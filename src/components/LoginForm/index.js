@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import styled from 'react-emotion';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import FormElem from '../FormElem';
 import { H1 } from '../../utils/content';
 
 const LoginFormMain = styled('div')`
@@ -68,32 +69,19 @@ class LoginForm extends Component {
                     <label htmlFor="email">
                       Email
                     </label>
-                    <input
-                      id="email"
-                      placeholder="Enter your email"
-                      type="text"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={
-                        errors.email && touched.email ? 'text-input error' : 'text-input'
-                      }
+                    <FormElem
+                      {...props}
+                      name="email"
+                      type="email"
+                      label="Email"
+                      placeholder="enter your email"
                     />
-                    {errors.email &&
-                      touched.email && <div className="input-feedback">{errors.email}</div>}
-                    <label htmlFor="password">
-                      Email
-                    </label>
-                    <input
-                      id="password"
-                      placeholder="Enter your password"
+                    <FormElem
+                      {...props}
+                      name="password"
                       type="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={
-                        errors.password && touched.password ? 'text-input error' : 'text-input'
-                      }
+                      label="Password"
+                      placeholder="enter your password"
                     />
                     {errors.password &&
                       touched.password && <div className="input-feedback">{errors.password}</div>}

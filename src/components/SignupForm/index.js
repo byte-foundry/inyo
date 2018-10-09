@@ -5,6 +5,7 @@ import styled from 'react-emotion';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { H1 } from '../../utils/content';
+import FormElem from '../FormElem';
 
 const SignupFormMain = styled('div')`
 `;
@@ -53,50 +54,41 @@ class SignupForm extends Component {
             >
               {props => {
                 const {
-                  values,
-                  touched,
-                  errors,
                   dirty,
                   isSubmitting,
-                  handleChange,
-                  handleBlur,
                   handleSubmit,
                   handleReset,
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      placeholder="Enter your email"
-                      type="text"
-                      value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={
-                        errors.email && touched.email ? 'text-input error' : 'text-input'
-                      }
+                    <FormElem
+                      {...props}
+                      name="email"
+                      type="email"
+                      label="Email"
+                      placeholder="enter your email"
                     />
-                    {errors.email &&
-                      touched.email && <div className="input-feedback">{errors.email}</div>}
-                    <label htmlFor="password">
-                      Email
-                    </label>
-                    <input
-                      id="password"
-                      placeholder="Enter your password"
+                    <FormElem
+                      {...props}
+                      name="password"
                       type="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={
-                        errors.password && touched.password ? 'text-input error' : 'text-input'
-                      }
+                      label="Password"
+                      placeholder="enter your password"
                     />
-                    {errors.password &&
-                      touched.password && <div className="input-feedback">{errors.password}</div>}
+                    <FormElem
+                      {...props}
+                      name="firstname"
+                      type="text"
+                      label="First name"
+                      placeholder="Your first name"
+                    />
+                    <FormElem
+                      {...props}
+                      name="lastname"
+                      type="text"
+                      label="Last name"
+                      placeholder="Your last name"
+                    />
                     <button type="submit" disabled={isSubmitting}>
                       Submit
                     </button>

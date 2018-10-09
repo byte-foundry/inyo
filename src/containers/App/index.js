@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import styled from 'react-emotion';
 import AppIndex from './AppIndex';
-import Signup from './Signup';
+import Auth from './Auth';
 import { GET_USER_LOGGEDIN } from '../../utils/queries';
 
 const AppMain = styled('div')`
@@ -13,7 +13,7 @@ const ProtectedRoute
   = ({ isAllowed, ...props }) => 
      isAllowed 
      ? <Route {...props}/> 
-     : <Redirect to="/signup"/>;
+     : <Redirect to="/auth"/>;
 
 class App extends Component {
   render() {
@@ -28,7 +28,7 @@ class App extends Component {
                   path="/app" 
                   component={AppIndex}
                 />
-                <Route path="/signup" component={Signup} />
+                <Route path="/auth" component={Auth} />
             </AppMain>
           </Router>
         )}

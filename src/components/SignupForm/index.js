@@ -6,10 +6,10 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { H1 } from '../../utils/content';
 
-const LoginFormMain = styled('div')`
+const SignupFormMain = styled('div')`
 `;
 
-class LoginForm extends Component {
+class SignupForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,8 +23,8 @@ class LoginForm extends Component {
       return <Redirect to={from} />;
     }
     return (
-      <LoginFormMain>
-        <H1>Log in</H1>
+      <SignupFormMain>        
+        <H1>Sign up</H1>
         <ApolloConsumer>
           {client => (
             <Formik
@@ -106,9 +106,9 @@ class LoginForm extends Component {
             </Formik>
           )}
         </ApolloConsumer>
-      </LoginFormMain>
+      </SignupFormMain>
     );
   }
 }
 
-export default LoginForm;
+export default SignupForm;

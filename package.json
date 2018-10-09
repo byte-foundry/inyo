@@ -1,11 +1,21 @@
 {
-  "name": "quotes-poc",
+  "name": "inyo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "apollo-boost": "^0.1.16",
+    "emotion": "^9.2.12",
+    "formik": "^1.3.1",
+    "graphql": "^14.0.2",
     "react": "^16.5.2",
+    "react-apollo": "^2.2.4",
+    "react-beautiful-dnd": "^9.0.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-emotion": "^9.2.12",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.4",
+    "shevyjs": "^1.1.0",
+    "yup": "^0.26.6"
   },
   "scripts": {
     "start": "react-scripts start",

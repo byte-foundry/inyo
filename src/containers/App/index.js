@@ -3,7 +3,6 @@ import { Query } from 'react-apollo';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import styled from 'react-emotion';
 
-import AppIndex from './AppIndex';
 import Auth from './Auth';
 import Dashboard from './Dashboard';
 import CreateQuote from './CreateQuote';
@@ -32,13 +31,13 @@ class App extends Component {
                   path="/app" 
                   component={Dashboard}
                 />
-                <Route path="/auth" component={Auth} />
                 <ProtectedRoute 
                   isAllowed={user.isLoggedIn} 
                   exact 
                   path="/app/create" 
                   component={Dashboard}
                 />
+                <Route path="/auth" component={Auth} />
             </AppMain>
           </Router>
         )}

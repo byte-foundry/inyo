@@ -6,6 +6,7 @@ import styled from 'react-emotion';
 import AppIndex from './AppIndex';
 import Auth from './Auth';
 import Dashboard from './Dashboard';
+import CreateQuote from './CreateQuote';
 
 import { GET_USER_LOGGEDIN } from '../../utils/queries';
 
@@ -32,6 +33,12 @@ class App extends Component {
                   component={Dashboard}
                 />
                 <Route path="/auth" component={Auth} />
+                <ProtectedRoute 
+                  isAllowed={user.isLoggedIn} 
+                  exact 
+                  path="/app/create" 
+                  component={Dashboard}
+                />
             </AppMain>
           </Router>
         )}

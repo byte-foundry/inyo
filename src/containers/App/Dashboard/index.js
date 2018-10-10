@@ -132,8 +132,8 @@ const temporaryStaticQuoteList = [
 ];
 
 class Dashboard extends Component {
-  createNewQuote() {
-    this.props.location.push('/app/create');
+  createNewQuote = () => {
+    this.props.history.push('/app/create');
   }
 
   render() {

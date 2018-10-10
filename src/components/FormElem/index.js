@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import styled from 'react-emotion';
 
-const FormElemMain = styled('div')`
+import { P } from '../../utils/content';
+
+
+const Label = styled('label')`
+    display: block;
 `;
+
 
 class FormElem extends Component {
   render() {
     const {name, label, placeholder, type, values, handleChange, handleBlur, errors, touched} = this.props;
     return (
-        <FormElemMain>
-            <label htmlFor={name}>
+        <P>
+            <Label htmlFor={name}>
                 {label}
-            </label>
+            </Label>
             <input
                 id={name}
                 placeholder={placeholder}
@@ -25,7 +30,7 @@ class FormElem extends Component {
             />
             {errors[name] &&
             touched[name] && <div className="input-feedback">{errors[name]}</div>}
-        </FormElemMain>
+        </P>
     );
   }
 }

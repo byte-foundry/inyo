@@ -1,9 +1,18 @@
 export default `
-  type User {
-    isLoggedIn: Boolean!
-  }
+    type NetworkStatus {
+        isConnected: Boolean!
+    }
+    
+    type Mutation {
+		updateNetworkStatus(isConnected: Boolean!): NetworkStatus!
 
-  type Query {
-    user: User
-  }
+		# Stripe-related mutations
+
+		createSubscription(plan: String!, quantity: Int, coupon: String): StripeSubscription!
+		updateSubscription($id: ID!, $newPlan: String, $quantity: Int): StripeSubscription!
+	}
+
+	type Query {
+		networkStatus: NetworkStatus!
+	}
 `;

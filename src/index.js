@@ -1,23 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
-import { GRAPHQL_API } from './utils/constants';
-import defaults from './utils/default';
-import resolvers from './utils/resolvers';
-import typeDefs from './utils/typedefs';
 import './index.css';
 import Container from './containers/Container';
+import client from './utils/graphQLConfig';
 import * as serviceWorker from './serviceWorker';
 
-const client = new ApolloClient({
-    uri: GRAPHQL_API,
-    clientState: {
-        defaults,
-        resolvers,
-        typeDefs
-      }
-});
+
 
 ReactDOM.render(
     <ApolloProvider client={client} >

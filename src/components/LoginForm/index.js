@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { ApolloConsumer } from 'react-apollo';
+import { Mutation } from 'react-apollo';
 import { Redirect } from "react-router-dom";
 import styled from 'react-emotion';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import FormElem from '../FormElem';
+import { LOGIN } from '../../utils/mutations';
 import { H1 } from '../../utils/content';
 
 const LoginFormMain = styled('div')`
@@ -26,8 +27,8 @@ class LoginForm extends Component {
     return (
       <LoginFormMain>
         <H1>Log in</H1>
-        <ApolloConsumer>
-          {client => (
+        <Mutation mutation={LOGIN}>
+          {login => (
             <Formik
               initialValues={{ email: '' }}
               validationSchema={Yup.object().shape({
@@ -37,19 +38,23 @@ class LoginForm extends Component {
                 password: Yup.string()
                   .required('Required'),
               })}
-              onSubmit={(values, actions) => {
+              onSubmit={async (values, actions) => {
                 actions.setSubmitting(false);
-                client.writeData({
-                  data: {
-                    user: {
-                      __typename: 'User',
-                      isLoggedIn: true
+                try {
+                    const { data } = await login({ variables: { email: values.email, password: values.password } });
+                    if (data) {
+                        console.log(data)
+                        window.localStorage.setItem('authToken', data.login.token);
+                        this.setState({
+                            shouldRedirect: true,
+                        });
                     }
-                  }
-                })
-                this.setState({
-                  shouldRedirect: true,
-                });
+                } catch (error) {
+                    console.log(error)
+                    actions.setSubmitting(false);
+                    actions.setErrors(error);
+                    actions.setStatus({ msg: 'Wrong credentials' });
+                }
               }}
             >
               {props => {
@@ -57,6 +62,7 @@ class LoginForm extends Component {
                   values,
                   touched,
                   errors,
+                  status,
                   dirty,
                   isSubmitting,
                   handleChange,
@@ -66,9 +72,6 @@ class LoginForm extends Component {
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <label htmlFor="email">
-                      Email
-                    </label>
                     <FormElem
                       {...props}
                       name="email"
@@ -83,8 +86,7 @@ class LoginForm extends Component {
                       label="Password"
                       placeholder="enter your password"
                     />
-                    {errors.password &&
-                      touched.password && <div className="input-feedback">{errors.password}</div>}
+                    {status && status.msg && <div>{status.msg}</div>}
                     <button type="submit" disabled={isSubmitting}>
                       Submit
                     </button>
@@ -93,7 +95,7 @@ class LoginForm extends Component {
               }}
             </Formik>
           )}
-        </ApolloConsumer>
+        </Mutation>
       </LoginFormMain>
     );
   }

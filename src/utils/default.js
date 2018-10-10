@@ -1,7 +1,7 @@
 export default {
     __typename: 'Query',
-    user: {
-        __typename: 'User',
-        isLoggedIn: false
+    networkStatus: {
+        isConnected: true,
+        __typename: 'NetworkStatus',
     }
   };

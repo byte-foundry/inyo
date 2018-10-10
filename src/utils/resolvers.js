@@ -5,5 +5,16 @@
 */
 
 export default {
-    
+    Mutation: {
+		updateNetworkStatus: (_, {isConnected}, {cache}) => {
+			const networkStatus = {
+				isConnected,
+				__typename: 'NetworkStatus',
+			};
+
+			cache.writeData({data: networkStatus});
+
+			return networkStatus;
+		},
+	}
 };

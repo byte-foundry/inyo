@@ -7,40 +7,28 @@ import Auth from './Auth';
 import Dashboard from './Dashboard';
 import CreateQuote from './CreateQuote';
 
-import { GET_USER_LOGGEDIN } from '../../utils/queries';
+import { GET_USER_INFOS } from '../../utils/queries';
 
 const AppMain = styled('div')`
 `;
 
-const ProtectedRoute 
-  = ({ isAllowed, ...props }) => 
-     isAllowed 
-     ? <Route {...props}/> 
-     : <Redirect to="/auth"/>;
-
 class App extends Component {
   render() {
     return (
-      <Query query={GET_USER_LOGGEDIN}>
-        {({ data: { user } }) => (
-          <Router>
-            <AppMain>
-                <ProtectedRoute 
-                  isAllowed={user.isLoggedIn} 
-                  exact 
-                  path="/app" 
-                  component={Dashboard}
-                />
-                <ProtectedRoute 
-                  isAllowed={user.isLoggedIn} 
-                  exact 
-                  path="/app/create" 
-                  component={Dashboard}
-                />
+      <Query query={GET_USER_INFOS}>
+        {({ loading, error, data}) => {
+          if (loading) return <p>Loading...</p>;
+          return (
+            <Router>
+              <AppMain>
+                <Route exact path="/app" component={Dashboard} />
+                <Route path="/app/create" component={Dashboard} />
                 <Route path="/auth" component={Auth} />
-            </AppMain>
-          </Router>
-        )}
+                {error && (<Redirect to="/auth"/>)}
+              </AppMain>
+            </Router>
+          )
+        }}
       </Query>
     );
   }

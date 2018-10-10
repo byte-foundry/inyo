@@ -8,10 +8,21 @@ export const GET_NETWORK_STATUS = gql`
 	}
 `;
 
+export const CHECK_LOGIN_USER = gql`
+	query loggedInUserQuery {
+		me {
+			id
+		}
+	}
+`;
+
 export const GET_USER_INFOS = gql`
 	query loggedInUserQuery {
 		me {
 			id
+			email
+			firstName
+			lastName
 		}
 	}
 `;

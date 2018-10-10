@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import styled from 'react-emotion';
+
 import AppIndex from './AppIndex';
 import Auth from './Auth';
+import Dashboard from './Dashboard';
+
 import { GET_USER_LOGGEDIN } from '../../utils/queries';
 
 const AppMain = styled('div')`
@@ -26,7 +29,7 @@ class App extends Component {
                   isAllowed={user.isLoggedIn} 
                   exact 
                   path="/app" 
-                  component={AppIndex}
+                  component={Dashboard}
                 />
                 <Route path="/auth" component={Auth} />
             </AppMain>

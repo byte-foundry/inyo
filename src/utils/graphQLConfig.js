@@ -7,7 +7,7 @@ import {onError} from 'apollo-link-error';
 import {InMemoryCache} from 'apollo-cache-inmemory';
 import merge from 'lodash/merge';
 
-import { GRAPHQL_API } from './constants';
+import {GRAPHQL_API} from './constants';
 import defaults from './default';
 import resolvers from './resolvers';
 import typeDefs from './typedefs';
@@ -113,7 +113,5 @@ const client = new ApolloClient({
 });
 
 const unsubscribe = client.onResetStore(stateLink.writeDefaults);
-
-
 
 export default client;

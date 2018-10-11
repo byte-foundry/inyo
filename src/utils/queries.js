@@ -27,11 +27,11 @@ export const GET_USER_CUSTOMERS = gql`
 					name
 					email
 					address {
-					number
-					street
-					city
-					postalCode
-					country
+						number
+						street
+						city
+						postalCode
+						country
 					}
 					phone
 					siret

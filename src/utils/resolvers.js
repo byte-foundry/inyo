@@ -5,7 +5,7 @@
 */
 
 export default {
-    Mutation: {
+	Mutation: {
 		updateNetworkStatus: (_, {isConnected}, {cache}) => {
 			const networkStatus = {
 				isConnected,
@@ -16,5 +16,5 @@ export default {
 
 			return networkStatus;
 		},
-	}
+	},
 };

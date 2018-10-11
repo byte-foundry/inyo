@@ -18,14 +18,19 @@ class CreateQuote extends Component {
                 const { me } = data;
                 const { company } = me;
                 const { customers } = company;
+
+                if (!customers.length) {
+                    return <Redirect to="/app/customer/create"/>;
+                }
+
                 return (
                     <CreateQuoteMain>
                         <H3>Create your quote</H3>
-                        {customers.length === 0 && <Redirect to="/app/customer/create"/>}
-                        {/* If no selected customer in local storage ? Redirect to customer select ? */}
+                        <input type="text" placeholder="Customer" />
+                        <button>Create quote</button>
                     </CreateQuoteMain>
                 )
-            }            
+            }
             return (<div/>)
             }}
         </Query>

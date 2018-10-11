@@ -21,7 +21,6 @@ export const SIGNUP = gql`
     $password: String!,
     $firstName: String,
     $lastName: String,
-    $company: CompanyInput!,
   ) {
     signup
     (
@@ -29,7 +28,6 @@ export const SIGNUP = gql`
         password: $password,
         firstName: $firstName,
         lastName: $lastName,
-        company: $company
     ) {
       token
       user {
@@ -38,6 +36,15 @@ export const SIGNUP = gql`
         firstName
         lastName
       }
+    }
+  }
+`;
+
+export const UPDATE_USER_COMPANY = gql`
+  mutation UpdateUserCompany($todo: String) {
+    updateCompany
+    (todo: $todo) {
+      id
     }
   }
 `;

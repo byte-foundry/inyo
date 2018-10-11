@@ -5,8 +5,10 @@ import styled from 'react-emotion';
 
 import Auth from './Auth';
 import Dashboard from './Dashboard';
-import CreateQuote from './CreateQuote';
 import Account from './Account';
+import Customer from './Customer';
+import Quote from './Quote';
+import Company from './Company';
 
 import { CHECK_LOGIN_USER } from '../../utils/queries';
 
@@ -16,20 +18,22 @@ const AppMain = styled('div')`
 class App extends Component {
   render() {
     return (
-      <Query query={CHECK_LOGIN_USER}>
+      <Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
         {({ loading, error, data}) => {
           if (loading) return <p>Loading...</p>;
           return (
             <Router>
               <AppMain>
-                <Link to='/account'>
+                <Link to='/app/account'>
                   My account
                 </Link>
                 <Route exact path="/app" component={Dashboard} />
-                <Route path="/app/create" component={Dashboard} />
-                <Route path="/auth" component={Auth} />
-                <Route path="/account" component={Account} />
-                {error && (<Redirect to="/auth"/>)}
+                <Route path="/app/auth" component={Auth} />
+                <Route path="/app/account" component={Account} />
+                <Route path="/app/company" component={Company} />
+                <Route path="/app/customer" component={Customer} />
+                <Route path="/app/quote" component={Quote} />
+                {error && (<Redirect to="/app/auth"/>)}
               </AppMain>
             </Router>
           )

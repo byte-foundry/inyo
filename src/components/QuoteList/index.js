@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import styled from 'react-emotion';
 
 import QuoteStateList from '../QuoteStateList';
-import {quoteState} from '../../containers/App/Dashboard';
+import {quoteState} from '../../containers/App/Quote/quote-list';
 
 const QuoteListMain = styled('div')`
   display: flex;

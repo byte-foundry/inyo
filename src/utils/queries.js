@@ -16,13 +16,58 @@ export const CHECK_LOGIN_USER = gql`
 	}
 `;
 
+export const GET_USER_CUSTOMERS = gql`
+	query userCustomersQuery {
+		me {
+			id
+			company {
+				id
+				customers {
+					id
+					name
+					email
+					address {
+					number
+					street
+					city
+					postalCode
+					country
+					}
+					phone
+					siret
+					rcs
+					rm
+					vat
+				}
+			}
+		}
+	}
+`;
+
 export const GET_USER_INFOS = gql`
-	query loggedInUserQuery {
+	query userInfosQuery {
 		me {
 			id
 			email
 			firstName
 			lastName
+			company {
+				id
+				name
+				email
+				address {
+					number
+					street
+					city
+					postalCode
+					country
+				}
+				phone
+				siret
+				rcs
+				rm
+				vat
+			}
 		}
 	}
 `;

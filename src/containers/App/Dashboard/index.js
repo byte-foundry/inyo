@@ -13,7 +13,7 @@ class Dashboard extends Component {
     return (
       <DashboardMain>
         <H1>Dashboard</H1>
-        <Redirect to="/app/quote"/>
+        <Redirect to="/app/quotes"/>
       </DashboardMain>
     );
   }

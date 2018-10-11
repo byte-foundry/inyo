@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { BrowserRouter as Router, Route, Redirect, Link } from "react-router-dom";
+import { Switch, Route, Redirect, Link } from "react-router-dom";
 import styled from 'react-emotion';
 
 import Auth from './Auth';
@@ -22,20 +22,20 @@ class App extends Component {
         {({ loading, error, data}) => {
           if (loading) return <p>Loading...</p>;
           return (
-            <Router>
-              <AppMain>
-                <Link to='/app/account'>
-                  My account
-                </Link>
+            <AppMain>
+              <Link to='/app/account'>
+                My account
+              </Link>
+              <Switch>
                 <Route exact path="/app" component={Dashboard} />
                 <Route path="/app/auth" component={Auth} />
                 <Route path="/app/account" component={Account} />
                 <Route path="/app/company" component={Company} />
                 <Route path="/app/customer" component={Customer} />
-                <Route path="/app/quote" component={Quote} />
-                {error && (<Redirect to="/app/auth"/>)}
-              </AppMain>
-            </Router>
+                <Route path="/app/quotes" component={Quote} />
+              </Switch>
+              {error && (<Redirect to="/app/auth"/>)}
+            </AppMain>
           )
         }}
       </Query>

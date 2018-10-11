@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider } from "react-apollo";
+import {BrowserRouter as Router} from 'react-router-dom';
+
 import './index.css';
 import Container from './containers/Container';
 import client from './utils/graphQLConfig';
@@ -10,7 +12,9 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
     <ApolloProvider client={client} >
-        <Container/>
+        <Router>
+            <Container/>
+        </Router>
     </ApolloProvider>,
 document.getElementById('root'));
 

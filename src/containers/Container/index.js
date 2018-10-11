@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import styled from 'react-emotion';
 import { Body } from '../../utils/content'
 import Landing from '../Landing';
@@ -17,22 +17,22 @@ const BodyMain = styled(Body)`
 class Container extends Component {
   render() {
     return (
-        <Router>
-            <BodyMain>
-                <nav>
-                    <Link to='/'>
-                        Landing
-                    </Link>
-                    <Link to='/app'>
-                        App
-                    </Link>
-                </nav>
-                <main>
+        <BodyMain>
+            <nav>
+                <Link to='/'>
+                    Landing
+                </Link>
+                <Link to='/app'>
+                    App
+                </Link>
+            </nav>
+            <main>
+                <Switch>
                     <Route exact path="/" component={Landing} />
                     <Route path="/app" component={App} />
-                </main>
-            </BodyMain>
-        </Router>
+                </Switch>
+            </main>
+        </BodyMain>
     );
   }
 }

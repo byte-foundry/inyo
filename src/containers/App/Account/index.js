@@ -43,7 +43,7 @@ class Account extends Component {
               </AccountMain>
             )
           }            
-          return (<Redirect to="/auth"/>)
+          return (<Redirect to="/app/auth"/>)
         }}
       </Query>
     );

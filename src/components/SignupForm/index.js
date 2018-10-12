@@ -56,7 +56,10 @@ class SignupForm extends Component {
 									});
 
 									if (data) {
-										window.localStorage.setItem('authToken', data.signup.token);
+										window.localStorage.setItem(
+											'authToken',
+											data.signup.token,
+										);
 										this.setState({
 											shouldRedirect: true,
 										});
@@ -66,7 +69,9 @@ class SignupForm extends Component {
 									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
-									actions.setStatus({msg: 'Something went wrong'});
+									actions.setStatus({
+										msg: 'Something went wrong',
+									});
 								}
 							}}
 						>
@@ -114,8 +119,14 @@ class SignupForm extends Component {
 												/>
 											</div>
 										</FormContainer>
-										{status && status.msg && <div>{status.msg}</div>}
-										<button type="submit" disabled={isSubmitting}>
+										{status
+											&& status.msg && (
+											<div>{status.msg}</div>
+										)}
+										<button
+											type="submit"
+											disabled={isSubmitting}
+										>
 											Submit
 										</button>
 									</form>

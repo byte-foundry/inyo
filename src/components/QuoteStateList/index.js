@@ -41,14 +41,19 @@ class QuoteStateList extends Component {
 	render() {
 		const {quotes, quoteState} = this.props;
 
-		const totalAmount = quotes.reduce((acc, quote) => acc + quote.amount, 0);
+		const totalAmount = quotes.reduce(
+			(acc, quote) => acc + quote.amount,
+			0,
+		);
 
 		const quoteColumn = quotes.map(quote => <QuoteCard quote={quote} />);
 
 		return (
 			<QuoteStateListMain>
 				<QuoteStateTitle>
-					<QuoteStateName>{quoteStateName[quoteState]}</QuoteStateName>
+					<QuoteStateName>
+						{quoteStateName[quoteState]}
+					</QuoteStateName>
 					<QuoteStateAmount>{totalAmount}</QuoteStateAmount>
 				</QuoteStateTitle>
 				{quoteColumn}

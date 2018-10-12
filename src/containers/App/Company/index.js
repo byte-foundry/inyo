@@ -15,7 +15,10 @@ class Company extends Component {
 				<Switch>
 					<Route exact path="/app/company" component={CompanySee} />
 					<Route path="/app/company/edit" component={CompanyEdit} />
-					<Route path="/app/company/create" component={CompanyCreate} />
+					<Route
+						path="/app/company/create"
+						component={CompanyCreate}
+					/>
 				</Switch>
 			</CompanyMain>
 		);

@@ -8,16 +8,10 @@ import {GET_USER_INFOS} from '../../../utils/queries';
 const AccountMain = styled('div')``;
 
 class Account extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		return (
 			<Query query={GET_USER_INFOS}>
-				{({
-					client, loading, error, data,
-				}) => {
+				{({client, loading, data}) => {
 					if (loading) return <p>Loading...</p>;
 					if (data && data.me) {
 						const {me} = data;
@@ -28,29 +22,39 @@ class Account extends Component {
 						return (
 							<AccountMain>
 								<button
+									type="button"
 									onClick={() => {
-										window.localStorage.removeItem('authToken');
+										window.localStorage.removeItem(
+											'authToken',
+										);
 										client.resetStore();
 									}}
 								>
 									Log out
 								</button>
+
 								<P>
-									Hello {firstName} {lastName}, your email is {email}
+									Hello {firstName} {lastName}, your email is{' '}
+									{email}
 								</P>
 								{company.name ? (
 									<div>
 										<H3>Your company</H3>
 										<P>{company.name}</P>
 										<P>
-											<Link to="/app/company/edit">Edit company details</Link>
+											<Link to="/app/company/edit">
+												Edit company details
+											</Link>
 										</P>
 									</div>
 								) : (
 									<P>
-										You do not have your company registered right now. Register
-										it to fill your quotes faster{' '}
-										<Link to="/app/company/create">Register my company</Link>
+										You do not have your company registered
+										right now. Register it to fill your
+										quotes faster{' '}
+										<Link to="/app/company/create">
+											Register my company
+										</Link>
 									</P>
 								)}
 							</AccountMain>

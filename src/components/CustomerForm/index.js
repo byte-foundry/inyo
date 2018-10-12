@@ -49,7 +49,9 @@ class CustomerForm extends Component {
 									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
-									actions.setStatus({msg: 'Something went wrong'});
+									actions.setStatus({
+										msg: 'Something went wrong',
+									});
 								}
 							}}
 						>
@@ -66,7 +68,10 @@ class CustomerForm extends Component {
 									<form onSubmit={handleSubmit}>
 										<FormContainer>
 											<div>
-												<H4>Your company (used to fill the quote)</H4>
+												<H4>
+													Your company (used to fill
+													the quote)
+												</H4>
 												<FormElem
 													{...props}
 													name="companyname"
@@ -154,8 +159,14 @@ class CustomerForm extends Component {
 												/>
 											</div>
 										</FormContainer>
-										{status && status.msg && <div>{status.msg}</div>}
-										<button type="submit" disabled={isSubmitting}>
+										{status
+											&& status.msg && (
+											<div>{status.msg}</div>
+										)}
+										<button
+											type="submit"
+											disabled={isSubmitting}
+										>
 											Submit
 										</button>
 									</form>

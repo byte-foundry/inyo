@@ -15,11 +15,21 @@ class Customer extends Component {
 		return (
 			<CustomerMain>
 				<Switch>
-					<Route exact path="/app/customer" component={CustomerList} />
+					<Route
+						exact
+						path="/app/customer"
+						component={CustomerList}
+					/>
 					<Route path="/app/customer/see" component={CustomerSee} />
 					<Route path="/app/customer/edit" component={CustomerEdit} />
-					<Route path="/app/customer/create" component={CustomerCreate} />
-					<Route path="/app/customer/select" component={CustomerSelect} />
+					<Route
+						path="/app/customer/create"
+						component={CustomerCreate}
+					/>
+					<Route
+						path="/app/customer/select"
+						component={CustomerSelect}
+					/>
 				</Switch>
 			</CustomerMain>
 		);

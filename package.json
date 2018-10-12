@@ -57,5 +57,9 @@
       "prettier-eslint --write",
       "git add"
     ]
+  },
+  "prettier": {
+	"tabWidth": 4,
+	"useTabs": true
   }
 }

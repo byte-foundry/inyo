@@ -50,7 +50,10 @@ class LoginForm extends Component {
 
 									if (data) {
 										console.log(data);
-										window.localStorage.setItem('authToken', data.login.token);
+										window.localStorage.setItem(
+											'authToken',
+											data.login.token,
+										);
 										this.setState({
 											shouldRedirect: true,
 										});
@@ -60,7 +63,9 @@ class LoginForm extends Component {
 									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
-									actions.setStatus({msg: 'Wrong credentials'});
+									actions.setStatus({
+										msg: 'Wrong credentials',
+									});
 								}
 							}}
 						>
@@ -94,8 +99,14 @@ class LoginForm extends Component {
 											label="Password"
 											placeholder="enter your password"
 										/>
-										{status && status.msg && <div>{status.msg}</div>}
-										<button type="submit" disabled={isSubmitting}>
+										{status
+											&& status.msg && (
+											<div>{status.msg}</div>
+										)}
+										<button
+											type="submit"
+											disabled={isSubmitting}
+										>
 											Submit
 										</button>
 									</form>

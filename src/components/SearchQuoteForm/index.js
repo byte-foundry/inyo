@@ -27,7 +27,10 @@ class SearchQuoteForm extends Component {
 				<ApolloConsumer>
 					{client => (
 						<Formik
-							initialValues={{from: '01/01/2018', to: '01/01/2019'}}
+							initialValues={{
+								from: '01/01/2018',
+								to: '01/01/2019',
+							}}
 							validationSchema={Yup.object().shape({
 								from: Yup.date().required('Required'),
 								to: Yup.date().required('Required'),
@@ -79,7 +82,9 @@ class SearchQuoteForm extends Component {
 										/>
 										{errors.email
 											&& touched.email && (
-											<div className="input-feedback">{errors.email}</div>
+											<div className="input-feedback">
+												{errors.email}
+											</div>
 										)}
 										<label htmlFor="password">to</label>
 										<input
@@ -110,7 +115,9 @@ class SearchQuoteForm extends Component {
 										/>
 										{errors.from
 											&& touched.to && (
-											<div className="input-feedback">{errors.from}</div>
+											<div className="input-feedback">
+												{errors.from}
+											</div>
 										)}
 									</form>
 								);

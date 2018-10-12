@@ -32,11 +32,15 @@ class FormElem extends Component {
 					onChange={handleChange}
 					onBlur={handleBlur}
 					className={
-						errors[name] && touched[name] ? 'text-input error' : 'text-input'
+						errors[name] && touched[name]
+							? 'text-input error'
+							: 'text-input'
 					}
 				/>
 				{errors[name]
-					&& touched[name] && <div className="input-feedback">{errors[name]}</div>}
+					&& touched[name] && (
+					<div className="input-feedback">{errors[name]}</div>
+				)}
 			</P>
 		);
 	}

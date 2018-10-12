@@ -26,11 +26,24 @@ class App extends Component {
 						<AppMain>
 							<Link to="/app/account">My account</Link>
 							<Switch>
-								<Route exact path="/app" component={Dashboard} />
+								<Route
+									exact
+									path="/app"
+									component={Dashboard}
+								/>
 								<Route path="/app/auth" component={Auth} />
-								<Route path="/app/account" component={Account} />
-								<Route path="/app/company" component={Company} />
-								<Route path="/app/customer" component={Customer} />
+								<Route
+									path="/app/account"
+									component={Account}
+								/>
+								<Route
+									path="/app/company"
+									component={Company}
+								/>
+								<Route
+									path="/app/customer"
+									component={Customer}
+								/>
 								<Route path="/app/quotes" component={Quote} />
 							</Switch>
 							{error && <Redirect to="/app/auth" />}

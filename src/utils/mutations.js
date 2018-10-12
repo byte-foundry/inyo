@@ -45,3 +45,11 @@ export const UPDATE_USER_COMPANY = gql`
 		}
 	}
 `;
+
+export const CREATE_CUSTOMER = gql`
+	mutation CreateCustomer($todo: String) {
+		createCustomer(todo: $todo) {
+			id
+		}
+	}
+`;

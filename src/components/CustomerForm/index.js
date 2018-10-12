@@ -3,7 +3,7 @@ import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {UPDATE_USER_COMPANY} from '../../utils/mutations';
+import {CREATE_CUSTOMER} from '../../utils/mutations';
 import {H4, H6} from '../../utils/content';
 import FormElem from '../FormElem';
 

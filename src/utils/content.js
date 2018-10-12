@@ -36,3 +36,15 @@ export const Ol = styled('ol')`
 export const Ul = styled('ul')`
 	${content};
 `;
+
+export const FlexRow = styled('div')`
+	display: flex;
+	flex-direction: row;
+	justify-content: ${props => props.justifyContent || 'flex-start'};
+`;
+export const FlexColumn = styled('div')`
+	display: flex;
+	flex-direction: column;
+	justify-content: ${props => props.justifyContent || 'flex-start'};
+	${props => props.flexGrow && `flex-grow: ${props.flexGrow};`};
+`;

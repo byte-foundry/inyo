@@ -135,7 +135,7 @@ const temporaryStaticQuoteList = [
 
 class ListQuotes extends Component {
 	createNewQuote = () => {
-		this.props.history.push('/app/quote/create');
+		this.props.history.push('/app/quotes/create');
 	};
 
 	render() {

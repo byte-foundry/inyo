@@ -47,4 +47,5 @@ export const FlexColumn = styled('div')`
 	flex-direction: column;
 	justify-content: ${props => props.justifyContent || 'flex-start'};
 	${props => props.flexGrow && `flex-grow: ${props.flexGrow};`};
+	${props => props.fullHeight && 'height: 100%;'};
 `;

@@ -95,10 +95,13 @@ class EditQuote extends Component {
 							<div>
 								<label>Template</label>
 							</div>
-							<Select>
-								<option value="website">Website</option>
-								<option value="logo">Logo</option>
-							</Select>
+							<div>
+								<Select>
+									<option value="website">Website</option>
+									<option value="logo">Logo</option>
+								</Select>
+							</div>
+							<Button>Save draft</Button>
 						</div>
 						<div>
 							<Button>Add an attachment</Button>
@@ -127,7 +130,7 @@ class EditQuote extends Component {
 							</div>
 							<Button>Add option</Button>
 						</FlexRow>
-						<FlexColumn>
+						<FlexColumn fullHeight>
 							{this.state.mode === 'quote' ? (
 								<QuoteSections>
 									{quoteSampleData.map(section => (
@@ -136,6 +139,7 @@ class EditQuote extends Component {
 								</QuoteSections>
 							) : (
 								<TextEditor
+									currentContent={this.state.proposalContent}
 									onChange={(raw) => {
 										this.setState({proposalContent: raw});
 									}}

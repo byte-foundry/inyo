@@ -7,7 +7,12 @@ import 'medium-draft/lib/index.css';
 
 import CustomImageSideButton from './custom-image-side-button';
 
-const TextEditorMain = styled('div')``;
+const TextEditorMain = styled('div')`
+	border: 1px solid black;
+	margin: 10px 20px;
+	border-radius: 5px;
+	height: 100%;
+`;
 
 class TextEditor extends Component {
 	constructor(props) {
@@ -18,7 +23,7 @@ class TextEditor extends Component {
 				component: CustomImageSideButton,
 			},
 		];
-		this.state = {editorState: createEditorState()};
+		this.state = {editorState: createEditorState(props.currentContent)};
 		this.onChange = (editorState) => {
 			this.props.onChange(convertToRaw(editorState.getCurrentContent()));
 			this.setState({editorState});

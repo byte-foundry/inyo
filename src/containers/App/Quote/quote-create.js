@@ -2,37 +2,41 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Query} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
-import {H3} from '../../../utils/content';
+
+import CreateQuoteForm from './create-quote-form';
+
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 
 const CreateQuoteMain = styled('div')``;
 
 class CreateQuote extends Component {
 	render() {
+		const {history} = this.props;
+
 		return (
 			<Query query={GET_USER_CUSTOMERS}>
-				{({
-					client, loading, error, data,
-				}) => {
+				{({loading, error, data}) => {
 					if (loading) return <p>Loading...</p>;
 					if (data && data.me) {
 						const {me} = data;
 						const {company} = me;
 						const {customers} = company;
 
-						if (!customers.length) {
-							return <Redirect to="/app/customer/create" />;
-						}
-
 						return (
 							<CreateQuoteMain>
-								<H3>Create your quote</H3>
-								<input type="text" placeholder="Customer" />
-								<button>Create quote</button>
+								<CreateQuoteForm
+									customers={customers}
+									onCreate={(newQuote) => {
+										history.push(
+											`/app/quotes/${newQuote.id}/edit`,
+										);
+									}}
+								/>
 							</CreateQuoteMain>
 						);
 					}
-					return <div />;
+
+					return <Redirect to="/app/auth" />;
 				}}
 			</Query>
 		);

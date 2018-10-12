@@ -45,6 +45,7 @@ class App extends Component {
 									component={Customer}
 								/>
 								<Route path="/app/quotes" component={Quote} />
+								<Redirect to="/app" />
 							</Switch>
 							{error && <Redirect to="/app/auth" />}
 						</AppMain>

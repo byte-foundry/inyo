@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import TextEditor from '../../../components/TextEditor';
 import QuoteSection from '../../../components/QuoteSection';
+import {templates} from '../../../utils/quote-templates';
 import {
 	H1,
 	H3,
@@ -31,60 +32,124 @@ const QuoteSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
 	min-width: 15vw;
 	border: 1px solid black;
+	padding: 20px 40px;
 `;
 
 const CenterContent = styled(FlexColumn)`
 	border: 1px solid black;
+	padding: 20px 40px;
 `;
-
-const quoteSampleData = [
-	{
-		title: 'Section 1 title',
-		tasks: [
-			{
-				name: 'Name of the task',
-				amount: 3,
-				price: 1500,
-			},
-			{
-				name: 'Name of the task',
-				amount: 3,
-				price: 1500,
-			},
-			{
-				name: 'Name of the task',
-				amount: 3,
-				price: 1500,
-			},
-		],
-	},
-	{
-		title: 'Section 2 title',
-		tasks: [
-			{
-				name: 'Name of the task',
-				amount: 3,
-				price: 1500,
-			},
-		],
-	},
-];
 
 class EditQuote extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			mode: 'quote',
-			proposalContent: undefined,
+			quoteData: {
+				name: '',
+				proposal: undefined,
+				sections: [],
+			},
 		};
 	}
 
+	setQuoteData = (templateName) => {
+		const templateData = templates.find(e => e.name === templateName);
+
+		if (templateData) {
+			this.setState({quoteData: templateData});
+		}
+		else {
+			this.setState({
+				quoteData: {
+					name: '',
+					proposal: undefined,
+					sections: [],
+				},
+			});
+		}
+	};
+
+	getQuoteTotal = () => {
+		let sumDays = 0;
+		let sumHT = 0;
+		let sumTTC = 0;
+
+		this.state.quoteData.sections.forEach((section) => {
+			section.tasks.forEach((task) => {
+				sumDays += task.amount;
+				sumHT += task.price;
+				sumTTC += task.price;
+			});
+		});
+		return (
+			<div>
+				<PriceElem>
+					<H6>Time scheduled</H6>
+					<H4>{sumDays} days</H4>
+				</PriceElem>
+				<PriceElem>
+					<H6>Total H.T.</H6>
+					<H4>{sumHT} €</H4>
+				</PriceElem>
+				<PriceElem>
+					<H6>Total T.T.C</H6>
+					<H4>{sumTTC} €</H4>
+				</PriceElem>
+			</div>
+		);
+	};
+
+	addTask = (sectionIndex) => {
+		const {sections} = this.state.quoteData;
+
+		sections[sectionIndex].tasks.push({
+			name: 'New task',
+			amount: 0,
+			price: 0,
+		});
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				sections,
+			},
+		});
+	};
+
+	addSection = () => {
+		const {sections} = this.state.quoteData;
+
+		sections.push({
+			title: 'New section name',
+			tasks: [],
+		});
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				sections,
+			},
+		});
+	};
+
+	componentDidMount() {
+		// placeholder
+		this.setQuoteData('Website');
+	}
+
 	render() {
+		const {quoteData} = this.state;
+
 		return (
 			<EditQuoteMain>
 				<FlexRow justifyContent="space-between">
 					<H1>Create your quote</H1>
-					<Button>Send proposal</Button>
+					<Button
+						onClick={() => {
+							console.log(this.state.proposalContent);
+						}}
+					>
+						Send proposal
+					</Button>
 				</FlexRow>
 				<FlexRow>
 					<H3>Name of the project</H3>
@@ -96,9 +161,17 @@ class EditQuote extends Component {
 								<label>Template</label>
 							</div>
 							<div>
-								<Select>
-									<option value="website">Website</option>
-									<option value="logo">Logo</option>
+								<Select
+									onChange={(e) => {
+										this.setQuoteData(e.target.value);
+									}}
+								>
+									{templates.map(template => (
+										<option value={template.name}>
+											{template.name}
+										</option>
+									))}
+									<option value="custom">New template</option>
 								</Select>
 							</div>
 							<Button>Save draft</Button>
@@ -133,15 +206,35 @@ class EditQuote extends Component {
 						<FlexColumn fullHeight>
 							{this.state.mode === 'quote' ? (
 								<QuoteSections>
-									{quoteSampleData.map(section => (
-										<QuoteSection data={section} />
-									))}
+									{quoteData.sections.map(
+										(section, index) => (
+											<QuoteSection
+												data={section}
+												addTask={() => {
+													this.addTask(index);
+												}}
+											/>
+										),
+									)}
+									<Button
+										onClick={() => {
+											this.addSection();
+										}}
+									>
+										Add section
+									</Button>
 								</QuoteSections>
 							) : (
 								<TextEditor
-									currentContent={this.state.proposalContent}
+									currentContent={quoteData.proposal}
+									templateName={quoteData.name}
 									onChange={(raw) => {
-										this.setState({proposalContent: raw});
+										this.setState({
+											quoteData: {
+												...quoteData,
+												proposal: raw,
+											},
+										});
 									}}
 								/>
 							)}
@@ -158,18 +251,7 @@ class EditQuote extends Component {
 							<option value="optionA">Option A</option>
 							<option value="optionB">Option B</option>
 						</Select>
-						<PriceElem>
-							<H6>Time scheduled</H6>
-							<H4>15 days</H4>
-						</PriceElem>
-						<PriceElem>
-							<H6>Total H.T.</H6>
-							<H4>5000 €</H4>
-						</PriceElem>
-						<PriceElem>
-							<H6>Total T.T.C</H6>
-							<H4>6000 €</H4>
-						</PriceElem>
+						{this.getQuoteTotal()}
 					</SideActions>
 				</FlexRow>
 			</EditQuoteMain>

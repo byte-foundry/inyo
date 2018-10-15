@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-import AddTask from './add-task';
+import InlineEditable from '../InlineEditable';
 import {H4, H5, FlexRow} from '../../utils/content';
 
 const QuoteSectionMain = styled('div')``;
@@ -23,29 +23,44 @@ class QuoteSection extends Component {
 	}
 
 	render() {
-		const {data} = this.props;
+		const {data, addTask} = this.props;
 
 		return (
 			<QuoteSectionMain>
-				<H4>{data.title}</H4>
+				<H4>
+					<InlineEditable
+						value={data.title}
+						type="text"
+						placeholder="Section name"
+					/>
+				</H4>
 				{data.tasks.map(task => (
-					<Task justifyContent="space-between">
-						<TaskName>{task.name}</TaskName>
-						<span>{task.amount}</span>
-						<span>{task.price}€</span>
-					</Task>
-				))}
-				{this.state.shouldDisplayAddTask ? (
-					<AddTask />
-				) : (
-					<QuoteAddItem
+					<Task
+						justifyContent="space-between"
 						onClick={() => {
-							this.setState({shouldDisplayAddTask: true});
+							console.log(task);
 						}}
 					>
-						Add item
-					</QuoteAddItem>
-				)}
+						<TaskName>
+							<InlineEditable
+								value={task.name}
+								type="text"
+								placeholder="your task name"
+							/>
+						</TaskName>
+						<InlineEditable
+							value={task.amount}
+							type="number"
+							placeholder="1"
+						/>
+						<InlineEditable
+							value={task.price}
+							type="number"
+							placeholder="1"
+						/>
+					</Task>
+				))}
+				<QuoteAddItem onClick={addTask}>Add item</QuoteAddItem>
 			</QuoteSectionMain>
 		);
 	}

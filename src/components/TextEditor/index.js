@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {convertToRaw} from 'draft-js';
 import {Editor, createEditorState} from 'medium-draft';
+import {
+	BLOCK_BUTTONS,
+	INLINE_BUTTONS,
+} from 'medium-draft/lib/components/toolbar';
 import styled from 'react-emotion';
 import 'medium-draft/lib/index.css';
 
@@ -23,11 +27,44 @@ class TextEditor extends Component {
 				component: CustomImageSideButton,
 			},
 		];
+		// default: block: ['ordered-list-item', 'unordered-list-item', 'blockquote', 'header-three', 'todo']
+		// inline: ['BOLD', 'ITALIC', 'UNDERLINE', 'hyperlink', 'HIGHLIGHT']
+		BLOCK_BUTTONS.unshift({
+			description: 'Heading 1',
+			icon: 'header',
+			label: 'H1',
+			style: 'header-one',
+		});
+		BLOCK_BUTTONS.unshift({
+			description: 'Heading 2',
+			icon: 'header',
+			label: 'H2',
+			style: 'header-two',
+		});
+		this.toolbarConfig = {
+			block: [
+				'header-one',
+				'header-two',
+				'header-three',
+				'ordered-list-item',
+				'unordered-list-item',
+				'blockquote',
+			],
+			inline: ['BOLD', 'ITALIC', 'UNDERLINE', 'hyperlink'],
+		};
 		this.state = {editorState: createEditorState(props.currentContent)};
 		this.onChange = (editorState) => {
 			this.props.onChange(convertToRaw(editorState.getCurrentContent()));
 			this.setState({editorState});
 		};
+	}
+
+	componentWillReceiveProps(newProps) {
+		if (newProps.templateName !== this.props.templateName) {
+			this.setState({
+				editorState: createEditorState(newProps.currentContent),
+			});
+		}
 	}
 
 	focusEditor = () => {
@@ -41,7 +78,8 @@ class TextEditor extends Component {
 					editorState={this.state.editorState}
 					onChange={this.onChange}
 					sideButtons={this.sideButtons}
-					placeholder="Write here..."
+					toolbarConfig={this.toolbarConfig}
+					placeholder="Write here ..."
 					ref={(element) => {
 						this.editor = element;
 					}}

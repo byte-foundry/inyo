@@ -3,6 +3,7 @@ import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import AdressAutocomplete from '../AddressAutocomplete';
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
 import {H4, H6} from '../../utils/content';
 import FormElem from '../FormElem';
@@ -31,16 +32,16 @@ class UserCompanyForm extends Component {
 							validationSchema={Yup.object().shape({})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
+								console.log(values);
 								try {
-									const {data} = await createCompany({
-										variables: {
-											firstName: values.firstname,
-											lastName: values.lastname,
-										},
-									});
-
-									if (data) {
-									}
+									// const {data} = await createCompany({
+									// 	variables: {
+									// 		firstName: values.firstname,
+									// 		lastName: values.lastname,
+									// 	},
+									// });
+									// if (data) {
+									// }
 								}
 								catch (error) {
 									console.log(error);
@@ -59,6 +60,7 @@ class UserCompanyForm extends Component {
 									status,
 									handleSubmit,
 									handleReset,
+									setFieldValue,
 								} = props;
 
 								return (
@@ -77,40 +79,12 @@ class UserCompanyForm extends Component {
 													placeholder="Your company name"
 												/>
 												<H6>Your company address</H6>
-												<FormElem
+												<AdressAutocomplete
 													{...props}
-													name="companyaddressnumber"
-													type="number"
-													label="Number"
-													placeholder="Number"
-												/>
-												<FormElem
-													{...props}
-													name="companyaddressstreet"
-													type="text"
-													label="Street address"
-													placeholder="Street"
-												/>
-												<FormElem
-													{...props}
-													name="companyaddresscity"
-													type="text"
-													label="City"
-													placeholder="City"
-												/>
-												<FormElem
-													{...props}
-													name="companyaddresspostcode"
-													type="number"
-													label="Postcode"
-													placeholder="Postcode"
-												/>
-												<FormElem
-													{...props}
-													name="companyaddresscountry"
-													type="text"
-													label="Country"
-													placeholder="Country"
+													onChange={setFieldValue}
+													name="companyaddress"
+													placeholder="Write an address here"
+													label="Company address"
 												/>
 												<FormElem
 													{...props}

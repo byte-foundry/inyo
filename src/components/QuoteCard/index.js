@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 
 const QuoteCardMain = styled('div')`
@@ -11,13 +10,6 @@ const DateOfIssue = styled('div')``;
 const Amount = styled('div')``;
 
 class QuoteCard extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			shouldRedirect: false,
-		};
-	}
-
 	render() {
 		const {quote} = this.props;
 		const {client, dateOfIssue, amount} = quote;

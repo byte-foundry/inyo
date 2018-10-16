@@ -4,8 +4,9 @@ import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';
 import Select from 'react-select/lib/Creatable';
 
-import {H3, H4, P} from '../../../utils/content';
+import {H3, H4} from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
+import AddressAutocomplete from '../../../components/AddressAutocomplete';
 
 import {CREATE_QUOTE} from '../../../utils/mutations';
 
@@ -24,9 +25,6 @@ class CreateQuoteForm extends React.Component {
 							lastName: '',
 							email: '',
 							vat: '',
-							street: '',
-							city: '',
-							country: '',
 						}}
 						validationSchema={Yup.object().shape({
 							customer: Yup.string(),
@@ -38,11 +36,9 @@ class CreateQuoteForm extends React.Component {
 							lastName: Yup.string(),
 							email: Yup.string().email(),
 							vat: Yup.string(),
-							street: Yup.string(),
-							city: Yup.string(),
-							country: Yup.string(),
 						})}
 						onSubmit={async (values, actions) => {
+							console.log(values);
 							const customer = customers.find(
 								c => c.name === values.customer,
 							);
@@ -156,23 +152,14 @@ class CreateQuoteForm extends React.Component {
 													placeholder="FR 152 154 874"
 												/>
 
-												<FormElem
+												<AddressAutocomplete
 													{...props}
-													label="Street"
-													name="street"
-													placeholder="Baker Street"
-												/>
-												<FormElem
-													{...props}
-													label="City"
-													name="city"
-													placeholder="London"
-												/>
-												<FormElem
-													{...props}
-													label="Country"
-													name="country"
-													placeholder="UK"
+													onChange={
+														props.setFieldValue
+													}
+													name="address"
+													placeholder="Write an address here"
+													label="Address"
 												/>
 											</div>
 										)}

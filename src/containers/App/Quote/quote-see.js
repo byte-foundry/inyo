@@ -21,26 +21,35 @@ const tasksListStatic = [
 		name: 'Task',
 		time: 2,
 		price: 1337,
-		finished: true,
+		status: 'FINISHED',
 	},
 	{
 		id: 2,
 		name: 'Task 2',
 		time: 0.5,
 		price: 137,
-		finished: true,
+		status: 'FINISHED',
 	},
 	{
 		id: 3,
 		name: 'Task 3',
 		time: 1,
 		price: 337,
+		status: 'UPDATED',
 	},
 	{
 		id: 4,
 		name: 'Task 4',
 		time: 2,
 		price: 1337,
+		status: 'UPDATED_SENT',
+	},
+	{
+		id: 5,
+		name: 'Task 4',
+		time: 2,
+		price: 1337,
+		status: 'PENDING',
 	},
 ];
 

@@ -1,15 +1,13 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+
 import {FlexRow} from '../../utils/content.js';
+
+import TaskStatus from '../TaskStatus';
 
 const TaskMain = styled(FlexRow)`
 	border: solid 1px;
 	background: none;
-`;
-const TaskStatus = styled('div')`
-	width: 50px;
-	height: 50px;
-	background: ${props => (props.finished ? 'lightgreen' : 'grey')};
 `;
 const TaskName = styled('label')`
 	flex: 1;
@@ -26,13 +24,13 @@ class Task extends Component {
 		const {
 			selected,
 			task: {
-				name, time, price, finished,
+				name, time, price, status,
 			},
 		} = this.props;
 
 		return (
 			<TaskMain onClick={this.select}>
-				<TaskStatus finished={finished} />
+				<TaskStatus status={status} />
 				<TaskName>{name}</TaskName>
 				<TaskTime>{time}</TaskTime>
 				<TaskPrice>

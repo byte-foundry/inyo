@@ -5,17 +5,13 @@ import {Formik} from 'formik';
 
 import FormInput from '../FormInput';
 import FormTextarea from '../FormTextarea';
+import TaskStatus from '../TaskStatus';
 
 import {FlexRow, FlexColumn} from '../../utils/content.js';
 
 const TaskMain = styled(FlexRow)`
 	border: solid 1px;
 	background: lightgrey;
-`;
-const TaskStatus = styled('div')`
-	width: 50px;
-	height: 50px;
-	background: ${props => (props.finished ? 'lightgreen' : 'grey')};
 `;
 const TaskTextarea = styled(FormTextarea)`
 	width: 100%;
@@ -27,13 +23,13 @@ class TaskForm extends Component {
 			done,
 			cancel,
 			task: {
-				name, time, price, finished,
+				name, time, price, status,
 			},
 		} = this.props;
 
 		return (
 			<TaskMain>
-				<TaskStatus finished={finished} />
+				<TaskStatus status={status} />
 				<Formik
 					initialValues={{name, time, price}}
 					validationSchema={Yup.object().shape({

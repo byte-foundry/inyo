@@ -4,6 +4,7 @@ import {Mutation} from 'react-apollo';
 import TextEditor from '../../../components/TextEditor';
 import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
+import QuoteTotal from '../../../components/QuoteTotal';
 import {templates} from '../../../utils/quote-templates';
 import {EDIT_TASK_ITEMS} from '../../../utils/mutations';
 import {
@@ -30,7 +31,6 @@ const ToggleButton = styled('span')`
 `;
 const AddOptionButton = styled('button')``;
 const ClientAddress = styled('div')``;
-const PriceElem = styled('div')``;
 const QuoteSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
 	min-width: 15vw;
@@ -93,22 +93,7 @@ class EditQuote extends Component {
 				sumTTC += task.price;
 			});
 		});
-		return (
-			<div>
-				<PriceElem>
-					<H6>Time scheduled</H6>
-					<H4>{sumDays} days</H4>
-				</PriceElem>
-				<PriceElem>
-					<H6>Total H.T.</H6>
-					<H4>{sumHT} €</H4>
-				</PriceElem>
-				<PriceElem>
-					<H6>Total T.T.C</H6>
-					<H4>{sumTTC} €</H4>
-				</PriceElem>
-			</div>
-		);
+		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
 	};
 
 	editQuoteTitle = (title) => {

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Switch, Route, Link} from 'react-router-dom';
 import QuoteSee from './quote-see';
+import QuoteCustomerView from './quote-customer-view';
 import QuoteEdit from './quote-edit';
 import QuoteCreate from './quote-create';
 import QuoteList from './quote-list';
@@ -21,7 +22,7 @@ class Quote extends Component {
 					/>
 					<Route
 						path="/app/quotes/view/:quoteId/:customerToken"
-						component={QuoteSee}
+						component={QuoteCustomerView}
 					/>
 					<Route
 						path="/app/quotes/:quoteId/edit/"

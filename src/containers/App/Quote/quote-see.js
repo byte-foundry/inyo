@@ -13,41 +13,45 @@ const TLCustomerName = styled('label')`
 `;
 const TLTimeIndicators = styled(FlexColumn)``;
 const TLTimeLabel = styled('div')``;
-const TLTimeValue = styled('div')``;
+const TLTimeValue = styled('div')`
+	color: ${props => (props.warning ? 'red' : 'black')};
+`;
 
 const tasksListStatic = [
 	{
 		id: 1,
 		name: 'Task',
-		time: 2,
+		unit: 2,
 		price: 1337,
 		status: 'FINISHED',
 	},
 	{
 		id: 2,
 		name: 'Task 2',
-		time: 0.5,
+		unit: 0.5,
 		price: 137,
 		status: 'FINISHED',
 	},
 	{
 		id: 3,
 		name: 'Task 3',
-		time: 1,
+		unit: 1,
+		updatedUnit: 1.5,
 		price: 337,
-		status: 'UPDATED',
+		status: 'UPDATED_SENT',
 	},
 	{
 		id: 4,
 		name: 'Task 4',
-		time: 2,
+		unit: 2,
+		updatedUnit: 3,
 		price: 1337,
 		status: 'UPDATED_SENT',
 	},
 	{
 		id: 5,
 		name: 'Task 4',
-		time: 2,
+		unit: 2,
 		price: 1337,
 		status: 'PENDING',
 	},
@@ -65,7 +69,15 @@ const quote = {
 class TasksListUser extends Component {
 	render() {
 		const {customer, tasks, projectName} = quote;
-		const timePlanned = tasks.reduce((acc, task) => acc + task.time, 0);
+		const timePlanned = tasks.reduce((acc, task) => acc + task.unit, 0);
+		const amendmentEnabled = tasks.reduce(
+			(acc, task) => (acc |= task.status === 'UPDATED'),
+			false,
+		);
+		const overtime = tasks.reduce(
+			(acc, task) => acc + (task.updatedUnit ? task.updatedUnit - task.unit : 0),
+			0,
+		);
 
 		return (
 			<TasksListUserMain>
@@ -80,10 +92,12 @@ class TasksListUser extends Component {
 						</FlexRow>
 						<FlexRow>
 							<TLTimeLabel>Overtime:</TLTimeLabel>
-							<TLTimeValue>0.5</TLTimeValue>
+							<TLTimeValue warning={overtime > 0}>
+								{overtime}
+							</TLTimeValue>
 						</FlexRow>
 					</TLTimeIndicators>
-					<button>Send amendment</button>
+					<button disabled={!amendmentEnabled}>Send amendment</button>
 				</TLTopBar>
 				<H1>{projectName}</H1>
 				<TasksProgressBar tasksCompleted={1} tasksTotal={5} />

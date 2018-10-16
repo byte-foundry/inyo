@@ -17,23 +17,27 @@ const TLTimeValue = styled('div')``;
 
 const tasksListStatic = [
 	{
+		id: 1,
 		name: 'Task',
 		time: 2,
 		price: 1337,
 		finished: true,
 	},
 	{
+		id: 2,
 		name: 'Task 2',
 		time: 0.5,
 		price: 137,
 		finished: true,
 	},
 	{
+		id: 3,
 		name: 'Task 3',
 		time: 1,
 		price: 337,
 	},
 	{
+		id: 4,
 		name: 'Task 4',
 		time: 2,
 		price: 1337,
@@ -44,20 +48,26 @@ const quote = {
 	customer: {
 		name: 'Yolo Inc.',
 		email: 'roger@yolo.head',
-		tasks: tasksListStatic,
 	},
+	projectName: 'Yolo website',
+	tasks: tasksListStatic,
 };
 
 class TasksListUser extends Component {
 	render() {
+		const {customer, tasks, projectName} = quote;
+		const timePlanned = tasks.reduce((acc, task) => acc + task.time, 0);
+
 		return (
 			<TasksListUserMain>
 				<TLTopBar>
-					<TLCustomerName>Dashboard</TLCustomerName>
+					<TLCustomerName>
+						{customer.name} via {customer.email}
+					</TLCustomerName>
 					<TLTimeIndicators>
 						<FlexRow>
-							<TLTimeLabel>Time spent:</TLTimeLabel>
-							<TLTimeValue>5.5</TLTimeValue>
+							<TLTimeLabel>Temps prévu:</TLTimeLabel>
+							<TLTimeValue>{timePlanned}</TLTimeValue>
 						</FlexRow>
 						<FlexRow>
 							<TLTimeLabel>Overtime:</TLTimeLabel>
@@ -66,7 +76,7 @@ class TasksListUser extends Component {
 					</TLTimeIndicators>
 					<button>Send amendment</button>
 				</TLTopBar>
-				<H1>Name of The Project</H1>
+				<H1>{projectName}</H1>
 				<TasksProgressBar tasksCompleted={1} tasksTotal={5} />
 				<TasksList tasks={tasksListStatic} />
 			</TasksListUserMain>

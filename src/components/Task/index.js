@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-
 import {FlexRow} from '../../utils/content.js';
 
 const TaskMain = styled(FlexRow)`
 	border: solid 1px;
+	background: none;
 `;
 const TaskStatus = styled('div')`
 	width: 50px;
@@ -18,13 +18,20 @@ const TaskTime = styled('label')``;
 const TaskPrice = styled('label')``;
 
 class Task extends Component {
+	select = () => {
+		this.props.select(this.props.task.id);
+	};
+
 	render() {
 		const {
-			name, time, price, finished,
-		} = this.props.task;
+			selected,
+			task: {
+				name, time, price, finished,
+			},
+		} = this.props;
 
 		return (
-			<TaskMain>
+			<TaskMain onClick={this.select}>
 				<TaskStatus finished={finished} />
 				<TaskName>{name}</TaskName>
 				<TaskTime>{time}</TaskTime>

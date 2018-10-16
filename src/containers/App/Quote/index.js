@@ -15,7 +15,14 @@ class Quote extends Component {
 			<QuoteMain>
 				<Switch>
 					<Route exact path="/app/quotes" component={QuoteList} />
-					<Route path="/app/quotes/see" component={QuoteSee} />
+					<Route
+						path="/app/quotes/see/:quoteId"
+						component={QuoteSee}
+					/>
+					<Route
+						path="/app/quotes/view/:quoteId/:customerToken"
+						component={QuoteSee}
+					/>
 					<Route path="/app/quotes/edit" component={QuoteEdit} />
 					<Route path="/app/quotes/create" component={QuoteCreate} />
 				</Switch>

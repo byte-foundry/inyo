@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
+import FormInput from '../FormInput';
+
 import {P} from '../../utils/content';
 
 const Label = styled('label')`
@@ -24,18 +26,15 @@ class FormElem extends Component {
 		return (
 			<P>
 				<Label htmlFor={name}>{label}</Label>
-				<input
-					id={name}
+				<FormInput
+					name={name}
 					placeholder={placeholder}
 					type={type}
-					value={values[name]}
-					onChange={handleChange}
-					onBlur={handleBlur}
-					className={
-						errors[name] && touched[name]
-							? 'text-input error'
-							: 'text-input'
-					}
+					values={values}
+					handleChange={handleChange}
+					handleBlur={handleBlur}
+					errors={errors}
+					touched={touched}
 				/>
 				{errors[name]
 					&& touched[name] && (

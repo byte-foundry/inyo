@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Mutation} from 'react-apollo';
 import TextEditor from '../../../components/TextEditor';
 import QuoteSection from '../../../components/QuoteSection';
 import {templates} from '../../../utils/quote-templates';
+import {EDIT_TASK_ITEMS} from '../../../utils/mutations';
 import {
 	H1,
 	H3,
@@ -53,10 +55,15 @@ class EditQuote extends Component {
 		};
 	}
 
-	setQuoteData = (templateName) => {
+	setQuoteData = (templateName, EditTaskItems) => {
 		const templateData = templates.find(e => e.name === templateName);
 
 		if (templateData) {
+			const taskItems = templateData.sections.flatMap(section => section.tasks.map(task => task.name));
+
+			if (typeof EditTaskItems === 'function') {
+				EditTaskItems({variables: {taskItems}});
+			}
 			this.setState({quoteData: templateData});
 		}
 		else {
@@ -67,6 +74,9 @@ class EditQuote extends Component {
 					sections: [],
 				},
 			});
+			if (typeof EditTaskItems === 'function') {
+				EditTaskItems({variables: {taskItems: []}});
+			}
 		}
 	};
 
@@ -107,7 +117,20 @@ class EditQuote extends Component {
 			name: 'New task',
 			amount: 0,
 			price: 0,
+			comment: '',
 		});
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				sections,
+			},
+		});
+	};
+
+	editTask = (sectionIndex, taskIndex, data) => {
+		const {sections} = this.state.quoteData;
+
+		sections[sectionIndex].tasks[taskIndex] = data;
 		this.setState({
 			quoteData: {
 				...this.state.quoteData,
@@ -131,6 +154,18 @@ class EditQuote extends Component {
 		});
 	};
 
+	editSectionTitle = (sectionIndex, title) => {
+		const {sections} = this.state.quoteData;
+
+		sections[sectionIndex].title = title;
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				sections,
+			},
+		});
+	};
+
 	componentDidMount() {
 		// placeholder
 		this.setQuoteData('Website');
@@ -145,7 +180,7 @@ class EditQuote extends Component {
 					<H1>Create your quote</H1>
 					<Button
 						onClick={() => {
-							console.log(this.state.proposalContent);
+							console.log(this.state.quoteData);
 						}}
 					>
 						Send proposal
@@ -161,18 +196,27 @@ class EditQuote extends Component {
 								<label>Template</label>
 							</div>
 							<div>
-								<Select
-									onChange={(e) => {
-										this.setQuoteData(e.target.value);
-									}}
-								>
-									{templates.map(template => (
-										<option value={template.name}>
-											{template.name}
-										</option>
-									))}
-									<option value="custom">New template</option>
-								</Select>
+								<Mutation mutation={EDIT_TASK_ITEMS}>
+									{EditTaskItems => (
+										<Select
+											onChange={(e) => {
+												this.setQuoteData(
+													e.target.value,
+													EditTaskItems,
+												);
+											}}
+										>
+											{templates.map(template => (
+												<option value={template.name}>
+													{template.name}
+												</option>
+											))}
+											<option value="custom">
+												New template
+											</option>
+										</Select>
+									)}
+								</Mutation>
 							</div>
 							<Button>Save draft</Button>
 						</div>
@@ -213,6 +257,11 @@ class EditQuote extends Component {
 												addTask={() => {
 													this.addTask(index);
 												}}
+												editTask={this.editTask}
+												editSectionTitle={
+													this.editSectionTitle
+												}
+												sectionIndex={index}
 											/>
 										),
 									)}

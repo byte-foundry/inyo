@@ -1,17 +1,13 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import InlineEditable from '../InlineEditable';
+import Task from './see-task';
 import {H4, H5, FlexRow} from '../../utils/content';
 
 const QuoteSectionMain = styled('div')``;
 const QuoteAddItem = styled('button')``;
 const TaskName = styled(H5)`
 	margin: 0;
-`;
-const Task = styled(FlexRow)`
-	padding: 10px 20px;
-	margin-bottom: 5px;
-	border: 1px solid black;
 `;
 
 class QuoteSection extends Component {
@@ -23,7 +19,13 @@ class QuoteSection extends Component {
 	}
 
 	render() {
-		const {data, addTask} = this.props;
+		const {
+			data,
+			addTask,
+			editSectionTitle,
+			editTask,
+			sectionIndex,
+		} = this.props;
 
 		return (
 			<QuoteSectionMain>
@@ -32,33 +34,18 @@ class QuoteSection extends Component {
 						value={data.title}
 						type="text"
 						placeholder="Section name"
+						onFocusOut={(value) => {
+							editSectionTitle(sectionIndex, value);
+						}}
 					/>
 				</H4>
-				{data.tasks.map(task => (
+				{data.tasks.map((task, index) => (
 					<Task
-						justifyContent="space-between"
-						onClick={() => {
-							console.log(task);
-						}}
-					>
-						<TaskName>
-							<InlineEditable
-								value={task.name}
-								type="text"
-								placeholder="your task name"
-							/>
-						</TaskName>
-						<InlineEditable
-							value={task.amount}
-							type="number"
-							placeholder="1"
-						/>
-						<InlineEditable
-							value={task.price}
-							type="number"
-							placeholder="1"
-						/>
-					</Task>
+						task={task}
+						sectionIndex={sectionIndex}
+						taskIndex={index}
+						editTask={editTask}
+					/>
 				))}
 				<QuoteAddItem onClick={addTask}>Add item</QuoteAddItem>
 			</QuoteSectionMain>

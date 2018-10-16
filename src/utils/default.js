@@ -4,4 +4,8 @@ export default {
 		isConnected: true,
 		__typename: 'NetworkStatus',
 	},
+	taskTemplate: {
+		taskItems: [],
+		__typename: 'TaskTemplate',
+	},
 };

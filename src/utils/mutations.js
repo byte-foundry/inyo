@@ -54,6 +54,14 @@ export const CREATE_CUSTOMER = gql`
 	}
 `;
 
+export const EDIT_TASK_ITEMS = gql`
+	mutation EditTaskItems($taskItems: [String!]!) {
+		editTaskItems(taskItems: $taskItems) @client {
+			taskItems
+		}
+	}
+`;
+
 export const CREATE_QUOTE = gql`
 	# creating quote with a customer id or a new customer
 	mutation createQuote($customerId: ID, $customer: CustomerInput) {

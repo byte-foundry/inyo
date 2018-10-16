@@ -8,6 +8,14 @@ export const GET_NETWORK_STATUS = gql`
 	}
 `;
 
+export const GET_TASK_ITEMS = gql`
+	query getTaskItems {
+		taskTemplate @client {
+			taskItems
+		}
+	}
+`;
+
 export const CHECK_LOGIN_USER = gql`
 	query loggedInUserQuery {
 		me {

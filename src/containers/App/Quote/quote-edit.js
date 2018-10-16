@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
 import TextEditor from '../../../components/TextEditor';
+import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
 import {templates} from '../../../utils/quote-templates';
 import {EDIT_TASK_ITEMS} from '../../../utils/mutations';
@@ -48,7 +49,7 @@ class EditQuote extends Component {
 		this.state = {
 			mode: 'quote',
 			quoteData: {
-				name: '',
+				name: 'Name of the project',
 				proposal: undefined,
 				sections: [],
 			},
@@ -110,6 +111,15 @@ class EditQuote extends Component {
 		);
 	};
 
+	editQuoteTitle = (title) => {
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				name: title,
+			},
+		});
+	};
+
 	addTask = (sectionIndex) => {
 		const {sections} = this.state.quoteData;
 
@@ -139,6 +149,18 @@ class EditQuote extends Component {
 		});
 	};
 
+	removeTask = (sectionIndex, taskIndex) => {
+		const {sections} = this.state.quoteData;
+
+		sections[sectionIndex].task.splice(taskIndex, 1);
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				sections,
+			},
+		});
+	};
+
 	addSection = () => {
 		const {sections} = this.state.quoteData;
 
@@ -146,6 +168,18 @@ class EditQuote extends Component {
 			title: 'New section name',
 			tasks: [],
 		});
+		this.setState({
+			quoteData: {
+				...this.state.quoteData,
+				sections,
+			},
+		});
+	};
+
+	removeSection = (sectionIndex) => {
+		const {sections} = this.state.quoteData;
+
+		sections.splice(sectionIndex, 1);
 		this.setState({
 			quoteData: {
 				...this.state.quoteData,
@@ -177,7 +211,7 @@ class EditQuote extends Component {
 		return (
 			<EditQuoteMain>
 				<FlexRow justifyContent="space-between">
-					<H1>Create your quote</H1>
+					<H1>Fill your quote data</H1>
 					<Button
 						onClick={() => {
 							console.log(this.state.quoteData);
@@ -187,7 +221,16 @@ class EditQuote extends Component {
 					</Button>
 				</FlexRow>
 				<FlexRow>
-					<H3>Name of the project</H3>
+					<H3>
+						<InlineEditable
+							value={quoteData.name}
+							type="text"
+							placeholder="Name of the project"
+							onFocusOut={(value) => {
+								this.editQuoteTitle(value);
+							}}
+						/>
+					</H3>
 				</FlexRow>
 				<FlexRow justifyContent="space-between">
 					<SideActions justifyContent="space-between">
@@ -261,7 +304,11 @@ class EditQuote extends Component {
 												editSectionTitle={
 													this.editSectionTitle
 												}
+												removeTask={this.removeTask}
 												sectionIndex={index}
+												removeSection={() => {
+													this.removeSection(index);
+												}}
 											/>
 										),
 									)}

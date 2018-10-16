@@ -28,7 +28,9 @@ class AddTask extends Component {
 		const {
 			name, amount, price, comment,
 		} = this.state;
-		const {task, cancel, done} = this.props;
+		const {
+			task, cancel, done, remove,
+		} = this.props;
 
 		return (
 			<AddTaskMain>
@@ -95,6 +97,13 @@ class AddTask extends Component {
 					/>
 				</FlexRow>
 				<FlexRow>
+					<ActionButton
+						onClick={() => {
+							remove();
+						}}
+					>
+						Remove task
+					</ActionButton>
 					<ActionButton
 						onClick={() => {
 							cancel();

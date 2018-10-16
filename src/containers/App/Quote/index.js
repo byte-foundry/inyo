@@ -23,7 +23,10 @@ class Quote extends Component {
 						path="/app/quotes/view/:quoteId/:customerToken"
 						component={QuoteSee}
 					/>
-					<Route path="/app/quotes/edit" component={QuoteEdit} />
+					<Route
+						path="/app/quotes/:quoteId/edit/"
+						component={QuoteEdit}
+					/>
 					<Route path="/app/quotes/create" component={QuoteCreate} />
 				</Switch>
 			</QuoteMain>

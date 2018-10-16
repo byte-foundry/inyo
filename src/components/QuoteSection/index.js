@@ -5,7 +5,7 @@ import Task from './see-task';
 import {H4, H5, FlexRow} from '../../utils/content';
 
 const QuoteSectionMain = styled('div')``;
-const QuoteAddItem = styled('button')``;
+const QuoteAction = styled('button')``;
 const TaskName = styled(H5)`
 	margin: 0;
 `;
@@ -25,6 +25,8 @@ class QuoteSection extends Component {
 			editSectionTitle,
 			editTask,
 			sectionIndex,
+			removeSection,
+			removeTask,
 		} = this.props;
 
 		return (
@@ -45,9 +47,13 @@ class QuoteSection extends Component {
 						sectionIndex={sectionIndex}
 						taskIndex={index}
 						editTask={editTask}
+						removeTask={removeTask}
 					/>
 				))}
-				<QuoteAddItem onClick={addTask}>Add item</QuoteAddItem>
+				<QuoteAction onClick={removeSection}>
+					Remove section
+				</QuoteAction>
+				<QuoteAction onClick={addTask}>Add item</QuoteAction>
 			</QuoteSectionMain>
 		);
 	}

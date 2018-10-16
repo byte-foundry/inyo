@@ -23,13 +23,21 @@ class Task extends Component {
 
 	render() {
 		const {
-			task, sectionIndex, taskIndex, editTask,
+			task,
+			sectionIndex,
+			taskIndex,
+			editTask,
+			removeTask,
 		} = this.props;
 		const {shouldDisplayAddTask} = this.state;
 
 		return shouldDisplayAddTask ? (
 			<AddTask
 				task={task}
+				remove={() => {
+					removeTask(sectionIndex, taskIndex);
+					this.setState({shouldDisplayAddTask: false});
+				}}
 				cancel={() => {
 					this.setState({shouldDisplayAddTask: false});
 				}}

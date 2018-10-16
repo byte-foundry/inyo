@@ -27,6 +27,7 @@ class CreateQuote extends Component {
 								<CreateQuoteForm
 									customers={customers}
 									onCreate={(newQuote) => {
+										console.log(newQuote);
 										history.push(
 											`/app/quotes/${newQuote.id}/edit`,
 										);

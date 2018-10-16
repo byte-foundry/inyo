@@ -61,14 +61,22 @@ export default class CustomImageSideButton extends ImageSideButton {
 			selectionAfter: selectionState,
 		});
 
-		return EditorState.push(editorState, newContentState, 'change-block-data');
+		return EditorState.push(
+			editorState,
+			newContentState,
+			'change-block-data',
+		);
 	}
 
 	createPlaceholderImage(file) {
 		const src = URL.createObjectURL(file);
-		const editorState = addNewBlock(this.props.getEditorState(), Block.IMAGE, {
-			src,
-		});
+		const editorState = addNewBlock(
+			this.props.getEditorState(),
+			Block.IMAGE,
+			{
+				src,
+			},
+		);
 		const block = getCurrentBlock(editorState);
 
 		this.props.setEditorState(editorState);

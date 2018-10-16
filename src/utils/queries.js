@@ -27,7 +27,6 @@ export const GET_USER_CUSTOMERS = gql`
 					name
 					email
 					address {
-						number
 						street
 						city
 						postalCode
@@ -56,7 +55,6 @@ export const GET_USER_INFOS = gql`
 				name
 				email
 				address {
-					number
 					street
 					city
 					postalCode

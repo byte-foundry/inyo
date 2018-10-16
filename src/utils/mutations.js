@@ -57,7 +57,7 @@ export const CREATE_CUSTOMER = gql`
 export const CREATE_QUOTE = gql`
 	# creating quote with a customer id or a new customer
 	mutation createQuote($customerId: ID, $customer: CustomerInput) {
-		createQuote(id: $id, customer: $customer) {
+		createQuote(customerId: $customerId, customer: $customer) {
 			id
 		}
 	}

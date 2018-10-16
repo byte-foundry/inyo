@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import styled from 'react-emotion';
 import {Body} from '../../utils/content';
 import Landing from '../Landing';
@@ -18,10 +18,6 @@ class Container extends Component {
 	render() {
 		return (
 			<BodyMain>
-				<nav>
-					<Link to="/">Landing</Link>
-					<Link to="/app">App</Link>
-				</nav>
 				<main>
 					<Switch>
 						<Route exact path="/" component={Landing} />

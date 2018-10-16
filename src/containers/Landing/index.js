@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'react-emotion';
 import {
 	H1, H2, H3, P, Ol, Ul,
@@ -10,6 +11,7 @@ class Landing extends Component {
 	render() {
 		return (
 			<LandingMain>
+				<Link to="/app">Go to App</Link>
 				<H1>HTML Ipsum Presents</H1>
 
 				<P>

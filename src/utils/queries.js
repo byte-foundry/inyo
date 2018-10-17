@@ -8,10 +8,10 @@ export const GET_NETWORK_STATUS = gql`
 	}
 `;
 
-export const GET_TASK_ITEMS = gql`
-	query getTaskItems {
-		taskTemplate @client {
-			taskItems
+export const GET_ITEMS = gql`
+	query getItems {
+		template @client {
+			items
 		}
 	}
 `;

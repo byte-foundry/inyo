@@ -9,6 +9,6 @@ export default `
 
 	type Query {
 		networkStatus: NetworkStatus!
-		taskTemplate: TaskTemplate
+		Template: Template
 	}
 `;

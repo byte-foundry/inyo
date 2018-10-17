@@ -131,7 +131,7 @@ export const templates = [
 		sections: [
 			{
 				title: 'Conception',
-				tasks: [
+				items: [
 					{
 						name: 'Arborescence',
 						amount: 3,
@@ -148,7 +148,7 @@ export const templates = [
 			},
 			{
 				title: 'Direction artistique',
-				tasks: [
+				items: [
 					{
 						name: 'Principe de navigation',
 						amount: 3,
@@ -165,7 +165,7 @@ export const templates = [
 			},
 			{
 				title: 'Webdesign',
-				tasks: [
+				items: [
 					{
 						name: 'Déclinaison et mise en page des gabarits',
 						amount: 3,

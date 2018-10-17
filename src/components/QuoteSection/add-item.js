@@ -5,23 +5,23 @@ import {Query} from 'react-apollo';
 import {H4, H5, FlexRow} from '../../utils/content';
 import {templates} from '../../utils/quote-templates';
 
-import {GET_TASK_ITEMS} from '../../utils/queries';
+import {GET_ITEMS} from '../../utils/queries';
 
-const AddTaskMain = styled('div')`
+const AddItemMain = styled('div')`
 	background: #ddd;
 	padding: 10px 20px;
 `;
 
-const TaskComment = styled('textarea')`
+const ItemComment = styled('textarea')`
 	width: 100%;
 `;
 
 const ActionButton = styled('button')``;
 
-class AddTask extends Component {
+class AddItem extends Component {
 	constructor(props) {
 		super(props);
-		this.state = props.task;
+		this.state = props.item;
 	}
 
 	render() {
@@ -29,25 +29,25 @@ class AddTask extends Component {
 			name, amount, price, comment,
 		} = this.state;
 		const {
-			task, cancel, done, remove,
+			item, cancel, done, remove,
 		} = this.props;
 
 		return (
-			<AddTaskMain>
+			<AddItemMain>
 				<FlexRow justifyContent="space-between">
-					<Query query={GET_TASK_ITEMS}>
+					<Query query={GET_ITEMS}>
 						{({loading, error, data}) => {
 							if (loading) return <p>Loading...</p>;
-							if (!loading && data && data.taskTemplate) {
-								const {taskItems} = data.taskTemplate;
+							if (!loading && data && data.template) {
+								const {items} = data.template;
 
 								return (
 									<Autocomplete
-										getItemValue={task => task}
-										items={taskItems}
-										shouldItemRender={(task, value) => task.includes(value)
+										getItemValue={item => item}
+										items={items}
+										shouldItemRender={(item, value) => item.includes(value)
 										}
-										renderItem={(task, isHighlighted) => (
+										renderItem={(item, isHighlighted) => (
 											<div
 												style={{
 													background: isHighlighted
@@ -55,7 +55,7 @@ class AddTask extends Component {
 														: 'white',
 												}}
 											>
-												{task}
+												{item}
 											</div>
 										)}
 										value={name}
@@ -90,7 +90,7 @@ class AddTask extends Component {
 					/>
 				</FlexRow>
 				<FlexRow>
-					<TaskComment
+					<ItemComment
 						placeholder="Add comments or description"
 						value={comment}
 						onChange={e => this.setState({comment: e.target.value})}
@@ -102,7 +102,7 @@ class AddTask extends Component {
 							remove();
 						}}
 					>
-						Remove task
+						Remove item
 					</ActionButton>
 					<ActionButton
 						onClick={() => {
@@ -119,9 +119,9 @@ class AddTask extends Component {
 						Done
 					</ActionButton>
 				</FlexRow>
-			</AddTaskMain>
+			</AddItemMain>
 		);
 	}
 }
 
-export default AddTask;
+export default AddItem;

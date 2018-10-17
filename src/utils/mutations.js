@@ -61,10 +61,10 @@ export const CREATE_CUSTOMER = gql`
 
 /** ******** QUOTE MUTATIONS ********* */
 
-export const EDIT_TASK_ITEMS = gql`
-	mutation EditTaskItems($taskItems: [String!]!) {
-		editTaskItems(taskItems: $taskItems) @client {
-			taskItems
+export const EDIT_ITEMS = gql`
+	mutation EditItems($items: [String!]!) {
+		editItems(items: $items) @client {
+			items
 		}
 	}
 `;
@@ -77,29 +77,61 @@ export const CREATE_QUOTE = gql`
 		}
 	}
 `;
+export const UPDATE_QUOTE = gql`
+	# creating quote with a customer id or a new customer
+	mutation updateQuote($quoteId: ID, $name: String!) {
+		updateQuote(quoteId: $quoteId, name: $name) {
+			id
+		}
+	}
+`;
 // Option
 export const CREATE_OPTION = gql`
-	# creating quote with a customer id or a new customer
 	mutation createOption($quoteId: ID, $name: String!, $proposal: String) {
 		createOption(quoteId: $quoteId, name: $name, proposal: $proposal) {
 			id
 		}
 	}
 `;
+export const UPDATE_OPTION = gql`
+	mutation updateOption($optionId: ID, $name: String!, $option: OptionInput) {
+		updateOption(optionId: $optionId, name: $name, option: $option) {
+			id
+			options {
+				id
+			}
+		}
+	}
+`;
 // Section
-export const CREATE_SECTION = gql`
-	# creating quote with a customer id or a new customer
-	mutation createSection($optionId: ID, $name: String!) {
-		createSection(optionId: $optionId, name: $name) {
+export const ADD_SECTION = gql`
+	mutation addSection($optionId: ID, $name: String!, $items: [ItemInput!]) {
+		addSection(optionId: $optionId, name: $name, items: $items) {
+			id
+			items {
+				id
+			}
+		}
+	}
+`;
+export const REMOVE_SECTION = gql`
+	mutation removeSection($sectionId: ID) {
+		removeSection(sectionId: $sectionId) {
 			id
 		}
 	}
 `;
-// Task
-export const CREATE_TASK = gql`
-	# creating quote with a customer id or a new customer
-	mutation createTask($sectionId: ID, $task: TaskInput) {
-		createTask(sectionId: $sectionId, task: $task) {
+// Item
+export const ADD_ITEM = gql`
+	mutation addSection($sectionId: ID, $item: ItemInput!) {
+		addSection(sectionId: $sectionId, item: $item) {
+			id
+		}
+	}
+`;
+export const REMOVE_ITEM = gql`
+	mutation removeSection($itemId: ID) {
+		removeSection(itemId: $itemId) {
 			id
 		}
 	}

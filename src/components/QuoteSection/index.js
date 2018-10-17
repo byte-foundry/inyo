@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import InlineEditable from '../InlineEditable';
-import Task from './see-task';
+import Item from './see-item';
 import {H4, H5, FlexRow} from '../../utils/content';
 
 const QuoteSectionMain = styled('div')``;
 const QuoteAction = styled('button')``;
-const TaskName = styled(H5)`
+const ItemName = styled(H5)`
 	margin: 0;
 `;
 
@@ -14,19 +14,19 @@ class QuoteSection extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			shouldDisplayAddTask: false,
+			shouldDisplayAddItem: false,
 		};
 	}
 
 	render() {
 		const {
 			data,
-			addTask,
+			addItem,
 			editSectionTitle,
-			editTask,
+			editItem,
 			sectionIndex,
 			removeSection,
-			removeTask,
+			removeItem,
 		} = this.props;
 
 		return (
@@ -41,19 +41,19 @@ class QuoteSection extends Component {
 						}}
 					/>
 				</H4>
-				{data.tasks.map((task, index) => (
-					<Task
-						task={task}
+				{data.items.map((item, index) => (
+					<Item
+						item={item}
 						sectionIndex={sectionIndex}
-						taskIndex={index}
-						editTask={editTask}
-						removeTask={removeTask}
+						itemIndex={index}
+						editItem={editItem}
+						removeItem={removeItem}
 					/>
 				))}
 				<QuoteAction onClick={removeSection}>
 					Remove section
 				</QuoteAction>
-				<QuoteAction onClick={addTask}>Add item</QuoteAction>
+				<QuoteAction onClick={addItem}>Add item</QuoteAction>
 			</QuoteSectionMain>
 		);
 	}

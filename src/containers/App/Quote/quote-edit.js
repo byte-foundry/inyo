@@ -6,7 +6,7 @@ import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
 import QuoteTotal from '../../../components/QuoteTotal';
 import {templates} from '../../../utils/quote-templates';
-import {EDIT_TASK_ITEMS} from '../../../utils/mutations';
+import {EDIT_ITEMS} from '../../../utils/mutations';
 import {
 	H1,
 	H3,
@@ -56,14 +56,14 @@ class EditQuote extends Component {
 		};
 	}
 
-	setQuoteData = (templateName, EditTaskItems) => {
+	setQuoteData = (templateName, EditItemItems) => {
 		const templateData = templates.find(e => e.name === templateName);
 
 		if (templateData) {
-			const taskItems = templateData.sections.flatMap(section => section.tasks.map(task => task.name));
+			const items = templateData.sections.flatMap(section => section.items.map(item => item.name));
 
-			if (typeof EditTaskItems === 'function') {
-				EditTaskItems({variables: {taskItems}});
+			if (typeof EditItemItems === 'function') {
+				EditItemItems({variables: {items}});
 			}
 			this.setState({quoteData: templateData});
 		}
@@ -75,8 +75,8 @@ class EditQuote extends Component {
 					sections: [],
 				},
 			});
-			if (typeof EditTaskItems === 'function') {
-				EditTaskItems({variables: {taskItems: []}});
+			if (typeof EditItemItems === 'function') {
+				EditItemItems({variables: {items: []}});
 			}
 		}
 	};
@@ -87,10 +87,10 @@ class EditQuote extends Component {
 		let sumTTC = 0;
 
 		this.state.quoteData.sections.forEach((section) => {
-			section.tasks.forEach((task) => {
-				sumDays += task.amount;
-				sumHT += task.price;
-				sumTTC += task.price;
+			section.items.forEach((item) => {
+				sumDays += item.amount;
+				sumHT += item.price;
+				sumTTC += item.price;
 			});
 		});
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
@@ -105,11 +105,11 @@ class EditQuote extends Component {
 		});
 	};
 
-	addTask = (sectionIndex) => {
+	addItem = (sectionIndex) => {
 		const {sections} = this.state.quoteData;
 
-		sections[sectionIndex].tasks.push({
-			name: 'New task',
+		sections[sectionIndex].items.push({
+			name: 'New item',
 			amount: 0,
 			price: 0,
 			comment: '',
@@ -122,10 +122,10 @@ class EditQuote extends Component {
 		});
 	};
 
-	editTask = (sectionIndex, taskIndex, data) => {
+	editItem = (sectionIndex, itemIndex, data) => {
 		const {sections} = this.state.quoteData;
 
-		sections[sectionIndex].tasks[taskIndex] = data;
+		sections[sectionIndex].items[itemIndex] = data;
 		this.setState({
 			quoteData: {
 				...this.state.quoteData,
@@ -134,10 +134,10 @@ class EditQuote extends Component {
 		});
 	};
 
-	removeTask = (sectionIndex, taskIndex) => {
+	removeItem = (sectionIndex, itemIndex) => {
 		const {sections} = this.state.quoteData;
 
-		sections[sectionIndex].task.splice(taskIndex, 1);
+		sections[sectionIndex].items.splice(itemIndex, 1);
 		this.setState({
 			quoteData: {
 				...this.state.quoteData,
@@ -151,7 +151,7 @@ class EditQuote extends Component {
 
 		sections.push({
 			title: 'New section name',
-			tasks: [],
+			items: [],
 		});
 		this.setState({
 			quoteData: {
@@ -224,13 +224,13 @@ class EditQuote extends Component {
 								<label>Template</label>
 							</div>
 							<div>
-								<Mutation mutation={EDIT_TASK_ITEMS}>
-									{EditTaskItems => (
+								<Mutation mutation={EDIT_ITEMS}>
+									{EditItems => (
 										<Select
 											onChange={(e) => {
 												this.setQuoteData(
 													e.target.value,
-													EditTaskItems,
+													EditItems,
 												);
 											}}
 										>
@@ -282,14 +282,14 @@ class EditQuote extends Component {
 										(section, index) => (
 											<QuoteSection
 												data={section}
-												addTask={() => {
-													this.addTask(index);
+												addItem={() => {
+													this.addItem(index);
 												}}
-												editTask={this.editTask}
+												editItem={this.editItem}
 												editSectionTitle={
 													this.editSectionTitle
 												}
-												removeTask={this.removeTask}
+												removeItem={this.removeItem}
 												sectionIndex={index}
 												removeSection={() => {
 													this.removeSection(index);

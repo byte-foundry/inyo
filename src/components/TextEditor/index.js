@@ -59,13 +59,7 @@ class TextEditor extends Component {
 		};
 	}
 
-	componentWillReceiveProps(newProps) {
-		if (newProps.templateName !== this.props.templateName) {
-			this.setState({
-				editorState: createEditorState(newProps.currentContent),
-			});
-		}
-	}
+	componentWillReceiveProps(newProps) {}
 
 	focusEditor = () => {
 		this.editor.focus();

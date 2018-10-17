@@ -6,7 +6,7 @@ import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
 import QuoteTotal from '../../../components/QuoteTotal';
 import {templates} from '../../../utils/quote-templates';
-import {EDIT_ITEMS} from '../../../utils/mutations';
+import {EDIT_ITEMS, UPDATE_QUOTE, ADD_SECTION} from '../../../utils/mutations';
 import {GET_QUOTE_DATA} from '../../../utils/queries';
 import {
 	H1,
@@ -49,22 +49,18 @@ class EditQuote extends Component {
 		super(props);
 		this.state = {
 			mode: 'quote',
-			quoteData: {
-				name: 'Name of the project',
-				proposal: undefined,
-				sections: [],
-			},
+			selectedOption: undefined,
 		};
 	}
 
-	setQuoteData = (templateName, EditItemItems) => {
+	setQuoteData = (templateName, EditItems) => {
 		const templateData = templates.find(e => e.name === templateName);
 
 		if (templateData) {
 			const items = templateData.sections.flatMap(section => section.items.map(item => item.name));
 
 			if (typeof EditItemItems === 'function') {
-				EditItemItems({variables: {items}});
+				EditItems({variables: {items}});
 			}
 			this.setState({quoteData: templateData});
 		}
@@ -77,17 +73,17 @@ class EditQuote extends Component {
 				},
 			});
 			if (typeof EditItemItems === 'function') {
-				EditItemItems({variables: {items: []}});
+				EditItems({variables: {items: []}});
 			}
 		}
 	};
 
-	getQuoteTotal = () => {
+	getQuoteTotal = (option) => {
 		let sumDays = 0;
 		let sumHT = 0;
 		let sumTTC = 0;
 
-		this.state.quoteData.sections.forEach((section) => {
+		option.sections.forEach((section) => {
 			section.items.forEach((item) => {
 				sumDays += item.amount;
 				sumHT += item.price;
@@ -97,13 +93,8 @@ class EditQuote extends Component {
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
 	};
 
-	editQuoteTitle = (title) => {
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				name: title,
-			},
-		});
+	editQuoteTitle = (title, quoteId, updateQuote) => {
+		updateQuote({variables: {quoteId, name: title}});
 	};
 
 	addItem = (sectionIndex) => {
@@ -147,19 +138,8 @@ class EditQuote extends Component {
 		});
 	};
 
-	addSection = () => {
-		const {sections} = this.state.quoteData;
-
-		sections.push({
-			title: 'New section name',
-			items: [],
-		});
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				sections,
-			},
-		});
+	addSection = (optionId, addSection) => {
+		addSection({variables: {optionId, name: 'Nouvelle section'}});
 	};
 
 	removeSection = (sectionIndex) => {
@@ -186,13 +166,7 @@ class EditQuote extends Component {
 		});
 	};
 
-	componentDidMount() {
-		// placeholder
-		this.setQuoteData('Website');
-	}
-
 	render() {
-		const {quoteData} = this.state;
 		const {quoteId} = this.props.match.params;
 
 		return (
@@ -201,14 +175,26 @@ class EditQuote extends Component {
 					console.log(data);
 					if (loading) return <p>Loading</p>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
+					const {quote} = data;
 
+					if (!this.state.selectedOption) {
+						this.setState({
+							selectedOption: quote.options[0].name,
+						});
+						return null;
+					}
+					const option = quote.options.find(
+						o => o.name === this.state.selectedOption,
+					);
+
+					console.log(option);
 					return (
 						<EditQuoteMain>
 							<FlexRow justifyContent="space-between">
 								<H1>Fill your quote data</H1>
 								<Button
 									onClick={() => {
-										console.log(this.state.quoteData);
+										console.log(quote);
 									}}
 								>
 									Send proposal
@@ -216,14 +202,22 @@ class EditQuote extends Component {
 							</FlexRow>
 							<FlexRow>
 								<H3>
-									<InlineEditable
-										value={quoteData.name}
-										type="text"
-										placeholder="Name of the project"
-										onFocusOut={(value) => {
-											this.editQuoteTitle(value);
-										}}
-									/>
+									<Mutation mutation={UPDATE_QUOTE}>
+										{updateQuote => (
+											<InlineEditable
+												value={quote.name}
+												type="text"
+												placeholder="Name of the project"
+												onFocusOut={(value) => {
+													this.editQuoteTitle(
+														value,
+														quote.id,
+														updateQuote,
+													);
+												}}
+											/>
+										)}
+									</Mutation>
 								</H3>
 							</FlexRow>
 							<FlexRow justifyContent="space-between">
@@ -304,7 +298,7 @@ class EditQuote extends Component {
 									<FlexColumn fullHeight>
 										{this.state.mode === 'quote' ? (
 											<QuoteSections>
-												{quoteData.sections.map(
+												{option.sections.map(
 													(section, index) => (
 														<QuoteSection
 															data={section}
@@ -332,27 +326,30 @@ class EditQuote extends Component {
 														/>
 													),
 												)}
-												<Button
-													onClick={() => {
-														this.addSection();
-													}}
+												<Mutation
+													mutation={ADD_SECTION}
 												>
-													Add section
-												</Button>
+													{addSection => (
+														<Button
+															onClick={() => {
+																this.addSection(
+																	option.id,
+																	addSection,
+																);
+															}}
+														>
+															Add section
+														</Button>
+													)}
+												</Mutation>
 											</QuoteSections>
 										) : (
 											<TextEditor
-												currentContent={
-													quoteData.proposal
-												}
-												templateName={quoteData.name}
+												currentContent={JSON.parse(
+													option.proposal,
+												)}
 												onChange={(raw) => {
-													this.setState({
-														quoteData: {
-															...quoteData,
-															proposal: raw,
-														},
-													});
+													// mutation edit proposal
 												}}
 											/>
 										)}
@@ -366,14 +363,13 @@ class EditQuote extends Component {
 										<P>France</P>
 									</ClientAddress>
 									<Select>
-										<option value="optionA">
-											Option A
-										</option>
-										<option value="optionB">
-											Option B
-										</option>
+										{quote.options.map(option => (
+											<option value={option.name}>
+												{option.name}
+											</option>
+										))}
 									</Select>
-									{this.getQuoteTotal()}
+									{this.getQuoteTotal(option)}
 								</SideActions>
 							</FlexRow>
 						</EditQuoteMain>

@@ -105,6 +105,7 @@ export const GET_QUOTE_DATA = gql`
 		quote(id: $quoteId) {
 			id
 			template
+			name
 			options {
 				id
 				name

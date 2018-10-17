@@ -1,6 +1,6 @@
 export const templates = [
 	{
-		name: 'Website',
+		name: 'WEBSITE',
 		proposal: {
 			blocks: [
 				{
@@ -130,53 +130,59 @@ export const templates = [
 		},
 		sections: [
 			{
-				title: 'Conception',
+				name: 'Conception',
 				items: [
 					{
 						name: 'Arborescence',
-						amount: 3,
-						price: 1500,
-						comment: '',
+						unit: 3,
+						unitPrice: 1500,
+						description: '',
+						vatRate: 20,
 					},
 					{
 						name: 'Zonings des différents gabarits',
-						amount: 3,
-						price: 1500,
-						comment: '',
+						unit: 3,
+						unitPrice: 1500,
+						description: '',
+						vatRate: 20,
 					},
 				],
 			},
 			{
-				title: 'Direction artistique',
+				name: 'Direction artistique',
 				items: [
 					{
 						name: 'Principe de navigation',
-						amount: 3,
-						price: 1500,
-						comment: '',
+						unit: 3,
+						unitPrice: 1500,
+						description: '',
+						vatRate: 20,
 					},
 					{
 						name: 'Identité graphique de la page d’accueil',
-						amount: 3,
-						price: 1500,
-						comment: '',
+						unit: 3,
+						unitPrice: 1500,
+						description: '',
+						vatRate: 20,
 					},
 				],
 			},
 			{
-				title: 'Webdesign',
+				name: 'Webdesign',
 				items: [
 					{
 						name: 'Déclinaison et mise en page des gabarits',
-						amount: 3,
-						price: 1500,
-						comment: '',
+						unit: 3,
+						unitPrice: 1500,
+						description: '',
+						vatRate: 20,
 					},
 					{
 						name: 'Versions responsives ',
-						amount: 3,
-						price: 1500,
-						comment: '',
+						unit: 3,
+						unitPrice: 1500,
+						description: '',
+						vatRate: 20,
 					},
 				],
 			},

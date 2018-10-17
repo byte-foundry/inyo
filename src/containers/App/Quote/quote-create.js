@@ -4,7 +4,6 @@ import {Query} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
 
 import CreateQuoteForm from './create-quote-form';
-
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 
 const CreateQuoteMain = styled('div')``;
@@ -22,6 +21,7 @@ class CreateQuote extends Component {
 						const {company} = me;
 						const {customers} = company;
 
+						console.log(data);
 						return (
 							<CreateQuoteMain>
 								<CreateQuoteForm

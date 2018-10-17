@@ -85,9 +85,11 @@ class EditQuote extends Component {
 
 		option.sections.forEach((section) => {
 			section.items.forEach((item) => {
-				sumDays += item.amount;
-				sumHT += item.price;
-				sumTTC += item.price;
+				console.log(item);
+				sumDays += item.unit;
+				sumHT += item.unitPrice;
+				sumTTC
+					+= item.unitPrice + item.unitPrice * (item.vatRate / 100);
 			});
 		});
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
@@ -345,9 +347,7 @@ class EditQuote extends Component {
 											</QuoteSections>
 										) : (
 											<TextEditor
-												currentContent={JSON.parse(
-													option.proposal,
-												)}
+												currentContent={option.proposal}
 												onChange={(raw) => {
 													// mutation edit proposal
 												}}

@@ -54,8 +54,8 @@ class Item extends Component {
 				}}
 			>
 				<ItemName>{item.name}</ItemName>
-				<span>{item.amount}</span>
-				<span>{item.price}€</span>
+				<span>{item.unit}</span>
+				<span>{item.unitPrice}€</span>
 			</ItemMain>
 		);
 	}

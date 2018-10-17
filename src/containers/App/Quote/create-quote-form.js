@@ -8,6 +8,7 @@ import {H3, H4} from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
 
+import {templates} from '../../../utils/quote-templates';
 import {CREATE_QUOTE} from '../../../utils/mutations';
 
 class CreateQuoteForm extends React.Component {
@@ -24,7 +25,6 @@ class CreateQuoteForm extends React.Component {
 							firstName: '',
 							lastName: '',
 							email: '',
-							vat: '',
 						}}
 						validationSchema={Yup.object().shape({
 							customer: Yup.string(),
@@ -35,7 +35,6 @@ class CreateQuoteForm extends React.Component {
 							firstName: Yup.string(),
 							lastName: Yup.string(),
 							email: Yup.string().email(),
-							vat: Yup.string(),
 						})}
 						onSubmit={async (values, actions) => {
 							console.log(values);
@@ -56,7 +55,6 @@ class CreateQuoteForm extends React.Component {
 									firstName: values.firstName,
 									lastName: values.lastName,
 									email: values.email,
-									vat: values.vat,
 									address: {
 										street: values.street,
 										city: values.city,
@@ -64,6 +62,18 @@ class CreateQuoteForm extends React.Component {
 									},
 								};
 							}
+
+							const option = {};
+							const selectedTemplate = templates.find(
+								t => t.name === values.template,
+							);
+
+							if (selectedTemplate) {
+								option.proposal = selectedTemplate.proposal;
+								option.sections = selectedTemplate.sections;
+							}
+
+							variables.option = option;
 
 							const result = await createQuote({
 								variables,
@@ -150,12 +160,6 @@ class CreateQuoteForm extends React.Component {
 													label="Email address"
 													name="email"
 													placeholder="contact@company.com"
-												/>
-												<FormElem
-													{...props}
-													label="VAT Number"
-													name="vat"
-													placeholder="FR 152 154 874"
 												/>
 
 												<AddressAutocomplete

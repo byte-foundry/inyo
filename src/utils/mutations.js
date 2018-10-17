@@ -75,11 +75,13 @@ export const CREATE_QUOTE = gql`
 		$customerId: ID
 		$customer: CustomerInput
 		$template: QuoteTemplate!
+		$option: OptionInput
 	) {
 		createQuote(
 			customerId: $customerId
 			customer: $customer
 			template: $template
+			option: $option
 		) {
 			id
 		}

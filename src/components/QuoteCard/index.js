@@ -15,7 +15,7 @@ class QuoteCard extends Component {
 	render() {
 		const {quote} = this.props;
 		const {
-			customer, issuedAt, createdAt, amount, id,
+			customer, issuedAt, createdAt, amount, id, status,
 		} = quote;
 		const options = {
 			weekday: 'long',
@@ -27,7 +27,11 @@ class QuoteCard extends Component {
 		return (
 			<QuoteCardMain
 				onClick={() => {
-					this.props.history.push(`/app/quotes/${id}/edit`);
+					this.props.history.push(
+						`/app/quotes/${id}/${
+							status === 'DRAFT' ? 'edit' : 'see'
+						}`,
+					);
 				}}
 			>
 				<ClientName>{customer.name}</ClientName>

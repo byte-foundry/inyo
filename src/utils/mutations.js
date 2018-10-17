@@ -71,8 +71,16 @@ export const EDIT_ITEMS = gql`
 // Quote
 export const CREATE_QUOTE = gql`
 	# creating quote with a customer id or a new customer
-	mutation createQuote($customerId: ID, $customer: CustomerInput) {
-		createQuote(customerId: $customerId, customer: $customer) {
+	mutation createQuote(
+		$customerId: ID
+		$customer: CustomerInput
+		$template: QuoteTemplate!
+	) {
+		createQuote(
+			customerId: $customerId
+			customer: $customer
+			template: $template
+		) {
 			id
 		}
 	}
@@ -86,20 +94,10 @@ export const UPDATE_QUOTE = gql`
 	}
 `;
 // Option
-export const CREATE_OPTION = gql`
-	mutation createOption($quoteId: ID, $name: String!, $proposal: String) {
-		createOption(quoteId: $quoteId, name: $name, proposal: $proposal) {
-			id
-		}
-	}
-`;
 export const UPDATE_OPTION = gql`
-	mutation updateOption($optionId: ID, $name: String!, $option: OptionInput) {
-		updateOption(optionId: $optionId, name: $name, option: $option) {
+	mutation updateOption($optionId: ID, $proposal: String!) {
+		updateOption(optionId: $optionId, proposal: $proposal) {
 			id
-			options {
-				id
-			}
 		}
 	}
 `;
@@ -114,6 +112,13 @@ export const ADD_SECTION = gql`
 		}
 	}
 `;
+export const UPDATE_SECTION = gql`
+	mutation updateSection($sectionId: ID, $name: String!) {
+		updateSection(sectionId: $sectionId, name: $name) {
+			id
+		}
+	}
+`;
 export const REMOVE_SECTION = gql`
 	mutation removeSection($sectionId: ID) {
 		removeSection(sectionId: $sectionId) {
@@ -123,15 +128,22 @@ export const REMOVE_SECTION = gql`
 `;
 // Item
 export const ADD_ITEM = gql`
-	mutation addSection($sectionId: ID, $item: ItemInput!) {
-		addSection(sectionId: $sectionId, item: $item) {
+	mutation addItem($itemId: ID, $item: ItemInput!) {
+		addItem(itemId: $itemId, item: $item) {
+			id
+		}
+	}
+`;
+export const UPDATE_ITEM = gql`
+	mutation updateItem($itemId: ID, $item: ItemInput!) {
+		updateItem(itemId: $itemId, item: $item) {
 			id
 		}
 	}
 `;
 export const REMOVE_ITEM = gql`
-	mutation removeSection($itemId: ID) {
-		removeSection(itemId: $itemId) {
+	mutation removeItem($itemId: ID) {
+		removeItem(itemId: $itemId) {
 			id
 		}
 	}

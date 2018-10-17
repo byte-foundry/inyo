@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 
+/** ******** APP QUERIES ********* */
 export const GET_NETWORK_STATUS = gql`
 	query getNetworkStatus {
 		networkStatus @client {
@@ -16,6 +17,7 @@ export const GET_ITEMS = gql`
 	}
 `;
 
+/** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
 	query loggedInUserQuery {
 		me {
@@ -73,6 +75,51 @@ export const GET_USER_INFOS = gql`
 				rcs
 				rm
 				vat
+			}
+		}
+	}
+`;
+
+/** ******** QUOTE QUERIES ********* */
+
+export const GET_ALL_QUOTES = gql`
+	query getAllQuotesQuery {
+		me {
+			id
+			company {
+				quotes {
+					id
+					customer {
+						name
+					}
+					issuedAt
+					createdAt
+					status
+				}
+			}
+		}
+	}
+`;
+export const GET_QUOTE_DATA = gql`
+	query getQuoteData($quoteId: ID!) {
+		quote(id: $quoteId) {
+			id
+			template
+			options {
+				id
+				name
+				proposal
+				sections {
+					id
+					name
+					items {
+						id
+						name
+						unitPrice
+						unit
+						vatRate
+					}
+				}
 			}
 		}
 	}

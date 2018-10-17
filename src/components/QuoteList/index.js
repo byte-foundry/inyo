@@ -28,7 +28,7 @@ class QuoteList extends Component {
 
 		const quoteColumn = Object.entries(quoteState).map(([state, value]) => {
 			const filteredQuotes = quotes.filter(
-				quote => quote.quoteState === value,
+				quote => quote.status === state,
 			);
 
 			return (

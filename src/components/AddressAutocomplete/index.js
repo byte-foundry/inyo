@@ -31,7 +31,6 @@ class AddressAutocomplete extends Component {
 						suggestion,
 						suggestionIndex,
 					}) => {
-						console.log(suggestion);
 						this.props.onChange(name, {
 							street: suggestion.name,
 							city: suggestion.city,

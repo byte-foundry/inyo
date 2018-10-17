@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
+import {GET_ALL_QUOTES} from '../../../utils/queries';
 import {H1} from '../../../utils/content';
 
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
@@ -140,16 +142,29 @@ class ListQuotes extends Component {
 
 	render() {
 		return (
-			<ListQuotesMain>
-				<ListQuotesTopBar>
-					<H1>Your quotes</H1>
-					<CreateNewQuoteButton onClick={this.createNewQuote}>
-						Create a new quote
-					</CreateNewQuoteButton>
-				</ListQuotesTopBar>
-				<SearchQuoteForm />
-				<QuoteList quotes={temporaryStaticQuoteList} />
-			</ListQuotesMain>
+			<Query query={GET_ALL_QUOTES}>
+				{({loading, error, data}) => {
+					console.log(data);
+					if (loading) return <p>Loading</p>;
+					if (error) return <p>Error!: ${error.toString()}</p>;
+					const {quotes} = data.me.company;
+
+					return (
+						<ListQuotesMain>
+							<ListQuotesTopBar>
+								<H1>Your quotes</H1>
+								<CreateNewQuoteButton
+									onClick={this.createNewQuote}
+								>
+									Create a new quote
+								</CreateNewQuoteButton>
+							</ListQuotesTopBar>
+							<SearchQuoteForm />
+							<QuoteList quotes={quotes} />
+						</ListQuotesMain>
+					);
+				}}
+			</Query>
 		);
 	}
 }

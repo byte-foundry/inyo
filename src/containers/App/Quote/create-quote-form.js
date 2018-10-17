@@ -20,7 +20,7 @@ class CreateQuoteForm extends React.Component {
 					<Formik
 						initialValues={{
 							customer: '',
-							template: 'website',
+							template: 'WEBSITE',
 							firstName: '',
 							lastName: '',
 							email: '',
@@ -29,8 +29,8 @@ class CreateQuoteForm extends React.Component {
 						validationSchema={Yup.object().shape({
 							customer: Yup.string(),
 							template: Yup.string().oneOf([
-								'website',
-								'identity',
+								'WEBSITE',
+								'IDENTITY',
 							]),
 							firstName: Yup.string(),
 							lastName: Yup.string(),
@@ -73,7 +73,7 @@ class CreateQuoteForm extends React.Component {
 						}}
 					>
 						{(props) => {
-							const {values} = props;
+							const {values, setFieldValue} = props;
 							const selectedCustomer = customers.find(
 								c => c.name === props.values.customer,
 							);
@@ -95,7 +95,7 @@ class CreateQuoteForm extends React.Component {
 											}
 											onChange={(option) => {
 												console.log(option);
-												props.setFieldValue(
+												setFieldValue(
 													'customer',
 													option && option.value,
 												);
@@ -105,12 +105,18 @@ class CreateQuoteForm extends React.Component {
 										/>
 										<select
 											name="template"
-											defaultValue="website"
+											defaultValue="WEBSITE"
+											onChange={(option) => {
+												setFieldValue(
+													'template',
+													option && option.value,
+												);
+											}}
 										>
-											<option value="website">
+											<option value="WEBSITE">
 												Website
 											</option>
-											<option value="identity">
+											<option value="IDENTITY">
 												Identity
 											</option>
 										</select>

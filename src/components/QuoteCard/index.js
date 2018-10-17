@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import styled from 'react-emotion';
 
 const QuoteCardMain = styled('div')`
 	border: solid 1px grey;
+	cursor: pointer;
 `;
 
 const ClientName = styled('div')``;
@@ -12,16 +14,38 @@ const Amount = styled('div')``;
 class QuoteCard extends Component {
 	render() {
 		const {quote} = this.props;
-		const {client, dateOfIssue, amount} = quote;
+		const {
+			customer, issuedAt, createdAt, amount, id,
+		} = quote;
+		const options = {
+			weekday: 'long',
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		};
 
 		return (
-			<QuoteCardMain>
-				<ClientName>{client}</ClientName>
-				<DateOfIssue>{dateOfIssue.toLocaleString()}</DateOfIssue>
-				<Amount>{amount}</Amount>
+			<QuoteCardMain
+				onClick={() => {
+					this.props.history.push(`/app/quotes/${id}/edit`);
+				}}
+			>
+				<ClientName>{customer.name}</ClientName>
+				<DateOfIssue>
+					{issuedAt
+						? new Date(issuedAt).toLocaleDateString(
+							'fr-FR',
+							options,
+						  )
+						: new Date(createdAt).toLocaleDateString(
+							'fr-FR',
+							options,
+						  )}
+				</DateOfIssue>
+				<Amount>{amount || 0}</Amount>
 			</QuoteCardMain>
 		);
 	}
 }
 
-export default QuoteCard;
+export default withRouter(QuoteCard);

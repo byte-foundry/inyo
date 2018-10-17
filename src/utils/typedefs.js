@@ -11,4 +11,8 @@ export default `
 		networkStatus: NetworkStatus!
 		Template: Template
 	}
+
+	type Template {
+		items: [String!]
+	}
 `;

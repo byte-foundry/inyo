@@ -42,7 +42,7 @@ class QuoteStateList extends Component {
 		const {quotes, quoteState} = this.props;
 
 		const totalAmount = quotes.reduce(
-			(acc, quote) => acc + quote.amount,
+			(acc, quote) => acc + quote.amount || 0,
 			0,
 		);
 

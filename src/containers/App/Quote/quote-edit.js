@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-import {Mutation} from 'react-apollo';
+import {Mutation, Query} from 'react-apollo';
 import TextEditor from '../../../components/TextEditor';
 import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
 import QuoteTotal from '../../../components/QuoteTotal';
 import {templates} from '../../../utils/quote-templates';
 import {EDIT_ITEMS} from '../../../utils/mutations';
+import {GET_QUOTE_DATA} from '../../../utils/queries';
 import {
 	H1,
 	H3,
@@ -192,150 +193,193 @@ class EditQuote extends Component {
 
 	render() {
 		const {quoteData} = this.state;
+		const {quoteId} = this.props.match.params;
 
 		return (
-			<EditQuoteMain>
-				<FlexRow justifyContent="space-between">
-					<H1>Fill your quote data</H1>
-					<Button
-						onClick={() => {
-							console.log(this.state.quoteData);
-						}}
-					>
-						Send proposal
-					</Button>
-				</FlexRow>
-				<FlexRow>
-					<H3>
-						<InlineEditable
-							value={quoteData.name}
-							type="text"
-							placeholder="Name of the project"
-							onFocusOut={(value) => {
-								this.editQuoteTitle(value);
-							}}
-						/>
-					</H3>
-				</FlexRow>
-				<FlexRow justifyContent="space-between">
-					<SideActions justifyContent="space-between">
-						<div>
-							<div>
-								<label>Template</label>
-							</div>
-							<div>
-								<Mutation mutation={EDIT_ITEMS}>
-									{EditItems => (
-										<Select
-											onChange={(e) => {
-												this.setQuoteData(
-													e.target.value,
-													EditItems,
-												);
-											}}
-										>
-											{templates.map(template => (
-												<option value={template.name}>
-													{template.name}
-												</option>
-											))}
-											<option value="custom">
-												New template
-											</option>
-										</Select>
-									)}
-								</Mutation>
-							</div>
-							<Button>Save draft</Button>
-						</div>
-						<div>
-							<Button>Add an attachment</Button>
-							<p>Portfolio.pdf</p>
-						</div>
-					</SideActions>
-					<CenterContent flexGrow="2">
-						<FlexRow justifyContent="space-between">
-							<div>
-								<ToggleButton
-									active={this.state.mode === 'proposal'}
-									onClick={(raw) => {
-										this.setState({mode: 'proposal'});
+			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
+				{({loading, error, data}) => {
+					console.log(data);
+					if (loading) return <p>Loading</p>;
+					if (error) return <p>Error!: ${error.toString()}</p>;
+
+					return (
+						<EditQuoteMain>
+							<FlexRow justifyContent="space-between">
+								<H1>Fill your quote data</H1>
+								<Button
+									onClick={() => {
+										console.log(this.state.quoteData);
 									}}
 								>
-									Proposal
-								</ToggleButton>
-								<ToggleButton
-									active={this.state.mode === 'quote'}
-									onClick={(raw) => {
-										this.setState({mode: 'quote'});
-									}}
-								>
-									Quote
-								</ToggleButton>
-							</div>
-							<Button>Add option</Button>
-						</FlexRow>
-						<FlexColumn fullHeight>
-							{this.state.mode === 'quote' ? (
-								<QuoteSections>
-									{quoteData.sections.map(
-										(section, index) => (
-											<QuoteSection
-												data={section}
-												addItem={() => {
-													this.addItem(index);
-												}}
-												editItem={this.editItem}
-												editSectionTitle={
-													this.editSectionTitle
+									Send proposal
+								</Button>
+							</FlexRow>
+							<FlexRow>
+								<H3>
+									<InlineEditable
+										value={quoteData.name}
+										type="text"
+										placeholder="Name of the project"
+										onFocusOut={(value) => {
+											this.editQuoteTitle(value);
+										}}
+									/>
+								</H3>
+							</FlexRow>
+							<FlexRow justifyContent="space-between">
+								<SideActions justifyContent="space-between">
+									<div>
+										<div>
+											<label>Template</label>
+										</div>
+										<div>
+											<Mutation mutation={EDIT_ITEMS}>
+												{EditItems => (
+													<Select
+														onChange={(e) => {
+															this.setQuoteData(
+																e.target.value,
+																EditItems,
+															);
+														}}
+													>
+														{templates.map(
+															template => (
+																<option
+																	value={
+																		template.name
+																	}
+																>
+																	{
+																		template.name
+																	}
+																</option>
+															),
+														)}
+														<option value="custom">
+															New template
+														</option>
+													</Select>
+												)}
+											</Mutation>
+										</div>
+										<Button>Save draft</Button>
+									</div>
+									<div>
+										<Button>Add an attachment</Button>
+										<p>Portfolio.pdf</p>
+									</div>
+								</SideActions>
+								<CenterContent flexGrow="2">
+									<FlexRow justifyContent="space-between">
+										<div>
+											<ToggleButton
+												active={
+													this.state.mode
+													=== 'proposal'
 												}
-												removeItem={this.removeItem}
-												sectionIndex={index}
-												removeSection={() => {
-													this.removeSection(index);
+												onClick={(raw) => {
+													this.setState({
+														mode: 'proposal',
+													});
+												}}
+											>
+												Proposal
+											</ToggleButton>
+											<ToggleButton
+												active={
+													this.state.mode === 'quote'
+												}
+												onClick={(raw) => {
+													this.setState({
+														mode: 'quote',
+													});
+												}}
+											>
+												Quote
+											</ToggleButton>
+										</div>
+										<Button>Add option</Button>
+									</FlexRow>
+									<FlexColumn fullHeight>
+										{this.state.mode === 'quote' ? (
+											<QuoteSections>
+												{quoteData.sections.map(
+													(section, index) => (
+														<QuoteSection
+															data={section}
+															addItem={() => {
+																this.addItem(
+																	index,
+																);
+															}}
+															editItem={
+																this.editItem
+															}
+															editSectionTitle={
+																this
+																	.editSectionTitle
+															}
+															removeItem={
+																this.removeItem
+															}
+															sectionIndex={index}
+															removeSection={() => {
+																this.removeSection(
+																	index,
+																);
+															}}
+														/>
+													),
+												)}
+												<Button
+													onClick={() => {
+														this.addSection();
+													}}
+												>
+													Add section
+												</Button>
+											</QuoteSections>
+										) : (
+											<TextEditor
+												currentContent={
+													quoteData.proposal
+												}
+												templateName={quoteData.name}
+												onChange={(raw) => {
+													this.setState({
+														quoteData: {
+															...quoteData,
+															proposal: raw,
+														},
+													});
 												}}
 											/>
-										),
-									)}
-									<Button
-										onClick={() => {
-											this.addSection();
-										}}
-									>
-										Add section
-									</Button>
-								</QuoteSections>
-							) : (
-								<TextEditor
-									currentContent={quoteData.proposal}
-									templateName={quoteData.name}
-									onChange={(raw) => {
-										this.setState({
-											quoteData: {
-												...quoteData,
-												proposal: raw,
-											},
-										});
-									}}
-								/>
-							)}
-						</FlexColumn>
-					</CenterContent>
-					<SideActions>
-						<ClientAddress>
-							<H5>Michel Renard</H5>
-							<P>666 rue yorkshire</P>
-							<P>69003 Lyon</P>
-							<P>France</P>
-						</ClientAddress>
-						<Select>
-							<option value="optionA">Option A</option>
-							<option value="optionB">Option B</option>
-						</Select>
-						{this.getQuoteTotal()}
-					</SideActions>
-				</FlexRow>
-			</EditQuoteMain>
+										)}
+									</FlexColumn>
+								</CenterContent>
+								<SideActions>
+									<ClientAddress>
+										<H5>Michel Renard</H5>
+										<P>666 rue yorkshire</P>
+										<P>69003 Lyon</P>
+										<P>France</P>
+									</ClientAddress>
+									<Select>
+										<option value="optionA">
+											Option A
+										</option>
+										<option value="optionB">
+											Option B
+										</option>
+									</Select>
+									{this.getQuoteTotal()}
+								</SideActions>
+							</FlexRow>
+						</EditQuoteMain>
+					);
+				}}
+			</Query>
 		);
 	}
 }

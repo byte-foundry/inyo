@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
 import TextEditor from '../../../components/TextEditor';
 import InlineEditable from '../../../components/InlineEditable';
@@ -11,6 +12,7 @@ import {
 	UPDATE_QUOTE,
 	ADD_SECTION,
 	UPDATE_OPTION,
+	SEND_QUOTE,
 } from '../../../utils/mutations';
 import {GET_QUOTE_DATA} from '../../../utils/queries';
 import {
@@ -98,6 +100,15 @@ class EditQuote extends Component {
 			});
 		});
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
+	};
+
+	sendQuote = (quoteId, sendQuote) => {
+		sendQuote({
+			variables: {quoteId},
+			update: (cache, {data: {sendQuote}}) => {
+				this.props.router.push('/app/quotes');
+			},
+		});
 	};
 
 	editQuoteTitle = (title, quoteId, updateQuote) => {
@@ -378,13 +389,20 @@ class EditQuote extends Component {
 						<EditQuoteMain>
 							<FlexRow justifyContent="space-between">
 								<H1>Fill your quote data</H1>
-								<Button
-									onClick={() => {
-										console.log(quote);
-									}}
-								>
-									Send proposal
-								</Button>
+								<Mutation mutation={SEND_QUOTE}>
+									{sendQuote => (
+										<Button
+											onClick={() => {
+												this.sendQuote(
+													quote.id,
+													sendQuote,
+												);
+											}}
+										>
+											Send proposal
+										</Button>
+									)}
+								</Mutation>
 							</FlexRow>
 							<FlexRow>
 								<H3>
@@ -446,7 +464,15 @@ class EditQuote extends Component {
 												)}
 											</Mutation>
 										</div>
-										<Button>Save draft</Button>
+										<Button
+											onClick={() => {
+												this.props.history.push(
+													'/app/quotes',
+												);
+											}}
+										>
+											Save draft
+										</Button>
 									</div>
 									<div>
 										<Button>Add an attachment</Button>
@@ -580,4 +606,4 @@ class EditQuote extends Component {
 	}
 }
 
-export default EditQuote;
+export default withRouter(EditQuote);

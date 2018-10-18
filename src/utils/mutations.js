@@ -96,6 +96,14 @@ export const UPDATE_QUOTE = gql`
 		}
 	}
 `;
+export const SEND_QUOTE = gql`
+	# creating quote with a customer id or a new customer
+	mutation sendQuote($quoteId: ID!) {
+		sendQuote(id: $quoteId) {
+			id
+		}
+	}
+`;
 // Option
 export const UPDATE_OPTION = gql`
 	mutation updateOption($optionId: ID!, $proposal: Json!) {

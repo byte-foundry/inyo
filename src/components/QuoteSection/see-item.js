@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Mutation} from 'react-apollo';
 import AddItem from './add-item';
 import {H4, H5, FlexRow} from '../../utils/content';
+import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
 
 const QuoteAddItem = styled('button')``;
 const ItemName = styled(H5)`
@@ -22,30 +24,47 @@ class Item extends Component {
 	}
 
 	render() {
-		const {
-			item,
-			sectionIndex,
-			itemIndex,
-			editItem,
-			removeItem,
-		} = this.props;
+		const {item, sectionId, editItem} = this.props;
 		const {shouldDisplayAddItem} = this.state;
 
 		return shouldDisplayAddItem ? (
-			<AddItem
-				item={item}
-				remove={() => {
-					removeItem(sectionIndex, itemIndex);
-					this.setState({shouldDisplayAddItem: false});
-				}}
-				cancel={() => {
-					this.setState({shouldDisplayAddItem: false});
-				}}
-				done={(data) => {
-					editItem(sectionIndex, itemIndex, data);
-					this.setState({shouldDisplayAddItem: false});
-				}}
-			/>
+			<Mutation mutation={UPDATE_ITEM}>
+				{updateItem => (
+					<Mutation mutation={REMOVE_ITEM}>
+						{removeItem => (
+							<AddItem
+								item={item}
+								remove={() => {
+									this.props.removeItem(
+										item.id,
+										sectionId,
+										removeItem,
+									);
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+								cancel={() => {
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+								done={(data) => {
+									editItem(
+										item.id,
+										sectionId,
+										data,
+										updateItem,
+									);
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+							/>
+						)}
+					</Mutation>
+				)}
+			</Mutation>
 		) : (
 			<ItemMain
 				justifyContent="space-between"

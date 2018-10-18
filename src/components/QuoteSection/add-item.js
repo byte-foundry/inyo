@@ -26,7 +26,7 @@ class AddItem extends Component {
 
 	render() {
 		const {
-			name, amount, price, comment,
+			name, unit, unitPrice, description,
 		} = this.state;
 		const {
 			item, cancel, done, remove,
@@ -77,23 +77,24 @@ class AddItem extends Component {
 					<input
 						type="number"
 						placeholder="1"
-						value={amount}
-						onChange={e => this.setState({amount: parseInt(e.target.value)})
+						value={unit}
+						onChange={e => this.setState({unit: parseInt(e.target.value)})
 						}
 					/>
 					<input
 						type="number"
 						placeholder="500"
-						value={price}
-						onChange={e => this.setState({price: parseInt(e.target.value)})
+						value={unitPrice}
+						onChange={e => this.setState({unitPrice: parseInt(e.target.value)})
 						}
 					/>
 				</FlexRow>
 				<FlexRow>
 					<ItemComment
 						placeholder="Add comments or description"
-						value={comment}
-						onChange={e => this.setState({comment: e.target.value})}
+						value={description}
+						onChange={e => this.setState({description: e.target.value})
+						}
 					/>
 				</FlexRow>
 				<FlexRow>

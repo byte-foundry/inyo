@@ -98,9 +98,10 @@ export const UPDATE_QUOTE = gql`
 `;
 // Option
 export const UPDATE_OPTION = gql`
-	mutation updateOption($optionId: ID!, $proposal: String!) {
-		updateOption(optionId: $optionId, proposal: $proposal) {
+	mutation updateOption($optionId: ID!, $proposal: Json!) {
+		updateOption(id: $optionId, proposal: $proposal) {
 			id
+			proposal
 		}
 	}
 `;
@@ -113,8 +114,7 @@ export const ADD_SECTION = gql`
 			items {
 				id
 				name
-				pendingUnitPrice
-				pendingUnitPrice
+				unitPrice
 				unit
 				vatRate
 			}
@@ -123,14 +123,13 @@ export const ADD_SECTION = gql`
 `;
 export const UPDATE_SECTION = gql`
 	mutation updateSection($sectionId: ID!, $name: String!) {
-		updateSection(sectionId: $sectionId, name: $name) {
+		updateSection(id: $sectionId, name: $name) {
 			id
 			name
 			items {
 				id
 				name
-				pendingUnitPrice
-				pendingUnitPrice
+				unitPrice
 				unit
 				vatRate
 			}
@@ -139,31 +138,43 @@ export const UPDATE_SECTION = gql`
 `;
 export const REMOVE_SECTION = gql`
 	mutation removeSection($sectionId: ID!) {
-		removeSection(sectionId: $sectionId) {
+		removeSection(id: $sectionId) {
 			id
 		}
 	}
 `;
 // Item
 export const ADD_ITEM = gql`
-	mutation addItem($itemId: ID!, $item: ItemInput!) {
-		addItem(itemId: $itemId, item: $item) {
+	mutation addItem($sectionId: ID!, $name: String!) {
+		addItem(sectionId: $sectionId, name: $name) {
 			id
 			name
-			pendingUnitPrice
-			pendingUnitPrice
+			unitPrice
 			unit
 			vatRate
 		}
 	}
 `;
 export const UPDATE_ITEM = gql`
-	mutation updateItem($itemId: ID!, $item: ItemInput!) {
-		updateItem(itemId: $itemId, item: $item) {
+	mutation updateItem(
+		$itemId: ID!
+		$name: String
+		$description: String
+		$unitPrice: Int
+		$unit: Int
+		$vatRate: Int
+	) {
+		updateItem(
+			id: $itemId
+			name: $name
+			description: $description
+			unitPrice: $unitPrice
+			unit: $unit
+			vatRate: $vatRate
+		) {
 			id
 			name
-			pendingUnitPrice
-			pendingUnitPrice
+			unitPrice
 			unit
 			vatRate
 		}
@@ -171,7 +182,7 @@ export const UPDATE_ITEM = gql`
 `;
 export const REMOVE_ITEM = gql`
 	mutation removeItem($itemId: ID!) {
-		removeItem(itemId: $itemId) {
+		removeItem(id: $itemId) {
 			id
 		}
 	}

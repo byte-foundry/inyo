@@ -6,7 +6,12 @@ import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
 import QuoteTotal from '../../../components/QuoteTotal';
 import {templates} from '../../../utils/quote-templates';
-import {EDIT_ITEMS, UPDATE_QUOTE, ADD_SECTION} from '../../../utils/mutations';
+import {
+	EDIT_ITEMS,
+	UPDATE_QUOTE,
+	ADD_SECTION,
+	UPDATE_OPTION,
+} from '../../../utils/mutations';
 import {GET_QUOTE_DATA} from '../../../utils/queries';
 import {
 	H1,
@@ -50,6 +55,7 @@ class EditQuote extends Component {
 		this.state = {
 			mode: 'quote',
 			selectedOption: undefined,
+			apolloTriggerRenderTemporaryFix: false,
 		};
 	}
 
@@ -85,7 +91,6 @@ class EditQuote extends Component {
 
 		option.sections.forEach((section) => {
 			section.items.forEach((item) => {
-				console.log(item);
 				sumDays += item.unit;
 				sumHT += item.unitPrice;
 				sumTTC
@@ -96,64 +101,181 @@ class EditQuote extends Component {
 	};
 
 	editQuoteTitle = (title, quoteId, updateQuote) => {
-		updateQuote({variables: {quoteId, name: title}});
-	};
+		updateQuote({
+			variables: {quoteId, name: title},
+			update: (cache, {data: {updateQuote}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
 
-	addItem = (sectionIndex) => {
-		const {sections} = this.state.quoteData;
-
-		sections[sectionIndex].items.push({
-			name: 'New item',
-			amount: 0,
-			price: 0,
-			comment: '',
-		});
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				sections,
+				data.quote.name = updateQuote.name;
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
 			},
 		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
-	editItem = (sectionIndex, itemIndex, data) => {
-		const {sections} = this.state.quoteData;
+	updateOption = (optionId, raw, updateOption) => {
+		updateOption({
+			variables: {optionId, proposal: raw},
+			update: (cache, {data: {updateOption}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
 
-		sections[sectionIndex].items[itemIndex] = data;
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				sections,
+				data.quote.options[0].proposal = updateOption.proposal;
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
 			},
 		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
-	removeItem = (sectionIndex, itemIndex) => {
-		const {sections} = this.state.quoteData;
+	addItem = (sectionId, addItem) => {
+		addItem({
+			variables: {sectionId, name: 'Nouvelle tâche'},
+			update: (cache, {data: {addItem}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const section = data.quote.options[0].sections.find(
+					e => e.id === sectionId,
+				);
 
-		sections[sectionIndex].items.splice(itemIndex, 1);
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				sections,
+				section.items.push(addItem);
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
 			},
 		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
+	};
+
+	editItem = (itemId, sectionId, data, updateItem) => {
+		const {
+			name, description, unitPrice, unit, vatRate,
+		} = data;
+
+		updateItem({
+			variables: {
+				itemId,
+				name,
+				description,
+				unitPrice,
+				unit,
+				vatRate,
+			},
+			update: (cache, {data: {updateItem}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const section = data.quote.options[0].sections.find(
+					e => e.id === sectionId,
+				);
+				const itemIndex = section.items.find(
+					e => e.id === updateItem.id,
+				);
+
+				section.items[itemIndex] = updateItem;
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
+			},
+		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
+	};
+
+	removeItem = (itemId, sectionId, removeItem) => {
+		removeItem({
+			variables: {itemId},
+			update: (cache, {data: {removeItem}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const section = data.quote.options[0].sections.find(
+					e => e.id === sectionId,
+				);
+				const itemIndex = section.items.find(
+					e => e.id === removeItem.id,
+				);
+
+				section.items.splice(itemIndex, 1);
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
+			},
+		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	addSection = (optionId, addSection) => {
-		addSection({variables: {optionId, name: 'Nouvelle section'}});
-	};
+		addSection({
+			variables: {optionId, name: 'Nouvelle section'},
+			update: (cache, {data: {addSection}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
 
-	removeSection = (sectionIndex) => {
-		const {sections} = this.state.quoteData;
-
-		sections.splice(sectionIndex, 1);
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				sections,
+				data.quote.options[0].sections.push(addSection);
+				console.log(addSection);
+				console.log(data);
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
 			},
 		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	editSectionTitle = (sectionIndex, title) => {
@@ -168,13 +290,42 @@ class EditQuote extends Component {
 		});
 	};
 
+	removeSection = (sectionId, removeSection) => {
+		removeSection({
+			variables: {sectionId},
+			update: (cache, {data: {removeSection}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const sectionIndex = data.quote.options[0].sections.findIndex(
+					e => e.id === removeSection.id,
+				);
+
+				data.quote.options[0].sections.splice(sectionIndex, 1);
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
+			},
+		});
+		this.setState({apolloTriggerRenderTemporaryFix: true});
+	};
+
 	render() {
 		const {quoteId} = this.props.match.params;
 
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
 				{({loading, error, data}) => {
-					console.log(data);
+					const fetchedData = {...data};
+
 					if (loading) return <p>Loading</p>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {quote} = data;
@@ -185,11 +336,15 @@ class EditQuote extends Component {
 						});
 						return null;
 					}
+					if (this.state.apolloTriggerRenderTemporaryFix) {
+						this.setState({
+							apolloTriggerRenderTemporaryFix: false,
+						});
+					}
 					const option = quote.options.find(
 						o => o.name === this.state.selectedOption,
 					);
 
-					console.log(option);
 					return (
 						<EditQuoteMain>
 							<FlexRow justifyContent="space-between">
@@ -242,6 +397,9 @@ class EditQuote extends Component {
 														{templates.map(
 															template => (
 																<option
+																	key={`option${
+																		option.name
+																	}`}
 																	value={
 																		template.name
 																	}
@@ -303,12 +461,13 @@ class EditQuote extends Component {
 												{option.sections.map(
 													(section, index) => (
 														<QuoteSection
+															key={`section${
+																section.id
+															}`}
 															data={section}
-															addItem={() => {
-																this.addItem(
-																	index,
-																);
-															}}
+															addItem={
+																this.addItem
+															}
 															editItem={
 																this.editItem
 															}
@@ -319,12 +478,11 @@ class EditQuote extends Component {
 															removeItem={
 																this.removeItem
 															}
+															removeSection={
+																this
+																	.removeSection
+															}
 															sectionIndex={index}
-															removeSection={() => {
-																this.removeSection(
-																	index,
-																);
-															}}
 														/>
 													),
 												)}
@@ -346,12 +504,22 @@ class EditQuote extends Component {
 												</Mutation>
 											</QuoteSections>
 										) : (
-											<TextEditor
-												currentContent={option.proposal}
-												onChange={(raw) => {
-													// mutation edit proposal
-												}}
-											/>
+											<Mutation mutation={UPDATE_OPTION}>
+												{updateOption => (
+													<TextEditor
+														currentContent={
+															option.proposal
+														}
+														onChange={(raw) => {
+															this.updateOption(
+																option.id,
+																raw,
+																updateOption,
+															);
+														}}
+													/>
+												)}
+											</Mutation>
 										)}
 									</FlexColumn>
 								</CenterContent>
@@ -364,7 +532,10 @@ class EditQuote extends Component {
 									</ClientAddress>
 									<Select>
 										{quote.options.map(option => (
-											<option value={option.name}>
+											<option
+												value={option.name}
+												key={`option${option.name}`}
+											>
 												{option.name}
 											</option>
 										))}

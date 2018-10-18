@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Mutation} from 'react-apollo';
+import {cpus} from 'os';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
 import {H4, H5, FlexRow} from '../../utils/content';
+import {REMOVE_SECTION, ADD_ITEM} from '../../utils/mutations';
+import {GET_QUOTE_DATA} from '../../utils/queries';
 
 const QuoteSectionMain = styled('div')``;
 const QuoteAction = styled('button')``;
@@ -25,7 +29,6 @@ class QuoteSection extends Component {
 			editSectionTitle,
 			editItem,
 			sectionIndex,
-			removeSection,
 			removeItem,
 		} = this.props;
 
@@ -33,7 +36,7 @@ class QuoteSection extends Component {
 			<QuoteSectionMain>
 				<H4>
 					<InlineEditable
-						value={data.title}
+						value={data.name}
 						type="text"
 						placeholder="Section name"
 						onFocusOut={(value) => {
@@ -43,17 +46,38 @@ class QuoteSection extends Component {
 				</H4>
 				{data.items.map((item, index) => (
 					<Item
+						key={`item${item.id}`}
 						item={item}
-						sectionIndex={sectionIndex}
-						itemIndex={index}
+						sectionId={data.id}
 						editItem={editItem}
 						removeItem={removeItem}
 					/>
 				))}
-				<QuoteAction onClick={removeSection}>
-					Remove section
-				</QuoteAction>
-				<QuoteAction onClick={addItem}>Add item</QuoteAction>
+				<Mutation mutation={REMOVE_SECTION}>
+					{removeSection => (
+						<QuoteAction
+							onClick={() => {
+								this.props.removeSection(
+									data.id,
+									removeSection,
+								);
+							}}
+						>
+							Remove section
+						</QuoteAction>
+					)}
+				</Mutation>
+				<Mutation mutation={ADD_ITEM}>
+					{addItem => (
+						<QuoteAction
+							onClick={() => {
+								this.props.addItem(data.id, addItem);
+							}}
+						>
+							Add item
+						</QuoteAction>
+					)}
+				</Mutation>
 			</QuoteSectionMain>
 		);
 	}

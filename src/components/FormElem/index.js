@@ -3,11 +3,7 @@ import styled from 'react-emotion';
 
 import FormInput from '../FormInput';
 
-import {P} from '../../utils/content';
-
-const Label = styled('label')`
-	display: block;
-`;
+import {P, Label, ErrorInput} from '../../utils/content';
 
 class FormElem extends Component {
 	render() {
@@ -21,11 +17,14 @@ class FormElem extends Component {
 			handleBlur,
 			errors,
 			touched,
+			required,
 		} = this.props;
 
 		return (
 			<P>
-				<Label htmlFor={name}>{label}</Label>
+				<Label htmlFor={name} required={required}>
+					{label}
+				</Label>
 				<FormInput
 					name={name}
 					placeholder={placeholder}
@@ -38,7 +37,9 @@ class FormElem extends Component {
 				/>
 				{errors[name]
 					&& touched[name] && (
-					<div className="input-feedback">{errors[name]}</div>
+					<ErrorInput className="input-feedback">
+						{errors[name]}
+					</ErrorInput>
 				)}
 			</P>
 		);

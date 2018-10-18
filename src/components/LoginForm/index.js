@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 import FormElem from '../FormElem';
 import {LOGIN} from '../../utils/mutations';
-import {H1} from '../../utils/content';
+import {Button, ErrorInput} from '../../utils/content';
 
 const LoginFormMain = styled('div')``;
 
@@ -28,7 +28,6 @@ class LoginForm extends Component {
 		}
 		return (
 			<LoginFormMain>
-				<H1>Log in</H1>
 				<Mutation mutation={LOGIN}>
 					{login => (
 						<Formik
@@ -92,6 +91,7 @@ class LoginForm extends Component {
 											type="email"
 											label="Email"
 											placeholder="enter your email"
+											required
 										/>
 										<FormElem
 											{...props}
@@ -99,17 +99,26 @@ class LoginForm extends Component {
 											type="password"
 											label="Password"
 											placeholder="enter your password"
+											required
 										/>
 										{status
 											&& status.msg && (
-											<div>{status.msg}</div>
+											<ErrorInput>
+												{status.msg}
+											</ErrorInput>
 										)}
-										<button
+										<Button
 											type="submit"
+											theme={
+												isSubmitting
+													? 'Disabled'
+													: 'PrimaryNavy'
+											}
+											size="Big"
 											disabled={isSubmitting}
 										>
-											Submit
-										</button>
+											Log in
+										</Button>
 									</form>
 								);
 							}}

@@ -5,15 +5,10 @@ import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {SIGNUP} from '../../utils/mutations';
-import {H1, H4, H6} from '../../utils/content';
+import {Button, ErrorInput} from '../../utils/content';
 import FormElem from '../FormElem';
 
 const SignupFormMain = styled('div')``;
-
-const FormContainer = styled('div')`
-	display: flex;
-	flex-direction: ${props => (props.column ? 'column' : 'row')};
-`;
 
 class SignupForm extends Component {
 	constructor(props) {
@@ -32,7 +27,6 @@ class SignupForm extends Component {
 		}
 		return (
 			<SignupFormMain>
-				<H1>Sign up</H1>
 				<Mutation mutation={SIGNUP}>
 					{signup => (
 						<Formik
@@ -86,49 +80,55 @@ class SignupForm extends Component {
 
 								return (
 									<form onSubmit={handleSubmit}>
-										<FormContainer>
-											<div>
-												<H4>Yourself</H4>
-												<FormElem
-													{...props}
-													name="email"
-													type="email"
-													label="Email"
-													placeholder="enter your email"
-												/>
-												<FormElem
-													{...props}
-													name="password"
-													type="password"
-													label="Password"
-													placeholder="enter your password"
-												/>
-												<FormElem
-													{...props}
-													name="firstname"
-													type="text"
-													label="First name"
-													placeholder="Your first name"
-												/>
-												<FormElem
-													{...props}
-													name="lastname"
-													type="text"
-													label="Last name"
-													placeholder="Your last name"
-												/>
-											</div>
-										</FormContainer>
+										<FormElem
+											{...props}
+											name="email"
+											type="email"
+											label="Email"
+											placeholder="enter your email"
+											required
+										/>
+										<FormElem
+											{...props}
+											name="password"
+											type="password"
+											label="Password"
+											placeholder="enter your password"
+											required
+										/>
+										<FormElem
+											{...props}
+											name="firstname"
+											type="text"
+											label="First name"
+											placeholder="Your first name"
+											required
+										/>
+										<FormElem
+											{...props}
+											name="lastname"
+											type="text"
+											label="Last name"
+											placeholder="Your last name"
+										/>
 										{status
 											&& status.msg && (
-											<div>{status.msg}</div>
+											<ErrorInput>
+												{status.msg}
+											</ErrorInput>
 										)}
-										<button
+										<Button
 											type="submit"
+											theme={
+												isSubmitting
+													? 'Disabled'
+													: 'PrimaryNavy'
+											}
+											size="Big"
 											disabled={isSubmitting}
 										>
-											Submit
-										</button>
+											Get started now
+										</Button>
 									</form>
 								);
 							}}

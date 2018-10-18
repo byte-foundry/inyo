@@ -2,10 +2,24 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'react-emotion';
 import {
-	H1, H2, H3, P, Ol, Ul,
+	H1,
+	H2,
+	H3,
+	P,
+	Ol,
+	Ul,
+	Button,
+	Input,
+	Label,
+	ErrorInput,
 } from '../../utils/content';
 
 const LandingMain = styled('div')``;
+
+const KitchenSinkContainer = styled('div')`
+	padding: 10px 20px;
+	max-width: 700px;
+`;
 
 class Landing extends Component {
 	render() {
@@ -102,7 +116,129 @@ class Landing extends Component {
 					tellus, at luctus turpis elit sit amet quam. Vivamus pretium
 					ornare est.
 				</P>
+				<KitchenSinkContainer>
+					<Button theme="Primary" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Primary" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Primary" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="Link" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Link" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Link" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="Disabled" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Disabled" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Disabled" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="Outline" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Outline" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Outline" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="PrimaryNavy" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="PrimaryNavy" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="PrimaryNavy" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="Warning" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Warning" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Warning" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="Error" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Error" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Error" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<Button theme="Success" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Success" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Success" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
 
+					<Button theme="Default" size="Big">
+						Bonjour
+					</Button>
+					<Button theme="Default" size="Medium">
+						Bonjour
+					</Button>
+					<Button theme="Default" size="Small">
+						Bonjour
+					</Button>
+					<br />
+					<br />
+					<br />
+					<Input type="text" placeholder="bonjour" />
+					<br />
+					<br />
+					<Input type="text" placeholder="bonjour" error />
+					<br />
+					<br />
+					<Input type="text" placeholder="bonjour" disabled />
+					<br />
+					<br />
+					<Label>With label</Label>
+					<Input type="text" placeholder="bonjour" />
+					<br />
+					<br />
+					<Label required>With label required</Label>
+					<Input type="text" placeholder="bonjour" />
+					<br />
+					<br />
+					<Label required>With error</Label>
+					<Input type="text" placeholder="bonjour" error />
+					<ErrorInput>Error message</ErrorInput>
+				</KitchenSinkContainer>
 				<pre>
 					<code>
 						{`#header H1 a {

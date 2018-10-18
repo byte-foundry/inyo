@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-
-const Input = styled('input')``;
+import {Input} from '../../utils/content';
 
 class FormInput extends Component {
 	render() {
@@ -24,11 +23,7 @@ class FormInput extends Component {
 				value={values[name]}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				className={
-					errors[name] && touched[name]
-						? 'text-input error'
-						: 'text-input'
-				}
+				error={errors[name]}
 			/>
 		);
 	}

@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import LoginForm from '../../../components/LoginForm';
 import SignUpForm from '../../../components/SignupForm';
-import {P} from '../../../utils/content';
+import {P, Button} from '../../../utils/content';
 
-const AuthMain = styled('div')``;
+const AuthMain = styled('div')`
+	padding: 10px 20px;
+	max-width: 600px;
+`;
 
 class Auth extends Component {
 	constructor(props) {
@@ -23,24 +26,28 @@ class Auth extends Component {
 				{isLogin ? (
 					<P>
 						New?{' '}
-						<button
+						<Button
+							theme="Link"
+							size="XSmall"
 							onClick={() => {
 								this.setState({isLogin: false});
 							}}
 						>
 							Create an account
-						</button>
+						</Button>
 					</P>
 				) : (
 					<P>
 						Already have an account?{' '}
-						<button
+						<Button
+							theme="Link"
+							size="XSmall"
 							onClick={() => {
 								this.setState({isLogin: true});
 							}}
 						>
 							Log in
-						</button>
+						</Button>
 					</P>
 				)}
 			</AuthMain>

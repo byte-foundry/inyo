@@ -5,7 +5,7 @@ import {cpus} from 'os';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
 import {H4, H5, FlexRow} from '../../utils/content';
-import {REMOVE_SECTION, ADD_ITEM} from '../../utils/mutations';
+import {REMOVE_SECTION, ADD_ITEM, UPDATE_SECTION} from '../../utils/mutations';
 import {GET_QUOTE_DATA} from '../../utils/queries';
 
 const QuoteSectionMain = styled('div')``;
@@ -35,14 +35,22 @@ class QuoteSection extends Component {
 		return (
 			<QuoteSectionMain>
 				<H4>
-					<InlineEditable
-						value={data.name}
-						type="text"
-						placeholder="Section name"
-						onFocusOut={(value) => {
-							editSectionTitle(sectionIndex, value);
-						}}
-					/>
+					<Mutation mutation={UPDATE_SECTION}>
+						{updateSection => (
+							<InlineEditable
+								value={data.name}
+								type="text"
+								placeholder="Section name"
+								onFocusOut={(value) => {
+									editSectionTitle(
+										data.id,
+										value,
+										updateSection,
+									);
+								}}
+							/>
+						)}
+					</Mutation>
 				</H4>
 				{data.items.map((item, index) => (
 					<Item

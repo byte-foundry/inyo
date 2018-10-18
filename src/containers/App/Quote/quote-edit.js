@@ -120,9 +120,9 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	updateOption = (optionId, raw, updateOption) => {
@@ -145,9 +145,9 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	addItem = (sectionId, addItem) => {
@@ -173,9 +173,9 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	editItem = (itemId, sectionId, data, updateItem) => {
@@ -192,7 +192,20 @@ class EditQuote extends Component {
 				unit,
 				vatRate,
 			},
+			optimisticResponse: {
+				__typename: 'Mutation',
+				updateItem: {
+					id: itemId,
+					name,
+					unitPrice,
+					unit,
+					vatRate,
+					description,
+					__typename: 'Item',
+				},
+			},
 			update: (cache, {data: {updateItem}}) => {
+				console.log(updateItem);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -215,9 +228,9 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	removeItem = (itemId, sectionId, removeItem) => {
@@ -246,9 +259,9 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	addSection = (optionId, addSection) => {
@@ -273,19 +286,35 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
-	editSectionTitle = (sectionIndex, title) => {
-		const {sections} = this.state.quoteData;
+	editSectionTitle = (sectionId, name, updateSection) => {
+		updateSection({
+			variables: {sectionId, name},
+			update: (cache, {data: {updateSection}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const sectionIndex = data.quote.options[0].sections.findIndex(
+					e => e.id === sectionId,
+				);
 
-		sections[sectionIndex].title = title;
-		this.setState({
-			quoteData: {
-				...this.state.quoteData,
-				sections,
+				data.quote.options[0].sections[sectionIndex] = updateSection;
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
 	};
@@ -313,9 +342,9 @@ class EditQuote extends Component {
 				catch (e) {
 					console.log(e);
 				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
-		this.setState({apolloTriggerRenderTemporaryFix: true});
 	};
 
 	render() {

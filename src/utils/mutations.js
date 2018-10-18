@@ -117,6 +117,7 @@ export const ADD_SECTION = gql`
 				unitPrice
 				unit
 				vatRate
+				description
 			}
 		}
 	}
@@ -132,6 +133,7 @@ export const UPDATE_SECTION = gql`
 				unitPrice
 				unit
 				vatRate
+				description
 			}
 		}
 	}
@@ -152,6 +154,7 @@ export const ADD_ITEM = gql`
 			unitPrice
 			unit
 			vatRate
+			description
 		}
 	}
 `;
@@ -177,6 +180,7 @@ export const UPDATE_ITEM = gql`
 			unitPrice
 			unit
 			vatRate
+			description
 		}
 	}
 `;

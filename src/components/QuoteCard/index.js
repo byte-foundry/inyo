@@ -39,7 +39,7 @@ class QuoteCard extends Component {
 	render() {
 		const {quote} = this.props;
 		const {
-			customer, issuedAt, createdAt, amount, id, status,
+			customer, issuedAt, createdAt, total, id, status,
 		} = quote;
 		const options = {
 			weekday: 'long',
@@ -72,7 +72,7 @@ class QuoteCard extends Component {
 							  )}
 					</DateOfIssue>
 				</CardHeader>
-				<Amount>{amount || 0} HT</Amount>
+				<Amount>{total || 0} HT</Amount>
 			</QuoteCardMain>
 		);
 	}

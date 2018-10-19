@@ -24,14 +24,29 @@ import {
 	P,
 	FlexRow,
 	FlexColumn,
+	Button,
+	primaryNavyBlue,
+	primaryBlue,
 } from '../../../utils/content';
 
 const EditQuoteMain = styled('div')`
 	min-height: 600px;
+	max-width: 1600px;
+	margin-left: auto;
+	margin-right: auto;
+`;
+
+const BackButton = styled(Button)`
+	margin-top: 10px;
+	margin-bottom: 10px;
+`;
+
+const EditQuoteTitle = styled(H1)`
+	color: ${primaryNavyBlue};
+	margin: 0;
 `;
 
 const Select = styled('select')``;
-const Button = styled('button')``;
 const ToggleButton = styled('span')`
 	color: ${props => (props.active ? 'black' : 'grey')};
 	cursor: pointer;
@@ -387,11 +402,23 @@ class EditQuote extends Component {
 
 					return (
 						<EditQuoteMain>
+							<BackButton
+								theme="Link"
+								size="XSmall"
+								onClick={() => this.props.history.push('/app/quotes')
+								}
+							>
+								Retour à la liste des devis
+							</BackButton>
 							<FlexRow justifyContent="space-between">
-								<H1>Fill your quote data</H1>
+								<EditQuoteTitle>
+									Remplissez votre devis
+								</EditQuoteTitle>
 								<Mutation mutation={SEND_QUOTE}>
 									{sendQuote => (
 										<Button
+											theme="Primary"
+											size="Medium"
 											onClick={() => {
 												this.sendQuote(
 													quote.id,
@@ -399,7 +426,7 @@ class EditQuote extends Component {
 												);
 											}}
 										>
-											Send proposal
+											Envoyez la proposition
 										</Button>
 									)}
 								</Mutation>

@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import Autocomplete from 'react-autocomplete';
 import {Query} from 'react-apollo';
-import {H4, H5, FlexRow} from '../../utils/content';
+import {
+	H4, H5, FlexRow, Input, Button,
+} from '../../utils/content';
 import {templates} from '../../utils/quote-templates';
 
 import {GET_ITEMS} from '../../utils/queries';
@@ -16,7 +18,7 @@ const ItemComment = styled('textarea')`
 	width: 100%;
 `;
 
-const ActionButton = styled('button')``;
+const ActionButton = styled(Button)``;
 
 class AddItem extends Component {
 	constructor(props) {
@@ -74,14 +76,14 @@ class AddItem extends Component {
 							}
 						}}
 					</Query>
-					<input
+					<Input
 						type="number"
 						placeholder="1"
 						value={unit}
 						onChange={e => this.setState({unit: parseInt(e.target.value)})
 						}
 					/>
-					<input
+					<Input
 						type="number"
 						placeholder="500"
 						value={unitPrice}

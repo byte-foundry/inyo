@@ -61,6 +61,8 @@ class QuoteStateList extends Component {
 
 		const quoteColumn = quotes.map(quote => <QuoteCard quote={quote} />);
 
+		const quoteTotal = quotes.reduce((sum, e) => sum + e.total, 0);
+
 		return (
 			<QuoteStateListMain>
 				<QuoteStateTitle>
@@ -68,7 +70,7 @@ class QuoteStateList extends Component {
 						{quoteStateName[quoteState]}
 					</QuoteStateName>
 					<QuoteStateAmount>{quotes.length}</QuoteStateAmount>
-					<QuoteStateTotal>{quotes.length} HT</QuoteStateTotal>
+					<QuoteStateTotal>{quoteTotal} HT</QuoteStateTotal>
 				</QuoteStateTitle>
 				{quoteColumn}
 			</QuoteStateListMain>

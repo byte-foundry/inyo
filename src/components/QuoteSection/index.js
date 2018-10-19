@@ -4,12 +4,14 @@ import {Mutation} from 'react-apollo';
 import {cpus} from 'os';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
-import {H4, H5, FlexRow} from '../../utils/content';
+import {
+	H4, H5, FlexRow, Button,
+} from '../../utils/content';
 import {REMOVE_SECTION, ADD_ITEM, UPDATE_SECTION} from '../../utils/mutations';
 import {GET_QUOTE_DATA} from '../../utils/queries';
 
 const QuoteSectionMain = styled('div')``;
-const QuoteAction = styled('button')``;
+const QuoteAction = styled(Button)``;
 const ItemName = styled(H5)`
 	margin: 0;
 `;

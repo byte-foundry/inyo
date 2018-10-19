@@ -95,6 +95,7 @@ export const GET_ALL_QUOTES = gql`
 					issuedAt
 					createdAt
 					status
+					total
 				}
 			}
 		}

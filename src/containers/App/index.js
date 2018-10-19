@@ -24,8 +24,6 @@ class App extends Component {
 					if (loading) return <p>Loading...</p>;
 					return (
 						<AppMain>
-							<Link to="/app">Dashboard</Link>{' '}
-							<Link to="/app/account">My account</Link>
 							<Switch>
 								<Route
 									exact

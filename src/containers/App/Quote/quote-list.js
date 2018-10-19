@@ -2,20 +2,48 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
+import {endOfDay} from 'date-fns';
 import {GET_ALL_QUOTES} from '../../../utils/queries';
-import {H1} from '../../../utils/content';
+import {H1, Button, primaryNavyBlue} from '../../../utils/content';
+
+import AccountLogo from './accountLogo.svg';
 
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
 import QuoteList from '../../../components/QuoteList';
 
-const ListQuotesMain = styled('div')``;
+const ListQuotesMain = styled('div')`
+	max-width: 1600px;
+	margin-left: auto;
+	margin-right: auto;
+`;
 
-const CreateNewQuoteButton = styled('button')``;
+const TopBarButton = styled(Button)`
+	height: 60px;
+	margin-left: 20px;
+`;
 
 const ListQuotesTopBar = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 40px;
+`;
+
+const TopBarTitle = styled(H1)`
+	color: ${primaryNavyBlue};
+`;
+
+const ActionRow = styled('div')`
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-end;
+	align-items: center;
+`;
+
+const TopBarAccountIcon = styled('img')`
+	height: 60px;
+	width: auto;
 `;
 
 export const quoteState = {
@@ -26,114 +54,6 @@ export const quoteState = {
 	INVOICE_SENT: 4,
 	INVOICE_ACCEPTED: 5,
 };
-
-const temporaryStaticQuoteList = [
-	{
-		client: 'Keiran Lee',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.DRAFT,
-	},
-	{
-		client: 'Danny D',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.DRAFT,
-	},
-	{
-		client: 'Seth Gamble',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.DRAFT,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.SENT,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.SENT,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.SENT,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.SENT,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.VALIDATED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.VALIDATED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.REJECTED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.INVOICE_ACCEPTED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.INVOICE_ACCEPTED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.INVOICE_ACCEPTED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.INVOICE_ACCEPTED,
-	},
-	{
-		client: 'Charles Dera',
-		itemsLength: 5,
-		dateOfIssue: new Date(2018, 6, 10),
-		amount: 1450.0,
-		quoteState: quoteState.INVOICE_ACCEPTED,
-	},
-];
 
 class ListQuotes extends Component {
 	createNewQuote = () => {
@@ -152,12 +72,30 @@ class ListQuotes extends Component {
 					return (
 						<ListQuotesMain>
 							<ListQuotesTopBar>
-								<H1>Your quotes</H1>
-								<CreateNewQuoteButton
-									onClick={this.createNewQuote}
-								>
-									Create a new quote
-								</CreateNewQuoteButton>
+								<TopBarTitle>Your quotes</TopBarTitle>
+								<ActionRow>
+									<TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/account',
+											);
+										}}
+									>
+										<TopBarAccountIcon
+											src={AccountLogo}
+											alt="account logo"
+										/>
+									</TopBarButton>
+									<TopBarButton
+										theme="Primary"
+										size="Medium"
+										onClick={this.createNewQuote}
+									>
+										Create a new quote
+									</TopBarButton>
+								</ActionRow>
 							</ListQuotesTopBar>
 							<SearchQuoteForm />
 							<QuoteList quotes={quotes} />

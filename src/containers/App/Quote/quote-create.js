@@ -17,9 +17,7 @@ class CreateQuote extends Component {
 				{({loading, error, data}) => {
 					if (loading) return <p>Loading...</p>;
 					if (data && data.me) {
-						const {me} = data;
-						const {company} = me;
-						const {customers} = company;
+						const {customers} = data.me.company;
 
 						console.log(data);
 						return (

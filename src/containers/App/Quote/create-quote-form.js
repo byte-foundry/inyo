@@ -37,9 +37,8 @@ class CreateQuoteForm extends React.Component {
 							email: Yup.string().email(),
 						})}
 						onSubmit={async (values, actions) => {
-							console.log(values);
 							const customer = customers.find(
-								c => c.name === values.customer,
+								c => c.id === values.customer,
 							);
 
 							const variables = {
@@ -85,7 +84,7 @@ class CreateQuoteForm extends React.Component {
 						{(props) => {
 							const {values, setFieldValue} = props;
 							const selectedCustomer = customers.find(
-								c => c.name === props.values.customer,
+								c => c.id === props.values.customer,
 							);
 							const newCustomer
 								= !selectedCustomer && values.customer;
@@ -100,11 +99,15 @@ class CreateQuoteForm extends React.Component {
 										<Select
 											id="customer"
 											name="customer"
-											options={customers}
-											getOptionValue={option => option.name
-											}
+											options={customers.map(
+												customer => ({
+													...customer,
+													label: customer.name,
+													value: customer.id,
+												}),
+											)}
+											getOptionValue={option => option.id}
 											onChange={(option) => {
-												console.log(option);
 												setFieldValue(
 													'customer',
 													option && option.value,

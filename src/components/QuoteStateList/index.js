@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 
 import QuoteCard from '../QuoteCard';
-import {quoteState} from '../../containers/App/Dashboard';
+import {P, primaryNavyBlue, primaryBlue} from '../../utils/content';
 
 const QuoteStateListMain = styled('div')`
 	display: flex;
@@ -11,23 +11,39 @@ const QuoteStateListMain = styled('div')`
 	flex: 1;
 `;
 
-const QuoteStateTitle = styled('label')`
+const QuoteStateTitle = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
-	font-size: 1.2em;
+	justify-content: space-between;
+	margin-right: 10px;
+	padding: 14px 16px 15px 16px;
+	border: 1px solid ${primaryNavyBlue};
+	margin-bottom: 10px;
 `;
-const QuoteStateAmount = styled('label')`
-	font-size: 0.6em;
+const QuoteStateAmount = styled(P)`
+	font-size: 13px;
+	color: ${primaryNavyBlue};
+	margin: 0;
 `;
-const QuoteStateName = styled('label')``;
+const QuoteStateName = styled(P)`
+	font-size: 13px;
+	color: ${primaryNavyBlue};
+	font-weight: bold;
+	margin: 0;
+`;
+const QuoteStateTotal = styled(P)`
+	font-size: 13px;
+	color: ${primaryBlue};
+	margin: 0;
+`;
 
 const quoteStateName = {
-	DRAFT: 'Draft',
-	SENT: 'Sent',
-	VALIDATED: 'Accepted',
-	REJECTED: 'Rejected',
-	INVOICE_SENT: 'Invoice sent',
-	INVOICE_ACCEPTED: 'Invoice accepted',
+	DRAFT: 'Brouillons',
+	SENT: 'Envoyés',
+	VALIDATED: 'Acceptés',
+	REJECTED: 'Rejetées',
+	INVOICE_SENT: 'Facture envoyée',
+	INVOICE_ACCEPTED: 'Facture acceptée',
 };
 
 class QuoteStateList extends Component {
@@ -41,10 +57,7 @@ class QuoteStateList extends Component {
 	render() {
 		const {quotes, quoteState} = this.props;
 
-		const totalAmount = quotes.reduce(
-			(acc, quote) => acc + quote.amount || 0,
-			0,
-		);
+		console.log(quotes);
 
 		const quoteColumn = quotes.map(quote => <QuoteCard quote={quote} />);
 
@@ -54,7 +67,8 @@ class QuoteStateList extends Component {
 					<QuoteStateName>
 						{quoteStateName[quoteState]}
 					</QuoteStateName>
-					<QuoteStateAmount>{totalAmount}</QuoteStateAmount>
+					<QuoteStateAmount>{quotes.length}</QuoteStateAmount>
+					<QuoteStateTotal>{quotes.length} HT</QuoteStateTotal>
 				</QuoteStateTitle>
 				{quoteColumn}
 			</QuoteStateListMain>

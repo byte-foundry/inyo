@@ -1,130 +1,133 @@
 import React, {Component} from 'react';
-import {ApolloConsumer} from 'react-apollo';
-import {Redirect} from 'react-router-dom';
+import DayPicker from 'react-day-picker';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import styled from 'react-emotion';
-import {Formik} from 'formik';
-import * as Yup from 'yup';
+import 'react-day-picker/lib/style.css';
 
-const SearchQuoteFormMain = styled('div')``;
+import {Input, primaryWhite, primaryNavyBlue} from '../../utils/content';
+
+const WEEKDAYS_SHORT = {
+	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+};
+const MONTHS = {
+	fr: [
+		'Janvier',
+		'Février',
+		'Mars',
+		'Avril',
+		'Mai',
+		'Juin',
+		'Juillet',
+		'Août',
+		'Septembre',
+		'Octobre',
+		'Novembre',
+		'Décembre',
+	],
+};
+
+const WEEKDAYS_LONG = {
+	fr: [
+		'Dimanche',
+		'Lundi',
+		'Mardi',
+		'Mercredi',
+		'Jeudi',
+		'Vendredi',
+		'Smedi',
+	],
+};
+
+const FIRST_DAY_OF_WEEK = {
+	fr: 1,
+};
+// Translate aria-labels
+const LABELS = {
+	ru: {nextMonth: 'следующий месяц', previousMonth: 'предыдущий месяц'},
+	it: {nextMonth: 'Prossimo mese', previousMonth: 'Mese precedente'},
+};
+
+const formatDate = dateObject => new Date(dateObject).toLocaleDateString('fr-FR');
+
+const parseDate = (dateString) => {
+	const dates = dateString.split('/');
+
+	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
+};
+
+const SearchQuoteFormMain = styled('div')`
+	margin-bottom: 40px;
+`;
+
+const DateInput = styled(Input)`
+	background: ${primaryNavyBlue};
+	border-color: ${primaryNavyBlue};
+	color: ${primaryWhite};
+	margin-right: 10px;
+	&:focus {
+		outline: none;
+		border-color: transparent;
+	}
+`;
+
+const SpanLabel = styled('span')`
+	background: ${primaryNavyBlue};
+	color: ${primaryWhite};
+	padding: 15px 0px 16px 18px;
+`;
 
 class SearchQuoteForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			shouldRedirect: false,
+			from: new Date('01/01/2018'),
+			to: new Date('01/01/2019'),
 		};
 	}
 
+	// initialValues={{
+	// 	from: '01/01/2018',
+	// 	to: '01/01/2019',
+	// }}
 	render() {
-		const {shouldRedirect} = this.state;
-		const from = this.props.from || '/app';
+		const {from, to} = this.state;
 
-		if (shouldRedirect) {
-			return <Redirect to={from} />;
-		}
 		return (
 			<SearchQuoteFormMain>
-				<ApolloConsumer>
-					{client => (
-						<Formik
-							initialValues={{
-								from: '01/01/2018',
-								to: '01/01/2019',
-							}}
-							validationSchema={Yup.object().shape({
-								from: Yup.date().required('Required'),
-								to: Yup.date().required('Required'),
-								client: Yup.string(),
-							})}
-							onSubmit={(values, actions) => {
-								actions.setSubmitting(false);
-								client.writeData({
-									data: {
-										user: {
-											__typename: 'User',
-											isLoggedIn: true,
-										},
-									},
-								});
-								this.setState({
-									shouldRedirect: true,
-								});
-							}}
-						>
-							{(props) => {
-								const {
-									values,
-									touched,
-									errors,
-									dirty,
-									isSubmitting,
-									handleChange,
-									handleBlur,
-									handleSubmit,
-									handleReset,
-								} = props;
-
-								return (
-									<form onSubmit={handleSubmit}>
-										<label htmlFor="email">from</label>
-										<input
-											id="from"
-											placeholder="01/01/2018"
-											type="date"
-											value={values.from}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											className={
-												errors.from && touched.from
-													? 'text-input error'
-													: 'text-input'
-											}
-										/>
-										{errors.email
-											&& touched.email && (
-											<div className="input-feedback">
-												{errors.email}
-											</div>
-										)}
-										<label htmlFor="password">to</label>
-										<input
-											id="to"
-											placeholder="01/01/2018"
-											type="date"
-											value={values.from}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											className={
-												errors.to && touched.to
-													? 'text-input error'
-													: 'text-input'
-											}
-										/>
-										<input
-											id="clients"
-											placeholder="01/01/2018"
-											type="text"
-											value={values.from}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											className={
-												errors.to && touched.to
-													? 'text-input error'
-													: 'text-input'
-											}
-										/>
-										{errors.from
-											&& touched.to && (
-											<div className="input-feedback">
-												{errors.from}
-											</div>
-										)}
-									</form>
-								);
-							}}
-						</Formik>
-					)}
-				</ApolloConsumer>
+				<SpanLabel>Du :</SpanLabel>
+				<DayPickerInput
+					formatDate={formatDate}
+					parseDate={parseDate}
+					dayPickerProps={{
+						locale: 'fr',
+						months: MONTHS.fr,
+						weekdaysLong: WEEKDAYS_LONG.fr,
+						weekdaysShort: WEEKDAYS_SHORT.fr,
+						firstDayOfWeek: FIRST_DAY_OF_WEEK.fr,
+						labels: LABELS.fr,
+						selectedDays: from,
+					}}
+					component={props => <DateInput {...props} />}
+					onDayChange={day => this.setState({from: day})}
+					value={from}
+				/>
+				<SpanLabel>Au :</SpanLabel>
+				<DayPickerInput
+					formatDate={formatDate}
+					parseDate={parseDate}
+					dayPickerProps={{
+						locale: 'fr',
+						months: MONTHS.fr,
+						weekdaysLong: WEEKDAYS_LONG.fr,
+						weekdaysShort: WEEKDAYS_SHORT.fr,
+						firstDayOfWeek: FIRST_DAY_OF_WEEK.fr,
+						labels: LABELS.fr,
+						selectedDays: to,
+					}}
+					component={props => <DateInput {...props} />}
+					onDayChange={day => this.setState({to: day})}
+					value={to}
+				/>
 			</SearchQuoteFormMain>
 		);
 	}

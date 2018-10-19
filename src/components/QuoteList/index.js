@@ -13,18 +13,10 @@ const QuoteListMain = styled('div')`
 class QuoteList extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			shouldRedirect: false,
-		};
 	}
 
 	render() {
-		const {shouldRedirect} = this.state;
 		const {quotes, from} = this.props;
-
-		if (shouldRedirect) {
-			return <Redirect to={from} />;
-		}
 
 		const quoteColumn = Object.entries(quoteState).map(([state, value]) => {
 			const filteredQuotes = quotes.filter(

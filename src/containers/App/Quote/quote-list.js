@@ -72,7 +72,7 @@ class ListQuotes extends Component {
 					return (
 						<ListQuotesMain>
 							<ListQuotesTopBar>
-								<TopBarTitle>Your quotes</TopBarTitle>
+								<TopBarTitle>Vos devis</TopBarTitle>
 								<ActionRow>
 									<TopBarButton
 										theme="Link"

@@ -7,7 +7,7 @@ import FormInput from '../FormInput';
 import FormTextarea from '../FormTextarea';
 import TaskStatus from '../TaskStatus';
 
-import {FlexRow, FlexColumn} from '../../utils/content.js';
+import {FlexRow, FlexColumn, Button} from '../../utils/content.js';
 
 const TaskMain = styled(FlexRow)`
 	border: solid 1px;
@@ -85,18 +85,18 @@ class TaskForm extends Component {
 										type="number"
 									/>
 									<FlexRow>
-										<button
+										<Button
 											type="submit"
 											disabled={isSubmitting}
 										>
 											Validez
-										</button>
-										<button
+										</Button>
+										<Button
 											onClick={cancel}
 											disabled={isSubmitting}
 										>
 											Annulez
-										</button>
+										</Button>
 									</FlexRow>
 								</FlexColumn>
 							</form>

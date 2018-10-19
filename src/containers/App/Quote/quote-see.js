@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {FlexRow, FlexColumn, H1} from '../../../utils/content';
+import {
+	FlexRow, FlexColumn, H1, Button,
+} from '../../../utils/content';
 
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import TasksList from '../../../components/TasksList';
@@ -97,7 +99,7 @@ class TasksListUser extends Component {
 							</TLTimeValue>
 						</FlexRow>
 					</TLTimeIndicators>
-					<button disabled={!amendmentEnabled}>Send amendment</button>
+					<Button disabled={!amendmentEnabled}>Send amendment</Button>
 				</TLTopBar>
 				<H1>{projectName}</H1>
 				<TasksProgressBar tasksCompleted={1} tasksTotal={5} />

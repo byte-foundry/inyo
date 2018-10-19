@@ -4,6 +4,8 @@ import styled from 'react-emotion';
 import Task from '../Task';
 import TaskForm from '../TaskForm';
 
+import {Button} from '../../utils/content';
+
 const TasksListMain = styled('div')`
 	width: 70%;
 `;
@@ -70,7 +72,7 @@ class TasksList extends Component {
 			<TasksListMain>
 				{tasksList}
 				{addItem}
-				<button onClick={this.addItem}>Add Item</button>
+				<Button onClick={this.addItem}>Add Item</Button>
 			</TasksListMain>
 		);
 	}

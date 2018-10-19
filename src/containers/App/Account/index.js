@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {Redirect, Link} from 'react-router-dom';
 import styled from 'react-emotion';
-import {H3, P} from '../../../utils/content';
+import {H3, P, Button} from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
 const AccountMain = styled('div')``;
@@ -21,7 +21,7 @@ class Account extends Component {
 
 						return (
 							<AccountMain>
-								<button
+								<Button
 									type="button"
 									onClick={() => {
 										window.localStorage.removeItem(
@@ -31,7 +31,7 @@ class Account extends Component {
 									}}
 								>
 									Log out
-								</button>
+								</Button>
 
 								<P>
 									Hello {firstName} {lastName}, your email is{' '}

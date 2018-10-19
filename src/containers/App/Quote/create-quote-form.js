@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';
 import Select from 'react-select/lib/Creatable';
 
-import {H3, H4} from '../../../utils/content';
+import {H3, H4, Button} from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
 
@@ -176,11 +176,11 @@ class CreateQuoteForm extends React.Component {
 												/>
 											</div>
 										)}
-										<button type="submit">
+										<Button type="submit">
 											{newCustomer
 												? 'Create Client and Quote'
 												: 'Create Quote'}
-										</button>
+										</Button>
 										{selectedCustomer && (
 											<React.Fragment>
 												<H4>

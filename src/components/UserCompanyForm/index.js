@@ -5,7 +5,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import AdressAutocomplete from '../AddressAutocomplete';
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
-import {H4, H6} from '../../utils/content';
+import {H4, H6, Button} from '../../utils/content';
 import FormElem from '../FormElem';
 
 const UserCompanyFormMain = styled('div')``;
@@ -134,12 +134,12 @@ class UserCompanyForm extends Component {
 											&& status.msg && (
 											<div>{status.msg}</div>
 										)}
-										<button
+										<Button
 											type="submit"
 											disabled={isSubmitting}
 										>
 											Submit
-										</button>
+										</Button>
 									</form>
 								);
 							}}

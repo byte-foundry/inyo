@@ -5,7 +5,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import AdressAutocomplete from '../AddressAutocomplete';
 import {CREATE_CUSTOMER} from '../../utils/mutations';
-import {H4, H6} from '../../utils/content';
+import {H4, H6, Button} from '../../utils/content';
 import FormElem from '../FormElem';
 
 const CustomerFormMain = styled('div')``;
@@ -137,12 +137,12 @@ class CustomerForm extends Component {
 											&& status.msg && (
 											<div>{status.msg}</div>
 										)}
-										<button
+										<Button
 											type="submit"
 											disabled={isSubmitting}
 										>
 											Submit
-										</button>
+										</Button>
 									</form>
 								);
 							}}

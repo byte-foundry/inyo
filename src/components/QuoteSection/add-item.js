@@ -43,6 +43,8 @@ class AddItem extends Component {
 							if (!loading && data && data.template) {
 								const {items} = data.template;
 
+								console.log(data);
+
 								return (
 									<Autocomplete
 										getItemValue={item => item}

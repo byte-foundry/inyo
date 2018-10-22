@@ -1,6 +1,7 @@
 export const templates = [
 	{
 		name: 'WEBSITE',
+		label: 'Site web',
 		proposal: {
 			blocks: [
 				{

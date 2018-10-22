@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
+import Select from 'react-select';
 import TextEditor from '../../../components/TextEditor';
 import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
@@ -27,18 +28,25 @@ import {
 	Button,
 	primaryNavyBlue,
 	primaryBlue,
+	gray20,
+	gray10,
+	gray30,
+	secondaryLightBlue,
+	gray50,
 } from '../../../utils/content';
 
 const EditQuoteMain = styled('div')`
-	min-height: 600px;
+	min-height: 100vh;
 	max-width: 1600px;
 	margin-left: auto;
 	margin-right: auto;
 `;
 
 const BackButton = styled(Button)`
-	margin-top: 10px;
+	padding: 10px 5px;
+	font-size: 11px;
 	margin-bottom: 10px;
+	color: ${gray50};
 `;
 
 const EditQuoteTitle = styled(H1)`
@@ -46,24 +54,103 @@ const EditQuoteTitle = styled(H1)`
 	margin: 0;
 `;
 
-const Select = styled('select')``;
 const ToggleButton = styled('span')`
-	color: ${props => (props.active ? 'black' : 'grey')};
+	color: ${props => (props.active ? primaryBlue : gray30)};
 	cursor: pointer;
 	margin-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	border-bottom: 4px solid
+		${props => (props.active ? primaryBlue : 'transparent')};
+	transition: color 0.2s ease, border-color 0.2s ease;
 `;
 const AddOptionButton = styled('button')``;
 const ClientAddress = styled('div')``;
 const QuoteSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
 	min-width: 15vw;
-	border: 1px solid black;
+	padding: 20px 40px;
+`;
+const QuoteName = styled(H3)`
+	color: ${primaryBlue};
+	margin: 0;
+`;
+const CenterContent = styled(FlexColumn)`
+	background: ${gray10};
 	padding: 20px 40px;
 `;
 
-const CenterContent = styled(FlexColumn)`
-	border: 1px solid black;
-	padding: 20px 40px;
+const QuoteRow = styled(FlexRow)`
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 10px;
+	padding-bottom: ${props => (props.noPadding ? '0px' : '10px')};
+	border-bottom: 1px solid ${gray20};
+`;
+
+const QuoteContent = styled('div')`
+	max-width: 750px;
+	width: -webkit-fill-available;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 40px;
+`;
+
+const CompanyName = styled(H4)`
+	color: ${primaryNavyBlue};
+	margin: 0;
+	margin-bottom: 10px;
+`;
+
+const ContactName = styled(H5)`
+	color: ${primaryNavyBlue};
+	margin: 0;
+	margin-bottom: 10px;
+`;
+
+const AddressBlock = styled('div')`
+	border-top: 1px solid ${primaryBlue};
+	padding-top: 10px;
+`;
+
+const Address = styled(P)`
+	color: ${primaryBlue};
+	font-size: 11px;
+	margin: 0;
+	margin-bottom: 5px;
+`;
+
+const QuoteAction = styled(Button)`
+	text-decoration: none;
+	color: ${primaryBlue};
+	font-size: 13px;
+	transform: translateY(18px);
+	margin-top: 10px;
+	margin-bottom: 10px;
+`;
+
+const SelectStyles = {
+	option: (base, state) => ({
+		...base,
+		borderRadius: 0,
+	}),
+	menu: (base, state) => ({
+		...base,
+		marginTop: 2,
+		borderRadius: 0,
+	}),
+	control: base => ({
+		...base,
+		width: 300,
+		border: 'none',
+		borderRadius: 0,
+	}),
+	singleValue: (base, state) => ({
+		...base,
+	}),
+};
+const SendQuoteButton = styled(Button)`
+	width: auto;
 `;
 
 class EditQuote extends Component {
@@ -376,6 +463,13 @@ class EditQuote extends Component {
 	render() {
 		const {quoteId} = this.props.match.params;
 
+		const quoteTemplates = templates.map(template => ({
+			value: template.name,
+			label: template.label,
+		}));
+
+		quoteTemplates.push({value: 'custom', label: 'Sans recommandation'});
+
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
 				{({loading, error, data}) => {
@@ -410,13 +504,13 @@ class EditQuote extends Component {
 							>
 								Retour à la liste des devis
 							</BackButton>
-							<FlexRow justifyContent="space-between">
+							<QuoteRow justifyContent="space-between">
 								<EditQuoteTitle>
 									Remplissez votre devis
 								</EditQuoteTitle>
 								<Mutation mutation={SEND_QUOTE}>
 									{sendQuote => (
-										<Button
+										<SendQuoteButton
 											theme="Primary"
 											size="Medium"
 											onClick={() => {
@@ -427,12 +521,12 @@ class EditQuote extends Component {
 											}}
 										>
 											Envoyez la proposition
-										</Button>
+										</SendQuoteButton>
 									)}
 								</Mutation>
-							</FlexRow>
-							<FlexRow>
-								<H3>
+							</QuoteRow>
+							<QuoteRow justifyContent="space-between">
+								<QuoteName>
 									<Mutation mutation={UPDATE_QUOTE}>
 										{updateQuote => (
 											<InlineEditable
@@ -449,185 +543,137 @@ class EditQuote extends Component {
 											/>
 										)}
 									</Mutation>
-								</H3>
-							</FlexRow>
-							<FlexRow justifyContent="space-between">
-								<SideActions justifyContent="space-between">
-									<div>
-										<div>
-											<label>Template</label>
-										</div>
-										<div>
-											<Mutation mutation={EDIT_ITEMS}>
-												{EditItems => (
-													<Select
-														onChange={(e) => {
-															this.setQuoteData(
-																e.target.value,
-																EditItems,
-															);
-														}}
-													>
-														{templates.map(
-															template => (
-																<option
-																	key={`option${
-																		option.name
-																	}`}
-																	value={
-																		template.name
-																	}
-																>
-																	{
-																		template.name
-																	}
-																</option>
-															),
-														)}
-														<option value="custom">
-															New template
-														</option>
-													</Select>
-												)}
-											</Mutation>
-										</div>
-										<Button
-											onClick={() => {
-												this.props.history.push(
-													'/app/quotes',
+								</QuoteName>
+								<Mutation mutation={EDIT_ITEMS}>
+									{EditItems => (
+										<Select
+											styles={SelectStyles}
+											placeholder="Recommandation de contenu"
+											onChange={(e) => {
+												this.setQuoteData(
+													e.value,
+													EditItems,
 												);
 											}}
-										>
-											Save draft
-										</Button>
-									</div>
-									<div>
-										<Button>Add an attachment</Button>
-										<p>Portfolio.pdf</p>
-									</div>
-								</SideActions>
+											options={quoteTemplates}
+										/>
+									)}
+								</Mutation>
+							</QuoteRow>
+							<QuoteRow noPadding>
+								<ToggleButton
+									active={this.state.mode === 'proposal'}
+									onClick={(raw) => {
+										this.setState({
+											mode: 'proposal',
+										});
+									}}
+								>
+									Proposition
+								</ToggleButton>
+								<ToggleButton
+									active={this.state.mode === 'quote'}
+									onClick={(raw) => {
+										this.setState({
+											mode: 'quote',
+										});
+									}}
+								>
+									Devis
+								</ToggleButton>
+							</QuoteRow>
+							<FlexRow justifyContent="space-between">
 								<CenterContent flexGrow="2">
-									<FlexRow justifyContent="space-between">
-										<div>
-											<ToggleButton
-												active={
-													this.state.mode
-													=== 'proposal'
-												}
-												onClick={(raw) => {
-													this.setState({
-														mode: 'proposal',
-													});
-												}}
-											>
-												Proposal
-											</ToggleButton>
-											<ToggleButton
-												active={
-													this.state.mode === 'quote'
-												}
-												onClick={(raw) => {
-													this.setState({
-														mode: 'quote',
-													});
-												}}
-											>
-												Quote
-											</ToggleButton>
-										</div>
-										<Button>Add option</Button>
-									</FlexRow>
-									<FlexColumn fullHeight>
-										{this.state.mode === 'quote' ? (
-											<QuoteSections>
-												{option.sections.map(
-													(section, index) => (
-														<QuoteSection
-															key={`section${
-																section.id
-															}`}
-															data={section}
-															addItem={
-																this.addItem
-															}
-															editItem={
-																this.editItem
-															}
-															editSectionTitle={
-																this
-																	.editSectionTitle
-															}
-															removeItem={
-																this.removeItem
-															}
-															removeSection={
-																this
-																	.removeSection
-															}
-															sectionIndex={index}
-														/>
-													),
-												)}
+									<QuoteContent>
+										<FlexColumn fullHeight>
+											{this.state.mode === 'quote' ? (
+												<QuoteSections>
+													{option.sections.map(
+														(section, index) => (
+															<QuoteSection
+																key={`section${
+																	section.id
+																}`}
+																data={section}
+																addItem={
+																	this.addItem
+																}
+																editItem={
+																	this
+																		.editItem
+																}
+																editSectionTitle={
+																	this
+																		.editSectionTitle
+																}
+																removeItem={
+																	this
+																		.removeItem
+																}
+																removeSection={
+																	this
+																		.removeSection
+																}
+																sectionIndex={
+																	index
+																}
+															/>
+														),
+													)}
+													<Mutation
+														mutation={ADD_SECTION}
+													>
+														{addSection => (
+															<QuoteAction
+																theme="Link"
+																size="XSmall"
+																onClick={() => {
+																	this.addSection(
+																		option.id,
+																		addSection,
+																	);
+																}}
+															>
+																Ajouter une
+																section
+															</QuoteAction>
+														)}
+													</Mutation>
+												</QuoteSections>
+											) : (
 												<Mutation
-													mutation={ADD_SECTION}
+													mutation={UPDATE_OPTION}
 												>
-													{addSection => (
-														<Button
-															onClick={() => {
-																this.addSection(
+													{updateOption => (
+														<TextEditor
+															currentContent={
+																option.proposal
+															}
+															onChange={(raw) => {
+																this.updateOption(
 																	option.id,
-																	addSection,
+																	raw,
+																	updateOption,
 																);
 															}}
-														>
-															Add section
-														</Button>
+														/>
 													)}
 												</Mutation>
-											</QuoteSections>
-										) : (
-											<Mutation mutation={UPDATE_OPTION}>
-												{updateOption => (
-													<TextEditor
-														currentContent={
-															option.proposal
-														}
-														onChange={(raw) => {
-															this.updateOption(
-																option.id,
-																raw,
-																updateOption,
-															);
-														}}
-													/>
-												)}
-											</Mutation>
-										)}
-									</FlexColumn>
+											)}
+										</FlexColumn>
+									</QuoteContent>
 								</CenterContent>
 								<SideActions>
 									<ClientAddress>
-										<H5>{quote.customer.name}</H5>
-										<P>
-											{quote.customer.address.number}{' '}
-											{quote.customer.address.street}
-										</P>
-										<P>
-											{quote.customer.address.postalCode}{' '}
-											{quote.customer.address.city}
-										</P>
-										<P>{quote.customer.address.country}</P>
+										<CompanyName>{quote.customer.name}</CompanyName>
+										<ContactName>{quote.customer.firstName} {quote.customer.lastName}</ContactName>
+										<AddressBlock>
+											<Address>{quote.customer.address.street}</Address>
+											<Address>{quote.customer.address.postalCode}{' '}
+											{quote.customer.address.city}</Address>
+											<Address>{quote.customer.address.country}</Address>
+										</AddressBlock>
 									</ClientAddress>
-									<Select>
-										{quote.options.map(option => (
-											<option
-												value={option.name}
-												key={`option${option.name}`}
-											>
-												{option.name}
-											</option>
-										))}
-									</Select>
 									{this.getQuoteTotal(option)}
 								</SideActions>
 							</FlexRow>

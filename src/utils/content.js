@@ -18,6 +18,7 @@ export const secondaryLightBlue = '#deebff';
 export const secondaryLightYellow = '#fffae6';
 export const secondaryLightGreen = '#e3fcef';
 export const gray50 = '#808080';
+export const gray10 = '#fbfbfb';
 export const gray20 = '#f4f5f7';
 export const gray30 = '#4d4d4d';
 export const gray70 = '#b3b3b3';
@@ -239,7 +240,7 @@ export const Input = styled('input')`
 	border: 1px solid ${props => (props.error ? signalRed : gray70)};
 	padding: 15px 18px 16px 18px;
 	color: ${gray50};
-	width: fill-available;
+	width: ${props => (props.flexible ? '100%' : 'fill-available')};
 	font-family: 'Ligne';
 	font-size: 16px;
 	transition: background-color 0.2s ease, color 0.2s ease,

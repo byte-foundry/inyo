@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Input} from '../../utils/content';
 
 class InlineEditable extends Component {
 	constructor(props) {
@@ -32,13 +33,14 @@ class InlineEditable extends Component {
 		const {type, placeholder} = this.props;
 
 		return isEditing ? (
-			<input
+			<Input
 				type={type}
 				value={value}
 				onChange={this.handleChange}
 				onBlur={this.handleFocus}
 				placeholder={placeholder}
 				autoFocus
+				flexible
 			/>
 		) : (
 			<span onClick={this.handleFocus}>{value}</span>

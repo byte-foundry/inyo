@@ -8,25 +8,25 @@ import {
 } from 'medium-draft/lib/components/toolbar';
 import styled from 'react-emotion';
 import 'medium-draft/lib/index.css';
+import {gray20} from '../../utils/content';
 
 import CustomImageSideButton from './custom-image-side-button';
 
 const TextEditorMain = styled('div')`
-	border: 1px solid black;
+	border: 1px solid ${gray20};
 	margin: 10px 20px;
-	border-radius: 5px;
 	height: 100%;
 `;
 
 class TextEditor extends Component {
 	constructor(props) {
 		super(props);
-		this.sideButtons = [
-			{
-				title: 'Image',
-				component: CustomImageSideButton,
-			},
-		];
+		// this.sideButtons = [
+		// 	{
+		// 		title: 'Image',
+		// 		component: CustomImageSideButton,
+		// 	},
+		// ];
 		// default: block: ['ordered-list-item', 'unordered-list-item', 'blockquote', 'header-three', 'todo']
 		// inline: ['BOLD', 'ITALIC', 'UNDERLINE', 'hyperlink', 'HIGHLIGHT']
 		BLOCK_BUTTONS.unshift({
@@ -71,7 +71,7 @@ class TextEditor extends Component {
 				<Editor
 					editorState={this.state.editorState}
 					onChange={this.onChange}
-					sideButtons={this.sideButtons}
+					// sideButtons={this.sideButtons}
 					toolbarConfig={this.toolbarConfig}
 					placeholder="Write here ..."
 					ref={(element) => {

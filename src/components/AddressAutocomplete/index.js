@@ -2,11 +2,7 @@ import React, {Component} from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
 import styled from 'react-emotion';
 
-import {P} from '../../utils/content';
-
-const Label = styled('label')`
-	display: block;
-`;
+import {P, Label} from '../../utils/content';
 
 class AddressAutocomplete extends Component {
 	render() {

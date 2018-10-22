@@ -1,15 +1,68 @@
 import React from 'react';
 import {Formik} from 'formik';
+import styled from 'react-emotion';
 import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';
-import Select from 'react-select/lib/Creatable';
+import Creatable from 'react-select/lib/Creatable';
+import ClassicSelect from 'react-select';
+import {templates} from '../../../utils/quote-templates';
 
-import {H3, H4, Button} from '../../../utils/content';
+import {
+	H1,
+	H3,
+	H4,
+	Button,
+	primaryBlue,
+	primaryNavyBlue,
+	FlexRow,
+} from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
-
-import {templates} from '../../../utils/quote-templates';
 import {CREATE_QUOTE} from '../../../utils/mutations';
+
+const Title = styled(H1)`
+	color: ${primaryNavyBlue};
+`;
+
+const SubTitle = styled(H3)`
+	color: ${primaryBlue};
+`;
+
+const FormTitle = styled(H4)`
+	color: ${primaryBlue};
+`;
+
+const SelectStyles = {
+	option: (base, state) => ({
+		...base,
+		borderRadius: 0,
+		fontFamily: 'Ligne',
+	}),
+	menu: (base, state) => ({
+		...base,
+		marginTop: 2,
+		borderRadius: 0,
+		fontFamily: 'Ligne',
+	}),
+	control: base => ({
+		...base,
+		width: '30vw',
+		borderRadius: 0,
+		fontFamily: 'Ligne',
+	}),
+	input: (base, state) => ({
+		...base,
+		fontFamily: 'Ligne',
+		marginTop: '5px',
+	}),
+};
+
+const quoteTemplates = templates.map(template => ({
+	value: template.name,
+	label: template.label,
+}));
+
+quoteTemplates.push({value: 'IDENTITY', label: 'Identité visuelle'});
 
 class CreateQuoteForm extends React.Component {
 	render() {
@@ -88,116 +141,118 @@ class CreateQuoteForm extends React.Component {
 							return (
 								<div>
 									<form onSubmit={props.handleSubmit}>
-										<H3>Create your quote</H3>
-										<label htmlFor="customer">
-											Customer
-										</label>
-										<Select
-											id="customer"
-											name="customer"
-											options={customers.map(
-												customer => ({
-													...customer,
-													label: customer.name,
-													value: customer.id,
-												}),
-											)}
-											getOptionValue={option => option.id}
-											onChange={(option) => {
-												setFieldValue(
-													'customer',
-													option && option.value,
-												);
-											}}
-											value={values.customer}
-											isClearable
-										/>
-										<select
-											name="template"
-											defaultValue="WEBSITE"
-											onChange={(option) => {
-												setFieldValue(
-													'template',
-													option && option.value,
-												);
-											}}
-										>
-											<option value="WEBSITE">
-												Website
-											</option>
-											<option value="IDENTITY">
-												Identity
-											</option>
-										</select>
-										{!selectedCustomer
-											&& values.customer && (
+										<Title>Créez votre devis</Title>
+										<FlexRow justifyContent="space-around">
 											<div>
-												<H4>
-														Congrats, it seems
-														that's a fresh new
-														client!
-												</H4>
-												<p>
-														Could you please tell us
-														more about it?
-												</p>
-
-												<FormElem
-													{...props}
-													label="Contact Firstname"
-													name="firstName"
-													placeholder="John"
-												/>
-												<FormElem
-													{...props}
-													label="Contact Lastname"
-													name="lastName"
-													placeholder="Doe"
-												/>
-												<FormElem
-													{...props}
-													label="Email address"
-													name="email"
-													placeholder="contact@company.com"
-												/>
-
-												<AddressAutocomplete
-													{...props}
-													onChange={
-														props.setFieldValue
+												<SubTitle>
+													1. Votre client
+												</SubTitle>
+												<label htmlFor="customer">
+													Entrez le nom de votre
+													client
+												</label>
+												<Creatable
+													id="customer"
+													name="customer"
+													options={customers.map(
+														customer => ({
+															...customer,
+															label:
+																customer.name,
+															value: customer.id,
+														}),
+													)}
+													getOptionValue={option => option.id
 													}
-													name="address"
-													placeholder="Write an address here"
-													label="Address"
+													onChange={(option) => {
+														setFieldValue(
+															'customer',
+															option
+																&& option.value,
+														);
+													}}
+													styles={SelectStyles}
+													value={values.customer}
+													isClearable
+													placeholder="Marc Dubois"
+													formatCreateLabel={inputValue => `Créer "${inputValue}"`
+													}
 												/>
+												{!selectedCustomer
+													&& values.customer && (
+													<div>
+														<FormTitle>
+																Il semblerait
+																que ce soit un
+																nouveau client !
+														</FormTitle>
+														<p>
+																Pourriez-vous
+																nous en dire
+																plus ?
+														</p>
+
+														<FormElem
+															{...props}
+															label="Son prénom"
+															name="firstName"
+															placeholder="John"
+														/>
+														<FormElem
+															{...props}
+															label="Son nom"
+															name="lastName"
+															placeholder="Doe"
+														/>
+														<FormElem
+															{...props}
+															label="Son email"
+															name="email"
+															placeholder="contact@company.com"
+														/>
+
+														<AddressAutocomplete
+															{...props}
+															onChange={
+																props.setFieldValue
+															}
+															name="Son addresse"
+															placeholder="42 rue du Fer, 75000 Paris"
+															label="Address"
+														/>
+													</div>
+												)}
 											</div>
-										)}
-										<Button type="submit">
-											{newCustomer
-												? 'Create Client and Quote'
-												: 'Create Quote'}
-										</Button>
-										{selectedCustomer && (
-											<React.Fragment>
-												<H4>
-													Some facts about{' '}
-													{values.customer}
-												</H4>
-												<ul>
-													<li>
-														He's a good guy
-														apparently
-													</li>
-													<li>
-														He wants to give you
-														money... we guess
-													</li>
-													<li>
-														We hope he pays you back
-													</li>
-												</ul>
-											</React.Fragment>
-										)}
+
+											<div>
+												<SubTitle>
+													2. Votre Projet
+												</SubTitle>
+
+												<ClassicSelect
+													styles={SelectStyles}
+													defaultValue="WEBSITE"
+													placeholder="Type de contenu"
+													onChange={(option) => {
+														setFieldValue(
+															'template',
+															option
+																&& option.value,
+														);
+													}}
+													options={quoteTemplates}
+												/>
+												<br />
+												<br />
+												<Button
+													type="submit"
+													theme="Primary"
+													size="Large"
+												>
+													Commencer à éditer
+												</Button>
+											</div>
+										</FlexRow>
 									</form>
 								</div>
 							);

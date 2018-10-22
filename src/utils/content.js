@@ -224,7 +224,7 @@ const ButtonSizes = (props) => {
 };
 
 export const Button = styled(ButtonReset)`
-	width: 200px;
+	width: auto;
 	font-size: 17px;
 	cursor: pointer;
 	transition: background-color 0.2s ease, color 0.2s ease,

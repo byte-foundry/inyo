@@ -153,6 +153,14 @@ const SendQuoteButton = styled(Button)`
 	width: auto;
 `;
 
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
 class EditQuote extends Component {
 	constructor(props) {
 		super(props);
@@ -465,7 +473,7 @@ class EditQuote extends Component {
 				{({loading, error, data}) => {
 					const fetchedData = {...data};
 
-					if (loading) return <p>Loading</p>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {quote} = data;
 
@@ -655,13 +663,27 @@ class EditQuote extends Component {
 								</CenterContent>
 								<SideActions>
 									<ClientAddress>
-										<CompanyName>{quote.customer.name}</CompanyName>
-										<ContactName>{quote.customer.firstName} {quote.customer.lastName}</ContactName>
+										<CompanyName>
+											{quote.customer.name}
+										</CompanyName>
+										<ContactName>
+											{quote.customer.firstName}{' '}
+											{quote.customer.lastName}
+										</ContactName>
 										<AddressBlock>
-											<Address>{quote.customer.address.street}</Address>
-											<Address>{quote.customer.address.postalCode}{' '}
-											{quote.customer.address.city}</Address>
-											<Address>{quote.customer.address.country}</Address>
+											<Address>
+												{quote.customer.address.street}
+											</Address>
+											<Address>
+												{
+													quote.customer.address
+														.postalCode
+												}{' '}
+												{quote.customer.address.city}
+											</Address>
+											<Address>
+												{quote.customer.address.country}
+											</Address>
 										</AddressBlock>
 									</ClientAddress>
 									{this.getQuoteTotal(option)}

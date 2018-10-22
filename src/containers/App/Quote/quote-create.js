@@ -6,7 +6,11 @@ import {Redirect} from 'react-router-dom';
 import CreateQuoteForm from './create-quote-form';
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 
-const CreateQuoteMain = styled('div')``;
+const CreateQuoteMain = styled('div')`
+	max-width: 1600px;
+	margin-left: auto;
+	margin-right: auto;
+`;
 
 class CreateQuote extends Component {
 	render() {

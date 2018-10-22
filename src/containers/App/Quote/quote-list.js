@@ -46,6 +46,14 @@ const TopBarAccountIcon = styled('img')`
 	width: auto;
 `;
 
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
 export const quoteState = {
 	DRAFT: 0,
 	SENT: 1,
@@ -65,7 +73,7 @@ class ListQuotes extends Component {
 			<Query query={GET_ALL_QUOTES}>
 				{({loading, error, data}) => {
 					console.log(data);
-					if (loading) return <p>Loading</p>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {quotes} = data.me.company;
 

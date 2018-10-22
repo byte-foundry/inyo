@@ -2,23 +2,57 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import Autocomplete from 'react-autocomplete';
 import {Query} from 'react-apollo';
+import link from 'medium-draft/lib/components/entities/link';
 import {
-	H4, H5, FlexRow, Input, Button,
+	H4,
+	H5,
+	FlexRow,
+	Input,
+	Button,
+	primaryBlue,
+	secondaryLightBlue,
+	signalGreen,
+	signalOrange,
+	signalRed,
+	primaryWhite,
+	gray30,
 } from '../../utils/content';
 import {templates} from '../../utils/quote-templates';
 
 import {GET_ITEMS} from '../../utils/queries';
 
 const AddItemMain = styled('div')`
-	background: #ddd;
+	background: ${secondaryLightBlue};
+	border: 1px solid ${primaryBlue};
 	padding: 10px 20px;
 `;
 
 const ItemComment = styled('textarea')`
+	margin-top: 10px;
 	width: 100%;
+	background: ${primaryWhite};
+	padding: 3px 4px 3px 3px;
+	font-family: 'Ligne';
+	color: ${gray30};
 `;
 
-const ActionButton = styled(Button)``;
+const ActionButton = styled(Button)`
+	font-size: 13px;
+	color: ${props => props.color};
+	margin-bottom: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+`;
+
+const AddInput = styled(Input)`
+	padding: 3px 4px 3px 3px;
+	background: ${primaryWhite};
+	width: auto;
+	border-color: transparent;
+	font-size: 13px;
+`;
+
+const AutocompleteItem = styled('div')``;
 
 class AddItem extends Component {
 	constructor(props) {
@@ -52,15 +86,15 @@ class AddItem extends Component {
 										shouldItemRender={(item, value) => item.includes(value)
 										}
 										renderItem={(item, isHighlighted) => (
-											<div
-												style={{
-													background: isHighlighted
+											<AutocompleteItem
+												background={
+													isHighlighted
 														? 'lightgray'
-														: 'white',
-												}}
+														: 'white'
+												}
 											>
 												{item}
-											</div>
+											</AutocompleteItem>
 										)}
 										value={name}
 										onChange={(e) => {
@@ -73,23 +107,47 @@ class AddItem extends Component {
 												name: value,
 											});
 										}}
+										menuStyle={{
+											borderRadius: '0px',
+											boxShadow:
+												'0 2px 12px rgba(0, 0, 0, 0.1)',
+											background: 'rgb(255, 255, 255)',
+											padding: '2px 0',
+											fontSize: '11px',
+											position: 'fixed',
+											overflow: 'auto',
+											maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
+										}}
+										inputProps={{
+											style: {
+												color: gray30,
+												padding: '3px 4px 3px 3px',
+												background: primaryWhite,
+												width: 'auto',
+												borderColor: 'transparent',
+												fontSize: '13px',
+												fontFamily: 'Ligne',
+											},
+										}}
 									/>
 								);
 							}
 						}}
 					</Query>
-					<Input
+					<AddInput
 						type="number"
 						placeholder="1"
 						value={unit}
 						onChange={e => this.setState({unit: parseInt(e.target.value)})
 						}
 					/>
-					<Input
+					<AddInput
 						type="number"
 						placeholder="500"
 						value={unitPrice}
-						onChange={e => this.setState({unitPrice: parseInt(e.target.value)})
+						onChange={e => this.setState({
+							unitPrice: parseInt(e.target.value),
+						})
 						}
 					/>
 				</FlexRow>
@@ -101,28 +159,39 @@ class AddItem extends Component {
 						}
 					/>
 				</FlexRow>
-				<FlexRow>
+				<FlexRow justifyContent="space-between">
 					<ActionButton
+						theme="Link"
+						size="XSmall"
+						color={signalRed}
 						onClick={() => {
 							remove();
 						}}
 					>
-						Remove item
+						Supprimer
 					</ActionButton>
-					<ActionButton
-						onClick={() => {
-							cancel();
-						}}
-					>
-						Cancel
-					</ActionButton>
-					<ActionButton
-						onClick={() => {
-							done(this.state);
-						}}
-					>
-						Done
-					</ActionButton>
+					<div>
+						<ActionButton
+							theme="Link"
+							size="XSmall"
+							color={signalOrange}
+							onClick={() => {
+								cancel();
+							}}
+						>
+							Annuler
+						</ActionButton>
+						<ActionButton
+							theme="Link"
+							size="XSmall"
+							color={signalGreen}
+							onClick={() => {
+								done(this.state);
+							}}
+						>
+							Valider
+						</ActionButton>
+					</div>
 				</FlexRow>
 			</AddItemMain>
 		);

@@ -44,7 +44,8 @@ class QuoteCard extends Component {
 			createdAt,
 			id,
 			status,
-			options: [{sections}],
+			// options: [{sections}],
+			total,
 		} = quote;
 		const options = {
 			weekday: 'long',
@@ -52,15 +53,6 @@ class QuoteCard extends Component {
 			month: 'long',
 			day: 'numeric',
 		};
-
-		const amount = sections.reduce(
-			(acc, section) => acc
-				+ section.items.reduce(
-					(itemSum, item) => itemSum + item.unitPrice,
-					0,
-				),
-			0,
-		);
 
 		return (
 			<QuoteCardMain

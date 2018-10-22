@@ -129,6 +129,7 @@ export const GET_QUOTE_DATA = gql`
 						unitPrice
 						unit
 						vatRate
+						description
 					}
 				}
 			}

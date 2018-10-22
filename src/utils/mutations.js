@@ -172,7 +172,7 @@ export const UPDATE_ITEM = gql`
 		$name: String
 		$description: String
 		$unitPrice: Int
-		$unit: Int
+		$unit: Float
 		$vatRate: Int
 	) {
 		updateItem(

@@ -31,7 +31,7 @@ class QuoteTotal extends Component {
 		return (
 			<TotalMain>
 				<TotalElem>
-					<TotalNumber>{sumDays} days</TotalNumber>
+					<TotalNumber>{sumDays} jours</TotalNumber>
 					<TotalLabel>Temps prévu</TotalLabel>
 				</TotalElem>
 				<TotalElem>

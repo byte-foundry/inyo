@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import Task from '../Task';
+import TaskSeeOrForm from '../TaskSeeOrForm';
 import TaskForm from '../TaskForm';
 
 import {Button} from '../../utils/content';
@@ -48,24 +48,10 @@ class TasksList extends Component {
 		const {tasks} = this.props;
 		const {selectedTask, addingItem} = this.state;
 
-		const tasksList = tasks.map(
-			task => (selectedTask === task.id ? (
-				<TaskForm
-					task={task}
-					done={this.updateTask}
-					cancel={this.unselectTask}
-				/>
-			) : (
-				<Task task={task} select={this.selectTask} />
-			)),
-		);
+		const tasksList = tasks.map(task => <TaskSeeOrForm task={task} />);
 
 		const addItem = addingItem && (
-			<TaskForm
-				task={{}}
-				done={this.saveNewItem}
-				cancel={this.removeAddItem}
-			/>
+			<TaskForm task={{}} cancel={this.removeAddItem} />
 		);
 
 		return (

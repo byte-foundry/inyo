@@ -124,10 +124,12 @@ export const GET_QUOTE_DATA = gql`
 					id
 					name
 					items {
+						status
 						id
 						name
 						unitPrice
 						unit
+						pendingUnit
 						vatRate
 						description
 					}

@@ -192,6 +192,36 @@ export const UPDATE_ITEM = gql`
 		}
 	}
 `;
+
+export const UPDATE_VALIDATED_ITEM = gql`
+	mutation updateValidatedItem(
+		$itemId: ID!
+		$unit: Float!
+		$comment: CommentInput!
+	) {
+		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
+			id
+			unit
+			pendingUnit
+			status
+			comments {
+				text
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
+		}
+	}
+`;
+
 export const REMOVE_ITEM = gql`
 	mutation removeItem($itemId: ID!) {
 		removeItem(id: $itemId) {

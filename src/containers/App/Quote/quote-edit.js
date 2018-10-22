@@ -169,22 +169,12 @@ class EditQuote extends Component {
 		if (templateData) {
 			const items = templateData.sections.flatMap(section => section.items.map(item => item.name));
 
-			if (typeof EditItemItems === 'function') {
+			if (typeof EditItems === 'function') {
 				EditItems({variables: {items}});
 			}
-			this.setState({quoteData: templateData});
 		}
-		else {
-			this.setState({
-				quoteData: {
-					name: '',
-					proposal: undefined,
-					sections: [],
-				},
-			});
-			if (typeof EditItemItems === 'function') {
-				EditItems({variables: {items: []}});
-			}
+		else if (typeof EditItems === 'function') {
+			EditItems({variables: {items: []}});
 		}
 	};
 

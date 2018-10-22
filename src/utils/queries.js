@@ -107,6 +107,15 @@ export const GET_QUOTE_DATA = gql`
 			id
 			template
 			name
+			customer {
+				name
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
 			options {
 				id
 				name

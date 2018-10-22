@@ -20,6 +20,11 @@ const QuoteStateTitle = styled('div')`
 	border: 1px solid ${primaryNavyBlue};
 	margin-bottom: 10px;
 `;
+const QuoteStateQuantity = styled('label')`
+	font-size: 13px;
+	color: ${primaryNavyBlue};
+	margin: 0;
+`;
 const QuoteStateAmount = styled(P)`
 	font-size: 13px;
 	color: ${primaryNavyBlue};
@@ -56,8 +61,6 @@ class QuoteStateList extends Component {
 
 	render() {
 		const {quotes, quoteState} = this.props;
-
-		console.log(quotes);
 
 		const quoteColumn = quotes.map(quote => <QuoteCard quote={quote} />);
 

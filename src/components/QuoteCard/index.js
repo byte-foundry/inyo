@@ -44,7 +44,6 @@ class QuoteCard extends Component {
 			createdAt,
 			id,
 			status,
-			// options: [{sections}],
 			total,
 		} = quote;
 		const options = {

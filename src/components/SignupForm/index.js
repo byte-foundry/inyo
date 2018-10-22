@@ -4,8 +4,10 @@ import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+
 import {SIGNUP} from '../../utils/mutations';
 import {Button, ErrorInput} from '../../utils/content';
+
 import FormElem from '../FormElem';
 
 const SignupFormMain = styled('div')``;

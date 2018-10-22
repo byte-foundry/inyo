@@ -15,6 +15,10 @@ const TLTopBar = styled(FlexRow)``;
 const TLCustomerName = styled('label')`
 	flex: 1;
 `;
+const BackButton = styled(Button)`
+	margin-top: 10px;
+	margin-bottom: 10px;
+`;
 const TLTimeIndicators = styled(FlexColumn)``;
 const TLTimeLabel = styled('div')``;
 const TLTimeValue = styled('div')`
@@ -59,8 +63,8 @@ class TasksListUser extends Component {
 						(sectionOvertime, section) => sectionOvertime
 							+ section.items.reduce(
 								(itemOvertime, item) => itemOvertime
-									+ (item.updatedUnit
-										? item.updatedUnit - item.unit
+									+ (item.pendingUnit
+										? item.pendingUnit - item.unit
 										: 0),
 								0,
 							),
@@ -68,7 +72,11 @@ class TasksListUser extends Component {
 					);
 
 					const sectionsElems = sections.map(section => (
-						<Section items={section.items} name={section.name} />
+						<Section
+							items={section.items}
+							name={section.name}
+							id={section.id}
+						/>
 					));
 
 					const totalItems = sections.reduce(
@@ -86,6 +94,14 @@ class TasksListUser extends Component {
 
 					return (
 						<TasksListUserMain>
+							<BackButton
+								theme="Link"
+								size="XSmall"
+								onClick={() => this.props.history.push('/app/quotes')
+								}
+							>
+								Retour à la liste des devis
+							</BackButton>
 							<TLTopBar>
 								<TLCustomerName>
 									{customer.name} via {customer.email}

@@ -31,7 +31,7 @@ class AddressAutocomplete extends Component {
 						suggestion,
 						suggestionIndex,
 					}) => {
-						this.props.onChange(name, {
+						onChange(name, {
 							street: suggestion.name,
 							city: suggestion.city,
 							country: suggestion.country,
@@ -45,7 +45,7 @@ class AddressAutocomplete extends Component {
 						suggestion,
 						suggestonIndex,
 					}) => {}}
-					onClear={() => this.props.onChange(name, {})}
+					onClear={() => onChange(name, {})}
 					onLimit={({message}) => console.err(message)}
 					onError={({message}) => console.err(message)}
 					value={values[name]}

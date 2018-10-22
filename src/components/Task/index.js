@@ -24,7 +24,7 @@ class Task extends Component {
 		const {
 			selected,
 			task: {
-				name, time, price, status,
+				name, unit, unitPrice, status,
 			},
 		} = this.props;
 
@@ -32,9 +32,9 @@ class Task extends Component {
 			<TaskMain onClick={this.select}>
 				<TaskStatus status={status} />
 				<TaskName>{name}</TaskName>
-				<TaskTime>{time}</TaskTime>
+				<TaskTime>{unit}</TaskTime>
 				<TaskPrice>
-					{price.toLocaleString(undefined, {
+					{unitPrice.toLocaleString(undefined, {
 						currency: 'EUR',
 						minimumFractionDigits: 2,
 					})}

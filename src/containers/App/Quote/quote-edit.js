@@ -607,10 +607,16 @@ class EditQuote extends Component {
 								</CenterContent>
 								<SideActions>
 									<ClientAddress>
-										<H5>Michel Renard</H5>
-										<P>666 rue yorkshire</P>
-										<P>69003 Lyon</P>
-										<P>France</P>
+										<H5>{quote.customer.name}</H5>
+										<P>
+											{quote.customer.address.number}{' '}
+											{quote.customer.address.street}
+										</P>
+										<P>
+											{quote.customer.address.postalCode}{' '}
+											{quote.customer.address.city}
+										</P>
+										<P>{quote.customer.address.country}</P>
 									</ClientAddress>
 									<Select>
 										{quote.options.map(option => (

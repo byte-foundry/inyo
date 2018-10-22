@@ -54,11 +54,7 @@ class CreateQuoteForm extends React.Component {
 									firstName: values.firstName,
 									lastName: values.lastName,
 									email: values.email,
-									address: {
-										street: values.street,
-										city: values.city,
-										country: values.country,
-									},
+									address: values.address,
 								};
 							}
 

@@ -17,7 +17,7 @@ class Quote extends Component {
 				<Switch>
 					<Route exact path="/app/quotes" component={QuoteList} />
 					<Route
-						path="/app/quotes/see/:quoteId"
+						path="/app/quotes/:quoteId/see"
 						component={QuoteSee}
 					/>
 					<Route

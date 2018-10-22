@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Mutation, Query} from 'react-apollo';
 
 import {
 	FlexRow, FlexColumn, H1, Button,
 } from '../../../utils/content';
+import {GET_QUOTE_DATA} from '../../../utils/queries';
 
 import TasksProgressBar from '../../../components/TasksProgressBar';
-import TasksList from '../../../components/TasksList';
+import Section from '../../../components/Section';
 
 const TasksListUserMain = styled('div')``;
 const TLTopBar = styled(FlexRow)``;
@@ -19,92 +21,101 @@ const TLTimeValue = styled('div')`
 	color: ${props => (props.warning ? 'red' : 'black')};
 `;
 
-const tasksListStatic = [
-	{
-		id: 1,
-		name: 'Task',
-		unit: 2,
-		price: 1337,
-		status: 'FINISHED',
-	},
-	{
-		id: 2,
-		name: 'Task 2',
-		unit: 0.5,
-		price: 137,
-		status: 'FINISHED',
-	},
-	{
-		id: 3,
-		name: 'Task 3',
-		unit: 1,
-		updatedUnit: 1.5,
-		price: 337,
-		status: 'UPDATED_SENT',
-	},
-	{
-		id: 4,
-		name: 'Task 4',
-		unit: 2,
-		updatedUnit: 3,
-		price: 1337,
-		status: 'UPDATED_SENT',
-	},
-	{
-		id: 5,
-		name: 'Task 4',
-		unit: 2,
-		price: 1337,
-		status: 'PENDING',
-	},
-];
-
-const quote = {
-	customer: {
-		name: 'Yolo Inc.',
-		email: 'roger@yolo.head',
-	},
-	projectName: 'Yolo website',
-	tasks: tasksListStatic,
-};
-
 class TasksListUser extends Component {
 	render() {
-		const {customer, tasks, projectName} = quote;
-		const timePlanned = tasks.reduce((acc, task) => acc + task.unit, 0);
-		const amendmentEnabled = tasks.reduce(
-			(acc, task) => (acc |= task.status === 'UPDATED'),
-			false,
-		);
-		const overtime = tasks.reduce(
-			(acc, task) => acc + (task.updatedUnit ? task.updatedUnit - task.unit : 0),
-			0,
-		);
+		const {quoteId} = this.props.match.params;
 
 		return (
-			<TasksListUserMain>
-				<TLTopBar>
-					<TLCustomerName>
-						{customer.name} via {customer.email}
-					</TLCustomerName>
-					<TLTimeIndicators>
-						<FlexRow>
-							<TLTimeLabel>Temps prévu:</TLTimeLabel>
-							<TLTimeValue>{timePlanned}</TLTimeValue>
-						</FlexRow>
-						<FlexRow>
-							<TLTimeLabel>Overtime:</TLTimeLabel>
-							<TLTimeValue warning={overtime > 0}>
-								{overtime}
-							</TLTimeValue>
-						</FlexRow>
-					</TLTimeIndicators>
-					<Button disabled={!amendmentEnabled}>Send amendment</Button>
-				</TLTopBar>
-				<H1>{projectName}</H1>
-				<TasksProgressBar tasksCompleted={1} tasksTotal={5} />
-				<TasksList tasks={tasksListStatic} />
-			</TasksListUserMain>
+			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
+				{({loading, error, data}) => {
+					const fetchedData = {...data};
+
+					if (loading) return <p>Loading</p>;
+					if (error) return <p>Error!: ${error.toString()}</p>;
+					const {
+						quote: {
+							options: [{sections}],
+							customer,
+							name,
+						},
+					} = data;
+					const timePlanned = sections.reduce(
+						(timeSectionSum, section) => timeSectionSum
+							+ section.items.reduce(
+								(itemSum, item) => itemSum + item.unit,
+								0,
+							),
+						0,
+					);
+					const amendmentEnabled = sections.reduce(
+						(isSectionUpdated, section) => isSectionUpdated
+							|| section.items.reduce(
+								(isItemUpdated, item) => isItemUpdated || item.unit,
+								false,
+							),
+						false,
+					);
+					const overtime = sections.reduce(
+						(sectionOvertime, section) => sectionOvertime
+							+ section.items.reduce(
+								(itemOvertime, item) => itemOvertime
+									+ (item.updatedUnit
+										? item.updatedUnit - item.unit
+										: 0),
+								0,
+							),
+						0,
+					);
+
+					const sectionsElems = sections.map(section => (
+						<Section items={section.items} name={section.name} />
+					));
+
+					const totalItems = sections.reduce(
+						(sumItems, section) => sumItems + section.items.length,
+						0,
+					);
+
+					const totalItemsFinished = sections.reduce(
+						(sumItems, section) => sumItems
+							+ section.items.filter(
+								item => item.status === 'FINISHED',
+							).length,
+						0,
+					);
+
+					return (
+						<TasksListUserMain>
+							<TLTopBar>
+								<TLCustomerName>
+									{customer.name} via {customer.email}
+								</TLCustomerName>
+								<TLTimeIndicators>
+									<FlexRow>
+										<TLTimeLabel>Temps prévu:</TLTimeLabel>
+										<TLTimeValue>{timePlanned}</TLTimeValue>
+									</FlexRow>
+									<FlexRow>
+										<TLTimeLabel>Overtime:</TLTimeLabel>
+										<TLTimeValue warning={overtime > 0}>
+											{overtime}
+										</TLTimeValue>
+									</FlexRow>
+								</TLTimeIndicators>
+								<Button disabled={!amendmentEnabled}>
+									Send amendment
+								</Button>
+							</TLTopBar>
+							<H1>{name}</H1>
+							<TasksProgressBar
+								tasksCompleted={totalItemsFinished}
+								tasksTotal={totalItems}
+							/>
+							{sectionsElems}
+						</TasksListUserMain>
+					);
+				}}
+			</Query>
 		);
 	}
 }

@@ -45,7 +45,7 @@ const QuoteStateTotal = styled(P)`
 const quoteStateName = {
 	DRAFT: 'Brouillons',
 	SENT: 'Envoyés',
-	VALIDATED: 'Acceptés',
+	ACCEPTED: 'Acceptés',
 	REJECTED: 'Rejetées',
 	INVOICE_SENT: 'Facture envoyée',
 	INVOICE_ACCEPTED: 'Facture acceptée',

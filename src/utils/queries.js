@@ -196,7 +196,7 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 `;
 
 /** ******** COMMENT QUERIES ********* */
-export const GET_COMMENTS_CONTENT = gql`
+export const GET_COMMENTS_BY_ITEM = gql`
 	query getCommentsFromItemId($itemId: ID!, $token: String) {
 		itemComments(itemId: $itemId, token: $token) {
 			id

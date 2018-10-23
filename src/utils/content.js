@@ -297,3 +297,14 @@ export const FlexColumn = styled('div')`
 	${props => props.flexGrow && `flex-grow: ${props.flexGrow};`};
 	${props => props.fullHeight && 'height: 100%;'};
 `;
+
+export const ToggleButton = styled('span')`
+	color: ${props => (props.active ? primaryBlue : gray30)};
+	cursor: pointer;
+	margin-right: 20px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	border-bottom: 4px solid
+		${props => (props.active ? primaryBlue : 'transparent')};
+	transition: color 0.2s ease, border-color 0.2s ease;
+`;

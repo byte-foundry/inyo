@@ -3,7 +3,9 @@ import styled from 'react-emotion';
 import {Route} from 'react-router-dom';
 
 import {Query} from 'react-apollo';
-import {FlexRow, FlexColumn, H1} from '../../../utils/content';
+import {
+	FlexRow, FlexColumn, H1, ToggleButton,
+} from '../../../utils/content';
 
 import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
 
@@ -12,6 +14,7 @@ import Section from '../../../components/Section';
 import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
 import IssuerNameAndAddress from '../../../components/IssuerNameAndAddress';
 import CommentModal from '../../../components/CommentModal';
+import TextEditor from '../../../components/TextEditor';
 
 const TasksListUserMain = styled('div')``;
 const TLTopBar = styled(FlexRow)``;
@@ -28,6 +31,11 @@ const SideActions = styled(FlexColumn)`
 `;
 
 class TasksListUser extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {mode: 'proposal'};
+	}
+
 	render() {
 		const {quoteId, customerToken} = this.props.match.params;
 
@@ -45,7 +53,7 @@ class TasksListUser extends Component {
 							name,
 							customer,
 							issuer,
-							options: [{sections}],
+							options: [{sections, proposal}],
 						},
 					} = data;
 
@@ -72,17 +80,48 @@ class TasksListUser extends Component {
 								tasksCompleted={1}
 								tasksTotal={5}
 							/>
-							<FlexRow>
-								<SideActions>
-									<IssuerNameAndAddress issuer={issuer} />
-								</SideActions>
-								<FlexColumn>{sectionsElems}</FlexColumn>
-								<SideActions>
-									<CustomerNameAndAddress
-										customer={customer}
-									/>
-								</SideActions>
-							</FlexRow>
+							<FlexColumn>
+								<FlexRow>
+									<ToggleButton
+										active={this.state.mode === 'proposal'}
+										onClick={(raw) => {
+											this.setState({
+												mode: 'proposal',
+											});
+										}}
+									>
+										Proposition
+									</ToggleButton>
+									<ToggleButton
+										active={this.state.mode === 'quote'}
+										onClick={(raw) => {
+											this.setState({
+												mode: 'quote',
+											});
+										}}
+									>
+										Devis
+									</ToggleButton>
+								</FlexRow>
+								<FlexRow>
+									<SideActions>
+										<IssuerNameAndAddress issuer={issuer} />
+									</SideActions>
+									{this.state.mode === 'quote' ? (
+										<FlexColumn>{sectionsElems}</FlexColumn>
+									) : (
+										<TextEditor
+											currentContent={proposal}
+											onChange={() => {}}
+										/>
+									)}
+									<SideActions>
+										<CustomerNameAndAddress
+											customer={customer}
+										/>
+									</SideActions>
+								</FlexRow>
+							</FlexColumn>
 							<Route
 								path={`${
 									this.props.match.path

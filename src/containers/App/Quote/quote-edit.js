@@ -36,6 +36,7 @@ import {
 	gray30,
 	secondaryLightBlue,
 	gray50,
+	ToggleButton,
 } from '../../../utils/content';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,16 +60,6 @@ const EditQuoteTitle = styled(H1)`
 	margin: 0;
 `;
 
-const ToggleButton = styled('span')`
-	color: ${props => (props.active ? primaryBlue : gray30)};
-	cursor: pointer;
-	margin-right: 20px;
-	padding-top: 15px;
-	padding-bottom: 10px;
-	border-bottom: 4px solid
-		${props => (props.active ? primaryBlue : 'transparent')};
-	transition: color 0.2s ease, border-color 0.2s ease;
-`;
 const AddOptionButton = styled('button')``;
 const QuoteSections = styled('div')``;
 const SideActions = styled(FlexColumn)`

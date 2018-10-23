@@ -6,6 +6,7 @@ import {
 	primaryNavyBlue,
 	gray50,
 	secondaryLightBlue,
+	primaryBlue,
 } from '../../utils/content';
 
 const QuoteCardMain = styled('div')`
@@ -20,9 +21,14 @@ const CardHeader = styled('div')`
 	padding: 8px 16px 15px 16px;
 `;
 
-const ClientName = styled(P)`
+const QuoteName = styled(P)`
 	margin: 0;
 	color: ${primaryNavyBlue};
+`;
+const ClientName = styled(P)`
+	margin: 0;
+	color: ${primaryBlue};
+	font-size: 80%;
 `;
 const DateOfIssue = styled('span')`
 	color: ${gray50};
@@ -39,12 +45,7 @@ class QuoteCard extends Component {
 	render() {
 		const {quote} = this.props;
 		const {
-			customer,
-			issuedAt,
-			createdAt,
-			id,
-			status,
-			total,
+			customer, issuedAt, createdAt, id, status, total,
 		} = quote;
 		const options = {
 			weekday: 'long',
@@ -64,6 +65,7 @@ class QuoteCard extends Component {
 				}}
 			>
 				<CardHeader>
+					<QuoteName>{quote.name}</QuoteName>
 					<ClientName>{customer.name}</ClientName>
 					<DateOfIssue>
 						{issuedAt

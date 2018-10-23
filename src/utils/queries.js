@@ -90,6 +90,7 @@ export const GET_ALL_QUOTES = gql`
 				id
 				quotes {
 					id
+					name
 					customer {
 						name
 					}

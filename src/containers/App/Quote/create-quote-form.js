@@ -15,6 +15,8 @@ import {
 	primaryBlue,
 	primaryNavyBlue,
 	FlexRow,
+	ErrorInput,
+	Label,
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
@@ -72,28 +74,74 @@ class CreateQuoteForm extends React.Component {
 					<Formik
 						initialValues={{
 							customer: '',
-							template: 'WEBSITE',
+							template: '',
 							firstName: '',
 							lastName: '',
 							email: '',
+							quoteTitle: '',
 						}}
-						validationSchema={Yup.object().shape({
-							customer: Yup.string(),
-							template: Yup.string().oneOf([
-								'WEBSITE',
-								'IDENTITY',
-							]),
-							firstName: Yup.string(),
-							lastName: Yup.string(),
-							email: Yup.string().email(),
-						})}
+						validate={(values) => {
+							const errors = {};
+
+							if (!values.customer) {
+								errors.customer = 'Requis';
+							}
+							else {
+								const selectedCustomer
+									= values.customer
+									&& customers.find(
+										c => c.id === values.customer.id,
+									);
+								const newCustomer
+									= !selectedCustomer && values.customer;
+
+								if (newCustomer) {
+									if (!values.firstName) {
+										errors.firstName = 'Requis';
+									}
+									if (!values.lastName) {
+										errors.lastName = 'Requis';
+									}
+									if (!values.address) {
+										errors.address = 'Requis';
+									}
+									if (!values.email) {
+										errors.email = 'Requis';
+									}
+									else if (
+										!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+											values.email,
+										)
+									) {
+										errors.email = 'Email invalide';
+									}
+								}
+							}
+							if (!values.template) {
+								errors.template = 'Requis';
+							}
+							else if (
+								values.template !== 'WEBSITE'
+								&& values.template !== 'IDENTITY'
+								&& values.template !== 'BLANK'
+							) {
+								errors.template = 'Template invalide';
+							}
+							if (!values.quoteTitle) {
+								errors.quoteTitle = 'Requis';
+							}
+
+							return errors;
+						}}
 						onSubmit={async (values, actions) => {
+							actions.setSubmitting(true);
 							const customer = customers.find(
-								c => c.id === values.customer,
+								c => c.id === values.customer.id,
 							);
 
 							const variables = {
 								template: values.template,
+								name: values.quoteTitle,
 							};
 
 							if (customer) {
@@ -101,7 +149,7 @@ class CreateQuoteForm extends React.Component {
 							}
 							else {
 								variables.customer = {
-									name: values.customer,
+									name: values.customer.value,
 									firstName: values.firstName,
 									lastName: values.lastName,
 									email: values.email,
@@ -121,18 +169,39 @@ class CreateQuoteForm extends React.Component {
 
 							variables.option = option;
 
-							const result = await createQuote({
-								variables,
-							});
+							try {
+								const result = await createQuote({
+									variables,
+								});
 
-							onCreate(result.data.createQuote);
+								onCreate(result.data.createQuote);
+								actions.setSubmitting(false);
+							}
+							catch (error) {
+								actions.setSubmitting(false);
+								actions.setErrors(error);
+								actions.setStatus({
+									msg:
+										`Quelque chose ne s'est pas passé comme prévu. ${
+											error}`,
+								});
+							}
 						}}
 					>
 						{(props) => {
-							const {values, setFieldValue} = props;
-							const selectedCustomer = customers.find(
-								c => c.id === props.values.customer,
-							);
+							const {
+								values,
+								setFieldValue,
+								status,
+								isSubmitting,
+								errors,
+								touched,
+							} = props;
+							const selectedCustomer
+								= values.customer
+								&& customers.find(
+									c => c.id === values.customer.id,
+								);
 							const newCustomer
 								= !selectedCustomer && values.customer;
 
@@ -145,10 +214,10 @@ class CreateQuoteForm extends React.Component {
 												<SubTitle>
 													1. Votre client
 												</SubTitle>
-												<label htmlFor="customer">
-													Entrez le nom de votre
-													client
-												</label>
+												<Label>
+													Entrez le nom de
+													l'entreprise de votre client
+												</Label>
 												<Creatable
 													id="customer"
 													name="customer"
@@ -165,17 +234,22 @@ class CreateQuoteForm extends React.Component {
 													onChange={(option) => {
 														setFieldValue(
 															'customer',
-															option
-																&& option.value,
+															option,
 														);
 													}}
 													styles={SelectStyles}
 													value={values.customer}
 													isClearable
-													placeholder="Marc Dubois"
+													placeholder="Dubois SARL"
 													formatCreateLabel={inputValue => `Créer "${inputValue}"`
 													}
 												/>
+												{errors.customer
+													&& touched.customer && (
+													<ErrorInput>
+														{errors.customer}
+													</ErrorInput>
+												)}
 												{!selectedCustomer
 													&& values.customer && (
 													<div>
@@ -192,13 +266,13 @@ class CreateQuoteForm extends React.Component {
 
 														<FormElem
 															{...props}
-															label="Son prénom"
+															label="Le prénom de votre contact"
 															name="firstName"
 															placeholder="John"
 														/>
 														<FormElem
 															{...props}
-															label="Son nom"
+															label="Le nom de votre contact"
 															name="lastName"
 															placeholder="Doe"
 														/>
@@ -214,10 +288,18 @@ class CreateQuoteForm extends React.Component {
 															onChange={
 																props.setFieldValue
 															}
-															name="Son addresse"
+															name="address"
 															placeholder="42 rue du Fer, 75000 Paris"
-															label="Address"
+															label="L'adresse de l'entreprise"
 														/>
+														{errors.address
+																&& touched.address && (
+															<ErrorInput>
+																{
+																	errors.address
+																}
+															</ErrorInput>
+														)}
 													</div>
 												)}
 											</div>
@@ -226,11 +308,14 @@ class CreateQuoteForm extends React.Component {
 												<SubTitle>
 													2. Votre Projet
 												</SubTitle>
-
+												<Label>
+													Nous pouvons pré-remplir
+													votre devis pour vous
+												</Label>
 												<ClassicSelect
 													styles={SelectStyles}
 													defaultValue="WEBSITE"
-													placeholder="Type de contenu"
+													placeholder="Type de devis"
 													onChange={(option) => {
 														setFieldValue(
 															'template',
@@ -240,14 +325,37 @@ class CreateQuoteForm extends React.Component {
 													}}
 													options={quoteTemplates}
 												/>
-												<br />
+												{errors.template
+													&& touched.template && (
+													<ErrorInput>
+														{errors.template}
+													</ErrorInput>
+												)}
+												<FormElem
+													{...props}
+													label="Titre de votre devis"
+													name="quoteTitle"
+													placeholder="Nom du devis"
+												/>
+												{status
+													&& status.msg && (
+													<ErrorInput>
+														{status.msg}
+													</ErrorInput>
+												)}
+
 												<br />
 												<Button
 													type="submit"
-													theme="Primary"
+													theme={
+														isSubmitting
+															? 'Disabled'
+															: 'Primary'
+													}
+													disabled={isSubmitting}
 													size="Large"
 												>
-													Commencer à éditer
+													Créez votre devis
 												</Button>
 											</div>
 										</FlexRow>

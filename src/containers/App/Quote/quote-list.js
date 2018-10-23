@@ -101,7 +101,7 @@ class ListQuotes extends Component {
 										size="Medium"
 										onClick={this.createNewQuote}
 									>
-										Create a new quote
+										Créer un nouveau devis
 									</TopBarButton>
 								</ActionRow>
 							</ListQuotesTopBar>

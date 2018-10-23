@@ -50,7 +50,7 @@ class TextEditor extends Component {
 				'unordered-list-item',
 				'blockquote',
 			],
-			inline: ['BOLD', 'ITALIC', 'UNDERLINE', 'hyperlink'],
+			inline: ['BOLD', 'ITALIC', 'UNDERLINE', 'hyperlink', 'HIGHLIGHT'],
 		};
 		this.state = {editorState: createEditorState(props.currentContent)};
 		this.onChange = (editorState) => {

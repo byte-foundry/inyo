@@ -385,8 +385,6 @@ class EditQuote extends Component {
 				});
 
 				data.quote.options[0].sections.push(addSection);
-				console.log(addSection);
-				console.log(data);
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,

@@ -23,7 +23,7 @@ class FormInput extends Component {
 				value={values[name]}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				error={errors[name]}
+				error={errors[name] && touched[name]}
 			/>
 		);
 	}

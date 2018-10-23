@@ -112,6 +112,7 @@ export const GET_QUOTE_DATA = gql`
 			status
 			customer {
 				name
+				email
 				address {
 					street
 					city

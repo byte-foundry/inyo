@@ -30,11 +30,17 @@ class Task extends Component {
 				name, unit, unitPrice, status, pendingUnit, id,
 			},
 			sectionId,
+			options,
 		} = this.props;
 
 		return (
 			<TaskMain>
-				<TaskStatus status={status} itemId={id} sectionId={sectionId} />
+				<TaskStatus
+					status={status}
+					itemId={id}
+					sectionId={sectionId}
+					options={options}
+				/>
 				<TaskInfo onClick={this.select}>
 					<TaskName>{name}</TaskName>
 					<TaskTime>{pendingUnit || unit}</TaskTime>

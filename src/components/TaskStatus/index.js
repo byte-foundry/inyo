@@ -62,7 +62,9 @@ class TaskStatus extends Component {
 	});
 
 	render() {
-		const {status, sectionId, itemId} = this.props;
+		const {
+			status, sectionId, itemId, options,
+		} = this.props;
 
 		return (
 			<Mutation mutation={FINISH_ITEM}>
@@ -70,7 +72,9 @@ class TaskStatus extends Component {
 					<TaskStatusMain
 						status={status}
 						onClick={() => {
-							this.finishItem(itemId, sectionId, finishItem);
+							if (!options.noValidation) {
+								this.finishItem(itemId, sectionId, finishItem);
+							}
 						}}
 					/>
 				)}
@@ -78,5 +82,9 @@ class TaskStatus extends Component {
 		);
 	}
 }
+
+TaskStatus.defaultProps = {
+	options: {},
+};
 
 export default TaskStatus;

@@ -4,6 +4,8 @@ import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import Select from 'react-select';
+
+import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
 import TextEditor from '../../../components/TextEditor';
 import InlineEditable from '../../../components/InlineEditable';
 import QuoteSection from '../../../components/QuoteSection';
@@ -68,7 +70,6 @@ const ToggleButton = styled('span')`
 	transition: color 0.2s ease, border-color 0.2s ease;
 `;
 const AddOptionButton = styled('button')``;
-const ClientAddress = styled('div')``;
 const QuoteSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
 	min-width: 15vw;
@@ -97,30 +98,6 @@ const QuoteContent = styled('div')`
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 40px;
-`;
-
-const CompanyName = styled(H4)`
-	color: ${primaryNavyBlue};
-	margin: 0;
-	margin-bottom: 10px;
-`;
-
-const ContactName = styled(H5)`
-	color: ${primaryNavyBlue};
-	margin: 0;
-	margin-bottom: 10px;
-`;
-
-const AddressBlock = styled('div')`
-	border-top: 1px solid ${primaryBlue};
-	padding-top: 10px;
-`;
-
-const Address = styled(P)`
-	color: ${primaryBlue};
-	font-size: 11px;
-	margin: 0;
-	margin-bottom: 5px;
 `;
 
 const QuoteAction = styled(Button)`
@@ -697,30 +674,9 @@ class EditQuote extends Component {
 									</QuoteContent>
 								</CenterContent>
 								<SideActions>
-									<ClientAddress>
-										<CompanyName>
-											{quote.customer.name}
-										</CompanyName>
-										<ContactName>
-											{quote.customer.firstName}{' '}
-											{quote.customer.lastName}
-										</ContactName>
-										<AddressBlock>
-											<Address>
-												{quote.customer.address.street}
-											</Address>
-											<Address>
-												{
-													quote.customer.address
-														.postalCode
-												}{' '}
-												{quote.customer.address.city}
-											</Address>
-											<Address>
-												{quote.customer.address.country}
-											</Address>
-										</AddressBlock>
-									</ClientAddress>
+									<CustomerNameAndAddress
+										customer={quote.customer}
+									/>
 									{this.getQuoteTotal(option)}
 								</SideActions>
 							</FlexRow>

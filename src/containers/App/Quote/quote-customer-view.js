@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
+import {Query} from 'react-apollo';
 import {FlexRow, FlexColumn, H1} from '../../../utils/content';
 
+import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
+
 import TasksProgressBar from '../../../components/TasksProgressBar';
-import TasksList from '../../../components/TasksList';
+import Section from '../../../components/Section';
+import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
+import IssuerNameAndAddress from '../../../components/IssuerNameAndAddress';
 
 const TasksListUserMain = styled('div')``;
 const TLTopBar = styled(FlexRow)``;
@@ -15,66 +20,70 @@ const TLTimeIndicators = styled(FlexColumn)``;
 const TLTimeLabel = styled('div')``;
 const TLTimeValue = styled('div')``;
 
-const tasksListStatic = [
-	{
-		id: 1,
-		name: 'Task',
-		time: 2,
-		price: 1337,
-		status: 'FINISHED',
-	},
-	{
-		id: 2,
-		name: 'Task 2',
-		time: 0.5,
-		price: 137,
-		status: 'FINISHED',
-	},
-	{
-		id: 3,
-		name: 'Task 3',
-		time: 1,
-		price: 337,
-		status: 'UPDATED',
-	},
-	{
-		id: 4,
-		name: 'Task 4',
-		time: 2,
-		price: 1337,
-		status: 'UPDATED_SENT',
-	},
-	{
-		id: 5,
-		name: 'Task 4',
-		time: 2,
-		price: 1337,
-		status: 'PENDING',
-	},
-];
-
-const quote = {
-	customer: {
-		name: 'Yolo Inc.',
-		email: 'roger@yolo.head',
-	},
-	projectName: 'Yolo website',
-	tasks: tasksListStatic,
-};
+const SideActions = styled(FlexColumn)`
+	min-width: 15vw;
+	padding: 20px 40px;
+`;
 
 class TasksListUser extends Component {
 	render() {
-		const {customer, tasks, projectName} = quote;
-		const timePlanned = tasks.reduce((acc, task) => acc + task.time, 0);
+		const {quoteId, customerToken} = this.props.match.params;
 
 		return (
-			<TasksListUserMain>
-				<FlexRow>
-					<H1>{projectName}</H1>
-					<TasksProgressBar tasksCompleted={1} tasksTotal={5} />
-					<TasksList tasks={tasksListStatic} />
-				</FlexRow>
-			</TasksListUserMain>
+			<Query
+				query={GET_QUOTE_DATA_WITH_TOKEN}
+				variables={{quoteId, token: customerToken}}
+			>
+				{({loading, error, data}) => {
+					if (loading) return <p>Loading</p>;
+					if (error) return <p>Error!: ${error.toString()}</p>;
+
+					const {
+						quote: {
+							name,
+							customer,
+							issuer,
+							options: [{sections}],
+						},
+					} = data;
+
+					const customerOptions = {
+						noAddItem: true,
+						noValidation: true,
+						noItemEdition: true,
+					};
+
+					const sectionsElems = sections.map(section => (
+						<Section
+							items={section.items}
+							name={section.name}
+							id={section.id}
+							options={customerOptions}
+						/>
+					));
+
+					return (
+						<TasksListUserMain>
+							<H1>{name}</H1>
+							<TasksProgressBar
+								tasksCompleted={1}
+								tasksTotal={5}
+							/>
+							<FlexRow>
+								<SideActions>
+									<IssuerNameAndAddress issuer={issuer} />
+								</SideActions>
+								<FlexColumn>{sectionsElems}</FlexColumn>
+								<SideActions>
+									<CustomerNameAndAddress
+										customer={customer}
+									/>
+								</SideActions>
+							</FlexRow>
+						</TasksListUserMain>
+					);
+				}}
+			</Query>
 		);
 	}
 }

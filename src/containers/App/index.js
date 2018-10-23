@@ -11,6 +11,7 @@ import Account from './Account';
 import Customer from './Customer';
 import Quote from './Quote';
 import Company from './Company';
+import QuoteCustomerView from './Quote/quote-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
 
@@ -46,7 +47,15 @@ class App extends Component {
 								<Route path="/app/quotes" component={Quote} />
 								<Redirect to="/app" />
 							</Switch>
-							{error && <Redirect to="/app/auth" />}
+							{error && (
+								<Switch>
+									<Route
+										path="/app/quotes/:quoteId/view/:customerToken"
+										component={QuoteCustomerView}
+									/>
+									<Redirect to="/app/auth" />
+								</Switch>
+							)}
 						</AppMain>
 					);
 				}}

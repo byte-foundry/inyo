@@ -59,8 +59,6 @@ class TasksListUser extends Component {
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
 				{({loading, error, data}) => {
-					const fetchedData = {...data};
-
 					if (loading) return <p>Loading</p>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {

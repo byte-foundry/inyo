@@ -21,10 +21,6 @@ class Quote extends Component {
 						component={QuoteSee}
 					/>
 					<Route
-						path="/app/quotes/view/:quoteId/:customerToken"
-						component={QuoteCustomerView}
-					/>
-					<Route
 						path="/app/quotes/:quoteId/edit/"
 						component={QuoteEdit}
 					/>

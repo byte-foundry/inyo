@@ -17,9 +17,11 @@ class TaskSeeOrForm extends Component {
 	}
 
 	selectTask = (id) => {
-		this.setState({
-			selected: true,
-		});
+		if (!this.props.options.noItemEdition) {
+			this.setState({
+				selected: true,
+			});
+		}
 	};
 
 	unselectTask = () => {
@@ -77,7 +79,7 @@ class TaskSeeOrForm extends Component {
 	};
 
 	render() {
-		const {task, sectionId} = this.props;
+		const {task, sectionId, options} = this.props;
 		const {selected} = this.state;
 
 		const taskElem = selected ? (
@@ -88,11 +90,20 @@ class TaskSeeOrForm extends Component {
 				unselect={this.unselectTask}
 			/>
 		) : (
-			<Task task={task} select={this.selectTask} sectionId={sectionId} />
+			<Task
+				task={task}
+				select={this.selectTask}
+				sectionId={sectionId}
+				options={options}
+			/>
 		);
 
 		return <TaskSeeOrFormMain>{taskElem}</TaskSeeOrFormMain>;
 	}
 }
+
+TaskSeeOrForm.defaultProps = {
+	options: {},
+};
 
 export default TaskSeeOrForm;

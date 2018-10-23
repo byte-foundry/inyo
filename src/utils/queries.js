@@ -141,3 +141,52 @@ export const GET_QUOTE_DATA = gql`
 		}
 	}
 `;
+
+export const GET_QUOTE_DATA_WITH_TOKEN = gql`
+	query getQuoteData($quoteId: ID!, $token: String) {
+		quote(id: $quoteId, token: $token) {
+			id
+			template
+			name
+			issuer {
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				siret
+			}
+			customer {
+				name
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
+			options {
+				id
+				name
+				proposal
+				sections {
+					id
+					name
+					items {
+						status
+						id
+						name
+						unitPrice
+						unit
+						pendingUnit
+						vatRate
+						description
+					}
+				}
+			}
+		}
+	}
+`;

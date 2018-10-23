@@ -45,10 +45,12 @@ class TasksList extends Component {
 	};
 
 	render() {
-		const {tasks} = this.props;
+		const {tasks, options} = this.props;
 		const {selectedTask, addingItem} = this.state;
 
-		const tasksList = tasks.map(task => <TaskSeeOrForm task={task} />);
+		const tasksList = tasks.map(task => (
+			<TaskSeeOrForm task={task} options={options} />
+		));
 
 		const addItem = addingItem && (
 			<TaskForm task={{}} cancel={this.removeAddItem} />
@@ -58,10 +60,18 @@ class TasksList extends Component {
 			<TasksListMain>
 				{tasksList}
 				{addItem}
-				<Button onClick={this.addItem}>Add Item</Button>
+				{options.noAddItem ? (
+					false
+				) : (
+					<Button onClick={this.addItem}>Add Item</Button>
+				)}
 			</TasksListMain>
 		);
 	}
 }
+
+TasksList.defaultProps = {
+	options: {},
+};
 
 export default TasksList;

@@ -574,7 +574,20 @@ export const templates = [
 	{
 		name: 'IDENTITY',
 		label: 'Identité visuelle',
-		proposal: {},
+		proposal: {
+			blocks: [
+				{
+					key: 'bhdp7',
+					text: '',
+					type: 'unstyled',
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [],
+					data: {},
+				},
+			],
+			entityMap: {},
+		},
 		sections: [
 			{
 				name: 'Pré-projet',

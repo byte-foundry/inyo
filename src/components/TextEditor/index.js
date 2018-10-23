@@ -56,6 +56,7 @@ class TextEditor extends Component {
 		this.onChange = (editorState) => {
 			this.props.onChange(convertToRaw(editorState.getCurrentContent()));
 			this.setState({editorState});
+			console.log(convertToRaw(editorState.getCurrentContent()));
 		};
 	}
 

@@ -39,12 +39,58 @@ export const SIGNUP = gql`
 	}
 `;
 
+export const UPDATE_USER = gql`
+	mutation UpdateUser($firstName: String, $lastName: String, $email: String) {
+		updateUser(firstName: $firstName, lastName: $lastName, email: $email) {
+			id
+			email
+			firstName
+			lastName
+			company {
+				id
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				phone
+				siret
+				rcs
+				rm
+				vat
+			}
+		}
+	}
+`;
+
 /** ******** COMPANY MUTATIONS ********* */
 
 export const UPDATE_USER_COMPANY = gql`
-	mutation UpdateUserCompany($todo: String) {
-		updateCompany(todo: $todo) {
+	mutation UpdateUser($company: CompanyInput) {
+		updateUser(company: $company) {
 			id
+			email
+			firstName
+			lastName
+			company {
+				id
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				phone
+				siret
+				rcs
+				rm
+				vat
+			}
 		}
 	}
 `;
@@ -58,7 +104,6 @@ export const CREATE_CUSTOMER = gql`
 		}
 	}
 `;
-
 /** ******** QUOTE MUTATIONS ********* */
 
 export const EDIT_ITEMS = gql`

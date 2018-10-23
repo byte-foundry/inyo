@@ -5,6 +5,11 @@ import FormInput from '../FormInput';
 
 import {P, Label, ErrorInput} from '../../utils/content';
 
+const FormElemMain = styled(P)`
+	width: 100%;
+	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
+`;
+
 class FormElem extends Component {
 	render() {
 		const {
@@ -18,10 +23,11 @@ class FormElem extends Component {
 			errors,
 			touched,
 			required,
+			padded,
 		} = this.props;
 
 		return (
-			<P>
+			<FormElemMain padded={padded}>
 				<Label htmlFor={name} required={required}>
 					{label}
 				</Label>
@@ -41,7 +47,7 @@ class FormElem extends Component {
 						{errors[name]}
 					</ErrorInput>
 				)}
-			</P>
+			</FormElemMain>
 		);
 	}
 }

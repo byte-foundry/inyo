@@ -2,17 +2,32 @@ import React, {Component} from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
 import styled from 'react-emotion';
 
-import {P, Label} from '../../utils/content';
+import {P, Label, ErrorInput} from '../../utils/content';
+
+const AddressAutocompleteMain = styled(P)`
+	width: fill-available;
+	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
+`;
 
 class AddressAutocomplete extends Component {
 	render() {
 		const {
-			onChange, name, placeholder, values, label,
+			onChange,
+			name,
+			placeholder,
+			values,
+			label,
+			padded,
+			required,
+			errors,
+			touched,
 		} = this.props;
 
 		return (
-			<P>
-				<Label htmlFor={name}>{label}</Label>
+			<AddressAutocompleteMain padded={padded}>
+				<Label htmlFor={name} required={required}>
+					{label}
+				</Label>
 				<AlgoliaPlaces
 					placeholder={placeholder}
 					options={{
@@ -27,6 +42,7 @@ class AddressAutocomplete extends Component {
 						suggestion,
 						suggestionIndex,
 					}) => {
+						console.log('onChange');
 						onChange(name, {
 							street: suggestion.name,
 							city: suggestion.city,
@@ -46,7 +62,13 @@ class AddressAutocomplete extends Component {
 					onError={({message}) => console.err(message)}
 					value={values[name]}
 				/>
-			</P>
+				{errors[name]
+					&& touched[name] && (
+					<ErrorInput className="input-feedback">
+						{errors[name]}
+					</ErrorInput>
+				)}
+			</AddressAutocompleteMain>
 		);
 	}
 }

@@ -231,7 +231,7 @@ class CreateQuoteForm extends React.Component {
 												<SubTitle>
 													1. Votre client
 												</SubTitle>
-												<Label>
+												<Label required>
 													Entrez le nom de
 													l'entreprise de votre client
 												</Label>
@@ -286,6 +286,7 @@ class CreateQuoteForm extends React.Component {
 															label="Le prénom de votre contact"
 															name="firstName"
 															placeholder="John"
+															required
 														/>
 														<FormElem
 															{...props}
@@ -298,6 +299,7 @@ class CreateQuoteForm extends React.Component {
 															label="Son email"
 															name="email"
 															placeholder="contact@company.com"
+															required
 														/>
 
 														<AddressAutocomplete
@@ -306,17 +308,10 @@ class CreateQuoteForm extends React.Component {
 																props.setFieldValue
 															}
 															name="address"
-															placeholder="42 rue du Fer, 75000 Paris"
+															placeholder=""
 															label="L'adresse de l'entreprise"
+															required
 														/>
-														{errors.address
-																&& touched.address && (
-															<ErrorInput>
-																{
-																	errors.address
-																}
-															</ErrorInput>
-														)}
 													</div>
 												)}
 											</div>
@@ -349,6 +344,7 @@ class CreateQuoteForm extends React.Component {
 													</ErrorInput>
 												)}
 												<FormElem
+													required
 													{...props}
 													label="Titre de votre devis"
 													name="quoteTitle"

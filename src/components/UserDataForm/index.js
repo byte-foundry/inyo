@@ -3,8 +3,7 @@ import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import AddressAutocomplete from '../AddressAutocomplete';
-import {UPDATE_USER_COMPANY} from '../../utils/mutations';
+import {UPDATE_USER} from '../../utils/mutations';
 import {
 	Button,
 	FlexRow,
@@ -12,10 +11,10 @@ import {
 	gray20,
 	ErrorInput,
 } from '../../utils/content';
-import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
+import {GET_USER_INFOS} from '../../utils/queries';
 
-const UserCompanyFormMain = styled('div')``;
+const UserDataFormMain = styled('div')``;
 
 const FormContainer = styled('div')``;
 const ProfileSection = styled('div')`
@@ -30,37 +29,30 @@ const UpdateButton = styled(Button)`
 	margin-right: auto;
 `;
 
-class UserCompanyForm extends Component {
+class UserDataForm extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
-		const {
-			name, address, phone, siret, rcs, rm, vat,
-		} = this.props.data;
+		const {firstName, lastName, email} = this.props.data;
 
-		console.log(name);
 		return (
-			<UserCompanyFormMain>
-				<Mutation mutation={UPDATE_USER_COMPANY}>
+			<UserDataFormMain>
+				<Mutation mutation={UPDATE_USER}>
 					{updateUser => (
 						<Formik
 							initialValues={{
-								name: name || '',
-								phone: phone || '',
-								siret: siret || '',
-								rcs: rcs || '',
-								rm: rm || '',
-								vat: vat || '',
+								firstName,
+								lastName,
+								email,
 							}}
 							validationSchema={Yup.object().shape({
-								name: Yup.string().required('Requis'),
-								phone: Yup.string(),
-								siret: Yup.string().required('Requis'),
-								rcs: Yup.string(),
-								rm: Yup.string(),
-								vat: Yup.string(),
+								email: Yup.string()
+									.email('Email invalide')
+									.required('Requis'),
+								firstName: Yup.string().required('Requis'),
+								lastName: Yup.string().required('Requis'),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -68,7 +60,9 @@ class UserCompanyForm extends Component {
 								try {
 									updateUser({
 										variables: {
-											company: values,
+											firstName: values.firstName,
+											lastName: values.lastName,
+											email: values.email,
 										},
 										update: (
 											cache,
@@ -103,6 +97,7 @@ class UserCompanyForm extends Component {
 						>
 							{(props) => {
 								const {
+									values,
 									dirty,
 									isSubmitting,
 									status,
@@ -118,70 +113,35 @@ class UserCompanyForm extends Component {
 												<FlexRow justifyContent="space-between">
 													<FormElem
 														{...props}
-														name="name"
+														name="firstName"
 														type="text"
-														label="Raison sociale"
-														placeholder="Bertrand SA"
+														label="Prénom"
+														placeholder="Jacques"
 														padded
 														required
 													/>
 													<FormElem
 														{...props}
-														name="siret"
+														name="lastName"
 														type="text"
-														label="Siret"
-														placeholder="123456824"
+														label="Nom"
+														placeholder="Bertrand"
 														padded
 														required
 													/>
 												</FlexRow>
-												<AddressAutocomplete
-													{...props}
-													onChange={setFieldValue}
-													name="address"
-													placeholder=""
-													label="Adresse de la société"
-													padded
-													required
-												/>
 												<FlexRow justifyContent="space-between">
 													<FormElem
 														{...props}
-														name="phone"
-														type="tel"
-														label="Numéro de téléphone"
-														placeholder="0427..."
+														name="email"
+														type="email"
+														label="Email"
+														placeholder="jacques@bertrandsa.com"
 														padded
-													/>
-													<FormElem
-														{...props}
-														name="rcs"
-														type="text"
-														label="RCS"
-														placeholder="RCS Paris  654 987 321"
-														padded
-													/>
-												</FlexRow>
-												<FlexRow justifyContent="space-between">
-													<FormElem
-														{...props}
-														name="rm"
-														type="text"
-														label="RM"
-														placeholder="RM 123"
-														padded
-													/>
-													<FormElem
-														{...props}
-														name="vat"
-														type="text"
-														label="N° TVA"
-														placeholder="FR 40 123456824"
-														padded
+														required
 													/>
 												</FlexRow>
 											</FormContainer>
-
 											{status
 												&& status.msg && (
 												<ErrorInput>
@@ -202,9 +162,9 @@ class UserCompanyForm extends Component {
 						</Formik>
 					)}
 				</Mutation>
-			</UserCompanyFormMain>
+			</UserDataFormMain>
 		);
 	}
 }
 
-export default UserCompanyForm;
+export default UserDataForm;

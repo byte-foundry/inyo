@@ -5,7 +5,6 @@ import styled from 'react-emotion';
 import {FlexRow} from '../../utils/content.js';
 
 import TaskStatus from '../TaskStatus';
-import CommentModal from '../CommentModal';
 
 const TaskMain = styled(FlexRow)`
 	border: solid 1px;
@@ -42,7 +41,11 @@ class Task extends Component {
 			task: {id},
 		} = this.props;
 
-		this.props.history.push(`${customerToken}/comments/${id}`);
+		this.props.history.push(
+			`/app/quotes/${this.props.match.params.quoteId}/view/${
+				this.props.match.params.customerToken
+			}/comments/${id}`,
+		);
 	};
 
 	render() {

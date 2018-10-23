@@ -111,6 +111,7 @@ class TasksListUser extends Component {
 										<FlexColumn>{sectionsElems}</FlexColumn>
 									) : (
 										<TextEditor
+											editorEnabled={false}
 											currentContent={proposal}
 											onChange={() => {}}
 										/>

@@ -23,6 +23,7 @@ export const gray20 = '#f4f5f7';
 export const gray30 = '#4d4d4d';
 export const gray70 = '#b3b3b3';
 export const gray80 = '#cccccc';
+export const alpha10 = 'rgba(0, 0, 0, 0.1)';
 export const signalGreen = '#36b37e';
 export const signalOrange = '#ffab00';
 export const signalRed = '#ff5630';
@@ -307,4 +308,35 @@ export const ToggleButton = styled('span')`
 	border-bottom: 4px solid
 		${props => (props.active ? primaryBlue : 'transparent')};
 	transition: color 0.2s ease, border-color 0.2s ease;
+`;
+
+export const ModalContainer = styled('div')`
+	position: fixed;
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: center;
+	align-items: center;
+	background: ${alpha10};
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+`;
+
+export const ModalElem = styled('div')`
+	flex: 0 50vw;
+	background: ${primaryWhite};
+	width: 50vw;
+	position: relative;
+	padding-bottom: 30px;
+`;
+
+export const ModalCloseIcon = styled('div')`
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background: ${gray80};
+	width: 40px;
+	height: 40px;
 `;

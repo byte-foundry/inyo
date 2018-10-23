@@ -70,6 +70,7 @@ class TextEditor extends Component {
 		return (
 			<TextEditorMain onClick={this.focusEditor}>
 				<Editor
+					editorEnabled={this.props.editorEnabled}
 					editorState={this.state.editorState}
 					onChange={this.onChange}
 					sideButtons={this.sideButtons}

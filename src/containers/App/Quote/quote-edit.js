@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
+import {ToastContainer, toast} from 'react-toastify';
 import Select from 'react-select';
 import TextEditor from '../../../components/TextEditor';
 import InlineEditable from '../../../components/InlineEditable';
@@ -15,7 +16,7 @@ import {
 	UPDATE_OPTION,
 	SEND_QUOTE,
 } from '../../../utils/mutations';
-import {GET_QUOTE_DATA} from '../../../utils/queries';
+import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
 import {
 	H1,
 	H3,
@@ -34,6 +35,8 @@ import {
 	secondaryLightBlue,
 	gray50,
 } from '../../../utils/content';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditQuoteMain = styled('div')`
 	min-height: 100vh;
@@ -171,6 +174,13 @@ class EditQuote extends Component {
 		};
 	}
 
+	toast = () => {
+		toast.success('📬 Le devis a été envoyé !', {
+			position: toast.POSITION.TOP_RIGHT,
+			autoClose: 3000,
+		});
+	};
+
 	setQuoteData = (templateName, EditItems) => {
 		const templateData = templates.find(e => e.name === templateName);
 
@@ -206,7 +216,24 @@ class EditQuote extends Component {
 		sendQuote({
 			variables: {quoteId},
 			update: (cache, {data: {sendQuote}}) => {
-				this.props.router.push('/app/quotes');
+				const data = cache.readQuery({
+					query: GET_ALL_QUOTES,
+				});
+				const updatedQuote = data.me.company.quotes.find(
+					quote => quote.id === sendQuote.id,
+				);
+
+				updatedQuote.status = sendQuote.status;
+				try {
+					cache.writeQuery({
+						query: GET_ALL_QUOTES,
+						data,
+					});
+					this.toast();
+				}
+				catch (e) {
+					console.log(e);
+				}
 			},
 		});
 	};
@@ -492,6 +519,7 @@ class EditQuote extends Component {
 
 					return (
 						<EditQuoteMain>
+							<ToastContainer />
 							<BackButton
 								theme="Link"
 								size="XSmall"
@@ -504,22 +532,24 @@ class EditQuote extends Component {
 								<EditQuoteTitle>
 									Remplissez votre devis
 								</EditQuoteTitle>
-								<Mutation mutation={SEND_QUOTE}>
-									{sendQuote => (
-										<SendQuoteButton
-											theme="Primary"
-											size="Medium"
-											onClick={() => {
-												this.sendQuote(
-													quote.id,
-													sendQuote,
-												);
-											}}
-										>
-											Envoyez la proposition
-										</SendQuoteButton>
-									)}
-								</Mutation>
+								{quote.status === 'DRAFT' && (
+									<Mutation mutation={SEND_QUOTE}>
+										{sendQuote => (
+											<SendQuoteButton
+												theme="Primary"
+												size="Medium"
+												onClick={() => {
+													this.sendQuote(
+														quote.id,
+														sendQuote,
+													);
+												}}
+											>
+												Envoyez la proposition
+											</SendQuoteButton>
+										)}
+									</Mutation>
+								)}
 							</QuoteRow>
 							<QuoteRow justifyContent="space-between">
 								<QuoteName>

@@ -21,6 +21,7 @@ import {
 import FormElem from '../../../components/FormElem';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
 import {CREATE_QUOTE} from '../../../utils/mutations';
+import {GET_ALL_QUOTES} from '../../../utils/queries';
 
 const Title = styled(H1)`
 	color: ${primaryNavyBlue};
@@ -172,6 +173,24 @@ class CreateQuoteForm extends React.Component {
 							try {
 								const result = await createQuote({
 									variables,
+									update: (cache, {data: {createQuote}}) => {
+										const data = cache.readQuery({
+											query: GET_ALL_QUOTES,
+										});
+
+										data.me.company.quotes.push(
+											createQuote,
+										);
+										try {
+											cache.writeQuery({
+												query: GET_ALL_QUOTES,
+												data,
+											});
+										}
+										catch (e) {
+											console.log(e);
+										}
+									},
 								});
 
 								onCreate(result.data.createQuote);
@@ -181,9 +200,7 @@ class CreateQuoteForm extends React.Component {
 								actions.setSubmitting(false);
 								actions.setErrors(error);
 								actions.setStatus({
-									msg:
-										`Quelque chose ne s'est pas passé comme prévu. ${
-											error}`,
+									msg: `Quelque chose ne s'est pas passé comme prévu. ${error}`,
 								});
 							}
 						}}

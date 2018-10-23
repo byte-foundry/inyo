@@ -86,6 +86,14 @@ export const CREATE_QUOTE = gql`
 			name: $name
 		) {
 			id
+			name
+			customer {
+				name
+			}
+			issuedAt
+			createdAt
+			status
+			total
 		}
 	}
 `;
@@ -103,6 +111,7 @@ export const SEND_QUOTE = gql`
 	mutation sendQuote($quoteId: ID!) {
 		sendQuote(id: $quoteId) {
 			id
+			status
 		}
 	}
 `;

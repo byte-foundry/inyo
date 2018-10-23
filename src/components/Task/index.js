@@ -14,6 +14,7 @@ const TaskName = styled('label')`
 `;
 const TaskTime = styled('label')``;
 const TaskPrice = styled('label')``;
+const TaskInfo = styled(FlexRow)``;
 
 class Task extends Component {
 	select = () => {
@@ -24,21 +25,24 @@ class Task extends Component {
 		const {
 			selected,
 			task: {
-				name, unit, unitPrice, status, pendingUnit,
+				name, unit, unitPrice, status, pendingUnit, id,
 			},
+			sectionId,
 		} = this.props;
 
 		return (
-			<TaskMain onClick={this.select}>
-				<TaskStatus status={status} />
-				<TaskName>{name}</TaskName>
-				<TaskTime>{pendingUnit || unit}</TaskTime>
-				<TaskPrice>
-					{unitPrice.toLocaleString(undefined, {
-						currency: 'EUR',
-						minimumFractionDigits: 2,
-					})}
-				</TaskPrice>
+			<TaskMain>
+				<TaskStatus status={status} itemId={id} sectionId={sectionId} />
+				<TaskInfo onClick={this.select}>
+					<TaskName>{name}</TaskName>
+					<TaskTime>{pendingUnit || unit}</TaskTime>
+					<TaskPrice>
+						{unitPrice.toLocaleString(undefined, {
+							currency: 'EUR',
+							minimumFractionDigits: 2,
+						})}
+					</TaskPrice>
+				</TaskInfo>
 			</TaskMain>
 		);
 	}

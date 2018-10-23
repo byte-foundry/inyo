@@ -88,7 +88,7 @@ class TaskSeeOrForm extends Component {
 				unselect={this.unselectTask}
 			/>
 		) : (
-			<Task task={task} select={this.selectTask} />
+			<Task task={task} select={this.selectTask} sectionId={sectionId} />
 		);
 
 		return <TaskSeeOrFormMain>{taskElem}</TaskSeeOrFormMain>;

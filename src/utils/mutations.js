@@ -194,6 +194,9 @@ export const UPDATE_ITEM = gql`
 `;
 
 export const UPDATE_VALIDATED_ITEM = gql`
+	# update an item that is in a VALIDATED quote
+	# the item status is passed to UPDATED
+	# and pendingUnit is filled with the value passed
 	mutation updateValidatedItem(
 		$itemId: ID!
 		$unit: Float!
@@ -218,6 +221,15 @@ export const UPDATE_VALIDATED_ITEM = gql`
 					}
 				}
 			}
+		}
+	}
+`;
+
+export const FINISH_ITEM = gql`
+	mutation finishItem($itemId: ID!) {
+		finishItem(id: $itemId) {
+			id
+			status
 		}
 	}
 `;

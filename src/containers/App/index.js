@@ -53,6 +53,10 @@ class App extends Component {
 										path="/app/quotes/:quoteId/view/:customerToken"
 										component={QuoteCustomerView}
 									/>
+									<Route
+										path="/app/quotes/:quoteId/view/:customerToken/comments/:itemId"
+										component={QuoteCustomerView}
+									/>
 									<Redirect to="/app/auth" />
 								</Switch>
 							)}

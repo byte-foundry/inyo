@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {Route} from 'react-router-dom';
 
 import {Query} from 'react-apollo';
 import {FlexRow, FlexColumn, H1} from '../../../utils/content';
@@ -10,6 +11,7 @@ import TasksProgressBar from '../../../components/TasksProgressBar';
 import Section from '../../../components/Section';
 import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
 import IssuerNameAndAddress from '../../../components/IssuerNameAndAddress';
+import CommentModal from '../../../components/CommentModal';
 
 const TasksListUserMain = styled('div')``;
 const TLTopBar = styled(FlexRow)``;
@@ -51,6 +53,7 @@ class TasksListUser extends Component {
 						noAddItem: true,
 						noValidation: true,
 						noItemEdition: true,
+						seeCommentsNotification: true,
 					};
 
 					const sectionsElems = sections.map(section => (
@@ -80,6 +83,12 @@ class TasksListUser extends Component {
 									/>
 								</SideActions>
 							</FlexRow>
+							<Route
+								path={`${
+									this.props.match.path
+								}/comments/:itemId`}
+								component={CommentModal}
+							/>
 						</TasksListUserMain>
 					);
 				}}

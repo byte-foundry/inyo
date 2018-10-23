@@ -181,10 +181,35 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 						name
 						unitPrice
 						unit
+						comments {
+							id
+							#readByCustomer
+						}
 						pendingUnit
 						vatRate
 						description
 					}
+				}
+			}
+		}
+	}
+`;
+
+/** ******** COMMENT QUERIES ********* */
+export const GET_COMMENTS_CONTENT = gql`
+	query getCommentsFromItemId($itemId: ID!, $token: String) {
+		itemComments(itemId: $itemId, token: $token) {
+			id
+			text
+			author {
+				... on User {
+					firstName
+					lastName
+				}
+				... on Customer {
+					firstName
+					lastName
+					name
 				}
 			}
 		}

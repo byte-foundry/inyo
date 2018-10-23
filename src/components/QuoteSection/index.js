@@ -48,6 +48,7 @@ class QuoteSection extends Component {
 			editItem,
 			sectionIndex,
 			removeItem,
+			mode,
 		} = this.props;
 
 		return (
@@ -71,38 +72,43 @@ class QuoteSection extends Component {
 							)}
 						</Mutation>
 					</SectionTitle>
-					<div>
-						<Mutation mutation={REMOVE_SECTION}>
-							{removeSection => (
-								<QuoteAction
-									theme="Link"
-									size="XSmall"
-									type="delete"
-									onClick={() => {
-										this.props.removeSection(
-											data.id,
-											removeSection,
-										);
-									}}
-								>
-									Supprimer la section
-								</QuoteAction>
-							)}
-						</Mutation>
-						<Mutation mutation={ADD_ITEM}>
-							{addItem => (
-								<QuoteAction
-									theme="Link"
-									size="XSmall"
-									onClick={() => {
-										this.props.addItem(data.id, addItem);
-									}}
-								>
-									Ajouter une tâche
-								</QuoteAction>
-							)}
-						</Mutation>
-					</div>
+					{mode === 'edit' && (
+						<div>
+							<Mutation mutation={REMOVE_SECTION}>
+								{removeSection => (
+									<QuoteAction
+										theme="Link"
+										size="XSmall"
+										type="delete"
+										onClick={() => {
+											this.props.removeSection(
+												data.id,
+												removeSection,
+											);
+										}}
+									>
+										Supprimer la section
+									</QuoteAction>
+								)}
+							</Mutation>
+							<Mutation mutation={ADD_ITEM}>
+								{addItem => (
+									<QuoteAction
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.addItem(
+												data.id,
+												addItem,
+											);
+										}}
+									>
+										Ajouter une tâche
+									</QuoteAction>
+								)}
+							</Mutation>
+						</div>
+					)}
 				</FlexRow>
 
 				{data.items.map((item, index) => (
@@ -112,6 +118,7 @@ class QuoteSection extends Component {
 						sectionId={data.id}
 						editItem={editItem}
 						removeItem={removeItem}
+						mode={mode}
 					/>
 				))}
 			</QuoteSectionMain>

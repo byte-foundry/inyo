@@ -28,9 +28,11 @@ class FormElem extends Component {
 
 		return (
 			<FormElemMain padded={padded}>
-				<Label htmlFor={name} required={required}>
-					{label}
-				</Label>
+				{this.props.label && (
+					<Label htmlFor={name} required={required}>
+						{label}
+					</Label>
+				)}
 				<FormInput
 					name={name}
 					placeholder={placeholder}

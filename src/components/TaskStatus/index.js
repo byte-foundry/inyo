@@ -5,17 +5,23 @@ import {Mutation} from 'react-apollo';
 import {FINISH_ITEM} from '../../utils/mutations.js';
 import {GET_QUOTE_DATA} from '../../utils/queries.js';
 
-const TaskStatusMain = styled('div')`
-	width: 50px;
-	height: 50px;
-	background-image: url(${props => taskImageByStatus[props.status]});
+import PENDING from './pending.svg';
+import FINISHED from './finished.svg';
+import UPDATED from './updated.svg';
+import UPDATED_SENT from './updated_sent.svg';
+
+const TaskStatusMain = styled('div')``;
+
+const Status = styled('img')`
+	width: 30px;
+	height: auto;
 `;
 
 const taskImageByStatus = {
-	PENDING: require('./pending.svg'),
-	FINISHED: require('./finished.svg'),
-	UPDATED: require('./updated.svg'),
-	UPDATED_SENT: require('./updated_sent.svg'),
+	PENDING,
+	FINISHED,
+	UPDATED,
+	UPDATED_SENT,
 };
 
 class TaskStatus extends Component {
@@ -63,28 +69,25 @@ class TaskStatus extends Component {
 
 	render() {
 		const {
-			status, sectionId, itemId, options,
+			status, sectionId, itemId, mode,
 		} = this.props;
 
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItem => (
 					<TaskStatusMain
-						status={status}
 						onClick={() => {
-							if (!options.noValidation) {
+							if (mode === 'see') {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
 						}}
-					/>
+					>
+						<Status src={taskImageByStatus[status]} />
+					</TaskStatusMain>
 				)}
 			</Mutation>
 		);
 	}
 }
-
-TaskStatus.defaultProps = {
-	options: {},
-};
 
 export default TaskStatus;

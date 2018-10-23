@@ -219,6 +219,8 @@ export const ADD_ITEM = gql`
 			unit
 			vatRate
 			description
+			pendingUnit
+			status
 		}
 	}
 `;

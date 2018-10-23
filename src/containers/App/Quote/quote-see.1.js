@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation, Query} from 'react-apollo';
-import Section from '../../../components/Section';
 
 import {
 	FlexRow, FlexColumn, H1, Button,
@@ -10,8 +9,7 @@ import {GET_QUOTE_DATA} from '../../../utils/queries';
 import {SEND_AMENDMENT} from '../../../utils/mutations';
 
 import TasksProgressBar from '../../../components/TasksProgressBar';
-
-import QuoteDisplay from '../../../components/QuoteDisplay';
+import Section from '../../../components/Section';
 
 const TasksListUserMain = styled('div')``;
 const TLTopBar = styled(FlexRow)``;
@@ -28,7 +26,7 @@ const TLTimeValue = styled('div')`
 	color: ${props => (props.warning ? 'red' : 'black')};
 `;
 
-class TasksListUser extends Component {
+class TasksListUserLegacy extends Component {
 	sendAmendment = async (quoteId, sendAmendment) => sendAmendment({
 		variables: {
 			quoteId,
@@ -63,9 +61,14 @@ class TasksListUser extends Component {
 				{({loading, error, data}) => {
 					if (loading) return <p>Loading</p>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
-					const {quote} = data;
-					const option = quote.options[0];
-					const timePlanned = option.sections.reduce(
+					const {
+						quote: {
+							options: [{sections}],
+							customer,
+							name,
+						},
+					} = data;
+					const timePlanned = sections.reduce(
 						(timeSectionSum, section) => timeSectionSum
 							+ section.items.reduce(
 								(itemSum, item) => itemSum + item.unit,
@@ -73,7 +76,7 @@ class TasksListUser extends Component {
 							),
 						0,
 					);
-					const amendmentEnabled = option.sections.reduce(
+					const amendmentEnabled = sections.reduce(
 						(isSectionUpdated, section) => isSectionUpdated
 							|| section.items.reduce(
 								(isItemUpdated, item) => isItemUpdated || item.unit,
@@ -81,7 +84,7 @@ class TasksListUser extends Component {
 							),
 						false,
 					);
-					const overtime = option.sections.reduce(
+					const overtime = sections.reduce(
 						(sectionOvertime, section) => sectionOvertime
 							+ section.items.reduce(
 								(itemOvertime, item) => itemOvertime
@@ -93,7 +96,7 @@ class TasksListUser extends Component {
 						0,
 					);
 
-					const sectionsElems = option.sections.map(section => (
+					const sectionsElems = sections.map(section => (
 						<Section
 							items={section.items}
 							name={section.name}
@@ -101,12 +104,12 @@ class TasksListUser extends Component {
 						/>
 					));
 
-					const totalItems = option.sections.reduce(
+					const totalItems = sections.reduce(
 						(sumItems, section) => sumItems + section.items.length,
 						0,
 					);
 
-					const totalItemsFinished = option.sections.reduce(
+					const totalItemsFinished = sections.reduce(
 						(sumItems, section) => sumItems
 							+ section.items.filter(
 								item => item.status === 'FINISHED',
@@ -115,17 +118,64 @@ class TasksListUser extends Component {
 					);
 
 					return (
-						<QuoteDisplay
-							quoteOption={option}
-							quote={quote}
-							totalItems={totalItems}
-							totalItemsFinished={totalItemsFinished}
-							sendAmendment={this.sendAmendment}
-							timePlanned={timePlanned}
-							amendmentEnabled={amendmentEnabled}
-							overtime={overtime}
-							mode="see"
-						/>
+						<Mutation mutation={SEND_AMENDMENT}>
+							{sendAmendment => (
+								<TasksListUserMain>
+									<BackButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => this.props.history.push(
+											'/app/quotes',
+										)
+										}
+									>
+										Retour à la liste des devis
+									</BackButton>
+									<TLTopBar>
+										<TLCustomerName>
+											{customer.name} via {customer.email}
+										</TLCustomerName>
+										<TLTimeIndicators>
+											<FlexRow>
+												<TLTimeLabel>
+													Temps prévu:
+												</TLTimeLabel>
+												<TLTimeValue>
+													{timePlanned}
+												</TLTimeValue>
+											</FlexRow>
+											<FlexRow>
+												<TLTimeLabel>
+													Overtime:
+												</TLTimeLabel>
+												<TLTimeValue
+													warning={overtime > 0}
+												>
+													{overtime}
+												</TLTimeValue>
+											</FlexRow>
+										</TLTimeIndicators>
+										<Button
+											disabled={!amendmentEnabled}
+											onClick={() => {
+												this.sendAmendment(
+													quoteId,
+													sendAmendment,
+												);
+											}}
+										>
+											Send amendment
+										</Button>
+									</TLTopBar>
+									<H1>{name}</H1>
+									<TasksProgressBar
+										tasksCompleted={totalItemsFinished}
+										tasksTotal={totalItems}
+									/>
+									{sectionsElems}
+								</TasksListUserMain>
+							)}
+						</Mutation>
 					);
 				}}
 			</Query>
@@ -133,4 +183,4 @@ class TasksListUser extends Component {
 	}
 }
 
-export default TasksListUser;
+export default TasksListUserLegacy;

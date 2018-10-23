@@ -55,6 +55,7 @@ class TextEditor extends Component {
 		};
 		this.state = {editorState: createEditorState(props.currentContent)};
 		this.onChange = (editorState) => {
+			if (this.props.disabled) return;
 			this.props.onChange(convertToRaw(editorState.getCurrentContent()));
 			this.setState({editorState});
 		};
@@ -70,7 +71,7 @@ class TextEditor extends Component {
 		return (
 			<TextEditorMain onClick={this.focusEditor}>
 				<Editor
-					editorEnabled={this.props.editorEnabled}
+					editorEnabled={this.props.editorEnabled || !this.props.disabled}
 					editorState={this.state.editorState}
 					onChange={this.onChange}
 					sideButtons={this.sideButtons}

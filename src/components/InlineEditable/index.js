@@ -12,6 +12,7 @@ class InlineEditable extends Component {
 	}
 
 	handleFocus = () => {
+		if (this.props.disabled) return;
 		if (this.state.isEditing) {
 			if (typeof this.props.onFocusOut === 'function') {
 				this.props.onFocusOut(this.state.value);

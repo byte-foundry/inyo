@@ -1,15 +1,9 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
 import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
-import {ToastContainer, toast} from 'react-toastify';
-import Select from 'react-select';
 
-import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
-import TextEditor from '../../../components/TextEditor';
-import InlineEditable from '../../../components/InlineEditable';
-import QuoteSection from '../../../components/QuoteSection';
-import QuoteTotal from '../../../components/QuoteTotal';
+import {ToastContainer, toast} from 'react-toastify';
+import styled from 'react-emotion';
 import {templates} from '../../../utils/quote-templates';
 import {
 	EDIT_ITEMS,
@@ -19,110 +13,7 @@ import {
 	SEND_QUOTE,
 } from '../../../utils/mutations';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
-import {
-	H1,
-	H3,
-	H5,
-	H4,
-	H6,
-	P,
-	FlexRow,
-	FlexColumn,
-	Button,
-	primaryNavyBlue,
-	primaryBlue,
-	gray20,
-	gray10,
-	gray30,
-	secondaryLightBlue,
-	gray50,
-	ToggleButton,
-} from '../../../utils/content';
-
-import 'react-toastify/dist/ReactToastify.css';
-
-const EditQuoteMain = styled('div')`
-	min-height: 100vh;
-	max-width: 1600px;
-	margin-left: auto;
-	margin-right: auto;
-`;
-
-const BackButton = styled(Button)`
-	padding: 10px 5px;
-	font-size: 11px;
-	margin-bottom: 10px;
-	color: ${gray50};
-`;
-
-const EditQuoteTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-	margin: 0;
-`;
-
-const AddOptionButton = styled('button')``;
-const QuoteSections = styled('div')``;
-const SideActions = styled(FlexColumn)`
-	min-width: 15vw;
-	padding: 20px 40px;
-`;
-const QuoteName = styled(H3)`
-	color: ${primaryBlue};
-	margin: 0;
-`;
-const CenterContent = styled(FlexColumn)`
-	background: ${gray10};
-	padding: 20px 40px;
-`;
-
-const QuoteRow = styled(FlexRow)`
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-top: 10px;
-	padding-bottom: ${props => (props.noPadding ? '0px' : '10px')};
-	border-bottom: 1px solid ${gray20};
-`;
-
-const QuoteContent = styled('div')`
-	max-width: 750px;
-	width: -webkit-fill-available;
-	margin-left: auto;
-	margin-right: auto;
-	padding-bottom: 40px;
-`;
-
-const QuoteAction = styled(Button)`
-	text-decoration: none;
-	color: ${primaryBlue};
-	font-size: 13px;
-	transform: translateY(18px);
-	margin-top: 10px;
-	margin-bottom: 10px;
-`;
-
-const SelectStyles = {
-	option: (base, state) => ({
-		...base,
-		borderRadius: 0,
-	}),
-	menu: (base, state) => ({
-		...base,
-		marginTop: 2,
-		borderRadius: 0,
-	}),
-	control: base => ({
-		...base,
-		width: 300,
-		border: 'none',
-		borderRadius: 0,
-	}),
-	singleValue: (base, state) => ({
-		...base,
-	}),
-};
-const SendQuoteButton = styled(Button)`
-	width: auto;
-`;
+import QuoteDisplay from '../../../components/QuoteDisplay';
 
 const Loading = styled('div')`
 	font-size: 70px;
@@ -136,8 +27,6 @@ class EditQuote extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			mode: 'quote',
-			selectedOption: undefined,
 			apolloTriggerRenderTemporaryFix: false,
 		};
 	}
@@ -169,22 +58,6 @@ class EditQuote extends Component {
 		else if (typeof EditItems === 'function') {
 			EditItems({variables: {items: []}});
 		}
-	};
-
-	getQuoteTotal = (option) => {
-		let sumDays = 0;
-		let sumHT = 0;
-		let sumTTC = 0;
-
-		option.sections.forEach((section) => {
-			section.items.forEach((item) => {
-				sumDays += item.unit;
-				sumHT += item.unitPrice;
-				sumTTC
-					+= item.unitPrice + item.unitPrice * (item.vatRate / 100);
-			});
-		});
-		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
 	};
 
 	sendQuote = (quoteId, sendQuote) => {
@@ -473,9 +346,9 @@ class EditQuote extends Component {
 				{({loading, error, data}) => {
 					const fetchedData = {...data};
 
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading || !fetchedData.quote) {return <Loading>Chargement...</Loading>;}
 					if (error) return <p>Error!: ${error.toString()}</p>;
-					const {quote} = data;
+					const {quote} = fetchedData;
 
 					if (!this.state.selectedOption) {
 						this.setState({
@@ -488,190 +361,31 @@ class EditQuote extends Component {
 							apolloTriggerRenderTemporaryFix: false,
 						});
 					}
+					console.log(fetchedData);
 					const option = quote.options.find(
 						o => o.name === this.state.selectedOption,
 					);
 
 					return (
-						<EditQuoteMain>
+						<div>
 							<ToastContainer />
-							<BackButton
-								theme="Link"
-								size="XSmall"
-								onClick={() => this.props.history.push('/app/quotes')
-								}
-							>
-								Retour à la liste des devis
-							</BackButton>
-							<QuoteRow justifyContent="space-between">
-								<EditQuoteTitle>
-									Remplissez votre devis
-								</EditQuoteTitle>
-								{quote.status === 'DRAFT' && (
-									<Mutation mutation={SEND_QUOTE}>
-										{sendQuote => (
-											<SendQuoteButton
-												theme="Primary"
-												size="Medium"
-												onClick={() => {
-													this.sendQuote(
-														quote.id,
-														sendQuote,
-													);
-												}}
-											>
-												Envoyez la proposition
-											</SendQuoteButton>
-										)}
-									</Mutation>
-								)}
-							</QuoteRow>
-							<QuoteRow justifyContent="space-between">
-								<QuoteName>
-									<Mutation mutation={UPDATE_QUOTE}>
-										{updateQuote => (
-											<InlineEditable
-												value={quote.name}
-												type="text"
-												placeholder="Name of the project"
-												onFocusOut={(value) => {
-													this.editQuoteTitle(
-														value,
-														quote.id,
-														updateQuote,
-													);
-												}}
-											/>
-										)}
-									</Mutation>
-								</QuoteName>
-								<Mutation mutation={EDIT_ITEMS}>
-									{EditItems => (
-										<Select
-											styles={SelectStyles}
-											placeholder="Recommandation de contenu"
-											onChange={(e) => {
-												this.setQuoteData(
-													e.value,
-													EditItems,
-												);
-											}}
-											options={quoteTemplates}
-										/>
-									)}
-								</Mutation>
-							</QuoteRow>
-							<QuoteRow noPadding>
-								<ToggleButton
-									active={this.state.mode === 'proposal'}
-									onClick={(raw) => {
-										this.setState({
-											mode: 'proposal',
-										});
-									}}
-								>
-									Proposition
-								</ToggleButton>
-								<ToggleButton
-									active={this.state.mode === 'quote'}
-									onClick={(raw) => {
-										this.setState({
-											mode: 'quote',
-										});
-									}}
-								>
-									Devis
-								</ToggleButton>
-							</QuoteRow>
-							<FlexRow justifyContent="space-between">
-								<CenterContent flexGrow="2">
-									<QuoteContent>
-										<FlexColumn fullHeight>
-											{this.state.mode === 'quote' ? (
-												<QuoteSections>
-													{option.sections.map(
-														(section, index) => (
-															<QuoteSection
-																key={`section${
-																	section.id
-																}`}
-																data={section}
-																addItem={
-																	this.addItem
-																}
-																editItem={
-																	this
-																		.editItem
-																}
-																editSectionTitle={
-																	this
-																		.editSectionTitle
-																}
-																removeItem={
-																	this
-																		.removeItem
-																}
-																removeSection={
-																	this
-																		.removeSection
-																}
-																sectionIndex={
-																	index
-																}
-															/>
-														),
-													)}
-													<Mutation
-														mutation={ADD_SECTION}
-													>
-														{addSection => (
-															<QuoteAction
-																theme="Link"
-																size="XSmall"
-																onClick={() => {
-																	this.addSection(
-																		option.id,
-																		addSection,
-																	);
-																}}
-															>
-																Ajouter une
-																section
-															</QuoteAction>
-														)}
-													</Mutation>
-												</QuoteSections>
-											) : (
-												<Mutation
-													mutation={UPDATE_OPTION}
-												>
-													{updateOption => (
-														<TextEditor
-															currentContent={
-																option.proposal
-															}
-															onChange={(raw) => {
-																this.updateOption(
-																	option.id,
-																	raw,
-																	updateOption,
-																);
-															}}
-														/>
-													)}
-												</Mutation>
-											)}
-										</FlexColumn>
-									</QuoteContent>
-								</CenterContent>
-								<SideActions>
-									<CustomerNameAndAddress
-										customer={quote.customer}
-									/>
-									{this.getQuoteTotal(option)}
-								</SideActions>
-							</FlexRow>
-						</EditQuoteMain>
+							<QuoteDisplay
+								quoteTemplates={quoteTemplates}
+								quoteOption={option}
+								quote={quote}
+								mode="edit"
+								sendQuote={this.sendQuote}
+								editQuoteTitle={this.editQuoteTitle}
+								setQuoteData={this.setQuoteData}
+								addItem={this.addItem}
+								editItem={this.editItem}
+								editSectionTitle={this.editSectionTitle}
+								removeItem={this.removeItem}
+								removeSection={this.removeSection}
+								addSection={this.addSection}
+								updateOption={this.updateOption}
+							/>
+						</div>
 					);
 				}}
 			</Query>

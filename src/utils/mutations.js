@@ -243,3 +243,41 @@ export const REMOVE_ITEM = gql`
 		}
 	}
 `;
+
+export const SEND_AMENDMENT = gql`
+	mutation sendAmendment($quoteId: ID!) {
+		sendAmendment(quoteId: $quoteId) {
+			id
+			template
+			name
+			customer {
+				name
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
+			options {
+				id
+				name
+				proposal
+				sections {
+					id
+					name
+					items {
+						status
+						id
+						name
+						unitPrice
+						unit
+						pendingUnit
+						vatRate
+						description
+					}
+				}
+			}
+		}
+	}
+`;

@@ -14,7 +14,9 @@ const TaskName = styled('label')`
 `;
 const TaskTime = styled('label')``;
 const TaskPrice = styled('label')``;
-const TaskInfo = styled(FlexRow)``;
+const TaskInfo = styled(FlexRow)`
+	width: 100%;
+`;
 
 class Task extends Component {
 	select = () => {

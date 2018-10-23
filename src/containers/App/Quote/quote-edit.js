@@ -175,10 +175,17 @@ class EditQuote extends Component {
 	}
 
 	toast = () => {
-		toast.success('📬 Le devis a été envoyé !', {
-			position: toast.POSITION.TOP_RIGHT,
-			autoClose: 3000,
-		});
+		toast.success(
+			<div>
+				<p>📬 Le devis a été envoyé !</p>
+				<p>Retour au menu principal.</p>
+			</div>,
+			{
+				position: toast.POSITION.TOP_RIGHT,
+				autoClose: 3000,
+				onClose: () => this.props.history.push('/app/quotes'),
+			},
+		);
 	};
 
 	setQuoteData = (templateName, EditItems) => {

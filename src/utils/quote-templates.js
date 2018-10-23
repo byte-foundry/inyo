@@ -571,4 +571,122 @@ export const templates = [
 			},
 		],
 	},
+	{
+		name: 'IDENTITY',
+		label: 'Identité visuelle',
+		proposal: {},
+		sections: [
+			{
+				name: 'Pré-projet',
+				items: [
+					{
+						name: 'Réunion de lancement',
+						unit: 0.5,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name:
+							"Rédaction d'un cahier des charges et définition des valeurs de l'entreprise",
+						unit: 0.25,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name: 'Validation',
+						unit: 0,
+						unitPrice: 0,
+						description: '',
+						vatRate: 20,
+					},
+				],
+			},
+			{
+				name: 'Conception',
+				items: [
+					{
+						name: 'Benchmark',
+						unit: 0.5,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name: 'Moodboard',
+						unit: 0.75,
+						unitPrice: 350,
+						description:
+							'— Dont réunion téléphonique pour valider les directions: 0.25',
+						vatRate: 20,
+					},
+					{
+						name: 'Création de 3 axes créatifs',
+						unit: 2.5,
+						unitPrice: 350,
+						description: '— Validation',
+						vatRate: 20,
+					},
+					{
+						name: "Mise au point de l'axe retenu",
+						unit: 1,
+						unitPrice: 350,
+						description:
+							'Dont 2 allers-retours + compte-rendu des échanges et validation: 0.25',
+						vatRate: 20,
+					},
+					{
+						name:
+							'Déclinaisons du logo en couleur et en noir & blanc ',
+						unit: 0.25,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name:
+							'Préparation des fichiers aux formats nécessaires pour une utilisation Print et Web',
+						unit: 0.25,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+				],
+			},
+			{
+				name: 'Divers',
+				items: [
+					{
+						name: 'Gestion et suivi de projet',
+						unit: 1,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name: 'Cession des droits',
+						unit: 0.25,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name: 'Achat typographique',
+						unit: 0.25,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+					{
+						name: 'Conception charte graphique utilisation logo',
+						unit: 1,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
+				],
+			},
+		],
+	},
 ];

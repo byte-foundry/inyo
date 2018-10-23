@@ -62,8 +62,6 @@ const quoteTemplates = templates.map(template => ({
 	label: template.label,
 }));
 
-quoteTemplates.push({value: 'IDENTITY', label: 'Identité visuelle'});
-
 class CreateQuoteForm extends React.Component {
 	render() {
 		const {customers, onCreate} = this.props;

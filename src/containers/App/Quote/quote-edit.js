@@ -355,7 +355,7 @@ class EditQuote extends Component {
 				const section = data.quote.options[0].sections.find(
 					e => e.id === sectionId,
 				);
-				const itemIndex = section.items.find(
+				const itemIndex = section.items.findIndex(
 					e => e.id === removeItem.id,
 				);
 

@@ -29,6 +29,7 @@ class TextEditor extends Component {
 		// ];
 		// default: block: ['ordered-list-item', 'unordered-list-item', 'blockquote', 'header-three', 'todo']
 		// inline: ['BOLD', 'ITALIC', 'UNDERLINE', 'hyperlink', 'HIGHLIGHT']
+		this.sideButtons = [];
 		BLOCK_BUTTONS.unshift({
 			description: 'Heading 1',
 			icon: 'header',
@@ -56,6 +57,7 @@ class TextEditor extends Component {
 		this.onChange = (editorState) => {
 			this.props.onChange(convertToRaw(editorState.getCurrentContent()));
 			this.setState({editorState});
+			console.log(convertToRaw(editorState.getCurrentContent()));
 		};
 	}
 
@@ -71,7 +73,7 @@ class TextEditor extends Component {
 				<Editor
 					editorState={this.state.editorState}
 					onChange={this.onChange}
-					// sideButtons={this.sideButtons}
+					sideButtons={this.sideButtons}
 					toolbarConfig={this.toolbarConfig}
 					placeholder="Write here ..."
 					ref={(element) => {

@@ -51,26 +51,31 @@ export const templates = [
 						{
 							offset: 0,
 							length: 19,
-							style: 'ITALIC',
+							style: 'HIGHLIGHT',
 						},
 						{
-							offset: 60,
-							length: 28,
-							style: 'ITALIC',
+							offset: 61,
+							length: 27,
+							style: 'HIGHLIGHT',
 						},
 						{
 							offset: 111,
 							length: 36,
-							style: 'ITALIC',
+							style: 'HIGHLIGHT',
 						},
 						{
 							offset: 149,
 							length: 19,
-							style: 'ITALIC',
+							style: 'HIGHLIGHT',
 						},
 						{
 							offset: 238,
 							length: 25,
+							style: 'HIGHLIGHT',
+						},
+						{
+							offset: 60,
+							length: 1,
 							style: 'ITALIC',
 						},
 					],
@@ -95,7 +100,7 @@ export const templates = [
 						{
 							offset: 0,
 							length: 22,
-							style: 'ITALIC',
+							style: 'HIGHLIGHT',
 						},
 					],
 					entityRanges: [],
@@ -110,7 +115,7 @@ export const templates = [
 						{
 							offset: 0,
 							length: 22,
-							style: 'ITALIC',
+							style: 'HIGHLIGHT',
 						},
 					],
 					entityRanges: [],
@@ -125,7 +130,7 @@ export const templates = [
 						{
 							offset: 0,
 							length: 22,
-							style: 'ITALIC',
+							style: 'HIGHLIGHT',
 						},
 					],
 					entityRanges: [],
@@ -173,14 +178,9 @@ export const templates = [
 					depth: 0,
 					inlineStyleRanges: [
 						{
-							offset: 1,
-							length: 32,
-							style: 'ITALIC',
-						},
-						{
-							offset: 38,
-							length: 12,
-							style: 'ITALIC',
+							offset: 0,
+							length: 50,
+							style: 'HIGHLIGHT',
 						},
 					],
 					entityRanges: [],
@@ -193,14 +193,9 @@ export const templates = [
 					depth: 0,
 					inlineStyleRanges: [
 						{
-							offset: 1,
-							length: 32,
-							style: 'ITALIC',
-						},
-						{
-							offset: 37,
-							length: 13,
-							style: 'ITALIC',
+							offset: 0,
+							length: 50,
+							style: 'HIGHLIGHT',
 						},
 					],
 					entityRanges: [],

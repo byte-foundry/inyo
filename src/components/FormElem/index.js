@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 
 import FormInput from '../FormInput';
 
@@ -8,6 +8,10 @@ import {P, Label, ErrorInput} from '../../utils/content';
 const FormElemMain = styled(P)`
 	width: 100%;
 	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
+	${props => props.inline
+		&& css`
+			margin: 0;
+		`};
 `;
 
 class FormElem extends Component {
@@ -24,10 +28,11 @@ class FormElem extends Component {
 			touched,
 			required,
 			padded,
+			inline,
 		} = this.props;
 
 		return (
-			<FormElemMain padded={padded}>
+			<FormElemMain padded={padded} inline={inline}>
 				{this.props.label && (
 					<Label htmlFor={name} required={required}>
 						{label}
@@ -42,6 +47,7 @@ class FormElem extends Component {
 					handleBlur={handleBlur}
 					errors={errors}
 					touched={touched}
+					inline={inline}
 				/>
 				{errors[name]
 					&& touched[name] && (

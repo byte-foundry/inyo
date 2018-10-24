@@ -10,11 +10,20 @@ import FINISHED from './finished.svg';
 import UPDATED from './updated.svg';
 import UPDATED_SENT from './updated_sent.svg';
 
-const TaskStatusMain = styled('div')``;
+const TaskStatusMain = styled('div')`
+	position: relative;
+	width: 25px;
+	height: 25px;
+	margin-right: 20px;
+`;
 
 const Status = styled('img')`
 	width: 30px;
 	height: auto;
+	position: absolute;
+	top: 55%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 `;
 
 const taskImageByStatus = {

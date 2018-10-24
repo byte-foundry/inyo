@@ -29,6 +29,54 @@ const TLTimeValue = styled('div')`
 `;
 
 class TasksListUser extends Component {
+	editItem = async (itemId, sectionId, data, updateValidatedItem) => {
+		const {name, unit, comment} = data;
+
+		return updateValidatedItem({
+			variables: {
+				itemId,
+				unit,
+				comment: {text: comment},
+			},
+			optimisticResponse: {
+				__typename: 'Mutation',
+				updateValidatedItem: {
+					id: itemId,
+					status: 'UPDATED',
+					name,
+					unit,
+					comment: {text: comment},
+					__typename: 'Item',
+				},
+			},
+			update: (cache, {data: {updateValidatedItem}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const section = data.quote.options[0].sections.find(
+					e => e.id === sectionId,
+				);
+				const itemIndex = section.items.find(
+					e => e.id === updateValidatedItem.id,
+				);
+
+				section.items[itemIndex] = updateValidatedItem;
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					console.log(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	sendAmendment = async (quoteId, sendAmendment) => sendAmendment({
 		variables: {
 			quoteId,
@@ -119,6 +167,7 @@ class TasksListUser extends Component {
 							quoteOption={option}
 							quote={quote}
 							totalItems={totalItems}
+							editItem={this.editItem}
 							totalItemsFinished={totalItemsFinished}
 							sendAmendment={this.sendAmendment}
 							timePlanned={timePlanned}

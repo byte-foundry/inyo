@@ -14,10 +14,10 @@ import {
 } from '../../utils/mutations';
 
 const QuoteAddItem = styled('button')``;
-const ItemName = styled(H5)`
+const ItemName = styled(FlexRow)`
 	margin: 0;
 	font-size: 13px;
-	width: 40%;
+	width: 50%;
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
@@ -94,15 +94,15 @@ class Item extends Component {
 								});
 							}}
 							done={(data) => {
+								this.setState({
+									shouldDisplayAddItem: false,
+								});
 								editItem(
 									item.id,
 									sectionId,
 									data,
 									updateValidatedItem,
 								);
-								this.setState({
-									shouldDisplayAddItem: false,
-								});
 							}}
 						/>
 					)}
@@ -111,21 +111,25 @@ class Item extends Component {
 		}
 		return (
 			<ItemMain justifyContent="space-between">
-				{mode === 'see' && (
-					<TaskStatus
-						status={item.status}
-						itemId={item.id}
-						sectionId={sectionId}
-						mode={mode}
-					/>
-				)}
-				<ItemName
-					onClick={() => {
-						this.setState({shouldDisplayAddItem: true});
-					}}
-				>
-					{item.name}
+				<ItemName>
+					{mode === 'see' && (
+						<TaskStatus
+							status={item.status}
+							itemId={item.id}
+							sectionId={sectionId}
+							mode={mode}
+						/>
+					)}
+					<span
+						onClick={() => {
+							this.setState({shouldDisplayAddItem: true});
+						}}
+						style={{cursor: 'pointer'}}
+					>
+						{item.name}
+					</span>
 				</ItemName>
+
 				<span>{item.unit} jours</span>
 				<span>{item.unitPrice}€</span>
 				<span>{item.unitPrice * item.unit}€</span>

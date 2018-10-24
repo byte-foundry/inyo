@@ -14,6 +14,7 @@ import {
 	signalOrange,
 	signalRed,
 	primaryWhite,
+	ErrorInput,
 	gray30,
 } from '../../utils/content';
 
@@ -23,6 +24,7 @@ const AmendItemMain = styled('div')`
 	background: ${secondaryLightBlue};
 	border: 1px solid ${primaryBlue};
 	padding: 10px 20px;
+	font-size: 13px;
 `;
 
 const ItemComment = styled('textarea')`
@@ -72,8 +74,8 @@ class AmendItem extends Component {
 					comment: '',
 				}}
 				validationSchema={Yup.object().shape({
-					unit: Yup.number().required('Required'),
-					comment: Yup.string().required('Required'),
+					unit: Yup.number().required('Requis'),
+					comment: Yup.string().required('Requis'),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
@@ -87,8 +89,6 @@ class AmendItem extends Component {
 							msg: 'Something went wrong',
 						});
 					}
-
-					this.props.unselect();
 				}}
 			>
 				{(props) => {
@@ -103,18 +103,20 @@ class AmendItem extends Component {
 						handleBlur,
 						handleSubmit,
 						handleReset,
+						setFieldValue,
 					} = props;
 
 					return (
 						<form onSubmit={handleSubmit}>
 							<AmendItemMain>
 								<FlexRow justifyContent="space-between">
-									<span>{name}</span>
+									<span style={{width: '50%'}}>{name}</span>
 									<FormElem
 										{...props}
 										name="unit"
 										type="number"
 										placeholder="1"
+										inline
 									/>
 									<span>{unitPrice}€</span>
 								</FlexRow>
@@ -123,11 +125,18 @@ class AmendItem extends Component {
 										placeholder="Expliquez pourquoi le temps nécessaire augmente. C'est très important pour votre client de savoir."
 										value={comment}
 										name="comment"
-										onChange={e => this.setState({
-											description: e.target.value,
-										})
+										onChange={e => setFieldValue(
+											'comment',
+											e.target.value,
+										)
 										}
 									/>
+									{errors.comment
+										&& touched.comment && (
+										<ErrorInput>
+											{errors.comment}
+										</ErrorInput>
+									)}
 								</FlexRow>
 								<FlexRow justifyContent="space-between">
 									<div />

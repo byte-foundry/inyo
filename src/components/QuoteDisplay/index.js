@@ -99,6 +99,13 @@ const QuoteAction = styled(Button)`
 	margin-bottom: 10px;
 `;
 
+const QuoteStatus = styled(FlexColumn)`
+	span {
+		font-size: 13px;
+		margin: 5px 10px;
+	}
+`;
+
 const SelectStyles = {
 	option: (base, state) => ({
 		...base,
@@ -202,26 +209,35 @@ class QuoteDisplay extends Component {
 						</Mutation>
 					</QuoteRow>
 				)}
-				<QuoteRow justifyContent="space-between">
-					<QuoteName>
-						<Mutation mutation={UPDATE_QUOTE}>
-							{updateQuote => (
-								<InlineEditable
-									value={quote.name}
-									type="text"
-									placeholder="Name of the project"
-									disabled={mode !== 'edit'}
-									onFocusOut={(value) => {
-										editQuoteTitle(
-											value,
-											quote.id,
-											updateQuote,
-										);
-									}}
-								/>
-							)}
-						</Mutation>
-					</QuoteName>
+				<QuoteRow noPadding justifyContent="space-between">
+					<FlexColumn>
+						<QuoteName>
+							<Mutation mutation={UPDATE_QUOTE}>
+								{updateQuote => (
+									<InlineEditable
+										value={quote.name}
+										type="text"
+										placeholder="Name of the project"
+										disabled={mode !== 'edit'}
+										onFocusOut={(value) => {
+											editQuoteTitle(
+												value,
+												quote.id,
+												updateQuote,
+											);
+										}}
+									/>
+								)}
+							</Mutation>
+						</QuoteName>
+						{mode === 'see' && (
+							<TasksProgressBar
+								tasksCompleted={totalItemsFinished}
+								tasksTotal={totalItems}
+							/>
+						)}
+					</FlexColumn>
+
 					{mode === 'edit' && (
 						<Mutation mutation={EDIT_ITEMS}>
 							{EditItems => (
@@ -238,10 +254,10 @@ class QuoteDisplay extends Component {
 					)}
 					{mode === 'see' && (
 						<FlexRow>
-							<FlexColumn>
+							<QuoteStatus>
 								<span>Temps prévu : {timePlanned}</span>
 								<span>Dépassement : {overtime}</span>
-							</FlexColumn>
+							</QuoteStatus>
 							<Mutation mutation={SEND_AMENDMENT}>
 								{SendAmendment => (
 									<SendQuoteButton
@@ -262,14 +278,6 @@ class QuoteDisplay extends Component {
 						</FlexRow>
 					)}
 				</QuoteRow>
-				{mode === 'see' && (
-					<QuoteRow>
-						<TasksProgressBar
-							tasksCompleted={totalItemsFinished}
-							tasksTotal={totalItems}
-						/>
-					</QuoteRow>
-				)}
 				<QuoteRow noPadding>
 					<ToggleButton
 						active={this.state.mode === 'proposal'}

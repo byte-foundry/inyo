@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+import {gray20, signalGreen} from '../../utils/content';
 
 const TasksProgressBarMain = styled('div')`
-	background: grey;
+	background: ${gray20};
 	position: relative;
 	height: 5px;
 	width: 200px;
+	margin-top: 15px;
 
 	&:after {
 		position: absolute;
@@ -14,7 +16,7 @@ const TasksProgressBarMain = styled('div')`
 		content: ' ';
 		width: ${props => props.completionRate || 0}%;
 		height: 100%;
-		background: lightgreen;
+		background: ${signalGreen};
 		transition: width 0.2s ease;
 	}
 `;

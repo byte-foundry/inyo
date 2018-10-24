@@ -1,6 +1,16 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
-import {Input} from '../../utils/content';
+import styled, {css} from 'react-emotion';
+import {Input, primaryWhite} from '../../utils/content';
+
+const FormInputMain = styled(Input)`
+	${props => props.inline
+		&& css`
+			background: ${primaryWhite};
+			padding: 0;
+			width: auto;
+			text-align: center;
+		`};
+`;
 
 class FormInput extends Component {
 	render() {
@@ -13,10 +23,11 @@ class FormInput extends Component {
 			handleBlur,
 			errors,
 			touched,
+			inline,
 		} = this.props;
 
 		return (
-			<Input
+			<FormInputMain
 				id={name}
 				placeholder={placeholder}
 				type={type}
@@ -24,6 +35,7 @@ class FormInput extends Component {
 				onChange={handleChange}
 				onBlur={handleBlur}
 				error={errors[name] && touched[name]}
+				inline={inline}
 			/>
 		);
 	}

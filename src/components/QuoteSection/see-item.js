@@ -111,12 +111,14 @@ class Item extends Component {
 		}
 		return (
 			<ItemMain justifyContent="space-between">
-				<TaskStatus
-					status={item.status}
-					itemId={item.id}
-					sectionId={sectionId}
-					mode={mode}
-				/>
+				{mode === 'see' && (
+					<TaskStatus
+						status={item.status}
+						itemId={item.id}
+						sectionId={sectionId}
+						mode={mode}
+					/>
+				)}
 				<ItemName
 					onClick={() => {
 						this.setState({shouldDisplayAddItem: true});

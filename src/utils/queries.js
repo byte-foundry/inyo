@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** APP QUERIES ********* */
 export const GET_NETWORK_STATUS = gql`

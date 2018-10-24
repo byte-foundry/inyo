@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import {
-	Switch, Route, Redirect, Link,
-} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 
 import Auth from './Auth';
@@ -21,7 +19,7 @@ class App extends Component {
 	render() {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
-				{({loading, error, data}) => {
+				{({loading, error}) => {
 					if (loading) return <p>Loading...</p>;
 					return (
 						<AppMain>

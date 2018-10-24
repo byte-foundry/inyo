@@ -8,7 +8,6 @@ class FormTextarea extends Component {
 		const {
 			name,
 			placeholder,
-			type,
 			values,
 			handleChange,
 			handleBlur,

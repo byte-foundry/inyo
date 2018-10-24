@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-import LoginForm from '../../../components/LoginForm';
-import SignUpForm from '../../../components/SignupForm';
+
 import {
 	P,
 	Button,
@@ -10,6 +9,10 @@ import {
 	primaryWhite,
 	H1,
 } from '../../../utils/content';
+
+import LoginForm from '../../../components/LoginForm';
+import SignUpForm from '../../../components/SignupForm';
+
 import {ReactComponent as AppLogo} from '../appLogo.svg';
 import AuthLogo from './authLogo.svg';
 

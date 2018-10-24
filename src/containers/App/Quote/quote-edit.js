@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Mutation, Query} from 'react-apollo';
-
+import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
+
 import {templates} from '../../../utils/quote-templates';
-import {
-	EDIT_ITEMS,
-	UPDATE_QUOTE,
-	ADD_SECTION,
-	UPDATE_OPTION,
-	SEND_QUOTE,
-} from '../../../utils/mutations';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
+
 import QuoteDisplay from '../../../components/QuoteDisplay';
 
 const Loading = styled('div')`
@@ -63,15 +57,15 @@ class EditQuote extends Component {
 	sendQuote = (quoteId, sendQuote) => {
 		sendQuote({
 			variables: {quoteId},
-			update: (cache, {data: {sendQuote}}) => {
+			update: (cache, {data: {sendQuoteData}}) => {
 				const data = cache.readQuery({
 					query: GET_ALL_QUOTES,
 				});
 				const updatedQuote = data.me.company.quotes.find(
-					quote => quote.id === sendQuote.id,
+					quote => quote.id === sendQuoteData.id,
 				);
 
-				updatedQuote.status = sendQuote.status;
+				updatedQuote.status = sendQuoteData.status;
 				try {
 					cache.writeQuery({
 						query: GET_ALL_QUOTES,
@@ -80,7 +74,7 @@ class EditQuote extends Component {
 					this.toast();
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 			},
 		});
@@ -89,13 +83,13 @@ class EditQuote extends Component {
 	editQuoteTitle = (title, quoteId, updateQuote) => {
 		updateQuote({
 			variables: {quoteId, name: title},
-			update: (cache, {data: {updateQuote}}) => {
+			update: (cache, {data: {updateQuoteData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
-				data.quote.name = updateQuote.name;
+				data.quote.name = updateQuoteData.name;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -104,7 +98,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -114,13 +108,13 @@ class EditQuote extends Component {
 	updateOption = (optionId, raw, updateOption) => {
 		updateOption({
 			variables: {optionId, proposal: raw},
-			update: (cache, {data: {updateOption}}) => {
+			update: (cache, {data: {updateOptionData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
-				data.quote.options[0].proposal = updateOption.proposal;
+				data.quote.options[0].proposal = updateOptionData.proposal;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -129,7 +123,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -139,7 +133,7 @@ class EditQuote extends Component {
 	addItem = (sectionId, addItem) => {
 		addItem({
 			variables: {sectionId, name: 'Nouvelle tâche'},
-			update: (cache, {data: {addItem}}) => {
+			update: (cache, {data: {addItemData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -148,7 +142,7 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 
-				section.items.push(addItem);
+				section.items.push(addItemData);
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -157,17 +151,17 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
 	};
 
-	editItem = (itemId, sectionId, data, updateItem) => {
+	editItem = (itemId, sectionId, editData, updateItem) => {
 		const {
 			name, description, unitPrice, unit, vatRate,
-		} = data;
+		} = editData;
 
 		updateItem({
 			variables: {
@@ -190,8 +184,7 @@ class EditQuote extends Component {
 					__typename: 'Item',
 				},
 			},
-			update: (cache, {data: {updateItem}}) => {
-				console.log(updateItem);
+			update: (cache, {data: {updateItemData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -200,10 +193,10 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === updateItem.id,
+					e => e.id === updateItemData.id,
 				);
 
-				section.items[itemIndex] = updateItem;
+				section.items[itemIndex] = updateItemData;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -212,7 +205,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -222,7 +215,7 @@ class EditQuote extends Component {
 	removeItem = (itemId, sectionId, removeItem) => {
 		removeItem({
 			variables: {itemId},
-			update: (cache, {data: {removeItem}}) => {
+			update: (cache, {data: {removeItemData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -231,7 +224,7 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.findIndex(
-					e => e.id === removeItem.id,
+					e => e.id === removeItemData.id,
 				);
 
 				section.items.splice(itemIndex, 1);
@@ -243,7 +236,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -253,13 +246,13 @@ class EditQuote extends Component {
 	addSection = (optionId, addSection) => {
 		addSection({
 			variables: {optionId, name: 'Nouvelle section'},
-			update: (cache, {data: {addSection}}) => {
+			update: (cache, {data: {addSectionData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
-				data.quote.options[0].sections.push(addSection);
+				data.quote.options[0].sections.push(addSectionData);
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -268,7 +261,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -278,7 +271,7 @@ class EditQuote extends Component {
 	editSectionTitle = (sectionId, name, updateSection) => {
 		updateSection({
 			variables: {sectionId, name},
-			update: (cache, {data: {updateSection}}) => {
+			update: (cache, {data: {updateSectionData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -287,7 +280,9 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 
-				data.quote.options[0].sections[sectionIndex] = updateSection;
+				data.quote.options[0].sections[
+					sectionIndex
+				] = updateSectionData;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -296,7 +291,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -306,13 +301,13 @@ class EditQuote extends Component {
 	removeSection = (sectionId, removeSection) => {
 		removeSection({
 			variables: {sectionId},
-			update: (cache, {data: {removeSection}}) => {
+			update: (cache, {data: {removeSectionData}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const sectionIndex = data.quote.options[0].sections.findIndex(
-					e => e.id === removeSection.id,
+					e => e.id === removeSectionData.id,
 				);
 
 				data.quote.options[0].sections.splice(sectionIndex, 1);
@@ -324,7 +319,7 @@ class EditQuote extends Component {
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -346,7 +341,9 @@ class EditQuote extends Component {
 				{({loading, error, data}) => {
 					const fetchedData = {...data};
 
-					if (loading || !fetchedData.quote) {return <Loading>Chargement...</Loading>;}
+					if (loading || !fetchedData.quote) {
+						return <Loading>Chargement...</Loading>;
+					}
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {quote} = fetchedData;
 
@@ -361,7 +358,7 @@ class EditQuote extends Component {
 							apolloTriggerRenderTemporaryFix: false,
 						});
 					}
-					console.log(fetchedData);
+
 					const option = quote.options.find(
 						o => o.name === this.state.selectedOption,
 					);

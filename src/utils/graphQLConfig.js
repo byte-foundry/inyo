@@ -1,11 +1,10 @@
-import {ApolloClient} from 'apollo-client';
-import {ApolloLink} from 'apollo-link';
-import {withClientState} from 'apollo-link-state';
-import {createHttpLink} from 'apollo-link-http';
+import {ApolloClient} from 'apollo-client'; // eslint-disable-line import/no-extraneous-dependencies
+import {ApolloLink} from 'apollo-link'; // eslint-disable-line import/no-extraneous-dependencies
+import {withClientState} from 'apollo-link-state'; // eslint-disable-line import/no-extraneous-dependencies
+import {createHttpLink} from 'apollo-link-http'; // eslint-disable-line import/no-extraneous-dependencies
 import {setContext} from 'apollo-link-context';
-import {onError} from 'apollo-link-error';
-import {InMemoryCache} from 'apollo-cache-inmemory';
-import merge from 'lodash/merge';
+import {onError} from 'apollo-link-error'; // eslint-disable-line import/no-extraneous-dependencies
+import {InMemoryCache} from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
 
 import {GRAPHQL_API} from './constants';
 import defaults from './default';
@@ -71,8 +70,7 @@ const cache = new InMemoryCache({
 	// 	}),
 });
 
-const errorLink = onError(({operation, networkError, graphQLErrors}) => {
-	console.log(operation, networkError, graphQLErrors);
+const errorLink = onError(({networkError, graphQLErrors}) => {
 	if (networkError) {
 		cache.writeData({
 			data: {
@@ -112,6 +110,6 @@ const client = new ApolloClient({
 	queryDeduplication: true,
 });
 
-const unsubscribe = client.onResetStore(stateLink.writeDefaults);
+client.onResetStore(stateLink.writeDefaults);
 
 export default client;

@@ -10,7 +10,7 @@ import {
 	ModalElem,
 	ModalCloseIcon,
 	H2,
-} from '../../utils/content.js';
+} from '../../utils/content';
 
 import Comment from '../Comment';
 
@@ -23,7 +23,6 @@ const CommentRow = styled('div')`
 
 class CommentModal extends Component {
 	closeCommentModal = () => {
-		console.log('out');
 		this.props.history.push(
 			`/app/quotes/${this.props.match.params.quoteId}/view/${
 				this.props.match.params.customerToken

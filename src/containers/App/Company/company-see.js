@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
+
 import {H3} from '../../../utils/content';
 
 const CompanySeeMain = styled('div')``;

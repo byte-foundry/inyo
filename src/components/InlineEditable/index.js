@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+
 import {Input} from '../../utils/content';
 
 class InlineEditable extends Component {

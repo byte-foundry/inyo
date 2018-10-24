@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`

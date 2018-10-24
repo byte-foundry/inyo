@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
-import {endOfDay} from 'date-fns';
 import {GET_ALL_QUOTES} from '../../../utils/queries';
 import {H1, Button, primaryNavyBlue} from '../../../utils/content';
 

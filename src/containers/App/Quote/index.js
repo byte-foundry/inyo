@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-import {Switch, Route, Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
+
 import QuoteSee from './quote-see';
 import QuoteSeeLegacy from './quote-see.1';
-import QuoteCustomerView from './quote-customer-view';
 import QuoteEdit from './quote-edit';
 import QuoteCreate from './quote-create';
 import QuoteList from './quote-list';
-import {H1} from '../../../utils/content';
 
 const QuoteMain = styled('div')``;
 

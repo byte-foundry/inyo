@@ -34,7 +34,6 @@ const Address = styled(P)`
 
 class CustomerNameAndAddress extends Component {
 	render() {
-		console.log(this.props);
 		const {
 			name, firstName, lastName, address,
 		} = this.props.customer;

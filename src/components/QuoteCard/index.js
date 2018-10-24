@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from 'react-emotion';
+
 import {
 	P,
 	primaryNavyBlue,

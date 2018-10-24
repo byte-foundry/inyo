@@ -36,13 +36,7 @@ class AddressAutocomplete extends Component {
 						language: 'fr',
 						type: 'address',
 					}}
-					onChange={({
-						query,
-						rawAnswer,
-						suggestion,
-						suggestionIndex,
-					}) => {
-						console.log('onChange');
+					onChange={({suggestion}) => {
 						onChange(name, {
 							street: suggestion.name,
 							city: suggestion.city,
@@ -50,16 +44,15 @@ class AddressAutocomplete extends Component {
 							postalCode: suggestion.postcode,
 						});
 					}}
-					onSuggestions={({rawAnswer, query, suggestions}) => {}}
-					onCursorChanged={({
-						rawAnswer,
-						query,
-						suggestion,
-						suggestonIndex,
-					}) => {}}
+					onSuggestions={() => {}}
+					onCursorChanged={() => {}}
 					onClear={() => onChange(name, {})}
-					onLimit={({message}) => console.err(message)}
-					onError={({message}) => console.err(message)}
+					onLimit={({message}) => {
+						throw new Error(message);
+					}}
+					onError={({message}) => {
+						throw new Error(message);
+					}}
 					value={values[name]}
 				/>
 				{errors[name]

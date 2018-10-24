@@ -49,7 +49,6 @@ class LoginForm extends Component {
 									});
 
 									if (data) {
-										console.log(data);
 										window.localStorage.setItem(
 											'authToken',
 											data.login.token,
@@ -60,7 +59,6 @@ class LoginForm extends Component {
 									}
 								}
 								catch (error) {
-									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
@@ -71,16 +69,9 @@ class LoginForm extends Component {
 						>
 							{(props) => {
 								const {
-									values,
-									touched,
-									errors,
 									status,
-									dirty,
 									isSubmitting,
-									handleChange,
-									handleBlur,
 									handleSubmit,
-									handleReset,
 								} = props;
 
 								return (

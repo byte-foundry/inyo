@@ -17,8 +17,6 @@ export default {
 
 			return networkStatus;
 		},
-	},
-	Mutation: {
 		editItems: (_, {items}, {cache}) => {
 			const previous = cache.readQuery({query: GET_ITEMS});
 			const data = {

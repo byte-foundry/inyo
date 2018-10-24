@@ -1,32 +1,9 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
-import {Mutation, Query} from 'react-apollo';
-import Section from '../../../components/Section';
+import {Query} from 'react-apollo';
 
-import {
-	FlexRow, FlexColumn, H1, Button,
-} from '../../../utils/content';
 import {GET_QUOTE_DATA} from '../../../utils/queries';
-import {SEND_AMENDMENT} from '../../../utils/mutations';
-
-import TasksProgressBar from '../../../components/TasksProgressBar';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
-
-const TasksListUserMain = styled('div')``;
-const TLTopBar = styled(FlexRow)``;
-const TLCustomerName = styled('label')`
-	flex: 1;
-`;
-const BackButton = styled(Button)`
-	margin-top: 10px;
-	margin-bottom: 10px;
-`;
-const TLTimeIndicators = styled(FlexColumn)``;
-const TLTimeLabel = styled('div')``;
-const TLTimeValue = styled('div')`
-	color: ${props => (props.warning ? 'red' : 'black')};
-`;
 
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateValidatedItem) => {
@@ -81,13 +58,13 @@ class TasksListUser extends Component {
 		variables: {
 			quoteId,
 		},
-		update: (cache, {data: {sendAmendment}}) => {
+		update: (cache, {data: {sendAmendmentData}}) => {
 			const data = cache.readQuery({
 				query: GET_QUOTE_DATA,
 				variables: {quoteId: this.props.match.params.quoteId},
 			});
 
-			data.quote = sendAmendment;
+			data.quote = sendAmendmentData;
 
 			try {
 				cache.writeQuery({
@@ -97,7 +74,7 @@ class TasksListUser extends Component {
 				});
 			}
 			catch (e) {
-				console.log(e);
+				throw new Error(e);
 			}
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},
@@ -140,14 +117,6 @@ class TasksListUser extends Component {
 							),
 						0,
 					);
-
-					const sectionsElems = option.sections.map(section => (
-						<Section
-							items={section.items}
-							name={section.name}
-							id={section.id}
-						/>
-					));
 
 					const totalItems = option.sections.reduce(
 						(sumItems, section) => sumItems + section.items.length,

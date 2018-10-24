@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
-import CustomerForm from '../../../components/CustomerForm';
+
 import {H3} from '../../../utils/content';
+
+import CustomerForm from '../../../components/CustomerForm';
 
 const CreateCustomerMain = styled('div')``;
 

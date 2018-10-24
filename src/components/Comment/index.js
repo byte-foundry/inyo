@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {FlexRow, FlexColumn, primaryBlue} from '../../utils/content.js';
+import {FlexRow, FlexColumn, primaryBlue} from '../../utils/content';
 
 const CommentMain = styled('div')``;
 const CommentImage = styled('div')`

@@ -18,6 +18,7 @@ import {
 	SEND_QUOTE,
 	SEND_AMENDMENT,
 } from '../../utils/mutations';
+import {GET_USER_INFOS} from '../../utils/queries';
 import {
 	H1,
 	H3,
@@ -129,6 +130,13 @@ const SelectStyles = {
 const SendQuoteButton = styled(Button)`
 	width: auto;
 `;
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
 
 class QuoteDisplay extends Component {
 	constructor(props) {
@@ -140,7 +148,7 @@ class QuoteDisplay extends Component {
 		};
 	}
 
-	getQuoteTotal = (option) => {
+	getQuoteTotal = (option, defaultVatRate = 20) => {
 		let sumDays = 0;
 		let sumHT = 0;
 		let sumTTC = 0;
@@ -150,7 +158,7 @@ class QuoteDisplay extends Component {
 				sumDays += item.unit;
 				sumHT += item.unitPrice;
 				sumTTC
-					+= item.unitPrice + item.unitPrice * (item.vatRate / 100);
+					+= item.unitPrice + item.unitPrice * (defaultVatRate / 100);
 			});
 		});
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
@@ -181,197 +189,257 @@ class QuoteDisplay extends Component {
 		} = this.props;
 
 		return (
-			<QuoteDisplayMain>
-				<BackButton
-					theme="Link"
-					size="XSmall"
-					onClick={() => this.props.history.push('/app/quotes')}
-				>
-					Retour à la liste des devis
-				</BackButton>
-				{mode === 'edit' && (
-					<QuoteRow justifyContent="space-between">
-						<QuoteDisplayTitle>
-							Remplissez votre devis
-						</QuoteDisplayTitle>
-						<Mutation mutation={SEND_QUOTE}>
-							{SendQuote => (
-								<SendQuoteButton
-									theme="Primary"
-									size="Medium"
-									onClick={() => {
-										sendQuote(quote.id, SendQuote);
-									}}
+			<Query query={GET_USER_INFOS}>
+				{({loading, data}) => {
+					if (loading) return <Loading>Chargement...</Loading>;
+					if (data && data.me) {
+						return (
+							<QuoteDisplayMain>
+								<BackButton
+									theme="Link"
+									size="XSmall"
+									onClick={() => this.props.history.push('/app/quotes')
+									}
 								>
-									Envoyez la proposition
-								</SendQuoteButton>
-							)}
-						</Mutation>
-					</QuoteRow>
-				)}
-				<QuoteRow noPadding justifyContent="space-between">
-					<FlexColumn>
-						<QuoteName>
-							<Mutation mutation={UPDATE_QUOTE}>
-								{updateQuote => (
-									<InlineEditable
-										value={quote.name}
-										type="text"
-										placeholder="Name of the project"
-										disabled={mode !== 'edit'}
-										onFocusOut={(value) => {
-											editQuoteTitle(
-												value,
-												quote.id,
-												updateQuote,
-											);
-										}}
-									/>
+									Retour à la liste des devis
+								</BackButton>
+								{mode === 'edit' && (
+									<QuoteRow justifyContent="space-between">
+										<QuoteDisplayTitle>
+											Remplissez votre devis
+										</QuoteDisplayTitle>
+										<Mutation mutation={SEND_QUOTE}>
+											{SendQuote => (
+												<SendQuoteButton
+													theme="Primary"
+													size="Medium"
+													onClick={() => {
+														sendQuote(
+															quote.id,
+															SendQuote,
+														);
+													}}
+												>
+													Envoyez la proposition
+												</SendQuoteButton>
+											)}
+										</Mutation>
+									</QuoteRow>
 								)}
-							</Mutation>
-						</QuoteName>
-						{mode === 'see' && (
-							<TasksProgressBar
-								tasksCompleted={totalItemsFinished}
-								tasksTotal={totalItems}
-							/>
-						)}
-					</FlexColumn>
-
-					{mode === 'edit' && (
-						<Mutation mutation={EDIT_ITEMS}>
-							{EditItems => (
-								<Select
-									styles={SelectStyles}
-									placeholder="Recommandation de contenu"
-									onChange={(e) => {
-										setQuoteData(e.value, EditItems);
-									}}
-									options={quoteTemplates}
-								/>
-							)}
-						</Mutation>
-					)}
-					{mode === 'see' && (
-						<FlexRow>
-							<QuoteStatus>
-								<span>Temps prévu : {timePlanned}</span>
-								<span>Dépassement : {overtime}</span>
-							</QuoteStatus>
-							<Mutation mutation={SEND_AMENDMENT}>
-								{SendAmendment => (
-									<SendQuoteButton
-										theme="Primary"
-										disabled={!amendmentEnabled}
-										size="Medium"
-										onClick={() => {
-											sendAmendment(
-												quote.id,
-												SendAmendment,
-											);
-										}}
-									>
-										Envoyez l'avenant
-									</SendQuoteButton>
-								)}
-							</Mutation>
-						</FlexRow>
-					)}
-				</QuoteRow>
-				<QuoteRow noPadding>
-					<ToggleButton
-						active={this.state.mode === 'proposal'}
-						onClick={(raw) => {
-							this.setState({
-								mode: 'proposal',
-							});
-						}}
-					>
-						Proposition
-					</ToggleButton>
-					<ToggleButton
-						active={this.state.mode === 'quote'}
-						onClick={(raw) => {
-							this.setState({
-								mode: 'quote',
-							});
-						}}
-					>
-						Devis
-					</ToggleButton>
-				</QuoteRow>
-				<FlexRow justifyContent="space-between">
-					<CenterContent flexGrow="2">
-						<QuoteContent>
-							<FlexColumn fullHeight>
-								{this.state.mode === 'quote' ? (
-									<QuoteSections>
-										{quoteOption.sections.map(
-											(section, index) => (
-												<QuoteSection
-													key={`section${section.id}`}
-													data={section}
-													addItem={addItem}
-													editItem={editItem}
-													mode={mode}
-													editSectionTitle={
-														editSectionTitle
-													}
-													removeItem={removeItem}
-													removeSection={
-														removeSection
-													}
-													sectionIndex={index}
-												/>
-											),
+								<QuoteRow
+									noPadding
+									justifyContent="space-between"
+								>
+									<FlexColumn>
+										<QuoteName>
+											<Mutation mutation={UPDATE_QUOTE}>
+												{updateQuote => (
+													<InlineEditable
+														value={quote.name}
+														type="text"
+														placeholder="Name of the project"
+														disabled={
+															mode !== 'edit'
+														}
+														onFocusOut={(value) => {
+															editQuoteTitle(
+																value,
+																quote.id,
+																updateQuote,
+															);
+														}}
+													/>
+												)}
+											</Mutation>
+										</QuoteName>
+										{mode === 'see' && (
+											<TasksProgressBar
+												tasksCompleted={
+													totalItemsFinished
+												}
+												tasksTotal={totalItems}
+											/>
 										)}
-										{mode === 'edit' && (
-											<Mutation mutation={ADD_SECTION}>
-												{AddSection => (
-													<QuoteAction
-														theme="Link"
-														size="XSmall"
+									</FlexColumn>
+
+									{mode === 'edit' && (
+										<Mutation mutation={EDIT_ITEMS}>
+											{EditItems => (
+												<Select
+													styles={SelectStyles}
+													placeholder="Recommandation de contenu"
+													onChange={(e) => {
+														setQuoteData(
+															e.value,
+															EditItems,
+														);
+													}}
+													options={quoteTemplates}
+												/>
+											)}
+										</Mutation>
+									)}
+									{mode === 'see' && (
+										<FlexRow>
+											<QuoteStatus>
+												<span>
+													Temps prévu : {timePlanned}
+												</span>
+												<span>
+													Dépassement : {overtime}
+												</span>
+											</QuoteStatus>
+											<Mutation mutation={SEND_AMENDMENT}>
+												{SendAmendment => (
+													<SendQuoteButton
+														theme="Primary"
+														disabled={
+															!amendmentEnabled
+														}
+														size="Medium"
 														onClick={() => {
-															addSection(
-																quoteOption.id,
-																AddSection,
+															sendAmendment(
+																quote.id,
+																SendAmendment,
 															);
 														}}
 													>
-														Ajouter une section
-													</QuoteAction>
+														Envoyez l'avenant
+													</SendQuoteButton>
 												)}
 											</Mutation>
+										</FlexRow>
+									)}
+								</QuoteRow>
+								<QuoteRow noPadding>
+									<ToggleButton
+										active={this.state.mode === 'proposal'}
+										onClick={(raw) => {
+											this.setState({
+												mode: 'proposal',
+											});
+										}}
+									>
+										Proposition
+									</ToggleButton>
+									<ToggleButton
+										active={this.state.mode === 'quote'}
+										onClick={(raw) => {
+											this.setState({
+												mode: 'quote',
+											});
+										}}
+									>
+										Devis
+									</ToggleButton>
+								</QuoteRow>
+								<FlexRow justifyContent="space-between">
+									<CenterContent flexGrow="2">
+										<QuoteContent>
+											<FlexColumn fullHeight>
+												{this.state.mode === 'quote' ? (
+													<QuoteSections>
+														{quoteOption.sections.map(
+															(
+																section,
+																index,
+															) => (
+																<QuoteSection
+																	key={`section${
+																		section.id
+																	}`}
+																	data={
+																		section
+																	}
+																	addItem={
+																		addItem
+																	}
+																	editItem={
+																		editItem
+																	}
+																	mode={mode}
+																	editSectionTitle={
+																		editSectionTitle
+																	}
+																	removeItem={
+																		removeItem
+																	}
+																	removeSection={
+																		removeSection
+																	}
+																	sectionIndex={
+																		index
+																	}
+																/>
+															),
+														)}
+														{mode === 'edit' && (
+															<Mutation
+																mutation={
+																	ADD_SECTION
+																}
+															>
+																{AddSection => (
+																	<QuoteAction
+																		theme="Link"
+																		size="XSmall"
+																		onClick={() => {
+																			addSection(
+																				quoteOption.id,
+																				AddSection,
+																			);
+																		}}
+																	>
+																		Ajouter
+																		une
+																		section
+																	</QuoteAction>
+																)}
+															</Mutation>
+														)}
+													</QuoteSections>
+												) : (
+													<Mutation
+														mutation={UPDATE_OPTION}
+													>
+														{UpdateOption => (
+															<TextEditor
+																disabled={
+																	mode
+																	!== 'edit'
+																}
+																currentContent={
+																	quoteOption.proposal
+																}
+																onChange={(raw) => {
+																	updateOption(
+																		quoteOption.id,
+																		raw,
+																		UpdateOption,
+																	);
+																}}
+															/>
+														)}
+													</Mutation>
+												)}
+											</FlexColumn>
+										</QuoteContent>
+									</CenterContent>
+									<SideActions>
+										<CustomerNameAndAddress
+											customer={quote.customer}
+										/>
+										{this.getQuoteTotal(
+											quoteOption,
+											data.me.defaultVatRate,
 										)}
-									</QuoteSections>
-								) : (
-									<Mutation mutation={UPDATE_OPTION}>
-										{UpdateOption => (
-											<TextEditor
-												disabled={mode !== 'edit'}
-												currentContent={
-													quoteOption.proposal
-												}
-												onChange={(raw) => {
-													updateOption(
-														quoteOption.id,
-														raw,
-														UpdateOption,
-													);
-												}}
-											/>
-										)}
-									</Mutation>
-								)}
-							</FlexColumn>
-						</QuoteContent>
-					</CenterContent>
-					<SideActions>
-						<CustomerNameAndAddress customer={quote.customer} />
-						{this.getQuoteTotal(quoteOption)}
-					</SideActions>
-				</FlexRow>
-			</QuoteDisplayMain>
+									</SideActions>
+								</FlexRow>
+							</QuoteDisplayMain>
+						);
+					}
+				}}
+			</Query>
 		);
 	}
 }

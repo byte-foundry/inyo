@@ -250,7 +250,7 @@ class Account extends Component {
 												Informations de devis
 											</ProfileTitle>
 											<UserQuoteSettingsForm
-												data={me.company}
+												data={me}
 												done={() => this.toast()}
 											/>
 											<ProfileTitle

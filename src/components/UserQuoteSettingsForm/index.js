@@ -3,7 +3,7 @@ import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import {UPDATE_USER} from '../../utils/mutations';
+import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
 	Button,
 	FlexRow,
@@ -39,7 +39,7 @@ class UserQuoteSettingsForm extends Component {
 
 		return (
 			<UserQuoteSettingsFormMain>
-				<Mutation mutation={UPDATE_USER}>
+				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
 						<Formik
 							initialValues={{
@@ -58,31 +58,34 @@ class UserQuoteSettingsForm extends Component {
 								actions.setSubmitting(false);
 								console.log(values);
 								try {
-									// updateUser({
-									// 	variables: {
-									// 		firstName: values.firstName,
-									// 		lastName: values.lastName,
-									// 		email: values.email,
-									// 	},
-									// 	update: (
-									// 		cache,
-									// 		{data: {updateUser}},
-									// 	) => {
-									// 		const data = cache.readQuery({
-									// 			query: GET_USER_INFOS,
-									// 		});
-									// 		data.me = updateUser;
-									// 		try {
-									// 			cache.writeQuery({
-									// 				query: GET_USER_INFOS,
-									// 				data,
-									// 			});
-									// 		}
-									// 		catch (e) {
-									// 			console.log(e);
-									// 		}
-									// 	},
-									// });
+									updateUser({
+										variables: {
+											defaultVatRate:
+												values.defaultVatRate,
+											defaultDailyPrice:
+												values.defaultDailyPrice,
+										},
+										update: (
+											cache,
+											{data: {updateUser}},
+										) => {
+											const data = cache.readQuery({
+												query: GET_USER_INFOS,
+											});
+
+											data.me = updateUser;
+											try {
+												cache.writeQuery({
+													query: GET_USER_INFOS,
+													data,
+												});
+												this.props.done();
+											}
+											catch (e) {
+												console.log(e);
+											}
+										},
+									});
 								}
 								catch (error) {
 									console.log(error);

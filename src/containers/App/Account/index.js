@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {Redirect, Link} from 'react-router-dom';
 import styled, {css} from 'react-emotion';
+import {ToastContainer, toast} from 'react-toastify';
 import {
 	H1,
 	H3,
@@ -22,6 +23,7 @@ import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserQuoteSettingsForm from '../../../components/UserQuoteSettingsForm';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
 	background: ${gray10};
@@ -108,6 +110,18 @@ class Account extends Component {
 		};
 	}
 
+	toast = () => {
+		toast.info(
+			<div>
+				<p>Les données ont été mises à jour</p>
+			</div>,
+			{
+				position: toast.POSITION.BOTTOM_LEFT,
+				autoClose: 3000,
+			},
+		);
+	};
+
 	render() {
 		const {activeItem} = this.state;
 
@@ -121,6 +135,7 @@ class Account extends Component {
 
 						return (
 							<AccountMain>
+								<ToastContainer />
 								<AccountBody>
 									<BackButton
 										theme="Link"
@@ -212,7 +227,10 @@ class Account extends Component {
 											>
 												Vous
 											</ProfileTitle>
-											<UserDataForm data={me} />
+											<UserDataForm
+												data={me}
+												done={() => this.toast()}
+											/>
 											<ProfileTitle
 												innerRef={(elem) => {
 													this.company = elem;
@@ -222,6 +240,7 @@ class Account extends Component {
 											</ProfileTitle>
 											<UserCompanyForm
 												data={me.company}
+												done={() => this.toast()}
 											/>
 											<ProfileTitle
 												innerRef={(elem) => {
@@ -232,6 +251,7 @@ class Account extends Component {
 											</ProfileTitle>
 											<UserQuoteSettingsForm
 												data={me.company}
+												done={() => this.toast()}
 											/>
 											<ProfileTitle
 												innerRef={(elem) => {

@@ -78,6 +78,7 @@ class UserDataForm extends Component {
 													query: GET_USER_INFOS,
 													data,
 												});
+												this.props.done();
 											}
 											catch (e) {
 												console.log(e);

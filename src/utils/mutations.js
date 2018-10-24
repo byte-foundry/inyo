@@ -46,6 +46,40 @@ export const UPDATE_USER = gql`
 			email
 			firstName
 			lastName
+			defaultDailyPrice
+			defaultVatRate
+			company {
+				id
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				phone
+				siret
+				rcs
+				rm
+				vat
+			}
+		}
+	}
+`;
+
+export const UPDATE_USER_CONSTANTS = gql`
+	mutation UpdateUser($defaultDailyPrice: Int, $defaultVatRate: Int) {
+		updateUser(
+			defaultDailyPrice: $defaultDailyPrice
+			defaultVatRate: $defaultVatRate
+		) {
+			id
+			email
+			firstName
+			lastName
+			defaultDailyPrice
+			defaultVatRate
 			company {
 				id
 				name
@@ -75,6 +109,8 @@ export const UPDATE_USER_COMPANY = gql`
 			email
 			firstName
 			lastName
+			defaultDailyPrice
+			defaultVatRate
 			company {
 				id
 				name

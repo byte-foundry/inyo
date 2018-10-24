@@ -60,6 +60,8 @@ export const GET_USER_INFOS = gql`
 			email
 			firstName
 			lastName
+			defaultDailyPrice
+			defaultVatRate
 			company {
 				id
 				name

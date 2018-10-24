@@ -40,7 +40,6 @@ class UserCompanyForm extends Component {
 			name, address, phone, siret, rcs, rm, vat,
 		} = this.props.data;
 
-		console.log(name);
 		return (
 			<UserCompanyFormMain>
 				<Mutation mutation={UPDATE_USER_COMPANY}>
@@ -84,6 +83,7 @@ class UserCompanyForm extends Component {
 													query: GET_USER_INFOS,
 													data,
 												});
+												this.props.done();
 											}
 											catch (e) {
 												console.log(e);

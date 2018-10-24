@@ -373,3 +373,23 @@ export const SEND_AMENDMENT = gql`
 		}
 	}
 `;
+
+export const ACCEPT_ITEM = gql`
+	mutation acceptItem($itemId: ID!, $token: String!) {
+		acceptItem(id: $itemId, token: $token) {
+			id
+			status
+			unit
+		}
+	}
+`;
+
+export const REJECT_ITEM = gql`
+	mutation removeItem($itemId: ID!, $token: String!) {
+		removeItem(id: $itemId, token: $token) {
+			id
+			status
+			unit
+		}
+	}
+`;

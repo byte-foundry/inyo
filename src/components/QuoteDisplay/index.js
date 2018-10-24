@@ -188,6 +188,19 @@ class QuoteDisplay extends Component {
 			overtime,
 		} = this.props;
 
+		const customerViewMode = this.props.match.params.customerToken;
+		const isAcceptable = quote.status === 'SENT';
+		const isAmendmentAcceptable
+			= quote.status === 'ACCEPTED'
+			&& quoteOption.sections.reduce(
+				(optionUpdated, section) => optionUpdated
+					|| section.items.reduce(
+						(sectionUpdated, item) => sectionUpdated || item.status === 'UPDATED_SENT',
+						optionUpdated,
+					),
+				false,
+			);
+
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
@@ -285,29 +298,142 @@ class QuoteDisplay extends Component {
 												<span>
 													Temps prévu : {timePlanned}
 												</span>
-												<span>
-													Dépassement : {overtime}
-												</span>
-											</QuoteStatus>
-											<Mutation mutation={SEND_AMENDMENT}>
-												{SendAmendment => (
-													<SendQuoteButton
-														theme="Primary"
-														disabled={
-															!amendmentEnabled
-														}
-														size="Medium"
-														onClick={() => {
-															sendAmendment(
-																quote.id,
-																SendAmendment,
-															);
-														}}
-													>
-														Envoyez l'avenant
-													</SendQuoteButton>
+												{!customerViewMode && (
+													<span>
+														Dépassement : {overtime}
+													</span>
 												)}
-											</Mutation>
+											</QuoteStatus>
+											{!customerViewMode && (
+												<Mutation
+													mutation={SEND_AMENDMENT}
+												>
+													{SendAmendment => (
+														<SendQuoteButton
+															theme="Primary"
+															disabled={
+																!amendmentEnabled
+															}
+															size="Medium"
+															onClick={() => {
+																sendAmendment(
+																	quote.id,
+																	SendAmendment,
+																);
+															}}
+														>
+															Envoyez l'avenant
+														</SendQuoteButton>
+													)}
+												</Mutation>
+											)}
+											{customerViewMode
+												&& isAmendmentAcceptable && (
+												<Mutation
+													mutation={
+														SEND_AMENDMENT
+													}
+												>
+													{SendAmendment => (
+														<SendQuoteButton
+															theme="Primary"
+															disabled={
+																!amendmentEnabled
+															}
+															size="Medium"
+															onClick={() => {
+																sendAmendment(
+																	quote.id,
+																	SendAmendment,
+																);
+															}}
+														>
+																Acceptez
+																l'avenant
+														</SendQuoteButton>
+													)}
+												</Mutation>
+											)}
+											{customerViewMode
+												&& isAmendmentAcceptable && (
+												<Mutation
+													mutation={
+														SEND_AMENDMENT
+													}
+												>
+													{SendAmendment => (
+														<SendQuoteButton
+															theme="Primary"
+															disabled={
+																!amendmentEnabled
+															}
+															size="Medium"
+															onClick={() => {
+																sendAmendment(
+																	quote.id,
+																	SendAmendment,
+																);
+															}}
+														>
+																Rejetez
+																l'avenant
+														</SendQuoteButton>
+													)}
+												</Mutation>
+											)}
+											{customerViewMode
+												&& isAcceptable && (
+												<Mutation
+													mutation={
+														SEND_AMENDMENT
+													}
+												>
+													{SendAmendment => (
+														<SendQuoteButton
+															theme="Primary"
+															disabled={
+																!amendmentEnabled
+															}
+															size="Medium"
+															onClick={() => {
+																sendAmendment(
+																	quote.id,
+																	SendAmendment,
+																);
+															}}
+														>
+																Acceptez le
+																devis
+														</SendQuoteButton>
+													)}
+												</Mutation>
+											)}
+											{customerViewMode
+												&& isAcceptable && (
+												<Mutation
+													mutation={
+														SEND_AMENDMENT
+													}
+												>
+													{SendAmendment => (
+														<SendQuoteButton
+															theme="Primary"
+															disabled={
+																!amendmentEnabled
+															}
+															size="Medium"
+															onClick={() => {
+																sendAmendment(
+																	quote.id,
+																	SendAmendment,
+																);
+															}}
+														>
+																Rejetez le devis
+														</SendQuoteButton>
+													)}
+												</Mutation>
+											)}
 										</FlexRow>
 									)}
 								</QuoteRow>

@@ -151,6 +151,7 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 			id
 			template
 			name
+			status
 			issuer {
 				name
 				email

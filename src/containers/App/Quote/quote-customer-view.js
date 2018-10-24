@@ -1,34 +1,11 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
 import {Route} from 'react-router-dom';
-
 import {Query} from 'react-apollo';
-import {
-	FlexRow, FlexColumn, H1, ToggleButton,
-} from '../../../utils/content';
 
 import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
 
-import TasksProgressBar from '../../../components/TasksProgressBar';
-import Section from '../../../components/Section';
-import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
-import IssuerNameAndAddress from '../../../components/IssuerNameAndAddress';
+import QuoteDisplay from '../../../components/QuoteDisplay';
 import CommentModal from '../../../components/CommentModal';
-import TextEditor from '../../../components/TextEditor';
-
-const TasksListUserMain = styled('div')``;
-const TLTopBar = styled(FlexRow)``;
-const TLCustomerName = styled('label')`
-	flex: 1;
-`;
-const TLTimeIndicators = styled(FlexColumn)``;
-const TLTimeLabel = styled('div')``;
-const TLTimeValue = styled('div')``;
-
-const SideActions = styled(FlexColumn)`
-	min-width: 15vw;
-	padding: 20px 40px;
-`;
 
 class QuoteCustomerView extends Component {
 	constructor(props) {
@@ -50,86 +27,49 @@ class QuoteCustomerView extends Component {
 
 					const {
 						quote: {
-							name,
-							customer,
-							issuer,
-							options: [{sections, proposal}],
+							options: [option],
 						},
 					} = data;
 
-					const customerOptions = {
-						noAddItem: true,
-						noValidation: true,
-						noItemEdition: true,
-						seeCommentsNotification: true,
-					};
+					const totalItems = option.sections.reduce(
+						(sumItems, section) => sumItems + section.items.length,
+						0,
+					);
 
-					const sectionsElems = sections.map(section => (
-						<Section
-							items={section.items}
-							name={section.name}
-							id={section.id}
-							options={customerOptions}
-						/>
-					));
+					const totalItemsFinished = option.sections.reduce(
+						(sumItems, section) => sumItems
+							+ section.items.filter(
+								item => item.status === 'FINISHED',
+							).length,
+						0,
+					);
+
+					const timePlanned = option.sections.reduce(
+						(timeSectionSum, section) => timeSectionSum
+							+ section.items.reduce(
+								(itemSum, item) => itemSum + item.unit,
+								0,
+							),
+						0,
+					);
 
 					return (
-						<TasksListUserMain>
-							<H1>{name}</H1>
-							<TasksProgressBar
-								tasksCompleted={1}
-								tasksTotal={5}
+						<div>
+							<QuoteDisplay
+								quoteOption={option}
+								quote={data.quote}
+								totalItems={totalItems}
+								totalItemsFinished={totalItemsFinished}
+								timePlanned={timePlanned}
+								mode="see"
 							/>
-							<FlexColumn>
-								<FlexRow>
-									<ToggleButton
-										active={this.state.mode === 'proposal'}
-										onClick={(raw) => {
-											this.setState({
-												mode: 'proposal',
-											});
-										}}
-									>
-										Proposition
-									</ToggleButton>
-									<ToggleButton
-										active={this.state.mode === 'quote'}
-										onClick={(raw) => {
-											this.setState({
-												mode: 'quote',
-											});
-										}}
-									>
-										Devis
-									</ToggleButton>
-								</FlexRow>
-								<FlexRow>
-									<SideActions>
-										<IssuerNameAndAddress issuer={issuer} />
-									</SideActions>
-									{this.state.mode === 'quote' ? (
-										<FlexColumn>{sectionsElems}</FlexColumn>
-									) : (
-										<TextEditor
-											editorEnabled={false}
-											currentContent={proposal}
-											onChange={() => {}}
-										/>
-									)}
-									<SideActions>
-										<CustomerNameAndAddress
-											customer={customer}
-										/>
-									</SideActions>
-								</FlexRow>
-							</FlexColumn>
 							<Route
 								path={`${
 									this.props.match.path
 								}/comments/:itemId`}
 								component={CommentModal}
 							/>
-						</TasksListUserMain>
+						</div>
 					);
 				}}
 			</Query>

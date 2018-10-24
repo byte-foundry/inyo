@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {Redirect, Link} from 'react-router-dom';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import {
 	H1,
 	H3,
@@ -16,25 +16,55 @@ import {
 	gray10,
 	primaryWhite,
 	gray20,
+	gray30,
 } from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
+import UserQuoteSettingsForm from '../../../components/UserQuoteSettingsForm';
 
 const AccountMain = styled('div')`
 	background: ${gray10};
 	min-height: 100vh;
+	padding-bottom: 80px;
 `;
 const AccountBody = styled('div')`
 	max-width: 1600px;
 	margin-left: auto;
 	margin-right: auto;
 `;
+const Profile = styled(FlexRow)``;
+const ProfileSide = styled('div')`
+	float: right;
+	margin-top: 80px;
+	margin-left: auto;
+	margin-right: 40px;
+	position: sticky;
+`;
 
+const ProfileSideElem = styled(P)`
+	text-transform: uppercase;
+	color: ${gray50};
+	border-left: 3px solid transparent;
+	padding-left: 10px;
+	cursor: pointer;
+	transition: border-color 0.3s ease, color 0.3s ease;
+	${props => props.active
+		&& css`
+			border-color: ${gray30};
+			color: ${gray30};
+		`};
+`;
 const ProfileMain = styled('div')`
 	max-width: 900px;
-	margin-left: auto;
 	margin-right: auto;
+	flex-grow: 2;
+`;
+
+const ProfileSection = styled('div')`
+	background: ${primaryWhite};
+	padding: 20px 40px;
+	border: 1px solid ${gray20};
 `;
 const BackButton = styled(Button)`
 	padding: 10px 5px;
@@ -71,7 +101,16 @@ const ProfileTitle = styled(H3)`
 `;
 
 class Account extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			activeItem: 'me',
+		};
+	}
+
 	render() {
+		const {activeItem} = this.state;
+
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({client, loading, data}) => {
@@ -79,8 +118,6 @@ class Account extends Component {
 					if (data && data.me) {
 						const {me} = data;
 						const {firstName} = me;
-
-						console.log(me);
 
 						return (
 							<AccountMain>
@@ -99,28 +136,127 @@ class Account extends Component {
 									<WelcomeMessage>
 										Bonjour {firstName} !
 									</WelcomeMessage>
-									<ProfileMain>
-										<ProfileTitle>Vous</ProfileTitle>
-										<UserDataForm data={me} />
-										<ProfileTitle>
-											Votre société
-										</ProfileTitle>
-										<UserCompanyForm data={me.company} />
-									</ProfileMain>
+									<Profile>
+										<ProfileSide>
+											<ProfileSideElem
+												active={activeItem === 'me'}
+												onClick={() => {
+													this.me.scrollIntoView({
+														block: 'start',
+														behavior: 'smooth',
+													});
+													this.setState({
+														activeItem: 'me',
+													});
+												}}
+											>
+												Vous
+											</ProfileSideElem>
+											<ProfileSideElem
+												active={
+													activeItem === 'company'
+												}
+												onClick={() => {
+													this.company.scrollIntoView(
+														{
+															block: 'start',
+															behavior: 'smooth',
+														},
+													);
+													this.setState({
+														activeItem: 'company',
+													});
+												}}
+											>
+												Votre société
+											</ProfileSideElem>
+											<ProfileSideElem
+												active={activeItem === 'quote'}
+												onClick={() => {
+													this.quote.scrollIntoView({
+														block: 'start',
+														behavior: 'smooth',
+													});
+													this.setState({
+														activeItem: 'quote',
+													});
+												}}
+											>
+												Informations de devis
+											</ProfileSideElem>
+											<ProfileSideElem
+												active={
+													activeItem === 'account'
+												}
+												onClick={() => {
+													this.account.scrollIntoView(
+														{
+															block: 'start',
+															behavior: 'smooth',
+														},
+													);
+													this.setState({
+														activeItem: 'account',
+													});
+												}}
+											>
+												Votre compte
+											</ProfileSideElem>
+										</ProfileSide>
 
-									<LogoutButton
-										theme="Link"
-										size="XSmall"
-										type="button"
-										onClick={() => {
-											window.localStorage.removeItem(
-												'authToken',
-											);
-											client.resetStore();
-										}}
-									>
-										Me déconnecter
-									</LogoutButton>
+										<ProfileMain>
+											<ProfileTitle
+												innerRef={(elem) => {
+													this.me = elem;
+												}}
+											>
+												Vous
+											</ProfileTitle>
+											<UserDataForm data={me} />
+											<ProfileTitle
+												innerRef={(elem) => {
+													this.company = elem;
+												}}
+											>
+												Votre société
+											</ProfileTitle>
+											<UserCompanyForm
+												data={me.company}
+											/>
+											<ProfileTitle
+												innerRef={(elem) => {
+													this.quote = elem;
+												}}
+											>
+												Informations de devis
+											</ProfileTitle>
+											<UserQuoteSettingsForm
+												data={me.company}
+											/>
+											<ProfileTitle
+												innerRef={(elem) => {
+													this.account = elem;
+												}}
+											>
+												Votre compte
+											</ProfileTitle>
+											<ProfileSection>
+												<LogoutButton
+													theme="Link"
+													size="XSmall"
+													type="button"
+													onClick={() => {
+														window.localStorage.removeItem(
+															'authToken',
+														);
+														client.resetStore();
+													}}
+												>
+													Me déconnecter
+												</LogoutButton>
+											</ProfileSection>
+										</ProfileMain>
+									</Profile>
 								</AccountBody>
 							</AccountMain>
 						);

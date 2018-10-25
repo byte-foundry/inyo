@@ -234,6 +234,7 @@ class Item extends Component {
 						itemId={item.id}
 						sectionId={sectionId}
 						mode={mode}
+						customerViewMode={customerViewMode}
 					/>
 				)}
 				<ItemMain

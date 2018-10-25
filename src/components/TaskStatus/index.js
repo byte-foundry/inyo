@@ -78,7 +78,7 @@ class TaskStatus extends Component {
 
 	render() {
 		const {
-			status, sectionId, itemId, mode,
+			status, sectionId, itemId, mode, customerViewMode,
 		} = this.props;
 
 		return (
@@ -86,7 +86,7 @@ class TaskStatus extends Component {
 				{finishItem => (
 					<TaskStatusMain
 						onClick={() => {
-							if (mode === 'see') {
+							if (mode === 'see' && !customerViewMode) {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
 						}}

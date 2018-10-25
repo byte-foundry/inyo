@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
+import ReactGA from 'react-ga';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
@@ -53,6 +54,10 @@ class LoginForm extends Component {
 											'authToken',
 											data.login.token,
 										);
+										ReactGA.event({
+											category: 'User',
+											action: 'Logged in',
+										});
 										this.setState({
 											shouldRedirect: true,
 										});

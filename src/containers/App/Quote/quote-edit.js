@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
-
+import ReactGA from 'react-ga';
 import {templates} from '../../../utils/quote-templates';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
 
@@ -70,6 +70,10 @@ class EditQuote extends Component {
 					cache.writeQuery({
 						query: GET_ALL_QUOTES,
 						data,
+					});
+					ReactGA.event({
+						category: 'Quote',
+						action: 'Sent quote',
 					});
 					this.toast();
 				}

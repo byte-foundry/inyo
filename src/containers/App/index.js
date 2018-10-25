@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
-
+import ReactGA from 'react-ga';
 import Auth from './Auth';
 import Dashboard from './Dashboard';
 import Account from './Account';
@@ -16,11 +16,22 @@ import {CHECK_LOGIN_USER} from '../../utils/queries';
 const AppMain = styled('div')``;
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			uid_set: false,
+		};
+	}
+
 	render() {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
-				{({loading, error}) => {
+				{({data, loading, error}) => {
 					if (loading) return <p>Loading...</p>;
+					if (data.me && !this.state.uid_set) {
+						ReactGA.set({userId: data.me.id});
+						this.setState({uid_set: true});
+					}
 					return (
 						<AppMain>
 							<Switch>

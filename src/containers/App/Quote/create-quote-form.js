@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import {Mutation, Query} from 'react-apollo';
 import Creatable from 'react-select/lib/Creatable';
 import ClassicSelect from 'react-select';
+import ReactGA from 'react-ga';
 import {templates} from '../../../utils/quote-templates';
 
 import {
@@ -131,7 +132,7 @@ class CreateQuoteForm extends React.Component {
 														errors.email = 'Requis';
 													}
 													else if (
-														!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(
+														!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,10}$/i.test(
 															values.email,
 														)
 													) {
@@ -230,6 +231,12 @@ class CreateQuoteForm extends React.Component {
 																		data,
 																	},
 																);
+																ReactGA.event({
+																	category:
+																		'Quote',
+																	action:
+																		'Created quote',
+																});
 															}
 															catch (e) {
 																console.log(e);

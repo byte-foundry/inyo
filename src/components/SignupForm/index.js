@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
+import ReactGA from 'react-ga';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -56,6 +57,10 @@ class SignupForm extends Component {
 											'authToken',
 											data.signup.token,
 										);
+										ReactGA.event({
+											category: 'User',
+											action: 'Created an account',
+										});
 										this.setState({
 											shouldRedirect: true,
 										});

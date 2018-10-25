@@ -3,6 +3,7 @@ import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import ReactGA from 'react-ga';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
 	Button,
@@ -78,6 +79,11 @@ class UserQuoteSettingsForm extends Component {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
 													data,
+												});
+												ReactGA.event({
+													category: 'User',
+													action:
+														'Updated quote settings',
 												});
 												this.props.done();
 											}

@@ -3,6 +3,7 @@ import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import ReactGA from 'react-ga';
 import AddressAutocomplete from '../AddressAutocomplete';
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
 import {
@@ -78,6 +79,10 @@ class UserCompanyForm extends Component {
 											});
 
 											data.me = updateUser;
+											ReactGA.event({
+												category: 'User',
+												action: 'Updated company data',
+											});
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,

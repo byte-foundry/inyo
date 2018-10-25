@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {Query} from 'react-apollo';
+import styled from 'react-emotion';
+import {Mutation, Query} from 'react-apollo';
+import ReactGA from 'react-ga';
+import Section from '../../../components/Section';
 
 import {GET_QUOTE_DATA} from '../../../utils/queries';
 
@@ -71,6 +74,10 @@ class TasksListUser extends Component {
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 					data,
+				});
+				ReactGA.event({
+					category: 'Quote',
+					action: 'Sent amendment',
 				});
 			}
 			catch (e) {

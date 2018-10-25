@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 import {Query} from 'react-apollo';
-
+import {ToastContainer, toast} from 'react-toastify';
+import styled from 'react-emotion';
 import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
 import CommentModal from '../../../components/CommentModal';
+
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
 
 class QuoteCustomerView extends Component {
 	constructor(props) {
@@ -43,6 +52,15 @@ class QuoteCustomerView extends Component {
 			catch (e) {
 				throw new Error(e);
 			}
+			toast.info(
+				<div>
+					<p>📬 Le prestataire a été notifié.</p>
+				</div>,
+				{
+					position: toast.POSITION.TOP_RIGHT,
+					autoClose: 3000,
+				},
+			);
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},
 	});
@@ -78,6 +96,15 @@ class QuoteCustomerView extends Component {
 			catch (e) {
 				throw new Error(e);
 			}
+			toast.info(
+				<div>
+					<p>📬 Le prestataire a été notifié.</p>
+				</div>,
+				{
+					position: toast.POSITION.TOP_RIGHT,
+					autoClose: 3000,
+				},
+			);
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},
 	});
@@ -91,7 +118,7 @@ class QuoteCustomerView extends Component {
 				variables={{quoteId, token: customerToken}}
 			>
 				{({loading, error, data}) => {
-					if (loading) return <p>Loading</p>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 
 					const {
@@ -124,6 +151,7 @@ class QuoteCustomerView extends Component {
 
 					return (
 						<div>
+							<ToastContainer />
 							<QuoteDisplay
 								quoteOption={option}
 								quote={data.quote}

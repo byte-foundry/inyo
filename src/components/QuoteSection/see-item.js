@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
+import {ToastContainer, toast} from 'react-toastify';
 import AddItem from './add-item';
 import AmendItem from './amend-item';
 import TaskStatus from '../TaskStatus';
@@ -117,6 +118,15 @@ class Item extends Component {
 				token: this.props.match.params.customerToken,
 			},
 			update: (cache, {data: {itemMutation}}) => {
+				toast.info(
+					<div>
+						<p>📬 Le prestataire a été notifié.</p>
+					</div>,
+					{
+						position: toast.POSITION.TOP_RIGHT,
+						autoClose: 3000,
+					},
+				);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA_WITH_TOKEN,
 					variables: {
@@ -267,6 +277,7 @@ class Item extends Component {
 					{customerViewMode
 						&& item.status === 'UPDATED_SENT' && (
 						<ItemCustomerActions>
+							<ToastContainer />
 							<Mutation mutation={ACCEPT_ITEM}>
 								{acceptItem => (
 									<ItemCustomerButton

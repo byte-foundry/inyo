@@ -342,114 +342,117 @@ class QuoteDisplay extends Component {
 											)}
 											{customerViewMode
 												&& isAmendmentAcceptable && (
-												<Mutation
-													mutation={
-														ACCEPT_AMENDMENT
-													}
-												>
-													{acceptAmendment => (
-														<SendQuoteButton
-															theme="Primary"
-															size="Medium"
-															onClick={() => {
-																acceptOrRejectAmendment(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	acceptAmendment,
-																);
-															}}
-														>
-																Acceptez
-																l'avenant
-														</SendQuoteButton>
-													)}
-												</Mutation>
-											)}
-											{customerViewMode
-												&& isAmendmentAcceptable && (
-												<Mutation
-													mutation={
-														REJECT_AMENDMENT
-													}
-												>
-													{rejectAmendment => (
-														<SendQuoteButton
-															theme="Primary"
-															size="Medium"
-															onClick={() => {
-																acceptOrRejectAmendment(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	rejectAmendment,
-																);
-															}}
-														>
-																Rejetez
-																l'avenant
-														</SendQuoteButton>
-													)}
-												</Mutation>
-											)}
-											{customerViewMode
-												&& isAcceptable && (
-												<Mutation
-													mutation={ACCEPT_QUOTE}
-												>
-													{acceptQuote => (
-														<SendQuoteButton
-															theme="Primary"
-															size="Medium"
-															onClick={() => {
-																acceptOrRejectQuote(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	acceptQuote,
-																);
-															}}
-														>
-																Acceptez le
-																devis
-														</SendQuoteButton>
-													)}
-												</Mutation>
+												<FlexColumn justifyContent="space-around">
+													<Mutation
+														mutation={
+															ACCEPT_AMENDMENT
+														}
+													>
+														{acceptAmendment => (
+															<SendQuoteButton
+																theme="Success"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectAmendment(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		acceptAmendment,
+																	);
+																}}
+															>
+																	Acceptez
+																	l'avenant
+															</SendQuoteButton>
+														)}
+													</Mutation>
+													<Mutation
+														mutation={
+															REJECT_AMENDMENT
+														}
+													>
+														{rejectAmendment => (
+															<SendQuoteButton
+																theme="Error"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectAmendment(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		rejectAmendment,
+																	);
+																}}
+															>
+																	Rejetez
+																	l'avenant
+															</SendQuoteButton>
+														)}
+													</Mutation>
+												</FlexColumn>
 											)}
 											{customerViewMode
 												&& isAcceptable && (
-												<Mutation
-													mutation={REJECT_QUOTE}
-												>
-													{rejectQuote => (
-														<SendQuoteButton
-															theme="Primary"
-															size="Medium"
-															onClick={() => {
-																acceptOrRejectQuote(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	rejectQuote,
-																);
-															}}
-														>
-																Rejetez le devis
-														</SendQuoteButton>
-													)}
-												</Mutation>
+												<FlexColumn>
+													<Mutation
+														mutation={
+															ACCEPT_QUOTE
+														}
+													>
+														{acceptQuote => (
+															<SendQuoteButton
+																theme="Success"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectQuote(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		acceptQuote,
+																	);
+																}}
+															>
+																	Acceptez le
+																	devis
+															</SendQuoteButton>
+														)}
+													</Mutation>
+													<Mutation
+														mutation={
+															REJECT_QUOTE
+														}
+													>
+														{rejectQuote => (
+															<SendQuoteButton
+																theme="Error"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectQuote(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		rejectQuote,
+																	);
+																}}
+															>
+																	Rejetez le
+																	devis
+															</SendQuoteButton>
+														)}
+													</Mutation>
+												</FlexColumn>
 											)}
 										</FlexRow>
 									)}

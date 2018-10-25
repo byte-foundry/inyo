@@ -57,15 +57,15 @@ class EditQuote extends Component {
 	sendQuote = (quoteId, sendQuote) => {
 		sendQuote({
 			variables: {quoteId},
-			update: (cache, {data: {sendQuoteData}}) => {
+			update: (cache, {data: {sendQuote}}) => {
 				const data = cache.readQuery({
 					query: GET_ALL_QUOTES,
 				});
 				const updatedQuote = data.me.company.quotes.find(
-					quote => quote.id === sendQuoteData.id,
+					quote => quote.id === sendQuote.id,
 				);
 
-				updatedQuote.status = sendQuoteData.status;
+				updatedQuote.status = sendQuote.status;
 				try {
 					cache.writeQuery({
 						query: GET_ALL_QUOTES,
@@ -83,13 +83,13 @@ class EditQuote extends Component {
 	editQuoteTitle = (title, quoteId, updateQuote) => {
 		updateQuote({
 			variables: {quoteId, name: title},
-			update: (cache, {data: {updateQuoteData}}) => {
+			update: (cache, {data: {updateQuote}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
-				data.quote.name = updateQuoteData.name;
+				data.quote.name = updateQuote.name;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -108,13 +108,13 @@ class EditQuote extends Component {
 	updateOption = (optionId, raw, updateOption) => {
 		updateOption({
 			variables: {optionId, proposal: raw},
-			update: (cache, {data: {updateOptionData}}) => {
+			update: (cache, {data: {updateOption}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
-				data.quote.options[0].proposal = updateOptionData.proposal;
+				data.quote.options[0].proposal = updateOption.proposal;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -133,7 +133,7 @@ class EditQuote extends Component {
 	addItem = (sectionId, addItem) => {
 		addItem({
 			variables: {sectionId, name: 'Nouvelle tâche'},
-			update: (cache, {data: {addItemData}}) => {
+			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -142,7 +142,7 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 
-				section.items.push(addItemData);
+				section.items.push(addItem);
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -184,7 +184,7 @@ class EditQuote extends Component {
 					__typename: 'Item',
 				},
 			},
-			update: (cache, {data: {updateItemData}}) => {
+			update: (cache, {data: {updateItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -193,10 +193,10 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === updateItemData.id,
+					e => e.id === updateItem.id,
 				);
 
-				section.items[itemIndex] = updateItemData;
+				section.items[itemIndex] = updateItem;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -215,7 +215,7 @@ class EditQuote extends Component {
 	removeItem = (itemId, sectionId, removeItem) => {
 		removeItem({
 			variables: {itemId},
-			update: (cache, {data: {removeItemData}}) => {
+			update: (cache, {data: {removeItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -224,7 +224,7 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.findIndex(
-					e => e.id === removeItemData.id,
+					e => e.id === removeItem.id,
 				);
 
 				section.items.splice(itemIndex, 1);
@@ -246,13 +246,13 @@ class EditQuote extends Component {
 	addSection = (optionId, addSection) => {
 		addSection({
 			variables: {optionId, name: 'Nouvelle section'},
-			update: (cache, {data: {addSectionData}}) => {
+			update: (cache, {data: {addSection}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
-				data.quote.options[0].sections.push(addSectionData);
+				data.quote.options[0].sections.push(addSection);
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -271,7 +271,7 @@ class EditQuote extends Component {
 	editSectionTitle = (sectionId, name, updateSection) => {
 		updateSection({
 			variables: {sectionId, name},
-			update: (cache, {data: {updateSectionData}}) => {
+			update: (cache, {data: {updateSection}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -280,9 +280,7 @@ class EditQuote extends Component {
 					e => e.id === sectionId,
 				);
 
-				data.quote.options[0].sections[
-					sectionIndex
-				] = updateSectionData;
+				data.quote.options[0].sections[sectionIndex] = updateSection;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA,
@@ -301,13 +299,13 @@ class EditQuote extends Component {
 	removeSection = (sectionId, removeSection) => {
 		removeSection({
 			variables: {sectionId},
-			update: (cache, {data: {removeSectionData}}) => {
+			update: (cache, {data: {removeSection}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const sectionIndex = data.quote.options[0].sections.findIndex(
-					e => e.id === removeSectionData.id,
+					e => e.id === removeSection.id,
 				);
 
 				data.quote.options[0].sections.splice(sectionIndex, 1);

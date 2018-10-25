@@ -111,7 +111,7 @@ class Item extends Component {
 				itemId: this.props.item.id,
 				token: this.props.match.params.customerToken,
 			},
-			update: (cache, {data: {itemMutationData}}) => {
+			update: (cache, {data: {itemMutation}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA_WITH_TOKEN,
 					variables: {
@@ -123,10 +123,10 @@ class Item extends Component {
 					e => e.id === this.props.sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === itemMutationData.id,
+					e => e.id === itemMutation.id,
 				);
 
-				section.items[itemIndex].status = itemMutationData.status;
+				section.items[itemIndex].status = itemMutation.status;
 				try {
 					cache.writeQuery({
 						query: GET_QUOTE_DATA_WITH_TOKEN,

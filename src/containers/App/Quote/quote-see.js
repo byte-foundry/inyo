@@ -58,13 +58,13 @@ class TasksListUser extends Component {
 		variables: {
 			quoteId,
 		},
-		update: (cache, {data: {sendAmendmentData}}) => {
+		update: (cache, {data: {sendAmendment}}) => {
 			const data = cache.readQuery({
 				query: GET_QUOTE_DATA,
 				variables: {quoteId: this.props.match.params.quoteId},
 			});
 
-			data.quote = sendAmendmentData;
+			data.quote = sendAmendment;
 
 			try {
 				cache.writeQuery({

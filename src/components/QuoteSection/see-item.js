@@ -29,6 +29,7 @@ const ItemMain = styled(FlexRow)`
 	background: ${primaryWhite};
 	font-size: 13px;
 	position: relative;
+	width: 100%;
 `;
 
 const CommentsCount = styled('div')`
@@ -82,6 +83,10 @@ const ItemCustomerButton = styled(Button)`
 		border-color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
 		color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
 	}`};
+`;
+
+const ItemRow = styled(FlexRow)`
+	align-items: center;
 `;
 
 class Item extends Component {
@@ -222,68 +227,68 @@ class Item extends Component {
 			);
 		}
 		return (
-			<ItemMain justifyContent="space-between">
-				<ItemName>
-					{mode === 'see' && (
-						<TaskStatus
-							status={item.status}
-							itemId={item.id}
-							sectionId={sectionId}
-							mode={mode}
-						/>
+			<ItemRow>
+				{mode === 'see' && (
+					<TaskStatus
+						status={item.status}
+						itemId={item.id}
+						sectionId={sectionId}
+						mode={mode}
+					/>
+				)}
+				<ItemMain
+					justifyContent="space-between"
+					onClick={() => {
+						if (!customerViewMode) {
+							this.setState({shouldDisplayAddItem: true});
+						}
+					}}
+				>
+					<ItemName>
+						<span style={{cursor: 'pointer'}}>{item.name}</span>
+					</ItemName>
+					{customerViewMode
+						&& status === 'UPDATED_SENT' && (
+						<ItemStatus>UPDATED</ItemStatus>
 					)}
-					<span
-						onClick={() => {
-							if (!customerViewMode) {
-								this.setState({shouldDisplayAddItem: true});
-							}
-						}}
-						style={{cursor: 'pointer'}}
-					>
-						{item.name}
-					</span>
-				</ItemName>
-				{customerViewMode
-					&& status === 'UPDATED_SENT' && (
-					<ItemStatus>UPDATED</ItemStatus>
-				)}
-				{customerViewMode
-					&& status === 'UPDATED_SENT'
-					&& comments.length > 0 && (
-					<CommentsCount onClick={this.seeComments}>
-						{comments.length}
-					</CommentsCount>
-				)}
-				<span>{item.unit} jours</span>
-				<span>{item.unitPrice}€</span>
-				<span>{item.unitPrice * item.unit}€</span>
-				{customerViewMode
-					&& item.status === 'UPDATED_SENT' && (
-					<ItemCustomerActions>
-						<Mutation mutation={ACCEPT_ITEM}>
-							{acceptItem => (
-								<ItemCustomerButton
-									accept
-									onClick={() => this.submitItem(acceptItem)
-									}
-								>
-										Accepter
-								</ItemCustomerButton>
-							)}
-						</Mutation>
-						<Mutation mutation={REJECT_ITEM}>
-							{rejectItem => (
-								<ItemCustomerButton
-									onClick={() => this.submitItem(rejectItem)
-									}
-								>
-										Rejeter
-								</ItemCustomerButton>
-							)}
-						</Mutation>
-					</ItemCustomerActions>
-				)}
-			</ItemMain>
+					{customerViewMode
+						&& status === 'UPDATED_SENT'
+						&& comments.length > 0 && (
+						<CommentsCount onClick={this.seeComments}>
+							{comments.length}
+						</CommentsCount>
+					)}
+					<span>{item.unit} jours</span>
+					<span>{item.unitPrice.toLocaleString('fr-FR')}€</span>
+					<span>{item.unitPrice * item.unit}€</span>
+					{customerViewMode
+						&& item.status === 'UPDATED_SENT' && (
+						<ItemCustomerActions>
+							<Mutation mutation={ACCEPT_ITEM}>
+								{acceptItem => (
+									<ItemCustomerButton
+										accept
+										onClick={() => this.submitItem(acceptItem)
+										}
+									>
+											Accepter
+									</ItemCustomerButton>
+								)}
+							</Mutation>
+							<Mutation mutation={REJECT_ITEM}>
+								{rejectItem => (
+									<ItemCustomerButton
+										onClick={() => this.submitItem(rejectItem)
+										}
+									>
+											Rejeter
+									</ItemCustomerButton>
+								)}
+							</Mutation>
+						</ItemCustomerActions>
+					)}
+				</ItemMain>
+			</ItemRow>
 		);
 	}
 }

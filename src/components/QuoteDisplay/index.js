@@ -155,10 +155,13 @@ class QuoteDisplay extends Component {
 
 		option.sections.forEach((section) => {
 			section.items.forEach((item) => {
-				sumDays += item.unit;
-				sumHT += item.unitPrice;
+				sumDays += item.pendingUnit || item.unit;
+				sumHT += (item.pendingUnit || item.unit) * item.unitPrice;
 				sumTTC
-					+= item.unitPrice + item.unitPrice * (defaultVatRate / 100);
+					+= (item.pendingUnit || item.unit) * item.unitPrice
+					+ (item.pendingUnit || item.unit)
+						* item.unitPrice
+						* (defaultVatRate / 100);
 			});
 		});
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;

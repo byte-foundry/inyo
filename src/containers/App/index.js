@@ -28,7 +28,7 @@ class App extends Component {
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
 				{({data, loading, error}) => {
 					if (loading) return <p>Loading...</p>;
-					if (data.me && !this.state.uid_set) {
+					if (data && data.me && !this.state.uid_set) {
 						ReactGA.set({userId: data.me.id});
 						this.setState({uid_set: true});
 					}

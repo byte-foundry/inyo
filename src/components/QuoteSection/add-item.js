@@ -39,9 +39,8 @@ const ItemComment = styled('textarea')`
 const ActionButton = styled(Button)`
 	font-size: 13px;
 	color: ${props => props.color};
-	margin-bottom: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
+	margin: 15px 0 10px;
+	padding: 0 10px;
 `;
 
 const AddInput = styled(Input)`

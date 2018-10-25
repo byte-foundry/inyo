@@ -51,7 +51,7 @@ const QuoteDisplayMain = styled('div')`
 const BackButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 11px;
-	margin-bottom: 10px;
+	margin: 10px 0 10px 40px;
 	color: ${gray50};
 `;
 
@@ -68,7 +68,7 @@ const SideActions = styled(FlexColumn)`
 `;
 const QuoteName = styled(H3)`
 	color: ${primaryBlue};
-	margin: 0;
+	margin: 10px 0 20px;
 `;
 const CenterContent = styled(FlexColumn)`
 	background: ${gray10};

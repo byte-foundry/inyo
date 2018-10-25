@@ -16,7 +16,7 @@ const CreateQuoteMain = styled('div')`
 const BackButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 11px;
-	margin-bottom: 10px;
+	margin: 10px 0 10px 40px;
 	color: ${gray50};
 `;
 

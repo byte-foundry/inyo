@@ -35,11 +35,13 @@ class QuoteTotal extends Component {
 					<TotalLabel>Temps prévu</TotalLabel>
 				</TotalElem>
 				<TotalElem>
-					<TotalNumber>{sumHT} €</TotalNumber>
+					<TotalNumber>{sumHT.toLocaleString('fr-FR')} €</TotalNumber>
 					<TotalLabel>Total H.T.</TotalLabel>
 				</TotalElem>
 				<TotalElem>
-					<TotalNumber>{sumTTC} €</TotalNumber>
+					<TotalNumber>
+						{sumTTC.toLocaleString('fr-FR')} €
+					</TotalNumber>
 					<TotalLabel>Total T.T.C</TotalLabel>
 				</TotalElem>
 			</TotalMain>

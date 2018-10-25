@@ -16,13 +16,14 @@ import {
 	signalRed,
 	primaryWhite,
 	gray30,
+	gray20,
 } from '../../utils/content';
 import {templates} from '../../utils/quote-templates';
 
 import {GET_ITEMS} from '../../utils/queries';
 
 const AddItemMain = styled('div')`
-	background: ${secondaryLightBlue};
+	background: ${gray20};
 	border: 1px solid ${primaryBlue};
 	padding: 10px 20px;
 `;
@@ -137,8 +138,7 @@ class AddItem extends Component {
 						type="number"
 						placeholder="1"
 						value={unit}
-						onChange={e => this.setState({unit: parseInt(e.target.value)})
-						}
+						onChange={e => this.setState({unit: e.target.value})}
 					/>
 					<AddInput
 						type="number"

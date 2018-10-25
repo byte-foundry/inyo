@@ -17,6 +17,10 @@ import {
 	UPDATE_OPTION,
 	SEND_QUOTE,
 	SEND_AMENDMENT,
+	ACCEPT_AMENDMENT,
+	REJECT_AMENDMENT,
+	ACCEPT_QUOTE,
+	REJECT_QUOTE,
 } from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -155,10 +159,13 @@ class QuoteDisplay extends Component {
 
 		option.sections.forEach((section) => {
 			section.items.forEach((item) => {
-				sumDays += item.unit;
-				sumHT += item.unitPrice;
+				sumDays += item.pendingUnit || item.unit;
+				sumHT += (item.pendingUnit || item.unit) * item.unitPrice;
 				sumTTC
-					+= item.unitPrice + item.unitPrice * (defaultVatRate / 100);
+					+= (item.pendingUnit || item.unit) * item.unitPrice
+					+ (item.pendingUnit || item.unit)
+						* item.unitPrice
+						* (defaultVatRate / 100);
 			});
 		});
 		return <QuoteTotal sumDays={sumDays} sumHT={sumHT} sumTTC={sumTTC} />;
@@ -183,6 +190,8 @@ class QuoteDisplay extends Component {
 			totalItemsFinished,
 			totalItems,
 			sendAmendment,
+			acceptOrRejectAmendment,
+			acceptOrRejectQuote,
 			timePlanned,
 			amendmentEnabled,
 			overtime,
@@ -205,17 +214,21 @@ class QuoteDisplay extends Component {
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
-					if (data && data.me) {
+					if ((data && data.me) || customerViewMode) {
 						return (
 							<QuoteDisplayMain>
-								<BackButton
-									theme="Link"
-									size="XSmall"
-									onClick={() => this.props.history.push('/app/quotes')
-									}
-								>
-									Retour à la liste des devis
-								</BackButton>
+								{!customerViewMode && (
+									<BackButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => this.props.history.push(
+											'/app/quotes',
+										)
+										}
+									>
+										Retour à la liste des devis
+									</BackButton>
+								)}
 								{mode === 'edit' && (
 									<QuoteRow justifyContent="space-between">
 										<QuoteDisplayTitle>
@@ -329,110 +342,117 @@ class QuoteDisplay extends Component {
 											)}
 											{customerViewMode
 												&& isAmendmentAcceptable && (
-												<Mutation
-													mutation={
-														SEND_AMENDMENT
-													}
-												>
-													{SendAmendment => (
-														<SendQuoteButton
-															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
-															size="Medium"
-															onClick={() => {
-																sendAmendment(
-																	quote.id,
-																	SendAmendment,
-																);
-															}}
-														>
-																Acceptez
-																l'avenant
-														</SendQuoteButton>
-													)}
-												</Mutation>
-											)}
-											{customerViewMode
-												&& isAmendmentAcceptable && (
-												<Mutation
-													mutation={
-														SEND_AMENDMENT
-													}
-												>
-													{SendAmendment => (
-														<SendQuoteButton
-															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
-															size="Medium"
-															onClick={() => {
-																sendAmendment(
-																	quote.id,
-																	SendAmendment,
-																);
-															}}
-														>
-																Rejetez
-																l'avenant
-														</SendQuoteButton>
-													)}
-												</Mutation>
-											)}
-											{customerViewMode
-												&& isAcceptable && (
-												<Mutation
-													mutation={
-														SEND_AMENDMENT
-													}
-												>
-													{SendAmendment => (
-														<SendQuoteButton
-															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
-															size="Medium"
-															onClick={() => {
-																sendAmendment(
-																	quote.id,
-																	SendAmendment,
-																);
-															}}
-														>
-																Acceptez le
-																devis
-														</SendQuoteButton>
-													)}
-												</Mutation>
+												<FlexColumn justifyContent="space-around">
+													<Mutation
+														mutation={
+															ACCEPT_AMENDMENT
+														}
+													>
+														{acceptAmendment => (
+															<SendQuoteButton
+																theme="Success"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectAmendment(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		acceptAmendment,
+																	);
+																}}
+															>
+																	Acceptez
+																	l'avenant
+															</SendQuoteButton>
+														)}
+													</Mutation>
+													<Mutation
+														mutation={
+															REJECT_AMENDMENT
+														}
+													>
+														{rejectAmendment => (
+															<SendQuoteButton
+																theme="Error"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectAmendment(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		rejectAmendment,
+																	);
+																}}
+															>
+																	Rejetez
+																	l'avenant
+															</SendQuoteButton>
+														)}
+													</Mutation>
+												</FlexColumn>
 											)}
 											{customerViewMode
 												&& isAcceptable && (
-												<Mutation
-													mutation={
-														SEND_AMENDMENT
-													}
-												>
-													{SendAmendment => (
-														<SendQuoteButton
-															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
-															size="Medium"
-															onClick={() => {
-																sendAmendment(
-																	quote.id,
-																	SendAmendment,
-																);
-															}}
-														>
-																Rejetez le devis
-														</SendQuoteButton>
-													)}
-												</Mutation>
+												<FlexColumn>
+													<Mutation
+														mutation={
+															ACCEPT_QUOTE
+														}
+													>
+														{acceptQuote => (
+															<SendQuoteButton
+																theme="Success"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectQuote(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		acceptQuote,
+																	);
+																}}
+															>
+																	Acceptez le
+																	devis
+															</SendQuoteButton>
+														)}
+													</Mutation>
+													<Mutation
+														mutation={
+															REJECT_QUOTE
+														}
+													>
+														{rejectQuote => (
+															<SendQuoteButton
+																theme="Error"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectQuote(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		rejectQuote,
+																	);
+																}}
+															>
+																	Rejetez le
+																	devis
+															</SendQuoteButton>
+														)}
+													</Mutation>
+												</FlexColumn>
 											)}
 										</FlexRow>
 									)}
@@ -557,7 +577,10 @@ class QuoteDisplay extends Component {
 										/>
 										{this.getQuoteTotal(
 											quoteOption,
-											data.me.defaultVatRate,
+											customerViewMode
+												? quote.issuer.owner
+													.defaultVatRate
+												: data.me.defaultVatRate,
 										)}
 									</SideActions>
 								</FlexRow>

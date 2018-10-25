@@ -9,7 +9,7 @@ import {
 	Input,
 	Button,
 	primaryBlue,
-	secondaryLightBlue,
+	gray20,
 	signalGreen,
 	signalOrange,
 	signalRed,
@@ -21,7 +21,7 @@ import {
 import FormElem from '../FormElem';
 
 const AmendItemMain = styled('div')`
-	background: ${secondaryLightBlue};
+	background: ${gray20};
 	border: 1px solid ${primaryBlue};
 	padding: 10px 20px;
 	font-size: 13px;

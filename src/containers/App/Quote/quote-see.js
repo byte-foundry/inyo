@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation, Query} from 'react-apollo';
 import ReactGA from 'react-ga';
+import {ToastContainer, toast} from 'react-toastify';
 import Section from '../../../components/Section';
 
 import {GET_QUOTE_DATA} from '../../../utils/queries';
@@ -75,14 +76,24 @@ class TasksListUser extends Component {
 					variables: {quoteId: this.props.match.params.quoteId},
 					data,
 				});
-				ReactGA.event({
-					category: 'Quote',
-					action: 'Sent amendment',
-				});
 			}
 			catch (e) {
 				throw new Error(e);
 			}
+			ReactGA.event({
+				category: 'Quote',
+				action: 'Sent amendment',
+			});
+			toast.success(
+				<div>
+					<p>📬 L'avenant a été envoyé !</p>
+				</div>,
+				{
+					position: toast.POSITION.TOP_RIGHT,
+					autoClose: 3000,
+					onClose: () => this.props.history.push('/app/quotes'),
+				},
+			);
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},
 	});
@@ -139,18 +150,21 @@ class TasksListUser extends Component {
 					);
 
 					return (
-						<QuoteDisplay
-							quoteOption={option}
-							quote={quote}
-							totalItems={totalItems}
-							editItem={this.editItem}
-							totalItemsFinished={totalItemsFinished}
-							sendAmendment={this.sendAmendment}
-							timePlanned={timePlanned}
-							amendmentEnabled={amendmentEnabled}
-							overtime={overtime}
-							mode="see"
-						/>
+						<div>
+							<ToastContainer />
+							<QuoteDisplay
+								quoteOption={option}
+								quote={quote}
+								totalItems={totalItems}
+								editItem={this.editItem}
+								totalItemsFinished={totalItemsFinished}
+								sendAmendment={this.sendAmendment}
+								timePlanned={timePlanned}
+								amendmentEnabled={amendmentEnabled}
+								overtime={overtime}
+								mode="see"
+							/>
+						</div>
 					);
 				}}
 			</Query>

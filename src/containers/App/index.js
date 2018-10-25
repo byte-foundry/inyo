@@ -26,45 +26,53 @@ class App extends Component {
 	render() {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
-				{({data, loading, error}) => {
+				{({data, loading}) => {
 					if (loading) return <p>Loading...</p>;
-					if (data.me && !this.state.uid_set) {
-						ReactGA.set({userId: data.me.id});
-						this.setState({uid_set: true});
+					if (data && data.me) {
+						if (!this.state.uid_set) {
+							ReactGA.set({userId: data.me.id});
+							this.setState({uid_set: true});
+						}
+						return (
+							<AppMain>
+								<Switch>
+									<Route
+										exact
+										path="/app"
+										component={Dashboard}
+									/>
+									<Route path="/app/auth" component={Auth} />
+									<Route
+										path="/app/account"
+										component={Account}
+									/>
+									<Route
+										path="/app/company"
+										component={Company}
+									/>
+									<Route
+										path="/app/customer"
+										component={Customer}
+									/>
+									<Route
+										path="/app/quotes"
+										component={Quote}
+									/>
+									<Redirect to="/app" />
+								</Switch>
+							</AppMain>
+						);
 					}
+
 					return (
 						<AppMain>
 							<Switch>
 								<Route
-									exact
-									path="/app"
-									component={Dashboard}
+									path="/app/quotes/:quoteId/view/:customerToken"
+									component={QuoteCustomerView}
 								/>
-								<Route path="/app/auth" component={Auth} />
-								<Route
-									path="/app/account"
-									component={Account}
-								/>
-								<Route
-									path="/app/company"
-									component={Company}
-								/>
-								<Route
-									path="/app/customer"
-									component={Customer}
-								/>
-								<Route path="/app/quotes" component={Quote} />
-								<Redirect to="/app" />
+								<Redirect to="/app/auth" />
 							</Switch>
-							{error && (
-								<Switch>
-									<Route
-										path="/app/quotes/:quoteId/view/:customerToken"
-										component={QuoteCustomerView}
-									/>
-									<Redirect to="/app/auth" />
-								</Switch>
-							)}
 						</AppMain>
 					);
 				}}

@@ -17,6 +17,10 @@ import {
 	UPDATE_OPTION,
 	SEND_QUOTE,
 	SEND_AMENDMENT,
+	ACCEPT_AMENDMENT,
+	REJECT_AMENDMENT,
+	ACCEPT_QUOTE,
+	REJECT_QUOTE,
 } from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -186,6 +190,8 @@ class QuoteDisplay extends Component {
 			totalItemsFinished,
 			totalItems,
 			sendAmendment,
+			acceptOrRejectAmendment,
+			acceptOrRejectQuote,
 			timePlanned,
 			amendmentEnabled,
 			overtime,
@@ -208,7 +214,7 @@ class QuoteDisplay extends Component {
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
-					if (data && data.me) {
+					if ((data && data.me) || customerViewMode) {
 						return (
 							<QuoteDisplayMain>
 								<BackButton
@@ -334,20 +340,22 @@ class QuoteDisplay extends Component {
 												&& isAmendmentAcceptable && (
 												<Mutation
 													mutation={
-														SEND_AMENDMENT
+														ACCEPT_AMENDMENT
 													}
 												>
-													{SendAmendment => (
+													{acceptAmendment => (
 														<SendQuoteButton
 															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
 															size="Medium"
 															onClick={() => {
-																sendAmendment(
+																acceptOrRejectAmendment(
 																	quote.id,
-																	SendAmendment,
+																	this
+																		.props
+																		.match
+																		.params
+																		.customerToken,
+																	acceptAmendment,
 																);
 															}}
 														>
@@ -361,20 +369,22 @@ class QuoteDisplay extends Component {
 												&& isAmendmentAcceptable && (
 												<Mutation
 													mutation={
-														SEND_AMENDMENT
+														REJECT_AMENDMENT
 													}
 												>
-													{SendAmendment => (
+													{rejectAmendment => (
 														<SendQuoteButton
 															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
 															size="Medium"
 															onClick={() => {
-																sendAmendment(
+																acceptOrRejectAmendment(
 																	quote.id,
-																	SendAmendment,
+																	this
+																		.props
+																		.match
+																		.params
+																		.customerToken,
+																	rejectAmendment,
 																);
 															}}
 														>
@@ -387,21 +397,21 @@ class QuoteDisplay extends Component {
 											{customerViewMode
 												&& isAcceptable && (
 												<Mutation
-													mutation={
-														SEND_AMENDMENT
-													}
+													mutation={ACCEPT_QUOTE}
 												>
-													{SendAmendment => (
+													{acceptQuote => (
 														<SendQuoteButton
 															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
 															size="Medium"
 															onClick={() => {
-																sendAmendment(
+																acceptOrRejectQuote(
 																	quote.id,
-																	SendAmendment,
+																	this
+																		.props
+																		.match
+																		.params
+																		.customerToken,
+																	acceptQuote,
 																);
 															}}
 														>
@@ -414,21 +424,21 @@ class QuoteDisplay extends Component {
 											{customerViewMode
 												&& isAcceptable && (
 												<Mutation
-													mutation={
-														SEND_AMENDMENT
-													}
+													mutation={REJECT_QUOTE}
 												>
-													{SendAmendment => (
+													{rejectQuote => (
 														<SendQuoteButton
 															theme="Primary"
-															disabled={
-																!amendmentEnabled
-															}
 															size="Medium"
 															onClick={() => {
-																sendAmendment(
+																acceptOrRejectQuote(
 																	quote.id,
-																	SendAmendment,
+																	this
+																		.props
+																		.match
+																		.params
+																		.customerToken,
+																	rejectQuote,
 																);
 															}}
 														>
@@ -560,7 +570,10 @@ class QuoteDisplay extends Component {
 										/>
 										{this.getQuoteTotal(
 											quoteOption,
-											data.me.defaultVatRate,
+											customerViewMode
+												? quote.issuer.owner
+													.defaultVatRate
+												: data.me.defaultVatRate,
 										)}
 									</SideActions>
 								</FlexRow>

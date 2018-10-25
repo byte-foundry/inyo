@@ -228,14 +228,6 @@ class Item extends Component {
 		}
 		return (
 			<ItemRow>
-				{mode === 'see' && (
-					<TaskStatus
-						status={item.status}
-						itemId={item.id}
-						sectionId={sectionId}
-						mode={mode}
-					/>
-				)}
 				<ItemMain
 					justifyContent="space-between"
 					onClick={() => {
@@ -258,9 +250,9 @@ class Item extends Component {
 							{comments.length}
 						</CommentsCount>
 					)}
-					<span>{item.unit} jours</span>
+				<span>{item.pendingUnit || item.unit} jours</span>
 					<span>{item.unitPrice.toLocaleString('fr-FR')}€</span>
-					<span>{item.unitPrice * item.unit}€</span>
+				<span>{item.unitPrice * (item.pendingUnit || item.unit)}€</span>
 					{customerViewMode
 						&& item.status === 'UPDATED_SENT' && (
 						<ItemCustomerActions>

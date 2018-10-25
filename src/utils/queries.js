@@ -161,6 +161,9 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 					postalCode
 					country
 				}
+				owner {
+					defaultVatRate
+				}
 				siret
 			}
 			customer {

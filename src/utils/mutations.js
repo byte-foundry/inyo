@@ -196,6 +196,26 @@ export const SEND_QUOTE = gql`
 		}
 	}
 `;
+
+export const ACCEPT_QUOTE = gql`
+	# creating quote with a customer id or a new customer
+	mutation acceptQuote($quoteId: ID!, $token: String!) {
+		acceptQuote(id: $quoteId, token: $token) {
+			id
+			status
+		}
+	}
+`;
+
+export const REJECT_QUOTE = gql`
+	# creating quote with a customer id or a new customer
+	mutation rejectQuote($quoteId: ID!, $token: String!) {
+		rejectQuote(id: $quoteId, token: $token) {
+			id
+			status
+		}
+	}
+`;
 // Option
 export const UPDATE_OPTION = gql`
 	mutation updateOption($optionId: ID!, $proposal: Json!) {
@@ -364,6 +384,120 @@ export const SEND_AMENDMENT = gql`
 						name
 						unitPrice
 						unit
+						pendingUnit
+						vatRate
+						description
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const ACCEPT_AMENDMENT = gql`
+	mutation acceptAmendment($quoteId: ID!, $token: String!) {
+		acceptAmendment(quoteId: $quoteId, token: $token) {
+			id
+			template
+			name
+			status
+			issuer {
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					defaultVatRate
+				}
+				siret
+			}
+			customer {
+				name
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
+			options {
+				id
+				name
+				proposal
+				sections {
+					id
+					name
+					items {
+						status
+						id
+						name
+						unitPrice
+						unit
+						comments {
+							id
+							#readByCustomer
+						}
+						pendingUnit
+						vatRate
+						description
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const REJECT_AMENDMENT = gql`
+	mutation rejectAmendment($quoteId: ID!, $token: String!) {
+		rejectAmendment(quoteId: $quoteId, token: $token) {
+			id
+			template
+			name
+			status
+			issuer {
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					defaultVatRate
+				}
+				siret
+			}
+			customer {
+				name
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
+			options {
+				id
+				name
+				proposal
+				sections {
+					id
+					name
+					items {
+						status
+						id
+						name
+						unitPrice
+						unit
+						comments {
+							id
+							#readByCustomer
+						}
 						pendingUnit
 						vatRate
 						description

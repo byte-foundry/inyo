@@ -13,6 +13,75 @@ class QuoteCustomerView extends Component {
 		this.state = {mode: 'proposal'};
 	}
 
+	acceptOrRejectAmendment = async (quoteId, token, acceptOrRejectAmendment) => acceptOrRejectAmendment({
+		variables: {
+			quoteId,
+			token,
+		},
+		update: (cache, {data: {acceptAmendment, rejectAmendment}}) => {
+			const amendment = acceptAmendment || rejectAmendment;
+			const data = cache.readQuery({
+				query: GET_QUOTE_DATA_WITH_TOKEN,
+				variables: {
+					quoteId: this.props.match.params.quoteId,
+					token: this.props.match.params.customerToken,
+				},
+			});
+
+			data.quote = amendment;
+
+			try {
+				cache.writeQuery({
+					query: GET_QUOTE_DATA_WITH_TOKEN,
+					variables: {
+						quoteId: this.props.match.params.quoteId,
+						token: this.props.match.params.customerToken,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw new Error(e);
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
+	acceptOrRejectQuote = async (quoteId, token, acceptOrRejectQuote) => acceptOrRejectQuote({
+		variables: {
+			quoteId,
+			token,
+		},
+		update: (cache, {data: {acceptQuote, rejectQuote}}) => {
+			const quote = acceptQuote || rejectQuote;
+
+			const data = cache.readQuery({
+				query: GET_QUOTE_DATA_WITH_TOKEN,
+				variables: {
+					quoteId: this.props.match.params.quoteId,
+					token: this.props.match.params.customerToken,
+				},
+			});
+
+			data.quote.status = quote.status;
+
+			try {
+				cache.writeQuery({
+					query: GET_QUOTE_DATA_WITH_TOKEN,
+					variables: {
+						quoteId: this.props.match.params.quoteId,
+						token: this.props.match.params.customerToken,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw new Error(e);
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	render() {
 		const {quoteId, customerToken} = this.props.match.params;
 
@@ -61,6 +130,10 @@ class QuoteCustomerView extends Component {
 								totalItems={totalItems}
 								totalItemsFinished={totalItemsFinished}
 								timePlanned={timePlanned}
+								acceptOrRejectAmendment={
+									this.acceptOrRejectAmendment
+								}
+								acceptOrRejectQuote={this.acceptOrRejectQuote}
 								mode="see"
 							/>
 							<Route

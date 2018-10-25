@@ -217,14 +217,18 @@ class QuoteDisplay extends Component {
 					if ((data && data.me) || customerViewMode) {
 						return (
 							<QuoteDisplayMain>
-								<BackButton
-									theme="Link"
-									size="XSmall"
-									onClick={() => this.props.history.push('/app/quotes')
-									}
-								>
-									Retour à la liste des devis
-								</BackButton>
+								{!customerViewMode && (
+									<BackButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => this.props.history.push(
+											'/app/quotes',
+										)
+										}
+									>
+										Retour à la liste des devis
+									</BackButton>
+								)}
 								{mode === 'edit' && (
 									<QuoteRow justifyContent="space-between">
 										<QuoteDisplayTitle>

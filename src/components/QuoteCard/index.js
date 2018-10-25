@@ -4,6 +4,7 @@ import styled from 'react-emotion';
 
 import {
 	P,
+	alpha10,
 	primaryNavyBlue,
 	gray50,
 	secondaryLightBlue,
@@ -11,7 +12,7 @@ import {
 } from '../../utils/content';
 
 const QuoteCardMain = styled('div')`
-	border: solid 1px grey;
+	border: solid 1px ${alpha10};
 	cursor: pointer;
 	margin-right: 10px;
 	margin-bottom: 10px;

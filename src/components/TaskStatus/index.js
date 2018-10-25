@@ -21,7 +21,7 @@ const Status = styled('img')`
 	width: 30px;
 	height: auto;
 	position: absolute;
-	top: 50%;
+	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;

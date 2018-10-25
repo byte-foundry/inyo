@@ -7,7 +7,7 @@ import AddItem from './add-item';
 import AmendItem from './amend-item';
 import TaskStatus from '../TaskStatus';
 import {
-	FlexRow, gray70, primaryWhite, Button,
+	FlexRow, alpha10, primaryWhite, Button,
 } from '../../utils/content';
 import {
 	UPDATE_ITEM,
@@ -25,11 +25,11 @@ const ItemName = styled(FlexRow)`
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
-	margin-bottom: 5px;
-	border: 1px solid ${gray70};
+	margin-bottom: 7px;
 	background: ${primaryWhite};
 	font-size: 13px;
 	position: relative;
+	box-shadow: 0px 0px 8px ${alpha10};
 	width: 100%;
 `;
 

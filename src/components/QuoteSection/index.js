@@ -19,17 +19,18 @@ import {GET_QUOTE_DATA} from '../../utils/queries';
 const QuoteSectionMain = styled('div')``;
 const QuoteAction = styled(Button)`
 	text-decoration: none;
-	margin-right: 10px;
+	padding: 0;
 	color: ${props => (props.type === 'delete' ? signalRed : primaryBlue)};
 	font-size: 11px;
 	transform: translateY(18px);
+	margin: ${props => (props.type === 'delete' ? '50px 0 25px;' : '0 0 10px 0;')};
 `;
 const ItemName = styled(H5)`
 	margin: 0;
 `;
 const SectionTitle = styled(H5)`
 	color: ${primaryNavyBlue};
-	margin: 10px 0;
+	margin: 50px 0 25px;
 `;
 
 class QuoteSection extends Component {
@@ -91,22 +92,6 @@ class QuoteSection extends Component {
 									</QuoteAction>
 								)}
 							</Mutation>
-							<Mutation mutation={ADD_ITEM}>
-								{addItem => (
-									<QuoteAction
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.addItem(
-												data.id,
-												addItem,
-											);
-										}}
-									>
-										Ajouter une tâche
-									</QuoteAction>
-								)}
-							</Mutation>
 						</div>
 					)}
 				</FlexRow>
@@ -121,6 +106,20 @@ class QuoteSection extends Component {
 						mode={mode}
 					/>
 				))}
+
+				<Mutation mutation={ADD_ITEM}>
+					{addItem => (
+						<QuoteAction
+							theme="Link"
+							size="XSmall"
+							onClick={() => {
+								this.props.addItem(data.id, addItem);
+							}}
+						>
+							Ajouter une tâche
+						</QuoteAction>
+					)}
+				</Mutation>
 			</QuoteSectionMain>
 		);
 	}

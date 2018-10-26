@@ -16,7 +16,7 @@ class TasksListUser extends Component {
 		return updateValidatedItem({
 			variables: {
 				itemId,
-				unit,
+				unit: parseFloat(unit),
 				comment: {text: comment},
 			},
 			optimisticResponse: {

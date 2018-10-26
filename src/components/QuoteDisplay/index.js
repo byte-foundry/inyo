@@ -309,153 +309,165 @@ class QuoteDisplay extends Component {
 											)}
 										</Mutation>
 									)}
-									<FlexRow>
-										{mode === 'see'
-											&& !customerViewMode && (
-											<QuoteStatus>
-												<span>
-														Temps prévu :{' '}
-													{timePlanned}
-												</span>
-												{!customerViewMode && (
+									{mode === 'see' && (
+										<FlexRow>
+											{!customerViewMode && (
+												<QuoteStatus>
 													<span>
-															Dépassement :{' '}
-														{overtime}
+														Temps prévu :{' '}
+														{timePlanned}
 													</span>
-												)}
-											</QuoteStatus>
-										)}
-										{!customerViewMode && (
-											<Mutation mutation={SEND_AMENDMENT}>
-												{SendAmendment => (
-													<SendQuoteButton
-														theme="Primary"
-														disabled={
-															!amendmentEnabled
+													{!customerViewMode && (
+														<span>
+															Dépassement :{' '}
+															{overtime}
+														</span>
+													)}
+												</QuoteStatus>
+											)}
+											{mode === 'see'
+												&& !customerViewMode && (
+												<Mutation
+													mutation={
+														SEND_AMENDMENT
+													}
+												>
+													{SendAmendment => (
+														<SendQuoteButton
+															theme="Primary"
+															disabled={
+																!amendmentEnabled
+															}
+															size="Medium"
+															onClick={() => {
+																sendAmendment(
+																	quote.id,
+																	SendAmendment,
+																);
+															}}
+														>
+																Envoyez
+																l'avenant
+														</SendQuoteButton>
+													)}
+												</Mutation>
+											)}
+											{customerViewMode
+												&& isAmendmentAcceptable && (
+												<FlexColumn justifyContent="space-around">
+													<Mutation
+														mutation={
+															ACCEPT_AMENDMENT
 														}
-														size="Medium"
-														onClick={() => {
-															sendAmendment(
-																quote.id,
-																SendAmendment,
-															);
-														}}
 													>
-														Envoyez l'avenant
-													</SendQuoteButton>
-												)}
-											</Mutation>
-										)}
-										{customerViewMode
-											&& isAmendmentAcceptable && (
-											<FlexColumn justifyContent="space-around">
-												<Mutation
-													mutation={
-														ACCEPT_AMENDMENT
-													}
-												>
-													{acceptAmendment => (
-														<SendQuoteButton
-															theme="Success"
-															size="Small"
-															onClick={() => {
-																acceptOrRejectAmendment(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	acceptAmendment,
-																);
-															}}
-														>
-																Acceptez
-																l'avenant
-														</SendQuoteButton>
-													)}
-												</Mutation>
-												<Mutation
-													mutation={
-														REJECT_AMENDMENT
-													}
-												>
-													{rejectAmendment => (
-														<SendQuoteButton
-															theme="Error"
-															size="Small"
-															onClick={() => {
-																acceptOrRejectAmendment(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	rejectAmendment,
-																);
-															}}
-														>
-																Rejetez
-																l'avenant
-														</SendQuoteButton>
-													)}
-												</Mutation>
-											</FlexColumn>
-										)}
-										{customerViewMode
-											&& isAcceptable && (
-											<FlexColumn>
-												<Mutation
-													mutation={ACCEPT_QUOTE}
-												>
-													{acceptQuote => (
-														<SendQuoteButton
-															theme="Success"
-															size="Small"
-															onClick={() => {
-																acceptOrRejectQuote(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	acceptQuote,
-																);
-															}}
-														>
-																Acceptez le
-																devis
-														</SendQuoteButton>
-													)}
-												</Mutation>
-												<Mutation
-													mutation={REJECT_QUOTE}
-												>
-													{rejectQuote => (
-														<SendQuoteButton
-															theme="Error"
-															size="Small"
-															onClick={() => {
-																acceptOrRejectQuote(
-																	quote.id,
-																	this
-																		.props
-																		.match
-																		.params
-																		.customerToken,
-																	rejectQuote,
-																);
-															}}
-														>
-																Rejetez le devis
-														</SendQuoteButton>
-													)}
-												</Mutation>
-											</FlexColumn>
-										)}
-									</FlexRow>
+														{acceptAmendment => (
+															<SendQuoteButton
+																theme="Success"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectAmendment(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		acceptAmendment,
+																	);
+																}}
+															>
+																	Acceptez
+																	l'avenant
+															</SendQuoteButton>
+														)}
+													</Mutation>
+													<Mutation
+														mutation={
+															REJECT_AMENDMENT
+														}
+													>
+														{rejectAmendment => (
+															<SendQuoteButton
+																theme="Error"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectAmendment(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		rejectAmendment,
+																	);
+																}}
+															>
+																	Rejetez
+																	l'avenant
+															</SendQuoteButton>
+														)}
+													</Mutation>
+												</FlexColumn>
+											)}
+											{customerViewMode
+												&& isAcceptable && (
+												<FlexColumn>
+													<Mutation
+														mutation={
+															ACCEPT_QUOTE
+														}
+													>
+														{acceptQuote => (
+															<SendQuoteButton
+																theme="Success"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectQuote(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		acceptQuote,
+																	);
+																}}
+															>
+																	Acceptez le
+																	devis
+															</SendQuoteButton>
+														)}
+													</Mutation>
+													<Mutation
+														mutation={
+															REJECT_QUOTE
+														}
+													>
+														{rejectQuote => (
+															<SendQuoteButton
+																theme="Error"
+																size="Small"
+																onClick={() => {
+																	acceptOrRejectQuote(
+																		quote.id,
+																		this
+																			.props
+																			.match
+																			.params
+																			.customerToken,
+																		rejectQuote,
+																	);
+																}}
+															>
+																	Rejetez le
+																	devis
+															</SendQuoteButton>
+														)}
+													</Mutation>
+												</FlexColumn>
+											)}
+										</FlexRow>
+									)}
 								</QuoteRow>
 								<QuoteRow noPadding>
 									<ToggleButton

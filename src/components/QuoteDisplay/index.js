@@ -198,9 +198,6 @@ class QuoteDisplay extends Component {
 			overtime,
 			issuer,
 		} = this.props;
-
-		console.log(issuer);
-		console.log(quote);
 		const customerViewMode = this.props.match.params.customerToken;
 		const isAcceptable = quote.status === 'SENT';
 		const isAmendmentAcceptable

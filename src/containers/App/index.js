@@ -45,7 +45,6 @@ class App extends Component {
 							ReactGA.set({userId: data.me.id});
 							this.setState({uid_set: true});
 						}
-						console.log('in data/data.me');
 						return (
 							<AppMain>
 								<Switch>

@@ -15,6 +15,14 @@ import {CHECK_LOGIN_USER} from '../../utils/queries';
 
 const AppMain = styled('div')``;
 
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -27,7 +35,7 @@ class App extends Component {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
 				{({data, loading}) => {
-					if (loading) return <p>Loading...</p>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (data && data.me) {
 						if (!this.state.uid_set) {
 							ReactGA.set({userId: data.me.id});

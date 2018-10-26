@@ -155,6 +155,7 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 			issuer {
 				name
 				email
+				phone
 				address {
 					street
 					city

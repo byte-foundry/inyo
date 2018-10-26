@@ -52,6 +52,14 @@ const AddInput = styled(Input)`
 	font-size: 13px;
 `;
 
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
 const AutocompleteItem = styled('div')``;
 
 class AddItem extends Component {
@@ -73,7 +81,7 @@ class AddItem extends Component {
 				<FlexRow justifyContent="space-between">
 					<Query query={GET_ITEMS}>
 						{({loading, error, data}) => {
-							if (loading) return <p>Loading...</p>;
+							if (loading) {return <Loading>Chargement...</Loading>;}
 							if (!loading && data && data.template) {
 								const {items} = data.template;
 

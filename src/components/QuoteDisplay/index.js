@@ -5,6 +5,7 @@ import {Mutation, Query} from 'react-apollo';
 import Select from 'react-select';
 
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
+import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import TextEditor from '../TextEditor';
 import InlineEditable from '../InlineEditable';
 import QuoteSection from '../QuoteSection';
@@ -195,7 +196,10 @@ class QuoteDisplay extends Component {
 			timePlanned,
 			amendmentEnabled,
 			overtime,
+			issuer,
 		} = this.props;
+
+		console.log(issuer);
 
 		const customerViewMode = this.props.match.params.customerToken;
 		const isAcceptable = quote.status === 'SENT';
@@ -305,21 +309,26 @@ class QuoteDisplay extends Component {
 											)}
 										</Mutation>
 									)}
-									{mode === 'see' && (
+									{mode === 'see'
+										&& !customerViewMode && (
 										<FlexRow>
 											<QuoteStatus>
 												<span>
-													Temps prévu : {timePlanned}
+														Temps prévu :{' '}
+													{timePlanned}
 												</span>
 												{!customerViewMode && (
 													<span>
-														Dépassement : {overtime}
+															Dépassement :{' '}
+														{overtime}
 													</span>
 												)}
 											</QuoteStatus>
 											{!customerViewMode && (
 												<Mutation
-													mutation={SEND_AMENDMENT}
+													mutation={
+														SEND_AMENDMENT
+													}
 												>
 													{SendAmendment => (
 														<SendQuoteButton
@@ -335,13 +344,14 @@ class QuoteDisplay extends Component {
 																);
 															}}
 														>
-															Envoyez l'avenant
+																Envoyez
+																l'avenant
 														</SendQuoteButton>
 													)}
 												</Mutation>
 											)}
 											{customerViewMode
-												&& isAmendmentAcceptable && (
+													&& isAmendmentAcceptable && (
 												<FlexColumn justifyContent="space-around">
 													<Mutation
 														mutation={
@@ -364,8 +374,8 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Acceptez
-																	l'avenant
+																		Acceptez
+																		l'avenant
 															</SendQuoteButton>
 														)}
 													</Mutation>
@@ -390,15 +400,15 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Rejetez
-																	l'avenant
+																		Rejetez
+																		l'avenant
 															</SendQuoteButton>
 														)}
 													</Mutation>
 												</FlexColumn>
 											)}
 											{customerViewMode
-												&& isAcceptable && (
+													&& isAcceptable && (
 												<FlexColumn>
 													<Mutation
 														mutation={
@@ -421,8 +431,8 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Acceptez le
-																	devis
+																		Acceptez
+																		le devis
 															</SendQuoteButton>
 														)}
 													</Mutation>
@@ -447,8 +457,8 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Rejetez le
-																	devis
+																		Rejetez
+																		le devis
 															</SendQuoteButton>
 														)}
 													</Mutation>
@@ -572,6 +582,12 @@ class QuoteDisplay extends Component {
 										</QuoteContent>
 									</CenterContent>
 									<SideActions>
+										{customerViewMode
+											&& issuer.name && (
+											<IssuerNameAndAddress
+												issuer={issuer}
+											/>
+										)}
 										<CustomerNameAndAddress
 											customer={quote.customer}
 										/>

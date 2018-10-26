@@ -62,6 +62,7 @@ class QuoteSection extends Component {
 									value={data.name}
 									type="text"
 									placeholder="Section name"
+									disabled={mode !== 'edit'}
 									onFocusOut={(value) => {
 										editSectionTitle(
 											data.id,

@@ -154,6 +154,7 @@ class QuoteCustomerView extends Component {
 							<ToastContainer />
 							<QuoteDisplay
 								quoteOption={option}
+								issuer={data.quote.issuer}
 								quote={data.quote}
 								totalItems={totalItems}
 								totalItemsFinished={totalItemsFinished}

@@ -30,6 +30,7 @@ const ItemMain = styled(FlexRow)`
 	font-size: 13px;
 	position: relative;
 	box-shadow: 0px 0px 8px ${alpha10};
+	cursor: pointer;
 	width: 100%;
 `;
 
@@ -256,7 +257,7 @@ class Item extends Component {
 					}}
 				>
 					<ItemName>
-						<span style={{cursor: 'pointer'}}>{item.name}</span>
+						<span>{item.name}</span>
 					</ItemName>
 					{customerViewMode
 						&& status === 'UPDATED_SENT' && (

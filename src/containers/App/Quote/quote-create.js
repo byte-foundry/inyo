@@ -20,6 +20,14 @@ const BackButton = styled(Button)`
 	color: ${gray50};
 `;
 
+const Loading = styled('div')`
+	font-size: 70px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
 class CreateQuote extends Component {
 	render() {
 		const {history} = this.props;
@@ -27,7 +35,7 @@ class CreateQuote extends Component {
 		return (
 			<Query query={GET_USER_CUSTOMERS}>
 				{({loading, error, data}) => {
-					if (loading) return <p>Loading...</p>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (data && data.me) {
 						const {customers} = data.me.company;
 

@@ -48,9 +48,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const QuoteDisplayMain = styled('div')`
 	min-height: 100vh;
-	max-width: 1600px;
-	margin-left: auto;
-	margin-right: auto;
 `;
 
 const BackButton = styled(Button)`

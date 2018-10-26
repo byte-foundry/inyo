@@ -53,8 +53,6 @@ class QuoteSection extends Component {
 			customerViewMode,
 		} = this.props;
 
-		console.log(data);
-
 		return (
 			<QuoteSectionMain>
 				<FlexRow justifyContent="space-between">

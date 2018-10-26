@@ -3,7 +3,6 @@ import {Query} from 'react-apollo';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
-import Auth from './Auth';
 import Dashboard from './Dashboard';
 import Account from './Account';
 import Customer from './Customer';
@@ -34,13 +33,14 @@ class App extends Component {
 	render() {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
-				{({data, loading}) => {
+				{({data, loading, error}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
 					if (data && data.me) {
 						if (!this.state.uid_set) {
 							ReactGA.set({userId: data.me.id});
 							this.setState({uid_set: true});
 						}
+						console.log('in data/data.me');
 						return (
 							<AppMain>
 								<Switch>
@@ -49,7 +49,6 @@ class App extends Component {
 										path="/app"
 										component={Dashboard}
 									/>
-									<Route path="/app/auth" component={Auth} />
 									<Route
 										path="/app/account"
 										component={Account}
@@ -79,7 +78,7 @@ class App extends Component {
 									path="/app/quotes/:quoteId/view/:customerToken"
 									component={QuoteCustomerView}
 								/>
-								<Redirect to="/app/auth" />
+								<Redirect to="/auth" />
 							</Switch>
 						</AppMain>
 					);

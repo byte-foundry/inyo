@@ -7,6 +7,7 @@ import styled from 'react-emotion';
 import {Body} from '../../utils/content';
 import Landing from '../Landing';
 import App from '../App';
+import Auth from '../App/Auth';
 import SentryReporter from '../SentryReporter';
 
 const BodyMain = styled(Body)`
@@ -67,8 +68,13 @@ class Container extends Component {
 				<BodyMain>
 					<main>
 						<Switch>
-							<Route exact path="/" component={withTracker(Landing)} />
+							<Route
+								exact
+								path="/"
+								component={withTracker(Landing)}
+							/>
 							<Route path="/app" component={withTracker(App)} />
+							<Route path="/auth" component={Auth} />
 						</Switch>
 					</main>
 				</BodyMain>

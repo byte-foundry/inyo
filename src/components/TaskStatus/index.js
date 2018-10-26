@@ -24,6 +24,7 @@ const Status = styled('img')`
 	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	cursor: ${props => (props.status === 'PENDING' ? 'pointer' : 'initial')};
 `;
 
 const taskImageByStatus = {
@@ -31,6 +32,8 @@ const taskImageByStatus = {
 	FINISHED,
 	UPDATED,
 	UPDATED_SENT,
+	ADDED: UPDATED,
+	ADDED_SENT: UPDATED_SENT,
 };
 
 class TaskStatus extends Component {
@@ -86,12 +89,19 @@ class TaskStatus extends Component {
 				{finishItem => (
 					<TaskStatusMain
 						onClick={() => {
-							if (mode === 'see' && !customerViewMode) {
+							if (
+								mode === 'see'
+								&& !customerViewMode
+								&& status === 'PENDING'
+							) {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
 						}}
 					>
-						<Status src={taskImageByStatus[status]} />
+						<Status
+							src={taskImageByStatus[status]}
+							status={status}
+						/>
 					</TaskStatusMain>
 				)}
 			</Mutation>

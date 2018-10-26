@@ -169,6 +169,9 @@ class Item extends Component {
 		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
 
+		const isValidStatus
+			= status && (status === 'ADDED_SENT' || status === 'UPDATED_SENT');
+
 		if (shouldDisplayAddItem && mode === 'edit') {
 			return (
 				<Mutation mutation={UPDATE_ITEM}>
@@ -261,14 +264,18 @@ class Item extends Component {
 					</ItemName>
 					{customerViewMode
 						&& status === 'UPDATED_SENT' && (
-						<ItemStatus>UPDATED</ItemStatus>
+						<ItemStatus>Mis à jour</ItemStatus>
 					)}
 					{customerViewMode
-						&& status === 'UPDATED_SENT'
+						&& isValidStatus
 						&& comments.length > 0 && (
 						<CommentsCount onClick={this.seeComments}>
 							{comments.length}
 						</CommentsCount>
+					)}
+					{customerViewMode
+						&& status === 'ADDED_SENT' && (
+						<ItemStatus>Ajouté</ItemStatus>
 					)}
 					<span>{item.pendingUnit || item.unit} jours</span>
 					<span>{item.unitPrice.toLocaleString('fr-FR')}€</span>
@@ -276,7 +283,7 @@ class Item extends Component {
 						{item.unitPrice * (item.pendingUnit || item.unit)}€
 					</span>
 					{customerViewMode
-						&& item.status === 'UPDATED_SENT' && (
+						&& isValidStatus && (
 						<ItemCustomerActions>
 							<ToastContainer />
 							<Mutation mutation={ACCEPT_ITEM}>

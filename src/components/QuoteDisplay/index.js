@@ -509,6 +509,9 @@ class QuoteDisplay extends Component {
 																	editItem={
 																		editItem
 																	}
+																	customerViewMode={
+																		customerViewMode
+																	}
 																	mode={mode}
 																	editSectionTitle={
 																		editSectionTitle

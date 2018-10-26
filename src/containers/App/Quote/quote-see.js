@@ -98,6 +98,34 @@ class TasksListUser extends Component {
 		},
 	});
 
+	addItem = (sectionId, addItem) => {
+		addItem({
+			variables: {sectionId, name: 'Nouvelle tâche'},
+			update: (cache, {data: {addItem}}) => {
+				const data = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId: this.props.match.params.quoteId},
+				});
+				const section = data.quote.options[0].sections.find(
+					e => e.id === sectionId,
+				);
+
+				section.items.push(addItem);
+				try {
+					cache.writeQuery({
+						query: GET_QUOTE_DATA,
+						variables: {quoteId: this.props.match.params.quoteId},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	render() {
 		const {quoteId} = this.props.match.params;
 
@@ -162,6 +190,7 @@ class TasksListUser extends Component {
 								timePlanned={timePlanned}
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
+								addItem={this.addItem}
 								mode="see"
 							/>
 						</div>

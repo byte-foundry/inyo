@@ -71,7 +71,7 @@ const ProfileSection = styled('div')`
 const BackButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 11px;
-	margin: 10px 0 10px 40px;
+	margin: 10px 0 10px 0px;
 	color: ${gray50};
 `;
 const LogoutButton = styled(Button)`

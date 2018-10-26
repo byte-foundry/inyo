@@ -21,6 +21,7 @@ export const GET_ITEMS = gql`
 export const CHECK_LOGIN_USER = gql`
 	query loggedInUserQuery {
 		me {
+			email
 			id
 		}
 	}

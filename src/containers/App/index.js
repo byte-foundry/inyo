@@ -3,6 +3,8 @@ import {Query} from 'react-apollo';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
+import * as Sentry from '@sentry/browser';
+
 import Dashboard from './Dashboard';
 import Account from './Account';
 import Customer from './Customer';
@@ -36,6 +38,9 @@ class App extends Component {
 				{({data, loading, error}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
 					if (data && data.me) {
+						Sentry.configureScope((scope) => {
+							scope.setUser({email: data.me.email});
+						});
 						if (!this.state.uid_set) {
 							ReactGA.set({userId: data.me.id});
 							this.setState({uid_set: true});

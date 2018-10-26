@@ -108,19 +108,21 @@ class QuoteSection extends Component {
 					/>
 				))}
 
-				<Mutation mutation={ADD_ITEM}>
-					{addItem => (
-						<QuoteAction
-							theme="Link"
-							size="XSmall"
-							onClick={() => {
-								this.props.addItem(data.id, addItem);
-							}}
-						>
-							Ajouter une tâche
-						</QuoteAction>
-					)}
-				</Mutation>
+				{mode === 'edit' && (
+					<Mutation mutation={ADD_ITEM}>
+						{addItem => (
+							<QuoteAction
+								theme="Link"
+								size="XSmall"
+								onClick={() => {
+									this.props.addItem(data.id, addItem);
+								}}
+							>
+								Ajouter une tâche
+							</QuoteAction>
+						)}
+					</Mutation>
+				)}
 			</QuoteSectionMain>
 		);
 	}

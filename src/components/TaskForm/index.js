@@ -99,7 +99,7 @@ class TaskForm extends Component {
 											</FlexRow>
 											<TaskTextarea
 												{...props}
-												placeholder="Expliquez pourquoi le temps nécessaire augmente. C'est très important pour votre client de savoir."
+												placeholder="Expliquez pourquoi le temps alloué à cette tâche change. C'est très important pour votre client de comprendre."
 												name="comment"
 												type="number"
 											/>

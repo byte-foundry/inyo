@@ -25,11 +25,8 @@ const ItemName = styled(FlexRow)`
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
-	margin-bottom: 7px;
-	background: ${primaryWhite};
 	font-size: 13px;
 	position: relative;
-	box-shadow: 0px 0px 8px ${alpha10};
 	cursor: pointer;
 	width: 100%;
 `;
@@ -89,6 +86,10 @@ const ItemCustomerButton = styled(Button)`
 
 const ItemRow = styled(FlexRow)`
 	align-items: center;
+	box-shadow: 0px 0px 8px ${alpha10};
+	margin-bottom: 7px;
+	background: ${primaryWhite};
+	padding: 5px 20px;
 `;
 
 class Item extends Component {

@@ -24,6 +24,8 @@ const Loading = styled('div')`
 	transform: translate(-50%, -50%);
 `;
 
+const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -45,44 +47,42 @@ class App extends Component {
 							ReactGA.set({userId: data.me.id});
 							this.setState({uid_set: true});
 						}
-						return (
-							<AppMain>
-								<Switch>
-									<Route
-										exact
-										path="/app"
-										component={Dashboard}
-									/>
-									<Route
-										path="/app/account"
-										component={Account}
-									/>
-									<Route
-										path="/app/company"
-										component={Company}
-									/>
-									<Route
-										path="/app/customer"
-										component={Customer}
-									/>
-									<Route
-										path="/app/quotes"
-										component={Quote}
-									/>
-									<Redirect to="/app" />
-								</Switch>
-							</AppMain>
-						);
 					}
-
 					return (
 						<AppMain>
 							<Switch>
-								<Route
-									path="/app/quotes/:quoteId/view/:customerToken"
-									component={QuoteCustomerView}
+								{error && (
+									<Route
+										path="/app/quotes/:quoteId/view/:customerToken"
+										component={QuoteCustomerView}
+									/>
+								)}
+								<ProtectedRoute
+									exact
+									path="/app"
+									component={Dashboard}
+									isAllowed={data && data.me}
 								/>
-								<Redirect to="/auth" />
+								<ProtectedRoute
+									path="/app/account"
+									component={Account}
+									isAllowed={data && data.me}
+								/>
+								<ProtectedRoute
+									path="/app/company"
+									component={Company}
+									isAllowed={data && data.me}
+								/>
+								<ProtectedRoute
+									path="/app/customer"
+									component={Customer}
+									isAllowed={data && data.me}
+								/>
+								<ProtectedRoute
+									path="/app/quotes"
+									component={Quote}
+									isAllowed={data && data.me}
+								/>
 							</Switch>
 						</AppMain>
 					);

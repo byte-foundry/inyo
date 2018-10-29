@@ -10,11 +10,7 @@ import AccountLogo from './accountLogo.svg';
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
 import QuoteList from '../../../components/QuoteList';
 
-const ListQuotesMain = styled('div')`
-	max-width: 1600px;
-	margin-left: auto;
-	margin-right: auto;
-`;
+const ListQuotesMain = styled('div')``;
 
 const TopBarButton = styled(Button)`
 	height: 60px;
@@ -63,17 +59,31 @@ export const quoteState = {
 };
 
 class ListQuotes extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			quotes: undefined,
+		};
+	}
+
 	createNewQuote = () => {
 		this.props.history.push('/app/quotes/create');
 	};
 
 	render() {
+		const {quotes, baseQuotes} = this.state;
+
 		return (
 			<Query query={GET_ALL_QUOTES}>
 				{({loading, error, data}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
-					const {quotes} = data.me.company;
+					if (!quotes) {
+						this.setState({
+							quotes: data.me.company.quotes,
+							baseQuotes: data.me.company.quotes,
+						});
+					}
 
 					return (
 						<ListQuotesMain>
@@ -103,8 +113,26 @@ class ListQuotes extends Component {
 									</TopBarButton>
 								</ActionRow>
 							</ListQuotesTopBar>
-							<SearchQuoteForm />
-							<QuoteList quotes={quotes} />
+							{quotes && (
+								<div>
+									<SearchQuoteForm
+										baseQuotes={baseQuotes}
+										sortByCustomer={(value) => {
+											this.setState({
+												quotes:
+													value !== 'all'
+														? baseQuotes.filter(
+															e => e.customer
+																.name
+																	=== value,
+														  )
+														: baseQuotes,
+											});
+										}}
+									/>
+									<QuoteList quotes={quotes} />
+								</div>
+							)}
 						</ListQuotesMain>
 					);
 				}}

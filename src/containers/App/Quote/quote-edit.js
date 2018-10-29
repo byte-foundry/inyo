@@ -173,7 +173,7 @@ class EditQuote extends Component {
 				name,
 				description,
 				unitPrice,
-				unit,
+				unit: parseFloat(unit),
 				vatRate,
 			},
 			optimisticResponse: {

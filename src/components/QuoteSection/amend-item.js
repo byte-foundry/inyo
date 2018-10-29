@@ -72,10 +72,12 @@ class AmendItem extends Component {
 				initialValues={{
 					unit: pendingUnit || unit,
 					comment: '',
+					name,
 				}}
 				validationSchema={Yup.object().shape({
 					unit: Yup.number().required('Requis'),
 					comment: Yup.string().required('Requis'),
+					name: Yup.string().required('Requis'),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
@@ -110,7 +112,13 @@ class AmendItem extends Component {
 						<form onSubmit={handleSubmit}>
 							<AmendItemMain>
 								<FlexRow justifyContent="space-between">
-									<span style={{width: '50%'}}>{name}</span>
+									<FormElem
+										{...props}
+										name="name"
+										type="text"
+										placeholder="Nom de la tâche"
+										inline
+									/>
 									<FormElem
 										{...props}
 										name="unit"

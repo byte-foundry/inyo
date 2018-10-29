@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import DayPicker from 'react-day-picker';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import ClassicSelect from 'react-select';
 import styled from 'react-emotion';
 import 'react-day-picker/lib/style.css';
 
-import {Input, primaryWhite, primaryNavyBlue} from '../../utils/content';
+import {
+	Input,
+	primaryWhite,
+	primaryNavyBlue,
+	FlexRow,
+} from '../../utils/content';
 
 const WEEKDAYS_SHORT = {
 	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
@@ -55,7 +61,7 @@ const parseDate = (dateString) => {
 	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
 };
 
-const SearchQuoteFormMain = styled('div')`
+const SearchQuoteFormMain = styled(FlexRow)`
 	margin-bottom: 40px;
 `;
 
@@ -73,15 +79,53 @@ const DateInput = styled(Input)`
 const SpanLabel = styled('span')`
 	background: ${primaryNavyBlue};
 	color: ${primaryWhite};
-	padding: 15px 0px 16px 18px;
+	padding: 15px 0px 12px 18px;
 `;
+
+const SelectStyles = {
+	option: (base, state) => ({
+		...base,
+		borderRadius: 0,
+		fontFamily: 'Ligne',
+	}),
+	menu: (base, state) => ({
+		...base,
+		marginTop: 2,
+		borderRadius: 0,
+		fontFamily: 'Ligne',
+	}),
+	control: base => ({
+		...base,
+		borderRadius: 0,
+		fontFamily: 'Ligne',
+		width: '300px',
+		height: '100%',
+	}),
+	input: (base, state) => ({
+		...base,
+		fontFamily: 'Ligne',
+		marginTop: '5px',
+	}),
+};
 
 class SearchQuoteForm extends Component {
 	constructor(props) {
 		super(props);
+		const customers = [];
+
+		props.baseQuotes.forEach((quote) => {
+			if (!customers.find(e => e.value === quote.customer.name)) {
+				customers.push({
+					value: quote.customer.name,
+					label: quote.customer.name,
+				});
+			}
+		});
+		customers.push({value: 'all', label: 'Tous les clients'});
 		this.state = {
 			from: new Date('01/01/2018'),
 			to: new Date('01/01/2019'),
+			customers,
 		};
 	}
 
@@ -90,6 +134,7 @@ class SearchQuoteForm extends Component {
 	// 	to: '01/01/2019',
 	// }}
 	render() {
+		console.log(this.props.baseQuotes);
 		const {from, to} = this.state;
 
 		return (
@@ -127,6 +172,15 @@ class SearchQuoteForm extends Component {
 					component={props => <DateInput {...props} />}
 					onDayChange={day => this.setState({to: day})}
 					value={to}
+				/>
+				<ClassicSelect
+					styles={SelectStyles}
+					placeholder="Triez par client"
+					defaultValue={{value: 'all', label: 'Tous les clients'}}
+					onChange={(option) => {
+						this.props.sortByCustomer(option && option.value);
+					}}
+					options={this.state.customers}
 				/>
 			</SearchQuoteFormMain>
 		);

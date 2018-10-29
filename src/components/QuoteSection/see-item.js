@@ -25,11 +25,8 @@ const ItemName = styled(FlexRow)`
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
-	margin-bottom: 7px;
-	background: ${primaryWhite};
 	font-size: 13px;
 	position: relative;
-	box-shadow: 0px 0px 8px ${alpha10};
 	cursor: pointer;
 	width: 100%;
 `;
@@ -89,6 +86,10 @@ const ItemCustomerButton = styled(Button)`
 
 const ItemRow = styled(FlexRow)`
 	align-items: center;
+	box-shadow: 0px 0px 8px ${alpha10};
+	margin-bottom: 7px;
+	background: ${primaryWhite};
+	padding: 5px 20px;
 `;
 
 class Item extends Component {
@@ -168,6 +169,9 @@ class Item extends Component {
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
+
+		const isValidStatus
+			= status && (status === 'ADDED_SENT' || status === 'UPDATED_SENT');
 
 		if (shouldDisplayAddItem && mode === 'edit') {
 			return (
@@ -261,14 +265,18 @@ class Item extends Component {
 					</ItemName>
 					{customerViewMode
 						&& status === 'UPDATED_SENT' && (
-						<ItemStatus>UPDATED</ItemStatus>
+						<ItemStatus>Mis à jour</ItemStatus>
 					)}
 					{customerViewMode
-						&& status === 'UPDATED_SENT'
+						&& isValidStatus
 						&& comments.length > 0 && (
 						<CommentsCount onClick={this.seeComments}>
 							{comments.length}
 						</CommentsCount>
+					)}
+					{customerViewMode
+						&& status === 'ADDED_SENT' && (
+						<ItemStatus>Ajouté</ItemStatus>
 					)}
 					<span>{item.pendingUnit || item.unit} jours</span>
 					<span>{item.unitPrice.toLocaleString('fr-FR')}€</span>
@@ -276,7 +284,7 @@ class Item extends Component {
 						{item.unitPrice * (item.pendingUnit || item.unit)}€
 					</span>
 					{customerViewMode
-						&& item.status === 'UPDATED_SENT' && (
+						&& isValidStatus && (
 						<ItemCustomerActions>
 							<ToastContainer />
 							<Mutation mutation={ACCEPT_ITEM}>

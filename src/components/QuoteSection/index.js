@@ -50,6 +50,7 @@ class QuoteSection extends Component {
 			sectionIndex,
 			removeItem,
 			mode,
+			customerViewMode,
 		} = this.props;
 
 		return (
@@ -108,7 +109,7 @@ class QuoteSection extends Component {
 					/>
 				))}
 
-				{mode === 'edit' && (
+				{!customerViewMode && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (
 							<QuoteAction

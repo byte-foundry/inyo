@@ -59,6 +59,9 @@
       "pre-commit": "lint-staged"
     }
   },
+  "scripts": {
+	  "start": "NODE_ENV=development react-scripts start"
+  },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
       "prettier-eslint --write",

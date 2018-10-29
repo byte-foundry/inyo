@@ -9,7 +9,7 @@ import QuoteDisplay from '../../../components/QuoteDisplay';
 import CommentModal from '../../../components/CommentModal';
 
 const Loading = styled('div')`
-	font-size: 70px;
+	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;

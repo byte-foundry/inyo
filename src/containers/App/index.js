@@ -17,7 +17,7 @@ import {CHECK_LOGIN_USER} from '../../utils/queries';
 const AppMain = styled('div')``;
 
 const Loading = styled('div')`
-	font-size: 70px;
+	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;

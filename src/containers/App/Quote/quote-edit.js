@@ -10,7 +10,7 @@ import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
 import QuoteDisplay from '../../../components/QuoteDisplay';
 
 const Loading = styled('div')`
-	font-size: 70px;
+	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;

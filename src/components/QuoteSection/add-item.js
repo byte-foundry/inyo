@@ -25,14 +25,15 @@ import {GET_ITEMS} from '../../utils/queries';
 const AddItemMain = styled('div')`
 	background: ${gray20};
 	border: 1px solid ${primaryBlue};
-	padding: 10px 20px;
+	padding: 20px 20px 10px 20px;
+	margin-bottom: 10px;
 `;
 
 const ItemComment = styled('textarea')`
 	margin-top: 10px;
 	width: 100%;
 	background: ${primaryWhite};
-	padding: 3px 4px 3px 3px;
+	padding: 15px 10px;
 	font-family: 'Ligne';
 	color: ${gray30};
 `;
@@ -45,7 +46,7 @@ const ActionButton = styled(Button)`
 `;
 
 const AddInput = styled(Input)`
-	padding: 3px 4px 3px 3px;
+	padding: 15px 10px;
 	background: ${primaryWhite};
 	width: auto;
 	border-color: transparent;
@@ -53,14 +54,17 @@ const AddInput = styled(Input)`
 `;
 
 const Loading = styled('div')`
-	font-size: 70px;
+	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;
 
-const AutocompleteItem = styled('div')``;
+const AutocompleteItem = styled('div')`
+	width: 500px;
+	background: red;
+`;
 
 class AddItem extends Component {
 	constructor(props) {
@@ -81,7 +85,9 @@ class AddItem extends Component {
 				<FlexRow justifyContent="space-between">
 					<Query query={GET_ITEMS}>
 						{({loading, error, data}) => {
-							if (loading) {return <Loading>Chargement...</Loading>;}
+							if (loading) {
+								return <Loading>Chargement...</Loading>;
+							}
 							if (!loading && data && data.template) {
 								const {items} = data.template;
 
@@ -160,7 +166,7 @@ class AddItem extends Component {
 				</FlexRow>
 				<FlexRow>
 					<ItemComment
-						placeholder="Add comments or description"
+						placeholder="Ajoutez un commentaire ou une description de cette tâche."
 						value={description}
 						onChange={e => this.setState({description: e.target.value})
 						}

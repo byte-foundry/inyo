@@ -49,8 +49,7 @@ const FIRST_DAY_OF_WEEK = {
 };
 // Translate aria-labels
 const LABELS = {
-	ru: {nextMonth: 'следующий месяц', previousMonth: 'предыдущий месяц'},
-	it: {nextMonth: 'Prossimo mese', previousMonth: 'Mese precedente'},
+	fr: {nextMonth: 'Mois suivant', previousMonth: 'Mois précédent'},
 };
 
 const formatDate = dateObject => new Date(dateObject).toLocaleDateString('fr-FR');
@@ -134,7 +133,6 @@ class SearchQuoteForm extends Component {
 	// 	to: '01/01/2019',
 	// }}
 	render() {
-		console.log(this.props.baseQuotes);
 		const {from, to} = this.state;
 
 		return (
@@ -153,7 +151,10 @@ class SearchQuoteForm extends Component {
 						selectedDays: from,
 					}}
 					component={props => <DateInput {...props} />}
-					onDayChange={day => this.setState({from: day})}
+					onDayChange={(day) => {
+						this.setState({from: day});
+						this.props.sortByDate(day, to);
+					}}
 					value={from}
 				/>
 				<SpanLabel>Au :</SpanLabel>
@@ -170,7 +171,10 @@ class SearchQuoteForm extends Component {
 						selectedDays: to,
 					}}
 					component={props => <DateInput {...props} />}
-					onDayChange={day => this.setState({to: day})}
+					onDayChange={(day) => {
+						this.setState({to: day});
+						this.props.sortByDate(from, day);
+					}}
 					value={to}
 				/>
 				<ClassicSelect

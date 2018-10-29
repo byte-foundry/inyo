@@ -42,7 +42,7 @@ const TopBarAccountIcon = styled('img')`
 `;
 
 const Loading = styled('div')`
-	font-size: 70px;
+	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -84,6 +84,7 @@ class ListQuotes extends Component {
 							baseQuotes: data.me.company.quotes,
 						});
 					}
+					console.log(quotes);
 
 					return (
 						<ListQuotesMain>
@@ -127,6 +128,26 @@ class ListQuotes extends Component {
 																	=== value,
 														  )
 														: baseQuotes,
+											});
+										}}
+										sortByDate={(from, to) => {
+											this.setState({
+												quotes: baseQuotes.filter(
+													quote => (quote.issuedAt
+														? new Date(
+															quote.issuedAt,
+															  )
+														: new Date(
+															quote.createdAt,
+															  )) >= from
+														&& (quote.issuedAt
+															? new Date(
+																quote.issuedAt,
+															  )
+															: new Date(
+																quote.createdAt,
+															  )) <= to,
+												),
 											});
 										}}
 									/>

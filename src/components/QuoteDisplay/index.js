@@ -87,7 +87,7 @@ const QuoteRow = styled(FlexRow)`
 
 const QuoteContent = styled('div')`
 	max-width: 750px;
-	width: -webkit-fill-available;
+	width: fill-available;
 	margin-left: auto;
 	margin-right: auto;
 	padding-bottom: 40px;
@@ -133,7 +133,7 @@ const SendQuoteButton = styled(Button)`
 	width: auto;
 `;
 const Loading = styled('div')`
-	font-size: 70px;
+	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;

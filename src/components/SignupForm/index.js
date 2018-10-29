@@ -92,31 +92,32 @@ class SignupForm extends Component {
 											name="email"
 											type="email"
 											label="Email"
-											placeholder="enter your email"
+											placeholder="Entrez votre email"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="password"
 											type="password"
-											label="Password"
-											placeholder="enter your password"
+											label="Mot de passe"
+											placeholder="Entrez votre mot de passe"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="firstname"
 											type="text"
-											label="First name"
-											placeholder="Your first name"
+											label="Prénom"
+											placeholder="Prénom"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="lastname"
 											type="text"
-											label="Last name"
-											placeholder="Your last name"
+											label="Nom"
+											placeholder="Nom"
+											required
 										/>
 										{status
 											&& status.msg && (
@@ -134,7 +135,7 @@ class SignupForm extends Component {
 											size="Big"
 											disabled={isSubmitting}
 										>
-											Get started now
+											Commencez
 										</Button>
 									</form>
 								);

@@ -106,12 +106,13 @@ class Auth extends Component {
 				<AuthText>
 					<AuthTextContent>
 						<img src={AuthLogo} alt="auth logo" />
-						<TextTitle>Get started with a free account</TextTitle>
+						<TextTitle>Créez votre compte gratuitement</TextTitle>
 						<TextContent>
-							We make it easy to create and launch marketing
-							campaigns that help you hit your goals whether youre
-							trying to grow your audience, sell more stuff, or
-							build your brand.
+							Optimisez votre temps en automatisant des tâches
+							répétitives et réévaluez vos projets en direct avec
+							vos clients. Avec Inyo vous gagnez du temps en vous
+							concentrant sur votre vrai métier et votre travail
+							est payé à sa juste valeur.
 						</TextContent>
 					</AuthTextContent>
 				</AuthText>

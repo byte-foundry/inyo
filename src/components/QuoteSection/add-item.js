@@ -48,7 +48,8 @@ const ActionButton = styled(Button)`
 const AddInput = styled(Input)`
 	padding: 15px 10px;
 	background: ${primaryWhite};
-	width: auto;
+	width: 100px;
+	margin-left: 10px;
 	border-color: transparent;
 	font-size: 13px;
 `;
@@ -59,11 +60,6 @@ const Loading = styled('div')`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-`;
-
-const AutocompleteItem = styled('div')`
-	width: 500px;
-	background: red;
 `;
 
 class AddItem extends Component {
@@ -100,7 +96,7 @@ class AddItem extends Component {
 										shouldItemRender={(item, value) => item.includes(value)
 										}
 										renderItem={(item, isHighlighted) => (
-											<AutocompleteItem
+											<div
 												background={
 													isHighlighted
 														? 'lightgray'
@@ -108,7 +104,7 @@ class AddItem extends Component {
 												}
 											>
 												{item}
-											</AutocompleteItem>
+											</div>
 										)}
 										value={name}
 										onChange={(e) => {
@@ -120,6 +116,10 @@ class AddItem extends Component {
 											this.setState({
 												name: value,
 											});
+										}}
+										wrapperStyle={{
+											flex: '2',
+											marginRight: '20px',
 										}}
 										menuStyle={{
 											borderRadius: '0px',
@@ -135,12 +135,12 @@ class AddItem extends Component {
 										inputProps={{
 											style: {
 												color: gray30,
-												padding: '3px 4px 3px 3px',
 												background: primaryWhite,
-												width: 'auto',
 												borderColor: 'transparent',
 												fontSize: '13px',
 												fontFamily: 'Ligne',
+												width: '100%',
+												padding: '16px 10px',
 											},
 										}}
 									/>
@@ -148,21 +148,24 @@ class AddItem extends Component {
 							}
 						}}
 					</Query>
-					<AddInput
-						type="number"
-						placeholder="1"
-						value={unit}
-						onChange={e => this.setState({unit: e.target.value})}
-					/>
-					<AddInput
-						type="number"
-						placeholder="500"
-						value={unitPrice}
-						onChange={e => this.setState({
-							unitPrice: parseInt(e.target.value),
-						})
-						}
-					/>
+					<FlexRow>
+						<AddInput
+							type="number"
+							placeholder="1"
+							value={unit}
+							onChange={e => this.setState({unit: e.target.value})
+							}
+						/>
+						<AddInput
+							type="number"
+							placeholder="500"
+							value={unitPrice}
+							onChange={e => this.setState({
+								unitPrice: parseInt(e.target.value),
+							})
+							}
+						/>
+					</FlexRow>
 				</FlexRow>
 				<FlexRow>
 					<ItemComment

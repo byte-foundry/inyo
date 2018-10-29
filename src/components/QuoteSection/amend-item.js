@@ -27,13 +27,22 @@ const AmendItemMain = styled('div')`
 	font-size: 13px;
 `;
 
+const UnitPrice = styled('span')`
+	padding: 15px 10px;
+	width: 100px;
+	margin-left: 10px;
+	border-color: transparent;
+	font-size: 13px;
+`;
+
 const ItemComment = styled('textarea')`
 	margin-top: 10px;
 	width: 100%;
 	background: ${primaryWhite};
-	padding: 3px 4px 3px 3px;
+	padding: 15px 10px;
 	font-family: 'Ligne';
 	color: ${gray30};
+	margin-bottom: 10px;
 `;
 
 const ActionButton = styled(Button)`
@@ -45,11 +54,13 @@ const ActionButton = styled(Button)`
 `;
 
 const AddInput = styled(Input)`
-	padding: 3px 4px 3px 3px;
+	padding: 15px 10px;
 	background: ${primaryWhite};
-	width: auto;
+	width: 100px;
+	margin-right: 10px;
 	border-color: transparent;
 	font-size: 13px;
+	flex: ${props => (props.full ? '2' : '1')};
 `;
 
 const AutocompleteItem = styled('div')``;
@@ -112,21 +123,27 @@ class AmendItem extends Component {
 						<form onSubmit={handleSubmit}>
 							<AmendItemMain>
 								<FlexRow justifyContent="space-between">
-									<FormElem
-										{...props}
-										name="name"
+									<AddInput
 										type="text"
 										placeholder="Nom de la tâche"
-										inline
+										value={values.name}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										name="name"
+										full={true}
 									/>
-									<FormElem
-										{...props}
-										name="unit"
-										type="number"
-										placeholder="1"
-										inline
-									/>
-									<span>{unitPrice}€</span>
+									<FlexRow>
+										<AddInput
+											type="number"
+											placeholder="1"
+											value={values.unit}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											name="unit"
+											full={false}
+										/>
+										<UnitPrice>{unitPrice}€</UnitPrice>
+									</FlexRow>
 								</FlexRow>
 								<FlexRow>
 									<ItemComment

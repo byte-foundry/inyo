@@ -519,8 +519,8 @@ export const ACCEPT_ITEM = gql`
 `;
 
 export const REJECT_ITEM = gql`
-	mutation removeItem($itemId: ID!, $token: String!) {
-		removeItem(id: $itemId, token: $token) {
+	mutation rejectItem($itemId: ID!, $token: String!) {
+		rejectItem(id: $itemId, token: $token) {
 			id
 			status
 			unit

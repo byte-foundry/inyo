@@ -57,7 +57,7 @@ class CreateQuote extends Component {
 						);
 					}
 
-					return <Redirect to="/app/auth" />;
+					return <Redirect to="/auth" />;
 				}}
 			</Query>
 		);

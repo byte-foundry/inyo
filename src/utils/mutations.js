@@ -69,10 +69,21 @@ export const UPDATE_USER = gql`
 `;
 
 export const UPDATE_USER_CONSTANTS = gql`
-	mutation UpdateUser($defaultDailyPrice: Int, $defaultVatRate: Int) {
+	mutation UpdateUser(
+		$defaultDailyPrice: Int
+		$defaultVatRate: Int
+		$workingFields: [String!]
+		$jobType: JobType
+		$interestedFeatures: [String!]
+		$hasUpcomingProject: Boolean
+	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
 			defaultVatRate: $defaultVatRate
+			workingFields: $workingFields
+			jobType: $jobType
+			interestedFeatures: $interestedFeatures
+			hasUpcomingProject: $hasUpcomingProject
 		) {
 			id
 			email
@@ -80,6 +91,10 @@ export const UPDATE_USER_CONSTANTS = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name

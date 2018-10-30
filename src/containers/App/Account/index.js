@@ -277,7 +277,7 @@ class Account extends Component {
 							</AccountMain>
 						);
 					}
-					return <Redirect to="/app/auth" />;
+					return <Redirect to="/auth" />;
 				}}
 			</Query>
 		);

@@ -273,6 +273,11 @@ export const Label = styled('label')`
 				padding-left: 5px;
 			}
 		`};
+	${props => props.onboarding
+		&& css`
+			margin: 10px 15px 10px 16px;
+			width: inherit;
+		`};
 `;
 
 export const ErrorInput = styled('p')`

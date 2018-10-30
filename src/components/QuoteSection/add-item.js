@@ -27,6 +27,7 @@ const AddItemMain = styled('div')`
 	border: 1px solid ${primaryBlue};
 	padding: 20px 20px 10px 20px;
 	margin-bottom: 10px;
+	border-radius: 4px;
 `;
 
 const ItemComment = styled('textarea')`

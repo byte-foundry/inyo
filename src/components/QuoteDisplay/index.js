@@ -131,6 +131,7 @@ const SelectStyles = {
 };
 const SendQuoteButton = styled(Button)`
 	width: auto;
+	padding: 0 25px;
 `;
 const Loading = styled('div')`
 	font-size: 30px;

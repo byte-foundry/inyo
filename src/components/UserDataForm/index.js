@@ -27,7 +27,8 @@ const UpdateButton = styled(Button)`
 	display: block;
 	margin-top: 15px;
 	margin-left: auto;
-	margin-right: auto;
+	margin-right: 50px;
+	margin-bottom: 80px;
 `;
 
 class UserDataForm extends Component {

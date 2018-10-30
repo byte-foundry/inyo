@@ -230,6 +230,7 @@ export const Button = styled(ButtonReset)`
 	cursor: pointer;
 	transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
+	border-radius: 4px;
 	${ButtonStyles};
 	${ButtonSizes};
 `;

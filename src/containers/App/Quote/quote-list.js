@@ -10,11 +10,14 @@ import AccountLogo from './accountLogo.svg';
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
 import QuoteList from '../../../components/QuoteList';
 
-const ListQuotesMain = styled('div')``;
+const ListQuotesMain = styled('div')`
+	padding-left: 40px;
+	padding-right: 40px;
+`;
 
 const TopBarButton = styled(Button)`
 	height: 60px;
-	margin-left: 20px;
+	padding: 0 25px;
 `;
 
 const ListQuotesTopBar = styled('div')`

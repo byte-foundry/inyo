@@ -3,7 +3,9 @@ import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 
 import QuoteCard from '../QuoteCard';
-import {P, primaryNavyBlue, primaryBlue} from '../../utils/content';
+import {
+	P, primaryNavyBlue, primaryBlue, gray20,
+} from '../../utils/content';
 
 const QuoteStateListMain = styled('div')`
 	display: flex;
@@ -17,8 +19,9 @@ const QuoteStateTitle = styled('div')`
 	justify-content: space-between;
 	margin-right: 10px;
 	padding: 14px 16px 15px 16px;
-	border: 1px solid ${primaryNavyBlue};
+	border: 1px solid ${gray20};
 	margin-bottom: 10px;
+	border-radius: 4px;
 `;
 const QuoteStateQuantity = styled('label')`
 	font-size: 13px;

@@ -39,8 +39,8 @@ class SignupForm extends Component {
 									.email()
 									.required('Required'),
 								password: Yup.string().required('Required'),
-								firstName: Yup.string().required('Required'),
-								lastName: Yup.string().required('Required'),
+								firstname: Yup.string().required('Required'),
+								lastname: Yup.string().required('Required'),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);

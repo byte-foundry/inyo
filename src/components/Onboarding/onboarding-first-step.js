@@ -82,12 +82,12 @@ class OnboardingFirstStep extends Component {
 
 		if (itemIndex !== -1) {
 			selectedItems.splice(itemIndex, 1);
-			setFieldValue('selectedItems', selectedItems);
+			setFieldValue('workingFields', selectedItems);
 			this.setState({selectedItems});
 
 			return;
 		}
-		setFieldValue('selectedItems', selectedItems);
+		setFieldValue('workingFields', selectedItems);
 		selectedItems.push(item);
 		this.setState({selectedItems});
 	};
@@ -119,20 +119,20 @@ class OnboardingFirstStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								selectedItems: me.workingFields,
+								workingFields: me.workingFields,
 								otherDomain: '',
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const {selectedItems, otherDomain} = values;
+								const {workingFields, otherDomain} = values;
 
 								try {
 									if (otherDomain !== '') {
-										selectedItems.push(otherDomain);
+										workingFields.push(otherDomain);
 									}
 									updateUser({
 										variables: {
-											selectedItems,
+											workingFields,
 										},
 										update: (
 											cache,

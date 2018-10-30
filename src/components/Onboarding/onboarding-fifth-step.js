@@ -55,27 +55,46 @@ const UseCaseCard = styled('div')`
 	text-align: center;
 `;
 
+const useCases = ['Oui', 'Non', 'Peut être'];
+const getHasUpcoming = (str) => {
+	switch (str) {
+	case 'Oui':
+		return true;
+	case 'Non':
+		return false;
+	default:
+		return null;
+	}
+};
+const getUseCase = (bln) => {
+	switch (bln) {
+	case true:
+		return 'Oui';
+	case false:
+		return 'Non';
+	default:
+		return 'Peut être';
+	}
+};
+
 class OnboardingFifthStep extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selectedItem: '',
+			hasUpcomingProject: getUseCase(props.me.hasUpcomingProject),
 		};
 	}
 
 	selectItem = (item, setFieldValue) => {
-		const {selectedItem} = this.state;
-
-		setFieldValue('selectedItem', item);
-		this.setState({selectedItem: item});
+		setFieldValue('hasUpcomingProject', item);
+		this.setState({hasUpcomingProject: item});
 	};
 
 	render() {
 		const {
 			me, getNextStep, getPreviousStep, step,
 		} = this.props;
-		const {selectedItem} = this.state;
-		const useCases = ['Oui', 'Non', 'Peut être'];
+		const {hasUpcomingProject} = this.state;
 
 		return (
 			<OnboardingStep>
@@ -88,15 +107,40 @@ class OnboardingFifthStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								selectedItem: '',
+								hasUpcomingProject: me.hasUpcomingProject,
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
+								const {hasUpcomingProject} = values;
+
 								try {
-									// updateUser({
-									// 	variables: {}
-									// });
-									getNextStep();
+									updateUser({
+										variables: {
+											hasUpcomingProject: getHasUpcoming(
+												hasUpcomingProject,
+											),
+										},
+										update: (
+											cache,
+											{data: {updateUser}},
+										) => {
+											const data = cache.readQuery({
+												query: GET_USER_INFOS,
+											});
+
+											data.me = updateUser;
+											try {
+												cache.writeQuery({
+													query: GET_USER_INFOS,
+													data,
+												});
+												getNextStep();
+											}
+											catch (e) {
+												console.log(e);
+											}
+										},
+									});
 								}
 								catch (error) {
 									console.log(error);
@@ -117,7 +161,8 @@ class OnboardingFifthStep extends Component {
 											{useCases.map(useCase => (
 												<UseCaseCard
 													selected={
-														selectedItem === useCase
+														hasUpcomingProject
+														=== useCase
 													}
 													onClick={() => {
 														this.selectItem(

@@ -23,7 +23,7 @@ class SignupForm extends Component {
 
 	render() {
 		const {shouldRedirect} = this.state;
-		const from = this.props.from || '/app';
+		const from = this.props.from || '/app/onboarding';
 
 		if (shouldRedirect) {
 			return <Redirect to={from} />;

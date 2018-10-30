@@ -39,6 +39,8 @@ class SignupForm extends Component {
 									.email()
 									.required('Required'),
 								password: Yup.string().required('Required'),
+								firstName: Yup.string().required('Required'),
+								lastName: Yup.string().required('Required'),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -71,7 +73,8 @@ class SignupForm extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg: 'Something went wrong',
+										msg:
+											"Quelque chose ne s'est pas passé comme prévu",
 									});
 								}
 							}}
@@ -91,32 +94,33 @@ class SignupForm extends Component {
 											{...props}
 											name="email"
 											type="email"
-											label="Email"
-											placeholder="enter your email"
+											label="Adresse email"
+											placeholder="john@doe.com"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="password"
 											type="password"
-											label="Password"
-											placeholder="enter your password"
+											label="Mot de passe"
+											placeholder="***************"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="firstname"
 											type="text"
-											label="First name"
-											placeholder="Your first name"
+											label="Prénom"
+											placeholder="John"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="lastname"
 											type="text"
-											label="Last name"
-											placeholder="Your last name"
+											label="Nom"
+											placeholder="Doe"
+											required
 										/>
 										{status
 											&& status.msg && (
@@ -134,7 +138,7 @@ class SignupForm extends Component {
 											size="Big"
 											disabled={isSubmitting}
 										>
-											Get started now
+											Commencez
 										</Button>
 									</form>
 								);

@@ -30,13 +30,15 @@ const AccountMain = styled('div')`
 	min-height: 100vh;
 	padding-bottom: 80px;
 `;
-const AccountBody = styled('div')``;
+const AccountBody = styled('div')`
+	padding-left: 40px;
+	padding-right: 40px;
+`;
 const Profile = styled(FlexRow)``;
 const ProfileSide = styled('div')`
 	float: right;
 	margin-top: 80px;
-	margin-left: auto;
-	margin-right: 40px;
+	margin-right: 80px;
 	position: sticky;
 `;
 

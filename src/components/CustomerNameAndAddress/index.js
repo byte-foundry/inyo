@@ -47,7 +47,7 @@ class CustomerNameAndAddress extends Component {
 				<AddressBlock>
 					<Address>{address.street}</Address>
 					<Address>
-						{address.postalCode} {address.city}
+						{address.postalCode} - {address.city}
 					</Address>
 					<Address>{address.country}</Address>
 				</AddressBlock>

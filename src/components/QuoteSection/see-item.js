@@ -27,7 +27,7 @@ const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
 	font-size: 13px;
 	position: relative;
-	cursor: pointer;
+	cursor: ${props => (props.customer ? 'initial' : 'pointer')};
 	width: 100%;
 `;
 
@@ -253,6 +253,7 @@ class Item extends Component {
 					/>
 				)}
 				<ItemMain
+					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
 						if (!customerViewMode) {

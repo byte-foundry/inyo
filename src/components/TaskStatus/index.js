@@ -24,7 +24,7 @@ const Status = styled('img')`
 	top: 60%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING' ? 'pointer' : 'initial')};
+	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
 `;
 
 const taskImageByStatus = {
@@ -101,6 +101,7 @@ class TaskStatus extends Component {
 						<Status
 							src={taskImageByStatus[status]}
 							status={status}
+							customer={customerViewMode}
 						/>
 					</TaskStatusMain>
 				)}

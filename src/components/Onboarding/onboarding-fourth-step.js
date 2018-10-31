@@ -64,7 +64,7 @@ class OnboardingFourthStep extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			interestedFeatures: [],
+			interestedFeatures: props.me.interestedFeatures,
 		};
 	}
 

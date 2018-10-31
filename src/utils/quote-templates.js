@@ -462,9 +462,8 @@ export const templates = [
 						vatRate: 20,
 					},
 					{
-						name:
-							'Tests (Phase de recette), corrections et mises en ligne',
-						unit: 0,
+						name: 'Tests (Phase de recette) et corrections',
+						unit: 1,
 						unitPrice: 350,
 						description: '+ Validation',
 						vatRate: 20,
@@ -502,14 +501,7 @@ export const templates = [
 				items: [
 					{
 						name: 'Hébergement',
-						unit: 0,
-						unitPrice: 350,
-						description: '',
-						vatRate: 20,
-					},
-					{
-						name: 'Mises-à-jour',
-						unit: 0,
+						unit: 0.25,
 						unitPrice: 350,
 						description: '',
 						vatRate: 20,
@@ -519,6 +511,13 @@ export const templates = [
 			{
 				name: 'Options',
 				items: [
+					{
+						name: 'Mises-à-jour',
+						unit: 0,
+						unitPrice: 350,
+						description: '',
+						vatRate: 20,
+					},
 					{
 						name: 'Formulaire de contact',
 						unit: 0.5,

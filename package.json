@@ -35,13 +35,13 @@
     "react-toastify": "^4.4.0",
     "shevyjs": "^1.1.0",
     "yup": "^0.26.6",
-    "react-scripts": "2.0.4"
-  },
-  "devDependencies": {
+    "react-scripts": "2.0.4",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
-    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-react": "^7.11.1"
+  },
+  "devDependencies": {
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",

@@ -77,7 +77,7 @@ class QuoteStateList extends Component {
 					</QuoteStateName>
 					<QuoteStateAmount>{quotes.length}</QuoteStateAmount>
 					<QuoteStateTotal>
-						{quoteTotal.toLocaleString('fr-FR')} HT
+						{quoteTotal.toLocaleString('fr-FR')}€ H.T.
 					</QuoteStateTotal>
 				</QuoteStateTitle>
 				{quoteColumn}

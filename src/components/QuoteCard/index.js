@@ -81,7 +81,7 @@ class QuoteCard extends Component {
 							  )}
 					</DateOfIssue>
 				</CardHeader>
-				<Amount>{total || 0} HT</Amount>
+				<Amount>{total || 0}€ H.T.</Amount>
 			</QuoteCardMain>
 		);
 	}

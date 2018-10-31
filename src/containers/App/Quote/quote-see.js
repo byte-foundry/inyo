@@ -191,6 +191,7 @@ class TasksListUser extends Component {
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
 								addItem={this.addItem}
+								issuer={quote.issuer}
 								mode="see"
 							/>
 						</div>

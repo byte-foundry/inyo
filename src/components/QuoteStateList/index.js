@@ -50,8 +50,6 @@ const quoteStateName = {
 	SENT: 'Envoyés',
 	ACCEPTED: 'Acceptés',
 	REJECTED: 'Rejetées',
-	INVOICE_SENT: 'Facture envoyée',
-	INVOICE_ACCEPTED: 'Facture acceptée',
 };
 
 class QuoteStateList extends Component {

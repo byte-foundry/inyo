@@ -7,12 +7,15 @@ import CreateQuoteForm from './create-quote-form';
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 import {gray50, Button} from '../../../utils/content';
 
-const CreateQuoteMain = styled('div')``;
+const CreateQuoteMain = styled('div')`
+	margin-left: 40px;
+	margin-right: 40px;
+`;
 
 const BackButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 11px;
-	margin: 10px 0 10px 40px;
+	margin: 10px 0 10px 0;
 	color: ${gray50};
 `;
 

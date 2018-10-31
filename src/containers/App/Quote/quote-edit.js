@@ -383,6 +383,7 @@ class EditQuote extends Component {
 								removeSection={this.removeSection}
 								addSection={this.addSection}
 								updateOption={this.updateOption}
+								issuer={quote.issuer}
 							/>
 						</div>
 					);

@@ -113,8 +113,25 @@ export const GET_QUOTE_DATA = gql`
 			template
 			name
 			status
+			issuer {
+				name
+				email
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					defaultVatRate
+				}
+				siret
+			}
 			customer {
 				name
+				firstName
+				lastName
 				email
 				address {
 					street

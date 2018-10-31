@@ -582,8 +582,7 @@ class QuoteDisplay extends Component {
 										</QuoteContent>
 									</CenterContent>
 									<SideActions>
-										{customerViewMode
-											&& issuer.name && (
+										{issuer.name && (
 											<IssuerNameAndAddress
 												issuer={issuer}
 											/>

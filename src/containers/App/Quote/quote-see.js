@@ -147,7 +147,7 @@ class TasksListUser extends Component {
 					const amendmentEnabled = option.sections.reduce(
 						(isSectionUpdated, section) => isSectionUpdated
 							|| section.items.reduce(
-								(isItemUpdated, item) => isItemUpdated || item.unit,
+								(isItemUpdated, item) => isItemUpdated || item.status === 'UPDATED',
 								false,
 							),
 						false,
@@ -191,6 +191,7 @@ class TasksListUser extends Component {
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
 								addItem={this.addItem}
+								issuer={quote.issuer}
 								mode="see"
 							/>
 						</div>

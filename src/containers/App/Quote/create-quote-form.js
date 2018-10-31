@@ -46,6 +46,11 @@ const FormTitle = styled(H4)`
 	color: ${primaryBlue};
 `;
 
+const FormSection = styled('div')`
+	margin-left: ${props => (props.right ? '40px' : 0)};
+	margin-right: ${props => (props.left ? '40px' : 0)};
+`;
+
 const SelectStyles = {
 	option: (base, state) => ({
 		...base,
@@ -61,6 +66,7 @@ const SelectStyles = {
 	control: base => ({
 		...base,
 		width: '30vw',
+		maxWidth: '500px',
 		borderRadius: 0,
 		fontFamily: 'Ligne',
 	}),
@@ -290,8 +296,8 @@ class CreateQuoteForm extends React.Component {
 														<Title>
 															Créez votre devis
 														</Title>
-														<FlexRow justifyContent="space-around">
-															<div>
+														<FlexRow>
+															<FormSection left>
 																<SubTitle>
 																	1. Votre
 																	client
@@ -400,9 +406,9 @@ class CreateQuoteForm extends React.Component {
 																		/>
 																	</div>
 																)}
-															</div>
+															</FormSection>
 
-															<div>
+															<FormSection right>
 																<SubTitle>
 																	2. Votre
 																	Projet
@@ -472,7 +478,7 @@ class CreateQuoteForm extends React.Component {
 																	Créez votre
 																	devis
 																</Button>
-															</div>
+															</FormSection>
 														</FlexRow>
 													</form>
 												</div>

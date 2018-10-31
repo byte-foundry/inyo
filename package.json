@@ -34,7 +34,8 @@
     "react-select": "^2.1.0",
     "react-toastify": "^4.4.0",
     "shevyjs": "^1.1.0",
-    "yup": "^0.26.6"
+    "yup": "^0.26.6",
+    "react-scripts": "2.0.4"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
@@ -45,8 +46,7 @@
     "lint-staged": "^7.3.0",
     "prettier": "^1.14.3",
     "prettier-eslint": "^8.8.2",
-    "prettier-eslint-cli": "^4.7.1",
-    "react-scripts": "2.0.4"
+    "prettier-eslint-cli": "^4.7.1"
   },
   "browserslist": [
     ">0.2%",

@@ -19,8 +19,8 @@ export const SIGNUP = gql`
 	mutation Signup(
 		$email: String!
 		$password: String!
-		$firstName: String
-		$lastName: String
+		$firstName: String!
+		$lastName: String!
 	) {
 		signup(
 			email: $email

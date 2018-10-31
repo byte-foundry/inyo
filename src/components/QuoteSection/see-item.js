@@ -67,7 +67,7 @@ const ItemStatus = styled('div')`
 
 const ItemCustomerActions = styled('div')`
 	position: absolute;
-	right: -212px;
+	right: -222px;
 	top: -2px;
 `;
 

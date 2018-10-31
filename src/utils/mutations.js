@@ -362,8 +362,27 @@ export const SEND_AMENDMENT = gql`
 			id
 			template
 			name
+			status
+			issuer {
+				name
+				email
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					defaultVatRate
+				}
+				siret
+			}
 			customer {
 				name
+				firstName
+				lastName
+				email
 				address {
 					street
 					city

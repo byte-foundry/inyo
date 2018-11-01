@@ -49,7 +49,7 @@ const quoteStateName = {
 	DRAFT: 'Brouillons',
 	SENT: 'Envoyés',
 	ACCEPTED: 'Acceptés',
-	REJECTED: 'Rejetées',
+	REJECTED: 'Rejetés',
 };
 
 class QuoteStateList extends Component {

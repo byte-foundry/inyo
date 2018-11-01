@@ -57,8 +57,6 @@ export const quoteState = {
 	SENT: 1,
 	ACCEPTED: 2,
 	REJECTED: 3,
-	INVOICE_SENT: 4,
-	INVOICE_ACCEPTED: 5,
 };
 
 class ListQuotes extends Component {

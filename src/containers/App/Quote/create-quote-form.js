@@ -26,8 +26,6 @@ import {GET_ALL_QUOTES, GET_USER_INFOS} from '../../../utils/queries';
 
 const Title = styled(H1)`
 	color: ${primaryNavyBlue};
-	padding-left: 40px;
-	padding-right: 40px;
 `;
 
 const Loading = styled('div')`

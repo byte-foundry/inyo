@@ -23,6 +23,8 @@ export const CHECK_LOGIN_USER = gql`
 		me {
 			email
 			id
+			firstName
+			lastName
 		}
 	}
 `;

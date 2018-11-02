@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 
 import {primaryWhite, gray20} from '../../utils/content';
+import { comment } from 'postcss';
 
 const CommentIconMain = styled('div')`
-	background: ${props => props.comments && props.comments.length > 0 ? '#3860ff' : gray20};
+	background: ${props => props.commentLength > 0 ? '#3860ff' : gray20};
 	color: ${primaryWhite};
 	padding: 5px;
 	width: 18px;
@@ -16,7 +17,7 @@ const CommentIconMain = styled('div')`
 	cursor: pointer;
 
 	&:after {
-		border-top: solid 5px ${props => props.comments && props.comments.length > 0 ? '#3860ff' : gray20};
+		border-top: solid 5px ${props =>  props.commentLength > 0 ? '#3860ff' : gray20};
 		border-left: solid 5px transparent;
 		border-right: solid 5px transparent;
 		content: '';
@@ -30,10 +31,16 @@ const CommentIconMain = styled('div')`
 
 class CommentIcon extends Component {
 	render() {
-		const {comments} = this.props;
+		const {comments, userType} = this.props;
+		let commentLength = 0;
+		if(comments && comments.length !== 0) {
+			console.log('--')
+			console.log(comments)
+			commentLength = comments.filter(comment => (!comment.views.find(e => e.viewer.__typename === userType))).length;
+		}
 		return (
-			<CommentIconMain comments={this.props.comments} onClick={() => {this.props.onClick()}}>
-			{comments && comments.length !== 0 && comments.length}
+			<CommentIconMain commentLength={commentLength} onClick={() => {this.props.onClick()}}>
+				{commentLength !== 0 && commentLength}
 			</CommentIconMain>
 		);
 	}

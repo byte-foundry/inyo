@@ -245,7 +245,7 @@ class Item extends Component {
 						<ItemStatus>Mis à jour</ItemStatus>
 					)}
 					{(customerViewMode || mode === 'see') && (
-					<CommentIcon onClick={this.seeCommentModal} comments={comments}/>)}
+		<CommentIcon onClick={this.seeCommentModal} comments={comments} userType={customerViewMode ? 'Customer' : 'User'}/>)}
 					{customerViewMode
 						&& status === 'ADDED_SENT' && (
 						<ItemStatus>Ajouté</ItemStatus>

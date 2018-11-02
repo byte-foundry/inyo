@@ -4,7 +4,8 @@ import {withClientState} from 'apollo-link-state'; // eslint-disable-line import
 import {createHttpLink} from 'apollo-link-http'; // eslint-disable-line import/no-extraneous-dependencies
 import {setContext} from 'apollo-link-context';
 import {onError} from 'apollo-link-error'; // eslint-disable-line import/no-extraneous-dependencies
-import {InMemoryCache} from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
+import {InMemoryCache, IntrospectionFragmentMatcher} from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
+import introspectionQueryResultData from './fragmentTypes.json';
 
 import {GRAPHQL_API} from './constants';
 import defaults from './default';
@@ -61,7 +62,12 @@ const withToken = setContext((_, {headers}) => {
 	};
 });
 
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+	introspectionQueryResultData,
+});
+
 const cache = new InMemoryCache({
+	fragmentMatcher,
 	dataIdFromObject: o => o.id,
 	// addTypename: true,
 	// cacheResolvers: {},

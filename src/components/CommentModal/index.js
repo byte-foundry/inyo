@@ -12,7 +12,7 @@ import {
 	ModalContainer,
 	ModalElem,
 	ModalCloseIcon,
-	H3,
+	H4,
 	Button,
 	gray20,
 	primaryWhite,
@@ -59,7 +59,7 @@ class CommentModal extends Component {
 	};
 
 	render() {
-		const { itemId, customerToken } = this.props;
+		const { itemId, customerToken, taskName } = this.props;
 
 		return (
 			<Query
@@ -71,7 +71,6 @@ class CommentModal extends Component {
 					if (error) return <p>Error!: ${error.toString()}</p>;
 
 					const { itemComments } = data;
-					console.log(itemComments);
 
 					const commentsElem = itemComments.map(comment => (
 						<Comment
@@ -84,7 +83,7 @@ class CommentModal extends Component {
 						<ModalContainer>
 							<ModalElem>
 								<CommentRow>
-									<H3>Commentaires</H3>
+									<H4>{taskName}</H4>
 								</CommentRow>
 								<Comments>
 									<CommentRow>{commentsElem}</CommentRow>

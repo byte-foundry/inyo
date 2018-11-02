@@ -604,6 +604,19 @@ export const POST_COMMENT = gql`
 				comments {
 					id
 					text
+					views {
+						viewer {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
+					}
 					author {
 						... on User {
 							firstName

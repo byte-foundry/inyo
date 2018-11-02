@@ -115,13 +115,10 @@ class QuoteCustomerView extends Component {
 			<Query
 				query={GET_QUOTE_DATA_WITH_TOKEN}
 				variables={{quoteId, token: customerToken}}
-				fetchPolicy="network-only"
 			>
 				{({loading, error, data}) => {
-					console.log(data)
-					if (loading || !data.quote) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
-					console.log(data)
 					const {
 						quote: {
 							options: [option],

@@ -34,8 +34,6 @@ class CommentIcon extends Component {
 		const {comments, userType} = this.props;
 		let commentLength = 0;
 		if(comments && comments.length !== 0) {
-			console.log('--')
-			console.log(comments)
 			commentLength = comments.filter(comment => (!comment.views.find(e => e.viewer.__typename === userType))).length;
 		}
 		return (

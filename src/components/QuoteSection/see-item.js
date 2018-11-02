@@ -1,24 +1,22 @@
-import React, {Component} from 'react';
-import styled from 'react-emotion';
-import {Mutation} from 'react-apollo';
-import {withRouter} from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify';
-import AddItem from './add-item';
-import AmendItem from './amend-item';
-import TaskStatus from '../TaskStatus';
-import CommentIcon from '../CommentIcon';
-import CommentModal from '../CommentModal';
-import {
-	FlexRow, alpha10, primaryWhite, Button,
-} from '../../utils/content';
+import React, { Component } from "react";
+import styled from "react-emotion";
+import { Mutation } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import AddItem from "./add-item";
+import AmendItem from "./amend-item";
+import TaskStatus from "../TaskStatus";
+import CommentIcon from "../CommentIcon";
+import CommentModal from "../CommentModal";
+import { FlexRow, alpha10, primaryWhite, Button } from "../../utils/content";
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
 	UPDATE_VALIDATED_ITEM,
 	ACCEPT_ITEM,
-	REJECT_ITEM,
-} from '../../utils/mutations';
-import {GET_QUOTE_DATA_WITH_TOKEN} from '../../utils/queries';
+	REJECT_ITEM
+} from "../../utils/mutations";
+import { GET_QUOTE_DATA_WITH_TOKEN } from "../../utils/queries";
 
 const ItemName = styled(FlexRow)`
 	margin: 0;
@@ -29,11 +27,11 @@ const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
 	font-size: 13px;
 	position: relative;
-	cursor: ${props => (props.customer ? 'initial' : 'pointer')};
+	cursor: ${props => (props.customer ? "initial" : "pointer")};
 	width: 100%;
 `;
 
-const ItemStatus = styled('div')`
+const ItemStatus = styled("div")`
 	border: solid 1px purple;
 	border-radius: 3px;
 	color: purple;
@@ -43,7 +41,7 @@ const ItemStatus = styled('div')`
 	align-items: center;
 `;
 
-const ItemCustomerActions = styled('div')`
+const ItemCustomerActions = styled("div")`
 	position: absolute;
 	right: -222px;
 	top: -2px;
@@ -51,14 +49,14 @@ const ItemCustomerActions = styled('div')`
 
 const ItemCustomerButton = styled(Button)`
 	margin-right: 5px;
-	background: ${props => (props.accept ? '#00a676' : '#fe4a49')};
+	background: ${props => (props.accept ? "#00a676" : "#fe4a49")};
 	font-size: 14px;
 	color: ${primaryWhite};
-	border-color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
+	border-color: ${props => (props.accept ? "#00a676" : "#fe4a49")};
 
 	${`&:hover {
-		border-color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
-		color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
+		border-color: ${props => (props.accept ? "#00a676" : "#fe4a49")};
+		color: ${props => (props.accept ? "#00a676" : "#fe4a49")};
 	}`};
 `;
 
@@ -75,47 +73,46 @@ class Item extends Component {
 		super(props);
 		this.state = {
 			shouldDisplayAddItem: false,
-			shouldDisplayCommentModal: false,
+			shouldDisplayCommentModal: false
 		};
 	}
 
 	seeCommentModal = () => {
-		this.setState({shouldDisplayCommentModal: true});
+		this.setState({ shouldDisplayCommentModal: true });
 	};
 
 	closeCommentModal = () => {
-		this.setState({shouldDisplayCommentModal: false});
+		this.setState({ shouldDisplayCommentModal: false });
 	};
 
-
-	submitItem = (itemMutation) => {
+	submitItem = itemMutation => {
 		itemMutation({
 			variables: {
 				itemId: this.props.item.id,
-				token: this.props.match.params.customerToken,
+				token: this.props.match.params.customerToken
 			},
-			update: (cache, {data: {itemMutation}}) => {
+			update: (cache, { data: { itemMutation } }) => {
 				toast.info(
 					<div>
 						<p>📬 Le prestataire a été notifié.</p>
 					</div>,
 					{
 						position: toast.POSITION.TOP_RIGHT,
-						autoClose: 3000,
-					},
+						autoClose: 3000
+					}
 				);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA_WITH_TOKEN,
 					variables: {
 						quoteId: this.props.match.params.quoteId,
-						token: this.props.match.params.customerToken,
-					},
+						token: this.props.match.params.customerToken
+					}
 				});
 				const section = data.quote.options[0].sections.find(
-					e => e.id === this.props.sectionId,
+					e => e.id === this.props.sectionId
 				);
 				const itemIndex = section.items.find(
-					e => e.id === itemMutation.id,
+					e => e.id === itemMutation.id
 				);
 
 				section.items[itemIndex].status = itemMutation.status;
@@ -124,32 +121,28 @@ class Item extends Component {
 						query: GET_QUOTE_DATA_WITH_TOKEN,
 						variables: {
 							quoteId: this.props.match.params.quoteId,
-							token: this.props.match.params.customerToken,
+							token: this.props.match.params.customerToken
 						},
-						data,
+						data
 					});
-				}
-				catch (e) {
+				} catch (e) {
 					throw new Error(e);
 				}
-				this.setState({apolloTriggerRenderTemporaryFix: true});
-			},
+				this.setState({ apolloTriggerRenderTemporaryFix: true });
+			}
 		});
 	};
 
 	render() {
-		const {
-			item, sectionId, editItem, mode,
-		} = this.props;
-		const {comments, status} = item;
-		console.log(comments)
-		const {shouldDisplayAddItem} = this.state;
+		const { item, sectionId, editItem, mode } = this.props;
+		const { comments, status } = item;
+		const { shouldDisplayAddItem } = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
 
-		const isValidStatus
-			= status && (status === 'ADDED_SENT' || status === 'UPDATED_SENT');
+		const isValidStatus =
+			status && (status === "ADDED_SENT" || status === "UPDATED_SENT");
 
-		if (shouldDisplayAddItem && mode === 'edit') {
+		if (shouldDisplayAddItem && mode === "edit") {
 			return (
 				<Mutation mutation={UPDATE_ITEM}>
 					{updateItem => (
@@ -161,26 +154,26 @@ class Item extends Component {
 										this.props.removeItem(
 											item.id,
 											sectionId,
-											removeItem,
+											removeItem
 										);
 										this.setState({
-											shouldDisplayAddItem: false,
+											shouldDisplayAddItem: false
 										});
 									}}
 									cancel={() => {
 										this.setState({
-											shouldDisplayAddItem: false,
+											shouldDisplayAddItem: false
 										});
 									}}
-									done={(data) => {
+									done={data => {
 										editItem(
 											item.id,
 											sectionId,
 											data,
-											updateItem,
+											updateItem
 										);
 										this.setState({
-											shouldDisplayAddItem: false,
+											shouldDisplayAddItem: false
 										});
 									}}
 								/>
@@ -190,7 +183,7 @@ class Item extends Component {
 				</Mutation>
 			);
 		}
-		if (shouldDisplayAddItem && mode === 'see') {
+		if (shouldDisplayAddItem && mode === "see") {
 			return (
 				<Mutation mutation={UPDATE_VALIDATED_ITEM}>
 					{updateValidatedItem => (
@@ -198,18 +191,18 @@ class Item extends Component {
 							item={item}
 							cancel={() => {
 								this.setState({
-									shouldDisplayAddItem: false,
+									shouldDisplayAddItem: false
 								});
 							}}
-							done={(data) => {
+							done={data => {
 								this.setState({
-									shouldDisplayAddItem: false,
+									shouldDisplayAddItem: false
 								});
 								editItem(
 									item.id,
 									sectionId,
 									data,
-									updateValidatedItem,
+									updateValidatedItem
 								);
 							}}
 						/>
@@ -219,7 +212,7 @@ class Item extends Component {
 		}
 		return (
 			<ItemRow>
-				{(customerViewMode || mode === 'see') && (
+				{(customerViewMode || mode === "see") && (
 					<TaskStatus
 						status={item.status}
 						itemId={item.id}
@@ -233,57 +226,71 @@ class Item extends Component {
 					justifyContent="space-between"
 					onClick={() => {
 						if (!customerViewMode) {
-							this.setState({shouldDisplayAddItem: true});
+							this.setState({ shouldDisplayAddItem: true });
 						}
 					}}
 				>
 					<ItemName>
 						<span>{item.name}</span>
 					</ItemName>
-					{customerViewMode
-						&& status === 'UPDATED_SENT' && (
-						<ItemStatus>Mis à jour</ItemStatus>
+					{customerViewMode &&
+						status === "UPDATED_SENT" && (
+							<ItemStatus>Mis à jour</ItemStatus>
+						)}
+					{(customerViewMode || mode === "see") && (
+						<CommentIcon
+							onClick={this.seeCommentModal}
+							comments={comments}
+							userType={customerViewMode ? "Customer" : "User"}
+						/>
 					)}
-					{(customerViewMode || mode === 'see') && (
-		<CommentIcon onClick={this.seeCommentModal} comments={comments} userType={customerViewMode ? 'Customer' : 'User'}/>)}
-					{customerViewMode
-						&& status === 'ADDED_SENT' && (
-						<ItemStatus>Ajouté</ItemStatus>
-					)}
+					{customerViewMode &&
+						status === "ADDED_SENT" && (
+							<ItemStatus>Ajouté</ItemStatus>
+						)}
 					<span>{item.pendingUnit || item.unit} jours</span>
-					<span>{item.unitPrice.toLocaleString('fr-FR')}€</span>
+					<span>{item.unitPrice.toLocaleString("fr-FR")}€</span>
 					<span>
 						{item.unitPrice * (item.pendingUnit || item.unit)}€
 					</span>
-					{customerViewMode
-						&& isValidStatus && (
-						<ItemCustomerActions>
-							<ToastContainer />
-							<Mutation mutation={ACCEPT_ITEM}>
-								{acceptItem => (
-									<ItemCustomerButton
-										accept
-										onClick={() => this.submitItem(acceptItem)
-										}
-									>
+					{customerViewMode &&
+						isValidStatus && (
+							<ItemCustomerActions>
+								<ToastContainer />
+								<Mutation mutation={ACCEPT_ITEM}>
+									{acceptItem => (
+										<ItemCustomerButton
+											accept
+											onClick={() =>
+												this.submitItem(acceptItem)
+											}
+										>
 											Accepter
-									</ItemCustomerButton>
-								)}
-							</Mutation>
-							<Mutation mutation={REJECT_ITEM}>
-								{rejectItem => (
-									<ItemCustomerButton
-										onClick={() => this.submitItem(rejectItem)
-										}
-									>
+										</ItemCustomerButton>
+									)}
+								</Mutation>
+								<Mutation mutation={REJECT_ITEM}>
+									{rejectItem => (
+										<ItemCustomerButton
+											onClick={() =>
+												this.submitItem(rejectItem)
+											}
+										>
 											Rejeter
-									</ItemCustomerButton>
-								)}
-							</Mutation>
-						</ItemCustomerActions>
-					)}
+										</ItemCustomerButton>
+									)}
+								</Mutation>
+							</ItemCustomerActions>
+						)}
 				</ItemMain>
-				{this.state.shouldDisplayCommentModal && (<CommentModal closeCommentModal={this.closeCommentModal} itemId={item.id} customerToken={customerViewMode}/>)}
+				{this.state.shouldDisplayCommentModal && (
+					<CommentModal
+						closeCommentModal={this.closeCommentModal}
+						itemId={item.id}
+						customerToken={customerViewMode}
+						taskName={item.name}
+					/>
+				)}
 			</ItemRow>
 		);
 	}

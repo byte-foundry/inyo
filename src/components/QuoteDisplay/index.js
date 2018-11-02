@@ -5,6 +5,7 @@ import {Mutation, Query} from 'react-apollo';
 import Select from 'react-select';
 
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
+import CompanyInfoModal from '../CompanyInfoModal';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import TextEditor from '../TextEditor';
 import InlineEditable from '../InlineEditable';
@@ -191,6 +192,7 @@ class QuoteDisplay extends Component {
 			sendAmendment,
 			acceptOrRejectAmendment,
 			acceptOrRejectQuote,
+			askForInfos,
 			timePlanned,
 			amendmentEnabled,
 			overtime,
@@ -233,7 +235,18 @@ class QuoteDisplay extends Component {
 										<QuoteDisplayTitle>
 											Remplissez votre devis
 										</QuoteDisplayTitle>
-										<Mutation mutation={SEND_QUOTE}>
+										<Mutation
+											mutation={SEND_QUOTE}
+											onError={(error) => {
+												if (
+													error.message.includes(
+														'NEED_MORE_INFOS',
+													)
+												) {
+													return askForInfos();
+												}
+											}}
+										>
 											{SendQuote => (
 												<SendQuoteButton
 													theme="Primary"
@@ -245,7 +258,7 @@ class QuoteDisplay extends Component {
 														);
 													}}
 												>
-													Envoyez la proposition
+														Envoyez la proposition
 												</SendQuoteButton>
 											)}
 										</Mutation>
@@ -599,6 +612,9 @@ class QuoteDisplay extends Component {
 										)}
 									</SideActions>
 								</FlexRow>
+								{this.state.showInfoModal && (
+									<CompanyInfoModal />
+								)}
 							</QuoteDisplayMain>
 						);
 					}

@@ -341,3 +341,10 @@ export const ModalCloseIcon = styled('div')`
 	width: 40px;
 	height: 40px;
 `;
+
+export const ModalRow = styled('div')`
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+`;

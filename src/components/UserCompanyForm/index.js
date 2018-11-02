@@ -39,8 +39,16 @@ class UserCompanyForm extends Component {
 
 	render() {
 		const {
-			name, address, phone, siret, rcs, rm, vat,
+			name,
+			address,
+			phone,
+			siret,
+			rcs,
+			rm,
+			vat,
+			submit,
 		} = this.props.data;
+		const {buttonText, done} = this.props;
 
 		return (
 			<UserCompanyFormMain>
@@ -51,6 +59,7 @@ class UserCompanyForm extends Component {
 								name: name || '',
 								phone: phone || '',
 								siret: siret || '',
+								address: address || '',
 								rcs: rcs || '',
 								rm: rm || '',
 								vat: vat || '',
@@ -59,13 +68,21 @@ class UserCompanyForm extends Component {
 								name: Yup.string().required('Requis'),
 								phone: Yup.string(),
 								siret: Yup.string().required('Requis'),
+								address: Yup.object()
+									.shape({
+										street: Yup.string().required(),
+										city: Yup.string().required(),
+										postalCode: Yup.string().required(),
+										country: Yup.string().required(),
+									})
+									.required('Requis'),
 								rcs: Yup.string(),
 								rm: Yup.string(),
 								vat: Yup.string(),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								console.log(values);
+								values.address.__typename = undefined;
 								try {
 									updateUser({
 										variables: {
@@ -89,7 +106,7 @@ class UserCompanyForm extends Component {
 													query: GET_USER_INFOS,
 													data,
 												});
-												this.props.done();
+												done();
 											}
 											catch (e) {
 												console.log(e);
@@ -145,6 +162,7 @@ class UserCompanyForm extends Component {
 													{...props}
 													onChange={setFieldValue}
 													name="address"
+													values={address}
 													placeholder=""
 													label="Adresse de la société"
 													padded
@@ -200,7 +218,7 @@ class UserCompanyForm extends Component {
 											size="Medium"
 											type="submit"
 										>
-											Mettre à jour
+											{buttonText || 'Mettre à jour'}
 										</UpdateButton>
 									</form>
 								);

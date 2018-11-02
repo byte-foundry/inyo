@@ -9,17 +9,11 @@ import {
 	ModalContainer,
 	ModalElem,
 	ModalCloseIcon,
+	ModalRow,
 	H2,
 } from '../../utils/content';
 
 import Comment from '../Comment';
-
-const CommentRow = styled('div')`
-	padding-left: 40px;
-	padding-right: 40px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-`;
 
 class CommentModal extends Component {
 	closeCommentModal = () => {
@@ -51,10 +45,10 @@ class CommentModal extends Component {
 					return (
 						<ModalContainer>
 							<ModalElem>
-								<CommentRow>
+								<ModalRow>
 									<H2>Commentaires</H2>
-								</CommentRow>
-								<CommentRow>{commentsElem}</CommentRow>
+								</ModalRow>
+								<ModalRow>{commentsElem}</ModalRow>
 								<ModalCloseIcon
 									onClick={this.closeCommentModal}
 								/>

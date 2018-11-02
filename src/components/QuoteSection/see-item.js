@@ -6,6 +6,8 @@ import {ToastContainer, toast} from 'react-toastify';
 import AddItem from './add-item';
 import AmendItem from './amend-item';
 import TaskStatus from '../TaskStatus';
+import CommentIcon from '../CommentIcon';
+import CommentModal from '../CommentModal';
 import {
 	FlexRow, alpha10, primaryWhite, Button,
 } from '../../utils/content';
@@ -29,30 +31,6 @@ const ItemMain = styled(FlexRow)`
 	position: relative;
 	cursor: ${props => (props.customer ? 'initial' : 'pointer')};
 	width: 100%;
-`;
-
-const CommentsCount = styled('div')`
-	background: #3860ff;
-	color: ${primaryWhite};
-	padding: 5px;
-	width: 25px;
-	height: 14px;
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	&:after {
-		border-top: solid 5px #3860ff;
-		border-left: solid 5px transparent;
-		border-right: solid 5px transparent;
-		content: ' ';
-		height: 0px;
-		width: 0px;
-		position: absolute;
-		bottom: -5px;
-		display: block;
-	}
 `;
 
 const ItemStatus = styled('div')`
@@ -97,21 +75,18 @@ class Item extends Component {
 		super(props);
 		this.state = {
 			shouldDisplayAddItem: false,
+			shouldDisplayCommentModal: false,
 		};
 	}
 
-	seeComments = () => {
-		const {quoteId, customerToken} = this.props.match.params;
-		const {
-			item: {id},
-		} = this.props;
-
-		this.props.history.push(
-			`/app/quotes/${this.props.match.params.quoteId}/view/${
-				this.props.match.params.customerToken
-			}/comments/${id}`,
-		);
+	seeCommentModal = () => {
+		this.setState({shouldDisplayCommentModal: true});
 	};
+
+	closeCommentModal = () => {
+		this.setState({shouldDisplayCommentModal: false});
+	};
+
 
 	submitItem = (itemMutation) => {
 		itemMutation({
@@ -167,6 +142,7 @@ class Item extends Component {
 			item, sectionId, editItem, mode,
 		} = this.props;
 		const {comments, status} = item;
+		console.log(comments)
 		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
 
@@ -268,13 +244,8 @@ class Item extends Component {
 						&& status === 'UPDATED_SENT' && (
 						<ItemStatus>Mis à jour</ItemStatus>
 					)}
-					{customerViewMode
-						&& isValidStatus
-						&& comments.length > 0 && (
-						<CommentsCount onClick={this.seeComments}>
-							{comments.length}
-						</CommentsCount>
-					)}
+					{(customerViewMode || mode === 'see') && (
+					<CommentIcon onClick={this.seeCommentModal} comments={comments}/>)}
 					{customerViewMode
 						&& status === 'ADDED_SENT' && (
 						<ItemStatus>Ajouté</ItemStatus>
@@ -312,6 +283,7 @@ class Item extends Component {
 						</ItemCustomerActions>
 					)}
 				</ItemMain>
+				{this.state.shouldDisplayCommentModal && (<CommentModal closeCommentModal={this.closeCommentModal} itemId={item.id} customerToken={customerViewMode}/>)}
 			</ItemRow>
 		);
 	}

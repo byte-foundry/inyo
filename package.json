@@ -60,11 +60,11 @@
     }
   },
   "scripts": {
-	  "start": "NODE_ENV=development react-scripts start",
+	  "start": "set NODE_ENV=development && react-scripts start",
 	  "build": "react-scripts build"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
+    "src/**/*.{j s,jsx,json,css}": [
       "prettier-eslint --write",
       "git add"
     ]

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from "graphql-tag"; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** APP QUERIES ********* */
 export const GET_NETWORK_STATUS = gql`
@@ -153,6 +153,33 @@ export const GET_QUOTE_DATA = gql`
 						name
 						unitPrice
 						unit
+						comments {
+							id
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
+						}
 						pendingUnit
 						vatRate
 						description
@@ -209,7 +236,30 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 						unit
 						comments {
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from "graphql-tag"; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -458,7 +458,30 @@ export const ACCEPT_AMENDMENT = gql`
 						unit
 						comments {
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -515,7 +538,30 @@ export const REJECT_AMENDMENT = gql`
 						unit
 						comments {
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -545,4 +591,32 @@ export const REJECT_ITEM = gql`
 			unit
 		}
 	}
+`;
+
+export const POST_COMMENT = gql`
+		mutation postComment($itemId: ID!, $token: String, $comment: CommentInput! ) {
+			postComment(
+				itemId: $itemId
+				token: $token
+				comment: $comment
+			)  {
+				id
+				comments {
+					id
+					text
+					author {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+					
+			}
+		}
 `;

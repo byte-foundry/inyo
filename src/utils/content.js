@@ -330,13 +330,13 @@ export const ModalElem = styled('div')`
 	background: ${primaryWhite};
 	width: 50vw;
 	position: relative;
-	padding-bottom: 30px;
+	padding: 20px 40px;
 `;
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
 	top: 20px;
-	right: 20px;
+	right: 40px;
 	background: ${gray80};
 	width: 40px;
 	height: 40px;

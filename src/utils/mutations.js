@@ -322,6 +322,7 @@ export const UPDATE_VALIDATED_ITEM = gql`
 			pendingUnit
 			status
 			comments {
+				createdAt
 				text
 				author {
 					... on User {
@@ -457,6 +458,7 @@ export const ACCEPT_AMENDMENT = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
 							views {
 								viewer {
@@ -537,6 +539,7 @@ export const REJECT_AMENDMENT = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
 							views {
 								viewer {
@@ -602,6 +605,7 @@ export const POST_COMMENT = gql`
 			)  {
 				id
 				comments {
+					createdAt
 					id
 					text
 					views {

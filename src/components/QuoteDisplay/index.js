@@ -286,24 +286,6 @@ class QuoteDisplay extends Component {
 											/>
 										)}
 									</FlexColumn>
-
-									{mode === 'edit' && (
-										<Mutation mutation={EDIT_ITEMS}>
-											{EditItems => (
-												<Select
-													styles={SelectStyles}
-													placeholder="Recommandation de contenu"
-													onChange={(e) => {
-														setQuoteData(
-															e.value,
-															EditItems,
-														);
-													}}
-													options={quoteTemplates}
-												/>
-											)}
-										</Mutation>
-									)}
 									{mode === 'see' && (
 										<FlexRow>
 											{!customerViewMode && (

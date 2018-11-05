@@ -39,8 +39,6 @@ class Comment extends Component {
 
 		const { isCustomer } = this.props;
 
-		console.log(this.props.comment);
-
 		return (
 			<CommentMain>
 				<FlexRow>

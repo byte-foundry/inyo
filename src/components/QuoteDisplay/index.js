@@ -12,7 +12,6 @@ import QuoteSection from '../QuoteSection';
 import QuoteTotal from '../QuoteTotal';
 import TasksProgressBar from '../TasksProgressBar';
 import {
-	EDIT_ITEMS,
 	UPDATE_QUOTE,
 	ADD_SECTION,
 	UPDATE_OPTION,

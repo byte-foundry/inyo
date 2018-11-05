@@ -8,6 +8,8 @@ import { Formik } from "formik";
 import { GET_COMMENTS_BY_ITEM } from "../../utils/queries";
 import { POST_COMMENT } from "../../utils/mutations";
 
+import { ReactComponent as CloseIcon } from "../../utils/icons/close.svg";
+
 import {
 	ModalContainer,
 	ModalElem,
@@ -30,10 +32,10 @@ const CommentRow = styled("div")`
 	padding-bottom: 5px;
 `;
 
-const Comments = styled('div') `
+const Comments = styled("div")`
 	max-height: 60vh;
 	overflow-y: auto;
-`
+`;
 
 const ItemComment = styled("textarea")`
 	margin-top: 10px;
@@ -76,6 +78,9 @@ class CommentModal extends Component {
 						<Comment
 							key={`comment${comment.id}`}
 							comment={comment}
+							isCustomer={
+								comment.author.__typename === "Customer"
+							}
 						/>
 					));
 
@@ -88,7 +93,6 @@ class CommentModal extends Component {
 								<Comments>
 									<CommentRow>{commentsElem}</CommentRow>
 								</Comments>
-								<hr />
 								<Mutation mutation={POST_COMMENT}>
 									{postComment => (
 										<Formik
@@ -148,6 +152,7 @@ class CommentModal extends Component {
 																		data
 																	}
 																);
+																actions.resetForm();
 															} catch (e) {
 																console.log(e);
 															}
@@ -205,7 +210,7 @@ class CommentModal extends Component {
 															)}
 														<FlexRow justifyContent="flex-end">
 															<ActionButton
-																theme="Success"
+																theme="Primary"
 																size="Medium"
 																type="submit"
 															>
@@ -221,7 +226,9 @@ class CommentModal extends Component {
 
 								<ModalCloseIcon
 									onClick={this.closeCommentModal}
-								/>
+								>
+									<CloseIcon />
+								</ModalCloseIcon>
 							</ModalElem>
 						</ModalContainer>
 					);

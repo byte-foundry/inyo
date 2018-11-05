@@ -154,6 +154,7 @@ export const GET_QUOTE_DATA = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
 							views {
 								viewer {
@@ -235,6 +236,7 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
 							views {
 								viewer {
@@ -277,6 +279,7 @@ export const GET_COMMENTS_BY_ITEM = gql`
 		itemComments(itemId: $itemId, token: $token) {
 			id
 			text
+			createdAt
 			author {
 				... on User {
 					firstName

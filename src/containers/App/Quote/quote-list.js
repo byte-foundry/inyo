@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 import {GET_ALL_QUOTES} from '../../../utils/queries';
 import {H1, Button, primaryNavyBlue} from '../../../utils/content';
 
-import AccountLogo from './accountLogo.svg';
+import {ReactComponent as AccountIcon} from '../../../utils/icons/user.svg';
 
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
 import QuoteList from '../../../components/QuoteList';
@@ -18,6 +18,9 @@ const ListQuotesMain = styled('div')`
 const TopBarButton = styled(Button)`
 	height: 60px;
 	padding: 0 25px;
+	svg {
+		width: 60px;
+	}
 `;
 
 const ListQuotesTopBar = styled('div')`
@@ -37,11 +40,6 @@ const ActionRow = styled('div')`
 	flex-flow: row nowrap;
 	justify-content: flex-end;
 	align-items: center;
-`;
-
-const TopBarAccountIcon = styled('img')`
-	height: 60px;
-	width: auto;
 `;
 
 const Loading = styled('div')`
@@ -101,10 +99,7 @@ class ListQuotes extends Component {
 											);
 										}}
 									>
-										<TopBarAccountIcon
-											src={AccountLogo}
-											alt="account logo"
-										/>
+										<AccountIcon />
 									</TopBarButton>
 									<TopBarButton
 										theme="Primary"

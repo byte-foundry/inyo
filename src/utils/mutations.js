@@ -1,4 +1,4 @@
-import gql from "graphql-tag"; // eslint-disable-line import/no-extraneous-dependencies
+import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -282,8 +282,22 @@ export const REMOVE_SECTION = gql`
 `;
 // Item
 export const ADD_ITEM = gql`
-	mutation addItem($sectionId: ID!, $name: String!, $unitPrice: Int, $unit: Float, $vatRate: Int, $description: String) {
-		addItem(sectionId: $sectionId, name: $name, unitPrice: $unitPrice, unit: $unit, vatRate: $vatRate, description: $description) {
+	mutation addItem(
+		$sectionId: ID!
+		$name: String!
+		$unitPrice: Int
+		$unit: Float
+		$vatRate: Int
+		$description: String
+	) {
+		addItem(
+			sectionId: $sectionId
+			name: $name
+			unitPrice: $unitPrice
+			unit: $unit
+			vatRate: $vatRate
+			description: $description
+		) {
 			id
 			name
 			unitPrice
@@ -387,10 +401,9 @@ export const UPDATE_VALIDATED_ITEM = gql`
 	mutation updateValidatedItem(
 		$itemId: ID!
 		$unit: Float!
-		$name: String
 		$comment: CommentInput!
 	) {
-		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment, name: $name) {
+		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
 			id
 			name
 			unitPrice
@@ -688,31 +701,19 @@ export const REJECT_ITEM = gql`
 `;
 
 export const POST_COMMENT = gql`
-		mutation postComment($itemId: ID!, $token: String, $comment: CommentInput! ) {
-			postComment(
-				itemId: $itemId
-				token: $token
-				comment: $comment
-			)  {
+	mutation postComment(
+		$itemId: ID!
+		$token: String
+		$comment: CommentInput!
+	) {
+		postComment(itemId: $itemId, token: $token, comment: $comment) {
+			id
+			comments {
+				createdAt
 				id
-				comments {
-					createdAt
-					id
-					text
-					views {
-						viewer {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					author {
+				text
+				views {
+					viewer {
 						... on User {
 							firstName
 							lastName
@@ -724,7 +725,18 @@ export const POST_COMMENT = gql`
 						}
 					}
 				}
-					
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
 			}
 		}
+	}
 `;

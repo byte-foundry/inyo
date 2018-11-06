@@ -14,6 +14,7 @@
     "algolia-places-react": "^1.3.0",
     "apollo-boost": "^0.1.16",
     "apollo-link-context": "^1.0.9",
+    "apollo-upload-client": "^9.1.0",
     "draft-js": "^0.10.5",
     "emotion": "^9.2.12",
     "eslint-config-airbnb": "^17.1.0",

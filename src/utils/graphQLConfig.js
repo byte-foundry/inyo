@@ -10,6 +10,10 @@ import {
 } from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
 import {createUploadLink} from 'apollo-upload-client'; // eslint-disable-line import/no-extraneous-dependencies
 import introspectionQueryResultData from './fragmentTypes.json';
+<<<<<<< HEAD
+=======
+import {createUploadLink} from 'apollo-upload-client'; // eslint-disable-line import/no-extraneous-dependencies
+>>>>>>> Wip - File upload
 import {GRAPHQL_API} from './constants';
 import defaults from './default';
 import resolvers from './resolvers';
@@ -75,9 +79,13 @@ const cache = new InMemoryCache({
 	// 	}),
 });
 
+<<<<<<< HEAD
 const uploadLink = createUploadLink({
 	uri: GRAPHQL_API,
 });
+=======
+const uploadLink = createUploadLink();
+>>>>>>> Wip - File upload
 
 const errorLink = onError(({networkError, graphQLErrors}) => {
 	if (networkError) {

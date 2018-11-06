@@ -240,7 +240,10 @@ class QuoteDisplay extends Component {
 												if (
 													error.message.includes(
 														'NEED_MORE_INFOS',
-													) || error.message.includes('Missing required data')
+													)
+													|| error.message.includes(
+														'Missing required data',
+													)
 												) {
 													return askForInfos();
 												}
@@ -522,14 +525,22 @@ class QuoteDisplay extends Component {
 																		index
 																	}
 																	defaultDailyPrice={
-																		data.me.defaultDailyPrice
+																		!customerViewMode
+																		&& data.me
+																			.defaultDailyPrice
 																	}
-																	refetch={refetch}
-																	quoteStatus={quote.status}
+																	refetch={
+																		refetch
+																	}
+																	quoteStatus={
+																		quote.status
+																	}
 																/>
 															),
 														)}
-														{mode === 'edit' && quote.status !== 'SENT' && (
+														{mode === 'edit'
+															&& quote.status
+																!== 'SENT' && (
 															<Mutation
 																mutation={
 																	ADD_SECTION
@@ -546,9 +557,9 @@ class QuoteDisplay extends Component {
 																			);
 																		}}
 																	>
-																		Ajouter
-																		une
-																		section
+																			Ajouter
+																			une
+																			section
 																	</QuoteAction>
 																)}
 															</Mutation>

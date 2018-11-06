@@ -15,7 +15,10 @@ import {ReactComponent as AccountIcon} from '../../../utils/icons/user.svg';
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
 import QuoteList from '../../../components/QuoteList';
 
-const ListQuotesMain = styled('div')``;
+const ListQuotesMain = styled('div')`
+	background-color: #fbfbfb;
+	min-height: 100vh;
+`;
 
 const TopBarButton = styled(Button)`
 	height: 60px;

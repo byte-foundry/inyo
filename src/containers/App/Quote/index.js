@@ -9,7 +9,6 @@ import QuoteCreate from './quote-create';
 import QuoteList from './quote-list';
 
 const QuoteMain = styled('div')`
-	background-color: #fbfbfb;
 	min-height: 100vh;
 `;
 

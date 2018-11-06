@@ -51,7 +51,8 @@ class QuoteSection extends Component {
 			mode,
 			customerViewMode,
 			refetch,
-			defaultDailyPrice
+			defaultDailyPrice,
+			quoteStatus,
 		} = this.props;
 
 		return (
@@ -111,7 +112,6 @@ class QuoteSection extends Component {
 					/>
 				))}
 				{this.state.shouldDisplayAddItem && (
-					
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (
 					<AddItem
@@ -133,13 +133,13 @@ class QuoteSection extends Component {
 							});
 						}}
 					/>
-					
+
 					)}
 					</Mutation>
 				)}
 
 
-				{!customerViewMode && (
+				{!customerViewMode && quoteStatus !== 'SENT' && (
 							<QuoteAction
 								theme="Link"
 								size="XSmall"

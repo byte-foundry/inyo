@@ -525,10 +525,11 @@ class QuoteDisplay extends Component {
 																		data.me.defaultDailyPrice
 																	}
 																	refetch={refetch}
+																	quoteStatus={quote.status}
 																/>
 															),
 														)}
-														{mode === 'edit' && (
+														{mode === 'edit' && quote.status !== 'SENT' && (
 															<Mutation
 																mutation={
 																	ADD_SECTION

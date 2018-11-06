@@ -241,7 +241,7 @@ class Item extends Component {
 					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
-						if (!customerViewMode) {
+						if (!customerViewMode && item.status !== 'FINISHED') {
 							this.setState({ shouldDisplayAddItem: true });
 						}
 					}}

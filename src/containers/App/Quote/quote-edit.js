@@ -139,9 +139,10 @@ class EditQuote extends Component {
 		});
 	};
 
-	addItem = (sectionId, addItem) => {
+	addItem = (sectionId, addItemValues, addItem) => {
+		const {name, vatRate, unit, unitPrice, description} = addItemValues;
 		addItem({
-			variables: {sectionId, name: 'Nouvelle tâche'},
+			variables: {sectionId, name, vatRate, unit: parseFloat(unit), unitPrice, description},
 			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,

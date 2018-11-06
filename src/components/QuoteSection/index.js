@@ -4,6 +4,7 @@ import {Mutation} from 'react-apollo';
 import {cpus} from 'os';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
+import AddItem from './add-item';
 import {
 	H4,
 	H5,
@@ -49,7 +50,8 @@ class QuoteSection extends Component {
 			removeItem,
 			mode,
 			customerViewMode,
-			refetch
+			refetch,
+			defaultDailyPrice
 		} = this.props;
 
 		return (
@@ -108,21 +110,47 @@ class QuoteSection extends Component {
 						refetch={refetch}
 					/>
 				))}
-
-				{!customerViewMode && (
+				{this.state.shouldDisplayAddItem && (
+					
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (
+					<AddItem
+						item={{
+							name: 'Nouvelle tâche',
+							unit: 0,
+							unitPrice: defaultDailyPrice,
+							description: ''
+						}}
+						remove={() => {
+							this.setState({
+								shouldDisplayAddItem: false
+							});
+						}}
+						done={values => {
+							this.props.addItem(data.id, values, addItem);
+							this.setState({
+								shouldDisplayAddItem: false
+							});
+						}}
+					/>
+					
+					)}
+					</Mutation>
+				)}
+
+
+				{!customerViewMode && (
 							<QuoteAction
 								theme="Link"
 								size="XSmall"
 								onClick={() => {
-									this.props.addItem(data.id, addItem);
+									this.setState({
+										shouldDisplayAddItem: true
+									});
 								}}
 							>
 								Ajouter une tâche
 							</QuoteAction>
-						)}
-					</Mutation>
 				)}
 			</QuoteSectionMain>
 		);

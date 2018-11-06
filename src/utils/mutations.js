@@ -282,8 +282,8 @@ export const REMOVE_SECTION = gql`
 `;
 // Item
 export const ADD_ITEM = gql`
-	mutation addItem($sectionId: ID!, $name: String!) {
-		addItem(sectionId: $sectionId, name: $name) {
+	mutation addItem($sectionId: ID!, $name: String!, $unitPrice: Int, $unit: Float, $vatRate: Int, $description: String) {
+		addItem(sectionId: $sectionId, name: $name, unitPrice: $unitPrice, unit: $unit, vatRate: $vatRate, description: $description) {
 			id
 			name
 			unitPrice
@@ -346,6 +346,36 @@ export const UPDATE_ITEM = gql`
 			unit
 			vatRate
 			description
+			pendingUnit
+			status
+			comments {
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;
@@ -357,16 +387,34 @@ export const UPDATE_VALIDATED_ITEM = gql`
 	mutation updateValidatedItem(
 		$itemId: ID!
 		$unit: Float!
+		$name: String
 		$comment: CommentInput!
 	) {
-		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
+		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment, name: $name) {
 			id
+			name
+			unitPrice
 			unit
+			vatRate
+			description
 			pendingUnit
 			status
 			comments {
 				createdAt
-				text
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
 				author {
 					... on User {
 						firstName

@@ -521,6 +521,9 @@ class QuoteDisplay extends Component {
 																	sectionIndex={
 																		index
 																	}
+																	defaultDailyPrice={
+																		data.me.defaultDailyPrice
+																	}
 																	refetch={refetch}
 																/>
 															),

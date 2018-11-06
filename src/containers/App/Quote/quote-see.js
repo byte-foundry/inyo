@@ -12,25 +12,15 @@ import QuoteDisplay from '../../../components/QuoteDisplay';
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateValidatedItem) => {
 		const {name, unit, comment} = data;
-
 		return updateValidatedItem({
 			variables: {
 				itemId,
+				name,
 				unit: parseFloat(unit),
 				comment: {text: comment},
 			},
-			optimisticResponse: {
-				__typename: 'Mutation',
-				updateValidatedItem: {
-					id: itemId,
-					status: 'UPDATED',
-					name,
-					unit,
-					comment: {text: comment},
-					__typename: 'Item',
-				},
-			},
 			update: (cache, {data: {updateValidatedItem}}) => {
+				console.log(updateValidatedItem)
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -98,9 +88,10 @@ class TasksListUser extends Component {
 		},
 	});
 
-	addItem = (sectionId, addItem) => {
+	addItem = (sectionId, addItemValues, addItem) => {
+		const {name, vatRate, unit, unitPrice, description} = addItemValues;
 		addItem({
-			variables: {sectionId, name: 'Nouvelle tâche'},
+			variables: {sectionId, name, vatRate, unit: parseFloat(unit), unitPrice, description},
 			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,

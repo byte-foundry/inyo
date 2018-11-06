@@ -258,7 +258,7 @@ class QuoteDisplay extends Component {
 														);
 													}}
 												>
-														Envoyez la proposition
+													Envoyez la proposition
 												</SendQuoteButton>
 											)}
 										</Mutation>
@@ -334,7 +334,8 @@ class QuoteDisplay extends Component {
 												</QuoteStatus>
 											)}
 											{mode === 'see'
-												&& !customerViewMode && (
+												&& !customerViewMode
+												&& amendmentEnabled && (
 												<Mutation
 													mutation={
 														SEND_AMENDMENT

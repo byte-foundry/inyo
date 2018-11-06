@@ -68,15 +68,15 @@ class EditQuote extends Component {
 
 				updatedQuote.status = sendQuote.status;
 				try {
-					cache.writeQuery({
-						query: GET_ALL_QUOTES,
-						data,
-					});
 					ReactGA.event({
 						category: 'Quote',
 						action: 'Sent quote',
 					});
 					this.toast();
+					cache.writeQuery({
+						query: GET_ALL_QUOTES,
+						data,
+					});
 				}
 				catch (e) {
 					throw new Error(e);

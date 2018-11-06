@@ -30,7 +30,6 @@ class AddressAutocomplete extends Component {
 				<Label htmlFor={name} required={required}>
 					{label}
 				</Label>
-				{values && <AddressDisplay address={values} />}
 				<AlgoliaPlaces
 					placeholder={placeholder}
 					options={{
@@ -56,12 +55,18 @@ class AddressAutocomplete extends Component {
 					onError={({message}) => {
 						throw new Error(message);
 					}}
-					value={values[name]}
+					defaultValue={
+						values
+						&& values.street
+						&& `${values.street} ${values.postalCode} ${values.city} ${
+							values.country
+						}`
+					}
 				/>
 				{errors[name]
 					&& touched[name] && (
 					<ErrorInput className="input-feedback">
-						{errors[name]}
+						{errors && errors[name]}
 					</ErrorInput>
 				)}
 			</AddressAutocompleteMain>

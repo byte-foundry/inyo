@@ -11,7 +11,7 @@ import {
 	ModalElem,
 	ModalCloseIcon,
 	ModalRow,
-	H3,
+	H5,
 } from '../../utils/content';
 
 import UserCompanyForm from '../UserCompanyForm';
@@ -32,11 +32,11 @@ class CompanyInfoModal extends Component {
 						<ModalContainer>
 							<ModalElem>
 								<ModalRow>
-									<H3>
+									<H5>
 										Pour envoyer votre devis vous devez
 										compléter les informations de votre
 										société
-									</H3>
+									</H5>
 								</ModalRow>
 								<ModalRow>
 									<Mutation mutation={SEND_QUOTE}>

@@ -36,7 +36,7 @@ class EditQuote extends Component {
 			{
 				position: toast.POSITION.TOP_RIGHT,
 				autoClose: 3000,
-				onClose: () => this.props.history.push('/app/quotes'),
+				onClose: () => this.props.history.push('/app/quotes?action=quote_sent'),
 			},
 		);
 	};
@@ -68,9 +68,9 @@ class EditQuote extends Component {
 					const updatedQuote = data.me.company.quotes.find(
 						quote => quote.id === sendQuote.id,
 					);
-	
+
 					updatedQuote.status = sendQuote.status;
-				}				
+				}
 				try {
 					ReactGA.event({
 						category: 'Quote',
@@ -140,9 +140,19 @@ class EditQuote extends Component {
 	};
 
 	addItem = (sectionId, addItemValues, addItem) => {
-		const {name, vatRate, unit, unitPrice, description} = addItemValues;
+		const {
+			name, vatRate, unit, unitPrice, description,
+		} = addItemValues;
+
 		addItem({
-			variables: {sectionId, name, vatRate, unit: parseFloat(unit), unitPrice, description},
+			variables: {
+				sectionId,
+				name,
+				vatRate,
+				unit: parseFloat(unit),
+				unitPrice,
+				description,
+			},
 			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
@@ -352,7 +362,7 @@ class EditQuote extends Component {
 
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
-				{({loading, error, data }) => {
+				{({loading, error, data}) => {
 					const fetchedData = {...data};
 
 					if (loading || !fetchedData.quote) {

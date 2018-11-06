@@ -292,6 +292,34 @@ export const ADD_ITEM = gql`
 			description
 			pendingUnit
 			status
+			comments {
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;

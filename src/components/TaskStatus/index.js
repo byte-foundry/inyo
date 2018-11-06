@@ -93,6 +93,17 @@ const Status = styled('div')`
 		width: 30px;
 		${getTaskIconStylesByStatus};
 	}
+
+	&:hover {
+		.hover {
+			&.cls-1 {
+				stroke: ${primaryNavyBlue};
+			}
+			&.cls-2 {
+				stroke: ${primaryBlue};
+			}
+		}
+	}
 `;
 
 class TaskStatus extends Component {

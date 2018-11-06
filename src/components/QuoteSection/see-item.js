@@ -77,7 +77,8 @@ class Item extends Component {
 		};
 	}
 
-	seeCommentModal = () => {
+	seeCommentModal = (e) => {
+		e.stopPropagation();
 		this.setState({ shouldDisplayCommentModal: true });
 	};
 

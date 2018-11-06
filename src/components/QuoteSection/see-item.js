@@ -83,6 +83,7 @@ class Item extends Component {
 
 	closeCommentModal = () => {
 		this.setState({ shouldDisplayCommentModal: false });
+		this.props.refetch();
 	};
 
 	submitItem = itemMutation => {

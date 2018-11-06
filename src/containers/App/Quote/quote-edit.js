@@ -340,7 +340,7 @@ class EditQuote extends Component {
 
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
-				{({loading, error, data}) => {
+				{({loading, error, data }) => {
 					const fetchedData = {...data};
 
 					if (loading || !fetchedData.quote) {

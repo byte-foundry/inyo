@@ -340,61 +340,56 @@ class EditQuote extends Component {
 		quoteTemplates.push({value: 'custom', label: 'Sans recommandation'});
 
 		return (
-			<Mutation mutation={EDIT_ITEMS}>
-				{EditItems => (
-					<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
-						{({loading, error, data}) => {
-							const fetchedData = {...data};
+			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
+				{({loading, error, data }) => {
+					const fetchedData = {...data};
 
-							if (loading || !fetchedData.quote) {
-								return <Loading>Chargement...</Loading>;
-							}
-							if (error) {return <p>Error!: ${error.toString()}</p>;}
-							const {quote} = fetchedData;
+					if (loading || !fetchedData.quote) {
+						return <Loading>Chargement...</Loading>;
+					}
+					if (error) return <p>Error!: ${error.toString()}</p>;
+					const {quote} = fetchedData;
 
-							if (!this.state.selectedOption) {
-								this.setState({
-									selectedOption: quote.options[0].name,
-								});
-								this.setQuoteData(quote.template, EditItems);
-								return null;
-							}
-							if (this.state.apolloTriggerRenderTemporaryFix) {
-								this.setState({
-									apolloTriggerRenderTemporaryFix: false,
-								});
-							}
+					if (!this.state.selectedOption) {
+						this.setState({
+							selectedOption: quote.options[0].name,
+						});
+						return null;
+					}
+					if (this.state.apolloTriggerRenderTemporaryFix) {
+						this.setState({
+							apolloTriggerRenderTemporaryFix: false,
+						});
+					}
 
-							const option = quote.options.find(
-								o => o.name === this.state.selectedOption,
-							);
+					const option = quote.options.find(
+						o => o.name === this.state.selectedOption,
+					);
 
-							return (
-								<div>
-									<ToastContainer />
-									<QuoteDisplay
-										quoteTemplates={quoteTemplates}
-										quoteOption={option}
-										quote={quote}
-										mode="edit"
-										sendQuote={this.sendQuote}
-										editQuoteTitle={this.editQuoteTitle}
-										setQuoteData={this.setQuoteData}
-										addItem={this.addItem}
-										editItem={this.editItem}
-										editSectionTitle={this.editSectionTitle}
-										removeItem={this.removeItem}
-										removeSection={this.removeSection}
-										addSection={this.addSection}
-										updateOption={this.updateOption}
-										issuer={quote.issuer}
-									/>
-								</div>
-							);
-						}}
-					</Query>
-				)}
-			</Mutation>
+					return (
+						<div>
+							<ToastContainer />
+							<QuoteDisplay
+								quoteTemplates={quoteTemplates}
+								quoteOption={option}
+								quote={quote}
+								mode="edit"
+								sendQuote={this.sendQuote}
+								editQuoteTitle={this.editQuoteTitle}
+								setQuoteData={this.setQuoteData}
+								addItem={this.addItem}
+								editItem={this.editItem}
+								editSectionTitle={this.editSectionTitle}
+								removeItem={this.removeItem}
+								removeSection={this.removeSection}
+								addSection={this.addSection}
+								updateOption={this.updateOption}
+								issuer={quote.issuer}
+							/>
+						</div>
+					);
+				}}
+			</Query>
 		);
 	}
 }

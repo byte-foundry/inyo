@@ -116,7 +116,7 @@ class QuoteCustomerView extends Component {
 				query={GET_QUOTE_DATA_WITH_TOKEN}
 				variables={{quoteId, token: customerToken}}
 			>
-				{({loading, error, data}) => {
+				{({loading, error, data, refetch}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {
@@ -157,6 +157,7 @@ class QuoteCustomerView extends Component {
 								totalItems={totalItems}
 								totalItemsFinished={totalItemsFinished}
 								timePlanned={timePlanned}
+								refetch={refetch}
 								acceptOrRejectAmendment={
 									this.acceptOrRejectAmendment
 								}

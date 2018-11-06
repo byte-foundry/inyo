@@ -37,7 +37,7 @@ class CommentIcon extends Component {
 			commentLength = comments.filter(comment => (!comment.views.find(e => e.viewer.__typename === userType))).length;
 		}
 		return (
-			<CommentIconMain commentLength={commentLength} onClick={() => {this.props.onClick()}}>
+			<CommentIconMain commentLength={commentLength} onClick={(e) => {this.props.onClick(e)}}>
 				{commentLength !== 0 && commentLength}
 			</CommentIconMain>
 		);

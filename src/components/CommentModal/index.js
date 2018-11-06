@@ -69,7 +69,7 @@ class CommentModal extends Component {
 				variables={{ itemId, token: customerToken }}
 			>
 				{({ loading, error, data }) => {
-					if (loading) return <p>Chargement...</p>;
+					if (loading) return <span></span>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 
 					const { itemComments } = data;

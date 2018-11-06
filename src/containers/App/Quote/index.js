@@ -8,7 +8,10 @@ import QuoteEdit from './quote-edit';
 import QuoteCreate from './quote-create';
 import QuoteList from './quote-list';
 
-const QuoteMain = styled('div')``;
+const QuoteMain = styled('div')`
+	background-color: #fbfbfb;
+	min-height: 100vh;
+`;
 
 class Quote extends Component {
 	render() {

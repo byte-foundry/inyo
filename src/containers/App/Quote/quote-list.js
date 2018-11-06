@@ -3,17 +3,19 @@ import styled from 'react-emotion';
 import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 import {GET_ALL_QUOTES} from '../../../utils/queries';
-import {H1, Button, primaryNavyBlue} from '../../../utils/content';
+import {
+	H1,
+	Button,
+	primaryNavyBlue,
+	primaryWhite,
+} from '../../../utils/content';
 
 import {ReactComponent as AccountIcon} from '../../../utils/icons/user.svg';
 
 import SearchQuoteForm from '../../../components/SearchQuoteForm';
 import QuoteList from '../../../components/QuoteList';
 
-const ListQuotesMain = styled('div')`
-	padding-left: 40px;
-	padding-right: 40px;
-`;
+const ListQuotesMain = styled('div')``;
 
 const TopBarButton = styled(Button)`
 	height: 60px;
@@ -28,7 +30,9 @@ const ListQuotesTopBar = styled('div')`
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 40px;
+	padding-left: 40px;
+	padding-right: 40px;
+	background-color: ${primaryWhite};
 `;
 
 const TopBarTitle = styled(H1)`

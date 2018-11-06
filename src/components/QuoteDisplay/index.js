@@ -5,7 +5,6 @@ import {Mutation, Query} from 'react-apollo';
 import Select from 'react-select';
 
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
-import CompanyInfoModal from '../CompanyInfoModal';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import TextEditor from '../TextEditor';
 import InlineEditable from '../InlineEditable';
@@ -241,7 +240,7 @@ class QuoteDisplay extends Component {
 												if (
 													error.message.includes(
 														'NEED_MORE_INFOS',
-													)
+													) || error.message.includes('Missing required data')
 												) {
 													return askForInfos();
 												}
@@ -596,9 +595,6 @@ class QuoteDisplay extends Component {
 										)}
 									</SideActions>
 								</FlexRow>
-								{this.state.showInfoModal && (
-									<CompanyInfoModal />
-								)}
 							</QuoteDisplayMain>
 						);
 					}

@@ -63,11 +63,14 @@ class EditQuote extends Component {
 				const data = cache.readQuery({
 					query: GET_ALL_QUOTES,
 				});
-				const updatedQuote = data.me.company.quotes.find(
-					quote => quote.id === sendQuote.id,
-				);
 
-				updatedQuote.status = sendQuote.status;
+				if (data.me && data.me.company && data.me.company.quotes) {
+					const updatedQuote = data.me.company.quotes.find(
+						quote => quote.id === sendQuote.id,
+					);
+	
+					updatedQuote.status = sendQuote.status;
+				}				
 				try {
 					ReactGA.event({
 						category: 'Quote',

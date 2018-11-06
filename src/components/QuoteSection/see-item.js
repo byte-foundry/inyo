@@ -21,7 +21,7 @@ import { GET_QUOTE_DATA_WITH_TOKEN } from "../../utils/queries";
 const ItemName = styled(FlexRow)`
 	margin: 0;
 	font-size: 13px;
-	width: 50%;
+	flex: 1;
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
@@ -29,6 +29,20 @@ const ItemMain = styled(FlexRow)`
 	position: relative;
 	cursor: ${props => (props.customer ? "initial" : "pointer")};
 	width: 100%;
+	justify-content: space-between;
+`;
+
+const ItemUnit = styled('div')`
+	flex: 0 0 70px;
+	text-align: right;
+`;
+const ItemUnitPrice = styled('div')`
+	flex: 0 0 70px;
+	text-align: right;
+`;
+const ItemAmount = styled('div')`
+	flex: 0 0 100px;
+	text-align: right;
 `;
 
 const ItemStatus = styled("div")`
@@ -250,11 +264,13 @@ class Item extends Component {
 						status === "ADDED_SENT" && (
 							<ItemStatus>Ajouté</ItemStatus>
 						)}
-					<span>{item.pendingUnit || item.unit} jours</span>
-					<span>{item.unitPrice.toLocaleString("fr-FR")}€</span>
-					<span>
+					<ItemUnit>{item.pendingUnit || item.unit} jours</ItemUnit>
+					<ItemUnitPrice>
+						{item.unitPrice.toLocaleString('fr-FR')}€
+					</ItemUnitPrice>
+					<ItemAmount>
 						{item.unitPrice * (item.pendingUnit || item.unit)}€
-					</span>
+					</ItemAmount>
 					{customerViewMode &&
 						isValidStatus && (
 							<ItemCustomerActions>

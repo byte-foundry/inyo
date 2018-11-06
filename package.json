@@ -60,7 +60,8 @@
     }
   },
   "scripts": {
-	  "start": "set REACT_APP_INYO_ENV=development && REACT_APP_INYO_ENV=development react-scripts start",
+    "win-start": "set REACT_APP_INYO_ENV=development && react-scripts start",
+	  "start": "REACT_APP_INYO_ENV=development react-scripts start",
 	  "build": "react-scripts build"
   },
   "lint-staged": {

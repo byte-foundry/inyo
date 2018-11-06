@@ -13,7 +13,6 @@ import QuoteSection from '../QuoteSection';
 import QuoteTotal from '../QuoteTotal';
 import TasksProgressBar from '../TasksProgressBar';
 import {
-	EDIT_ITEMS,
 	UPDATE_QUOTE,
 	ADD_SECTION,
 	UPDATE_OPTION,
@@ -197,6 +196,7 @@ class QuoteDisplay extends Component {
 			amendmentEnabled,
 			overtime,
 			issuer,
+			refetch,
 		} = this.props;
 		const customerViewMode = this.props.match.params.customerToken;
 		const isAcceptable = quote.status === 'SENT';
@@ -299,24 +299,6 @@ class QuoteDisplay extends Component {
 											/>
 										)}
 									</FlexColumn>
-
-									{mode === 'edit' && (
-										<Mutation mutation={EDIT_ITEMS}>
-											{EditItems => (
-												<Select
-													styles={SelectStyles}
-													placeholder="Recommandation de contenu"
-													onChange={(e) => {
-														setQuoteData(
-															e.value,
-															EditItems,
-														);
-													}}
-													options={quoteTemplates}
-												/>
-											)}
-										</Mutation>
-									)}
 									{mode === 'see' && (
 										<FlexRow>
 											{!customerViewMode && (
@@ -540,6 +522,7 @@ class QuoteDisplay extends Component {
 																	sectionIndex={
 																		index
 																	}
+																	refetch={refetch}
 																/>
 															),
 														)}

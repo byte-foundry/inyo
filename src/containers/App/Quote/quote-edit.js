@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Query} from 'react-apollo';
+import {Query, Mutation} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
 import {templates} from '../../../utils/quote-templates';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
+import {EDIT_ITEMS} from '../../../utils/mutations';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
 import CompanyInfoModal from '../../../components/CompanyInfoModal';
@@ -347,7 +348,7 @@ class EditQuote extends Component {
 
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
-				{({loading, error, data}) => {
+				{({loading, error, data }) => {
 					const fetchedData = {...data};
 
 					if (loading || !fetchedData.quote) {

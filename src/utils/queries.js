@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from "graphql-tag"; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** APP QUERIES ********* */
 export const GET_NETWORK_STATUS = gql`
@@ -65,6 +65,10 @@ export const GET_USER_INFOS = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -155,6 +159,34 @@ export const GET_QUOTE_DATA = gql`
 						name
 						unitPrice
 						unit
+						comments {
+							createdAt
+							id
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
+						}
 						pendingUnit
 						vatRate
 						description
@@ -210,8 +242,32 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -229,6 +285,7 @@ export const GET_COMMENTS_BY_ITEM = gql`
 		itemComments(itemId: $itemId, token: $token) {
 			id
 			text
+			createdAt
 			author {
 				... on User {
 					firstName

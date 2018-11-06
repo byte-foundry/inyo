@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from "graphql-tag"; // eslint-disable-line import/no-extraneous-dependencies
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -69,10 +69,21 @@ export const UPDATE_USER = gql`
 `;
 
 export const UPDATE_USER_CONSTANTS = gql`
-	mutation UpdateUser($defaultDailyPrice: Int, $defaultVatRate: Int) {
+	mutation UpdateUser(
+		$defaultDailyPrice: Int
+		$defaultVatRate: Int
+		$workingFields: [String!]
+		$jobType: JobType
+		$interestedFeatures: [String!]
+		$hasUpcomingProject: Boolean
+	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
 			defaultVatRate: $defaultVatRate
+			workingFields: $workingFields
+			jobType: $jobType
+			interestedFeatures: $interestedFeatures
+			hasUpcomingProject: $hasUpcomingProject
 		) {
 			id
 			email
@@ -80,6 +91,10 @@ export const UPDATE_USER_CONSTANTS = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -322,6 +337,7 @@ export const UPDATE_VALIDATED_ITEM = gql`
 			pendingUnit
 			status
 			comments {
+				createdAt
 				text
 				author {
 					... on User {
@@ -457,8 +473,32 @@ export const ACCEPT_AMENDMENT = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -514,8 +554,32 @@ export const REJECT_AMENDMENT = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -545,4 +609,46 @@ export const REJECT_ITEM = gql`
 			unit
 		}
 	}
+`;
+
+export const POST_COMMENT = gql`
+		mutation postComment($itemId: ID!, $token: String, $comment: CommentInput! ) {
+			postComment(
+				itemId: $itemId
+				token: $token
+				comment: $comment
+			)  {
+				id
+				comments {
+					createdAt
+					id
+					text
+					views {
+						viewer {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
+					}
+					author {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+					
+			}
+		}
 `;

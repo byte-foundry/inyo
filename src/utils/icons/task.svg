@@ -1,4 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Calque_1" data-name="Calque 1" viewBox="0 0 48.08 48.19">
-<path fill="none" stroke-linejoin="round" stroke-width="2px" stroke="#b0b0b5" d="M13.05 22.88l9.34 8.6 12.68-17.8" class="cls-1"/>
-<path fill="none" stroke-linejoin="round" stroke-width="2px" stroke="#dfe1e6" stroke-linecap="round" d="M33.85 3.27a23 23 0 0 0-26.8 36.29M14.58 45A23 23 0 0 0 41.29 8.86" class="cls-2"/>
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="29.75px" height="29.76px" viewBox="944.797 524.069 29.75 29.76" enable-background="new 944.797 524.069 29.75 29.76"
+	 xml:space="preserve">
+<path fill="none" class="cls-1" stroke="#B0B0B5" stroke-width="2" stroke-linejoin="round" d="M953.458,538.288l5.288,4.87l7.18-10.079"/>
+<path fill="none" class="cls-2" stroke="#DFE1E6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M965.235,527.185
+	c-6.51-3.06-14.266-0.265-17.326,6.245c-2.24,4.763-1.391,10.408,2.15,14.3 M954.324,550.812c6.563,2.941,14.267,0.006,17.21-6.559
+	c2.08-4.644,1.266-10.074-2.088-13.903"/>
 </svg>

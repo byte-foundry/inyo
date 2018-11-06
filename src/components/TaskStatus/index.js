@@ -84,7 +84,7 @@ const Status = styled('div')`
 	width: 30px;
 	height: auto;
 	position: absolute;
-	top: 50%;
+	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
 	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};

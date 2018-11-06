@@ -46,7 +46,7 @@ class CompanyInfoModal extends Component {
 												done={() => {
 													submit(quoteId, SendQuote);
 												}}
-												buttonText="Envoyez le devis"
+												buttonText="Envoyer le devis"
 											/>
 										)}
 									</Mutation>

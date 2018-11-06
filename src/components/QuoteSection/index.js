@@ -44,13 +44,12 @@ class QuoteSection extends Component {
 	render() {
 		const {
 			data,
-			addItem,
 			editSectionTitle,
 			editItem,
-			sectionIndex,
 			removeItem,
 			mode,
 			customerViewMode,
+			refetch
 		} = this.props;
 
 		return (
@@ -106,6 +105,7 @@ class QuoteSection extends Component {
 						editItem={editItem}
 						removeItem={removeItem}
 						mode={mode}
+						refetch={refetch}
 					/>
 				))}
 

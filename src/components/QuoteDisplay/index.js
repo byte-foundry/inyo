@@ -194,6 +194,7 @@ class QuoteDisplay extends Component {
 			amendmentEnabled,
 			overtime,
 			issuer,
+			refetch,
 		} = this.props;
 		const customerViewMode = this.props.match.params.customerToken;
 		const isAcceptable = quote.status === 'SENT';
@@ -507,6 +508,7 @@ class QuoteDisplay extends Component {
 																	sectionIndex={
 																		index
 																	}
+																	refetch={refetch}
 																/>
 															),
 														)}

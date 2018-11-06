@@ -330,14 +330,26 @@ export const ModalElem = styled('div')`
 	background: ${primaryWhite};
 	width: 50vw;
 	position: relative;
-	padding-bottom: 30px;
+	padding: 20px 40px;
 `;
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
 	top: 20px;
-	right: 20px;
-	background: ${gray80};
+	right: 40px;
 	width: 40px;
 	height: 40px;
+	cursor: pointer;
+	transition: all .3s ease;
+	.cls-1, .cls-2 {
+		transition: all .3s ease;
+	}
+	&:hover {
+		.cls-1 {
+			stroke: ${primaryNavyBlue};
+		}
+		.cls-2{
+			stroke: ${primaryBlue};
+		}
+	}
 `;

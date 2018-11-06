@@ -1,0 +1,16 @@
+{
+	"__schema": {
+		"types": [
+			{
+				"kind": "UNION",
+				"name": "Author",
+				"possibleTypes": [{"name": "User"}, {"name": "Customer"}]
+			},
+			{
+				"kind": "UNION",
+				"name": "Viewer",
+				"possibleTypes": [{"name": "User"}, {"name": "Customer"}]
+			}
+		]
+	}
+}

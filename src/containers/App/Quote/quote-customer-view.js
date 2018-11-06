@@ -6,7 +6,6 @@ import styled from 'react-emotion';
 import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
-import CommentModal from '../../../components/CommentModal';
 
 const Loading = styled('div')`
 	font-size: 30px;
@@ -117,10 +116,9 @@ class QuoteCustomerView extends Component {
 				query={GET_QUOTE_DATA_WITH_TOKEN}
 				variables={{quoteId, token: customerToken}}
 			>
-				{({loading, error, data}) => {
+				{({loading, error, data, refetch}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
-
 					const {
 						quote: {
 							options: [option],
@@ -159,17 +157,12 @@ class QuoteCustomerView extends Component {
 								totalItems={totalItems}
 								totalItemsFinished={totalItemsFinished}
 								timePlanned={timePlanned}
+								refetch={refetch}
 								acceptOrRejectAmendment={
 									this.acceptOrRejectAmendment
 								}
 								acceptOrRejectQuote={this.acceptOrRejectQuote}
 								mode="see"
-							/>
-							<Route
-								path={`${
-									this.props.match.path
-								}/comments/:itemId`}
-								component={CommentModal}
 							/>
 						</div>
 					);

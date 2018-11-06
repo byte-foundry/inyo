@@ -104,7 +104,7 @@ const QuoteAction = styled(Button)`
 const QuoteStatus = styled(FlexColumn)`
 	span {
 		font-size: 13px;
-		margin: 5px 10px;
+		margin: 5px 20px;
 	}
 `;
 
@@ -130,7 +130,8 @@ const SelectStyles = {
 };
 const SendQuoteButton = styled(Button)`
 	width: auto;
-	padding: 0 25px;
+	padding: .5em 1em;
+	margin-bottom: .5em;
 `;
 const Loading = styled('div')`
 	font-size: 30px;
@@ -260,7 +261,7 @@ class QuoteDisplay extends Component {
 														);
 													}}
 												>
-													Envoyez la proposition
+													Envoyer la proposition
 												</SendQuoteButton>
 											)}
 										</Mutation>
@@ -292,14 +293,6 @@ class QuoteDisplay extends Component {
 												)}
 											</Mutation>
 										</QuoteName>
-										{mode === 'see' && (
-											<TasksProgressBar
-												tasksCompleted={
-													totalItemsFinished
-												}
-												tasksTotal={totalItems}
-											/>
-										)}
 									</FlexColumn>
 									{mode === 'see' && (
 										<FlexRow>
@@ -339,7 +332,7 @@ class QuoteDisplay extends Component {
 																);
 															}}
 														>
-																Envoyez
+																Envoyer
 																l'avenant
 														</SendQuoteButton>
 													)}
@@ -369,7 +362,7 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Acceptez
+																	Accepter
 																	l'avenant
 															</SendQuoteButton>
 														)}
@@ -395,7 +388,7 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Rejetez
+																	Rejeter
 																	l'avenant
 															</SendQuoteButton>
 														)}
@@ -426,7 +419,7 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Acceptez le
+																	Accepter le
 																	devis
 															</SendQuoteButton>
 														)}
@@ -452,7 +445,7 @@ class QuoteDisplay extends Component {
 																	);
 																}}
 															>
-																	Rejetez le
+																	Rejeter le
 																	devis
 															</SendQuoteButton>
 														)}
@@ -487,6 +480,14 @@ class QuoteDisplay extends Component {
 								<FlexRow justifyContent="space-between">
 									<CenterContent flexGrow="2">
 										<QuoteContent>
+										{mode === 'see' && (
+											<TasksProgressBar
+												tasksCompleted={
+													totalItemsFinished
+												}
+												tasksTotal={totalItems}
+											/>
+										)}
 											<FlexColumn fullHeight>
 												{this.state.mode === 'quote' ? (
 													<QuoteSections>

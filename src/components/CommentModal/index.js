@@ -26,7 +26,7 @@ import {
 import Comment from "../Comment";
 
 const CommentRow = styled("div")`
-	padding-left: 40px;
+	padding-left: 20px;
 	padding-right: 40px;
 	padding-top: 5px;
 	padding-bottom: 5px;
@@ -39,7 +39,7 @@ const Comments = styled("div")`
 
 const ItemComment = styled("textarea")`
 	margin-top: 10px;
-	margin-left: 100px;
+	margin-left: 80px;
 	width: 100%;
 	background: ${primaryWhite};
 	border: 1px solid ${gray20};

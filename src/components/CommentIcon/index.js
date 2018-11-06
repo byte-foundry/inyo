@@ -15,6 +15,7 @@ const CommentIconMain = styled('div')`
 	justify-content: center;
 	align-items: center;
 	cursor: pointer;
+	margin-left: 1em;
 
 	&:after {
 		border-top: solid 5px ${props =>  props.commentLength > 0 ? '#3860ff' : gray20};

@@ -8,7 +8,7 @@ import AmendItem from "./amend-item";
 import TaskStatus from "../TaskStatus";
 import CommentIcon from "../CommentIcon";
 import CommentModal from "../CommentModal";
-import { FlexRow, alpha10, primaryWhite, Button } from "../../utils/content";
+import { FlexRow, alpha10, primaryWhite, primaryBlue, Button } from "../../utils/content";
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
@@ -46,13 +46,15 @@ const ItemAmount = styled('div')`
 `;
 
 const ItemStatus = styled("div")`
-	border: solid 1px purple;
+	border: solid 2px ${primaryBlue};
 	border-radius: 3px;
-	color: purple;
+	color: ${primaryBlue};
 	padding: 0 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-left: 1em;
+	margin-top: -1px;
 `;
 
 const ItemCustomerActions = styled("div")`
@@ -63,14 +65,14 @@ const ItemCustomerActions = styled("div")`
 
 const ItemCustomerButton = styled(Button)`
 	margin-right: 5px;
-	background: ${props => (props.accept ? "#00a676" : "#fe4a49")};
+	background: ${props => (props.accept ? "#0dcc94" : "#fe4a49")};
 	font-size: 14px;
 	color: ${primaryWhite};
-	border-color: ${props => (props.accept ? "#00a676" : "#fe4a49")};
+	border-color: ${props => (props.accept ? "#0dcc94" : "#fe4a49")};
 
 	${`&:hover {
-		border-color: ${props => (props.accept ? "#00a676" : "#fe4a49")};
-		color: ${props => (props.accept ? "#00a676" : "#fe4a49")};
+		border-color: ${props => (props.accept ? "#0dcc94" : "#fe4a49")};
+		color: ${props => (props.accept ? "#0dcc94" : "#fe4a49")};
 	}`};
 `;
 
@@ -253,6 +255,10 @@ class Item extends Component {
 						status === "UPDATED_SENT" && (
 							<ItemStatus>Mis à jour</ItemStatus>
 						)}
+					{customerViewMode &&
+						status === "ADDED_SENT" && (
+							<ItemStatus>Ajouté</ItemStatus>
+						)}
 					{(customerViewMode || mode === "see") && (
 						<CommentIcon
 							onClick={this.seeCommentModal}
@@ -260,10 +266,6 @@ class Item extends Component {
 							userType={customerViewMode ? "Customer" : "User"}
 						/>
 					)}
-					{customerViewMode &&
-						status === "ADDED_SENT" && (
-							<ItemStatus>Ajouté</ItemStatus>
-						)}
 					<ItemUnit>{item.pendingUnit || item.unit} jours</ItemUnit>
 					<ItemUnitPrice>
 						{item.unitPrice.toLocaleString('fr-FR')}€

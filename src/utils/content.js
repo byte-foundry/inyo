@@ -24,9 +24,9 @@ export const gray30 = '#4d4d4d';
 export const gray70 = '#b3b3b3';
 export const gray80 = '#cccccc';
 export const alpha10 = 'rgba(0, 0, 0, 0.1)';
-export const signalGreen = '#36b37e';
+export const signalGreen = '#0dcc94';
 export const signalOrange = '#ffab00';
-export const signalRed = '#ff5630';
+export const signalRed = '#fe4a49';
 // Typography
 
 export const Body = styled('div')`
@@ -335,12 +335,12 @@ export const ModalElem = styled('div')`
 	background: ${primaryWhite};
 	width: 50vw;
 	position: relative;
-	padding: 20px 40px;
+	padding: 20px 40px 30px;
 `;
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	top: 20px;
+	top: 40px;
 	right: 40px;
 	width: 40px;
 	height: 40px;

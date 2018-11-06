@@ -9,7 +9,7 @@ import {
 	IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
 import introspectionQueryResultData from './fragmentTypes.json';
-
+import {createUploadLink} from 'apollo-upload-client'; // eslint-disable-line import/no-extraneous-dependencies
 import {GRAPHQL_API} from './constants';
 import defaults from './default';
 import resolvers from './resolvers';
@@ -79,6 +79,8 @@ const cache = new InMemoryCache({
 	// 	}),
 });
 
+const uploadLink = createUploadLink();
+
 const errorLink = onError(({networkError, graphQLErrors}) => {
 	if (networkError) {
 		cache.writeData({
@@ -113,7 +115,13 @@ const stateLink = withClientState({
 });
 
 const client = new ApolloClient({
-	link: ApolloLink.from([withToken, errorLink, stateLink, httpLink]),
+	link: ApolloLink.from([
+		withToken,
+		errorLink,
+		stateLink,
+		httpLink,
+		uploadLink,
+	]),
 	cache,
 	connectToDevTools: true,
 	queryDeduplication: true,

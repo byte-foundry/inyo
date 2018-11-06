@@ -9,6 +9,7 @@ import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
 import {EDIT_ITEMS} from '../../../utils/mutations';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
+import CompanyInfoModal from '../../../components/CompanyInfoModal';
 
 const Loading = styled('div')`
 	font-size: 30px;
@@ -68,15 +69,15 @@ class EditQuote extends Component {
 
 				updatedQuote.status = sendQuote.status;
 				try {
-					cache.writeQuery({
-						query: GET_ALL_QUOTES,
-						data,
-					});
 					ReactGA.event({
 						category: 'Quote',
 						action: 'Sent quote',
 					});
 					this.toast();
+					cache.writeQuery({
+						query: GET_ALL_QUOTES,
+						data,
+					});
 				}
 				catch (e) {
 					throw new Error(e);
@@ -329,6 +330,12 @@ class EditQuote extends Component {
 		});
 	};
 
+	askForInfos = () => {
+		this.setState({
+			showInfoModal: true,
+		});
+	};
+
 	render() {
 		const {quoteId} = this.props.match.params;
 
@@ -383,9 +390,16 @@ class EditQuote extends Component {
 								removeItem={this.removeItem}
 								removeSection={this.removeSection}
 								addSection={this.addSection}
+								askForInfos={this.askForInfos}
 								updateOption={this.updateOption}
 								issuer={quote.issuer}
 							/>
+							{this.state.showInfoModal && (
+								<CompanyInfoModal
+									quoteId={quote.id}
+									submit={this.sendQuote}
+								/>
+							)}
 						</div>
 					);
 				}}

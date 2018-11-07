@@ -130,8 +130,8 @@ const SelectStyles = {
 };
 const SendQuoteButton = styled(Button)`
 	width: auto;
-	padding: .5em 1em;
-	margin-bottom: .5em;
+	padding: 0.5em 1em;
+	margin-bottom: 0.5em;
 `;
 const Loading = styled('div')`
 	font-size: 30px;
@@ -480,14 +480,14 @@ class QuoteDisplay extends Component {
 								<FlexRow justifyContent="space-between">
 									<CenterContent flexGrow="2">
 										<QuoteContent>
-										{mode === 'see' && (
-											<TasksProgressBar
-												tasksCompleted={
-													totalItemsFinished
-												}
-												tasksTotal={totalItems}
-											/>
-										)}
+											{mode === 'see' && (
+												<TasksProgressBar
+													tasksCompleted={
+														totalItemsFinished
+													}
+													tasksTotal={totalItems}
+												/>
+											)}
 											<FlexColumn fullHeight>
 												{this.state.mode === 'quote' ? (
 													<QuoteSections>

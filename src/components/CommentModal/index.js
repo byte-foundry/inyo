@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import styled from "react-emotion";
-import { Query, Mutation } from "react-apollo";
-import { withRouter } from "react-router-dom";
-import * as Yup from "yup";
-import { Formik } from "formik";
+import React, {Component} from 'react';
+import styled from 'react-emotion';
+import {Query, Mutation} from 'react-apollo';
+import {withRouter} from 'react-router-dom';
+import * as Yup from 'yup';
+import {Formik} from 'formik';
 
-import { GET_COMMENTS_BY_ITEM } from "../../utils/queries";
-import { POST_COMMENT } from "../../utils/mutations";
+import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
+import {POST_COMMENT} from '../../utils/mutations';
 
-import { ReactComponent as CloseIcon } from "../../utils/icons/close.svg";
+import {ReactComponent as CloseIcon} from '../../utils/icons/close.svg';
 
 import {
 	ModalContainer,
@@ -20,31 +20,31 @@ import {
 	primaryWhite,
 	gray30,
 	ErrorInput,
-	FlexRow
-} from "../../utils/content";
+	FlexRow,
+} from '../../utils/content';
 
-import Comment from "../Comment";
+import Comment from '../Comment';
 
-const CommentRow = styled("div")`
+const CommentRow = styled('div')`
 	padding-left: 20px;
 	padding-right: 40px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 `;
 
-const Comments = styled("div")`
+const Comments = styled('div')`
 	max-height: 60vh;
 	overflow-y: auto;
 `;
 
-const ItemComment = styled("textarea")`
+const ItemComment = styled('textarea')`
 	margin-top: 10px;
 	margin-left: 80px;
 	width: 100%;
 	background: ${primaryWhite};
 	border: 1px solid ${gray20};
 	padding: 15px 10px;
-	font-family: "Ligne";
+	font-family: 'Ligne';
 	color: ${gray30};
 	margin-bottom: 10px;
 `;
@@ -55,32 +55,31 @@ const ActionButton = styled(Button)`
 	padding-right: 10px;
 `;
 
-
 class CommentModal extends Component {
 	closeCommentModal = () => {
 		this.props.closeCommentModal();
 	};
 
 	render() {
-		const { itemId, customerToken, taskName } = this.props;
+		const {itemId, customerToken, taskName} = this.props;
 
 		return (
 			<Query
 				query={GET_COMMENTS_BY_ITEM}
-				variables={{ itemId, token: customerToken }}
+				variables={{itemId, token: customerToken}}
 			>
-				{({ loading, error, data }) => {
-					if (loading) return <span></span>;
+				{({loading, error, data}) => {
+					if (loading) return <span />;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 
-					const { itemComments } = data;
+					const {itemComments} = data;
 
 					const commentsElem = itemComments.map(comment => (
 						<Comment
 							key={`comment${comment.id}`}
 							comment={comment}
 							isCustomer={
-								comment.author.__typename === "Customer"
+								comment.author.__typename === 'Customer'
 							}
 						/>
 					));
@@ -98,18 +97,18 @@ class CommentModal extends Component {
 									{postComment => (
 										<Formik
 											initialValues={{
-												newComment: ""
+												newComment: '',
 											}}
 											validationSchema={Yup.object().shape(
 												{
 													newComment: Yup.string().required(
-														"Requis"
-													)
-												}
+														'Requis',
+													),
+												},
 											)}
 											onSubmit={async (
 												values,
-												actions
+												actions,
 											) => {
 												actions.setSubmitting(false);
 												try {
@@ -119,65 +118,67 @@ class CommentModal extends Component {
 															token: customerToken,
 															comment: {
 																text:
-																	values.newComment
-															}
+																	values.newComment,
+															},
 														},
 														update: (
 															cache,
 															{
 																data: {
-																	postComment
-																}
-															}
+																	postComment,
+																},
+															},
 														) => {
 															const data = cache.readQuery(
 																{
 																	query: GET_COMMENTS_BY_ITEM,
 																	variables: {
 																		itemId,
-																		token: customerToken
-																	}
-																}
+																		token: customerToken,
+																	},
+																},
 															);
 
-															data.itemComments =
-																postComment.comments;
+															data.itemComments
+																= postComment.comments;
 															try {
 																cache.writeQuery(
 																	{
 																		query: GET_COMMENTS_BY_ITEM,
 																		variables: {
 																			itemId,
-																			token: customerToken
+																			token: customerToken,
 																		},
-																		data
-																	}
+																		data,
+																	},
 																);
 																actions.resetForm();
-															} catch (e) {
+															}
+															catch (e) {
 																console.log(e);
 															}
-														}
+														},
 													});
-												} catch (error) {
+												}
+												catch (error) {
 													actions.setSubmitting(
-														false
+														false,
 													);
 													actions.setErrors(error);
 													actions.setStatus({
 														msg:
-															"Something went wrong"
+															'Something went wrong',
 													});
 												}
 											}}
 										>
-											{props => {
+											{(props) => {
 												const {
 													touched,
 													errors,
 													handleSubmit,
 													setFieldValue,
-													values
+													values,
 												} = props;
 
 												return (
@@ -191,24 +192,23 @@ class CommentModal extends Component {
 																	values.newComment
 																}
 																name="newComment"
-																onChange={e =>
-																	setFieldValue(
-																		"newComment",
-																		e.target
-																			.value
-																	)
+																onChange={e => setFieldValue(
+																	'newComment',
+																	e.target
+																		.value,
+																)
 																}
 															/>
 														</FlexRow>
 
-														{errors.comment &&
-															touched.comment && (
-																<ErrorInput>
-																	{
-																		errors.comment
-																	}
-																</ErrorInput>
-															)}
+														{errors.comment
+															&& touched.comment && (
+															<ErrorInput>
+																{
+																	errors.comment
+																}
+															</ErrorInput>
+														)}
 														<FlexRow justifyContent="flex-end">
 															<ActionButton
 																theme="Primary"

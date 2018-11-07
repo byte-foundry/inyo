@@ -12,6 +12,7 @@ import QuoteDisplay from '../../../components/QuoteDisplay';
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateValidatedItem) => {
 		const {name, unit, comment} = data;
+
 		return updateValidatedItem({
 			variables: {
 				itemId,
@@ -20,7 +21,7 @@ class TasksListUser extends Component {
 				comment: {text: comment},
 			},
 			update: (cache, {data: {updateValidatedItem}}) => {
-				console.log(updateValidatedItem)
+				console.log(updateValidatedItem);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -89,9 +90,19 @@ class TasksListUser extends Component {
 	});
 
 	addItem = (sectionId, addItemValues, addItem) => {
-		const {name, vatRate, unit, unitPrice, description} = addItemValues;
+		const {
+			name, vatRate, unit, unitPrice, description,
+		} = addItemValues;
+
 		addItem({
-			variables: {sectionId, name, vatRate, unit: parseFloat(unit), unitPrice, description},
+			variables: {
+				sectionId,
+				name,
+				vatRate,
+				unit: parseFloat(unit),
+				unitPrice,
+				description,
+			},
 			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
@@ -122,7 +133,9 @@ class TasksListUser extends Component {
 
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
-				{({loading, error, data, refetch}) => {
+				{({
+					loading, error, data, refetch,
+				}) => {
 					if (loading) return <p>Loading</p>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {quote} = data;

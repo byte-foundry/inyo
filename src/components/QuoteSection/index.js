@@ -114,43 +114,46 @@ class QuoteSection extends Component {
 				{this.state.shouldDisplayAddItem && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (
-					<AddItem
-						item={{
-							name: 'Nouvelle tâche',
-							unit: 0,
-							unitPrice: defaultDailyPrice,
-							description: ''
-						}}
-						remove={() => {
-							this.setState({
-								shouldDisplayAddItem: false
-							});
-						}}
-						done={values => {
-							this.props.addItem(data.id, values, addItem);
-							this.setState({
-								shouldDisplayAddItem: false
-							});
-						}}
-					/>
-
-					)}
+							<AddItem
+								item={{
+									name: 'Nouvelle tâche',
+									unit: 0,
+									unitPrice: defaultDailyPrice,
+									description: '',
+								}}
+								remove={() => {
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+								done={(values) => {
+									this.props.addItem(
+										data.id,
+										values,
+										addItem,
+									);
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+							/>
+						)}
 					</Mutation>
 				)}
 
-
-				{!customerViewMode && quoteStatus !== 'SENT' && (
-							<QuoteAction
-								theme="Link"
-								size="XSmall"
-								onClick={() => {
-									this.setState({
-										shouldDisplayAddItem: true
-									});
-								}}
-							>
-								Ajouter une tâche
-							</QuoteAction>
+				{!customerViewMode
+					&& quoteStatus !== 'SENT' && (
+					<QuoteAction
+						theme="Link"
+						size="XSmall"
+						onClick={() => {
+							this.setState({
+								shouldDisplayAddItem: true,
+							});
+						}}
+					>
+							Ajouter une tâche
+					</QuoteAction>
 				)}
 			</QuoteSectionMain>
 		);

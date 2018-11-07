@@ -345,15 +345,16 @@ export const ModalCloseIcon = styled('div')`
 	width: 40px;
 	height: 40px;
 	cursor: pointer;
-	transition: all .3s ease;
-	.cls-1, .cls-2 {
-		transition: all .3s ease;
+	transition: all 0.3s ease;
+	.cls-1,
+	.cls-2 {
+		transition: all 0.3s ease;
 	}
 	&:hover {
 		.cls-1 {
 			stroke: ${primaryNavyBlue};
 		}
-		.cls-2{
+		.cls-2 {
 			stroke: ${primaryBlue};
 		}
 	}

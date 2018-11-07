@@ -87,6 +87,7 @@ class AddItem extends Component {
 							}
 							if (!loading && data && data.template) {
 								const {items} = data.template;
+
 								return (
 									<Autocomplete
 										getItemValue={item => item}
@@ -185,7 +186,7 @@ class AddItem extends Component {
 						Supprimer
 					</ActionButton>
 					<div>
-						{typeof(cancel) === 'function' && (
+						{typeof cancel === 'function' && (
 							<ActionButton
 								theme="Link"
 								size="XSmall"

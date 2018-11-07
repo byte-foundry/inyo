@@ -10,6 +10,7 @@ import {
 } from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
 import introspectionQueryResultData from './fragmentTypes.json';
 import {createUploadLink} from 'apollo-upload-client'; // eslint-disable-line import/no-extraneous-dependencies
+import introspectionQueryResultData from './fragmentTypes.json';
 import {GRAPHQL_API} from './constants';
 import defaults from './default';
 import resolvers from './resolvers';
@@ -50,10 +51,6 @@ export const ERRORS = {
 	UnhandledFunctionError: 3034,
 };
 
-const httpLink = createHttpLink({
-	uri: GRAPHQL_API,
-});
-
 const withToken = setContext((_, {headers}) => {
 	const token = localStorage.getItem('authToken');
 
@@ -79,7 +76,9 @@ const cache = new InMemoryCache({
 	// 	}),
 });
 
-const uploadLink = createUploadLink();
+const uploadLink = createUploadLink({
+	uri: GRAPHQL_API,
+});
 
 const errorLink = onError(({networkError, graphQLErrors}) => {
 	if (networkError) {
@@ -113,15 +112,8 @@ const stateLink = withClientState({
 	cache,
 	typeDefs,
 });
-
 const client = new ApolloClient({
-	link: ApolloLink.from([
-		withToken,
-		errorLink,
-		stateLink,
-		httpLink,
-		uploadLink,
-	]),
+	link: ApolloLink.from([withToken, errorLink, stateLink, uploadLink]),
 	cache,
 	connectToDevTools: true,
 	queryDeduplication: true,

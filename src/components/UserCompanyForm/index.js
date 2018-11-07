@@ -83,6 +83,7 @@ class UserCompanyForm extends Component {
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
+								console.log(values);
 								values.address.__typename = undefined;
 								try {
 									updateUser({

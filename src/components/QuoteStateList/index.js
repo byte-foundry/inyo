@@ -26,6 +26,7 @@ const QuoteStateTitle = styled('div')`
 	border: 1px solid ${gray20};
 	border-radius: 3px;
 	background-color: ${primaryWhite};
+	border-bottom: 3px solid ${primaryBlue};
 `;
 const QuoteStateQuantity = styled('label')`
 	font-size: 13px;

@@ -6,8 +6,14 @@ import {ToastContainer, toast} from 'react-toastify';
 import AddItem from './add-item';
 import AmendItem from './amend-item';
 import TaskStatus from '../TaskStatus';
+import CommentIcon from '../CommentIcon';
+import CommentModal from '../CommentModal';
 import {
-	FlexRow, alpha10, primaryWhite, Button,
+	FlexRow,
+	alpha10,
+	primaryWhite,
+	primaryBlue,
+	Button,
 } from '../../utils/content';
 import {
 	UPDATE_ITEM,
@@ -21,48 +27,40 @@ import {GET_QUOTE_DATA_WITH_TOKEN} from '../../utils/queries';
 const ItemName = styled(FlexRow)`
 	margin: 0;
 	font-size: 13px;
-	width: 50%;
+	flex: 1;
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
 	font-size: 13px;
 	position: relative;
-	cursor: pointer;
+	cursor: ${props => (props.customer ? 'initial' : 'pointer')};
 	width: 100%;
+	justify-content: space-between;
 `;
 
-const CommentsCount = styled('div')`
-	background: #3860ff;
-	color: ${primaryWhite};
-	padding: 5px;
-	width: 25px;
-	height: 14px;
-	position: relative;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	&:after {
-		border-top: solid 5px #3860ff;
-		border-left: solid 5px transparent;
-		border-right: solid 5px transparent;
-		content: ' ';
-		height: 0px;
-		width: 0px;
-		position: absolute;
-		bottom: -5px;
-		display: block;
-	}
+const ItemUnit = styled('div')`
+	flex: 0 0 70px;
+	text-align: right;
+`;
+const ItemUnitPrice = styled('div')`
+	flex: 0 0 70px;
+	text-align: right;
+`;
+const ItemAmount = styled('div')`
+	flex: 0 0 100px;
+	text-align: right;
 `;
 
 const ItemStatus = styled('div')`
-	border: solid 1px purple;
+	border: solid 2px ${primaryBlue};
 	border-radius: 3px;
-	color: purple;
+	color: ${primaryBlue};
 	padding: 0 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-left: 1em;
+	margin-top: -1px;
 `;
 
 const ItemCustomerActions = styled('div')`
@@ -73,14 +71,14 @@ const ItemCustomerActions = styled('div')`
 
 const ItemCustomerButton = styled(Button)`
 	margin-right: 5px;
-	background: ${props => (props.accept ? '#00a676' : '#fe4a49')};
+	background: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
 	font-size: 14px;
 	color: ${primaryWhite};
-	border-color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
+	border-color: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
 
 	${`&:hover {
-		border-color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
-		color: ${props => (props.accept ? '#00a676' : '#fe4a49')};
+		border-color: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
+		color: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
 	}`};
 `;
 
@@ -97,20 +95,18 @@ class Item extends Component {
 		super(props);
 		this.state = {
 			shouldDisplayAddItem: false,
+			shouldDisplayCommentModal: false,
 		};
 	}
 
-	seeComments = () => {
-		const {quoteId, customerToken} = this.props.match.params;
-		const {
-			item: {id},
-		} = this.props;
+	seeCommentModal = (e) => {
+		e.stopPropagation();
+		this.setState({shouldDisplayCommentModal: true});
+	};
 
-		this.props.history.push(
-			`/app/quotes/${this.props.match.params.quoteId}/view/${
-				this.props.match.params.customerToken
-			}/comments/${id}`,
-		);
+	closeCommentModal = () => {
+		this.setState({shouldDisplayCommentModal: false});
+		this.props.refetch();
 	};
 
 	submitItem = (itemMutation) => {
@@ -253,9 +249,10 @@ class Item extends Component {
 					/>
 				)}
 				<ItemMain
+					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
-						if (!customerViewMode) {
+						if (!customerViewMode && item.status !== 'FINISHED') {
 							this.setState({shouldDisplayAddItem: true});
 						}
 					}}
@@ -268,21 +265,23 @@ class Item extends Component {
 						<ItemStatus>Mis à jour</ItemStatus>
 					)}
 					{customerViewMode
-						&& isValidStatus
-						&& comments.length > 0 && (
-						<CommentsCount onClick={this.seeComments}>
-							{comments.length}
-						</CommentsCount>
-					)}
-					{customerViewMode
 						&& status === 'ADDED_SENT' && (
 						<ItemStatus>Ajouté</ItemStatus>
 					)}
-					<span>{item.pendingUnit || item.unit} jours</span>
-					<span>{item.unitPrice.toLocaleString('fr-FR')}€</span>
-					<span>
+					{(customerViewMode || mode === 'see') && (
+						<CommentIcon
+							onClick={this.seeCommentModal}
+							comments={comments}
+							userType={customerViewMode ? 'Customer' : 'User'}
+						/>
+					)}
+					<ItemUnit>{item.pendingUnit || item.unit} jours</ItemUnit>
+					<ItemUnitPrice>
+						{item.unitPrice.toLocaleString('fr-FR')}€
+					</ItemUnitPrice>
+					<ItemAmount>
 						{item.unitPrice * (item.pendingUnit || item.unit)}€
-					</span>
+					</ItemAmount>
 					{customerViewMode
 						&& isValidStatus && (
 						<ItemCustomerActions>
@@ -311,6 +310,14 @@ class Item extends Component {
 						</ItemCustomerActions>
 					)}
 				</ItemMain>
+				{this.state.shouldDisplayCommentModal && (
+					<CommentModal
+						closeCommentModal={this.closeCommentModal}
+						itemId={item.id}
+						customerToken={customerViewMode}
+						taskName={item.name}
+					/>
+				)}
 			</ItemRow>
 		);
 	}

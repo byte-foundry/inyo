@@ -8,6 +8,8 @@ import {quoteState} from '../../containers/App/Quote/quote-list';
 const QuoteListMain = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
+	padding-left: 40px;
+	padding-right: 40px;
 `;
 
 class QuoteList extends Component {

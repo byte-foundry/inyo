@@ -9,17 +9,24 @@ import {
 	gray50,
 	secondaryLightBlue,
 	primaryBlue,
+	primaryWhite,
 } from '../../utils/content';
 
 const QuoteCardMain = styled('div')`
-	border: solid 1px ${alpha10};
+	background-color: ${primaryWhite};
+	box-shadow: 0px 0px 8px ${alpha10};
 	cursor: pointer;
 	margin-right: 10px;
 	margin-bottom: 10px;
+	border-radius: 3px;
+
+	&:hover {
+		box-shadow: 0px 0px 25px ${alpha10};
+	}
 `;
 
 const CardHeader = styled('div')`
-	background: ${secondaryLightBlue};
+	border-bottom: 1px solid ${secondaryLightBlue};
 	padding: 8px 16px 15px 16px;
 `;
 
@@ -67,8 +74,8 @@ class QuoteCard extends Component {
 				}}
 			>
 				<CardHeader>
-					<QuoteName>{quote.name}</QuoteName>
 					<ClientName>{customer.name}</ClientName>
+					<QuoteName>{quote.name}</QuoteName>
 					<DateOfIssue>
 						{issuedAt
 							? new Date(issuedAt).toLocaleDateString(

@@ -1,3 +1,3 @@
 export const GRAPHQL_API = `https://prisma${
-	process.env.NODE_ENV === 'development' ? '-dev' : ''
+	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 }.inyo.me/`;

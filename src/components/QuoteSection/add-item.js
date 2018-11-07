@@ -88,8 +88,6 @@ class AddItem extends Component {
 							if (!loading && data && data.template) {
 								const {items} = data.template;
 
-								console.log(data);
-
 								return (
 									<Autocomplete
 										getItemValue={item => item}
@@ -188,16 +186,18 @@ class AddItem extends Component {
 						Supprimer
 					</ActionButton>
 					<div>
-						<ActionButton
-							theme="Link"
-							size="XSmall"
-							color={signalOrange}
-							onClick={() => {
-								cancel();
-							}}
-						>
-							Annuler
-						</ActionButton>
+						{typeof cancel === 'function' && (
+							<ActionButton
+								theme="Link"
+								size="XSmall"
+								color={signalOrange}
+								onClick={() => {
+									cancel();
+								}}
+							>
+								Annuler
+							</ActionButton>
+						)}
 						<ActionButton
 							theme="Link"
 							size="XSmall"

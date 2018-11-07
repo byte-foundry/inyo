@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 
 import Dashboard from './Dashboard';
+import Onboarding from './Onboarding';
 import Account from './Account';
 import Customer from './Customer';
 import Quote from './Quote';
@@ -88,6 +89,11 @@ class App extends Component {
 								<ProtectedRoute
 									path="/app/quotes"
 									component={Quote}
+									isAllowed={data && data.me}
+								/>
+								<ProtectedRoute
+									path="/app/onboarding"
+									component={Onboarding}
 									isAllowed={data && data.me}
 								/>
 							</Switch>

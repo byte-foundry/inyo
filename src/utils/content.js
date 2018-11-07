@@ -24,9 +24,9 @@ export const gray30 = '#4d4d4d';
 export const gray70 = '#b3b3b3';
 export const gray80 = '#cccccc';
 export const alpha10 = 'rgba(0, 0, 0, 0.1)';
-export const signalGreen = '#36b37e';
+export const signalGreen = '#0dcc94';
 export const signalOrange = '#ffab00';
-export const signalRed = '#ff5630';
+export const signalRed = '#fe4a49';
 // Typography
 
 export const Body = styled('div')`
@@ -274,6 +274,11 @@ export const Label = styled('label')`
 				padding-left: 5px;
 			}
 		`};
+	${props => props.onboarding
+		&& css`
+			margin: 10px 15px 10px 16px;
+			width: inherit;
+		`};
 `;
 
 export const ErrorInput = styled('p')`
@@ -330,14 +335,34 @@ export const ModalElem = styled('div')`
 	background: ${primaryWhite};
 	width: 50vw;
 	position: relative;
-	padding-bottom: 30px;
+	padding: 20px 40px 30px;
 `;
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	top: 20px;
-	right: 20px;
-	background: ${gray80};
+	top: 40px;
+	right: 40px;
 	width: 40px;
 	height: 40px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	.cls-1,
+	.cls-2 {
+		transition: all 0.3s ease;
+	}
+	&:hover {
+		.cls-1 {
+			stroke: ${primaryNavyBlue};
+		}
+		.cls-2 {
+			stroke: ${primaryBlue};
+		}
+	}
+`;
+
+export const ModalRow = styled('div')`
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 5px;
+	padding-bottom: 5px;
 `;

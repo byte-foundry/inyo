@@ -4,7 +4,11 @@ import styled from 'react-emotion';
 
 import QuoteCard from '../QuoteCard';
 import {
-	P, primaryNavyBlue, primaryBlue, gray20,
+	P,
+	primaryNavyBlue,
+	primaryBlue,
+	primaryWhite,
+	gray20,
 } from '../../utils/content';
 
 const QuoteStateListMain = styled('div')`
@@ -17,11 +21,12 @@ const QuoteStateTitle = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
-	margin-right: 10px;
+	margin: 10px 10px 10px 0;
 	padding: 14px 16px 15px 16px;
 	border: 1px solid ${gray20};
-	margin-bottom: 10px;
-	border-radius: 4px;
+	border-radius: 3px;
+	background-color: ${primaryWhite};
+	border-bottom: 3px solid ${primaryBlue};
 `;
 const QuoteStateQuantity = styled('label')`
 	font-size: 13px;
@@ -49,7 +54,7 @@ const quoteStateName = {
 	DRAFT: 'Brouillons',
 	SENT: 'Envoyés',
 	ACCEPTED: 'Acceptés',
-	REJECTED: 'Rejetées',
+	REJECTED: 'Rejetés',
 };
 
 class QuoteStateList extends Component {

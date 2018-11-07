@@ -69,10 +69,21 @@ export const UPDATE_USER = gql`
 `;
 
 export const UPDATE_USER_CONSTANTS = gql`
-	mutation UpdateUser($defaultDailyPrice: Int, $defaultVatRate: Int) {
+	mutation UpdateUser(
+		$defaultDailyPrice: Int
+		$defaultVatRate: Int
+		$workingFields: [String!]
+		$jobType: JobType
+		$interestedFeatures: [String!]
+		$hasUpcomingProject: Boolean
+	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
 			defaultVatRate: $defaultVatRate
+			workingFields: $workingFields
+			jobType: $jobType
+			interestedFeatures: $interestedFeatures
+			hasUpcomingProject: $hasUpcomingProject
 		) {
 			id
 			email
@@ -80,6 +91,10 @@ export const UPDATE_USER_CONSTANTS = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -267,8 +282,22 @@ export const REMOVE_SECTION = gql`
 `;
 // Item
 export const ADD_ITEM = gql`
-	mutation addItem($sectionId: ID!, $name: String!) {
-		addItem(sectionId: $sectionId, name: $name) {
+	mutation addItem(
+		$sectionId: ID!
+		$name: String!
+		$unitPrice: Int
+		$unit: Float
+		$vatRate: Int
+		$description: String
+	) {
+		addItem(
+			sectionId: $sectionId
+			name: $name
+			unitPrice: $unitPrice
+			unit: $unit
+			vatRate: $vatRate
+			description: $description
+		) {
 			id
 			name
 			unitPrice
@@ -277,6 +306,34 @@ export const ADD_ITEM = gql`
 			description
 			pendingUnit
 			status
+			comments {
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;
@@ -303,6 +360,36 @@ export const UPDATE_ITEM = gql`
 			unit
 			vatRate
 			description
+			pendingUnit
+			status
+			comments {
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;
@@ -318,11 +405,29 @@ export const UPDATE_VALIDATED_ITEM = gql`
 	) {
 		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
 			id
+			name
+			unitPrice
 			unit
+			vatRate
+			description
 			pendingUnit
 			status
 			comments {
-				text
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
 				author {
 					... on User {
 						firstName
@@ -457,8 +562,32 @@ export const ACCEPT_AMENDMENT = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -514,8 +643,32 @@ export const REJECT_AMENDMENT = gql`
 						unitPrice
 						unit
 						comments {
+							createdAt
 							id
-							#readByCustomer
+							views {
+								viewer {
+									... on User {
+										firstName
+										lastName
+									}
+									... on Customer {
+										firstName
+										lastName
+										name
+									}
+								}
+							}
+							author {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
 						pendingUnit
 						vatRate
@@ -543,6 +696,47 @@ export const REJECT_ITEM = gql`
 			id
 			status
 			unit
+		}
+	}
+`;
+
+export const POST_COMMENT = gql`
+	mutation postComment(
+		$itemId: ID!
+		$token: String
+		$comment: CommentInput!
+	) {
+		postComment(itemId: $itemId, token: $token, comment: $comment) {
+			id
+			comments {
+				createdAt
+				id
+				text
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;

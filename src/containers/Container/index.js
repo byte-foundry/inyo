@@ -21,7 +21,7 @@ const BodyMain = styled(Body)`
 
 Sentry.init({
 	dsn: 'https://d6ed2b1e0a594835b2f768405b6c5e90@sentry.io/1307916',
-	environment: process.env.NODE_ENV,
+	environment: process.env.REACT_APP_INYO_ENV,
 	release: 'inyo@v1.0.0',
 });
 GoogleAnalytics.initialize('UA-41962243-12');

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 import {
 	H1,
@@ -23,6 +23,7 @@ const KitchenSinkContainer = styled('div')`
 
 class Landing extends Component {
 	render() {
+		return <Redirect to="/app" />;
 		return (
 			<LandingMain>
 				<Link to="/app">Go to App</Link>

@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Query} from 'react-apollo';
+import {Query, Mutation} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
 import {templates} from '../../../utils/quote-templates';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
+import {EDIT_ITEMS} from '../../../utils/mutations';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
+import CompanyInfoModal from '../../../components/CompanyInfoModal';
 
 const Loading = styled('div')`
 	font-size: 30px;
@@ -34,7 +36,7 @@ class EditQuote extends Component {
 			{
 				position: toast.POSITION.TOP_RIGHT,
 				autoClose: 3000,
-				onClose: () => this.props.history.push('/app/quotes'),
+				onClose: () => this.props.history.push('/app/quotes?action=quote_sent'),
 			},
 		);
 	};
@@ -61,21 +63,24 @@ class EditQuote extends Component {
 				const data = cache.readQuery({
 					query: GET_ALL_QUOTES,
 				});
-				const updatedQuote = data.me.company.quotes.find(
-					quote => quote.id === sendQuote.id,
-				);
 
-				updatedQuote.status = sendQuote.status;
+				if (data.me && data.me.company && data.me.company.quotes) {
+					const updatedQuote = data.me.company.quotes.find(
+						quote => quote.id === sendQuote.id,
+					);
+
+					updatedQuote.status = sendQuote.status;
+				}
 				try {
-					cache.writeQuery({
-						query: GET_ALL_QUOTES,
-						data,
-					});
 					ReactGA.event({
 						category: 'Quote',
 						action: 'Sent quote',
 					});
 					this.toast();
+					cache.writeQuery({
+						query: GET_ALL_QUOTES,
+						data,
+					});
 				}
 				catch (e) {
 					throw new Error(e);
@@ -134,9 +139,20 @@ class EditQuote extends Component {
 		});
 	};
 
-	addItem = (sectionId, addItem) => {
+	addItem = (sectionId, addItemValues, addItem) => {
+		const {
+			name, vatRate, unit, unitPrice, description,
+		} = addItemValues;
+
 		addItem({
-			variables: {sectionId, name: 'Nouvelle tâche'},
+			variables: {
+				sectionId,
+				name,
+				vatRate,
+				unit: parseFloat(unit),
+				unitPrice,
+				description,
+			},
 			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
@@ -328,6 +344,12 @@ class EditQuote extends Component {
 		});
 	};
 
+	askForInfos = () => {
+		this.setState({
+			showInfoModal: true,
+		});
+	};
+
 	render() {
 		const {quoteId} = this.props.match.params;
 
@@ -382,9 +404,16 @@ class EditQuote extends Component {
 								removeItem={this.removeItem}
 								removeSection={this.removeSection}
 								addSection={this.addSection}
+								askForInfos={this.askForInfos}
 								updateOption={this.updateOption}
 								issuer={quote.issuer}
 							/>
+							{this.state.showInfoModal && (
+								<CompanyInfoModal
+									quoteId={quote.id}
+									submit={this.sendQuote}
+								/>
+							)}
 						</div>
 					);
 				}}

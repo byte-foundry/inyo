@@ -12,6 +12,11 @@ const FormElemMain = styled(P)`
 		&& css`
 			margin: 0;
 		`};
+	${props => props.onboarding
+		&& css`
+			margin: 10px 15px 10px 16px;
+			width: inherit;
+		`};
 `;
 
 class FormElem extends Component {
@@ -29,10 +34,15 @@ class FormElem extends Component {
 			required,
 			padded,
 			inline,
+			onboarding,
 		} = this.props;
 
 		return (
-			<FormElemMain padded={padded} inline={inline}>
+			<FormElemMain
+				padded={padded}
+				inline={inline}
+				onboarding={onboarding}
+			>
 				{this.props.label && (
 					<Label htmlFor={name} required={required}>
 						{label}

@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import {Mutation} from 'react-apollo';
 
 import {FINISH_ITEM} from '../../utils/mutations.js';
 import {GET_QUOTE_DATA} from '../../utils/queries.js';
 
-import PENDING from './pending.svg';
-import FINISHED from './finished.svg';
-import UPDATED from './updated.svg';
-import UPDATED_SENT from './updated_sent.svg';
+import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
+import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
+
+import {primaryNavyBlue, primaryBlue} from '../../utils/content';
 
 const TaskStatusMain = styled('div')`
 	position: relative;
@@ -17,24 +17,95 @@ const TaskStatusMain = styled('div')`
 	margin-right: 20px;
 `;
 
-const Status = styled('img')`
+const getTaskIconByStatus = (status) => {
+	switch (status) {
+	case 'PENDING':
+		return <TaskIcon />;
+	case 'FINISHED':
+		return <TaskIcon />;
+	case 'UPDATED':
+		return <PendingIcon />;
+	case 'UPDATED_SENT':
+		return <PendingIcon />;
+	case 'ADDED':
+		return <PendingIcon />;
+	case 'ADDED_SENT':
+		return <PendingIcon />;
+	default:
+		break;
+	}
+};
+
+const getTaskIconStylesByStatus = (props) => {
+	switch (props.status) {
+	case 'PENDING':
+		return css``;
+	case 'FINISHED':
+		return css`
+				.cls-1 {
+					stroke: ${primaryNavyBlue};
+				}
+				.cls-2 {
+					stroke: ${primaryBlue};
+				}
+			`;
+	case 'UPDATED':
+		return css``;
+	case 'UPDATED_SENT':
+		return css`
+				.cls-2 {
+					stroke: ${primaryBlue};
+				}
+				.cls-1 {
+					stroke: ${primaryNavyBlue};
+				}
+			`;
+	case 'ADDED':
+		return css``;
+	case 'ADDED_SENT':
+		return css`
+				.cls-2 {
+					stroke: ${primaryBlue};
+				}
+				.cls-1 {
+					stroke: ${primaryNavyBlue};
+				}
+			`;
+	default:
+		return css`
+				.cls-1,
+				.cls-2 {
+					stroke: pink !important;
+				}
+			`;
+	}
+};
+
+const Status = styled('div')`
 	width: 30px;
 	height: auto;
 	position: absolute;
-	top: 60%;
+	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING' ? 'pointer' : 'initial')};
-`;
+	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
 
-const taskImageByStatus = {
-	PENDING,
-	FINISHED,
-	UPDATED,
-	UPDATED_SENT,
-	ADDED: UPDATED,
-	ADDED_SENT: UPDATED_SENT,
-};
+	svg {
+		width: 30px;
+		${getTaskIconStylesByStatus};
+	}
+
+	&:hover {
+		.hover {
+			&.cls-1 {
+				stroke: ${primaryNavyBlue};
+			}
+			&.cls-2 {
+				stroke: ${primaryBlue};
+			}
+		}
+	}
+`;
 
 class TaskStatus extends Component {
 	select = () => {
@@ -84,6 +155,7 @@ class TaskStatus extends Component {
 			status, sectionId, itemId, mode, customerViewMode,
 		} = this.props;
 
+		console.log(status);
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItem => (
@@ -98,10 +170,9 @@ class TaskStatus extends Component {
 							}
 						}}
 					>
-						<Status
-							src={taskImageByStatus[status]}
-							status={status}
-						/>
+						<Status status={status} customer={customerViewMode}>
+							{getTaskIconByStatus(status)}
+						</Status>
 					</TaskStatusMain>
 				)}
 			</Mutation>

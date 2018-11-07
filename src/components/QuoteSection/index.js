@@ -4,6 +4,7 @@ import {Mutation} from 'react-apollo';
 import {cpus} from 'os';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
+import AddItem from './add-item';
 import {
 	H4,
 	H5,
@@ -44,13 +45,14 @@ class QuoteSection extends Component {
 	render() {
 		const {
 			data,
-			addItem,
 			editSectionTitle,
 			editItem,
-			sectionIndex,
 			removeItem,
 			mode,
 			customerViewMode,
+			refetch,
+			defaultDailyPrice,
+			quoteStatus,
 		} = this.props;
 
 		return (
@@ -106,23 +108,52 @@ class QuoteSection extends Component {
 						editItem={editItem}
 						removeItem={removeItem}
 						mode={mode}
+						refetch={refetch}
 					/>
 				))}
-
-				{!customerViewMode && (
+				{this.state.shouldDisplayAddItem && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (
-							<QuoteAction
-								theme="Link"
-								size="XSmall"
-								onClick={() => {
-									this.props.addItem(data.id, addItem);
+							<AddItem
+								item={{
+									name: 'Nouvelle tâche',
+									unit: 0,
+									unitPrice: defaultDailyPrice,
+									description: '',
 								}}
-							>
-								Ajouter une tâche
-							</QuoteAction>
+								remove={() => {
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+								done={(values) => {
+									this.props.addItem(
+										data.id,
+										values,
+										addItem,
+									);
+									this.setState({
+										shouldDisplayAddItem: false,
+									});
+								}}
+							/>
 						)}
 					</Mutation>
+				)}
+
+				{!customerViewMode
+					&& quoteStatus !== 'SENT' && (
+					<QuoteAction
+						theme="Link"
+						size="XSmall"
+						onClick={() => {
+							this.setState({
+								shouldDisplayAddItem: true,
+							});
+						}}
+					>
+							Ajouter une tâche
+					</QuoteAction>
 				)}
 			</QuoteSectionMain>
 		);

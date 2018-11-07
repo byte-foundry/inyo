@@ -9,6 +9,7 @@ import {
 	Input,
 	primaryWhite,
 	primaryNavyBlue,
+	primaryBlue,
 	FlexRow,
 } from '../../utils/content';
 
@@ -61,23 +62,27 @@ const parseDate = (dateString) => {
 };
 
 const SearchQuoteFormMain = styled(FlexRow)`
-	margin-bottom: 40px;
+	padding: 40px;
+	background-color: ${primaryWhite};
 `;
 
 const DateInput = styled(Input)`
-	background: ${primaryNavyBlue};
-	border-color: ${primaryNavyBlue};
-	color: ${primaryWhite};
+	background: ${primaryWhite};
+	border-color: ${primaryBlue};
+	border-left: 0px;
+	color: ${primaryNavyBlue};
 	margin-right: 10px;
+	padding: 18px 5px;
 	&:focus {
 		outline: none;
-		border-color: transparent;
 	}
 `;
 
 const SpanLabel = styled('span')`
-	background: ${primaryNavyBlue};
-	color: ${primaryWhite};
+	background: ${primaryWhite};
+	color: ${primaryNavyBlue};
+	border: 1px solid ${primaryBlue};
+	border-right: 0px;
 	padding: 15px 0px 12px 18px;
 `;
 

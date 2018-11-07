@@ -5,6 +5,7 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
 import AddressAutocomplete from '../AddressAutocomplete';
+import FileInput from '../FileInput';
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
 import {
 	Button,
@@ -201,6 +202,15 @@ class UserCompanyForm extends Component {
 														type="text"
 														label="N° TVA"
 														placeholder="FR 40 123456824"
+														padded
+													/>
+												</FlexRow>
+												<FlexRow justifyContent="space-between">
+													<FileInput
+														{...props}
+														name="logo"
+														onChange={setFieldValue}
+														label="Votre logo d'entreprise"
 														padded
 													/>
 												</FlexRow>

@@ -53,12 +53,10 @@ const getTaskIconStylesByStatus = (props) => {
 		return css``;
 	case 'UPDATED_SENT':
 		return css`
-				.cls-1,
 				.cls-2 {
 					stroke: ${primaryBlue};
 				}
-				.cls-3,
-				.cls-4 {
+				.cls-1 {
 					stroke: ${primaryNavyBlue};
 				}
 			`;
@@ -66,17 +64,20 @@ const getTaskIconStylesByStatus = (props) => {
 		return css``;
 	case 'ADDED_SENT':
 		return css`
-				.cls-1,
 				.cls-2 {
 					stroke: ${primaryBlue};
 				}
-				.cls-3,
-				.cls-4 {
+				.cls-1 {
 					stroke: ${primaryNavyBlue};
 				}
 			`;
 	default:
-		return css``;
+		return css`
+				.cls-1,
+				.cls-2 {
+					stroke: pink !important;
+				}
+			`;
 	}
 };
 
@@ -154,6 +155,7 @@ class TaskStatus extends Component {
 			status, sectionId, itemId, mode, customerViewMode,
 		} = this.props;
 
+		console.log(status);
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItem => (

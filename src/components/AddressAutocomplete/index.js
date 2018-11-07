@@ -66,7 +66,9 @@ class AddressAutocomplete extends Component {
 				{errors[name]
 					&& touched[name] && (
 					<ErrorInput className="input-feedback">
-						{errors && errors[name]}
+						{/* Yup does not provide a way to reduce errors to a parent object
+						so errors is always errors on street city, postalCode and country not on address */}
+						{errors && errors[name] && 'Requis'}
 					</ErrorInput>
 				)}
 			</AddressAutocompleteMain>

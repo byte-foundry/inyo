@@ -20,6 +20,7 @@ import {
 	Label,
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
+import FormSelect from '../../../components/FormSelect';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
 import {CREATE_QUOTE} from '../../../utils/mutations';
 import {GET_ALL_QUOTES, GET_USER_INFOS} from '../../../utils/queries';
@@ -103,6 +104,7 @@ class CreateQuoteForm extends React.Component {
 											lastName: '',
 											email: '',
 											quoteTitle: '',
+											title: '',
 										}}
 										validate={(values) => {
 											const errors = {};
@@ -122,14 +124,6 @@ class CreateQuoteForm extends React.Component {
 													&& values.customer;
 
 												if (newCustomer) {
-													if (!values.firstName) {
-														errors.firstName
-															= 'Requis';
-													}
-													if (!values.lastName) {
-														errors.lastName
-															= 'Requis';
-													}
 													if (!values.address) {
 														errors.address
 															= 'Requis';
@@ -187,6 +181,7 @@ class CreateQuoteForm extends React.Component {
 													lastName: values.lastName,
 													email: values.email,
 													address: values.address,
+													title: values.title,
 												};
 											}
 
@@ -243,6 +238,131 @@ class CreateQuoteForm extends React.Component {
 																	action:
 																		'Created quote',
 																});
+																window.$crisp.push(
+																	[
+																		'set',
+																		'session:event',
+																		[
+																			[
+																				[
+																					'quote_created',
+																					{
+																						template:
+																							values.template,
+																					},
+																					'blue',
+																				],
+																			],
+																		],
+																	],
+																);
+																const quoteNumber = window.$crisp.get(
+																	'session:data',
+																	'quote_count',
+																);
+
+																if (
+																	quoteNumber
+																) {
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:data',
+																			[
+																				[
+																					[
+																						'quote_count',
+																						quoteNumber
+																							+ 1,
+																					],
+																				],
+																			],
+																		],
+																	);
+																}
+																else {
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:data',
+																			[
+																				[
+																					[
+																						'quote_count',
+																						1,
+																					],
+																				],
+																			],
+																		],
+																	);
+																}
+																if (
+																	variables.customer
+																) {
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:event',
+																			[
+																				[
+																					[
+																						'customer_created',
+																						{},
+																						'pink',
+																					],
+																				],
+																			],
+																		],
+																	);
+																	const customerNumber = window.$crisp.get(
+																		'session:data',
+																		'customer_count',
+																	);
+
+																	if (
+																		customerNumber
+																	) {
+																		window.$crisp.push(
+																			[
+																				'set',
+																				'session:data',
+																				[
+																					[
+																						[
+																							'customer_count',
+																							customerNumber
+																								+ 1,
+																						],
+																					],
+																				],
+																			],
+																		);
+																	}
+																	else {
+																		window.$crisp.push(
+																			[
+																				'set',
+																				'session:data',
+																				[
+																					[
+																						[
+																							'customer_count',
+																							1,
+																						],
+																					],
+																				],
+																			],
+																		);
+																	}
+																	ReactGA.event(
+																		{
+																			category:
+																				'Customer',
+																			action:
+																				'Created customer',
+																		},
+																	);
+																}
 															}
 															catch (e) {
 																console.log(e);
@@ -370,14 +490,40 @@ class CreateQuoteForm extends React.Component {
 																				plus
 																				?
 																		</p>
-
-																		<FormElem
-																			{...props}
-																			label="Le prénom de votre contact"
-																			name="firstName"
-																			placeholder="John"
-																			required
-																		/>
+																		<FlexRow
+																		>
+																			<FormSelect
+																				{...props}
+																				label="Civilité"
+																				name="title"
+																				paddedRight
+																				options={[
+																					{
+																						value: undefined,
+																						label:
+																								'',
+																					},
+																					{
+																						value:
+																								'MONSIEUR',
+																						label:
+																								'M.',
+																					},
+																					{
+																						value:
+																								'MADAME',
+																						label:
+																								'Mme',
+																					},
+																				]}
+																			/>
+																			<FormElem
+																				{...props}
+																				label="Le prénom de votre contact"
+																				name="firstName"
+																				placeholder="John"
+																			/>
+																		</FlexRow>
 																		<FormElem
 																			{...props}
 																			label="Le nom de votre contact"
@@ -409,7 +555,7 @@ class CreateQuoteForm extends React.Component {
 															<FormSection right>
 																<SubTitle>
 																	2. Votre
-																	Projet
+																	projet
 																</SubTitle>
 																<Label>
 																	Nous pouvons

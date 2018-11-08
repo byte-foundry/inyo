@@ -18,7 +18,7 @@ const Loading = styled('div')`
 class QuoteCustomerView extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {mode: 'proposal'};
+		this.state = {mode: 'proposal', isCrispLoggedIn: false};
 	}
 
 	acceptOrRejectAmendment = async (quoteId, token, acceptOrRejectAmendment) => acceptOrRejectAmendment({
@@ -148,6 +148,28 @@ class QuoteCustomerView extends Component {
 							),
 						0,
 					);
+
+					if (!this.state.isCrispLoggedIn && data.quote.customer) {
+						window.$crisp.push([
+							'set',
+							'user:email',
+							[data.quote.customer.email],
+						]);
+						window.$crisp.push([
+							'set',
+							'user:nickname',
+							[
+								`${data.quote.customer.firstName} ${
+									data.quote.customer.lastName
+								} (${data.quote.customer.name})`,
+							],
+						]);
+						window.$crisp.push([
+							'set',
+							'session:segments',
+							[['customer']],
+						]);
+					}
 
 					return (
 						<div>

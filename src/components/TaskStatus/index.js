@@ -124,6 +124,11 @@ class TaskStatus extends Component {
 			},
 		},
 		update: (cache, {data: {finishItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', {}, 'yellow']]],
+			]);
 			const data = cache.readQuery({
 				query: GET_QUOTE_DATA,
 				variables: {quoteId: this.props.match.params.quoteId},

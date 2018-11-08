@@ -4,7 +4,7 @@ import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
 import {
 	Button,
 	FlexRow,
@@ -13,9 +13,10 @@ import {
 	ErrorInput,
 } from '../../utils/content';
 import FormElem from '../FormElem';
+import FormCheckbox from '../FormCheckbox';
 import {GET_USER_INFOS} from '../../utils/queries';
 
-const UserQuoteSettingsFormMain = styled('div')``;
+const UserDataFormMain = styled('div')``;
 
 const FormContainer = styled('div')``;
 const ProfileSection = styled('div')`
@@ -31,59 +32,49 @@ const UpdateButton = styled(Button)`
 	margin-bottom: 80px;
 `;
 
-class UserQuoteSettingsForm extends Component {
+class UserDataForm extends Component {
 	constructor(props) {
 		super(props);
 	}
 
 	render() {
-		const {defaultDailyPrice, defaultVatRate} = this.props.data;
+		const {
+			askSendQuoteConfirmation,
+			askItemFinishConfirmation,
+		} = this.props.data.settings;
 
 		return (
-			<UserQuoteSettingsFormMain>
-				<Mutation mutation={UPDATE_USER_CONSTANTS}>
+			<UserDataFormMain>
+				<Mutation mutation={UPDATE_USER_SETTINGS}>
 					{updateUser => (
 						<Formik
 							initialValues={{
-								defaultDailyPrice: defaultDailyPrice || 350,
-								defaultVatRate: defaultVatRate || 20,
+								askSendQuoteConfirmation,
+								askItemFinishConfirmation,
 							}}
 							validationSchema={Yup.object().shape({
-								defaultVatRate: Yup.number(
-									'Doit être un nombre',
-								).required('Requis'),
-								defaultDailyPrice: Yup.number(
-									'Doit être un nombre',
-								).required('Requis'),
+								askItemFinishConfirmation: Yup.boolean().required(
+									'Requis',
+								),
+								askSendQuoteConfirmation: Yup.boolean().required(
+									'Requis',
+								),
 							})}
 							onSubmit={async (values, actions) => {
-								actions.setSubmitting(false);
-								console.log(values);
 								try {
 									updateUser({
 										variables: {
-											defaultVatRate:
-												values.defaultVatRate,
-											defaultDailyPrice:
-												values.defaultDailyPrice,
+											settings: {
+												askSendQuoteConfirmation:
+													values.askSendQuoteConfirmation,
+												askItemFinishConfirmation:
+													values.askItemFinishConfirmation,
+											},
 										},
 										update: (
 											cache,
 											{data: {updateUser}},
 										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'updated_quote_settings_data',
-															{},
-															'green',
-														],
-													],
-												],
-											]);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
@@ -96,8 +87,7 @@ class UserQuoteSettingsForm extends Component {
 												});
 												ReactGA.event({
 													category: 'User',
-													action:
-														'Updated quote settings',
+													action: 'Updated user data',
 												});
 												this.props.done();
 											}
@@ -108,7 +98,6 @@ class UserQuoteSettingsForm extends Component {
 									});
 								}
 								catch (error) {
-									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
@@ -133,26 +122,30 @@ class UserQuoteSettingsForm extends Component {
 										<ProfileSection>
 											<FormContainer>
 												<FlexRow justifyContent="space-between">
-													<FormElem
+													<FormCheckbox
 														{...props}
-														name="defaultDailyPrice"
-														type="number"
-														label="Taux journée par défaut"
-														placeholder="350"
-														padded
+														name="askSendQuoteConfirmation"
+														type="checkbox"
+														label="Toujours me demander confirmation lors de l'envoi d'un devis"
 														required
 													/>
-													<FormElem
+												</FlexRow>
+												<FlexRow justifyContent="space-between">
+													<FormCheckbox
 														{...props}
-														name="defaultVatRate"
-														type="number"
-														label="Taux de TVA"
-														placeholder="20"
-														padded
+														name="askItemFinishConfirmation"
+														type="checkbox"
+														label="Toujours me demander confirmation lors de la validation d'une tâche"
 														required
 													/>
 												</FlexRow>
 											</FormContainer>
+											{status
+												&& status.msg && (
+												<ErrorInput>
+													{status.msg}
+												</ErrorInput>
+											)}
 										</ProfileSection>
 										<UpdateButton
 											theme="Primary"
@@ -167,9 +160,9 @@ class UserQuoteSettingsForm extends Component {
 						</Formik>
 					)}
 				</Mutation>
-			</UserQuoteSettingsFormMain>
+			</UserDataFormMain>
 		);
 	}
 }
 
-export default UserQuoteSettingsForm;
+export default UserDataForm;

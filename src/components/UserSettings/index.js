@@ -127,7 +127,6 @@ class UserDataForm extends Component {
 														name="askSendQuoteConfirmation"
 														type="checkbox"
 														label="Toujours me demander confirmation lors de l'envoi d'un devis"
-														required
 													/>
 												</FlexRow>
 												<FlexRow justifyContent="space-between">
@@ -136,7 +135,6 @@ class UserDataForm extends Component {
 														name="askItemFinishConfirmation"
 														type="checkbox"
 														label="Toujours me demander confirmation lors de la validation d'une tâche"
-														required
 													/>
 												</FlexRow>
 											</FormContainer>

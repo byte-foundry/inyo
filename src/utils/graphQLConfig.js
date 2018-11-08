@@ -8,7 +8,6 @@ import {
 	InMemoryCache,
 	IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
-import introspectionQueryResultData from './fragmentTypes.json';
 import {createUploadLink} from 'apollo-upload-client'; // eslint-disable-line import/no-extraneous-dependencies
 import introspectionQueryResultData from './fragmentTypes.json';
 import {GRAPHQL_API} from './constants';

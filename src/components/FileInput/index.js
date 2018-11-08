@@ -106,7 +106,7 @@ class FileInput extends Component {
 					<PreviewContainer>
 						{(defaultValue || this.state.preview) && (
 							<img
-								src={this.state.preview || defaultValue}
+								src={this.state.preview || defaultValue.url}
 								alt="Company Logo"
 							/>
 						)}

@@ -126,6 +126,9 @@ export const GET_QUOTE_DATA = gql`
 				name
 				email
 				phone
+				logo {
+					url
+				}
 				address {
 					street
 					city
@@ -216,6 +219,9 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 					city
 					postalCode
 					country
+				}
+				logo {
+					url
 				}
 				owner {
 					defaultVatRate

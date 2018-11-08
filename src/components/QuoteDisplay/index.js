@@ -23,6 +23,7 @@ import {
 	REJECT_QUOTE,
 } from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
+import {dateDiff} from '../../utils/functions';
 import {
 	H1,
 	H3,
@@ -360,6 +361,29 @@ class QuoteDisplay extends Component {
 																			.customerToken,
 																		acceptAmendment,
 																	);
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:event',
+																			[
+																				[
+																					[
+																						'amendment_accepted',
+																						{
+																							elapsedTime: dateDiff(
+																								'd',
+																								new Date(
+																									quote.issuedAt,
+																								),
+																								new Date(),
+																							),
+																						},
+																						'pink',
+																					],
+																				],
+																			],
+																		],
+																	);
 																}}
 															>
 																	Accepter
@@ -385,6 +409,29 @@ class QuoteDisplay extends Component {
 																			.params
 																			.customerToken,
 																		rejectAmendment,
+																	);
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:event',
+																			[
+																				[
+																					[
+																						'amendment_rejected',
+																						{
+																							elapsedTime: dateDiff(
+																								'd',
+																								new Date(
+																									quote.issuedAt,
+																								),
+																								new Date(),
+																							),
+																						},
+																						'pink',
+																					],
+																				],
+																			],
+																		],
 																	);
 																}}
 															>
@@ -417,6 +464,29 @@ class QuoteDisplay extends Component {
 																			.customerToken,
 																		acceptQuote,
 																	);
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:event',
+																			[
+																				[
+																					[
+																						'quote_accepted',
+																						{
+																							elapsedTime: dateDiff(
+																								'd',
+																								new Date(
+																									quote.issuedAt,
+																								),
+																								new Date(),
+																							),
+																						},
+																						'pink',
+																					],
+																				],
+																			],
+																		],
+																	);
 																}}
 															>
 																	Accepter le
@@ -442,6 +512,29 @@ class QuoteDisplay extends Component {
 																			.params
 																			.customerToken,
 																		rejectQuote,
+																	);
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:event',
+																			[
+																				[
+																					[
+																						'quote_rejected',
+																						{
+																							elapsedTime: dateDiff(
+																								'd',
+																								new Date(
+																									quote.issuedAt,
+																								),
+																								new Date(),
+																							),
+																						},
+																						'pink',
+																					],
+																				],
+																			],
+																		],
 																	);
 																}}
 															>

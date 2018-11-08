@@ -6,6 +6,7 @@ import styled from 'react-emotion';
 import ReactGA from 'react-ga';
 import {templates} from '../../../utils/quote-templates';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
+import {dateDiff} from '../../../utils/functions';
 import {EDIT_ITEMS} from '../../../utils/mutations';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
@@ -71,11 +72,48 @@ class EditQuote extends Component {
 
 					updatedQuote.status = sendQuote.status;
 				}
+
+				const quoteData = cache.readQuery({
+					query: GET_QUOTE_DATA,
+					variables: {quoteId},
+				});
+
+				let totalItems = 0;
+				let totalSections = 0;
+
+				quoteData.quote.options[0].sections.forEach((section) => {
+					totalSections += 1;
+					section.items.forEach((item) => {
+						totalItems += 1;
+					});
+				});
+
 				try {
 					ReactGA.event({
 						category: 'Quote',
 						action: 'Sent quote',
 					});
+					window.$crisp.push([
+						'set',
+						'session:event',
+						[
+							[
+								[
+									'quote_sent',
+									{
+										sectionsCount: totalSections,
+										itemsCount: totalItems,
+										elapsedTime: dateDiff(
+											'd',
+											new Date(quoteData.quote.createdAt),
+											new Date(),
+										),
+									},
+									'blue',
+								],
+							],
+						],
+					]);
 					this.toast();
 					cache.writeQuery({
 						query: GET_ALL_QUOTES,
@@ -169,6 +207,11 @@ class EditQuote extends Component {
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
+					window.$crisp.push([
+						'set',
+						'session:event',
+						[[['item_added', {}, 'yellow']]],
+					]);
 				}
 				catch (e) {
 					throw new Error(e);
@@ -205,6 +248,11 @@ class EditQuote extends Component {
 				},
 			},
 			update: (cache, {data: {updateItem}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['item_edited', {}, 'yellow']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -233,6 +281,11 @@ class EditQuote extends Component {
 	};
 
 	removeItem = (itemId, sectionId, removeItem) => {
+		window.$crisp.push([
+			'set',
+			'session:event',
+			[[['item_removed', {}, 'yellow']]],
+		]);
 		removeItem({
 			variables: {itemId},
 			update: (cache, {data: {removeItem}}) => {
@@ -267,6 +320,11 @@ class EditQuote extends Component {
 		addSection({
 			variables: {optionId, name: 'Nouvelle section'},
 			update: (cache, {data: {addSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_added', {}, 'orange']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -292,6 +350,11 @@ class EditQuote extends Component {
 		updateSection({
 			variables: {sectionId, name},
 			update: (cache, {data: {updateSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_edited', {}, 'orange']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -320,6 +383,11 @@ class EditQuote extends Component {
 		removeSection({
 			variables: {sectionId},
 			update: (cache, {data: {removeSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_removed', {}, 'orange']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -348,6 +416,11 @@ class EditQuote extends Component {
 		this.setState({
 			showInfoModal: true,
 		});
+		window.$crisp.push([
+			'set',
+			'session:event',
+			[[['asked_for_customer_infos', {}, 'green']]],
+		]);
 	};
 
 	render() {

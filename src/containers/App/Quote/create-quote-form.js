@@ -430,7 +430,7 @@ class CreateQuoteForm extends React.Component {
 															<FormSection right>
 																<SubTitle>
 																	2. Votre
-																	Projet
+																	projet
 																</SubTitle>
 																<Label>
 																	Nous pouvons

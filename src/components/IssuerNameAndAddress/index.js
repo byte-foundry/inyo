@@ -48,6 +48,11 @@ const Address = styled(P)`
 	margin-bottom: 5px;
 `;
 
+const CompanyLogo = styled('img')`
+	max-width: 100%;
+	max-height: 200px;
+`;
+
 class IssuerNameAndAddress extends Component {
 	render() {
 		const {
@@ -57,10 +62,15 @@ class IssuerNameAndAddress extends Component {
 			address,
 			siret,
 			phone,
+			logo,
 		} = this.props.issuer;
 
 		return (
 			<ClientAddress>
+				{logo
+					&& logo.url && (
+					<CompanyLogo src={logo.url} alt="Company logo" />
+				)}
 				<CompanyName>{name}</CompanyName>
 				<ContactName>
 					{firstName} {lastName}

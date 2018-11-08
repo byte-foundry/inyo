@@ -238,6 +238,131 @@ class CreateQuoteForm extends React.Component {
 																	action:
 																		'Created quote',
 																});
+																window.$crisp.push(
+																	[
+																		'set',
+																		'session:event',
+																		[
+																			[
+																				[
+																					'quote_created',
+																					{
+																						template:
+																							values.template,
+																					},
+																					'blue',
+																				],
+																			],
+																		],
+																	],
+																);
+																const quoteNumber = window.$crisp.get(
+																	'session:data',
+																	'quote_count',
+																);
+
+																if (
+																	quoteNumber
+																) {
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:data',
+																			[
+																				[
+																					[
+																						'quote_count',
+																						quoteNumber
+																							+ 1,
+																					],
+																				],
+																			],
+																		],
+																	);
+																}
+																else {
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:data',
+																			[
+																				[
+																					[
+																						'quote_count',
+																						1,
+																					],
+																				],
+																			],
+																		],
+																	);
+																}
+																if (
+																	variables.customer
+																) {
+																	window.$crisp.push(
+																		[
+																			'set',
+																			'session:event',
+																			[
+																				[
+																					[
+																						'customer_created',
+																						{},
+																						'pink',
+																					],
+																				],
+																			],
+																		],
+																	);
+																	const customerNumber = window.$crisp.get(
+																		'session:data',
+																		'customer_count',
+																	);
+
+																	if (
+																		customerNumber
+																	) {
+																		window.$crisp.push(
+																			[
+																				'set',
+																				'session:data',
+																				[
+																					[
+																						[
+																							'customer_count',
+																							customerNumber
+																								+ 1,
+																						],
+																					],
+																				],
+																			],
+																		);
+																	}
+																	else {
+																		window.$crisp.push(
+																			[
+																				'set',
+																				'session:data',
+																				[
+																					[
+																						[
+																							'customer_count',
+																							1,
+																						],
+																					],
+																				],
+																			],
+																		);
+																	}
+																	ReactGA.event(
+																		{
+																			category:
+																				'Customer',
+																			action:
+																				'Created customer',
+																		},
+																	);
+																}
 															}
 															catch (e) {
 																console.log(e);

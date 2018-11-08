@@ -123,6 +123,7 @@ export const GET_QUOTE_DATA = gql`
 			template
 			name
 			status
+			createdAt
 			issuer {
 				name
 				email
@@ -208,6 +209,7 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 			template
 			name
 			status
+			issuedAt
 			issuer {
 				name
 				email
@@ -225,6 +227,9 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 			}
 			customer {
 				name
+				firstName
+				lastName
+				email
 				address {
 					street
 					city

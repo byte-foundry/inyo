@@ -71,6 +71,19 @@ class UserQuoteSettingsForm extends Component {
 											cache,
 											{data: {updateUser}},
 										) => {
+											window.$crisp.push([
+												'set',
+												'session:event',
+												[
+													[
+														[
+															'updated_quote_settings_data',
+															{},
+															'green',
+														],
+													],
+												],
+											]);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});

@@ -41,15 +41,23 @@ class App extends Component {
 				{({data, loading, error}) => {
 					if (loading) return <Loading>Chargement...</Loading>;
 					if (data && data.me) {
+						window.$crisp.push([
+							'set',
+							'user:email',
+							[data.me.email],
+						]);
+						window.$crisp.push([
+							'set',
+							'user:nickname',
+							[`${data.me.firstName} ${data.me.lastName}`],
+						]);
+						window.$crisp.push([
+							'set',
+							'session:segments',
+							[['user']],
+						]);
 						Sentry.configureScope((scope) => {
 							scope.setUser({email: data.me.email});
-						});
-						window.Intercom('boot', {
-							app_id: 'imlnj7st',
-							name: String(
-								`${data.me.firstName} ${data.me.lastName}`,
-							).trim(),
-							email: data.me.email,
 						});
 						if (!this.state.uid_set) {
 							ReactGA.set({userId: data.me.id});

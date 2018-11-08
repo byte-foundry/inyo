@@ -21,7 +21,11 @@ class TasksListUser extends Component {
 				comment: {text: comment},
 			},
 			update: (cache, {data: {updateValidatedItem}}) => {
-				console.log(updateValidatedItem);
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['item_edited', {}, 'yellow']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
@@ -71,6 +75,11 @@ class TasksListUser extends Component {
 			catch (e) {
 				throw new Error(e);
 			}
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['amendment_sent', {}, 'blue']]],
+			]);
 			ReactGA.event({
 				category: 'Quote',
 				action: 'Sent amendment',
@@ -104,6 +113,11 @@ class TasksListUser extends Component {
 				description,
 			},
 			update: (cache, {data: {addItem}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['item_added', {}, 'yellow']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_QUOTE_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},

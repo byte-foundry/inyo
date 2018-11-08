@@ -129,6 +129,23 @@ class CommentModal extends Component {
 																},
 															},
 														) => {
+															window.$crisp.push([
+																'set',
+																'session:event',
+																[
+																	[
+																		[
+																			'comment_sent',
+																			{
+																				from: customerToken
+																					? 'Customer'
+																					: 'User',
+																			},
+																			'purple',
+																		],
+																	],
+																],
+															]);
 															const data = cache.readQuery(
 																{
 																	query: GET_COMMENTS_BY_ITEM,

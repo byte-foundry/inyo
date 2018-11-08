@@ -85,6 +85,10 @@ export const GET_USER_INFOS = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askSendQuoteConfirmation
+			}
 		}
 	}
 `;

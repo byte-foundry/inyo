@@ -48,6 +48,7 @@ class UserCompanyForm extends Component {
 			rm,
 			vat,
 			submit,
+			logo,
 		} = this.props.data;
 		const {buttonText, done} = this.props;
 
@@ -212,6 +213,7 @@ class UserCompanyForm extends Component {
 														name="logo"
 														onChange={setFieldValue}
 														label="Votre logo d'entreprise"
+														defaultValue={logo}
 														padded
 													/>
 												</FlexRow>

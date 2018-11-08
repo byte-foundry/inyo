@@ -84,6 +84,7 @@ class FileInput extends Component {
 			padded,
 			inline,
 			onboarding,
+			defaultValue,
 		} = this.props;
 
 		return (
@@ -103,8 +104,11 @@ class FileInput extends Component {
 						<p>Ou cliquez pour sélectionner un fichier à ajouter</p>
 					</StyledDropZone>
 					<PreviewContainer>
-						{this.state.preview && (
-							<img src={this.state.preview} alt="Company Logo" />
+						{(defaultValue || this.state.preview) && (
+							<img
+								src={this.state.preview || defaultValue}
+								alt="Company Logo"
+							/>
 						)}
 					</PreviewContainer>
 				</FileInputContainer>

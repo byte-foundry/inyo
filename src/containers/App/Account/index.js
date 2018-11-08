@@ -23,6 +23,7 @@ import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserQuoteSettingsForm from '../../../components/UserQuoteSettingsForm';
+import UserSettings from '../../../components/UserSettings';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
@@ -199,6 +200,24 @@ class Account extends Component {
 											</ProfileSideElem>
 											<ProfileSideElem
 												active={
+													activeItem === 'settings'
+												}
+												onClick={() => {
+													this.settings.scrollIntoView(
+														{
+															block: 'start',
+															behavior: 'smooth',
+														},
+													);
+													this.setState({
+														activeItem: 'settings',
+													});
+												}}
+											>
+												Vos options
+											</ProfileSideElem>
+											<ProfileSideElem
+												active={
 													activeItem === 'account'
 												}
 												onClick={() => {
@@ -248,6 +267,17 @@ class Account extends Component {
 												Informations de devis
 											</ProfileTitle>
 											<UserQuoteSettingsForm
+												data={me}
+												done={() => this.toast()}
+											/>
+											<ProfileTitle
+												innerRef={(elem) => {
+													this.settings = elem;
+												}}
+											>
+												Vos options
+											</ProfileTitle>
+											<UserSettings
 												data={me}
 												done={() => this.toast()}
 											/>

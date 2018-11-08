@@ -20,6 +20,7 @@ import {
 	Label,
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
+import FormSelect from '../../../components/FormSelect';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
 import {CREATE_QUOTE} from '../../../utils/mutations';
 import {GET_ALL_QUOTES, GET_USER_INFOS} from '../../../utils/queries';
@@ -103,6 +104,7 @@ class CreateQuoteForm extends React.Component {
 											lastName: '',
 											email: '',
 											quoteTitle: '',
+											title: '',
 										}}
 										validate={(values) => {
 											const errors = {};
@@ -122,14 +124,6 @@ class CreateQuoteForm extends React.Component {
 													&& values.customer;
 
 												if (newCustomer) {
-													if (!values.firstName) {
-														errors.firstName
-															= 'Requis';
-													}
-													if (!values.lastName) {
-														errors.lastName
-															= 'Requis';
-													}
 													if (!values.address) {
 														errors.address
 															= 'Requis';
@@ -187,6 +181,7 @@ class CreateQuoteForm extends React.Component {
 													lastName: values.lastName,
 													email: values.email,
 													address: values.address,
+													title: values.title,
 												};
 											}
 
@@ -370,14 +365,40 @@ class CreateQuoteForm extends React.Component {
 																				plus
 																				?
 																		</p>
-
-																		<FormElem
-																			{...props}
-																			label="Le prénom de votre contact"
-																			name="firstName"
-																			placeholder="John"
-																			required
-																		/>
+																		<FlexRow
+																		>
+																			<FormSelect
+																				{...props}
+																				label="Civilité"
+																				name="title"
+																				paddedRight
+																				options={[
+																					{
+																						value: undefined,
+																						label:
+																								'',
+																					},
+																					{
+																						value:
+																								'MONSIEUR',
+																						label:
+																								'M.',
+																					},
+																					{
+																						value:
+																								'MADAME',
+																						label:
+																								'Mme',
+																					},
+																				]}
+																			/>
+																			<FormElem
+																				{...props}
+																				label="Le prénom de votre contact"
+																				name="firstName"
+																				placeholder="John"
+																			/>
+																		</FlexRow>
 																		<FormElem
 																			{...props}
 																			label="Le nom de votre contact"

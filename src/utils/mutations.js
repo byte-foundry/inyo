@@ -64,6 +64,10 @@ export const UPDATE_USER = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askSendQuoteConfirmation
+			}
 		}
 	}
 `;
@@ -111,10 +115,51 @@ export const UPDATE_USER_CONSTANTS = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askSendQuoteConfirmation
+			}
 		}
 	}
 `;
 
+// Update User settings
+export const UPDATE_USER_SETTINGS = gql`
+	mutation UpdateUser($settings: SettingsInput!) {
+		updateUser(settings: $settings) {
+			id
+			email
+			firstName
+			lastName
+			defaultDailyPrice
+			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
+			company {
+				id
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				phone
+				siret
+				rcs
+				rm
+				vat
+			}
+			settings {
+				askItemFinishConfirmation
+				askSendQuoteConfirmation
+			}
+		}
+	}
+`;
 /** ******** COMPANY MUTATIONS ********* */
 
 export const UPDATE_USER_COMPANY = gql`
@@ -141,6 +186,10 @@ export const UPDATE_USER_COMPANY = gql`
 				rcs
 				rm
 				vat
+			}
+			settings {
+				askItemFinishConfirmation
+				askSendQuoteConfirmation
 			}
 		}
 	}

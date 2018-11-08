@@ -112,7 +112,7 @@ class FileInput extends Component {
 						)}
 					</PreviewContainer>
 				</FileInputContainer>
-
+ 
 				{errors[name]
 					&& touched[name] && (
 					<ErrorInput className="input-feedback">

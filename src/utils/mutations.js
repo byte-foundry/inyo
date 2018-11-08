@@ -186,6 +186,9 @@ export const UPDATE_USER_COMPANY = gql`
 				rcs
 				rm
 				vat
+				logo {
+					url
+				}
 			}
 			settings {
 				askItemFinishConfirmation

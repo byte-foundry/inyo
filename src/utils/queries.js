@@ -79,6 +79,9 @@ export const GET_USER_INFOS = gql`
 					postalCode
 					country
 				}
+				logo {
+					url
+				}
 				phone
 				siret
 				rcs

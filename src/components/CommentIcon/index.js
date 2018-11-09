@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 
 import {comment} from 'postcss';
-import {primaryWhite, gray20} from '../../utils/content';
+import {primaryWhite, primaryBlue, gray20} from '../../utils/content';
 
 const CommentIconMain = styled('div')`
 	background: ${props => (props.commentLength > 0 ? '#3860ff' : gray20)};
@@ -17,7 +17,15 @@ const CommentIconMain = styled('div')`
 	cursor: pointer;
 	margin-left: 1em;
 
-	&:after {
+	&::before {
+		content: "${props => (props.commentLength > 0 ? '' : '+')}";
+		position: relative;
+		font-weight: bold;
+		font-size: 14px;
+		color: ${primaryBlue};
+	}
+
+	&::after {
 		border-top: solid 5px
 			${props => (props.commentLength > 0 ? '#3860ff' : gray20)};
 		border-left: solid 5px transparent;

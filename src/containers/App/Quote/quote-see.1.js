@@ -60,7 +60,10 @@ class TasksListUserLegacy extends Component {
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
 				{({loading, error, data}) => {
 					if (loading) return <Loading />;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					const {
 						quote: {
 							options: [{sections}],

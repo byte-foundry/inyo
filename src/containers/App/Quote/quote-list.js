@@ -76,7 +76,10 @@ class ListQuotes extends Component {
 			<Query query={GET_ALL_QUOTES}>
 				{({loading, error, data}) => {
 					if (loading) return <Loading />;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					if (!quotes) {
 						this.setState({
 							quotes: data.me.company.quotes,

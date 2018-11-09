@@ -24,7 +24,10 @@ class CompanyInfoModal extends Component {
 			<Query query={GET_USER_INFOS}>
 				{({loading, error, data}) => {
 					if (loading) return <p>Chargement...</p>;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 
 					const {me} = data;
 

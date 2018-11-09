@@ -483,7 +483,10 @@ class EditQuote extends Component {
 					if (loading || !fetchedData.quote) {
 						return <Loading />;
 					}
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					const {quote} = fetchedData;
 
 					if (!this.state.selectedOption) {

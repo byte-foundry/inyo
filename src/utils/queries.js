@@ -104,6 +104,7 @@ export const GET_ALL_QUOTES = gql`
 				quotes {
 					id
 					name
+					viewedByCustomer
 					customer {
 						name
 					}
@@ -121,6 +122,7 @@ export const GET_QUOTE_DATA = gql`
 		quote(id: $quoteId) {
 			id
 			template
+			viewedByCustomer
 			name
 			status
 			createdAt

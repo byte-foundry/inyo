@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import styled from 'react-emotion';
+import styled, {keyframes} from 'react-emotion';
 
 import {
 	P,
@@ -12,7 +12,10 @@ import {
 	primaryWhite,
 } from '../../utils/content';
 
+import {ReactComponent as eyeIcon} from '../../utils/icons/eye.svg';
+
 const QuoteCardMain = styled('div')`
+	position: relative;
 	background-color: ${primaryWhite};
 	box-shadow: 0px 0px 8px ${alpha10};
 	cursor: pointer;
@@ -48,6 +51,67 @@ const Amount = styled('div')`
 	font-size: 24px;
 	color: ${primaryNavyBlue};
 	text-align: right;
+`;
+
+const pulsePB = keyframes`
+  0% {
+	stroke: "#dfe1e6";
+  }
+  50% {
+    stroke: ${primaryBlue};
+  }
+  100% {
+    stroke: "#dfe1e6";
+  }
+`;
+
+const pulsePNB = keyframes`
+  0% {
+	stroke: "#b0b0b5";
+  }
+  50% {
+    stroke: ${primaryNavyBlue};
+  }
+  100% {
+    stroke: "#b0b0b5";
+  }
+`;
+
+const pulsePNBF = keyframes`
+  0% {
+	fill: "#b0b0b5";
+  }
+  50% {
+    fill: ${primaryNavyBlue};
+  }
+  100% {
+    fill: "#b0b0b5";
+  }
+`;
+
+const EyeIcon = styled(eyeIcon)`
+	position: absolute;
+	left: 16px;
+	bottom: 20px;
+	width: 30px;
+	height: auto;
+	opacity: ${props => (props.viewedByCustomer ? '1' : '0.2')};
+	.cls-1 {
+		animation: ${props => (props.viewedByCustomer
+		? `${pulsePB} 3s ease-in-out infinite`
+		: 'none')};
+	}
+	.cls-2,
+	.cls-3 {
+		animation: ${props => (props.viewedByCustomer
+		? `${pulsePNB} 3s ease-in-out infinite`
+		: 'none')};
+	}
+	.cls-4 {
+		animation: ${props => (props.viewedByCustomer
+		? `${pulsePNBF} 3s ease-in-out infinite`
+		: 'none')};
+	}
 `;
 
 class QuoteCard extends Component {
@@ -89,6 +153,9 @@ class QuoteCard extends Component {
 					</DateOfIssue>
 				</CardHeader>
 				<Amount>{total || 0}€ H.T.</Amount>
+				{status === 'SENT' && (
+					<EyeIcon viewedByCustomer={quote.viewedByCustomer} />
+				)}
 			</QuoteCardMain>
 		);
 	}

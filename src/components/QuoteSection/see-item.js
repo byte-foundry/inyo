@@ -160,7 +160,7 @@ class Item extends Component {
 
 	render() {
 		const {
-			item, sectionId, editItem, mode,
+			item, sectionId, editItem, mode, quoteStatus,
 		} = this.props;
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;
@@ -246,6 +246,7 @@ class Item extends Component {
 						sectionId={sectionId}
 						mode={mode}
 						customerViewMode={customerViewMode}
+						quoteStatus={quoteStatus}
 					/>
 				)}
 				<ItemMain

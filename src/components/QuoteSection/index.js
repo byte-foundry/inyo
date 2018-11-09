@@ -109,6 +109,7 @@ class QuoteSection extends Component {
 						removeItem={removeItem}
 						mode={mode}
 						refetch={refetch}
+						quoteStatus={quoteStatus}
 					/>
 				))}
 				{this.state.shouldDisplayAddItem && (

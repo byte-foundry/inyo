@@ -42,6 +42,20 @@ class EditQuote extends Component {
 		);
 	};
 
+	toastDelete = () => {
+		toast.success(
+			<div>
+				<p>Le brouillon a été supprimé</p>
+				<p>Retour au menu principal.</p>
+			</div>,
+			{
+				position: toast.POSITION.TOP_RIGHT,
+				autoClose: 1000,
+				onClose: () => this.props.history.push('/app/quotes?action=quote_removed'),
+			},
+		);
+	};
+
 	setQuoteData = (templateName, EditItems) => {
 		const templateData = templates.find(e => e.name === templateName);
 
@@ -412,6 +426,41 @@ class EditQuote extends Component {
 		});
 	};
 
+	removeQuote = (quoteId, removeQuote) => {
+		window.$crisp.push([
+			'set',
+			'session:event',
+			[[['quote_removed', {}, 'blue']]],
+		]);
+		removeQuote({
+			variables: {quoteId},
+			update: (cache, {data: {removeQuote}}) => {
+				const data = cache.readQuery({
+					query: GET_ALL_QUOTES,
+				});
+
+				if (data.me && data.me.company && data.me.company.quotes) {
+					const quoteIndex = data.me.company.quotes.findIndex(
+						quote => quote.id === removeQuote.id,
+					);
+
+					data.me.company.quotes.splice(quoteIndex, 1);
+				}
+				try {
+					cache.writeQuery({
+						query: GET_ALL_QUOTES,
+						data,
+					});
+					this.toastDelete();
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	askForInfos = () => {
 		this.setState({
 			showInfoModal: true,
@@ -480,6 +529,7 @@ class EditQuote extends Component {
 								askForInfos={this.askForInfos}
 								updateOption={this.updateOption}
 								issuer={quote.issuer}
+								removeQuote={this.removeQuote}
 							/>
 							{this.state.showInfoModal && (
 								<CompanyInfoModal

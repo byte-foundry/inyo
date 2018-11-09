@@ -261,6 +261,14 @@ export const SEND_QUOTE = gql`
 	}
 `;
 
+export const REMOVE_QUOTE = gql`
+	mutation removeQuote($quoteId: ID!) {
+		removeQuote(id: $quoteId) {
+			id
+		}
+	}
+`;
+
 export const ACCEPT_QUOTE = gql`
 	# creating quote with a customer id or a new customer
 	mutation acceptQuote($quoteId: ID!, $token: String!) {

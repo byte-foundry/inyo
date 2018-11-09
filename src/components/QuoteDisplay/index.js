@@ -21,6 +21,7 @@ import {
 	REJECT_AMENDMENT,
 	ACCEPT_QUOTE,
 	REJECT_QUOTE,
+	REMOVE_QUOTE,
 } from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import {dateDiff} from '../../utils/functions';
@@ -42,6 +43,7 @@ import {
 	secondaryLightBlue,
 	gray50,
 	ToggleButton,
+	signalRed,
 } from '../../utils/content';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -95,7 +97,7 @@ const QuoteContent = styled('div')`
 
 const QuoteAction = styled(Button)`
 	text-decoration: none;
-	color: ${primaryBlue};
+	color: ${props => (props.theme === 'DeleteOutline' ? signalRed : primaryBlue)};
 	font-size: 13px;
 	transform: translateY(18px);
 	margin-top: 10px;
@@ -686,21 +688,42 @@ class QuoteDisplay extends Component {
 											</FlexColumn>
 										</QuoteContent>
 									</CenterContent>
-									<SideActions>
-										{issuer.name && (
-											<IssuerNameAndAddress
-												issuer={issuer}
+									<SideActions justifyContent="space-between">
+										<div>
+											{issuer.name && (
+												<IssuerNameAndAddress
+													issuer={issuer}
+												/>
+											)}
+											<CustomerNameAndAddress
+												customer={quote.customer}
 											/>
-										)}
-										<CustomerNameAndAddress
-											customer={quote.customer}
-										/>
-										{this.getQuoteTotal(
-											quoteOption,
-											customerViewMode
-												? quote.issuer.owner
-													.defaultVatRate
-												: data.me.defaultVatRate,
+											{this.getQuoteTotal(
+												quoteOption,
+												customerViewMode
+													? quote.issuer.owner
+														.defaultVatRate
+													: data.me.defaultVatRate,
+											)}
+										</div>
+										{mode === 'edit' && (
+											<Mutation mutation={REMOVE_QUOTE}>
+												{RemoveQuote => (
+													<QuoteAction
+														theme="DeleteOutline"
+														size="XSmall"
+														type="delete"
+														onClick={() => {
+															this.props.removeQuote(
+																quote.id,
+																RemoveQuote,
+															);
+														}}
+													>
+														Supprimer le brouillon
+													</QuoteAction>
+												)}
+											</Mutation>
 										)}
 									</SideActions>
 								</FlexRow>

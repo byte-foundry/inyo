@@ -120,6 +120,12 @@ const ButtonStyles = (props) => {
 				color: ${primaryBlue};
 				text-decoration: underline;
 			`;
+	case 'DeleteOutline':
+		return css`
+				background-color: transparent;
+				color: ${signalRed};
+				text-decoration: underline;
+			`;
 	case 'Outline':
 		return css`
 				border-color: ${primaryBlue};

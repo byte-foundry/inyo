@@ -410,8 +410,9 @@ const translate = keyframes`
 `;
 
 const BubbleIcon = styled(bubbleIcon)`
-	width: 150px;
+	width: 45px;
 	height: auto;
+	opacity: 0.5;
 	.circle {
 		transform-origin: center;
 		animation: ${rotate} 2s linear infinite;
@@ -419,14 +420,14 @@ const BubbleIcon = styled(bubbleIcon)`
 	}
 	.cls-2 {
 		transform-origin: center;
-		animation: ${translate} 2s ease-in-out infinite;
+		animation: ${translate} 1s ease-in-out infinite;
 		will-change: transform;
 	}
 	.dot-2 {
-		animation-delay: 0.3s;
+		animation-delay: 0.2s;
 	}
 	.dot-3 {
-		animation-delay: 0.6s;
+		animation-delay: 0.4s;
 	}
 `;
 

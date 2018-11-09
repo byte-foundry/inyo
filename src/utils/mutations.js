@@ -48,6 +48,10 @@ export const UPDATE_USER = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -57,6 +61,9 @@ export const UPDATE_USER = gql`
 					city
 					postalCode
 					country
+				}
+				logo {
+					url
 				}
 				phone
 				siret
@@ -109,6 +116,9 @@ export const UPDATE_USER_CONSTANTS = gql`
 					postalCode
 					country
 				}
+				logo {
+					url
+				}
 				phone
 				siret
 				rcs
@@ -147,6 +157,9 @@ export const UPDATE_USER_SETTINGS = gql`
 					postalCode
 					country
 				}
+				logo {
+					url
+				}
 				phone
 				siret
 				rcs
@@ -171,6 +184,10 @@ export const UPDATE_USER_COMPANY = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -181,14 +198,14 @@ export const UPDATE_USER_COMPANY = gql`
 					postalCode
 					country
 				}
+				logo {
+					url
+				}
 				phone
 				siret
 				rcs
 				rm
 				vat
-				logo {
-					url
-				}
 			}
 			settings {
 				askItemFinishConfirmation

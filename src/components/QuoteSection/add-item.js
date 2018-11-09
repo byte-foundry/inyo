@@ -76,7 +76,7 @@ class AddItem extends Component {
 					<Query query={GET_ITEMS}>
 						{({loading, error, data}) => {
 							if (loading) {
-								return <Loading>Chargement...</Loading>;
+								return <Loading />;
 							}
 							if (!loading && data && data.template) {
 								const {items} = data.template;

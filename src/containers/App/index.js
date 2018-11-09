@@ -32,7 +32,7 @@ class App extends Component {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
 				{({data, loading, error}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
 						window.$crisp.push([
 							'set',

@@ -26,7 +26,7 @@ class CreateQuote extends Component {
 		return (
 			<Query query={GET_USER_CUSTOMERS}>
 				{({loading, error, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
 						const {customers} = data.me.company;
 

@@ -1,5 +1,7 @@
-import styled, {css} from 'react-emotion';
+import styled, {css, keyframes} from 'react-emotion';
+import React from 'react';
 import Shevy from 'shevyjs';
+import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -373,10 +375,63 @@ export const ModalRow = styled('div')`
 	padding-bottom: 5px;
 `;
 
-export const Loading = styled('div')`
+const LoadingMain = styled('div')`
 	font-size: 30px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 `;
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+const translate = keyframes`
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+	transform: translateY(5px);
+  }
+  50% {
+	transform: translateY(0px);
+  }
+  75% {
+	transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const BubbleIcon = styled(bubbleIcon)`
+	width: 150px;
+	height: auto;
+	.circle {
+		transform-origin: center;
+		animation: ${rotate} 2s linear infinite;
+		will-change: transform;
+	}
+	.cls-2 {
+		transform-origin: center;
+		animation: ${translate} 2s ease-in-out infinite;
+		will-change: transform;
+	}
+	.dot-2 {
+		animation-delay: 0.3s;
+	}
+	.dot-3 {
+		animation-delay: 0.6s;
+	}
+`;
+
+export const Loading = props => (
+	<LoadingMain>
+		<BubbleIcon />
+	</LoadingMain>
+);

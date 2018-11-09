@@ -481,7 +481,7 @@ class EditQuote extends Component {
 					const fetchedData = {...data};
 
 					if (loading || !fetchedData.quote) {
-						return <Loading>Chargement...</Loading>;
+						return <Loading />;
 					}
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {quote} = fetchedData;

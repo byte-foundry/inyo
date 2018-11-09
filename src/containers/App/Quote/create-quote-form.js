@@ -81,7 +81,7 @@ class CreateQuoteForm extends React.Component {
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({client, loading, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
 						const {me} = data;
 						const {defaultDailyPrice} = me;

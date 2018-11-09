@@ -211,7 +211,7 @@ class QuoteDisplay extends Component {
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if ((data && data.me) || customerViewMode) {
 						return (
 							<QuoteDisplayMain>

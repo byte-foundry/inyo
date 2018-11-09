@@ -5,7 +5,7 @@ import {Redirect, withRouter} from 'react-router-dom';
 
 import CreateQuoteForm from './create-quote-form';
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
-import {gray50, Button} from '../../../utils/content';
+import {gray50, Button, Loading} from '../../../utils/content';
 
 const CreateQuoteMain = styled('div')`
 	margin-left: 40px;
@@ -17,14 +17,6 @@ const BackButton = styled(Button)`
 	font-size: 11px;
 	margin: 10px 0 10px 0;
 	color: ${gray50};
-`;
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 class CreateQuote extends Component {

@@ -8,17 +8,10 @@ import {templates} from '../../../utils/quote-templates';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
 import {dateDiff} from '../../../utils/functions';
 import {EDIT_ITEMS} from '../../../utils/mutations';
+import {Loading} from '../../../utils/content';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
 import CompanyInfoModal from '../../../components/CompanyInfoModal';
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 class EditQuote extends Component {
 	constructor(props) {

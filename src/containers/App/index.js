@@ -14,16 +14,9 @@ import Company from './Company';
 import QuoteCustomerView from './Quote/quote-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
+import {Loading} from '../../utils/content';
 
 const AppMain = styled('div')``;
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
 

@@ -17,6 +17,7 @@ import {
 	primaryWhite,
 	gray30,
 	gray20,
+	Loading,
 } from '../../utils/content';
 import {templates} from '../../utils/quote-templates';
 
@@ -53,14 +54,6 @@ const AddInput = styled(Input)`
 	margin-left: 10px;
 	border-color: transparent;
 	font-size: 13px;
-`;
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 class AddItem extends Component {

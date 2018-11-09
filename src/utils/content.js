@@ -372,3 +372,11 @@ export const ModalRow = styled('div')`
 	padding-top: 5px;
 	padding-bottom: 5px;
 `;
+
+export const Loading = styled('div')`
+	font-size: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;

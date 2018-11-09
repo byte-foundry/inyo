@@ -18,6 +18,7 @@ import {
 	primaryWhite,
 	gray20,
 	gray30,
+	Loading,
 } from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
@@ -78,13 +79,6 @@ const LogoutButton = styled(Button)`
 	font-size: 15px;
 	margin-bottom: 10px;
 	color: ${signalRed};
-`;
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 const WelcomeMessage = styled(H3)`

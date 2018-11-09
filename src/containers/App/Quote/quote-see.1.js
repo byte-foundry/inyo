@@ -3,7 +3,7 @@ import styled from 'react-emotion';
 import {Mutation, Query} from 'react-apollo';
 
 import {
-	FlexRow, FlexColumn, H1, Button,
+	FlexRow, FlexColumn, H1, Button, Loading,
 } from '../../../utils/content';
 import {GET_QUOTE_DATA} from '../../../utils/queries';
 import {SEND_AMENDMENT} from '../../../utils/mutations';
@@ -59,7 +59,7 @@ class TasksListUserLegacy extends Component {
 		return (
 			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
 				{({loading, error, data}) => {
-					if (loading) return <p>Loading</p>;
+					if (loading) return <Loading>Chargement...</Loading>;
 					if (error) return <p>Error!: ${error.toString()}</p>;
 					const {
 						quote: {

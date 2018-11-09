@@ -44,6 +44,7 @@ import {
 	gray50,
 	ToggleButton,
 	signalRed,
+	Loading,
 } from '../../utils/content';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -135,13 +136,6 @@ const SendQuoteButton = styled(Button)`
 	width: auto;
 	padding: 0.5em 1em;
 	margin-bottom: 0.5em;
-`;
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 class QuoteDisplay extends Component {

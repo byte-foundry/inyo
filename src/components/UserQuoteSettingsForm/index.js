@@ -58,7 +58,6 @@ class UserQuoteSettingsForm extends Component {
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								console.log(values);
 								try {
 									updateUser({
 										variables: {

@@ -18,6 +18,7 @@ import {
 	FlexRow,
 	ErrorInput,
 	Label,
+	Loading,
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
@@ -27,14 +28,6 @@ import {GET_ALL_QUOTES, GET_USER_INFOS} from '../../../utils/queries';
 
 const Title = styled(H1)`
 	color: ${primaryNavyBlue};
-`;
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 const SubTitle = styled(H3)`

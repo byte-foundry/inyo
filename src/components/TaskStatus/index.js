@@ -160,7 +160,6 @@ class TaskStatus extends Component {
 			status, sectionId, itemId, mode, customerViewMode,
 		} = this.props;
 
-		console.log(status);
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItem => (

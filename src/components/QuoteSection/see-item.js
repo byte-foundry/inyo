@@ -33,7 +33,7 @@ const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;
 	font-size: 13px;
 	position: relative;
-	cursor: ${props => (props.customer ? 'initial' : 'pointer')};
+	cursor: ${props => (props.customer || props.quoteStatus === 'SENT' ? 'initial' : 'pointer')};
 	width: 100%;
 	justify-content: space-between;
 `;
@@ -250,10 +250,15 @@ class Item extends Component {
 					/>
 				)}
 				<ItemMain
+					quoteStatus={quoteStatus}
 					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
-						if (!customerViewMode && item.status !== 'FINISHED') {
+						if (
+							!customerViewMode
+							&& item.status !== 'FINISHED'
+							&& quoteStatus !== 'SENT'
+						) {
 							this.setState({shouldDisplayAddItem: true});
 						}
 					}}

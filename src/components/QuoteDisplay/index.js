@@ -65,6 +65,12 @@ const QuoteDisplayTitle = styled(H1)`
 	margin: 0;
 `;
 
+const InfoMessage = styled(P)`
+	color: ${primaryBlue};
+	font-size: 11px;
+	margin: 0;
+`;
+
 const AddOptionButton = styled('button')``;
 const QuoteSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
@@ -293,15 +299,16 @@ class QuoteDisplay extends Component {
 									</FlexColumn>
 									{mode === 'see' && (
 										<FlexRow>
-											{!customerViewMode && (
+											{!customerViewMode
+												&& quote.status !== 'SENT' && (
 												<QuoteStatus>
 													<span>
-														Temps prévu :{' '}
+															Temps prévu :{' '}
 														{timePlanned}
 													</span>
 													{!customerViewMode && (
 														<span>
-															Dépassement :{' '}
+																Dépassement :{' '}
 															{overtime}
 														</span>
 													)}
@@ -334,6 +341,14 @@ class QuoteDisplay extends Component {
 														</SendQuoteButton>
 													)}
 												</Mutation>
+											)}
+											{quote.status === 'SENT' && (
+												<InfoMessage>
+													Ce devis est en attente de
+													validation: vous ne pouvez
+													pas le modifier pour le
+													moment
+												</InfoMessage>
 											)}
 											{customerViewMode
 												&& isAmendmentAcceptable && (

@@ -32,6 +32,7 @@ class AddressAutocomplete extends Component {
 				</Label>
 				<AlgoliaPlaces
 					placeholder={placeholder}
+					autocomplete="false"
 					options={{
 						appId: 'pl1YAVPVE0UO',
 						apiKey: 'ca2fe2df77738e8d67dfea649c5ede2e',

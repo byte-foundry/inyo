@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Query, Mutation} from 'react-apollo';
+import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
@@ -505,6 +505,8 @@ class EditQuote extends Component {
 						o => o.name === this.state.selectedOption,
 					);
 
+					const userSettings = data.issuer.owner.settings;
+
 					return (
 						<div>
 							<ToastContainer />
@@ -526,7 +528,14 @@ class EditQuote extends Component {
 								updateOption={this.updateOption}
 								issuer={quote.issuer}
 								removeQuote={this.removeQuote}
+								userSettings={userSettings}
 							/>
+							{this.state.showSendQuoteConfirmModal && (
+								<CompanyInfoModal
+									quoteId={quote.id}
+									submit={this.sendQuote}
+								/>
+							)}
 							{this.state.showInfoModal && (
 								<CompanyInfoModal
 									quoteId={quote.id}

@@ -138,6 +138,10 @@ export const GET_QUOTE_DATA = gql`
 				}
 				owner {
 					defaultVatRate
+					settings {
+						askSendQuoteConfirmation
+						askItemFinishConfirmation
+					}
 				}
 				siret
 			}

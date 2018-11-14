@@ -282,12 +282,6 @@ class Item extends Component {
 						/>
 					)}
 					<ItemUnit>{item.pendingUnit || item.unit} jours</ItemUnit>
-					<ItemUnitPrice>
-						{item.unitPrice.toLocaleString('fr-FR')}€
-					</ItemUnitPrice>
-					<ItemAmount>
-						{item.unitPrice * (item.pendingUnit || item.unit)}€
-					</ItemAmount>
 					{customerViewMode
 						&& isValidStatus && (
 						<ItemCustomerActions>

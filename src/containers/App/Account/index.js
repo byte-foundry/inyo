@@ -138,7 +138,7 @@ class Account extends Component {
 										)
 										}
 									>
-										Retour à la liste des devis
+										Retour à la liste des projets
 									</BackButton>
 									<TopBarTitle>Mon compte</TopBarTitle>
 									<WelcomeMessage>
@@ -177,20 +177,6 @@ class Account extends Component {
 												}}
 											>
 												Votre société
-											</ProfileSideElem>
-											<ProfileSideElem
-												active={activeItem === 'quote'}
-												onClick={() => {
-													this.quote.scrollIntoView({
-														block: 'start',
-														behavior: 'smooth',
-													});
-													this.setState({
-														activeItem: 'quote',
-													});
-												}}
-											>
-												Informations de devis
 											</ProfileSideElem>
 											<ProfileSideElem
 												active={
@@ -251,17 +237,6 @@ class Account extends Component {
 											</ProfileTitle>
 											<UserCompanyForm
 												data={me.company}
-												done={() => this.toast()}
-											/>
-											<ProfileTitle
-												innerRef={(elem) => {
-													this.quote = elem;
-												}}
-											>
-												Informations de devis
-											</ProfileTitle>
-											<UserQuoteSettingsForm
-												data={me}
 												done={() => this.toast()}
 											/>
 											<ProfileTitle

@@ -152,7 +152,7 @@ class QuoteCard extends Component {
 							  )}
 					</DateOfIssue>
 				</CardHeader>
-				<Amount>{total || 0}€ H.T.</Amount>
+				<Amount>{total || 0} jours</Amount>
 				{status === 'SENT' && (
 					<EyeIcon viewedByCustomer={quote.viewedByCustomer} />
 				)}

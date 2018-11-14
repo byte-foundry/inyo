@@ -126,7 +126,7 @@ class UserDataForm extends Component {
 														{...props}
 														name="askSendQuoteConfirmation"
 														type="checkbox"
-														label="Toujours me demander confirmation lors de l'envoi d'un devis"
+														label="Toujours me demander confirmation lors de l'envoi d'un projet"
 														required
 													/>
 												</FlexRow>

@@ -52,9 +52,8 @@ const QuoteStateTotal = styled(P)`
 
 const quoteStateName = {
 	DRAFT: 'Brouillons',
-	SENT: 'Envoyés',
-	ACCEPTED: 'Acceptés',
-	REJECTED: 'Rejetés',
+	SENT: 'En cours',
+	ACCEPTED: 'Finis',
 };
 
 class QuoteStateList extends Component {
@@ -80,7 +79,7 @@ class QuoteStateList extends Component {
 					</QuoteStateName>
 					<QuoteStateAmount>{quotes.length}</QuoteStateAmount>
 					<QuoteStateTotal>
-						{quoteTotal.toLocaleString('fr-FR')}€ H.T.
+						{quoteTotal.toLocaleString('fr-FR')}
 					</QuoteStateTotal>
 				</QuoteStateTitle>
 				{quoteColumn}

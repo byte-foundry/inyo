@@ -117,10 +117,6 @@ class CreateQuoteForm extends React.Component {
 													&& values.customer;
 
 												if (newCustomer) {
-													if (!values.address) {
-														errors.address
-															= 'Requis';
-													}
 													if (!values.email) {
 														errors.email = 'Requis';
 													}
@@ -173,7 +169,6 @@ class CreateQuoteForm extends React.Component {
 													firstName: values.firstName,
 													lastName: values.lastName,
 													email: values.email,
-													address: values.address,
 													title: values.title,
 												};
 											}
@@ -405,7 +400,7 @@ class CreateQuoteForm extends React.Component {
 														}
 													>
 														<Title>
-															Créez votre devis
+															Créez votre projet
 														</Title>
 														<FlexRow>
 															<FormSection left>
@@ -530,17 +525,6 @@ class CreateQuoteForm extends React.Component {
 																			placeholder="contact@company.com"
 																			required
 																		/>
-
-																		<AddressAutocomplete
-																			{...props}
-																			onChange={
-																				props.setFieldValue
-																			}
-																			name="address"
-																			placeholder=""
-																			label="L'adresse de l'entreprise"
-																			required
-																		/>
 																	</div>
 																)}
 															</FormSection>
@@ -553,7 +537,7 @@ class CreateQuoteForm extends React.Component {
 																<Label>
 																	Nous pouvons
 																	pré-remplir
-																	votre devis
+																	votre projet
 																	pour vous
 																</Label>
 																<ClassicSelect
@@ -561,7 +545,7 @@ class CreateQuoteForm extends React.Component {
 																		SelectStyles
 																	}
 																	defaultValue="WEBSITE"
-																	placeholder="Type de devis"
+																	placeholder="Type de projet"
 																	onChange={(option) => {
 																		setFieldValue(
 																			'template',
@@ -585,9 +569,9 @@ class CreateQuoteForm extends React.Component {
 																<FormElem
 																	required
 																	{...props}
-																	label="Titre de votre devis"
+																	label="Titre de votre projet"
 																	name="quoteTitle"
-																	placeholder="Nom du devis"
+																	placeholder="Nom du projet"
 																/>
 																{status
 																	&& status.msg && (
@@ -613,7 +597,7 @@ class CreateQuoteForm extends React.Component {
 																	size="Large"
 																>
 																	Créez votre
-																	devis
+																	projet
 																</Button>
 															</FormSection>
 														</FlexRow>

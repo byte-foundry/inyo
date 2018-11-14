@@ -38,7 +38,7 @@ class CreateQuote extends Component {
 									onClick={() => this.props.history.push('/app/quotes')
 									}
 								>
-									Retour à la liste des devis
+									Retour à la liste des projets
 								</BackButton>
 								<CreateQuoteForm
 									customers={customers}

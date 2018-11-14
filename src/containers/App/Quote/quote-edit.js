@@ -24,7 +24,7 @@ class EditQuote extends Component {
 	toast = () => {
 		toast.success(
 			<div>
-				<p>📬 Le devis a été envoyé !</p>
+				<p>📬 Leprojet a été envoyé !</p>
 				<p>Retour au menu principal.</p>
 			</div>,
 			{

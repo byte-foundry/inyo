@@ -54,7 +54,6 @@ export const quoteState = {
 	DRAFT: 0,
 	SENT: 1,
 	ACCEPTED: 2,
-	REJECTED: 3,
 };
 
 class ListQuotes extends Component {
@@ -90,7 +89,7 @@ class ListQuotes extends Component {
 					return (
 						<ListQuotesMain>
 							<ListQuotesTopBar>
-								<TopBarTitle>Vos devis</TopBarTitle>
+								<TopBarTitle>Vos projets</TopBarTitle>
 								<ActionRow>
 									<TopBarButton
 										theme="Link"
@@ -108,7 +107,7 @@ class ListQuotes extends Component {
 										size="Medium"
 										onClick={this.createNewQuote}
 									>
-										Créer un nouveau devis
+										Créer un nouveau projet
 									</TopBarButton>
 								</ActionRow>
 							</ListQuotesTopBar>

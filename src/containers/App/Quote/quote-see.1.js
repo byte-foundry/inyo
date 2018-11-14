@@ -132,7 +132,7 @@ class TasksListUserLegacy extends Component {
 										)
 										}
 									>
-										Retour à la liste des devis
+										Retour à la liste des projets
 									</BackButton>
 									<TLTopBar>
 										<TLCustomerName>

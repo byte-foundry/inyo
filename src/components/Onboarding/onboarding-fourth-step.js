@@ -90,7 +90,7 @@ class OnboardingFourthStep extends Component {
 		} = this.props;
 		const {interestedFeatures} = this.state;
 		const features = [
-			'Gérer mes devis',
+			'Gérer mes projets',
 			'Créer des avenants facilement',
 			'Discuter avec mon client',
 			'Gérer mes factures',

@@ -3,7 +3,7 @@ import styled, {css} from 'react-emotion';
 import {Mutation} from 'react-apollo';
 
 import {FINISH_ITEM} from '../../utils/mutations.js';
-import {GET_QUOTE_DATA} from '../../utils/queries.js';
+import {GET_PROJECT_DATA} from '../../utils/queries.js';
 
 import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
 import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
@@ -141,7 +141,7 @@ class TaskStatus extends Component {
 				[[['item_finished', {}, 'yellow']]],
 			]);
 			const data = cache.readQuery({
-				query: GET_QUOTE_DATA,
+				query: GET_PROJECT_DATA,
 				variables: {quoteId: this.props.match.params.quoteId},
 			});
 			const section = data.quote.options[0].sections.find(
@@ -154,7 +154,7 @@ class TaskStatus extends Component {
 			section.items[itemIndex].status = finishItem.status;
 			try {
 				cache.writeQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 					data,
 				});

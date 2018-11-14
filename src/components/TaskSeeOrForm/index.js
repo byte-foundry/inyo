@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {GET_QUOTE_DATA} from '../../utils/queries.js';
+import {GET_PROJECT_DATA} from '../../utils/queries.js';
 
 import Task from '../Task';
 import TaskForm from '../TaskForm';
@@ -52,7 +52,7 @@ class TaskSeeOrForm extends Component {
 			},
 			update: (cache, {data: {updateValidatedItem}}) => {
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const section = data.quote.options[0].sections.find(
@@ -65,7 +65,7 @@ class TaskSeeOrForm extends Component {
 				section.items[itemIndex] = updateValidatedItem;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});

@@ -87,21 +87,21 @@ export const GET_USER_INFOS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendQuoteConfirmation
+				askSendProjectConfirmation
 			}
 		}
 	}
 `;
 
-/** ******** QUOTE QUERIES ********* */
+/** ******** PROJECT QUERIES ********* */
 
-export const GET_ALL_QUOTES = gql`
-	query getAllQuotesQuery {
+export const GET_ALL_PROJECTS = gql`
+	query getAllProjectsQuery {
 		me {
 			id
 			company {
 				id
-				quotes {
+				projects {
 					id
 					name
 					viewedByCustomer
@@ -117,9 +117,9 @@ export const GET_ALL_QUOTES = gql`
 		}
 	}
 `;
-export const GET_QUOTE_DATA = gql`
-	query getQuoteData($quoteId: ID!) {
-		quote(id: $quoteId) {
+export const GET_PROJECT_DATA = gql`
+	query getProjectData($projectId: ID!) {
+		project(id: $projectId) {
 			id
 			template
 			viewedByCustomer
@@ -139,7 +139,7 @@ export const GET_QUOTE_DATA = gql`
 				owner {
 					defaultVatRate
 					settings {
-						askSendQuoteConfirmation
+						askSendProjectConfirmation
 						askItemFinishConfirmation
 					}
 				}
@@ -208,9 +208,9 @@ export const GET_QUOTE_DATA = gql`
 	}
 `;
 
-export const GET_QUOTE_DATA_WITH_TOKEN = gql`
-	query getQuoteData($quoteId: ID!, $token: String) {
-		quote(id: $quoteId, token: $token) {
+export const GET_PROJECT_DATA_WITH_TOKEN = gql`
+	query getProjectData($projectId: ID!, $token: String) {
+		project(id: $projectId, token: $token) {
 			id
 			template
 			name

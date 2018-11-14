@@ -66,7 +66,7 @@ export const UPDATE_USER = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendQuoteConfirmation
+				askSendProjectConfirmation
 			}
 		}
 	}
@@ -117,7 +117,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendQuoteConfirmation
+				askSendProjectConfirmation
 			}
 		}
 	}
@@ -155,7 +155,7 @@ export const UPDATE_USER_SETTINGS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendQuoteConfirmation
+				askSendProjectConfirmation
 			}
 		}
 	}
@@ -189,7 +189,7 @@ export const UPDATE_USER_COMPANY = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendQuoteConfirmation
+				askSendProjectConfirmation
 			}
 		}
 	}
@@ -204,7 +204,7 @@ export const CREATE_CUSTOMER = gql`
 		}
 	}
 `;
-/** ******** QUOTE MUTATIONS ********* */
+/** ******** PROJECT MUTATIONS ********* */
 
 export const EDIT_ITEMS = gql`
 	mutation EditItems($items: [String!]!) {
@@ -213,17 +213,17 @@ export const EDIT_ITEMS = gql`
 		}
 	}
 `;
-// Quote
-export const CREATE_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation createQuote(
+// Project
+export const CREATE_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation createProject(
 		$customerId: ID
 		$customer: CustomerInput
-		$template: QuoteTemplate!
+		$template: ProjectTemplate!
 		$option: OptionInput
 		$name: String
 	) {
-		createQuote(
+		createProject(
 			customerId: $customerId
 			customer: $customer
 			template: $template
@@ -243,19 +243,19 @@ export const CREATE_QUOTE = gql`
 		}
 	}
 `;
-export const UPDATE_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation updateQuote($quoteId: ID!, $name: String!) {
-		updateQuote(id: $quoteId, name: $name) {
+export const UPDATE_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation updateProject($projectId: ID!, $name: String!) {
+		updateProject(id: $projectId, name: $name) {
 			id
 			name
 		}
 	}
 `;
-export const SEND_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation sendQuote($quoteId: ID!) {
-		sendQuote(id: $quoteId) {
+export const SEND_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation sendProject($projectId: ID!) {
+		sendProject(id: $projectId) {
 			id
 			status
 			viewedByCustomer
@@ -263,28 +263,28 @@ export const SEND_QUOTE = gql`
 	}
 `;
 
-export const REMOVE_QUOTE = gql`
-	mutation removeQuote($quoteId: ID!) {
-		removeQuote(id: $quoteId) {
+export const REMOVE_PROJECT = gql`
+	mutation removeProject($projectId: ID!) {
+		removeProject(id: $projectId) {
 			id
 		}
 	}
 `;
 
-export const ACCEPT_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation acceptQuote($quoteId: ID!, $token: String!) {
-		acceptQuote(id: $quoteId, token: $token) {
+export const ACCEPT_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation acceptProject($projectId: ID!, $token: String!) {
+		acceptProject(id: $projectId, token: $token) {
 			id
 			status
 		}
 	}
 `;
 
-export const REJECT_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation rejectQuote($quoteId: ID!, $token: String!) {
-		rejectQuote(id: $quoteId, token: $token) {
+export const REJECT_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation rejectProject($projectId: ID!, $token: String!) {
+		rejectProject(id: $projectId, token: $token) {
 			id
 			status
 		}
@@ -454,7 +454,7 @@ export const UPDATE_ITEM = gql`
 `;
 
 export const UPDATE_VALIDATED_ITEM = gql`
-	# update an item that is in a VALIDATED quote
+	# update an item that is in a VALIDATED project
 	# the item status is passed to UPDATED
 	# and pendingUnit is filled with the value passed
 	mutation updateValidatedItem(
@@ -521,8 +521,8 @@ export const REMOVE_ITEM = gql`
 `;
 
 export const SEND_AMENDMENT = gql`
-	mutation sendAmendment($quoteId: ID!) {
-		sendAmendment(quoteId: $quoteId) {
+	mutation sendAmendment($projectId: ID!) {
+		sendAmendment(projectId: $projectId) {
 			id
 			template
 			name
@@ -579,8 +579,8 @@ export const SEND_AMENDMENT = gql`
 `;
 
 export const ACCEPT_AMENDMENT = gql`
-	mutation acceptAmendment($quoteId: ID!, $token: String!) {
-		acceptAmendment(quoteId: $quoteId, token: $token) {
+	mutation acceptAmendment($projectId: ID!, $token: String!) {
+		acceptAmendment(projectId: $projectId, token: $token) {
 			id
 			template
 			name
@@ -660,8 +660,8 @@ export const ACCEPT_AMENDMENT = gql`
 `;
 
 export const REJECT_AMENDMENT = gql`
-	mutation rejectAmendment($quoteId: ID!, $token: String!) {
-		rejectAmendment(quoteId: $quoteId, token: $token) {
+	mutation rejectAmendment($projectId: ID!, $token: String!) {
+		rejectAmendment(projectId: $projectId, token: $token) {
 			id
 			template
 			name

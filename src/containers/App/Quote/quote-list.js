@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
-import {GET_ALL_QUOTES} from '../../../utils/queries';
+import {GET_ALL_PROJECTS} from '../../../utils/queries';
 import {
 	H1,
 	Button,
@@ -72,7 +72,7 @@ class ListQuotes extends Component {
 		const {quotes, baseQuotes} = this.state;
 
 		return (
-			<Query query={GET_ALL_QUOTES}>
+			<Query query={GET_ALL_PROJECTS}>
 				{({loading, error, data}) => {
 					if (loading) return <Loading />;
 					if (error) {

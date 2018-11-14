@@ -15,7 +15,6 @@ import {
 	signalRed,
 } from '../../utils/content';
 import {REMOVE_SECTION, ADD_ITEM, UPDATE_SECTION} from '../../utils/mutations';
-import {GET_QUOTE_DATA} from '../../utils/queries';
 
 const QuoteSectionMain = styled('div')``;
 const QuoteAction = styled(Button)`

@@ -22,7 +22,7 @@ import {
 	ACCEPT_ITEM,
 	REJECT_ITEM,
 } from '../../utils/mutations';
-import {GET_QUOTE_DATA_WITH_TOKEN} from '../../utils/queries';
+import {GET_PROJECT_DATA_WITH_TOKEN} from '../../utils/queries';
 
 const ItemName = styled(FlexRow)`
 	margin: 0;
@@ -126,7 +126,7 @@ class Item extends Component {
 					},
 				);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA_WITH_TOKEN,
+					query: GET_PROJECT_DATA_WITH_TOKEN,
 					variables: {
 						quoteId: this.props.match.params.quoteId,
 						token: this.props.match.params.customerToken,
@@ -142,7 +142,7 @@ class Item extends Component {
 				section.items[itemIndex].status = itemMutation.status;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA_WITH_TOKEN,
+						query: GET_PROJECT_DATA_WITH_TOKEN,
 						variables: {
 							quoteId: this.props.match.params.quoteId,
 							token: this.props.match.params.customerToken,

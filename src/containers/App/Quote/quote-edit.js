@@ -5,7 +5,7 @@ import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
 import {templates} from '../../../utils/quote-templates';
-import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
+import {GET_PROJECT_DATA, GET_ALL_PROJECTS} from '../../../utils/queries';
 import {dateDiff} from '../../../utils/functions';
 import {EDIT_ITEMS} from '../../../utils/mutations';
 import {Loading} from '../../../utils/content';
@@ -69,7 +69,7 @@ class EditQuote extends Component {
 			variables: {quoteId},
 			update: (cache, {data: {sendQuote}}) => {
 				const data = cache.readQuery({
-					query: GET_ALL_QUOTES,
+					query: GET_ALL_PROJECTS,
 				});
 
 				if (data.me && data.me.company && data.me.company.quotes) {
@@ -81,7 +81,7 @@ class EditQuote extends Component {
 				}
 
 				const quoteData = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId},
 				});
 
@@ -123,7 +123,7 @@ class EditQuote extends Component {
 					]);
 					this.toast();
 					cache.writeQuery({
-						query: GET_ALL_QUOTES,
+						query: GET_ALL_PROJECTS,
 						data,
 					});
 				}
@@ -139,14 +139,14 @@ class EditQuote extends Component {
 			variables: {quoteId, name: title},
 			update: (cache, {data: {updateQuote}}) => {
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
 				data.quote.name = updateQuote.name;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -164,14 +164,14 @@ class EditQuote extends Component {
 			variables: {optionId, proposal: raw},
 			update: (cache, {data: {updateOption}}) => {
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
 				data.quote.options[0].proposal = updateOption.proposal;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -200,7 +200,7 @@ class EditQuote extends Component {
 			},
 			update: (cache, {data: {addItem}}) => {
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const section = data.quote.options[0].sections.find(
@@ -210,7 +210,7 @@ class EditQuote extends Component {
 				section.items.push(addItem);
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -261,7 +261,7 @@ class EditQuote extends Component {
 					[[['item_edited', {}, 'yellow']]],
 				]);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const section = data.quote.options[0].sections.find(
@@ -274,7 +274,7 @@ class EditQuote extends Component {
 				section.items[itemIndex] = updateItem;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -297,7 +297,7 @@ class EditQuote extends Component {
 			variables: {itemId},
 			update: (cache, {data: {removeItem}}) => {
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const section = data.quote.options[0].sections.find(
@@ -310,7 +310,7 @@ class EditQuote extends Component {
 				section.items.splice(itemIndex, 1);
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -333,14 +333,14 @@ class EditQuote extends Component {
 					[[['section_added', {}, 'orange']]],
 				]);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 
 				data.quote.options[0].sections.push(addSection);
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -363,7 +363,7 @@ class EditQuote extends Component {
 					[[['section_edited', {}, 'orange']]],
 				]);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const sectionIndex = data.quote.options[0].sections.findIndex(
@@ -373,7 +373,7 @@ class EditQuote extends Component {
 				data.quote.options[0].sections[sectionIndex] = updateSection;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -396,7 +396,7 @@ class EditQuote extends Component {
 					[[['section_removed', {}, 'orange']]],
 				]);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const sectionIndex = data.quote.options[0].sections.findIndex(
@@ -406,7 +406,7 @@ class EditQuote extends Component {
 				data.quote.options[0].sections.splice(sectionIndex, 1);
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -429,7 +429,7 @@ class EditQuote extends Component {
 			variables: {quoteId},
 			update: (cache, {data: {removeQuote}}) => {
 				const data = cache.readQuery({
-					query: GET_ALL_QUOTES,
+					query: GET_ALL_PROJECTS,
 				});
 
 				if (data.me && data.me.company && data.me.company.quotes) {
@@ -441,7 +441,7 @@ class EditQuote extends Component {
 				}
 				try {
 					cache.writeQuery({
-						query: GET_ALL_QUOTES,
+						query: GET_ALL_PROJECTS,
 						data,
 					});
 					this.toastDelete();
@@ -476,7 +476,7 @@ class EditQuote extends Component {
 		quoteTemplates.push({value: 'custom', label: 'Sans recommandation'});
 
 		return (
-			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
+			<Query query={GET_PROJECT_DATA} variables={{quoteId}}>
 				{({loading, error, data}) => {
 					const fetchedData = {...data};
 

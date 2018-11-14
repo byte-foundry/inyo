@@ -3,7 +3,6 @@ import styled from 'react-emotion';
 import {Switch, Route} from 'react-router-dom';
 
 import QuoteSee from './quote-see';
-import QuoteSeeLegacy from './quote-see.1';
 import QuoteEdit from './quote-edit';
 import QuoteCreate from './quote-create';
 import QuoteList from './quote-list';
@@ -21,10 +20,6 @@ class Quote extends Component {
 					<Route
 						path="/app/quotes/:quoteId/see"
 						component={QuoteSee}
-					/>
-					<Route
-						path="/app/quotes/:quoteId/seelegacy"
-						component={QuoteSeeLegacy}
 					/>
 					<Route
 						path="/app/quotes/:quoteId/edit/"

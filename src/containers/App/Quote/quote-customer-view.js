@@ -3,7 +3,7 @@ import {Route} from 'react-router-dom';
 import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
-import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
+import {GET_PROJECT_DATA_WITH_TOKEN} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
@@ -22,7 +22,7 @@ class QuoteCustomerView extends Component {
 		update: (cache, {data: {acceptAmendment, rejectAmendment}}) => {
 			const amendment = acceptAmendment || rejectAmendment;
 			const data = cache.readQuery({
-				query: GET_QUOTE_DATA_WITH_TOKEN,
+				query: GET_PROJECT_DATA_WITH_TOKEN,
 				variables: {
 					quoteId: this.props.match.params.quoteId,
 					token: this.props.match.params.customerToken,
@@ -33,7 +33,7 @@ class QuoteCustomerView extends Component {
 
 			try {
 				cache.writeQuery({
-					query: GET_QUOTE_DATA_WITH_TOKEN,
+					query: GET_PROJECT_DATA_WITH_TOKEN,
 					variables: {
 						quoteId: this.props.match.params.quoteId,
 						token: this.props.match.params.customerToken,
@@ -66,7 +66,7 @@ class QuoteCustomerView extends Component {
 			const quote = acceptQuote || rejectQuote;
 
 			const data = cache.readQuery({
-				query: GET_QUOTE_DATA_WITH_TOKEN,
+				query: GET_PROJECT_DATA_WITH_TOKEN,
 				variables: {
 					quoteId: this.props.match.params.quoteId,
 					token: this.props.match.params.customerToken,
@@ -77,7 +77,7 @@ class QuoteCustomerView extends Component {
 
 			try {
 				cache.writeQuery({
-					query: GET_QUOTE_DATA_WITH_TOKEN,
+					query: GET_PROJECT_DATA_WITH_TOKEN,
 					variables: {
 						quoteId: this.props.match.params.quoteId,
 						token: this.props.match.params.customerToken,
@@ -106,7 +106,7 @@ class QuoteCustomerView extends Component {
 
 		return (
 			<Query
-				query={GET_QUOTE_DATA_WITH_TOKEN}
+				query={GET_PROJECT_DATA_WITH_TOKEN}
 				variables={{quoteId, token: customerToken}}
 			>
 				{({

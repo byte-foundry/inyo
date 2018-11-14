@@ -12,16 +12,16 @@ import QuoteSection from '../QuoteSection';
 import QuoteTotal from '../QuoteTotal';
 import TasksProgressBar from '../TasksProgressBar';
 import {
-	UPDATE_QUOTE,
+	UPDATE_PROJECT,
 	ADD_SECTION,
 	UPDATE_OPTION,
-	SEND_QUOTE,
+	SEND_PROJECT,
 	SEND_AMENDMENT,
 	ACCEPT_AMENDMENT,
 	REJECT_AMENDMENT,
-	ACCEPT_QUOTE,
-	REJECT_QUOTE,
-	REMOVE_QUOTE,
+	ACCEPT_PROJECT,
+	REJECT_PROJECT,
+	REMOVE_PROJECT,
 } from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import {dateDiff} from '../../utils/functions';
@@ -239,7 +239,7 @@ class QuoteDisplay extends Component {
 											Remplissez votre projet
 										</QuoteDisplayTitle>
 										<Mutation
-											mutation={SEND_QUOTE}
+											mutation={SEND_PROJECT}
 											onError={(error) => {
 												if (
 													error.message.includes(
@@ -276,7 +276,7 @@ class QuoteDisplay extends Component {
 								>
 									<FlexColumn>
 										<QuoteName>
-											<Mutation mutation={UPDATE_QUOTE}>
+											<Mutation mutation={UPDATE_PROJECT}>
 												{updateQuote => (
 													<InlineEditable
 														value={quote.name}
@@ -452,7 +452,7 @@ class QuoteDisplay extends Component {
 											)}
 										</div>
 										{mode === 'edit' && (
-											<Mutation mutation={REMOVE_QUOTE}>
+											<Mutation mutation={REMOVE_PROJECT}>
 												{RemoveQuote => (
 													<QuoteAction
 														theme="DeleteOutline"

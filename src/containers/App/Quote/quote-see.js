@@ -5,7 +5,7 @@ import ReactGA from 'react-ga';
 import {ToastContainer, toast} from 'react-toastify';
 import Section from '../../../components/Section';
 
-import {GET_QUOTE_DATA} from '../../../utils/queries';
+import {GET_PROJECT_DATA} from '../../../utils/queries';
 
 import {Loading} from '../../../utils/content';
 
@@ -29,7 +29,7 @@ class TasksListUser extends Component {
 					[[['item_edited', {}, 'yellow']]],
 				]);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const section = data.quote.options[0].sections.find(
@@ -42,7 +42,7 @@ class TasksListUser extends Component {
 				section.items[itemIndex] = updateValidatedItem;
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -61,7 +61,7 @@ class TasksListUser extends Component {
 		},
 		update: (cache, {data: {sendAmendment}}) => {
 			const data = cache.readQuery({
-				query: GET_QUOTE_DATA,
+				query: GET_PROJECT_DATA,
 				variables: {quoteId: this.props.match.params.quoteId},
 			});
 
@@ -69,7 +69,7 @@ class TasksListUser extends Component {
 
 			try {
 				cache.writeQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 					data,
 				});
@@ -121,7 +121,7 @@ class TasksListUser extends Component {
 					[[['item_added', {}, 'yellow']]],
 				]);
 				const data = cache.readQuery({
-					query: GET_QUOTE_DATA,
+					query: GET_PROJECT_DATA,
 					variables: {quoteId: this.props.match.params.quoteId},
 				});
 				const section = data.quote.options[0].sections.find(
@@ -131,7 +131,7 @@ class TasksListUser extends Component {
 				section.items.push(addItem);
 				try {
 					cache.writeQuery({
-						query: GET_QUOTE_DATA,
+						query: GET_PROJECT_DATA,
 						variables: {quoteId: this.props.match.params.quoteId},
 						data,
 					});
@@ -148,7 +148,7 @@ class TasksListUser extends Component {
 		const {quoteId} = this.props.match.params;
 
 		return (
-			<Query query={GET_QUOTE_DATA} variables={{quoteId}}>
+			<Query query={GET_PROJECT_DATA} variables={{quoteId}}>
 				{({
 					loading, error, data, refetch,
 				}) => {

@@ -23,8 +23,8 @@ import {
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
 import AddressAutocomplete from '../../../components/AddressAutocomplete';
-import {CREATE_QUOTE} from '../../../utils/mutations';
-import {GET_ALL_QUOTES, GET_USER_INFOS} from '../../../utils/queries';
+import {CREATE_PROJECT} from '../../../utils/mutations';
+import {GET_ALL_PROJECTS, GET_USER_INFOS} from '../../../utils/queries';
 
 const Title = styled(H1)`
 	color: ${primaryNavyBlue};
@@ -87,7 +87,7 @@ class CreateQuoteForm extends React.Component {
 						const {defaultDailyPrice} = me;
 
 						return (
-							<Mutation mutation={CREATE_QUOTE}>
+							<Mutation mutation={CREATE_PROJECT}>
 								{createQuote => (
 									<Formik
 										initialValues={{
@@ -206,7 +206,7 @@ class CreateQuoteForm extends React.Component {
 														) => {
 															const data = cache.readQuery(
 																{
-																	query: GET_ALL_QUOTES,
+																	query: GET_ALL_PROJECTS,
 																},
 															);
 
@@ -216,7 +216,7 @@ class CreateQuoteForm extends React.Component {
 															try {
 																cache.writeQuery(
 																	{
-																		query: GET_ALL_QUOTES,
+																		query: GET_ALL_PROJECTS,
 																		data,
 																	},
 																);

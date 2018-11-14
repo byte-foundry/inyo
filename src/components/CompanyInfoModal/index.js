@@ -4,7 +4,7 @@ import {Query, Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
 import {GET_USER_INFOS} from '../../utils/queries';
-import {SEND_QUOTE} from '../../utils/mutations';
+import {SEND_PROJECT} from '../../utils/mutations';
 
 import {
 	ModalContainer,
@@ -42,7 +42,7 @@ class CompanyInfoModal extends Component {
 									</H5>
 								</ModalRow>
 								<ModalRow>
-									<Mutation mutation={SEND_QUOTE}>
+									<Mutation mutation={SEND_PROJECT}>
 										{SendQuote => (
 											<UserCompanyForm
 												data={me.company}

@@ -66,7 +66,7 @@ export const UPDATE_USER = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendProjectConfirmation
+				askStartProjectConfirmation
 			}
 		}
 	}
@@ -117,7 +117,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendProjectConfirmation
+				askStartProjectConfirmation
 			}
 		}
 	}
@@ -155,7 +155,7 @@ export const UPDATE_USER_SETTINGS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendProjectConfirmation
+				askStartProjectConfirmation
 			}
 		}
 	}
@@ -189,7 +189,7 @@ export const UPDATE_USER_COMPANY = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendProjectConfirmation
+				askStartProjectConfirmation
 			}
 		}
 	}
@@ -220,14 +220,14 @@ export const CREATE_PROJECT = gql`
 		$customerId: ID
 		$customer: CustomerInput
 		$template: ProjectTemplate!
-		$option: OptionInput
+		$sections: [SectionInput!]
 		$name: String
 	) {
 		createProject(
 			customerId: $customerId
 			customer: $customer
 			template: $template
-			option: $option
+			sections: $sections
 			name: $name
 		) {
 			id
@@ -252,10 +252,10 @@ export const UPDATE_PROJECT = gql`
 		}
 	}
 `;
-export const SEND_PROJECT = gql`
+export const START_PROJECT = gql`
 	# creating project with a customer id or a new customer
-	mutation sendProject($projectId: ID!) {
-		sendProject(id: $projectId) {
+	mutation startProject($projectId: ID!) {
+		startProject(id: $projectId) {
 			id
 			status
 			viewedByCustomer
@@ -290,25 +290,15 @@ export const REJECT_PROJECT = gql`
 		}
 	}
 `;
-// Option
-export const UPDATE_OPTION = gql`
-	mutation updateOption($optionId: ID!, $proposal: Json!) {
-		updateOption(id: $optionId, proposal: $proposal) {
-			id
-			proposal
-		}
-	}
-`;
 // Section
 export const ADD_SECTION = gql`
-	mutation addSection($optionId: ID!, $name: String!, $items: [ItemInput!]) {
-		addSection(optionId: $optionId, name: $name, items: $items) {
+	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {
+		addSection(projectId: $projectId, name: $name, items: $items) {
 			id
 			name
 			items {
 				id
 				name
-				unitPrice
 				unit
 				vatRate
 				description
@@ -324,7 +314,6 @@ export const UPDATE_SECTION = gql`
 			items {
 				id
 				name
-				unitPrice
 				unit
 				vatRate
 				description
@@ -344,7 +333,6 @@ export const ADD_ITEM = gql`
 	mutation addItem(
 		$sectionId: ID!
 		$name: String!
-		$unitPrice: Int
 		$unit: Float
 		$vatRate: Int
 		$description: String
@@ -352,14 +340,12 @@ export const ADD_ITEM = gql`
 		addItem(
 			sectionId: $sectionId
 			name: $name
-			unitPrice: $unitPrice
 			unit: $unit
 			vatRate: $vatRate
 			description: $description
 		) {
 			id
 			name
-			unitPrice
 			unit
 			vatRate
 			description
@@ -401,7 +387,6 @@ export const UPDATE_ITEM = gql`
 		$itemId: ID!
 		$name: String
 		$description: String
-		$unitPrice: Int
 		$unit: Float
 		$vatRate: Int
 	) {
@@ -409,13 +394,11 @@ export const UPDATE_ITEM = gql`
 			id: $itemId
 			name: $name
 			description: $description
-			unitPrice: $unitPrice
 			unit: $unit
 			vatRate: $vatRate
 		) {
 			id
 			name
-			unitPrice
 			unit
 			vatRate
 			description
@@ -465,7 +448,6 @@ export const UPDATE_VALIDATED_ITEM = gql`
 		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
 			id
 			name
-			unitPrice
 			unit
 			vatRate
 			description
@@ -555,23 +537,17 @@ export const SEND_AMENDMENT = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
-						id
-						name
-						unitPrice
-						unit
-						pendingUnit
-						vatRate
-						description
-					}
+					unit
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}
@@ -608,36 +584,19 @@ export const ACCEPT_AMENDMENT = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							createdAt
-							id
-							views {
-								viewer {
-									... on User {
-										firstName
-										lastName
-									}
-									... on Customer {
-										firstName
-										lastName
-										name
-									}
-								}
-							}
-							author {
+						views {
+							viewer {
 								... on User {
 									firstName
 									lastName
@@ -649,10 +608,21 @@ export const ACCEPT_AMENDMENT = gql`
 								}
 							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}
@@ -689,36 +659,19 @@ export const REJECT_AMENDMENT = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							createdAt
-							id
-							views {
-								viewer {
-									... on User {
-										firstName
-										lastName
-									}
-									... on Customer {
-										firstName
-										lastName
-										name
-									}
-								}
-							}
-							author {
+						views {
+							viewer {
 								... on User {
 									firstName
 									lastName
@@ -730,10 +683,21 @@ export const REJECT_AMENDMENT = gql`
 								}
 							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}

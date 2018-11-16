@@ -87,7 +87,7 @@ export const GET_USER_INFOS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendProjectConfirmation
+				askStartProjectConfirmation
 			}
 		}
 	}
@@ -139,7 +139,7 @@ export const GET_PROJECT_DATA = gql`
 				owner {
 					defaultVatRate
 					settings {
-						askSendProjectConfirmation
+						askStartProjectConfirmation
 						askItemFinishConfirmation
 					}
 				}
@@ -157,36 +157,19 @@ export const GET_PROJECT_DATA = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							createdAt
-							id
-							views {
-								viewer {
-									... on User {
-										firstName
-										lastName
-									}
-									... on Customer {
-										firstName
-										lastName
-										name
-									}
-								}
-							}
-							author {
+						views {
+							viewer {
 								... on User {
 									firstName
 									lastName
@@ -198,10 +181,20 @@ export const GET_PROJECT_DATA = gql`
 								}
 							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					description
 				}
 			}
 		}
@@ -243,36 +236,19 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							createdAt
-							id
-							views {
-								viewer {
-									... on User {
-										firstName
-										lastName
-									}
-									... on Customer {
-										firstName
-										lastName
-										name
-									}
-								}
-							}
-							author {
+						views {
+							viewer {
 								... on User {
 									firstName
 									lastName
@@ -284,10 +260,21 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 								}
 							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}

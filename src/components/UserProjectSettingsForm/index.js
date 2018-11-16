@@ -4,19 +4,14 @@ import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
-import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
+import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
-	Button,
-	FlexRow,
-	primaryWhite,
-	gray20,
-	ErrorInput,
+	Button, FlexRow, primaryWhite, gray20,
 } from '../../utils/content';
 import FormElem from '../FormElem';
-import FormCheckbox from '../FormCheckbox';
 import {GET_USER_INFOS} from '../../utils/queries';
 
-const UserDataFormMain = styled('div')``;
+const UserProjectSettingsFormMain = styled('div')``;
 
 const FormContainer = styled('div')``;
 const ProfileSection = styled('div')`
@@ -32,49 +27,54 @@ const UpdateButton = styled(Button)`
 	margin-bottom: 80px;
 `;
 
-class UserDataForm extends Component {
-	constructor(props) {
-		super(props);
-	}
-
+class UserProjectSettingsForm extends Component {
 	render() {
-		const {
-			askStartProjectConfirmation,
-			askItemFinishConfirmation,
-		} = this.props.data.settings;
+		const {defaultDailyPrice, defaultVatRate} = this.props.data;
 
 		return (
-			<UserDataFormMain>
-				<Mutation mutation={UPDATE_USER_SETTINGS}>
+			<UserProjectSettingsFormMain>
+				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
 						<Formik
 							initialValues={{
-								askStartProjectConfirmation,
-								askItemFinishConfirmation,
+								defaultDailyPrice: defaultDailyPrice || 350,
+								defaultVatRate: defaultVatRate || 20,
 							}}
 							validationSchema={Yup.object().shape({
-								askItemFinishConfirmation: Yup.boolean().required(
-									'Requis',
-								),
-								askStartProjectConfirmation: Yup.boolean().required(
-									'Requis',
-								),
+								defaultVatRate: Yup.number(
+									'Doit être un nombre',
+								).required('Requis'),
+								defaultDailyPrice: Yup.number(
+									'Doit être un nombre',
+								).required('Requis'),
 							})}
 							onSubmit={async (values, actions) => {
+								actions.setSubmitting(false);
 								try {
 									updateUser({
 										variables: {
-											settings: {
-												askStartProjectConfirmation:
-													values.askStartProjectConfirmation,
-												askItemFinishConfirmation:
-													values.askItemFinishConfirmation,
-											},
+											defaultVatRate:
+												values.defaultVatRate,
+											defaultDailyPrice:
+												values.defaultDailyPrice,
 										},
 										update: (
 											cache,
 											{data: {updateUser}},
 										) => {
+											window.$crisp.push([
+												'set',
+												'session:event',
+												[
+													[
+														[
+															'updated_project_settings_data',
+															{},
+															'green',
+														],
+													],
+												],
+											]);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
@@ -87,12 +87,13 @@ class UserDataForm extends Component {
 												});
 												ReactGA.event({
 													category: 'User',
-													action: 'Updated user data',
+													action:
+														'Updated project settings',
 												});
 												this.props.done();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
@@ -107,45 +108,33 @@ class UserDataForm extends Component {
 							}}
 						>
 							{(props) => {
-								const {
-									values,
-									dirty,
-									isSubmitting,
-									status,
-									handleSubmit,
-									handleReset,
-									setFieldValue,
-								} = props;
+								const {handleSubmit} = props;
 
 								return (
 									<form onSubmit={handleSubmit}>
 										<ProfileSection>
 											<FormContainer>
 												<FlexRow justifyContent="space-between">
-													<FormCheckbox
+													<FormElem
 														{...props}
-														name="askStartProjectConfirmation"
-														type="checkbox"
-														label="Toujours me demander confirmation lors de l'envoi d'un projet"
+														name="defaultDailyPrice"
+														type="number"
+														label="Taux journée par défaut"
+														placeholder="350"
+														padded
 														required
 													/>
-												</FlexRow>
-												<FlexRow justifyContent="space-between">
-													<FormCheckbox
+													<FormElem
 														{...props}
-														name="askItemFinishConfirmation"
-														type="checkbox"
-														label="Toujours me demander confirmation lors de la validation d'une tâche"
+														name="defaultVatRate"
+														type="number"
+														label="Taux de TVA"
+														placeholder="20"
+														padded
 														required
 													/>
 												</FlexRow>
 											</FormContainer>
-											{status
-												&& status.msg && (
-												<ErrorInput>
-													{status.msg}
-												</ErrorInput>
-											)}
 										</ProfileSection>
 										<UpdateButton
 											theme="Primary"
@@ -160,9 +149,9 @@ class UserDataForm extends Component {
 						</Formik>
 					)}
 				</Mutation>
-			</UserDataFormMain>
+			</UserProjectSettingsFormMain>
 		);
 	}
 }
 
-export default UserDataForm;
+export default UserProjectSettingsForm;

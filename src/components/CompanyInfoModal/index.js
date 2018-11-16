@@ -18,7 +18,7 @@ import UserCompanyForm from '../UserCompanyForm';
 
 class CompanyInfoModal extends Component {
 	render() {
-		const {submit, quoteId} = this.props;
+		const {submit, projectId} = this.props;
 
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -43,11 +43,14 @@ class CompanyInfoModal extends Component {
 								</ModalRow>
 								<ModalRow>
 									<Mutation mutation={SEND_PROJECT}>
-										{SendQuote => (
+										{StartProject => (
 											<UserCompanyForm
 												data={me.company}
 												done={() => {
-													submit(quoteId, SendQuote);
+													submit(
+														projectId,
+														StartProject,
+													);
 												}}
 												buttonText="Envoyer le devis"
 											/>

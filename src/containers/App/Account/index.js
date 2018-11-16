@@ -23,7 +23,7 @@ import {
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserQuoteSettingsForm from '../../../components/UserQuoteSettingsForm';
+import UserProjectSettingsForm from '../../../components/UserProjectSettingsForm';
 import UserSettings from '../../../components/UserSettings';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -134,7 +134,7 @@ class Account extends Component {
 										theme="Link"
 										size="XSmall"
 										onClick={() => this.props.history.push(
-											'/app/quotes',
+											'/app/projects',
 										)
 										}
 									>

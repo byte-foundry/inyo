@@ -101,21 +101,14 @@ const Status = styled('div')`
 	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING'
-		&& !props.customer
-		&& props.quoteStatus !== 'SENT'
-		? 'pointer'
-		: 'initial')};
+	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
 
 	svg {
 		width: 30px;
 		${getTaskIconStylesByStatus};
 	}
 
-	${props => props.status === 'PENDING'
-		&& !props.customer
-		&& props.quoteStatus !== 'SENT'
-		&& hoverState};
+	${props => props.status === 'PENDING' && !props.customer && hoverState};
 `;
 
 class TaskStatus extends Component {
@@ -142,9 +135,9 @@ class TaskStatus extends Component {
 			]);
 			const data = cache.readQuery({
 				query: GET_PROJECT_DATA,
-				variables: {quoteId: this.props.match.params.quoteId},
+				variables: {projectId: this.props.match.params.projectId},
 			});
-			const section = data.quote.options[0].sections.find(
+			const section = data.project.sections.find(
 				e => e.id === sectionId,
 			);
 			const itemIndex = section.items.find(
@@ -155,7 +148,9 @@ class TaskStatus extends Component {
 			try {
 				cache.writeQuery({
 					query: GET_PROJECT_DATA,
-					variables: {quoteId: this.props.match.params.quoteId},
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
 					data,
 				});
 			}
@@ -173,7 +168,7 @@ class TaskStatus extends Component {
 			itemId,
 			mode,
 			customerViewMode,
-			quoteStatus,
+			projectStatus,
 		} = this.props;
 
 		return (
@@ -185,7 +180,7 @@ class TaskStatus extends Component {
 								mode === 'see'
 								&& !customerViewMode
 								&& status === 'PENDING'
-								&& quoteStatus !== 'SENT'
+								&& projectStatus !== 'SENT'
 							) {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
@@ -194,7 +189,7 @@ class TaskStatus extends Component {
 						<Status
 							status={status}
 							customer={customerViewMode}
-							quoteStatus={quoteStatus}
+							projectStatus={projectStatus}
 						>
 							{getTaskIconByStatus(status)}
 						</Status>

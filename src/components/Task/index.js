@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from 'react-emotion';
 
-import {FlexRow} from '../../utils/content.js';
+import {FlexRow} from '../../utils/content';
 
 import TaskStatus from '../TaskStatus';
 
@@ -36,30 +36,27 @@ class Task extends Component {
 	};
 
 	seeComments = () => {
-		const {quoteId, customerToken} = this.props.match.params;
+		const {projectId, customerToken} = this.props.match.params;
 		const {
 			task: {id},
 		} = this.props;
 
 		this.props.history.push(
-			`/app/quotes/${this.props.match.params.quoteId}/view/${
-				this.props.match.params.customerToken
-			}/comments/${id}`,
+			`/app/projects/${projectId}/view/${customerToken}/comments/${id}`,
 		);
 	};
 
 	render() {
 		const {
-			selected,
 			task: {
 				name, unit, unitPrice, status, pendingUnit, id, comments,
 			},
 			sectionId,
-			options,
+			project,
 		} = this.props;
 
 		const commentsCountElem
-			= options.seeCommentsNotification
+			= project.seeCommentsNotification
 			&& status === 'UPDATED_SENT'
 			&& comments.length > 0 ? (
 					<CommentsCount onClick={this.seeComments}>
@@ -69,7 +66,7 @@ class Task extends Component {
 					false
 				);
 		const itemStatus
-			= options.seeCommentsNotification && status === 'UPDATED_SENT' ? (
+			= project.seeCommentsNotification && status === 'UPDATED_SENT' ? (
 				<ItemStatus>UPDATED</ItemStatus>
 			) : (
 				false
@@ -81,7 +78,7 @@ class Task extends Component {
 					status={status}
 					itemId={id}
 					sectionId={sectionId}
-					options={options}
+					project={project}
 				/>
 				<TaskInfo onClick={this.select}>
 					<TaskName>{name}</TaskName>

@@ -45,11 +45,11 @@ class TasksList extends Component {
 	};
 
 	render() {
-		const {tasks, options} = this.props;
+		const {tasks, project} = this.props;
 		const {selectedTask, addingItem} = this.state;
 
 		const tasksList = tasks.map(task => (
-			<TaskSeeOrForm task={task} options={options} />
+			<TaskSeeOrForm task={task} project={project} />
 		));
 
 		const addItem = addingItem && (
@@ -60,7 +60,7 @@ class TasksList extends Component {
 			<TasksListMain>
 				{tasksList}
 				{addItem}
-				{options.noAddItem ? (
+				{project.noAddItem ? (
 					false
 				) : (
 					<Button onClick={this.addItem}>Add Item</Button>
@@ -71,7 +71,7 @@ class TasksList extends Component {
 }
 
 TasksList.defaultProps = {
-	options: {},
+	project: {},
 };
 
 export default TasksList;

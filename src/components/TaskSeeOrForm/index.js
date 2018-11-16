@@ -17,7 +17,7 @@ class TaskSeeOrForm extends Component {
 	}
 
 	selectTask = (id) => {
-		if (!this.props.options.noItemEdition) {
+		if (!this.props.project.noItemEdition) {
 			this.setState({
 				selected: true,
 			});
@@ -53,9 +53,9 @@ class TaskSeeOrForm extends Component {
 			update: (cache, {data: {updateValidatedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
-					variables: {quoteId: this.props.match.params.quoteId},
+					variables: {projectId: this.props.match.params.projectId},
 				});
-				const section = data.quote.options[0].sections.find(
+				const section = data.project.sections.find(
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(
@@ -66,7 +66,9 @@ class TaskSeeOrForm extends Component {
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
-						variables: {quoteId: this.props.match.params.quoteId},
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
 						data,
 					});
 				}
@@ -79,7 +81,7 @@ class TaskSeeOrForm extends Component {
 	};
 
 	render() {
-		const {task, sectionId, options} = this.props;
+		const {task, sectionId, project} = this.props;
 		const {selected} = this.state;
 
 		const taskElem = selected ? (
@@ -94,7 +96,7 @@ class TaskSeeOrForm extends Component {
 				task={task}
 				select={this.selectTask}
 				sectionId={sectionId}
-				options={options}
+				project={project}
 			/>
 		);
 
@@ -103,7 +105,7 @@ class TaskSeeOrForm extends Component {
 }
 
 TaskSeeOrForm.defaultProps = {
-	options: {},
+	project: {},
 };
 
 export default TaskSeeOrForm;

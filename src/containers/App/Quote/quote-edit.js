@@ -505,7 +505,7 @@ class EditQuote extends Component {
 						o => o.name === this.state.selectedOption,
 					);
 
-					const userSettings = data.issuer.owner.settings;
+					const userSettings = quote.issuer.owner.settings;
 
 					return (
 						<div>

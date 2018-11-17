@@ -342,12 +342,13 @@ class QuoteDisplay extends Component {
 													)}
 												</Mutation>
 											)}
-											{quote.status === 'SENT' && (
+											{!customerViewMode
+												&& quote.status === 'SENT' && (
 												<InfoMessage>
-													Ce devis est en attente de
-													validation: vous ne pouvez
-													pas le modifier pour le
-													moment
+														Ce devis est en attente
+														de validation: vous ne
+														pouvez pas le modifier
+														pour le moment
 												</InfoMessage>
 											)}
 											{customerViewMode

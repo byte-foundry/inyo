@@ -97,20 +97,14 @@ const EyeIcon = styled(eyeIcon)`
 	height: auto;
 	opacity: ${props => (props.viewedByCustomer ? '1' : '0.2')};
 	.cls-1 {
-		animation: ${props => (props.viewedByCustomer
-		? `${pulsePB} 3s ease-in-out infinite`
-		: 'none')};
+		stroke: ${primaryBlue};
 	}
 	.cls-2,
 	.cls-3 {
-		animation: ${props => (props.viewedByCustomer
-		? `${pulsePNB} 3s ease-in-out infinite`
-		: 'none')};
+		stroke: ${primaryNavyBlue};
 	}
 	.cls-4 {
-		animation: ${props => (props.viewedByCustomer
-		? `${pulsePNBF} 3s ease-in-out infinite`
-		: 'none')};
+		fill: ${primaryNavyBlue};
 	}
 `;
 

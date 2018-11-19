@@ -26,7 +26,7 @@ const TotalNumber = styled(H4)`
 
 class ProjectTotal extends Component {
 	render() {
-		const {sumDays, sumHT, sumTTC} = this.props;
+		const {sumDays} = this.props;
 
 		return (
 			<TotalMain>

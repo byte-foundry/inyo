@@ -143,7 +143,9 @@ class AddItem extends Component {
 							type="number"
 							placeholder="1"
 							value={unit}
-							onChange={e => this.setState({unit: e.target.value})
+							onChange={e => this.setState({
+								unit: parseFloat(e.target.value),
+							})
 							}
 						/>
 					</FlexRow>

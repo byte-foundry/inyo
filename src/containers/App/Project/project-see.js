@@ -32,7 +32,7 @@ class TasksListUser extends Component {
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
 				});
-				const section = data.project.options[0].sections.find(
+				const section = data.project.sections.find(
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(

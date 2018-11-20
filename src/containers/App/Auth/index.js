@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import {
+	Link, Switch, Route, Redirect,
+} from 'react-router-dom';
 import styled from 'react-emotion';
 
 import {
 	P,
-	Button,
 	primaryNavyBlue,
 	primaryBlue,
 	primaryWhite,
@@ -12,6 +14,7 @@ import {
 
 import LoginForm from '../../../components/LoginForm';
 import SignUpForm from '../../../components/SignupForm';
+import SendResetPasswordForm from '../../../components/SendResetPasswordForm';
 
 import {ReactComponent as AppLogo} from '../appLogo.svg';
 import AuthLogo from './authLogo.svg';
@@ -60,48 +63,53 @@ const TextContent = styled(P)`
 `;
 
 class Auth extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isLogin: true,
-		};
-	}
-
 	render() {
-		const {isLogin} = this.state;
-
 		return (
 			<AuthMain>
 				<AuthForm>
 					<AppLogo />
-					{isLogin ? <LoginForm /> : <SignUpForm />}
-					{isLogin ? (
-						<P>
-							Vous êtes nouveau ?{' '}
-							<Button
-								theme="Link"
-								size="XSmall"
-								onClick={() => {
-									this.setState({isLogin: false});
-								}}
-							>
-								Créer un compte
-							</Button>
-						</P>
-					) : (
-						<P>
-							Vous avez déjà un compte ?{' '}
-							<Button
-								theme="Link"
-								size="XSmall"
-								onClick={() => {
-									this.setState({isLogin: true});
-								}}
-							>
-								Se connecter
-							</Button>
-						</P>
-					)}
+					<Switch>
+						<Route
+							exact
+							path="/auth/sign-up"
+							component={SignUpForm}
+						/>
+						<Route
+							exact
+							path="/auth/sign-in"
+							component={LoginForm}
+						/>
+						<Route
+							path="/auth/forgotten-password"
+							component={SendResetPasswordForm}
+						/>
+						<Redirect to="/auth/sign-up" />
+					</Switch>
+
+					<Switch>
+						<Route
+							exact
+							path="/auth/sign-in"
+							render={() => (
+								<P>
+									Vous êtes nouveau ?{' '}
+									<Link to="/auth/sign-up">
+										Créer un compte
+									</Link>
+								</P>
+							)}
+						/>
+						<Route
+							exact
+							path="/auth/sign-up"
+							render={() => (
+								<P>
+									Vous avez déjà un compte ?{' '}
+									<Link to="/auth/sign-in">Se connecter</Link>
+								</P>
+							)}
+						/>
+					</Switch>
 				</AuthForm>
 				<AuthText>
 					<AuthTextContent>

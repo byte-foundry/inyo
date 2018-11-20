@@ -8,10 +8,9 @@ import * as Sentry from '@sentry/browser';
 import Dashboard from './Dashboard';
 import Onboarding from './Onboarding';
 import Account from './Account';
-import Customer from './Customer';
-import Quote from './Quote';
+import Project from './Project';
 import Company from './Company';
-import QuoteCustomerView from './Quote/quote-customer-view';
+import ProjectCustomerView from './Project/project-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
 import {Loading} from '../../utils/content';
@@ -62,8 +61,8 @@ class App extends Component {
 							<Switch>
 								{error && (
 									<Route
-										path="/app/quotes/:quoteId/view/:customerToken"
-										component={QuoteCustomerView}
+										path="/app/projects/:projectId/view/:customerToken"
+										component={ProjectCustomerView}
 									/>
 								)}
 								<ProtectedRoute
@@ -83,13 +82,8 @@ class App extends Component {
 									isAllowed={data && data.me}
 								/>
 								<ProtectedRoute
-									path="/app/customer"
-									component={Customer}
-									isAllowed={data && data.me}
-								/>
-								<ProtectedRoute
-									path="/app/quotes"
-									component={Quote}
+									path="/app/projects"
+									component={Project}
 									isAllowed={data && data.me}
 								/>
 								<ProtectedRoute

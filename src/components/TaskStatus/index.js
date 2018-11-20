@@ -3,7 +3,7 @@ import styled, {css} from 'react-emotion';
 import {Mutation} from 'react-apollo';
 
 import {FINISH_ITEM} from '../../utils/mutations.js';
-import {GET_QUOTE_DATA} from '../../utils/queries.js';
+import {GET_PROJECT_DATA} from '../../utils/queries.js';
 
 import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
 import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
@@ -101,21 +101,14 @@ const Status = styled('div')`
 	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING'
-		&& !props.customer
-		&& props.quoteStatus !== 'SENT'
-		? 'pointer'
-		: 'initial')};
+	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
 
 	svg {
 		width: 30px;
 		${getTaskIconStylesByStatus};
 	}
 
-	${props => props.status === 'PENDING'
-		&& !props.customer
-		&& props.quoteStatus !== 'SENT'
-		&& hoverState};
+	${props => props.status === 'PENDING' && !props.customer && hoverState};
 `;
 
 class TaskStatus extends Component {
@@ -141,10 +134,10 @@ class TaskStatus extends Component {
 				[[['item_finished', {}, 'yellow']]],
 			]);
 			const data = cache.readQuery({
-				query: GET_QUOTE_DATA,
-				variables: {quoteId: this.props.match.params.quoteId},
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
 			});
-			const section = data.quote.options[0].sections.find(
+			const section = data.project.sections.find(
 				e => e.id === sectionId,
 			);
 			const itemIndex = section.items.find(
@@ -154,8 +147,10 @@ class TaskStatus extends Component {
 			section.items[itemIndex].status = finishItem.status;
 			try {
 				cache.writeQuery({
-					query: GET_QUOTE_DATA,
-					variables: {quoteId: this.props.match.params.quoteId},
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
 					data,
 				});
 			}
@@ -173,7 +168,7 @@ class TaskStatus extends Component {
 			itemId,
 			mode,
 			customerViewMode,
-			quoteStatus,
+			projectStatus,
 		} = this.props;
 
 		return (
@@ -185,7 +180,7 @@ class TaskStatus extends Component {
 								mode === 'see'
 								&& !customerViewMode
 								&& status === 'PENDING'
-								&& quoteStatus !== 'SENT'
+								&& projectStatus !== 'SENT'
 							) {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
@@ -194,7 +189,7 @@ class TaskStatus extends Component {
 						<Status
 							status={status}
 							customer={customerViewMode}
-							quoteStatus={quoteStatus}
+							projectStatus={projectStatus}
 						>
 							{getTaskIconByStatus(status)}
 						</Status>

@@ -4,7 +4,7 @@ import {Query, Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
 import {GET_USER_INFOS} from '../../utils/queries';
-import {SEND_QUOTE} from '../../utils/mutations';
+import {SEND_PROJECT} from '../../utils/mutations';
 
 import {
 	ModalContainer,
@@ -18,7 +18,7 @@ import UserCompanyForm from '../UserCompanyForm';
 
 class CompanyInfoModal extends Component {
 	render() {
-		const {submit, quoteId} = this.props;
+		const {submit, projectId} = this.props;
 
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -42,12 +42,15 @@ class CompanyInfoModal extends Component {
 									</H5>
 								</ModalRow>
 								<ModalRow>
-									<Mutation mutation={SEND_QUOTE}>
-										{SendQuote => (
+									<Mutation mutation={SEND_PROJECT}>
+										{StartProject => (
 											<UserCompanyForm
 												data={me.company}
 												done={() => {
-													submit(quoteId, SendQuote);
+													submit(
+														projectId,
+														StartProject,
+													);
 												}}
 												buttonText="Envoyer le devis"
 											/>

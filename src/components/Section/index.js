@@ -9,12 +9,12 @@ const SectionMain = styled('div')``;
 
 class Section extends Component {
 	render() {
-		const {items, name, options} = this.props;
+		const {items, name, project} = this.props;
 
 		return (
 			<SectionMain>
 				<H4>{name}</H4>
-				<TasksList tasks={items} options={options} />
+				<TasksList tasks={items} project={project} />
 			</SectionMain>
 		);
 	}

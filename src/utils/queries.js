@@ -87,21 +87,21 @@ export const GET_USER_INFOS = gql`
 			}
 			settings {
 				askItemFinishConfirmation
-				askSendQuoteConfirmation
+				askStartProjectConfirmation
 			}
 		}
 	}
 `;
 
-/** ******** QUOTE QUERIES ********* */
+/** ******** PROJECT QUERIES ********* */
 
-export const GET_ALL_QUOTES = gql`
-	query getAllQuotesQuery {
+export const GET_ALL_PROJECTS = gql`
+	query getAllProjectsQuery {
 		me {
 			id
 			company {
 				id
-				quotes {
+				projects {
 					id
 					name
 					viewedByCustomer
@@ -117,9 +117,9 @@ export const GET_ALL_QUOTES = gql`
 		}
 	}
 `;
-export const GET_QUOTE_DATA = gql`
-	query getQuoteData($quoteId: ID!) {
-		quote(id: $quoteId) {
+export const GET_PROJECT_DATA = gql`
+	query getProjectData($projectId: ID!) {
+		project(id: $projectId) {
 			id
 			template
 			viewedByCustomer
@@ -139,7 +139,7 @@ export const GET_QUOTE_DATA = gql`
 				owner {
 					defaultVatRate
 					settings {
-						askSendQuoteConfirmation
+						askStartProjectConfirmation
 						askItemFinishConfirmation
 					}
 				}
@@ -157,36 +157,19 @@ export const GET_QUOTE_DATA = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							createdAt
-							id
-							views {
-								viewer {
-									... on User {
-										firstName
-										lastName
-									}
-									... on Customer {
-										firstName
-										lastName
-										name
-									}
-								}
-							}
-							author {
+						views {
+							viewer {
 								... on User {
 									firstName
 									lastName
@@ -198,19 +181,29 @@ export const GET_QUOTE_DATA = gql`
 								}
 							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					description
 				}
 			}
 		}
 	}
 `;
 
-export const GET_QUOTE_DATA_WITH_TOKEN = gql`
-	query getQuoteData($quoteId: ID!, $token: String) {
-		quote(id: $quoteId, token: $token) {
+export const GET_PROJECT_DATA_WITH_TOKEN = gql`
+	query getProjectData($projectId: ID!, $token: String) {
+		project(id: $projectId, token: $token) {
 			id
 			template
 			name
@@ -243,36 +236,19 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							createdAt
-							id
-							views {
-								viewer {
-									... on User {
-										firstName
-										lastName
-									}
-									... on Customer {
-										firstName
-										lastName
-										name
-									}
-								}
-							}
-							author {
+						views {
+							viewer {
 								... on User {
 									firstName
 									lastName
@@ -284,10 +260,21 @@ export const GET_QUOTE_DATA_WITH_TOKEN = gql`
 								}
 							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
+import Plural from '../Plural';
 import {
 	H4, H6, gray20, primaryNavyBlue,
 } from '../../utils/content';
@@ -31,7 +32,14 @@ class ProjectTotal extends Component {
 		return (
 			<TotalMain>
 				<TotalElem>
-					<TotalNumber>{sumDays} jours</TotalNumber>
+					<TotalNumber>
+						{sumDays}{' '}
+						<Plural
+							singular="jour"
+							plural="jours"
+							value={sumDays}
+						/>
+					</TotalNumber>
 					<TotalLabel>Temps prévu</TotalLabel>
 				</TotalElem>
 			</TotalMain>

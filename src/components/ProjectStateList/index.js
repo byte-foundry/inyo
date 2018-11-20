@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 
+import Plural from '../Plural';
 import ProjectCard from '../ProjectCard';
 import {
 	P,
@@ -79,9 +80,21 @@ class ProjectStateList extends Component {
 					<ProjectStateName>
 						{projectStateName[projectState]}
 					</ProjectStateName>
-					<ProjectStateAmount>{projects.length}</ProjectStateAmount>
+					<ProjectStateAmount>
+						{projects.length}{' '}
+						<Plural
+							singular="projet"
+							plural="projets"
+							value={projects.length}
+						/>
+					</ProjectStateAmount>
 					<ProjectStateTotal>
-						{projectTotal.toLocaleString('fr-FR')}
+						{projectTotal.toLocaleString('fr-FR')}{' '}
+						<Plural
+							singular="jour"
+							plural="jours"
+							value={projectTotal}
+						/>
 					</ProjectStateTotal>
 				</ProjectStateTitle>
 				{projectColumn}

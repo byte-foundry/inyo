@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled, {keyframes} from 'react-emotion';
 
+import Plural from '../Plural';
 import {
 	P,
 	alpha10,
@@ -146,7 +147,10 @@ class ProjectCard extends Component {
 							  )}
 					</DateOfIssue>
 				</CardHeader>
-				<Amount>{total || 0} jours</Amount>
+				<Amount>
+					{total || 0}{' '}
+					<Plural singular="jour" plural="jours" value={total} />
+				</Amount>
 			</ProjectCardMain>
 		);
 	}

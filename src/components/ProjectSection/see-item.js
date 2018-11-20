@@ -8,6 +8,7 @@ import AmendItem from './amend-item';
 import TaskStatus from '../TaskStatus';
 import CommentIcon from '../CommentIcon';
 import CommentModal from '../CommentModal';
+import Plural from '../Plural';
 import {
 	FlexRow,
 	alpha10,
@@ -272,7 +273,14 @@ class Item extends Component {
 							userType={customerViewMode ? 'Customer' : 'User'}
 						/>
 					)}
-					<ItemUnit>{item.pendingUnit || item.unit} jours</ItemUnit>
+					<ItemUnit>
+						{item.pendingUnit || item.unit}{' '}
+						<Plural
+							singular="jour"
+							plural="jours"
+							value={item.pendingUnit || item.unit}
+						/>
+					</ItemUnit>
 					{customerViewMode
 						&& isValidStatus && (
 						<ItemCustomerActions>

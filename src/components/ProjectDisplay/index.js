@@ -210,7 +210,7 @@ class ProjectDisplay extends Component {
 													<InlineEditable
 														value={project.name}
 														type="text"
-														placeholder="Name of the project"
+														placeholder="Nom de votre projet"
 														disabled={
 															mode !== 'edit'
 														}

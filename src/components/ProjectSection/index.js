@@ -58,7 +58,7 @@ class ProjectSection extends Component {
 								<InlineEditable
 									value={data.name}
 									type="text"
-									placeholder="Section name"
+									placeholder="Nom de la section"
 									disabled={mode !== 'edit'}
 									onFocusOut={(value) => {
 										editSectionTitle(

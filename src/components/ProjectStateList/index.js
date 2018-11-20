@@ -53,7 +53,7 @@ const ProjectStateTotal = styled(P)`
 
 const projectStateName = {
 	DRAFT: 'Brouillons',
-	ONGOIND: 'En cours',
+	ONGOING: 'En cours',
 	FINISHED: 'Finis',
 };
 

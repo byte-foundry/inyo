@@ -79,4 +79,8 @@ class IssuerNameAndAddress extends Component {
 	}
 }
 
+IssuerName.defaultProps = {
+	address: {},
+};
+
 export default withRouter(IssuerNameAndAddress);

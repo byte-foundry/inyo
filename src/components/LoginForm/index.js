@@ -113,7 +113,7 @@ class LoginForm extends Component {
 											size="Big"
 											disabled={isSubmitting}
 										>
-											Log in
+											Se connecter
 										</Button>
 									</form>
 								);

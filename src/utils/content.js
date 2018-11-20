@@ -1,5 +1,7 @@
-import styled, {css} from 'react-emotion';
+import styled, {css, keyframes} from 'react-emotion';
+import React from 'react';
 import Shevy from 'shevyjs';
+import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -24,9 +26,9 @@ export const gray30 = '#4d4d4d';
 export const gray70 = '#b3b3b3';
 export const gray80 = '#cccccc';
 export const alpha10 = 'rgba(0, 0, 0, 0.1)';
-export const signalGreen = '#36b37e';
+export const signalGreen = '#0dcc94';
 export const signalOrange = '#ffab00';
-export const signalRed = '#ff5630';
+export const signalRed = '#fe4a49';
 // Typography
 
 export const Body = styled('div')`
@@ -118,6 +120,12 @@ const ButtonStyles = (props) => {
 		return css`
 				background-color: transparent;
 				color: ${primaryBlue};
+				text-decoration: underline;
+			`;
+	case 'DeleteOutline':
+		return css`
+				background-color: transparent;
+				color: ${signalRed};
 				text-decoration: underline;
 			`;
 	case 'Outline':
@@ -274,6 +282,11 @@ export const Label = styled('label')`
 				padding-left: 5px;
 			}
 		`};
+	${props => props.onboarding
+		&& css`
+			margin: 10px 15px 10px 16px;
+			width: inherit;
+		`};
 `;
 
 export const ErrorInput = styled('p')`
@@ -330,14 +343,96 @@ export const ModalElem = styled('div')`
 	background: ${primaryWhite};
 	width: 50vw;
 	position: relative;
-	padding-bottom: 30px;
+	padding: 20px 40px 30px;
 `;
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	top: 20px;
-	right: 20px;
-	background: ${gray80};
+	top: 40px;
+	right: 40px;
 	width: 40px;
 	height: 40px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	.cls-1,
+	.cls-2 {
+		transition: all 0.3s ease;
+	}
+	&:hover {
+		.cls-1 {
+			stroke: ${primaryNavyBlue};
+		}
+		.cls-2 {
+			stroke: ${primaryBlue};
+		}
+	}
 `;
+
+export const ModalRow = styled('div')`
+	padding-left: 40px;
+	padding-right: 40px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+`;
+
+const LoadingMain = styled('div')`
+	font-size: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+const translate = keyframes`
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+	transform: translateY(5px);
+  }
+  50% {
+	transform: translateY(0px);
+  }
+  75% {
+	transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const BubbleIcon = styled(bubbleIcon)`
+	width: 45px;
+	height: auto;
+	opacity: 0.5;
+	.circle {
+		transform-origin: center;
+		animation: ${rotate} 2s linear infinite;
+		will-change: transform;
+	}
+	.cls-2 {
+		transform-origin: center;
+		animation: ${translate} 1s ease-in-out infinite;
+		will-change: transform;
+	}
+	.dot-2 {
+		animation-delay: 0.2s;
+	}
+	.dot-3 {
+		animation-delay: 0.4s;
+	}
+`;
+
+export const Loading = props => (
+	<LoadingMain>
+		<BubbleIcon />
+	</LoadingMain>
+);

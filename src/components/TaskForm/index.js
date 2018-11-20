@@ -30,7 +30,7 @@ class TaskForm extends Component {
 		const {
 			unselect,
 			task: {
-				name, unit, unitPrice, status, pendingUnit,
+				name, unit, status, pendingUnit,
 			},
 		} = this.props;
 
@@ -91,7 +91,6 @@ class TaskForm extends Component {
 													name="unit"
 													type="number"
 												/>
-												<div>{unitPrice}</div>
 												{status
 													&& status.msg && (
 													<div>{status.msg}</div>

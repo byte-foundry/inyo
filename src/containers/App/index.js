@@ -6,23 +6,16 @@ import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 
 import Dashboard from './Dashboard';
+import Onboarding from './Onboarding';
 import Account from './Account';
-import Customer from './Customer';
-import Quote from './Quote';
+import Project from './Project';
 import Company from './Company';
-import QuoteCustomerView from './Quote/quote-customer-view';
+import ProjectCustomerView from './Project/project-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
+import {Loading} from '../../utils/content';
 
 const AppMain = styled('div')``;
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
 
@@ -38,8 +31,23 @@ class App extends Component {
 		return (
 			<Query query={CHECK_LOGIN_USER} fetchPolicy="network-only">
 				{({data, loading, error}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
+						window.$crisp.push([
+							'set',
+							'user:email',
+							[data.me.email],
+						]);
+						window.$crisp.push([
+							'set',
+							'user:nickname',
+							[`${data.me.firstName} ${data.me.lastName}`],
+						]);
+						window.$crisp.push([
+							'set',
+							'session:segments',
+							[['user']],
+						]);
 						Sentry.configureScope((scope) => {
 							scope.setUser({email: data.me.email});
 						});
@@ -53,8 +61,8 @@ class App extends Component {
 							<Switch>
 								{error && (
 									<Route
-										path="/app/quotes/:quoteId/view/:customerToken"
-										component={QuoteCustomerView}
+										path="/app/projects/:projectId/view/:customerToken"
+										component={ProjectCustomerView}
 									/>
 								)}
 								<ProtectedRoute
@@ -74,13 +82,13 @@ class App extends Component {
 									isAllowed={data && data.me}
 								/>
 								<ProtectedRoute
-									path="/app/customer"
-									component={Customer}
+									path="/app/projects"
+									component={Project}
 									isAllowed={data && data.me}
 								/>
 								<ProtectedRoute
-									path="/app/quotes"
-									component={Quote}
+									path="/app/onboarding"
+									component={Onboarding}
 									isAllowed={data && data.me}
 								/>
 							</Switch>

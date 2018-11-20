@@ -23,6 +23,8 @@ export const CHECK_LOGIN_USER = gql`
 		me {
 			email
 			id
+			firstName
+			lastName
 		}
 	}
 `;
@@ -63,6 +65,10 @@ export const GET_USER_INFOS = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -79,21 +85,26 @@ export const GET_USER_INFOS = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askStartProjectConfirmation
+			}
 		}
 	}
 `;
 
-/** ******** QUOTE QUERIES ********* */
+/** ******** PROJECT QUERIES ********* */
 
-export const GET_ALL_QUOTES = gql`
-	query getAllQuotesQuery {
+export const GET_ALL_PROJECTS = gql`
+	query getAllProjectsQuery {
 		me {
 			id
 			company {
 				id
-				quotes {
+				projects {
 					id
 					name
+					viewedByCustomer
 					customer {
 						name
 					}
@@ -106,13 +117,98 @@ export const GET_ALL_QUOTES = gql`
 		}
 	}
 `;
-export const GET_QUOTE_DATA = gql`
-	query getQuoteData($quoteId: ID!) {
-		quote(id: $quoteId) {
+export const GET_PROJECT_DATA = gql`
+	query getProjectData($projectId: ID!) {
+		project(id: $projectId) {
+			id
+			template
+			viewedByCustomer
+			name
+			status
+			createdAt
+			issuer {
+				name
+				email
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					defaultVatRate
+					settings {
+						askStartProjectConfirmation
+						askItemFinishConfirmation
+					}
+				}
+				siret
+			}
+			customer {
+				name
+				firstName
+				lastName
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
+			sections {
+				id
+				name
+				items {
+					status
+					id
+					name
+					unit
+					comments {
+						createdAt
+						id
+						views {
+							viewer {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
+						}
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
+					}
+					pendingUnit
+					description
+				}
+			}
+		}
+	}
+`;
+
+export const GET_PROJECT_DATA_WITH_TOKEN = gql`
+	query getProjectData($projectId: ID!, $token: String) {
+		project(id: $projectId, token: $token) {
 			id
 			template
 			name
 			status
+			issuedAt
 			issuer {
 				name
 				email
@@ -140,81 +236,45 @@ export const GET_QUOTE_DATA = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						pendingUnit
-						vatRate
-						description
-					}
-				}
-			}
-		}
-	}
-`;
-
-export const GET_QUOTE_DATA_WITH_TOKEN = gql`
-	query getQuoteData($quoteId: ID!, $token: String) {
-		quote(id: $quoteId, token: $token) {
-			id
-			template
-			name
-			status
-			issuer {
-				name
-				email
-				phone
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-				owner {
-					defaultVatRate
-				}
-				siret
-			}
-			customer {
-				name
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-			}
-			options {
-				id
-				name
-				proposal
-				sections {
-					id
-					name
-					items {
-						status
-						id
-						name
-						unitPrice
-						unit
-						comments {
-							id
-							#readByCustomer
+						views {
+							viewer {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}
@@ -227,6 +287,7 @@ export const GET_COMMENTS_BY_ITEM = gql`
 		itemComments(itemId: $itemId, token: $token) {
 			id
 			text
+			createdAt
 			author {
 				... on User {
 					firstName

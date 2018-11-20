@@ -1,6 +1,23 @@
 import React, {Component} from 'react';
+import styled from 'react-emotion';
 
-import {Input} from '../../utils/content';
+import {Input, gray80, primaryBlue} from '../../utils/content';
+
+const Placeholder = styled('span')`
+	color: ${gray80};
+`;
+
+const NameInput = styled(Input)`
+	font-size: inherit;
+	padding: 2px 20px;
+	position: relative;
+	left: -20px;
+`;
+
+const Editable = styled('span')`
+	padding: 3px 0px;
+	color: ${primaryBlue};
+`;
 
 class InlineEditable extends Component {
 	constructor(props) {
@@ -34,7 +51,7 @@ class InlineEditable extends Component {
 		const {type, placeholder} = this.props;
 
 		return isEditing ? (
-			<Input
+			<NameInput
 				type={type}
 				value={value}
 				onChange={this.handleChange}
@@ -43,8 +60,10 @@ class InlineEditable extends Component {
 				autoFocus
 				flexible
 			/>
+		) : value ? (
+			<Editable onClick={this.handleFocus}>{value}</Editable>
 		) : (
-			<span onClick={this.handleFocus}>{value}</span>
+			<Placeholder onClick={this.handleFocus}>{placeholder}</Placeholder>
 		);
 	}
 }

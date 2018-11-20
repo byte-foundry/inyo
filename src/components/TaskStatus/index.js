@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled, {css} from 'react-emotion';
 import {Mutation} from 'react-apollo';
 
 import {FINISH_ITEM} from '../../utils/mutations.js';
-import {GET_QUOTE_DATA} from '../../utils/queries.js';
+import {GET_PROJECT_DATA} from '../../utils/queries.js';
 
-import PENDING from './pending.svg';
-import FINISHED from './finished.svg';
-import UPDATED from './updated.svg';
-import UPDATED_SENT from './updated_sent.svg';
+import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
+import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
+
+import {primaryNavyBlue, primaryBlue} from '../../utils/content';
 
 const TaskStatusMain = styled('div')`
 	position: relative;
@@ -17,24 +17,99 @@ const TaskStatusMain = styled('div')`
 	margin-right: 20px;
 `;
 
-const Status = styled('img')`
+const getTaskIconByStatus = (status) => {
+	switch (status) {
+	case 'PENDING':
+		return <TaskIcon />;
+	case 'FINISHED':
+		return <TaskIcon />;
+	case 'UPDATED':
+		return <PendingIcon />;
+	case 'UPDATED_SENT':
+		return <PendingIcon />;
+	case 'ADDED':
+		return <PendingIcon />;
+	case 'ADDED_SENT':
+		return <PendingIcon />;
+	default:
+		break;
+	}
+};
+
+const getTaskIconStylesByStatus = (props) => {
+	switch (props.status) {
+	case 'PENDING':
+		return css``;
+	case 'FINISHED':
+		return css`
+				.cls-1 {
+					stroke: ${primaryNavyBlue};
+				}
+				.cls-2 {
+					stroke: ${primaryBlue};
+				}
+			`;
+	case 'UPDATED':
+		return css``;
+	case 'UPDATED_SENT':
+		return css`
+				.cls-2 {
+					stroke: ${primaryBlue};
+				}
+				.cls-1 {
+					stroke: ${primaryNavyBlue};
+				}
+			`;
+	case 'ADDED':
+		return css``;
+	case 'ADDED_SENT':
+		return css`
+				.cls-2 {
+					stroke: ${primaryBlue};
+				}
+				.cls-1 {
+					stroke: ${primaryNavyBlue};
+				}
+			`;
+	default:
+		return css`
+				.cls-1,
+				.cls-2 {
+					stroke: pink !important;
+				}
+			`;
+	}
+};
+
+const hoverState = css`
+	&:hover {
+		.hover {
+			&.cls-1 {
+				stroke: ${primaryNavyBlue};
+			}
+			&.cls-2 {
+				stroke: ${primaryBlue};
+			}
+		}
+	}
+`;
+
+const Status = styled('div')`
 	width: 30px;
 	height: auto;
 	position: absolute;
-	top: 60%;
+	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
 	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
-`;
 
-const taskImageByStatus = {
-	PENDING,
-	FINISHED,
-	UPDATED,
-	UPDATED_SENT,
-	ADDED: UPDATED,
-	ADDED_SENT: UPDATED_SENT,
-};
+	svg {
+		width: 30px;
+		${getTaskIconStylesByStatus};
+	}
+
+	${props => props.status === 'PENDING' && !props.customer && hoverState};
+`;
 
 class TaskStatus extends Component {
 	select = () => {
@@ -53,11 +128,16 @@ class TaskStatus extends Component {
 			},
 		},
 		update: (cache, {data: {finishItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', {}, 'yellow']]],
+			]);
 			const data = cache.readQuery({
-				query: GET_QUOTE_DATA,
-				variables: {quoteId: this.props.match.params.quoteId},
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
 			});
-			const section = data.quote.options[0].sections.find(
+			const section = data.project.sections.find(
 				e => e.id === sectionId,
 			);
 			const itemIndex = section.items.find(
@@ -67,8 +147,10 @@ class TaskStatus extends Component {
 			section.items[itemIndex].status = finishItem.status;
 			try {
 				cache.writeQuery({
-					query: GET_QUOTE_DATA,
-					variables: {quoteId: this.props.match.params.quoteId},
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
 					data,
 				});
 			}
@@ -81,7 +163,12 @@ class TaskStatus extends Component {
 
 	render() {
 		const {
-			status, sectionId, itemId, mode, customerViewMode,
+			status,
+			sectionId,
+			itemId,
+			mode,
+			customerViewMode,
+			projectStatus,
 		} = this.props;
 
 		return (
@@ -93,16 +180,19 @@ class TaskStatus extends Component {
 								mode === 'see'
 								&& !customerViewMode
 								&& status === 'PENDING'
+								&& projectStatus !== 'SENT'
 							) {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
 						}}
 					>
 						<Status
-							src={taskImageByStatus[status]}
 							status={status}
 							customer={customerViewMode}
-						/>
+							projectStatus={projectStatus}
+						>
+							{getTaskIconByStatus(status)}
+						</Status>
 					</TaskStatusMain>
 				)}
 			</Mutation>

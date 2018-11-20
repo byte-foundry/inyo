@@ -58,7 +58,6 @@ class UserDataForm extends Component {
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								console.log(values);
 								try {
 									updateUser({
 										variables: {
@@ -70,6 +69,19 @@ class UserDataForm extends Component {
 											cache,
 											{data: {updateUser}},
 										) => {
+											window.$crisp.push([
+												'set',
+												'session:event',
+												[
+													[
+														[
+															'updated_user_data',
+															{},
+															'green',
+														],
+													],
+												],
+											]);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});

@@ -4,6 +4,8 @@ import styled from 'react-emotion';
 
 import {P, Label, ErrorInput} from '../../utils/content';
 
+import AddressDisplay from './address-display.js';
+
 const AddressAutocompleteMain = styled(P)`
 	width: fill-available;
 	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
@@ -30,6 +32,7 @@ class AddressAutocomplete extends Component {
 				</Label>
 				<AlgoliaPlaces
 					placeholder={placeholder}
+					autocomplete="false"
 					options={{
 						appId: 'pl1YAVPVE0UO',
 						apiKey: 'ca2fe2df77738e8d67dfea649c5ede2e',
@@ -53,12 +56,20 @@ class AddressAutocomplete extends Component {
 					onError={({message}) => {
 						throw new Error(message);
 					}}
-					value={values[name]}
+					defaultValue={
+						values
+						&& values.street
+						&& `${values.street} ${values.postalCode} ${values.city} ${
+							values.country
+						}`
+					}
 				/>
 				{errors[name]
 					&& touched[name] && (
 					<ErrorInput className="input-feedback">
-						{errors[name]}
+						{/* Yup does not provide a way to reduce errors to a parent object
+						so errors is always errors on street city, postalCode and country not on address */}
+						{errors && errors[name] && 'Requis'}
 					</ErrorInput>
 				)}
 			</AddressAutocompleteMain>

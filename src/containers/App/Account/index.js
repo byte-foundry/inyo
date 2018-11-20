@@ -18,11 +18,13 @@ import {
 	primaryWhite,
 	gray20,
 	gray30,
+	Loading,
 } from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserQuoteSettingsForm from '../../../components/UserQuoteSettingsForm';
+import UserProjectSettingsForm from '../../../components/UserProjectSettingsForm';
+import UserSettings from '../../../components/UserSettings';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
@@ -78,13 +80,6 @@ const LogoutButton = styled(Button)`
 	margin-bottom: 10px;
 	color: ${signalRed};
 `;
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 const WelcomeMessage = styled(H3)`
 	color: ${primaryBlue};
@@ -126,7 +121,7 @@ class Account extends Component {
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({client, loading, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
 						const {me} = data;
 						const {firstName} = me;
@@ -139,11 +134,11 @@ class Account extends Component {
 										theme="Link"
 										size="XSmall"
 										onClick={() => this.props.history.push(
-											'/app/quotes',
+											'/app/projects',
 										)
 										}
 									>
-										Retour à la liste des devis
+										Retour à la liste des projets
 									</BackButton>
 									<TopBarTitle>Mon compte</TopBarTitle>
 									<WelcomeMessage>
@@ -184,18 +179,22 @@ class Account extends Component {
 												Votre société
 											</ProfileSideElem>
 											<ProfileSideElem
-												active={activeItem === 'quote'}
+												active={
+													activeItem === 'settings'
+												}
 												onClick={() => {
-													this.quote.scrollIntoView({
-														block: 'start',
-														behavior: 'smooth',
-													});
+													this.settings.scrollIntoView(
+														{
+															block: 'start',
+															behavior: 'smooth',
+														},
+													);
 													this.setState({
-														activeItem: 'quote',
+														activeItem: 'settings',
 													});
 												}}
 											>
-												Informations de devis
+												Vos options
 											</ProfileSideElem>
 											<ProfileSideElem
 												active={
@@ -242,12 +241,12 @@ class Account extends Component {
 											/>
 											<ProfileTitle
 												innerRef={(elem) => {
-													this.quote = elem;
+													this.settings = elem;
 												}}
 											>
-												Informations de devis
+												Vos options
 											</ProfileTitle>
-											<UserQuoteSettingsForm
+											<UserSettings
 												data={me}
 												done={() => this.toast()}
 											/>

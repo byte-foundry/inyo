@@ -44,13 +44,6 @@ class CustomerNameAndAddress extends Component {
 				<ContactName>
 					{firstName} {lastName}
 				</ContactName>
-				<AddressBlock>
-					<Address>{address.street}</Address>
-					<Address>
-						{address.postalCode} - {address.city}
-					</Address>
-					<Address>{address.country}</Address>
-				</AddressBlock>
 			</ClientAddress>
 		);
 	}

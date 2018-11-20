@@ -64,15 +64,30 @@ export const UPDATE_USER = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askStartProjectConfirmation
+			}
 		}
 	}
 `;
 
 export const UPDATE_USER_CONSTANTS = gql`
-	mutation UpdateUser($defaultDailyPrice: Int, $defaultVatRate: Int) {
+	mutation UpdateUser(
+		$defaultDailyPrice: Int
+		$defaultVatRate: Int
+		$workingFields: [String!]
+		$jobType: JobType
+		$interestedFeatures: [String!]
+		$hasUpcomingProject: Boolean
+	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
 			defaultVatRate: $defaultVatRate
+			workingFields: $workingFields
+			jobType: $jobType
+			interestedFeatures: $interestedFeatures
+			hasUpcomingProject: $hasUpcomingProject
 		) {
 			id
 			email
@@ -80,6 +95,10 @@ export const UPDATE_USER_CONSTANTS = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
 			company {
 				id
 				name
@@ -96,10 +115,51 @@ export const UPDATE_USER_CONSTANTS = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askStartProjectConfirmation
+			}
 		}
 	}
 `;
 
+// Update User settings
+export const UPDATE_USER_SETTINGS = gql`
+	mutation UpdateUser($settings: SettingsInput!) {
+		updateUser(settings: $settings) {
+			id
+			email
+			firstName
+			lastName
+			defaultDailyPrice
+			defaultVatRate
+			workingFields
+			jobType
+			interestedFeatures
+			hasUpcomingProject
+			company {
+				id
+				name
+				email
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				phone
+				siret
+				rcs
+				rm
+				vat
+			}
+			settings {
+				askItemFinishConfirmation
+				askStartProjectConfirmation
+			}
+		}
+	}
+`;
 /** ******** COMPANY MUTATIONS ********* */
 
 export const UPDATE_USER_COMPANY = gql`
@@ -127,6 +187,10 @@ export const UPDATE_USER_COMPANY = gql`
 				rm
 				vat
 			}
+			settings {
+				askItemFinishConfirmation
+				askStartProjectConfirmation
+			}
 		}
 	}
 `;
@@ -140,7 +204,7 @@ export const CREATE_CUSTOMER = gql`
 		}
 	}
 `;
-/** ******** QUOTE MUTATIONS ********* */
+/** ******** PROJECT MUTATIONS ********* */
 
 export const EDIT_ITEMS = gql`
 	mutation EditItems($items: [String!]!) {
@@ -149,25 +213,26 @@ export const EDIT_ITEMS = gql`
 		}
 	}
 `;
-// Quote
-export const CREATE_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation createQuote(
+// Project
+export const CREATE_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation createProject(
 		$customerId: ID
 		$customer: CustomerInput
-		$template: QuoteTemplate!
-		$option: OptionInput
+		$template: ProjectTemplate!
+		$sections: [SectionInput!]
 		$name: String
 	) {
-		createQuote(
+		createProject(
 			customerId: $customerId
 			customer: $customer
 			template: $template
-			option: $option
+			sections: $sections
 			name: $name
 		) {
 			id
 			name
+			viewedByCustomer
 			customer {
 				name
 			}
@@ -178,63 +243,62 @@ export const CREATE_QUOTE = gql`
 		}
 	}
 `;
-export const UPDATE_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation updateQuote($quoteId: ID!, $name: String!) {
-		updateQuote(id: $quoteId, name: $name) {
+export const UPDATE_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation updateProject($projectId: ID!, $name: String!) {
+		updateProject(id: $projectId, name: $name) {
 			id
 			name
 		}
 	}
 `;
-export const SEND_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation sendQuote($quoteId: ID!) {
-		sendQuote(id: $quoteId) {
+export const START_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation startProject($projectId: ID!) {
+		startProject(id: $projectId) {
+			id
+			status
+			viewedByCustomer
+		}
+	}
+`;
+
+export const REMOVE_PROJECT = gql`
+	mutation removeProject($projectId: ID!) {
+		removeProject(id: $projectId) {
+			id
+		}
+	}
+`;
+
+export const ACCEPT_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation acceptProject($projectId: ID!, $token: String!) {
+		acceptProject(id: $projectId, token: $token) {
 			id
 			status
 		}
 	}
 `;
 
-export const ACCEPT_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation acceptQuote($quoteId: ID!, $token: String!) {
-		acceptQuote(id: $quoteId, token: $token) {
+export const REJECT_PROJECT = gql`
+	# creating project with a customer id or a new customer
+	mutation rejectProject($projectId: ID!, $token: String!) {
+		rejectProject(id: $projectId, token: $token) {
 			id
 			status
-		}
-	}
-`;
-
-export const REJECT_QUOTE = gql`
-	# creating quote with a customer id or a new customer
-	mutation rejectQuote($quoteId: ID!, $token: String!) {
-		rejectQuote(id: $quoteId, token: $token) {
-			id
-			status
-		}
-	}
-`;
-// Option
-export const UPDATE_OPTION = gql`
-	mutation updateOption($optionId: ID!, $proposal: Json!) {
-		updateOption(id: $optionId, proposal: $proposal) {
-			id
-			proposal
 		}
 	}
 `;
 // Section
 export const ADD_SECTION = gql`
-	mutation addSection($optionId: ID!, $name: String!, $items: [ItemInput!]) {
-		addSection(optionId: $optionId, name: $name, items: $items) {
+	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {
+		addSection(projectId: $projectId, name: $name, items: $items) {
 			id
 			name
 			items {
 				id
 				name
-				unitPrice
 				unit
 				vatRate
 				description
@@ -250,7 +314,6 @@ export const UPDATE_SECTION = gql`
 			items {
 				id
 				name
-				unitPrice
 				unit
 				vatRate
 				description
@@ -267,16 +330,55 @@ export const REMOVE_SECTION = gql`
 `;
 // Item
 export const ADD_ITEM = gql`
-	mutation addItem($sectionId: ID!, $name: String!) {
-		addItem(sectionId: $sectionId, name: $name) {
+	mutation addItem(
+		$sectionId: ID!
+		$name: String!
+		$unit: Float
+		$vatRate: Int
+		$description: String
+	) {
+		addItem(
+			sectionId: $sectionId
+			name: $name
+			unit: $unit
+			vatRate: $vatRate
+			description: $description
+		) {
 			id
 			name
-			unitPrice
 			unit
 			vatRate
 			description
 			pendingUnit
 			status
+			comments {
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;
@@ -285,7 +387,6 @@ export const UPDATE_ITEM = gql`
 		$itemId: ID!
 		$name: String
 		$description: String
-		$unitPrice: Int
 		$unit: Float
 		$vatRate: Int
 	) {
@@ -293,22 +394,50 @@ export const UPDATE_ITEM = gql`
 			id: $itemId
 			name: $name
 			description: $description
-			unitPrice: $unitPrice
 			unit: $unit
 			vatRate: $vatRate
 		) {
 			id
 			name
-			unitPrice
 			unit
 			vatRate
 			description
+			pendingUnit
+			status
+			comments {
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;
 
 export const UPDATE_VALIDATED_ITEM = gql`
-	# update an item that is in a VALIDATED quote
+	# update an item that is in a VALIDATED project
 	# the item status is passed to UPDATED
 	# and pendingUnit is filled with the value passed
 	mutation updateValidatedItem(
@@ -318,11 +447,28 @@ export const UPDATE_VALIDATED_ITEM = gql`
 	) {
 		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
 			id
+			name
 			unit
+			vatRate
+			description
 			pendingUnit
 			status
 			comments {
-				text
+				createdAt
+				id
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
 				author {
 					... on User {
 						firstName
@@ -357,11 +503,12 @@ export const REMOVE_ITEM = gql`
 `;
 
 export const SEND_AMENDMENT = gql`
-	mutation sendAmendment($quoteId: ID!) {
-		sendAmendment(quoteId: $quoteId) {
+	mutation sendAmendment($projectId: ID!) {
+		sendAmendment(projectId: $projectId) {
 			id
 			template
 			name
+			viewedByCustomer
 			status
 			issuer {
 				name
@@ -390,23 +537,17 @@ export const SEND_AMENDMENT = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
-						id
-						name
-						unitPrice
-						unit
-						pendingUnit
-						vatRate
-						description
-					}
+					unit
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}
@@ -414,8 +555,8 @@ export const SEND_AMENDMENT = gql`
 `;
 
 export const ACCEPT_AMENDMENT = gql`
-	mutation acceptAmendment($quoteId: ID!, $token: String!) {
-		acceptAmendment(quoteId: $quoteId, token: $token) {
+	mutation acceptAmendment($projectId: ID!, $token: String!) {
+		acceptAmendment(projectId: $projectId, token: $token) {
 			id
 			template
 			name
@@ -443,27 +584,45 @@ export const ACCEPT_AMENDMENT = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							id
-							#readByCustomer
+						views {
+							viewer {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}
@@ -471,8 +630,8 @@ export const ACCEPT_AMENDMENT = gql`
 `;
 
 export const REJECT_AMENDMENT = gql`
-	mutation rejectAmendment($quoteId: ID!, $token: String!) {
-		rejectAmendment(quoteId: $quoteId, token: $token) {
+	mutation rejectAmendment($projectId: ID!, $token: String!) {
+		rejectAmendment(projectId: $projectId, token: $token) {
 			id
 			template
 			name
@@ -500,27 +659,45 @@ export const REJECT_AMENDMENT = gql`
 					country
 				}
 			}
-			options {
+			sections {
 				id
 				name
-				proposal
-				sections {
+				items {
+					status
 					id
 					name
-					items {
-						status
+					unit
+					comments {
+						createdAt
 						id
-						name
-						unitPrice
-						unit
-						comments {
-							id
-							#readByCustomer
+						views {
+							viewer {
+								... on User {
+									firstName
+									lastName
+								}
+								... on Customer {
+									firstName
+									lastName
+									name
+								}
+							}
 						}
-						pendingUnit
-						vatRate
-						description
+						author {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
 					}
+					pendingUnit
+					vatRate
+					description
 				}
 			}
 		}
@@ -543,6 +720,47 @@ export const REJECT_ITEM = gql`
 			id
 			status
 			unit
+		}
+	}
+`;
+
+export const POST_COMMENT = gql`
+	mutation postComment(
+		$itemId: ID!
+		$token: String
+		$comment: CommentInput!
+	) {
+		postComment(itemId: $itemId, token: $token, comment: $comment) {
+			id
+			comments {
+				createdAt
+				id
+				text
+				views {
+					viewer {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
+				author {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;

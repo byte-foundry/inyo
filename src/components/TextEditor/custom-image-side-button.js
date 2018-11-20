@@ -50,7 +50,6 @@ export default class CustomImageSideButton extends ImageSideButton {
 	}
 
 	updateDataOfBlock(editorState, blockKey, newData) {
-		console.log(EditorState);
 		const contentState = editorState.getCurrentContent();
 		const selectionState = editorState.getSelection();
 		const newBlock = contentState.getBlockForKey(blockKey).merge({

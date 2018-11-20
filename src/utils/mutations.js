@@ -232,6 +232,7 @@ export const CREATE_QUOTE = gql`
 		) {
 			id
 			name
+			viewedByCustomer
 			customer {
 				name
 			}
@@ -257,6 +258,15 @@ export const SEND_QUOTE = gql`
 		sendQuote(id: $quoteId) {
 			id
 			status
+			viewedByCustomer
+		}
+	}
+`;
+
+export const REMOVE_QUOTE = gql`
+	mutation removeQuote($quoteId: ID!) {
+		removeQuote(id: $quoteId) {
+			id
 		}
 	}
 `;
@@ -516,6 +526,7 @@ export const SEND_AMENDMENT = gql`
 			id
 			template
 			name
+			viewedByCustomer
 			status
 			issuer {
 				name

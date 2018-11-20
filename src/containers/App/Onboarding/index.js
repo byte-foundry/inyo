@@ -9,7 +9,7 @@ import OnboardingFourthStep from '../../../components/Onboarding/onboarding-four
 import OnboardingFifthStep from '../../../components/Onboarding/onboarding-fifth-step';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
-import {gray20, signalGreen} from '../../../utils/content';
+import {gray20, signalGreen, Loading} from '../../../utils/content';
 
 const OnboardingMain = styled('div')`
 	max-width: 650px;
@@ -35,14 +35,6 @@ const OnboardingProgressBar = styled('div')`
 		background: ${signalGreen};
 		transition: width 0.2s ease;
 	}
-`;
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 class Onboarding extends Component {
@@ -117,7 +109,7 @@ class Onboarding extends Component {
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
 						const {me} = data;
 

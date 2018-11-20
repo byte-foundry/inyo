@@ -4,16 +4,9 @@ import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
 import {GET_QUOTE_DATA_WITH_TOKEN} from '../../../utils/queries';
+import {Loading} from '../../../utils/content';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 class QuoteCustomerView extends Component {
 	constructor(props) {
@@ -119,8 +112,11 @@ class QuoteCustomerView extends Component {
 				{({
 					loading, error, data, refetch,
 				}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (loading) return <Loading />;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					const {
 						quote: {
 							options: [option],

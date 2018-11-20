@@ -1,5 +1,7 @@
-import styled, {css} from 'react-emotion';
+import styled, {css, keyframes} from 'react-emotion';
+import React from 'react';
 import Shevy from 'shevyjs';
+import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -118,6 +120,12 @@ const ButtonStyles = (props) => {
 		return css`
 				background-color: transparent;
 				color: ${primaryBlue};
+				text-decoration: underline;
+			`;
+	case 'DeleteOutline':
+		return css`
+				background-color: transparent;
+				color: ${signalRed};
 				text-decoration: underline;
 			`;
 	case 'Outline':
@@ -366,3 +374,65 @@ export const ModalRow = styled('div')`
 	padding-top: 5px;
 	padding-bottom: 5px;
 `;
+
+const LoadingMain = styled('div')`
+	font-size: 30px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+`;
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+const translate = keyframes`
+  0% {
+    transform: translateY(0px);
+  }
+  25% {
+	transform: translateY(5px);
+  }
+  50% {
+	transform: translateY(0px);
+  }
+  75% {
+	transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+const BubbleIcon = styled(bubbleIcon)`
+	width: 45px;
+	height: auto;
+	opacity: 0.5;
+	.circle {
+		transform-origin: center;
+		animation: ${rotate} 2s linear infinite;
+		will-change: transform;
+	}
+	.cls-2 {
+		transform-origin: center;
+		animation: ${translate} 1s ease-in-out infinite;
+		will-change: transform;
+	}
+	.dot-2 {
+		animation-delay: 0.2s;
+	}
+	.dot-3 {
+		animation-delay: 0.4s;
+	}
+`;
+
+export const Loading = props => (
+	<LoadingMain>
+		<BubbleIcon />
+	</LoadingMain>
+);

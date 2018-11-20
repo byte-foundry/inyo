@@ -8,6 +8,7 @@ import {
 	Button,
 	primaryNavyBlue,
 	primaryWhite,
+	Loading,
 } from '../../../utils/content';
 
 import {ReactComponent as AccountIcon} from '../../../utils/icons/user.svg';
@@ -49,14 +50,6 @@ const ActionRow = styled('div')`
 	align-items: center;
 `;
 
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
-
 export const quoteState = {
 	DRAFT: 0,
 	SENT: 1,
@@ -82,15 +75,17 @@ class ListQuotes extends Component {
 		return (
 			<Query query={GET_ALL_QUOTES}>
 				{({loading, error, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (loading) return <Loading />;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					if (!quotes) {
 						this.setState({
 							quotes: data.me.company.quotes,
 							baseQuotes: data.me.company.quotes,
 						});
 					}
-					console.log(quotes);
 
 					return (
 						<ListQuotesMain>

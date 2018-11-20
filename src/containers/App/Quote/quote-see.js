@@ -7,6 +7,8 @@ import Section from '../../../components/Section';
 
 import {GET_QUOTE_DATA} from '../../../utils/queries';
 
+import {Loading} from '../../../utils/content';
+
 import QuoteDisplay from '../../../components/QuoteDisplay';
 
 class TasksListUser extends Component {
@@ -150,8 +152,11 @@ class TasksListUser extends Component {
 				{({
 					loading, error, data, refetch,
 				}) => {
-					if (loading) return <p>Loading</p>;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (loading) return <Loading />;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					const {quote} = data;
 					const option = quote.options[0];
 					const timePlanned = option.sections.reduce(

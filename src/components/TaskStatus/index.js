@@ -81,20 +81,7 @@ const getTaskIconStylesByStatus = (props) => {
 	}
 };
 
-const Status = styled('div')`
-	width: 30px;
-	height: auto;
-	position: absolute;
-	top: calc(50% + 4px);
-	left: 50%;
-	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
-
-	svg {
-		width: 30px;
-		${getTaskIconStylesByStatus};
-	}
-
+const hoverState = css`
 	&:hover {
 		.hover {
 			&.cls-1 {
@@ -105,6 +92,30 @@ const Status = styled('div')`
 			}
 		}
 	}
+`;
+
+const Status = styled('div')`
+	width: 30px;
+	height: auto;
+	position: absolute;
+	top: calc(50% + 4px);
+	left: 50%;
+	transform: translate(-50%, -50%);
+	cursor: ${props => (props.status === 'PENDING'
+		&& !props.customer
+		&& props.quoteStatus !== 'SENT'
+		? 'pointer'
+		: 'initial')};
+
+	svg {
+		width: 30px;
+		${getTaskIconStylesByStatus};
+	}
+
+	${props => props.status === 'PENDING'
+		&& !props.customer
+		&& props.quoteStatus !== 'SENT'
+		&& hoverState};
 `;
 
 class TaskStatus extends Component {
@@ -157,10 +168,14 @@ class TaskStatus extends Component {
 
 	render() {
 		const {
-			status, sectionId, itemId, mode, customerViewMode,
+			status,
+			sectionId,
+			itemId,
+			mode,
+			customerViewMode,
+			quoteStatus,
 		} = this.props;
 
-		console.log(status);
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItem => (
@@ -170,12 +185,17 @@ class TaskStatus extends Component {
 								mode === 'see'
 								&& !customerViewMode
 								&& status === 'PENDING'
+								&& quoteStatus !== 'SENT'
 							) {
 								this.finishItem(itemId, sectionId, finishItem);
 							}
 						}}
 					>
-						<Status status={status} customer={customerViewMode}>
+						<Status
+							status={status}
+							customer={customerViewMode}
+							quoteStatus={quoteStatus}
+						>
 							{getTaskIconByStatus(status)}
 						</Status>
 					</TaskStatusMain>

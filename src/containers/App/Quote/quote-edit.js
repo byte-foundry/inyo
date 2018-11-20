@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import {Query, Mutation} from 'react-apollo';
+import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
@@ -8,17 +8,10 @@ import {templates} from '../../../utils/quote-templates';
 import {GET_QUOTE_DATA, GET_ALL_QUOTES} from '../../../utils/queries';
 import {dateDiff} from '../../../utils/functions';
 import {EDIT_ITEMS} from '../../../utils/mutations';
+import {Loading} from '../../../utils/content';
 
 import QuoteDisplay from '../../../components/QuoteDisplay';
 import CompanyInfoModal from '../../../components/CompanyInfoModal';
-
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 class EditQuote extends Component {
 	constructor(props) {
@@ -38,6 +31,20 @@ class EditQuote extends Component {
 				position: toast.POSITION.TOP_RIGHT,
 				autoClose: 3000,
 				onClose: () => this.props.history.push('/app/quotes?action=quote_sent'),
+			},
+		);
+	};
+
+	toastDelete = () => {
+		toast.success(
+			<div>
+				<p>Le brouillon a été supprimé</p>
+				<p>Retour au menu principal.</p>
+			</div>,
+			{
+				position: toast.POSITION.TOP_RIGHT,
+				autoClose: 1000,
+				onClose: () => this.props.history.push('/app/quotes?action=quote_removed'),
 			},
 		);
 	};
@@ -412,6 +419,41 @@ class EditQuote extends Component {
 		});
 	};
 
+	removeQuote = (quoteId, removeQuote) => {
+		window.$crisp.push([
+			'set',
+			'session:event',
+			[[['quote_removed', {}, 'blue']]],
+		]);
+		removeQuote({
+			variables: {quoteId},
+			update: (cache, {data: {removeQuote}}) => {
+				const data = cache.readQuery({
+					query: GET_ALL_QUOTES,
+				});
+
+				if (data.me && data.me.company && data.me.company.quotes) {
+					const quoteIndex = data.me.company.quotes.findIndex(
+						quote => quote.id === removeQuote.id,
+					);
+
+					data.me.company.quotes.splice(quoteIndex, 1);
+				}
+				try {
+					cache.writeQuery({
+						query: GET_ALL_QUOTES,
+						data,
+					});
+					this.toastDelete();
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	askForInfos = () => {
 		this.setState({
 			showInfoModal: true,
@@ -439,9 +481,12 @@ class EditQuote extends Component {
 					const fetchedData = {...data};
 
 					if (loading || !fetchedData.quote) {
-						return <Loading>Chargement...</Loading>;
+						return <Loading />;
 					}
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 					const {quote} = fetchedData;
 
 					if (!this.state.selectedOption) {
@@ -459,6 +504,8 @@ class EditQuote extends Component {
 					const option = quote.options.find(
 						o => o.name === this.state.selectedOption,
 					);
+
+					const userSettings = quote.issuer.owner.settings;
 
 					return (
 						<div>
@@ -480,7 +527,15 @@ class EditQuote extends Component {
 								askForInfos={this.askForInfos}
 								updateOption={this.updateOption}
 								issuer={quote.issuer}
+								removeQuote={this.removeQuote}
+								userSettings={userSettings}
 							/>
+							{this.state.showSendQuoteConfirmModal && (
+								<CompanyInfoModal
+									quoteId={quote.id}
+									submit={this.sendQuote}
+								/>
+							)}
 							{this.state.showInfoModal && (
 								<CompanyInfoModal
 									quoteId={quote.id}

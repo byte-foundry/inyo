@@ -18,6 +18,7 @@ import {
 	primaryWhite,
 	gray20,
 	gray30,
+	Loading,
 } from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
@@ -79,13 +80,6 @@ const LogoutButton = styled(Button)`
 	margin-bottom: 10px;
 	color: ${signalRed};
 `;
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
 
 const WelcomeMessage = styled(H3)`
 	color: ${primaryBlue};
@@ -127,7 +121,7 @@ class Account extends Component {
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({client, loading, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if (data && data.me) {
 						const {me} = data;
 						const {firstName} = me;

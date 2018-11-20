@@ -21,6 +21,7 @@ import {
 	REJECT_AMENDMENT,
 	ACCEPT_QUOTE,
 	REJECT_QUOTE,
+	REMOVE_QUOTE,
 } from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import {dateDiff} from '../../utils/functions';
@@ -42,6 +43,8 @@ import {
 	secondaryLightBlue,
 	gray50,
 	ToggleButton,
+	signalRed,
+	Loading,
 } from '../../utils/content';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -59,6 +62,12 @@ const BackButton = styled(Button)`
 
 const QuoteDisplayTitle = styled(H1)`
 	color: ${primaryNavyBlue};
+	margin: 0;
+`;
+
+const InfoMessage = styled(P)`
+	color: ${primaryBlue};
+	font-size: 11px;
 	margin: 0;
 `;
 
@@ -95,7 +104,7 @@ const QuoteContent = styled('div')`
 
 const QuoteAction = styled(Button)`
 	text-decoration: none;
-	color: ${primaryBlue};
+	color: ${props => (props.theme === 'DeleteOutline' ? signalRed : primaryBlue)};
 	font-size: 13px;
 	transform: translateY(18px);
 	margin-top: 10px;
@@ -133,13 +142,6 @@ const SendQuoteButton = styled(Button)`
 	width: auto;
 	padding: 0.5em 1em;
 	margin-bottom: 0.5em;
-`;
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 `;
 
 class QuoteDisplay extends Component {
@@ -215,7 +217,7 @@ class QuoteDisplay extends Component {
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
-					if (loading) return <Loading>Chargement...</Loading>;
+					if (loading) return <Loading />;
 					if ((data && data.me) || customerViewMode) {
 						return (
 							<QuoteDisplayMain>
@@ -297,15 +299,16 @@ class QuoteDisplay extends Component {
 									</FlexColumn>
 									{mode === 'see' && (
 										<FlexRow>
-											{!customerViewMode && (
+											{!customerViewMode
+												&& quote.status !== 'SENT' && (
 												<QuoteStatus>
 													<span>
-														Temps prévu :{' '}
+															Temps prévu :{' '}
 														{timePlanned}
 													</span>
 													{!customerViewMode && (
 														<span>
-															Dépassement :{' '}
+																Dépassement :{' '}
 															{overtime}
 														</span>
 													)}
@@ -338,6 +341,15 @@ class QuoteDisplay extends Component {
 														</SendQuoteButton>
 													)}
 												</Mutation>
+											)}
+											{!customerViewMode
+												&& quote.status === 'SENT' && (
+												<InfoMessage>
+														Ce devis est en attente
+														de validation: vous ne
+														pouvez pas le modifier
+														pour le moment
+												</InfoMessage>
 											)}
 											{customerViewMode
 												&& isAmendmentAcceptable && (
@@ -686,21 +698,42 @@ class QuoteDisplay extends Component {
 											</FlexColumn>
 										</QuoteContent>
 									</CenterContent>
-									<SideActions>
-										{issuer.name && (
-											<IssuerNameAndAddress
-												issuer={issuer}
+									<SideActions justifyContent="space-between">
+										<div>
+											{issuer.name && (
+												<IssuerNameAndAddress
+													issuer={issuer}
+												/>
+											)}
+											<CustomerNameAndAddress
+												customer={quote.customer}
 											/>
-										)}
-										<CustomerNameAndAddress
-											customer={quote.customer}
-										/>
-										{this.getQuoteTotal(
-											quoteOption,
-											customerViewMode
-												? quote.issuer.owner
-													.defaultVatRate
-												: data.me.defaultVatRate,
+											{this.getQuoteTotal(
+												quoteOption,
+												customerViewMode
+													? quote.issuer.owner
+														.defaultVatRate
+													: data.me.defaultVatRate,
+											)}
+										</div>
+										{mode === 'edit' && (
+											<Mutation mutation={REMOVE_QUOTE}>
+												{RemoveQuote => (
+													<QuoteAction
+														theme="DeleteOutline"
+														size="XSmall"
+														type="delete"
+														onClick={() => {
+															this.props.removeQuote(
+																quote.id,
+																RemoveQuote,
+															);
+														}}
+													>
+														Supprimer le brouillon
+													</QuoteAction>
+												)}
+											</Mutation>
 										)}
 									</SideActions>
 								</FlexRow>

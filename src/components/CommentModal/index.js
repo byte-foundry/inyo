@@ -70,7 +70,10 @@ class CommentModal extends Component {
 			>
 				{({loading, error, data}) => {
 					if (loading) return <span />;
-					if (error) return <p>Error!: ${error.toString()}</p>;
+					if (error) {
+						throw new Error(error);
+						return <span />;
+					}
 
 					const {itemComments} = data;
 

@@ -17,6 +17,7 @@ import {
 	primaryWhite,
 	gray30,
 	gray20,
+	Loading,
 } from '../../utils/content';
 import {templates} from '../../utils/quote-templates';
 
@@ -55,14 +56,6 @@ const AddInput = styled(Input)`
 	font-size: 13px;
 `;
 
-const Loading = styled('div')`
-	font-size: 30px;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
-
 class AddItem extends Component {
 	constructor(props) {
 		super(props);
@@ -83,7 +76,7 @@ class AddItem extends Component {
 					<Query query={GET_ITEMS}>
 						{({loading, error, data}) => {
 							if (loading) {
-								return <Loading>Chargement...</Loading>;
+								return <Loading />;
 							}
 							if (!loading && data && data.template) {
 								const {items} = data.template;

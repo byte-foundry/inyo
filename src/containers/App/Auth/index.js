@@ -77,7 +77,7 @@ class Auth extends Component {
 					{isLogin ? <LoginForm /> : <SignUpForm />}
 					{isLogin ? (
 						<P>
-							New?{' '}
+							Vous êtes nouveau ?{' '}
 							<Button
 								theme="Link"
 								size="XSmall"
@@ -85,12 +85,12 @@ class Auth extends Component {
 									this.setState({isLogin: false});
 								}}
 							>
-								Create an account
+								Créer un compte
 							</Button>
 						</P>
 					) : (
 						<P>
-							Already have an account?{' '}
+							Vous avez déjà un compte ?{' '}
 							<Button
 								theme="Link"
 								size="XSmall"
@@ -98,7 +98,7 @@ class Auth extends Component {
 									this.setState({isLogin: true});
 								}}
 							>
-								Log in
+								Se connecter
 							</Button>
 						</P>
 					)}

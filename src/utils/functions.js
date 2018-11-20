@@ -11,3 +11,17 @@ export const dateDiff = (datepart, fromdate, todate) => {
 
 	return Math.floor(diff / divideBy[datepart]);
 };
+
+export function nonEmpty(parts, ...rest) {
+	let res = parts[0];
+
+	rest.forEach((item, index) => {
+		if (item) {
+			res += item;
+		}
+
+		res += parts[index];
+	});
+
+	return res;
+}

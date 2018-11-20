@@ -165,6 +165,7 @@ export const GET_PROJECT_DATA = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id

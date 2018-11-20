@@ -22,8 +22,10 @@ import {
 	FlexRow,
 	FlexColumn,
 	Button,
+	primaryWhite,
 	primaryNavyBlue,
 	primaryBlue,
+	pastelGreen,
 	gray20,
 	gray10,
 	gray50,
@@ -51,7 +53,8 @@ const ProjectDisplayTitle = styled(H1)`
 
 const ProjectSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
-	min-width: 15vw;
+	min-width: 260px;
+	flex: 0.1 260px;
 	padding: 20px 40px;
 `;
 const ProjectName = styled(H3)`
@@ -86,6 +89,23 @@ const ProjectAction = styled(Button)`
 	transform: translateY(18px);
 	margin-top: 10px;
 	margin-bottom: 10px;
+`;
+
+const InfosOnItems = styled('div')`
+	display: flex;
+	margin: 8px 0px 10px;
+	&::before {
+		content: ' ';
+		background: ${props => props.color};
+		margin-right: 10px;
+		border: solid 1px #dddddd;
+		width: 40px;
+		height: 40px;
+		display: block;
+		border-radius: 50%;
+		position: relative;
+		top: -8px;
+	}
 `;
 
 const ProjectStatus = styled(FlexColumn)`
@@ -237,6 +257,53 @@ class ProjectDisplay extends Component {
 									)}
 								</ProjectRow>
 								<FlexRow justifyContent="space-between">
+									<SideActions>
+										<InfosOnItems color={primaryWhite}>
+											Vos tâches
+										</InfosOnItems>
+										<InfosOnItems color={pastelGreen}>
+											Tâches de votre client
+										</InfosOnItems>
+										<div>
+											{customerViewMode
+												&& issuer.name && (
+												<IssuerNameAndAddress
+													issuer={issuer}
+												/>
+											)}
+											{!customerViewMode && (
+												<CustomerNameAndAddress
+													customer={project.customer}
+												/>
+											)}
+											{this.getProjectTotal(
+												project,
+												customerViewMode
+													? project.issuer.owner
+														.defaultVatRate
+													: data.me.defaultVatRate,
+											)}
+										</div>
+										{mode === 'edit' && (
+											<Mutation mutation={REMOVE_PROJECT}>
+												{RemoveProject => (
+													<ProjectAction
+														theme="DeleteOutline"
+														size="XSmall"
+														type="delete"
+														onClick={() => {
+															this.props.removeProject(
+																project.id,
+																RemoveProject,
+															);
+														}}
+													>
+														Supprimer le brouillon
+													</ProjectAction>
+												)}
+											</Mutation>
+										)}
+									</SideActions>
 									<CenterContent flexGrow="2">
 										<ProjectContent>
 											{mode === 'see' && (
@@ -319,44 +386,6 @@ class ProjectDisplay extends Component {
 											</FlexColumn>
 										</ProjectContent>
 									</CenterContent>
-									<SideActions justifyContent="space-between">
-										<div>
-											{issuer.name && (
-												<IssuerNameAndAddress
-													issuer={issuer}
-												/>
-											)}
-											<CustomerNameAndAddress
-												customer={project.customer}
-											/>
-											{this.getProjectTotal(
-												project,
-												customerViewMode
-													? project.issuer.owner
-														.defaultVatRate
-													: data.me.defaultVatRate,
-											)}
-										</div>
-										{mode === 'edit' && (
-											<Mutation mutation={REMOVE_PROJECT}>
-												{RemoveProject => (
-													<ProjectAction
-														theme="DeleteOutline"
-														size="XSmall"
-														type="delete"
-														onClick={() => {
-															this.props.removeProject(
-																project.id,
-																RemoveProject,
-															);
-														}}
-													>
-														Supprimer le brouillon
-													</ProjectAction>
-												)}
-											</Mutation>
-										)}
-									</SideActions>
 								</FlexRow>
 							</ProjectDisplayMain>
 						);

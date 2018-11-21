@@ -111,7 +111,8 @@ class AddItem extends Component {
 											value: 'CUSTOMER',
 										}}
 										name="reviewer"
-										onChange={handleChange}
+										setFieldValue={setFieldValue}
+										value={reviewer}
 									/>
 								</FlexRow>
 								<FlexRow justifyContent="space-between">

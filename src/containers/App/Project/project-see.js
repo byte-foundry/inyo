@@ -3,7 +3,6 @@ import styled from 'react-emotion';
 import {Mutation, Query} from 'react-apollo';
 import ReactGA from 'react-ga';
 import {ToastContainer, toast} from 'react-toastify';
-import Section from '../../../components/Section';
 
 import {GET_PROJECT_DATA} from '../../../utils/queries';
 
@@ -12,17 +11,17 @@ import {Loading} from '../../../utils/content';
 import ProjectDisplay from '../../../components/ProjectDisplay';
 
 class TasksListUser extends Component {
-	editItem = async (itemId, sectionId, data, updateValidatedItem) => {
+	editItem = async (itemId, sectionId, data, updateItem) => {
 		const {name, unit, comment} = data;
 
-		return updateValidatedItem({
+		return updateItem({
 			variables: {
 				itemId,
 				name,
 				unit: parseFloat(unit),
 				comment: {text: comment},
 			},
-			update: (cache, {data: {updateValidatedItem}}) => {
+			update: (cache, {data: {updateItem}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
@@ -36,10 +35,10 @@ class TasksListUser extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === updateValidatedItem.id,
+					e => e.id === updateItem.id,
 				);
 
-				section.items[itemIndex] = updateValidatedItem;
+				section.items[itemIndex] = updateItem;
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,

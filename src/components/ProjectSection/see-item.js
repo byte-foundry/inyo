@@ -20,7 +20,6 @@ import {
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
-	UPDATE_VALIDATED_ITEM,
 	ACCEPT_ITEM,
 	REJECT_ITEM,
 } from '../../utils/mutations';
@@ -210,9 +209,9 @@ class Item extends Component {
 		}
 		if (shouldDisplayAddItem && mode === 'see') {
 			return (
-				<Mutation mutation={UPDATE_VALIDATED_ITEM}>
-					{updateValidatedItem => (
-						<AmendItem
+				<Mutation mutation={UPDATE_ITEM}>
+					{updateItem => (
+						<AddItem
 							item={item}
 							cancel={() => {
 								this.setState({
@@ -223,12 +222,7 @@ class Item extends Component {
 								this.setState({
 									shouldDisplayAddItem: false,
 								});
-								editItem(
-									item.id,
-									sectionId,
-									data,
-									updateValidatedItem,
-								);
+								editItem(item.id, sectionId, data, updateItem);
 							}}
 						/>
 					)}

@@ -336,6 +336,7 @@ export const ADD_ITEM = gql`
 		$unit: Float
 		$vatRate: Int
 		$description: String
+		$reviewer: String
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -387,7 +388,8 @@ export const UPDATE_ITEM = gql`
 		$name: String
 		$description: String
 		$unit: Float
-		$vatRate: Int
+		$comment: CommentInput
+		$reviewer: String
 	) {
 		updateItem(
 			id: $itemId
@@ -396,54 +398,6 @@ export const UPDATE_ITEM = gql`
 			unit: $unit
 			vatRate: $vatRate
 		) {
-			id
-			name
-			unit
-			description
-			status
-			reviewer
-			comments {
-				createdAt
-				id
-				views {
-					viewer {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
-				author {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
-		}
-	}
-`;
-
-export const UPDATE_VALIDATED_ITEM = gql`
-	# update an item that is in a VALIDATED project
-	# the item status is passed to UPDATED
-	# and pendingUnit is filled with the value passed
-	mutation updateValidatedItem(
-		$itemId: ID!
-		$unit: Float!
-		$comment: CommentInput!
-	) {
-		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
 			id
 			name
 			unit

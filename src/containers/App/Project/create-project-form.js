@@ -1,11 +1,11 @@
 import React from 'react';
 import {Formik} from 'formik';
 import styled from 'react-emotion';
-import * as Yup from 'yup';
 import {Mutation, Query} from 'react-apollo';
 import Creatable from 'react-select/lib/Creatable';
 import ClassicSelect from 'react-select';
 import ReactGA from 'react-ga';
+import * as Sentry from '@sentry/browser';
 import {templates} from '../../../utils/project-templates';
 
 import {
@@ -22,7 +22,6 @@ import {
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
-import AddressAutocomplete from '../../../components/AddressAutocomplete';
 import {CREATE_PROJECT} from '../../../utils/mutations';
 import {GET_ALL_PROJECTS, GET_USER_INFOS} from '../../../utils/queries';
 
@@ -44,12 +43,12 @@ const FormSection = styled('div')`
 `;
 
 const SelectStyles = {
-	option: (base, state) => ({
+	option: base => ({
 		...base,
 		borderRadius: 0,
 		fontFamily: 'Ligne',
 	}),
-	menu: (base, state) => ({
+	menu: base => ({
 		...base,
 		marginTop: 2,
 		borderRadius: 0,
@@ -62,7 +61,7 @@ const SelectStyles = {
 		borderRadius: 0,
 		fontFamily: 'Ligne',
 	}),
-	input: (base, state) => ({
+	input: base => ({
 		...base,
 		fontFamily: 'Ligne',
 		marginTop: '5px',
@@ -80,12 +79,12 @@ class CreateProjectForm extends React.Component {
 
 		return (
 			<Query query={GET_USER_INFOS}>
-				{({client, loading, data}) => {
+				{({loading, data, error}) => {
+					if (error) {
+						throw new Error(error);
+					}
 					if (loading) return <Loading />;
 					if (data && data.me) {
-						const {me} = data;
-						const {defaultDailyPrice} = me;
-
 						return (
 							<Mutation mutation={CREATE_PROJECT}>
 								{createProject => (
@@ -102,10 +101,7 @@ class CreateProjectForm extends React.Component {
 										validate={(values) => {
 											const errors = {};
 
-											if (!values.customer) {
-												errors.customer = 'Requis';
-											}
-											else {
+											if (values.customer) {
 												const selectedCustomer
 													= values.customer
 													&& customers.find(
@@ -130,6 +126,10 @@ class CreateProjectForm extends React.Component {
 													}
 												}
 											}
+											else {
+												errors.customer = 'Requis';
+											}
+
 											if (!values.template) {
 												errors.template = 'Requis';
 											}
@@ -193,24 +193,24 @@ class CreateProjectForm extends React.Component {
 															cache,
 															{
 																data: {
-																	createProject,
+																	createProject: createdProject,
 																},
 															},
 														) => {
-															const data = cache.readQuery(
+															const projectsResults = cache.readQuery(
 																{
 																	query: GET_ALL_PROJECTS,
 																},
 															);
 
-															data.me.company.projects.push(
-																createProject,
+															projectsResults.me.company.projects.push(
+																createdProject,
 															);
 															try {
 																cache.writeQuery(
 																	{
 																		query: GET_ALL_PROJECTS,
-																		data,
+																		projectsResults,
 																	},
 																);
 																ReactGA.event({
@@ -346,7 +346,7 @@ class CreateProjectForm extends React.Component {
 																}
 															}
 															catch (e) {
-																console.log(e);
+																throw e;
 															}
 														},
 													},
@@ -357,7 +357,10 @@ class CreateProjectForm extends React.Component {
 												);
 												actions.setSubmitting(false);
 											}
-											catch (error) {
+											catch (projectError) {
+												Sentry.captureException(
+													projectError,
+												);
 												actions.setSubmitting(false);
 												actions.setErrors(error);
 												actions.setStatus({
@@ -381,9 +384,6 @@ class CreateProjectForm extends React.Component {
 													c => c.id
 														=== values.customer.id,
 												);
-											const newCustomer
-												= !selectedCustomer
-												&& values.customer;
 
 											return (
 												<div>
@@ -603,6 +603,7 @@ class CreateProjectForm extends React.Component {
 							</Mutation>
 						);
 					}
+					return false;
 				}}
 			</Query>
 		);

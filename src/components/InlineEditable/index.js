@@ -50,19 +50,25 @@ class InlineEditable extends Component {
 		const {isEditing, value} = this.state;
 		const {type, placeholder} = this.props;
 
-		return isEditing ? (
-			<NameInput
-				type={type}
-				value={value}
-				onChange={this.handleChange}
-				onBlur={this.handleFocus}
-				placeholder={placeholder}
-				autoFocus
-				flexible
-			/>
-		) : value ? (
-			<Editable onClick={this.handleFocus}>{value}</Editable>
-		) : (
+		if (isEditing) {
+			return (
+				<NameInput
+					type={type}
+					value={value}
+					onChange={this.handleChange}
+					onBlur={this.handleFocus}
+					placeholder={placeholder}
+					autoFocus
+					flexible
+				/>
+			);
+		}
+
+		if (value) {
+			return <Editable onClick={this.handleFocus}>{value}</Editable>;
+		}
+
+		return (
 			<Placeholder onClick={this.handleFocus}>{placeholder}</Placeholder>
 		);
 	}

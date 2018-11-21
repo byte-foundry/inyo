@@ -4,7 +4,6 @@ import styled from 'react-emotion';
 import {
 	FlexRow,
 	FlexColumn,
-	primaryBlue,
 	primaryWhite,
 	primarySalmon,
 	primaryNavyBlue,

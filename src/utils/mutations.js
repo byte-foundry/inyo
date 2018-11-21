@@ -300,8 +300,8 @@ export const ADD_SECTION = gql`
 				id
 				name
 				unit
-				vatRate
 				description
+				reviewer
 			}
 		}
 	}
@@ -315,8 +315,8 @@ export const UPDATE_SECTION = gql`
 				id
 				name
 				unit
-				vatRate
 				description
+				reviewer
 			}
 		}
 	}
@@ -336,6 +336,7 @@ export const ADD_ITEM = gql`
 		$unit: Float
 		$vatRate: Int
 		$description: String
+		$reviewer: String
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -347,10 +348,9 @@ export const ADD_ITEM = gql`
 			id
 			name
 			unit
-			vatRate
 			description
-			pendingUnit
 			status
+			reviewer
 			comments {
 				createdAt
 				id
@@ -388,7 +388,8 @@ export const UPDATE_ITEM = gql`
 		$name: String
 		$description: String
 		$unit: Float
-		$vatRate: Int
+		$comment: CommentInput
+		$reviewer: String
 	) {
 		updateItem(
 			id: $itemId
@@ -400,59 +401,9 @@ export const UPDATE_ITEM = gql`
 			id
 			name
 			unit
-			vatRate
 			description
-			pendingUnit
 			status
-			comments {
-				createdAt
-				id
-				views {
-					viewer {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
-				author {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
-		}
-	}
-`;
-
-export const UPDATE_VALIDATED_ITEM = gql`
-	# update an item that is in a VALIDATED project
-	# the item status is passed to UPDATED
-	# and pendingUnit is filled with the value passed
-	mutation updateValidatedItem(
-		$itemId: ID!
-		$unit: Float!
-		$comment: CommentInput!
-	) {
-		updateValidatedItem(id: $itemId, unit: $unit, comment: $comment) {
-			id
-			name
-			unit
-			vatRate
-			description
-			pendingUnit
-			status
+			reviewer
 			comments {
 				createdAt
 				id
@@ -545,9 +496,8 @@ export const SEND_AMENDMENT = gql`
 					id
 					name
 					unit
-					pendingUnit
-					vatRate
 					description
+					reviewer
 				}
 			}
 		}
@@ -592,6 +542,7 @@ export const ACCEPT_AMENDMENT = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id
@@ -620,8 +571,6 @@ export const ACCEPT_AMENDMENT = gql`
 							}
 						}
 					}
-					pendingUnit
-					vatRate
 					description
 				}
 			}
@@ -667,6 +616,7 @@ export const REJECT_AMENDMENT = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id
@@ -695,8 +645,6 @@ export const REJECT_AMENDMENT = gql`
 							}
 						}
 					}
-					pendingUnit
-					vatRate
 					description
 				}
 			}

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
 import ReactGA from 'react-ga';
+import * as Sentry from '@sentry/browser';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -69,7 +70,7 @@ class SignupForm extends Component {
 									}
 								}
 								catch (error) {
-									console.log(error);
+									Sentry.captureException(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
@@ -81,11 +82,9 @@ class SignupForm extends Component {
 						>
 							{(props) => {
 								const {
-									dirty,
 									isSubmitting,
 									status,
 									handleSubmit,
-									handleReset,
 								} = props;
 
 								return (

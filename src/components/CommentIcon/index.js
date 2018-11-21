@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {comment} from 'postcss';
 import {primaryWhite, primaryBlue, gray20} from '../../utils/content';
 
 const CommentIconMain = styled('div')`
@@ -46,7 +45,7 @@ class CommentIcon extends Component {
 
 		if (comments && comments.length !== 0) {
 			commentLength = comments.filter(
-				comment => !comment.views.find(e => e.viewer.__typename === userType),
+				comment => !comment.views.find(e => e.viewer.__typename === userType), // eslint-disable-line no-underscore-dangle
 			).length;
 		}
 		return (

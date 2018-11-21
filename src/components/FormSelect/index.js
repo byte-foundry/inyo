@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import styled, {css} from 'react-emotion';
 import {Field} from 'formik';
 
-import FormInput from '../FormInput';
-
 import {
 	P, Label, ErrorInput, gray50, gray70,
 } from '../../utils/content';

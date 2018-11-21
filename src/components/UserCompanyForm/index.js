@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
+import * as Sentry from '@sentry/browser';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
-import AddressAutocomplete from '../AddressAutocomplete';
+
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
 import {
 	Button,
@@ -14,6 +15,8 @@ import {
 	ErrorInput,
 } from '../../utils/content';
 import {GET_USER_INFOS} from '../../utils/queries';
+
+import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
 
 const UserCompanyFormMain = styled('div')``;
@@ -33,20 +36,9 @@ const UpdateButton = styled(Button)`
 `;
 
 class UserCompanyForm extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		const {
-			name,
-			address,
-			phone,
-			siret,
-			rcs,
-			rm,
-			vat,
-			submit,
+			name, address, phone, siret, rcs, rm, vat,
 		} = this.props.data;
 		const {buttonText, done} = this.props;
 
@@ -82,7 +74,7 @@ class UserCompanyForm extends Component {
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								values.address.__typename = undefined;
+								values.address.__typename = undefined; // eslint-disable-line no-underscore-dangle, no-param-reassign
 								try {
 									updateUser({
 										variables: {
@@ -90,7 +82,7 @@ class UserCompanyForm extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: updatedUser}},
 										) => {
 											window.$crisp.push([
 												'set',
@@ -109,7 +101,7 @@ class UserCompanyForm extends Component {
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = updatedUser;
 											ReactGA.event({
 												category: 'User',
 												action: 'Updated company data',
@@ -122,13 +114,13 @@ class UserCompanyForm extends Component {
 												done();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
 								}
 								catch (error) {
-									console.log(error);
+									Sentry.captureException(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
@@ -139,11 +131,8 @@ class UserCompanyForm extends Component {
 						>
 							{(props) => {
 								const {
-									dirty,
-									isSubmitting,
 									status,
 									handleSubmit,
-									handleReset,
 									setFieldValue,
 								} = props;
 

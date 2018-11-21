@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import {Route} from 'react-router-dom';
 import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
-import styled from 'react-emotion';
 import {GET_PROJECT_DATA_WITH_TOKEN} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
 
@@ -119,7 +117,6 @@ class ProjectCustomerView extends Component {
 					if (loading) return <Loading />;
 					if (error) {
 						throw new Error(error);
-						return <span />;
 					}
 					const {project} = data;
 

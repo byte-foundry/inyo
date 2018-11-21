@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import styled, {keyframes} from 'react-emotion';
+import styled from 'react-emotion';
 
 import Plural from '../Plural';
 import {
@@ -12,8 +12,6 @@ import {
 	primaryBlue,
 	primaryWhite,
 } from '../../utils/content';
-
-import {ReactComponent as eyeIcon} from '../../utils/icons/eye.svg';
 
 const ProjectCardMain = styled('div')`
 	position: relative;
@@ -52,61 +50,6 @@ const Amount = styled('div')`
 	font-size: 24px;
 	color: ${primaryNavyBlue};
 	text-align: right;
-`;
-
-const pulsePB = keyframes`
-  0% {
-	stroke: "#dfe1e6";
-  }
-  50% {
-    stroke: ${primaryBlue};
-  }
-  100% {
-    stroke: "#dfe1e6";
-  }
-`;
-
-const pulsePNB = keyframes`
-  0% {
-	stroke: "#b0b0b5";
-  }
-  50% {
-    stroke: ${primaryNavyBlue};
-  }
-  100% {
-    stroke: "#b0b0b5";
-  }
-`;
-
-const pulsePNBF = keyframes`
-  0% {
-	fill: "#b0b0b5";
-  }
-  50% {
-    fill: ${primaryNavyBlue};
-  }
-  100% {
-    fill: "#b0b0b5";
-  }
-`;
-
-const EyeIcon = styled(eyeIcon)`
-	position: absolute;
-	left: 16px;
-	bottom: 20px;
-	width: 30px;
-	height: auto;
-	opacity: ${props => (props.viewedByCustomer ? '1' : '0.2')};
-	.cls-1 {
-		stroke: ${primaryBlue};
-	}
-	.cls-2,
-	.cls-3 {
-		stroke: ${primaryNavyBlue};
-	}
-	.cls-4 {
-		fill: ${primaryNavyBlue};
-	}
 `;
 
 class ProjectCard extends Component {

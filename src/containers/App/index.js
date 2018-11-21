@@ -5,11 +5,9 @@ import styled from 'react-emotion';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 
-import Dashboard from './Dashboard';
 import Onboarding from './Onboarding';
 import Account from './Account';
 import Project from './Project';
-import Company from './Company';
 import ProjectCustomerView from './Project/project-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
@@ -66,19 +64,8 @@ class App extends Component {
 									/>
 								)}
 								<ProtectedRoute
-									exact
-									path="/app"
-									component={Dashboard}
-									isAllowed={data && data.me}
-								/>
-								<ProtectedRoute
 									path="/app/account"
 									component={Account}
-									isAllowed={data && data.me}
-								/>
-								<ProtectedRoute
-									path="/app/company"
-									component={Company}
 									isAllowed={data && data.me}
 								/>
 								<ProtectedRoute

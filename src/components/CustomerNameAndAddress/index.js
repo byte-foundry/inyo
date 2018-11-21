@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from 'react-emotion';
 
-import {
-	H5, H4, P, primaryNavyBlue, primaryBlue,
-} from '../../utils/content';
+import {H5, H4, primaryNavyBlue} from '../../utils/content';
 
 const ClientAddress = styled('div')``;
 
@@ -20,22 +18,10 @@ const ContactName = styled(H5)`
 	margin-bottom: 10px;
 `;
 
-const AddressBlock = styled('div')`
-	border-top: 1px solid ${primaryBlue};
-	padding-top: 10px;
-`;
-
-const Address = styled(P)`
-	color: ${primaryBlue};
-	font-size: 11px;
-	margin: 0;
-	margin-bottom: 5px;
-`;
-
 class CustomerNameAndAddress extends Component {
 	render() {
 		const {
-			name, firstName, lastName, address,
+			name, firstName, lastName, email,
 		} = this.props.customer;
 
 		return (
@@ -44,6 +30,7 @@ class CustomerNameAndAddress extends Component {
 				<ContactName>
 					{firstName} {lastName}
 				</ContactName>
+				<ContactName>{email}</ContactName>
 			</ClientAddress>
 		);
 	}

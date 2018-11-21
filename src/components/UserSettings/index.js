@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
+import * as Sentry from '@sentry/browser';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
+
 import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
 import {
 	Button,
@@ -12,9 +14,9 @@ import {
 	gray20,
 	ErrorInput,
 } from '../../utils/content';
-import FormElem from '../FormElem';
-import FormCheckbox from '../FormCheckbox';
 import {GET_USER_INFOS} from '../../utils/queries';
+
+import FormCheckbox from '../FormCheckbox';
 
 const UserDataFormMain = styled('div')``;
 
@@ -33,10 +35,6 @@ const UpdateButton = styled(Button)`
 `;
 
 class UserDataForm extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		const {
 			askStartProjectConfirmation,
@@ -73,13 +71,13 @@ class UserDataForm extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: updatedUser}},
 										) => {
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = updatedUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -92,12 +90,13 @@ class UserDataForm extends Component {
 												this.props.done();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
 								}
 								catch (error) {
+									Sentry.captureException(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
@@ -107,15 +106,7 @@ class UserDataForm extends Component {
 							}}
 						>
 							{(props) => {
-								const {
-									values,
-									dirty,
-									isSubmitting,
-									status,
-									handleSubmit,
-									handleReset,
-									setFieldValue,
-								} = props;
+								const {status, handleSubmit} = props;
 
 								return (
 									<form onSubmit={handleSubmit}>

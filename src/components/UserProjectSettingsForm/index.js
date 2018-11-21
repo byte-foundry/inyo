@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Formik} from 'formik';
+import * as Sentry from '@sentry/browser';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
+
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
 	Button, FlexRow, primaryWhite, gray20,
 } from '../../utils/content';
-import FormElem from '../FormElem';
 import {GET_USER_INFOS} from '../../utils/queries';
+
+import FormElem from '../FormElem';
 
 const UserProjectSettingsFormMain = styled('div')``;
 
@@ -60,7 +63,7 @@ class UserProjectSettingsForm extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: updatedUser}},
 										) => {
 											window.$crisp.push([
 												'set',
@@ -79,7 +82,7 @@ class UserProjectSettingsForm extends Component {
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = updatedUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -99,6 +102,7 @@ class UserProjectSettingsForm extends Component {
 									});
 								}
 								catch (error) {
+									Sentry.captureException(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({

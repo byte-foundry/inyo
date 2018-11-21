@@ -4,8 +4,6 @@ import styled from 'react-emotion';
 
 import {P, Label, ErrorInput} from '../../utils/content';
 
-import AddressDisplay from './address-display.js';
-
 const AddressAutocompleteMain = styled(P)`
 	width: fill-available;
 	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};

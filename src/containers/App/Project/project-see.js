@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
-import {Mutation, Query} from 'react-apollo';
+import {Query} from 'react-apollo';
 import ReactGA from 'react-ga';
 import {ToastContainer, toast} from 'react-toastify';
-import Section from '../../../components/Section';
 
 import {GET_PROJECT_DATA} from '../../../utils/queries';
 
@@ -12,45 +10,45 @@ import {Loading} from '../../../utils/content';
 import ProjectDisplay from '../../../components/ProjectDisplay';
 
 class TasksListUser extends Component {
-	editItem = async (itemId, sectionId, data, updateValidatedItem) => {
+	editItem = async (itemId, sectionId, data, updateItem) => {
 		const {name, unit, comment} = data;
 
-		return updateValidatedItem({
+		return updateItem({
 			variables: {
 				itemId,
 				name,
 				unit: parseFloat(unit),
 				comment: {text: comment},
 			},
-			update: (cache, {data: {updateValidatedItem}}) => {
+			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
 					[[['item_edited', {}, 'yellow']]],
 				]);
-				const data = cache.readQuery({
+				const projectData = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
 				});
-				const section = data.project.sections.find(
+				const section = projectData.project.sections.find(
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === updateValidatedItem.id,
+					e => e.id === updatedItem.id,
 				);
 
-				section.items[itemIndex] = updateValidatedItem;
+				section.items[itemIndex] = updatedItem;
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
 						variables: {
 							projectId: this.props.match.params.projectId,
 						},
-						data,
+						projectData,
 					});
 				}
 				catch (e) {
-					console.log(e);
+					throw e;
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -61,13 +59,13 @@ class TasksListUser extends Component {
 		variables: {
 			projectId,
 		},
-		update: (cache, {data: {sendAmendment}}) => {
+		update: (cache, {data: {sendAmendment: sentAmendment}}) => {
 			const data = cache.readQuery({
 				query: GET_PROJECT_DATA,
 				variables: {projectId: this.props.match.params.projectId},
 			});
 
-			data.project = sendAmendment;
+			data.project = sentAmendment;
 
 			try {
 				cache.writeQuery({
@@ -118,7 +116,7 @@ class TasksListUser extends Component {
 				unitPrice,
 				description,
 			},
-			update: (cache, {data: {addItem}}) => {
+			update: (cache, {data: {addItem: addedItem}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
@@ -132,7 +130,7 @@ class TasksListUser extends Component {
 					e => e.id === sectionId,
 				);
 
-				section.items.push(addItem);
+				section.items.push(addedItem);
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -161,7 +159,6 @@ class TasksListUser extends Component {
 					if (loading) return <Loading />;
 					if (error) {
 						throw new Error(error);
-						return <span />;
 					}
 					const {project} = data;
 					const timePlanned = project.sections.reduce(

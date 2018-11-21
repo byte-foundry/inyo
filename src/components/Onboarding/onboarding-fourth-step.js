@@ -5,7 +5,6 @@ import {Mutation} from 'react-apollo';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import {
-	H3,
 	H4,
 	P,
 	gray50,
@@ -123,13 +122,13 @@ class OnboardingFourthStep extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: updatedUser}},
 										) => {
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = updatedUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -138,13 +137,12 @@ class OnboardingFourthStep extends Component {
 												getNextStep();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
 								}
 								catch (error) {
-									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({

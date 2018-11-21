@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import {Redirect, Link} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import styled, {css} from 'react-emotion';
 import {ToastContainer, toast} from 'react-toastify';
 import {
@@ -13,7 +13,6 @@ import {
 	primaryBlue,
 	signalRed,
 	FlexRow,
-	Label,
 	gray10,
 	primaryWhite,
 	gray20,
@@ -23,7 +22,6 @@ import {
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserProjectSettingsForm from '../../../components/UserProjectSettingsForm';
 import UserSettings from '../../../components/UserSettings';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -86,9 +84,6 @@ const WelcomeMessage = styled(H3)`
 `;
 const TopBarTitle = styled(H1)`
 	color: ${primaryNavyBlue};
-	margin-top: 0;
-`;
-const ProfileField = styled(P)`
 	margin-top: 0;
 `;
 const ProfileTitle = styled(H3)`

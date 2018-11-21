@@ -6,10 +6,7 @@ import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import {
-	H3,
 	H4,
-	P,
-	gray50,
 	FlexRow,
 	gray70,
 	primaryWhite,
@@ -71,8 +68,6 @@ class OnboardingSecondStep extends Component {
 	}
 
 	selectItem = (item, setFieldValue) => {
-		const {jobType} = this.state;
-
 		setFieldValue('jobType', item);
 		this.setState({jobType: item});
 	};
@@ -105,13 +100,13 @@ class OnboardingSecondStep extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: updatedUser}},
 										) => {
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = updatedUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -120,13 +115,12 @@ class OnboardingSecondStep extends Component {
 												getNextStep();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
 								}
 								catch (error) {
-									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({

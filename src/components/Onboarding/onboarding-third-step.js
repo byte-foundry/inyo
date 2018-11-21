@@ -8,10 +8,7 @@ import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 import {
-	H3,
 	H4,
-	P,
-	gray50,
 	FlexRow,
 	gray70,
 	primaryWhite,
@@ -113,13 +110,13 @@ class OnboardingThirdStep extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: updatedUser}},
 										) => {
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = updatedUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -128,13 +125,12 @@ class OnboardingThirdStep extends Component {
 												getNextStep();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
 								}
 								catch (error) {
-									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({

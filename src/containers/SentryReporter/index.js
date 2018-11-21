@@ -3,13 +3,7 @@ import {withRouter} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 import styled from 'react-emotion';
 import {
-	primaryNavyBlue,
-	primaryBlue,
-	FlexRow,
-	P,
-	Button,
-	gray70,
-	gray10,
+	FlexRow, P, Button, gray70, gray10,
 } from '../../utils/content';
 import thumbDownIcon from '../../utils/icons/thumbDown.svg';
 import {ReactComponent as AppLogo} from '../App/appLogo.svg';

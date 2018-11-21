@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import styled, {css} from 'react-emotion';
 import {Mutation} from 'react-apollo';
 
-import {FINISH_ITEM} from '../../utils/mutations.js';
-import {GET_PROJECT_DATA} from '../../utils/queries.js';
+import {FINISH_ITEM} from '../../utils/mutations';
+import {GET_PROJECT_DATA} from '../../utils/queries';
 
 import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
 import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
@@ -32,7 +32,7 @@ const getTaskIconByStatus = (status) => {
 	case 'ADDED_SENT':
 		return <PendingIcon />;
 	default:
-		break;
+		return false;
 	}
 };
 
@@ -127,7 +127,7 @@ class TaskStatus extends Component {
 				status: 'FINISHED',
 			},
 		},
-		update: (cache, {data: {finishItem}}) => {
+		update: (cache, {data: {finishItem: finishedItem}}) => {
 			window.$crisp.push([
 				'set',
 				'session:event',
@@ -141,10 +141,10 @@ class TaskStatus extends Component {
 				e => e.id === sectionId,
 			);
 			const itemIndex = section.items.find(
-				e => e.id === finishItem.id,
+				e => e.id === finishedItem.id,
 			);
 
-			section.items[itemIndex].status = finishItem.status;
+			section.items[itemIndex].status = finishedItem.status;
 			try {
 				cache.writeQuery({
 					query: GET_PROJECT_DATA,
@@ -155,7 +155,7 @@ class TaskStatus extends Component {
 				});
 			}
 			catch (e) {
-				console.log(e);
+				throw e;
 			}
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},

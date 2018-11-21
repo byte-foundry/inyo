@@ -1,4 +1,5 @@
 export const templates = [
+	// eslint-disable-line import/prefer-default-export
 	{
 		name: 'WEBSITE',
 		label: 'Site web',

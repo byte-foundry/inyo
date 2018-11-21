@@ -1,5 +1,5 @@
 export const dateDiff = (datepart, fromdate, todate) => {
-	datepart = datepart.toLowerCase();
+	const lowerDatepart = datepart.toLowerCase();
 	const diff = todate - fromdate;
 	const divideBy = {
 		w: 604800000,
@@ -9,5 +9,5 @@ export const dateDiff = (datepart, fromdate, todate) => {
 		s: 1000,
 	};
 
-	return Math.floor(diff / divideBy[datepart]);
+	return Math.floor(diff / divideBy[lowerDatepart]);
 };

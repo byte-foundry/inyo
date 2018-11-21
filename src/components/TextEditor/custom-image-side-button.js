@@ -1,6 +1,5 @@
 import {
 	ImageSideButton,
-	ImageUploadButton,
 	addNewBlock,
 	getCurrentBlock,
 	Block,
@@ -17,9 +16,6 @@ export default class CustomImageSideButton extends ImageSideButton {
 		const file = e.target.files[0];
 
 		if (file.type.indexOf('image/') === 0) {
-			const placeHolderBlock = this.createPlaceholderImage(file);
-			const placeholderData = placeHolderBlock.getData();
-			const placeHolderBlockKey = placeHolderBlock.getKey();
 			const formData = new FormData();
 
 			formData.append('data', file);

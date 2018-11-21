@@ -1,16 +1,10 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 import {convertToRaw} from 'draft-js';
 import {Editor, createEditorState} from 'medium-draft';
-import {
-	BLOCK_BUTTONS,
-	INLINE_BUTTONS,
-} from 'medium-draft/lib/components/toolbar';
+import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
 import styled from 'react-emotion';
 import 'medium-draft/lib/index.css';
 import {gray20} from '../../utils/content';
-
-import CustomImageSideButton from './custom-image-side-button';
 
 const TextEditorMain = styled('div')`
 	border: 1px solid ${gray20};
@@ -61,8 +55,6 @@ class TextEditor extends Component {
 		};
 	}
 
-	componentWillReceiveProps(newProps) {}
-
 	focusEditor = () => {
 		this.editor.focus();
 	};
@@ -71,7 +63,9 @@ class TextEditor extends Component {
 		return (
 			<TextEditorMain onClick={this.focusEditor}>
 				<Editor
-					editorEnabled={this.props.editorEnabled || !this.props.disabled}
+					editorEnabled={
+						this.props.editorEnabled || !this.props.disabled
+					}
 					editorState={this.state.editorState}
 					onChange={this.onChange}
 					sideButtons={this.sideButtons}

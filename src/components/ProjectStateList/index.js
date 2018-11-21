@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 
 import Plural from '../Plural';
@@ -28,11 +27,6 @@ const ProjectStateTitle = styled('div')`
 	border-radius: 3px;
 	background-color: ${primaryWhite};
 	border-bottom: 3px solid ${primaryBlue};
-`;
-const ProjectStateQuantity = styled('label')`
-	font-size: 13px;
-	color: ${primaryNavyBlue};
-	margin: 0;
 `;
 const ProjectStateAmount = styled(P)`
 	font-size: 13px;

@@ -431,7 +431,7 @@ const BubbleIcon = styled(bubbleIcon)`
 	}
 `;
 
-export const Loading = props => (
+export const Loading = () => (
 	<LoadingMain>
 		<BubbleIcon />
 	</LoadingMain>

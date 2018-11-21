@@ -100,6 +100,8 @@ class Onboarding extends Component {
 			);
 		case 6:
 			return <Redirect to="/app" />;
+		default:
+			return false;
 		}
 	};
 

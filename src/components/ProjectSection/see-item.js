@@ -4,7 +4,6 @@ import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 import AddItem from './add-item';
-import AmendItem from './amend-item';
 import TaskStatus from '../TaskStatus';
 import CommentIcon from '../CommentIcon';
 import CommentModal from '../CommentModal';
@@ -19,7 +18,6 @@ import {
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
-	UPDATE_VALIDATED_ITEM,
 	ACCEPT_ITEM,
 	REJECT_ITEM,
 } from '../../utils/mutations';
@@ -108,7 +106,7 @@ class Item extends Component {
 				itemId: this.props.item.id,
 				token: this.props.match.params.customerToken,
 			},
-			update: (cache, {data: {itemMutation}}) => {
+			update: (cache, {data: {itemMutation: mutatedItem}}) => {
 				toast.info(
 					<div>
 						<p>📬 Le prestataire a été notifié.</p>
@@ -129,10 +127,10 @@ class Item extends Component {
 					e => e.id === this.props.sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === itemMutation.id,
+					e => e.id === mutatedItem.id,
 				);
 
-				section.items[itemIndex].status = itemMutation.status;
+				section.items[itemIndex].status = mutatedItem.status;
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA_WITH_TOKEN,
@@ -204,9 +202,9 @@ class Item extends Component {
 		}
 		if (shouldDisplayAddItem && mode === 'see') {
 			return (
-				<Mutation mutation={UPDATE_VALIDATED_ITEM}>
-					{updateValidatedItem => (
-						<AmendItem
+				<Mutation mutation={UPDATE_ITEM}>
+					{updateItem => (
+						<AddItem
 							item={item}
 							cancel={() => {
 								this.setState({
@@ -217,12 +215,7 @@ class Item extends Component {
 								this.setState({
 									shouldDisplayAddItem: false,
 								});
-								editItem(
-									item.id,
-									sectionId,
-									data,
-									updateValidatedItem,
-								);
+								editItem(item.id, sectionId, data, updateItem);
 							}}
 						/>
 					)}

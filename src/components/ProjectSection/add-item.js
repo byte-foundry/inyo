@@ -2,15 +2,11 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import Autocomplete from 'react-autocomplete';
 import {Query} from 'react-apollo';
-import link from 'medium-draft/lib/components/entities/link';
 import {
-	H4,
-	H5,
 	FlexRow,
 	Input,
 	Button,
 	primaryBlue,
-	secondaryLightBlue,
 	signalGreen,
 	signalOrange,
 	signalRed,
@@ -19,7 +15,6 @@ import {
 	gray20,
 	Loading,
 } from '../../utils/content';
-import {templates} from '../../utils/project-templates';
 
 import {GET_ITEMS} from '../../utils/queries';
 
@@ -64,15 +59,16 @@ class AddItem extends Component {
 
 	render() {
 		const {name, unit, description} = this.state;
-		const {
-			item, cancel, done, remove,
-		} = this.props;
+		const {cancel, done, remove} = this.props;
 
 		return (
 			<AddItemMain>
 				<FlexRow justifyContent="space-between">
 					<Query query={GET_ITEMS}>
 						{({loading, error, data}) => {
+							if (error) {
+								throw new Error(error);
+							}
 							if (loading) {
 								return <Loading />;
 							}
@@ -136,6 +132,7 @@ class AddItem extends Component {
 									/>
 								);
 							}
+							return false;
 						}}
 					</Query>
 					<FlexRow>

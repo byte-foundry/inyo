@@ -72,7 +72,6 @@ class CommentModal extends Component {
 					if (loading) return <span />;
 					if (error) {
 						throw new Error(error);
-						return <span />;
 					}
 
 					const {itemComments} = data;
@@ -82,7 +81,7 @@ class CommentModal extends Component {
 							key={`comment${comment.id}`}
 							comment={comment}
 							isCustomer={
-								comment.author.__typename === 'Customer'
+								comment.author.__typename === 'Customer' // eslint-disable-line no-underscore-dangle
 							}
 						/>
 					));
@@ -97,7 +96,7 @@ class CommentModal extends Component {
 									<CommentRow>{commentsElem}</CommentRow>
 								</Comments>
 								<Mutation mutation={POST_COMMENT}>
-									{postComment => (
+									{postCommentMutation => (
 										<Formik
 											initialValues={{
 												newComment: '',
@@ -115,7 +114,7 @@ class CommentModal extends Component {
 											) => {
 												actions.setSubmitting(false);
 												try {
-													postComment({
+													postCommentMutation({
 														variables: {
 															itemId,
 															token: customerToken,
@@ -149,7 +148,7 @@ class CommentModal extends Component {
 																	],
 																],
 															]);
-															const data = cache.readQuery(
+															const commentsQueryResult = cache.readQuery(
 																{
 																	query: GET_COMMENTS_BY_ITEM,
 																	variables: {
@@ -159,7 +158,7 @@ class CommentModal extends Component {
 																},
 															);
 
-															data.itemComments
+															commentsQueryResult.itemComments
 																= postComment.comments;
 															try {
 																cache.writeQuery(
@@ -169,25 +168,27 @@ class CommentModal extends Component {
 																			itemId,
 																			token: customerToken,
 																		},
-																		data,
+																		commentsQueryResult,
 																	},
 																);
 																actions.resetForm();
 															}
 															catch (e) {
-																console.log(e);
+																throw e;
 															}
 														},
 													});
 												}
-												catch (error) {
+												catch (commentError) {
 													actions.setSubmitting(
 														false,
 													);
-													actions.setErrors(error);
+													actions.setErrors(
+														commentError,
+													);
 													actions.setStatus({
 														msg:
-															'Something went wrong',
+															"Une erreur c'est produit pendant la soumission du commentaire",
 													});
 												}
 											}}

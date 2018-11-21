@@ -6,10 +6,7 @@ import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import {
-	H3,
 	H4,
-	P,
-	gray50,
 	FlexRow,
 	gray70,
 	primaryWhite,
@@ -122,13 +119,13 @@ class OnboardingFifthStep extends Component {
 										},
 										update: (
 											cache,
-											{data: {updateUser}},
+											{data: {updateUser: newUpdateUser}},
 										) => {
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updateUser;
+											data.me = newUpdateUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -137,13 +134,12 @@ class OnboardingFifthStep extends Component {
 												getNextStep();
 											}
 											catch (e) {
-												console.log(e);
+												throw e;
 											}
 										},
 									});
 								}
 								catch (error) {
-									console.log(error);
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled, {css} from 'react-emotion';
+import styled from 'react-emotion';
 import {Field} from 'formik';
 
 import {FlexRow, Label, ErrorInput} from '../../utils/content';

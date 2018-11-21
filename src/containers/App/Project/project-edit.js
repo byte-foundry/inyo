@@ -2,12 +2,11 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
-import styled from 'react-emotion';
 import ReactGA from 'react-ga';
+
 import {templates} from '../../../utils/project-templates';
 import {GET_PROJECT_DATA, GET_ALL_PROJECTS} from '../../../utils/queries';
 import {dateDiff} from '../../../utils/functions';
-import {EDIT_ITEMS} from '../../../utils/mutations';
 import {Loading} from '../../../utils/content';
 
 import ProjectDisplay from '../../../components/ProjectDisplay';
@@ -70,17 +69,17 @@ class EditProject extends Component {
 	startProject = (projectId, startProject) => {
 		startProject({
 			variables: {projectId},
-			update: (cache, {data: {startProject}}) => {
+			update: (cache, {data: {startProject: startedProject}}) => {
 				const data = cache.readQuery({
 					query: GET_ALL_PROJECTS,
 				});
 
 				if (data.me && data.me.company && data.me.company.projects) {
 					const updatedProject = data.me.company.projects.find(
-						project => project.id === startProject.id,
+						project => project.id === startedProject.id,
 					);
 
-					updatedProject.status = startProject.status;
+					updatedProject.status = startedProject.status;
 				}
 
 				const projectData = cache.readQuery({
@@ -93,7 +92,7 @@ class EditProject extends Component {
 
 				projectData.project.sections.forEach((section) => {
 					totalSections += 1;
-					section.items.forEach((item) => {
+					section.items.forEach(() => {
 						totalItems += 1;
 					});
 				});
@@ -142,13 +141,13 @@ class EditProject extends Component {
 	editProjectTitle = (title, projectId, updateProject) => {
 		updateProject({
 			variables: {projectId, name: title},
-			update: (cache, {data: {updateProject}}) => {
+			update: (cache, {data: {updateProject: updatedProject}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
 				});
 
-				data.project.name = updateProject.name;
+				data.project.name = updatedProject.name;
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -180,7 +179,7 @@ class EditProject extends Component {
 				unitPrice,
 				description,
 			},
-			update: (cache, {data: {addItem}}) => {
+			update: (cache, {data: {addItem: addedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -189,7 +188,7 @@ class EditProject extends Component {
 					e => e.id === sectionId,
 				);
 
-				section.items.push(addItem);
+				section.items.push(addedItem);
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -238,7 +237,7 @@ class EditProject extends Component {
 					__typename: 'Item',
 				},
 			},
-			update: (cache, {data: {updateItem}}) => {
+			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
@@ -252,10 +251,10 @@ class EditProject extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.find(
-					e => e.id === updateItem.id,
+					e => e.id === updatedItem.id,
 				);
 
-				section.items[itemIndex] = updateItem;
+				section.items[itemIndex] = updatedItem;
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -281,7 +280,7 @@ class EditProject extends Component {
 		]);
 		removeItem({
 			variables: {itemId},
-			update: (cache, {data: {removeItem}}) => {
+			update: (cache, {data: {removeItem: removedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -290,7 +289,7 @@ class EditProject extends Component {
 					e => e.id === sectionId,
 				);
 				const itemIndex = section.items.findIndex(
-					e => e.id === removeItem.id,
+					e => e.id === removedItem.id,
 				);
 
 				section.items.splice(itemIndex, 1);
@@ -314,7 +313,7 @@ class EditProject extends Component {
 	addSection = (projectId, addSection) => {
 		addSection({
 			variables: {projectId, name: 'Nouvelle section'},
-			update: (cache, {data: {addSection}}) => {
+			update: (cache, {data: {addSection: addedSection}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
@@ -325,7 +324,7 @@ class EditProject extends Component {
 					variables: {projectId: this.props.match.params.projectId},
 				});
 
-				data.project.sections.push(addSection);
+				data.project.sections.push(addedSection);
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -346,7 +345,7 @@ class EditProject extends Component {
 	editSectionTitle = (sectionId, name, updateSection) => {
 		updateSection({
 			variables: {sectionId, name},
-			update: (cache, {data: {updateSection}}) => {
+			update: (cache, {data: {updateSection: updatedSection}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
@@ -360,7 +359,7 @@ class EditProject extends Component {
 					e => e.id === sectionId,
 				);
 
-				data.project.sections[sectionIndex] = updateSection;
+				data.project.sections[sectionIndex] = updatedSection;
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -381,7 +380,7 @@ class EditProject extends Component {
 	removeSection = (sectionId, removeSection) => {
 		removeSection({
 			variables: {sectionId},
-			update: (cache, {data: {removeSection}}) => {
+			update: (cache, {data: {removeSection: removedSection}}) => {
 				window.$crisp.push([
 					'set',
 					'session:event',
@@ -392,7 +391,7 @@ class EditProject extends Component {
 					variables: {projectId: this.props.match.params.projectId},
 				});
 				const sectionIndex = data.project.sections.findIndex(
-					e => e.id === removeSection.id,
+					e => e.id === removedSection.id,
 				);
 
 				data.project.sections.splice(sectionIndex, 1);
@@ -421,14 +420,14 @@ class EditProject extends Component {
 		]);
 		removeProject({
 			variables: {projectId},
-			update: (cache, {data: {removeProject}}) => {
+			update: (cache, {data: {removeProject: removedProject}}) => {
 				const data = cache.readQuery({
 					query: GET_ALL_PROJECTS,
 				});
 
 				if (data.me && data.me.company && data.me.company.projects) {
 					const projectIndex = data.me.company.projects.findIndex(
-						project => project.id === removeProject.id,
+						project => project.id === removedProject.id,
 					);
 
 					data.me.company.projects.splice(projectIndex, 1);
@@ -479,7 +478,6 @@ class EditProject extends Component {
 					}
 					if (error) {
 						throw new Error(error);
-						return <span />;
 					}
 					const {project} = fetchedData;
 

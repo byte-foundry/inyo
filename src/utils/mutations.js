@@ -300,8 +300,8 @@ export const ADD_SECTION = gql`
 				id
 				name
 				unit
-				vatRate
 				description
+				reviewer
 			}
 		}
 	}
@@ -315,8 +315,8 @@ export const UPDATE_SECTION = gql`
 				id
 				name
 				unit
-				vatRate
 				description
+				reviewer
 			}
 		}
 	}
@@ -347,10 +347,9 @@ export const ADD_ITEM = gql`
 			id
 			name
 			unit
-			vatRate
 			description
-			pendingUnit
 			status
+			reviewer
 			comments {
 				createdAt
 				id
@@ -400,10 +399,9 @@ export const UPDATE_ITEM = gql`
 			id
 			name
 			unit
-			vatRate
 			description
-			pendingUnit
 			status
+			reviewer
 			comments {
 				createdAt
 				id
@@ -449,10 +447,9 @@ export const UPDATE_VALIDATED_ITEM = gql`
 			id
 			name
 			unit
-			vatRate
 			description
-			pendingUnit
 			status
+			reviewer
 			comments {
 				createdAt
 				id
@@ -545,9 +542,8 @@ export const SEND_AMENDMENT = gql`
 					id
 					name
 					unit
-					pendingUnit
-					vatRate
 					description
+					reviewer
 				}
 			}
 		}
@@ -592,6 +588,7 @@ export const ACCEPT_AMENDMENT = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id
@@ -620,8 +617,6 @@ export const ACCEPT_AMENDMENT = gql`
 							}
 						}
 					}
-					pendingUnit
-					vatRate
 					description
 				}
 			}
@@ -667,6 +662,7 @@ export const REJECT_AMENDMENT = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id
@@ -695,8 +691,6 @@ export const REJECT_AMENDMENT = gql`
 							}
 						}
 					}
-					pendingUnit
-					vatRate
 					description
 				}
 			}

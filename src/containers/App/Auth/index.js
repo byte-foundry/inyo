@@ -15,6 +15,7 @@ import {
 import LoginForm from '../../../components/LoginForm';
 import SignUpForm from '../../../components/SignupForm';
 import SendResetPasswordForm from '../../../components/SendResetPasswordForm';
+import ResetPasswordForm from '../../../components/ResetPasswordForm';
 
 import {ReactComponent as AppLogo} from '../appLogo.svg';
 import AuthLogo from './authLogo.svg';
@@ -82,6 +83,14 @@ class Auth extends Component {
 						<Route
 							path="/auth/forgotten-password"
 							component={SendResetPasswordForm}
+						/>
+						<Route
+							path="/auth/reset/:token"
+							render={({match}) => (
+								<ResetPasswordForm
+									resetToken={match.params.token}
+								/>
+							)}
 						/>
 						<Redirect to="/auth/sign-up" />
 					</Switch>

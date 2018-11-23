@@ -245,6 +245,7 @@ class AddItem extends Component {
 											size="XSmall"
 											color={signalGreen}
 											onClick={handleSubmit}
+											type="submit"
 										>
 											Valider
 										</ActionButton>

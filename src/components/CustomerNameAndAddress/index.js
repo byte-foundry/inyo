@@ -20,32 +20,19 @@ const ClientAddress = styled('div')`
 const ClientTitle = styled(H3)`
 	font-size: 13px;
 	margin: 0;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
 `;
 
 const CompanyName = styled(H4)`
 	color: ${primaryNavyBlue};
 	margin: 0;
-	margin-bottom: 10px;
+	margin-bottom: 7px;
 `;
 
-const ContactName = styled('div')`
+const ContactInfo = styled('div')`
 	margin: 0;
-	margin-bottom: 10px;
-`;
-
-const ContactEmail = styled('div')``;
-
-const AddressBlock = styled('div')`
-	border-top: 1px solid ${primaryBlue};
-	padding-top: 10px;
-`;
-
-const Address = styled(P)`
-	color: ${primaryBlue};
-	font-size: 11px;
-	margin: 0;
-	margin-bottom: 5px;
+	margin-bottom: 6px;
 `;
 
 class CustomerNameAndAddress extends Component {
@@ -57,16 +44,18 @@ class CustomerNameAndAddress extends Component {
 			address,
 			email,
 			title,
+			phone,
 		} = this.props.customer;
 
 		return (
 			<ClientAddress>
 				<ClientTitle>Votre client</ClientTitle>
 				<CompanyName>{name}</CompanyName>
-				<ContactName>
+				<ContactInfo>
 					{nonEmpty`${title} ${firstName} ${lastName}`.trimRight()}
-				</ContactName>
-				<ContactEmail>{email}</ContactEmail>
+				</ContactInfo>
+				<ContactInfo>{email}</ContactInfo>
+				<ContactInfo>{phone}</ContactInfo>
 			</ClientAddress>
 		);
 	}

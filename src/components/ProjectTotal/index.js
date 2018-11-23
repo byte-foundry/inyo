@@ -16,7 +16,8 @@ const TotalElem = styled('div')`
 const TotalLabel = styled(H6)`
 	font-size: 13px;
 	margin: 0;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
+	text-transform: uppercase;
 `;
 const TotalNumber = styled(H4)`
 	color: ${primaryNavyBlue};
@@ -31,7 +32,8 @@ class ProjectTotal extends Component {
 			<TotalMain>
 				<TotalElem>
 					<TotalLabel>Temps prévu</TotalLabel>
-					<TotalNumber>{sumDays}{' '}
+					<TotalNumber>
+						{sumDays}{' '}
 						<Plural
 							singular="jour"
 							plural="jours"

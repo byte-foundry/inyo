@@ -214,7 +214,7 @@ class EditProject extends Component {
 
 	editItem = (itemId, sectionId, editData, updateItem) => {
 		const {
-			name, description, unitPrice, unit, vatRate,
+			name, description, unit, reviewer,
 		} = editData;
 
 		updateItem({
@@ -222,18 +222,16 @@ class EditProject extends Component {
 				itemId,
 				name,
 				description,
-				unitPrice,
+				reviewer,
 				unit: parseFloat(unit),
-				vatRate,
 			},
 			optimisticResponse: {
 				__typename: 'Mutation',
 				updateItem: {
 					id: itemId,
 					name,
-					unitPrice,
 					unit,
-					vatRate,
+					reviewer,
 					description,
 					__typename: 'Item',
 				},

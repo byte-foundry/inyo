@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import Autocomplete from 'react-autocomplete';
+import * as Yup from 'yup';
 import {Query} from 'react-apollo';
+import {Formik} from 'formik';
+
 import {
 	FlexRow,
 	Input,
@@ -12,14 +15,16 @@ import {
 	signalRed,
 	primaryWhite,
 	gray30,
-	gray20,
+	gray80,
 	Loading,
 } from '../../utils/content';
 
 import {GET_ITEMS} from '../../utils/queries';
 
+import SwitchButton from '../SwitchButton';
+
 const AddItemMain = styled('div')`
-	background: ${gray20};
+	background: ${primaryWhite};
 	border: 1px solid ${primaryBlue};
 	padding: 20px 20px 10px 20px;
 	margin-bottom: 10px;
@@ -33,6 +38,7 @@ const ItemComment = styled('textarea')`
 	padding: 15px 10px;
 	font-family: 'Ligne';
 	color: ${gray30};
+	border: solid 1px ${gray80};
 `;
 
 const ActionButton = styled(Button)`
@@ -47,150 +53,205 @@ const AddInput = styled(Input)`
 	background: ${primaryWhite};
 	width: 100px;
 	margin-left: 10px;
-	border-color: transparent;
+	border: solid 1px ${gray80};
 	font-size: 13px;
 `;
 
 class AddItem extends Component {
-	constructor(props) {
-		super(props);
-		this.state = props.item;
-	}
-
 	render() {
-		const {name, unit, description} = this.state;
-		const {cancel, done, remove} = this.props;
+		const {
+			item, cancel, done, remove,
+		} = this.props;
 
 		return (
 			<AddItemMain>
-				<FlexRow justifyContent="space-between">
-					<Query query={GET_ITEMS}>
-						{({loading, error, data}) => {
-							if (error) {
-								throw new Error(error);
-							}
-							if (loading) {
-								return <Loading />;
-							}
-							if (!loading && data && data.template) {
-								const {items} = data.template;
+				<Formik
+					initialValues={{
+						...item,
+					}}
+					validationSchema={Yup.object().shape({
+						name: Yup.string().required('Requis'),
+						unit: Yup.number().required('Requis'),
+						description: Yup.string(),
+						reviewer: Yup.string().required('Requis'),
+					})}
+					onSubmit={(values) => {
+						done(values);
+					}}
+				>
+					{(props) => {
+						const {
+							handleSubmit,
+							setFieldValue,
+							handleChange,
+							values: {
+								name, unit, description, reviewer,
+							},
+						} = props;
 
-								return (
-									<Autocomplete
-										getItemValue={item => item}
-										items={items}
-										shouldItemRender={(item, value) => item.includes(value)
-										}
-										renderItem={(item, isHighlighted) => (
-											<div
-												background={
-													isHighlighted
-														? 'lightgray'
-														: 'white'
-												}
-											>
-												{item}
-											</div>
-										)}
-										value={name}
-										onChange={(e) => {
-											this.setState({
-												name: e.target.value,
-											});
+						return (
+							<div>
+								<FlexRow>
+									<SwitchButton
+										left={{
+											label: 'Vous exécutez la tâche',
+											value: 'USER',
 										}}
-										onSelect={(value) => {
-											this.setState({
-												name: value,
-											});
+										right={{
+											label:
+												'Votre client exécute la tâche',
+											value: 'CUSTOMER',
 										}}
-										wrapperStyle={{
-											flex: '2',
-											marginRight: '20px',
-										}}
-										menuStyle={{
-											borderRadius: '0px',
-											boxShadow:
-												'0 2px 12px rgba(0, 0, 0, 0.1)',
-											background: 'rgb(255, 255, 255)',
-											padding: '2px 0',
-											fontSize: '11px',
-											position: 'fixed',
-											overflow: 'auto',
-											maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
-										}}
-										inputProps={{
-											style: {
-												color: gray30,
-												background: primaryWhite,
-												borderColor: 'transparent',
-												fontSize: '13px',
-												fontFamily: 'Ligne',
-												width: '100%',
-												padding: '16px 10px',
-											},
-										}}
+										name="reviewer"
+										setFieldValue={setFieldValue}
+										value={reviewer}
 									/>
-								);
-							}
-							return false;
-						}}
-					</Query>
-					<FlexRow>
-						<AddInput
-							type="number"
-							placeholder="1"
-							value={unit}
-							onChange={e => this.setState({
-								unit: parseFloat(e.target.value),
-							})
-							}
-						/>
-					</FlexRow>
-				</FlexRow>
-				<FlexRow>
-					<ItemComment
-						placeholder="Ajoutez un commentaire ou une description de cette tâche."
-						value={description}
-						onChange={e => this.setState({description: e.target.value})
-						}
-					/>
-				</FlexRow>
-				<FlexRow justifyContent="space-between">
-					<ActionButton
-						theme="Link"
-						size="XSmall"
-						color={signalRed}
-						onClick={() => {
-							remove();
-						}}
-					>
-						Supprimer
-					</ActionButton>
-					<div>
-						{typeof cancel === 'function' && (
-							<ActionButton
-								theme="Link"
-								size="XSmall"
-								color={signalOrange}
-								onClick={() => {
-									cancel();
-								}}
-							>
-								Annuler
-							</ActionButton>
-						)}
-						<ActionButton
-							theme="Link"
-							size="XSmall"
-							color={signalGreen}
-							onClick={() => {
-								done(this.state);
-							}}
-						>
-							Valider
-						</ActionButton>
-					</div>
-				</FlexRow>
+								</FlexRow>
+								<FlexRow justifyContent="space-between">
+									<Query query={GET_ITEMS}>
+										{({loading, error, data}) => {
+											if (error) {
+												throw new Error(error);
+											}
+											if (loading) {
+												return <Loading />;
+											}
+											if (
+												!loading
+												&& data
+												&& data.template
+											) {
+												const {items} = data.template;
+
+												return (
+													<Autocomplete
+														getItemValue={itemValue => itemValue
+														}
+														items={items}
+														shouldItemRender={(
+															itemRender,
+															value,
+														) => itemRender.includes(
+															value,
+														)
+														}
+														renderItem={(
+															itemToRender,
+															isHighlighted,
+														) => (
+															<div
+																background={
+																	isHighlighted
+																		? 'lightgray'
+																		: 'white'
+																}
+															>
+																{itemToRender}
+															</div>
+														)}
+														value={name}
+														onChange={handleChange}
+														onSelect={(value) => {
+															setFieldValue(
+																'name',
+																value,
+															);
+														}}
+														wrapperStyle={{
+															flex: '2',
+															marginRight: '20px',
+														}}
+														menuStyle={{
+															borderRadius: '0px',
+															boxShadow:
+																'0 2px 12px rgba(0, 0, 0, 0.1)',
+															background:
+																'rgb(255, 255, 255)',
+															padding: '2px 0',
+															fontSize: '11px',
+															position: 'fixed',
+															overflow: 'auto',
+															maxHeight: '50%', // TODO: don't cheat, let it flow to the bottom
+														}}
+														inputProps={{
+															name: 'name',
+															style: {
+																color: gray30,
+																border: `solid 1px ${gray80}`,
+																background: primaryWhite,
+																fontSize:
+																	'13px',
+																fontFamily:
+																	'Ligne',
+																width: '100%',
+																padding:
+																	'16px 10px',
+															},
+														}}
+													/>
+												);
+											}
+
+											throw new Error(error);
+										}}
+									</Query>
+									<FlexRow>
+										<AddInput
+											type="number"
+											name="unit"
+											placeholder="1"
+											value={unit}
+											onChange={handleChange}
+										/>
+									</FlexRow>
+								</FlexRow>
+								<FlexRow>
+									<ItemComment
+										placeholder="Ajoutez un commentaire ou une description de cette tâche."
+										value={description}
+										name="description"
+										onChange={handleChange}
+									/>
+								</FlexRow>
+								<FlexRow justifyContent="space-between">
+									<ActionButton
+										theme="Link"
+										size="XSmall"
+										color={signalRed}
+										onClick={() => {
+											remove();
+										}}
+									>
+										Supprimer
+									</ActionButton>
+									<div>
+										{typeof cancel === 'function' && (
+											<ActionButton
+												theme="Link"
+												size="XSmall"
+												color={signalOrange}
+												onClick={() => {
+													cancel();
+												}}
+											>
+												Annuler
+											</ActionButton>
+										)}
+										<ActionButton
+											theme="Link"
+											size="XSmall"
+											color={signalGreen}
+											onClick={handleSubmit}
+											type="submit"
+										>
+											Valider
+										</ActionButton>
+									</div>
+								</FlexRow>
+							</div>
+						);
+					}}
+				</Formik>
 			</AddItemMain>
 		);
 	}

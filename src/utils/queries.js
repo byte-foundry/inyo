@@ -165,6 +165,7 @@ export const GET_PROJECT_DATA = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id
@@ -244,6 +245,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					id
 					name
 					unit
+					reviewer
 					comments {
 						createdAt
 						id

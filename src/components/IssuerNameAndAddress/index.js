@@ -48,15 +48,14 @@ const Address = styled(P)`
 	margin-bottom: 5px;
 `;
 
+const ContactEmail = styled('div')`
+	color: ${primaryBlue};
+`;
+
 class IssuerNameAndAddress extends Component {
 	render() {
 		const {
-			name,
-			firstName,
-			lastName,
-			address,
-			siret,
-			phone,
+			name, firstName, lastName, phone, email,
 		} = this.props.issuer;
 
 		return (
@@ -65,14 +64,7 @@ class IssuerNameAndAddress extends Component {
 				<ContactName>
 					{firstName} {lastName}
 				</ContactName>
-				<Siret>SIRET: {siret}</Siret>
-				<AddressBlock>
-					<Address>{address.street}</Address>
-					<Address>
-						{address.postalCode} {address.city}
-					</Address>
-					<Address>{address.country}</Address>
-				</AddressBlock>
+				<ContactEmail>{email}</ContactEmail>
 				<Phone>{phone}</Phone>
 			</ClientAddress>
 		);

@@ -389,14 +389,15 @@ export const UPDATE_ITEM = gql`
 		$description: String
 		$unit: Float
 		$comment: CommentInput
-		$reviewer: String
+		$reviewer: Reviewer
 	) {
 		updateItem(
 			id: $itemId
 			name: $name
 			description: $description
 			unit: $unit
-			vatRate: $vatRate
+			comment: $comment
+			reviewer: $reviewer
 		) {
 			id
 			name
@@ -437,8 +438,8 @@ export const UPDATE_ITEM = gql`
 `;
 
 export const FINISH_ITEM = gql`
-	mutation finishItem($itemId: ID!) {
-		finishItem(id: $itemId) {
+	mutation finishItem($itemId: ID!, $token: String) {
+		finishItem(id: $itemId, token: $token) {
 			id
 			status
 		}

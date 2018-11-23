@@ -12,17 +12,16 @@ const TotalMain = styled('div')`
 const TotalElem = styled('div')`
 	padding-top: 15px;
 	padding-bottom: 15px;
-	border-top: 1px solid ${gray20};
-	border-bottom: 1px solid ${gray20};
 `;
 const TotalLabel = styled(H6)`
 	font-size: 13px;
 	margin: 0;
+	margin-bottom: 10px;
+	text-transform: uppercase;
 `;
 const TotalNumber = styled(H4)`
 	color: ${primaryNavyBlue};
 	margin: 0;
-	margin-bottom: 5px;
 `;
 
 class ProjectTotal extends Component {
@@ -32,6 +31,7 @@ class ProjectTotal extends Component {
 		return (
 			<TotalMain>
 				<TotalElem>
+					<TotalLabel>Temps prévu</TotalLabel>
 					<TotalNumber>
 						{sumDays}{' '}
 						<Plural
@@ -40,7 +40,6 @@ class ProjectTotal extends Component {
 							value={sumDays}
 						/>
 					</TotalNumber>
-					<TotalLabel>Temps prévu</TotalLabel>
 				</TotalElem>
 			</TotalMain>
 		);

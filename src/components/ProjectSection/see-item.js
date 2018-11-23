@@ -236,6 +236,7 @@ class Item extends Component {
 						status={item.status}
 						itemId={item.id}
 						sectionId={sectionId}
+						reviewer={item.reviewer}
 						mode={mode}
 						customerViewMode={customerViewMode}
 						projectStatus={projectStatus}
@@ -246,11 +247,7 @@ class Item extends Component {
 					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
-						if (
-							!customerViewMode
-							&& item.status !== 'FINISHED'
-							&& projectStatus !== 'SENT'
-						) {
+						if (!customerViewMode && item.status !== 'FINISHED') {
 							this.setState({shouldDisplayAddItem: true});
 						}
 					}}

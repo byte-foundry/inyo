@@ -12,14 +12,17 @@ import ProjectDisplay from '../../../components/ProjectDisplay';
 
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateItem) => {
-		const {name, unit, comment} = data;
+		const {
+			name, unit, comment, reviewer,
+		} = data;
 
 		return updateItem({
 			variables: {
 				itemId,
 				name,
+				reviewer,
 				unit: parseFloat(unit),
-				comment: {text: comment},
+				comment: comment && {text: comment},
 			},
 			update: (cache, {data: {updateItem}}) => {
 				window.$crisp.push([
@@ -50,6 +53,44 @@ class TasksListUser extends Component {
 				}
 				catch (e) {
 					console.log(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
+	removeItem = (itemId, sectionId, removeItem) => {
+		window.$crisp.push([
+			'set',
+			'session:event',
+			[[['item_removed', {}, 'yellow']]],
+		]);
+		removeItem({
+			variables: {itemId},
+			update: (cache, {data: {removeItem}}) => {
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+				const section = data.project.sections.find(
+					e => e.id === sectionId,
+				);
+				const itemIndex = section.items.findIndex(
+					e => e.id === removeItem.id,
+				);
+
+				section.items.splice(itemIndex, 1);
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
 				}
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
@@ -218,6 +259,8 @@ class TasksListUser extends Component {
 								timePlanned={timePlanned}
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
+								removeItem={this.removeItem}
+								removeSection={this.removeSection}
 								addItem={this.addItem}
 								issuer={project.issuer}
 								refetch={refetch}

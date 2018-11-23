@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled, {css} from 'react-emotion';
 import {Mutation} from 'react-apollo';
+import {withRouter} from 'react-router-dom';
 
 import {FINISH_ITEM} from '../../utils/mutations.js';
 import {GET_PROJECT_DATA} from '../../utils/queries.js';
@@ -101,14 +102,21 @@ const Status = styled('div')`
 	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING' && !props.customer ? 'pointer' : 'initial')};
+	cursor: ${props => (props.status === 'PENDING'
+		&& ((!props.customer && props.reviewer === 'USER')
+			|| (props.customer && props.reviewer === 'CUSTOMER'))
+		? 'pointer'
+		: 'initial')};
 
 	svg {
 		width: 30px;
 		${getTaskIconStylesByStatus};
 	}
 
-	${props => props.status === 'PENDING' && !props.customer && hoverState};
+	${props => props.status === 'PENDING'
+		&& ((!props.customer && props.reviewer === 'USER')
+			|| (props.customer && props.reviewer === 'CUSTOMER'))
+		&& hoverState};
 `;
 
 class TaskStatus extends Component {
@@ -116,9 +124,10 @@ class TaskStatus extends Component {
 		this.props.select(this.props.task.id);
 	};
 
-	finishItem = async (itemId, sectionId, finishItem) => finishItem({
+	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
 		variables: {
 			itemId,
+			token,
 		},
 		optimisticResponse: {
 			__typename: 'Mutation',
@@ -169,7 +178,10 @@ class TaskStatus extends Component {
 			mode,
 			customerViewMode,
 			projectStatus,
+			reviewer,
 		} = this.props;
+
+		const {customerToken} = this.props.match.params;
 
 		return (
 			<Mutation mutation={FINISH_ITEM}>
@@ -177,18 +189,27 @@ class TaskStatus extends Component {
 					<TaskStatusMain
 						onClick={() => {
 							if (
-								mode === 'see'
-								&& !customerViewMode
-								&& status === 'PENDING'
-								&& projectStatus !== 'SENT'
+								(mode === 'see'
+									&& (!customerViewMode
+										&& reviewer === 'USER'
+										&& status === 'PENDING'))
+								|| (customerViewMode
+									&& reviewer === 'CUSTOMER'
+									&& status === 'PENDING')
 							) {
-								this.finishItem(itemId, sectionId, finishItem);
+								this.finishItem(
+									itemId,
+									sectionId,
+									finishItem,
+									customerToken,
+								);
 							}
 						}}
 					>
 						<Status
 							status={status}
 							customer={customerViewMode}
+							reviewer={reviewer}
 							projectStatus={projectStatus}
 						>
 							{getTaskIconByStatus(status)}
@@ -200,4 +221,4 @@ class TaskStatus extends Component {
 	}
 }
 
-export default TaskStatus;
+export default withRouter(TaskStatus);

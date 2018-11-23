@@ -438,8 +438,8 @@ export const UPDATE_ITEM = gql`
 `;
 
 export const FINISH_ITEM = gql`
-	mutation finishItem($itemId: ID!) {
-		finishItem(id: $itemId) {
+	mutation finishItem($itemId: ID!, $token: String) {
+		finishItem(id: $itemId, token: $token) {
 			id
 			status
 		}

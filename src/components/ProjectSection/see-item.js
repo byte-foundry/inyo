@@ -204,20 +204,39 @@ class Item extends Component {
 			return (
 				<Mutation mutation={UPDATE_ITEM}>
 					{updateItem => (
-						<AddItem
-							item={item}
-							cancel={() => {
-								this.setState({
-									shouldDisplayAddItem: false,
-								});
-							}}
-							done={(data) => {
-								this.setState({
-									shouldDisplayAddItem: false,
-								});
-								editItem(item.id, sectionId, data, updateItem);
-							}}
-						/>
+						<Mutation mutation={REMOVE_ITEM}>
+							{removeItem => (
+								<AddItem
+									item={item}
+									remove={() => {
+										this.props.removeItem(
+											item.id,
+											sectionId,
+											removeItem,
+										);
+										this.setState({
+											shouldDisplayAddItem: false,
+										});
+									}}
+									cancel={() => {
+										this.setState({
+											shouldDisplayAddItem: false,
+										});
+									}}
+									done={(data) => {
+										this.setState({
+											shouldDisplayAddItem: false,
+										});
+										editItem(
+											item.id,
+											sectionId,
+											data,
+											updateItem,
+										);
+									}}
+								/>
+							)}
+						</Mutation>
 					)}
 				</Mutation>
 			);

@@ -18,7 +18,7 @@ class TasksListUser extends Component {
 				itemId,
 				name,
 				unit: parseFloat(unit),
-				comment: {text: comment},
+				comment: comment && {text: comment},
 			},
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
@@ -148,6 +148,44 @@ class TasksListUser extends Component {
 		});
 	};
 
+	removeItem = (itemId, sectionId, removeItem) => {
+		window.$crisp.push([
+			'set',
+			'session:event',
+			[[['item_removed', {}, 'yellow']]],
+		]);
+		removeItem({
+			variables: {itemId},
+			update: (cache, {data: {removeItem: removedItem}}) => {
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+				const section = data.project.sections.find(
+					e => e.id === sectionId,
+				);
+				const itemIndex = section.items.findIndex(
+					e => e.id === removedItem.id,
+				);
+
+				section.items.splice(itemIndex, 1);
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	render() {
 		const {projectId} = this.props.match.params;
 
@@ -217,6 +255,7 @@ class TasksListUser extends Component {
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
 								addItem={this.addItem}
+								removeItem={this.removeItem}
 								issuer={project.issuer}
 								refetch={refetch}
 								mode="see"

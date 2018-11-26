@@ -336,7 +336,7 @@ export const ADD_ITEM = gql`
 		$unit: Float
 		$vatRate: Int
 		$description: String
-		$reviewer: String
+		$reviewer: Reviewer
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -344,6 +344,7 @@ export const ADD_ITEM = gql`
 			unit: $unit
 			vatRate: $vatRate
 			description: $description
+			reviewer: $reviewer
 		) {
 			id
 			name
@@ -395,8 +396,8 @@ export const UPDATE_ITEM = gql`
 			id: $itemId
 			name: $name
 			description: $description
-			unit: $unit
 			comment: $comment
+			unit: $unit
 			reviewer: $reviewer
 		) {
 			id

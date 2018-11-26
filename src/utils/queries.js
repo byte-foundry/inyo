@@ -193,7 +193,6 @@ export const GET_PROJECT_DATA = gql`
 							}
 						}
 					}
-					pendingUnit
 					description
 				}
 			}

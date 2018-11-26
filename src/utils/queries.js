@@ -69,6 +69,8 @@ export const GET_USER_INFOS = gql`
 			jobType
 			interestedFeatures
 			hasUpcomingProject
+			startWorkAt
+			endWorkAt
 			company {
 				id
 				name

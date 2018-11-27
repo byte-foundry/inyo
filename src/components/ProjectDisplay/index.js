@@ -222,7 +222,7 @@ class ProjectDisplay extends Component {
 														);
 													}}
 												>
-													Commencer le project
+													Commencer le projet
 												</StartProjectButton>
 											)}
 										</Mutation>

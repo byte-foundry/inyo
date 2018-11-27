@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 import ReactGA from 'react-ga';
 import {Formik} from 'formik';
@@ -11,6 +11,14 @@ import {LOGIN} from '../../utils/mutations';
 import {Button, ErrorInput} from '../../utils/content';
 
 const LoginFormMain = styled('div')``;
+
+const ForgotPasswordLink = styled(Link)`
+	font-size: 14px;
+`;
+
+const ForgotPasswordLinkContainer = styled('div')`
+	text-align: right;
+`;
 
 class LoginForm extends Component {
 	constructor(props) {
@@ -35,9 +43,9 @@ class LoginForm extends Component {
 							initialValues={{email: ''}}
 							validationSchema={Yup.object().shape({
 								email: Yup.string()
-									.email()
-									.required('Required'),
-								password: Yup.string().required('Required'),
+									.email("L'email n'est pas valide")
+									.required('Requis'),
+								password: Yup.string().required('Requis'),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -85,18 +93,23 @@ class LoginForm extends Component {
 											{...props}
 											name="email"
 											type="email"
-											label="Email"
-											placeholder="enter your email"
+											label="Adresse email"
+											placeholder="jean@dupont.fr"
 											required
 										/>
 										<FormElem
 											{...props}
 											name="password"
 											type="password"
-											label="Password"
-											placeholder="enter your password"
+											label="Mot de passe"
+											placeholder="***************"
 											required
 										/>
+										<ForgotPasswordLinkContainer>
+											<ForgotPasswordLink to="/auth/forgotten-password">
+												Mot de passe oublié ?
+											</ForgotPasswordLink>
+										</ForgotPasswordLinkContainer>
 										{status
 											&& status.msg && (
 											<ErrorInput>

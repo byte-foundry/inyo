@@ -259,7 +259,8 @@ class ProjectDisplay extends Component {
 										<FlexRow>
 											<ProjectStatus>
 												<span>
-													Temps prévu : {timePlanned}
+													Temps prévu :{' '}
+													{timePlanned.toLocaleString()}
 												</span>
 											</ProjectStatus>
 										</FlexRow>

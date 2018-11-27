@@ -46,8 +46,11 @@ class ResetPasswordForm extends Component {
 	checkResetPassword = async () => {
 		this.setState({isValidToken: false});
 
-		const {isValidToken} = await apolloClient.mutate({
+		const {
+			data: {isValidToken},
+		} = await apolloClient.mutate({
 			mutation: CHECK_RESET_PASSWORD,
+			variables: {resetToken: this.props.resetToken},
 		});
 
 		this.setState({isValidToken});

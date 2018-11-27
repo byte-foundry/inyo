@@ -70,16 +70,31 @@ class EditProject extends Component {
 		startProject({
 			variables: {projectId},
 			update: (cache, {data: {startProject: startedProject}}) => {
-				const data = cache.readQuery({
-					query: GET_ALL_PROJECTS,
-				});
+				let data;
+				let updateCache = true;
 
-				if (data.me && data.me.company && data.me.company.projects) {
-					const updatedProject = data.me.company.projects.find(
-						project => project.id === startedProject.id,
-					);
+				try {
+					data = cache.readQuery({
+						query: GET_ALL_PROJECTS,
+					});
+				}
+				catch (e) {
+					// cache does not all projects loaded so do nothing
+					updateCache = false;
+				}
 
-					updatedProject.status = startedProject.status;
+				if (updateCache) {
+					if (
+						data.me
+						&& data.me.company
+						&& data.me.company.projects
+					) {
+						const updatedProject = data.me.company.projects.find(
+							project => project.id === startedProject.id,
+						);
+
+						updatedProject.status = startedProject.status;
+					}
 				}
 
 				const projectData = cache.readQuery({
@@ -126,10 +141,12 @@ class EditProject extends Component {
 						],
 					]);
 					this.toast();
-					cache.writeQuery({
-						query: GET_ALL_PROJECTS,
-						data,
-					});
+					if (updateCache) {
+						cache.writeQuery({
+							query: GET_ALL_PROJECTS,
+							data,
+						});
+					}
 				}
 				catch (e) {
 					throw new Error(e);

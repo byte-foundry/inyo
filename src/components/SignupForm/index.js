@@ -37,11 +37,11 @@ class SignupForm extends Component {
 							initialValues={{email: ''}}
 							validationSchema={Yup.object().shape({
 								email: Yup.string()
-									.email()
+									.email("L'email doit être valide")
 									.required('Required'),
-								password: Yup.string().required('Required'),
-								firstname: Yup.string().required('Required'),
-								lastname: Yup.string().required('Required'),
+								password: Yup.string().required('Requis'),
+								firstname: Yup.string().required('Requis'),
+								lastname: Yup.string().required('Requis'),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -94,7 +94,7 @@ class SignupForm extends Component {
 											name="email"
 											type="email"
 											label="Adresse email"
-											placeholder="john@doe.com"
+											placeholder="jean@dupont.fr"
 											required
 										/>
 										<FormElem
@@ -110,7 +110,7 @@ class SignupForm extends Component {
 											name="firstname"
 											type="text"
 											label="Prénom"
-											placeholder="John"
+											placeholder="Jean"
 											required
 										/>
 										<FormElem
@@ -118,7 +118,7 @@ class SignupForm extends Component {
 											name="lastname"
 											type="text"
 											label="Nom"
-											placeholder="Doe"
+											placeholder="Dupont"
 											required
 										/>
 										{status

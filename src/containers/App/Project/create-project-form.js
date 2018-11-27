@@ -113,6 +113,18 @@ class CreateProjectForm extends React.Component {
 													&& values.customer;
 
 												if (newCustomer) {
+													if (
+														!values.title
+														&& !values.firstName
+														&& !values.lastName
+													) {
+														errors.title
+															= 'Remplissez au moins civilité, prénom ou nom';
+														errors.firstName
+															= 'Remplissez au moins civilité, prénom ou nom';
+														errors.lastName
+															= 'Remplissez au moins civilité, prénom ou nom';
+													}
 													if (!values.email) {
 														errors.email = 'Requis';
 													}

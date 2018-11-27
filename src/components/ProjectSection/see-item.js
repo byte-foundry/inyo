@@ -13,6 +13,7 @@ import {
 	alpha10,
 	primaryWhite,
 	primaryBlue,
+	pastelGreen,
 	Button,
 } from '../../utils/content';
 import {
@@ -77,7 +78,7 @@ const ItemRow = styled(FlexRow)`
 	align-items: center;
 	box-shadow: 0px 0px 8px ${alpha10};
 	margin-bottom: 7px;
-	background: ${primaryWhite};
+	background: ${props => (props.reviewer === 'USER' ? primaryWhite : pastelGreen)};
 	padding: 5px 20px;
 `;
 
@@ -151,7 +152,12 @@ class Item extends Component {
 
 	render() {
 		const {
-			item, sectionId, editItem, mode, projectStatus,
+			item,
+			sectionId,
+			editItem,
+			mode,
+			projectStatus,
+			reviewer,
 		} = this.props;
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;
@@ -242,12 +248,13 @@ class Item extends Component {
 			);
 		}
 		return (
-			<ItemRow>
+			<ItemRow reviewer={item.reviewer}>
 				{(customerViewMode || mode === 'see') && (
 					<TaskStatus
 						status={item.status}
 						itemId={item.id}
 						sectionId={sectionId}
+						reviewer={item.reviewer}
 						mode={mode}
 						customerViewMode={customerViewMode}
 						projectStatus={projectStatus}
@@ -258,11 +265,7 @@ class Item extends Component {
 					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
-						if (
-							!customerViewMode
-							&& item.status !== 'FINISHED'
-							&& projectStatus !== 'SENT'
-						) {
+						if (!customerViewMode && item.status !== 'FINISHED') {
 							this.setState({shouldDisplayAddItem: true});
 						}
 					}}

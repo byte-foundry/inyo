@@ -15,6 +15,7 @@ export const primaryWhite = '#ffffff';
 export const primaryBlue = '#3860ff';
 export const primaryNavyBlue = '#171a44';
 export const primarySalmon = '#fbada1';
+export const pastelGreen = '#e9fffd';
 export const secondaryRed = '#e62043';
 export const secondaryLightBlue = '#deebff';
 export const secondaryLightYellow = '#fffae6';

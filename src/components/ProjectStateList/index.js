@@ -83,7 +83,7 @@ class ProjectStateList extends Component {
 						/>
 					</ProjectStateAmount>
 					<ProjectStateTotal>
-						{projectTotal.toLocaleString('fr-FR')}{' '}
+						{projectTotal.toLocaleString()}{' '}
 						<Plural
 							singular="jour"
 							plural="jours"

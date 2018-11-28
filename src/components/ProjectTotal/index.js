@@ -33,7 +33,7 @@ class ProjectTotal extends Component {
 				<TotalElem>
 					<TotalLabel>Temps prévu</TotalLabel>
 					<TotalNumber>
-						{sumDays}{' '}
+						{sumDays.toLocaleString()}{' '}
 						<Plural
 							singular="jour"
 							plural="jours"

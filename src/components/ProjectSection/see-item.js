@@ -289,7 +289,7 @@ class Item extends Component {
 						/>
 					)}
 					<ItemUnit>
-						{item.pendingUnit || item.unit}{' '}
+						{(item.pendingUnit || item.unit).toLocaleString()}{' '}
 						<Plural
 							singular="jour"
 							plural="jours"

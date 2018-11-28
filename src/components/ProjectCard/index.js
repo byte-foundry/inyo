@@ -56,7 +56,7 @@ class ProjectCard extends Component {
 	render() {
 		const {project} = this.props;
 		const {
-			customer, issuedAt, createdAt, id, status, total,
+			customer, issuedAt, createdAt, id, status, total = 0,
 		} = project;
 		const options = {
 			weekday: 'long',
@@ -91,7 +91,7 @@ class ProjectCard extends Component {
 					</DateOfIssue>
 				</CardHeader>
 				<Amount>
-					{total || 0}{' '}
+					{total.toLocaleString()}{' '}
 					<Plural singular="jour" plural="jours" value={total} />
 				</Amount>
 			</ProjectCardMain>

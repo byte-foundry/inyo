@@ -111,8 +111,8 @@ class ProjectSection extends Component {
 								item={{
 									name: 'Nouvelle tâche',
 									unit: 0,
-									unitPrice: defaultDailyPrice,
 									description: '',
+									reviewer: 'USER',
 								}}
 								remove={() => {
 									this.setState({

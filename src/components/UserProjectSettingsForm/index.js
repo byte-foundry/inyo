@@ -102,7 +102,18 @@ class UserProjectSettingsForm extends Component {
 									});
 								}
 								catch (error) {
-									Sentry.captureException(error);
+									if (
+										error.networkError
+										&& error.networkError.result
+										&& error.networkError.result.errors
+									) {
+										Sentry.captureException(
+											error.networkError.result.errors,
+										);
+									}
+									else {
+										Sentry.captureException(error);
+									}
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({

@@ -124,39 +124,30 @@ class OnboardingThirdStep extends Component {
 									endHour,
 									endMinutes,
 								} = values;
-								const timezoneOffsetInMinutes = new Date().getTimezoneOffset();
-								const timezoneOffsetHours = Math.floor(
-									timezoneOffsetInMinutes / 60,
-								);
-								const timezoneOffsetMinutes
-									= timezoneOffsetInMinutes % 60;
-								let timezoneOffsetFormated = 'Z';
 
-								if (
-									timezoneOffsetHours
-									|| timezoneOffsetMinutes
-								) {
-									const paddedTimezoneOffsetHours = timezoneOffsetHours
-										.toString()
-										.padStart(2, '0');
-									const paddedTimezoneOffsetMinutes = Math.abs(
-										timezoneOffsetHours,
-									)
-										.toString()
-										.padStart(2, '0');
+								const start = new Date();
 
-									if (timezoneOffsetInMinutes > 0) {
-										timezoneOffsetFormated = `+${paddedTimezoneOffsetHours}:${paddedTimezoneOffsetMinutes}`;
-									}
-									else {
-										timezoneOffsetFormated = `-${paddedTimezoneOffsetHours}:${paddedTimezoneOffsetMinutes}`;
-									}
-								}
+								start.setHours(startHour);
+								start.setMinutes(startMinutes);
+								start.setSeconds(0);
+								start.setMilliseconds(0);
+
+								const end = new Date();
+
+								end.setHours(endHour);
+								end.setMinutes(endMinutes);
+								end.setSeconds(0);
+								end.setMilliseconds(0);
+
 								try {
 									updateUser({
 										variables: {
-											workStartTime: `${startHour}:${startMinutes}:00${timezoneOffsetFormated}`,
-											workEndTime: '',
+											workStartTime: start
+												.toJSON()
+												.split('T')[1],
+											workEndTime: end
+												.toJSON()
+												.split('T')[1],
 										},
 										update: (
 											cache,

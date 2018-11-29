@@ -96,7 +96,6 @@ class CreateProjectForm extends React.Component {
 											lastName: '',
 											email: '',
 											projectTitle: '',
-											title: '',
 										}}
 										validate={(values) => {
 											const errors = {};
@@ -358,13 +357,28 @@ class CreateProjectForm extends React.Component {
 												actions.setSubmitting(false);
 											}
 											catch (projectError) {
-												Sentry.captureException(
-													projectError,
-												);
+												if (
+													projectError.networkError
+													&& projectError.networkError
+														.result
+													&& projectError.networkError
+														.result.errors
+												) {
+													Sentry.captureException(
+														projectError
+															.networkError.result
+															.errors,
+													);
+												}
+												else {
+													Sentry.captureException(
+														projectError,
+													);
+												}
 												actions.setSubmitting(false);
-												actions.setErrors(error);
+												actions.setErrors(projectError);
 												actions.setStatus({
-													msg: `Quelque chose ne s'est pas passé comme prévu. ${error}`,
+													msg: `Quelque chose ne s'est pas passé comme prévu. ${projectError}`,
 												});
 											}
 										}}

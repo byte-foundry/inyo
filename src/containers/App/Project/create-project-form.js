@@ -115,6 +115,7 @@ class CreateProjectForm extends React.Component {
 											lastName: '',
 											email: '',
 											projectTitle: '',
+											phone: '',
 										}}
 										validate={(values) => {
 											const errors = {};
@@ -203,6 +204,7 @@ class CreateProjectForm extends React.Component {
 													lastName: values.lastName,
 													email: values.email,
 													title: values.title,
+													phone: values.phone,
 												};
 											}
 
@@ -614,6 +616,12 @@ class CreateProjectForm extends React.Component {
 																			name="email"
 																			placeholder="contact@company.com"
 																			required
+																		/>
+																		<FormElem
+																			{...props}
+																			label="Son numéro de téléphone"
+																			name="phone"
+																			placeholder="08 36 65 65 65"
 																		/>
 																	</div>
 																)}

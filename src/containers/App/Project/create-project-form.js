@@ -5,7 +5,9 @@ import {Mutation, Query} from 'react-apollo';
 import Creatable from 'react-select/lib/Creatable';
 import ClassicSelect from 'react-select';
 import ReactGA from 'react-ga';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import * as Sentry from '@sentry/browser';
+
 import {templates} from '../../../utils/project-templates';
 
 import {
@@ -20,6 +22,7 @@ import {
 	ErrorInput,
 	Label,
 	Loading,
+	Input,
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
@@ -61,6 +64,18 @@ const InfoPrivacy = styled('div')`
 	}
 `;
 
+const DateInput = styled(Input)`
+	background: ${primaryWhite};
+	border-color: ${primaryBlue};
+	border-left: 0px;
+	color: ${primaryNavyBlue};
+	margin-right: 10px;
+	padding: 18px 5px;
+	&:focus {
+		outline: none;
+	}
+`;
+
 const SelectStyles = {
 	option: base => ({
 		...base,
@@ -87,12 +102,68 @@ const SelectStyles = {
 	}),
 };
 
+const WEEKDAYS_SHORT = {
+	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+};
+
+const MONTHS = {
+	fr: [
+		'Janvier',
+		'Février',
+		'Mars',
+		'Avril',
+		'Mai',
+		'Juin',
+		'Juillet',
+		'Août',
+		'Septembre',
+		'Octobre',
+		'Novembre',
+		'Décembre',
+	],
+};
+
+const WEEKDAYS_LONG = {
+	fr: [
+		'Dimanche',
+		'Lundi',
+		'Mardi',
+		'Mercredi',
+		'Jeudi',
+		'Vendredi',
+		'Smedi',
+	],
+};
+
+const FIRST_DAY_OF_WEEK = {
+	fr: 1,
+};
+// Translate aria-labels
+const LABELS = {
+	fr: {nextMonth: 'Mois suivant', previousMonth: 'Mois précédent'},
+};
+
 const projectTemplates = templates.map(template => ({
 	value: template.name,
 	label: template.label,
 }));
 
+const formatDate = dateObject => new Date(dateObject).toLocaleDateString('fr-FR');
+
+const parseDate = (dateString) => {
+	const dates = dateString.split('/');
+
+	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
+};
+
 class CreateProjectForm extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			from: new Date('01/01/2018'),
+		};
+	}
+
 	render() {
 		const {customers, onCreate} = this.props;
 
@@ -680,7 +751,48 @@ class CreateProjectForm extends React.Component {
 																		}
 																	</ErrorInput>
 																)}
-
+																<DayPickerInput
+																	formatDate={
+																		formatDate
+																	}
+																	parseDate={
+																		parseDate
+																	}
+																	dayPickerProps={{
+																		locale:
+																			'fr',
+																		months:
+																			MONTHS.fr,
+																		weekdaysLong:
+																			WEEKDAYS_LONG.fr,
+																		weekdaysShort:
+																			WEEKDAYS_SHORT.fr,
+																		firstDayOfWeek:
+																			FIRST_DAY_OF_WEEK.fr,
+																		labels:
+																			LABELS.fr,
+																		selectedDays: this
+																			.state
+																			.from,
+																	}}
+																	component={props => (
+																		<DateInput
+																			{...props}
+																		/>
+																	)}
+																	onDayChange={(day) => {
+																		this.setState(
+																			{
+																				from: day,
+																			},
+																		);
+																	}}
+																	value={
+																		this
+																			.state
+																			.from
+																	}
+																/>
 																<br />
 																<Button
 																	type="submit"

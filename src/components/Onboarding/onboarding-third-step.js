@@ -19,6 +19,8 @@ import {
 	Label,
 } from '../../utils/content';
 
+import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
+
 const OnboardingStep = styled('div')`
 	width: 100%;
 `;
@@ -57,6 +59,20 @@ const VATCard = styled('div')`
 	text-align: center;
 `;
 
+const EmojiTimeline = styled('div')`
+	display: flex;
+	justify-content: space-between;
+	font-size: 32px;
+	margin: 15px;
+	position: relative;
+	height: 50px;
+`;
+
+const Emoji = styled('div')`
+	position: absolute;
+	left: calc(${props => props.offset}% - 21px);
+`;
+
 class OnboardingThirdStep extends Component {
 	constructor(props) {
 		super(props);
@@ -89,24 +105,49 @@ class OnboardingThirdStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								defaultDailyPrice: me.defaultDailyPrice || 350,
-								isTVAApplicable: true,
+								startHour: 8,
+								startMinutes: 30,
+								endHour: 19,
+								endMinutes: 0,
 							}}
 							validationSchema={Yup.object().shape({
-								defaultDailyPrice: Yup.number(
-									'Doit être un nombre',
-								).required('Requis'),
+								startHour: Yup.number().required(),
+								startMinutes: Yup.number().required(),
+								endHour: Yup.number().required(),
+								endMinutes: Yup.number().required(),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
+								const {
+									startHour,
+									startMinutes,
+									endHour,
+									endMinutes,
+								} = values;
+
+								const start = new Date();
+
+								start.setHours(startHour);
+								start.setMinutes(startMinutes);
+								start.setSeconds(0);
+								start.setMilliseconds(0);
+
+								const end = new Date();
+
+								end.setHours(endHour);
+								end.setMinutes(endMinutes);
+								end.setSeconds(0);
+								end.setMilliseconds(0);
+
 								try {
 									updateUser({
 										variables: {
-											defaultVatRate: values.isTVAApplicable
-												? 20
-												: 0,
-											defaultDailyPrice:
-												values.defaultDailyPrice,
+											workStartTime: start
+												.toJSON()
+												.split('T')[1],
+											workEndTime: end
+												.toJSON()
+												.split('T')[1],
 										},
 										update: (
 											cache,
@@ -144,44 +185,22 @@ class OnboardingThirdStep extends Component {
 
 								return (
 									<form onSubmit={handleSubmit}>
-										<FormElem
-											{...props}
-											name="defaultDailyPrice"
-											type="number"
-											label="Quel est votre taux journée ?"
-											placeholder="350"
-											onboarding
-											required
-										/>
 										<Label onboarding>
-											Êtes-vous assujetti à la TVA?
+											Définissez vos horaires de travail
 										</Label>
-										<VATCards>
-											<VATCard
-												selected={
-													isVATApplicable === true
-												}
-												onClick={() => {
-													this.selectItem(
-														setFieldValue,
-													);
-												}}
-											>
-												Oui
-											</VATCard>
-											<VATCard
-												selected={
-													isVATApplicable === false
-												}
-												onClick={() => {
-													this.selectItem(
-														setFieldValue,
-													);
-												}}
-											>
-												Non
-											</VATCard>
-										</VATCards>
+										<DoubleRangeTimeInput
+											value={{
+												start: [8, 10],
+												end: [19, 0],
+											}}
+										/>
+										<EmojiTimeline>
+											<Emoji offset={0}>🌙</Emoji>
+											<Emoji offset={33}>🥐</Emoji>
+											<Emoji offset={50}>🍱</Emoji>
+											<Emoji offset={87}>🛌</Emoji>
+											<Emoji offset={100}>🌗</Emoji>
+										</EmojiTimeline>
 										<ActionButtons>
 											<ActionButton
 												theme="Primary"

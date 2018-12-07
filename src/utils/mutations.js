@@ -48,6 +48,9 @@ export const UPDATE_USER = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			startWorkAt
+			endWorkAt
+			workingDays
 			company {
 				id
 				name
@@ -82,6 +85,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$hasUpcomingProject: Boolean
 		$startWorkAt: Time
 		$endWorkAt: Time
+		$workingDays: [DAY!]
 	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
@@ -92,6 +96,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			hasUpcomingProject: $hasUpcomingProject
 			startWorkAt: $startWorkAt
 			endWorkAt: $endWorkAt
+			workingDays: $workingDays
 		) {
 			id
 			email
@@ -105,6 +110,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			hasUpcomingProject
 			startWorkAt
 			endWorkAt
+			workingDays
 			company {
 				id
 				name

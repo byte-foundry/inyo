@@ -11,6 +11,7 @@ import {
 } from '../../utils/content';
 
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
+import WeekDaysInput from '../WeekDaysInput';
 
 const OnboardingStep = styled('div')`
 	width: 100%;
@@ -68,6 +69,13 @@ class OnboardingThirdStep extends Component {
 		const endMinutes = me.endWorkAt
 			? Number.parseInt(me.endWorkAt.substring(3, 5), 10)
 			: 0;
+		const workingDays = me.workingDays || [
+			'MONDAY',
+			'TUESDAY',
+			'WEDNESDAY',
+			'THURSDAY',
+			'FRIDAY',
+		];
 
 		return (
 			<OnboardingStep>
@@ -83,6 +91,7 @@ class OnboardingThirdStep extends Component {
 								startMinutes,
 								endHour,
 								endMinutes,
+								workingDays,
 							}}
 							validationSchema={Yup.object().shape({
 								startHour: Yup.number().required(),
@@ -97,6 +106,7 @@ class OnboardingThirdStep extends Component {
 									startMinutes,
 									endHour,
 									endMinutes,
+									workingDays,
 								} = values;
 
 								const start = new Date();
@@ -116,12 +126,13 @@ class OnboardingThirdStep extends Component {
 								try {
 									updateUser({
 										variables: {
-											workStartTime: start
+											startWorkAt: start
 												.toJSON()
 												.split('T')[1],
-											workEndTime: end
+											endWorkAt: end
 												.toJSON()
 												.split('T')[1],
+											workingDays,
 										},
 										update: (
 											cache,
@@ -163,6 +174,7 @@ class OnboardingThirdStep extends Component {
 										startMinutes,
 										endHour,
 										endMinutes,
+										workingDays,
 									},
 								} = props;
 
@@ -188,6 +200,13 @@ class OnboardingThirdStep extends Component {
 											<Emoji offset={87}>🛌</Emoji>
 											<Emoji offset={100}>🌗</Emoji>
 										</EmojiTimeline>
+										<Label onboarding>
+											Définissez vos jours de travail
+										</Label>
+										<WeekDaysInput
+											values={workingDays}
+											setFieldValue={setFieldValue}
+										/>
 										<ActionButtons>
 											<ActionButton
 												theme="Primary"

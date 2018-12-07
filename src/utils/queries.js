@@ -71,6 +71,7 @@ export const GET_USER_INFOS = gql`
 			hasUpcomingProject
 			startWorkAt
 			endWorkAt
+			workingDays
 			company {
 				id
 				name

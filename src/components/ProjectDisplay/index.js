@@ -322,29 +322,25 @@ class ProjectDisplay extends Component {
 															/>
 														),
 													)}
-													{mode === 'edit' && (
-														<Mutation
-															mutation={
-																ADD_SECTION
-															}
-														>
-															{AddSection => (
-																<ProjectAction
-																	theme="Link"
-																	size="XSmall"
-																	onClick={() => {
-																		addSection(
-																			project.id,
-																			AddSection,
-																		);
-																	}}
-																>
-																	Ajouter une
-																	section
-																</ProjectAction>
-															)}
-														</Mutation>
-													)}
+													<Mutation
+														mutation={ADD_SECTION}
+													>
+														{AddSection => (
+															<ProjectAction
+																theme="Link"
+																size="XSmall"
+																onClick={() => {
+																	addSection(
+																		project.id,
+																		AddSection,
+																	);
+																}}
+															>
+																Ajouter une
+																section
+															</ProjectAction>
+														)}
+													</Mutation>
 												</ProjectSections>
 											</FlexColumn>
 										</ProjectContent>

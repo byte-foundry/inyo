@@ -15,6 +15,7 @@ import {
 	Button,
 	primaryBlue,
 	primaryNavyBlue,
+	primaryWhite,
 	FlexRow,
 	ErrorInput,
 	Label,
@@ -40,6 +41,24 @@ const FormTitle = styled(H4)`
 const FormSection = styled('div')`
 	margin-left: ${props => (props.right ? '40px' : 0)};
 	margin-right: ${props => (props.left ? '40px' : 0)};
+`;
+
+const InfoPrivacy = styled('div')`
+	font-size: 15px;
+	background: ${primaryNavyBlue};
+	color: ${primaryWhite};
+	border-radius: 3px;
+	padding: 20px;
+	display: flex;
+
+	&:before {
+		display: block;
+		content: '🔒';
+		width: 30px;
+		height: 30px;
+		align-self: center;
+		font-size: 18px;
+	}
 `;
 
 const SelectStyles = {
@@ -100,7 +119,10 @@ class CreateProjectForm extends React.Component {
 										validate={(values) => {
 											const errors = {};
 
-											if (values.customer) {
+											if (
+												values.customer
+												&& values.customer.label
+											) {
 												const selectedCustomer
 													= values.customer
 													&& customers.find(
@@ -465,6 +487,26 @@ class CreateProjectForm extends React.Component {
 																	formatCreateLabel={inputValue => `Créer "${inputValue}"`
 																	}
 																/>
+																{!selectedCustomer
+																	&& !values.customer && (
+																	<div>
+																		<br />
+																		<Button
+																			theme="Primary"
+																			onClick={() => setFieldValue(
+																				'customer',
+																				{},
+																			)
+																			}
+																		>
+																				Je
+																				crée
+																				un
+																				nouveau
+																				client
+																		</Button>
+																	</div>
+																)}
 																{errors.customer
 																	&& touched.customer && (
 																	<ErrorInput
@@ -497,6 +539,35 @@ class CreateProjectForm extends React.Component {
 																				plus
 																				?
 																		</p>
+																		<InfoPrivacy
+																		>
+																				Vos
+																				données
+																				sont
+																				les
+																				vôtres
+																				!
+																			<br />{' '}
+																				Nous
+																				ne
+																				partageons
+																				pas
+																				les
+																				informations
+																				de
+																				vos
+																				clients.
+																		</InfoPrivacy>
+																		<FlexRow
+																		>
+																			<FormElem
+																				{...props}
+																				label="Nom"
+																				type="text"
+																				required
+																				name="customer.label"
+																			/>
+																		</FlexRow>
 																		<FlexRow
 																		>
 																			<FormSelect

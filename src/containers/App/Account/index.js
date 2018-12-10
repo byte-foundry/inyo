@@ -23,6 +23,7 @@ import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserSettings from '../../../components/UserSettings';
+import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
@@ -239,8 +240,12 @@ class Account extends Component {
 													this.settings = elem;
 												}}
 											>
-												Vos options
+												Vos horaires et jour de travail
 											</ProfileTitle>
+											<UserWorkHourAndDaysForm
+												data={me}
+												done={() => this.toast()}
+											/>
 											<UserSettings
 												data={me}
 												done={() => this.toast()}

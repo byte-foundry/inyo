@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled, {css} from 'react-emotion';
+import {Field} from 'formik';
 import {Input, primaryWhite} from '../../utils/content';
 
 const FormInputMain = styled(Input)`
@@ -11,6 +12,14 @@ const FormInputMain = styled(Input)`
 			text-align: center;
 		`};
 `;
+
+function FormInputShell({field, form: {touched, errors}, ...props}) {
+	return (
+		<div>
+			<FormInputMain {...field} {...props} />
+		</div>
+	);
+}
 
 class FormInput extends Component {
 	render() {
@@ -27,11 +36,12 @@ class FormInput extends Component {
 		} = this.props;
 
 		return (
-			<FormInputMain
+			<Field
+				component={FormInputShell}
 				id={name}
 				placeholder={placeholder}
 				type={type}
-				value={values[name]}
+				name={name}
 				onChange={handleChange}
 				onBlur={handleBlur}
 				error={errors[name] && touched[name]}

@@ -234,6 +234,7 @@ export const CREATE_PROJECT = gql`
 		$template: ProjectTemplate!
 		$sections: [SectionInput!]
 		$name: String
+		$deadline: DateTime
 	) {
 		createProject(
 			customerId: $customerId
@@ -241,10 +242,12 @@ export const CREATE_PROJECT = gql`
 			template: $template
 			sections: $sections
 			name: $name
+			deadline: $deadline
 		) {
 			id
 			name
 			viewedByCustomer
+			deadline
 			customer {
 				name
 			}

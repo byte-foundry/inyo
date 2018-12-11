@@ -9,6 +9,7 @@ import InlineEditable from '../InlineEditable';
 import ProjectSection from '../ProjectSection';
 import ProjectTotal from '../ProjectTotal';
 import TasksProgressBar from '../TasksProgressBar';
+import Plural from '../Plural';
 import {
 	UPDATE_PROJECT,
 	ADD_SECTION,
@@ -146,7 +147,7 @@ class ProjectDisplay extends Component {
 				sumDays += item.pendingUnit || item.unit;
 			});
 		});
-		return <ProjectTotal sumDays={sumDays} />;
+		return sumDays.toLocaleString();
 	};
 
 	render() {
@@ -359,13 +360,41 @@ class ProjectDisplay extends Component {
 											)}
 										</CustomerIssuerContainer>
 										<TotalContainer>
-											{this.getProjectTotal(
-												project,
-												customerViewMode
-													? project.issuer.owner
-														.defaultVatRate
-													: data.me.defaultVatRate,
-											)}
+											<ProjectTotal
+												sumDays={new Date(
+													project.deadline,
+												).toLocaleDateString()}
+												label="Date de fin"
+											/>
+										</TotalContainer>
+										<TotalContainer>
+											<ProjectTotal
+												sumDays={Math.ceil(
+													(new Date(
+														project.deadline,
+													)
+														- new Date())
+														/ 86400000,
+												)}
+												label="Jours avant date de fin"
+											/>
+										</TotalContainer>
+										<TotalContainer>
+											<ProjectTotal
+												sumDays={this.getProjectTotal(
+													project,
+												)}
+												label="Temps prévu"
+												counter={
+													<Plural
+														singular="jour"
+														plural="jours"
+														value={this.getProjectTotal(
+															project,
+														)}
+													/>
+												}
+											/>
 										</TotalContainer>
 										<TaskLegend>
 											<InfosOnItems color={gray50}>

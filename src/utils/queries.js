@@ -129,6 +129,7 @@ export const GET_PROJECT_DATA = gql`
 			name
 			status
 			createdAt
+			deadline
 			issuer {
 				name
 				email
@@ -153,6 +154,7 @@ export const GET_PROJECT_DATA = gql`
 				firstName
 				lastName
 				email
+				phone
 				address {
 					street
 					city

@@ -5,7 +5,9 @@ import {Mutation, Query} from 'react-apollo';
 import Creatable from 'react-select/lib/Creatable';
 import ClassicSelect from 'react-select';
 import ReactGA from 'react-ga';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
 import * as Sentry from '@sentry/browser';
+
 import {templates} from '../../../utils/project-templates';
 
 import {
@@ -20,6 +22,7 @@ import {
 	ErrorInput,
 	Label,
 	Loading,
+	Input,
 } from '../../../utils/content';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
@@ -61,6 +64,26 @@ const InfoPrivacy = styled('div')`
 	}
 `;
 
+const DateInput = styled(Input)`
+	background: ${primaryWhite};
+	border-color: ${primaryBlue};
+	border-left: 0px;
+	color: ${primaryNavyBlue};
+	margin-right: 10px;
+	padding: 18px 5px;
+	&:focus {
+		outline: none;
+	}
+`;
+
+const SpanLabel = styled('span')`
+	background: ${primaryWhite};
+	color: ${primaryNavyBlue};
+	border: 1px solid ${primaryBlue};
+	border-right: 0px;
+	padding: 15px 0px 12px 18px;
+`;
+
 const SelectStyles = {
 	option: base => ({
 		...base,
@@ -87,10 +110,59 @@ const SelectStyles = {
 	}),
 };
 
+const WEEKDAYS_SHORT = {
+	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+};
+
+const MONTHS = {
+	fr: [
+		'Janvier',
+		'Février',
+		'Mars',
+		'Avril',
+		'Mai',
+		'Juin',
+		'Juillet',
+		'Août',
+		'Septembre',
+		'Octobre',
+		'Novembre',
+		'Décembre',
+	],
+};
+
+const WEEKDAYS_LONG = {
+	fr: [
+		'Dimanche',
+		'Lundi',
+		'Mardi',
+		'Mercredi',
+		'Jeudi',
+		'Vendredi',
+		'Smedi',
+	],
+};
+
+const FIRST_DAY_OF_WEEK = {
+	fr: 1,
+};
+// Translate aria-labels
+const LABELS = {
+	fr: {nextMonth: 'Mois suivant', previousMonth: 'Mois précédent'},
+};
+
 const projectTemplates = templates.map(template => ({
 	value: template.name,
 	label: template.label,
 }));
+
+const formatDate = dateObject => new Date(dateObject).toLocaleDateString('fr-FR');
+
+const parseDate = (dateString) => {
+	const dates = dateString.split('/');
+
+	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
+};
 
 class CreateProjectForm extends React.Component {
 	render() {
@@ -115,6 +187,8 @@ class CreateProjectForm extends React.Component {
 											lastName: '',
 											email: '',
 											projectTitle: '',
+											phone: '',
+											deadline: new Date(),
 										}}
 										validate={(values) => {
 											const errors = {};
@@ -190,6 +264,7 @@ class CreateProjectForm extends React.Component {
 											const variables = {
 												template: values.template,
 												name: values.projectTitle,
+												deadline: values.deadline.toISOString(),
 											};
 
 											if (customer) {
@@ -198,11 +273,14 @@ class CreateProjectForm extends React.Component {
 											}
 											else {
 												variables.customer = {
-													name: values.customer.value,
+													name:
+														values.customer.value
+														|| values.customer.label,
 													firstName: values.firstName,
 													lastName: values.lastName,
 													email: values.email,
 													title: values.title,
+													phone: values.phone,
 												};
 											}
 
@@ -615,6 +693,12 @@ class CreateProjectForm extends React.Component {
 																			placeholder="contact@company.com"
 																			required
 																		/>
+																		<FormElem
+																			{...props}
+																			label="Son numéro de téléphone"
+																			name="phone"
+																			placeholder="08 36 65 65 65"
+																		/>
 																	</div>
 																)}
 															</FormSection>
@@ -672,7 +756,50 @@ class CreateProjectForm extends React.Component {
 																		}
 																	</ErrorInput>
 																)}
-
+																<FlexRow>
+																	<SpanLabel>
+																		Finir
+																		avant :
+																	</SpanLabel>
+																	<DayPickerInput
+																		formatDate={
+																			formatDate
+																		}
+																		parseDate={
+																			parseDate
+																		}
+																		dayPickerProps={{
+																			locale:
+																				'fr',
+																			months:
+																				MONTHS.fr,
+																			weekdaysLong:
+																				WEEKDAYS_LONG.fr,
+																			weekdaysShort:
+																				WEEKDAYS_SHORT.fr,
+																			firstDayOfWeek:
+																				FIRST_DAY_OF_WEEK.fr,
+																			labels:
+																				LABELS.fr,
+																			selectedDays:
+																				values.deadline,
+																		}}
+																		component={props => (
+																			<DateInput
+																				{...props}
+																			/>
+																		)}
+																		onDayChange={(day) => {
+																			setFieldValue(
+																				'deadline',
+																				day,
+																			);
+																		}}
+																		value={
+																			values.deadline
+																		}
+																	/>
+																</FlexRow>
 																<br />
 																<Button
 																	type="submit"

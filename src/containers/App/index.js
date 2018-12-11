@@ -8,6 +8,7 @@ import * as Sentry from '@sentry/browser';
 import Onboarding from './Onboarding';
 import Account from './Account';
 import Project from './Project';
+import ConditionalContent from './ConditionalContent';
 import ProjectCustomerView from './Project/project-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
@@ -80,6 +81,16 @@ class App extends Component {
 								/>
 								<Redirect to="/app/projects" />
 							</Switch>
+							<ProtectedRoute
+								path={['/app/projects', '/app/account']}
+								render={props => (
+									<ConditionalContent
+										{...props}
+										user={data.me}
+									/>
+								)}
+								isAllowed={data && data.me}
+							/>
 						</AppMain>
 					);
 				}}

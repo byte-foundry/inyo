@@ -227,6 +227,73 @@ class TasksListUser extends Component {
 		});
 	};
 
+	addSection = (projectId, addSection) => {
+		addSection({
+			variables: {projectId, name: 'Nouvelle section'},
+			update: (cache, {data: {addSection: addedSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_added', {}, 'orange']]],
+				]);
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+
+				data.project.sections.push(addedSection);
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
+	removeSection = (sectionId, removeSection) => {
+		removeSection({
+			variables: {sectionId},
+			update: (cache, {data: {removeSection: removedSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_removed', {}, 'orange']]],
+				]);
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+				const sectionIndex = data.project.sections.findIndex(
+					e => e.id === removedSection.id,
+				);
+
+				data.project.sections.splice(sectionIndex, 1);
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	render() {
 		const {projectId} = this.props.match.params;
 
@@ -296,6 +363,7 @@ class TasksListUser extends Component {
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
 								removeItem={this.removeItem}
+								addSection={this.addSection}
 								removeSection={this.removeSection}
 								addItem={this.addItem}
 								removeItem={this.removeItem}

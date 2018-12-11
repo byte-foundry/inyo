@@ -240,7 +240,7 @@ class Account extends Component {
 													this.settings = elem;
 												}}
 											>
-												Vos horaires et jour de travail
+												Vos horaires et jours de travail
 											</ProfileTitle>
 											<UserWorkHourAndDaysForm
 												data={me}

@@ -184,17 +184,16 @@ class EditProject extends Component {
 
 	addItem = (sectionId, addItemValues, addItem) => {
 		const {
-			name, vatRate, unit, unitPrice, description,
+			name, unit, description, reviewer,
 		} = addItemValues;
 
 		addItem({
 			variables: {
 				sectionId,
 				name,
-				vatRate,
 				unit: parseFloat(unit),
-				unitPrice,
 				description,
+				reviewer,
 			},
 			update: (cache, {data: {addItem: addedItem}}) => {
 				const data = cache.readQuery({

@@ -22,10 +22,8 @@ import {
 	FlexRow,
 	FlexColumn,
 	Button,
-	primaryWhite,
 	primaryNavyBlue,
 	primaryBlue,
-	pastelGreen,
 	gray20,
 	gray10,
 	gray50,
@@ -101,15 +99,16 @@ const InfosOnItems = styled('div')`
 	font-size: 14px;
 	&::before {
 		content: ' ';
-		background: ${props => props.color};
+		box-sizing: border-box;
+		border: solid 1px ${gray50};
+		border-right: ${props => (props.color === primaryBlue ? '4px' : '1px')}
+			solid ${props => props.color};
 		margin-right: 10px;
-		border: solid 1px #dddddd;
-		width: 40px;
-		height: 40px;
+		width: 16px;
+		height: 16px;
 		display: block;
-		border-radius: 50%;
 		position: relative;
-		top: -10px;
+		top: 0.18em;
 	}
 `;
 
@@ -346,14 +345,6 @@ class ProjectDisplay extends Component {
 										</ProjectContent>
 									</CenterContent>
 									<SideActions>
-										<TaskLegend>
-											<InfosOnItems color={primaryWhite}>
-												Vos tâches
-											</InfosOnItems>
-											<InfosOnItems color={pastelGreen}>
-												Tâches de votre client
-											</InfosOnItems>
-										</TaskLegend>
 										<CustomerIssuerContainer>
 											{customerViewMode
 												&& issuer.name && (
@@ -376,6 +367,14 @@ class ProjectDisplay extends Component {
 													: data.me.defaultVatRate,
 											)}
 										</TotalContainer>
+										<TaskLegend>
+											<InfosOnItems color={gray50}>
+												Vos tâches
+											</InfosOnItems>
+											<InfosOnItems color={primaryBlue}>
+												Tâches de votre client
+											</InfosOnItems>
+										</TaskLegend>
 										{mode === 'edit' && (
 											<Mutation mutation={REMOVE_PROJECT}>
 												{RemoveProject => (

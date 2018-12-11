@@ -11,9 +11,8 @@ export default function ConditionalContent(props) {
 	return (
 		<ConditionalContentMain>
 			{(!workingDays || !startWorkAt || !endWorkAt) && (
-				<ModalWithHoursAndDays />
+				<ModalWithHoursAndDays data={props.user} />
 			)}
-			}
 		</ConditionalContentMain>
 	);
 }

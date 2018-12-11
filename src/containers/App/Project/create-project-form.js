@@ -76,6 +76,14 @@ const DateInput = styled(Input)`
 	}
 `;
 
+const SpanLabel = styled('span')`
+	background: ${primaryWhite};
+	color: ${primaryNavyBlue};
+	border: 1px solid ${primaryBlue};
+	border-right: 0px;
+	padding: 15px 0px 12px 18px;
+`;
+
 const SelectStyles = {
 	option: base => ({
 		...base,
@@ -159,9 +167,6 @@ const parseDate = (dateString) => {
 class CreateProjectForm extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			from: new Date('01/01/2018'),
-		};
 	}
 
 	render() {
@@ -187,6 +192,7 @@ class CreateProjectForm extends React.Component {
 											email: '',
 											projectTitle: '',
 											phone: '',
+											deadline: new Date(),
 										}}
 										validate={(values) => {
 											const errors = {};
@@ -262,6 +268,7 @@ class CreateProjectForm extends React.Component {
 											const variables = {
 												template: values.template,
 												name: values.projectTitle,
+												deadline: values.deadline.toISOString(),
 											};
 
 											if (customer) {
@@ -270,7 +277,9 @@ class CreateProjectForm extends React.Component {
 											}
 											else {
 												variables.customer = {
-													name: values.customer.value,
+													name:
+														values.customer.value
+														|| values.customer.label,
 													firstName: values.firstName,
 													lastName: values.lastName,
 													email: values.email,
@@ -751,48 +760,50 @@ class CreateProjectForm extends React.Component {
 																		}
 																	</ErrorInput>
 																)}
-																<DayPickerInput
-																	formatDate={
-																		formatDate
-																	}
-																	parseDate={
-																		parseDate
-																	}
-																	dayPickerProps={{
-																		locale:
-																			'fr',
-																		months:
-																			MONTHS.fr,
-																		weekdaysLong:
-																			WEEKDAYS_LONG.fr,
-																		weekdaysShort:
-																			WEEKDAYS_SHORT.fr,
-																		firstDayOfWeek:
-																			FIRST_DAY_OF_WEEK.fr,
-																		labels:
-																			LABELS.fr,
-																		selectedDays: this
-																			.state
-																			.from,
-																	}}
-																	component={props => (
-																		<DateInput
-																			{...props}
-																		/>
-																	)}
-																	onDayChange={(day) => {
-																		this.setState(
-																			{
-																				from: day,
-																			},
-																		);
-																	}}
-																	value={
-																		this
-																			.state
-																			.from
-																	}
-																/>
+																<FlexRow>
+																	<SpanLabel>
+																		Finir
+																		avant :
+																	</SpanLabel>
+																	<DayPickerInput
+																		formatDate={
+																			formatDate
+																		}
+																		parseDate={
+																			parseDate
+																		}
+																		dayPickerProps={{
+																			locale:
+																				'fr',
+																			months:
+																				MONTHS.fr,
+																			weekdaysLong:
+																				WEEKDAYS_LONG.fr,
+																			weekdaysShort:
+																				WEEKDAYS_SHORT.fr,
+																			firstDayOfWeek:
+																				FIRST_DAY_OF_WEEK.fr,
+																			labels:
+																				LABELS.fr,
+																			selectedDays:
+																				values.deadline,
+																		}}
+																		component={props => (
+																			<DateInput
+																				{...props}
+																			/>
+																		)}
+																		onDayChange={(day) => {
+																			setFieldValue(
+																				'deadline',
+																				day,
+																			);
+																		}}
+																		value={
+																			values.deadline
+																		}
+																	/>
+																</FlexRow>
 																<br />
 																<Button
 																	type="submit"

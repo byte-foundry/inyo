@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
 
-import {pastelGreen, gray80, primaryWhite} from '../../utils/content';
+import {primaryBlue, gray80, primaryWhite} from '../../utils/content';
 
 const SwitchButtonMain = styled('div')`
 	display: flex;
@@ -21,7 +21,7 @@ const SwitchContainer = styled('div')`
 const SwitchToggle = styled('div')`
 	height: 20px;
 	width: 20px;
-	background: ${props => (props.checked ? pastelGreen : primaryWhite)};
+	background: ${props => (props.checked ? primaryBlue : primaryWhite)};
 	border-radius: 50%;
 	margin: 3px;
 	position: relative;

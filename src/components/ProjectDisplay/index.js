@@ -381,8 +381,8 @@ class ProjectDisplay extends Component {
 												sumDays={Math.ceil(
 													(new Date(
 														project.deadline,
-													).getTime()
-														- new Date().getTime())
+													)
+														- new Date())
 														/ 86400000,
 												)}
 												label="Jours avant date de fin"
@@ -404,7 +404,6 @@ class ProjectDisplay extends Component {
 													/>
 												}
 											/>
-											{}
 										</TotalContainer>
 										{mode === 'edit' && (
 											<Mutation mutation={REMOVE_PROJECT}>

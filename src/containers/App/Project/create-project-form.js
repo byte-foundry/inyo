@@ -165,10 +165,6 @@ const parseDate = (dateString) => {
 };
 
 class CreateProjectForm extends React.Component {
-	constructor(props) {
-		super(props);
-	}
-
 	render() {
 		const {customers, onCreate} = this.props;
 

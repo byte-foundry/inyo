@@ -25,6 +25,9 @@ export const CHECK_LOGIN_USER = gql`
 			id
 			firstName
 			lastName
+			workingDays
+			startWorkAt
+			endWorkAt
 		}
 	}
 `;

@@ -3,9 +3,9 @@ import styled, {css} from 'react-emotion';
 
 import FormInput from '../FormInput';
 
-import {P, Label, ErrorInput} from '../../utils/content';
+import {Label, ErrorInput} from '../../utils/content';
 
-const FormElemMain = styled(P)`
+const FormElemMain = styled('div')`
 	width: 100%;
 	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
 	${props => props.inline

@@ -68,9 +68,9 @@ function track(trackingSide, value) {
 
 function convertMousePosToTime(e, trackingSide) {
 	const mouseOffset = e.clientX;
-	const baseOffset = inputRange.current.offsetLeft;
+	const baseOffset = inputRange.current.getBoundingClientRect().left;
 	const realOffset = mouseOffset - baseOffset;
-	const baseWidth = inputRange.current.clientWidth;
+	const baseWidth = inputRange.current.getBoundingClientRect().width;
 
 	const percentage = Math.max(Math.min(realOffset / baseWidth, 1), 0);
 
@@ -126,7 +126,17 @@ export default function DoubleRangeTimeInput(props) {
 			}}
 		>
 			<TimeInputRange innerRef={inputRange}>
-				<RangeDecoration start={startPercentage} end={endPercentage} />
+				{endPercentage < startPercentage ? (
+					<>
+						<RangeDecoration start={0} end={endPercentage} />
+						<RangeDecoration start={startPercentage} end={100} />
+					</>
+				) : (
+					<RangeDecoration
+						start={startPercentage}
+						end={endPercentage}
+					/>
+				)}
 				<TimeDisplay percentage={startPercentage}>
 					{startHour}h{startMinutes.toString().padStart(2, '0')}
 				</TimeDisplay>

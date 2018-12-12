@@ -10,6 +10,7 @@
     "extends": "react-app"
   },
   "dependencies": {
+    "@reach/dialog": "^0.1.2",
     "@sentry/browser": "^4.2.1",
     "algolia-places-react": "^1.3.0",
     "apollo-boost": "^0.1.16",

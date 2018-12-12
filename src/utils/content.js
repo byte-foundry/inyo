@@ -1,6 +1,9 @@
 import styled, {css, keyframes} from 'react-emotion';
 import React from 'react';
 import Shevy from 'shevyjs';
+import {Dialog} from '@reach/dialog';
+
+import '@reach/dialog/styles.css';
 import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
 
 const shevy = new Shevy({
@@ -325,32 +328,16 @@ export const ToggleButton = styled('span')`
 	transition: color 0.2s ease, border-color 0.2s ease;
 `;
 
-export const ModalContainer = styled('div')`
-	position: fixed;
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	align-items: center;
-	background: ${alpha10};
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-`;
+export const ModalContainer = Dialog;
 
 export const ModalElem = styled('div')`
-	flex: 0 50vw;
-	background: ${primaryWhite};
-	width: 50vw;
 	position: relative;
-	padding: 20px 40px 30px;
 `;
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	top: 40px;
-	right: 40px;
+	top: 0px;
+	right: 0px;
 	width: 40px;
 	height: 40px;
 	cursor: pointer;

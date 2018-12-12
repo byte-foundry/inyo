@@ -37,9 +37,7 @@ const UpdateButton = styled(Button)`
 
 class UserCompanyForm extends Component {
 	render() {
-		const {
-			name, address, phone, siret, rcs, rm, vat,
-		} = this.props.data;
+		const {name, address, phone} = this.props.data;
 		const {buttonText, done} = this.props;
 
 		return (
@@ -50,16 +48,11 @@ class UserCompanyForm extends Component {
 							initialValues={{
 								name: name || '',
 								phone: phone || '',
-								siret: siret || '',
 								address: address || '',
-								rcs: rcs || '',
-								rm: rm || '',
-								vat: vat || '',
 							}}
 							validationSchema={Yup.object().shape({
 								name: Yup.string().required('Requis'),
 								phone: Yup.string(),
-								siret: Yup.string().required('Requis'),
 								address: Yup.object()
 									.shape({
 										street: Yup.string().required(),
@@ -68,9 +61,6 @@ class UserCompanyForm extends Component {
 										country: Yup.string().required(),
 									})
 									.required('Requis'),
-								rcs: Yup.string(),
-								rm: Yup.string(),
-								vat: Yup.string(),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -163,12 +153,11 @@ class UserCompanyForm extends Component {
 													/>
 													<FormElem
 														{...props}
-														name="siret"
-														type="text"
-														label="Siret"
-														placeholder="123456824"
+														name="phone"
+														type="tel"
+														label="Numéro de téléphone"
+														placeholder="0427..."
 														padded
-														required
 													/>
 												</FlexRow>
 												<AddressAutocomplete
@@ -181,42 +170,6 @@ class UserCompanyForm extends Component {
 													padded
 													required
 												/>
-												<FlexRow justifyContent="space-between">
-													<FormElem
-														{...props}
-														name="phone"
-														type="tel"
-														label="Numéro de téléphone"
-														placeholder="0427..."
-														padded
-													/>
-													<FormElem
-														{...props}
-														name="rcs"
-														type="text"
-														label="RCS"
-														placeholder="RCS Paris  654 987 321"
-														padded
-													/>
-												</FlexRow>
-												<FlexRow justifyContent="space-between">
-													<FormElem
-														{...props}
-														name="rm"
-														type="text"
-														label="RM"
-														placeholder="RM 123"
-														padded
-													/>
-													<FormElem
-														{...props}
-														name="vat"
-														type="text"
-														label="N° TVA"
-														placeholder="FR 40 123456824"
-														padded
-													/>
-												</FlexRow>
 											</FormContainer>
 
 											{status

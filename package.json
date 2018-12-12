@@ -27,7 +27,7 @@
     "react": "^16.5.2",
     "react-apollo": "^2.2.4",
     "react-autocomplete": "^1.8.1",
-    "react-beautiful-dnd": "^9.0.2",
+    "react-beautiful-dnd": "^10.0.3",
     "react-day-picker": "^7.2.4",
     "react-dom": "^16.5.2",
     "react-emotion": "^9.2.12",

@@ -75,6 +75,7 @@ const ItemCustomerButton = styled(Button)`
 
 const ItemRow = styled(FlexRow)`
 	align-items: center;
+	background: ${primaryWhite};
 	box-shadow: 0px 0px 8px ${alpha10};
 	margin-bottom: 7px;
 	box-sizing: border-box;

@@ -18,7 +18,7 @@ import {
 	Button,
 	gray20,
 	primaryWhite,
-	gray30,
+	gray80,
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
@@ -45,7 +45,7 @@ const ItemComment = styled('textarea')`
 	border: 1px solid ${gray20};
 	padding: 15px 10px;
 	font-family: 'Ligne';
-	color: ${gray30};
+	color: ${gray80};
 	margin-bottom: 10px;
 `;
 

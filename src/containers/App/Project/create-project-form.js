@@ -523,48 +523,62 @@ class CreateProjectForm extends React.Component {
 														</Title>
 														<FlexRow>
 															<FormSection left>
-																<SubTitle>
-																	1. Votre
-																	client
-																</SubTitle>
-																<Label required>
-																	Entrez le
-																	nom de
-																	l'entreprise
-																	de votre
-																	client
-																</Label>
-																<Creatable
-																	id="customer"
-																	name="customer"
-																	options={customers.map(
-																		customer => ({
-																			...customer,
-																			label:
-																				customer.name,
-																			value:
-																				customer.id,
-																		}),
-																	)}
-																	getOptionValue={option => option.id
-																	}
-																	onChange={(option) => {
-																		setFieldValue(
-																			'customer',
-																			option,
-																		);
-																	}}
-																	styles={
-																		SelectStyles
-																	}
-																	value={
-																		values.customer
-																	}
-																	isClearable
-																	placeholder="Dubois SARL"
-																	formatCreateLabel={inputValue => `Créer "${inputValue}"`
-																	}
-																/>
+																{((selectedCustomer
+																	&& values.customer)
+																	|| (!selectedCustomer
+																		&& !values.customer)) && (
+																	<div>
+																		<SubTitle
+																		>
+																			1.
+																			Votre
+																			client
+																		</SubTitle>
+																		<Label
+																			required
+																		>
+																			Entrez
+																			le
+																			nom
+																			de
+																			l'entreprise
+																			de
+																			votre
+																			client
+																		</Label>
+																		<Creatable
+																			id="customer"
+																			name="customer"
+																			options={customers.map(
+																				customer => ({
+																					...customer,
+																					label:
+																						customer.name,
+																					value:
+																						customer.id,
+																				}),
+																			)}
+																			getOptionValue={option => option.id
+																			}
+																			onChange={(option) => {
+																				setFieldValue(
+																					'customer',
+																					option,
+																				);
+																			}}
+																			styles={
+																				SelectStyles
+																			}
+																			value={
+																				values.customer
+																			}
+																			isClearable
+																			placeholder="Dubois SARL"
+																			formatCreateLabel={inputValue => `Créer "${inputValue}"`
+																			}
+																		/>
+																	</div>
+																)}
 																{!selectedCustomer
 																	&& !values.customer && (
 																	<div>
@@ -599,15 +613,10 @@ class CreateProjectForm extends React.Component {
 																	<div>
 																		<FormTitle
 																		>
-																				Il
-																				semblerait
-																				que
-																				ce
-																				soit
-																				un
+																				Création
+																				d'un
 																				nouveau
 																				client
-																				!
 																		</FormTitle>
 																		<p>
 																				Pourriez-vous
@@ -636,6 +645,18 @@ class CreateProjectForm extends React.Component {
 																				vos
 																				clients.
 																		</InfoPrivacy>
+																		<Label
+																			required
+																		>
+																				Entrez
+																				le
+																				nom
+																				de
+																				l'entreprise
+																				de
+																				votre
+																				client
+																		</Label>
 																		<FlexRow
 																		>
 																			<FormElem

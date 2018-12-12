@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {Input, gray80, primaryBlue} from '../../utils/content';
+import {Input, gray30, primaryBlue} from '../../utils/content';
 
 const Placeholder = styled('span')`
-	color: ${gray80};
+	color: ${gray30};
 `;
 
 const NameInput = styled(Input)`

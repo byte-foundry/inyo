@@ -20,12 +20,12 @@ export const secondaryRed = '#e62043';
 export const secondaryLightBlue = '#deebff';
 export const secondaryLightYellow = '#fffae6';
 export const secondaryLightGreen = '#e3fcef';
-export const gray50 = '#808080';
-export const gray10 = '#fbfbfb';
-export const gray20 = '#f4f5f7';
-export const gray30 = '#4d4d4d';
-export const gray70 = '#b3b3b3';
-export const gray80 = '#cccccc';
+export const gray10 = '#ebfbfb';
+export const gray20 = '#e0e0e0';
+export const gray50 = '#8c8c8c';
+export const gray70 = '#666666';
+export const gray30 = '#cccccc';
+export const gray80 = '#4d4d4d';
 export const alpha10 = 'rgba(0, 0, 0, 0.1)';
 export const signalGreen = '#0dcc94';
 export const signalOrange = '#ffab00';
@@ -34,49 +34,49 @@ export const signalRed = '#fe4a49';
 
 export const Body = styled('div')`
 	${body};
-	color: ${gray30};
+	color: ${gray80};
 `;
 export const H1 = styled('h1')`
 	${h1};
-	color: ${gray30};
+	color: ${gray80};
 	font-weight: 600;
 `;
 export const H2 = styled('h2')`
 	${h2};
-	color: ${gray30};
+	color: ${gray80};
 	font-weight: 600;
 `;
 export const H3 = styled('h3')`
 	${h3};
-	color: ${gray30};
+	color: ${gray80};
 	font-weight: normal;
 `;
 export const H4 = styled('h4')`
 	${h4};
-	color: ${gray30};
+	color: ${gray80};
 	font-weight: normal;
 `;
 export const H5 = styled('h5')`
 	${h5};
-	color: ${gray30};
+	color: ${gray80};
 	font-weight: normal;
 `;
 export const H6 = styled('h6')`
 	${h6};
-	color: ${gray30};
+	color: ${gray80};
 	font-weight: normal;
 `;
 export const P = styled('p')`
 	${content};
-	color: ${gray30};
+	color: ${gray80};
 `;
 export const Ol = styled('ol')`
 	${content};
-	color: ${gray30};
+	color: ${gray80};
 `;
 export const Ul = styled('ul')`
 	${content};
-	color: ${gray30};
+	color: ${gray80};
 `;
 export const A = styled('a')`
 	${content};
@@ -144,7 +144,7 @@ const ButtonStyles = (props) => {
 	case 'Disabled':
 		return css`
 				border-color: ${gray70};
-				color: ${gray80};
+				color: ${gray30};
 				cursor: initial;
 			`;
 	case 'PrimaryNavy':
@@ -257,10 +257,10 @@ export const Input = styled('input')`
 	transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
 	&::placeholder {
-		color: ${gray80};
+		color: ${gray30};
 	}
 	&:disabled {
-		color: ${gray80};
+		color: ${gray30};
 	}
 	&:focus {
 		border-color: ${primaryBlue};
@@ -271,7 +271,7 @@ export const Label = styled('label')`
 	font-family: 'Ligne';
 	font-size: 15px;
 	width: fill-available;
-	color: ${gray30};
+	color: ${gray80};
 	margin-bottom: 5px;
 	${props => props.required
 		&& css`
@@ -315,7 +315,7 @@ export const FlexColumn = styled('div')`
 `;
 
 export const ToggleButton = styled('span')`
-	color: ${props => (props.active ? primaryBlue : gray30)};
+	color: ${props => (props.active ? primaryBlue : gray80)};
 	cursor: pointer;
 	margin-right: 20px;
 	padding-top: 15px;

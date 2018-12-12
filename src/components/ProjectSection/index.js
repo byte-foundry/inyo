@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
 import AddItem from './add-item';
@@ -92,18 +94,46 @@ class ProjectSection extends Component {
 					</div>
 				</FlexRow>
 
-				{data.items.map(item => (
-					<Item
-						key={`item${item.id}`}
-						item={item}
-						sectionId={data.id}
-						editItem={editItem}
-						removeItem={removeItem}
-						mode={mode}
-						refetch={refetch}
-						projectStatus={projectStatus}
-					/>
-				))}
+				<DragDropContext onDragEnd={() => {}}>
+					<Droppable droppableId={data.id}>
+						{(provided, snapshot) => (
+							<div ref={provided.innerRef}>
+								{data.items.map((item, index) => (
+									<Draggable
+										key={`item${item.id}`}
+										draggableId={item.id}
+										index={index}
+									>
+										{(provided, snapshot) => (
+											<div
+												ref={provided.innerRef}
+												{...provided.draggableProps}
+												{...provided.dragHandleProps}
+												style={
+													provided.draggableProps
+														.style
+												}
+											>
+												<Item
+													key={`item${item.id}`}
+													item={item}
+													sectionId={data.id}
+													editItem={editItem}
+													removeItem={removeItem}
+													mode={mode}
+													refetch={refetch}
+													projectStatus={
+														projectStatus
+													}
+												/>
+											</div>
+										)}
+									</Draggable>
+								))}
+							</div>
+						)}
+					</Droppable>
+				</DragDropContext>
 				{this.state.shouldDisplayAddItem && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (

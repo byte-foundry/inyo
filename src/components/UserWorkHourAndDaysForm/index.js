@@ -198,7 +198,7 @@ class UserWorkHourAndDaysForm extends Component {
 											<FormContainer>
 												<FlexColumn justifyContent="space-between">
 													<Label>
-														Jour travaillé
+														Horaires de travail
 													</Label>
 													<DoubleRangeTimeInput
 														value={{
@@ -233,7 +233,7 @@ class UserWorkHourAndDaysForm extends Component {
 														</Emoji>
 													</EmojiTimeline>
 													<Label>
-														Jour travaillé
+														Jours travaillés
 													</Label>
 													<WeekDaysInput
 														values={workingDays}

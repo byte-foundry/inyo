@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
 
-import {gray80, primaryBlue} from '../../utils/content';
+import {gray30, primaryBlue} from '../../utils/content';
 
 const TimeInputContainer = styled('div')`
 	padding: 15px;
@@ -10,7 +10,7 @@ const TimeInputContainer = styled('div')`
 const TimeInputRange = styled('div')`
 	width: 100%;
 	height: 8px;
-	background: ${gray80};
+	background: ${gray30};
 	border-radius: 4px;
 	position: relative;
 	margin-top: 40px;

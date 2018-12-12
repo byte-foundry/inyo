@@ -11,7 +11,7 @@ import {
 	gray70,
 	primaryWhite,
 	primaryBlue,
-	gray30,
+	gray80,
 	FlexColumn,
 	Button,
 } from '../../utils/content';
@@ -43,7 +43,7 @@ const TeamTypeCard = styled('div')`
 	width: 100%;
 	margin-bottom: 15px;
 	padding: 14px 16px 15px 16px;
-	color: ${props => (props.selected ? primaryWhite : gray30)};
+	color: ${props => (props.selected ? primaryWhite : gray80)};
 	background-color: ${props => (props.selected ? primaryBlue : 'transparent')};
 	border: 1px solid ${props => (props.selected ? primaryBlue : gray70)};
 	transition: color 0.3s ease, background-color 0.3s ease,

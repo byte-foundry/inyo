@@ -81,16 +81,19 @@ class App extends Component {
 								/>
 								<Redirect to="/app/projects" />
 							</Switch>
-							<ProtectedRoute
-								path={['/app/projects', '/app/account']}
-								render={props => (
-									<ConditionalContent
-										{...props}
-										user={data.me}
-									/>
-								)}
-								isAllowed={data && data.me}
-							/>
+							{data
+								&& data.me && (
+								<ProtectedRoute
+									path={['/app/projects', '/app/account']}
+									render={props => (
+										<ConditionalContent
+											{...props}
+											user={data.me}
+										/>
+									)}
+									isAllowed
+								/>
+							)}
 						</AppMain>
 					);
 				}}

@@ -269,8 +269,8 @@ export const UPDATE_PROJECT = gql`
 `;
 export const START_PROJECT = gql`
 	# creating project with a customer id or a new customer
-	mutation startProject($projectId: ID!) {
-		startProject(id: $projectId) {
+	mutation startProject($projectId: ID!, $notifyCustomer: Boolean) {
+		startProject(id: $projectId, notifyCustomer: $notifyCustomer) {
 			id
 			status
 			viewedByCustomer

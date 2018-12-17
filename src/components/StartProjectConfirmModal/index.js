@@ -122,9 +122,7 @@ export default function StartProjectConfirmModal({
 												/>
 											</ModalCloseIcon>
 											<form
-												onSubmit={(e) => {
-													handleSubmit(e);
-												}}
+												onSubmit={handleSubmit}
 											>
 												<ModalRow>
 													<StartModalTitle>

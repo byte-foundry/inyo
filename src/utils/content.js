@@ -196,14 +196,14 @@ const ButtonStyles = (props) => {
 			`;
 	default:
 		return css`
-				background-color: ${gray20};
+				background-color: ${primaryWhite};
 				border-color: ${gray70};
-				color: ${gray50};
+				color: ${gray70};
 				&:hover,
 				&:focus {
-					background-color: transparent;
+					background-color: ${gray50};
 					border-color: ${gray70};
-					color: ${gray70};
+					color: ${gray10};
 				}
 			`;
 	}
@@ -328,7 +328,13 @@ export const ToggleButton = styled('span')`
 	transition: color 0.2s ease, border-color 0.2s ease;
 `;
 
-export const ModalContainer = Dialog;
+export function ModalContainer({size, ...props}) {
+	const style = {
+		width: size === 'small' ? '35vw' : '50vw',
+	};
+
+	return <Dialog {...props} style={style} />;
+}
 
 export const ModalElem = styled('div')`
 	position: relative;

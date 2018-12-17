@@ -5,6 +5,9 @@ import {Field} from 'formik';
 import {FlexRow, Label, ErrorInput} from '../../utils/content';
 
 const FormCheckboxMain = styled(FlexRow)``;
+const CheckboxLabel = styled('span')`
+	margin-left: 10px;
+`;
 
 class FormCheckbox extends Component {
 	render() {
@@ -16,33 +19,30 @@ class FormCheckbox extends Component {
 			errors,
 			touched,
 			required,
-			padded,
-			inline,
-			onboarding,
 		} = this.props;
 
 		return (
-			<FormCheckboxMain
-				padded={padded}
-				inline={inline}
-				onboarding={onboarding}
-			>
+			<FormCheckboxMain>
 				{this.props.label && (
-					<Label htmlFor={name} required={required}>
-						<Field>
-							{({form}) => (
+					<Field>
+						{({form}) => (
+							<Label htmlFor={name} required={required}>
 								<input
 									type="checkbox"
 									checked={values[name]}
 									onBlur={handleBlur}
-									onChange={() => {
-										form.setFieldValue(name, !values[name]);
-									}}
+									onChange={() => form.setFieldValue(name, !values[name])
+									}
 								/>
-							)}
-						</Field>
-						{label}
-					</Label>
+								<CheckboxLabel
+									onClick={() => form.setFieldValue(name, !values[name])
+									}
+								>
+									{label}
+								</CheckboxLabel>
+							</Label>
+						)}
+					</Field>
 				)}
 				{errors[name]
 					&& touched[name] && (

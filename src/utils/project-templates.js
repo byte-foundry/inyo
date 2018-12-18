@@ -13,16 +13,26 @@ export const templates = [
 						description: '',
 					},
 					{
+						name: 'Benchmark',
+						unit: 0.5,
+						description: '',
+					},
+					{
 						name:
 							"Rédaction d'un cahier des charges et des principales fonctionnalités",
 						unit: 1,
 						description: '',
 					},
 					{
-						name: 'Validation',
+						name: 'Validation du cahier des charges',
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+					},
+					{
+						name: 'Moodboard',
+						unit: 0.5,
+						description: '',
 					},
 				],
 			},
@@ -30,37 +40,54 @@ export const templates = [
 				name: 'Conception',
 				items: [
 					{
-						name: 'Benchmark',
-						unit: 0.5,
-						description: '',
-					},
-					{
-						name: 'Moodboard',
-						unit: 0.5,
-						description: '',
-					},
-					{
 						name: 'Architecture du site (arborescence)',
 						unit: 0.25,
 						description: '',
 					},
 					{
 						name:
-							'Wireframes de l’ensemble des pages clefs et interactions (base 10 pages)',
+							'Création d’une charte fonctionnelle selon le cahier des charges',
+						unit: 1,
+						description: '',
+					},
+					{
+						name:
+							'Wireframes de l’ensemble des pages clefs et interactions',
 						unit: 2,
 						description:
-							' Validation + 1 A/R corrections et compte rendu',
+							'Temps estimé sur la base de 10 pages clefs.',
+					},
+					{
+						name:
+							'Validation de l’ensemble des pages clefs et interactions',
+						unit: 0.5,
+						description:
+							'1 aller/retour corrections est prévu dans la proposition commerciale',
+						reviewer: 'CUSTOMER',
+					},
+					{
+						name:
+							'Envoi de l’ensemble des contenus textes + images',
+						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
 					},
 					{
 						name: 'Direction artistique',
 						unit: 2,
+						description: '',
+					},
+					{
+						name: 'Validation de la direction artistique',
+						unit: 1,
 						description:
-							'Validation + 2 A/R corrections et compte rendu',
+							'2 aller/retour corrections sont prévus dans la proposition commerciale',
+						reviewer: 'CUSTOMER',
 					},
 					{
 						name:
-							'Création d’une charte fonctionnelle selon le cahier des charges',
-						unit: 1,
+							'Traitement de vos images pour les optimiser pour le web',
+						unit: 0.5,
 						description: '',
 					},
 					{
@@ -107,6 +134,11 @@ export const templates = [
 				name: 'Tests, corrections et mise en ligne',
 				items: [
 					{
+						name: 'Intégration des contenus (base 10 pages)',
+						unit: 1,
+						description: '',
+					},
+					{
 						name: 'Compatibilité navigateurs',
 						unit: 1.5,
 						description: '',
@@ -115,6 +147,12 @@ export const templates = [
 						name: 'Tests (Phase de recette) et corrections',
 						unit: 1,
 						description: '+ Validation',
+					},
+					{
+						name: 'Validation du site et de ses contenus',
+						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
 					},
 					{
 						name: 'Mise en production',
@@ -127,65 +165,20 @@ export const templates = [
 				name: 'Divers',
 				items: [
 					{
-						name: 'Gestion et suivi de projet',
-						unit: 1,
-						description: '',
-					},
-					{
 						name: 'Formation au back-office',
 						unit: 0.25,
 						description: '',
 					},
-				],
-			},
-			{
-				name: 'Maintenance',
-				items: [
 					{
-						name: 'Hébergement',
-						unit: 0.25,
-						description: '',
-					},
-				],
-			},
-			{
-				name: 'Options',
-				items: [
-					{
-						name: 'Mises-à-jour',
+						name: 'Envoi facture',
 						unit: 0,
 						description: '',
 					},
 					{
-						name: 'Formulaire de contact',
-						unit: 0.5,
+						name: 'Paiement facture',
+						unit: 0,
 						description: '',
-					},
-					{
-						name: 'Système de newsletter',
-						unit: 0.5,
-						description: '',
-					},
-					{
-						name: 'Système sauvegardes BDD',
-						unit: 0.25,
-						description: '',
-					},
-					{
-						name: "Blocage des tentatives d'intrusion",
-						unit: 0.25,
-						description: '',
-					},
-					{
-						name: 'Intégration des contenus (base 10 pages)',
-						unit: 1,
-						description: '',
-					},
-					{
-						name:
-							'Traitement de vos images pour les optimiser pour le web',
-						unit: 0.5,
-						description: '',
+						reviewer: 'CUSTOMER',
 					},
 				],
 			},

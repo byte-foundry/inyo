@@ -62,7 +62,7 @@ export const templates = [
 							'Validation de l’ensemble des pages clefs et interactions',
 						unit: 0.5,
 						description:
-							'1 aller/retour corrections est prévu dans la proposition commerciale',
+							'1 aller-retour corrections est prévu dans la proposition commerciale',
 						reviewer: 'CUSTOMER',
 					},
 					{
@@ -81,7 +81,7 @@ export const templates = [
 						name: 'Validation de la direction artistique',
 						unit: 1,
 						description:
-							'2 aller/retour corrections sont prévus dans la proposition commerciale',
+							'2 aller-retour corrections sont prévus dans la proposition commerciale',
 						reviewer: 'CUSTOMER',
 					},
 					{
@@ -93,8 +93,14 @@ export const templates = [
 					{
 						name: 'Design de l’ensemble des pages',
 						unit: 4,
+						description: '',
+					},
+					{
+						name: 'Validation de l’ensemble des pages',
+						unit: 0.5,
 						description:
-							'Validation + 1 A/R corrections + compte rendu',
+							'1 aller-retour corrections est prévu dans la proposition commerciale',
+						reviewer: 'CUSTOMER',
 					},
 					{
 						name:
@@ -121,7 +127,7 @@ export const templates = [
 						name:
 							'Intégration des pages clefs principales et annexes (base 10 pages)',
 						unit: 8,
-						description: 'Validation + 1 A/R corrections',
+						description: '',
 					},
 					{
 						name: 'Responsive design 1 point de rupture 1024',
@@ -146,7 +152,7 @@ export const templates = [
 					{
 						name: 'Tests (Phase de recette) et corrections',
 						unit: 1,
-						description: '+ Validation',
+						description: '',
 					},
 					{
 						name: 'Validation du site et de ses contenus',
@@ -197,14 +203,25 @@ export const templates = [
 						description: '',
 					},
 					{
-						name:
-							"Rédaction d'un cahier des charges et définition des valeurs de l'entreprise",
-						unit: 0.25,
+						name: 'Benchmark',
+						unit: 0.5,
 						description: '',
 					},
 					{
-						name: 'Validation',
+						name:
+							"Rédaction d'un cahier des charges et des valeurs de l'entreprise",
+						unit: 1,
+						description: '',
+					},
+					{
+						name: 'Validation du cahier des charges',
 						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
+					},
+					{
+						name: 'Moodboard',
+						unit: 0.5,
 						description: '',
 					},
 				],
@@ -213,26 +230,27 @@ export const templates = [
 				name: 'Conception',
 				items: [
 					{
-						name: 'Benchmark',
-						unit: 0.5,
+						name: 'Création de 3 axes créatifs',
+						unit: 3,
 						description: '',
 					},
 					{
-						name: 'Moodboard',
-						unit: 0.75,
-						description:
-							'— Dont réunion téléphonique pour valider les directions: 0.25',
-					},
-					{
-						name: 'Création de 3 axes créatifs',
-						unit: 2.5,
-						description: '— Validation',
+						name: "Validation d'un axe créatif",
+						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
 					},
 					{
 						name: "Mise au point de l'axe retenu",
 						unit: 1,
+						description: '',
+					},
+					{
+						name: 'Validation',
+						unit: 0,
 						description:
-							'Dont 2 allers-retours + compte-rendu des échanges et validation: 0.25',
+							'2 allers-retours sont prévus dans la proposition commerciale',
+						reviewer: 'CUSTOMER',
 					},
 					{
 						name:
@@ -252,24 +270,20 @@ export const templates = [
 				name: 'Divers',
 				items: [
 					{
-						name: 'Gestion et suivi de projet',
-						unit: 1,
-						description: '',
-					},
-					{
-						name: 'Cession des droits',
-						unit: 0.25,
-						description: '',
-					},
-					{
-						name: 'Achat typographique',
-						unit: 0.25,
-						description: '',
-					},
-					{
 						name: 'Conception charte graphique utilisation logo',
 						unit: 1,
 						description: '',
+					},
+					{
+						name: 'Envoi facture',
+						unit: 0,
+						description: '',
+					},
+					{
+						name: 'Paiement facture',
+						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
 					},
 				],
 			},

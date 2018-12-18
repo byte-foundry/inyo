@@ -93,47 +93,18 @@ class ProjectSection extends Component {
 						</Mutation>
 					</div>
 				</FlexRow>
-
-				<DragDropContext onDragEnd={() => {}}>
-					<Droppable droppableId={data.id}>
-						{(provided, snapshot) => (
-							<div ref={provided.innerRef}>
-								{data.items.map((item, index) => (
-									<Draggable
-										key={`item${item.id}`}
-										draggableId={item.id}
-										index={index}
-									>
-										{(provided, snapshot) => (
-											<div
-												ref={provided.innerRef}
-												{...provided.draggableProps}
-												{...provided.dragHandleProps}
-												style={
-													provided.draggableProps
-														.style
-												}
-											>
-												<Item
-													key={`item${item.id}`}
-													item={item}
-													sectionId={data.id}
-													editItem={editItem}
-													removeItem={removeItem}
-													mode={mode}
-													refetch={refetch}
-													projectStatus={
-														projectStatus
-													}
-												/>
-											</div>
-										)}
-									</Draggable>
-								))}
-							</div>
-						)}
-					</Droppable>
-				</DragDropContext>
+				{data.items.map((item, index) => (
+					<Item
+						key={`item${item.id}`}
+						item={item}
+						sectionId={data.id}
+						editItem={editItem}
+						removeItem={removeItem}
+						mode={mode}
+						refetch={refetch}
+						projectStatus={projectStatus}
+					/>
+				))}
 				{this.state.shouldDisplayAddItem && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (

@@ -48,6 +48,9 @@ export const UPDATE_USER = gql`
 			lastName
 			defaultDailyPrice
 			defaultVatRate
+			startWorkAt
+			endWorkAt
+			workingDays
 			company {
 				id
 				name
@@ -80,6 +83,9 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$jobType: JobType
 		$interestedFeatures: [String!]
 		$hasUpcomingProject: Boolean
+		$startWorkAt: Time
+		$endWorkAt: Time
+		$workingDays: [DAY!]
 	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
@@ -88,6 +94,9 @@ export const UPDATE_USER_CONSTANTS = gql`
 			jobType: $jobType
 			interestedFeatures: $interestedFeatures
 			hasUpcomingProject: $hasUpcomingProject
+			startWorkAt: $startWorkAt
+			endWorkAt: $endWorkAt
+			workingDays: $workingDays
 		) {
 			id
 			email
@@ -99,6 +108,9 @@ export const UPDATE_USER_CONSTANTS = gql`
 			jobType
 			interestedFeatures
 			hasUpcomingProject
+			startWorkAt
+			endWorkAt
+			workingDays
 			company {
 				id
 				name
@@ -222,6 +234,7 @@ export const CREATE_PROJECT = gql`
 		$template: ProjectTemplate!
 		$sections: [SectionInput!]
 		$name: String
+		$deadline: DateTime
 	) {
 		createProject(
 			customerId: $customerId
@@ -229,10 +242,12 @@ export const CREATE_PROJECT = gql`
 			template: $template
 			sections: $sections
 			name: $name
+			deadline: $deadline
 		) {
 			id
 			name
 			viewedByCustomer
+			deadline
 			customer {
 				name
 			}
@@ -254,8 +269,8 @@ export const UPDATE_PROJECT = gql`
 `;
 export const START_PROJECT = gql`
 	# creating project with a customer id or a new customer
-	mutation startProject($projectId: ID!) {
-		startProject(id: $projectId) {
+	mutation startProject($projectId: ID!, $notifyCustomer: Boolean) {
+		startProject(id: $projectId, notifyCustomer: $notifyCustomer) {
 			id
 			status
 			viewedByCustomer
@@ -312,6 +327,7 @@ export const UPDATE_SECTION = gql`
 			id
 			name
 			items {
+				status
 				id
 				name
 				unit

@@ -22,26 +22,7 @@ const ContactName = styled(H5)`
 	margin-bottom: 10px;
 `;
 
-const Siret = styled(P)`
-	color: ${primaryBlue};
-	font-size: 11px;
-	margin: 0;
-	margin-bottom: 5px;
-`;
-
 const Phone = styled(P)`
-	color: ${primaryBlue};
-	font-size: 11px;
-	margin: 0;
-	margin-bottom: 5px;
-`;
-
-const AddressBlock = styled('div')`
-	border-top: 1px solid ${primaryBlue};
-	padding-top: 10px;
-`;
-
-const Address = styled(P)`
 	color: ${primaryBlue};
 	font-size: 11px;
 	margin: 0;

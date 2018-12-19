@@ -9,6 +9,7 @@ import InlineEditable from '../InlineEditable';
 import ProjectSection from '../ProjectSection';
 import ProjectTotal from '../ProjectTotal';
 import TasksProgressBar from '../TasksProgressBar';
+import Plural from '../Plural';
 import {
 	UPDATE_PROJECT,
 	ADD_SECTION,
@@ -101,15 +102,16 @@ const InfosOnItems = styled('div')`
 	font-size: 14px;
 	&::before {
 		content: ' ';
-		background: ${props => props.color};
+		box-sizing: border-box;
+		border: solid 1px ${gray50};
+		border-right: ${props => (props.color === primaryBlue ? '4px' : '1px')}
+			solid ${props => props.color};
 		margin-right: 10px;
-		border: solid 1px #dddddd;
-		width: 40px;
-		height: 40px;
+		width: 16px;
+		height: 16px;
 		display: block;
-		border-radius: 50%;
 		position: relative;
-		top: -10px;
+		top: 0.18em;
 	}
 `;
 
@@ -147,7 +149,7 @@ class ProjectDisplay extends Component {
 				sumDays += item.pendingUnit || item.unit;
 			});
 		});
-		return <ProjectTotal sumDays={sumDays} />;
+		return sumDays.toLocaleString();
 	};
 
 	render() {
@@ -255,16 +257,6 @@ class ProjectDisplay extends Component {
 											</Mutation>
 										</ProjectName>
 									</FlexColumn>
-									{mode === 'see' && (
-										<FlexRow>
-											<ProjectStatus>
-												<span>
-													Temps prévu :{' '}
-													{timePlanned.toLocaleString()}
-												</span>
-											</ProjectStatus>
-										</FlexRow>
-									)}
 								</ProjectRow>
 								<FlexRow justifyContent="space-between">
 									<CenterContent flexGrow="2">
@@ -322,42 +314,30 @@ class ProjectDisplay extends Component {
 															/>
 														),
 													)}
-													{mode === 'edit' && (
-														<Mutation
-															mutation={
-																ADD_SECTION
-															}
-														>
-															{AddSection => (
-																<ProjectAction
-																	theme="Link"
-																	size="XSmall"
-																	onClick={() => {
-																		addSection(
-																			project.id,
-																			AddSection,
-																		);
-																	}}
-																>
-																	Ajouter une
-																	section
-																</ProjectAction>
-															)}
-														</Mutation>
-													)}
+													<Mutation
+														mutation={ADD_SECTION}
+													>
+														{AddSection => (
+															<ProjectAction
+																theme="Link"
+																size="XSmall"
+																onClick={() => {
+																	addSection(
+																		project.id,
+																		AddSection,
+																	);
+																}}
+															>
+																Ajouter une
+																section
+															</ProjectAction>
+														)}
+													</Mutation>
 												</ProjectSections>
 											</FlexColumn>
 										</ProjectContent>
 									</CenterContent>
 									<SideActions>
-										<TaskLegend>
-											<InfosOnItems color={primaryWhite}>
-												Vos tâches
-											</InfosOnItems>
-											<InfosOnItems color={pastelGreen}>
-												Tâches de votre client
-											</InfosOnItems>
-										</TaskLegend>
 										<CustomerIssuerContainer>
 											{customerViewMode
 												&& issuer.name && (
@@ -372,14 +352,52 @@ class ProjectDisplay extends Component {
 											)}
 										</CustomerIssuerContainer>
 										<TotalContainer>
-											{this.getProjectTotal(
-												project,
-												customerViewMode
-													? project.issuer.owner
-														.defaultVatRate
-													: data.me.defaultVatRate,
-											)}
+											<ProjectTotal
+												sumDays={new Date(
+													project.deadline,
+												).toLocaleDateString()}
+												label="Date de fin"
+											/>
 										</TotalContainer>
+										<TotalContainer>
+											<ProjectTotal
+												sumDays={Math.ceil(
+													(new Date(
+														project.deadline,
+													)
+														- new Date())
+														/ 86400000,
+												)}
+												label="Jours avant date de fin"
+											/>
+										</TotalContainer>
+										<TotalContainer>
+											<ProjectTotal
+												sumDays={this.getProjectTotal(
+													project,
+												)}
+												label="Temps prévu"
+												counter={
+													<Plural
+														singular="jour"
+														plural="jours"
+														value={Number.parseFloat(
+															this.getProjectTotal(
+																project,
+															),
+														)}
+													/>
+												}
+											/>
+										</TotalContainer>
+										<TaskLegend>
+											<InfosOnItems color={gray50}>
+												Vos tâches
+											</InfosOnItems>
+											<InfosOnItems color={primaryBlue}>
+												Tâches de votre client
+											</InfosOnItems>
+										</TaskLegend>
 										{mode === 'edit' && (
 											<Mutation mutation={REMOVE_PROJECT}>
 												{RemoveProject => (

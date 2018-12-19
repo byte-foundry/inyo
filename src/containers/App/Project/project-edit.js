@@ -10,6 +10,7 @@ import {dateDiff} from '../../../utils/functions';
 import {Loading} from '../../../utils/content';
 
 import ProjectDisplay from '../../../components/ProjectDisplay';
+import StartProjectConfirmModal from '../../../components/StartProjectConfirmModal';
 
 class EditProject extends Component {
 	constructor(props) {
@@ -66,9 +67,9 @@ class EditProject extends Component {
 		}
 	};
 
-	startProject = (projectId, startProject) => {
+	startProject = (projectId, startProject, notifyCustomer) => {
 		startProject({
-			variables: {projectId},
+			variables: {projectId, notifyCustomer},
 			update: (cache, {data: {startProject: startedProject}}) => {
 				let data;
 				let updateCache = true;
@@ -140,7 +141,12 @@ class EditProject extends Component {
 							],
 						],
 					]);
+
 					this.toast();
+					this.setState({
+						showStartProjectConfirmModal: false,
+					});
+
 					if (updateCache) {
 						cache.writeQuery({
 							query: GET_ALL_PROJECTS,
@@ -184,17 +190,16 @@ class EditProject extends Component {
 
 	addItem = (sectionId, addItemValues, addItem) => {
 		const {
-			name, vatRate, unit, unitPrice, description,
+			name, unit, description, reviewer,
 		} = addItemValues;
 
 		addItem({
 			variables: {
 				sectionId,
 				name,
-				vatRate,
 				unit: parseFloat(unit),
-				unitPrice,
 				description,
+				reviewer,
 			},
 			update: (cache, {data: {addItem: addedItem}}) => {
 				const data = cache.readQuery({
@@ -473,6 +478,18 @@ class EditProject extends Component {
 		]);
 	};
 
+	openStartProjectModal = () => {
+		this.setState({
+			showStartProjectConfirmModal: true,
+		});
+	};
+
+	closeStartProjectModal = () => {
+		this.setState({
+			showStartProjectConfirmModal: false,
+		});
+	};
+
 	render() {
 		const {projectId} = this.props.match.params;
 
@@ -503,6 +520,9 @@ class EditProject extends Component {
 					}
 
 					const userSettings = project.issuer.owner.settings;
+					const startProject = userSettings.askStartProjectConfirmation
+						? this.openStartProjectModal
+						: this.startProject;
 
 					return (
 						<div>
@@ -511,7 +531,7 @@ class EditProject extends Component {
 								projectTemplates={projectTemplates}
 								project={project}
 								mode="edit"
-								startProject={this.startProject}
+								startProject={startProject}
 								editProjectTitle={this.editProjectTitle}
 								setProjectData={this.setProjectData}
 								addItem={this.addItem}
@@ -525,7 +545,17 @@ class EditProject extends Component {
 								removeProject={this.removeProject}
 								userSettings={userSettings}
 							/>
-							{this.state.showStartProjectConfirmModal && false}
+							{this.state.showStartProjectConfirmModal && (
+								<StartProjectConfirmModal
+									askStartProject={
+										project.issuer.owner.settings
+											.askStartProjectConfirmation
+									}
+									projectId={project.id}
+									startProject={this.startProject}
+									closeModal={this.closeStartProjectModal}
+								/>
+							)}
 						</div>
 					);
 				}}

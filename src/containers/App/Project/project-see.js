@@ -12,7 +12,7 @@ import ProjectDisplay from '../../../components/ProjectDisplay';
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateItem) => {
 		const {
-			name, unit, comment, reviewer,
+			name, unit, comment, reviewer, description,
 		} = data;
 
 		return updateItem({
@@ -20,6 +20,7 @@ class TasksListUser extends Component {
 				itemId,
 				name,
 				reviewer,
+				description,
 				unit: parseFloat(unit),
 				comment: comment && {text: comment},
 			},
@@ -145,17 +146,16 @@ class TasksListUser extends Component {
 
 	addItem = (sectionId, addItemValues, addItem) => {
 		const {
-			name, vatRate, unit, unitPrice, description,
+			name, unit, description, reviewer,
 		} = addItemValues;
 
 		addItem({
 			variables: {
 				sectionId,
 				name,
-				vatRate,
 				unit: parseFloat(unit),
-				unitPrice,
 				description,
+				reviewer,
 			},
 			update: (cache, {data: {addItem: addedItem}}) => {
 				window.$crisp.push([
@@ -210,6 +210,108 @@ class TasksListUser extends Component {
 				);
 
 				section.items.splice(itemIndex, 1);
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
+	editSectionTitle = (sectionId, name, updateSection) => {
+		updateSection({
+			variables: {sectionId, name},
+			update: (cache, {data: {updateSection: updatedSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_edited', {}, 'orange']]],
+				]);
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+				const sectionIndex = data.project.sections.findIndex(
+					e => e.id === sectionId,
+				);
+
+				data.project.sections[sectionIndex] = updatedSection;
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
+	addSection = (projectId, addSection) => {
+		addSection({
+			variables: {projectId, name: 'Nouvelle section'},
+			update: (cache, {data: {addSection: addedSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_added', {}, 'orange']]],
+				]);
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+
+				data.project.sections.push(addedSection);
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
+	removeSection = (sectionId, removeSection) => {
+		removeSection({
+			variables: {sectionId},
+			update: (cache, {data: {removeSection: removedSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_removed', {}, 'orange']]],
+				]);
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+				const sectionIndex = data.project.sections.findIndex(
+					e => e.id === removedSection.id,
+				);
+
+				data.project.sections.splice(sectionIndex, 1);
 				try {
 					cache.writeQuery({
 						query: GET_PROJECT_DATA,
@@ -296,6 +398,8 @@ class TasksListUser extends Component {
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
 								removeItem={this.removeItem}
+								editSectionTitle={this.editSectionTitle}
+								addSection={this.addSection}
 								removeSection={this.removeSection}
 								addItem={this.addItem}
 								removeItem={this.removeItem}

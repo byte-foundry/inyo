@@ -5,19 +5,13 @@ import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
-import FormElem from '../FormElem';
 
 import {
-	H4,
-	FlexRow,
-	gray70,
-	primaryWhite,
-	primaryBlue,
-	gray30,
-	FlexColumn,
-	Button,
-	Label,
+	H4, FlexColumn, Button, Label,
 } from '../../utils/content';
+
+import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
+import WeekDaysInput from '../WeekDaysInput';
 
 const OnboardingStep = styled('div')`
 	width: 100%;
@@ -38,46 +32,50 @@ const StepSubtitle = styled(H4)`
 	text-align: center;
 `;
 
-const VATCards = styled(FlexRow)`
-	flex-wrap: wrap;
+const EmojiTimeline = styled('div')`
+	display: flex;
+	justify-content: space-between;
+	font-size: 32px;
+	margin: 15px;
+	position: relative;
+	height: 50px;
 `;
 
-const VATCard = styled('div')`
-	width: 39.771%;
-	margin-right: 2.5%;
-	margin-left: 2.5%;
-	margin-bottom: 15px;
-	padding: 14px 16px 15px 16px;
-	color: ${props => (props.selected ? primaryWhite : gray30)};
-	background-color: ${props => (props.selected ? primaryBlue : 'transparent')};
-	border: 1px solid ${props => (props.selected ? primaryBlue : gray70)};
-	transition: color 0.3s ease, background-color 0.3s ease,
-		border-color 0.3s ease;
-	cursor: pointer;
-	text-align: center;
+const Emoji = styled('div')`
+	position: absolute;
+	left: calc(${props => props.offset}% - 21px);
+	user-select: none;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
 `;
 
 class OnboardingThirdStep extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selectedItem: '',
-			isVATApplicable: true,
-		};
-	}
-
-	selectItem = (setFieldValue) => {
-		const {isVATApplicable} = this.state;
-
-		setFieldValue('isVATApplicable', !isVATApplicable);
-		this.setState({isVATApplicable: !isVATApplicable});
-	};
-
 	render() {
 		const {
 			me, getNextStep, getPreviousStep, step,
 		} = this.props;
-		const {isVATApplicable} = this.state;
+
+		const startHour = me.startWorkAt
+			? Number.parseInt(me.startWorkAt.substring(0, 2), 10)
+			: 8;
+		const startMinutes = me.startWorkAt
+			? Number.parseInt(me.startWorkAt.substring(3, 5), 10)
+			: 30;
+		const endHour = me.endWorkAt
+			? Number.parseInt(me.endWorkAt.substring(0, 2), 10)
+			: 19;
+		const endMinutes = me.endWorkAt
+			? Number.parseInt(me.endWorkAt.substring(3, 5), 10)
+			: 0;
+		const workingDays = me.workingDays || [
+			'MONDAY',
+			'TUESDAY',
+			'WEDNESDAY',
+			'THURSDAY',
+			'FRIDAY',
+		];
 
 		return (
 			<OnboardingStep>
@@ -89,24 +87,52 @@ class OnboardingThirdStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								defaultDailyPrice: me.defaultDailyPrice || 350,
-								isTVAApplicable: true,
+								startHour,
+								startMinutes,
+								endHour,
+								endMinutes,
+								workingDays,
 							}}
 							validationSchema={Yup.object().shape({
-								defaultDailyPrice: Yup.number(
-									'Doit être un nombre',
-								).required('Requis'),
+								startHour: Yup.number().required(),
+								startMinutes: Yup.number().required(),
+								endHour: Yup.number().required(),
+								endMinutes: Yup.number().required(),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
+								const {
+									startHour,
+									startMinutes,
+									endHour,
+									endMinutes,
+									workingDays,
+								} = values;
+
+								const start = new Date();
+
+								start.setHours(startHour);
+								start.setMinutes(startMinutes);
+								start.setSeconds(0);
+								start.setMilliseconds(0);
+
+								const end = new Date();
+
+								end.setHours(endHour);
+								end.setMinutes(endMinutes);
+								end.setSeconds(0);
+								end.setMilliseconds(0);
+
 								try {
 									updateUser({
 										variables: {
-											defaultVatRate: values.isTVAApplicable
-												? 20
-												: 0,
-											defaultDailyPrice:
-												values.defaultDailyPrice,
+											startWorkAt: start
+												.toJSON()
+												.split('T')[1],
+											endWorkAt: end
+												.toJSON()
+												.split('T')[1],
+											workingDays,
 										},
 										update: (
 											cache,
@@ -140,48 +166,47 @@ class OnboardingThirdStep extends Component {
 							}}
 						>
 							{(props) => {
-								const {handleSubmit, setFieldValue} = props;
+								const {
+									handleSubmit,
+									setFieldValue,
+									values: {
+										startHour,
+										startMinutes,
+										endHour,
+										endMinutes,
+										workingDays,
+									},
+								} = props;
 
 								return (
 									<form onSubmit={handleSubmit}>
-										<FormElem
-											{...props}
-											name="defaultDailyPrice"
-											type="number"
-											label="Quel est votre taux journée ?"
-											placeholder="350"
-											onboarding
-											required
-										/>
 										<Label onboarding>
-											Êtes-vous assujetti à la TVA?
+											Définissez vos horaires de travail
 										</Label>
-										<VATCards>
-											<VATCard
-												selected={
-													isVATApplicable === true
-												}
-												onClick={() => {
-													this.selectItem(
-														setFieldValue,
-													);
-												}}
-											>
-												Oui
-											</VATCard>
-											<VATCard
-												selected={
-													isVATApplicable === false
-												}
-												onClick={() => {
-													this.selectItem(
-														setFieldValue,
-													);
-												}}
-											>
-												Non
-											</VATCard>
-										</VATCards>
+										<DoubleRangeTimeInput
+											value={{
+												start: [
+													startHour,
+													startMinutes,
+												],
+												end: [endHour, endMinutes],
+											}}
+											setFieldValue={setFieldValue}
+										/>
+										<EmojiTimeline>
+											<Emoji offset={0}>🌙</Emoji>
+											<Emoji offset={33}>🥐</Emoji>
+											<Emoji offset={50}>🍱</Emoji>
+											<Emoji offset={87}>🛌</Emoji>
+											<Emoji offset={100}>🌗</Emoji>
+										</EmojiTimeline>
+										<Label onboarding>
+											Définissez vos jours de travail
+										</Label>
+										<WeekDaysInput
+											values={workingDays}
+											setFieldValue={setFieldValue}
+										/>
 										<ActionButtons>
 											<ActionButton
 												theme="Primary"

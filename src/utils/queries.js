@@ -25,6 +25,9 @@ export const CHECK_LOGIN_USER = gql`
 			id
 			firstName
 			lastName
+			workingDays
+			startWorkAt
+			endWorkAt
 		}
 	}
 `;
@@ -69,6 +72,9 @@ export const GET_USER_INFOS = gql`
 			jobType
 			interestedFeatures
 			hasUpcomingProject
+			startWorkAt
+			endWorkAt
+			workingDays
 			company {
 				id
 				name
@@ -126,6 +132,7 @@ export const GET_PROJECT_DATA = gql`
 			name
 			status
 			createdAt
+			deadline
 			issuer {
 				name
 				email
@@ -150,6 +157,7 @@ export const GET_PROJECT_DATA = gql`
 				firstName
 				lastName
 				email
+				phone
 				address {
 					street
 					city

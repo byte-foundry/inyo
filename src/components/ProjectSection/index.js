@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
 import AddItem from './add-item';
@@ -59,7 +61,6 @@ class ProjectSection extends Component {
 									value={data.name}
 									type="text"
 									placeholder="Nom de la section"
-									disabled={mode !== 'edit'}
 									onFocusOut={(value) => {
 										editSectionTitle(
 											data.id,
@@ -91,8 +92,7 @@ class ProjectSection extends Component {
 						</Mutation>
 					</div>
 				</FlexRow>
-
-				{data.items.map(item => (
+				{data.items.map((item, index) => (
 					<Item
 						key={`item${item.id}`}
 						item={item}

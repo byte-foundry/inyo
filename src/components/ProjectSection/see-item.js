@@ -76,9 +76,12 @@ const ItemCustomerButton = styled(Button)`
 
 const ItemRow = styled(FlexRow)`
 	align-items: center;
+	background: ${primaryWhite};
 	box-shadow: 0px 0px 8px ${alpha10};
 	margin-bottom: 7px;
-	background: ${props => (props.reviewer === 'USER' ? primaryWhite : pastelGreen)};
+	box-sizing: border-box;
+	border-right: ${props => (props.reviewer === 'USER' ? '1px solid' : '5px solid')}
+		${props => (props.reviewer === 'USER' ? alpha10 : primaryBlue)};
 	padding: 5px 20px;
 `;
 

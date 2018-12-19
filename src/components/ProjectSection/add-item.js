@@ -14,8 +14,8 @@ import {
 	signalOrange,
 	signalRed,
 	primaryWhite,
-	gray30,
 	gray80,
+	gray30,
 	Loading,
 } from '../../utils/content';
 
@@ -37,8 +37,8 @@ const ItemComment = styled('textarea')`
 	background: ${primaryWhite};
 	padding: 15px 10px;
 	font-family: 'Ligne';
-	color: ${gray30};
-	border: solid 1px ${gray80};
+	color: ${gray80};
+	border: solid 1px ${gray30};
 `;
 
 const ActionButton = styled(Button)`
@@ -53,7 +53,7 @@ const AddInput = styled(Input)`
 	background: ${primaryWhite};
 	width: 100px;
 	margin-left: 10px;
-	border: solid 1px ${gray80};
+	border: solid 1px ${gray30};
 	font-size: 13px;
 `;
 
@@ -176,8 +176,8 @@ class AddItem extends Component {
 														inputProps={{
 															name: 'name',
 															style: {
-																color: gray30,
-																border: `solid 1px ${gray80}`,
+																color: gray80,
+																border: `solid 1px ${gray30}`,
 																background: primaryWhite,
 																fontSize:
 																	'13px',

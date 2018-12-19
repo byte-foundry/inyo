@@ -18,7 +18,7 @@ import {
 	Button,
 	gray20,
 	primaryWhite,
-	gray30,
+	gray80,
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
@@ -45,7 +45,7 @@ const ItemComment = styled('textarea')`
 	border: 1px solid ${gray20};
 	padding: 15px 10px;
 	font-family: 'Ligne';
-	color: ${gray30};
+	color: ${gray80};
 	margin-bottom: 10px;
 `;
 
@@ -56,12 +56,10 @@ const ActionButton = styled(Button)`
 `;
 
 class CommentModal extends Component {
-	closeCommentModal = () => {
-		this.props.closeCommentModal();
-	};
-
 	render() {
-		const {itemId, customerToken, taskName} = this.props;
+		const {
+			itemId, customerToken, taskName, closeCommentModal,
+		} = this.props;
 
 		return (
 			<Query
@@ -87,7 +85,7 @@ class CommentModal extends Component {
 					));
 
 					return (
-						<ModalContainer>
+						<ModalContainer onDismiss={closeCommentModal}>
 							<ModalElem>
 								<CommentRow>
 									<H4>{taskName}</H4>
@@ -245,9 +243,7 @@ class CommentModal extends Component {
 										</Formik>
 									)}
 								</Mutation>
-								<ModalCloseIcon
-									onClick={this.closeCommentModal}
-								>
+								<ModalCloseIcon onClick={closeCommentModal}>
 									<CloseIcon />
 								</ModalCloseIcon>
 							</ModalElem>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'react-emotion';
 
-import {pastelGreen, gray80, primaryWhite} from '../../utils/content';
+import {primaryBlue, gray30, primaryWhite} from '../../utils/content';
 
 const SwitchButtonMain = styled('div')`
 	display: flex;
@@ -15,13 +15,13 @@ const SwitchContainer = styled('div')`
 	width: 50px;
 	height: 26px;
 	border-radius: 13px;
-	background: ${gray80};
+	background: ${gray30};
 `;
 
 const SwitchToggle = styled('div')`
 	height: 20px;
 	width: 20px;
-	background: ${props => (props.checked ? pastelGreen : primaryWhite)};
+	background: ${props => (props.checked ? primaryBlue : primaryWhite)};
 	border-radius: 50%;
 	margin: 3px;
 	position: relative;

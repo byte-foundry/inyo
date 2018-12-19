@@ -167,7 +167,7 @@ class Item extends Component {
 
 		const isValidStatus = status && status === 'ONGOING';
 
-		if (shouldDisplayAddItem && mode === 'edit') {
+		if (shouldDisplayAddItem && mode === 'edit' && editItem) {
 			return (
 				<Mutation mutation={UPDATE_ITEM}>
 					{updateItem => (
@@ -208,7 +208,7 @@ class Item extends Component {
 				</Mutation>
 			);
 		}
-		if (shouldDisplayAddItem && mode === 'see') {
+		if (shouldDisplayAddItem && mode === 'see' && editItem) {
 			return (
 				<Mutation mutation={UPDATE_ITEM}>
 					{updateItem => (

@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 
 import Onboarding from './Onboarding';
+import Dashboard from './Dashboard';
 import Account from './Account';
 import Project from './Project';
 import ConditionalContent from './ConditionalContent';
@@ -64,6 +65,11 @@ class App extends Component {
 										component={ProjectCustomerView}
 									/>
 								)}
+								<ProtectedRoute
+									path="/app/dashboard"
+									component={Dashboard}
+									isAllowed={data && data.me}
+								/>
 								<ProtectedRoute
 									path="/app/account"
 									component={Account}

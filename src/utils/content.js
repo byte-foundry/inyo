@@ -2,6 +2,7 @@ import styled, {css, keyframes} from 'react-emotion';
 import React from 'react';
 import Shevy from 'shevyjs';
 import {Dialog} from '@reach/dialog';
+import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
 import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
@@ -88,7 +89,7 @@ export const A = styled('a')`
 
 // Buttons
 
-const ButtonReset = styled('button')`
+const buttonResetStyles = css`
 	border: 1px solid transparent;
 	margin: 0;
 	padding: 0;
@@ -236,7 +237,8 @@ const ButtonSizes = (props) => {
 	}
 };
 
-export const Button = styled(ButtonReset)`
+export const Button = styled('button')`
+	${buttonResetStyles};
 	width: auto;
 	font-size: 17px;
 	cursor: pointer;
@@ -245,6 +247,18 @@ export const Button = styled(ButtonReset)`
 	border-radius: 4px;
 	${ButtonStyles};
 	${ButtonSizes};
+`;
+
+export const LinkButton = styled(Link)`
+	${buttonResetStyles} width: auto;
+	font-size: 17px;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease,
+		border-color 0.2s ease;
+	border-radius: 4px;
+	${ButtonStyles};
+	${ButtonSizes};
+	text-decoration: none;
 `;
 
 // Inputs

@@ -384,9 +384,8 @@ class TasksListUser extends Component {
 					loading, error, data, refetch,
 				}) => {
 					if (loading) return <Loading />;
-					if (error) {
-						throw new Error(error);
-					}
+					if (error) throw error;
+
 					const {project} = data;
 					const timePlanned = project.sections.reduce(
 						(timeSectionSum, section) => timeSectionSum

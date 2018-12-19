@@ -61,7 +61,6 @@ class ProjectSection extends Component {
 									value={data.name}
 									type="text"
 									placeholder="Nom de la section"
-									disabled={mode !== 'edit'}
 									onFocusOut={(value) => {
 										editSectionTitle(
 											data.id,

@@ -327,6 +327,7 @@ export const UPDATE_SECTION = gql`
 			id
 			name
 			items {
+				status
 				id
 				name
 				unit

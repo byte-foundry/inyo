@@ -12,7 +12,7 @@ import ProjectDisplay from '../../../components/ProjectDisplay';
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateItem) => {
 		const {
-			name, unit, comment, reviewer,
+			name, unit, comment, reviewer, description,
 		} = data;
 
 		return updateItem({
@@ -20,6 +20,7 @@ class TasksListUser extends Component {
 				itemId,
 				name,
 				reviewer,
+				description,
 				unit: parseFloat(unit),
 				comment: comment && {text: comment},
 			},
@@ -226,6 +227,41 @@ class TasksListUser extends Component {
 		});
 	};
 
+	editSectionTitle = (sectionId, name, updateSection) => {
+		updateSection({
+			variables: {sectionId, name},
+			update: (cache, {data: {updateSection: updatedSection}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['section_edited', {}, 'orange']]],
+				]);
+				const data = cache.readQuery({
+					query: GET_PROJECT_DATA,
+					variables: {projectId: this.props.match.params.projectId},
+				});
+				const sectionIndex = data.project.sections.findIndex(
+					e => e.id === sectionId,
+				);
+
+				data.project.sections[sectionIndex] = updatedSection;
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw new Error(e);
+				}
+				this.setState({apolloTriggerRenderTemporaryFix: true});
+			},
+		});
+	};
+
 	addSection = (projectId, addSection) => {
 		addSection({
 			variables: {projectId, name: 'Nouvelle section'},
@@ -362,6 +398,7 @@ class TasksListUser extends Component {
 								amendmentEnabled={amendmentEnabled}
 								overtime={overtime}
 								removeItem={this.removeItem}
+								editSectionTitle={this.editSectionTitle}
 								addSection={this.addSection}
 								removeSection={this.removeSection}
 								addItem={this.addItem}

@@ -255,16 +255,6 @@ class ProjectDisplay extends Component {
 											</Mutation>
 										</ProjectName>
 									</FlexColumn>
-									{mode === 'see' && (
-										<FlexRow>
-											<ProjectStatus>
-												<span>
-													Temps prévu :{' '}
-													{timePlanned.toLocaleString()}
-												</span>
-											</ProjectStatus>
-										</FlexRow>
-									)}
 								</ProjectRow>
 								<FlexRow justifyContent="space-between">
 									<CenterContent flexGrow="2">
@@ -389,8 +379,10 @@ class ProjectDisplay extends Component {
 													<Plural
 														singular="jour"
 														plural="jours"
-														value={this.getProjectTotal(
-															project,
+														value={Number.parseFloat(
+															this.getProjectTotal(
+																project,
+															),
 														)}
 													/>
 												}

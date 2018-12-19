@@ -33,10 +33,6 @@ const ContactEmail = styled('div')`
 	color: ${primaryBlue};
 `;
 
-const ContactEmail = styled('div')`
-	color: ${primaryBlue};
-`;
-
 class IssuerNameAndAddress extends Component {
 	render() {
 		const {

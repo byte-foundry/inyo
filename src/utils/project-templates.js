@@ -171,6 +171,7 @@ export const templates = [
 				name: 'Divers',
 				items: [
 					{
+
 						name: 'Formation au back-office',
 						unit: 0.25,
 						description: '',

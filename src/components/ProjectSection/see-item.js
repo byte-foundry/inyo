@@ -13,6 +13,7 @@ import {
 	alpha10,
 	primaryWhite,
 	primaryBlue,
+	pastelGreen,
 	Button,
 } from '../../utils/content';
 import {

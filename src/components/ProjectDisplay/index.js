@@ -160,8 +160,9 @@ class ProjectDisplay extends Component {
 			editProjectTitle,
 			addItem,
 			editItem,
-			editSectionTitle,
+			finishItem,
 			removeItem,
+			editSectionTitle,
 			removeSection,
 			addSection,
 			totalItemsFinished,
@@ -284,15 +285,18 @@ class ProjectDisplay extends Component {
 																editItem={
 																	editItem
 																}
+																removeItem={
+																	removeItem
+																}
+																finishItem={
+																	finishItem
+																}
 																customerViewMode={
 																	customerViewMode
 																}
 																mode={mode}
 																editSectionTitle={
 																	editSectionTitle
-																}
-																removeItem={
-																	removeItem
 																}
 																removeSection={
 																	removeSection

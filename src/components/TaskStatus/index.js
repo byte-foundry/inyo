@@ -4,7 +4,6 @@ import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
 import {FINISH_ITEM} from '../../utils/mutations';
-import {GET_PROJECT_DATA} from '../../utils/queries';
 
 import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
 import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
@@ -124,52 +123,6 @@ class TaskStatus extends Component {
 		this.props.select(this.props.task.id);
 	};
 
-	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
-		variables: {
-			itemId,
-			token,
-		},
-		optimisticResponse: {
-			__typename: 'Mutation',
-			finishItem: {
-				id: itemId,
-				status: 'FINISHED',
-			},
-		},
-		update: (cache, {data: {finishItem: finishedItem}}) => {
-			window.$crisp.push([
-				'set',
-				'session:event',
-				[[['item_finished', {}, 'yellow']]],
-			]);
-			const data = cache.readQuery({
-				query: GET_PROJECT_DATA,
-				variables: {projectId: this.props.match.params.projectId},
-			});
-			const section = data.project.sections.find(
-				e => e.id === sectionId,
-			);
-			const itemIndex = section.items.find(
-				e => e.id === finishedItem.id,
-			);
-
-			section.items[itemIndex].status = finishedItem.status;
-			try {
-				cache.writeQuery({
-					query: GET_PROJECT_DATA,
-					variables: {
-						projectId: this.props.match.params.projectId,
-					},
-					data,
-				});
-			}
-			catch (e) {
-				throw e;
-			}
-			this.setState({apolloTriggerRenderTemporaryFix: true});
-		},
-	});
-
 	render() {
 		const {
 			status,
@@ -179,13 +132,14 @@ class TaskStatus extends Component {
 			customerViewMode,
 			projectStatus,
 			reviewer,
+			finishItem,
 		} = this.props;
 
 		const {customerToken} = this.props.match.params;
 
 		return (
 			<Mutation mutation={FINISH_ITEM}>
-				{finishItem => (
+				{finishItemMutation => (
 					<TaskStatusMain
 						onClick={() => {
 							if (
@@ -197,10 +151,10 @@ class TaskStatus extends Component {
 									&& reviewer === 'CUSTOMER'
 									&& status === 'PENDING')
 							) {
-								this.finishItem(
+								finishItem(
 									itemId,
 									sectionId,
-									finishItem,
+									finishItemMutation,
 									customerToken,
 								);
 							}

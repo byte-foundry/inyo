@@ -329,6 +329,52 @@ class TasksListUser extends Component {
 		});
 	};
 
+	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
+		variables: {
+			itemId,
+			token,
+		},
+		optimisticResponse: {
+			__typename: 'Mutation',
+			finishItem: {
+				id: itemId,
+				status: 'FINISHED',
+			},
+		},
+		update: (cache, {data: {finishItem: finishedItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', {}, 'yellow']]],
+			]);
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.find(
+				e => e.id === finishedItem.id,
+			);
+
+			section.items[itemIndex].status = finishedItem.status;
+			try {
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw e;
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	render() {
 		const {projectId} = this.props.match.params;
 
@@ -403,6 +449,7 @@ class TasksListUser extends Component {
 								removeSection={this.removeSection}
 								addItem={this.addItem}
 								removeItem={this.removeItem}
+								finishItem={this.finishItem}
 								issuer={project.issuer}
 								refetch={refetch}
 								mode="see"

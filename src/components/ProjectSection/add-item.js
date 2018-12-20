@@ -15,6 +15,7 @@ import {
 	signalRed,
 	primaryWhite,
 	gray80,
+	gray70,
 	gray30,
 	Loading,
 } from '../../utils/content';
@@ -35,10 +36,12 @@ const ItemComment = styled('textarea')`
 	margin-top: 10px;
 	width: 100%;
 	background: ${primaryWhite};
-	padding: 15px 10px;
+	padding: 15px;
 	font-family: 'Ligne';
-	color: ${gray80};
+	color: ${gray70};
 	border: solid 1px ${gray30};
+	font-size: 0.8rem;
+	line-height: 1.8;
 `;
 
 const ActionButton = styled(Button)`

@@ -171,7 +171,6 @@ export const templates = [
 				name: 'Divers',
 				items: [
 					{
-
 						name: 'Formation au back-office',
 						unit: 0.25,
 						description: '',
@@ -293,6 +292,43 @@ export const templates = [
 	{
 		name: 'BLANK',
 		label: 'Vierge',
-		sections: [],
+		sections: [
+			{
+				name: 'Pré-projet',
+				items: [
+					{
+						name: 'Réunion de lancement',
+						unit: 0.5,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Modifier le titre de cette section',
+				items: [
+					{
+						name: 'Modifier le titre de cette tâche',
+						unit: 0,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Divers',
+				items: [
+					{
+						name: 'Envoi facture',
+						unit: 0,
+						description: '',
+					},
+					{
+						name: 'Paiement facture',
+						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
+					},
+				],
+			},
+		],
 	},
 ];

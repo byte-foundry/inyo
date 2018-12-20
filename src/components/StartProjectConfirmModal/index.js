@@ -18,8 +18,6 @@ import {
 	primaryBlue,
 } from '../../utils/content';
 
-import FormCheckbox from '../FormCheckbox';
-
 const ModalRow = styled('div')`
 	padding-left: 20px;
 	padding-right: 40px;
@@ -30,10 +28,6 @@ const ModalRow = styled('div')`
 const ModalRowHoriz = styled(ModalRow)`
 	display: flex;
 	justify-content: space-between;
-`;
-
-const CheckboxContainer = styled('div')`
-	margin-bottom: 25px;
 `;
 
 const StartModalTitle = styled(H4)`
@@ -107,7 +101,6 @@ export default function StartProjectConfirmModal({
 							>
 								{(props) => {
 									const {
-										values,
 										isSubmitting,
 										handleSubmit,
 										setFieldValue,

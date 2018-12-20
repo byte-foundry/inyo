@@ -108,13 +108,14 @@ class OnboardingFifthStep extends Component {
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const {hasUpcomingProject} = values;
+								const newHasUpcomingProject
+									= values.hasUpcomingProject;
 
 								try {
 									updateUser({
 										variables: {
 											hasUpcomingProject: getHasUpcoming(
-												hasUpcomingProject,
+												newHasUpcomingProject,
 											),
 										},
 										update: (

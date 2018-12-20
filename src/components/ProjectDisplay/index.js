@@ -23,10 +23,8 @@ import {
 	FlexRow,
 	FlexColumn,
 	Button,
-	primaryWhite,
 	primaryNavyBlue,
 	primaryBlue,
-	pastelGreen,
 	gray20,
 	gray10,
 	gray50,
@@ -119,13 +117,6 @@ const CustomerIssuerContainer = styled('div')``;
 
 const TotalContainer = styled('div')``;
 
-const ProjectStatus = styled(FlexColumn)`
-	span {
-		font-size: 13px;
-		margin: 5px 20px;
-	}
-`;
-
 const StartProjectButton = styled(Button)`
 	width: auto;
 	padding: 0.5em 1em;
@@ -168,7 +159,6 @@ class ProjectDisplay extends Component {
 			totalItemsFinished,
 			totalItems,
 			askForInfos,
-			timePlanned,
 			issuer,
 			refetch,
 		} = this.props;

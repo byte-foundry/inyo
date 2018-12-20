@@ -57,19 +57,19 @@ class OnboardingThirdStep extends Component {
 			me, getNextStep, getPreviousStep, step,
 		} = this.props;
 
-		const startHour = me.startWorkAt
+		const startHourInitial = me.startWorkAt
 			? Number.parseInt(me.startWorkAt.substring(0, 2), 10)
 			: 8;
-		const startMinutes = me.startWorkAt
+		const startMinutesInitial = me.startWorkAt
 			? Number.parseInt(me.startWorkAt.substring(3, 5), 10)
 			: 30;
-		const endHour = me.endWorkAt
+		const endHourInitial = me.endWorkAt
 			? Number.parseInt(me.endWorkAt.substring(0, 2), 10)
 			: 19;
-		const endMinutes = me.endWorkAt
+		const endMinutesInitial = me.endWorkAt
 			? Number.parseInt(me.endWorkAt.substring(3, 5), 10)
 			: 0;
-		const workingDays = me.workingDays || [
+		const workingDaysInitial = me.workingDays || [
 			'MONDAY',
 			'TUESDAY',
 			'WEDNESDAY',
@@ -87,11 +87,11 @@ class OnboardingThirdStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								startHour,
-								startMinutes,
-								endHour,
-								endMinutes,
-								workingDays,
+								startHour: startHourInitial,
+								startMinutes: startMinutesInitial,
+								endHour: endHourInitial,
+								endMinutes: endMinutesInitial,
+								workingDays: workingDaysInitial,
 							}}
 							validationSchema={Yup.object().shape({
 								startHour: Yup.number().required(),

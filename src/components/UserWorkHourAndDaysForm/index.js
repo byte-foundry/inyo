@@ -60,19 +60,19 @@ class UserWorkHourAndDaysForm extends Component {
 	render() {
 		const {startWorkAt, endWorkAt} = this.props.data;
 
-		const startHour = startWorkAt
+		const startHourInitial = startWorkAt
 			? Number.parseInt(startWorkAt.substring(0, 2), 10)
 			: 8;
-		const startMinutes = startWorkAt
+		const startMinutesInitial = startWorkAt
 			? Number.parseInt(startWorkAt.substring(3, 5), 10)
 			: 30;
-		const endHour = endWorkAt
+		const endHourInitial = endWorkAt
 			? Number.parseInt(endWorkAt.substring(0, 2), 10)
 			: 19;
-		const endMinutes = endWorkAt
+		const endMinutesInitial = endWorkAt
 			? Number.parseInt(endWorkAt.substring(3, 5), 10)
 			: 0;
-		const workingDays = this.props.data.workingDays || [
+		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',
 			'TUESDAY',
 			'WEDNESDAY',
@@ -86,11 +86,11 @@ class UserWorkHourAndDaysForm extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								startMinutes,
-								startHour,
-								endHour,
-								endMinutes,
-								workingDays,
+								startMinutes: startMinutesInitial,
+								startHour: startHourInitial,
+								endHour: endHourInitial,
+								endMinutes: endMinutesInitial,
+								workingDays: workingDaysInitial,
 							}}
 							validationSchema={Yup.object().shape({})}
 							onSubmit={async (values, actions) => {

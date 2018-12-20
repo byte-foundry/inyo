@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 
 import {
-	ModalContainer,
-	ModalElem,
-	ModalCloseIcon,
-	H4,
-	P,
+	ModalContainer, ModalElem, H4, P,
 } from '../../utils/content';
 
 import UserWorkHourAndDaysForm from '../UserWorkHourAndDaysForm';

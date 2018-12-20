@@ -290,7 +290,7 @@ class CreateProjectForm extends React.Component {
 											let sections = [];
 
 											if (selectedTemplate) {
-												sections
+												sections // eslint-disable-line prefer-destructuring
 													= selectedTemplate.sections;
 											}
 
@@ -805,9 +805,9 @@ class CreateProjectForm extends React.Component {
 																			selectedDays:
 																				values.deadline,
 																		}}
-																		component={props => (
+																		component={dateProps => (
 																			<DateInput
-																				{...props}
+																				{...dateProps}
 																			/>
 																		)}
 																		onDayChange={(day) => {

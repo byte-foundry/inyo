@@ -13,7 +13,6 @@ import {
 	alpha10,
 	primaryWhite,
 	primaryBlue,
-	pastelGreen,
 	Button,
 } from '../../utils/content';
 import {
@@ -161,7 +160,6 @@ class Item extends Component {
 			finishItem,
 			mode,
 			projectStatus,
-			reviewer,
 		} = this.props;
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;

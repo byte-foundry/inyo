@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
@@ -47,7 +46,6 @@ class ProjectSection extends Component {
 			mode,
 			customerViewMode,
 			refetch,
-			defaultDailyPrice,
 			projectStatus,
 		} = this.props;
 
@@ -92,7 +90,7 @@ class ProjectSection extends Component {
 						</Mutation>
 					</div>
 				</FlexRow>
-				{data.items.map((item, index) => (
+				{data.items.map(item => (
 					<Item
 						key={`item${item.id}`}
 						item={item}

@@ -13,7 +13,7 @@ const FormInputMain = styled(Input)`
 		`};
 `;
 
-function FormInputShell({field, form: {touched, errors}, ...props}) {
+function FormInputShell({field, ...props}) {
 	return (
 		<div>
 			<FormInputMain {...field} {...props} />
@@ -27,7 +27,6 @@ class FormInput extends Component {
 			name,
 			placeholder,
 			type,
-			values,
 			handleChange,
 			handleBlur,
 			errors,

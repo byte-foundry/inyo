@@ -295,8 +295,8 @@ export const templates = [
 		sections: [],
 	},
 	{
-		name: 'BLANK',
-		label: 'Vierge',
+		name: 'ONBOARDING',
+		label: 'Onboarding',
 		sections: [
 			{
 				name: 'Pour commencer…',

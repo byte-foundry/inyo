@@ -6,7 +6,6 @@ import {ToastContainer, toast} from 'react-toastify';
 import AddItem from './add-item';
 import TaskStatus from '../TaskStatus';
 import CommentIcon from '../CommentIcon';
-import CommentModal from '../CommentModal';
 import Plural from '../Plural';
 import {
 	FlexRow,
@@ -22,6 +21,9 @@ import {
 	REJECT_ITEM,
 } from '../../utils/mutations';
 import {GET_PROJECT_DATA_WITH_TOKEN} from '../../utils/queries';
+import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
+import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
+import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 
 const ItemName = styled(FlexRow)`
 	margin: 0;
@@ -38,8 +40,10 @@ const ItemMain = styled(FlexRow)`
 `;
 
 const ItemUnit = styled('div')`
-	flex: 0 0 70px;
+	flex: 0 0 100px;
 	text-align: right;
+	display: flex;
+	align-items: center;
 `;
 
 const ItemStatus = styled('div')`
@@ -54,25 +58,6 @@ const ItemStatus = styled('div')`
 	margin-top: -1px;
 `;
 
-const ItemCustomerActions = styled('div')`
-	position: absolute;
-	right: -222px;
-	top: -2px;
-`;
-
-const ItemCustomerButton = styled(Button)`
-	margin-right: 5px;
-	background: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
-	font-size: 14px;
-	color: ${primaryWhite};
-	border-color: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
-
-	${`&:hover {
-		border-color: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
-		color: ${props => (props.accept ? '#0dcc94' : '#fe4a49')};
-	}`};
-`;
-
 const ItemRow = styled(FlexRow)`
 	align-items: center;
 	background: ${primaryWhite};
@@ -85,22 +70,8 @@ const ItemRow = styled(FlexRow)`
 `;
 
 class Item extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			shouldDisplayAddItem: false,
-			shouldDisplayCommentModal: false,
-		};
-	}
-
-	seeCommentModal = (e) => {
-		e.stopPropagation();
-		this.setState({shouldDisplayCommentModal: true});
-	};
-
-	closeCommentModal = () => {
-		this.setState({shouldDisplayCommentModal: false});
-		this.props.refetch();
+	state = {
+		shouldDisplayAddItem: false,
 	};
 
 	submitItem = (itemMutation) => {
@@ -160,12 +131,17 @@ class Item extends Component {
 			finishItem,
 			mode,
 			projectStatus,
+			customer,
+			onClickCommentIcon,
+			deadline,
 		} = this.props;
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
 
-		const isValidStatus = status && status === 'ONGOING';
+		const daysUntilDeadline = Math.round(
+			(new Date(deadline) - new Date()) / (24 * 60 * 60 * 1000),
+		);
 
 		if (shouldDisplayAddItem && mode === 'edit' && editItem) {
 			return (
@@ -251,7 +227,9 @@ class Item extends Component {
 		}
 		return (
 			<ItemRow reviewer={item.reviewer}>
-				{(customerViewMode || mode === 'see') && (
+				{(customerViewMode
+					|| mode === 'see'
+					|| mode === 'dashboard') && (
 					<TaskStatus
 						status={item.status}
 						itemId={item.id}
@@ -268,6 +246,10 @@ class Item extends Component {
 					customer={customerViewMode}
 					justifyContent="space-between"
 					onClick={() => {
+						if (this.props.onClick) {
+							this.props.onClick();
+							return;
+						}
 						if (!customerViewMode && item.status !== 'FINISHED') {
 							this.setState({shouldDisplayAddItem: true});
 						}
@@ -284,57 +266,41 @@ class Item extends Component {
 						&& status === 'ADDED_SENT' && (
 						<ItemStatus>Ajouté</ItemStatus>
 					)}
+					<ItemUnit>
+						<TimeIcon />
+						{item.unit.toLocaleString()}{' '}
+						<Plural
+							singular="jour"
+							plural="jours"
+							value={item.unit}
+						/>
+					</ItemUnit>
+					{mode === 'dashboard'
+						&& daysUntilDeadline && (
+						<ItemUnit>
+							<DateIcon />
+							{daysUntilDeadline}{' '}
+							<Plural
+								singular="jour"
+								plural="jours"
+								value={daysUntilDeadline}
+							/>
+						</ItemUnit>
+					)}
+					{mode === 'dashboard' && (
+						<ItemUnit>
+							<ContactIcon />
+							{customer}
+						</ItemUnit>
+					)}
 					{(customerViewMode || mode === 'see') && (
 						<CommentIcon
-							onClick={this.seeCommentModal}
+							onClick={onClickCommentIcon}
 							comments={comments}
 							userType={customerViewMode ? 'Customer' : 'User'}
 						/>
 					)}
-					<ItemUnit>
-						{(item.pendingUnit || item.unit).toLocaleString()}{' '}
-						<Plural
-							singular="jour"
-							plural="jours"
-							value={item.pendingUnit || item.unit}
-						/>
-					</ItemUnit>
-					{customerViewMode
-						&& isValidStatus && (
-						<ItemCustomerActions>
-							<ToastContainer />
-							<Mutation mutation={ACCEPT_ITEM}>
-								{acceptItem => (
-									<ItemCustomerButton
-										accept
-										onClick={() => this.submitItem(acceptItem)
-										}
-									>
-											Accepter
-									</ItemCustomerButton>
-								)}
-							</Mutation>
-							<Mutation mutation={REJECT_ITEM}>
-								{rejectItem => (
-									<ItemCustomerButton
-										onClick={() => this.submitItem(rejectItem)
-										}
-									>
-											Rejeter
-									</ItemCustomerButton>
-								)}
-							</Mutation>
-						</ItemCustomerActions>
-					)}
 				</ItemMain>
-				{this.state.shouldDisplayCommentModal && (
-					<CommentModal
-						closeCommentModal={this.closeCommentModal}
-						itemId={item.id}
-						customerToken={customerViewMode}
-						taskName={item.name}
-					/>
-				)}
 			</ItemRow>
 		);
 	}

@@ -137,7 +137,7 @@ class ProjectDisplay extends Component {
 
 		project.sections.forEach((section) => {
 			section.items.forEach((item) => {
-				sumDays += item.pendingUnit || item.unit;
+				sumDays += item.unit;
 			});
 		});
 		return sumDays.toLocaleString();
@@ -265,9 +265,10 @@ class ProjectDisplay extends Component {
 													{project.sections.map(
 														(section, index) => (
 															<ProjectSection
-																key={`section${
-																	section.id
-																}`}
+																key={section.id}
+																projectId={
+																	project.id
+																}
 																data={section}
 																addItem={
 																	addItem
@@ -293,11 +294,6 @@ class ProjectDisplay extends Component {
 																}
 																sectionIndex={
 																	index
-																}
-																defaultDailyPrice={
-																	!customerViewMode
-																	&& data.me
-																		.defaultDailyPrice
 																}
 																refetch={
 																	refetch

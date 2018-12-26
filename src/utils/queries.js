@@ -112,6 +112,7 @@ export const GET_ALL_PROJECTS = gql`
 					name
 					viewedByCustomer
 					customer {
+						id
 						name
 					}
 					issuedAt
@@ -153,6 +154,7 @@ export const GET_PROJECT_DATA = gql`
 				siret
 			}
 			customer {
+				id
 				name
 				firstName
 				lastName
@@ -281,7 +283,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 							}
 						}
 					}
-					pendingUnit
 					vatRate
 					description
 				}

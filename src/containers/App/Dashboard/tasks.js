@@ -1,12 +1,18 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
+import {withRouter, Route} from 'react-router-dom';
 import styled from 'react-emotion';
 
 import Item from '../../../components/ProjectSection/see-item';
-
+import ItemView from '../../../components/ItemView';
 import {
-	P, H3, primaryNavyBlue, LinkButton,
+	P,
+	H3,
+	primaryNavyBlue,
+	LinkButton,
+	ModalContainer as Modal,
+	ModalElem,
 } from '../../../utils/content';
 
 const SectionTitle = styled(H3)`
@@ -27,11 +33,23 @@ const USER_TASKS = gql`
 			description
 			unit
 			reviewer
+			section {
+				id
+				project {
+					id
+					deadline
+					status
+					customer {
+						id
+						name
+					}
+				}
+			}
 		}
 	}
 `;
 
-const DashboardTasks = () => (
+const DashboardTasks = ({history}) => (
 	<Query query={USER_TASKS}>
 		{({data, loading}) => {
 			if (loading) return <p>Loading</p>;
@@ -90,7 +108,26 @@ const DashboardTasks = () => (
 					)}
 					{itemsToDo.length ? (
 						itemsToDo.map(item => (
-							<Item key={item.id} item={item} mode="see" />
+							<Item
+								key={item.id}
+								item={item}
+								projectStatus={item.section.project.status}
+								deadline={item.section.project.deadline}
+								mode="dashboard"
+								customer={item.section.project.customer.name}
+								onClick={() => {
+									history.push(
+										`/app/dashboard/items/${item.id}`,
+									);
+								}}
+								onClickCommentIcon={() => {
+									history.push(
+										`/app/dashboard/items/${
+											item.id
+										}#comments`,
+									);
+								}}
+							/>
 						))
 					) : (
 						<div>
@@ -105,12 +142,40 @@ const DashboardTasks = () => (
 					)}
 					<SectionTitle>Il vous reste du temps ?</SectionTitle>
 					{itemsToDoLater.map(item => (
-						<Item key={item.id} item={item} mode="see" />
+						<Item
+							key={item.id}
+							item={item}
+							projectStatus={item.section.project.status}
+							deadline={item.section.project.deadline}
+							mode="dashboard"
+							customer={item.section.project.customer.name}
+							onClick={() => {
+								history.push(`/app/dashboard/items/${item.id}`);
+							}}
+							onClickCommentIcon={() => {
+								history.push(
+									`/app/dashboard/items/${item.id}#comments`,
+								);
+							}}
+						/>
 					))}
+
+					<Route
+						path="/app/dashboard/items/:itemId"
+						render={({match, history}) => (
+							<Modal
+								onDismiss={() => history.push('/app/dashboard')}
+							>
+								<ModalElem>
+									<ItemView id={match.params.itemId} />
+								</ModalElem>
+							</Modal>
+						)}
+					/>
 				</>
 			);
 		}}
 	</Query>
 );
 
-export default DashboardTasks;
+export default withRouter(DashboardTasks);

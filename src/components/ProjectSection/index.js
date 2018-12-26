@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
+import {withRouter} from 'react-router-dom';
 
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
@@ -46,9 +47,12 @@ class ProjectSection extends Component {
 			finishItem,
 			mode,
 			customerViewMode,
-			refetch,
 			projectStatus,
+			projectId,
+			history,
 		} = this.props;
+
+		const projectUrl = `/app/projects/${projectId}/${mode}`;
 
 		return (
 			<ProjectSectionMain>
@@ -93,14 +97,20 @@ class ProjectSection extends Component {
 				</FlexRow>
 				{data.items.map(item => (
 					<Item
-						key={`item${item.id}`}
+						key={item.id}
 						item={item}
 						sectionId={data.id}
 						editItem={editItem}
 						removeItem={removeItem}
 						finishItem={finishItem}
 						mode={mode}
-						refetch={refetch}
+						onClickCommentIcon={() => {
+							history.push(
+								`${projectUrl}/items/${
+									item.id
+								}#comments`,
+							);
+						}}
 						projectStatus={projectStatus}
 					/>
 				))}
@@ -152,4 +162,4 @@ class ProjectSection extends Component {
 	}
 }
 
-export default ProjectSection;
+export default withRouter(ProjectSection);

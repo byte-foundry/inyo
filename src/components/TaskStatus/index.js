@@ -143,7 +143,7 @@ class TaskStatus extends Component {
 					<TaskStatusMain
 						onClick={() => {
 							if (
-								(mode === 'see'
+								((mode === 'see' || mode === 'dashboard')
 									&& (!customerViewMode
 										&& reviewer === 'USER'
 										&& status === 'PENDING'))

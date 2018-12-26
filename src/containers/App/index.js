@@ -20,12 +20,9 @@ const AppMain = styled('div')``;
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			uid_set: false,
-		};
-	}
+	state = {
+		uid_set: false,
+	};
 
 	render() {
 		return (

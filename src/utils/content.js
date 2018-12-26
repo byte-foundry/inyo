@@ -417,7 +417,7 @@ const translate = keyframes`
   }
 `;
 
-const BubbleIcon = styled(bubbleIcon)`
+export const SpinningBubble = styled(bubbleIcon)`
 	width: 45px;
 	height: auto;
 	opacity: 0.5;
@@ -441,6 +441,6 @@ const BubbleIcon = styled(bubbleIcon)`
 
 export const Loading = () => (
 	<LoadingMain>
-		<BubbleIcon />
+		<SpinningBubble />
 	</LoadingMain>
 );

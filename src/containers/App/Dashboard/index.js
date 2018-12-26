@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import {Redirect} from 'react-router-dom';
 import styled from 'react-emotion';
 import {ToastContainer, toast} from 'react-toastify';
 
@@ -79,47 +78,45 @@ class Dashboard extends Component {
 			<Query query={GET_USER_INFOS}>
 				{({client, loading, data}) => {
 					if (loading) return <Loading />;
-					if (data && data.me) {
-						const {me} = data;
-						const {firstName} = me;
 
-						return (
-							<Main>
-								<ToastContainer />
-								<ListProjectsTopBar>
-									<TopBarTitle>Tableau de bord</TopBarTitle>
-									<ActionRow>
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/account',
-												);
-											}}
-										>
-											<AccountIcon />
-										</TopBarButton>
-										<TopBarButton
-											theme="Primary"
-											size="Medium"
-											onClick={this.createNewProject}
-										>
-											Créer un nouveau projet
-										</TopBarButton>
-									</ActionRow>
-								</ListProjectsTopBar>
-								<Content>
-									<WelcomeMessage>
-										Bonjour {firstName} !
-									</WelcomeMessage>
+					const {me} = data;
+					const {firstName} = me;
 
-									<Tasks />
-								</Content>
-							</Main>
-						);
-					}
-					return <Redirect to="/auth" />;
+					return (
+						<Main>
+							<ToastContainer />
+							<ListProjectsTopBar>
+								<TopBarTitle>Tableau de bord</TopBarTitle>
+								<ActionRow>
+									<TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/account',
+											);
+										}}
+									>
+										<AccountIcon />
+									</TopBarButton>
+									<TopBarButton
+										theme="Primary"
+										size="Medium"
+										onClick={this.createNewProject}
+									>
+										Créer un nouveau projet
+									</TopBarButton>
+								</ActionRow>
+							</ListProjectsTopBar>
+							<Content>
+								<WelcomeMessage>
+									Bonjour {firstName} !
+								</WelcomeMessage>
+
+								<Tasks />
+							</Content>
+						</Main>
+					);
 				}}
 			</Query>
 		);

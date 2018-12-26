@@ -312,3 +312,29 @@ export const GET_COMMENTS_BY_ITEM = gql`
 		}
 	}
 `;
+
+export const GET_ITEM_DETAILS = gql`
+	query getItemDetails($id: ID!, $token: String) {
+		item(id: $id, token: $token) {
+			id
+			name
+			status
+			description
+			unit
+			reviewer
+			section {
+				id
+				project {
+					id
+					name
+					status
+					deadline
+					customer {
+						id
+						name
+					}
+				}
+			}
+		}
+	}
+`;

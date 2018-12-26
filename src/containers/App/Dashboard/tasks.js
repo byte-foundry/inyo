@@ -10,6 +10,10 @@ import ItemView from '../../../components/ItemView';
 import {
 	P,
 	H3,
+	gray20,
+	gray50,
+	gray80,
+	primaryBlue,
 	primaryNavyBlue,
 	LinkButton,
 	ModalContainer as Modal,
@@ -21,6 +25,7 @@ import {ReactComponent as TaskIcon} from '../../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../../utils/icons/time.svg';
 import {ReactComponent as DateIcon} from '../../../utils/icons/date.svg';
 import {ReactComponent as ContactIcon} from '../../../utils/icons/contact.svg';
+import {ReactComponent as SnoozeIcon} from '../../../utils/icons/snooze.svg';
 
 const SectionTitle = styled(H3)`
 	color: ${primaryNavyBlue};
@@ -32,14 +37,44 @@ const ColumnHeader = styled('div')`
 `;
 
 const HeaderRow = styled(FlexRow)`
-	margin: 10px 51px 10px 17px;
+	margin: 10px 121px 10px 17px;
 `;
 
 const HeaderText = styled('span')`
 	margin-left: 7px;
 `;
 
-const DashboardTasks = ({history}) => (
+const SnoozeContainer = styled('div')`
+	flex: 0 0 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 7px;
+	cursor: pointer;
+	svg {
+		.arrow-head,
+		.circle {
+			stroke: ${gray20};
+		}
+
+		.text {
+			fill: ${gray50};
+		}
+
+		&:hover {
+			.arrow-head,
+			.circle {
+				stroke: ${gray80};
+			}
+
+			.text {
+				fill: ${primaryBlue};
+			}
+		}
+	}
+`;
+
+const DashboardTasks = ({history, finishItem}) => (
 	<Query query={USER_TASKS}>
 		{({data, loading}) => {
 			if (loading) return <p>Loading</p>;
@@ -116,10 +151,54 @@ const DashboardTasks = ({history}) => (
 					</HeaderRow>
 					{itemsToDo.length ? (
 						itemsToDo.map(item => (
+							<FlexRow>
+								<Item
+									key={item.id}
+									item={item}
+									projectStatus={item.section.project.status}
+									finishItem={finishItem}
+									deadline={item.section.project.deadline}
+									mode="dashboard"
+									customer={
+										item.section.project.customer.name
+									}
+									onClick={() => {
+										history.push(
+											`/app/dashboard/items/${item.id}`,
+										);
+									}}
+									onClickCommentIcon={() => {
+										history.push(
+											`/app/dashboard/items/${
+												item.id
+											}#comments`,
+										);
+									}}
+								/>
+								<SnoozeContainer>
+									<SnoozeIcon />
+								</SnoozeContainer>
+							</FlexRow>
+						))
+					) : (
+						<div>
+							<P>
+								Bravo, vous n'avez plus rien à faire !
+								Voulez-vous...
+							</P>
+							<LinkButton to="/app/projects/create">
+								Créer un nouveau projet
+							</LinkButton>
+						</div>
+					)}
+					<SectionTitle>Il vous reste du temps ?</SectionTitle>
+					{itemsToDoLater.map(item => (
+						<FlexRow>
 							<Item
 								key={item.id}
 								item={item}
 								projectStatus={item.section.project.status}
+								finishItem={finishItem}
 								deadline={item.section.project.deadline}
 								mode="dashboard"
 								customer={item.section.project.customer.name}
@@ -136,36 +215,10 @@ const DashboardTasks = ({history}) => (
 									);
 								}}
 							/>
-						))
-					) : (
-						<div>
-							<P>
-								Bravo, vous n'avez plus rien à faire !
-								Voulez-vous...
-							</P>
-							<LinkButton to="/app/projects/create">
-								Créer un nouveau projet
-							</LinkButton>
-						</div>
-					)}
-					<SectionTitle>Il vous reste du temps ?</SectionTitle>
-					{itemsToDoLater.map(item => (
-						<Item
-							key={item.id}
-							item={item}
-							projectStatus={item.section.project.status}
-							deadline={item.section.project.deadline}
-							mode="dashboard"
-							customer={item.section.project.customer.name}
-							onClick={() => {
-								history.push(`/app/dashboard/items/${item.id}`);
-							}}
-							onClickCommentIcon={() => {
-								history.push(
-									`/app/dashboard/items/${item.id}#comments`,
-								);
-							}}
-						/>
+							<SnoozeContainer>
+								<SnoozeIcon />
+							</SnoozeContainer>
+						</FlexRow>
 					))}
 
 					<Route

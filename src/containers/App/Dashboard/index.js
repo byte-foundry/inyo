@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import styled from 'react-emotion';
+import {withRouter} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 
 import Tasks from './tasks';
@@ -12,7 +13,7 @@ import TopBar, {
 import {
 	H2, primaryBlue, gray10, Loading,
 } from '../../../utils/content';
-import {GET_USER_INFOS} from '../../../utils/queries';
+import {GET_USER_INFOS, GET_PROJECT_DATA} from '../../../utils/queries';
 import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
 // import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
 import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
@@ -33,6 +34,52 @@ const WelcomeMessage = styled(H2)`
 `;
 
 class Dashboard extends Component {
+	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
+		variables: {
+			itemId,
+			token,
+		},
+		optimisticResponse: {
+			__typename: 'Mutation',
+			finishItem: {
+				id: itemId,
+				status: 'FINISHED',
+			},
+		},
+		update: (cache, {data: {finishItem: finishedItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', {}, 'yellow']]],
+			]);
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.find(
+				e => e.id === finishedItem.id,
+			);
+
+			section.items[itemIndex].status = finishedItem.status;
+			try {
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw e;
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	toast = () => {
 		toast.info(
 			<div>
@@ -111,7 +158,7 @@ class Dashboard extends Component {
 									Bonjour {firstName} !
 								</WelcomeMessage>
 
-								<Tasks />
+								<Tasks finishItem={this.finishItem} />
 							</Content>
 						</Main>
 					);
@@ -121,4 +168,4 @@ class Dashboard extends Component {
 	}
 }
 
-export default Dashboard;
+export default withRouter(Dashboard);

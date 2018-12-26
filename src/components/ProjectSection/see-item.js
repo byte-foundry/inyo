@@ -62,6 +62,7 @@ const ItemStatus = styled('div')`
 `;
 
 const ItemRow = styled(FlexRow)`
+	flex: 1;
 	align-items: center;
 	background: ${primaryWhite};
 	box-shadow: 0px 0px 8px ${alpha10};

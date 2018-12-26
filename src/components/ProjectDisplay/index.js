@@ -40,11 +40,6 @@ const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
 `;
 
-const ProjectDisplayTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-	margin: 0;
-`;
-
 const ProjectSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
 	min-width: 260px;
@@ -65,6 +60,7 @@ const ProjectRow = styled(FlexRow)`
 	padding-right: 40px;
 	padding-top: 10px;
 	padding-bottom: ${props => (props.noPadding ? '0px' : '10px')};
+	border-top: 1px solid ${gray20};
 	border-bottom: 1px solid ${gray20};
 `;
 
@@ -169,20 +165,24 @@ class ProjectDisplay extends Component {
 								{!customerViewMode && (
 									<TopBar>
 										<TopBarTitle>
-											Projet en cours
+											{mode === 'edit'
+												? 'Remplissez le projet'
+												: 'Projet en cours'}
 										</TopBarTitle>
 										<TopBarNavigation>
-											<TopBarButton
-												theme="Primary"
-												size="Medium"
-												onClick={() => {
-													this.props.history.push(
-														'/app/projects/create',
-													);
-												}}
-											>
-												Créer un nouveau projet
-											</TopBarButton>
+											{mode !== 'edit' && (
+												<TopBarButton
+													theme="Primary"
+													size="Medium"
+													onClick={() => {
+														this.props.history.push(
+															'/app/projects/create',
+														);
+													}}
+												>
+													Créer un nouveau projet
+												</TopBarButton>
+											)}
 											<TopBarButton
 												theme="Link"
 												size="XSmall"
@@ -220,11 +220,34 @@ class ProjectDisplay extends Component {
 									</TopBar>
 								)}
 
-								{mode === 'edit' && (
-									<ProjectRow justifyContent="space-between">
-										<ProjectDisplayTitle>
-											Remplissez votre projet
-										</ProjectDisplayTitle>
+								<ProjectRow
+									noPadding
+									justifyContent="space-between"
+								>
+									<FlexColumn>
+										<ProjectName>
+											<Mutation mutation={UPDATE_PROJECT}>
+												{updateProject => (
+													<InlineEditable
+														value={project.name}
+														type="text"
+														placeholder="Nom de votre projet"
+														disabled={
+															mode !== 'edit'
+														}
+														onFocusOut={(value) => {
+															editProjectTitle(
+																value,
+																project.id,
+																updateProject,
+															);
+														}}
+													/>
+												)}
+											</Mutation>
+										</ProjectName>
+									</FlexColumn>
+									{mode === 'edit' && (
 										<Mutation
 											mutation={START_PROJECT}
 											onError={(error) => {
@@ -256,35 +279,7 @@ class ProjectDisplay extends Component {
 												</StartProjectButton>
 											)}
 										</Mutation>
-									</ProjectRow>
-								)}
-								<ProjectRow
-									noPadding
-									justifyContent="space-between"
-								>
-									<FlexColumn>
-										<ProjectName>
-											<Mutation mutation={UPDATE_PROJECT}>
-												{updateProject => (
-													<InlineEditable
-														value={project.name}
-														type="text"
-														placeholder="Nom de votre projet"
-														disabled={
-															mode !== 'edit'
-														}
-														onFocusOut={(value) => {
-															editProjectTitle(
-																value,
-																project.id,
-																updateProject,
-															);
-														}}
-													/>
-												)}
-											</Mutation>
-										</ProjectName>
-									</FlexColumn>
+									)}
 								</ProjectRow>
 								<FlexRow justifyContent="space-between">
 									<CenterContent flexGrow="2">

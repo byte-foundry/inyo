@@ -2,16 +2,18 @@ import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
-import {GET_ALL_PROJECTS} from '../../../utils/queries';
-import {
-	H1,
-	Button,
-	primaryNavyBlue,
-	primaryWhite,
-	Loading,
-} from '../../../utils/content';
 
-import {ReactComponent as AccountIcon} from '../../../utils/icons/user.svg';
+import {GET_ALL_PROJECTS} from '../../../utils/queries';
+import TopBar, {
+	TopBarNavigation,
+	TopBarButton,
+	TopBarTitle,
+} from '../../../components/TopBar';
+import {Loading} from '../../../utils/content';
+
+import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+// import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
+import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 
 import SearchProjectForm from '../../../components/SearchProjectForm';
 import ProjectList from '../../../components/ProjectList';
@@ -19,35 +21,6 @@ import ProjectList from '../../../components/ProjectList';
 const ListProjectsMain = styled('div')`
 	background-color: #fbfbfb;
 	min-height: 100vh;
-`;
-
-const TopBarButton = styled(Button)`
-	height: 60px;
-	padding: 0 25px;
-	svg {
-		width: 60px;
-	}
-`;
-
-const ListProjectsTopBar = styled('div')`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: center;
-	padding-left: 40px;
-	padding-right: 40px;
-	background-color: ${primaryWhite};
-`;
-
-const TopBarTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-`;
-
-const ActionRow = styled('div')`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-end;
-	align-items: center;
 `;
 
 export const projectState = {
@@ -63,10 +36,6 @@ class ListProjects extends Component {
 			projects: undefined,
 		};
 	}
-
-	createNewProject = () => {
-		this.props.history.push('/app/projects/create');
-	};
 
 	render() {
 		const {projects, baseProjects} = this.state;
@@ -87,9 +56,42 @@ class ListProjects extends Component {
 
 					return (
 						<ListProjectsMain>
-							<ListProjectsTopBar>
+							<TopBar>
 								<TopBarTitle>Vos projets</TopBarTitle>
-								<ActionRow>
+								<TopBarNavigation>
+									<TopBarButton
+										theme="Primary"
+										size="Medium"
+										onClick={() => {
+											this.props.history.push(
+												'/app/projects/create',
+											);
+										}}
+									>
+										Créer un nouveau projet
+									</TopBarButton>
+									<TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/dashboard',
+											);
+										}}
+									>
+										<FoldersIcon />
+									</TopBarButton>
+									{/* <TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/customers',
+											);
+										}}
+									>
+										<UsersIcon />
+									</TopBarButton> */}
 									<TopBarButton
 										theme="Link"
 										size="XSmall"
@@ -99,17 +101,11 @@ class ListProjects extends Component {
 											);
 										}}
 									>
-										<AccountIcon />
+										<SettingsIcon />
 									</TopBarButton>
-									<TopBarButton
-										theme="Primary"
-										size="Medium"
-										onClick={this.createNewProject}
-									>
-										Créer un nouveau projet
-									</TopBarButton>
-								</ActionRow>
-							</ListProjectsTopBar>
+								</TopBarNavigation>
+							</TopBar>
+
 							{projects && (
 								<div>
 									<SearchProjectForm

@@ -4,18 +4,18 @@ import styled from 'react-emotion';
 import {ToastContainer, toast} from 'react-toastify';
 
 import Tasks from './tasks';
+import TopBar, {
+	TopBarTitle,
+	TopBarButton,
+	TopBarNavigation,
+} from '../../../components/TopBar';
 import {
-	H1,
-	H2,
-	Button,
-	primaryNavyBlue,
-	primaryBlue,
-	gray10,
-	primaryWhite,
-	Loading,
+	H2, primaryBlue, gray10, Loading,
 } from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
-import {ReactComponent as AccountIcon} from '../../../utils/icons/user.svg';
+import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+// import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
+import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Main = styled('div')`
@@ -28,36 +28,8 @@ const Content = styled('div')`
 	padding-right: 40px;
 `;
 
-const TopBarTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-`;
 const WelcomeMessage = styled(H2)`
 	color: ${primaryBlue};
-`;
-
-const TopBarButton = styled(Button)`
-	height: 60px;
-	padding: 0 25px;
-	svg {
-		width: 60px;
-	}
-`;
-
-const ListProjectsTopBar = styled('div')`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	align-items: center;
-	padding-left: 40px;
-	padding-right: 40px;
-	background-color: ${primaryWhite};
-`;
-
-const ActionRow = styled('div')`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-end;
-	align-items: center;
 `;
 
 class Dashboard extends Component {
@@ -85,9 +57,42 @@ class Dashboard extends Component {
 					return (
 						<Main>
 							<ToastContainer />
-							<ListProjectsTopBar>
+							<TopBar>
 								<TopBarTitle>Tableau de bord</TopBarTitle>
-								<ActionRow>
+								<TopBarNavigation>
+									<TopBarButton
+										theme="Primary"
+										size="Medium"
+										onClick={() => {
+											this.props.history.push(
+												'/app/projects/create',
+											);
+										}}
+									>
+										Créer un nouveau projet
+									</TopBarButton>
+									<TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/projects',
+											);
+										}}
+									>
+										<FoldersIcon />
+									</TopBarButton>
+									{/* <TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/customers',
+											);
+										}}
+									>
+										<UsersIcon />
+									</TopBarButton> */}
 									<TopBarButton
 										theme="Link"
 										size="XSmall"
@@ -97,17 +102,10 @@ class Dashboard extends Component {
 											);
 										}}
 									>
-										<AccountIcon />
+										<SettingsIcon />
 									</TopBarButton>
-									<TopBarButton
-										theme="Primary"
-										size="Medium"
-										onClick={this.createNewProject}
-									>
-										Créer un nouveau projet
-									</TopBarButton>
-								</ActionRow>
-							</ListProjectsTopBar>
+								</TopBarNavigation>
+							</TopBar>
 							<Content>
 								<WelcomeMessage>
 									Bonjour {firstName} !

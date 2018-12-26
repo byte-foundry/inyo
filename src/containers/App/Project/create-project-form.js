@@ -11,7 +11,6 @@ import * as Sentry from '@sentry/browser';
 import {templates} from '../../../utils/project-templates';
 
 import {
-	H1,
 	H3,
 	H4,
 	Button,
@@ -28,10 +27,6 @@ import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
 import {CREATE_PROJECT} from '../../../utils/mutations';
 import {GET_ALL_PROJECTS, GET_USER_INFOS} from '../../../utils/queries';
-
-const Title = styled(H1)`
-	color: ${primaryNavyBlue};
-`;
 
 const SubTitle = styled(H3)`
 	color: ${primaryBlue};
@@ -518,9 +513,6 @@ class CreateProjectForm extends React.Component {
 															props.handleSubmit
 														}
 													>
-														<Title>
-															Créez votre projet
-														</Title>
 														<FlexRow>
 															<FormSection left>
 																{((selectedCustomer

@@ -3,6 +3,7 @@ import styled from 'react-emotion';
 import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
 
+import TopBar, {TopBarTitle, TopBarNavigation, TopBarButton} from '../TopBar';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import InlineEditable from '../InlineEditable';
@@ -31,18 +32,12 @@ import {
 	signalRed,
 	Loading,
 } from '../../utils/content';
-
+import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
+import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
-`;
-
-const BackButton = styled(Button)`
-	padding: 10px 5px;
-	font-size: 11px;
-	margin: 10px 0 10px 40px;
-	color: ${gray50};
 `;
 
 const ProjectDisplayTitle = styled(H1)`
@@ -172,17 +167,59 @@ class ProjectDisplay extends Component {
 						return (
 							<ProjectDisplayMain>
 								{!customerViewMode && (
-									<BackButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => this.props.history.push(
-											'/app/projects',
-										)
-										}
-									>
-										Retour à la liste des projets
-									</BackButton>
+									<TopBar>
+										<TopBarTitle>
+											Projet en cours
+										</TopBarTitle>
+										<TopBarNavigation>
+											<TopBarButton
+												theme="Primary"
+												size="Medium"
+												onClick={() => {
+													this.props.history.push(
+														'/app/projects/create',
+													);
+												}}
+											>
+												Créer un nouveau projet
+											</TopBarButton>
+											<TopBarButton
+												theme="Link"
+												size="XSmall"
+												onClick={() => {
+													this.props.history.push(
+														'/app/dashboard',
+													);
+												}}
+											>
+												<FoldersIcon />
+											</TopBarButton>
+											<TopBarButton
+												theme="Link"
+												size="XSmall"
+												onClick={() => {
+													this.props.history.push(
+														'/app/projects',
+													);
+												}}
+											>
+												<FoldersIcon />
+											</TopBarButton>
+											<TopBarButton
+												theme="Link"
+												size="XSmall"
+												onClick={() => {
+													this.props.history.push(
+														'/app/account',
+													);
+												}}
+											>
+												<SettingsIcon />
+											</TopBarButton>
+										</TopBarNavigation>
+									</TopBar>
 								)}
+
 								{mode === 'edit' && (
 									<ProjectRow justifyContent="space-between">
 										<ProjectDisplayTitle>

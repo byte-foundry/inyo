@@ -12,6 +12,7 @@ import {
 	alpha10,
 	primaryWhite,
 	primaryBlue,
+	gray80,
 	Button,
 } from '../../utils/content';
 import {
@@ -27,7 +28,7 @@ import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 
 const ItemName = styled(FlexRow)`
 	margin: 0;
-	font-size: 13px;
+	font-size: 15px;
 	flex: 1;
 `;
 const ItemMain = styled(FlexRow)`
@@ -40,10 +41,12 @@ const ItemMain = styled(FlexRow)`
 `;
 
 const ItemUnit = styled('div')`
-	flex: 0 0 100px;
+	font-size: 15px;
+	flex: 0 0 140px;
 	text-align: right;
 	display: flex;
 	align-items: center;
+	color: ${props => props.color || gray80};
 `;
 
 const ItemStatus = styled('div')`
@@ -67,6 +70,10 @@ const ItemRow = styled(FlexRow)`
 	border-right: ${props => (props.reviewer === 'USER' ? '1px solid' : '5px solid')}
 		${props => (props.reviewer === 'USER' ? alpha10 : primaryBlue)};
 	padding: 5px 20px;
+`;
+
+const CommentContainer = styled('div')`
+	flex: 0 0 28px;
 `;
 
 class Item extends Component {
@@ -266,8 +273,7 @@ class Item extends Component {
 						&& status === 'ADDED_SENT' && (
 						<ItemStatus>Ajouté</ItemStatus>
 					)}
-					<ItemUnit>
-						<TimeIcon />
+					<ItemUnit color={primaryBlue}>
 						{item.unit.toLocaleString()}{' '}
 						<Plural
 							singular="jour"
@@ -277,8 +283,7 @@ class Item extends Component {
 					</ItemUnit>
 					{mode === 'dashboard'
 						&& daysUntilDeadline && (
-						<ItemUnit>
-							<DateIcon />
+						<ItemUnit color={primaryBlue}>
 							{daysUntilDeadline}{' '}
 							<Plural
 								singular="jour"
@@ -287,18 +292,17 @@ class Item extends Component {
 							/>
 						</ItemUnit>
 					)}
-					{mode === 'dashboard' && (
-						<ItemUnit>
-							<ContactIcon />
-							{customer}
-						</ItemUnit>
-					)}
+					{mode === 'dashboard' && <ItemUnit>{customer}</ItemUnit>}
 					{(customerViewMode || mode === 'see') && (
-						<CommentIcon
-							onClick={onClickCommentIcon}
-							comments={comments}
-							userType={customerViewMode ? 'Customer' : 'User'}
-						/>
+						<CommentContainer>
+							<CommentIcon
+								onClick={onClickCommentIcon}
+								comments={comments}
+								userType={
+									customerViewMode ? 'Customer' : 'User'
+								}
+							/>
+						</CommentContainer>
 					)}
 				</ItemMain>
 			</ItemRow>

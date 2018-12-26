@@ -6,14 +6,20 @@ import styled from 'react-emotion';
 
 import Item from '../../../components/ProjectSection/see-item';
 import ItemView from '../../../components/ItemView';
+
 import {
 	P,
 	H3,
 	primaryNavyBlue,
 	LinkButton,
 	ModalContainer as Modal,
+	FlexRow,
 	ModalElem,
 } from '../../../utils/content';
+import {ReactComponent as TaskIcon} from '../../../utils/icons/folder.svg';
+import {ReactComponent as TimeIcon} from '../../../utils/icons/time.svg';
+import {ReactComponent as DateIcon} from '../../../utils/icons/date.svg';
+import {ReactComponent as ContactIcon} from '../../../utils/icons/contact.svg';
 
 const SectionTitle = styled(H3)`
 	color: ${primaryNavyBlue};
@@ -47,6 +53,19 @@ const USER_TASKS = gql`
 			}
 		}
 	}
+`;
+
+const ColumnHeader = styled('div')`
+	flex: ${props => props.flex};
+	display: flex;
+`;
+
+const HeaderRow = styled(FlexRow)`
+	margin: 10px 51px 10px 17px;
+`;
+
+const HeaderText = styled('span')`
+	margin-left: 7px;
 `;
 
 const DashboardTasks = ({history}) => (
@@ -106,6 +125,24 @@ const DashboardTasks = ({history}) => (
 					) : (
 						<SectionTitle>Tâches à faire aujourd'hui</SectionTitle>
 					)}
+					<HeaderRow>
+						<ColumnHeader flex="1">
+							<TaskIcon />
+							<HeaderText>Titre de la tâche</HeaderText>
+						</ColumnHeader>
+						<ColumnHeader flex="0 0 140px">
+							<TimeIcon />
+							<HeaderText>Durée</HeaderText>
+						</ColumnHeader>
+						<ColumnHeader flex="0 0 140px">
+							<DateIcon />
+							<HeaderText>Deadline</HeaderText>
+						</ColumnHeader>
+						<ColumnHeader flex="0 0 140px">
+							<ContactIcon />
+							<HeaderText>Client</HeaderText>
+						</ColumnHeader>
+					</HeaderRow>
 					{itemsToDo.length ? (
 						itemsToDo.map(item => (
 							<Item

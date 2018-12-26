@@ -16,6 +16,7 @@ import {
 	FlexRow,
 	ModalElem,
 } from '../../../utils/content';
+import {USER_TASKS} from '../../../utils/queries.js';
 import {ReactComponent as TaskIcon} from '../../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../../utils/icons/time.svg';
 import {ReactComponent as DateIcon} from '../../../utils/icons/date.svg';
@@ -23,36 +24,6 @@ import {ReactComponent as ContactIcon} from '../../../utils/icons/contact.svg';
 
 const SectionTitle = styled(H3)`
 	color: ${primaryNavyBlue};
-`;
-
-const USER_TASKS = gql`
-	query {
-		me {
-			id
-			startWorkAt
-			endWorkAt
-		}
-		items {
-			id
-			status
-			name
-			description
-			unit
-			reviewer
-			section {
-				id
-				project {
-					id
-					deadline
-					status
-					customer {
-						id
-						name
-					}
-				}
-			}
-		}
-	}
 `;
 
 const ColumnHeader = styled('div')`

@@ -338,3 +338,33 @@ export const GET_ITEM_DETAILS = gql`
 		}
 	}
 `;
+
+export const USER_TASKS = gql`
+	query {
+		me {
+			id
+			startWorkAt
+			endWorkAt
+		}
+		items {
+			id
+			status
+			name
+			description
+			unit
+			reviewer
+			section {
+				id
+				project {
+					id
+					deadline
+					status
+					customer {
+						id
+						name
+					}
+				}
+			}
+		}
+	}
+`;

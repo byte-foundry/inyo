@@ -143,6 +143,7 @@ export default function StartProjectConfirmModal({
 												<ModalRowHoriz>
 													<Button
 														theme="Link"
+														tabindex="-1"
 														onClick={(e) => {
 															e.preventDefault();
 															e.stopPropagation();
@@ -158,6 +159,7 @@ export default function StartProjectConfirmModal({
 													<Button
 														theme="Primary"
 														type="submit"
+														tabindex="-1"
 														disabled={isSubmitting}
 													>
 														Commencer et envoyer un

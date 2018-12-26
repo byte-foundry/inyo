@@ -43,6 +43,7 @@ class ProjectSection extends Component {
 			editSectionTitle,
 			editItem,
 			removeItem,
+			finishItem,
 			mode,
 			customerViewMode,
 			refetch,
@@ -97,6 +98,7 @@ class ProjectSection extends Component {
 						sectionId={data.id}
 						editItem={editItem}
 						removeItem={removeItem}
+						finishItem={finishItem}
 						mode={mode}
 						refetch={refetch}
 						projectStatus={projectStatus}

@@ -222,7 +222,7 @@ class EditProject extends Component {
 					window.$crisp.push([
 						'set',
 						'session:event',
-						[[['item_added', {}, 'yellow']]],
+						[[['item_added', undefined, 'yellow']]],
 					]);
 				}
 				catch (e) {
@@ -261,7 +261,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['item_edited', {}, 'yellow']]],
+					[[['item_edited', undefined, 'yellow']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -293,14 +293,14 @@ class EditProject extends Component {
 	};
 
 	removeItem = (itemId, sectionId, removeItem) => {
-		window.$crisp.push([
-			'set',
-			'session:event',
-			[[['item_removed', {}, 'yellow']]],
-		]);
 		removeItem({
 			variables: {itemId},
 			update: (cache, {data: {removeItem: removedItem}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['item_removed', undefined, 'yellow']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -337,7 +337,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_added', {}, 'orange']]],
+					[[['section_added', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -369,7 +369,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_edited', {}, 'orange']]],
+					[[['section_edited', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -404,7 +404,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_removed', {}, 'orange']]],
+					[[['section_removed', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -433,14 +433,14 @@ class EditProject extends Component {
 	};
 
 	removeProject = (projectId, removeProject) => {
-		window.$crisp.push([
-			'set',
-			'session:event',
-			[[['project_removed', {}, 'blue']]],
-		]);
 		removeProject({
 			variables: {projectId},
 			update: (cache, {data: {removeProject: removedProject}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['project_removed', undefined, 'blue']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_ALL_PROJECTS,
 				});
@@ -474,7 +474,7 @@ class EditProject extends Component {
 		window.$crisp.push([
 			'set',
 			'session:event',
-			[[['asked_for_customer_infos', {}, 'green']]],
+			[[['asked_for_customer_infos', undefined, 'green']]],
 		]);
 	};
 

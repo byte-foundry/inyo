@@ -6,39 +6,14 @@ import styled from 'react-emotion';
 import Plural from '../Plural';
 import TaskStatus from '../TaskStatus';
 import {
-	H2, H3, gray50, SpinningBubble,
+	H2, H3, gray50, gray80, SpinningBubble,
 } from '../../utils/content';
 import CommentList from '../CommentList';
 
+import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
-
-const GET_ITEM_DETAILS = gql`
-	query getItemDetails($id: ID!, $token: String) {
-		item(id: $id, token: $token) {
-			id
-			name
-			status
-			description
-			unit
-			reviewer
-			section {
-				id
-				project {
-					id
-					name
-					status
-					deadline
-					customer {
-						id
-						name
-					}
-				}
-			}
-		}
-	}
-`;
 
 const Header = styled('div')`
 	display: flex;
@@ -50,10 +25,36 @@ const Header = styled('div')`
 	}
 `;
 
-const Meta = styled('div')`
+const Metas = styled('div')`
 	display: flex;
 	align-items: center;
 	color: ${gray50};
+	margin-left: -9px;
+`;
+
+const Meta = styled('div')`
+	display: flex;
+	margin-right: 15px;
+	align-items: center;
+`;
+
+const MetaText = styled('span')`
+	margin-left: 5px;
+`;
+
+const MetaTime = styled('time')`
+	margin-left: 5px;
+`;
+
+const NoDescription = styled('div')`
+	text-align: center;
+	color: ${gray50};
+`;
+
+const Description = styled('div')`
+	color: ${gray80};
+	margin-top: 30px;
+	margin-bottom: 25px;
 `;
 
 const Item = ({id}) => (
@@ -83,30 +84,41 @@ const Item = ({id}) => (
 						<span>dans</span>
 						<H3>{project.name}</H3>
 					</Header>
-					<Meta>
-						<TimeIcon />
-						{item.unit}
-						&nbsp;
-						<Plural
-							singular="jour"
-							plural="jours"
-							value={item.unit}
-						/>
+					<Metas>
+						<Meta>
+							<TimeIcon />
+							<MetaText>
+								{item.unit}
+								<Plural
+									singular=" jour"
+									plural=" jours"
+									value={item.unit}
+								/>
+							</MetaText>
+						</Meta>
 						{deadline && (
-							<>
+							<Meta>
 								<DateIcon />
-								<time
+								<MetaTime
 									title={deadline.toLocaleString()}
 									dateTime={deadline}
 								>
 									{deadline.toLocaleDateString()}
-								</time>
-							</>
+								</MetaTime>
+							</Meta>
 						)}
-						<ContactIcon />
-						{project.customer.name}
-					</Meta>
-					<p>{item.description || "Il n'y a pas de description."}</p>
+						<Meta>
+							<ContactIcon />
+							<MetaText>{project.customer.name}</MetaText>
+						</Meta>
+					</Metas>
+					<Description>
+						{item.description || (
+							<NoDescription>
+								Il n'y a pas de description.
+							</NoDescription>
+						)}
+					</Description>
 					<CommentList itemId={item.id} />
 				</>
 			);

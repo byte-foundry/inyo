@@ -288,7 +288,7 @@ class CreateProjectForm extends React.Component {
 																				[
 																					[
 																						'customer_created',
-																						{},
+																						undefined,
 																						'pink',
 																					],
 																				],

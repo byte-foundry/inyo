@@ -131,7 +131,7 @@ class TaskStatus extends Component {
 			window.$crisp.push([
 				'set',
 				'session:event',
-				[[['item_finished', {}, 'yellow']]],
+				[[['item_finished', undefined, 'yellow']]],
 			]);
 			const data = cache.readQuery({
 				query: GET_PROJECT_DATA,

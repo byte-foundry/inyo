@@ -72,7 +72,7 @@ class UserProjectSettingsForm extends Component {
 													[
 														[
 															'updated_project_settings_data',
-															{},
+															undefined,
 															'green',
 														],
 													],

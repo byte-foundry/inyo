@@ -75,7 +75,7 @@ class UserDataForm extends Component {
 													[
 														[
 															'updated_user_data',
-															{},
+															undefined,
 															'green',
 														],
 													],

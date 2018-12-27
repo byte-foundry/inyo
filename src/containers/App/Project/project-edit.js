@@ -200,7 +200,7 @@ class EditProject extends Component {
 					window.$crisp.push([
 						'set',
 						'session:event',
-						[[['item_added', {}, 'yellow']]],
+						[[['item_added', undefined, 'yellow']]],
 					]);
 				}
 				catch (e) {
@@ -241,7 +241,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['item_edited', {}, 'yellow']]],
+					[[['item_edited', undefined, 'yellow']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -276,7 +276,7 @@ class EditProject extends Component {
 		window.$crisp.push([
 			'set',
 			'session:event',
-			[[['item_removed', {}, 'yellow']]],
+			[[['item_removed', undefined, 'yellow']]],
 		]);
 		removeItem({
 			variables: {itemId},
@@ -317,7 +317,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_added', {}, 'orange']]],
+					[[['section_added', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -349,7 +349,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_edited', {}, 'orange']]],
+					[[['section_edited', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -384,7 +384,7 @@ class EditProject extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_removed', {}, 'orange']]],
+					[[['section_removed', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -416,7 +416,7 @@ class EditProject extends Component {
 		window.$crisp.push([
 			'set',
 			'session:event',
-			[[['project_removed', {}, 'blue']]],
+			[[['project_removed', undefined, 'blue']]],
 		]);
 		removeProject({
 			variables: {projectId},
@@ -454,7 +454,7 @@ class EditProject extends Component {
 		window.$crisp.push([
 			'set',
 			'session:event',
-			[[['asked_for_customer_infos', {}, 'green']]],
+			[[['asked_for_customer_infos', undefined, 'green']]],
 		]);
 	};
 

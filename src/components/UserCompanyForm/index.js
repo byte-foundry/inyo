@@ -91,7 +91,7 @@ class UserCompanyForm extends Component {
 													[
 														[
 															'updated_company_data',
-															{},
+															undefined,
 															'green',
 														],
 													],

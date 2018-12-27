@@ -99,8 +99,8 @@ export default function DoubleRangeTimeInput(props) {
 	} = props.value;
 	const {setFieldValue} = props;
 
-	const startPercentage = startHour / 24 + (startMinutes / (60 * 24)) * 100;
-	const endPercentage = endHour / 24 + (endMinutes / (60 * 24)) * 100;
+	const startPercentage = (startHour / 24 + startMinutes / (60 * 24)) * 100;
+	const endPercentage = (endHour / 24 + endMinutes / (60 * 24)) * 100;
 
 	return (
 		<TimeInputContainer

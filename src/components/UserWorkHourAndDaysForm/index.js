@@ -50,27 +50,25 @@ const Emoji = styled('div')`
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
 `;
 
 class UserWorkHourAndDaysForm extends Component {
 	render() {
 		const {startWorkAt, endWorkAt} = this.props.data;
 
-		const startHourInitial = startWorkAt
-			? Number.parseInt(startWorkAt.substring(0, 2), 10)
+		const currentDate = new Date().toJSON().split('T')[0];
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+
+		const startHourInitial = startWorkAtDate
+			? startWorkAtDate.getHours()
 			: 8;
-		const startMinutesInitial = startWorkAt
-			? Number.parseInt(startWorkAt.substring(3, 5), 10)
+		const startMinutesInitial = startWorkAtDate
+			? startWorkAtDate.getMinutes()
 			: 30;
-		const endHourInitial = endWorkAt
-			? Number.parseInt(endWorkAt.substring(0, 2), 10)
-			: 19;
-		const endMinutesInitial = endWorkAt
-			? Number.parseInt(endWorkAt.substring(3, 5), 10)
+		const endHourInitial = endWorkAtDate ? endWorkAtDate.getHours() : 19;
+		const endMinutesInitial = endWorkAtDate
+			? endWorkAtDate.getMinutes()
 			: 0;
 		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',

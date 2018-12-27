@@ -54,22 +54,27 @@ const Emoji = styled('div')`
 class OnboardingThirdStep extends Component {
 	render() {
 		const {
-			me, getNextStep, getPreviousStep, step,
+			me: {startWorkAt, endWorkAt},
+			getNextStep,
+			getPreviousStep,
+			step,
 		} = this.props;
 
-		const startHourInitial = me.startWorkAt
-			? Number.parseInt(me.startWorkAt.substring(0, 2), 10)
+		const currentDate = new Date().toJSON().split('T')[0];
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+
+		const startHourInitial = startWorkAtDate
+			? startWorkAtDate.getHours()
 			: 8;
-		const startMinutesInitial = me.startWorkAt
-			? Number.parseInt(me.startWorkAt.substring(3, 5), 10)
+		const startMinutesInitial = startWorkAtDate
+			? startWorkAtDate.getMinutes()
 			: 30;
-		const endHourInitial = me.endWorkAt
-			? Number.parseInt(me.endWorkAt.substring(0, 2), 10)
-			: 19;
-		const endMinutesInitial = me.endWorkAt
-			? Number.parseInt(me.endWorkAt.substring(3, 5), 10)
+		const endHourInitial = endWorkAtDate ? endWorkAtDate.getHours() : 19;
+		const endMinutesInitial = endWorkAtDate
+			? endWorkAtDate.getMinutes()
 			: 0;
-		const workingDaysInitial = me.workingDays || [
+		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',
 			'TUESDAY',
 			'WEDNESDAY',

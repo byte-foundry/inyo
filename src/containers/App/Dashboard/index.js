@@ -50,7 +50,7 @@ class Dashboard extends Component {
 			window.$crisp.push([
 				'set',
 				'session:event',
-				[[['item_finished', {}, 'yellow']]],
+				[[['item_finished', undefined, 'yellow']]],
 			]);
 			const data = cache.readQuery({
 				query: GET_PROJECT_DATA,
@@ -64,6 +64,52 @@ class Dashboard extends Component {
 			);
 
 			section.items[itemIndex].status = finishedItem.status;
+			try {
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw e;
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
+	snoozeItem = (itemId, sectionId, during = 1, snoozeItem) => snoozeItem({
+		variables: {
+			itemId,
+			during,
+		},
+		optimisticResponse: {
+			__typename: 'Mutation',
+			finishItem: {
+				id: itemId,
+				status: 'SNOOZED',
+			},
+		},
+		update: (cache, {data: {snoozeItem: snoozedItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_snoozed', undefined, 'yellow']]],
+			]);
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.find(
+				e => e.id === snoozedItem.id,
+			);
+
+			section.items[itemIndex].status = snoozedItem.status;
 			try {
 				cache.writeQuery({
 					query: GET_PROJECT_DATA,
@@ -158,7 +204,10 @@ class Dashboard extends Component {
 									Bonjour {firstName} !
 								</WelcomeMessage>
 
-								<Tasks finishItem={this.finishItem} />
+								<Tasks
+									finishItem={this.finishItem}
+									snoozeItem={this.snoozeItem}
+								/>
 							</Content>
 						</Main>
 					);

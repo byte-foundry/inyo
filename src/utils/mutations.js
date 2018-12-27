@@ -471,6 +471,15 @@ export const REMOVE_ITEM = gql`
 	}
 `;
 
+export const SNOOZE_ITEM = gql`
+	mutation snoozeItem($itemId: ID!, $during: Int) {
+		snoozeItem(id: $itemId, during: $during) {
+			id
+			status
+		}
+	}
+`;
+
 export const SEND_AMENDMENT = gql`
 	mutation sendAmendment($projectId: ID!) {
 		sendAmendment(projectId: $projectId) {

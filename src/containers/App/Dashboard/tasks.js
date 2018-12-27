@@ -1,6 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import {Query} from 'react-apollo';
+import {Query, Mutation} from 'react-apollo';
 import {withRouter, Route} from 'react-router-dom';
 import styled from 'react-emotion';
 
@@ -20,7 +19,8 @@ import {
 	FlexRow,
 	ModalElem,
 } from '../../../utils/content';
-import {USER_TASKS} from '../../../utils/queries.js';
+import {USER_TASKS} from '../../../utils/queries';
+import {SNOOZE_ITEM} from '../../../utils/mutations';
 import {ReactComponent as TaskIcon} from '../../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../../utils/icons/time.svg';
 import {ReactComponent as DateIcon} from '../../../utils/icons/date.svg';
@@ -54,11 +54,11 @@ const SnoozeContainer = styled('div')`
 	svg {
 		.arrow-head,
 		.circle {
-			stroke: ${gray20};
+			stroke: ${props => (props.snoozed ? gray80 : gray20)};
 		}
 
 		.text {
-			fill: ${gray50};
+			fill: ${props => (props.snoozed ? primaryBlue : gray50)};
 		}
 
 		&:hover {
@@ -74,7 +74,7 @@ const SnoozeContainer = styled('div')`
 	}
 `;
 
-const DashboardTasks = ({history, finishItem}) => (
+const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 	<Query query={USER_TASKS}>
 		{({data, loading}) => {
 			if (loading) return <p>Loading</p>;
@@ -175,9 +175,23 @@ const DashboardTasks = ({history, finishItem}) => (
 										);
 									}}
 								/>
-								<SnoozeContainer>
-									<SnoozeIcon />
-								</SnoozeContainer>
+								<Mutation mutation={SNOOZE_ITEM}>
+									{snoozeItemMutation => (
+										<SnoozeContainer
+											snoozed={item.status === 'SNOOZED'}
+											onClick={() => {
+												snoozeItem(
+													item.id,
+													item.section.id,
+													1,
+													snoozeItemMutation,
+												);
+											}}
+										>
+											<SnoozeIcon />
+										</SnoozeContainer>
+									)}
+								</Mutation>
 							</FlexRow>
 						))
 					) : (
@@ -215,9 +229,22 @@ const DashboardTasks = ({history, finishItem}) => (
 									);
 								}}
 							/>
-							<SnoozeContainer>
-								<SnoozeIcon />
-							</SnoozeContainer>
+							<Mutation mutation={SNOOZE_ITEM}>
+								{snoozeItemMutation => (
+									<SnoozeContainer
+										onClick={() => {
+											snoozeItem(
+												item.id,
+												item.section.id,
+												1,
+												snoozeItemMutation,
+											);
+										}}
+									>
+										<SnoozeIcon />
+									</SnoozeContainer>
+								)}
+							</Mutation>
 						</FlexRow>
 					))}
 

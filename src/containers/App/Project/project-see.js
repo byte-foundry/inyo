@@ -28,7 +28,7 @@ class TasksListUser extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['item_edited', {}, 'yellow']]],
+					[[['item_edited', undefined, 'yellow']]],
 				]);
 				const projectData = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -124,7 +124,7 @@ class TasksListUser extends Component {
 			window.$crisp.push([
 				'set',
 				'session:event',
-				[[['amendment_sent', {}, 'blue']]],
+				[[['amendment_sent', undefined, 'blue']]],
 			]);
 			ReactGA.event({
 				category: 'Project',
@@ -161,7 +161,7 @@ class TasksListUser extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['item_added', {}, 'yellow']]],
+					[[['item_added', undefined, 'yellow']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -193,7 +193,7 @@ class TasksListUser extends Component {
 		window.$crisp.push([
 			'set',
 			'session:event',
-			[[['item_removed', {}, 'yellow']]],
+			[[['item_removed', undefined, 'yellow']]],
 		]);
 		removeItem({
 			variables: {itemId},

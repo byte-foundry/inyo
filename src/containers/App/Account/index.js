@@ -35,12 +35,15 @@ const AccountBody = styled('div')`
 	padding-left: 40px;
 	padding-right: 40px;
 `;
-const Profile = styled(FlexRow)``;
+const Profile = styled(FlexRow)`
+	align-items: flex-start;
+`;
+
 const ProfileSide = styled('div')`
-	float: right;
 	margin-top: 80px;
 	margin-right: 80px;
 	position: sticky;
+	top: 20px;
 `;
 
 const ProfileSideElem = styled(P)`

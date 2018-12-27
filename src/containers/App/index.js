@@ -82,7 +82,7 @@ class App extends Component {
 									component={Onboarding}
 									isAllowed={data && data.me}
 								/>
-								<Redirect to="/app/projects" />
+								<Redirect to="/app/dashboard" />
 							</Switch>
 							{data
 								&& data.me && (

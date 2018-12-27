@@ -74,10 +74,7 @@ class ProjectSection extends Component {
 					<div>
 						<Mutation mutation={REMOVE_SECTION}>
 							{(removeSection) => {
-								const display = data.items.reduce(
-									(acc, item) => acc && item.status !== 'FINISHED',
-									true,
-								);
+								const display = data.items.every(item => item.status !== 'FINISHED')
 
 								return (
 									display && (

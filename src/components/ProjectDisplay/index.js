@@ -48,6 +48,7 @@ const BackButton = styled(Button)`
 const ProjectDisplayTitle = styled(H1)`
 	color: ${primaryNavyBlue};
 	margin: 0;
+	flex: 1;
 `;
 
 const ProjectSections = styled('div')``;
@@ -120,8 +121,7 @@ const TotalContainer = styled('div')``;
 
 const StartProjectButton = styled(Button)`
 	width: auto;
-	padding: 0.5em 1em;
-	margin-bottom: 0.5em;
+	margin-left: 10px;
 `;
 
 class ProjectDisplay extends Component {
@@ -188,11 +188,20 @@ class ProjectDisplay extends Component {
 										Retour à la liste des projets
 									</BackButton>
 								)}
-								{mode === 'edit' && (
-									<ProjectRow justifyContent="space-between">
-										<ProjectDisplayTitle>
-											Remplissez votre projet
-										</ProjectDisplayTitle>
+								<ProjectRow justifyContent="space-between">
+									<ProjectDisplayTitle>
+										{mode === 'edit'
+											&& 'Remplissez votre projet'}
+										{mode === 'see' && 'Projet en cours'}
+									</ProjectDisplayTitle>
+									<Button
+										size="Medium"
+										onClick={() => this.duplicateProject(project)
+										}
+									>
+										Dupliquer ce projet
+									</Button>
+									{mode === 'edit' && (
 										<Mutation
 											mutation={START_PROJECT}
 											onError={(error) => {
@@ -224,8 +233,8 @@ class ProjectDisplay extends Component {
 												</StartProjectButton>
 											)}
 										</Mutation>
-									</ProjectRow>
-								)}
+									)}
+								</ProjectRow>
 								<ProjectRow
 									noPadding
 									justifyContent="space-between"
@@ -416,13 +425,6 @@ class ProjectDisplay extends Component {
 												)}
 											</Mutation>
 										)}
-										<Button
-											onClick={() => this.duplicateProject(project)
-											}
-											theme="primary"
-										>
-											Dupliquer ce projet
-										</Button>
 									</SideActions>
 								</FlexRow>
 							</ProjectDisplayMain>

@@ -1,3 +1,4 @@
+import gql from 'graphql-tag';
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
@@ -15,33 +16,59 @@ import FormElem from '../FormElem';
 
 const SignupFormMain = styled('div')``;
 
-class SignupForm extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			shouldRedirect: false,
-		};
+const CHECK_UNIQUE_EMAIL = gql`
+	mutation checkEmailAvailability($email: String!) {
+		isAvailable: checkEmailAvailability(email: $email)
 	}
+`;
+
+class SignupForm extends Component {
+	state = {
+		shouldRedirect: false,
+	};
 
 	render() {
 		const {shouldRedirect} = this.state;
-		const from = this.props.from || '/app/onboarding';
 
 		if (shouldRedirect) {
-			return <Redirect to={from} />;
+			return <Redirect to="/app/onboarding" />;
 		}
 		return (
 			<SignupFormMain>
 				<Mutation mutation={SIGNUP}>
 					{signup => (
+						<Mutation
+							mutation={CHECK_UNIQUE_EMAIL}
+							context={{
+								debounceKey: 'emailAvailability',
+								debounceTimeout: 300,
+							}}
+						>
+						{checkEmailAvailability => (
 						<Mutation mutation={CREATE_PROJECT}>
 							{createProject => (
 								<Formik
-									initialValues={{email: ''}}
+									initialValues={{
+										email: '',
+										password: '',
+										firstname: '',
+										lastname: '',
+									}}
 									validationSchema={Yup.object().shape({
 										email: Yup.string()
 											.email("L'email doit être valide")
-											.required('Required'),
+											.required('Requis')
+											.test(
+												'unique-email',
+												"L'email est déjà utilisé",
+												value => checkEmailAvailability({
+													variables: {
+														email: value,
+													},
+												}).then(
+													({data}) => data.isAvailable,
+												),
+											),
 										password: Yup.string().required(
 											'Requis',
 										),

@@ -8,6 +8,7 @@ import {
 	InMemoryCache,
 	IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
+import DebounceLink from 'apollo-link-debounce';
 import introspectionQueryResultData from './fragmentTypes.json';
 
 import {GRAPHQL_API} from './constants';
@@ -49,6 +50,9 @@ export const ERRORS = {
 	FilterCannotBeNullOnToManyField: 3033,
 	UnhandledFunctionError: 3034,
 };
+
+const DEFAULT_DEBOUNCE_TIMEOUT = 100;
+const debounceLink = new DebounceLink(DEFAULT_DEBOUNCE_TIMEOUT);
 
 const httpLink = createHttpLink({
 	uri: GRAPHQL_API,
@@ -113,7 +117,13 @@ const stateLink = withClientState({
 });
 
 const client = new ApolloClient({
-	link: ApolloLink.from([withToken, errorLink, stateLink, httpLink]),
+	link: ApolloLink.from([
+		withToken,
+		debounceLink,
+		errorLink,
+		stateLink,
+		httpLink,
+	]),
 	cache,
 	connectToDevTools: true,
 	queryDeduplication: true,

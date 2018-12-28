@@ -49,6 +49,7 @@ const SideActions = styled(FlexColumn)`
 const ProjectName = styled(H3)`
 	color: ${primaryBlue};
 	margin: 10px 0 20px;
+	flex: 1;
 `;
 const CenterContent = styled(FlexColumn)`
 	background: ${gray10};
@@ -83,6 +84,7 @@ const ProjectAction = styled(Button)`
 
 const TaskLegend = styled('div')`
 	margin-top: 20px;
+	margin-bottom: 20px;
 `;
 
 const InfosOnItems = styled('div')`
@@ -110,8 +112,8 @@ const TotalContainer = styled('div')``;
 
 const StartProjectButton = styled(Button)`
 	width: auto;
-	padding: 0.5em 1em;
-	margin-bottom: 0.5em;
+	margin-left: 10px;
+	margin-bottom: 10px;
 `;
 
 class ProjectDisplay extends Component {
@@ -122,6 +124,10 @@ class ProjectDisplay extends Component {
 			apolloTriggerRenderTemporaryFix: false,
 		};
 	}
+
+	duplicateProject = (project) => {
+		this.props.history.push(`/app/projects/create/from/${project.id}`);
+	};
 
 	getProjectTotal = (project) => {
 		let sumDays = 0;
@@ -224,29 +230,32 @@ class ProjectDisplay extends Component {
 									noPadding
 									justifyContent="space-between"
 								>
-									<FlexColumn>
-										<ProjectName>
-											<Mutation mutation={UPDATE_PROJECT}>
-												{updateProject => (
-													<InlineEditable
-														value={project.name}
-														type="text"
-														placeholder="Nom de votre projet"
-														disabled={
-															mode !== 'edit'
-														}
-														onFocusOut={(value) => {
-															editProjectTitle(
-																value,
-																project.id,
-																updateProject,
-															);
-														}}
-													/>
-												)}
-											</Mutation>
-										</ProjectName>
-									</FlexColumn>
+									<ProjectName>
+										<Mutation mutation={UPDATE_PROJECT}>
+											{updateProject => (
+												<InlineEditable
+													value={project.name}
+													type="text"
+													placeholder="Nom de votre projet"
+													disabled={mode !== 'edit'}
+													onFocusOut={(value) => {
+														editProjectTitle(
+															value,
+															project.id,
+															updateProject,
+														);
+													}}
+												/>
+											)}
+										</Mutation>
+									</ProjectName>
+									<StartProjectButton
+										size="Medium"
+										onClick={() => this.duplicateProject(project)
+										}
+									>
+										Dupliquer ce projet
+									</StartProjectButton>
 									{mode === 'edit' && (
 										<Mutation
 											mutation={START_PROJECT}

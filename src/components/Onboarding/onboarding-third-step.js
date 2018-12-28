@@ -55,6 +55,7 @@ class OnboardingThirdStep extends Component {
 	render() {
 		const {
 			me: {startWorkAt, endWorkAt},
+			me,
 			getNextStep,
 			getPreviousStep,
 			step,
@@ -66,23 +67,26 @@ class OnboardingThirdStep extends Component {
 		const endWorkAtDate
 			= endWorkAt && new Date(`${currentDate}T${endWorkAt}`);
 
-		const startHourInitial = startWorkAtDate
-			? startWorkAtDate.getHours()
-			: 8;
-		const startMinutesInitial = startWorkAtDate
-			? startWorkAtDate.getMinutes()
-			: 30;
-		const endHourInitial = endWorkAtDate ? endWorkAtDate.getHours() : 19;
-		const endMinutesInitial = endWorkAtDate
-			? endWorkAtDate.getMinutes()
-			: 0;
-		const workingDaysInitial = this.props.me.workingDays || [
-			'MONDAY',
-			'TUESDAY',
-			'WEDNESDAY',
-			'THURSDAY',
-			'FRIDAY',
-		];
+		const startHourInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 8
+				: startWorkAtDate.getHours();
+		const startMinutesInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 30
+				: startWorkAtDate.getMinutes();
+		const endHourInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 19
+				: endWorkAtDate.getHours();
+		const endMinutesInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? endWorkAtDate.getMinutes()
+				: 0;
+		const workingDaysInitial
+			= me.workingDays && me.workingDays.length
+				? me.workingDays
+				: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 
 		return (
 			<OnboardingStep>

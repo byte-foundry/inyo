@@ -25,12 +25,13 @@ const CommentImage = styled('div')`
 	min-width: 40px;
 `;
 const CommentInfo = styled('time')`
-	font-size: 11px;
+	font-size: 13px;
+	margin-bottom: 5px;
 	color: ${gray70};
 `;
 const CommentText = styled('div')`
 	padding-top: 2px;
-	font-size: 13px;
+	font-size: 15px;
 `;
 const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
@@ -50,8 +51,8 @@ class Comment extends Component {
 			<CommentMain>
 				<FlexRow>
 					<CommentImage isCustomer={isCustomer}>
-						{firstName.charAt(0)}
-						{lastName.charAt(0)}
+						{firstName && firstName.charAt(0)}
+						{lastName && lastName.charAt(0)}
 					</CommentImage>
 					<CommentContent>
 						<CommentInfo dateTime={createdAt}>

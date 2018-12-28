@@ -73,21 +73,27 @@ class ProjectSection extends Component {
 					</SectionTitle>
 					<div>
 						<Mutation mutation={REMOVE_SECTION}>
-							{removeSection => (
-								<ProjectAction
-									theme="Link"
-									size="XSmall"
-									type="delete"
-									onClick={() => {
-										this.props.removeSection(
-											data.id,
-											removeSection,
-										);
-									}}
-								>
-									Supprimer la section
-								</ProjectAction>
-							)}
+							{(removeSection) => {
+								const display = data.items.every(item => item.status !== 'FINISHED')
+
+								return (
+									display && (
+										<ProjectAction
+											theme="Link"
+											size="XSmall"
+											type="delete"
+											onClick={() => {
+												this.props.removeSection(
+													data.id,
+													removeSection,
+												);
+											}}
+										>
+											Supprimer la section
+										</ProjectAction>
+									)
+								);
+							}}
 						</Mutation>
 					</div>
 				</FlexRow>

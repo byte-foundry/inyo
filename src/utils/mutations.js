@@ -739,3 +739,9 @@ export const POST_COMMENT = gql`
 		}
 	}
 `;
+
+export const CHECK_UNIQUE_EMAIL = gql`
+	mutation checkEmailAvailability($email: String!) {
+		isAvailable: checkEmailAvailability(email: $email)
+	}
+`;

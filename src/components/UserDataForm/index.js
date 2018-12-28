@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/browser';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
 
-import {UPDATE_USER} from '../../utils/mutations';
+import {UPDATE_USER, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
 import {
 	Button,
 	FlexRow,
@@ -42,145 +42,180 @@ class UserDataForm extends Component {
 			<UserDataFormMain>
 				<Mutation mutation={UPDATE_USER}>
 					{updateUser => (
-						<Formik
-							initialValues={{
-								firstName,
-								lastName,
-								email,
-							}}
-							validationSchema={Yup.object().shape({
-								email: Yup.string()
-									.email('Email invalide')
-									.required('Requis'),
-								firstName: Yup.string().required('Requis'),
-								lastName: Yup.string().required('Requis'),
-							})}
-							onSubmit={async (values, actions) => {
-								actions.setSubmitting(false);
-								try {
-									updateUser({
-										variables: {
-											firstName: values.firstName,
-											lastName: values.lastName,
-											email: values.email,
-										},
-										update: (
-											cache,
-											{data: {updateUser: updatedUser}},
-										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'updated_user_data',
-															undefined,
-															'green',
-														],
-													],
-												],
-											]);
-											const data = cache.readQuery({
-												query: GET_USER_INFOS,
-											});
-
-											data.me = updatedUser;
-											try {
-												cache.writeQuery({
-													query: GET_USER_INFOS,
-													data,
-												});
-												ReactGA.event({
-													category: 'User',
-													action: 'Updated user data',
-												});
-												this.props.done();
-											}
-											catch (e) {
-												throw e;
-											}
-										},
-									});
-								}
-								catch (error) {
-									if (
-										error.networkError
-										&& error.networkError.result
-										&& error.networkError.result.errors
-									) {
-										Sentry.captureException(
-											error.networkError.result.errors,
-										);
-									}
-									else {
-										Sentry.captureException(error);
-									}
-									actions.setSubmitting(false);
-									actions.setErrors(error);
-									actions.setStatus({
-										msg: "Quelque chose s'est mal passé",
-									});
-								}
+						<Mutation
+							mutation={CHECK_UNIQUE_EMAIL}
+							context={{
+								debounceKey: 'emailAvailability',
+								debounceTimeout: 300,
 							}}
 						>
-							{(props) => {
-								const {status, handleSubmit} = props;
+							{checkEmailAvailability => (
+								<Formik
+									initialValues={{
+										firstName,
+										lastName,
+										email,
+									}}
+									validationSchema={Yup.object().shape({
+										email: Yup.string()
+											.email('Email invalide')
+											.required('Requis')
+											.test(
+												'unique-email',
+												"L'email est déjà utilisé",
+												value => email === value
+													|| checkEmailAvailability({
+														variables: {
+															email: value,
+														},
+													}).then(
+														({data}) => data.isAvailable,
+													),
+											),
+										firstName: Yup.string().required(
+											'Requis',
+										),
+										lastName: Yup.string().required(
+											'Requis',
+										),
+									})}
+									onSubmit={async (values, actions) => {
+										actions.setSubmitting(false);
+										try {
+											updateUser({
+												variables: {
+													firstName: values.firstName,
+													lastName: values.lastName,
+													email: values.email,
+												},
+												update: (
+													cache,
+													{
+														data: {
+															updateUser: updatedUser,
+														},
+													},
+												) => {
+													window.$crisp.push([
+														'set',
+														'session:event',
+														[
+															[
+																[
+																	'updated_user_data',
+																	undefined,
+																	'green',
+																],
+															],
+														],
+													]);
+													const data = cache.readQuery(
+														{
+															query: GET_USER_INFOS,
+														},
+													);
 
-								return (
-									<form onSubmit={handleSubmit}>
-										<ProfileSection>
-											<FormContainer>
-												<FlexRow justifyContent="space-between">
-													<FormElem
-														{...props}
-														name="firstName"
-														type="text"
-														label="Prénom"
-														placeholder="Jacques"
-														padded
-														required
-													/>
-													<FormElem
-														{...props}
-														name="lastName"
-														type="text"
-														label="Nom"
-														placeholder="Bertrand"
-														padded
-														required
-													/>
-												</FlexRow>
-												<FlexRow justifyContent="space-between">
-													<FormElem
-														{...props}
-														name="email"
-														type="email"
-														label="Email"
-														placeholder="jacques@bertrandsa.com"
-														padded
-														required
-													/>
-												</FlexRow>
-											</FormContainer>
-											{status
-												&& status.msg && (
-												<ErrorInput>
-													{status.msg}
-												</ErrorInput>
-											)}
-										</ProfileSection>
-										<UpdateButton
-											theme="Primary"
-											size="Medium"
-											type="submit"
-										>
-											Mettre à jour
-										</UpdateButton>
-									</form>
-								);
-							}}
-						</Formik>
+													data.me = updatedUser;
+													try {
+														cache.writeQuery({
+															query: GET_USER_INFOS,
+															data,
+														});
+														ReactGA.event({
+															category: 'User',
+															action:
+																'Updated user data',
+														});
+														this.props.done();
+													}
+													catch (e) {
+														throw e;
+													}
+												},
+											});
+										}
+										catch (error) {
+											if (
+												error.networkError
+												&& error.networkError.result
+												&& error.networkError.result.errors
+											) {
+												Sentry.captureException(
+													error.networkError.result
+														.errors,
+												);
+											}
+											else {
+												Sentry.captureException(error);
+											}
+											actions.setSubmitting(false);
+											actions.setErrors(error);
+											actions.setStatus({
+												msg:
+													"Quelque chose s'est mal passé",
+											});
+										}
+									}}
+								>
+									{(props) => {
+										const {status, handleSubmit} = props;
+
+										return (
+											<form onSubmit={handleSubmit}>
+												<ProfileSection>
+													<FormContainer>
+														<FlexRow justifyContent="space-between">
+															<FormElem
+																{...props}
+																name="firstName"
+																type="text"
+																label="Prénom"
+																placeholder="Jacques"
+																padded
+																required
+															/>
+															<FormElem
+																{...props}
+																name="lastName"
+																type="text"
+																label="Nom"
+																placeholder="Bertrand"
+																padded
+																required
+															/>
+														</FlexRow>
+														<FlexRow justifyContent="space-between">
+															<FormElem
+																{...props}
+																name="email"
+																type="email"
+																label="Email"
+																placeholder="jacques@bertrandsa.com"
+																padded
+																required
+															/>
+														</FlexRow>
+													</FormContainer>
+													{status
+														&& status.msg && (
+														<ErrorInput>
+															{status.msg}
+														</ErrorInput>
+													)}
+												</ProfileSection>
+												<UpdateButton
+													theme="Primary"
+													size="Medium"
+													type="submit"
+												>
+													Mettre à jour
+												</UpdateButton>
+											</form>
+										);
+									}}
+								</Formik>
+							)}
+						</Mutation>
 					)}
 				</Mutation>
 			</UserDataFormMain>

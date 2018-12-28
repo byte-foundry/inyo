@@ -92,6 +92,7 @@ const ProjectAction = styled(Button)`
 
 const TaskLegend = styled('div')`
 	margin-top: 20px;
+	margin-bottom: 20px;
 `;
 
 const InfosOnItems = styled('div')`
@@ -131,6 +132,10 @@ class ProjectDisplay extends Component {
 			apolloTriggerRenderTemporaryFix: false,
 		};
 	}
+
+	duplicateProject = (project) => {
+		this.props.history.push(`/app/projects/create/from/${project.id}`);
+	};
 
 	getProjectTotal = (project) => {
 		let sumDays = 0;
@@ -411,6 +416,13 @@ class ProjectDisplay extends Component {
 												)}
 											</Mutation>
 										)}
+										<Button
+											onClick={() => this.duplicateProject(project)
+											}
+											theme="primary"
+										>
+											Dupliquer ce projet
+										</Button>
 									</SideActions>
 								</FlexRow>
 							</ProjectDisplayMain>

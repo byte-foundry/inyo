@@ -24,7 +24,7 @@ const CommentImage = styled('div')`
 	text-transform: uppercase;
 	min-width: 40px;
 `;
-const CommentInfo = styled('div')`
+const CommentInfo = styled('time')`
 	font-size: 11px;
 	color: ${gray70};
 `;
@@ -54,9 +54,8 @@ class Comment extends Component {
 						{lastName.charAt(0)}
 					</CommentImage>
 					<CommentContent>
-						<CommentInfo>
-							{new Date(createdAt).toLocaleDateString('FR-fr')}{' '}
-							{new Date(createdAt).toLocaleTimeString('FR-fr')}
+						<CommentInfo dateTime={createdAt}>
+							{new Date(createdAt).toLocaleString()}
 						</CommentInfo>
 						<CommentText>{text}</CommentText>
 					</CommentContent>

@@ -23,14 +23,6 @@ const getTaskIconByStatus = (status) => {
 		return <TaskIcon />;
 	case 'FINISHED':
 		return <TaskIcon />;
-	case 'UPDATED':
-		return <PendingIcon />;
-	case 'UPDATED_SENT':
-		return <PendingIcon />;
-	case 'ADDED':
-		return <PendingIcon />;
-	case 'ADDED_SENT':
-		return <PendingIcon />;
 	default:
 		return false;
 	}
@@ -47,28 +39,6 @@ const getTaskIconStylesByStatus = (props) => {
 				}
 				.cls-2 {
 					stroke: ${primaryBlue};
-				}
-			`;
-	case 'UPDATED':
-		return css``;
-	case 'UPDATED_SENT':
-		return css`
-				.cls-2 {
-					stroke: ${primaryBlue};
-				}
-				.cls-1 {
-					stroke: ${primaryNavyBlue};
-				}
-			`;
-	case 'ADDED':
-		return css``;
-	case 'ADDED_SENT':
-		return css`
-				.cls-2 {
-					stroke: ${primaryBlue};
-				}
-				.cls-1 {
-					stroke: ${primaryNavyBlue};
 				}
 			`;
 	default:
@@ -143,7 +113,7 @@ class TaskStatus extends Component {
 					<TaskStatusMain
 						onClick={() => {
 							if (
-								(mode === 'see'
+								((mode === 'see' || mode === 'dashboard')
 									&& (!customerViewMode
 										&& reviewer === 'USER'
 										&& status === 'PENDING'))

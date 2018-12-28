@@ -7,6 +7,7 @@ const CommentIconMain = styled('div')`
 	background: ${props => (props.commentLength > 0 ? '#3860ff' : gray20)};
 	color: ${primaryWhite};
 	padding: 5px;
+	flex: 0 0 18px;
 	width: 18px;
 	height: 10px;
 	position: relative;

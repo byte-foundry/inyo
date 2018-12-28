@@ -3,13 +3,17 @@ import {Query} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
 import styled, {css} from 'react-emotion';
 import {ToastContainer, toast} from 'react-toastify';
+
+import TopBar, {
+	TopBarTitle,
+	TopBarButton,
+	TopBarNavigation,
+} from '../../../components/TopBar';
 import {
-	H1,
 	H3,
 	P,
 	Button,
 	gray50,
-	primaryNavyBlue,
 	primaryBlue,
 	signalRed,
 	FlexRow,
@@ -24,6 +28,8 @@ import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserSettings from '../../../components/UserSettings';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
+import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+// import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
@@ -70,12 +76,6 @@ const ProfileSection = styled('div')`
 	padding: 20px 40px;
 	border: 1px solid ${gray20};
 `;
-const BackButton = styled(Button)`
-	padding: 10px 5px;
-	font-size: 11px;
-	margin: 10px 0 10px 0px;
-	color: ${gray50};
-`;
 const LogoutButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 15px;
@@ -85,10 +85,6 @@ const LogoutButton = styled(Button)`
 
 const WelcomeMessage = styled(H3)`
 	color: ${primaryBlue};
-`;
-const TopBarTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-	margin-top: 0;
 `;
 const ProfileTitle = styled(H3)`
 	font-size: 25px;
@@ -128,18 +124,58 @@ class Account extends Component {
 						return (
 							<AccountMain>
 								<ToastContainer />
+
+								<TopBar>
+									<TopBarTitle>Mon Compte</TopBarTitle>
+									<TopBarNavigation>
+										<TopBarButton
+											theme="Primary"
+											size="Medium"
+											onClick={() => {
+												this.props.history.push(
+													'/app/projects/create',
+												);
+											}}
+										>
+											Créer un nouveau projet
+										</TopBarButton>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/dashboard',
+												);
+											}}
+										>
+											<FoldersIcon />
+										</TopBarButton>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/projects',
+												);
+											}}
+										>
+											<FoldersIcon />
+										</TopBarButton>
+										{/* <TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/customers',
+												);
+											}}
+										>
+											<UsersIcon />
+										</TopBarButton> */}
+									</TopBarNavigation>
+								</TopBar>
+
 								<AccountBody>
-									<BackButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => this.props.history.push(
-											'/app/projects',
-										)
-										}
-									>
-										Retour à la liste des projets
-									</BackButton>
-									<TopBarTitle>Mon compte</TopBarTitle>
 									<WelcomeMessage>
 										Bonjour {firstName} !
 									</WelcomeMessage>

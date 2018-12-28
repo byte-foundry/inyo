@@ -2,10 +2,16 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import ReactGA from 'react-ga';
 import {ToastContainer, toast} from 'react-toastify';
+import {Route} from 'react-router-dom';
 
 import {GET_PROJECT_DATA} from '../../../utils/queries';
 
-import {Loading} from '../../../utils/content';
+import ItemView from '../../../components/ItemView';
+import {
+	Loading,
+	ModalContainer as Modal,
+	ModalElem,
+} from '../../../utils/content';
 
 import ProjectDisplay from '../../../components/ProjectDisplay';
 
@@ -384,9 +390,8 @@ class TasksListUser extends Component {
 					loading, error, data, refetch,
 				}) => {
 					if (loading) return <Loading />;
-					if (error) {
-						throw new Error(error);
-					}
+					if (error) throw error;
+
 					const {project} = data;
 					const timePlanned = project.sections.reduce(
 						(timeSectionSum, section) => timeSectionSum
@@ -406,17 +411,7 @@ class TasksListUser extends Component {
 							),
 						false,
 					);
-					const overtime = project.sections.reduce(
-						(sectionOvertime, section) => sectionOvertime
-							+ section.items.reduce(
-								(itemOvertime, item) => itemOvertime
-									+ (item.pendingUnit
-										? item.pendingUnit - item.unit
-										: 0),
-								0,
-							),
-						0,
-					);
+					const overtime = 0;
 
 					const totalItems = project.sections.reduce(
 						(sumItems, section) => sumItems + section.items.length,
@@ -453,6 +448,23 @@ class TasksListUser extends Component {
 								issuer={project.issuer}
 								refetch={refetch}
 								mode="see"
+							/>
+							<Route
+								path="/app/projects/:projectId/see/items/:itemId"
+								render={({match, history}) => (
+									<Modal
+										onDismiss={() => history.push(
+											`/app/projects/${projectId}/see`,
+										)
+										}
+									>
+										<ModalElem>
+											<ItemView
+												id={match.params.itemId}
+											/>
+										</ModalElem>
+									</Modal>
+								)}
 							/>
 						</div>
 					);

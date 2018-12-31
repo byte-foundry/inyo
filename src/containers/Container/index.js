@@ -10,14 +10,7 @@ import App from '../App';
 import Auth from '../App/Auth';
 import SentryReporter from '../SentryReporter';
 
-const BodyMain = styled(Body)`
-	nav {
-		a {
-			color: #61dafb;
-			margin-right: 10px;
-		}
-	}
-`;
+const BodyMain = styled(Body)``;
 
 Sentry.init({
 	dsn: 'https://d6ed2b1e0a594835b2f768405b6c5e90@sentry.io/1307916',

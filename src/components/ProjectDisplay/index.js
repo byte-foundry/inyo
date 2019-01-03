@@ -33,6 +33,7 @@ import {
 	Loading,
 } from '../../utils/content';
 import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
+import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
 import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -198,7 +199,7 @@ class ProjectDisplay extends Component {
 													);
 												}}
 											>
-												<FoldersIcon />
+												<DashboardIcon />
 											</TopBarButton>
 											<TopBarButton
 												theme="Link"

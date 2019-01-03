@@ -19,6 +19,7 @@ class FormCheckbox extends Component {
 			errors,
 			touched,
 			required,
+			onChange,
 		} = this.props;
 
 		return (
@@ -26,20 +27,20 @@ class FormCheckbox extends Component {
 				{this.props.label && (
 					<Field>
 						{({form}) => (
-							<Label htmlFor={name} required={required}>
+							<Label required={required}>
 								<input
 									type="checkbox"
 									checked={values[name]}
 									onBlur={handleBlur}
-									onChange={() => form.setFieldValue(name, !values[name])
-									}
+									onChange={(e) => {
+										form.setFieldValue(
+											name,
+											e.target.checked,
+										);
+										onChange(e);
+									}}
 								/>
-								<CheckboxLabel
-									onClick={() => form.setFieldValue(name, !values[name])
-									}
-								>
-									{label}
-								</CheckboxLabel>
+								<CheckboxLabel>{label}</CheckboxLabel>
 							</Label>
 						)}
 					</Field>
@@ -54,5 +55,9 @@ class FormCheckbox extends Component {
 		);
 	}
 }
+
+FormCheckbox.defaultProps = {
+	onChange: () => {},
+};
 
 export default FormCheckbox;

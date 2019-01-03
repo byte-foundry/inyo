@@ -6,8 +6,6 @@ import {primaryBlue, gray30, primaryWhite} from '../../utils/content';
 const SwitchButtonMain = styled('div')`
 	display: flex;
 	margin: 0 10px 10px;
-	justify-content: center;
-	width: 100%;
 `;
 
 const SwitchContainer = styled('div')`
@@ -30,29 +28,26 @@ const SwitchToggle = styled('div')`
 `;
 
 export default function SwitchButton({
-	left,
-	right,
-	value,
-	setFieldValue,
-	name,
+	left, right, value, onChange,
 }) {
 	return (
 		<SwitchButtonMain>
-			<span onClick={() => setFieldValue(name, left.value)}>
-				{left.label}
-			</span>
+			<span onClick={() => onChange(left.value)}>{left.label}</span>
 			<SwitchContainer
 				onClick={() => {
-					value === left.value
-						? setFieldValue(name, right.value)
-						: setFieldValue(name, left.value);
+					const selectedValue
+						= value === left.value ? right.value : left.value;
+
+					onChange(selectedValue);
 				}}
 			>
 				<SwitchToggle checked={value === right.value} />
 			</SwitchContainer>
-			<span onClick={() => setFieldValue(name, right.value)}>
-				{right.label}
-			</span>
+			<span onClick={() => onChange(right.value)}>{right.label}</span>
 		</SwitchButtonMain>
 	);
 }
+
+SwitchButton.defaultProps = {
+	onChange: () => {},
+};

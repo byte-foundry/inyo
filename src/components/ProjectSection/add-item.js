@@ -23,6 +23,7 @@ import {
 import {GET_ITEMS} from '../../utils/queries';
 
 import SwitchButton from '../SwitchButton';
+import FormCheckbox from '../FormCheckbox';
 
 const AddItemMain = styled('div')`
 	background: ${primaryWhite};
@@ -71,15 +72,23 @@ class AddItem extends Component {
 				<Formik
 					initialValues={{
 						...item,
+						isContentAcquisition:
+							item.type === 'CONTENT_ACQUISITION',
 					}}
 					validationSchema={Yup.object().shape({
 						name: Yup.string().required('Requis'),
 						unit: Yup.number().required('Requis'),
 						description: Yup.string(),
 						reviewer: Yup.string().required('Requis'),
+						isContentAcquisition: Yup.string().required('Requis'),
 					})}
-					onSubmit={(values) => {
-						done(values);
+					onSubmit={({isContentAcquisition, ...values}) => {
+						done({
+							...values,
+							type: isContentAcquisition
+								? 'CONTENT_ACQUISITION'
+								: 'DEFAULT',
+						});
 					}}
 				>
 					{(props) => {
@@ -105,9 +114,30 @@ class AddItem extends Component {
 												'Votre client exécute la tâche',
 											value: 'CUSTOMER',
 										}}
-										name="reviewer"
-										setFieldValue={setFieldValue}
 										value={reviewer}
+										onChange={(value) => {
+											setFieldValue('reviewer', value);
+											if (value === 'USER') {
+												setFieldValue(
+													'isContentAcquisition',
+													false,
+												);
+											}
+										}}
+									/>
+									<FormCheckbox
+										{...props}
+										name="isContentAcquisition"
+										type="checkbox"
+										label="Récupération contenu"
+										onChange={(e) => {
+											if (e.target.checked) {
+												setFieldValue(
+													'reviewer',
+													'CUSTOMER',
+												);
+											}
+										}}
 									/>
 								</FlexRow>
 								<FlexRow justifyContent="space-between">

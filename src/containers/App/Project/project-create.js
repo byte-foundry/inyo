@@ -12,6 +12,7 @@ import TopBar, {
 } from '../../../components/TopBar';
 import {Loading} from '../../../utils/content';
 import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
 import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 
 const CreateProjectMain = styled('div')`
@@ -51,7 +52,7 @@ class CreateProject extends Component {
 												);
 											}}
 										>
-											<FoldersIcon />
+											<DashboardIcon />
 										</TopBarButton>
 										<TopBarButton
 											theme="Link"

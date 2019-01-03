@@ -13,6 +13,7 @@ import {
 	primaryWhite,
 	gray50,
 	gray80,
+	primaryBlue,
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
@@ -32,12 +33,13 @@ const Comments = styled('div')`
 
 const ItemComment = styled('textarea')`
 	margin-top: 10px;
-	margin-left: 60px;
 	width: 100%;
 	background: ${primaryWhite};
 	border: 1px solid ${gray20};
-	padding: 15px 10px;
+	padding: 15px;
 	font-family: 'Ligne';
+	font-size: 12px;
+	line-height: 1.6;
 	color: ${gray80};
 	margin-bottom: 10px;
 `;
@@ -49,8 +51,7 @@ const ActionButton = styled(Button)`
 `;
 
 const Empty = styled('p')`
-	color: ${gray50};
-	text-align: center;
+	color: ${primaryBlue};
 `;
 
 class CommentList extends Component {
@@ -84,7 +85,10 @@ class CommentList extends Component {
 								{comments.length ? (
 									<CommentRow>{comments}</CommentRow>
 								) : (
-									<Empty>Il n'y a pas de commentaires.</Empty>
+									<Empty>
+										Une question ou une suggestion? Ajoutez
+										un commentaire.
+									</Empty>
 								)}
 							</Comments>
 							<Mutation mutation={POST_COMMENT}>

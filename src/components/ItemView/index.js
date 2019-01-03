@@ -6,7 +6,13 @@ import styled from 'react-emotion';
 import Plural from '../Plural';
 import TaskStatus from '../TaskStatus';
 import {
-	H2, H3, gray50, gray80, SpinningBubble,
+	H2,
+	H3,
+	gray50,
+	gray70,
+	SpinningBubble,
+	primaryBlue,
+	secondaryLightBlue,
 } from '../../utils/content';
 import CommentList from '../CommentList';
 
@@ -17,11 +23,18 @@ import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
 
 const Header = styled('div')`
 	display: flex;
-	align-items: baseline;
-	color: ${gray50};
+	justify-content: start;
+	margin-bottom: 1em;
 
-	span {
-		margin: 0 5px;
+	h3 {
+		font-size: 1.4rem;
+		color: ${primaryBlue};
+		margin: 0;
+	}
+
+	h2 {
+		font-size: 2rem;
+		margin: 10px 0;
 	}
 `;
 
@@ -29,7 +42,8 @@ const Metas = styled('div')`
 	display: flex;
 	align-items: center;
 	color: ${gray50};
-	margin-left: -9px;
+	margin-left: -5px;
+	padding-bottom: 1em;
 `;
 
 const Meta = styled('div')`
@@ -47,14 +61,15 @@ const MetaTime = styled('time')`
 `;
 
 const NoDescription = styled('div')`
-	text-align: center;
 	color: ${gray50};
 `;
 
 const Description = styled('div')`
-	color: ${gray80};
-	margin-top: 30px;
+	color: ${gray70};
+	line-height: 1.6;
+	margin-top: 20px;
 	margin-bottom: 25px;
+	margin-left: 0;
 `;
 
 const Item = ({id}) => (
@@ -71,18 +86,21 @@ const Item = ({id}) => (
 			return (
 				<>
 					<Header>
-						<TaskStatus
-							status={item.status}
-							itemId={item.id}
-							sectionId={item.section.id}
-							reviewer={item.reviewer}
-							mode="see"
-							customerViewMode={false}
-							projectStatus={project.status}
-						/>
-						<H2>{item.name}</H2>
-						<span>dans</span>
-						<H3>{project.name}</H3>
+						<div>
+							<TaskStatus
+								status={item.status}
+								itemId={item.id}
+								sectionId={item.section.id}
+								reviewer={item.reviewer}
+								mode="see"
+								customerViewMode={false}
+								projectStatus={project.status}
+							/>
+						</div>
+						<div>
+							<H3>{project.name}</H3>
+							<H2>{item.name}</H2>
+						</div>
 					</Header>
 					<Metas>
 						<Meta>
@@ -112,13 +130,7 @@ const Item = ({id}) => (
 							<MetaText>{project.customer.name}</MetaText>
 						</Meta>
 					</Metas>
-					<Description>
-						{item.description || (
-							<NoDescription>
-								Il n'y a pas de description.
-							</NoDescription>
-						)}
-					</Description>
+					<Description>{item.description}</Description>
 					<CommentList itemId={item.id} />
 				</>
 			);

@@ -11,7 +11,7 @@ import TopBar, {
 } from '../../../components/TopBar';
 import {Loading} from '../../../utils/content';
 
-import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
 // import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
 import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 
@@ -79,7 +79,7 @@ class ListProjects extends Component {
 											);
 										}}
 									>
-										<FoldersIcon />
+										<DashboardIcon />
 									</TopBarButton>
 									{/* <TopBarButton
 										theme="Link"

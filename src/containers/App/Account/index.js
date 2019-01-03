@@ -29,6 +29,7 @@ import UserDataForm from '../../../components/UserDataForm';
 import UserSettings from '../../../components/UserSettings';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
 import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
 // import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -148,7 +149,7 @@ class Account extends Component {
 												);
 											}}
 										>
-											<FoldersIcon />
+											<DashboardIcon />
 										</TopBarButton>
 										<TopBarButton
 											theme="Link"

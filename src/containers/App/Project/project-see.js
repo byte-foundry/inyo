@@ -18,13 +18,14 @@ import ProjectDisplay from '../../../components/ProjectDisplay';
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateItem) => {
 		const {
-			name, unit, comment, reviewer, description,
+			name, type, unit, comment, reviewer, description,
 		} = data;
 
 		return updateItem({
 			variables: {
 				itemId,
 				name,
+				type,
 				reviewer,
 				description,
 				unit: parseFloat(unit),
@@ -152,13 +153,14 @@ class TasksListUser extends Component {
 
 	addItem = (sectionId, addItemValues, addItem) => {
 		const {
-			name, unit, description, reviewer,
+			name, type, unit, description, reviewer,
 		} = addItemValues;
 
 		addItem({
 			variables: {
 				sectionId,
 				name,
+				type,
 				unit: parseFloat(unit),
 				description,
 				reviewer,

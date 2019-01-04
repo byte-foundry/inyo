@@ -30,14 +30,16 @@ class InlineEditable extends Component {
 
 	handleFocus = () => {
 		if (this.props.disabled) return;
+
+		let shouldBeCleared = false;
+
 		if (this.state.isEditing) {
-			if (typeof this.props.onFocusOut === 'function') {
-				this.props.onFocusOut(this.state.value);
-			}
+			shouldBeCleared = this.props.onFocusOut(this.state.value);
 		}
-		this.setState({
+		this.setState(state => ({
+			value: shouldBeCleared ? '' : state.value,
 			isEditing: !this.state.isEditing,
-		});
+		}));
 	};
 
 	handleChange = (e) => {
@@ -48,7 +50,7 @@ class InlineEditable extends Component {
 
 	render() {
 		const {isEditing, value} = this.state;
-		const {type, placeholder} = this.props;
+		const {type, placeholder, className} = this.props;
 
 		if (isEditing) {
 			return (
@@ -60,18 +62,34 @@ class InlineEditable extends Component {
 					placeholder={placeholder}
 					autoFocus
 					flexible
+					className={className}
+					onKeyPress={(e) => {
+						if (e.key === 'Enter') {
+							e.target.blur();
+						}
+					}}
 				/>
 			);
 		}
 
 		if (value) {
-			return <Editable onClick={this.handleFocus}>{value}</Editable>;
+			return (
+				<Editable className={className} onClick={this.handleFocus}>
+					{value}
+				</Editable>
+			);
 		}
 
 		return (
-			<Placeholder onClick={this.handleFocus}>{placeholder}</Placeholder>
+			<Placeholder className={className} onClick={this.handleFocus}>
+				{placeholder}
+			</Placeholder>
 		);
 	}
 }
+
+InlineEditable.defaultProps = {
+	onFocusOut: () => {},
+};
 
 export default InlineEditable;

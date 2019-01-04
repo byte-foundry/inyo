@@ -24,6 +24,7 @@ import {GET_ITEMS} from '../../utils/queries';
 
 import SwitchButton from '../SwitchButton';
 import FormCheckbox from '../FormCheckbox';
+import CheckList from '../CheckList';
 
 const AddItemMain = styled('div')`
 	background: ${primaryWhite};
@@ -67,11 +68,37 @@ class AddItem extends Component {
 			item, cancel, done, remove,
 		} = this.props;
 
+		let {description: initialDescription} = item;
+
+		// parse the description for the file list
+		let initialFiles = [];
+		const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+
+		if (fileListRegex.test(item.description)) {
+			const matches = item.description
+				.match(fileListRegex)[0]
+				.split('# content-acquisition-list');
+
+			const fileItemRegex = /- \[([ x])\] (.+)/;
+
+			initialFiles = matches
+				.pop()
+				.split('\n')
+				.filter(line => fileItemRegex.test(line))
+				.map(line => ({
+					checked: /^- \[[x]]/.test(line),
+					name: line.match(fileItemRegex).pop(),
+				}));
+			initialDescription = matches.join('# content-acquisition-list');
+		}
+
 		return (
 			<AddItemMain>
 				<Formik
 					initialValues={{
 						...item,
+						description: initialDescription,
+						files: initialFiles,
 						isContentAcquisition:
 							item.type === 'CONTENT_ACQUISITION',
 					}}
@@ -80,9 +107,38 @@ class AddItem extends Component {
 						unit: Yup.number().required('Requis'),
 						description: Yup.string(),
 						reviewer: Yup.string().required('Requis'),
-						isContentAcquisition: Yup.string().required('Requis'),
+						isContentAcquisition: Yup.boolean().required('Requis'),
+						files: Yup.mixed().when('isContentAcquisition', {
+							is: true,
+							then: Yup.array()
+								.required(
+									'Vous devez spécifier au moins un fichier',
+								)
+								.of(
+									Yup.object({
+										checked: Yup.boolean(),
+										name: Yup.string().required(
+											'Le nom est requis',
+										),
+									}),
+								),
+							otherwise: Yup.array().ensure(),
+						}),
 					})}
-					onSubmit={({isContentAcquisition, ...values}) => {
+					onSubmit={({isContentAcquisition, files, ...values}) => {
+						if (isContentAcquisition) {
+							values.description = values.description.concat(
+								`\n# content-acquisition-list\n${
+									files
+										.map(
+											({checked, name}) => `- [${
+												checked ? 'x' : ' '
+											}] ${name}`,
+										)
+										.join('\n')}`,
+							);
+						}
+
 						done({
 							...values,
 							type: isContentAcquisition
@@ -97,7 +153,12 @@ class AddItem extends Component {
 							setFieldValue,
 							handleChange,
 							values: {
-								name, unit, description, reviewer,
+								name,
+								unit,
+								description,
+								reviewer,
+								isContentAcquisition,
+								files,
 							},
 						} = props;
 
@@ -246,6 +307,16 @@ class AddItem extends Component {
 										onChange={handleChange}
 									/>
 								</FlexRow>
+								{isContentAcquisition && (
+									<FlexRow>
+										<CheckList
+											items={files}
+											onChange={({items}) => {
+												setFieldValue('files', items);
+											}}
+										/>
+									</FlexRow>
+								)}
 								<FlexRow justifyContent="space-between">
 									<ActionButton
 										theme="Link"

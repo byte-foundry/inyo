@@ -461,6 +461,7 @@ class TasksListUser extends Component {
 										<ModalElem>
 											<ItemView
 												id={match.params.itemId}
+												finishItem={this.finishItem}
 											/>
 										</ModalElem>
 									</Modal>

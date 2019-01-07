@@ -128,14 +128,13 @@ class AddItem extends Component {
 					onSubmit={({isContentAcquisition, files, ...values}) => {
 						if (isContentAcquisition) {
 							values.description = values.description.concat(
-								`\n# content-acquisition-list\n${
-									files
-										.map(
-											({checked, name}) => `- [${
-												checked ? 'x' : ' '
-											}] ${name}`,
-										)
-										.join('\n')}`,
+								`\n# content-acquisition-list\n${files
+									.map(
+										({checked, name}) => `- [${
+											checked ? 'x' : ' '
+										}] ${name}`,
+									)
+									.join('\n')}`,
 							);
 						}
 
@@ -178,12 +177,6 @@ class AddItem extends Component {
 										value={reviewer}
 										onChange={(value) => {
 											setFieldValue('reviewer', value);
-											if (value === 'USER') {
-												setFieldValue(
-													'isContentAcquisition',
-													false,
-												);
-											}
 										}}
 									/>
 									<FormCheckbox

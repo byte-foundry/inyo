@@ -24,8 +24,8 @@ class SignupForm extends Component {
 	}
 
 	render() {
-		const {shouldRedirect} = this.state;
-		const from = this.props.from || '/app/onboarding';
+		const {shouldRedirect, projectId} = this.state;
+		const from = this.props.from || `/app/onboarding/${projectId}`;
 
 		if (shouldRedirect) {
 			return <Redirect to={from} />;
@@ -133,6 +133,7 @@ class SignupForm extends Component {
 
 														this.setState({
 															shouldRedirect: true,
+															projectId: onboardProjectId,
 														});
 													}
 												}

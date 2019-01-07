@@ -78,7 +78,10 @@ class App extends Component {
 									isAllowed={data && data.me}
 								/>
 								<ProtectedRoute
-									path="/app/onboarding"
+									path={[
+										'/app/onboarding/:projectId',
+										'/app/onboarding',
+									]}
 									component={Onboarding}
 									isAllowed={data && data.me}
 								/>

@@ -65,7 +65,7 @@ class OnboardingThirdStep extends Component {
 		const startWorkAtDate
 			= startWorkAt && new Date(`${currentDate}T${startWorkAt}`);
 		const endWorkAtDate
-			= endWorkAt && new Date(`${currentDate}T${endWorkAt}`);
+			= new Date(`${currentDate}T${endWorkAt}`);
 
 		const startHourInitial
 			= startWorkAtDate.toString() === 'Invalid Date'

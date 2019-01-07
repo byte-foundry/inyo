@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
+import {Route} from 'react-router-dom';
+
 import {GET_PROJECT_DATA_WITH_TOKEN} from '../../../utils/queries';
-import {Loading} from '../../../utils/content';
+import ItemView from '../../../components/ItemView';
+import {
+	Loading,
+	ModalContainer as Modal,
+	ModalElem,
+} from '../../../utils/content';
 
 import ProjectDisplay from '../../../components/ProjectDisplay';
 
@@ -182,6 +189,25 @@ class ProjectCustomerView extends Component {
 									this.acceptOrRejectProject
 								}
 								mode="see"
+							/>
+							<Route
+								path="/app/projects/:projectId/view/:customerToken/items/:itemId"
+								render={({match, history}) => (
+									<Modal
+										onDismiss={() => history.push(
+											`/app/projects/${projectId}/view/${customerToken}`,
+										)
+										}
+									>
+										<ModalElem>
+											<ItemView
+												id={match.params.itemId}
+												customerToken={customerToken}
+												finishItem={this.finishItem}
+											/>
+										</ModalElem>
+									</Modal>
+								)}
 							/>
 						</div>
 					);

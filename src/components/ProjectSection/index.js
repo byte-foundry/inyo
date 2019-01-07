@@ -52,7 +52,7 @@ class ProjectSection extends Component {
 			history,
 		} = this.props;
 
-		const projectUrl = `/app/projects/${projectId}/${mode}`;
+		const projectUrl = `/app/projects/${projectId}`;
 
 		return (
 			<ProjectSectionMain>
@@ -78,7 +78,9 @@ class ProjectSection extends Component {
 					<div>
 						<Mutation mutation={REMOVE_SECTION}>
 							{(removeSection) => {
-								const display = data.items.every(item => item.status !== 'FINISHED')
+								const display = data.items.every(
+									item => item.status !== 'FINISHED',
+								);
 
 								return (
 									display && (
@@ -111,11 +113,11 @@ class ProjectSection extends Component {
 						finishItem={finishItem}
 						mode={mode}
 						onClickCommentIcon={() => {
-							history.push(
-								`${projectUrl}/items/${
-									item.id
-								}#comments`,
-							);
+							const uri = customerViewMode
+								? `/view/${customerViewMode}/items/${item.id}`
+								: `/${mode}/items/${item.id}`;
+
+							history.push(`${projectUrl}${uri}#comments`);
 						}}
 						projectStatus={projectStatus}
 					/>

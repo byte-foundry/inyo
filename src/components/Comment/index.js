@@ -8,6 +8,7 @@ import {
 	primarySalmon,
 	primaryNavyBlue,
 	gray70,
+	gray80,
 } from '../../utils/content';
 
 const CommentMain = styled('div')`
@@ -32,6 +33,8 @@ const CommentInfo = styled('time')`
 const CommentText = styled('div')`
 	padding-top: 2px;
 	font-size: 15px;
+	line-height: 1.5;
+	color: ${gray80};
 `;
 const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;

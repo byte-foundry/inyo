@@ -61,8 +61,10 @@ class OnboardingThirdStep extends Component {
 		} = this.props;
 
 		const currentDate = new Date().toJSON().split('T')[0];
-		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
-		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+		const startWorkAtDate
+			= startWorkAt && new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate
+			= endWorkAt && new Date(`${currentDate}T${endWorkAt}`);
 
 		const startHourInitial = startWorkAtDate
 			? startWorkAtDate.getHours()
@@ -74,7 +76,7 @@ class OnboardingThirdStep extends Component {
 		const endMinutesInitial = endWorkAtDate
 			? endWorkAtDate.getMinutes()
 			: 0;
-		const workingDaysInitial = this.props.data.workingDays || [
+		const workingDaysInitial = this.props.me.workingDays || [
 			'MONDAY',
 			'TUESDAY',
 			'WEDNESDAY',

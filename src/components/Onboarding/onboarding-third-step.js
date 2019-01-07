@@ -45,10 +45,6 @@ const Emoji = styled('div')`
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
 `;
 
 class OnboardingThirdStep extends Component {
@@ -62,10 +58,8 @@ class OnboardingThirdStep extends Component {
 		} = this.props;
 
 		const currentDate = new Date().toJSON().split('T')[0];
-		const startWorkAtDate
-			= startWorkAt && new Date(`${currentDate}T${startWorkAt}`);
-		const endWorkAtDate
-			= new Date(`${currentDate}T${endWorkAt}`);
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
 
 		const startHourInitial
 			= startWorkAtDate.toString() === 'Invalid Date'

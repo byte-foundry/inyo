@@ -15,6 +15,11 @@ const ContentItem = styled('li')`
 	align-items: baseline;
 `;
 
+const DeleteIcon = styled('span')`
+	cursor: pointer;
+	padding: 0 10px;
+`;
+
 class CheckList extends Component {
 	render() {
 		const {items, onChange} = this.props;
@@ -41,6 +46,16 @@ class CheckList extends Component {
 							type="text"
 							placeholder="Ajouter le titre du contenu à récupérer"
 							onFocusOut={(value) => {
+								if (!value) {
+									onChange({
+										items: [
+											...items.slice(0, i),
+											...items.slice(i + 1),
+										],
+									});
+									return;
+								}
+
 								onChange({
 									items: [
 										...items.slice(0, i),
@@ -50,6 +65,18 @@ class CheckList extends Component {
 								});
 							}}
 						/>
+						<DeleteIcon
+							onClick={() => {
+								onChange({
+									items: [
+										...items.slice(0, i),
+										...items.slice(i + 1),
+									],
+								});
+							}}
+						>
+							&times;
+						</DeleteIcon>
 					</ContentItem>
 				))}
 				<ContentItem>

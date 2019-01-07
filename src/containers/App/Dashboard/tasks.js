@@ -255,7 +255,10 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 								onDismiss={() => history.push('/app/dashboard')}
 							>
 								<ModalElem>
-									<ItemView id={match.params.itemId} />
+									<ItemView
+										id={match.params.itemId}
+										finishItem={finishItem}
+									/>
 								</ModalElem>
 							</Modal>
 						)}

@@ -99,7 +99,15 @@ class Onboarding extends Component {
 				/>
 			);
 		case 6:
-			return <Redirect to={`/app/projects/${projectId}/see`} />;
+			return (
+				<Redirect
+					to={
+						projectId
+							? `/app/projects/${projectId}/see`
+							: '/app/projects'
+					}
+				/>
+			);
 		default:
 			return false;
 		}
@@ -107,7 +115,8 @@ class Onboarding extends Component {
 
 	render() {
 		const {step} = this.state;
-		const {projectId} = this.props.match.params;
+		const queryString = new URLSearchParams(this.props.location.search);
+		const projectId = queryString.get('projectId');
 
 		return (
 			<Query query={GET_USER_INFOS}>

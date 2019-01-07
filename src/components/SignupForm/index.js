@@ -25,7 +25,7 @@ class SignupForm extends Component {
 
 	render() {
 		const {shouldRedirect, projectId} = this.state;
-		const from = this.props.from || `/app/onboarding/${projectId}`;
+		const from = this.props.from || `/app/onboarding?projectId=${projectId}`;
 
 		if (shouldRedirect) {
 			return <Redirect to={from} />;

@@ -74,7 +74,7 @@ class OnboardingThirdStep extends Component {
 		const endMinutesInitial = endWorkAtDate
 			? endWorkAtDate.getMinutes()
 			: 0;
-		const workingDaysInitial = this.props.data.workingDays || [
+		const workingDaysInitial = this.props.me.workingDays || [
 			'MONDAY',
 			'TUESDAY',
 			'WEDNESDAY',

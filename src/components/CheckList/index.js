@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'react-emotion';
 
-import {Ul} from '../../utils/content';
+import {Ul, secondaryRed} from '../../utils/content';
 
 import InlineEditable from '../InlineEditable';
 
 const ContentList = styled(Ul)`
 	padding: 0;
+	flex: 1;
 `;
 
 const ContentItem = styled('li')`
@@ -18,6 +19,7 @@ const ContentItem = styled('li')`
 const DeleteIcon = styled('span')`
 	cursor: pointer;
 	padding: 0 10px;
+	color: ${secondaryRed};
 `;
 
 class CheckList extends Component {
@@ -44,7 +46,7 @@ class CheckList extends Component {
 						<InlineEditable
 							value={item.name}
 							type="text"
-							placeholder="Ajouter le titre du contenu à récupérer"
+							placeholder="Ajoutez les titres des contenus à récupérer et validez"
 							onFocusOut={(value) => {
 								if (!value) {
 									onChange({
@@ -82,7 +84,7 @@ class CheckList extends Component {
 				<ContentItem>
 					<InlineEditable
 						type="text"
-						placeholder="Ajouter le titre du contenu à récupérer"
+						placeholder="Ajoutez les titres des contenus à récupérer et validez"
 						onFocusOut={(value) => {
 							if (value) {
 								onChange({

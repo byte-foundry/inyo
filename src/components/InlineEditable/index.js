@@ -1,22 +1,34 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {Input, gray30, primaryBlue} from '../../utils/content';
+import {Input, gray50, primaryBlue} from '../../utils/content';
 
 const Placeholder = styled('span')`
-	color: ${gray30};
+	color: ${gray50};
+	font-style: italic;
+	font-size: 14px;
+	cursor: pointer;
+
+	&::before {
+		content: '+';
+		display: inline-block;
+		color: ${primaryBlue};
+		margin-right: 0.8rem;
+		font-style: normal;
+		font-size: 1.2rem;
+	}
 `;
 
 const NameInput = styled(Input)`
 	font-size: inherit;
-	padding: 2px 20px;
-	position: relative;
-	left: -20px;
+	padding: 5px 10px;
+	margin: 5px 20px;
 `;
 
 const Editable = styled('span')`
-	padding: 3px 0px;
+	padding: 0 0 0 0.8rem;
 	color: ${primaryBlue};
+	font-size: 14px;
 `;
 
 class InlineEditable extends Component {

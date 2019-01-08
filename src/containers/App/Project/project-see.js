@@ -335,7 +335,7 @@ class TasksListUser extends Component {
 		});
 	};
 
-	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
+	finishItem = async (itemId, sectionId, finishItem, token, finishProject) => finishItem({
 		variables: {
 			itemId,
 			token,
@@ -360,22 +360,71 @@ class TasksListUser extends Component {
 			const section = data.project.sections.find(
 				e => e.id === sectionId,
 			);
-			const itemIndex = section.items.find(
+			const itemIndex = section.items.findIndex(
 				e => e.id === finishedItem.id,
 			);
 
 			section.items[itemIndex].status = finishedItem.status;
-			try {
-				cache.writeQuery({
-					query: GET_PROJECT_DATA,
+
+			const projectIsFinished = data.project.sections.every(
+				sectionVerification => sectionVerification.items.every(
+					itemVerification => itemVerification.status === 'FINISHED',
+				),
+			);
+
+			if (projectIsFinished) {
+				finishProject({
 					variables: {
 						projectId: this.props.match.params.projectId,
 					},
-					data,
+					optimisticResponse: {
+						__typename: 'Mutation',
+						finishProject: {
+							id: this.props.match.params.projectId,
+							status: 'FINISHED',
+						},
+					},
+					update: (
+						cacheProject,
+						{data: {finishProject: finishedProject}},
+					) => {
+						window.$crisp.push([
+							'set',
+							'session:event',
+							[[['project_finished', undefined, 'green']]],
+						]);
+
+						data.project.status = finishedProject.status;
+
+						try {
+							cache.writeQuery({
+								query: GET_PROJECT_DATA,
+								variables: {
+									projectId: this.props.match.params
+										.projectId,
+								},
+								data,
+							});
+						}
+						catch (e) {
+							throw e;
+						}
+					},
 				});
 			}
-			catch (e) {
-				throw e;
+			else {
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw e;
+				}
 			}
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},

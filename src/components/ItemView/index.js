@@ -72,8 +72,8 @@ const Description = styled('div')`
 	margin-left: 0;
 `;
 
-const Item = ({id, finishItem}) => (
-	<Query query={GET_ITEM_DETAILS} variables={{id}}>
+const Item = ({id, customerToken, finishItem}) => (
+	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
 			if (loading) return <SpinningBubble />;
 			if (error) throw error;
@@ -93,7 +93,7 @@ const Item = ({id, finishItem}) => (
 								sectionId={item.section.id}
 								reviewer={item.reviewer}
 								mode="see"
-								customerViewMode={false}
+								customerViewMode={!!customerToken}
 								projectStatus={project.status}
 								finishItem={finishItem}
 							/>
@@ -132,7 +132,10 @@ const Item = ({id, finishItem}) => (
 						</Meta>
 					</Metas>
 					<Description>{item.description}</Description>
-					<CommentList itemId={item.id} />
+					<CommentList
+						itemId={item.id}
+						customerToken={customerToken}
+					/>
 				</>
 			);
 		}}

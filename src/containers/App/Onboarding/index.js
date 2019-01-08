@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Query} from 'react-apollo';
-import {Redirect} from 'react-router-dom';
+import {Redirect, withRouter} from 'react-router-dom';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSecondStep from '../../../components/Onboarding/onboarding-second-step';
 import OnboardingThirdStep from '../../../components/Onboarding/onboarding-third-step';
@@ -49,7 +49,7 @@ class Onboarding extends Component {
 
 	getPreviousStep = () => this.setState({step: this.state.step - 1});
 
-	getStepData = (step, me) => {
+	getStepData = (step, me, projectId) => {
 		switch (step) {
 		case 0:
 			return <Redirect to="/auth" />;
@@ -99,7 +99,15 @@ class Onboarding extends Component {
 				/>
 			);
 		case 6:
-			return <Redirect to="/app" />;
+			return (
+				<Redirect
+					to={
+						projectId
+							? `/app/projects/${projectId}/see`
+							: '/app/projects'
+					}
+				/>
+			);
 		default:
 			return false;
 		}
@@ -107,6 +115,8 @@ class Onboarding extends Component {
 
 	render() {
 		const {step} = this.state;
+		const queryString = new URLSearchParams(this.props.location.search);
+		const projectId = queryString.get('projectId');
 
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -120,7 +130,7 @@ class Onboarding extends Component {
 								<OnboardingProgressBar
 									completionRate={((step - 1) / 5) * 100}
 								/>
-								{this.getStepData(step, me)}
+								{this.getStepData(step, me, projectId)}
 							</OnboardingMain>
 						);
 					}
@@ -131,4 +141,4 @@ class Onboarding extends Component {
 	}
 }
 
-export default Onboarding;
+export default withRouter(Onboarding);

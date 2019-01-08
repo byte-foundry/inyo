@@ -246,6 +246,7 @@ class ProjectCustomerView extends Component {
 												id={match.params.itemId}
 												customerToken={customerToken}
 												finishItem={this.finishItem}
+												projectUrl={`/app/projects/${projectId}/view/${customerToken}`}
 											/>
 										</ModalElem>
 									</Modal>

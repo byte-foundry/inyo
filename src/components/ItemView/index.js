@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import React from 'react';
 import {Query} from 'react-apollo';
 import styled from 'react-emotion';
+import {Link} from 'react-router-dom';
 
 import Plural from '../Plural';
 import TaskStatus from '../TaskStatus';
@@ -12,7 +13,7 @@ import {
 	gray70,
 	SpinningBubble,
 	primaryBlue,
-	secondaryLightBlue,
+	primaryNavyBlue,
 } from '../../utils/content';
 import CommentList from '../CommentList';
 
@@ -26,15 +27,23 @@ const Header = styled('div')`
 	justify-content: start;
 	margin-bottom: 1em;
 
-	h3 {
-		font-size: 1.4rem;
-		color: ${primaryBlue};
-		margin: 0;
-	}
-
 	h2 {
 		font-size: 2rem;
 		margin: 10px 0;
+	}
+`;
+
+const ProjectName = styled(H3)`
+	font-size: 1.4rem;
+	margin: 0;
+
+	a {
+		color: ${primaryBlue};
+		text-decoration: none;
+
+		&:hover {
+			color: ${primaryNavyBlue};
+		}
 	}
 `;
 
@@ -72,7 +81,9 @@ const Description = styled('div')`
 	margin-left: 0;
 `;
 
-const Item = ({id, customerToken, finishItem}) => (
+const Item = ({
+	id, customerToken, finishItem, projectUrl,
+}) => (
 	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
 			if (loading) return <SpinningBubble />;
@@ -99,7 +110,16 @@ const Item = ({id, customerToken, finishItem}) => (
 							/>
 						</div>
 						<div>
-							<H3>{project.name}</H3>
+							<ProjectName>
+								<Link
+									to={
+										projectUrl
+										|| `/app/projects/${project.id}/see`
+									}
+								>
+									{project.name}
+								</Link>
+							</ProjectName>
 							<H2>{item.name}</H2>
 						</div>
 					</Header>

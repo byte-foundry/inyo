@@ -511,6 +511,7 @@ class TasksListUser extends Component {
 											<ItemView
 												id={match.params.itemId}
 												finishItem={this.finishItem}
+												projectUrl={`/app/projects/${projectId}/see`}
 											/>
 										</ModalElem>
 									</Modal>

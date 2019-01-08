@@ -110,6 +110,47 @@ class ProjectCustomerView extends Component {
 		},
 	});
 
+	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
+		variables: {
+			itemId,
+			token,
+		},
+		optimisticResponse: {
+			__typename: 'Mutation',
+			finishItem: {
+				id: itemId,
+				status: 'FINISHED',
+			},
+		},
+		update: (cache, {data: {finishItem: finishedItem}}) => {
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA_WITH_TOKEN,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.find(
+				e => e.id === finishedItem.id,
+			);
+
+			section.items[itemIndex].status = finishedItem.status;
+			try {
+				cache.writeQuery({
+					query: GET_PROJECT_DATA_WITH_TOKEN,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw e;
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	render() {
 		const {projectId, customerToken} = this.props.match.params;
 
@@ -181,6 +222,7 @@ class ProjectCustomerView extends Component {
 								totalItems={totalItems}
 								totalItemsFinished={totalItemsFinished}
 								timePlanned={timePlanned}
+								finishItem={this.finishItem}
 								refetch={refetch}
 								acceptOrRejectAmendment={
 									this.acceptOrRejectAmendment

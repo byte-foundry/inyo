@@ -24,7 +24,7 @@ const DeleteIcon = styled('span')`
 
 class CheckList extends Component {
 	render() {
-		const {items, onChange} = this.props;
+		const {items, editable, onChange} = this.props;
 
 		return (
 			<ContentList>
@@ -44,6 +44,7 @@ class CheckList extends Component {
 							}}
 						/>
 						<InlineEditable
+							disabled={!editable}
 							value={item.name}
 							type="text"
 							placeholder="Ajoutez les titres des contenus à récupérer et validez"
@@ -67,37 +68,41 @@ class CheckList extends Component {
 								});
 							}}
 						/>
-						<DeleteIcon
-							onClick={() => {
-								onChange({
-									items: [
-										...items.slice(0, i),
-										...items.slice(i + 1),
-									],
-								});
-							}}
-						>
-							&times;
-						</DeleteIcon>
+						{editable && (
+							<DeleteIcon
+								onClick={() => {
+									onChange({
+										items: [
+											...items.slice(0, i),
+											...items.slice(i + 1),
+										],
+									});
+								}}
+							>
+								&times;
+							</DeleteIcon>
+						)}
 					</ContentItem>
 				))}
-				<ContentItem>
-					<InlineEditable
-						type="text"
-						placeholder="Ajoutez les titres des contenus à récupérer et validez"
-						onFocusOut={(value) => {
-							if (value) {
-								onChange({
-									items: items.concat({
-										checked: false,
-										name: value,
-									}),
-								});
-								return true;
-							}
-						}}
-					/>
-				</ContentItem>
+				{editable && (
+					<ContentItem>
+						<InlineEditable
+							type="text"
+							placeholder="Ajoutez les titres des contenus à récupérer et validez"
+							onFocusOut={(value) => {
+								if (value) {
+									onChange({
+										items: items.concat({
+											checked: false,
+											name: value,
+										}),
+									});
+									return true;
+								}
+							}}
+						/>
+					</ContentItem>
+				)}
 			</ContentList>
 		);
 	}
@@ -105,6 +110,7 @@ class CheckList extends Component {
 
 CheckList.defaultProps = {
 	items: [],
+	editable: true,
 	onChange: () => {},
 };
 
@@ -115,6 +121,7 @@ CheckList.propTypes = {
 			name: PropTypes.string,
 		}),
 	),
+	editable: PropTypes.bool,
 	onChange: PropTypes.func,
 };
 

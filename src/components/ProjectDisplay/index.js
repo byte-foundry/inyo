@@ -250,13 +250,15 @@ class ProjectDisplay extends Component {
 											)}
 										</Mutation>
 									</ProjectName>
-									<StartProjectButton
-										size="Medium"
-										onClick={() => this.duplicateProject(project)
-										}
-									>
-										Dupliquer ce projet
-									</StartProjectButton>
+									{!customerViewMode && (
+										<StartProjectButton
+											size="Medium"
+											onClick={() => this.duplicateProject(project)
+											}
+										>
+											Dupliquer ce projet
+										</StartProjectButton>
+									)}
 									{mode === 'edit' && (
 										<Mutation
 											mutation={START_PROJECT}

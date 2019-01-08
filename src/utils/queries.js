@@ -218,6 +218,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			template
 			name
 			status
+			deadline
 			issuedAt
 			issuer {
 				name

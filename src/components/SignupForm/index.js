@@ -145,7 +145,7 @@ class SignupForm extends Component {
 																	sections:
 																		onboardingTemplate.sections,
 																	name:
-																		'Bienvenu, découvrez votre smart assistant!',
+																		'Bienvenue, découvrez votre smart assistant!',
 																	deadline: deadLineForOnboardingProjet.toISOString(),
 																},
 															},

@@ -93,7 +93,7 @@ const Item = ({id, customerToken}) => (
 								sectionId={item.section.id}
 								reviewer={item.reviewer}
 								mode="see"
-								customerViewMode={customerToken}
+								customerViewMode={!!customerToken}
 								projectStatus={project.status}
 							/>
 						</div>

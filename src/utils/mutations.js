@@ -305,6 +305,16 @@ export const REJECT_PROJECT = gql`
 		}
 	}
 `;
+
+export const FINISH_PROJECT = gql`
+	mutation finishProject($projectId: ID!) {
+		finishProject(id: $projectId) {
+			id
+			status
+		}
+	}
+`;
+
 // Section
 export const ADD_SECTION = gql`
 	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {

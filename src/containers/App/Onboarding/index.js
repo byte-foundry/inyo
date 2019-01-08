@@ -103,7 +103,7 @@ class Onboarding extends Component {
 				<Redirect
 					to={
 						projectId
-							? `/app/projects/${projectId}/see`
+							? `/app/projects/${projectId}/edit`
 							: '/app/projects'
 					}
 				/>

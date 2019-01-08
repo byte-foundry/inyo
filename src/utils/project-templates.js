@@ -350,7 +350,7 @@ export const onboardingTemplate = {
 					name: "🙋 Attendre le mail d'accueil par Edwige de Inyo",
 					unit: 0,
 					description:
-						"Cette tâche est attribuée à votre client, ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure! Vous ne raterez plus qu'une aucune deadline 🎉",
+						"Cette tâche est attribuée à votre client, ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. Vous ne raterez plus aucune deadline 🎉",
 					reviewer: 'CUSTOMER',
 				},
 				{

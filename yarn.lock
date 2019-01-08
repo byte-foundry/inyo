@@ -1423,6 +1423,14 @@ apollo-link-context@^1.0.9:
   dependencies:
     apollo-link "^1.2.3"
 
+apollo-link-debounce@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/apollo-link-debounce/-/apollo-link-debounce-2.1.0.tgz#8bf34988d94ab28d73d23de0cf26777235a6bfd7"
+  integrity sha512-tpAb3558SoZVKL8Y5N1pyrw4ko9eYWGpveKCp1fjfDz8bA4977fyfR4OZdrxwBtTjhYf5wNq2N9YTtKaq3OZIg==
+  dependencies:
+    apollo-link "^1.2.2"
+    zen-observable-ts "^0.8.9"
+
 apollo-link-dedup@^1.0.0:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.10.tgz#7b94589fe7f969777efd18a129043c78430800ae"
@@ -1467,6 +1475,14 @@ apollo-link@^1.0.0, apollo-link@^1.0.6, apollo-link@^1.2.3:
   dependencies:
     apollo-utilities "^1.0.0"
     zen-observable-ts "^0.8.10"
+
+apollo-link@^1.2.2:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.6.tgz#d9b5676d79c01eb4e424b95c7171697f6ad2b8da"
+  integrity sha512-sUNlA20nqIF3gG3F8eyMD+mO80fmf3dPZX+GUOs3MI9oZR8ug09H3F0UsWJMcpEg6h55Yy5wZ+BMmAjrbenF/Q==
+  dependencies:
+    apollo-utilities "^1.0.0"
+    zen-observable-ts "^0.8.13"
 
 apollo-utilities@1.0.21, apollo-utilities@^1.0.0, apollo-utilities@^1.0.21, apollo-utilities@^1.0.8:
   version "1.0.21"
@@ -11522,6 +11538,13 @@ zen-observable-ts@^0.8.10:
   version "0.8.10"
   resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.10.tgz#18e2ce1c89fe026e9621fd83cc05168228fce829"
   integrity sha512-5vqMtRggU/2GhePC9OU4sYEWOdvmayp2k3gjPf4F0mXwB3CSbbNznfDUvDJx9O2ZTa1EIXdJhPchQveFKwNXPQ==
+  dependencies:
+    zen-observable "^0.8.0"
+
+zen-observable-ts@^0.8.13, zen-observable-ts@^0.8.9:
+  version "0.8.13"
+  resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.13.tgz#ae1fd77c84ef95510188b1f8bca579d7a5448fc2"
+  integrity sha512-WDb8SM0tHCb6c0l1k60qXWlm1ok3zN9U4VkLdnBKQwIYwUoB9psH7LIFgR+JVCCMmBxUgOjskIid8/N02k/2Bg==
   dependencies:
     zen-observable "^0.8.0"
 

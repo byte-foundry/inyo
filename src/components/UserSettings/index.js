@@ -34,7 +34,7 @@ const UpdateButton = styled(Button)`
 	margin-bottom: 80px;
 `;
 
-class UserDataForm extends Component {
+class UserSettingsForm extends Component {
 	render() {
 		const {
 			askStartProjectConfirmation,
@@ -129,7 +129,6 @@ class UserDataForm extends Component {
 														name="askStartProjectConfirmation"
 														type="checkbox"
 														label="Toujours me demander confirmation lors de l'envoi d'un projet"
-														required
 													/>
 												</FlexRow>
 												<FlexRow justifyContent="space-between">
@@ -138,7 +137,6 @@ class UserDataForm extends Component {
 														name="askItemFinishConfirmation"
 														type="checkbox"
 														label="Toujours me demander confirmation lors de la validation d'une tâche"
-														required
 													/>
 												</FlexRow>
 											</FormContainer>
@@ -167,4 +165,4 @@ class UserDataForm extends Component {
 	}
 }
 
-export default UserDataForm;
+export default UserSettingsForm;

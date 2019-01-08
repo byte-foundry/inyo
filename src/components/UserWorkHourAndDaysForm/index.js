@@ -60,16 +60,22 @@ class UserWorkHourAndDaysForm extends Component {
 		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
 		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
 
-		const startHourInitial = startWorkAtDate
-			? startWorkAtDate.getHours()
-			: 8;
-		const startMinutesInitial = startWorkAtDate
-			? startWorkAtDate.getMinutes()
-			: 30;
-		const endHourInitial = endWorkAtDate ? endWorkAtDate.getHours() : 19;
-		const endMinutesInitial = endWorkAtDate
-			? endWorkAtDate.getMinutes()
-			: 0;
+		const startHourInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 8
+				: startWorkAtDate.getHours();
+		const startMinutesInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 30
+				: startWorkAtDate.getMinutes();
+		const endHourInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 19
+				: endWorkAtDate.getHours();
+		const endMinutesInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? endWorkAtDate.getMinutes()
+				: 0;
 		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',
 			'TUESDAY',

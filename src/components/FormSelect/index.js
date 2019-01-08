@@ -75,12 +75,10 @@ class FormSelect extends Component {
 								form.setFieldValue(name, event.target.value);
 							}}
 							onBlur={handleBlur}
+							value={values[name]}
 						>
 							{options.map(option => (
-								<option
-									value={option.value}
-									selected={values[name] === option.value}
-								>
+								<option value={option.value}>
 									{option.label}
 								</option>
 							))}

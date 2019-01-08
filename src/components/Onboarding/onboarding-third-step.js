@@ -45,44 +45,42 @@ const Emoji = styled('div')`
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
 `;
 
 class OnboardingThirdStep extends Component {
 	render() {
 		const {
 			me: {startWorkAt, endWorkAt},
+			me,
 			getNextStep,
 			getPreviousStep,
 			step,
 		} = this.props;
 
 		const currentDate = new Date().toJSON().split('T')[0];
-		const startWorkAtDate
-			= startWorkAt && new Date(`${currentDate}T${startWorkAt}`);
-		const endWorkAtDate
-			= endWorkAt && new Date(`${currentDate}T${endWorkAt}`);
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
 
-		const startHourInitial = startWorkAtDate
-			? startWorkAtDate.getHours()
-			: 8;
-		const startMinutesInitial = startWorkAtDate
-			? startWorkAtDate.getMinutes()
-			: 30;
-		const endHourInitial = endWorkAtDate ? endWorkAtDate.getHours() : 19;
-		const endMinutesInitial = endWorkAtDate
-			? endWorkAtDate.getMinutes()
-			: 0;
-		const workingDaysInitial = this.props.me.workingDays || [
-			'MONDAY',
-			'TUESDAY',
-			'WEDNESDAY',
-			'THURSDAY',
-			'FRIDAY',
-		];
+		const startHourInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 8
+				: startWorkAtDate.getHours();
+		const startMinutesInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 30
+				: startWorkAtDate.getMinutes();
+		const endHourInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 19
+				: endWorkAtDate.getHours();
+		const endMinutesInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? endWorkAtDate.getMinutes()
+				: 0;
+		const workingDaysInitial
+			= me.workingDays && me.workingDays.length
+				? me.workingDays
+				: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 
 		return (
 			<OnboardingStep>

@@ -30,6 +30,7 @@ const ItemName = styled(FlexRow)`
 	margin: 0;
 	font-size: 15px;
 	flex: 1;
+	padding-right: 1em;
 `;
 const ItemMain = styled(FlexRow)`
 	padding: 10px 20px;

@@ -72,7 +72,7 @@ const Description = styled('div')`
 	margin-left: 0;
 `;
 
-const Item = ({id, customerToken}) => (
+const Item = ({id, customerToken, finishItem}) => (
 	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
 			if (loading) return <SpinningBubble />;
@@ -95,6 +95,7 @@ const Item = ({id, customerToken}) => (
 								mode="see"
 								customerViewMode={!!customerToken}
 								projectStatus={project.status}
+								finishItem={finishItem}
 							/>
 						</div>
 						<div>

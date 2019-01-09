@@ -20,7 +20,7 @@ const CommentIconMain = styled('div')`
 	&::before {
 		content: "${props => (props.commentLength > 0 ? '' : '+')}";
 		position: relative;
-		font-weight: bold;
+		font-weight: 800;
 		font-size: 14px;
 		color: ${primaryBlue};
 	}

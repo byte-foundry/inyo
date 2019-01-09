@@ -37,7 +37,7 @@ const ItemComment = styled('textarea')`
 	width: 100%;
 	background: ${primaryWhite};
 	padding: 15px;
-	font-family: 'Ligne';
+	font-family: 'Montserrat';
 	color: ${gray70};
 	border: solid 1px ${gray30};
 	font-size: 0.8rem;
@@ -185,7 +185,7 @@ class AddItem extends Component {
 																fontSize:
 																	'13px',
 																fontFamily:
-																	'Ligne',
+																	'Montserrat',
 																width: '100%',
 																padding:
 																	'16px 10px',

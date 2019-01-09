@@ -75,8 +75,8 @@ class OnboardingThirdStep extends Component {
 				: endWorkAtDate.getHours();
 		const endMinutesInitial
 			= endWorkAtDate.toString() === 'Invalid Date'
-				? endWorkAtDate.getMinutes()
-				: 0;
+				? 0
+				: endWorkAtDate.getMinutes();
 		const workingDaysInitial
 			= me.workingDays && me.workingDays.length
 				? me.workingDays

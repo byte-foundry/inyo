@@ -89,24 +89,24 @@ const SelectStyles = {
 	option: base => ({
 		...base,
 		borderRadius: 0,
-		fontFamily: 'Ligne',
+		fontFamily: 'Montserrat',
 	}),
 	menu: base => ({
 		...base,
 		marginTop: 2,
 		borderRadius: 0,
-		fontFamily: 'Ligne',
+		fontFamily: 'Montserrat',
 	}),
 	control: base => ({
 		...base,
 		borderRadius: 0,
-		fontFamily: 'Ligne',
+		fontFamily: 'Montserrat',
 		width: '300px',
 		height: '100%',
 	}),
 	input: base => ({
 		...base,
-		fontFamily: 'Ligne',
+		fontFamily: 'Montserrat',
 		marginTop: '5px',
 	}),
 };

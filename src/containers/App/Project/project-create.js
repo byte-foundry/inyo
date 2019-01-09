@@ -5,18 +5,24 @@ import {Redirect, withRouter} from 'react-router-dom';
 
 import CreateProjectForm from './create-project-form';
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
-import {gray50, Button, Loading} from '../../../utils/content';
+import TopBar, {
+	TopBarNavigation,
+	TopBarButton,
+	TopBarTitle,
+} from '../../../components/TopBar';
+import {Loading} from '../../../utils/content';
+import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
+import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
+import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 
 const CreateProjectMain = styled('div')`
-	margin-left: 40px;
-	margin-right: 40px;
+	background-color: #fbfbfb;
+	min-height: 100vh;
 `;
 
-const BackButton = styled(Button)`
-	padding: 10px 5px;
-	font-size: 11px;
-	margin: 10px 0 10px 0;
-	color: ${gray50};
+const Content = styled('div')`
+	margin-left: 40px;
+	margin-right: 40px;
 `;
 
 class CreateProject extends Component {
@@ -32,24 +38,59 @@ class CreateProject extends Component {
 
 						return (
 							<CreateProjectMain>
-								<BackButton
-									theme="Link"
-									size="XSmall"
-									onClick={() => this.props.history.push('/app/projects')
-									}
-								>
-									Retour à la liste des projets
-								</BackButton>
-								<CreateProjectForm
-									customers={customers}
-									onCreate={(newProject) => {
-										history.push(
-											`/app/projects/${
-												newProject.id
-											}/edit`,
-										);
-									}}
-								/>
+								<TopBar>
+									<TopBarTitle>
+										Créer votre projet
+									</TopBarTitle>
+									<TopBarNavigation>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/dashboard',
+												);
+											}}
+										>
+											<DashboardIcon />
+										</TopBarButton>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/dashboard',
+												);
+											}}
+										>
+											<FoldersIcon />
+										</TopBarButton>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/account',
+												);
+											}}
+										>
+											<SettingsIcon />
+										</TopBarButton>
+									</TopBarNavigation>
+								</TopBar>
+
+								<Content>
+									<CreateProjectForm
+										customers={customers}
+										onCreate={(newProject) => {
+											history.push(
+												`/app/projects/${
+													newProject.id
+												}/edit`,
+											);
+										}}
+									/>
+								</Content>
 							</CreateProjectMain>
 						);
 					}

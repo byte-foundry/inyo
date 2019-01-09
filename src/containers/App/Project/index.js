@@ -26,7 +26,10 @@ class Project extends Component {
 						component={ProjectEdit}
 					/>
 					<Route
-						path="/app/projects/create"
+						path={[
+							'/app/projects/create/from/:projectId',
+							'/app/projects/create',
+						]}
 						component={ProjectCreate}
 					/>
 				</Switch>

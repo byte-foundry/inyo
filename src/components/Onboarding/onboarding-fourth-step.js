@@ -113,12 +113,13 @@ class OnboardingFourthStep extends Component {
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const {interestedFeatures} = values;
+								const newInterestedFeatures
+									= values.interestedFeatures;
 
 								try {
 									updateUser({
 										variables: {
-											interestedFeatures,
+											interestedFeatures: newInterestedFeatures,
 										},
 										update: (
 											cache,

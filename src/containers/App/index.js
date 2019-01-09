@@ -6,6 +6,7 @@ import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 
 import Onboarding from './Onboarding';
+import Dashboard from './Dashboard';
 import Account from './Account';
 import Project from './Project';
 import ConditionalContent from './ConditionalContent';
@@ -19,12 +20,9 @@ const AppMain = styled('div')``;
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
 
 class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			uid_set: false,
-		};
-	}
+	state = {
+		uid_set: false,
+	};
 
 	render() {
 		return (
@@ -65,6 +63,11 @@ class App extends Component {
 									/>
 								)}
 								<ProtectedRoute
+									path="/app/dashboard"
+									component={Dashboard}
+									isAllowed={data && data.me}
+								/>
+								<ProtectedRoute
 									path="/app/account"
 									component={Account}
 									isAllowed={data && data.me}
@@ -79,7 +82,7 @@ class App extends Component {
 									component={Onboarding}
 									isAllowed={data && data.me}
 								/>
-								<Redirect to="/app/projects" />
+								<Redirect to="/app/dashboard" />
 							</Switch>
 							{data
 								&& data.me && (

@@ -56,7 +56,7 @@ const workingDaysNames = [
 ];
 
 function selectDay(values, value, setFieldValue) {
-	return function () {
+	return () => {
 		const index = values.findIndex(item => value === item);
 
 		if (index === -1) {

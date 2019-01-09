@@ -45,37 +45,42 @@ const Emoji = styled('div')`
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
 `;
 
 class OnboardingThirdStep extends Component {
 	render() {
 		const {
-			me, getNextStep, getPreviousStep, step,
+			me: {startWorkAt, endWorkAt},
+			me,
+			getNextStep,
+			getPreviousStep,
+			step,
 		} = this.props;
 
-		const startHour = me.startWorkAt
-			? Number.parseInt(me.startWorkAt.substring(0, 2), 10)
-			: 8;
-		const startMinutes = me.startWorkAt
-			? Number.parseInt(me.startWorkAt.substring(3, 5), 10)
-			: 30;
-		const endHour = me.endWorkAt
-			? Number.parseInt(me.endWorkAt.substring(0, 2), 10)
-			: 19;
-		const endMinutes = me.endWorkAt
-			? Number.parseInt(me.endWorkAt.substring(3, 5), 10)
-			: 0;
-		const workingDays = me.workingDays || [
-			'MONDAY',
-			'TUESDAY',
-			'WEDNESDAY',
-			'THURSDAY',
-			'FRIDAY',
-		];
+		const currentDate = new Date().toJSON().split('T')[0];
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+
+		const startHourInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 8
+				: startWorkAtDate.getHours();
+		const startMinutesInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 30
+				: startWorkAtDate.getMinutes();
+		const endHourInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 19
+				: endWorkAtDate.getHours();
+		const endMinutesInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 0
+				: endWorkAtDate.getMinutes();
+		const workingDaysInitial
+			= me.workingDays && me.workingDays.length
+				? me.workingDays
+				: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 
 		return (
 			<OnboardingStep>
@@ -87,11 +92,11 @@ class OnboardingThirdStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								startHour,
-								startMinutes,
-								endHour,
-								endMinutes,
-								workingDays,
+								startHour: startHourInitial,
+								startMinutes: startMinutesInitial,
+								endHour: endHourInitial,
+								endMinutes: endMinutesInitial,
+								workingDays: workingDaysInitial,
 							}}
 							validationSchema={Yup.object().shape({
 								startHour: Yup.number().required(),

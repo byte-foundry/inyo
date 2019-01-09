@@ -293,14 +293,14 @@ class EditProject extends Component {
 	};
 
 	removeItem = (itemId, sectionId, removeItem) => {
-		window.$crisp.push([
-			'set',
-			'session:event',
-			[[['item_removed', undefined, 'yellow']]],
-		]);
 		removeItem({
 			variables: {itemId},
 			update: (cache, {data: {removeItem: removedItem}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['item_removed', undefined, 'yellow']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -433,14 +433,14 @@ class EditProject extends Component {
 	};
 
 	removeProject = (projectId, removeProject) => {
-		window.$crisp.push([
-			'set',
-			'session:event',
-			[[['project_removed', undefined, 'blue']]],
-		]);
 		removeProject({
 			variables: {projectId},
 			update: (cache, {data: {removeProject: removedProject}}) => {
+				window.$crisp.push([
+					'set',
+					'session:event',
+					[[['project_removed', undefined, 'blue']]],
+				]);
 				const data = cache.readQuery({
 					query: GET_ALL_PROJECTS,
 				});

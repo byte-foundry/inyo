@@ -112,6 +112,7 @@ export const GET_ALL_PROJECTS = gql`
 					name
 					viewedByCustomer
 					customer {
+						id
 						name
 					}
 					issuedAt
@@ -153,6 +154,7 @@ export const GET_PROJECT_DATA = gql`
 				siret
 			}
 			customer {
+				id
 				name
 				firstName
 				lastName
@@ -216,6 +218,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			template
 			name
 			status
+			deadline
 			issuedAt
 			issuer {
 				name
@@ -281,7 +284,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 							}
 						}
 					}
-					pendingUnit
 					vatRate
 					description
 				}
@@ -306,6 +308,62 @@ export const GET_COMMENTS_BY_ITEM = gql`
 					firstName
 					lastName
 					name
+				}
+			}
+		}
+	}
+`;
+
+export const GET_ITEM_DETAILS = gql`
+	query getItemDetails($id: ID!, $token: String) {
+		item(id: $id, token: $token) {
+			id
+			name
+			status
+			description
+			unit
+			reviewer
+			section {
+				id
+				project {
+					id
+					name
+					status
+					deadline
+					customer {
+						id
+						name
+					}
+				}
+			}
+		}
+	}
+`;
+
+export const USER_TASKS = gql`
+	query {
+		me {
+			id
+			startWorkAt
+			endWorkAt
+		}
+		items {
+			id
+			status
+			name
+			description
+			unit
+			reviewer
+			section {
+				id
+				project {
+					id
+					deadline
+					status
+					customer {
+						id
+						name
+					}
 				}
 			}
 		}

@@ -171,7 +171,6 @@ export const templates = [
 				name: 'Divers',
 				items: [
 					{
-
 						name: 'Formation au back-office',
 						unit: 0.25,
 						description: '',
@@ -293,6 +292,103 @@ export const templates = [
 	{
 		name: 'BLANK',
 		label: 'Vierge',
-		sections: [],
+		sections: [
+			{
+				name: 'Pré-projet',
+				items: [
+					{
+						name: 'Réunion de lancement',
+						unit: 0.5,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Modifier le titre de cette section',
+				items: [
+					{
+						name: 'Modifier le titre de cette tâche',
+						unit: 0,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Divers',
+				items: [
+					{
+						name: 'Envoi facture',
+						unit: 0,
+						description: '',
+					},
+					{
+						name: 'Paiement facture',
+						unit: 0,
+						description: '',
+						reviewer: 'CUSTOMER',
+					},
+				],
+			},
+		],
 	},
 ];
+
+export const onboardingTemplate = {
+	name: 'ONBOARDING',
+	label: 'Onboarding',
+	sections: [
+		{
+			name: 'Pour commencer…',
+			items: [
+				{
+					name: '✌️ Cliquer sur cette tâche!',
+					unit: 0,
+					description:
+						'Bienvenue sur cet onboarding! Cliquez sur le bouton en haut à droite pour commencer ce projet fictif et laissez vous guider.',
+				},
+				{
+					name: "🙋 Attendre le mail d'accueil par Edwige de Inyo",
+					unit: 0,
+					description:
+						"Cette tâche est attribuée à votre client, ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. Vous ne raterez plus aucune deadline 🎉",
+					reviewer: 'CUSTOMER',
+				},
+				{
+					name: '✏️ Ajouter un commentaire',
+					unit: 0,
+					description: '',
+				},
+				{
+					name: '👀 Ouvrir cette tâche et lire la description',
+					unit: 0,
+					description:
+						'Pour chaque tâche, vous pouvez définir qui doit la réaliser, son titre, sa description et la durée estimée de cette tâche. Modifiez le titre de celle-ci et validez 👀',
+				},
+			],
+		},
+		{
+			name: '…et pour finir',
+			items: [
+				{
+					name: '😎 Compléter son profil',
+					unit: 0,
+					description:
+						'Pour remplir votre profil, rendez-vous sur cette page: https://beta.inyo.me/app/account',
+				},
+				{
+					name:
+						'🚀 Créer un nouveau projet en modifiant un modèle existant',
+					unit: 0.1,
+					description:
+						"Vous connaissez à présent les options de base pour créer un projet, il ne vous reste plus qu'à les appliquer! 🎉🎉🎉 Pour vous aider, nous proposons des templates prédéfinis car nous savons que la création de projets est toujours une tâche fastidieuse: créer dès maintenant un projet et commencer à gagner du temps! https://beta.inyo.me/app/projects/create",
+				},
+				{
+					name:
+						'🏆 Envoyer un email à edwige@inyo.me et donner une note sur 10 à cet onboarding',
+					unit: 0,
+					description: 'Merci 😍',
+				},
+			],
+		},
+	],
+};

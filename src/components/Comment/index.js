@@ -8,6 +8,7 @@ import {
 	primarySalmon,
 	primaryNavyBlue,
 	gray70,
+	gray80,
 } from '../../utils/content';
 
 const CommentMain = styled('div')`
@@ -24,13 +25,16 @@ const CommentImage = styled('div')`
 	text-transform: uppercase;
 	min-width: 40px;
 `;
-const CommentInfo = styled('div')`
-	font-size: 11px;
+const CommentInfo = styled('time')`
+	font-size: 13px;
+	margin-bottom: 5px;
 	color: ${gray70};
 `;
 const CommentText = styled('div')`
 	padding-top: 2px;
-	font-size: 13px;
+	font-size: 15px;
+	line-height: 1.5;
+	color: ${gray80};
 `;
 const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
@@ -50,13 +54,12 @@ class Comment extends Component {
 			<CommentMain>
 				<FlexRow>
 					<CommentImage isCustomer={isCustomer}>
-						{firstName.charAt(0)}
-						{lastName.charAt(0)}
+						{firstName && firstName.charAt(0)}
+						{lastName && lastName.charAt(0)}
 					</CommentImage>
 					<CommentContent>
-						<CommentInfo>
-							{new Date(createdAt).toLocaleDateString('FR-fr')}{' '}
-							{new Date(createdAt).toLocaleTimeString('FR-fr')}
+						<CommentInfo dateTime={createdAt}>
+							{new Date(createdAt).toLocaleString()}
 						</CommentInfo>
 						<CommentText>{text}</CommentText>
 					</CommentContent>

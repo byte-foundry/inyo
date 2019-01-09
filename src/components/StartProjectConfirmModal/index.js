@@ -18,8 +18,6 @@ import {
 	primaryBlue,
 } from '../../utils/content';
 
-import FormCheckbox from '../FormCheckbox';
-
 const ModalRow = styled('div')`
 	padding-left: 20px;
 	padding-right: 40px;
@@ -30,10 +28,6 @@ const ModalRow = styled('div')`
 const ModalRowHoriz = styled(ModalRow)`
 	display: flex;
 	justify-content: space-between;
-`;
-
-const CheckboxContainer = styled('div')`
-	margin-bottom: 25px;
 `;
 
 const StartModalTitle = styled(H4)`
@@ -107,7 +101,6 @@ export default function StartProjectConfirmModal({
 							>
 								{(props) => {
 									const {
-										values,
 										isSubmitting,
 										handleSubmit,
 										setFieldValue,
@@ -121,9 +114,7 @@ export default function StartProjectConfirmModal({
 													onClick={closeModal}
 												/>
 											</ModalCloseIcon>
-											<form
-												onSubmit={handleSubmit}
-											>
+											<form onSubmit={handleSubmit}>
 												<ModalRow>
 													<StartModalTitle>
 														C'est parti !
@@ -141,8 +132,8 @@ export default function StartProjectConfirmModal({
 														au courant de
 														l'évolution du projet un
 														email sera envoyé quand
-														vous finirez un tâche du
-														projet
+														vous finirez une tâche
+														du projet.
 													</P>
 													<P>
 														Vous serez notifié au
@@ -151,14 +142,8 @@ export default function StartProjectConfirmModal({
 												</ModalRow>
 												<ModalRowHoriz>
 													<Button
-														theme="Primary"
-														type="submit"
-														disabled={isSubmitting}
-													>
-														Commencer et envoyer un
-														email
-													</Button>
-													<Button
+														theme="Link"
+														tabindex="-1"
 														onClick={(e) => {
 															e.preventDefault();
 															e.stopPropagation();
@@ -170,6 +155,15 @@ export default function StartProjectConfirmModal({
 														}}
 													>
 														Ne pas envoyer d'email
+													</Button>
+													<Button
+														theme="Primary"
+														type="submit"
+														tabindex="-1"
+														disabled={isSubmitting}
+													>
+														Commencer et envoyer un
+														email
 													</Button>
 												</ModalRowHoriz>
 											</form>

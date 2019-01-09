@@ -66,7 +66,7 @@ function track(trackingSide, value) {
 	};
 }
 
-function convertMousePosToTime(e, trackingSide) {
+function convertMousePosToTime(e) {
 	const mouseOffset = e.clientX;
 	const baseOffset = inputRange.current.getBoundingClientRect().left;
 	const realOffset = mouseOffset - baseOffset;

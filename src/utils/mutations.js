@@ -305,6 +305,16 @@ export const REJECT_PROJECT = gql`
 		}
 	}
 `;
+
+export const FINISH_PROJECT = gql`
+	mutation finishProject($projectId: ID!) {
+		finishProject(id: $projectId) {
+			id
+			status
+		}
+	}
+`;
+
 // Section
 export const ADD_SECTION = gql`
 	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {
@@ -467,6 +477,15 @@ export const REMOVE_ITEM = gql`
 	mutation removeItem($itemId: ID!) {
 		removeItem(id: $itemId) {
 			id
+		}
+	}
+`;
+
+export const SNOOZE_ITEM = gql`
+	mutation snoozeItem($itemId: ID!, $during: Int) {
+		snoozeItem(id: $itemId, during: $during) {
+			id
+			status
 		}
 	}
 `;
@@ -728,5 +747,11 @@ export const POST_COMMENT = gql`
 				}
 			}
 		}
+	}
+`;
+
+export const CHECK_UNIQUE_EMAIL = gql`
+	mutation checkEmailAvailability($email: String!) {
+		isAvailable: checkEmailAvailability(email: $email)
 	}
 `;

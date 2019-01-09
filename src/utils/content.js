@@ -2,6 +2,7 @@ import styled, {css, keyframes} from 'react-emotion';
 import React from 'react';
 import Shevy from 'shevyjs';
 import {Dialog} from '@reach/dialog';
+import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
 import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
@@ -42,32 +43,32 @@ export const Body = styled('div')`
 export const H1 = styled('h1')`
 	${h1};
 	color: ${gray80};
-	font-weight: 600;
+	font-weight: 800;
 `;
 export const H2 = styled('h2')`
 	${h2};
 	color: ${gray80};
-	font-weight: 600;
+	font-weight: 800;
 `;
 export const H3 = styled('h3')`
 	${h3};
 	color: ${gray80};
-	font-weight: normal;
+	font-weight: 500;
 `;
 export const H4 = styled('h4')`
 	${h4};
 	color: ${gray80};
-	font-weight: normal;
+	font-weight: 500;
 `;
 export const H5 = styled('h5')`
 	${h5};
 	color: ${gray80};
-	font-weight: normal;
+	font-weight: 500;
 `;
 export const H6 = styled('h6')`
 	${h6};
 	color: ${gray80};
-	font-weight: normal;
+	font-weight: 500;
 `;
 export const P = styled('p')`
 	${content};
@@ -88,7 +89,7 @@ export const A = styled('a')`
 
 // Buttons
 
-const ButtonReset = styled('button')`
+const buttonResetStyles = css`
 	border: 1px solid transparent;
 	margin: 0;
 	padding: 0;
@@ -236,7 +237,8 @@ const ButtonSizes = (props) => {
 	}
 };
 
-export const Button = styled(ButtonReset)`
+export const Button = styled('button')`
+	${buttonResetStyles};
 	width: auto;
 	font-size: 17px;
 	cursor: pointer;
@@ -247,6 +249,18 @@ export const Button = styled(ButtonReset)`
 	${ButtonSizes};
 `;
 
+export const LinkButton = styled(Link)`
+	${buttonResetStyles} width: auto;
+	font-size: 17px;
+	cursor: pointer;
+	transition: background-color 0.2s ease, color 0.2s ease,
+		border-color 0.2s ease;
+	border-radius: 4px;
+	${ButtonStyles};
+	${ButtonSizes};
+	text-decoration: none;
+`;
+
 // Inputs
 
 export const Input = styled('input')`
@@ -255,7 +269,7 @@ export const Input = styled('input')`
 	padding: 15px 18px 16px 18px;
 	color: ${gray50};
 	width: ${props => (props.flexible ? '100%' : 'fill-available')};
-	font-family: 'Ligne';
+	font-family: 'Montserrat';
 	font-size: 16px;
 	transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
@@ -271,7 +285,7 @@ export const Input = styled('input')`
 `;
 
 export const Label = styled('label')`
-	font-family: 'Ligne';
+	font-family: 'Montserrat';
 	font-size: 15px;
 	width: fill-available;
 	color: ${gray80};
@@ -294,7 +308,7 @@ export const Label = styled('label')`
 `;
 
 export const ErrorInput = styled('p')`
-	font-family: 'Ligne';
+	font-family: 'Montserrat';
 	width: fill-available;
 	font-size: 12px;
 	color: ${signalRed};
@@ -331,6 +345,7 @@ export const ToggleButton = styled('span')`
 export function ModalContainer({size, ...props}) {
 	const style = {
 		width: size === 'small' ? '35vw' : '50vw',
+		minWidth: '600px',
 	};
 
 	return <Dialog {...props} style={style} />;
@@ -403,7 +418,7 @@ const translate = keyframes`
   }
 `;
 
-const BubbleIcon = styled(bubbleIcon)`
+export const SpinningBubble = styled(bubbleIcon)`
 	width: 45px;
 	height: auto;
 	opacity: 0.5;
@@ -427,6 +442,6 @@ const BubbleIcon = styled(bubbleIcon)`
 
 export const Loading = () => (
 	<LoadingMain>
-		<BubbleIcon />
+		<SpinningBubble />
 	</LoadingMain>
 );

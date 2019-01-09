@@ -91,12 +91,12 @@ class OnboardingSecondStep extends Component {
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const {jobType} = values;
+								const newJobType = values.jobType;
 
 								try {
 									updateUser({
 										variables: {
-											jobType,
+											jobType: newJobType,
 										},
 										update: (
 											cache,

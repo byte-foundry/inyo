@@ -36,7 +36,7 @@ const ProjectStateAmount = styled(P)`
 const ProjectStateName = styled(P)`
 	font-size: 13px;
 	color: ${primaryNavyBlue};
-	font-weight: bold;
+	font-weight: 800;
 	margin: 0;
 `;
 const ProjectStateTotal = styled(P)`

@@ -29,7 +29,7 @@ const FormSelectElem = styled('select')`
 	width: -webkit-fill-available;
 	width: -moz-available;
 	width: fill-available;
-	font-family: 'Ligne';
+	font-family: 'Montserrat';
 	font-size: 16px;
 	-webkit-transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
@@ -75,12 +75,10 @@ class FormSelect extends Component {
 								form.setFieldValue(name, event.target.value);
 							}}
 							onBlur={handleBlur}
+							value={values[name]}
 						>
 							{options.map(option => (
-								<option
-									value={option.value}
-									selected={values[name] === option.value}
-								>
+								<option value={option.value}>
 									{option.label}
 								</option>
 							))}

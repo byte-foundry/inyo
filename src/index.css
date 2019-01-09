@@ -1,13 +1,7 @@
-@font-face {
-	font-family: 'Ligne';
-	src: url('/fonts/Ligne-Medium.otf') format('opentype');
-	font-weight: normal;
-	font-style: normal;
-}
 body {
 	margin: 0;
 	padding: 0;
-	font-family: 'Ligne', sans-serif;
+	font-family: 'Montserrat', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

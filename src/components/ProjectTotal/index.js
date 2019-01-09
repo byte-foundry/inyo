@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {
-	H4, H6, gray20, primaryNavyBlue,
-} from '../../utils/content';
+import {H4, H6, primaryNavyBlue} from '../../utils/content';
 
 const TotalMain = styled('div')`
 	margin-top: 10px;

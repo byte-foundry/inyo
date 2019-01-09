@@ -3,6 +3,7 @@ import styled from 'react-emotion';
 import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
 
+import TopBar, {TopBarTitle, TopBarNavigation, TopBarButton} from '../TopBar';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import InlineEditable from '../InlineEditable';
@@ -23,33 +24,21 @@ import {
 	FlexRow,
 	FlexColumn,
 	Button,
-	primaryWhite,
 	primaryNavyBlue,
 	primaryBlue,
-	pastelGreen,
 	gray20,
 	gray10,
 	gray50,
 	signalRed,
 	Loading,
 } from '../../utils/content';
-
+import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
+import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
+import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
-`;
-
-const BackButton = styled(Button)`
-	padding: 10px 5px;
-	font-size: 11px;
-	margin: 10px 0 10px 40px;
-	color: ${gray50};
-`;
-
-const ProjectDisplayTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-	margin: 0;
 `;
 
 const ProjectSections = styled('div')``;
@@ -61,6 +50,7 @@ const SideActions = styled(FlexColumn)`
 const ProjectName = styled(H3)`
 	color: ${primaryBlue};
 	margin: 10px 0 20px;
+	flex: 1;
 `;
 const CenterContent = styled(FlexColumn)`
 	background: ${gray10};
@@ -72,6 +62,7 @@ const ProjectRow = styled(FlexRow)`
 	padding-right: 40px;
 	padding-top: 10px;
 	padding-bottom: ${props => (props.noPadding ? '0px' : '10px')};
+	border-top: 1px solid ${gray20};
 	border-bottom: 1px solid ${gray20};
 `;
 
@@ -94,6 +85,7 @@ const ProjectAction = styled(Button)`
 
 const TaskLegend = styled('div')`
 	margin-top: 20px;
+	margin-bottom: 20px;
 `;
 
 const InfosOnItems = styled('div')`
@@ -119,17 +111,10 @@ const CustomerIssuerContainer = styled('div')``;
 
 const TotalContainer = styled('div')``;
 
-const ProjectStatus = styled(FlexColumn)`
-	span {
-		font-size: 13px;
-		margin: 5px 20px;
-	}
-`;
-
 const StartProjectButton = styled(Button)`
 	width: auto;
-	padding: 0.5em 1em;
-	margin-bottom: 0.5em;
+	margin-left: 10px;
+	margin-bottom: 10px;
 `;
 
 class ProjectDisplay extends Component {
@@ -141,12 +126,16 @@ class ProjectDisplay extends Component {
 		};
 	}
 
+	duplicateProject = (project) => {
+		this.props.history.push(`/app/projects/create/from/${project.id}`);
+	};
+
 	getProjectTotal = (project) => {
 		let sumDays = 0;
 
 		project.sections.forEach((section) => {
 			section.items.forEach((item) => {
-				sumDays += item.pendingUnit || item.unit;
+				sumDays += item.unit;
 			});
 		});
 		return sumDays.toLocaleString();
@@ -160,14 +149,14 @@ class ProjectDisplay extends Component {
 			editProjectTitle,
 			addItem,
 			editItem,
-			editSectionTitle,
+			finishItem,
 			removeItem,
+			editSectionTitle,
 			removeSection,
 			addSection,
 			totalItemsFinished,
 			totalItems,
 			askForInfos,
-			timePlanned,
 			issuer,
 			refetch,
 		} = this.props;
@@ -181,22 +170,96 @@ class ProjectDisplay extends Component {
 						return (
 							<ProjectDisplayMain>
 								{!customerViewMode && (
-									<BackButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => this.props.history.push(
-											'/app/projects',
-										)
-										}
-									>
-										Retour à la liste des projets
-									</BackButton>
+									<TopBar>
+										<TopBarTitle>
+											{mode === 'edit'
+												? 'Remplissez le projet'
+												: 'Projet en cours'}
+										</TopBarTitle>
+										<TopBarNavigation>
+											{mode !== 'edit' && (
+												<TopBarButton
+													theme="Primary"
+													size="Medium"
+													onClick={() => {
+														this.props.history.push(
+															'/app/projects/create',
+														);
+													}}
+												>
+													Créer un nouveau projet
+												</TopBarButton>
+											)}
+											<TopBarButton
+												theme="Link"
+												size="XSmall"
+												onClick={() => {
+													this.props.history.push(
+														'/app/dashboard',
+													);
+												}}
+											>
+												<DashboardIcon />
+											</TopBarButton>
+											<TopBarButton
+												theme="Link"
+												size="XSmall"
+												onClick={() => {
+													this.props.history.push(
+														'/app/projects',
+													);
+												}}
+											>
+												<FoldersIcon />
+											</TopBarButton>
+											<TopBarButton
+												theme="Link"
+												size="XSmall"
+												onClick={() => {
+													this.props.history.push(
+														'/app/account',
+													);
+												}}
+											>
+												<SettingsIcon />
+											</TopBarButton>
+										</TopBarNavigation>
+									</TopBar>
 								)}
-								{mode === 'edit' && (
-									<ProjectRow justifyContent="space-between">
-										<ProjectDisplayTitle>
-											Remplissez votre projet
-										</ProjectDisplayTitle>
+
+								<ProjectRow
+									noPadding
+									justifyContent="space-between"
+								>
+									<ProjectName>
+										<Mutation mutation={UPDATE_PROJECT}>
+											{updateProject => (
+												<InlineEditable
+													value={project.name}
+													type="text"
+													placeholder="Nom de votre projet"
+													disabled={mode !== 'edit'}
+													onFocusOut={(value) => {
+														editProjectTitle(
+															value,
+															project.id,
+															updateProject,
+														);
+													}}
+												/>
+											)}
+										</Mutation>
+									</ProjectName>
+									{!customerViewMode && (
+										<StartProjectButton
+											size="Medium"
+											onClick={() => this.duplicateProject(project)
+											}
+										>
+											Dupliquer ce projet
+										</StartProjectButton>
+									)}
+									{mode === 'edit' && (
 										<Mutation
 											mutation={START_PROJECT}
 											onError={(error) => {
@@ -228,35 +291,7 @@ class ProjectDisplay extends Component {
 												</StartProjectButton>
 											)}
 										</Mutation>
-									</ProjectRow>
-								)}
-								<ProjectRow
-									noPadding
-									justifyContent="space-between"
-								>
-									<FlexColumn>
-										<ProjectName>
-											<Mutation mutation={UPDATE_PROJECT}>
-												{updateProject => (
-													<InlineEditable
-														value={project.name}
-														type="text"
-														placeholder="Nom de votre projet"
-														disabled={
-															mode !== 'edit'
-														}
-														onFocusOut={(value) => {
-															editProjectTitle(
-																value,
-																project.id,
-																updateProject,
-															);
-														}}
-													/>
-												)}
-											</Mutation>
-										</ProjectName>
-									</FlexColumn>
+									)}
 								</ProjectRow>
 								<FlexRow justifyContent="space-between">
 									<CenterContent flexGrow="2">
@@ -274,15 +309,22 @@ class ProjectDisplay extends Component {
 													{project.sections.map(
 														(section, index) => (
 															<ProjectSection
-																key={`section${
-																	section.id
-																}`}
+																key={section.id}
+																projectId={
+																	project.id
+																}
 																data={section}
 																addItem={
 																	addItem
 																}
 																editItem={
 																	editItem
+																}
+																removeItem={
+																	removeItem
+																}
+																finishItem={
+																	finishItem
 																}
 																customerViewMode={
 																	customerViewMode
@@ -291,19 +333,11 @@ class ProjectDisplay extends Component {
 																editSectionTitle={
 																	editSectionTitle
 																}
-																removeItem={
-																	removeItem
-																}
 																removeSection={
 																	removeSection
 																}
 																sectionIndex={
 																	index
-																}
-																defaultDailyPrice={
-																	!customerViewMode
-																	&& data.me
-																		.defaultDailyPrice
 																}
 																refetch={
 																	refetch

@@ -18,7 +18,7 @@ import SendResetPasswordForm from '../../../components/SendResetPasswordForm';
 import ResetPasswordForm from '../../../components/ResetPasswordForm';
 
 import {ReactComponent as AppLogo} from '../appLogo.svg';
-import AuthLogo from './authLogo.svg';
+import AuthIllus from './illustration-inyo.gif';
 
 const AuthMain = styled('div')`
 	display: flex;
@@ -43,11 +43,11 @@ const AuthText = styled('div')`
 	justify-content: top;
 	min-height: fill-content;
 	width: 60%;
-	background: ${primaryNavyBlue};
-	color: ${primaryWhite};
-	padding-left: 5%;
-	padding-right: 5%;
-	padding-top: 5%;
+	padding: 40px 40px 40px;
+	background-image: url(${AuthIllus});
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center bottom;
 `;
 
 const AuthTextContent = styled('div')`
@@ -57,10 +57,11 @@ const AuthTextContent = styled('div')`
 `;
 const TextTitle = styled(H1)`
 	color: ${primaryBlue};
+	font-size: 32px;
 `;
 const TextContent = styled(P)`
-	color: ${primaryWhite};
-	font-size: 24px;
+	color: ${primaryNavyBlue};
+	font-size: 20px;
 `;
 
 class Auth extends Component {
@@ -122,7 +123,6 @@ class Auth extends Component {
 				</AuthForm>
 				<AuthText>
 					<AuthTextContent>
-						<img src={AuthLogo} alt="auth logo" />
 						<TextTitle>Créez votre compte gratuitement</TextTitle>
 						<TextContent>
 							Optimisez votre temps en automatisant des tâches

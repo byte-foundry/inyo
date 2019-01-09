@@ -50,29 +50,33 @@ const Emoji = styled('div')`
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
 `;
 
 class UserWorkHourAndDaysForm extends Component {
 	render() {
 		const {startWorkAt, endWorkAt} = this.props.data;
 
-		const startHour = startWorkAt
-			? Number.parseInt(startWorkAt.substring(0, 2), 10)
-			: 8;
-		const startMinutes = startWorkAt
-			? Number.parseInt(startWorkAt.substring(3, 5), 10)
-			: 30;
-		const endHour = endWorkAt
-			? Number.parseInt(endWorkAt.substring(0, 2), 10)
-			: 19;
-		const endMinutes = endWorkAt
-			? Number.parseInt(endWorkAt.substring(3, 5), 10)
-			: 0;
-		const workingDays = this.props.data.workingDays || [
+		const currentDate = new Date().toJSON().split('T')[0];
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+
+		const startHourInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 8
+				: startWorkAtDate.getHours();
+		const startMinutesInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 30
+				: startWorkAtDate.getMinutes();
+		const endHourInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 19
+				: endWorkAtDate.getHours();
+		const endMinutesInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? endWorkAtDate.getMinutes()
+				: 0;
+		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',
 			'TUESDAY',
 			'WEDNESDAY',
@@ -86,11 +90,11 @@ class UserWorkHourAndDaysForm extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								startMinutes,
-								startHour,
-								endHour,
-								endMinutes,
-								workingDays,
+								startMinutes: startMinutesInitial,
+								startHour: startHourInitial,
+								endHour: endHourInitial,
+								endMinutes: endMinutesInitial,
+								workingDays: workingDaysInitial,
 							}}
 							validationSchema={Yup.object().shape({})}
 							onSubmit={async (values, actions) => {
@@ -140,7 +144,7 @@ class UserWorkHourAndDaysForm extends Component {
 													[
 														[
 															'updated_user_data',
-															{},
+															undefined,
 															'green',
 														],
 													],

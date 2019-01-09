@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 import {Mutation} from 'react-apollo';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import {withRouter} from 'react-router-dom';
 
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
@@ -44,12 +44,15 @@ class ProjectSection extends Component {
 			editSectionTitle,
 			editItem,
 			removeItem,
+			finishItem,
 			mode,
 			customerViewMode,
-			refetch,
-			defaultDailyPrice,
 			projectStatus,
+			projectId,
+			history,
 		} = this.props;
+
+		const projectUrl = `/app/projects/${projectId}`;
 
 		return (
 			<ProjectSectionMain>
@@ -74,33 +77,48 @@ class ProjectSection extends Component {
 					</SectionTitle>
 					<div>
 						<Mutation mutation={REMOVE_SECTION}>
-							{removeSection => (
-								<ProjectAction
-									theme="Link"
-									size="XSmall"
-									type="delete"
-									onClick={() => {
-										this.props.removeSection(
-											data.id,
-											removeSection,
-										);
-									}}
-								>
-									Supprimer la section
-								</ProjectAction>
-							)}
+							{(removeSection) => {
+								const display = data.items.every(
+									item => item.status !== 'FINISHED',
+								);
+
+								return (
+									display && (
+										<ProjectAction
+											theme="Link"
+											size="XSmall"
+											type="delete"
+											onClick={() => {
+												this.props.removeSection(
+													data.id,
+													removeSection,
+												);
+											}}
+										>
+											Supprimer la section
+										</ProjectAction>
+									)
+								);
+							}}
 						</Mutation>
 					</div>
 				</FlexRow>
-				{data.items.map((item, index) => (
+				{data.items.map(item => (
 					<Item
-						key={`item${item.id}`}
+						key={item.id}
 						item={item}
 						sectionId={data.id}
 						editItem={editItem}
 						removeItem={removeItem}
+						finishItem={finishItem}
 						mode={mode}
-						refetch={refetch}
+						onClickCommentIcon={() => {
+							const uri = customerViewMode
+								? `/view/${customerViewMode}/items/${item.id}`
+								: `/${mode}/items/${item.id}`;
+
+							history.push(`${projectUrl}${uri}#comments`);
+						}}
 						projectStatus={projectStatus}
 					/>
 				))}
@@ -152,4 +170,4 @@ class ProjectSection extends Component {
 	}
 }
 
-export default ProjectSection;
+export default withRouter(ProjectSection);

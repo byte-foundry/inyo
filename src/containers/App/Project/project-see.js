@@ -2,10 +2,16 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import ReactGA from 'react-ga';
 import {ToastContainer, toast} from 'react-toastify';
+import {Route} from 'react-router-dom';
 
 import {GET_PROJECT_DATA} from '../../../utils/queries';
 
-import {Loading} from '../../../utils/content';
+import ItemView from '../../../components/ItemView';
+import {
+	Loading,
+	ModalContainer as Modal,
+	ModalElem,
+} from '../../../utils/content';
 
 import ProjectDisplay from '../../../components/ProjectDisplay';
 
@@ -63,7 +69,7 @@ class TasksListUser extends Component {
 		window.$crisp.push([
 			'set',
 			'session:event',
-			[[['item_removed', {}, 'yellow']]],
+			[[['item_removed', undefined, 'yellow']]],
 		]);
 		removeItem({
 			variables: {itemId},
@@ -234,7 +240,7 @@ class TasksListUser extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_edited', {}, 'orange']]],
+					[[['section_edited', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -269,7 +275,7 @@ class TasksListUser extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_added', {}, 'orange']]],
+					[[['section_added', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -301,7 +307,7 @@ class TasksListUser extends Component {
 				window.$crisp.push([
 					'set',
 					'session:event',
-					[[['section_removed', {}, 'orange']]],
+					[[['section_removed', undefined, 'orange']]],
 				]);
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -329,6 +335,101 @@ class TasksListUser extends Component {
 		});
 	};
 
+	finishItem = async (itemId, sectionId, finishItem, token, finishProject) => finishItem({
+		variables: {
+			itemId,
+			token,
+		},
+		optimisticResponse: {
+			__typename: 'Mutation',
+			finishItem: {
+				id: itemId,
+				status: 'FINISHED',
+			},
+		},
+		update: (cache, {data: {finishItem: finishedItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', undefined, 'yellow']]],
+			]);
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.findIndex(
+				e => e.id === finishedItem.id,
+			);
+
+			section.items[itemIndex].status = finishedItem.status;
+
+			const projectIsFinished = data.project.sections.every(
+				sectionVerification => sectionVerification.items.every(
+					itemVerification => itemVerification.status === 'FINISHED',
+				),
+			);
+
+			if (projectIsFinished) {
+				finishProject({
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					optimisticResponse: {
+						__typename: 'Mutation',
+						finishProject: {
+							id: this.props.match.params.projectId,
+							status: 'FINISHED',
+						},
+					},
+					update: (
+						cacheProject,
+						{data: {finishProject: finishedProject}},
+					) => {
+						window.$crisp.push([
+							'set',
+							'session:event',
+							[[['project_finished', undefined, 'green']]],
+						]);
+
+						data.project.status = finishedProject.status;
+
+						try {
+							cache.writeQuery({
+								query: GET_PROJECT_DATA,
+								variables: {
+									projectId: this.props.match.params
+										.projectId,
+								},
+								data,
+							});
+						}
+						catch (e) {
+							throw e;
+						}
+					},
+				});
+			}
+			else {
+				try {
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {
+							projectId: this.props.match.params.projectId,
+						},
+						data,
+					});
+				}
+				catch (e) {
+					throw e;
+				}
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	render() {
 		const {projectId} = this.props.match.params;
 
@@ -338,9 +439,8 @@ class TasksListUser extends Component {
 					loading, error, data, refetch,
 				}) => {
 					if (loading) return <Loading />;
-					if (error) {
-						throw new Error(error);
-					}
+					if (error) throw error;
+
 					const {project} = data;
 					const timePlanned = project.sections.reduce(
 						(timeSectionSum, section) => timeSectionSum
@@ -360,17 +460,7 @@ class TasksListUser extends Component {
 							),
 						false,
 					);
-					const overtime = project.sections.reduce(
-						(sectionOvertime, section) => sectionOvertime
-							+ section.items.reduce(
-								(itemOvertime, item) => itemOvertime
-									+ (item.pendingUnit
-										? item.pendingUnit - item.unit
-										: 0),
-								0,
-							),
-						0,
-					);
+					const overtime = 0;
 
 					const totalItems = project.sections.reduce(
 						(sumItems, section) => sumItems + section.items.length,
@@ -403,9 +493,29 @@ class TasksListUser extends Component {
 								removeSection={this.removeSection}
 								addItem={this.addItem}
 								removeItem={this.removeItem}
+								finishItem={this.finishItem}
 								issuer={project.issuer}
 								refetch={refetch}
 								mode="see"
+							/>
+							<Route
+								path="/app/projects/:projectId/see/items/:itemId"
+								render={({match, history}) => (
+									<Modal
+										onDismiss={() => history.push(
+											`/app/projects/${projectId}/see`,
+										)
+										}
+									>
+										<ModalElem>
+											<ItemView
+												id={match.params.itemId}
+												finishItem={this.finishItem}
+												projectUrl={`/app/projects/${projectId}/see`}
+											/>
+										</ModalElem>
+									</Modal>
+								)}
 							/>
 						</div>
 					);

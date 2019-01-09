@@ -2,11 +2,7 @@ import React from 'react';
 import styled from 'react-emotion';
 
 import {
-	ModalContainer,
-	ModalElem,
-	ModalCloseIcon,
-	H4,
-	P,
+	ModalContainer, ModalElem, H4, P,
 } from '../../utils/content';
 
 import UserWorkHourAndDaysForm from '../UserWorkHourAndDaysForm';
@@ -27,14 +23,15 @@ export default function ModalWithHoursAndDays(props) {
 				</ModalRow>
 				<ModalRow>
 					<P>
-						Nous avons ajouté des fonctionnalités qui nécessite de
-						nouvelle informations sur la façon dont vous travaillez.
+						Nous avons ajouté des fonctionnalités qui nécessitent de
+						nouvelles informations sur la façon dont vous
+						travaillez.
 					</P>
 					<P>
-						Un email vous sera envoyé par inyo chaque matin à
-						l'heure ou vous commencez le travail c'est pourquoi nous
+						Inyo vous enverra un email chaque matin à l'heure à
+						laquelle vous commencez le travail, c'est pourquoi nous
 						vous demandons vos horaires de travail et vos jours
-						travaillés
+						travaillés.
 					</P>
 				</ModalRow>
 				<ModalRow>

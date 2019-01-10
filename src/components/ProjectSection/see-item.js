@@ -69,9 +69,9 @@ const ItemRow = styled(FlexRow)`
 	box-shadow: 0px 0px 8px ${alpha10};
 	margin-bottom: 7px;
 	box-sizing: border-box;
-	border-right: ${props => (props.reviewer === 'USER' ? '1px solid' : '5px solid')}
-		${props => (props.reviewer === 'USER' ? alpha10 : primaryBlue)};
-	padding: 5px 20px;
+	border-right: 5px solid
+		${props => (props.reviewer === 'USER' ? primaryWhite : primaryBlue)};
+	padding: 5px 0px 5px 20px;
 `;
 
 const CommentContainer = styled('div')`

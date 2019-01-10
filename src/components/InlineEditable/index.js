@@ -1,22 +1,34 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {Input, gray30, primaryBlue} from '../../utils/content';
+import {Input, gray50, primaryBlue} from '../../utils/content';
 
 const Placeholder = styled('span')`
-	color: ${gray30};
+	color: ${gray50};
+	font-style: italic;
+	font-size: 14px;
+	cursor: pointer;
+
+	&::before {
+		content: '+';
+		display: inline-block;
+		color: ${primaryBlue};
+		margin-right: 0.8rem;
+		font-style: normal;
+		font-size: 1.2rem;
+	}
 `;
 
 const NameInput = styled(Input)`
 	font-size: inherit;
-	padding: 2px 20px;
-	position: relative;
-	left: -20px;
+	padding: 5px 10px;
+	margin: 5px 20px;
 `;
 
 const Editable = styled('span')`
-	padding: 3px 0px;
+	padding: 0 0 0 0.8rem;
 	color: ${primaryBlue};
+	font-size: 14px;
 `;
 
 class InlineEditable extends Component {
@@ -30,14 +42,16 @@ class InlineEditable extends Component {
 
 	handleFocus = () => {
 		if (this.props.disabled) return;
+
+		let shouldBeCleared = false;
+
 		if (this.state.isEditing) {
-			if (typeof this.props.onFocusOut === 'function') {
-				this.props.onFocusOut(this.state.value);
-			}
+			shouldBeCleared = this.props.onFocusOut(this.state.value);
 		}
-		this.setState({
+		this.setState(state => ({
+			value: shouldBeCleared ? '' : state.value,
 			isEditing: !this.state.isEditing,
-		});
+		}));
 	};
 
 	handleChange = (e) => {
@@ -48,7 +62,7 @@ class InlineEditable extends Component {
 
 	render() {
 		const {isEditing, value} = this.state;
-		const {type, placeholder} = this.props;
+		const {type, placeholder, className} = this.props;
 
 		if (isEditing) {
 			return (
@@ -60,18 +74,34 @@ class InlineEditable extends Component {
 					placeholder={placeholder}
 					autoFocus
 					flexible
+					className={className}
+					onKeyPress={(e) => {
+						if (e.key === 'Enter') {
+							e.target.blur();
+						}
+					}}
 				/>
 			);
 		}
 
 		if (value) {
-			return <Editable onClick={this.handleFocus}>{value}</Editable>;
+			return (
+				<Editable className={className} onClick={this.handleFocus}>
+					{value}
+				</Editable>
+			);
 		}
 
 		return (
-			<Placeholder onClick={this.handleFocus}>{placeholder}</Placeholder>
+			<Placeholder className={className} onClick={this.handleFocus}>
+				{placeholder}
+			</Placeholder>
 		);
 	}
 }
+
+InlineEditable.defaultProps = {
+	onFocusOut: () => {},
+};
 
 export default InlineEditable;

@@ -174,6 +174,7 @@ export const GET_PROJECT_DATA = gql`
 					status
 					id
 					name
+					type
 					unit
 					reviewer
 					comments {
@@ -254,6 +255,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					status
 					id
 					name
+					type
 					unit
 					reviewer
 					comments {
@@ -319,6 +321,7 @@ export const GET_ITEM_DETAILS = gql`
 		item(id: $id, token: $token) {
 			id
 			name
+			type
 			status
 			description
 			unit

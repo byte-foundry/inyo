@@ -21,8 +21,7 @@ const ProjectCardMain = styled('div')`
 	margin-right: 10px;
 	margin-bottom: 10px;
 	border-radius: 3px;
-
-	&:hover {
+	${props => (props.inRow ? 'flex: 0 0 450px;' : '')} &:hover {
 		box-shadow: 0px 0px 25px ${alpha10};
 	}
 `;
@@ -67,6 +66,7 @@ class ProjectCard extends Component {
 
 		return (
 			<ProjectCardMain
+				{...this.props}
 				onClick={() => {
 					this.props.history.push(
 						`/app/projects/${id}/${

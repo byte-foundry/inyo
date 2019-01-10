@@ -21,7 +21,9 @@ const ProjectCardMain = styled('div')`
 	margin-right: 10px;
 	margin-bottom: 10px;
 	border-radius: 3px;
-	${props => (props.inRow ? 'flex: 0 0 450px;' : '')} &:hover {
+	${props => (props.inRow ? 'flex: 0 0 450px;' : '')}
+
+	&:hover {
 		box-shadow: 0px 0px 25px ${alpha10};
 	}
 `;

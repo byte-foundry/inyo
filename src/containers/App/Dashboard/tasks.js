@@ -238,7 +238,7 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 								) : projectsPending.length > 0 ? (
 									<div>
 										<P>
-											Bonjour vous n’avez plus de tâche a
+											Bonjour, vous n’avez plus de tâche à
 											accomplir pour l’instant !<br />
 											Vous avez des projets en attente.
 											C’est peut-être le moment de

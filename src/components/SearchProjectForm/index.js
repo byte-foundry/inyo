@@ -125,9 +125,16 @@ class SearchProjectForm extends Component {
 			}
 		});
 		customers.push({value: 'all', label: 'Tous les clients'});
+
+		const from = new Date('01/01/2018');
+		const to = new Date('01/01/2020');
+
+		from.setFullYear(new Date().getFullYear() - 1);
+		to.setFullYear(new Date().getFullYear() + 1);
+
 		this.state = {
-			from: new Date('01/01/2018'),
-			to: new Date('01/01/2019'),
+			from,
+			to,
 			customers,
 		};
 	}
@@ -157,7 +164,7 @@ class SearchProjectForm extends Component {
 					component={props => <DateInput {...props} />}
 					onDayChange={(day) => {
 						this.setState({from: day});
-						this.props.sortByDate(day, to);
+						this.props.filterByDate(day, to);
 					}}
 					value={from}
 				/>
@@ -177,7 +184,7 @@ class SearchProjectForm extends Component {
 					component={props => <DateInput {...props} />}
 					onDayChange={(day) => {
 						this.setState({to: day});
-						this.props.sortByDate(from, day);
+						this.props.filterByDate(from, day);
 					}}
 					value={to}
 				/>
@@ -186,7 +193,7 @@ class SearchProjectForm extends Component {
 					placeholder="Triez par client"
 					defaultValue={{value: 'all', label: 'Tous les clients'}}
 					onChange={(option) => {
-						this.props.sortByCustomer(option && option.value);
+						this.props.filterByCustomer(option && option.value);
 					}}
 					options={this.state.customers}
 				/>

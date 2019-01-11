@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
+import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
@@ -14,7 +15,12 @@ import {
 	primaryBlue,
 	signalRed,
 } from '../../utils/content';
-import {REMOVE_SECTION, ADD_ITEM, UPDATE_SECTION} from '../../utils/mutations';
+import {
+	REMOVE_SECTION,
+	ADD_ITEM,
+	UPDATE_SECTION,
+	UPDATE_ITEM,
+} from '../../utils/mutations';
 
 const ProjectSectionMain = styled('div')``;
 const ProjectAction = styled(Button)`
@@ -37,6 +43,20 @@ class ProjectSection extends Component {
 			shouldDisplayAddItem: false,
 		};
 	}
+
+	onDragEnd = async ([result], updateItem) => {
+		// dropped outside the list
+		if (!result.destination) {
+			return;
+		}
+
+		await this.props.editItem(
+			this.props.data.items[result.source.index].id,
+			this.props.data.id,
+			{position: result.destination.index},
+			updateItem,
+		);
+	};
 
 	render() {
 		const {
@@ -105,25 +125,81 @@ class ProjectSection extends Component {
 						)}
 					</div>
 				</FlexRow>
-				{data.items.map(item => (
-					<Item
-						key={item.id}
-						item={item}
-						sectionId={data.id}
-						editItem={editItem}
-						removeItem={removeItem}
-						finishItem={finishItem}
-						mode={mode}
-						onClickCommentIcon={() => {
-							const uri = customerViewMode
-								? `/view/${customerViewMode}/items/${item.id}`
-								: `/${mode}/items/${item.id}`;
+				<Mutation mutation={UPDATE_ITEM}>
+					{updateItem => (
+						<DragDropContext
+							onDragEnd={(...args) => this.onDragEnd(args, updateItem)
+							}
+						>
+							<Droppable droppableId="droppable">
+								{(provided, snapshot) => (
+									<div ref={provided.innerRef}>
+										{data.items.map((item, index) => (
+											<Draggable
+												key={item.id}
+												draggableId={item.id}
+												index={index}
+											>
+												{(provided, snapshot) => (
+													<div
+														ref={provided.innerRef}
+														{...provided.draggableProps}
+														{...provided.dragHandleProps}
+														style={{
+															// some basic styles to make the items look a bit nicer
+															userSelect: 'none',
 
-							history.push(`${projectUrl}${uri}#comments`);
-						}}
-						projectStatus={projectStatus}
-					/>
-				))}
+															// change background colour if dragging
+															background: snapshot.isDragging
+																? 'lightgreen'
+																: 'grey',
+
+															// styles we need to apply on draggables
+															...provided
+																.draggableProps
+																.style,
+														}}
+													>
+														<Item
+															key={item.id}
+															item={item}
+															sectionId={data.id}
+															editItem={editItem}
+															removeItem={
+																removeItem
+															}
+															finishItem={
+																finishItem
+															}
+															mode={mode}
+															onClickCommentIcon={() => {
+																const uri = customerViewMode
+																	? `/view/${customerViewMode}/items/${
+																		item.id
+																	  }`
+																	: `/${mode}/items/${
+																		item.id
+																	  }`;
+
+																history.push(
+																	`${projectUrl}${uri}#comments`,
+																);
+															}}
+															projectStatus={
+																projectStatus
+															}
+														/>
+													</div>
+												)}
+											</Draggable>
+										))}
+										{provided.placeholder}
+									</div>
+								)}
+							</Droppable>
+						</DragDropContext>
+					)}
+				</Mutation>
 				{this.state.shouldDisplayAddItem && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (

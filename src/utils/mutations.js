@@ -470,6 +470,7 @@ export const UPDATE_ITEM = gql`
 		$unit: Float
 		$comment: CommentInput
 		$reviewer: Reviewer
+		$position: Int
 		$token: String
 	) {
 		updateItem(
@@ -480,6 +481,7 @@ export const UPDATE_ITEM = gql`
 			comment: $comment
 			unit: $unit
 			reviewer: $reviewer
+			position: $position
 			token: $token
 		) {
 			id
@@ -489,6 +491,7 @@ export const UPDATE_ITEM = gql`
 			description
 			status
 			reviewer
+			position
 			comments {
 				createdAt
 				id

@@ -237,7 +237,7 @@ class EditProject extends Component {
 
 	editItem = (itemId, sectionId, editData, updateItem) => {
 		const {
-			name, type, description, unit, reviewer,
+			name, type, description, unit, reviewer, position,
 		} = editData;
 
 		updateItem({
@@ -247,7 +247,8 @@ class EditProject extends Component {
 				type,
 				description,
 				reviewer,
-				unit: parseFloat(unit),
+				unit: typeof unit === 'number' ? parseFloat(unit) : undefined,
+				position,
 			},
 			optimisticResponse: {
 				__typename: 'Mutation',
@@ -257,6 +258,7 @@ class EditProject extends Component {
 					unit,
 					reviewer,
 					description,
+					position,
 					__typename: 'Item',
 				},
 			},
@@ -273,23 +275,48 @@ class EditProject extends Component {
 				const section = data.project.sections.find(
 					e => e.id === sectionId,
 				);
-				const itemIndex = section.items.find(
+				const itemIndex = section.items.findIndex(
 					e => e.id === updatedItem.id,
 				);
 
-				section.items[itemIndex] = updatedItem;
-				try {
-					cache.writeQuery({
-						query: GET_PROJECT_DATA,
-						variables: {
-							projectId: this.props.match.params.projectId,
-						},
-						data,
+				if (itemIndex !== updatedItem.position) {
+					const itemsToUpdate
+						= updatedItem.position > itemIndex
+							? section.items.slice(
+								itemIndex + 1,
+								updatedItem.position + 1,
+							  )
+							: section.items.slice(
+								updatedItem.position,
+								itemIndex,
+							  );
+
+					const startIndex
+						= updatedItem.position > itemIndex
+							? itemIndex
+							: updatedItem.position + 1;
+
+					itemsToUpdate.forEach((sectionItem, index) => {
+						// eslint-disable-next-line no-param-reassign
+						sectionItem.position = startIndex + index;
 					});
 				}
-				catch (e) {
-					throw new Error(e);
-				}
+
+				const [elementToMove] = section.items.splice(itemIndex, 1);
+
+				section.items.splice(updatedItem.position || itemIndex, 0, {
+					...updatedItem,
+					...elementToMove,
+				});
+
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});

@@ -342,6 +342,7 @@ class TasksListUser extends Component {
 			itemId,
 			token,
 		},
+		refetchQueries: ['userTasks'],
 		optimisticResponse: {
 			__typename: 'Mutation',
 			finishItem: {
@@ -436,7 +437,11 @@ class TasksListUser extends Component {
 		const {projectId} = this.props.match.params;
 
 		return (
-			<Query query={GET_PROJECT_DATA} variables={{projectId}}>
+			<Query
+				query={GET_PROJECT_DATA}
+				variables={{projectId}}
+				fetchPolicy="network-only"
+			>
 				{({
 					loading, error, data, refetch,
 				}) => {

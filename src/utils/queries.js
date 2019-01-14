@@ -344,7 +344,7 @@ export const GET_ITEM_DETAILS = gql`
 `;
 
 export const USER_TASKS = gql`
-	query {
+	query userTasks {
 		me {
 			id
 			startWorkAt

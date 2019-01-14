@@ -70,6 +70,7 @@ class EditProject extends Component {
 	startProject = (projectId, startProject, notifyCustomer) => {
 		startProject({
 			variables: {projectId, notifyCustomer},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {startProject: startedProject}}) => {
 				let data;
 				let updateCache = true;

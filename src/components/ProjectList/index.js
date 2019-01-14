@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import ProjectStateList from '../ProjectStateList';
 import {projectState} from '../../containers/App/Project/project-list';

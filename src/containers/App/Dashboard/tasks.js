@@ -1,7 +1,7 @@
 import React from 'react';
 import {Query, Mutation} from 'react-apollo';
 import {withRouter, Route} from 'react-router-dom';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import Item from '../../../components/ProjectSection/see-item';
 import ItemView from '../../../components/ItemView';

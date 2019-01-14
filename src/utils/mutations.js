@@ -319,6 +319,34 @@ export const ADD_SECTION = gql`
 				unit
 				description
 				reviewer
+				comments {
+					createdAt
+					id
+					views {
+						viewer {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
+					}
+					author {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
 			}
 		}
 	}
@@ -335,6 +363,34 @@ export const UPDATE_SECTION = gql`
 				unit
 				description
 				reviewer
+				comments {
+					createdAt
+					id
+					views {
+						viewer {
+							... on User {
+								firstName
+								lastName
+							}
+							... on Customer {
+								firstName
+								lastName
+								name
+							}
+						}
+					}
+					author {
+						... on User {
+							firstName
+							lastName
+						}
+						... on Customer {
+							firstName
+							lastName
+							name
+						}
+					}
+				}
 			}
 		}
 	}

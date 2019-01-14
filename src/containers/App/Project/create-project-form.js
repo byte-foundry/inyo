@@ -1,6 +1,6 @@
 import React from 'react';
 import {Formik} from 'formik';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {Mutation, Query} from 'react-apollo';
 import Creatable from 'react-select/lib/Creatable';
 import {withRouter} from 'react-router-dom';

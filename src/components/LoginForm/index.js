@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import {Link, Redirect} from 'react-router-dom';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import {Formik} from 'formik';
 import * as Yup from 'yup';

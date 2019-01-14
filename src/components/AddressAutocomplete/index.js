@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import {P, Label, ErrorInput} from '../../utils/content';
 

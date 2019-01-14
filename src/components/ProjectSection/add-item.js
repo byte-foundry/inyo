@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import Autocomplete from 'react-autocomplete';
 import * as Yup from 'yup';
 import {Query} from 'react-apollo';

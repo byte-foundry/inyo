@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {withRouter} from 'react-router-dom';
 import {ToastContainer, toast} from 'react-toastify';
 

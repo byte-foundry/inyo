@@ -366,6 +366,9 @@ class CreateProjectForm extends React.Component {
 														const result = await createProject(
 															{
 																variables,
+																refetchQueries: [
+																	'userCustomersQuery',
+																],
 																update: (
 																	cache,
 																	{

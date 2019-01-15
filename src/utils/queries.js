@@ -237,6 +237,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 				siret
 			}
 			customer {
+				id
 				name
 				firstName
 				lastName
@@ -344,7 +345,7 @@ export const GET_ITEM_DETAILS = gql`
 `;
 
 export const USER_TASKS = gql`
-	query {
+	query userTasks {
 		me {
 			id
 			startWorkAt

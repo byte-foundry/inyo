@@ -31,6 +31,7 @@ class TasksListUser extends Component {
 				unit: parseFloat(unit),
 				comment: comment && {text: comment},
 			},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
 					'set',
@@ -74,6 +75,7 @@ class TasksListUser extends Component {
 		]);
 		removeItem({
 			variables: {itemId},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {removeItem: removedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -165,6 +167,7 @@ class TasksListUser extends Component {
 				description,
 				reviewer,
 			},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {addItem: addedItem}}) => {
 				window.$crisp.push([
 					'set',
@@ -205,6 +208,7 @@ class TasksListUser extends Component {
 		]);
 		removeItem({
 			variables: {itemId},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {removeItem: removedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -273,6 +277,7 @@ class TasksListUser extends Component {
 	addSection = (projectId, addSection) => {
 		addSection({
 			variables: {projectId, name: 'Nouvelle section'},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {addSection: addedSection}}) => {
 				window.$crisp.push([
 					'set',
@@ -305,6 +310,7 @@ class TasksListUser extends Component {
 	removeSection = (sectionId, removeSection) => {
 		removeSection({
 			variables: {sectionId},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {removeSection: removedSection}}) => {
 				window.$crisp.push([
 					'set',
@@ -342,6 +348,7 @@ class TasksListUser extends Component {
 			itemId,
 			token,
 		},
+		refetchQueries: ['userTasks'],
 		optimisticResponse: {
 			__typename: 'Mutation',
 			finishItem: {
@@ -436,7 +443,11 @@ class TasksListUser extends Component {
 		const {projectId} = this.props.match.params;
 
 		return (
-			<Query query={GET_PROJECT_DATA} variables={{projectId}}>
+			<Query
+				query={GET_PROJECT_DATA}
+				variables={{projectId}}
+				fetchPolicy="network-only"
+			>
 				{({
 					loading, error, data, refetch,
 				}) => {

@@ -212,7 +212,7 @@ class CreateProjectForm extends React.Component {
 												}}
 												validationSchema={Yup.object({
 													customer: Yup.object().required(
-														'Requis',
+														"Un client est requis pour la création d'un projet",
 													),
 													projectTitle: Yup.string().required(
 														'Requis',

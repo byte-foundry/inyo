@@ -75,7 +75,7 @@ class LoginForm extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg: 'Wrong credentials',
+										msg: 'Mauvais email ou mot de passe',
 									});
 								}
 							}}

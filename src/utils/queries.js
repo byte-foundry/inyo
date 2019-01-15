@@ -134,6 +134,7 @@ export const GET_PROJECT_DATA = gql`
 			status
 			createdAt
 			deadline
+			daysUntilDeadline
 			issuer {
 				name
 				email
@@ -220,6 +221,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			name
 			status
 			deadline
+			daysUntilDeadline
 			issuedAt
 			issuer {
 				name
@@ -362,6 +364,7 @@ export const USER_TASKS = gql`
 				project {
 					id
 					deadline
+					daysUntilDeadline
 					status
 					customer {
 						id

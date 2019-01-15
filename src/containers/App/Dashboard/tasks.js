@@ -185,9 +185,9 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 															.status
 													}
 													finishItem={finishItem}
-													deadline={
+													daysUntilDeadline={
 														item.section.project
-															.deadline
+															.daysUntilDeadline
 													}
 													mode="dashboard"
 													customer={
@@ -283,9 +283,9 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 															.status
 													}
 													finishItem={finishItem}
-													deadline={
+													daysUntilDeadline={
 														item.section.project
-															.deadline
+															.daysUntilDeadline
 													}
 													mode="dashboard"
 													customer={

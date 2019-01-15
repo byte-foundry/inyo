@@ -240,6 +240,7 @@ export const CREATE_PROJECT = gql`
 			name
 			viewedByCustomer
 			deadline
+			daysUntilDeadline
 			customer {
 				name
 			}

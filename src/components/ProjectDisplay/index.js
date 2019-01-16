@@ -397,18 +397,16 @@ class ProjectDisplay extends Component {
 												label="Date de fin"
 											/>
 										</TotalContainer>
-										<TotalContainer>
-											<ProjectTotal
-												sumDays={Math.ceil(
-													(new Date(
-														project.deadline,
-													)
-														- new Date())
-														/ 86400000,
-												)}
-												label="Jours avant date de fin"
-											/>
-										</TotalContainer>
+										{project.daysUntilDeadline !== null && (
+											<TotalContainer>
+												<ProjectTotal
+													sumDays={
+														project.daysUntilDeadline
+													}
+													label="Jours travaillés avant date de fin"
+												/>
+											</TotalContainer>
+										)}
 										<TotalContainer>
 											<ProjectTotal
 												sumDays={this.getProjectTotal(

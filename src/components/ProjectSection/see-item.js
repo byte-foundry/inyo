@@ -142,15 +142,11 @@ class Item extends Component {
 			projectStatus,
 			customer,
 			onClickCommentIcon,
-			deadline,
+			daysUntilDeadline,
 		} = this.props;
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
-
-		const daysUntilDeadline = Math.round(
-			(new Date(deadline) - new Date()) / (24 * 60 * 60 * 1000),
-		);
 
 		if (shouldDisplayAddItem && mode === 'edit' && editItem) {
 			return (
@@ -284,7 +280,7 @@ class Item extends Component {
 						/>
 					</ItemUnit>
 					{mode === 'dashboard'
-						&& daysUntilDeadline && (
+						&& typeof daysUntilDeadline === 'number' && (
 						<ItemUnit color={primaryBlue}>
 							{daysUntilDeadline}{' '}
 							<Plural

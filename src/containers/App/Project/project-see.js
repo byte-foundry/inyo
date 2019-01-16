@@ -16,10 +16,16 @@ import {
 import ProjectDisplay from '../../../components/ProjectDisplay';
 
 class TasksListUser extends Component {
-	editItem = async (itemId, sectionId, data, updateItem) => {
+	editItem = async (itemId, sectionId, editData, updateItem) => {
 		const {
-			name, type, unit, comment, reviewer, description,
-		} = data;
+			name,
+			type,
+			unit,
+			comment,
+			reviewer,
+			description,
+			position,
+		} = editData;
 
 		return updateItem({
 			variables: {
@@ -28,8 +34,21 @@ class TasksListUser extends Component {
 				type,
 				reviewer,
 				description,
-				unit: parseFloat(unit),
+				unit: typeof unit === 'number' ? parseFloat(unit) : undefined,
+				position,
 				comment: comment && {text: comment},
+			},
+			optimisticResponse: {
+				__typename: 'Mutation',
+				updateItem: {
+					id: itemId,
+					name,
+					unit,
+					reviewer,
+					description,
+					position,
+					__typename: 'Item',
+				},
 			},
 			refetchQueries: ['userTasks'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
@@ -38,30 +57,59 @@ class TasksListUser extends Component {
 					'session:event',
 					[[['item_edited', undefined, 'yellow']]],
 				]);
-				const projectData = cache.readQuery({
+				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
 				});
-				const section = projectData.project.sections.find(
+				const section = data.project.sections.find(
 					e => e.id === sectionId,
 				);
-				const itemIndex = section.items.find(
+				const itemIndex = section.items.findIndex(
 					e => e.id === updatedItem.id,
 				);
 
-				section.items[itemIndex] = updatedItem;
-				try {
-					cache.writeQuery({
-						query: GET_PROJECT_DATA,
-						variables: {
-							projectId: this.props.match.params.projectId,
-						},
-						projectData,
+				if (itemIndex !== updatedItem.position) {
+					const itemsToUpdate
+						= updatedItem.position > itemIndex
+							? section.items.slice(
+								itemIndex + 1,
+								updatedItem.position + 1,
+							  )
+							: section.items.slice(
+								updatedItem.position,
+								itemIndex,
+							  );
+
+					const startIndex
+						= updatedItem.position > itemIndex
+							? itemIndex
+							: updatedItem.position + 1;
+
+					itemsToUpdate.forEach((sectionItem, index) => {
+						// eslint-disable-next-line no-param-reassign
+						sectionItem.position = startIndex + index;
 					});
 				}
-				catch (e) {
-					throw e;
-				}
+
+				const [elementToMove] = section.items.splice(itemIndex, 1);
+				const itemPosition
+					= typeof updatedItem.position === 'number'
+						? updatedItem.position
+						: itemIndex;
+
+				section.items.splice(itemPosition, 0, {
+					...updatedItem,
+					...elementToMove,
+				});
+
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});

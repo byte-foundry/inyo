@@ -303,8 +303,12 @@ class EditProject extends Component {
 				}
 
 				const [elementToMove] = section.items.splice(itemIndex, 1);
+				const itemPosition
+					= typeof updatedItem.position === 'number'
+						? updatedItem.position
+						: itemIndex;
 
-				section.items.splice(updatedItem.position || itemIndex, 0, {
+				section.items.splice(itemPosition, 0, {
 					...updatedItem,
 					...elementToMove,
 				});

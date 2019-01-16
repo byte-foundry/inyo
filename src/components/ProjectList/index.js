@@ -15,7 +15,7 @@ class ProjectList extends Component {
 	render() {
 		const {projects} = this.props;
 
-		const projectColumn = Object.entries(projectState).map(([state]) => {
+		const projectColumn = Object.keys(projectState).map((state) => {
 			const filteredProjects = projects.filter(
 				project => project.status === state,
 			);

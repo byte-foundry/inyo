@@ -26,6 +26,7 @@
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "medium-draft": "^0.5.6",
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-apollo": "^2.2.4",
     "react-autocomplete": "^1.8.1",

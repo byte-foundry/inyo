@@ -218,14 +218,6 @@ export const CREATE_CUSTOMER = gql`
 `;
 /** ******** PROJECT MUTATIONS ********* */
 
-export const EDIT_ITEMS = gql`
-	mutation EditItems($items: [String!]!) {
-		editItems(items: $items) @client {
-			items
-		}
-	}
-`;
-// Project
 export const CREATE_PROJECT = gql`
 	# creating project with a customer id or a new customer
 	mutation createProject(
@@ -248,6 +240,7 @@ export const CREATE_PROJECT = gql`
 			name
 			viewedByCustomer
 			deadline
+			daysUntilDeadline
 			customer {
 				name
 			}
@@ -359,6 +352,7 @@ export const ADD_ITEM = gql`
 	mutation addItem(
 		$sectionId: ID!
 		$name: String!
+		$type: ItemType
 		$unit: Float
 		$vatRate: Int
 		$description: String
@@ -367,6 +361,7 @@ export const ADD_ITEM = gql`
 		addItem(
 			sectionId: $sectionId
 			name: $name
+			type: $type
 			unit: $unit
 			vatRate: $vatRate
 			description: $description
@@ -374,6 +369,7 @@ export const ADD_ITEM = gql`
 		) {
 			id
 			name
+			type
 			unit
 			description
 			status
@@ -413,21 +409,26 @@ export const UPDATE_ITEM = gql`
 	mutation updateItem(
 		$itemId: ID!
 		$name: String
+		$type: ItemType
 		$description: String
 		$unit: Float
 		$comment: CommentInput
 		$reviewer: Reviewer
+		$token: String
 	) {
 		updateItem(
 			id: $itemId
 			name: $name
+			type: $type
 			description: $description
 			comment: $comment
 			unit: $unit
 			reviewer: $reviewer
+			token: $token
 		) {
 			id
 			name
+			type
 			unit
 			description
 			status

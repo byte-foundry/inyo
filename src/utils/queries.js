@@ -134,6 +134,7 @@ export const GET_PROJECT_DATA = gql`
 			status
 			createdAt
 			deadline
+			daysUntilDeadline
 			issuer {
 				name
 				email
@@ -174,6 +175,7 @@ export const GET_PROJECT_DATA = gql`
 					status
 					id
 					name
+					type
 					unit
 					reviewer
 					comments {
@@ -219,6 +221,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			name
 			status
 			deadline
+			daysUntilDeadline
 			issuedAt
 			issuer {
 				name
@@ -236,6 +239,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 				siret
 			}
 			customer {
+				id
 				name
 				firstName
 				lastName
@@ -254,6 +258,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					status
 					id
 					name
+					type
 					unit
 					reviewer
 					comments {
@@ -319,6 +324,7 @@ export const GET_ITEM_DETAILS = gql`
 		item(id: $id, token: $token) {
 			id
 			name
+			type
 			status
 			description
 			unit
@@ -341,7 +347,7 @@ export const GET_ITEM_DETAILS = gql`
 `;
 
 export const USER_TASKS = gql`
-	query {
+	query userTasks {
 		me {
 			id
 			startWorkAt
@@ -359,6 +365,7 @@ export const USER_TASKS = gql`
 				project {
 					id
 					deadline
+					daysUntilDeadline
 					status
 					customer {
 						id

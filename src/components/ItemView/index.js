@@ -1,6 +1,5 @@
-import gql from 'graphql-tag';
 import React from 'react';
-import {Query} from 'react-apollo';
+import {Query, Mutation} from 'react-apollo';
 import styled from 'react-emotion';
 import {Link} from 'react-router-dom';
 
@@ -9,15 +8,18 @@ import TaskStatus from '../TaskStatus';
 import {
 	H2,
 	H3,
+	H4,
 	gray50,
 	gray70,
 	SpinningBubble,
 	primaryBlue,
 	primaryNavyBlue,
 } from '../../utils/content';
+import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
+import {UPDATE_ITEM} from '../../utils/mutations';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
@@ -69,10 +71,6 @@ const MetaTime = styled('time')`
 	margin-left: 5px;
 `;
 
-const NoDescription = styled('div')`
-	color: ${gray50};
-`;
-
 const Description = styled('div')`
 	color: ${gray70};
 	line-height: 1.6;
@@ -90,9 +88,32 @@ const Item = ({
 			if (error) throw error;
 
 			const {item} = data;
+			let {description} = data;
 			const {project} = item.section;
 
 			const deadline = new Date(project.deadline);
+
+			// parse the description for the file list
+			let files = [];
+			const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+
+			if (fileListRegex.test(item.description)) {
+				const matches = item.description
+					.match(fileListRegex)[0]
+					.split('# content-acquisition-list');
+
+				const fileItemRegex = /- \[([ x])\] (.+)/;
+
+				files = matches
+					.pop()
+					.split('\n')
+					.filter(line => fileItemRegex.test(line))
+					.map(line => ({
+						checked: /^- \[[x]]/.test(line),
+						name: line.match(fileItemRegex).pop(),
+					}));
+				description = matches.join('# content-acquisition-list');
+			}
 
 			return (
 				<>
@@ -135,12 +156,12 @@ const Item = ({
 								/>
 							</MetaText>
 						</Meta>
-						{deadline && (
+						{deadline.toString() !== 'Invalid Date' && (
 							<Meta>
 								<DateIcon />
 								<MetaTime
 									title={deadline.toLocaleString()}
-									dateTime={deadline}
+									dateTime={deadline.toJSON()}
 								>
 									{deadline.toLocaleDateString()}
 								</MetaTime>
@@ -151,7 +172,38 @@ const Item = ({
 							<MetaText>{project.customer.name}</MetaText>
 						</Meta>
 					</Metas>
-					<Description>{item.description}</Description>
+					<Description>{description}</Description>
+					<H4>Contenus à récupérer</H4>
+					{item.type === 'CONTENT_ACQUISITION' && (
+						<Mutation mutation={UPDATE_ITEM}>
+							{updateItem => (
+								<CheckList
+									editable={!customerToken} // editable by user only, but checkable
+									items={files}
+									onChange={({items}) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												token: customerToken,
+												description: description.concat(
+													`\n# content-acquisition-list\n${items
+														.map(
+															({checked, name}) => `- [${
+																checked
+																	? 'x'
+																	: ' '
+															}] ${name}`,
+														)
+														.join('\n')}`,
+												),
+											},
+										});
+									}}
+								/>
+							)}
+						</Mutation>
+					)}
+					<H4>Commentaires</H4>
 					<CommentList
 						itemId={item.id}
 						customerToken={customerToken}

@@ -18,18 +18,20 @@ import ProjectDisplay from '../../../components/ProjectDisplay';
 class TasksListUser extends Component {
 	editItem = async (itemId, sectionId, data, updateItem) => {
 		const {
-			name, unit, comment, reviewer, description,
+			name, type, unit, comment, reviewer, description,
 		} = data;
 
 		return updateItem({
 			variables: {
 				itemId,
 				name,
+				type,
 				reviewer,
 				description,
 				unit: parseFloat(unit),
 				comment: comment && {text: comment},
 			},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
 					'set',
@@ -73,6 +75,7 @@ class TasksListUser extends Component {
 		]);
 		removeItem({
 			variables: {itemId},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {removeItem: removedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -152,17 +155,19 @@ class TasksListUser extends Component {
 
 	addItem = (sectionId, addItemValues, addItem) => {
 		const {
-			name, unit, description, reviewer,
+			name, type, unit, description, reviewer,
 		} = addItemValues;
 
 		addItem({
 			variables: {
 				sectionId,
 				name,
+				type,
 				unit: parseFloat(unit),
 				description,
 				reviewer,
 			},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {addItem: addedItem}}) => {
 				window.$crisp.push([
 					'set',
@@ -203,6 +208,7 @@ class TasksListUser extends Component {
 		]);
 		removeItem({
 			variables: {itemId},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {removeItem: removedItem}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
@@ -271,6 +277,7 @@ class TasksListUser extends Component {
 	addSection = (projectId, addSection) => {
 		addSection({
 			variables: {projectId, name: 'Nouvelle section'},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {addSection: addedSection}}) => {
 				window.$crisp.push([
 					'set',
@@ -303,6 +310,7 @@ class TasksListUser extends Component {
 	removeSection = (sectionId, removeSection) => {
 		removeSection({
 			variables: {sectionId},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {removeSection: removedSection}}) => {
 				window.$crisp.push([
 					'set',
@@ -340,6 +348,7 @@ class TasksListUser extends Component {
 			itemId,
 			token,
 		},
+		refetchQueries: ['userTasks'],
 		optimisticResponse: {
 			__typename: 'Mutation',
 			finishItem: {
@@ -434,7 +443,11 @@ class TasksListUser extends Component {
 		const {projectId} = this.props.match.params;
 
 		return (
-			<Query query={GET_PROJECT_DATA} variables={{projectId}}>
+			<Query
+				query={GET_PROJECT_DATA}
+				variables={{projectId}}
+				fetchPolicy="network-only"
+			>
 				{({
 					loading, error, data, refetch,
 				}) => {

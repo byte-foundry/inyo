@@ -69,9 +69,9 @@ const ItemRow = styled(FlexRow)`
 	box-shadow: 0px 0px 8px ${alpha10};
 	margin-bottom: 7px;
 	box-sizing: border-box;
-	border-right: ${props => (props.reviewer === 'USER' ? '1px solid' : '5px solid')}
-		${props => (props.reviewer === 'USER' ? alpha10 : primaryBlue)};
-	padding: 5px 20px;
+	border-right: 5px solid
+		${props => (props.reviewer === 'USER' ? primaryWhite : primaryBlue)};
+	padding: 5px 0px 5px 20px;
 `;
 
 const CommentContainer = styled('div')`
@@ -142,15 +142,11 @@ class Item extends Component {
 			projectStatus,
 			customer,
 			onClickCommentIcon,
-			deadline,
+			daysUntilDeadline,
 		} = this.props;
 		const {comments, status} = item;
 		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
-
-		const daysUntilDeadline = Math.round(
-			(new Date(deadline) - new Date()) / (24 * 60 * 60 * 1000),
-		);
 
 		if (shouldDisplayAddItem && mode === 'edit' && editItem) {
 			return (
@@ -284,7 +280,7 @@ class Item extends Component {
 						/>
 					</ItemUnit>
 					{mode === 'dashboard'
-						&& daysUntilDeadline && (
+						&& typeof daysUntilDeadline === 'number' && (
 						<ItemUnit color={primaryBlue}>
 							{daysUntilDeadline}{' '}
 							<Plural

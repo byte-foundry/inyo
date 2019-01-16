@@ -158,6 +158,7 @@ class ProjectCustomerView extends Component {
 			<Query
 				query={GET_PROJECT_DATA_WITH_TOKEN}
 				variables={{projectId, token: customerToken}}
+				fetchPolicy="network-only"
 			>
 				{({
 					loading, error, data, refetch,

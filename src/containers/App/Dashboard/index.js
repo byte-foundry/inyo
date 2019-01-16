@@ -39,6 +39,7 @@ class Dashboard extends Component {
 			itemId,
 			token,
 		},
+		refetchQueries: ['userTasks'],
 		optimisticResponse: {
 			__typename: 'Mutation',
 			finishItem: {

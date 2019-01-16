@@ -70,6 +70,7 @@ class EditProject extends Component {
 	startProject = (projectId, startProject, notifyCustomer) => {
 		startProject({
 			variables: {projectId, notifyCustomer},
+			refetchQueries: ['userTasks'],
 			update: (cache, {data: {startProject: startedProject}}) => {
 				let data;
 				let updateCache = true;
@@ -190,13 +191,14 @@ class EditProject extends Component {
 
 	addItem = (sectionId, addItemValues, addItem) => {
 		const {
-			name, unit, description, reviewer,
+			name, type, unit, description, reviewer,
 		} = addItemValues;
 
 		addItem({
 			variables: {
 				sectionId,
 				name,
+				type,
 				unit: parseFloat(unit),
 				description,
 				reviewer,
@@ -235,13 +237,14 @@ class EditProject extends Component {
 
 	editItem = (itemId, sectionId, editData, updateItem) => {
 		const {
-			name, description, unit, reviewer,
+			name, type, description, unit, reviewer,
 		} = editData;
 
 		updateItem({
 			variables: {
 				itemId,
 				name,
+				type,
 				description,
 				reviewer,
 				unit: parseFloat(unit),

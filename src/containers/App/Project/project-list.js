@@ -30,28 +30,46 @@ export const projectState = {
 };
 
 class ListProjects extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			projects: undefined,
-		};
-	}
+	state = {
+		customerFilter: null,
+		dateFilter: null,
+	};
 
 	render() {
-		const {projects, baseProjects} = this.state;
+		const {dateFilter, customerFilter} = this.state;
 
 		return (
 			<Query query={GET_ALL_PROJECTS}>
 				{({loading, error, data}) => {
 					if (loading) return <Loading />;
-					if (error) {
-						throw new Error(error);
+					if (error) throw error;
+
+					let {projects} = data.me.company;
+
+					// order by creation date
+					projects.sort(
+						(a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+					);
+
+					// filter with customer name
+					if (customerFilter) {
+						projects = projects.filter(
+							project => project.customer.name === customerFilter,
+						);
 					}
-					if (!projects) {
-						this.setState({
-							projects: data.me.company.projects,
-							baseProjects: data.me.company.projects,
-						});
+
+					// filter between two dates
+					if (dateFilter) {
+						projects = projects.filter(
+							project => (project.issuedAt
+								? new Date(project.issuedAt)
+								: new Date(project.createdAt))
+									>= dateFilter.from
+								&& (project.issuedAt
+									? new Date(project.issuedAt)
+									: new Date(project.createdAt))
+									<= dateFilter.to,
+						);
 					}
 
 					return (
@@ -109,37 +127,21 @@ class ListProjects extends Component {
 							{projects && (
 								<div>
 									<SearchProjectForm
-										baseProjects={baseProjects}
-										sortByCustomer={(value) => {
+										baseProjects={projects}
+										filterByCustomer={(value) => {
 											this.setState({
-												projects:
+												customerFilter:
 													value === 'all'
-														? baseProjects
-														: baseProjects.filter(
-															e => e.customer
-																.name
-																	=== value,
-														  ),
+														? null
+														: value,
 											});
 										}}
-										sortByDate={(from, to) => {
+										filterByDate={(from, to) => {
 											this.setState({
-												projects: baseProjects.filter(
-													project => (project.issuedAt
-														? new Date(
-															project.issuedAt,
-															  )
-														: new Date(
-															project.createdAt,
-															  )) >= from
-														&& (project.issuedAt
-															? new Date(
-																project.issuedAt,
-															  )
-															: new Date(
-																project.createdAt,
-															  )) <= to,
-												),
+												dateFilter: {
+													from,
+													to,
+												},
 											});
 										}}
 									/>

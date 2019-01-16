@@ -348,25 +348,29 @@ class ProjectDisplay extends Component {
 															/>
 														),
 													)}
-													<Mutation
-														mutation={ADD_SECTION}
-													>
-														{AddSection => (
-															<ProjectAction
-																theme="Link"
-																size="XSmall"
-																onClick={() => {
-																	addSection(
-																		project.id,
-																		AddSection,
-																	);
-																}}
-															>
-																Ajouter une
-																section
-															</ProjectAction>
-														)}
-													</Mutation>
+													{!customerViewMode && (
+														<Mutation
+															mutation={
+																ADD_SECTION
+															}
+														>
+															{AddSection => (
+																<ProjectAction
+																	theme="Link"
+																	size="XSmall"
+																	onClick={() => {
+																		addSection(
+																			project.id,
+																			AddSection,
+																		);
+																	}}
+																>
+																	Ajouter une
+																	section
+																</ProjectAction>
+															)}
+														</Mutation>
+													)}
 												</ProjectSections>
 											</FlexColumn>
 										</ProjectContent>
@@ -393,18 +397,16 @@ class ProjectDisplay extends Component {
 												label="Date de fin"
 											/>
 										</TotalContainer>
-										<TotalContainer>
-											<ProjectTotal
-												sumDays={Math.ceil(
-													(new Date(
-														project.deadline,
-													)
-														- new Date())
-														/ 86400000,
-												)}
-												label="Jours avant date de fin"
-											/>
-										</TotalContainer>
+										{project.daysUntilDeadline !== null && (
+											<TotalContainer>
+												<ProjectTotal
+													sumDays={
+														project.daysUntilDeadline
+													}
+													label="Jours travaillés avant date de fin"
+												/>
+											</TotalContainer>
+										)}
 										<TotalContainer>
 											<ProjectTotal
 												sumDays={this.getProjectTotal(

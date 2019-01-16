@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import styled from 'react-emotion';
 
-import {primaryWhite, primaryBlue, gray20} from '../../utils/content';
+import {
+	primaryWhite,
+	primaryBlue,
+	primaryNavyBlue,
+	gray20,
+} from '../../utils/content';
 
 const CommentIconMain = styled('div')`
-	background: ${props => (props.commentLength > 0 ? '#3860ff' : gray20)};
-	color: ${primaryWhite};
+	background: ${props => (props.unreadCommentLength > 0 ? '#3860ff' : gray20)};
+	color: ${props => (props.unreadCommentLength > 0 ? primaryWhite : primaryNavyBlue)};
 	padding: 5px;
 	flex: 0 0 18px;
 	width: 18px;
@@ -18,7 +23,7 @@ const CommentIconMain = styled('div')`
 	margin-left: 1em;
 
 	&::before {
-		content: "${props => (props.commentLength > 0 ? '' : '+')}";
+		content: "${props => (props.commentsLength > 0 ? '' : '+')}";
 		position: relative;
 		font-weight: 800;
 		font-size: 14px;
@@ -27,7 +32,7 @@ const CommentIconMain = styled('div')`
 
 	&::after {
 		border-top: solid 5px
-			${props => (props.commentLength > 0 ? '#3860ff' : gray20)};
+			${props => (props.unreadCommentLength > 0 ? '#3860ff' : gray20)};
 		border-left: solid 5px transparent;
 		border-right: solid 5px transparent;
 		content: '';
@@ -51,12 +56,13 @@ class CommentIcon extends Component {
 		}
 		return (
 			<CommentIconMain
-				commentLength={commentLength}
+				unreadCommentLength={commentLength}
+				commentsLength={comments.length}
 				onClick={(e) => {
 					this.props.onClick(e);
 				}}
 			>
-				{commentLength !== 0 && commentLength}
+				{comments.length !== 0 && comments.length}
 			</CommentIconMain>
 		);
 	}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';

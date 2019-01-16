@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {Query} from 'react-apollo';
 import {Redirect, withRouter} from 'react-router-dom';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
+import {css} from '@emotion/core';
 
-import {Ul, secondaryRed} from '../../utils/content';
+import {Ul, secondaryRed, primaryBlue} from '../../utils/content';
 
 import InlineEditable from '../InlineEditable';
 
@@ -20,6 +21,31 @@ const DeleteIcon = styled('span')`
 	cursor: pointer;
 	padding: 0 10px;
 	color: ${secondaryRed};
+`;
+
+const placeholderCss = css`
+	font-style: italic;
+	font-size: 14px;
+	cursor: pointer;
+
+	&::before {
+		content: '+';
+		display: inline-block;
+		color: ${primaryBlue};
+		margin-right: 0.8rem;
+		font-style: normal;
+		font-size: 1.2rem;
+	}
+`;
+
+const nameCss = css`
+	padding: 5px 10px;
+	margin: 5px 20px;
+`;
+
+const editableCss = css`
+	padding: 0 0 0 0.8rem;
+	font-size: 14px;
 `;
 
 class CheckList extends Component {
@@ -47,7 +73,11 @@ class CheckList extends Component {
 							disabled={!editable}
 							value={item.name}
 							type="text"
+							for="checkList"
 							placeholder="Ajoutez les titres des contenus à récupérer et validez"
+							placeholderCss={placeholderCss}
+							nameCss={nameCss}
+							editableCss={editableCss}
 							onFocusOut={(value) => {
 								if (!value) {
 									onChange({
@@ -88,7 +118,11 @@ class CheckList extends Component {
 					<ContentItem>
 						<InlineEditable
 							type="text"
+							size="small"
 							placeholder="Ajoutez les titres des contenus à récupérer et validez"
+							placeholderCss={placeholderCss}
+							nameCss={nameCss}
+							editableCss={editableCss}
 							onFocusOut={(value) => {
 								if (value) {
 									onChange({

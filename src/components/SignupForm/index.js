@@ -3,7 +3,7 @@ import {Mutation} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 

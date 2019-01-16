@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import * as Sentry from '@sentry/browser';
 import * as Yup from 'yup';

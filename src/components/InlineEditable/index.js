@@ -1,34 +1,21 @@
 import React, {Component} from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import {Input, gray50, primaryBlue} from '../../utils/content';
 
 const Placeholder = styled('span')`
 	color: ${gray50};
-	font-style: italic;
-	font-size: 14px;
-	cursor: pointer;
-
-	&::before {
-		content: '+';
-		display: inline-block;
-		color: ${primaryBlue};
-		margin-right: 0.8rem;
-		font-style: normal;
-		font-size: 1.2rem;
-	}
+	${props => props.css};
 `;
 
 const NameInput = styled(Input)`
 	font-size: inherit;
-	padding: 5px 10px;
-	margin: 5px 20px;
+	${props => props.css};
 `;
 
 const Editable = styled('span')`
-	padding: 0 0 0 0.8rem;
 	color: ${primaryBlue};
-	font-size: 14px;
+	${props => props.css};
 `;
 
 class InlineEditable extends Component {
@@ -75,6 +62,7 @@ class InlineEditable extends Component {
 					autoFocus
 					flexible
 					className={className}
+					css={this.props.nameCss}
 					onKeyPress={(e) => {
 						if (e.key === 'Enter') {
 							e.target.blur();
@@ -86,14 +74,22 @@ class InlineEditable extends Component {
 
 		if (value) {
 			return (
-				<Editable className={className} onClick={this.handleFocus}>
+				<Editable
+					className={className}
+					onClick={this.handleFocus}
+					css={this.props.editableCss}
+				>
 					{value}
 				</Editable>
 			);
 		}
 
 		return (
-			<Placeholder className={className} onClick={this.handleFocus}>
+			<Placeholder
+				className={className}
+				onClick={this.handleFocus}
+				css={this.props.placeholderCss}
+			>
 				{placeholder}
 			</Placeholder>
 		);

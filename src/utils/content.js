@@ -1,4 +1,5 @@
-import styled, {css, keyframes} from 'react-emotion';
+import styled from '@emotion/styled';
+import {css, keyframes} from '@emotion/core';
 import React from 'react';
 import Shevy from 'shevyjs';
 import {Dialog} from '@reach/dialog';

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {
 	FlexRow, P, Button, gray70, gray10,
 } from '../../utils/content';

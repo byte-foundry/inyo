@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {convertToRaw} from 'draft-js';
 import {Editor, createEditorState} from 'medium-draft';
 import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import 'medium-draft/lib/index.css';
 import {gray20} from '../../utils/content';
 

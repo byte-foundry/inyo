@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {Switch, Route, Redirect} from 'react-router-dom';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 

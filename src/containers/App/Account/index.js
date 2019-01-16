@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {Redirect} from 'react-router-dom';
-import styled, {css} from 'react-emotion';
+import styled from '@emotion/styled';
+import {css} from '@emotion/core';
 import {ToastContainer, toast} from 'react-toastify';
 
 import TopBar, {

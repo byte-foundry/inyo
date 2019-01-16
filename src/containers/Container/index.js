@@ -3,7 +3,7 @@ import {Switch, Route} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 
 import GoogleAnalytics from 'react-ga';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {Body} from '../../utils/content';
 import Landing from '../Landing';
 import App from '../App';

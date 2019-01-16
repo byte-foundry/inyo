@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {
 	Link, Switch, Route, Redirect,
 } from 'react-router-dom';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
 import {
 	P,

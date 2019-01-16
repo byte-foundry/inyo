@@ -261,6 +261,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					type
 					unit
 					reviewer
+					position
 					comments {
 						createdAt
 						id

@@ -253,10 +253,15 @@ export const CREATE_PROJECT = gql`
 `;
 export const UPDATE_PROJECT = gql`
 	# creating project with a customer id or a new customer
-	mutation updateProject($projectId: ID!, $name: String!) {
-		updateProject(id: $projectId, name: $name) {
+	mutation updateProject(
+		$projectId: ID!
+		$name: String
+		$deadline: DateTime
+	) {
+		updateProject(id: $projectId, name: $name, deadline: $deadline) {
 			id
 			name
+			deadline
 		}
 	}
 `;

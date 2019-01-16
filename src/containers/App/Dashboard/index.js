@@ -31,6 +31,7 @@ const Content = styled('div')`
 
 const WelcomeMessage = styled(H2)`
 	color: ${primaryBlue};
+	display: none;
 `;
 
 class Dashboard extends Component {

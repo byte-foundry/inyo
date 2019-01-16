@@ -89,24 +89,24 @@ const SelectStyles = {
 	option: base => ({
 		...base,
 		borderRadius: 0,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 	}),
 	menu: base => ({
 		...base,
 		marginTop: 2,
 		borderRadius: 0,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 	}),
 	control: base => ({
 		...base,
 		borderRadius: 0,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 		width: '300px',
 		height: '100%',
 	}),
 	input: base => ({
 		...base,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 		marginTop: '5px',
 	}),
 };

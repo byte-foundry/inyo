@@ -215,7 +215,6 @@ class Account extends Component {
 							</TopBar>
 
 							<AccountBody>
-								<TopBarTitle>Mon compte</TopBarTitle>
 								<WelcomeMessage>
 									Bonjour {firstName} !
 								</WelcomeMessage>

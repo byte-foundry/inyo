@@ -84,11 +84,12 @@ const Item = ({
 }) => (
 	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
+			debugger;
 			if (loading) return <SpinningBubble />;
 			if (error) throw error;
 
 			const {item} = data;
-			let {description} = data;
+			let {description} = item;
 			const {project} = item.section;
 
 			const deadline = new Date(project.deadline);

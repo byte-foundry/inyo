@@ -23,7 +23,7 @@ class EditProject extends Component {
 	toast = () => {
 		toast.success(
 			<div>
-				<p>📬 Le projet a été envoyé !</p>
+				<p>📬 Le projet a été créé !</p>
 				<p>Retour au menu principal.</p>
 			</div>,
 			{

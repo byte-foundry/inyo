@@ -4,7 +4,7 @@ import {css} from '@emotion/core';
 import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
-import {FINISH_ITEM, FINISH_PROJECT} from '../../utils/mutations';
+import {FINISH_ITEM} from '../../utils/mutations';
 
 import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
 import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
@@ -111,41 +111,35 @@ class TaskStatus extends Component {
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItemMutation => (
-					<Mutation mutation={FINISH_PROJECT}>
-						{finishProjectMutation => (
-							<TaskStatusMain
-								onClick={() => {
-									if (
-										((mode === 'see'
-											|| mode === 'dashboard')
-											&& (!customerViewMode
-												&& reviewer === 'USER'
-												&& status === 'PENDING'))
-										|| (customerViewMode
-											&& reviewer === 'CUSTOMER'
-											&& status === 'PENDING')
-									) {
-										finishItem(
-											itemId,
-											sectionId,
-											finishItemMutation,
-											customerToken,
-											finishProjectMutation,
-										);
-									}
-								}}
-							>
-								<Status
-									status={status}
-									customer={customerViewMode}
-									reviewer={reviewer}
-									projectStatus={projectStatus}
-								>
-									{getTaskIconByStatus(status)}
-								</Status>
-							</TaskStatusMain>
-						)}
-					</Mutation>
+					<TaskStatusMain
+						onClick={() => {
+							if (
+								((mode === 'see' || mode === 'dashboard')
+									&& (!customerViewMode
+										&& reviewer === 'USER'
+										&& status === 'PENDING'))
+								|| (customerViewMode
+									&& reviewer === 'CUSTOMER'
+									&& status === 'PENDING')
+							) {
+								finishItem(
+									itemId,
+									sectionId,
+									finishItemMutation,
+									customerToken,
+								);
+							}
+						}}
+					>
+						<Status
+							status={status}
+							customer={customerViewMode}
+							reviewer={reviewer}
+							projectStatus={projectStatus}
+						>
+							{getTaskIconByStatus(status)}
+						</Status>
+					</TaskStatusMain>
 				)}
 			</Mutation>
 		);

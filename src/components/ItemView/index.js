@@ -84,11 +84,12 @@ const Item = ({
 }) => (
 	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
+			debugger;
 			if (loading) return <SpinningBubble />;
 			if (error) throw error;
 
 			const {item} = data;
-			let {description} = data;
+			let {description} = item;
 			const {project} = item.section;
 
 			const deadline = new Date(project.deadline);
@@ -173,35 +174,40 @@ const Item = ({
 						</Meta>
 					</Metas>
 					<Description>{description}</Description>
-					<H4>Contenus à récupérer</H4>
 					{item.type === 'CONTENT_ACQUISITION' && (
-						<Mutation mutation={UPDATE_ITEM}>
-							{updateItem => (
-								<CheckList
-									editable={!customerToken} // editable by user only, but checkable
-									items={files}
-									onChange={({items}) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												token: customerToken,
-												description: description.concat(
-													`\n# content-acquisition-list\n${items
-														.map(
-															({checked, name}) => `- [${
-																checked
-																	? 'x'
-																	: ' '
-															}] ${name}`,
-														)
-														.join('\n')}`,
-												),
-											},
-										});
-									}}
-								/>
-							)}
-						</Mutation>
+						<>
+							<H4>Contenus à récupérer</H4>
+							<Mutation mutation={UPDATE_ITEM}>
+								{updateItem => (
+									<CheckList
+										editable={!customerToken} // editable by user only, but checkable
+										items={files}
+										onChange={({items}) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													token: customerToken,
+													description: description.concat(
+														`\n# content-acquisition-list\n${items
+															.map(
+																({
+																	checked,
+																	name,
+																}) => `- [${
+																	checked
+																		? 'x'
+																		: ' '
+																}] ${name}`,
+															)
+															.join('\n')}`,
+													),
+												},
+											});
+										}}
+									/>
+								)}
+							</Mutation>
+						</>
 					)}
 					<H4>Commentaires</H4>
 					<CommentList

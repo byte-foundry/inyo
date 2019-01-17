@@ -200,6 +200,7 @@ class ProjectDisplay extends Component {
 												}}
 											>
 												<DashboardIcon />
+												<span>Dashboard</span>
 											</TopBarButton>
 											<TopBarButton
 												theme="Link"
@@ -211,6 +212,7 @@ class ProjectDisplay extends Component {
 												}}
 											>
 												<FoldersIcon />
+												<span>Projets</span>
 											</TopBarButton>
 											<TopBarButton
 												theme="Link"
@@ -222,6 +224,7 @@ class ProjectDisplay extends Component {
 												}}
 											>
 												<SettingsIcon />
+												<span>Réglages</span>
 											</TopBarButton>
 										</TopBarNavigation>
 									</TopBar>

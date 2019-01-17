@@ -136,10 +136,11 @@ const StartProjectButton = styled(Button)`
 `;
 
 const DateButton = styled('div')`
-	margin-right: 10px;
+	margin-left: 10px;
 	margin-top: 10px;
-	color: ${props => (props.cancel ? 'red' : 'green')};
+	color: ${props => (props.cancel ? 'orange' : 'green')};
 	cursor: pointer;
+	font-size: 12px;
 	&:hover {
 		text-decoration: underline;
 	}
@@ -535,9 +536,8 @@ class ProjectDisplay extends Component {
 																			component={dateProps => (
 																				<DateInput
 																					{...dateProps}
-																					alone={
-																						true
-																					}
+																					alone
+																					wide
 																				/>
 																			)}
 																			onDayChange={(day) => {
@@ -550,15 +550,7 @@ class ProjectDisplay extends Component {
 																				values.deadline
 																			}
 																		/>
-																		<FlexRow
-																		>
-																			<DateButton
-																				onClick={() => {
-																					handleSubmit();
-																				}}
-																			>
-																				Ok
-																			</DateButton>
+																		<FlexRow justifyContent="flex-end">
 																			<DateButton
 																				cancel
 																				onClick={() => {
@@ -570,6 +562,13 @@ class ProjectDisplay extends Component {
 																				}}
 																			>
 																				Annuler
+																			</DateButton>
+																			<DateButton
+																				onClick={() => {
+																					handleSubmit();
+																				}}
+																			>
+																				Ok
 																			</DateButton>
 																		</FlexRow>
 																	</>

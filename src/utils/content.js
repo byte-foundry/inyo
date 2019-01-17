@@ -471,4 +471,5 @@ export const DateInput = styled(Input)`
 	&:focus {
 		outline: none;
 	}
+	width: ${props => (props.wide ? '100%' : 'auto')};
 `;

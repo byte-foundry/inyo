@@ -308,10 +308,6 @@ class Account extends Component {
 											data={me}
 											done={() => this.toast()}
 										/>
-										<UserSettings
-											data={me}
-											done={() => this.toast()}
-										/>
 										<ProfileTitle
 											id="account"
 											innerRef={(elem) => {

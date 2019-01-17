@@ -127,6 +127,11 @@ const TotalContainer = styled('div')``;
 const TotalNumber = styled(H4)`
 	color: ${primaryNavyBlue};
 	margin: 0;
+	cursor: ${props => (props.editable ? 'pointer' : 'default')};
+
+	&:hover {
+		color: ${props => (props.editable ? primaryBlue : primaryNavyBlue)};
+	}
 `;
 
 const StartProjectButton = styled(Button)`
@@ -431,7 +436,7 @@ class ProjectDisplay extends Component {
 															});
 													}}
 												>
-													<TotalNumber>
+													<TotalNumber editable>
 														{new Date(
 															project.deadline,
 														).toLocaleDateString()}

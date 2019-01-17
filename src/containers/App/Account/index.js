@@ -188,6 +188,7 @@ class Account extends Component {
 										}}
 									>
 										<DashboardIcon />
+										<span>Dashboard</span>
 									</TopBarButton>
 									<TopBarButton
 										theme="Link"
@@ -199,6 +200,7 @@ class Account extends Component {
 										}}
 									>
 										<FoldersIcon />
+										<span>Projets</span>
 									</TopBarButton>
 									{/* <TopBarButton
 										theme="Link"

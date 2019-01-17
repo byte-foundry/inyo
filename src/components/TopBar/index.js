@@ -1,14 +1,35 @@
 import styled from '@emotion/styled';
 
 import {
-	Button, primaryNavyBlue, primaryWhite, H1,
+	Button,
+	primaryNavyBlue,
+	primaryWhite,
+	gray50,
+	H1,
 } from '../../utils/content';
 
 export const TopBarButton = styled(Button)`
 	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+
+	span {
+		text-transform: uppercase;
+		font-size: 10px;
+		color: ${gray50};
+	}
 
 	svg {
-		width: 60px;
+		width: 45px;
+		margin-left: 1em;
+	}
+
+	&:hover {
+		span {
+			color: ${primaryNavyBlue};
+		}
 	}
 `;
 

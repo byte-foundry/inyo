@@ -176,6 +176,7 @@ class Dashboard extends Component {
 										}}
 									>
 										<FoldersIcon />
+										<span>Projets</span>
 									</TopBarButton>
 									{/* <TopBarButton
 										theme="Link"
@@ -198,6 +199,7 @@ class Dashboard extends Component {
 										}}
 									>
 										<SettingsIcon />
+										<span>Réglages</span>
 									</TopBarButton>
 								</TopBarNavigation>
 							</TopBar>

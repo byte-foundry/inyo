@@ -345,9 +345,16 @@ export const ToggleButton = styled('span')`
 
 export function ModalContainer({size, ...props}) {
 	const style = {
-		width: size === 'small' ? '35vw' : '50vw',
+		width: '50vw',
 		minWidth: '600px',
 	};
+
+	if (size === 'small') {
+		style.width = '35vw';
+	}
+	else if (size === 'large') {
+		style.width = '75vw';
+	}
 
 	return <Dialog {...props} style={style} />;
 }

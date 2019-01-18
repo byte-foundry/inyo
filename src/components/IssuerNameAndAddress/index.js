@@ -3,7 +3,7 @@ import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 
 import {
-	H5, H4, P, primaryNavyBlue, primaryBlue,
+	H5, H4, H3, P, primaryNavyBlue, primaryBlue,
 } from '../../utils/content';
 
 const ClientAddress = styled('div')`
@@ -33,19 +33,25 @@ const ContactEmail = styled('div')`
 	color: ${primaryBlue};
 `;
 
+const Title = styled(H3)`
+	font-size: 13px;
+	margin: 0;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+`;
+
 class IssuerNameAndAddress extends Component {
 	render() {
-		const {
-			name, firstName, lastName, phone, email,
-		} = this.props.issuer;
+		const {name, phone, owner} = this.props.issuer;
 
 		return (
 			<ClientAddress>
+				<Title>Votre prestataire</Title>
 				<CompanyName>{name}</CompanyName>
 				<ContactName>
-					{firstName} {lastName}
+					{owner.firstName} {owner.lastName}
 				</ContactName>
-				<ContactEmail>{email}</ContactEmail>
+				<ContactEmail>{owner.email}</ContactEmail>
 				<Phone>{phone}</Phone>
 			</ClientAddress>
 		);

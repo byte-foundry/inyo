@@ -36,6 +36,8 @@ import {
 	gray50,
 	signalRed,
 	Loading,
+	ModalContainer,
+	P,
 	DateInput,
 } from '../../utils/content';
 import {
@@ -46,6 +48,7 @@ import {
 	LABELS,
 } from '../../utils/constants';
 import {formatDate, parseDate} from '../../utils/functions';
+import StaticCustomerView from '../StaticCustomerView';
 import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
 import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
 import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
@@ -152,6 +155,24 @@ const DateButton = styled('div')`
 	}
 `;
 
+const ClientPreviewButton = styled(Button)`
+	margin-top: 10px;
+	width: 100%;
+`;
+
+const PreviewModal = styled(ModalContainer)`
+	min-height: 50vh;
+	padding: 0;
+`;
+
+const Notice = styled(P)`
+	color: #fff;
+	background: ${primaryBlue};
+	padding: 10px;
+	text-align: center;
+	margin: 0;
+`;
+
 class ProjectDisplay extends Component {
 	constructor(props) {
 		super(props);
@@ -194,8 +215,10 @@ class ProjectDisplay extends Component {
 			askForInfos,
 			issuer,
 			refetch,
+			customerToken,
 		} = this.props;
-		const {customerToken} = this.props.match.params;
+
+		const {isCustomerPreviewOpen} = this.state;
 
 		const hasAllTasksDone = project.sections.every(section => section.items.every(item => item.status === 'FINISHED'));
 
@@ -212,530 +235,549 @@ class ProjectDisplay extends Component {
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
 					if (loading) return <Loading />;
-					if ((data && data.me) || customerToken) {
-						return (
-							<ProjectDisplayMain>
-								{!customerToken && (
-									<TopBar>
-										<TopBarTitle>{title}</TopBarTitle>
-										<TopBarNavigation>
-											{mode !== 'edit' && (
-												<TopBarButton
-													theme="Primary"
-													size="Medium"
-													onClick={() => {
-														this.props.history.push(
-															'/app/projects/create',
-														);
-													}}
-												>
-													Créer un nouveau projet
-												</TopBarButton>
-											)}
-											<TopBarButton
-												theme="Link"
-												size="XSmall"
-												onClick={() => {
-													this.props.history.push(
-														'/app/dashboard',
-													);
-												}}
-											>
-												<DashboardIcon />
-												<span>Dashboard</span>
-											</TopBarButton>
-											<TopBarButton
-												theme="Link"
-												size="XSmall"
-												onClick={() => {
-													this.props.history.push(
-														'/app/projects',
-													);
-												}}
-											>
-												<FoldersIcon />
-												<span>Projets</span>
-											</TopBarButton>
-											<TopBarButton
-												theme="Link"
-												size="XSmall"
-												onClick={() => {
-													this.props.history.push(
-														'/app/account',
-													);
-												}}
-											>
-												<SettingsIcon />
-												<span>Réglages</span>
-											</TopBarButton>
-										</TopBarNavigation>
-									</TopBar>
-								)}
 
-								<ProjectRow
-									noPadding
-									justifyContent="space-between"
-								>
-									<ProjectName>
-										<Mutation mutation={UPDATE_PROJECT}>
-											{updateProject => (
-												<InlineEditable
-													value={project.name}
-													type="text"
-													placeholder="Nom de votre projet"
-													disabled={mode !== 'edit'}
-													onFocusOut={(value) => {
-														editProjectTitle(
-															value,
-															project.id,
-															updateProject,
-														);
-													}}
-												/>
-											)}
-										</Mutation>
-									</ProjectName>
-									{!customerToken
-										&& hasAllTasksDone
-										&& project.status === 'ONGOING' && (
-										<Mutation
-											mutation={FINISH_PROJECT}
-											variables={{
-												projectId: project.id,
+					if (!(data && data.me) && !customerToken) return false;
+					return (
+						<ProjectDisplayMain>
+							{!customerToken && (
+								<TopBar>
+									<TopBarTitle>{title}</TopBarTitle>
+									<TopBarNavigation>
+										{mode !== 'edit' && (
+											<TopBarButton
+												theme="Primary"
+												size="Medium"
+												onClick={() => {
+													this.props.history.push(
+														'/app/projects/create',
+													);
+												}}
+											>
+												Créer un nouveau projet
+											</TopBarButton>
+										)}
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/dashboard',
+												);
 											}}
-											optimisticResponse={{
-												__typename: 'Mutation',
-												finishProject: {
-													id: project.id,
-													status: 'FINISHED',
-												},
+										>
+											<DashboardIcon />
+											<span>Dashboard</span>
+										</TopBarButton>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/projects',
+												);
 											}}
-											update={(
-												cache,
-												{
-													data: {
-														finishProject: finishedProject,
-													},
+										>
+											<FoldersIcon />
+											<span>Projets</span>
+										</TopBarButton>
+										<TopBarButton
+											theme="Link"
+											size="XSmall"
+											onClick={() => {
+												this.props.history.push(
+													'/app/account',
+												);
+											}}
+										>
+											<SettingsIcon />
+											<span>Réglages</span>
+										</TopBarButton>
+									</TopBarNavigation>
+								</TopBar>
+							)}
+
+							<ProjectRow
+								noPadding
+								justifyContent="space-between"
+							>
+								<ProjectName>
+									<Mutation mutation={UPDATE_PROJECT}>
+										{updateProject => (
+											<InlineEditable
+												value={project.name}
+												type="text"
+												placeholder="Nom de votre projet"
+												disabled={mode !== 'edit'}
+												onFocusOut={(value) => {
+													editProjectTitle(
+														value,
+														project.id,
+														updateProject,
+													);
+												}}
+											/>
+										)}
+									</Mutation>
+								</ProjectName>
+								{!customerToken
+									&& hasAllTasksDone
+									&& project.status === 'ONGOING' && (
+									<Mutation
+										mutation={FINISH_PROJECT}
+										variables={{
+											projectId: project.id,
+										}}
+										optimisticResponse={{
+											__typename: 'Mutation',
+											finishProject: {
+												id: project.id,
+												status: 'FINISHED',
+											},
+										}}
+										update={(
+											cache,
+											{
+												data: {
+													finishProject: finishedProject,
 												},
-											) => {
-												window.$crisp.push([
-													'set',
-													'session:event',
+											},
+										) => {
+											window.$crisp.push([
+												'set',
+												'session:event',
+												[
 													[
 														[
-															[
-																'project_finished',
-																undefined,
-																'green',
-															],
+															'project_finished',
+															undefined,
+															'green',
 														],
 													],
-												]);
+												],
+											]);
 
-												const data = cache.readQuery(
-													{
-														query: GET_PROJECT_DATA,
-														variables: {
-															projectId:
-																	project.id,
-														},
-													},
-												);
+											const data = cache.readQuery({
+												query: GET_PROJECT_DATA,
+												variables: {
+													projectId: project.id,
+												},
+											});
 
-												data.project.status
-														= finishedProject.status;
+											data.project.status
+													= finishedProject.status;
 
-												cache.writeQuery({
-													query: GET_PROJECT_DATA,
-													variables: {
-														projectId:
-																project.id,
-													},
-													data,
-												});
-											}}
-										>
-											{finishProject => (
-												<StartProjectButton
-													theme="Primary"
-													size="Medium"
-													onClick={() => finishProject()
-													}
-												>
-														Archiver ce projet
-												</StartProjectButton>
-											)}
-										</Mutation>
-									)}
-									{!customerToken && (
-										<StartProjectButton
-											size="Medium"
-											onClick={() => this.duplicateProject(project)
-											}
-										>
-											Dupliquer ce projet
-										</StartProjectButton>
-									)}
-									{mode === 'edit' && (
-										<Mutation
-											mutation={START_PROJECT}
-											onError={(error) => {
-												if (
-													error.message.includes(
-														'NEED_MORE_INFOS',
-													)
-													|| error.message.includes(
-														'Missing required data',
-													)
-												) {
-													return askForInfos();
+											cache.writeQuery({
+												query: GET_PROJECT_DATA,
+												variables: {
+													projectId: project.id,
+												},
+												data,
+											});
+										}}
+									>
+										{finishProject => (
+											<StartProjectButton
+												theme="Primary"
+												size="Medium"
+												onClick={() => finishProject()
 												}
-												return false;
-											}}
-										>
-											{StartProject => (
-												<StartProjectButton
-													theme="Primary"
-													size="Medium"
-													onClick={() => {
-														startProject(
-															project.id,
-															StartProject,
-														);
-													}}
-												>
-													Commencer le projet
-												</StartProjectButton>
-											)}
-										</Mutation>
-									)}
-								</ProjectRow>
-								<FlexRow justifyContent="space-between">
-									<CenterContent flexGrow="2">
-										<ProjectContent>
-											{mode === 'see' && (
-												<TasksProgressBar
-													tasksCompleted={
-														totalItemsFinished
-													}
-													tasksTotal={totalItems}
-												/>
-											)}
-											<FlexColumn fullHeight>
-												<ProjectSections>
-													{project.sections.map(
-														(section, index) => (
-															<ProjectSection
-																key={section.id}
-																projectId={
-																	project.id
-																}
-																data={section}
-																addItem={
-																	addItem
-																}
-																editItem={
-																	editItem
-																}
-																removeItem={
-																	removeItem
-																}
-																finishItem={
-																	finishItem
-																}
-																customerToken={
-																	customerToken
-																}
-																mode={mode}
-																editSectionTitle={
-																	editSectionTitle
-																}
-																removeSection={
-																	removeSection
-																}
-																sectionIndex={
-																	index
-																}
-																refetch={
-																	refetch
-																}
-																projectStatus={
-																	project.status
-																}
-															/>
-														),
-													)}
-													{!customerToken && (
-														<Mutation
-															mutation={
-																ADD_SECTION
+											>
+													Archiver ce projet
+											</StartProjectButton>
+										)}
+									</Mutation>
+								)}
+								{!customerToken && (
+									<StartProjectButton
+										size="Medium"
+										onClick={() => this.duplicateProject(project)
+										}
+									>
+										Dupliquer ce projet
+									</StartProjectButton>
+								)}
+								{mode === 'edit' && (
+									<Mutation
+										mutation={START_PROJECT}
+										onError={(error) => {
+											if (
+												error.message.includes(
+													'NEED_MORE_INFOS',
+												)
+												|| error.message.includes(
+													'Missing required data',
+												)
+											) {
+												return askForInfos();
+											}
+											return false;
+										}}
+									>
+										{StartProject => (
+											<StartProjectButton
+												theme="Primary"
+												size="Medium"
+												onClick={() => {
+													startProject(
+														project.id,
+														StartProject,
+													);
+												}}
+											>
+												Commencer le projet
+											</StartProjectButton>
+										)}
+									</Mutation>
+								)}
+							</ProjectRow>
+							<FlexRow justifyContent="space-between">
+								<CenterContent flexGrow="2">
+									<ProjectContent>
+										{mode === 'see' && (
+											<TasksProgressBar
+												tasksCompleted={
+													totalItemsFinished
+												}
+												tasksTotal={totalItems}
+											/>
+										)}
+										<FlexColumn fullHeight>
+											<ProjectSections>
+												{project.sections.map(
+													(section, index) => (
+														<ProjectSection
+															key={section.id}
+															projectId={
+																project.id
 															}
-														>
-															{AddSection => (
-																<ProjectAction
-																	theme="Link"
-																	size="XSmall"
-																	onClick={() => {
-																		addSection(
-																			project.id,
-																			AddSection,
-																		);
-																	}}
-																>
-																	Ajouter une
-																	section
-																</ProjectAction>
-															)}
-														</Mutation>
-													)}
-												</ProjectSections>
-											</FlexColumn>
-										</ProjectContent>
-									</CenterContent>
-									<SideActions>
-										<CustomerIssuerContainer>
-											{customerToken
-												&& issuer.name && (
-												<IssuerNameAndAddress
-													issuer={issuer}
-												/>
-											)}
-											{!customerToken && (
-												<CustomerNameAndAddress
-													customer={project.customer}
-												/>
-											)}
-										</CustomerIssuerContainer>
-										<TotalContainer>
-											{!this.state.editDeadline ? (
-												<ProjectData
-													label="Date de fin"
-													onClick={() => {
-														!customerToken
-															&& this.setState({
-																editDeadline: !this
-																	.state
-																	.editDeadline,
-															});
-													}}
-												>
-													<TotalNumber editable>
-														{new Date(
-															project.deadline,
-														).toLocaleDateString()}
-													</TotalNumber>
-												</ProjectData>
-											) : (
-												<ProjectData label="Date de fin">
+															data={section}
+															addItem={addItem}
+															editItem={editItem}
+															removeItem={
+																removeItem
+															}
+															finishItem={
+																finishItem
+															}
+															customerToken={
+																customerToken
+															}
+															mode={mode}
+															editSectionTitle={
+																editSectionTitle
+															}
+															removeSection={
+																removeSection
+															}
+															sectionIndex={index}
+															refetch={refetch}
+															projectStatus={
+																project.status
+															}
+														/>
+													),
+												)}
+												{!customerToken && (
 													<Mutation
-														mutation={
-															UPDATE_PROJECT
-														}
+														mutation={ADD_SECTION}
 													>
-														{updateProjectMutation => (
-															<Formik
-																initialValues={{
-																	deadline: new Date(
-																		project.deadline,
-																	),
-																}}
-																validationSchema={Yup.object(
-																	{
-																		deadline: Yup.date().required(
-																			'Requis',
-																		),
-																	},
-																)}
-																onSubmit={async (
-																	values,
-																	actions,
-																) => {
-																	actions.setSubmitting(
-																		true,
-																	);
-																	try {
-																		await updateProjectMutation(
-																			{
-																				variables: {
-																					projectId:
-																						project.id,
-																					deadline: values.deadline.toISOString(),
-																				},
-																				refetchQueries: [
-																					'getProjectData',
-																				],
-																			},
-																		);
-																	}
-																	catch (error) {
-																		actions.setSubmitting(
-																			false,
-																		);
-																		actions.setErrors(
-																			error,
-																		);
-																		actions.setStatus(
-																			{
-																				msg: `Quelque chose ne s'est pas passé comme prévu. ${error}`,
-																			},
-																		);
-																	}
-
-																	this.setState(
-																		{
-																			editDeadline: false,
-																		},
+														{AddSection => (
+															<ProjectAction
+																theme="Link"
+																size="XSmall"
+																onClick={() => {
+																	addSection(
+																		project.id,
+																		AddSection,
 																	);
 																}}
 															>
-																{({
-																	values,
-																	setFieldValue,
-																	status,
-																	isSubmitting,
-																	handleSubmit,
-																	errors,
-																	touched,
-																}) => (
-																	<>
-																		<DayPickerInput
-																			formatDate={
-																				formatDate
-																			}
-																			parseDate={
-																				parseDate
-																			}
-																			dayPickerProps={{
-																				locale:
-																					'fr',
-																				months:
-																					MONTHS.fr,
-																				weekdaysLong:
-																					WEEKDAYS_LONG.fr,
-																				weekdaysShort:
-																					WEEKDAYS_SHORT.fr,
-																				firstDayOfWeek:
-																					FIRST_DAY_OF_WEEK.fr,
-																				labels:
-																					LABELS.fr,
-																				selectedDays:
-																					values.deadline,
-																			}}
-																			component={dateProps => (
-																				<DateInput
-																					{...dateProps}
-																					alone
-																					wide
-																				/>
-																			)}
-																			onDayChange={(day) => {
-																				setFieldValue(
-																					'deadline',
-																					day,
-																				);
-																			}}
-																			value={
-																				values.deadline
-																			}
-																		/>
-																		<FlexRow justifyContent="flex-end">
-																			<DateButton
-																				cancel
-																				onClick={() => {
-																					this.setState(
-																						{
-																							editDeadline: false,
-																						},
-																					);
-																				}}
-																			>
-																				Annuler
-																			</DateButton>
-																			<DateButton
-																				onClick={() => {
-																					handleSubmit();
-																				}}
-																			>
-																				Ok
-																			</DateButton>
-																		</FlexRow>
-																	</>
-																)}
-															</Formik>
+																Ajouter une
+																section
+															</ProjectAction>
 														)}
 													</Mutation>
-												</ProjectData>
-											)}
-										</TotalContainer>
-										{project.daysUntilDeadline !== null && (
-											<TotalContainer>
-												<ProjectData label="Jours travaillés avant date de fin">
-													<TotalNumber>
-														{
-															project.daysUntilDeadline
-														}{' '}
-														<Plural
-															singular="jour"
-															plural="jours"
-															value={
-																project.daysUntilDeadline
+												)}
+											</ProjectSections>
+										</FlexColumn>
+									</ProjectContent>
+								</CenterContent>
+								<SideActions>
+									<CustomerIssuerContainer>
+										{customerToken
+											&& issuer.name && (
+											<IssuerNameAndAddress
+												issuer={issuer}
+											/>
+										)}
+										{!customerToken && (
+											<>
+												<CustomerNameAndAddress
+													customer={project.customer}
+												/>
+												<ClientPreviewButton
+													theme="Primary"
+													size="Small"
+													onClick={() => this.setState({
+														isCustomerPreviewOpen: true,
+													})
+													}
+												>
+													<span
+														role="img"
+														arial-label="eye"
+													>
+														👁
+													</span>
+													&nbsp; Voir la vue de mon
+													client
+												</ClientPreviewButton>
+												{isCustomerPreviewOpen && (
+													<PreviewModal
+														size="large"
+														onDismiss={() => this.setState({
+															isCustomerPreviewOpen: false,
+														})
+														}
+													>
+														<Notice>
+															Cet affichage
+															correspond à la page
+															que verra votre
+															client lorsqu'il
+															devra effectuer des
+															actions.
+														</Notice>
+														<StaticCustomerView
+															projectId={
+																project.id
 															}
 														/>
-													</TotalNumber>
-												</ProjectData>
-											</TotalContainer>
+													</PreviewModal>
+												)}
+											</>
 										)}
+									</CustomerIssuerContainer>
+									<TotalContainer>
+										{!this.state.editDeadline ? (
+											<ProjectData
+												label="Date de fin"
+												onClick={() => {
+													!customerToken
+														&& this.setState({
+															editDeadline: !this
+																.state
+																.editDeadline,
+														});
+												}}
+											>
+												<TotalNumber editable>
+													{new Date(
+														project.deadline,
+													).toLocaleDateString()}
+												</TotalNumber>
+											</ProjectData>
+										) : (
+											<ProjectData label="Date de fin">
+												<Mutation
+													mutation={UPDATE_PROJECT}
+												>
+													{updateProjectMutation => (
+														<Formik
+															initialValues={{
+																deadline: new Date(
+																	project.deadline,
+																),
+															}}
+															validationSchema={Yup.object(
+																{
+																	deadline: Yup.date().required(
+																		'Requis',
+																	),
+																},
+															)}
+															onSubmit={async (
+																values,
+																actions,
+															) => {
+																actions.setSubmitting(
+																	true,
+																);
+																try {
+																	await updateProjectMutation(
+																		{
+																			variables: {
+																				projectId:
+																					project.id,
+																				deadline: values.deadline.toISOString(),
+																			},
+																			refetchQueries: [
+																				'getProjectData',
+																			],
+																		},
+																	);
+																}
+																catch (error) {
+																	actions.setSubmitting(
+																		false,
+																	);
+																	actions.setErrors(
+																		error,
+																	);
+																	actions.setStatus(
+																		{
+																			msg: `Quelque chose ne s'est pas passé comme prévu. ${error}`,
+																		},
+																	);
+																}
+
+																this.setState({
+																	editDeadline: false,
+																});
+															}}
+														>
+															{({
+																values,
+																setFieldValue,
+																status,
+																isSubmitting,
+																handleSubmit,
+																errors,
+																touched,
+															}) => (
+																<>
+																	<DayPickerInput
+																		formatDate={
+																			formatDate
+																		}
+																		parseDate={
+																			parseDate
+																		}
+																		dayPickerProps={{
+																			locale:
+																				'fr',
+																			months:
+																				MONTHS.fr,
+																			weekdaysLong:
+																				WEEKDAYS_LONG.fr,
+																			weekdaysShort:
+																				WEEKDAYS_SHORT.fr,
+																			firstDayOfWeek:
+																				FIRST_DAY_OF_WEEK.fr,
+																			labels:
+																				LABELS.fr,
+																			selectedDays:
+																				values.deadline,
+																		}}
+																		component={dateProps => (
+																			<DateInput
+																				{...dateProps}
+																				alone
+																				wide
+																			/>
+																		)}
+																		onDayChange={(day) => {
+																			setFieldValue(
+																				'deadline',
+																				day,
+																			);
+																		}}
+																		value={
+																			values.deadline
+																		}
+																	/>
+																	<FlexRow justifyContent="flex-end">
+																		<DateButton
+																			cancel
+																			onClick={() => {
+																				this.setState(
+																					{
+																						editDeadline: false,
+																					},
+																				);
+																			}}
+																		>
+																			Annuler
+																		</DateButton>
+																		<DateButton
+																			onClick={() => {
+																				handleSubmit();
+																			}}
+																		>
+																			Ok
+																		</DateButton>
+																	</FlexRow>
+																</>
+															)}
+														</Formik>
+													)}
+												</Mutation>
+											</ProjectData>
+										)}
+									</TotalContainer>
+									{project.daysUntilDeadline !== null && (
 										<TotalContainer>
-											<ProjectData label="Temps prévu">
+											<ProjectData label="Jours travaillés avant date de fin">
 												<TotalNumber>
-													{this.getProjectTotal(
-														project,
-													)}{' '}
+													{project.daysUntilDeadline}{' '}
 													<Plural
 														singular="jour"
 														plural="jours"
-														value={Number.parseFloat(
-															this.getProjectTotal(
-																project,
-															),
-														)}
+														value={
+															project.daysUntilDeadline
+														}
 													/>
 												</TotalNumber>
 											</ProjectData>
 										</TotalContainer>
-										<TaskLegend>
-											<InfosOnItems color={gray50}>
-												Vos tâches
-											</InfosOnItems>
-											<InfosOnItems color={primaryBlue}>
-												Tâches de votre client
-											</InfosOnItems>
-										</TaskLegend>
-										{mode === 'edit' && (
-											<Mutation mutation={REMOVE_PROJECT}>
-												{RemoveProject => (
-													<ProjectAction
-														theme="DeleteOutline"
-														size="XSmall"
-														type="delete"
-														onClick={() => {
-															this.props.removeProject(
-																project.id,
-																RemoveProject,
-															);
-														}}
-													>
-														Supprimer le brouillon
-													</ProjectAction>
-												)}
-											</Mutation>
-										)}
-									</SideActions>
-								</FlexRow>
-							</ProjectDisplayMain>
-						);
-					}
-					return false;
+									)}
+									<TotalContainer>
+										<ProjectData label="Temps prévu">
+											<TotalNumber>
+												{this.getProjectTotal(project)}{' '}
+												<Plural
+													singular="jour"
+													plural="jours"
+													value={Number.parseFloat(
+														this.getProjectTotal(
+															project,
+														),
+													)}
+												/>
+											</TotalNumber>
+										</ProjectData>
+									</TotalContainer>
+									<TaskLegend>
+										<InfosOnItems color={gray50}>
+											Vos tâches
+										</InfosOnItems>
+										<InfosOnItems color={primaryBlue}>
+											Tâches de votre client
+										</InfosOnItems>
+									</TaskLegend>
+									{mode === 'edit' && (
+										<Mutation mutation={REMOVE_PROJECT}>
+											{RemoveProject => (
+												<ProjectAction
+													theme="DeleteOutline"
+													size="XSmall"
+													type="delete"
+													onClick={() => {
+														this.props.removeProject(
+															project.id,
+															RemoveProject,
+														);
+													}}
+												>
+													Supprimer le brouillon
+												</ProjectAction>
+											)}
+										</Mutation>
+									)}
+								</SideActions>
+							</FlexRow>
+						</ProjectDisplayMain>
+					);
 				}}
 			</Query>
 		);

@@ -216,6 +216,20 @@ export const CREATE_CUSTOMER = gql`
 		}
 	}
 `;
+
+export const UPDATE_CUSTOMER = gql`
+	mutation updateCustomer($id: ID!, $customer: CustomerInput!) {
+		updateCustomer(id: $id, customer: $customer) {
+			id
+			name
+			title
+			firstName
+			lastName
+			email
+			phone
+		}
+	}
+`;
 /** ******** PROJECT MUTATIONS ********* */
 
 export const CREATE_PROJECT = gql`

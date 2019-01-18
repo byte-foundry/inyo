@@ -44,7 +44,7 @@ const ProjectDisplayMain = styled('div')`
 const ProjectSections = styled('div')``;
 const SideActions = styled(FlexColumn)`
 	min-width: 260px;
-	flex: 0.1 260px;
+	flex: 0.1 295px;
 	padding: 20px 40px;
 `;
 const ProjectName = styled(H3)`

@@ -391,7 +391,7 @@ class TasksListUser extends Component {
 		});
 	};
 
-	finishItem = async (itemId, sectionId, finishItem, token, finishProject) => finishItem({
+	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
 		variables: {
 			itemId,
 			token,
@@ -423,66 +423,13 @@ class TasksListUser extends Component {
 
 			section.items[itemIndex].status = finishedItem.status;
 
-			const projectIsFinished = data.project.sections.every(
-				sectionVerification => sectionVerification.items.every(
-					itemVerification => itemVerification.status === 'FINISHED',
-				),
-			);
-
-			if (projectIsFinished) {
-				finishProject({
-					variables: {
-						projectId: this.props.match.params.projectId,
-					},
-					optimisticResponse: {
-						__typename: 'Mutation',
-						finishProject: {
-							id: this.props.match.params.projectId,
-							status: 'FINISHED',
-						},
-					},
-					update: (
-						cacheProject,
-						{data: {finishProject: finishedProject}},
-					) => {
-						window.$crisp.push([
-							'set',
-							'session:event',
-							[[['project_finished', undefined, 'green']]],
-						]);
-
-						data.project.status = finishedProject.status;
-
-						try {
-							cache.writeQuery({
-								query: GET_PROJECT_DATA,
-								variables: {
-									projectId: this.props.match.params
-										.projectId,
-								},
-								data,
-							});
-						}
-						catch (e) {
-							throw e;
-						}
-					},
-				});
-			}
-			else {
-				try {
-					cache.writeQuery({
-						query: GET_PROJECT_DATA,
-						variables: {
-							projectId: this.props.match.params.projectId,
-						},
-						data,
-					});
-				}
-				catch (e) {
-					throw e;
-				}
-			}
+			cache.writeQuery({
+				query: GET_PROJECT_DATA,
+				variables: {
+					projectId: this.props.match.params.projectId,
+				},
+				data,
+			});
 			this.setState({apolloTriggerRenderTemporaryFix: true});
 		},
 	});

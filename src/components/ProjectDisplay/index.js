@@ -16,8 +16,9 @@ import {
 	ADD_SECTION,
 	START_PROJECT,
 	REMOVE_PROJECT,
+	FINISH_PROJECT,
 } from '../../utils/mutations';
-import {GET_USER_INFOS} from '../../utils/queries';
+import {GET_USER_INFOS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
 	H1,
 	H3,
@@ -162,6 +163,17 @@ class ProjectDisplay extends Component {
 		} = this.props;
 		const customerViewMode = this.props.match.params.customerToken;
 
+		const hasAllTasksDone = project.sections.every(section => section.items.every(item => item.status === 'FINISHED'));
+
+		let title = 'Project en cours';
+
+		if (mode === 'edit' && project.status === 'DRAFT') {
+			title = 'Remplissez le projet';
+		}
+		else if (project.status === 'FINISHED') {
+			title = 'Project archivé';
+		}
+
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
@@ -171,11 +183,7 @@ class ProjectDisplay extends Component {
 							<ProjectDisplayMain>
 								{!customerViewMode && (
 									<TopBar>
-										<TopBarTitle>
-											{mode === 'edit'
-												? 'Remplissez le projet'
-												: 'Projet en cours'}
-										</TopBarTitle>
+										<TopBarTitle>{title}</TopBarTitle>
 										<TopBarNavigation>
 											{mode !== 'edit' && (
 												<TopBarButton
@@ -253,6 +261,76 @@ class ProjectDisplay extends Component {
 											)}
 										</Mutation>
 									</ProjectName>
+									{!customerViewMode
+										&& hasAllTasksDone
+										&& project.status === 'ONGOING' && (
+										<Mutation
+											mutation={FINISH_PROJECT}
+											variables={{id: project.id}}
+											optimisticResponse={{
+												__typename: 'Mutation',
+												finishProject: {
+													id: project.id,
+													status: 'FINISHED',
+												},
+											}}
+											update={(
+												cache,
+												{
+													data: {
+														finishProject: finishedProject,
+													},
+												},
+											) => {
+												window.$crisp.push([
+													'set',
+													'session:event',
+													[
+														[
+															[
+																'project_finished',
+																undefined,
+																'green',
+															],
+														],
+													],
+												]);
+
+												const data = cache.readQuery(
+													{
+														query: GET_PROJECT_DATA,
+														variables: {
+															projectId:
+																	project.id,
+														},
+													},
+												);
+
+												data.project.status
+														= finishedProject.status;
+
+												cache.writeQuery({
+													query: GET_PROJECT_DATA,
+													variables: {
+														projectId:
+																project.id,
+													},
+													data,
+												});
+											}}
+										>
+											{finishProject => (
+												<StartProjectButton
+													theme="Primary"
+													size="Medium"
+													onClick={() => finishProject()
+													}
+												>
+														Archiver ce projet
+												</StartProjectButton>
+											)}
+										</Mutation>
+									)}
 									{!customerViewMode && (
 										<StartProjectButton
 											size="Medium"

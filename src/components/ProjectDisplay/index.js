@@ -511,7 +511,7 @@ class ProjectDisplay extends Component {
 												<ProjectData
 													label="Date de fin"
 													onClick={() => {
-														!customerViewMode
+														!customerToken
 															&& this.setState({
 																editDeadline: !this
 																	.state

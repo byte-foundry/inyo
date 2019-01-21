@@ -517,7 +517,6 @@ class ProjectDisplay extends Component {
 													customer={project.customer}
 												/>
 												<ClientPreviewButton
-													theme="Primary"
 													size="Small"
 													onClick={() => this.setState({
 														isCustomerPreviewOpen: true,

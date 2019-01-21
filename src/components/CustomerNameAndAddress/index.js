@@ -15,7 +15,7 @@ import {nonEmpty} from '../../utils/functions';
 import {UPDATE_CUSTOMER} from '../../utils/mutations';
 
 const ClientAddress = styled('div')`
-	margin-top: 20px;
+	margin: 20px 0;
 `;
 
 const ClientTitle = styled(H3)`
@@ -75,7 +75,12 @@ class CustomerNameAndAddress extends Component {
 						{this.state.editing ? (
 							<Formik
 								initialValues={{
-									...this.props.customer,
+									name,
+									email,
+									firstName,
+									lastName,
+									title,
+									phone,
 								}}
 								validationSchema={Yup.object().shape({
 									name: Yup.string().required('Requis'),
@@ -89,101 +94,101 @@ class CustomerNameAndAddress extends Component {
 								})}
 								onSubmit={async (values, actions) => {
 									actions.setSubmitting(false);
-									try {
-										updateCustomerMutation({
-											variables: {
-												id: customerId,
-												customer: values,
-											},
-											refetchQueries: ['getProjectData'],
-										});
-									}
-									catch (e) {}
+
+									await updateCustomerMutation({
+										variables: {
+											id: customerId,
+											customer: values,
+										},
+										refetchQueries: ['getProjectData'],
+									});
+
+									this.setState({editing: false});
 								}}
 							>
 								{props => (
-										<>
+									<>
+										<FormElem
+											{...props}
+											name="name"
+											label="Nom du client"
+											type="text"
+											placeholder="Nom du client"
+										/>
+										<FormFlexRow>
+											<FormSelect
+												{...props}
+												name="title"
+												label="Civilité"
+												paddedRight
+												options={[
+													{
+														value: undefined,
+														label: '',
+													},
+													{
+														value: 'MONSIEUR',
+														label: 'M.',
+													},
+													{
+														value: 'MADAME',
+														label: 'Mme',
+													},
+												]}
+											/>
 											<FormElem
 												{...props}
-												name="name"
-												label="Nom du client"
+												name="firstName"
+												label="Prénom"
 												type="text"
-												placeholder="Nom du client"
+												placeholder="Prénom"
 											/>
-											<FormFlexRow>
-												<FormSelect
-													{...props}
-													name="title"
-													label="Civilité"
-													paddedRight
-													options={[
-														{
-															value: undefined,
-															label: '',
-														},
-														{
-															value: 'MONSIEUR',
-															label: 'M.',
-														},
-														{
-															value: 'MADAME',
-															label: 'Mme',
-														},
-													]}
-												/>
-												<FormElem
-													{...props}
-													name="firstName"
-													label="Prénom"
-													type="text"
-													placeholder="Prénom"
-												/>
-											</FormFlexRow>{' '}
-											<FormElem
-												{...props}
-												name="lastName"
-												label="Nom de famille"
-												type="text"
-												placeholder="Nom de famille"
-											/>
-											<FormElem
-												{...props}
-												name="email"
-												label="Adresse email"
-												type="email"
-												placeholder="Adresse email"
-											/>
-											<FormElem
-												{...props}
-												name="phone"
-												label="Téléphone"
-												type="text"
-												placeholder="Tél."
-											/>
-											<FormFlexRow justifyContent="flex-end">
-												<FormButton
-													cancel
-													onClick={(e) => {
-														e.stopPropagation();
-														this.setState({
-															editing: false,
-														});
-													}}
-												>
-													Annuler
-												</FormButton>
-												<FormButton
-													onClick={() => {
-														props.handleSubmit();
-														this.setState({
-															editing: false,
-														});
-													}}
-												>
-													Ok
-												</FormButton>
-											</FormFlexRow>
-										</>
+										</FormFlexRow>{' '}
+										<FormElem
+											{...props}
+											name="lastName"
+											label="Nom de famille"
+											type="text"
+											placeholder="Nom de famille"
+										/>
+										<FormElem
+											{...props}
+											name="email"
+											label="Adresse email"
+											type="email"
+											placeholder="Adresse email"
+										/>
+										<FormElem
+											{...props}
+											name="phone"
+											label="Téléphone"
+											type="text"
+											placeholder="Tél."
+										/>
+										<FormFlexRow justifyContent="flex-end">
+											<FormButton
+												cancel
+												onClick={(e) => {
+													e.stopPropagation();
+													this.setState({
+														editing: false,
+													});
+												}}
+											>
+												Annuler
+											</FormButton>
+											<FormButton
+												onClick={() => {
+													props.handleSubmit();
+													this.setState({
+														editing: false,
+													});
+												}}
+											>
+												Ok
+											</FormButton>
+										</FormFlexRow>
+									</>
 								)}
 							</Formik>
 						) : (

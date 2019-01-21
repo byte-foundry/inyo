@@ -300,7 +300,9 @@ class ProjectDisplay extends Component {
 										&& project.status === 'ONGOING' && (
 										<Mutation
 											mutation={FINISH_PROJECT}
-											variables={{id: project.id}}
+											variables={{
+												projectId: project.id,
+											}}
 											optimisticResponse={{
 												__typename: 'Mutation',
 												finishProject: {

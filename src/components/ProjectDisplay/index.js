@@ -1,16 +1,20 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import {Formik} from 'formik';
 import {withRouter} from 'react-router-dom';
 import {Mutation, Query} from 'react-apollo';
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import * as Yup from 'yup';
 
 import TopBar, {TopBarTitle, TopBarNavigation, TopBarButton} from '../TopBar';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import InlineEditable from '../InlineEditable';
 import ProjectSection from '../ProjectSection';
-import ProjectTotal from '../ProjectTotal';
+import ProjectData from '../ProjectData';
 import TasksProgressBar from '../TasksProgressBar';
 import Plural from '../Plural';
+
 import {
 	UPDATE_PROJECT,
 	ADD_SECTION,
@@ -20,7 +24,7 @@ import {
 } from '../../utils/mutations';
 import {GET_USER_INFOS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
-	H1,
+	H4,
 	H3,
 	FlexRow,
 	FlexColumn,
@@ -32,7 +36,16 @@ import {
 	gray50,
 	signalRed,
 	Loading,
+	DateInput,
 } from '../../utils/content';
+import {
+	MONTHS,
+	WEEKDAYS_LONG,
+	WEEKDAYS_SHORT,
+	FIRST_DAY_OF_WEEK,
+	LABELS,
+} from '../../utils/constants';
+import {formatDate, parseDate} from '../../utils/functions';
 import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
 import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
 import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
@@ -112,10 +125,31 @@ const CustomerIssuerContainer = styled('div')``;
 
 const TotalContainer = styled('div')``;
 
+const TotalNumber = styled(H4)`
+	color: ${primaryNavyBlue};
+	margin: 0;
+	cursor: ${props => (props.editable ? 'pointer' : 'default')};
+
+	&:hover {
+		color: ${props => (props.editable ? primaryBlue : primaryNavyBlue)};
+	}
+`;
+
 const StartProjectButton = styled(Button)`
 	width: auto;
 	margin-left: 10px;
 	margin-bottom: 10px;
+`;
+
+const DateButton = styled('div')`
+	margin-left: 10px;
+	margin-top: 10px;
+	color: ${props => (props.cancel ? 'orange' : 'green')};
+	cursor: pointer;
+	font-size: 12px;
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 class ProjectDisplay extends Component {
@@ -471,30 +505,190 @@ class ProjectDisplay extends Component {
 											)}
 										</CustomerIssuerContainer>
 										<TotalContainer>
-											<ProjectTotal
-												sumDays={new Date(
-													project.deadline,
-												).toLocaleDateString()}
-												label="Date de fin"
-											/>
+											{!this.state.editDeadline ? (
+												<ProjectData
+													label="Date de fin"
+													onClick={() => {
+														!customerViewMode
+															&& this.setState({
+																editDeadline: !this
+																	.state
+																	.editDeadline,
+															});
+													}}
+												>
+													<TotalNumber editable>
+														{new Date(
+															project.deadline,
+														).toLocaleDateString()}
+													</TotalNumber>
+												</ProjectData>
+											) : (
+												<ProjectData label="Date de fin">
+													<Mutation
+														mutation={
+															UPDATE_PROJECT
+														}
+													>
+														{updateProjectMutation => (
+															<Formik
+																initialValues={{
+																	deadline: new Date(
+																		project.deadline,
+																	),
+																}}
+																validationSchema={Yup.object(
+																	{
+																		deadline: Yup.date().required(
+																			'Requis',
+																		),
+																	},
+																)}
+																onSubmit={async (
+																	values,
+																	actions,
+																) => {
+																	actions.setSubmitting(
+																		true,
+																	);
+																	try {
+																		await updateProjectMutation(
+																			{
+																				variables: {
+																					projectId:
+																						project.id,
+																					deadline: values.deadline.toISOString(),
+																				},
+																				refetchQueries: [
+																					'getProjectData',
+																				],
+																			},
+																		);
+																	}
+																	catch (error) {
+																		actions.setSubmitting(
+																			false,
+																		);
+																		actions.setErrors(
+																			error,
+																		);
+																		actions.setStatus(
+																			{
+																				msg: `Quelque chose ne s'est pas passé comme prévu. ${error}`,
+																			},
+																		);
+																	}
+
+																	this.setState(
+																		{
+																			editDeadline: false,
+																		},
+																	);
+																}}
+															>
+																{({
+																	values,
+																	setFieldValue,
+																	status,
+																	isSubmitting,
+																	handleSubmit,
+																	errors,
+																	touched,
+																}) => (
+																	<>
+																		<DayPickerInput
+																			formatDate={
+																				formatDate
+																			}
+																			parseDate={
+																				parseDate
+																			}
+																			dayPickerProps={{
+																				locale:
+																					'fr',
+																				months:
+																					MONTHS.fr,
+																				weekdaysLong:
+																					WEEKDAYS_LONG.fr,
+																				weekdaysShort:
+																					WEEKDAYS_SHORT.fr,
+																				firstDayOfWeek:
+																					FIRST_DAY_OF_WEEK.fr,
+																				labels:
+																					LABELS.fr,
+																				selectedDays:
+																					values.deadline,
+																			}}
+																			component={dateProps => (
+																				<DateInput
+																					{...dateProps}
+																					alone
+																					wide
+																				/>
+																			)}
+																			onDayChange={(day) => {
+																				setFieldValue(
+																					'deadline',
+																					day,
+																				);
+																			}}
+																			value={
+																				values.deadline
+																			}
+																		/>
+																		<FlexRow justifyContent="flex-end">
+																			<DateButton
+																				cancel
+																				onClick={() => {
+																					this.setState(
+																						{
+																							editDeadline: false,
+																						},
+																					);
+																				}}
+																			>
+																				Annuler
+																			</DateButton>
+																			<DateButton
+																				onClick={() => {
+																					handleSubmit();
+																				}}
+																			>
+																				Ok
+																			</DateButton>
+																		</FlexRow>
+																	</>
+																)}
+															</Formik>
+														)}
+													</Mutation>
+												</ProjectData>
+											)}
 										</TotalContainer>
 										{project.daysUntilDeadline !== null && (
 											<TotalContainer>
-												<ProjectTotal
-													sumDays={
-														project.daysUntilDeadline
-													}
-													label="Jours travaillés avant date de fin"
-												/>
+												<ProjectData label="Jours travaillés avant date de fin">
+													<TotalNumber>
+														{
+															project.daysUntilDeadline
+														}{' '}
+														<Plural
+															singular="jour"
+															plural="jours"
+															value={
+																project.daysUntilDeadline
+															}
+														/>
+													</TotalNumber>
+												</ProjectData>
 											</TotalContainer>
 										)}
 										<TotalContainer>
-											<ProjectTotal
-												sumDays={this.getProjectTotal(
-													project,
-												)}
-												label="Temps prévu"
-												counter={
+											<ProjectData label="Temps prévu">
+												<TotalNumber>
+													{this.getProjectTotal(
+														project,
+													)}{' '}
 													<Plural
 														singular="jour"
 														plural="jours"
@@ -504,8 +698,8 @@ class ProjectDisplay extends Component {
 															),
 														)}
 													/>
-												}
-											/>
+												</TotalNumber>
+											</ProjectData>
 										</TotalContainer>
 										<TaskLegend>
 											<InfosOnItems color={gray50}>

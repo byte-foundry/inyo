@@ -25,3 +25,13 @@ export function nonEmpty(parts, ...rest) {
 
 	return res;
 }
+
+export function formatDate(dateObject) {
+	return new Date(dateObject).toLocaleDateString('fr-FR');
+}
+
+export function parseDate(dateString) {
+	const dates = dateString.split('/');
+
+	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
+}

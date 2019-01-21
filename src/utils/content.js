@@ -446,3 +446,30 @@ export const Loading = () => (
 		<SpinningBubble />
 	</LoadingMain>
 );
+
+export const ProjectDataMain = styled('div')`
+	margin-top: 10px;
+`;
+export const ProjectDataElem = styled('div')`
+	padding-top: 15px;
+	padding-bottom: 15px;
+`;
+export const ProjectDataLabel = styled(H6)`
+	font-size: 13px;
+	margin: 0;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+`;
+
+export const DateInput = styled(Input)`
+	background: ${primaryWhite};
+	border-left: ${props => (props.alone ? 'solid 1px' : 'none')};
+	border-color: ${primaryBlue};
+	color: ${primaryNavyBlue};
+	margin-right: 10px;
+	padding: 18px 5px;
+	&:focus {
+		outline: none;
+	}
+	width: ${props => (props.wide ? '100%' : 'auto')};
+`;

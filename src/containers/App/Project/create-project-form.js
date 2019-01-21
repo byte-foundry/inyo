@@ -316,6 +316,7 @@ class CreateProjectForm extends React.Component {
 																variables,
 																refetchQueries: [
 																	'userCustomersQuery',
+																	'getAllProjectsQuery',
 																],
 																update: (
 																	cache,

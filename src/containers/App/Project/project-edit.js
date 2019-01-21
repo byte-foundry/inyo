@@ -165,6 +165,7 @@ class EditProject extends Component {
 	editProjectTitle = (title, projectId, updateProject) => {
 		updateProject({
 			variables: {projectId, name: title},
+			refetchQueries: ['getAllProjectsQuery'],
 			update: (cache, {data: {updateProject: updatedProject}}) => {
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,

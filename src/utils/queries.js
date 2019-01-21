@@ -146,6 +146,9 @@ export const GET_PROJECT_DATA = gql`
 					country
 				}
 				owner {
+					firstName
+					lastName
+					email
 					defaultVatRate
 					settings {
 						askStartProjectConfirmation
@@ -234,6 +237,9 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					country
 				}
 				owner {
+					firstName
+					lastName
+					email
 					defaultVatRate
 				}
 				siret

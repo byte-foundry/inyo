@@ -72,21 +72,14 @@ const Status = styled('div')`
 	top: calc(50% + 4px);
 	left: 50%;
 	transform: translate(-50%, -50%);
-	cursor: ${props => (props.status === 'PENDING'
-		&& ((!props.customer && props.reviewer === 'USER')
-			|| (props.customer && props.reviewer === 'CUSTOMER'))
-		? 'pointer'
-		: 'initial')};
+	cursor: ${props => (props.status === 'PENDING' && props.actionable ? 'pointer' : 'initial')};
 
 	svg {
 		width: 30px;
 		${getTaskIconStylesByStatus};
 	}
 
-	${props => props.status === 'PENDING'
-		&& ((!props.customer && props.reviewer === 'USER')
-			|| (props.customer && props.reviewer === 'CUSTOMER'))
-		&& hoverState};
+	${props => props.status === 'PENDING' && props.actionable && hoverState};
 `;
 
 class TaskStatus extends Component {
@@ -99,7 +92,6 @@ class TaskStatus extends Component {
 			status,
 			sectionId,
 			itemId,
-			mode,
 			customerViewMode,
 			projectStatus,
 			reviewer,
@@ -108,20 +100,16 @@ class TaskStatus extends Component {
 
 		const {customerToken} = this.props.match.params;
 
+		const actionable
+			= (finishItem && (!customerViewMode && reviewer === 'USER'))
+			|| (customerViewMode && reviewer === 'CUSTOMER');
+
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItemMutation => (
 					<TaskStatusMain
 						onClick={() => {
-							if (
-								((mode === 'see' || mode === 'dashboard')
-									&& (!customerViewMode
-										&& reviewer === 'USER'
-										&& status === 'PENDING'))
-								|| (customerViewMode
-									&& reviewer === 'CUSTOMER'
-									&& status === 'PENDING')
-							) {
+							if (actionable) {
 								finishItem(
 									itemId,
 									sectionId,
@@ -136,6 +124,7 @@ class TaskStatus extends Component {
 							customer={customerViewMode}
 							reviewer={reviewer}
 							projectStatus={projectStatus}
+							actionable={actionable}
 						>
 							{getTaskIconByStatus(status)}
 						</Status>

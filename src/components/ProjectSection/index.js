@@ -175,6 +175,13 @@ class ProjectSection extends Component {
 															}
 															mode={mode}
 															onClickCommentIcon={() => {
+																if (
+																	customerToken
+																	=== 'preview'
+																) {
+																	return;
+																}
+
 																const uri = customerToken
 																	? `/view/${customerToken}/items/${
 																		item.id

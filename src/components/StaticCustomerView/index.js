@@ -57,6 +57,7 @@ class StaticCustomerView extends Component {
 							refetch={refetch}
 							mode="see"
 							customerToken="preview"
+							style={{pointerEvents: 'none', minHeight: 'auto'}}
 						/>
 					);
 				}}

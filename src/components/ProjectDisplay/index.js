@@ -161,7 +161,7 @@ const ClientPreviewButton = styled(Button)`
 `;
 
 const PreviewModal = styled(ModalContainer)`
-	min-height: 50vh;
+	min-height: 600px;
 	padding: 0;
 `;
 
@@ -216,6 +216,7 @@ class ProjectDisplay extends Component {
 			issuer,
 			refetch,
 			customerToken,
+			style,
 		} = this.props;
 
 		const {isCustomerPreviewOpen} = this.state;
@@ -238,7 +239,7 @@ class ProjectDisplay extends Component {
 
 					if (!(data && data.me) && !customerToken) return false;
 					return (
-						<ProjectDisplayMain>
+						<ProjectDisplayMain style={style}>
 							{!customerToken && (
 								<TopBar>
 									<TopBarTitle>{title}</TopBarTitle>
@@ -516,7 +517,6 @@ class ProjectDisplay extends Component {
 													customer={project.customer}
 												/>
 												<ClientPreviewButton
-													theme="Primary"
 													size="Small"
 													onClick={() => this.setState({
 														isCustomerPreviewOpen: true,

@@ -66,7 +66,7 @@ class ProjectSection extends Component {
 			removeItem,
 			finishItem,
 			mode,
-			customerViewMode,
+			customerToken,
 			projectStatus,
 			projectId,
 			history,
@@ -97,7 +97,7 @@ class ProjectSection extends Component {
 						</Mutation>
 					</SectionTitle>
 					<div>
-						{!customerViewMode && (
+						{!customerToken && (
 							<Mutation mutation={REMOVE_SECTION}>
 								{(removeSection) => {
 									const display = data.items.every(
@@ -140,6 +140,7 @@ class ProjectSection extends Component {
 												key={item.id}
 												draggableId={item.id}
 												index={index}
+												isDragDisabled={!!customerToken}
 											>
 												{(provided, snapshot) => (
 													<div
@@ -174,8 +175,8 @@ class ProjectSection extends Component {
 															}
 															mode={mode}
 															onClickCommentIcon={() => {
-																const uri = customerViewMode
-																	? `/view/${customerViewMode}/items/${
+																const uri = customerToken
+																	? `/view/${customerToken}/items/${
 																		item.id
 																	  }`
 																	: `/${mode}/items/${
@@ -231,7 +232,7 @@ class ProjectSection extends Component {
 					</Mutation>
 				)}
 
-				{!customerViewMode && (
+				{!customerToken && (
 					<ProjectAction
 						theme="Link"
 						size="XSmall"

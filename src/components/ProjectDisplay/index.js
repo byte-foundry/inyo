@@ -195,7 +195,7 @@ class ProjectDisplay extends Component {
 			issuer,
 			refetch,
 		} = this.props;
-		const customerViewMode = this.props.match.params.customerToken;
+		const {customerToken} = this.props.match.params;
 
 		const hasAllTasksDone = project.sections.every(section => section.items.every(item => item.status === 'FINISHED'));
 
@@ -212,10 +212,10 @@ class ProjectDisplay extends Component {
 			<Query query={GET_USER_INFOS}>
 				{({loading, data}) => {
 					if (loading) return <Loading />;
-					if ((data && data.me) || customerViewMode) {
+					if ((data && data.me) || customerToken) {
 						return (
 							<ProjectDisplayMain>
-								{!customerViewMode && (
+								{!customerToken && (
 									<TopBar>
 										<TopBarTitle>{title}</TopBarTitle>
 										<TopBarNavigation>
@@ -295,7 +295,7 @@ class ProjectDisplay extends Component {
 											)}
 										</Mutation>
 									</ProjectName>
-									{!customerViewMode
+									{!customerToken
 										&& hasAllTasksDone
 										&& project.status === 'ONGOING' && (
 										<Mutation
@@ -365,7 +365,7 @@ class ProjectDisplay extends Component {
 											)}
 										</Mutation>
 									)}
-									{!customerViewMode && (
+									{!customerToken && (
 										<StartProjectButton
 											size="Medium"
 											onClick={() => this.duplicateProject(project)
@@ -441,8 +441,8 @@ class ProjectDisplay extends Component {
 																finishItem={
 																	finishItem
 																}
-																customerViewMode={
-																	customerViewMode
+																customerToken={
+																	customerToken
 																}
 																mode={mode}
 																editSectionTitle={
@@ -463,7 +463,7 @@ class ProjectDisplay extends Component {
 															/>
 														),
 													)}
-													{!customerViewMode && (
+													{!customerToken && (
 														<Mutation
 															mutation={
 																ADD_SECTION
@@ -492,13 +492,13 @@ class ProjectDisplay extends Component {
 									</CenterContent>
 									<SideActions>
 										<CustomerIssuerContainer>
-											{customerViewMode
+											{customerToken
 												&& issuer.name && (
 												<IssuerNameAndAddress
 													issuer={issuer}
 												/>
 											)}
-											{!customerViewMode && (
+											{!customerToken && (
 												<CustomerNameAndAddress
 													customer={project.customer}
 												/>

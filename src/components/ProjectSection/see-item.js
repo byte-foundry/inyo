@@ -272,7 +272,8 @@ class Item extends Component {
 						<ItemStatus>Ajouté</ItemStatus>
 					)}
 					<ItemUnit color={primaryBlue}>
-						{item.unit.toLocaleString()}{' '}
+						{/* This is a hacky way to remove only the figures after the second decimal */}
+						{(+item.unit.toFixed(2)).toLocaleString()}{' '}
 						<Plural
 							singular="jour"
 							plural="jours"

@@ -51,6 +51,11 @@ const FormFlexRow = styled(FlexRow)`
 	margin: -17px 0;
 `;
 
+const titleEnumToTitle = {
+	MONSIEUR: 'M.',
+	MADAME: 'Mme',
+};
+
 class CustomerNameAndAddress extends Component {
 	state = {};
 
@@ -195,7 +200,9 @@ class CustomerNameAndAddress extends Component {
 							<>
 								<CompanyName>{name}</CompanyName>
 								<ContactInfo>
-									{nonEmpty`${title} ${firstName} ${lastName}`.trimRight()}
+									{nonEmpty` ${
+										titleEnumToTitle[title]
+									} ${firstName} ${lastName}`.trimRight()}
 								</ContactInfo>
 								<ContactInfo>{email}</ContactInfo>
 								<ContactInfo>{phone}</ContactInfo>

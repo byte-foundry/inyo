@@ -3,6 +3,9 @@ export const GRAPHQL_API = `https://prisma${
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 }.inyo.me/`;
 
+export const INTERCOM_APP_ID
+	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
+
 export const WEEKDAYS_SHORT = {
 	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
 };

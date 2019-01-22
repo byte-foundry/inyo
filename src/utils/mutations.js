@@ -34,6 +34,9 @@ export const SIGNUP = gql`
 				email
 				firstName
 				lastName
+				company {
+					phone
+				}
 			}
 		}
 	}

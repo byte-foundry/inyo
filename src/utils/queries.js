@@ -28,6 +28,9 @@ export const CHECK_LOGIN_USER = gql`
 			workingDays
 			startWorkAt
 			endWorkAt
+			company {
+				phone
+			}
 		}
 	}
 `;

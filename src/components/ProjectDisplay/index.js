@@ -343,19 +343,10 @@ class ProjectDisplay extends Component {
 												},
 											},
 										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'project_finished',
-															undefined,
-															'green',
-														],
-													],
-												],
-											]);
+											window.Intercom(
+												'trackEvent',
+												'project-finished',
+											);
 
 											const data = cache.readQuery({
 												query: GET_PROJECT_DATA,

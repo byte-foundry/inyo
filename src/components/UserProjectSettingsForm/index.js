@@ -65,19 +65,10 @@ class UserProjectSettingsForm extends Component {
 											cache,
 											{data: {updateUser: updatedUser}},
 										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'updated_project_settings_data',
-															undefined,
-															'green',
-														],
-													],
-												],
-											]);
+											window.Intercom(
+												'trackEvent',
+												'update-project-settings',
+											);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});

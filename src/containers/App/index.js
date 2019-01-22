@@ -14,6 +14,7 @@ import ProjectCustomerView from './Project/project-customer-view';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
 import {Loading} from '../../utils/content';
+import {INTERCOM_APP_ID} from '../../utils/constants';
 
 const AppMain = styled('div')``;
 
@@ -30,21 +31,13 @@ class App extends Component {
 				{({data, loading, error}) => {
 					if (loading) return <Loading />;
 					if (data && data.me) {
-						window.$crisp.push([
-							'set',
-							'user:email',
-							[data.me.email],
-						]);
-						window.$crisp.push([
-							'set',
-							'user:nickname',
-							[`${data.me.firstName} ${data.me.lastName}`],
-						]);
-						window.$crisp.push([
-							'set',
-							'session:segments',
-							[['user']],
-						]);
+						window.Intercom('boot', {
+							app_id: INTERCOM_APP_ID,
+							email: data.me.email,
+							user_id: data.me.id,
+							name: `${data.me.firstName} ${data.me.lastName}`,
+							phone: data.me.company.phone,
+						});
 						Sentry.configureScope((scope) => {
 							scope.setUser({email: data.me.email});
 						});
@@ -52,6 +45,11 @@ class App extends Component {
 							ReactGA.set({userId: data.me.id});
 							this.setState({uid_set: true});
 						}
+					}
+					else {
+						window.Intercom('boot', {
+							app_id: INTERCOM_APP_ID,
+						});
 					}
 					return (
 						<AppMain>
@@ -87,7 +85,11 @@ class App extends Component {
 							{data
 								&& data.me && (
 								<ProtectedRoute
-									path={['/app/projects', '/app/account']}
+									path={[
+										'/app/projects',
+										'/app/account',
+										'/app/dashboard',
+									]}
 									render={props => (
 										<ConditionalContent
 											{...props}

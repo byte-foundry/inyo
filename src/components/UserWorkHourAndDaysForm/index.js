@@ -74,8 +74,8 @@ class UserWorkHourAndDaysForm extends Component {
 				: endWorkAtDate.getHours();
 		const endMinutesInitial
 			= endWorkAtDate.toString() === 'Invalid Date'
-				? endWorkAtDate.getMinutes()
-				: 0;
+				? 0
+				: endWorkAtDate.getMinutes();
 		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',
 			'TUESDAY',
@@ -137,19 +137,10 @@ class UserWorkHourAndDaysForm extends Component {
 											cache,
 											{data: {updateUser: updatedUser}},
 										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'updated_user_data',
-															undefined,
-															'green',
-														],
-													],
-												],
-											]);
+											window.Intercom(
+												'trackEvent',
+												'updated-user-hours',
+											);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});

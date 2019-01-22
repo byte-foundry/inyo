@@ -49,11 +49,7 @@ class Dashboard extends Component {
 			},
 		},
 		update: (cache, {data: {finishItem: finishedItem}}) => {
-			window.$crisp.push([
-				'set',
-				'session:event',
-				[[['item_finished', undefined, 'yellow']]],
-			]);
+			window.Intercom('trackEvent', 'item-finished');
 			const data = cache.readQuery({
 				query: GET_PROJECT_DATA,
 				variables: {projectId: this.props.match.params.projectId},
@@ -95,11 +91,7 @@ class Dashboard extends Component {
 			},
 		},
 		update: (cache, {data: {snoozeItem: snoozedItem}}) => {
-			window.$crisp.push([
-				'set',
-				'session:event',
-				[[['item_snoozed', undefined, 'yellow']]],
-			]);
+			window.Intercom('trackEvent', 'item-snoozed');
 			const data = cache.readQuery({
 				query: GET_PROJECT_DATA,
 				variables: {projectId: this.props.match.params.projectId},

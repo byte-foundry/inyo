@@ -113,14 +113,14 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 						const endWorkAt = new Date();
 
 						startWorkAt.setUTCHours(
-							me.startWorkAt.split(':')[0],
-							me.endWorkAt.split(':')[1],
+							me.startWorkAt ? me.startWorkAt.split(':')[0] : 8,
+							me.startWorkAt ? me.startWorkAt.split(':')[1] : 30,
 							0,
 							0,
 						);
 						endWorkAt.setUTCHours(
-							me.endWorkAt.split(':')[0],
-							me.endWorkAt.split(':')[1],
+							me.endWorkAt ? me.endWorkAt.split(':')[0] : 19,
+							me.endWorkAt ? me.endWorkAt.split(':')[1] : 30,
 							0,
 							0,
 						);

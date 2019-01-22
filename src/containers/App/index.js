@@ -87,7 +87,11 @@ class App extends Component {
 							{data
 								&& data.me && (
 								<ProtectedRoute
-									path={['/app/projects', '/app/account']}
+									path={[
+										'/app/projects',
+										'/app/account',
+										'/app/dashboard',
+									]}
 									render={props => (
 										<ConditionalContent
 											{...props}

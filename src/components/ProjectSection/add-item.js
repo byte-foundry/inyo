@@ -287,6 +287,7 @@ class AddItem extends Component {
 										<AddUnitInput
 											type="number"
 											placeholder="1"
+											value={unit}
 											onChange={({value}) => setFieldValue('unit', value)
 											}
 										/>

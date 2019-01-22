@@ -74,8 +74,8 @@ class UserWorkHourAndDaysForm extends Component {
 				: endWorkAtDate.getHours();
 		const endMinutesInitial
 			= endWorkAtDate.toString() === 'Invalid Date'
-				? endWorkAtDate.getMinutes()
-				: 0;
+				? 0
+				: endWorkAtDate.getMinutes();
 		const workingDaysInitial = this.props.data.workingDays || [
 			'MONDAY',
 			'TUESDAY',

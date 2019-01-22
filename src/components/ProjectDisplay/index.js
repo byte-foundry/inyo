@@ -52,6 +52,7 @@ import StaticCustomerView from '../StaticCustomerView';
 import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
 import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
 import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
+import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const ProjectDisplayMain = styled('div')`
@@ -516,22 +517,20 @@ class ProjectDisplay extends Component {
 												<CustomerNameAndAddress
 													customer={project.customer}
 												/>
-												<ClientPreviewButton
-													size="Small"
+												<ProjectAction
+													theme="Link"
+													size="XSmall"
 													onClick={() => this.setState({
 														isCustomerPreviewOpen: true,
 													})
 													}
 												>
-													<span
-														role="img"
-														arial-label="eye"
-													>
-														👁
+													<EyeIcon />
+													<span>
+														Voir la vue de mon
+														client
 													</span>
-													&nbsp; Voir la vue de mon
-													client
-												</ClientPreviewButton>
+												</ProjectAction>
 												{isCustomerPreviewOpen && (
 													<PreviewModal
 														size="large"
@@ -541,8 +540,7 @@ class ProjectDisplay extends Component {
 														}
 													>
 														<Notice>
-															Cet affichage
-															correspond à la page
+															Cette vue est celle
 															que verra votre
 															client lorsqu'il
 															devra effectuer des

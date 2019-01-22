@@ -749,10 +749,10 @@ class ProjectDisplay extends Component {
 									</TotalContainer>
 									<TaskLegend>
 										<InfosOnItems color={gray50}>
-											Vos tâches
+											Tâches prestataire
 										</InfosOnItems>
 										<InfosOnItems color={primaryBlue}>
-											Tâches de votre client
+											Tâches client
 										</InfosOnItems>
 									</TaskLegend>
 									{mode === 'edit' && (

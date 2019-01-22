@@ -163,6 +163,7 @@ export const GET_PROJECT_DATA = gql`
 				firstName
 				lastName
 				email
+				title
 				phone
 				address {
 					street

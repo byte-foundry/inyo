@@ -188,6 +188,7 @@ class Account extends Component {
 										}}
 									>
 										<DashboardIcon />
+										<span>Dashboard</span>
 									</TopBarButton>
 									<TopBarButton
 										theme="Link"
@@ -199,6 +200,7 @@ class Account extends Component {
 										}}
 									>
 										<FoldersIcon />
+										<span>Projets</span>
 									</TopBarButton>
 									{/* <TopBarButton
 										theme="Link"
@@ -215,7 +217,6 @@ class Account extends Component {
 							</TopBar>
 
 							<AccountBody>
-								<TopBarTitle>Mon compte</TopBarTitle>
 								<WelcomeMessage>
 									Bonjour {firstName} !
 								</WelcomeMessage>
@@ -306,10 +307,6 @@ class Account extends Component {
 											Vos horaires et jours de travail
 										</ProfileTitle>
 										<UserWorkHourAndDaysForm
-											data={me}
-											done={() => this.toast()}
-										/>
-										<UserSettings
 											data={me}
 											done={() => this.toast()}
 										/>

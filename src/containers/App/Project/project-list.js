@@ -98,6 +98,7 @@ class ListProjects extends Component {
 										}}
 									>
 										<DashboardIcon />
+										<span>Dashboard</span>
 									</TopBarButton>
 									{/* <TopBarButton
 										theme="Link"
@@ -120,6 +121,7 @@ class ListProjects extends Component {
 										}}
 									>
 										<SettingsIcon />
+										<span>Réglages</span>
 									</TopBarButton>
 								</TopBarNavigation>
 							</TopBar>

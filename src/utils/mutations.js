@@ -216,6 +216,20 @@ export const CREATE_CUSTOMER = gql`
 		}
 	}
 `;
+
+export const UPDATE_CUSTOMER = gql`
+	mutation updateCustomer($id: ID!, $customer: CustomerInput!) {
+		updateCustomer(id: $id, customer: $customer) {
+			id
+			name
+			title
+			firstName
+			lastName
+			email
+			phone
+		}
+	}
+`;
 /** ******** PROJECT MUTATIONS ********* */
 
 export const CREATE_PROJECT = gql`
@@ -253,10 +267,15 @@ export const CREATE_PROJECT = gql`
 `;
 export const UPDATE_PROJECT = gql`
 	# creating project with a customer id or a new customer
-	mutation updateProject($projectId: ID!, $name: String!) {
-		updateProject(id: $projectId, name: $name) {
+	mutation updateProject(
+		$projectId: ID!
+		$name: String
+		$deadline: DateTime
+	) {
+		updateProject(id: $projectId, name: $name, deadline: $deadline) {
 			id
 			name
+			deadline
 		}
 	}
 `;
@@ -470,6 +489,7 @@ export const UPDATE_ITEM = gql`
 		$unit: Float
 		$comment: CommentInput
 		$reviewer: Reviewer
+		$position: Int
 		$token: String
 	) {
 		updateItem(
@@ -480,6 +500,7 @@ export const UPDATE_ITEM = gql`
 			comment: $comment
 			unit: $unit
 			reviewer: $reviewer
+			position: $position
 			token: $token
 		) {
 			id
@@ -489,6 +510,7 @@ export const UPDATE_ITEM = gql`
 			description
 			status
 			reviewer
+			position
 			comments {
 				createdAt
 				id

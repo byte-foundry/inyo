@@ -25,7 +25,16 @@ import {
 	Label,
 	Loading,
 	Input,
+	DateInput,
 } from '../../../utils/content';
+import {formatDate, parseDate} from '../../../utils/functions';
+import {
+	MONTHS,
+	WEEKDAYS_LONG,
+	WEEKDAYS_SHORT,
+	FIRST_DAY_OF_WEEK,
+	LABELS,
+} from '../../../utils/constants';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
 import {CREATE_PROJECT} from '../../../utils/mutations';
@@ -66,18 +75,6 @@ const InfoPrivacy = styled('div')`
 	}
 `;
 
-const DateInput = styled(Input)`
-	background: ${primaryWhite};
-	border-color: ${primaryBlue};
-	border-left: 0px;
-	color: ${primaryNavyBlue};
-	margin-right: 10px;
-	padding: 18px 5px;
-	&:focus {
-		outline: none;
-	}
-`;
-
 const SpanLabel = styled('span')`
 	background: ${primaryWhite};
 	color: ${primaryNavyBlue};
@@ -90,82 +87,33 @@ const SelectStyles = {
 	option: base => ({
 		...base,
 		borderRadius: 0,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 	}),
 	menu: base => ({
 		...base,
 		marginTop: 2,
 		borderRadius: 0,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 	}),
 	control: base => ({
 		...base,
 		width: '30vw',
 		maxWidth: '500px',
 		borderRadius: 0,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 		marginBottom: '10px',
 	}),
 	input: base => ({
 		...base,
-		fontFamily: 'Montserrat',
+		fontFamily: 'Work Sans',
 		marginTop: '5px',
 	}),
-};
-
-const WEEKDAYS_SHORT = {
-	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
-};
-
-const MONTHS = {
-	fr: [
-		'Janvier',
-		'Février',
-		'Mars',
-		'Avril',
-		'Mai',
-		'Juin',
-		'Juillet',
-		'Août',
-		'Septembre',
-		'Octobre',
-		'Novembre',
-		'Décembre',
-	],
-};
-
-const WEEKDAYS_LONG = {
-	fr: [
-		'Dimanche',
-		'Lundi',
-		'Mardi',
-		'Mercredi',
-		'Jeudi',
-		'Vendredi',
-		'Smedi',
-	],
-};
-
-const FIRST_DAY_OF_WEEK = {
-	fr: 1,
-};
-// Translate aria-labels
-const LABELS = {
-	fr: {nextMonth: 'Mois suivant', previousMonth: 'Mois précédent'},
 };
 
 const projectTemplates = templates.map(template => ({
 	value: template.name,
 	label: template.label,
 }));
-
-const formatDate = dateObject => new Date(dateObject).toLocaleDateString('fr-FR');
-
-const parseDate = (dateString) => {
-	const dates = dateString.split('/');
-
-	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
-};
 
 class CreateProjectForm extends React.Component {
 	render() {
@@ -368,6 +316,7 @@ class CreateProjectForm extends React.Component {
 																variables,
 																refetchQueries: [
 																	'userCustomersQuery',
+																	'getAllProjectsQuery',
 																],
 																update: (
 																	cache,

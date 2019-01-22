@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
+import {Mutation} from 'react-apollo';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
 
-import {H3, H4, primaryNavyBlue} from '../../utils/content';
+import FormElem from '../FormElem';
+import FormSelect from '../FormSelect';
+
+import {
+	H3, H4, primaryNavyBlue, FlexRow,
+} from '../../utils/content';
 import {nonEmpty} from '../../utils/functions';
+import {UPDATE_CUSTOMER} from '../../utils/mutations';
 
 const ClientAddress = styled('div')`
-	margin-top: 20px;
+	margin: 20px 0;
 `;
 
 const ClientTitle = styled(H3)`
@@ -27,7 +36,29 @@ const ContactInfo = styled('div')`
 	margin-bottom: 6px;
 `;
 
+const FormButton = styled('div')`
+	margin-left: 10px;
+	margin-top: 10px;
+	color: ${props => (props.cancel ? 'orange' : 'green')};
+	cursor: pointer;
+	font-size: 12px;
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
+const FormFlexRow = styled(FlexRow)`
+	margin: -17px 0;
+`;
+
+const titleEnumToTitle = {
+	MONSIEUR: 'M.',
+	MADAME: 'Mme',
+};
+
 class CustomerNameAndAddress extends Component {
+	state = {};
+
 	render() {
 		const {
 			name,
@@ -36,18 +67,150 @@ class CustomerNameAndAddress extends Component {
 			email,
 			title,
 			phone,
+			id: customerId,
 		} = this.props.customer;
 
 		return (
-			<ClientAddress>
-				<ClientTitle>Votre client</ClientTitle>
-				<CompanyName>{name}</CompanyName>
-				<ContactInfo>
-					{nonEmpty`${title} ${firstName} ${lastName}`.trimRight()}
-				</ContactInfo>
-				<ContactInfo>{email}</ContactInfo>
-				<ContactInfo>{phone}</ContactInfo>
-			</ClientAddress>
+			<Mutation mutation={UPDATE_CUSTOMER}>
+				{updateCustomerMutation => (
+					<ClientAddress
+						onClick={() => this.setState({editing: true})}
+					>
+						<ClientTitle>Votre client</ClientTitle>
+						{this.state.editing ? (
+							<Formik
+								initialValues={{
+									name,
+									email,
+									firstName,
+									lastName,
+									title,
+									phone,
+								}}
+								validationSchema={Yup.object().shape({
+									name: Yup.string().required('Requis'),
+									email: Yup.string()
+										.email('Email invalide')
+										.required('Requis'),
+									firstName: Yup.string(),
+									lastName: Yup.string(),
+									title: Yup.string(),
+									phone: Yup.string(),
+								})}
+								onSubmit={async (values, actions) => {
+									actions.setSubmitting(false);
+
+									await updateCustomerMutation({
+										variables: {
+											id: customerId,
+											customer: values,
+										},
+										refetchQueries: ['getProjectData'],
+									});
+
+									this.setState({editing: false});
+								}}
+							>
+								{props => (
+									<>
+										<FormElem
+											{...props}
+											name="name"
+											label="Nom du client"
+											type="text"
+											placeholder="Nom du client"
+										/>
+										<FormFlexRow>
+											<FormSelect
+												{...props}
+												name="title"
+												label="Civilité"
+												paddedRight
+												options={[
+													{
+														value: undefined,
+														label: '',
+													},
+													{
+														value: 'MONSIEUR',
+														label: 'M.',
+													},
+													{
+														value: 'MADAME',
+														label: 'Mme',
+													},
+												]}
+											/>
+											<FormElem
+												{...props}
+												name="firstName"
+												label="Prénom"
+												type="text"
+												placeholder="Prénom"
+											/>
+										</FormFlexRow>{' '}
+										<FormElem
+											{...props}
+											name="lastName"
+											label="Nom de famille"
+											type="text"
+											placeholder="Nom de famille"
+										/>
+										<FormElem
+											{...props}
+											name="email"
+											label="Adresse email"
+											type="email"
+											placeholder="Adresse email"
+										/>
+										<FormElem
+											{...props}
+											name="phone"
+											label="Téléphone"
+											type="text"
+											placeholder="Tél."
+										/>
+										<FormFlexRow justifyContent="flex-end">
+											<FormButton
+												cancel
+												onClick={(e) => {
+													e.stopPropagation();
+													this.setState({
+														editing: false,
+													});
+												}}
+											>
+												Annuler
+											</FormButton>
+											<FormButton
+												onClick={() => {
+													props.handleSubmit();
+													this.setState({
+														editing: false,
+													});
+												}}
+											>
+												Ok
+											</FormButton>
+										</FormFlexRow>
+									</>
+								)}
+							</Formik>
+						) : (
+							<>
+								<CompanyName>{name}</CompanyName>
+								<ContactInfo>
+									{nonEmpty` ${
+										titleEnumToTitle[title]
+									} ${firstName} ${lastName}`.trimRight()}
+								</ContactInfo>
+								<ContactInfo>{email}</ContactInfo>
+								<ContactInfo>{phone}</ContactInfo>
+							</>
+						)}
+					</ClientAddress>
+				)}
+			</Mutation>
 		);
 	}
 }

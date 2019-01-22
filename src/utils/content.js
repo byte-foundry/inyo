@@ -44,32 +44,32 @@ export const Body = styled('div')`
 export const H1 = styled('h1')`
 	${h1};
 	color: ${gray80};
-	font-weight: 800;
+	font-weight: 700;
 `;
 export const H2 = styled('h2')`
 	${h2};
 	color: ${gray80};
-	font-weight: 800;
+	font-weight: 700;
 `;
 export const H3 = styled('h3')`
 	${h3};
 	color: ${gray80};
-	font-weight: 500;
+	font-weight: 400;
 `;
 export const H4 = styled('h4')`
 	${h4};
 	color: ${gray80};
-	font-weight: 500;
+	font-weight: 400;
 `;
 export const H5 = styled('h5')`
 	${h5};
 	color: ${gray80};
-	font-weight: 500;
+	font-weight: 400;
 `;
 export const H6 = styled('h6')`
 	${h6};
 	color: ${gray80};
-	font-weight: 500;
+	font-weight: 400;
 `;
 export const P = styled('p')`
 	${content};
@@ -270,7 +270,7 @@ export const Input = styled('input')`
 	padding: 15px 18px 16px 18px;
 	color: ${gray50};
 	width: ${props => (props.flexible ? '100%' : 'fill-available')};
-	font-family: 'Montserrat';
+	font-family: 'Work Sans';
 	font-size: 16px;
 	transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
@@ -286,7 +286,7 @@ export const Input = styled('input')`
 `;
 
 export const Label = styled('label')`
-	font-family: 'Montserrat';
+	font-family: 'Work Sans';
 	font-size: 15px;
 	width: fill-available;
 	color: ${gray80};
@@ -309,7 +309,7 @@ export const Label = styled('label')`
 `;
 
 export const ErrorInput = styled('p')`
-	font-family: 'Montserrat';
+	font-family: 'Work Sans';
 	width: fill-available;
 	font-size: 12px;
 	color: ${signalRed};
@@ -345,9 +345,16 @@ export const ToggleButton = styled('span')`
 
 export function ModalContainer({size, ...props}) {
 	const style = {
-		width: size === 'small' ? '35vw' : '50vw',
+		width: '50vw',
 		minWidth: '600px',
 	};
+
+	if (size === 'small') {
+		style.width = '35vw';
+	}
+	else if (size === 'large') {
+		style.width = '75vw';
+	}
 
 	return <Dialog {...props} style={style} />;
 }
@@ -446,3 +453,30 @@ export const Loading = () => (
 		<SpinningBubble />
 	</LoadingMain>
 );
+
+export const ProjectDataMain = styled('div')`
+	margin-top: 10px;
+`;
+export const ProjectDataElem = styled('div')`
+	padding-top: 15px;
+	padding-bottom: 15px;
+`;
+export const ProjectDataLabel = styled(H6)`
+	font-size: 13px;
+	margin: 0;
+	margin-bottom: 10px;
+	text-transform: uppercase;
+`;
+
+export const DateInput = styled(Input)`
+	background: ${primaryWhite};
+	border-left: ${props => (props.alone ? 'solid 1px' : 'none')};
+	border-color: ${primaryBlue};
+	color: ${primaryNavyBlue};
+	margin-right: 10px;
+	padding: 18px 5px;
+	&:focus {
+		outline: none;
+	}
+	width: ${props => (props.wide ? '100%' : 'auto')};
+`;

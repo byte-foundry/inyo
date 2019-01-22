@@ -53,6 +53,7 @@ class CreateProject extends Component {
 											}}
 										>
 											<DashboardIcon />
+											<span>Dashboard</span>
 										</TopBarButton>
 										<TopBarButton
 											theme="Link"
@@ -64,6 +65,7 @@ class CreateProject extends Component {
 											}}
 										>
 											<FoldersIcon />
+											<span>Projets</span>
 										</TopBarButton>
 										<TopBarButton
 											theme="Link"
@@ -75,6 +77,7 @@ class CreateProject extends Component {
 											}}
 										>
 											<SettingsIcon />
+											<span>Réglages</span>
 										</TopBarButton>
 									</TopBarNavigation>
 								</TopBar>

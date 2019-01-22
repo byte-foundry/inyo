@@ -7,7 +7,6 @@ import {Formik} from 'formik';
 
 import {
 	FlexRow,
-	Input,
 	Button,
 	primaryBlue,
 	signalGreen,
@@ -25,6 +24,7 @@ import {GET_ITEMS} from '../../utils/queries';
 import SwitchButton from '../SwitchButton';
 import FormCheckbox from '../FormCheckbox';
 import CheckList from '../CheckList';
+import UnitInput from '../UnitInput';
 
 const AddItemMain = styled('div')`
 	background: ${primaryWhite};
@@ -39,7 +39,7 @@ const ItemComment = styled('textarea')`
 	width: 100%;
 	background: ${primaryWhite};
 	padding: 15px;
-	font-family: 'Montserrat';
+	font-family: 'Work Sans';
 	color: ${gray70};
 	border: solid 1px ${gray30};
 	font-size: 0.8rem;
@@ -53,7 +53,7 @@ const ActionButton = styled(Button)`
 	padding: 0 10px;
 `;
 
-const AddInput = styled(Input)`
+const AddUnitInput = styled(UnitInput)`
 	padding: 15px 10px;
 	background: ${primaryWhite};
 	width: 100px;
@@ -140,6 +140,7 @@ class AddItem extends Component {
 
 						done({
 							...values,
+							unit: parseFloat(values.unit) || 0,
 							type: isContentAcquisition
 								? 'CONTENT_ACQUISITION'
 								: 'DEFAULT',
@@ -269,7 +270,7 @@ class AddItem extends Component {
 																fontSize:
 																	'13px',
 																fontFamily:
-																	'Montserrat',
+																	'Work Sans',
 																width: '100%',
 																padding:
 																	'16px 10px',
@@ -283,12 +284,12 @@ class AddItem extends Component {
 										}}
 									</Query>
 									<FlexRow>
-										<AddInput
+										<AddUnitInput
 											type="number"
-											name="unit"
 											placeholder="1"
 											value={unit}
-											onChange={handleChange}
+											onChange={({value}) => setFieldValue('unit', value)
+											}
 										/>
 									</FlexRow>
 								</FlexRow>

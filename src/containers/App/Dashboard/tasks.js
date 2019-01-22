@@ -14,7 +14,6 @@ import {
 	gray50,
 	gray80,
 	primaryBlue,
-	primaryNavyBlue,
 	LinkButton,
 	ModalContainer as Modal,
 	FlexRow,
@@ -29,7 +28,10 @@ import {ReactComponent as ContactIcon} from '../../../utils/icons/contact.svg';
 import {ReactComponent as SnoozeIcon} from '../../../utils/icons/snooze.svg';
 
 const SectionTitle = styled(H3)`
-	color: ${primaryNavyBlue};
+	color: ${primaryBlue};
+	font-size: 22px;
+	font-weight: 600;
+	margin: 2em 0;
 `;
 
 const ColumnHeader = styled('div')`
@@ -38,11 +40,20 @@ const ColumnHeader = styled('div')`
 `;
 
 const HeaderRow = styled(FlexRow)`
-	margin: 10px 121px 10px 17px;
+	margin: 10px 105px 10px 17px;
+
+	svg {
+		margin-top: -3px;
+	}
 `;
 
 const HeaderText = styled('span')`
 	margin-left: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	color: ${gray50};
 `;
 
 const SnoozeContainer = styled('div')`

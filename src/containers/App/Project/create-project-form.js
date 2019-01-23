@@ -299,6 +299,7 @@ class CreateProjectForm extends React.Component {
 																		comments: undefined,
 																		id: undefined,
 																		__typename: undefined,
+																		position: undefined,
 																	}),
 																),
 																__typename: undefined,

@@ -4,7 +4,12 @@ import {css} from '@emotion/core';
 import {Field} from 'formik';
 
 import {
-	P, Label, ErrorInput, gray50, gray70,
+	P,
+	Label,
+	ErrorInput,
+	gray50,
+	gray70,
+	signalRed,
 } from '../../utils/content';
 
 const FormSelectMain = styled(P)`
@@ -24,7 +29,7 @@ const FormSelectMain = styled(P)`
 
 const FormSelectElem = styled('select')`
 	display: block;
-	border: 1px solid ${gray70};
+	border: 1px solid ${props => (props.error ? signalRed : gray70)};
 	padding: 14px 18px 15px 18px;
 	color: ${gray50};
 	width: -webkit-fill-available;
@@ -69,14 +74,20 @@ class FormSelect extends Component {
 						{label}
 					</Label>
 				)}
-				<Field>
+				<Field
+					name={name}
+					id={name}
+					error={errors[name] && touched[name]}
+				>
 					{({form}) => (
 						<FormSelectElem
 							onChange={(event) => {
 								form.setFieldValue(name, event.target.value);
 							}}
 							onBlur={handleBlur}
+							name={name}
 							value={values[name]}
+							error={errors[name] && touched[name]}
 						>
 							{options.map(option => (
 								<option value={option.value}>
@@ -86,12 +97,6 @@ class FormSelect extends Component {
 						</FormSelectElem>
 					)}
 				</Field>
-				{errors[name]
-					&& touched[name] && (
-					<ErrorInput className="input-feedback">
-						{errors[name]}
-					</ErrorInput>
-				)}
 			</FormSelectMain>
 		);
 	}

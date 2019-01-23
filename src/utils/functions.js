@@ -35,3 +35,6 @@ export function parseDate(dateString) {
 
 	return new Date(`${dates[1]}/${dates[0]}/${dates[2]}`);
 }
+
+// This deeply get a props from a path (no array allowed)
+export const getDeep = (p, o) => p.split('.').reduce((xs, x) => (xs && xs[x] ? xs[x] : null), o);

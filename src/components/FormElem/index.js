@@ -5,6 +5,7 @@ import {css} from '@emotion/core';
 import FormInput from '../FormInput';
 
 import {Label, ErrorInput} from '../../utils/content';
+import {getDeep} from '../../utils/functions';
 
 const FormElemMain = styled('div')`
 	width: 100%;
@@ -60,10 +61,10 @@ class FormElem extends Component {
 					touched={touched}
 					inline={inline}
 				/>
-				{errors[name]
-					&& touched[name] && (
+				{getDeep(name, errors)
+					&& getDeep(name, touched) && (
 					<ErrorInput className="input-feedback">
-						{errors[name]}
+						{getDeep(name, errors)}
 					</ErrorInput>
 				)}
 			</FormElemMain>

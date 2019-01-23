@@ -147,6 +147,14 @@ class ProjectSection extends Component {
 														ref={provided.innerRef}
 														{...provided.draggableProps}
 														{...provided.dragHandleProps}
+														onMouseDown={(e) => {
+															// hack to remove focus from the inputs
+															e.preventDefault = () => {};
+
+															return provided.dragHandleProps.onMouseDown(
+																e,
+															);
+														}}
 														style={{
 															// some basic styles to make the items look a bit nicer
 															userSelect: 'none',

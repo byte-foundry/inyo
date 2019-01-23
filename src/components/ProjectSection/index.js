@@ -65,6 +65,7 @@ class ProjectSection extends Component {
 			editItem,
 			removeItem,
 			finishItem,
+			unfinishItem,
 			mode,
 			customerToken,
 			projectStatus,
@@ -172,6 +173,9 @@ class ProjectSection extends Component {
 															}
 															finishItem={
 																finishItem
+															}
+															unfinishItem={
+																unfinishItem
 															}
 															mode={mode}
 															onClickCommentIcon={() => {

@@ -28,8 +28,7 @@ const ProjectAction = styled(Button)`
 	padding: 0;
 	color: ${props => (props.type === 'delete' ? signalRed : primaryBlue)};
 	font-size: 11px;
-	transform: translateY(18px);
-	margin: ${props => (props.type === 'delete' ? '50px 0 25px;' : '0 0 10px 0;')};
+	margin: ${props => (props.type === 'delete' ? '50px 0 25px;' : '18px 0 10px 0;')};
 `;
 const SectionTitle = styled(H5)`
 	color: ${primaryNavyBlue};
@@ -65,6 +64,7 @@ class ProjectSection extends Component {
 			editItem,
 			removeItem,
 			finishItem,
+			unfinishItem,
 			mode,
 			customerToken,
 			projectStatus,
@@ -147,6 +147,14 @@ class ProjectSection extends Component {
 														ref={provided.innerRef}
 														{...provided.draggableProps}
 														{...provided.dragHandleProps}
+														onMouseDown={(e) => {
+															// hack to remove focus from the inputs
+															e.preventDefault = () => {};
+
+															return provided.dragHandleProps.onMouseDown(
+																e,
+															);
+														}}
 														style={{
 															// some basic styles to make the items look a bit nicer
 															userSelect: 'none',
@@ -172,6 +180,9 @@ class ProjectSection extends Component {
 															}
 															finishItem={
 																finishItem
+															}
+															unfinishItem={
+																unfinishItem
 															}
 															mode={mode}
 															onClickCommentIcon={() => {

@@ -1,7 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="Calque_1" data-name="Calque 1" viewBox="0 0 50.42 28.08">
-  <path fill="none" stroke-linejoin="round" stroke-width="2px" d="M1.1 14.1c2.59-6 10.9-13 24.22-13s20.93 6.5 24 13" stroke="#dfe1e6" stroke-linecap="round" class="cls-1"/>
-  <path fill="none" stroke-linejoin="round" stroke-width="2px" d="M25.14 27.1c-13.33 0-20.94-6.5-24-13" stroke-linecap="round" stroke="#b0b0b5" class="cls-2"/>
-  <path fill="none" stroke-linejoin="round" stroke-width="2px" d="M49.36 14.1a20.74 20.74 0 0 1-9 9.26 27.69 27.69 0 0 1-5.46 2.33A32.8 32.8 0 0 1 27.46 27" stroke="#dfe1e6" stroke-linecap="round" class="cls-1"/>
-  <path fill="none" stroke-linejoin="round" stroke-width="2px" d="M14.79 21.85a13 13 0 1 1 10.44 5.25" stroke="#b0b0b5" class="cls-3"/>
-  <circle cx="25.23" cy="14.1" r="3.69" class="cls-4" fill="#b0b0b5" />
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Calque_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+<g>
+	<circle fill="#3860FF" cx="12.5" cy="12.5" r="3.062"/>
+	<path fill="#3860FF" d="M24.027,12.055C21.65,7.395,17.234,4.5,12.5,4.5c-4.733,0-9.149,2.895-11.526,7.555l-0.227,0.446
+		l0.227,0.445C3.35,17.606,7.766,20.5,12.5,20.5c4.735,0,9.151-2.894,11.528-7.554l0.227-0.445L24.027,12.055z M12.5,18.539
+		c-3.842,0-7.457-2.301-9.541-6.038C5.042,8.763,8.658,6.462,12.5,6.462c3.842,0,7.458,2.301,9.542,6.039
+		C19.957,16.238,16.342,18.539,12.5,18.539z"/>
+</g>
 </svg>

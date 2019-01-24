@@ -35,6 +35,53 @@ const WelcomeMessage = styled(H2)`
 `;
 
 class Dashboard extends Component {
+	unfinishItem = async (itemId, sectionId, unfinishItem, token) => unfinishItem({
+		variables: {
+			itemId,
+			token,
+		},
+		refetchQueries: ['userTasks'],
+		optimisticResponse: {
+			__typename: 'Mutation',
+			unfinishItem: {
+				id: itemId,
+				status: 'FINISHED',
+			},
+		},
+		update: (cache, {data: {unfinishItem: unfinishedItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', undefined, 'yellow']]],
+			]);
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.find(
+				e => e.id === unfinishedItem.id,
+			);
+
+			section.items[itemIndex].status = unfinishedItem.status;
+			try {
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+			}
+			catch (e) {
+				throw e;
+			}
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
 		variables: {
 			itemId,
@@ -210,6 +257,7 @@ class Dashboard extends Component {
 
 								<Tasks
 									finishItem={this.finishItem}
+									unfinishItem={this.unfinishItem}
 									snoozeItem={this.snoozeItem}
 								/>
 							</Content>

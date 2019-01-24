@@ -86,7 +86,9 @@ const SnoozeContainer = styled('div')`
 	}
 `;
 
-const DashboardTasks = ({history, finishItem, snoozeItem}) => (
+const DashboardTasks = ({
+	history, finishItem, unfinishItem, snoozeItem,
+}) => (
 	<Query query={GET_ALL_PROJECTS}>
 		{({data: projectsData, loading: projectsLoading}) => {
 			if (projectsLoading) return <p>Loading</p>;
@@ -196,6 +198,7 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 															.status
 													}
 													finishItem={finishItem}
+													unfinishItem={unfinishItem}
 													daysUntilDeadline={
 														item.section.project
 															.daysUntilDeadline
@@ -294,6 +297,7 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 															.status
 													}
 													finishItem={finishItem}
+													unfinishItem={unfinishItem}
 													daysUntilDeadline={
 														item.section.project
 															.daysUntilDeadline
@@ -353,6 +357,7 @@ const DashboardTasks = ({history, finishItem, snoozeItem}) => (
 												<ItemView
 													id={match.params.itemId}
 													finishItem={finishItem}
+													unfinishItem={unfinishItem}
 												/>
 											</ModalElem>
 										</Modal>

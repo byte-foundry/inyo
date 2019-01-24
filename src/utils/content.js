@@ -127,6 +127,13 @@ const ButtonStyles = (props) => {
 				background-color: transparent;
 				color: ${primaryBlue};
 				text-decoration: underline;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				svg {
+					max-width: 20px;
+					margin-right: 0.5rem;
+				}
 			`;
 	case 'DeleteOutline':
 		return css`

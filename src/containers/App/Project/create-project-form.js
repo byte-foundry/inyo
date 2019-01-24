@@ -20,6 +20,8 @@ import {
 	primaryBlue,
 	primaryNavyBlue,
 	primaryWhite,
+	gray70,
+	signalRed,
 	FlexRow,
 	ErrorInput,
 	Label,
@@ -83,7 +85,7 @@ const SpanLabel = styled('span')`
 	padding: 15px 0px 12px 18px;
 `;
 
-const SelectStyles = {
+const SelectStyles = props => ({
 	option: base => ({
 		...base,
 		borderRadius: 0,
@@ -102,13 +104,17 @@ const SelectStyles = {
 		borderRadius: 0,
 		fontFamily: 'Work Sans',
 		marginBottom: '10px',
+		borderColor: props.error ? signalRed : gray70,
+	}),
+	valueContainer: base => ({
+		padding: '8px 8px',
 	}),
 	input: base => ({
 		...base,
 		fontFamily: 'Work Sans',
 		marginTop: '5px',
 	}),
-};
+});
 
 const projectTemplates = templates.map(template => ({
 	value: template.name,
@@ -116,6 +122,8 @@ const projectTemplates = templates.map(template => ({
 }));
 
 class CreateProjectForm extends React.Component {
+	state = {};
+
 	render() {
 		const {
 			customers,
@@ -149,7 +157,11 @@ class CreateProjectForm extends React.Component {
 										{createProject => (
 											<Formik
 												initialValues={{
-													customer: '',
+													customer: {
+														label: '',
+														value: '',
+													},
+													title: '',
 													template: '',
 													firstName: '',
 													lastName: '',
@@ -175,42 +187,45 @@ class CreateProjectForm extends React.Component {
 												validate={(values) => {
 													const errors = {};
 
-													if (
-														values.customer
-														&& values.customer.label
-													) {
-														const selectedCustomer
-															= values.customer
-															&& customers.find(
-																c => c.id
-																	=== values
-																		.customer
-																		.id,
-															);
-														const newCustomer
-															= !selectedCustomer
-															&& values.customer;
+													const selectedCustomer
+														= values.customer
+														&& customers.find(
+															c => c.id
+																=== values.customer
+																	.id,
+														);
 
-														if (newCustomer) {
-															if (
-																!values.title
-																&& !values.firstName
-																&& !values.lastName
-															) {
-																errors.title
-																	= 'Remplissez au moins civilité, prénom ou nom';
-																errors.firstName
-																	= 'Remplissez au moins civilité, prénom ou nom';
-																errors.lastName
-																	= 'Remplissez au moins civilité, prénom ou nom';
-															}
-															if (!values.email) {
-																errors.email
-																	= 'Requis';
-															}
+													if (
+														this.state.newCustomer
+													) {
+														if (
+															!values.title
+															&& !values.firstName
+															&& !values.lastName
+														) {
+															errors.title
+																= 'Remplissez au moins civilité, prénom ou nom';
+															errors.firstName
+																= 'Remplissez au moins civilité, prénom ou nom';
+															errors.lastName
+																= 'Remplissez au moins civilité, prénom ou nom';
+														}
+														if (!values.email) {
+															errors.email
+																= 'Requis';
+														}
+														if (
+															!values.customer
+																.label
+														) {
+															errors.customer = {
+																label: 'Requis',
+															};
 														}
 													}
-													else {
+													else if (
+														!selectedCustomer
+													) {
 														errors.customer
 															= 'Requis';
 													}
@@ -299,6 +314,7 @@ class CreateProjectForm extends React.Component {
 																		comments: undefined,
 																		id: undefined,
 																		__typename: undefined,
+																		position: undefined,
 																	}),
 																),
 																__typename: undefined,
@@ -549,10 +565,9 @@ class CreateProjectForm extends React.Component {
 																	<FormSection
 																		left
 																	>
-																		{((selectedCustomer
-																			&& values.customer)
-																			|| (!selectedCustomer
-																				&& !values.customer)) && (
+																		{!this
+																			.state
+																			.newCustomer && (
 																			<>
 																				<SubTitle
 																				>
@@ -592,9 +607,13 @@ class CreateProjectForm extends React.Component {
 																							option,
 																						);
 																					}}
-																					styles={
-																						SelectStyles
-																					}
+																					styles={SelectStyles(
+																						{
+																							error:
+																								touched.customer
+																								&& errors.customer,
+																						},
+																					)}
 																					value={
 																						values.customer
 																					}
@@ -614,78 +633,79 @@ class CreateProjectForm extends React.Component {
 																				)}
 																			</>
 																		)}
-																		{!selectedCustomer
-																			&& !values.customer && (
+																		{!this
+																			.state
+																			.newCustomer && (
 																			<div
 																			>
 																				<br />
 																				<Button
 																					theme="Primary"
-																					onClick={() => setFieldValue(
-																						'customer',
-																						{},
-																					)
-																					}
+																					onClick={() => {
+																						setFieldValue(
+																							'customer',
+																							{
+																								label:
+																									'',
+																								value:
+																									'',
+																							},
+																						);
+																						this.setState(
+																							{
+																								newCustomer: true,
+																							},
+																						);
+																					}}
 																				>
-																						Je
-																						crée
-																						un
-																						nouveau
-																						client
+																					Je
+																					crée
+																					un
+																					nouveau
+																					client
 																				</Button>
 																			</div>
 																		)}
-																		{!selectedCustomer
-																			&& values.customer && (
+																		{this
+																			.state
+																			.newCustomer && (
 																			<div
 																			>
 																				<FormTitle
 																				>
-																						Création
-																						d'un
-																						nouveau
-																						client
+																					Création
+																					d'un
+																					nouveau
+																					client
 																				</FormTitle>
 																				<p
 																				>
-																						Pourriez-vous
-																						nous
-																						en
-																						dire
-																						plus
-																						?
+																					Pourriez-vous
+																					nous
+																					en
+																					dire
+																					plus
+																					?
 																				</p>
 																				<InfoPrivacy
 																				>
-																						Vos
-																						données
-																						sont
-																						les
-																						vôtres
-																						!
+																					Vos
+																					données
+																					sont
+																					les
+																					vôtres
+																					!
 																					<br />
-																						Nous
-																						ne
-																						partageons
-																						pas
-																						les
-																						informations
-																						de
-																						vos
-																						clients.
+																					Nous
+																					ne
+																					partageons
+																					pas
+																					les
+																					informations
+																					de
+																					vos
+																					clients.
 																				</InfoPrivacy>
-																				<Label
-																					required
-																				>
-																						Entrez
-																						le
-																						nom
-																						de
-																						l'entreprise
-																						de
-																						votre
-																						client
-																				</Label>
 																				<FlexRow
 																				>
 																					<FormElem
@@ -707,19 +727,19 @@ class CreateProjectForm extends React.Component {
 																							{
 																								value: undefined,
 																								label:
-																										'',
+																									'',
 																							},
 																							{
 																								value:
-																										'MONSIEUR',
+																									'MONSIEUR',
 																								label:
-																										'M.',
+																									'M.',
 																							},
 																							{
 																								value:
-																										'MADAME',
+																									'MADAME',
 																								label:
-																										'Mme',
+																									'Mme',
 																							},
 																						]}
 																					/>
@@ -797,9 +817,13 @@ class CreateProjectForm extends React.Component {
 																					vous
 																				</Label>
 																				<ClassicSelect
-																					styles={
-																						SelectStyles
-																					}
+																					styles={SelectStyles(
+																						{
+																							error:
+																								touched.template
+																								&& errors.template,
+																						},
+																					)}
 																					defaultValue="WEBSITE"
 																					placeholder="Type de projet"
 																					onChange={(option) => {

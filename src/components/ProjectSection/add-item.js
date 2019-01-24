@@ -322,7 +322,7 @@ class AddItem extends Component {
 									>
 										Supprimer
 									</ActionButton>
-									<div>
+									<FlexRow>
 										{typeof cancel === 'function' && (
 											<ActionButton
 												theme="Link"
@@ -342,9 +342,9 @@ class AddItem extends Component {
 											onClick={handleSubmit}
 											type="submit"
 										>
-											Valider
+											Sauvegarder les modifications
 										</ActionButton>
-									</div>
+									</FlexRow>
 								</FlexRow>
 							</div>
 						);

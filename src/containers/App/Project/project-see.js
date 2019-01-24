@@ -391,6 +391,50 @@ class TasksListUser extends Component {
 		});
 	};
 
+	unfinishItem = async (itemId, sectionId, unfinishItem, token) => unfinishItem({
+		variables: {
+			itemId,
+			token,
+		},
+		refetchQueries: ['userTasks'],
+		optimisticResponse: {
+			__typename: 'Mutation',
+			unfinishItem: {
+				id: itemId,
+				status: 'FINISHED',
+				__typename: 'Item',
+			},
+		},
+		update: (cache, {data: {unfinishItem: unfinishedItem}}) => {
+			window.$crisp.push([
+				'set',
+				'session:event',
+				[[['item_finished', undefined, 'yellow']]],
+			]);
+			const data = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId: this.props.match.params.projectId},
+			});
+			const section = data.project.sections.find(
+				e => e.id === sectionId,
+			);
+			const itemIndex = section.items.findIndex(
+				e => e.id === unfinishedItem.id,
+			);
+
+			section.items[itemIndex].status = unfinishedItem.status;
+
+			cache.writeQuery({
+				query: GET_PROJECT_DATA,
+				variables: {
+					projectId: this.props.match.params.projectId,
+				},
+				data,
+			});
+			this.setState({apolloTriggerRenderTemporaryFix: true});
+		},
+	});
+
 	finishItem = async (itemId, sectionId, finishItem, token) => finishItem({
 		variables: {
 			itemId,
@@ -402,6 +446,7 @@ class TasksListUser extends Component {
 			finishItem: {
 				id: itemId,
 				status: 'FINISHED',
+				__typename: 'Item',
 			},
 		},
 		update: (cache, {data: {finishItem: finishedItem}}) => {
@@ -502,6 +547,7 @@ class TasksListUser extends Component {
 								addItem={this.addItem}
 								removeItem={this.removeItem}
 								finishItem={this.finishItem}
+								unfinishItem={this.unfinishItem}
 								issuer={project.issuer}
 								refetch={refetch}
 								mode="see"
@@ -519,6 +565,7 @@ class TasksListUser extends Component {
 											<ItemView
 												id={match.params.itemId}
 												finishItem={this.finishItem}
+												unfinishItem={this.unfinishItem}
 												projectUrl={`/app/projects/${projectId}/see`}
 											/>
 										</ModalElem>

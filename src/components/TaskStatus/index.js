@@ -4,7 +4,7 @@ import {css} from '@emotion/core';
 import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
-import {FINISH_ITEM} from '../../utils/mutations';
+import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 import {ReactComponent as TaskIcon} from '../../utils/icons/task.svg';
 import {ReactComponent as PendingIcon} from '../../utils/icons/pendingTask.svg';
@@ -96,39 +96,54 @@ class TaskStatus extends Component {
 			projectStatus,
 			reviewer,
 			finishItem,
+			unfinishItem,
 		} = this.props;
 
 		const {customerToken} = this.props.match.params;
 
-		const actionable
+		const finishable
 			= (finishItem && (!customerViewMode && reviewer === 'USER'))
 			|| (customerViewMode && reviewer === 'CUSTOMER');
+		const unfinishable
+			= status === 'FINISHED' && reviewer === 'USER' && !customerViewMode;
 
 		return (
 			<Mutation mutation={FINISH_ITEM}>
 				{finishItemMutation => (
-					<TaskStatusMain
-						onClick={() => {
-							if (actionable) {
-								finishItem(
-									itemId,
-									sectionId,
-									finishItemMutation,
-									customerToken,
-								);
-							}
-						}}
-					>
-						<Status
-							status={status}
-							customer={customerViewMode}
-							reviewer={reviewer}
-							projectStatus={projectStatus}
-							actionable={actionable}
-						>
-							{getTaskIconByStatus(status)}
-						</Status>
-					</TaskStatusMain>
+					<Mutation mutation={UNFINISH_ITEM}>
+						{unfinishItemMutation => (
+							<TaskStatusMain
+								onClick={() => {
+									if (finishable) {
+										finishItem(
+											itemId,
+											sectionId,
+											finishItemMutation,
+											customerToken,
+										);
+									}
+									if (unfinishable) {
+										unfinishItem(
+											itemId,
+											sectionId,
+											unfinishItemMutation,
+											customerToken,
+										);
+									}
+								}}
+							>
+								<Status
+									status={status}
+									customer={customerViewMode}
+									reviewer={reviewer}
+									projectStatus={projectStatus}
+									actionable={finishable || unfinishable}
+								>
+									{getTaskIconByStatus(status)}
+								</Status>
+							</TaskStatusMain>
+						)}
+					</Mutation>
 				)}
 			</Mutation>
 		);

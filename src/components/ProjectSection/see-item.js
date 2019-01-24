@@ -138,6 +138,7 @@ class Item extends Component {
 			sectionId,
 			editItem,
 			finishItem,
+			unfinishItem,
 			mode,
 			projectStatus,
 			customer,
@@ -244,6 +245,7 @@ class Item extends Component {
 						customerViewMode={customerViewMode}
 						projectStatus={projectStatus}
 						finishItem={finishItem}
+						unfinishItem={finishItem}
 					/>
 				)}
 				<ItemMain

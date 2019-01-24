@@ -552,6 +552,15 @@ export const FINISH_ITEM = gql`
 	}
 `;
 
+export const UNFINISH_ITEM = gql`
+	mutation unfinishItem($itemId: ID!) {
+		unfinishItem(id: $itemId) {
+			id
+			status
+		}
+	}
+`;
+
 export const REMOVE_ITEM = gql`
 	mutation removeItem($itemId: ID!) {
 		removeItem(id: $itemId) {

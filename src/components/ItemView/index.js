@@ -80,7 +80,7 @@ const Description = styled('div')`
 `;
 
 const Item = ({
-	id, customerToken, finishItem, projectUrl,
+	id, customerToken, finishItem, unfinishItem, projectUrl,
 }) => (
 	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
@@ -129,6 +129,7 @@ const Item = ({
 								customerViewMode={!!customerToken}
 								projectStatus={project.status}
 								finishItem={finishItem}
+								unfinishItem={unfinishItem}
 							/>
 						</div>
 						<div>

@@ -206,6 +206,7 @@ class ProjectDisplay extends Component {
 			addItem,
 			editItem,
 			finishItem,
+			unfinishItem,
 			removeItem,
 			editSectionTitle,
 			removeSection,
@@ -459,6 +460,9 @@ class ProjectDisplay extends Component {
 															}
 															finishItem={
 																finishItem
+															}
+															unfinishItem={
+																unfinishItem
 															}
 															customerToken={
 																customerToken

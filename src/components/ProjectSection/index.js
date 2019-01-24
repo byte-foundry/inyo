@@ -28,8 +28,7 @@ const ProjectAction = styled(Button)`
 	padding: 0;
 	color: ${props => (props.type === 'delete' ? signalRed : primaryBlue)};
 	font-size: 11px;
-	transform: translateY(18px);
-	margin: ${props => (props.type === 'delete' ? '50px 0 25px;' : '0 0 10px 0;')};
+	margin: ${props => (props.type === 'delete' ? '50px 0 25px;' : '18px 0 10px 0;')};
 `;
 const SectionTitle = styled(H5)`
 	color: ${primaryNavyBlue};

@@ -96,7 +96,6 @@ const ProjectAction = styled(Button)`
 	text-decoration: none;
 	color: ${props => (props.theme === 'DeleteOutline' ? signalRed : primaryBlue)};
 	font-size: 13px;
-	transform: translateY(18px);
 	margin-top: 10px;
 	margin-bottom: 10px;
 `;

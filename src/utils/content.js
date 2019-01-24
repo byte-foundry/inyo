@@ -131,6 +131,7 @@ const ButtonStyles = (props) => {
 				justify-content: center;
 				align-items: center;
 				svg {
+					max-width: 20px;
 					margin-right: 0.5rem;
 				}
 			`;

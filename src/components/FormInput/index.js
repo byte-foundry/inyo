@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {Field} from 'formik';
+
 import {Input, primaryWhite} from '../../utils/content';
+import {getDeep} from '../../utils/functions';
 
 const FormInputMain = styled(Input)`
 	${props => props.inline
@@ -44,7 +46,7 @@ class FormInput extends Component {
 				name={name}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				error={errors[name] && touched[name]}
+				error={getDeep(name, errors) && getDeep(name, touched)}
 				inline={inline}
 			/>
 		);

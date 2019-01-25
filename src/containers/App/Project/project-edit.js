@@ -119,29 +119,15 @@ class EditProject extends Component {
 						category: 'Project',
 						action: 'Sent project',
 					});
-					window.$crisp.push([
-						'set',
-						'session:event',
-						[
-							[
-								[
-									'project_sent',
-									{
-										sectionsCount: totalSections,
-										itemsCount: totalItems,
-										elapsedTime: dateDiff(
-											'd',
-											new Date(
-												projectData.project.createdAt,
-											),
-											new Date(),
-										),
-									},
-									'blue',
-								],
-							],
-						],
-					]);
+					window.Intercom('trackEvent', 'project-sent', {
+						sectionsCount: totalSections,
+						itemsCount: totalItems,
+						elapsedTime: dateDiff(
+							'd',
+							new Date(projectData.project.createdAt),
+							new Date(),
+						),
+					});
 
 					this.toast();
 					this.setState({
@@ -222,11 +208,7 @@ class EditProject extends Component {
 						},
 						data,
 					});
-					window.$crisp.push([
-						'set',
-						'session:event',
-						[[['item_added', undefined, 'yellow']]],
-					]);
+					window.Intercom('trackEvent', 'item-added');
 				}
 				catch (e) {
 					throw new Error(e);
@@ -264,11 +246,7 @@ class EditProject extends Component {
 				},
 			},
 			update: (cache, {data: {updateItem: updatedItem}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['item_edited', undefined, 'yellow']]],
-				]);
+				window.Intercom('trackEvent', 'item-edited');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -331,11 +309,7 @@ class EditProject extends Component {
 		removeItem({
 			variables: {itemId},
 			update: (cache, {data: {removeItem: removedItem}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['item_removed', undefined, 'yellow']]],
-				]);
+				window.Intercom('trackEvent', 'item-removed');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -369,11 +343,7 @@ class EditProject extends Component {
 		addSection({
 			variables: {projectId, name: 'Nouvelle section'},
 			update: (cache, {data: {addSection: addedSection}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['section_added', undefined, 'orange']]],
-				]);
+				window.Intercom('trackEvent', 'section-added');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -401,11 +371,7 @@ class EditProject extends Component {
 		updateSection({
 			variables: {sectionId, name},
 			update: (cache, {data: {updateSection: updatedSection}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['section_edited', undefined, 'orange']]],
-				]);
+				window.Intercom('trackEvent', 'section-edited');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -436,11 +402,7 @@ class EditProject extends Component {
 		removeSection({
 			variables: {sectionId},
 			update: (cache, {data: {removeSection: removedSection}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['section_removed', undefined, 'orange']]],
-				]);
+				window.Intercom('trackEvent', 'section-removed');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -471,11 +433,7 @@ class EditProject extends Component {
 		removeProject({
 			variables: {projectId},
 			update: (cache, {data: {removeProject: removedProject}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['project_removed', undefined, 'blue']]],
-				]);
+				window.Intercom('trackEvent', 'project-removed');
 				const data = cache.readQuery({
 					query: GET_ALL_PROJECTS,
 				});
@@ -506,11 +464,7 @@ class EditProject extends Component {
 		this.setState({
 			showInfoModal: true,
 		});
-		window.$crisp.push([
-			'set',
-			'session:event',
-			[[['asked_for_customer_infos', undefined, 'green']]],
-		]);
+		window.Intercom('trackEvent', 'asked-for-customer-infos');
 	};
 
 	openStartProjectModal = () => {

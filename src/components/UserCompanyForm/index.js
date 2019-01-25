@@ -74,19 +74,10 @@ class UserCompanyForm extends Component {
 											cache,
 											{data: {updateUser: updatedUser}},
 										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'updated_company_data',
-															undefined,
-															'green',
-														],
-													],
-												],
-											]);
+											window.Intercom(
+												'trackEvent',
+												'updated-company-data',
+											);
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});

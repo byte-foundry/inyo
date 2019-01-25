@@ -13,6 +13,7 @@ import {
 	CREATE_PROJECT,
 } from '../../utils/mutations';
 import {Button, ErrorInput} from '../../utils/content';
+import {INTERCOM_APP_ID} from '../../utils/constants';
 import {onboardingTemplate} from '../../utils/project-templates';
 
 import FormElem from '../FormElem';
@@ -124,6 +125,10 @@ class SignupForm extends Component {
 														);
 
 														const {
+															user,
+														} = data.signup;
+
+														const {
 															data: {
 																createProject: {
 																	id: onboardProjectId,
@@ -148,6 +153,25 @@ class SignupForm extends Component {
 																		'Bienvenue, découvrez votre smart assistant!',
 																	deadline: deadLineForOnboardingProjet.toISOString(),
 																},
+															},
+														);
+
+														window.Intercom(
+															'boot',
+															{
+																app_id: INTERCOM_APP_ID,
+																email:
+																	user.email,
+																user_id:
+																	user.id,
+																name: `${
+																	user.firstName
+																} ${
+																	user.lastName
+																}`,
+																phone:
+																	user.company
+																		.phone,
 															},
 														);
 

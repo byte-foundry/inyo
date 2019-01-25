@@ -24,6 +24,8 @@ const ClientTitle = styled(H3)`
 	margin: 0;
 	margin-bottom: 10px;
 	text-transform: uppercase;
+	display: flex;
+	justify-content: space-between;
 `;
 
 const CompanyName = styled(H4)`
@@ -58,8 +60,9 @@ const titleEnumToTitle = {
 };
 
 const PencilElem = styled(Pencil)`
-	margin-left: 10px;
 	cursor: pointer;
+	width: 15px;
+	margin-top: -2px;
 `;
 
 class CustomerNameAndAddress extends Component {

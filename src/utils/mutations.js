@@ -244,6 +244,7 @@ export const CREATE_PROJECT = gql`
 		$sections: [SectionInput!]
 		$name: String
 		$deadline: DateTime
+		$notifyActivityToCustomer: Boolean
 	) {
 		createProject(
 			customerId: $customerId
@@ -252,6 +253,7 @@ export const CREATE_PROJECT = gql`
 			sections: $sections
 			name: $name
 			deadline: $deadline
+			notifyActivityToCustomer: $notifyActivityToCustomer
 		) {
 			id
 			name

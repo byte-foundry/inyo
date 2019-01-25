@@ -39,6 +39,7 @@ import {
 } from '../../../utils/constants';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
+import FormCheckbox from '../../../components/FormCheckbox';
 import {CREATE_PROJECT} from '../../../utils/mutations';
 import {
 	GET_ALL_PROJECTS,
@@ -83,6 +84,10 @@ const SpanLabel = styled('span')`
 	border: 1px solid ${primaryBlue};
 	border-right: 0px;
 	padding: 15px 0px 12px 18px;
+`;
+
+const ProjectFormCheckboxContainer = styled('div')`
+	margin-bottom: 17px;
 `;
 
 const SelectStyles = props => ({
@@ -161,6 +166,7 @@ class CreateProjectForm extends React.Component {
 														label: '',
 														value: '',
 													},
+													notifyActivityToCustomer: true,
 													title: '',
 													template: '',
 													firstName: '',
@@ -268,6 +274,8 @@ class CreateProjectForm extends React.Component {
 														name:
 															values.projectTitle,
 														deadline: values.deadline.toISOString(),
+														notifyActivityToCustomer:
+															values.notifyActivityToCustomer,
 													};
 
 													if (customer) {
@@ -864,6 +872,14 @@ class CreateProjectForm extends React.Component {
 																				}
 																			</ErrorInput>
 																		)}
+																		<ProjectFormCheckboxContainer
+																		>
+																			<FormCheckbox
+																				{...props}
+																				label="Notifier mon client par email de l'avancé du projet"
+																				name="notifyActivityToCustomer"
+																			/>
+																		</ProjectFormCheckboxContainer>
 																		<FlexRow
 																		>
 																			<SpanLabel

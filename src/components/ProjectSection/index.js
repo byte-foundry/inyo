@@ -104,7 +104,10 @@ class ProjectSection extends Component {
 					direction="vertical"
 				>
 					{(provided, snapshot) => (
-						<div ref={provided.innerRef}>
+						<div
+							style={{minHeight: '50px'}}
+							ref={provided.innerRef}
+						>
 							{data.items.map((item, index) => (
 								<Draggable
 									key={item.id}

@@ -375,10 +375,11 @@ export const ADD_SECTION = gql`
 	}
 `;
 export const UPDATE_SECTION = gql`
-	mutation updateSection($sectionId: ID!, $name: String!) {
-		updateSection(id: $sectionId, name: $name) {
+	mutation updateSection($sectionId: ID!, $name: String, $position: Int) {
+		updateSection(id: $sectionId, name: $name, position: $position) {
 			id
 			name
+			position
 			items {
 				status
 				id
@@ -494,6 +495,7 @@ export const UPDATE_ITEM = gql`
 		$reviewer: Reviewer
 		$position: Int
 		$token: String
+		$sectionId: ID
 	) {
 		updateItem(
 			id: $itemId
@@ -505,6 +507,7 @@ export const UPDATE_ITEM = gql`
 			reviewer: $reviewer
 			position: $position
 			token: $token
+			sectionId: $sectionId
 		) {
 			id
 			name
@@ -514,6 +517,9 @@ export const UPDATE_ITEM = gql`
 			status
 			reviewer
 			position
+			section {
+				id
+			}
 			comments {
 				createdAt
 				id

@@ -218,9 +218,15 @@ class EditProject extends Component {
 		});
 	};
 
-	editItem = (itemId, sectionId, editData, updateItem) => {
+	editItem = (itemId, previousSectionId, editData, updateItem) => {
 		const {
-			name, type, description, unit, reviewer, position,
+			name,
+			type,
+			description,
+			unit,
+			reviewer,
+			position,
+			sectionId,
 		} = editData;
 
 		updateItem({
@@ -232,9 +238,9 @@ class EditProject extends Component {
 				reviewer,
 				unit: typeof unit === 'number' ? parseFloat(unit) : undefined,
 				position,
+				sectionId,
 			},
 			optimisticResponse: {
-				__typename: 'Mutation',
 				updateItem: {
 					id: itemId,
 					name,
@@ -242,7 +248,9 @@ class EditProject extends Component {
 					reviewer,
 					description,
 					position,
-					__typename: 'Item',
+					section: {
+						id: sectionId,
+					},
 				},
 			},
 			update: (cache, {data: {updateItem: updatedItem}}) => {
@@ -251,12 +259,21 @@ class EditProject extends Component {
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
 				});
-				const section = data.project.sections.find(
-					e => e.id === sectionId,
+				let section = data.project.sections.find(
+					e => e.id === previousSectionId,
 				);
-				const itemIndex = section.items.findIndex(
+				let itemIndex = section.items.findIndex(
 					e => e.id === updatedItem.id,
 				);
+
+				if (previousSectionId !== updatedItem.section.id) {
+					section.items.splice(itemIndex, 1);
+
+					section = data.project.sections.find(
+						e => e.id === updatedItem.section.id,
+					);
+					itemIndex = section.items.length;
+				}
 
 				if (itemIndex !== updatedItem.position) {
 					const itemsToUpdate
@@ -290,6 +307,7 @@ class EditProject extends Component {
 				section.items.splice(itemPosition, 0, {
 					...updatedItem,
 					...elementToMove,
+					section: undefined,
 				});
 
 				cache.writeQuery({
@@ -367,9 +385,16 @@ class EditProject extends Component {
 		});
 	};
 
-	editSectionTitle = (sectionId, name, updateSection) => {
+	editSection = (sectionId, {name, position}, updateSection) => {
 		updateSection({
-			variables: {sectionId, name},
+			variables: {sectionId, name, position},
+			optimisticResponse: {
+				updateSection: {
+					id: sectionId,
+					name,
+					position,
+				},
+			},
 			update: (cache, {data: {updateSection: updatedSection}}) => {
 				window.Intercom('trackEvent', 'section-edited');
 				const data = cache.readQuery({
@@ -380,19 +405,50 @@ class EditProject extends Component {
 					e => e.id === sectionId,
 				);
 
-				data.project.sections[sectionIndex] = updatedSection;
-				try {
-					cache.writeQuery({
-						query: GET_PROJECT_DATA,
-						variables: {
-							projectId: this.props.match.params.projectId,
-						},
-						data,
+				const {sections} = data.project;
+
+				if (sectionIndex !== updatedSection.position) {
+					const itemsToUpdate
+						= updatedSection.position > sectionIndex
+							? sections.slice(
+								sectionIndex + 1,
+								updatedSection.position + 1,
+							  )
+							: sections.slice(
+								updatedSection.position,
+								sectionIndex,
+							  );
+
+					const startIndex
+						= updatedSection.position > sectionIndex
+							? sectionIndex
+							: updatedSection.position + 1;
+
+					itemsToUpdate.forEach((sectionItem, index) => {
+						// eslint-disable-next-line no-param-reassign
+						sectionItem.position = startIndex + index;
 					});
 				}
-				catch (e) {
-					throw new Error(e);
-				}
+
+				const [elementToMove] = sections.splice(sectionIndex, 1);
+				const itemPosition
+					= typeof updatedSection.position === 'number'
+						? updatedSection.position
+						: sectionIndex;
+
+				sections.splice(itemPosition, 0, {
+					...updatedSection,
+					...elementToMove,
+				});
+
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
@@ -525,7 +581,7 @@ class EditProject extends Component {
 								setProjectData={this.setProjectData}
 								addItem={this.addItem}
 								editItem={this.editItem}
-								editSectionTitle={this.editSectionTitle}
+								editSection={this.editSection}
 								removeItem={this.removeItem}
 								removeSection={this.removeSection}
 								addSection={this.addSection}

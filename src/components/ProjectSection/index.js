@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import {Droppable, Draggable} from 'react-beautiful-dnd';
 
+import css from '@emotion/css';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
 import AddItem from './add-item';
@@ -15,12 +16,7 @@ import {
 	primaryBlue,
 	signalRed,
 } from '../../utils/content';
-import {
-	REMOVE_SECTION,
-	ADD_ITEM,
-	UPDATE_SECTION,
-	UPDATE_ITEM,
-} from '../../utils/mutations';
+import {REMOVE_SECTION, ADD_ITEM, UPDATE_ITEM} from '../../utils/mutations';
 
 const ProjectSectionMain = styled('div')``;
 const ProjectAction = styled(Button)`
@@ -43,24 +39,10 @@ class ProjectSection extends Component {
 		};
 	}
 
-	onDragEnd = async ([result], updateItem) => {
-		// dropped outside the list
-		if (!result.destination) {
-			return;
-		}
-
-		await this.props.editItem(
-			this.props.data.items[result.source.index].id,
-			this.props.data.id,
-			{position: result.destination.index},
-			updateItem,
-		);
-	};
-
 	render() {
 		const {
 			data,
-			editSectionTitle,
+			editTitle,
 			editItem,
 			removeItem,
 			finishItem,
@@ -78,23 +60,13 @@ class ProjectSection extends Component {
 			<ProjectSectionMain>
 				<FlexRow justifyContent="space-between">
 					<SectionTitle>
-						<Mutation mutation={UPDATE_SECTION}>
-							{updateSection => (
-								<InlineEditable
-									value={data.name}
-									type="text"
-									placeholder="Nom de la section"
-									disabled={customerToken}
-									onFocusOut={(value) => {
-										editSectionTitle(
-											data.id,
-											value,
-											updateSection,
-										);
-									}}
-								/>
-							)}
-						</Mutation>
+						<InlineEditable
+							value={data.name}
+							type="text"
+							placeholder="Nom de la section"
+							disabled={customerToken}
+							onFocusOut={editTitle}
+						/>
 					</SectionTitle>
 					<div>
 						{!customerToken && (
@@ -126,100 +98,82 @@ class ProjectSection extends Component {
 						)}
 					</div>
 				</FlexRow>
-				<Mutation mutation={UPDATE_ITEM}>
-					{updateItem => (
-						<DragDropContext
-							onDragEnd={(...args) => this.onDragEnd(args, updateItem)
-							}
-						>
-							<Droppable droppableId="droppable">
-								{(provided, snapshot) => (
-									<div ref={provided.innerRef}>
-										{data.items.map((item, index) => (
-											<Draggable
+				<Droppable
+					droppableId={data.id}
+					type="ITEM"
+					direction="vertical"
+				>
+					{(provided, snapshot) => (
+						<div ref={provided.innerRef}>
+							{data.items.map((item, index) => (
+								<Draggable
+									key={item.id}
+									draggableId={item.id}
+									index={index}
+									isDragDisabled={!!customerToken}
+									type="ITEM"
+								>
+									{(provided, snapshot) => (
+										<div
+											ref={provided.innerRef}
+											{...provided.draggableProps}
+											{...provided.dragHandleProps}
+											onMouseDown={(e) => {
+												// hack to remove focus from the inputs
+												e.preventDefault = () => {};
+
+												return provided.dragHandleProps.onMouseDown(
+													e,
+												);
+											}}
+											style={{
+												// some basic styles to make the items look a bit nicer
+												userSelect: 'none',
+
+												// styles we need to apply on draggables
+												...provided.draggableProps
+													.style,
+											}}
+										>
+											<Item
 												key={item.id}
-												draggableId={item.id}
-												index={index}
-												isDragDisabled={!!customerToken}
-											>
-												{(provided, snapshot) => (
-													<div
-														ref={provided.innerRef}
-														{...provided.draggableProps}
-														{...provided.dragHandleProps}
-														onMouseDown={(e) => {
-															// hack to remove focus from the inputs
-															e.preventDefault = () => {};
+												item={item}
+												sectionId={data.id}
+												editItem={editItem}
+												removeItem={removeItem}
+												finishItem={finishItem}
+												unfinishItem={unfinishItem}
+												mode={mode}
+												onClickCommentIcon={() => {
+													if (
+														customerToken
+														=== 'preview'
+													) {
+														return;
+													}
 
-															return provided.dragHandleProps.onMouseDown(
-																e,
-															);
-														}}
-														style={{
-															// some basic styles to make the items look a bit nicer
-															userSelect: 'none',
+													const uri = customerToken
+														? `/view/${customerToken}/items/${
+															item.id
+														  }`
+														: `/${mode}/items/${
+															item.id
+														  }`;
 
-															// change background colour if dragging
-															background: snapshot.isDragging
-																? 'lightgreen'
-																: 'grey',
-
-															// styles we need to apply on draggables
-															...provided
-																.draggableProps
-																.style,
-														}}
-													>
-														<Item
-															key={item.id}
-															item={item}
-															sectionId={data.id}
-															editItem={editItem}
-															removeItem={
-																removeItem
-															}
-															finishItem={
-																finishItem
-															}
-															unfinishItem={
-																unfinishItem
-															}
-															mode={mode}
-															onClickCommentIcon={() => {
-																if (
-																	customerToken
-																	=== 'preview'
-																) {
-																	return;
-																}
-
-																const uri = customerToken
-																	? `/view/${customerToken}/items/${
-																		item.id
-																	  }`
-																	: `/${mode}/items/${
-																		item.id
-																	  }`;
-
-																history.push(
-																	`${projectUrl}${uri}#comments`,
-																);
-															}}
-															projectStatus={
-																projectStatus
-															}
-														/>
-													</div>
-												)}
-											</Draggable>
-										))}
-										{provided.placeholder}
-									</div>
-								)}
-							</Droppable>
-						</DragDropContext>
+													history.push(
+														`${projectUrl}${uri}#comments`,
+													);
+												}}
+												projectStatus={projectStatus}
+											/>
+										</div>
+									)}
+								</Draggable>
+							))}
+							{provided.placeholder}
+						</div>
 					)}
-				</Mutation>
+				</Droppable>
 				{this.state.shouldDisplayAddItem && (
 					<Mutation mutation={ADD_ITEM}>
 						{addItem => (

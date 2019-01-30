@@ -140,15 +140,17 @@ class CreateProjectForm extends React.Component {
 					if (loading) return <Loading />;
 
 					return (
-						<Query query={GET_PROJECT_DATA} variables={{projectId}}>
+						<Query
+							query={GET_PROJECT_DATA}
+							variables={{projectId}}
+							skip={!projectId}
+						>
 							{({
 								loading: loadingProject,
 								data: dataProject,
 								error: errorProject,
 							}) => {
-								if (errorProject && projectId) {
-									throw new Error(errorProject);
-								}
+								if (errorProject && projectId) throw errorProject;
 								if (loadingProject) return <Loading />;
 								if (!dataProject && projectId) return false;
 
@@ -546,13 +548,6 @@ class CreateProjectForm extends React.Component {
 														errors,
 														touched,
 													} = props;
-													const selectedCustomer
-														= values.customer
-														&& customers.find(
-															c => c.id
-																=== values.customer
-																	.id,
-														);
 
 													return (
 														<div>

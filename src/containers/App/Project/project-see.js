@@ -39,7 +39,9 @@ class TasksListUser extends Component {
 				sectionId,
 			},
 			optimisticResponse: {
+				__typename: 'Mutation',
 				updateItem: {
+					__typename: 'Item',
 					id: itemId,
 					name,
 					unit,
@@ -47,6 +49,7 @@ class TasksListUser extends Component {
 					description,
 					position,
 					section: {
+						__typename: 'Section',
 						id: sectionId,
 					},
 				},
@@ -302,7 +305,9 @@ class TasksListUser extends Component {
 		updateSection({
 			variables: {sectionId, name, position},
 			optimisticResponse: {
+				__typename: 'Mutation',
 				updateSection: {
+					__typename: 'Section',
 					id: sectionId,
 					name,
 					position,

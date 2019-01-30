@@ -241,7 +241,9 @@ class EditProject extends Component {
 				sectionId,
 			},
 			optimisticResponse: {
+				__typename: 'Mutation',
 				updateItem: {
+					__typename: 'Item',
 					id: itemId,
 					name,
 					unit,
@@ -249,6 +251,7 @@ class EditProject extends Component {
 					description,
 					position,
 					section: {
+						__typename: 'Section',
 						id: sectionId,
 					},
 				},
@@ -389,7 +392,9 @@ class EditProject extends Component {
 		updateSection({
 			variables: {sectionId, name, position},
 			optimisticResponse: {
+				__typename: 'Mutation',
 				updateSection: {
+					__typename: 'Section',
 					id: sectionId,
 					name,
 					position,

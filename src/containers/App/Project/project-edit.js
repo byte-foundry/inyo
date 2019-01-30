@@ -119,29 +119,15 @@ class EditProject extends Component {
 						category: 'Project',
 						action: 'Sent project',
 					});
-					window.$crisp.push([
-						'set',
-						'session:event',
-						[
-							[
-								[
-									'project_sent',
-									{
-										sectionsCount: totalSections,
-										itemsCount: totalItems,
-										elapsedTime: dateDiff(
-											'd',
-											new Date(
-												projectData.project.createdAt,
-											),
-											new Date(),
-										),
-									},
-									'blue',
-								],
-							],
-						],
-					]);
+					window.Intercom('trackEvent', 'project-sent', {
+						sectionsCount: totalSections,
+						itemsCount: totalItems,
+						elapsedTime: dateDiff(
+							'd',
+							new Date(projectData.project.createdAt),
+							new Date(),
+						),
+					});
 
 					this.toast();
 					this.setState({
@@ -222,11 +208,7 @@ class EditProject extends Component {
 						},
 						data,
 					});
-					window.$crisp.push([
-						'set',
-						'session:event',
-						[[['item_added', undefined, 'yellow']]],
-					]);
+					window.Intercom('trackEvent', 'item-added');
 				}
 				catch (e) {
 					throw new Error(e);
@@ -236,9 +218,15 @@ class EditProject extends Component {
 		});
 	};
 
-	editItem = (itemId, sectionId, editData, updateItem) => {
+	editItem = (itemId, previousSectionId, editData, updateItem) => {
 		const {
-			name, type, description, unit, reviewer, position,
+			name,
+			type,
+			description,
+			unit,
+			reviewer,
+			position,
+			sectionId,
 		} = editData;
 
 		updateItem({
@@ -250,35 +238,45 @@ class EditProject extends Component {
 				reviewer,
 				unit: typeof unit === 'number' ? parseFloat(unit) : undefined,
 				position,
+				sectionId,
 			},
 			optimisticResponse: {
 				__typename: 'Mutation',
 				updateItem: {
+					__typename: 'Item',
 					id: itemId,
 					name,
 					unit,
 					reviewer,
 					description,
 					position,
-					__typename: 'Item',
+					section: {
+						__typename: 'Section',
+						id: sectionId,
+					},
 				},
 			},
 			update: (cache, {data: {updateItem: updatedItem}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['item_edited', undefined, 'yellow']]],
-				]);
+				window.Intercom('trackEvent', 'item-edited');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
 				});
-				const section = data.project.sections.find(
-					e => e.id === sectionId,
+				let section = data.project.sections.find(
+					e => e.id === previousSectionId,
 				);
-				const itemIndex = section.items.findIndex(
+				let itemIndex = section.items.findIndex(
 					e => e.id === updatedItem.id,
 				);
+
+				if (previousSectionId !== updatedItem.section.id) {
+					section.items.splice(itemIndex, 1);
+
+					section = data.project.sections.find(
+						e => e.id === updatedItem.section.id,
+					);
+					itemIndex = section.items.length;
+				}
 
 				if (itemIndex !== updatedItem.position) {
 					const itemsToUpdate
@@ -312,6 +310,7 @@ class EditProject extends Component {
 				section.items.splice(itemPosition, 0, {
 					...updatedItem,
 					...elementToMove,
+					section: undefined,
 				});
 
 				cache.writeQuery({
@@ -331,11 +330,7 @@ class EditProject extends Component {
 		removeItem({
 			variables: {itemId},
 			update: (cache, {data: {removeItem: removedItem}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['item_removed', undefined, 'yellow']]],
-				]);
+				window.Intercom('trackEvent', 'item-removed');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -369,11 +364,7 @@ class EditProject extends Component {
 		addSection({
 			variables: {projectId, name: 'Nouvelle section'},
 			update: (cache, {data: {addSection: addedSection}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['section_added', undefined, 'orange']]],
-				]);
+				window.Intercom('trackEvent', 'section-added');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -397,15 +388,20 @@ class EditProject extends Component {
 		});
 	};
 
-	editSectionTitle = (sectionId, name, updateSection) => {
+	editSection = (sectionId, {name, position}, updateSection) => {
 		updateSection({
-			variables: {sectionId, name},
+			variables: {sectionId, name, position},
+			optimisticResponse: {
+				__typename: 'Mutation',
+				updateSection: {
+					__typename: 'Section',
+					id: sectionId,
+					name,
+					position,
+				},
+			},
 			update: (cache, {data: {updateSection: updatedSection}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['section_edited', undefined, 'orange']]],
-				]);
+				window.Intercom('trackEvent', 'section-edited');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -414,19 +410,50 @@ class EditProject extends Component {
 					e => e.id === sectionId,
 				);
 
-				data.project.sections[sectionIndex] = updatedSection;
-				try {
-					cache.writeQuery({
-						query: GET_PROJECT_DATA,
-						variables: {
-							projectId: this.props.match.params.projectId,
-						},
-						data,
+				const {sections} = data.project;
+
+				if (sectionIndex !== updatedSection.position) {
+					const itemsToUpdate
+						= updatedSection.position > sectionIndex
+							? sections.slice(
+								sectionIndex + 1,
+								updatedSection.position + 1,
+							  )
+							: sections.slice(
+								updatedSection.position,
+								sectionIndex,
+							  );
+
+					const startIndex
+						= updatedSection.position > sectionIndex
+							? sectionIndex
+							: updatedSection.position + 1;
+
+					itemsToUpdate.forEach((sectionItem, index) => {
+						// eslint-disable-next-line no-param-reassign
+						sectionItem.position = startIndex + index;
 					});
 				}
-				catch (e) {
-					throw new Error(e);
-				}
+
+				const [elementToMove] = sections.splice(sectionIndex, 1);
+				const itemPosition
+					= typeof updatedSection.position === 'number'
+						? updatedSection.position
+						: sectionIndex;
+
+				sections.splice(itemPosition, 0, {
+					...updatedSection,
+					...elementToMove,
+				});
+
+				cache.writeQuery({
+					query: GET_PROJECT_DATA,
+					variables: {
+						projectId: this.props.match.params.projectId,
+					},
+					data,
+				});
+
 				this.setState({apolloTriggerRenderTemporaryFix: true});
 			},
 		});
@@ -436,11 +463,7 @@ class EditProject extends Component {
 		removeSection({
 			variables: {sectionId},
 			update: (cache, {data: {removeSection: removedSection}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['section_removed', undefined, 'orange']]],
-				]);
+				window.Intercom('trackEvent', 'section-removed');
 				const data = cache.readQuery({
 					query: GET_PROJECT_DATA,
 					variables: {projectId: this.props.match.params.projectId},
@@ -471,11 +494,7 @@ class EditProject extends Component {
 		removeProject({
 			variables: {projectId},
 			update: (cache, {data: {removeProject: removedProject}}) => {
-				window.$crisp.push([
-					'set',
-					'session:event',
-					[[['project_removed', undefined, 'blue']]],
-				]);
+				window.Intercom('trackEvent', 'project-removed');
 				const data = cache.readQuery({
 					query: GET_ALL_PROJECTS,
 				});
@@ -506,11 +525,7 @@ class EditProject extends Component {
 		this.setState({
 			showInfoModal: true,
 		});
-		window.$crisp.push([
-			'set',
-			'session:event',
-			[[['asked_for_customer_infos', undefined, 'green']]],
-		]);
+		window.Intercom('trackEvent', 'asked-for-customer-infos');
 	};
 
 	openStartProjectModal = () => {
@@ -571,7 +586,7 @@ class EditProject extends Component {
 								setProjectData={this.setProjectData}
 								addItem={this.addItem}
 								editItem={this.editItem}
-								editSectionTitle={this.editSectionTitle}
+								editSection={this.editSection}
 								removeItem={this.removeItem}
 								removeSection={this.removeSection}
 								addSection={this.addSection}

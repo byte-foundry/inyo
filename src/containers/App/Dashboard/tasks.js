@@ -258,7 +258,7 @@ const DashboardTasks = ({
 											C’est peut-être le moment de
 											recontacter ces clients :)
 										</P>
-										<FlexRow>
+										<FlexRow flexWrap="wrap">
 											{projectsPending.map(project => (
 												<ProjectCard
 													project={project}

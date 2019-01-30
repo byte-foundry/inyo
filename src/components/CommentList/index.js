@@ -118,23 +118,10 @@ class CommentList extends Component {
 														cache,
 														{data: {postComment}},
 													) => {
-														window.$crisp.push([
-															'set',
-															'session:event',
-															[
-																[
-																	[
-																		'comment_sent',
-																		{
-																			from: customerToken
-																				? 'Customer'
-																				: 'User',
-																		},
-																		'purple',
-																	],
-																],
-															],
-														]);
+														window.Intercom(
+															'trackEvent',
+															'comment-sent',
+														);
 														const commentsQueryResult = cache.readQuery(
 															{
 																query: GET_COMMENTS_BY_ITEM,

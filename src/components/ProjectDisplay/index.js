@@ -54,6 +54,7 @@ import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
 import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import 'react-toastify/dist/ReactToastify.css';
+import SectionList from '../SectionList';
 
 const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
@@ -208,7 +209,7 @@ class ProjectDisplay extends Component {
 			finishItem,
 			unfinishItem,
 			removeItem,
-			editSectionTitle,
+			editSection,
 			removeSection,
 			addSection,
 			totalItemsFinished,
@@ -344,19 +345,10 @@ class ProjectDisplay extends Component {
 												},
 											},
 										) => {
-											window.$crisp.push([
-												'set',
-												'session:event',
-												[
-													[
-														[
-															'project_finished',
-															undefined,
-															'green',
-														],
-													],
-												],
-											]);
+											window.Intercom(
+												'trackEvent',
+												'project-finished',
+											);
 
 											const data = cache.readQuery({
 												query: GET_PROJECT_DATA,
@@ -445,43 +437,27 @@ class ProjectDisplay extends Component {
 										)}
 										<FlexColumn fullHeight>
 											<ProjectSections>
-												{project.sections.map(
-													(section, index) => (
-														<ProjectSection
-															key={section.id}
-															projectId={
-																project.id
-															}
-															data={section}
-															addItem={addItem}
-															editItem={editItem}
-															removeItem={
-																removeItem
-															}
-															finishItem={
-																finishItem
-															}
-															unfinishItem={
-																unfinishItem
-															}
-															customerToken={
-																customerToken
-															}
-															mode={mode}
-															editSectionTitle={
-																editSectionTitle
-															}
-															removeSection={
-																removeSection
-															}
-															sectionIndex={index}
-															refetch={refetch}
-															projectStatus={
-																project.status
-															}
-														/>
-													),
-												)}
+												<SectionList
+													projectId={project.id}
+													addItem={addItem}
+													editItem={editItem}
+													removeItem={removeItem}
+													finishItem={finishItem}
+													unfinishItem={unfinishItem}
+													customerToken={
+														customerToken
+													}
+													mode={mode}
+													editSection={editSection}
+													removeSection={
+														removeSection
+													}
+													refetch={refetch}
+													projectStatus={
+														project.status
+													}
+													sections={project.sections}
+												/>
 												{!customerToken && (
 													<Mutation
 														mutation={ADD_SECTION}

@@ -60,7 +60,7 @@ class CreateProject extends Component {
 											size="XSmall"
 											onClick={() => {
 												this.props.history.push(
-													'/app/dashboard',
+													'/app/projects',
 												);
 											}}
 										>

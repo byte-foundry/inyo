@@ -13,6 +13,7 @@ import {
 } from '../../utils/content';
 import {nonEmpty} from '../../utils/functions';
 import {UPDATE_CUSTOMER} from '../../utils/mutations';
+import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;
@@ -23,6 +24,8 @@ const ClientTitle = styled(H3)`
 	margin: 0;
 	margin-bottom: 10px;
 	text-transform: uppercase;
+	display: flex;
+	justify-content: space-between;
 `;
 
 const CompanyName = styled(H4)`
@@ -56,6 +59,12 @@ const titleEnumToTitle = {
 	MADAME: 'Mme',
 };
 
+const PencilElem = styled(Pencil)`
+	cursor: pointer;
+	width: 15px;
+	margin-top: -2px;
+`;
+
 class CustomerNameAndAddress extends Component {
 	state = {};
 
@@ -73,10 +82,13 @@ class CustomerNameAndAddress extends Component {
 		return (
 			<Mutation mutation={UPDATE_CUSTOMER}>
 				{updateCustomerMutation => (
-					<ClientAddress
-						onClick={() => this.setState({editing: true})}
-					>
-						<ClientTitle>Votre client</ClientTitle>
+					<ClientAddress>
+						<ClientTitle>
+							Votre client
+							<PencilElem
+								onClick={() => this.setState({editing: true})}
+							/>
+						</ClientTitle>
 						{this.state.editing ? (
 							<Formik
 								initialValues={{

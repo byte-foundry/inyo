@@ -344,7 +344,7 @@ export const onboardingTemplate = {
 					name: '✌️ Cliquer sur cette tâche!',
 					unit: 0,
 					description:
-						'Bienvenue sur cet onboarding! Cliquez sur le bouton en haut à droite pour commencer ce projet fictif et laissez vous guider.',
+						"Bienvenue sur cet onboarding! Cliquez sur le bouton en haut à droite pour commencer ce projet fictif. N'oubliez pas de marquer cette tâche comme achevée ensuite ✅",
 				},
 				{
 					name: "🙋 Attendre le mail d'accueil par Edwige de Inyo",

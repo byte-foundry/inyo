@@ -330,6 +330,7 @@ export const FlexRow = styled('div')`
 	display: flex;
 	flex-direction: row;
 	justify-content: ${props => props.justifyContent || 'flex-start'};
+	${props => props.flexWrap && `flex-wrap: ${props.flexWrap};`};
 `;
 export const FlexColumn = styled('div')`
 	display: flex;

@@ -288,7 +288,9 @@ class CreateProjectForm extends React.Component {
 															lastName:
 																values.lastName,
 															email: values.email,
-															title: values.title,
+															title:
+																values.title
+																|| undefined,
 															phone: values.phone,
 														};
 													}

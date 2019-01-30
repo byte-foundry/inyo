@@ -43,6 +43,11 @@ import {INTERCOM_APP_ID} from './utils/constants';
 })();
 /* eslint-enable */
 
+// Deactivate temporarily all call to crisp
+window.$crisp = {
+	push: () => {},
+};
+
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<Router>

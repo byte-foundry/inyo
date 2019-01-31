@@ -245,7 +245,7 @@ class Item extends Component {
 						customerViewMode={customerViewMode}
 						projectStatus={projectStatus}
 						finishItem={finishItem}
-						unfinishItem={finishItem}
+						unfinishItem={unfinishItem}
 					/>
 				)}
 				<ItemMain

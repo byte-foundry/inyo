@@ -127,9 +127,7 @@ const ButtonStyles = (props) => {
 				background-color: transparent;
 				color: ${primaryBlue};
 				text-decoration: underline;
-				display: flex;
-				justify-content: center;
-				align-items: center;
+				display: inline;
 				svg {
 					max-width: 20px;
 					margin-right: 0.5rem;

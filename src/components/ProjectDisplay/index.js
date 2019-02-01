@@ -689,17 +689,22 @@ class ProjectDisplay extends Component {
 																				} = query;
 
 																				data.project.notifyActivityToCustomer
-																					= updatedProject.status;
-																				data.project.sections.forEach(
-																					(section) => {
-																						section.items.forEach(
-																							(item) => {
-																								item.reviewer
-																									= 'USER';
-																							},
-																						);
-																					},
-																				);
+																					= updatedProject.notifyActivityToCustomer;
+
+																				if (
+																					!updatedProject.notifyActivityToCustomer
+																				) {
+																					data.project.sections.forEach(
+																						(section) => {
+																							section.items.forEach(
+																								(item) => {
+																									item.reviewer
+																										= 'USER';
+																								},
+																							);
+																						},
+																					);
+																				}
 
 																				cache.writeQuery(
 																					query,

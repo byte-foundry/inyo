@@ -29,12 +29,12 @@
     "graphql-tag": "^2.10.0",
     "medium-draft": "^0.5.6",
     "prop-types": "^15.6.2",
-    "react": "^16.5.2",
+    "react": "^16.8.0-alpha.1",
     "react-apollo": "^2.2.4",
     "react-autocomplete": "^1.8.1",
     "react-beautiful-dnd": "^10.0.3",
     "react-day-picker": "^7.2.4",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.8.0-alpha.1",
     "react-ga": "^2.5.3",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.4",
@@ -42,6 +42,7 @@
     "react-toastify": "^4.4.0",
     "remarkable": "^1.7.1",
     "shevyjs": "^1.1.0",
+    "use-onclickoutside": "^0.2.2",
     "yup": "^0.26.6"
   },
   "devDependencies": {

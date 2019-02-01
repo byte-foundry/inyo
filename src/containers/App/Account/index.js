@@ -31,6 +31,7 @@ import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm
 import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
 import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
 // import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
+import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
@@ -213,6 +214,18 @@ class Account extends Component {
 									>
 										<UsersIcon />
 									</TopBarButton> */}
+									<TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/account',
+											);
+										}}
+									>
+										<SettingsIcon />
+										<span>Réglages</span>
+									</TopBarButton>
 								</TopBarNavigation>
 							</TopBar>
 

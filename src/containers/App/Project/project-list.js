@@ -12,6 +12,7 @@ import TopBar, {
 import {Loading} from '../../../utils/content';
 
 import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
+import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
 // import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
 import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 
@@ -88,6 +89,17 @@ class ListProjects extends Component {
 									>
 										Créer un nouveau projet
 									</TopBarButton>
+									{/* <TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/customers',
+											);
+										}}
+									>
+										<UsersIcon />
+									</TopBarButton> */}
 									<TopBarButton
 										theme="Link"
 										size="XSmall"
@@ -100,17 +112,18 @@ class ListProjects extends Component {
 										<DashboardIcon />
 										<span>Dashboard</span>
 									</TopBarButton>
-									{/* <TopBarButton
+									<TopBarButton
 										theme="Link"
 										size="XSmall"
 										onClick={() => {
 											this.props.history.push(
-												'/app/customers',
+												'/app/projects',
 											);
 										}}
 									>
-										<UsersIcon />
-									</TopBarButton> */}
+										<FoldersIcon />
+										<span>Projets</span>
+									</TopBarButton>
 									<TopBarButton
 										theme="Link"
 										size="XSmall"

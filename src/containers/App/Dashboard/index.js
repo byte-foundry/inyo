@@ -14,6 +14,7 @@ import {
 	H2, primaryBlue, gray10, Loading,
 } from '../../../utils/content';
 import {GET_USER_INFOS, GET_PROJECT_DATA} from '../../../utils/queries';
+import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
 import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
 // import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
 import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
@@ -205,6 +206,29 @@ class Dashboard extends Component {
 									>
 										Créer un nouveau projet
 									</TopBarButton>
+									{/* <TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/customers',
+											);
+										}}
+									>
+										<UsersIcon />
+									</TopBarButton> */}
+									<TopBarButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											this.props.history.push(
+												'/app/dashboard',
+											);
+										}}
+									>
+										<DashboardIcon />
+										<span>Dashboard</span>
+									</TopBarButton>
 									<TopBarButton
 										theme="Link"
 										size="XSmall"
@@ -217,17 +241,6 @@ class Dashboard extends Component {
 										<FoldersIcon />
 										<span>Projets</span>
 									</TopBarButton>
-									{/* <TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/customers',
-											);
-										}}
-									>
-										<UsersIcon />
-									</TopBarButton> */}
 									<TopBarButton
 										theme="Link"
 										size="XSmall"

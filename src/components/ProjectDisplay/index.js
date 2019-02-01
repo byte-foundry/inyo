@@ -157,6 +157,7 @@ const DateButton = styled('div')`
 
 const ClientPreviewIcon = styled(EyeIcon)`
 	vertical-align: middle;
+	margin-top: -2px;
 `;
 
 const PreviewModal = styled(ModalContainer)`
@@ -173,13 +174,15 @@ const Notice = styled(P)`
 `;
 
 const CheckBoxLabel = styled('label')`
-	font-size: 12px;
+	font-size: 13px;
 	margin: 0.5em 0;
 	color: ${primaryBlue};
+	cursor: pointer;
 
 	input[type='checkbox'] {
 		margin-left: 0.4em;
 		margin-right: 0.8em;
+		margin-top: -1px;
 	}
 `;
 

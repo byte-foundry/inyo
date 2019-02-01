@@ -20,7 +20,7 @@ const ModalRow = styled('div')`
 
 const ModalRowHoriz = styled(ModalRow)`
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 `;
 
 export default function ConfirmModal({children, onConfirm, closeModal}) {

@@ -13,6 +13,7 @@ import InlineEditable from '../InlineEditable';
 import ProjectData from '../ProjectData';
 import TasksProgressBar from '../TasksProgressBar';
 import Plural from '../Plural';
+import TaskInput from '../TaskInput';
 
 import {
 	UPDATE_PROJECT,
@@ -474,6 +475,10 @@ class ProjectDisplay extends Component {
 															)
 														}
 													/>
+												)}
+												{!customerToken
+													&& project.status !== 'FINISHED' && (
+													<TaskInput />
 												)}
 												<FlexColumn fullHeight>
 													<ProjectSections>

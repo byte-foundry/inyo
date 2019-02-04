@@ -2,6 +2,7 @@ import React from 'react';
 import {Query, Mutation} from 'react-apollo';
 import styled from '@emotion/styled';
 import {Link} from 'react-router-dom';
+import Remarkable from 'remarkable';
 
 import Plural from '../Plural';
 import TaskStatus from '../TaskStatus';
@@ -84,7 +85,6 @@ const Item = ({
 }) => (
 	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
 		{({loading, data, error}) => {
-			debugger;
 			if (loading) return <SpinningBubble />;
 			if (error) throw error;
 
@@ -174,7 +174,13 @@ const Item = ({
 							<MetaText>{project.customer.name}</MetaText>
 						</Meta>
 					</Metas>
-					<Description>{description}</Description>
+					<Description
+						dangerouslySetInnerHTML={{
+							__html: new Remarkable({linkify: true}).render(
+								description,
+							),
+						}}
+					/>
 					{item.type === 'CONTENT_ACQUISITION' && (
 						<>
 							<H4>Contenus à récupérer</H4>

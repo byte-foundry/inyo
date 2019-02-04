@@ -50,7 +50,7 @@ class TasksListUser extends Component {
 					position,
 					section: {
 						__typename: 'Section',
-						id: sectionId,
+						id: sectionId || previousSectionId,
 					},
 				},
 			},

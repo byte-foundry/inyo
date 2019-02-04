@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import Remarkable from 'remarkable';
 
 import {
 	FlexRow,
@@ -61,7 +62,14 @@ class Comment extends Component {
 						<CommentInfo dateTime={createdAt}>
 							{new Date(createdAt).toLocaleString()}
 						</CommentInfo>
-						<CommentText>{text}</CommentText>
+						<CommentText
+							className="content"
+							dangerouslySetInnerHTML={{
+								__html: new Remarkable({linkify: true}).render(
+									text,
+								),
+							}}
+						/>
 					</CommentContent>
 				</FlexRow>
 			</CommentMain>

@@ -40,6 +40,7 @@
     "react-scripts": "2.0.4",
     "react-select": "^2.1.0",
     "react-toastify": "^4.4.0",
+    "remarkable": "^1.7.1",
     "shevyjs": "^1.1.0",
     "yup": "^0.26.6"
   },

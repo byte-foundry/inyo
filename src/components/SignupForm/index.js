@@ -141,7 +141,7 @@ class SignupForm extends Component {
 																		'BLANK',
 																	customer: {
 																		name:
-																			'Inyo Support',
+																			'Client test',
 																		email:
 																			'edwige@inyo.me',
 																		firstName:

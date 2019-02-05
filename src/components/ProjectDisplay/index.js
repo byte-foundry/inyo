@@ -617,7 +617,7 @@ class ProjectDisplay extends Component {
 										<SideActions>
 											<CustomerIssuerContainer>
 												{customerToken
-													&& issuer.name && (
+													&& issuer && (
 													<IssuerNameAndAddress
 														issuer={issuer}
 													/>

@@ -32,6 +32,7 @@ export const SIGNUP = gql`
 			user {
 				id
 				email
+				hmacIntercomId
 				firstName
 				lastName
 				company {

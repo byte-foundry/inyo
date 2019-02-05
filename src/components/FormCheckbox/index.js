@@ -20,6 +20,7 @@ class FormCheckbox extends Component {
 			touched,
 			required,
 			onChange,
+			manual,
 		} = this.props;
 
 		return (
@@ -33,10 +34,12 @@ class FormCheckbox extends Component {
 									checked={values[name]}
 									onBlur={handleBlur}
 									onChange={(e) => {
-										form.setFieldValue(
-											name,
-											e.target.checked,
-										);
+										if (!manual) {
+											form.setFieldValue(
+												name,
+												e.target.checked,
+											);
+										}
 										onChange(e);
 									}}
 								/>

@@ -452,9 +452,21 @@ class ProjectDisplay extends Component {
 												{mode === 'see' && (
 													<TasksProgressBar
 														tasksCompleted={
-															totalItemsFinished
+															totalItemsFinished.length
+															+ totalItemsFinished.reduce(
+																(acc, item) => acc
+																	+ item.unit,
+																0,
+															)
 														}
-														tasksTotal={totalItems}
+														tasksTotal={
+															totalItems.length
+															+ totalItems.reduce(
+																(acc, item) => acc
+																	+ item.unit,
+																0,
+															)
+														}
 													/>
 												)}
 												<FlexColumn fullHeight>

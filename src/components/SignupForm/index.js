@@ -169,6 +169,8 @@ class SignupForm extends Component {
 																} ${
 																	user.lastName
 																}`,
+																user_hash:
+																	user.hmacIntercomId,
 																phone:
 																	user.company
 																		.phone,

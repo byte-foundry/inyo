@@ -23,6 +23,7 @@ export const CHECK_LOGIN_USER = gql`
 		me {
 			email
 			id
+			hmacIntercomId
 			firstName
 			lastName
 			workingDays

@@ -54,7 +54,7 @@ class TasksListUser extends Component {
 					},
 				},
 			},
-			refetchQueries: ['userTasks'],
+			refetchQueries: ['userTasks', 'getItemDetails'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
 					'set',

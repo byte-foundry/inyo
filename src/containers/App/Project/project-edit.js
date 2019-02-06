@@ -256,6 +256,7 @@ class EditProject extends Component {
 					},
 				},
 			},
+			refetchQueries: ['userTasks', 'getItemDetails'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.Intercom('trackEvent', 'item-edited');
 				const data = cache.readQuery({

@@ -28,6 +28,7 @@ import {
 	Loading,
 	Input,
 	DateInput,
+	P,
 } from '../../../utils/content';
 import {formatDate, parseDate} from '../../../utils/functions';
 import {
@@ -39,6 +40,8 @@ import {
 } from '../../../utils/constants';
 import FormElem from '../../../components/FormElem';
 import FormSelect from '../../../components/FormSelect';
+import FormCheckbox from '../../../components/FormCheckbox';
+import ConfirmModal from '../../../components/ConfirmModal';
 import {CREATE_PROJECT} from '../../../utils/mutations';
 import {
 	GET_ALL_PROJECTS,
@@ -83,6 +86,10 @@ const SpanLabel = styled('span')`
 	border: 1px solid ${primaryBlue};
 	border-right: 0px;
 	padding: 15px 0px 12px 18px;
+`;
+
+const ProjectFormCheckboxContainer = styled('div')`
+	margin-top: 17px;
 `;
 
 const SelectStyles = props => ({
@@ -133,6 +140,8 @@ class CreateProjectForm extends React.Component {
 			},
 		} = this.props;
 
+		const {askNotifyActivityConfirm} = this.state;
+
 		return (
 			<Query query={GET_USER_INFOS}>
 				{({loading, data, error}) => {
@@ -163,6 +172,7 @@ class CreateProjectForm extends React.Component {
 														label: '',
 														value: '',
 													},
+													notifyActivityToCustomer: true,
 													title: '',
 													template: '',
 													firstName: '',
@@ -270,6 +280,8 @@ class CreateProjectForm extends React.Component {
 														name:
 															values.projectTitle,
 														deadline: values.deadline.toISOString(),
+														notifyActivityToCustomer:
+															values.notifyActivityToCustomer,
 													};
 
 													if (customer) {
@@ -891,6 +903,13 @@ class CreateProjectForm extends React.Component {
 																						LABELS.fr,
 																					selectedDays:
 																						values.deadline,
+																					fromMonth: new Date(),
+																					showOutsideDays: true,
+																					modifiers: {
+																						disabled: {
+																							before: new Date(),
+																						},
+																					},
 																				}}
 																				component={dateProps => (
 																					<DateInput
@@ -908,6 +927,97 @@ class CreateProjectForm extends React.Component {
 																				}
 																			/>
 																		</FlexRow>
+																		<ProjectFormCheckboxContainer
+																		>
+																			<FormCheckbox
+																				{...props}
+																				onChange={async () => {
+																					if (
+																						values.notifyActivityToCustomer
+																					) {
+																						const confirmed = await new Promise(
+																							resolve => this.setState(
+																								{
+																									askNotifyActivityConfirm: resolve,
+																								},
+																							),
+																						);
+
+																						this.setState(
+																							{
+																								askNotifyActivityConfirm: null,
+																							},
+																						);
+
+																						if (
+																							!confirmed
+																						) {
+																						}
+																						else {
+																							setFieldValue(
+																								'notifyActivityToCustomer',
+																								false,
+																							);
+																						}
+																					}
+																				}}
+																				manual={
+																					values.notifyActivityToCustomer
+																				}
+																				label="Notifier mon client par email de l'avancée du projet"
+																				name="notifyActivityToCustomer"
+																			/>
+																			{askNotifyActivityConfirm && (
+																				<ConfirmModal
+																					onConfirm={confirmed => askNotifyActivityConfirm(
+																						confirmed,
+																					)
+																					}
+																					closeModal={() => askNotifyActivityConfirm(
+																						false,
+																					)
+																					}
+																				>
+																					<P
+																					>
+																						En
+																						décochant
+																						cette
+																						option,
+																						les
+																						tâches
+																						automatiques
+																						(obtenir
+																						des
+																						validations
+																						de
+																						la
+																						part
+																						de
+																						votre
+																						client,
+																						les
+																						contenus,
+																						les
+																						relances
+																						paiement,
+																						etc.)
+																						seront
+																						désactivées.
+																					</P>
+																					<P
+																					>
+																						Êtes-vous
+																						sûr
+																						de
+																						vouloir
+																						désactiver
+																						ces
+																						notifications?
+																					</P>
+																				</ConfirmModal>
+																			)}
+																		</ProjectFormCheckboxContainer>
 																		<br />
 																		<Button
 																			type="submit"

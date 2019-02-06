@@ -23,6 +23,7 @@ export const CHECK_LOGIN_USER = gql`
 		me {
 			email
 			id
+			hmacIntercomId
 			firstName
 			lastName
 			workingDays
@@ -138,6 +139,7 @@ export const GET_PROJECT_DATA = gql`
 			createdAt
 			deadline
 			daysUntilDeadline
+			notifyActivityToCustomer
 			issuer {
 				name
 				email

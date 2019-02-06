@@ -141,7 +141,7 @@ class SignupForm extends Component {
 																		'BLANK',
 																	customer: {
 																		name:
-																			'Inyo Support',
+																			'Client test',
 																		email:
 																			'edwige@inyo.me',
 																		firstName:
@@ -169,6 +169,8 @@ class SignupForm extends Component {
 																} ${
 																	user.lastName
 																}`,
+																user_hash:
+																	user.hmacIntercomId,
 																phone:
 																	user.company
 																		.phone,

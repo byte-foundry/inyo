@@ -32,6 +32,7 @@ export const SIGNUP = gql`
 			user {
 				id
 				email
+				hmacIntercomId
 				firstName
 				lastName
 				company {
@@ -244,6 +245,7 @@ export const CREATE_PROJECT = gql`
 		$sections: [SectionInput!]
 		$name: String
 		$deadline: DateTime
+		$notifyActivityToCustomer: Boolean
 	) {
 		createProject(
 			customerId: $customerId
@@ -252,6 +254,7 @@ export const CREATE_PROJECT = gql`
 			sections: $sections
 			name: $name
 			deadline: $deadline
+			notifyActivityToCustomer: $notifyActivityToCustomer
 		) {
 			id
 			name
@@ -274,11 +277,18 @@ export const UPDATE_PROJECT = gql`
 		$projectId: ID!
 		$name: String
 		$deadline: DateTime
+		$notifyActivityToCustomer: Boolean
 	) {
-		updateProject(id: $projectId, name: $name, deadline: $deadline) {
+		updateProject(
+			id: $projectId
+			name: $name
+			deadline: $deadline
+			notifyActivityToCustomer: $notifyActivityToCustomer
+		) {
 			id
 			name
 			deadline
+			notifyActivityToCustomer
 		}
 	}
 `;

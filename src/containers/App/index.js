@@ -37,6 +37,7 @@ class App extends Component {
 							user_id: data.me.id,
 							name: `${data.me.firstName} ${data.me.lastName}`,
 							phone: data.me.company.phone,
+							user_hash: data.me.hmacIntercomId,
 						});
 						Sentry.configureScope((scope) => {
 							scope.setUser({email: data.me.email});

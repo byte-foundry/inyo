@@ -50,11 +50,11 @@ class TasksListUser extends Component {
 					position,
 					section: {
 						__typename: 'Section',
-						id: sectionId,
+						id: sectionId || previousSectionId,
 					},
 				},
 			},
-			refetchQueries: ['userTasks'],
+			refetchQueries: ['userTasks', 'getItemDetails'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.$crisp.push([
 					'set',
@@ -570,16 +570,17 @@ class TasksListUser extends Component {
 					const overtime = 0;
 
 					const totalItems = project.sections.reduce(
-						(sumItems, section) => sumItems + section.items.length,
-						0,
+						(sumItems, section) => sumItems.concat(...section.items),
+						[],
 					);
 
 					const totalItemsFinished = project.sections.reduce(
-						(sumItems, section) => sumItems
-							+ section.items.filter(
+						(sumItems, section) => sumItems.concat(
+							...section.items.filter(
 								item => item.status === 'FINISHED',
-							).length,
-						0,
+							),
+						),
+						[],
 					);
 
 					return (

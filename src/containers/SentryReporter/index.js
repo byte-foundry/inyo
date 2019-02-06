@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 import styled from '@emotion/styled';
 import {
@@ -88,22 +88,22 @@ class SentryReporter extends Component {
 							</P>
 							<P>
 								Nous vous invitons à{' '}
-								<Button
-									theme="Link"
-									size="XSmall"
+								<Link
+									to="/app"
 									onClick={() => {
-										this.props.history.replace('/app');
-										window.location.reload();
+										this.setState({error: null});
 									}}
 								>
 									revenir à la page d'accueil
-								</Button>
+								</Link>
 								. Si vous souhaitez nous aider, vous pouvez
 								aussi nous{' '}
 								<Button
 									theme="Link"
 									size="XSmall"
-									onClick={() => Sentry.showReportDialog()}
+									onClick={() => {
+										Sentry.showReportDialog();
+									}}
 								>
 									transmettre cette erreur
 								</Button>

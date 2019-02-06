@@ -252,10 +252,11 @@ class EditProject extends Component {
 					position,
 					section: {
 						__typename: 'Section',
-						id: sectionId,
+						id: sectionId || previousSectionId,
 					},
 				},
 			},
+			refetchQueries: ['userTasks', 'getItemDetails'],
 			update: (cache, {data: {updateItem: updatedItem}}) => {
 				window.Intercom('trackEvent', 'item-edited');
 				const data = cache.readQuery({

@@ -10,7 +10,6 @@ import TopBar, {TopBarTitle, TopBarNavigation, TopBarButton} from '../TopBar';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import InlineEditable from '../InlineEditable';
-import ProjectSection from '../ProjectSection';
 import ProjectData from '../ProjectData';
 import TasksProgressBar from '../TasksProgressBar';
 import Plural from '../Plural';
@@ -55,6 +54,7 @@ import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import 'react-toastify/dist/ReactToastify.css';
 import SectionList from '../SectionList';
+import ConfirmModal from '../ConfirmModal';
 
 const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
@@ -97,8 +97,7 @@ const ProjectAction = styled(Button)`
 	text-decoration: none;
 	color: ${props => (props.theme === 'DeleteOutline' ? signalRed : primaryBlue)};
 	font-size: 13px;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	margin: 0.4em 0;
 `;
 
 const TaskLegend = styled('div')`
@@ -156,9 +155,9 @@ const DateButton = styled('div')`
 	}
 `;
 
-const ClientPreviewButton = styled(Button)`
-	margin-top: 10px;
-	width: 100%;
+const ClientPreviewIcon = styled(EyeIcon)`
+	vertical-align: middle;
+	margin-top: -2px;
 `;
 
 const PreviewModal = styled(ModalContainer)`
@@ -174,14 +173,26 @@ const Notice = styled(P)`
 	margin: 0;
 `;
 
-class ProjectDisplay extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			mode: 'project',
-			apolloTriggerRenderTemporaryFix: false,
-		};
+const CheckBoxLabel = styled('label')`
+	font-size: 13px;
+	margin: 0.5em 0;
+	color: ${primaryBlue};
+	cursor: pointer;
+
+	input[type='checkbox'] {
+		margin-left: 0.4em;
+		margin-right: 0.8em;
+		margin-top: -1px;
 	}
+`;
+
+class ProjectDisplay extends Component {
+	state = {
+		mode: 'project',
+		apolloTriggerRenderTemporaryFix: false,
+		askNotifyActivityConfirm: null,
+		askCustomerAttributionConfirm: null,
+	};
 
 	duplicateProject = (project) => {
 		this.props.history.push(`/app/projects/create/from/${project.id}`);
@@ -221,9 +232,16 @@ class ProjectDisplay extends Component {
 			style,
 		} = this.props;
 
-		const {isCustomerPreviewOpen} = this.state;
+		const {
+			isCustomerPreviewOpen,
+			askNotifyActivityConfirm,
+			askCustomerAttributionConfirm,
+		} = this.state;
 
 		const hasAllTasksDone = project.sections.every(section => section.items.every(item => item.status === 'FINISHED'));
+		const hasClientAttributedTasks = project.sections.some(section => section.items.some(
+			item => item.status === 'PENDING' && item.reviewer === 'CUSTOMER',
+		));
 
 		let title = 'Project en cours';
 
@@ -241,71 +259,71 @@ class ProjectDisplay extends Component {
 
 					if (!(data && data.me) && !customerToken) return false;
 					return (
-						<ProjectDisplayMain style={style}>
-							{!customerToken && (
-								<TopBar>
-									<TopBarTitle>{title}</TopBarTitle>
-									<TopBarNavigation>
-										{mode !== 'edit' && (
-											<TopBarButton
-												theme="Primary"
-												size="Medium"
-												onClick={() => {
-													this.props.history.push(
-														'/app/projects/create',
-													);
-												}}
-											>
-												Créer un nouveau projet
-											</TopBarButton>
-										)}
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/dashboard',
-												);
-											}}
-										>
-											<DashboardIcon />
-											<span>Dashboard</span>
-										</TopBarButton>
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/projects',
-												);
-											}}
-										>
-											<FoldersIcon />
-											<span>Projets</span>
-										</TopBarButton>
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/account',
-												);
-											}}
-										>
-											<SettingsIcon />
-											<span>Réglages</span>
-										</TopBarButton>
-									</TopBarNavigation>
-								</TopBar>
-							)}
+						<Mutation mutation={UPDATE_PROJECT}>
+							{updateProject => (
+								<ProjectDisplayMain style={style}>
+									{!customerToken && (
+										<TopBar>
+											<TopBarTitle>{title}</TopBarTitle>
+											<TopBarNavigation>
+												{mode !== 'edit' && (
+													<TopBarButton
+														theme="Primary"
+														size="Medium"
+														onClick={() => {
+															this.props.history.push(
+																'/app/projects/create',
+															);
+														}}
+													>
+														Créer un nouveau projet
+													</TopBarButton>
+												)}
+												<TopBarButton
+													theme="Link"
+													size="XSmall"
+													onClick={() => {
+														this.props.history.push(
+															'/app/dashboard',
+														);
+													}}
+												>
+													<DashboardIcon />
+													<span>Dashboard</span>
+												</TopBarButton>
+												<TopBarButton
+													theme="Link"
+													size="XSmall"
+													onClick={() => {
+														this.props.history.push(
+															'/app/projects',
+														);
+													}}
+												>
+													<FoldersIcon />
+													<span>Projets</span>
+												</TopBarButton>
+												<TopBarButton
+													theme="Link"
+													size="XSmall"
+													onClick={() => {
+														this.props.history.push(
+															'/app/account',
+														);
+													}}
+												>
+													<SettingsIcon />
+													<span>Réglages</span>
+												</TopBarButton>
+											</TopBarNavigation>
+										</TopBar>
+									)}
 
-							<ProjectRow
-								noPadding
-								justifyContent="space-between"
-							>
-								<ProjectName>
-									<Mutation mutation={UPDATE_PROJECT}>
-										{updateProject => (
+									<ProjectRow
+										noPadding
+										justifyContent="space-between"
+									>
+										<ProjectName>
 											<InlineEditable
 												value={project.name}
 												type="text"
@@ -319,247 +337,529 @@ class ProjectDisplay extends Component {
 													);
 												}}
 											/>
-										)}
-									</Mutation>
-								</ProjectName>
-								{!customerToken
-									&& hasAllTasksDone
-									&& project.status === 'ONGOING' && (
-									<Mutation
-										mutation={FINISH_PROJECT}
-										variables={{
-											projectId: project.id,
-										}}
-										optimisticResponse={{
-											__typename: 'Mutation',
-											finishProject: {
-												id: project.id,
-												status: 'FINISHED',
-											},
-										}}
-										update={(
-											cache,
-											{
-												data: {
-													finishProject: finishedProject,
-												},
-											},
-										) => {
-											window.Intercom(
-												'trackEvent',
-												'project-finished',
-											);
-
-											const data = cache.readQuery({
-												query: GET_PROJECT_DATA,
-												variables: {
+										</ProjectName>
+										{!customerToken
+											&& hasAllTasksDone
+											&& project.status === 'ONGOING' && (
+											<Mutation
+												mutation={FINISH_PROJECT}
+												variables={{
 													projectId: project.id,
-												},
-											});
-
-											data.project.status
-													= finishedProject.status;
-
-											cache.writeQuery({
-												query: GET_PROJECT_DATA,
-												variables: {
-													projectId: project.id,
-												},
-												data,
-											});
-										}}
-									>
-										{finishProject => (
-											<StartProjectButton
-												theme="Primary"
-												size="Medium"
-												onClick={() => finishProject()
-												}
-											>
-													Archiver ce projet
-											</StartProjectButton>
-										)}
-									</Mutation>
-								)}
-								{!customerToken && (
-									<StartProjectButton
-										size="Medium"
-										onClick={() => this.duplicateProject(project)
-										}
-									>
-										Dupliquer ce projet
-									</StartProjectButton>
-								)}
-								{mode === 'edit' && (
-									<Mutation
-										mutation={START_PROJECT}
-										onError={(error) => {
-											if (
-												error.message.includes(
-													'NEED_MORE_INFOS',
-												)
-												|| error.message.includes(
-													'Missing required data',
-												)
-											) {
-												return askForInfos();
-											}
-											return false;
-										}}
-									>
-										{StartProject => (
-											<StartProjectButton
-												theme="Primary"
-												size="Medium"
-												onClick={() => {
-													startProject(
-														project.id,
-														StartProject,
+												}}
+												optimisticResponse={{
+													__typename: 'Mutation',
+													finishProject: {
+														id: project.id,
+														status: 'FINISHED',
+													},
+												}}
+												update={(
+													cache,
+													{
+														data: {
+															finishProject: finishedProject,
+														},
+													},
+												) => {
+													window.Intercom(
+														'trackEvent',
+														'project-finished',
 													);
+
+													const data = cache.readQuery(
+														{
+															query: GET_PROJECT_DATA,
+															variables: {
+																projectId:
+																		project.id,
+															},
+														},
+													);
+
+													data.project.status
+															= finishedProject.status;
+
+													cache.writeQuery({
+														query: GET_PROJECT_DATA,
+														variables: {
+															projectId:
+																	project.id,
+														},
+														data,
+													});
 												}}
 											>
-												Commencer le projet
-											</StartProjectButton>
-										)}
-									</Mutation>
-								)}
-							</ProjectRow>
-							<FlexRow justifyContent="space-between">
-								<CenterContent flexGrow="2">
-									<ProjectContent>
-										{mode === 'see' && (
-											<TasksProgressBar
-												tasksCompleted={
-													totalItemsFinished
-												}
-												tasksTotal={totalItems}
-											/>
-										)}
-										<FlexColumn fullHeight>
-											<ProjectSections>
-												<SectionList
-													projectId={project.id}
-													addItem={addItem}
-													editItem={editItem}
-													removeItem={removeItem}
-													finishItem={finishItem}
-													unfinishItem={unfinishItem}
-													customerToken={
-														customerToken
-													}
-													mode={mode}
-													editSection={editSection}
-													removeSection={
-														removeSection
-													}
-													refetch={refetch}
-													projectStatus={
-														project.status
-													}
-													sections={project.sections}
-												/>
-												{!customerToken && (
-													<Mutation
-														mutation={ADD_SECTION}
-													>
-														{AddSection => (
-															<ProjectAction
-																theme="Link"
-																size="XSmall"
-																onClick={() => {
-																	addSection(
-																		project.id,
-																		AddSection,
-																	);
-																}}
-															>
-																Ajouter une
-																section
-															</ProjectAction>
-														)}
-													</Mutation>
-												)}
-											</ProjectSections>
-										</FlexColumn>
-									</ProjectContent>
-								</CenterContent>
-								<SideActions>
-									<CustomerIssuerContainer>
-										{customerToken
-											&& issuer.name && (
-											<IssuerNameAndAddress
-												issuer={issuer}
-											/>
-										)}
-										{!customerToken && (
-											<>
-												<CustomerNameAndAddress
-													customer={project.customer}
-												/>
-												<ProjectAction
-													theme="Link"
-													size="XSmall"
-													onClick={() => this.setState({
-														isCustomerPreviewOpen: true,
-													})
-													}
-												>
-													<EyeIcon />
-													<span>
-														Voir la vue de mon
-														client
-													</span>
-												</ProjectAction>
-												{isCustomerPreviewOpen && (
-													<PreviewModal
-														size="large"
-														onDismiss={() => this.setState({
-															isCustomerPreviewOpen: false,
-														})
+												{finishProject => (
+													<StartProjectButton
+														theme="Primary"
+														size="Medium"
+														onClick={() => finishProject()
 														}
 													>
-														<Notice>
-															Cette vue est celle
-															que verra votre
-															client lorsqu'il
-															devra effectuer des
-															actions.
-														</Notice>
-														<StaticCustomerView
+															Archiver ce projet
+													</StartProjectButton>
+												)}
+											</Mutation>
+										)}
+										{!customerToken && (
+											<StartProjectButton
+												size="Medium"
+												onClick={() => this.duplicateProject(
+													project,
+												)
+												}
+											>
+												Dupliquer ce projet
+											</StartProjectButton>
+										)}
+										{mode === 'edit' && (
+											<Mutation
+												mutation={START_PROJECT}
+												onError={(error) => {
+													if (
+														error.message.includes(
+															'NEED_MORE_INFOS',
+														)
+														|| error.message.includes(
+															'Missing required data',
+														)
+													) {
+														return askForInfos();
+													}
+													return false;
+												}}
+											>
+												{StartProject => (
+													<StartProjectButton
+														theme="Primary"
+														size="Medium"
+														onClick={() => {
+															startProject(
+																project.id,
+																StartProject,
+															);
+														}}
+													>
+														Commencer le projet
+													</StartProjectButton>
+												)}
+											</Mutation>
+										)}
+									</ProjectRow>
+									<FlexRow justifyContent="space-between">
+										<CenterContent flexGrow="2">
+											<ProjectContent>
+												{mode === 'see' && (
+													<TasksProgressBar
+														tasksCompleted={
+															totalItemsFinished.length
+															+ totalItemsFinished.reduce(
+																(acc, item) => acc
+																	+ item.unit,
+																0,
+															)
+														}
+														tasksTotal={
+															totalItems.length
+															+ totalItems.reduce(
+																(acc, item) => acc
+																	+ item.unit,
+																0,
+															)
+														}
+													/>
+												)}
+												<FlexColumn fullHeight>
+													<ProjectSections>
+														<SectionList
 															projectId={
 																project.id
 															}
+															addItem={async (
+																itemId,
+																data,
+																...rest
+															) => {
+																if (
+																	!project.notifyActivityToCustomer
+																	&& data.reviewer
+																		=== 'CUSTOMER'
+																) {
+																	const confirmed = await new Promise(
+																		resolve => this.setState(
+																			{
+																				askCustomerAttributionConfirm: resolve,
+																			},
+																		),
+																	);
+
+																	this.setState(
+																		{
+																			askCustomerAttributionConfirm: null,
+																		},
+																	);
+
+																	if (
+																		!confirmed
+																	) {
+																		return;
+																	}
+
+																	await updateProject(
+																		{
+																			variables: {
+																				projectId:
+																					project.id,
+																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
+																			},
+																		},
+																	);
+																}
+
+																await addItem(
+																	itemId,
+																	data,
+																	...rest,
+																);
+															}}
+															editItem={async (
+																itemId,
+																sectionId,
+																data,
+																...rest
+															) => {
+																if (
+																	!project.notifyActivityToCustomer
+																	&& data.reviewer
+																		=== 'CUSTOMER'
+																) {
+																	const confirmed = await new Promise(
+																		resolve => this.setState(
+																			{
+																				askCustomerAttributionConfirm: resolve,
+																			},
+																		),
+																	);
+
+																	this.setState(
+																		{
+																			askCustomerAttributionConfirm: null,
+																		},
+																	);
+
+																	if (
+																		!confirmed
+																	) {
+																		return;
+																	}
+
+																	await updateProject(
+																		{
+																			variables: {
+																				projectId:
+																					project.id,
+																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
+																			},
+																		},
+																	);
+																}
+
+																await editItem(
+																	itemId,
+																	sectionId,
+																	data,
+																	...rest,
+																);
+															}}
+															removeItem={
+																removeItem
+															}
+															finishItem={
+																finishItem
+															}
+															unfinishItem={
+																unfinishItem
+															}
+															customerToken={
+																customerToken
+															}
+															mode={mode}
+															editSection={
+																editSection
+															}
+															removeSection={
+																removeSection
+															}
+															refetch={refetch}
+															projectStatus={
+																project.status
+															}
+															sections={
+																project.sections
+															}
 														/>
-													</PreviewModal>
+														{!customerToken && (
+															<Mutation
+																mutation={
+																	ADD_SECTION
+																}
+															>
+																{AddSection => (
+																	<ProjectAction
+																		theme="Link"
+																		size="XSmall"
+																		onClick={() => {
+																			addSection(
+																				project.id,
+																				AddSection,
+																			);
+																		}}
+																	>
+																		Ajouter
+																		une
+																		section
+																	</ProjectAction>
+																)}
+															</Mutation>
+														)}
+													</ProjectSections>
+												</FlexColumn>
+											</ProjectContent>
+										</CenterContent>
+										<SideActions>
+											<CustomerIssuerContainer>
+												{customerToken
+													&& issuer && (
+													<IssuerNameAndAddress
+														issuer={issuer}
+													/>
 												)}
-											</>
-										)}
-									</CustomerIssuerContainer>
-									<TotalContainer>
-										{!this.state.editDeadline ? (
-											<ProjectData
-												label="Date de fin"
-												onClick={() => {
-													!customerToken
-														&& this.setState({
-															editDeadline: !this
-																.state
-																.editDeadline,
-														});
-												}}
-											>
-												<TotalNumber editable>
-													{new Date(
-														project.deadline,
-													).toLocaleDateString()}
-												</TotalNumber>
-											</ProjectData>
-										) : (
-											<ProjectData label="Date de fin">
-												<Mutation
-													mutation={UPDATE_PROJECT}
-												>
-													{updateProjectMutation => (
+												{!customerToken && (
+													<>
+														<CustomerNameAndAddress
+															customer={
+																project.customer
+															}
+														/>
+														<CheckBoxLabel>
+															<input
+																type="checkbox"
+																checked={
+																	project.notifyActivityToCustomer
+																}
+																onChange={async () => {
+																	if (
+																		project.notifyActivityToCustomer
+																	) {
+																		const confirmed = await new Promise(
+																			resolve => this.setState(
+																				{
+																					askNotifyActivityConfirm: resolve,
+																				},
+																			),
+																		);
+
+																		this.setState(
+																			{
+																				askNotifyActivityConfirm: null,
+																			},
+																		);
+
+																		if (
+																			!confirmed
+																		) {
+																			return;
+																		}
+																	}
+
+																	await updateProject(
+																		{
+																			variables: {
+																				projectId:
+																					project.id,
+																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
+																			},
+																			update: (
+																				cache,
+																				{
+																					data: {
+																						updateProject: updatedProject,
+																					},
+																				},
+																			) => {
+																				const query = {
+																					query: GET_PROJECT_DATA,
+																					variables: {
+																						projectId:
+																							project.id,
+																					},
+																				};
+
+																				query.data = cache.readQuery(
+																					query,
+																				);
+
+																				const {
+																					data,
+																				} = query;
+
+																				data.project.notifyActivityToCustomer
+																					= updatedProject.notifyActivityToCustomer;
+
+																				if (
+																					!updatedProject.notifyActivityToCustomer
+																				) {
+																					data.project.sections.forEach(
+																						(section) => {
+																							section.items.forEach(
+																								(item) => {
+																									item.reviewer
+																										= 'USER';
+																								},
+																							);
+																						},
+																					);
+																				}
+
+																				cache.writeQuery(
+																					query,
+																				);
+																			},
+																		},
+																	);
+																}}
+															/>
+															Notifier mon client
+															de l'évolution du
+															projet
+														</CheckBoxLabel>
+														{askNotifyActivityConfirm && (
+															<ConfirmModal
+																onConfirm={confirmed => askNotifyActivityConfirm(
+																	confirmed,
+																)
+																}
+																closeModal={() => askNotifyActivityConfirm(
+																	false,
+																)
+																}
+															>
+																<P>
+																	En décochant
+																	cette
+																	option,
+																	votre client
+																	ne recevra
+																	aucune
+																	notification
+																	de l'avancée
+																	de votre
+																	projet.
+																</P>
+																{hasClientAttributedTasks && (
+																	<P>
+																		Cependant,
+																		certaines
+																		des
+																		tâches
+																		sont
+																		attribuées
+																		à votre
+																		client
+																		et
+																		nécessitent
+																		l'envoi
+																		d'emails
+																		à
+																		celui-ci.
+																		Désactiver
+																		les
+																		notifications
+																		changera
+																		aussi
+																		l'attribution
+																		de ces
+																		tâches
+																		et votre
+																		client
+																		n'en
+																		sera pas
+																		averti.
+																	</P>
+																)}
+																<P>
+																	Êtes-vous
+																	sûr de
+																	vouloir
+																	continuer?
+																</P>
+															</ConfirmModal>
+														)}
+														<ProjectAction
+															theme="Link"
+															size="XSmall"
+															onClick={() => this.setState({
+																isCustomerPreviewOpen: true,
+															})
+															}
+														>
+															<ClientPreviewIcon />
+															<span>
+																Voir la vue de
+																mon client
+															</span>
+														</ProjectAction>
+														{isCustomerPreviewOpen && (
+															<PreviewModal
+																size="large"
+																onDismiss={() => this.setState(
+																	{
+																		isCustomerPreviewOpen: false,
+																	},
+																)
+																}
+															>
+																<Notice>
+																	Cette vue
+																	est celle
+																	que verra
+																	votre client
+																	lorsqu'il
+																	devra
+																	effectuer
+																	des actions.
+																</Notice>
+																<StaticCustomerView
+																	projectId={
+																		project.id
+																	}
+																/>
+															</PreviewModal>
+														)}
+													</>
+												)}
+											</CustomerIssuerContainer>
+											<TotalContainer>
+												{!this.state.editDeadline ? (
+													<ProjectData
+														label="Date de fin"
+														onClick={() => {
+															!customerToken
+																&& this.setState({
+																	editDeadline: !this
+																		.state
+																		.editDeadline,
+																});
+														}}
+													>
+														<TotalNumber editable>
+															{new Date(
+																project.deadline,
+															).toLocaleDateString()}
+														</TotalNumber>
+													</ProjectData>
+												) : (
+													<ProjectData label="Date de fin">
 														<Formik
 															initialValues={{
 																deadline: new Date(
@@ -581,7 +881,7 @@ class ProjectDisplay extends Component {
 																	true,
 																);
 																try {
-																	await updateProjectMutation(
+																	await updateProject(
 																		{
 																			variables: {
 																				projectId:
@@ -687,73 +987,107 @@ class ProjectDisplay extends Component {
 																</>
 															)}
 														</Formik>
+													</ProjectData>
+												)}
+											</TotalContainer>
+											{project.daysUntilDeadline
+												!== null && (
+												<TotalContainer>
+													<ProjectData label="Jours travaillés avant date de fin">
+														<TotalNumber>
+															{
+																project.daysUntilDeadline
+															}{' '}
+															<Plural
+																singular="jour"
+																plural="jours"
+																value={
+																	project.daysUntilDeadline
+																}
+															/>
+														</TotalNumber>
+													</ProjectData>
+												</TotalContainer>
+											)}
+											<TotalContainer>
+												<ProjectData label="Temps prévu">
+													<TotalNumber>
+														{this.getProjectTotal(
+															project,
+														)}{' '}
+														<Plural
+															singular="jour"
+															plural="jours"
+															value={Number.parseFloat(
+																this.getProjectTotal(
+																	project,
+																),
+															)}
+														/>
+													</TotalNumber>
+												</ProjectData>
+											</TotalContainer>
+											<TaskLegend>
+												<InfosOnItems color={gray50}>
+													Tâches prestataire
+												</InfosOnItems>
+												<InfosOnItems
+													color={primaryBlue}
+												>
+													Tâches client
+												</InfosOnItems>
+											</TaskLegend>
+											{mode === 'edit' && (
+												<Mutation
+													mutation={REMOVE_PROJECT}
+												>
+													{RemoveProject => (
+														<ProjectAction
+															theme="DeleteOutline"
+															size="XSmall"
+															type="delete"
+															onClick={() => {
+																this.props.removeProject(
+																	project.id,
+																	RemoveProject,
+																);
+															}}
+														>
+															Supprimer le
+															brouillon
+														</ProjectAction>
 													)}
 												</Mutation>
-											</ProjectData>
-										)}
-									</TotalContainer>
-									{project.daysUntilDeadline !== null && (
-										<TotalContainer>
-											<ProjectData label="Jours travaillés avant date de fin">
-												<TotalNumber>
-													{project.daysUntilDeadline}{' '}
-													<Plural
-														singular="jour"
-														plural="jours"
-														value={
-															project.daysUntilDeadline
-														}
-													/>
-												</TotalNumber>
-											</ProjectData>
-										</TotalContainer>
-									)}
-									<TotalContainer>
-										<ProjectData label="Temps prévu">
-											<TotalNumber>
-												{this.getProjectTotal(project)}{' '}
-												<Plural
-													singular="jour"
-													plural="jours"
-													value={Number.parseFloat(
-														this.getProjectTotal(
-															project,
-														),
-													)}
-												/>
-											</TotalNumber>
-										</ProjectData>
-									</TotalContainer>
-									<TaskLegend>
-										<InfosOnItems color={gray50}>
-											Tâches prestataire
-										</InfosOnItems>
-										<InfosOnItems color={primaryBlue}>
-											Tâches client
-										</InfosOnItems>
-									</TaskLegend>
-									{mode === 'edit' && (
-										<Mutation mutation={REMOVE_PROJECT}>
-											{RemoveProject => (
-												<ProjectAction
-													theme="DeleteOutline"
-													size="XSmall"
-													type="delete"
-													onClick={() => {
-														this.props.removeProject(
-															project.id,
-															RemoveProject,
-														);
-													}}
-												>
-													Supprimer le brouillon
-												</ProjectAction>
 											)}
-										</Mutation>
+										</SideActions>
+									</FlexRow>
+									{askCustomerAttributionConfirm && (
+										<ConfirmModal
+											onConfirm={confirmed => askCustomerAttributionConfirm(
+												confirmed,
+											)
+											}
+											closeModal={() => askCustomerAttributionConfirm(
+												false,
+											)
+											}
+										>
+											<P>
+												Vous souhaitez créer une tâche
+												attribuée au client qui
+												nécessite d'activer les
+												notifications par email à
+												celui-ci.
+											</P>
+											<P>
+												Souhaitez vous continuer et
+												activer les notifications?
+											</P>
+										</ConfirmModal>
 									)}
-								</SideActions>
-							</FlexRow>
-						</ProjectDisplayMain>
+								</ProjectDisplayMain>
+							)}
+						</Mutation>
 					);
 				}}
 			</Query>

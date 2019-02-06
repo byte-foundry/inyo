@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import {Mutation} from 'react-apollo';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import * as Sentry from '@sentry/browser';
 
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
@@ -104,23 +105,69 @@ class CustomerNameAndAddress extends Component {
 									email: Yup.string()
 										.email('Email invalide')
 										.required('Requis'),
-									firstName: Yup.string(),
-									lastName: Yup.string(),
-									title: Yup.string(),
-									phone: Yup.string(),
+									firstName: Yup.string().nullable(),
+									lastName: Yup.string().nullable(),
+									title: Yup.string().nullable(),
+									phone: Yup.string().nullable(),
 								})}
+								validate={(values) => {
+									const errors = {};
+
+									if (
+										!values.title
+										&& !values.firstName
+										&& !values.lastName
+									) {
+										errors.title
+											= 'Remplissez au moins civilité, prénom ou nom';
+										errors.firstName
+											= 'Remplissez au moins civilité, prénom ou nom';
+										errors.lastName
+											= 'Remplissez au moins civilité, prénom ou nom';
+									}
+									if (!values.email) {
+										errors.email = 'Requis';
+									}
+
+									return errors;
+								}}
 								onSubmit={async (values, actions) => {
 									actions.setSubmitting(false);
 
-									await updateCustomerMutation({
-										variables: {
-											id: customerId,
-											customer: values,
-										},
-										refetchQueries: ['getProjectData'],
-									});
+									try {
+										await updateCustomerMutation({
+											variables: {
+												id: customerId,
+												customer: values,
+											},
+											refetchQueries: ['getProjectData'],
+										});
 
-									this.setState({editing: false});
+										this.setState({editing: false});
+									}
+									catch (customerError) {
+										if (
+											customerError.networkError
+											&& customerError.networkError.result
+											&& customerError.networkError.result
+												.errors
+										) {
+											Sentry.captureException(
+												customerError.networkError
+													.result.errors,
+											);
+										}
+										else {
+											Sentry.captureException(
+												customerError,
+											);
+										}
+										actions.setSubmitting(false);
+										actions.setErrors(customerError);
+										actions.setStatus({
+											msg: `Quelque chose ne s'est pas passé comme prévu. ${customerError}`,
+										});
+									}
 								}}
 							>
 								{props => (
@@ -197,9 +244,6 @@ class CustomerNameAndAddress extends Component {
 											<FormButton
 												onClick={() => {
 													props.handleSubmit();
-													this.setState({
-														editing: false,
-													});
 												}}
 											>
 												Ok

@@ -903,6 +903,13 @@ class CreateProjectForm extends React.Component {
 																						LABELS.fr,
 																					selectedDays:
 																						values.deadline,
+																					fromMonth: new Date(),
+																					showOutsideDays: true,
+																					modifiers: {
+																						disabled: {
+																							before: new Date(),
+																						},
+																					},
 																				}}
 																				component={dateProps => (
 																					<DateInput

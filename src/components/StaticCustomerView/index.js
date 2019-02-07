@@ -24,19 +24,6 @@ class StaticCustomerView extends Component {
 
 					const {project} = data;
 
-					const totalItems = project.sections.reduce(
-						(sumItems, section) => sumItems + section.items.length,
-						0,
-					);
-
-					const totalItemsFinished = project.sections.reduce(
-						(sumItems, section) => sumItems
-							+ section.items.filter(
-								item => item.status === 'FINISHED',
-							).length,
-						0,
-					);
-
 					const timePlanned = project.sections.reduce(
 						(timeSectionSum, section) => timeSectionSum
 							+ section.items.reduce(
@@ -51,8 +38,6 @@ class StaticCustomerView extends Component {
 							project={project}
 							issuer={data.project.issuer}
 							project={data.project}
-							totalItems={totalItems}
-							totalItemsFinished={totalItemsFinished}
 							timePlanned={timePlanned}
 							refetch={refetch}
 							mode="see"

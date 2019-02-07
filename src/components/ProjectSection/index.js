@@ -121,9 +121,10 @@ class ProjectSection extends Component {
 											ref={provided.innerRef}
 											{...provided.draggableProps}
 											{...provided.dragHandleProps}
-											onMouseDown={e => provided.dragHandleProps.onMouseDown(
-												e,
-											)
+											onMouseDown={e => provided.dragHandleProps
+												&& provided.dragHandleProps.onMouseDown(
+													e,
+												)
 											}
 											style={{
 												// some basic styles to make the items look a bit nicer

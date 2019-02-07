@@ -223,8 +223,6 @@ class ProjectDisplay extends Component {
 			editSection,
 			removeSection,
 			addSection,
-			totalItemsFinished,
-			totalItems,
 			askForInfos,
 			issuer,
 			refetch,
@@ -251,6 +249,14 @@ class ProjectDisplay extends Component {
 		else if (project.status === 'FINISHED') {
 			title = 'Project archivé';
 		}
+
+		const allItems = project.sections.reduce(
+			(total, section) => total.concat(section.items),
+			[],
+		);
+		const finishedItems = allItems.filter(
+			item => item.status === 'FINISHED',
+		);
 
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -452,16 +458,16 @@ class ProjectDisplay extends Component {
 												{mode === 'see' && (
 													<TasksProgressBar
 														tasksCompleted={
-															totalItemsFinished.length
-															+ totalItemsFinished.reduce(
+															finishedItems.length
+															+ finishedItems.reduce(
 																(acc, item) => acc
 																	+ item.unit,
 																0,
 															)
 														}
 														tasksTotal={
-															totalItems.length
-															+ totalItems.reduce(
+															allItems.length
+															+ allItems.reduce(
 																(acc, item) => acc
 																	+ item.unit,
 																0,

@@ -569,28 +569,12 @@ class TasksListUser extends Component {
 					);
 					const overtime = 0;
 
-					const totalItems = project.sections.reduce(
-						(sumItems, section) => sumItems.concat(...section.items),
-						[],
-					);
-
-					const totalItemsFinished = project.sections.reduce(
-						(sumItems, section) => sumItems.concat(
-							...section.items.filter(
-								item => item.status === 'FINISHED',
-							),
-						),
-						[],
-					);
-
 					return (
 						<div>
 							<ToastContainer />
 							<ProjectDisplay
 								project={project}
-								totalItems={totalItems}
 								editItem={this.editItem}
-								totalItemsFinished={totalItemsFinished}
 								sendAmendment={this.sendAmendment}
 								timePlanned={timePlanned}
 								amendmentEnabled={amendmentEnabled}

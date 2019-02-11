@@ -79,6 +79,7 @@ class Onboarding extends Component {
 				/>
 			);
 		case 4:
+			window.Intercom('trackEvent', 'start-onboarding-project');
 			return <Redirect to="/app/tasks" />;
 		default:
 			return false;

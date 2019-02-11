@@ -439,11 +439,10 @@ export const REMOVE_SECTION = gql`
 // Item
 export const ADD_ITEM = gql`
 	mutation addItem(
-		$sectionId: ID!
+		$sectionId: ID
 		$name: String!
 		$type: ItemType
 		$unit: Float
-		$vatRate: Int
 		$description: String
 		$reviewer: Reviewer
 	) {
@@ -452,7 +451,6 @@ export const ADD_ITEM = gql`
 			name: $name
 			type: $type
 			unit: $unit
-			vatRate: $vatRate
 			description: $description
 			reviewer: $reviewer
 		) {
@@ -463,34 +461,6 @@ export const ADD_ITEM = gql`
 			description
 			status
 			reviewer
-			comments {
-				createdAt
-				id
-				views {
-					viewer {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
-				author {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
 		}
 	}
 `;

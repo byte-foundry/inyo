@@ -69,14 +69,13 @@ const Icon = styled('div')`
 `;
 
 const types = {
-	DEFAULT: <span>🛃</span>,
 	REMINDER: <span>⏰</span>,
 	VALIDATION: <span>👍</span>,
 };
 
-const TaskInput = ({onCreateProject, onCreateTask, defaultValue}) => {
+const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	const [value, setValue] = useState(defaultValue);
-	const [type, setType] = useState(null);
+	const [type, setType] = useState('DEFAULT');
 	const [focus, setFocus] = useState(false);
 	const ref = useRef();
 
@@ -87,7 +86,7 @@ const TaskInput = ({onCreateProject, onCreateTask, defaultValue}) => {
 	return (
 		<Container ref={ref}>
 			<InputContainer>
-				<Icon>{type ? types[type] || types.DEFAULT : '+'}</Icon>
+				<Icon>{type && type !== 'DEFAULT' ? types[type] : '+'}</Icon>
 				<Input
 					type="text"
 					onChange={e => setValue(e.target.value)}
@@ -96,13 +95,13 @@ const TaskInput = ({onCreateProject, onCreateTask, defaultValue}) => {
 					onKeyDown={(e) => {
 						if (!value.startsWith('/')) {
 							if (e.key === 'ArrowUp') {
-								onCreateProject({
+								onSubmitProject({
 									name: value,
 								});
 								setValue('');
 							}
 							else if (e.key === 'Enter') {
-								onCreateTask({
+								onSubmitTask({
 									name: value,
 									type,
 								});
@@ -133,14 +132,14 @@ const TaskInput = ({onCreateProject, onCreateTask, defaultValue}) => {
 
 TaskInput.defaultProps = {
 	defaultValue: '',
-	onCreateTask: () => {},
-	onCreateProject: () => {},
+	onSubmitTask: () => {},
+	onSubmitProject: () => {},
 };
 
 TaskInput.propTypes = {
 	defaultValue: PropTypes.string,
-	onCreateTask: PropTypes.func,
-	onCreateProject: PropTypes.func,
+	onSubmitTask: PropTypes.func,
+	onSubmitProject: PropTypes.func,
 };
 
 export default TaskInput;

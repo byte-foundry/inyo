@@ -3,56 +3,39 @@ import {Link, withRouter} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 import styled from '@emotion/styled';
 import {
-	FlexRow, P, Button, gray70, gray10,
+	FlexRow, P, Button, primaryWhite,
 } from '../../utils/content';
-import thumbDownIcon from '../../utils/icons/thumbDown.svg';
-import {ReactComponent as AppLogo} from '../App/appLogo.svg';
+import LostPeople from '../../utils/illustrations/404.svg';
 
 const ReporterMain = styled('div')`
-	padding: 20px 40px;
+	padding: 40px;
+	background-color: #0d0f25;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	min-height: calc(100vh - 80px);
+`;
+
+const Illus = styled('img')`
+	max-width: 40%;
 `;
 
 const ReporterRow = styled(FlexRow)`
-	position: absolute;
-	left: 0;
-	top: 50%;
-	right: 0;
-	transform: translateY(-50%);
-	height: 40vh;
-	padding: 5%;
-	background: ${gray10};
-	align-items: center;
-`;
-
-const ErrorTitle = styled('div')`
-	position: absolute;
-	top: 83%;
-	left: 0px;
-	font-size: 70px;
-	color: #171a44;
-	transform: rotate(-90deg);
-	text-transform: uppercase;
-	transform-origin: left;
+	color: ${primaryWhite};
+	line-height: 1.8;
+	text-align: center;
+	max-width: 1000px;
+	margin: 0 auto;
 `;
 
 const ErrorText = styled('div')`
-	position: relative;
-	padding-left: 60px;
-`;
-
-const ReporterIcon = styled('div')`
-	height: 100%;
-	width: 25%;
-	background-image: url("${thumbDownIcon}");
-	background-size: 75%;
-	background-repeat: no-repeat;
-	background-position: left center;
+	padding: 2em;
 `;
 
 const ErrorCode = styled('span')`
-	border: 1px solid ${gray70};
-	padding: 15px 16px;
-	margin-top: 10px;
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 50px;
+	padding: 1rem;
 	display: block;
 `;
 
@@ -77,44 +60,41 @@ class SentryReporter extends Component {
 			// render fallback UI
 			return (
 				<ReporterMain>
-					<AppLogo />
+					<Illus src={LostPeople} />
 					<ReporterRow>
-						<ReporterIcon />
 						<ErrorText>
-							<ErrorTitle>Erreur</ErrorTitle>
-							<P>
-								Nous sommes désolés, quelque chose ne s'est pas
-								passé comme prévu.
-							</P>
-							<P>
-								Nous vous invitons à{' '}
-								<Link
-									to="/app"
-									onClick={() => {
-										this.setState({error: null});
-									}}
-								>
-									revenir à la page d'accueil
-								</Link>
-								. Si vous souhaitez nous aider, vous pouvez
-								aussi nous{' '}
-								<Button
-									theme="Link"
-									size="XSmall"
-									onClick={() => {
-										Sentry.showReportDialog();
-									}}
-								>
-									transmettre cette erreur
-								</Button>
-								.
-							</P>
-							<P>
-								Voici l'erreur en question : <br />
-								<ErrorCode>
-									<code>{this.state.error.toString()}</code>
-								</ErrorCode>
-							</P>
+							<h1>Oops.</h1>
+							Nous sommes désolés, quelque chose ne s'est pas
+							passé comme prévu.
+							<br />
+							<br />
+							Nous vous invitons à{' '}
+							<Link
+								to="/app"
+								onClick={() => {
+									this.setState({error: null});
+								}}
+							>
+								revenir à la page d'accueil
+							</Link>
+							. Si vous souhaitez nous aider, vous pouvez aussi
+							nous{' '}
+							<Button
+								theme="Link"
+								size="XSmall"
+								onClick={() => {
+									Sentry.showReportDialog();
+								}}
+							>
+								transmettre cette erreur
+							</Button>
+							. Voici l'erreur en question:
+							<br />
+							<br />
+							<br />
+							<ErrorCode>
+								<code>{this.state.error.toString()}</code>
+							</ErrorCode>
 						</ErrorText>
 					</ReporterRow>
 				</ReporterMain>

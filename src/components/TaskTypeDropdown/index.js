@@ -94,6 +94,7 @@ const TaskTypeDropdown = ({filter, onSelectCommand}) => {
 			<List>
 				{filteredTypes.map(({icon, name, description}, index) => (
 					<ListItem
+						key={name}
 						tabIndex="0"
 						onMouseEnter={() => setFocusedItemIndex(index)}
 						onClick={() => onSelectCommand(filteredTypes[index])}

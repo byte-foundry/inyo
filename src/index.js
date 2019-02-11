@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {ApolloProvider} from 'react-apollo';
+import {ApolloProvider as ApolloHooksProvider} from 'react-apollo-hooks';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 import './index.css';
@@ -50,9 +51,12 @@ window.$crisp = {
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
-		<Router>
-			<Container />
-		</Router>
+		<ApolloHooksProvider client={client}>
+			<Router>
+				<Container />
+			</Router>
+		</ApolloHooksProvider>
+		,
 	</ApolloProvider>,
 	document.getElementById('root'),
 );

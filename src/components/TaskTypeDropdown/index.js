@@ -1,12 +1,23 @@
 import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
+
+import {
+	gray20, gray30, gray50, gray80,
+} from '../../utils/content';
 
 const Dropdown = styled('div')`
 	background: white;
-	box-shadow: 0 0 5px #e1e1e1;
+	box-shadow: 0 0 5px ${gray20};
 	position: absolute;
 	z-index: 1; /* do a portal instead */
+	width: 500px;
+`;
+
+const Header = styled('p')`
+	text-transform: uppercase;
+	color: ${gray30};
+	margin: 1.5em 2em 0.5em 2em;
 `;
 
 const List = styled('ul')`
@@ -17,37 +28,42 @@ const List = styled('ul')`
 	list-style: none;
 `;
 
-const ListItem = styled('li')`
-	cursor: pointer;
-	padding: 10px;
+const ListItemIcon = styled('div')`
+	margin: 0 1.5em;
+`;
 
-	${props => props.focused && 'background: #e1e1e1;'} &:hover, &:focus {
-		background: #e1e1e1;
+const ListItemTitle = styled('div')`
+	color: ${gray80};
+`;
+
+const ListItemDescription = styled('div')`
+	grid-column-start: 2;
+	color: ${gray30};
+`;
+
+const ListItem = styled('li')`
+	display: grid;
+	grid-template-columns: auto 1fr;
+	cursor: pointer;
+	padding: 0.5em;
+
+	${props => props.focused
+		&& `
+		background: #f2f2f2;
+
+		${ListItemDescription} {
+			color: ${gray50};
+		}
+	`} &:hover, &:focus {
+		background: #f2f2f2;
+
+		${ListItemDescription} {
+			color: ${gray50};
+		}
 	}
 `;
 
-const TaskTypeDropdown = ({filter, onSelectCommand}) => {
-	const types = [
-		{
-			icon: '🛃',
-			type: 'DEFAULT',
-			name: 'Tâche attribuée au client',
-			description: 'Une tâche à réaliser par votre client',
-		},
-		{
-			icon: '⏰',
-			type: 'REMINDER',
-			name: 'Relance client générique',
-			description: 'Programmer des relances client',
-		},
-		{
-			icon: '👍',
-			type: 'VALIDATION',
-			name: 'Validation client',
-			description: '',
-		},
-	];
-
+const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 	const lowercaseFilter = filter.toLocaleLowerCase();
 
 	const filteredTypes = types.filter(
@@ -58,23 +74,23 @@ const TaskTypeDropdown = ({filter, onSelectCommand}) => {
 
 	const [focusedItemIndex, setFocusedItemIndex] = useState(0);
 
-	useEffect(() => {
-		const arrowNavigationListener = (e) => {
-			if (e.key === 'ArrowUp') {
-				setFocusedItemIndex(
-					(focusedItemIndex - 1 + types.length) % types.length,
-				);
-			}
-			else if (e.key === 'ArrowDown') {
-				setFocusedItemIndex(
-					(focusedItemIndex + 1 + types.length) % types.length,
-				);
-			}
-			else if (e.key === 'Enter') {
-				onSelectCommand(filteredTypes[focusedItemIndex]);
-			}
-		};
+	const arrowNavigationListener = (e) => {
+		if (e.key === 'ArrowUp') {
+			setFocusedItemIndex(
+				(focusedItemIndex - 1 + types.length) % types.length,
+			);
+		}
+		else if (e.key === 'ArrowDown') {
+			setFocusedItemIndex(
+				(focusedItemIndex + 1 + types.length) % types.length,
+			);
+		}
+		else if (e.key === 'Enter') {
+			onSelectCommand(filteredTypes[focusedItemIndex]);
+		}
+	};
 
+	useEffect(() => {
 		document.addEventListener('keydown', arrowNavigationListener);
 
 		return () => {
@@ -91,6 +107,7 @@ const TaskTypeDropdown = ({filter, onSelectCommand}) => {
 
 	return (
 		<Dropdown>
+			<Header>Tâches automatiques et/ou préfédinies</Header>
 			<List>
 				{filteredTypes.map(({icon, name, description}, index) => (
 					<ListItem
@@ -100,10 +117,9 @@ const TaskTypeDropdown = ({filter, onSelectCommand}) => {
 						onClick={() => onSelectCommand(filteredTypes[index])}
 						focused={index === focusedItemIndex}
 					>
-						{icon}
-						{name}
-						<br />
-						{description}
+						<ListItemIcon>{icon}</ListItemIcon>
+						<ListItemTitle>{name}</ListItemTitle>
+						<ListItemDescription>{description}</ListItemDescription>
 					</ListItem>
 				))}
 			</List>

@@ -68,25 +68,100 @@ const Icon = styled('div')`
 	}
 `;
 
-const types = {
-	REMINDER: <span>⏰</span>,
-	VALIDATION: <span>👍</span>,
-};
+const types = [
+	{
+		icon: '🔵',
+		type: 'DEFAULT',
+		name: 'Tâche par défaut',
+		description: 'Une tâche dont vous êtes responsable',
+	},
+	{
+		icon: '🔴',
+		type: 'CUSTOMER',
+		name: 'Tâche attribuée au client',
+		description: 'Une tâche à réaliser par votre client',
+	},
+	{
+		icon: '⏰',
+		type: 'REMINDER',
+		name: 'Relance client générique',
+		description: 'Programmer des relances client',
+	},
+	{
+		icon: '👍',
+		type: 'VALIDATION',
+		name: 'Validation client',
+		description: 'Demander à votre client une validation',
+	},
+	{
+		icon: '🔔',
+		type: 'PERSONAL_REMINDER',
+		name: 'Rappel personnel',
+		description: 'Programmer un rappel (visible seulement par vous)',
+	},
+	{
+		icon: '📝',
+		type: 'MEETING_NOTES',
+		name: 'Réunion client',
+		description: 'Assembler et partager les notes de réunion',
+	},
+	{
+		icon: '📁',
+		type: 'CONTENT_ACQUISITION',
+		name: 'Récupération contenu',
+		description: 'Lister et récupérer les contenus nécessaires',
+	},
+	{
+		icon: '🌳',
+		type: 'SUBTASKS',
+		name: 'Tâche et sous-tâches',
+		description: "Lister les sous-tâches d'une tâche parente",
+	},
+	{
+		icon: '💰',
+		type: 'PAYMENT',
+		name: 'Paiement par le client',
+		description: 'Demander et relancer pour un paiement',
+	},
+	{
+		icon: '📆',
+		type: 'SCHEDULE_MEETING',
+		name: 'Programmation de RDV client',
+		description: 'Programmer automatiquement une réunion',
+	},
+	{
+		icon: '⭕',
+		type: 'PERSONAL',
+		name: 'Tâche personnelle',
+		description: 'Créer une tâche uniquement visible par vous',
+	},
+];
 
 const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	const [value, setValue] = useState(defaultValue);
-	const [type, setType] = useState('DEFAULT');
+	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
+	const [focusByClick, setFocusByClick] = useState(false);
 	const ref = useRef();
 
 	useOnClickOutside(ref, () => {
 		setFocus(false);
+		setFocusByClick(false);
 	});
+
+	let icon = '🔃';
+
+	if (type) {
+		icon = types.find(t => t.type === type).icon;
+	}
+	else if (!value.startsWith('/') && value.length > 0) {
+		icon = types.find(t => t.type === 'DEFAULT').icon;
+	}
 
 	return (
 		<Container ref={ref}>
 			<InputContainer>
-				<Icon>{type && type !== 'DEFAULT' ? types[type] : '+'}</Icon>
+				<Icon onClick={() => setFocusByClick(true)}>{icon}</Icon>
 				<Input
 					type="text"
 					onChange={e => setValue(e.target.value)}
@@ -116,13 +191,15 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					}
 				/>
 			</InputContainer>
-			{value.startsWith('/')
-				&& focus && (
+			{((value.startsWith('/') && focus) || focusByClick) && (
 				<TaskTypeDropdown
+					types={types}
 					filter={value.substr(1)}
 					onSelectCommand={({type: selectedType}) => {
 						setType(selectedType);
+
 						setValue('');
+						setFocusByClick(false);
 					}}
 				/>
 			)}

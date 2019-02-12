@@ -5,6 +5,7 @@ import {Formik} from 'formik';
 import * as Sentry from '@sentry/browser';
 import * as Yup from 'yup';
 import ReactGA from 'react-ga';
+import {timezones, findTimeZone, getUTCOffset} from '../../utils/timezones';
 
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
@@ -15,6 +16,7 @@ import {
 	ErrorInput,
 	Label,
 } from '../../utils/content';
+import FormSelect from '../FormSelect';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
@@ -54,7 +56,11 @@ const Emoji = styled('div')`
 
 class UserWorkHourAndDaysForm extends Component {
 	render() {
-		const {startWorkAt, endWorkAt} = this.props.data;
+		const {
+			timeZone: initialTimeZone,
+			startWorkAt,
+			endWorkAt,
+		} = this.props.data;
 
 		const currentDate = new Date().toJSON().split('T')[0];
 		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
@@ -95,6 +101,7 @@ class UserWorkHourAndDaysForm extends Component {
 								endHour: endHourInitial,
 								endMinutes: endMinutesInitial,
 								workingDays: workingDaysInitial,
+								timeZone: initialTimeZone,
 							}}
 							validationSchema={Yup.object().shape({})}
 							onSubmit={async (values, actions) => {
@@ -106,6 +113,7 @@ class UserWorkHourAndDaysForm extends Component {
 									endHour,
 									endMinutes,
 									workingDays,
+									timeZone,
 								} = values;
 
 								const start = new Date();
@@ -132,6 +140,7 @@ class UserWorkHourAndDaysForm extends Component {
 												.toJSON()
 												.split('T')[1],
 											workingDays,
+											timeZone,
 										},
 										update: (
 											cache,
@@ -183,6 +192,7 @@ class UserWorkHourAndDaysForm extends Component {
 										endHour,
 										endMinutes,
 										workingDays,
+										timeZone,
 									},
 									setFieldValue,
 								} = props;
@@ -235,6 +245,60 @@ class UserWorkHourAndDaysForm extends Component {
 														setFieldValue={
 															setFieldValue
 														}
+													/>
+													<Label>
+														Fuseau horaire
+													</Label>
+													<FormSelect
+														{...props}
+														name="timeZone"
+														placeholder="Triez par fuseau"
+														value={{
+															value:
+																timeZone
+																|| 'Europe/Paris',
+															label: `${timeZone
+																|| 'Europe/Paris'} (${
+																getUTCOffset(
+																	Date.now(),
+																	findTimeZone(
+																		timeZone
+																			|| 'Europe/Paris',
+																	),
+																).abbreviation
+															})`,
+														}}
+														options={timezones
+															.sort(
+																(a, b) => getUTCOffset(
+																	Date.now(),
+																	findTimeZone(
+																		a,
+																	),
+																).offset
+																		- getUTCOffset(
+																			Date.now(),
+																			findTimeZone(
+																				b,
+																			),
+																		)
+																			.offset
+																	|| a - b,
+															)
+															.map(tz => ({
+																value: tz,
+																label: `${tz} (${
+																	getUTCOffset(
+																		Date.now(),
+																		findTimeZone(
+																			tz,
+																		),
+																	)
+																		.abbreviation
+																})`,
+															}))}
+														hideSelectedOptions
+														isSearchable
 													/>
 												</FlexColumn>
 											</FormContainer>

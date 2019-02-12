@@ -14,6 +14,7 @@ export const CHECK_LOGIN_USER = gql`
 			workingDays
 			startWorkAt
 			endWorkAt
+			timeZone
 			company {
 				phone
 			}
@@ -64,6 +65,7 @@ export const GET_USER_INFOS = gql`
 			startWorkAt
 			endWorkAt
 			workingDays
+			timeZone
 			company {
 				id
 				name

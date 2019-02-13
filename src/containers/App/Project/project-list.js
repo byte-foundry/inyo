@@ -4,11 +4,7 @@ import {Query} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
-import TopBar, {
-	TopBarNavigation,
-	TopBarButton,
-	TopBarTitle,
-} from '../../../components/TopBar';
+import TopBar, {TopBarMenu, TopBarLogo} from '../../../components/TopBar';
 import {Loading} from '../../../utils/content';
 
 import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
@@ -76,67 +72,8 @@ class ListProjects extends Component {
 					return (
 						<ListProjectsMain>
 							<TopBar>
-								<TopBarTitle>Vos projets</TopBarTitle>
-								<TopBarNavigation>
-									<TopBarButton
-										theme="Primary"
-										size="Medium"
-										onClick={() => {
-											this.props.history.push(
-												'/app/projects/create',
-											);
-										}}
-									>
-										Créer un nouveau projet
-									</TopBarButton>
-									{/* <TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/customers',
-											);
-										}}
-									>
-										<UsersIcon />
-									</TopBarButton> */}
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/dashboard',
-											);
-										}}
-									>
-										<DashboardIcon />
-										<span>Dashboard</span>
-									</TopBarButton>
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/projects',
-											);
-										}}
-									>
-										<FoldersIcon />
-										<span>Projets</span>
-									</TopBarButton>
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/account',
-											);
-										}}
-									>
-										<SettingsIcon />
-										<span>Réglages</span>
-									</TopBarButton>
-								</TopBarNavigation>
+								<TopBarLogo>Vos projets</TopBarLogo>
+								<TopBarMenu />
 							</TopBar>
 
 							{projects && (

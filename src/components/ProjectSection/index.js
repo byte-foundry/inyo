@@ -8,6 +8,7 @@ import css from '@emotion/css';
 import InlineEditable from '../InlineEditable';
 import Item from './see-item';
 import AddItem from './add-item';
+import TasksList from '../TasksList';
 import {
 	H5,
 	FlexRow,
@@ -98,6 +99,11 @@ class ProjectSection extends Component {
 						)}
 					</div>
 				</FlexRow>
+				<TasksList
+					items={data.items}
+					projectId={projectId}
+					sectionId={data.id}
+				/>
 				<Droppable
 					droppableId={data.id}
 					type="ITEM"

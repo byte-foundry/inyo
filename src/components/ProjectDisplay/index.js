@@ -6,7 +6,7 @@ import {Mutation, Query} from 'react-apollo';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import * as Yup from 'yup';
 
-import TopBar, {TopBarTitle, TopBarNavigation, TopBarButton} from '../TopBar';
+import TopBar, {TopBarLogo, TopBarMenu} from '../TopBar';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import InlineEditable from '../InlineEditable';
@@ -264,58 +264,8 @@ class ProjectDisplay extends Component {
 								<ProjectDisplayMain style={style}>
 									{!customerToken && (
 										<TopBar>
-											<TopBarTitle>{title}</TopBarTitle>
-											<TopBarNavigation>
-												{mode !== 'edit' && (
-													<TopBarButton
-														theme="Primary"
-														size="Medium"
-														onClick={() => {
-															this.props.history.push(
-																'/app/projects/create',
-															);
-														}}
-													>
-														Créer un nouveau projet
-													</TopBarButton>
-												)}
-												<TopBarButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														this.props.history.push(
-															'/app/dashboard',
-														);
-													}}
-												>
-													<DashboardIcon />
-													<span>Dashboard</span>
-												</TopBarButton>
-												<TopBarButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														this.props.history.push(
-															'/app/projects',
-														);
-													}}
-												>
-													<FoldersIcon />
-													<span>Projets</span>
-												</TopBarButton>
-												<TopBarButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														this.props.history.push(
-															'/app/account',
-														);
-													}}
-												>
-													<SettingsIcon />
-													<span>Réglages</span>
-												</TopBarButton>
-											</TopBarNavigation>
+											<TopBarLogo>{title}</TopBarLogo>
+											<TopBarMenu />
 										</TopBar>
 									)}
 

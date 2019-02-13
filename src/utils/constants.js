@@ -1,7 +1,9 @@
-export const GRAPHQL_API = `https://prisma${
+/* export const GRAPHQL_API = `https://prisma${
 	// eslint-disable-line import/prefer-default-export
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 }.inyo.me/`;
+*/
+export const GRAPHQL_API = 'http://prisma.prototypo.io:4002';
 
 export const INTERCOM_APP_ID
 	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
@@ -45,4 +47,9 @@ export const FIRST_DAY_OF_WEEK = {
 // Translate aria-labels
 export const LABELS = {
 	fr: {nextMonth: 'Mois suivant', previousMonth: 'Mois précédent'},
+};
+
+export const itemStatuses = {
+	FINISHED: 'FINISHED',
+	PENDING: 'PENDING',
 };

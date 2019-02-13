@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Suspense, Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 
 import GoogleAnalytics from 'react-ga';
 import styled from '@emotion/styled';
-import {Body} from '../../utils/content';
-import Landing from '../Landing';
+import {Loading} from '../../utils/content';
+import {Body} from '../../utils/new/design-system.js';
 import App from '../App';
 import Auth from '../App/Auth';
 import SentryReporter from '../SentryReporter';
@@ -62,15 +62,18 @@ class Container extends Component {
 			<SentryReporter>
 				<BodyMain>
 					<main>
-						<Switch>
-							<Route
-								exact
-								path="/"
-								component={withTracker(Landing)}
-							/>
-							<Route path="/app" component={withTracker(App)} />
-							<Route path="/auth" component={Auth} />
-						</Switch>
+						<Suspense fallback={<Loading />}>
+							<Switch>
+								<Route
+									path="/app"
+									component={withTracker(App)}
+								/>
+								<Route
+									path="/auth"
+									component={withTracker(Auth)}
+								/>
+							</Switch>
+						</Suspense>
 					</main>
 				</BodyMain>
 			</SentryReporter>

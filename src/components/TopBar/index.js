@@ -7,51 +7,38 @@ import {
 	gray50,
 	H1,
 } from '../../utils/content';
+import Logo from '../../utils/icons/inyo-topbar-logo.svg';
 
-export const TopBarButton = styled(Button)`
-	height: 60px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-
-	span {
-		text-transform: uppercase;
-		font-size: 10px;
-		color: ${gray50};
-	}
-
-	svg {
-		width: 45px;
-		margin-left: 1em;
-	}
-
-	&:hover {
-		span {
-			color: ${primaryNavyBlue};
-		}
-	}
+export const TopBarLogo = styled('div')`
+	background: url(${Logo});
+	width: 36px;
+	height: 36px;
+	background-repeat: no-repeat;
+	background-position: center;
 `;
 
-export const TopBarTitle = styled(H1)`
-	color: ${primaryNavyBlue};
-`;
-
-export const TopBarNavigation = styled('div')`
+export const TopBarMenu = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: flex-end;
 	align-items: center;
 `;
 
+export const TopBarMenuLink = styled('div')`
+	margin-left: 10px;
+
+	&:before {
+		margin-right: 10px;
+		content: '\\2014';
+	}
+`;
+
 const TopBar = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
-	align-items: center;
-	padding-left: 40px;
-	padding-right: 40px;
 	background-color: ${primaryWhite};
+	margin-bottom: 3rem;
 `;
 
 export default TopBar;

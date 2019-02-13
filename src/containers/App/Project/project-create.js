@@ -5,11 +5,7 @@ import {Redirect, withRouter} from 'react-router-dom';
 
 import CreateProjectForm from './create-project-form';
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
-import TopBar, {
-	TopBarNavigation,
-	TopBarButton,
-	TopBarTitle,
-} from '../../../components/TopBar';
+import TopBar, {TopBarMenu, TopBarLogo} from '../../../components/TopBar';
 import {Loading} from '../../../utils/content';
 import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
 import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
@@ -39,47 +35,8 @@ class CreateProject extends Component {
 						return (
 							<CreateProjectMain>
 								<TopBar>
-									<TopBarTitle>
-										Créer votre projet
-									</TopBarTitle>
-									<TopBarNavigation>
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/dashboard',
-												);
-											}}
-										>
-											<DashboardIcon />
-											<span>Dashboard</span>
-										</TopBarButton>
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/projects',
-												);
-											}}
-										>
-											<FoldersIcon />
-											<span>Projets</span>
-										</TopBarButton>
-										<TopBarButton
-											theme="Link"
-											size="XSmall"
-											onClick={() => {
-												this.props.history.push(
-													'/app/account',
-												);
-											}}
-										>
-											<SettingsIcon />
-											<span>Réglages</span>
-										</TopBarButton>
-									</TopBarNavigation>
+									<TopBarLogo>Créer votre projet</TopBarLogo>
+									<TopBarMenu />
 								</TopBar>
 
 								<Content>

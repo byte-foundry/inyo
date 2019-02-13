@@ -187,6 +187,7 @@ export const GET_PROJECT_DATA = gql`
 					type
 					unit
 					reviewer
+					position
 					comments {
 						createdAt
 						id
@@ -231,7 +232,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			status
 			deadline
 			daysUntilDeadline
-			issuedAt
 			issuer {
 				name
 				email
@@ -302,7 +302,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 							}
 						}
 					}
-					vatRate
 					description
 				}
 			}
@@ -354,6 +353,37 @@ export const GET_ITEM_DETAILS = gql`
 						name
 					}
 				}
+			}
+		}
+	}
+`;
+
+export const GET_ALL_TASKS = gql`
+	query getAllTasks {
+		me {
+			id
+			tasks {
+				id
+				status
+				name
+				description
+				unit
+				type
+				comments {
+					id
+				}
+			}
+		}
+	}
+`;
+
+export const GET_ALL_CUSTOMERS = gql`
+	query getAllCustomers {
+		me {
+			id
+			customers {
+				id
+				name
 			}
 		}
 	}

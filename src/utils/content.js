@@ -37,10 +37,6 @@ export const signalOrange = '#ffab00';
 export const signalRed = '#fe4a49';
 // Typography
 
-export const Body = styled('div')`
-	${body};
-	color: ${gray80};
-`;
 export const H1 = styled('h1')`
 	${h1};
 	color: ${gray80};

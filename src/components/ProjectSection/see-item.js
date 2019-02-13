@@ -92,7 +92,7 @@ class Item extends Component {
 			update: (cache, {data: {itemMutation: mutatedItem}}) => {
 				toast.info(
 					<div>
-						<p>📬 Le prestataire a été notifié.</p>
+						<p>Tâche terminé</p>
 					</div>,
 					{
 						position: toast.POSITION.TOP_RIGHT,

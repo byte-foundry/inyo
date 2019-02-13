@@ -6,7 +6,6 @@ import useOnClickOutside from 'use-onclickoutside';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 
 const Container = styled('div')`
-	margin: 1rem 0;
 	font-size: 14px;
 `;
 

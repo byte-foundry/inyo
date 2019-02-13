@@ -199,6 +199,4 @@ export function TaskIconText({icon, content}) {
 	);
 }
 
-export const LayoutMainElem = styled('div')`
-	width: 1200px;
-`;
+export const LayoutMainElem = styled('div')``;

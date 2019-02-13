@@ -27,6 +27,7 @@ import finishItem from '../../utils/mutateAndUpdate/finishItem';
 const TaskContainer = styled('div')`
 	display: flex;
 	margin-bottom: 2rem;
+	margin-top: 3rem;
 	position: relative;
 	cursor: grab;
 `;

@@ -15,7 +15,7 @@ const ArianneContainer = styled(LayoutMainElem)`
 	margin-bottom: 60px;
 `;
 
-const ArianneElemMain = styled(LayoutMainElem)`
+const ArianneElemMain = styled('div')`
 	flex: 0 0 170px;
 `;
 
@@ -25,10 +25,14 @@ const customSelectStyles = {
 	dropdownIndicator: styles => ({
 		...styles,
 		color: primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
 	}),
 	clearIndicator: styles => ({
 		...styles,
 		color: primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
 	}),
 	option: (styles, state) => ({
 		...styles,
@@ -48,10 +52,15 @@ const customSelectStyles = {
 		...styles,
 		color: primaryPurple,
 	}),
+	input: styles => ({
+		...styles,
+		padding: 0,
+	}),
 	control: styles => ({
 		...styles,
 		border: 'none',
 		boxShadow: 'none',
+		minHeight: 'auto',
 		':hover, :focus, :active': {
 			border: 'none',
 			boxShadow: 'none',
@@ -67,6 +76,10 @@ const customSelectStyles = {
 		...styles,
 		width: '300px',
 		fontSize: '14px',
+	}),
+	valueContainer: styles => ({
+		...styles,
+		padding: 0,
 	}),
 };
 

@@ -11,24 +11,28 @@ import TopBar, {
 	TopBarMenuLink,
 } from '../../../components/TopBar';
 import {Button} from '../../../utils/new/design-system';
+
 import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
+import CreateTask from '../../../components/CreateTask';
 
 const TasksMain = styled('div')`
 	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
 `;
 
 const TasksListContainer = styled('div')`
 	display: flex;
 	justify-content: center;
-	width: 100%;
+	flex: 1;
 `;
 
 const TasksListSidebar = styled('div')``;
 
 const TaskAndArianne = styled('div')`
-	display: flex;
-	flex-direction: column;
+	flex: auto 1;
+	max-width: 1200px;
 `;
 
 function TasksList() {
@@ -59,6 +63,7 @@ function TasksList() {
 						selectCustomer={setCustomerSelected}
 						selectProjects={setProjectSelected}
 					/>
+					<CreateTask />
 					<TasksListComponent items={tasks} />
 				</TaskAndArianne>
 				<TasksListSidebar />

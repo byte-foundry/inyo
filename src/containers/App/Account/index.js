@@ -5,11 +5,7 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {ToastContainer, toast} from 'react-toastify';
 
-import TopBar, {
-	TopBarTitle,
-	TopBarButton,
-	TopBarNavigation,
-} from '../../../components/TopBar';
+import TopBar, {TopBarLogo, TopBarMenu} from '../../../components/TopBar';
 import {
 	H3,
 	Button,
@@ -164,70 +160,6 @@ class Account extends Component {
 					return (
 						<AccountMain>
 							<ToastContainer />
-
-							<TopBar>
-								<TopBarTitle>Mon Compte</TopBarTitle>
-								<TopBarNavigation>
-									<TopBarButton
-										theme="Primary"
-										size="Medium"
-										onClick={() => {
-											this.props.history.push(
-												'/app/projects/create',
-											);
-										}}
-									>
-										Créer un nouveau projet
-									</TopBarButton>
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/dashboard',
-											);
-										}}
-									>
-										<DashboardIcon />
-										<span>Dashboard</span>
-									</TopBarButton>
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/projects',
-											);
-										}}
-									>
-										<FoldersIcon />
-										<span>Projets</span>
-									</TopBarButton>
-									{/* <TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/customers',
-											);
-										}}
-									>
-										<UsersIcon />
-									</TopBarButton> */}
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/account',
-											);
-										}}
-									>
-										<SettingsIcon />
-										<span>Réglages</span>
-									</TopBarButton>
-								</TopBarNavigation>
-							</TopBar>
 
 							<AccountBody>
 								<WelcomeMessage>

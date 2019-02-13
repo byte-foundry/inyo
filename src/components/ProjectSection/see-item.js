@@ -92,7 +92,7 @@ class Item extends Component {
 			update: (cache, {data: {itemMutation: mutatedItem}}) => {
 				toast.info(
 					<div>
-						<p>📬 Le prestataire a été notifié.</p>
+						<p>Tâche terminé</p>
 					</div>,
 					{
 						position: toast.POSITION.TOP_RIGHT,
@@ -265,12 +265,10 @@ class Item extends Component {
 					<ItemName>
 						<span>{item.name}</span>
 					</ItemName>
-					{customerViewMode
-						&& status === 'UPDATED_SENT' && (
+					{customerViewMode && status === 'UPDATED_SENT' && (
 						<ItemStatus>Mis à jour</ItemStatus>
 					)}
-					{customerViewMode
-						&& status === 'ADDED_SENT' && (
+					{customerViewMode && status === 'ADDED_SENT' && (
 						<ItemStatus>Ajouté</ItemStatus>
 					)}
 					<ItemUnit color={primaryBlue}>

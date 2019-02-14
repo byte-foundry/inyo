@@ -8,7 +8,6 @@ import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
 import {POST_COMMENT} from '../../utils/mutations';
 
 import {
-	Button,
 	gray20,
 	primaryWhite,
 	gray50,
@@ -17,6 +16,7 @@ import {
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
+import {Button} from '../../utils/new/design-system';
 
 import Comment from '../Comment';
 
@@ -42,12 +42,6 @@ const ItemComment = styled('textarea')`
 	line-height: 1.6;
 	color: ${gray80};
 	margin-bottom: 10px;
-`;
-
-const ActionButton = styled(Button)`
-	margin-bottom: 10px;
-	padding-left: 10px;
-	padding-right: 10px;
 `;
 
 const Empty = styled('p')`
@@ -192,14 +186,10 @@ class CommentList extends Component {
 														</ErrorInput>
 													)}
 													<FlexRow justifyContent="flex-end">
-														<ActionButton
-															theme="Primary"
-															size="Medium"
-															type="submit"
-														>
+														<Button type="submit">
 															Ajouter un
 															commentaire
-														</ActionButton>
+														</Button>
 													</FlexRow>
 												</form>
 											);

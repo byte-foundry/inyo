@@ -1,33 +1,23 @@
 import React from 'react';
-import {Query, Mutation} from 'react-apollo';
 import styled from '@emotion/styled';
 import {Link} from 'react-router-dom';
-import Remarkable from 'remarkable';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 
+import TaskStatusButton from '../TaskStatusButton';
 import Plural from '../Plural';
-import TaskStatus from '../TaskStatus';
-import {
-	H2,
-	H3,
-	H4,
-	gray50,
-	gray70,
-	SpinningBubble,
-	primaryBlue,
-	primaryNavyBlue,
-} from '../../utils/content';
+import {gray50, gray70, SpinningBubble} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
+import MultilineEditable from '../MultilineEditable';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {UPDATE_ITEM} from '../../utils/mutations';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
+import {TaskHeading, SubHeading, Button} from '../../utils/new/design-system';
 
 const Header = styled('div')`
-	display: flex;
-	justify-content: start;
 	margin-bottom: 1em;
 
 	h2 {
@@ -36,195 +26,199 @@ const Header = styled('div')`
 	}
 `;
 
-const ProjectName = styled(H3)`
-	font-size: 1.4rem;
-	margin: 0;
-
-	a {
-		color: ${primaryBlue};
-		text-decoration: none;
-
-		&:hover {
-			color: ${primaryNavyBlue};
-		}
-	}
-`;
-
 const Metas = styled('div')`
-	display: flex;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-row-gap: 0.5em;
 	color: ${gray50};
-	margin-left: -5px;
 	padding-bottom: 1em;
 `;
 
 const Meta = styled('div')`
 	display: flex;
-	margin-right: 15px;
 	align-items: center;
+
+	svg {
+		margin-right: 15px;
+	}
+`;
+
+const MetaLabel = styled('div')`
+	flex: 1;
 `;
 
 const MetaText = styled('span')`
-	margin-left: 5px;
+	flex: 1;
+
+	:empty::before {
+		content: ' - ';
+	}
 `;
 
-const MetaTime = styled('time')`
-	margin-left: 5px;
-`;
+const MetaTime = styled(MetaText)``;
 
 const Description = styled('div')`
 	color: ${gray70};
 	line-height: 1.6;
 	margin-top: 20px;
 	margin-bottom: 25px;
-	margin-left: 0;
+	margin-left: -4rem;
+	margin-right: -4rem;
+	background-color: #faf8fe;
+	min-height: 5rem;
+	display: flex;
+
+	textarea {
+		min-height: 5rem;
+	}
 `;
 
-const Item = ({
-	id, customerToken, finishItem, unfinishItem, projectUrl,
-}) => (
-	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
-		{({loading, data, error}) => {
-			if (loading) return <SpinningBubble />;
-			if (error) throw error;
+const StickyHeader = styled('div')`
+	position: sticky;
+	top: 0;
+	background: #5020ee;
+	margin: -4rem -4rem 1.4rem;
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+`;
 
-			const {item} = data;
-			let {description} = item;
-			const {project} = item.section;
+const Item = ({id, customerToken, projectUrl}) => {
+	const updateItem = useMutation(UPDATE_ITEM);
+	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
+		suspend: false,
+		variables: {id, token: customerToken},
+	});
 
-			const deadline = new Date(project.deadline);
+	if (loading) return <SpinningBubble />;
+	if (error) throw error;
 
-			// parse the description for the file list
-			let files = [];
-			const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+	const {item} = data;
+	const {linkedCustomer: customer, type} = item;
 
-			if (fileListRegex.test(item.description)) {
-				const matches = item.description
-					.match(fileListRegex)[0]
-					.split('# content-acquisition-list');
+	let {description} = item;
+	const {project} = item.section;
+	const deadline = new Date(project.deadline);
 
-				const fileItemRegex = /- \[([ x])\] (.+)/;
+	// parse the description for the file list
+	let files = [];
+	const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
 
-				files = matches
-					.pop()
-					.split('\n')
-					.filter(line => fileItemRegex.test(line))
-					.map(line => ({
-						checked: /^- \[[x]]/.test(line),
-						name: line.match(fileItemRegex).pop(),
-					}));
-				description = matches.join('# content-acquisition-list');
-			}
+	if (fileListRegex.test(item.description)) {
+		const matches = item.description
+			.match(fileListRegex)[0]
+			.split('# content-acquisition-list');
 
-			return (
+		const fileItemRegex = /- \[([ x])\] (.+)/;
+
+		files = matches
+			.pop()
+			.split('\n')
+			.filter(line => fileItemRegex.test(line))
+			.map(line => ({
+				checked: /^- \[[x]]/.test(line),
+				name: line.match(fileItemRegex).pop(),
+			}));
+		description = matches.join('# content-acquisition-list');
+	}
+
+	return (
+		<>
+			<StickyHeader>
+				<TaskStatusButton />
+			</StickyHeader>
+			<Header>
+				<TaskHeading>{item.name}</TaskHeading>
+			</Header>
+			<Metas>
+				<Meta>
+					<TimeIcon />
+					<MetaLabel>Temps estimé</MetaLabel>
+					<MetaText>
+						{item.unit}
+						<Plural
+							singular=" jour"
+							plural=" jours"
+							value={item.unit}
+						/>
+					</MetaText>
+				</Meta>
+				<Meta>
+					<ContactIcon />
+					<MetaLabel>Client</MetaLabel>
+					<MetaText>{customer && customer.name}</MetaText>
+				</Meta>
+				{deadline.toString() !== 'Invalid Date' && (
+					<Meta>
+						<DateIcon />
+						<MetaLabel>Temps restant</MetaLabel>
+						<MetaTime
+							title={deadline.toLocaleString()}
+							dateTime={deadline.toJSON()}
+						>
+							{deadline.toLocaleDateString()}
+						</MetaTime>
+					</Meta>
+				)}
+				<Meta>
+					<ContactIcon />
+					<MetaLabel>Projet</MetaLabel>
+					<MetaText>{project && project.name}</MetaText>
+				</Meta>
+				<Meta>
+					<ContactIcon />
+					<MetaLabel>Type de tâche</MetaLabel>
+					<MetaText>{type}</MetaText>
+				</Meta>
+			</Metas>
+			<Button grey icon="+">
+				Ajouter une catégorie
+			</Button>
+			<Description>
+				<MultilineEditable
+					placeholder="Ajouter une description…"
+					style={{padding: '1rem 4rem'}}
+					onBlur={e => updateItem({
+						variables: {
+							itemId: id,
+							token: customerToken,
+							description: e.target.innerText || undefined,
+						},
+					})
+					}
+					defaultValue={description}
+				/>
+			</Description>
+			{item.type === 'CONTENT_ACQUISITION' && (
 				<>
-					<Header>
-						<div>
-							<TaskStatus
-								status={item.status}
-								itemId={item.id}
-								sectionId={item.section.id}
-								reviewer={item.reviewer}
-								mode="see"
-								customerViewMode={!!customerToken}
-								projectStatus={project.status}
-								finishItem={finishItem}
-								unfinishItem={unfinishItem}
-							/>
-						</div>
-						<div>
-							<ProjectName>
-								<Link
-									to={
-										projectUrl
-										|| `/app/projects/${project.id}/see`
-									}
-								>
-									{project.name}
-								</Link>
-							</ProjectName>
-							<H2>{item.name}</H2>
-						</div>
-					</Header>
-					<Metas>
-						<Meta>
-							<TimeIcon />
-							<MetaText>
-								{item.unit}
-								<Plural
-									singular=" jour"
-									plural=" jours"
-									value={item.unit}
-								/>
-							</MetaText>
-						</Meta>
-						{deadline.toString() !== 'Invalid Date' && (
-							<Meta>
-								<DateIcon />
-								<MetaTime
-									title={deadline.toLocaleString()}
-									dateTime={deadline.toJSON()}
-								>
-									{deadline.toLocaleDateString()}
-								</MetaTime>
-							</Meta>
-						)}
-						<Meta>
-							<ContactIcon />
-							<MetaText>{project.customer.name}</MetaText>
-						</Meta>
-					</Metas>
-					<Description
-						dangerouslySetInnerHTML={{
-							__html: new Remarkable({linkify: true}).render(
-								description,
-							),
+					<SubHeading>Contenus à récupérer</SubHeading>
+					<CheckList
+						editable={!customerToken} // editable by user only, but checkable
+						items={files}
+						onChange={({items}) => {
+							updateItem({
+								variables: {
+									itemId: id,
+									token: customerToken,
+									description: description.concat(
+										`\n# content-acquisition-list\n${items
+											.map(
+												({checked, name}) => `- [${
+													checked ? 'x' : ' '
+												}] ${name}`,
+											)
+											.join('\n')}`,
+									),
+								},
+							});
 						}}
 					/>
-					{item.type === 'CONTENT_ACQUISITION' && (
-						<>
-							<H4>Contenus à récupérer</H4>
-							<Mutation mutation={UPDATE_ITEM}>
-								{updateItem => (
-									<CheckList
-										editable={!customerToken} // editable by user only, but checkable
-										items={files}
-										onChange={({items}) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													token: customerToken,
-													description: description.concat(
-														`\n# content-acquisition-list\n${items
-															.map(
-																({
-																	checked,
-																	name,
-																}) => `- [${
-																	checked
-																		? 'x'
-																		: ' '
-																}] ${name}`,
-															)
-															.join('\n')}`,
-													),
-												},
-											});
-										}}
-									/>
-								)}
-							</Mutation>
-						</>
-					)}
-					<H4>Commentaires</H4>
-					<CommentList
-						itemId={item.id}
-						customerToken={customerToken}
-					/>
 				</>
-			);
-		}}
-	</Query>
-);
+			)}
+			<SubHeading>Commentaires</SubHeading>
+			<CommentList itemId={item.id} customerToken={customerToken} />
+		</>
+	);
+};
 
 export default Item;

@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
-import {Switch, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
-import TasksList from './tasks-lists.js';
+import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
+import TasksList from './tasks-lists';
+import TaskView from '../../../components/ItemView';
 
 const ProjectMain = styled('div')`
 	min-height: 100vh;
@@ -12,9 +14,17 @@ class Tasks extends Component {
 	render() {
 		return (
 			<ProjectMain>
-				<Switch>
-					<Route exact path="/app/tasks" component={TasksList} />
-				</Switch>
+				<Route path="/app/tasks" component={TasksList} />
+				<Route
+					path="/app/tasks/:taskId"
+					render={({match, history}) => (
+						<Modal onDismiss={() => history.push('/app/tasks')}>
+							<ModalElem>
+								<TaskView id={match.params.taskId} />
+							</ModalElem>
+						</Modal>
+					)}
+				/>
 			</ProjectMain>
 		);
 	}

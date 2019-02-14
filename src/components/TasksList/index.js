@@ -13,6 +13,7 @@ import ClientIconSvg from '../../utils/icons/clienticon.svg';
 
 import {
 	Button,
+	ButtonLink,
 	TaskHeading,
 	primaryPurple,
 	CommentIcon,
@@ -130,7 +131,9 @@ function Task({
 				<TaskHeader>
 					<TaskHeading>{item.name}</TaskHeading>
 					<TaskActions>
-						<Button>Modifier</Button>
+						<ButtonLink to={`/app/tasks/${item.id}`}>
+							Modifier
+						</ButtonLink>
 						<Mutation mutation={FINISH_ITEM}>
 							{itemMutation => (
 								<Button

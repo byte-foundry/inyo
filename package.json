@@ -20,6 +20,7 @@
     "apollo-link-debounce": "^2.1.0",
     "draft-js": "^0.10.5",
     "emotion": "^9.2.12",
+    "escape-html": "^1.0.3",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",

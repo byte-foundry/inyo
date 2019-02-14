@@ -56,7 +56,6 @@ ReactDOM.render(
 				<Container />
 			</Router>
 		</ApolloHooksProvider>
-		,
 	</ApolloProvider>,
 	document.getElementById('root'),
 );

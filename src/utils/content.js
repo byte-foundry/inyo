@@ -363,6 +363,7 @@ export function ModalContainer({size, ...props}) {
 
 export const ModalElem = styled('div')`
 	position: relative;
+	padding: 2rem;
 `;
 
 export const ModalCloseIcon = styled('div')`

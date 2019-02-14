@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
 import Shevy from 'shevyjs';
+import {Link} from 'react-router-dom';
 
 export const primaryPurple = '#5020ee';
 export const primaryWhite = '#fff';
@@ -28,9 +29,13 @@ export const Button = styled('button')`
 	border: 2px solid #333;
 	border-radius: 30px;
 	cursor: pointer;
+	text-decoration: none;
 	background: ${(props) => {
 		if (props.primary) {
 			return primaryPurple;
+		}
+		if (props.white) {
+			return 'transparent';
 		}
 		return primaryWhite;
 	}};
@@ -44,40 +49,50 @@ export const Button = styled('button')`
 		if (props.grey) {
 			return primaryGrey;
 		}
-		return primaryPurple;
-	}};
-	border-color: ${(props) => {
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.grey) {
-			return accentGrey;
+		if (props.white) {
+			return primaryWhite;
 		}
 		return primaryPurple;
 	}};
+	border-color: currentColor;
 
 	&:hover {
 		background: ${(props) => {
 		if (props.red) {
 			return primaryRed;
 		}
+		if (props.white) {
+			return primaryWhite;
+		}
 		return primaryPurple;
 	}};
-		color: ${primaryWhite};
+		color: ${(props) => {
+		if (props.red) {
+			return primaryRed;
+		}
+		if (props.white) {
+			return primaryPurple;
+		}
+		return primaryWhite;
+	}};
 		border-color: ${(props) => {
 		if (props.primary) {
 			return 'transparent';
 		}
-		if (props.red) {
-			return primaryRed;
-		}
-		return primaryPurple;
+		return 'currentColor';
 	}};
 
 		&::before {
-			color: ${primaryWhite};
+			color: currentColor;
 		}
 	}
+
+	${props => props.big
+		&& `
+		font-size: 14px;
+		font-weight: 600;
+		padding: .8rem 1.6rem;
+	`}
 
 	${props => props.icon
 		&& `&::before {
@@ -87,6 +102,8 @@ export const Button = styled('button')`
 			font-weight: 600;
 		}`};
 `;
+
+export const ButtonLink = Button.withComponent(Link);
 
 export const ProjectHeading = styled('div')`
 	color: ${accentGrey};
@@ -101,7 +118,7 @@ export const TaskHeading = styled('h2')`
 `;
 
 export const SubHeading = styled('div')`
-	text-transformation: 'uppercase';
+	text-transform: uppercase;
 	font-size: 12px;
 	letter-spacing: 0.5px;
 	color: ${accentGrey};

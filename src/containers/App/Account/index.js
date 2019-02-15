@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {ToastContainer, toast} from 'react-toastify';
 
-import TopBar, {TopBarLogo, TopBarMenu} from '../../../components/TopBar';
 import {
 	H3,
 	Button,
@@ -13,7 +12,6 @@ import {
 	primaryBlue,
 	signalRed,
 	FlexRow,
-	gray10,
 	primaryWhite,
 	gray20,
 	gray30,
@@ -22,17 +20,10 @@ import {
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserSettings from '../../../components/UserSettings';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
-import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
-import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
-// import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
-import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
-	background: ${gray10};
-	min-height: 100vh;
 	padding-bottom: 80px;
 `;
 const AccountBody = styled('div')`

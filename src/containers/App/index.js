@@ -8,15 +8,24 @@ import * as Sentry from '@sentry/browser';
 import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
 import Account from './Account';
-import Project from './Project';
 import Tasks from './Tasks';
 import ConditionalContent from './ConditionalContent';
 import ProjectCustomerView from './Project/project-customer-view';
+import TopBar, {
+	TopBarMenu,
+	TopBarLogo,
+	TopBarMenuLink,
+} from '../../components/TopBar';
+import {ButtonLink} from '../../utils/new/design-system';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
 import {INTERCOM_APP_ID} from '../../utils/constants';
 
-const AppMain = styled('div')``;
+const AppMain = styled('div')`
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+`;
 
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
 
@@ -51,6 +60,14 @@ function App() {
 
 	return (
 		<AppMain>
+			<TopBar>
+				<TopBarLogo />
+				<TopBarMenu>
+					<ButtonLink to="/app/dashboard">Dashboard</ButtonLink>
+					<TopBarMenuLink to="/app/tasks">Tasks</TopBarMenuLink>
+					<TopBarMenuLink to="/app/account">Options</TopBarMenuLink>
+				</TopBarMenu>
+			</TopBar>
 			<Switch>
 				{error && (
 					<Route

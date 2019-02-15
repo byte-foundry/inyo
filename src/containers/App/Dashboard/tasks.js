@@ -104,8 +104,9 @@ const DashboardTasks = ({
 
 			return (
 				<Query query={USER_TASKS}>
-					{({data, loading}) => {
+					{({data, loading, error}) => {
 						if (loading) return <p>Loading</p>;
+						if (error) throw error;
 
 						const {me, items} = data;
 
@@ -130,6 +131,7 @@ const DashboardTasks = ({
 						const userWorkingTime
 							= (endWorkAt - startWorkAt) / 60 / 60 / 1000;
 						// day is over -> show next day
+
 						let timeLeft = userWorkingTime;
 
 						// day ongoing -> show tasks the user can do

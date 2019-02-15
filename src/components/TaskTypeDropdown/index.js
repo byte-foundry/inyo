@@ -98,12 +98,9 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 		};
 	});
 
-	useEffect(
-		() => {
-			setFocusedItemIndex(0);
-		},
-		[filter],
-	);
+	useEffect(() => {
+		setFocusedItemIndex(0);
+	}, [filter]);
 
 	return (
 		<Dropdown>
@@ -127,7 +124,7 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 	);
 };
 
-TaskTypeDropdown.propTypes = {
+TaskTypeDropdown.defaultProps = {
 	filter: '',
 	onSelectCommand: () => {},
 };

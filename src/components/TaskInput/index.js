@@ -5,27 +5,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import TaskTypeDropdown from '../TaskTypeDropdown';
 
-import TaskIconUrl, {
-	ReactComponent as TaskIcon,
-} from '../../utils/icons/taskicon.svg';
-import TaskIconValidatedUrl from '../../utils/icons/taskicon-user-validated.svg';
-import TaskCustomerIconUrl, {
-	ReactComponent as TaskCustomerIcon,
-} from '../../utils/icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl from '../../utils/icons/taskicon-customer-validated.svg';
-import CustomerReminderIconUrl, {
-	ReactComponent as CustomerReminderIcon,
-} from '../../utils/icons/customer-reminder.svg';
-import UserReminderIconUrl, {
-	ReactComponent as UserReminderIcon,
-} from '../../utils/icons/user-reminder.svg';
-import ValidationIconUrl, {
-	ReactComponent as ValidationIcon,
-} from '../../utils/icons/validation.svg';
-import ContentAcquisitionIconUrl, {
-	ReactComponent as ContentAcquisitionIcon,
-} from '../../utils/icons/content-acquisition.svg';
-import {ITEM_TYPES} from '../../utils/constants.js';
+import {ITEM_TYPES} from '../../utils/constants';
 
 const Container = styled('div')`
 	font-size: 14px;
@@ -104,10 +84,10 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	let icon = '🔃';
 
 	if (type) {
-		icon = types.find(t => t.type === type).icon;
+		({icon} = types.find(t => t.type === type));
 	}
 	else if (!value.startsWith('/') && value.length > 0) {
-		icon = types.find(t => t.type === 'DEFAULT').icon;
+		({icon} = types.find(t => t.type === 'DEFAULT'));
 	}
 
 	return (
@@ -132,10 +112,14 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 							else if (e.key === 'Enter') {
 								onSubmitTask({
 									name: value,
-									type,
+									type: type || 'DEFAULT',
 								});
 								setValue('');
 							}
+						}
+						if (e.key === 'Escape') {
+							setValue('');
+							setFocusByClick(false);
 						}
 					}}
 					placeholder={

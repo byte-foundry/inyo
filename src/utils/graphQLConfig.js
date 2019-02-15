@@ -9,8 +9,10 @@ import {
 	IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory'; // eslint-disable-line import/no-extraneous-dependencies
 import DebounceLink from 'apollo-link-debounce';
+import WatchedMutationLink from 'apollo-link-watched-mutation'; // eslint-disable-line import/no-extraneous-dependencies
 import introspectionQueryResultData from './fragmentTypes.json';
 
+import createTaskWatchMutation from './mutationLinks/createTask.js';
 import {GRAPHQL_API} from './constants';
 import defaults from './default';
 import resolvers from './resolvers';
@@ -116,13 +118,20 @@ const stateLink = withClientState({
 	typeDefs,
 });
 
+const watchLink = new WatchedMutationLink(cache, {
+	addItem: createTaskWatchMutation,
+});
+
 const client = new ApolloClient({
 	link: ApolloLink.from([
+		watchLink,
 		withToken,
 		debounceLink,
 		errorLink,
 		stateLink,
 		httpLink,
+		// Don't put link after httpLink this will not work
+		// because it is a terminating link
 	]),
 	cache,
 	connectToDevTools: true,

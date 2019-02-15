@@ -1,3 +1,23 @@
+import React from 'react';
+import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
+import TaskIconValidatedUrl from './icons/taskicon-user-validated.svg';
+import TaskCustomerIconUrl, {
+	ReactComponent as TaskCustomerIcon,
+} from './icons/taskicon-customer.svg';
+import TaskCustomerIconValidatedUrl from './icons/taskicon-customer-validated.svg';
+import CustomerReminderIconUrl, {
+	ReactComponent as CustomerReminderIcon,
+} from './icons/customer-reminder.svg';
+import UserReminderIconUrl, {
+	ReactComponent as UserReminderIcon,
+} from './icons/user-reminder.svg';
+import ValidationIconUrl, {
+	ReactComponent as ValidationIcon,
+} from './icons/validation.svg';
+import ContentAcquisitionIconUrl, {
+	ReactComponent as ContentAcquisitionIcon,
+} from './icons/content-acquisition.svg';
+
 /* export const GRAPHQL_API = `https://prisma${
 	// eslint-disable-line import/prefer-default-export
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
@@ -53,3 +73,80 @@ export const itemStatuses = {
 	FINISHED: 'FINISHED',
 	PENDING: 'PENDING',
 };
+
+export const ITEM_TYPES = [
+	{
+		icon: <TaskIcon />,
+		iconUrl: TaskIconUrl,
+		iconUrlValidated: TaskIconValidatedUrl,
+		type: 'DEFAULT',
+		name: 'Tâche par défaut',
+		description: 'Une tâche dont vous êtes responsable',
+	},
+	{
+		icon: <TaskCustomerIcon />,
+		iconUrl: TaskCustomerIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'CUSTOMER',
+		name: 'Tâche attribuée au client',
+		description: 'Une tâche à réaliser par votre client',
+	},
+	{
+		icon: <CustomerReminderIcon />,
+		iconUrl: CustomerReminderIconUrl,
+		type: 'CUSTOMER_REMINDER',
+		name: 'Relance client générique',
+		description: 'Programmer des relances client',
+	},
+	{
+		icon: <ValidationIcon />,
+		iconUrl: ValidationIconUrl,
+		type: 'VALIDATION',
+		name: 'Validation client',
+		description: 'Demander à votre client une validation',
+	},
+	{
+		icon: <UserReminderIcon />,
+		iconUrl: UserReminderIconUrl,
+		type: 'USER_REMINDER',
+		name: 'Rappel personnel',
+		description: 'Programmer un rappel (visible seulement par vous)',
+	},
+	{
+		icon: <ContentAcquisitionIcon />,
+		iconUrl: ContentAcquisitionIconUrl,
+		type: 'CONTENT_ACQUISITION',
+		name: 'Récupération contenu',
+		description: 'Lister et récupérer les contenus nécessaires',
+	},
+	/* {
+		icon: '📝',
+		type: 'MEETING_NOTES',
+		name: 'Réunion client',
+		description: 'Assembler et partager les notes de réunion',
+	},
+	{
+		icon: '🌳',
+		type: 'SUBTASKS',
+		name: 'Tâche et sous-tâches',
+		description: "Lister les sous-tâches d'une tâche parente",
+	},
+	{
+		icon: '💰',
+		type: 'PAYMENT',
+		name: 'Paiement par le client',
+		description: 'Demander et relancer pour un paiement',
+	},
+	{
+		icon: '📆',
+		type: 'SCHEDULE_MEETING',
+		name: 'Programmation de RDV client',
+		description: 'Programmer automatiquement une réunion',
+	},
+	{
+		icon: '⭕',
+		type: 'PERSONAL',
+		name: 'Tâche personnelle',
+		description: 'Créer une tâche uniquement visible par vous',
+	}, */
+];

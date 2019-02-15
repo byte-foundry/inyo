@@ -83,8 +83,14 @@ const customSelectStyles = {
 	}),
 };
 
-function ArianneElem({
-	children, id, list, onChange,
+export function ArianneElem({
+	children,
+	id,
+	list,
+	onChange,
+	open,
+	onBlur,
+	defaultValue,
 }) {
 	return (
 		<ArianneElemMain>
@@ -92,9 +98,12 @@ function ArianneElem({
 				placeholder={children}
 				options={list.map(item => ({value: item.id, label: item.name}))}
 				onChange={onChange}
+				onBlur={onBlur}
 				styles={customSelectStyles}
+				defaultValue={defaultValue}
 				isSearchable
 				isClearable
+				defaultMenuIsOpen={open}
 			/>
 			<ArianneArrow />
 		</ArianneElemMain>

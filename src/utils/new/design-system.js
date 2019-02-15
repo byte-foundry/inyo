@@ -193,6 +193,7 @@ export const CommentIcon = styled('div')`
 const TaskInfosContent = styled('div')`
 	color: ${primaryPurple};
 	padding-bottom: 0;
+	display: flex;
 `;
 
 export const TaskInfosItem = styled('div')`
@@ -207,9 +208,9 @@ export const TaskInfosItem = styled('div')`
 	}
 `;
 
-export function TaskIconText({icon, content}) {
+export function TaskIconText({icon, content, ...rest}) {
 	return (
-		<TaskInfosItem>
+		<TaskInfosItem {...rest}>
 			{icon}
 			<TaskInfosContent>{content}</TaskInfosContent>
 		</TaskInfosItem>

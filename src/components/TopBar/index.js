@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import {Link} from 'react-router-dom';
 
 import {
 	Button,
@@ -24,7 +25,8 @@ export const TopBarMenu = styled('div')`
 	align-items: center;
 `;
 
-export const TopBarMenuLink = styled('div')`
+export const TopBarMenuLink = styled(Link)`
+	text-decoration: none;
 	margin-left: 10px;
 
 	&:before {

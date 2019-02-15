@@ -2,28 +2,14 @@ import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import styled from '@emotion/styled';
 import {withRouter} from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify';
 
-import Tasks from './tasks';
-import TopBar, {TopBarLogo, TopBarMenu} from '../../../components/TopBar';
-import {
-	H2, primaryBlue, gray10, Loading,
-} from '../../../utils/content';
+import {Loading, primaryBlue, H2} from '../../../utils/content';
 import {GET_USER_INFOS, GET_PROJECT_DATA} from '../../../utils/queries';
-import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
-import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
-// import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
-import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
+import Tasks from './tasks';
 
 const Main = styled('div')`
-	background: ${gray10};
-	min-height: 100vh;
 	padding-bottom: 80px;
-`;
-const Content = styled('div')`
-	padding-left: 40px;
-	padding-right: 40px;
 `;
 
 const WelcomeMessage = styled(H2)`
@@ -164,18 +150,6 @@ class Dashboard extends Component {
 		},
 	});
 
-	toast = () => {
-		toast.info(
-			<div>
-				<p>Les données ont été mises à jour</p>
-			</div>,
-			{
-				position: toast.POSITION.BOTTOM_LEFT,
-				autoClose: 3000,
-			},
-		);
-	};
-
 	render() {
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -187,22 +161,15 @@ class Dashboard extends Component {
 
 					return (
 						<Main>
-							<ToastContainer />
-							<TopBar>
-								<TopBarLogo>Tableau de bord</TopBarLogo>
-								<TopBarMenu />
-							</TopBar>
-							<Content>
-								<WelcomeMessage>
-									Bonjour {firstName} !
-								</WelcomeMessage>
+							<WelcomeMessage>
+								Bonjour {firstName} !
+							</WelcomeMessage>
 
-								<Tasks
-									finishItem={this.finishItem}
-									unfinishItem={this.unfinishItem}
-									snoozeItem={this.snoozeItem}
-								/>
-							</Content>
+							<Tasks
+								finishItem={this.finishItem}
+								unfinishItem={this.unfinishItem}
+								snoozeItem={this.snoozeItem}
+							/>
 						</Main>
 					);
 				}}

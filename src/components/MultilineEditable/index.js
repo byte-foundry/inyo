@@ -26,8 +26,6 @@ const MultilineEditable = ({
 	const inputRef = useRef(null);
 	const [isEditing, setEditing] = useState(false);
 
-	defaultValue = defaultValue || '';
-
 	useEffect(() => {
 		if (inputRef.current) {
 			const el = inputRef.current;

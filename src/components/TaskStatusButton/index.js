@@ -5,23 +5,24 @@ import {Button} from '../../utils/new/design-system';
 
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
-const TaskStatusButton = () => {
+const TaskStatusButton = ({taskId, isFinished}) => {
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
 
 	return (
 		<Button
-			white
+			icon={isFinished && '✔'}
+			white={!isFinished}
 			onClick={() => {
-				// if (finishable) {
-				// 	finishItem({variables: {itemId}});
-				// }
-				// if (unfinishable) {
-				// 	unfinishItem({variables: {itemId}});
-				// }
+				if (isFinished) {
+					unfinishItem({variables: {itemId: taskId}});
+				}
+				else {
+					finishItem({variables: {itemId: taskId}});
+				}
 			}}
 		>
-			Marquer comme fait
+			{isFinished ? 'Fait' : 'Marquer comme fait'}
 		</Button>
 	);
 };

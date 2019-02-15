@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import {ITEM_FRAGMENT} from './fragments';
 
 /** ******** APP QUERIES ********* */
 export const GET_NETWORK_STATUS = gql`
@@ -129,6 +130,8 @@ export const GET_ALL_PROJECTS = gql`
 	}
 `;
 export const GET_PROJECT_DATA = gql`
+	${ITEM_FRAGMENT}
+
 	query getProjectData($projectId: ID!) {
 		project(id: $projectId) {
 			id
@@ -181,42 +184,7 @@ export const GET_PROJECT_DATA = gql`
 				id
 				name
 				items {
-					status
-					id
-					name
-					type
-					unit
-					reviewer
-					position
-					comments {
-						createdAt
-						id
-						views {
-							viewer {
-								... on User {
-									firstName
-									lastName
-								}
-								... on Customer {
-									firstName
-									lastName
-									name
-								}
-							}
-						}
-						author {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					description
+					...ItemFragment
 				}
 			}
 		}
@@ -224,7 +192,9 @@ export const GET_PROJECT_DATA = gql`
 `;
 
 export const GET_PROJECT_DATA_WITH_TOKEN = gql`
-	query getProjectData($projectId: ID!, $token: String) {
+	${ITEM_FRAGMENT}
+
+	query getProjectDataWithToken($projectId: ID!, $token: String) {
 		project(id: $projectId, token: $token) {
 			id
 			template
@@ -267,42 +237,7 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 				id
 				name
 				items {
-					status
-					id
-					name
-					type
-					unit
-					reviewer
-					position
-					comments {
-						createdAt
-						id
-						views {
-							viewer {
-								... on User {
-									firstName
-									lastName
-								}
-								... on Customer {
-									firstName
-									lastName
-									name
-								}
-							}
-						}
-						author {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					description
+					...ItemFragment
 				}
 			}
 		}
@@ -332,46 +267,23 @@ export const GET_COMMENTS_BY_ITEM = gql`
 `;
 
 export const GET_ITEM_DETAILS = gql`
+	${ITEM_FRAGMENT}
+
 	query getItemDetails($id: ID!, $token: String) {
 		item(id: $id, token: $token) {
-			id
-			name
-			type
-			status
-			description
-			unit
-			reviewer
-			section {
-				id
-				project {
-					id
-					name
-					status
-					deadline
-					customer {
-						id
-						name
-					}
-				}
-			}
+			...ItemFragment
 		}
 	}
 `;
 
 export const GET_ALL_TASKS = gql`
+	${ITEM_FRAGMENT}
+
 	query getAllTasks {
 		me {
 			id
 			tasks {
-				id
-				status
-				name
-				description
-				unit
-				type
-				comments {
-					id
-				}
+				...ItemFragment
 			}
 		}
 	}
@@ -390,6 +302,7 @@ export const GET_ALL_CUSTOMERS = gql`
 `;
 
 export const USER_TASKS = gql`
+	${ITEM_FRAGMENT}
 	query userTasks {
 		me {
 			id
@@ -397,25 +310,7 @@ export const USER_TASKS = gql`
 			endWorkAt
 		}
 		items {
-			id
-			status
-			name
-			description
-			unit
-			reviewer
-			section {
-				id
-				project {
-					id
-					deadline
-					daysUntilDeadline
-					status
-					customer {
-						id
-						name
-					}
-				}
-			}
+			...ItemFragment
 		}
 	}
 `;

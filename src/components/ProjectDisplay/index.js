@@ -851,6 +851,7 @@ class ProjectDisplay extends Component {
 																			},
 																			refetchQueries: [
 																				'getProjectData',
+																				'getProjectDataWithToken',
 																			],
 																		},
 																	);

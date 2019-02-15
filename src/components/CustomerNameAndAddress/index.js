@@ -140,7 +140,10 @@ class CustomerNameAndAddress extends Component {
 												id: customerId,
 												customer: values,
 											},
-											refetchQueries: ['getProjectData'],
+											refetchQueries: [
+												'getProjectData',
+												'getProjectDataWithToken',
+											],
 										});
 
 										this.setState({editing: false});

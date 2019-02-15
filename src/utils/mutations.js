@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
+import {ITEM_FRAGMENT} from './fragments';
+
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
 	mutation Login($email: String!, $password: String!) {
@@ -436,8 +438,11 @@ export const REMOVE_SECTION = gql`
 		}
 	}
 `;
+
 // Item
 export const ADD_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation addItem(
 		$sectionId: ID
 		$name: String!
@@ -454,98 +459,62 @@ export const ADD_ITEM = gql`
 			description: $description
 			reviewer: $reviewer
 		) {
-			id
-			name
-			type
-			unit
-			description
-			status
-			reviewer
+			...ItemFragment
 		}
 	}
 `;
 export const UPDATE_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation updateItem(
 		$itemId: ID!
-		$name: String
-		$type: ItemType
-		$description: String
-		$unit: Float
 		$comment: CommentInput
-		$reviewer: Reviewer
+		$description: String
+		$dueDate: DateTime
+		$linkedCustomerId: ID
+		$name: String
 		$position: Int
-		$token: String
+		$reviewer: Reviewer
 		$sectionId: ID
+		$token: String
+		$type: ItemType
+		$unit: Float
 	) {
 		updateItem(
 			id: $itemId
-			name: $name
-			type: $type
-			description: $description
 			comment: $comment
-			unit: $unit
-			reviewer: $reviewer
+			description: $description
+			dueDate: $dueDate
+			linkedCustomerId: $linkedCustomerId
+			name: $name
 			position: $position
-			token: $token
+			reviewer: $reviewer
 			sectionId: $sectionId
+			token: $token
+			type: $type
+			unit: $unit
 		) {
-			id
-			name
-			type
-			unit
-			description
-			status
-			reviewer
-			position
-			section {
-				id
-			}
-			comments {
-				createdAt
-				id
-				views {
-					viewer {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
-				author {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
+			...ItemFragment
 		}
 	}
 `;
 
 export const FINISH_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation finishItem($itemId: ID!, $token: String) {
 		finishItem(id: $itemId, token: $token) {
-			id
-			status
+			...ItemFragment
 		}
 	}
 `;
 
 export const UNFINISH_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation unfinishItem($itemId: ID!) {
 		unfinishItem(id: $itemId) {
-			id
-			status
+			...ItemFragment
 		}
 	}
 `;
@@ -559,10 +528,11 @@ export const REMOVE_ITEM = gql`
 `;
 
 export const SNOOZE_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation snoozeItem($itemId: ID!, $during: Int) {
 		snoozeItem(id: $itemId, during: $during) {
-			id
-			status
+			...ItemFragment
 		}
 	}
 `;

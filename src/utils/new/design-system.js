@@ -98,7 +98,7 @@ export const Button = styled('button')`
 		&& `&::before {
 			content: '${props.icon}';
 			margin-right: .4rem;
-			color: ${primaryPurple};
+			color: currentColor;
 			font-weight: 600;
 		}`};
 `;

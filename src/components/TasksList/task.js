@@ -8,7 +8,7 @@ import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import {FINISH_ITEM} from '../../utils/mutations';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
-import {ITEM_TYPES} from '../../utils/constants';
+import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
 
 import {
 	Button,
@@ -18,7 +18,6 @@ import {
 	TaskIconText,
 	TaskInfosItem,
 } from '../../utils/new/design-system';
-import {itemStatuses} from '../../utils/constants';
 
 import {ArianneElem} from '../ArianneThread';
 

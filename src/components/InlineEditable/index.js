@@ -14,7 +14,9 @@ const NameInput = styled(Input)`
 `;
 
 const Editable = styled('span')`
-	color: ${primaryBlue};
+	:hover {
+		border: 1px solid ${primaryBlue};
+	}
 	${props => props.css};
 `;
 

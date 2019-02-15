@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import {css} from '@emotion/core';
 import {Link} from 'react-router-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 
@@ -9,22 +10,24 @@ import {gray50, gray70, SpinningBubble} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 import MultilineEditable from '../MultilineEditable';
+import InlineEditable from '../InlineEditable';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {UPDATE_ITEM} from '../../utils/mutations';
+import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
-import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
-import {TaskHeading, SubHeading, Button} from '../../utils/new/design-system';
+import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
+import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
+import {
+	TaskHeading,
+	SubHeading,
+	Button,
+	primaryPurple,
+} from '../../utils/new/design-system';
+import {ITEM_TYPES} from '../../utils/constants';
 
-const Header = styled('div')`
-	margin-bottom: 1em;
-
-	h2 {
-		font-size: 2rem;
-		margin: 10px 0;
-	}
-`;
+const Header = styled('div')``;
 
 const Metas = styled('div')`
 	display: grid;
@@ -48,6 +51,7 @@ const MetaLabel = styled('div')`
 `;
 
 const MetaText = styled('span')`
+	color: ${primaryPurple};
 	flex: 1;
 
 	:empty::before {
@@ -81,9 +85,20 @@ const StickyHeader = styled('div')`
 	display: flex;
 	justify-content: center;
 	padding: 1rem;
+	z-index: 1;
 `;
 
-const Item = ({id, customerToken, projectUrl}) => {
+const Title = styled(TaskHeading)`
+	display: flex;
+	align-items: center;
+`;
+
+const TaskHeadingIcon = styled('div')`
+	position: relative;
+	left: -5px;
+`;
+
+const Item = ({id, customerToken}) => {
 	const updateItem = useMutation(UPDATE_ITEM);
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
 		suspend: false,
@@ -94,7 +109,7 @@ const Item = ({id, customerToken, projectUrl}) => {
 	if (error) throw error;
 
 	const {item} = data;
-	const {linkedCustomer: customer, type} = item;
+	const {linkedCustomer: customer} = item;
 
 	let {description} = item;
 	const {project} = item.section;
@@ -122,13 +137,42 @@ const Item = ({id, customerToken, projectUrl}) => {
 		description = matches.join('# content-acquisition-list');
 	}
 
+	const typeInfo
+		= ITEM_TYPES.find(({type}) => type === item.type)
+		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
+
 	return (
 		<>
 			<StickyHeader>
-				<TaskStatusButton />
+				<TaskStatusButton
+					taskId={id}
+					isFinished={item.status === 'FINISHED'}
+				/>
 			</StickyHeader>
 			<Header>
-				<TaskHeading>{item.name}</TaskHeading>
+				<Title>
+					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
+					<InlineEditable
+						disabled={!!customerToken}
+						editableCss={css`
+							padding: 1rem 1.5rem;
+						`}
+						value={item.name}
+						type="text"
+						placeholder="Nommez cette tâche"
+						onFocusOut={(value) => {
+							if (value && value !== item.name) {
+								updateItem({
+									variables: {
+										itemId: id,
+										token: customerToken,
+										name: value,
+									},
+								});
+							}
+						}}
+					/>
+				</Title>
 			</Header>
 			<Metas>
 				<Meta>
@@ -150,7 +194,7 @@ const Item = ({id, customerToken, projectUrl}) => {
 				</Meta>
 				{deadline.toString() !== 'Invalid Date' && (
 					<Meta>
-						<DateIcon />
+						<HourglassIcon />
 						<MetaLabel>Temps restant</MetaLabel>
 						<MetaTime
 							title={deadline.toLocaleString()}
@@ -161,14 +205,14 @@ const Item = ({id, customerToken, projectUrl}) => {
 					</Meta>
 				)}
 				<Meta>
-					<ContactIcon />
+					<FolderIcon />
 					<MetaLabel>Projet</MetaLabel>
 					<MetaText>{project && project.name}</MetaText>
 				</Meta>
 				<Meta>
-					<ContactIcon />
+					<TaskTypeIcon />
 					<MetaLabel>Type de tâche</MetaLabel>
-					<MetaText>{type}</MetaText>
+					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
 			</Metas>
 			<Button grey icon="+">

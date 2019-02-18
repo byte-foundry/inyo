@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import {useMutation, useQuery} from 'react-apollo-hooks';
+import useOnClickOutside from 'use-onclickoutside';
 
-import Plural from '../Plural';
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
-import {FINISH_ITEM} from '../../utils/mutations';
-import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
+import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
+import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 
 import {
 	Button,
@@ -20,6 +21,8 @@ import {
 } from '../../utils/new/design-system';
 
 import {ArianneElem} from '../ArianneThread';
+import DateInput from '../DateInput';
+import Plural from '../Plural';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -103,18 +106,29 @@ const TaskInfos = styled('div')`
 	display: flex;
 `;
 
+const TaskDateContainer = styled('div')`
+	position: relative;
+`;
+
 export default function Task({
 	item, sectionId, projectId, token,
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
-	const updateItem = useMutation(FINISH_ITEM);
+	const updateItem = useMutation(UPDATE_ITEM);
 	const {
 		data: {
 			me: {customers},
 		},
 		errors: errorsCustomers,
 	} = useQuery(GET_ALL_CUSTOMERS);
-	const [modifyCustomer, setModifyCustomer] = useState(false);
+	const [editCustomer, setEditCustomer] = useState(false);
+	const [editDueDate, setEditDueDate] = useState(false);
+
+	const dateRef = useRef();
+
+	useOnClickOutside(dateRef, () => {
+		setEditDueDate(false);
+	});
 
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 
@@ -169,39 +183,83 @@ export default function Task({
 					<TaskIconText
 						icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 						content={
-							<>
-								{item.unit}{' '}
-								<Plural
-									value={item.unit}
-									singular="jour"
-									plural="jours"
-								/>
-							</>
+							<TaskDateContainer
+								onClick={() => !editDueDate && setEditDueDate(true)
+								}
+							>
+								{editDueDate ? (
+									<DateInput
+										innerRef={dateRef}
+										date={moment(
+											item.dueDate || new Date(),
+										)}
+										onDateChange={async (date) => {
+											await updateItem({
+												variables: {
+													itemId: item.id,
+													dueDate: date.toISOString(),
+												},
+											});
+											setEditDueDate(false);
+										}}
+										duration={item.unit}
+									/>
+								) : (
+									<>
+										{(item.dueDate && (
+											<>
+												{moment(item.dueDate).diff(
+													moment(),
+													'days',
+												) - item.unit}{' '}
+												<Plural
+													value={item.unit}
+													singular="jour"
+													plural="jours"
+												/>
+											</>
+										)) || (
+											<div
+												dangerouslySetInnerHTML={{
+													__html: '&mdash;',
+												}}
+											/>
+										)}
+									</>
+								)}
+							</TaskDateContainer>
 						}
 					/>
 					<TaskIconText
 						icon={<TaskInfosIcon icon={ClientIconSvg} />}
 						content={
-							modifyCustomer ? (
+							editCustomer ? (
 								<ArianneElem
 									id="projects"
 									list={customers}
-									open={true}
+									defaultMenuIsOpen={true}
 									defaultValue={{
 										value: item.linkedCustomer.id,
 										label: item.linkedCustomer.name,
 									}}
-									onChange={() => {
-										setModifyCustomer(false);
+									autoFocus={true}
+									onChange={async ({value}) => {
+										await updateItem({
+											variables: {
+												itemId: item.id,
+												linkedCustomerId: value,
+											},
+										});
+										setEditCustomer(false);
 									}}
 									onBlur={() => {
-										setModifyCustomer(false);
+										setEditCustomer(false);
 									}}
 								/>
 							) : (
 								<div
 									onClick={() => {
-										setModifyCustomer(true);
+										setEditCustomer(true);
 									}}
 								>
 									{clientName}

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import ClassicSelect from 'react-select';
 import styled from '@emotion/styled';
-import 'react-day-picker/lib/style.css';
 
 import {
 	Input,

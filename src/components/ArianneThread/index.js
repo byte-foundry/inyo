@@ -84,26 +84,16 @@ const customSelectStyles = {
 };
 
 export function ArianneElem({
-	children,
-	id,
-	list,
-	onChange,
-	open,
-	onBlur,
-	defaultValue,
+	children, id, list, ...rest
 }) {
 	return (
 		<ArianneElemMain>
 			<Select
 				placeholder={children}
 				options={list.map(item => ({value: item.id, label: item.name}))}
-				onChange={onChange}
-				onBlur={onBlur}
 				styles={customSelectStyles}
-				defaultValue={defaultValue}
 				isSearchable
-				isClearable
-				defaultMenuIsOpen={open}
+				{...rest}
 			/>
 			<ArianneArrow />
 		</ArianneElemMain>
@@ -135,6 +125,7 @@ function ArianneThread({selectCustomer, selectProjects}) {
 				id="clients"
 				list={customers}
 				onChange={selectCustomer}
+				isClearable={true}
 			>
 				Tous les clients
 			</ArianneElem>

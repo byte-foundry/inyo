@@ -218,3 +218,5 @@ export function TaskIconText({icon, content, ...rest}) {
 }
 
 export const LayoutMainElem = styled('div')``;
+
+export const DateInput = styled('input')``;

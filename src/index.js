@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import {ApolloProvider} from 'react-apollo';
 import {ApolloProvider as ApolloHooksProvider} from 'react-apollo-hooks';
 import {BrowserRouter as Router} from 'react-router-dom';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
 
 import './index.css';
 import Container from './containers/Container';

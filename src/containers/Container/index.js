@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Switch, Route} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 
-import GoogleAnalytics from 'react-ga';
+import ReactGA from 'react-ga';
 import styled from '@emotion/styled';
 import {Body} from '../../utils/content';
 import Landing from '../Landing';
@@ -17,15 +17,15 @@ Sentry.init({
 	environment: process.env.REACT_APP_INYO_ENV,
 	release: 'inyo@v1.0.0',
 });
-GoogleAnalytics.initialize('UA-41962243-12');
+ReactGA.initialize('UA-41962243-14');
 
 const withTracker = (WrappedComponent, options = {}) => {
 	const trackPage = (page) => {
-		GoogleAnalytics.set({
+		ReactGA.set({
 			page,
 			...options,
 		});
-		GoogleAnalytics.pageview(page);
+		ReactGA.pageview(page);
 	};
 
 	// eslint-disable-next-line

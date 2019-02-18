@@ -129,6 +129,60 @@ export const GET_ALL_PROJECTS = gql`
 		}
 	}
 `;
+
+export const GET_PROJECT_INFOS = gql`
+	query getProjectData($projectId: ID!) {
+		project(id: $projectId) {
+			id
+			template
+			viewedByCustomer
+			name
+			status
+			createdAt
+			deadline
+			daysUntilDeadline
+			notifyActivityToCustomer
+			issuer {
+				name
+				email
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					firstName
+					lastName
+					email
+					defaultVatRate
+					settings {
+						askStartProjectConfirmation
+						askItemFinishConfirmation
+					}
+				}
+				siret
+			}
+			customer {
+				id
+				name
+				firstName
+				lastName
+				email
+				title
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
+		}
+	}
+`;
+
 export const GET_PROJECT_DATA = gql`
 	${ITEM_FRAGMENT}
 

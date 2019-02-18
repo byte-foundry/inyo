@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
+import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
 
@@ -70,7 +71,7 @@ export const Button = styled('button')`
 		if (props.red) {
 			return primaryRed;
 		}
-		if (props.white) {
+		if (props.white || props.link) {
 			return primaryPurple;
 		}
 		return primaryWhite;
@@ -101,6 +102,19 @@ export const Button = styled('button')`
 			color: currentColor;
 			font-weight: 600;
 		}`};
+
+	${props => props.link
+		&& css`
+			padding: 0;
+			margin: 0;
+			border: none;
+			background: none;
+
+			:hover {
+				border: none;
+				background: none;
+			}
+		`}
 `;
 
 export const ButtonLink = Button.withComponent(Link);
@@ -142,7 +156,7 @@ export const A = styled('a')`
 	border-bottom: 2px solid transparent;
 
 	&:hover {
-		border-color: ${primaryPurple}
+		border-color: ${primaryPurple};
 		transition: border-color 200ms ease;
 	}
 `;

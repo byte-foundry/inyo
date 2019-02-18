@@ -1,11 +1,11 @@
 import React, {Suspense, Component} from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
-
 import GoogleAnalytics from 'react-ga';
 import styled from '@emotion/styled';
+
 import {Loading} from '../../utils/content';
-import {Body} from '../../utils/new/design-system.js';
+import {Body} from '../../utils/new/design-system';
 import App from '../App';
 import Auth from '../App/Auth';
 import SentryReporter from '../SentryReporter';
@@ -72,6 +72,7 @@ class Container extends Component {
 									path="/auth"
 									component={withTracker(Auth)}
 								/>
+								<Redirect to="/app" />
 							</Switch>
 						</Suspense>
 					</main>

@@ -39,7 +39,8 @@ const TaskIcon = styled('div')`
 	border-radius: 50%;
 	margin-right: 30px;
 	background: url(${(props) => {
-		const typeInfos = ITEM_TYPES.find(t => t.type === props.type);
+		const typeInfos
+			= ITEM_TYPES.find(t => t.type === props.type) || ITEM_TYPES[0];
 
 		let icon = typeInfos.iconUrl;
 

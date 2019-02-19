@@ -92,6 +92,13 @@ export const ITEM_TYPES = [
 		description: 'Une tâche à réaliser par votre client',
 	},
 	{
+		icon: <ContentAcquisitionIcon />,
+		iconUrl: ContentAcquisitionIconUrl,
+		type: 'CONTENT_ACQUISITION',
+		name: 'Récupération contenu',
+		description: 'Lister et récupérer les contenus nécessaires',
+	},
+	/* {
 		icon: <CustomerReminderIcon />,
 		iconUrl: CustomerReminderIconUrl,
 		type: 'CUSTOMER_REMINDER',
@@ -113,13 +120,6 @@ export const ITEM_TYPES = [
 		description: 'Programmer un rappel (visible seulement par vous)',
 	},
 	{
-		icon: <ContentAcquisitionIcon />,
-		iconUrl: ContentAcquisitionIconUrl,
-		type: 'CONTENT_ACQUISITION',
-		name: 'Récupération contenu',
-		description: 'Lister et récupérer les contenus nécessaires',
-	},
-	/* {
 		icon: '📝',
 		type: 'MEETING_NOTES',
 		name: 'Réunion client',

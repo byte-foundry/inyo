@@ -3,7 +3,9 @@ import {DayPickerSingleDateController} from 'react-dates';
 import moment from 'moment';
 import styled from '@emotion/styled/macro';
 
-import {primaryWhite} from '../../utils/new/design-system';
+import {primaryWhite, primaryGrey} from '../../utils/new/design-system';
+
+import Plural from '../Plural';
 
 const TaskDateInput = styled('div')`
 	position: absolute;
@@ -13,28 +15,54 @@ const TaskDateInput = styled('div')`
 	z-index: 1;
 `;
 
+const MarginMessage = styled('div')`
+	color: ${primaryGrey};
+	width: 200px;
+	margin-left: 15px;
+	font-style: italic;
+`;
+
+class InyoDayPickerSingleDateController extends DayPickerSingleDateController {
+	onDayMouseEnter(day) {
+		super.onDayMouseEnter(day);
+
+		this.props.onDayMouseEnter(day);
+	}
+
+	onDayMouseLeave(day) {
+		super.onDayMouseLeave(day);
+
+		this.props.onDayMouseLeave(day);
+	}
+}
+
 export default function ({innerRef, duration, ...rest}) {
 	const [focused, setFocused] = useState(false);
+	const [currentDate, setCurrentDate] = useState(rest.date);
+
+	const margin = currentDate.diff(moment(), 'days') - duration;
 
 	return (
 		<>
 			{rest.date.format('DD/MM/YYYY')}
 			<TaskDateInput ref={innerRef}>
-				<DayPickerSingleDateController
+				<InyoDayPickerSingleDateController
 					focused={focused}
 					onFocusChange={setFocused}
 					onDayMouseEnter={(day) => {
-						console.log(day);
+						if (!day.isBefore(moment())) {
+							setCurrentDate(day);
+						}
 					}}
-					onDayMouseLeave={(day) => {
-						console.log(day);
-					}}
+					onDayMouseLeave={(day) => {}}
+					isDayBlocked={day => day.isBefore(moment())}
 					{...rest}
 				/>
-				<div>
-					Cela vous laisse{' '}
-					{rest.date.diff(moment(), 'days') - duration} pour commencer
-				</div>
+				<MarginMessage>
+					Cela vous laisse {margin}{' '}
+					<Plural value={margin} singular="jour" plural="jours" />{' '}
+					pour commencer cette tâche
+				</MarginMessage>
 			</TaskDateInput>
 		</>
 	);

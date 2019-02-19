@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
+import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 
 import ConfirmModal from '../ConfirmModal';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
-import {primaryBlue, ModalContainer, P} from '../../utils/content';
+import {ModalContainer, P} from '../../utils/content';
 import StaticCustomerView from '../StaticCustomerView';
+import DuplicateProjectButton from '../DuplicateProjectButton';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 
@@ -63,7 +65,11 @@ const CheckBoxLabel = styled('label')`
 	}
 `;
 
-const SidebarProjectInfos = ({projectId, hasClientAttributedTasks}) => {
+const SidebarProjectInfos = ({
+	projectId,
+	hasClientAttributedTasks,
+	history,
+}) => {
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
 	const [askNotifyActivityConfirm, setAskNotifyActivityConfirm] = useState(
 		null,
@@ -156,11 +162,19 @@ const SidebarProjectInfos = ({projectId, hasClientAttributedTasks}) => {
 				<SubHeading>Marge jours restants</SubHeading>
 			</SubSection>
 
-			<Button red onClick={removeProject}>
+			<DuplicateProjectButton
+				grey
+				projectId={project.id}
+				onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)}
+			>
+				Dupliquer le projet
+			</DuplicateProjectButton>
+
+			{/* <Button red onClick={removeProject}>
 				Supprimer le projet
-			</Button>
+			</Button> */}
 		</Aside>
 	);
 };
 
-export default SidebarProjectInfos;
+export default withRouter(SidebarProjectInfos);

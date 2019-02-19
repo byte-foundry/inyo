@@ -68,9 +68,6 @@ export const Button = styled('button')`
 		return primaryPurple;
 	}};
 		color: ${(props) => {
-		if (props.red) {
-			return primaryRed;
-		}
 		if (props.white || props.link) {
 			return primaryPurple;
 		}
@@ -80,7 +77,16 @@ export const Button = styled('button')`
 		if (props.primary) {
 			return 'transparent';
 		}
-		return 'currentColor';
+		if (props.red) {
+			return primaryRed;
+		}
+		if (props.grey) {
+			return primaryGrey;
+		}
+		if (props.white) {
+			return primaryWhite;
+		}
+		return primaryPurple;
 	}};
 
 		&::before {

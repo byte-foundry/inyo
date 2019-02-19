@@ -5,7 +5,7 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 
 import ConfirmModal from '../ConfirmModal';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
-import {ModalContainer, P} from '../../utils/content';
+import {ModalContainer} from '../../utils/content';
 import StaticCustomerView from '../StaticCustomerView';
 import DuplicateProjectButton from '../DuplicateProjectButton';
 
@@ -13,7 +13,13 @@ import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
-import {SubHeading, Button, primaryPurple} from '../../utils/new/design-system';
+import {
+	SubHeading,
+	Button,
+	primaryPurple,
+	primaryGrey,
+	P,
+} from '../../utils/new/design-system';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -63,6 +69,12 @@ const CheckBoxLabel = styled('label')`
 		margin-right: 0.8em;
 		margin-top: -1px;
 	}
+`;
+
+const BigNumber = styled(P)`
+	font-size: 20px;
+	font-weight: 600;
+	color: ${primaryGrey};
 `;
 
 const SidebarProjectInfos = ({
@@ -158,9 +170,12 @@ const SidebarProjectInfos = ({
 				</PreviewModal>
 			)}
 
-			<SubSection>
-				<SubHeading>Marge jours restants</SubHeading>
-			</SubSection>
+			{project.daysUntilDeadline !== null && (
+				<SubSection>
+					<SubHeading>Marge jours restants</SubHeading>
+					<BigNumber>{project.daysUntilDeadline} jours</BigNumber>
+				</SubSection>
+			)}
 
 			<DuplicateProjectButton
 				grey

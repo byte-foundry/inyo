@@ -55,7 +55,7 @@ const Icon = styled('div')`
 	border-radius: 50%;
 	width: 26px;
 	height: 26px;
-	z-index: 1;
+	z-index: 0;
 	transition: all 400ms ease;
 	cursor: pointer;
 

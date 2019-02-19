@@ -69,7 +69,7 @@ const TaskIcon = styled('div')`
 
 	&:after {
 		top: 73px;
-		height: 28px;
+		height: 29px;
 	}
 `;
 
@@ -171,10 +171,31 @@ export default function Task({
 						</CommentIcon>
 					</TaskInfosItem>
 					<TaskIconText
+						inactive={editUnit}
 						icon={<TaskInfosIcon icon={ClockIconSvg} />}
 						content={
 							editUnit ? (
-								<UnitInput value={item.unit} />
+								<UnitInput
+									unit={item.unit}
+									onBlur={() => setEditUnit(false)}
+									onSubmit={(unit) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												unit,
+											},
+											optimisticResponse: {
+												__typename: 'Mutation',
+												updateItem: {
+													__typename: 'Item',
+													...item,
+													unit,
+												},
+											},
+										});
+										setEditUnit(false);
+									}}
+								/>
 							) : (
 								<div onClick={() => setEditUnit(true)}>
 									{item.unit}{' '}
@@ -188,6 +209,7 @@ export default function Task({
 						}
 					/>
 					<TaskIconText
+						inactive={editDueDate}
 						icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 						content={
 							<TaskDateContainer
@@ -200,11 +222,19 @@ export default function Task({
 										date={moment(
 											item.dueDate || new Date(),
 										)}
-										onDateChange={async (date) => {
-											await updateItem({
+										onDateChange={(date) => {
+											updateItem({
 												variables: {
 													itemId: item.id,
 													dueDate: date.toISOString(),
+												},
+												optimisticResponse: {
+													__typename: 'Mutation',
+													updateItem: {
+														__typename: 'Item',
+														...item,
+														dueDate: date.toISOString(),
+													},
 												},
 											});
 											setEditDueDate(false);
@@ -238,6 +268,7 @@ export default function Task({
 						}
 					/>
 					<TaskIconText
+						inactive={editCustomer}
 						icon={<TaskInfosIcon icon={ClientIconSvg} />}
 						content={
 							editCustomer ? (
@@ -250,8 +281,8 @@ export default function Task({
 										label: item.linkedCustomer.name,
 									}}
 									autoFocus={true}
-									onChange={async ({value}) => {
-										await updateItem({
+									onChange={({value}) => {
+										updateItem({
 											variables: {
 												itemId: item.id,
 												linkedCustomerId: value,

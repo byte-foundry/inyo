@@ -1,5 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
+import useOnClickOutside from 'use-onclickoutside';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
 
 import {
 	Input, Button, gray30, primaryBlue,
@@ -36,8 +39,8 @@ const UnitInputContainer = styled('div')`
 
 const UnitInputInput = styled('input')`
 	padding: 0 2rem;
-	width: 20px;
-	margin-right: -1.2rem;
+	width: 30px;
+	margin-right: calc(-1.2rem - 10px);
 	background-color: #f5f2fe;
 	border-radius: 20px;
 	height: 27px;
@@ -51,6 +54,7 @@ const UnitInputSwitch = styled('label')`
 	display: inline-block;
 	width: 100px;
 	height: 29px;
+	cursor: pointer;
 `;
 
 const UnitInputLabel = styled('span')`
@@ -73,13 +77,14 @@ const UnitInputSlider = styled('span')`
     right: -2px;
     bottom: 0;
     background-color: ${primaryWhite};
-    transition: .4s;
+    transition: transform ease .4s;
     border-radius: 29px;
     border: 2px solid #DDD;
 
 	&::before {
 		position: absolute;
-		content: '${props => props.content}';
+		content: '${props => (props.isHours ? 'heures' : 'Jours')}';
+		transform: ${props => (props.isHours ? 'translateX(29px)' : 'translateX(0px)')};
 		font-family: 'Work Sans', sans-serif;
 		font-size: 12px;
 		line-height: 21px;
@@ -96,18 +101,61 @@ const UnitInputSlider = styled('span')`
 	}
 `;
 
-export default function ({value}) {
+export default function ({unit, onBlur, onSubmit}) {
 	const [isHours, setIsHours] = useState(false);
+	const inputRef = useRef(null);
+	const containerRef = useRef(null);
+
+	useEffect(() => {
+		inputRef.current.focus();
+	});
+
+	useOnClickOutside(containerRef, () => {
+		onBlur();
+	});
 
 	return (
-		<UnitInputContainer>
-			<UnitInputInput value={value} />
-			<UnitInputSwitch>
-				<UnitInputLabel>J</UnitInputLabel>
-				<UnitInputLabel>h</UnitInputLabel>
-				<UnitInputSlider content="Jours" />
-			</UnitInputSwitch>
-		</UnitInputContainer>
+		<Formik
+			initialValues={{
+				unit,
+			}}
+			validationSchema={Yup.object().shape({
+				unit: Yup.number().required(),
+			})}
+			onSubmit={async (values, actions) => {
+				actions.setSubmitting(false);
+				try {
+					await onSubmit(parseFloat(values.unit));
+				}
+				catch (error) {
+					actions.setSubmitting(false);
+					actions.setErrors(error);
+				}
+			}}
+		>
+			{({handleSubmit, values, setFieldValue}) => (
+				<form onSubmit={handleSubmit}>
+					<UnitInputContainer ref={containerRef}>
+						<UnitInputInput
+							id="unit"
+							value={values.unit}
+							name="unit"
+							type="number"
+							ref={inputRef}
+							onChange={e => setFieldValue('unit', e.target.value)
+							}
+						/>
+						<UnitInputSwitch
+							onClick={() => setIsHours(!isHours)}
+						>
+							<UnitInputLabel>J</UnitInputLabel>
+							<UnitInputLabel>h</UnitInputLabel>
+							<UnitInputSlider isHours={isHours} />
+						</UnitInputSwitch>
+					</UnitInputContainer>
+				</form>
+			)}
+		</Formik>
 	);
 }
 

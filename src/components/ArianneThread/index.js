@@ -3,14 +3,10 @@ import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import Select from 'react-select';
 
-import {
-	LayoutMainElem,
-	primaryPurple,
-	primaryWhite,
-} from '../../utils/new/design-system';
+import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';
 
-const ArianneContainer = styled(LayoutMainElem)`
+const ArianneContainer = styled('div')`
 	display: flex;
 	margin-bottom: 60px;
 `;

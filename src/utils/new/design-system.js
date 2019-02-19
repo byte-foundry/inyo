@@ -214,6 +214,7 @@ const TaskInfosContent = styled('div')`
 	color: ${primaryPurple};
 	padding-bottom: 0;
 	display: flex;
+	border-bottom: solid 1px transparent;
 `;
 
 export const TaskInfosItem = styled('div')`
@@ -221,11 +222,15 @@ export const TaskInfosItem = styled('div')`
 	margin-right: 1rem;
 	font-size: 14px;
 	cursor: pointer;
+	align-items: center;
+	height: 30px;
 
-	&:hover ${TaskInfosContent} {
-		color: ${accentGrey};
-		border-bottom: 1px dotted ${primaryPurple};
-	}
+	${props => (props.inactive
+		? ''
+		: `&:hover ${TaskInfosContent} {
+			color: ${accentGrey};
+			border-bottom: 1px dotted ${primaryPurple};
+		}`)}
 `;
 
 export function TaskIconText({icon, content, ...rest}) {
@@ -238,5 +243,3 @@ export function TaskIconText({icon, content, ...rest}) {
 }
 
 export const LayoutMainElem = styled('div')``;
-
-export const DateInput = styled('input')``;

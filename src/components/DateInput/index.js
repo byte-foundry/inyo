@@ -26,13 +26,13 @@ class InyoDayPickerSingleDateController extends DayPickerSingleDateController {
 	onDayMouseEnter(day) {
 		super.onDayMouseEnter(day);
 
-		this.props.onDayMouseEnter(day);
+		this.props.onDayMouseEnter && this.props.onDayMouseEnter(day);
 	}
 
 	onDayMouseLeave(day) {
 		super.onDayMouseLeave(day);
 
-		this.props.onDayMouseLeave(day);
+		this.props.onDayMouseLeave && this.props.onDayMouseLeave(day);
 	}
 }
 

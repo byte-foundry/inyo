@@ -5,12 +5,17 @@ import {ApolloProvider as ApolloHooksProvider} from 'react-apollo-hooks';
 import {BrowserRouter as Router} from 'react-router-dom';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
+import moment from 'moment';
+import 'moment/locale/fr';
 
 import './index.css';
 import Container from './containers/Container';
 import client from './utils/graphQLConfig';
 import * as serviceWorker from './serviceWorker';
 import {INTERCOM_APP_ID} from './utils/constants';
+
+// Setting up locale mostly for react-dates
+moment.locale((navigator && navigator.language) || 'fr-FR');
 
 /* eslint-disable */
 (function() {

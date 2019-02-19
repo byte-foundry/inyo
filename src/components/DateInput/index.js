@@ -3,7 +3,7 @@ import {DayPickerSingleDateController} from 'react-dates';
 import moment from 'moment';
 import styled from '@emotion/styled/macro';
 
-import {primaryWhite, primaryGrey} from '../../utils/new/design-system';
+import {primaryGrey} from '../../utils/new/design-system';
 
 import Plural from '../Plural';
 
@@ -36,7 +36,13 @@ class InyoDayPickerSingleDateController extends DayPickerSingleDateController {
 	}
 }
 
-export default function ({innerRef, duration, ...rest}) {
+export default function ({
+	innerRef,
+	duration,
+	noInfo,
+	startDate = moment(),
+	...rest
+}) {
 	const [focused, setFocused] = useState(false);
 	const [currentDate, setCurrentDate] = useState(rest.date);
 
@@ -54,15 +60,16 @@ export default function ({innerRef, duration, ...rest}) {
 							setCurrentDate(day);
 						}
 					}}
-					onDayMouseLeave={(day) => {}}
-					isDayBlocked={day => day.isBefore(moment())}
+					isDayBlocked={day => day.isBefore(startDate)}
 					{...rest}
 				/>
-				<MarginMessage>
-					Cela vous laisse {margin}{' '}
-					<Plural value={margin} singular="jour" plural="jours" />{' '}
-					pour commencer cette tâche
-				</MarginMessage>
+				{!noInfo && (
+					<MarginMessage>
+						Cela vous laisse {margin}{' '}
+						<Plural value={margin} singular="jour" plural="jours" />{' '}
+						pour commencer cette tâche
+					</MarginMessage>
+				)}
 			</TaskDateInput>
 		</>
 	);

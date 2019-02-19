@@ -22,6 +22,7 @@ import {
 
 import {ArianneElem} from '../ArianneThread';
 import DateInput from '../DateInput';
+import UnitInput from '../UnitInput';
 import Plural from '../Plural';
 
 export const TaskContainer = styled('div')`
@@ -124,6 +125,7 @@ export default function Task({
 	} = useQuery(GET_ALL_CUSTOMERS);
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
+	const [editUnit, setEditUnit] = useState(false);
 
 	const dateRef = useRef();
 
@@ -171,14 +173,18 @@ export default function Task({
 					<TaskIconText
 						icon={<TaskInfosIcon icon={ClockIconSvg} />}
 						content={
-							<>
-								{item.unit}{' '}
-								<Plural
-									value={item.unit}
-									singular="jour"
-									plural="jours"
-								/>
-							</>
+							editUnit ? (
+								<UnitInput value={item.unit} />
+							) : (
+								<div onClick={() => setEditUnit(true)}>
+									{item.unit}{' '}
+									<Plural
+										value={item.unit}
+										singular="jour"
+										plural="jours"
+									/>
+								</div>
+							)
 						}
 					/>
 					<TaskIconText

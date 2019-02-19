@@ -69,7 +69,7 @@ class Container extends Component {
 								component={withTracker(Landing)}
 							/>
 							<Route path="/app" component={withTracker(App)} />
-							<Route path="/auth" component={Auth} />
+							<Route path="/auth" component={withTracker(Auth)} />
 						</Switch>
 					</main>
 				</BodyMain>

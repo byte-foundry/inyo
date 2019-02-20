@@ -11,6 +11,7 @@ export const ITEM_FRAGMENT = gql`
 		status
 		type
 		unit
+		timeItTook
 		linkedCustomer {
 			id
 			name

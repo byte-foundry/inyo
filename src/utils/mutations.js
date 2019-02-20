@@ -510,8 +510,8 @@ export const UPDATE_ITEM = gql`
 export const FINISH_ITEM = gql`
 	${ITEM_FRAGMENT}
 
-	mutation finishItem($itemId: ID!, $token: String) {
-		finishItem(id: $itemId, token: $token) {
+	mutation finishItem($itemId: ID!, $token: String, $timeItTook: Float) {
+		finishItem(id: $itemId, token: $token, timeItTook: $timeItTook) {
 			...ItemFragment
 		}
 	}

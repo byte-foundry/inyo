@@ -80,9 +80,6 @@ export const Button = styled('button')`
 		if (props.red) {
 			return primaryRed;
 		}
-		if (props.grey) {
-			return primaryGrey;
-		}
 		if (props.white) {
 			return primaryWhite;
 		}
@@ -93,6 +90,10 @@ export const Button = styled('button')`
 			color: currentColor;
 		}
 	}
+	${props => props.textIcon
+		&& `
+		font-weight: 600;
+	`}
 
 	${props => props.big
 		&& `
@@ -108,6 +109,13 @@ export const Button = styled('button')`
 			color: currentColor;
 			font-weight: 600;
 		}`};
+
+	${props => props.tiny
+		&& `
+		padding: 0;
+		width: 30px;
+		height: 30px;
+	`}
 
 	${props => props.link
 		&& css`
@@ -134,7 +142,8 @@ export const TaskHeading = styled('h2')`
 	color: ${primaryGrey};
 	font-size: 18px;
 	font-weight: 400;
-	flex: 1 0 calc(100% - 168px);
+	flex: 1 0
+		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 168px)')};
 `;
 
 export const SubHeading = styled('div')`

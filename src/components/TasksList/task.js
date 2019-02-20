@@ -18,6 +18,8 @@ import {
 	CommentIcon,
 	TaskIconText,
 	TaskInfosItem,
+	primaryPurple,
+	primaryGrey,
 } from '../../utils/new/design-system';
 
 import {ArianneElem} from '../ArianneThread';
@@ -86,10 +88,11 @@ const TaskContent = styled('div')`
 `;
 
 const TaskActions = styled('div')`
-	opacity: 0;
-	margin-right: -100px;
+	opacity: ${props => (props.stayActive ? 1 : 0)};
+	margin-right: ${props => (props.stayActive ? 0 : -100)}px;
 	pointer-events: none;
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
+	display: flex;
 `;
 
 const TaskHeader = styled('div')`
@@ -112,6 +115,31 @@ const TaskDateContainer = styled('div')`
 	position: relative;
 `;
 
+const SetTimeContainer = styled('div')`
+	display: flex;
+`;
+
+const SetTimeInfos = styled('div')`
+	display: flex;
+	flex-flow: column nowrap;
+	margin-right: 10px;
+	text-align: right;
+`;
+
+const SetTimeHeadline = styled('div')`
+	color: ${primaryPurple};
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.3;
+`;
+
+const SetTimeCaption = styled('div')`
+	color: ${primaryGrey};
+	font-size: 12px;
+	font-style: italic;
+	line-height: 1.3;
+`;
+
 export default function Task({
 	item, sectionId, projectId, token,
 }) {
@@ -126,8 +154,10 @@ export default function Task({
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
+	const [setTimeItTook, setSetTimeItTook] = useState(false);
 
 	const dateRef = useRef();
+	const setSetTimeItTookRef = useRef();
 
 	useOnClickOutside(dateRef, () => {
 		setEditDueDate(false);
@@ -135,31 +165,59 @@ export default function Task({
 
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 
+	function finishItemCallback(unit) {
+		finishItem({
+			variables: {
+				itemId: item.id,
+				token,
+				timeItTook: unit,
+			},
+		});
+		setSetTimeItTook(false);
+	}
+
 	return (
 		<TaskContainer>
 			<TaskAdd />
 			<TaskIcon status={item.status} type={item.type} />
 			<TaskContent>
 				<TaskHeader>
-					<TaskHeading>{item.name}</TaskHeading>
-					<TaskActions>
-						<ButtonLink to={`/app/tasks/${item.id}`}>
-							Modifier
-						</ButtonLink>
-						<Button
-							icon="✓"
-							onClick={() => finishItem({
-								variables: {
-									itemId: item.id,
-									sectionId,
-									projectId,
-									token,
-								},
-							})
-							}
-						>
-							Fait
-						</Button>
+					<TaskHeading small={setTimeItTook}>{item.name}</TaskHeading>
+					<TaskActions stayActive={setTimeItTook}>
+						{setTimeItTook ? (
+							<SetTimeContainer>
+								<SetTimeInfos>
+									<SetTimeHeadline>
+										Temps réellement passé
+									</SetTimeHeadline>
+									<SetTimeCaption>
+										Uniquement visible par vous
+									</SetTimeCaption>
+								</SetTimeInfos>
+								<UnitInput
+									innerRef={setSetTimeItTookRef}
+									unit={item.unit}
+									onBlur={() => {}}
+									onSubmit={finishItemCallback}
+									withButton
+									cancel={() => setSetTimeItTook(false)}
+								/>
+							</SetTimeContainer>
+						) : (
+							<>
+								<ButtonLink to={`/app/tasks/${item.id}`}>
+									Modifier
+								</ButtonLink>
+								{item.status !== 'FINISHED' && (
+									<Button
+										icon="✓"
+										onClick={() => setSetTimeItTook(true)}
+									>
+										Fait
+									</Button>
+								)}
+							</>
+						)}
 					</TaskActions>
 				</TaskHeader>
 				<TaskInfos>
@@ -204,6 +262,9 @@ export default function Task({
 										singular="jour"
 										plural="jours"
 									/>
+									{item.timeItTook !== undefined
+										&& item.status === 'FINISHED'
+										&& ` (${item.timeItTook - item.unit}) `}
 								</div>
 							)
 						}
@@ -301,13 +362,7 @@ export default function Task({
 										setEditCustomer(true);
 									}}
 								>
-									{clientName || (
-										<div
-											dangerouslySetInnerHTML={{
-												__html: '&mdash;',
-											}}
-										/>
-									)}
+									{clientName || <>&mdash;</>}
 								</div>
 							)
 						}

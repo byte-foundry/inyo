@@ -4,34 +4,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
-import {
-	Input, Button, gray30, primaryBlue,
-} from '../../utils/content';
 import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
-
-const Container = styled('div')`
-	display: flex;
-`;
-
-const Switch = styled('div')`
-	display: flex;
-	flex-direction: column;
-`;
-
-const SwitchButton = styled(Button)`
-	border-radius: 0;
-	padding: 0 5px;
-	flex: 1;
-	border: solid 1px ${gray30};
-	font-size: 13px;
-
-	${props => props.selected
-		&& `
-		background: ${primaryBlue};
-		color: #fff;
-		border: solid 1px ${primaryBlue};
-	`} border-left: none;
-`;
 
 const UnitInputContainer = styled('div')`
 	display: flex;
@@ -125,7 +98,9 @@ export default function ({unit, onBlur, onSubmit}) {
 			onSubmit={async (values, actions) => {
 				actions.setSubmitting(false);
 				try {
-					await onSubmit(parseFloat(values.unit));
+					const valueFloat = parseFloat(values.unit);
+
+					await onSubmit(isHours ? valueFloat / 8 : valueFloat);
 				}
 				catch (error) {
 					actions.setSubmitting(false);
@@ -146,7 +121,15 @@ export default function ({unit, onBlur, onSubmit}) {
 							}
 						/>
 						<UnitInputSwitch
-							onClick={() => setIsHours(!isHours)}
+							onClick={() => {
+								if (isHours) {
+									setFieldValue('unit', values.unit / 8);
+								}
+								else {
+									setFieldValue('unit', values.unit * 8);
+								}
+								setIsHours(!isHours);
+							}}
 						>
 							<UnitInputLabel>J</UnitInputLabel>
 							<UnitInputLabel>h</UnitInputLabel>
@@ -157,63 +140,4 @@ export default function ({unit, onBlur, onSubmit}) {
 			)}
 		</Formik>
 	);
-}
-
-class UnitInput extends React.Component {
-	state = {
-		isHours: false,
-		value: this.props.value,
-		displayedValue: this.props.value,
-	};
-
-	handleChange = (e) => {
-		const {isHours} = this.state;
-		const {value} = e.target;
-
-		this.setState({
-			value: isHours ? value / 8 : value,
-			displayedValue: value,
-		});
-		this.props.onChange({value: isHours ? value / 8 : value});
-	};
-
-	toggleHours = (isHours) => {
-		this.setState(state => ({
-			isHours,
-			displayedValue: isHours ? state.value * 8 : state.value,
-		}));
-	};
-
-	render() {
-		const {
-			onChange, name, id, ...props
-		} = this.props;
-		const {isHours, displayedValue} = this.state;
-
-		return (
-			<Container>
-				<Input
-					{...props}
-					onChange={this.handleChange}
-					value={displayedValue}
-				/>
-				<Switch>
-					<SwitchButton
-						theme="Outline"
-						onClick={() => this.toggleHours(false)}
-						selected={!isHours}
-					>
-						Jours
-					</SwitchButton>
-					<SwitchButton
-						theme="Outline"
-						onClick={() => this.toggleHours(true)}
-						selected={isHours}
-					>
-						Heures
-					</SwitchButton>
-				</Switch>
-			</Container>
-		);
-	}
 }

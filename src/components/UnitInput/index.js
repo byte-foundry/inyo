@@ -4,7 +4,11 @@ import useOnClickOutside from 'use-onclickoutside';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 
-import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
+import {
+	primaryPurple,
+	primaryWhite,
+	Button,
+} from '../../utils/new/design-system';
 
 const UnitInputContainer = styled('div')`
 	display: flex;
@@ -74,9 +78,21 @@ const UnitInputSlider = styled('span')`
 	}
 `;
 
-export default function ({unit, onBlur, onSubmit}) {
+const UnitInputForm = styled('form')`
+	display: flex;
+	flex-flow: row nowrap;
+`;
+
+export default function ({
+	unit,
+	onBlur,
+	onSubmit,
+	innerRef,
+	withButton,
+	cancel,
+}) {
 	const [isHours, setIsHours] = useState(false);
-	const inputRef = useRef(null);
+	const inputRef = innerRef || useRef();
 	const containerRef = useRef(null);
 
 	useEffect(() => {
@@ -95,12 +111,12 @@ export default function ({unit, onBlur, onSubmit}) {
 			validationSchema={Yup.object().shape({
 				unit: Yup.number().required(),
 			})}
-			onSubmit={async (values, actions) => {
+			onSubmit={(values, actions) => {
 				actions.setSubmitting(false);
 				try {
 					const valueFloat = parseFloat(values.unit);
 
-					await onSubmit(isHours ? valueFloat / 8 : valueFloat);
+					onSubmit(isHours ? valueFloat / 8 : valueFloat);
 				}
 				catch (error) {
 					actions.setSubmitting(false);
@@ -109,7 +125,7 @@ export default function ({unit, onBlur, onSubmit}) {
 			}}
 		>
 			{({handleSubmit, values, setFieldValue}) => (
-				<form onSubmit={handleSubmit}>
+				<UnitInputForm onSubmit={handleSubmit}>
 					<UnitInputContainer ref={containerRef}>
 						<UnitInputInput
 							id="unit"
@@ -136,7 +152,17 @@ export default function ({unit, onBlur, onSubmit}) {
 							<UnitInputSlider isHours={isHours} />
 						</UnitInputSwitch>
 					</UnitInputContainer>
-				</form>
+					{withButton && (
+						<>
+							<Button textIcon tiny type="submit">
+								✓
+							</Button>
+							<Button grey onClick={cancel}>
+								Cancel
+							</Button>
+						</>
+					)}
+				</UnitInputForm>
 			)}
 		</Formik>
 	);

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
+import {Loading} from '../../../utils/content';
 
 import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
@@ -20,42 +21,75 @@ const TaskAndArianne = styled('div')`
 	max-width: 1200px;
 `;
 
-function TasksList({location, history}) {
-	const query = new URLSearchParams(location.search);
-	const {data, error} = useQuery(GET_ALL_TASKS);
+function TasksListContainer({linkedCustomerId}) {
+	const {data, error} = useQuery(GET_ALL_TASKS, {
+		variables: {
+			linkedCustomerId: linkedCustomerId || undefined,
+		},
+	});
 
 	if (error) throw error;
-
-	const setProjectSelected = (projectId) => {
-		const newQuery = new URLSearchParams(query);
-
-		newQuery.set('projectId', projectId);
-
-		history.push(`/app/tasks?${newQuery.toString()}`);
-	};
-
-	const setCustomerSelected = (customerId) => {
-		const newQuery = new URLSearchParams(query);
-
-		newQuery.set('customerId', customerId);
-
-		history.push(`/app/tasks?${newQuery.toString()}`);
-	};
 
 	const {tasks} = data.me;
 
 	// order by creation date
 	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+	return <TasksListComponent items={tasks} />;
+}
+
+function TasksList({location, history}) {
+	const query = new URLSearchParams(location.search);
+	const linkedCustomerId = query.get('customerId');
+	const projectId = query.get('projectId');
+
+	const setProjectSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedProjectId} = selected;
+
+			newQuery.set('projectId', selectedProjectId);
+		}
+		else if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
+	const setCustomerSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedCustomerId} = selected;
+
+			newQuery.set('customerId', selectedCustomerId);
+		}
+		else if (newQuery.has('customerId')) {
+			newQuery.delete('customerId');
+		}
+
+		if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
 	return (
 		<Container>
 			<TaskAndArianne>
 				<ArianneThread
+					projectId={projectId}
+					linkedCustomerId={linkedCustomerId}
 					selectCustomer={setCustomerSelected}
 					selectProjects={setProjectSelected}
 				/>
 				<CreateTask />
-				<TasksListComponent items={tasks} />
+				<Suspense fallback={<Loading />}>
+					<TasksListContainer linkedCustomerId={linkedCustomerId} />
+				</Suspense>
 			</TaskAndArianne>
 			{query.get('projectId') && (
 				<SidebarProjectInfos projectId={query.get('projectId')} />

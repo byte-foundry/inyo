@@ -333,10 +333,10 @@ export const GET_ITEM_DETAILS = gql`
 export const GET_ALL_TASKS = gql`
 	${ITEM_FRAGMENT}
 
-	query getAllTasks {
+	query getAllTasks($linkedCustomerId: ID) {
 		me {
 			id
-			tasks {
+			tasks(filter: {linkedCustomerId: $linkedCustomerId}) {
 				...ItemFragment
 			}
 		}

@@ -276,10 +276,12 @@ export default function Task({
 									id="projects"
 									list={customers}
 									defaultMenuIsOpen={true}
-									defaultValue={{
-										value: item.linkedCustomer.id,
-										label: item.linkedCustomer.name,
-									}}
+									defaultValue={
+										item.linkedCustomer && {
+											value: item.linkedCustomer.id,
+											label: item.linkedCustomer.name,
+										}
+									}
 									autoFocus={true}
 									onChange={({value}) => {
 										updateItem({
@@ -300,7 +302,13 @@ export default function Task({
 										setEditCustomer(true);
 									}}
 								>
-									{clientName}
+									{clientName || (
+										<div
+											dangerouslySetInnerHTML={{
+												__html: '&mdash;',
+											}}
+										/>
+									)}
 								</div>
 							)
 						}

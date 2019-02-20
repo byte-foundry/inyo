@@ -80,15 +80,20 @@ const customSelectStyles = {
 };
 
 export function ArianneElem({
-	children, id, list, ...rest
+	children, id, list, selectedId, ...rest
 }) {
+	const options = list.map(item => ({value: item.id, label: item.name}));
+	const selectedItem = options.find(item => item.value === selectedId);
+
 	return (
 		<ArianneElemMain>
 			<Select
 				placeholder={children}
-				options={list.map(item => ({value: item.id, label: item.name}))}
+				options={options}
 				styles={customSelectStyles}
 				isSearchable
+				value={selectedItem}
+				hideSelectedOptions
 				{...rest}
 			/>
 			<ArianneArrow />
@@ -96,7 +101,12 @@ export function ArianneElem({
 	);
 }
 
-function ArianneThread({selectCustomer, selectProjects}) {
+function ArianneThread({
+	selectCustomer,
+	selectProjects,
+	linkedCustomerId,
+	projectId,
+}) {
 	const {
 		data: {
 			me: {customers},
@@ -106,11 +116,15 @@ function ArianneThread({selectCustomer, selectProjects}) {
 	const {
 		data: {
 			me: {
-				company: {projects},
+				company: {projects: projectsUnfiltered},
 			},
 		},
 		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS);
+
+	const projects = projectsUnfiltered.filter(
+		project => !linkedCustomerId || project.customer.id === linkedCustomerId,
+	);
 
 	if (errorsProject) throw errorsProject;
 	if (errorsCustomers) throw errorsCustomers;
@@ -122,10 +136,17 @@ function ArianneThread({selectCustomer, selectProjects}) {
 				list={customers}
 				onChange={selectCustomer}
 				isClearable={true}
+				selectedId={linkedCustomerId}
 			>
 				Tous les clients
 			</ArianneElem>
-			<ArianneElem id="projects" list={projects}>
+			<ArianneElem
+				id="projects"
+				list={projects}
+				onChange={selectProjects}
+				isClearable={true}
+				selectedId={projectId}
+			>
 				Projets
 			</ArianneElem>
 			<ArianneElem list={customers}>Tags</ArianneElem>

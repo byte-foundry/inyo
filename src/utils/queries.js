@@ -142,6 +142,7 @@ export const GET_PROJECT_INFOS = gql`
 			deadline
 			daysUntilDeadline
 			notifyActivityToCustomer
+			total
 			issuer {
 				name
 				email

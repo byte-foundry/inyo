@@ -5,6 +5,7 @@ import {useQuery} from 'react-apollo-hooks';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
 
+import ProjectList from '../../../components/ProjectTasksList';
 import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
@@ -21,10 +22,11 @@ const TaskAndArianne = styled('div')`
 	max-width: 1200px;
 `;
 
-function TasksListContainer({linkedCustomerId}) {
+function TasksListContainer({projectId, linkedCustomerId}) {
 	const {data, error} = useQuery(GET_ALL_TASKS, {
 		variables: {
 			linkedCustomerId: linkedCustomerId || undefined,
+			// projectId: projectId || undefined,
 		},
 	});
 
@@ -34,6 +36,16 @@ function TasksListContainer({linkedCustomerId}) {
 
 	// order by creation date
 	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+	if (projectId) {
+		return (
+			<ProjectList
+				items={tasks.filter(
+					item => item.section && item.section.project.id === projectId,
+				)}
+			/>
+		);
+	}
 
 	return <TasksListComponent items={tasks} />;
 }
@@ -88,7 +100,10 @@ function TasksList({location, history}) {
 				/>
 				<CreateTask />
 				<Suspense fallback={<Loading />}>
-					<TasksListContainer linkedCustomerId={linkedCustomerId} />
+					<TasksListContainer
+						projectId={projectId}
+						linkedCustomerId={linkedCustomerId}
+					/>
 				</Suspense>
 			</TaskAndArianne>
 			{query.get('projectId') && (

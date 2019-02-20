@@ -18,6 +18,8 @@ export const ITEM_FRAGMENT = gql`
 
 		section {
 			id
+			name
+			position
 			project {
 				id
 				deadline

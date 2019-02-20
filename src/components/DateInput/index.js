@@ -10,15 +10,16 @@ import Plural from '../Plural';
 const TaskDateInput = styled('div')`
 	position: absolute;
 	display: flex;
-	left: calc(100% + 5px);
+	${props => (props.position === 'left'
+		? 'right: calc(100% + 5px);'
+		: 'left: calc(100% + 5px);')}
 	top: 0px;
 	z-index: 1;
 `;
 
 const MarginMessage = styled('div')`
 	color: ${primaryGrey};
-	width: 200px;
-	margin-left: 15px;
+	margin: 20px;
 	font-style: italic;
 `;
 
@@ -41,6 +42,7 @@ export default function ({
 	duration,
 	noInfo,
 	startDate = moment(),
+	position,
 	...rest
 }) {
 	const [focused, setFocused] = useState(false);
@@ -49,28 +51,30 @@ export default function ({
 	const margin = currentDate.diff(moment(), 'days') - duration;
 
 	return (
-		<>
-			{rest.date.format('DD/MM/YYYY')}
-			<TaskDateInput ref={innerRef}>
-				<InyoDayPickerSingleDateController
-					focused={focused}
-					onFocusChange={setFocused}
-					onDayMouseEnter={(day) => {
-						if (!day.isBefore(moment())) {
-							setCurrentDate(day);
-						}
-					}}
-					isDayBlocked={day => day.isBefore(startDate)}
-					{...rest}
-				/>
-				{!noInfo && (
+		<TaskDateInput ref={innerRef} position={position}>
+			<InyoDayPickerSingleDateController
+				focused={focused}
+				onFocusChange={setFocused}
+				onDayMouseEnter={(day) => {
+					if (!day.isBefore(moment())) {
+						setCurrentDate(day);
+					}
+				}}
+				isDayBlocked={day => day.isBefore(startDate)}
+				renderCalendarInfo={() => !noInfo && (
 					<MarginMessage>
-						Cela vous laisse {margin}{' '}
-						<Plural value={margin} singular="jour" plural="jours" />{' '}
-						pour commencer cette tâche
+							Cela vous laisse {margin}{' '}
+						<Plural
+							value={margin}
+							singular="jour"
+							plural="jours"
+						/>{' '}
+							pour commencer cette tâche
 					</MarginMessage>
-				)}
-			</TaskDateInput>
-		</>
+				)
+				}
+				{...rest}
+			/>
+		</TaskDateInput>
 	);
 }

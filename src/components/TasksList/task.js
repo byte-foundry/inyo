@@ -217,30 +217,35 @@ export default function Task({
 								}
 							>
 								{editDueDate ? (
-									<DateInput
-										innerRef={dateRef}
-										date={moment(
+									<>
+										{moment(
 											item.dueDate || new Date(),
-										)}
-										onDateChange={(date) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													dueDate: date.toISOString(),
-												},
-												optimisticResponse: {
-													__typename: 'Mutation',
-													updateItem: {
-														__typename: 'Item',
-														...item,
+										).format('DD/MM/YYYY')}
+										<DateInput
+											innerRef={dateRef}
+											date={moment(
+												item.dueDate || new Date(),
+											)}
+											onDateChange={(date) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
 														dueDate: date.toISOString(),
 													},
-												},
-											});
-											setEditDueDate(false);
-										}}
-										duration={item.unit}
-									/>
+													optimisticResponse: {
+														__typename: 'Mutation',
+														updateItem: {
+															__typename: 'Item',
+															...item,
+															dueDate: date.toISOString(),
+														},
+													},
+												});
+												setEditDueDate(false);
+											}}
+											duration={item.unit}
+										/>
+									</>
 								) : (
 									<>
 										{(item.dueDate && (
@@ -255,13 +260,7 @@ export default function Task({
 													plural="jours"
 												/>
 											</>
-										)) || (
-											<div
-												dangerouslySetInnerHTML={{
-													__html: '&mdash;',
-												}}
-											/>
-										)}
+										)) || <>&mdash;</>}
 									</>
 								)}
 							</TaskDateContainer>

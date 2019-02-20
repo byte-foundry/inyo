@@ -1,13 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
+import moment from 'moment';
+import useOnClickOutside from 'use-onclickoutside';
 
 import ConfirmModal from '../ConfirmModal';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import {ModalContainer} from '../../utils/content';
 import StaticCustomerView from '../StaticCustomerView';
 import DuplicateProjectButton from '../DuplicateProjectButton';
+import DateInput from '../DateInput';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 
@@ -20,6 +23,7 @@ import {
 	primaryGrey,
 	P,
 } from '../../utils/new/design-system';
+import Plural from '../Plural';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -77,11 +81,16 @@ const BigNumber = styled(P)`
 	color: ${primaryGrey};
 `;
 
+const DateContainer = styled('div')`
+	position: relative;
+`;
+
 const SidebarProjectInfos = ({
 	projectId,
 	hasClientAttributedTasks,
 	history,
 }) => {
+	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
 	const [askNotifyActivityConfirm, setAskNotifyActivityConfirm] = useState(
 		null,
@@ -90,6 +99,12 @@ const SidebarProjectInfos = ({
 	const removeProject = useMutation(REMOVE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
+	});
+
+	const dateRef = useRef();
+
+	useOnClickOutside(dateRef, () => {
+		setEditDueDate(false);
 	});
 
 	if (error) throw error;
@@ -170,10 +185,58 @@ const SidebarProjectInfos = ({
 				</PreviewModal>
 			)}
 
+			{project.deadline !== null && (
+				<SubSection>
+					<SubHeading>Deadline</SubHeading>
+					<DateContainer
+						onClick={() => !editDueDate && setEditDueDate(true)}
+					>
+						<BigNumber>
+							{(project.deadline
+								&& moment(project.deadline).format(
+									'DD/MM/YYYY',
+								)) || <>&mdash;</>}
+						</BigNumber>
+						{editDueDate && (
+							<DateInput
+								innerRef={dateRef}
+								date={moment(project.deadline || new Date())}
+								onDateChange={(date) => {
+									updateProject({
+										variables: {
+											projectId: project.id,
+											deadline: date.toISOString(),
+										},
+										optimisticResponse: {
+											__typename: 'Mutation',
+											updateProject: {
+												__typename: 'Project',
+												...project,
+												dueDate: date.toISOString(),
+											},
+										},
+									});
+									setEditDueDate(false);
+								}}
+								duration={project.total}
+								position="left"
+							/>
+						)}
+					</DateContainer>
+				</SubSection>
+			)}
+
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
-					<BigNumber>{project.daysUntilDeadline} jours</BigNumber>
+					<BigNumber>
+						{project.daysUntilDeadline}&nbsp;
+						<Plural
+							value={project.daysUntilDeadline}
+							singular="jour"
+							plural="jours"
+						/>
+					</BigNumber>
 				</SubSection>
 			)}
 

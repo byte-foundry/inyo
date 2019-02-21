@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
+import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
@@ -20,6 +21,8 @@ import {
 	TaskInfosItem,
 	primaryPurple,
 	primaryGrey,
+	lightGrey,
+	mediumGrey,
 } from '../../utils/new/design-system';
 
 import {ArianneElem} from '../ArianneThread';
@@ -32,6 +35,21 @@ export const TaskContainer = styled('div')`
 	position: relative;
 	margin-bottom: calc(2rem - 16px);
 	cursor: grab;
+	z-index: 100;
+
+	&:hover {
+		&:after {
+			content: '';
+			display: block;
+			width: 12px;
+			height: 18px;
+			background: url(${DragIconSvg});
+			background-repeat: no-repeat;
+			position: absolute;
+			left: -1.2rem;
+			top: 2.3rem;
+		}
+	}
 `;
 
 const TaskAdd = styled('div')``;
@@ -52,14 +70,14 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: 30px;
+	margin-top: 2rem;
 	margin-bottom: 30px;
 
 	&:after,
 	&:before {
 		content: '';
 		display: block;
-		border-left: 1px solid #ddd;
+		border-left: 1px solid ${mediumGrey};
 		position: absolute;
 		left: 13px;
 	}
@@ -71,7 +89,7 @@ const TaskIcon = styled('div')`
 
 	&:after {
 		top: 73px;
-		height: 29px;
+		height: 60%;
 	}
 `;
 
@@ -99,11 +117,26 @@ const TaskHeader = styled('div')`
 	display: flex;
 	justify-content: space-between;
 	align-items: baseline;
+	position: relative;
+	z-index: 100;
 
 	&:hover ${TaskActions} {
 		opacity: 1;
 		margin-right: 0;
 		pointer-events: all;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -1rem;
+			top: 0;
+			right: -1rem;
+			bottom: 0;
+			z-index: -1;
+			border-radius: 8px;
+		}
 	}
 `;
 

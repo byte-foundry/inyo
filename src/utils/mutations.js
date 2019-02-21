@@ -250,10 +250,10 @@ export const CREATE_PROJECT = gql`
 	# creating project with a customer id or a new customer
 	mutation createProject(
 		$customerId: ID
-		$customer: CustomerInput
-		$template: ProjectTemplate!
-		$sections: [SectionInput!]
 		$name: String
+		$customer: CustomerInput
+		$template: ProjectTemplate
+		$sections: [SectionInput!]
 		$deadline: DateTime
 		$notifyActivityToCustomer: Boolean
 	) {

@@ -5,7 +5,7 @@ import styled from '@emotion/styled/macro';
 import TaskInput from '../TaskInput';
 import {TaskContainer} from '../TasksList/task';
 
-import {ADD_ITEM} from '../../utils/mutations';
+import {ADD_ITEM, CREATE_PROJECT} from '../../utils/mutations';
 
 const TaskInputContainer = styled('div')`
 	& + ${TaskContainer} {
@@ -13,12 +13,24 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = () => {
+const CreateTask = ({setProjectSelected}) => {
 	const createTask = useMutation(ADD_ITEM);
+	const createProject = useMutation(CREATE_PROJECT);
 
 	return (
 		<TaskInputContainer>
-			<TaskInput onSubmitTask={task => createTask({variables: task})} />
+			<TaskInput
+				onSubmitTask={task => createTask({variables: task})}
+				onSubmitProject={async (name) => {
+					const {
+						data: {
+							createProject: {id},
+						},
+					} = await createProject({variables: name});
+
+					setProjectSelected({value: id});
+				}}
+			/>
 		</TaskInputContainer>
 	);
 };

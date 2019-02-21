@@ -157,9 +157,6 @@ export default function ({
 							<Button textIcon tiny type="submit">
 								✓
 							</Button>
-							<Button grey onClick={cancel}>
-								Cancel
-							</Button>
 						</>
 					)}
 				</UnitInputForm>

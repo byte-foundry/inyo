@@ -35,7 +35,7 @@ export const TaskContainer = styled('div')`
 	position: relative;
 	margin-bottom: calc(2rem - 16px);
 	cursor: grab;
-	z-index: 100;
+	z-index: 1;
 
 	&:after {
 		content: '';
@@ -55,7 +55,7 @@ export const TaskContainer = styled('div')`
 	&:hover {
 		&:after {
 			opacity: 1;
-			left: -1.2rem;
+			left: -1.8rem;
 		}
 	}
 `;
@@ -126,7 +126,7 @@ const TaskHeader = styled('div')`
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
-	z-index: 100;
+	z-index: 1;
 
 	&:hover {
 		&:before {

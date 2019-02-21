@@ -2,16 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled/macro';
 
 import {H4, H5} from '../../utils/content';
-import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
-import {SubHeading, P} from '../../utils/new/design-system';
+import {P} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;
-`;
-
-const ClientTitle = styled(SubHeading)`
-	display: flex;
-	justify-content: space-between;
 `;
 
 const ContactName = styled(H5)`
@@ -42,22 +36,12 @@ const titleEnumToTitle = {
 	MADAME: 'Mme',
 };
 
-const PencilElem = styled(Pencil)`
-	cursor: pointer;
-	width: 15px;
-	margin-top: -2px;
-`;
-
 const CustomerNameAndAddress = ({
 	customer: {
 		name, firstName, lastName, email, title, phone,
 	},
 }) => (
 	<ClientAddress>
-		<ClientTitle>
-			Votre client
-			{/* <PencilElem onClick={() => this.setState({editing: true})} /> */}
-		</ClientTitle>
 		<CompanyName>{name}</CompanyName>
 		<ContactName>
 			{titleEnumToTitle[title]} {firstName} {lastName}

@@ -26,7 +26,6 @@ export const Body = styled('div')`
 
 export const Button = styled('button')`
 	font-size: 13px;
-	margin-left: 5px;
 	font-family: 'Work Sans', sans-serif;
 	padding: 0.3rem 0.8rem;
 	border: 2px solid #333;

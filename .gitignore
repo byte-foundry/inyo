@@ -2,6 +2,7 @@
 
 # vim
 *.sw*
+.tern-project
 
 # dependencies
 /node_modules

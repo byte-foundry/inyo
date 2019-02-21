@@ -37,17 +37,25 @@ export const TaskContainer = styled('div')`
 	cursor: grab;
 	z-index: 100;
 
+	&:after {
+		content: '';
+		display: block;
+		width: 12px;
+		height: 18px;
+		background: url(${DragIconSvg});
+		background-repeat: no-repeat;
+		position: absolute;
+		left: -3rem;
+		top: 2.3rem;
+
+		opacity: 0;
+		transition: all 300ms ease;
+	}
+
 	&:hover {
 		&:after {
-			content: '';
-			display: block;
-			width: 12px;
-			height: 18px;
-			background: url(${DragIconSvg});
-			background-repeat: no-repeat;
-			position: absolute;
+			opacity: 1;
 			left: -1.2rem;
-			top: 2.3rem;
 		}
 	}
 `;
@@ -120,11 +128,7 @@ const TaskHeader = styled('div')`
 	position: relative;
 	z-index: 100;
 
-	&:hover ${TaskActions} {
-		opacity: 1;
-		margin-right: 0;
-		pointer-events: all;
-
+	&:hover {
 		&:before {
 			content: '';
 			display: block;
@@ -137,6 +141,12 @@ const TaskHeader = styled('div')`
 			z-index: -1;
 			border-radius: 8px;
 		}
+	}
+
+	&:hover ${TaskActions} {
+		opacity: 1;
+		margin-right: 0;
+		pointer-events: all;
 	}
 `;
 

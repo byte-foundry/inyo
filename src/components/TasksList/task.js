@@ -116,7 +116,7 @@ const TaskActions = styled('div')`
 const TaskHeader = styled('div')`
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: center;
 	position: relative;
 	z-index: 100;
 

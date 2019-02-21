@@ -6,6 +6,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 
 import {ITEM_TYPES} from '../../utils/constants';
+import {Button} from '../../utils/new/design-system';
 
 const Container = styled('div')`
 	font-size: 14px;
@@ -15,6 +16,19 @@ const InputContainer = styled('div')`
 	display: flex;
 	align-items: center;
 	padding-left: 0.3rem;
+`;
+
+const InputButtonWrapper = styled('div')`
+	position: relative;
+`;
+
+const InputButtonContainer = styled('div')`
+	position: absolute;
+	display: flex;
+	flex-flow: column nowrap;
+	right: calc(-100% + 10px);
+	top: -13px;
+	width: 145px;
 `;
 
 const Input = styled('input')`
@@ -128,6 +142,19 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 							: 'Ajouter une tâche'
 					}
 				/>
+				<InputButtonWrapper>
+					<InputButtonContainer>
+						<Button icon="↵" grey>
+							Creér la tâche
+						</Button>
+						<Button
+							icon="↑"
+							onClick={() => onSubmitProject({name: value})}
+						>
+							Creér un projet
+						</Button>
+					</InputButtonContainer>
+				</InputButtonWrapper>
 			</InputContainer>
 			{((value.startsWith('/') && focus) || focusByClick) && (
 				<TaskTypeDropdown

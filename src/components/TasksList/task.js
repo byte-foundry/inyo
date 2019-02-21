@@ -163,6 +163,10 @@ export default function Task({
 		setEditDueDate(false);
 	});
 
+	useOnClickOutside(setSetTimeItTookRef, () => {
+		setTimeItTook(false);
+	});
+
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 
 	function finishItemCallback(unit) {

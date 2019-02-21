@@ -80,7 +80,7 @@ export const ITEM_TYPES = [
 		iconUrl: TaskIconUrl,
 		iconUrlValidated: TaskIconValidatedUrl,
 		type: 'DEFAULT',
-		name: 'Tâche par défaut',
+		name: 'Basique',
 		description: 'Une tâche dont vous êtes responsable',
 	},
 	{

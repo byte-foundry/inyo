@@ -31,15 +31,16 @@ const Header = styled('div')``;
 
 const Metas = styled('div')`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-row-gap: 0.5em;
+	grid-template-columns: 300px 1fr;
+	grid-row-gap: 0.8em;
 	color: ${gray50};
-	padding-bottom: 1em;
+	padding-bottom: 2rem;
+	font-size: 14px;
 `;
 
 const Meta = styled('div')`
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 
 	svg {
 		margin-right: 15px;
@@ -47,7 +48,7 @@ const Meta = styled('div')`
 `;
 
 const MetaLabel = styled('div')`
-	flex: 1;
+	margin-right: 1rem;
 `;
 
 const MetaText = styled('span')`
@@ -91,6 +92,13 @@ const StickyHeader = styled('div')`
 const Title = styled(TaskHeading)`
 	display: flex;
 	align-items: center;
+	margin: 2rem 0;
+
+	span {
+		border: 1px solid transparent;
+		padding: 15px 18px 16px;
+		width: 100%;
+	}
 `;
 
 const TaskHeadingIcon = styled('div')`

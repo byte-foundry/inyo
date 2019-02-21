@@ -162,7 +162,7 @@ const ClientPreviewIcon = styled(EyeIcon)`
 `;
 
 const PreviewModal = styled(ModalContainer)`
-	min-height: 600px;
+	min-height: 500px;
 	padding: 0;
 `;
 

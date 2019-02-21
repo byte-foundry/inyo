@@ -9,6 +9,8 @@ export const primaryWhite = '#fff';
 export const primaryRed = '#ff3366';
 export const primaryGrey = '#888';
 export const accentGrey = '#c7c7c7';
+export const lightGrey = '#fafafa';
+export const mediumGrey = '#eee';
 export const primaryBlack = '#333';
 
 const shevy = new Shevy({
@@ -181,7 +183,8 @@ export const CommentIcon = styled('div')`
 	position: relative;
 	width: 22px;
 	height: 16px;
-	background-color: ${accentGrey};
+	margin-top: -2px;
+	background-color: ${mediumGrey};
 	color: ${(props) => {
 		if (props.new) {
 			return primaryWhite;
@@ -215,7 +218,7 @@ export const CommentIcon = styled('div')`
 		top: 100%;
 		border-style: solid;
 		border-width: 4px 4px 0 4px;
-		border-color: ${accentGrey} transparent transparent transparent;
+		border-color: ${mediumGrey} transparent transparent transparent;
 	}
 `;
 

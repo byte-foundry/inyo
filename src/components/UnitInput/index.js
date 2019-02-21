@@ -22,7 +22,7 @@ const UnitInputInput = styled('input')`
 	border-radius: 20px;
 	height: 27px;
 	border: 1px solid transparent;
-	font-weight: 600;
+	font-weight: 500;
 	color: ${primaryPurple};
 `;
 

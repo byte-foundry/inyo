@@ -348,7 +348,7 @@ export const ToggleButton = styled('span')`
 export function ModalContainer({size, ...props}) {
 	const style = {
 		width: '50vw',
-		minWidth: '600px',
+		minWidth: '500px',
 	};
 
 	if (size === 'small') {

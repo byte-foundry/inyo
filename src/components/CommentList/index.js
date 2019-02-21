@@ -16,7 +16,7 @@ import {
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
-import {Button} from '../../utils/new/design-system';
+import {Button, primaryPurple} from '../../utils/new/design-system';
 
 import Comment from '../Comment';
 
@@ -45,7 +45,7 @@ const ItemComment = styled('textarea')`
 `;
 
 const Empty = styled('p')`
-	color: ${primaryBlue};
+	color: ${primaryPurple};
 `;
 
 class CommentList extends Component {

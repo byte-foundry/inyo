@@ -39,11 +39,11 @@ const TaskAdd = styled('div')``;
 const TaskIcon = styled('div')`
 	width: 26px;
 	height: 26px;
-	border-radius: 50%;
 	margin-right: 30px;
-	background: url(${(props) => {
+	background: center no-repeat
+		url(${(props) => {
 		const typeInfos
-			= ITEM_TYPES.find(t => t.type === props.type) || ITEM_TYPES[0];
+				= ITEM_TYPES.find(t => t.type === props.type) || ITEM_TYPES[0];
 
 		let icon = typeInfos.iconUrl;
 
@@ -129,7 +129,7 @@ const SetTimeInfos = styled('div')`
 const SetTimeHeadline = styled('div')`
 	color: ${primaryPurple};
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 500;
 	line-height: 1.3;
 `;
 

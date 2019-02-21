@@ -29,7 +29,10 @@ const List = styled('ul')`
 `;
 
 const ListItemIcon = styled('div')`
-	margin: 0 1.5em;
+	margin: 0.15rem 1.5rem;
+	svg {
+		zoom: 0.7;
+	}
 `;
 
 const ListItemTitle = styled('div')`

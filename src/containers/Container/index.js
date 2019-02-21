@@ -19,6 +19,12 @@ Sentry.init({
 });
 ReactGA.initialize('UA-41962243-14');
 
+const query = new URLSearchParams(document.location.search);
+
+if (query.has('dimension')) {
+	ReactGA.set({dimension1: query.get('dimension')});
+}
+
 const withTracker = (WrappedComponent, options = {}) => {
 	const trackPage = (page) => {
 		ReactGA.set({

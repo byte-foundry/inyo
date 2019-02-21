@@ -290,6 +290,7 @@ export const UPDATE_PROJECT = gql`
 			id
 			name
 			deadline
+			daysUntilDeadline
 			notifyActivityToCustomer
 		}
 	}

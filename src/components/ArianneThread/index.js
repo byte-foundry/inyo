@@ -15,8 +15,6 @@ const ArianneElemMain = styled('div')`
 	flex: 0 0 170px;
 `;
 
-const ArianneArrow = styled('div')``;
-
 const customSelectStyles = {
 	dropdownIndicator: styles => ({
 		...styles,
@@ -96,7 +94,6 @@ export function ArianneElem({
 				hideSelectedOptions
 				{...rest}
 			/>
-			<ArianneArrow />
 		</ArianneElemMain>
 	);
 }
@@ -135,7 +132,7 @@ function ArianneThread({
 				id="clients"
 				list={customers}
 				onChange={selectCustomer}
-				isClearable={true}
+				isClearable
 				selectedId={linkedCustomerId}
 			>
 				Tous les clients
@@ -144,7 +141,7 @@ function ArianneThread({
 				id="projects"
 				list={projects}
 				onChange={selectProjects}
-				isClearable={true}
+				isClearable
 				selectedId={projectId}
 			>
 				Projets

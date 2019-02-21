@@ -5,17 +5,6 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
 
-import ConfirmModal from '../ConfirmModal';
-import CustomerNameAndAddress from '../CustomerNameAndAddress';
-import {ModalContainer} from '../../utils/content';
-import StaticCustomerView from '../StaticCustomerView';
-import DuplicateProjectButton from '../DuplicateProjectButton';
-import DateInput from '../DateInput';
-
-import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
-
-import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {
 	SubHeading,
 	Button,
@@ -23,12 +12,25 @@ import {
 	primaryGrey,
 	P,
 } from '../../utils/new/design-system';
+import ConfirmModal from '../ConfirmModal';
+import CustomerNameAndAddress from '../CustomerNameAndAddress';
+import {ModalContainer} from '../../utils/content';
+import StaticCustomerView from '../StaticCustomerView';
+import DuplicateProjectButton from '../DuplicateProjectButton';
+import DateInput from '../DateInput';
 import Plural from '../Plural';
+import CustomerModal from '../CustomerModal';
+
+import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
+import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+
+import {GET_PROJECT_INFOS} from '../../utils/queries';
+import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 
 const Aside = styled('aside')`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: stretch;
 	width: 270px;
 	padding-left: 30px;
 `;
@@ -85,11 +87,24 @@ const DateContainer = styled('div')`
 	position: relative;
 `;
 
+const ClientTitle = styled(SubHeading)`
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+`;
+
+const PencilElem = styled(Pencil)`
+	cursor: pointer;
+	width: 15px;
+	margin-top: -2px;
+`;
+
 const SidebarProjectInfos = ({
 	projectId,
 	hasClientAttributedTasks,
 	history,
 }) => {
+	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
 	const [askNotifyActivityConfirm, setAskNotifyActivityConfirm] = useState(
@@ -118,59 +133,103 @@ const SidebarProjectInfos = ({
 			</SubSection> */}
 
 			<SubSection>
-				<CustomerNameAndAddress customer={project.customer} />
-			</SubSection>
+				<ClientTitle>
+					Votre client
+					<PencilElem onClick={() => setEditCustomer(true)} />
+				</ClientTitle>
+				{project.customer ? (
+					<>
+						<CustomerNameAndAddress customer={project.customer} />
+						<CheckBoxLabel>
+							<input
+								type="checkbox"
+								checked={project.notifyActivityToCustomer}
+								onChange={async () => {
+									if (project.notifyActivityToCustomer) {
+										const confirmed = await new Promise(
+											resolve => setAskNotifyActivityConfirm(
+												resolve,
+											),
+										);
 
-			<CheckBoxLabel>
-				<input
-					type="checkbox"
-					checked={project.notifyActivityToCustomer}
-					onChange={async () => {
-						if (project.notifyActivityToCustomer) {
-							const confirmed = await new Promise(resolve => setAskNotifyActivityConfirm(resolve));
+										setAskNotifyActivityConfirm(null);
 
-							setAskNotifyActivityConfirm(null);
+										if (!confirmed) {
+											return;
+										}
+									}
 
-							if (!confirmed) {
-								return;
+									await updateProject({
+										variables: {
+											projectId: project.id,
+											notifyActivityToCustomer: !project.notifyActivityToCustomer,
+										},
+									});
+								}}
+							/>
+							Notifier mon client par email
+						</CheckBoxLabel>
+						{askNotifyActivityConfirm && (
+							<ConfirmModal
+								onConfirm={confirmed => askNotifyActivityConfirm(confirmed)
+								}
+								closeModal={() => askNotifyActivityConfirm(false)
+								}
+							>
+								<P>
+									En décochant cette option, votre client ne
+									recevra aucune notification de l'avancée de
+									votre projet.
+								</P>
+								{hasClientAttributedTasks && (
+									<P>
+										Cependant, certaines des tâches sont
+										attribuées à votre client et nécessitent
+										l'envoi d'emails à celui-ci. Désactiver
+										les notifications changera aussi
+										l'attribution de ces tâches et votre
+										client n'en sera pas averti.
+									</P>
+								)}
+								<P>Êtes-vous sûr de vouloir continuer?</P>
+							</ConfirmModal>
+						)}
+						<Button link onClick={() => setCustomerPreview(true)}>
+							<ClientPreviewIcon />
+							<span>Voir la vue de mon client</span>
+						</Button>
+					</>
+				) : (
+					<Button grey icon="+" onClick={() => setEditCustomer(true)}>
+						Ajouter un client
+					</Button>
+				)}
+
+				{isEditingCustomer && (
+					<CustomerModal
+						onValidate={(selected) => {
+							if (
+								project.customer
+								&& selected.customerId
+								&& project.customer.id !== selected.customerId
+							) {
+								return project;
 							}
-						}
 
-						await updateProject({
-							variables: {
-								projectId: project.id,
-								notifyActivityToCustomer: !project.notifyActivityToCustomer,
-							},
-						});
-					}}
-				/>
-				Notifier mon client par email
-			</CheckBoxLabel>
-			{askNotifyActivityConfirm && (
-				<ConfirmModal
-					onConfirm={confirmed => askNotifyActivityConfirm(confirmed)}
-					closeModal={() => askNotifyActivityConfirm(false)}
-				>
-					<P>
-						En décochant cette option, votre client ne recevra
-						aucune notification de l'avancée de votre projet.
-					</P>
-					{hasClientAttributedTasks && (
-						<P>
-							Cependant, certaines des tâches sont attribuées à
-							votre client et nécessitent l'envoi d'emails à
-							celui-ci. Désactiver les notifications changera
-							aussi l'attribution de ces tâches et votre client
-							n'en sera pas averti.
-						</P>
-					)}
-					<P>Êtes-vous sûr de vouloir continuer?</P>
-				</ConfirmModal>
-			)}
-			<Button link onClick={() => setCustomerPreview(true)}>
-				<ClientPreviewIcon />
-				<span>Voir la vue de mon client</span>
-			</Button>
+							return updateProject({
+								variables: {
+									projectId: project.id,
+									...selected,
+								},
+							});
+						}}
+						selectedCustomerId={
+							project.customer && project.customer.id
+						}
+						onDismiss={() => setEditCustomer(false)}
+					/>
+				)}
+			</SubSection>
 
 			{isCustomerPreviewOpen && (
 				<PreviewModal
@@ -188,41 +247,51 @@ const SidebarProjectInfos = ({
 			{project.deadline !== null && (
 				<SubSection>
 					<SubHeading>Deadline</SubHeading>
-					<DateContainer
-						onClick={() => !editDueDate && setEditDueDate(true)}
-					>
-						<BigNumber>
-							{(project.deadline
-								&& moment(project.deadline).format(
-									'DD/MM/YYYY',
-								)) || <>&mdash;</>}
-						</BigNumber>
-						{editDueDate && (
-							<DateInput
-								innerRef={dateRef}
-								date={moment(project.deadline || new Date())}
-								onDateChange={(date) => {
-									updateProject({
-										variables: {
-											projectId: project.id,
-											deadline: date.toISOString(),
-										},
-										optimisticResponse: {
-											__typename: 'Mutation',
-											updateProject: {
-												__typename: 'Project',
-												...project,
-												dueDate: date.toISOString(),
+					{project.deadline || editDueDate ? (
+						<DateContainer onClick={() => setEditDueDate(true)}>
+							<BigNumber>
+								{(project.deadline
+									&& moment(project.deadline).format(
+										'DD/MM/YYYY',
+									)) || <>&mdash;</>}
+							</BigNumber>
+							{editDueDate && (
+								<DateInput
+									innerRef={dateRef}
+									date={moment(
+										project.deadline || new Date(),
+									)}
+									onDateChange={(date) => {
+										updateProject({
+											variables: {
+												projectId: project.id,
+												deadline: date.toISOString(),
 											},
-										},
-									});
-									setEditDueDate(false);
-								}}
-								duration={project.total}
-								position="left"
-							/>
-						)}
-					</DateContainer>
+											optimisticResponse: {
+												__typename: 'Mutation',
+												updateProject: {
+													__typename: 'Project',
+													...project,
+													dueDate: date.toISOString(),
+												},
+											},
+										});
+										setEditDueDate(false);
+									}}
+									duration={project.total}
+									position="left"
+								/>
+							)}
+						</DateContainer>
+					) : (
+						<Button
+							grey
+							icon="+"
+							onClick={() => setEditDueDate(true)}
+						>
+							Ajouter une deadline
+						</Button>
+					)}
 				</SubSection>
 			)}
 

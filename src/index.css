@@ -1,3 +1,9 @@
+@font-face {
+	font-family: 'Work Sans', sans-serif;
+	font-style: italic;
+	src: url('/utils/fonts/WorkSans-Italic.otf') format('opentype');
+}
+
 body {
 	margin: 0;
 	padding: 0;

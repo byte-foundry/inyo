@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
+import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
@@ -20,6 +21,8 @@ import {
 	TaskInfosItem,
 	primaryPurple,
 	primaryGrey,
+	lightGrey,
+	mediumGrey,
 } from '../../utils/new/design-system';
 
 import {ArianneElem} from '../ArianneThread';
@@ -32,6 +35,28 @@ export const TaskContainer = styled('div')`
 	position: relative;
 	margin-bottom: calc(2rem - 16px);
 	cursor: grab;
+
+	&:after {
+		content: '';
+		display: block;
+		width: 12px;
+		height: 18px;
+		background: url(${DragIconSvg});
+		background-repeat: no-repeat;
+		position: absolute;
+		left: -3rem;
+		top: 2.3rem;
+
+		opacity: 0;
+		transition: all 300ms ease;
+	}
+
+	&:hover {
+		&:after {
+			opacity: 1;
+			left: -1.8rem;
+		}
+	}
 `;
 
 const TaskAdd = styled('div')``;
@@ -52,14 +77,14 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: 30px;
+	margin-top: 2rem;
 	margin-bottom: 30px;
 
 	&:after,
 	&:before {
 		content: '';
 		display: block;
-		border-left: 1px solid #ddd;
+		border-left: 1px solid ${mediumGrey};
 		position: absolute;
 		left: 13px;
 	}
@@ -71,7 +96,7 @@ const TaskIcon = styled('div')`
 
 	&:after {
 		top: 73px;
-		height: 29px;
+		height: 60%;
 	}
 `;
 
@@ -98,7 +123,23 @@ const TaskActions = styled('div')`
 const TaskHeader = styled('div')`
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: center;
+	position: relative;
+
+	&:hover {
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -1rem;
+			top: 0;
+			right: -1rem;
+			bottom: 0;
+			border-radius: 8px;
+			z-index: -1;
+		}
+	}
 
 	&:hover ${TaskActions} {
 		opacity: 1;

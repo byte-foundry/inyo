@@ -19,7 +19,7 @@ const Container = styled('div')`
 
 const TaskAndArianne = styled('div')`
 	flex: auto 1;
-	max-width: 1200px;
+	max-width: 980px;
 `;
 
 function TasksListContainer({projectId, linkedCustomerId}) {

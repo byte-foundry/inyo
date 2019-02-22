@@ -87,6 +87,7 @@ export default function ({
 	unit,
 	onBlur,
 	onSubmit,
+	onTab,
 	innerRef,
 	withButton,
 	cancel,
@@ -135,6 +136,11 @@ export default function ({
 							ref={inputRef}
 							onChange={e => setFieldValue('unit', e.target.value)
 							}
+							onKeyDown={(e) => {
+								if (e.key === 'Tab') {
+									onTab(e.target.value);
+								}
+							}}
 						/>
 						<UnitInputSwitch
 							onClick={() => {

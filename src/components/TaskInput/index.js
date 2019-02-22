@@ -4,12 +4,14 @@ import React, {useState, useRef} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
 import TaskTypeDropdown from '../TaskTypeDropdown';
+import {TaskInfosInputs} from '../TasksList/task';
 
 import {ITEM_TYPES} from '../../utils/constants';
 import {Button} from '../../utils/new/design-system';
 
 const Container = styled('div')`
 	font-size: 14px;
+	position: relative;
 `;
 
 const InputContainer = styled('div')`
@@ -18,6 +20,8 @@ const InputContainer = styled('div')`
 	padding-left: 0.3rem;
 	margin-left: -7px;
 `;
+
+const TaskInfosContainer = styled('div')``;
 
 const InputButtonWrapper = styled('div')`
 	position: relative;
@@ -91,6 +95,12 @@ const Icon = styled('div')`
 	}
 `;
 
+const TaskInfosInputsContainer = styled('div')`
+	position: absolute;
+	top: 54px;
+	left: 94px;
+`;
+
 const types = ITEM_TYPES;
 
 const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
@@ -98,6 +108,10 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
 	const [focusByClick, setFocusByClick] = useState(false);
+	const [moreInfosMode, setMoreInfosMode] = useState(false);
+	const [itemUnit, setItemUnit] = useState(0);
+	const [itemDueDate, setItemDueDate] = useState();
+	const [itemCustomer, setItemCustomer] = useState();
 	const ref = useRef();
 
 	useOnClickOutside(ref, () => {
@@ -132,6 +146,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 									name: value,
 								});
 								setValue('');
+								setMoreInfosMode(false);
 							}
 							else if (e.key === 'Enter') {
 								onSubmitTask({
@@ -139,11 +154,16 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 									type: type || 'DEFAULT',
 								});
 								setValue('');
+								setMoreInfosMode(false);
+							}
+							else if (e.key === 'Tab') {
+								setMoreInfosMode(true);
 							}
 						}
 						if (e.key === 'Escape') {
 							setValue('');
 							setFocusByClick(false);
+							setMoreInfosMode(false);
 						}
 					}}
 					placeholder={
@@ -168,6 +188,25 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					</InputButtonWrapper>
 				)}
 			</InputContainer>
+			{moreInfosMode && (
+				<TaskInfosInputsContainer>
+					<TaskInfosInputs
+						item={{
+							dueDate: itemDueDate,
+							unit: itemUnit,
+							linkedCustomer: itemCustomer,
+						}}
+						noComment
+						onDueDateSubmit={date => setItemDueDate(date)}
+						onCustomerSubmit={customer => setItemCustomer({
+							id: customer.value,
+							name: customer.label,
+						})
+						}
+						onUnitSubmit={unit => setItemUnit(unit)}
+					/>
+				</TaskInfosInputsContainer>
+			)}
 			{((value.startsWith('/') && focus) || focusByClick) && (
 				<TaskTypeDropdown
 					types={types}

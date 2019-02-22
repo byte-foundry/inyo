@@ -181,37 +181,161 @@ const SetTimeCaption = styled('div')`
 	line-height: 1.3;
 `;
 
-const me = {customers: []};
-
-export default function Task({
-	item, sectionId, projectId, token,
+export function TaskInfosInputs({
+	item,
+	noComment,
+	onDueDateSubmit,
+	onUnitSubmit,
+	onCustomerSubmit,
 }) {
-	const finishItem = useMutation(FINISH_ITEM);
-	const updateItem = useMutation(UPDATE_ITEM);
-	/* const {
-		data: {
-			me,
-		},
-		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS); */
-
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
-	const [setTimeItTook, setSetTimeItTook] = useState(false);
-
+	const {
+		data: {me},
+		errors: errorsCustomers,
+	} = useQuery(GET_ALL_CUSTOMERS);
 	const dateRef = useRef();
-	const setSetTimeItTookRef = useRef();
+	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 
 	useOnClickOutside(dateRef, () => {
 		setEditDueDate(false);
 	});
 
+	return (
+		<TaskInfos>
+			{!noComment && (
+				<TaskInfosItem>
+					<CommentIcon>
+						{item.comments.length > 0 ? item.comments.length : '+'}
+					</CommentIcon>
+				</TaskInfosItem>
+			)}
+			<TaskIconText
+				inactive={editUnit}
+				icon={<TaskInfosIcon icon={ClockIconSvg} />}
+				content={
+					editUnit ? (
+						<UnitInput
+							unit={item.unit}
+							onBlur={() => setEditUnit(false)}
+							onSubmit={(args) => {
+								onUnitSubmit(args);
+								setEditUnit(false);
+							}}
+							onTab={(args) => {
+								onUnitSubmit(args);
+								setEditUnit(false);
+								setEditDueDate(true);
+							}}
+						/>
+					) : (
+						<div onClick={() => setEditUnit(true)}>
+							{item.unit}{' '}
+							<Plural
+								value={item.unit}
+								singular="jour"
+								plural="jours"
+							/>
+							{item.timeItTook !== undefined
+								&& item.status === 'FINISHED'
+								&& ` (${item.timeItTook - item.unit}) `}
+						</div>
+					)
+				}
+			/>
+			<TaskIconText
+				inactive={editDueDate}
+				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
+				content={
+					<TaskDateContainer
+						onClick={() => !editDueDate && setEditDueDate(true)}
+					>
+						{editDueDate ? (
+							<>
+								{moment(item.dueDate || new Date()).format(
+									'DD/MM/YYYY',
+								)}
+								<DateInput
+									innerRef={dateRef}
+									date={moment(item.dueDate || new Date())}
+									onDateChange={(args) => {
+										onDueDateSubmit(args);
+										setEditDueDate(false);
+									}}
+									duration={item.unit}
+								/>
+							</>
+						) : (
+							<>
+								{(item.dueDate && (
+									<>
+										{moment(item.dueDate).diff(
+											moment(),
+											'days',
+										) - item.unit}{' '}
+										<Plural
+											value={item.unit}
+											singular="jour"
+											plural="jours"
+										/>
+									</>
+								)) || <>&mdash;</>}
+							</>
+						)}
+					</TaskDateContainer>
+				}
+			/>
+			<TaskIconText
+				inactive={editCustomer}
+				icon={<TaskInfosIcon icon={ClientIconSvg} />}
+				content={
+					editCustomer ? (
+						<ArianneElem
+							id="projects"
+							list={me.customers}
+							defaultMenuIsOpen={true}
+							defaultValue={
+								item.linkedCustomer && {
+									value: item.linkedCustomer.id,
+									label: item.linkedCustomer.name,
+								}
+							}
+							autoFocus={true}
+							onChange={(args) => {
+								onCustomerSubmit(args);
+								setEditCustomer(false);
+							}}
+							onBlur={() => {
+								setEditCustomer(false);
+							}}
+						/>
+					) : (
+						<div
+							onClick={() => {
+								setEditCustomer(true);
+							}}
+						>
+							{clientName || <>&mdash;</>}
+						</div>
+					)
+				}
+			/>
+		</TaskInfos>
+	);
+}
+
+export default function Task({item, token}) {
+	const finishItem = useMutation(FINISH_ITEM);
+	const updateItem = useMutation(UPDATE_ITEM);
+
+	const [setTimeItTook, setSetTimeItTook] = useState(false);
+
+	const setSetTimeItTookRef = useRef();
+
 	useOnClickOutside(setSetTimeItTookRef, () => {
 		setSetTimeItTook(false);
 	});
-
-	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 
 	function finishItemCallback(unit) {
 		finishItem({
@@ -268,154 +392,49 @@ export default function Task({
 						)}
 					</TaskActions>
 				</TaskHeader>
-				<TaskInfos>
-					<TaskInfosItem>
-						<CommentIcon>
-							{item.comments.length > 0
-								? item.comments.length
-								: '+'}
-						</CommentIcon>
-					</TaskInfosItem>
-					<TaskIconText
-						inactive={editUnit}
-						icon={<TaskInfosIcon icon={ClockIconSvg} />}
-						content={
-							editUnit ? (
-								<UnitInput
-									unit={item.unit}
-									onBlur={() => setEditUnit(false)}
-									onSubmit={(unit) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												unit,
-											},
-											optimisticResponse: {
-												__typename: 'Mutation',
-												updateItem: {
-													__typename: 'Item',
-													...item,
-													unit,
-												},
-											},
-										});
-										setEditUnit(false);
-									}}
-								/>
-							) : (
-								<div onClick={() => setEditUnit(true)}>
-									{item.unit}{' '}
-									<Plural
-										value={item.unit}
-										singular="jour"
-										plural="jours"
-									/>
-									{item.timeItTook !== undefined
-										&& item.status === 'FINISHED'
-										&& ` (${item.timeItTook - item.unit}) `}
-								</div>
-							)
-						}
-					/>
-					<TaskIconText
-						inactive={editDueDate}
-						icon={<TaskInfosIcon icon={HourglassIconSvg} />}
-						content={
-							<TaskDateContainer
-								onClick={() => !editDueDate && setEditDueDate(true)
-								}
-							>
-								{editDueDate ? (
-									<>
-										{moment(
-											item.dueDate || new Date(),
-										).format('DD/MM/YYYY')}
-										<DateInput
-											innerRef={dateRef}
-											date={moment(
-												item.dueDate || new Date(),
-											)}
-											onDateChange={(date) => {
-												updateItem({
-													variables: {
-														itemId: item.id,
-														dueDate: date.toISOString(),
-													},
-													optimisticResponse: {
-														__typename: 'Mutation',
-														updateItem: {
-															__typename: 'Item',
-															...item,
-															dueDate: date.toISOString(),
-														},
-													},
-												});
-												setEditDueDate(false);
-											}}
-											duration={item.unit}
-										/>
-									</>
-								) : (
-									<>
-										{(item.dueDate && (
-											<>
-												{moment(item.dueDate).diff(
-													moment(),
-													'days',
-												) - item.unit}{' '}
-												<Plural
-													value={item.unit}
-													singular="jour"
-													plural="jours"
-												/>
-											</>
-										)) || <>&mdash;</>}
-									</>
-								)}
-							</TaskDateContainer>
-						}
-					/>
-					<TaskIconText
-						inactive={editCustomer}
-						icon={<TaskInfosIcon icon={ClientIconSvg} />}
-						content={
-							editCustomer ? (
-								<ArianneElem
-									id="projects"
-									list={me.customers}
-									defaultMenuIsOpen={true}
-									defaultValue={
-										item.linkedCustomer && {
-											value: item.linkedCustomer.id,
-											label: item.linkedCustomer.name,
-										}
-									}
-									autoFocus={true}
-									onChange={({value}) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												linkedCustomerId: value,
-											},
-										});
-										setEditCustomer(false);
-									}}
-									onBlur={() => {
-										setEditCustomer(false);
-									}}
-								/>
-							) : (
-								<div
-									onClick={() => {
-										setEditCustomer(true);
-									}}
-								>
-									{clientName || <>&mdash;</>}
-								</div>
-							)
-						}
-					/>
-				</TaskInfos>
+				<TaskInfosInputs
+					item={item}
+					onDueDateSubmit={(date) => {
+						updateItem({
+							variables: {
+								itemId: item.id,
+								dueDate: date.toISOString(),
+							},
+							optimisticResponse: {
+								__typename: 'Mutation',
+								updateItem: {
+									__typename: 'Item',
+									...item,
+									dueDate: date.toISOString(),
+								},
+							},
+						});
+					}}
+					onCustomerSubmit={({value}) => {
+						updateItem({
+							variables: {
+								itemId: item.id,
+								linkedCustomerId: value,
+							},
+						});
+					}}
+					onUnitSubmit={(unit) => {
+						updateItem({
+							variables: {
+								itemId: item.id,
+								unit,
+							},
+							optimisticResponse: {
+								__typename: 'Mutation',
+								updateItem: {
+									__typename: 'Item',
+									...item,
+									unit,
+								},
+							},
+						});
+					}}
+				/>
 			</TaskContent>
 		</TaskContainer>
 	);

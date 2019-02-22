@@ -53,6 +53,7 @@ const Input = styled('input')`
 		color: #888;
 		font-size: 14px;
 		font-style: italic;
+		font-family: 'Work Sans', sans-serif;
 	}
 
 	&:focus {

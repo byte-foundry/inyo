@@ -271,7 +271,7 @@ export const Input = styled('input')`
 	padding: 15px 18px 16px 18px;
 	color: ${gray50};
 	width: ${props => (props.flexible ? '100%' : 'fill-available')};
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	font-size: 16px;
 	transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
@@ -287,7 +287,7 @@ export const Input = styled('input')`
 `;
 
 export const Label = styled('label')`
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	font-size: 15px;
 	width: fill-available;
 	color: ${gray80};
@@ -310,7 +310,7 @@ export const Label = styled('label')`
 `;
 
 export const ErrorInput = styled('p')`
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	width: fill-available;
 	font-size: 12px;
 	color: ${signalRed};

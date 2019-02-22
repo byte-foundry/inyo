@@ -39,7 +39,7 @@ const ItemComment = styled('textarea')`
 	width: 100%;
 	background: ${primaryWhite};
 	padding: 15px;
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	color: ${gray70};
 	border: solid 1px ${gray30};
 	font-size: 0.8rem;

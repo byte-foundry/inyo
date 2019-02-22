@@ -25,6 +25,7 @@ export const Body = styled('div')`
 export const Button = styled('button')`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
+	font-weight: 500;
 	padding: 0.3rem 0.8rem;
 	border: 2px solid #333;
 	border-radius: 30px;
@@ -91,13 +92,13 @@ export const Button = styled('button')`
 	}
 	${props => props.textIcon
 		&& `
-		font-weight: 600;
+		font-weight: 500;
 	`}
 
 	${props => props.big
 		&& `
 		font-size: 14px;
-		font-weight: 600;
+		font-weight: 500;
 		padding: .8rem 1.6rem;
 	`}
 
@@ -106,7 +107,7 @@ export const Button = styled('button')`
 			content: '${props.icon}';
 			margin-right: .4rem;
 			color: currentColor;
-			font-weight: 600;
+			font-weight: 500;
 		}`};
 
 	${props => props.tiny
@@ -128,6 +129,10 @@ export const Button = styled('button')`
 				background: none;
 			}
 		`}
+
+	& + button {
+		margin-left: .5rem;
+	}
 `;
 
 export const ButtonLink = Button.withComponent(Link);

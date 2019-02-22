@@ -16,6 +16,7 @@ const InputContainer = styled('div')`
 	display: flex;
 	align-items: center;
 	padding-left: 0.3rem;
+	margin-left: -7px;
 `;
 
 const InputButtonWrapper = styled('div')`
@@ -28,7 +29,12 @@ const InputButtonContainer = styled('div')`
 	flex-flow: column nowrap;
 	right: calc(-100% + 10px);
 	top: -13px;
-	width: 145px;
+	width: 155px;
+
+	button  {
+		background: rgba(255, 255, 255, 0.5);
+		margin-bottom: 0.75rem;
+	}
 `;
 
 const Input = styled('input')`
@@ -145,13 +151,13 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 				<InputButtonWrapper>
 					<InputButtonContainer>
 						<Button icon="↵" grey>
-							Creér la tâche
+							Créer la tâche
 						</Button>
 						<Button
 							icon="↑"
 							onClick={() => onSubmitProject({name: value})}
 						>
-							Creér un projet
+							Créer un projet
 						</Button>
 					</InputButtonContainer>
 				</InputButtonWrapper>

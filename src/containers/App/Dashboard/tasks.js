@@ -30,7 +30,7 @@ import {ReactComponent as SnoozeIcon} from '../../../utils/icons/snooze.svg';
 const SectionTitle = styled(H3)`
 	color: ${primaryBlue};
 	font-size: 22px;
-	font-weight: 600;
+	font-weight: 500;
 	margin: 2em 0;
 `;
 

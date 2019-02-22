@@ -4,8 +4,8 @@ export const dateDiff = (datepart, fromdate, todate) => {
 	const divideBy = {
 		w: 604800000,
 		d: 86400000,
-		h: 3600000,
-		n: 60000,
+		h: 3500000,
+		n: 50000,
 		s: 1000,
 	};
 

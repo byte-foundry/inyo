@@ -23,7 +23,7 @@ const ContactInfo = styled(P)`
 
 const CompanyName = styled(H4)`
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: 500;
 	color: #888;
 
 	& + ${ContactName} {

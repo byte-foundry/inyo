@@ -14,6 +14,7 @@ import ProjectData from '../ProjectData';
 import TasksProgressBar from '../TasksProgressBar';
 import Plural from '../Plural';
 import CreateTask from '../CreateTask';
+import ProjectSection from '../ProjectSection';
 
 import {
 	UPDATE_PROJECT,
@@ -33,7 +34,6 @@ import {
 	primaryBlue,
 	gray20,
 	gray10,
-	gray50,
 	signalRed,
 	Loading,
 	ModalContainer,
@@ -49,12 +49,8 @@ import {
 } from '../../utils/constants';
 import {formatDate, parseDate} from '../../utils/functions';
 import StaticCustomerView from '../StaticCustomerView';
-import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
-import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
-import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import 'react-toastify/dist/ReactToastify.css';
-import SectionList from '../SectionList';
 import ConfirmModal from '../ConfirmModal';
 
 const ProjectDisplayMain = styled('div')`
@@ -409,133 +405,21 @@ class ProjectDisplay extends Component {
 												)}
 												<FlexColumn fullHeight>
 													<ProjectSections>
-														<SectionList
-															projectId={
-																project.id
-															}
-															addItem={async (
-																itemId,
-																data,
-																...rest
-															) => {
-																if (
-																	!project.notifyActivityToCustomer
-																	&& data.reviewer
-																		=== 'CUSTOMER'
-																) {
-																	const confirmed = await new Promise(
-																		resolve => this.setState(
-																			{
-																				askCustomerAttributionConfirm: resolve,
-																			},
-																		),
-																	);
-
-																	this.setState(
-																		{
-																			askCustomerAttributionConfirm: null,
-																		},
-																	);
-
-																	if (
-																		!confirmed
-																	) {
-																		return;
+														{project.sections.map(
+															section => (
+																<ProjectSection
+																	key={
+																		section.id
 																	}
-
-																	await updateProject(
-																		{
-																			variables: {
-																				projectId:
-																					project.id,
-																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
-																			},
-																		},
-																	);
-																}
-
-																await addItem(
-																	itemId,
-																	data,
-																	...rest,
-																);
-															}}
-															editItem={async (
-																itemId,
-																sectionId,
-																data,
-																...rest
-															) => {
-																if (
-																	!project.notifyActivityToCustomer
-																	&& data.reviewer
-																		=== 'CUSTOMER'
-																) {
-																	const confirmed = await new Promise(
-																		resolve => this.setState(
-																			{
-																				askCustomerAttributionConfirm: resolve,
-																			},
-																		),
-																	);
-
-																	this.setState(
-																		{
-																			askCustomerAttributionConfirm: null,
-																		},
-																	);
-
-																	if (
-																		!confirmed
-																	) {
-																		return;
+																	projectId={
+																		project.id
 																	}
-
-																	await updateProject(
-																		{
-																			variables: {
-																				projectId:
-																					project.id,
-																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
-																			},
-																		},
-																	);
-																}
-
-																await editItem(
-																	itemId,
-																	sectionId,
-																	data,
-																	...rest,
-																);
-															}}
-															removeItem={
-																removeItem
-															}
-															finishItem={
-																finishItem
-															}
-															unfinishItem={
-																unfinishItem
-															}
-															customerToken={
-																customerToken
-															}
-															mode={mode}
-															editSection={
-																editSection
-															}
-															removeSection={
-																removeSection
-															}
-															refetch={refetch}
-															projectStatus={
-																project.status
-															}
-															sections={
-																project.sections
-															}
-														/>
+																	data={
+																		section
+																	}
+																/>
+															),
+														)}
 														{!customerToken && (
 															<Mutation
 																mutation={

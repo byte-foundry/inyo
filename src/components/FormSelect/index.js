@@ -35,7 +35,7 @@ const FormSelectElem = styled('select')`
 	width: -webkit-fill-available;
 	width: -moz-available;
 	width: fill-available;
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	font-size: 16px;
 	-webkit-transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;

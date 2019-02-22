@@ -146,7 +146,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					placeholder={
 						focus
 							? 'Taper / pour choisir un type de tâche'
-							: 'Ajouter une tâche'
+							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>
 				<InputButtonWrapper>

@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, memo} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 
@@ -47,7 +47,13 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 		);
 	}
 
-	return <TasksListComponent items={tasks} />;
+	return (
+		<TasksListComponent
+			items={tasks}
+			projectId={projectId}
+			customerId={linkedCustomerId}
+		/>
+	);
 }
 
 function TasksList({location, history}) {

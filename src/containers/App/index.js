@@ -43,12 +43,12 @@ const withHeader = Component => (...args) => (
 );
 
 function App() {
-	const [uidSet, setUidSet] = useState(false);
+	const [setupDone, setSetupDone] = useState(false);
 	const {data, error} = useQuery(CHECK_LOGIN_USER);
 
 	if (error) throw error;
 
-	if (data && data.me) {
+	if (data && data.me && !setupDone) {
 		window.Intercom('boot', {
 			app_id: INTERCOM_APP_ID,
 			email: data.me.email,
@@ -60,10 +60,9 @@ function App() {
 		Sentry.configureScope((scope) => {
 			scope.setUser({email: data.me.email});
 		});
-		if (!uidSet) {
-			ReactGA.set({userId: data.me.id});
-			setUidSet(true);
-		}
+		ReactGA.set({userId: data.me.id});
+
+		setSetupDone(true);
 	}
 	else {
 		window.Intercom('boot', {

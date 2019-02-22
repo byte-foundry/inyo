@@ -31,8 +31,11 @@ const InputButtonContainer = styled('div')`
 	top: -13px;
 	width: 155px;
 
-	button  {
+	button {
 		background: rgba(255, 255, 255, 0.5);
+	}
+
+	& ${Button}:first-of-type {
 		margin-bottom: 0.75rem;
 	}
 `;
@@ -149,19 +152,21 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>
-				<InputButtonWrapper>
-					<InputButtonContainer>
-						<Button icon="↵" grey>
-							Créer la tâche
-						</Button>
-						<Button
-							icon="↑"
-							onClick={() => onSubmitProject({name: value})}
-						>
-							Créer un projet
-						</Button>
-					</InputButtonContainer>
-				</InputButtonWrapper>
+				{value && (
+					<InputButtonWrapper>
+						<InputButtonContainer>
+							<Button icon="↵" grey>
+								Creér la tâche
+							</Button>
+							<Button
+								icon="↑"
+								onClick={() => onSubmitProject({name: value})}
+							>
+								Creér un projet
+							</Button>
+						</InputButtonContainer>
+					</InputButtonWrapper>
+				)}
 			</InputContainer>
 			{((value.startsWith('/') && focus) || focusByClick) && (
 				<TaskTypeDropdown

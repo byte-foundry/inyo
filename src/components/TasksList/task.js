@@ -181,17 +181,20 @@ const SetTimeCaption = styled('div')`
 	line-height: 1.3;
 `;
 
+const me = {customers: []};
+
 export default function Task({
 	item, sectionId, projectId, token,
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
-	const {
+	/* const {
 		data: {
-			me: {customers},
+			me,
 		},
 		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS);
+	} = useQuery(GET_ALL_CUSTOMERS); */
+
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
@@ -205,7 +208,7 @@ export default function Task({
 	});
 
 	useOnClickOutside(setSetTimeItTookRef, () => {
-		setTimeItTook(false);
+		setSetTimeItTook(false);
 	});
 
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
@@ -379,7 +382,7 @@ export default function Task({
 							editCustomer ? (
 								<ArianneElem
 									id="projects"
-									list={customers}
+									list={me.customers}
 									defaultMenuIsOpen={true}
 									defaultValue={
 										item.linkedCustomer && {

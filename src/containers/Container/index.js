@@ -13,11 +13,11 @@ import SentryReporter from '../SentryReporter';
 
 const BodyMain = styled(Body)``;
 
-Sentry.init({
+/* Sentry.init({
 	dsn: 'https://d6ed2b1e0a594835b2f768405b6c5e90@sentry.io/1307916',
 	environment: process.env.REACT_APP_INYO_ENV,
 	release: 'inyo@v1.0.0',
-});
+}); */
 ReactGA.initialize('UA-41962243-14');
 
 const query = new URLSearchParams(document.location.search);
@@ -66,25 +66,17 @@ const withTracker = (WrappedComponent, options = {}) => {
 class Container extends Component {
 	render() {
 		return (
-			<SentryReporter>
-				<BodyMain>
-					<main>
-						<Suspense fallback={<Loading />}>
-							<Switch>
-								<Route
-									path="/app"
-									component={withTracker(App)}
-								/>
-								<Route
-									path="/auth"
-									component={withTracker(Auth)}
-								/>
-								<Redirect to="/app" />
-							</Switch>
-						</Suspense>
-					</main>
-				</BodyMain>
-			</SentryReporter>
+			<BodyMain>
+				<main>
+					<Suspense fallback={<Loading />}>
+						<Switch>
+							<Route path="/app" component={withTracker(App)} />
+							<Route path="/auth" component={withTracker(Auth)} />
+							<Redirect to="/app" />
+						</Switch>
+					</Suspense>
+				</main>
+			</BodyMain>
 		);
 	}
 }

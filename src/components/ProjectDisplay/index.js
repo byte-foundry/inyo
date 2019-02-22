@@ -101,30 +101,6 @@ const ProjectAction = styled(Button)`
 	margin: 0.4em 0;
 `;
 
-const TaskLegend = styled('div')`
-	margin-top: 20px;
-	margin-bottom: 20px;
-`;
-
-const InfosOnItems = styled('div')`
-	display: flex;
-	margin-bottom: 8px;
-	font-size: 14px;
-	&::before {
-		content: ' ';
-		box-sizing: border-box;
-		border: solid 1px ${gray50};
-		border-right: ${props => (props.color === primaryBlue ? '4px' : '1px')}
-			solid ${props => props.color};
-		margin-right: 10px;
-		width: 16px;
-		height: 16px;
-		display: block;
-		position: relative;
-		top: 0.18em;
-	}
-`;
-
 const CustomerIssuerContainer = styled('div')``;
 
 const TotalContainer = styled('div')``;
@@ -990,16 +966,6 @@ class ProjectDisplay extends Component {
 													</TotalNumber>
 												</ProjectData>
 											</TotalContainer>
-											<TaskLegend>
-												<InfosOnItems color={gray50}>
-													Tâches prestataire
-												</InfosOnItems>
-												<InfosOnItems
-													color={primaryBlue}
-												>
-													Tâches client
-												</InfosOnItems>
-											</TaskLegend>
 											{mode === 'edit' && (
 												<Mutation
 													mutation={REMOVE_PROJECT}

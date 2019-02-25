@@ -4,7 +4,8 @@ import React, {useState, useRef} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
 import TaskTypeDropdown from '../TaskTypeDropdown';
-import {TaskInfosInputs} from '../TasksList/task';
+import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
+import CheckList from '../CheckList';
 
 import {ITEM_TYPES} from '../../utils/constants';
 import {
@@ -105,6 +106,10 @@ const TaskInfosInputsContainer = styled('div')`
 	left: 94px;
 `;
 
+const TaskInputCheckListContainer = styled('div')`
+	margin-left: 2em;
+`;
+
 const types = ITEM_TYPES;
 
 const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
@@ -119,6 +124,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	] = useState(false);
 	const [itemUnit, setItemUnit] = useState(0);
 	const [itemDueDate, setItemDueDate] = useState();
+	const [files, setFiles] = useState([]);
 	const [itemCustomer, setItemCustomer] = useState();
 	const ref = useRef();
 	const inputRef = useRef();
@@ -168,13 +174,34 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 											itemDueDate
 											&& itemDueDate.toISOString(),
 										unit: parseFloat(itemUnit || 0),
-										linkedCustomerId: itemCustomer,
+										linkedCustomerId:
+											itemCustomer && itemCustomer.id,
 									});
 									setValue('');
 									setMoreInfosMode(false);
 								}
 								else if (type === 'CONTENT_ACQUISITION') {
-									setShowContentAcquisitionInfos(true);
+									if (showContentAcquisitionInfos) {
+										onSubmitTask({
+											name: value,
+											type: type || 'DEFAULT',
+											linkedCustomerId:
+												itemCustomer && itemCustomer.id,
+											description: `\n# content-acquisition-list\n${files
+												.map(
+													({checked, name}) => `- [${
+														checked ? 'x' : ' '
+													}] ${name}`,
+												)
+												.join('\n')}`,
+										});
+										setValue('');
+										setMoreInfosMode(false);
+										setShowContentAcquisitionInfos(false);
+									}
+									else {
+										setShowContentAcquisitionInfos(true);
+									}
 								}
 							}
 							else if (e.key === 'Tab' && value.length > 0) {
@@ -207,18 +234,53 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 								grey
 								onClick={() => {
 									if (!value.startsWith('/')) {
-										onSubmitTask({
-											name: value,
-											type: type || 'DEFAULT',
-											dueDate:
-												itemDueDate
-												&& itemDueDate.toISOString(),
-											unit: parseFloat(itemUnit || 0),
-											linkedCustomerId:
-												itemCustomer && itemCustomer.id,
-										});
-										setValue('');
-										setMoreInfosMode(false);
+										if (!type || type === 'DEFAULT') {
+											onSubmitTask({
+												name: value,
+												type: type || 'DEFAULT',
+												dueDate:
+													itemDueDate
+													&& itemDueDate.toISOString(),
+												unit: parseFloat(itemUnit || 0),
+												linkedCustomerId:
+													itemCustomer
+													&& itemCustomer.id,
+											});
+											setValue('');
+											setMoreInfosMode(false);
+										}
+										else if (
+											type === 'CONTENT_ACQUISITION'
+										) {
+											if (showContentAcquisitionInfos) {
+												onSubmitTask({
+													name: value,
+													type: type || 'DEFAULT',
+													linkedCustomerId:
+														itemCustomer
+														&& itemCustomer.id,
+													description: `\n# content-acquisition-list\n${files
+														.map(
+															({checked, name}) => `- [${
+																checked
+																	? 'x'
+																	: ' '
+															}] ${name}`,
+														)
+														.join('\n')}`,
+												});
+												setValue('');
+												setMoreInfosMode(false);
+												setShowContentAcquisitionInfos(
+													false,
+												);
+											}
+											else {
+												setShowContentAcquisitionInfos(
+													true,
+												);
+											}
+										}
 									}
 								}}
 							>
@@ -260,6 +322,31 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					<TaskInputDropdownHeader>
 						Récupération de contenu
 					</TaskInputDropdownHeader>
+					<TaskInputCheckListContainer>
+						<TaskCustomerInput
+							item={{
+								linkedCustomer: itemCustomer,
+							}}
+							noComment
+							onCustomerSubmit={customer => setItemCustomer({
+								id: customer.value,
+								name: customer.label,
+							})
+							}
+						/>
+					</TaskInputCheckListContainer>
+					<TaskInputDropdownHeader>
+						Liste des documents a récuperer
+					</TaskInputDropdownHeader>
+					<TaskInputCheckListContainer>
+						<CheckList
+							editable={true} // editable by user only, but checkable
+							items={files}
+							onChange={({items}) => {
+								setFiles(items);
+							}}
+						/>
+					</TaskInputCheckListContainer>
 				</TaskInputDropdown>
 			)}
 			{((value.startsWith('/') && focus) || focusByClick) && (

@@ -51,11 +51,14 @@ class InlineEditable extends Component {
 
 	render() {
 		const {isEditing, value} = this.state;
-		const {type, placeholder, className} = this.props;
+		const {
+			type, placeholder, className, innerRef,
+		} = this.props;
 
 		if (isEditing) {
 			return (
 				<NameInput
+					ref={innerRef}
 					type={type}
 					value={value}
 					onChange={this.handleChange}

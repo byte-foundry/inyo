@@ -6,19 +6,10 @@ import {
 	gray20, gray30, gray50, gray80,
 } from '../../utils/content';
 
-const Dropdown = styled('div')`
-	background: white;
-	box-shadow: 0 0 5px ${gray20};
-	position: absolute;
-	z-index: 2; /* do a portal instead */
-	width: 500px;
-`;
-
-const Header = styled('p')`
-	text-transform: uppercase;
-	color: ${gray30};
-	margin: 1.5em 2em 0.5em 2em;
-`;
+import {
+	TaskInputDropdown,
+	TaskInputDropdownHeader,
+} from '../../utils/new/design-system';
 
 const List = styled('ul')`
 	display: flex;
@@ -106,8 +97,10 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 	}, [filter]);
 
 	return (
-		<Dropdown>
-			<Header>Tâches automatiques et/ou prédéfinies</Header>
+		<TaskInputDropdown>
+			<TaskInputDropdownHeader>
+				Tâches automatiques et/ou prédéfinies
+			</TaskInputDropdownHeader>
 			<List>
 				{filteredTypes.map(({icon, name, description}, index) => (
 					<ListItem
@@ -123,7 +116,7 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 					</ListItem>
 				))}
 			</List>
-		</Dropdown>
+		</TaskInputDropdown>
 	);
 };
 

@@ -120,8 +120,9 @@ const Item = ({id, customerToken}) => {
 	const {linkedCustomer: customer} = item;
 
 	let {description} = item;
-	const {project} = item.section;
-	const deadline = new Date(project.deadline);
+	const deadline = new Date(
+		item.section ? item.section.project.deadline : item.dueDate,
+	);
 
 	// parse the description for the file list
 	let files = [];
@@ -215,7 +216,11 @@ const Item = ({id, customerToken}) => {
 				<Meta>
 					<FolderIcon />
 					<MetaLabel>Projet</MetaLabel>
-					<MetaText>{project && project.name}</MetaText>
+					<MetaText>
+						{item.section
+							&& item.section.project
+							&& item.section.project.name}
+					</MetaText>
 				</Meta>
 				<Meta>
 					<TaskTypeIcon />

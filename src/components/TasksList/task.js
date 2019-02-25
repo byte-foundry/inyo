@@ -181,16 +181,25 @@ const SetTimeCaption = styled('div')`
 	line-height: 1.3;
 `;
 
+const DueDateInputElem = styled('input')`
+	font-family: 'Work sans', sans-serif;
+	color: ${primaryPurple};
+	width: 83px;
+	display: block;
+`;
+
 export function TaskInfosInputs({
 	item,
 	noComment,
 	onDueDateSubmit,
 	onUnitSubmit,
 	onCustomerSubmit,
+	startOpen,
+	switchOnSelect,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
-	const [editUnit, setEditUnit] = useState(false);
+	const [editUnit, setEditUnit] = useState(startOpen);
 	const {
 		data: {me},
 		errors: errorsCustomers,
@@ -222,6 +231,9 @@ export function TaskInfosInputs({
 							onSubmit={(args) => {
 								onUnitSubmit(args);
 								setEditUnit(false);
+								if (switchOnSelect) {
+									setEditDueDate(true);
+								}
 							}}
 							onTab={(args) => {
 								onUnitSubmit(args);
@@ -253,15 +265,20 @@ export function TaskInfosInputs({
 					>
 						{editDueDate ? (
 							<>
-								{moment(item.dueDate || new Date()).format(
-									'DD/MM/YYYY',
-								)}
+								<DueDateInputElem
+									value={moment(
+										item.dueDate || new Date(),
+									).format('DD/MM/YYYY')}
+								/>
 								<DateInput
 									innerRef={dateRef}
 									date={moment(item.dueDate || new Date())}
 									onDateChange={(args) => {
 										onDueDateSubmit(args);
 										setEditDueDate(false);
+										if (switchOnSelect) {
+											setEditCustomer(true);
+										}
 									}}
 									duration={item.unit}
 								/>

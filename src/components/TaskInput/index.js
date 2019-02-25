@@ -7,7 +7,11 @@ import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs} from '../TasksList/task';
 
 import {ITEM_TYPES} from '../../utils/constants';
-import {Button} from '../../utils/new/design-system';
+import {
+	Button,
+	TaskInputDropdown,
+	TaskInputDropdownHeader,
+} from '../../utils/new/design-system';
 
 const Container = styled('div')`
 	font-size: 14px;
@@ -109,10 +113,15 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	const [focus, setFocus] = useState(false);
 	const [focusByClick, setFocusByClick] = useState(false);
 	const [moreInfosMode, setMoreInfosMode] = useState(false);
+	const [
+		showContentAcquisitionInfos,
+		setShowContentAcquisitionInfos,
+	] = useState(false);
 	const [itemUnit, setItemUnit] = useState(0);
 	const [itemDueDate, setItemDueDate] = useState();
 	const [itemCustomer, setItemCustomer] = useState();
 	const ref = useRef();
+	const inputRef = useRef();
 
 	useOnClickOutside(ref, () => {
 		setFocus(false);
@@ -135,6 +144,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					{icon}
 				</Icon>
 				<Input
+					ref={inputRef}
 					type="text"
 					onChange={e => setValue(e.target.value)}
 					value={value}
@@ -147,23 +157,40 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 								});
 								setValue('');
 								setMoreInfosMode(false);
+								setShowContentAcquisitionInfos(false);
 							}
 							else if (e.key === 'Enter') {
-								onSubmitTask({
-									name: value,
-									type: type || 'DEFAULT',
-								});
-								setValue('');
-								setMoreInfosMode(false);
+								if (!type || type === 'DEFAULT') {
+									onSubmitTask({
+										name: value,
+										type: type || 'DEFAULT',
+										dueDate:
+											itemDueDate
+											&& itemDueDate.toISOString(),
+										unit: itemUnit,
+										linkedCustomerId: itemCustomer,
+									});
+									setValue('');
+									setMoreInfosMode(false);
+								}
+								else if (type === 'CONTENT_ACQUISITION') {
+									setShowContentAcquisitionInfos(true);
+								}
 							}
-							else if (e.key === 'Tab') {
-								setMoreInfosMode(true);
+							else if (e.key === 'Tab' && value.length > 0) {
+								if (!type || type === 'DEFAULT') {
+									setMoreInfosMode(true);
+								}
+								else if (type === 'CONTENT_ACQUISITION') {
+									setShowContentAcquisitionInfos(true);
+								}
 							}
 						}
 						if (e.key === 'Escape') {
 							setValue('');
 							setFocusByClick(false);
 							setMoreInfosMode(false);
+							setShowContentAcquisitionInfos(false);
 						}
 					}}
 					placeholder={
@@ -175,7 +202,25 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 				{value && (
 					<InputButtonWrapper>
 						<InputButtonContainer>
-							<Button icon="↵" grey>
+							<Button
+								icon="↵"
+								grey
+								onClick={() => {
+									if (!value.startsWith('/')) {
+										onSubmitTask({
+											name: value,
+											type: type || 'DEFAULT',
+											dueDate:
+												itemDueDate
+												&& itemDueDate.toISOString(),
+											unit: itemUnit,
+											linkedCustomerId: itemCustomer,
+										});
+										setValue('');
+										setMoreInfosMode(false);
+									}
+								}}
+							>
 								Creér la tâche
 							</Button>
 							<Button
@@ -191,6 +236,8 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 			{moreInfosMode && (
 				<TaskInfosInputsContainer>
 					<TaskInfosInputs
+						startOpen
+						switchOnSelect
 						item={{
 							dueDate: itemDueDate,
 							unit: itemUnit,
@@ -207,6 +254,13 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					/>
 				</TaskInfosInputsContainer>
 			)}
+			{showContentAcquisitionInfos && (
+				<TaskInputDropdown>
+					<TaskInputDropdownHeader>
+						Récupération de contenu
+					</TaskInputDropdownHeader>
+				</TaskInputDropdown>
+			)}
 			{((value.startsWith('/') && focus) || focusByClick) && (
 				<TaskTypeDropdown
 					types={types}
@@ -215,7 +269,12 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 						setType(selectedType);
 
 						setValue('');
+						inputRef.current.focus();
 						setFocusByClick(false);
+						setMoreInfosMode(false);
+						setItemDueDate();
+						setItemCustomer();
+						setItemUnit();
 					}}
 				/>
 			)}

@@ -288,18 +288,37 @@ export const UPDATE_PROJECT = gql`
 		$name: String
 		$deadline: DateTime
 		$notifyActivityToCustomer: Boolean
+		$customerId: ID
+		$customer: CustomerInput
 	) {
 		updateProject(
 			id: $projectId
 			name: $name
 			deadline: $deadline
 			notifyActivityToCustomer: $notifyActivityToCustomer
+			customerId: $customerId
+			customer: $customer
 		) {
 			id
 			name
 			deadline
 			daysUntilDeadline
 			notifyActivityToCustomer
+			customer {
+				id
+				name
+				firstName
+				lastName
+				email
+				title
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+			}
 		}
 	}
 `;

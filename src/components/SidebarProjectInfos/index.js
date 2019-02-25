@@ -145,6 +145,9 @@ const SidebarProjectInfos = ({
 								type="checkbox"
 								checked={project.notifyActivityToCustomer}
 								onChange={async () => {
+									console.log(
+										project.notifyActivityToCustomer,
+									);
 									if (project.notifyActivityToCustomer) {
 										const confirmed = await new Promise(
 											resolve => setAskNotifyActivityConfirm(
@@ -207,21 +210,26 @@ const SidebarProjectInfos = ({
 
 				{isEditingCustomer && (
 					<CustomerModal
-						onValidate={(selected) => {
+						onValidate={async (selected) => {
 							if (
 								project.customer
 								&& selected.customerId
-								&& project.customer.id !== selected.customerId
+								&& project.customer.id === selected.customerId
 							) {
+								setEditCustomer(false);
 								return project;
 							}
 
-							return updateProject({
+							const updatedProject = await updateProject({
 								variables: {
 									projectId: project.id,
 									...selected,
 								},
 							});
+
+							setEditCustomer(false);
+
+							return updatedProject;
 						}}
 						selectedCustomerId={
 							project.customer && project.customer.id

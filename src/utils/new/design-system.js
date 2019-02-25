@@ -259,3 +259,62 @@ export function TaskIconText({icon, content, ...rest}) {
 }
 
 export const LayoutMainElem = styled('div')``;
+
+export const Input = styled('input')`
+	font-family: 'Work Sans', sans-serif;
+	font-size: 14px;
+
+	background-color: ${props => (props.error ? primaryRed : '#f5f2fe')};
+	border: none;
+	border-radius: 20px;
+	height: 27px;
+	padding: 0 1rem;
+	width: auto;
+	border: 1px solid transparent;
+	font-weight: 600;
+	color: ${props => (props.error ? primaryWhite : '#5020ee')};
+
+	&::placeholder {
+		font-weight: normal;
+		color: ${props => (props.error ? primaryWhite : '#888')};
+		font-style: italic;
+		font-size: 14px;
+	}
+
+	&:disabled {
+		background: #f3f3f3;
+		color: #7b7980;
+	}
+
+	&:focus {
+		outline: none;
+		box-shadow: none;
+		background: #fff;
+		border: 1px solid #f5f2fe;
+		transition: all 400ms ease;
+		color: #5020ee;
+
+		&::placeholder {
+			color: #888;
+			font-style: italic;
+			font-size: 14px;
+		}
+	}
+`;
+
+export const InputLabel = styled('div')`
+	${Label} {
+		font-size: 12px;
+		margin-bottom: 0.8rem;
+		margin-left: 1rem;
+
+		${props => props.required
+			&& css`
+				&::after {
+					color: ${primaryRed};
+					content: '*';
+					padding-left: 5px;
+				}
+			`};
+	}
+`;

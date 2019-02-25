@@ -167,7 +167,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 										dueDate:
 											itemDueDate
 											&& itemDueDate.toISOString(),
-										unit: itemUnit,
+										unit: parseFloat(itemUnit || 0),
 										linkedCustomerId: itemCustomer,
 									});
 									setValue('');
@@ -213,8 +213,9 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 											dueDate:
 												itemDueDate
 												&& itemDueDate.toISOString(),
-											unit: itemUnit,
-											linkedCustomerId: itemCustomer,
+											unit: parseFloat(itemUnit || 0),
+											linkedCustomerId:
+												itemCustomer && itemCustomer.id,
 										});
 										setValue('');
 										setMoreInfosMode(false);

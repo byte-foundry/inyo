@@ -470,6 +470,8 @@ export const ADD_ITEM = gql`
 		$unit: Float
 		$description: String
 		$reviewer: Reviewer
+		$dueDate: DateTime
+		$linkedCustomerId: ID
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -478,6 +480,8 @@ export const ADD_ITEM = gql`
 			unit: $unit
 			description: $description
 			reviewer: $reviewer
+			dueDate: $dueDate
+			linkedCustomerId: $linkedCustomerId
 		) {
 			...ItemFragment
 		}

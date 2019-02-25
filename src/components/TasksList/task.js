@@ -188,6 +188,57 @@ const DueDateInputElem = styled('input')`
 	display: block;
 `;
 
+export function TaskCustomerInput({
+	editCustomer: editCustomerProp,
+	onCustomerSubmit,
+	item,
+}) {
+	const {
+		data: {me},
+		errors: errorsCustomers,
+	} = useQuery(GET_ALL_CUSTOMERS);
+	const clientName = item.linkedCustomer && item.linkedCustomer.name;
+	const [editCustomer, setEditCustomer] = useState(editCustomer);
+
+	return (
+		<TaskIconText
+			inactive={editCustomer}
+			icon={<TaskInfosIcon icon={ClientIconSvg} />}
+			content={
+				editCustomer ? (
+					<ArianneElem
+						id="projects"
+						list={me.customers}
+						defaultMenuIsOpen={true}
+						defaultValue={
+							item.linkedCustomer && {
+								value: item.linkedCustomer.id,
+								label: item.linkedCustomer.name,
+							}
+						}
+						autoFocus={true}
+						onChange={(args) => {
+							onCustomerSubmit(args);
+							setEditCustomer(false);
+						}}
+						onBlur={() => {
+							setEditCustomer(false);
+						}}
+					/>
+				) : (
+					<div
+						onClick={() => {
+							setEditCustomer(true);
+						}}
+					>
+						{clientName || <>&mdash;</>}
+					</div>
+				)
+			}
+		/>
+	);
+}
+
 export function TaskInfosInputs({
 	item,
 	noComment,
@@ -200,12 +251,7 @@ export function TaskInfosInputs({
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(startOpen);
-	const {
-		data: {me},
-		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS);
 	const dateRef = useRef();
-	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 
 	useOnClickOutside(dateRef, () => {
 		setEditDueDate(false);
@@ -227,7 +273,10 @@ export function TaskInfosInputs({
 					editUnit ? (
 						<UnitInput
 							unit={item.unit}
-							onBlur={() => setEditUnit(false)}
+							onBlur={(args) => {
+								onUnitSubmit(args);
+								setEditUnit(false);
+							}}
 							onSubmit={(args) => {
 								onUnitSubmit(args);
 								setEditUnit(false);
@@ -303,40 +352,11 @@ export function TaskInfosInputs({
 					</TaskDateContainer>
 				}
 			/>
-			<TaskIconText
-				inactive={editCustomer}
-				icon={<TaskInfosIcon icon={ClientIconSvg} />}
-				content={
-					editCustomer ? (
-						<ArianneElem
-							id="projects"
-							list={me.customers}
-							defaultMenuIsOpen={true}
-							defaultValue={
-								item.linkedCustomer && {
-									value: item.linkedCustomer.id,
-									label: item.linkedCustomer.name,
-								}
-							}
-							autoFocus={true}
-							onChange={(args) => {
-								onCustomerSubmit(args);
-								setEditCustomer(false);
-							}}
-							onBlur={() => {
-								setEditCustomer(false);
-							}}
-						/>
-					) : (
-						<div
-							onClick={() => {
-								setEditCustomer(true);
-							}}
-						>
-							{clientName || <>&mdash;</>}
-						</div>
-					)
-				}
+			<TaskCustomerInput
+				editCustomer={editCustomer}
+				setEditCustomer={setEditCustomer}
+				onCustomerSubmit={onCustomerSubmit}
+				item={item}
 			/>
 		</TaskInfos>
 	);

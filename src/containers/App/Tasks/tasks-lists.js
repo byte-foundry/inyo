@@ -5,6 +5,7 @@ import {useQuery} from 'react-apollo-hooks';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
 
+import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectList from '../../../components/ProjectTasksList';
 import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
@@ -105,6 +106,7 @@ function TasksList({location, history}) {
 					selectCustomer={setCustomerSelected}
 					selectProjects={setProjectSelected}
 				/>
+				{projectId && <ProjectHeader projectId={projectId} />}
 				<CreateTask setProjectSelected={setProjectSelected} />
 				<Suspense fallback={<Loading />}>
 					<TasksListContainer

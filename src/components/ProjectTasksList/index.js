@@ -6,6 +6,7 @@ import {useMutation} from 'react-apollo-hooks';
 import Task from '../TasksList/task';
 import TemplateFiller from '../TemplateFiller';
 
+import {GET_ALL_TASKS} from '../../utils/queries';
 import {LayoutMainElem, P} from '../../utils/new/design-system';
 import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
 
@@ -128,6 +129,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 			<DragDropContext
 				onDragEnd={async (result) => {
 					// dropped outside the list
+					debugger;
 					if (!result.destination) {
 						return;
 					}
@@ -142,19 +144,133 @@ function ProjectTasksList({items, projectId, sectionId}) {
 					}
 
 					if (type === 'SECTION') {
+						debugger;
 						await updateSection({
 							variables: {
-								sectionId: sections[result.source.index].id,
-								position: result.destination.index,
+								sectionId: sections[source.index].id,
+								position: destination.index,
 							},
 						});
 					}
 					else if (type === 'ITEM') {
+						debugger;
 						await updateTask({
 							variables: {
 								itemId: result.draggableId,
-								sectionId: result.destination.droppableId,
-								position: result.destination.index,
+								sectionId: destination.droppableId,
+								position: destination.index,
+							},
+							optimisticResponse: {
+								updateItem: {
+									...sections.find(
+										section => section.id === source.droppableId,
+									).items[source.index],
+									position: destination.index,
+									section: sections.find(
+										section => section.id
+											=== destination.droppableId,
+									),
+								},
+							},
+							update: (cache, {data: {updateItem}}) => {
+								const dataToUpdate = cache.readQuery({
+									query: GET_ALL_TASKS,
+								});
+								const itemsToUpdate = [updateItem];
+								const section = sections.find(
+									section => section.id === destination.droppableId,
+								);
+
+								if (
+									source.droppableId
+									=== destination.droppableId
+								) {
+									if (
+										section.items.find(
+											item => updateItem.id === item.id,
+										).position !== destination.index
+									) {
+										section.items.forEach((item) => {
+											if (
+												item.position > source.index
+												&& item.position
+													<= destination.index
+											) {
+												itemsToUpdate.push({
+													...item,
+													position: item.position - 1,
+												});
+											}
+											else if (
+												item.position < source.index
+												&& item.position
+													>= destination.index
+											) {
+												itemsToUpdate.push({
+													...item,
+													position: item.position + 1,
+												});
+											}
+										});
+
+										itemsToUpdate.forEach((itemUpdated) => {
+											const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
+												task => itemUpdated.id === task.id,
+											);
+
+											dataToUpdate.me.tasks[
+												indexTaskToUpdate
+											].position = itemUpdated.position;
+										});
+
+										cache.writeQuery({
+											query: GET_ALL_TASKS,
+											data: dataToUpdate,
+										});
+									}
+								}
+								else if (
+									section.items.find(
+										item => updateItem.id === item.id,
+									).position !== destination.index
+								) {
+									section.items.forEach((item) => {
+										if (
+											item.position <= destination.index
+										) {
+											itemsToUpdate.push({
+												...item,
+												position: item.position - 1,
+											});
+										}
+										else if (
+											item.position >= destination.index
+										) {
+											itemsToUpdate.push({
+												...item,
+												position: item.position + 1,
+											});
+										}
+									});
+
+									itemsToUpdate.forEach((itemUpdated) => {
+										const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
+											task => itemUpdated.id === task.id,
+										);
+
+										dataToUpdate.me.tasks[
+											indexTaskToUpdate
+										].position = itemUpdated.position;
+										dataToUpdate.me.tasks[
+											indexTaskToUpdate
+										].section = section;
+									});
+
+									cache.writeQuery({
+										query: GET_ALL_TASKS,
+										data: dataToUpdate,
+									});
+								}
 							},
 						});
 					}

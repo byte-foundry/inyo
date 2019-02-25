@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
@@ -48,98 +48,94 @@ const editableCss = css`
 	font-size: 14px;
 `;
 
-class CheckList extends Component {
-	render() {
-		const {items, editable, onChange} = this.props;
-
-		return (
-			<ContentList>
-				{items.map((item, i) => (
-					<ContentItem key={item.name}>
-						<input
-							type="checkbox"
-							checked={item.checked}
-							onChange={(e) => {
+function CheckList({items, editable, onChange}) {
+	return (
+		<ContentList>
+			{items.map((item, i) => (
+				<ContentItem key={item.name}>
+					<input
+						type="checkbox"
+						checked={item.checked}
+						onChange={(e) => {
+							onChange({
+								items: [
+									...items.slice(0, i),
+									{...item, checked: e.target.checked},
+									...items.slice(i + 1),
+								],
+							});
+						}}
+					/>
+					<InlineEditable
+						disabled={!editable}
+						value={item.name}
+						type="text"
+						for="checkList"
+						placeholder="Ajoutez les titres des contenus à récupérer et validez"
+						placeholderCss={placeholderCss}
+						nameCss={nameCss}
+						editableCss={editableCss}
+						onFocusOut={(value) => {
+							if (!value) {
 								onChange({
 									items: [
 										...items.slice(0, i),
-										{...item, checked: e.target.checked},
+										...items.slice(i + 1),
+									],
+								});
+								return;
+							}
+
+							onChange({
+								items: [
+									...items.slice(0, i),
+									{...item, name: value},
+									...items.slice(i + 1),
+								],
+							});
+						}}
+					/>
+					{editable && (
+						<DeleteIcon
+							onClick={() => {
+								onChange({
+									items: [
+										...items.slice(0, i),
 										...items.slice(i + 1),
 									],
 								});
 							}}
-						/>
-						<InlineEditable
-							disabled={!editable}
-							value={item.name}
-							type="text"
-							for="checkList"
-							placeholder="Ajoutez les titres des contenus à récupérer et validez"
-							placeholderCss={placeholderCss}
-							nameCss={nameCss}
-							editableCss={editableCss}
-							onFocusOut={(value) => {
-								if (!value) {
-									onChange({
-										items: [
-											...items.slice(0, i),
-											...items.slice(i + 1),
-										],
-									});
-									return;
-								}
-
+						>
+							&times;
+						</DeleteIcon>
+					)}
+				</ContentItem>
+			))}
+			{editable && (
+				<ContentItem>
+					<InlineEditable
+						type="text"
+						size="small"
+						placeholder="Ajoutez les titres des contenus à récupérer et validez"
+						placeholderCss={placeholderCss}
+						nameCss={nameCss}
+						editableCss={editableCss}
+						onFocusOut={(value) => {
+							if (value) {
 								onChange({
-									items: [
-										...items.slice(0, i),
-										{...item, name: value},
-										...items.slice(i + 1),
-									],
+									items: items.concat({
+										checked: false,
+										name: value,
+									}),
 								});
-							}}
-						/>
-						{editable && (
-							<DeleteIcon
-								onClick={() => {
-									onChange({
-										items: [
-											...items.slice(0, i),
-											...items.slice(i + 1),
-										],
-									});
-								}}
-							>
-								&times;
-							</DeleteIcon>
-						)}
-					</ContentItem>
-				))}
-				{editable && (
-					<ContentItem>
-						<InlineEditable
-							type="text"
-							size="small"
-							placeholder="Ajoutez les titres des contenus à récupérer et validez"
-							placeholderCss={placeholderCss}
-							nameCss={nameCss}
-							editableCss={editableCss}
-							onFocusOut={(value) => {
-								if (value) {
-									onChange({
-										items: items.concat({
-											checked: false,
-											name: value,
-										}),
-									});
-									return true;
-								}
-							}}
-						/>
-					</ContentItem>
-				)}
-			</ContentList>
-		);
-	}
+								return true;
+							}
+						}}
+					/>
+				</ContentItem>
+			)}
+		</ContentList>
+	);
 }
 
 CheckList.defaultProps = {

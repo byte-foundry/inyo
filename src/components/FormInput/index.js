@@ -3,10 +3,14 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {Field} from 'formik';
 
-import {Input, primaryWhite} from '../../utils/content';
+import {Input, primaryWhite} from '../../utils/new/design-system';
 import {getDeep} from '../../utils/functions';
 
 const FormInputMain = styled(Input)`
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+
 	${props => props.inline
 		&& css`
 			background: ${primaryWhite};
@@ -17,11 +21,7 @@ const FormInputMain = styled(Input)`
 `;
 
 function FormInputShell({field, ...props}) {
-	return (
-		<div>
-			<FormInputMain {...field} {...props} />
-		</div>
-	);
+	return <FormInputMain {...field} {...props} />;
 }
 
 class FormInput extends Component {

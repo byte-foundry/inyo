@@ -118,7 +118,8 @@ function ArianneThread({
 	} = useQuery(GET_ALL_PROJECTS);
 
 	const projects = projectsUnfiltered.filter(
-		project => !linkedCustomerId || project.customer.id === linkedCustomerId,
+		project => !linkedCustomerId
+			|| (project.customer && project.customer.id === linkedCustomerId),
 	);
 
 	if (errorsProject) throw errorsProject;
@@ -144,7 +145,6 @@ function ArianneThread({
 			>
 				Projets
 			</ArianneElem>
-			<ArianneElem list={customers}>Tags</ArianneElem>
 		</ArianneContainer>
 	);
 }

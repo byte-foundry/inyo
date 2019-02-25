@@ -4,9 +4,10 @@ import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation} from 'react-apollo-hooks';
 
 import Task from '../TasksList/task';
+import TemplateFiller from '../TemplateFiller';
 
 import {LayoutMainElem, P} from '../../utils/new/design-system';
-import {UPDATE_SECTION, UPDATE_ITEM} from '../../utils/mutations';
+import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 3rem;
@@ -84,7 +85,25 @@ const DraggableSection = ({children, section, index}) => (
 
 function ProjectTasksList({items, projectId, sectionId}) {
 	const updateTask = useMutation(UPDATE_ITEM);
+	const addSection = useMutation(ADD_SECTION);
 	const updateSection = useMutation(UPDATE_SECTION);
+
+	if (!items.length) {
+		return (
+			<TemplateFiller
+				onChoose={(template) => {
+					template.sections.forEach((section) => {
+						addSection({
+							variables: {
+								projectId,
+								...section,
+							},
+						});
+					});
+				}}
+			/>
+		);
+	}
 
 	const sections = Object.values(
 		items.reduce((acc, item) => {

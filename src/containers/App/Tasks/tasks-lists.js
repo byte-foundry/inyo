@@ -40,6 +40,7 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 	if (projectId) {
 		return (
 			<ProjectList
+				projectId={projectId}
 				items={tasks.filter(
 					item => item.section && item.section.project.id === projectId,
 				)}

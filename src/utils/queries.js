@@ -110,21 +110,18 @@ export const GET_ALL_PROJECTS = gql`
 	query getAllProjectsQuery {
 		me {
 			id
-			company {
+			projects {
 				id
-				projects {
+				name
+				viewedByCustomer
+				customer {
 					id
 					name
-					viewedByCustomer
-					customer {
-						id
-						name
-					}
-					issuedAt
-					createdAt
-					status
-					total
 				}
+				issuedAt
+				createdAt
+				status
+				total
 			}
 		}
 	}

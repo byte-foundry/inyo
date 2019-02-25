@@ -361,6 +361,13 @@ export default function Task({item, token}) {
 				token,
 				timeItTook: unit,
 			},
+			optimisticResponse: {
+				finishItem: {
+					...item,
+					status: 'FINISHED',
+					timeItTook: unit,
+				},
+			},
 		});
 		setSetTimeItTook(false);
 	}
@@ -384,7 +391,6 @@ export default function Task({item, token}) {
 									</SetTimeCaption>
 								</SetTimeInfos>
 								<UnitInput
-									innerRef={setSetTimeItTookRef}
 									unit={item.unit}
 									onBlur={() => {}}
 									onSubmit={finishItemCallback}

@@ -112,9 +112,7 @@ function ArianneThread({
 	} = useQuery(GET_ALL_CUSTOMERS);
 	const {
 		data: {
-			me: {
-				company: {projects: projectsUnfiltered},
-			},
+			me: {projects: projectsUnfiltered},
 		},
 		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS);

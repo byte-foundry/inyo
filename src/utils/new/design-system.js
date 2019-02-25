@@ -324,7 +324,7 @@ export const TaskInputDropdown = styled('div')`
 	background: white;
 	box-shadow: 0 0 5px ${gray20};
 	position: absolute;
-	z-index: 1; /* do a portal instead */
+	z-index: 2; /* do a portal instead */
 	width: 500px;
 	top: calc(100% + 15px);
 	left: 55px;

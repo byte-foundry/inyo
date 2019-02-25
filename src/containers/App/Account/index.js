@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import {Redirect} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {ToastContainer, toast} from 'react-toastify';
@@ -280,4 +280,4 @@ class Account extends Component {
 	}
 }
 
-export default Account;
+export default withRouter(Account);

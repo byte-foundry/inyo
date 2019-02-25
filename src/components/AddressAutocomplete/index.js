@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import AlgoliaPlaces from 'algolia-places-react';
 import styled from '@emotion/styled';
 
-import {P, Label, ErrorInput} from '../../utils/content';
+import {InputLabel, Label} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
 
-const AddressAutocompleteMain = styled(P)`
-	width: fill-available;
-	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
+const AddressAutocompleteMain = styled(InputLabel)`
+	width: 100%;
+	margin-bottom: 20px;
 `;
 
 class AddressAutocomplete extends Component {
@@ -17,14 +18,14 @@ class AddressAutocomplete extends Component {
 			placeholder,
 			values,
 			label,
-			padded,
 			required,
 			errors,
 			touched,
+			style,
 		} = this.props;
 
 		return (
-			<AddressAutocompleteMain padded={padded}>
+			<AddressAutocompleteMain style={style} required={required}>
 				<Label htmlFor={name} required={required}>
 					{label}
 				</Label>
@@ -62,8 +63,7 @@ class AddressAutocomplete extends Component {
 						}`
 					}
 				/>
-				{errors[name]
-					&& touched[name] && (
+				{errors[name] && touched[name] && (
 					<ErrorInput className="input-feedback">
 						{/* Yup does not provide a way to reduce errors to a parent object
 						so errors is always errors on street city, postalCode and country not on address */}

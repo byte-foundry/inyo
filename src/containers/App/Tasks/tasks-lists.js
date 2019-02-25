@@ -18,7 +18,7 @@ const Container = styled('div')`
 `;
 
 const TaskAndArianne = styled('div')`
-	flex: auto 1;
+	flex: auto;
 	max-width: 980px;
 `;
 

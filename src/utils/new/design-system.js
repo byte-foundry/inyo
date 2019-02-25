@@ -3,6 +3,7 @@ import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
+import {gray20, gray30} from '../content';
 
 export const primaryPurple = '#5020ee';
 export const primaryWhite = '#fff';
@@ -317,4 +318,20 @@ export const InputLabel = styled('div')`
 				}
 			`};
 	}
+`;
+
+export const TaskInputDropdown = styled('div')`
+	background: white;
+	box-shadow: 0 0 5px ${gray20};
+	position: absolute;
+	z-index: 1; /* do a portal instead */
+	width: 500px;
+	top: calc(100% + 15px);
+	left: 55px;
+`;
+
+export const TaskInputDropdownHeader = styled('p')`
+	text-transform: uppercase;
+	color: ${gray30};
+	margin: 1.5em 2em 0.5em 2em;
 `;

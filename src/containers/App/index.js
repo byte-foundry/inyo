@@ -22,12 +22,25 @@ import {CHECK_LOGIN_USER} from '../../utils/queries';
 import {INTERCOM_APP_ID} from '../../utils/constants';
 
 const AppMain = styled('div')`
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 `;
 
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
+
+const withHeader = Component => (...args) => (
+	<>
+		<TopBar>
+			<TopBarLogo />
+			<TopBarMenu>
+				<ButtonLink to="/app/dashboard">Dashboard</ButtonLink>
+				<TopBarMenuLink to="/app/tasks">Tasks</TopBarMenuLink>
+				<TopBarMenuLink to="/app/account">Options</TopBarMenuLink>
+			</TopBarMenu>
+		</TopBar>
+		<Component {...args} />
+	</>
+);
 
 function App() {
 	const [uidSet, setUidSet] = useState(false);
@@ -60,34 +73,26 @@ function App() {
 
 	return (
 		<AppMain>
-			<TopBar>
-				<TopBarLogo />
-				<TopBarMenu>
-					<ButtonLink to="/app/dashboard">Dashboard</ButtonLink>
-					<TopBarMenuLink to="/app/tasks">Tasks</TopBarMenuLink>
-					<TopBarMenuLink to="/app/account">Options</TopBarMenuLink>
-				</TopBarMenu>
-			</TopBar>
 			<Switch>
 				{error && (
 					<Route
 						path="/app/projects/:projectId/view/:customerToken"
-						component={ProjectCustomerView}
+						component={withHeader(ProjectCustomerView)}
 					/>
 				)}
 				<ProtectedRoute
 					path="/app/dashboard"
-					component={Dashboard}
+					component={withHeader(Dashboard)}
 					isAllowed={data && data.me}
 				/>
 				<ProtectedRoute
 					path="/app/account"
-					component={Account}
+					component={withHeader(Account)}
 					isAllowed={data && data.me}
 				/>
 				<ProtectedRoute
 					path="/app/tasks"
-					component={Tasks}
+					component={withHeader(Tasks)}
 					isAllowed={data && data.me}
 				/>
 				<ProtectedRoute

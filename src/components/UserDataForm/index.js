@@ -20,7 +20,12 @@ import FormElem from '../FormElem';
 
 const UserDataFormMain = styled('div')``;
 
-const FormContainer = styled('div')``;
+const FormContainer = styled('div')`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 20px;
+`;
+
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 20px 40px;
@@ -155,40 +160,39 @@ class UserDataForm extends Component {
 											<form onSubmit={handleSubmit}>
 												<ProfileSection>
 													<FormContainer>
-														<FlexRow justifyContent="space-between">
-															<FormElem
-																{...props}
-																name="firstName"
-																type="text"
-																label="Prénom"
-																placeholder="Jacques"
-																padded
-																required
-															/>
-															<FormElem
-																{...props}
-																name="lastName"
-																type="text"
-																label="Nom"
-																placeholder="Bertrand"
-																padded
-																required
-															/>
-														</FlexRow>
-														<FlexRow justifyContent="space-between">
-															<FormElem
-																{...props}
-																name="email"
-																type="email"
-																label="Email"
-																placeholder="jacques@bertrandsa.com"
-																padded
-																required
-															/>
-														</FlexRow>
+														<FormElem
+															{...props}
+															name="firstName"
+															type="text"
+															label="Prénom"
+															placeholder="Jacques"
+															padded
+															required
+														/>
+														<FormElem
+															{...props}
+															name="lastName"
+															type="text"
+															label="Nom"
+															placeholder="Bertrand"
+															padded
+															required
+														/>
+														<FormElem
+															{...props}
+															name="email"
+															type="email"
+															label="Email"
+															placeholder="jacques@bertrandsa.com"
+															padded
+															required
+															style={{
+																gridColumn:
+																	'1 / 3',
+															}}
+														/>
 													</FormContainer>
-													{status
-														&& status.msg && (
+													{status && status.msg && (
 														<ErrorInput>
 															{status.msg}
 														</ErrorInput>

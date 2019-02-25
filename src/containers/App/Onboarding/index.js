@@ -5,8 +5,6 @@ import {Redirect, withRouter} from 'react-router-dom';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSecondStep from '../../../components/Onboarding/onboarding-second-step';
 import OnboardingThirdStep from '../../../components/Onboarding/onboarding-third-step';
-import OnboardingFourthStep from '../../../components/Onboarding/onboarding-fourth-step';
-import OnboardingFifthStep from '../../../components/Onboarding/onboarding-fifth-step';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
 import {gray20, signalGreen, Loading} from '../../../utils/content';
@@ -82,24 +80,6 @@ class Onboarding extends Component {
 			);
 		case 4:
 			return (
-				<OnboardingFourthStep
-					me={me}
-					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
-				/>
-			);
-		case 5:
-			return (
-				<OnboardingFifthStep
-					me={me}
-					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
-				/>
-			);
-		case 6:
-			return (
 				<Redirect
 					to={
 						projectId
@@ -128,7 +108,7 @@ class Onboarding extends Component {
 						return (
 							<OnboardingMain>
 								<OnboardingProgressBar
-									completionRate={((step - 1) / 5) * 100}
+									completionRate={((step - 1) / 3) * 100}
 								/>
 								{this.getStepData(step, me, projectId)}
 							</OnboardingMain>

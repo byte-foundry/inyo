@@ -87,8 +87,12 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$jobType: JobType
 		$interestedFeatures: [String!]
 		$hasUpcomingProject: Boolean
+		$canBeContacted: Boolean
+		$otherPain: String
+		$painsExpressed: [String!]
 		$startWorkAt: Time
 		$endWorkAt: Time
+		$company: CompanyInput
 		$workingDays: [DAY!]
 	) {
 		updateUser(
@@ -98,6 +102,10 @@ export const UPDATE_USER_CONSTANTS = gql`
 			jobType: $jobType
 			interestedFeatures: $interestedFeatures
 			hasUpcomingProject: $hasUpcomingProject
+			canBeContacted: $canBeContacted
+			otherPain: $otherPain
+			painsExpressed: $painsExpressed
+			company: $company
 			startWorkAt: $startWorkAt
 			endWorkAt: $endWorkAt
 			workingDays: $workingDays

@@ -1,24 +1,17 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
+import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
-import FormElem from '../FormElem';
 
 import {
-	H3,
-	H4,
-	P,
-	gray50,
-	FlexRow,
-	gray70,
-	primaryWhite,
-	primaryBlue,
-	gray80,
-	FlexColumn,
-	Button,
+	H4, FlexColumn, Button, Label,
 } from '../../utils/content';
+
+import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
+import WeekDaysInput from '../WeekDaysInput';
 
 const OnboardingStep = styled('div')`
 	width: 100%;
@@ -35,104 +28,116 @@ const ActionButton = styled(Button)`
 	margin-right: auto;
 `;
 
-const StepTitle = styled(H3)`
-	text-align: center;
-`;
-
 const StepSubtitle = styled(H4)`
 	text-align: center;
 `;
 
-const StepDescription = styled(P)`
-	text-align: center;
-	color: ${gray50};
-	font-size: 15px;
+const EmojiTimeline = styled('div')`
+	display: flex;
+	justify-content: space-between;
+	font-size: 32px;
+	margin: 15px;
+	position: relative;
+	height: 50px;
 `;
 
-const DomainCards = styled(FlexRow)`
-	flex-wrap: wrap;
+const Emoji = styled('div')`
+	position: absolute;
+	left: calc(${props => props.offset}% - 21px);
+	user-select: none;
 `;
 
-const DomainCard = styled('div')`
-	width: 39.771%;
-	margin-right: 2.5%;
-	margin-left: 2.5%;
-	margin-bottom: 15px;
-	padding: 14px 16px 15px 16px;
-	color: ${props => (props.selected ? primaryWhite : gray80)};
-	background-color: ${props => (props.selected ? primaryBlue : 'transparent')};
-	border: 1px solid ${props => (props.selected ? primaryBlue : gray70)};
-	transition: color 0.3s ease, background-color 0.3s ease,
-		border-color 0.3s ease;
-	cursor: pointer;
-	text-align: center;
-`;
-
-class OnboardingFirstStep extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			selectedItems: props.me.workingFields,
-		};
-	}
-
-	toggleSelectedItems = (item, setFieldValue) => {
-		const {selectedItems} = this.state;
-		const itemIndex = selectedItems.findIndex(e => e === item);
-
-		if (itemIndex !== -1) {
-			selectedItems.splice(itemIndex, 1);
-			setFieldValue('workingFields', selectedItems);
-			this.setState({selectedItems});
-
-			return;
-		}
-		setFieldValue('workingFields', selectedItems);
-		selectedItems.push(item);
-		this.setState({selectedItems});
-	};
-
+class OnboardingThirdStep extends Component {
 	render() {
 		const {
-			me, getNextStep, getPreviousStep, step,
+			me: {startWorkAt, endWorkAt},
+			me,
+			getNextStep,
+			getPreviousStep,
+			step,
 		} = this.props;
-		const {selectedItems} = this.state;
-		const domains = [
-			'Design',
-			'Développement',
-			'Écriture',
-			'Photographie',
-			'Multimédia',
-			'Marketing',
-			'Comptabilité',
-			'Autre',
-		];
+
+		const currentDate = new Date().toJSON().split('T')[0];
+		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+
+		const startHourInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 8
+				: startWorkAtDate.getHours();
+		const startMinutesInitial
+			= startWorkAtDate.toString() === 'Invalid Date'
+				? 30
+				: startWorkAtDate.getMinutes();
+		const endHourInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 19
+				: endWorkAtDate.getHours();
+		const endMinutesInitial
+			= endWorkAtDate.toString() === 'Invalid Date'
+				? 0
+				: endWorkAtDate.getMinutes();
+		const workingDaysInitial
+			= me.workingDays && me.workingDays.length
+				? me.workingDays
+				: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 
 		return (
 			<OnboardingStep>
-				<StepTitle>Bienvenue, {me.firstName} !</StepTitle>
-				<StepSubtitle>Dans quel domaine travaillez-vous ?</StepSubtitle>
-				<StepDescription>
-					Vous pouvez choisir plusieurs options
-				</StepDescription>
+				<StepSubtitle>
+					Nous avons besoin de quelques informations pour nous aider à
+					travailler pour vous.
+				</StepSubtitle>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
 						<Formik
 							initialValues={{
-								workingFields: me.workingFields,
-								otherDomain: '',
+								startHour: startHourInitial,
+								startMinutes: startMinutesInitial,
+								endHour: endHourInitial,
+								endMinutes: endMinutesInitial,
+								workingDays: workingDaysInitial,
 							}}
+							validationSchema={Yup.object().shape({
+								startHour: Yup.number().required(),
+								startMinutes: Yup.number().required(),
+								endHour: Yup.number().required(),
+								endMinutes: Yup.number().required(),
+							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const {workingFields, otherDomain} = values;
+								const {
+									startHour,
+									startMinutes,
+									endHour,
+									endMinutes,
+									workingDays,
+								} = values;
+
+								const start = new Date();
+
+								start.setHours(startHour);
+								start.setMinutes(startMinutes);
+								start.setSeconds(0);
+								start.setMilliseconds(0);
+
+								const end = new Date();
+
+								end.setHours(endHour);
+								end.setMinutes(endMinutes);
+								end.setSeconds(0);
+								end.setMilliseconds(0);
 
 								try {
-									if (otherDomain !== '') {
-										workingFields.push(otherDomain);
-									}
 									updateUser({
 										variables: {
-											workingFields,
+											startWorkAt: start
+												.toJSON()
+												.split('T')[1],
+											endWorkAt: end
+												.toJSON()
+												.split('T')[1],
+											workingDays,
 										},
 										update: (
 											cache,
@@ -166,39 +171,55 @@ class OnboardingFirstStep extends Component {
 							}}
 						>
 							{(props) => {
-								const {setFieldValue, handleSubmit} = props;
+								const {
+									handleSubmit,
+									setFieldValue,
+									values: {
+										startHour,
+										startMinutes,
+										endHour,
+										endMinutes,
+										workingDays,
+									},
+								} = props;
 
 								return (
 									<form onSubmit={handleSubmit}>
-										<DomainCards>
-											{domains.map(domain => (
-												<DomainCard
-													selected={selectedItems.find(
-														e => e === domain,
-													)}
-													onClick={() => {
-														this.toggleSelectedItems(
-															domain,
-															setFieldValue,
-														);
-													}}
-												>
-													{domain}
-												</DomainCard>
-											))}
-										</DomainCards>
-										{selectedItems.find(
-											e => e === 'Autre',
-										) && (
-											<FormElem
-												{...props}
-												name="otherDomain"
-												type="text"
-												label="Autre ? Merci de spécifier"
-												placeholder="Journaliste"
-												onboarding="true"
-											/>
-										)}
+										<Label onboarding>
+											Définissez vos horaires de travail
+											<br />
+											(cela nous aide a organiser les
+											tâches que vous pouvez effectuer
+											dans la journée)
+										</Label>
+										<DoubleRangeTimeInput
+											value={{
+												start: [
+													startHour,
+													startMinutes,
+												],
+												end: [endHour, endMinutes],
+											}}
+											setFieldValue={setFieldValue}
+										/>
+										<EmojiTimeline>
+											<Emoji offset={0}>🌙</Emoji>
+											<Emoji offset={33}>🥐</Emoji>
+											<Emoji offset={50}>🍱</Emoji>
+											<Emoji offset={87}>🛌</Emoji>
+											<Emoji offset={100}>🌗</Emoji>
+										</EmojiTimeline>
+										<Label onboarding>
+											Définissez vos horaires de travail
+											<br />
+											(Pour vous aider a ne pas être
+											débordé et ne pas manquer vos
+											deadlines)
+										</Label>
+										<WeekDaysInput
+											values={workingDays}
+											setFieldValue={setFieldValue}
+										/>
 										<ActionButtons>
 											<ActionButton
 												theme="Primary"
@@ -231,4 +252,4 @@ class OnboardingFirstStep extends Component {
 	}
 }
 
-export default OnboardingFirstStep;
+export default OnboardingThirdStep;

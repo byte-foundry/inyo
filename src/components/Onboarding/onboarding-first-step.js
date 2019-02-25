@@ -193,9 +193,9 @@ class OnboardingThirdStep extends Component {
 										<Label onboarding>
 											Définissez vos horaires de travail
 											<br />
-											(cela nous aide a organiser les
+											(cela nous aide à organiser les
 											tâches que vous pouvez effectuer
-											dans la journée)
+											dans une journée)
 										</Label>
 										<DoubleRangeTimeInput
 											value={{
@@ -215,11 +215,11 @@ class OnboardingThirdStep extends Component {
 											<Emoji offset={100}>🌗</Emoji>
 										</EmojiTimeline>
 										<Label onboarding>
-											Définissez vos horaires de travail
+											Définissez vos jours travaillés
 											<br />
-											(Pour vous aider a ne pas être
-											débordé et ne pas manquer vos
-											deadlines)
+											(Pour vous aider à ne pas être
+											débordé et ne jamais manquer une
+											deadline)
 										</Label>
 										<WeekDaysInput
 											values={workingDays}

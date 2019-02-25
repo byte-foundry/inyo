@@ -45,31 +45,37 @@ export const H1 = styled('h1')`
 	${h1};
 	color: ${gray80};
 	font-weight: 700;
+	line-height: 1.4;
 `;
 export const H2 = styled('h2')`
 	${h2};
 	color: ${gray80};
 	font-weight: 700;
+	line-height: 1.4;
 `;
 export const H3 = styled('h3')`
 	${h3};
 	color: ${gray80};
 	font-weight: 400;
+	line-height: 1.4;
 `;
 export const H4 = styled('h4')`
 	${h4};
 	color: ${gray80};
 	font-weight: 400;
+	line-height: 1.4;
 `;
 export const H5 = styled('h5')`
 	${h5};
 	color: ${gray80};
 	font-weight: 400;
+	line-height: 1.4;
 `;
 export const H6 = styled('h6')`
 	${h6};
 	color: ${gray80};
 	font-weight: 400;
+	line-height: 1.4;
 `;
 export const P = styled('p')`
 	${content};
@@ -296,6 +302,7 @@ export const Label = styled('label')`
 	width: fill-available;
 	color: ${gray80};
 	margin-bottom: 5px;
+	line-height: 1.6;
 	${props => props.required
 		&& css`
 			&::after {
@@ -308,7 +315,7 @@ export const Label = styled('label')`
 		`};
 	${props => props.onboarding
 		&& css`
-			margin: 10px 15px 10px 16px;
+			margin: 50px 15px 10px 16px;
 			width: inherit;
 		`};
 `;

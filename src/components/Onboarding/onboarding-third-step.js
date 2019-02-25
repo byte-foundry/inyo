@@ -14,6 +14,7 @@ import {
 	gray80,
 	FlexColumn,
 	Button,
+	P,
 } from '../../utils/content';
 import FormElem from '../FormElem';
 
@@ -34,6 +35,12 @@ const ActionButton = styled(Button)`
 
 const StepSubtitle = styled(H4)`
 	text-align: center;
+`;
+
+const StepDescription = styled(P)`
+	text-align: center;
+	color: ${gray70};
+	font-size: 15px;
 `;
 
 const UseCaseCards = styled(FlexRow)`
@@ -73,9 +80,10 @@ class OnboardingFifthStep extends Component {
 		return (
 			<OnboardingStep>
 				<StepSubtitle>Dernière question !</StepSubtitle>
-				<StepSubtitle>
-					Aidez-nous à transformer Inyo en l'application de vos rêves?
-				</StepSubtitle>
+				<StepDescription>
+					Pouvez-vous nous aider à transformer Inyo en l'application
+					de vos rêves?
+				</StepDescription>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
 						<Formik
@@ -179,7 +187,7 @@ class OnboardingFifthStep extends Component {
 										</UseCaseCards>
 										{values.canBeContacted && (
 											<FormElem
-												label="Votre numéro de téléphone"
+												label="Merci! Renseignez svp votre numéro de téléphone"
 												errors={errors}
 												required
 												values={values}

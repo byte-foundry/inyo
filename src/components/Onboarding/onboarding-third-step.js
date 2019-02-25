@@ -95,6 +95,11 @@ class OnboardingFifthStep extends Component {
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
 
+								window.Intercom('update', {
+									canBeContacted: values.canBeContacted,
+									phone: values.phone,
+								});
+
 								try {
 									updateUser({
 										variables: {

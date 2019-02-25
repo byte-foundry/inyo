@@ -123,6 +123,10 @@ class OnboardingSecondStep extends Component {
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
+								window.Intercom('update', {
+									painsExpressed: values.painsExpressed,
+									otherPain: values.otherPain,
+								});
 								const newPainsExpressed = values.painsExpressed;
 
 								try {

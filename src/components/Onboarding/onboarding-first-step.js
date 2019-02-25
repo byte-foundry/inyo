@@ -127,6 +127,11 @@ class OnboardingThirdStep extends Component {
 								end.setMinutes(endMinutes);
 								end.setSeconds(0);
 								end.setMilliseconds(0);
+								window.Intercom('update', {
+									startHour: `${startHour}:${startMinutes}`,
+									endHour: `${endHour}:${endMinutes}`,
+									workindDays: workingDays,
+								});
 
 								try {
 									updateUser({

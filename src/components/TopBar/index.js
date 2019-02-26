@@ -12,10 +12,11 @@ import Logo from '../../utils/icons/inyo-topbar-logo.svg';
 
 export const TopBarLogo = styled('div')`
 	background: url(${Logo});
-	width: 36px;
-	height: 36px;
+	width: 26px;
+	height: 26px;
 	background-repeat: no-repeat;
 	background-position: center;
+	background-size: cover;
 `;
 
 export const TopBarMenu = styled('div')`

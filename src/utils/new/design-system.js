@@ -279,7 +279,7 @@ export const Input = styled('input')`
 	padding: 0 1rem;
 	width: auto;
 	border: 1px solid transparent;
-	font-weight: 600;
+	font-weight: 400;
 	color: ${props => (props.error ? primaryWhite : '#5020ee')};
 
 	&::placeholder {

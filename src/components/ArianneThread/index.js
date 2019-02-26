@@ -36,6 +36,7 @@ const customSelectStyles = {
 		':hover, :active, :focus': {
 			color: primaryWhite,
 			backgroundColor: primaryPurple,
+			cursor: 'pointer',
 		},
 	}),
 	placeholder: styles => ({
@@ -58,6 +59,7 @@ const customSelectStyles = {
 		':hover, :focus, :active': {
 			border: 'none',
 			boxShadow: 'none',
+			cursor: 'pointer',
 		},
 		fontSize: '14px',
 		overflow: 'hidden',

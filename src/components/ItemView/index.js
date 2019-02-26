@@ -239,7 +239,7 @@ const Item = ({id, customerToken}) => {
 						variables: {
 							itemId: id,
 							token: customerToken,
-							description: e.target.innerText || undefined,
+							description: e.target.innerText,
 						},
 					})
 					}
@@ -258,13 +258,17 @@ const Item = ({id, customerToken}) => {
 									itemId: id,
 									token: customerToken,
 									description: description.concat(
-										`\n# content-acquisition-list\n${items
-											.map(
-												({checked, name}) => `- [${
-													checked ? 'x' : ' '
-												}] ${name}`,
-											)
-											.join('\n')}`,
+										items.length > 0
+											? `\n# content-acquisition-list\n${items
+												.map(
+													({checked, name}) => `- [${
+														checked
+															? 'x'
+															: ' '
+													}] ${name}`,
+												)
+												.join('\n')}`
+											: '',
 									),
 								},
 							});

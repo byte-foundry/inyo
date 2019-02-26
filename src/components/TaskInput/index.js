@@ -259,15 +259,23 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 													linkedCustomerId:
 														itemCustomer
 														&& itemCustomer.id,
-													description: `\n# content-acquisition-list\n${files
-														.map(
-															({checked, name}) => `- [${
-																checked
-																	? 'x'
-																	: ' '
-															}] ${name}`,
-														)
-														.join('\n')}`,
+													description:
+														files.length > 0
+															? `\n# content-acquisition-list\n${files
+																.map(
+																	({
+																		checked,
+																		name,
+																	}) => `- [${
+																		checked
+																			? 'x'
+																			: ' '
+																	}] ${name}`,
+																)
+																.join(
+																	'\n',
+																)}`
+															: '',
 												});
 												setValue('');
 												setMoreInfosMode(false);

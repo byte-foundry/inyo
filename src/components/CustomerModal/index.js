@@ -188,17 +188,19 @@ const CustomerModal = ({selectedCustomerId, onDismiss, onValidate}) => {
 								)}
 
 								<Buttons>
-									<Button
-										red
-										type="button"
-										onClick={() => onValidate({
-											customerId: null,
-											customer: null,
-										})
-										}
-									>
-										Enlever le client
-									</Button>
+									{selectedCustomerId && (
+										<Button
+											red
+											type="button"
+											onClick={() => onValidate({
+												customerId: null,
+												customer: null,
+											})
+											}
+										>
+											Enlever le client
+										</Button>
+									)}
 									<Button
 										type="submit"
 										disabled={isSubmitting}

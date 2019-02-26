@@ -17,8 +17,13 @@ class Tasks extends Component {
 				<Route path="/app/tasks" component={TasksList} />
 				<Route
 					path="/app/tasks/:taskId"
-					render={({match, history}) => (
-						<Modal onDismiss={() => history.push('/app/tasks')}>
+					render={({location: {state = {}}, match, history}) => (
+						<Modal
+							onDismiss={() => history.push(
+								`/app/tasks${state.prevSearch || ''}`,
+							)
+							}
+						>
 							<ModalElem>
 								<TaskView id={match.params.taskId} />
 							</ModalElem>

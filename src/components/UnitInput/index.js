@@ -12,6 +12,7 @@ import {
 
 const UnitInputContainer = styled('div')`
 	display: flex;
+	margin-right: 10px;
 `;
 
 const UnitInputInput = styled('input')`
@@ -157,14 +158,14 @@ export default function ({
 							<UnitInputLabel>h</UnitInputLabel>
 							<UnitInputSlider isHours={isHours} />
 						</UnitInputSwitch>
-						{withButton && (
-							<>
-								<Button textIcon tiny type="submit">
-									✓
-								</Button>
-							</>
-						)}
 					</UnitInputContainer>
+					{withButton && (
+						<>
+							<Button textIcon tiny type="submit">
+								✓
+							</Button>
+						</>
+					)}
 				</UnitInputForm>
 			)}
 		</Formik>

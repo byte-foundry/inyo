@@ -19,6 +19,7 @@ import {
 	CommentIcon,
 	TaskIconText,
 	TaskInfosItem,
+	TaskInfosItemLink,
 	primaryPurple,
 	primaryGrey,
 	lightGrey,
@@ -260,11 +261,11 @@ export function TaskInfosInputs({
 	return (
 		<TaskInfos>
 			{!noComment && (
-				<TaskInfosItem>
+				<TaskInfosItemLink to={`/app/tasks/${item.id}`}>
 					<CommentIcon>
 						{item.comments.length > 0 ? item.comments.length : '+'}
 					</CommentIcon>
-				</TaskInfosItem>
+				</TaskInfosItemLink>
 			)}
 			<TaskIconText
 				inactive={editUnit}
@@ -368,9 +369,9 @@ export default function Task({item, token}) {
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
 
-	const setSetTimeItTookRef = useRef();
+	const setTimeItTookRef = useRef();
 
-	useOnClickOutside(setSetTimeItTookRef, () => {
+	useOnClickOutside(setTimeItTookRef, () => {
 		setSetTimeItTook(false);
 	});
 
@@ -401,7 +402,7 @@ export default function Task({item, token}) {
 					<TaskHeading small={setTimeItTook}>{item.name}</TaskHeading>
 					<TaskActions stayActive={setTimeItTook}>
 						{setTimeItTook ? (
-							<SetTimeContainer>
+							<SetTimeContainer ref={setTimeItTookRef}>
 								<SetTimeInfos>
 									<SetTimeHeadline>
 										Temps réellement passé

@@ -241,6 +241,11 @@ export const TaskInfosItem = styled('div')`
 	cursor: pointer;
 	align-items: center;
 	height: 30px;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
 
 	${props => (props.inactive
 		? ''
@@ -249,6 +254,8 @@ export const TaskInfosItem = styled('div')`
 			border-bottom: 1px dotted ${primaryPurple};
 		}`)}
 `;
+
+export const TaskInfosItemLink = TaskInfosItem.withComponent(Link);
 
 export function TaskIconText({icon, content, ...rest}) {
 	return (

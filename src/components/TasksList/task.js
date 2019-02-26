@@ -493,7 +493,15 @@ function Task({item, token, location}) {
 			</TaskContent>
 			{isEditingCustomer && (
 				<CustomerModal
-					onValidate={(selected) => {}}
+					onValidate={(selected) => {
+						updateItem({
+							variables: {
+								itemId: item.id,
+								linkedCustomer: selected.customer,
+							},
+						});
+						setEditCustomer(false);
+					}}
 					selectedCustomerId={''}
 					onDismiss={() => setEditCustomer(false)}
 				/>

@@ -474,6 +474,7 @@ export const UPDATE_ITEM = gql`
 		$description: String
 		$dueDate: DateTime
 		$linkedCustomerId: ID
+		$linkedCustomer: CustomerInput
 		$name: String
 		$position: Int
 		$reviewer: Reviewer
@@ -488,6 +489,7 @@ export const UPDATE_ITEM = gql`
 			description: $description
 			dueDate: $dueDate
 			linkedCustomerId: $linkedCustomerId
+			linkedCustomer: $linkedCustomer
 			name: $name
 			position: $position
 			reviewer: $reviewer

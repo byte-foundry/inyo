@@ -372,44 +372,14 @@ export const FINISH_PROJECT = gql`
 
 // Section
 export const ADD_SECTION = gql`
+	${ITEM_FRAGMENT}
+
 	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {
 		addSection(projectId: $projectId, name: $name, items: $items) {
 			id
 			name
 			items {
-				id
-				name
-				unit
-				description
-				reviewer
-				comments {
-					createdAt
-					id
-					views {
-						viewer {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					author {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
+				...ItemFragment
 			}
 		}
 	}

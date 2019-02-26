@@ -59,7 +59,8 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 }
 
 function TasksList({location, history}) {
-	const query = new URLSearchParams(location.search);
+	const {prevSearch} = location.state || {};
+	const query = new URLSearchParams(prevSearch || location.search);
 	const linkedCustomerId = query.get('customerId');
 	const projectId = query.get('projectId');
 

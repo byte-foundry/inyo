@@ -1,4 +1,5 @@
 import React, {useState, useRef} from 'react';
+import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import {useMutation, useQuery} from 'react-apollo-hooks';
@@ -358,7 +359,7 @@ export function TaskInfosInputs({
 	);
 }
 
-export default function Task({item, token}) {
+function Task({item, token, location}) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
@@ -417,7 +418,12 @@ export default function Task({item, token}) {
 							</SetTimeContainer>
 						) : (
 							<>
-								<ButtonLink to={`/app/tasks/${item.id}`}>
+								<ButtonLink
+									to={{
+										pathname: `/app/tasks/${item.id}`,
+										state: {prevSearch: location.search},
+									}}
+								>
 									Modifier
 								</ButtonLink>
 								{item.status !== 'FINISHED' && (
@@ -491,3 +497,5 @@ export default function Task({item, token}) {
 		</TaskContainer>
 	);
 }
+
+export default withRouter(Task);

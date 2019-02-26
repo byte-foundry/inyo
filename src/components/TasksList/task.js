@@ -32,6 +32,7 @@ import {ArianneElem} from '../ArianneThread';
 import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
+import CustomerModal from '../CustomerModal';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -200,7 +201,10 @@ export function TaskCustomerInput({
 				editCustomer ? (
 					<ArianneElem
 						id="projects"
-						list={me.customers}
+						list={[
+							{id: 'CREATE', name: 'Créer un nouveau client'},
+							...me.customers,
+						]}
 						defaultMenuIsOpen={true}
 						defaultValue={
 							item.linkedCustomer && {
@@ -359,6 +363,7 @@ export default function Task({item, token}) {
 	const updateItem = useMutation(UPDATE_ITEM);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
+	const [isEditingCustomer, setEditCustomer] = useState(false);
 
 	const setTimeItTookRef = useRef();
 
@@ -446,12 +451,17 @@ export default function Task({item, token}) {
 						});
 					}}
 					onCustomerSubmit={({value}) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								linkedCustomerId: value,
-							},
-						});
+						if (value === 'CREATE') {
+							setEditCustomer(true);
+						}
+						else {
+							updateItem({
+								variables: {
+									itemId: item.id,
+									linkedCustomerId: value,
+								},
+							});
+						}
 					}}
 					onUnitSubmit={(unit) => {
 						updateItem({
@@ -471,6 +481,13 @@ export default function Task({item, token}) {
 					}}
 				/>
 			</TaskContent>
+			{isEditingCustomer && (
+				<CustomerModal
+					onValidate={(selected) => {}}
+					selectedCustomerId={''}
+					onDismiss={() => setEditCustomer(false)}
+				/>
+			)}
 		</TaskContainer>
 	);
 }

@@ -26,7 +26,12 @@ const Buttons = styled('div')`
 	justify-content: flex-end;
 `;
 
-const CustomerModal = ({selectedCustomerId, onDismiss, onValidate}) => {
+const CustomerModal = ({
+	selectedCustomerId,
+	onDismiss,
+	onValidate,
+	noSelect,
+}) => {
 	const {data, error} = useQuery(GET_ALL_CUSTOMERS);
 
 	if (error) throw error;
@@ -105,21 +110,28 @@ const CustomerModal = ({selectedCustomerId, onDismiss, onValidate}) => {
 
 						return (
 							<form onSubmit={props.handleSubmit}>
-								<Header>Choisir un client existant</Header>
-								<FormSelect
-									{...props}
-									name="customerId"
-									placeholder="Tous les clients"
-									options={options}
-									hideSelectedOptions
-									isSearchable
-									isClearable
-									style={{marginBottom: '30px'}}
-								/>
+								{noSelect && (
+									<>
+										<Header>
+											Choisir un client existant
+										</Header>
+										<FormSelect
+											{...props}
+											name="customerId"
+											placeholder="Tous les clients"
+											options={options}
+											hideSelectedOptions
+											isSearchable
+											isClearable
+											style={{marginBottom: '30px'}}
+										/>
+									</>
+								)}
 								{!values.customerId && (
 									<>
 										<Header>
-											Ou créer un nouveau client
+											{noSelect ? 'C' : 'Ou c'}réer un
+											nouveau client
 										</Header>
 										<CreateCustomerForm>
 											<FormElem

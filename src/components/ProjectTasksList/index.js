@@ -6,7 +6,7 @@ import {useMutation} from 'react-apollo-hooks';
 import Task from '../TasksList/task';
 import TemplateFiller from '../TemplateFiller';
 
-import {GET_ALL_TASKS} from '../../utils/queries';
+import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {LayoutMainElem, P} from '../../utils/new/design-system';
 import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
 
@@ -86,7 +86,24 @@ const DraggableSection = ({children, section, index}) => (
 
 function ProjectTasksList({items, projectId, sectionId}) {
 	const updateTask = useMutation(UPDATE_ITEM);
-	const addSection = useMutation(ADD_SECTION);
+	const addSection = useMutation(ADD_SECTION, {
+		update: (cache, {data: {addSection: addedSection}}) => {
+			const data = cache.readQuery({
+				query: GET_ALL_TASKS,
+				variables: {},
+			});
+
+			const {me} = data;
+
+			me.tasks.push(...addedSection.items);
+
+			cache.writeQuery({
+				query: GET_ALL_TASKS,
+				variables: {},
+				data,
+			});
+		},
+	});
 	const updateSection = useMutation(UPDATE_SECTION);
 
 	if (!items.length) {

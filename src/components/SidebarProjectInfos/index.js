@@ -108,7 +108,7 @@ const SidebarProjectInfos = ({
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
 	const [askNotifyActivityConfirm, setAskNotifyActivityConfirm] = useState(
-		null,
+		{},
 	);
 	const updateProject = useMutation(UPDATE_PROJECT);
 	const removeProject = useMutation(REMOVE_PROJECT);
@@ -135,7 +135,9 @@ const SidebarProjectInfos = ({
 			<SubSection>
 				<ClientTitle>
 					Votre client
-					<PencilElem onClick={() => setEditCustomer(true)} />
+					{project.customer && (
+						<PencilElem onClick={() => setEditCustomer(true)} />
+					)}
 				</ClientTitle>
 				{project.customer ? (
 					<>
@@ -145,17 +147,14 @@ const SidebarProjectInfos = ({
 								type="checkbox"
 								checked={project.notifyActivityToCustomer}
 								onChange={async () => {
-									console.log(
-										project.notifyActivityToCustomer,
-									);
 									if (project.notifyActivityToCustomer) {
 										const confirmed = await new Promise(
-											resolve => setAskNotifyActivityConfirm(
+											resolve => setAskNotifyActivityConfirm({
 												resolve,
-											),
+											}),
 										);
 
-										setAskNotifyActivityConfirm(null);
+										setAskNotifyActivityConfirm({});
 
 										if (!confirmed) {
 											return;
@@ -172,11 +171,11 @@ const SidebarProjectInfos = ({
 							/>
 							Notifier mon client par email
 						</CheckBoxLabel>
-						{askNotifyActivityConfirm && (
+						{askNotifyActivityConfirm.resolve && (
 							<ConfirmModal
-								onConfirm={confirmed => askNotifyActivityConfirm(confirmed)
+								onConfirm={confirmed => askNotifyActivityConfirm.resolve(confirmed)
 								}
-								closeModal={() => askNotifyActivityConfirm(false)
+								closeModal={() => askNotifyActivityConfirm.resolve(false)
 								}
 							>
 								<P>

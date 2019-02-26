@@ -342,3 +342,15 @@ export const TaskInputDropdownHeader = styled('p')`
 	color: ${gray30};
 	margin: 1.5em 2em 0.5em 2em;
 `;
+
+export const DueDateInputElem = styled('input')`
+	font-family: 'Work sans', sans-serif;
+	color: ${primaryPurple};
+	width: 83px;
+	display: block;
+`;
+
+export const DateInputContainer = styled('div')`
+	position: relative;
+	display: inline-block;
+`;

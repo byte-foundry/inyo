@@ -26,6 +26,7 @@ export const ITEM_FRAGMENT = gql`
 				deadline
 				daysUntilDeadline
 				status
+				name
 				customer {
 					id
 					name

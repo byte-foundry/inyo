@@ -24,6 +24,8 @@ import {
 	primaryGrey,
 	lightGrey,
 	mediumGrey,
+	DueDateInputElem,
+	DateInputContainer,
 } from '../../utils/new/design-system';
 
 import {ArianneElem} from '../ArianneThread';
@@ -153,10 +155,6 @@ const TaskInfos = styled('div')`
 	display: flex;
 `;
 
-const TaskDateContainer = styled('div')`
-	position: relative;
-`;
-
 const SetTimeContainer = styled('div')`
 	display: flex;
 `;
@@ -180,13 +178,6 @@ const SetTimeCaption = styled('div')`
 	font-size: 12px;
 	font-style: italic;
 	line-height: 1.3;
-`;
-
-const DueDateInputElem = styled('input')`
-	font-family: 'Work sans', sans-serif;
-	color: ${primaryPurple};
-	width: 83px;
-	display: block;
 `;
 
 export function TaskCustomerInput({
@@ -310,7 +301,7 @@ export function TaskInfosInputs({
 				inactive={editDueDate}
 				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 				content={
-					<TaskDateContainer
+					<DateInputContainer
 						onClick={() => !editDueDate && setEditDueDate(true)}
 					>
 						{editDueDate ? (
@@ -350,7 +341,7 @@ export function TaskInfosInputs({
 								)) || <>&mdash;</>}
 							</>
 						)}
-					</TaskDateContainer>
+					</DateInputContainer>
 				}
 			/>
 			<TaskCustomerInput

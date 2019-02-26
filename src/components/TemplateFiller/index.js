@@ -93,7 +93,7 @@ const TemplateFiller = ({onChoose}) => {
 							<li key={section.name}>
 								{section.name}
 								<SectionItemList>
-									{selectedTemplate.sections.map(item => (
+									{section.items.map(item => (
 										<li key={item.name}>{item.name}</li>
 									))}
 								</SectionItemList>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {Link} from 'react-router-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
+import moment from 'moment';
+import useOnClickOutside from 'use-onclickoutside';
 
 import TaskStatusButton from '../TaskStatusButton';
 import Plural from '../Plural';
@@ -11,8 +13,11 @@ import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 import MultilineEditable from '../MultilineEditable';
 import InlineEditable from '../InlineEditable';
+import UnitInput from '../UnitInput';
+import DateInput from '../DateInput';
+import {ArianneElem} from '../ArianneThread';
 
-import {GET_ITEM_DETAILS} from '../../utils/queries';
+import {GET_ITEM_DETAILS, GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {UPDATE_ITEM} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -24,6 +29,8 @@ import {
 	SubHeading,
 	Button,
 	primaryPurple,
+	DueDateInputElem,
+	DateInputContainer,
 } from '../../utils/new/design-system';
 import {ITEM_TYPES} from '../../utils/constants';
 
@@ -31,7 +38,7 @@ const Header = styled('div')``;
 
 const Metas = styled('div')`
 	display: grid;
-	grid-template-columns: 300px 1fr;
+	grid-template-columns: 340px 1fr;
 	grid-row-gap: 0.8em;
 	color: ${gray50};
 	padding-bottom: 2rem;
@@ -60,7 +67,9 @@ const MetaText = styled('span')`
 	}
 `;
 
-const MetaTime = styled(MetaText)``;
+const MetaTime = styled(MetaText)`
+	position: relative;
+`;
 
 const Description = styled('div')`
 	color: ${gray70};
@@ -107,10 +116,24 @@ const TaskHeadingIcon = styled('div')`
 `;
 
 const Item = ({id, customerToken}) => {
+	const [editCustomer, setEditCustomer] = useState(false);
+	const [editDueDate, setEditDueDate] = useState(false);
+	const [editUnit, setEditUnit] = useState(false);
+	const [editProject, setEditProject] = useState(false);
+	const {
+		data: {me},
+		errors: errorsCustomers,
+	} = useQuery(GET_ALL_CUSTOMERS);
+	const dateRef = useRef();
+
 	const updateItem = useMutation(UPDATE_ITEM);
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
 		suspend: false,
 		variables: {id, token: customerToken},
+	});
+
+	useOnClickOutside(dateRef, () => {
+		setEditDueDate(false);
 	});
 
 	if (loading) return <SpinningBubble />;
@@ -121,7 +144,7 @@ const Item = ({id, customerToken}) => {
 
 	let {description} = item;
 	const deadline = new Date(
-		item.section ? item.section.project.deadline : item.dueDate,
+		item.dueDate || (item.section && item.section.project.deadline),
 	);
 
 	// parse the description for the file list
@@ -188,18 +211,82 @@ const Item = ({id, customerToken}) => {
 					<TimeIcon />
 					<MetaLabel>Temps estimé</MetaLabel>
 					<MetaText>
-						{item.unit}
-						<Plural
-							singular=" jour"
-							plural=" jours"
-							value={item.unit}
-						/>
+						{editUnit ? (
+							<UnitInput
+								unit={item.unit}
+								onBlur={(unit) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											unit,
+										},
+									});
+									setEditUnit(false);
+								}}
+								onSubmit={(unit) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											unit,
+										},
+									});
+									setEditUnit(false);
+								}}
+								onTab={(unit) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											unit,
+										},
+									});
+									setEditUnit(false);
+								}}
+							/>
+						) : (
+							<div onClick={() => setEditUnit(true)}>
+								{item.unit}
+								<Plural
+									singular=" jour"
+									plural=" jours"
+									value={item.unit}
+								/>
+							</div>
+						)}
 					</MetaText>
 				</Meta>
 				<Meta>
 					<ContactIcon />
 					<MetaLabel>Client</MetaLabel>
-					<MetaText>{customer && customer.name}</MetaText>
+					{editCustomer ? (
+						<ArianneElem
+							id="projects"
+							list={me.customers}
+							defaultMenuIsOpen={true}
+							defaultValue={
+								item.linkedCustomer && {
+									value: item.linkedCustomer.id,
+									label: item.linkedCustomer.name,
+								}
+							}
+							autoFocus={true}
+							onChange={({value}) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										linkedCustomerId: value,
+									},
+								});
+								setEditCustomer(false);
+							}}
+							onBlur={() => {
+								setEditCustomer(false);
+							}}
+						/>
+					) : (
+						<MetaText onClick={() => setEditCustomer(true)}>
+							{customer && customer.name}
+						</MetaText>
+					)}
 				</Meta>
 				{deadline.toString() !== 'Invalid Date' && (
 					<Meta>
@@ -209,7 +296,39 @@ const Item = ({id, customerToken}) => {
 							title={deadline.toLocaleString()}
 							dateTime={deadline.toJSON()}
 						>
-							{deadline.toLocaleDateString()}
+							{editDueDate ? (
+								<DateInputContainer>
+									<DueDateInputElem
+										value={moment(
+											deadline || new Date(),
+										).format('DD/MM/YYYY')}
+									/>
+									<DateInput
+										innerRef={dateRef}
+										date={moment(deadline || new Date())}
+										onDateChange={(date) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													dueDate: date.toISOString(),
+												},
+											});
+											setEditDueDate(false);
+										}}
+										duration={item.unit}
+									/>
+								</DateInputContainer>
+							) : (
+								<div onClick={() => setEditDueDate(true)}>
+									{moment(deadline).diff(moment(), 'days')
+										- item.unit}{' '}
+									<Plural
+										value={item.unit}
+										singular="jour"
+										plural="jours"
+									/>
+								</div>
+							)}
 						</MetaTime>
 					</Meta>
 				)}

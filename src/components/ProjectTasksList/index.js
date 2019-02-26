@@ -129,7 +129,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 			<DragDropContext
 				onDragEnd={async (result) => {
 					// dropped outside the list
-					debugger;
 					if (!result.destination) {
 						return;
 					}
@@ -144,7 +143,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 					}
 
 					if (type === 'SECTION') {
-						debugger;
 						await updateSection({
 							variables: {
 								sectionId: sections[source.index].id,
@@ -153,7 +151,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 						});
 					}
 					else if (type === 'ITEM') {
-						debugger;
 						await updateTask({
 							variables: {
 								itemId: result.draggableId,

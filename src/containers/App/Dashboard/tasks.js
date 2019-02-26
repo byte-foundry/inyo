@@ -94,9 +94,7 @@ const DashboardTasks = ({
 			if (projectsLoading) return <p>Loading</p>;
 
 			const {
-				me: {
-					company: {projects},
-				},
+				me: {projects},
 			} = projectsData;
 			const projectsPending = projects.filter(
 				project => project.status === 'DRAFT',

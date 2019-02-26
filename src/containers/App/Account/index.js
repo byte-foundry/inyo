@@ -17,6 +17,7 @@ import {
 	gray30,
 	Loading,
 } from '../../../utils/content';
+import {primaryPurple} from '../../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
@@ -57,8 +58,8 @@ const ProfileSideElem = styled('li')`
 	transition: border-color 0.3s ease, color 0.3s ease;
 	${props => props.active
 		&& css`
-			border-color: ${gray30};
-			color: ${gray30};
+			border-color: ${primaryPurple};
+			color: ${primaryPurple};
 		`};
 `;
 const ProfileSideLink = styled('a')`
@@ -74,7 +75,7 @@ const ProfileMain = styled('div')`
 
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
-	padding: 20px 40px;
+	padding: 60px 40px;
 	border: 1px solid ${gray20};
 `;
 const LogoutButton = styled(Button)`

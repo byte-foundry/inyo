@@ -87,7 +87,7 @@ const DateContainer = styled('div')`
 	position: relative;
 `;
 
-const ClientTitle = styled(SubHeading)`
+const SidebarHeading = styled(SubHeading)`
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
@@ -133,12 +133,12 @@ const SidebarProjectInfos = ({
 			</SubSection> */}
 
 			<SubSection>
-				<ClientTitle>
+				<SidebarHeading>
 					Votre client
 					{project.customer && (
 						<PencilElem onClick={() => setEditCustomer(true)} />
 					)}
-				</ClientTitle>
+				</SidebarHeading>
 				{project.customer ? (
 					<>
 						<CustomerNameAndAddress customer={project.customer} />
@@ -251,45 +251,16 @@ const SidebarProjectInfos = ({
 				</PreviewModal>
 			)}
 
-			{project.deadline !== null && (
-				<SubSection>
-					<SubHeading>Deadline</SubHeading>
-					{project.deadline || editDueDate ? (
-						<DateContainer onClick={() => setEditDueDate(true)}>
-							<BigNumber>
-								{(project.deadline
-									&& moment(project.deadline).format(
-										'DD/MM/YYYY',
-									)) || <>&mdash;</>}
-							</BigNumber>
-							{editDueDate && (
-								<DateInput
-									innerRef={dateRef}
-									date={moment(
-										project.deadline || new Date(),
-									)}
-									onDateChange={(date) => {
-										updateProject({
-											variables: {
-												projectId: project.id,
-												deadline: date.toISOString(),
-											},
-											optimisticResponse: {
-												__typename: 'Mutation',
-												updateProject: {
-													__typename: 'Project',
-													...project,
-													dueDate: date.toISOString(),
-												},
-											},
-										});
-										setEditDueDate(false);
-									}}
-									duration={project.total}
-									position="left"
-								/>
-							)}
-						</DateContainer>
+			<SubSection>
+				<SidebarHeading>Deadline</SidebarHeading>
+				<DateContainer>
+					{project.deadline ? (
+						<BigNumber onClick={() => setEditDueDate(true)}>
+							{(project.deadline
+								&& moment(project.deadline).format(
+									'DD/MM/YYYY',
+								)) || <>&mdash;</>}
+						</BigNumber>
 					) : (
 						<Button
 							grey
@@ -299,8 +270,33 @@ const SidebarProjectInfos = ({
 							Ajouter une deadline
 						</Button>
 					)}
-				</SubSection>
-			)}
+					{editDueDate && (
+						<DateInput
+							innerRef={dateRef}
+							date={moment(project.deadline || new Date())}
+							onDateChange={(date) => {
+								updateProject({
+									variables: {
+										projectId: project.id,
+										deadline: date.toISOString(),
+									},
+									optimisticResponse: {
+										__typename: 'Mutation',
+										updateProject: {
+											__typename: 'Project',
+											...project,
+											dueDate: date.toISOString(),
+										},
+									},
+								});
+								setEditDueDate(false);
+							}}
+							duration={project.total}
+							position="left"
+						/>
+					)}
+				</DateContainer>
+			</SubSection>
 
 			{project.daysUntilDeadline !== null && (
 				<SubSection>

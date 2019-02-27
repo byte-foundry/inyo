@@ -38,7 +38,7 @@ import CustomerModal from '../CustomerModal';
 export const TaskContainer = styled('div')`
 	display: flex;
 	position: relative;
-	margin-bottom: 0.8rem;
+	margin-bottom: 0.6rem;
 	cursor: grab;
 
 	&:after {

@@ -186,9 +186,9 @@ export const A = styled('a')`
 export const CommentIcon = styled('div')`
 	display: flex;
 	position: relative;
-	width: 22px;
-	height: 16px;
-	margin-top: -2px;
+	width: 20px;
+	height: 14px;
+	margin-top: -1px;
 	margin-right: 0.3rem;
 	font-weight: 600;
 	background-color: ${mediumGrey};
@@ -230,7 +230,8 @@ export const CommentIcon = styled('div')`
 `;
 
 const TaskInfosContent = styled('div')`
-	color: ${primaryPurple};
+	color: ${primaryGrey};
+	opacity: 0.8;
 	padding-bottom: 0;
 	display: flex;
 	border-bottom: solid 1px transparent;
@@ -239,7 +240,7 @@ const TaskInfosContent = styled('div')`
 export const TaskInfosItem = styled('div')`
 	display: flex;
 	margin-right: 1rem;
-	font-size: 14px;
+	font-size: 12px;
 	cursor: pointer;
 	align-items: center;
 	height: 30px;
@@ -252,7 +253,7 @@ export const TaskInfosItem = styled('div')`
 	${props => (props.inactive
 		? ''
 		: `&:hover ${TaskInfosContent} {
-			color: ${accentGrey};
+			color: ${primaryPurple};
 			border-bottom: 1px dotted ${primaryPurple};
 		}`)}
 `;
@@ -272,7 +273,7 @@ export const LayoutMainElem = styled('div')``;
 
 export const Input = styled('input')`
 	font-family: 'Work Sans', sans-serif;
-	font-size: 14px;
+	font-size: inherit;
 
 	background-color: ${props => (props.error ? primaryRed : '#f5f2fe')};
 	border: none;

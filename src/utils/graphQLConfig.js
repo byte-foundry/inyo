@@ -12,6 +12,8 @@ import WatchedMutationLink from 'apollo-link-watched-mutation';
 import introspectionQueryResultData from './fragmentTypes.json';
 
 import createTaskWatchMutation from './mutationLinks/createTask';
+import deleteTaskWatchMutation from './mutationLinks/deleteTask';
+
 import {GRAPHQL_API} from './constants';
 
 const DEFAULT_DEBOUNCE_TIMEOUT = 100;
@@ -67,6 +69,7 @@ const errorLink = onError(({networkError, graphQLErrors}) => {
 
 const watchLink = new WatchedMutationLink(cache, {
 	addItem: createTaskWatchMutation,
+	removeItem: deleteTaskWatchMutation,
 });
 
 const client = new ApolloClient({

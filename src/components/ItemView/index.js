@@ -18,7 +18,7 @@ import DateInput from '../DateInput';
 import {ArianneElem} from '../ArianneThread';
 
 import {GET_ITEM_DETAILS, GET_ALL_CUSTOMERS} from '../../utils/queries';
-import {UPDATE_ITEM} from '../../utils/mutations';
+import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
@@ -115,21 +115,33 @@ const TaskHeadingIcon = styled('div')`
 	left: -5px;
 `;
 
-const Item = ({id, customerToken}) => {
+const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
+	const [deletingItem, setDeletingItem] = useState(false);
+	const dateRef = useRef();
+
+	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
+		suspend: false,
+		variables: {id, token: customerToken},
+	});
 	const {
 		data: {me},
 		errors: errorsCustomers,
 	} = useQuery(GET_ALL_CUSTOMERS);
-	const dateRef = useRef();
 
 	const updateItem = useMutation(UPDATE_ITEM);
-	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
-		suspend: false,
-		variables: {id, token: customerToken},
+	const deleteItem = useMutation(REMOVE_ITEM, {
+		variables: {
+			itemId: id,
+		},
+		optimisticReponse: {
+			removeItem: {
+				id,
+			},
+		},
 	});
 
 	useOnClickOutside(dateRef, () => {
@@ -397,6 +409,26 @@ const Item = ({id, customerToken}) => {
 			)}
 			<SubHeading>Commentaires</SubHeading>
 			<CommentList itemId={item.id} customerToken={customerToken} />
+			{deletingItem ? (
+				<>
+					<Button
+						red
+						onClick={() => {
+							deleteItem();
+							close();
+						}}
+					>
+						Supprimer
+					</Button>
+					<Button grey onClick={() => setDeletingItem(false)}>
+						Annuler
+					</Button>
+				</>
+			) : (
+				<Button red onClick={() => setDeletingItem(true)}>
+					Supprimer la tâche
+				</Button>
+			)}
 		</>
 	);
 };

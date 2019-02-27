@@ -48,7 +48,7 @@ const ClientPreviewIcon = styled(EyeIcon)`
 `;
 
 const PreviewModal = styled(ModalContainer)`
-	min-height: 600px;
+	min-height: 500px;
 	padding: 0;
 `;
 
@@ -75,7 +75,7 @@ const CheckBoxLabel = styled('label')`
 
 const BigNumber = styled(P)`
 	font-size: 20px;
-	font-weight: 600;
+	font-weight: 500;
 	color: ${primaryGrey};
 `;
 

@@ -295,13 +295,13 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 									}
 								}}
 							>
-								Creér la tâche
+								créer la tâche
 							</Button>
 							<Button
 								icon="↑"
 								onClick={() => onSubmitProject({name: value})}
 							>
-								Creér un projet
+								créer un projet
 							</Button>
 						</InputButtonContainer>
 					</InputButtonWrapper>

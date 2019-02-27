@@ -36,11 +36,7 @@ const Aside = styled('aside')`
 `;
 
 const SubSection = styled('div')`
-	margin: 3rem 0;
-
-	:first-child {
-		margin-top: 0;
-	}
+	margin-bottom: 2rem;
 `;
 
 const ClientPreviewIcon = styled(EyeIcon)`

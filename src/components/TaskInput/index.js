@@ -395,7 +395,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 						setItemCustomer(selected.customer);
 						setEditCustomer(false);
 					}}
-					selectedCustomerId={''}
+					noSelect
 					onDismiss={() => setEditCustomer(false)}
 				/>
 			)}

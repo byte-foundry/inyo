@@ -516,7 +516,7 @@ function Task({item, token, location}) {
 						});
 						setEditCustomer(false);
 					}}
-					selectedCustomerId={''}
+					noSelect
 					onDismiss={() => setEditCustomer(false)}
 				/>
 			)}

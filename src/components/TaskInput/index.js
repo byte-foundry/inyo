@@ -134,7 +134,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 		setFocusByClick(false);
 	});
 
-	let icon = '🔃';
+	let icon = '+';
 
 	if (type) {
 		({icon} = types.find(t => t.type === type));

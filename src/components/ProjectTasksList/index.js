@@ -7,7 +7,7 @@ import Task from '../TasksList/task';
 import TemplateFiller from '../TemplateFiller';
 
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
-import {LayoutMainElem, P} from '../../utils/new/design-system';
+import {LayoutMainElem, P, primaryBlack} from '../../utils/new/design-system';
 import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
 
 const TasksListContainer = styled(LayoutMainElem)`
@@ -15,7 +15,9 @@ const TasksListContainer = styled(LayoutMainElem)`
 `;
 
 const SectionTitle = styled(P)`
-	margin: 2rem 14px;
+	margin: 3rem 14px 2rem;
+	font-weight: 500;
+	color: ${primaryBlack};
 `;
 
 const DraggableTask = ({task, index, ...rest}) => (

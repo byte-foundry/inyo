@@ -25,7 +25,14 @@ class Tasks extends Component {
 							}
 						>
 							<ModalElem>
-								<TaskView id={match.params.taskId} />
+								<TaskView
+									id={match.params.taskId}
+									close={() => history.push(
+										`/app/tasks${state.prevSearch
+												|| ''}`,
+									)
+									}
+								/>
 							</ModalElem>
 						</Modal>
 					)}

@@ -71,6 +71,11 @@ const MetaTime = styled(MetaText)`
 	position: relative;
 `;
 
+const ClientDropdown = styled(ArianneElem)`
+	margin-top: -6px;
+	padding: 0;
+`;
+
 const Description = styled('div')`
 	color: ${gray70};
 	line-height: 1.6;
@@ -270,7 +275,7 @@ const Item = ({id, customerToken, close}) => {
 					<ContactIcon />
 					<MetaLabel>Client</MetaLabel>
 					{editCustomer ? (
-						<ArianneElem
+						<ClientDropdown
 							id="projects"
 							list={me.customers}
 							defaultMenuIsOpen={true}

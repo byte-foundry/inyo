@@ -37,14 +37,11 @@ const SectionTitle = styled(H3)`
 const ColumnHeader = styled('div')`
 	flex: ${props => props.flex};
 	display: flex;
+	align-items: center;
 `;
 
 const HeaderRow = styled(FlexRow)`
 	margin: 10px 105px 10px 17px;
-
-	svg {
-		margin-top: -3px;
-	}
 `;
 
 const HeaderText = styled('span')`

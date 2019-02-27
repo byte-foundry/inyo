@@ -41,7 +41,7 @@ const TemplateItem = styled('li')`
 const SectionList = styled('ul')`
 	color: ${primaryBlack};
 	list-style-type: none;
-	font-weight: 600;
+	font-weight: 500;
 	padding: 10px 0;
 `;
 

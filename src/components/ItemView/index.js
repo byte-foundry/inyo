@@ -61,9 +61,10 @@ const MetaLabel = styled('div')`
 const MetaText = styled('span')`
 	color: ${primaryPurple};
 	flex: 1;
+	cursor: pointer;
 
 	:empty::before {
-		content: ' - ';
+		content: '\\2014';
 	}
 `;
 
@@ -160,9 +161,11 @@ const Item = ({id, customerToken, close}) => {
 	const {linkedCustomer: customer} = item;
 
 	let {description} = item;
-	const deadline = new Date(
-		item.dueDate || (item.section && item.section.project.deadline),
-	);
+	const deadline
+		= (item.dueDate || (item.section && item.section.project.deadline))
+		&& new Date(
+			item.dueDate || (item.section && item.section.project.deadline),
+		);
 
 	// parse the description for the file list
 	let files = [];
@@ -305,13 +308,14 @@ const Item = ({id, customerToken, close}) => {
 						</MetaText>
 					)}
 				</Meta>
-				{deadline.toString() !== 'Invalid Date' && (
+				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Meta>
 						<HourglassIcon />
 						<MetaLabel>Temps restant</MetaLabel>
 						<MetaTime
-							title={deadline.toLocaleString()}
-							dateTime={deadline.toJSON()}
+							title={deadline && deadline.toLocaleString()}
+							dateTime={deadline && deadline.toJSON()}
+							onClick={() => !editDueDate && setEditDueDate(true)}
 						>
 							{editDueDate ? (
 								<DateInputContainer>
@@ -322,7 +326,9 @@ const Item = ({id, customerToken, close}) => {
 									/>
 									<DateInput
 										innerRef={dateRef}
-										date={moment(deadline || new Date())}
+										date={moment(
+											deadline || new Date(),
+										)}
 										onDateChange={(date) => {
 											updateItem({
 												variables: {
@@ -336,15 +342,19 @@ const Item = ({id, customerToken, close}) => {
 									/>
 								</DateInputContainer>
 							) : (
-								<div onClick={() => setEditDueDate(true)}>
-									{moment(deadline).diff(moment(), 'days')
-										- item.unit}{' '}
-									<Plural
-										value={item.unit}
-										singular="jour"
-										plural="jours"
-									/>
-								</div>
+								deadline && (
+									<div>
+										{moment(deadline).diff(
+											moment(),
+											'days',
+										) - item.unit}{' '}
+										<Plural
+											value={item.unit}
+											singular="jour"
+											plural="jours"
+										/>
+									</div>
+								)
 							)}
 						</MetaTime>
 					</Meta>
@@ -364,9 +374,6 @@ const Item = ({id, customerToken, close}) => {
 					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
 			</Metas>
-			<Button grey icon="+">
-				Ajouter une catégorie
-			</Button>
 			<Description>
 				<MultilineEditable
 					placeholder="Ajouter une description…"

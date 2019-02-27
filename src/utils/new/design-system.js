@@ -347,6 +347,7 @@ export const TaskInputDropdownHeader = styled('p')`
 
 export const DueDateInputElem = styled('input')`
 	font-family: 'Work sans', sans-serif;
+	font-size: inherit;
 	color: ${primaryPurple};
 	width: 83px;
 	display: block;

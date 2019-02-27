@@ -125,6 +125,15 @@ const TaskActions = styled('div')`
 	pointer-events: none;
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
+
+	form {
+		input {
+			padding-left: 1rem;
+		}
+		label {
+			margin-top: -0.35rem;
+		}
+	}
 `;
 
 const TaskHeader = styled('div')`

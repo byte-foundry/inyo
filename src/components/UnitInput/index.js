@@ -13,31 +13,32 @@ import {
 const UnitInputContainer = styled('div')`
 	display: flex;
 	margin-right: 10px;
+	position: relative;
 `;
 
 const UnitInputInput = styled('input')`
-	padding: 0 2rem;
-	width: 30px;
-	margin-right: calc(-1.2rem - 10px);
-	background-color: #f5f2fe;
-	border-radius: 20px;
-	height: 27px;
-	border: 1px solid transparent;
-	font-weight: 500;
+	width: 50px;
+	margin-right: 1rem;
+	font-size: 14px;
+	font-family: inherit;
 	color: ${primaryPurple};
 `;
 
 const UnitInputSwitch = styled('label')`
 	position: relative;
+	top: 0.45rem;
+	right: 1.2rem;
 	display: inline-block;
 	width: 100px;
 	height: 29px;
 	cursor: pointer;
+	transform: scale(0.8);
+	margin-top: -0.85rem;
 `;
 
 const UnitInputLabel = styled('span')`
 	position: absolute;
-	top: 20%;
+	top: 26%;
 	color: ${primaryPurple};
 	right: 1rem;
 	z-index: 1;
@@ -52,7 +53,7 @@ const UnitInputSlider = styled('span')`
     cursor: pointer;
     top: 0;
     left: 0;
-    right: -2px;
+    right: -7px;
     bottom: 0;
     background-color: ${primaryWhite};
     transition: transform ease .4s;
@@ -72,6 +73,8 @@ const UnitInputSlider = styled('span')`
 		bottom: 2px;
 		background-color: #5020ee;
 		color: #FFF;
+		font-weight: 500;
+		letter-spacing: .05rem;
 		transition: .4s;
 		border-radius: 16px;
 		padding: 0 .8rem;

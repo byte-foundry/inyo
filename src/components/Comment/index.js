@@ -12,12 +12,14 @@ import {
 	gray80,
 } from '../../utils/content';
 
+import {primaryPurple, primaryRed} from '../../utils/new/design-system';
+
 const CommentMain = styled('div')`
-	margin-bottom: 20px;
+	margin: 20px 0;
 `;
 const CommentImage = styled('div')`
 	border-radius: 50%;
-	background: ${props => (props.isCustomer ? primarySalmon : primaryNavyBlue)};
+	background: ${props => (props.isCustomer ? primaryRed : primaryPurple)};
 	width: 40px;
 	height: 40px;
 	text-align: center;
@@ -36,6 +38,9 @@ const CommentText = styled('div')`
 	font-size: 15px;
 	line-height: 1.5;
 	color: ${gray80};
+	p {
+		margin-top: 0;
+	}
 `;
 const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;

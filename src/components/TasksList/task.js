@@ -38,7 +38,7 @@ import CustomerModal from '../CustomerModal';
 export const TaskContainer = styled('div')`
 	display: flex;
 	position: relative;
-	margin-bottom: calc(2rem - 16px);
+	margin-bottom: 0.8rem;
 	cursor: grab;
 
 	&:after {
@@ -50,7 +50,7 @@ export const TaskContainer = styled('div')`
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
-		top: 2.3rem;
+		top: 1.9rem;
 
 		opacity: 0;
 		transition: all 300ms ease;
@@ -82,33 +82,34 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: 2rem;
+	margin-top: 1.65rem;
 	margin-bottom: 30px;
 
 	&:after,
 	&:before {
 		content: '';
 		display: block;
-		border-left: 1px solid ${mediumGrey};
+		border-left: 1px dotted ${mediumGrey};
 		position: absolute;
 		left: 13px;
 	}
 
 	&:before {
-		height: 30px;
-		top: -17px;
+		height: 22px;
+		top: -3px;
 	}
 
 	&:after {
-		top: 73px;
-		height: 60%;
+		top: 62px;
+		bottom: -13px;
 	}
 `;
 
 const TaskInfosIcon = styled('div')`
-	width: 20px;
-	height: 20px;
+	width: 12px;
+	height: 12px;
 	background-repeat: no-repeat;
+	background-size: contain;
 	background-image: url(${props => props.icon});
 	margin-right: 0.4rem;
 `;
@@ -131,6 +132,12 @@ const TaskHeader = styled('div')`
 	justify-content: space-between;
 	align-items: center;
 	position: relative;
+	z-index: 0;
+	cursor: pointer;
+
+	h2 {
+		margin: 0.5rem 0;
+	}
 
 	&:hover {
 		&:before {
@@ -154,11 +161,16 @@ const TaskHeader = styled('div')`
 	}
 `;
 
+const OpenBtn = styled(ButtonLink)`
+	color: ${primaryGrey};
+	border-color: transparent;
+	background: transparent;
+`;
+
 const TaskInfos = styled('div')`
 	display: flex;
 	letter-spacing: 0.05em;
-	transform-origin: top left;
-	transform: scale(0.85);
+	margin-top: -0.25rem;
 `;
 
 const SetTimeContainer = styled('div')`
@@ -422,14 +434,14 @@ function Task({item, token, location}) {
 							</SetTimeContainer>
 						) : (
 							<>
-								<ButtonLink
+								<OpenBtn
 									to={{
 										pathname: `/app/tasks/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
 									Modifier
-								</ButtonLink>
+								</OpenBtn>
 								{item.status !== 'FINISHED' && (
 									<Button
 										icon="✓"

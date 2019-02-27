@@ -14,7 +14,12 @@ const ContentList = styled(Ul)`
 
 const ContentItem = styled('li')`
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+
+	input {
+		font-size: 14px;
+		padding: 0.5rem;
+	}
 `;
 
 const DeleteIcon = styled('span')`
@@ -27,6 +32,7 @@ const placeholderCss = css`
 	font-style: italic;
 	font-size: 14px;
 	cursor: pointer;
+	padding: 0.5rem 0;
 
 	&::before {
 		content: '+';
@@ -44,8 +50,9 @@ const nameCss = css`
 `;
 
 const editableCss = css`
-	padding: 0 0 0 0.8rem;
+	margin-left: 0.8rem;
 	font-size: 14px;
+	border: 1px solid transparent;
 `;
 
 function CheckList({items, editable, onChange}) {
@@ -71,7 +78,7 @@ function CheckList({items, editable, onChange}) {
 						value={item.name}
 						type="text"
 						for="checkList"
-						placeholder="Ajoutez les titres des contenus à récupérer et validez"
+						placeholder="Ajoutez les titres des documents et appuyez sur entrée"
 						placeholderCss={placeholderCss}
 						nameCss={nameCss}
 						editableCss={editableCss}
@@ -116,7 +123,7 @@ function CheckList({items, editable, onChange}) {
 					<InlineEditable
 						type="text"
 						size="small"
-						placeholder="Ajoutez les titres des contenus à récupérer et validez"
+						placeholder="Ajoutez les titres des documents et appuyez sur entrée"
 						placeholderCss={placeholderCss}
 						nameCss={nameCss}
 						editableCss={editableCss}

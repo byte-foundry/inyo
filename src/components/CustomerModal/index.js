@@ -110,7 +110,7 @@ const CustomerModal = ({
 
 						return (
 							<form onSubmit={props.handleSubmit}>
-								{noSelect && (
+								{!noSelect && (
 									<>
 										<Header>
 											Choisir un client existant

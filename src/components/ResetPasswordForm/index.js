@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import {Link, withRouter} from 'react-router-dom';
+import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
 import gql from 'graphql-tag';
 
 import apolloClient from '../../utils/graphQLConfig';
-import {P, Button, ErrorInput} from '../../utils/content';
+import {P, Button} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
 import FormElem from '../FormElem';
 
 const CHECK_RESET_PASSWORD = gql`
@@ -22,6 +24,11 @@ const UPDATE_PASSWORD = gql`
 			token
 		}
 	}
+`;
+
+const ResetButton = styled(Button)`
+	display: block;
+	margin-left: auto;
 `;
 
 class ResetPasswordForm extends Component {
@@ -144,24 +151,16 @@ class ResetPasswordForm extends Component {
 										placeholder="***************"
 										required
 									/>
-									{status
-										&& status.msg && (
-										<ErrorInput>
-											{status.msg}
-										</ErrorInput>
+									{status && status.msg && (
+										<ErrorInput>{status.msg}</ErrorInput>
 									)}
-									<Button
+									<ResetButton
 										type="submit"
-										theme={
-											isSubmitting
-												? 'Disabled'
-												: 'PrimaryNavy'
-										}
-										size="Big"
+										big
 										disabled={isSubmitting}
 									>
 										Changer le mot de passe
-									</Button>
+									</ResetButton>
 								</form>
 							)}
 						</Formik>

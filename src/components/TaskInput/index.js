@@ -345,11 +345,17 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 								linkedCustomer: itemCustomer,
 							}}
 							noComment
-							onCustomerSubmit={customer => setItemCustomer({
-								id: customer.value,
-								name: customer.label,
-							})
-							}
+							onCustomerSubmit={(customer) => {
+								if (customer.value === 'CREATE') {
+									setEditCustomer(true);
+								}
+								else {
+									setItemCustomer({
+										id: customer.value,
+										name: customer.label,
+									});
+								}
+							}}
 						/>
 					</TaskInputCheckListContainer>
 					<TaskInputDropdownHeader>

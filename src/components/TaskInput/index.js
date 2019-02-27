@@ -6,6 +6,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
+import CustomerModal from '../CustomerModal';
 
 import {ITEM_TYPES} from '../../utils/constants';
 import {
@@ -116,6 +117,7 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
+	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [focusByClick, setFocusByClick] = useState(false);
 	const [moreInfosMode, setMoreInfosMode] = useState(false);
 	const [
@@ -316,11 +318,17 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 						}}
 						noComment
 						onDueDateSubmit={date => setItemDueDate(date)}
-						onCustomerSubmit={customer => setItemCustomer({
-							id: customer.value,
-							name: customer.label,
-						})
-						}
+						onCustomerSubmit={(customer) => {
+							if (customer.value === 'CREATE') {
+								setEditCustomer(true);
+							}
+							else {
+								setItemCustomer({
+									id: customer.value,
+									name: customer.label,
+								});
+							}
+						}}
 						onUnitSubmit={unit => setItemUnit(unit)}
 					/>
 				</TaskInfosInputsContainer>
@@ -372,6 +380,16 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 						setItemCustomer();
 						setItemUnit();
 					}}
+				/>
+			)}
+			{isEditingCustomer && (
+				<CustomerModal
+					onValidate={(selected) => {
+						setItemCustomer(selected.customer);
+						setEditCustomer(false);
+					}}
+					selectedCustomerId={''}
+					onDismiss={() => setEditCustomer(false)}
 				/>
 			)}
 		</Container>

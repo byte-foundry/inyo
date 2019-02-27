@@ -11,7 +11,7 @@ const TaskStatusButton = ({taskId, isFinished}) => {
 
 	return (
 		<Button
-			icon={isFinished && '✔'}
+			icon={isFinished && '✓'}
 			white={!isFinished}
 			onClick={() => {
 				if (isFinished) {

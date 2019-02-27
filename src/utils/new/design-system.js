@@ -28,9 +28,9 @@ export const Body = styled('div')`
 export const Button = styled('button')`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
-	font-weight: 500;
+	font-weight: 400;
 	padding: 0.3rem 0.8rem;
-	border: 2px solid #333;
+	border: 1px solid #333;
 	border-radius: 30px;
 	cursor: pointer;
 	text-decoration: none;

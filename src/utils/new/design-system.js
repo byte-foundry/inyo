@@ -8,7 +8,7 @@ import {gray20, gray30} from '../content';
 export const primaryPurple = '#5020ee';
 export const primaryWhite = '#fff';
 export const primaryRed = '#ff3366';
-export const primaryGrey = '#888';
+export const primaryGrey = '#A9A9A9';
 export const accentGrey = '#c7c7c7';
 export const lightGrey = '#fafafa';
 export const mediumGrey = '#eee';
@@ -231,7 +231,6 @@ export const CommentIcon = styled('div')`
 
 const TaskInfosContent = styled('div')`
 	color: ${primaryGrey};
-	opacity: 0.8;
 	padding-bottom: 0;
 	display: flex;
 	border-bottom: solid 1px transparent;

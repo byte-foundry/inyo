@@ -125,6 +125,15 @@ const TaskActions = styled('div')`
 	pointer-events: none;
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
+
+	form {
+		input {
+			padding-left: 1rem;
+		}
+		label {
+			margin-top: -0.35rem;
+		}
+	}
 `;
 
 const TaskHeader = styled('div')`
@@ -169,10 +178,7 @@ const OpenBtn = styled(ButtonLink)`
 const TaskInfos = styled('div')`
 	display: flex;
 	letter-spacing: 0.05em;
-<<<<<<< HEAD
-=======
 	margin-top: -0.25rem;
->>>>>>> compacted-task
 `;
 
 const SetTimeContainer = styled('div')`

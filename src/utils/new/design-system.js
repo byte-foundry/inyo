@@ -189,6 +189,8 @@ export const CommentIcon = styled('div')`
 	width: 22px;
 	height: 16px;
 	margin-top: -2px;
+	margin-right: 0.3rem;
+	font-weight: 600;
 	background-color: ${mediumGrey};
 	color: ${(props) => {
 		if (props.new) {

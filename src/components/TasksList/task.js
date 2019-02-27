@@ -110,6 +110,7 @@ const TaskInfosIcon = styled('div')`
 	height: 20px;
 	background-repeat: no-repeat;
 	background-image: url(${props => props.icon});
+	margin-right: 0.4rem;
 `;
 
 const TaskContent = styled('div')`
@@ -155,6 +156,9 @@ const TaskHeader = styled('div')`
 
 const TaskInfos = styled('div')`
 	display: flex;
+	letter-spacing: 0.05em;
+	transform-origin: top left;
+	transform: scale(0.85);
 `;
 
 const SetTimeContainer = styled('div')`

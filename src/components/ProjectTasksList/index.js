@@ -2,22 +2,53 @@ import React from 'react';
 import styled from '@emotion/styled';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation} from 'react-apollo-hooks';
+import {css} from '@emotion/core';
 
 import Task from '../TasksList/task';
 import TemplateFiller from '../TemplateFiller';
 
-import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
-import {LayoutMainElem, P, primaryBlack} from '../../utils/new/design-system';
+import {GET_ALL_TASKS} from '../../utils/queries';
+import {
+	LayoutMainElem,
+	primaryBlack,
+	primaryPurple,
+} from '../../utils/new/design-system';
 import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
+import InlineEditable from '../InlineEditable';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 3rem;
 `;
 
-const SectionTitle = styled(P)`
+const SectionTitle = styled(InlineEditable)`
 	margin: 3rem 14px 2rem;
 	font-weight: 500;
 	color: ${primaryBlack};
+	border: 1px solid transparent;
+	cursor: text;
+
+	:hover {
+		border: 1px solid ${primaryPurple};
+	}
+`;
+
+const placeholderCss = css`
+	font-style: italic;
+	padding: 0;
+	display: block;
+	line-height: 1.5;
+`;
+
+const nameCss = css`
+	padding: 0;
+	display: block;
+	line-height: 1.5;
+`;
+
+const editableCss = css`
+	padding: 0;
+	line-height: 1.5;
+	display: block;
 `;
 
 const DraggableTask = ({task, index, ...rest}) => (
@@ -299,7 +330,23 @@ function ProjectTasksList({items, projectId, sectionId}) {
 							key={section.id}
 							index={sectionIndex}
 						>
-							<SectionTitle>{section.name}</SectionTitle>
+							<SectionTitle
+								placeholder="Nom du projet"
+								value={section.name}
+								placeholderCss={placeholderCss}
+								nameCss={nameCss}
+								editableCss={editableCss}
+								onFocusOut={(value) => {
+									if (value) {
+										updateSection({
+											variables: {
+												sectionId: section.id,
+												name: value,
+											},
+										});
+									}
+								}}
+							/>
 							<DroppableTaskArea section={section}>
 								{section.items.map((task, itemIndex) => (
 									<DraggableTask

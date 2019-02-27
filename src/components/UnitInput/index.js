@@ -102,7 +102,7 @@ export default function ({
 	});
 
 	useOnClickOutside(containerRef, () => {
-		onBlur();
+		onBlur(parseFloat(inputRef.current.value));
 	});
 
 	return (
@@ -135,6 +135,7 @@ export default function ({
 							name="unit"
 							type="number"
 							ref={inputRef}
+							step="0.1"
 							onChange={e => setFieldValue('unit', e.target.value)
 							}
 							onKeyDown={(e) => {

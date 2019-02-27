@@ -44,9 +44,7 @@ const withHeader = Component => (...args) => (
 
 function App() {
 	const [setupDone, setSetupDone] = useState(false);
-	const {data, error} = useQuery(CHECK_LOGIN_USER);
-
-	if (error) throw error;
+	const {data} = useQuery(CHECK_LOGIN_USER);
 
 	if (data && data.me && !setupDone) {
 		window.Intercom('boot', {
@@ -73,7 +71,7 @@ function App() {
 	return (
 		<AppMain>
 			<Switch>
-				{error && (
+				{!data.me && (
 					<Route
 						path="/app/projects/:projectId/view/:customerToken"
 						component={withHeader(ProjectCustomerView)}

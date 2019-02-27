@@ -64,12 +64,3 @@ export const ITEM_FRAGMENT = gql`
 		}
 	}
 `;
-
-/** ******** APP QUERIES ********* */
-export const GET_NETWORK_STATUS = gql`
-	query getNetworkStatus {
-		networkStatus @client {
-			isConnected
-		}
-	}
-`;

@@ -34,9 +34,9 @@ const withHeader = Component => (...args) => (
 		<TopBar>
 			<TopBarLogo />
 			<TopBarMenu>
-				<ButtonLink to="/app/dashboard">Dashboard</ButtonLink>
-				<TopBarMenuLink to="/app/tasks">Tasks</TopBarMenuLink>
-				<TopBarMenuLink to="/app/account">Options</TopBarMenuLink>
+				<TopBarMenuLink to="/app/dashboard">Dashboard</TopBarMenuLink>
+				<TopBarMenuLink to="/app/tasks">Tâches</TopBarMenuLink>
+				<TopBarMenuLink to="/app/account">Réglages</TopBarMenuLink>
 			</TopBarMenu>
 		</TopBar>
 		<Component {...args} />

@@ -1,23 +1,6 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 import {ITEM_FRAGMENT} from './fragments';
 
-/** ******** APP QUERIES ********* */
-export const GET_NETWORK_STATUS = gql`
-	query getNetworkStatus {
-		networkStatus @client {
-			isConnected
-		}
-	}
-`;
-
-export const GET_ITEMS = gql`
-	query getItems {
-		template @client {
-			items
-		}
-	}
-`;
-
 /** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
 	query loggedInUserQuery {

@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
-import {Mutation} from 'react-apollo';
 import {withRouter} from 'react-router-dom';
-import {ToastContainer, toast} from 'react-toastify';
-import AddItem from './add-item';
+import {toast} from 'react-toastify';
 import TaskStatus from '../TaskStatus';
 import CommentIcon from '../CommentIcon';
 import Plural from '../Plural';
@@ -13,18 +11,8 @@ import {
 	primaryWhite,
 	primaryBlue,
 	gray80,
-	Button,
 } from '../../utils/content';
-import {
-	UPDATE_ITEM,
-	REMOVE_ITEM,
-	ACCEPT_ITEM,
-	REJECT_ITEM,
-} from '../../utils/mutations';
 import {GET_PROJECT_DATA_WITH_TOKEN} from '../../utils/queries';
-import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
-import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
-import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 
 const ItemName = styled(FlexRow)`
 	margin: 0;
@@ -78,10 +66,6 @@ const CommentContainer = styled('div')`
 `;
 
 class Item extends Component {
-	state = {
-		shouldDisplayAddItem: false,
-	};
-
 	submitItem = (itemMutation) => {
 		itemMutation({
 			variables: {
@@ -145,91 +129,8 @@ class Item extends Component {
 			daysUntilDeadline,
 		} = this.props;
 		const {comments, status} = item;
-		const {shouldDisplayAddItem} = this.state;
 		const customerViewMode = this.props.match.params.customerToken;
 
-		if (shouldDisplayAddItem && mode === 'edit' && editItem) {
-			return (
-				<Mutation mutation={UPDATE_ITEM}>
-					{updateItem => (
-						<Mutation mutation={REMOVE_ITEM}>
-							{removeItem => (
-								<AddItem
-									item={item}
-									remove={() => {
-										this.props.removeItem(
-											item.id,
-											sectionId,
-											removeItem,
-										);
-										this.setState({
-											shouldDisplayAddItem: false,
-										});
-									}}
-									cancel={() => {
-										this.setState({
-											shouldDisplayAddItem: false,
-										});
-									}}
-									done={(data) => {
-										editItem(
-											item.id,
-											sectionId,
-											data,
-											updateItem,
-										);
-										this.setState({
-											shouldDisplayAddItem: false,
-										});
-									}}
-								/>
-							)}
-						</Mutation>
-					)}
-				</Mutation>
-			);
-		}
-		if (shouldDisplayAddItem && mode === 'see' && editItem) {
-			return (
-				<Mutation mutation={UPDATE_ITEM}>
-					{updateItem => (
-						<Mutation mutation={REMOVE_ITEM}>
-							{removeItem => (
-								<AddItem
-									item={item}
-									remove={() => {
-										this.props.removeItem(
-											item.id,
-											sectionId,
-											removeItem,
-										);
-										this.setState({
-											shouldDisplayAddItem: false,
-										});
-									}}
-									cancel={() => {
-										this.setState({
-											shouldDisplayAddItem: false,
-										});
-									}}
-									done={(data) => {
-										this.setState({
-											shouldDisplayAddItem: false,
-										});
-										editItem(
-											item.id,
-											sectionId,
-											data,
-											updateItem,
-										);
-									}}
-								/>
-							)}
-						</Mutation>
-					)}
-				</Mutation>
-			);
-		}
 		return (
 			<ItemRow reviewer={item.reviewer}>
 				{(customerViewMode
@@ -254,10 +155,6 @@ class Item extends Component {
 					onClick={() => {
 						if (this.props.onClick) {
 							this.props.onClick();
-							return;
-						}
-						if (!customerViewMode && item.status !== 'FINISHED') {
-							this.setState({shouldDisplayAddItem: true});
 						}
 					}}
 				>

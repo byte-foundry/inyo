@@ -67,8 +67,8 @@ const CheckBoxLabel = styled('label')`
 	cursor: pointer;
 
 	input[type='checkbox'] {
-		margin-left: 0.4em;
-		margin-right: 0.8em;
+		margin-left: 0.5em;
+		margin-right: 0.9em;
 		margin-top: -1px;
 	}
 `;
@@ -81,6 +81,11 @@ const BigNumber = styled(P)`
 
 const DateContainer = styled('div')`
 	position: relative;
+
+	p:hover {
+		color: ${primaryPurple};
+		cursor: pointer;
+	}
 `;
 
 const SidebarHeading = styled(SubHeading)`

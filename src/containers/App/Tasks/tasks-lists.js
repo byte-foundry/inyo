@@ -108,7 +108,10 @@ function TasksList({location, history}) {
 					selectProjects={setProjectSelected}
 				/>
 				{projectId && <ProjectHeader projectId={projectId} />}
-				<CreateTask setProjectSelected={setProjectSelected} />
+				<CreateTask
+					setProjectSelected={setProjectSelected}
+					currentProjectId={projectId}
+				/>
 				<Suspense fallback={<Loading />}>
 					<TasksListContainer
 						projectId={projectId}

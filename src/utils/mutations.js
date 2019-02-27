@@ -435,6 +435,7 @@ export const ADD_ITEM = gql`
 
 	mutation addItem(
 		$sectionId: ID
+		$projectId: ID
 		$name: String!
 		$type: ItemType
 		$unit: Float
@@ -445,6 +446,7 @@ export const ADD_ITEM = gql`
 	) {
 		addItem(
 			sectionId: $sectionId
+			projectId: $projectId
 			name: $name
 			type: $type
 			unit: $unit

@@ -22,7 +22,6 @@ const {body} = shevy;
 
 export const Body = styled('div')`
 	${body};
-	padding: 3rem;
 `;
 
 export const Button = styled('button')`

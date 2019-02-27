@@ -24,6 +24,7 @@ import {INTERCOM_APP_ID} from '../../utils/constants';
 const AppMain = styled('div')`
 	display: flex;
 	flex-direction: column;
+	padding: 3rem;
 `;
 
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);

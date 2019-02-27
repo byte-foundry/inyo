@@ -17,7 +17,7 @@ const {
 
 // Colors
 export const primaryWhite = '#ffffff';
-export const primaryBlue = '#3860ff';
+export const primaryBlue = '#5020ee';
 export const primaryNavyBlue = '#171a44';
 export const primarySalmon = '#fbada1';
 export const pastelGreen = '#e9fffd';

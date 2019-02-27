@@ -57,7 +57,10 @@ const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
 `;
 
-const ProjectSections = styled('div')``;
+const ProjectSections = styled('div')`
+	padding: 20px 40px;
+`;
+
 const SideActions = styled(FlexColumn)`
 	min-width: 260px;
 	flex: 0.1 295px;

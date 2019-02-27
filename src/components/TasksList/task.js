@@ -268,6 +268,7 @@ export function TaskInfosInputs({
 	onCustomerSubmit,
 	startOpen,
 	switchOnSelect,
+	location,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -281,7 +282,12 @@ export function TaskInfosInputs({
 	return (
 		<TaskInfos>
 			{!noComment && (
-				<TaskInfosItemLink to={`/app/tasks/${item.id}`}>
+				<TaskInfosItemLink
+					to={{
+						pathname: `/app/tasks/${item.id}`,
+						state: {prevSearch: location.search},
+					}}
+				>
 					<CommentIcon>
 						{item.comments.length > 0 ? item.comments.length : '+'}
 					</CommentIcon>
@@ -463,6 +469,7 @@ function Task({item, token, location}) {
 					</TaskActions>
 				</TaskHeader>
 				<TaskInfosInputs
+					location={location}
 					item={item}
 					onDueDateSubmit={(date) => {
 						updateItem({

@@ -13,14 +13,17 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = ({setProjectSelected}) => {
+const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 
 	return (
 		<TaskInputContainer>
 			<TaskInput
-				onSubmitTask={task => createTask({variables: task})}
+				onSubmitTask={task => createTask({
+					variables: {projectId: currentProjectId, ...task},
+				})
+				}
 				onSubmitProject={async (name) => {
 					const {
 						data: {

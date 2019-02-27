@@ -157,8 +157,6 @@ const TaskHeader = styled('div')`
 const TaskInfos = styled('div')`
 	display: flex;
 	letter-spacing: 0.05em;
-	transform-origin: top left;
-	transform: scale(0.85);
 `;
 
 const SetTimeContainer = styled('div')`

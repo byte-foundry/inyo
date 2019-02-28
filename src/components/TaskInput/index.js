@@ -191,9 +191,9 @@ const TaskInput = ({
 											name: value,
 											type: type || 'DEFAULT',
 											linkedCustomer:
-												itemCustomer
-												&& !itemCustomer.id
-												&& itemCustomer,
+												itemCustomer && !itemCustomer.id
+													? itemCustomer
+													: undefined,
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											description: `\n# content-acquisition-list\n${files
@@ -221,9 +221,9 @@ const TaskInput = ({
 											&& itemDueDate.toISOString(),
 										unit: parseFloat(itemUnit || 0),
 										linkedCustomer:
-											itemCustomer
-											&& !itemCustomer.id
-											&& itemCustomer,
+											itemCustomer && !itemCustomer.id
+												? itemCustomer
+												: undefined,
 										linkedCustomerId:
 											itemCustomer && itemCustomer.id,
 									});
@@ -291,7 +291,8 @@ const TaskInput = ({
 													linkedCustomer:
 														itemCustomer
 														&& !itemCustomer.id
-														&& itemCustomer,
+															? itemCustomer
+															: undefined,
 													linkedCustomerId:
 														itemCustomer
 														&& itemCustomer.id,

@@ -267,7 +267,8 @@ export const LinkButton = styled(Link)`
 
 export const Input = styled('input')`
 	display: block;
-	border: 1px solid ${props => (props.error ? signalRed : gray70)};
+	position: relative;
+	border: 1px solid ${props => (props.error ? signalRed : 'transparent')};
 	padding: 15px 18px 16px 18px;
 	color: ${gray50};
 	width: ${props => (props.flexible ? '100%' : 'fill-available')};
@@ -282,7 +283,7 @@ export const Input = styled('input')`
 		color: ${gray30};
 	}
 	&:focus {
-		border-color: ${primaryBlue};
+		background-color: ${gray10};
 	}
 `;
 

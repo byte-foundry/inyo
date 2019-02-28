@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {gray20} from '../../utils/content';
-import {primaryPurple} from '../../utils/new/design-system';
+import {
+	primaryPurple,
+	lightGrey,
+	mediumGrey,
+} from '../../utils/new/design-system';
 
 const TasksProgressBarMain = styled('div')`
-	background: ${gray20};
+	background: ${lightGrey};
 	position: relative;
-	height: 10px;
+	height: 8px;
 	width: 100%;
-	margin-top: 16px;
+	margin: 2rem 0;
 	border-radius: 5px;
+	border: 1px dotted ${mediumGrey};
 
 	&:after {
 		position: absolute;
@@ -21,6 +26,7 @@ const TasksProgressBarMain = styled('div')`
 		background: ${primaryPurple};
 		transition: width 0.2s ease;
 		border-radius: 5px;
+		border: 1px solid ${primaryPurple};
 	}
 `;
 

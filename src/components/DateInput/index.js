@@ -3,7 +3,7 @@ import {DayPickerSingleDateController} from 'react-dates';
 import moment from 'moment';
 import styled from '@emotion/styled/macro';
 
-import {primaryGrey} from '../../utils/new/design-system';
+import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
 
 import Plural from '../Plural';
 
@@ -15,6 +15,16 @@ const TaskDateInput = styled('div')`
 		: 'left: calc(100% + 5px);')}
 	top: 0px;
 	z-index: 1;
+
+	.CalendarDay__selected,
+	.CalendarDay__selected:active,
+	.CalendarDay__selected:hover {
+		background-color: ${primaryPurple};
+		border-color: ${primaryPurple};
+	}
+	.DayPickerKeyboardShortcuts_show__bottomRight {
+		display: none;
+	}
 `;
 
 const MarginMessage = styled('div')`

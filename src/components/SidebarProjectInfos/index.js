@@ -10,6 +10,8 @@ import {
 	Button,
 	primaryPurple,
 	primaryGrey,
+	lightGrey,
+	accentGrey,
 	P,
 } from '../../utils/new/design-system';
 import ConfirmModal from '../ConfirmModal';
@@ -23,6 +25,7 @@ import CustomerModal from '../CustomerModal';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
@@ -32,7 +35,7 @@ const Aside = styled('aside')`
 	flex-direction: column;
 	align-items: stretch;
 	width: 270px;
-	padding-left: 30px;
+	padding-left: 4rem;
 `;
 
 const SubSection = styled('div')`
@@ -83,8 +86,34 @@ const DateContainer = styled('div')`
 	position: relative;
 
 	p:hover {
-		color: ${primaryPurple};
 		cursor: pointer;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -0.5rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: ${accentGrey};
+			mask-size: 35%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-image: url(${Pencil2});
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+		}
 	}
 `;
 

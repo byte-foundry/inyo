@@ -6,8 +6,11 @@ import {Link} from 'react-router-dom';
 import {gray20, gray30} from '../content';
 
 export const primaryPurple = '#5020ee';
+export const mediumPurple = '#8f76e0';
+export const lightPurple = '#f8f8ff';
 export const primaryWhite = '#fff';
 export const primaryRed = '#ff3366';
+export const lightRed = '#fff2f5';
 export const primaryGrey = '#A9A9A9';
 export const accentGrey = '#c7c7c7';
 export const lightGrey = '#fafafa';
@@ -273,19 +276,18 @@ export const Input = styled('input')`
 	font-family: 'Work Sans', sans-serif;
 	font-size: inherit;
 
-	background-color: ${props => (props.error ? primaryRed : '#f5f2fe')};
-	border: none;
+	background-color: ${props => (props.error ? lightRed : lightPurple)};
 	border-radius: 20px;
 	height: 27px;
 	padding: 0 1rem;
 	width: auto;
-	border: 1px solid transparent;
+	border: 1px solid ${props => (props.error ? primaryRed : 'transparent')};
 	font-weight: 400;
-	color: ${props => (props.error ? primaryWhite : '#5020ee')};
+	color: ${props => (props.error ? primaryRed : primaryPurple)};
 
 	&::placeholder {
 		font-weight: normal;
-		color: ${props => (props.error ? primaryWhite : '#888')};
+		color: ${props => (props.error ? primaryRed : mediumPurple)};
 		font-style: italic;
 		font-size: 14px;
 	}
@@ -301,10 +303,10 @@ export const Input = styled('input')`
 		background: #fff;
 		border: 1px solid #f5f2fe;
 		transition: all 400ms ease;
-		color: #5020ee;
+		color: ${primaryPurple};
 
 		&::placeholder {
-			color: #888;
+			color: ${mediumPurple};
 			font-style: italic;
 			font-size: 14px;
 		}

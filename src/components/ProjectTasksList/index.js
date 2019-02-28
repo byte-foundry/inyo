@@ -12,9 +12,12 @@ import {
 	LayoutMainElem,
 	primaryBlack,
 	primaryPurple,
+	lightGrey,
+	accentGrey,
 } from '../../utils/new/design-system';
 import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
 import InlineEditable from '../InlineEditable';
+import Pencil from '../../utils/icons/pencil.svg';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 3rem;
@@ -26,9 +29,38 @@ const SectionTitle = styled(InlineEditable)`
 	color: ${primaryBlack};
 	border: 1px solid transparent;
 	cursor: text;
+	position: relative;
+	padding: 0.5rem 0;
 
 	:hover {
-		border: 1px solid ${primaryPurple};
+		cursor: text;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: 0;
+			right: -0.5rem;
+			bottom: 0;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: ${accentGrey};
+			mask-size: 35%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-image: url(${Pencil});
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+		}
 	}
 `;
 

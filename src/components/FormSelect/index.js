@@ -3,7 +3,12 @@ import styled from '@emotion/styled';
 import Select from 'react-select';
 import {Field} from 'formik';
 
-import {InputLabel, Label, primaryPurple} from '../../utils/new/design-system';
+import {
+	InputLabel,
+	Label,
+	primaryPurple,
+	lightPurple,
+} from '../../utils/new/design-system';
 
 const FormSelectMain = styled(InputLabel)``;
 
@@ -22,7 +27,7 @@ const customSelectStyles = {
 	}),
 	placeholder: styles => ({
 		...styles,
-		color: '#888',
+		color: lightPurple,
 		fontStyle: 'italic',
 		fontSize: '14px',
 	}),
@@ -33,12 +38,13 @@ const customSelectStyles = {
 	input: styles => ({
 		...styles,
 		padding: 0,
+		color: primaryPurple,
 	}),
 	control: styles => ({
 		...styles,
 		minHeight: 'auto',
 		border: 'none',
-		backgroundColor: '#f5f2fe',
+		backgroundColor: lightPurple,
 		borderRadius: '20px',
 		':hover, :focus, :active': {
 			border: 'none',

@@ -13,6 +13,10 @@ import {
 	Button,
 	TaskInputDropdown,
 	TaskInputDropdownHeader,
+	primaryPurple,
+	mediumPurple,
+	lightPurple,
+	lightGrey,
 } from '../../utils/new/design-system';
 
 const Container = styled('div')`
@@ -52,18 +56,23 @@ const InputButtonContainer = styled('div')`
 
 const Input = styled('input')`
 	flex: 1;
-	background-color: #f5f2fe;
+	background-color: ${lightPurple};
 	border: none;
 	border-radius: 20px;
 	padding: 0.5rem 1.2rem 0.5rem 4rem;
 	margin-left: -2.2rem;
-	color: #5020ee;
+	color: ${primaryPurple};
 	font-size: 18px;
 	border: 1px solid transparent;
 	transition: all 400ms ease;
 
+	&:hover {
+		background-color: ${lightGrey};
+		animation: all 400ms ease;
+	}
+
 	&::placeholder {
-		color: #888;
+		color: ${mediumPurple};
 		font-size: 14px;
 		font-style: italic;
 		font-family: 'Work Sans', sans-serif;
@@ -74,7 +83,7 @@ const Input = styled('input')`
 		outline: 0;
 		box-shadow: none;
 		background: #fff;
-		border: 1px solid #f5f2fe;
+		border: 1px solid ${lightPurple};
 		transition: all 400ms ease;
 	}
 `;
@@ -83,7 +92,7 @@ const Icon = styled('div')`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${props => (props.active ? 'transparent' : '#5020ee')};
+	background-color: ${props => (props.active ? 'transparent' : primaryPurple)};
 	color: #fff;
 	border: 2px solid transparent;
 	border-radius: 50%;
@@ -95,8 +104,9 @@ const Icon = styled('div')`
 	cursor: pointer;
 
 	&:hover {
-		border: 2px solid ${props => (props.active ? 'transparent' : '#5020ee')};
-		color: #5020ee;
+		border: 2px solid
+			${props => (props.active ? 'transparent' : primaryPurple)};
+		color: primaryPurple;
 		background-color: #fff;
 		transition: all 400ms ease;
 	}

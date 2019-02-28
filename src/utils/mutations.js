@@ -454,6 +454,7 @@ export const ADD_ITEM = gql`
 		$reviewer: Reviewer
 		$dueDate: DateTime
 		$linkedCustomerId: ID
+		$linkedCustomer: CustomerInput
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -465,6 +466,7 @@ export const ADD_ITEM = gql`
 			reviewer: $reviewer
 			dueDate: $dueDate
 			linkedCustomerId: $linkedCustomerId
+			linkedCustomer: $linkedCustomer
 		) {
 			...ItemFragment
 		}

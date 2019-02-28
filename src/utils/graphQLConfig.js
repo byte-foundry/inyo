@@ -13,6 +13,8 @@ import introspectionQueryResultData from './fragmentTypes.json';
 
 import createTaskWatchMutation from './mutationLinks/createTask';
 import createProjectWatchMutation from './mutationLinks/createProject';
+import createCustomerWatchMutation from './mutationLinks/createCustomer';
+import updateItemWatchMutation from './mutationLinks/updateItem';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
 
 import {GRAPHQL_API} from './constants';
@@ -72,6 +74,8 @@ const watchLink = new WatchedMutationLink(cache, {
 	addItem: createTaskWatchMutation,
 	removeItem: deleteTaskWatchMutation,
 	createProject: createProjectWatchMutation,
+	createCustomer: createCustomerWatchMutation,
+	updateItem: updateItemWatchMutation,
 });
 
 const client = new ApolloClient({

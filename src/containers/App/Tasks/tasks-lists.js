@@ -51,7 +51,7 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 
 	return (
 		<TasksListComponent
-			items={tasks}
+			items={[...tasks]}
 			projectId={projectId}
 			customerId={linkedCustomerId}
 		/>

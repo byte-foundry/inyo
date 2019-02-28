@@ -1,6 +1,6 @@
 export default {
 	getAllTasks: ({mutation, query}) => {
-		const cachedItems = query.result.me.tasks;
+		const cachedItems = [...query.result.me.tasks];
 		const addedItem = mutation.result.data.addItem;
 
 		cachedItems.unshift(addedItem);
@@ -12,5 +12,22 @@ export default {
 				tasks: cachedItems,
 			},
 		};
+	},
+	getAllCustomers: ({mutation, query}) => {
+		const cachedCustomers = [...query.result.me.customers];
+
+		if (mutation.variables.linkedCustomer) {
+			const addedCustomer = mutation.result.data.addItem.linkedCustomer;
+
+			cachedCustomers.unshift(addedCustomer);
+
+			return {
+				...query.result,
+				me: {
+					...query.result.me,
+					customers: cachedCustomers,
+				},
+			};
+		}
 	},
 };

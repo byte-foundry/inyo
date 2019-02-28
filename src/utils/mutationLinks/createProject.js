@@ -1,6 +1,6 @@
 export default {
 	getAllProjectsQuery: ({mutation, query}) => {
-		const cachedProjects = query.result.me.projects;
+		const cachedProjects = [...query.result.me.projects];
 		const addedProject = mutation.result.data.createProject;
 
 		cachedProjects.unshift(addedProject);

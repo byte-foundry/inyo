@@ -70,42 +70,6 @@ class Dashboard extends Component {
 			itemId,
 			token,
 		},
-		refetchQueries: ['userTasks'],
-		optimisticResponse: {
-			__typename: 'Mutation',
-			finishItem: {
-				id: itemId,
-				status: 'FINISHED',
-			},
-		},
-		update: (cache, {data: {finishItem: finishedItem}}) => {
-			window.Intercom('trackEvent', 'item-finished');
-			const data = cache.readQuery({
-				query: GET_PROJECT_DATA,
-				variables: {projectId: this.props.match.params.projectId},
-			});
-			const section = data.project.sections.find(
-				e => e.id === sectionId,
-			);
-			const itemIndex = section.items.find(
-				e => e.id === finishedItem.id,
-			);
-
-			section.items[itemIndex].status = finishedItem.status;
-			try {
-				cache.writeQuery({
-					query: GET_PROJECT_DATA,
-					variables: {
-						projectId: this.props.match.params.projectId,
-					},
-					data,
-				});
-			}
-			catch (e) {
-				throw e;
-			}
-			this.setState({apolloTriggerRenderTemporaryFix: true});
-		},
 	});
 
 	snoozeItem = (itemId, sectionId, during = 1, snoozeItem) => snoozeItem({

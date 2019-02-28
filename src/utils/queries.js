@@ -124,6 +124,20 @@ export const GET_PROJECT_INFOS = gql`
 			notifyActivityToCustomer
 			total
 			sections {
+				id
+				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					id
 					status
@@ -225,6 +239,18 @@ export const GET_PROJECT_DATA = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					...ItemFragment
 				}
@@ -278,6 +304,18 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					...ItemFragment
 				}

@@ -3,7 +3,11 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 
-import {accentGrey, primaryPurple} from '../../utils/new/design-system';
+import {
+	accentGrey,
+	lightGrey,
+	primaryPurple,
+} from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
 
@@ -17,11 +21,6 @@ const ProjectHeaderContainer = styled('div')`
 const ProjectHeading = styled(InlineEditable)`
 	color: ${accentGrey};
 	font-size: 32px;
-	border: 1px solid transparent;
-
-	:hover {
-		border: 1px solid ${primaryPurple};
-	}
 `;
 
 const placeholderCss = css`

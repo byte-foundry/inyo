@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import escapeHtml from 'escape-html';
 import Remarkable from 'remarkable';
 
+import {mediumPurple} from '../../utils/new/design-system';
+
 const EditableArea = styled('div')`
 	width: 100%;
 
@@ -12,7 +14,7 @@ const EditableArea = styled('div')`
 		display: block;
 		font-style: italic;
 		font-size: 13px;
-		color: #888;
+		color: ${mediumPurple};
 	}
 `;
 

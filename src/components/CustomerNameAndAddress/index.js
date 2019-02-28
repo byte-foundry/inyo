@@ -2,7 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled/macro';
 
 import {H4, H5} from '../../utils/content';
-import {P} from '../../utils/new/design-system';
+import {
+	P,
+	primaryGrey,
+	mediumGrey,
+	accentGrey,
+} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;
@@ -11,20 +16,20 @@ const ClientAddress = styled('div')`
 const ContactName = styled(H5)`
 	font-size: 14px;
 	font-weight: 400;
-	color: #333;
+	color: ${accentGrey};
 `;
 
 const ContactInfo = styled(P)`
 	font-size: 14px;
 	line-height: 1.4;
-	color: #888;
+	color: ${accentGrey};
 	margin-top: 0;
 `;
 
 const CompanyName = styled(H4)`
 	font-size: 16px;
 	font-weight: 500;
-	color: #888;
+	color: ${primaryGrey};
 
 	& + ${ContactName} {
 		margin-bottom: 0;

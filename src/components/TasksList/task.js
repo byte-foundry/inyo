@@ -39,6 +39,7 @@ export const TaskContainer = styled('div')`
 	display: flex;
 	margin-bottom: 0.6rem;
 	cursor: grab;
+	position: relative;
 
 	&:after {
 		content: '';

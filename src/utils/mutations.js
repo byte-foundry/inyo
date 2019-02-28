@@ -374,10 +374,21 @@ export const FINISH_PROJECT = gql`
 export const ADD_SECTION = gql`
 	${ITEM_FRAGMENT}
 
-	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {
-		addSection(projectId: $projectId, name: $name, items: $items) {
+	mutation addSection(
+		$projectId: ID!
+		$name: String!
+		$items: [ItemInput!]
+		$position: Int
+	) {
+		addSection(
+			projectId: $projectId
+			name: $name
+			items: $items
+			position: $position
+		) {
 			id
 			name
+			position
 			items {
 				...ItemFragment
 			}

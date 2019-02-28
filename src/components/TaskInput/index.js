@@ -114,7 +114,12 @@ const TaskInputCheckListContainer = styled('div')`
 
 const types = ITEM_TYPES;
 
-const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
+const TaskInput = ({
+	onSubmitProject,
+	onSubmitSection,
+	onSubmitTask,
+	defaultValue,
+}) => {
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
@@ -160,8 +165,19 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 					onFocus={() => setFocus(true)}
 					onKeyDown={(e) => {
 						if (!value.startsWith('/')) {
-							if (e.key === 'ArrowUp') {
+							if (e.key === 'ArrowUp' && onSubmitProject) {
 								onSubmitProject({
+									name: value,
+								});
+								setValue('');
+								setMoreInfosMode(false);
+								setShowContentAcquisitionInfos(false);
+							}
+							else if (
+								e.key === 'ArrowDown'
+								&& onSubmitSection
+							) {
+								onSubmitSection({
 									name: value,
 								});
 								setValue('');
@@ -297,12 +313,24 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 							>
 								créer la tâche
 							</Button>
-							<Button
-								icon="↑"
-								onClick={() => onSubmitProject({name: value})}
-							>
-								créer un projet
-							</Button>
+							{onSubmitProject && (
+								<Button
+									icon="↑"
+									onClick={() => onSubmitProject({name: value})
+									}
+								>
+									créer un projet
+								</Button>
+							)}
+							{onSubmitSection && (
+								<Button
+									icon="↓"
+									onClick={() => onSubmitSection({name: value})
+									}
+								>
+									Créer une section
+								</Button>
+							)}
 						</InputButtonContainer>
 					</InputButtonWrapper>
 				)}
@@ -406,13 +434,13 @@ const TaskInput = ({onSubmitProject, onSubmitTask, defaultValue}) => {
 TaskInput.defaultProps = {
 	defaultValue: '',
 	onSubmitTask: () => {},
-	onSubmitProject: () => {},
 };
 
 TaskInput.propTypes = {
 	defaultValue: PropTypes.string,
 	onSubmitTask: PropTypes.func,
 	onSubmitProject: PropTypes.func,
+	onSubmitSection: PropTypes.func,
 };
 
 export default TaskInput;

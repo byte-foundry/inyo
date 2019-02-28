@@ -4,7 +4,7 @@ import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
 import moment from 'moment';
 
-import Item from '../../../components/ProjectSection/see-item';
+import TasksList from '../../../components/TasksList';
 import ItemView from '../../../components/ItemView';
 import ProjectCard from '../../../components/ProjectCard';
 
@@ -191,88 +191,7 @@ const DashboardTasks = ({
 								)}
 								{itemsToDo.length ? (
 									<>
-										<HeaderRow>
-											<ColumnHeader flex="1">
-												<TaskIcon />
-												<HeaderText>
-													Titre de la tâche
-												</HeaderText>
-											</ColumnHeader>
-											<ColumnHeader flex="0 0 140px">
-												<TimeIcon />
-												<HeaderText>Durée</HeaderText>
-											</ColumnHeader>
-											<ColumnHeader flex="0 0 140px">
-												<DateIcon />
-												<HeaderText>
-													Deadline
-												</HeaderText>
-											</ColumnHeader>
-											<ColumnHeader flex="0 0 140px">
-												<ContactIcon />
-												<HeaderText>Client</HeaderText>
-											</ColumnHeader>
-										</HeaderRow>
-										{itemsToDo.map(item => (
-											<FlexRow>
-												<Item
-													key={item.id}
-													item={item}
-													projectStatus={
-														item.section.project
-															.status
-													}
-													finishItem={finishItem}
-													unfinishItem={unfinishItem}
-													daysUntilDeadline={
-														item.section.project
-															.daysUntilDeadline
-													}
-													mode="dashboard"
-													customer={
-														item.section.project
-															.customer.name
-													}
-													onClick={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}`,
-														);
-													}}
-													onClickCommentIcon={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}#comments`,
-														);
-													}}
-												/>
-												<Mutation
-													mutation={SNOOZE_ITEM}
-												>
-													{snoozeItemMutation => (
-														<SnoozeContainer
-															snoozed={
-																item.status
-																=== 'SNOOZED'
-															}
-															onClick={() => {
-																snoozeItem(
-																	item.id,
-																	item.section
-																		.id,
-																	1,
-																	snoozeItemMutation,
-																);
-															}}
-														>
-															<SnoozeIcon />
-														</SnoozeContainer>
-													)}
-												</Mutation>
-											</FlexRow>
-										))}
+										<TasksList items={itemsToDo} />
 									</>
 								) : (
 									<div>
@@ -284,62 +203,7 @@ const DashboardTasks = ({
 										<SectionTitle>
 											Il vous reste du temps ?
 										</SectionTitle>
-										{itemsToDoLater.map(item => (
-											<FlexRow>
-												<Item
-													key={item.id}
-													item={item}
-													projectStatus={
-														item.section.project
-															.status
-													}
-													finishItem={finishItem}
-													unfinishItem={unfinishItem}
-													daysUntilDeadline={
-														item.section.project
-															.daysUntilDeadline
-													}
-													mode="dashboard"
-													customer={
-														item.section.project
-															.customer.name
-													}
-													onClick={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}`,
-														);
-													}}
-													onClickCommentIcon={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}#comments`,
-														);
-													}}
-												/>
-												<Mutation
-													mutation={SNOOZE_ITEM}
-												>
-													{snoozeItemMutation => (
-														<SnoozeContainer
-															onClick={() => {
-																snoozeItem(
-																	item.id,
-																	item.section
-																		.id,
-																	1,
-																	snoozeItemMutation,
-																);
-															}}
-														>
-															<SnoozeIcon />
-														</SnoozeContainer>
-													)}
-												</Mutation>
-											</FlexRow>
-										))}
+										<TasksList items={itemsToDoLater} />
 									</>
 								)}
 

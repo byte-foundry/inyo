@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import {useMutation, useQuery} from 'react-apollo-hooks';
@@ -117,6 +117,10 @@ const TaskInfosIcon = styled('div')`
 const TaskContent = styled('div')`
 	flex: 1;
 	margin-top: 16px;
+`;
+
+const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
+	text-decoration: none;
 `;
 
 const TaskActions = styled('div')`
@@ -426,7 +430,15 @@ function Task({item, token, location}) {
 			<TaskIcon status={item.status} type={item.type} />
 			<TaskContent>
 				<TaskHeader>
-					<TaskHeading small={setTimeItTook}>{item.name}</TaskHeading>
+					<TaskHeadingLink
+						small={setTimeItTook}
+						to={{
+							pathname: `/app/tasks/${item.id}`,
+							state: {prevSearch: location.search},
+						}}
+					>
+						{item.name}
+					</TaskHeadingLink>
 					<TaskActions stayActive={setTimeItTook}>
 						{setTimeItTook ? (
 							<SetTimeContainer ref={setTimeItTookRef}>

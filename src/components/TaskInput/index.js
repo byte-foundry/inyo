@@ -190,6 +190,10 @@ const TaskInput = ({
 										onSubmitTask({
 											name: value,
 											type: type || 'DEFAULT',
+											linkedCustomer:
+												itemCustomer
+												&& !itemCustomer.id
+												&& itemCustomer,
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											description: `\n# content-acquisition-list\n${files
@@ -216,6 +220,10 @@ const TaskInput = ({
 											itemDueDate
 											&& itemDueDate.toISOString(),
 										unit: parseFloat(itemUnit || 0),
+										linkedCustomer:
+											itemCustomer
+											&& !itemCustomer.id
+											&& itemCustomer,
 										linkedCustomerId:
 											itemCustomer && itemCustomer.id,
 									});
@@ -261,6 +269,11 @@ const TaskInput = ({
 													itemDueDate
 													&& itemDueDate.toISOString(),
 												unit: parseFloat(itemUnit || 0),
+												linkedCustomer:
+													itemCustomer
+													&& !itemCustomer.id
+														? itemCustomer
+														: undefined,
 												linkedCustomerId:
 													itemCustomer
 													&& itemCustomer.id,
@@ -275,6 +288,10 @@ const TaskInput = ({
 												onSubmitTask({
 													name: value,
 													type: type || 'DEFAULT',
+													linkedCustomer:
+														itemCustomer
+														&& !itemCustomer.id
+														&& itemCustomer,
 													linkedCustomerId:
 														itemCustomer
 														&& itemCustomer.id,

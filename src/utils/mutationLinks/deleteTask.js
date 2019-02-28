@@ -1,6 +1,6 @@
 export default {
 	getAllTasks: ({mutation, query}) => {
-		const cachedItems = query.result.me.tasks;
+		const cachedItems = [...query.result.me.tasks];
 		const removedItem = mutation.result.data.removeItem;
 		const removedItemIndex = cachedItems.findIndex(
 			item => item.id === removedItem.id,

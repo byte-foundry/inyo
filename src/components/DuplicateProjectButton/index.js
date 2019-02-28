@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import ConfirmModal from '../ConfirmModal';
-import {Button, P} from '../../utils/new/design-system';
+import {Button, P, Input} from '../../utils/new/design-system';
 
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import {CREATE_PROJECT} from '../../utils/mutations';
@@ -37,7 +37,9 @@ const DuplicateProjectModal = ({
 						})),
 					}));
 
-					const newProject = await duplicateProject({
+					const {
+						data: {createProject},
+					} = await duplicateProject({
 						variables: {
 							template: project.template,
 							name,
@@ -46,13 +48,13 @@ const DuplicateProjectModal = ({
 						},
 					});
 
-					onCreate(newProject);
+					onCreate(createProject);
 				}
 			}}
 			{...rest}
 		>
 			<P>Titre du nouveau projet</P>
-			<input type="text" onChange={e => setName(e.target.value)} />
+			<Input type="text" onChange={e => setName(e.target.value)} />
 		</ConfirmModal>
 	);
 };

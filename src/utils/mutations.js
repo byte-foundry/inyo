@@ -388,46 +388,15 @@ export const ADD_SECTION = gql`
 	}
 `;
 export const UPDATE_SECTION = gql`
+	${ITEM_FRAGMENT}
+
 	mutation updateSection($sectionId: ID!, $name: String, $position: Int) {
 		updateSection(id: $sectionId, name: $name, position: $position) {
 			id
 			name
 			position
 			items {
-				status
-				id
-				name
-				unit
-				description
-				reviewer
-				comments {
-					createdAt
-					id
-					views {
-						viewer {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					author {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
+				...ItemFragment
 			}
 		}
 	}
@@ -586,6 +555,18 @@ export const SEND_AMENDMENT = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					status
 					id
@@ -632,6 +613,18 @@ export const ACCEPT_AMENDMENT = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					status
 					id
@@ -706,6 +699,18 @@ export const REJECT_AMENDMENT = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					status
 					id

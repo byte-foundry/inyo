@@ -198,6 +198,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 								sectionId: sections[source.index].id,
 								position: destination.index,
 							},
+							refetchQueries: ['getProjectData'],
 						});
 					}
 					else if (type === 'ITEM') {

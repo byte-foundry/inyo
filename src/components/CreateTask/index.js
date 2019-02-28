@@ -14,7 +14,11 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = ({setProjectSelected, setCustomerSelected, currentProjectId}) => {
+const CreateTask = ({
+	setProjectSelected,
+	setCustomerSelected,
+	currentProjectId,
+}) => {
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
@@ -54,8 +58,8 @@ const CreateTask = ({setProjectSelected, setCustomerSelected, currentProjectId})
 				},
 			} = await createProject({variables: project});
 
-			setProjectSelected({value: project.id});
-			setProjectSelected({value: project.id, label: project.name}, true);
+			setProjectSelected({value: id});
+			setProjectSelected({value: id, label: name}, true);
 		};
 	}
 

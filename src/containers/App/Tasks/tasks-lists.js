@@ -64,7 +64,7 @@ function TasksList({location, history}) {
 	const linkedCustomerId = query.get('customerId');
 	const projectId = query.get('projectId');
 
-	const setProjectSelected = (selected) => {
+	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
 
 		if (selected) {
@@ -74,6 +74,10 @@ function TasksList({location, history}) {
 		}
 		else if (newQuery.has('projectId')) {
 			newQuery.delete('projectId');
+		}
+
+		if (removeCustomer) {
+			newQuery.delete('customerId');
 		}
 
 		history.push(`/app/tasks?${newQuery.toString()}`);
@@ -111,6 +115,7 @@ function TasksList({location, history}) {
 				<CreateTask
 					setProjectSelected={setProjectSelected}
 					currentProjectId={projectId}
+					setCustomerSelected={setCustomerSelected}
 				/>
 				<Suspense fallback={<Loading />}>
 					<TasksListContainer

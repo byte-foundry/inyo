@@ -10,6 +10,8 @@ import Tasks from './tasks';
 
 const Main = styled('div')`
 	padding-bottom: 80px;
+	width: 980px;
+	align-self: center;
 `;
 
 const WelcomeMessage = styled(H2)`
@@ -125,10 +127,6 @@ class Dashboard extends Component {
 
 					return (
 						<Main>
-							<WelcomeMessage>
-								Bonjour {firstName} !
-							</WelcomeMessage>
-
 							<Tasks
 								finishItem={this.finishItem}
 								unfinishItem={this.unfinishItem}

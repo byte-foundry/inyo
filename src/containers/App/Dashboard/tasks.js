@@ -112,11 +112,11 @@ const DashboardTasks = ({
 						tasks.sort((a, b) => {
 							const aDueDate
 								= a.dueDate
-								|| a.section.project.deadline
+								|| (a.section && a.section.project.deadline)
 								|| undefined;
 							const bDueDate
 								= b.dueDate
-								|| b.section.project.deadline
+								|| (b.section && b.section.project.deadline)
 								|| undefined;
 
 							const aMargin

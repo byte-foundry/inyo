@@ -88,6 +88,19 @@ const Description = styled('div')`
 	min-height: 5rem;
 	display: flex;
 
+	a {
+		color: ${primaryPurple};
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	blockquote {
+		border-left: 3px solid ${primaryPurple};
+		padding-left: 1rem;
+	}
+
 	textarea {
 		min-height: 5rem;
 	}

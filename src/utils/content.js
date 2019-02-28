@@ -6,7 +6,7 @@ import {Dialog} from '@reach/dialog';
 import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
-import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
+import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -436,31 +436,27 @@ const translate = keyframes`
   }
 `;
 
-export const SpinningBubble = styled(bubbleIcon)`
-	width: 45px;
-	height: auto;
-	opacity: 0.5;
-	.circle {
-		transform-origin: center;
-		animation: ${rotate} 2s linear infinite;
-		will-change: transform;
-	}
-	.cls-2 {
-		transform-origin: center;
-		animation: ${translate} 1s ease-in-out infinite;
-		will-change: transform;
-	}
-	.dot-2 {
-		animation-delay: 0.2s;
-	}
-	.dot-3 {
-		animation-delay: 0.4s;
-	}
+export const LoadingLogo = styled(InyoLogo)`
+	animation: breathing 2s ease-out infinite normal;
+
+	@keyframes breathing {
+		0% {
+			transform: scale(0.9);
+		}
+		25% {
+			transform: scale(1.2);
+		}
+		60% {
+			transform: scale(0.7);
+		}
+		100% {
+			transform: scale(0.9);
+		}
 `;
 
 export const Loading = () => (
 	<LoadingMain>
-		<SpinningBubble />
+		<LoadingLogo />
 	</LoadingMain>
 );
 

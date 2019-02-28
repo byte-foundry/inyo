@@ -8,7 +8,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import TaskStatusButton from '../TaskStatusButton';
 import Plural from '../Plural';
-import {gray50, gray70, SpinningBubble} from '../../utils/content';
+import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 import MultilineEditable from '../MultilineEditable';
@@ -154,7 +154,7 @@ const Item = ({id, customerToken, close}) => {
 		setEditDueDate(false);
 	});
 
-	if (loading) return <SpinningBubble />;
+	if (loading) return <LoadingLogo />;
 	if (error) throw error;
 
 	const {item} = data;
@@ -326,9 +326,7 @@ const Item = ({id, customerToken, close}) => {
 									/>
 									<DateInput
 										innerRef={dateRef}
-										date={moment(
-											deadline || new Date(),
-										)}
+										date={moment(deadline || new Date())}
 										onDateChange={(date) => {
 											updateItem({
 												variables: {

@@ -68,6 +68,25 @@ const CreateTask = ({
 			<TaskInput
 				onSubmitTask={task => createTask({
 					variables: {projectId: currentProjectId, ...task},
+					update: (cache, {data: {addItem: addedItem}}) => {
+						const data = cache.readQuery({
+							query: GET_PROJECT_DATA,
+							variables: {projectId: currentProjectId},
+						});
+
+						if (data.project.sections.length === 0) {
+							data.project.sections.push({
+								...addedItem.section,
+								items: [addedItem],
+							});
+
+							cache.writeQuery({
+								query: GET_PROJECT_DATA,
+								variables: {projectId: currentProjectId},
+								data,
+							});
+						}
+					},
 				})
 				}
 				{...props}

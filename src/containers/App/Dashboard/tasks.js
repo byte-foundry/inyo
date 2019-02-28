@@ -2,6 +2,7 @@ import React from 'react';
 import {Query, Mutation} from 'react-apollo';
 import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
+import moment from 'moment';
 
 import Item from '../../../components/ProjectSection/see-item';
 import ItemView from '../../../components/ItemView';
@@ -19,7 +20,7 @@ import {
 	FlexRow,
 	ModalElem,
 } from '../../../utils/content';
-import {USER_TASKS, GET_ALL_PROJECTS} from '../../../utils/queries';
+import {GET_ALL_TASKS, GET_ALL_PROJECTS} from '../../../utils/queries';
 import {SNOOZE_ITEM} from '../../../utils/mutations';
 import {ReactComponent as TaskIcon} from '../../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../../utils/icons/time.svg';
@@ -98,12 +99,39 @@ const DashboardTasks = ({
 			);
 
 			return (
-				<Query query={USER_TASKS}>
+				<Query query={GET_ALL_TASKS}>
 					{({data, loading, error}) => {
 						if (loading) return <p>Loading</p>;
 						if (error) throw error;
 
-						const {me, items} = data;
+						const {me} = data;
+						const tasks = me.tasks.filter(
+							task => task.type === 'DEFAULT',
+						);
+
+						tasks.sort((a, b) => {
+							const aDueDate
+								= a.dueDate
+								|| a.section.project.deadline
+								|| undefined;
+							const bDueDate
+								= b.dueDate
+								|| b.section.project.deadline
+								|| undefined;
+
+							const aMargin
+								= a.dueDate
+								&& a.unit
+								&& moment(aDueDate).diff(moment(), 'days')
+									- a.unit;
+							const bMargin
+								= b.dueDate
+								&& b.unit
+								&& moment(bDueDate).diff(moment(), 'days')
+									- b.unit;
+
+							return aMargin - bMargin;
+						});
 
 						const now = new Date();
 
@@ -141,11 +169,11 @@ const DashboardTasks = ({
 								* userWorkingTime
 								< timeLeft
 							&& itemsToDo.length < 8
-							&& items[itemsToDo.length]
+							&& tasks[itemsToDo.length]
 						) {
-							itemsToDo.push(items[itemsToDo.length]);
+							itemsToDo.push(tasks[itemsToDo.length]);
 						}
-						const itemsToDoLater = items.slice(
+						const itemsToDoLater = tasks.slice(
 							itemsToDo.length,
 							itemsToDo.length + 3,
 						);
@@ -246,37 +274,9 @@ const DashboardTasks = ({
 											</FlexRow>
 										))}
 									</>
-								) : projectsPending.length > 0 ? (
-									<div>
-										<P>
-											Bonjour, vous n’avez plus de tâche à
-											accomplir pour l’instant !<br />
-											Vous avez des projets en attente.
-											C’est peut-être le moment de
-											recontacter ces clients :)
-										</P>
-										<FlexRow flexWrap="wrap">
-											{projectsPending.map(project => (
-												<ProjectCard
-													project={project}
-													inRow={true}
-												/>
-											))}
-										</FlexRow>
-										<P>Vous pouvez aussi</P>
-										<LinkButton to="/app/projects/create">
-											Créer un nouveau projet
-										</LinkButton>
-									</div>
 								) : (
 									<div>
-										<P>
-											Bravo, vous n'avez plus rien à faire
-											! Voulez-vous...
-										</P>
-										<LinkButton to="/app/projects/create">
-											Créer un nouveau projet
-										</LinkButton>
+										<P>Vous n'avez pas de tâche à faire</P>
 									</div>
 								)}
 								{itemsToDoLater.length > 0 && (

@@ -351,7 +351,7 @@ export const USER_TASKS = gql`
 			startWorkAt
 			endWorkAt
 		}
-		items {
+		tasks {
 			...ItemFragment
 		}
 	}

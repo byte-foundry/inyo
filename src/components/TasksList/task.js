@@ -121,6 +121,7 @@ const TaskContent = styled('div')`
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
+	margin: 0.5rem 0;
 `;
 
 const TaskActions = styled('div')`
@@ -146,10 +147,6 @@ const TaskHeader = styled('div')`
 	align-items: center;
 	position: relative;
 	cursor: pointer;
-
-	h2 {
-		margin: 0.5rem 0;
-	}
 
 	&:hover {
 		&:before {

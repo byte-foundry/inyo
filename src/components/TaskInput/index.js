@@ -185,21 +185,7 @@ const TaskInput = ({
 								setShowContentAcquisitionInfos(false);
 							}
 							else if (e.key === 'Enter') {
-								if (!type || type === 'DEFAULT') {
-									onSubmitTask({
-										name: value,
-										type: type || 'DEFAULT',
-										dueDate:
-											itemDueDate
-											&& itemDueDate.toISOString(),
-										unit: parseFloat(itemUnit || 0),
-										linkedCustomerId:
-											itemCustomer && itemCustomer.id,
-									});
-									setValue('');
-									setMoreInfosMode(false);
-								}
-								else if (type === 'CONTENT_ACQUISITION') {
+								if (type === 'CONTENT_ACQUISITION') {
 									if (showContentAcquisitionInfos) {
 										onSubmitTask({
 											name: value,
@@ -221,6 +207,20 @@ const TaskInput = ({
 									else {
 										setShowContentAcquisitionInfos(true);
 									}
+								}
+								else {
+									onSubmitTask({
+										name: value,
+										type: type || 'DEFAULT',
+										dueDate:
+											itemDueDate
+											&& itemDueDate.toISOString(),
+										unit: parseFloat(itemUnit || 0),
+										linkedCustomerId:
+											itemCustomer && itemCustomer.id,
+									});
+									setValue('');
+									setMoreInfosMode(false);
 								}
 							}
 							else if (e.key === 'Tab' && value.length > 0) {

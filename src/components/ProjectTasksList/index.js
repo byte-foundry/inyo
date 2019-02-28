@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
-import {useMutation} from 'react-apollo-hooks';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
 
 import Task from '../TasksList/task';
 import TemplateFiller from '../TemplateFiller';
 
-import {GET_ALL_TASKS} from '../../utils/queries';
+import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
 	LayoutMainElem,
 	primaryBlack,
@@ -118,6 +118,9 @@ const DraggableSection = ({children, section, index}) => (
 );
 
 function ProjectTasksList({items, projectId, sectionId}) {
+	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
+		variables: {projectId},
+	});
 	const updateTask = useMutation(UPDATE_ITEM);
 	const addSection = useMutation(ADD_SECTION, {
 		update: (cache, {data: {addSection: addedSection}}) => {
@@ -139,7 +142,11 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	});
 	const updateSection = useMutation(UPDATE_SECTION);
 
-	if (!items.length) {
+	if (error) throw error;
+
+	const {sections: sectionsInfos} = projectData.project;
+
+	if (!items.length && !sectionsInfos.length) {
 		return (
 			<TemplateFiller
 				onChoose={(template) => {
@@ -156,23 +163,16 @@ function ProjectTasksList({items, projectId, sectionId}) {
 		);
 	}
 
-	const sections = Object.values(
-		items.reduce((acc, item) => {
-			if (!acc[item.section.id]) {
-				acc[item.section.id] = {
-					...item.section,
-					items: [],
-				};
-			}
+	const sections = sectionsInfos.map((section) => {
+		const itemsInSection = items.filter(i => i.section.id === section.id);
 
-			acc[item.section.id].items.push(item);
+		itemsInSection.sort((a, b) => a.position - b.position);
 
-			return acc;
-		}, {}),
-	);
-
-	sections.forEach(section => section.items.sort((a, b) => a.position - b.position));
-	sections.sort((a, b) => a.position - b.position);
+		return {
+			...section,
+			items: itemsInSection,
+		};
+	});
 
 	return (
 		<TasksListContainer>

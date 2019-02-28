@@ -130,7 +130,7 @@ export default function ({
 			}}
 		>
 			{({handleSubmit, values, setFieldValue}) => (
-				<UnitInputForm onSubmit={handleSubmit}>
+				<UnitInputForm onSubmit={handleSubmit} novalidate>
 					<UnitInputContainer ref={containerRef}>
 						<UnitInputInput
 							id="unit"
@@ -138,7 +138,7 @@ export default function ({
 							name="unit"
 							type="number"
 							ref={inputRef}
-							step="0.1"
+							step="any"
 							onChange={e => setFieldValue('unit', e.target.value)
 							}
 							onKeyDown={(e) => {

@@ -5,6 +5,7 @@ import {
 	primaryPurple,
 	lightGrey,
 	mediumGrey,
+	accentGrey,
 } from '../../utils/new/design-system';
 
 const TasksProgressBarMain = styled('div')`
@@ -12,7 +13,7 @@ const TasksProgressBarMain = styled('div')`
 	position: relative;
 	height: 8px;
 	width: 100%;
-	margin: 2rem 0;
+	margin-bottom: 2rem;
 	border-radius: 5px;
 	border: 1px dotted ${mediumGrey};
 
@@ -30,14 +31,29 @@ const TasksProgressBarMain = styled('div')`
 	}
 `;
 
+const TasksProgressBarLabel = styled('div')`
+	margin-top: 2rem;
+	color: ${accentGrey};
+	text-align: right;
+
+	&::after {
+		content: '%';
+	}
+`;
+
 class TasksProgressBar extends Component {
 	render() {
 		const {tasksCompleted, tasksTotal} = this.props;
 
 		return (
-			<TasksProgressBarMain
-				completionRate={(tasksCompleted / tasksTotal) * 100}
-			/>
+			<>
+				<TasksProgressBarLabel>
+					{Math.round((tasksCompleted / tasksTotal) * 100)}
+				</TasksProgressBarLabel>
+				<TasksProgressBarMain
+					completionRate={(tasksCompleted / tasksTotal) * 100}
+				/>
+			</>
 		);
 	}
 }

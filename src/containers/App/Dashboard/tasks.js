@@ -106,7 +106,8 @@ const DashboardTasks = ({
 
 						const {me} = data;
 						const tasks = me.tasks.filter(
-							task => task.type === 'DEFAULT',
+							task => task.type === 'DEFAULT'
+								&& task.status === 'PENDING',
 						);
 
 						tasks.sort((a, b) => {

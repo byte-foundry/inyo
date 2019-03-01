@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from 'graphql-tag';
 
 export const ITEM_FRAGMENT = gql`
 	fragment ItemFragment on Item {
@@ -61,6 +61,24 @@ export const ITEM_FRAGMENT = gql`
 					name
 				}
 			}
+		}
+	}
+`;
+
+export const PROJECT_CUSTOMER_FRAGMENT = gql`
+	fragment ProjectCustomerFragment on Customer {
+		id
+		name
+		firstName
+		lastName
+		email
+		title
+		phone
+		address {
+			street
+			city
+			postalCode
+			country
 		}
 	}
 `;

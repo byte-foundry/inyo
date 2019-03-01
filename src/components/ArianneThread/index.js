@@ -3,7 +3,14 @@ import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import Select from 'react-select';
 
-import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
+import {
+	primaryPurple,
+	primaryWhite,
+	lightGrey,
+	mediumGrey,
+	accentGrey,
+	primaryRed,
+} from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';
 
 const ArianneContainer = styled('div')`
@@ -13,20 +20,46 @@ const ArianneContainer = styled('div')`
 
 const ArianneElemMain = styled('div')`
 	flex: 0 0 170px;
+	margin-right: 1rem;
+	position: relative;
+
+	&:hover {
+		cursor: text;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -0.5rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+	}
 `;
 
 const customSelectStyles = {
 	dropdownIndicator: styles => ({
 		...styles,
 		color: primaryPurple,
-		paddingTop: 0,
-		paddingBottom: 0,
+		padding: 0,
+		marginRight: '.5rem',
+		marginTop: '-2px',
+		transform: 'scale(.7)',
 	}),
 	clearIndicator: styles => ({
 		...styles,
-		color: primaryPurple,
-		paddingTop: 0,
+		color: accentGrey,
+		padding: 0,
 		paddingBottom: 0,
+		transform: 'scale(.7)',
+
+		':hover, :active, :focus': {
+			color: primaryRed,
+		},
 	}),
 	option: (styles, state) => ({
 		...styles,
@@ -64,6 +97,7 @@ const customSelectStyles = {
 		fontSize: '14px',
 		overflow: 'hidden',
 		textOverflow: 'ellipsis',
+		backgroundColor: 'transparent',
 	}),
 	indicatorSeparator: () => ({
 		backgroundColor: 'transparent',
@@ -76,6 +110,11 @@ const customSelectStyles = {
 	valueContainer: styles => ({
 		...styles,
 		padding: 0,
+	}),
+	container: styles => ({
+		...styles,
+		padding: 0,
+		backgroundColor: 'transparent',
 	}),
 };
 

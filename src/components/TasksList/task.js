@@ -300,7 +300,7 @@ export function TaskInfosInputs({
 				content={
 					editUnit ? (
 						<UnitInput
-							unit={item.unit}
+							unit={item.timeItTook ? item.timeItTook : item.unit}
 							onBlur={(args) => {
 								onUnitSubmit(args);
 								setEditUnit(false);
@@ -320,13 +320,20 @@ export function TaskInfosInputs({
 						/>
 					) : (
 						<div onClick={() => setEditUnit(true)}>
-							{item.unit}{' '}
+							{item.timeItTook ? item.timeItTook : item.unit}{' '}
 							<Plural
 								value={item.unit}
 								singular="jour"
 								plural="jours"
 							/>
 							{item.timeItTook !== undefined
+								&& item.timeItTook > item.unit
+								&& item.timeItTook !== item.unit
+								&& item.status === 'FINISHED'
+								&& ` (+${item.timeItTook - item.unit}) `}{' '}
+							{/* It is bad, should be a component */}
+							{item.timeItTook !== undefined
+								&& item.timeItTook < item.unit
 								&& item.status === 'FINISHED'
 								&& ` (${item.timeItTook - item.unit}) `}
 						</div>

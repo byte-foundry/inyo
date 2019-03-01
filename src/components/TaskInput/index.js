@@ -43,7 +43,7 @@ const InputButtonContainer = styled('div')`
 	flex-flow: column nowrap;
 	right: calc(-100% + 10px);
 	top: -13px;
-	width: 155px;
+	width: 165px;
 
 	button {
 		background: rgba(255, 255, 255, 0.5);

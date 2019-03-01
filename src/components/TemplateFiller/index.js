@@ -21,10 +21,17 @@ const Column = styled('div')`
 `;
 
 const TemplateList = styled('ul')`
-	list-style-type: '— ';
+	padding: 0;
 `;
 
 const TemplateItem = styled('li')`
+	list-style: none;
+	&::before {
+		content: '—';
+		color: ${primaryPurple};
+		margin-right: 0.5rem;
+	}
+
 	font-size: 18px;
 	cursor: pointer;
 	color: ${props => (props.selected ? primaryPurple : primaryGrey)};
@@ -46,9 +53,18 @@ const SectionList = styled('ul')`
 `;
 
 const SectionItemList = styled('ul')`
-	list-style-type: none;
+	list-style: none;
 	font-weight: 400;
 	padding: 20px 0;
+
+	li {
+		padding: 0;
+		&::before {
+			content: '·';
+			color: ${primaryPurple};
+			margin-right: 0.5rem;
+		}
+	}
 `;
 
 const TemplateFiller = ({onChoose}) => {

@@ -48,7 +48,9 @@ class TasksProgressBar extends Component {
 		return (
 			<>
 				<TasksProgressBarLabel>
-					{Math.round((tasksCompleted / tasksTotal) * 100)}
+					{Math.round((tasksCompleted / tasksTotal) * 100)
+						? Math.round((tasksCompleted / tasksTotal) * 100)
+						: '0'}
 				</TasksProgressBarLabel>
 				<TasksProgressBarMain
 					completionRate={(tasksCompleted / tasksTotal) * 100}

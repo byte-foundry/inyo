@@ -1,5 +1,6 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
-import {ITEM_FRAGMENT} from './fragments';
+import gql from 'graphql-tag';
+
+import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
 
 /** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
@@ -111,6 +112,8 @@ export const GET_ALL_PROJECTS = gql`
 `;
 
 export const GET_PROJECT_INFOS = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+
 	query getProjectData($projectId: ID!) {
 		project(id: $projectId) {
 			id
@@ -167,19 +170,7 @@ export const GET_PROJECT_INFOS = gql`
 				siret
 			}
 			customer {
-				id
-				name
-				firstName
-				lastName
-				email
-				title
-				phone
-				address {
-					street
-					city
-					postalCode
-					country
-				}
+				...ProjectCustomerFragment
 			}
 		}
 	}

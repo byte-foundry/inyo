@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
-import {ITEM_FRAGMENT} from './fragments';
+import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -213,32 +213,11 @@ export const UPDATE_USER_COMPANY = gql`
 	}
 `;
 
-/** ******** CUSTOMER MUTATIONS ********* */
-
-export const CREATE_CUSTOMER = gql`
-	mutation CreateCustomer($customer: CustomerInput) {
-		createCustomer(customer: $customer) {
-			id
-		}
-	}
-`;
-
-export const UPDATE_CUSTOMER = gql`
-	mutation updateCustomer($id: ID!, $customer: CustomerInput!) {
-		updateCustomer(id: $id, customer: $customer) {
-			id
-			name
-			title
-			firstName
-			lastName
-			email
-			phone
-		}
-	}
-`;
 /** ******** PROJECT MUTATIONS ********* */
 
 export const CREATE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+
 	# creating project with a customer id or a new customer
 	mutation createProject(
 		$customerId: ID
@@ -264,7 +243,7 @@ export const CREATE_PROJECT = gql`
 			deadline
 			daysUntilDeadline
 			customer {
-				name
+				...ProjectCustomerFragment
 			}
 			issuedAt
 			createdAt
@@ -274,6 +253,8 @@ export const CREATE_PROJECT = gql`
 	}
 `;
 export const UPDATE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+
 	# creating project with a customer id or a new customer
 	mutation updateProject(
 		$projectId: ID!
@@ -297,19 +278,7 @@ export const UPDATE_PROJECT = gql`
 			daysUntilDeadline
 			notifyActivityToCustomer
 			customer {
-				id
-				name
-				firstName
-				lastName
-				email
-				title
-				phone
-				address {
-					street
-					city
-					postalCode
-					country
-				}
+				...ProjectCustomerFragment
 			}
 		}
 	}
@@ -329,26 +298,6 @@ export const REMOVE_PROJECT = gql`
 	mutation removeProject($projectId: ID!) {
 		removeProject(id: $projectId) {
 			id
-		}
-	}
-`;
-
-export const ACCEPT_PROJECT = gql`
-	# creating project with a customer id or a new customer
-	mutation acceptProject($projectId: ID!, $token: String!) {
-		acceptProject(id: $projectId, token: $token) {
-			id
-			status
-		}
-	}
-`;
-
-export const REJECT_PROJECT = gql`
-	# creating project with a customer id or a new customer
-	mutation rejectProject($projectId: ID!, $token: String!) {
-		rejectProject(id: $projectId, token: $token) {
-			id
-			status
 		}
 	}
 `;

@@ -170,6 +170,21 @@ function ProjectTasksList({items, projectId, sectionId}) {
 				variables: {},
 				data,
 			});
+
+			const cachedProject = cache.readQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId},
+			});
+
+			const {project} = cachedProject;
+
+			project.sections.push(addedSection);
+
+			cache.writeQuery({
+				query: GET_PROJECT_DATA,
+				variables: {projectId},
+				data: cachedProject,
+			});
 		},
 	});
 	const updateSection = useMutation(UPDATE_SECTION);

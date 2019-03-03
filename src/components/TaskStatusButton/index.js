@@ -1,6 +1,5 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import ReactTooltip from 'react-tooltip';
 
 import {Button} from '../../utils/new/design-system';
 
@@ -13,7 +12,9 @@ const TaskStatusButton = ({taskId, isFinished}) => {
 	return (
 		<Button
 			data-tip={
-				isFinished ? 'Ré-ouvrir la tâche' : 'Cette tâche a été réalisée'
+				isFinished
+					? 'Ré-ouvrir la tâche'
+					: 'Cliquer si cette tâche a été réalisée'
 			}
 			icon={isFinished && '✓'}
 			white={!isFinished}

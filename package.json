@@ -49,6 +49,7 @@
     "react-scripts": "2.0.4",
     "react-select": "^2.1.0",
     "react-toastify": "^4.4.0",
+    "react-tooltip": "^3.9.2",
     "remarkable": "^1.7.1",
     "shevyjs": "^1.1.0",
     "timezone-support": "^1.8.1",

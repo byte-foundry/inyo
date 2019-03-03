@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import React, {useState, useRef} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import ReactTooltip from 'react-tooltip';
 
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
@@ -163,8 +164,13 @@ const TaskInput = ({
 
 	return (
 		<Container ref={ref}>
+			<ReactTooltip effect="solid" delayShow={1000} />
 			<InputContainer>
-				<Icon onClick={() => setFocusByClick(true)} active={type}>
+				<Icon
+					onClick={() => setFocusByClick(true)}
+					active={type}
+					data-tip="Choisir le type de tâche"
+				>
 					{icon}
 				</Icon>
 				<Input

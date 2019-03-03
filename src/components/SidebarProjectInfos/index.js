@@ -166,7 +166,10 @@ const SidebarProjectInfos = ({
 				<SidebarHeading>
 					Votre client
 					{project.customer && (
-						<PencilElem onClick={() => setEditCustomer(true)} />
+						<PencilElem
+							data-tip="Changer le client lié au projet"
+							onClick={() => setEditCustomer(true)}
+						/>
 					)}
 				</SidebarHeading>
 				{project.customer ? (
@@ -285,7 +288,10 @@ const SidebarProjectInfos = ({
 				<SidebarHeading>Deadline</SidebarHeading>
 				<DateContainer>
 					{project.deadline ? (
-						<BigNumber onClick={() => setEditDueDate(true)}>
+						<BigNumber
+							data-tip="Date limite du projet"
+							onClick={() => setEditDueDate(true)}
+						>
 							{(project.deadline
 								&& moment(project.deadline).format(
 									'DD/MM/YYYY',
@@ -331,7 +337,7 @@ const SidebarProjectInfos = ({
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
-					<BigNumber>
+					<BigNumber data-tip="Nombre de jours travaillés avant deadline">
 						{project.daysUntilDeadline}&nbsp;
 						<Plural
 							value={project.daysUntilDeadline}
@@ -343,6 +349,7 @@ const SidebarProjectInfos = ({
 			)}
 
 			<DuplicateProjectButton
+				data-tip="Copier ces tâches dans un nouveau projet"
 				grey
 				projectId={project.id}
 				onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)}

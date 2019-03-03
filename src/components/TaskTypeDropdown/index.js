@@ -9,6 +9,7 @@ import {
 import {
 	TaskInputDropdown,
 	TaskInputDropdownHeader,
+	lightGrey,
 } from '../../utils/new/design-system';
 
 const List = styled('ul')`
@@ -20,13 +21,15 @@ const List = styled('ul')`
 `;
 
 const ListItemIcon = styled('div')`
-	margin: 0.15rem 1.5rem;
+	margin: 0.2rem auto;
 	svg {
-		zoom: 0.7;
+		transform: scale(0.6);
 	}
 `;
 
 const ListItemTitle = styled('div')`
+	padding-top: 0.2rem;
+	font-weight: 500;
 	color: ${gray80};
 `;
 
@@ -37,7 +40,8 @@ const ListItemDescription = styled('div')`
 
 const ListItem = styled('li')`
 	display: grid;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: 4rem 1fr;
+	border-top: 1px solid ${lightGrey};
 	cursor: pointer;
 	padding: 0.5em;
 
@@ -111,8 +115,12 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 						focused={index === focusedItemIndex}
 					>
 						<ListItemIcon>{icon}</ListItemIcon>
-						<ListItemTitle>{name}</ListItemTitle>
-						<ListItemDescription>{description}</ListItemDescription>
+						<div>
+							<ListItemTitle>{name}</ListItemTitle>
+							<ListItemDescription>
+								{description}
+							</ListItemDescription>
+						</div>
 					</ListItem>
 				))}
 			</List>

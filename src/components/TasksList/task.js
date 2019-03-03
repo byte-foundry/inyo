@@ -4,6 +4,7 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
+import ReactTooltip from 'react-tooltip';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
@@ -221,6 +222,7 @@ export function TaskCustomerInput({
 
 	return (
 		<TaskIconText
+			data-tip="Personne liée à la tâche"
 			inactive={editCustomer}
 			icon={<TaskInfosIcon icon={ClientIconSvg} />}
 			content={
@@ -282,6 +284,7 @@ export function TaskInfosInputs({
 
 	return (
 		<TaskInfos>
+			<ReactTooltip effect="solid" delayShow={1000} />
 			{!noComment && (
 				<TaskInfosItemLink
 					to={{
@@ -289,12 +292,13 @@ export function TaskInfosInputs({
 						state: {prevSearch: location.search},
 					}}
 				>
-					<CommentIcon>
+					<CommentIcon data-tip="Ouvrir les commentaires">
 						{item.comments.length > 0 ? item.comments.length : '+'}
 					</CommentIcon>
 				</TaskInfosItemLink>
 			)}
 			<TaskIconText
+				data-tip="Durée de la tâche"
 				inactive={editUnit}
 				icon={<TaskInfosIcon icon={ClockIconSvg} />}
 				content={
@@ -341,6 +345,7 @@ export function TaskInfosInputs({
 				}
 			/>
 			<TaskIconText
+				data-tip="Marge restante pour commencer la tâche"
 				inactive={editDueDate}
 				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 				content={
@@ -433,7 +438,7 @@ function Task({item, token, location}) {
 			<TaskAdd />
 			<TaskIcon status={item.status} type={item.type} />
 			<TaskContent>
-				<TaskHeader>
+				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
 					<TaskHeadingLink
 						small={setTimeItTook}
 						to={{
@@ -465,6 +470,7 @@ function Task({item, token, location}) {
 						) : (
 							<>
 								<OpenBtn
+									data-tip="Plus d'informations"
 									to={{
 										pathname: `/app/tasks/${item.id}`,
 										state: {prevSearch: location.search},
@@ -474,6 +480,7 @@ function Task({item, token, location}) {
 								</OpenBtn>
 								{item.status !== 'FINISHED' && (
 									<Button
+										data-tip="Marquer la tâche comme faite"
 										icon="✓"
 										onClick={() => setSetTimeItTook(true)}
 									>

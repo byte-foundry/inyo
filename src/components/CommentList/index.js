@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {Query, Mutation} from 'react-apollo';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import ReactTooltip from 'react-tooltip';
 
 import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
 import {POST_COMMENT} from '../../utils/mutations';
@@ -163,8 +164,13 @@ class CommentList extends Component {
 
 											return (
 												<form onSubmit={handleSubmit}>
+													<ReactTooltip
+														effect="solid"
+														delayShow={1000}
+													/>
 													<FlexRow>
 														<ItemComment
+															data-tip="Les personnes liées à la tâche seront notifiées"
 															placeholder="Votre commentaire"
 															value={
 																values.newComment
@@ -186,7 +192,10 @@ class CommentList extends Component {
 														</ErrorInput>
 													)}
 													<FlexRow justifyContent="flex-end">
-														<Button type="submit">
+														<Button
+															data-tip="Visible par les personnes liées au projet"
+															type="submit"
+														>
 															Ajouter un
 															commentaire
 														</Button>

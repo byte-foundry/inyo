@@ -72,6 +72,8 @@ export const itemStatuses = {
 	PENDING: 'PENDING',
 };
 
+export const TOOLTIP_DELAY = 650;
+
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,

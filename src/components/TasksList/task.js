@@ -221,6 +221,7 @@ export function TaskCustomerInput({
 
 	return (
 		<TaskIconText
+			data-tip="Personne liée à la tâche"
 			inactive={editCustomer}
 			icon={<TaskInfosIcon icon={ClientIconSvg} />}
 			content={
@@ -290,7 +291,7 @@ export function TaskInfosInputs({
 						state: {prevSearch: location.search},
 					}}
 				>
-					<CommentIcon>
+					<CommentIcon data-tip="Ouvrir les commentaires">
 						{item.comments.length > 0 ? item.comments.length : '+'}
 					</CommentIcon>
 				</TaskInfosItemLink>
@@ -327,22 +328,27 @@ export function TaskInfosInputs({
 								singular="jour"
 								plural="jours"
 							/>
-							{item.timeItTook !== undefined
-								&& item.timeItTook > item.unit
-								&& item.timeItTook !== item.unit
-								&& item.status === 'FINISHED'
-								&& ` (+${item.timeItTook - item.unit}) `}{' '}
+							<span data-tip="Temps dépassé">
+								{item.timeItTook !== undefined
+									&& item.timeItTook > item.unit
+									&& item.timeItTook !== item.unit
+									&& item.status === 'FINISHED'
+									&& ` (+${item.timeItTook - item.unit}) `}
+							</span>
 							{/* It is bad, should be a component */}
-							{!customerToken
-								&& item.timeItTook !== undefined
-								&& item.timeItTook < item.unit
-								&& item.status === 'FINISHED'
-								&& ` (${item.timeItTook - item.unit}) `}
+							<span data-tip="Temps surestimé">
+								{!customerToken
+									&& item.timeItTook !== undefined
+									&& item.timeItTook < item.unit
+									&& item.status === 'FINISHED'
+									&& ` (${item.timeItTook - item.unit}) `}
+							</span>
 						</div>
 					)
 				}
 			/>
 			<TaskIconText
+				data-tip="Marge restante pour commencer la tâche"
 				inactive={editDueDate}
 				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 				content={
@@ -437,7 +443,7 @@ function Task({
 			<TaskAdd />
 			<TaskIcon status={item.status} type={item.type} />
 			<TaskContent>
-				<TaskHeader>
+				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
 					<TaskHeadingLink
 						small={setTimeItTook}
 						to={{
@@ -469,15 +475,17 @@ function Task({
 						) : (
 							<>
 								<OpenBtn
+									data-tip="Description, détails, commentaires, etc."
 									to={{
 										pathname: `/app/tasks/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
-									Modifier
+									Ouvrir
 								</OpenBtn>
 								{item.status !== 'FINISHED' && (
 									<Button
+										data-tip="Marquer la tâche comme faite"
 										icon="✓"
 										onClick={() => setSetTimeItTook(true)}
 									>

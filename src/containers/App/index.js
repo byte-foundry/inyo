@@ -4,6 +4,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
+import ReactTooltip from 'react-tooltip';
 
 import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
@@ -19,7 +20,7 @@ import TopBar, {
 import {ButtonLink} from '../../utils/new/design-system';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
-import {INTERCOM_APP_ID} from '../../utils/constants';
+import {INTERCOM_APP_ID, TOOLTIP_DELAY} from '../../utils/constants';
 
 const AppMain = styled('div')`
 	display: flex;
@@ -32,11 +33,24 @@ const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props}
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<TopBarLogo />
 			<TopBarMenu>
-				<TopBarMenuLink to="/app/dashboard">Dashboard</TopBarMenuLink>
-				<TopBarMenuLink to="/app/tasks">Tâches</TopBarMenuLink>
-				<TopBarMenuLink to="/app/account">Réglages</TopBarMenuLink>
+				<TopBarMenuLink
+					data-tip="Tâches prioritaires"
+					to="/app/dashboard"
+				>
+					Dashboard
+				</TopBarMenuLink>
+				<TopBarMenuLink data-tip="Toutes les tâches" to="/app/tasks">
+					Tâches
+				</TopBarMenuLink>
+				<TopBarMenuLink
+					data-tip="Profil, jours travaillés, etc."
+					to="/app/account"
+				>
+					Réglages
+				</TopBarMenuLink>
 			</TopBarMenu>
 		</TopBar>
 		<Component {...args} />
@@ -100,14 +114,9 @@ function App() {
 				/>
 				<Redirect to="/app/tasks" />
 			</Switch>
-			{data
-				&& data.me && (
+			{data && data.me && (
 				<ProtectedRoute
-					path={[
-						'/app/projects',
-						'/app/account',
-						'/app/dashboard',
-					]}
+					path={['/app/projects', '/app/account', '/app/dashboard']}
 					render={props => (
 						<ConditionalContent {...props} user={data.me} />
 					)}

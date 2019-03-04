@@ -61,7 +61,7 @@ export default function ProjectHeader({projectId}) {
 	return (
 		<ProjectHeaderContainer>
 			<ProjectHeading
-				placeholder="Nom du projet"
+				placeholder="Ajouter un titre à ce projet"
 				value={project.name}
 				placeholderCss={placeholderCss}
 				nameCss={nameCss}

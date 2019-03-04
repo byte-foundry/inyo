@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
+import ReactTooltip from 'react-tooltip';
 
 import {
 	SubHeading,
@@ -29,6 +30,7 @@ import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
+import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -158,6 +160,7 @@ const SidebarProjectInfos = ({
 
 	return (
 		<Aside>
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			{/* <SubSection>
 				<SubHeading>Menu projet</SubHeading>
 			</SubSection> */}
@@ -166,13 +169,16 @@ const SidebarProjectInfos = ({
 				<SidebarHeading>
 					Votre client
 					{project.customer && (
-						<PencilElem onClick={() => setEditCustomer(true)} />
+						<PencilElem
+							data-tip="Changer le client lié au projet"
+							onClick={() => setEditCustomer(true)}
+						/>
 					)}
 				</SidebarHeading>
 				{project.customer ? (
 					<>
 						<CustomerNameAndAddress customer={project.customer} />
-						<CheckBoxLabel>
+						<CheckBoxLabel data-tip="Évolution du projet, tâches qui requièrent une action, etc.">
 							<input
 								type="checkbox"
 								checked={project.notifyActivityToCustomer}
@@ -226,7 +232,11 @@ const SidebarProjectInfos = ({
 								<P>Êtes-vous sûr de vouloir continuer?</P>
 							</ConfirmModal>
 						)}
-						<Button link onClick={() => setCustomerPreview(true)}>
+						<Button
+							data-tip="Ce que verra votre client lorsqu'il se connecte au projet"
+							link
+							onClick={() => setCustomerPreview(true)}
+						>
 							<ClientPreviewIcon />
 							<span>Voir la vue de mon client</span>
 						</Button>
@@ -285,7 +295,10 @@ const SidebarProjectInfos = ({
 				<SidebarHeading>Deadline</SidebarHeading>
 				<DateContainer>
 					{project.deadline ? (
-						<BigNumber onClick={() => setEditDueDate(true)}>
+						<BigNumber
+							data-tip="Date limite du projet"
+							onClick={() => setEditDueDate(true)}
+						>
 							{(project.deadline
 								&& moment(project.deadline).format(
 									'DD/MM/YYYY',
@@ -331,7 +344,7 @@ const SidebarProjectInfos = ({
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
-					<BigNumber>
+					<BigNumber data-tip="Nombre de jours travaillés avant deadline">
 						{project.daysUntilDeadline}&nbsp;
 						<Plural
 							value={project.daysUntilDeadline}
@@ -343,6 +356,7 @@ const SidebarProjectInfos = ({
 			)}
 
 			<DuplicateProjectButton
+				data-tip="Copier ces tâches dans un nouveau projet"
 				grey
 				projectId={project.id}
 				onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)}

@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
+import ReactTooltip from 'react-tooltip';
 
 import TaskStatusButton from '../TaskStatusButton';
 import Plural from '../Plural';
@@ -32,7 +33,7 @@ import {
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
-import {ITEM_TYPES} from '../../utils/constants';
+import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
 
 const Header = styled('div')``;
 
@@ -208,6 +209,7 @@ const Item = ({id, customerToken, close}) => {
 
 	return (
 		<>
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader>
 				<TaskStatusButton
 					taskId={id}
@@ -215,7 +217,7 @@ const Item = ({id, customerToken, close}) => {
 				/>
 			</StickyHeader>
 			<Header>
-				<Title>
+				<Title data-tip="Type et titre de la tâche">
 					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
 					<InlineEditable
 						disabled={!!customerToken}
@@ -240,7 +242,7 @@ const Item = ({id, customerToken, close}) => {
 				</Title>
 			</Header>
 			<Metas>
-				<Meta>
+				<Meta data-tip="Temps estimé ou passé pour cette tâche">
 					<TimeIcon />
 					<MetaLabel>Temps estimé</MetaLabel>
 					<MetaText>
@@ -287,7 +289,7 @@ const Item = ({id, customerToken, close}) => {
 						)}
 					</MetaText>
 				</Meta>
-				<Meta>
+				<Meta data-tip="Personne liée à cette tâche">
 					<ContactIcon />
 					<MetaLabel>Client</MetaLabel>
 					{editCustomer ? (
@@ -322,7 +324,7 @@ const Item = ({id, customerToken, close}) => {
 					)}
 				</Meta>
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
-					<Meta>
+					<Meta data-tip="Date limite pour réaliser cette tâche">
 						<HourglassIcon />
 						<MetaLabel>Temps restant</MetaLabel>
 						<MetaTime
@@ -370,7 +372,7 @@ const Item = ({id, customerToken, close}) => {
 						</MetaTime>
 					</Meta>
 				)}
-				<Meta>
+				<Meta data-tip="Projet lié à cette tâche">
 					<FolderIcon />
 					<MetaLabel>Projet</MetaLabel>
 					<MetaText>
@@ -379,13 +381,13 @@ const Item = ({id, customerToken, close}) => {
 							&& item.section.project.name}
 					</MetaText>
 				</Meta>
-				<Meta>
+				<Meta data-tip="Définit s'il y a des actions automatiques">
 					<TaskTypeIcon />
 					<MetaLabel>Type de tâche</MetaLabel>
 					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
 			</Metas>
-			<Description>
+			<Description data-tip="Description de la tâche">
 				<MultilineEditable
 					placeholder="Ajouter une description…"
 					style={{padding: '1rem 4rem'}}
@@ -434,6 +436,9 @@ const Item = ({id, customerToken, close}) => {
 			<CommentList itemId={item.id} customerToken={customerToken} />
 			{deletingItem ? (
 				<>
+					<Button grey onClick={() => setDeletingItem(false)}>
+						Annuler
+					</Button>
 					<Button
 						red
 						onClick={() => {
@@ -441,10 +446,7 @@ const Item = ({id, customerToken, close}) => {
 							close();
 						}}
 					>
-						Supprimer
-					</Button>
-					<Button grey onClick={() => setDeletingItem(false)}>
-						Annuler
+						Confirmer la suppression
 					</Button>
 				</>
 			) : (

@@ -3,12 +3,14 @@ import styled from '@emotion/styled';
 import useOnClickOutside from 'use-onclickoutside';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+import ReactTooltip from 'react-tooltip';
 
 import {
 	primaryPurple,
 	primaryWhite,
 	Button,
 } from '../../utils/new/design-system';
+import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const UnitInputContainer = styled('div')`
 	display: flex;
@@ -131,8 +133,10 @@ export default function ({
 		>
 			{({handleSubmit, values, setFieldValue}) => (
 				<UnitInputForm onSubmit={handleSubmit} novalidate>
+					<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 					<UnitInputContainer ref={containerRef}>
 						<UnitInputInput
+							data-tip="Durée de la tâche"
 							id="unit"
 							value={values.unit}
 							name="unit"
@@ -148,6 +152,7 @@ export default function ({
 							}}
 						/>
 						<UnitInputSwitch
+							data-tip="Changer l'unité de temps"
 							onClick={() => {
 								if (isHours) {
 									setFieldValue('unit', values.unit / 8);
@@ -165,7 +170,12 @@ export default function ({
 					</UnitInputContainer>
 					{withButton && (
 						<>
-							<Button textIcon tiny type="submit">
+							<Button
+								textIcon
+								tiny
+								type="submit"
+								data-tip="Valider le temps et marquer comme fait"
+							>
 								✓
 							</Button>
 						</>

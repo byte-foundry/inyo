@@ -11,6 +11,11 @@ const TaskStatusButton = ({taskId, isFinished}) => {
 
 	return (
 		<Button
+			data-tip={
+				isFinished
+					? 'Ré-ouvrir la tâche'
+					: 'Cliquer si cette tâche a été réalisée'
+			}
 			icon={isFinished && '✓'}
 			white={!isFinished}
 			onClick={() => {

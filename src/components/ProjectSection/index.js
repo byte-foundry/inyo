@@ -12,7 +12,7 @@ const SectionTitle = styled(H5)`
 
 class ProjectSection extends Component {
 	render() {
-		const {data, projectId} = this.props;
+		const {data, projectId, customerToken} = this.props;
 
 		return (
 			<div>
@@ -27,6 +27,7 @@ class ProjectSection extends Component {
 					</SectionTitle>
 				</FlexRow>
 				<TasksList
+					customerToken={customerToken}
 					items={data.items}
 					projectId={projectId}
 					sectionId={data.id}

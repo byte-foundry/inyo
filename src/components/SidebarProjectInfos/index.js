@@ -30,6 +30,7 @@ import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
+import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -159,7 +160,7 @@ const SidebarProjectInfos = ({
 
 	return (
 		<Aside>
-			<ReactTooltip effect="solid" delayShow={1000} />
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			{/* <SubSection>
 				<SubHeading>Menu projet</SubHeading>
 			</SubSection> */}

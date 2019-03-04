@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
+import {TOOLTIP_DELAY} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectList from '../../../components/ProjectTasksList';
@@ -49,7 +50,7 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 							&& item.section.project.id === projectId,
 					)}
 				/>
-				<ReactTooltip effect="solid" delayShow={1000} />
+				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</>
 		);
 	}
@@ -61,7 +62,7 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 				projectId={projectId}
 				customerId={linkedCustomerId}
 			/>
-			<ReactTooltip effect="solid" delayShow={1000} />
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 		</>
 	);
 }

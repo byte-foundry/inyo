@@ -9,7 +9,7 @@ import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
 import CustomerModal from '../CustomerModal';
 
-import {ITEM_TYPES} from '../../utils/constants';
+import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
 import {
 	Button,
 	TaskInputDropdown,
@@ -164,7 +164,7 @@ const TaskInput = ({
 
 	return (
 		<Container ref={ref}>
-			<ReactTooltip effect="solid" delayShow={1000} />
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<InputContainer>
 				<Icon
 					data-tip="Définir le type de tâche"
@@ -271,7 +271,7 @@ const TaskInput = ({
 				/>
 				{value && (
 					<InputButtonWrapper>
-						<ReactTooltip effect="solid" delayShow={1000} />
+						<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 						<InputButtonContainer>
 							<Button
 								data-tip="Touche entrée pour créer la tâche"

@@ -10,6 +10,7 @@ import {
 	primaryWhite,
 	Button,
 } from '../../utils/new/design-system';
+import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const UnitInputContainer = styled('div')`
 	display: flex;
@@ -132,7 +133,7 @@ export default function ({
 		>
 			{({handleSubmit, values, setFieldValue}) => (
 				<UnitInputForm onSubmit={handleSubmit} novalidate>
-					<ReactTooltip effect="solid" delayShow={1000} />
+					<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 					<UnitInputContainer ref={containerRef}>
 						<UnitInputInput
 							data-tip="Durée de la tâche"

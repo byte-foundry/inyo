@@ -7,6 +7,7 @@ import ReactTooltip from 'react-tooltip';
 
 import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
 import {POST_COMMENT} from '../../utils/mutations';
+import {TOOLTIP_DELAY} from '../../utils/constants';
 
 import {
 	gray20,
@@ -76,7 +77,7 @@ class CommentList extends Component {
 
 					return (
 						<>
-							<ReactTooltip effect="solid" delayShow={1000} />
+							<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 							<Comments id="comments">
 								{comments.length ? (
 									<CommentRow>{comments}</CommentRow>

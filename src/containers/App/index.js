@@ -20,7 +20,7 @@ import TopBar, {
 import {ButtonLink} from '../../utils/new/design-system';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
-import {INTERCOM_APP_ID} from '../../utils/constants';
+import {INTERCOM_APP_ID, TOOLTIP_DELAY} from '../../utils/constants';
 
 const AppMain = styled('div')`
 	display: flex;
@@ -33,7 +33,7 @@ const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props}
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
-			<ReactTooltip effect="solid" delayShow={1000} />
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<TopBarLogo />
 			<TopBarMenu>
 				<TopBarMenuLink

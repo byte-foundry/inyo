@@ -33,7 +33,7 @@ import {
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
-import {ITEM_TYPES} from '../../utils/constants';
+import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
 
 const Header = styled('div')``;
 
@@ -209,7 +209,7 @@ const Item = ({id, customerToken, close}) => {
 
 	return (
 		<>
-			<ReactTooltip effect="solid" delayShow={1000} />
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader>
 				<TaskStatusButton
 					taskId={id}

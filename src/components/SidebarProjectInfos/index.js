@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
+import ReactTooltip from 'react-tooltip';
 
 import {
 	SubHeading,
@@ -158,6 +159,7 @@ const SidebarProjectInfos = ({
 
 	return (
 		<Aside>
+			<ReactTooltip effect="solid" delayShow={1000} />
 			{/* <SubSection>
 				<SubHeading>Menu projet</SubHeading>
 			</SubSection> */}
@@ -175,7 +177,7 @@ const SidebarProjectInfos = ({
 				{project.customer ? (
 					<>
 						<CustomerNameAndAddress customer={project.customer} />
-						<CheckBoxLabel>
+						<CheckBoxLabel data-tip="Évolution du projet, tâches qui requièrent une action, etc.">
 							<input
 								type="checkbox"
 								checked={project.notifyActivityToCustomer}
@@ -229,7 +231,11 @@ const SidebarProjectInfos = ({
 								<P>Êtes-vous sûr de vouloir continuer?</P>
 							</ConfirmModal>
 						)}
-						<Button link onClick={() => setCustomerPreview(true)}>
+						<Button
+							data-tip="Ce que verra votre client lorsqu'il se connecte au projet"
+							link
+							onClick={() => setCustomerPreview(true)}
+						>
 							<ClientPreviewIcon />
 							<span>Voir la vue de mon client</span>
 						</Button>

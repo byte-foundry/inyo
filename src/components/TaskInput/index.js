@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import React, {useState, useRef} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
+import ReactTooltip from 'react-tooltip';
 
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
@@ -163,8 +164,13 @@ const TaskInput = ({
 
 	return (
 		<Container ref={ref}>
+			<ReactTooltip effect="solid" delayShow={1000} />
 			<InputContainer>
-				<Icon onClick={() => setFocusByClick(true)} active={type}>
+				<Icon
+					data-tip="Définir le type de tâche"
+					onClick={() => setFocusByClick(true)}
+					active={type}
+				>
 					{icon}
 				</Icon>
 				<Input
@@ -265,8 +271,10 @@ const TaskInput = ({
 				/>
 				{value && (
 					<InputButtonWrapper>
+						<ReactTooltip effect="solid" delayShow={1000} />
 						<InputButtonContainer>
 							<Button
+								data-tip="Touche entrée pour créer la tâche"
 								icon="↵"
 								grey
 								onClick={() => {
@@ -343,7 +351,7 @@ const TaskInput = ({
 							</Button>
 							{onSubmitProject && (
 								<Button
-									data-tip="Créer un projet vierge ou d'après un modèle"
+									data-tip="Flèche du haut pour créer un projet"
 									icon="↑"
 									onClick={() => onSubmitProject({name: value})
 									}
@@ -353,7 +361,7 @@ const TaskInput = ({
 							)}
 							{onSubmitSection && (
 								<Button
-									data-tip="Créer un ensemble de tâches dans ce projet"
+									data-tip="Flèche du bas pour créer un ensemble de tâches"
 									icon="↓"
 									onClick={() => onSubmitSection({name: value})
 									}

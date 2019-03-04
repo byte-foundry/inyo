@@ -7,7 +7,6 @@ import {
 	InMemoryCache,
 	IntrospectionFragmentMatcher,
 } from 'apollo-cache-inmemory';
-import DebounceLink from 'apollo-link-debounce';
 import WatchedMutationLink from 'apollo-link-watched-mutation';
 import introspectionQueryResultData from './fragmentTypes.json';
 
@@ -18,9 +17,6 @@ import updateItemWatchMutation from './mutationLinks/updateItem';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
 
 import {GRAPHQL_API} from './constants';
-
-const DEFAULT_DEBOUNCE_TIMEOUT = 100;
-const debounceLink = new DebounceLink(DEFAULT_DEBOUNCE_TIMEOUT);
 
 const httpLink = new BatchHttpLink({
 	uri: GRAPHQL_API,
@@ -82,7 +78,6 @@ const client = new ApolloClient({
 	link: ApolloLink.from([
 		watchLink,
 		withToken,
-		debounceLink,
 		errorLink,
 		httpLink,
 		// Don't put link after httpLink this will not work

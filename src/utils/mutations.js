@@ -338,6 +338,17 @@ export const ADD_SECTION = gql`
 			id
 			name
 			position
+			project {
+				id
+				deadline
+				daysUntilDeadline
+				status
+				name
+				customer {
+					id
+					name
+				}
+			}
 			items {
 				...ItemFragment
 			}
@@ -352,6 +363,17 @@ export const UPDATE_SECTION = gql`
 			id
 			name
 			position
+			project {
+				id
+				deadline
+				daysUntilDeadline
+				status
+				name
+				customer {
+					id
+					name
+				}
+			}
 			items {
 				...ItemFragment
 			}

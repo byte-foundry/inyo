@@ -7,13 +7,8 @@ import * as Yup from 'yup';
 import ReactGA from 'react-ga';
 
 import {UPDATE_USER, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
-import {
-	Button,
-	FlexRow,
-	primaryWhite,
-	gray20,
-	ErrorInput,
-} from '../../utils/content';
+import {gray20, ErrorInput} from '../../utils/content';
+import {Button, primaryWhite} from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import FormElem from '../FormElem';
@@ -198,11 +193,7 @@ class UserDataForm extends Component {
 														</ErrorInput>
 													)}
 												</ProfileSection>
-												<UpdateButton
-													theme="Primary"
-													size="Medium"
-													type="submit"
-												>
+												<UpdateButton type="submit" big>
 													Mettre à jour
 												</UpdateButton>
 											</form>

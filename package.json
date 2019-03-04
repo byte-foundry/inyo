@@ -51,6 +51,7 @@
     "react-toastify": "^4.4.0",
     "remarkable": "^1.7.1",
     "shevyjs": "^1.1.0",
+    "timezone-support": "^1.8.1",
     "use-onclickoutside": "^0.2.2",
     "yup": "^0.26.6"
   },

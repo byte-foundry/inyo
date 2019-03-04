@@ -96,6 +96,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$endWorkAt: Time
 		$company: CompanyInput
 		$workingDays: [DAY!]
+		$timeZone: TimeZone
 	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
@@ -111,6 +112,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			startWorkAt: $startWorkAt
 			endWorkAt: $endWorkAt
 			workingDays: $workingDays
+			timeZone: $timeZone
 		) {
 			id
 			email
@@ -125,6 +127,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			startWorkAt
 			endWorkAt
 			workingDays
+			timeZone
 			company {
 				id
 				name

@@ -800,3 +800,23 @@ export const CHECK_UNIQUE_EMAIL = gql`
 		isAvailable: checkEmailAvailability(email: $email)
 	}
 `;
+
+export const CREATE_CUSTOMER = gql`
+	mutation createCustomer(
+		$email: String!
+		$name: String
+		$firstName: String
+		$lastName: String
+		$title: Title
+	) {
+		createCustomer(
+			email: $email
+			name: $name
+			firstName: $firstName
+			lastName: $lastName
+			title: $title
+		) {
+			id
+		}
+	}
+`;

@@ -209,6 +209,7 @@ const Item = ({id, customerToken, close}) => {
 
 	return (
 		<>
+			<ReactTooltip effect="solid" delayShow={1000} />
 			<StickyHeader>
 				<TaskStatusButton
 					taskId={id}
@@ -216,7 +217,7 @@ const Item = ({id, customerToken, close}) => {
 				/>
 			</StickyHeader>
 			<Header>
-				<Title>
+				<Title data-tip="Type et titre de la tâche">
 					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
 					<InlineEditable
 						disabled={!!customerToken}
@@ -380,7 +381,7 @@ const Item = ({id, customerToken, close}) => {
 							&& item.section.project.name}
 					</MetaText>
 				</Meta>
-				<Meta data-tip="">
+				<Meta data-tip="Définit s'il y a des actions automatiques">
 					<TaskTypeIcon />
 					<MetaLabel>Type de tâche</MetaLabel>
 					<MetaText>{typeInfo.name}</MetaText>

@@ -76,6 +76,7 @@ class CommentList extends Component {
 
 					return (
 						<>
+							<ReactTooltip effect="solid" delayShow={1000} />
 							<Comments id="comments">
 								{comments.length ? (
 									<CommentRow>{comments}</CommentRow>
@@ -164,10 +165,6 @@ class CommentList extends Component {
 
 											return (
 												<form onSubmit={handleSubmit}>
-													<ReactTooltip
-														effect="solid"
-														delayShow={1000}
-													/>
 													<FlexRow>
 														<ItemComment
 															data-tip="Les personnes liées à la tâche seront notifiées"

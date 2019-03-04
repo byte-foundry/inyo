@@ -4,7 +4,6 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
-import ReactTooltip from 'react-tooltip';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
@@ -284,7 +283,6 @@ export function TaskInfosInputs({
 
 	return (
 		<TaskInfos>
-			<ReactTooltip effect="solid" delayShow={1000} />
 			{!noComment && (
 				<TaskInfosItemLink
 					to={{
@@ -298,7 +296,6 @@ export function TaskInfosInputs({
 				</TaskInfosItemLink>
 			)}
 			<TaskIconText
-				data-tip="Durée de la tâche"
 				inactive={editUnit}
 				icon={<TaskInfosIcon icon={ClockIconSvg} />}
 				content={
@@ -330,16 +327,20 @@ export function TaskInfosInputs({
 								singular="jour"
 								plural="jours"
 							/>
-							{item.timeItTook !== undefined
-								&& item.timeItTook > item.unit
-								&& item.timeItTook !== item.unit
-								&& item.status === 'FINISHED'
-								&& ` (+${item.timeItTook - item.unit}) `}{' '}
+							<span data-tip="Temps dépassé">
+								{item.timeItTook !== undefined
+									&& item.timeItTook > item.unit
+									&& item.timeItTook !== item.unit
+									&& item.status === 'FINISHED'
+									&& ` (+${item.timeItTook - item.unit}) `}
+							</span>
 							{/* It is bad, should be a component */}
-							{item.timeItTook !== undefined
-								&& item.timeItTook < item.unit
-								&& item.status === 'FINISHED'
-								&& ` (${item.timeItTook - item.unit}) `}
+							<span data-tip="Temps surestimé">
+								{item.timeItTook !== undefined
+									&& item.timeItTook < item.unit
+									&& item.status === 'FINISHED'
+									&& ` (${item.timeItTook - item.unit}) `}
+							</span>
 						</div>
 					)
 				}
@@ -470,13 +471,13 @@ function Task({item, token, location}) {
 						) : (
 							<>
 								<OpenBtn
-									data-tip="Plus d'informations"
+									data-tip="Description, détails, commentaires, etc."
 									to={{
 										pathname: `/app/tasks/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
-									Modifier
+									Ouvrir
 								</OpenBtn>
 								{item.status !== 'FINISHED' && (
 									<Button

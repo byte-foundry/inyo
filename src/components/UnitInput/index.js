@@ -135,6 +135,7 @@ export default function ({
 					<ReactTooltip effect="solid" delayShow={1000} />
 					<UnitInputContainer ref={containerRef}>
 						<UnitInputInput
+							data-tip="Durée de la tâche"
 							id="unit"
 							value={values.unit}
 							name="unit"

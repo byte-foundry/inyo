@@ -1,6 +1,7 @@
 import React, {Suspense, memo} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
+import ReactTooltip from 'react-tooltip';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
@@ -40,21 +41,28 @@ function TasksListContainer({projectId, linkedCustomerId}) {
 
 	if (projectId) {
 		return (
-			<ProjectList
-				projectId={projectId}
-				items={tasks.filter(
-					item => item.section && item.section.project.id === projectId,
-				)}
-			/>
+			<>
+				<ProjectList
+					projectId={projectId}
+					items={tasks.filter(
+						item => item.section
+							&& item.section.project.id === projectId,
+					)}
+				/>
+				<ReactTooltip effect="solid" delayShow={1000} />
+			</>
 		);
 	}
 
 	return (
-		<TasksListComponent
-			items={[...tasks]}
-			projectId={projectId}
-			customerId={linkedCustomerId}
-		/>
+		<>
+			<TasksListComponent
+				items={[...tasks]}
+				projectId={projectId}
+				customerId={linkedCustomerId}
+			/>
+			<ReactTooltip effect="solid" delayShow={1000} />
+		</>
 	);
 }
 

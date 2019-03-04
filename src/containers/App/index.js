@@ -4,6 +4,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
+import ReactTooltip from 'react-tooltip';
 
 import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
@@ -32,11 +33,24 @@ const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props}
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
+			<ReactTooltip effect="solid" delayShow={1000} />
 			<TopBarLogo />
 			<TopBarMenu>
-				<TopBarMenuLink to="/app/dashboard">Dashboard</TopBarMenuLink>
-				<TopBarMenuLink to="/app/tasks">Tâches</TopBarMenuLink>
-				<TopBarMenuLink to="/app/account">Réglages</TopBarMenuLink>
+				<TopBarMenuLink
+					data-tip="Tâches prioritaires"
+					to="/app/dashboard"
+				>
+					Dashboard
+				</TopBarMenuLink>
+				<TopBarMenuLink data-tip="Toutes les tâches" to="/app/tasks">
+					Tâches
+				</TopBarMenuLink>
+				<TopBarMenuLink
+					data-tip="Profil, jours travaillés, etc."
+					to="/app/account"
+				>
+					Réglages
+				</TopBarMenuLink>
 			</TopBarMenu>
 		</TopBar>
 		<Component {...args} />

@@ -12,13 +12,19 @@ import {
 	CHECK_UNIQUE_EMAIL,
 	CREATE_PROJECT,
 } from '../../utils/mutations';
-import {Button, ErrorInput} from '../../utils/content';
+import {Button} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
 import {INTERCOM_APP_ID} from '../../utils/constants';
 import {onboardingTemplate} from '../../utils/project-templates';
 
 import FormElem from '../FormElem';
 
 const SignupFormMain = styled('div')``;
+
+const SignupButton = styled(Button)`
+	display: block;
+	margin-left: auto;
+`;
 
 class SignupForm extends Component {
 	state = {
@@ -261,20 +267,15 @@ class SignupForm extends Component {
 																{status.msg}
 															</ErrorInput>
 														)}
-														<Button
+														<SignupButton
 															type="submit"
-															theme={
-																isSubmitting
-																	? 'Disabled'
-																	: 'PrimaryNavy'
-															}
-															size="Big"
 															disabled={
 																isSubmitting
 															}
+															big
 														>
 															Commencez
-														</Button>
+														</SignupButton>
 													</form>
 												);
 											}}

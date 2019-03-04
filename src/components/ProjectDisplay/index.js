@@ -6,13 +6,15 @@ import {Mutation, Query} from 'react-apollo';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import * as Yup from 'yup';
 
-import TopBar, {TopBarTitle, TopBarNavigation, TopBarButton} from '../TopBar';
+import TopBar, {TopBarLogo, TopBarMenu} from '../TopBar';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import InlineEditable from '../InlineEditable';
 import ProjectData from '../ProjectData';
 import TasksProgressBar from '../TasksProgressBar';
 import Plural from '../Plural';
+import CreateTask from '../CreateTask';
+import ProjectSection from '../ProjectSection';
 
 import {
 	UPDATE_PROJECT,
@@ -32,7 +34,6 @@ import {
 	primaryBlue,
 	gray20,
 	gray10,
-	gray50,
 	signalRed,
 	Loading,
 	ModalContainer,
@@ -48,19 +49,18 @@ import {
 } from '../../utils/constants';
 import {formatDate, parseDate} from '../../utils/functions';
 import StaticCustomerView from '../StaticCustomerView';
-import {ReactComponent as FoldersIcon} from '../../utils/icons/folders.svg';
-import {ReactComponent as DashboardIcon} from '../../utils/icons/dashboard.svg';
-import {ReactComponent as SettingsIcon} from '../../utils/icons/settings.svg';
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import 'react-toastify/dist/ReactToastify.css';
-import SectionList from '../SectionList';
 import ConfirmModal from '../ConfirmModal';
 
 const ProjectDisplayMain = styled('div')`
 	min-height: 100vh;
 `;
 
-const ProjectSections = styled('div')``;
+const ProjectSections = styled('div')`
+	padding: 20px 40px;
+`;
+
 const SideActions = styled(FlexColumn)`
 	min-width: 260px;
 	flex: 0.1 295px;
@@ -100,30 +100,6 @@ const ProjectAction = styled(Button)`
 	margin: 0.4em 0;
 `;
 
-const TaskLegend = styled('div')`
-	margin-top: 20px;
-	margin-bottom: 20px;
-`;
-
-const InfosOnItems = styled('div')`
-	display: flex;
-	margin-bottom: 8px;
-	font-size: 14px;
-	&::before {
-		content: ' ';
-		box-sizing: border-box;
-		border: solid 1px ${gray50};
-		border-right: ${props => (props.color === primaryBlue ? '4px' : '1px')}
-			solid ${props => props.color};
-		margin-right: 10px;
-		width: 16px;
-		height: 16px;
-		display: block;
-		position: relative;
-		top: 0.18em;
-	}
-`;
-
 const CustomerIssuerContainer = styled('div')``;
 
 const TotalContainer = styled('div')``;
@@ -161,7 +137,7 @@ const ClientPreviewIcon = styled(EyeIcon)`
 `;
 
 const PreviewModal = styled(ModalContainer)`
-	min-height: 600px;
+	min-height: 500px;
 	padding: 0;
 `;
 
@@ -270,58 +246,8 @@ class ProjectDisplay extends Component {
 								<ProjectDisplayMain style={style}>
 									{!customerToken && (
 										<TopBar>
-											<TopBarTitle>{title}</TopBarTitle>
-											<TopBarNavigation>
-												{mode !== 'edit' && (
-													<TopBarButton
-														theme="Primary"
-														size="Medium"
-														onClick={() => {
-															this.props.history.push(
-																'/app/projects/create',
-															);
-														}}
-													>
-														Créer un nouveau projet
-													</TopBarButton>
-												)}
-												<TopBarButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														this.props.history.push(
-															'/app/dashboard',
-														);
-													}}
-												>
-													<DashboardIcon />
-													<span>Dashboard</span>
-												</TopBarButton>
-												<TopBarButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														this.props.history.push(
-															'/app/projects',
-														);
-													}}
-												>
-													<FoldersIcon />
-													<span>Projets</span>
-												</TopBarButton>
-												<TopBarButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														this.props.history.push(
-															'/app/account',
-														);
-													}}
-												>
-													<SettingsIcon />
-													<span>Réglages</span>
-												</TopBarButton>
-											</TopBarNavigation>
+											<TopBarLogo>{title}</TopBarLogo>
+											<TopBarMenu />
 										</TopBar>
 									)}
 
@@ -475,135 +401,28 @@ class ProjectDisplay extends Component {
 														}
 													/>
 												)}
+												{!customerToken
+													&& project.status
+														!== 'FINISHED' && (
+													<CreateTask />
+												)}
 												<FlexColumn fullHeight>
 													<ProjectSections>
-														<SectionList
-															projectId={
-																project.id
-															}
-															addItem={async (
-																itemId,
-																data,
-																...rest
-															) => {
-																if (
-																	!project.notifyActivityToCustomer
-																	&& data.reviewer
-																		=== 'CUSTOMER'
-																) {
-																	const confirmed = await new Promise(
-																		resolve => this.setState(
-																			{
-																				askCustomerAttributionConfirm: resolve,
-																			},
-																		),
-																	);
-
-																	this.setState(
-																		{
-																			askCustomerAttributionConfirm: null,
-																		},
-																	);
-
-																	if (
-																		!confirmed
-																	) {
-																		return;
+														{project.sections.map(
+															section => (
+																<ProjectSection
+																	key={
+																		section.id
 																	}
-
-																	await updateProject(
-																		{
-																			variables: {
-																				projectId:
-																					project.id,
-																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
-																			},
-																		},
-																	);
-																}
-
-																await addItem(
-																	itemId,
-																	data,
-																	...rest,
-																);
-															}}
-															editItem={async (
-																itemId,
-																sectionId,
-																data,
-																...rest
-															) => {
-																if (
-																	!project.notifyActivityToCustomer
-																	&& data.reviewer
-																		=== 'CUSTOMER'
-																) {
-																	const confirmed = await new Promise(
-																		resolve => this.setState(
-																			{
-																				askCustomerAttributionConfirm: resolve,
-																			},
-																		),
-																	);
-
-																	this.setState(
-																		{
-																			askCustomerAttributionConfirm: null,
-																		},
-																	);
-
-																	if (
-																		!confirmed
-																	) {
-																		return;
+																	projectId={
+																		project.id
 																	}
-
-																	await updateProject(
-																		{
-																			variables: {
-																				projectId:
-																					project.id,
-																				notifyActivityToCustomer: !project.notifyActivityToCustomer,
-																			},
-																		},
-																	);
-																}
-
-																await editItem(
-																	itemId,
-																	sectionId,
-																	data,
-																	...rest,
-																);
-															}}
-															removeItem={
-																removeItem
-															}
-															finishItem={
-																finishItem
-															}
-															unfinishItem={
-																unfinishItem
-															}
-															customerToken={
-																customerToken
-															}
-															mode={mode}
-															editSection={
-																editSection
-															}
-															removeSection={
-																removeSection
-															}
-															refetch={refetch}
-															projectStatus={
-																project.status
-															}
-															sections={
-																project.sections
-															}
-														/>
+																	data={
+																		section
+																	}
+																/>
+															),
+														)}
 														{!customerToken && (
 															<Mutation
 																mutation={
@@ -896,6 +715,7 @@ class ProjectDisplay extends Component {
 																			},
 																			refetchQueries: [
 																				'getProjectData',
+																				'getProjectDataWithToken',
 																			],
 																		},
 																	);
@@ -1033,16 +853,6 @@ class ProjectDisplay extends Component {
 													</TotalNumber>
 												</ProjectData>
 											</TotalContainer>
-											<TaskLegend>
-												<InfosOnItems color={gray50}>
-													Tâches prestataire
-												</InfosOnItems>
-												<InfosOnItems
-													color={primaryBlue}
-												>
-													Tâches client
-												</InfosOnItems>
-											</TaskLegend>
 											{mode === 'edit' && (
 												<Mutation
 													mutation={REMOVE_PROJECT}

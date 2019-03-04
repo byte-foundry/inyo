@@ -19,7 +19,7 @@ const UserProjectSettingsFormMain = styled('div')``;
 const FormContainer = styled('div')``;
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
-	padding: 20px 40px;
+	padding: 60px 40px;
 	border: 1px solid ${gray20};
 `;
 const UpdateButton = styled(Button)`

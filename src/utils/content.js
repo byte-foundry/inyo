@@ -6,7 +6,7 @@ import {Dialog} from '@reach/dialog';
 import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
-import {ReactComponent as bubbleIcon} from './icons/bubble.svg';
+import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -17,7 +17,7 @@ const {
 
 // Colors
 export const primaryWhite = '#ffffff';
-export const primaryBlue = '#3860ff';
+export const primaryBlue = '#5020ee';
 export const primaryNavyBlue = '#171a44';
 export const primarySalmon = '#fbada1';
 export const pastelGreen = '#e9fffd';
@@ -37,10 +37,6 @@ export const signalOrange = '#ffab00';
 export const signalRed = '#fe4a49';
 // Typography
 
-export const Body = styled('div')`
-	${body};
-	color: ${gray80};
-`;
 export const H1 = styled('h1')`
 	${h1};
 	color: ${gray80};
@@ -277,11 +273,12 @@ export const LinkButton = styled(Link)`
 
 export const Input = styled('input')`
 	display: block;
-	border: 1px solid ${props => (props.error ? signalRed : gray70)};
+	position: relative;
+	border: 1px solid ${props => (props.error ? signalRed : 'transparent')};
 	padding: 15px 18px 16px 18px;
 	color: ${gray50};
 	width: ${props => (props.flexible ? '100%' : 'fill-available')};
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	font-size: 16px;
 	transition: background-color 0.2s ease, color 0.2s ease,
 		border-color 0.2s ease;
@@ -292,12 +289,12 @@ export const Input = styled('input')`
 		color: ${gray30};
 	}
 	&:focus {
-		border-color: ${primaryBlue};
+		background-color: ${gray10};
 	}
 `;
 
 export const Label = styled('label')`
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	font-size: 15px;
 	width: fill-available;
 	color: ${gray80};
@@ -321,7 +318,7 @@ export const Label = styled('label')`
 `;
 
 export const ErrorInput = styled('p')`
-	font-family: 'Work Sans';
+	font-family: 'Work Sans', sans-serif;
 	width: fill-available;
 	font-size: 12px;
 	color: ${signalRed};
@@ -359,7 +356,7 @@ export const ToggleButton = styled('span')`
 export function ModalContainer({size, ...props}) {
 	const style = {
 		width: '50vw',
-		minWidth: '600px',
+		minWidth: '500px',
 	};
 
 	if (size === 'small') {
@@ -374,6 +371,7 @@ export function ModalContainer({size, ...props}) {
 
 export const ModalElem = styled('div')`
 	position: relative;
+	padding: 2rem;
 `;
 
 export const ModalCloseIcon = styled('div')`
@@ -439,31 +437,27 @@ const translate = keyframes`
   }
 `;
 
-export const SpinningBubble = styled(bubbleIcon)`
-	width: 45px;
-	height: auto;
-	opacity: 0.5;
-	.circle {
-		transform-origin: center;
-		animation: ${rotate} 2s linear infinite;
-		will-change: transform;
-	}
-	.cls-2 {
-		transform-origin: center;
-		animation: ${translate} 1s ease-in-out infinite;
-		will-change: transform;
-	}
-	.dot-2 {
-		animation-delay: 0.2s;
-	}
-	.dot-3 {
-		animation-delay: 0.4s;
-	}
+export const LoadingLogo = styled(InyoLogo)`
+	animation: breathing 2s ease-out infinite normal;
+
+	@keyframes breathing {
+		0% {
+			transform: scale(0.9);
+		}
+		25% {
+			transform: scale(1.2);
+		}
+		60% {
+			transform: scale(0.7);
+		}
+		100% {
+			transform: scale(0.9);
+		}
 `;
 
 export const Loading = () => (
 	<LoadingMain>
-		<SpinningBubble />
+		<LoadingLogo />
 	</LoadingMain>
 );
 

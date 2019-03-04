@@ -1,24 +1,15 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
-import {css} from '@emotion/core';
 
 import FormInput from '../FormInput';
 
-import {Label, ErrorInput} from '../../utils/content';
+import {InputLabel, Label} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
 import {getDeep} from '../../utils/functions';
 
-const FormElemMain = styled('div')`
+const FormElemMain = styled(InputLabel)`
 	width: 100%;
-	margin: ${props => (props.padded ? '17px 10px 25.5px 10px' : '17px 0 25.5px 0')};
-	${props => props.inline
-		&& css`
-			margin: 0;
-		`};
-	${props => props.onboarding
-		&& css`
-			margin: 10px 15px 10px 16px;
-			width: inherit;
-		`};
+	margin-bottom: 20px;
 `;
 
 class FormElem extends Component {
@@ -37,6 +28,7 @@ class FormElem extends Component {
 			padded,
 			inline,
 			onboarding,
+			...rest
 		} = this.props;
 
 		return (
@@ -44,6 +36,8 @@ class FormElem extends Component {
 				padded={padded}
 				inline={inline}
 				onboarding={onboarding}
+				required={required}
+				{...rest}
 			>
 				{this.props.label && (
 					<Label htmlFor={name} required={required}>
@@ -61,8 +55,7 @@ class FormElem extends Component {
 					touched={touched}
 					inline={inline}
 				/>
-				{getDeep(name, errors)
-					&& getDeep(name, touched) && (
+				{getDeep(name, errors) && getDeep(name, touched) && (
 					<ErrorInput className="input-feedback">
 						{getDeep(name, errors)}
 					</ErrorInput>

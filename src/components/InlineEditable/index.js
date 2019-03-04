@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import styled from '@emotion/styled';
 
 import {Input, gray50, primaryBlue} from '../../utils/content';
+import {lightGrey, accentGrey} from '../../utils/new/design-system';
+import Pencil from '../../utils/icons/pencil.svg';
 
 const Placeholder = styled('span')`
 	color: ${gray50};
@@ -14,7 +16,40 @@ const NameInput = styled(Input)`
 `;
 
 const Editable = styled('span')`
-	color: ${primaryBlue};
+	position: relative;
+	border: 1px solid transparent;
+
+	&:hover {
+		cursor: text;
+		border: 1px solid transparent;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: 0;
+			right: -0.5rem;
+			bottom: 0;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: ${accentGrey};
+			mask-size: 35%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-image: url(${Pencil});
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+		}
+	}
 	${props => props.css};
 `;
 
@@ -49,11 +84,14 @@ class InlineEditable extends Component {
 
 	render() {
 		const {isEditing, value} = this.state;
-		const {type, placeholder, className} = this.props;
+		const {
+			type, placeholder, className, innerRef,
+		} = this.props;
 
 		if (isEditing) {
 			return (
 				<NameInput
+					ref={innerRef}
 					type={type}
 					value={value}
 					onChange={this.handleChange}

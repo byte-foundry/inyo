@@ -1,21 +1,6 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from 'graphql-tag';
 
-/** ******** APP QUERIES ********* */
-export const GET_NETWORK_STATUS = gql`
-	query getNetworkStatus {
-		networkStatus @client {
-			isConnected
-		}
-	}
-`;
-
-export const GET_ITEMS = gql`
-	query getItems {
-		template @client {
-			items
-		}
-	}
-`;
+import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
 
 /** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
@@ -109,26 +94,91 @@ export const GET_ALL_PROJECTS = gql`
 	query getAllProjectsQuery {
 		me {
 			id
-			company {
+			projects {
 				id
-				projects {
+				name
+				viewedByCustomer
+				customer {
 					id
 					name
-					viewedByCustomer
-					customer {
-						id
-						name
-					}
-					issuedAt
-					createdAt
-					status
-					total
 				}
+				issuedAt
+				createdAt
+				status
+				total
 			}
 		}
 	}
 `;
+
+export const GET_PROJECT_INFOS = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+
+	query getProjectData($projectId: ID!) {
+		project(id: $projectId) {
+			id
+			template
+			viewedByCustomer
+			name
+			status
+			createdAt
+			deadline
+			daysUntilDeadline
+			notifyActivityToCustomer
+			total
+			sections {
+				id
+				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
+				items {
+					id
+					status
+					unit
+				}
+			}
+			issuer {
+				name
+				email
+				phone
+				address {
+					street
+					city
+					postalCode
+					country
+				}
+				owner {
+					firstName
+					lastName
+					email
+					defaultVatRate
+					settings {
+						askStartProjectConfirmation
+						askItemFinishConfirmation
+					}
+				}
+				siret
+			}
+			customer {
+				...ProjectCustomerFragment
+			}
+		}
+	}
+`;
+
 export const GET_PROJECT_DATA = gql`
+	${ITEM_FRAGMENT}
+
 	query getProjectData($projectId: ID!) {
 		project(id: $projectId) {
 			id
@@ -180,42 +230,20 @@ export const GET_PROJECT_DATA = gql`
 			sections {
 				id
 				name
-				items {
-					status
+				position
+				project {
 					id
+					deadline
+					daysUntilDeadline
+					status
 					name
-					type
-					unit
-					reviewer
-					comments {
-						createdAt
+					customer {
 						id
-						views {
-							viewer {
-								... on User {
-									firstName
-									lastName
-								}
-								... on Customer {
-									firstName
-									lastName
-									name
-								}
-							}
-						}
-						author {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
+						name
 					}
-					description
+				}
+				items {
+					...ItemFragment
 				}
 			}
 		}
@@ -223,7 +251,9 @@ export const GET_PROJECT_DATA = gql`
 `;
 
 export const GET_PROJECT_DATA_WITH_TOKEN = gql`
-	query getProjectData($projectId: ID!, $token: String) {
+	${ITEM_FRAGMENT}
+
+	query getProjectDataWithToken($projectId: ID!, $token: String) {
 		project(id: $projectId, token: $token) {
 			id
 			template
@@ -231,7 +261,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			status
 			deadline
 			daysUntilDeadline
-			issuedAt
 			issuer {
 				name
 				email
@@ -266,44 +295,20 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			sections {
 				id
 				name
-				items {
-					status
+				position
+				project {
 					id
+					deadline
+					daysUntilDeadline
+					status
 					name
-					type
-					unit
-					reviewer
-					position
-					comments {
-						createdAt
+					customer {
 						id
-						views {
-							viewer {
-								... on User {
-									firstName
-									lastName
-								}
-								... on Customer {
-									firstName
-									lastName
-									name
-								}
-							}
-						}
-						author {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
+						name
 					}
-					vatRate
-					description
+				}
+				items {
+					...ItemFragment
 				}
 			}
 		}
@@ -333,59 +338,50 @@ export const GET_COMMENTS_BY_ITEM = gql`
 `;
 
 export const GET_ITEM_DETAILS = gql`
+	${ITEM_FRAGMENT}
+
 	query getItemDetails($id: ID!, $token: String) {
 		item(id: $id, token: $token) {
+			...ItemFragment
+		}
+	}
+`;
+
+export const GET_ALL_TASKS = gql`
+	${ITEM_FRAGMENT}
+
+	query getAllTasks($linkedCustomerId: ID) {
+		me {
 			id
-			name
-			type
-			status
-			description
-			unit
-			reviewer
-			section {
+			tasks(filter: {linkedCustomerId: $linkedCustomerId}) {
+				...ItemFragment
+			}
+		}
+	}
+`;
+
+export const GET_ALL_CUSTOMERS = gql`
+	query getAllCustomers {
+		me {
+			id
+			customers {
 				id
-				project {
-					id
-					name
-					status
-					deadline
-					customer {
-						id
-						name
-					}
-				}
+				name
 			}
 		}
 	}
 `;
 
 export const USER_TASKS = gql`
+	${ITEM_FRAGMENT}
 	query userTasks {
 		me {
 			id
 			startWorkAt
 			endWorkAt
 		}
-		items {
-			id
-			status
-			name
-			description
-			unit
-			reviewer
-			section {
-				id
-				project {
-					id
-					deadline
-					daysUntilDeadline
-					status
-					customer {
-						id
-						name
-					}
-				}
-			}
+		tasks {
+			...ItemFragment
 		}
 	}
 `;

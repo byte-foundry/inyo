@@ -47,7 +47,7 @@ class Onboarding extends Component {
 
 	getPreviousStep = () => this.setState({step: this.state.step - 1});
 
-	getStepData = (step, me, projectId) => {
+	getStepData = (step, me) => {
 		switch (step) {
 		case 0:
 			return <Redirect to="/auth" />;
@@ -79,15 +79,7 @@ class Onboarding extends Component {
 				/>
 			);
 		case 4:
-			return (
-				<Redirect
-					to={
-						projectId
-							? `/app/projects/${projectId}/edit`
-							: '/app/projects'
-					}
-				/>
-			);
+			return <Redirect to="/app/tasks" />;
 		default:
 			return false;
 		}
@@ -95,8 +87,6 @@ class Onboarding extends Component {
 
 	render() {
 		const {step} = this.state;
-		const queryString = new URLSearchParams(this.props.location.search);
-		const projectId = queryString.get('projectId');
 
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -110,7 +100,7 @@ class Onboarding extends Component {
 								<OnboardingProgressBar
 									completionRate={((step - 1) / 3) * 100}
 								/>
-								{this.getStepData(step, me, projectId)}
+								{this.getStepData(step, me)}
 							</OnboardingMain>
 						);
 					}

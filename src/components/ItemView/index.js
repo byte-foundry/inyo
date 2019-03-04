@@ -1,75 +1,80 @@
-import React from 'react';
-import {Query, Mutation} from 'react-apollo';
+import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
+import {css} from '@emotion/core';
 import {Link} from 'react-router-dom';
-import Remarkable from 'remarkable';
+import {useQuery, useMutation} from 'react-apollo-hooks';
+import moment from 'moment';
+import useOnClickOutside from 'use-onclickoutside';
 
+import TaskStatusButton from '../TaskStatusButton';
 import Plural from '../Plural';
-import TaskStatus from '../TaskStatus';
-import {
-	H2,
-	H3,
-	H4,
-	gray50,
-	gray70,
-	SpinningBubble,
-	primaryBlue,
-	primaryNavyBlue,
-} from '../../utils/content';
+import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
+import MultilineEditable from '../MultilineEditable';
+import InlineEditable from '../InlineEditable';
+import UnitInput from '../UnitInput';
+import DateInput from '../DateInput';
+import {ArianneElem} from '../ArianneThread';
 
-import {GET_ITEM_DETAILS} from '../../utils/queries';
-import {UPDATE_ITEM} from '../../utils/mutations';
+import {GET_ITEM_DETAILS, GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
+import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
-import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
+import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
+import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
+import {
+	TaskHeading,
+	SubHeading,
+	Button,
+	primaryPurple,
+	DueDateInputElem,
+	DateInputContainer,
+} from '../../utils/new/design-system';
+import {ITEM_TYPES} from '../../utils/constants';
 
-const Header = styled('div')`
-	display: flex;
-	justify-content: start;
-	margin-bottom: 1em;
-
-	h2 {
-		font-size: 2rem;
-		margin: 10px 0;
-	}
-`;
-
-const ProjectName = styled(H3)`
-	font-size: 1.4rem;
-	margin: 0;
-
-	a {
-		color: ${primaryBlue};
-		text-decoration: none;
-
-		&:hover {
-			color: ${primaryNavyBlue};
-		}
-	}
-`;
+const Header = styled('div')``;
 
 const Metas = styled('div')`
-	display: flex;
-	align-items: center;
+	display: grid;
+	grid-template-columns: 340px 1fr;
+	grid-row-gap: 0.8em;
 	color: ${gray50};
-	margin-left: -5px;
-	padding-bottom: 1em;
+	padding-bottom: 2rem;
+	font-size: 14px;
 `;
 
 const Meta = styled('div')`
 	display: flex;
-	margin-right: 15px;
-	align-items: center;
+	align-items: flex-start;
+
+	svg {
+		margin-right: 15px;
+	}
+`;
+
+const MetaLabel = styled('div')`
+	margin-right: 1rem;
 `;
 
 const MetaText = styled('span')`
-	margin-left: 5px;
+	color: ${primaryPurple};
+	flex: 1;
+	cursor: pointer;
+
+	:empty::before {
+		content: '\\2014';
+	}
 `;
 
-const MetaTime = styled('time')`
-	margin-left: 5px;
+const MetaTime = styled(MetaText)`
+	position: relative;
+`;
+
+const ClientDropdown = styled(ArianneElem)`
+	margin-top: -6px;
+	padding: 0;
 `;
 
 const Description = styled('div')`
@@ -77,154 +82,378 @@ const Description = styled('div')`
 	line-height: 1.6;
 	margin-top: 20px;
 	margin-bottom: 25px;
-	margin-left: 0;
+	margin-left: -4rem;
+	margin-right: -4rem;
+	background-color: #faf8fe;
+	min-height: 5rem;
+	display: flex;
+
+	a {
+		color: ${primaryPurple};
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	blockquote {
+		border-left: 3px solid ${primaryPurple};
+		padding-left: 1rem;
+	}
+
+	textarea {
+		min-height: 5rem;
+	}
 `;
 
-const Item = ({
-	id, customerToken, finishItem, unfinishItem, projectUrl,
-}) => (
-	<Query query={GET_ITEM_DETAILS} variables={{id, token: customerToken}}>
-		{({loading, data, error}) => {
-			if (loading) return <SpinningBubble />;
-			if (error) throw error;
+const StickyHeader = styled('div')`
+	position: sticky;
+	top: 0;
+	background: #5020ee;
+	margin: -4rem -4rem 1.4rem;
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+	z-index: 1;
+`;
 
-			const {item} = data;
-			let {description} = item;
-			const {project} = item.section;
+const Title = styled(TaskHeading)`
+	display: flex;
+	align-items: center;
+	margin: 2rem 0;
 
-			const deadline = new Date(project.deadline);
+	span {
+		border: 1px solid transparent;
+		padding: 15px 18px 16px;
+		width: 100%;
+	}
+`;
 
-			// parse the description for the file list
-			let files = [];
-			const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+const TaskHeadingIcon = styled('div')`
+	position: relative;
+	left: -5px;
+`;
 
-			if (fileListRegex.test(item.description)) {
-				const matches = item.description
-					.match(fileListRegex)[0]
-					.split('# content-acquisition-list');
+const Item = ({id, customerToken, close}) => {
+	const [editCustomer, setEditCustomer] = useState(false);
+	const [editDueDate, setEditDueDate] = useState(false);
+	const [editUnit, setEditUnit] = useState(false);
+	const [editProject, setEditProject] = useState(false);
+	const [deletingItem, setDeletingItem] = useState(false);
+	const dateRef = useRef();
 
-				const fileItemRegex = /- \[([ x])\] (.+)/;
+	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
+		suspend: false,
+		variables: {id, token: customerToken},
+	});
+	const {
+		data: {me},
+		errors: errorsCustomers,
+	} = useQuery(GET_ALL_CUSTOMERS);
 
-				files = matches
-					.pop()
-					.split('\n')
-					.filter(line => fileItemRegex.test(line))
-					.map(line => ({
-						checked: /^- \[[x]]/.test(line),
-						name: line.match(fileItemRegex).pop(),
-					}));
-				description = matches.join('# content-acquisition-list');
-			}
+	const updateItem = useMutation(UPDATE_ITEM);
+	const deleteItem = useMutation(REMOVE_ITEM, {
+		variables: {
+			itemId: id,
+		},
+		optimisticReponse: {
+			removeItem: {
+				id,
+			},
+		},
+	});
 
-			return (
-				<>
-					<Header>
-						<div>
-							<TaskStatus
-								status={item.status}
-								itemId={item.id}
-								sectionId={item.section.id}
-								reviewer={item.reviewer}
-								mode="see"
-								customerViewMode={!!customerToken}
-								projectStatus={project.status}
-								finishItem={finishItem}
-								unfinishItem={unfinishItem}
+	useOnClickOutside(dateRef, () => {
+		setEditDueDate(false);
+	});
+
+	if (loading) return <LoadingLogo />;
+	if (error) throw error;
+
+	const {item} = data;
+	const {linkedCustomer: customer} = item;
+
+	let {description} = item;
+	const deadline
+		= (item.dueDate || (item.section && item.section.project.deadline))
+		&& new Date(
+			item.dueDate || (item.section && item.section.project.deadline),
+		);
+
+	// parse the description for the file list
+	let files = [];
+	const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+
+	if (fileListRegex.test(item.description)) {
+		const matches = item.description
+			.match(fileListRegex)[0]
+			.split('# content-acquisition-list');
+
+		const fileItemRegex = /- \[([ x])\] (.+)/;
+
+		files = matches
+			.pop()
+			.split('\n')
+			.filter(line => fileItemRegex.test(line))
+			.map(line => ({
+				checked: /^- \[[x]]/.test(line),
+				name: line.match(fileItemRegex).pop(),
+			}));
+		description = matches.join('# content-acquisition-list');
+	}
+
+	const typeInfo
+		= ITEM_TYPES.find(({type}) => type === item.type)
+		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
+
+	return (
+		<>
+			<StickyHeader>
+				<TaskStatusButton
+					taskId={id}
+					isFinished={item.status === 'FINISHED'}
+				/>
+			</StickyHeader>
+			<Header>
+				<Title>
+					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
+					<InlineEditable
+						disabled={!!customerToken}
+						editableCss={css`
+							padding: 1rem 1.5rem;
+						`}
+						value={item.name}
+						type="text"
+						placeholder="Nommez cette tâche"
+						onFocusOut={(value) => {
+							if (value && value !== item.name) {
+								updateItem({
+									variables: {
+										itemId: id,
+										token: customerToken,
+										name: value,
+									},
+								});
+							}
+						}}
+					/>
+				</Title>
+			</Header>
+			<Metas>
+				<Meta>
+					<TimeIcon />
+					<MetaLabel>Temps estimé</MetaLabel>
+					<MetaText>
+						{editUnit ? (
+							<UnitInput
+								unit={item.unit}
+								onBlur={(unit) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											unit,
+										},
+									});
+									setEditUnit(false);
+								}}
+								onSubmit={(unit) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											unit,
+										},
+									});
+									setEditUnit(false);
+								}}
+								onTab={(unit) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											unit,
+										},
+									});
+									setEditUnit(false);
+								}}
 							/>
-						</div>
-						<div>
-							<ProjectName>
-								<Link
-									to={
-										projectUrl
-										|| `/app/projects/${project.id}/see`
-									}
-								>
-									{project.name}
-								</Link>
-							</ProjectName>
-							<H2>{item.name}</H2>
-						</div>
-					</Header>
-					<Metas>
-						<Meta>
-							<TimeIcon />
-							<MetaText>
+						) : (
+							<div onClick={() => setEditUnit(true)}>
 								{item.unit}
 								<Plural
 									singular=" jour"
 									plural=" jours"
 									value={item.unit}
 								/>
-							</MetaText>
-						</Meta>
-						{deadline.toString() !== 'Invalid Date' && (
-							<Meta>
-								<DateIcon />
-								<MetaTime
-									title={deadline.toLocaleString()}
-									dateTime={deadline.toJSON()}
-								>
-									{deadline.toLocaleDateString()}
-								</MetaTime>
-							</Meta>
+							</div>
 						)}
-						<Meta>
-							<ContactIcon />
-							<MetaText>{project.customer.name}</MetaText>
-						</Meta>
-					</Metas>
-					<Description
-						dangerouslySetInnerHTML={{
-							__html: new Remarkable({linkify: true}).render(
-								description,
-							),
-						}}
-					/>
-					{item.type === 'CONTENT_ACQUISITION' && (
-						<>
-							<H4>Contenus à récupérer</H4>
-							<Mutation mutation={UPDATE_ITEM}>
-								{updateItem => (
-									<CheckList
-										editable={!customerToken} // editable by user only, but checkable
-										items={files}
-										onChange={({items}) => {
+					</MetaText>
+				</Meta>
+				<Meta>
+					<ContactIcon />
+					<MetaLabel>Client</MetaLabel>
+					{editCustomer ? (
+						<ClientDropdown
+							id="projects"
+							list={me.customers}
+							defaultMenuIsOpen={true}
+							defaultValue={
+								item.linkedCustomer && {
+									value: item.linkedCustomer.id,
+									label: item.linkedCustomer.name,
+								}
+							}
+							autoFocus={true}
+							onChange={({value}) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										linkedCustomerId: value,
+									},
+								});
+								setEditCustomer(false);
+							}}
+							onBlur={() => {
+								setEditCustomer(false);
+							}}
+						/>
+					) : (
+						<MetaText onClick={() => setEditCustomer(true)}>
+							{customer && customer.name}
+						</MetaText>
+					)}
+				</Meta>
+				{(!deadline || deadline.toString() !== 'Invalid Date') && (
+					<Meta>
+						<HourglassIcon />
+						<MetaLabel>Temps restant</MetaLabel>
+						<MetaTime
+							title={deadline && deadline.toLocaleString()}
+							dateTime={deadline && deadline.toJSON()}
+							onClick={() => !editDueDate && setEditDueDate(true)}
+						>
+							{editDueDate ? (
+								<DateInputContainer>
+									<DueDateInputElem
+										value={moment(
+											deadline || new Date(),
+										).format('DD/MM/YYYY')}
+									/>
+									<DateInput
+										innerRef={dateRef}
+										date={moment(deadline || new Date())}
+										onDateChange={(date) => {
 											updateItem({
 												variables: {
 													itemId: item.id,
-													token: customerToken,
-													description: description.concat(
-														`\n# content-acquisition-list\n${items
-															.map(
-																({
-																	checked,
-																	name,
-																}) => `- [${
-																	checked
-																		? 'x'
-																		: ' '
-																}] ${name}`,
-															)
-															.join('\n')}`,
-													),
+													dueDate: date.toISOString(),
 												},
 											});
+											setEditDueDate(false);
 										}}
+										duration={item.unit}
 									/>
-								)}
-							</Mutation>
-						</>
-					)}
-					<H4>Commentaires</H4>
-					<CommentList
-						itemId={item.id}
-						customerToken={customerToken}
+								</DateInputContainer>
+							) : (
+								deadline && (
+									<div>
+										{moment(deadline).diff(
+											moment(),
+											'days',
+										) - item.unit}{' '}
+										<Plural
+											value={item.unit}
+											singular="jour"
+											plural="jours"
+										/>
+									</div>
+								)
+							)}
+						</MetaTime>
+					</Meta>
+				)}
+				<Meta>
+					<FolderIcon />
+					<MetaLabel>Projet</MetaLabel>
+					<MetaText>
+						{item.section
+							&& item.section.project
+							&& item.section.project.name}
+					</MetaText>
+				</Meta>
+				<Meta>
+					<TaskTypeIcon />
+					<MetaLabel>Type de tâche</MetaLabel>
+					<MetaText>{typeInfo.name}</MetaText>
+				</Meta>
+			</Metas>
+			<Description>
+				<MultilineEditable
+					placeholder="Ajouter une description…"
+					style={{padding: '1rem 4rem'}}
+					onBlur={e => updateItem({
+						variables: {
+							itemId: id,
+							token: customerToken,
+							description: e.target.innerText,
+						},
+					})
+					}
+					defaultValue={description}
+				/>
+			</Description>
+			{item.type === 'CONTENT_ACQUISITION' && (
+				<>
+					<SubHeading>Contenus à récupérer</SubHeading>
+					<CheckList
+						editable={!customerToken} // editable by user only, but checkable
+						items={files}
+						onChange={({items}) => {
+							updateItem({
+								variables: {
+									itemId: id,
+									token: customerToken,
+									description: description.concat(
+										items.length > 0
+											? `\n# content-acquisition-list\n${items
+												.map(
+													({checked, name}) => `- [${
+														checked
+															? 'x'
+															: ' '
+													}] ${name}`,
+												)
+												.join('\n')}`
+											: '',
+									),
+								},
+							});
+						}}
 					/>
 				</>
-			);
-		}}
-	</Query>
-);
+			)}
+			<SubHeading>Commentaires</SubHeading>
+			<CommentList itemId={item.id} customerToken={customerToken} />
+			{deletingItem ? (
+				<>
+					<Button
+						red
+						onClick={() => {
+							deleteItem();
+							close();
+						}}
+					>
+						Supprimer
+					</Button>
+					<Button grey onClick={() => setDeletingItem(false)}>
+						Annuler
+					</Button>
+				</>
+			) : (
+				<Button red onClick={() => setDeletingItem(true)}>
+					Supprimer la tâche
+				</Button>
+			)}
+		</>
+	);
+};
 
 export default Item;

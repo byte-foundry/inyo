@@ -7,11 +7,13 @@ const TasksListContainer = styled('div')`
 	margin-top: 3rem;
 `;
 
-function TasksList({items, projectId, customerId}) {
+function TasksList({
+	items, projectId, customerId, customerToken,
+}) {
 	return (
 		<TasksListContainer>
 			{items.map(item => (
-				<Task item={item} key={item.id} />
+				<Task item={item} key={item.id} customerToken={customerToken} />
 			))}
 		</TasksListContainer>
 	);

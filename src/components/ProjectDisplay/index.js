@@ -411,6 +411,9 @@ class ProjectDisplay extends Component {
 														{project.sections.map(
 															section => (
 																<ProjectSection
+																	customerToken={
+																		customerToken
+																	}
 																	key={
 																		section.id
 																	}
@@ -453,8 +456,7 @@ class ProjectDisplay extends Component {
 										</CenterContent>
 										<SideActions>
 											<CustomerIssuerContainer>
-												{customerToken
-													&& issuer && (
+												{customerToken && issuer && (
 													<IssuerNameAndAddress
 														issuer={issuer}
 													/>

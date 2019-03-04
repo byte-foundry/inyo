@@ -270,6 +270,7 @@ export function TaskInfosInputs({
 	startOpen,
 	switchOnSelect,
 	location,
+	customerToken,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -332,7 +333,8 @@ export function TaskInfosInputs({
 								&& item.status === 'FINISHED'
 								&& ` (+${item.timeItTook - item.unit}) `}{' '}
 							{/* It is bad, should be a component */}
-							{item.timeItTook !== undefined
+							{!customerToken
+								&& item.timeItTook !== undefined
 								&& item.timeItTook < item.unit
 								&& item.status === 'FINISHED'
 								&& ` (${item.timeItTook - item.unit}) `}
@@ -397,7 +399,9 @@ export function TaskInfosInputs({
 	);
 }
 
-function Task({item, token, location}) {
+function Task({
+	item, token, location, customerToken,
+}) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
@@ -487,6 +491,7 @@ function Task({item, token, location}) {
 				<TaskInfosInputs
 					location={location}
 					item={item}
+					customerToken={customerToken}
 					onDueDateSubmit={(date) => {
 						updateItem({
 							variables: {

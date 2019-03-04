@@ -123,6 +123,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name: 'Moodboard',
@@ -159,6 +160,7 @@ export const templates = [
 						description:
 							'1 aller-retour corrections est prévu dans la proposition commerciale',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name:
@@ -166,6 +168,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name: 'Direction artistique',
@@ -178,6 +181,7 @@ export const templates = [
 						description:
 							'2 aller-retour corrections sont prévus dans la proposition commerciale',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name:
@@ -196,6 +200,7 @@ export const templates = [
 						description:
 							'1 aller-retour corrections est prévu dans la proposition commerciale',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name:
@@ -254,6 +259,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name: 'Mise en production',
@@ -280,6 +286,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 				],
 			},
@@ -313,6 +320,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name: 'Moodboard',
@@ -334,6 +342,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name: "Mise au point de l'axe retenu",
@@ -346,6 +355,7 @@ export const templates = [
 						description:
 							'2 allers-retours sont prévus dans la proposition commerciale',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 					{
 						name:
@@ -379,6 +389,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 				],
 			},
@@ -421,6 +432,7 @@ export const templates = [
 						unit: 0,
 						description: '',
 						reviewer: 'CUSTOMER',
+						type: 'CUSTOMER',
 					},
 				],
 			},
@@ -447,6 +459,7 @@ export const onboardingTemplate = {
 					description:
 						"Cette tâche est attribuée à votre client, ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. Vous ne raterez plus aucune deadline 🎉",
 					reviewer: 'CUSTOMER',
+					type: 'CUSTOMER',
 				},
 				{
 					name: '✏️ Ajouter un commentaire',

@@ -115,7 +115,7 @@ const Icon = styled('div')`
 const TaskInfosInputsContainer = styled('div')`
 	position: absolute;
 	top: 54px;
-	left: 94px;
+	left: 57px;
 `;
 
 const TaskInputCheckListContainer = styled('div')`

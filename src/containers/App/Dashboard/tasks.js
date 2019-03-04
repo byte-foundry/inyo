@@ -131,6 +131,8 @@ const DashboardTasks = ({
 								&& moment(bDueDate).diff(moment(), 'days')
 									- b.unit;
 
+							if (!aMargin) return 1;
+							if (!bMargin) return -1;
 							return aMargin - bMargin;
 						});
 

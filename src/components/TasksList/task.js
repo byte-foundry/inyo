@@ -239,7 +239,8 @@ export function TaskCustomerInput({
 								label: item.linkedCustomer.name,
 							}
 						}
-						autoFocus={true}
+						isClearable
+						autoFocus
 						onChange={(args) => {
 							onCustomerSubmit(args);
 							setEditCustomer(false);
@@ -516,15 +517,23 @@ function Task({
 							},
 						});
 					}}
-					onCustomerSubmit={({value}) => {
-						if (value === 'CREATE') {
+					onCustomerSubmit={(customer) => {
+						if (customer === null) {
+							updateItem({
+								variables: {
+									itemId: item.id,
+									linkedCustomerId: null,
+								},
+							});
+						}
+						else if (customer.value === 'CREATE') {
 							setEditCustomer(true);
 						}
 						else {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									linkedCustomerId: value,
+									linkedCustomerId: customer.value,
 								},
 							});
 						}

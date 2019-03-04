@@ -389,7 +389,10 @@ const TaskInput = ({
 						noComment
 						onDueDateSubmit={date => setItemDueDate(date)}
 						onCustomerSubmit={(customer) => {
-							if (customer.value === 'CREATE') {
+							if (customer === null) {
+								setItemCustomer();
+							}
+							else if (customer.value === 'CREATE') {
 								setEditCustomer(true);
 							}
 							else {
@@ -415,7 +418,10 @@ const TaskInput = ({
 							}}
 							noComment
 							onCustomerSubmit={(customer) => {
-								if (customer.value === 'CREATE') {
+								if (customer === null) {
+									setItemCustomer();
+								}
+								else if (customer.value === 'CREATE') {
 									setEditCustomer(true);
 								}
 								else {

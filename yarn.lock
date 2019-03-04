@@ -1379,13 +1379,6 @@ apollo-link-context@^1.0.9:
   dependencies:
     apollo-link "^1.2.8"
 
-apollo-link-debounce@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/apollo-link-debounce/-/apollo-link-debounce-2.1.0.tgz#8bf34988d94ab28d73d23de0cf26777235a6bfd7"
-  dependencies:
-    apollo-link "^1.2.2"
-    zen-observable-ts "^0.8.9"
-
 apollo-link-dedup@^1.0.0:
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.15.tgz#028148f1028e806a9ab2f4abf3bde9dc292565e9"
@@ -1412,7 +1405,7 @@ apollo-link-watched-mutation@^0.2.4:
     "@babel/runtime" "^7.0.0-beta.32"
     apollo-utilities "^1.0.0"
 
-apollo-link@^1.0.0, apollo-link@^1.2.2, apollo-link@^1.2.8:
+apollo-link@^1.0.0, apollo-link@^1.2.8:
   version "1.2.8"
   resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.8.tgz#0f252adefd5047ac1a9f35ba9439d216587dcd84"
   dependencies:
@@ -6128,6 +6121,11 @@ lodash.camelcase@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
 
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
+
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -10472,12 +10470,12 @@ yup@^0.26.6:
     synchronous-promise "^2.0.5"
     toposort "^2.0.2"
 
-zen-observable-ts@^0.8.15, zen-observable-ts@^0.8.9:
+zen-observable-ts@^0.8.15:
   version "0.8.15"
   resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.15.tgz#6cf7df6aa619076e4af2f707ccf8a6290d26699b"
   dependencies:
     zen-observable "^0.8.0"
 
 zen-observable@^0.8.0:
-  version "0.8.13"
-  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.13.tgz#a9f1b9dbdfd2d60a08761ceac6a861427d44ae2e"
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.10.tgz#85ad75d41fed82e5b4651bd64ca117b2af960182"

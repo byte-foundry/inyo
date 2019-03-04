@@ -9,13 +9,13 @@ import {timezones, findTimeZone, getUTCOffset} from '../../utils/timezones';
 
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
-	Button,
 	FlexColumn,
 	primaryWhite,
 	gray20,
 	ErrorInput,
 	Label,
 } from '../../utils/content';
+import {Button} from '../../utils/new/design-system';
 import FormSelect from '../FormSelect';
 import {GET_USER_INFOS} from '../../utils/queries';
 
@@ -308,11 +308,7 @@ class UserWorkHourAndDaysForm extends Component {
 												</ErrorInput>
 											)}
 										</ProfileSection>
-										<UpdateButton
-											theme="Primary"
-											size="Medium"
-											type="submit"
-										>
+										<UpdateButton type="submit" big>
 											Mettre à jour
 										</UpdateButton>
 									</form>

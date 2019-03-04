@@ -7,9 +7,8 @@ import * as Yup from 'yup';
 import ReactGA from 'react-ga';
 
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
-import {
-	Button, primaryWhite, gray20, ErrorInput,
-} from '../../utils/content';
+import {gray20, ErrorInput} from '../../utils/content';
+import {Button, primaryWhite} from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import AddressAutocomplete from '../AddressAutocomplete';
@@ -170,11 +169,7 @@ class UserCompanyForm extends Component {
 												</ErrorInput>
 											)}
 										</ProfileSection>
-										<UpdateButton
-											theme="Primary"
-											size="Medium"
-											type="submit"
-										>
+										<UpdateButton type="submit" big>
 											{buttonText || 'Mettre à jour'}
 										</UpdateButton>
 									</form>

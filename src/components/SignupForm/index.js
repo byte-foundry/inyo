@@ -12,6 +12,7 @@ import {
 	SIGNUP,
 	CHECK_UNIQUE_EMAIL,
 	CREATE_PROJECT,
+	CREATE_CUSTOMER,
 } from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
@@ -33,7 +34,9 @@ const SignupForm = (componentProps) => {
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
 	const createProject = useMutation(CREATE_PROJECT);
-	const from = componentProps.from || `/app/onboarding?projectId=${projectId}`;
+	const createCustomer = useMutation(CREATE_CUSTOMER);
+	const from
+		= componentProps.from || `/app/onboarding?projectId=${projectId}`;
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 300);
 
@@ -111,6 +114,13 @@ const SignupForm = (componentProps) => {
 									name:
 										'Bienvenue, découvrez votre smart assistant!',
 									deadline: deadLineForOnboardingProjet.toISOString(),
+								},
+							});
+
+							const {} = await createCustomer({
+								variables: {
+									email: 'community@inyo.me',
+									name: 'Communauté Inyo',
 								},
 							});
 

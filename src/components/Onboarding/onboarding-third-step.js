@@ -178,7 +178,7 @@ class OnboardingFifthStep extends Component {
 												}
 												onClick={() => setFieldValue(
 													'canBeContacted',
-													true,
+													false,
 												)
 												}
 											>

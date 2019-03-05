@@ -8,7 +8,8 @@ import * as Yup from 'yup';
 
 import FormElem from '../FormElem';
 import {LOGIN} from '../../utils/mutations';
-import {Button, ErrorInput} from '../../utils/content';
+import {Button} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
 
 const LoginFormMain = styled('div')``;
 
@@ -18,6 +19,12 @@ const ForgotPasswordLink = styled(Link)`
 
 const ForgotPasswordLinkContainer = styled('div')`
 	text-align: right;
+	margin-bottom: 2rem;
+`;
+
+const LoginButton = styled(Button)`
+	display: block;
+	margin-left: auto;
 `;
 
 class LoginForm extends Component {
@@ -104,30 +111,25 @@ class LoginForm extends Component {
 											label="Mot de passe"
 											placeholder="***************"
 											required
+											style={{marginBottom: '5px'}}
 										/>
 										<ForgotPasswordLinkContainer>
 											<ForgotPasswordLink to="/auth/forgotten-password">
 												Mot de passe oublié ?
 											</ForgotPasswordLink>
 										</ForgotPasswordLinkContainer>
-										{status
-											&& status.msg && (
+										{status && status.msg && (
 											<ErrorInput>
 												{status.msg}
 											</ErrorInput>
 										)}
-										<Button
+										<LoginButton
 											type="submit"
-											theme={
-												isSubmitting
-													? 'Disabled'
-													: 'PrimaryNavy'
-											}
-											size="Big"
+											big
 											disabled={isSubmitting}
 										>
 											Se connecter
-										</Button>
+										</LoginButton>
 									</form>
 								);
 							}}

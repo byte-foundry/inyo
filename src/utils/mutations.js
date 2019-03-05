@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
+import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
+
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
 	mutation Login($email: String!, $password: String!) {
@@ -87,9 +89,14 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$jobType: JobType
 		$interestedFeatures: [String!]
 		$hasUpcomingProject: Boolean
+		$canBeContacted: Boolean
+		$otherPain: String
+		$painsExpressed: [String!]
 		$startWorkAt: Time
 		$endWorkAt: Time
+		$company: CompanyInput
 		$workingDays: [DAY!]
+		$timeZone: TimeZone
 	) {
 		updateUser(
 			defaultDailyPrice: $defaultDailyPrice
@@ -98,9 +105,14 @@ export const UPDATE_USER_CONSTANTS = gql`
 			jobType: $jobType
 			interestedFeatures: $interestedFeatures
 			hasUpcomingProject: $hasUpcomingProject
+			canBeContacted: $canBeContacted
+			otherPain: $otherPain
+			painsExpressed: $painsExpressed
+			company: $company
 			startWorkAt: $startWorkAt
 			endWorkAt: $endWorkAt
 			workingDays: $workingDays
+			timeZone: $timeZone
 		) {
 			id
 			email
@@ -115,6 +127,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			startWorkAt
 			endWorkAt
 			workingDays
+			timeZone
 			company {
 				id
 				name
@@ -211,39 +224,18 @@ export const UPDATE_USER_COMPANY = gql`
 	}
 `;
 
-/** ******** CUSTOMER MUTATIONS ********* */
-
-export const CREATE_CUSTOMER = gql`
-	mutation CreateCustomer($customer: CustomerInput) {
-		createCustomer(customer: $customer) {
-			id
-		}
-	}
-`;
-
-export const UPDATE_CUSTOMER = gql`
-	mutation updateCustomer($id: ID!, $customer: CustomerInput!) {
-		updateCustomer(id: $id, customer: $customer) {
-			id
-			name
-			title
-			firstName
-			lastName
-			email
-			phone
-		}
-	}
-`;
 /** ******** PROJECT MUTATIONS ********* */
 
 export const CREATE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+
 	# creating project with a customer id or a new customer
 	mutation createProject(
 		$customerId: ID
-		$customer: CustomerInput
-		$template: ProjectTemplate!
-		$sections: [SectionInput!]
 		$name: String
+		$customer: CustomerInput
+		$template: ProjectTemplate
+		$sections: [SectionInput!]
 		$deadline: DateTime
 		$notifyActivityToCustomer: Boolean
 	) {
@@ -262,7 +254,7 @@ export const CREATE_PROJECT = gql`
 			deadline
 			daysUntilDeadline
 			customer {
-				name
+				...ProjectCustomerFragment
 			}
 			issuedAt
 			createdAt
@@ -272,23 +264,33 @@ export const CREATE_PROJECT = gql`
 	}
 `;
 export const UPDATE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+
 	# creating project with a customer id or a new customer
 	mutation updateProject(
 		$projectId: ID!
 		$name: String
 		$deadline: DateTime
 		$notifyActivityToCustomer: Boolean
+		$customerId: ID
+		$customer: CustomerInput
 	) {
 		updateProject(
 			id: $projectId
 			name: $name
 			deadline: $deadline
 			notifyActivityToCustomer: $notifyActivityToCustomer
+			customerId: $customerId
+			customer: $customer
 		) {
 			id
 			name
 			deadline
+			daysUntilDeadline
 			notifyActivityToCustomer
+			customer {
+				...ProjectCustomerFragment
+			}
 		}
 	}
 `;
@@ -311,26 +313,6 @@ export const REMOVE_PROJECT = gql`
 	}
 `;
 
-export const ACCEPT_PROJECT = gql`
-	# creating project with a customer id or a new customer
-	mutation acceptProject($projectId: ID!, $token: String!) {
-		acceptProject(id: $projectId, token: $token) {
-			id
-			status
-		}
-	}
-`;
-
-export const REJECT_PROJECT = gql`
-	# creating project with a customer id or a new customer
-	mutation rejectProject($projectId: ID!, $token: String!) {
-		rejectProject(id: $projectId, token: $token) {
-			id
-			status
-		}
-	}
-`;
-
 export const FINISH_PROJECT = gql`
 	mutation finishProject($projectId: ID!) {
 		finishProject(id: $projectId) {
@@ -342,89 +324,61 @@ export const FINISH_PROJECT = gql`
 
 // Section
 export const ADD_SECTION = gql`
-	mutation addSection($projectId: ID!, $name: String!, $items: [ItemInput!]) {
-		addSection(projectId: $projectId, name: $name, items: $items) {
+	${ITEM_FRAGMENT}
+
+	mutation addSection(
+		$projectId: ID!
+		$name: String!
+		$items: [ItemInput!]
+		$position: Int
+	) {
+		addSection(
+			projectId: $projectId
+			name: $name
+			items: $items
+			position: $position
+		) {
 			id
 			name
-			items {
+			position
+			project {
 				id
+				deadline
+				daysUntilDeadline
+				status
 				name
-				unit
-				description
-				reviewer
-				comments {
-					createdAt
+				customer {
 					id
-					views {
-						viewer {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					author {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
+					name
 				}
+			}
+			items {
+				...ItemFragment
 			}
 		}
 	}
 `;
 export const UPDATE_SECTION = gql`
+	${ITEM_FRAGMENT}
+
 	mutation updateSection($sectionId: ID!, $name: String, $position: Int) {
 		updateSection(id: $sectionId, name: $name, position: $position) {
 			id
 			name
 			position
-			items {
-				status
+			project {
 				id
+				deadline
+				daysUntilDeadline
+				status
 				name
-				unit
-				description
-				reviewer
-				comments {
-					createdAt
+				customer {
 					id
-					views {
-						viewer {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					author {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
+					name
 				}
+			}
+			items {
+				...ItemFragment
 			}
 		}
 	}
@@ -436,146 +390,93 @@ export const REMOVE_SECTION = gql`
 		}
 	}
 `;
+
 // Item
 export const ADD_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation addItem(
-		$sectionId: ID!
+		$sectionId: ID
+		$projectId: ID
 		$name: String!
 		$type: ItemType
 		$unit: Float
-		$vatRate: Int
 		$description: String
 		$reviewer: Reviewer
+		$dueDate: DateTime
+		$linkedCustomerId: ID
+		$linkedCustomer: CustomerInput
 	) {
 		addItem(
 			sectionId: $sectionId
+			projectId: $projectId
 			name: $name
 			type: $type
 			unit: $unit
-			vatRate: $vatRate
 			description: $description
 			reviewer: $reviewer
+			dueDate: $dueDate
+			linkedCustomerId: $linkedCustomerId
+			linkedCustomer: $linkedCustomer
 		) {
-			id
-			name
-			type
-			unit
-			description
-			status
-			reviewer
-			comments {
-				createdAt
-				id
-				views {
-					viewer {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
-				author {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
+			...ItemFragment
 		}
 	}
 `;
 export const UPDATE_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation updateItem(
 		$itemId: ID!
-		$name: String
-		$type: ItemType
-		$description: String
-		$unit: Float
 		$comment: CommentInput
-		$reviewer: Reviewer
+		$description: String
+		$dueDate: DateTime
+		$linkedCustomerId: ID
+		$linkedCustomer: CustomerInput
+		$name: String
 		$position: Int
-		$token: String
+		$reviewer: Reviewer
 		$sectionId: ID
+		$token: String
+		$type: ItemType
+		$unit: Float
 	) {
 		updateItem(
 			id: $itemId
-			name: $name
-			type: $type
-			description: $description
 			comment: $comment
-			unit: $unit
-			reviewer: $reviewer
+			description: $description
+			dueDate: $dueDate
+			linkedCustomerId: $linkedCustomerId
+			linkedCustomer: $linkedCustomer
+			name: $name
 			position: $position
-			token: $token
+			reviewer: $reviewer
 			sectionId: $sectionId
+			token: $token
+			type: $type
+			unit: $unit
 		) {
-			id
-			name
-			type
-			unit
-			description
-			status
-			reviewer
-			position
-			section {
-				id
-			}
-			comments {
-				createdAt
-				id
-				views {
-					viewer {
-						... on User {
-							firstName
-							lastName
-						}
-						... on Customer {
-							firstName
-							lastName
-							name
-						}
-					}
-				}
-				author {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
+			...ItemFragment
 		}
 	}
 `;
 
 export const FINISH_ITEM = gql`
-	mutation finishItem($itemId: ID!, $token: String) {
-		finishItem(id: $itemId, token: $token) {
-			id
-			status
+	${ITEM_FRAGMENT}
+
+	mutation finishItem($itemId: ID!, $token: String, $timeItTook: Float) {
+		finishItem(id: $itemId, token: $token, timeItTook: $timeItTook) {
+			...ItemFragment
 		}
 	}
 `;
 
 export const UNFINISH_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation unfinishItem($itemId: ID!) {
 		unfinishItem(id: $itemId) {
-			id
-			status
+			...ItemFragment
 		}
 	}
 `;
@@ -589,10 +490,11 @@ export const REMOVE_ITEM = gql`
 `;
 
 export const SNOOZE_ITEM = gql`
+	${ITEM_FRAGMENT}
+
 	mutation snoozeItem($itemId: ID!, $during: Int) {
 		snoozeItem(id: $itemId, during: $during) {
-			id
-			status
+			...ItemFragment
 		}
 	}
 `;
@@ -635,6 +537,18 @@ export const SEND_AMENDMENT = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					status
 					id
@@ -681,6 +595,18 @@ export const ACCEPT_AMENDMENT = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					status
 					id
@@ -755,6 +681,18 @@ export const REJECT_AMENDMENT = gql`
 			sections {
 				id
 				name
+				position
+				project {
+					id
+					deadline
+					daysUntilDeadline
+					status
+					name
+					customer {
+						id
+						name
+					}
+				}
 				items {
 					status
 					id

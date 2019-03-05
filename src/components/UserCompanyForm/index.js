@@ -7,13 +7,8 @@ import * as Yup from 'yup';
 import ReactGA from 'react-ga';
 
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
-import {
-	Button,
-	FlexRow,
-	primaryWhite,
-	gray20,
-	ErrorInput,
-} from '../../utils/content';
+import {gray20, ErrorInput} from '../../utils/content';
+import {Button, primaryWhite} from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import AddressAutocomplete from '../AddressAutocomplete';
@@ -21,10 +16,14 @@ import FormElem from '../FormElem';
 
 const UserCompanyFormMain = styled('div')``;
 
-const FormContainer = styled('div')``;
+const FormContainer = styled('div')`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 20px;
+`;
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
-	padding: 20px 40px;
+	padding: 60px 40px;
 	border: 1px solid ${gray20};
 `;
 const UpdateButton = styled(Button)`
@@ -132,25 +131,23 @@ class UserCompanyForm extends Component {
 									<form onSubmit={handleSubmit}>
 										<ProfileSection>
 											<FormContainer>
-												<FlexRow justifyContent="space-between">
-													<FormElem
-														{...props}
-														name="name"
-														type="text"
-														label="Raison sociale"
-														placeholder="Bertrand SA"
-														padded
-														required
-													/>
-													<FormElem
-														{...props}
-														name="phone"
-														type="tel"
-														label="Numéro de téléphone"
-														placeholder="0427..."
-														padded
-													/>
-												</FlexRow>
+												<FormElem
+													{...props}
+													name="name"
+													type="text"
+													label="Raison sociale"
+													placeholder="Bertrand SA"
+													padded
+													required
+												/>
+												<FormElem
+													{...props}
+													name="phone"
+													type="tel"
+													label="Numéro de téléphone"
+													placeholder="0427..."
+													padded
+												/>
 												<AddressAutocomplete
 													{...props}
 													onChange={setFieldValue}
@@ -160,21 +157,19 @@ class UserCompanyForm extends Component {
 													label="Adresse de la société"
 													padded
 													required
+													style={{
+														gridColumn: '1 / 3',
+													}}
 												/>
 											</FormContainer>
 
-											{status
-												&& status.msg && (
+											{status && status.msg && (
 												<ErrorInput>
 													{status.msg}
 												</ErrorInput>
 											)}
 										</ProfileSection>
-										<UpdateButton
-											theme="Primary"
-											size="Medium"
-											type="submit"
-										>
+										<UpdateButton type="submit" big>
 											{buttonText || 'Mettre à jour'}
 										</UpdateButton>
 									</form>

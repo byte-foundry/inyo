@@ -1,17 +1,22 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
 import {Mutation} from 'react-apollo';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import {
-	H4, FlexColumn, Button, Label,
+	H4,
+	FlexRow,
+	gray70,
+	primaryWhite,
+	primaryBlue,
+	gray80,
+	FlexColumn,
+	Button,
+	P,
 } from '../../utils/content';
-
-import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
-import WeekDaysInput from '../WeekDaysInput';
+import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`
 	width: 100%;
@@ -32,122 +37,95 @@ const StepSubtitle = styled(H4)`
 	text-align: center;
 `;
 
-const EmojiTimeline = styled('div')`
-	display: flex;
-	justify-content: space-between;
-	font-size: 32px;
-	margin: 15px;
-	position: relative;
-	height: 50px;
+const StepDescription = styled(P)`
+	text-align: center;
+	color: ${gray70};
+	font-size: 15px;
 `;
 
-const Emoji = styled('div')`
-	position: absolute;
-	left: calc(${props => props.offset}% - 21px);
-	user-select: none;
+const UseCaseCards = styled(FlexRow)`
+	flex-wrap: nowrap;
 `;
 
-class OnboardingThirdStep extends Component {
+const UseCaseCard = styled('div')`
+	flex: 1;
+	margin-bottom: 15px;
+	padding: 14px 16px 15px 16px;
+	color: ${props => (props.selected ? primaryWhite : gray80)};
+	background-color: ${props => (props.selected ? primaryBlue : 'transparent')};
+	border: 1px solid ${props => (props.selected ? primaryBlue : gray70)};
+	transition: color 0.3s ease, background-color 0.3s ease,
+		border-color 0.3s ease;
+	cursor: pointer;
+	text-align: center;
+
+	&:first-child {
+		margin-right: 10px;
+	}
+`;
+
+class OnboardingFifthStep extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			canBeContacted: false,
+		};
+	}
+
 	render() {
 		const {
-			me: {startWorkAt, endWorkAt},
-			me,
-			getNextStep,
-			getPreviousStep,
-			step,
+			me, getNextStep, getPreviousStep, step,
 		} = this.props;
-
-		const currentDate = new Date().toJSON().split('T')[0];
-		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
-		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
-
-		const startHourInitial
-			= startWorkAtDate.toString() === 'Invalid Date'
-				? 8
-				: startWorkAtDate.getHours();
-		const startMinutesInitial
-			= startWorkAtDate.toString() === 'Invalid Date'
-				? 30
-				: startWorkAtDate.getMinutes();
-		const endHourInitial
-			= endWorkAtDate.toString() === 'Invalid Date'
-				? 19
-				: endWorkAtDate.getHours();
-		const endMinutesInitial
-			= endWorkAtDate.toString() === 'Invalid Date'
-				? 0
-				: endWorkAtDate.getMinutes();
-		const workingDaysInitial
-			= me.workingDays && me.workingDays.length
-				? me.workingDays
-				: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'];
 
 		return (
 			<OnboardingStep>
-				<StepSubtitle>
-					Nous avons besoin de quelques informations pour nous aider à
-					travailler pour vous.
-				</StepSubtitle>
+				<StepSubtitle>Dernière question !</StepSubtitle>
+				<StepDescription>
+					Pouvez-vous nous aider à transformer Inyo en l'application
+					de vos rêves?
+				</StepDescription>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
 						<Formik
 							initialValues={{
-								startHour: startHourInitial,
-								startMinutes: startMinutesInitial,
-								endHour: endHourInitial,
-								endMinutes: endMinutesInitial,
-								workingDays: workingDaysInitial,
+								canBeContacted: me.canBeContacted,
+								phone: '',
 							}}
-							validationSchema={Yup.object().shape({
-								startHour: Yup.number().required(),
-								startMinutes: Yup.number().required(),
-								endHour: Yup.number().required(),
-								endMinutes: Yup.number().required(),
-							})}
+							validate={({canBeContacted, phone}) => {
+								const errors = {};
+
+								if (canBeContacted && !phone) {
+									errors.phone = 'Requis';
+								}
+
+								return errors;
+							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const {
-									startHour,
-									startMinutes,
-									endHour,
-									endMinutes,
-									workingDays,
-								} = values;
 
-								const start = new Date();
-
-								start.setHours(startHour);
-								start.setMinutes(startMinutes);
-								start.setSeconds(0);
-								start.setMilliseconds(0);
-
-								const end = new Date();
-
-								end.setHours(endHour);
-								end.setMinutes(endMinutes);
-								end.setSeconds(0);
-								end.setMilliseconds(0);
+								window.Intercom('update', {
+									canBeContacted: values.canBeContacted,
+									phone: values.phone,
+								});
 
 								try {
 									updateUser({
 										variables: {
-											startWorkAt: start
-												.toJSON()
-												.split('T')[1],
-											endWorkAt: end
-												.toJSON()
-												.split('T')[1],
-											workingDays,
+											canBeContacted:
+												values.canBeContacted,
+											company: {
+												phone: values.phone,
+											},
 										},
 										update: (
 											cache,
-											{data: {updateUser: updatedUser}},
+											{data: {updateUser: newUpdateUser}},
 										) => {
 											const data = cache.readQuery({
 												query: GET_USER_INFOS,
 											});
 
-											data.me = updatedUser;
+											data.me = newUpdateUser;
 											try {
 												cache.writeQuery({
 													query: GET_USER_INFOS,
@@ -172,46 +150,56 @@ class OnboardingThirdStep extends Component {
 						>
 							{(props) => {
 								const {
-									handleSubmit,
+									values,
+									errors,
 									setFieldValue,
-									values: {
-										startHour,
-										startMinutes,
-										endHour,
-										endMinutes,
-										workingDays,
-									},
+									handleChange,
+									handleBlur,
+									handleSubmit,
+									touched,
 								} = props;
 
 								return (
 									<form onSubmit={handleSubmit}>
-										<Label onboarding>
-											Définissez vos horaires de travail
-										</Label>
-										<DoubleRangeTimeInput
-											value={{
-												start: [
-													startHour,
-													startMinutes,
-												],
-												end: [endHour, endMinutes],
-											}}
-											setFieldValue={setFieldValue}
-										/>
-										<EmojiTimeline>
-											<Emoji offset={0}>🌙</Emoji>
-											<Emoji offset={33}>🥐</Emoji>
-											<Emoji offset={50}>🍱</Emoji>
-											<Emoji offset={87}>🛌</Emoji>
-											<Emoji offset={100}>🌗</Emoji>
-										</EmojiTimeline>
-										<Label onboarding>
-											Définissez vos jours de travail
-										</Label>
-										<WeekDaysInput
-											values={workingDays}
-											setFieldValue={setFieldValue}
-										/>
+										<UseCaseCards>
+											<UseCaseCard
+												selected={values.canBeContacted}
+												onClick={() => setFieldValue(
+													'canBeContacted',
+													true,
+												)
+												}
+											>
+												Oui
+											</UseCaseCard>
+											<UseCaseCard
+												selected={
+													!values.canBeContacted
+												}
+												onClick={() => setFieldValue(
+													'canBeContacted',
+													false,
+												)
+												}
+											>
+												Non
+											</UseCaseCard>
+										</UseCaseCards>
+										{values.canBeContacted && (
+											<FormElem
+												label="Merci! Renseignez svp votre numéro de téléphone"
+												errors={errors}
+												required
+												values={values}
+												type="text"
+												touched={touched}
+												name="phone"
+												id="phone"
+												handleBlur={handleBlur}
+												handleChange={handleChange}
+												placeholder="08 36 65 65 65"
+											/>
+										)}
 										<ActionButtons>
 											<ActionButton
 												theme="Primary"
@@ -244,4 +232,4 @@ class OnboardingThirdStep extends Component {
 	}
 }
 
-export default OnboardingThirdStep;
+export default OnboardingFifthStep;

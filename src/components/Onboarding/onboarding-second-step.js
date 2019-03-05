@@ -4,9 +4,10 @@ import {Formik} from 'formik';
 import {Mutation} from 'react-apollo';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
-
 import {
 	H4,
+	P,
+	gray50,
 	FlexRow,
 	gray70,
 	primaryWhite,
@@ -15,6 +16,8 @@ import {
 	FlexColumn,
 	Button,
 } from '../../utils/content';
+
+import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`
 	width: 100%;
@@ -35,11 +38,17 @@ const StepSubtitle = styled(H4)`
 	text-align: center;
 `;
 
-const TeamTypeCards = styled(FlexRow)`
+const StepDescription = styled(P)`
+	text-align: center;
+	color: ${gray50};
+	font-size: 15px;
+`;
+
+const DomainCards = styled(FlexRow)`
 	flex-wrap: wrap;
 `;
 
-const TeamTypeCard = styled('div')`
+const DomainCard = styled('div')`
 	width: 100%;
 	margin-bottom: 15px;
 	padding: 14px 16px 15px 16px;
@@ -52,51 +61,79 @@ const TeamTypeCard = styled('div')`
 	text-align: center;
 `;
 
-const teamTypes = [
-	{name: 'TEAM', value: 'Studio / Groupe de freelances'},
-	{name: 'FULLTIME_INDIVIDUAL', value: 'Freelance à plein temps'},
-	{name: 'PARTTIME_INDIVIDUAL', value: 'Freelance à temps partiel'},
-	{name: 'NOT_FREELANCER', value: 'Je ne suis pas Freelance'},
-];
-
 class OnboardingSecondStep extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			jobType: props.me.jobType,
+			painsExpressed: props.me.painsExpressed || [],
 		};
 	}
 
-	selectItem = (item, setFieldValue) => {
-		setFieldValue('jobType', item);
-		this.setState({jobType: item});
+	toggleSelectedItems = (painsExpressed, item, setFieldValue) => {
+		const itemIndex = painsExpressed.findIndex(e => e === item);
+
+		if (itemIndex !== -1) {
+			painsExpressed.splice(itemIndex, 1);
+			setFieldValue('painsExpressed', painsExpressed);
+
+			return;
+		}
+		setFieldValue('painsExpressed', painsExpressed);
+		painsExpressed.push(item);
+		this.setState({painsExpressed});
 	};
 
 	render() {
 		const {
 			me, getNextStep, getPreviousStep, step,
 		} = this.props;
-		const {jobType} = this.state;
+		const pains = [
+			'Jongler entre plusieurs canaux de communications (Slack, emails, etc.)',
+			'Estimer correctement le temps et les tâches en amont du projet',
+			'Organiser et respecter mon programme de temps de travail',
+			'Relancer mes clients pour obtenir des validations',
+		];
 
 		return (
 			<OnboardingStep>
 				<StepSubtitle>
-					Quelle type de structure avez-vous ?
+					Qu'est-ce qui vous ennuie le plus au quotidien ?
 				</StepSubtitle>
+				<StepDescription>
+					Vous pouvez choisir plusieurs options
+				</StepDescription>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
 						<Formik
 							initialValues={{
-								jobType: me.jobType,
+								painsExpressed: me.painsExpressed || [],
+								other: '',
+							}}
+							validate={({painsExpressed, other}) => {
+								const errors = {};
+
+								if (
+									painsExpressed.find(e => e === 'Autre')
+									&& !other
+								) {
+									errors.other = 'Requis';
+								}
+
+								return errors;
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const newJobType = values.jobType;
+								window.Intercom('update', {
+									painsExpressed: values.painsExpressed,
+									otherPain: values.otherPain,
+								});
+								const newPainsExpressed = values.painsExpressed;
 
 								try {
 									updateUser({
 										variables: {
-											jobType: newJobType,
+											painsExpressed: newPainsExpressed,
+											otherPain: values.other,
 										},
 										update: (
 											cache,
@@ -130,28 +167,66 @@ class OnboardingSecondStep extends Component {
 							}}
 						>
 							{(props) => {
-								const {setFieldValue, handleSubmit} = props;
+								const {
+									values,
+									errors,
+									setFieldValue,
+									handleChange,
+									handleBlur,
+									handleSubmit,
+									touched,
+								} = props;
 
 								return (
 									<form onSubmit={handleSubmit}>
-										<TeamTypeCards>
-											{teamTypes.map(teamType => (
-												<TeamTypeCard
-													selected={
-														jobType
-														=== teamType.name
-													}
+										<DomainCards>
+											{pains.map(pain => (
+												<DomainCard
+													selected={values.painsExpressed.find(
+														e => e === pain,
+													)}
 													onClick={() => {
-														this.selectItem(
-															teamType.name,
+														this.toggleSelectedItems(
+															values.painsExpressed,
+															pain,
 															setFieldValue,
 														);
 													}}
 												>
-													{teamType.value}
-												</TeamTypeCard>
+													{pain}
+												</DomainCard>
 											))}
-										</TeamTypeCards>
+											<DomainCard
+												selected={values.painsExpressed.find(
+													e => e === 'Autre',
+												)}
+												onClick={() => {
+													this.toggleSelectedItems(
+														values.painsExpressed,
+														'Autre',
+														setFieldValue,
+													);
+												}}
+											>
+												Autre
+											</DomainCard>
+											{values.painsExpressed.find(
+												e => e === 'Autre',
+											) && (
+												<FormElem
+													label="Donnez nous un exemple :)"
+													errors={errors}
+													required
+													values={values}
+													type="text"
+													touched={touched}
+													name="other"
+													id="other"
+													handleBlur={handleBlur}
+													handleChange={handleChange}
+												/>
+											)}
+										</DomainCards>
 										<ActionButtons>
 											<ActionButton
 												theme="Primary"

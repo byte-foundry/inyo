@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import {Redirect} from 'react-router-dom';
+import {withRouter, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {ToastContainer, toast} from 'react-toastify';
 
-import TopBar, {
-	TopBarTitle,
-	TopBarButton,
-	TopBarNavigation,
-} from '../../../components/TopBar';
 import {
 	H3,
 	Button,
@@ -17,26 +12,19 @@ import {
 	primaryBlue,
 	signalRed,
 	FlexRow,
-	gray10,
 	primaryWhite,
 	gray20,
 	gray30,
 	Loading,
 } from '../../../utils/content';
+import {primaryPurple} from '../../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserSettings from '../../../components/UserSettings';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
-import {ReactComponent as FoldersIcon} from '../../../utils/icons/folders.svg';
-import {ReactComponent as DashboardIcon} from '../../../utils/icons/dashboard.svg';
-// import {ReactComponent as UsersIcon} from '../../../utils/icons/users.svg';
-import {ReactComponent as SettingsIcon} from '../../../utils/icons/settings.svg';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AccountMain = styled('div')`
-	background: ${gray10};
-	min-height: 100vh;
 	padding-bottom: 80px;
 `;
 const AccountBody = styled('div')`
@@ -70,8 +58,8 @@ const ProfileSideElem = styled('li')`
 	transition: border-color 0.3s ease, color 0.3s ease;
 	${props => props.active
 		&& css`
-			border-color: ${gray30};
-			color: ${gray30};
+			border-color: ${primaryPurple};
+			color: ${primaryPurple};
 		`};
 `;
 const ProfileSideLink = styled('a')`
@@ -87,7 +75,7 @@ const ProfileMain = styled('div')`
 
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
-	padding: 20px 40px;
+	padding: 60px 40px;
 	border: 1px solid ${gray20};
 `;
 const LogoutButton = styled(Button)`
@@ -164,70 +152,6 @@ class Account extends Component {
 					return (
 						<AccountMain>
 							<ToastContainer />
-
-							<TopBar>
-								<TopBarTitle>Mon Compte</TopBarTitle>
-								<TopBarNavigation>
-									<TopBarButton
-										theme="Primary"
-										size="Medium"
-										onClick={() => {
-											this.props.history.push(
-												'/app/projects/create',
-											);
-										}}
-									>
-										Créer un nouveau projet
-									</TopBarButton>
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/dashboard',
-											);
-										}}
-									>
-										<DashboardIcon />
-										<span>Dashboard</span>
-									</TopBarButton>
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/projects',
-											);
-										}}
-									>
-										<FoldersIcon />
-										<span>Projets</span>
-									</TopBarButton>
-									{/* <TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/customers',
-											);
-										}}
-									>
-										<UsersIcon />
-									</TopBarButton> */}
-									<TopBarButton
-										theme="Link"
-										size="XSmall"
-										onClick={() => {
-											this.props.history.push(
-												'/app/account',
-											);
-										}}
-									>
-										<SettingsIcon />
-										<span>Réglages</span>
-									</TopBarButton>
-								</TopBarNavigation>
-							</TopBar>
 
 							<AccountBody>
 								<WelcomeMessage>
@@ -357,4 +281,4 @@ class Account extends Component {
 	}
 }
 
-export default Account;
+export default withRouter(Account);

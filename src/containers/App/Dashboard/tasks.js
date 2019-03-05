@@ -2,8 +2,9 @@ import React from 'react';
 import {Query, Mutation} from 'react-apollo';
 import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
+import moment from 'moment';
 
-import Item from '../../../components/ProjectSection/see-item';
+import TasksList from '../../../components/TasksList';
 import ItemView from '../../../components/ItemView';
 import ProjectCard from '../../../components/ProjectCard';
 
@@ -19,7 +20,7 @@ import {
 	FlexRow,
 	ModalElem,
 } from '../../../utils/content';
-import {USER_TASKS, GET_ALL_PROJECTS} from '../../../utils/queries';
+import {GET_ALL_TASKS, GET_ALL_PROJECTS} from '../../../utils/queries';
 import {SNOOZE_ITEM} from '../../../utils/mutations';
 import {ReactComponent as TaskIcon} from '../../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../../utils/icons/time.svg';
@@ -30,21 +31,18 @@ import {ReactComponent as SnoozeIcon} from '../../../utils/icons/snooze.svg';
 const SectionTitle = styled(H3)`
 	color: ${primaryBlue};
 	font-size: 22px;
-	font-weight: 600;
+	font-weight: 500;
 	margin: 2em 0;
 `;
 
 const ColumnHeader = styled('div')`
 	flex: ${props => props.flex};
 	display: flex;
+	align-items: center;
 `;
 
 const HeaderRow = styled(FlexRow)`
 	margin: 10px 105px 10px 17px;
-
-	svg {
-		margin-top: -3px;
-	}
 `;
 
 const HeaderText = styled('span')`
@@ -94,20 +92,49 @@ const DashboardTasks = ({
 			if (projectsLoading) return <p>Loading</p>;
 
 			const {
-				me: {
-					company: {projects},
-				},
+				me: {projects},
 			} = projectsData;
 			const projectsPending = projects.filter(
 				project => project.status === 'DRAFT',
 			);
 
 			return (
-				<Query query={USER_TASKS}>
-					{({data, loading}) => {
+				<Query query={GET_ALL_TASKS}>
+					{({data, loading, error}) => {
 						if (loading) return <p>Loading</p>;
+						if (error) throw error;
 
-						const {me, items} = data;
+						const {me} = data;
+						const tasks = me.tasks.filter(
+							task => task.type === 'DEFAULT'
+								&& task.status === 'PENDING',
+						);
+
+						tasks.sort((a, b) => {
+							const aDueDate
+								= a.dueDate
+								|| (a.section && a.section.project.deadline)
+								|| undefined;
+							const bDueDate
+								= b.dueDate
+								|| (b.section && b.section.project.deadline)
+								|| undefined;
+
+							const aMargin
+								= a.dueDate
+								&& a.unit
+								&& moment(aDueDate).diff(moment(), 'days')
+									- a.unit;
+							const bMargin
+								= b.dueDate
+								&& b.unit
+								&& moment(bDueDate).diff(moment(), 'days')
+									- b.unit;
+
+							if (!aMargin) return 1;
+							if (!bMargin) return -1;
+							return aMargin - bMargin;
+						});
 
 						const now = new Date();
 
@@ -130,6 +157,7 @@ const DashboardTasks = ({
 						const userWorkingTime
 							= (endWorkAt - startWorkAt) / 60 / 60 / 1000;
 						// day is over -> show next day
+
 						let timeLeft = userWorkingTime;
 
 						// day ongoing -> show tasks the user can do
@@ -144,11 +172,11 @@ const DashboardTasks = ({
 								* userWorkingTime
 								< timeLeft
 							&& itemsToDo.length < 8
-							&& items[itemsToDo.length]
+							&& tasks[itemsToDo.length]
 						) {
-							itemsToDo.push(items[itemsToDo.length]);
+							itemsToDo.push(tasks[itemsToDo.length]);
 						}
-						const itemsToDoLater = items.slice(
+						const itemsToDoLater = tasks.slice(
 							itemsToDo.length,
 							itemsToDo.length + 3,
 						);
@@ -166,120 +194,11 @@ const DashboardTasks = ({
 								)}
 								{itemsToDo.length ? (
 									<>
-										<HeaderRow>
-											<ColumnHeader flex="1">
-												<TaskIcon />
-												<HeaderText>
-													Titre de la tâche
-												</HeaderText>
-											</ColumnHeader>
-											<ColumnHeader flex="0 0 140px">
-												<TimeIcon />
-												<HeaderText>Durée</HeaderText>
-											</ColumnHeader>
-											<ColumnHeader flex="0 0 140px">
-												<DateIcon />
-												<HeaderText>
-													Deadline
-												</HeaderText>
-											</ColumnHeader>
-											<ColumnHeader flex="0 0 140px">
-												<ContactIcon />
-												<HeaderText>Client</HeaderText>
-											</ColumnHeader>
-										</HeaderRow>
-										{itemsToDo.map(item => (
-											<FlexRow>
-												<Item
-													key={item.id}
-													item={item}
-													projectStatus={
-														item.section.project
-															.status
-													}
-													finishItem={finishItem}
-													unfinishItem={unfinishItem}
-													daysUntilDeadline={
-														item.section.project
-															.daysUntilDeadline
-													}
-													mode="dashboard"
-													customer={
-														item.section.project
-															.customer.name
-													}
-													onClick={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}`,
-														);
-													}}
-													onClickCommentIcon={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}#comments`,
-														);
-													}}
-												/>
-												<Mutation
-													mutation={SNOOZE_ITEM}
-												>
-													{snoozeItemMutation => (
-														<SnoozeContainer
-															snoozed={
-																item.status
-																=== 'SNOOZED'
-															}
-															onClick={() => {
-																snoozeItem(
-																	item.id,
-																	item.section
-																		.id,
-																	1,
-																	snoozeItemMutation,
-																);
-															}}
-														>
-															<SnoozeIcon />
-														</SnoozeContainer>
-													)}
-												</Mutation>
-											</FlexRow>
-										))}
+										<TasksList items={itemsToDo} />
 									</>
-								) : projectsPending.length > 0 ? (
-									<div>
-										<P>
-											Bonjour, vous n’avez plus de tâche à
-											accomplir pour l’instant !<br />
-											Vous avez des projets en attente.
-											C’est peut-être le moment de
-											recontacter ces clients :)
-										</P>
-										<FlexRow flexWrap="wrap">
-											{projectsPending.map(project => (
-												<ProjectCard
-													project={project}
-													inRow={true}
-												/>
-											))}
-										</FlexRow>
-										<P>Vous pouvez aussi</P>
-										<LinkButton to="/app/projects/create">
-											Créer un nouveau projet
-										</LinkButton>
-									</div>
 								) : (
 									<div>
-										<P>
-											Bravo, vous n'avez plus rien à faire
-											! Voulez-vous...
-										</P>
-										<LinkButton to="/app/projects/create">
-											Créer un nouveau projet
-										</LinkButton>
+										<P>Vous n'avez pas de tâche à faire</P>
 									</div>
 								)}
 								{itemsToDoLater.length > 0 && (
@@ -287,62 +206,7 @@ const DashboardTasks = ({
 										<SectionTitle>
 											Il vous reste du temps ?
 										</SectionTitle>
-										{itemsToDoLater.map(item => (
-											<FlexRow>
-												<Item
-													key={item.id}
-													item={item}
-													projectStatus={
-														item.section.project
-															.status
-													}
-													finishItem={finishItem}
-													unfinishItem={unfinishItem}
-													daysUntilDeadline={
-														item.section.project
-															.daysUntilDeadline
-													}
-													mode="dashboard"
-													customer={
-														item.section.project
-															.customer.name
-													}
-													onClick={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}`,
-														);
-													}}
-													onClickCommentIcon={() => {
-														history.push(
-															`/app/dashboard/items/${
-																item.id
-															}#comments`,
-														);
-													}}
-												/>
-												<Mutation
-													mutation={SNOOZE_ITEM}
-												>
-													{snoozeItemMutation => (
-														<SnoozeContainer
-															onClick={() => {
-																snoozeItem(
-																	item.id,
-																	item.section
-																		.id,
-																	1,
-																	snoozeItemMutation,
-																);
-															}}
-														>
-															<SnoozeIcon />
-														</SnoozeContainer>
-													)}
-												</Mutation>
-											</FlexRow>
-										))}
+										<TasksList items={itemsToDoLater} />
 									</>
 								)}
 

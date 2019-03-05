@@ -5,7 +5,8 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import gql from 'graphql-tag';
 
-import {P, Button, ErrorInput} from '../../utils/content';
+import {P, Button} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
 
 import FormElem from '../FormElem';
 
@@ -16,6 +17,11 @@ const SEND_RESET_PASSWORD = gql`
 `;
 
 const Container = styled('div')``;
+
+const SendButton = styled(Button)`
+	display: block;
+	margin-left: auto;
+`;
 
 class SendResetPasswordForm extends Component {
 	constructor(props) {
@@ -87,24 +93,16 @@ class SendResetPasswordForm extends Component {
 										placeholder="jean@dupont.fr"
 										required
 									/>
-									{status
-										&& status.msg && (
-										<ErrorInput>
-											{status.msg}
-										</ErrorInput>
+									{status && status.msg && (
+										<ErrorInput>{status.msg}</ErrorInput>
 									)}
-									<Button
+									<SendButton
 										type="submit"
-										theme={
-											isSubmitting
-												? 'Disabled'
-												: 'PrimaryNavy'
-										}
-										size="Big"
+										big
 										disabled={isSubmitting}
 									>
 										Réinitialiser le mot de passe
-									</Button>
+									</SendButton>
 								</form>
 							)}
 						</Formik>

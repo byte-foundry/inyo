@@ -53,7 +53,7 @@ const UseCaseCard = styled('div')`
 `;
 
 const useCases = ['Oui', 'Non', 'Peut être'];
-const getHasUpcoming = (str) => {
+const getCanBeContacted = (str) => {
 	switch (str) {
 	case 'Oui':
 		return true;
@@ -104,18 +104,17 @@ class OnboardingFifthStep extends Component {
 					{updateUser => (
 						<Formik
 							initialValues={{
-								hasUpcomingProject: me.hasUpcomingProject,
+								canBeContacted: me.canBeContacted,
 							}}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
-								const newHasUpcomingProject
-									= values.hasUpcomingProject;
+								const newCanBeContacted = values.canBeContacted;
 
 								try {
 									updateUser({
 										variables: {
-											hasUpcomingProject: getHasUpcoming(
-												newHasUpcomingProject,
+											canBeContacted: getHasUpcoming(
+												newCanBeContacted,
 											),
 										},
 										update: (

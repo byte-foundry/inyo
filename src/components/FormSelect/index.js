@@ -1,47 +1,59 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
-import {css} from '@emotion/core';
+import Select from 'react-select';
 import {Field} from 'formik';
 
 import {
-	P,
+	InputLabel,
 	Label,
-	ErrorInput,
-	gray50,
-	gray70,
-	signalRed,
-} from '../../utils/content';
+	primaryPurple,
+	lightPurple,
+} from '../../utils/new/design-system';
 
-const FormSelectMain = styled(P)`
-	flex: 0 100px;
-	margin: 17px ${props => (props.padded || props.paddedRight ? '10px' : '0')}
-		25.5px ${props => (props.padded || props.paddedLeft ? '10px' : '0')}
-		${props => props.inline
-			&& css`
-				margin: 0;
-			`};
-	${props => props.onboarding
-		&& css`
-			margin: 10px 15px 10px 16px;
-			width: inherit;
-		`};
-`;
+const FormSelectMain = styled(InputLabel)``;
 
-const FormSelectElem = styled('select')`
-	display: block;
-	border: 1px solid ${props => (props.error ? signalRed : gray70)};
-	padding: 14px 18px 15px 18px;
-	color: ${gray50};
-	width: -webkit-fill-available;
-	width: -moz-available;
-	width: fill-available;
-	font-family: 'Work Sans';
-	font-size: 16px;
-	-webkit-transition: background-color 0.2s ease, color 0.2s ease,
-		border-color 0.2s ease;
-	transition: background-color 0.2s ease, color 0.2s ease,
-		border-color 0.2s ease;
-`;
+const customSelectStyles = {
+	dropdownIndicator: styles => ({
+		...styles,
+		color: primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+	clearIndicator: styles => ({
+		...styles,
+		color: primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+	placeholder: styles => ({
+		...styles,
+		color: lightPurple,
+		fontStyle: 'italic',
+		fontSize: '14px',
+	}),
+	singleValue: styles => ({
+		...styles,
+		color: primaryPurple,
+	}),
+	input: styles => ({
+		...styles,
+		padding: 0,
+		color: primaryPurple,
+	}),
+	control: styles => ({
+		...styles,
+		minHeight: 'auto',
+		border: 'none',
+		backgroundColor: lightPurple,
+		borderRadius: '20px',
+		':hover, :focus, :active': {
+			border: 'none',
+		},
+	}),
+	indicatorSeparator: () => ({
+		backgroundColor: 'transparent',
+	}),
+};
 
 class FormSelect extends Component {
 	render() {
@@ -53,21 +65,21 @@ class FormSelect extends Component {
 			errors,
 			touched,
 			required,
-			padded,
-			paddedRight,
-			paddedLeft,
 			inline,
 			onboarding,
 			options,
+			css,
+			style,
+			...rest
 		} = this.props;
 
 		return (
 			<FormSelectMain
-				padded={padded}
-				paddedRight={paddedRight}
-				paddedLeft={paddedLeft}
 				inline={inline}
 				onboarding={onboarding}
+				css={css}
+				style={style}
+				required={required}
 			>
 				{this.props.label && (
 					<Label htmlFor={name} required={required}>
@@ -80,21 +92,23 @@ class FormSelect extends Component {
 					error={errors[name] && touched[name]}
 				>
 					{({form}) => (
-						<FormSelectElem
-							onChange={(event) => {
-								form.setFieldValue(name, event.target.value);
+						<Select
+							onChange={(selected) => {
+								form.setFieldValue(
+									name,
+									selected && selected.value,
+								);
 							}}
 							onBlur={handleBlur}
 							name={name}
-							value={values[name]}
+							value={options.find(
+								option => option.value === values[name],
+							)}
 							error={errors[name] && touched[name]}
-						>
-							{options.map(option => (
-								<option value={option.value}>
-									{option.label}
-								</option>
-							))}
-						</FormSelectElem>
+							options={options}
+							styles={customSelectStyles}
+							{...rest}
+						/>
 					)}
 				</Field>
 			</FormSelectMain>

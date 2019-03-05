@@ -5,8 +5,6 @@ import {Redirect, withRouter} from 'react-router-dom';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSecondStep from '../../../components/Onboarding/onboarding-second-step';
 import OnboardingThirdStep from '../../../components/Onboarding/onboarding-third-step';
-import OnboardingFourthStep from '../../../components/Onboarding/onboarding-fourth-step';
-import OnboardingFifthStep from '../../../components/Onboarding/onboarding-fifth-step';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
 import {gray20, signalGreen, Loading} from '../../../utils/content';
@@ -49,7 +47,7 @@ class Onboarding extends Component {
 
 	getPreviousStep = () => this.setState({step: this.state.step - 1});
 
-	getStepData = (step, me, projectId) => {
+	getStepData = (step, me) => {
 		switch (step) {
 		case 0:
 			return <Redirect to="/auth" />;
@@ -81,33 +79,8 @@ class Onboarding extends Component {
 				/>
 			);
 		case 4:
-			return (
-				<OnboardingFourthStep
-					me={me}
-					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
-				/>
-			);
-		case 5:
-			return (
-				<OnboardingFifthStep
-					me={me}
-					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
-				/>
-			);
-		case 6:
-			return (
-				<Redirect
-					to={
-						projectId
-							? `/app/projects/${projectId}/edit`
-							: '/app/projects'
-					}
-				/>
-			);
+			window.Intercom('trackEvent', 'start-onboarding-project');
+			return <Redirect to="/app/tasks" />;
 		default:
 			return false;
 		}
@@ -115,8 +88,6 @@ class Onboarding extends Component {
 
 	render() {
 		const {step} = this.state;
-		const queryString = new URLSearchParams(this.props.location.search);
-		const projectId = queryString.get('projectId');
 
 		return (
 			<Query query={GET_USER_INFOS}>
@@ -128,9 +99,9 @@ class Onboarding extends Component {
 						return (
 							<OnboardingMain>
 								<OnboardingProgressBar
-									completionRate={((step - 1) / 5) * 100}
+									completionRate={((step - 1) / 3) * 100}
 								/>
-								{this.getStepData(step, me, projectId)}
+								{this.getStepData(step, me)}
 							</OnboardingMain>
 						);
 					}

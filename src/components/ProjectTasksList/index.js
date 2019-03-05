@@ -379,7 +379,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 							index={sectionIndex}
 						>
 							<SectionTitle
-								placeholder="Nom du projet"
+								placeholder="Nom de la section"
 								value={section.name}
 								placeholderCss={placeholderCss}
 								nameCss={nameCss}

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
 import {ToastContainer, toast} from 'react-toastify';
-import {Route} from 'react-router-dom';
+import {Route, withRouter} from 'react-router-dom';
 
 import {GET_PROJECT_DATA_WITH_TOKEN} from '../../../utils/queries';
 import ItemView from '../../../components/ItemView';
@@ -150,4 +150,4 @@ class ProjectCustomerView extends Component {
 	}
 }
 
-export default ProjectCustomerView;
+export default withRouter(ProjectCustomerView);

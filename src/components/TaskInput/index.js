@@ -174,6 +174,8 @@ const TaskInput = ({
 					{icon}
 				</Icon>
 				<Input
+					data-multiline
+					data-tip="Presser `Tab` pour changer de paramètre<br/>`Entrée` pour valider"
 					ref={inputRef}
 					type="text"
 					onChange={e => setValue(e.target.value)}

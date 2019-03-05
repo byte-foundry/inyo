@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {
+	Switch, Route, Redirect, NavLink,
+} from 'react-router-dom';
 import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';

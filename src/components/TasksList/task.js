@@ -406,9 +406,7 @@ export function TaskInfosInputs({
 	);
 }
 
-function Task({
-	item, token, location, customerToken,
-}) {
+function Task({item, customerToken, location}) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
@@ -425,7 +423,7 @@ function Task({
 		finishItem({
 			variables: {
 				itemId: item.id,
-				token,
+				token: customerToken,
 				timeItTook: unit,
 			},
 			optimisticResponse: {
@@ -488,7 +486,14 @@ function Task({
 									<Button
 										data-tip="Marquer la tâche comme faite"
 										icon="✓"
-										onClick={() => setSetTimeItTook(true)}
+										onClick={() => {
+											if (customerToken) {
+												finishItemCallback(item.unit);
+											}
+											else {
+												setSetTimeItTook(true);
+											}
+										}}
 									>
 										Fait
 									</Button>

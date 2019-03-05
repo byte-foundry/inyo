@@ -33,7 +33,8 @@ const SignupForm = (componentProps) => {
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
 	const createProject = useMutation(CREATE_PROJECT);
-	const from = componentProps.from || `/app/onboarding?projectId=${projectId}`;
+	const from
+		= componentProps.from || `/app/onboarding?projectId=${projectId}`;
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 300);
 

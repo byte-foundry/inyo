@@ -32,6 +32,7 @@ import {
 	primaryPurple,
 	DueDateInputElem,
 	DateInputContainer,
+	HR,
 } from '../../utils/new/design-system';
 import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
 
@@ -450,9 +451,12 @@ const Item = ({id, customerToken, close}) => {
 					</Button>
 				</>
 			) : (
-				<Button red onClick={() => setDeletingItem(true)}>
-					Supprimer la tâche
-				</Button>
+				<>
+					<HR />
+					<Button red onClick={() => setDeletingItem(true)}>
+						Supprimer la tâche
+					</Button>
+				</>
 			)}
 		</>
 	);

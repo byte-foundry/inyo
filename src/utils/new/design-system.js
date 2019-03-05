@@ -168,6 +168,12 @@ export const P = styled('p')`
 	color: ${primaryGrey};
 `;
 
+export const HR = styled('hr')`
+	margin: 2rem 0;
+	border: 0;
+	border-top: 1px solid ${mediumGrey};
+`;
+
 export const Label = styled('label')`
 	font-size: 14px;
 	color: ${primaryGrey};

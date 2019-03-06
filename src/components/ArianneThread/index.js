@@ -142,8 +142,10 @@ export function ArianneElem({
 function ArianneThread({
 	selectCustomer,
 	selectProjects,
+	selectFilter,
 	linkedCustomerId,
 	projectId,
+	filterId = 'PENDING',
 }) {
 	const {
 		data: {
@@ -162,6 +164,12 @@ function ArianneThread({
 		project => !linkedCustomerId
 			|| (project.customer && project.customer.id === linkedCustomerId),
 	);
+
+	const filters = [
+		{id: 'PENDING', name: 'Tâches à faire'},
+		{id: 'FINISHED', name: 'Tâches faites'},
+		{id: 'ALL', name: 'Toutes les tâches'},
+	];
 
 	if (errorsProject) throw errorsProject;
 	if (errorsCustomers) throw errorsCustomers;
@@ -186,6 +194,12 @@ function ArianneThread({
 			>
 				Projets
 			</ArianneElem>
+			<ArianneElem
+				id="filter"
+				list={filters}
+				onChange={selectFilter}
+				selectedId={filterId}
+			/>
 		</ArianneContainer>
 	);
 }

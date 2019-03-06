@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import {ApolloProvider} from 'react-apollo';
 import {ApolloProvider as ApolloHooksProvider} from 'react-apollo-hooks';
@@ -9,6 +9,7 @@ import moment from 'moment';
 import 'moment/locale/fr';
 
 import './index.css';
+import {Loading} from './utils/content';
 import Container from './containers/Container';
 import client from './utils/graphQLConfig';
 import * as serviceWorker from './serviceWorker';
@@ -60,7 +61,9 @@ ReactDOM.render(
 	<ApolloProvider client={client}>
 		<ApolloHooksProvider client={client}>
 			<Router>
-				<Container />
+				<Suspense fallback={<Loading />}>
+					<Container />
+				</Suspense>
 			</Router>
 		</ApolloHooksProvider>
 	</ApolloProvider>,

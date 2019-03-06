@@ -1,9 +1,6 @@
-import React, {useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
-import ReactGA from 'react-ga';
-import * as Sentry from '@sentry/browser';
 import ReactTooltip from 'react-tooltip';
 
 import Onboarding from './Onboarding';
@@ -19,16 +16,13 @@ import TopBar, {
 } from '../../components/TopBar';
 import {ButtonLink} from '../../utils/new/design-system';
 
-import {CHECK_LOGIN_USER} from '../../utils/queries';
-import {INTERCOM_APP_ID, TOOLTIP_DELAY} from '../../utils/constants';
+import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const AppMain = styled('div')`
 	display: flex;
 	flex-direction: column;
 	padding: 3rem;
 `;
-
-const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
 
 const withHeader = Component => (...args) => (
 	<>
@@ -57,70 +51,31 @@ const withHeader = Component => (...args) => (
 	</>
 );
 
-function App() {
-	const [setupDone, setSetupDone] = useState(false);
-	const {data} = useQuery(CHECK_LOGIN_USER);
-
-	if (data && data.me && !setupDone) {
-		window.Intercom('boot', {
-			app_id: INTERCOM_APP_ID,
-			email: data.me.email,
-			user_id: data.me.id,
-			name: `${data.me.firstName} ${data.me.lastName}`,
-			phone: data.me.company.phone,
-			user_hash: data.me.hmacIntercomId,
-		});
-		Sentry.configureScope((scope) => {
-			scope.setUser({email: data.me.email});
-		});
-		ReactGA.set({userId: data.me.id});
-
-		setSetupDone(true);
-	}
-	else {
-		window.Intercom('boot', {
-			app_id: INTERCOM_APP_ID,
-		});
-	}
-
+function App({me}) {
 	return (
 		<AppMain>
 			<Switch>
-				{!data.me && (
+				{!me && (
 					<Route
 						path="/app/projects/:projectId/view/:customerToken"
 						component={withHeader(ProjectCustomerView)}
 					/>
 				)}
-				<ProtectedRoute
+				<Route
 					path="/app/dashboard"
 					component={withHeader(Dashboard)}
-					isAllowed={data && data.me}
 				/>
-				<ProtectedRoute
-					path="/app/account"
-					component={withHeader(Account)}
-					isAllowed={data && data.me}
-				/>
-				<ProtectedRoute
-					path="/app/tasks"
-					component={withHeader(Tasks)}
-					isAllowed={data && data.me}
-				/>
-				<ProtectedRoute
-					path="/app/onboarding"
-					component={Onboarding}
-					isAllowed={data && data.me}
-				/>
+				<Route path="/app/account" component={withHeader(Account)} />
+				<Route path="/app/tasks" component={withHeader(Tasks)} />
+				<Route path="/app/onboarding" component={Onboarding} />
 				<Redirect to="/app/tasks" />
 			</Switch>
-			{data && data.me && (
-				<ProtectedRoute
+			{me && (
+				<Route
 					path={['/app/projects', '/app/account', '/app/dashboard']}
 					render={props => (
-						<ConditionalContent {...props} user={data.me} />
+						<ConditionalContent {...props} user={me} />
 					)}
-					isAllowed
 				/>
 			)}
 		</AppMain>

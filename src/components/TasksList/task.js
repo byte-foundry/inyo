@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
@@ -81,9 +81,11 @@ const TaskAdd = styled('div')``;
 
 const TaskIcon = styled('div')`
 	cursor: pointer;
-	width: 1.75rem;
-	height: 1.75rem;
+	width: 3.5rem;
+	height: 3.5rem;
+	margin-left: -.8725rem;
 	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
+	overflow: visible;
 	background: center no-repeat
 		url(${(props) => {
 		const typeInfos
@@ -92,11 +94,14 @@ const TaskIcon = styled('div')`
 		let icon = typeInfos.iconUrl;
 
 		if (props.status === itemStatuses.FINISHED) {
-			icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
+			icon
+					= (props.justUpdated
+					? typeInfos.iconUrlValidatedAnim
+					: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
 		}
 		return icon;
 	}});
-	margin-top: ${props => (props.noData ? '0.1rem' : '1.55rem')};
+	margin-top: ${props => (props.noData ? '0.1rem' : '.6775rem')};
 	margin-bottom: ${props => (props.noData ? 0 : '2rem')};
 
 	transform: scale(${props => (props.noData ? 0.75 : '')});
@@ -141,13 +146,13 @@ const TaskIcon = styled('div')`
 				background-size: 0% auto;
 			}
 			50% {
-				background-size: 100% auto;
+				background-size: 50% auto;
 			}
 			70% {
-				background-size: 80% auto;
+				background-size: 40% auto;
 			}
 			100% {
-				background-size: 100% auto;
+				background-size: 50% auto;
 			}
 		}
 	}
@@ -583,9 +588,11 @@ function Task({
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
+	const [justUpdated, setJustUpdated] = useState(false);
 
 	const setTimeItTookRef = useRef();
 	const setTimeItTookValueRef = useRef();
+	const iconRef = useRef();
 
 	function finishItemCallback(unit) {
 		finishItem({
@@ -602,6 +609,7 @@ function Task({
 				},
 			},
 		});
+		setJustUpdated(true);
 		setSetTimeItTook(false);
 	}
 
@@ -622,6 +630,8 @@ function Task({
 				status={item.status}
 				type={item.type}
 				noData={noData}
+				ref={iconRef}
+				justUpdated={justUpdated}
 				onClick={() => {
 					if (!isFinishable && !isUnfinishable) return;
 

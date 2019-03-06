@@ -1,12 +1,13 @@
 import React from 'react';
 import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 import TaskIconValidatedUrl from './icons/taskicon-user-validated.svg';
+import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl, {
-	ReactComponent as TaskIconValidated,
-} from './icons/taskicon-customer-validated.svg';
+import TaskCustomerIconValidatedUrl, {ReactComponent as TaskIconValidated} from './icons/taskicon-customer-validated.svg';
+import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
+
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
@@ -80,6 +81,7 @@ export const ITEM_TYPES = [
 		iconValidated: <TaskIconValidated />,
 		iconUrl: TaskIconUrl,
 		iconUrlValidated: TaskIconValidatedUrl,
+		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
 		type: 'DEFAULT',
 		name: 'Basique',
 		description: 'Une tâche dont vous êtes responsable',
@@ -89,6 +91,7 @@ export const ITEM_TYPES = [
 		iconValidated: <TaskIconValidated />,
 		iconUrl: TaskCustomerIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		iconUrlValidatedAnim: TaskCustomerIconValidatedAnimUrl,
 		type: 'CUSTOMER',
 		name: 'Tâche attribuée au client',
 		description: 'Une tâche à réaliser par votre client',

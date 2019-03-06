@@ -25,6 +25,7 @@ import {
 	primaryGrey,
 	lightGrey,
 	mediumGrey,
+	primaryBlack,
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
@@ -123,6 +124,7 @@ const TaskContent = styled('div')`
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	margin: 0.5rem 0;
+	color: ${primaryBlack};
 `;
 
 const TaskActions = styled('div')`

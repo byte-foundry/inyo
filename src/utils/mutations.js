@@ -410,7 +410,6 @@ export const ADD_ITEM = gql`
 		$type: ItemType
 		$unit: Float
 		$description: String
-		$reviewer: Reviewer
 		$dueDate: DateTime
 		$linkedCustomerId: ID
 		$linkedCustomer: CustomerInput
@@ -422,7 +421,6 @@ export const ADD_ITEM = gql`
 			type: $type
 			unit: $unit
 			description: $description
-			reviewer: $reviewer
 			dueDate: $dueDate
 			linkedCustomerId: $linkedCustomerId
 			linkedCustomer: $linkedCustomer
@@ -443,7 +441,6 @@ export const UPDATE_ITEM = gql`
 		$linkedCustomer: CustomerInput
 		$name: String
 		$position: Int
-		$reviewer: Reviewer
 		$sectionId: ID
 		$projectId: ID
 		$token: String
@@ -459,7 +456,6 @@ export const UPDATE_ITEM = gql`
 			linkedCustomer: $linkedCustomer
 			name: $name
 			position: $position
-			reviewer: $reviewer
 			sectionId: $sectionId
 			projectId: $projectId
 			token: $token
@@ -565,7 +561,6 @@ export const SEND_AMENDMENT = gql`
 					name
 					unit
 					description
-					reviewer
 				}
 			}
 		}
@@ -622,7 +617,6 @@ export const ACCEPT_AMENDMENT = gql`
 					id
 					name
 					unit
-					reviewer
 					comments {
 						createdAt
 						id
@@ -708,7 +702,6 @@ export const REJECT_AMENDMENT = gql`
 					id
 					name
 					unit
-					reviewer
 					comments {
 						createdAt
 						id

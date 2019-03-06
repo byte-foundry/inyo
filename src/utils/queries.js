@@ -362,6 +362,16 @@ export const GET_ALL_TASKS = gql`
 	}
 `;
 
+export const GET_CUSTOMER_TASKS = gql`
+	${ITEM_FRAGMENT}
+
+	query getCustomerTasks($token: String!) {
+		tasks(token: $token) {
+			...ItemFragment
+		}
+	}
+`;
+
 export const GET_ALL_CUSTOMERS = gql`
 	query getAllCustomers {
 		me {

@@ -442,6 +442,8 @@ function Task({
 		setSetTimeItTook(false);
 	}
 
+	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
+
 	return (
 		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
@@ -451,7 +453,7 @@ function Task({
 					<TaskHeadingLink
 						small={setTimeItTook}
 						to={{
-							pathname: `/app/tasks/${item.id}`,
+							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 							state: {prevSearch: location.search},
 						}}
 					>
@@ -481,7 +483,9 @@ function Task({
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
-										pathname: `/app/tasks/${item.id}`,
+										pathname: `${taskUrlPrefix}/tasks/${
+											item.id
+										}`,
 										state: {prevSearch: location.search},
 									}}
 								>

@@ -122,7 +122,6 @@ export const templates = [
 						name: 'Validation du cahier des charges',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -159,7 +158,6 @@ export const templates = [
 						unit: 0.5,
 						description:
 							'1 aller-retour corrections est prévu dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -167,7 +165,6 @@ export const templates = [
 							'Envoi de l’ensemble des contenus textes + images',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -180,7 +177,6 @@ export const templates = [
 						unit: 1,
 						description:
 							'2 aller-retour corrections sont prévus dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -199,7 +195,6 @@ export const templates = [
 						unit: 0.5,
 						description:
 							'1 aller-retour corrections est prévu dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -258,7 +253,6 @@ export const templates = [
 						name: 'Validation du site et de ses contenus',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -285,7 +279,6 @@ export const templates = [
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 				],
@@ -319,7 +312,6 @@ export const templates = [
 						name: 'Validation du cahier des charges',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -341,7 +333,6 @@ export const templates = [
 						name: "Validation d'un axe créatif",
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -354,7 +345,6 @@ export const templates = [
 						unit: 0,
 						description:
 							'2 allers-retours sont prévus dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -388,7 +378,6 @@ export const templates = [
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 				],
@@ -431,7 +420,6 @@ export const templates = [
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 				],
@@ -464,7 +452,6 @@ export const onboardingTemplate = {
 					unit: 0,
 					description:
 						"### Comment fonctionnent les tâches client? \n\nCette tâche est une tâche attribuée à votre client (couleur rouge), ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. \n\nVous ne raterez plus aucune deadline 🎉\n\n### Edwige?\nCette tâche est attribuée au client 'Client test' et ce sera donc *Edwige de Inyo* qui se chargera de vous répondre!",
-					reviewer: 'CUSTOMER',
 					type: 'CUSTOMER',
 				},
 				{

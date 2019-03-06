@@ -27,6 +27,36 @@ export const Body = styled('div')`
 	${body};
 `;
 
+const getButtonHoveredColor = (props) => {
+	if (props.white || props.link) {
+		return primaryPurple;
+	}
+	return primaryWhite;
+};
+
+const getButtonHoveredBackground = (props) => {
+	if (props.red) {
+		return primaryRed;
+	}
+	if (props.white) {
+		return primaryWhite;
+	}
+	return primaryPurple;
+};
+
+const getButtonHoveredBorderColor = (props) => {
+	if (props.primary) {
+		return 'transparent';
+	}
+	if (props.red) {
+		return primaryRed;
+	}
+	if (props.white) {
+		return primaryWhite;
+	}
+	return primaryPurple;
+};
+
 export const Button = styled('button')`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
@@ -62,39 +92,19 @@ export const Button = styled('button')`
 	}};
 	border-color: currentColor;
 
-	&:hover {
-		background: ${(props) => {
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.white) {
-			return primaryWhite;
-		}
-		return primaryPurple;
-	}};
-		color: ${(props) => {
-		if (props.white || props.link) {
-			return primaryPurple;
-		}
-		return primaryWhite;
-	}};
-		border-color: ${(props) => {
-		if (props.primary) {
-			return 'transparent';
-		}
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.white) {
-			return primaryWhite;
-		}
-		return primaryPurple;
-	}};
+	${props => !props.disabled
+		&& css`
+			&:hover {
+				background: ${getButtonHoveredBackground(props)};
+				color: ${getButtonHoveredColor(props)};
+				border-color: ${getButtonHoveredBorderColor(props)};
 
-		&::before {
-			color: currentColor;
-		}
-	}
+				&::before {
+					color: currentColor;
+				}
+			}
+		`}
+
 	${props => props.textIcon
 		&& `
 		font-weight: 500;

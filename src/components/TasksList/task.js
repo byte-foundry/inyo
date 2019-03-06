@@ -38,15 +38,16 @@ import CustomerModal from '../CustomerModal';
 export const TaskContainer = styled('div')`
 	display: flex;
 	margin-bottom: 0.6rem;
-	cursor: grab;
 	position: relative;
+	padding-left: 2rem;
+	margin-left: -2rem;
 
 	&:after {
 		content: '';
 		display: block;
 		width: 12px;
 		height: 18px;
-		background: url(${DragIconSvg});
+		background: ${props => (props.isDraggable ? `url(${DragIconSvg})` : 'none')};
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
@@ -59,7 +60,7 @@ export const TaskContainer = styled('div')`
 	&:hover {
 		&:after {
 			opacity: 1;
-			left: -1.8rem;
+			left: 0.2rem;
 		}
 	}
 `;
@@ -91,7 +92,7 @@ const TaskIcon = styled('div')`
 		display: block;
 		border-left: 1px dotted ${mediumGrey};
 		position: absolute;
-		left: 13px;
+		left: calc(13px + 2rem);
 	}
 
 	&:before {
@@ -406,7 +407,9 @@ export function TaskInfosInputs({
 	);
 }
 
-function Task({item, customerToken, location}) {
+function Task({
+	item, customerToken, location, isDraggable,
+}) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
@@ -438,7 +441,7 @@ function Task({item, customerToken, location}) {
 	}
 
 	return (
-		<TaskContainer>
+		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
 			<TaskIcon status={item.status} type={item.type} />
 			<TaskContent>

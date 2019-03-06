@@ -101,7 +101,7 @@ const DraggableTask = ({task, index, ...rest}) => (
 					...provided.draggableProps.style,
 				}}
 			>
-				<Task item={task} key={task.id} {...rest} />
+				<Task item={task} key={task.id} {...rest} isDraggable />
 			</div>
 		)}
 	</Draggable>

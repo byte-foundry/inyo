@@ -209,6 +209,8 @@ const SetTimeCaption = styled('div')`
 	line-height: 1.3;
 `;
 
+const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
+
 export function TaskCustomerInput({
 	disabled,
 	editCustomer: editCustomerProp,
@@ -453,9 +455,8 @@ function Task({
 
 	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
 	const isFinishable
-		= customerToken
-		&& (item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION')
-		&& item.status !== 'FINISHED';
+		= (!customerToken && !isCustomerTask(item))
+		|| (customerToken && isCustomerTask(item));
 
 	return (
 		<TaskContainer isDraggable={isDraggable}>

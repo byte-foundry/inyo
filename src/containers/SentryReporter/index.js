@@ -38,6 +38,7 @@ const ErrorTitle = styled('div')`
 const ErrorText = styled('div')`
 	position: relative;
 	padding-left: 60px;
+	max-width: 75%;
 `;
 
 const ReporterIcon = styled('div')`
@@ -49,11 +50,13 @@ const ReporterIcon = styled('div')`
 	background-position: left center;
 `;
 
-const ErrorCode = styled('span')`
+const ErrorCode = styled('pre')`
 	border: 1px solid ${gray70};
 	padding: 15px 16px;
 	margin-top: 10px;
 	display: block;
+	max-height: 200px;
+	overflow: auto;
 `;
 
 class SentryReporter extends Component {
@@ -109,12 +112,10 @@ class SentryReporter extends Component {
 								</Button>
 								.
 							</P>
-							<P>
-								Voici l'erreur en question : <br />
-								<ErrorCode>
-									<code>{this.state.error.toString()}</code>
-								</ErrorCode>
-							</P>
+							<P>Voici l'erreur en question :</P>
+							<ErrorCode>
+								<code>{this.state.error.toString()}</code>
+							</ErrorCode>
 						</ErrorText>
 					</ReporterRow>
 				</ReporterMain>

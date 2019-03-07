@@ -21,6 +21,7 @@ import TopBar, {
 	TopBarMenuLink,
 } from '../../components/TopBar';
 import ProjectCustomerView from '../App/Project/project-customer-view';
+import CustomerTasks from '../App/CustomerTasks';
 
 const BodyMain = styled(Body)``;
 
@@ -143,14 +144,16 @@ function Container() {
 			<BodyMain>
 				<main>
 					<Switch>
-						{!data.me && (
-							<Route
-								path="/app/projects/:projectId/view/:customerToken"
-								component={withTracker(
-									withHeader(ProjectCustomerView),
-								)}
-							/>
-						)}
+						<Route
+							path="/app/projects/:projectId/view/:customerToken"
+							component={withTracker(
+								withHeader(ProjectCustomerView),
+							)}
+						/>
+						<Route
+							path="/app/:customerToken/tasks"
+							component={CustomerTasks}
+						/>
 						<ProtectedRoute
 							path="/app"
 							component={withTracker(App)}

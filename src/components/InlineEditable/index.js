@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import {css} from '@emotion/core';
 
-import {Input, gray50, primaryBlue} from '../../utils/content';
+import {Input, gray50} from '../../utils/content';
 import {lightGrey, accentGrey} from '../../utils/new/design-system';
 import Pencil from '../../utils/icons/pencil.svg';
 
@@ -19,37 +20,31 @@ const Editable = styled('span')`
 	position: relative;
 	border: 1px solid transparent;
 
-	&:hover {
-		cursor: text;
-		border: 1px solid transparent;
+	${props => !props.disabled
+		&& css`
+			&:hover {
+				cursor: text;
+				border: 1px solid transparent;
+				background: ${lightGrey};
+				border-radius: 8px;
 
-		&:before {
-			content: '';
-			display: block;
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: 0;
-			right: -0.5rem;
-			bottom: 0;
-			border-radius: 8px;
-			z-index: -1;
-		}
-		&:after {
-			content: '';
-			display: block;
-			background-color: ${accentGrey};
-			mask-size: 35%;
-			mask-position: center;
-			mask-repeat: no-repeat;
-			mask-image: url(${Pencil});
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: 50px;
-		}
-	}
+				&:after {
+					content: '';
+					display: block;
+					background-color: ${accentGrey};
+					mask-size: 35%;
+					mask-position: center;
+					mask-repeat: no-repeat;
+					mask-image: url(${Pencil});
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					width: 50px;
+				}
+			}
+		`}
+
 	${props => props.css};
 `;
 
@@ -85,7 +80,7 @@ class InlineEditable extends Component {
 	render() {
 		const {isEditing, value} = this.state;
 		const {
-			type, placeholder, className, innerRef,
+			type, placeholder, className, innerRef, disabled,
 		} = this.props;
 
 		if (isEditing) {
@@ -115,6 +110,7 @@ class InlineEditable extends Component {
 				<Editable
 					className={className}
 					onClick={this.handleFocus}
+					disabled={disabled}
 					css={this.props.editableCss}
 				>
 					{value}
@@ -126,6 +122,7 @@ class InlineEditable extends Component {
 			<Placeholder
 				className={className}
 				onClick={this.handleFocus}
+				disabled={disabled}
 				css={this.props.placeholderCss}
 			>
 				{placeholder}

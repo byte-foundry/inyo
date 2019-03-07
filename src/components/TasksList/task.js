@@ -11,7 +11,6 @@ import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
-import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 
 import {
 	Button,
@@ -30,7 +29,7 @@ import {
 	DateInputContainer,
 } from '../../utils/new/design-system';
 
-import {ArianneElem} from '../ArianneThread';
+import CustomerDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
@@ -211,16 +210,13 @@ const SetTimeCaption = styled('div')`
 `;
 
 export function TaskCustomerInput({
+	disabled,
 	editCustomer: editCustomerProp,
 	onCustomerSubmit,
 	item,
 }) {
-	const {
-		data: {me},
-		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS);
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
-	const [editCustomer, setEditCustomer] = useState(editCustomer);
+	const [editCustomer, setEditCustomer] = useState(editCustomerProp);
 
 	return (
 		<TaskIconText
@@ -228,20 +224,17 @@ export function TaskCustomerInput({
 			inactive={editCustomer}
 			icon={<TaskInfosIcon icon={ClientIconSvg} />}
 			content={
-				editCustomer ? (
-					<ArianneElem
+				!disabled && editCustomer ? (
+					<CustomerDropdown
 						id="projects"
-						list={[
-							{id: 'CREATE', name: 'Créer un nouveau client'},
-							...me.customers,
-						]}
-						defaultMenuIsOpen={true}
+						defaultMenuIsOpen
 						defaultValue={
 							item.linkedCustomer && {
 								value: item.linkedCustomer.id,
 								label: item.linkedCustomer.name,
 							}
 						}
+						creatable
 						isClearable
 						autoFocus
 						onChange={(args) => {
@@ -254,9 +247,13 @@ export function TaskCustomerInput({
 					/>
 				) : (
 					<div
-						onClick={() => {
-							setEditCustomer(true);
-						}}
+						onClick={
+							disabled
+								? undefined
+								: () => {
+									setEditCustomer(true);
+								  }
+						}
 					>
 						{clientName || <>&mdash;</>}
 					</div>
@@ -276,6 +273,7 @@ export function TaskInfosInputs({
 	switchOnSelect,
 	location,
 	customerToken,
+	taskUrlPrefix,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -291,7 +289,7 @@ export function TaskInfosInputs({
 			{!noComment && (
 				<TaskInfosItemLink
 					to={{
-						pathname: `/app/tasks/${item.id}`,
+						pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 						state: {prevSearch: location.search},
 					}}
 				>
@@ -304,7 +302,7 @@ export function TaskInfosInputs({
 				inactive={editUnit}
 				icon={<TaskInfosIcon icon={ClockIconSvg} />}
 				content={
-					editUnit ? (
+					!customerToken && editUnit ? (
 						<UnitInput
 							unit={item.timeItTook ? item.timeItTook : item.unit}
 							onBlur={(args) => {
@@ -325,7 +323,13 @@ export function TaskInfosInputs({
 							}}
 						/>
 					) : (
-						<div onClick={() => setEditUnit(true)}>
+						<div
+							onClick={
+								customerToken
+									? undefined
+									: () => setEditUnit(true)
+							}
+						>
 							{item.timeItTook ? item.timeItTook : item.unit}{' '}
 							<Plural
 								value={item.unit}
@@ -357,9 +361,13 @@ export function TaskInfosInputs({
 				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 				content={
 					<DateInputContainer
-						onClick={() => !editDueDate && setEditDueDate(true)}
+						onClick={
+							customerToken
+								? undefined
+								: () => !editDueDate && setEditDueDate(true)
+						}
 					>
-						{editDueDate ? (
+						{!customerToken && editDueDate ? (
 							<>
 								<DueDateInputElem
 									value={moment(
@@ -404,6 +412,7 @@ export function TaskInfosInputs({
 				setEditCustomer={setEditCustomer}
 				onCustomerSubmit={onCustomerSubmit}
 				item={item}
+				disabled={!!customerToken}
 			/>
 		</TaskInfos>
 	);
@@ -442,6 +451,12 @@ function Task({
 		setSetTimeItTook(false);
 	}
 
+	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
+	const isFinishable
+		= customerToken
+		&& (item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION')
+		&& item.status !== 'FINISHED';
+
 	return (
 		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
@@ -451,7 +466,7 @@ function Task({
 					<TaskHeadingLink
 						small={setTimeItTook}
 						to={{
-							pathname: `/app/tasks/${item.id}`,
+							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 							state: {prevSearch: location.search},
 						}}
 					>
@@ -481,13 +496,15 @@ function Task({
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
-										pathname: `/app/tasks/${item.id}`,
+										pathname: `${taskUrlPrefix}/tasks/${
+											item.id
+										}`,
 										state: {prevSearch: location.search},
 									}}
 								>
 									Ouvrir
 								</OpenBtn>
-								{item.status !== 'FINISHED' && (
+								{isFinishable && (
 									<Button
 										data-tip="Marquer la tâche comme faite"
 										icon="✓"
@@ -508,6 +525,7 @@ function Task({
 					</TaskActions>
 				</TaskHeader>
 				<TaskInfosInputs
+					taskUrlPrefix={taskUrlPrefix}
 					location={location}
 					item={item}
 					customerToken={customerToken}

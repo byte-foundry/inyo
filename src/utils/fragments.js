@@ -7,7 +7,6 @@ export const ITEM_FRAGMENT = gql`
 		dueDate
 		name
 		position
-		reviewer
 		status
 		type
 		unit

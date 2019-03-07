@@ -4,21 +4,29 @@ import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
-	mutation Login($email: String!, $password: String!) {
+	mutation login($email: String!, $password: String!) {
 		login(email: $email, password: $password) {
 			token
 			user {
 				id
 				email
+				hmacIntercomId
 				firstName
 				lastName
+				workingDays
+				startWorkAt
+				endWorkAt
+				timeZone
+				company {
+					phone
+				}
 			}
 		}
 	}
 `;
 
 export const SIGNUP = gql`
-	mutation Signup(
+	mutation signup(
 		$email: String!
 		$password: String!
 		$firstName: String!
@@ -46,7 +54,7 @@ export const SIGNUP = gql`
 `;
 
 export const UPDATE_USER = gql`
-	mutation UpdateUser($firstName: String, $lastName: String, $email: String) {
+	mutation updateUser($firstName: String, $lastName: String, $email: String) {
 		updateUser(firstName: $firstName, lastName: $lastName, email: $email) {
 			id
 			email
@@ -82,7 +90,7 @@ export const UPDATE_USER = gql`
 `;
 
 export const UPDATE_USER_CONSTANTS = gql`
-	mutation UpdateUser(
+	mutation updateUserConstant(
 		$defaultDailyPrice: Int
 		$defaultVatRate: Int
 		$workingFields: [String!]
@@ -154,7 +162,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 
 // Update User settings
 export const UPDATE_USER_SETTINGS = gql`
-	mutation UpdateUser($settings: SettingsInput!) {
+	mutation updateUserSettings($settings: SettingsInput!) {
 		updateUser(settings: $settings) {
 			id
 			email
@@ -192,7 +200,7 @@ export const UPDATE_USER_SETTINGS = gql`
 /** ******** COMPANY MUTATIONS ********* */
 
 export const UPDATE_USER_COMPANY = gql`
-	mutation UpdateUser($company: CompanyInput) {
+	mutation updateUserCompany($company: CompanyInput) {
 		updateUser(company: $company) {
 			id
 			email

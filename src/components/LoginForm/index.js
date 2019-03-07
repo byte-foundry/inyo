@@ -45,26 +45,25 @@ function LoginForm({from = '/app', history, client}) {
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 					try {
-						await login({
+						const {data} = await login({
 							variables: {
 								email: values.email,
 								password: values.password,
 							},
-							update: (cache, {data}) => {
-								if (data) {
-									window.localStorage.setItem(
-										'authToken',
-										data.login.token,
-									);
-									ReactGA.event({
-										category: 'User',
-										action: 'Logged in',
-									});
-									history.push(from);
-									client.resetStore();
-								}
-							},
 						});
+
+						if (data) {
+							window.localStorage.setItem(
+								'authToken',
+								data.login.token,
+							);
+							ReactGA.event({
+								category: 'User',
+								action: 'Logged in',
+							});
+							client.resetStore();
+							history.push(from);
+						}
 					}
 					catch (error) {
 						actions.setSubmitting(false);

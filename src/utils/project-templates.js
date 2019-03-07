@@ -477,7 +477,7 @@ export const onboardingTemplate = {
 					name: '👀 Ouvrir cette tâche et lire la description',
 					unit: 0,
 					description:
-						'Dans chaque tâche vous pourrez ajouter des descriptions, des deadlines, mesurer le temps passé, etc. Cela vous permettra d’avoir une vision claire de vos priorités au jour le jour. \n\n### Astuce!\nLe champ de description utilise les balises *Markdown,* ce qui signifie que vous pouvez ajouter des titres, du bold, des listes, etc. Plus d’informations sur cette [page]([https://openclassrooms.com/fr/courses/1304236-redigez-en-markdown).\n\n👀 Modifiez le titre de cette tâche et validez',
+						'Dans chaque tâche vous pourrez ajouter des descriptions, des deadlines, mesurer le temps passé, etc. Cela vous permettra d’avoir une vision claire de vos priorités au jour le jour. \n\n### Astuce!\nLe champ de description utilise les balises *Markdown,* ce qui signifie que vous pouvez ajouter des titres, du bold, des listes, etc. Plus d’informations sur cette [page](https://openclassrooms.com/fr/courses/1304236-redigez-en-markdown).\n\n👀 Modifiez le titre de cette tâche et validez',
 				},
 			],
 		},

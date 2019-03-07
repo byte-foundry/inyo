@@ -471,7 +471,7 @@ export const onboardingTemplate = {
 					name: '✏️ Ajouter un commentaire',
 					unit: 0,
 					description:
-						'Vous pouvez commenter une tâche via le champ de texte ci-dessous. Votre client recevra un email le notifiant de votre commentaire et pourra y répondre en accédant à la tâche. Vous serez notifié à votre tour par email. En centralisant tout au même endroit, vous vous évitez des allers-retours entre de multiples canaux pour retrouver des information.\n\nAjoutez votre 1er commentaire en cliquant ci-dessous.',
+						'Vous pouvez commenter une tâche via le champ de texte ci-dessous. Votre client recevra un email le notifiant de votre commentaire et pourra y répondre en accédant à la tâche. Vous serez notifié à votre tour par email. En centralisant tout au même endroit, vous vous évitez des allers-retours entre de multiples canaux pour retrouver des informations.\n\nAjoutez votre 1er commentaire en cliquant ci-dessous.',
 				},
 				{
 					name: '👀 Ouvrir cette tâche et lire la description',

@@ -394,7 +394,7 @@ const Item = ({id, customerToken, close}) => {
 				<Meta data-tip="Projet lié à cette tâche">
 					<FolderIcon />
 					<MetaLabel>Projet</MetaLabel>
-					{editProject ? (
+					{!customerToken && editProject ? (
 						<StyledProjectsDropdown
 							id="projects"
 							defaultMenuIsOpen
@@ -420,7 +420,13 @@ const Item = ({id, customerToken, close}) => {
 							}}
 						/>
 					) : (
-						<MetaText onClick={() => setEditProject(true)}>
+						<MetaText
+							onClick={
+								customerToken
+									? undefined
+									: () => setEditProject(true)
+							}
+						>
 							{item.section
 								&& item.section.project
 								&& item.section.project.name}

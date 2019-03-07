@@ -126,10 +126,8 @@ const SignupForm = ({from, history, client}) => {
 								phone: user.company.phone,
 							});
 
-							client.resetStore();
-							const fromPage
-								= from
-								|| `/app/onboarding?projectId=${onboardProjectId}`;
+							await client.resetStore();
+							const fromPage = from || '/app/onboarding';
 
 							history.push(fromPage);
 						}

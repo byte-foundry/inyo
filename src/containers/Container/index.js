@@ -107,6 +107,7 @@ const ProtectedRedirect = ({isAllowed, fallback, ...props}) => (isAllowed ? <Red
 
 function Container() {
 	const [setupDone, setSetupDone] = useState(false);
+	const [previousPage, setPreviousPage] = useState(undefined);
 	const {data, loading, error} = useQuery(CHECK_LOGIN_USER, {
 		suspend: false,
 		fetchPolicy: 'network-only',

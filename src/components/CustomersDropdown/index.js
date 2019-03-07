@@ -9,12 +9,13 @@ const CustomersDropdown = ({creatable, ...props}) => {
 	const {data, errors} = useQuery(GET_ALL_CUSTOMERS);
 
 	if (errors) throw errors;
+	const customers = [...data.me.customers];
 
 	if (creatable) {
-		data.me.customers.push({id: 'CREATE', name: 'Créer un nouveau client'});
+		customers.unshift({id: 'CREATE', name: 'Créer un nouveau client'});
 	}
 
-	return <ArianneElem list={data.me.customers} {...props} />;
+	return <ArianneElem list={customers} {...props} />;
 };
 
 export default CustomersDropdown;

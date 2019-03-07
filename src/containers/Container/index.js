@@ -1,15 +1,18 @@
-import React, {Suspense, Component} from 'react';
+import React, {Component, useState} from 'react';
+import {Query} from 'react-apollo';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 
 import ReactGA from 'react-ga';
 import styled from '@emotion/styled';
 
-import {Loading} from '../../utils/content';
 import {Body} from '../../utils/new/design-system';
+import {CHECK_LOGIN_USER} from '../../utils/queries';
+import {INTERCOM_APP_ID} from '../../utils/constants';
+
+import SentryReporter from '../SentryReporter';
 import App from '../App';
 import Auth from '../App/Auth';
-import SentryReporter from '../SentryReporter';
 
 const BodyMain = styled(Body)``;
 
@@ -63,30 +66,71 @@ const withTracker = (WrappedComponent, options = {}) => {
 	return HOC;
 };
 
-class Container extends Component {
-	render() {
-		return (
-			<SentryReporter>
-				<BodyMain>
-					<main>
-						<Suspense fallback={<Loading />}>
-							<Switch>
-								<Route
-									path="/app"
-									component={withTracker(App)}
-								/>
-								<Route
-									path="/auth"
-									component={withTracker(Auth)}
-								/>
-								<Redirect to="/app" />
-							</Switch>
-						</Suspense>
-					</main>
-				</BodyMain>
-			</SentryReporter>
-		);
-	}
+const ProtectedRoute = ({isAllowed, fallback, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to={fallback} />);
+const ProtectedRedirect = ({isAllowed, fallback, ...props}) => (isAllowed ? <Redirect {...props} /> : <Redirect to={fallback} />);
+
+function Container() {
+	const [setupDone, setSetupDone] = useState(false);
+
+	return (
+		<SentryReporter>
+			<Query query={CHECK_LOGIN_USER}>
+				{({data, loading}) => {
+					if (loading) return false;
+					if (data && data.me && !setupDone) {
+						window.Intercom('boot', {
+							app_id: INTERCOM_APP_ID,
+							email: data.me.email,
+							user_id: data.me.id,
+							name: `${data.me.firstName} ${data.me.lastName}`,
+							phone: data.me.company.phone,
+							user_hash: data.me.hmacIntercomId,
+						});
+						Sentry.configureScope((scope) => {
+							scope.setUser({email: data.me.email});
+						});
+						ReactGA.set({userId: data.me.id});
+
+						setSetupDone(true);
+					}
+					else if (!(data && data.me)) {
+						if (setupDone) {
+							setSetupDone(false);
+						}
+						window.Intercom('boot', {
+							app_id: INTERCOM_APP_ID,
+						});
+					}
+
+					return (
+						<BodyMain>
+							<main>
+								<Switch>
+									<ProtectedRoute
+										path="/app"
+										component={withTracker(App)}
+										isAllowed={data && data.me}
+										fallback="/auth"
+									/>
+									<ProtectedRoute
+										path="/auth"
+										component={withTracker(Auth)}
+										isAllowed={!(data && data.me)}
+										fallback="/app"
+									/>
+									<ProtectedRedirect
+										to="/app"
+										isAllowed={data && data.me}
+										fallback="/auth"
+									/>
+								</Switch>
+							</main>
+						</BodyMain>
+					);
+				}}
+			</Query>
+		</SentryReporter>
+	);
 }
 
 export default Container;

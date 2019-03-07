@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import {Redirect} from 'react-router-dom';
+import {withApollo} from 'react-apollo';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import debounce from 'lodash.debounce';
+import debounce from 'debounce-promise';
 
 import {
 	SIGNUP,
@@ -28,21 +28,14 @@ const SignupButton = styled(Button)`
 	margin-left: auto;
 `;
 
-const SignupForm = (componentProps) => {
-	const [shouldRedirect, setShouldRedirect] = useState(false);
-	const [projectId, setProjectId] = useState(false);
+const SignupForm = ({from, history, client}) => {
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
 	const createProject = useMutation(CREATE_PROJECT);
 	const createCustomer = useMutation(CREATE_CUSTOMER);
-	const from
-		= componentProps.from || `/app/onboarding?projectId=${projectId}`;
 
-	const debouncedCheckEmail = debounce(checkEmailAvailability, 300);
+	const debouncedCheckEmail = debounce(checkEmailAvailability, 500);
 
-	if (shouldRedirect) {
-		return <Redirect to={from} />;
-	}
 	return (
 		<SignupFormMain>
 			<Formik
@@ -133,8 +126,12 @@ const SignupForm = (componentProps) => {
 								phone: user.company.phone,
 							});
 
-							setShouldRedirect(true);
-							setProjectId(onboardProjectId);
+							client.resetStore();
+							const fromPage
+								= from
+								|| `/app/onboarding?projectId=${onboardProjectId}`;
+
+							history.push(fromPage);
 						}
 					}
 					catch (error) {
@@ -213,4 +210,4 @@ const SignupForm = (componentProps) => {
 	);
 };
 
-export default SignupForm;
+export default withApollo(SignupForm);

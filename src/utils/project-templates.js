@@ -445,7 +445,7 @@ export const onboardingTemplate = {
 					name: '✅ Créer votre 1ère tâche',
 					unit: 0,
 					description:
-						"### Un champ de saisie multitâches \n\nLe champ de saisie en haut de l’interface vous permet de créer de nouvelles tâches, de nouveaux projets et de nouvelles sections.\n\nLorsque vous commencez par un slash '/' vous pouvez choisir parmi les différents types de tâches: tâche personnelle, tâche client, tâche récupération de contenus. Appuyez sur *Tab* pour parcourir les options et pressez *entrée* pour valider.\n\nÀ vous de jouer, créez votre 1ère tâche et marquez celle-ci comme faîte!",
+						"### Un champ de saisie multitâches \n\nLe champ de saisie en haut de la vue principale vous permet de créer de nouvelles tâches, de nouveaux projets et de nouvelles sections.\n\nLorsque vous commencez par un slash '/' vous pouvez choisir parmi les différents types de tâches: tâche personnelle, tâche client, tâche récupération de contenus. Appuyez sur *Tab* pour parcourir les options et pressez *entrée* pour valider.\n\nÀ vous de jouer, créez votre 1ère tâche et marquez celle-ci comme faîte!",
 				},
 				{
 					name: "🙋 Attendre le mail d'accueil par Edwige de Inyo",

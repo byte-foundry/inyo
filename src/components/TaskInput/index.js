@@ -267,7 +267,7 @@ const TaskInput = ({
 					}}
 					placeholder={
 						focus
-							? 'Entrer le titre de la tâche ou du projet. Taper / pour changer le type de tâche'
+							? 'Entrer le titre de la tâche ou du projet. Taper un slash "/" pour changer le type de tâche'
 							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>

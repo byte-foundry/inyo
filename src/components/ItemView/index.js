@@ -18,7 +18,11 @@ import UnitInput from '../UnitInput';
 import DateInput from '../DateInput';
 import {ArianneElem} from '../ArianneThread';
 
-import {GET_ITEM_DETAILS, GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {
+	GET_ITEM_DETAILS,
+	GET_ALL_CUSTOMERS,
+	GET_ALL_PROJECTS,
+} from '../../utils/queries';
 import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -75,6 +79,11 @@ const MetaTime = styled(MetaText)`
 `;
 
 const ClientDropdown = styled(ArianneElem)`
+	margin-top: -6px;
+	padding: 0;
+`;
+
+const ProjectDropdown = styled(ArianneElem)`
 	margin-top: -6px;
 	padding: 0;
 `;
@@ -152,6 +161,12 @@ const Item = ({id, customerToken, close}) => {
 		data: {me},
 		errors: errorsCustomers,
 	} = useQuery(GET_ALL_CUSTOMERS);
+	const {
+		data: {
+			me: {projects},
+		},
+		errors: errorsProjects,
+	} = useQuery(GET_ALL_PROJECTS);
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const deleteItem = useMutation(REMOVE_ITEM, {
@@ -376,11 +391,39 @@ const Item = ({id, customerToken, close}) => {
 				<Meta data-tip="Projet lié à cette tâche">
 					<FolderIcon />
 					<MetaLabel>Projet</MetaLabel>
-					<MetaText>
-						{item.section
-							&& item.section.project
-							&& item.section.project.name}
-					</MetaText>
+					{editProject ? (
+						<ProjectDropdown
+							id="projects"
+							list={projects}
+							defaultMenuIsOpen={true}
+							autoFocus={true}
+							defaultValue={
+								item.section
+								&& item.section.project && {
+									value: item.section.project.id,
+									label: item.section.project.name,
+								}
+							}
+							onChange={({value}) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										projectId: value,
+									},
+								});
+								setEditProject(false);
+							}}
+							onBlur={() => {
+								setEditProject(false);
+							}}
+						/>
+					) : (
+						<MetaText onClick={() => setEditProject(true)}>
+							{item.section
+								&& item.section.project
+								&& item.section.project.name}
+						</MetaText>
+					)}
 				</Meta>
 				<Meta data-tip="Définit s'il y a des actions automatiques">
 					<TaskTypeIcon />

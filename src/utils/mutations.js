@@ -445,6 +445,7 @@ export const UPDATE_ITEM = gql`
 		$position: Int
 		$reviewer: Reviewer
 		$sectionId: ID
+		$projectId: ID
 		$token: String
 		$type: ItemType
 		$unit: Float
@@ -460,6 +461,7 @@ export const UPDATE_ITEM = gql`
 			position: $position
 			reviewer: $reviewer
 			sectionId: $sectionId
+			projectId: $projectId
 			token: $token
 			type: $type
 			unit: $unit

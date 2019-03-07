@@ -8,6 +8,7 @@ import CustomerTasks from './tasks';
 
 const Container = styled('div')`
 	min-height: 100vh;
+	padding: 3rem;
 `;
 
 const Tasks = ({match}) => {

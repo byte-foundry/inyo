@@ -217,6 +217,7 @@ const Item = ({id, customerToken, close}) => {
 					taskId={id}
 					isFinished={item.status === 'FINISHED'}
 					disabled={customerToken && item.type !== 'CUSTOMER'}
+					customerToken={customerToken}
 				/>
 			</StickyHeader>
 			<Header>

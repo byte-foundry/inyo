@@ -8,7 +8,6 @@ import Dashboard from './Dashboard';
 import Account from './Account';
 import Tasks from './Tasks';
 import ConditionalContent from './ConditionalContent';
-import ProjectCustomerView from './Project/project-customer-view';
 import TopBar, {
 	TopBarMenu,
 	TopBarLogo,
@@ -55,12 +54,6 @@ function App({me}) {
 	return (
 		<AppMain>
 			<Switch>
-				{!me && (
-					<Route
-						path="/app/projects/:projectId/view/:customerToken"
-						component={withHeader(ProjectCustomerView)}
-					/>
-				)}
 				<Route
 					path="/app/dashboard"
 					component={withHeader(Dashboard)}

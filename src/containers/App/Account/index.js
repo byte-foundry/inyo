@@ -24,15 +24,25 @@ import UserDataForm from '../../../components/UserDataForm';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
 import 'react-toastify/dist/ReactToastify.css';
 
+import {BREAKPOINTS} from '../../../utils/constants';
+
 const AccountMain = styled('div')`
 	padding-bottom: 80px;
 `;
 const AccountBody = styled('div')`
 	padding-left: 40px;
 	padding-right: 40px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 1rem;
+	}
 `;
 const Profile = styled(FlexRow)`
 	align-items: flex-start;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const ProfileSide = styled('div')`
@@ -40,6 +50,10 @@ const ProfileSide = styled('div')`
 	margin-right: 80px;
 	position: sticky;
 	top: 20px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const ProfileSideLinks = styled('ul')`
@@ -71,13 +85,23 @@ const ProfileMain = styled('div')`
 	max-width: 900px;
 	margin-right: auto;
 	flex-grow: 2;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: 100%;
+	}
 `;
 
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 0;
+		border: none;
+	}
 `;
+
 const LogoutButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 15px;
@@ -89,7 +113,12 @@ const WelcomeMessage = styled(H3)`
 	color: ${primaryBlue};
 `;
 const ProfileTitle = styled(H3)`
-	font-size: 25px;
+	font-size: 1.5rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1.2rem;
+		margin: 3rem 0 2.5rem 0.8rem;
+	}
 `;
 
 class Account extends Component {

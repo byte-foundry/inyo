@@ -10,7 +10,7 @@ import Tasks from './tasks';
 
 const Main = styled('div')`
 	padding-bottom: 80px;
-	width: 980px;
+	max-width: 980px;
 	align-self: center;
 `;
 

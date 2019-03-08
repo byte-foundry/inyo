@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import ReactGA from 'react-ga';
 import {timezones, findTimeZone, getUTCOffset} from '../../utils/timezones';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
 	FlexColumn,
@@ -24,12 +26,22 @@ import WeekDaysInput from '../WeekDaysInput';
 
 const UserWorkHourAndDaysFormMain = styled('div')``;
 
-const FormContainer = styled('div')``;
+const FormContainer = styled('div')`
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+	}
+`;
 
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 0;
+		border: none;
+	}
 `;
 const UpdateButton = styled(Button)`
 	display: block;
@@ -37,15 +49,23 @@ const UpdateButton = styled(Button)`
 	margin-left: auto;
 	margin-right: 50px;
 	margin-bottom: 80px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-right: 0;
+	}
 `;
 
 const EmojiTimeline = styled('div')`
 	display: flex;
 	justify-content: space-between;
-	font-size: 32px;
+	font-size: 1.8rem;
 	margin: 15px;
 	position: relative;
 	height: 50px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1.5rem;
+	}
 `;
 
 const Emoji = styled('div')`

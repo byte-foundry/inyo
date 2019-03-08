@@ -1,19 +1,39 @@
-import React, {Suspense} from 'react';
+import React, {Suspense, useState} from 'react';
 import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
+import styled from '@emotion/styled';
 import {ApolloProvider} from 'react-apollo';
-import {ApolloProvider as ApolloHooksProvider} from 'react-apollo-hooks';
-import {BrowserRouter as Router} from 'react-router-dom';
+import {
+	ApolloProvider as ApolloHooksProvider,
+	useQuery,
+} from 'react-apollo-hooks';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
+} from 'react-router-dom';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import 'moment/locale/fr';
+import * as Sentry from '@sentry/browser';
 
 import './index.css';
+
+import withTracker from './HOC/withTracker';
+
+import App from './screens/App';
+import Auth from './screens/Auth';
+import SentryReporter from './providers/SentryReporter';
+
 import {Loading} from './utils/content';
-import Container from './containers/Container';
 import client from './utils/graphQLConfig';
-import * as serviceWorker from './serviceWorker';
 import {INTERCOM_APP_ID} from './utils/constants';
+import {CHECK_LOGIN_USER} from './utils/queries';
+import {Body} from './utils/new/design-system';
+
+import * as serviceWorker from './serviceWorker';
 
 // Setting up locale mostly for react-dates
 moment.locale((navigator && navigator.language) || 'fr-FR');
@@ -52,17 +72,86 @@ moment.locale((navigator && navigator.language) || 'fr-FR');
 })();
 /* eslint-enable */
 
-// Deactivate temporarily all call to crisp
-window.$crisp = {
-	push: () => {},
-};
+const BodyMain = styled(Body)``;
+
+Sentry.init({
+	dsn: 'https://d6ed2b1e0a594835b2f768405b6c5e90@sentry.io/1307916',
+	environment: process.env.REACT_APP_INYO_ENV,
+	release: 'inyo@v1.0.0',
+});
+ReactGA.initialize('UA-41962243-14');
+
+const query = new URLSearchParams(document.location.search);
+
+if (query.has('dimension')) {
+	ReactGA.set({dimension1: query.get('dimension')});
+}
+
+const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
+const ProtectedRedirect = ({isAllowed, ...props}) => (isAllowed ? <Redirect {...props} /> : <Redirect to="/auth" />);
+
+function Root() {
+	const [setupDone, setSetupDone] = useState(false);
+	const {data} = useQuery(CHECK_LOGIN_USER);
+
+	if (data && data.me && !setupDone) {
+		window.Intercom('boot', {
+			app_id: INTERCOM_APP_ID,
+			email: data.me.email,
+			user_id: data.me.id,
+			name: `${data.me.firstName} ${data.me.lastName}`,
+			phone: data.me.company.phone,
+			user_hash: data.me.hmacIntercomId,
+		});
+		Sentry.configureScope((scope) => {
+			scope.setUser({email: data.me.email});
+		});
+		ReactGA.set({userId: data.me.id});
+
+		setSetupDone(true);
+	}
+	else {
+		window.Intercom('boot', {
+			app_id: INTERCOM_APP_ID,
+		});
+	}
+
+	return (
+		<SentryReporter>
+			<BodyMain>
+				<main>
+					<Switch>
+						<ProtectedRoute
+							path="/app"
+							component={withTracker(App)}
+							isAllowed={data && data.me}
+						/>
+						<ProtectedRoute
+							path="/auth"
+							component={withTracker(Auth)}
+							isAllowed={!(data && data.me)}
+						/>
+						<Route
+							path="/app/:customerToken"
+							component={withTracker(Customer)}
+						/>
+						<ProtectedRedirect
+							to="/app"
+							isAllowed={data && data.me}
+						/>
+					</Switch>
+				</main>
+			</BodyMain>
+		</SentryReporter>
+	);
+}
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
 		<ApolloHooksProvider client={client}>
 			<Router>
 				<Suspense fallback={<Loading />}>
-					<Container />
+					<Root />
 				</Suspense>
 			</Router>
 		</ApolloHooksProvider>

@@ -9,7 +9,7 @@ import ClockIconSvg from '../../utils/icons/clock.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
-import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
+import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
 
 import {
@@ -63,6 +63,15 @@ export const TaskContainer = styled('div')`
 			left: 0.2rem;
 		}
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding-left: 0;
+		margin-left: 0;
+
+		&:after {
+			display: none;
+		}
+	}
 `;
 
 const TaskAdd = styled('div')``;
@@ -104,6 +113,16 @@ const TaskIcon = styled('div')`
 		top: 4.15rem;
 		bottom: -0.85rem;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		transform: scale(0.6);
+		margin: 0 0.5rem 0 0;
+
+		&:after,
+		&:before {
+			display: none;
+		}
+	}
 `;
 
 const TaskInfosIcon = styled('div')`
@@ -118,6 +137,10 @@ const TaskInfosIcon = styled('div')`
 const TaskContent = styled('div')`
 	flex: 1;
 	margin-top: 1rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 0.3rem 0 0 0;
+	}
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
@@ -140,6 +163,10 @@ const TaskActions = styled('div')`
 		label {
 			margin-top: -0.35rem;
 		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
 	}
 `;
 
@@ -170,6 +197,10 @@ const TaskHeader = styled('div')`
 		margin-right: 0;
 		pointer-events: all;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: block;
+	}
 `;
 
 const OpenBtn = styled(ButtonLink)`
@@ -182,6 +213,10 @@ const TaskInfos = styled('div')`
 	display: flex;
 	letter-spacing: 0.05em;
 	margin-top: -0.25rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const SetTimeContainer = styled('div')`

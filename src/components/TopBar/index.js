@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import {NavLink} from 'react-router-dom';
+import {BREAKPOINTS} from '../../utils/constants';
 
 import {
 	Button,
@@ -65,6 +66,10 @@ const TopBar = styled('div')`
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	margin-bottom: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 export default TopBar;

@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
-import {TOOLTIP_DELAY} from '../../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectList from '../../../components/ProjectTasksList';
@@ -18,6 +18,10 @@ const Container = styled('div')`
 	display: flex;
 	justify-content: center;
 	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const TaskAndArianne = styled('div')`

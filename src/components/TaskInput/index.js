@@ -9,7 +9,7 @@ import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
 import CustomerModal from '../CustomerModal';
 
-import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
+import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 import {
 	Button,
 	TaskInputDropdown,
@@ -36,6 +36,11 @@ const TaskInfosContainer = styled('div')``;
 
 const InputButtonWrapper = styled('div')`
 	position: relative;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: row;
+	}
 `;
 
 const InputButtonContainer = styled('div')`

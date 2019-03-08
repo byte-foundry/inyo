@@ -12,10 +12,15 @@ import {
 	primaryRed,
 } from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const ArianneContainer = styled('div')`
 	display: flex;
 	margin-bottom: 60px;
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+		margin-bottom: 1rem;
+	}
 `;
 
 const ArianneElemMain = styled('div')`
@@ -38,6 +43,10 @@ const ArianneElemMain = styled('div')`
 			border-radius: 8px;
 			z-index: -1;
 		}
+	}
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex: 1;
+		margin: 0.25rem 0;
 	}
 `;
 

@@ -74,6 +74,8 @@ export const itemStatuses = {
 
 export const TOOLTIP_DELAY = 650;
 
+export const BREAKPOINTS = [420];
+
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,

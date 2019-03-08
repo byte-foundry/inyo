@@ -381,7 +381,12 @@ const Item = ({id, customerToken, close}) => {
 											'days',
 										) - item.unit}{' '}
 										<Plural
-											value={item.unit}
+											value={
+												moment(deadline).diff(
+													moment(),
+													'days',
+												) - item.unit
+											}
 											singular="jour"
 											plural="jours"
 										/>

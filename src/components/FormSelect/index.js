@@ -107,6 +107,7 @@ class FormSelect extends Component {
 							error={errors[name] && touched[name]}
 							options={options}
 							styles={customSelectStyles}
+							noOptionsMessage={() => 'Aucune option'}
 							{...rest}
 						/>
 					)}

@@ -133,6 +133,7 @@ export function ArianneElem({
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
+				noOptionsMessage={() => 'Aucune option'}
 				{...rest}
 			/>
 		</ArianneElemMain>

@@ -45,8 +45,8 @@ export const TaskContainer = styled('div')`
 	&:after {
 		content: '';
 		display: block;
-		width: 12px;
-		height: 18px;
+		width: 0.8rem;
+		height: 1.2rem;
 		background: ${props => (props.isDraggable ? `url(${DragIconSvg})` : 'none')};
 		background-repeat: no-repeat;
 		position: absolute;
@@ -68,9 +68,9 @@ export const TaskContainer = styled('div')`
 const TaskAdd = styled('div')``;
 
 const TaskIcon = styled('div')`
-	width: 26px;
-	height: 26px;
-	margin-right: 30px;
+	width: 1.75rem;
+	height: 1.75rem;
+	margin-right: 2rem;
 	background: center no-repeat
 		url(${(props) => {
 		const typeInfos
@@ -83,8 +83,8 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: 1.65rem;
-	margin-bottom: 30px;
+	margin-top: 1.55rem;
+	margin-bottom: 2rem;
 
 	&:after,
 	&:before {
@@ -92,23 +92,23 @@ const TaskIcon = styled('div')`
 		display: block;
 		border-left: 1px dotted ${mediumGrey};
 		position: absolute;
-		left: calc(13px + 2rem);
+		left: 2.85rem;
 	}
 
 	&:before {
-		height: 22px;
-		top: -3px;
+		height: 1rem;
+		top: 0.2rem;
 	}
 
 	&:after {
-		top: 62px;
-		bottom: -13px;
+		top: 4.15rem;
+		bottom: -0.85rem;
 	}
 `;
 
 const TaskInfosIcon = styled('div')`
-	width: 12px;
-	height: 12px;
+	width: 0.8rem;
+	height: 0.8rem;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-image: url(${props => props.icon});
@@ -117,7 +117,7 @@ const TaskInfosIcon = styled('div')`
 
 const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: 16px;
+	margin-top: 1rem;
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`

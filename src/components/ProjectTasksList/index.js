@@ -28,25 +28,28 @@ const TasksListContainer = styled(LayoutMainElem)`
 
 const SectionDraggable = styled('div')`
 	position: relative;
+	padding-left: 2rem;
+	margin-left: -2rem;
 
 	&:before {
 		content: '';
 		display: block;
-		width: 12px;
-		height: 18px;
+		width: 0.8rem;
+		height: 1.2rem;
 		background: url(${DragIconSvg});
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
-		top: 0.7rem;
+		top: 0.75rem;
 
 		opacity: 0;
 		transition: all 300ms ease;
 	}
+
 	&:hover {
 		&:before {
 			opacity: 1;
-			left: -1.8rem;
+			left: 0.2rem;
 		}
 	}
 
@@ -88,7 +91,7 @@ const SectionTitle = styled(InlineEditable)`
 			display: block;
 			background: ${lightGrey};
 			position: absolute;
-			left: -0.5rem;
+			left: -1rem;
 			top: 0;
 			right: -0.5rem;
 			bottom: 0;

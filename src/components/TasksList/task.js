@@ -67,6 +67,7 @@ export const TaskContainer = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
 		margin-left: 0;
+		margin-bottom: 0.85rem;
 
 		&:after {
 			display: none;
@@ -139,7 +140,7 @@ const TaskContent = styled('div')`
 	margin-top: 1rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 0.3rem 0 0 0;
+		margin: 0.2rem 0 0 0;
 	}
 `;
 
@@ -147,6 +148,10 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	margin: 0.5rem 0;
 	color: ${primaryBlack};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1rem;
+	}
 `;
 
 const TaskActions = styled('div')`

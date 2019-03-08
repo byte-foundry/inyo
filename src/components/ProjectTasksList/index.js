@@ -134,10 +134,6 @@ const editableCss = css`
 	display: block;
 `;
 
-const draggableSnapshot = {
-	isDragging: true,
-};
-
 const DraggableTask = ({task, index, ...rest}) => (
 	<Draggable key={task.id} draggableId={task.id} index={index} type="ITEM">
 		{provided => (

@@ -13,7 +13,6 @@ import TopBar, {
 	TopBarLogo,
 	TopBarMenuLink,
 } from '../../components/TopBar';
-import {ButtonLink} from '../../utils/new/design-system';
 
 import {TOOLTIP_DELAY} from '../../utils/constants';
 

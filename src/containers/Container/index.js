@@ -21,6 +21,7 @@ import TopBar, {
 	TopBarMenuLink,
 } from '../../components/TopBar';
 import ProjectCustomerView from '../App/Project/project-customer-view';
+import CustomerTasks from '../App/CustomerTasks';
 
 const BodyMain = styled(Body)``;
 
@@ -106,6 +107,7 @@ const ProtectedRedirect = ({isAllowed, fallback, ...props}) => (isAllowed ? <Red
 
 function Container() {
 	const [setupDone, setSetupDone] = useState(false);
+	const [previousPage, setPreviousPage] = useState(undefined);
 	const {data, loading, error} = useQuery(CHECK_LOGIN_USER, {
 		suspend: false,
 		fetchPolicy: 'network-only',
@@ -143,14 +145,16 @@ function Container() {
 			<BodyMain>
 				<main>
 					<Switch>
-						{!data.me && (
-							<Route
-								path="/app/projects/:projectId/view/:customerToken"
-								component={withTracker(
-									withHeader(ProjectCustomerView),
-								)}
-							/>
-						)}
+						<Route
+							path="/app/projects/:projectId/view/:customerToken"
+							component={withTracker(
+								withHeader(ProjectCustomerView),
+							)}
+						/>
+						<Route
+							path="/app/:customerToken/tasks"
+							component={CustomerTasks}
+						/>
 						<ProtectedRoute
 							path="/app"
 							component={withTracker(App)}

@@ -122,7 +122,6 @@ export const templates = [
 						name: 'Validation du cahier des charges',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -159,7 +158,6 @@ export const templates = [
 						unit: 0.5,
 						description:
 							'1 aller-retour corrections est prévu dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -167,7 +165,6 @@ export const templates = [
 							'Envoi de l’ensemble des contenus textes + images',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -180,7 +177,6 @@ export const templates = [
 						unit: 1,
 						description:
 							'2 aller-retour corrections sont prévus dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -199,7 +195,6 @@ export const templates = [
 						unit: 0.5,
 						description:
 							'1 aller-retour corrections est prévu dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -258,7 +253,6 @@ export const templates = [
 						name: 'Validation du site et de ses contenus',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -285,7 +279,6 @@ export const templates = [
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 				],
@@ -319,7 +312,6 @@ export const templates = [
 						name: 'Validation du cahier des charges',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -341,7 +333,6 @@ export const templates = [
 						name: "Validation d'un axe créatif",
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -354,7 +345,6 @@ export const templates = [
 						unit: 0,
 						description:
 							'2 allers-retours sont prévus dans la proposition commerciale',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 					{
@@ -388,7 +378,6 @@ export const templates = [
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 				],
@@ -431,7 +420,6 @@ export const templates = [
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						reviewer: 'CUSTOMER',
 						type: 'CUSTOMER',
 					},
 				],
@@ -457,27 +445,26 @@ export const onboardingTemplate = {
 					name: '✅ Créer votre 1ère tâche',
 					unit: 0,
 					description:
-						"### Un champ de saisie multitâches \n\nLe champ de saisie en haut de l’interface vous permet de créer de nouvelles tâches, de nouveaux projets et de nouvelles sections.\n\nLorsque vous commencez par un slash '/' vous pouvez choisir parmi les différents types de tâches: tâche personnelle, tâche client, tâche récupération de contenus. Appuyez sur *Tab* pour parcourir les options et pressez *entrée* pour valider.\n\nÀ vous de jouer, créez votre 1ère tâche et marquez celle-ci comme faîte!",
+						"### Un champ de saisie multitâches \n\nLe champ de saisie en haut de la vue principale vous permet de créer de nouvelles tâches, de nouveaux projets et de nouvelles sections.\n\nLorsque vous commencez par un slash '/' vous pouvez choisir parmi les différents types de tâches: tâche personnelle, tâche client, tâche récupération de contenus. Appuyez sur *Tab* pour parcourir les options et pressez *entrée* pour valider.\n\nÀ vous de jouer, créez votre 1ère tâche et marquez celle-ci comme faîte!",
 				},
 				{
 					name: "🙋 Attendre le mail d'accueil par Edwige de Inyo",
 					unit: 0,
 					description:
 						"### Comment fonctionnent les tâches client? \n\nCette tâche est une tâche attribuée à votre client (couleur rouge), ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. \n\nVous ne raterez plus aucune deadline 🎉\n\n### Edwige?\nCette tâche est attribuée au client 'Client test' et ce sera donc *Edwige de Inyo* qui se chargera de vous répondre!",
-					reviewer: 'CUSTOMER',
 					type: 'CUSTOMER',
 				},
 				{
 					name: '✏️ Ajouter un commentaire',
 					unit: 0,
 					description:
-						'Vous pouvez commenter une tâche via le champ de texte ci-dessous. Votre client recevra un email le notifiant de votre commentaire et pourra y répondre en accédant à la tâche. Vous serez notifié à votre tour par email. En centralisant tout au même endroit, vous vous évitez des allers-retours entre de multiples canaux pour retrouver des information.\n\nAjoutez votre 1er commentaire en cliquant ci-dessous.',
+						'Vous pouvez commenter une tâche via le champ de texte ci-dessous. Votre client recevra un email le notifiant de votre commentaire et pourra y répondre en accédant à la tâche. Vous serez notifié à votre tour par email. En centralisant tout au même endroit, vous vous évitez des allers-retours entre de multiples canaux pour retrouver des informations.\n\nAjoutez votre 1er commentaire en cliquant ci-dessous.',
 				},
 				{
 					name: '👀 Ouvrir cette tâche et lire la description',
 					unit: 0,
 					description:
-						'Dans chaque tâche vous pourrez ajouter des descriptions, des deadlines, mesurer le temps passé, etc. Cela vous permettra d’avoir une vision claire de vos priorités au jour le jour. \n\n### Astuce!\nLe champ de description utilise les balises *Markdown,* ce qui signifie que vous pouvez ajouter des titres, du bold, des listes, etc. Plus d’informations sur cette [page]([https://openclassrooms.com/fr/courses/1304236-redigez-en-markdown).\n\n👀 Modifiez le titre de cette tâche et validez',
+						'Dans chaque tâche vous pourrez ajouter des descriptions, des deadlines, mesurer le temps passé, etc. Cela vous permettra d’avoir une vision claire de vos priorités au jour le jour. \n\n### Astuce!\nLe champ de description utilise les balises *Markdown,* ce qui signifie que vous pouvez ajouter des titres, du bold, des listes, etc. Plus d’informations sur cette [page](https://openclassrooms.com/fr/courses/1304236-redigez-en-markdown).\n\n👀 Modifiez le titre de cette tâche et validez',
 				},
 			],
 		},

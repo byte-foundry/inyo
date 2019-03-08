@@ -27,6 +27,36 @@ export const Body = styled('div')`
 	${body};
 `;
 
+const getButtonHoveredColor = (props) => {
+	if (props.white || props.link) {
+		return primaryPurple;
+	}
+	return primaryWhite;
+};
+
+const getButtonHoveredBackground = (props) => {
+	if (props.red) {
+		return primaryRed;
+	}
+	if (props.white) {
+		return primaryWhite;
+	}
+	return primaryPurple;
+};
+
+const getButtonHoveredBorderColor = (props) => {
+	if (props.primary) {
+		return 'transparent';
+	}
+	if (props.red) {
+		return primaryRed;
+	}
+	if (props.white) {
+		return primaryWhite;
+	}
+	return primaryPurple;
+};
+
 export const Button = styled('button')`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
@@ -62,39 +92,19 @@ export const Button = styled('button')`
 	}};
 	border-color: currentColor;
 
-	&:hover {
-		background: ${(props) => {
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.white) {
-			return primaryWhite;
-		}
-		return primaryPurple;
-	}};
-		color: ${(props) => {
-		if (props.white || props.link) {
-			return primaryPurple;
-		}
-		return primaryWhite;
-	}};
-		border-color: ${(props) => {
-		if (props.primary) {
-			return 'transparent';
-		}
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.white) {
-			return primaryWhite;
-		}
-		return primaryPurple;
-	}};
+	${props => !props.disabled
+		&& css`
+			&:hover {
+				background: ${getButtonHoveredBackground(props)};
+				color: ${getButtonHoveredColor(props)};
+				border-color: ${getButtonHoveredBorderColor(props)};
 
-		&::before {
-			color: currentColor;
-		}
-	}
+				&::before {
+					color: currentColor;
+				}
+			}
+		`}
+
 	${props => props.textIcon
 		&& `
 		font-weight: 500;
@@ -150,6 +160,7 @@ export const ProjectHeading = styled('div')`
 export const TaskHeading = styled('h2')`
 	color: ${primaryGrey};
 	font-size: 18px;
+	line-height: 1.5;
 	font-weight: 400;
 	flex: 1 0
 		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 168px)')};
@@ -166,6 +177,12 @@ export const P = styled('p')`
 	font-size: 14px;
 	line-height: 1.4em;
 	color: ${primaryGrey};
+`;
+
+export const HR = styled('hr')`
+	margin: 2rem 0;
+	border: 0;
+	border-top: 1px solid ${mediumGrey};
 `;
 
 export const Label = styled('label')`

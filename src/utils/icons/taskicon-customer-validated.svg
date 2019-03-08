@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height='26' width='26'>
   <defs>
-    <ellipse id="task-icon-customer-validated-ellipse-0" opacity="1" rx="13" ry="13" cx="17.70463010947833" cy="17.704630109478444"/>
+    <ellipse id="task-icon-customer-validated-ellipse-0" opacity="1" rx="13" ry="13" cx="13" cy="13"/>
     <mask id="mask-1" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
-      <rect opacity="1" x="0" y="0" width="35.40926021895666" height="35.4092602189569" fill="black"/>
+      <rect opacity="1" x="0" y="0" width="35.40926021895666" height="35.409260218956916" fill="black"/>
       <use xlink:href="#task-icon-customer-validated-ellipse-0" fill="white"/>
     </mask>
-    <path id="task-icon-customer-validated-path-2" opacity="1" fill-rule="evenodd" d="M21.70463010947833,15.704630109478444 L16.70463010947833,20.70463010947799 L13.70463010947833,17.70463010947799 "/>
+    <path id="task-icon-customer-validated-path-2" opacity="1" fill-rule="evenodd" d="M17,11 L12,16 L9,13 "/>
   </defs>
   <g opacity="1">
     <g opacity="1">

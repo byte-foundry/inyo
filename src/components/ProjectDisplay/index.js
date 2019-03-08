@@ -214,7 +214,7 @@ class ProjectDisplay extends Component {
 
 		const hasAllTasksDone = project.sections.every(section => section.items.every(item => item.status === 'FINISHED'));
 		const hasClientAttributedTasks = project.sections.some(section => section.items.some(
-			item => item.status === 'PENDING' && item.reviewer === 'CUSTOMER',
+			item => item.status === 'PENDING' && item.type === 'CUSTOMER',
 		));
 
 		let title = 'Project en cours';

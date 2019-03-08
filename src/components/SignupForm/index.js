@@ -12,6 +12,7 @@ import {
 	SIGNUP,
 	CHECK_UNIQUE_EMAIL,
 	CREATE_PROJECT,
+	CREATE_CUSTOMER,
 } from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
@@ -31,6 +32,7 @@ const SignupForm = ({from, history, client}) => {
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
 	const createProject = useMutation(CREATE_PROJECT);
+	const createCustomer = useMutation(CREATE_CUSTOMER);
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 500);
 
@@ -108,6 +110,13 @@ const SignupForm = ({from, history, client}) => {
 								},
 							});
 
+							const {} = await createCustomer({
+								variables: {
+									email: 'community@inyo.me',
+									name: 'Communauté Inyo',
+								},
+							});
+
 							window.Intercom('boot', {
 								app_id: INTERCOM_APP_ID,
 								email: user.email,
@@ -117,10 +126,8 @@ const SignupForm = ({from, history, client}) => {
 								phone: user.company.phone,
 							});
 
-							client.resetStore();
-							const fromPage
-								= from
-								|| `/app/onboarding?projectId=${onboardProjectId}`;
+							await client.resetStore();
+							const fromPage = from || '/app/onboarding';
 
 							history.push(fromPage);
 						}

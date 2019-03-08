@@ -61,7 +61,7 @@ function LoginForm({from = '/app', history, client}) {
 								category: 'User',
 								action: 'Logged in',
 							});
-							client.resetStore();
+							await client.resetStore();
 							history.push(from);
 						}
 					}

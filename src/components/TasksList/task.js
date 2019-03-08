@@ -11,7 +11,6 @@ import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
-import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 
 import {
 	Button,
@@ -25,11 +24,12 @@ import {
 	primaryGrey,
 	lightGrey,
 	mediumGrey,
+	primaryBlack,
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
 
-import {ArianneElem} from '../ArianneThread';
+import CustomerDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
@@ -38,15 +38,16 @@ import CustomerModal from '../CustomerModal';
 export const TaskContainer = styled('div')`
 	display: flex;
 	margin-bottom: 0.6rem;
-	cursor: grab;
 	position: relative;
+	padding-left: 2rem;
+	margin-left: -2rem;
 
 	&:after {
 		content: '';
 		display: block;
-		width: 12px;
-		height: 18px;
-		background: url(${DragIconSvg});
+		width: 0.8rem;
+		height: 1.2rem;
+		background: ${props => (props.isDraggable ? `url(${DragIconSvg})` : 'none')};
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
@@ -59,7 +60,7 @@ export const TaskContainer = styled('div')`
 	&:hover {
 		&:after {
 			opacity: 1;
-			left: -1.8rem;
+			left: 0.2rem;
 		}
 	}
 `;
@@ -67,9 +68,9 @@ export const TaskContainer = styled('div')`
 const TaskAdd = styled('div')``;
 
 const TaskIcon = styled('div')`
-	width: 26px;
-	height: 26px;
-	margin-right: 30px;
+	width: 1.75rem;
+	height: 1.75rem;
+	margin-right: 2rem;
 	background: center no-repeat
 		url(${(props) => {
 		const typeInfos
@@ -82,8 +83,8 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: 1.65rem;
-	margin-bottom: 30px;
+	margin-top: 1.55rem;
+	margin-bottom: 2rem;
 
 	&:after,
 	&:before {
@@ -91,23 +92,23 @@ const TaskIcon = styled('div')`
 		display: block;
 		border-left: 1px dotted ${mediumGrey};
 		position: absolute;
-		left: 13px;
+		left: 2.85rem;
 	}
 
 	&:before {
-		height: 22px;
-		top: -3px;
+		height: 1rem;
+		top: 0.2rem;
 	}
 
 	&:after {
-		top: 62px;
-		bottom: -13px;
+		top: 4.15rem;
+		bottom: -0.85rem;
 	}
 `;
 
 const TaskInfosIcon = styled('div')`
-	width: 12px;
-	height: 12px;
+	width: 0.8rem;
+	height: 0.8rem;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-image: url(${props => props.icon});
@@ -116,12 +117,13 @@ const TaskInfosIcon = styled('div')`
 
 const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: 16px;
+	margin-top: 1rem;
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	margin: 0.5rem 0;
+	color: ${primaryBlack};
 `;
 
 const TaskActions = styled('div')`
@@ -207,17 +209,16 @@ const SetTimeCaption = styled('div')`
 	line-height: 1.3;
 `;
 
+const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
+
 export function TaskCustomerInput({
+	disabled,
 	editCustomer: editCustomerProp,
 	onCustomerSubmit,
 	item,
 }) {
-	const {
-		data: {me},
-		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS);
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
-	const [editCustomer, setEditCustomer] = useState(editCustomer);
+	const [editCustomer, setEditCustomer] = useState(editCustomerProp);
 
 	return (
 		<TaskIconText
@@ -225,20 +226,17 @@ export function TaskCustomerInput({
 			inactive={editCustomer}
 			icon={<TaskInfosIcon icon={ClientIconSvg} />}
 			content={
-				editCustomer ? (
-					<ArianneElem
+				!disabled && editCustomer ? (
+					<CustomerDropdown
 						id="projects"
-						list={[
-							{id: 'CREATE', name: 'Créer un nouveau client'},
-							...me.customers,
-						]}
-						defaultMenuIsOpen={true}
+						defaultMenuIsOpen
 						defaultValue={
 							item.linkedCustomer && {
 								value: item.linkedCustomer.id,
 								label: item.linkedCustomer.name,
 							}
 						}
+						creatable
 						isClearable
 						autoFocus
 						onChange={(args) => {
@@ -251,9 +249,13 @@ export function TaskCustomerInput({
 					/>
 				) : (
 					<div
-						onClick={() => {
-							setEditCustomer(true);
-						}}
+						onClick={
+							disabled
+								? undefined
+								: () => {
+									setEditCustomer(true);
+								  }
+						}
 					>
 						{clientName || <>&mdash;</>}
 					</div>
@@ -273,6 +275,7 @@ export function TaskInfosInputs({
 	switchOnSelect,
 	location,
 	customerToken,
+	taskUrlPrefix,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -288,7 +291,7 @@ export function TaskInfosInputs({
 			{!noComment && (
 				<TaskInfosItemLink
 					to={{
-						pathname: `/app/tasks/${item.id}`,
+						pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 						state: {prevSearch: location.search},
 					}}
 				>
@@ -301,7 +304,7 @@ export function TaskInfosInputs({
 				inactive={editUnit}
 				icon={<TaskInfosIcon icon={ClockIconSvg} />}
 				content={
-					editUnit ? (
+					!customerToken && editUnit ? (
 						<UnitInput
 							unit={item.timeItTook ? item.timeItTook : item.unit}
 							onBlur={(args) => {
@@ -322,7 +325,13 @@ export function TaskInfosInputs({
 							}}
 						/>
 					) : (
-						<div onClick={() => setEditUnit(true)}>
+						<div
+							onClick={
+								customerToken
+									? undefined
+									: () => setEditUnit(true)
+							}
+						>
 							{item.timeItTook ? item.timeItTook : item.unit}{' '}
 							<Plural
 								value={item.unit}
@@ -354,9 +363,13 @@ export function TaskInfosInputs({
 				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
 				content={
 					<DateInputContainer
-						onClick={() => !editDueDate && setEditDueDate(true)}
+						onClick={
+							customerToken
+								? undefined
+								: () => !editDueDate && setEditDueDate(true)
+						}
 					>
-						{editDueDate ? (
+						{!customerToken && editDueDate ? (
 							<>
 								<DueDateInputElem
 									value={moment(
@@ -401,12 +414,15 @@ export function TaskInfosInputs({
 				setEditCustomer={setEditCustomer}
 				onCustomerSubmit={onCustomerSubmit}
 				item={item}
+				disabled={!!customerToken}
 			/>
 		</TaskInfos>
 	);
 }
 
-function Task({item, customerToken, location}) {
+function Task({
+	item, customerToken, location, isDraggable,
+}) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
@@ -437,8 +453,13 @@ function Task({item, customerToken, location}) {
 		setSetTimeItTook(false);
 	}
 
+	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
+	const isFinishable
+		= (!customerToken && !isCustomerTask(item))
+		|| (customerToken && isCustomerTask(item));
+
 	return (
-		<TaskContainer>
+		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
 			<TaskIcon status={item.status} type={item.type} />
 			<TaskContent>
@@ -446,7 +467,7 @@ function Task({item, customerToken, location}) {
 					<TaskHeadingLink
 						small={setTimeItTook}
 						to={{
-							pathname: `/app/tasks/${item.id}`,
+							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 							state: {prevSearch: location.search},
 						}}
 					>
@@ -476,13 +497,15 @@ function Task({item, customerToken, location}) {
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
-										pathname: `/app/tasks/${item.id}`,
+										pathname: `${taskUrlPrefix}/tasks/${
+											item.id
+										}`,
 										state: {prevSearch: location.search},
 									}}
 								>
 									Ouvrir
 								</OpenBtn>
-								{item.status !== 'FINISHED' && (
+								{isFinishable && (
 									<Button
 										data-tip="Marquer la tâche comme faite"
 										icon="✓"
@@ -503,6 +526,7 @@ function Task({item, customerToken, location}) {
 					</TaskActions>
 				</TaskHeader>
 				<TaskInfosInputs
+					taskUrlPrefix={taskUrlPrefix}
 					location={location}
 					item={item}
 					customerToken={customerToken}

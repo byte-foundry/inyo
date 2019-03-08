@@ -1,7 +1,6 @@
 import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
-import {Link} from 'react-router-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
@@ -16,9 +15,10 @@ import MultilineEditable from '../MultilineEditable';
 import InlineEditable from '../InlineEditable';
 import UnitInput from '../UnitInput';
 import DateInput from '../DateInput';
-import {ArianneElem} from '../ArianneThread';
+import CustomersDropdown from '../CustomersDropdown';
+import ProjectsDropdown from '../ProjectsDropdown';
 
-import {GET_ITEM_DETAILS, GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -32,6 +32,7 @@ import {
 	primaryPurple,
 	DueDateInputElem,
 	DateInputContainer,
+	HR,
 } from '../../utils/new/design-system';
 import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
 
@@ -62,7 +63,7 @@ const MetaLabel = styled('div')`
 const MetaText = styled('span')`
 	color: ${primaryPurple};
 	flex: 1;
-	cursor: pointer;
+	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
 
 	:empty::before {
 		content: '\\2014';
@@ -73,7 +74,12 @@ const MetaTime = styled(MetaText)`
 	position: relative;
 `;
 
-const ClientDropdown = styled(ArianneElem)`
+const ClientDropdown = styled(CustomersDropdown)`
+	margin-top: -6px;
+	padding: 0;
+`;
+
+const StyledProjectsDropdown = styled(ProjectsDropdown)`
 	margin-top: -6px;
 	padding: 0;
 `;
@@ -147,10 +153,6 @@ const Item = ({id, customerToken, close}) => {
 		suspend: false,
 		variables: {id, token: customerToken},
 	});
-	const {
-		data: {me},
-		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS);
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const deleteItem = useMutation(REMOVE_ITEM, {
@@ -214,6 +216,8 @@ const Item = ({id, customerToken, close}) => {
 				<TaskStatusButton
 					taskId={id}
 					isFinished={item.status === 'FINISHED'}
+					disabled={customerToken && item.type !== 'CUSTOMER'}
+					customerToken={customerToken}
 				/>
 			</StickyHeader>
 			<Header>
@@ -246,7 +250,7 @@ const Item = ({id, customerToken, close}) => {
 					<TimeIcon />
 					<MetaLabel>Temps estimé</MetaLabel>
 					<MetaText>
-						{editUnit ? (
+						{!customerToken && editUnit ? (
 							<UnitInput
 								unit={item.unit}
 								onBlur={(unit) => {
@@ -278,7 +282,13 @@ const Item = ({id, customerToken, close}) => {
 								}}
 							/>
 						) : (
-							<div onClick={() => setEditUnit(true)}>
+							<div
+								onClick={
+									customerToken
+										? undefined
+										: () => setEditUnit(true)
+								}
+							>
 								{item.unit}
 								<Plural
 									singular=" jour"
@@ -292,18 +302,17 @@ const Item = ({id, customerToken, close}) => {
 				<Meta data-tip="Personne liée à cette tâche">
 					<ContactIcon />
 					<MetaLabel>Client</MetaLabel>
-					{editCustomer ? (
+					{!customerToken && editCustomer ? (
 						<ClientDropdown
 							id="projects"
-							list={me.customers}
-							defaultMenuIsOpen={true}
+							defaultMenuIsOpen
 							defaultValue={
 								item.linkedCustomer && {
 									value: item.linkedCustomer.id,
 									label: item.linkedCustomer.name,
 								}
 							}
-							autoFocus={true}
+							autoFocus
 							onChange={({value}) => {
 								updateItem({
 									variables: {
@@ -318,7 +327,13 @@ const Item = ({id, customerToken, close}) => {
 							}}
 						/>
 					) : (
-						<MetaText onClick={() => setEditCustomer(true)}>
+						<MetaText
+							onClick={
+								customerToken
+									? undefined
+									: () => setEditCustomer(true)
+							}
+						>
 							{customer && customer.name}
 						</MetaText>
 					)}
@@ -330,9 +345,13 @@ const Item = ({id, customerToken, close}) => {
 						<MetaTime
 							title={deadline && deadline.toLocaleString()}
 							dateTime={deadline && deadline.toJSON()}
-							onClick={() => !editDueDate && setEditDueDate(true)}
+							onClick={
+								customerToken
+									? undefined
+									: () => !editDueDate && setEditDueDate(true)
+							}
 						>
-							{editDueDate ? (
+							{!customerToken && editDueDate ? (
 								<DateInputContainer>
 									<DueDateInputElem
 										value={moment(
@@ -362,7 +381,12 @@ const Item = ({id, customerToken, close}) => {
 											'days',
 										) - item.unit}{' '}
 										<Plural
-											value={item.unit}
+											value={
+												moment(deadline).diff(
+													moment(),
+													'days',
+												) - item.unit
+											}
 											singular="jour"
 											plural="jours"
 										/>
@@ -375,11 +399,44 @@ const Item = ({id, customerToken, close}) => {
 				<Meta data-tip="Projet lié à cette tâche">
 					<FolderIcon />
 					<MetaLabel>Projet</MetaLabel>
-					<MetaText>
-						{item.section
-							&& item.section.project
-							&& item.section.project.name}
-					</MetaText>
+					{!customerToken && editProject ? (
+						<StyledProjectsDropdown
+							id="projects"
+							defaultMenuIsOpen
+							autoFocus
+							defaultValue={
+								item.section
+								&& item.section.project && {
+									value: item.section.project.id,
+									label: item.section.project.name,
+								}
+							}
+							onChange={({value}) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										projectId: value,
+									},
+								});
+								setEditProject(false);
+							}}
+							onBlur={() => {
+								setEditProject(false);
+							}}
+						/>
+					) : (
+						<MetaText
+							onClick={
+								customerToken
+									? undefined
+									: () => setEditProject(true)
+							}
+						>
+							{item.section
+								&& item.section.project
+								&& item.section.project.name}
+						</MetaText>
+					)}
 				</Meta>
 				<Meta data-tip="Définit s'il y a des actions automatiques">
 					<TaskTypeIcon />
@@ -387,21 +444,24 @@ const Item = ({id, customerToken, close}) => {
 					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
 			</Metas>
-			<Description data-tip="Description de la tâche">
-				<MultilineEditable
-					placeholder="Ajouter une description…"
-					style={{padding: '1rem 4rem'}}
-					onBlur={e => updateItem({
-						variables: {
-							itemId: id,
-							token: customerToken,
-							description: e.target.innerText,
-						},
-					})
-					}
-					defaultValue={description}
-				/>
-			</Description>
+			{(!customerToken || description) && (
+				<Description data-tip="Description de la tâche">
+					<MultilineEditable
+						disabled={!!customerToken}
+						placeholder="Ajouter une description…"
+						style={{padding: '1rem 4rem'}}
+						onBlur={e => updateItem({
+							variables: {
+								itemId: id,
+								token: customerToken,
+								description: e.target.innerText,
+							},
+						})
+						}
+						defaultValue={description}
+					/>
+				</Description>
+			)}
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>
 					<SubHeading>Contenus à récupérer</SubHeading>
@@ -434,26 +494,30 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Commentaires</SubHeading>
 			<CommentList itemId={item.id} customerToken={customerToken} />
-			{deletingItem ? (
-				<>
-					<Button grey onClick={() => setDeletingItem(false)}>
-						Annuler
-					</Button>
-					<Button
-						red
-						onClick={() => {
-							deleteItem();
-							close();
-						}}
-					>
-						Confirmer la suppression
-					</Button>
-				</>
-			) : (
-				<Button red onClick={() => setDeletingItem(true)}>
-					Supprimer la tâche
-				</Button>
-			)}
+			{!customerToken
+				&& (deletingItem ? (
+					<>
+						<Button grey onClick={() => setDeletingItem(false)}>
+							Annuler
+						</Button>
+						<Button
+							red
+							onClick={() => {
+								deleteItem();
+								close();
+							}}
+						>
+							Confirmer la suppression
+						</Button>
+					</>
+				) : (
+					<>
+						<HR />
+						<Button red onClick={() => setDeletingItem(true)}>
+							Supprimer la tâche
+						</Button>
+					</>
+				))}
 		</>
 	);
 };

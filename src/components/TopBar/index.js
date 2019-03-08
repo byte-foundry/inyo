@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import {
 	Button,
@@ -15,6 +15,7 @@ import {
 	primaryBlack,
 	accentGrey,
 	lightGrey,
+	mediumGrey,
 } from '../../utils/new/design-system';
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
 
@@ -34,21 +35,24 @@ export const TopBarMenu = styled('div')`
 	align-items: center;
 `;
 
-export const TopBarMenuLink = styled(Link)`
+export const TopBarMenuLink = styled(NavLink)`
 	text-decoration: none;
-	margin-left: 1.5rem;
+	margin-left: 2rem;
 	color: ${accentGrey};
 	position: relative;
 
-	&:hover {
+	&:hover,
+	&.active {
+		color: ${primaryBlack};
+
 		&::before {
 			content: '';
 			display: block;
 			background: ${lightGrey};
 			position: absolute;
-			left: -0.5rem;
+			left: -0.7rem;
 			top: -0.5rem;
-			right: -0.5rem;
+			right: -0.7rem;
 			bottom: -0.5rem;
 			border-radius: 8px;
 			z-index: -1;

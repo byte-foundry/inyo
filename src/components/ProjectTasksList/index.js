@@ -12,15 +12,66 @@ import {
 	LayoutMainElem,
 	primaryBlack,
 	primaryPurple,
+	primaryWhite,
 	lightGrey,
 	accentGrey,
+	mediumGrey,
 } from '../../utils/new/design-system';
 import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
 import InlineEditable from '../InlineEditable';
 import Pencil from '../../utils/icons/pencil.svg';
+import DragIconSvg from '../../utils/icons/drag.svg';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 3rem;
+`;
+
+const SectionDraggable = styled('div')`
+	position: relative;
+	padding-left: 2rem;
+	margin-left: -2rem;
+
+	&:before {
+		content: '';
+		display: block;
+		width: 0.8rem;
+		height: 1.2rem;
+		background: url(${DragIconSvg});
+		background-repeat: no-repeat;
+		position: absolute;
+		left: -3rem;
+		top: 0.75rem;
+
+		opacity: 0;
+		transition: all 300ms ease;
+	}
+
+	&:hover {
+		&:before {
+			opacity: 1;
+			left: 0.2rem;
+		}
+	}
+
+	.task {
+		position: ${props => (props.isDragging ? 'absolute' : 'relative')};
+		top: ${props => (props.isDragging ? '6rem' : 'auto')};
+		background-color: ${props => (props.isDragging ? primaryWhite : 'auto')};
+		width: ${props => (props.isDragging ? '100%' : 'flex')};
+		padding-left: ${props => (props.isDragging ? '1rem' : 0)};
+		border: ${props => (props.isDragging ? `1px solid ${mediumGrey}` : 'none')};
+		border-radius: 4px;
+
+		&:not(:first-child) {
+			z-index: ${props => (props.isDragging ? '-1' : 'auto')};
+		}
+		& + .task {
+			margin: ${props => (props.isDragging ? '8px' : 0)};
+			& + .task {
+				margin: ${props => (props.isDragging ? '4px' : 0)};
+			}
+		}
+	}
 `;
 
 const SectionTitle = styled(InlineEditable)`
@@ -40,7 +91,7 @@ const SectionTitle = styled(InlineEditable)`
 			display: block;
 			background: ${lightGrey};
 			position: absolute;
-			left: -0.5rem;
+			left: -1rem;
 			top: 0;
 			right: -0.5rem;
 			bottom: 0;
@@ -83,10 +134,15 @@ const editableCss = css`
 	display: block;
 `;
 
+const draggableSnapshot = {
+	isDragging: true,
+};
+
 const DraggableTask = ({task, index, ...rest}) => (
 	<Draggable key={task.id} draggableId={task.id} index={index} type="ITEM">
 		{provided => (
 			<div
+				className="task"
 				ref={provided.innerRef}
 				{...provided.draggableProps}
 				{...provided.dragHandleProps}
@@ -101,7 +157,7 @@ const DraggableTask = ({task, index, ...rest}) => (
 					...provided.draggableProps.style,
 				}}
 			>
-				<Task item={task} key={task.id} {...rest} />
+				<Task item={task} key={task.id} {...rest} isDraggable />
 			</div>
 		)}
 	</Draggable>
@@ -130,9 +186,10 @@ const DraggableSection = ({children, section, index}) => (
 		index={index}
 		type="SECTION"
 	>
-		{provided => (
-			<div
+		{(provided, snapshot) => (
+			<SectionDraggable
 				ref={provided.innerRef}
+				isDragging={snapshot.isDragging}
 				{...provided.draggableProps}
 				{...provided.dragHandleProps}
 				style={{
@@ -144,7 +201,7 @@ const DraggableSection = ({children, section, index}) => (
 				}}
 			>
 				{children}
-			</div>
+			</SectionDraggable>
 		)}
 	</Draggable>
 );

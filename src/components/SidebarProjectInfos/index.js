@@ -48,6 +48,10 @@ const Aside = styled('aside')`
 
 const SubSection = styled('div')`
 	margin-bottom: 2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 const ClientPreviewIcon = styled(EyeIcon)`

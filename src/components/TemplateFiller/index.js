@@ -11,13 +11,20 @@ import {
 	primaryBlack,
 } from '../../utils/new/design-system';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 const Container = styled('div')`
 	display: flex;
 	margin: 50px 15px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const Column = styled('div')`
 	flex: 1;
+	margin-bottom: 2rem;
 `;
 
 const TemplateList = styled('ul')`

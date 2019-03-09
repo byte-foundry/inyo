@@ -23,6 +23,10 @@ const AppMain = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding: 1rem;
+
+		.__react_component_tooltip {
+			display: none;
+		}
 	}
 `;
 

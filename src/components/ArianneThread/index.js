@@ -202,13 +202,14 @@ function ArianneThread({
 				isClearable
 				selectedId={projectId}
 			>
-				Projets
+				Tous les projets
 			</ArianneElem>
 			<ArianneElem
 				id="filter"
 				list={filters}
 				onChange={selectFilter}
 				selectedId={filterId}
+				placeholder={'Toutes les tâches'}
 			/>
 		</ArianneContainer>
 	);

@@ -527,6 +527,7 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Commentaires</SubHeading>
 			<CommentList itemId={item.id} customerToken={customerToken} />
+			<HR />
 			{!customerToken
 				&& (deletingItem ? (
 					<>
@@ -545,7 +546,6 @@ const Item = ({id, customerToken, close}) => {
 					</>
 				) : (
 					<>
-						<HR />
 						<Button red onClick={() => setDeletingItem(true)}>
 							Supprimer la tâche
 						</Button>

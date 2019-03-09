@@ -36,11 +36,6 @@ const TaskInfosContainer = styled('div')``;
 
 const InputButtonWrapper = styled('div')`
 	position: relative;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: flex;
-		flex-direction: row;
-	}
 `;
 
 const InputButtonContainer = styled('div')`
@@ -51,12 +46,32 @@ const InputButtonContainer = styled('div')`
 	top: -13px;
 	width: 165px;
 
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: row;
+		width: calc(100vh - 20rem);
+		top: 1.5rem;
+		right: 0;
+		display: flex;
+		flex-direction: row-reverse;
+	}
+
 	button {
 		background: rgba(255, 255, 255, 0.5);
+
+		@media (max-width: ${BREAKPOINTS}px) {
+			flex: 1;
+			margin: 0;
+			color: ${primaryPurple};
+			border-color: ${primaryPurple};
+		}
 	}
 
 	& ${Button}:first-of-type {
 		margin-bottom: 0.75rem;
+
+		@media (max-width: ${BREAKPOINTS}px) {
+			margin: 0;
+		}
 	}
 `;
 

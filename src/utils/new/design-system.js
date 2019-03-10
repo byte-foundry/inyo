@@ -365,7 +365,7 @@ export const TaskInputDropdown = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		left: -1rem;
 		width: calc(100% + 2rem);
-		box-shadow: 0 0 20rem ${primaryGrey};
+		box-shadow: 0 0 20rem ${primaryBlack};
 	}
 `;
 

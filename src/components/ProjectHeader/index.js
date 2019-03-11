@@ -58,6 +58,12 @@ export default function ProjectHeader({projectId}) {
 	);
 	const finishedItems = allItems.filter(item => item.status === 'FINISHED');
 
+	// const timeItTook =
+	// additioner le temps de tous les itemItTook définis + item.unit des tâches pas encore finies
+	// puis résultat divisé par la somme de tous les item.unit
+	// ça donne un chiffre en dessous de zéro quand plus rapide que prévu
+	// et plus de 1 si a pris du retard
+
 	return (
 		<ProjectHeaderContainer>
 			<ProjectHeading
@@ -86,6 +92,12 @@ export default function ProjectHeader({projectId}) {
 					allItems.length
 					+ allItems.reduce((acc, item) => acc + item.unit, 0)
 				}
+				// tasksTotal devrait prendre en compte timeItook.
+				// en fait tasksTotal = additioner le temps de tous les itemItTook définis + item.unit des tâches pas encore finies
+				// + allItems.length pour tenir compte des tâches avec durée = 0
+				allItems={allItems.length}
+				finishedItems={finishedItems.length}
+				timeItTook={0.5}
 			/>
 		</ProjectHeaderContainer>
 	);

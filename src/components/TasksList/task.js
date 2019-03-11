@@ -151,6 +151,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
+		display: block;
 	}
 `;
 

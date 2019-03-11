@@ -6,6 +6,8 @@ import {
 	lightGrey,
 	mediumGrey,
 	accentGrey,
+	lightPurple,
+	mediumPurple,
 } from '../../utils/new/design-system';
 
 const TasksProgressBarMain = styled('div')`
@@ -29,6 +31,40 @@ const TasksProgressBarMain = styled('div')`
 		border-radius: 5px;
 		border: 1px solid ${primaryPurple};
 	}
+
+	&:hover {
+		&:before {
+			color: ${mediumPurple};
+			transition: color 0.2s ease;
+		}
+	}
+
+	&:before {
+		font-size: 0.75rem;
+		line-height: 3rem;
+		text-align: right;
+		overflow: visible;
+		color: ${accentGrey};
+		border-radius: 5px;
+		position: absolute;
+		transition: width 0.2s ease;
+
+		content: ${props => (props.timeItTook >= 1 ? '"+XX jours"' : '"-XX jours"')};
+		top: ${props => (props.timeItTook >= 1 ? 0 : '1px')};
+		left: calc(
+			2px +
+				${props => (props.timeItTook >= 1 ? 0 : props.completionRate || 0)}%
+		);
+		width: ${props => (props.timeItTook >= 1
+		? props.completionRate * props.timeItTook
+		: props.completionRate * (1 - props.timeItTook))}%;
+		height: ${props => (props.timeItTook >= 1 ? '100%' : 'calc(100% - 2px)')};
+		background: ${props => (props.timeItTook >= 1 ? mediumPurple : lightPurple)};
+		border: 1px solid
+			${props => (props.timeItTook >= 1 ? mediumPurple : primaryPurple)};
+		transform: translate(${props => (props.timeItTook >= 1 ? 0 : '-100%')});
+		z-index: ${props => (props.timeItTook >= 1 ? 0 : 1)};
+	}
 `;
 
 const TasksProgressBarLabel = styled('div')`
@@ -43,7 +79,13 @@ const TasksProgressBarLabel = styled('div')`
 
 class TasksProgressBar extends Component {
 	render() {
-		const {tasksCompleted, tasksTotal} = this.props;
+		const {
+			tasksCompleted,
+			tasksTotal,
+			finishedItems,
+			allItems,
+			timeItTook,
+		} = this.props;
 
 		return (
 			<>
@@ -54,6 +96,7 @@ class TasksProgressBar extends Component {
 				</TasksProgressBarLabel>
 				<TasksProgressBarMain
 					completionRate={(tasksCompleted / tasksTotal) * 100}
+					timeItTook={timeItTook}
 				/>
 			</>
 		);

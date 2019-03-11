@@ -1,7 +1,7 @@
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import ReactTooltip from 'react-tooltip';
 import styled from '@emotion/styled';
+import ReactTooltip from 'react-tooltip';
 
 import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
 import {TOOLTIP_DELAY} from '../../../utils/constants';
@@ -13,6 +13,11 @@ const Container = styled('div')`
 	display: flex;
 	justify-content: center;
 	flex: 1;
+`;
+
+const TaskAndArianne = styled('div')`
+	flex: auto;
+	max-width: 980px;
 `;
 
 const CustomerTasks = ({
@@ -36,14 +41,16 @@ const CustomerTasks = ({
 	if (projectId) {
 		return (
 			<Container css={css} style={style}>
-				<ProjectCustomerTasksList
-					customerToken={token}
-					projectId={projectId}
-					items={tasks.filter(
-						item => item.section
-							&& item.section.project.id === projectId,
-					)}
-				/>
+				<TaskAndArianne>
+					<ProjectCustomerTasksList
+						customerToken={token}
+						projectId={projectId}
+						items={tasks.filter(
+							item => item.section
+								&& item.section.project.id === projectId,
+						)}
+					/>
+				</TaskAndArianne>
 				<SidebarCustomerProjectInfos
 					projectId={projectId}
 					customerToken={token}
@@ -55,8 +62,10 @@ const CustomerTasks = ({
 
 	return (
 		<Container css={css} style={style}>
-			<TasksList items={tasks} customerToken={token} />
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+			<TaskAndArianne>
+				<TasksList items={tasks} customerToken={token} />
+				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+			</TaskAndArianne>
 		</Container>
 	);
 };

@@ -1,43 +1,35 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 
-import {
-	H5, H4, H3, P, primaryNavyBlue, primaryBlue,
-} from '../../utils/content';
+import {H4, H5} from '../../utils/content';
+import {P, primaryGrey, accentGrey} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
-	margin-bottom: 20px;
-`;
-
-const CompanyName = styled(H4)`
-	color: ${primaryNavyBlue};
-	margin: 0;
-	margin-bottom: 10px;
+	margin: 20px 0;
 `;
 
 const ContactName = styled(H5)`
-	color: ${primaryNavyBlue};
-	margin: 0;
-	margin-bottom: 10px;
+	font-size: 14px;
+	font-weight: 400;
+	color: ${accentGrey};
 `;
 
-const Phone = styled(P)`
-	color: ${primaryBlue};
-	font-size: 11px;
-	margin: 0;
-	margin-bottom: 5px;
+const ContactInfo = styled(P)`
+	font-size: 14px;
+	line-height: 1.4;
+	color: ${accentGrey};
+	margin-top: 0;
 `;
 
-const ContactEmail = styled('div')`
-	color: ${primaryBlue};
-`;
+const CompanyName = styled(H4)`
+	font-size: 16px;
+	font-weight: 500;
+	color: ${primaryGrey};
 
-const Title = styled(H3)`
-	font-size: 13px;
-	margin: 0;
-	margin-bottom: 10px;
-	text-transform: uppercase;
+	& + ${ContactName} {
+		margin-bottom: 0;
+	}
 `;
 
 class IssuerNameAndAddress extends Component {
@@ -46,13 +38,12 @@ class IssuerNameAndAddress extends Component {
 
 		return (
 			<ClientAddress>
-				<Title>Votre prestataire</Title>
 				<CompanyName>{name}</CompanyName>
 				<ContactName>
 					{owner.firstName} {owner.lastName}
 				</ContactName>
-				<ContactEmail>{owner.email}</ContactEmail>
-				<Phone>{phone}</Phone>
+				<ContactInfo>{owner.email}</ContactInfo>
+				<ContactInfo>{phone}</ContactInfo>
 			</ClientAddress>
 		);
 	}

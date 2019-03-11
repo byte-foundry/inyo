@@ -116,8 +116,8 @@ export const GET_ALL_PROJECTS = gql`
 export const GET_PROJECT_INFOS = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 
-	query getProjectData($projectId: ID!) {
-		project(id: $projectId) {
+	query getProjectData($projectId: ID!, $token: String) {
+		project(id: $projectId, token: $token) {
 			id
 			template
 			viewedByCustomer
@@ -365,7 +365,7 @@ export const GET_ALL_TASKS = gql`
 export const GET_CUSTOMER_TASKS = gql`
 	${ITEM_FRAGMENT}
 
-	query getCustomerTasks($token: String!) {
+	query getCustomerTasks($token: String) {
 		tasks(token: $token) {
 			...ItemFragment
 		}

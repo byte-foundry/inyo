@@ -15,11 +15,6 @@ import SentryReporter from '../SentryReporter';
 import App from '../App';
 import Auth from '../App/Auth';
 
-import TopBar, {
-	TopBarMenu,
-	TopBarLogo,
-	TopBarMenuLink,
-} from '../../components/TopBar';
 import ProjectCustomerView from '../App/Project/project-customer-view';
 import CustomerTasks from '../App/CustomerTasks';
 
@@ -75,33 +70,6 @@ const withTracker = (WrappedComponent, options = {}) => {
 	return HOC;
 };
 
-const withHeader = Component => (...args) => (
-	<>
-		<TopBar>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			<TopBarLogo />
-			<TopBarMenu>
-				<TopBarMenuLink
-					data-tip="Tâches prioritaires"
-					to="/app/dashboard"
-				>
-					Dashboard
-				</TopBarMenuLink>
-				<TopBarMenuLink data-tip="Toutes les tâches" to="/app/tasks">
-					Tâches
-				</TopBarMenuLink>
-				<TopBarMenuLink
-					data-tip="Profil, jours travaillés, etc."
-					to="/app/account"
-				>
-					Réglages
-				</TopBarMenuLink>
-			</TopBarMenu>
-		</TopBar>
-		<Component {...args} />
-	</>
-);
-
 const ProtectedRoute = ({isAllowed, fallback, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to={fallback} />);
 const ProtectedRedirect = ({isAllowed, fallback, ...props}) => (isAllowed ? <Redirect {...props} /> : <Redirect to={fallback} />);
 
@@ -147,13 +115,11 @@ function Container() {
 					<Switch>
 						<Route
 							path="/app/projects/:projectId/view/:customerToken"
-							component={withTracker(
-								withHeader(ProjectCustomerView),
-							)}
+							component={withTracker(ProjectCustomerView)}
 						/>
 						<Route
 							path="/app/:customerToken/tasks"
-							component={CustomerTasks}
+							component={withTracker(CustomerTasks)}
 						/>
 						<ProtectedRoute
 							path="/app"

@@ -1,16 +1,33 @@
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
+import styled from '@emotion/styled';
 import ReactTooltip from 'react-tooltip';
 
 import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
 import {TOOLTIP_DELAY} from '../../../utils/constants';
-import ProjectList from '../../../components/ProjectTasksList';
-import TasksListComponent from '../../../components/TasksList';
+import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
+import TasksList from '../../../components/TasksList';
+import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
 
-const CustomerTasks = ({customerToken, projectId}) => {
+const Container = styled('div')`
+	display: flex;
+	justify-content: center;
+	flex: 1;
+`;
+
+const TaskAndArianne = styled('div')`
+	flex: auto;
+	max-width: 980px;
+`;
+
+const CustomerTasks = ({
+	css, style, customerToken, projectId,
+}) => {
+	const token = customerToken === 'preview' ? undefined : customerToken;
+
 	const {data, error} = useQuery(GET_CUSTOMER_TASKS, {
 		variables: {
-			token: customerToken,
+			token,
 		},
 	});
 
@@ -23,24 +40,33 @@ const CustomerTasks = ({customerToken, projectId}) => {
 
 	if (projectId) {
 		return (
-			<>
-				<ProjectList
+			<Container css={css} style={style}>
+				<TaskAndArianne>
+					<ProjectCustomerTasksList
+						customerToken={token}
+						projectId={projectId}
+						items={tasks.filter(
+							item => item.section
+								&& item.section.project.id === projectId,
+						)}
+					/>
+				</TaskAndArianne>
+				<SidebarCustomerProjectInfos
 					projectId={projectId}
-					items={tasks.filter(
-						item => item.section
-							&& item.section.project.id === projectId,
-					)}
+					customerToken={token}
 				/>
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			</>
+			</Container>
 		);
 	}
 
 	return (
-		<>
-			<TasksListComponent items={tasks} customerToken={customerToken} />
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-		</>
+		<Container css={css} style={style}>
+			<TaskAndArianne>
+				<TasksList items={tasks} customerToken={token} />
+				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+			</TaskAndArianne>
+		</Container>
 	);
 };
 

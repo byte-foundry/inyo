@@ -12,6 +12,8 @@ import {gray20, ErrorInput} from '../../utils/content';
 import {Button, primaryWhite} from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 import FormElem from '../FormElem';
 
 const UserDataFormMain = styled('div')``;
@@ -20,12 +22,22 @@ const FormContainer = styled('div')`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 20px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 0;
+		border: none;
+	}
 `;
 const UpdateButton = styled(Button)`
 	display: block;
@@ -33,6 +45,10 @@ const UpdateButton = styled(Button)`
 	margin-left: auto;
 	margin-right: 50px;
 	margin-bottom: 80px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-right: 0;
+	}
 `;
 
 const UserDataForm = (componentProps) => {

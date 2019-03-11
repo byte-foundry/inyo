@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {Loading} from '../../../utils/content';
-import {TOOLTIP_DELAY} from '../../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectList from '../../../components/ProjectTasksList';
@@ -18,6 +18,10 @@ const Container = styled('div')`
 	display: flex;
 	justify-content: center;
 	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const TaskAndArianne = styled('div')`
@@ -25,17 +29,18 @@ const TaskAndArianne = styled('div')`
 	max-width: 980px;
 `;
 
-function TasksListContainer({projectId, linkedCustomerId}) {
+function TasksListContainer({projectId, linkedCustomerId, filter}) {
 	const {data, error} = useQuery(GET_ALL_TASKS, {
 		variables: {
 			linkedCustomerId: linkedCustomerId || undefined,
-			// projectId: projectId || undefined,
 		},
 	});
 
 	if (error) throw error;
 
-	const {tasks} = data.me;
+	const tasks = data.me.tasks.filter(
+		task => !filter || task.status === filter || filter === 'ALL',
+	);
 
 	// order by creation date
 	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -72,6 +77,7 @@ function TasksList({location, history}) {
 	const query = new URLSearchParams(prevSearch || location.search);
 	const linkedCustomerId = query.get('customerId');
 	const projectId = query.get('projectId');
+	const filter = query.get('filter');
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -111,6 +117,18 @@ function TasksList({location, history}) {
 		history.push(`/app/tasks?${newQuery.toString()}`);
 	};
 
+	const setFilterSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedFilterId} = selected;
+
+			newQuery.set('filter', selectedFilterId);
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
 	return (
 		<Container>
 			<TaskAndArianne>
@@ -119,6 +137,8 @@ function TasksList({location, history}) {
 					linkedCustomerId={linkedCustomerId}
 					selectCustomer={setCustomerSelected}
 					selectProjects={setProjectSelected}
+					selectFilter={setFilterSelected}
+					filterId={filter}
 				/>
 				{projectId && <ProjectHeader projectId={projectId} />}
 				<CreateTask
@@ -130,6 +150,7 @@ function TasksList({location, history}) {
 					<TasksListContainer
 						projectId={projectId}
 						linkedCustomerId={linkedCustomerId}
+						filter={filter}
 					/>
 				</Suspense>
 			</TaskAndArianne>

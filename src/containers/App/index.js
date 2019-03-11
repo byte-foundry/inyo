@@ -14,12 +14,20 @@ import TopBar, {
 	TopBarMenuLink,
 } from '../../components/TopBar';
 
-import {TOOLTIP_DELAY} from '../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const AppMain = styled('div')`
 	display: flex;
 	flex-direction: column;
 	padding: 3rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 1rem;
+
+		.__react_component_tooltip {
+			display: none;
+		}
+	}
 `;
 
 const withHeader = Component => (...args) => (

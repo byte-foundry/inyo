@@ -30,7 +30,7 @@ import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
-import {TOOLTIP_DELAY} from '../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -38,10 +38,20 @@ const Aside = styled('aside')`
 	align-items: stretch;
 	width: 270px;
 	padding-left: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding-left: 0;
+		margin-top: 2rem;
+		width: 100%;
+	}
 `;
 
 const SubSection = styled('div')`
 	margin-bottom: 2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 const ClientPreviewIcon = styled(EyeIcon)`

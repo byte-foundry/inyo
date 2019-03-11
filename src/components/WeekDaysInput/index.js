@@ -2,13 +2,19 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import {primaryBlue, primaryWhite} from '../../utils/content';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const DayInputContainer = styled('div')`
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-between;
 	margin: 20px 0 20px 14px;
-	font-size: 13px;
+	font-size: 0.85rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 0.6rem;
+		margin: 20px 0;
+	}
 `;
 
 const DayInput = styled('div')`
@@ -16,12 +22,17 @@ const DayInput = styled('div')`
 	background: ${props => (props.active ? primaryBlue : 'transparent')};
 	color: ${props => (props.active ? primaryWhite : primaryBlue)};
 	border-radius: 50%;
-	width: 50px;
-	height: 50px;
+	width: 4.5rem;
+	height: 4.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border: solid 1px ${primaryBlue};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: 2.5rem;
+		height: 2.5rem;
+	}
 `;
 
 const workingDaysNames = [

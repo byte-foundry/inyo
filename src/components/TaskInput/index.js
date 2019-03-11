@@ -9,7 +9,7 @@ import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
 import CustomerModal from '../CustomerModal';
 
-import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
+import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 import {
 	Button,
 	TaskInputDropdown,
@@ -44,14 +44,34 @@ const InputButtonContainer = styled('div')`
 	flex-flow: column nowrap;
 	right: calc(-100% + 10px);
 	top: -13px;
-	width: 165px;
+	width: 166px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: row;
+		width: calc(100vh - 20rem);
+		top: 1.5rem;
+		right: 0;
+		display: flex;
+		flex-direction: row-reverse;
+	}
 
 	button {
 		background: rgba(255, 255, 255, 0.5);
+
+		@media (max-width: ${BREAKPOINTS}px) {
+			flex: 1;
+			margin: 0;
+			color: ${primaryPurple};
+			border-color: ${primaryPurple};
+		}
 	}
 
 	& ${Button}:first-of-type {
 		margin-bottom: 0.75rem;
+
+		@media (max-width: ${BREAKPOINTS}px) {
+			margin: 0;
+		}
 	}
 `;
 
@@ -271,7 +291,7 @@ const TaskInput = ({
 							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>
-				{value && (
+				{focus && (
 					<InputButtonWrapper>
 						<ReactTooltip
 							effect="solid"

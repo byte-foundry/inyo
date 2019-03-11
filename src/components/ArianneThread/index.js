@@ -12,10 +12,15 @@ import {
 	primaryRed,
 } from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const ArianneContainer = styled('div')`
 	display: flex;
 	margin-bottom: 60px;
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+		margin-bottom: 1rem;
+	}
 `;
 
 const ArianneElemMain = styled('div')`
@@ -38,6 +43,10 @@ const ArianneElemMain = styled('div')`
 			border-radius: 8px;
 			z-index: -1;
 		}
+	}
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex: 1;
+		margin: 0.25rem 0;
 	}
 `;
 
@@ -133,6 +142,7 @@ export function ArianneElem({
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
+				noOptionsMessage={() => 'Aucune option'}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -142,8 +152,10 @@ export function ArianneElem({
 function ArianneThread({
 	selectCustomer,
 	selectProjects,
+	selectFilter,
 	linkedCustomerId,
 	projectId,
+	filterId = 'PENDING',
 }) {
 	const {
 		data: {
@@ -162,6 +174,12 @@ function ArianneThread({
 		project => !linkedCustomerId
 			|| (project.customer && project.customer.id === linkedCustomerId),
 	);
+
+	const filters = [
+		{id: 'PENDING', name: 'Tâches à faire'},
+		{id: 'FINISHED', name: 'Tâches faites'},
+		{id: 'ALL', name: 'Toutes les tâches'},
+	];
 
 	if (errorsProject) throw errorsProject;
 	if (errorsCustomers) throw errorsCustomers;
@@ -184,8 +202,15 @@ function ArianneThread({
 				isClearable
 				selectedId={projectId}
 			>
-				Projets
+				Tous les projets
 			</ArianneElem>
+			<ArianneElem
+				id="filter"
+				list={filters}
+				onChange={selectFilter}
+				selectedId={filterId}
+				placeholder={'Toutes les tâches'}
+			/>
 		</ArianneContainer>
 	);
 }

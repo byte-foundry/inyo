@@ -34,7 +34,7 @@ import {
 	DateInputContainer,
 	HR,
 } from '../../utils/new/design-system';
-import {ITEM_TYPES, TOOLTIP_DELAY} from '../../utils/constants';
+import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled('div')``;
 
@@ -45,6 +45,12 @@ const Metas = styled('div')`
 	color: ${gray50};
 	padding-bottom: 2rem;
 	font-size: 14px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem 0;
+	}
 `;
 
 const Meta = styled('div')`
@@ -54,10 +60,18 @@ const Meta = styled('div')`
 	svg {
 		margin-right: 15px;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 0;
+	}
 `;
 
 const MetaLabel = styled('div')`
 	margin-right: 1rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const MetaText = styled('span')`
@@ -67,6 +81,11 @@ const MetaText = styled('span')`
 
 	:empty::before {
 		content: '\\2014';
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+		flex: 1 auto 100%;
 	}
 `;
 
@@ -111,6 +130,15 @@ const Description = styled('div')`
 	textarea {
 		min-height: 5rem;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: -2rem;
+		margin-right: -2rem;
+
+		div {
+			padding: 1rem 2rem !important;
+		}
+	}
 `;
 
 const StickyHeader = styled('div')`
@@ -122,6 +150,11 @@ const StickyHeader = styled('div')`
 	justify-content: center;
 	padding: 1rem;
 	z-index: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: -2rem;
+		margin-right: -2rem;
+	}
 `;
 
 const Title = styled(TaskHeading)`
@@ -494,6 +527,7 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Commentaires</SubHeading>
 			<CommentList itemId={item.id} customerToken={customerToken} />
+			<HR />
 			{!customerToken
 				&& (deletingItem ? (
 					<>
@@ -512,7 +546,6 @@ const Item = ({id, customerToken, close}) => {
 					</>
 				) : (
 					<>
-						<HR />
 						<Button red onClick={() => setDeletingItem(true)}>
 							Supprimer la tâche
 						</Button>

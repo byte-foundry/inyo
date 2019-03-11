@@ -4,6 +4,7 @@ import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
 import {gray20, gray30} from '../content';
+import {BREAKPOINTS} from '../constants';
 
 export const primaryPurple = '#5020ee';
 export const mediumPurple = '#8f76e0';
@@ -164,6 +165,11 @@ export const TaskHeading = styled('h2')`
 	font-weight: 400;
 	flex: 1 0
 		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 168px)')};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 14px;
+		margin: 0;
+	}
 `;
 
 export const SubHeading = styled('div')`
@@ -355,6 +361,12 @@ export const TaskInputDropdown = styled('div')`
 	width: 500px;
 	top: calc(100% + 15px);
 	left: 55px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		left: -1rem;
+		width: calc(100% + 2rem);
+		box-shadow: 0 0 20rem ${primaryBlack};
+	}
 `;
 
 export const TaskInputDropdownHeader = styled('p')`

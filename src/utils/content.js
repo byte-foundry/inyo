@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
 import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
+import {BREAKPOINTS} from './constants';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -353,20 +354,28 @@ export const ToggleButton = styled('span')`
 	transition: color 0.2s ease, border-color 0.2s ease;
 `;
 
-export function ModalContainer({size, ...props}) {
-	const style = {
-		width: '50vw',
-		minWidth: '500px',
-	};
+const ResponsiveDialog = styled(Dialog)`
+	width: ${(props) => {
+		if (props.size === 'small') {
+			return '35vw';
+		}
+		if (props.size === 'large') {
+			return '75vw';
+		}
+		return '50vw';
+	}};
+	min-width: 500px;
 
-	if (size === 'small') {
-		style.width = '35vw';
+	@media (max-width: ${BREAKPOINTS}px) {
+		min-width: initial;
+		width: 100vw;
+		padding: 0;
+		margin-top: 13vh;
 	}
-	else if (size === 'large') {
-		style.width = '75vw';
-	}
+`;
 
-	return <Dialog {...props} style={style} />;
+export function ModalContainer({...props}) {
+	return <ResponsiveDialog {...props} />;
 }
 
 export const ModalElem = styled('div')`

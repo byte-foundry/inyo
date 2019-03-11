@@ -44,7 +44,7 @@ const InputButtonContainer = styled('div')`
 	flex-flow: column nowrap;
 	right: calc(-100% + 10px);
 	top: -13px;
-	width: 165px;
+	width: 166px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: row;
@@ -291,7 +291,7 @@ const TaskInput = ({
 							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>
-				{value && (
+				{focus && (
 					<InputButtonWrapper>
 						<ReactTooltip
 							effect="solid"

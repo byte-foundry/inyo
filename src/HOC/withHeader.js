@@ -1,9 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
+
+import TopBar, {
+	TopBarMenu,
+	TopBarLogo,
+	TopBarMenuLink,
+} from '../components/TopBar';
 
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<TopBarLogo />
 			<TopBarMenu>
 				<TopBarMenuLink
@@ -26,3 +31,5 @@ const withHeader = Component => (...args) => (
 		<Component {...args} />
 	</>
 );
+
+export default withHeader;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import CustomerTasks from '../../containers/App/CustomerTasks/tasks';
+import CustomerTasks from '../../screens/Customer/Tasks/tasks';
 
 const Container = styled('div')`
 	padding: 3rem;

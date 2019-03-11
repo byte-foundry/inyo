@@ -9,51 +9,34 @@ import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
 import Account from './Account';
 import Tasks from './Tasks';
-import CustomerTasks from './CustomerTasks';
+import CustomerTasks from '../Customer/Tasks';
 import ConditionalContent from './ConditionalContent';
 import ProjectCustomerView from './Project/project-customer-view';
-import TopBar, {
-	TopBarMenu,
-	TopBarLogo,
-	TopBarMenuLink,
-} from '../../components/TopBar';
+
+import withHeader from '../../HOC/withHeader';
 
 import {CHECK_LOGIN_USER} from '../../utils/queries';
-import {INTERCOM_APP_ID, TOOLTIP_DELAY} from '../../utils/constants';
+import {
+	INTERCOM_APP_ID,
+	TOOLTIP_DELAY,
+	BREAKPOINTS,
+} from '../../utils/constants';
 
 const AppMain = styled('div')`
 	display: flex;
 	flex-direction: column;
 	padding: 3rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 1rem;
+
+		.__react_component_tooltip {
+			display: none;
+		}
+	}
 `;
 
 const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
-
-const withHeader = Component => (...args) => (
-	<>
-		<TopBar>
-			<TopBarLogo />
-			<TopBarMenu>
-				<TopBarMenuLink
-					data-tip="Tâches prioritaires"
-					to="/app/dashboard"
-				>
-					Dashboard
-				</TopBarMenuLink>
-				<TopBarMenuLink data-tip="Toutes les tâches" to="/app/tasks">
-					Tâches
-				</TopBarMenuLink>
-				<TopBarMenuLink
-					data-tip="Profil, jours travaillés, etc."
-					to="/app/account"
-				>
-					Réglages
-				</TopBarMenuLink>
-			</TopBarMenu>
-		</TopBar>
-		<Component {...args} />
-	</>
-);
 
 function App() {
 	const [setupDone, setSetupDone] = useState(false);

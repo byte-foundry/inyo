@@ -126,6 +126,10 @@ function Root() {
 				<main>
 					<UserContext.Provider user={data && data.me}>
 						<Switch>
+							<Route
+								path="/app/:customerToken(.{8}-.{4}-.{4}-.{4}-.{12})"
+								component={withTracker(Customer)}
+							/>
 							<ProtectedRoute
 								path="/app"
 								component={withTracker(App)}
@@ -135,10 +139,6 @@ function Root() {
 								path="/auth"
 								component={withTracker(Auth)}
 								isAllowed={!(data && data.me)}
-							/>
-							<Route
-								path="/app/:customerToken"
-								component={withTracker(Customer)}
 							/>
 							<ProtectedRedirect
 								to="/app"

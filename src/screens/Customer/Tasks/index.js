@@ -6,16 +6,40 @@ import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
 import CustomerTasks from './tasks';
 
+import TopBar, {
+	TopBarMenu,
+	TopBarLogo,
+	TopBarMenuLink,
+} from '../../../components/TopBar';
+
 const Container = styled('div')`
 	min-height: 100vh;
+	padding: 3rem;
 `;
 
-const Tasks = ({match}) => {
+const Tasks = ({location, match}) => {
 	const {customerToken} = match.params;
+	const {prevSearch} = location.state || {};
+	const query = new URLSearchParams(prevSearch || location.search);
+	const projectId = query.get('projectId');
 
 	return (
 		<Container>
-			<CustomerTasks customerToken={customerToken} />
+			<TopBar>
+				<TopBarLogo />
+				<TopBarMenu>
+					<TopBarMenuLink
+						data-tip="Toutes les tâches"
+						to={`/app/${customerToken}/tasks`}
+					>
+						Tâches
+					</TopBarMenuLink>
+				</TopBarMenu>
+			</TopBar>
+			<CustomerTasks
+				customerToken={customerToken}
+				projectId={projectId}
+			/>
 
 			<Route
 				path="/app/:customerToken/tasks/:taskId"

@@ -13,7 +13,7 @@ import SignUpForm from '../../components/SignupForm';
 import SendResetPasswordForm from '../../components/SendResetPasswordForm';
 import ResetPasswordForm from '../../components/ResetPasswordForm';
 
-import {ReactComponent as AppLogo} from '../appLogo.svg';
+import {ReactComponent as AppLogo} from '../../utils/icons/appLogo.svg';
 import AuthIllus from './illustration-inyo.gif';
 
 const AuthMain = styled('div')`

@@ -6,7 +6,7 @@ import {
 	FlexRow, P, Button, gray70, gray10,
 } from '../utils/content';
 import thumbDownIcon from '../utils/icons/thumbDown.svg';
-import {ReactComponent as AppLogo} from '../screens/App/appLogo.svg';
+import {ReactComponent as AppLogo} from '../utils/icons/appLogo.svg';
 
 const ReporterMain = styled('div')`
 	padding: 20px 40px;

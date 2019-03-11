@@ -4,7 +4,6 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
-import ReactTooltip from 'react-tooltip';
 
 import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
@@ -33,7 +32,6 @@ const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props}
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<TopBarLogo />
 			<TopBarMenu>
 				<TopBarMenuLink

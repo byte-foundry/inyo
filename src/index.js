@@ -1,4 +1,4 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense, useState, useContext} from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import styled from '@emotion/styled';
@@ -18,22 +18,26 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import 'moment/locale/fr';
 import * as Sentry from '@sentry/browser';
-
-import './index.css';
+import ReactTooltip from 'react-tooltip';
 
 import withTracker from './HOC/withTracker';
 
+import ProvidersSentry from './providers/sentry';
+
 import App from './screens/App';
 import Auth from './screens/Auth';
-import SentryReporter from './providers/SentryReporter';
+import Customer from './screens/Customer';
 
+import {UserContext} from './utils/contexts';
 import {Loading} from './utils/content';
 import client from './utils/graphQLConfig';
-import {INTERCOM_APP_ID} from './utils/constants';
+import {INTERCOM_APP_ID, TOOLTIP_DELAY} from './utils/constants';
 import {CHECK_LOGIN_USER} from './utils/queries';
 import {Body} from './utils/new/design-system';
 
 import * as serviceWorker from './serviceWorker';
+
+import './index.css';
 
 // Setting up locale mostly for react-dates
 moment.locale((navigator && navigator.language) || 'fr-FR');
@@ -117,32 +121,35 @@ function Root() {
 	}
 
 	return (
-		<SentryReporter>
+		<ProvidersSentry>
 			<BodyMain>
 				<main>
-					<Switch>
-						<ProtectedRoute
-							path="/app"
-							component={withTracker(App)}
-							isAllowed={data && data.me}
-						/>
-						<ProtectedRoute
-							path="/auth"
-							component={withTracker(Auth)}
-							isAllowed={!(data && data.me)}
-						/>
-						<Route
-							path="/app/:customerToken"
-							component={withTracker(Customer)}
-						/>
-						<ProtectedRedirect
-							to="/app"
-							isAllowed={data && data.me}
-						/>
-					</Switch>
+					<UserContext.Provider user={data && data.me}>
+						<Switch>
+							<ProtectedRoute
+								path="/app"
+								component={withTracker(App)}
+								isAllowed={data && data.me}
+							/>
+							<ProtectedRoute
+								path="/auth"
+								component={withTracker(Auth)}
+								isAllowed={!(data && data.me)}
+							/>
+							<Route
+								path="/app/:customerToken"
+								component={withTracker(Customer)}
+							/>
+							<ProtectedRedirect
+								to="/app"
+								isAllowed={data && data.me}
+							/>
+						</Switch>
+					</UserContext.Provider>
 				</main>
+				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</BodyMain>
-		</SentryReporter>
+		</ProvidersSentry>
 	);
 }
 

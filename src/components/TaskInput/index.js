@@ -19,7 +19,7 @@ import {
 	lightPurple,
 	primaryGrey,
 	lightGrey,
-	mediumGrey,
+	accentGrey,
 } from '../../utils/new/design-system';
 
 const Container = styled('div')`
@@ -101,13 +101,12 @@ const Input = styled('input')`
 	display: flex;
 	flex: 1;
 	background-color: ${lightGrey};
-	border: 1px solid ${mediumPurple};
 	border-radius: 2rem;
 	padding: 1rem 1.2rem 1rem 5rem;
 	margin-left: -3rem;
 	color: ${primaryPurple};
 	font-size: 1.2rem;
-	border: 1px solid ${mediumGrey};
+	border: 1px solid ${accentGrey};
 	transition: all 400ms ease;
 
 	&:hover {

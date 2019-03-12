@@ -10,7 +10,7 @@ import Plural from '../Plural';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {TOOLTIP_DELAY} from '../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -18,6 +18,10 @@ const Aside = styled('aside')`
 	align-items: stretch;
 	width: 270px;
 	padding-left: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding-left: 0;
+	}
 `;
 
 const SubSection = styled('div')`

@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import ReactTooltip from 'react-tooltip';
 
 import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
-import {TOOLTIP_DELAY} from '../../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
 import TasksList from '../../../components/TasksList';
 import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
@@ -13,6 +13,10 @@ const Container = styled('div')`
 	display: flex;
 	justify-content: center;
 	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const TaskAndArianne = styled('div')`

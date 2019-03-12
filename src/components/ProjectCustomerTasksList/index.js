@@ -10,7 +10,7 @@ import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';
 import InlineEditable from '../InlineEditable';
 
 const TasksListContainer = styled(LayoutMainElem)`
-	margin-top: 3rem;
+	margin-top: 0;
 `;
 
 const SectionTitle = styled(InlineEditable)`
@@ -21,6 +21,11 @@ const SectionTitle = styled(InlineEditable)`
 	cursor: text;
 	position: relative;
 	padding: 0.5rem 0;
+	display: block;
+
+	&:first-child {
+		margin-top: 0;
+	}
 `;
 
 const placeholderCss = css`

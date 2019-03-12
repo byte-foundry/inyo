@@ -176,7 +176,7 @@ export const SubHeading = styled('div')`
 	text-transform: uppercase;
 	font-size: 12px;
 	letter-spacing: 0.5px;
-	color: ${accentGrey};
+	color: ${primaryGrey};
 `;
 
 export const P = styled('p')`

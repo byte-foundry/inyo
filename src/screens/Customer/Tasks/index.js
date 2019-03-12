@@ -36,10 +36,7 @@ const Tasks = ({location, match}) => {
 					</TopBarMenuLink>
 				</TopBarMenu>
 			</TopBar>
-			<CustomerTasks
-				customerToken={customerToken}
-				projectId={projectId}
-			/>
+			<CustomerTasks projectId={projectId} />
 
 			<Route
 				path="/app/:customerToken/tasks/:taskId"

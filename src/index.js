@@ -91,8 +91,8 @@ if (query.has('dimension')) {
 	ReactGA.set({dimension1: query.get('dimension')});
 }
 
-const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : <Redirect to="/auth" />);
-const ProtectedRedirect = ({isAllowed, ...props}) => (isAllowed ? <Redirect {...props} /> : <Redirect to="/auth" />);
+const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : false);
+const ProtectedRedirect = ({isAllowed, ...props}) => (isAllowed ? <Redirect {...props} /> : false);
 
 function Root() {
 	const [setupDone, setSetupDone] = useState(false);
@@ -126,10 +126,6 @@ function Root() {
 				<main>
 					<UserContext.Provider user={data && data.me}>
 						<Switch>
-							<Route
-								path="/app/:customerToken(.{8}-.{4}-.{4}-.{4}-.{12})"
-								component={withTracker(Customer)}
-							/>
 							<ProtectedRoute
 								path="/app"
 								component={withTracker(App)}
@@ -139,6 +135,10 @@ function Root() {
 								path="/auth"
 								component={withTracker(Auth)}
 								isAllowed={!(data && data.me)}
+							/>
+							<Route
+								path="/app/:customerToken"
+								component={withTracker(Customer)}
 							/>
 							<ProtectedRedirect
 								to="/app"

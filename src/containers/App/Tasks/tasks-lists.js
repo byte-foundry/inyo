@@ -205,7 +205,6 @@ function TasksList({location, history}) {
 					</ModalElem>
 				</ModalContainer>
 			)}
-			)}
 		</Container>
 	);
 }

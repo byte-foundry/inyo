@@ -365,6 +365,7 @@ const ResponsiveDialog = styled(Dialog)`
 		return '50vw';
 	}};
 	min-width: 500px;
+	position: relative;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		min-width: initial;
@@ -375,8 +376,18 @@ const ResponsiveDialog = styled(Dialog)`
 `;
 
 export function ModalContainer({...props}) {
-	return <ResponsiveDialog {...props} />;
+	return (
+		<ResponsiveDialog {...props}>
+			<ModalCloseIcon onClick={props.onDismiss}>×</ModalCloseIcon>
+			{props.children}
+		</ResponsiveDialog>
+	);
 }
+
+export const ModalActions = styled('div')`
+	display: flex;
+	justify-content: flex-end;
+`;
 
 export const ModalElem = styled('div')`
 	position: relative;
@@ -385,24 +396,12 @@ export const ModalElem = styled('div')`
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 40px;
-	height: 40px;
+	color: #ff3366;
+	font-size: 2rem;
+	position: absolute;
+	top: -3rem;
+	right: -3rem;
 	cursor: pointer;
-	transition: all 0.3s ease;
-	.cls-1,
-	.cls-2 {
-		transition: all 0.3s ease;
-	}
-	&:hover {
-		.cls-1 {
-			stroke: ${primaryNavyBlue};
-		}
-		.cls-2 {
-			stroke: ${primaryBlue};
-		}
-	}
 `;
 
 export const ModalRow = styled('div')`

@@ -174,7 +174,7 @@ const Icon = styled('div')`
 
 const TaskInfosInputsContainer = styled('div')`
 	position: absolute;
-	top: 54px;
+	top: 61px;
 	left: 57px;
 `;
 
@@ -308,7 +308,7 @@ const TaskInput = ({
 									setMoreInfosMode(false);
 								}
 							}
-							else if (e.key === 'Tab' && value.length > 0) {
+							else if (e.key === 'Tab') {
 								if (!type || type === 'DEFAULT') {
 									setMoreInfosMode(true);
 								}

@@ -161,9 +161,14 @@ const DraggableTask = ({task, index, ...rest}) => (
 
 const DroppableTaskArea = ({children, section}) => (
 	<Droppable droppableId={section.id} type="ITEM" direction="vertical">
-		{provided => (
-			<div style={{minHeight: '50px'}} ref={provided.innerRef}>
+		{(provided, snapshot) => (
+			<div
+				style={{minHeight: '50px'}}
+				ref={provided.innerRef}
+				{...provided.droppableProps}
+			>
 				{children}
+				{snapshot.draggingFromThisWith && provided.placeholder}
 			</div>
 		)}
 	</Droppable>
@@ -171,7 +176,16 @@ const DroppableTaskArea = ({children, section}) => (
 
 const DroppableSectionArea = ({children}) => (
 	<Droppable droppableId="sections" type="SECTION" direction="vertical">
-		{provided => <div ref={provided.innerRef}>{children}</div>}
+		{provided => (
+			<div
+				style={{minHeight: '50px'}}
+				ref={provided.innerRef}
+				{...provided.droppableProps}
+			>
+				{children}
+				{provided.placeholder}
+			</div>
+		)}
 	</Droppable>
 );
 
@@ -325,14 +339,19 @@ function ProjectTasksList({items, projectId, sectionId}) {
 									query: GET_ALL_TASKS,
 								});
 								const itemsToUpdate = [updateItem];
+								const oldItemsToUpdate = [];
 								const section = sections.find(
 									section => section.id === destination.droppableId,
+								);
+								const oldSection = sections.find(
+									section => section.id === source.droppableId,
 								);
 
 								if (
 									source.droppableId
 									=== destination.droppableId
 								) {
+									// task is drag and drop in the same section
 									if (
 										section.items.find(
 											item => updateItem.id === item.id,
@@ -377,21 +396,9 @@ function ProjectTasksList({items, projectId, sectionId}) {
 										});
 									}
 								}
-								else if (
-									section.items.find(
-										item => updateItem.id === item.id,
-									).position !== destination.index
-								) {
+								else {
 									section.items.forEach((item) => {
 										if (
-											item.position <= destination.index
-										) {
-											itemsToUpdate.push({
-												...item,
-												position: item.position - 1,
-											});
-										}
-										else if (
 											item.position >= destination.index
 										) {
 											itemsToUpdate.push({
@@ -399,6 +406,40 @@ function ProjectTasksList({items, projectId, sectionId}) {
 												position: item.position + 1,
 											});
 										}
+									});
+
+									oldSection.items.forEach((item) => {
+										if (item.position >= source.index) {
+											oldItemsToUpdate.push({
+												...item,
+												position: item.position - 1,
+											});
+										}
+									});
+
+									oldSection.items.splice(source.index, 1);
+
+									const sectionForItem = {
+										...section,
+										items: undefined,
+									};
+
+									const oldSectionForItem = {
+										...oldSection,
+										items: undefined,
+									};
+
+									oldItemsToUpdate.forEach((itemUpdated) => {
+										const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
+											task => itemUpdated.id === task.id,
+										);
+
+										dataToUpdate.me.tasks[
+											indexTaskToUpdate
+										].position = itemUpdated.position;
+										dataToUpdate.me.tasks[
+											indexTaskToUpdate
+										].section = oldSectionForItem;
 									});
 
 									itemsToUpdate.forEach((itemUpdated) => {
@@ -411,7 +452,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 										].position = itemUpdated.position;
 										dataToUpdate.me.tasks[
 											indexTaskToUpdate
-										].section = section;
+										].section = sectionForItem;
 									});
 
 									cache.writeQuery({

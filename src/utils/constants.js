@@ -96,6 +96,7 @@ export const ITEM_TYPES = [
 	{
 		icon: <ContentAcquisitionIcon />,
 		iconUrl: ContentAcquisitionIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',
 		name: 'Récupération contenu',
 		description: 'Lister et récupérer les contenus nécessaires',

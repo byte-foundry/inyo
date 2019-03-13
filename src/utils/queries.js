@@ -147,6 +147,7 @@ export const GET_PROJECT_INFOS = gql`
 					id
 					status
 					unit
+					timeItTook
 				}
 			}
 			issuer {

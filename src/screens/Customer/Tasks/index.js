@@ -19,7 +19,7 @@ const Container = styled('div')`
 
 const Tasks = ({location, match}) => {
 	const {customerToken} = match.params;
-	const {prevSearch} = location.state || {};
+	const {prevSearch} = location.state || {prevSearch: location.search};
 	const query = new URLSearchParams(prevSearch || location.search);
 	const projectId = query.get('projectId');
 
@@ -50,6 +50,7 @@ const Tasks = ({location, match}) => {
 					<Modal
 						onDismiss={() => history.push(
 							`/app/${customerToken}/tasks${state.prevSearch
+									|| prevSearch
 									|| ''}`,
 						)
 						}

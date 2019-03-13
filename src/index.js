@@ -127,7 +127,7 @@ function Root() {
 					<UserContext.Provider user={data && data.me}>
 						<Switch>
 							<Route
-								path="/app/:customerToken(.*-.*-.*-.*)"
+								path="/app/:customerToken(.*-.*-.*-.*)/tasks"
 								component={withTracker(Customer)}
 							/>
 							<ProtectedRoute

@@ -89,6 +89,10 @@ const UnitInputForm = styled('form')`
 	flex-flow: row nowrap;
 `;
 
+let outsideClosureState;
+// This is necessary becuse useOnClickOutside
+// does not update the handler when state changes
+
 export default function ({
 	unit,
 	onBlur,
@@ -102,12 +106,16 @@ export default function ({
 	const inputRef = innerRef || useRef();
 	const containerRef = useRef(null);
 
+	outsideClosureState = isHours;
+
 	useEffect(() => {
 		inputRef.current.focus();
 	});
 
 	useOnClickOutside(containerRef, () => {
-		onBlur(parseFloat(inputRef.current.value));
+		const valueFloat = parseFloat(inputRef.current.value);
+
+		onBlur(outsideClosureState ? valueFloat / 8 : valueFloat);
 	});
 
 	return (
@@ -143,6 +151,7 @@ export default function ({
 							type="number"
 							ref={inputRef}
 							step="any"
+							isHours={isHours}
 							onChange={e => setFieldValue('unit', e.target.value)
 							}
 							onKeyDown={(e) => {

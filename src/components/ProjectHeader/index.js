@@ -7,6 +7,7 @@ import {
 	accentGrey,
 	lightGrey,
 	primaryPurple,
+	primaryGrey,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
@@ -19,7 +20,7 @@ const ProjectHeaderContainer = styled('div')`
 `;
 
 const ProjectHeading = styled(InlineEditable)`
-	color: ${accentGrey};
+	color: ${primaryGrey};
 	font-size: 32px;
 `;
 

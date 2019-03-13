@@ -164,7 +164,7 @@ const Title = styled(TaskHeading)`
 
 	span {
 		border: 1px solid transparent;
-		padding: 15px 18px 16px;
+		padding: 12px 18px 13px;
 		width: 100%;
 	}
 `;

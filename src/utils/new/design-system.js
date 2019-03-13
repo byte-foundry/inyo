@@ -158,6 +158,11 @@ export const ProjectHeading = styled('div')`
 	font-size: 32px;
 `;
 
+export const Heading = styled('h1')`
+	color: ${primaryPurple};
+	font-size: 32px;
+`;
+
 export const TaskHeading = styled('h2')`
 	color: ${primaryGrey};
 	font-size: 18px;
@@ -176,7 +181,7 @@ export const SubHeading = styled('div')`
 	text-transform: uppercase;
 	font-size: 12px;
 	letter-spacing: 0.5px;
-	color: ${accentGrey};
+	color: ${primaryGrey};
 `;
 
 export const P = styled('p')`

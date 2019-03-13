@@ -17,7 +17,9 @@ import {
 	primaryPurple,
 	mediumPurple,
 	lightPurple,
+	primaryGrey,
 	lightGrey,
+	accentGrey,
 } from '../../utils/new/design-system';
 
 const Container = styled('div')`
@@ -29,7 +31,14 @@ const InputContainer = styled('div')`
 	display: flex;
 	align-items: center;
 	padding-left: 0.3rem;
-	margin-left: -7px;
+	margin-left: -10px;
+	position: relative;
+	width: calc(100% + 25px);
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: 0;
+		width: calc(100% + 3px);
+	}
 `;
 
 const TaskInfosContainer = styled('div')``;
@@ -42,14 +51,14 @@ const InputButtonContainer = styled('div')`
 	position: absolute;
 	display: flex;
 	flex-flow: column nowrap;
-	right: calc(-100% + 10px);
+	right: calc(-100% + 1rem);
 	top: -13px;
 	width: 166px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: row;
 		width: calc(100vh - 20rem);
-		top: 1.5rem;
+		top: 2.5rem;
 		right: 0;
 		display: flex;
 		flex-direction: row-reverse;
@@ -58,16 +67,31 @@ const InputButtonContainer = styled('div')`
 	button {
 		background: rgba(255, 255, 255, 0.5);
 
+		&:after {
+			content: 'ou';
+			color: ${primaryGrey};
+			position: absolute;
+			left: -1.2rem;
+		}
+
 		@media (max-width: ${BREAKPOINTS}px) {
 			flex: 1;
 			margin: 0;
 			color: ${primaryPurple};
 			border-color: ${primaryPurple};
+
+			&:after {
+				display: none;
+			}
 		}
 	}
 
 	& ${Button}:first-of-type {
-		margin-bottom: 0.75rem;
+		margin-bottom: 2rem;
+
+		&:after {
+			display: none;
+		}
 
 		@media (max-width: ${BREAKPOINTS}px) {
 			margin: 0;
@@ -76,36 +100,45 @@ const InputButtonContainer = styled('div')`
 `;
 
 const Input = styled('input')`
+	display: flex;
 	flex: 1;
-	background-color: ${lightPurple};
-	border: none;
-	border-radius: 20px;
-	padding: 0.5rem 1.2rem 0.5rem 4rem;
-	margin-left: -2.2rem;
+	background-color: ${lightGrey};
+	border-radius: 2rem;
+	padding: 1rem 1.2rem 1rem 5rem;
+	margin-left: -3rem;
 	color: ${primaryPurple};
-	font-size: 18px;
-	border: 1px solid transparent;
+	font-size: 1.2rem;
+	border: 1px solid ${accentGrey};
 	transition: all 400ms ease;
 
 	&:hover {
-		background-color: ${lightGrey};
+		background-color: ${lightPurple};
 		animation: all 400ms ease;
 	}
 
 	&::placeholder {
 		color: ${mediumPurple};
 		font-size: 14px;
+		align-items: center;
 		font-style: italic;
 		font-family: 'Work Sans', sans-serif;
 	}
 
 	&:focus {
+		appearance: none;
 		outline: none;
 		outline: 0;
 		box-shadow: none;
 		background: #fff;
-		border: 1px solid ${lightPurple};
+		border: 1px solid ${mediumPurple};
 		transition: all 400ms ease;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1rem;
+		margin-left: -2rem;
+		padding: 0.5rem 1.2rem 0.5rem 5rem;
+		padding-left: 3rem;
 	}
 `;
 
@@ -117,25 +150,31 @@ const Icon = styled('div')`
 	color: #fff;
 	border: 2px solid transparent;
 	border-radius: 50%;
-	width: 26px;
-	height: 26px;
-	font-size: 24px;
+	width: 2rem;
+	height: 2rem;
+	font-size: 2rem;
 	z-index: 0;
 	transition: all 400ms ease;
 	cursor: pointer;
 
 	&:hover {
-		border: 2px solid
+		border: 2px dashed
 			${props => (props.active ? 'transparent' : primaryPurple)};
-		color: primaryPurple;
+		color: ${primaryPurple};
 		background-color: #fff;
 		transition: all 400ms ease;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: 1rem;
+		height: 1rem;
+		font-size: 1rem;
 	}
 `;
 
 const TaskInfosInputsContainer = styled('div')`
 	position: absolute;
-	top: 54px;
+	top: 61px;
 	left: 57px;
 `;
 
@@ -269,7 +308,7 @@ const TaskInput = ({
 									setMoreInfosMode(false);
 								}
 							}
-							else if (e.key === 'Tab' && value.length > 0) {
+							else if (e.key === 'Tab') {
 								if (!type || type === 'DEFAULT') {
 									setMoreInfosMode(true);
 								}
@@ -291,7 +330,7 @@ const TaskInput = ({
 							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>
-				{focus && (
+				{(focus || value) && (
 					<InputButtonWrapper>
 						<ReactTooltip
 							effect="solid"

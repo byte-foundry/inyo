@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import ReactTooltip from 'react-tooltip';
 
 import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
-import {TOOLTIP_DELAY} from '../../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
+import {CustomerContext} from '../../../utils/contexts';
+
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
 import TasksList from '../../../components/TasksList';
 import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
@@ -13,6 +15,10 @@ const Container = styled('div')`
 	display: flex;
 	justify-content: center;
 	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const TaskAndArianne = styled('div')`
@@ -20,9 +26,8 @@ const TaskAndArianne = styled('div')`
 	max-width: 980px;
 `;
 
-const CustomerTasks = ({
-	css, style, customerToken, projectId,
-}) => {
+const CustomerTasks = ({css, style, projectId}) => {
+	const customerToken = useContext(CustomerContext);
 	const token = customerToken === 'preview' ? undefined : customerToken;
 
 	const {data, error} = useQuery(GET_CUSTOMER_TASKS, {
@@ -43,7 +48,6 @@ const CustomerTasks = ({
 			<Container css={css} style={style}>
 				<TaskAndArianne>
 					<ProjectCustomerTasksList
-						customerToken={token}
 						projectId={projectId}
 						items={tasks.filter(
 							item => item.section
@@ -51,10 +55,7 @@ const CustomerTasks = ({
 						)}
 					/>
 				</TaskAndArianne>
-				<SidebarCustomerProjectInfos
-					projectId={projectId}
-					customerToken={token}
-				/>
+				<SidebarCustomerProjectInfos projectId={projectId} />
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</Container>
 		);

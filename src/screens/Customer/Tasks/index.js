@@ -19,28 +19,9 @@ const Container = styled('div')`
 
 const Tasks = ({location, match}) => {
 	const {customerToken} = match.params;
-	const {prevSearch} = location.state || {};
+	const {prevSearch} = location.state || {prevSearch: location.search};
 	const query = new URLSearchParams(prevSearch || location.search);
 	const projectId = query.get('projectId');
-
-	// const setProjectSelected = (selected, removeCustomer) => {
-	// 	const newQuery = new URLSearchParams(query);
-
-	// 	if (selected) {
-	// 		const {value: selectedProjectId} = selected;
-
-	// 		newQuery.set('projectId', selectedProjectId);
-	// 	}
-	// 	else if (newQuery.has('projectId')) {
-	// 		newQuery.delete('projectId');
-	// 	}
-
-	// 	if (removeCustomer) {
-	// 		newQuery.delete('customerId');
-	// 	}
-
-	// 	history.push(`/app/tasks?${newQuery.toString()}`);
-	// };
 
 	return (
 		<Container>
@@ -55,10 +36,8 @@ const Tasks = ({location, match}) => {
 					</TopBarMenuLink>
 				</TopBarMenu>
 			</TopBar>
-			<CustomerTasks
-				customerToken={customerToken}
-				projectId={projectId}
-			/>
+			<CustomerTasks projectId={projectId} />
+
 			<Route
 				path="/app/:customerToken/tasks/:taskId"
 				render={({
@@ -71,6 +50,7 @@ const Tasks = ({location, match}) => {
 					<Modal
 						onDismiss={() => history.push(
 							`/app/${customerToken}/tasks${state.prevSearch
+									|| prevSearch
 									|| ''}`,
 						)
 						}

@@ -7,6 +7,7 @@ import {
 	primaryGrey,
 	mediumGrey,
 	accentGrey,
+	primaryBlack,
 } from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
@@ -29,7 +30,7 @@ const ContactInfo = styled(P)`
 const CompanyName = styled(H4)`
 	font-size: 16px;
 	font-weight: 500;
-	color: ${primaryGrey};
+	color: ${primaryBlack};
 
 	& + ${ContactName} {
 		margin-bottom: 0;

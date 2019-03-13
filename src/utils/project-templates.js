@@ -18,7 +18,7 @@ export const templates = [
 							'Demander à vos anciens clients de vous recommander',
 						unit: 0.5,
 						description:
-							"Si vous ne l'avez pas encore fait, c'est le moment de contacter vos clients précédents pour que ceux-ci recommande vos compétences sur Linkedin et sur votre expérience commune.",
+							"Si vous ne l'avez pas encore fait, c'est le moment de contacter vos clients précédents pour que ceux-ci recommandent vos compétences sur Linkedin et sur votre expérience commune.",
 					},
 				],
 			},

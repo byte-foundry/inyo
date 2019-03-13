@@ -4,7 +4,13 @@ import {useQuery} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
-import {Loading} from '../../../utils/content';
+import {
+	Loading,
+	ModalContainer,
+	ModalElem,
+	ModalActions,
+} from '../../../utils/content';
+import {Heading, Button} from '../../../utils/new/design-system';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
@@ -76,6 +82,7 @@ function TasksList({location, history}) {
 	const {prevSearch} = location.state || {};
 	const query = new URLSearchParams(prevSearch || location.search);
 	const linkedCustomerId = query.get('customerId');
+	const openModal = query.get('openModal');
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 
@@ -156,6 +163,47 @@ function TasksList({location, history}) {
 			</TaskAndArianne>
 			{query.get('projectId') && (
 				<SidebarProjectInfos projectId={query.get('projectId')} />
+			)}
+			{openModal && (
+				<ModalContainer onDismiss={() => history.push('/app/tasks')}>
+					<ModalElem>
+						<Heading>Bienvenue sur Inyo,</Heading>
+						<p>
+							Pour découvrir comment fonctionne Inyo, nous avons
+							créé plusieurs tâches qui reprennent les
+							fonctionnalités de base. Vous pouvez les retrouver
+							sur la vue "Tâches" qui regroupe toutes les tâches
+							créées tous projets confondus, ou les filtrer par
+							"clients", "projets" ou type de tâches grâce aux
+							filtres en haut de la page.
+						</p>
+						<p>
+							À tout moment vous pouvez utiliser le champ
+							principal pour créer une tâche personnelle ou pour
+							un client, et même un projet complet à partir d'un
+							modèle.
+						</p>
+						<p>
+							Commencez par cliquer sur la 1ère tâche et optimisez
+							votre activité dès aujourd'hui!
+						</p>
+
+						<p>
+							Edwige,
+							<br />
+							votre Smart Assistant.
+						</p>
+						<ModalActions>
+							<Button
+								big
+								primary
+								onClick={() => history.push('/app/tasks')}
+							>
+								C'est parti!
+							</Button>
+						</ModalActions>
+					</ModalElem>
+				</ModalContainer>
 			)}
 		</Container>
 	);

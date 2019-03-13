@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
@@ -10,7 +10,8 @@ import Plural from '../Plural';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {TOOLTIP_DELAY} from '../../utils/constants';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import {CustomerContext} from '../../utils/contexts';
 
 const Aside = styled('aside')`
 	display: flex;
@@ -18,6 +19,10 @@ const Aside = styled('aside')`
 	align-items: stretch;
 	width: 270px;
 	padding-left: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding-left: 0;
+	}
 `;
 
 const SubSection = styled('div')`
@@ -40,7 +45,9 @@ const SidebarHeading = styled(SubHeading)`
 	margin-bottom: 10px;
 `;
 
-const SidebarCustomerProjectInfos = ({projectId, customerToken}) => {
+const SidebarCustomerProjectInfos = ({projectId}) => {
+	const customerToken = useContext(CustomerContext);
+
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token: customerToken},
 	});

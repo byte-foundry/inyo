@@ -343,29 +343,7 @@ const TaskInput = ({
 								grey
 								onClick={() => {
 									if (!value.startsWith('/')) {
-										if (!type || type === 'DEFAULT') {
-											onSubmitTask({
-												name: value,
-												type: type || 'DEFAULT',
-												dueDate:
-													itemDueDate
-													&& itemDueDate.toISOString(),
-												unit: parseFloat(itemUnit || 0),
-												linkedCustomer:
-													itemCustomer
-													&& !itemCustomer.id
-														? itemCustomer
-														: undefined,
-												linkedCustomerId:
-													itemCustomer
-													&& itemCustomer.id,
-											});
-											setValue('');
-											setMoreInfosMode(false);
-										}
-										else if (
-											type === 'CONTENT_ACQUISITION'
-										) {
+										if (type === 'CONTENT_ACQUISITION') {
 											if (showContentAcquisitionInfos) {
 												onSubmitTask({
 													name: value,
@@ -407,6 +385,26 @@ const TaskInput = ({
 													true,
 												);
 											}
+										}
+										else {
+											onSubmitTask({
+												name: value,
+												type: type || 'DEFAULT',
+												dueDate:
+													itemDueDate
+													&& itemDueDate.toISOString(),
+												unit: parseFloat(itemUnit || 0),
+												linkedCustomer:
+													itemCustomer
+													&& !itemCustomer.id
+														? itemCustomer
+														: undefined,
+												linkedCustomerId:
+													itemCustomer
+													&& itemCustomer.id,
+											});
+											setValue('');
+											setMoreInfosMode(false);
 										}
 									}
 								}}
@@ -511,7 +509,7 @@ const TaskInput = ({
 			{((value.startsWith('/') && focus) || focusByClick) && (
 				<TaskTypeDropdown
 					types={types}
-					filter={value.substr(1)}
+					filter={value.startsWith('/') ? value.substr(1) : ''}
 					onSelectCommand={({type: selectedType}) => {
 						setType(selectedType);
 

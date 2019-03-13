@@ -17,6 +17,7 @@ import UnitInput from '../UnitInput';
 import DateInput from '../DateInput';
 import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
+import UploadDashboard from '../UploadDashboard';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
@@ -172,6 +173,11 @@ const Title = styled(TaskHeading)`
 const TaskHeadingIcon = styled('div')`
 	position: relative;
 	left: -5px;
+`;
+
+const AttachedList = styled('div')`
+	margin-top: 20px;
+	margin-bottom: 20px;
 `;
 
 const Item = ({id, customerToken, close}) => {
@@ -495,6 +501,10 @@ const Item = ({id, customerToken, close}) => {
 					/>
 				</Description>
 			)}
+			<SubHeading>Pièces jointes</SubHeading>
+			<AttachedList>
+				<UploadDashboard />
+			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>
 					<SubHeading>Contenus à récupérer</SubHeading>

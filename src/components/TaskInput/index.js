@@ -330,7 +330,7 @@ const TaskInput = ({
 							: 'Ajouter une tâche ou créer un projet'
 					}
 				/>
-				{focus && (
+				{(focus || value) && (
 					<InputButtonWrapper>
 						<ReactTooltip
 							effect="solid"

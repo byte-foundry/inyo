@@ -27,6 +27,7 @@ import ProvidersSentry from './providers/sentry';
 import App from './screens/App';
 import Auth from './screens/Auth';
 import Customer from './screens/Customer';
+import ConditionalContent from './screens/App/ConditionalContent';
 
 import {UserContext} from './utils/contexts';
 import {Loading} from './utils/content';
@@ -91,12 +92,22 @@ if (query.has('dimension')) {
 	ReactGA.set({dimension1: query.get('dimension')});
 }
 
-const ProtectedRoute = ({isAllowed, ...props}) => (isAllowed ? <Route {...props} /> : false);
-const ProtectedRedirect = ({isAllowed, ...props}) => (isAllowed ? <Redirect {...props} /> : false);
+const ProtectedRoute = ({isAllowed, protectedPath, ...props}) => (isAllowed ? <Route path={protectedPath} {...props} /> : false);
+const ProtectedRedirect = ({isAllowed, protectedPath, ...props}) => (isAllowed ? (
+	<Redirect path={protectedPath} {...props} />
+) : (
+	<Redirect to="/auth" />
+));
 
 function Root() {
 	const [setupDone, setSetupDone] = useState(false);
-	const {data} = useQuery(CHECK_LOGIN_USER);
+	const {data, loading} = useQuery(CHECK_LOGIN_USER, {
+		suspend: false,
+		fetchPolicy: 'network-only',
+		errorPolicy: 'ignore',
+	});
+
+	if (loading) return <Loading />;
 
 	if (data && data.me && !setupDone) {
 		window.Intercom('boot', {
@@ -130,21 +141,32 @@ function Root() {
 								path="/app/:customerToken(.*-.*-.*-.*)/tasks"
 								component={withTracker(Customer)}
 							/>
-							<ProtectedRoute
-								path="/app"
-								component={withTracker(App)}
-								isAllowed={data && data.me}
-							/>
-							<ProtectedRoute
-								path="/auth"
-								component={withTracker(Auth)}
-								isAllowed={!(data && data.me)}
-							/>
+							{ProtectedRoute({
+								protectedPath: '/app',
+								component: withTracker(App),
+								isAllowed: data && data.me,
+							})}
+							{ProtectedRoute({
+								protectedPath: '/auth',
+								component: withTracker(Auth),
+								isAllowed: !(data && data.me),
+							})}
 							<ProtectedRedirect
 								to="/app"
 								isAllowed={data && data.me}
 							/>
 						</Switch>
+						<ProtectedRoute
+							protectedPath={[
+								'/app/projects',
+								'/app/account',
+								'/app/dashboard',
+							]}
+							render={props => (
+								<ConditionalContent {...props} user={data.me} />
+							)}
+							isAllowed={data && data.me}
+						/>
 					</UserContext.Provider>
 				</main>
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />

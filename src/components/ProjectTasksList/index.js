@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation, useQuery} from 'react-apollo-hooks';
@@ -16,11 +16,20 @@ import {
 	lightGrey,
 	accentGrey,
 	mediumGrey,
+	Button,
+	Heading,
 } from '../../utils/new/design-system';
-import {UPDATE_SECTION, UPDATE_ITEM, ADD_SECTION} from '../../utils/mutations';
+import {ModalContainer, ModalElem, ModalActions} from '../../utils/content';
+import {
+	UPDATE_SECTION,
+	UPDATE_ITEM,
+	ADD_SECTION,
+	REMOVE_SECTION,
+} from '../../utils/mutations';
 import InlineEditable from '../InlineEditable';
 import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
+import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 3rem;
@@ -74,14 +83,15 @@ const SectionDraggable = styled('div')`
 	}
 `;
 
-const SectionTitle = styled(InlineEditable)`
-	margin: 3rem 14px 2rem;
+const SectionInput = styled(InlineEditable)`
 	font-weight: 500;
 	color: ${primaryBlack};
 	border: 1px solid transparent;
 	cursor: text;
 	position: relative;
 	padding: 0.5rem 0;
+	margin: 0 14px 0;
+	flex: 1;
 
 	:hover {
 		cursor: text;
@@ -115,6 +125,36 @@ const SectionTitle = styled(InlineEditable)`
 	}
 `;
 
+const SectionTitleContainer = styled('div')`
+	margin: 3rem 0 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`;
+
+const TrashIconContainer = styled('div')`
+	flex: 0 0 3rem;
+	margin-left: 14px;
+	cursor: pointer;
+`;
+
+const TrashButton = styled(Button)`
+	padding: 0.3rem 0.5rem;
+`;
+
+function SectionTitle({onClickTrash, ...props}) {
+	return (
+		<SectionTitleContainer>
+			<SectionInput {...props} />
+			<TrashIconContainer onClick={onClickTrash}>
+				<TrashButton>
+					<TrashIcon />
+				</TrashButton>
+			</TrashIconContainer>
+		</SectionTitleContainer>
+	);
+}
+
 const placeholderCss = css`
 	font-style: italic;
 	padding: 0;
@@ -132,6 +172,10 @@ const editableCss = css`
 	padding: 0;
 	line-height: 1.5;
 	display: block;
+`;
+
+const DisableTask = styled('div')`
+	pointer-events: none;
 `;
 
 const DraggableTask = ({task, index, ...rest}) => (
@@ -220,7 +264,11 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
 	});
+	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
 	const updateTask = useMutation(UPDATE_ITEM);
+	const removeSection = useMutation(REMOVE_SECTION, {
+		refetchQueries: ['getProjectData'],
+	});
 	const addSection = useMutation(ADD_SECTION, {
 		update: (cache, {data: {addSection: addedSection}}) => {
 			const data = cache.readQuery({
@@ -473,6 +521,8 @@ function ProjectTasksList({items, projectId, sectionId}) {
 							index={sectionIndex}
 						>
 							<SectionTitle
+								onClickTrash={() => setRemoveSectionModalOpen(section)
+								}
 								placeholder="Nom de la section"
 								value={section.name}
 								placeholderCss={placeholderCss}
@@ -504,6 +554,63 @@ function ProjectTasksList({items, projectId, sectionId}) {
 					))}
 				</DroppableSectionArea>
 			</DragDropContext>
+			{removeSectionModalOpen && (
+				<ModalContainer
+					onDismiss={() => setRemoveSectionModalOpen(false)}
+				>
+					<ModalElem>
+						<Heading>
+							Êtes-vous sûr de vouloir supprimer cette section ?
+						</Heading>
+						<p>
+							Vous allez supprimer la section "
+							{removeSectionModalOpen.name}", en supprimant cette
+							section vous allez supprimer les tâches suivantes.
+						</p>
+						<DisableTask>
+							{removeSectionModalOpen.items.map(task => (
+								<Task
+									item={task}
+									key={task.id}
+									customerToken="preview"
+								/>
+							))}
+						</DisableTask>
+						<p>
+							Vous devez mettre ses tâches dans une autre section
+							pour ne pas qu'elles soient supprimées.
+						</p>
+						<p>
+							Vous pouvez glisser/déposer ces tâches dans une
+							autre section par exemple.
+						</p>
+						<ModalActions>
+							<Button
+								big
+								grey
+								onClick={() => setRemoveSectionModalOpen(false)}
+							>
+								Annuler
+							</Button>
+							<Button
+								big
+								red
+								onClick={async () => {
+									await removeSection({
+										variables: {
+											sectionId:
+												removeSectionModalOpen.id,
+										},
+									});
+									setRemoveSectionModalOpen(false);
+								}}
+							>
+								Supprimer
+							</Button>
+						</ModalActions>
+					</ModalElem>
+				</ModalContainer>
+			)}
 		</TasksListContainer>
 	);
 }

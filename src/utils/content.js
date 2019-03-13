@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import {css, keyframes} from '@emotion/core';
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 import Shevy from 'shevyjs';
 import {Dialog} from '@reach/dialog';
 import {Link} from 'react-router-dom';
@@ -375,7 +375,21 @@ const ResponsiveDialog = styled(Dialog)`
 	}
 `;
 
+function useLockBodyScroll() {
+	useLayoutEffect(() => {
+		// Get original body overflow
+		const originalStyle = window.getComputedStyle(document.body).overflow;
+		// Prevent scrolling on mount
+
+		document.body.style.overflow = 'hidden';
+		// Re-enable scrolling when component unmounts
+		return () => (document.body.style.overflow = originalStyle);
+	}, []); // Empty array ensures effect is only run on mount and unmount
+}
+
 export function ModalContainer({...props}) {
+	useLockBodyScroll();
+
 	return (
 		<ResponsiveDialog {...props}>
 			<ModalCloseIcon onClick={props.onDismiss}>×</ModalCloseIcon>

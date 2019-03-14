@@ -230,6 +230,10 @@ const DisableTask = styled('div')`
 	}
 	[class*='-TaskIcon'] {
 		margin: 0 1rem 0 0;
+		*::before,
+		*::after {
+			display: none;
+		}
 	}
 	[class*='-TaskContent'] {
 		margin-top: -0.5rem;

@@ -116,7 +116,7 @@ export const GET_ALL_PROJECTS = gql`
 export const GET_PROJECT_INFOS = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 
-	query getProjectData($projectId: ID!) {
+	query getProjectInfos($projectId: ID!) {
 		project(id: $projectId) {
 			id
 			template

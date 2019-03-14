@@ -186,8 +186,8 @@ export const SubHeading = styled('div')`
 
 export const P = styled('p')`
 	font-size: 14px;
-	line-height: 1.4em;
-	color: ${primaryGrey};
+	line-height: 1.6em;
+	color: ${primaryBlack};
 `;
 
 export const HR = styled('hr')`

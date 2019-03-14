@@ -401,6 +401,11 @@ export function ModalContainer({...props}) {
 export const ModalActions = styled('div')`
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 3rem;
+
+	button + button {
+		margin-left: 2rem;
+	}
 `;
 
 export const ModalElem = styled('div')`

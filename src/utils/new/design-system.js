@@ -159,6 +159,7 @@ export const ProjectHeading = styled('div')`
 `;
 
 export const Heading = styled('h1')`
+	font-weight: 500;
 	color: ${primaryPurple};
 	font-size: 32px;
 `;

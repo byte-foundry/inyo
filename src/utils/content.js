@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
 import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
+import {primaryRed, primaryBlack} from './new/design-system';
 import {BREAKPOINTS} from './constants';
 
 const shevy = new Shevy({
@@ -415,12 +416,16 @@ export const ModalElem = styled('div')`
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	color: #ff3366;
-	font-size: 2rem;
+	color: ${primaryBlack};
+	font-size: 2.5rem;
 	position: absolute;
 	top: -3rem;
 	right: -3rem;
 	cursor: pointer;
+
+	&:hover {
+		color: ${primaryRed};
+	}
 `;
 
 export const ModalRow = styled('div')`

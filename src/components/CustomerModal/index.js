@@ -31,17 +31,33 @@ const CustomerModal = ({
 	onDismiss,
 	onValidate,
 	noSelect,
+	customer,
 }) => {
-	const {data, error} = useQuery(GET_ALL_CUSTOMERS);
+	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {skip: noSelect});
 
-	if (error) throw error;
+	customer = customer || {};
 
-	const {customers} = data.me;
+	let options = [];
 
-	const options = customers.map(customer => ({
-		value: customer.id,
-		label: customer.name,
-	}));
+	if (!noSelect) {
+		if (error) throw error;
+
+		const {customers} = data.me;
+
+		options = customers.map(c => ({
+			value: c.id,
+			label: c.name,
+		}));
+	}
+
+	let formTitle = 'Ou créer un nouveau client';
+
+	if (noSelect && customer.id) {
+		formTitle = 'Éditer un client';
+	}
+	else if (noSelect) {
+		formTitle = 'Créer un nouveau client';
+	}
 
 	return (
 		<ModalContainer onDismiss={onDismiss}>
@@ -55,6 +71,7 @@ const CustomerModal = ({
 						lastName: '',
 						email: '',
 						phone: '',
+						...customer,
 					}}
 					validate={(values) => {
 						if (
@@ -129,10 +146,7 @@ const CustomerModal = ({
 								)}
 								{!values.customerId && (
 									<>
-										<Header>
-											{noSelect ? 'C' : 'Ou c'}réer un
-											nouveau client
-										</Header>
+										<Header>{formTitle}</Header>
 										<CreateCustomerForm>
 											<FormElem
 												{...props}
@@ -227,6 +241,10 @@ const CustomerModal = ({
 			</ModalElem>
 		</ModalContainer>
 	);
+};
+
+CustomerModal.defaultProps = {
+	customer: {},
 };
 
 export default CustomerModal;

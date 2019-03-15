@@ -26,24 +26,14 @@ export const GET_USER_CUSTOMERS = gql`
 	query userCustomersQuery {
 		me {
 			id
-			company {
+			customers {
 				id
-				customers {
-					id
-					name
-					email
-					address {
-						street
-						city
-						postalCode
-						country
-					}
-					phone
-					siret
-					rcs
-					rm
-					vat
-				}
+				title
+				firstName
+				lastName
+				name
+				email
+				phone
 			}
 		}
 	}

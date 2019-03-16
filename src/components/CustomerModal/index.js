@@ -10,15 +10,20 @@ import FormSelect from '../FormSelect';
 import {SubHeading, Button} from '../../utils/new/design-system';
 
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled(SubHeading)`
-	margin: 2rem 0;
+	margin-bottom: 2rem;
 `;
 
 const CreateCustomerForm = styled('div')`
 	display: grid;
 	grid-template-columns: 125px 1fr 1fr;
 	grid-column-gap: 20px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: contents;
+	}
 `;
 
 const Buttons = styled('div')`

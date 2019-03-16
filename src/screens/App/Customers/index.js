@@ -17,13 +17,19 @@ import Pencil from '../../../utils/icons/pencil.svg';
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../../utils/mutations';
 
+import {BREAKPOINTS} from '../../../utils/constants';
+
 const Main = styled('div')`
 	min-height: 100vh;
-	padding: 0 10rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 1rem;
+	}
 `;
 
 const Container = styled('div')`
 	max-width: 980px;
+	margin: 0 auto;
 `;
 
 const Table = styled('table')`
@@ -40,6 +46,10 @@ const RowHeader = styled('tr')`
 const HeaderCell = styled('th')`
 	font-weight: normal;
 	color: ${accentGrey};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const Row = styled('tr')`
@@ -48,6 +58,23 @@ const Row = styled('tr')`
 	border-bottom: 2px solid ${lightGrey};
 	position: relative;
 	line-height: 1.6;
+
+	td {
+		padding: 0.25rem 0;
+
+		@media (max-width: ${BREAKPOINTS}px) {
+			&:first-child {
+				color: ${primaryPurple};
+			}
+		}
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		background: none;
+		width: 50px;
+	}
 
 	:hover {
 		color: ${primaryPurple};
@@ -60,11 +87,17 @@ const Row = styled('tr')`
 			mask-position: center;
 			mask-repeat: no-repeat;
 			mask-image: url(${Pencil});
-			position: absolute;
-			top: 0;
+			position: relative;
+			right: 0;
+			top: 0.4rem;
 			bottom: 0;
-			width: 50px;
+			height: 1rem;
 		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: grid;
+		padding-bottom: 1rem;
 	}
 `;
 
@@ -78,6 +111,16 @@ const Forms = styled('div')`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+		margin-bottom: 1rem;
+
+		button {
+			width: 100%;
+			margin-bottom: 1rem;
+		}
+	}
 `;
 
 const FilterInput = styled(Input)`
@@ -85,6 +128,11 @@ const FilterInput = styled(Input)`
 	padding: 0.25rem 1rem;
 	border-radius: 1.5rem;
 	width: 50%;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 1rem 0;
+		width: 100%;
+	}
 `;
 
 const Customers = () => {

@@ -28,7 +28,7 @@ import {
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as FileIcon} from '../../utils/icons/file.svg';
-import TrashIcon from '../../utils/icons/file.svg';
+import TrashIcon from '../../utils/icons/trash-icon.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
@@ -564,7 +564,7 @@ const Item = ({id, customerToken, close}) => {
 						/>
 					</Attachment>
 				))}
-				<UploadDashboard taskId={item.id} />
+				{!customerToken && <UploadDashboard taskId={item.id} />}
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>

@@ -1,25 +1,16 @@
-import React, {useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
-import ReactGA from 'react-ga';
-import * as Sentry from '@sentry/browser';
 
 import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
 import Account from './Account';
 import Tasks from './Tasks';
-import CustomerTasks from '../Customer/Tasks';
-import ProjectCustomerView from './Project/project-customer-view';
+import CustomerList from './Customers';
 
 import withHeader from '../../HOC/withHeader';
 
-import {CHECK_LOGIN_USER} from '../../utils/queries';
-import {
-	INTERCOM_APP_ID,
-	TOOLTIP_DELAY,
-	BREAKPOINTS,
-} from '../../utils/constants';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const AppMain = styled('div')`
 	display: flex;
@@ -45,6 +36,10 @@ function App() {
 				/>
 				<Route path="/app/account" component={withHeader(Account)} />
 				<Route path="/app/tasks" component={withHeader(Tasks)} />
+				<Route
+					path="/app/customers"
+					component={withHeader(CustomerList)}
+				/>
 				<Route path="/app/onboarding" component={Onboarding} />
 				<Redirect to="/app/tasks" />
 			</Switch>

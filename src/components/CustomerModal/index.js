@@ -10,15 +10,20 @@ import FormSelect from '../FormSelect';
 import {SubHeading, Button} from '../../utils/new/design-system';
 
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled(SubHeading)`
-	margin: 2rem 0;
+	margin-bottom: 2rem;
 `;
 
 const CreateCustomerForm = styled('div')`
 	display: grid;
 	grid-template-columns: 125px 1fr 1fr;
 	grid-column-gap: 20px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: contents;
+	}
 `;
 
 const Buttons = styled('div')`
@@ -31,17 +36,33 @@ const CustomerModal = ({
 	onDismiss,
 	onValidate,
 	noSelect,
+	customer,
 }) => {
-	const {data, error} = useQuery(GET_ALL_CUSTOMERS);
+	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {skip: noSelect});
 
-	if (error) throw error;
+	customer = customer || {};
 
-	const {customers} = data.me;
+	let options = [];
 
-	const options = customers.map(customer => ({
-		value: customer.id,
-		label: customer.name,
-	}));
+	if (!noSelect) {
+		if (error) throw error;
+
+		const {customers} = data.me;
+
+		options = customers.map(c => ({
+			value: c.id,
+			label: c.name,
+		}));
+	}
+
+	let formTitle = 'Ou créer un nouveau client';
+
+	if (noSelect && customer.id) {
+		formTitle = 'Éditer un client';
+	}
+	else if (noSelect) {
+		formTitle = 'Créer un nouveau client';
+	}
 
 	return (
 		<ModalContainer onDismiss={onDismiss}>
@@ -49,12 +70,12 @@ const CustomerModal = ({
 				<Formik
 					initialValues={{
 						customerId: selectedCustomerId,
-						name: '',
-						title: null,
-						firstName: '',
-						lastName: '',
-						email: '',
-						phone: '',
+						name: customer.name || '',
+						title: customer.title || null,
+						firstName: customer.email || '',
+						lastName: customer.email || '',
+						email: customer.email || '',
+						phone: customer.phone || '',
 					}}
 					validate={(values) => {
 						if (
@@ -129,10 +150,7 @@ const CustomerModal = ({
 								)}
 								{!values.customerId && (
 									<>
-										<Header>
-											{noSelect ? 'C' : 'Ou c'}réer un
-											nouveau client
-										</Header>
+										<Header>{formTitle}</Header>
 										<CreateCustomerForm>
 											<FormElem
 												{...props}
@@ -227,6 +245,10 @@ const CustomerModal = ({
 			</ModalElem>
 		</ModalContainer>
 	);
+};
+
+CustomerModal.defaultProps = {
+	customer: {},
 };
 
 export default CustomerModal;

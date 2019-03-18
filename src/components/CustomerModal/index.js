@@ -70,13 +70,12 @@ const CustomerModal = ({
 				<Formik
 					initialValues={{
 						customerId: selectedCustomerId,
-						name: '',
-						title: null,
-						firstName: '',
-						lastName: '',
-						email: '',
-						phone: '',
-						...customer,
+						name: customer.name || '',
+						title: customer.title || null,
+						firstName: customer.email || '',
+						lastName: customer.email || '',
+						email: customer.email || '',
+						phone: customer.phone || '',
 					}}
 					validate={(values) => {
 						if (

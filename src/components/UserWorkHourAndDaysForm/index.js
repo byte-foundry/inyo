@@ -245,10 +245,10 @@ class UserWorkHourAndDaysForm extends Component {
 															🌙
 														</Emoji>
 														<Emoji offset={33}>
-															🥐
+															☕
 														</Emoji>
 														<Emoji offset={50}>
-															🍱
+															🍽️
 														</Emoji>
 														<Emoji offset={87}>
 															🛌

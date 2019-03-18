@@ -59,12 +59,17 @@ export default function ProjectHeader({projectId}) {
 	);
 	const finishedItems = allItems.filter(item => item.status === 'FINISHED');
 
-	const timeItTookPercentage
-		= finishedItems.reduce(
-			(totalTimeItTook, item) => totalTimeItTook + (item.timeItTook || item.unit) + 1,
-			0,
-		)
-		/ finishedItems.reduce((totalItem, item) => totalItem + item.unit + 1, 0);
+	const totalTimeItTook = finishedItems.reduce(
+		(totalTimeItTook, item) => totalTimeItTook + (item.timeItTook || item.unit) + 1,
+		0,
+	);
+	const totalTimePlanned = finishedItems.reduce(
+		(totalItem, item) => totalItem + item.unit + 1,
+		0,
+	);
+
+	const timeItTookPercentage = totalTimeItTook / (totalTimePlanned || 1);
+
 	const timeItTook = finishedItems.reduce(
 		(totalTimeItTook, item) => totalTimeItTook + item.timeItTook - item.unit,
 		0,

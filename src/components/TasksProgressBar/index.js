@@ -49,9 +49,9 @@ const TasksProgressBarMain = styled('div')`
 		position: absolute;
 		transition: width 0.2s ease;
 
-		content: ${props => (props.timeItTook >= 1
+		content: ${props => (props.timeItTook >= 0
 		? `"+${props.timeItTook} jours"`
-		: `"-${props.timeItTook} jours"`)};
+		: `"${props.timeItTook} jours"`)};
 		top: ${props => (props.timeItTookPercentage >= 1 ? 0 : '1px')};
 		left: calc(
 			2px +
@@ -95,6 +95,11 @@ class TasksProgressBar extends Component {
 			timeItTookPercentage,
 		} = this.props;
 
+		const completionRate
+			= tasksTotal > tasksTotalWithTimeItTook
+				? tasksCompleted / (tasksTotal || 1)
+				: tasksCompleted / (tasksTotalWithTimeItTook || 1);
+
 		return (
 			<>
 				<TasksProgressBarLabel>
@@ -103,9 +108,7 @@ class TasksProgressBar extends Component {
 						: '0'}
 				</TasksProgressBarLabel>
 				<TasksProgressBarMain
-					completionRate={
-						(tasksCompleted / tasksTotalWithTimeItTook) * 100
-					}
+					completionRate={completionRate * 100}
 					timeItTook={timeItTook}
 					timeItTookPercentage={timeItTookPercentage}
 				/>

@@ -165,13 +165,19 @@ const Customers = () => {
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [customerToEdit, setCustomerToEdit] = useState(null);
 
+	const sanitize = str => str
+		.toLowerCase()
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '');
+	const includesFilter = str => sanitize(str).includes(filter);
+
 	const filteredCustomers = data.me.customers.filter(
 		({
 			name, firstName, lastName, email,
-		}) => name.includes(filter)
-			|| firstName.includes(filter)
-			|| lastName.includes(filter)
-			|| email.includes(filter),
+		}) => includesFilter(name)
+			|| includesFilter(firstName)
+			|| includesFilter(lastName)
+			|| includesFilter(email),
 	);
 
 	return (

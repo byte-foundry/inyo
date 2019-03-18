@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 
 import {
@@ -10,13 +10,20 @@ import {
 	Input,
 	Button,
 	primaryBlack,
+	P,
 } from '../../../utils/new/design-system';
 import CustomerModal from '../../../components/CustomerModal';
-import Pencil from '../../../utils/icons/pencil.svg';
+import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
+import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
+import {ReactComponent as DeleteIcon} from '../../../utils/icons/trash-icon.svg';
 
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
-import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../../utils/mutations';
+import {
+	CREATE_CUSTOMER,
+	UPDATE_CUSTOMER,
+	REMOVE_CUSTOMER,
+} from '../../../utils/mutations';
 
 import {BREAKPOINTS} from '../../../utils/constants';
 
@@ -60,6 +67,17 @@ const HeaderCell = styled('th')`
 	}
 `;
 
+const Cell = styled('td')`
+	:empty::before {
+		content: '\\2014';
+	}
+`;
+
+const ActionCell = styled(Cell)`
+	display: flex;
+	align-items: center;
+`;
+
 const Row = styled('tr')`
 	cursor: pointer;
 	color: ${primaryBlack};
@@ -71,35 +89,21 @@ const Row = styled('tr')`
 		padding: 0.25rem 0;
 
 		@media (max-width: ${BREAKPOINTS}px) {
-			&:first-child {
+			&:first-of-type {
 				color: ${primaryPurple};
 			}
 		}
 	}
 
-	&:after {
-		content: '';
-		display: block;
-		background: none;
-		width: 50px;
+	${ActionCell} {
+		opacity: 0;
 	}
 
 	:hover {
 		color: ${primaryPurple};
 
-		&:after {
-			content: '';
-			display: block;
-			background-color: ${accentGrey};
-			mask-size: 35%;
-			mask-position: center;
-			mask-repeat: no-repeat;
-			mask-image: url(${Pencil});
-			position: relative;
-			right: 0;
-			top: 0.4rem;
-			bottom: 0;
-			height: 1rem;
+		${ActionCell} {
+			opacity: 1;
 		}
 	}
 
@@ -109,19 +113,13 @@ const Row = styled('tr')`
 	}
 `;
 
-const Cell = styled('td')`
-	:empty::before {
-		content: '\\2014';
-	}
-`;
-
 const Forms = styled('div')`
 	display: flex;
+	flex-direction: row-reverse;
 	align-items: center;
 	justify-content: space-between;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column-reverse;
 		margin-bottom: 1rem;
 
 		button {
@@ -154,16 +152,28 @@ const FilterInput = styled(Input)`
 	}
 `;
 
+const EditIcon = styled(PencilIcon)`
+	width: 18px;
+	padding: 0 5px;
+
+	path {
+		fill: ${accentGrey};
+	}
+`;
+
 const Customers = () => {
 	const {data, error} = useQuery(GET_USER_CUSTOMERS);
 	const createCustomer = useMutation(CREATE_CUSTOMER);
 	const updateCustomer = useMutation(UPDATE_CUSTOMER);
+	const removeCustomer = useMutation(REMOVE_CUSTOMER);
 
 	if (error) throw error;
 
 	const [filter, setFilter] = useState('');
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [customerToEdit, setCustomerToEdit] = useState(null);
+	const [confirmRemoveCustomer, setConfirmRemoveCustomer] = useState({});
+	const [customerToBeRemoved, setCustomerToBeRemoved] = useState(null);
 
 	const sanitize = str => str
 		.toLowerCase()
@@ -185,6 +195,9 @@ const Customers = () => {
 			<Container>
 				<Heading>Clients</Heading>
 				<Forms>
+					<Button big onClick={() => setEditCustomer(true)}>
+						Créer un nouveau client
+					</Button>
 					<FilterInput
 						name="filter"
 						placeholder="Filtrer par nom, email..."
@@ -192,9 +205,6 @@ const Customers = () => {
 						onChange={e => setFilter(e.target.value)}
 						value={filter}
 					/>
-					<Button big onClick={() => setEditCustomer(true)}>
-						Créer un nouveau client
-					</Button>
 				</Forms>
 				<Table>
 					<thead>
@@ -222,6 +232,33 @@ const Customers = () => {
 								</Cell>
 								<Cell>{customer.email}</Cell>
 								<Cell>{customer.phone}</Cell>
+								<ActionCell>
+									<EditIcon />
+									{/* <DeleteIcon
+										onClick={async (e) => {
+											e.stopPropagation();
+
+											setCustomerToBeRemoved(customer);
+
+											const confirmed = await new Promise(
+												resolve => setConfirmRemoveCustomer(
+													{resolve},
+												),
+											);
+
+											setConfirmRemoveCustomer({});
+											setCustomerToBeRemoved(null);
+
+											if (confirmed) {
+												removeCustomer({
+													variables: {
+														id: customer.id,
+													},
+												});
+											}
+										}}
+									/> */}
+								</ActionCell>
 							</Row>
 						))}
 					</tbody>
@@ -277,6 +314,22 @@ const Customers = () => {
 							setEditCustomer(false);
 						}}
 					/>
+				)}
+
+				{confirmRemoveCustomer.resolve && (
+					<ConfirmModal
+						onConfirm={confirmed => confirmRemoveCustomer.resolve(confirmed)
+						}
+						onDismiss={() => confirmRemoveCustomer.resolve(false)}
+					>
+						<P>
+							Êtes-vous sûr de vouloir supprimer{' '}
+							{customerToBeRemoved.email} ? Tous les projets et
+							les tâches associés à ce client se retrouveront sans
+							client.
+						</P>
+						<P>Êtes-vous sûr de vouloir continuer?</P>
+					</ConfirmModal>
 				)}
 			</Container>
 		</Main>

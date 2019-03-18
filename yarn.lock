@@ -1004,12 +1004,6 @@
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.8.0.tgz#8b63ab7f1aa5321248aad5ac890a485656dcea4d"
 
-"@uppy/companion-client@0.28.3":
-  version "0.28.3"
-  resolved "https://registry.yarnpkg.com/@uppy/companion-client/-/companion-client-0.28.3.tgz#c41800f1f609b8e0e25a2266886e68df0485b121"
-  dependencies:
-    namespace-emitter "^2.0.1"
-
 "@uppy/core@^0.30.3":
   version "0.30.3"
   resolved "https://registry.yarnpkg.com/@uppy/core/-/core-0.30.3.tgz#12694645697d8548d3ebfafaba6e42b88857fc8c"
@@ -1107,14 +1101,6 @@
   resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-0.30.3.tgz#b2f78db1974ae24290b572d0916e1f4eb1de61a8"
   dependencies:
     lodash.throttle "^4.1.1"
-
-"@uppy/xhr-upload@^0.30.3":
-  version "0.30.3"
-  resolved "https://registry.yarnpkg.com/@uppy/xhr-upload/-/xhr-upload-0.30.3.tgz#21340ef713ae7cb3930e3f778412a931817699c7"
-  dependencies:
-    "@uppy/companion-client" "0.28.3"
-    "@uppy/utils" "0.30.3"
-    cuid "^2.1.1"
 
 "@webassemblyjs/ast@1.7.6":
   version "1.7.6"

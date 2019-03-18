@@ -23,6 +23,7 @@ import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
+import {ReactComponent as FileIcon} from '../../utils/icons/file.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
@@ -503,6 +504,7 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
+				{item.attachments.map(({url, filename}) => <FileContainer><FileIcon<FileIcon/><a href={url}>{filename}</a></div>)}
 				<UploadDashboard />
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (

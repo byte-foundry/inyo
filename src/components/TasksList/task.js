@@ -6,6 +6,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
+import FilesIconSvg from '../../utils/icons/file.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
@@ -456,6 +457,23 @@ export function TaskInfosInputs({
 				item={item}
 				disabled={!!customerToken}
 			/>
+			{!!item.attachments.length && (
+				<TaskIconText
+					data-tip="Fichiers joints"
+					inactive={editDueDate}
+					icon={<TaskInfosIcon icon={FilesIconSvg} />}
+					content={
+						<>
+							{item.attachments.length}{' '}
+							<Plural
+								singular="fichier"
+								plural="fichiers"
+								value={item.attachments.length}
+							/>
+						</>
+					}
+				/>
+			)}
 		</TaskInfos>
 	);
 }

@@ -128,6 +128,11 @@ export const GET_PROJECT_INFOS = gql`
 			daysUntilDeadline
 			notifyActivityToCustomer
 			total
+			attachments {
+				id
+				filename
+				url
+			}
 			sections {
 				id
 				name

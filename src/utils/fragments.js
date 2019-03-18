@@ -11,6 +11,11 @@ export const ITEM_FRAGMENT = gql`
 		type
 		unit
 		timeItTook
+		attachments {
+			id
+			filename
+			url
+		}
 		linkedCustomer {
 			id
 			name

@@ -185,8 +185,8 @@ const Customers = () => {
 		({
 			name, firstName, lastName, email,
 		}) => includesFilter(name)
-			|| includesFilter(firstName)
-			|| includesFilter(lastName)
+			|| includesFilter(firstName || '')
+			|| includesFilter(lastName || '')
 			|| includesFilter(email),
 	);
 

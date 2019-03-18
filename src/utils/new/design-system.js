@@ -361,7 +361,8 @@ export const InputLabel = styled('div')`
 
 export const TaskInputDropdown = styled('div')`
 	background: white;
-	box-shadow: 0 0 5px ${gray20};
+	border: 1px solid ${mediumGrey};
+	box-shadow: 5px 5px 15px ${primaryGrey};
 	position: absolute;
 	z-index: 2; /* do a portal instead */
 	width: 500px;

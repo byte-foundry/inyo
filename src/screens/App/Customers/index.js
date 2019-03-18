@@ -42,6 +42,13 @@ const Table = styled('table')`
 const RowHeader = styled('tr')`
 	border-top: 2px solid ${lightGrey};
 	border-bottom: 2px solid ${lightGrey};
+
+	&:after {
+		content: '';
+		display: block;
+		background: none;
+		width: 50px;
+	}
 `;
 
 const HeaderCell = styled('th')`

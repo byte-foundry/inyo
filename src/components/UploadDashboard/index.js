@@ -1,34 +1,60 @@
 import React, {useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import Uppy, {Plugin} from '@uppy/core';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
-import XHRUpload from '@uppy/xhr-upload';
 
+import {UPLOAD_ATTACHMENTS} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
+
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
 
-class graphqlUpload extends Plugin {
+class GraphQlUpload extends Plugin {
 	constructor(uppy, opts) {
 		super(uppy, opts);
 		this.id = opts.id || 'graphqlupload';
 		this.type = 'GraphQlUpload';
+
+		this.mutation = opts.mutation;
+		this.taskId = opts.taskId;
+		this.projectId = opts.projectId;
 	}
 
 	install() {
 		this.uppy.addUploader((fileIDs) => {
-			const files = fileIDs.map(fileID => this.uppy.getFile(fileID));
+			const files = fileIDs.map(fileID => this.uppy.getFile(fileID).data);
 
+			const fuck = this.mutation({
+				variables: {
+					taskId: this.taskId,
+					projectId: this.projectId,
+					files,
+				},
+				context: {hasUpload: true},
+			});
 
-		}
+			console.log(fuck);
+			return fuck.then((zboub) => {
+				console.log(zboub);
+				return zboub;
+			});
+		});
 	}
 }
 
-const uppy = Uppy({
-	debug: true,
-}).use();
-
-function UploadDashboard() {
+function UploadDashboard({taskId}) {
+	const uploadAttachements = useMutation(UPLOAD_ATTACHMENTS, {
+		refetchQueries: ['getAllTasks'],
+	});
 	const [modalOpen, setModalOpen] = useState(false);
+	const [uppyState] = useState(
+		Uppy({
+			debuger: true,
+		}).use(GraphQlUpload, {
+			mutation: uploadAttachements,
+			taskId,
+		}),
+	);
 
 	return (
 		<>
@@ -39,7 +65,8 @@ function UploadDashboard() {
 				open={modalOpen}
 				onRequestClose={() => setModalOpen(false)}
 				closeModalOnClickOutside
-				uppy={uppy}
+				closeAfterFinish={true}
+				uppy={uppyState}
 			/>
 		</>
 	);

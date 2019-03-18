@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
@@ -20,10 +20,15 @@ import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
-import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
+import {
+	UPDATE_ITEM,
+	REMOVE_ITEM,
+	REMOVE_ATTACHMENTS,
+} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as FileIcon} from '../../utils/icons/file.svg';
+import TrashIcon from '../../utils/icons/file.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
@@ -181,6 +186,29 @@ const AttachedList = styled('div')`
 	margin-bottom: 20px;
 `;
 
+const RemoveFile = styled('div')`
+	opacity: 0;
+	background: url("${TrashIcon}");
+	width: 20px;
+	height: 20px;
+	margin-left: 10px;
+	cursor: pointer;
+`;
+
+const Attachment = styled('div')`
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+
+	&:hover ${RemoveFile} {
+		opacity: 1;
+	}
+`;
+
+const FileContainer = styled('span')`
+	margin-right: 15px;
+`;
+
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -195,6 +223,9 @@ const Item = ({id, customerToken, close}) => {
 	});
 
 	const updateItem = useMutation(UPDATE_ITEM);
+	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
+		refetchQueries: ['getAllTasks'],
+	});
 	const deleteItem = useMutation(REMOVE_ITEM, {
 		variables: {
 			itemId: id,
@@ -504,8 +535,26 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
-				{item.attachments.map(({url, filename}) => <FileContainer><FileIcon<FileIcon/><a href={url}>{filename}</a></div>)}
-				<UploadDashboard />
+				{item.attachments.map(({url, filename, id: attachmentId}) => (
+					<Attachment>
+						<FileContainer>
+							<FileIcon />
+						</FileContainer>
+						<a href={url} target="_blank" rel="noopener noreferrer">
+							{filename}
+						</a>
+						<RemoveFile
+							onClick={async () => {
+								await removeFile({
+									variables: {
+										attachmentId,
+									},
+								});
+							}}
+						/>
+					</Attachment>
+				))}
+				<UploadDashboard taskId={item.id} />
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>

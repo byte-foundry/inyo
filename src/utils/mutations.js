@@ -825,9 +825,9 @@ export const CREATE_CUSTOMER = gql`
 `;
 
 export const UPLOAD_ATTACHMENTS = gql`
-	mutation uploadAttachements(
+	mutation uploadAttachments(
 		$taskId: ID
-		$projectId: id
+		$projectId: ID
 		$files: [Upload!]!
 	) {
 		uploadAttachments(
@@ -835,6 +835,16 @@ export const UPLOAD_ATTACHMENTS = gql`
 			taskId: $taskId
 			projectId: $projectId
 		) {
+			id
+			filename
+			url
+		}
+	}
+`;
+
+export const REMOVE_ATTACHMENTS = gql`
+	mutation removeAttachment($attachmentId: ID!) {
+		removeFile(id: $attachmentId) {
 			id
 		}
 	}

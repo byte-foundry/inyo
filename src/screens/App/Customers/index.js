@@ -169,7 +169,7 @@ const Customers = () => {
 		.toLowerCase()
 		.normalize('NFD')
 		.replace(/[\u0300-\u036f]/g, '');
-	const includesFilter = str => sanitize(str).includes(filter);
+	const includesFilter = str => sanitize(str).includes(sanitize(filter));
 
 	const filteredCustomers = data.me.customers.filter(
 		({

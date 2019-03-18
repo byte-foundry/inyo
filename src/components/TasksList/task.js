@@ -514,7 +514,8 @@ function Task({
 
 	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
 	const isFinishable
-		= (!customerToken && !isCustomerTask(item))
+		= (item.status !== 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item)))
 		|| (customerToken && isCustomerTask(item));
 
 	return (

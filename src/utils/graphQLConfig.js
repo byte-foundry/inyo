@@ -3,6 +3,7 @@ import {ApolloLink} from 'apollo-link';
 import {BatchHttpLink} from 'apollo-link-batch-http';
 import {setContext} from 'apollo-link-context';
 import {onError} from 'apollo-link-error';
+import {createUploadLink} from 'apollo-upload-client';
 import {
 	InMemoryCache,
 	IntrospectionFragmentMatcher,
@@ -15,12 +16,20 @@ import createProjectWatchMutation from './mutationLinks/createProject';
 import createCustomerWatchMutation from './mutationLinks/createCustomer';
 import updateItemWatchMutation from './mutationLinks/updateItem';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
+import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
+import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
 
 import {GRAPHQL_API} from './constants';
 
-const httpLink = new BatchHttpLink({
+const options = {
 	uri: GRAPHQL_API,
-});
+};
+
+const httpLink = ApolloLink.split(
+	operation => operation.getContext().hasUpload,
+	createUploadLink(options),
+	new BatchHttpLink(options),
+);
 
 const withToken = setContext((_, {headers}) => {
 	const token = localStorage.getItem('authToken');
@@ -72,6 +81,8 @@ const watchLink = new WatchedMutationLink(cache, {
 	createProject: createProjectWatchMutation,
 	createCustomer: createCustomerWatchMutation,
 	updateItem: updateItemWatchMutation,
+	uploadAttachments: uploadAttachmentsWatchMutation,
+	removeAttachment: removeAttachmentWatchMutation,
 });
 
 const client = new ApolloClient({

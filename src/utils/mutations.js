@@ -823,3 +823,29 @@ export const CREATE_CUSTOMER = gql`
 		}
 	}
 `;
+
+export const UPLOAD_ATTACHMENTS = gql`
+	mutation uploadAttachments(
+		$taskId: ID
+		$projectId: ID
+		$files: [Upload!]!
+	) {
+		uploadAttachments(
+			files: $files
+			taskId: $taskId
+			projectId: $projectId
+		) {
+			id
+			filename
+			url
+		}
+	}
+`;
+
+export const REMOVE_ATTACHMENTS = gql`
+	mutation removeAttachment($attachmentId: ID!) {
+		removeFile(id: $attachmentId) {
+			id
+		}
+	}
+`;

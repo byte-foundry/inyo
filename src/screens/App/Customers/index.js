@@ -13,6 +13,7 @@ import {
 } from '../../../utils/new/design-system';
 import CustomerModal from '../../../components/CustomerModal';
 import Pencil from '../../../utils/icons/pencil.svg';
+import Search from '../../../utils/icons/search.svg';
 
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../../utils/mutations';
@@ -126,8 +127,19 @@ const Forms = styled('div')`
 const FilterInput = styled(Input)`
 	margin: 3rem 0;
 	padding: 0.25rem 1rem;
+	padding-left: 3rem;
 	border-radius: 1.5rem;
 	width: 50%;
+
+	background-position: 1rem center;
+	background-repeat: no-repeat;
+	background-image: url(${Search});
+
+	&:focus {
+		background-position: calc(1rem + 1px) center;
+		background-repeat: no-repeat;
+		background-image: url(${Search});
+	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin: 1rem 0;

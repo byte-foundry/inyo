@@ -183,7 +183,16 @@ const TaskHeadingIcon = styled('div')`
 
 const AttachedList = styled('div')`
 	margin-top: 20px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
+
+	a {
+		color: ${primaryPurple};
+		font-size: 0.85rem;
+	}
+
+	div + button {
+		margin-top: 1rem;
+	}
 `;
 
 const RemoveFile = styled('div')`
@@ -206,7 +215,8 @@ const Attachment = styled('div')`
 `;
 
 const FileContainer = styled('span')`
-	margin-right: 15px;
+	margin-right: 1rem;
+	margin-bottom: -0.3rem;
 `;
 
 const Item = ({id, customerToken, close}) => {

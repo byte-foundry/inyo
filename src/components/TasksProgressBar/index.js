@@ -18,6 +18,7 @@ const TasksProgressBarMain = styled('div')`
 	margin-bottom: 2rem;
 	border-radius: 5px;
 	border: 1px dotted ${mediumGrey};
+	z-index: 0;
 
 	&:after {
 		position: absolute;

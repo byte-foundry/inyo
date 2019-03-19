@@ -862,11 +862,13 @@ export const UPDATE_CUSTOMER = gql`
 
 export const UPLOAD_ATTACHMENTS = gql`
 	mutation uploadAttachments(
+		$token: String
 		$taskId: ID
 		$projectId: ID
 		$files: [Upload!]!
 	) {
 		uploadAttachments(
+			token: $token
 			files: $files
 			taskId: $taskId
 			projectId: $projectId

@@ -558,28 +558,41 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
-				{item.attachments.map(({url, filename, id: attachmentId}) => (
-					<Attachment>
-						<FileContainer>
-							<FileIcon />
-						</FileContainer>
-						<a href={url} target="_blank" rel="noopener noreferrer">
-							{filename}
-						</a>
-						{!customerToken && (
-							<RemoveFile
-								onClick={async () => {
-									await removeFile({
-										variables: {
-											attachmentId,
-										},
-									});
-								}}
-							/>
-						)}
-					</Attachment>
-				))}
-				{!customerToken && <UploadDashboard taskId={item.id} />}
+				{item.attachments.map(
+					({
+						url, filename, id: attachmentId, owner,
+					}) => (
+						<Attachment key={attachmentId}>
+							<FileContainer>
+								<FileIcon />
+							</FileContainer>
+							<a
+								href={url}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{filename}
+							</a>
+							{!customerToken
+								&& (!owner || owner.__typename === 'Customer') && (
+								<RemoveFile
+									onClick={async () => {
+										await removeFile({
+											variables: {
+												token: customerToken,
+												attachmentId,
+											},
+										});
+									}}
+								/>
+							)}
+						</Attachment>
+					),
+				)}
+				<UploadDashboard
+					customerToken={customerToken}
+					taskId={item.id}
+				/>
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>

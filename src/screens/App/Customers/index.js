@@ -7,7 +7,7 @@ import {
 	primaryPurple,
 	accentGrey,
 	lightGrey,
-	Input,
+	FilterInput,
 	Button,
 	primaryBlack,
 	P,
@@ -129,29 +129,6 @@ const Forms = styled('div')`
 	}
 `;
 
-const FilterInput = styled(Input)`
-	margin: 3rem 0;
-	padding: 0.25rem 1rem;
-	padding-left: 3rem;
-	border-radius: 1.5rem;
-	width: 50%;
-
-	background-position: 1rem center;
-	background-repeat: no-repeat;
-	background-image: url(${Search});
-
-	&:focus {
-		background-position: calc(1rem + 1px) center;
-		background-repeat: no-repeat;
-		background-image: url(${Search});
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 1rem 0;
-		width: 100%;
-	}
-`;
-
 const EditIcon = styled(PencilIcon)`
 	width: 18px;
 	padding: 0 5px;
@@ -199,6 +176,7 @@ const Customers = () => {
 						Créer un nouveau client
 					</Button>
 					<FilterInput
+						icon={Search}
 						name="filter"
 						placeholder="Filtrer par nom, email..."
 						type="text"

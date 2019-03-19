@@ -394,3 +394,26 @@ export const DateInputContainer = styled('div')`
 	position: relative;
 	display: inline-block;
 `;
+
+export const FilterInput = styled(Input)`
+	margin: 3rem 0;
+	padding: 0.25rem 1rem;
+	padding-left: 3rem;
+	border-radius: 1.5rem;
+	width: 50%;
+
+	background-position: 1rem center;
+	background-repeat: no-repeat;
+	background-image: url(${props => props.icon});
+
+	&:focus {
+		background-position: calc(1rem + 1px) center;
+		background-repeat: no-repeat;
+		background-image: url(${props => props.icon});
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 1rem 0;
+		width: 100%;
+	}
+`;

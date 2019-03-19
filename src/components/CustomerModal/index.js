@@ -72,8 +72,8 @@ const CustomerModal = ({
 						customerId: selectedCustomerId,
 						name: customer.name || '',
 						title: customer.title || null,
-						firstName: customer.email || '',
-						lastName: customer.email || '',
+						firstName: customer.firstName || '',
+						lastName: customer.lastName || '',
 						email: customer.email || '',
 						phone: customer.phone || '',
 					}}
@@ -91,13 +91,25 @@ const CustomerModal = ({
 							Yup.object({
 								name: Yup.string().required('Requis'),
 								title: Yup.string().nullable(),
-								firstName: Yup.string().required('Requis'),
-								lastName: Yup.string().required('Requis'),
+								firstName: Yup.string(),
+								lastName: Yup.string(),
 								email: Yup.string()
 									.email('Email invalide')
 									.required('Requis'),
 								phone: Yup.string(),
 							}).validateSync(values, {abortEarly: false});
+
+							if (
+								!values.title
+								&& !values.firstName
+								&& !values.lastName
+							) {
+								return {
+									title: 'Requis',
+									firstName: 'Requis',
+									lastName: 'Requis',
+								};
+							}
 
 							return {};
 						}
@@ -182,7 +194,6 @@ const CustomerModal = ({
 												label="Le prénom de votre contact"
 												name="firstName"
 												placeholder="John"
-												required
 												style={{gridColumn: '2 / 3'}}
 											/>
 											<FormElem
@@ -190,7 +201,6 @@ const CustomerModal = ({
 												label="Le nom de votre contact"
 												name="lastName"
 												placeholder="Doe"
-												required
 												style={{gridColumn: '3 / 4'}}
 											/>
 											<FormElem

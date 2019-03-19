@@ -9,6 +9,8 @@ import {
 	primaryPurple,
 	lightPurple,
 } from '../../utils/new/design-system';
+import {getDeep} from '../../utils/functions';
+import {ErrorInput} from '../../utils/content';
 
 const FormSelectMain = styled(InputLabel)``;
 
@@ -93,13 +95,17 @@ class FormSelect extends Component {
 				>
 					{({form}) => (
 						<Select
+							id={name}
 							onChange={(selected) => {
 								form.setFieldValue(
 									name,
 									selected && selected.value,
 								);
 							}}
-							onBlur={handleBlur}
+							onBlur={(...args) => {
+								form.setFieldTouched(name);
+								handleBlur(...args);
+							}}
 							name={name}
 							value={options.find(
 								option => option.value === values[name],
@@ -112,6 +118,11 @@ class FormSelect extends Component {
 						/>
 					)}
 				</Field>
+				{getDeep(name, errors) && getDeep(name, touched) && (
+					<ErrorInput className="input-feedback">
+						{getDeep(name, errors)}
+					</ErrorInput>
+				)}
 			</FormSelectMain>
 		);
 	}

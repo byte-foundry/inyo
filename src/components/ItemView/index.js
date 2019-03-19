@@ -36,10 +36,12 @@ import {
 	TaskHeading,
 	SubHeading,
 	Button,
-	primaryPurple,
 	DueDateInputElem,
 	DateInputContainer,
 	HR,
+	primaryPurple,
+	accentGrey,
+	primaryRed,
 } from '../../utils/new/design-system';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
@@ -196,12 +198,21 @@ const AttachedList = styled('div')`
 `;
 
 const RemoveFile = styled('div')`
-	opacity: 0;
-	background: url("${TrashIcon}");
+	background-color: ${accentGrey};
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-image: url(${TrashIcon});
+
 	width: 20px;
 	height: 20px;
-	margin-left: 10px;
+	margin-left: 3rem;
 	cursor: pointer;
+	opacity: 0;
+	transition: all 300ms ease;
+
+	&:hover {
+		background-color: ${primaryRed};
+	}
 `;
 
 const Attachment = styled('div')`
@@ -211,6 +222,8 @@ const Attachment = styled('div')`
 
 	&:hover ${RemoveFile} {
 		opacity: 1;
+		transition: all 200ms ease;
+		margin-left: 1.5rem;
 	}
 `;
 
@@ -553,15 +566,17 @@ const Item = ({id, customerToken, close}) => {
 						<a href={url} target="_blank" rel="noopener noreferrer">
 							{filename}
 						</a>
-						<RemoveFile
-							onClick={async () => {
-								await removeFile({
-									variables: {
-										attachmentId,
-									},
-								});
-							}}
-						/>
+						{!customerToken && (
+							<RemoveFile
+								onClick={async () => {
+									await removeFile({
+										variables: {
+											attachmentId,
+										},
+									});
+								}}
+							/>
+						)}
 					</Attachment>
 				))}
 				{!customerToken && <UploadDashboard taskId={item.id} />}

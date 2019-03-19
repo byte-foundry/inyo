@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import Uppy, {Plugin} from '@uppy/core';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
@@ -54,6 +54,13 @@ function UploadDashboard({taskId}) {
 			mutation: uploadAttachements,
 			taskId,
 		}),
+	);
+
+	useEffect(
+		() => function cleanup() {
+			uppyState.close();
+		},
+		[],
 	);
 
 	return (

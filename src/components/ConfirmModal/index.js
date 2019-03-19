@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import {ReactComponent as CloseIcon} from '../../utils/icons/close.svg';
-
 import {Button} from '../../utils/new/design-system';
-import {ModalContainer, ModalElem, ModalCloseIcon} from '../../utils/content';
+import {ModalContainer, ModalElem} from '../../utils/content';
 
 const ModalRow = styled('div')`
 	padding-left: 20px;
@@ -18,13 +16,15 @@ const ModalRowHoriz = styled(ModalRow)`
 	justify-content: flex-end;
 `;
 
-export default function ConfirmModal({children, onConfirm, closeModal}) {
+export default function ConfirmModal({
+	children,
+	onConfirm,
+	closeModal,
+	onDismiss,
+}) {
 	return (
-		<ModalContainer size="small">
+		<ModalContainer size="small" onDismiss={onDismiss || closeModal}>
 			<ModalElem>
-				<ModalCloseIcon>
-					<CloseIcon onClick={closeModal} />
-				</ModalCloseIcon>
 				<ModalRow>{children}</ModalRow>
 				<ModalRowHoriz>
 					<Button link onClick={() => onConfirm(false)}>

@@ -6,6 +6,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
+import FilesIconSvg from '../../utils/icons/file.svg';
 import HourglassIconSvg from '../../utils/icons/hourglass.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
@@ -151,6 +152,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
+		display: block;
 	}
 `;
 
@@ -308,6 +310,7 @@ export function TaskCustomerInput({
 export function TaskInfosInputs({
 	item,
 	noComment,
+	noAttachment,
 	onDueDateSubmit,
 	onUnitSubmit,
 	onCustomerSubmit,
@@ -456,6 +459,23 @@ export function TaskInfosInputs({
 				item={item}
 				disabled={!!customerToken}
 			/>
+			{!noAttachment && !!item.attachments.length && (
+				<TaskIconText
+					data-tip="Fichiers joints"
+					inactive={editDueDate}
+					icon={<TaskInfosIcon icon={FilesIconSvg} />}
+					content={
+						<>
+							{item.attachments.length}{' '}
+							<Plural
+								singular="fichier"
+								plural="fichiers"
+								value={item.attachments.length}
+							/>
+						</>
+					}
+				/>
+			)}
 		</TaskInfos>
 	);
 }
@@ -495,7 +515,8 @@ function Task({
 
 	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
 	const isFinishable
-		= (!customerToken && !isCustomerTask(item))
+		= (item.status !== 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item)))
 		|| (customerToken && isCustomerTask(item));
 
 	return (

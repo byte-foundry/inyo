@@ -10,7 +10,7 @@ import {
 	ModalElem,
 	ModalActions,
 } from '../../../utils/content';
-import {Heading, Button} from '../../../utils/new/design-system';
+import {Heading, Button, P} from '../../../utils/new/design-system';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
@@ -19,6 +19,10 @@ import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
+
+const PA = styled(P)`
+	font-size: 16px;
+`;
 
 const Container = styled('div')`
 	display: flex;
@@ -168,31 +172,30 @@ function TasksList({location, history}) {
 				<ModalContainer onDismiss={() => history.push('/app/tasks')}>
 					<ModalElem>
 						<Heading>Bienvenue sur Inyo,</Heading>
-						<p>
+						<PA>
 							Pour découvrir comment fonctionne Inyo, nous avons
 							créé plusieurs tâches qui reprennent les
 							fonctionnalités de base. Vous pouvez les retrouver
 							sur la vue "Tâches" qui regroupe toutes les tâches
-							créées tous projets confondus, ou les filtrer par
-							"clients", "projets" ou type de tâches grâce aux
-							filtres en haut de la page.
-						</p>
-						<p>
+							créées tous projets confondus, ou les filtrer grâce
+							aux filtres en haut de la page.
+						</PA>
+						<PA>
 							À tout moment vous pouvez utiliser le champ
 							principal pour créer une tâche personnelle ou pour
 							un client, et même un projet complet à partir d'un
 							modèle.
-						</p>
-						<p>
+						</PA>
+						<PA>
 							Commencez par cliquer sur la 1ère tâche et optimisez
 							votre activité dès aujourd'hui!
-						</p>
+						</PA>
 
-						<p>
+						<PA>
 							Edwige,
 							<br />
 							votre Smart Assistant.
-						</p>
+						</PA>
 						<ModalActions>
 							<Button
 								big

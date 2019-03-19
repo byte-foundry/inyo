@@ -16,8 +16,10 @@ import {
 	lightGrey,
 	accentGrey,
 	mediumGrey,
+	primaryRed,
 	Button,
-	Heading,
+	SubHeading,
+	P,
 } from '../../utils/new/design-system';
 import {ModalContainer, ModalElem, ModalActions} from '../../utils/content';
 import {
@@ -130,23 +132,66 @@ const SectionTitleContainer = styled('div')`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	&:hover {
+		button {
+			opacity: 1;
+			margin: 0;
+			transition: all 600ms ease;
+		}
+	}
 `;
 
 const TrashIconContainer = styled('div')`
-	flex: 0 0 3rem;
-	margin-left: 14px;
 	cursor: pointer;
+	padding: 1rem;
+
+	&:hover {
+		svg {
+			fill: ${primaryRed};
+		}
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -1rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+	}
 `;
 
 const TrashButton = styled(Button)`
-	padding: 0.3rem 0.5rem;
+	padding: 0;
+	border: none;
+	border-radius: 50%;
+
+	opacity: 0;
+	margin-right: -2rem;
+	transition: all 300ms ease;
+
+	svg {
+		fill: ${accentGrey};
+	}
+
+	&:hover {
+		background: none;
+	}
 `;
 
 function SectionTitle({onClickTrash, ...props}) {
 	return (
 		<SectionTitleContainer>
 			<SectionInput {...props} />
-			<TrashIconContainer onClick={onClickTrash}>
+			<TrashIconContainer
+				onClick={onClickTrash}
+				data-tip="Supprimer cette section"
+			>
 				<TrashButton>
 					<TrashIcon />
 				</TrashButton>
@@ -176,6 +221,27 @@ const editableCss = css`
 
 const DisableTask = styled('div')`
 	pointer-events: none;
+	margin: 2rem 0;
+
+	*::before,
+	*::after,
+	[class*='-TaskInfos'] {
+		display: none;
+	}
+	[class*='-TaskIcon'] {
+		margin: 0 1rem 0 0;
+		*::before,
+		*::after {
+			display: none;
+		}
+	}
+	[class*='-TaskContent'] {
+		margin-top: -0.5rem;
+	}
+`;
+
+const Heading = styled(SubHeading)`
+	margin-bottom: 3rem;
 `;
 
 const DraggableTask = ({task, index, ...rest}) => (
@@ -562,11 +628,11 @@ function ProjectTasksList({items, projectId, sectionId}) {
 						<Heading>
 							Êtes-vous sûr de vouloir supprimer cette section ?
 						</Heading>
-						<p>
+						<P>
 							Vous allez supprimer la section "
 							{removeSectionModalOpen.name}", en supprimant cette
-							section vous allez supprimer les tâches suivantes.
-						</p>
+							section vous allez supprimer les tâches suivantes:
+						</P>
 						<DisableTask>
 							{removeSectionModalOpen.items.map(task => (
 								<Task
@@ -576,17 +642,14 @@ function ProjectTasksList({items, projectId, sectionId}) {
 								/>
 							))}
 						</DisableTask>
-						<p>
-							Vous devez mettre ses tâches dans une autre section
-							pour ne pas qu'elles soient supprimées.
-						</p>
-						<p>
-							Vous pouvez glisser/déposer ces tâches dans une
-							autre section par exemple.
-						</p>
+						<P>
+							Vous pouvez glisser/déposer ses tâches dans une
+							autre section pour ne pas qu'elles soient
+							supprimées.
+						</P>
 						<ModalActions>
 							<Button
-								big
+								link
 								grey
 								onClick={() => setRemoveSectionModalOpen(false)}
 							>

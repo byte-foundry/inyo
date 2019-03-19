@@ -209,8 +209,8 @@ class OnboardingThirdStep extends Component {
 										/>
 										<EmojiTimeline>
 											<Emoji offset={0}>🌙</Emoji>
-											<Emoji offset={33}>🥐</Emoji>
-											<Emoji offset={50}>🍱</Emoji>
+											<Emoji offset={33}>☕</Emoji>
+											<Emoji offset={50}>🍽️</Emoji>
 											<Emoji offset={87}>🛌</Emoji>
 											<Emoji offset={100}>🌗</Emoji>
 										</EmojiTimeline>

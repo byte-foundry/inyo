@@ -159,6 +159,7 @@ export const ProjectHeading = styled('div')`
 `;
 
 export const Heading = styled('h1')`
+	font-weight: 500;
 	color: ${primaryPurple};
 	font-size: 32px;
 `;
@@ -186,8 +187,8 @@ export const SubHeading = styled('div')`
 
 export const P = styled('p')`
 	font-size: 14px;
-	line-height: 1.4em;
-	color: ${primaryGrey};
+	line-height: 1.6em;
+	color: ${primaryBlack};
 `;
 
 export const HR = styled('hr')`
@@ -360,7 +361,8 @@ export const InputLabel = styled('div')`
 
 export const TaskInputDropdown = styled('div')`
 	background: white;
-	box-shadow: 0 0 5px ${gray20};
+	border: 1px solid ${mediumGrey};
+	box-shadow: 5px 5px 15px ${primaryGrey};
 	position: absolute;
 	z-index: 2; /* do a portal instead */
 	width: 500px;

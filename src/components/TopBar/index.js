@@ -59,6 +59,10 @@ export const TopBarMenuLink = styled(NavLink)`
 			z-index: -1;
 		}
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: 1.2rem;
+	}
 `;
 
 const TopBar = styled('div')`
@@ -68,6 +72,7 @@ const TopBar = styled('div')`
 	margin-bottom: 4rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		justify-content: space-between;
 		margin-bottom: 1rem;
 	}
 `;

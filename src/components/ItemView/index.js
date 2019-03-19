@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
@@ -17,11 +17,18 @@ import UnitInput from '../UnitInput';
 import DateInput from '../DateInput';
 import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
+import UploadDashboard from '../UploadDashboard';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
-import {UPDATE_ITEM, REMOVE_ITEM} from '../../utils/mutations';
+import {
+	UPDATE_ITEM,
+	REMOVE_ITEM,
+	REMOVE_ATTACHMENTS,
+} from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
+import {ReactComponent as FileIcon} from '../../utils/icons/file.svg';
+import TrashIcon from '../../utils/icons/trash-icon.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
@@ -29,10 +36,12 @@ import {
 	TaskHeading,
 	SubHeading,
 	Button,
-	primaryPurple,
 	DueDateInputElem,
 	DateInputContainer,
 	HR,
+	primaryPurple,
+	accentGrey,
+	primaryRed,
 } from '../../utils/new/design-system';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
@@ -174,6 +183,55 @@ const TaskHeadingIcon = styled('div')`
 	left: -5px;
 `;
 
+const AttachedList = styled('div')`
+	margin-top: 20px;
+	margin-bottom: 40px;
+
+	a {
+		color: ${primaryPurple};
+		font-size: 0.85rem;
+	}
+
+	div + button {
+		margin-top: 1rem;
+	}
+`;
+
+const RemoveFile = styled('div')`
+	background-color: ${accentGrey};
+	mask-position: center;
+	mask-repeat: no-repeat;
+	mask-image: url(${TrashIcon});
+
+	width: 20px;
+	height: 20px;
+	margin-left: 3rem;
+	cursor: pointer;
+	opacity: 0;
+	transition: all 300ms ease;
+
+	&:hover {
+		background-color: ${primaryRed};
+	}
+`;
+
+const Attachment = styled('div')`
+	margin-bottom: 10px;
+	display: flex;
+	align-items: center;
+
+	&:hover ${RemoveFile} {
+		opacity: 1;
+		transition: all 200ms ease;
+		margin-left: 1.5rem;
+	}
+`;
+
+const FileContainer = styled('span')`
+	margin-right: 1rem;
+	margin-bottom: -0.3rem;
+`;
+
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -188,6 +246,9 @@ const Item = ({id, customerToken, close}) => {
 	});
 
 	const updateItem = useMutation(UPDATE_ITEM);
+	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
+		refetchQueries: ['getAllTasks'],
+	});
 	const deleteItem = useMutation(REMOVE_ITEM, {
 		variables: {
 			itemId: id,
@@ -495,6 +556,31 @@ const Item = ({id, customerToken, close}) => {
 					/>
 				</Description>
 			)}
+			<SubHeading>Pièces jointes</SubHeading>
+			<AttachedList>
+				{item.attachments.map(({url, filename, id: attachmentId}) => (
+					<Attachment>
+						<FileContainer>
+							<FileIcon />
+						</FileContainer>
+						<a href={url} target="_blank" rel="noopener noreferrer">
+							{filename}
+						</a>
+						{!customerToken && (
+							<RemoveFile
+								onClick={async () => {
+									await removeFile({
+										variables: {
+											attachmentId,
+										},
+									});
+								}}
+							/>
+						)}
+					</Attachment>
+				))}
+				{!customerToken && <UploadDashboard taskId={item.id} />}
+			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>
 					<SubHeading>Contenus à récupérer</SubHeading>
@@ -526,7 +612,11 @@ const Item = ({id, customerToken, close}) => {
 				</>
 			)}
 			<SubHeading>Commentaires</SubHeading>
-			<CommentList itemId={item.id} customerToken={customerToken} />
+			<CommentList
+				itemId={item.id}
+				customerToken={customerToken}
+				linkedCustomer={item.linkedCustomer}
+			/>
 			<HR />
 			{!customerToken
 				&& (deletingItem ? (

@@ -6,6 +6,8 @@ import {
 	lightGrey,
 	mediumGrey,
 	accentGrey,
+	lightPurple,
+	mediumPurple,
 } from '../../utils/new/design-system';
 
 const TasksProgressBarMain = styled('div')`
@@ -29,6 +31,46 @@ const TasksProgressBarMain = styled('div')`
 		border-radius: 5px;
 		border: 1px solid ${primaryPurple};
 	}
+
+	&:hover {
+		&:before {
+			color: ${mediumPurple};
+			transition: color 0.2s ease;
+		}
+	}
+
+	&:before {
+		font-size: 0.75rem;
+		line-height: 3rem;
+		text-align: right;
+		overflow: visible;
+		color: ${accentGrey};
+		border-radius: 5px;
+		position: absolute;
+		transition: width 0.2s ease;
+
+		content: ${props => (props.timeItTook >= 0
+		? `"+${props.timeItTook} jours"`
+		: `"${props.timeItTook} jours"`)};
+		top: ${props => (props.timeItTookPercentage >= 1 ? 0 : '1px')};
+		left: calc(
+			2px +
+				${props => (props.timeItTookPercentage >= 1
+		? 0
+		: props.completionRate || 0)}%
+		);
+		width: ${props => (props.timeItTookPercentage >= 1
+		? props.completionRate * props.timeItTookPercentage
+		: props.completionRate * (1 - props.timeItTookPercentage))}%;
+		height: ${props => (props.timeItTookPercentage >= 1 ? '100%' : 'calc(100% - 2px)')};
+		background: ${props => (props.timeItTookPercentage >= 1 ? mediumPurple : lightPurple)};
+		border: 1px solid
+			${props => (props.timeItTookPercentage >= 1 ? mediumPurple : primaryPurple)};
+		transform: translate(
+			${props => (props.timeItTookPercentage >= 1 ? 0 : '-100%')}
+		);
+		z-index: ${props => (props.timeItTookPercentage >= 1 ? 0 : 1)};
+	}
 `;
 
 const TasksProgressBarLabel = styled('div')`
@@ -43,7 +85,20 @@ const TasksProgressBarLabel = styled('div')`
 
 class TasksProgressBar extends Component {
 	render() {
-		const {tasksCompleted, tasksTotal} = this.props;
+		const {
+			tasksCompleted,
+			tasksTotal,
+			tasksTotalWithTimeItTook,
+			finishedItems,
+			allItems,
+			timeItTook,
+			timeItTookPercentage,
+		} = this.props;
+
+		const completionRate
+			= tasksTotal > tasksTotalWithTimeItTook
+				? tasksCompleted / (tasksTotal || 1)
+				: tasksCompleted / (tasksTotalWithTimeItTook || 1);
 
 		return (
 			<>
@@ -53,7 +108,9 @@ class TasksProgressBar extends Component {
 						: '0'}
 				</TasksProgressBarLabel>
 				<TasksProgressBarMain
-					completionRate={(tasksCompleted / tasksTotal) * 100}
+					completionRate={completionRate * 100}
+					timeItTook={timeItTook}
+					timeItTookPercentage={timeItTookPercentage}
 				/>
 			</>
 		);

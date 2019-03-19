@@ -820,6 +820,74 @@ export const CREATE_CUSTOMER = gql`
 			title: $title
 		) {
 			id
+			title
+			firstName
+			lastName
+			name
+			email
+			phone
 		}
+	}
+`;
+
+export const UPDATE_CUSTOMER = gql`
+	mutation updateCustomer(
+		$id: ID!
+		$email: String!
+		$name: String!
+		$firstName: String
+		$lastName: String
+		$title: Title
+		$phone: String
+	) {
+		updateCustomer(
+			id: $id
+			title: $title
+			name: $name
+			firstName: $firstName
+			lastName: $lastName
+			email: $email
+			phone: $phone
+		) {
+			id
+			title
+			firstName
+			lastName
+			name
+			email
+			phone
+		}
+	}
+`;
+
+export const UPLOAD_ATTACHMENTS = gql`
+	mutation uploadAttachments(
+		$taskId: ID
+		$projectId: ID
+		$files: [Upload!]!
+	) {
+		uploadAttachments(
+			files: $files
+			taskId: $taskId
+			projectId: $projectId
+		) {
+			id
+			filename
+			url
+		}
+	}
+`;
+
+export const REMOVE_ATTACHMENTS = gql`
+	mutation removeAttachment($attachmentId: ID!) {
+		removeFile(id: $attachmentId) {
+			id
+		}
+	}
+`;
+
+export const REMOVE_CUSTOMER = gql`
+	mutation removeCustomer($id: ID!) {
+		id
 	}
 `;

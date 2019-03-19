@@ -612,7 +612,11 @@ const Item = ({id, customerToken, close}) => {
 				</>
 			)}
 			<SubHeading>Commentaires</SubHeading>
-			<CommentList itemId={item.id} customerToken={customerToken} />
+			<CommentList
+				itemId={item.id}
+				customerToken={customerToken}
+				linkedCustomer={item.linkedCustomer}
+			/>
 			<HR />
 			{!customerToken
 				&& (deletingItem ? (

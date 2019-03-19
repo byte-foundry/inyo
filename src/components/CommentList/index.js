@@ -52,7 +52,17 @@ const Empty = styled('p')`
 
 class CommentList extends Component {
 	render() {
-		const {itemId, customerToken} = this.props;
+		const {itemId, customerToken, linkedCustomer} = this.props;
+
+		let placeholderText = 'Votre commentaire';
+
+		if (linkedCustomer && !customerToken) {
+			placeholderText = 'Écrire et envoyer un commentaire à votre client';
+		}
+		else if (linkedCustomer) {
+			placeholderText
+				= 'Écrire et envoyer un commentaire à votre prestataire';
+		}
 
 		return (
 			<Query
@@ -172,7 +182,9 @@ class CommentList extends Component {
 													<FlexRow>
 														<ItemComment
 															data-tip="Les personnes liées à la tâche seront notifiées"
-															placeholder="Votre commentaire"
+															placeholder={
+																placeholderText
+															}
 															value={
 																values.newComment
 															}

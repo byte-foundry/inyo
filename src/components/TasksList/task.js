@@ -310,6 +310,7 @@ export function TaskCustomerInput({
 export function TaskInfosInputs({
 	item,
 	noComment,
+	noAttachment,
 	onDueDateSubmit,
 	onUnitSubmit,
 	onCustomerSubmit,
@@ -458,7 +459,7 @@ export function TaskInfosInputs({
 				item={item}
 				disabled={!!customerToken}
 			/>
-			{!!item.attachments.length && (
+			{!noAttachment && !!item.attachments.length && (
 				<TaskIconText
 					data-tip="Fichiers joints"
 					inactive={editDueDate}

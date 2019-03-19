@@ -446,6 +446,7 @@ const TaskInput = ({
 							linkedCustomer: itemCustomer,
 						}}
 						noComment
+						noAttachment
 						onDueDateSubmit={date => setItemDueDate(date)}
 						onCustomerSubmit={(customer) => {
 							if (customer === null) {

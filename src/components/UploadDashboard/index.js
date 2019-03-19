@@ -24,7 +24,7 @@ class GraphQlUpload extends Plugin {
 		this.uppy.addUploader((fileIDs) => {
 			const files = fileIDs.map(fileID => this.uppy.getFile(fileID).data);
 
-			this.mutation({
+			return this.mutation({
 				variables: {
 					taskId: this.taskId,
 					projectId: this.projectId,
@@ -68,9 +68,11 @@ function UploadDashboard({taskId}) {
 				closeModalOnClickOutside
 				closeAfterFinish={true}
 				uppy={uppyState}
+				note="5Mo total maximum"
 				locale={{
 					strings: {
 						closeModal: 'Fermer',
+						cancel: 'Annuler',
 						addMoreFiles: "Ajouter d'autres fichiers",
 						importFrom: 'Importer',
 						dashboardWindowTitle: 'Appuyer sur échap pour fermer',

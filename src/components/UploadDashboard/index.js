@@ -24,19 +24,13 @@ class GraphQlUpload extends Plugin {
 		this.uppy.addUploader((fileIDs) => {
 			const files = fileIDs.map(fileID => this.uppy.getFile(fileID).data);
 
-			const fuck = this.mutation({
+			this.mutation({
 				variables: {
 					taskId: this.taskId,
 					projectId: this.projectId,
 					files,
 				},
 				context: {hasUpload: true},
-			});
-
-			console.log(fuck);
-			return fuck.then((zboub) => {
-				console.log(zboub);
-				return zboub;
 			});
 		});
 	}
@@ -67,6 +61,41 @@ function UploadDashboard({taskId}) {
 				closeModalOnClickOutside
 				closeAfterFinish={true}
 				uppy={uppyState}
+				locale={{
+					strings: {
+						closeModal: 'Fermer',
+						addMoreFiles: "Ajouter d'autres fichiers",
+						importFrom: 'Importer',
+						dashboardWindowTitle: 'Appuyer sur échap pour fermer',
+						dashboardTitle: 'Téléversement de document',
+						copyLinkToClipboardSuccess: 'Lien copié !',
+						copyLinkToClipboardFallback: "Copiez l'url ci-dessous",
+						copyLink: 'Copiez le lien',
+						fileSource: 'Fichier source: %{name}',
+						done: 'Terminé',
+						removeFile: 'Retirer le fichier',
+						editFile: 'Modifier le fichier',
+						editing: 'Modification de %{file} en cours',
+						edit: 'Modifier',
+						finishEditingFile: 'Valider modification',
+						myDevice: 'Mon appareil',
+						dropPasteImport:
+							'Déposer des fichiers ici, %{browse} votre ordinateur, ou importer de',
+						dropPaste:
+							'Déposer des fichiers ici ou %{browse} votre ordinateur',
+						browse: 'parcourir',
+						uploadComplete: 'Téléversement complété',
+						resumeUpload: 'Reprendre téléversement',
+						pauseUpload: 'Pauser téléversement',
+						retryUpload: 'Réessayer téléversement',
+						xFilesSelected: {
+							0: '%{smart_count} fichier sélectionné',
+							1: '%{smart_count} fichiers sélectionnés',
+						},
+						uploading: "En cours d'envoi",
+						complete: 'Terminé',
+					},
+				}}
 			/>
 		</>
 	);

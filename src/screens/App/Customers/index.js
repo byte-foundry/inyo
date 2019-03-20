@@ -16,7 +16,7 @@ import CustomerModal from '../../../components/CustomerModal';
 import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
 import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
-import {ReactComponent as DeleteIcon} from '../../../utils/icons/trash-icon.svg';
+import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 import {
@@ -157,6 +157,12 @@ const EditIcon = styled(PencilIcon)`
 	}
 `;
 
+const DeleteIcon = styled(TrashIcon)`
+	path {
+		fill: ${accentGrey};
+	}
+`;
+
 const Customers = () => {
 	const {data, error} = useQuery(GET_USER_CUSTOMERS);
 	const createCustomer = useMutation(CREATE_CUSTOMER);
@@ -230,16 +236,16 @@ const Customers = () => {
 								<Cell>{customer.phone}</Cell>
 								<ActionCell>
 									<EditIcon />
-									{/* <DeleteIcon
+									<DeleteIcon
 										onClick={async (e) => {
 											e.stopPropagation();
 
 											setCustomerToBeRemoved(customer);
 
 											const confirmed = await new Promise(
-												resolve => setConfirmRemoveCustomer(
-													{resolve},
-												),
+												resolve => setConfirmRemoveCustomer({
+													resolve,
+												}),
 											);
 
 											setConfirmRemoveCustomer({});
@@ -253,7 +259,7 @@ const Customers = () => {
 												});
 											}
 										}}
-									/> */}
+									/>
 								</ActionCell>
 							</Row>
 						))}
@@ -279,27 +285,6 @@ const Customers = () => {
 							else if (selected.customer) {
 								await createCustomer({
 									variables: selected.customer,
-									update(
-										cache,
-										{
-											data: {
-												createCustomer: addedCustomer,
-											},
-										},
-									) {
-										const query = cache.readQuery({
-											query: GET_USER_CUSTOMERS,
-											variables: {},
-										});
-
-										query.me.customers.push(addedCustomer);
-
-										cache.writeQuery({
-											query: GET_USER_CUSTOMERS,
-											variables: {},
-											data: query,
-										});
-									},
 								});
 
 								setEditCustomer(false);

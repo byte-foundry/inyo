@@ -481,7 +481,7 @@ export function TaskInfosInputs({
 }
 
 function Task({
-	item, customerToken, location, isDraggable,
+	item, customerToken, location, isDraggable, noData,
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
@@ -586,65 +586,67 @@ function Task({
 						)}
 					</TaskActions>
 				</TaskHeader>
-				<TaskInfosInputs
-					taskUrlPrefix={taskUrlPrefix}
-					location={location}
-					item={item}
-					customerToken={customerToken}
-					onDueDateSubmit={(date) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								dueDate: date.toISOString(),
-							},
-							optimisticResponse: {
-								__typename: 'Mutation',
-								updateItem: {
-									__typename: 'Item',
-									...item,
+				{!noData && (
+					<TaskInfosInputs
+						taskUrlPrefix={taskUrlPrefix}
+						location={location}
+						item={item}
+						customerToken={customerToken}
+						onDueDateSubmit={(date) => {
+							updateItem({
+								variables: {
+									itemId: item.id,
 									dueDate: date.toISOString(),
 								},
-							},
-						});
-					}}
-					onCustomerSubmit={(customer) => {
-						if (customer === null) {
+								optimisticResponse: {
+									__typename: 'Mutation',
+									updateItem: {
+										__typename: 'Item',
+										...item,
+										dueDate: date.toISOString(),
+									},
+								},
+							});
+						}}
+						onCustomerSubmit={(customer) => {
+							if (customer === null) {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										linkedCustomerId: null,
+									},
+								});
+							}
+							else if (customer.value === 'CREATE') {
+								setEditCustomer(true);
+							}
+							else {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										linkedCustomerId: customer.value,
+									},
+								});
+							}
+						}}
+						onUnitSubmit={(unit) => {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									linkedCustomerId: null,
-								},
-							});
-						}
-						else if (customer.value === 'CREATE') {
-							setEditCustomer(true);
-						}
-						else {
-							updateItem({
-								variables: {
-									itemId: item.id,
-									linkedCustomerId: customer.value,
-								},
-							});
-						}
-					}}
-					onUnitSubmit={(unit) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								unit,
-							},
-							optimisticResponse: {
-								__typename: 'Mutation',
-								updateItem: {
-									__typename: 'Item',
-									...item,
 									unit,
 								},
-							},
-						});
-					}}
-				/>
+								optimisticResponse: {
+									__typename: 'Mutation',
+									updateItem: {
+										__typename: 'Item',
+										...item,
+										unit,
+									},
+								},
+							});
+						}}
+					/>
+				)}
 			</TaskContent>
 			{isEditingCustomer && (
 				<CustomerModal

@@ -149,6 +149,11 @@ export const Button = styled('button')`
 	& + button {
 		margin-left: .5rem;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: 100%;
+		padding: 0.6rem 0.8rem;
+	}
 `;
 
 export const ButtonLink = Button.withComponent(Link);

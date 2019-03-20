@@ -122,10 +122,6 @@ const Forms = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
 		margin-bottom: 1rem;
-
-		button {
-			width: 100%;
-		}
 	}
 `;
 

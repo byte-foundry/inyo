@@ -426,6 +426,10 @@ export const ModalCloseIcon = styled('div')`
 	&:hover {
 		color: ${primaryRed};
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		right: 1rem;
+	}
 `;
 
 export const ModalRow = styled('div')`

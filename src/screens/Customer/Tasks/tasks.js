@@ -8,6 +8,7 @@ import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 import {CustomerContext} from '../../../utils/contexts';
 
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
+import ProjectHeader from '../../../components/ProjectHeader';
 import TasksList from '../../../components/TasksList';
 import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
 
@@ -47,6 +48,10 @@ const CustomerTasks = ({css, style, projectId}) => {
 		return (
 			<Container css={css} style={style}>
 				<TaskAndArianne>
+					<ProjectHeader
+						projectId={projectId}
+						customerToken={customerToken}
+					/>
 					<ProjectCustomerTasksList
 						projectId={projectId}
 						items={tasks.filter(

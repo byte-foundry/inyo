@@ -43,7 +43,7 @@ const editableCss = css`
 	display: block;
 `;
 
-export default function ProjectHeader({projectId}) {
+export default function ProjectHeader({projectId, customerToken}) {
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
 	});
@@ -59,8 +59,16 @@ export default function ProjectHeader({projectId}) {
 	);
 	const finishedItems = allItems.filter(item => item.status === 'FINISHED');
 
+	function getCustomerOffsetedTimeItTook(item) {
+		return customerToken && item.unit > item.timeItTook
+			? item.unit
+			: item.timeItTook;
+	}
+
 	const totalTimeItTook = finishedItems.reduce(
-		(totalTimeItTook, item) => totalTimeItTook + (item.timeItTook || item.unit) + 1,
+		(totalTimeItTook, item) => totalTimeItTook
+			+ (getCustomerOffsetedTimeItTook(item) || item.unit)
+			+ 1,
 		0,
 	);
 	const totalTimePlanned = finishedItems.reduce(
@@ -71,7 +79,7 @@ export default function ProjectHeader({projectId}) {
 	const timeItTookPercentage = totalTimeItTook / (totalTimePlanned || 1);
 
 	const timeItTook = finishedItems.reduce(
-		(totalTimeItTook, item) => totalTimeItTook + item.timeItTook - item.unit,
+		(totalTimeItTook, item) => totalTimeItTook + getCustomerOffsetedTimeItTook(item) - item.unit,
 		0,
 	);
 

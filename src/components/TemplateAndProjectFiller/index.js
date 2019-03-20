@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import styled from '@emotion/styled/macro';
+import styled from '@emotion/styled';
 
 import Plural from '../Plural';
 

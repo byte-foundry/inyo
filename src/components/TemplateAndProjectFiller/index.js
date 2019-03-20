@@ -279,7 +279,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 					</TemplateInfoHeader>
 					<P>
 						Les modèles sont composés d'un ensemble de tâches
-						prédéfinies. Ils vous permettont de démarrer vos projets
+						prédéfinies. Ils vous permettront de démarrer vos projets
 						sur de bonnes bases.
 					</P>
 					<P>

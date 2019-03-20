@@ -14,8 +14,9 @@ import {
 	primaryGrey,
 	primaryBlack,
 	FilterInput,
+	Heading,
 } from '../../utils/new/design-system';
-import {Loading} from '../../utils/content';
+import {Loading, P} from '../../utils/content';
 import Search from '../../utils/icons/search.svg';
 import {BREAKPOINTS} from '../../utils/constants';
 
@@ -91,6 +92,26 @@ const LoadingContainer = styled('div')`
 	position: relative;
 	flex: 1;
 	height: 1px;
+`;
+
+const TemplateInfo = styled('div')`
+	flex: 1;
+`;
+
+const TemplateInfoHeader = styled(Heading)`
+	display: flex;
+`;
+
+const TemplateInfoIcon = styled('span')`
+	font-weight: 500;
+	color: ${primaryPurple};
+	font-size: 32px;
+	border: solid 2px ${primaryPurple};
+	border-radius: 50%;
+	width: 47px;
+	display: flex;
+	justify-content: center;
+	margin-right: 10px;
 `;
 
 function TemplateTaskList({selectedTemplate}) {
@@ -250,6 +271,24 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 					</>
 				)}
 			</Column>
+			{!selectedTemplate && !selectedProject && (
+				<TemplateInfo>
+					<TemplateInfoHeader>
+						<TemplateInfoIcon>?</TemplateInfoIcon> Modèles
+						prédéfinis
+					</TemplateInfoHeader>
+					<P>
+						Les modèles sont composés d'un ensemble de tâches
+						prédéfinies. Ils vous permettont de démarrer vos projets
+						sur de bonnes bases.
+					</P>
+					<P>
+						Nous les avons construits en collaboration avec des
+						freelances expérimentés dans leurs domaines (design,
+						développement etc.)
+					</P>
+				</TemplateInfo>
+			)}
 			<TemplateTaskList selectedTemplate={selectedTemplate} />
 			{loading ? (
 				<LoadingContainer>

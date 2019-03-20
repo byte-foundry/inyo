@@ -876,6 +876,17 @@ export const UPLOAD_ATTACHMENTS = gql`
 			id
 			filename
 			url
+			owner {
+				__typename
+				... on User {
+					firstName
+					lastName
+				}
+				... on Customer {
+					firstName
+					lastName
+				}
+			}
 		}
 	}
 `;

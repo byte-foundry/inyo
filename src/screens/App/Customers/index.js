@@ -56,15 +56,15 @@ const RowHeader = styled('tr')`
 		background: none;
 		width: 50px;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const HeaderCell = styled('th')`
 	font-weight: normal;
 	color: ${accentGrey};
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: none;
-	}
 `;
 
 const Cell = styled('td')`
@@ -120,11 +120,11 @@ const Forms = styled('div')`
 	justify-content: space-between;
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
 		margin-bottom: 1rem;
 
 		button {
 			width: 100%;
-			margin-bottom: 1rem;
 		}
 	}
 `;
@@ -147,8 +147,8 @@ const FilterInput = styled(Input)`
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 1rem 0;
-		width: 100%;
+		margin: 0.5rem 0;
+		width: calc(100% - 4rem);
 	}
 `;
 

@@ -901,6 +901,8 @@ export const REMOVE_ATTACHMENTS = gql`
 
 export const REMOVE_CUSTOMER = gql`
 	mutation removeCustomer($id: ID!) {
-		id
+		removeCustomer(id: $id) {
+			id
+		}
 	}
 `;

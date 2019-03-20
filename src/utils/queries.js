@@ -23,7 +23,7 @@ export const CHECK_LOGIN_USER = gql`
 `;
 
 export const GET_USER_CUSTOMERS = gql`
-	query userCustomersQuery {
+	query getUserCustomers {
 		me {
 			id
 			customers {

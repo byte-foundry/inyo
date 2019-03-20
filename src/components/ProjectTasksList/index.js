@@ -5,7 +5,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
 
 import Task from '../TasksList/task';
-import TemplateFiller from '../TemplateFiller';
+import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
@@ -376,18 +376,21 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 	if (!items.length && !sectionsInfos.length) {
 		return (
-			<TemplateFiller
-				onChoose={(template) => {
-					template.sections.forEach((section) => {
-						addSection({
-							variables: {
-								projectId,
-								...section,
-							},
+			<>
+				<TemplateAndProjectFiller
+					projectId={projectId}
+					onChoose={(template) => {
+						template.sections.forEach((section) => {
+							addSection({
+								variables: {
+									projectId,
+									...section,
+								},
+							});
 						});
-					});
-				}}
-			/>
+					}}
+				/>
+			</>
 		);
 	}
 

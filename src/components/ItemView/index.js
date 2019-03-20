@@ -42,6 +42,7 @@ import {
 	primaryPurple,
 	accentGrey,
 	primaryRed,
+	primaryGrey,
 } from '../../utils/new/design-system';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
@@ -230,6 +231,16 @@ const Attachment = styled('div')`
 const FileContainer = styled('span')`
 	margin-right: 1rem;
 	margin-bottom: -0.3rem;
+`;
+
+const FileOwner = styled('span')`
+	font-size: 12px;
+	color: ${primaryGrey};
+
+	:before {
+		padding: 0 5px;
+		content: '\\2014';
+	}
 `;
 
 const Item = ({id, customerToken, close}) => {
@@ -558,28 +569,54 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
-				{item.attachments.map(({url, filename, id: attachmentId}) => (
-					<Attachment>
-						<FileContainer>
-							<FileIcon />
-						</FileContainer>
-						<a href={url} target="_blank" rel="noopener noreferrer">
-							{filename}
-						</a>
-						{!customerToken && (
-							<RemoveFile
-								onClick={async () => {
-									await removeFile({
-										variables: {
-											attachmentId,
-										},
-									});
-								}}
-							/>
-						)}
-					</Attachment>
-				))}
-				{!customerToken && <UploadDashboard taskId={item.id} />}
+				{item.attachments.map(
+					({
+						url, filename, id: attachmentId, owner,
+					}) => {
+						const isOwner
+							= owner
+							&& ((customerToken
+								&& owner.__typename === 'Customer')
+								|| (!customerToken
+									&& owner.__typename === 'User'));
+
+						return (
+							<Attachment key={attachmentId}>
+								<FileContainer>
+									<FileIcon />
+								</FileContainer>
+								<a
+									href={url}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									{filename}
+								</a>
+								{owner && !isOwner && (
+									<FileOwner>
+										{owner.firstName} {owner.lastName}
+									</FileOwner>
+								)}
+								{(!customerToken || isOwner) && (
+									<RemoveFile
+										onClick={async () => {
+											await removeFile({
+												variables: {
+													token: customerToken,
+													attachmentId,
+												},
+											});
+										}}
+									/>
+								)}
+							</Attachment>
+						);
+					},
+				)}
+				<UploadDashboard
+					customerToken={customerToken}
+					taskId={item.id}
+				/>
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>

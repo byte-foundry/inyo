@@ -7,7 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import FilesIconSvg from '../../utils/icons/file.svg';
-import HourglassIconSvg from '../../utils/icons/hourglass.svg';
+import DateIconSvg from '../../utils/icons/date.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
@@ -407,7 +407,7 @@ export function TaskInfosInputs({
 			<TaskIconText
 				data-tip="Marge restante pour commencer la tâche"
 				inactive={editDueDate}
-				icon={<TaskInfosIcon icon={HourglassIconSvg} />}
+				icon={<TaskInfosIcon icon={DateIconSvg} />}
 				content={
 					<DateInputContainer
 						onClick={

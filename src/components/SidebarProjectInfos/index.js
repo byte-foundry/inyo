@@ -26,6 +26,9 @@ import CustomerModal from '../CustomerModal';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
+import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
+import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
 import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
@@ -129,6 +132,19 @@ const DateContainer = styled('div')`
 	}
 `;
 
+const SidebarLink = styled('div')`
+	display: flex;
+	align-items: center;
+	color: ${primaryPurple};
+	text-decoration: none;
+	font-weight: 500;
+	margin-bottom: 8px;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`;
+
 const SidebarHeading = styled(SubHeading)`
 	display: flex;
 	justify-content: space-between;
@@ -169,21 +185,32 @@ const SidebarProjectInfos = ({
 
 	const {project} = data;
 
-	const query = new URLSearchParams(location.search);
+	function setView(view) {
+		const query = new URLSearchParams(location.search);
 
-	query.delete('filter');
-	query.set('notes', true);
+		query.delete('filter');
+		query.set('view', view);
+		history.push(`/app/tasks/?${query.toString()}`);
+	}
 
 	return (
 		<Aside>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<SubSection>
-				<SubHeading>Menu projet</SubHeading>
-				<Link to={`/app/tasks?${query.toString()}`}>
+				<SidebarHeading>Menu Projet</SidebarHeading>
+				<SidebarLink onClick={() => setView('tasks')}>
+					<TasksIcon />
+					Tâches du projet
+				</SidebarLink>
+				{/* <SidebarLink onClick={() => setView('personal-notes')}>
+					<PersonalNotesIcon />
+					Notes personnelles
+				</SidebarLink> */}
+				<SidebarLink onClick={() => setView('shared-notes')}>
+					<SharedNotesIcon />
 					Notes partagées
-				</Link>
+				</SidebarLink>
 			</SubSection>
-
 			<SubSection>
 				<SidebarHeading>
 					Votre client

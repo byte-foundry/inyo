@@ -43,7 +43,7 @@ const editableCss = css`
 	display: block;
 `;
 
-export default function ProjectHeader({projectId, customerToken}) {
+export default function ProjectHeader({projectId, customerToken, showProgress}) {
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token: customerToken},
 	});
@@ -107,30 +107,32 @@ export default function ProjectHeader({projectId, customerToken}) {
 					}
 				}}
 			/>
-			<TasksProgressBar
-				tasksCompleted={
-					finishedItems.length
-					+ finishedItems.reduce((acc, item) => acc + item.unit, 0)
-				}
-				tasksTotal={
-					allItems.length
-					+ allItems.reduce((acc, item) => acc + item.unit, 0)
-				}
-				tasksTotalWithTimeItTook={
-					allItems.length
-					+ allItems.reduce(
-						(acc, item) => acc + (item.timeItTook || item.unit),
-						0,
-					)
-				}
-				// tasksTotal devrait prendre en compte timeItook.
-				// en fait tasksTotal = additioner le temps de tous les itemItTook définis + item.unit des tâches pas encore finies
-				// + allItems.length pour tenir compte des tâches avec durée = 0
-				allItems={allItems.length}
-				finishedItems={finishedItems.length}
-				timeItTook={timeItTook}
-				timeItTookPercentage={timeItTookPercentage}
-			/>
+			{showProgress && (
+				<TasksProgressBar
+					tasksCompleted={
+						finishedItems.length
+						+ finishedItems.reduce((acc, item) => acc + item.unit, 0)
+					}
+					tasksTotal={
+						allItems.length
+						+ allItems.reduce((acc, item) => acc + item.unit, 0)
+					}
+					tasksTotalWithTimeItTook={
+						allItems.length
+						+ allItems.reduce(
+							(acc, item) => acc + (item.timeItTook || item.unit),
+							0,
+						)
+					}
+					// tasksTotal devrait prendre en compte timeItook.
+					// en fait tasksTotal = additioner le temps de tous les itemItTook définis + item.unit des tâches pas encore finies
+					// + allItems.length pour tenir compte des tâches avec durée = 0
+					allItems={allItems.length}
+					finishedItems={finishedItems.length}
+					timeItTook={timeItTook}
+					timeItTookPercentage={timeItTookPercentage}
+				/>
+			)}
 		</ProjectHeaderContainer>
 	);
 }

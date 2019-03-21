@@ -90,7 +90,7 @@ function TasksList({location, history}) {
 	const openModal = query.get('openModal');
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
-	const notes = query.get('notes');
+	const view = query.get('view');
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -114,6 +114,8 @@ function TasksList({location, history}) {
 	const setCustomerSelected = (selected) => {
 		const newQuery = new URLSearchParams(query);
 
+		newQuery.delete('view');
+
 		if (selected) {
 			const {value: selectedCustomerId} = selected;
 
@@ -133,6 +135,8 @@ function TasksList({location, history}) {
 	const setFilterSelected = (selected) => {
 		const newQuery = new URLSearchParams(query);
 
+		newQuery.delete('view');
+
 		if (selected) {
 			const {value: selectedFilterId} = selected;
 
@@ -141,6 +145,8 @@ function TasksList({location, history}) {
 
 		history.push(`/app/tasks?${newQuery.toString()}`);
 	};
+
+	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
 
 	return (
 		<Container>
@@ -153,10 +159,17 @@ function TasksList({location, history}) {
 					selectFilter={setFilterSelected}
 					filterId={filter}
 				/>
-				{projectId && <ProjectHeader projectId={projectId} />}
-				{projectId && notes ? (
+				{projectId && (
+					<ProjectHeader
+						projectId={projectId}
+						showProgress={tasksView}
+					/>
+				)}
+				{projectId && view === 'shared-notes' && <ProjectSharedNotes />}
+				{projectId && view === 'personal-notes' && (
 					<ProjectSharedNotes />
-				) : (
+				)}
+				{tasksView && (
 					<>
 						<CreateTask
 							setProjectSelected={setProjectSelected}

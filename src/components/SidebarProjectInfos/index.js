@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
@@ -145,6 +145,7 @@ const SidebarProjectInfos = ({
 	projectId,
 	hasClientAttributedTasks,
 	history,
+	location,
 }) => {
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -168,12 +169,20 @@ const SidebarProjectInfos = ({
 
 	const {project} = data;
 
+	const query = new URLSearchParams(location.search);
+
+	query.delete('filter');
+	query.set('notes', true);
+
 	return (
 		<Aside>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			{/* <SubSection>
+			<SubSection>
 				<SubHeading>Menu projet</SubHeading>
-			</SubSection> */}
+				<Link to={`/app/tasks?${query.toString()}`}>
+					Notes partagées
+				</Link>
+			</SubSection>
 
 			<SubSection>
 				<SidebarHeading>

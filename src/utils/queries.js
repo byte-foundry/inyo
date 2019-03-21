@@ -103,6 +103,15 @@ export const GET_ALL_PROJECTS = gql`
 	}
 `;
 
+export const GET_PROJECT_NOTES = gql`
+	query getProjectNotes($id: ID!, $token: String) {
+		project(id: $id, token: $token) {
+			id
+			notes
+		}
+	}
+`;
+
 export const GET_PROJECT_INFOS = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 

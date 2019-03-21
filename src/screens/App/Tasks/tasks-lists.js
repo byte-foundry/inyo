@@ -19,6 +19,7 @@ import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
+import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 
 const PA = styled(P)`
 	font-size: 16px;
@@ -89,6 +90,7 @@ function TasksList({location, history}) {
 	const openModal = query.get('openModal');
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
+	const notes = query.get('notes');
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -152,18 +154,24 @@ function TasksList({location, history}) {
 					filterId={filter}
 				/>
 				{projectId && <ProjectHeader projectId={projectId} />}
-				<CreateTask
-					setProjectSelected={setProjectSelected}
-					currentProjectId={projectId}
-					setCustomerSelected={setCustomerSelected}
-				/>
-				<Suspense fallback={<Loading />}>
-					<TasksListContainer
-						projectId={projectId}
-						linkedCustomerId={linkedCustomerId}
-						filter={filter}
-					/>
-				</Suspense>
+				{projectId && notes ? (
+					<ProjectSharedNotes />
+				) : (
+					<>
+						<CreateTask
+							setProjectSelected={setProjectSelected}
+							currentProjectId={projectId}
+							setCustomerSelected={setCustomerSelected}
+						/>
+						<Suspense fallback={<Loading />}>
+							<TasksListContainer
+								projectId={projectId}
+								linkedCustomerId={linkedCustomerId}
+								filter={filter}
+							/>
+						</Suspense>
+					</>
+				)}
 			</TaskAndArianne>
 			{query.get('projectId') && (
 				<SidebarProjectInfos projectId={query.get('projectId')} />

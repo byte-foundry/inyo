@@ -361,13 +361,16 @@ const SidebarProjectInfos = ({
 				</SubSection>
 			)}
 
-			<DuplicateProjectButton
-				data-tip="Copier ces tâches dans un nouveau projet"
-				projectId={project.id}
-				onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)}
-			>
-				Dupliquer le projet
-			</DuplicateProjectButton>
+			<div>
+				<DuplicateProjectButton
+					data-tip="Copier ces tâches dans un nouveau projet"
+					projectId={project.id}
+					onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
+					}
+				>
+					Dupliquer le projet
+				</DuplicateProjectButton>
+			</div>
 
 			{/* <Button red onClick={removeProject}>
 				Supprimer le projet

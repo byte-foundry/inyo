@@ -57,7 +57,7 @@ const InputButtonContainer = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: row;
-		width: calc(100vh - 20rem);
+		width: calc(50vh - 3rem);
 		top: 1.5rem;
 		right: 0;
 		display: flex;
@@ -65,7 +65,7 @@ const InputButtonContainer = styled('div')`
 		justify-content: space-between;
 
 		button + button {
-			margin: 0 0.2rem 0 0;
+			margin: 0 0.25rem 0 0;
 		}
 	}
 

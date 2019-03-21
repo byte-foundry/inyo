@@ -16,7 +16,7 @@ export const primaryGrey = '#A9A9A9';
 export const accentGrey = '#c7c7c7';
 export const lightGrey = '#fafafa';
 export const mediumGrey = '#eee';
-export const primaryBlack = '#333';
+export const primaryBlack = '#140642';
 
 const shevy = new Shevy({
 	baseFontSize: '14px',
@@ -149,6 +149,11 @@ export const Button = styled('button')`
 	& + button {
 		margin-left: .5rem;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: 100%;
+		padding: 0.6rem 0.8rem;
+	}
 `;
 
 export const ButtonLink = Button.withComponent(Link);
@@ -162,6 +167,10 @@ export const Heading = styled('h1')`
 	font-weight: 500;
 	color: ${primaryPurple};
 	font-size: 32px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 24px;
+	}
 `;
 
 export const TaskHeading = styled('h2')`
@@ -182,7 +191,8 @@ export const SubHeading = styled('div')`
 	text-transform: uppercase;
 	font-size: 12px;
 	letter-spacing: 0.5px;
-	color: ${primaryGrey};
+	color: ${primaryBlack};
+	font-weight: 500;
 `;
 
 export const P = styled('p')`
@@ -393,4 +403,27 @@ export const DueDateInputElem = styled('input')`
 export const DateInputContainer = styled('div')`
 	position: relative;
 	display: inline-block;
+`;
+
+export const FilterInput = styled(Input)`
+	margin: 3rem 0;
+	padding: 0.25rem 1rem;
+	padding-left: 3rem;
+	border-radius: 1.5rem;
+	width: 50%;
+
+	background-position: 1rem center;
+	background-repeat: no-repeat;
+	background-image: url(${props => props.icon});
+
+	&:focus {
+		background-position: calc(1rem + 1px) center;
+		background-repeat: no-repeat;
+		background-image: url(${props => props.icon});
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 0.5rem 0;
+		width: calc(100% - 4rem);
+	}
 `;

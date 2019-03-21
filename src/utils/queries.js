@@ -23,7 +23,7 @@ export const CHECK_LOGIN_USER = gql`
 `;
 
 export const GET_USER_CUSTOMERS = gql`
-	query userCustomersQuery {
+	query getUserCustomers {
 		me {
 			id
 			customers {
@@ -122,6 +122,17 @@ export const GET_PROJECT_INFOS = gql`
 				id
 				filename
 				url
+				owner {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
 			}
 			sections {
 				id

@@ -57,11 +57,16 @@ const InputButtonContainer = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: row;
-		width: calc(100vh - 20rem);
-		top: 2.5rem;
+		width: calc(50vh - 3rem);
+		top: 1.5rem;
 		right: 0;
 		display: flex;
 		flex-direction: row-reverse;
+		justify-content: space-between;
+
+		button + button {
+			margin: 0 0.25rem 0 0;
+		}
 	}
 
 	button {
@@ -76,7 +81,6 @@ const InputButtonContainer = styled('div')`
 
 		@media (max-width: ${BREAKPOINTS}px) {
 			flex: 1;
-			margin: 0;
 			color: ${primaryPurple};
 			border-color: ${primaryPurple};
 
@@ -340,7 +344,6 @@ const TaskInput = ({
 							<Button
 								data-tip="Touche entrée pour créer la tâche"
 								icon="↵"
-								grey
 								onClick={() => {
 									if (!value.startsWith('/')) {
 										if (type === 'CONTENT_ACQUISITION') {

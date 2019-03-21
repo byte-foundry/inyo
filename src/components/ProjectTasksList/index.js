@@ -5,7 +5,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
 
 import Task from '../TasksList/task';
-import TemplateFiller from '../TemplateFiller';
+import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
@@ -222,22 +222,6 @@ const editableCss = css`
 const DisableTask = styled('div')`
 	pointer-events: none;
 	margin: 2rem 0;
-
-	*::before,
-	*::after,
-	[class*='-TaskInfos'] {
-		display: none;
-	}
-	[class*='-TaskIcon'] {
-		margin: 0 1rem 0 0;
-		*::before,
-		*::after {
-			display: none;
-		}
-	}
-	[class*='-TaskContent'] {
-		margin-top: -0.5rem;
-	}
 `;
 
 const Heading = styled(SubHeading)`
@@ -376,18 +360,21 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 	if (!items.length && !sectionsInfos.length) {
 		return (
-			<TemplateFiller
-				onChoose={(template) => {
-					template.sections.forEach((section) => {
-						addSection({
-							variables: {
-								projectId,
-								...section,
-							},
+			<>
+				<TemplateAndProjectFiller
+					projectId={projectId}
+					onChoose={(template) => {
+						template.sections.forEach((section) => {
+							addSection({
+								variables: {
+									projectId,
+									...section,
+								},
+							});
 						});
-					});
-				}}
-			/>
+					}}
+				/>
+			</>
 		);
 	}
 
@@ -635,11 +622,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 						</P>
 						<DisableTask>
 							{removeSectionModalOpen.items.map(task => (
-								<Task
-									item={task}
-									key={task.id}
-									customerToken="preview"
-								/>
+								<Task item={task} key={task.id} noData />
 							))}
 						</DisableTask>
 						<P>

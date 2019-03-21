@@ -15,6 +15,17 @@ export const ITEM_FRAGMENT = gql`
 			id
 			filename
 			url
+			owner {
+				__typename
+				... on User {
+					firstName
+					lastName
+				}
+				... on Customer {
+					firstName
+					lastName
+				}
+			}
 		}
 		linkedCustomer {
 			id

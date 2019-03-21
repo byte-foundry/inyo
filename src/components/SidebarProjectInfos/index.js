@@ -252,7 +252,7 @@ const SidebarProjectInfos = ({
 						</Button>
 					</>
 				) : (
-					<Button grey icon="+" onClick={() => setEditCustomer(true)}>
+					<Button icon="+" onClick={() => setEditCustomer(true)}>
 						Ajouter un client
 					</Button>
 				)}
@@ -315,11 +315,7 @@ const SidebarProjectInfos = ({
 								)) || <>&mdash;</>}
 						</BigNumber>
 					) : (
-						<Button
-							grey
-							icon="+"
-							onClick={() => setEditDueDate(true)}
-						>
+						<Button icon="+" onClick={() => setEditDueDate(true)}>
 							Ajouter une deadline
 						</Button>
 					)}
@@ -365,14 +361,16 @@ const SidebarProjectInfos = ({
 				</SubSection>
 			)}
 
-			<DuplicateProjectButton
-				data-tip="Copier ces tâches dans un nouveau projet"
-				grey
-				projectId={project.id}
-				onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)}
-			>
-				Dupliquer le projet
-			</DuplicateProjectButton>
+			<div>
+				<DuplicateProjectButton
+					data-tip="Copier ces tâches dans un nouveau projet"
+					projectId={project.id}
+					onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
+					}
+				>
+					Dupliquer le projet
+				</DuplicateProjectButton>
+			</div>
 
 			{/* <Button red onClick={removeProject}>
 				Supprimer le projet

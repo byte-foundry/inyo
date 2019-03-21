@@ -141,6 +141,10 @@ function Root() {
 								path="/app/:customerToken(.*-.*-.*-.*)/tasks"
 								component={withTracker(Customer)}
 							/>
+							<Redirect
+								from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
+								to="/app/:customerToken/tasks?projectId=:projectId"
+							/>
 							{ProtectedRoute({
 								protectedPath: '/app',
 								component: withTracker(App),

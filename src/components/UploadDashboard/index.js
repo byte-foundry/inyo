@@ -16,6 +16,7 @@ class GraphQlUpload extends Plugin {
 		this.type = 'GraphQlUpload';
 
 		this.mutation = opts.mutation;
+		this.token = opts.token;
 		this.taskId = opts.taskId;
 		this.projectId = opts.projectId;
 	}
@@ -26,6 +27,7 @@ class GraphQlUpload extends Plugin {
 
 			return this.mutation({
 				variables: {
+					token: this.token,
 					taskId: this.taskId,
 					projectId: this.projectId,
 					files,
@@ -36,7 +38,7 @@ class GraphQlUpload extends Plugin {
 	}
 }
 
-function UploadDashboard({taskId}) {
+function UploadDashboard({customerToken, taskId}) {
 	const uploadAttachements = useMutation(UPLOAD_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -47,6 +49,7 @@ function UploadDashboard({taskId}) {
 		}).use(GraphQlUpload, {
 			mutation: uploadAttachements,
 			taskId,
+			token: customerToken,
 		}),
 	);
 

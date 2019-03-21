@@ -7,7 +7,7 @@ import {
 	primaryPurple,
 	accentGrey,
 	lightGrey,
-	Input,
+	FilterInput,
 	Button,
 	primaryBlack,
 	P,
@@ -16,7 +16,7 @@ import CustomerModal from '../../../components/CustomerModal';
 import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
 import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
-import {ReactComponent as DeleteIcon} from '../../../utils/icons/trash-icon.svg';
+import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 import {
@@ -56,15 +56,15 @@ const RowHeader = styled('tr')`
 		background: none;
 		width: 50px;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const HeaderCell = styled('th')`
 	font-weight: normal;
 	color: ${accentGrey};
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: none;
-	}
 `;
 
 const Cell = styled('td')`
@@ -120,35 +120,8 @@ const Forms = styled('div')`
 	justify-content: space-between;
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
 		margin-bottom: 1rem;
-
-		button {
-			width: 100%;
-			margin-bottom: 1rem;
-		}
-	}
-`;
-
-const FilterInput = styled(Input)`
-	margin: 3rem 0;
-	padding: 0.25rem 1rem;
-	padding-left: 3rem;
-	border-radius: 1.5rem;
-	width: 50%;
-
-	background-position: 1rem center;
-	background-repeat: no-repeat;
-	background-image: url(${Search});
-
-	&:focus {
-		background-position: calc(1rem + 1px) center;
-		background-repeat: no-repeat;
-		background-image: url(${Search});
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 1rem 0;
-		width: 100%;
 	}
 `;
 
@@ -156,6 +129,12 @@ const EditIcon = styled(PencilIcon)`
 	width: 18px;
 	padding: 0 5px;
 
+	path {
+		fill: ${accentGrey};
+	}
+`;
+
+const DeleteIcon = styled(TrashIcon)`
 	path {
 		fill: ${accentGrey};
 	}
@@ -199,6 +178,7 @@ const Customers = () => {
 						Créer un nouveau client
 					</Button>
 					<FilterInput
+						icon={Search}
 						name="filter"
 						placeholder="Filtrer par nom, email..."
 						type="text"
@@ -234,16 +214,16 @@ const Customers = () => {
 								<Cell>{customer.phone}</Cell>
 								<ActionCell>
 									<EditIcon />
-									{/* <DeleteIcon
+									<DeleteIcon
 										onClick={async (e) => {
 											e.stopPropagation();
 
 											setCustomerToBeRemoved(customer);
 
 											const confirmed = await new Promise(
-												resolve => setConfirmRemoveCustomer(
-													{resolve},
-												),
+												resolve => setConfirmRemoveCustomer({
+													resolve,
+												}),
 											);
 
 											setConfirmRemoveCustomer({});
@@ -257,7 +237,7 @@ const Customers = () => {
 												});
 											}
 										}}
-									/> */}
+									/>
 								</ActionCell>
 							</Row>
 						))}
@@ -283,27 +263,6 @@ const Customers = () => {
 							else if (selected.customer) {
 								await createCustomer({
 									variables: selected.customer,
-									update(
-										cache,
-										{
-											data: {
-												createCustomer: addedCustomer,
-											},
-										},
-									) {
-										const query = cache.readQuery({
-											query: GET_USER_CUSTOMERS,
-											variables: {},
-										});
-
-										query.me.customers.push(addedCustomer);
-
-										cache.writeQuery({
-											query: GET_USER_CUSTOMERS,
-											variables: {},
-											data: query,
-										});
-									},
 								});
 
 								setEditCustomer(false);

@@ -18,6 +18,7 @@ const TasksProgressBarMain = styled('div')`
 	margin-bottom: 2rem;
 	border-radius: 5px;
 	border: 1px dotted ${mediumGrey};
+	z-index: 0;
 
 	&:after {
 		position: absolute;
@@ -39,38 +40,42 @@ const TasksProgressBarMain = styled('div')`
 		}
 	}
 
-	&:before {
-		font-size: 0.75rem;
-		line-height: 3rem;
-		text-align: right;
-		overflow: visible;
-		color: ${accentGrey};
-		border-radius: 5px;
-		position: absolute;
-		transition: width 0.2s ease;
+	${props => (props.timeItTook !== 0
+		? `&:before {
+			font-size: 0.75rem;
+			line-height: 3rem;
+			text-align: right;
+			overflow: visible;
+			color: ${accentGrey};
+			border-radius: 5px;
+			position: absolute;
+			transition: width 0.2s ease;
 
-		content: ${props => (props.timeItTook >= 0
-		? `"+${props.timeItTook} jours"`
-		: `"${props.timeItTook} jours"`)};
-		top: ${props => (props.timeItTookPercentage >= 1 ? 0 : '1px')};
-		left: calc(
-			2px +
-				${props => (props.timeItTookPercentage >= 1
-		? 0
-		: props.completionRate || 0)}%
-		);
-		width: ${props => (props.timeItTookPercentage >= 1
-		? props.completionRate * props.timeItTookPercentage
-		: props.completionRate * (1 - props.timeItTookPercentage))}%;
-		height: ${props => (props.timeItTookPercentage >= 1 ? '100%' : 'calc(100% - 2px)')};
-		background: ${props => (props.timeItTookPercentage >= 1 ? mediumPurple : lightPurple)};
-		border: 1px solid
-			${props => (props.timeItTookPercentage >= 1 ? mediumPurple : primaryPurple)};
-		transform: translate(
-			${props => (props.timeItTookPercentage >= 1 ? 0 : '-100%')}
-		);
-		z-index: ${props => (props.timeItTookPercentage >= 1 ? 0 : 1)};
-	}
+			content: ${
+		props.timeItTook >= 0
+			? `"+${props.timeItTook} jours"`
+			: `"${props.timeItTook} jours"`
+		};
+			top: ${props.timeItTookPercentage >= 1 ? 0 : '1px'};
+			left: calc(
+				2px +
+					${props.timeItTookPercentage >= 1 ? 0 : props.completionRate || 0}%
+			);
+			width: ${
+		props.timeItTookPercentage >= 1
+			? props.completionRate * props.timeItTookPercentage
+			: props.completionRate * (1 - props.timeItTookPercentage)
+		}%;
+			height: ${props.timeItTookPercentage >= 1 ? '100%' : 'calc(100% - 2px)'};
+			background: ${props.timeItTookPercentage >= 1 ? mediumPurple : lightPurple};
+			border: 1px solid
+				${props.timeItTookPercentage >= 1 ? mediumPurple : primaryPurple};
+			transform: translate(
+				${props.timeItTookPercentage >= 1 ? 0 : '-100%'}
+			);
+			z-index: ${props.timeItTookPercentage >= 1 ? 0 : 1};
+		}`
+		: '')}
 `;
 
 const TasksProgressBarLabel = styled('div')`

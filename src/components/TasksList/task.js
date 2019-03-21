@@ -81,7 +81,7 @@ const TaskAdd = styled('div')``;
 const TaskIcon = styled('div')`
 	width: 1.75rem;
 	height: 1.75rem;
-	margin-right: 2rem;
+	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
 	background: center no-repeat
 		url(${(props) => {
 		const typeInfos
@@ -94,12 +94,15 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: 1.55rem;
-	margin-bottom: 2rem;
+	margin-top: ${props => (props.noData ? '0.1rem' : '1.55rem')};
+	margin-bottom: ${props => (props.noData ? 0 : '2rem')};
+
+	transform: scale(${props => (props.noData ? 0.75 : '')});
 
 	&:after,
 	&:before {
 		content: '';
+		display: ${props => (props.noData ? 'none' : 'block')};
 		display: block;
 		border-left: 1px dotted ${mediumGrey};
 		position: absolute;
@@ -108,7 +111,7 @@ const TaskIcon = styled('div')`
 
 	&:before {
 		height: 1rem;
-		top: 0.2rem;
+		top: 0.15rem;
 	}
 
 	&:after {
@@ -138,7 +141,7 @@ const TaskInfosIcon = styled('div')`
 
 const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: 1rem;
+	margin-top: ${props => (props.noData ? '0' : '1rem')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin: 0.2rem 0 0 0;
@@ -148,6 +151,7 @@ const TaskContent = styled('div')`
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	margin: 0.5rem 0;
+	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryBlack};
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -481,7 +485,7 @@ export function TaskInfosInputs({
 }
 
 function Task({
-	item, customerToken, location, isDraggable,
+	item, customerToken, location, isDraggable, noData,
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
@@ -522,10 +526,11 @@ function Task({
 	return (
 		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
-			<TaskIcon status={item.status} type={item.type} />
-			<TaskContent>
+			<TaskIcon status={item.status} type={item.type} noData={noData} />
+			<TaskContent noData={noData}>
 				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
 					<TaskHeadingLink
+						noData={noData}
 						small={setTimeItTook}
 						to={{
 							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
@@ -586,65 +591,67 @@ function Task({
 						)}
 					</TaskActions>
 				</TaskHeader>
-				<TaskInfosInputs
-					taskUrlPrefix={taskUrlPrefix}
-					location={location}
-					item={item}
-					customerToken={customerToken}
-					onDueDateSubmit={(date) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								dueDate: date.toISOString(),
-							},
-							optimisticResponse: {
-								__typename: 'Mutation',
-								updateItem: {
-									__typename: 'Item',
-									...item,
+				{!noData && (
+					<TaskInfosInputs
+						taskUrlPrefix={taskUrlPrefix}
+						location={location}
+						item={item}
+						customerToken={customerToken}
+						onDueDateSubmit={(date) => {
+							updateItem({
+								variables: {
+									itemId: item.id,
 									dueDate: date.toISOString(),
 								},
-							},
-						});
-					}}
-					onCustomerSubmit={(customer) => {
-						if (customer === null) {
+								optimisticResponse: {
+									__typename: 'Mutation',
+									updateItem: {
+										__typename: 'Item',
+										...item,
+										dueDate: date.toISOString(),
+									},
+								},
+							});
+						}}
+						onCustomerSubmit={(customer) => {
+							if (customer === null) {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										linkedCustomerId: null,
+									},
+								});
+							}
+							else if (customer.value === 'CREATE') {
+								setEditCustomer(true);
+							}
+							else {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										linkedCustomerId: customer.value,
+									},
+								});
+							}
+						}}
+						onUnitSubmit={(unit) => {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									linkedCustomerId: null,
-								},
-							});
-						}
-						else if (customer.value === 'CREATE') {
-							setEditCustomer(true);
-						}
-						else {
-							updateItem({
-								variables: {
-									itemId: item.id,
-									linkedCustomerId: customer.value,
-								},
-							});
-						}
-					}}
-					onUnitSubmit={(unit) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								unit,
-							},
-							optimisticResponse: {
-								__typename: 'Mutation',
-								updateItem: {
-									__typename: 'Item',
-									...item,
 									unit,
 								},
-							},
-						});
-					}}
-				/>
+								optimisticResponse: {
+									__typename: 'Mutation',
+									updateItem: {
+										__typename: 'Item',
+										...item,
+										unit,
+									},
+								},
+							});
+						}}
+					/>
+				)}
 			</TaskContent>
 			{isEditingCustomer && (
 				<CustomerModal

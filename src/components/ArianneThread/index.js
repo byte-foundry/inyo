@@ -61,13 +61,16 @@ const customSelectStyles = {
 	}),
 	clearIndicator: styles => ({
 		...styles,
-		color: accentGrey,
+		color: primaryWhite,
 		padding: 0,
 		paddingBottom: 0,
+		background: primaryPurple,
+		borderRadius: '50%',
 		transform: 'scale(.7)',
 
 		':hover, :active, :focus': {
-			color: primaryRed,
+			background: primaryRed,
+			color: primaryWhite,
 		},
 	}),
 	option: (styles, state) => ({

@@ -45,7 +45,7 @@ const editableCss = css`
 
 export default function ProjectHeader({projectId, customerToken}) {
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
-		variables: {projectId},
+		variables: {projectId, token: customerToken},
 	});
 	const updateProject = useMutation(UPDATE_PROJECT);
 

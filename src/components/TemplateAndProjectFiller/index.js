@@ -36,12 +36,12 @@ const ProjectFilterInput = styled(FilterInput)`
 `;
 
 const Column = styled('div')`
-	flex: 1;
 	margin-bottom: 2rem;
 `;
 
 const TemplateList = styled('ul')`
 	padding: 0;
+	margin-bottom: 2rem;
 `;
 
 const TemplateItem = styled('li')`
@@ -95,23 +95,36 @@ const LoadingContainer = styled('div')`
 `;
 
 const TemplateInfo = styled('div')`
+	margin-left: 4rem;
 	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: 0;
+	}
 `;
 
 const TemplateInfoHeader = styled(Heading)`
 	display: flex;
+	margin-top: -1rem;
+	align-items: center;
 `;
 
 const TemplateInfoIcon = styled('span')`
 	font-weight: 500;
 	color: ${primaryPurple};
-	font-size: 32px;
+	font-size: 1.2rem;
+	line-height: 1.5;
 	border: solid 2px ${primaryPurple};
 	border-radius: 50%;
-	width: 47px;
+	width: 1.8rem;
+	height: 1.8rem;
 	display: flex;
 	justify-content: center;
-	margin-right: 10px;
+	margin: 0 1rem -0.4rem 0;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 function TemplateTaskList({selectedTemplate}) {
@@ -172,7 +185,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 	return (
 		<Container>
 			<Column>
-				<SubHeading>Modèles de projet prédéfinis</SubHeading>
+				<SubHeading>Choisir un modèle de projet prédéfini</SubHeading>
 				<TemplateList>
 					{templates.map(({name, label}) => (
 						<TemplateItem
@@ -279,8 +292,8 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 					</TemplateInfoHeader>
 					<P>
 						Les modèles sont composés d'un ensemble de tâches
-						prédéfinies. Ils vous permettront de démarrer vos projets
-						sur de bonnes bases.
+						prédéfinies. Ils vous permettront de démarrer vos
+						projets sur de bonnes bases.
 					</P>
 					<P>
 						Nous les avons construits en collaboration avec des

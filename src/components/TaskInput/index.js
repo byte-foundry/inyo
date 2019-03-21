@@ -344,7 +344,6 @@ const TaskInput = ({
 							<Button
 								data-tip="Touche entrée pour créer la tâche"
 								icon="↵"
-								grey
 								onClick={() => {
 									if (!value.startsWith('/')) {
 										if (type === 'CONTENT_ACQUISITION') {

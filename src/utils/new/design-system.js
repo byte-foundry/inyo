@@ -16,7 +16,7 @@ export const primaryGrey = '#A9A9A9';
 export const accentGrey = '#c7c7c7';
 export const lightGrey = '#fafafa';
 export const mediumGrey = '#eee';
-export const primaryBlack = '#333';
+export const primaryBlack = '#140642';
 
 const shevy = new Shevy({
 	baseFontSize: '14px',
@@ -167,6 +167,10 @@ export const Heading = styled('h1')`
 	font-weight: 500;
 	color: ${primaryPurple};
 	font-size: 32px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 24px;
+	}
 `;
 
 export const TaskHeading = styled('h2')`
@@ -187,7 +191,8 @@ export const SubHeading = styled('div')`
 	text-transform: uppercase;
 	font-size: 12px;
 	letter-spacing: 0.5px;
-	color: ${primaryGrey};
+	color: ${primaryBlack};
+	font-weight: 500;
 `;
 
 export const P = styled('p')`

@@ -41,51 +41,51 @@ export const signalRed = '#fe4a49';
 
 export const H1 = styled('h1')`
 	${h1};
-	color: ${gray80};
+	color: ${primaryBlack};
 	font-weight: 700;
 	line-height: 1.4;
 `;
 export const H2 = styled('h2')`
 	${h2};
-	color: ${gray80};
+	color: ${primaryBlack};
 	font-weight: 700;
 	line-height: 1.4;
 `;
 export const H3 = styled('h3')`
 	${h3};
-	color: ${gray80};
+	color: ${primaryBlack};
 	font-weight: 400;
 	line-height: 1.4;
 `;
 export const H4 = styled('h4')`
 	${h4};
-	color: ${gray80};
+	color: ${primaryBlack};
 	font-weight: 400;
 	line-height: 1.4;
 `;
 export const H5 = styled('h5')`
 	${h5};
-	color: ${gray80};
+	color: ${primaryBlack};
 	font-weight: 400;
 	line-height: 1.4;
 `;
 export const H6 = styled('h6')`
 	${h6};
-	color: ${gray80};
+	color: ${primaryBlack};
 	font-weight: 400;
 	line-height: 1.4;
 `;
 export const P = styled('p')`
 	${content};
-	color: ${gray80};
+	color: ${primaryBlack};
 `;
 export const Ol = styled('ol')`
 	${content};
-	color: ${gray80};
+	color: ${primaryBlack};
 `;
 export const Ul = styled('ul')`
 	${content};
-	color: ${gray80};
+	color: ${primaryBlack};
 `;
 export const A = styled('a')`
 	${content};
@@ -299,7 +299,7 @@ export const Label = styled('label')`
 	font-family: 'Work Sans', sans-serif;
 	font-size: 15px;
 	width: fill-available;
-	color: ${gray80};
+	color: ${primaryBlack};
 	margin-bottom: 5px;
 	line-height: 1.6;
 	${props => props.required

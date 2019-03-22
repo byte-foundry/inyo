@@ -106,6 +106,7 @@ function Root() {
 		fetchPolicy: 'network-only',
 		errorPolicy: 'ignore',
 	});
+	// This is utter shit and should be removed once it works properly
 
 	if (loading) return <Loading />;
 
@@ -165,10 +166,9 @@ function Root() {
 								'/app/projects',
 								'/app/account',
 								'/app/dashboard',
+								'/app/tasks',
 							]}
-							render={props => (
-								<ConditionalContent {...props} user={data.me} />
-							)}
+							render={props => <ConditionalContent {...props} />}
 							isAllowed={data && data.me}
 						/>
 					</UserContext.Provider>

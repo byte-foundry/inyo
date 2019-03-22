@@ -11,10 +11,6 @@ export const CHECK_LOGIN_USER = gql`
 			hmacIntercomId
 			firstName
 			lastName
-			workingDays
-			startWorkAt
-			endWorkAt
-			timeZone
 			company {
 				phone
 			}

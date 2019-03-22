@@ -317,7 +317,11 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
 	const updateTask = useMutation(UPDATE_ITEM);
 	const removeSection = useMutation(REMOVE_SECTION, {
-		refetchQueries: ['getProjectData'],
+		optimisticResponse: {
+			removeSection: {
+				id: removeSectionModalOpen.id,
+			},
+		},
 	});
 	const addSection = useMutation(ADD_SECTION, {
 		update: (cache, {data: {addSection: addedSection}}) => {

@@ -103,11 +103,20 @@ export const GET_ALL_PROJECTS = gql`
 	}
 `;
 
-export const GET_PROJECT_NOTES = gql`
-	query getProjectNotes($id: ID!, $token: String) {
+export const GET_PROJECT_SHARED_NOTES = gql`
+	query getProjectSharedNotes($id: ID!, $token: String) {
 		project(id: $id, token: $token) {
 			id
-			notes
+			sharedNotes
+		}
+	}
+`;
+
+export const GET_PROJECT_PERSONAL_NOTES = gql`
+	query getProjectPersonalNotes($id: ID!) {
+		project(id: $id) {
+			id
+			personalNotes
 		}
 	}
 `;

@@ -1,4 +1,4 @@
-import React, {Suspense, memo} from 'react';
+import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
@@ -20,6 +20,7 @@ import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
+import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 
 const PA = styled(P)`
 	font-size: 16px;
@@ -184,17 +185,19 @@ function TasksList({location, history}) {
 					/>
 				)}
 				<Main>
-					{query.get('projectId') && (
+					{projectId && (
 						<SidebarProjectInfos
-							projectId={query.get('projectId')}
+							projectId={projectId}
 						/>
 					)}
-					{projectId && view === 'shared-notes' && (
-						<ProjectSharedNotes />
-					)}
-					{projectId && view === 'personal-notes' && (
-						<ProjectSharedNotes />
-					)}
+					<Suspense fallback={<Loading />}>
+						{projectId && view === 'shared-notes' && (
+							<ProjectSharedNotes projectId={projectId} />
+						)}
+						{projectId && view === 'personal-notes' && (
+							<ProjectPersonalNotes projectId={projectId} />
+						)}
+					</Suspense>
 					{tasksView && (
 						<Content>
 							<CreateTask

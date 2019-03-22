@@ -10,6 +10,7 @@ import {
 	SubHeading,
 	Button,
 	primaryPurple,
+	primaryBlack,
 	primaryGrey,
 	lightGrey,
 	accentGrey,
@@ -34,6 +35,10 @@ import Pencil2 from '../../utils/icons/pencil.svg';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+
+const ProjectMenuIcon = styled('div')`
+	margin-right: 10px;
+`;
 
 const Aside = styled('aside')`
 	flex-direction: column;
@@ -134,14 +139,16 @@ const DateContainer = styled('div')`
 const SidebarLink = styled('div')`
 	display: flex;
 	align-items: center;
-	color: ${primaryPurple};
+	color: ${props => (props.active ? primaryBlack : primaryPurple)};
 	text-decoration: none;
 	font-weight: 500;
 	margin-bottom: 8px;
+	cursor: ${props => (props.active ? 'default' : 'pointer')};
 
-	&:hover {
+	${props => !props.active
+		&& `&:hover {
 		text-decoration: underline;
-	}
+	}`}
 `;
 
 const SidebarHeading = styled(SubHeading)`
@@ -162,6 +169,8 @@ const SidebarProjectInfos = ({
 	history,
 	location,
 }) => {
+	const query = new URLSearchParams(location.search);
+	const activeView = query.get('view');
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
@@ -185,11 +194,11 @@ const SidebarProjectInfos = ({
 	const {project} = data;
 
 	function setView(view) {
-		const query = new URLSearchParams(location.search);
+		const newQuery = new URLSearchParams(location.search);
 
-		query.delete('filter');
-		query.set('view', view);
-		history.push(`/app/tasks/?${query.toString()}`);
+		newQuery.delete('filter');
+		newQuery.set('view', view);
+		history.push(`/app/tasks/?${newQuery.toString()}`);
 	}
 
 	return (
@@ -197,16 +206,31 @@ const SidebarProjectInfos = ({
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<SubSection>
 				<SidebarHeading>Menu Projet</SidebarHeading>
-				<SidebarLink onClick={() => setView('tasks')}>
-					<TasksIcon />
+				<SidebarLink
+					onClick={() => setView('tasks')}
+					active={activeView === 'tasks' || !activeView}
+				>
+					<ProjectMenuIcon>
+						<TasksIcon />
+					</ProjectMenuIcon>
 					Tâches du projet
 				</SidebarLink>
-				{/* <SidebarLink onClick={() => setView('personal-notes')}>
-					<PersonalNotesIcon />
+				<SidebarLink
+					onClick={() => setView('personal-notes')}
+					active={activeView === 'personal-notes'}
+				>
+					<ProjectMenuIcon>
+						<PersonalNotesIcon />
+					</ProjectMenuIcon>
 					Notes personnelles
-				</SidebarLink> */}
-				<SidebarLink onClick={() => setView('shared-notes')}>
-					<SharedNotesIcon />
+				</SidebarLink>
+				<SidebarLink
+					onClick={() => setView('shared-notes')}
+					active={activeView === 'shared-notes'}
+				>
+					<ProjectMenuIcon>
+						<SharedNotesIcon />
+					</ProjectMenuIcon>
 					Notes partagées
 				</SidebarLink>
 			</SubSection>

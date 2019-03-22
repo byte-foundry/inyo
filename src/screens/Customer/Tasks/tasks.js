@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, Suspense} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import ReactTooltip from 'react-tooltip';
@@ -7,10 +7,12 @@ import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 import {CustomerContext} from '../../../utils/contexts';
 
+import {Loading} from '../../../utils/content';
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
 import ProjectHeader from '../../../components/ProjectHeader';
 import TasksList from '../../../components/TasksList';
 import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
+import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 
 const Container = styled('div')`
 	display: flex;
@@ -40,10 +42,13 @@ const Main = styled('div')`
 	}
 `;
 
-const CustomerTasks = ({css, style, projectId}) => {
+const CustomerTasks = ({
+	css, style, projectId, location,
+}) => {
 	const customerToken = useContext(CustomerContext);
 	const token = customerToken === 'preview' ? undefined : customerToken;
-
+	const query = new URLSearchParams(location.search);
+	const view = query.get('view');
 	const {data, error} = useQuery(GET_CUSTOMER_TASKS, {
 		variables: {
 			token,
@@ -57,6 +62,8 @@ const CustomerTasks = ({css, style, projectId}) => {
 	// order by creation date
 	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
+
 	if (projectId) {
 		return (
 			<Container css={css} style={style}>
@@ -67,13 +74,23 @@ const CustomerTasks = ({css, style, projectId}) => {
 					/>
 					<Main>
 						<SidebarCustomerProjectInfos projectId={projectId} />
-						<ProjectCustomerTasksList
-							projectId={projectId}
-							items={tasks.filter(
-								item => item.section
-									&& item.section.project.id === projectId,
+						{tasksView && (
+							<ProjectCustomerTasksList
+								projectId={projectId}
+								items={tasks.filter(
+									item => item.section
+										&& item.section.project.id === projectId,
+								)}
+							/>
+						)}
+						<Suspense fallback={<Loading />}>
+							{projectId && view === 'shared-notes' && (
+								<ProjectSharedNotes
+									projectId={projectId}
+									customerToken={customerToken}
+								/>
 							)}
-						/>
+						</Suspense>
 					</Main>
 				</TaskAndArianne>
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />

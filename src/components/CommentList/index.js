@@ -4,6 +4,7 @@ import {Query, Mutation} from 'react-apollo';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ReactTooltip from 'react-tooltip';
+import {Waypoint} from 'react-waypoint';
 
 import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
 import {POST_COMMENT} from '../../utils/mutations';
@@ -18,7 +19,11 @@ import {
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
-import {Button, primaryPurple} from '../../utils/new/design-system';
+import {
+	Button,
+	primaryPurple,
+	primaryBlack,
+} from '../../utils/new/design-system';
 
 import Comment from '../Comment';
 
@@ -26,6 +31,7 @@ const CommentRow = styled('div')`
 	padding-right: 40px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	position: relative;
 `;
 
 const Comments = styled('div')`
@@ -50,7 +56,33 @@ const Empty = styled('p')`
 	color: ${primaryPurple};
 `;
 
+const ScrollAlert = styled('div')`
+	position: relative;
+	margin-top: -2.5rem;
+	margin-bottom: 2.5rem;
+	height: 2rem;
+	display: flex;
+	justify-content: center;
+	flex-shrink: 0;
+	pointer-events: none;
+`;
+
+const ScrollAlertContent = styled('div')`
+	display: ${props => (props.CommentListState ? 'none' : 'block')};
+	background-color: ${primaryBlack};
+	color: ${primaryWhite};
+	font-weight: 500;
+	padding: 0.4rem 0.8rem;
+	font-size: 0.8rem;
+	border-radius: 3rem;
+`;
+
 class CommentList extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+
 	render() {
 		const {itemId, customerToken, linkedCustomer} = this.props;
 
@@ -100,7 +132,24 @@ class CommentList extends Component {
 										un commentaire.
 									</Empty>
 								)}
+								<Waypoint
+									// onEnter={CommentListState}
+									onEnter={() => this.setState({noScrollIndicator: true})
+									}
+									onLeave={() => this.setState({
+										noScrollIndicator: false,
+									})
+									}
+								/>
 							</Comments>
+							<ScrollAlert>
+								{!this.state.noScrollIndicator && (
+									<ScrollAlertContent>
+										Scroller pour lire les autres
+										commentaires
+									</ScrollAlertContent>
+								)}
+							</ScrollAlert>
 							<Mutation mutation={POST_COMMENT}>
 								{postCommentMutation => (
 									<Formik
@@ -197,7 +246,6 @@ class CommentList extends Component {
 															}
 														/>
 													</FlexRow>
-
 													{errors.comment
 														&& touched.comment && (
 														<ErrorInput>

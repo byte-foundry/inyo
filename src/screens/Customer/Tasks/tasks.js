@@ -17,6 +17,9 @@ import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 const Container = styled('div')`
 	display: flex;
 	justify-content: center;
+	flex: 1;
+	max-width: 1280px;
+	margin: 0 auto;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
@@ -25,11 +28,8 @@ const Container = styled('div')`
 
 const TaskAndArianne = styled('div')`
 	display: flex;
-	flex-direction: row;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column-reverse;
-	}
+	flex-direction: column;
+	flex: auto;
 `;
 
 const Main = styled('div')`

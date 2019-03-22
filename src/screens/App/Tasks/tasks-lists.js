@@ -27,8 +27,9 @@ const PA = styled(P)`
 
 const Container = styled('div')`
 	display: flex;
-	justify-content: center;
 	flex: 1;
+	max-width: 1280px;
+	margin: 0 auto;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
@@ -36,8 +37,25 @@ const Container = styled('div')`
 `;
 
 const TaskAndArianne = styled('div')`
+	display: flex;
+	flex-direction: column;
 	flex: auto;
-	max-width: 980px;
+`;
+
+const Main = styled('div')`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+	}
+`;
+
+const Content = styled('div')`
+	display: flex;
+	flex-direction: column;
+	flex: auto;
 `;
 
 function TasksListContainer({projectId, linkedCustomerId, filter}) {
@@ -165,30 +183,36 @@ function TasksList({location, history}) {
 						showProgress={tasksView}
 					/>
 				)}
-				{projectId && view === 'shared-notes' && <ProjectSharedNotes />}
-				{projectId && view === 'personal-notes' && (
-					<ProjectSharedNotes />
-				)}
-				{tasksView && (
-					<>
-						<CreateTask
-							setProjectSelected={setProjectSelected}
-							currentProjectId={projectId}
-							setCustomerSelected={setCustomerSelected}
+				<Main>
+					{query.get('projectId') && (
+						<SidebarProjectInfos
+							projectId={query.get('projectId')}
 						/>
-						<Suspense fallback={<Loading />}>
-							<TasksListContainer
-								projectId={projectId}
-								linkedCustomerId={linkedCustomerId}
-								filter={filter}
+					)}
+					{projectId && view === 'shared-notes' && (
+						<ProjectSharedNotes />
+					)}
+					{projectId && view === 'personal-notes' && (
+						<ProjectSharedNotes />
+					)}
+					{tasksView && (
+						<Content>
+							<CreateTask
+								setProjectSelected={setProjectSelected}
+								currentProjectId={projectId}
+								setCustomerSelected={setCustomerSelected}
 							/>
-						</Suspense>
-					</>
-				)}
+							<Suspense fallback={<Loading />}>
+								<TasksListContainer
+									projectId={projectId}
+									linkedCustomerId={linkedCustomerId}
+									filter={filter}
+								/>
+							</Suspense>
+						</Content>
+					)}
+				</Main>
 			</TaskAndArianne>
-			{query.get('projectId') && (
-				<SidebarProjectInfos projectId={query.get('projectId')} />
-			)}
 			{openModal && (
 				<ModalContainer onDismiss={() => history.push('/app/tasks')}>
 					<ModalElem>

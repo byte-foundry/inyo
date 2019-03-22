@@ -15,7 +15,6 @@ import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProj
 const Container = styled('div')`
 	display: flex;
 	justify-content: center;
-	flex: 1;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
@@ -23,8 +22,22 @@ const Container = styled('div')`
 `;
 
 const TaskAndArianne = styled('div')`
-	flex: auto;
-	max-width: 980px;
+	display: flex;
+	flex-direction: row;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+	}
+`;
+
+const Main = styled('div')`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+	}
 `;
 
 const CustomerTasks = ({css, style, projectId}) => {
@@ -52,15 +65,17 @@ const CustomerTasks = ({css, style, projectId}) => {
 						projectId={projectId}
 						customerToken={customerToken}
 					/>
-					<ProjectCustomerTasksList
-						projectId={projectId}
-						items={tasks.filter(
-							item => item.section
-								&& item.section.project.id === projectId,
-						)}
-					/>
+					<Main>
+						<SidebarCustomerProjectInfos projectId={projectId} />
+						<ProjectCustomerTasksList
+							projectId={projectId}
+							items={tasks.filter(
+								item => item.section
+									&& item.section.project.id === projectId,
+							)}
+						/>
+					</Main>
 				</TaskAndArianne>
-				<SidebarCustomerProjectInfos projectId={projectId} />
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</Container>
 		);

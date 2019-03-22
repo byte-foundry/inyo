@@ -18,10 +18,12 @@ const Aside = styled('aside')`
 	flex-direction: column;
 	align-items: stretch;
 	width: 270px;
-	padding-left: 4rem;
+	padding-right: 4rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		padding-left: 0;
+		margin-top: 2rem;
+		padding-right: 0;
+		width: 100%;
 	}
 `;
 

@@ -58,11 +58,6 @@ const SidebarLink = styled('div')`
 	font-weight: 500;
 	margin-bottom: 8px;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
-
-	${props => !props.active
-		&& `&:hover {
-		text-decoration: underline;
-	}`}
 `;
 
 const SidebarHeading = styled(SubHeading)`

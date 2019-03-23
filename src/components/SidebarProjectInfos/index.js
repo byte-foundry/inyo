@@ -37,7 +37,11 @@ import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const ProjectMenuIcon = styled('div')`
-	margin-right: 10px;
+	margin: 0 10px -3px 0;
+
+	svg {
+		fill: ${primaryPurple};
+	}
 `;
 
 const Aside = styled('aside')`
@@ -137,18 +141,51 @@ const DateContainer = styled('div')`
 `;
 
 const SidebarLink = styled('div')`
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	color: ${props => (props.active ? primaryBlack : primaryPurple)};
 	text-decoration: none;
 	font-weight: 500;
-	margin-bottom: 8px;
+	margin-bottom: 0.8rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
+	position: relative;
 
-	${props => !props.active
-		&& `&:hover {
-		text-decoration: underline;
-	}`}
+	${props => props.active
+		&& `&:before {
+			content: '';
+			display: 'block';
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+
+		svg {
+			fill: ${primaryBlack} !important;
+		}`}
+
+	&:hover {
+		&:before {
+			content: '';
+			display: 'block';
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		color: ${primaryBlack};
+		svg {
+			fill: ${primaryBlack};
+		}
+	}
 `;
 
 const SidebarHeading = styled(SubHeading)`
@@ -207,6 +244,7 @@ const SidebarProjectInfos = ({
 			<SubSection>
 				<SidebarHeading>Menu Projet</SidebarHeading>
 				<SidebarLink
+					data-tip="Vue principale"
 					onClick={() => setView('tasks')}
 					active={activeView === 'tasks' || !activeView}
 				>
@@ -216,6 +254,7 @@ const SidebarProjectInfos = ({
 					Tâches du projet
 				</SidebarLink>
 				<SidebarLink
+					data-tip="Seulement visibles par vous"
 					onClick={() => setView('personal-notes')}
 					active={activeView === 'personal-notes'}
 				>
@@ -225,6 +264,7 @@ const SidebarProjectInfos = ({
 					Notes personnelles
 				</SidebarLink>
 				<SidebarLink
+					data-tip="Visibles par tout le monde"
 					onClick={() => setView('shared-notes')}
 					active={activeView === 'shared-notes'}
 				>

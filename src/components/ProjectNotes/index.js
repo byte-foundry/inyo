@@ -11,7 +11,7 @@ import {lightPurple} from '../../utils/new/design-system';
 
 const ProjectNotesContainer = styled('div')`
 	flex: 1;
-`
+`;
 
 const TasksListContainer = styled('div')`
 	margin-top: 1rem;
@@ -19,7 +19,7 @@ const TasksListContainer = styled('div')`
 
 const TextEditorMain = styled('div')`
 	border: 1px solid ${gray20};
-	background: ${lightPurple};
+	background-color: ${lightPurple};
 	height: 100%;
 `;
 
@@ -37,7 +37,11 @@ BLOCK_BUTTONS.unshift({
 });
 
 const ProjectNotes = ({
-	notes, customerToken, updateNotes, projectId, children,
+	notes,
+	customerToken,
+	updateNotes,
+	projectId,
+	children,
 }) => {
 	const [editorState, setEditorState] = useState(
 		createEditorState(Object.keys(notes).length > 0 ? notes : undefined),

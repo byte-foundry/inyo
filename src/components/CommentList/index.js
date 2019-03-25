@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
-import {Query, Mutation} from 'react-apollo';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import ReactTooltip from 'react-tooltip';
@@ -13,9 +13,7 @@ import {TOOLTIP_DELAY} from '../../utils/constants';
 import {
 	gray20,
 	primaryWhite,
-	gray50,
 	gray80,
-	primaryBlue,
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
@@ -77,202 +75,160 @@ const ScrollAlertContent = styled('div')`
 	border-radius: 3rem;
 `;
 
-class CommentList extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
+function CommentList({itemId, customerToken, linkedCustomer}) {
+	const [noScrollIndicator, setNoScrollIndicator] = useState(false);
+	const {data, loading, error} = useQuery(GET_COMMENTS_BY_ITEM, {
+		variables: {
+			itemId,
+			token: customerToken,
+		},
+	});
+	const postCommentMutation = useMutation(POST_COMMENT);
+
+	if (loading) return <span />;
+	if (error) throw error;
+
+	const {itemComments} = data;
+
+	const comments = itemComments.map(comment => (
+		<Comment
+			key={`comment${comment.id}`}
+			comment={comment}
+			isCustomer={
+				comment.author.__typename === 'Customer' // eslint-disable-line no-underscore-dangle
+			}
+		/>
+	));
+
+	let placeholderText = 'Votre commentaire';
+
+	if (linkedCustomer && !customerToken) {
+		placeholderText = 'Écrire et envoyer un commentaire à votre client';
+	}
+	else if (linkedCustomer) {
+		placeholderText
+			= 'Écrire et envoyer un commentaire à votre prestataire';
 	}
 
-	render() {
-		const {itemId, customerToken, linkedCustomer} = this.props;
+	return (
+		<>
+			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+			<Comments id="comments">
+				{comments.length ? (
+					<CommentRow>{comments}</CommentRow>
+				) : (
+					<Empty>
+						Une question ou une suggestion? Ajoutez un commentaire.
+					</Empty>
+				)}
+				<Waypoint
+					onEnter={() => setNoScrollIndicator(true)}
+					onLeave={() => setNoScrollIndicator(false)}
+					bottomOffset={-50}
+				/>
+			</Comments>
+			<ScrollAlert>
+				{!noScrollIndicator && (
+					<ScrollAlertContent>
+						Scroller pour lire les autres commentaires
+					</ScrollAlertContent>
+				)}
+			</ScrollAlert>
+			<Formik
+				initialValues={{
+					newComment: '',
+				}}
+				validationSchema={Yup.object().shape({
+					newComment: Yup.string().required('Requis'),
+				})}
+				onSubmit={async (values, actions) => {
+					actions.setSubmitting(false);
+					try {
+						postCommentMutation({
+							variables: {
+								itemId,
+								token: customerToken,
+								comment: {
+									text: values.newComment,
+								},
+							},
+							update: (cache, {data: {postComment}}) => {
+								window.Intercom('trackEvent', 'comment-sent');
+								const commentsQueryResult = cache.readQuery({
+									query: GET_COMMENTS_BY_ITEM,
+									variables: {
+										itemId,
+										token: customerToken,
+									},
+								});
 
-		let placeholderText = 'Votre commentaire';
+								commentsQueryResult.itemComments.push(
+									postComment.comments.pop(),
+								);
 
-		if (linkedCustomer && !customerToken) {
-			placeholderText = 'Écrire et envoyer un commentaire à votre client';
-		}
-		else if (linkedCustomer) {
-			placeholderText
-				= 'Écrire et envoyer un commentaire à votre prestataire';
-		}
-
-		return (
-			<Query
-				query={GET_COMMENTS_BY_ITEM}
-				variables={{itemId, token: customerToken}}
+								cache.writeQuery({
+									query: GET_COMMENTS_BY_ITEM,
+									variables: {
+										itemId,
+										token: customerToken,
+									},
+									data: commentsQueryResult,
+								});
+								actions.resetForm();
+							},
+						});
+					}
+					catch (commentError) {
+						actions.setSubmitting(false);
+						actions.setErrors(commentError);
+						actions.setStatus({
+							msg:
+								"Une erreur c'est produit pendant la soumission du commentaire",
+						});
+					}
+				}}
 			>
-				{({loading, error, data}) => {
-					if (loading) return <span />;
-					if (error) throw error;
-
-					const {itemComments} = data;
-
-					const comments = itemComments.map(comment => (
-						<Comment
-							key={`comment${comment.id}`}
-							comment={comment}
-							isCustomer={
-								comment.author.__typename === 'Customer' // eslint-disable-line no-underscore-dangle
-							}
-						/>
-					));
+				{(props) => {
+					const {
+						touched,
+						errors,
+						handleSubmit,
+						setFieldValue,
+						values,
+					} = props;
 
 					return (
-						<>
-							<ReactTooltip
-								effect="solid"
-								delayShow={TOOLTIP_DELAY}
-							/>
-							<Comments id="comments">
-								{comments.length ? (
-									<CommentRow>{comments}</CommentRow>
-								) : (
-									<Empty>
-										Une question ou une suggestion? Ajoutez
-										un commentaire.
-									</Empty>
-								)}
-								<Waypoint
-									// onEnter={CommentListState}
-									onEnter={() => this.setState({noScrollIndicator: true})
-									}
-									onLeave={() => this.setState({
-										noScrollIndicator: false,
-									})
+						<form onSubmit={handleSubmit}>
+							<FlexRow>
+								<ItemComment
+									data-tip="Les personnes liées à la tâche seront notifiées"
+									placeholder={placeholderText}
+									value={values.newComment}
+									name="newComment"
+									onChange={e => setFieldValue(
+										'newComment',
+										e.target.value,
+									)
 									}
 								/>
-							</Comments>
-							<ScrollAlert>
-								{!this.state.noScrollIndicator && (
-									<ScrollAlertContent>
-										Scroller pour lire les autres
-										commentaires
-									</ScrollAlertContent>
-								)}
-							</ScrollAlert>
-							<Mutation mutation={POST_COMMENT}>
-								{postCommentMutation => (
-									<Formik
-										initialValues={{
-											newComment: '',
-										}}
-										validationSchema={Yup.object().shape({
-											newComment: Yup.string().required(
-												'Requis',
-											),
-										})}
-										onSubmit={async (values, actions) => {
-											actions.setSubmitting(false);
-											try {
-												postCommentMutation({
-													variables: {
-														itemId,
-														token: customerToken,
-														comment: {
-															text:
-																values.newComment,
-														},
-													},
-													update: (
-														cache,
-														{data: {postComment}},
-													) => {
-														window.Intercom(
-															'trackEvent',
-															'comment-sent',
-														);
-														const commentsQueryResult = cache.readQuery(
-															{
-																query: GET_COMMENTS_BY_ITEM,
-																variables: {
-																	itemId,
-																	token: customerToken,
-																},
-															},
-														);
-
-														commentsQueryResult.itemComments.push(
-															postComment.comments.pop(),
-														);
-
-														cache.writeQuery({
-															query: GET_COMMENTS_BY_ITEM,
-															variables: {
-																itemId,
-																token: customerToken,
-															},
-															data: commentsQueryResult,
-														});
-														actions.resetForm();
-													},
-												});
-											}
-											catch (commentError) {
-												actions.setSubmitting(false);
-												actions.setErrors(commentError);
-												actions.setStatus({
-													msg:
-														"Une erreur c'est produit pendant la soumission du commentaire",
-												});
-											}
-										}}
-									>
-										{(props) => {
-											const {
-												touched,
-												errors,
-												handleSubmit,
-												setFieldValue,
-												values,
-											} = props;
-
-											return (
-												<form onSubmit={handleSubmit}>
-													<FlexRow>
-														<ItemComment
-															data-tip="Les personnes liées à la tâche seront notifiées"
-															placeholder={
-																placeholderText
-															}
-															value={
-																values.newComment
-															}
-															name="newComment"
-															onChange={e => setFieldValue(
-																'newComment',
-																e.target
-																	.value,
-															)
-															}
-														/>
-													</FlexRow>
-													{errors.comment
-														&& touched.comment && (
-														<ErrorInput>
-															{errors.comment}
-														</ErrorInput>
-													)}
-													<FlexRow justifyContent="flex-end">
-														<Button
-															data-tip="Visible par les personnes liées au projet"
-															type="submit"
-														>
-															Ajouter un
-															commentaire
-														</Button>
-													</FlexRow>
-												</form>
-											);
-										}}
-									</Formik>
-								)}
-							</Mutation>
-						</>
+							</FlexRow>
+							{errors.comment && touched.comment && (
+								<ErrorInput>{errors.comment}</ErrorInput>
+							)}
+							<FlexRow justifyContent="flex-end">
+								<Button
+									data-tip="Visible par les personnes liées au projet"
+									type="submit"
+								>
+									Ajouter un commentaire
+								</Button>
+							</FlexRow>
+						</form>
 					);
 				}}
-			</Query>
-		);
-	}
+			</Formik>
+		</>
+	);
 }
 
 export default CommentList;

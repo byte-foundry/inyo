@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
 import {convertToRaw} from 'draft-js';
 import {Editor, createEditorState} from 'medium-draft';
@@ -45,20 +45,6 @@ BLOCK_BUTTONS.unshift({
 	style: 'header-two',
 });
 
-const debounceUpdateNotes = debounce(({
-	notes, id, updateNotes, setSaved,
-}) => {
-	console.log('debounce called');
-	updateNotes({
-		variables: {
-			notes,
-			id,
-		},
-	});
-	setSaved(true);
-	setTimeout(() => setSaved(false), 1500);
-}, 2000);
-
 const ProjectNotes = ({
 	notes,
 	customerToken,
@@ -71,16 +57,26 @@ const ProjectNotes = ({
 		createEditorState(Object.keys(notes).length > 0 ? notes : undefined),
 	);
 
-	const handleChange = (newState) => {
-		console.log('calling debounce');
-		debounceUpdateNotes({
+	const debounceUpdateNotes = useRef(
+		debounce(({notes, id}) => {
+			updateNotes({
+				variables: {
+					notes,
+					id,
+				},
+			});
+			setSaved(true);
+			setTimeout(() => setSaved(false), 1500);
+		}, 2000),
+	);
+
+	const handleChange = useRef((newState) => {
+		debounceUpdateNotes.current({
 			notes: convertToRaw(newState.getCurrentContent()),
 			id: projectId,
-			updateNotes,
-			setSaved,
 		});
 		setEditorState(newState);
-	};
+	});
 
 	return (
 		<ProjectNotesContainer>
@@ -90,7 +86,7 @@ const ProjectNotes = ({
 					<Editor
 						editorEnabled
 						editorState={editorState}
-						onChange={handleChange}
+						onChange={handleChange.current}
 						sideButtons={[]}
 						toolbarConfig={{
 							block: [

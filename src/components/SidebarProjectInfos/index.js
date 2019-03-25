@@ -186,6 +186,10 @@ const SidebarLink = styled('div')`
 			fill: ${primaryBlack};
 		}
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+	}
 `;
 
 const SidebarHeading = styled(SubHeading)`

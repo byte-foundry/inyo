@@ -144,6 +144,11 @@ export const Button = styled('button')`
 				border: none;
 				background: none;
 			}
+
+			@media (max-width: ${BREAKPOINTS}px) {
+				width: auto !important;
+				padding: 0 !important;
+			}
 		`}
 
 	& + button {

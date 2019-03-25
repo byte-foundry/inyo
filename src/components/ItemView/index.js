@@ -321,7 +321,11 @@ const Item = ({id, customerToken, close}) => {
 				<TaskStatusButton
 					taskId={id}
 					isFinished={item.status === 'FINISHED'}
-					disabled={customerToken && item.type !== 'CUSTOMER'}
+					disabled={
+						customerToken
+						&& item.type !== 'CUSTOMER'
+						&& item.type !== 'CONTENT_ACQUISITION'
+					}
 					customerToken={customerToken}
 				/>
 			</StickyHeader>

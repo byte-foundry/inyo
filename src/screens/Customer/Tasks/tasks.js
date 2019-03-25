@@ -43,7 +43,7 @@ const Main = styled('div')`
 `;
 
 const CustomerTasks = ({
-	css, style, projectId, location,
+	css, style, projectId, location = {},
 }) => {
 	const customerToken = useContext(CustomerContext);
 	const token = customerToken === 'preview' ? undefined : customerToken;

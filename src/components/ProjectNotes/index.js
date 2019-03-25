@@ -22,6 +22,7 @@ const TextEditorMain = styled('div')`
 	background-color: ${lightPurple};
 	height: 100%;
 	position: relative;
+	z-index: 0;
 `;
 
 const EditorToast = styled('div')`

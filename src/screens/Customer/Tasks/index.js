@@ -6,6 +6,8 @@ import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
 import CustomerTasks from './tasks';
 
+import {BREAKPOINTS} from '../../../utils/constants';
+
 import TopBar, {
 	TopBarMenu,
 	TopBarLogo,
@@ -15,6 +17,10 @@ import TopBar, {
 const Container = styled('div')`
 	min-height: 100vh;
 	padding: 3rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 1rem;
+	}
 `;
 
 const Tasks = ({location, match}) => {
@@ -36,7 +42,7 @@ const Tasks = ({location, match}) => {
 					</TopBarMenuLink>
 				</TopBarMenu>
 			</TopBar>
-			<CustomerTasks projectId={projectId} />
+			<CustomerTasks projectId={projectId} location={location} />
 
 			<Route
 				path="/app/:customerToken/tasks/:taskId"

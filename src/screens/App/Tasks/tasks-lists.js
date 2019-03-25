@@ -1,4 +1,4 @@
-import React, {Suspense, memo} from 'react';
+import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
@@ -19,6 +19,8 @@ import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
+import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
+import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 
 const PA = styled(P)`
 	font-size: 16px;
@@ -26,8 +28,9 @@ const PA = styled(P)`
 
 const Container = styled('div')`
 	display: flex;
-	justify-content: center;
 	flex: 1;
+	max-width: 1280px;
+	margin: 0 auto;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
@@ -35,8 +38,25 @@ const Container = styled('div')`
 `;
 
 const TaskAndArianne = styled('div')`
+	display: flex;
+	flex-direction: column;
 	flex: auto;
-	max-width: 980px;
+`;
+
+const Main = styled('div')`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+	}
+`;
+
+const Content = styled('div')`
+	display: flex;
+	flex-direction: column;
+	flex: auto;
 `;
 
 function TasksListContainer({projectId, linkedCustomerId, filter}) {
@@ -89,6 +109,7 @@ function TasksList({location, history}) {
 	const openModal = query.get('openModal');
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
+	const view = query.get('view');
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -112,6 +133,8 @@ function TasksList({location, history}) {
 	const setCustomerSelected = (selected) => {
 		const newQuery = new URLSearchParams(query);
 
+		newQuery.delete('view');
+
 		if (selected) {
 			const {value: selectedCustomerId} = selected;
 
@@ -131,6 +154,8 @@ function TasksList({location, history}) {
 	const setFilterSelected = (selected) => {
 		const newQuery = new URLSearchParams(query);
 
+		newQuery.delete('view');
+
 		if (selected) {
 			const {value: selectedFilterId} = selected;
 
@@ -139,6 +164,8 @@ function TasksList({location, history}) {
 
 		history.push(`/app/tasks?${newQuery.toString()}`);
 	};
+
+	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
 
 	return (
 		<Container>
@@ -151,23 +178,44 @@ function TasksList({location, history}) {
 					selectFilter={setFilterSelected}
 					filterId={filter}
 				/>
-				{projectId && <ProjectHeader projectId={projectId} />}
-				<CreateTask
-					setProjectSelected={setProjectSelected}
-					currentProjectId={projectId}
-					setCustomerSelected={setCustomerSelected}
-				/>
-				<Suspense fallback={<Loading />}>
-					<TasksListContainer
+				{projectId && (
+					<ProjectHeader
 						projectId={projectId}
-						linkedCustomerId={linkedCustomerId}
-						filter={filter}
+						showProgress={tasksView}
 					/>
-				</Suspense>
+				)}
+				<Main>
+					{projectId && (
+						<SidebarProjectInfos
+							projectId={projectId}
+						/>
+					)}
+					<Suspense fallback={<Loading />}>
+						{projectId && view === 'shared-notes' && (
+							<ProjectSharedNotes projectId={projectId} />
+						)}
+						{projectId && view === 'personal-notes' && (
+							<ProjectPersonalNotes projectId={projectId} />
+						)}
+					</Suspense>
+					{tasksView && (
+						<Content>
+							<CreateTask
+								setProjectSelected={setProjectSelected}
+								currentProjectId={projectId}
+								setCustomerSelected={setCustomerSelected}
+							/>
+							<Suspense fallback={<Loading />}>
+								<TasksListContainer
+									projectId={projectId}
+									linkedCustomerId={linkedCustomerId}
+									filter={filter}
+								/>
+							</Suspense>
+						</Content>
+					)}
+				</Main>
 			</TaskAndArianne>
-			{query.get('projectId') && (
-				<SidebarProjectInfos projectId={query.get('projectId')} />
-			)}
 			{openModal && (
 				<ModalContainer onDismiss={() => history.push('/app/tasks')}>
 					<ModalElem>

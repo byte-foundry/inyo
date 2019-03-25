@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
@@ -10,6 +10,7 @@ import {
 	SubHeading,
 	Button,
 	primaryPurple,
+	primaryBlack,
 	primaryGrey,
 	lightGrey,
 	accentGrey,
@@ -26,18 +27,28 @@ import CustomerModal from '../CustomerModal';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
+import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
+import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
 import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
+const ProjectMenuIcon = styled('div')`
+	margin: 0 10px -3px 0;
+
+	svg {
+		fill: ${primaryPurple};
+	}
+`;
+
 const Aside = styled('aside')`
-	display: flex;
 	flex-direction: column;
 	align-items: stretch;
 	width: 270px;
-	padding-left: 4rem;
+	padding-right: 4rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
@@ -129,6 +140,54 @@ const DateContainer = styled('div')`
 	}
 `;
 
+const SidebarLink = styled('div')`
+	display: inline-flex;
+	align-items: center;
+	color: ${props => (props.active ? primaryBlack : primaryPurple)};
+	text-decoration: none;
+	font-weight: 500;
+	margin-bottom: 0.8rem;
+	cursor: ${props => (props.active ? 'default' : 'pointer')};
+	position: relative;
+
+	${props => props.active
+		&& `&:before {
+			content: '';
+			display: 'block';
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+
+		svg {
+			fill: ${primaryBlack} !important;
+		}`}
+
+	&:hover {
+		&:before {
+			content: '';
+			display: 'block';
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		color: ${primaryBlack};
+		svg {
+			fill: ${primaryBlack};
+		}
+	}
+`;
+
 const SidebarHeading = styled(SubHeading)`
 	display: flex;
 	justify-content: space-between;
@@ -145,7 +204,10 @@ const SidebarProjectInfos = ({
 	projectId,
 	hasClientAttributedTasks,
 	history,
+	location,
 }) => {
+	const query = new URLSearchParams(location.search);
+	const activeView = query.get('view');
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
@@ -168,13 +230,50 @@ const SidebarProjectInfos = ({
 
 	const {project} = data;
 
+	function setView(view) {
+		const newQuery = new URLSearchParams(location.search);
+
+		newQuery.delete('filter');
+		newQuery.set('view', view);
+		history.push(`/app/tasks/?${newQuery.toString()}`);
+	}
+
 	return (
 		<Aside>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			{/* <SubSection>
-				<SubHeading>Menu projet</SubHeading>
-			</SubSection> */}
-
+			<SubSection>
+				<SidebarHeading>Menu Projet</SidebarHeading>
+				<SidebarLink
+					data-tip="Vue principale"
+					onClick={() => setView('tasks')}
+					active={activeView === 'tasks' || !activeView}
+				>
+					<ProjectMenuIcon>
+						<TasksIcon />
+					</ProjectMenuIcon>
+					Tâches du projet
+				</SidebarLink>
+				<SidebarLink
+					data-tip="Seulement visibles par vous"
+					onClick={() => setView('personal-notes')}
+					active={activeView === 'personal-notes'}
+				>
+					<ProjectMenuIcon>
+						<PersonalNotesIcon />
+					</ProjectMenuIcon>
+					Notes personnelles
+				</SidebarLink>
+				<SidebarLink
+					data-tip="Visibles par tout le monde"
+					onClick={() => setView('shared-notes')}
+					active={activeView === 'shared-notes'}
+				>
+					<ProjectMenuIcon>
+						<SharedNotesIcon />
+					</ProjectMenuIcon>
+					Notes partagées
+				</SidebarLink>
+			</SubSection>
 			<SubSection>
 				<SidebarHeading>
 					Votre client

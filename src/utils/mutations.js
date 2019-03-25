@@ -302,6 +302,25 @@ export const UPDATE_PROJECT = gql`
 		}
 	}
 `;
+
+export const UPDATE_PROJECT_PERSONAL_NOTES = gql`
+	mutation updateProject($id: ID!, $notes: Json) {
+		updateProject(id: $id, personalNotes: $notes) {
+			id
+			personalNotes
+		}
+	}
+`;
+
+export const UPDATE_PROJECT_SHARED_NOTES = gql`
+	mutation updateProject($id: ID!, $notes: Json) {
+		updateProject(id: $id, sharedNotes: $notes) {
+			id
+			sharedNotes
+		}
+	}
+`;
+
 export const START_PROJECT = gql`
 	# creating project with a customer id or a new customer
 	mutation startProject($projectId: ID!, $notifyCustomer: Boolean) {

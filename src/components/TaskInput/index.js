@@ -33,7 +33,6 @@ const InputContainer = styled('div')`
 	padding-left: 0.3rem;
 	margin-left: -10px;
 	position: relative;
-	width: calc(100% + 25px);
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-left: 0;

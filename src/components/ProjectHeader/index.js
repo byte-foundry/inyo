@@ -6,12 +6,17 @@ import {css} from '@emotion/core';
 import {primaryBlack} from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
+import {BREAKPOINTS} from '../../utils/constants';
 
 import TasksProgressBar from '../TasksProgressBar';
 import InlineEditable from '../InlineEditable';
 
 const ProjectHeaderContainer = styled('div')`
-	margin-bottom: 25px;
+	margin-bottom: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 const ProjectHeading = styled(InlineEditable)`

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
@@ -13,9 +13,7 @@ import {TOOLTIP_DELAY} from '../../utils/constants';
 import {
 	gray20,
 	primaryWhite,
-	gray50,
 	gray80,
-	primaryBlue,
 	ErrorInput,
 	FlexRow,
 } from '../../utils/content';
@@ -78,6 +76,7 @@ const ScrollAlertContent = styled('div')`
 `;
 
 function CommentList({itemId, customerToken, linkedCustomer}) {
+	const [noScrollIndicator, setNoScrollIndicator] = useState(false);
 	const {data, loading, error} = useQuery(GET_COMMENTS_BY_ITEM, {
 		variables: {
 			itemId,
@@ -123,16 +122,13 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					</Empty>
 				)}
 				<Waypoint
-					// onEnter={CommentListState}
-					onEnter={() => this.setState({noScrollIndicator: true})}
-					onLeave={() => this.setState({
-						noScrollIndicator: false,
-					})
-					}
+					onEnter={() => setNoScrollIndicator(true)}
+					onLeave={() => setNoScrollIndicator(false)}
+					bottomOffset={-50}
 				/>
 			</Comments>
 			<ScrollAlert>
-				{!this.state.noScrollIndicator && (
+				{!noScrollIndicator && (
 					<ScrollAlertContent>
 						Scroller pour lire les autres commentaires
 					</ScrollAlertContent>

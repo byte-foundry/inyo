@@ -286,7 +286,7 @@ export const TaskInfosItem = styled('div')`
 	display: flex;
 	margin-right: 1rem;
 	font-size: 12px;
-	cursor: pointer;
+	${props => props.onClick && 'cursor: pointer;'}
 	align-items: center;
 	height: 30px;
 	text-decoration: none;

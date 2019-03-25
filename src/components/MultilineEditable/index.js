@@ -23,6 +23,7 @@ const MultilineEditable = ({
 	onBlur,
 	onChange,
 	defaultValue,
+	disabled,
 	...rest
 }) => {
 	const inputRef = useRef(null);
@@ -60,8 +61,8 @@ const MultilineEditable = ({
 	return (
 		<EditableArea
 			ref={inputRef}
-			onClick={() => setEditing(true)}
-			contentEditable={isEditing}
+			onClick={() => !disabled && setEditing(true)}
+			contentEditable={isEditing && !disabled}
 			onInput={(e) => {
 				if (!e.target.textContent.trim().length) {
 					e.target.innerHTML = '';
@@ -85,10 +86,12 @@ const MultilineEditable = ({
 
 MultilineEditable.propTypes = {
 	onChange: PropTypes.func,
+	disabled: PropTypes.bool,
 };
 
 MultilineEditable.propTypes = {
 	onChange: () => {},
+	disabled: false,
 };
 
 export default MultilineEditable;

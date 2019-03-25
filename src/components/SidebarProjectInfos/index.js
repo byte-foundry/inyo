@@ -440,7 +440,7 @@ const SidebarProjectInfos = ({
 								setEditDueDate(false);
 							}}
 							duration={project.total}
-							position="left"
+							position="right"
 						/>
 					)}
 				</DateContainer>

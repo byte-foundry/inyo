@@ -309,7 +309,9 @@ export function TaskIconText({icon, content, ...rest}) {
 	);
 }
 
-export const LayoutMainElem = styled('div')``;
+export const LayoutMainElem = styled('div')`
+	flex: 1;
+`;
 
 export const Input = styled('input')`
 	font-family: 'Work Sans', sans-serif;

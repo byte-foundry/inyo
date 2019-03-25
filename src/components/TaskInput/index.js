@@ -33,7 +33,6 @@ const InputContainer = styled('div')`
 	padding-left: 0.3rem;
 	margin-left: -10px;
 	position: relative;
-	width: calc(100% + 25px);
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-left: 0;
@@ -156,7 +155,7 @@ const Icon = styled('div')`
 	border-radius: 50%;
 	width: 2rem;
 	height: 2rem;
-	font-size: 2rem;
+	font-size: 1.2rem;
 	z-index: 0;
 	transition: all 400ms ease;
 	cursor: pointer;
@@ -216,7 +215,7 @@ const TaskInput = ({
 		setFocusByClick(false);
 	});
 
-	let icon = '+';
+	let icon = '▾';
 
 	if (type) {
 		({icon} = types.find(t => t.type === type));

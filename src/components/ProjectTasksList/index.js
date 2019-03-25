@@ -33,9 +33,7 @@ import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
 
-const TasksListContainer = styled(LayoutMainElem)`
-	margin-top: 3rem;
-`;
+const TasksListContainer = styled(LayoutMainElem)``;
 
 const SectionDraggable = styled('div')`
 	position: relative;
@@ -51,7 +49,7 @@ const SectionDraggable = styled('div')`
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
-		top: 0.75rem;
+		top: 1.1rem;
 
 		opacity: 0;
 		transition: all 300ms ease;
@@ -317,7 +315,11 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
 	const updateTask = useMutation(UPDATE_ITEM);
 	const removeSection = useMutation(REMOVE_SECTION, {
-		refetchQueries: ['getProjectData'],
+		optimisticResponse: {
+			removeSection: {
+				id: removeSectionModalOpen.id,
+			},
+		},
 	});
 	const addSection = useMutation(ADD_SECTION, {
 		update: (cache, {data: {addSection: addedSection}}) => {

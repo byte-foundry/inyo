@@ -89,7 +89,7 @@ export const templates = [
 						name: 'Faire appel à la communauté Inyo',
 						unit: 0.1,
 						description:
-							"La communauté Inyo grandit de jours en jours et compte des freelances aux nombreuses compétences: design graphique, développement, conception/rédaction, traduction, etc. N'hésitez pas à poster une annonce sur le [Slack](https://inyo-freelancers.slack.com) pour proposer vos services ou échanger vos bonnes pratiques!\n\n[Me connecter à la communauté Inyo](https://inyo-freelancers.slack.com)",
+							"La communauté Inyo grandit de jours en jours et compte des freelances aux nombreuses compétences: design graphique, développement, conception/rédaction, traduction, etc. N'hésitez pas à poster une annonce sur le [Slack](https://join.slack.com/t/inyo-freelancers/shared_invite/enQtNTgzNzA2NjI0NzcyLWM1MmYwMzM5NGVlMmI3MDU0N2U0MDEwYzk2OTViMGJlYzk3MmE1ZWYzZjkzNjFmMzU0OWFkNzYxNjVjYzBiOTk) pour proposer vos services ou échanger vos bonnes pratiques!\n\n[Me connecter à la communauté Inyo](https://inyo-freelancers.slack.com)",
 					},
 				],
 			},

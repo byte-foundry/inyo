@@ -30,7 +30,7 @@ import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
 import {ReactComponent as FileIcon} from '../../utils/icons/file.svg';
 import TrashIcon from '../../utils/icons/trash-icon.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
-import {ReactComponent as HourglassIcon} from '../../utils/icons/hourglass.svg';
+import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
 import {
 	TaskHeading,
@@ -321,7 +321,11 @@ const Item = ({id, customerToken, close}) => {
 				<TaskStatusButton
 					taskId={id}
 					isFinished={item.status === 'FINISHED'}
-					disabled={customerToken && item.type !== 'CUSTOMER'}
+					disabled={
+						customerToken
+						&& item.type !== 'CUSTOMER'
+						&& item.type !== 'CONTENT_ACQUISITION'
+					}
 					customerToken={customerToken}
 				/>
 			</StickyHeader>
@@ -445,7 +449,7 @@ const Item = ({id, customerToken, close}) => {
 				</Meta>
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Meta data-tip="Date limite pour réaliser cette tâche">
-						<HourglassIcon />
+						<DateIcon />
 						<MetaLabel>Temps restant</MetaLabel>
 						<MetaTime
 							title={deadline && deadline.toLocaleString()}

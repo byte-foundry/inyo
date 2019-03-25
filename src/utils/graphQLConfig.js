@@ -19,6 +19,7 @@ import updateItemWatchMutation from './mutationLinks/updateItem';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
 import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
+import removeSectionWatchMutation from './mutationLinks/removeSection';
 
 import {GRAPHQL_API} from './constants';
 
@@ -85,6 +86,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	updateItem: updateItemWatchMutation,
 	uploadAttachments: uploadAttachmentsWatchMutation,
 	removeAttachment: removeAttachmentWatchMutation,
+	removeSection: removeSectionWatchMutation,
 });
 
 const client = new ApolloClient({

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Remarkable from 'remarkable';
 
@@ -6,8 +6,6 @@ import {
 	FlexRow,
 	FlexColumn,
 	primaryWhite,
-	primarySalmon,
-	primaryNavyBlue,
 	gray70,
 	gray80,
 } from '../../utils/content';
@@ -46,40 +44,37 @@ const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
 `;
 
-class Comment extends Component {
-	render() {
-		const {
-			text,
-			author: {firstName, lastName},
-			createdAt,
-		} = this.props.comment;
-
-		const {isCustomer} = this.props;
-
-		return (
-			<CommentMain>
-				<FlexRow>
-					<CommentImage isCustomer={isCustomer}>
-						{firstName && firstName.charAt(0)}
-						{lastName && lastName.charAt(0)}
-					</CommentImage>
-					<CommentContent>
-						<CommentInfo dateTime={createdAt}>
-							{new Date(createdAt).toLocaleString()}
-						</CommentInfo>
-						<CommentText
-							className="content"
-							dangerouslySetInnerHTML={{
-								__html: new Remarkable({linkify: true}).render(
-									text,
-								),
-							}}
-						/>
-					</CommentContent>
-				</FlexRow>
-			</CommentMain>
-		);
-	}
+function Comment({
+	comment: {
+		text,
+		author: {firstName, lastName},
+		createdAt,
+	},
+	isCustomer,
+}) {
+	return (
+		<CommentMain>
+			<FlexRow>
+				<CommentImage isCustomer={isCustomer}>
+					{firstName && firstName.charAt(0)}
+					{lastName && lastName.charAt(0)}
+				</CommentImage>
+				<CommentContent>
+					<CommentInfo dateTime={createdAt}>
+						{new Date(createdAt).toLocaleString()}
+					</CommentInfo>
+					<CommentText
+						className="content"
+						dangerouslySetInnerHTML={{
+							__html: new Remarkable({linkify: true}).render(
+								text,
+							),
+						}}
+					/>
+				</CommentContent>
+			</FlexRow>
+		</CommentMain>
+	);
 }
 
 export default Comment;

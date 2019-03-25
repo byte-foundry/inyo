@@ -1,6 +1,40 @@
 import gql from 'graphql-tag';
 
+export const COMMENT_ON_ITEM_FRAGMENT = gql`
+	fragment CommentOnItemFragment on Comment {
+		createdAt
+		text
+		id
+		views {
+			viewer {
+				... on User {
+					firstName
+					lastName
+				}
+				... on Customer {
+					firstName
+					lastName
+					name
+				}
+			}
+		}
+		author {
+			... on User {
+				firstName
+				lastName
+			}
+			... on Customer {
+				firstName
+				lastName
+				name
+			}
+		}
+	}
+`;
+
 export const ITEM_FRAGMENT = gql`
+	${COMMENT_ON_ITEM_FRAGMENT}
+
 	fragment ItemFragment on Item {
 		id
 		description
@@ -50,32 +84,7 @@ export const ITEM_FRAGMENT = gql`
 		}
 
 		comments {
-			createdAt
-			id
-			views {
-				viewer {
-					... on User {
-						firstName
-						lastName
-					}
-					... on Customer {
-						firstName
-						lastName
-						name
-					}
-				}
-			}
-			author {
-				... on User {
-					firstName
-					lastName
-				}
-				... on Customer {
-					firstName
-					lastName
-					name
-				}
-			}
+			...CommentOnItemFragment
 		}
 	}
 `;

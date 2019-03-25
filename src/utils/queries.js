@@ -1,6 +1,10 @@
 import gql from 'graphql-tag';
 
-import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
+import {
+	ITEM_FRAGMENT,
+	PROJECT_CUSTOMER_FRAGMENT,
+	COMMENT_ON_ITEM_FRAGMENT,
+} from './fragments';
 
 /** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
@@ -344,22 +348,11 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 
 /** ******** COMMENT QUERIES ********* */
 export const GET_COMMENTS_BY_ITEM = gql`
+	${COMMENT_ON_ITEM_FRAGMENT}
+
 	query getCommentsFromItemId($itemId: ID!, $token: String) {
 		itemComments(itemId: $itemId, token: $token) {
-			id
-			text
-			createdAt
-			author {
-				... on User {
-					firstName
-					lastName
-				}
-				... on Customer {
-					firstName
-					lastName
-					name
-				}
-			}
+			...CommentOnItemFragment
 		}
 	}
 `;

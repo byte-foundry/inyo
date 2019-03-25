@@ -7,7 +7,7 @@ import debounce from 'lodash.debounce';
 import 'medium-draft/lib/index.css';
 
 import {gray20} from '../../utils/content';
-import {lightPurple} from '../../utils/new/design-system';
+import {lightPurple, primaryPurple} from '../../utils/new/design-system';
 
 const ProjectNotesContainer = styled('div')`
 	flex: 1;
@@ -21,6 +21,15 @@ const TextEditorMain = styled('div')`
 	border: 1px solid ${gray20};
 	background-color: ${lightPurple};
 	height: 100%;
+	position: relative;
+`;
+
+const EditorToast = styled('div')`
+	position: absolute;
+	font-weight: 600;
+	top: 10px;
+	right: 10px;
+	color: ${primaryPurple};
 `;
 
 BLOCK_BUTTONS.unshift({
@@ -36,6 +45,20 @@ BLOCK_BUTTONS.unshift({
 	style: 'header-two',
 });
 
+const debounceUpdateNotes = debounce(({
+	notes, id, updateNotes, setSaved,
+}) => {
+	console.log('debounce called');
+	updateNotes({
+		variables: {
+			notes,
+			id,
+		},
+	});
+	setSaved(true);
+	setTimeout(() => setSaved(false), 1500);
+}, 2000);
+
 const ProjectNotes = ({
 	notes,
 	customerToken,
@@ -43,19 +66,21 @@ const ProjectNotes = ({
 	projectId,
 	children,
 }) => {
+	const [saved, setSaved] = useState(false);
 	const [editorState, setEditorState] = useState(
 		createEditorState(Object.keys(notes).length > 0 ? notes : undefined),
 	);
 
-	const handleChange = debounce((newState) => {
-		updateNotes({
-			variables: {
-				notes: convertToRaw(newState.getCurrentContent()),
-				id: projectId,
-			},
+	const handleChange = (newState) => {
+		console.log('calling debounce');
+		debounceUpdateNotes({
+			notes: convertToRaw(newState.getCurrentContent()),
+			id: projectId,
+			updateNotes,
+			setSaved,
 		});
 		setEditorState(newState);
-	}, 800);
+	};
 
 	return (
 		<ProjectNotesContainer>
@@ -87,6 +112,7 @@ const ProjectNotes = ({
 						placeholder={`Écrivez des notes...
 Pour accèder aux options sélectionnez un bout de texte. Vous pouvez aussi utiliser markdown.`}
 					/>
+					{saved && <EditorToast>Sauvé!</EditorToast>}
 				</TextEditorMain>
 			</TasksListContainer>
 		</ProjectNotesContainer>

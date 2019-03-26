@@ -164,8 +164,9 @@ export const templates = [
 						name:
 							'Envoi de l’ensemble des contenus textes + images',
 						unit: 0,
-						description: '',
-						type: 'CUSTOMER',
+						description:
+							'Ci-dessous la liste des documents à récupérer.',
+						type: 'CONTENT_ACQUISITION',
 					},
 					{
 						name: 'Direction artistique',

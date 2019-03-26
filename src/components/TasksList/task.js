@@ -333,6 +333,17 @@ export function TaskInfosInputs({
 		setEditDueDate(false);
 	});
 
+	let unreadCommentLength = item.comments.length;
+
+	if (!noComment && item.comments.length > 0) {
+		unreadCommentLength = item.comments.filter(
+			comment => !comment.views.find(
+				e => e.viewer.__typename
+						=== (customerToken ? 'Customer' : 'User'),
+			),
+		).length;
+	}
+
 	return (
 		<TaskInfos>
 			{!noComment && (
@@ -342,7 +353,10 @@ export function TaskInfosInputs({
 						state: {prevSearch: location.search},
 					}}
 				>
-					<CommentIcon data-tip="Ouvrir les commentaires">
+					<CommentIcon
+						new={unreadCommentLength > 0}
+						data-tip="Ouvrir les commentaires"
+					>
 						{item.comments.length > 0 ? item.comments.length : '+'}
 					</CommentIcon>
 				</TaskInfosItemLink>

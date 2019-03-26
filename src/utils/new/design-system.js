@@ -237,7 +237,7 @@ export const CommentIcon = styled('div')`
 	margin-top: -1px;
 	margin-right: 0.3rem;
 	font-weight: 600;
-	background-color: ${mediumGrey};
+	background-color: ${props => (props.new ? primaryPurple : mediumGrey)};
 	color: ${(props) => {
 		if (props.new) {
 			return primaryWhite;
@@ -271,7 +271,8 @@ export const CommentIcon = styled('div')`
 		top: 100%;
 		border-style: solid;
 		border-width: 4px 4px 0 4px;
-		border-color: ${mediumGrey} transparent transparent transparent;
+		border-color: ${props => (props.new ? primaryPurple : mediumGrey)}
+			transparent transparent transparent;
 	}
 `;
 

@@ -10,14 +10,18 @@ import {
 	gray80,
 } from '../../utils/content';
 
-import {primaryPurple, primaryRed} from '../../utils/new/design-system';
+import {
+	primaryPurple,
+	primaryRed,
+	primaryGrey,
+} from '../../utils/new/design-system';
 
 const CommentMain = styled('div')`
 	margin: 20px 0;
 `;
 const CommentImage = styled('div')`
 	border-radius: 50%;
-	background: ${props => (props.isCustomer ? primaryRed : primaryPurple)};
+	background: ${props => props.color};
 	width: 40px;
 	height: 40px;
 	text-align: center;
@@ -44,21 +48,25 @@ const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
 `;
 
-function Comment({
-	comment: {
-		text,
-		author: {firstName, lastName},
-		createdAt,
-	},
-	isCustomer,
-}) {
+function Comment({comment: {text, author, createdAt}}) {
+	let color = primaryGrey;
+
+	let initials = '?';
+
+	if (author) {
+		// eslint-disable-next-line no-underscore-dangle
+		const isCustomer = author.__typename === 'Customer';
+
+		color = isCustomer ? primaryRed : primaryPurple;
+		initials
+			= (author.firstName || '').charAt(0)
+			+ (author.lastName || '').charAt(0);
+	}
+
 	return (
 		<CommentMain>
 			<FlexRow>
-				<CommentImage isCustomer={isCustomer}>
-					{firstName && firstName.charAt(0)}
-					{lastName && lastName.charAt(0)}
-				</CommentImage>
+				<CommentImage color={color}>{initials}</CommentImage>
 				<CommentContent>
 					<CommentInfo dateTime={createdAt}>
 						{new Date(createdAt).toLocaleString()}

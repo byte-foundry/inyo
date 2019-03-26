@@ -93,13 +93,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 	const {itemComments} = data;
 
 	const comments = itemComments.map(comment => (
-		<Comment
-			key={`comment${comment.id}`}
-			comment={comment}
-			isCustomer={
-				comment.author.__typename === 'Customer' // eslint-disable-line no-underscore-dangle
-			}
-		/>
+		<Comment key={`comment${comment.id}`} comment={comment} />
 	));
 
 	let placeholderText = 'Votre commentaire';

@@ -43,13 +43,6 @@ function Onboarding({history}) {
 
 	const {me} = data;
 
-	useEffect(
-		() => () => {
-			console.log('contenu');
-		},
-		[],
-	);
-
 	function getNextStep() {
 		setStep(step + 1);
 	}

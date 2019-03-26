@@ -21,6 +21,7 @@ import {
 	Button,
 	primaryPurple,
 	primaryBlack,
+	accentGrey,
 } from '../../utils/new/design-system';
 
 import Comment from '../Comment';
@@ -73,6 +74,7 @@ const ScrollAlertContent = styled('div')`
 	padding: 0.4rem 0.8rem;
 	font-size: 0.8rem;
 	border-radius: 3rem;
+	box-shadow: 2px 2px 20px ${accentGrey};
 `;
 
 function CommentList({itemId, customerToken, linkedCustomer}) {

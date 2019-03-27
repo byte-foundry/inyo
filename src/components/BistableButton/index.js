@@ -19,7 +19,7 @@ const BistableButton = ({
 		data-tip={value ? trueTooltip : falseTooltip}
 		white={white}
 		primary={primary}
-		icon={value && '✓'}
+		icon={value ? '×' : '✓'}
 		onClick={() => {
 			if (value) {
 				reverse({

@@ -6,19 +6,23 @@ export default {
 			const cachedSections = [...query.result.project.sections];
 
 			if (cachedSections.length > 0) {
-				const cachedItems = cachedSections.find(
+				const cachedSection = cachedSections.find(
 					section => section.id === addedItem.section.id,
-				).items;
+				);
 
-				cachedItems.unshift(addedItem);
+				if (cachedSection) {
+					const cachedItems = cachedSection.items;
 
-				return {
-					...query.result,
-					project: {
-						...query.result.project,
-						sections: [...cachedSections],
-					},
-				};
+					cachedItems.unshift(addedItem);
+
+					return {
+						...query.result,
+						project: {
+							...query.result.project,
+							sections: [...cachedSections],
+						},
+					};
+				}
 			}
 		}
 	},

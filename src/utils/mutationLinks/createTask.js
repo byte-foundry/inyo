@@ -4,19 +4,26 @@ export default {
 
 		if (addedItem.section) {
 			const cachedSections = [...query.result.project.sections];
-			const cachedItems = cachedSections.find(
-				section => section.id === addedItem.section.id,
-			).items;
 
-			cachedItems.unshift(addedItem);
+			if (cachedSections.length > 0) {
+				const cachedSection = cachedSections.find(
+					section => section.id === addedItem.section.id,
+				);
 
-			return {
-				...query.result,
-				project: {
-					...query.result.project,
-					sections: [...cachedSections],
-				},
-			};
+				if (cachedSection) {
+					const cachedItems = cachedSection.items;
+
+					cachedItems.unshift(addedItem);
+
+					return {
+						...query.result,
+						project: {
+							...query.result.project,
+							sections: [...cachedSections],
+						},
+					};
+				}
+			}
 		}
 	},
 	getAllTasks: ({mutation, query}) => {

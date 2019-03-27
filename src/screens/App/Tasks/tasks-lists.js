@@ -11,7 +11,10 @@ import {
 	ModalElem,
 	ModalActions,
 } from '../../../utils/content';
-import {Heading, Button, P} from '../../../utils/new/design-system';
+import {
+	Help, Heading, Button, P,
+} from '../../../utils/new/design-system';
+
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
@@ -174,6 +177,12 @@ function TasksList({location, history}) {
 
 	return (
 		<Container>
+			<Help
+				data-tip="Instructions pour utiliser l'interface"
+				onClick={() => history.push('?openModal=true')}
+			>
+				?
+			</Help>
 			<TaskAndArianne>
 				<ArianneThread
 					projectId={projectId}

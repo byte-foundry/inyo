@@ -314,20 +314,23 @@ const Item = ({id, customerToken, close}) => {
 		= ITEM_TYPES.find(({type}) => type === item.type)
 		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
+	const finishableTask
+		= (customerToken
+			&& (item.type === 'CUSTOMER'
+				|| item.type === 'CONTENT_ACQUISITION'))
+		|| !customerToken;
+
 	return (
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader>
-				<TaskStatusButton
-					taskId={id}
-					isFinished={item.status === 'FINISHED'}
-					disabled={
-						customerToken
-						&& item.type !== 'CUSTOMER'
-						&& item.type !== 'CONTENT_ACQUISITION'
-					}
-					customerToken={customerToken}
-				/>
+				{finishableTask && (
+					<TaskStatusButton
+						taskId={id}
+						isFinished={item.status === 'FINISHED'}
+						customerToken={customerToken}
+					/>
+				)}
 			</StickyHeader>
 			<Header>
 				<Title data-tip="Type et titre de la tâche">

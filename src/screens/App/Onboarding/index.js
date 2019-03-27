@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
-import {Query} from 'react-apollo';
+import {useQuery} from 'react-apollo-hooks';
 import {Redirect, withRouter} from 'react-router-dom';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSecondStep from '../../../components/Onboarding/onboarding-second-step';
@@ -35,19 +35,23 @@ const OnboardingProgressBar = styled('div')`
 	}
 `;
 
-class Onboarding extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			step: 1,
-		};
+function Onboarding({history}) {
+	const {data, loading} = useQuery(GET_USER_INFOS);
+	const [step, setStep] = useState(1);
+
+	if (loading) return <Loading />;
+
+	const {me} = data;
+
+	function getNextStep() {
+		setStep(step + 1);
 	}
 
-	getNextStep = () => this.setState({step: this.state.step + 1});
+	function getPreviousStep() {
+		setStep(step - 1);
+	}
 
-	getPreviousStep = () => this.setState({step: this.state.step - 1});
-
-	getStepData = (step, me) => {
+	function getStepData(step, me) {
 		switch (step) {
 		case 0:
 			return <Redirect to="/auth" />;
@@ -56,8 +60,8 @@ class Onboarding extends Component {
 				<OnboardingFirstStep
 					me={me}
 					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
+					getNextStep={getNextStep}
+					getPreviousStep={getPreviousStep}
 				/>
 			);
 		case 2:
@@ -65,8 +69,8 @@ class Onboarding extends Component {
 				<OnboardingSecondStep
 					me={me}
 					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
+					getNextStep={getNextStep}
+					getPreviousStep={getPreviousStep}
 				/>
 			);
 		case 3:
@@ -74,42 +78,24 @@ class Onboarding extends Component {
 				<OnboardingThirdStep
 					me={me}
 					step={step}
-					getNextStep={this.getNextStep}
-					getPreviousStep={this.getPreviousStep}
+					getNextStep={getNextStep}
+					getPreviousStep={getPreviousStep}
 				/>
 			);
 		case 4:
 			window.Intercom('trackEvent', 'start-onboarding-project');
-			return <Redirect to="/app/tasks?openModal=true" />;
+			history.push('/app/tasks?openModal=true');
 		default:
 			return false;
 		}
-	};
-
-	render() {
-		const {step} = this.state;
-
-		return (
-			<Query query={GET_USER_INFOS}>
-				{({loading, data}) => {
-					if (loading) return <Loading />;
-					if (data && data.me) {
-						const {me} = data;
-
-						return (
-							<OnboardingMain>
-								<OnboardingProgressBar
-									completionRate={((step - 1) / 3) * 100}
-								/>
-								{this.getStepData(step, me)}
-							</OnboardingMain>
-						);
-					}
-					return <Redirect to="/auth" />;
-				}}
-			</Query>
-		);
 	}
+
+	return (
+		<OnboardingMain>
+			<OnboardingProgressBar completionRate={((step - 1) / 3) * 100} />
+			{getStepData(step, me)}
+		</OnboardingMain>
+	);
 }
 
 export default withRouter(Onboarding);

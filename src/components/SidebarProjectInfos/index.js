@@ -10,6 +10,7 @@ import {
 	SubHeading,
 	Button,
 	primaryPurple,
+	primaryRed,
 	primaryBlack,
 	primaryGrey,
 	lightGrey,
@@ -102,7 +103,7 @@ const CheckBoxLabel = styled('label')`
 const BigNumber = styled(P)`
 	font-size: 20px;
 	font-weight: 500;
-	color: ${primaryGrey};
+	color: ${props => (props.urgent ? primaryRed : primaryGrey)};
 `;
 
 const DateContainer = styled('div')`
@@ -186,6 +187,10 @@ const SidebarLink = styled('div')`
 			fill: ${primaryBlack};
 		}
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+	}
 `;
 
 const SidebarHeading = styled(SubHeading)`
@@ -237,6 +242,15 @@ const SidebarProjectInfos = ({
 		newQuery.set('view', view);
 		history.push(`/app/tasks/?${newQuery.toString()}`);
 	}
+
+	const timeItTookPending = project.sections.reduce(
+		(sectionsSum, section) => (
+			sectionsSum
+				+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0)
+		),
+		0,
+	);
+	const margin = project.daysUntilDeadline - timeItTookPending;
 
 	return (
 		<Aside>
@@ -449,13 +463,12 @@ const SidebarProjectInfos = ({
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
-					<BigNumber data-tip="Nombre de jours travaillés avant deadline">
-						{project.daysUntilDeadline}&nbsp;
-						<Plural
-							value={project.daysUntilDeadline}
-							singular="jour"
-							plural="jours"
-						/>
+					<BigNumber
+						data-tip="Nombre de jours travaillés avant deadline"
+						urgent={margin < 1}
+					>
+						{margin}&nbsp;
+						<Plural value={margin} singular="jour" plural="jours" />
 					</BigNumber>
 				</SubSection>
 			)}

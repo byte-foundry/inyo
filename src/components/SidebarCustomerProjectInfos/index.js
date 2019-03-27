@@ -14,6 +14,7 @@ import {
 	P,
 	primaryPurple,
 	primaryBlack,
+	lightGrey,
 } from '../../utils/new/design-system';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
@@ -51,13 +52,55 @@ const DateContainer = styled('div')`
 `;
 
 const SidebarLink = styled('div')`
-	display: flex;
+	display: inline-flex;
 	align-items: center;
 	color: ${props => (props.active ? primaryBlack : primaryPurple)};
 	text-decoration: none;
 	font-weight: 500;
-	margin-bottom: 8px;
+	margin-bottom: 0.8rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
+	position: relative;
+
+	${props => props.active
+		&& `&:before {
+			content: '';
+			display: 'block';
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+
+		svg {
+			fill: ${primaryBlack} !important;
+		}`}
+
+	&:hover {
+		&:before {
+			content: '';
+			display: 'block';
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -1rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		color: ${primaryBlack};
+		svg {
+			fill: ${primaryBlack};
+		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+	}
 `;
 
 const SidebarHeading = styled(SubHeading)`
@@ -67,7 +110,11 @@ const SidebarHeading = styled(SubHeading)`
 `;
 
 const ProjectMenuIcon = styled('div')`
-	margin-right: 10px;
+	margin: 0 10px -3px 0;
+
+	svg {
+		fill: ${primaryPurple};
+	}
 `;
 
 const SidebarCustomerProjectInfos = ({projectId, location, history}) => {

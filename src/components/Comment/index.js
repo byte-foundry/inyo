@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import Remarkable from 'remarkable';
 
@@ -6,20 +6,22 @@ import {
 	FlexRow,
 	FlexColumn,
 	primaryWhite,
-	primarySalmon,
-	primaryNavyBlue,
 	gray70,
 	gray80,
 } from '../../utils/content';
 
-import {primaryPurple, primaryRed} from '../../utils/new/design-system';
+import {
+	primaryPurple,
+	primaryRed,
+	primaryGrey,
+} from '../../utils/new/design-system';
 
 const CommentMain = styled('div')`
 	margin: 20px 0;
 `;
 const CommentImage = styled('div')`
 	border-radius: 50%;
-	background: ${props => (props.isCustomer ? primaryRed : primaryPurple)};
+	background: ${props => props.color};
 	width: 40px;
 	height: 40px;
 	text-align: center;
@@ -46,40 +48,41 @@ const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
 `;
 
-class Comment extends Component {
-	render() {
-		const {
-			text,
-			author: {firstName, lastName},
-			createdAt,
-		} = this.props.comment;
+function Comment({comment: {text, author, createdAt}}) {
+	let color = primaryGrey;
 
-		const {isCustomer} = this.props;
+	let initials = '?';
 
-		return (
-			<CommentMain>
-				<FlexRow>
-					<CommentImage isCustomer={isCustomer}>
-						{firstName && firstName.charAt(0)}
-						{lastName && lastName.charAt(0)}
-					</CommentImage>
-					<CommentContent>
-						<CommentInfo dateTime={createdAt}>
-							{new Date(createdAt).toLocaleString()}
-						</CommentInfo>
-						<CommentText
-							className="content"
-							dangerouslySetInnerHTML={{
-								__html: new Remarkable({linkify: true}).render(
-									text,
-								),
-							}}
-						/>
-					</CommentContent>
-				</FlexRow>
-			</CommentMain>
-		);
+	if (author) {
+		// eslint-disable-next-line no-underscore-dangle
+		const isCustomer = author.__typename === 'Customer';
+
+		color = isCustomer ? primaryRed : primaryPurple;
+		initials
+			= (author.firstName || '').charAt(0)
+			+ (author.lastName || '').charAt(0);
 	}
+
+	return (
+		<CommentMain>
+			<FlexRow>
+				<CommentImage color={color}>{initials}</CommentImage>
+				<CommentContent>
+					<CommentInfo dateTime={createdAt}>
+						{new Date(createdAt).toLocaleString()}
+					</CommentInfo>
+					<CommentText
+						className="content"
+						dangerouslySetInnerHTML={{
+							__html: new Remarkable({linkify: true}).render(
+								text,
+							),
+						}}
+					/>
+				</CommentContent>
+			</FlexRow>
+		</CommentMain>
+	);
 }
 
 export default Comment;

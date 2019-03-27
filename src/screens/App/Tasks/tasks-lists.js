@@ -2,6 +2,7 @@ import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
+import YouTube from 'react-youtube';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {
@@ -35,6 +36,10 @@ const Container = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
 	}
+`;
+
+const IframeYouTube = styled(YouTube)`
+	width: 100%;
 `;
 
 const TaskAndArianne = styled('div')`
@@ -185,11 +190,7 @@ function TasksList({location, history}) {
 					/>
 				)}
 				<Main>
-					{projectId && (
-						<SidebarProjectInfos
-							projectId={projectId}
-						/>
-					)}
+					{projectId && <SidebarProjectInfos projectId={projectId} />}
 					<Suspense fallback={<Loading />}>
 						{projectId && view === 'shared-notes' && (
 							<ProjectSharedNotes projectId={projectId} />
@@ -221,36 +222,17 @@ function TasksList({location, history}) {
 					<ModalElem>
 						<Heading>Bienvenue sur Inyo,</Heading>
 						<PA>
-							Pour découvrir comment fonctionne Inyo, nous avons
-							créé plusieurs tâches qui reprennent les
-							fonctionnalités de base. Vous pouvez les retrouver
-							sur la vue "Tâches" qui regroupe toutes les tâches
-							créées tous projets confondus, ou les filtrer grâce
-							aux filtres en haut de la page.
+							Découvrez en 1'30min les options de bases de Inyo et
+							commencez dès maintenant à optimiser vos journées!
 						</PA>
-						<PA>
-							À tout moment vous pouvez utiliser le champ
-							principal pour créer une tâche personnelle ou pour
-							un client, et même un projet complet à partir d'un
-							modèle.
-						</PA>
-						<PA>
-							Commencez par cliquer sur la 1ère tâche et optimisez
-							votre activité dès aujourd'hui!
-						</PA>
-
-						<PA>
-							Edwige,
-							<br />
-							votre Smart Assistant.
-						</PA>
+						<IframeYouTube videoId="qBJvclaZ-yQ" />
 						<ModalActions>
 							<Button
 								big
 								primary
 								onClick={() => history.push('/app/tasks')}
 							>
-								C'est parti!
+								J'ai compris!
 							</Button>
 						</ModalActions>
 					</ModalElem>

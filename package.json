@@ -57,6 +57,7 @@
     "react-toastify": "^4.4.0",
     "react-tooltip": "^3.9.2",
     "react-waypoint": "^9.0.1",
+    "react-youtube": "^7.9.0",
     "remarkable": "^1.7.1",
     "shevyjs": "^1.1.0",
     "timezone-support": "^1.8.1",

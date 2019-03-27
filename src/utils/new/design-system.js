@@ -172,6 +172,7 @@ export const Heading = styled('h1')`
 	font-weight: 500;
 	color: ${primaryPurple};
 	font-size: 32px;
+	margin-top: 0;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 24px;

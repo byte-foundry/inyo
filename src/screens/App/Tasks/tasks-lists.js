@@ -42,7 +42,17 @@ const Container = styled('div')`
 `;
 
 const IframeYouTube = styled(YouTube)`
+	position: absolute;
 	width: 100%;
+	height: 100%;
+`;
+
+const YoutubeContainer = styled('div')`
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 0;
+	padding-bottom: 56.25%;
 `;
 
 const TaskAndArianne = styled('div')`
@@ -234,7 +244,9 @@ function TasksList({location, history}) {
 							Découvrez en 1'30min les options de bases de Inyo et
 							commencez dès maintenant à optimiser vos journées!
 						</PA>
-						<IframeYouTube videoId="qBJvclaZ-yQ" />
+						<YoutubeContainer>
+							<IframeYouTube videoId="qBJvclaZ-yQ" />
+						</YoutubeContainer>
 						<ModalActions>
 							<Button
 								big

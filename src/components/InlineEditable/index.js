@@ -3,7 +3,12 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 
 import {Input, gray50} from '../../utils/content';
-import {lightGrey, accentGrey} from '../../utils/new/design-system';
+import {
+	lightGrey,
+	lightRed,
+	accentGrey,
+	primaryRed,
+} from '../../utils/new/design-system';
 import Pencil from '../../utils/icons/pencil.svg';
 
 const Placeholder = styled('span')`
@@ -19,14 +24,14 @@ const NameInput = styled(Input)`
 const Editable = styled('span')`
 	position: relative;
 	border: 1px solid transparent;
-
+	border-radius: 8px;
+	
 	${props => !props.disabled
 		&& css`
 			&:hover {
 				cursor: text;
 				border: 1px solid transparent;
 				background: ${lightGrey};
-				border-radius: 8px;
 
 				&:after {
 					content: '';
@@ -43,6 +48,12 @@ const Editable = styled('span')`
 					width: 50px;
 				}
 			}
+		`}
+
+	${props => props.missing
+		&& css`
+			background-color: ${lightRed};
+			color: ${primaryRed};
 		`}
 
 	${props => props.css};
@@ -111,6 +122,10 @@ class InlineEditable extends Component {
 					className={className}
 					onClick={this.handleFocus}
 					disabled={disabled}
+					missing={
+						value === 'Renommer cette section'
+						|| value === 'Nom du projet'
+					}
 					css={this.props.editableCss}
 				>
 					{value}

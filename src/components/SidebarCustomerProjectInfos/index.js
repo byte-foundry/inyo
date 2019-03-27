@@ -27,6 +27,7 @@ const Aside = styled('aside')`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
+	min-width: 270px;
 	width: 270px;
 	padding-right: 4rem;
 

@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
 
 import TaskStatusButton from '../TaskStatusButton';
+import TaskActivationButton from '../TaskActivationButton';
 import Plural from '../Plural';
 import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
@@ -154,7 +155,7 @@ const Description = styled('div')`
 const StickyHeader = styled('div')`
 	position: sticky;
 	top: 0;
-	background: #5020ee;
+	background: ${props => (props.customer ? primaryRed : primaryPurple)};
 	margin: -4rem -4rem 1.4rem;
 	display: flex;
 	justify-content: center;
@@ -318,16 +319,18 @@ const Item = ({id, customerToken, close}) => {
 		= (customerToken
 			&& (item.type === 'CUSTOMER'
 				|| item.type === 'CONTENT_ACQUISITION'))
-		|| !customerToken;
+		|| (!customerToken && item.type === 'DEFAULT');
+
+	const activableTask = !customerToken;
 
 	return (
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			<StickyHeader>
-				{finishableTask && (
-					<TaskStatusButton
+			<StickyHeader customer={item.type !== 'DEFAULT'}>
+				{activableTask && (
+					<TaskActivationButton
 						taskId={id}
-						isFinished={item.status === 'FINISHED'}
+						isActive={item.status === 'FINISHED'}
 						customerToken={customerToken}
 					/>
 				)}
@@ -685,6 +688,13 @@ const Item = ({id, customerToken, close}) => {
 						</Button>
 					</>
 				))}
+			{finishableTask && (
+				<TaskStatusButton
+					taskId={id}
+					isFinished={item.status === 'FINISHED'}
+					customerToken={customerToken}
+				/>
+			)}
 		</>
 	);
 };

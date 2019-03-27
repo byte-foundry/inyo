@@ -5,19 +5,19 @@ import BistableButton from '../BistableButton';
 
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
-const TaskStatusButton = ({
-	customerToken, taskId, isFinished, disabled,
+const TaskActivationButton = ({
+	customerToken, taskId, isActive, disabled,
 }) => {
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
 
 	return (
 		<BistableButton
-			value={isFinished}
+			value={isActive}
 			disabled={disabled}
-			trueLabel="Fait"
+			trueLabel="Tâche déjà activé"
 			trueTooltip="Ré-ouvrir la tâche"
-			falseLabel="Marquer comme fait"
+			falseLabel="Activé la tâche"
 			falseTooltip="Cliquer si cette tâche a été réalisée"
 			commit={finishItem}
 			reverse={unfinishItem}
@@ -26,4 +26,4 @@ const TaskStatusButton = ({
 	);
 };
 
-export default TaskStatusButton;
+export default TaskActivationButton;

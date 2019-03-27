@@ -45,6 +45,7 @@ export const ITEM_FRAGMENT = gql`
 		type
 		unit
 		timeItTook
+		isFocused
 		attachments {
 			id
 			filename

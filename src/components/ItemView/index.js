@@ -8,6 +8,7 @@ import ReactTooltip from 'react-tooltip';
 
 import TaskStatusButton from '../TaskStatusButton';
 import TaskActivationButton from '../TaskActivationButton';
+import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 import Plural from '../Plural';
 import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
@@ -315,11 +316,10 @@ const Item = ({id, customerToken, close}) => {
 		= ITEM_TYPES.find(({type}) => type === item.type)
 		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
+	const customerTask
+		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
 	const finishableTask
-		= (customerToken
-			&& (item.type === 'CUSTOMER'
-				|| item.type === 'CONTENT_ACQUISITION'))
-		|| (!customerToken && item.type === 'DEFAULT');
+		= (customerToken && customerTask) || (!customerToken && !customerTask);
 
 	const activableTask = !customerToken;
 
@@ -327,11 +327,19 @@ const Item = ({id, customerToken, close}) => {
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader customer={item.type !== 'DEFAULT'}>
-				{activableTask && (
+				{activableTask && !customerTask && (
 					<TaskActivationButton
 						taskId={id}
-						isActive={item.status === 'FINISHED'}
-						customerToken={customerToken}
+						isActive={item.isFocused}
+					/>
+				)}
+				{activableTask && customerTask && (
+					<TaskCustomerActivationButton
+						taskId={id}
+						isActive={item.isFocused}
+						customerName={
+							item.linkedCustomer && item.linkedCustomer.name
+						}
 					/>
 				)}
 			</StickyHeader>
@@ -691,6 +699,7 @@ const Item = ({id, customerToken, close}) => {
 			{finishableTask && (
 				<TaskStatusButton
 					taskId={id}
+					primary={item.status === 'FINISHED'}
 					isFinished={item.status === 'FINISHED'}
 					customerToken={customerToken}
 				/>

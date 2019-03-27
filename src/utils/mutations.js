@@ -524,6 +524,26 @@ export const SNOOZE_ITEM = gql`
 	}
 `;
 
+export const FOCUS_TASK = gql`
+	${ITEM_FRAGMENT}
+
+	mutation focusTask($itemId: ID!) {
+		focusTask(id: $itemId) {
+			...ItemFragment
+		}
+	}
+`;
+
+export const UNFOCUS_TASK = gql`
+	${ITEM_FRAGMENT}
+
+	mutation unfocusTask($itemId: ID!) {
+		unfocusTask(id: $itemId) {
+			...ItemFragment
+		}
+	}
+`;
+
 export const SEND_AMENDMENT = gql`
 	mutation sendAmendment($projectId: ID!) {
 		sendAmendment(projectId: $projectId) {

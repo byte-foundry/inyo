@@ -12,11 +12,14 @@ const BistableButton = ({
 	commit,
 	reverse,
 	variables,
+	white,
+	primary,
 }) => (
 	<Button
 		data-tip={value ? trueTooltip : falseTooltip}
+		white={white}
+		primary={primary}
 		icon={value && '✓'}
-		white={!value}
 		onClick={() => {
 			if (value) {
 				reverse({

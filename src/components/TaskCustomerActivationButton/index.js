@@ -6,7 +6,7 @@ import BistableButton from '../BistableButton';
 import {FOCUS_TASK, UNFOCUS_TASK} from '../../utils/mutations';
 
 const TaskActivationButton = ({
-	customerToken, taskId, isActive, disabled,
+	taskId, isActive, disabled, customerName,
 }) => {
 	const focusItem = useMutation(FOCUS_TASK);
 	const unfocusItem = useMutation(UNFOCUS_TASK);
@@ -16,13 +16,13 @@ const TaskActivationButton = ({
 			white={!isActive}
 			value={isActive}
 			disabled={disabled}
-			trueLabel="Cette tâche est prévu pour aujourd'hui"
+			trueLabel="Edwige s'occupe de faire réaliser cette tâche"
 			trueTooltip="Enlever la tâche des choses à faire aujourd'hui"
-			falseLabel="Je fais cette tâche aujourd'hui"
+			falseLabel={`Charger Edwige de faire réaliser cette tâche à ${customerName}`}
 			falseTooltip="Ajouter la tâche aux choses à faire aujourd'hui"
 			commit={focusItem}
 			reverse={unfocusItem}
-			variables={{itemId: taskId, token: customerToken}}
+			variables={{itemId: taskId}}
 		/>
 	);
 };

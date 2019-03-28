@@ -151,6 +151,7 @@ const SidebarLink = styled('div')`
 	margin-bottom: 0.8rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
 	position: relative;
+	max-width: calc(100% - 2rem);
 
 	${props => props.active
 		&& `&:before {

@@ -25,7 +25,7 @@ const Editable = styled('span')`
 	position: relative;
 	border: 1px solid transparent;
 	border-radius: 8px;
-	
+
 	${props => !props.disabled
 		&& css`
 			&:hover {
@@ -50,7 +50,7 @@ const Editable = styled('span')`
 			}
 		`}
 
-	${props => props.missing
+	${props => props.missingTitle
 		&& css`
 			background-color: ${lightRed};
 			color: ${primaryRed};
@@ -122,7 +122,7 @@ class InlineEditable extends Component {
 					className={className}
 					onClick={this.handleFocus}
 					disabled={disabled}
-					missing={
+					missingTitle={
 						value === 'Renommer cette section'
 						|| value === 'Nom du projet'
 					}

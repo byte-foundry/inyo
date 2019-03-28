@@ -1,6 +1,10 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
-import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
+import {
+	ITEM_FRAGMENT,
+	PROJECT_CUSTOMER_FRAGMENT,
+	REMINDER_FRAGMENT,
+} from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -942,6 +946,16 @@ export const REMOVE_CUSTOMER = gql`
 	mutation removeCustomer($id: ID!) {
 		removeCustomer(id: $id) {
 			id
+		}
+	}
+`;
+
+export const CANCEL_REMINDER = gql`
+	${REMINDER_FRAGMENT}
+
+	mutation cancelReminder($id: ID!) {
+		cancelReminder(id: $id) {
+			...ReminderFragment
 		}
 	}
 `;

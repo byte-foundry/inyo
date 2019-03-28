@@ -20,6 +20,7 @@ import DateInput from '../DateInput';
 import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
+import TaskRemindersList from '../TaskRemindersList';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {
@@ -591,6 +592,8 @@ const Item = ({id, customerToken, close}) => {
 					/>
 				</Description>
 			)}
+			<SubHeading>Actions d'Edwige</SubHeading>
+			<TaskRemindersList reminders={item.reminders} />
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
 				{item.attachments.map(

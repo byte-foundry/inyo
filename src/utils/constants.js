@@ -154,3 +154,18 @@ export const ITEM_TYPES = [
 		description: 'Créer une tâche uniquement visible par vous',
 	}, */
 ];
+
+export const REMINDER_TYPES_DATA = {
+	DELAY: {
+		text: customerName => `Premier mail envoyé à ${customerName}`,
+	},
+	FIRST: {
+		text: customerName => `Premier rappel envoyé à ${customerName}`,
+	},
+	SECOND: {
+		text: customerName => `Second rappel envoyé à ${customerName}`,
+	},
+	LAST: {
+		text: customerName => `Dernier rappel envoyé à ${customerName}`,
+	},
+};

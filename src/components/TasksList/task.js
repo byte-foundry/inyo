@@ -323,6 +323,7 @@ export function TaskInfosInputs({
 	location,
 	customerToken,
 	taskUrlPrefix,
+	baseUrl,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -349,7 +350,7 @@ export function TaskInfosInputs({
 			{!noComment && (
 				<TaskInfosItemLink
 					to={{
-						pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+						pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 						state: {prevSearch: location.search},
 					}}
 				>
@@ -499,7 +500,12 @@ export function TaskInfosInputs({
 }
 
 function Task({
-	item, customerToken, location, isDraggable, noData,
+	item,
+	customerToken,
+	location,
+	isDraggable,
+	noData,
+	baseUrl = 'tasks',
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
@@ -547,7 +553,7 @@ function Task({
 						noData={noData}
 						small={setTimeItTook}
 						to={{
-							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+							pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 							state: {prevSearch: location.search},
 						}}
 					>
@@ -577,7 +583,7 @@ function Task({
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
-										pathname: `${taskUrlPrefix}/tasks/${
+										pathname: `${taskUrlPrefix}/${baseUrl}/${
 											item.id
 										}`,
 										state: {prevSearch: location.search},
@@ -608,6 +614,7 @@ function Task({
 				{!noData && (
 					<TaskInfosInputs
 						taskUrlPrefix={taskUrlPrefix}
+						baseUrl={baseUrl}
 						location={location}
 						item={item}
 						customerToken={customerToken}

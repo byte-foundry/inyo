@@ -8,7 +8,7 @@ import CreateTask from '../../../components/CreateTask';
 
 const Main = styled('div')`
 	padding-bottom: 80px;
-	min-width: 1280px;
+	width: 1280px;
 	align-self: center;
 `;
 

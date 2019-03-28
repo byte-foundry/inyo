@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import moment from 'moment';
 
 import TasksList from '../../../components/TasksList';
-import ItemView from '../../../components/ItemView';
+import TaskView from '../../../components/ItemView';
 
 import {
 	P,
@@ -61,22 +61,38 @@ const DashboardTasks = () => {
 				</>
 			) : (
 				<div>
-					<P>Vous n'avez pas de tâche à faire</P>
+					<P>
+						Vous n'avez pas de tâche prévue pour aujourd'hui. Pour
+						en ajoutez une, ouvrez une tâche puis cliquez sur "Je
+						fais cette tâche aujourd'hui" en haut de la fenêtre.
+					</P>
+					<P>
+						Vous pouvez aussi déclenché l'éxécution d'une tâche d'un
+						de vos clients. En ouvrant une tâche client (avec une
+						icône rouge) et en cliquant sur "Charger Edwige de faire
+						réaliser cette tâche". Edwige se chargera alors de
+						prévenir votre client que vous attendez de lui la
+						réalisation de cette tâche. Elle se chargera de le
+						relancer si nécessaire.
+					</P>
 				</div>
 			)}
 			{itemsToDoLater.length > 0 && (
 				<>
 					<SectionTitle>Il vous reste du temps ?</SectionTitle>
-					<TasksList items={itemsToDoLater} />
+					<TasksList items={itemsToDoLater} baseUrl="dashboard" />
 				</>
 			)}
 
 			<Route
-				path="/app/dashboard/:itemId"
-				render={({match, history}) => (
+				path="/app/dashboard/:taskId"
+				render={({location: {state = {}}, match, history}) => (
 					<Modal onDismiss={() => history.push('/app/dashboard')}>
 						<ModalElem>
-							<ItemView id={match.params.itemId} />
+							<TaskView
+								id={match.params.taskId}
+								close={() => history.push('/app/dashboard')}
+							/>
 						</ModalElem>
 					</Modal>
 				)}

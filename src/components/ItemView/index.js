@@ -333,7 +333,7 @@ const Item = ({id, customerToken, close}) => {
 						isActive={item.isFocused}
 					/>
 				)}
-				{activableTask && customerTask && (
+				{activableTask && customerTask && item.linkedCustomer && (
 					<TaskCustomerActivationButton
 						taskId={id}
 						isActive={item.isFocused}
@@ -341,6 +341,12 @@ const Item = ({id, customerToken, close}) => {
 							item.linkedCustomer && item.linkedCustomer.name
 						}
 					/>
+				)}
+				{activableTask && customerTask && !item.linkedCustomer && (
+					<div>
+						Il manque un client a cette tâche pour qu'elle soit
+						réalisable
+					</div>
 				)}
 			</StickyHeader>
 			<Header>

@@ -2,6 +2,7 @@ import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
+import moment from 'moment';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {
@@ -73,7 +74,20 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 	);
 
 	// order by creation date
-	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+	tasks.sort((a, b) => {
+		const bDeadline = b.dueDate || (b.project && b.project.deadline);
+		const aDeadline = a.dueDate || (a.project && a.project.deadline);
+
+		if ((a.unit && !b.unit) || (aDeadline && !bDeadline)) return -1;
+		if ((!a.unit && b.unit) || (!aDeadline && bDeadline)) return 1;
+		if ((!a.unit && !b.unit) || (!aDeadline && !bDeadline)) return 0;
+
+		return (
+			moment(aDeadline).diff(moment(), 'days')
+			- a.unit
+			- (moment(bDeadline).diff(moment(), 'days') - b.unit)
+		);
+	});
 
 	if (projectId) {
 		return (
@@ -185,11 +199,7 @@ function TasksList({location, history}) {
 					/>
 				)}
 				<Main>
-					{projectId && (
-						<SidebarProjectInfos
-							projectId={projectId}
-						/>
-					)}
+					{projectId && <SidebarProjectInfos projectId={projectId} />}
 					<Suspense fallback={<Loading />}>
 						{projectId && view === 'shared-notes' && (
 							<ProjectSharedNotes projectId={projectId} />

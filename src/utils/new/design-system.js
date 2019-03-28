@@ -172,6 +172,7 @@ export const Heading = styled('h1')`
 	font-weight: 500;
 	color: ${primaryPurple};
 	font-size: 32px;
+	margin-top: 0;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 24px;
@@ -433,5 +434,35 @@ export const FilterInput = styled(Input)`
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin: 0.5rem 0;
 		width: calc(100% - 4rem);
+	}
+`;
+
+export const Help = styled('div')`
+	position: fixed;
+	bottom: 3rem;
+	left: 3rem;
+	width: 1.5rem;
+	height: 1.5rem;
+	border: 2px solid transparent;
+	border-radius: 50%;
+	background-color: ${mediumGrey};
+	color: ${primaryBlack};
+	line-height: 0;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	transition: all 300ms ease;
+
+	&:hover {
+		border-color: ${primaryPurple};
+		color: ${primaryPurple};
+		background-color: transparent;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
 	}
 `;

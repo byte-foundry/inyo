@@ -48,6 +48,7 @@ const ProjectMenuIcon = styled('div')`
 const Aside = styled('aside')`
 	flex-direction: column;
 	align-items: stretch;
+	min-width: 270px;
 	width: 270px;
 	padding-right: 4rem;
 
@@ -150,6 +151,7 @@ const SidebarLink = styled('div')`
 	margin-bottom: 0.8rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
 	position: relative;
+	max-width: calc(100% - 2rem);
 
 	${props => props.active
 		&& `&:before {
@@ -244,10 +246,8 @@ const SidebarProjectInfos = ({
 	}
 
 	const timeItTookPending = project.sections.reduce(
-		(sectionsSum, section) => (
-			sectionsSum
-				+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0)
-		),
+		(sectionsSum, section) => sectionsSum
+			+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0),
 		0,
 	);
 	const margin = project.daysUntilDeadline - timeItTookPending;

@@ -10,6 +10,7 @@ import FilesIconSvg from '../../utils/icons/file.svg';
 import DateIconSvg from '../../utils/icons/date.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
+import DescriptionIcon from '../../utils/icons/descriptionicon.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
 
@@ -26,6 +27,7 @@ import {
 	lightGrey,
 	mediumGrey,
 	primaryBlack,
+	accentGrey,
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
@@ -148,6 +150,19 @@ const TaskContent = styled('div')`
 	}
 `;
 
+const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
+	text-decoration: none;
+	font-style: italic;
+	margin: 0.5rem 0;
+	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
+	color: ${primaryGrey};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1rem;
+		display: block;
+	}
+`;
+
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	margin: 0.5rem 0;
@@ -211,6 +226,19 @@ const TaskHeader = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: block;
+	}
+`;
+
+const HaveDescription = styled('div')`
+	background-color: ${accentGrey};
+	mask: center no-repeat url('${DescriptionIcon}');
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
+	margin: 0 0 1px 0.3rem;
+
+	&:hover{
+		background-color: ${primaryPurple};
 	}
 `;
 
@@ -359,6 +387,9 @@ export function TaskInfosInputs({
 					>
 						{item.comments.length > 0 ? item.comments.length : '+'}
 					</CommentIcon>
+					{item.description && (
+						<HaveDescription data-tip="Lire la description de cette tâche" />
+					)}
 				</TaskInfosItemLink>
 			)}
 			<TaskIconText
@@ -543,16 +574,29 @@ function Task({
 			<TaskIcon status={item.status} type={item.type} noData={noData} />
 			<TaskContent noData={noData}>
 				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
-					<TaskHeadingLink
-						noData={noData}
-						small={setTimeItTook}
-						to={{
-							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
-							state: {prevSearch: location.search},
-						}}
-					>
-						{item.name}
-					</TaskHeadingLink>
+					{item.name ? (
+						<TaskHeadingLink
+							noData={noData}
+							small={setTimeItTook}
+							to={{
+								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+								state: {prevSearch: location.search},
+							}}
+						>
+							{item.name}
+						</TaskHeadingLink>
+					) : (
+						<TaskHeadingPlaceholder
+							noData={noData}
+							small={setTimeItTook}
+							to={{
+								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+								state: {prevSearch: location.search},
+							}}
+						>
+							Choisir un titre pour cette tâche
+						</TaskHeadingPlaceholder>
+					)}
 					<TaskActions stayActive={setTimeItTook}>
 						{setTimeItTook ? (
 							<SetTimeContainer ref={setTimeItTookRef}>

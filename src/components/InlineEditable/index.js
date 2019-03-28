@@ -3,7 +3,12 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 
 import {Input, gray50} from '../../utils/content';
-import {lightGrey, accentGrey} from '../../utils/new/design-system';
+import {
+	lightGrey,
+	lightRed,
+	accentGrey,
+	primaryRed,
+} from '../../utils/new/design-system';
 import Pencil from '../../utils/icons/pencil.svg';
 
 const Placeholder = styled('span')`
@@ -19,6 +24,7 @@ const NameInput = styled(Input)`
 const Editable = styled('span')`
 	position: relative;
 	border: 1px solid transparent;
+	border-radius: 8px;
 
 	${props => !props.disabled
 		&& css`
@@ -26,7 +32,6 @@ const Editable = styled('span')`
 				cursor: text;
 				border: 1px solid transparent;
 				background: ${lightGrey};
-				border-radius: 8px;
 
 				&:after {
 					content: '';

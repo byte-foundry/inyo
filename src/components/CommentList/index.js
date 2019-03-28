@@ -126,7 +126,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			<ScrollAlert>
 				{!noScrollIndicator && (
 					<ScrollAlertContent>
-						Scroller pour lire les autres commentaires
+						↓ Autres commentaires
 					</ScrollAlertContent>
 				)}
 			</ScrollAlert>

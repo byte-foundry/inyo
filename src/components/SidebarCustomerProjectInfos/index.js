@@ -27,6 +27,7 @@ const Aside = styled('aside')`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
+	min-width: 270px;
 	width: 270px;
 	padding-right: 4rem;
 
@@ -60,6 +61,7 @@ const SidebarLink = styled('div')`
 	margin-bottom: 0.8rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
 	position: relative;
+	max-width: calc(100% - 2rem);
 
 	${props => props.active
 		&& `&:before {

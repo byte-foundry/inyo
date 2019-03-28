@@ -471,7 +471,7 @@ const TaskInput = ({
 			{showContentAcquisitionInfos && (
 				<TaskInputDropdown>
 					<TaskInputDropdownHeader>
-						Récupération de contenu
+						Choisir un client
 					</TaskInputDropdownHeader>
 					<TaskInputCheckListContainer>
 						<TaskCustomerInput

@@ -14,6 +14,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 	lightGrey,
+	lightRed,
 	accentGrey,
 	mediumGrey,
 	primaryRed,
@@ -92,6 +93,22 @@ const SectionInput = styled(InlineEditable)`
 	padding: 0.5rem 0;
 	margin: 0 14px 0;
 	flex: 1;
+
+	${props => props.missingTitle
+		&& `
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightRed};
+			position: absolute;
+			left: -1rem;
+			top: 0;
+			right: -0.5rem;
+			bottom: 0;
+			border-radius: 8px;
+			z-index: -1;
+		}
+	`}
 
 	:hover {
 		cursor: text;
@@ -580,6 +597,9 @@ function ProjectTasksList({items, projectId, sectionId}) {
 								}
 								placeholder="Nom de la section"
 								value={section.name}
+								missingTitle={
+									section.name === 'Renommer cette section'
+								}
 								placeholderCss={placeholderCss}
 								nameCss={nameCss}
 								editableCss={editableCss}

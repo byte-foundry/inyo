@@ -148,6 +148,19 @@ const TaskContent = styled('div')`
 	}
 `;
 
+const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
+	text-decoration: none;
+	font-style: italic;
+	margin: 0.5rem 0;
+	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
+	color: ${primaryGrey};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1rem;
+		display: block;
+	}
+`;
+
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	margin: 0.5rem 0;
@@ -543,16 +556,29 @@ function Task({
 			<TaskIcon status={item.status} type={item.type} noData={noData} />
 			<TaskContent noData={noData}>
 				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
-					<TaskHeadingLink
-						noData={noData}
-						small={setTimeItTook}
-						to={{
-							pathname: `${taskUrlPrefix}/tasks/${item.id}`,
-							state: {prevSearch: location.search},
-						}}
-					>
-						{item.name}
-					</TaskHeadingLink>
+					{item.name ? (
+						<TaskHeadingLink
+							noData={noData}
+							small={setTimeItTook}
+							to={{
+								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+								state: {prevSearch: location.search},
+							}}
+						>
+							{item.name}
+						</TaskHeadingLink>
+					) : (
+						<TaskHeadingPlaceholder
+							noData={noData}
+							small={setTimeItTook}
+							to={{
+								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+								state: {prevSearch: location.search},
+							}}
+						>
+							Choisir un titre pour cette tâche
+						</TaskHeadingPlaceholder>
+					)}
 					<TaskActions stayActive={setTimeItTook}>
 						{setTimeItTook ? (
 							<SetTimeContainer ref={setTimeItTookRef}>

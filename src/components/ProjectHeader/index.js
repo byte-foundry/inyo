@@ -3,7 +3,13 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 
-import {primaryBlack} from '../../utils/new/design-system';
+import {
+	primaryBlack,
+	lightRed,
+	lightGrey,
+	accentGrey,
+} from '../../utils/new/design-system';
+import Pencil from '../../utils/icons/pencil.svg';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
 import {BREAKPOINTS} from '../../utils/constants';
@@ -22,6 +28,53 @@ const ProjectHeaderContainer = styled('div')`
 const ProjectHeading = styled(InlineEditable)`
 	color: ${primaryBlack};
 	font-size: 32px;
+
+	${props => props.missingTitle
+		&& `
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightRed};
+			position: absolute;
+			left: -1rem;
+			top: 0;
+			right: -0.5rem;
+			bottom: 0;
+			border-radius: 8px;
+			z-index: -1;
+		}
+	`}
+
+	:hover {
+		cursor: text;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -1rem;
+			top: 0;
+			right: -0.5rem;
+			bottom: 0;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: ${accentGrey};
+			mask-size: 35%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-image: url(${Pencil});
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+		}
+	}
 `;
 
 const placeholderCss = css`
@@ -96,6 +149,7 @@ export default function ProjectHeader({projectId, customerToken}) {
 				placeholderCss={placeholderCss}
 				nameCss={nameCss}
 				editableCss={editableCss}
+				missingTitle={project.name === 'Nom du projet'}
 				onFocusOut={(value) => {
 					if (value) {
 						updateProject({

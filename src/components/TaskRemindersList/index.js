@@ -8,6 +8,8 @@ import {
 	primaryGrey,
 	primaryBlack,
 	primaryPurple,
+	primaryRed,
+	accentGrey,
 	Button,
 } from '../../utils/new/design-system';
 import {CANCEL_REMINDER} from '../../utils/mutations';
@@ -19,16 +21,26 @@ const ReminderList = styled('div')`
 `;
 
 const ReminderContainer = styled('div')`
-	color: ${primaryGrey};
+	color: ${accentGrey};
 	font-size: 12px;
-	margin-bottom: 8px;
+	margin-bottom: 5px;
 	display: flex;
 	align-items: center;
-	height: 25px;
+
+	overflow: hidden;
+
+	&:hover {
+		color: ${primaryBlack};
+		svg {
+			opacity: 1;
+			margin-right: 0;
+			transition: all 300ms ease;
+		}
+	}
 `;
 
 const ReminderText = styled('div')`
-	color: ${primaryBlack};
+	color: ${primaryGrey};
 	${props => props.small
 		&& `
 		width:250px;
@@ -48,6 +60,20 @@ const ReminderDate = styled('div')`
 		white-space: nowrap;
 	`}
 `;
+
+const DeleteIcon = styled(TrashIcon)`
+	opacity: 0.25;
+
+	path {
+		fill: ${accentGrey};
+	}
+	&:hover {
+		path {
+			fill: ${primaryRed};
+		}
+	}
+`;
+
 const ReminderCancel = styled('div')``;
 
 function TaskRemindersList({reminders, small}) {
@@ -100,6 +126,7 @@ function TaskRemindersList({reminders, small}) {
 									&& reminder.status !== 'SENT' && (
 									<Button
 										red
+										link
 										small
 										onClick={() => {
 											cancelReminder({
@@ -109,7 +136,7 @@ function TaskRemindersList({reminders, small}) {
 											});
 										}}
 									>
-										<TrashIcon />
+										<DeleteIcon />
 									</Button>
 								)}
 							</ReminderCancel>

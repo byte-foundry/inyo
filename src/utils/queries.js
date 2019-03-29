@@ -4,6 +4,7 @@ import {
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
 	COMMENT_ON_ITEM_FRAGMENT,
+	REMINDER_FRAGMENT,
 } from './fragments';
 
 /** ******** USER QUERIES ********* */
@@ -408,6 +409,16 @@ export const USER_TASKS = gql`
 		}
 		tasks {
 			...ItemFragment
+		}
+	}
+`;
+
+export const GET_REMINDERS = gql`
+	${REMINDER_FRAGMENT}
+
+	query reminders {
+		reminders {
+			...ReminderFragment
 		}
 	}
 `;

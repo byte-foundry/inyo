@@ -11,7 +11,14 @@ import {
 	ModalElem,
 	ModalActions,
 } from '../../../utils/content';
-import {Heading, Button, P} from '../../../utils/new/design-system';
+import {
+	Heading,
+	Button,
+	P,
+	Main,
+	Container,
+	Content,
+} from '../../../utils/new/design-system';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
@@ -27,34 +34,7 @@ const PA = styled(P)`
 	font-size: 16px;
 `;
 
-const Container = styled('div')`
-	display: flex;
-	flex: 1;
-	max-width: 1280px;
-	margin: 0 auto;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column;
-	}
-`;
-
 const TaskAndArianne = styled('div')`
-	display: flex;
-	flex-direction: column;
-	flex: auto;
-`;
-
-const Main = styled('div')`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column-reverse;
-	}
-`;
-
-const Content = styled('div')`
 	display: flex;
 	flex-direction: column;
 	flex: auto;

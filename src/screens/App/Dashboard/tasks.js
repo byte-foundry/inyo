@@ -20,7 +20,7 @@ const SectionTitle = styled(H3)`
 	color: ${primaryBlue};
 	font-size: 22px;
 	font-weight: 500;
-	margin: 2em 0;
+	margin: 2em 0 0;
 `;
 
 const DashboardTasks = () => {

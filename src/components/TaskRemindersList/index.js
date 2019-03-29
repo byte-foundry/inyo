@@ -11,16 +11,17 @@ import {
 	Button,
 } from '../../utils/new/design-system';
 import {CANCEL_REMINDER} from '../../utils/mutations';
+import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
 
 const ReminderList = styled('div')`
-	margin-bottom: 15px;
+	margin-bottom: 12px;
 	margin-top: 10px;
 `;
 
 const ReminderContainer = styled('div')`
 	color: ${primaryGrey};
-	font-size: 14px;
-	margin-bottom: 5px;
+	font-size: 12px;
+	margin-bottom: 8px;
 	display: flex;
 	align-items: center;
 	height: 25px;
@@ -28,13 +29,28 @@ const ReminderContainer = styled('div')`
 
 const ReminderText = styled('div')`
 	color: ${primaryBlack};
+	${props => props.small
+		&& `
+		width:250px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	`}
 `;
 const ReminderDate = styled('div')`
+	font-size: 10px;
 	margin: 0 10px;
+	${props => props.small
+		&& `
+		width:85px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+	`}
 `;
 const ReminderCancel = styled('div')``;
 
-function TaskRemindersList({reminders}) {
+function TaskRemindersList({reminders, small}) {
 	const cancelReminder = useMutation(CANCEL_REMINDER);
 
 	return (
@@ -45,50 +61,61 @@ function TaskRemindersList({reminders}) {
 				)
 				.filter(
 					reminder => reminder.status === 'PENDING'
-						|| reminder.status === 'CANCELED',
+						|| (reminder.status === 'CANCELED'
+							&& moment(reminder.sendingDate).diff(
+								moment(),
+								'hours',
+							) > -12),
 				)
-				.map(reminder => (
-					<ReminderContainer>
-						<ReminderText
-							canceled={reminder.status === 'CANCELED'}
-							done={reminder.status === 'SENT'}
-						>
-							{REMINDER_TYPES_DATA[reminder.type].text(
-								reminder.item.linkedCustomer
-									&& reminder.item.linkedCustomer.name,
-							)}
-						</ReminderText>
-						<ReminderDate
-							data-tip={moment(reminder.sendingDate).format(
-								'DD/MM/YYYY [à] HH:mm',
-							)}
-						>
-							{moment(reminder.sendingDate).fromNow()}
-						</ReminderDate>
-						<ReminderCancel
-							canceled={reminder.status === 'CANCELED'}
-						>
-							{reminder.status === 'CANCELED' && 'Annulé'}
-							{reminder.status === 'SENT' && 'Envoyé'}
-							{reminder.status !== 'CANCELED'
-								&& reminder.status !== 'SENT' && (
-								<Button
-									red
-									small
-									onClick={() => {
-										cancelReminder({
-											variables: {
-												id: reminder.id,
-											},
-										});
-									}}
-								>
-										Annuler
-								</Button>
-							)}
-						</ReminderCancel>
-					</ReminderContainer>
-				))}
+				.map((reminder) => {
+					const text = REMINDER_TYPES_DATA[reminder.type].text(
+						reminder.item.linkedCustomer
+							&& reminder.item.linkedCustomer.name,
+					);
+
+					return (
+						<ReminderContainer>
+							<ReminderText
+								small={small}
+								canceled={reminder.status === 'CANCELED'}
+								done={reminder.status === 'SENT'}
+								data-tip={text}
+							>
+								{text}
+							</ReminderText>
+							<ReminderDate
+								small={small}
+								data-tip={moment(reminder.sendingDate).format(
+									'DD/MM/YYYY [à] HH:mm',
+								)}
+							>
+								{moment(reminder.sendingDate).fromNow()}
+							</ReminderDate>
+							<ReminderCancel
+								canceled={reminder.status === 'CANCELED'}
+							>
+								{reminder.status === 'CANCELED' && 'Annulé'}
+								{reminder.status === 'SENT' && 'Envoyé'}
+								{reminder.status !== 'CANCELED'
+									&& reminder.status !== 'SENT' && (
+									<Button
+										red
+										small
+										onClick={() => {
+											cancelReminder({
+												variables: {
+													id: reminder.id,
+												},
+											});
+										}}
+									>
+										<TrashIcon />
+									</Button>
+								)}
+							</ReminderCancel>
+						</ReminderContainer>
+					);
+				})}
 		</ReminderList>
 	);
 }

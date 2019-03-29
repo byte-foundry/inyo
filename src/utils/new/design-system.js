@@ -91,11 +91,33 @@ export const Button = styled('button')`
 		}
 		return primaryPurple;
 	}};
+
+	svg {
+		fill: ${(props) => {
+		if (props.primary) {
+			return primaryWhite;
+		}
+		if (props.red) {
+			return primaryRed;
+		}
+		if (props.grey) {
+			return primaryGrey;
+		}
+		if (props.white) {
+			return primaryWhite;
+		}
+		return primaryPurple;
+	}};
+	}
+
 	border-color: currentColor;
 
 	${props => !props.disabled
 		&& css`
 			&:hover {
+				svg {
+					fill: ${getButtonHoveredColor(props)};
+				}
 				background: ${getButtonHoveredBackground(props)};
 				color: ${getButtonHoveredColor(props)};
 				border-color: ${getButtonHoveredBorderColor(props)};
@@ -434,4 +456,44 @@ export const FilterInput = styled(Input)`
 		margin: 0.5rem 0;
 		width: calc(100% - 4rem);
 	}
+`;
+
+export const Aside = styled('aside')`
+	flex-direction: column;
+	align-items: stretch;
+	flex: 0 0 270px;
+	padding-right: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding-left: 0;
+		margin-top: 2rem;
+		width: 100%;
+	}
+`;
+
+export const Main = styled('div')`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+	}
+`;
+
+export const Container = styled('div')`
+	display: flex;
+	width: 1280px;
+	margin: 0 auto;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
+`;
+
+export const Content = styled('div')`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 `;

@@ -5,19 +5,21 @@ import {withRouter} from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import Tasks from './tasks';
 import CreateTask from '../../../components/CreateTask';
+import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 
-const Main = styled('div')`
-	padding-bottom: 80px;
-	width: 1280px;
-	align-self: center;
-`;
+import {Main, Container, Content} from '../../../utils/new/design-system';
 
 function Dashboard() {
 	return (
-		<Main>
-			<CreateTask />
-			<Tasks />
-		</Main>
+		<Container>
+			<Main>
+				<Content>
+					<CreateTask />
+					<Tasks />
+				</Content>
+				<SidebarDashboardInfos />
+			</Main>
+		</Container>
 	);
 }
 

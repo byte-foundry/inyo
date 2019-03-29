@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
 
 import {
+	Aside,
 	SubHeading,
 	Button,
 	primaryPurple,
@@ -42,19 +43,6 @@ const ProjectMenuIcon = styled('div')`
 
 	svg {
 		fill: ${primaryPurple};
-	}
-`;
-
-const Aside = styled('aside')`
-	flex-direction: column;
-	align-items: stretch;
-	width: 270px;
-	padding-right: 4rem;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		padding-left: 0;
-		margin-top: 2rem;
-		width: 100%;
 	}
 `;
 
@@ -244,10 +232,8 @@ const SidebarProjectInfos = ({
 	}
 
 	const timeItTookPending = project.sections.reduce(
-		(sectionsSum, section) => (
-			sectionsSum
-				+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0)
-		),
+		(sectionsSum, section) => sectionsSum
+			+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0),
 		0,
 	);
 	const margin = project.daysUntilDeadline - timeItTookPending;

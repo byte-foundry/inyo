@@ -361,7 +361,7 @@ export function TaskInfosInputs({
 		setEditDueDate(false);
 	});
 
-	let unreadCommentLength = item.comments.length;
+	let unreadCommentLength = (item.comments || []).length;
 
 	if (!noComment && item.comments.length > 0) {
 		unreadCommentLength = item.comments.filter(

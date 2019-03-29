@@ -61,9 +61,25 @@ const getButtonHoveredBorderColor = (props) => {
 export const Button = styled('button')`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
-	font-weight: 400;
 	padding: 0.3rem 0.8rem;
-	border: 1px solid #333;
+	font-weight: ${(props) => {
+		if (props.white) {
+			return '500';
+		}
+		return '400';
+	}};
+	letter-spacing: ${(props) => {
+		if (props.white) {
+			return '0.01rem';
+		}
+		return 0;
+	}};
+	border: ${(props) => {
+		if (props.white) {
+			return '2px solid #333';
+		}
+		return '1px solid #333';
+	}};
 	border-radius: 30px;
 	cursor: pointer;
 	text-decoration: none;
@@ -449,7 +465,7 @@ export const Help = styled('div')`
 	color: ${primaryBlack};
 	line-height: 0;
 	font-weight: 500;
-	display: flex;
+	display: ${props => (props.customerToken ? 'flex' : 'none')};
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;

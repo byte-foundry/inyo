@@ -372,6 +372,13 @@ export function TaskInfosInputs({
 		).length;
 	}
 
+	const dueDate
+		= item.dueDate
+		|| (item.dueDate
+			|| (item.section
+				&& item.section.project
+				&& item.section.project.deadline));
+
 	return (
 		<TaskInfos>
 			{!noComment && (
@@ -464,13 +471,13 @@ export function TaskInfosInputs({
 						{!customerToken && editDueDate ? (
 							<>
 								<DueDateInputElem
-									value={moment(
-										item.dueDate || new Date(),
-									).format('DD/MM/YYYY')}
+									value={moment(dueDate || new Date()).format(
+										'DD/MM/YYYY',
+									)}
 								/>
 								<DateInput
 									innerRef={dateRef}
-									date={moment(item.dueDate || new Date())}
+									date={moment(dueDate || new Date())}
 									onDateChange={(args) => {
 										onDueDateSubmit(args);
 										setEditDueDate(false);
@@ -483,9 +490,9 @@ export function TaskInfosInputs({
 							</>
 						) : (
 							<>
-								{(item.dueDate && (
+								{(dueDate && (
 									<>
-										{moment(item.dueDate).diff(
+										{moment(dueDate).diff(
 											moment(),
 											'days',
 										) - item.unit}{' '}

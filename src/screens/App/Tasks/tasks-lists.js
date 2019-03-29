@@ -188,6 +188,7 @@ function TasksList({location, history}) {
 	return (
 		<Container>
 			<Help
+				customerToken
 				data-tip="Instructions pour utiliser l'interface"
 				onClick={() => history.push('?openModal=true')}
 			>

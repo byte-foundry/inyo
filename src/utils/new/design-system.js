@@ -465,7 +465,7 @@ export const Help = styled('div')`
 	color: ${primaryBlack};
 	line-height: 0;
 	font-weight: 500;
-	display: flex;
+	display: ${props => (props.customerToken ? 'flex' : 'none')};
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;

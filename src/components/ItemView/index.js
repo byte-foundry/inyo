@@ -322,7 +322,7 @@ const Item = ({id, customerToken, close}) => {
 	const finishableTask
 		= (customerToken && customerTask) || (!customerToken && !customerTask);
 
-	const activableTask = !customerToken;
+	const activableTask = !customerToken && item.status === 'PENDING';
 
 	return (
 		<>

@@ -273,6 +273,7 @@ export const CREATE_PROJECT = gql`
 `;
 export const UPDATE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
 
 	# creating project with a customer id or a new customer
 	mutation updateProject(
@@ -298,6 +299,13 @@ export const UPDATE_PROJECT = gql`
 			notifyActivityToCustomer
 			customer {
 				...ProjectCustomerFragment
+			}
+			sections {
+				id
+				items {
+					id
+					...ItemFragment
+				}
 			}
 		}
 	}

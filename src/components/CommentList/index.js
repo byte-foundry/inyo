@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
+import debounce from 'lodash.debounce';
 import {Formik} from 'formik';
 import ReactTooltip from 'react-tooltip';
 import {Waypoint} from 'react-waypoint';
@@ -85,7 +86,10 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			token: customerToken,
 		},
 	});
-	const postCommentMutation = useMutation(POST_COMMENT);
+	const postCommentMutation = useRef(
+		debounce(useMutation(POST_COMMENT)),
+		500,
+	);
 
 	if (loading) return <span />;
 	if (error) throw error;
@@ -140,7 +144,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 					try {
-						postCommentMutation({
+						postCommentMutation.current({
 							variables: {
 								itemId,
 								token: customerToken,

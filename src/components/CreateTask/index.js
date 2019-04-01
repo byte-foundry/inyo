@@ -89,6 +89,7 @@ const CreateTask = ({
 					},
 				})
 				}
+				currentProjectId={currentProjectId}
 				{...props}
 			/>
 		</TaskInputContainer>

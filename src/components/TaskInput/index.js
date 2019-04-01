@@ -192,6 +192,7 @@ const TaskInput = ({
 	onSubmitSection,
 	onSubmitTask,
 	defaultValue,
+	currentProjectId,
 }) => {
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
@@ -329,8 +330,16 @@ const TaskInput = ({
 					}}
 					placeholder={
 						focus
-							? 'Entrer le titre de la tâche ou du projet. Taper un slash "/" pour changer le type de tâche'
-							: 'Ajouter une tâche ou créer un projet'
+							? `Entrer le titre de la tâche ou ${
+								currentProjectId
+									? 'de la section'
+									: 'du projet'
+							  }. Taper un slash "/" pour changer le type de tâche`
+							: `Ajouter une tâche ou créer ${
+								currentProjectId
+									? 'une section'
+									: 'un projet'
+							  }`
 					}
 				/>
 				{(focus || value) && (

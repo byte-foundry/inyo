@@ -81,7 +81,7 @@ class OnboardingFifthStep extends Component {
 			<OnboardingStep>
 				<StepSubtitle>Dernière question !</StepSubtitle>
 				<StepDescription>
-					Avez-vous un quelques minutes pour nous aider à transformer
+					Auriez-vous quelques minutes pour nous aider à transformer
 					Inyo en l'application de vos rêves?
 				</StepDescription>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>

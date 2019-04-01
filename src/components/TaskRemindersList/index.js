@@ -106,12 +106,10 @@ function TaskRemindersList({
 						<ReminderContainer>
 							<ReminderText
 								withLink={baseUrl}
-								onClick={() => {
-									debugger;
-									history.push(
-										`${baseUrl}/${reminder.item.id}`,
-									);
-								}}
+								onClick={() => history.push(
+									`${baseUrl}/${reminder.item.id}`,
+								)
+								}
 								small={small}
 								canceled={reminder.status === 'CANCELED'}
 								done={reminder.status === 'SENT'}

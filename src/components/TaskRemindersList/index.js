@@ -11,18 +11,19 @@ import {
 	primaryPurple,
 	primaryRed,
 	accentGrey,
+	lightGrey,
 	Button,
 } from '../../utils/new/design-system';
 import {CANCEL_REMINDER} from '../../utils/mutations';
 import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
 
 const ReminderList = styled('div')`
-	margin-bottom: 12px;
-	margin-top: 10px;
+	margin-bottom: 2rem;
+	margin-top: 1rem;
 `;
 
 const ReminderContainer = styled('div')`
-	color: ${accentGrey};
+	color: ${primaryGrey};
 	font-size: 12px;
 	margin-bottom: 5px;
 	display: flex;
@@ -38,10 +39,23 @@ const ReminderContainer = styled('div')`
 			transition: all 300ms ease;
 		}
 	}
+
+	&:before {
+		content: '';
+		display: block;
+		background: ${lightGrey};
+		position: absolute;
+		left: -1rem;
+		top: -1rem;
+		right: -1rem;
+		bottom: -1rem;
+		border-radius: 8px;
+		z-index: -1;
+	}
 `;
 
 const ReminderText = styled('div')`
-	color: ${primaryGrey};
+	cursor: pointer;
 	${props => props.small
 		&& `
 		width:250px;
@@ -53,6 +67,7 @@ const ReminderText = styled('div')`
 const ReminderDate = styled('div')`
 	font-size: 10px;
 	margin: 0 10px;
+	cursor: default;
 	${props => props.small
 		&& `
 		width:85px;
@@ -113,7 +128,9 @@ function TaskRemindersList({
 								small={small}
 								canceled={reminder.status === 'CANCELED'}
 								done={reminder.status === 'SENT'}
-								data-tip={`${text} - ${reminder.item.name}`}
+								data-tip={`Ouvrir la tâche "${
+									reminder.item.name
+								}"`}
 							>
 								{text}
 							</ReminderText>
@@ -127,6 +144,7 @@ function TaskRemindersList({
 							</ReminderDate>
 							<ReminderCancel
 								canceled={reminder.status === 'CANCELED'}
+								data-tip="Supprimer cette action automatique"
 							>
 								{reminder.status === 'CANCELED' && 'Annulé'}
 								{reminder.status === 'SENT' && 'Envoyé'}

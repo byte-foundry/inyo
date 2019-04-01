@@ -27,6 +27,7 @@ const DashboardAside = styled(Aside)`
 
 const SubSection = styled('div')`
 	margin-bottom: 2rem;
+	margin-top: 1rem;
 	position: relative;
 
 	@media (max-width: ${BREAKPOINTS}px) {

@@ -62,18 +62,17 @@ const DashboardTasks = () => {
 			) : (
 				<div>
 					<P>
-						Vous n'avez pas de tâche prévue pour aujourd'hui. Pour
-						en ajoutez une, ouvrez une tâche puis cliquez sur "Je
-						fais cette tâche aujourd'hui" en haut de la fenêtre.
+						Vous n'avez pas de tâches prévues pour aujourd'hui. Pour
+						en ajouter, ouvrez une tâche puis cliquez sur "Je fais
+						cette tâche aujourd'hui" en haut de la fenêtre.
 					</P>
 					<P>
-						Vous pouvez aussi déclenché l'éxécution d'une tâche d'un
-						de vos clients. En ouvrant une tâche client (avec une
-						icône rouge) et en cliquant sur "Charger Edwige de faire
-						réaliser cette tâche". Edwige se chargera alors de
-						prévenir votre client que vous attendez de lui la
-						réalisation de cette tâche. Elle se chargera de le
-						relancer si nécessaire.
+						Vous pouvez aussi déclencher l'éxécution d'une tâche
+						client (icône rouge) en ouvrant celle-ci et en cliquant
+						sur "Charger Edwige de faire réaliser cette tâche".
+						Votre client sera alors notifié que vous attendez de lui
+						la réalisation de cette tâche et sera relancé
+						automatiquement si nécessaire.
 					</P>
 				</div>
 			)}

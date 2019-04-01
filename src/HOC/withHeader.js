@@ -20,6 +20,12 @@ const withHeader = Component => (...args) => (
 				<TopBarMenuLink data-tip="Toutes les tâches" to="/app/tasks">
 					Tâches
 				</TopBarMenuLink>
+				<TopBarMenuLink
+					data-tip="Toutes les projets"
+					to="/app/projects"
+				>
+					Projets
+				</TopBarMenuLink>
 				<TopBarMenuLink data-tip="Tous les clients" to="/app/customers">
 					Clients
 				</TopBarMenuLink>

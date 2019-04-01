@@ -7,6 +7,7 @@ import Dashboard from './Dashboard';
 import Account from './Account';
 import Tasks from './Tasks';
 import CustomerList from './Customers';
+import Projects from './Projects';
 
 import withHeader from '../../HOC/withHeader';
 
@@ -36,6 +37,7 @@ function App() {
 				/>
 				<Route path="/app/account" component={withHeader(Account)} />
 				<Route path="/app/tasks" component={withHeader(Tasks)} />
+				<Route path="/app/projects" component={withHeader(Projects)} />
 				<Route
 					path="/app/customers"
 					component={withHeader(CustomerList)}

@@ -47,6 +47,7 @@ import {
 	primaryRed,
 	primaryGrey,
 } from '../../utils/new/design-system';
+import {FlexRow} from '../../utils/content';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled('div')``;
@@ -245,7 +246,6 @@ const FileOwner = styled('span')`
 		content: '\\2014';
 	}
 `;
-
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -253,6 +253,7 @@ const Item = ({id, customerToken, close}) => {
 	const [editProject, setEditProject] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
 	const dateRef = useRef();
+	const timeItTookRef = useRef();
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
 		suspend: false,
@@ -682,37 +683,39 @@ const Item = ({id, customerToken, close}) => {
 				linkedCustomer={item.linkedCustomer}
 			/>
 			<HR />
-			{!customerToken
-				&& (deletingItem ? (
-					<>
-						<Button grey onClick={() => setDeletingItem(false)}>
-							Annuler
-						</Button>
-						<Button
-							red
-							onClick={() => {
-								deleteItem();
-								close();
-							}}
-						>
-							Confirmer la suppression
-						</Button>
-					</>
-				) : (
-					<>
-						<Button red onClick={() => setDeletingItem(true)}>
-							Supprimer la tâche
-						</Button>
-					</>
-				))}
-			{finishableTask && (
-				<TaskStatusButton
-					taskId={id}
-					primary={item.status === 'FINISHED'}
-					isFinished={item.status === 'FINISHED'}
-					customerToken={customerToken}
-				/>
-			)}
+			<FlexRow>
+				{!customerToken
+					&& (deletingItem ? (
+						<>
+							<Button grey onClick={() => setDeletingItem(false)}>
+								Annuler
+							</Button>
+							<Button
+								red
+								onClick={() => {
+									deleteItem();
+									close();
+								}}
+							>
+								Confirmer la suppression
+							</Button>
+						</>
+					) : (
+						<>
+							<Button red onClick={() => setDeletingItem(true)}>
+								Supprimer la tâche
+							</Button>
+						</>
+					))}
+				{finishableTask && (
+					<TaskStatusButton
+						item={item}
+						primary={item.status === 'FINISHED'}
+						isFinished={item.status === 'FINISHED'}
+						customerToken={customerToken}
+					/>
+				)}
+			</FlexRow>
 		</>
 	);
 };

@@ -273,6 +273,7 @@ export const CREATE_PROJECT = gql`
 `;
 export const UPDATE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
 
 	# creating project with a customer id or a new customer
 	mutation updateProject(
@@ -298,6 +299,13 @@ export const UPDATE_PROJECT = gql`
 			notifyActivityToCustomer
 			customer {
 				...ProjectCustomerFragment
+			}
+			sections {
+				id
+				items {
+					id
+					...ItemFragment
+				}
 			}
 		}
 	}
@@ -520,238 +528,6 @@ export const SNOOZE_ITEM = gql`
 	mutation snoozeItem($itemId: ID!, $during: Int) {
 		snoozeItem(id: $itemId, during: $during) {
 			...ItemFragment
-		}
-	}
-`;
-
-export const SEND_AMENDMENT = gql`
-	mutation sendAmendment($projectId: ID!) {
-		sendAmendment(projectId: $projectId) {
-			id
-			template
-			name
-			viewedByCustomer
-			status
-			issuer {
-				name
-				email
-				phone
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-				owner {
-					defaultVatRate
-				}
-				siret
-			}
-			customer {
-				name
-				firstName
-				lastName
-				email
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-			}
-			sections {
-				id
-				name
-				position
-				project {
-					id
-					deadline
-					daysUntilDeadline
-					status
-					name
-					customer {
-						id
-						name
-					}
-				}
-				items {
-					status
-					id
-					name
-					unit
-					description
-				}
-			}
-		}
-	}
-`;
-
-export const ACCEPT_AMENDMENT = gql`
-	mutation acceptAmendment($projectId: ID!, $token: String!) {
-		acceptAmendment(projectId: $projectId, token: $token) {
-			id
-			template
-			name
-			status
-			issuer {
-				name
-				email
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-				owner {
-					defaultVatRate
-				}
-				siret
-			}
-			customer {
-				name
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-			}
-			sections {
-				id
-				name
-				position
-				project {
-					id
-					deadline
-					daysUntilDeadline
-					status
-					name
-					customer {
-						id
-						name
-					}
-				}
-				items {
-					status
-					id
-					name
-					unit
-					comments {
-						createdAt
-						id
-						views {
-							viewer {
-								... on User {
-									firstName
-									lastName
-								}
-								... on Customer {
-									firstName
-									lastName
-									name
-								}
-							}
-						}
-						author {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					description
-				}
-			}
-		}
-	}
-`;
-
-export const REJECT_AMENDMENT = gql`
-	mutation rejectAmendment($projectId: ID!, $token: String!) {
-		rejectAmendment(projectId: $projectId, token: $token) {
-			id
-			template
-			name
-			status
-			issuer {
-				name
-				email
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-				owner {
-					defaultVatRate
-				}
-				siret
-			}
-			customer {
-				name
-				address {
-					street
-					city
-					postalCode
-					country
-				}
-			}
-			sections {
-				id
-				name
-				position
-				project {
-					id
-					deadline
-					daysUntilDeadline
-					status
-					name
-					customer {
-						id
-						name
-					}
-				}
-				items {
-					status
-					id
-					name
-					unit
-					comments {
-						createdAt
-						id
-						views {
-							viewer {
-								... on User {
-									firstName
-									lastName
-								}
-								... on Customer {
-									firstName
-									lastName
-									name
-								}
-							}
-						}
-						author {
-							... on User {
-								firstName
-								lastName
-							}
-							... on Customer {
-								firstName
-								lastName
-								name
-							}
-						}
-					}
-					description
-				}
-			}
 		}
 	}
 `;

@@ -104,7 +104,13 @@ const SidebarDashboardInfos = () => {
 			<SubSection>
 				<SidebarHeading>Actions d'edwige</SidebarHeading>
 				{loading && <Loading />}
-				{!loading && <TaskRemindersList small reminders={reminders} />}
+				{!loading && (
+					<TaskRemindersList
+						small
+						reminders={reminders}
+						baseUrl="/app/dashboard"
+					/>
+				)}
 			</SubSection>
 		</DashboardAside>
 	);

@@ -17,7 +17,7 @@ function Dashboard() {
 					<CreateTask />
 					<Tasks />
 				</Content>
-				<SidebarDashboardInfos />
+				<SidebarDashboardInfos baseUrl="app/dashboard" />
 			</Main>
 		</Container>
 	);

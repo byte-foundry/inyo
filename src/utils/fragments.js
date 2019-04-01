@@ -7,7 +7,10 @@ export const REMINDER_FRAGMENT = gql`
 		sendingDate
 		status
 		item {
+			id
+			name
 			linkedCustomer {
+				id
 				name
 			}
 		}

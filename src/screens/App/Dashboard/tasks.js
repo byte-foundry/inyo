@@ -57,7 +57,7 @@ const DashboardTasks = () => {
 			)}
 			{itemsToDo.length ? (
 				<>
-					<TasksList items={itemsToDo} />
+					<TasksList items={itemsToDo} baseUrl="dashboard" />
 				</>
 			) : (
 				<div>

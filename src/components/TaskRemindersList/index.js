@@ -1,5 +1,6 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import moment from 'moment';
 
@@ -76,7 +77,9 @@ const DeleteIcon = styled(TrashIcon)`
 
 const ReminderCancel = styled('div')``;
 
-function TaskRemindersList({reminders, small}) {
+function TaskRemindersList({
+	reminders = [], small, baseUrl, history,
+}) {
 	const cancelReminder = useMutation(CANCEL_REMINDER);
 
 	return (
@@ -102,10 +105,17 @@ function TaskRemindersList({reminders, small}) {
 					return (
 						<ReminderContainer>
 							<ReminderText
+								withLink={baseUrl}
+								onClick={() => {
+									debugger;
+									history.push(
+										`${baseUrl}/${reminder.item.id}`,
+									);
+								}}
 								small={small}
 								canceled={reminder.status === 'CANCELED'}
 								done={reminder.status === 'SENT'}
-								data-tip={text}
+								data-tip={`${text} - ${reminder.item.name}`}
 							>
 								{text}
 							</ReminderText>
@@ -147,4 +157,4 @@ function TaskRemindersList({reminders, small}) {
 	);
 }
 
-export default TaskRemindersList;
+export default withRouter(TaskRemindersList);

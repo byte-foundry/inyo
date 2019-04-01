@@ -9,6 +9,7 @@ import {
 	SubHeading,
 	primaryPurple,
 	primaryBlack,
+	primaryGrey,
 	lightGrey,
 } from '../../utils/new/design-system';
 import {Loading} from '../../utils/content';
@@ -32,6 +33,19 @@ const SubSection = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-bottom: 1rem;
+	}
+
+	&:before {
+		content: '';
+		display: block;
+		background: ${lightGrey};
+		position: absolute;
+		left: -1rem;
+		top: -1rem;
+		right: -1rem;
+		bottom: -1rem;
+		border-radius: 8px;
+		z-index: -1;
 	}
 `;
 
@@ -93,6 +107,11 @@ const SidebarHeading = styled(SubHeading)`
 	margin-bottom: 10px;
 `;
 
+const NoReminders = styled('div')`
+	font-style: italic;
+	color: ${primaryGrey};
+`;
+
 const SidebarDashboardInfos = () => {
 	const {data, loading} = useQuery(GET_REMINDERS, {suspend: false});
 
@@ -105,13 +124,19 @@ const SidebarDashboardInfos = () => {
 			<SubSection>
 				<SidebarHeading>Actions d'edwige</SidebarHeading>
 				{loading && <Loading />}
-				{!loading && (
-					<TaskRemindersList
-						small
-						reminders={reminders}
-						baseUrl="/app/dashboard"
-					/>
-				)}
+				{!loading
+					&& (reminders.length > 0 ? (
+						<TaskRemindersList
+							small
+							reminders={reminders}
+							baseUrl="/app/dashboard"
+						/>
+					) : (
+						<NoReminders>
+							Aucune tâches client n’ont été activées pour le
+							moment
+						</NoReminders>
+					))}
 			</SubSection>
 		</DashboardAside>
 	);

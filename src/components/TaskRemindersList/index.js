@@ -39,19 +39,6 @@ const ReminderContainer = styled('div')`
 			transition: all 300ms ease;
 		}
 	}
-
-	&:before {
-		content: '';
-		display: block;
-		background: ${lightGrey};
-		position: absolute;
-		left: -1rem;
-		top: -1rem;
-		right: -1rem;
-		bottom: -1rem;
-		border-radius: 8px;
-		z-index: -1;
-	}
 `;
 
 const ReminderText = styled('div')`

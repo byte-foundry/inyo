@@ -1,41 +1,35 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
-import {Button} from '../../utils/new/design-system';
+import BistableButton from '../BistableButton';
 
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 const TaskStatusButton = ({
-	customerToken, taskId, isFinished, disabled,
+	customerToken,
+	taskId,
+	isFinished,
+	disabled,
+	white,
+	primary,
 }) => {
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
 
 	return (
-		<Button
-			data-tip={
-				isFinished
-					? 'Ré-ouvrir la tâche'
-					: 'Cliquer si cette tâche a été réalisée'
-			}
-			icon={isFinished && '✓'}
-			white={!isFinished}
-			onClick={() => {
-				if (isFinished) {
-					unfinishItem({
-						variables: {itemId: taskId, token: customerToken},
-					});
-				}
-				else {
-					finishItem({
-						variables: {itemId: taskId, token: customerToken},
-					});
-				}
-			}}
+		<BistableButton
+			value={isFinished}
 			disabled={disabled}
-		>
-			{isFinished ? 'Fait' : 'Marquer comme fait'}
-		</Button>
+			trueLabel="Fait"
+			trueTooltip="Ré-ouvrir la tâche"
+			falseLabel="Marquer comme fait"
+			falseTooltip="Cliquer si cette tâche a été réalisée"
+			commit={finishItem}
+			reverse={unfinishItem}
+			variables={{itemId: taskId, token: customerToken}}
+			white={white}
+			primary={primary}
+		/>
 	);
 };
 

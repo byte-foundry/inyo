@@ -1,5 +1,22 @@
 import gql from 'graphql-tag';
 
+export const REMINDER_FRAGMENT = gql`
+	fragment ReminderFragment on Reminder {
+		id
+		type
+		sendingDate
+		status
+		item {
+			id
+			name
+			linkedCustomer {
+				id
+				name
+			}
+		}
+	}
+`;
+
 export const COMMENT_ON_ITEM_FRAGMENT = gql`
 	fragment CommentOnItemFragment on Comment {
 		createdAt
@@ -34,6 +51,7 @@ export const COMMENT_ON_ITEM_FRAGMENT = gql`
 
 export const ITEM_FRAGMENT = gql`
 	${COMMENT_ON_ITEM_FRAGMENT}
+	${REMINDER_FRAGMENT}
 
 	fragment ItemFragment on Item {
 		id
@@ -45,6 +63,10 @@ export const ITEM_FRAGMENT = gql`
 		type
 		unit
 		timeItTook
+		isFocused
+		reminders {
+			...ReminderFragment
+		}
 		attachments {
 			id
 			filename

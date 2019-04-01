@@ -1,6 +1,10 @@
 import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
 
-import {ITEM_FRAGMENT, PROJECT_CUSTOMER_FRAGMENT} from './fragments';
+import {
+	ITEM_FRAGMENT,
+	PROJECT_CUSTOMER_FRAGMENT,
+	REMINDER_FRAGMENT,
+} from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -532,6 +536,26 @@ export const SNOOZE_ITEM = gql`
 	}
 `;
 
+export const FOCUS_TASK = gql`
+	${ITEM_FRAGMENT}
+
+	mutation focusTask($itemId: ID!) {
+		focusTask(id: $itemId) {
+			...ItemFragment
+		}
+	}
+`;
+
+export const UNFOCUS_TASK = gql`
+	${ITEM_FRAGMENT}
+
+	mutation unfocusTask($itemId: ID!) {
+		unfocusTask(id: $itemId) {
+			...ItemFragment
+		}
+	}
+`;
+
 export const ACCEPT_ITEM = gql`
 	mutation acceptItem($itemId: ID!, $token: String!) {
 		acceptItem(id: $itemId, token: $token) {
@@ -698,6 +722,16 @@ export const REMOVE_CUSTOMER = gql`
 	mutation removeCustomer($id: ID!) {
 		removeCustomer(id: $id) {
 			id
+		}
+	}
+`;
+
+export const CANCEL_REMINDER = gql`
+	${REMINDER_FRAGMENT}
+
+	mutation cancelReminder($id: ID!) {
+		cancelReminder(id: $id) {
+			...ReminderFragment
 		}
 	}
 `;

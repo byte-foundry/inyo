@@ -18,10 +18,11 @@ import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
 
-export const GRAPHQL_API = `https://prisma${
+/* export const GRAPHQL_API = `https://prisma${
 	// eslint-disable-line import/prefer-default-export
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
-}.inyo.me/`;
+}.inyo.me/`; */
+export const GRAPHQL_API = 'http://prisma.prototypo.io:4002/';
 
 export const INTERCOM_APP_ID
 	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
@@ -153,3 +154,18 @@ export const ITEM_TYPES = [
 		description: 'Créer une tâche uniquement visible par vous',
 	}, */
 ];
+
+export const REMINDER_TYPES_DATA = {
+	DELAY: {
+		text: customerName => `Premier mail envoyé à ${customerName}`,
+	},
+	FIRST: {
+		text: customerName => `Premier rappel envoyé à ${customerName}`,
+	},
+	SECOND: {
+		text: customerName => `Second rappel envoyé à ${customerName}`,
+	},
+	LAST: {
+		text: customerName => `Dernier rappel envoyé à ${customerName}`,
+	},
+};

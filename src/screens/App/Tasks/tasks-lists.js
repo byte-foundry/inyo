@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
 import YouTube from 'react-youtube';
+import moment from 'moment';
 
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import {
@@ -12,9 +13,14 @@ import {
 	ModalActions,
 } from '../../../utils/content';
 import {
-	Help, Heading, Button, P,
+	Help,
+	Heading,
+	Button,
+	P,
+	Main,
+	Container,
+	Content,
 } from '../../../utils/new/design-system';
-
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
@@ -28,17 +34,6 @@ import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 
 const PA = styled(P)`
 	font-size: 16px;
-`;
-
-const Container = styled('div')`
-	display: flex;
-	flex: 1;
-	max-width: 1280px;
-	margin: 0 auto;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column;
-	}
 `;
 
 const IframeYouTube = styled(YouTube)`
@@ -61,22 +56,6 @@ const TaskAndArianne = styled('div')`
 	flex: auto;
 `;
 
-const Main = styled('div')`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column-reverse;
-	}
-`;
-
-const Content = styled('div')`
-	display: flex;
-	flex-direction: column;
-	flex: auto;
-`;
-
 function TasksListContainer({projectId, linkedCustomerId, filter}) {
 	const {data, error} = useQuery(GET_ALL_TASKS, {
 		variables: {
@@ -91,7 +70,20 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 	);
 
 	// order by creation date
-	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+	tasks.sort((a, b) => {
+		const bDeadline = b.dueDate || (b.project && b.project.deadline);
+		const aDeadline = a.dueDate || (a.project && a.project.deadline);
+
+		if ((a.unit && !b.unit) || (aDeadline && !bDeadline)) return -1;
+		if ((!a.unit && b.unit) || (!aDeadline && bDeadline)) return 1;
+		if ((!a.unit && !b.unit) || (!aDeadline && !bDeadline)) return 0;
+
+		return (
+			moment(aDeadline).diff(moment(), 'days')
+			- a.unit
+			- (moment(bDeadline).diff(moment(), 'days') - b.unit)
+		);
+	});
 
 	if (projectId) {
 		return (

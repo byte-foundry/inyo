@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
 
 import {
+	Aside,
 	SubHeading,
 	Button,
 	primaryPurple,
@@ -27,14 +28,13 @@ import Plural from '../Plural';
 import CustomerModal from '../CustomerModal';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
-import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
-import Pencil2 from '../../utils/icons/pencil.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {UPDATE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
+import {UPDATE_PROJECT} from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const ProjectMenuIcon = styled('div')`
@@ -42,20 +42,6 @@ const ProjectMenuIcon = styled('div')`
 
 	svg {
 		fill: ${primaryPurple};
-	}
-`;
-
-const Aside = styled('aside')`
-	flex-direction: column;
-	align-items: stretch;
-	min-width: 270px;
-	width: 270px;
-	padding-right: 4rem;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		padding-left: 0;
-		margin-top: 2rem;
-		width: 100%;
 	}
 `;
 
@@ -222,7 +208,6 @@ const SidebarProjectInfos = ({
 		{},
 	);
 	const updateProject = useMutation(UPDATE_PROJECT);
-	const removeProject = useMutation(REMOVE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
 	});

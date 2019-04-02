@@ -32,6 +32,7 @@ import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
+import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
@@ -185,6 +186,11 @@ const SidebarHeading = styled(SubHeading)`
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
+`;
+
+const Illus = styled('img')`
+	margin-top: 1rem;
+	max-width: 150px;
 `;
 
 const PencilElem = styled(Pencil)`
@@ -350,9 +356,12 @@ const SidebarProjectInfos = ({
 						</Button>
 					</>
 				) : (
-					<Button icon="+" onClick={() => setEditCustomer(true)}>
-						Ajouter un client
-					</Button>
+					<>
+						<Button icon="+" onClick={() => setEditCustomer(true)}>
+							Ajouter un client
+						</Button>
+						<Illus src={noClientIllus} />
+					</>
 				)}
 
 				{isEditingCustomer && (

@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled/macro';
 
 import TaskInput from '../TaskInput';
 import {TaskContainer} from '../TasksList/task';
-import ConfirmModal from '../ConfirmModal';
+import ConfirmModal, {useConfirmation} from '../ConfirmModal';
 import {P} from '../../utils/new/design-system';
 
 import {
@@ -23,25 +23,6 @@ const TaskInputContainer = styled('div')`
 		margin-top: 3rem;
 	}
 `;
-
-const useConfirmation = () => {
-	const [promise, setPromise] = useState();
-
-	return [
-		promise ? promise.resolve : false,
-		async () => {
-			const newPromise = new Promise((resolve) => {
-				setPromise({resolve});
-			});
-
-			const confirmed = await newPromise;
-
-			setPromise();
-
-			return confirmed;
-		},
-	];
-};
 
 const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
 

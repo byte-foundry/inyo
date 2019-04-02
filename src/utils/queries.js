@@ -416,7 +416,7 @@ export const USER_TASKS = gql`
 export const GET_REMINDERS = gql`
 	${REMINDER_FRAGMENT}
 
-	query reminders {
+	query getReminders {
 		reminders {
 			...ReminderFragment
 		}

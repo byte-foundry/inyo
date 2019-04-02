@@ -39,23 +39,10 @@ const ReminderContainer = styled('div')`
 			transition: all 300ms ease;
 		}
 	}
-
-	&:before {
-		content: '';
-		display: block;
-		background: ${lightGrey};
-		position: absolute;
-		left: -1rem;
-		top: -1rem;
-		right: -1rem;
-		bottom: -1rem;
-		border-radius: 8px;
-		z-index: -1;
-	}
 `;
 
 const ReminderText = styled('div')`
-	cursor: pointer;
+	cursor: ${props => (props.noLink ? 'default' : 'pointer')};
 	${props => props.small
 		&& `
 		width:250px;
@@ -93,7 +80,7 @@ const DeleteIcon = styled(TrashIcon)`
 const ReminderCancel = styled('div')``;
 
 function TaskRemindersList({
-	reminders = [], small, baseUrl, history,
+	reminders = [], small, baseUrl, history, noLink,
 }) {
 	const cancelReminder = useMutation(CANCEL_REMINDER);
 
@@ -117,20 +104,28 @@ function TaskRemindersList({
 							&& reminder.item.linkedCustomer.name,
 					);
 
+					const dataTipProps = {};
+
+					if (!noLink) {
+						dataTipProps['data-tip'] = `Ouvrir la tâche "${
+							reminder.item.name
+						}"`;
+					}
+
 					return (
 						<ReminderContainer>
 							<ReminderText
 								withLink={baseUrl}
-								onClick={() => history.push(
-									`${baseUrl}/${reminder.item.id}`,
-								)
+								onClick={() => !noLink
+									&& history.push(
+										`${baseUrl}/${reminder.item.id}`,
+									)
 								}
 								small={small}
 								canceled={reminder.status === 'CANCELED'}
 								done={reminder.status === 'SENT'}
-								data-tip={`Ouvrir la tâche "${
-									reminder.item.name
-								}"`}
+								{...dataTipProps}
+								noLink={noLink}
 							>
 								{text}
 							</ReminderText>

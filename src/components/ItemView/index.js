@@ -27,6 +27,7 @@ import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
 	REMOVE_ATTACHMENTS,
+	FOCUS_TASK,
 } from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -246,6 +247,10 @@ const FileOwner = styled('span')`
 	}
 `;
 
+const TaskButton = styled(Button)`
+	margin: 1rem 0 1.5rem;
+`;
+
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -260,6 +265,7 @@ const Item = ({id, customerToken, close}) => {
 	});
 
 	const updateItem = useMutation(UPDATE_ITEM);
+	const focusItem = useMutation(FOCUS_TASK);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -592,8 +598,23 @@ const Item = ({id, customerToken, close}) => {
 					/>
 				</Description>
 			)}
-			<SubHeading>Actions d'Edwige</SubHeading>
-			<TaskRemindersList reminders={item.reminders} />
+			{!customerToken && customerTask && item.linkedCustomer && (
+				<>
+					<SubHeading>Actions d'Edwige</SubHeading>
+					{item.reminders.length > 0 ? (
+						<TaskRemindersList noLink reminders={item.reminders} />
+					) : (
+						<TaskButton
+							onClick={() => focusItem({variables: {itemId: item.id}})
+							}
+							icon="✓"
+						>
+							Charger Edwige de faire réaliser cette tâche à{' '}
+							{item.linkedCustomer.name}
+						</TaskButton>
+					)}
+				</>
+			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
 				{item.attachments.map(

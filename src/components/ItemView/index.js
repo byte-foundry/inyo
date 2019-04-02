@@ -212,7 +212,7 @@ const RemoveFile = styled('div')`
 	height: 20px;
 	margin-left: 3rem;
 	cursor: pointer;
-	opacity: 0;
+
 	transition: all 300ms ease;
 
 	&:hover {

@@ -196,6 +196,9 @@ const TrashButton = styled(Button)`
 
 	&:hover {
 		background: none;
+		svg {
+			fill: ${primaryRed};
+		}
 	}
 `;
 

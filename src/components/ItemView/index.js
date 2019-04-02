@@ -602,7 +602,7 @@ const Item = ({id, customerToken, close}) => {
 				<>
 					<SubHeading>Actions d'Edwige</SubHeading>
 					{item.reminders.length > 0 ? (
-						<TaskRemindersList reminders={item.reminders} />
+						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
 						<TaskButton
 							onClick={() => focusItem({variables: {itemId: item.id}})

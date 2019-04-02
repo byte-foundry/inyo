@@ -149,7 +149,9 @@ export default function ProjectHeader({projectId, customerToken}) {
 				placeholderCss={placeholderCss}
 				nameCss={nameCss}
 				editableCss={editableCss}
-				missingTitle={project.name === 'Nom du projet'}
+				missingTitle={
+					project.name === 'Nom du projet' || project.name === ''
+				}
 				onFocusOut={(value) => {
 					if (value) {
 						updateProject({

@@ -5,13 +5,11 @@ export default {
 			reminder => reminder.status === 'PENDING',
 		);
 
-		cachedReminders.push(newRemindersItem);
+		cachedReminders.push(...newRemindersItem);
 
 		return {
 			...query.result,
-			reminders: {
-				...cachedReminders,
-			},
+			reminders: [...cachedReminders],
 		};
 	},
 };

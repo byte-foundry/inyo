@@ -12,20 +12,33 @@ import {
 	primaryRed,
 	accentGrey,
 	lightGrey,
+	lightRed,
+	primaryWhite,
 	Button,
 } from '../../utils/new/design-system';
 import {CANCEL_REMINDER} from '../../utils/mutations';
-import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
 
 const ReminderList = styled('div')`
 	margin-bottom: 2rem;
 	margin-top: 1rem;
 `;
 
+const Delete = styled(Button)`
+	color: ${primaryRed};
+	width: 1.15rem;
+	height: 1.2rem;
+	transition: all 200ms ease;
+
+	&:hover {
+		color: ${primaryWhite};
+		background-color: ${primaryRed};
+	}
+`;
+
 const ReminderContainer = styled('div')`
 	color: ${primaryGrey};
 	font-size: 12px;
-	margin-bottom: 5px;
+	margin-bottom: 2px;
 	display: flex;
 	align-items: center;
 
@@ -62,19 +75,6 @@ const ReminderDate = styled('div')`
 		overflow: hidden;
 		white-space: nowrap;
 	`}
-`;
-
-const DeleteIcon = styled(TrashIcon)`
-	opacity: 0.25;
-
-	path {
-		fill: ${accentGrey};
-	}
-	&:hover {
-		path {
-			fill: ${primaryRed};
-		}
-	}
 `;
 
 const ReminderCancel = styled('div')``;
@@ -145,8 +145,7 @@ function TaskRemindersList({
 								{reminder.status === 'SENT' && 'Envoyé'}
 								{reminder.status !== 'CANCELED'
 									&& reminder.status !== 'SENT' && (
-									<Button
-										red
+									<Delete
 										link
 										small
 										onClick={() => {
@@ -157,8 +156,8 @@ function TaskRemindersList({
 											});
 										}}
 									>
-										<DeleteIcon />
-									</Button>
+											&times;
+									</Delete>
 								)}
 							</ReminderCancel>
 						</ReminderContainer>

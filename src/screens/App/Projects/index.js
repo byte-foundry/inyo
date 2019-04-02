@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import {withRouter} from 'react-router-dom';
 import {useQuery} from 'react-apollo-hooks';
 
 import TasksProgressBar from '../../../components/TasksProgressBar';
@@ -12,7 +13,11 @@ import {
 	Heading,
 } from '../../../utils/new/design-system';
 
-function Projects() {
+const ProjectItem = styled('div')`
+	cursor: pointer;
+`;
+
+function Projects({history}) {
 	const {
 		data: {
 			me: {projects},
@@ -25,10 +30,15 @@ function Projects() {
 			<Main>
 				<Content>
 					{projects.map(project => (
-						<div>
+						<ProjectItem
+							onClick={() => history.push(
+								`/app/tasks?projectId=${project.id}`,
+							)
+							}
+						>
 							<Heading>{project.name}</Heading>
 							<TasksProgressBar project={project} />
-						</div>
+						</ProjectItem>
 					))}
 				</Content>
 			</Main>
@@ -36,4 +46,4 @@ function Projects() {
 	);
 }
 
-export default Projects;
+export default withRouter(Projects);

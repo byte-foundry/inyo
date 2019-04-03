@@ -80,7 +80,7 @@ const TasksProgressBarMain = styled('div')`
 
 const TasksProgressBarLabel = styled('div')`
 	margin-top: 2rem;
-	color: ${accentGrey};
+	color: ${primaryPurple};
 	text-align: right;
 
 	&::after {

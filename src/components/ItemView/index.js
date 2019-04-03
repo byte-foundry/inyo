@@ -7,6 +7,8 @@ import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
 
 import TaskStatusButton from '../TaskStatusButton';
+import TaskActivationButton from '../TaskActivationButton';
+import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 import Plural from '../Plural';
 import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
@@ -18,12 +20,14 @@ import DateInput from '../DateInput';
 import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
+import TaskRemindersList from '../TaskRemindersList';
 
 import {GET_ITEM_DETAILS} from '../../utils/queries';
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
 	REMOVE_ATTACHMENTS,
+	FOCUS_TASK,
 } from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -154,7 +158,7 @@ const Description = styled('div')`
 const StickyHeader = styled('div')`
 	position: sticky;
 	top: 0;
-	background: #5020ee;
+	background: ${props => (props.customer ? primaryRed : primaryPurple)};
 	margin: -4rem -4rem 1.4rem;
 	display: flex;
 	justify-content: center;
@@ -208,7 +212,7 @@ const RemoveFile = styled('div')`
 	height: 20px;
 	margin-left: 3rem;
 	cursor: pointer;
-	opacity: 0;
+
 	transition: all 300ms ease;
 
 	&:hover {
@@ -243,6 +247,10 @@ const FileOwner = styled('span')`
 	}
 `;
 
+const TaskButton = styled(Button)`
+	margin: 1rem 0 1.5rem;
+`;
+
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -257,6 +265,7 @@ const Item = ({id, customerToken, close}) => {
 	});
 
 	const updateItem = useMutation(UPDATE_ITEM);
+	const focusItem = useMutation(FOCUS_TASK);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -314,22 +323,37 @@ const Item = ({id, customerToken, close}) => {
 		= ITEM_TYPES.find(({type}) => type === item.type)
 		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
+	const customerTask
+		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
 	const finishableTask
-		= (customerToken
-			&& (item.type === 'CUSTOMER'
-				|| item.type === 'CONTENT_ACQUISITION'))
-		|| !customerToken;
+		= (customerToken && customerTask) || (!customerToken && !customerTask);
+
+	const activableTask = !customerToken && item.status === 'PENDING';
 
 	return (
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			<StickyHeader>
-				{finishableTask && (
-					<TaskStatusButton
+			<StickyHeader customer={item.type !== 'DEFAULT'}>
+				{activableTask && !customerTask && (
+					<TaskActivationButton
 						taskId={id}
-						isFinished={item.status === 'FINISHED'}
-						customerToken={customerToken}
+						isActive={item.isFocused}
 					/>
+				)}
+				{activableTask && customerTask && item.linkedCustomer && (
+					<TaskCustomerActivationButton
+						taskId={id}
+						isActive={item.isFocused}
+						customerName={
+							item.linkedCustomer && item.linkedCustomer.name
+						}
+					/>
+				)}
+				{activableTask && customerTask && !item.linkedCustomer && (
+					<div>
+						Il manque un client a cette tâche pour qu'elle soit
+						réalisable
+					</div>
 				)}
 			</StickyHeader>
 			<Header>
@@ -574,6 +598,23 @@ const Item = ({id, customerToken, close}) => {
 					/>
 				</Description>
 			)}
+			{!customerToken && customerTask && item.linkedCustomer && (
+				<>
+					<SubHeading>Actions d'Edwige</SubHeading>
+					{item.reminders.length > 0 ? (
+						<TaskRemindersList noLink reminders={item.reminders} />
+					) : (
+						<TaskButton
+							onClick={() => focusItem({variables: {itemId: item.id}})
+							}
+							icon="✓"
+						>
+							Charger Edwige de faire réaliser cette tâche à{' '}
+							{item.linkedCustomer.name}
+						</TaskButton>
+					)}
+				</>
+			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>
 				{item.attachments.map(
@@ -685,6 +726,14 @@ const Item = ({id, customerToken, close}) => {
 						</Button>
 					</>
 				))}
+			{finishableTask && (
+				<TaskStatusButton
+					taskId={id}
+					primary={item.status === 'FINISHED'}
+					isFinished={item.status === 'FINISHED'}
+					customerToken={customerToken}
+				/>
+			)}
 		</>
 	);
 };

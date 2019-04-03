@@ -3,7 +3,7 @@ import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
-import {gray20, gray30} from '../content';
+import {gray30} from '../content';
 import {BREAKPOINTS} from '../constants';
 
 export const primaryPurple = '#5020ee';
@@ -107,11 +107,33 @@ export const Button = styled('button')`
 		}
 		return primaryPurple;
 	}};
+
+	svg {
+		fill: ${(props) => {
+		if (props.primary) {
+			return primaryWhite;
+		}
+		if (props.red) {
+			return primaryRed;
+		}
+		if (props.grey) {
+			return primaryGrey;
+		}
+		if (props.white) {
+			return primaryWhite;
+		}
+		return primaryPurple;
+	}};
+	}
+
 	border-color: currentColor;
 
 	${props => !props.disabled
 		&& css`
 			&:hover {
+				svg {
+					fill: ${getButtonHoveredColor(props)};
+				}
 				background: ${getButtonHoveredBackground(props)};
 				color: ${getButtonHoveredColor(props)};
 				border-color: ${getButtonHoveredBorderColor(props)};
@@ -481,4 +503,44 @@ export const Help = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
 	}
+`;
+
+export const Aside = styled('aside')`
+	flex-direction: column;
+	align-items: stretch;
+	flex: 0 0 270px;
+	padding-right: 4rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding-left: 0;
+		margin-top: 2rem;
+		width: 100%;
+	}
+`;
+
+export const Main = styled('div')`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+	}
+`;
+
+export const Container = styled('div')`
+	display: flex;
+	width: 1280px;
+	margin: 0 auto;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
+`;
+
+export const Content = styled('div')`
+	display: flex;
+	flex-direction: column;
+	flex: 1;
 `;

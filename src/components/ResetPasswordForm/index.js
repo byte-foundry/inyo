@@ -12,6 +12,8 @@ import {P, Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
 import FormElem from '../FormElem';
 
+import {CHECK_LOGIN_USER} from '../../utils/queries';
+
 const CHECK_RESET_PASSWORD = gql`
 	mutation checkResetPassword($resetToken: String!) {
 		isValidToken: checkResetPassword(resetToken: $resetToken)
@@ -22,6 +24,16 @@ const UPDATE_PASSWORD = gql`
 	mutation updatePassword($resetToken: String!, $newPassword: String!) {
 		resetPassword(resetToken: $resetToken, newPassword: $newPassword) {
 			token
+			user {
+				id
+				email
+				hmacIntercomId
+				firstName
+				lastName
+				company {
+					phone
+				}
+			}
 		}
 	}
 `;
@@ -108,17 +120,36 @@ class ResetPasswordForm extends Component {
 								actions.setSubmitting(false);
 								this.setState({sent: false});
 								try {
-									const {data} = await updatePassword({
+									await updatePassword({
 										variables: {
 											resetToken,
 											newPassword: values.password,
 										},
+										update: (
+											cache,
+											{data: {resetPassword}},
+										) => {
+											window.localStorage.setItem(
+												'authToken',
+												resetPassword.token,
+											);
+
+											const data = cache.readQuery({
+												query: CHECK_LOGIN_USER,
+											});
+
+											cache.writeQuery({
+												query: CHECK_LOGIN_USER,
+												data: {
+													me: {
+														...data.me,
+														...resetPassword.user,
+													},
+												},
+											});
+										},
 									});
 
-									window.localStorage.setItem(
-										'authToken',
-										data.resetPassword.token,
-									);
 									ReactGA.event({
 										category: 'User',
 										action: 'Logged in',

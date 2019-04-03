@@ -196,6 +196,9 @@ const TrashButton = styled(Button)`
 
 	&:hover {
 		background: none;
+		svg {
+			fill: ${primaryRed};
+		}
 	}
 `;
 
@@ -597,9 +600,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 								}
 								placeholder="Nom de la section"
 								value={section.name}
-								missingTitle={
-									section.name === 'Renommer cette section'
-								}
+								missingTitle={section.name === ''}
 								placeholderCss={placeholderCss}
 								nameCss={nameCss}
 								editableCss={editableCss}

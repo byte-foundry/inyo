@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
-import {useMutation, useQuery} from 'react-apollo-hooks';
+import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
@@ -20,7 +20,6 @@ import {
 	TaskHeading,
 	CommentIcon,
 	TaskIconText,
-	TaskInfosItem,
 	TaskInfosItemLink,
 	primaryPurple,
 	primaryGrey,
@@ -351,6 +350,7 @@ export function TaskInfosInputs({
 	location,
 	customerToken,
 	taskUrlPrefix,
+	baseUrl,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -372,12 +372,19 @@ export function TaskInfosInputs({
 		).length;
 	}
 
+	const dueDate
+		= item.dueDate
+		|| (item.dueDate
+			|| (item.section
+				&& item.section.project
+				&& item.section.project.deadline));
+
 	return (
 		<TaskInfos>
 			{!noComment && (
 				<TaskInfosItemLink
 					to={{
-						pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+						pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 						state: {prevSearch: location.search},
 					}}
 				>
@@ -464,13 +471,13 @@ export function TaskInfosInputs({
 						{!customerToken && editDueDate ? (
 							<>
 								<DueDateInputElem
-									value={moment(
-										item.dueDate || new Date(),
-									).format('DD/MM/YYYY')}
+									value={moment(dueDate || new Date()).format(
+										'DD/MM/YYYY',
+									)}
 								/>
 								<DateInput
 									innerRef={dateRef}
-									date={moment(item.dueDate || new Date())}
+									date={moment(dueDate || new Date())}
 									onDateChange={(args) => {
 										onDueDateSubmit(args);
 										setEditDueDate(false);
@@ -483,9 +490,9 @@ export function TaskInfosInputs({
 							</>
 						) : (
 							<>
-								{(item.dueDate && (
+								{(dueDate && (
 									<>
-										{moment(item.dueDate).diff(
+										{moment(dueDate).diff(
 											moment(),
 											'days',
 										) - item.unit}{' '}
@@ -530,7 +537,12 @@ export function TaskInfosInputs({
 }
 
 function Task({
-	item, customerToken, location, isDraggable, noData,
+	item,
+	customerToken,
+	location,
+	isDraggable,
+	noData,
+	baseUrl = 'tasks',
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
@@ -579,7 +591,9 @@ function Task({
 							noData={noData}
 							small={setTimeItTook}
 							to={{
-								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
 								state: {prevSearch: location.search},
 							}}
 						>
@@ -621,7 +635,7 @@ function Task({
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
-										pathname: `${taskUrlPrefix}/tasks/${
+										pathname: `${taskUrlPrefix}/${baseUrl}/${
 											item.id
 										}`,
 										state: {prevSearch: location.search},
@@ -652,6 +666,7 @@ function Task({
 				{!noData && (
 					<TaskInfosInputs
 						taskUrlPrefix={taskUrlPrefix}
+						baseUrl={baseUrl}
 						location={location}
 						item={item}
 						customerToken={customerToken}

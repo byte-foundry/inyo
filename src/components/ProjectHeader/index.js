@@ -27,7 +27,8 @@ const ProjectHeaderContainer = styled('div')`
 
 const ProjectHeading = styled(InlineEditable)`
 	color: ${primaryBlack};
-	font-size: 32px;
+	font-size: 2rem;
+	margin-bottom: 1rem;
 
 	${props => props.missingTitle
 		&& `

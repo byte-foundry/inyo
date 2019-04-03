@@ -10,6 +10,12 @@ import {
 	mediumPurple,
 } from '../../utils/new/design-system';
 
+const TasksProgressBarWrapper = styled('div')`
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: baseline;
+`;
+
 const TasksProgressBarMain = styled('div')`
 	background: ${lightGrey};
 	position: relative;
@@ -79,9 +85,9 @@ const TasksProgressBarMain = styled('div')`
 `;
 
 const TasksProgressBarLabel = styled('div')`
-	margin-top: 2rem;
 	color: ${primaryPurple};
 	text-align: right;
+	flex: 1 1 50px;
 
 	&::after {
 		content: '%';
@@ -144,7 +150,7 @@ function TasksProgressBar({project, customerToken}) {
 			: tasksCompleted / (tasksTotalWithTimeItTook || 1);
 
 	return (
-		<>
+		<TasksProgressBarWrapper>
 			<TasksProgressBarLabel>
 				{Math.round((tasksCompleted / tasksTotal) * 100)
 					? Math.round((tasksCompleted / tasksTotal) * 100)
@@ -155,7 +161,7 @@ function TasksProgressBar({project, customerToken}) {
 				timeItTook={timeItTook}
 				timeItTookPercentage={timeItTookPercentage}
 			/>
-		</>
+		</TasksProgressBarWrapper>
 	);
 }
 

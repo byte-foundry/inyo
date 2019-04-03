@@ -104,6 +104,15 @@ export const GET_ALL_PROJECTS = gql`
 	}
 `;
 
+export const GET_PROJECT_NOTIFY_ACTIVITY = gql`
+	query getProjectNotifyActivity($id: ID!) {
+		project(id: $id) {
+			id
+			notifyActivityToCustomer
+		}
+	}
+`;
+
 export const GET_PROJECT_SHARED_NOTES = gql`
 	query getProjectSharedNotes($id: ID!, $token: String) {
 		project(id: $id, token: $token) {

@@ -266,6 +266,7 @@ const TaskInput = ({
 								setShowContentAcquisitionInfos(false);
 							}
 							else if (e.key === 'Enter') {
+								e.preventDefault();
 								if (type === 'CONTENT_ACQUISITION') {
 									if (showContentAcquisitionInfos) {
 										onSubmitTask({

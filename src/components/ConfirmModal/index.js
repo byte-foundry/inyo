@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 
 import {Button} from '../../utils/new/design-system';
@@ -15,6 +15,25 @@ const ModalRowHoriz = styled(ModalRow)`
 	display: flex;
 	justify-content: flex-end;
 `;
+
+export const useConfirmation = () => {
+	const [promise, setPromise] = useState();
+
+	return [
+		promise ? promise.resolve : false,
+		async () => {
+			const newPromise = new Promise((resolve) => {
+				setPromise({resolve});
+			});
+
+			const confirmed = await newPromise;
+
+			setPromise();
+
+			return confirmed;
+		},
+	];
+};
 
 export default function ConfirmModal({
 	children,

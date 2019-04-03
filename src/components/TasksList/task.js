@@ -182,15 +182,6 @@ const TaskActions = styled('div')`
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
 
-	form {
-		input {
-			padding-left: 1rem;
-		}
-		label {
-			margin-top: -0.35rem;
-		}
-	}
-
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
 	}

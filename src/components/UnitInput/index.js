@@ -24,6 +24,7 @@ const UnitInputInput = styled('input')`
 	font-size: 14px;
 	font-family: inherit;
 	color: ${primaryPurple};
+	padding-left: 1rem;
 `;
 
 const UnitInputSwitch = styled('label')`
@@ -87,6 +88,7 @@ const UnitInputSlider = styled('span')`
 const UnitInputForm = styled('form')`
 	display: flex;
 	flex-flow: row nowrap;
+	align-items: center;
 `;
 
 let outsideClosureState;

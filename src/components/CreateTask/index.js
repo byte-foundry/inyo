@@ -34,9 +34,7 @@ const CreateTask = ({
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
-	const {
-		data: {project: currentProject},
-	} = useQuery(GET_PROJECT_NOTIFY_ACTIVITY, {
+	const {data: currentProjectData} = useQuery(GET_PROJECT_NOTIFY_ACTIVITY, {
 		variables: {id: currentProjectId},
 		skip: !currentProjectId,
 	});
@@ -89,8 +87,8 @@ const CreateTask = ({
 			<TaskInput
 				onSubmitTask={async (task) => {
 					if (
-						currentProject
-						&& !currentProject.notifyActivityToCustomer
+						currentProjectData
+						&& !currentProjectData.project.notifyActivityToCustomer
 						&& isCustomerTask(task)
 					) {
 						const confirmed = await askConfirmationNotification();

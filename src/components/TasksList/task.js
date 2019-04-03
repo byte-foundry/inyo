@@ -36,6 +36,7 @@ import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
 import CustomerModal from '../CustomerModal';
+import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -372,6 +373,15 @@ export function TaskInfosInputs({
 		).length;
 	}
 
+	let unitToDisplay = item.timeItTook !== null ? item.timeItTook : item.unit;
+
+	let unitInHours = false;
+
+	if (unitToDisplay < 1) {
+		unitToDisplay *= 8;
+		unitInHours = true;
+	}
+
 	const dueDate
 		= item.dueDate
 		|| (item.dueDate
@@ -431,27 +441,27 @@ export function TaskInfosInputs({
 									: () => setEditUnit(true)
 							}
 						>
-							{item.timeItTook ? item.timeItTook : item.unit}{' '}
-							<Plural
-								value={item.unit}
-								singular="jour"
-								plural="jours"
+							{unitToDisplay}{' '}
+							{!unitInHours && (
+								<Plural
+									value={unitToDisplay}
+									singular="jour"
+									plural="jours"
+								/>
+							)}
+							{unitInHours && (
+								<Plural
+									value={unitToDisplay}
+									singular="heure"
+									plural="heures"
+								/>
+							)}
+							<TimeItTookDisplay
+								timeItTook={item.timeItTook}
+								unit={item.unit}
+								customerToken={customerToken}
+								status={item.status}
 							/>
-							<span data-tip="Temps dépassé">
-								{item.timeItTook !== undefined
-									&& item.timeItTook > item.unit
-									&& item.timeItTook !== item.unit
-									&& item.status === 'FINISHED'
-									&& ` (+${item.timeItTook - item.unit}) `}
-							</span>
-							{/* It is bad, should be a component */}
-							<span data-tip="Temps surestimé">
-								{!customerToken
-									&& item.timeItTook !== undefined
-									&& item.timeItTook < item.unit
-									&& item.status === 'FINISHED'
-									&& ` (${item.timeItTook - item.unit}) `}
-							</span>
 						</div>
 					)
 				}

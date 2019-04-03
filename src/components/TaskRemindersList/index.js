@@ -1,7 +1,7 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import moment from 'moment';
 
 import {REMINDER_TYPES_DATA} from '../../utils/constants';
@@ -14,6 +14,7 @@ import {
 	lightGrey,
 	lightRed,
 	primaryWhite,
+	mediumGrey,
 	Button,
 } from '../../utils/new/design-system';
 import {CANCEL_REMINDER} from '../../utils/mutations';
@@ -25,7 +26,7 @@ const ReminderList = styled('div')`
 
 const Delete = styled(Button)`
 	color: ${primaryRed};
-	width: 1.15rem;
+	width: 1.2rem;
 	height: 1.2rem;
 	transition: all 200ms ease;
 
@@ -35,12 +36,21 @@ const Delete = styled(Button)`
 	}
 `;
 
+const ReminderLine = styled('div')`
+	border-bottom: 1px dotted ${mediumGrey};
+	height: 1px;
+	flex: 1;
+	margin: 0 1%;
+`;
+
 const ReminderContainer = styled('div')`
 	color: ${primaryGrey};
 	font-size: 12px;
+	height: 1.2rem;
 	margin-bottom: 2px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 
 	overflow: hidden;
 
@@ -52,13 +62,17 @@ const ReminderContainer = styled('div')`
 			transition: all 300ms ease;
 		}
 	}
+
+	&:hover ${ReminderLine} {
+		border-color: ${accentGrey};
+	}
 `;
 
 const ReminderText = styled('div')`
 	cursor: ${props => (props.noLink ? 'default' : 'pointer')};
 	${props => props.small
 		&& `
-		width:250px;
+		flex: 1 0 200px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
@@ -68,13 +82,22 @@ const ReminderDate = styled('div')`
 	font-size: 10px;
 	margin: 0 10px;
 	cursor: default;
+	flex: 1 1 100px;
 	${props => props.small
 		&& `
-		width:85px;
+		flex: 1 1 50px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
 	`}
+`;
+
+const ReminderActions = styled('div')`
+	// flex: 1 0 100px;
+	display: flex;
+	text-align: right;
+	justify-content: space-between;
+	align-items: baseline;
 `;
 
 const ReminderCancel = styled('div')``;
@@ -129,37 +152,40 @@ function TaskRemindersList({
 							>
 								{text}
 							</ReminderText>
-							<ReminderDate
-								small={small}
-								data-tip={moment(reminder.sendingDate).format(
-									'DD/MM/YYYY [à] HH:mm',
-								)}
-							>
-								{moment(reminder.sendingDate).fromNow()}
-							</ReminderDate>
-							<ReminderCancel
-								canceled={reminder.status === 'CANCELED'}
-								data-tip="Supprimer cette action automatique"
-							>
-								{reminder.status === 'CANCELED' && 'Annulé'}
-								{reminder.status === 'SENT' && 'Envoyé'}
-								{reminder.status !== 'CANCELED'
-									&& reminder.status !== 'SENT' && (
-									<Delete
-										link
-										small
-										onClick={() => {
-											cancelReminder({
-												variables: {
-													id: reminder.id,
-												},
-											});
-										}}
-									>
-											&times;
-									</Delete>
-								)}
-							</ReminderCancel>
+							<ReminderLine />
+							<ReminderActions>
+								<ReminderDate
+									small={small}
+									data-tip={moment(
+										reminder.sendingDate,
+									).format('DD/MM/YYYY [à] HH:mm')}
+								>
+									{moment(reminder.sendingDate).fromNow()}
+								</ReminderDate>
+								<ReminderCancel
+									canceled={reminder.status === 'CANCELED'}
+									data-tip="Supprimer cette action automatique"
+								>
+									{reminder.status === 'CANCELED' && 'Annulé'}
+									{reminder.status === 'SENT' && 'Envoyé'}
+									{reminder.status !== 'CANCELED'
+										&& reminder.status !== 'SENT' && (
+										<Delete
+											link
+											small
+											onClick={() => {
+												cancelReminder({
+													variables: {
+														id: reminder.id,
+													},
+												});
+											}}
+										>
+												&times;
+										</Delete>
+									)}
+								</ReminderCancel>
+							</ReminderActions>
 						</ReminderContainer>
 					);
 				})}

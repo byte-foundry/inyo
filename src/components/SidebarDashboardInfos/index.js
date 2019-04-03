@@ -19,7 +19,7 @@ import {GET_REMINDERS} from '../../utils/queries';
 const DashboardAside = styled(Aside)`
 	padding-right: 0;
 	padding-left: 4rem;
-	flex: 0 0 320px;
+	width: 320px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;

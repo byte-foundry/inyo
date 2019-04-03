@@ -86,9 +86,9 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			token: customerToken,
 		},
 	});
-	const postCommentMutation = useRef(
-		debounce(useMutation(POST_COMMENT)),
-		500,
+	const postCommentMutation = useMutation(POST_COMMENT);
+	const debouncePostComment = useRef(
+		debounce(postCommentMutation, 500, {leading: true, trailing: false}),
 	);
 
 	if (loading) return <span />;
@@ -144,7 +144,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 					try {
-						postCommentMutation.current({
+						debouncePostComment.current({
 							variables: {
 								itemId,
 								token: customerToken,

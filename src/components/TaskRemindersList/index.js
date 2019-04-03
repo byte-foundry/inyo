@@ -93,7 +93,6 @@ const ReminderDate = styled('div')`
 `;
 
 const ReminderActions = styled('div')`
-	// flex: 1 0 100px;
 	display: flex;
 	text-align: right;
 	justify-content: space-between;

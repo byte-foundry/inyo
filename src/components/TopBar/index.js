@@ -7,7 +7,7 @@ import {primaryWhite} from '../../utils/content';
 import {primaryPurple, primaryGrey} from '../../utils/new/design-system';
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
 
-export const TopBarLogo = styled('div')`
+export const TopBarLogo = styled(NavLink)`
 	background: url(${Logo});
 	width: 26px;
 	height: 26px;

@@ -21,7 +21,7 @@ import {
 	Container,
 	Content,
 } from '../../../utils/new/design-system';
-import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
+import {TOOLTIP_DELAY} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectList from '../../../components/ProjectTasksList';

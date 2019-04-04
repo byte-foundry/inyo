@@ -14,7 +14,6 @@ import {
 	FlexRow,
 	primaryWhite,
 	gray20,
-	gray30,
 	Loading,
 } from '../../../utils/content';
 import {primaryPurple} from '../../../utils/new/design-system';

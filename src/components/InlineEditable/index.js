@@ -3,12 +3,7 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 
 import {Input, gray50} from '../../utils/content';
-import {
-	lightGrey,
-	lightRed,
-	accentGrey,
-	primaryRed,
-} from '../../utils/new/design-system';
+import {lightGrey, accentGrey} from '../../utils/new/design-system';
 import Pencil from '../../utils/icons/pencil.svg';
 
 const Placeholder = styled('span')`

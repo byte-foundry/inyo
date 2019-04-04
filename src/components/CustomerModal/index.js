@@ -36,11 +36,9 @@ const CustomerModal = ({
 	onDismiss,
 	onValidate,
 	noSelect,
-	customer,
+	customer = {},
 }) => {
 	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {skip: noSelect});
-
-	customer = customer || {};
 
 	let options = [];
 
@@ -114,8 +112,8 @@ const CustomerModal = ({
 							return {};
 						}
 						catch (err) {
-							return err.inner.reduce((errors, error) => {
-								errors[error.path] = error.message;
+							return err.inner.reduce((errors, errorContent) => {
+								errors[error.path] = errorContent.message;
 								return errors;
 							}, {});
 						}

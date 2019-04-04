@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
 	Link, Switch, Route, Redirect,
 } from 'react-router-dom';

@@ -8,11 +8,8 @@ import {REMINDER_TYPES_DATA} from '../../utils/constants';
 import {
 	primaryGrey,
 	primaryBlack,
-	primaryPurple,
 	primaryRed,
 	accentGrey,
-	lightGrey,
-	lightRed,
 	primaryWhite,
 	mediumGrey,
 	Button,

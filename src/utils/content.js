@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {css, keyframes} from '@emotion/core';
+import {css} from '@emotion/core';
 import React, {useLayoutEffect} from 'react';
 import Shevy from 'shevyjs';
 import {Dialog} from '@reach/dialog';
@@ -14,7 +14,7 @@ const shevy = new Shevy({
 	baseFontSize: '17px',
 });
 const {
-	body, content, h1, h2, h3, h4, h5, h6,
+	content, h1, h2, h3, h4, h5, h6,
 } = shevy;
 
 // Colors
@@ -384,7 +384,9 @@ function useLockBodyScroll() {
 
 		document.body.style.overflow = 'hidden';
 		// Re-enable scrolling when component unmounts
-		return () => (document.body.style.overflow = originalStyle);
+		return () => {
+			document.body.style.overflow = originalStyle;
+		};
 	}, []); // Empty array ensures effect is only run on mount and unmount
 }
 
@@ -445,32 +447,6 @@ const LoadingMain = styled('div')`
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-`;
-
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-const translate = keyframes`
-  0% {
-    transform: translateY(0px);
-  }
-  25% {
-	transform: translateY(5px);
-  }
-  50% {
-	transform: translateY(0px);
-  }
-  75% {
-	transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 `;
 
 export const LoadingLogo = styled(InyoLogo)`

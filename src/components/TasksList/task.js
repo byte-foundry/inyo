@@ -364,7 +364,7 @@ export function TaskInfosInputs({
 		).length;
 	}
 
-	let unitToDisplay = item.timeItTook !== null ? item.timeItTook : item.unit;
+	let unitToDisplay = item.timeItTook === null ? item.unit : item.timeItTook;
 
 	let unitInHours = false;
 

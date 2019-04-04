@@ -119,7 +119,7 @@ export default function ProjectHeader({projectId, customerToken}) {
 	}
 
 	const totalTimeItTook = finishedItems.reduce(
-		(totalTimeItTook, item) => totalTimeItTook
+		(totalTimeItTookAcc, item) => totalTimeItTookAcc
 			+ (getCustomerOffsetedTimeItTook(item) || item.unit)
 			+ 1,
 		0,
@@ -132,7 +132,9 @@ export default function ProjectHeader({projectId, customerToken}) {
 	const timeItTookPercentage = totalTimeItTook / (totalTimePlanned || 1);
 
 	const timeItTook = finishedItems.reduce(
-		(totalTimeItTook, item) => totalTimeItTook + getCustomerOffsetedTimeItTook(item) - item.unit,
+		(totalTimeItTookAcc, item) => totalTimeItTookAcc
+			+ getCustomerOffsetedTimeItTook(item)
+			- item.unit,
 		0,
 	);
 

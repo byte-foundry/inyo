@@ -1,4 +1,4 @@
-import React, {Suspense, useState, useContext} from 'react';
+import React, {Suspense, useState} from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import styled from '@emotion/styled';

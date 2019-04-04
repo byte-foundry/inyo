@@ -243,12 +243,12 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 															name: section.name,
 															items: section.items.map(
 																({
-																	name,
+																	name: sectionName,
 																	unit,
 																	description,
 																	type,
 																}) => ({
-																	name,
+																	name: sectionName,
 																	unit,
 																	description,
 																	type,

@@ -59,7 +59,7 @@ const cache = new InMemoryCache({
 	// 	}),
 });
 
-const errorLink = onError(({networkError, graphQLErrors}) => {
+const errorLink = onError(({graphQLErrors}) => {
 	if (graphQLErrors) {
 		graphQLErrors.forEach((error) => {
 			if (!error.extensions) {

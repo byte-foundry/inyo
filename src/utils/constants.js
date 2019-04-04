@@ -5,15 +5,6 @@ import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
 import TaskCustomerIconValidatedUrl from './icons/taskicon-customer-validated.svg';
-import CustomerReminderIconUrl, {
-	ReactComponent as CustomerReminderIcon,
-} from './icons/customer-reminder.svg';
-import UserReminderIconUrl, {
-	ReactComponent as UserReminderIcon,
-} from './icons/user-reminder.svg';
-import ValidationIconUrl, {
-	ReactComponent as ValidationIcon,
-} from './icons/validation.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';

@@ -33,6 +33,7 @@ import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
 import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
+import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
@@ -189,8 +190,9 @@ const SidebarHeading = styled(SubHeading)`
 `;
 
 const Illus = styled('img')`
-	margin-top: 1rem;
-	max-width: 150px;
+	max-width: 80%;
+	max-height: 200px;
+	margin: 1rem auto;
 `;
 
 const PencilElem = styled(Pencil)`
@@ -328,6 +330,7 @@ const SidebarProjectInfos = ({
 								closeModal={() => askNotifyActivityConfirm.resolve(false)
 								}
 							>
+								<Illus src={noNotificationsIllus} />
 								<P>
 									En décochant cette option, votre client ne
 									recevra aucune notification de l'avancée de

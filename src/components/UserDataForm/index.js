@@ -11,6 +11,7 @@ import {UPDATE_USER, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
 import {gray20, ErrorInput} from '../../utils/content';
 import {Button, primaryWhite} from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
+import userIllus from '../../utils/images/bermuda-coming-soon.svg';
 
 import {BREAKPOINTS} from '../../utils/constants';
 
@@ -22,6 +23,7 @@ const FormContainer = styled('div')`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 20px;
+	flex: 1;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: flex;
@@ -33,6 +35,8 @@ const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
+	display: flex;
+	flex-direction: row;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding: 0;
@@ -49,6 +53,11 @@ const UpdateButton = styled(Button)`
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-right: 0;
 	}
+`;
+
+const Illus = styled('img')`
+	margin-right: 2rem;
+	align-self: end;
 `;
 
 const UserDataForm = (componentProps) => {
@@ -149,6 +158,7 @@ const UserDataForm = (componentProps) => {
 					return (
 						<form onSubmit={handleSubmit}>
 							<ProfileSection>
+								<Illus src={userIllus} />
 								<FormContainer>
 									<FormElem
 										{...props}

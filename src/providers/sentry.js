@@ -2,61 +2,73 @@ import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import * as Sentry from '@sentry/browser';
 import styled from '@emotion/styled';
-import {
-	FlexRow, P, Button, gray70, gray10,
-} from '../utils/content';
-import thumbDownIcon from '../utils/icons/thumbDown.svg';
+import {FlexRow, gray70, gray10} from '../utils/content';
+import errorIllus from '../utils/images/bermuda-fatal-error.svg';
 import {ReactComponent as AppLogo} from '../utils/icons/appLogo.svg';
+import {
+	primaryPurple,
+	primaryBlack,
+	lightRed,
+	Heading,
+	Button,
+} from '../utils/new/design-system';
 
 const ReporterMain = styled('div')`
 	padding: 20px 40px;
 `;
 
 const ReporterRow = styled(FlexRow)`
-	position: absolute;
-	left: 0;
-	top: 50%;
-	right: 0;
-	transform: translateY(-50%);
-	height: 40vh;
+	flex-direction: column;
 	padding: 5%;
-	background: ${gray10};
-	align-items: center;
 `;
 
-const ErrorTitle = styled('div')`
-	position: absolute;
-	top: 83%;
-	left: 0px;
-	font-size: 70px;
-	color: #171a44;
-	transform: rotate(-90deg);
-	text-transform: uppercase;
-	transform-origin: left;
+const ErrorTitle = styled(Heading)`
+	color: ${primaryPurple};
 `;
 
 const ErrorText = styled('div')`
-	position: relative;
-	padding-left: 60px;
-	max-width: 75%;
+	margin: 0 auto;
+	max-width: 960px;
+	font-size: 1rem;
+	line-height: 1.6;
+	color: ${primaryBlack};
+	text-align: center;
 `;
 
-const ReporterIcon = styled('div')`
-	height: 100%;
-	width: 25%;
-	background-image: url("${thumbDownIcon}");
-	background-size: 75%;
-	background-repeat: no-repeat;
-	background-position: left center;
+const Illus = styled('img')`
+	height: 30vh;
+	margin-bottom: 2rem;
 `;
 
 const ErrorCode = styled('pre')`
-	border: 1px solid ${gray70};
-	padding: 15px 16px;
-	margin-top: 10px;
+	background: ${lightRed};
+	border-radius: 8px;
+	padding: 1rem;
+	margin: 1.5rem 0;
 	display: block;
-	max-height: 200px;
 	overflow: auto;
+`;
+
+const A = styled('a')`
+	font-size: inherit;
+	color: ${primaryPurple};
+	cursor: pointer;
+`;
+
+const LinkButton = styled(Link)`
+	font-size: 14px;
+	font-weight: 500;
+	padding: 0.8rem 1.6rem;
+	color: ${primaryPurple};
+	border: 1px solid ${primaryPurple};
+	border-radius: 30px;
+	cursor: pointer;
+	text-decoration: none;
+
+	&:hover {
+		background-color: ${primaryPurple};
+		color: white;
+	}
 `;
 
 class SentryReporter extends Component {
@@ -82,40 +94,33 @@ class SentryReporter extends Component {
 				<ReporterMain>
 					<AppLogo />
 					<ReporterRow>
-						<ReporterIcon />
+						<Illus src={errorIllus} />
 						<ErrorText>
-							<ErrorTitle>Erreur</ErrorTitle>
-							<P>
-								Nous sommes désolés, quelque chose ne s'est pas
-								passé comme prévu.
-							</P>
-							<P>
-								Nous vous invitons à{' '}
-								<Link
-									to="/app"
-									onClick={() => {
-										this.setState({error: null});
-									}}
-								>
-									revenir à la page d'accueil
-								</Link>
-								. Si vous souhaitez nous aider, vous pouvez
-								aussi nous{' '}
-								<Button
-									theme="Link"
-									size="XSmall"
+							<ErrorTitle>
+								Quelque chose ne s'est pas passé comme prévu.
+							</ErrorTitle>
+							<div>
+								Si vous souhaitez nous aider, vous pouvez nous{' '}
+								<A
 									onClick={() => {
 										Sentry.showReportDialog();
 									}}
 								>
 									transmettre cette erreur
-								</Button>
-								.
-							</P>
-							<P>Voici l'erreur en question :</P>
+								</A>
+								. Voici l'erreur en question :
+							</div>
 							<ErrorCode>
 								<code>{this.state.error.toString()}</code>
 							</ErrorCode>
+							<LinkButton
+								to="/app"
+								onClick={() => {
+									this.setState({error: null});
+								}}
+							>
+								Revenir à la page d'accueil
+							</LinkButton>
 						</ErrorText>
 					</ReporterRow>
 				</ReporterMain>

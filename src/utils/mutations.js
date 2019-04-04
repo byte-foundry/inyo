@@ -344,9 +344,33 @@ export const START_PROJECT = gql`
 	}
 `;
 
+export const ARCHIVE_PROJECT = gql`
+	mutation archiveProject($projectId: ID!) {
+		archiveProject(id: $projectId) {
+			id
+		}
+	}
+`;
+
+export const UNARCHIVE_PROJECT = gql`
+	mutation unarchiveProject($projectId: ID!) {
+		unarchiveProject(id: $projectId) {
+			id
+		}
+	}
+`;
+
 export const REMOVE_PROJECT = gql`
 	mutation removeProject($projectId: ID!) {
 		removeProject(id: $projectId) {
+			id
+		}
+	}
+`;
+
+export const UNREMOVE_PROJECT = gql`
+	mutation unremoveProject($projectId: ID!) {
+		unremoveProject(id: $projectId) {
 			id
 		}
 	}

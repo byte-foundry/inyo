@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled/macro';
 import {withRouter} from 'react-router-dom';
-import {useQuery} from 'react-apollo-hooks';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
 
 import TasksProgressBar from '../../../components/TasksProgressBar';
@@ -9,8 +9,10 @@ import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
+import {ModalContainer, ModalElem, ModalActions} from '../../../utils/content';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
+import {REMOVE_PROJECT, ARCHIVE_PROJECT} from '../../../utils/mutations';
 import {
 	Main,
 	Container,
@@ -22,6 +24,8 @@ import {
 	lightGrey,
 	accentGrey,
 	primaryRed,
+	Heading,
+	P,
 } from '../../../utils/new/design-system';
 
 const SmallContent = styled(Content)`
@@ -125,19 +129,30 @@ const ArchiveButton = styled(Button)`
 `;
 
 function Projects({history}) {
+	const [removeProjectModal, setRemoveProjectModal] = useState(false);
+	const [projectId, setProjectId] = useState(false);
 	const {
 		data: {
 			me: {projects},
 		},
 		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS);
+	const removeProject = useMutation(REMOVE_PROJECT);
+	const archiveProject = useMutation(ARCHIVE_PROJECT);
+
+	const unarchivedProject = projects.filter(
+		project => project.status !== 'ARCHIVED',
+	);
+	const archivedProject = projects.filter(
+		project => project.status == 'ARCHIVED',
+	);
 
 	return (
 		<Container>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<Main>
 				<SmallContent>
-					{projects.map(project => (
+					{unarchivedProject.map(project => (
 						<ProjectItem
 							onClick={() => history.push(
 								`/app/tasks?projectId=${project.id}`,
@@ -148,13 +163,24 @@ function Projects({history}) {
 								<ProjectTitle>{project.name}</ProjectTitle>
 								<ActionsIconContainer>
 									<TrashButton
-										// onClick={onClickTrash}
+										onClick={(e) => {
+											e.stopPropagation();
+											setRemoveProjectModal(true);
+											setProjectId(project.id);
+										}}
 										data-tip="Supprimer ce projet"
 									>
 										<TrashIcon />
 									</TrashButton>
 									<ArchiveButton
-										// onClick={onClickArchive}
+										onClick={(e) => {
+											e.stopPropagation();
+											archiveProject({
+												variables: {
+													projectId: project.id,
+												},
+											});
+										}}
 										data-tip="Archiver ce projet"
 									>
 										<ArchiveIcon />
@@ -166,6 +192,56 @@ function Projects({history}) {
 					))}
 				</SmallContent>
 			</Main>
+			{removeProjectModal && (
+				<ModalContainer onDismiss={() => setRemoveProjectModal(false)}>
+					<ModalElem>
+						<Heading>
+							Êtes-vous sûr de vouloir supprimer ce projet ?
+						</Heading>
+						<P>
+							En ce supprimant ce projet vous perdrez toutes les
+							données.
+						</P>
+						<P>
+							Cette option est présente pour supprimer un projet
+							créé par erreur.
+						</P>
+						<P>
+							Pour les projets terminés, préférez l'archivage :)
+						</P>
+						<ModalActions>
+							<Button
+								grey
+								onClick={() => setRemoveProjectModal(false)}
+							>
+								Annuler
+							</Button>
+							<Button
+								primary
+								onClick={() => archiveProject({
+									variables: {
+										projectId,
+									},
+								})
+								}
+							>
+								Archiver le projet
+							</Button>
+							<Button
+								red
+								onClick={() => removeProject({
+									variables: {
+										projectId,
+									},
+								})
+								}
+							>
+								Supprimer le projet
+							</Button>
+						</ModalActions>
+					</ModalElem>
+				</ModalContainer>
+			)}
 		</Container>
 	);
 }

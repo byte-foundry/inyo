@@ -15,6 +15,7 @@ import ResetPasswordForm from '../../components/ResetPasswordForm';
 
 import {ReactComponent as AppLogo} from '../../utils/icons/appLogo.svg';
 import AuthIllus from '../../utils/icons/illustration-inyo.gif';
+import SuccessIllus from '../../utils/images/bermuda-success.svg';
 
 import {BREAKPOINTS} from '../../utils/constants';
 
@@ -55,10 +56,6 @@ const AuthText = styled('div')`
 	min-height: fill-content;
 	width: 60%;
 	padding: 40px 40px 40px;
-	background-image: url(${AuthIllus});
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center bottom;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		background: none;
@@ -86,6 +83,11 @@ const TextContent = styled(P)`
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
 	}
+`;
+
+const Illus = styled('img')`
+	max-width: 60%;
+	margin: 0 auto;
 `;
 
 function Auth() {
@@ -136,6 +138,7 @@ function Auth() {
 			</AuthForm>
 			<AuthText>
 				<AuthTextContent>
+					<Illus src={SuccessIllus} />
 					<TextTitle>Créez votre compte gratuitement</TextTitle>
 					<TextContent>
 						Optimisez votre temps en automatisant des tâches

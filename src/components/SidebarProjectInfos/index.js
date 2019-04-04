@@ -32,6 +32,8 @@ import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
+import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
+import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
 
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {UPDATE_PROJECT} from '../../utils/mutations';
@@ -187,6 +189,12 @@ const SidebarHeading = styled(SubHeading)`
 	margin-bottom: 10px;
 `;
 
+const Illus = styled('img')`
+	max-width: 80%;
+	max-height: 200px;
+	margin: 1rem auto;
+`;
+
 const PencilElem = styled(Pencil)`
 	cursor: pointer;
 	width: 15px;
@@ -322,6 +330,7 @@ const SidebarProjectInfos = ({
 								closeModal={() => askNotifyActivityConfirm.resolve(false)
 								}
 							>
+								<Illus src={noNotificationsIllus} />
 								<P>
 									En décochant cette option, votre client ne
 									recevra aucune notification de l'avancée de
@@ -350,9 +359,12 @@ const SidebarProjectInfos = ({
 						</Button>
 					</>
 				) : (
-					<Button icon="+" onClick={() => setEditCustomer(true)}>
-						Ajouter un client
-					</Button>
+					<>
+						<Button icon="+" onClick={() => setEditCustomer(true)}>
+							Ajouter un client
+						</Button>
+						<Illus src={noClientIllus} />
+					</>
 				)}
 
 				{isEditingCustomer && (

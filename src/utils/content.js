@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 
 import '@reach/dialog/styles.css';
 import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
-import {primaryRed, primaryBlack} from './new/design-system';
+import {primaryRed, primaryBlack, primaryGrey} from './new/design-system';
 import {BREAKPOINTS} from './constants';
 
 const shevy = new Shevy({
@@ -77,7 +77,9 @@ export const H6 = styled('h6')`
 `;
 export const P = styled('p')`
 	${content};
-	color: ${primaryBlack};
+	color: ${primaryGrey};
+	font-size: 1rem;
+	line-height: 1.6;
 `;
 export const Ol = styled('ol')`
 	${content};

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 
 import TaskRemindersList from '../TaskRemindersList';
+import noRemindersIllus from '../../utils/images/bermuda-done.svg';
 
 import {
 	Aside,
@@ -19,10 +20,22 @@ import {GET_REMINDERS} from '../../utils/queries';
 const DashboardAside = styled(Aside)`
 	padding-right: 0;
 	padding-left: 4rem;
+<<<<<<< HEAD
 	width: 320px;
+=======
+	max-width: 320px;
+	flex: 0 0 320px;
+	display: flex;
+>>>>>>> feat/illus
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
+	}
+
+	img {
+		align-self: center;
+		max-width: 40%;
+		margin: 1rem 30%;
 	}
 `;
 
@@ -133,6 +146,7 @@ const SidebarDashboardInfos = () => {
 						/>
 					) : (
 						<NoReminders>
+							<img src={noRemindersIllus} />
 							Aucune tâches client n’ont été activées pour le
 							moment
 						</NoReminders>

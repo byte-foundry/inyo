@@ -12,6 +12,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+img {
+	max-width: 100%;
+}
+
 input,
 label,
 select,

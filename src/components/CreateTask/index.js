@@ -26,11 +26,7 @@ const TaskInputContainer = styled('div')`
 
 const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
 
-const CreateTask = ({
-	setProjectSelected,
-	setCustomerSelected,
-	currentProjectId,
-}) => {
+const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);

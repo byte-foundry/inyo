@@ -9,12 +9,31 @@ import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 
 import {Main, Container, Content} from '../../../utils/new/design-system';
 
-function Dashboard() {
+function Dashboard({history}) {
+	const setProjectSelected = (selected, removeCustomer) => {
+		const newQuery = new URLSearchParams();
+
+		if (selected) {
+			const {value: selectedProjectId} = selected;
+
+			newQuery.set('projectId', selectedProjectId);
+		}
+		else if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		if (removeCustomer) {
+			newQuery.delete('customerId');
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
 	return (
 		<Container>
 			<Main>
 				<Content>
-					<CreateTask />
+					<CreateTask setProjectSelected={setProjectSelected} />
 					<Tasks />
 				</Content>
 				<SidebarDashboardInfos baseUrl="app/dashboard" />

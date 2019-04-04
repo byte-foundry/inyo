@@ -9,7 +9,7 @@ import TopBar, {
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
-			<TopBarLogo />
+			<TopBarLogo to="/app/dashboard" />
 			<TopBarMenu>
 				<TopBarMenuLink
 					data-tip="Tâches prioritaires"

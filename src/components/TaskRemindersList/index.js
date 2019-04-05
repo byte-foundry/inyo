@@ -17,6 +17,7 @@ import {
 	mediumGrey,
 	Button,
 } from '../../utils/new/design-system';
+import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import {CANCEL_REMINDER} from '../../utils/mutations';
 
 const ReminderList = styled('div')`
@@ -184,6 +185,9 @@ function TaskRemindersList({
 										</Delete>
 									)}
 								</ReminderCancel>
+								{reminder.status === 'PENDING' && (
+									<ReminderTestEmailButton reminder={reminder} />
+								)}
 							</ReminderActions>
 						</ReminderContainer>
 					);

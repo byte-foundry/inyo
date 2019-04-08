@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env REACT_APP_INYO_ENV=development react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "storybook": "start-storybook"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,7 +66,10 @@
     "yup": "^0.26.6"
   },
   "devDependencies": {
+    "@storybook/react": "^5.0.6",
+    "@storybook/theming": "^5.0.6",
     "cross-env": "^5.2.0",
+    "emotion-theming": "^10.0.10",
     "husky": "^1.1.2",
     "lint-staged": "^8.1.5",
     "prettier": "^1.14.3",

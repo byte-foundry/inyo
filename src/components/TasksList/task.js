@@ -283,14 +283,13 @@ const TaskInfos = styled('div')`
 
 const SetTimeContainer = styled('div')`
 	display: flex;
-	margin-right: 10px;
+	margin-right: 1rem;
 `;
 
 const SetTimeInfos = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
-	margin-right: 10px;
-	text-align: right;
+	margin-right: 1rem;
 `;
 
 const SetTimeHeadline = styled('div')`
@@ -624,7 +623,6 @@ function Task({
 		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
 			<TaskIcon
-				data-tip={isFinishable && 'Marquer la tâche comme faite'}
 				status={item.status}
 				type={item.type}
 				noData={noData}
@@ -659,6 +657,12 @@ function Task({
 				>
 					{setTimeItTook && (
 						<SetTimeContainer ref={setTimeItTookRef}>
+							<UnitInput
+								unit={item.unit}
+								onBlur={() => {}}
+								onSubmit={finishItemCallback}
+								cancel={() => setSetTimeItTook(false)}
+							/>
 							<SetTimeInfos>
 								<SetTimeHeadline>
 									Temps réellement passé
@@ -667,13 +671,6 @@ function Task({
 									Uniquement visible par vous
 								</SetTimeCaption>
 							</SetTimeInfos>
-							<UnitInput
-								unit={item.unit}
-								onBlur={() => {}}
-								onSubmit={finishItemCallback}
-								withButton
-								cancel={() => setSetTimeItTook(false)}
-							/>
 						</SetTimeContainer>
 					)}
 					{item.name ? (

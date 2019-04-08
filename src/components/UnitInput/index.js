@@ -14,7 +14,6 @@ import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const UnitInputContainer = styled('div')`
 	display: flex;
-	margin-right: 10px;
 	position: relative;
 `;
 

@@ -9,10 +9,19 @@ import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
-import {ModalContainer, ModalElem, ModalActions} from '../../../utils/content';
+import {
+	ModalContainer,
+	ModalElem,
+	ModalActions,
+	FlexRow,
+} from '../../../utils/content';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
-import {REMOVE_PROJECT, ARCHIVE_PROJECT} from '../../../utils/mutations';
+import {
+	REMOVE_PROJECT,
+	ARCHIVE_PROJECT,
+	UNARCHIVE_PROJECT,
+} from '../../../utils/mutations';
 import {
 	Main,
 	Container,
@@ -83,6 +92,13 @@ const ProjectItem = styled('div')`
 	cursor: pointer;
 	position: relative;
 	margin-bottom: 0.5rem;
+	background: ${props => (props.archived ? lightGrey : 'transparent')};
+	${props => props.archived
+		&& `
+			margin: 0px -10px 0.5rem;
+			border-radius: 5px;
+			padding: 10px;
+	`}
 
 	:hover ${ProjectTitle} {
 		color: ${primaryPurple};
@@ -128,9 +144,14 @@ const ArchiveButton = styled(Button)`
 	}
 `;
 
+const ButtonsRow = styled(FlexRow)`
+	margin-bottom: 1.5rem;
+`;
+
 function Projects({history}) {
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
+	const [seeArchived, setSeeArchived] = useState(false);
 	const {
 		data: {
 			me: {projects},
@@ -139,6 +160,7 @@ function Projects({history}) {
 	} = useQuery(GET_ALL_PROJECTS);
 	const removeProject = useMutation(REMOVE_PROJECT);
 	const archiveProject = useMutation(ARCHIVE_PROJECT);
+	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
 
 	const unarchivedProject = projects.filter(
 		project => project.status !== 'ARCHIVED',
@@ -152,6 +174,18 @@ function Projects({history}) {
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<Main>
 				<SmallContent>
+					<ButtonsRow>
+						{!seeArchived && (
+							<Button onClick={() => setSeeArchived(true)}>
+								Voir tous les projets
+							</Button>
+						)}
+						{seeArchived && (
+							<Button onClick={() => setSeeArchived(false)}>
+								Voir uniquement les projets en cours
+							</Button>
+						)}
+					</ButtonsRow>
 					{unarchivedProject.map(project => (
 						<ProjectItem
 							onClick={() => history.push(
@@ -190,6 +224,55 @@ function Projects({history}) {
 							<TasksProgressBar project={project} />
 						</ProjectItem>
 					))}
+					{seeArchived && (
+						<>
+							<SubHeading>Projets archivés</SubHeading>
+							{archivedProject.map(project => (
+								<ProjectItem
+									onClick={() => history.push(
+										`/app/tasks?projectId=${
+											project.id
+										}`,
+									)
+									}
+									archived
+								>
+									<ProjectHeader>
+										<ProjectTitle>
+											{project.name}
+										</ProjectTitle>
+										<ActionsIconContainer>
+											<TrashButton
+												onClick={(e) => {
+													e.stopPropagation();
+													setRemoveProjectModal(true);
+													setProjectId(project.id);
+												}}
+												data-tip="Supprimer ce projet"
+											>
+												<TrashIcon />
+											</TrashButton>
+											<ArchiveButton
+												onClick={(e) => {
+													e.stopPropagation();
+													unarchiveProject({
+														variables: {
+															projectId:
+																project.id,
+														},
+													});
+												}}
+												data-tip="Désarchiver ce projet"
+											>
+												<ArchiveIcon />
+											</ArchiveButton>
+										</ActionsIconContainer>
+									</ProjectHeader>
+									<TasksProgressBar project={project} />
+								</ProjectItem>
+							))}
+						</>
+					)}
 				</SmallContent>
 			</Main>
 			{removeProjectModal && (

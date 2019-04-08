@@ -12,7 +12,7 @@ import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import DescriptionIcon from '../../utils/icons/descriptionicon.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
-import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
+import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 import {
 	Button,
@@ -81,6 +81,7 @@ export const TaskContainer = styled('div')`
 const TaskAdd = styled('div')``;
 
 const TaskIcon = styled('div')`
+	cursor: pointer;
 	width: 1.75rem;
 	height: 1.75rem;
 	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
@@ -251,6 +252,7 @@ const TaskInfos = styled('div')`
 
 const SetTimeContainer = styled('div')`
 	display: flex;
+	margin-right: 10px;
 `;
 
 const SetTimeInfos = styled('div')`
@@ -272,6 +274,7 @@ const SetTimeCaption = styled('div')`
 	font-size: 12px;
 	font-style: italic;
 	line-height: 1.3;
+	white-space: nowrap;
 `;
 
 const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
@@ -546,6 +549,7 @@ function Task({
 	baseUrl = 'tasks',
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
+	const unfinishItem = useMutation(UNFINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
@@ -580,13 +584,67 @@ function Task({
 		= (item.status !== 'FINISHED'
 			&& (!customerToken && !isCustomerTask(item)))
 		|| (customerToken && isCustomerTask(item));
+	const isUnfinishable
+		= (item.status === 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item)))
+		|| (customerToken && isCustomerTask(item));
 
 	return (
 		<TaskContainer isDraggable={isDraggable}>
 			<TaskAdd />
-			<TaskIcon status={item.status} type={item.type} noData={noData} />
+			<TaskIcon
+				data-tip={isFinishable && 'Marquer la tâche comme faite'}
+				status={item.status}
+				type={item.type}
+				noData={noData}
+				onClick={() => {
+					if (!isFinishable && !isUnfinishable) return;
+
+					if (isFinishable) {
+						if (customerToken) {
+							finishItemCallback(item.unit);
+						}
+						else {
+							setSetTimeItTook(true);
+						}
+					}
+					else if (isUnfinishable) {
+						unfinishItem({
+							variables: {
+								itemId: item.id,
+								token: customerToken,
+							},
+						});
+					}
+				}}
+			/>
 			<TaskContent noData={noData}>
-				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
+				<TaskHeader
+					data-tip={
+						!setTimeItTook
+							? 'Cliquer pour voir le contenu de la tâche'
+							: undefined
+					}
+				>
+					{setTimeItTook && (
+						<SetTimeContainer ref={setTimeItTookRef}>
+							<SetTimeInfos>
+								<SetTimeHeadline>
+									Temps réellement passé
+								</SetTimeHeadline>
+								<SetTimeCaption>
+									Uniquement visible par vous
+								</SetTimeCaption>
+							</SetTimeInfos>
+							<UnitInput
+								unit={item.unit}
+								onBlur={() => {}}
+								onSubmit={finishItemCallback}
+								withButton
+								cancel={() => setSetTimeItTook(false)}
+							/>
+						</SetTimeContainer>
+					)}
 					{item.name ? (
 						<TaskHeadingLink
 							noData={noData}
@@ -613,58 +671,20 @@ function Task({
 						</TaskHeadingPlaceholder>
 					)}
 					<TaskActions stayActive={setTimeItTook}>
-						{setTimeItTook ? (
-							<SetTimeContainer ref={setTimeItTookRef}>
-								<SetTimeInfos>
-									<SetTimeHeadline>
-										Temps réellement passé
-									</SetTimeHeadline>
-									<SetTimeCaption>
-										Uniquement visible par vous
-									</SetTimeCaption>
-								</SetTimeInfos>
-								<UnitInput
-									unit={item.unit}
-									onBlur={() => {}}
-									onSubmit={finishItemCallback}
-									withButton
-									cancel={() => setSetTimeItTook(false)}
-								/>
-							</SetTimeContainer>
-						) : (
-							<>
-								<OpenBtn
-									data-tip="Description, détails, commentaires, etc."
-									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
-										state: {prevSearch: location.search},
-									}}
-								>
-									Ouvrir
-								</OpenBtn>
-								{isFinishable && (
-									<Button
-										data-tip="Marquer la tâche comme faite"
-										icon="✓"
-										onClick={() => {
-											if (customerToken) {
-												finishItemCallback(item.unit);
-											}
-											else {
-												setSetTimeItTook(true);
-											}
-										}}
-									>
-										Fait
-									</Button>
-								)}
-							</>
-						)}
+						<OpenBtn
+							data-tip="Description, détails, commentaires, etc."
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
+						>
+							Ouvrir
+						</OpenBtn>
 					</TaskActions>
 				</TaskHeader>
-				{!noData && (
+				{!noData && !setTimeItTook && (
 					<TaskInfosInputs
 						taskUrlPrefix={taskUrlPrefix}
 						baseUrl={baseUrl}

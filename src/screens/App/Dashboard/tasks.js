@@ -45,7 +45,9 @@ const DashboardTasks = () => {
 	const itemsToDo = tasks.filter(task => task.isFocused);
 
 	const itemsToDoLater = tasks.filter(
-		task => !task.isFocused && task.status === 'PENDING',
+		task => !task.isFocused
+			&& task.status === 'PENDING'
+			&& (!task.section || task.section.project.status === 'ONGOING'),
 	);
 
 	return (

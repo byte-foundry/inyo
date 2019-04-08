@@ -7,6 +7,7 @@ import ReactTooltip from 'react-tooltip';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
+import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
 import {
@@ -14,6 +15,7 @@ import {
 	ModalElem,
 	ModalActions,
 	FlexRow,
+	FlexColumn,
 } from '../../../utils/content';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
@@ -148,6 +150,17 @@ const ButtonsRow = styled(FlexRow)`
 	margin-bottom: 1.5rem;
 `;
 
+const EmptyProjectList = styled(FlexColumn)`
+	align-items: center;
+	margin: auto;
+	width: 305px;
+	margin-top: 1rem;
+`;
+
+const SubHeadingProject = styled(SubHeading)`
+	margin-bottom: 1.5rem;
+`;
+
 function Projects({history}) {
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
@@ -163,7 +176,7 @@ function Projects({history}) {
 	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
 
 	const unarchivedProject = projects.filter(
-		project => project.status !== 'ARCHIVED',
+		project => project.status !== 'ARCHIVED' && project.status !== 'REMOVED',
 	);
 	const archivedProject = projects.filter(
 		project => project.status == 'ARCHIVED',
@@ -186,6 +199,7 @@ function Projects({history}) {
 							</Button>
 						)}
 					</ButtonsRow>
+					<SubHeadingProject>Projets en cours</SubHeadingProject>
 					{unarchivedProject.map(project => (
 						<ProjectItem
 							onClick={() => history.push(
@@ -226,7 +240,19 @@ function Projects({history}) {
 					))}
 					{seeArchived && (
 						<>
-							<SubHeading>Projets archivés</SubHeading>
+							<SubHeadingProject>
+								Projets archivés
+							</SubHeadingProject>
+							{archivedProject.length === 0 && (
+								<EmptyProjectList>
+									<img src={noArchivedIllus} height="300px" />
+									<P>
+										Une fois vos projets terminés,
+										archivez-les pour vous concentrer sur
+										les projets en cours.
+									</P>
+								</EmptyProjectList>
+							)}
 							{archivedProject.map(project => (
 								<ProjectItem
 									onClick={() => history.push(

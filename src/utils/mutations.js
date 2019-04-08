@@ -832,3 +832,9 @@ export const CANCEL_REMINDER = gql`
 		}
 	}
 `;
+
+export const SEND_REMINDER_TEST_EMAIL = gql`
+	mutation sendReminderTestEmail($id: ID!) {
+		sent: sendReminderTestEmail(id: $id)
+	}
+`;

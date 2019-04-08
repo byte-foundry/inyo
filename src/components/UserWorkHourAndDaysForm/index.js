@@ -11,11 +11,7 @@ import {BREAKPOINTS} from '../../utils/constants';
 
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
-	FlexColumn,
-	primaryWhite,
-	gray20,
-	ErrorInput,
-	Label,
+	primaryWhite, gray20, ErrorInput, Label,
 } from '../../utils/content';
 import {Button} from '../../utils/new/design-system';
 import FormSelect from '../FormSelect';
@@ -29,10 +25,14 @@ const UserWorkHourAndDaysFormMain = styled('div')``;
 
 const FormContainer = styled('div')`
 	flex: 1;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	align-items: center;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: flex;
 		flex-direction: column;
+		align-items: stretch;
 	}
 `;
 
@@ -48,17 +48,6 @@ const ProfileSection = styled('div')`
 		padding: 0;
 		border: none;
 	}
-`;
-
-const FlexColumnWrap = styled(FlexColumn)`
-	flex-direction: row;
-	justify-content: space-between;
-	flex: 1;
-`;
-
-const Wrap = styled('div')`
-	flex-direction: column;
-	flex: 1;
 `;
 
 const UpdateButton = styled(Button)`
@@ -95,6 +84,7 @@ const Emoji = styled('div')`
 const Illus = styled('img')`
 	margin-right: 2rem;
 	align-self: end;
+	grid-row: 4 / 8;
 `;
 
 class UserWorkHourAndDaysForm extends Component {
@@ -244,111 +234,108 @@ class UserWorkHourAndDaysForm extends Component {
 									<form onSubmit={handleSubmit}>
 										<ProfileSection>
 											<FormContainer>
-												<FlexColumnWrap>
-													<Illus src={workingIllus} />
-													<Wrap>
-														<Label>
-															Horaires de travail
-														</Label>
-														<DoubleRangeTimeInput
-															value={{
-																start: [
-																	startHour,
-																	startMinutes,
-																],
-																end: [
-																	endHour,
-																	endMinutes,
-																],
-															}}
-															setFieldValue={
-																setFieldValue
-															}
-														/>
-														<EmojiTimeline>
-															<Emoji offset={0}>
-																🌙
-															</Emoji>
-															<Emoji offset={33}>
-																☕
-															</Emoji>
-															<Emoji offset={50}>
-																🍽️
-															</Emoji>
-															<Emoji offset={87}>
-																🛌
-															</Emoji>
-															<Emoji offset={100}>
-																🌗
-															</Emoji>
-														</EmojiTimeline>
-														<Label>
-															Jours travaillés
-														</Label>
-														<WeekDaysInput
-															values={workingDays}
-															setFieldValue={
-																setFieldValue
-															}
-														/>
-														<Label>
-															Fuseau horaire
-														</Label>
-														<FormSelect
-															{...props}
-															name="timeZone"
-															placeholder="Triez par fuseau"
-															value={{
-																value:
+												<Illus src={workingIllus} />
+												<Label
+													style={{
+														gridColumn: '1 / 3',
+													}}
+												>
+													Horaires de travail
+												</Label>
+												<DoubleRangeTimeInput
+													style={{
+														gridColumn: '1 / 3',
+													}}
+													value={{
+														start: [
+															startHour,
+															startMinutes,
+														],
+														end: [
+															endHour,
+															endMinutes,
+														],
+													}}
+													setFieldValue={
+														setFieldValue
+													}
+												/>
+												<EmojiTimeline
+													style={{
+														gridColumn: '1 / 3',
+													}}
+												>
+													<Emoji offset={0}>🌙</Emoji>
+													<Emoji offset={33}>
+														☕
+													</Emoji>
+													<Emoji offset={50}>
+														🍽️
+													</Emoji>
+													<Emoji offset={87}>
+														🛌
+													</Emoji>
+													<Emoji offset={100}>
+														🌗
+													</Emoji>
+												</EmojiTimeline>
+												<Label>Jours travaillés</Label>
+												<WeekDaysInput
+													values={workingDays}
+													setFieldValue={
+														setFieldValue
+													}
+												/>
+												<Label>Fuseau horaire</Label>
+												<FormSelect
+													{...props}
+													name="timeZone"
+													placeholder="Triez par fuseau"
+													value={{
+														value:
+															timeZone
+															|| 'Europe/Paris',
+														label: `${timeZone
+															|| 'Europe/Paris'} (${
+															getUTCOffset(
+																Date.now(),
+																findTimeZone(
 																	timeZone
-																	|| 'Europe/Paris',
-																label: `${timeZone
-																	|| 'Europe/Paris'} (${
-																	getUTCOffset(
+																		|| 'Europe/Paris',
+																),
+															).abbreviation
+														})`,
+													}}
+													options={timezones
+														.sort(
+															(a, b) => getUTCOffset(
+																Date.now(),
+																findTimeZone(
+																	a,
+																),
+															).offset
+																	- getUTCOffset(
 																		Date.now(),
 																		findTimeZone(
-																			timeZone
-																				|| 'Europe/Paris',
+																			b,
 																		),
-																	)
-																		.abbreviation
-																})`,
-															}}
-															options={timezones
-																.sort(
-																	(a, b) => getUTCOffset(
-																		Date.now(),
-																		findTimeZone(
-																			a,
-																		),
-																	)
-																		.offset
-																			- getUTCOffset(
-																				Date.now(),
-																				findTimeZone(
-																					b,
-																				),
-																			)
-																				.offset
-																		|| a - b,
-																)
-																.map(tz => ({
-																	value: tz,
-																	label: `${tz} (${
-																		getUTCOffset(
-																			Date.now(),
-																			findTimeZone(
-																				tz,
-																			),
-																		)
-																			.abbreviation
-																	})`,
-																}))}
-															hideSelectedOptions
-															isSearchable
-														/>
-													</Wrap>
-												</FlexColumnWrap>
+																	).offset
+																|| a - b,
+														)
+														.map(tz => ({
+															value: tz,
+															label: `${tz} (${
+																getUTCOffset(
+																	Date.now(),
+																	findTimeZone(
+																		tz,
+																	),
+																).abbreviation
+															})`,
+														}))}
+													hideSelectedOptions
+													isSearchable
+												/>
 											</FormContainer>
 											{status && status.msg && (
 												<ErrorInput>

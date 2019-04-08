@@ -22,8 +22,8 @@ const DayInput = styled('div')`
 	background: ${props => (props.active ? primaryBlue : 'transparent')};
 	color: ${props => (props.active ? primaryWhite : primaryBlue)};
 	border-radius: 50%;
-	width: 4.5rem;
-	height: 4.5rem;
+	width: 3.5rem;
+	height: 3.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;

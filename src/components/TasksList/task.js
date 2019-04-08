@@ -122,6 +122,37 @@ const TaskIcon = styled('div')`
 		bottom: -0.85rem;
 	}
 
+	&:hover {
+		background: center no-repeat
+			url(${(props) => {
+		const typeInfos
+					= ITEM_TYPES.find(t => t.type === props.type)
+					|| ITEM_TYPES[0];
+
+		let icon = typeInfos.iconUrl;
+
+		icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
+		return icon;
+	}});
+
+		animation: ${props => (props.status === itemStatuses.FINISHED ? 'none' : 'growth 300ms')};
+
+		@keyframes growth {
+			0% {
+				background-size: 0% auto;
+			}
+			50% {
+				background-size: 100% auto;
+			}
+			70% {
+				background-size: 80% auto;
+			}
+			100% {
+				background-size: 100% auto;
+			}
+		}
+	}
+
 	@media (max-width: ${BREAKPOINTS}px) {
 		transform: scale(0.6);
 		margin: 0 0.5rem 0 0;

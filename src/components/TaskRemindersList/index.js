@@ -53,8 +53,6 @@ const ReminderContainer = styled('div')`
 	align-items: center;
 	justify-content: space-between;
 
-	overflow: hidden;
-
 	&:hover {
 		color: ${primaryBlack};
 		svg {
@@ -100,7 +98,9 @@ const ReminderActions = styled('div')`
 	align-items: baseline;
 `;
 
-const ReminderCancel = styled('div')``;
+const ReminderCancel = styled('div')`
+	${props => props.noLink && 'margin-right: 10px;'}
+`;
 
 function TaskRemindersList({
 	reminders = [], small, baseUrl, history, noLink,
@@ -162,31 +162,39 @@ function TaskRemindersList({
 								>
 									{moment(reminder.sendingDate).fromNow()}
 								</ReminderDate>
-								<ReminderCancel
-									canceled={reminder.status === 'CANCELED'}
-									data-tip="Supprimer cette action automatique"
-								>
-									{reminder.status === 'CANCELED' && 'Annulé'}
-									{reminder.status === 'SENT' && 'Envoyé'}
-									{reminder.status !== 'CANCELED'
-										&& reminder.status !== 'SENT' && (
-										<Delete
-											link
-											small
-											onClick={() => {
-												cancelReminder({
-													variables: {
-														id: reminder.id,
-													},
-												});
-											}}
-										>
-												&times;
-										</Delete>
-									)}
-								</ReminderCancel>
 								{reminder.status === 'PENDING' && (
-									<ReminderTestEmailButton reminder={reminder} />
+									<ReminderCancel
+										noLink={noLink}
+										canceled={
+											reminder.status === 'CANCELED'
+										}
+										data-tip="Supprimer cette action automatique"
+									>
+										{reminder.status === 'CANCELED'
+											&& 'Annulé'}
+										{reminder.status === 'SENT' && 'Envoyé'}
+										{reminder.status !== 'CANCELED'
+											&& reminder.status !== 'SENT' && (
+											<Delete
+												link
+												small
+												onClick={() => {
+													cancelReminder({
+														variables: {
+															id: reminder.id,
+														},
+													});
+												}}
+											>
+													&times;
+											</Delete>
+										)}
+									</ReminderCancel>
+								)}
+								{noLink && reminder.status === 'PENDING' && (
+									<ReminderTestEmailButton
+										reminder={reminder}
+									/>
 								)}
 							</ReminderActions>
 						</ReminderContainer>

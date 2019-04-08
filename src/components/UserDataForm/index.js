@@ -21,9 +21,10 @@ const UserDataFormMain = styled('div')``;
 
 const FormContainer = styled('div')`
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	flex: 1;
+	align-items: center;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: flex;
@@ -58,6 +59,7 @@ const UpdateButton = styled(Button)`
 const Illus = styled('img')`
 	margin-right: 2rem;
 	align-self: end;
+	grid-row: 1 / 3;
 `;
 
 const UserDataForm = (componentProps) => {
@@ -158,8 +160,8 @@ const UserDataForm = (componentProps) => {
 					return (
 						<form onSubmit={handleSubmit}>
 							<ProfileSection>
-								<Illus src={userIllus} />
 								<FormContainer>
+									<Illus src={userIllus} />
 									<FormElem
 										{...props}
 										name="firstName"
@@ -187,7 +189,7 @@ const UserDataForm = (componentProps) => {
 										padded
 										required
 										style={{
-											gridColumn: '1 / 3',
+											gridColumn: '2 / 4',
 										}}
 									/>
 								</FormContainer>

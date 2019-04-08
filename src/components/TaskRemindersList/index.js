@@ -156,11 +156,18 @@ function TaskRemindersList({
 							<ReminderActions>
 								<ReminderDate
 									small={small}
-									data-tip={moment(
-										reminder.sendingDate,
-									).format('DD/MM/YYYY [à] HH:mm')}
+									data-tip={
+										reminder.status !== 'CANCELED'
+											? moment(
+												reminder.sendingDate,
+											  ).format('DD/MM/YYYY [à] HH:mm')
+											: undefined
+									}
 								>
-									{moment(reminder.sendingDate).fromNow()}
+									{reminder.status === 'PENDING'
+										&& moment(reminder.sendingDate).fromNow()}
+									{reminder.status === 'CANCELED' && 'Annulé'}
+									{reminder.status === 'SENT' && 'Envoyé'}
 								</ReminderDate>
 								{reminder.status === 'PENDING' && (
 									<ReminderCancel
@@ -170,25 +177,19 @@ function TaskRemindersList({
 										}
 										data-tip="Supprimer cette action automatique"
 									>
-										{reminder.status === 'CANCELED'
-											&& 'Annulé'}
-										{reminder.status === 'SENT' && 'Envoyé'}
-										{reminder.status !== 'CANCELED'
-											&& reminder.status !== 'SENT' && (
-											<Delete
-												link
-												small
-												onClick={() => {
-													cancelReminder({
-														variables: {
-															id: reminder.id,
-														},
-													});
-												}}
-											>
-													&times;
-											</Delete>
-										)}
+										<Delete
+											link
+											small
+											onClick={() => {
+												cancelReminder({
+													variables: {
+														id: reminder.id,
+													},
+												});
+											}}
+										>
+											&times;
+										</Delete>
 									</ReminderCancel>
 								)}
 								{noLink && reminder.status === 'PENDING' && (

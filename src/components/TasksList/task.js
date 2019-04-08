@@ -12,7 +12,7 @@ import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import DescriptionIcon from '../../utils/icons/descriptionicon.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
-import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
+import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 import {
 	Button,
@@ -549,6 +549,7 @@ function Task({
 	baseUrl = 'tasks',
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
+	const unfinishItem = useMutation(UNFINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
@@ -583,6 +584,10 @@ function Task({
 		= (item.status !== 'FINISHED'
 			&& (!customerToken && !isCustomerTask(item)))
 		|| (customerToken && isCustomerTask(item));
+	const isUnfinishable
+		= (item.status === 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item)))
+		|| (customerToken && isCustomerTask(item));
 
 	return (
 		<TaskContainer isDraggable={isDraggable}>
@@ -593,18 +598,34 @@ function Task({
 				type={item.type}
 				noData={noData}
 				onClick={() => {
-					if (!isFinishable) return;
+					if (!isFinishable && !isUnfinishable) return;
 
-					if (customerToken) {
-						finishItemCallback(item.unit);
+					if (isFinishable) {
+						if (customerToken) {
+							finishItemCallback(item.unit);
+						}
+						else {
+							setSetTimeItTook(true);
+						}
 					}
-					else {
-						setSetTimeItTook(true);
+					else if (isUnfinishable) {
+						unfinishItem({
+							variables: {
+								itemId: item.id,
+								token: customerToken,
+							},
+						});
 					}
 				}}
 			/>
 			<TaskContent noData={noData}>
-				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
+				<TaskHeader
+					data-tip={
+						!setTimeItTook
+							? 'Cliquer pour voir le contenu de la tâche'
+							: undefined
+					}
+				>
 					{setTimeItTook && (
 						<SetTimeContainer ref={setTimeItTookRef}>
 							<SetTimeInfos>

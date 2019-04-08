@@ -66,7 +66,8 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 	if (error) throw error;
 
 	const tasks = data.me.tasks.filter(
-		task => !filter || task.status === filter || filter === 'ALL',
+		task => (!filter || task.status === filter || filter === 'ALL')
+			&& (!task.section || task.section.project.status === 'ONGOING'),
 	);
 
 	// order by creation date

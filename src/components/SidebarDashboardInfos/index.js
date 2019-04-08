@@ -20,13 +20,9 @@ import {GET_REMINDERS} from '../../utils/queries';
 const DashboardAside = styled(Aside)`
 	padding-right: 0;
 	padding-left: 4rem;
-<<<<<<< HEAD
-	width: 320px;
-=======
 	max-width: 320px;
 	flex: 0 0 320px;
 	display: flex;
->>>>>>> feat/illus
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;

@@ -240,6 +240,7 @@ export const UPDATE_USER_COMPANY = gql`
 
 export const CREATE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
 
 	# creating project with a customer id or a new customer
 	mutation createProject(
@@ -272,6 +273,12 @@ export const CREATE_PROJECT = gql`
 			createdAt
 			status
 			total
+			sections {
+				id
+				items {
+					...ItemFragment
+				}
+			}
 		}
 	}
 `;
@@ -308,7 +315,6 @@ export const UPDATE_PROJECT = gql`
 			sections {
 				id
 				items {
-					id
 					...ItemFragment
 				}
 			}

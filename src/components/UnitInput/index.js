@@ -95,13 +95,7 @@ let outsideClosureState;
 // does not update the handler when state changes
 
 export default function ({
-	unit,
-	onBlur,
-	onSubmit,
-	onTab,
-	innerRef,
-	withButton,
-	cancel,
+	unit, onBlur, onSubmit, onTab, innerRef, withButton,
 }) {
 	const [isHours, setIsHours] = useState(false);
 	const inputRef = innerRef || useRef();

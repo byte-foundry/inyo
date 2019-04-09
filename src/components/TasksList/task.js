@@ -586,6 +586,7 @@ function Task({
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 
 	const setTimeItTookRef = useRef();
+	const setTimeItTookInputRef = useRef();
 
 	useOnClickOutside(setTimeItTookRef, () => {
 		setSetTimeItTook(false);
@@ -620,7 +621,7 @@ function Task({
 		|| (customerToken && isCustomerTask(item));
 
 	return (
-		<TaskContainer isDraggable={isDraggable}>
+		<TaskContainer isDraggable={isDraggable} ref={setTimeItTookRef}>
 			<TaskAdd />
 			<TaskIcon
 				status={item.status}
@@ -633,8 +634,15 @@ function Task({
 						if (customerToken) {
 							finishItemCallback(item.unit);
 						}
-						else {
+						else if (!setTimeItTook) {
 							setSetTimeItTook(true);
+						}
+						else {
+							debugger;
+							finishItemCallback(
+								parseFloat(setTimeItTookInputRef.current.value),
+							);
+							setSetTimeItTook(false);
 						}
 					}
 					else if (isUnfinishable) {
@@ -656,12 +664,12 @@ function Task({
 					}
 				>
 					{setTimeItTook && (
-						<SetTimeContainer ref={setTimeItTookRef}>
+						<SetTimeContainer>
 							<UnitInput
+								innerRef={setTimeItTookInputRef}
 								unit={item.unit}
 								onBlur={() => {}}
 								onSubmit={finishItemCallback}
-								cancel={() => setSetTimeItTook(false)}
 							/>
 							<SetTimeInfos>
 								<SetTimeHeadline>

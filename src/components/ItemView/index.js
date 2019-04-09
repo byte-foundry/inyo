@@ -10,7 +10,9 @@ import TaskStatusButton from '../TaskStatusButton';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 import Plural from '../Plural';
-import {gray50, gray70, LoadingLogo} from '../../utils/content';
+import {
+	gray50, gray70, LoadingLogo, FlexRow,
+} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 import MultilineEditable from '../MultilineEditable';
@@ -48,7 +50,6 @@ import {
 	primaryRed,
 	primaryGrey,
 } from '../../utils/new/design-system';
-import {FlexRow} from '../../utils/content';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled('div')``;
@@ -359,7 +360,11 @@ const Item = ({id, customerToken, close}) => {
 			</StickyHeader>
 			<Header>
 				<Title data-tip="Type et titre de la tâche">
-					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
+					<TaskHeadingIcon>
+						{item.status === 'FINISHED'
+							? typeInfo.iconValidated
+							: typeInfo.icon}
+					</TaskHeadingIcon>
 					<InlineEditable
 						disabled={!!customerToken}
 						editableCss={css`

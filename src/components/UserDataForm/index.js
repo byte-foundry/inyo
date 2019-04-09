@@ -62,7 +62,7 @@ const Illus = styled('img')`
 	grid-row: 1 / 3;
 `;
 
-const UserDataForm = (componentProps) => {
+const UserDataForm = ({done, ...componentProps}) => {
 	const {firstName, lastName, email} = componentProps.data;
 	const updateUser = useMutation(UPDATE_USER);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
@@ -115,21 +115,20 @@ const UserDataForm = (componentProps) => {
 									query: GET_USER_INFOS,
 								});
 
-								data.me = updatedUser;
-								try {
-									cache.writeQuery({
-										query: GET_USER_INFOS,
-										data,
-									});
-									ReactGA.event({
-										category: 'User',
-										action: 'Updated user data',
-									});
-									this.props.done();
-								}
-								catch (e) {
-									throw e;
-								}
+								data.me = {
+									...data.me,
+									...updatedUser,
+								};
+
+								cache.writeQuery({
+									query: GET_USER_INFOS,
+									data,
+								});
+								ReactGA.event({
+									category: 'User',
+									action: 'Updated user data',
+								});
+								done();
 							},
 						});
 					}

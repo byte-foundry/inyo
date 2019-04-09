@@ -1,6 +1,5 @@
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
-import {withApollo} from 'react-apollo';
+import {useMutation, useApolloClient} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import * as Sentry from '@sentry/browser';
 import styled from '@emotion/styled';
@@ -28,7 +27,8 @@ const SignupButton = styled(Button)`
 	margin-left: auto;
 `;
 
-const SignupForm = ({from, history, client}) => {
+const SignupForm = ({from, history}) => {
+	const client = useApolloClient();
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
 	const createProject = useMutation(CREATE_PROJECT);
@@ -91,11 +91,7 @@ const SignupForm = ({from, history, client}) => {
 
 							const {user} = data.signup;
 
-							const {
-								data: {
-									createProject: {id: onboardProjectId},
-								},
-							} = await createProject({
+							await createProject({
 								variables: {
 									template: 'BLANK',
 									customer: {
@@ -110,7 +106,7 @@ const SignupForm = ({from, history, client}) => {
 								},
 							});
 
-							const {} = await createCustomer({
+							await createCustomer({
 								variables: {
 									email: 'community@inyo.me',
 									name: 'Communauté Inyo',
@@ -208,4 +204,4 @@ const SignupForm = ({from, history, client}) => {
 	);
 };
 
-export default withApollo(SignupForm);
+export default SignupForm;

@@ -7,6 +7,7 @@ import ReactTooltip from 'react-tooltip';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
+import {ReactComponent as UnarchiveIcon} from '../../../utils/icons/unarchive-icon.svg';
 import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
@@ -147,7 +148,8 @@ const ArchiveButton = styled(Button)`
 `;
 
 const ButtonsRow = styled(FlexRow)`
-	margin-bottom: 1.5rem;
+	margin: 3rem 0;
+	justify-content: flex-end;
 `;
 
 const EmptyProjectList = styled(FlexColumn)`
@@ -188,16 +190,7 @@ function Projects({history}) {
 			<Main>
 				<SmallContent>
 					<ButtonsRow>
-						{!seeArchived && (
-							<Button onClick={() => setSeeArchived(true)}>
-								Voir tous les projets
-							</Button>
-						)}
-						{seeArchived && (
-							<Button onClick={() => setSeeArchived(false)}>
-								Voir uniquement les projets en cours
-							</Button>
-						)}
+						<Button big>Nouveau projet</Button>
 					</ButtonsRow>
 					<SubHeadingProject>Projets en cours</SubHeadingProject>
 					{unarchivedProject.map(project => (
@@ -238,6 +231,18 @@ function Projects({history}) {
 							<TasksProgressBar project={project} />
 						</ProjectItem>
 					))}
+					<ButtonsRow>
+						{!seeArchived && (
+							<Button onClick={() => setSeeArchived(true)}>
+								Voir tous les projets
+							</Button>
+						)}
+						{seeArchived && (
+							<Button onClick={() => setSeeArchived(false)}>
+								Voir uniquement les projets en cours
+							</Button>
+						)}
+					</ButtonsRow>
 					{seeArchived && (
 						<>
 							<SubHeadingProject>
@@ -290,7 +295,7 @@ function Projects({history}) {
 												}}
 												data-tip="Désarchiver ce projet"
 											>
-												<ArchiveIcon />
+												<UnarchiveIcon />
 											</ArchiveButton>
 										</ActionsIconContainer>
 									</ProjectHeader>

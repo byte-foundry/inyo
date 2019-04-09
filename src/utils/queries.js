@@ -96,7 +96,9 @@ export const GET_ALL_PROJECTS = gql`
 					name
 				}
 				sections {
+					id
 					items {
+						id
 						unit
 						timeItTook
 						status

@@ -24,6 +24,7 @@ import {
 	REMOVE_PROJECT,
 	ARCHIVE_PROJECT,
 	UNARCHIVE_PROJECT,
+	CREATE_PROJECT,
 } from '../../../utils/mutations';
 import {
 	Main,
@@ -173,6 +174,7 @@ function Projects({history}) {
 		},
 		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS);
+	const createProject = useMutation(CREATE_PROJECT);
 	const removeProject = useMutation(REMOVE_PROJECT);
 	const archiveProject = useMutation(ARCHIVE_PROJECT);
 	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
@@ -190,7 +192,20 @@ function Projects({history}) {
 			<Main>
 				<SmallContent>
 					<ButtonsRow>
-						<Button big>Nouveau projet</Button>
+						<Button
+							big
+							onClick={async () => {
+								const {
+									data: {
+										createProject: {id, name},
+									},
+								} = await createProject();
+
+								history.push(`/app/tasks?projectId=${id}`);
+							}}
+						>
+							Nouveau projet
+						</Button>
 					</ButtonsRow>
 					<SubHeadingProject>Projets en cours</SubHeadingProject>
 					{unarchivedProject.map(project => (

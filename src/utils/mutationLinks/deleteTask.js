@@ -1,3 +1,18 @@
+const getProject = ({mutation, query}) => {
+	const cachedProject = query.result.project;
+	const removedItem = mutation.result.data.removeItem;
+
+	cachedProject.sections = cachedProject.sections.map(section => ({
+		...section,
+		items: section.items.filter(item => item.id !== removedItem.id),
+	}));
+
+	return {
+		...query.result,
+		project: cachedProject,
+	};
+};
+
 export default {
 	getAllTasks: ({mutation, query}) => {
 		const cachedItems = [...query.result.me.tasks];
@@ -16,4 +31,6 @@ export default {
 			},
 		};
 	},
+	getProjectData: getProject,
+	getProjectInfos: getProject,
 };

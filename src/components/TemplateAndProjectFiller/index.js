@@ -4,6 +4,7 @@ import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 
 import Plural from '../Plural';
+import templateIllus from '../../utils/images/bermuda-order-completed.svg';
 
 import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
 import {templates} from '../../utils/project-templates';
@@ -42,6 +43,7 @@ const Column = styled('div')`
 const TemplateList = styled('ul')`
 	padding: 0;
 	margin-bottom: 2rem;
+	flex: 0 0 300px;
 `;
 
 const TemplateItem = styled('li')`
@@ -300,6 +302,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 						freelances expérimentés dans leurs domaines (design,
 						développement etc.)
 					</P>
+					<img src={templateIllus} />
 				</TemplateInfo>
 			)}
 			<TemplateTaskList selectedTemplate={selectedTemplate} />

@@ -75,7 +75,9 @@ function convertMousePosToTime(e) {
 	const percentage = Math.max(Math.min(realOffset / baseWidth, 1), 0);
 
 	const time = percentage * 60 * 24 - 1;
+
 	let hour = Math.max(Math.min(Math.floor(time / 60), 23), 0);
+
 	let minutes = Math.round((time % 60) / 10) * 10;
 
 	if (minutes >= 60) {
@@ -97,7 +99,7 @@ export default function DoubleRangeTimeInput(props) {
 		start: [startHour, startMinutes],
 		end: [endHour, endMinutes],
 	} = props.value;
-	const {setFieldValue} = props;
+	const {setFieldValue, style} = props;
 
 	const startPercentage = (startHour / 24 + startMinutes / (60 * 24)) * 100;
 	const endPercentage = (endHour / 24 + endMinutes / (60 * 24)) * 100;
@@ -124,6 +126,7 @@ export default function DoubleRangeTimeInput(props) {
 					setFieldValue('endMinutes', newEndMinutes);
 				}
 			}}
+			style={style}
 		>
 			<TimeInputRange innerRef={inputRange}>
 				{endPercentage < startPercentage ? (

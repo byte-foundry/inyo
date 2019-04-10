@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import TasksList from '../../../components/TasksList';
 import TaskView from '../../../components/ItemView';
+import noTaskPlanned from '../../../utils/images/bermuda-searching.svg';
 
 import {
 	P,
@@ -22,6 +23,19 @@ const SectionTitle = styled(H3)`
 	font-weight: 500;
 	margin: 2em 0 0;
 `;
+
+const NoTask = styled('div')`
+	display: flex;
+	flex-direction: row;
+	margin-top: 2rem;
+`;
+
+const NoTaskIllus = styled('div')`
+	flex: 0 0 300px;
+	margin-right: 3rem;
+`;
+
+const NoTaskContent = styled('div')``;
 
 const DashboardTasks = () => {
 	const {data, loading, error} = useQuery(GET_ALL_TASKS);
@@ -45,7 +59,9 @@ const DashboardTasks = () => {
 	const itemsToDo = tasks.filter(task => task.isFocused);
 
 	const itemsToDoLater = tasks.filter(
-		task => !task.isFocused && task.status === 'PENDING',
+		task => !task.isFocused
+			&& task.status === 'PENDING'
+			&& (!task.section || task.section.project.status === 'ONGOING'),
 	);
 
 	return (
@@ -60,21 +76,27 @@ const DashboardTasks = () => {
 					<TasksList items={itemsToDo} baseUrl="dashboard" />
 				</>
 			) : (
-				<div>
-					<P>
-						Vous n'avez pas de tâches prévues pour aujourd'hui. Pour
-						en ajouter, ouvrez une tâche puis cliquez sur "Je fais
-						cette tâche aujourd'hui" en haut de la fenêtre.
-					</P>
-					<P>
-						Vous pouvez aussi déclencher l'éxécution d'une tâche
-						client (icône rouge) en ouvrant celle-ci et en cliquant
-						sur "Charger Edwige de faire réaliser cette tâche".
-						Votre client sera alors notifié que vous attendez de lui
-						la réalisation de cette tâche et sera relancé
-						automatiquement si nécessaire.
-					</P>
-				</div>
+				<NoTask>
+					<NoTaskIllus>
+						<img src={noTaskPlanned} />
+					</NoTaskIllus>
+					<NoTaskContent>
+						<P>
+							Vous n'avez pas de tâches prévues pour aujourd'hui.
+							Pour en ajouter, ouvrez une tâche puis cliquez sur
+							"Je fais cette tâche aujourd'hui" en haut de la
+							fenêtre.
+						</P>
+						<P>
+							Vous pouvez aussi déclencher l'éxécution d'une tâche
+							client (icône rouge) en ouvrant celle-ci et en
+							cliquant sur "Charger Edwige de faire réaliser cette
+							tâche". Votre client sera alors notifié que vous
+							attendez de lui la réalisation de cette tâche et
+							sera relancé automatiquement si nécessaire.
+						</P>
+					</NoTaskContent>
+				</NoTask>
 			)}
 			{itemsToDoLater.length > 0 && (
 				<>

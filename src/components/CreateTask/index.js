@@ -1,12 +1,22 @@
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled/macro';
 
 import TaskInput from '../TaskInput';
 import {TaskContainer} from '../TasksList/task';
+import ConfirmModal, {useConfirmation} from '../ConfirmModal';
+import {P} from '../../utils/new/design-system';
 
-import {ADD_ITEM, CREATE_PROJECT, ADD_SECTION} from '../../utils/mutations';
-import {GET_PROJECT_DATA} from '../../utils/queries';
+import {
+	ADD_ITEM,
+	CREATE_PROJECT,
+	ADD_SECTION,
+	UPDATE_PROJECT,
+} from '../../utils/mutations';
+import {
+	GET_PROJECT_DATA,
+	GET_PROJECT_NOTIFY_ACTIVITY,
+} from '../../utils/queries';
 
 const TaskInputContainer = styled('div')`
 	& + ${TaskContainer} {
@@ -14,10 +24,19 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
+const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
+
 const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
+	const {data: currentProjectData} = useQuery(GET_PROJECT_NOTIFY_ACTIVITY, {
+		variables: {id: currentProjectId},
+		skip: !currentProjectId,
+	});
+	const updateProject = useMutation(UPDATE_PROJECT);
+
+	const [confirmModal, askConfirmationNotification] = useConfirmation();
 
 	const props = {};
 
@@ -62,31 +81,66 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	return (
 		<TaskInputContainer>
 			<TaskInput
-				onSubmitTask={task => createTask({
-					variables: {projectId: currentProjectId, ...task},
-					update: (cache, {data: {addItem: addedItem}}) => {
-						const data = cache.readQuery({
-							query: GET_PROJECT_DATA,
-							variables: {projectId: currentProjectId},
+				onSubmitTask={async (task) => {
+					if (
+						currentProjectData
+						&& !currentProjectData.project.notifyActivityToCustomer
+						&& isCustomerTask(task)
+					) {
+						const confirmed = await askConfirmationNotification();
+
+						if (!confirmed) return false;
+
+						await updateProject({
+							variables: {
+								projectId: currentProjectId,
+								notifyActivityToCustomer: true,
+							},
 						});
+					}
 
-						if (data.project.sections.length === 0) {
-							data.project.sections.push({
-								...addedItem.section,
-								items: [addedItem],
-							});
-
-							cache.writeQuery({
+					return createTask({
+						variables: {projectId: currentProjectId, ...task},
+						update: (cache, {data: {addItem: addedItem}}) => {
+							const data = cache.readQuery({
 								query: GET_PROJECT_DATA,
 								variables: {projectId: currentProjectId},
-								data,
 							});
-						}
-					},
-				})
-				}
+
+							if (data.project.sections.length === 0) {
+								data.project.sections.push({
+									...addedItem.section,
+									items: [addedItem],
+								});
+
+								cache.writeQuery({
+									query: GET_PROJECT_DATA,
+									variables: {projectId: currentProjectId},
+									data,
+								});
+							}
+						},
+					});
+				}}
+				currentProjectId={currentProjectId}
 				{...props}
 			/>
+
+			{confirmModal && (
+				<ConfirmModal
+					onConfirm={confirmModal}
+					onDismiss={() => confirmModal(false)}
+				>
+					<P>
+						Vous souhaitez créer une tâche attribuée au client qui
+						nécessite d'activer les notifications par email à
+						celui-ci.
+					</P>
+					<P>
+						Souhaitez vous continuer et activer les notifications?
+					</P>
+				</ConfirmModal>
+			)}
 		</TaskInputContainer>
 	);
 };

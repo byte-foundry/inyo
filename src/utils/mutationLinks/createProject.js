@@ -13,4 +13,18 @@ export default {
 			},
 		};
 	},
+	getAllTasks: ({mutation, query}) => {
+		const cachedTasks = [...query.result.me.tasks];
+		const addedTasks = mutation.result.data.createProject.sections
+			.map(section => section.items)
+			.flat();
+
+		return {
+			...query.result,
+			me: {
+				...query.result.me,
+				tasks: [...cachedTasks, ...addedTasks],
+			},
+		};
+	},
 };

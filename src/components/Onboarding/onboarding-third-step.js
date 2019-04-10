@@ -5,6 +5,8 @@ import {Mutation} from 'react-apollo';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 
+import welcomeIllus from '../../utils/images/bermuda-welcome.svg';
+
 import {
 	H4,
 	FlexRow,
@@ -20,6 +22,8 @@ import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`
 	width: 100%;
+	display: flex;
+	flex-direction: column;
 `;
 const ActionButtons = styled(FlexColumn)`
 	margin-left: auto;
@@ -64,6 +68,10 @@ const UseCaseCard = styled('div')`
 	}
 `;
 
+const Illus = styled('img')`
+	height: 250px;
+`;
+
 class OnboardingFifthStep extends Component {
 	constructor(props) {
 		super(props);
@@ -80,6 +88,7 @@ class OnboardingFifthStep extends Component {
 		return (
 			<OnboardingStep>
 				<StepSubtitle>Dernière question !</StepSubtitle>
+				<Illus src={welcomeIllus} />
 				<StepDescription>
 					Auriez-vous quelques minutes pour nous aider à transformer
 					Inyo en l'application de vos rêves?

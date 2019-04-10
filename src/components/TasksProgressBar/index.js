@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import {gray20} from '../../utils/content';
 import {
@@ -9,6 +9,12 @@ import {
 	lightPurple,
 	mediumPurple,
 } from '../../utils/new/design-system';
+
+const TasksProgressBarWrapper = styled('div')`
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: baseline;
+`;
 
 const TasksProgressBarMain = styled('div')`
 	background: ${lightGrey};
@@ -79,47 +85,84 @@ const TasksProgressBarMain = styled('div')`
 `;
 
 const TasksProgressBarLabel = styled('div')`
-	margin-top: 2rem;
 	color: ${primaryPurple};
 	text-align: right;
+	flex: 1 1 50px;
 
 	&::after {
 		content: '%';
 	}
 `;
 
-class TasksProgressBar extends Component {
-	render() {
-		const {
-			tasksCompleted,
-			tasksTotal,
-			tasksTotalWithTimeItTook,
-			finishedItems,
-			allItems,
-			timeItTook,
-			timeItTookPercentage,
-		} = this.props;
+function TasksProgressBar({project, customerToken}) {
+	const allItems = project.sections.reduce(
+		(total, section) => total.concat(section.items),
+		[],
+	);
+	const finishedItems = allItems.filter(item => item.status === 'FINISHED');
 
-		const completionRate
-			= tasksTotal > tasksTotalWithTimeItTook
-				? tasksCompleted / (tasksTotal || 1)
-				: tasksCompleted / (tasksTotalWithTimeItTook || 1);
-
-		return (
-			<>
-				<TasksProgressBarLabel>
-					{Math.round((tasksCompleted / tasksTotal) * 100)
-						? Math.round((tasksCompleted / tasksTotal) * 100)
-						: '0'}
-				</TasksProgressBarLabel>
-				<TasksProgressBarMain
-					completionRate={completionRate * 100}
-					timeItTook={timeItTook}
-					timeItTookPercentage={timeItTookPercentage}
-				/>
-			</>
-		);
+	function getCustomerOffsetedTimeItTook(item) {
+		return customerToken && item.unit > item.timeItTook
+			? item.unit
+			: item.timeItTook;
 	}
+
+	const totalTimeItTook = finishedItems.reduce(
+		(totalTimeItTookSum, item) => totalTimeItTookSum
+			+ (getCustomerOffsetedTimeItTook(item) || item.unit)
+			+ 1,
+		0,
+	);
+	const totalTimePlanned = finishedItems.reduce(
+		(totalItem, item) => totalItem + item.unit + 1,
+		0,
+	);
+
+	const timeItTookPercentage = totalTimeItTook / (totalTimePlanned || 1);
+
+	const timeItTook = finishedItems.reduce(
+		(totalTimeItTookSum, item) => totalTimeItTookSum
+			+ getCustomerOffsetedTimeItTook(item)
+			- item.unit,
+		0,
+	);
+
+	// additioner le temps de tous les itemItTook définis + item.unit des tâches pas encore finies
+	// puis résultat divisé par la somme de tous les item.unit
+	// ça donne un chiffre en dessous de zéro quand plus rapide que prévu
+	// et plus de 1 si a pris du retard
+
+	const tasksCompleted
+		= finishedItems.length
+		+ finishedItems.reduce((acc, item) => acc + item.unit, 0);
+	const tasksTotal
+		= allItems.length + allItems.reduce((acc, item) => acc + item.unit, 0);
+	const tasksTotalWithTimeItTook
+		= allItems.length
+		+ allItems.reduce((acc, item) => acc + (item.timeItTook || item.unit), 0);
+	// tasksTotal devrait prendre en compte timeItook.
+	// en fait tasksTotal = additioner le temps de tous les itemItTook définis + item.unit des tâches pas encore finies
+	// + allItems.length pour tenir compte des tâches avec durée = 0
+
+	const completionRate
+		= tasksTotal > tasksTotalWithTimeItTook
+			? tasksCompleted / (tasksTotal || 1)
+			: tasksCompleted / (tasksTotalWithTimeItTook || 1);
+
+	return (
+		<TasksProgressBarWrapper>
+			<TasksProgressBarLabel>
+				{Math.round((tasksCompleted / tasksTotal) * 100)
+					? Math.round((tasksCompleted / tasksTotal) * 100)
+					: '0'}
+			</TasksProgressBarLabel>
+			<TasksProgressBarMain
+				completionRate={completionRate * 100}
+				timeItTook={timeItTook}
+				timeItTookPercentage={timeItTookPercentage}
+			/>
+		</TasksProgressBarWrapper>
+	);
 }
 
 export default TasksProgressBar;

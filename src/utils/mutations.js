@@ -240,6 +240,7 @@ export const UPDATE_USER_COMPANY = gql`
 
 export const CREATE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
 
 	# creating project with a customer id or a new customer
 	mutation createProject(
@@ -272,6 +273,12 @@ export const CREATE_PROJECT = gql`
 			createdAt
 			status
 			total
+			sections {
+				id
+				items {
+					...ItemFragment
+				}
+			}
 		}
 	}
 `;
@@ -301,13 +308,13 @@ export const UPDATE_PROJECT = gql`
 			deadline
 			daysUntilDeadline
 			notifyActivityToCustomer
+			status
 			customer {
 				...ProjectCustomerFragment
 			}
 			sections {
 				id
 				items {
-					id
 					...ItemFragment
 				}
 			}
@@ -344,10 +351,106 @@ export const START_PROJECT = gql`
 	}
 `;
 
+export const ARCHIVE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
+
+	mutation archiveProject($projectId: ID!) {
+		archiveProject(id: $projectId) {
+			id
+			name
+			deadline
+			daysUntilDeadline
+			status
+			notifyActivityToCustomer
+			customer {
+				...ProjectCustomerFragment
+			}
+			sections {
+				id
+				items {
+					id
+					...ItemFragment
+				}
+			}
+		}
+	}
+`;
+
+export const UNARCHIVE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
+
+	mutation unarchiveProject($projectId: ID!) {
+		unarchiveProject(id: $projectId) {
+			id
+			name
+			deadline
+			daysUntilDeadline
+			notifyActivityToCustomer
+			status
+			customer {
+				...ProjectCustomerFragment
+			}
+			sections {
+				id
+				items {
+					id
+					...ItemFragment
+				}
+			}
+		}
+	}
+`;
+
 export const REMOVE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
+
 	mutation removeProject($projectId: ID!) {
 		removeProject(id: $projectId) {
 			id
+			name
+			deadline
+			daysUntilDeadline
+			notifyActivityToCustomer
+			status
+			customer {
+				...ProjectCustomerFragment
+			}
+			sections {
+				id
+				items {
+					id
+					...ItemFragment
+				}
+			}
+		}
+	}
+`;
+
+export const UNREMOVE_PROJECT = gql`
+	${PROJECT_CUSTOMER_FRAGMENT}
+	${ITEM_FRAGMENT}
+
+	mutation unremoveProject($projectId: ID!) {
+		unremoveProject(id: $projectId) {
+			id
+			name
+			deadline
+			daysUntilDeadline
+			notifyActivityToCustomer
+			status
+			customer {
+				...ProjectCustomerFragment
+			}
+			sections {
+				id
+				items {
+					id
+					...ItemFragment
+				}
+			}
 		}
 	}
 `;
@@ -733,5 +836,11 @@ export const CANCEL_REMINDER = gql`
 		cancelReminder(id: $id) {
 			...ReminderFragment
 		}
+	}
+`;
+
+export const SEND_REMINDER_TEST_EMAIL = gql`
+	mutation sendReminderTestEmail($id: ID!) {
+		sent: sendReminderTestEmail(id: $id)
 	}
 `;

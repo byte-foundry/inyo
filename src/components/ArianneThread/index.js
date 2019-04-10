@@ -174,8 +174,10 @@ function ArianneThread({
 	} = useQuery(GET_ALL_PROJECTS);
 
 	const projects = projectsUnfiltered.filter(
-		project => !linkedCustomerId
-			|| (project.customer && project.customer.id === linkedCustomerId),
+		project => (!linkedCustomerId
+				|| (project.customer
+					&& project.customer.id === linkedCustomerId))
+			&& project.status === 'ONGOING',
 	);
 
 	const filters = [

@@ -156,13 +156,13 @@ export const ITEM_TYPES = [
 
 export const REMINDER_TYPES_DATA = {
 	DELAY: {
-		text: customerName => `Premier mail envoyé à ${customerName}`,
+		text: customerName => `1er mail envoyé à ${customerName}`,
 	},
 	FIRST: {
-		text: customerName => `Premier rappel envoyé à ${customerName}`,
+		text: customerName => `1er rappel envoyé à ${customerName}`,
 	},
 	SECOND: {
-		text: customerName => `Second rappel envoyé à ${customerName}`,
+		text: customerName => `2er rappel envoyé à ${customerName}`,
 	},
 	LAST: {
 		text: customerName => `Dernier rappel envoyé à ${customerName}`,

@@ -14,7 +14,6 @@ import {TOOLTIP_DELAY} from '../../utils/constants';
 
 const UnitInputContainer = styled('div')`
 	display: flex;
-	margin-right: 10px;
 	position: relative;
 `;
 
@@ -24,6 +23,7 @@ const UnitInputInput = styled('input')`
 	font-size: 14px;
 	font-family: inherit;
 	color: ${primaryPurple};
+	padding-left: 1rem;
 `;
 
 const UnitInputSwitch = styled('label')`
@@ -87,6 +87,7 @@ const UnitInputSlider = styled('span')`
 const UnitInputForm = styled('form')`
 	display: flex;
 	flex-flow: row nowrap;
+	align-items: center;
 `;
 
 let outsideClosureState;
@@ -94,13 +95,7 @@ let outsideClosureState;
 // does not update the handler when state changes
 
 export default function ({
-	unit,
-	onBlur,
-	onSubmit,
-	onTab,
-	innerRef,
-	withButton,
-	cancel,
+	unit, onBlur, onSubmit, onTab, innerRef, withButton,
 }) {
 	const [isHours, setIsHours] = useState(false);
 	const inputRef = innerRef || useRef();

@@ -23,6 +23,7 @@ import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
 import 'react-toastify/dist/ReactToastify.css';
+import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
 
 import {BREAKPOINTS} from '../../../utils/constants';
 
@@ -95,6 +96,8 @@ const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
+	display: flex;
+	flex-direction: row;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding: 0;
@@ -107,6 +110,7 @@ const LogoutButton = styled(Button)`
 	font-size: 15px;
 	margin-bottom: 10px;
 	color: ${signalRed};
+	flex: 1 1 50%;
 `;
 
 const WelcomeMessage = styled(H3)`
@@ -119,6 +123,11 @@ const ProfileTitle = styled(H3)`
 		font-size: 1.2rem;
 		margin: 3rem 0 2.5rem 0.8rem;
 	}
+`;
+
+const Illus = styled('img')`
+	flex: 1 1 50%;
+	height: 250px;
 `;
 
 class Account extends Component {
@@ -298,6 +307,7 @@ class Account extends Component {
 											>
 												Me déconnecter
 											</LogoutButton>
+											<Illus src={logoutIllus} />
 										</ProfileSection>
 									</ProfileMain>
 								</Profile>

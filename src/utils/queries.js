@@ -95,11 +95,29 @@ export const GET_ALL_PROJECTS = gql`
 					id
 					name
 				}
+				sections {
+					id
+					items {
+						id
+						unit
+						timeItTook
+						status
+					}
+				}
 				issuedAt
 				createdAt
 				status
 				total
 			}
+		}
+	}
+`;
+
+export const GET_PROJECT_NOTIFY_ACTIVITY = gql`
+	query getProjectNotifyActivity($id: ID!) {
+		project(id: $id) {
+			id
+			notifyActivityToCustomer
 		}
 	}
 `;

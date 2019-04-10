@@ -12,7 +12,7 @@ import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import DescriptionIcon from '../../utils/icons/descriptionicon.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
-import {FINISH_ITEM, UPDATE_ITEM} from '../../utils/mutations';
+import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 import {
 	Button,
@@ -36,6 +36,7 @@ import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
 import CustomerModal from '../CustomerModal';
+import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -80,6 +81,7 @@ export const TaskContainer = styled('div')`
 const TaskAdd = styled('div')``;
 
 const TaskIcon = styled('div')`
+	cursor: pointer;
 	width: 1.75rem;
 	height: 1.75rem;
 	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
@@ -118,6 +120,37 @@ const TaskIcon = styled('div')`
 	&:after {
 		top: 4.15rem;
 		bottom: -0.85rem;
+	}
+
+	&:hover {
+		background: center no-repeat
+			url(${(props) => {
+		const typeInfos
+					= ITEM_TYPES.find(t => t.type === props.type)
+					|| ITEM_TYPES[0];
+
+		let icon = typeInfos.iconUrl;
+
+		icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
+		return icon;
+	}});
+
+		animation: ${props => (props.status === itemStatuses.FINISHED ? 'none' : 'growth 300ms')};
+
+		@keyframes growth {
+			0% {
+				background-size: 0% auto;
+			}
+			50% {
+				background-size: 100% auto;
+			}
+			70% {
+				background-size: 80% auto;
+			}
+			100% {
+				background-size: 100% auto;
+			}
+		}
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -180,15 +213,6 @@ const TaskActions = styled('div')`
 	pointer-events: none;
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
-
-	form {
-		input {
-			padding-left: 1rem;
-		}
-		label {
-			margin-top: -0.35rem;
-		}
-	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
@@ -259,13 +283,13 @@ const TaskInfos = styled('div')`
 
 const SetTimeContainer = styled('div')`
 	display: flex;
+	margin-right: 1rem;
 `;
 
 const SetTimeInfos = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
-	margin-right: 10px;
-	text-align: right;
+	margin-right: 1rem;
 `;
 
 const SetTimeHeadline = styled('div')`
@@ -280,6 +304,7 @@ const SetTimeCaption = styled('div')`
 	font-size: 12px;
 	font-style: italic;
 	line-height: 1.3;
+	white-space: nowrap;
 `;
 
 const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
@@ -372,6 +397,15 @@ export function TaskInfosInputs({
 		).length;
 	}
 
+	let unitToDisplay = item.timeItTook !== null ? item.timeItTook : item.unit;
+
+	let unitInHours = false;
+
+	if (unitToDisplay < 1) {
+		unitToDisplay *= 8;
+		unitInHours = true;
+	}
+
 	const dueDate
 		= item.dueDate
 		|| (item.dueDate
@@ -431,27 +465,27 @@ export function TaskInfosInputs({
 									: () => setEditUnit(true)
 							}
 						>
-							{item.timeItTook ? item.timeItTook : item.unit}{' '}
-							<Plural
-								value={item.unit}
-								singular="jour"
-								plural="jours"
+							{unitToDisplay}{' '}
+							{!unitInHours && (
+								<Plural
+									value={unitToDisplay}
+									singular="jour"
+									plural="jours"
+								/>
+							)}
+							{unitInHours && (
+								<Plural
+									value={unitToDisplay}
+									singular="heure"
+									plural="heures"
+								/>
+							)}
+							<TimeItTookDisplay
+								timeItTook={item.timeItTook}
+								unit={item.unit}
+								customerToken={customerToken}
+								status={item.status}
 							/>
-							<span data-tip="Temps dépassé">
-								{item.timeItTook !== undefined
-									&& item.timeItTook > item.unit
-									&& item.timeItTook !== item.unit
-									&& item.status === 'FINISHED'
-									&& ` (+${item.timeItTook - item.unit}) `}
-							</span>
-							{/* It is bad, should be a component */}
-							<span data-tip="Temps surestimé">
-								{!customerToken
-									&& item.timeItTook !== undefined
-									&& item.timeItTook < item.unit
-									&& item.status === 'FINISHED'
-									&& ` (${item.timeItTook - item.unit}) `}
-							</span>
 						</div>
 					)
 				}
@@ -545,12 +579,14 @@ function Task({
 	baseUrl = 'tasks',
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
+	const unfinishItem = useMutation(UNFINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 
 	const setTimeItTookRef = useRef();
+	const setTimeItTookInputRef = useRef();
 
 	useOnClickOutside(setTimeItTookRef, () => {
 		setSetTimeItTook(false);
@@ -579,13 +615,72 @@ function Task({
 		= (item.status !== 'FINISHED'
 			&& (!customerToken && !isCustomerTask(item)))
 		|| (customerToken && isCustomerTask(item));
+	const isUnfinishable
+		= (item.status === 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item)))
+		|| (customerToken && isCustomerTask(item));
 
 	return (
-		<TaskContainer isDraggable={isDraggable}>
+		<TaskContainer isDraggable={isDraggable} ref={setTimeItTookRef}>
 			<TaskAdd />
-			<TaskIcon status={item.status} type={item.type} noData={noData} />
+			<TaskIcon
+				status={item.status}
+				type={item.type}
+				noData={noData}
+				onClick={() => {
+					if (!isFinishable && !isUnfinishable) return;
+
+					if (isFinishable) {
+						if (customerToken) {
+							finishItemCallback(item.unit);
+						}
+						else if (!setTimeItTook) {
+							setSetTimeItTook(true);
+						}
+						else {
+							debugger;
+							finishItemCallback(
+								parseFloat(setTimeItTookInputRef.current.value),
+							);
+							setSetTimeItTook(false);
+						}
+					}
+					else if (isUnfinishable) {
+						unfinishItem({
+							variables: {
+								itemId: item.id,
+								token: customerToken,
+							},
+						});
+					}
+				}}
+			/>
 			<TaskContent noData={noData}>
-				<TaskHeader data-tip="Cliquer pour voir le contenu de la tâche">
+				<TaskHeader
+					data-tip={
+						!setTimeItTook
+							? 'Cliquer pour voir le contenu de la tâche'
+							: undefined
+					}
+				>
+					{setTimeItTook && (
+						<SetTimeContainer>
+							<UnitInput
+								innerRef={setTimeItTookInputRef}
+								unit={item.unit}
+								onBlur={() => {}}
+								onSubmit={finishItemCallback}
+							/>
+							<SetTimeInfos>
+								<SetTimeHeadline>
+									Temps réellement passé
+								</SetTimeHeadline>
+								<SetTimeCaption>
+									Uniquement visible par vous
+								</SetTimeCaption>
+							</SetTimeInfos>
+						</SetTimeContainer>
+					)}
 					{item.name ? (
 						<TaskHeadingLink
 							noData={noData}
@@ -612,58 +707,20 @@ function Task({
 						</TaskHeadingPlaceholder>
 					)}
 					<TaskActions stayActive={setTimeItTook}>
-						{setTimeItTook ? (
-							<SetTimeContainer ref={setTimeItTookRef}>
-								<SetTimeInfos>
-									<SetTimeHeadline>
-										Temps réellement passé
-									</SetTimeHeadline>
-									<SetTimeCaption>
-										Uniquement visible par vous
-									</SetTimeCaption>
-								</SetTimeInfos>
-								<UnitInput
-									unit={item.unit}
-									onBlur={() => {}}
-									onSubmit={finishItemCallback}
-									withButton
-									cancel={() => setSetTimeItTook(false)}
-								/>
-							</SetTimeContainer>
-						) : (
-							<>
-								<OpenBtn
-									data-tip="Description, détails, commentaires, etc."
-									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
-										state: {prevSearch: location.search},
-									}}
-								>
-									Ouvrir
-								</OpenBtn>
-								{isFinishable && (
-									<Button
-										data-tip="Marquer la tâche comme faite"
-										icon="✓"
-										onClick={() => {
-											if (customerToken) {
-												finishItemCallback(item.unit);
-											}
-											else {
-												setSetTimeItTook(true);
-											}
-										}}
-									>
-										Fait
-									</Button>
-								)}
-							</>
-						)}
+						<OpenBtn
+							data-tip="Description, détails, commentaires, etc."
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
+						>
+							Ouvrir
+						</OpenBtn>
 					</TaskActions>
 				</TaskHeader>
-				{!noData && (
+				{!noData && !setTimeItTook && (
 					<TaskInfosInputs
 						taskUrlPrefix={taskUrlPrefix}
 						baseUrl={baseUrl}

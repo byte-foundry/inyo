@@ -91,11 +91,7 @@ const SignupForm = ({from, history, client}) => {
 
 							const {user} = data.signup;
 
-							const {
-								data: {
-									createProject: {id: onboardProjectId},
-								},
-							} = await createProject({
+							await createProject({
 								variables: {
 									template: 'BLANK',
 									customer: {
@@ -110,7 +106,7 @@ const SignupForm = ({from, history, client}) => {
 								},
 							});
 
-							const {} = await createCustomer({
+							await createCustomer({
 								variables: {
 									email: 'community@inyo.me',
 									name: 'Communauté Inyo',

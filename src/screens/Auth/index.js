@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
 	Link, Switch, Route, Redirect,
 } from 'react-router-dom';
@@ -14,7 +14,6 @@ import SendResetPasswordForm from '../../components/SendResetPasswordForm';
 import ResetPasswordForm from '../../components/ResetPasswordForm';
 
 import {ReactComponent as AppLogo} from '../../utils/icons/appLogo.svg';
-import AuthIllus from '../../utils/icons/illustration-inyo.gif';
 import SuccessIllus from '../../utils/images/bermuda-success.svg';
 
 import {BREAKPOINTS} from '../../utils/constants';

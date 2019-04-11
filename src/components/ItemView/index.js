@@ -10,7 +10,6 @@ import TaskStatusButton from '../TaskStatusButton';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 import Plural from '../Plural';
-import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 import MultilineEditable from '../MultilineEditable';
@@ -48,7 +47,9 @@ import {
 	primaryRed,
 	primaryGrey,
 } from '../../utils/new/design-system';
-import {FlexRow} from '../../utils/content';
+import {
+	FlexRow, gray50, gray70, LoadingLogo,
+} from '../../utils/content';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled('div')``;
@@ -258,7 +259,6 @@ const Item = ({id, customerToken, close}) => {
 	const [editProject, setEditProject] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
 	const dateRef = useRef();
-	const timeItTookRef = useRef();
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
 		suspend: false,

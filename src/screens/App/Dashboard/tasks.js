@@ -2,7 +2,6 @@ import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
-import moment from 'moment';
 
 import TasksList from '../../../components/TasksList';
 import TaskView from '../../../components/ItemView';
@@ -107,7 +106,7 @@ const DashboardTasks = () => {
 
 			<Route
 				path="/app/dashboard/:taskId"
-				render={({location: {state = {}}, match, history}) => (
+				render={({match, history}) => (
 					<Modal onDismiss={() => history.push('/app/dashboard')}>
 						<ModalElem>
 							<TaskView

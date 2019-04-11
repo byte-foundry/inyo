@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled/macro';
 
-import {
-	gray20, gray30, gray50, gray80,
-} from '../../utils/content';
+import {gray30, gray50, gray80} from '../../utils/content';
 
 import {
 	TaskInputDropdown,

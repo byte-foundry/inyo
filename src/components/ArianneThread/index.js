@@ -7,8 +7,6 @@ import {
 	primaryPurple,
 	primaryWhite,
 	lightGrey,
-	mediumGrey,
-	accentGrey,
 	primaryRed,
 } from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';

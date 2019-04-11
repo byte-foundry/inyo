@@ -137,6 +137,7 @@ function CheckList({items, editable, onChange}) {
 								});
 								return true;
 							}
+							return true;
 						}}
 					/>
 				</ContentItem>

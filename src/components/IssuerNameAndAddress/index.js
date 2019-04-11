@@ -3,12 +3,7 @@ import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 
 import {H4, H5} from '../../utils/content';
-import {
-	P,
-	primaryGrey,
-	accentGrey,
-	primaryBlack,
-} from '../../utils/new/design-system';
+import {P, accentGrey, primaryBlack} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;

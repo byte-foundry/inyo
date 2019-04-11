@@ -47,11 +47,7 @@ BLOCK_BUTTONS.unshift({
 });
 
 const ProjectNotes = ({
-	notes,
-	customerToken,
-	updateNotes,
-	projectId,
-	children,
+	notes, updateNotes, projectId, children,
 }) => {
 	const [saved, setSaved] = useState(false);
 	const [editorState, setEditorState] = useState(
@@ -59,10 +55,10 @@ const ProjectNotes = ({
 	);
 
 	const debounceUpdateNotes = useRef(
-		debounce(({notes, id}) => {
+		debounce(({notes: notesVar, id}) => {
 			updateNotes({
 				variables: {
-					notes,
+					notes: notesVar,
 					id,
 				},
 			});

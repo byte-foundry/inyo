@@ -40,8 +40,6 @@ const InputContainer = styled('div')`
 	}
 `;
 
-const TaskInfosContainer = styled('div')``;
-
 const InputButtonWrapper = styled('div')`
 	position: relative;
 `;

@@ -15,7 +15,6 @@ import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 import {
-	Button,
 	ButtonLink,
 	TaskHeading,
 	CommentIcon,
@@ -397,7 +396,7 @@ export function TaskInfosInputs({
 		).length;
 	}
 
-	let unitToDisplay = item.timeItTook !== null ? item.timeItTook : item.unit;
+	let unitToDisplay = item.timeItTook === null ? item.unit : item.timeItTook;
 
 	let unitInHours = false;
 
@@ -634,15 +633,14 @@ function Task({
 						if (customerToken) {
 							finishItemCallback(item.unit);
 						}
-						else if (!setTimeItTook) {
-							setSetTimeItTook(true);
-						}
-						else {
-							debugger;
+						else if (setTimeItTook) {
 							finishItemCallback(
 								parseFloat(setTimeItTookInputRef.current.value),
 							);
 							setSetTimeItTook(false);
+						}
+						else {
+							setSetTimeItTook(true);
 						}
 					}
 					else if (isUnfinishable) {
@@ -658,9 +656,9 @@ function Task({
 			<TaskContent noData={noData}>
 				<TaskHeader
 					data-tip={
-						!setTimeItTook
-							? 'Cliquer pour voir le contenu de la tâche'
-							: undefined
+						setTimeItTook
+							? undefined
+							: 'Cliquer pour voir le contenu de la tâche'
 					}
 				>
 					{setTimeItTook && (

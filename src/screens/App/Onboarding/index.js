@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import {Redirect, withRouter} from 'react-router-dom';
@@ -51,15 +51,15 @@ function Onboarding({history}) {
 		setStep(step - 1);
 	}
 
-	function getStepData(step, me) {
-		switch (step) {
+	function getStepData(stepId, meData) {
+		switch (stepId) {
 		case 0:
 			return <Redirect to="/auth" />;
 		case 1:
 			return (
 				<OnboardingFirstStep
-					me={me}
-					step={step}
+					me={meData}
+					step={stepId}
 					getNextStep={getNextStep}
 					getPreviousStep={getPreviousStep}
 				/>
@@ -67,8 +67,8 @@ function Onboarding({history}) {
 		case 2:
 			return (
 				<OnboardingSecondStep
-					me={me}
-					step={step}
+					me={meData}
+					step={stepId}
 					getNextStep={getNextStep}
 					getPreviousStep={getPreviousStep}
 				/>
@@ -76,8 +76,8 @@ function Onboarding({history}) {
 		case 3:
 			return (
 				<OnboardingThirdStep
-					me={me}
-					step={step}
+					me={meData}
+					step={stepId}
 					getNextStep={getNextStep}
 					getPreviousStep={getPreviousStep}
 				/>
@@ -85,6 +85,7 @@ function Onboarding({history}) {
 		case 4:
 			window.Intercom('trackEvent', 'start-onboarding-project');
 			history.push('/app/tasks?openModal=true');
+			return false;
 		default:
 			return false;
 		}

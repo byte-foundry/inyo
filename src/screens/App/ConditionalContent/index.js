@@ -10,7 +10,6 @@ const ConditionalContentMain = styled('div')``;
 export default function ConditionalContent() {
 	const {
 		data: {me},
-		loading,
 	} = useQuery(GET_USER_INFOS);
 	const {workingDays, startWorkAt, endWorkAt} = me;
 

@@ -172,7 +172,6 @@ function Projects({history}) {
 		data: {
 			me: {projects},
 		},
-		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS);
 	const createProject = useMutation(CREATE_PROJECT);
 	const removeProject = useMutation(REMOVE_PROJECT);
@@ -183,7 +182,7 @@ function Projects({history}) {
 		project => project.status !== 'ARCHIVED' && project.status !== 'REMOVED',
 	);
 	const archivedProject = projects.filter(
-		project => project.status == 'ARCHIVED',
+		project => project.status === 'ARCHIVED',
 	);
 
 	return (
@@ -197,7 +196,7 @@ function Projects({history}) {
 							onClick={async () => {
 								const {
 									data: {
-										createProject: {id, name},
+										createProject: {id},
 									},
 								} = await createProject();
 

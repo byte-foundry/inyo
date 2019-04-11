@@ -9,7 +9,6 @@ import * as Yup from 'yup';
 
 import FormElem from '../FormElem';
 import {LOGIN} from '../../utils/mutations';
-import {CHECK_LOGIN_USER} from '../../utils/queries';
 import {Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
 

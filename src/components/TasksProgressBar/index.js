@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {gray20} from '../../utils/content';
 import {
 	primaryPurple,
 	lightGrey,
@@ -46,8 +45,9 @@ const TasksProgressBarMain = styled('div')`
 		}
 	}
 
-	${props => (props.timeItTook !== 0
-		? `&:before {
+	${props => (props.timeItTook === 0
+		? ''
+		: `&:before {
 			font-size: 0.75rem;
 			line-height: 3rem;
 			text-align: right;
@@ -80,8 +80,7 @@ const TasksProgressBarMain = styled('div')`
 				${props.timeItTookPercentage >= 1 ? 0 : '-100%'}
 			);
 			z-index: ${props.timeItTookPercentage >= 1 ? 0 : 1};
-		}`
-		: '')}
+		}`)}
 `;
 
 const TasksProgressBarLabel = styled('div')`

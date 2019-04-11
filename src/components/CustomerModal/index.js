@@ -114,7 +114,8 @@ const CustomerModal = ({
 						}
 						catch (err) {
 							return err.inner.reduce((errors, errorContent) => {
-								errors[error.path] = errorContent.message;
+								errors[errorContent.path]
+									= errorContent.message;
 								return errors;
 							}, {});
 						}

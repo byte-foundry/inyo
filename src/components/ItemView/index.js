@@ -359,7 +359,11 @@ const Item = ({id, customerToken, close}) => {
 			</StickyHeader>
 			<Header>
 				<Title data-tip="Type et titre de la tâche">
-					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
+					<TaskHeadingIcon>
+						{item.status === 'FINISHED'
+							? typeInfo.iconValidated
+							: typeInfo.icon}
+					</TaskHeadingIcon>
 					<InlineEditable
 						disabled={!!customerToken}
 						editableCss={css`

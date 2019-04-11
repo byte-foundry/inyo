@@ -4,7 +4,9 @@ import TaskIconValidatedUrl from './icons/taskicon-user-validated.svg';
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl from './icons/taskicon-customer-validated.svg';
+import TaskCustomerIconValidatedUrl, {
+	ReactComponent as TaskIconValidated,
+} from './icons/taskicon-customer-validated.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
@@ -70,6 +72,7 @@ export const BREAKPOINTS = [420];
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,
+		iconValidated: <TaskIconValidated />,
 		iconUrl: TaskIconUrl,
 		iconUrlValidated: TaskIconValidatedUrl,
 		type: 'DEFAULT',
@@ -78,6 +81,7 @@ export const ITEM_TYPES = [
 	},
 	{
 		icon: <TaskCustomerIcon />,
+		iconValidated: <TaskIconValidated />,
 		iconUrl: TaskCustomerIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CUSTOMER',
@@ -86,6 +90,7 @@ export const ITEM_TYPES = [
 	},
 	{
 		icon: <ContentAcquisitionIcon />,
+		iconValidated: <TaskIconValidated />,
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',

@@ -36,9 +36,10 @@ const CustomerModal = ({
 	onDismiss,
 	onValidate,
 	noSelect,
-	customer = {},
+	customer,
 }) => {
 	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {skip: noSelect});
+	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
 
 	let options = [];
 
@@ -55,7 +56,7 @@ const CustomerModal = ({
 
 	let formTitle = 'Ou créer un nouveau client';
 
-	if (noSelect && customer.id) {
+	if (noSelect && customerNotNull.id) {
 		formTitle = 'Éditer un client';
 	}
 	else if (noSelect) {
@@ -68,12 +69,12 @@ const CustomerModal = ({
 				<Formik
 					initialValues={{
 						customerId: selectedCustomerId,
-						name: customer.name || '',
-						title: customer.title || null,
-						firstName: customer.firstName || '',
-						lastName: customer.lastName || '',
-						email: customer.email || '',
-						phone: customer.phone || '',
+						name: customerNotNull.name || '',
+						title: customerNotNull.title || null,
+						firstName: customerNotNull.firstName || '',
+						lastName: customerNotNull.lastName || '',
+						email: customerNotNull.email || '',
+						phone: customerNotNull.phone || '',
 					}}
 					validate={(values) => {
 						if (

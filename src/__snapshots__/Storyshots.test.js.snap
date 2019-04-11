@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots TaskInput default 1`] = `
+<div
+  className="css-1862w2f"
+>
+  <div
+    className="__react_component_tooltip place-top type-dark "
+    data-id="tooltip"
+  />
+  <div
+    className="css-smsiqn"
+  >
+    <div
+      className="css-12dgonj"
+      data-tip="Définir le type de tâche"
+      onClick={[Function]}
+    >
+      ▾
+    </div>
+    <input
+      className="css-1jdnlt8"
+      data-multiline={true}
+      data-tip="Presser \`Tab\` pour changer de paramètre<br/>\`Entrée\` pour valider"
+      onChange={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      placeholder="Ajouter une tâche ou créer un projet"
+      type="text"
+      value=""
+    />
+    
+  </div>
+</div>
+`;

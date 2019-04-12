@@ -300,7 +300,7 @@ const Item = ({id, customerToken, close}) => {
 
 	// parse the description for the file list
 	let files = [];
-	const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+	const fileListRegex = /([\s\S])*# content-acquisition-list(?:\n([^#]+)?)?$/;
 
 	if (fileListRegex.test(item.description)) {
 		const matches = item.description
@@ -595,7 +595,19 @@ const Item = ({id, customerToken, close}) => {
 							variables: {
 								itemId: id,
 								token: customerToken,
-								description: e.target.innerText,
+								description: e.target.innerText.concat(
+									files.length > 0
+										? `\n# content-acquisition-list\n${files
+											.map(
+												({checked, name}) => `- [${
+													checked
+														? 'x'
+														: ' '
+												}] ${name}`,
+											)
+											.join('\n')}`
+										: '',
+								),
 							},
 						})
 						}

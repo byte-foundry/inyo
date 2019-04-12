@@ -59,8 +59,8 @@ const TasksProgressBarMain = styled('div')`
 
 			content: ${
 		props.timeItTook >= 0
-			? `"+${props.timeItTook} jours"`
-			: `"${props.timeItTook} jours"`
+			? `"+${props.timeItTook.toFixed(2)} jours"`
+			: `"${props.timeItTook.toFixed(2)} jours"`
 		};
 			top: ${props.timeItTookPercentage >= 1 ? 0 : '1px'};
 			left: calc(

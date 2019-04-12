@@ -38,7 +38,10 @@ const CustomerModal = ({
 	noSelect,
 	customer,
 }) => {
-	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {skip: noSelect});
+	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {
+		skip: noSelect,
+		suspend: true,
+	});
 	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
 
 	let options = [];

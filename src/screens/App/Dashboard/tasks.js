@@ -37,7 +37,7 @@ const NoTaskIllus = styled('div')`
 const NoTaskContent = styled('div')``;
 
 const DashboardTasks = () => {
-	const {data, loading, error} = useQuery(GET_ALL_TASKS);
+	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
 
 	if (loading) return <p>Loading</p>;
 	if (error) throw error;

@@ -172,7 +172,7 @@ function Projects({history}) {
 		data: {
 			me: {projects},
 		},
-	} = useQuery(GET_ALL_PROJECTS);
+	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 	const createProject = useMutation(CREATE_PROJECT);
 	const removeProject = useMutation(REMOVE_PROJECT);
 	const archiveProject = useMutation(ARCHIVE_PROJECT);

@@ -61,6 +61,7 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 		variables: {
 			linkedCustomerId: linkedCustomerId || undefined,
 		},
+		suspend: true,
 	});
 
 	if (error) throw error;

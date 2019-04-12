@@ -36,7 +36,7 @@ const OnboardingProgressBar = styled('div')`
 `;
 
 function Onboarding({history}) {
-	const {data, loading} = useQuery(GET_USER_INFOS);
+	const {data, loading} = useQuery(GET_USER_INFOS, {suspend: true});
 	const [step, setStep] = useState(1);
 
 	if (loading) return <Loading />;

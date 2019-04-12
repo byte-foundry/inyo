@@ -218,6 +218,7 @@ const SidebarProjectInfos = ({
 	const updateProject = useMutation(UPDATE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
+		suspend: true,
 	});
 
 	const dateRef = useRef();

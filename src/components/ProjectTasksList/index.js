@@ -330,6 +330,7 @@ const DraggableSection = ({children, section, index}) => (
 function ProjectTasksList({items, projectId, sectionId}) {
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
+		suspend: true,
 	});
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
 	const updateTask = useMutation(UPDATE_ITEM);

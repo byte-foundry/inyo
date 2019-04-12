@@ -85,6 +85,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			itemId,
 			token: customerToken,
 		},
+		suspend: true,
 	});
 	const postCommentMutation = useMutation(POST_COMMENT);
 	const debouncePostComment = useRef(

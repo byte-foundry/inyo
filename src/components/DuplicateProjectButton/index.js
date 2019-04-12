@@ -12,6 +12,7 @@ const DuplicateProjectModal = ({
 }) => {
 	const {data, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
+		suspend: true,
 	});
 	const duplicateProject = useMutation(CREATE_PROJECT);
 	const [name, setName] = useState(false);

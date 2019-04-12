@@ -141,7 +141,7 @@ const DeleteIcon = styled(TrashIcon)`
 `;
 
 const Customers = () => {
-	const {data, error} = useQuery(GET_USER_CUSTOMERS);
+	const {data, error} = useQuery(GET_USER_CUSTOMERS, {suspend: true});
 	const createCustomer = useMutation(CREATE_CUSTOMER);
 	const updateCustomer = useMutation(UPDATE_CUSTOMER);
 	const removeCustomer = useMutation(REMOVE_CUSTOMER);

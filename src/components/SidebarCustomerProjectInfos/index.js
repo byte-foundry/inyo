@@ -126,6 +126,7 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token: customerToken},
+		suspend: true,
 	});
 
 	if (error) throw error;

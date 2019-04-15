@@ -4,24 +4,19 @@ import {withRouter} from 'react-router-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import ReactTooltip from 'react-tooltip';
 
+import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
+
 import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
 import {ReactComponent as UnarchiveIcon} from '../../../utils/icons/unarchive-icon.svg';
 import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
-import {
-	ModalContainer,
-	ModalElem,
-	ModalActions,
-	FlexRow,
-	FlexColumn,
-} from '../../../utils/content';
+import {FlexRow, FlexColumn} from '../../../utils/content';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
 import {
-	REMOVE_PROJECT,
 	ARCHIVE_PROJECT,
 	UNARCHIVE_PROJECT,
 	CREATE_PROJECT,
@@ -37,7 +32,6 @@ import {
 	lightGrey,
 	accentGrey,
 	primaryRed,
-	Heading,
 	P,
 } from '../../../utils/new/design-system';
 
@@ -174,7 +168,6 @@ function Projects({history}) {
 		},
 	} = useQuery(GET_ALL_PROJECTS);
 	const createProject = useMutation(CREATE_PROJECT);
-	const removeProject = useMutation(REMOVE_PROJECT);
 	const archiveProject = useMutation(ARCHIVE_PROJECT);
 	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
 
@@ -321,54 +314,10 @@ function Projects({history}) {
 				</SmallContent>
 			</Main>
 			{removeProjectModal && (
-				<ModalContainer onDismiss={() => setRemoveProjectModal(false)}>
-					<ModalElem>
-						<Heading>
-							Êtes-vous sûr de vouloir supprimer ce projet ?
-						</Heading>
-						<P>
-							En ce supprimant ce projet vous perdrez toutes les
-							données.
-						</P>
-						<P>
-							Cette option est présente pour supprimer un projet
-							créé par erreur.
-						</P>
-						<P>
-							Pour les projets terminés, préférez l'archivage :)
-						</P>
-						<ModalActions>
-							<Button
-								grey
-								onClick={() => setRemoveProjectModal(false)}
-							>
-								Annuler
-							</Button>
-							<Button
-								primary
-								onClick={() => archiveProject({
-									variables: {
-										projectId,
-									},
-								})
-								}
-							>
-								Archiver le projet
-							</Button>
-							<Button
-								red
-								onClick={() => removeProject({
-									variables: {
-										projectId,
-									},
-								})
-								}
-							>
-								Supprimer le projet
-							</Button>
-						</ModalActions>
-					</ModalElem>
-				</ModalContainer>
+				<RemoveProjectModal
+					closeModal={() => setRemoveProjectModal(false)}
+					projectId={projectId}
+				/>
 			)}
 		</Container>
 	);

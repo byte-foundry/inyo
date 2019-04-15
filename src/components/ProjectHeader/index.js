@@ -116,6 +116,7 @@ export default function ProjectHeader({projectId, customerToken}) {
 				placeholderCss={placeholderCss}
 				nameCss={nameCss}
 				editableCss={editableCss}
+				disabled={customerToken}
 				missingTitle={
 					project.name === 'Nom du projet' || project.name === ''
 				}

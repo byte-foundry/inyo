@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
 
@@ -185,6 +185,22 @@ const TaskInputCheckListContainer = styled('div')`
 
 const types = ITEM_TYPES;
 
+const useTrackEventInput = ({focus, openedByClick, value}) => {
+	useEffect(() => {
+		if (focus && value.startsWith('/')) {
+			window.Intercom('trackEvent', 'open-task-dropdown');
+			window.Intercom('trackEvent', 'open-task-dropdown-with-slash');
+		}
+	}, [focus, value.startsWith('/')]);
+
+	useEffect(() => {
+		if (openedByClick) {
+			window.Intercom('trackEvent', 'open-task-dropdown');
+			window.Intercom('trackEvent', 'open-task-dropdown-with-button');
+		}
+	}, [openedByClick]);
+};
+
 const TaskInput = ({
 	onSubmitProject,
 	onSubmitSection,
@@ -196,7 +212,7 @@ const TaskInput = ({
 	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
-	const [focusByClick, setFocusByClick] = useState(false);
+	const [openedByClick, setOpenedByClick] = useState(false);
 	const [moreInfosMode, setMoreInfosMode] = useState(false);
 	const [
 		showContentAcquisitionInfos,
@@ -211,7 +227,7 @@ const TaskInput = ({
 
 	useOnClickOutside(ref, () => {
 		setFocus(false);
-		setFocusByClick(false);
+		setOpenedByClick(false);
 	});
 
 	let icon = '▾';
@@ -223,13 +239,15 @@ const TaskInput = ({
 		({icon} = types.find(t => t.type === 'DEFAULT'));
 	}
 
+	useTrackEventInput({focus, openedByClick, value});
+
 	return (
 		<Container ref={ref}>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<InputContainer>
 				<Icon
 					data-tip="Définir le type de tâche"
-					onClick={() => setFocusByClick(true)}
+					onClick={() => setOpenedByClick(true)}
 					active={type}
 				>
 					{icon}
@@ -322,7 +340,7 @@ const TaskInput = ({
 						}
 						if (e.key === 'Escape') {
 							setValue('');
-							setFocusByClick(false);
+							setOpenedByClick(false);
 							setMoreInfosMode(false);
 							setShowContentAcquisitionInfos(false);
 						}
@@ -517,7 +535,7 @@ const TaskInput = ({
 					</TaskInputCheckListContainer>
 				</TaskInputDropdown>
 			)}
-			{((value.startsWith('/') && focus) || focusByClick) && (
+			{((value.startsWith('/') && focus) || openedByClick) && (
 				<TaskTypeDropdown
 					types={types}
 					filter={value.startsWith('/') ? value.substr(1) : ''}
@@ -526,7 +544,7 @@ const TaskInput = ({
 
 						setValue('');
 						inputRef.current.focus();
-						setFocusByClick(false);
+						setOpenedByClick(false);
 						setMoreInfosMode(false);
 						setItemDueDate();
 						setItemCustomer();

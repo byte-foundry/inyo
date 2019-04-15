@@ -53,6 +53,7 @@ const CustomerTasks = ({
 		variables: {
 			token,
 		},
+		suspend: true,
 	});
 
 	if (error) throw error;

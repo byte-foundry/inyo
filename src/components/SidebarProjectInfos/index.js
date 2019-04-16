@@ -25,7 +25,7 @@ import StaticCustomerView from '../StaticCustomerView';
 import DuplicateProjectButton from '../DuplicateProjectButton';
 import DateInput from '../DateInput';
 import Plural from '../Plural';
-import CustomerModal from '../CustomerModal';
+import CustomerModal from '../CustomerModalAndMail';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';

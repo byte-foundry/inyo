@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
-import CustomerModal from '../CustomerModal';
+import CustomerModal from '../CustomerModalAndMail';
 
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 import {

@@ -34,7 +34,7 @@ import CustomerDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
-import CustomerModal from '../CustomerModal';
+import CustomerModal from '../CustomerModalAndMail';
 import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`

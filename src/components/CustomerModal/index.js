@@ -35,6 +35,7 @@ const CustomerModal = ({
 	selectedCustomerId,
 	onDismiss,
 	onValidate,
+	onCustomerWasCreated,
 	noSelect,
 	customer,
 }) => {
@@ -137,6 +138,10 @@ const CustomerModal = ({
 								phone: values.phone,
 							},
 						});
+
+						if (!values.customerId) {
+							onCustomerWasCreated();
+						}
 
 						actions.setSubmitting(false);
 					}}

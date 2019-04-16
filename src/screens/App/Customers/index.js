@@ -12,7 +12,7 @@ import {
 	primaryBlack,
 	P,
 } from '../../../utils/new/design-system';
-import CustomerModal from '../../../components/CustomerModal';
+import CustomerModal from '../../../components/CustomerModalAndMail';
 import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
 import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
@@ -264,8 +264,6 @@ const Customers = () => {
 								await createCustomer({
 									variables: selected.customer,
 								});
-
-								setEditCustomer(false);
 							}
 						}}
 						onDismiss={() => {

@@ -71,6 +71,7 @@
     "@storybook/react": "^5.0.6",
     "@storybook/theming": "^5.0.6",
     "cross-env": "^5.2.0",
+    "cypress": "^3.2.0",
     "emotion-theming": "^10.0.10",
     "husky": "^1.1.2",
     "lint-staged": "^8.1.5",

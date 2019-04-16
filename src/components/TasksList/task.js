@@ -585,11 +585,7 @@ function Task({
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 
 	const setTimeItTookRef = useRef();
-	const setTimeItTookInputRef = useRef();
-
-	useOnClickOutside(setTimeItTookRef, () => {
-		setSetTimeItTook(false);
-	});
+	const setTimeItTookValueRef = useRef();
 
 	function finishItemCallback(unit) {
 		finishItem({
@@ -635,7 +631,7 @@ function Task({
 						}
 						else if (setTimeItTook) {
 							finishItemCallback(
-								parseFloat(setTimeItTookInputRef.current.value),
+								parseFloat(setTimeItTookValueRef.current()),
 							);
 							setSetTimeItTook(false);
 						}
@@ -664,9 +660,12 @@ function Task({
 					{setTimeItTook && (
 						<SetTimeContainer>
 							<UnitInput
-								innerRef={setTimeItTookInputRef}
+								getValue={setTimeItTookValueRef}
 								unit={item.unit}
-								onBlur={() => {}}
+								onBlur={(unit) => {
+									finishItemCallback(unit);
+									setSetTimeItTook(false);
+								}}
 								onSubmit={finishItemCallback}
 							/>
 							<SetTimeInfos>

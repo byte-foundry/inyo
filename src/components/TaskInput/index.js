@@ -296,10 +296,6 @@ const TaskInput = ({
 											itemDueDate
 											&& itemDueDate.toISOString(),
 										unit: parseFloat(itemUnit || 0),
-										linkedCustomer:
-											itemCustomer && !itemCustomer.id
-												? itemCustomer
-												: undefined,
 										linkedCustomerId:
 											itemCustomer && itemCustomer.id,
 									});

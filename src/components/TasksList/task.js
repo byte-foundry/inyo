@@ -787,7 +787,7 @@ function Task({
 						updateItem({
 							variables: {
 								itemId: item.id,
-								linkedCustomer: customer,
+								linkedCustomerId: customer.id,
 							},
 						});
 					}}

@@ -131,7 +131,7 @@ const CustomerModal = ({
 						actions.setSubmitting(true);
 
 						if (values.customerId) {
-							onValidate(values.customerId);
+							onValidate({id: values.customerId});
 							onDismiss();
 						}
 						else if (customer && customer.id) {
@@ -263,11 +263,12 @@ const CustomerModal = ({
 										<Button
 											red
 											type="button"
-											onClick={() => onValidate({
-												customerId: null,
-												customer: null,
-											})
-											}
+											onClick={() => {
+												onValidate({
+													id: null,
+												});
+												onDismiss();
+											}}
 										>
 											Enlever le client
 										</Button>

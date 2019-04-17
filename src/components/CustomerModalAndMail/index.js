@@ -10,7 +10,6 @@ function CustomerModalAndMail({onDismiss, onValidate, ...rest}) {
 		<CustomerIntroMail
 			customer={createdCustomer}
 			onDismiss={() => {
-				onValidate(createdCustomer);
 				onDismiss();
 			}}
 		/>
@@ -19,7 +18,10 @@ function CustomerModalAndMail({onDismiss, onValidate, ...rest}) {
 			{...rest}
 			onDismiss={onDismiss}
 			onValidate={onValidate}
-			onCustomerWasCreated={setCreatedCustomer}
+			onCustomerWasCreated={(customer) => {
+				onValidate(customer);
+				setCreatedCustomer(customer);
+			}}
 		/>
 	);
 }

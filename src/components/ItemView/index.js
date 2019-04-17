@@ -21,6 +21,7 @@ import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
 import Apostrophe from '../Apostrophe';
+import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
 
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -685,14 +686,21 @@ const Item = ({id, customerToken, close}) => {
 					{item.reminders.length > 0 ? (
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
-						<TaskButton
-							onClick={() => focusItem({variables: {itemId: item.id}})
-							}
-							icon="✓"
-						>
-							Charger {me.settings.assistantName} de faire
-							réaliser cette tâche à {item.linkedCustomer.name}
-						</TaskButton>
+						<>
+							<TaskRemindersPreviewsList
+								taskId={item.id}
+								remindersPreviews={item.remindersPreviews}
+								customerName={item.linkedCustomer.name}
+							/>
+							<TaskButton
+								onClick={() => focusItem({variables: {itemId: item.id}})
+								}
+								icon="✓"
+							>
+								Charger {me.settings.assistantName} de faire réaliser cette tâche à{' '}
+								{item.linkedCustomer.name}
+							</TaskButton>
+						</>
 					)}
 				</>
 			)}

@@ -833,3 +833,9 @@ export const SEND_REMINDER_TEST_EMAIL = gql`
 		sent: sendReminderTestEmail(id: $id)
 	}
 `;
+
+export const SEND_REMINDER_PREVIEW_TEST_EMAIL = gql`
+	mutation sendReminderPreviewTestEmail($taskId: ID!, $type: ReminderType!) {
+		sent: sendReminderPreviewTestEmail(taskId: $taskId, type: $type)
+	}
+`;

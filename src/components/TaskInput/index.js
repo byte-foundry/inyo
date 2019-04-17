@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
-import CustomerModal from '../CustomerModalAndMail';
+import CustomerModalAndMail from '../CustomerModalAndMail';
 
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 import {
@@ -270,10 +270,6 @@ const TaskInput = ({
 										onSubmitTask({
 											name: value,
 											type: type || 'DEFAULT',
-											linkedCustomer:
-												itemCustomer && !itemCustomer.id
-													? itemCustomer
-													: undefined,
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											description: `\n# content-acquisition-list\n${files
@@ -358,11 +354,6 @@ const TaskInput = ({
 												onSubmitTask({
 													name: value,
 													type: type || 'DEFAULT',
-													linkedCustomer:
-														itemCustomer
-														&& !itemCustomer.id
-															? itemCustomer
-															: undefined,
 													linkedCustomerId:
 														itemCustomer
 														&& itemCustomer.id,
@@ -404,11 +395,6 @@ const TaskInput = ({
 													itemDueDate
 													&& itemDueDate.toISOString(),
 												unit: parseFloat(itemUnit || 0),
-												linkedCustomer:
-													itemCustomer
-													&& !itemCustomer.id
-														? itemCustomer
-														: undefined,
 												linkedCustomerId:
 													itemCustomer
 													&& itemCustomer.id,
@@ -535,10 +521,9 @@ const TaskInput = ({
 				/>
 			)}
 			{isEditingCustomer && (
-				<CustomerModal
-					onValidate={(selected) => {
-						setItemCustomer(selected.customer);
-						setEditCustomer(false);
+				<CustomerModalAndMail
+					onValidate={(customer) => {
+						setItemCustomer(customer);
 					}}
 					noSelect
 					onDismiss={() => setEditCustomer(false)}

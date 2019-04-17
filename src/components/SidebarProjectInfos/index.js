@@ -25,7 +25,7 @@ import StaticCustomerView from '../StaticCustomerView';
 import DuplicateProjectButton from '../DuplicateProjectButton';
 import DateInput from '../DateInput';
 import Plural from '../Plural';
-import CustomerModal from '../CustomerModalAndMail';
+import CustomerModalAndMail from '../CustomerModalAndMail';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
@@ -369,25 +369,21 @@ const SidebarProjectInfos = ({
 				)}
 
 				{isEditingCustomer && (
-					<CustomerModal
-						onValidate={async (selected) => {
+					<CustomerModalAndMail
+						onValidate={async (customer) => {
 							if (
 								project.customer
-								&& selected.customerId
-								&& project.customer.id === selected.customerId
+								&& project.customer.id === customer.id
 							) {
-								setEditCustomer(false);
 								return project;
 							}
 
 							const updatedProject = await updateProject({
 								variables: {
 									projectId: project.id,
-									...selected,
+									customerId: customer.id,
 								},
 							});
-
-							setEditCustomer(false);
 
 							return updatedProject;
 						}}

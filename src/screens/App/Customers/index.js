@@ -12,7 +12,7 @@ import {
 	primaryBlack,
 	P,
 } from '../../../utils/new/design-system';
-import CustomerModal from '../../../components/CustomerModalAndMail';
+import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
 import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
@@ -245,26 +245,11 @@ const Customers = () => {
 				</Table>
 
 				{isEditingCustomer && (
-					<CustomerModal
+					<CustomerModalAndMail
 						noSelect
 						customer={customerToEdit}
-						onValidate={async (selected) => {
-							if (customerToEdit && selected.customer) {
-								await updateCustomer({
-									variables: {
-										...customerToEdit,
-										...selected.customer,
-									},
-								});
-
-								setCustomerToEdit(null);
-								setEditCustomer(false);
-							}
-							else if (selected.customer) {
-								await createCustomer({
-									variables: selected.customer,
-								});
-							}
+						onValidate={async () => {
+							setCustomerToEdit(null);
 						}}
 						onDismiss={() => {
 							setCustomerToEdit(null);

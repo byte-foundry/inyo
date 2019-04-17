@@ -1,4 +1,5 @@
 import React, {useRef, useState} from 'react';
+import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 
 import EmailExample from '../EmailExample';
@@ -8,8 +9,12 @@ import {
 	ModalElem,
 	ErrorInput,
 	ModalActions,
+	Loading,
 } from '../../utils/content';
-import {SubHeading, Button, P} from '../../utils/new/design-system';
+import {
+	SubHeading, Button, P, lightGrey,
+} from '../../utils/new/design-system';
+import {GET_USER_INFOS} from '../../utils/queries';
 
 const Header = styled(SubHeading)`
 	margin-bottom: 2rem;
@@ -24,73 +29,108 @@ const ContentForCopy = styled('textarea')`
 	white-space: pre-line;
 `;
 
-const CustomerIntroMail = ({onDismiss}) => {
+const ReplaceableText = styled('span')`
+	background: yellow;
+`;
+
+const Info = styled(P)`
+	padding: 1rem;
+	background: ${lightGrey};
+`;
+
+function cap(s) {
+	return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+function nullStr(s) {
+	return s ? cap(s) : '';
+}
+
+const CustomerIntroMail = ({onDismiss, customer}) => {
 	const contentRef = useRef();
 	const [isCopied, setIsCopied] = useState(false);
+	const {
+		data: {
+			me: {email},
+		},
+		loading,
+	} = useQuery(GET_USER_INFOS);
+
+	if (loading) return <Loading />;
 
 	return (
 		<ModalContainer size="small" onDismiss={onDismiss}>
 			<ModalElem>
 				<Header>Présentation d'Inyo à votre client</Header>
-				<P>texte qui explique le pourquoi de l'email</P>
+				<Info>
+					Vous venez de créer un client ! Voici un email prérédigé qui
+					vous permettra de lui présenter inyo.
+				</Info>
 				<EmailExample
-					subject="J'utilise inyo pour gérer votre projet"
-					email="email@customer.com"
-					userEmail="email@user.com"
+					subject={
+						<>
+							Nous allons utiliser Inyo pour le suivi du projet{' '}
+							<ReplaceableText>[nom du projet]</ReplaceableText>
+						</>
+					}
+					email={customer.email}
+					userEmail={email}
 				>
-					<P>Bonjour [Nom de votre client],</P>
 					<P>
-						Je vais utiliser Inyo, mon assistant virtuel, pour
-						communiquer avec vous lors de *la [création de votre
-						logo -* renseigner le type de projet].
+						Bonjour{' '}
+						{`${nullStr(customer.title)} ${nullStr(
+							customer.firstName,
+						)} ${nullStr(customer.lastName)}`.trim()}
+						,
 					</P>
 					<P>
+						Je vais utiliser Inyo, un outil de gestion de projet
+						360, pour communiquer avec vous pendant le projet{' '}
+						<ReplaceableText>[nom du projet]</ReplaceableText>
+						<br />
 						Vous allez prochainement recevoir des emails provenant
 						d'Edwige Inyo. Ne les placez pas en spam, ils vont vous
-						tenir informé de l'avancement de mon travail.{' '}
-					</P>
-					<P>
-						Vos recevrez tous les soirs un bilan des tâches que j'ai
-						réalisées pour vous dans la journée. Vous serez
-						également notifié lorsque je commenterai une tâche et
-						lorsque je vous demanderai une validation ou un
-						document.
+						tenir informé de l'avancement de votre projet.
+						<br />
+						Afin d'avoir un aperçu en temps réel des avancées de ce
+						projet, vous recevrez régulièrement des résumés des
+						tâches réalisées, des notifications lorsque j'aurais des
+						questions ou lorsqu'une action de votre part est
+						nécessaire.
 					</P>
 					<P>
 						Ces emails contiendront un lien personnalisé vous
-						permettant d'accéder au projet, vous n'aurez pas à créer
-						de compte. Vous pourrez ajouter des commentaires,
-						valider des tâches et déposer ou récupérer des documents
-						(maquettes, textes etc..).
+						permettant d'accéder directement au projet. Vous pourrez
+						ajouter des commentaires, valider des tâches et déposer
+						ou récupérer des documents.
 					</P>
 					<P>
-						Toutes les informations relatives au projet seront
-						disponibles en permanence sur cet espace. Cela ne vous
-						demandera aucun travail supplémentaire et nous permettra
-						d'être plus efficace dans notre collaboration.
+						Merci de privilégier cette plateforme pour nos échanges,
+						cela nous permettra d'être plus efficaces en
+						centralisant nos échanges et la documentation.
 					</P>
 					<P>
 						Je reste à votre disposition si vous avez des questions.
 					</P>
-					<P>[Votre signature]</P>
+					<P>
+						<ReplaceableText>[Votre signature]</ReplaceableText>
+					</P>
 				</EmailExample>
 				<ContentForCopy
 					ref={contentRef}
-					value={`Bonjour [Nom de votre client],
+					value={`Bonjour ${`${nullStr(customer.title)} ${nullStr(
+						customer.firstName,
+					)} ${nullStr(customer.lastName)}`.trim()},
 
-Je vais utiliser Inyo, mon assistant virtuel, pour communiquer avec vous lors de *la [création de votre logo -* renseigner le type de projet].
+Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet **[nom du projet]**
+Vous allez prochainement recevoir des emails provenant d'Edwige Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.
+Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire.
 
-Vous allez prochainement recevoir des emails provenant d'Edwige Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de mon travail.
+Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez  ajouter des commentaires, valider des tâches et déposer ou récupérer des documents.
 
-Vos recevrez tous les soirs un bilan des tâches que j'ai réalisées pour vous dans la journée. Vous serez également notifié lorsque je commenterai une tâche et lorsque je vous demanderai une validation ou un document.
+Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation.
 
-Ces emails contiendront un lien personnalisé vous permettant d'accéder au projet, vous n'aurez pas à créer de compte. Vous pourrez  ajouter des commentaires, valider des tâches et déposer ou récupérer des documents (maquettes, textes etc..).
-
-Toutes les informations relatives au projet seront disponibles en permanence sur cet espace. Cela ne vous demandera aucun travail supplémentaire et nous permettra d'être plus efficace dans notre collaboration.
-
-Je reste à votre disposition si vous avez des questions.
-
-[Votre signature]`}
+Je reste à votre disposition si vous avez des questions.`}
 				/>
 				<ModalActions>
 					<Button

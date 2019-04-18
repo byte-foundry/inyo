@@ -4,7 +4,9 @@ import {Button} from '../../utils/new/design-system';
 
 import RemoveProjectModal from '../RemoveProjectModal';
 
-const RemoveProjectButton = ({children, projectId, ...rest}) => {
+const RemoveProjectButton = ({
+	children, projectId, onRemove, ...rest
+}) => {
 	const [isOpen, toggleModal] = useState(false);
 
 	return (
@@ -15,6 +17,7 @@ const RemoveProjectButton = ({children, projectId, ...rest}) => {
 
 			{isOpen && (
 				<RemoveProjectModal
+					onRemove={onRemove}
 					projectId={projectId}
 					closeModal={() => toggleModal(false)}
 				/>

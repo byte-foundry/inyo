@@ -525,7 +525,11 @@ const SidebarProjectInfos = ({
 					)}
 				</Actions>
 				<Actions>
-					<RemoveProjectButton red>
+					<RemoveProjectButton
+						red
+						projectId={project.id}
+						onRemove={() => history.push('/app/projects')}
+					>
 						<TrashIcon /> Supprimer le projet
 					</RemoveProjectButton>
 				</Actions>

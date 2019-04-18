@@ -146,7 +146,7 @@ const CustomerModal = ({
 									phone: values.phone,
 								},
 							});
-							onValidate(customer.id);
+							onValidate(customer);
 							onDismiss();
 						}
 						else {

@@ -5,7 +5,7 @@ import {Button, Heading, P} from '../../utils/new/design-system';
 import {ModalContainer, ModalElem, ModalActions} from '../../utils/content';
 import {REMOVE_PROJECT, ARCHIVE_PROJECT} from '../../utils/mutations';
 
-function RemoveProject({closeModal, projectId}) {
+function RemoveProject({closeModal, projectId, onRemove = () => {}}) {
 	const removeProject = useMutation(REMOVE_PROJECT);
 	const archiveProject = useMutation(ARCHIVE_PROJECT);
 
@@ -29,23 +29,28 @@ function RemoveProject({closeModal, projectId}) {
 					</Button>
 					<Button
 						primary
-						onClick={() => archiveProject({
-							variables: {
-								projectId,
-							},
-						})
-						}
+						onClick={() => {
+							archiveProject({
+								variables: {
+									projectId,
+								},
+							});
+							closeModal();
+						}}
 					>
 						Archiver le projet
 					</Button>
 					<Button
 						red
-						onClick={() => removeProject({
-							variables: {
-								projectId,
-							},
-						})
-						}
+						onClick={() => {
+							removeProject({
+								variables: {
+									projectId,
+								},
+							});
+							closeModal();
+							onRemove();
+						}}
 					>
 						Supprimer le projet
 					</Button>

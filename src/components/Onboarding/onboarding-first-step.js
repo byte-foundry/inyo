@@ -54,7 +54,7 @@ class OnboardingThirdStep extends Component {
 			me,
 			getNextStep,
 			getPreviousStep,
-			step,
+			isFirstStep,
 		} = this.props;
 
 		const currentDate = new Date().toJSON().split('T')[0];
@@ -233,7 +233,7 @@ class OnboardingThirdStep extends Component {
 											>
 												Continuer
 											</ActionButton>
-											{step !== 1 && (
+											{!isFirstStep && (
 												<ActionButton
 													theme="Link"
 													size="XSmall"

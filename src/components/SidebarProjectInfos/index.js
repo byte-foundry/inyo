@@ -18,26 +18,36 @@ import {
 	accentGrey,
 	P,
 } from '../../utils/new/design-system';
-import ConfirmModal from '../ConfirmModal';
-import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import {ModalContainer} from '../../utils/content';
-import StaticCustomerView from '../StaticCustomerView';
-import DuplicateProjectButton from '../DuplicateProjectButton';
-import DateInput from '../DateInput';
-import Plural from '../Plural';
-import CustomerModal from '../CustomerModal';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
+import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
+import {ReactComponent as ArchiveIcon} from '../../utils/icons/archive-icon.svg';
+import {ReactComponent as UnarchiveIcon} from '../../utils/icons/unarchive-icon.svg';
 import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
-
 import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {UPDATE_PROJECT} from '../../utils/mutations';
+import {
+	UPDATE_PROJECT,
+	ARCHIVE_PROJECT,
+	UNARCHIVE_PROJECT,
+	REMOVE_PROJECT,
+} from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+
+import ConfirmModal from '../ConfirmModal';
+import RemoveProjectButton from '../RemoveProjectButton';
+import CreateProjectLinkButton from '../CreateProjectLinkButton';
+import CustomerNameAndAddress from '../CustomerNameAndAddress';
+import CustomerModalAndMail from '../CustomerModalAndMail';
+import StaticCustomerView from '../StaticCustomerView';
+import DuplicateProjectButton from '../DuplicateProjectButton';
+import DateInput from '../DateInput';
+import Plural from '../Plural';
 
 const ProjectMenuIcon = styled('div')`
 	margin: 0 10px -3px 0;
@@ -53,6 +63,10 @@ const SubSection = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-bottom: 1rem;
 	}
+`;
+
+const Actions = styled('div')`
+	margin-bottom: 1rem;
 `;
 
 const ClientPreviewIcon = styled(EyeIcon)`
@@ -216,8 +230,12 @@ const SidebarProjectInfos = ({
 		{},
 	);
 	const updateProject = useMutation(UPDATE_PROJECT);
+	const archiveProject = useMutation(ARCHIVE_PROJECT);
+	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
+	const removeProject = useMutation(REMOVE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
+		suspend: true,
 	});
 
 	const dateRef = useRef();
@@ -229,6 +247,7 @@ const SidebarProjectInfos = ({
 	if (error) throw error;
 
 	const {project} = data;
+	const isArchived = project.status === 'ARCHIVED';
 
 	function setView(view) {
 		const newQuery = new URLSearchParams(location.search);
@@ -368,25 +387,21 @@ const SidebarProjectInfos = ({
 				)}
 
 				{isEditingCustomer && (
-					<CustomerModal
-						onValidate={async (selected) => {
+					<CustomerModalAndMail
+						onValidate={async (customer) => {
 							if (
 								project.customer
-								&& selected.customerId
-								&& project.customer.id === selected.customerId
+								&& project.customer.id === customer.id
 							) {
-								setEditCustomer(false);
 								return project;
 							}
 
 							const updatedProject = await updateProject({
 								variables: {
 									projectId: project.id,
-									...selected,
+									customerId: customer.id,
 								},
 							});
-
-							setEditCustomer(false);
 
 							return updatedProject;
 						}}
@@ -471,19 +486,54 @@ const SidebarProjectInfos = ({
 			)}
 
 			<div>
-				<DuplicateProjectButton
-					data-tip="Copier ces tâches dans un nouveau projet"
-					projectId={project.id}
-					onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
-					}
-				>
-					Dupliquer le projet
-				</DuplicateProjectButton>
+				<Actions>
+					<DuplicateProjectButton
+						data-tip="Copier ces tâches dans un nouveau projet"
+						projectId={project.id}
+						onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
+						}
+					>
+						Dupliquer le projet
+					</DuplicateProjectButton>
+				</Actions>
+				<Actions>
+					<CreateProjectLinkButton project={project} />
+				</Actions>
+				<Actions>
+					{isArchived ? (
+						<Button
+							onClick={() => unarchiveProject({
+								variables: {
+									projectId: project.id,
+								},
+							})
+							}
+						>
+							<UnarchiveIcon /> Désarchiver le projet
+						</Button>
+					) : (
+						<Button
+							onClick={() => archiveProject({
+								variables: {
+									projectId: project.id,
+								},
+							})
+							}
+						>
+							<ArchiveIcon /> Archiver le projet
+						</Button>
+					)}
+				</Actions>
+				<Actions>
+					<RemoveProjectButton
+						red
+						projectId={project.id}
+						onRemove={() => history.push('/app/projects')}
+					>
+						<TrashIcon /> Supprimer le projet
+					</RemoveProjectButton>
+				</Actions>
 			</div>
-
-			{/* <Button red onClick={removeProject}>
-				Supprimer le projet
-			</Button> */}
 		</Aside>
 	);
 };

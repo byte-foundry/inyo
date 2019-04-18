@@ -18,7 +18,6 @@ import {
 } from '../../utils/new/design-system';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
-import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
@@ -127,6 +126,7 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token: customerToken},
+		suspend: true,
 	});
 
 	if (error) throw error;
@@ -134,11 +134,11 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 	const {project} = data;
 
 	function setView(view) {
-		const query = new URLSearchParams(location.search);
+		const newQuery = new URLSearchParams(location.search);
 
-		query.delete('filter');
-		query.set('view', view);
-		history.push(`/app/${customerToken}/tasks/?${query.toString()}`);
+		newQuery.delete('filter');
+		newQuery.set('view', view);
+		history.push(`/app/${customerToken}/tasks/?${newQuery.toString()}`);
 	}
 
 	return (

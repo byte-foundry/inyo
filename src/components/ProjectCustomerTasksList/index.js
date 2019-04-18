@@ -46,6 +46,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	const customerToken = useContext(CustomerContext);
 	const {data, error} = useQuery(GET_PROJECT_DATA_WITH_TOKEN, {
 		variables: {projectId, token: customerToken},
+		suspend: true,
 	});
 
 	if (error) throw error;

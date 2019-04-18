@@ -2,7 +2,6 @@ import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
-import moment from 'moment';
 
 import TasksList from '../../../components/TasksList';
 import TaskView from '../../../components/ItemView';
@@ -38,7 +37,7 @@ const NoTaskIllus = styled('div')`
 const NoTaskContent = styled('div')``;
 
 const DashboardTasks = () => {
-	const {data, loading, error} = useQuery(GET_ALL_TASKS);
+	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
 
 	if (loading) return <p>Loading</p>;
 	if (error) throw error;
@@ -107,7 +106,7 @@ const DashboardTasks = () => {
 
 			<Route
 				path="/app/dashboard/:taskId"
-				render={({location: {state = {}}, match, history}) => (
+				render={({match, history}) => (
 					<Modal onDismiss={() => history.push('/app/dashboard')}>
 						<ModalElem>
 							<TaskView

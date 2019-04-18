@@ -95,13 +95,25 @@ let outsideClosureState;
 // does not update the handler when state changes
 
 export default function ({
-	unit, onBlur, onSubmit, onTab, innerRef, withButton,
+	unit,
+	onBlur,
+	onSubmit,
+	onTab,
+	innerRef,
+	withButton,
+	getValue = {},
 }) {
 	const [isHours, setIsHours] = useState(false);
 	const inputRef = innerRef || useRef();
 	const containerRef = useRef(null);
 
 	outsideClosureState = isHours;
+
+	getValue.current = () => {
+		const valueFloat = parseFloat(inputRef.current.value);
+
+		return outsideClosureState ? valueFloat / 8 : valueFloat;
+	};
 
 	useEffect(() => {
 		inputRef.current.focus();
@@ -158,12 +170,6 @@ export default function ({
 						<UnitInputSwitch
 							data-tip="Changer l'unité de temps"
 							onClick={() => {
-								if (isHours) {
-									setFieldValue('unit', values.unit / 8);
-								}
-								else {
-									setFieldValue('unit', values.unit * 8);
-								}
 								setIsHours(!isHours);
 							}}
 						>

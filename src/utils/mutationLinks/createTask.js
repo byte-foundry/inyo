@@ -23,8 +23,14 @@ export default {
 						},
 					};
 				}
+
+				return undefined;
 			}
+
+			return undefined;
 		}
+
+		return undefined;
 	},
 	getAllTasks: ({mutation, query}) => {
 		const cachedItems = [...query.result.me.tasks];
@@ -56,5 +62,7 @@ export default {
 				},
 			};
 		}
+
+		return undefined;
 	},
 };

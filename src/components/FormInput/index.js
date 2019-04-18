@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 import {Field} from 'formik';
@@ -20,37 +20,26 @@ const FormInputMain = styled(Input)`
 		`};
 `;
 
-function FormInputShell({field, ...props}) {
-	return <FormInputMain {...field} {...props} />;
-}
-
-class FormInput extends Component {
-	render() {
-		const {
-			name,
-			placeholder,
-			type,
-			handleChange,
-			handleBlur,
-			errors,
-			touched,
-			inline,
-		} = this.props;
-
-		return (
-			<Field
-				component={FormInputShell}
-				id={name}
-				placeholder={placeholder}
-				type={type}
-				name={name}
-				onChange={handleChange}
-				onBlur={handleBlur}
-				error={getDeep(name, errors) && getDeep(name, touched)}
-				inline={inline}
-			/>
-		);
-	}
-}
+const FormInput = ({
+	name,
+	handleChange,
+	handleBlur,
+	errors,
+	touched,
+	...rest
+}) => (
+	<Field
+		id={name}
+		name={name}
+		onChange={handleChange}
+		onBlur={handleBlur}
+		error={getDeep(name, errors) && getDeep(name, touched)}
+		{...rest}
+	>
+		{({field, form: {isSubmitting}}) => (
+			<FormInputMain {...field} disabled={isSubmitting} {...rest} />
+		)}
+	</Field>
+);
 
 export default FormInput;

@@ -7,8 +7,6 @@ import {
 	primaryPurple,
 	primaryWhite,
 	lightGrey,
-	mediumGrey,
-	accentGrey,
 	primaryRed,
 } from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';
@@ -165,13 +163,13 @@ function ArianneThread({
 			me: {customers},
 		},
 		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS);
+	} = useQuery(GET_ALL_CUSTOMERS, {suspend: true});
 	const {
 		data: {
 			me: {projects: projectsUnfiltered},
 		},
 		errors: errorsProject,
-	} = useQuery(GET_ALL_PROJECTS);
+	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 
 	const projects = projectsUnfiltered.filter(
 		project => (!linkedCustomerId

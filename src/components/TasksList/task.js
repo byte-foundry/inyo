@@ -15,7 +15,6 @@ import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 import {
-	Button,
 	ButtonLink,
 	TaskHeading,
 	CommentIcon,
@@ -35,7 +34,7 @@ import CustomerDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
-import CustomerModal from '../CustomerModal';
+import CustomerModalAndMail from '../CustomerModalAndMail';
 import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`
@@ -397,7 +396,7 @@ export function TaskInfosInputs({
 		).length;
 	}
 
-	let unitToDisplay = item.timeItTook !== null ? item.timeItTook : item.unit;
+	let unitToDisplay = item.timeItTook === null ? item.unit : item.timeItTook;
 
 	let unitInHours = false;
 
@@ -586,11 +585,7 @@ function Task({
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 
 	const setTimeItTookRef = useRef();
-	const setTimeItTookInputRef = useRef();
-
-	useOnClickOutside(setTimeItTookRef, () => {
-		setSetTimeItTook(false);
-	});
+	const setTimeItTookValueRef = useRef();
 
 	function finishItemCallback(unit) {
 		finishItem({
@@ -634,15 +629,14 @@ function Task({
 						if (customerToken) {
 							finishItemCallback(item.unit);
 						}
-						else if (!setTimeItTook) {
-							setSetTimeItTook(true);
-						}
-						else {
-							debugger;
+						else if (setTimeItTook) {
 							finishItemCallback(
-								parseFloat(setTimeItTookInputRef.current.value),
+								parseFloat(setTimeItTookValueRef.current()),
 							);
 							setSetTimeItTook(false);
+						}
+						else {
+							setSetTimeItTook(true);
 						}
 					}
 					else if (isUnfinishable) {
@@ -658,17 +652,20 @@ function Task({
 			<TaskContent noData={noData}>
 				<TaskHeader
 					data-tip={
-						!setTimeItTook
-							? 'Cliquer pour voir le contenu de la tâche'
-							: undefined
+						setTimeItTook
+							? undefined
+							: 'Cliquer pour voir le contenu de la tâche'
 					}
 				>
 					{setTimeItTook && (
 						<SetTimeContainer>
 							<UnitInput
-								innerRef={setTimeItTookInputRef}
+								getValue={setTimeItTookValueRef}
 								unit={item.unit}
-								onBlur={() => {}}
+								onBlur={(unit) => {
+									finishItemCallback(unit);
+									setSetTimeItTook(false);
+								}}
 								onSubmit={finishItemCallback}
 							/>
 							<SetTimeInfos>
@@ -784,15 +781,14 @@ function Task({
 				)}
 			</TaskContent>
 			{isEditingCustomer && (
-				<CustomerModal
-					onValidate={(selected) => {
+				<CustomerModalAndMail
+					onValidate={(customer) => {
 						updateItem({
 							variables: {
 								itemId: item.id,
-								linkedCustomer: selected.customer,
+								linkedCustomerId: customer.id,
 							},
 						});
-						setEditCustomer(false);
 					}}
 					noSelect
 					onDismiss={() => setEditCustomer(false)}

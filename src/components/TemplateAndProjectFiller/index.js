@@ -162,7 +162,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 		data: {
 			me: {projects},
 		},
-	} = useQuery(GET_ALL_PROJECTS);
+	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 	const sanitize = str => str
 		.toLowerCase()
 		.normalize('NFD')
@@ -245,12 +245,12 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 															name: section.name,
 															items: section.items.map(
 																({
-																	name,
+																	name: sectionName,
 																	unit,
 																	description,
 																	type,
 																}) => ({
-																	name,
+																	name: sectionName,
 																	unit,
 																	description,
 																	type,

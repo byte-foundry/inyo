@@ -4,16 +4,9 @@ import TaskIconValidatedUrl from './icons/taskicon-user-validated.svg';
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl from './icons/taskicon-customer-validated.svg';
-import CustomerReminderIconUrl, {
-	ReactComponent as CustomerReminderIcon,
-} from './icons/customer-reminder.svg';
-import UserReminderIconUrl, {
-	ReactComponent as UserReminderIcon,
-} from './icons/user-reminder.svg';
-import ValidationIconUrl, {
-	ReactComponent as ValidationIcon,
-} from './icons/validation.svg';
+import TaskCustomerIconValidatedUrl, {
+	ReactComponent as TaskIconValidated,
+} from './icons/taskicon-customer-validated.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
@@ -28,6 +21,11 @@ export const INTERCOM_APP_ID
 
 export const WEEKDAYS_SHORT = {
 	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+};
+
+export const TITLE_ENUM_TO_TITLE = {
+	MONSIEUR: 'M.',
+	MADAME: 'Mme',
 };
 
 export const MONTHS = {
@@ -79,6 +77,7 @@ export const BREAKPOINTS = [420];
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,
+		iconValidated: <TaskIconValidated />,
 		iconUrl: TaskIconUrl,
 		iconUrlValidated: TaskIconValidatedUrl,
 		type: 'DEFAULT',
@@ -87,6 +86,7 @@ export const ITEM_TYPES = [
 	},
 	{
 		icon: <TaskCustomerIcon />,
+		iconValidated: <TaskIconValidated />,
 		iconUrl: TaskCustomerIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CUSTOMER',
@@ -95,6 +95,7 @@ export const ITEM_TYPES = [
 	},
 	{
 		icon: <ContentAcquisitionIcon />,
+		iconValidated: <TaskIconValidated />,
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',

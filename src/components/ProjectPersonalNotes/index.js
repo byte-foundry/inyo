@@ -11,6 +11,7 @@ import {SubHeading} from '../../utils/new/design-system';
 const ProjectPersonalNotes = ({projectId}) => {
 	const {data, error} = useQuery(GET_PROJECT_PERSONAL_NOTES, {
 		variables: {id: projectId},
+		suspend: true,
 	});
 	const updateNotes = useMutation(UPDATE_PROJECT_PERSONAL_NOTES);
 

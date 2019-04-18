@@ -12,7 +12,7 @@ import {
 	primaryBlack,
 	P,
 } from '../../../utils/new/design-system';
-import CustomerModal from '../../../components/CustomerModal';
+import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
 import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
@@ -141,7 +141,7 @@ const DeleteIcon = styled(TrashIcon)`
 `;
 
 const Customers = () => {
-	const {data, error} = useQuery(GET_USER_CUSTOMERS);
+	const {data, error} = useQuery(GET_USER_CUSTOMERS, {suspend: true});
 	const createCustomer = useMutation(CREATE_CUSTOMER);
 	const updateCustomer = useMutation(UPDATE_CUSTOMER);
 	const removeCustomer = useMutation(REMOVE_CUSTOMER);
@@ -245,28 +245,11 @@ const Customers = () => {
 				</Table>
 
 				{isEditingCustomer && (
-					<CustomerModal
+					<CustomerModalAndMail
 						noSelect
 						customer={customerToEdit}
-						onValidate={async (selected) => {
-							if (customerToEdit && selected.customer) {
-								await updateCustomer({
-									variables: {
-										...customerToEdit,
-										...selected.customer,
-									},
-								});
-
-								setCustomerToEdit(null);
-								setEditCustomer(false);
-							}
-							else if (selected.customer) {
-								await createCustomer({
-									variables: selected.customer,
-								});
-
-								setEditCustomer(false);
-							}
+						onValidate={async () => {
+							setCustomerToEdit(null);
 						}}
 						onDismiss={() => {
 							setCustomerToEdit(null);

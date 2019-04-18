@@ -100,6 +100,7 @@ const editableCss = css`
 export default function ProjectHeader({projectId, customerToken}) {
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token: customerToken},
+		suspend: true,
 	});
 	const updateProject = useMutation(UPDATE_PROJECT);
 
@@ -115,6 +116,7 @@ export default function ProjectHeader({projectId, customerToken}) {
 				placeholderCss={placeholderCss}
 				nameCss={nameCss}
 				editableCss={editableCss}
+				disabled={customerToken}
 				missingTitle={
 					project.name === 'Nom du projet' || project.name === ''
 				}

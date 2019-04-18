@@ -33,6 +33,7 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	const {data: currentProjectData} = useQuery(GET_PROJECT_NOTIFY_ACTIVITY, {
 		variables: {id: currentProjectId},
 		skip: !currentProjectId,
+		suspend: true,
 	});
 	const updateProject = useMutation(UPDATE_PROJECT);
 

@@ -8,11 +8,8 @@ import {REMINDER_TYPES_DATA} from '../../utils/constants';
 import {
 	primaryGrey,
 	primaryBlack,
-	primaryPurple,
 	primaryRed,
 	accentGrey,
-	lightGrey,
-	lightRed,
 	primaryWhite,
 	mediumGrey,
 	Button,
@@ -157,11 +154,11 @@ function TaskRemindersList({
 								<ReminderDate
 									small={small}
 									data-tip={
-										reminder.status !== 'CANCELED'
-											? moment(
+										reminder.status === 'CANCELED'
+											? undefined
+											: moment(
 												reminder.sendingDate,
 											  ).format('DD/MM/YYYY [à] HH:mm')
-											: undefined
 									}
 								>
 									{reminder.status === 'PENDING'

@@ -39,8 +39,6 @@ export default {
 			task => !task.section || task.section.id !== removedSection.id,
 		);
 
-		console.log(cachedMe.tasks, tasks);
-
 		return {
 			...query.result,
 			me: {

@@ -8,8 +8,6 @@ import noRemindersIllus from '../../utils/images/bermuda-done.svg';
 import {
 	Aside,
 	SubHeading,
-	primaryPurple,
-	primaryBlack,
 	primaryGrey,
 	lightGrey,
 } from '../../utils/new/design-system';
@@ -55,58 +53,6 @@ const SubSection = styled('div')`
 		bottom: -1rem;
 		border-radius: 8px;
 		z-index: -1;
-	}
-`;
-
-const SidebarLink = styled('div')`
-	display: inline-flex;
-	align-items: center;
-	color: ${props => (props.active ? primaryBlack : primaryPurple)};
-	text-decoration: none;
-	font-weight: 500;
-	margin-bottom: 0.8rem;
-	cursor: ${props => (props.active ? 'default' : 'pointer')};
-	position: relative;
-
-	${props => props.active
-		&& `&:before {
-			content: '';
-			display: 'block';
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -1rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-
-		svg {
-			fill: ${primaryBlack} !important;
-		}`}
-
-	&:hover {
-		&:before {
-			content: '';
-			display: 'block';
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -1rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-		color: ${primaryBlack};
-		svg {
-			fill: ${primaryBlack};
-		}
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: flex;
 	}
 `;
 

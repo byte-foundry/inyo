@@ -11,7 +11,12 @@ export default function ConditionalContent() {
 	const {
 		data: {me},
 		loading,
-	} = useQuery(GET_USER_INFOS);
+	} = useQuery(GET_USER_INFOS, {suspend: false});
+
+	if (loading) {
+		return false;
+	}
+
 	const {workingDays, startWorkAt, endWorkAt} = me;
 
 	return (

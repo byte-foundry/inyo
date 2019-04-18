@@ -10,7 +10,6 @@ import TaskStatusButton from '../TaskStatusButton';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 import Plural from '../Plural';
-import {gray50, gray70, LoadingLogo} from '../../utils/content';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
 import MultilineEditable from '../MultilineEditable';
@@ -48,7 +47,9 @@ import {
 	primaryRed,
 	primaryGrey,
 } from '../../utils/new/design-system';
-import {FlexRow} from '../../utils/content';
+import {
+	FlexRow, gray50, gray70, LoadingLogo,
+} from '../../utils/content';
 import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled('div')``;
@@ -258,7 +259,6 @@ const Item = ({id, customerToken, close}) => {
 	const [editProject, setEditProject] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
 	const dateRef = useRef();
-	const timeItTookRef = useRef();
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
 		suspend: false,
@@ -300,7 +300,7 @@ const Item = ({id, customerToken, close}) => {
 
 	// parse the description for the file list
 	let files = [];
-	const fileListRegex = /([\s\S])+# content-acquisition-list\n([^#]+)$/;
+	const fileListRegex = /([\s\S])*# content-acquisition-list(?:\n([^#]+)?)?$/;
 
 	if (fileListRegex.test(item.description)) {
 		const matches = item.description
@@ -359,7 +359,11 @@ const Item = ({id, customerToken, close}) => {
 			</StickyHeader>
 			<Header>
 				<Title data-tip="Type et titre de la tâche">
-					<TaskHeadingIcon>{typeInfo.icon}</TaskHeadingIcon>
+					<TaskHeadingIcon>
+						{item.status === 'FINISHED'
+							? typeInfo.iconValidated
+							: typeInfo.icon}
+					</TaskHeadingIcon>
 					<InlineEditable
 						disabled={!!customerToken}
 						editableCss={css`
@@ -591,7 +595,19 @@ const Item = ({id, customerToken, close}) => {
 							variables: {
 								itemId: id,
 								token: customerToken,
-								description: e.target.innerText,
+								description: e.target.innerText.concat(
+									files.length > 0
+										? `\n# content-acquisition-list\n${files
+											.map(
+												({checked, name}) => `- [${
+													checked
+														? 'x'
+														: ' '
+												}] ${name}`,
+											)
+											.join('\n')}`
+										: '',
+								),
 							},
 						})
 						}

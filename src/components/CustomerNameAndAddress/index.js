@@ -2,13 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled/macro';
 
 import {H4, H5} from '../../utils/content';
-import {
-	P,
-	primaryGrey,
-	mediumGrey,
-	accentGrey,
-	primaryBlack,
-} from '../../utils/new/design-system';
+import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
+import {P, accentGrey, primaryBlack} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;
@@ -37,11 +32,6 @@ const CompanyName = styled(H4)`
 	}
 `;
 
-const titleEnumToTitle = {
-	MONSIEUR: 'M.',
-	MADAME: 'Mme',
-};
-
 const CustomerNameAndAddress = ({
 	customer: {
 		name, firstName, lastName, email, title, phone,
@@ -50,7 +40,7 @@ const CustomerNameAndAddress = ({
 	<ClientAddress>
 		<CompanyName>{name}</CompanyName>
 		<ContactName>
-			{titleEnumToTitle[title]} {firstName} {lastName}
+			{TITLE_ENUM_TO_TITLE[title]} {firstName} {lastName}
 		</ContactName>
 		<ContactInfo>{email}</ContactInfo>
 		<ContactInfo>{phone}</ContactInfo>

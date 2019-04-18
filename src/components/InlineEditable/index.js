@@ -1,14 +1,9 @@
-import React, {Component} from 'react';
+import React, {useState, useCallback, useRef} from 'react';
 import styled from '@emotion/styled';
 import {css} from '@emotion/core';
 
 import {Input, gray50} from '../../utils/content';
-import {
-	lightGrey,
-	lightRed,
-	accentGrey,
-	primaryRed,
-} from '../../utils/new/design-system';
+import {lightGrey, accentGrey} from '../../utils/new/design-system';
 import Pencil from '../../utils/icons/pencil.svg';
 
 const Placeholder = styled('span')`
@@ -53,87 +48,83 @@ const Editable = styled('span')`
 	${props => props.css};
 `;
 
-class InlineEditable extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			isEditing: props.isEditing || false,
-			value: props.value,
-		};
-	}
+function InlineEditable({
+	isEditing: isEditingProps,
+	value: valueProps,
+	disabled,
+	onFocusOut,
+	type,
+	placeholder,
+	className,
+	innerRef,
+	nameCss,
+	editableCss,
+	placeholderCss,
+}) {
+	const [isEditing, setIsEditing] = useState(isEditingProps || false);
+	const [value, setValue] = useState(valueProps);
 
-	handleFocus = () => {
-		if (this.props.disabled) return;
+	const handleFocus = useCallback(() => {
+		if (disabled) return;
 
 		let shouldBeCleared = false;
 
-		if (this.state.isEditing) {
-			shouldBeCleared = this.props.onFocusOut(this.state.value);
-		}
-		this.setState(state => ({
-			value: shouldBeCleared ? '' : state.value,
-			isEditing: !this.state.isEditing,
-		}));
-	};
-
-	handleChange = (e) => {
-		this.setState({
-			value: e.target.value,
-		});
-	};
-
-	render() {
-		const {isEditing, value} = this.state;
-		const {
-			type, placeholder, className, innerRef, disabled,
-		} = this.props;
-
 		if (isEditing) {
-			return (
-				<NameInput
-					ref={innerRef}
-					type={type}
-					value={value}
-					onChange={this.handleChange}
-					onBlur={this.handleFocus}
-					placeholder={placeholder}
-					autoFocus
-					flexible
-					className={className}
-					css={this.props.nameCss}
-					onKeyPress={(e) => {
-						if (e.key === 'Enter') {
-							e.target.blur();
-						}
-					}}
-				/>
-			);
+			shouldBeCleared = onFocusOut(value);
 		}
+		setIsEditing(!isEditing);
+		setValue(shouldBeCleared ? '' : value);
+	}, [isEditing, value, disabled, onFocusOut]);
 
-		if (value) {
-			return (
-				<Editable
-					className={className}
-					onClick={this.handleFocus}
-					disabled={disabled}
-					css={this.props.editableCss}
-				>
-					{value}
-				</Editable>
-			);
-		}
+	const handleChange = useRef((e) => {
+		setValue(e.target.value);
+	});
 
+	if (isEditing) {
 		return (
-			<Placeholder
+			<NameInput
+				ref={innerRef}
+				type={type}
+				value={value}
+				onChange={handleChange.current}
+				onBlur={handleFocus}
+				placeholder={placeholder}
+				autoFocus
+				flexible
 				className={className}
-				onClick={this.handleFocus}
-				disabled={disabled}
-				css={this.props.placeholderCss}
-			>
-				{placeholder}
-			</Placeholder>
+				css={nameCss}
+				onKeyPress={(e) => {
+					if (e.key === 'Enter') {
+						e.target.blur();
+					}
+				}}
+			/>
 		);
 	}
+
+	if (value) {
+		return (
+			<Editable
+				className={className}
+				onClick={handleFocus}
+				disabled={disabled}
+				css={editableCss}
+			>
+				{value}
+			</Editable>
+		);
+	}
+
+	return (
+		<Placeholder
+			className={className}
+			onClick={handleFocus}
+			disabled={disabled}
+			css={placeholderCss}
+		>
+			{placeholder}
+		</Placeholder>
+	);
 }
 
 InlineEditable.defaultProps = {

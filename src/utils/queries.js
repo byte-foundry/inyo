@@ -155,6 +155,7 @@ export const GET_PROJECT_INFOS = gql`
 			daysUntilDeadline
 			notifyActivityToCustomer
 			total
+			token
 			attachments {
 				id
 				filename

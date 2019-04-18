@@ -11,7 +11,6 @@ import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
 	LayoutMainElem,
 	primaryBlack,
-	primaryPurple,
 	primaryWhite,
 	lightGrey,
 	lightRed,
@@ -331,6 +330,7 @@ const DraggableSection = ({children, section, index}) => (
 function ProjectTasksList({items, projectId, sectionId}) {
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
+		suspend: true,
 	});
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
 	const updateTask = useMutation(UPDATE_ITEM);
@@ -464,10 +464,11 @@ function ProjectTasksList({items, projectId, sectionId}) {
 								const itemsToUpdate = [updateItem];
 								const oldItemsToUpdate = [];
 								const section = sections.find(
-									section => section.id === destination.droppableId,
+									sectionItem => sectionItem.id
+										=== destination.droppableId,
 								);
 								const oldSection = sections.find(
-									section => section.id === source.droppableId,
+									sectionItem => sectionItem.id === source.droppableId,
 								);
 
 								if (

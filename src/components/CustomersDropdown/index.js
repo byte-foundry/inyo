@@ -6,7 +6,7 @@ import {ArianneElem} from '../ArianneThread';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 
 const CustomersDropdown = ({creatable, ...props}) => {
-	const {data, errors} = useQuery(GET_ALL_CUSTOMERS);
+	const {data, errors} = useQuery(GET_ALL_CUSTOMERS, {suspend: true});
 
 	if (errors) throw errors;
 	const customers = [...data.me.customers];

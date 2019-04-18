@@ -86,6 +86,7 @@ export default function WeekDaysInput({values, setFieldValue}) {
 		<DayInputContainer>
 			{workingDaysNames.map(({value, label}) => (
 				<DayInput
+					key={value}
 					active={values.includes(value)}
 					onClick={selectDay(values, value, setFieldValue)}
 				>

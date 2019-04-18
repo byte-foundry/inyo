@@ -23,6 +23,11 @@ export const WEEKDAYS_SHORT = {
 	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
 };
 
+export const TITLE_ENUM_TO_TITLE = {
+	MONSIEUR: 'M.',
+	MADAME: 'Mme',
+};
+
 export const MONTHS = {
 	fr: [
 		'Janvier',

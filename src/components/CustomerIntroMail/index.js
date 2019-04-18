@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 import EmailExample from '../EmailExample';
 
+import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
 	ModalContainer,
 	ModalElem,
@@ -46,6 +47,10 @@ function nullStr(s) {
 	return s ? cap(s) : '';
 }
 
+function getCiv(s) {
+	return TITLE_ENUM_TO_TITLE[s];
+}
+
 const CustomerIntroMail = ({onDismiss, customer}) => {
 	const contentRef = useRef();
 	const [isCopied, setIsCopied] = useState(false);
@@ -78,7 +83,7 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 				>
 					<P>
 						Bonjour{' '}
-						{`${nullStr(customer.title)} ${nullStr(
+						{`${nullStr(getCiv(customer.title))} ${nullStr(
 							customer.firstName,
 						)} ${nullStr(customer.lastName)}`.trim()}
 						,
@@ -118,9 +123,11 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 				</EmailExample>
 				<ContentForCopy
 					ref={contentRef}
-					value={`Bonjour ${`${nullStr(customer.title)} ${nullStr(
-						customer.firstName,
-					)} ${nullStr(customer.lastName)}`.trim()},
+					value={`Bonjour ${`${nullStr(
+						getCiv(customer.title),
+					)} ${nullStr(customer.firstName)} ${nullStr(
+						customer.lastName,
+					)}`.trim()},
 
 Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet **[nom du projet]**
 Vous allez prochainement recevoir des emails provenant d'Edwige Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.

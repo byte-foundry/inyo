@@ -218,7 +218,6 @@ export const GET_PROJECT_INFOS = gql`
 			}
 			customer {
 				...ProjectCustomerFragment
-				token
 			}
 		}
 	}

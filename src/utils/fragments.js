@@ -120,6 +120,7 @@ export const PROJECT_CUSTOMER_FRAGMENT = gql`
 		email
 		title
 		phone
+		token
 		address {
 			street
 			city

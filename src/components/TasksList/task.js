@@ -34,7 +34,7 @@ import CustomerDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
 import UnitInput from '../UnitInput';
 import Plural from '../Plural';
-import CustomerModal from '../CustomerModal';
+import CustomerModalAndMail from '../CustomerModalAndMail';
 import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`
@@ -781,15 +781,14 @@ function Task({
 				)}
 			</TaskContent>
 			{isEditingCustomer && (
-				<CustomerModal
-					onValidate={(selected) => {
+				<CustomerModalAndMail
+					onValidate={(customer) => {
 						updateItem({
 							variables: {
 								itemId: item.id,
-								linkedCustomer: selected.customer,
+								linkedCustomerId: customer.id,
 							},
 						});
-						setEditCustomer(false);
 					}}
 					noSelect
 					onDismiss={() => setEditCustomer(false)}

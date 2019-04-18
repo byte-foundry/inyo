@@ -1,5 +1,5 @@
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
@@ -10,6 +10,7 @@ import FormSelect from '../FormSelect';
 import {SubHeading, Button} from '../../utils/new/design-system';
 
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../utils/mutations';
 import {BREAKPOINTS} from '../../utils/constants';
 
 const Header = styled(SubHeading)`
@@ -34,7 +35,8 @@ const Buttons = styled('div')`
 const CustomerModal = ({
 	selectedCustomerId,
 	onDismiss,
-	onValidate,
+	onValidate = () => {},
+	onCustomerWasCreated,
 	noSelect,
 	customer,
 }) => {
@@ -42,6 +44,8 @@ const CustomerModal = ({
 		skip: noSelect,
 		suspend: true,
 	});
+	const updateCustomer = useMutation(UPDATE_CUSTOMER);
+	const createCustomer = useMutation(CREATE_CUSTOMER);
 	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
 
 	let options = [];
@@ -126,17 +130,41 @@ const CustomerModal = ({
 					onSubmit={async (values, actions) => {
 						actions.setSubmitting(true);
 
-						await onValidate({
-							customerId: values.customerId,
-							customer: {
-								name: values.name,
-								title: values.title,
-								firstName: values.firstName,
-								lastName: values.lastName,
-								email: values.email,
-								phone: values.phone,
-							},
-						});
+						if (values.customerId) {
+							onValidate({id: values.customerId});
+							onDismiss();
+						}
+						else if (customer && customer.id) {
+							updateCustomer({
+								variables: {
+									...customer,
+									name: values.name,
+									title: values.title,
+									firstName: values.firstName,
+									lastName: values.lastName,
+									email: values.email,
+									phone: values.phone,
+								},
+							});
+							onValidate(customer.id);
+							onDismiss();
+						}
+						else {
+							const {
+								data: {createCustomer: createdCustomer},
+							} = await createCustomer({
+								variables: {
+									name: values.name,
+									title: values.title,
+									firstName: values.firstName,
+									lastName: values.lastName,
+									email: values.email,
+									phone: values.phone,
+								},
+							});
+
+							onCustomerWasCreated(createdCustomer);
+						}
 
 						actions.setSubmitting(false);
 					}}
@@ -235,11 +263,12 @@ const CustomerModal = ({
 										<Button
 											red
 											type="button"
-											onClick={() => onValidate({
-												customerId: null,
-												customer: null,
-											})
-											}
+											onClick={() => {
+												onValidate({
+													id: null,
+												});
+												onDismiss();
+											}}
 										>
 											Enlever le client
 										</Button>

@@ -19,14 +19,15 @@ import {
 	P,
 } from '../../utils/new/design-system';
 import {ModalContainer} from '../../utils/content';
-import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
-import {ReactComponent as ArchiveIcon} from '../../utils/icons/archive-icon.svg';
-import {ReactComponent as UnarchiveIcon} from '../../utils/icons/unarchive-icon.svg';
+
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
+import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
+import {ReactComponent as ArchiveIcon} from '../../utils/icons/archive-icon.svg';
+import {ReactComponent as UnarchiveIcon} from '../../utils/icons/unarchive-icon.svg';
 import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
@@ -42,11 +43,11 @@ import ConfirmModal from '../ConfirmModal';
 import RemoveProjectButton from '../RemoveProjectButton';
 import CreateProjectLinkButton from '../CreateProjectLinkButton';
 import CustomerNameAndAddress from '../CustomerNameAndAddress';
+import CustomerModalAndMail from '../CustomerModalAndMail';
 import StaticCustomerView from '../StaticCustomerView';
 import DuplicateProjectButton from '../DuplicateProjectButton';
 import DateInput from '../DateInput';
 import Plural from '../Plural';
-import CustomerModal from '../CustomerModal';
 
 const ProjectMenuIcon = styled('div')`
 	margin: 0 10px -3px 0;
@@ -222,7 +223,6 @@ const SidebarProjectInfos = ({
 }) => {
 	const query = new URLSearchParams(location.search);
 	const activeView = query.get('view');
-	const [openDeleteProjectModal, setOpenDeleteProjectModal] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
@@ -387,25 +387,21 @@ const SidebarProjectInfos = ({
 				)}
 
 				{isEditingCustomer && (
-					<CustomerModal
-						onValidate={async (selected) => {
+					<CustomerModalAndMail
+						onValidate={async (customer) => {
 							if (
 								project.customer
-								&& selected.customerId
-								&& project.customer.id === selected.customerId
+								&& project.customer.id === customer.id
 							) {
-								setEditCustomer(false);
 								return project;
 							}
 
 							const updatedProject = await updateProject({
 								variables: {
 									projectId: project.id,
-									...selected,
+									customerId: customer.id,
 								},
 							});
-
-							setEditCustomer(false);
 
 							return updatedProject;
 						}}
@@ -529,10 +525,7 @@ const SidebarProjectInfos = ({
 					)}
 				</Actions>
 				<Actions>
-					<RemoveProjectButton
-						red
-						onClick={() => setOpenDeleteProjectModal(true)}
-					>
+					<RemoveProjectButton red>
 						<TrashIcon /> Supprimer le projet
 					</RemoveProjectButton>
 				</Actions>

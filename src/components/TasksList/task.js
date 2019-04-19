@@ -268,7 +268,8 @@ const HaveDescription = styled('div')`
 	}
 `;
 
-const NotificationsState = styled('div')`
+const NotificationsState = styled(Link)`
+	display: block;
 	background-color: ${props => (props.isFocused ? primaryPurple : accentGrey)};
 	mask: center no-repeat url('${props => (props.isFocused ? NotificationsActiveIcon : NotificationsOffIcon)}');
 	mask-size: contain;
@@ -283,7 +284,8 @@ const NotificationsState = styled('div')`
 	}
 `;
 
-const NotificationsImpossible = styled('div')`
+const NotificationsImpossible = styled(Link)`
+	display: block;
 	background-color: ${primaryRed};
 	mask: center no-repeat url('${NotificationsImpossibleIcon}');
 	mask-size: contain;
@@ -491,8 +493,14 @@ export function TaskInfosInputs({
 						// 	}
 						// />
 						<NotificationsState
-							data-tip="Activer les rappels client"
+							data-tip="Les rappels clients ne sont pas activés pour cette tâche"
 							isFocused={item.isFocused}
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
 						/>
 					)}
 					{activableTask && item.linkedCustomer && item.isFocused && (
@@ -504,12 +512,26 @@ export function TaskInfosInputs({
 						// 	}
 						// />
 						<NotificationsState
-							data-tip="Désactiver les rappels client"
+							data-tip="Les rappels client sont activés pour cette tâche"
 							isFocused={item.isFocused}
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
 						/>
 					)}
 					{activableTask && !item.linkedCustomer && (
-						<NotificationsImpossible data-tip="Aucun client n’est lié à cette tâche" />
+						<NotificationsImpossible
+							data-tip="Aucun client n’est lié à cette tâche"
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
+						/>
 					)}
 				</FocusStateIcon>
 			)}

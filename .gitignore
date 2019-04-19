@@ -3,6 +3,7 @@
 # vim
 *.sw*
 .tern-project
+.sentryclirc
 
 # dependencies
 /node_modules

@@ -87,7 +87,7 @@ export const Button = styled('button')`
 		if (props.primary) {
 			return primaryPurple;
 		}
-		if (props.white) {
+		if (props.white || props.grey) {
 			return 'transparent';
 		}
 		return primaryWhite;
@@ -173,7 +173,7 @@ export const Button = styled('button')`
 	`}
 
 	${props => props.link
-		&& css`
+		&& `
 			padding: 0;
 			margin: 0;
 			border: none;
@@ -189,6 +189,12 @@ export const Button = styled('button')`
 				padding: 0 !important;
 			}
 		`}
+
+	${props => props.centered
+		&& `
+		margin: 0 auto;
+	`}
+
 
 	& + button {
 		margin-left: .5rem;
@@ -544,4 +550,46 @@ export const Content = styled('div')`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+	${props => (props.small ? 'max-width: 640px' : '')};
+	${props => (props.small ? 'margin: 0 auto' : '')};
+`;
+
+export const IllusContainer = styled('div')`
+	height: 660px;
+	background: url('${props => props.bg}');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	display: flex;
+`;
+
+export const IllusFigureContainer = styled('div')`
+	height: ${props => (props.big ? '70%' : '60%')};
+	flex: 1;
+	background: url('${props => props.fig}');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+`;
+
+export const IllusText = styled('div')`
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding-right: 70px;
+	padding-bottom: 120px;
+
+	${P} {
+		font-size: 1.15rem;
+	}
+`;
+
+export const UserSpan = styled('span')`
+	color: ${primaryPurple};
+`;
+
+export const CustomerSpan = styled('span')`
+	color: ${primaryRed};
 `;

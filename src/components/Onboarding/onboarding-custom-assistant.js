@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
 import {
 	H4, P, gray50, Button,
 } from '../../utils/content';
@@ -53,7 +53,7 @@ const OnboardingCustomAssistant = ({
 	getPreviousStep,
 	isFirstStep,
 }) => {
-	const updateUser = useMutation(UPDATE_USER_CONSTANTS);
+	const updateUserSettings = useMutation(UPDATE_USER_SETTINGS);
 	const [assistantName, setAssistantName] = useState('Edwige');
 
 	return (
@@ -73,12 +73,14 @@ const OnboardingCustomAssistant = ({
 			</StepDescription>
 
 			<Form
-				onSubmit={async () => {
-					// await updateUserSettings({
-					// 	variables: {
-					// 		assistantName,
-					// 	},
-					// })
+				onSubmit={async (e) => {
+					e.preventDefault();
+
+					await updateUserSettings({
+						variables: {
+							settings: {assistantName},
+						},
+					});
 
 					getNextStep();
 				}}

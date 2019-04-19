@@ -24,6 +24,7 @@ import {
 	UNARCHIVE_PROJECT,
 	CREATE_PROJECT,
 } from '../../../utils/mutations';
+import {ModalContainer, ModalElem, ModalActions} from '../../../utils/content';
 import {
 	Main,
 	Container,
@@ -39,6 +40,7 @@ import {
 	IllusFigureContainer,
 	IllusContainer,
 	IllusText,
+	IllusTextIcon,
 } from '../../../utils/new/design-system';
 
 const ProjectTitle = styled(SubHeading)`
@@ -163,6 +165,8 @@ function Projects({history}) {
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
 	const [seeArchived, setSeeArchived] = useState(false);
+	const [openModeleModal, setOpenModeleModal] = useState(false);
+	const [openDuplicateModal, setOpenDuplicateModal] = useState(false);
 	const {
 		data: {
 			me: {projects},
@@ -214,8 +218,22 @@ function Projects({history}) {
 								<P>
 										Créez un projet à partir de zéro, ou
 										gagnez du temps en utilisant un modèle
-										existant ou en vous basant sur un de vos
-										anciens projets.
+										existant{' '}
+									<IllusTextIcon
+										onClick={() => setOpenModeleModal(true)
+										}
+									>
+											?
+									</IllusTextIcon>{' '}
+										ou en vous basant sur un de vos anciens
+										projets{' '}
+									<IllusTextIcon
+										onClick={() => setOpenDuplicateModal(true)
+										}
+									>
+											?
+									</IllusTextIcon>
+										.
 								</P>
 								<P>
 										Vous pouvez aussi tester notre projet
@@ -264,6 +282,67 @@ function Projects({history}) {
 								</Button>
 							</IllusText>
 						</IllusContainer>
+					)}
+					{openModeleModal && (
+						<ModalContainer
+							size="small"
+							onDismiss={() => setOpenModeleModal(false)}
+						>
+							<ModalElem>
+								<SubHeading>
+									Utiliser un de nos modèles
+								</SubHeading>
+								<P>
+									Les modèles sont composés d'un ensemble de
+									tâches prédéfinies. Ils vous permettront de
+									démarrer vos projets sur de bonnes bases.
+								</P>
+								<P>
+									Nous les avons construits en collaboration
+									avec des freelances expérimentés dans leur
+									domains (design, développement, etc.)
+								</P>
+								<ModalActions>
+									<Button
+										onClick={() => setOpenModeleModal(false)
+										}
+									>
+										J'ai compris
+									</Button>
+								</ModalActions>
+							</ModalElem>
+						</ModalContainer>
+					)}
+					{openDuplicateModal && (
+						<ModalContainer
+							size="small"
+							onDismiss={() => setOpenDuplicateModal(false)}
+						>
+							<ModalElem>
+								<SubHeading>
+									Se baser sur l'un de vos anciens projets
+								</SubHeading>
+								<P>
+									Vous avez le sentiment que beaucoup de vos
+									projets se ressemblent?
+								</P>
+								<P>
+									Utilisez votre expérience passée pour éviter
+									de perdre du temps à recréer vos de choses à
+									faire, et devisez au plus juste en vous
+									basant sur le temps réellement passés sur
+									chacune des tâches.
+								</P>
+								<ModalActions>
+									<Button
+										onClick={() => setOpenDuplicateModal(false)
+										}
+									>
+										J'ai compris
+									</Button>
+								</ModalActions>
+							</ModalElem>
+						</ModalContainer>
 					)}
 					{(unarchivedProject.length > 0
 						|| archivedProject.length > 0) && (

@@ -586,6 +586,38 @@ export const IllusText = styled('div')`
 	}
 `;
 
+export const IllusTextIcon = styled('span')`
+	position: relative;
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	font-size: 1rem;
+	z-index: 0;
+	text-align: center;
+	cursor: pointer;
+
+	&:after {
+		content: '';
+		width: 20px;
+		height: 20px;
+		position: absolute;
+		top: 5px;
+		left: 0px;
+		background: ${accentGrey};
+		border-radius: 50%;
+		z-index: -1;
+		display: inline-block;
+	}
+
+	&:hover {
+		color: ${primaryWhite};
+
+		&:after {
+			background: ${primaryPurple};
+		}
+	}
+`;
+
 export const UserSpan = styled('span')`
 	color: ${primaryPurple};
 `;

@@ -567,6 +567,7 @@ export const UPDATE_ITEM = gql`
 		$token: String
 		$type: ItemType
 		$unit: Float
+		$timeItTook: Float
 	) {
 		updateItem(
 			id: $itemId
@@ -582,6 +583,7 @@ export const UPDATE_ITEM = gql`
 			token: $token
 			type: $type
 			unit: $unit
+			timeItTook: $timeItTook
 		) {
 			...ItemFragment
 		}

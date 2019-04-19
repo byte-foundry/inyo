@@ -82,7 +82,7 @@ class OnboardingFifthStep extends Component {
 
 	render() {
 		const {
-			me, getNextStep, getPreviousStep, step,
+			me, getNextStep, getPreviousStep, isFirstStep,
 		} = this.props;
 
 		return (
@@ -217,7 +217,7 @@ class OnboardingFifthStep extends Component {
 											>
 												Continuer
 											</ActionButton>
-											{step !== 1 && (
+											{!isFirstStep && (
 												<ActionButton
 													theme="Link"
 													size="XSmall"

@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
-import {Redirect, withRouter} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
+
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSecondStep from '../../../components/Onboarding/onboarding-second-step';
 import OnboardingThirdStep from '../../../components/Onboarding/onboarding-third-step';
+import OnboardingCustomAssistant from '../../../components/Onboarding/onboarding-custom-assistant';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
 import {gray20, signalGreen, Loading} from '../../../utils/content';
@@ -35,68 +37,49 @@ const OnboardingProgressBar = styled('div')`
 	}
 `;
 
-function Onboarding({history}) {
+function Onboarding() {
 	const {data, loading} = useQuery(GET_USER_INFOS, {suspend: true});
-	const [step, setStep] = useState(1);
+	const [currentStep, setStep] = useState(0);
 
 	if (loading) return <Loading />;
 
 	const {me} = data;
 
 	function getNextStep() {
-		setStep(step + 1);
+		setStep(currentStep + 1);
 	}
 
 	function getPreviousStep() {
-		setStep(step - 1);
+		setStep(currentStep - 1);
 	}
 
-	function getStepData(stepId, meData) {
-		switch (stepId) {
-		case 0:
-			return <Redirect to="/auth" />;
-		case 1:
-			return (
-				<OnboardingFirstStep
-					me={meData}
-					step={stepId}
-					getNextStep={getNextStep}
-					getPreviousStep={getPreviousStep}
-				/>
-			);
-		case 2:
-			return (
-				<OnboardingSecondStep
-					me={meData}
-					step={stepId}
-					getNextStep={getNextStep}
-					getPreviousStep={getPreviousStep}
-				/>
-			);
-		case 3:
-			return (
-				<OnboardingThirdStep
-					me={meData}
-					step={stepId}
-					getNextStep={getNextStep}
-					getPreviousStep={getPreviousStep}
-				/>
-			);
-		case 4:
-			window.Intercom('trackEvent', 'start-onboarding-project');
-			history.push('/app/tasks?openModal=true');
-			return false;
-		default:
-			return false;
-		}
+	const steps = [
+		OnboardingFirstStep,
+		OnboardingSecondStep,
+		OnboardingCustomAssistant,
+		OnboardingThirdStep,
+	];
+
+	if (currentStep >= steps.length) {
+		window.Intercom('trackEvent', 'start-onboarding-project');
+		return <Redirect to="/app/tasks?openModal=true" />;
 	}
+
+	const CurrentOnboardingStep = steps[currentStep];
 
 	return (
 		<OnboardingMain>
-			<OnboardingProgressBar completionRate={((step - 1) / 3) * 100} />
-			{getStepData(step, me)}
+			<OnboardingProgressBar
+				completionRate={((currentStep + 1) / steps.length) * 100}
+			/>
+			<CurrentOnboardingStep
+				me={me}
+				isFirstStep={currentStep === 0}
+				getNextStep={getNextStep}
+				getPreviousStep={getPreviousStep}
+			/>
 		</OnboardingMain>
 	);
 }
 
-export default withRouter(Onboarding);
+export default Onboarding;

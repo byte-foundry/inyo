@@ -85,7 +85,7 @@ class OnboardingSecondStep extends Component {
 
 	render() {
 		const {
-			me, getNextStep, getPreviousStep, step,
+			me, getNextStep, getPreviousStep, isFirstStep,
 		} = this.props;
 		const pains = [
 			'Jongler entre plusieurs canaux de communications (Slack, emails, etc.)',
@@ -235,7 +235,7 @@ class OnboardingSecondStep extends Component {
 											>
 												Continuer
 											</ActionButton>
-											{step !== 1 && (
+											{!isFirstStep && (
 												<ActionButton
 													theme="Link"
 													size="XSmall"

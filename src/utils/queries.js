@@ -74,8 +74,7 @@ export const GET_USER_INFOS = gql`
 				vat
 			}
 			settings {
-				askItemFinishConfirmation
-				askStartProjectConfirmation
+				assistantName
 			}
 		}
 	}
@@ -209,10 +208,6 @@ export const GET_PROJECT_INFOS = gql`
 					lastName
 					email
 					defaultVatRate
-					settings {
-						askStartProjectConfirmation
-						askItemFinishConfirmation
-					}
 				}
 				siret
 			}
@@ -252,10 +247,6 @@ export const GET_PROJECT_DATA = gql`
 					lastName
 					email
 					defaultVatRate
-					settings {
-						askStartProjectConfirmation
-						askItemFinishConfirmation
-					}
 				}
 				siret
 			}

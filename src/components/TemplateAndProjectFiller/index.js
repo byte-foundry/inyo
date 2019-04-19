@@ -249,9 +249,13 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 																	unit,
 																	description,
 																	type,
+																	timeItTook,
 																}) => ({
 																	name: sectionName,
-																	unit,
+																	unit:
+																		timeItTook
+																		|| unit
+																		|| 0,
 																	description,
 																	type,
 																}),

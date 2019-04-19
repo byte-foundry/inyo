@@ -3,6 +3,17 @@ import styled from '@emotion/styled/macro';
 
 import Task from './task';
 
+import IllusBackground from '../../utils/images/empty-tasks-background.svg';
+import IllusFigure from '../../utils/images/empty-tasks-illus.svg';
+import {
+	P,
+	IllusContainer,
+	IllusFigureContainer,
+	IllusText,
+	UserSpan,
+	CustomerSpan,
+} from '../../utils/new/design-system';
+
 const TasksListContainer = styled('div')`
 	margin-top: 3rem;
 `;
@@ -18,6 +29,28 @@ function TasksList({items, customerToken, baseUrl}) {
 					baseUrl={baseUrl}
 				/>
 			))}
+			{items.length === 0 && (
+				<IllusContainer bg={IllusBackground}>
+					<IllusFigureContainer fig={IllusFigure} />
+					<IllusText>
+						<P>Aucune tâche à faire pour le moment.</P>
+						<P>
+							Dites-nous ce que{' '}
+							<UserSpan data-tip="Les tâches violettes sont les tâches que vous prévoyez de faire">
+								vous
+							</UserSpan>{' '}
+							souhaitez faire aujourd'hui ou affectez des tâches à{' '}
+							<CustomerSpan data-tip="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
+								votre client
+							</CustomerSpan>
+							.
+						</P>
+						<P>
+							Cliquez sur l'icône pour choisir un type de tâche.
+						</P>
+					</IllusText>
+				</IllusContainer>
+			)}
 		</TasksListContainer>
 	);
 }

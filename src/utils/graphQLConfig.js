@@ -13,6 +13,7 @@ import introspectionQueryResultData from './fragmentTypes.json';
 
 import createTaskWatchMutation from './mutationLinks/createTask';
 import createProjectWatchMutation from './mutationLinks/createProject';
+import updateProjectWatchMutation from './mutationLinks/updateProject';
 import createCustomerWatchMutation from './mutationLinks/createCustomer';
 import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
 import updateItemWatchMutation from './mutationLinks/updateItem';
@@ -83,6 +84,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	removeItem: deleteTaskWatchMutation,
 	focusTask: focusTaskWatchMutation,
 	createProject: createProjectWatchMutation,
+	updateProject: updateProjectWatchMutation,
 	createCustomer: createCustomerWatchMutation,
 	removeCustomer: removeCustomerWatchMutation,
 	updateItem: updateItemWatchMutation,

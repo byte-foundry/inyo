@@ -87,7 +87,7 @@ const TaskIcon = styled('div')`
 	cursor: pointer;
 	width: 3.5rem;
 	height: 3.5rem;
-	margin-left: -.8725rem;
+	margin-left: -0.8725rem;
 	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
 	overflow: visible;
 	background: center no-repeat
@@ -447,7 +447,10 @@ export function TaskInfosInputs({
 		).length;
 	}
 
-	let unitToDisplay = item.timeItTook === null ? item.unit : item.timeItTook;
+	let unitToDisplay
+		= item.timeItTook === null || item.timeItTook === undefined
+			? item.unit
+			: item.timeItTook;
 
 	let unitInHours = false;
 

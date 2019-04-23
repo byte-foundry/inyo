@@ -3,6 +3,7 @@ import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 
 import EmailExample from '../EmailExample';
+import Apostrophe from '../Apostrophe';
 
 import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
@@ -56,7 +57,10 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 	const [isCopied, setIsCopied] = useState(false);
 	const {
 		data: {
-			me: {email},
+			me: {
+				email,
+				settings: {assistantName},
+			},
 		},
 		loading,
 	} = useQuery(GET_USER_INFOS);
@@ -93,9 +97,14 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 						360, pour communiquer avec vous pendant le projet{' '}
 						<ReplaceableText>[nom du projet]</ReplaceableText>
 						<br />
-						Vous allez prochainement recevoir des emails provenant
-						d'Edwige Inyo. Ne les placez pas en spam, ils vont vous
-						tenir informé de l'avancement de votre projet.
+						Vous allez prochainement recevoir des emails provenant{' '}
+						<Apostrophe
+							value={assistantName}
+							withVowel="d'"
+							withConsonant="de "
+						/>
+						{assistantName} Inyo. Ne les placez pas en spam, ils
+						vont vous tenir informé de l'avancement de votre projet.
 						<br />
 						Afin d'avoir un aperçu en temps réel des avancées de ce
 						projet, vous recevrez régulièrement des résumés des
@@ -130,7 +139,11 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 					)}`.trim()},
 
 Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet **[nom du projet]**
-Vous allez prochainement recevoir des emails provenant d'Edwige Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.
+Vous allez prochainement recevoir des emails provenant ${Apostrophe({
+			value: assistantName,
+			withVowel: "d'",
+			withConsonant: 'de ',
+		})}${assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.
 Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire.
 
 Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez  ajouter des commentaires, valider des tâches et déposer ou récupérer des documents.

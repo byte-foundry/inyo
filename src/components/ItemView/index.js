@@ -20,8 +20,9 @@ import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
+import Apostrophe from '../Apostrophe';
 
-import {GET_ITEM_DETAILS} from '../../utils/queries';
+import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
@@ -264,6 +265,15 @@ const Item = ({id, customerToken, close}) => {
 		suspend: false,
 		variables: {id, token: customerToken},
 	});
+	const {
+		loading: loadingUser,
+		data: {
+			me: {
+				settings: {assistantName},
+			},
+		},
+		error: errorUser,
+	} = useQuery(GET_USER_INFOS);
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const focusItem = useMutation(FOCUS_TASK);
@@ -285,8 +295,8 @@ const Item = ({id, customerToken, close}) => {
 		setEditDueDate(false);
 	});
 
-	if (loading) return <LoadingLogo />;
-	if (error) throw error;
+	if (loading || loadingUser) return <LoadingLogo />;
+	if (error || errorUser) throw error || errorUser;
 
 	const {item} = data;
 	const {linkedCustomer: customer} = item;
@@ -667,7 +677,15 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			{!customerToken && customerTask && item.linkedCustomer && (
 				<>
-					<SubHeading>Actions d'Edwige</SubHeading>
+					<SubHeading>
+						Actions{' '}
+						<Apostrophe
+							value={assistantName}
+							withVowel="d'"
+							withConsonant="de "
+						/>
+						{assistantName}
+					</SubHeading>
 					{item.reminders.length > 0 ? (
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
@@ -676,8 +694,8 @@ const Item = ({id, customerToken, close}) => {
 							}
 							icon="✓"
 						>
-							Charger Edwige de faire réaliser cette tâche à{' '}
-							{item.linkedCustomer.name}
+							Charger {assistantName} de faire réaliser cette
+							tâche à {item.linkedCustomer.name}
 						</TaskButton>
 					)}
 				</>

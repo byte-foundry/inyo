@@ -267,11 +267,7 @@ const Item = ({id, customerToken, close}) => {
 	});
 	const {
 		loading: loadingUser,
-		data: {
-			me: {
-				settings: {assistantName},
-			},
-		},
+		data: {me},
 		error: errorUser,
 	} = useQuery(GET_USER_INFOS);
 
@@ -680,11 +676,11 @@ const Item = ({id, customerToken, close}) => {
 					<SubHeading>
 						Actions{' '}
 						<Apostrophe
-							value={assistantName}
+							value={me.settings.assistantName}
 							withVowel="d'"
 							withConsonant="de "
 						/>
-						{assistantName}
+						{me.settings.assistantName}
 					</SubHeading>
 					{item.reminders.length > 0 ? (
 						<TaskRemindersList noLink reminders={item.reminders} />
@@ -694,8 +690,8 @@ const Item = ({id, customerToken, close}) => {
 							}
 							icon="✓"
 						>
-							Charger {assistantName} de faire réaliser cette
-							tâche à {item.linkedCustomer.name}
+							Charger {me.settings.assistantName} de faire
+							réaliser cette tâche à {item.linkedCustomer.name}
 						</TaskButton>
 					)}
 				</>

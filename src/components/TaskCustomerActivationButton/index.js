@@ -14,11 +14,7 @@ const TaskActivationButton = ({
 	const unfocusItem = useMutation(UNFOCUS_TASK);
 
 	const {
-		data: {
-			me: {
-				settings: {assistantName},
-			},
-		},
+		data: {me},
 		loading,
 	} = useQuery(GET_USER_INFOS);
 
@@ -30,8 +26,12 @@ const TaskActivationButton = ({
 			value={isActive}
 			disabled={disabled}
 			trueLabel={`Ne plus rappeler à ${customerName} de faire cette tâche`}
-			trueTooltip={`${assistantName} s'occupe de faire réaliser cette tâche`}
-			falseLabel={`Charger ${assistantName} de faire réaliser cette tâche à ${customerName}`}
+			trueTooltip={`${
+				me.settings.assistantName
+			} s'occupe de faire réaliser cette tâche`}
+			falseLabel={`Charger ${
+				me.settings.assistantName
+			} de faire réaliser cette tâche à ${customerName}`}
 			falseTooltip="Ajouter la tâche aux choses à faire aujourd'hui"
 			commit={focusItem}
 			reverse={unfocusItem}

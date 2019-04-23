@@ -72,11 +72,7 @@ const SidebarDashboardInfos = () => {
 	const {data, loading} = useQuery(GET_REMINDERS, {suspend: false});
 	const {
 		loading: loadingUser,
-		data: {
-			me: {
-				settings: {assistantName},
-			},
-		},
+		data: {me},
 		error: errorUser,
 	} = useQuery(GET_USER_INFOS);
 
@@ -92,11 +88,11 @@ const SidebarDashboardInfos = () => {
 					<SidebarHeading>
 						Actions{' '}
 						<Apostrophe
-							value={assistantName}
+							value={me.settings.assistantName}
 							withVowel="d'"
 							withConsonant="de "
 						/>{' '}
-						{assistantName}
+						{me.settings.assistantName}
 					</SidebarHeading>
 				)}
 				{loading && <Loading />}

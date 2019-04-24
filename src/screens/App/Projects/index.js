@@ -300,7 +300,7 @@ function Projects({history}) {
 								<P>
 									Nous les avons construits en collaboration
 									avec des freelances expérimentés dans leur
-									domains (design, développement, etc.)
+									domaines (design, développement, etc.)
 								</P>
 								<ModalActions>
 									<Button
@@ -328,7 +328,7 @@ function Projects({history}) {
 								</P>
 								<P>
 									Utilisez votre expérience passée pour éviter
-									de perdre du temps à recréer vos de choses à
+									de perdre du temps à recréer vos choses à
 									faire, et devisez au plus juste en vous
 									basant sur le temps réellement passés sur
 									chacune des tâches.

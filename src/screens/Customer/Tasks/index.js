@@ -42,7 +42,7 @@ const Tasks = ({location, match}) => {
 				Bonjour,
 				<br />
 				Les tâches <Red>rouges</Red> sont celles dont vous êtes
-				responsables.
+				responsable.
 			</WelcomeMessage>
 
 			<CustomerTasks projectId={projectId} location={location} />

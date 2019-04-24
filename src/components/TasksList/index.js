@@ -3,6 +3,8 @@ import styled from '@emotion/styled/macro';
 
 import Task from './task';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 import IllusBackground from '../../utils/images/empty-tasks-background.svg';
 import IllusFigure from '../../utils/images/empty-tasks-illus.svg';
 import {
@@ -16,6 +18,10 @@ import {
 
 const TasksListContainer = styled('div')`
 	margin-top: 3rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-top: 1rem;
+	}
 `;
 
 function TasksList({items, customerToken, baseUrl}) {

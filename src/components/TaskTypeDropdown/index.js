@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled/macro';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 import {gray30, gray50, gray80} from '../../utils/content';
 
 import {
@@ -56,6 +58,10 @@ const ListItem = styled('li')`
 		${ListItemDescription} {
 			color: ${gray50};
 		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		grid-template-columns: 2.5rem 1fr;
 	}
 `;
 

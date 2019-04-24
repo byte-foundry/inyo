@@ -538,7 +538,8 @@ export const Main = styled('div')`
 
 export const Container = styled('div')`
 	display: flex;
-	width: 1280px;
+	width: 100%;
+	max-width: 1280px;
 	margin: 0 auto;
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -550,6 +551,7 @@ export const Content = styled('div')`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+	${props => (props.small ? 'width: 100%' : '')};
 	${props => (props.small ? 'max-width: 640px' : '')};
 	${props => (props.small ? 'margin: 0 auto' : '')};
 `;

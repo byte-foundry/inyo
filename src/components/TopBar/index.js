@@ -48,7 +48,8 @@ export const TopBarMenuLink = styled(NavLink)`
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		margin-left: 1.2rem;
+		margin-left: 0;
+		margin-right: 1.2rem;
 	}
 `;
 
@@ -59,8 +60,14 @@ const TopBar = styled('div')`
 	margin-bottom: 4rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		justify-content: space-between;
+		align-items: center;
 		margin-bottom: 1rem;
+		height: 6rem;
+		width: 100%;
+		overflow-x: auto;
+		padding-right: 1rem;
+		display: grid;
+		grid-auto-rows: 1fr;
 	}
 `;
 

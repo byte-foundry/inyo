@@ -420,19 +420,30 @@ export const ModalElem = styled('div')`
 
 export const ModalCloseIcon = styled('div')`
 	position: absolute;
-	color: ${primaryBlack};
+	color: ${primaryRed};
 	font-size: 2.5rem;
 	position: absolute;
 	top: -3rem;
 	right: -3rem;
 	cursor: pointer;
 
+	transition: all 200ms ease;
+
+	background-color: ${primaryWhite};
+	border-radius: 50%;
+	width: 3rem;
+	text-align: center;
+
 	&:hover {
-		color: ${primaryRed};
+		background-color: ${primaryRed};
+		color: ${primaryWhite};
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		right: 1rem;
+		right: 0;
+		top: -4.1rem;
+		font-size: 2rem;
+		background: transparent;
 	}
 `;
 

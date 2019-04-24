@@ -25,6 +25,7 @@ const DashboardAside = styled(Aside)`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
+		flex: 1;
 	}
 
 	img {

@@ -79,6 +79,10 @@ const ProjectHeading = styled(InlineEditable)`
 			}
 		}
 	`}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 1rem;
+	}
 `;
 
 const placeholderCss = css`

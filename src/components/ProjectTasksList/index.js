@@ -7,6 +7,8 @@ import {css} from '@emotion/core';
 import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
 	LayoutMainElem,
@@ -139,6 +141,11 @@ const SectionInput = styled(InlineEditable)`
 			width: 50px;
 		}
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 0;
+		padding: 0;
+	}
 `;
 
 const SectionTitleContainer = styled('div')`
@@ -153,6 +160,10 @@ const SectionTitleContainer = styled('div')`
 			margin: 0;
 			transition: all 600ms ease;
 		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 1rem 0 0 0;
 	}
 `;
 
@@ -238,7 +249,9 @@ const editableCss = css`
 
 const DisableTask = styled('div')`
 	pointer-events: none;
-	margin: 2rem 0;
+	margin: 1rem 0;
+	transform: scale(0.8);
+	transform-origin: left top;
 `;
 
 const Heading = styled(SubHeading)`

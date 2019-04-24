@@ -10,6 +10,8 @@ import {CustomerContext} from '../../utils/contexts';
 import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';
 import InlineEditable from '../InlineEditable';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 0;
 `;
@@ -26,6 +28,10 @@ const SectionTitle = styled(InlineEditable)`
 
 	&:first-child {
 		margin-top: 0;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 0.5rem 0 0 0;
 	}
 `;
 

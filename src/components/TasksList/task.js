@@ -43,7 +43,7 @@ import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`
 	display: flex;
-	margin-bottom: 0.6rem;
+	margin-bottom: ${props => (props.noData ? '-1rem' : '0.6rem')};
 	position: relative;
 	padding-left: 2rem;
 	margin-left: -2rem;
@@ -73,7 +73,7 @@ export const TaskContainer = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
 		margin-left: 0;
-		margin-bottom: 0.85rem;
+		margin-bottom: 0;
 
 		&:after {
 			display: none;
@@ -163,7 +163,9 @@ const TaskIcon = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		transform: scale(0.6);
-		margin: 0 0.5rem 0 0;
+		margin: 0;
+		position: absolute;
+		left: -1rem;
 
 		&:after,
 		&:before {
@@ -183,10 +185,10 @@ const TaskInfosIcon = styled('div')`
 
 const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: ${props => (props.noData ? '0' : '1rem')};
+	margin-top: ${props => (props.noData ? '0.9rem' : '1rem')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 0.2rem 0 0 0;
+		padding-left: 2rem;
 	}
 `;
 
@@ -210,7 +212,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	color: ${primaryBlack};
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		font-size: 1rem;
+		font-size: 0.85rem;
 		display: block;
 	}
 `;
@@ -730,7 +732,11 @@ function Task({
 		|| (customerToken && isCustomerTask(item));
 
 	return (
-		<TaskContainer isDraggable={isDraggable} ref={setTimeItTookRef}>
+		<TaskContainer
+			noData={noData}
+			isDraggable={isDraggable}
+			ref={setTimeItTookRef}
+		>
 			<TaskAdd />
 			<TaskIcon
 				status={item.status}

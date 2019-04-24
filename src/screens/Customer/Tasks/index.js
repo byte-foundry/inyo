@@ -23,6 +23,7 @@ const WelcomeMessage = styled(P)`
 	max-width: 1280px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-bottom: 3rem;
 `;
 
 const Red = styled('span')`

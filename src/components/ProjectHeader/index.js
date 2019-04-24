@@ -46,36 +46,39 @@ const ProjectHeading = styled(InlineEditable)`
 		}
 	`}
 
-	:hover {
-		cursor: text;
+	${props => !props.disabled
+		&& `
+		&:hover {
+			cursor: text;
 
-		&:before {
-			content: '';
-			display: block;
-			background: ${lightGrey};
-			position: absolute;
-			left: -1rem;
-			top: 0;
-			right: -0.5rem;
-			bottom: 0;
-			border-radius: 8px;
-			z-index: -1;
+			&:before {
+				content: '';
+				display: block;
+				background: ${lightGrey};
+				position: absolute;
+				left: -1rem;
+				top: 0;
+				right: -0.5rem;
+				bottom: 0;
+				border-radius: 8px;
+				z-index: -1;
+			}
+			&:after {
+				content: '';
+				display: block;
+				background-color: ${accentGrey};
+				mask-size: 35%;
+				mask-position: center;
+				mask-repeat: no-repeat;
+				mask-image: url(${Pencil});
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				width: 50px;
+			}
 		}
-		&:after {
-			content: '';
-			display: block;
-			background-color: ${accentGrey};
-			mask-size: 35%;
-			mask-position: center;
-			mask-repeat: no-repeat;
-			mask-image: url(${Pencil});
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: 50px;
-		}
-	}
+	`}
 `;
 
 const placeholderCss = css`

@@ -21,6 +21,8 @@ function CreateProjectLinkButton({project}) {
 		? project.customer.token
 		: project.token;
 
+	const {protocol, host} = window.location;
+
 	return (
 		<>
 			<Button onClick={() => setOpenLinkModal(true)}>
@@ -38,7 +40,7 @@ function CreateProjectLinkButton({project}) {
 						<ModalContent>
 							<Input
 								big
-								value={`https://beta.inyo.me/app/${customerToken}/tasks?projectId=${projectId}`}
+								value={`${protocol}//${host}/app/${customerToken}/tasks?projectId=${projectId}`}
 							/>
 						</ModalContent>
 						<ModalActions>

@@ -7,12 +7,7 @@ import TaskView from '../../../components/ItemView';
 import CustomerTasks from './tasks';
 
 import {BREAKPOINTS} from '../../../utils/constants';
-
-import TopBar, {
-	TopBarMenu,
-	TopBarLogo,
-	TopBarMenuLink,
-} from '../../../components/TopBar';
+import {P, primaryGrey, primaryRed} from '../../../utils/new/design-system';
 
 const Container = styled('div')`
 	min-height: 100vh;
@@ -23,6 +18,18 @@ const Container = styled('div')`
 	}
 `;
 
+const WelcomeMessage = styled(P)`
+	color: ${primaryGrey};
+	max-width: 1280px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 3rem;
+`;
+
+const Red = styled('span')`
+	color: ${primaryRed};
+`;
+
 const Tasks = ({location, match}) => {
 	const {customerToken} = match.params;
 	const {prevSearch} = location.state || {prevSearch: location.search};
@@ -31,17 +38,13 @@ const Tasks = ({location, match}) => {
 
 	return (
 		<Container>
-			<TopBar>
-				<TopBarLogo />
-				<TopBarMenu>
-					<TopBarMenuLink
-						data-tip="Toutes les tâches"
-						to={`/app/${customerToken}/tasks`}
-					>
-						Tâches
-					</TopBarMenuLink>
-				</TopBarMenu>
-			</TopBar>
+			<WelcomeMessage>
+				Bonjour,
+				<br />
+				Les tâches <Red>rouges</Red> sont celles dont vous êtes
+				responsables.
+			</WelcomeMessage>
+
 			<CustomerTasks projectId={projectId} location={location} />
 
 			<Route

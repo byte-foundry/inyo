@@ -11,6 +11,9 @@ import DateIconSvg from '../../utils/icons/date.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import DescriptionIcon from '../../utils/icons/descriptionicon.svg';
+import NotificationsActiveIcon from '../../utils/icons/baseline-notifications_active-24px.svg';
+import NotificationsOffIcon from '../../utils/icons/baseline-notifications_off-24px.svg';
+import NotificationsImpossibleIcon from '../../utils/icons/baseline-error-24px.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
@@ -26,6 +29,7 @@ import {
 	mediumGrey,
 	primaryBlack,
 	accentGrey,
+	primaryRed,
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
@@ -83,7 +87,7 @@ const TaskIcon = styled('div')`
 	cursor: pointer;
 	width: 3.5rem;
 	height: 3.5rem;
-	margin-left: -.8725rem;
+	margin-left: -0.8725rem;
 	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
 	overflow: visible;
 	background: center no-repeat
@@ -269,6 +273,38 @@ const HaveDescription = styled('div')`
 	}
 `;
 
+const NotificationsState = styled(Link)`
+	display: block;
+	background-color: ${props => (props.isFocused ? primaryPurple : accentGrey)};
+	mask: center no-repeat url('${props => (props.isFocused ? NotificationsActiveIcon : NotificationsOffIcon)}');
+	mask-size: contain;
+	width: 18px;
+	height: 18px;
+	display: inline-flex;
+	margin-left: -.75rem;
+	align-self: center;
+
+	&:hover{
+		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)};
+	}
+`;
+
+const NotificationsImpossible = styled(Link)`
+	display: block;
+	background-color: ${primaryRed};
+	mask: center no-repeat url('${NotificationsImpossibleIcon}');
+	mask-size: contain;
+	width: 19px;
+	height: 19px;
+	display: inline-flex;
+	margin-left: -.5rem;
+	align-self: center;
+
+	&:hover{
+		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)};
+	}
+`;
+
 const OpenBtn = styled(ButtonLink)`
 	color: ${primaryGrey};
 	border-color: transparent;
@@ -309,6 +345,16 @@ const SetTimeCaption = styled('div')`
 	font-style: italic;
 	line-height: 1.3;
 	white-space: nowrap;
+`;
+
+const FocusStateIcon = styled('div')`
+	display: flex;
+	margin-right: 1rem;
+	cursor: pointer;
+
+	:hover ${NotificationsState} {
+		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)}');
+	}
 `;
 
 const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
@@ -401,7 +447,10 @@ export function TaskInfosInputs({
 		).length;
 	}
 
-	let unitToDisplay = item.timeItTook === null ? item.unit : item.timeItTook;
+	let unitToDisplay
+		= item.timeItTook === null || item.timeItTook === undefined
+			? item.unit
+			: item.timeItTook;
 
 	let unitInHours = false;
 
@@ -416,6 +465,10 @@ export function TaskInfosInputs({
 			|| (item.section
 				&& item.section.project
 				&& item.section.project.deadline));
+
+	const activableTask = !customerToken && item.status === 'PENDING';
+	const customerTask
+		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
 
 	return (
 		<TaskInfos>
@@ -436,6 +489,59 @@ export function TaskInfosInputs({
 						<HaveDescription data-tip="Lire la description de cette tâche" />
 					)}
 				</TaskInfosItemLink>
+			)}
+			{customerTask && (
+				<FocusStateIcon>
+					{activableTask && item.linkedCustomer && !item.isFocused && (
+						// <TaskCustomerActivationButton
+						// 	taskId={id}
+						// 	isActive={item.isFocused}
+						// 	customerName={
+						// 		item.linkedCustomer && item.linkedCustomer.name
+						// 	}
+						// />
+						<NotificationsState
+							data-tip="Les rappels clients ne sont pas activés pour cette tâche"
+							isFocused={item.isFocused}
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
+						/>
+					)}
+					{activableTask && item.linkedCustomer && item.isFocused && (
+						// <TaskCustomerActivationButton
+						// 	taskId={id}
+						// 	isActive={item.isFocused}
+						// 	customerName={
+						// 		item.linkedCustomer && item.linkedCustomer.name
+						// 	}
+						// />
+						<NotificationsState
+							data-tip="Les rappels client sont activés pour cette tâche"
+							isFocused={item.isFocused}
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
+						/>
+					)}
+					{activableTask && !item.linkedCustomer && (
+						<NotificationsImpossible
+							data-tip="Aucun client n’est lié à cette tâche"
+							to={{
+								pathname: `${taskUrlPrefix}/${baseUrl}/${
+									item.id
+								}`,
+								state: {prevSearch: location.search},
+							}}
+						/>
+					)}
+				</FocusStateIcon>
 			)}
 			<TaskIconText
 				inactive={editUnit}

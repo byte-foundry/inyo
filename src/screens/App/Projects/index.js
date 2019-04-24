@@ -11,9 +11,12 @@ import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
 import {ReactComponent as UnarchiveIcon} from '../../../utils/icons/unarchive-icon.svg';
 import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
+import IllusBackground from '../../../utils/images/empty-project-background.svg';
+import IllusFigure from '../../../utils/images/empty-project-illus.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
 import {FlexRow, FlexColumn} from '../../../utils/content';
+import {onboardingTemplate} from '../../../utils/project-templates';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
 import {
@@ -21,6 +24,7 @@ import {
 	UNARCHIVE_PROJECT,
 	CREATE_PROJECT,
 } from '../../../utils/mutations';
+import {ModalContainer, ModalElem, ModalActions} from '../../../utils/content';
 import {
 	Main,
 	Container,
@@ -33,12 +37,11 @@ import {
 	accentGrey,
 	primaryRed,
 	P,
+	IllusFigureContainer,
+	IllusContainer,
+	IllusText,
+	IllusTextIcon,
 } from '../../../utils/new/design-system';
-
-const SmallContent = styled(Content)`
-	max-width: 640px;
-	margin: 0 auto;
-`;
 
 const ProjectTitle = styled(SubHeading)`
 	color: ${primaryGrey};
@@ -162,6 +165,8 @@ function Projects({history}) {
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
 	const [seeArchived, setSeeArchived] = useState(false);
+	const [openModeleModal, setOpenModeleModal] = useState(false);
+	const [openDuplicateModal, setOpenDuplicateModal] = useState(false);
 	const {
 		data: {
 			me: {projects},
@@ -182,7 +187,12 @@ function Projects({history}) {
 		<Container>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<Main>
-				<SmallContent>
+				<Content
+					small={
+						unarchivedProject.length > 0
+						|| archivedProject.length > 0
+					}
+				>
 					<ButtonsRow>
 						<Button
 							big
@@ -199,73 +209,148 @@ function Projects({history}) {
 							Nouveau projet
 						</Button>
 					</ButtonsRow>
-					<SubHeadingProject>Projets en cours</SubHeadingProject>
-					{unarchivedProject.map(project => (
-						<ProjectItem
-							onClick={() => history.push(
-								`/app/tasks?projectId=${project.id}`,
-							)
-							}
-						>
-							<ProjectHeader>
-								<ProjectTitle>{project.name}</ProjectTitle>
-								<ActionsIconContainer>
-									<TrashButton
-										onClick={(e) => {
-											e.stopPropagation();
-											setRemoveProjectModal(true);
-											setProjectId(project.id);
-										}}
-										data-tip="Supprimer ce projet"
+					{unarchivedProject.length === 0
+						&& archivedProject.length === 0 && (
+						<IllusContainer bg={IllusBackground}>
+							<IllusFigureContainer fig={IllusFigure} big />
+							<IllusText>
+								<P>Aucun projet en cours?</P>
+								<P>
+										Créez un projet à partir de zéro, ou
+										gagnez du temps en utilisant un modèle
+										existant{' '}
+									<IllusTextIcon
+										onClick={() => setOpenModeleModal(true)
+										}
 									>
-										<TrashIcon />
-									</TrashButton>
-									<ArchiveButton
-										onClick={(e) => {
-											e.stopPropagation();
-											archiveProject({
-												variables: {
-													projectId: project.id,
+											?
+									</IllusTextIcon>{' '}
+										ou en vous basant sur un de vos anciens
+										projets{' '}
+									<IllusTextIcon
+										onClick={() => setOpenDuplicateModal(true)
+										}
+									>
+											?
+									</IllusTextIcon>
+										.
+								</P>
+								<P>
+										Vous pouvez aussi tester notre projet
+										fictif et comprendre comment inyo
+										fonctionne.
+								</P>
+								<Button
+									grey
+									big
+									centered
+									onClick={async () => {
+										const deadLineForOnboardingProjet = new Date();
+
+										deadLineForOnboardingProjet.setDate(
+											new Date().getDate() + 10,
+										);
+
+										const {
+											data: {
+												createProject: createdProject,
+											},
+										} = await createProject({
+											variables: {
+												template: 'BLANK',
+												customer: {
+													name: 'Client test',
+													email: 'edwige@inyo.me',
+													firstName: 'Edwige',
 												},
-											});
-										}}
-										data-tip="Archiver ce projet"
+												sections:
+														onboardingTemplate.sections,
+												name:
+														'Bienvenue, découvrez votre smart assistant!',
+												deadline: deadLineForOnboardingProjet.toISOString(),
+											},
+										});
+
+										history.push(
+											`/app/tasks?projectId=${
+												createdProject.id
+											}`,
+										);
+									}}
+								>
+										Commencer
+								</Button>
+							</IllusText>
+						</IllusContainer>
+					)}
+					{openModeleModal && (
+						<ModalContainer
+							size="small"
+							onDismiss={() => setOpenModeleModal(false)}
+						>
+							<ModalElem>
+								<SubHeading>
+									Utiliser un de nos modèles
+								</SubHeading>
+								<P>
+									Les modèles sont composés d'un ensemble de
+									tâches prédéfinies. Ils vous permettront de
+									démarrer vos projets sur de bonnes bases.
+								</P>
+								<P>
+									Nous les avons construits en collaboration
+									avec des freelances expérimentés dans leur
+									domains (design, développement, etc.)
+								</P>
+								<ModalActions>
+									<Button
+										onClick={() => setOpenModeleModal(false)
+										}
 									>
-										<ArchiveIcon />
-									</ArchiveButton>
-								</ActionsIconContainer>
-							</ProjectHeader>
-							<TasksProgressBar project={project} />
-						</ProjectItem>
-					))}
-					<ButtonsRow>
-						{!seeArchived && (
-							<Button onClick={() => setSeeArchived(true)}>
-								Voir tous les projets
-							</Button>
-						)}
-						{seeArchived && (
-							<Button onClick={() => setSeeArchived(false)}>
-								Voir uniquement les projets en cours
-							</Button>
-						)}
-					</ButtonsRow>
-					{seeArchived && (
+										J'ai compris
+									</Button>
+								</ModalActions>
+							</ModalElem>
+						</ModalContainer>
+					)}
+					{openDuplicateModal && (
+						<ModalContainer
+							size="small"
+							onDismiss={() => setOpenDuplicateModal(false)}
+						>
+							<ModalElem>
+								<SubHeading>
+									Se baser sur l'un de vos anciens projets
+								</SubHeading>
+								<P>
+									Vous avez le sentiment que beaucoup de vos
+									projets se ressemblent?
+								</P>
+								<P>
+									Utilisez votre expérience passée pour éviter
+									de perdre du temps à recréer vos de choses à
+									faire, et devisez au plus juste en vous
+									basant sur le temps réellement passés sur
+									chacune des tâches.
+								</P>
+								<ModalActions>
+									<Button
+										onClick={() => setOpenDuplicateModal(false)
+										}
+									>
+										J'ai compris
+									</Button>
+								</ModalActions>
+							</ModalElem>
+						</ModalContainer>
+					)}
+					{(unarchivedProject.length > 0
+						|| archivedProject.length > 0) && (
 						<>
 							<SubHeadingProject>
-								Projets archivés
+								Projets en cours
 							</SubHeadingProject>
-							{archivedProject.length === 0 && (
-								<EmptyProjectList>
-									<img src={noArchivedIllus} height="300px" />
-									<P>
-										Une fois vos projets terminés,
-										archivez-les pour vous concentrer sur
-										les projets en cours.
-									</P>
-								</EmptyProjectList>
-							)}
-							{archivedProject.map(project => (
+							{unarchivedProject.map(project => (
 								<ProjectItem
 									onClick={() => history.push(
 										`/app/tasks?projectId=${
@@ -273,7 +358,6 @@ function Projects({history}) {
 										}`,
 									)
 									}
-									archived
 								>
 									<ProjectHeader>
 										<ProjectTitle>
@@ -293,25 +377,112 @@ function Projects({history}) {
 											<ArchiveButton
 												onClick={(e) => {
 													e.stopPropagation();
-													unarchiveProject({
+													archiveProject({
 														variables: {
 															projectId:
 																project.id,
 														},
 													});
 												}}
-												data-tip="Désarchiver ce projet"
+												data-tip="Archiver ce projet"
 											>
-												<UnarchiveIcon />
+												<ArchiveIcon />
 											</ArchiveButton>
 										</ActionsIconContainer>
 									</ProjectHeader>
 									<TasksProgressBar project={project} />
 								</ProjectItem>
 							))}
+							<ButtonsRow>
+								{!seeArchived && (
+									<Button
+										onClick={() => setSeeArchived(true)}
+									>
+										Voir tous les projets
+									</Button>
+								)}
+								{seeArchived && (
+									<Button
+										onClick={() => setSeeArchived(false)}
+									>
+										Voir uniquement les projets en cours
+									</Button>
+								)}
+							</ButtonsRow>
+							{seeArchived && (
+								<>
+									<SubHeadingProject>
+										Projets archivés
+									</SubHeadingProject>
+									{archivedProject.length === 0 && (
+										<EmptyProjectList>
+											<img
+												src={noArchivedIllus}
+												height="300px"
+											/>
+											<P>
+												Une fois vos projets terminés,
+												archivez-les pour vous
+												concentrer sur les projets en
+												cours.
+											</P>
+										</EmptyProjectList>
+									)}
+									{archivedProject.map(project => (
+										<ProjectItem
+											onClick={() => history.push(
+												`/app/tasks?projectId=${
+													project.id
+												}`,
+											)
+											}
+											archived
+										>
+											<ProjectHeader>
+												<ProjectTitle>
+													{project.name}
+												</ProjectTitle>
+												<ActionsIconContainer>
+													<TrashButton
+														onClick={(e) => {
+															e.stopPropagation();
+															setRemoveProjectModal(
+																true,
+															);
+															setProjectId(
+																project.id,
+															);
+														}}
+														data-tip="Supprimer ce projet"
+													>
+														<TrashIcon />
+													</TrashButton>
+													<ArchiveButton
+														onClick={(e) => {
+															e.stopPropagation();
+															unarchiveProject({
+																variables: {
+																	projectId:
+																		project.id,
+																},
+															});
+														}}
+														data-tip="Désarchiver ce projet"
+													>
+														<UnarchiveIcon />
+													</ArchiveButton>
+												</ActionsIconContainer>
+											</ProjectHeader>
+											<TasksProgressBar
+												project={project}
+											/>
+										</ProjectItem>
+									))}
+								</>
+							)}
 						</>
 					)}
-				</SmallContent>
+				</Content>
 			</Main>
 			{removeProjectModal && (
 				<RemoveProjectModal

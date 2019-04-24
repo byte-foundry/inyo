@@ -1,11 +1,15 @@
 import React from 'react';
 import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
-import TaskIconValidatedUrl from './icons/taskicon-user-validated.svg';
+import TaskIconValidatedUrl, {
+	ReactComponent as TaskIconValidated,
+} from './icons/taskicon-user-validated.svg';
 import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl, {ReactComponent as TaskIconValidated} from './icons/taskicon-customer-validated.svg';
+import TaskCustomerIconValidatedUrl, {
+	ReactComponent as TaskCustomerIconValidated,
+} from './icons/taskicon-customer-validated.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 
 import ContentAcquisitionIconUrl, {
@@ -88,7 +92,7 @@ export const ITEM_TYPES = [
 	},
 	{
 		icon: <TaskCustomerIcon />,
-		iconValidated: <TaskIconValidated />,
+		iconValidated: <TaskCustomerIconValidated />,
 		iconUrl: TaskCustomerIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		iconUrlValidatedAnim: TaskCustomerIconValidatedAnimUrl,
@@ -98,7 +102,7 @@ export const ITEM_TYPES = [
 	},
 	{
 		icon: <ContentAcquisitionIcon />,
-		iconValidated: <TaskIconValidated />,
+		iconValidated: <TaskCustomerIconValidated />,
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',
@@ -166,7 +170,7 @@ export const REMINDER_TYPES_DATA = {
 		text: customerName => `1er rappel envoyé à ${customerName}`,
 	},
 	SECOND: {
-		text: customerName => `2er rappel envoyé à ${customerName}`,
+		text: customerName => `2nd rappel envoyé à ${customerName}`,
 	},
 	LAST: {
 		text: customerName => `Dernier rappel envoyé à ${customerName}`,

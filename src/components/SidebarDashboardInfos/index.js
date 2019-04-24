@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 
 import TaskRemindersList from '../TaskRemindersList';
+import Apostrophe from '../Apostrophe';
 import noRemindersIllus from '../../utils/images/bermuda-done.svg';
 
 import {
@@ -13,7 +14,7 @@ import {
 } from '../../utils/new/design-system';
 import {Loading} from '../../utils/content';
 import {BREAKPOINTS} from '../../utils/constants';
-import {GET_REMINDERS} from '../../utils/queries';
+import {GET_REMINDERS, GET_USER_INFOS} from '../../utils/queries';
 
 const DashboardAside = styled(Aside)`
 	padding-right: 0;
@@ -69,6 +70,11 @@ const NoReminders = styled('div')`
 
 const SidebarDashboardInfos = () => {
 	const {data, loading} = useQuery(GET_REMINDERS, {suspend: false});
+	const {
+		loading: loadingUser,
+		data: {me},
+		error: errorUser,
+	} = useQuery(GET_USER_INFOS);
 
 	const reminders
 		= data.reminders
@@ -77,7 +83,18 @@ const SidebarDashboardInfos = () => {
 	return (
 		<DashboardAside>
 			<SubSection>
-				<SidebarHeading>Actions d'edwige</SidebarHeading>
+				{loadingUser && <Loading />}
+				{!loadingUser && (
+					<SidebarHeading>
+						Actions{' '}
+						<Apostrophe
+							value={me.settings.assistantName}
+							withVowel="d'"
+							withConsonant="de "
+						/>{' '}
+						{me.settings.assistantName}
+					</SidebarHeading>
+				)}
 				{loading && <Loading />}
 				{!loading
 					&& (reminders.length > 0 ? (

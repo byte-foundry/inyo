@@ -21,6 +21,7 @@ import {GET_USER_INFOS} from '../../../utils/queries';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
+import UserAssistantForm from '../../../components/UserAssistantForm';
 import 'react-toastify/dist/ReactToastify.css';
 import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
 
@@ -234,6 +235,18 @@ class Account extends Component {
 											</ProfileSideElem>
 											<ProfileSideElem
 												active={
+													activeItem === 'assistant'
+												}
+											>
+												<ProfileSideLink
+													href="#assistant"
+													onClick={this.handleScroll}
+												>
+													Votre assistant·e
+												</ProfileSideLink>
+											</ProfileSideElem>
+											<ProfileSideElem
+												active={
 													activeItem === 'account'
 												}
 											>
@@ -250,7 +263,7 @@ class Account extends Component {
 									<ProfileMain>
 										<ProfileTitle
 											id="me"
-											innerRef={(elem) => {
+											ref={(elem) => {
 												this.me = elem;
 											}}
 										>
@@ -262,7 +275,7 @@ class Account extends Component {
 										/>
 										<ProfileTitle
 											id="company"
-											innerRef={(elem) => {
+											ref={(elem) => {
 												this.company = elem;
 											}}
 										>
@@ -274,7 +287,7 @@ class Account extends Component {
 										/>
 										<ProfileTitle
 											id="settings"
-											innerRef={(elem) => {
+											ref={(elem) => {
 												this.settings = elem;
 											}}
 										>
@@ -285,8 +298,22 @@ class Account extends Component {
 											done={() => this.toast()}
 										/>
 										<ProfileTitle
+											id="assistant"
+											ref={(elem) => {
+												this.assistant = elem;
+											}}
+										>
+											Votre assistant·e
+										</ProfileTitle>
+										<UserAssistantForm
+											defaultAssistantName={
+												me.settings.assistantName
+											}
+											done={() => this.toast()}
+										/>
+										<ProfileTitle
 											id="account"
-											innerRef={(elem) => {
+											ref={(elem) => {
 												this.account = elem;
 											}}
 										>

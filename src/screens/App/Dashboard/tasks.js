@@ -72,7 +72,7 @@ const DashboardTasks = () => {
 			)}
 			{itemsToDo.length ? (
 				<>
-					<TasksList items={itemsToDo} baseUrl="dashboard" />
+					<TasksList items={[...itemsToDo]} baseUrl="dashboard" />
 				</>
 			) : (
 				<NoTask>
@@ -100,7 +100,10 @@ const DashboardTasks = () => {
 			{itemsToDoLater.length > 0 && (
 				<>
 					<SectionTitle>Il vous reste du temps ?</SectionTitle>
-					<TasksList items={itemsToDoLater} baseUrl="dashboard" />
+					<TasksList
+						items={[...itemsToDoLater]}
+						baseUrl="dashboard"
+					/>
 				</>
 			)}
 

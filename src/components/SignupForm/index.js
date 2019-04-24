@@ -7,16 +7,10 @@ import {Formik} from 'formik';
 import * as Yup from 'yup';
 import debounce from 'debounce-promise';
 
-import {
-	SIGNUP,
-	CHECK_UNIQUE_EMAIL,
-	CREATE_PROJECT,
-	CREATE_CUSTOMER,
-} from '../../utils/mutations';
+import {SIGNUP, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
 import {INTERCOM_APP_ID} from '../../utils/constants';
-import {onboardingTemplate} from '../../utils/project-templates';
 
 import FormElem from '../FormElem';
 
@@ -31,8 +25,6 @@ const SignupForm = ({from, history}) => {
 	const client = useApolloClient();
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
-	const createProject = useMutation(CREATE_PROJECT);
-	const createCustomer = useMutation(CREATE_CUSTOMER);
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 500);
 
@@ -83,35 +75,7 @@ const SignupForm = ({from, history}) => {
 								action: 'Created an account',
 							});
 
-							const deadLineForOnboardingProjet = new Date();
-
-							deadLineForOnboardingProjet.setDate(
-								new Date().getDate() + 10,
-							);
-
 							const {user} = data.signup;
-
-							await createProject({
-								variables: {
-									template: 'BLANK',
-									customer: {
-										name: 'Client test',
-										email: 'edwige@inyo.me',
-										firstName: 'Edwige',
-									},
-									sections: onboardingTemplate.sections,
-									name:
-										'Bienvenue, découvrez votre smart assistant!',
-									deadline: deadLineForOnboardingProjet.toISOString(),
-								},
-							});
-
-							await createCustomer({
-								variables: {
-									email: 'community@inyo.me',
-									name: 'Communauté Inyo',
-								},
-							});
 
 							window.Intercom('boot', {
 								app_id: INTERCOM_APP_ID,

@@ -85,10 +85,6 @@ export const UPDATE_USER = gql`
 				rm
 				vat
 			}
-			settings {
-				askItemFinishConfirmation
-				askStartProjectConfirmation
-			}
 		}
 	}
 `;
@@ -156,10 +152,6 @@ export const UPDATE_USER_CONSTANTS = gql`
 				rm
 				vat
 			}
-			settings {
-				askItemFinishConfirmation
-				askStartProjectConfirmation
-			}
 		}
 	}
 `;
@@ -195,8 +187,7 @@ export const UPDATE_USER_SETTINGS = gql`
 				vat
 			}
 			settings {
-				askItemFinishConfirmation
-				askStartProjectConfirmation
+				assistantName
 			}
 		}
 	}
@@ -227,10 +218,6 @@ export const UPDATE_USER_COMPANY = gql`
 				rcs
 				rm
 				vat
-			}
-			settings {
-				askItemFinishConfirmation
-				askStartProjectConfirmation
 			}
 		}
 	}
@@ -580,6 +567,7 @@ export const UPDATE_ITEM = gql`
 		$token: String
 		$type: ItemType
 		$unit: Float
+		$timeItTook: Float
 	) {
 		updateItem(
 			id: $itemId
@@ -595,6 +583,7 @@ export const UPDATE_ITEM = gql`
 			token: $token
 			type: $type
 			unit: $unit
+			timeItTook: $timeItTook
 		) {
 			...ItemFragment
 		}

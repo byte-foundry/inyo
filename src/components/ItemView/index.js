@@ -20,8 +20,9 @@ import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
+import Apostrophe from '../Apostrophe';
 
-import {GET_ITEM_DETAILS} from '../../utils/queries';
+import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
 	UPDATE_ITEM,
 	REMOVE_ITEM,
@@ -264,6 +265,11 @@ const Item = ({id, customerToken, close}) => {
 		suspend: false,
 		variables: {id, token: customerToken},
 	});
+	const {
+		loading: loadingUser,
+		data: {me},
+		error: errorUser,
+	} = useQuery(GET_USER_INFOS);
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const focusItem = useMutation(FOCUS_TASK);
@@ -285,8 +291,8 @@ const Item = ({id, customerToken, close}) => {
 		setEditDueDate(false);
 	});
 
-	if (loading) return <LoadingLogo />;
-	if (error) throw error;
+	if (loading || loadingUser) return <LoadingLogo />;
+	if (error || errorUser) throw error || errorUser;
 
 	const {item} = data;
 	const {linkedCustomer: customer} = item;
@@ -387,59 +393,109 @@ const Item = ({id, customerToken, close}) => {
 				</Title>
 			</Header>
 			<Metas>
-				<Meta data-tip="Temps estimé ou passé pour cette tâche">
-					<TimeIcon />
-					<MetaLabel>Temps estimé</MetaLabel>
-					<MetaText>
-						{!customerToken && editUnit ? (
-							<UnitInput
-								unit={item.unit}
-								onBlur={(unit) => {
-									updateItem({
-										variables: {
-											itemId: item.id,
-											unit,
-										},
-									});
-									setEditUnit(false);
-								}}
-								onSubmit={(unit) => {
-									updateItem({
-										variables: {
-											itemId: item.id,
-											unit,
-										},
-									});
-									setEditUnit(false);
-								}}
-								onTab={(unit) => {
-									updateItem({
-										variables: {
-											itemId: item.id,
-											unit,
-										},
-									});
-									setEditUnit(false);
-								}}
-							/>
-						) : (
-							<div
-								onClick={
-									customerToken
-										? undefined
-										: () => setEditUnit(true)
-								}
-							>
-								{item.unit}
-								<Plural
-									singular=" jour"
-									plural=" jours"
-									value={item.unit}
+				{customerToken || item.status !== 'FINISHED' ? (
+					<Meta data-tip="Temps estimé pour cette tâche">
+						<TimeIcon />
+						<MetaLabel>Temps estimé</MetaLabel>
+						<MetaText>
+							{!customerToken && editUnit ? (
+								<UnitInput
+									unit={item.unit}
+									onBlur={(unit) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												unit,
+											},
+										});
+										setEditUnit(false);
+									}}
+									onSubmit={(unit) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												unit,
+											},
+										});
+										setEditUnit(false);
+									}}
+									onTab={(unit) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												unit,
+											},
+										});
+										setEditUnit(false);
+									}}
 								/>
-							</div>
-						)}
-					</MetaText>
-				</Meta>
+							) : (
+								<div
+									onClick={
+										customerToken
+											? undefined
+											: () => setEditUnit(true)
+									}
+								>
+									{item.unit}
+									<Plural
+										singular=" jour"
+										plural=" jours"
+										value={item.unit}
+									/>
+								</div>
+							)}
+						</MetaText>
+					</Meta>
+				) : (
+					<Meta data-tip="Temps passé pour cette tâche">
+						<TimeIcon />
+						<MetaLabel>Temps passé</MetaLabel>
+						<MetaText>
+							{editUnit ? (
+								<UnitInput
+									unit={item.timeItTook}
+									onBlur={(timeItTook) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												timeItTook,
+											},
+										});
+										setEditUnit(false);
+									}}
+									onSubmit={(timeItTook) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												timeItTook,
+											},
+										});
+										setEditUnit(false);
+									}}
+									onTab={(timeItTook) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												timeItTook,
+											},
+										});
+										setEditUnit(false);
+									}}
+								/>
+							) : (
+								<div onClick={() => setEditUnit(true)}>
+									{item.timeItTook}
+									<Plural
+										singular=" jour"
+										plural=" jours"
+										value={item.timeItTook}
+									/>
+								</div>
+							)}
+						</MetaText>
+					</Meta>
+				)}
 				<Meta data-tip="Personne liée à cette tâche">
 					<ContactIcon />
 					<MetaLabel>Client</MetaLabel>
@@ -617,7 +673,15 @@ const Item = ({id, customerToken, close}) => {
 			)}
 			{!customerToken && customerTask && item.linkedCustomer && (
 				<>
-					<SubHeading>Actions d'Edwige</SubHeading>
+					<SubHeading>
+						Actions{' '}
+						<Apostrophe
+							value={me.settings.assistantName}
+							withVowel="d'"
+							withConsonant="de "
+						/>
+						{me.settings.assistantName}
+					</SubHeading>
 					{item.reminders.length > 0 ? (
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
@@ -626,8 +690,8 @@ const Item = ({id, customerToken, close}) => {
 							}
 							icon="✓"
 						>
-							Charger Edwige de faire réaliser cette tâche à{' '}
-							{item.linkedCustomer.name}
+							Charger {me.settings.assistantName} de faire
+							réaliser cette tâche à {item.linkedCustomer.name}
 						</TaskButton>
 					)}
 				</>

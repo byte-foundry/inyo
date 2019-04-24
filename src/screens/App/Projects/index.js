@@ -6,6 +6,7 @@ import ReactTooltip from 'react-tooltip';
 
 import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
+import CreateProjectModal from '../../../components/CreateProjectModal';
 
 import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
 import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
@@ -493,6 +494,7 @@ function Projects({history}) {
 					projectId={projectId}
 				/>
 			)}
+			<CreateProjectModal />
 		</Container>
 	);
 }

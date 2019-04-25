@@ -110,7 +110,6 @@ export const Button = styled('button')`
 	}};
 
 	svg {
-		vertical-align: text-bottom;
 		fill: ${(props) => {
 		if (props.primary) {
 			return primaryWhite;

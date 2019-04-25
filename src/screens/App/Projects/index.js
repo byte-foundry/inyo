@@ -168,6 +168,7 @@ const SubHeadingProject = styled(SubHeading)`
 function Projects({history}) {
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
+	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [seeArchived, setSeeArchived] = useState(false);
 	const [openModeleModal, setOpenModeleModal] = useState(false);
 	const [openDuplicateModal, setOpenDuplicateModal] = useState(false);
@@ -200,15 +201,7 @@ function Projects({history}) {
 					<ButtonsRow>
 						<Button
 							big
-							onClick={async () => {
-								const {
-									data: {
-										createProject: {id},
-									},
-								} = await createProject();
-
-								history.push(`/app/tasks?projectId=${id}`);
-							}}
+							onClick={() => setOpenCreateProjectModal(true)}
 						>
 							Nouveau projet
 						</Button>
@@ -494,7 +487,11 @@ function Projects({history}) {
 					projectId={projectId}
 				/>
 			)}
-			<CreateProjectModal />
+			{openCreateProjectModal && (
+				<CreateProjectModal
+					onDismiss={() => setOpenCreateProjectModal(false)}
+				/>
+			)}
 		</Container>
 	);
 }

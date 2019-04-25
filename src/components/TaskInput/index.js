@@ -18,7 +18,7 @@ import {
 	mediumPurple,
 	lightPurple,
 	primaryGrey,
-	lightGrey,
+	mediumGrey,
 	accentGrey,
 	primaryWhite,
 } from '../../utils/new/design-system';
@@ -110,7 +110,7 @@ const Input = styled('input')`
 	margin-left: -2.7rem;
 	color: ${primaryPurple};
 	font-size: 1.2rem;
-	border: 1px solid ${accentGrey};
+	border: 1px solid ${mediumGrey};
 	transition: all 400ms ease;
 	height: 2.5rem;
 

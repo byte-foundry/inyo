@@ -87,6 +87,8 @@ const ActionsIconContainer = styled('div')`
 	transition: all 300ms ease;
 	margin-right: -3rem;
 	opacity: 0;
+
+	pointer-events: none;
 `;
 
 const ProjectItem = styled('div')`
@@ -106,6 +108,7 @@ const ProjectItem = styled('div')`
 	}
 
 	:hover ${ActionsIconContainer} {
+		pointer-events: all;
 		margin-right: 0;
 		opacity: 1;
 	}

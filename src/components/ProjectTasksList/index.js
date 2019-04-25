@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
@@ -148,28 +148,11 @@ const SectionInput = styled(InlineEditable)`
 	}
 `;
 
-const SectionTitleContainer = styled('div')`
-	margin: 3rem 0 2rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	&:hover {
-		button {
-			opacity: 1;
-			margin: 0;
-			transition: all 600ms ease;
-		}
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 1rem 0 0 0;
-	}
-`;
-
 const TrashIconContainer = styled('div')`
 	cursor: pointer;
 	padding: 1rem;
+
+	pointer-events: none;
 
 	&:hover {
 		svg {
@@ -188,6 +171,29 @@ const TrashIconContainer = styled('div')`
 			border-radius: 8px;
 			z-index: -1;
 		}
+	}
+`;
+
+const SectionTitleContainer = styled('div')`
+	margin: 3rem 0 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&:hover {
+		${TrashIconContainer} {
+			pointer-events: all;
+		}
+
+		button {
+			opacity: 1;
+			margin: 0;
+			transition: all 600ms ease;
+		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 1rem 0 0 0;
 	}
 `;
 

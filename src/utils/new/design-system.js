@@ -519,7 +519,7 @@ export const Aside = styled('aside')`
 	padding-right: 4rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		padding-left: 0;
+		padding-right: 0;
 		margin-top: 2rem;
 		width: 100%;
 	}

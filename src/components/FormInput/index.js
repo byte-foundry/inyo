@@ -37,7 +37,12 @@ const FormInput = ({
 		{...rest}
 	>
 		{({field, form: {isSubmitting}}) => (
-			<FormInputMain {...field} disabled={isSubmitting} {...rest} />
+			<FormInputMain
+				{...field}
+				disabled={isSubmitting}
+				{...rest}
+				error={getDeep(name, errors) && getDeep(name, touched)}
+			/>
 		)}
 	</Field>
 );

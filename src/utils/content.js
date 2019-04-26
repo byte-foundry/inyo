@@ -328,7 +328,7 @@ export const ErrorInput = styled('p')`
 	color: ${signalRed};
 	text-align: right;
 	margin-top: 2px;
-	margin-bottom: 0;
+	margin-bottom: -16px;
 `;
 // Layout
 
@@ -404,6 +404,7 @@ export function ModalContainer({...props}) {
 }
 
 export const ModalActions = styled('div')`
+	grid-column: 1 / 4;
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 3rem;

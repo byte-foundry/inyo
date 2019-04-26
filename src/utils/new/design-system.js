@@ -6,6 +6,7 @@ import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
 import {gray30} from '../content';
 import {BREAKPOINTS} from '../constants';
+import Pencil from '../icons/pencil.svg';
 
 export const primaryPurple = '#5020ee';
 export const mediumPurple = '#8f76e0';
@@ -94,6 +95,9 @@ export const Button = styled('button')`
 		return primaryWhite;
 	}};
 	color: ${(props) => {
+		if (props.link && props.disabled) {
+			return primaryGrey;
+		}
 		if (props.primary) {
 			return primaryWhite;
 		}
@@ -111,6 +115,9 @@ export const Button = styled('button')`
 
 	svg {
 		fill: ${(props) => {
+		if (props.link && props.disabled) {
+			return primaryGrey;
+		}
 		if (props.primary) {
 			return primaryWhite;
 		}
@@ -678,3 +685,46 @@ export const Select = ({style, ...rest}) => (
 		{...rest}
 	/>
 );
+
+export const DateContainer = styled('div')`
+	position: relative;
+	z-index: 0;
+
+	p:hover {
+		position: relative;
+		cursor: pointer;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -0.5rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: ${accentGrey};
+			mask-size: 35%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-image: url(${Pencil});
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+		}
+	}
+`;
+
+export const BigNumber = styled(P)`
+	font-size: 20px;
+	font-weight: 500;
+	color: ${props => (props.urgent ? primaryRed : primaryGrey)};
+`;

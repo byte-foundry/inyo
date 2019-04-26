@@ -495,13 +495,6 @@ export function TaskInfosInputs({
 			{customerTask && (
 				<FocusStateIcon>
 					{activableTask && item.linkedCustomer && !item.isFocused && (
-						// <TaskCustomerActivationButton
-						// 	taskId={id}
-						// 	isActive={item.isFocused}
-						// 	customerName={
-						// 		item.linkedCustomer && item.linkedCustomer.name
-						// 	}
-						// />
 						<NotificationsState
 							data-tip="Les rappels clients ne sont pas activés pour cette tâche"
 							isFocused={item.isFocused}
@@ -514,13 +507,6 @@ export function TaskInfosInputs({
 						/>
 					)}
 					{activableTask && item.linkedCustomer && item.isFocused && (
-						// <TaskCustomerActivationButton
-						// 	taskId={id}
-						// 	isActive={item.isFocused}
-						// 	customerName={
-						// 		item.linkedCustomer && item.linkedCustomer.name
-						// 	}
-						// />
 						<NotificationsState
 							data-tip="Les rappels client sont activés pour cette tâche"
 							isFocused={item.isFocused}

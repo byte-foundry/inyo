@@ -8,6 +8,14 @@ import {
 	SEND_REMINDER_PREVIEW_TEST_EMAIL,
 } from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
+import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
+
+const Eye = styled(EyeIcon)`
+	vertical-align: middle;
+	width: 16px;
+	height: 16px;
+	margin: 0 10px;
+`;
 
 const Status = styled('span')`
 	white-space: nowrap;
@@ -15,6 +23,7 @@ const Status = styled('span')`
 
 const TestButton = styled(Button)`
 	white-space: nowrap;
+	height: 18px;
 	padding-top: 0.1rem;
 	padding-bottom: 0.2rem;
 `;
@@ -42,6 +51,7 @@ const ReminderTestEmailButton = ({
 
 	return (
 		<TestButton
+			link
 			onClick={async () => {
 				setStatus('loading');
 
@@ -64,11 +74,11 @@ const ReminderTestEmailButton = ({
 
 				setStatus(sent ? 'done' : 'error');
 			}}
-			data-tip="Vous recevrez un email identique à celui que recevra votre client"
+			data-tip="S'envoyer un email test"
 			disabled={!preview && reminder.status !== 'PENDING'}
 			{...props}
 		>
-			S'envoyer un email test
+			<Eye />
 		</TestButton>
 	);
 };

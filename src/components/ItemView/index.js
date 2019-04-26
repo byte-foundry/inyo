@@ -48,6 +48,7 @@ import {
 	accentGrey,
 	primaryRed,
 	primaryGrey,
+	primaryWhite,
 } from '../../utils/new/design-system';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
@@ -168,6 +169,7 @@ const StickyHeader = styled('div')`
 	justify-content: center;
 	padding: 1rem;
 	z-index: 1;
+	color: ${primaryWhite};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-left: -2rem;
@@ -260,6 +262,7 @@ const Item = ({id, customerToken, close}) => {
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
+	const [isActivating, setIsActivating] = useState(false);
 	const dateRef = useRef();
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
@@ -273,7 +276,7 @@ const Item = ({id, customerToken, close}) => {
 	} = useQuery(GET_USER_INFOS);
 
 	const updateItem = useMutation(UPDATE_ITEM);
-	const focusItem = useMutation(FOCUS_TASK);
+	const focusTask = useMutation(FOCUS_TASK);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -338,6 +341,36 @@ const Item = ({id, customerToken, close}) => {
 
 	const activableTask = !customerToken && item.status === 'PENDING';
 
+	if (isActivating) {
+		return (
+			<>
+				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+				<StickyHeader customer={item.type !== 'DEFAULT'}>
+					Prévisualisation des actions{' '}
+					<Apostrophe
+						value={me.settings.assistantName}
+						withVowel="d'"
+						withConsonant="de "
+					/>
+					{me.settings.assistantName}
+				</StickyHeader>
+				<TaskRemindersPreviewsList
+					taskId={item.id}
+					remindersPreviews={item.remindersPreviews}
+					customerName={item.linkedCustomer.name}
+					onFocusTask={async ({reminders}) => {
+						await focusTask({
+							variables: {itemId: item.id, reminders},
+						});
+
+						setIsActivating(false);
+					}}
+					onCancel={() => setIsActivating(false)}
+				/>
+			</>
+		);
+	}
+
 	return (
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
@@ -346,6 +379,7 @@ const Item = ({id, customerToken, close}) => {
 					<TaskActivationButton
 						taskId={id}
 						isActive={item.isFocused}
+						onCommit={() => setIsActivating(true)}
 					/>
 				)}
 				{activableTask && customerTask && item.linkedCustomer && (
@@ -355,6 +389,7 @@ const Item = ({id, customerToken, close}) => {
 						customerName={
 							item.linkedCustomer && item.linkedCustomer.name
 						}
+						onCommit={() => setIsActivating(true)}
 					/>
 				)}
 				{activableTask && customerTask && !item.linkedCustomer && (
@@ -686,21 +721,14 @@ const Item = ({id, customerToken, close}) => {
 					{item.reminders.length > 0 ? (
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
-						<>
-							<TaskRemindersPreviewsList
-								taskId={item.id}
-								remindersPreviews={item.remindersPreviews}
-								customerName={item.linkedCustomer.name}
-							/>
-							<TaskButton
-								onClick={() => focusItem({variables: {itemId: item.id}})
-								}
-								icon="✓"
-							>
-								Charger {me.settings.assistantName} de faire réaliser cette tâche à{' '}
-								{item.linkedCustomer.name}
-							</TaskButton>
-						</>
+						<TaskButton
+							onClick={() => focusTask({variables: {itemId: item.id}})
+							}
+							icon="✓"
+						>
+							Charger {me.settings.assistantName} de faire
+							réaliser cette tâche à {item.linkedCustomer.name}
+						</TaskButton>
 					)}
 				</>
 			)}

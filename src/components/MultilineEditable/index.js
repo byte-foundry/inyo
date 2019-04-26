@@ -89,7 +89,7 @@ MultilineEditable.propTypes = {
 	disabled: PropTypes.bool,
 };
 
-MultilineEditable.propTypes = {
+MultilineEditable.defaultProps = {
 	onChange: () => {},
 	disabled: false,
 };

@@ -92,16 +92,16 @@ const TaskStatusButton = ({
 			trueTooltip="Ré-ouvrir la tâche"
 			falseLabel="Marquer comme fait"
 			falseTooltip="Cliquer si cette tâche a été réalisée"
-			commit={(...args) => {
+			commit={() => {
 				if (customerToken) {
-					finishItem(...args);
+					finishItem({itemId: item.id, token: customerToken});
 				}
 				else {
 					setSetTimeItTook(true);
 				}
 			}}
-			reverse={unfinishItem}
-			variables={{itemId: item.id, token: customerToken}}
+			reverse={() => unfinishItem({itemId: item.id, token: customerToken})
+			}
 			white={white}
 			primary={primary}
 		/>

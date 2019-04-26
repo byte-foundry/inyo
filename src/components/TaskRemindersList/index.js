@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
@@ -102,7 +102,16 @@ const ReminderCancel = styled('div')`
 function TaskRemindersList({
 	reminders = [], small, baseUrl, history, noLink,
 }) {
+	const [, setLastUpdatedAt] = useState(new Date());
 	const cancelReminder = useMutation(CANCEL_REMINDER);
+
+	useEffect(() => {
+		const id = setInterval(() => {
+			setLastUpdatedAt(new Date());
+		}, 60 * 1000);
+
+		return () => clearInterval(id);
+	}, []);
 
 	return (
 		<ReminderList>

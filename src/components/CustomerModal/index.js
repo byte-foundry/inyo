@@ -296,7 +296,7 @@ const CustomerModal = ({
 											/>
 											<FormElem
 												{...props}
-												label="Son occupation"
+												label="Son poste"
 												name="occupation"
 												placeholder="Comptable"
 												style={{gridColumn: '2 / 4'}}

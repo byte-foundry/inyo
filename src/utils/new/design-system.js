@@ -672,7 +672,7 @@ const customSelectStyles = {
 	}),
 };
 
-export const Select = ({name, style, ...rest}) => (
+export const Select = ({style, ...rest}) => (
 	<ReactSelect
 		styles={{...customSelectStyles, ...style}}
 		noOptionsMessage={() => 'Aucune option'}

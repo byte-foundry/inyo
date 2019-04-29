@@ -65,14 +65,18 @@ const CreateProjectGrid = styled('form')`
 	grid-row-gap: 1.5rem;
 `;
 
-export default function ({setViewContent, onDismiss, ...props}) {
-	const [addCustomer, setAddCustomer] = useState(false);
-	const [addDeadline, setAddDeadline] = useState(false);
+export default function ({
+	optionsProjects,
+	setViewContent,
+	setCreateCustomer,
+	addDeadline,
+	setAddDeadline,
+	addCustomer,
+	setAddCustomer,
+	onDismiss,
+	...props
+}) {
 	const [editDeadline, setEditDeadline] = useState(false);
-	const {loading: loadingProjects, data: dataProjects} = useQuery(
-		GET_ALL_PROJECTS,
-		{suspend: true},
-	);
 	const {loading: loadingCustomers, data: dataCustomers, error} = useQuery(
 		GET_ALL_CUSTOMERS,
 		{
@@ -80,16 +84,7 @@ export default function ({setViewContent, onDismiss, ...props}) {
 		},
 	);
 
-	let optionsProjects = [];
-
 	let optionsCustomers = [];
-
-	if (!loadingProjects) {
-		optionsProjects = dataProjects.me.projects.map(project => ({
-			value: project.id,
-			label: project.name,
-		}));
-	}
 
 	if (!loadingCustomers) {
 		optionsCustomers = dataCustomers.me.customers.map(customer => ({
@@ -207,7 +202,7 @@ export default function ({setViewContent, onDismiss, ...props}) {
 						/>
 					</CreateProjectElem>
 					<CreateProjectElem end>
-						<Button link>
+						<Button link onClick={() => setCreateCustomer(true)}>
 							<AddCustomerIcon />
 							<span>Créer un nouveau client</span>
 						</Button>

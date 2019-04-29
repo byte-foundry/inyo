@@ -253,6 +253,16 @@ const TaskButton = styled(Button)`
 	margin: 1rem 0 1.5rem;
 `;
 
+const FlexRowButtons = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+
+		button + button {
+			margin: 10px 0;
+		}
+	}
+`;
+
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -784,39 +794,52 @@ const Item = ({id, customerToken, close}) => {
 				linkedCustomer={item.linkedCustomer}
 			/>
 			<HR />
-			<FlexRow>
-				{!customerToken
-					&& (deletingItem ? (
-						<>
-							<Button grey onClick={() => setDeletingItem(false)}>
-								Annuler
-							</Button>
-							<Button
-								red
-								onClick={() => {
-									deleteItem();
-									close();
-								}}
-							>
-								Confirmer la suppression
-							</Button>
-						</>
-					) : (
-						<>
-							<Button red onClick={() => setDeletingItem(true)}>
-								Supprimer la tâche
-							</Button>
-						</>
-					))}
-				{finishableTask && (
-					<TaskStatusButton
-						item={item}
-						primary={item.status === 'FINISHED'}
-						isFinished={item.status === 'FINISHED'}
-						customerToken={customerToken}
-					/>
-				)}
-			</FlexRow>
+			<FlexRowButtons justifyContent="space-between">
+				<div>
+					{!customerToken
+						&& (deletingItem ? (
+							<>
+								<Button
+									grey
+									onClick={() => setDeletingItem(false)}
+								>
+									Annuler
+								</Button>
+								<Button
+									red
+									onClick={() => {
+										deleteItem();
+										close();
+									}}
+								>
+									Confirmer la suppression
+								</Button>
+							</>
+						) : (
+							<>
+								<Button
+									red
+									onClick={() => setDeletingItem(true)}
+								>
+									Supprimer la tâche
+								</Button>
+							</>
+						))}
+					{finishableTask && (
+						<TaskStatusButton
+							item={item}
+							primary={item.status === 'FINISHED'}
+							isFinished={item.status === 'FINISHED'}
+							customerToken={customerToken}
+						/>
+					)}
+				</div>
+				<div>
+					<Button onClick={() => close()}>
+						Enregistrer et fermer
+					</Button>
+				</div>
+			</FlexRowButtons>
 		</>
 	);
 };

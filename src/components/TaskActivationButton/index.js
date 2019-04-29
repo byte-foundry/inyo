@@ -3,12 +3,15 @@ import {useMutation} from 'react-apollo-hooks';
 
 import BistableButton from '../BistableButton';
 
-import {FOCUS_TASK, UNFOCUS_TASK} from '../../utils/mutations';
+import {UNFOCUS_TASK} from '../../utils/mutations';
 
 const TaskActivationButton = ({
-	customerToken, taskId, isActive, disabled,
+	customerToken,
+	taskId,
+	isActive,
+	disabled,
+	onCommit,
 }) => {
-	const focusItem = useMutation(FOCUS_TASK);
 	const unfocusItem = useMutation(UNFOCUS_TASK);
 
 	return (
@@ -20,9 +23,9 @@ const TaskActivationButton = ({
 			trueTooltip="Cette tâche est prévue pour aujourd'hui"
 			falseLabel="Je fais cette tâche aujourd'hui"
 			falseTooltip="Ajouter cette tâche à mon programme du jour"
-			commit={focusItem}
-			reverse={unfocusItem}
-			variables={{itemId: taskId, token: customerToken}}
+			commit={onCommit}
+			reverse={() => unfocusItem({variables: {itemId: taskId, token: customerToken}})
+			}
 		/>
 	);
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactSelect from 'react-select';
 import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
@@ -627,3 +628,54 @@ export const UserSpan = styled('span')`
 export const CustomerSpan = styled('span')`
 	color: ${primaryRed};
 `;
+
+const customSelectStyles = {
+	dropdownIndicator: (styles, {isDisabled}) => ({
+		...styles,
+		color: isDisabled ? primaryGrey : primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+	clearIndicator: styles => ({
+		...styles,
+		color: primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+	placeholder: (styles, {isDisabled}) => ({
+		...styles,
+		color: isDisabled ? lightGrey : lightPurple,
+		fontStyle: 'italic',
+		fontSize: '14px',
+	}),
+	singleValue: (styles, {isDisabled}) => ({
+		...styles,
+		color: isDisabled ? primaryGrey : primaryPurple,
+	}),
+	input: (styles, {isDisabled}) => ({
+		...styles,
+		padding: 0,
+		color: isDisabled ? primaryGrey : primaryPurple,
+	}),
+	control: (styles, {isDisabled}) => ({
+		...styles,
+		minHeight: 'auto',
+		border: 'none',
+		backgroundColor: isDisabled ? lightGrey : lightPurple,
+		borderRadius: '20px',
+		':hover, :focus, :active': {
+			border: 'none',
+		},
+	}),
+	indicatorSeparator: () => ({
+		backgroundColor: 'transparent',
+	}),
+};
+
+export const Select = ({style, ...rest}) => (
+	<ReactSelect
+		styles={{...customSelectStyles, ...style}}
+		noOptionsMessage={() => 'Aucune option'}
+		{...rest}
+	/>
+);

@@ -1,13 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import {convertToRaw} from 'draft-js';
+import {Editor, createEditorState} from 'medium-draft';
+import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
+import 'medium-draft/lib/index.css';
 
 import {ModalContainer, ModalElem, ErrorInput} from '../../utils/content';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
-import {SubHeading, Button} from '../../utils/new/design-system';
+import {
+	SubHeading,
+	Button,
+	Label,
+	primaryGrey,
+} from '../../utils/new/design-system';
 
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../utils/mutations';
@@ -32,6 +41,29 @@ const Buttons = styled('div')`
 	justify-content: flex-end;
 `;
 
+BLOCK_BUTTONS.unshift({
+	description: 'Heading 1',
+	icon: 'header',
+	label: 'H1',
+	style: 'header-one',
+});
+BLOCK_BUTTONS.unshift({
+	description: 'Heading 2',
+	icon: 'header',
+	label: 'H2',
+	style: 'header-two',
+});
+
+const NotesFormLabel = styled(Label)`
+	margin-bottom: 10px;
+`;
+
+const NotesForm = styled('div')`
+	border: 1px solid ${primaryGrey};
+	grid-column: 1 / 4;
+	margin-bottom: 10px;
+`;
+
 const CustomerModal = ({
 	selectedCustomerId,
 	onDismiss,
@@ -47,6 +79,9 @@ const CustomerModal = ({
 	const updateCustomer = useMutation(UPDATE_CUSTOMER);
 	const createCustomer = useMutation(CREATE_CUSTOMER);
 	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
+	const [editorState, setEditorState] = useState(
+		createEditorState(customerNotNull.userNotes),
+	);
 
 	let options = [];
 
@@ -82,6 +117,7 @@ const CustomerModal = ({
 						lastName: customerNotNull.lastName || '',
 						email: customerNotNull.email || '',
 						phone: customerNotNull.phone || '',
+						occupation: customerNotNull.occupation || '',
 					}}
 					validate={(values) => {
 						if (
@@ -102,6 +138,7 @@ const CustomerModal = ({
 								email: Yup.string()
 									.email('Email invalide')
 									.required('Requis'),
+								occupation: Yup.string(),
 								phone: Yup.string(),
 							}).validateSync(values, {abortEarly: false});
 
@@ -144,6 +181,10 @@ const CustomerModal = ({
 									lastName: values.lastName,
 									email: values.email,
 									phone: values.phone,
+									occupation: values.occupation,
+									userNotes: convertToRaw(
+										editorState.getCurrentContent(),
+									),
 								},
 							});
 							onValidate(customer);
@@ -160,6 +201,10 @@ const CustomerModal = ({
 									lastName: values.lastName,
 									email: values.email,
 									phone: values.phone,
+									occupation: values.occupation,
+									userNotes: convertToRaw(
+										editorState.getCurrentContent(),
+									),
 								},
 							});
 
@@ -249,6 +294,43 @@ const CustomerModal = ({
 												placeholder="08 36 65 65 65"
 												style={{gridColumn: '2 / 4'}}
 											/>
+											<FormElem
+												{...props}
+												label="Son poste"
+												name="occupation"
+												placeholder="Comptable"
+												style={{gridColumn: '2 / 4'}}
+											/>
+											<NotesFormLabel>
+												Notes
+											</NotesFormLabel>
+											<NotesForm>
+												<Editor
+													editorEnabled
+													editorState={editorState}
+													onChange={newState => setEditorState(newState)
+													}
+													sideButtons={[]}
+													toolbarConfig={{
+														block: [
+															'header-one',
+															'header-two',
+															'header-three',
+															'ordered-list-item',
+															'unordered-list-item',
+															'blockquote',
+														],
+														inline: [
+															'BOLD',
+															'ITALIC',
+															'UNDERLINE',
+															'hyperlink',
+															'HIGHLIGHT',
+														],
+													}}
+													placeholder="Écrivez des notes..."
+												/>
+											</NotesForm>
 										</CreateCustomerForm>
 										{status && status.msg && (
 											<ErrorInput>

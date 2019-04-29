@@ -36,7 +36,7 @@ const TaskActivationButton = ({
 			} de faire réaliser cette tâche à ${customerName}`}
 			falseTooltip="Ajouter la tâche aux choses à faire aujourd'hui"
 			commit={onCommit}
-			reverse={() => unfocusItem({itemId: taskId})}
+			reverse={() => unfocusItem({variables: {itemId: taskId}})}
 		/>
 	);
 };

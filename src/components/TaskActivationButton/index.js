@@ -24,7 +24,8 @@ const TaskActivationButton = ({
 			falseLabel="Je fais cette tâche aujourd'hui"
 			falseTooltip="Ajouter cette tâche à mon programme du jour"
 			commit={onCommit}
-			reverse={() => unfocusItem({itemId: taskId, token: customerToken})}
+			reverse={() => unfocusItem({variables: {itemId: taskId, token: customerToken}})
+			}
 		/>
 	);
 };

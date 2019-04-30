@@ -185,7 +185,7 @@ const TaskRemindersPreviewsList = ({
 						if (index === 0 || !reminder.isRelative) {
 							delay = `${moment
 								.duration(reminder.delay * 1000)
-								.humanize()} après activaton`;
+								.humanize()} après activation`;
 						}
 						else {
 							delay = `${moment

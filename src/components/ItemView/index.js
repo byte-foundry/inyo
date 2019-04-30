@@ -389,7 +389,10 @@ const Item = ({id, customerToken, close}) => {
 					<TaskActivationButton
 						taskId={id}
 						isActive={item.isFocused}
-						onCommit={() => setIsActivating(true)}
+						onCommit={() => focusTask({
+							variables: {itemId: item.id},
+						})
+						}
 					/>
 				)}
 				{activableTask && customerTask && item.linkedCustomer && (

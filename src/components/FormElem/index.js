@@ -9,7 +9,7 @@ import {getDeep} from '../../utils/functions';
 
 const FormElemMain = styled(InputLabel)`
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: ${props => (props.noMarginBottom ? '0' : '20px')};
 `;
 
 class FormElem extends Component {
@@ -28,6 +28,7 @@ class FormElem extends Component {
 			padded,
 			inline,
 			onboarding,
+			big,
 			...rest
 		} = this.props;
 
@@ -45,6 +46,7 @@ class FormElem extends Component {
 					</Label>
 				)}
 				<FormInput
+					big={big}
 					name={name}
 					placeholder={placeholder}
 					type={type}

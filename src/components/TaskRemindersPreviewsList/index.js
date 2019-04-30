@@ -10,6 +10,7 @@ import {
 	primaryBlack,
 	Button,
 	Select,
+	BackButton,
 } from '../../utils/new/design-system';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import {ReactComponent as PencilIcon} from '../../utils/icons/pencil.svg';
@@ -89,16 +90,6 @@ const ReminderFormGroup = styled('div')`
 
 const ReminderFormActions = styled('div')`
 	align-self: flex-end;
-`;
-
-const BackButton = styled(Button)`
-	align-self: flex-start;
-	text-transform: uppercase;
-
-	::before {
-		content: '⇽';
-		margin-right: 10px;
-	}
 `;
 
 const TaskRemindersPreviewsList = ({

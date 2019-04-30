@@ -635,7 +635,7 @@ export const CustomerSpan = styled('span')`
 	color: ${primaryRed};
 `;
 
-const customSelectStyles = {
+const customSelectStyles = props => ({
 	dropdownIndicator: (styles, {isDisabled}) => ({
 		...styles,
 		color: isDisabled ? primaryGrey : primaryPurple,
@@ -663,8 +663,9 @@ const customSelectStyles = {
 		padding: 0,
 		color: isDisabled ? primaryGrey : primaryPurple,
 	}),
-	control: (styles, {isDisabled}) => ({
+	control: (styles, {isDisabled, big}) => ({
 		...styles,
+		height: props.big && '40px',
 		minHeight: 'auto',
 		border: 'none',
 		backgroundColor: isDisabled ? lightGrey : lightPurple,
@@ -676,11 +677,11 @@ const customSelectStyles = {
 	indicatorSeparator: () => ({
 		backgroundColor: 'transparent',
 	}),
-};
+});
 
 export const Select = ({style, ...rest}) => (
 	<ReactSelect
-		styles={{...customSelectStyles, ...style}}
+		styles={{...customSelectStyles(rest), ...style}}
 		noOptionsMessage={() => 'Aucune option'}
 		{...rest}
 	/>
@@ -727,4 +728,15 @@ export const BigNumber = styled(P)`
 	font-size: 20px;
 	font-weight: 500;
 	color: ${props => (props.urgent ? primaryRed : primaryGrey)};
+`;
+
+export const BackButton = styled(Button)`
+	align-self: flex-start;
+	text-transform: uppercase;
+	${props => props.withMargin && 'margin-bottom: 1rem;'}
+
+	::before {
+		content: '⇽';
+		margin-right: 10px;
+	}
 `;

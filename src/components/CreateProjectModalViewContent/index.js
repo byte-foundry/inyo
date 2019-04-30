@@ -11,12 +11,13 @@ import {
 	SubHeading,
 	primaryPurple,
 	primaryBlack,
+	BackButton,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import {Loading} from '../../utils/content';
 
 const TemplateSubHeading = styled(SubHeading)`
-	margin-bottom: 1.2rem;
+	margin-bottom: 1.5rem;
 `;
 
 const TemplateContent = styled('div')`
@@ -45,6 +46,7 @@ const TemplateColumn = styled('div')`
 	flex: 1;
 	font-size: 13px;
 	position: relative;
+	margin-left: 0.5rem;
 `;
 
 const TemplateColumnLabel = styled(Label)`
@@ -77,8 +79,9 @@ const SectionItemList = styled('ul')`
 	}
 `;
 
-const TemplateFormSelect = styled(FormSelect)`
-	margin-left: -1rem;
+const Container = styled('div')`
+	display: flex;
+	flex-direction: column;
 `;
 
 function TemplateTaskList({selectedTemplate}) {
@@ -139,7 +142,10 @@ export default function ({back, optionsProjects, ...props}) {
 	}
 
 	return (
-		<>
+		<Container>
+			<BackButton withMargin grey type="button" link onClick={back}>
+				Retour
+			</BackButton>
 			{type === 'MODELS' && (
 				<>
 					<TemplateSubHeading>
@@ -151,6 +157,7 @@ export default function ({back, optionsProjects, ...props}) {
 								{...props}
 								name="modelTemplateTemp"
 								label="Titre du modèle"
+								big
 								options={templates.map(template => ({
 									value: template.name,
 									label: template.label,
@@ -188,6 +195,7 @@ export default function ({back, optionsProjects, ...props}) {
 								{...props}
 								name="modelProjectTemp"
 								label="Titre du projet"
+								big
 								options={optionsProjects}
 							/>
 							<TemplateButton
@@ -215,6 +223,6 @@ export default function ({back, optionsProjects, ...props}) {
 					</TemplateContent>
 				</>
 			)}
-		</>
+		</Container>
 	);
 }

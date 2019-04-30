@@ -23,6 +23,10 @@ import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import {ReactComponent as AddIcon} from '../../utils/icons/add-circle.svg';
 import {ModalActions} from '../../utils/content';
 
+const FormSubHeading = styled(SubHeading)`
+	grid-column: 1 / 4;
+`;
+
 const SeeContentIcon = styled(EyeIcon)`
 	vertical-align: middle;
 	margin-top: -2px;
@@ -42,6 +46,7 @@ const AddCustomerIcon = styled(AddIcon)`
 const CreateProjectRow = styled('div')`
 	margin-top: 1rem;
 	grid-column-end: span 3;
+	${props => (props.leftMargin ? 'margin-left: -1rem;' : '')}
 `;
 
 const CreateProjectElem = styled('div')`
@@ -56,12 +61,14 @@ const CreateProjectElem = styled('div')`
 		&& `
 		display: flex;
 		align-items: flex-end;
+		margin-bottom: 9px;
 	`}
+	${props => (props.leftMargin ? 'margin-left: -1rem;' : '')}
 `;
 
 const CreateProjectGrid = styled('form')`
 	display: grid;
-	grid-template-column: 1fr 1fr 1fr;
+	grid-template-column: 165px 1fr 1fr;
 	grid-row-gap: 1.5rem;
 `;
 
@@ -101,14 +108,16 @@ export default function ({
 
 	return (
 		<CreateProjectGrid>
-			<SubHeading>Créer un nouveau projet</SubHeading>
-			<CreateProjectRow>
+			<FormSubHeading>Créer un nouveau projet</FormSubHeading>
+			<CreateProjectRow leftMargin>
 				<FormElem
 					{...props}
 					name="name"
 					type="text"
 					label="Titre du projet"
 					placeholder="Ex: Landing page nouvelle collection, etc."
+					big
+					noMarginBottom
 				/>
 			</CreateProjectRow>
 			<CreateProjectElem>
@@ -144,6 +153,7 @@ export default function ({
 							{...props}
 							name="modelTemplate"
 							label="Titre du modèle"
+							big
 							options={templates.map(template => ({
 								value: template.name,
 								label: template.label,
@@ -172,6 +182,7 @@ export default function ({
 							{...props}
 							name="modelProject"
 							label="Titre du projet"
+							big
 							options={optionsProjects}
 						/>
 					</CreateProjectElem>
@@ -192,12 +203,13 @@ export default function ({
 			)}
 			{addCustomer && (
 				<>
-					<CreateProjectElem big>
+					<CreateProjectElem big leftMargin>
 						<FormSelect
 							{...props}
 							options={optionsCustomers}
 							name="customerId"
 							label="Client principal du projet"
+							big
 							css="width: 100%;"
 						/>
 					</CreateProjectElem>

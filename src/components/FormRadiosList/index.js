@@ -7,7 +7,7 @@ import {InputLabel, Label} from '../../utils/new/design-system';
 const FormRadiosMain = styled(InputLabel)``;
 
 const RadioElem = styled('div')`
-	margin: 0.5rem;
+	margin: 0.5rem 0;
 `;
 
 const RadioInput = styled('input')`

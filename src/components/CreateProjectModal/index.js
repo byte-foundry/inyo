@@ -159,6 +159,7 @@ function CreateProjectModal({onDismiss, history}) {
 					{createCustomer && (
 						<CustomerModalAndMail
 							noSelect
+							withBack
 							onDismiss={() => {
 								setCreateCustomer(false);
 							}}

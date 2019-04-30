@@ -10,6 +10,7 @@ const FormInputMain = styled(Input)`
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
+	${props => props.big && 'height: 40px;'}
 
 	${props => props.inline
 		&& css`

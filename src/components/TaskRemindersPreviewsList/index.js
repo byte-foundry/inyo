@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useSpring, animated} from 'react-spring';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 
@@ -11,6 +12,8 @@ import {
 	Button,
 	Select,
 } from '../../utils/new/design-system';
+import usePrevious from '../../utils/usePrevious';
+import useMeasure from '../../utils/useMeasure';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import {ReactComponent as PencilIcon} from '../../utils/icons/pencil.svg';
 
@@ -64,7 +67,7 @@ const ReminderText = styled('div')`
 
 const ReminderDate = styled('div')`
 	font-size: 12px;
-	margin: 0 10px;
+	margin: 0 5px;
 	cursor: default;
 `;
 
@@ -77,7 +80,7 @@ const ReminderActions = styled('div')`
 
 const ButtonIcon = styled(Button)``;
 
-const ReminderForm = styled('form')`
+const ReminderForm = styled(animated.form)`
 	display: flex;
 	flex-direction: column;
 `;
@@ -100,6 +103,29 @@ const BackButton = styled(Button)`
 		margin-right: 10px;
 	}
 `;
+
+const CollapsableReminderForm = ({children, isOpen, ...props}) => {
+	const previous = usePrevious(isOpen);
+
+	const [bind, {height: viewHeight}] = useMeasure();
+	const {height, opacity} = useSpring({
+		height: isOpen ? viewHeight : 0,
+		opacity: isOpen ? 1 : 0,
+	});
+
+	return (
+		<ReminderForm
+			style={{
+				overflow: isOpen && previous ? '' : 'hidden',
+				opacity,
+				height: isOpen && previous ? 'auto' : height,
+			}}
+			{...props}
+		>
+			<animated.div {...bind}>{children}</animated.div>
+		</ReminderForm>
+	);
+};
 
 const TaskRemindersPreviewsList = ({
 	taskId,
@@ -215,145 +241,141 @@ const TaskRemindersPreviewsList = ({
 										</Delete>
 									</ReminderActions>
 								</ReminderItem>
-								{editingIndex === index && (
-									<ReminderForm
-										onSubmit={(e) => {
-											e.preventDefault();
+								<CollapsableReminderForm
+									isOpen={editingIndex === index}
+									onSubmit={(e) => {
+										e.preventDefault();
 
-											const absoluteDelay = moment.duration(
-												value,
-												unit,
+										const absoluteDelay = moment.duration(
+											value,
+											unit,
+										);
+
+										if (isRelative && index > 0) {
+											absoluteDelay.add(
+												reminders[index - 1].delay
+													* 1000,
 											);
+										}
 
-											if (isRelative && index > 0) {
-												absoluteDelay.add(
-													reminders[index - 1].delay
-														* 1000,
-												);
+										setReminders([
+											...reminders.slice(0, index),
+											{
+												...reminder,
+												delay: absoluteDelay.asSeconds(),
+												isRelative,
+											},
+											...reminders.slice(index + 1),
+										]);
+
+										setEditingIndex(null);
+									}}
+								>
+									<ReminderFormGroup>
+										<Select
+											key={unit}
+											name="value"
+											options={durationOptions[unit]}
+											onChange={({value}) => setValue(value)
 											}
-
-											setReminders([
-												...reminders.slice(0, index),
+											isSearchable={false}
+											defaultValue={
+												durationOptions[unit][0]
+											}
+											style={{
+												container: styles => ({
+													...styles,
+													flex: 1,
+												}),
+											}}
+										/>
+										<Select
+											name="unit"
+											options={[
 												{
-													...reminder,
-													delay: absoluteDelay.asSeconds(),
-													isRelative,
+													label: 'minutes',
+													value: 'minutes',
 												},
-												...reminders.slice(index + 1),
-											]);
-
-											setEditingIndex(null);
-										}}
-									>
-										<ReminderFormGroup>
-											<Select
-												key={unit}
-												name="value"
-												options={durationOptions[unit]}
-												onChange={({value}) => setValue(value)
-												}
-												isSearchable={false}
-												defaultValue={
-													durationOptions[unit][0]
-												}
-												style={{
-													container: styles => ({
-														...styles,
-														flex: 1,
-													}),
-												}}
-											/>
-											<Select
-												name="unit"
-												options={[
-													{
-														label: 'minutes',
-														value: 'minutes',
-													},
-													{
-														label: 'heures',
-														value: 'hours',
-													},
-													{
-														label: 'jours',
-														value: 'days',
-													},
-													{
-														label: 'semaines',
-														value: 'weeks',
-													},
-												]}
-												onChange={({value}) => setUnit(value)
-												}
-												isSearchable={false}
-												defaultValue={{
+												{
+													label: 'heures',
+													value: 'hours',
+												},
+												{
 													label: 'jours',
 													value: 'days',
-												}}
-												style={{
-													container: styles => ({
-														...styles,
-														flex: 1,
-														marginLeft: '5px',
-													}),
-												}}
-											/>
-											<Select
-												name="from"
-												isDisabled={index === 0}
-												options={[
-													{
+												},
+												{
+													label: 'semaines',
+													value: 'weeks',
+												},
+											]}
+											onChange={({value}) => setUnit(value)
+											}
+											isSearchable={false}
+											defaultValue={{
+												label: 'jours',
+												value: 'days',
+											}}
+											style={{
+												container: styles => ({
+													...styles,
+													flex: 1,
+													marginLeft: '5px',
+												}),
+											}}
+										/>
+										<Select
+											name="from"
+											isDisabled={index === 0}
+											options={[
+												{
+													label: 'après activation',
+													value: false,
+												},
+												{
+													label:
+														'après action précédente',
+													value: true,
+												},
+											]}
+											onChange={({value}) => setIsRelative(value)
+											}
+											isSearchable={false}
+											value={
+												index !== 0 && isRelative
+													? {
 														label:
-															'après activation',
-														value: false,
-													},
-													{
-														label:
-															'après action précédente',
+																'après action précédente',
 														value: true,
-													},
-												]}
-												onChange={({value}) => setIsRelative(value)
-												}
-												isSearchable={false}
-												value={
-													index !== 0 && isRelative
-														? {
-															label:
-																	'après action précédente',
-															value: true,
-														  }
-														: {
-															label:
-																	'après activation',
-															value: false,
-														  }
-												}
-												style={{
-													container: styles => ({
-														...styles,
-														flex: 3,
-														marginLeft: '5px',
-													}),
-												}}
-											/>
-										</ReminderFormGroup>
-										<ReminderFormActions>
-											<Button
-												grey
-												type="button"
-												link
-												onClick={() => setEditingIndex(null)
-												}
-											>
-												Annuler
-											</Button>
-											<Button type="submit">
-												Valider
-											</Button>
-										</ReminderFormActions>
-									</ReminderForm>
-								)}
+													  }
+													: {
+														label:
+																'après activation',
+														value: false,
+													  }
+											}
+											style={{
+												container: styles => ({
+													...styles,
+													flex: 3,
+													marginLeft: '5px',
+												}),
+											}}
+										/>
+									</ReminderFormGroup>
+									<ReminderFormActions>
+										<Button
+											grey
+											type="button"
+											link
+											onClick={() => setEditingIndex(null)
+											}
+										>
+											Annuler
+										</Button>
+										<Button type="submit">Valider</Button>
+									</ReminderFormActions>
+								</CollapsableReminderForm>
 							</>
 						);
 					})}

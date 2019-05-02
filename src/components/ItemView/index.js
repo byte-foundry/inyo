@@ -402,7 +402,16 @@ const Item = ({id, customerToken, close}) => {
 						customerName={
 							item.linkedCustomer && item.linkedCustomer.name
 						}
-						onCommit={() => setIsActivating(true)}
+						onCommit={() => {
+							if (item.type === 'CONTENT_ACQUISITION') {
+								focusTask({
+									variables: {itemId: item.id},
+								});
+							}
+							else {
+								setIsActivating(true);
+							}
+						}}
 					/>
 				)}
 				{activableTask && customerTask && !item.linkedCustomer && (

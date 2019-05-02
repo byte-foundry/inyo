@@ -562,7 +562,7 @@ export function TaskInfosInputs({
 									: () => setEditUnit(true)
 							}
 						>
-							{unitToDisplay}{' '}
+							{+unitToDisplay.toFixed(2)}{' '}
 							{!unitInHours && (
 								<Plural
 									value={unitToDisplay}
@@ -623,10 +623,14 @@ export function TaskInfosInputs({
 							<>
 								{(dueDate && (
 									<>
-										{moment(dueDate).diff(
-											moment(),
-											'days',
-										) - item.unit}{' '}
+										{
+											+(
+												moment(dueDate).diff(
+													moment(),
+													'days',
+												) - item.unit
+											).toFixed(2)
+										}{' '}
 										<Plural
 											value={item.unit}
 											singular="jour"

@@ -437,7 +437,7 @@ const SidebarProjectInfos = ({
 						data-tip="Nombre de jours travaillés avant deadline"
 						urgent={margin < 1}
 					>
-						{margin}&nbsp;
+						{+margin.toFixed(2)}&nbsp;
 						<Plural value={margin} singular="jour" plural="jours" />
 					</BigNumber>
 				</SubSection>

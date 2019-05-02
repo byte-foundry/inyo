@@ -495,7 +495,7 @@ const Item = ({id, customerToken, close}) => {
 											: () => setEditUnit(true)
 									}
 								>
-									{item.unit}
+									{+item.unit.toFixed(2)}
 									<Plural
 										singular=" jour"
 										plural=" jours"
@@ -543,7 +543,7 @@ const Item = ({id, customerToken, close}) => {
 								/>
 							) : (
 								<div onClick={() => setEditUnit(true)}>
-									{item.timeItTook}
+									{+item.timeItTook.toFixed(2)}
 									<Plural
 										singular=" jour"
 										plural=" jours"
@@ -631,10 +631,14 @@ const Item = ({id, customerToken, close}) => {
 							) : (
 								deadline && (
 									<div>
-										{moment(deadline).diff(
-											moment(),
-											'days',
-										) - item.unit}{' '}
+										{
+											+(
+												moment(deadline).diff(
+													moment(),
+													'days',
+												) - item.unit
+											).toFixed(2)
+										}{' '}
 										<Plural
 											value={
 												moment(deadline).diff(

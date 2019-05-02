@@ -387,7 +387,7 @@ export const templates = [
 	},
 	{
 		name: 'BLANK',
-		label: 'Vierge',
+		label: 'Basique',
 		sections: [
 			{
 				name: 'Pré-projet',

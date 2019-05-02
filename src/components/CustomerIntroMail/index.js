@@ -56,16 +56,24 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 	const contentRef = useRef();
 	const [isCopied, setIsCopied] = useState(false);
 	const {
-		data: {
-			me: {
-				email,
-				settings: {assistantName},
-			},
-		},
+		data: {me},
 		loading,
 	} = useQuery(GET_USER_INFOS);
 
-	if (loading) return <Loading />;
+	if (loading) {
+		return (
+			<ModalContainer onDismiss={onDismiss}>
+				<ModalElem>
+					<Loading />
+				</ModalElem>
+			</ModalContainer>
+		);
+	}
+
+	const {
+		email,
+		settings: {assistantName},
+	} = me;
 
 	return (
 		<ModalContainer onDismiss={onDismiss}>

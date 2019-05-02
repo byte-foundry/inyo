@@ -47,6 +47,10 @@ const CreateProjectRow = styled('div')`
 	margin-top: 1rem;
 	grid-column-end: span 3;
 	${props => (props.leftMargin ? 'margin-left: -1rem;' : '')}
+
+	${props => (props.third ? 'display: grid;' : '')}
+	${props => (props.third ? 'grid-template-columns: 150px 1fr 150px;' : '')}
+	${props => (props.third ? 'align-items: end;' : '')}
 `;
 
 const CreateProjectElem = styled('div')`
@@ -68,7 +72,7 @@ const CreateProjectElem = styled('div')`
 
 const CreateProjectGrid = styled('form')`
 	display: grid;
-	grid-template-column: 165px 1fr 1fr;
+	grid-template-columns: 400px 1fr 1fr;
 	grid-row-gap: 1.5rem;
 `;
 
@@ -120,87 +124,89 @@ export default function ({
 					noMarginBottom
 				/>
 			</CreateProjectRow>
-			<CreateProjectElem>
-				<FormRadiosList
-					{...props}
-					name="source"
-					options={[
-						{
-							id: 'BLANK',
-							label: 'Projet vierge',
-						},
-						{
-							id: 'MODELS',
-							label: 'Nos modèles',
-						},
-						{
-							id: 'PROJECTS',
-							label: 'Vos projets',
-						},
-					]}
-				/>
-			</CreateProjectElem>
-			{props.values.source === 'BLANK' && (
-				<>
-					<CreateProjectElem />
-					<CreateProjectElem />
-				</>
-			)}
-			{props.values.source === 'MODELS' && (
-				<>
-					<CreateProjectElem>
-						<FormSelect
-							{...props}
-							name="modelTemplate"
-							label="Titre du modèle"
-							big
-							options={templates.map(template => ({
-								value: template.name,
-								label: template.label,
-							}))}
-						/>
-					</CreateProjectElem>
-					<CreateProjectElem center>
-						<Button
-							link
-							disabled={!props.values.modelTemplate}
-							onClick={(e) => {
-								e.preventDefault();
-								setViewContent(true);
-							}}
-						>
-							<SeeContentIcon />
-							<span>Voir le contenu</span>
-						</Button>
-					</CreateProjectElem>
-				</>
-			)}
-			{props.values.source === 'PROJECTS' && (
-				<>
-					<CreateProjectElem>
-						<FormSelect
-							{...props}
-							name="modelProject"
-							label="Titre du projet"
-							big
-							options={optionsProjects}
-						/>
-					</CreateProjectElem>
-					<CreateProjectElem center>
-						<Button
-							link
-							disabled={!props.values.modelProject}
-							onClick={(e) => {
-								e.preventDefault();
-								setViewContent(true);
-							}}
-						>
-							<SeeContentIcon />
-							<span>Voir le contenu</span>
-						</Button>
-					</CreateProjectElem>
-				</>
-			)}
+			<CreateProjectRow third>
+				<CreateProjectElem>
+					<FormRadiosList
+						{...props}
+						name="source"
+						options={[
+							{
+								id: 'BLANK',
+								label: 'Projet vierge',
+							},
+							{
+								id: 'MODELS',
+								label: 'Nos modèles',
+							},
+							{
+								id: 'PROJECTS',
+								label: 'Vos projets',
+							},
+						]}
+					/>
+				</CreateProjectElem>
+				{props.values.source === 'BLANK' && (
+					<>
+						<CreateProjectElem />
+						<CreateProjectElem />
+					</>
+				)}
+				{props.values.source === 'MODELS' && (
+					<>
+						<CreateProjectElem>
+							<FormSelect
+								{...props}
+								name="modelTemplate"
+								label="Titre du modèle"
+								big
+								options={templates.map(template => ({
+									value: template.name,
+									label: template.label,
+								}))}
+							/>
+						</CreateProjectElem>
+						<CreateProjectElem center>
+							<Button
+								link
+								disabled={!props.values.modelTemplate}
+								onClick={(e) => {
+									e.preventDefault();
+									setViewContent(true);
+								}}
+							>
+								<SeeContentIcon />
+								<span>Voir le contenu</span>
+							</Button>
+						</CreateProjectElem>
+					</>
+				)}
+				{props.values.source === 'PROJECTS' && (
+					<>
+						<CreateProjectElem>
+							<FormSelect
+								{...props}
+								name="modelProject"
+								label="Titre du projet"
+								big
+								options={optionsProjects}
+							/>
+						</CreateProjectElem>
+						<CreateProjectElem center>
+							<Button
+								link
+								disabled={!props.values.modelProject}
+								onClick={(e) => {
+									e.preventDefault();
+									setViewContent(true);
+								}}
+							>
+								<SeeContentIcon />
+								<span>Voir le contenu</span>
+							</Button>
+						</CreateProjectElem>
+					</>
+				)}
+			</CreateProjectRow>
 			{addCustomer && (
 				<>
 					<CreateProjectElem big leftMargin>

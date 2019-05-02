@@ -126,7 +126,7 @@ function CreateProjectModal({onDismiss, history}) {
 				<>
 					{!createCustomer && !viewContent && (
 						<form onSubmit={props.handleSubmit}>
-							<ModalContainer size="small" onDismiss={onDismiss}>
+							<ModalContainer onDismiss={onDismiss}>
 								<ModalElem>
 									<CreateProjectModalForm
 										{...props}

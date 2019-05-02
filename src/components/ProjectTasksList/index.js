@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
 
 import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
+
+import {BREAKPOINTS} from '../../utils/constants';
 
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
@@ -139,26 +141,18 @@ const SectionInput = styled(InlineEditable)`
 			width: 50px;
 		}
 	}
-`;
 
-const SectionTitleContainer = styled('div')`
-	margin: 3rem 0 2rem;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	&:hover {
-		button {
-			opacity: 1;
-			margin: 0;
-			transition: all 600ms ease;
-		}
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 0;
+		padding: 0;
 	}
 `;
 
 const TrashIconContainer = styled('div')`
 	cursor: pointer;
 	padding: 1rem;
+
+	pointer-events: none;
 
 	&:hover {
 		svg {
@@ -177,6 +171,29 @@ const TrashIconContainer = styled('div')`
 			border-radius: 8px;
 			z-index: -1;
 		}
+	}
+`;
+
+const SectionTitleContainer = styled('div')`
+	margin: 3rem 0 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&:hover {
+		${TrashIconContainer} {
+			pointer-events: all;
+		}
+
+		button {
+			opacity: 1;
+			margin: 0;
+			transition: all 600ms ease;
+		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 1rem 0 0 0;
 	}
 `;
 
@@ -238,7 +255,9 @@ const editableCss = css`
 
 const DisableTask = styled('div')`
 	pointer-events: none;
-	margin: 2rem 0;
+	margin: 1rem 0;
+	transform: scale(0.8);
+	transform-origin: left top;
 `;
 
 const Heading = styled(SubHeading)`

@@ -16,6 +16,7 @@ import NotificationsOffIcon from '../../utils/icons/baseline-notifications_off-2
 import NotificationsImpossibleIcon from '../../utils/icons/baseline-error-24px.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {isCustomerTask} from '../../utils/functions';
 
 import {
 	ButtonLink,
@@ -43,7 +44,7 @@ import TimeItTookDisplay from '../TimeItTookDisplay';
 
 export const TaskContainer = styled('div')`
 	display: flex;
-	margin-bottom: 0.6rem;
+	margin-bottom: ${props => (props.noData ? '-1rem' : '0.6rem')};
 	position: relative;
 	padding-left: 2rem;
 	margin-left: -2rem;
@@ -73,7 +74,7 @@ export const TaskContainer = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
 		margin-left: 0;
-		margin-bottom: 0.85rem;
+		margin-bottom: 0;
 
 		&:after {
 			display: none;
@@ -163,7 +164,9 @@ const TaskIcon = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		transform: scale(0.6);
-		margin: 0 0.5rem 0 0;
+		margin: 0;
+		position: absolute;
+		left: -1rem;
 
 		&:after,
 		&:before {
@@ -183,10 +186,10 @@ const TaskInfosIcon = styled('div')`
 
 const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: ${props => (props.noData ? '0' : '1rem')};
+	margin-top: ${props => (props.noData ? '0.9rem' : '1rem')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		margin: 0.2rem 0 0 0;
+		padding-left: 2rem;
 	}
 `;
 
@@ -210,7 +213,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	color: ${primaryBlack};
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		font-size: 1rem;
+		font-size: 0.85rem;
 		display: block;
 	}
 `;
@@ -357,8 +360,6 @@ const FocusStateIcon = styled('div')`
 	}
 `;
 
-const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
-
 export function TaskCustomerInput({
 	disabled,
 	editCustomer: editCustomerProp,
@@ -493,13 +494,6 @@ export function TaskInfosInputs({
 			{customerTask && (
 				<FocusStateIcon>
 					{activableTask && item.linkedCustomer && !item.isFocused && (
-						// <TaskCustomerActivationButton
-						// 	taskId={id}
-						// 	isActive={item.isFocused}
-						// 	customerName={
-						// 		item.linkedCustomer && item.linkedCustomer.name
-						// 	}
-						// />
 						<NotificationsState
 							data-tip="Les rappels clients ne sont pas activés pour cette tâche"
 							isFocused={item.isFocused}
@@ -512,13 +506,6 @@ export function TaskInfosInputs({
 						/>
 					)}
 					{activableTask && item.linkedCustomer && item.isFocused && (
-						// <TaskCustomerActivationButton
-						// 	taskId={id}
-						// 	isActive={item.isFocused}
-						// 	customerName={
-						// 		item.linkedCustomer && item.linkedCustomer.name
-						// 	}
-						// />
 						<NotificationsState
 							data-tip="Les rappels client sont activés pour cette tâche"
 							isFocused={item.isFocused}
@@ -575,7 +562,7 @@ export function TaskInfosInputs({
 									: () => setEditUnit(true)
 							}
 						>
-							{unitToDisplay}{' '}
+							{+unitToDisplay.toFixed(2)}{' '}
 							{!unitInHours && (
 								<Plural
 									value={unitToDisplay}
@@ -636,10 +623,14 @@ export function TaskInfosInputs({
 							<>
 								{(dueDate && (
 									<>
-										{moment(dueDate).diff(
-											moment(),
-											'days',
-										) - item.unit}{' '}
+										{
+											+(
+												moment(dueDate).diff(
+													moment(),
+													'days',
+												) - item.unit
+											).toFixed(2)
+										}{' '}
 										<Plural
 											value={item.unit}
 											singular="jour"
@@ -722,15 +713,19 @@ function Task({
 	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
 	const isFinishable
 		= (item.status !== 'FINISHED'
-			&& (!customerToken && !isCustomerTask(item)))
-		|| (customerToken && isCustomerTask(item));
+			&& (!customerToken && !isCustomerTask(item.type)))
+		|| (customerToken && isCustomerTask(item.type));
 	const isUnfinishable
 		= (item.status === 'FINISHED'
-			&& (!customerToken && !isCustomerTask(item)))
-		|| (customerToken && isCustomerTask(item));
+			&& (!customerToken && !isCustomerTask(item.type)))
+		|| (customerToken && isCustomerTask(item.type));
 
 	return (
-		<TaskContainer isDraggable={isDraggable} ref={setTimeItTookRef}>
+		<TaskContainer
+			noData={noData}
+			isDraggable={isDraggable}
+			ref={setTimeItTookRef}
+		>
 			<TaskAdd />
 			<TaskIcon
 				status={item.status}

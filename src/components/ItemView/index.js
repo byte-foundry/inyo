@@ -21,6 +21,7 @@ import ProjectsDropdown from '../ProjectsDropdown';
 import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
 import Apostrophe from '../Apostrophe';
+import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
 
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -47,6 +48,7 @@ import {
 	accentGrey,
 	primaryRed,
 	primaryGrey,
+	primaryWhite,
 } from '../../utils/new/design-system';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
@@ -167,6 +169,7 @@ const StickyHeader = styled('div')`
 	justify-content: center;
 	padding: 1rem;
 	z-index: 1;
+	color: ${primaryWhite};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-left: -2rem;
@@ -253,12 +256,23 @@ const TaskButton = styled(Button)`
 	margin: 1rem 0 1.5rem;
 `;
 
+const FlexRowButtons = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+
+		button + button {
+			margin: 10px 0;
+		}
+	}
+`;
+
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
+	const [isActivating, setIsActivating] = useState(false);
 	const dateRef = useRef();
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
@@ -272,7 +286,7 @@ const Item = ({id, customerToken, close}) => {
 	} = useQuery(GET_USER_INFOS);
 
 	const updateItem = useMutation(UPDATE_ITEM);
-	const focusItem = useMutation(FOCUS_TASK);
+	const focusTask = useMutation(FOCUS_TASK);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -337,6 +351,36 @@ const Item = ({id, customerToken, close}) => {
 
 	const activableTask = !customerToken && item.status === 'PENDING';
 
+	if (isActivating) {
+		return (
+			<>
+				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+				<StickyHeader customer={item.type !== 'DEFAULT'}>
+					Prévisualisation des actions{' '}
+					<Apostrophe
+						value={me.settings.assistantName}
+						withVowel="d'"
+						withConsonant="de "
+					/>
+					{me.settings.assistantName}
+				</StickyHeader>
+				<TaskRemindersPreviewsList
+					taskId={item.id}
+					remindersPreviews={item.remindersPreviews}
+					customerName={item.linkedCustomer.name}
+					onFocusTask={async (reminders) => {
+						await focusTask({
+							variables: {itemId: item.id, reminders},
+						});
+
+						setIsActivating(false);
+					}}
+					onCancel={() => setIsActivating(false)}
+				/>
+			</>
+		);
+	}
+
 	return (
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
@@ -345,6 +389,10 @@ const Item = ({id, customerToken, close}) => {
 					<TaskActivationButton
 						taskId={id}
 						isActive={item.isFocused}
+						onCommit={() => focusTask({
+							variables: {itemId: item.id},
+						})
+						}
 					/>
 				)}
 				{activableTask && customerTask && item.linkedCustomer && (
@@ -354,6 +402,16 @@ const Item = ({id, customerToken, close}) => {
 						customerName={
 							item.linkedCustomer && item.linkedCustomer.name
 						}
+						onCommit={() => {
+							if (item.type === 'CONTENT_ACQUISITION') {
+								focusTask({
+									variables: {itemId: item.id},
+								});
+							}
+							else {
+								setIsActivating(true);
+							}
+						}}
 					/>
 				)}
 				{activableTask && customerTask && !item.linkedCustomer && (
@@ -437,7 +495,7 @@ const Item = ({id, customerToken, close}) => {
 											: () => setEditUnit(true)
 									}
 								>
-									{item.unit}
+									{+item.unit.toFixed(2)}
 									<Plural
 										singular=" jour"
 										plural=" jours"
@@ -485,7 +543,7 @@ const Item = ({id, customerToken, close}) => {
 								/>
 							) : (
 								<div onClick={() => setEditUnit(true)}>
-									{item.timeItTook}
+									{+item.timeItTook.toFixed(2)}
 									<Plural
 										singular=" jour"
 										plural=" jours"
@@ -573,10 +631,14 @@ const Item = ({id, customerToken, close}) => {
 							) : (
 								deadline && (
 									<div>
-										{moment(deadline).diff(
-											moment(),
-											'days',
-										) - item.unit}{' '}
+										{
+											+(
+												moment(deadline).diff(
+													moment(),
+													'days',
+												) - item.unit
+											).toFixed(2)
+										}{' '}
 										<Plural
 											value={
 												moment(deadline).diff(
@@ -686,8 +748,16 @@ const Item = ({id, customerToken, close}) => {
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
 						<TaskButton
-							onClick={() => focusItem({variables: {itemId: item.id}})
-							}
+							onClick={() => {
+								if (item.type === 'CONTENT_ACQUISITION') {
+									focusTask({
+										variables: {itemId: item.id},
+									});
+								}
+								else {
+									setIsActivating(true);
+								}
+							}}
 							icon="✓"
 						>
 							Charger {me.settings.assistantName} de faire
@@ -784,39 +854,52 @@ const Item = ({id, customerToken, close}) => {
 				linkedCustomer={item.linkedCustomer}
 			/>
 			<HR />
-			<FlexRow>
-				{!customerToken
-					&& (deletingItem ? (
-						<>
-							<Button grey onClick={() => setDeletingItem(false)}>
-								Annuler
-							</Button>
-							<Button
-								red
-								onClick={() => {
-									deleteItem();
-									close();
-								}}
-							>
-								Confirmer la suppression
-							</Button>
-						</>
-					) : (
-						<>
-							<Button red onClick={() => setDeletingItem(true)}>
-								Supprimer la tâche
-							</Button>
-						</>
-					))}
-				{finishableTask && (
-					<TaskStatusButton
-						item={item}
-						primary={item.status === 'FINISHED'}
-						isFinished={item.status === 'FINISHED'}
-						customerToken={customerToken}
-					/>
-				)}
-			</FlexRow>
+			<FlexRowButtons justifyContent="space-between">
+				<div>
+					{!customerToken
+						&& (deletingItem ? (
+							<>
+								<Button
+									grey
+									onClick={() => setDeletingItem(false)}
+								>
+									Annuler
+								</Button>
+								<Button
+									red
+									onClick={() => {
+										deleteItem();
+										close();
+									}}
+								>
+									Confirmer la suppression
+								</Button>
+							</>
+						) : (
+							<>
+								<Button
+									red
+									onClick={() => setDeletingItem(true)}
+								>
+									Supprimer la tâche
+								</Button>
+							</>
+						))}
+					{finishableTask && (
+						<TaskStatusButton
+							item={item}
+							primary={item.status === 'FINISHED'}
+							isFinished={item.status === 'FINISHED'}
+							customerToken={customerToken}
+						/>
+					)}
+				</div>
+				<div>
+					<Button onClick={() => close()}>
+						Enregistrer et fermer
+					</Button>
+				</div>
+			</FlexRowButtons>
 		</>
 	);
 };

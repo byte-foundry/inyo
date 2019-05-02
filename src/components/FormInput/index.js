@@ -10,6 +10,7 @@ const FormInputMain = styled(Input)`
 	display: block;
 	width: 100%;
 	box-sizing: border-box;
+	${props => props.big && 'height: 40px;'}
 
 	${props => props.inline
 		&& css`
@@ -37,7 +38,12 @@ const FormInput = ({
 		{...rest}
 	>
 		{({field, form: {isSubmitting}}) => (
-			<FormInputMain {...field} disabled={isSubmitting} {...rest} />
+			<FormInputMain
+				{...field}
+				disabled={isSubmitting}
+				{...rest}
+				error={getDeep(name, errors) && getDeep(name, touched)}
+			/>
 		)}
 	</Field>
 );

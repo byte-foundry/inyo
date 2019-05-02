@@ -25,6 +25,7 @@ const DashboardAside = styled(Aside)`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
+		flex: 1;
 	}
 
 	img {
@@ -38,6 +39,7 @@ const SubSection = styled('div')`
 	margin-bottom: 2rem;
 	margin-top: 1rem;
 	position: relative;
+	min-height: 200px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-bottom: 1rem;

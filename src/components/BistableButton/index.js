@@ -11,7 +11,6 @@ const BistableButton = ({
 	falseTooltip,
 	commit,
 	reverse,
-	variables,
 	white,
 	primary,
 }) => (
@@ -22,14 +21,10 @@ const BistableButton = ({
 		icon={value ? '×' : '✓'}
 		onClick={() => {
 			if (value) {
-				reverse({
-					variables,
-				});
+				reverse();
 			}
 			else {
-				commit({
-					variables,
-				});
+				commit();
 			}
 		}}
 		disabled={disabled}

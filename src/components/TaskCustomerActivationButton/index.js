@@ -2,15 +2,17 @@ import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import BistableButton from '../BistableButton';
-import Apostrophe from '../Apostrophe';
 
-import {FOCUS_TASK, UNFOCUS_TASK} from '../../utils/mutations';
+import {UNFOCUS_TASK} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 const TaskActivationButton = ({
-	taskId, isActive, disabled, customerName,
+	taskId,
+	isActive,
+	disabled,
+	customerName,
+	onCommit,
 }) => {
-	const focusItem = useMutation(FOCUS_TASK);
 	const unfocusItem = useMutation(UNFOCUS_TASK);
 
 	const {
@@ -33,9 +35,8 @@ const TaskActivationButton = ({
 				me.settings.assistantName
 			} de faire réaliser cette tâche à ${customerName}`}
 			falseTooltip="Ajouter la tâche aux choses à faire aujourd'hui"
-			commit={focusItem}
-			reverse={unfocusItem}
-			variables={{itemId: taskId}}
+			commit={onCommit}
+			reverse={() => unfocusItem({variables: {itemId: taskId}})}
 		/>
 	);
 };

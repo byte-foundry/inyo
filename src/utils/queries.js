@@ -35,6 +35,8 @@ export const GET_USER_CUSTOMERS = gql`
 				name
 				email
 				phone
+				occupation
+				userNotes
 			}
 		}
 	}
@@ -370,6 +372,10 @@ export const GET_ITEM_DETAILS = gql`
 	query getItemDetails($id: ID!, $token: String) {
 		item(id: $id, token: $token) {
 			...ItemFragment
+			remindersPreviews {
+				type
+				delay
+			}
 		}
 	}
 `;

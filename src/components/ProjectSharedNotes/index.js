@@ -1,12 +1,17 @@
 import React from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
+import styled from '@emotion/styled';
 import 'medium-draft/lib/index.css';
 
 import ProjectNotes from '../ProjectNotes';
 
 import {GET_PROJECT_SHARED_NOTES} from '../../utils/queries';
 import {UPDATE_PROJECT_SHARED_NOTES} from '../../utils/mutations';
-import {SubHeading} from '../../utils/new/design-system';
+import {SubHeading, primaryRed} from '../../utils/new/design-system';
+
+const SubHeadingRed = styled(SubHeading)`
+	color: ${primaryRed};
+`;
 
 const ProjectSharedNotes = ({projectId, customerToken}) => {
 	const {data, error} = useQuery(GET_PROJECT_SHARED_NOTES, {
@@ -24,10 +29,10 @@ const ProjectSharedNotes = ({projectId, customerToken}) => {
 			customerToken={customerToken}
 			projectId={projectId}
 		>
-			<SubHeading>
+			<SubHeadingRed>
 				Ces notes sont partagées avec votre{' '}
 				{customerToken ? 'prestataire' : 'client'}.
-			</SubHeading>
+			</SubHeadingRed>
 		</ProjectNotes>
 	);
 };

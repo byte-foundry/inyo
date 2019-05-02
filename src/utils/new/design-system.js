@@ -1,10 +1,12 @@
 import React from 'react';
+import ReactSelect from 'react-select';
 import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
 import {gray30} from '../content';
 import {BREAKPOINTS} from '../constants';
+import Pencil from '../icons/pencil.svg';
 
 export const primaryPurple = '#5020ee';
 export const mediumPurple = '#8f76e0';
@@ -93,6 +95,9 @@ export const Button = styled('button')`
 		return primaryWhite;
 	}};
 	color: ${(props) => {
+		if (props.link && props.disabled) {
+			return primaryGrey;
+		}
 		if (props.primary) {
 			return primaryWhite;
 		}
@@ -109,8 +114,10 @@ export const Button = styled('button')`
 	}};
 
 	svg {
-		vertical-align: text-bottom;
 		fill: ${(props) => {
+		if (props.link && props.disabled) {
+			return primaryGrey;
+		}
 		if (props.primary) {
 			return primaryWhite;
 		}
@@ -519,7 +526,7 @@ export const Aside = styled('aside')`
 	padding-right: 4rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		padding-left: 0;
+		padding-right: 0;
 		margin-top: 2rem;
 		width: 100%;
 	}
@@ -538,7 +545,8 @@ export const Main = styled('div')`
 
 export const Container = styled('div')`
 	display: flex;
-	width: 1280px;
+	width: 100%;
+	max-width: 1280px;
 	margin: 0 auto;
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -550,6 +558,7 @@ export const Content = styled('div')`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
+	${props => (props.small ? 'width: 100%' : '')};
 	${props => (props.small ? 'max-width: 640px' : '')};
 	${props => (props.small ? 'margin: 0 auto' : '')};
 `;
@@ -624,4 +633,110 @@ export const UserSpan = styled('span')`
 
 export const CustomerSpan = styled('span')`
 	color: ${primaryRed};
+`;
+
+const customSelectStyles = props => ({
+	dropdownIndicator: (styles, {isDisabled}) => ({
+		...styles,
+		color: isDisabled ? primaryGrey : primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+	clearIndicator: styles => ({
+		...styles,
+		color: primaryPurple,
+		paddingTop: 0,
+		paddingBottom: 0,
+	}),
+	placeholder: (styles, {isDisabled}) => ({
+		...styles,
+		color: isDisabled ? lightGrey : lightPurple,
+		fontStyle: 'italic',
+		fontSize: '14px',
+	}),
+	singleValue: (styles, {isDisabled}) => ({
+		...styles,
+		color: isDisabled ? primaryGrey : primaryPurple,
+	}),
+	input: (styles, {isDisabled}) => ({
+		...styles,
+		padding: 0,
+		color: isDisabled ? primaryGrey : primaryPurple,
+	}),
+	control: (styles, {isDisabled, big}) => ({
+		...styles,
+		height: props.big && '40px',
+		minHeight: 'auto',
+		border: 'none',
+		backgroundColor: isDisabled ? lightGrey : lightPurple,
+		borderRadius: '20px',
+		':hover, :focus, :active': {
+			border: 'none',
+		},
+	}),
+	indicatorSeparator: () => ({
+		backgroundColor: 'transparent',
+	}),
+});
+
+export const Select = ({style, ...rest}) => (
+	<ReactSelect
+		styles={{...customSelectStyles(rest), ...style}}
+		noOptionsMessage={() => 'Aucune option'}
+		{...rest}
+	/>
+);
+
+export const DateContainer = styled('div')`
+	position: relative;
+	z-index: 0;
+
+	p:hover {
+		position: relative;
+		cursor: pointer;
+
+		&:before {
+			content: '';
+			display: block;
+			background: ${lightGrey};
+			position: absolute;
+			left: -0.5rem;
+			top: -0.5rem;
+			right: -0.5rem;
+			bottom: -0.5rem;
+			border-radius: 8px;
+			z-index: -1;
+		}
+		&:after {
+			content: '';
+			display: block;
+			background-color: ${accentGrey};
+			mask-size: 35%;
+			mask-position: center;
+			mask-repeat: no-repeat;
+			mask-image: url(${Pencil});
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 50px;
+		}
+	}
+`;
+
+export const BigNumber = styled(P)`
+	font-size: 20px;
+	font-weight: 500;
+	color: ${props => (props.urgent ? primaryRed : primaryGrey)};
+`;
+
+export const BackButton = styled(Button)`
+	align-self: flex-start;
+	text-transform: uppercase;
+	${props => props.withMargin && 'margin-bottom: 1rem;'}
+
+	::before {
+		content: '⇽';
+		margin-right: 10px;
+	}
 `;

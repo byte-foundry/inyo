@@ -631,8 +631,8 @@ export const SNOOZE_ITEM = gql`
 export const FOCUS_TASK = gql`
 	${ITEM_FRAGMENT}
 
-	mutation focusTask($itemId: ID!) {
-		focusTask(id: $itemId) {
+	mutation focusTask($itemId: ID!, $reminders: [ReminderInput]) {
+		focusTask(id: $itemId, reminders: $reminders) {
 			...ItemFragment
 		}
 	}
@@ -722,6 +722,9 @@ export const CREATE_CUSTOMER = gql`
 		$firstName: String
 		$lastName: String
 		$title: Title
+		$phone: String
+		$occupation: String
+		$userNotes: Json
 	) {
 		createCustomer(
 			email: $email
@@ -729,6 +732,9 @@ export const CREATE_CUSTOMER = gql`
 			firstName: $firstName
 			lastName: $lastName
 			title: $title
+			phone: $phone
+			occupation: $occupation
+			userNotes: $userNotes
 		) {
 			id
 			title
@@ -737,6 +743,8 @@ export const CREATE_CUSTOMER = gql`
 			name
 			email
 			phone
+			occupation
+			userNotes
 		}
 	}
 `;
@@ -750,6 +758,8 @@ export const UPDATE_CUSTOMER = gql`
 		$lastName: String
 		$title: Title
 		$phone: String
+		$occupation: String
+		$userNotes: Json
 	) {
 		updateCustomer(
 			id: $id
@@ -759,6 +769,8 @@ export const UPDATE_CUSTOMER = gql`
 			lastName: $lastName
 			email: $email
 			phone: $phone
+			occupation: $occupation
+			userNotes: $userNotes
 		) {
 			id
 			title
@@ -767,6 +779,8 @@ export const UPDATE_CUSTOMER = gql`
 			name
 			email
 			phone
+			occupation
+			userNotes
 		}
 	}
 `;
@@ -831,5 +845,11 @@ export const CANCEL_REMINDER = gql`
 export const SEND_REMINDER_TEST_EMAIL = gql`
 	mutation sendReminderTestEmail($id: ID!) {
 		sent: sendReminderTestEmail(id: $id)
+	}
+`;
+
+export const SEND_REMINDER_PREVIEW_TEST_EMAIL = gql`
+	mutation sendReminderPreviewTestEmail($taskId: ID!, $type: ReminderType!) {
+		sent: sendReminderPreviewTestEmail(taskId: $taskId, type: $type)
 	}
 `;

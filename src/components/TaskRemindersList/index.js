@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
@@ -99,25 +99,31 @@ const ReminderCancel = styled('div')`
 	${props => props.noLink && 'margin-right: 10px;'}
 `;
 
+const statuses = ['PENDING', 'SENT', 'CANCELED', 'ERRORED'];
+
 function TaskRemindersList({
 	reminders = [], small, baseUrl, history, noLink,
 }) {
+	const [, setLastUpdatedAt] = useState(new Date());
 	const cancelReminder = useMutation(CANCEL_REMINDER);
+
+	useEffect(() => {
+		const id = setInterval(() => {
+			setLastUpdatedAt(new Date());
+		}, 60 * 1000);
+
+		return () => clearInterval(id);
+	}, []);
 
 	return (
 		<ReminderList>
 			{reminders
-				.sort(
-					(a, b) => new Date(a.sendingDate) - new Date(b.sendingDate),
-				)
-				.filter(
-					reminder => reminder.status === 'PENDING'
-						|| (reminder.status === 'CANCELED'
-							&& moment(reminder.sendingDate).diff(
-								moment(),
-								'hours',
-							) > -12),
-				)
+				.sort((a, b) => {
+					if (statuses.indexOf(a.status) < statuses.indexOf(b.status)) return -1;
+					if (statuses.indexOf(a.status) > statuses.indexOf(b.status)) return 1;
+
+					return new Date(b.sendingDate) - new Date(a.sendingDate);
+				})
 				.map((reminder) => {
 					const text = REMINDER_TYPES_DATA[reminder.type].text(
 						reminder.item.linkedCustomer

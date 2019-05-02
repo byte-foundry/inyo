@@ -4,6 +4,7 @@ import {useQuery} from 'react-apollo-hooks';
 
 import FormSelect from '../FormSelect';
 
+import {isCustomerTask} from '../../utils/functions';
 import {templates} from '../../utils/project-templates';
 import {
 	Button,
@@ -85,8 +86,6 @@ const SectionItemList = styled('ul')`
 		}
 	}
 `;
-
-const isCustomerTask = type => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(type);
 
 const Li = styled('li')`
 	${props => isCustomerTask(props.type)

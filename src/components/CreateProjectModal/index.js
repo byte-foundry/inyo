@@ -14,7 +14,7 @@ import {CREATE_PROJECT} from '../../utils/mutations';
 import {templates} from '../../utils/project-templates';
 import {ModalContainer, ModalElem} from '../../utils/content';
 
-function CreateProjectModal({onDismiss, history}) {
+function CreateProjectModal({onDismiss, history, baseName}) {
 	const [viewContent, setViewContent] = useState(false);
 	const [createCustomer, setCreateCustomer] = useState(false);
 	const [addCustomer, setAddCustomer] = useState(false);
@@ -42,6 +42,7 @@ function CreateProjectModal({onDismiss, history}) {
 		<Formik
 			initialValues={{
 				source: 'BLANK',
+				name: baseName,
 			}}
 			validate={(values) => {
 				try {

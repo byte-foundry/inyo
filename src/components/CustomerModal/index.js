@@ -16,6 +16,7 @@ import {
 	Button,
 	Label,
 	primaryGrey,
+	BackButton,
 } from '../../utils/new/design-system';
 
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
@@ -70,6 +71,7 @@ const CustomerModal = ({
 	onValidate = () => {},
 	onCustomerWasCreated,
 	noSelect,
+	withBack,
 	customer,
 }) => {
 	const {data, error} = useQuery(GET_ALL_CUSTOMERS, {
@@ -108,6 +110,11 @@ const CustomerModal = ({
 	return (
 		<ModalContainer onDismiss={onDismiss}>
 			<ModalElem>
+				{withBack && (
+					<BackButton withMargin grey link onClick={onDismiss}>
+						Retour
+					</BackButton>
+				)}
 				<Formik
 					initialValues={{
 						customerId: selectedCustomerId,

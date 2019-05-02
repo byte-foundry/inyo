@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled/macro';
 
 import TaskInput from '../TaskInput';
 import {TaskContainer} from '../TasksList/task';
 import ConfirmModal, {useConfirmation} from '../ConfirmModal';
-import {P} from '../../utils/new/design-system';
+import CreateProjectModal from '../CreateProjectModal';
 
+import {isCustomerTask} from '../../utils/functions';
+import {P} from '../../utils/new/design-system';
 import {
 	ADD_ITEM,
 	CREATE_PROJECT,
@@ -24,9 +26,9 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
-
 const CreateTask = ({setProjectSelected, currentProjectId}) => {
+	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
+	const [newProjectName, setNewProjectName] = useState('');
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
@@ -68,14 +70,8 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	}
 	else {
 		props.onSubmitProject = async (project) => {
-			const {
-				data: {
-					createProject: {id, name},
-				},
-			} = await createProject({variables: project});
-
-			setProjectSelected({value: id});
-			setProjectSelected({value: id, label: name}, true);
+			setOpenCreateProjectModal(true);
+			setNewProjectName(project.name);
 		};
 	}
 
@@ -86,7 +82,7 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 					if (
 						currentProjectData
 						&& !currentProjectData.project.notifyActivityToCustomer
-						&& isCustomerTask(task)
+						&& isCustomerTask(task.type)
 					) {
 						const confirmed = await askConfirmationNotification();
 
@@ -141,6 +137,15 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 						Souhaitez vous continuer et activer les notifications?
 					</P>
 				</ConfirmModal>
+			)}
+			{openCreateProjectModal && (
+				<CreateProjectModal
+					onDismiss={() => {
+						setOpenCreateProjectModal(false);
+						setNewProjectName('');
+					}}
+					baseName={newProjectName}
+				/>
 			)}
 		</TaskInputContainer>
 	);

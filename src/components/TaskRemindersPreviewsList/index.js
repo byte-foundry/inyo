@@ -11,6 +11,7 @@ import {
 	primaryBlack,
 	Button,
 	Select,
+	BackButton,
 } from '../../utils/new/design-system';
 import usePrevious from '../../utils/usePrevious';
 import useMeasure from '../../utils/useMeasure';
@@ -92,16 +93,6 @@ const ReminderFormGroup = styled('div')`
 
 const ReminderFormActions = styled('div')`
 	align-self: flex-end;
-`;
-
-const BackButton = styled(Button)`
-	align-self: flex-start;
-	text-transform: uppercase;
-
-	::before {
-		content: '⇽';
-		margin-right: 10px;
-	}
 `;
 
 const CollapsableReminderForm = ({children, isOpen, ...props}) => {

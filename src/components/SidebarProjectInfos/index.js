@@ -11,17 +11,16 @@ import {
 	SubHeading,
 	Button,
 	primaryPurple,
-	primaryRed,
 	primaryBlack,
-	primaryGrey,
 	lightGrey,
-	accentGrey,
 	P,
+	DateContainer,
+	BigNumber,
 } from '../../utils/new/design-system';
 import {ModalContainer} from '../../utils/content';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
-import Pencil2, {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
@@ -100,47 +99,6 @@ const CheckBoxLabel = styled('label')`
 		margin-left: 0.5em;
 		margin-right: 0.9em;
 		margin-top: -1px;
-	}
-`;
-
-const BigNumber = styled(P)`
-	font-size: 20px;
-	font-weight: 500;
-	color: ${props => (props.urgent ? primaryRed : primaryGrey)};
-`;
-
-const DateContainer = styled('div')`
-	position: relative;
-
-	p:hover {
-		cursor: pointer;
-
-		&:before {
-			content: '';
-			display: block;
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -0.5rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-		&:after {
-			content: '';
-			display: block;
-			background-color: ${accentGrey};
-			mask-size: 35%;
-			mask-position: center;
-			mask-repeat: no-repeat;
-			mask-image: url(${Pencil2});
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: 50px;
-		}
 	}
 `;
 

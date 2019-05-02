@@ -16,6 +16,7 @@ import NotificationsOffIcon from '../../utils/icons/baseline-notifications_off-2
 import NotificationsImpossibleIcon from '../../utils/icons/baseline-error-24px.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {isCustomerTask} from '../../utils/functions';
 
 import {
 	ButtonLink,
@@ -359,8 +360,6 @@ const FocusStateIcon = styled('div')`
 	}
 `;
 
-const isCustomerTask = task => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(task.type);
-
 export function TaskCustomerInput({
 	disabled,
 	editCustomer: editCustomerProp,
@@ -495,13 +494,6 @@ export function TaskInfosInputs({
 			{customerTask && (
 				<FocusStateIcon>
 					{activableTask && item.linkedCustomer && !item.isFocused && (
-						// <TaskCustomerActivationButton
-						// 	taskId={id}
-						// 	isActive={item.isFocused}
-						// 	customerName={
-						// 		item.linkedCustomer && item.linkedCustomer.name
-						// 	}
-						// />
 						<NotificationsState
 							data-tip="Les rappels clients ne sont pas activés pour cette tâche"
 							isFocused={item.isFocused}
@@ -514,13 +506,6 @@ export function TaskInfosInputs({
 						/>
 					)}
 					{activableTask && item.linkedCustomer && item.isFocused && (
-						// <TaskCustomerActivationButton
-						// 	taskId={id}
-						// 	isActive={item.isFocused}
-						// 	customerName={
-						// 		item.linkedCustomer && item.linkedCustomer.name
-						// 	}
-						// />
 						<NotificationsState
 							data-tip="Les rappels client sont activés pour cette tâche"
 							isFocused={item.isFocused}
@@ -724,12 +709,12 @@ function Task({
 	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
 	const isFinishable
 		= (item.status !== 'FINISHED'
-			&& (!customerToken && !isCustomerTask(item)))
-		|| (customerToken && isCustomerTask(item));
+			&& (!customerToken && !isCustomerTask(item.type)))
+		|| (customerToken && isCustomerTask(item.type));
 	const isUnfinishable
 		= (item.status === 'FINISHED'
-			&& (!customerToken && !isCustomerTask(item)))
-		|| (customerToken && isCustomerTask(item));
+			&& (!customerToken && !isCustomerTask(item.type)))
+		|| (customerToken && isCustomerTask(item.type));
 
 	return (
 		<TaskContainer

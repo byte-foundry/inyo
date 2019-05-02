@@ -105,23 +105,34 @@ const BackButton = styled(Button)`
 `;
 
 const CollapsableReminderForm = ({children, isOpen, ...props}) => {
-	const previous = usePrevious(isOpen);
-
 	const [bind, {height: viewHeight}] = useMeasure();
-	const {height, opacity} = useSpring({
-		height: isOpen ? viewHeight : 0,
-		opacity: isOpen ? 1 : 0,
+	const wasOpen = usePrevious(isOpen);
+	const animatedProps = useSpring({
+		to: async (next) => {
+			if (isOpen) {
+				await next({
+					opacity: 1,
+					height: viewHeight,
+					overflow: 'hidden',
+				});
+				await next({opacity: 1, height: 'auto', overflow: ''});
+			}
+			else {
+				if (wasOpen) {
+					await next({
+						opacity: 1,
+						height: viewHeight,
+						overflow: 'hidden',
+					});
+				}
+				await next({opacity: 0, height: 0, overflow: 'hidden'});
+			}
+		},
+		from: {opacity: 0, height: 0, overflow: 'hidden'},
 	});
 
 	return (
-		<ReminderForm
-			style={{
-				overflow: isOpen && previous ? '' : 'hidden',
-				opacity,
-				height: isOpen && previous ? 'auto' : height,
-			}}
-			{...props}
-		>
+		<ReminderForm style={animatedProps} {...props}>
 			<animated.div {...bind}>{children}</animated.div>
 		</ReminderForm>
 	);

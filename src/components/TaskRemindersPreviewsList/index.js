@@ -395,7 +395,16 @@ const TaskRemindersPreviewsList = ({
 				<Button grey type="button" link onClick={() => onCancel()}>
 					Annuler
 				</Button>
-				<Button type="submit" onClick={() => onFocusTask(reminders)}>
+				<Button
+					type="submit"
+					onClick={() => onFocusTask(
+						reminders.map(r => ({
+							delay: r.delay,
+							type: r.type,
+						})),
+					)
+					}
+				>
 					Valider l'activation
 				</Button>
 			</ReminderFormActions>

@@ -368,7 +368,7 @@ const Item = ({id, customerToken, close}) => {
 					taskId={item.id}
 					remindersPreviews={item.remindersPreviews}
 					customerName={item.linkedCustomer.name}
-					onFocusTask={async ({reminders}) => {
+					onFocusTask={async (reminders) => {
 						await focusTask({
 							variables: {itemId: item.id, reminders},
 						});
@@ -735,8 +735,7 @@ const Item = ({id, customerToken, close}) => {
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
 						<TaskButton
-							onClick={() => focusTask({variables: {itemId: item.id}})
-							}
+							onClick={() => setIsActivating(true)}
 							icon="✓"
 						>
 							Charger {me.settings.assistantName} de faire

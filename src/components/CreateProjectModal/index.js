@@ -145,7 +145,7 @@ function CreateProjectModal({onDismiss, history}) {
 					)}
 					{viewContent && (
 						<form onSubmit={props.handleSubmit}>
-							<ModalContainer size="small" onDismiss={onDismiss}>
+							<ModalContainer onDismiss={onDismiss}>
 								<ModalElem>
 									<CreateProjectModalViewContent
 										optionsProjects={optionsProjects}

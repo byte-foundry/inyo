@@ -99,6 +99,8 @@ const ReminderCancel = styled('div')`
 	${props => props.noLink && 'margin-right: 10px;'}
 `;
 
+const statuses = ['PENDING', 'SENT', 'CANCELED', 'ERRORED'];
+
 function TaskRemindersList({
 	reminders = [], small, baseUrl, history, noLink,
 }) {
@@ -116,17 +118,12 @@ function TaskRemindersList({
 	return (
 		<ReminderList>
 			{reminders
-				.sort(
-					(a, b) => new Date(a.sendingDate) - new Date(b.sendingDate),
-				)
-				.filter(
-					reminder => reminder.status === 'PENDING'
-						|| (reminder.status === 'CANCELED'
-							&& moment(reminder.sendingDate).diff(
-								moment(),
-								'hours',
-							) > -12),
-				)
+				.sort((a, b) => {
+					if (statuses.indexOf(a.status) < statuses.indexOf(b.status)) return -1;
+					if (statuses.indexOf(a.status) > statuses.indexOf(b.status)) return 1;
+
+					return new Date(b.sendingDate) - new Date(a.sendingDate);
+				})
 				.map((reminder) => {
 					const text = REMINDER_TYPES_DATA[reminder.type].text(
 						reminder.item.linkedCustomer

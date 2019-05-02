@@ -744,7 +744,16 @@ const Item = ({id, customerToken, close}) => {
 						<TaskRemindersList noLink reminders={item.reminders} />
 					) : (
 						<TaskButton
-							onClick={() => setIsActivating(true)}
+							onClick={() => {
+								if (item.type === 'CONTENT_ACQUISITION') {
+									focusTask({
+										variables: {itemId: item.id},
+									});
+								}
+								else {
+									setIsActivating(true);
+								}
+							}}
 							icon="✓"
 						>
 							Charger {me.settings.assistantName} de faire

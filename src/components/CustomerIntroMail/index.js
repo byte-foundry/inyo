@@ -68,7 +68,7 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 	if (loading) return <Loading />;
 
 	return (
-		<ModalContainer size="small" onDismiss={onDismiss}>
+		<ModalContainer onDismiss={onDismiss}>
 			<ModalElem>
 				<Header>Présentation d'Inyo à votre client</Header>
 				<Info>

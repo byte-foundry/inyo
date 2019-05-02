@@ -335,7 +335,7 @@ const CustomerModal = ({
 															'HIGHLIGHT',
 														],
 													}}
-													placeholder="Écrivez des notes..."
+													placeholder="Notes personnelles à propos de ce client..."
 												/>
 											</NotesForm>
 										</CreateCustomerForm>

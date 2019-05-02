@@ -209,7 +209,6 @@ export const GET_PROJECT_INFOS = gql`
 					firstName
 					lastName
 					email
-					defaultVatRate
 				}
 				siret
 			}

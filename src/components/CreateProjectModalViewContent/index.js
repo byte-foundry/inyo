@@ -11,6 +11,7 @@ import {
 	SubHeading,
 	primaryPurple,
 	primaryBlack,
+	primaryRed,
 	BackButton,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
@@ -71,12 +72,27 @@ const SectionItemList = styled('ul')`
 
 	li {
 		padding: 0;
+		padding-left: 1rem;
+		position: relative;
+		margin-bottom: 5px;
+
 		&::before {
-			content: '·';
-			color: ${primaryPurple};
-			margin-right: 0.5rem;
+			content: '•';
+			position: absolute;
+			top: -4px;
+			left: 0;
+			font-size: 1.2rem;
 		}
 	}
+`;
+
+const Li = styled('li')`
+	${props => props.type
+		&& `
+		&::before {
+			color: ${primaryRed};
+		}
+	`}
 `;
 
 const Container = styled('div')`
@@ -100,7 +116,9 @@ function TemplateTaskList({selectedTemplate}) {
 							{section.name}
 							<SectionItemList>
 								{section.items.map(item => (
-									<li key={item.name}>{item.name}</li>
+									<Li type={item.type} key={item.name}>
+										{item.name}
+									</Li>
 								))}
 							</SectionItemList>
 						</li>

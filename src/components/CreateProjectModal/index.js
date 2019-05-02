@@ -116,6 +116,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 						sections,
 						customerId,
 						deadline,
+						template: modelTemplate,
 					},
 				});
 

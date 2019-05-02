@@ -86,8 +86,10 @@ const SectionItemList = styled('ul')`
 	}
 `;
 
+const isCustomerTask = type => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(type);
+
 const Li = styled('li')`
-	${props => props.type
+	${props => isCustomerTask(props.type)
 		&& `
 		&::before {
 			color: ${primaryRed};

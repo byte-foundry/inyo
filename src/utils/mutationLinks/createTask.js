@@ -76,6 +76,16 @@ export default {
 		const cachedItems = [...query.result.me.tasks];
 		const addedItem = mutation.result.data.addItem;
 
+		if (addedItem.section) {
+			const updatePositionItems = cachedItems.filter(
+				item => item.section && item.section.id === addedItem.section.id,
+			);
+
+			updatePositionItems.forEach((item) => {
+				item.position += 1;
+			});
+		}
+
 		cachedItems.unshift(addedItem);
 
 		return {

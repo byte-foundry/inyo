@@ -92,7 +92,13 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 	if (projectId) {
 		return (
 			<>
-				<ProjectList projectId={projectId} />
+				<ProjectList
+					projectId={projectId}
+					items={tasks.filter(
+						item => item.section
+							&& item.section.project.id === projectId,
+					)}
+				/>
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</>
 		);

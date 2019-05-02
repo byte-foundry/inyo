@@ -399,8 +399,28 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 	const {sections: sectionsInfos} = projectData.project;
 
+	if (!items.length && !sectionsInfos.length) {
+		return (
+			<>
+				<TemplateAndProjectFiller
+					projectId={projectId}
+					onChoose={(template) => {
+						template.sections.forEach((section) => {
+							addSection({
+								variables: {
+									projectId,
+									...section,
+								},
+							});
+						});
+					}}
+				/>
+			</>
+		);
+	}
+
 	const sections = sectionsInfos.map((section) => {
-		const itemsInSection = section.items;
+		const itemsInSection = items.filter(i => i.section.id === section.id);
 
 		itemsInSection.sort((a, b) => a.position - b.position);
 

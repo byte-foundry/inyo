@@ -35,6 +35,8 @@ export const GET_USER_CUSTOMERS = gql`
 				name
 				email
 				phone
+				occupation
+				userNotes
 			}
 		}
 	}

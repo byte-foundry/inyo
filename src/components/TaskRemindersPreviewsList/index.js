@@ -187,7 +187,7 @@ const TaskRemindersPreviewsList = ({
 						if (index === 0 || !reminder.isRelative) {
 							delay = `${moment
 								.duration(reminder.delay * 1000)
-								.humanize()} après activation`;
+								.humanize()} après l'activation de la tâche`;
 						}
 						else {
 							delay = `${moment
@@ -196,7 +196,7 @@ const TaskRemindersPreviewsList = ({
 										- reminders[index - 1].delay)
 										* 1000,
 								)
-								.humanize()} après`;
+								.humanize()} après l'email précédent`;
 						}
 
 						return (
@@ -273,98 +273,97 @@ const TaskRemindersPreviewsList = ({
 										setEditingIndex(null);
 									}}
 								>
-									<ReminderFormGroup>
-										<Select
-											key={unit}
-											name="value"
-											options={durationOptions[unit]}
-											onChange={({value}) => setValue(value)
-											}
-											isSearchable={false}
-											defaultValue={
-												durationOptions[unit][0]
-											}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 1,
-												}),
-											}}
-										/>
-										<Select
-											name="unit"
-											options={[
-												{
-													label: 'minutes',
-													value: 'minutes',
-												},
-												{
-													label: 'heures',
-													value: 'hours',
-												},
-												{
+									{editingIndex === index && (
+										<ReminderFormGroup>
+											<Select
+												key={unit}
+												name="value"
+												options={durationOptions[unit]}
+												onChange={({value}) => setValue(value)
+												}
+												isSearchable={false}
+												defaultValue={
+													durationOptions[unit][0]
+												}
+												style={{
+													container: styles => ({
+														...styles,
+														flex: 1,
+													}),
+												}}
+											/>
+											<Select
+												name="unit"
+												options={[
+													{
+														label: 'minutes',
+														value: 'minutes',
+													},
+													{
+														label: 'heures',
+														value: 'hours',
+													},
+													{
+														label: 'jours',
+														value: 'days',
+													},
+													{
+														label: 'semaines',
+														value: 'weeks',
+													},
+												]}
+												onChange={({value}) => setUnit(value)
+												}
+												isSearchable={false}
+												defaultValue={{
 													label: 'jours',
 													value: 'days',
-												},
-												{
-													label: 'semaines',
-													value: 'weeks',
-												},
-											]}
-											onChange={({value}) => setUnit(value)
-											}
-											isSearchable={false}
-											defaultValue={{
-												label: 'jours',
-												value: 'days',
-											}}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 1,
-													marginLeft: '5px',
-												}),
-											}}
-										/>
-										<Select
-											name="from"
-											isDisabled={index === 0}
-											options={[
-												{
-													label: 'après activation',
-													value: false,
-												},
-												{
-													label:
-														'après action précédente',
-													value: true,
-												},
-											]}
-											onChange={({value}) => setIsRelative(value)
-											}
-											isSearchable={false}
-											value={
-												index !== 0 && isRelative
-													? {
-														label:
-																'après action précédente',
-														value: true,
-													  }
-													: {
-														label:
-																'après activation',
+												}}
+												style={{
+													container: styles => ({
+														...styles,
+														flex: 1,
+														marginLeft: '5px',
+													}),
+												}}
+											/>
+											<Select
+												name="from"
+												isDisabled={index === 0}
+												options={[
+													{
+														label: 'après l\'activation de la tâche',
 														value: false,
-													  }
-											}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 3,
-													marginLeft: '5px',
-												}),
-											}}
-										/>
-									</ReminderFormGroup>
+													},
+													{
+														label: 'après l\'email précédent',
+														value: true,
+													},
+												]}
+												onChange={({value}) => setIsRelative(value)
+												}
+												isSearchable={false}
+												value={
+													index !== 0 && isRelative
+														? {
+															label: 'après l\'email précédent',
+															value: true,
+														  }
+														: {
+															label: 'après l\'activation de la tâche',
+															value: false,
+														  }
+												}
+												style={{
+													container: styles => ({
+														...styles,
+														flex: 3,
+														marginLeft: '5px',
+													}),
+												}}
+											/>
+										</ReminderFormGroup>
+									)}
 									<ReminderFormActions>
 										<Button
 											grey

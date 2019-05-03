@@ -82,7 +82,11 @@ const CustomerModal = ({
 	const createCustomer = useMutation(CREATE_CUSTOMER);
 	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
 	const [editorState, setEditorState] = useState(
-		createEditorState(customerNotNull.userNotes),
+		createEditorState(
+			customerNotNull.userNotes && customerNotNull.userNotes.blocks
+				? customerNotNull.userNotes
+				: undefined,
+		),
 	);
 
 	let options = [];

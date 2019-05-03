@@ -1,3 +1,3 @@
 export default function Plural({singular, plural, value}) {
-	return value > 1 ? plural : singular;
+	return Math.abs(value) > 1 ? plural : singular;
 }

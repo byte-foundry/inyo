@@ -451,98 +451,99 @@ const Item = ({id, customerToken, close}) => {
 				</Title>
 			</Header>
 			<Metas>
-				{customerToken || item.status !== 'FINISHED' ? (
-					<Meta data-tip="Temps estimé pour cette tâche">
-						<TimeIcon />
-						<MetaLabel>Temps estimé</MetaLabel>
-						<MetaText>
-							{!customerToken && editUnit ? (
-								<UnitInput
-									unit={item.unit}
-									onBlur={(unit) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												unit,
-											},
-										});
-										setEditUnit(false);
-									}}
-									onSubmit={(unit) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												unit,
-											},
-										});
-										setEditUnit(false);
-									}}
-									onTab={(unit) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												unit,
-											},
-										});
-										setEditUnit(false);
-									}}
-								/>
-							) : (
-								<div
-									onClick={
-										customerToken
-											? undefined
-											: () => setEditUnit(true)
-									}
-								>
-									{+item.unit.toFixed(2)}
-									<Plural
-										singular=" jour"
-										plural=" jours"
-										value={item.unit}
+				{customerToken
+				|| item.status !== 'FINISHED'
+				|| !item.timeItTook ? (
+						<Meta data-tip="Temps estimé pour cette tâche">
+							<TimeIcon />
+							<MetaLabel>Temps estimé</MetaLabel>
+							<MetaText>
+								{!customerToken && editUnit ? (
+									<UnitInput
+										unit={item.unit}
+										onBlur={(unit) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													unit,
+												},
+											});
+											setEditUnit(false);
+										}}
+										onSubmit={(unit) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													unit,
+												},
+											});
+											setEditUnit(false);
+										}}
+										onTab={(unit) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													unit,
+												},
+											});
+											setEditUnit(false);
+										}}
 									/>
-								</div>
-							)}
-						</MetaText>
-					</Meta>
-				) : (
-					<Meta data-tip="Temps passé pour cette tâche">
-						<TimeIcon />
-						<MetaLabel>Temps passé</MetaLabel>
-						<MetaText>
-							{editUnit ? (
-								<UnitInput
-									unit={item.timeItTook}
-									onBlur={(timeItTook) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												timeItTook,
-											},
-										});
-										setEditUnit(false);
-									}}
-									onSubmit={(timeItTook) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												timeItTook,
-											},
-										});
-										setEditUnit(false);
-									}}
-									onTab={(timeItTook) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												timeItTook,
-											},
-										});
-										setEditUnit(false);
-									}}
-								/>
-							) : (
-								item.timeItTook && (
+								) : (
+									<div
+										onClick={
+											customerToken
+												? undefined
+												: () => setEditUnit(true)
+										}
+									>
+										{+item.unit.toFixed(2)}
+										<Plural
+											singular=" jour"
+											plural=" jours"
+											value={item.unit}
+										/>
+									</div>
+								)}
+							</MetaText>
+						</Meta>
+					) : (
+						<Meta data-tip="Temps passé pour cette tâche">
+							<TimeIcon />
+							<MetaLabel>Temps passé</MetaLabel>
+							<MetaText>
+								{editUnit ? (
+									<UnitInput
+										unit={item.timeItTook}
+										onBlur={(timeItTook) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													timeItTook,
+												},
+											});
+											setEditUnit(false);
+										}}
+										onSubmit={(timeItTook) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													timeItTook,
+												},
+											});
+											setEditUnit(false);
+										}}
+										onTab={(timeItTook) => {
+											updateItem({
+												variables: {
+													itemId: item.id,
+													timeItTook,
+												},
+											});
+											setEditUnit(false);
+										}}
+									/>
+								) : (
 									<div onClick={() => setEditUnit(true)}>
 										{+item.timeItTook.toFixed(2)}
 										<Plural
@@ -551,11 +552,10 @@ const Item = ({id, customerToken, close}) => {
 											value={item.timeItTook}
 										/>
 									</div>
-								)
-							)}
-						</MetaText>
-					</Meta>
-				)}
+								)}
+							</MetaText>
+						</Meta>
+					)}
 				<Meta data-tip="Personne liée à cette tâche">
 					<ContactIcon />
 					<MetaLabel>Client</MetaLabel>

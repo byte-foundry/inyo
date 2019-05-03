@@ -632,7 +632,12 @@ export function TaskInfosInputs({
 											).toFixed(2)
 										}{' '}
 										<Plural
-											value={item.unit}
+											value={
+												moment(dueDate).diff(
+													moment(),
+													'days',
+												) - item.unit
+											}
 											singular="jour"
 											plural="jours"
 										/>

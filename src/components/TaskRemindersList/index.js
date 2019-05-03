@@ -54,7 +54,6 @@ const ReminderContainer = styled('div')`
 		color: ${primaryBlack};
 		svg {
 			opacity: 1;
-			margin-right: 0;
 			transition: all 300ms ease;
 		}
 	}

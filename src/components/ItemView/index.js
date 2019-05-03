@@ -542,14 +542,16 @@ const Item = ({id, customerToken, close}) => {
 									}}
 								/>
 							) : (
-								<div onClick={() => setEditUnit(true)}>
-									{+item.timeItTook.toFixed(2)}
-									<Plural
-										singular=" jour"
-										plural=" jours"
-										value={item.timeItTook}
-									/>
-								</div>
+								item.timeItTook && (
+									<div onClick={() => setEditUnit(true)}>
+										{+item.timeItTook.toFixed(2)}
+										<Plural
+											singular=" jour"
+											plural=" jours"
+											value={item.timeItTook}
+										/>
+									</div>
+								)
 							)}
 						</MetaText>
 					</Meta>

@@ -18,10 +18,12 @@ import UnitInput from '../UnitInput';
 import DateInput from '../DateInput';
 import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
+import TagDropdown from '../TagDropdown';
 import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
+import TagList from '../TagList';
 
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -37,6 +39,7 @@ import TrashIcon from '../../utils/icons/trash-icon.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
+import {ReactComponent as TagIcon} from '../../utils/icons/tags.svg';
 import {
 	TaskHeading,
 	SubHeading,
@@ -271,6 +274,7 @@ const Item = ({id, customerToken, close}) => {
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
+	const [editTags, setEditTags] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
 	const [isActivating, setIsActivating] = useState(false);
 	const dateRef = useRef();
@@ -703,6 +707,47 @@ const Item = ({id, customerToken, close}) => {
 					<TaskTypeIcon />
 					<MetaLabel>Type de tâche</MetaLabel>
 					<MetaText>{typeInfo.name}</MetaText>
+				</Meta>
+				<Meta data-tip="Tag de la tâche">
+					<TagIcon />
+					<MetaLabel>Tags</MetaLabel>
+					{!customerToken && editTags ? (
+						<TagDropdown
+							id="tags"
+							defaultMenuIsOpen
+							long
+							placeholder="Choisisser ou créer un nouveau tag"
+							defaultValue={item.tags.map(tag => ({
+								value: tag.id,
+								label: tag.name,
+							}))}
+							onChange={({value}) => {
+								updateItem({
+									variables: {
+										tags: value,
+									},
+								});
+								setEditTags(false);
+							}}
+							onBlur={() => {
+								setEditTags(false);
+							}}
+						/>
+					) : (
+						<MetaText
+							onClick={
+								customerToken
+									? undefined
+									: () => setEditTags(true)
+							}
+						>
+							{item.tags.length === 0 ? (
+								<em>Il n'y a pas de tags pour cette tâche</em>
+							) : (
+								<TagList tags={item.tags} />
+							)}
+						</MetaText>
+					)}
 				</Meta>
 			</Metas>
 			{(!customerToken || description) && (

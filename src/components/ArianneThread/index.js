@@ -2,6 +2,7 @@ import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import Select from 'react-select';
+import Creatable from 'react-select/lib/Creatable';
 
 import {
 	primaryPurple,
@@ -22,7 +23,7 @@ const ArianneContainer = styled('div')`
 `;
 
 const ArianneElemMain = styled('div')`
-	flex: 0 0 170px;
+	flex: ${props => (props.long ? '0 0 280px' : '0 0 170px')};
 	margin-right: 1rem;
 	position: relative;
 
@@ -120,11 +121,17 @@ const customSelectStyles = {
 	valueContainer: styles => ({
 		...styles,
 		padding: 0,
+		height: '27px',
+		overflow: 'auto',
 	}),
 	container: styles => ({
 		...styles,
 		padding: 0,
 		backgroundColor: 'transparent',
+	}),
+	multiValue: (styles, {data}) => ({
+		...styles,
+		backgroundColor: data.color,
 	}),
 };
 
@@ -150,13 +157,48 @@ export function ArianneElem({
 	);
 }
 
+export function ArianneElemCreatable({
+	children,
+	id,
+	list,
+	selectedId,
+	long,
+	...rest
+}) {
+	const selectedString = selectedId || [];
+	const options = list.map(item => ({
+		value: item.id,
+		label: item.name,
+		color: item.color,
+	}));
+	const selectedItem = rest.isMulti
+		? options.filter(item => selectedString.find(i => i === item.value))
+		: options.find(item => item.value === selectedId);
+
+	return (
+		<ArianneElemMain long={long}>
+			<Creatable
+				placeholder={children}
+				options={options}
+				styles={customSelectStyles}
+				isSearchable
+				value={selectedItem}
+				hideSelectedOptions
+				noOptionsMessage={() => 'Aucune option'}
+				{...rest}
+			/>
+		</ArianneElemMain>
+	);
+}
 function ArianneThread({
 	selectCustomer,
 	selectProjects,
 	selectFilter,
+	selectTag,
 	linkedCustomerId,
 	projectId,
 	filterId = 'PENDING',
+	tagsSelected = '',
 }) {
 	const {
 		data: {
@@ -182,6 +224,12 @@ function ArianneThread({
 		{id: 'PENDING', name: 'Tâches à faire'},
 		{id: 'FINISHED', name: 'Tâches faites'},
 		{id: 'ALL', name: 'Toutes les tâches'},
+	];
+
+	const tags = [
+		{id: 'a', name: 'Bois bleu', color: '#45a5b2'},
+		{id: 'b', name: 'Pain rouge', color: '#c567a8'},
+		{id: 'c', name: 'Vache violet', color: '#5463d4'},
 	];
 
 	if (errorsProject) throw errorsProject;
@@ -213,6 +261,15 @@ function ArianneThread({
 				onChange={selectFilter}
 				selectedId={filterId}
 				placeholder={'Toutes les tâches'}
+			/>
+			<ArianneElemCreatable
+				id="tags"
+				list={tags}
+				onChange={selectTag}
+				selectedId={tagsSelected}
+				isMulti
+				long
+				placeholder={'Chercher par tags'}
 			/>
 		</ArianneContainer>
 	);

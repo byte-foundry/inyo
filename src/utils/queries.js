@@ -5,6 +5,7 @@ import {
 	PROJECT_CUSTOMER_FRAGMENT,
 	COMMENT_ON_ITEM_FRAGMENT,
 	REMINDER_FRAGMENT,
+	TAG_FRAGMENT,
 } from './fragments';
 
 /** ******** USER QUERIES ********* */
@@ -43,6 +44,8 @@ export const GET_USER_CUSTOMERS = gql`
 `;
 
 export const GET_USER_INFOS = gql`
+	${TAG_FRAGMENT}
+
 	query userInfosQuery {
 		me {
 			id
@@ -59,6 +62,9 @@ export const GET_USER_INFOS = gql`
 			endWorkAt
 			workingDays
 			timeZone
+			tags {
+				...TagFragment
+			}
 			company {
 				id
 				name
@@ -77,6 +83,16 @@ export const GET_USER_INFOS = gql`
 			}
 			settings {
 				assistantName
+			}
+		}
+	}
+`;
+
+export const GET_USER_TAGS = gql`
+	query getAllTags {
+		me {
+			tags {
+				...TagFragment
 			}
 		}
 	}

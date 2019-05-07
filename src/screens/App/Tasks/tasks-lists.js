@@ -124,6 +124,7 @@ function TasksList({location, history}) {
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 	const view = query.get('view');
+	const tags = query.getAll('tags');
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -179,7 +180,22 @@ function TasksList({location, history}) {
 		history.push(`/app/tasks?${newQuery.toString()}`);
 	};
 
+	const setTagSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		newQuery.delete('view');
+
+		if (selected) {
+			newQuery.delete('tags');
+			selected.forEach(tag => newQuery.append('tags', tag.value));
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
 	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
+
+	console.log(tags);
 
 	return (
 		<Container>
@@ -197,7 +213,9 @@ function TasksList({location, history}) {
 					selectCustomer={setCustomerSelected}
 					selectProjects={setProjectSelected}
 					selectFilter={setFilterSelected}
+					selectTag={setTagSelected}
 					filterId={filter}
+					tagsSelected={tags}
 				/>
 				{projectId && (
 					<ProjectHeader

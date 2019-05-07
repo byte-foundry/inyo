@@ -178,9 +178,10 @@ const TaskIcon = styled('div')`
 const TaskInfosIcon = styled('div')`
 	width: 0.8rem;
 	height: 0.8rem;
-	background-repeat: no-repeat;
-	background-size: contain;
-	background-image: url(${props => props.icon});
+	background: ${primaryGrey};
+	mask-repeat: no-repeat;
+	mask-size: contain;
+	mask-image: url(${props => props.icon});
 	margin-right: 0.4rem;
 `;
 

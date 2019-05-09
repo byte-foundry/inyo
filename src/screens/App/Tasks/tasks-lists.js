@@ -16,7 +16,9 @@ import {
 	Help,
 	Heading,
 	Button,
+	A,
 	P,
+	UL,
 	Main,
 	Container,
 	Content,
@@ -121,6 +123,7 @@ function TasksList({location, history}) {
 	const query = new URLSearchParams(prevSearch || location.search);
 	const linkedCustomerId = query.get('customerId');
 	const openModal = query.get('openModal');
+	const openHelpModal = query.get('openHelpModal');
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 	const view = query.get('view');
@@ -186,7 +189,7 @@ function TasksList({location, history}) {
 			<Help
 				customerToken
 				data-tip="Instructions pour utiliser l'interface"
-				onClick={() => history.push('?openModal=true')}
+				onClick={() => history.push('?openHelpModal=true')}
 			>
 				?
 			</Help>
@@ -243,6 +246,105 @@ function TasksList({location, history}) {
 						<YoutubeContainer>
 							<IframeYouTube videoId="qBJvclaZ-yQ" />
 						</YoutubeContainer>
+						<ModalActions>
+							<Button
+								big
+								primary
+								onClick={() => history.push('/app/tasks')}
+							>
+								J'ai compris!
+							</Button>
+						</ModalActions>
+					</ModalElem>
+				</ModalContainer>
+			)}
+			{openHelpModal && (
+				<ModalContainer
+					size="small"
+					onDismiss={() => history.push('/app/tasks')}
+				>
+					<ModalElem>
+						<Heading>Aide</Heading>
+						<PA>
+							Voici quelques liens pour vous aider à utiliser
+							Inyo.
+						</PA>
+						<PA>
+							<UL noBullet>
+								<li>
+									🎬 -{' '}
+									<A
+										href=""
+										onClick={() => history.push('?openModal=true')
+										}
+									>
+										Voir la vidéo de présentation
+									</A>
+								</li>
+								<li>
+									✅ -{' '}
+									<A
+										target="_blank"
+										href="https://site.inyo.me/documentation/creer-une-nouvelle-tache/"
+									>
+										Créer une nouvelle tâche
+									</A>
+								</li>
+								<li>
+									🤑 -{' '}
+									<A
+										target="_blank"
+										href="https://site.inyo.me/documentation/liste-de-mes-clients/"
+									>
+										Créer un nouveau client
+									</A>
+								</li>
+								<li>
+									🗂️ -{' '}
+									<A
+										target="_blank"
+										href="https://site.inyo.me/documentation/creer-un-nouveau-projet/"
+									>
+										Créer un nouveau projet
+									</A>
+								</li>
+								<li>
+									📝 -{' '}
+									<A
+										target="_blank"
+										href="https://site.inyo.me/documentation/creer-un-nouveau-projet/utiliser-un-modele-predefini/"
+									>
+										Utiliser un modèle de projet
+									</A>
+								</li>
+								<li>
+									🕵️ -{' '}
+									<A
+										target="_blank"
+										href="https://site.inyo.me/documentation/les-principales-vues/vue-du-client-d-un-projet/"
+									>
+										Voir ce que voit le client
+									</A>
+								</li>
+								<li>
+									🌀 -{' '}
+									<A target="_blank" href="https://inyo.pro">
+										Présenter Inyo à votre client
+									</A>
+								</li>
+							</UL>
+						</PA>
+						<PA>
+							Une information est manquante? Contactez-nous via la
+							messagerie en bas à droite, ou proposez des
+							fonctionnalités sur{' '}
+							<A
+								target="_blank"
+								href="https://site.inyo.me/produit/fonctionnalites/proposer-une-fonctionnalite/"
+							>
+								notre roadmap collaborative.
+							</A>
+						</PA>
 						<ModalActions>
 							<Button
 								big

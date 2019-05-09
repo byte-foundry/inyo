@@ -42,6 +42,7 @@ import {
 	IllusContainer,
 	IllusText,
 	IllusTextIcon,
+	Help,
 } from '../../../utils/new/design-system';
 
 const ProjectTitle = styled(SubHeading)`
@@ -190,6 +191,13 @@ function Projects({history}) {
 
 	return (
 		<Container>
+			<Help
+				customerToken
+				data-tip="Instructions pour utiliser l'interface"
+				onClick={() => history.push('/app/tasks?openHelpModal=true')}
+			>
+				?
+			</Help>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<Main>
 				<Content

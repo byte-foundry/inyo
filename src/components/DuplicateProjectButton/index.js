@@ -29,12 +29,9 @@ const DuplicateProjectModal = ({
 						name: section.name,
 						items: section.items.map(item => ({
 							name: item.name,
-							reviewer: item.reviewer,
 							description: item.description,
 							type: item.type,
-							unit: item.unit,
-							// dueDate: item.dueDate,
-							// linkedCustomerId: item.linkedCustomer,
+							unit: item.timeItTook || item.unit || 0,
 						})),
 					}));
 
@@ -45,7 +42,8 @@ const DuplicateProjectModal = ({
 							template: project.template,
 							name,
 							sections,
-							customerId: project.customer.id,
+							customerId: project.customer && project.customer.id,
+							deadline: project.deadline,
 						},
 					});
 

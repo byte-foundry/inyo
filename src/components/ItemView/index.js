@@ -56,7 +56,12 @@ import {
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
-import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import {
+	ITEM_TYPES,
+	TOOLTIP_DELAY,
+	BREAKPOINTS,
+	TAG_COLOR_PALETTE,
+} from '../../utils/constants';
 
 const Header = styled('div')``;
 
@@ -721,6 +726,7 @@ const Item = ({id, customerToken, close}) => {
 								value: tag.id,
 								label: tag.name,
 							}))}
+							onCreate={(value) => {}}
 							onChange={({value}) => {
 								updateItem({
 									variables: {

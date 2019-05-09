@@ -4,18 +4,44 @@ import styled from '@emotion/styled';
 import {DialogOverlay, DialogContent} from '@reach/dialog';
 
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
+import NotificationPicto from '../../utils/icons/notifications.svg';
 import NotificationItem from '../NotificationItem';
-import {Button, primaryGrey} from '../../utils/new/design-system';
+import {
+	Button,
+	primaryPurple,
+	primaryGrey,
+	primaryRed,
+} from '../../utils/new/design-system';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
 import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
 
+const DialogContentWrap = styled(DialogContent)`
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+`;
+
 const Icon = styled('button')`
-	background: url(${Logo});
+	background: ${props => (props.someUnread ? primaryRed : primaryGrey)};
+	mask-image: url(${NotificationPicto});
 	width: 26px;
 	height: 26px;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
+	mask-repeat: no-repeat;
+	mask-position: center;
+	mask-size: cover;
+	cursor: pointer;
+`;
+
+const MarkRead = styled(Button)`
+	color: ${primaryGrey};
+	padding: 15px 10px;
+	${props => (props.someUnread ? '' : 'display: none')};
+	&:focus {
+		outline: 0;
+	}
+	&:hover {
+		color: ${primaryPurple};
+	}
 `;
 
 const List = styled('ul')`
@@ -32,7 +58,7 @@ const Item = styled('li')`
 	display: block;
 
 	& + li {
-		margin-top: 10px;
+		margin-top: 2px;
 	}
 `;
 
@@ -66,16 +92,29 @@ const NotificationTrayButton = () => {
 		},
 	});
 
+	let someUnread = false;
+
+	if (!loading) {
+		someUnread = data.me.notifications.some(
+			notification => notification.unread,
+		);
+	}
+
 	return (
 		<>
-			<Icon ref={icon} onClick={() => setOpen(true)} />
+			<Icon
+				data-tip="Notifications liées à vos clients"
+				someUnread={someUnread}
+				ref={icon}
+				onClick={() => setOpen(true)}
+			/>
 			{isOpen && (
 				<DialogOverlay
 					isOpen
 					style={{background: 'none'}}
 					onDismiss={() => setOpen(false)}
 				>
-					<DialogContent
+					<DialogContentWrap
 						style={{
 							margin: '0',
 							padding: '5px',
@@ -89,9 +128,13 @@ const NotificationTrayButton = () => {
 							borderRadius: '3px',
 						}}
 					>
-						<Button link onClick={() => markNotificationsAsRead()}>
-							Marquer comme lu
-						</Button>
+						<MarkRead
+							someUnread={someUnread}
+							link
+							onClick={() => markNotificationsAsRead()}
+						>
+							Tout marquer comme lu
+						</MarkRead>
 						<List>
 							{loading ? (
 								<p>loading</p>
@@ -103,7 +146,7 @@ const NotificationTrayButton = () => {
 								))
 							)}
 						</List>
-					</DialogContent>
+					</DialogContentWrap>
 				</DialogOverlay>
 			)}
 		</>

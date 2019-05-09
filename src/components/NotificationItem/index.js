@@ -2,11 +2,25 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import {lightPurple} from '../../utils/new/design-system';
+import {lightGrey, lightPurple} from '../../utils/new/design-system';
+
+const A = styled(Link)`
+	text-decoration: none;
+	color: inherit;
+`;
 
 const Container = styled('div')`
 	background: ${props => (props.unread ? lightPurple : '')};
+	border-bottom: 1px solid ${lightPurple};
+	border-radius: 4px;
 	padding: 10px;
+	font-size: 0.85rem;
+	line-height: 1.4;
+	transition: all 200ms ease;
+
+	&:hover {
+		background-color: ${lightGrey};
+	}
 `;
 
 const NotificationItem = ({
@@ -29,24 +43,20 @@ const NotificationItem = ({
 	// eslint-disable-next-line no-underscore-dangle
 	switch (object.__typename) {
 	case 'Project':
-		objectLink = (
-			<Link to={`/app/tasks?project=${object.id}`}>
-				{object.name}
-			</Link>
-		);
+		objectLink = `/app/tasks?project=${object.id}`;
 		break;
 	case 'Item':
-		objectLink = (
-			<Link to={`/app/tasks/${object.id}`}>{object.name}</Link>
-		);
+		objectLink = `/app/tasks/${object.id}`;
 		break;
 	default:
 	}
 
 	return (
-		<Container unread={unread}>
-			{from.firstName} {from.lastName} {action} {objectLink}
-		</Container>
+		<A to={objectLink}>
+			<Container unread={unread}>
+				{from.firstName} {from.lastName} {action} {object.name}.
+			</Container>
+		</A>
 	);
 };
 

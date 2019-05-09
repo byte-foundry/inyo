@@ -689,7 +689,7 @@ export const Select = ({style, ...rest}) => (
 
 export const DateContainer = styled('div')`
 	position: relative;
-	z-index: 0;
+	z-index: 1;
 
 	p:hover {
 		position: relative;

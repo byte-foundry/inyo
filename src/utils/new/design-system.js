@@ -271,7 +271,7 @@ export const Label = styled('label')`
 `;
 
 export const A = styled('a')`
-	font-size: inherit;
+	font-size: 1em;
 	color: ${primaryPurple};
 	text-decoration: none;
 	border-bottom: 2px solid transparent;

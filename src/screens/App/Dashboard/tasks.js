@@ -14,6 +14,7 @@ import {
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
+import {A} from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 
 const SectionTitle = styled(H3)`
@@ -87,12 +88,14 @@ const DashboardTasks = () => {
 							fenêtre.
 						</P>
 						<P>
-							Vous pouvez aussi déclencher l'éxécution d'une tâche
-							client (icône rouge) en ouvrant celle-ci et en
-							cliquant sur "Charger Edwige de faire réaliser cette
-							tâche". Votre client sera alors notifié que vous
-							attendez de lui la réalisation de cette tâche et
-							sera relancé automatiquement si nécessaire.
+							Vous pouvez aussi{' '}
+							<A
+								target="_blank"
+								href="https://site.inyo.me/documentation/les-principales-vues/vue-tache/activer-une-tache"
+							>
+								activer une tâche client pour que celui-ci soit
+								notifié et qu'il la réalise.
+							</A>
 						</P>
 					</NoTaskContent>
 				</NoTask>

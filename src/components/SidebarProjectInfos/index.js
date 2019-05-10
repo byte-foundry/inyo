@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
@@ -21,6 +21,9 @@ import {ModalContainer} from '../../utils/content';
 
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
+import {ReactComponent as DuplicateIcon} from '../../utils/icons/file_copy.svg';
+import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
+import {ReactComponent as ClientIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
 import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
@@ -65,7 +68,13 @@ const SubSection = styled('div')`
 `;
 
 const Actions = styled('div')`
-	margin-bottom: 1rem;
+	margin-bottom: 0.5rem;
+
+	svg {
+		max-width: 1rem;
+		max-height: 1rem;
+		margin-right: 0.5rem;
+	}
 `;
 
 const ClientPreviewIcon = styled(EyeIcon)`
@@ -169,8 +178,23 @@ const Illus = styled('img')`
 
 const PencilElem = styled(Pencil)`
 	cursor: pointer;
-	width: 15px;
-	margin-top: -2px;
+	width: 1rem;
+	position: absolute;
+	left: 0;
+
+	display: none;
+`;
+
+const CustomerInfos = styled('div')`
+	position: relative;
+	margin-left: -2rem;
+	padding-left: 2rem;
+
+	&:hover {
+		${PencilElem} {
+			display: block;
+		}
+	}
 `;
 
 const SidebarProjectInfos = ({
@@ -226,7 +250,6 @@ const SidebarProjectInfos = ({
 		<Aside>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<SubSection>
-				<SidebarHeading>Menu Projet</SidebarHeading>
 				<SidebarLink
 					data-tip="Vue principale"
 					onClick={() => setView('tasks')}
@@ -259,18 +282,17 @@ const SidebarProjectInfos = ({
 				</SidebarLink>
 			</SubSection>
 			<SubSection>
-				<SidebarHeading>
-					Votre client
-					{project.customer && (
-						<PencilElem
-							data-tip="Changer le client lié au projet"
-							onClick={() => setEditCustomer(true)}
-						/>
-					)}
-				</SidebarHeading>
 				{project.customer ? (
 					<>
-						<CustomerNameAndAddress customer={project.customer} />
+						<CustomerInfos>
+							<PencilElem
+								data-tip="Changer le client lié au projet"
+								onClick={() => setEditCustomer(true)}
+							/>
+							<CustomerNameAndAddress
+								customer={project.customer}
+							/>
+						</CustomerInfos>
 						<CheckBoxLabel data-tip="Évolution du projet, tâches qui requièrent une action, etc.">
 							<input
 								type="checkbox"
@@ -337,10 +359,12 @@ const SidebarProjectInfos = ({
 					</>
 				) : (
 					<>
-						<Button icon="+" onClick={() => setEditCustomer(true)}>
-							Ajouter un client
-						</Button>
 						<Illus src={noClientIllus} />
+						<Actions>
+							<Button onClick={() => setEditCustomer(true)}>
+								<ClientIcon /> Ajouter un client
+							</Button>
+						</Actions>
 					</>
 				)}
 
@@ -385,22 +409,26 @@ const SidebarProjectInfos = ({
 			)}
 
 			<SubSection>
-				<SidebarHeading>Deadline</SidebarHeading>
 				<DateContainer>
 					{project.deadline ? (
-						<BigNumber
-							data-tip="Date limite du projet"
-							onClick={() => setEditDueDate(true)}
-						>
-							{(project.deadline
-								&& moment(project.deadline).format(
-									'DD/MM/YYYY',
-								)) || <>&mdash;</>}
-						</BigNumber>
+						<>
+							<SidebarHeading>Deadline</SidebarHeading>
+							<BigNumber
+								data-tip="Date limite du projet"
+								onClick={() => setEditDueDate(true)}
+							>
+								{(project.deadline
+									&& moment(project.deadline).format(
+										'DD/MM/YYYY',
+									)) || <>&mdash;</>}
+							</BigNumber>
+						</>
 					) : (
-						<Button icon="+" onClick={() => setEditDueDate(true)}>
-							Ajouter une deadline
-						</Button>
+						<Actions>
+							<Button onClick={() => setEditDueDate(true)}>
+								<DateIcon /> Ajouter une deadline
+							</Button>
+						</Actions>
 					)}
 					{editDueDate && (
 						<DateInput
@@ -451,25 +479,38 @@ const SidebarProjectInfos = ({
 						onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
 						}
 					>
-						Dupliquer le projet
+						<DuplicateIcon /> Dupliquer le projet
 					</DuplicateProjectButton>
 				</Actions>
 				<Actions>
 					<CreateProjectLinkButton project={project} />
 				</Actions>
-				<Actions>
-					{isArchived ? (
-						<Button
-							onClick={() => unarchiveProject({
-								variables: {
-									projectId: project.id,
-								},
-							})
-							}
-						>
-							<UnarchiveIcon /> Désarchiver le projet
-						</Button>
-					) : (
+				{isArchived ? (
+					<>
+						<Actions>
+							<Button
+								onClick={() => unarchiveProject({
+									variables: {
+										projectId: project.id,
+									},
+								})
+								}
+							>
+								<UnarchiveIcon /> Désarchiver le projet
+							</Button>
+						</Actions>
+						<Actions>
+							<RemoveProjectButton
+								red
+								projectId={project.id}
+								onRemove={() => history.push('/app/projects')}
+							>
+								<TrashIcon /> Supprimer le projet
+							</RemoveProjectButton>
+						</Actions>
+					</>
+				) : (
+					<Actions>
 						<Button
 							onClick={() => archiveProject({
 								variables: {
@@ -480,17 +521,8 @@ const SidebarProjectInfos = ({
 						>
 							<ArchiveIcon /> Archiver le projet
 						</Button>
-					)}
-				</Actions>
-				<Actions>
-					<RemoveProjectButton
-						red
-						projectId={project.id}
-						onRemove={() => history.push('/app/projects')}
-					>
-						<TrashIcon /> Supprimer le projet
-					</RemoveProjectButton>
-				</Actions>
+					</Actions>
+				)}
 			</div>
 		</Aside>
 	);

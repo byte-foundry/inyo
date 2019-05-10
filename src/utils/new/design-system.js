@@ -135,6 +135,8 @@ export const Button = styled('button')`
 	}
 
 	border-color: currentColor;
+	display: flex;
+  align-items: center;
 
 	${props => !props.disabled
 		&& css`

@@ -568,7 +568,7 @@ export const UPDATE_ITEM = gql`
 		$type: ItemType
 		$unit: Float
 		$timeItTook: Float
-		$tags: [ID!]!
+		$tags: [ID!]
 	) {
 		updateItem(
 			id: $itemId

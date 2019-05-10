@@ -43,7 +43,7 @@ const NotificationItem = ({
 	// eslint-disable-next-line no-underscore-dangle
 	switch (object.__typename) {
 	case 'Project':
-		objectLink = `/app/tasks?project=${object.id}`;
+		objectLink = `/app/tasks?projectId=${object.id}`;
 		break;
 	case 'Item':
 		objectLink = `/app/tasks/${object.id}`;

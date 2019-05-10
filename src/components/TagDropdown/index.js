@@ -16,7 +16,9 @@ const TagDropdown = (props) => {
 	const onCreateOption = (name) => {
 		const [colorBg, colorText] = TAG_COLOR_PALETTE[
 			data.me.tags.length % TAG_COLOR_PALETTE.length
-		].map(color => `#${color.map(p => p.toString(16)).join('')}`);
+		].map(
+			color => `#${color.map(p => p.toString(16).padStart(2, '0')).join('')}`,
+		);
 
 		props.onCreateOption(name, colorBg, colorText);
 	};

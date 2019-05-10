@@ -285,7 +285,7 @@ function TasksList({location, history}) {
 									✅ -{' '}
 									<A
 										target="_blank"
-										href="https://site.inyo.me/documentation/creer-une-nouvelle-tache/"
+										href="https://inyo.me/documentation/creer-une-nouvelle-tache/"
 									>
 										Créer une nouvelle tâche
 									</A>
@@ -294,7 +294,7 @@ function TasksList({location, history}) {
 									🤑 -{' '}
 									<A
 										target="_blank"
-										href="https://site.inyo.me/documentation/liste-de-mes-clients/"
+										href="https://inyo.me/documentation/liste-de-mes-clients/"
 									>
 										Créer un nouveau client
 									</A>
@@ -303,7 +303,7 @@ function TasksList({location, history}) {
 									🗂️ -{' '}
 									<A
 										target="_blank"
-										href="https://site.inyo.me/documentation/creer-un-nouveau-projet/"
+										href="https://inyo.me/documentation/creer-un-nouveau-projet/"
 									>
 										Créer un nouveau projet
 									</A>
@@ -312,7 +312,7 @@ function TasksList({location, history}) {
 									📝 -{' '}
 									<A
 										target="_blank"
-										href="https://site.inyo.me/documentation/creer-un-nouveau-projet/utiliser-un-modele-predefini/"
+										href="https://inyo.me/documentation/creer-un-nouveau-projet/utiliser-un-modele-predefini/"
 									>
 										Utiliser un modèle de projet
 									</A>
@@ -321,7 +321,7 @@ function TasksList({location, history}) {
 									🕵️ -{' '}
 									<A
 										target="_blank"
-										href="https://site.inyo.me/documentation/les-principales-vues/vue-du-client-d-un-projet/"
+										href="https://inyo.me/documentation/les-principales-vues/vue-du-client-d-un-projet/"
 									>
 										Voir ce que voit le client
 									</A>
@@ -340,7 +340,7 @@ function TasksList({location, history}) {
 							fonctionnalités sur{' '}
 							<A
 								target="_blank"
-								href="https://site.inyo.me/produit/fonctionnalites/proposer-une-fonctionnalite/"
+								href="https://inyo.me/produit/fonctionnalites/proposer-une-fonctionnalite/"
 							>
 								notre roadmap collaborative.
 							</A>

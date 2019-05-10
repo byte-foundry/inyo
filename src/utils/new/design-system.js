@@ -733,6 +733,7 @@ export const BigNumber = styled(P)`
 export const BackButton = styled(Button)`
 	align-self: flex-start;
 	text-transform: uppercase;
+	margin: 1rem 0;
 	${props => props.withMargin && 'margin-bottom: 1rem;'}
 
 	::before {

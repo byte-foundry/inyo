@@ -56,7 +56,7 @@ const ReminderItem = styled('div')`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	margin: 10px 0;
+	margin-bottom: 5px;
 `;
 
 const ReminderText = styled('div')`
@@ -76,10 +76,19 @@ const ReminderActions = styled('div')`
 	display: flex;
 	text-align: right;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: center;
 `;
 
-const ButtonIcon = styled(Button)``;
+const ReminderButtons = styled('div')`
+	margin-left: 1rem;
+`;
+
+const ButtonIcon = styled(Button)`
+	svg {
+		width: 14px;
+		max-height: 14px;
+	}
+`;
 
 const ReminderForm = styled(animated.form)`
 	display: flex;
@@ -211,36 +220,38 @@ const TaskRemindersPreviewsList = ({
 									</ReminderText>
 									<ReminderActions>
 										<ReminderDate>{delay}</ReminderDate>
-										<ButtonIcon
-											link
-											onClick={() => {
-												setEditingIndex(index);
-											}}
-										>
-											<EditIcon />
-										</ButtonIcon>
-										<ReminderTestEmailButton
-											taskId={taskId}
-											reminder={reminder}
-											preview
-										/>
-										<Delete
-											data-tip="Supprimer cette action automatique"
-											link
-											onClick={() => {
-												setReminders([
-													...reminders.slice(
-														0,
-														index,
-													),
-													...reminders.slice(
-														index + 1,
-													),
-												]);
-											}}
-										>
-											&times;
-										</Delete>
+										<ReminderButtons>
+											<ButtonIcon
+												link
+												onClick={() => {
+													setEditingIndex(index);
+												}}
+											>
+												<EditIcon />
+											</ButtonIcon>
+											<ReminderTestEmailButton
+												taskId={taskId}
+												reminder={reminder}
+												preview
+											/>
+											<Delete
+												data-tip="Supprimer cette action automatique"
+												link
+												onClick={() => {
+													setReminders([
+														...reminders.slice(
+															0,
+															index,
+														),
+														...reminders.slice(
+															index + 1,
+														),
+													]);
+												}}
+											>
+												&times;
+											</Delete>
+										</ReminderButtons>
 									</ReminderActions>
 								</ReminderItem>
 								<CollapsableReminderForm
@@ -332,11 +343,13 @@ const TaskRemindersPreviewsList = ({
 												isDisabled={index === 0}
 												options={[
 													{
-														label: 'après l\'activation de la tâche',
+														label:
+															"après l'activation de la tâche",
 														value: false,
 													},
 													{
-														label: 'après l\'email précédent',
+														label:
+															"après l'email précédent",
 														value: true,
 													},
 												]}
@@ -346,11 +359,13 @@ const TaskRemindersPreviewsList = ({
 												value={
 													index !== 0 && isRelative
 														? {
-															label: 'après l\'email précédent',
+															label:
+																	"après l'email précédent",
 															value: true,
 														  }
 														: {
-															label: 'après l\'activation de la tâche',
+															label:
+																	"après l'activation de la tâche",
 															value: false,
 														  }
 												}

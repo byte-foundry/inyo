@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import FilesIconSvg from '../../utils/icons/file.svg';
+import TagIconSvg from '../../utils/icons/tags.svg';
 import DateIconSvg from '../../utils/icons/date.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
@@ -360,6 +361,19 @@ const FocusStateIcon = styled('div')`
 	}
 `;
 
+const Tag = styled(Link)`
+	background-color: ${props => props.bg};
+	color: ${props => props.color};
+	border-radius: 2px;
+	padding: 0 3px;
+	margin-right: 5px;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
+	}
+`;
+
 export function TaskCustomerInput({
 	disabled,
 	editCustomer: editCustomerProp,
@@ -668,6 +682,26 @@ export function TaskInfosInputs({
 								plural="fichiers"
 								value={item.attachments.length}
 							/>
+						</>
+					}
+				/>
+			)}
+			{item.tags && item.tags.length > 0 && (
+				<TaskIconText
+					data-tip="Tags"
+					inactive={true}
+					icon={<TaskInfosIcon icon={TagIconSvg} />}
+					content={
+						<>
+							{item.tags.map(tag => (
+								<Tag
+									to={{search: `?tags=${tag.id}`}}
+									bg={tag.colorBg}
+									color={tag.colorText}
+								>
+									{tag.name}
+								</Tag>
+							))}
 						</>
 					}
 				/>

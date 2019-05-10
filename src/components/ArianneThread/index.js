@@ -10,7 +10,11 @@ import {
 	lightGrey,
 	primaryRed,
 } from '../../utils/new/design-system';
-import {GET_ALL_CUSTOMERS, GET_ALL_PROJECTS} from '../../utils/queries';
+import {
+	GET_ALL_CUSTOMERS,
+	GET_ALL_PROJECTS,
+	GET_USER_TAGS,
+} from '../../utils/queries';
 import {BREAKPOINTS} from '../../utils/constants';
 
 const ArianneContainer = styled('div')`
@@ -49,7 +53,7 @@ const ArianneElemMain = styled('div')`
 	}
 `;
 
-const customSelectStyles = {
+const customSelectStyles = props => ({
 	dropdownIndicator: styles => ({
 		...styles,
 		color: primaryPurple,
@@ -75,11 +79,13 @@ const customSelectStyles = {
 	option: (styles, state) => ({
 		...styles,
 		backgroundColor: state.isSelected ? primaryPurple : primaryWhite,
-		color: state.isSelected ? primaryWhite : primaryPurple,
+		color: state.isSelected
+			? primaryWhite
+			: state.data.colorText || primaryPurple,
 
 		':hover, :active, :focus': {
-			color: primaryWhite,
-			backgroundColor: primaryPurple,
+			color: state.data.colorText || primaryWhite,
+			backgroundColor: state.data.colorBg || primaryPurple,
 			cursor: 'pointer',
 		},
 	}),
@@ -121,7 +127,7 @@ const customSelectStyles = {
 	valueContainer: styles => ({
 		...styles,
 		padding: 0,
-		height: '27px',
+		height: props.short ? '27px' : 'auto',
 		overflow: 'auto',
 	}),
 	container: styles => ({
@@ -131,9 +137,14 @@ const customSelectStyles = {
 	}),
 	multiValue: (styles, {data}) => ({
 		...styles,
-		backgroundColor: data.color,
+		backgroundColor: data.colorBg,
+		color: data.colorText,
 	}),
-};
+	multiValueLabel: (styles, {data}) => ({
+		...styles,
+		color: data.colorText,
+	}),
+});
 
 export function ArianneElem({
 	children, id, list, selectedId, ...rest
@@ -146,7 +157,7 @@ export function ArianneElem({
 			<Select
 				placeholder={children}
 				options={options}
-				styles={customSelectStyles}
+				styles={customSelectStyles({...rest})}
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
@@ -169,7 +180,8 @@ export function ArianneElemCreatable({
 	const options = list.map(item => ({
 		value: item.id,
 		label: item.name,
-		color: item.color,
+		colorBg: item.colorBg,
+		colorText: item.colorText,
 	}));
 	const selectedItem = rest.isMulti
 		? options.filter(item => selectedString.find(i => i === item.value))
@@ -180,7 +192,7 @@ export function ArianneElemCreatable({
 			<Creatable
 				placeholder={children}
 				options={options}
-				styles={customSelectStyles}
+				styles={customSelectStyles({...rest})}
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
@@ -212,6 +224,13 @@ function ArianneThread({
 		},
 		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
+	const {
+		loading,
+		data: {
+			me: {tags},
+		},
+		errors: errorsTags,
+	} = useQuery(GET_USER_TAGS, {suspend: false});
 
 	const projects = projectsUnfiltered.filter(
 		project => (!linkedCustomerId
@@ -226,13 +245,8 @@ function ArianneThread({
 		{id: 'ALL', name: 'Toutes les tâches'},
 	];
 
-	const tags = [
-		{id: 'a', name: 'Bois bleu', color: '#45a5b2'},
-		{id: 'b', name: 'Pain rouge', color: '#c567a8'},
-		{id: 'c', name: 'Vache violet', color: '#5463d4'},
-	];
-
 	if (errorsProject) throw errorsProject;
+	if (errorsTags) throw errorsTags;
 	if (errorsCustomers) throw errorsCustomers;
 
 	return (
@@ -269,6 +283,7 @@ function ArianneThread({
 				selectedId={tagsSelected}
 				isMulti
 				long
+				short
 				placeholder={'Chercher par tags'}
 			/>
 		</ArianneContainer>

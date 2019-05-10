@@ -31,6 +31,7 @@ import {
 	REMOVE_ITEM,
 	REMOVE_ATTACHMENTS,
 	FOCUS_TASK,
+	CREATE_TAG,
 } from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -84,7 +85,7 @@ const Meta = styled('div')`
 	display: flex;
 	align-items: flex-start;
 
-	svg {
+	& > svg {
 		margin-right: 15px;
 	}
 
@@ -296,6 +297,7 @@ const Item = ({id, customerToken, close}) => {
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const focusTask = useMutation(FOCUS_TASK);
+	const createTag = useMutation(CREATE_TAG);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -713,24 +715,35 @@ const Item = ({id, customerToken, close}) => {
 					<MetaLabel>Type de tâche</MetaLabel>
 					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
-				<Meta data-tip="Tag de la tâche">
-					<TagIcon />
-					<MetaLabel>Tags</MetaLabel>
-					{!customerToken && editTags ? (
+				{!customerToken && (
+					<Meta data-tip="Tag de la tâche">
+						<TagIcon />
+						<MetaLabel>Tags</MetaLabel>
 						<TagDropdown
 							id="tags"
 							defaultMenuIsOpen
 							long
 							placeholder="Choisisser ou créer un nouveau tag"
-							defaultValue={item.tags.map(tag => ({
+							value={item.tags.map(tag => ({
 								value: tag.id,
 								label: tag.name,
+								colorBg: tag.colorBg,
+								colorText: tag.colorText,
 							}))}
-							onCreate={(value) => {}}
-							onChange={({value}) => {
+							onCreateOption={(name, colorBg, colorText) => {
+								createTag({
+									variables: {
+										name,
+										colorBg,
+										colorText,
+									},
+								});
+							}}
+							onChange={(tags) => {
 								updateItem({
 									variables: {
-										tags: value,
+										itemId: item.id,
+										tags: tags.map(({value}) => value),
 									},
 								});
 								setEditTags(false);
@@ -739,22 +752,8 @@ const Item = ({id, customerToken, close}) => {
 								setEditTags(false);
 							}}
 						/>
-					) : (
-						<MetaText
-							onClick={
-								customerToken
-									? undefined
-									: () => setEditTags(true)
-							}
-						>
-							{item.tags.length === 0 ? (
-								<em>Il n'y a pas de tags pour cette tâche</em>
-							) : (
-								<TagList tags={item.tags} />
-							)}
-						</MetaText>
-					)}
-				</Meta>
+					</Meta>
+				)}
 			</Metas>
 			{(!customerToken || description) && (
 				<Description data-tip="Description de la tâche">

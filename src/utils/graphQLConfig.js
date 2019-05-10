@@ -19,6 +19,7 @@ import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
 import updateItemWatchMutation from './mutationLinks/updateItem';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
 import focusTaskWatchMutation from './mutationLinks/focusTask';
+import createTagWatchMutation from './mutationLinks/createTag';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
 import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
 import removeSectionWatchMutation from './mutationLinks/removeSection';
@@ -91,6 +92,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	uploadAttachments: uploadAttachmentsWatchMutation,
 	removeAttachment: removeAttachmentWatchMutation,
 	removeSection: removeSectionWatchMutation,
+	createTag: createTagWatchMutation,
 });
 
 const client = new ApolloClient({

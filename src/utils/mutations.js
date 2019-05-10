@@ -568,6 +568,7 @@ export const UPDATE_ITEM = gql`
 		$type: ItemType
 		$unit: Float
 		$timeItTook: Float
+		$tags: [ID!]!
 	) {
 		updateItem(
 			id: $itemId
@@ -584,6 +585,7 @@ export const UPDATE_ITEM = gql`
 			type: $type
 			unit: $unit
 			timeItTook: $timeItTook
+			tags: $tags
 		) {
 			...ItemFragment
 		}
@@ -851,5 +853,16 @@ export const SEND_REMINDER_TEST_EMAIL = gql`
 export const SEND_REMINDER_PREVIEW_TEST_EMAIL = gql`
 	mutation sendReminderPreviewTestEmail($taskId: ID!, $type: ReminderType!) {
 		sent: sendReminderPreviewTestEmail(taskId: $taskId, type: $type)
+	}
+`;
+
+export const CREATE_TAG = gql`
+	mutation createTag($name: String!, $colorBg: String!, $colorText: String!) {
+		createTag(name: $name, colorBg: $colorBg, colorText: $colorText) {
+			id
+			name
+			colorBg
+			colorText
+		}
 	}
 `;

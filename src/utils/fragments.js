@@ -4,7 +4,8 @@ export const TAG_FRAGMENT = gql`
 	fragment TagFragment on Tag {
 		id
 		name
-		color
+		colorBg
+		colorText
 	}
 `;
 

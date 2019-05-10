@@ -89,8 +89,11 @@ export const GET_USER_INFOS = gql`
 `;
 
 export const GET_USER_TAGS = gql`
+	${TAG_FRAGMENT}
+
 	query getAllTags {
 		me {
+			id
 			tags {
 				...TagFragment
 			}

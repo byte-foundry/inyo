@@ -56,7 +56,9 @@ const TaskAndArianne = styled('div')`
 	flex: auto;
 `;
 
-function TasksListContainer({projectId, linkedCustomerId, filter}) {
+function TasksListContainer({
+	projectId, linkedCustomerId, filter, tags,
+}) {
 	const {data, error} = useQuery(GET_ALL_TASKS, {
 		variables: {
 			linkedCustomerId: linkedCustomerId || undefined,
@@ -70,7 +72,8 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 		task => (!filter || task.status === filter || filter === 'ALL')
 			&& (!task.section
 				|| task.section.project.status === 'ONGOING'
-				|| projectId),
+				|| projectId)
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
 	// order by creation date
@@ -244,6 +247,7 @@ function TasksList({location, history}) {
 									projectId={projectId}
 									linkedCustomerId={linkedCustomerId}
 									filter={filter}
+									tags={tags}
 								/>
 							</Suspense>
 						</Content>

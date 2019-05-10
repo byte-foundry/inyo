@@ -108,7 +108,16 @@ const MetaText = styled('span')`
 	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
 
 	:empty::before {
-		content: '\\2014';
+		content: '+';
+		border: 1px solid ${primaryPurple};
+		border-radius: 50%;
+		width: 0.8rem;
+		height: 0.8rem;
+		font-size: 0.8rem;
+		display: flex;
+		text-align: center;
+		flex-direction: column;
+		line-height: 1;
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -721,9 +730,8 @@ const Item = ({id, customerToken, close}) => {
 						<MetaLabel>Tags</MetaLabel>
 						<TagDropdown
 							id="tags"
-							defaultMenuIsOpen
 							long
-							placeholder="Choisisser ou créer un nouveau tag"
+							placeholder="Ajouter ou créer un tag"
 							value={item.tags.map(tag => ({
 								value: tag.id,
 								label: tag.name,

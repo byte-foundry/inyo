@@ -1,9 +1,9 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
+import ReactDOM from 'react-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
-import {DialogOverlay, DialogContent} from '@reach/dialog';
+import useOnClickOutside from 'use-onclickoutside';
 
-import Logo from '../../utils/icons/inyo-topbar-logo.svg';
 import NotificationPicto from '../../utils/icons/notifications.svg';
 import NotificationItem from '../NotificationItem';
 import {
@@ -11,14 +11,23 @@ import {
 	primaryPurple,
 	primaryGrey,
 	primaryRed,
+	primaryWhite,
 } from '../../utils/new/design-system';
+import {Loading} from '../../utils/content';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
 import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
 
-const DialogContentWrap = styled(DialogContent)`
+const Dropdown = styled('div')`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
+	align-items: stretch;
+	margin-top: 10px;
+	padding: 5px;
+	position: absolute;
+	width: 400px;
+	box-shadow: 0 0 10px ${primaryGrey};
+	border-radius: 3px;
+	background: ${primaryWhite};
 `;
 
 const Icon = styled('button')`
@@ -36,6 +45,8 @@ const MarkRead = styled(Button)`
 	color: ${primaryGrey};
 	padding: 15px 10px;
 	${props => (props.someUnread ? '' : 'display: none')};
+	align-self: flex-end;
+
 	&:focus {
 		outline: 0;
 	}
@@ -62,10 +73,20 @@ const Item = styled('li')`
 	}
 `;
 
+const EmptyState = styled('div')`
+	flex: 1;
+	display: flex;
+	align-items: center;
+	min-height: 400px;
+	justify-content: center;
+`;
+
 const NotificationTrayButton = () => {
 	const icon = useRef();
+	const dialogRef = useRef();
+	const containerElement = useRef(null);
 	const [isOpen, setOpen] = useState(false);
-	const {data, loading, errors} = useQuery(GET_USER_NOTIFICATIONS, {
+	const {data, loading} = useQuery(GET_USER_NOTIFICATIONS, {
 		suspend: false,
 	});
 	const markNotificationsAsRead = useMutation(MARK_NOTIFICATIONS_AS_READ, {
@@ -100,32 +121,41 @@ const NotificationTrayButton = () => {
 		);
 	}
 
+	useEffect(() => {
+		if (!containerElement.current) {
+			containerElement.current = document.createElement('div');
+		}
+
+		document.body.appendChild(containerElement.current);
+
+		return () => {
+			document.body.removeChild(containerElement.current);
+		};
+	});
+
+	useOnClickOutside(dialogRef, () => {
+		setOpen(false);
+	});
+
 	return (
 		<>
 			<Icon
 				data-tip="Notifications liées à vos clients"
 				someUnread={someUnread}
 				ref={icon}
-				onClick={() => setOpen(true)}
+				onClick={() => setOpen(!isOpen)}
 			/>
-			{isOpen && (
-				<DialogOverlay
-					isOpen
-					style={{background: 'none'}}
-					onDismiss={() => setOpen(false)}
-				>
-					<DialogContentWrap
+			{isOpen
+				&& ReactDOM.createPortal(
+					<Dropdown
+						ref={dialogRef}
+						aria-modal="true"
+						tabIndex="-1"
 						style={{
-							margin: '0',
-							padding: '5px',
-							position: 'absolute',
-							width: '400px',
 							top:
 								icon.current.getBoundingClientRect().top
 								+ icon.current.getBoundingClientRect().height,
 							left: icon.current.getBoundingClientRect().left,
-							boxShadow: `0 0 10px ${primaryGrey}`,
-							borderRadius: '3px',
 						}}
 					>
 						<MarkRead
@@ -135,20 +165,24 @@ const NotificationTrayButton = () => {
 						>
 							Tout marquer comme lu
 						</MarkRead>
-						<List>
-							{loading ? (
-								<p>loading</p>
-							) : (
-								data.me.notifications.map(notification => (
+						{loading ? (
+							<Loading />
+						) : data.me.notifications.length > 0 ? (
+							<List>
+								{data.me.notifications.map(notification => (
 									<Item key={notification.id}>
 										<NotificationItem {...notification} />
 									</Item>
-								))
-							)}
-						</List>
-					</DialogContentWrap>
-				</DialogOverlay>
-			)}
+								))}
+							</List>
+						) : (
+							<EmptyState>
+								<p>Aucune notification.</p>
+							</EmptyState>
+						)}
+					</Dropdown>,
+					containerElement.current,
+				)}
 		</>
 	);
 };

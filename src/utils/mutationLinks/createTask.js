@@ -11,10 +11,7 @@ export default {
 				);
 
 				if (cachedSection) {
-					const cachedItems = cachedSection.items.map(item => ({
-						...item,
-						position: item.position + 1,
-					}));
+					const cachedItems = cachedSection.items;
 
 					cachedItems.unshift(addedItem);
 
@@ -47,10 +44,7 @@ export default {
 				);
 
 				if (cachedSection) {
-					const cachedItems = cachedSection.items.map(item => ({
-						...item,
-						position: item.position + 1,
-					}));
+					const cachedItems = cachedSection.items;
 
 					cachedItems.unshift(addedItem);
 					cachedSection.items = cachedItems;

@@ -16,6 +16,7 @@ import {
 import {Loading} from '../../utils/content';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
 import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const Dropdown = styled('div')`
 	display: flex;
@@ -28,6 +29,9 @@ const Dropdown = styled('div')`
 	box-shadow: 0 0 10px ${primaryGrey};
 	border-radius: 3px;
 	background: ${primaryWhite};
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: calc(100% - 10px);
+	}
 `;
 
 const Icon = styled('button')`
@@ -81,7 +85,23 @@ const EmptyState = styled('div')`
 	justify-content: center;
 `;
 
-const NotificationTrayButton = () => {
+const NotificationContainer = styled('div')`
+	${props => (props.mobile
+		? `
+		display: none;
+		@media (max-width: ${BREAKPOINTS}px) {
+			display: block;
+		}
+	`
+		: `
+		display: block;
+		@media (max-width: ${BREAKPOINTS}px) {
+			display: none;
+		}
+	`)}
+`;
+
+const NotificationTrayButton = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
 	const containerElement = useRef(null);
@@ -138,7 +158,7 @@ const NotificationTrayButton = () => {
 	});
 
 	return (
-		<>
+		<NotificationContainer mobile={mobile}>
 			<Icon
 				data-tip="Notifications liées à vos clients"
 				someUnread={someUnread}
@@ -155,7 +175,16 @@ const NotificationTrayButton = () => {
 							top:
 								icon.current.getBoundingClientRect().top
 								+ icon.current.getBoundingClientRect().height,
-							left: icon.current.getBoundingClientRect().left,
+							left: mobile
+								? 0
+								: icon.current.getBoundingClientRect().left,
+							height: mobile
+								? `calc(100% - ${icon.current.getBoundingClientRect()
+									.top
+										+ icon.current.getBoundingClientRect()
+											.height
+										+ 20}px`
+								: undefined,
 						}}
 					>
 						<MarkRead
@@ -183,7 +212,7 @@ const NotificationTrayButton = () => {
 					</Dropdown>,
 					containerElement.current,
 				)}
-		</>
+		</NotificationContainer>
 	);
 };
 

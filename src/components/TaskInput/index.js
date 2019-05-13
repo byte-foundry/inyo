@@ -56,7 +56,7 @@ const InputButtonContainer = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: row;
 		width: calc(50vh - 3rem);
-		top: 1.5rem;
+		top: 2.2rem;
 		right: 0;
 		display: flex;
 		flex-direction: row-reverse;

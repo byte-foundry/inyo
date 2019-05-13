@@ -14,6 +14,7 @@ import {
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
+import {BREAKPOINTS} from '../../../utils/constants';
 import {A} from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 
@@ -28,6 +29,11 @@ const NoTask = styled('div')`
 	display: flex;
 	flex-direction: row;
 	margin-top: 2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const NoTaskIllus = styled('div')`

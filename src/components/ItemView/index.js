@@ -267,13 +267,6 @@ const FlexRowButtons = styled(FlexRow)`
 	}
 `;
 
-const Actions = styled('div')`
-	display: flex;
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: column;
-	}
-`;
-
 const Item = ({id, customerToken, close}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -865,7 +858,7 @@ const Item = ({id, customerToken, close}) => {
 			/>
 			<HR />
 			<FlexRowButtons justifyContent="space-between">
-				<Actions>
+				<FlexRowButtons>
 					{!customerToken
 						&& (deletingItem ? (
 							<>
@@ -903,7 +896,7 @@ const Item = ({id, customerToken, close}) => {
 							customerToken={customerToken}
 						/>
 					)}
-				</Actions>
+				</FlexRowButtons>
 				<div>
 					<Button onClick={() => close()}>
 						Enregistrer et fermer

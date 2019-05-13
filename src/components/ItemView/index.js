@@ -69,7 +69,7 @@ const Header = styled('div')``;
 const Metas = styled('div')`
 	display: grid;
 	grid-template-columns: 340px 1fr;
-	grid-row-gap: 0.8em;
+	grid-row-gap: 5px;
 	color: ${gray50};
 	padding-bottom: 2rem;
 	font-size: 14px;
@@ -84,6 +84,7 @@ const Metas = styled('div')`
 const Meta = styled('div')`
 	display: flex;
 	align-items: flex-start;
+	min-height: 1.25rem;
 
 	& > svg {
 		margin-right: 15px;
@@ -96,6 +97,7 @@ const Meta = styled('div')`
 
 const MetaLabel = styled('div')`
 	margin-right: 1rem;
+	min-width: 40px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
@@ -111,13 +113,16 @@ const MetaText = styled('span')`
 		content: '+';
 		border: 1px solid ${primaryPurple};
 		border-radius: 50%;
-		width: 0.8rem;
+		width: 0.85rem;
 		height: 0.8rem;
 		font-size: 0.8rem;
 		display: flex;
 		text-align: center;
 		flex-direction: column;
 		line-height: 1;
+		position: relative;
+		top: 2px;
+		left: -2px;
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {

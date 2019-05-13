@@ -738,12 +738,28 @@ const Item = ({id, customerToken, close}) => {
 								colorBg: tag.colorBg,
 								colorText: tag.colorText,
 							}))}
-							onCreateOption={(name, colorBg, colorText) => {
-								createTag({
+							onCreateOption={async (
+								name,
+								colorBg,
+								colorText,
+							) => {
+								const {
+									data: {createTag: tag},
+								} = await createTag({
 									variables: {
 										name,
 										colorBg,
 										colorText,
+									},
+								});
+
+								updateItem({
+									variables: {
+										itemId: item.id,
+										tags: [
+											...item.tags.map(i => i.id),
+											tag.id,
+										],
 									},
 								});
 							}}

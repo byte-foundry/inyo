@@ -58,6 +58,8 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 
 				const {project} = data;
 
+				project.sections.forEach(sec => (sec.position += 1));
+
 				project.sections.unshift(addedSection);
 
 				cache.writeQuery({

@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import gql from 'graphql-tag';
 import styled from '@emotion/styled/macro';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation, useQuery} from 'react-apollo-hooks';
@@ -430,6 +431,8 @@ function ProjectTasksList({items, projectId, sectionId}) {
 		};
 	});
 
+	sections.sort((a, b) => a.position - b.position);
+
 	return (
 		<TasksListContainer>
 			<DragDropContext
@@ -454,7 +457,75 @@ function ProjectTasksList({items, projectId, sectionId}) {
 								sectionId: sections[source.index].id,
 								position: destination.index,
 							},
-							refetchQueries: ['getProjectData'],
+							optimisticResponse: {
+								updateSection: {
+									...sections[source.index],
+									position: destination.index,
+								},
+							},
+							update: (
+								cache,
+								{data: {updateSection: updatedSection}},
+							) => {
+								const dataToUpdate = cache.readFragment({
+									fragment: gql`
+										fragment myProject on Project {
+											sections {
+												id
+												name
+												position
+											}
+										}
+									`,
+									id: projectId,
+								});
+
+								const sectionsInProject = dataToUpdate.sections;
+								const cachedUpdatedSection = sectionsInProject.find(
+									sec => sec.id === updatedSection.id,
+								);
+
+								if (destination.index < source.index) {
+									const sectionsToUpdate = sectionsInProject.filter(
+										sec => sec.position < source.index
+											&& sec.position >= destination.index,
+									);
+
+									sectionsToUpdate.forEach(
+										sec => (sec.position += 1),
+									);
+								}
+								else if (destination.index > source.index) {
+									const sectionsToUpdate = sectionsInProject.filter(
+										sec => sec.position > source.index
+											&& sec.position <= destination.index,
+									);
+
+									sectionsToUpdate.forEach(
+										sec => (sec.position -= 1),
+									);
+								}
+
+								cachedUpdatedSection.position
+									= destination.index;
+
+								cache.writeFragment({
+									fragment: gql`
+										fragment myProject on Project {
+											sections {
+												id
+												name
+												position
+											}
+										}
+									`,
+									id: projectId,
+									data: {
+										...dataToUpdate,
+										sections: sectionsInProject,
+									},
+								});
+							},
 						});
 					}
 					else if (type === 'ITEM') {

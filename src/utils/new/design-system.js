@@ -212,6 +212,7 @@ export const Button = styled('button')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		width: 100%;
 		padding: 0.6rem 0.8rem;
+		display: initial;
 	}
 `;
 

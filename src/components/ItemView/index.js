@@ -78,6 +78,7 @@ const Meta = styled('div')`
 
 	svg {
 		margin-right: 15px;
+		fill: ${primaryGrey};
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {

@@ -379,8 +379,8 @@ export const Input = styled('input')`
 	font-size: inherit;
 
 	background-color: ${props => (props.error ? lightRed : lightPurple)};
-	border-radius: 20px;
-	height: 27px;
+	border-radius: ${props => (props.big ? '24px' : '20px')};
+	height: ${props => (props.big ? '48px' : '27px')};
 	padding: 0 1rem;
 	width: auto;
 	border: 1px solid ${props => (props.error ? primaryRed : 'transparent')};

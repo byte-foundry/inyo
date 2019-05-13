@@ -21,7 +21,8 @@ import {
 } from '../../utils/new/design-system';
 import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
 import {ReactComponent as AddIcon} from '../../utils/icons/add-circle.svg';
-import {ModalActions} from '../../utils/content';
+import {ModalActions, FlexRow} from '../../utils/content';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const FormSubHeading = styled(SubHeading)`
 	grid-column: 1 / 4;
@@ -74,6 +75,16 @@ const CreateProjectGrid = styled('form')`
 	display: grid;
 	grid-template-columns: 400px 1fr 1fr;
 	grid-row-gap: 1.5rem;
+`;
+
+const FlexRowButtons = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+
+		button + button {
+			margin: 10px 0;
+		}
+	}
 `;
 
 export default function ({
@@ -264,27 +275,29 @@ export default function ({
 			)}
 			{(!addCustomer || !addDeadline) && (
 				<CreateProjectRow>
-					{!addCustomer && (
-						<Button
-							onClick={(e) => {
-								e.preventDefault();
-								setAddCustomer(true);
-							}}
-						>
-							Ajouter un client
-						</Button>
-					)}
-					{!addDeadline && (
-						<Button
-							onClick={(e) => {
-								e.preventDefault();
-								setAddDeadline(true);
-								setEditDeadline(true);
-							}}
-						>
-							Ajouter une deadline
-						</Button>
-					)}
+					<FlexRowButtons>
+						{!addCustomer && (
+							<Button
+								onClick={(e) => {
+									e.preventDefault();
+									setAddCustomer(true);
+								}}
+							>
+								Ajouter un client
+							</Button>
+						)}
+						{!addDeadline && (
+							<Button
+								onClick={(e) => {
+									e.preventDefault();
+									setAddDeadline(true);
+									setEditDeadline(true);
+								}}
+							>
+								Ajouter une deadline
+							</Button>
+						)}
+					</FlexRowButtons>
 				</CreateProjectRow>
 			)}
 			<ModalActions>

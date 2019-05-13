@@ -85,6 +85,7 @@ function LoginForm({from = '/app', history, client}) {
 								label="Adresse email"
 								placeholder="jean@dupont.fr"
 								required
+								big
 							/>
 							<FormElem
 								{...props}
@@ -94,6 +95,7 @@ function LoginForm({from = '/app', history, client}) {
 								placeholder="***************"
 								required
 								style={{marginBottom: '5px'}}
+								big
 							/>
 							<ForgotPasswordLinkContainer>
 								<ForgotPasswordLink to="/auth/forgotten-password">

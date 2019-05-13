@@ -14,6 +14,8 @@ import {
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
+import {BREAKPOINTS} from '../../../utils/constants';
+import {A} from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 
 const SectionTitle = styled(H3)`
@@ -27,6 +29,11 @@ const NoTask = styled('div')`
 	display: flex;
 	flex-direction: row;
 	margin-top: 2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const NoTaskIllus = styled('div')`
@@ -82,17 +89,25 @@ const DashboardTasks = () => {
 					<NoTaskContent>
 						<P>
 							Vous n'avez pas de tâches prévues pour aujourd'hui.
-							Pour en ajouter, ouvrez une tâche puis cliquez sur
-							"Je fais cette tâche aujourd'hui" en haut de la
-							fenêtre.
+							Pour en ajouter, ouvrez une tâche puis cliquez sur{' '}
+							<A
+								target="_blank"
+								href="https://inyo.me/documentation/les-principales-vues/vue-tache/activer-une-tache"
+							>
+								{' '}
+								"Je fais cette tâche aujourd'hui"
+							</A>{' '}
+							en haut de la fenêtre.
 						</P>
 						<P>
-							Vous pouvez aussi déclencher l'éxécution d'une tâche
-							client (icône rouge) en ouvrant celle-ci et en
-							cliquant sur "Charger Edwige de faire réaliser cette
-							tâche". Votre client sera alors notifié que vous
-							attendez de lui la réalisation de cette tâche et
-							sera relancé automatiquement si nécessaire.
+							Vous pouvez aussi{' '}
+							<A
+								target="_blank"
+								href="https://inyo.me/documentation/les-principales-vues/vue-tache/activer-une-tache"
+							>
+								activer une tâche client pour que celui-ci soit
+								notifié et qu'il la réalise.
+							</A>
 						</P>
 					</NoTaskContent>
 				</NoTask>

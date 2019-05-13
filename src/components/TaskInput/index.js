@@ -56,7 +56,7 @@ const InputButtonContainer = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: row;
 		width: calc(50vh - 3rem);
-		top: 1.5rem;
+		top: 2.2rem;
 		right: 0;
 		display: flex;
 		flex-direction: row-reverse;
@@ -227,6 +227,13 @@ const TaskInput = ({
 	const ref = useRef();
 	const inputRef = useRef();
 
+	function closeMoreInfos() {
+		setMoreInfosMode(false);
+		setItemDueDate();
+		setItemCustomer();
+		setItemUnit(0);
+	}
+
 	useOnClickOutside(ref, () => {
 		setFocus(false);
 		setOpenedByClick(false);
@@ -269,7 +276,7 @@ const TaskInput = ({
 									name: value,
 								});
 								setValue('');
-								setMoreInfosMode(false);
+								closeMoreInfos();
 								setShowContentAcquisitionInfos(false);
 							}
 							else if (
@@ -280,7 +287,7 @@ const TaskInput = ({
 									name: value,
 								});
 								setValue('');
-								setMoreInfosMode(false);
+								closeMoreInfos();
 								setShowContentAcquisitionInfos(false);
 							}
 							else if (e.key === 'Enter') {
@@ -301,7 +308,7 @@ const TaskInput = ({
 												.join('\n')}`,
 										});
 										setValue('');
-										setMoreInfosMode(false);
+										closeMoreInfos();
 										setShowContentAcquisitionInfos(false);
 									}
 									else {
@@ -320,7 +327,7 @@ const TaskInput = ({
 											itemCustomer && itemCustomer.id,
 									});
 									setValue('');
-									setMoreInfosMode(false);
+									closeMoreInfos();
 								}
 							}
 							else if (e.key === 'Tab') {
@@ -335,7 +342,7 @@ const TaskInput = ({
 						if (e.key === 'Escape') {
 							setValue('');
 							setOpenedByClick(false);
-							setMoreInfosMode(false);
+							closeMoreInfos();
 							setShowContentAcquisitionInfos(false);
 						}
 					}}
@@ -392,7 +399,7 @@ const TaskInput = ({
 															: '',
 												});
 												setValue('');
-												setMoreInfosMode(false);
+												closeMoreInfos();
 												setShowContentAcquisitionInfos(
 													false,
 												);
@@ -416,7 +423,7 @@ const TaskInput = ({
 													&& itemCustomer.id,
 											});
 											setValue('');
-											setMoreInfosMode(false);
+											closeMoreInfos();
 										}
 									}
 								}}
@@ -529,10 +536,7 @@ const TaskInput = ({
 						setValue('');
 						inputRef.current.focus();
 						setOpenedByClick(false);
-						setMoreInfosMode(false);
-						setItemDueDate();
-						setItemCustomer();
-						setItemUnit();
+						closeMoreInfos();
 					}}
 				/>
 			)}

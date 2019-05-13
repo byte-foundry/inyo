@@ -78,6 +78,7 @@ const Meta = styled('div')`
 
 	svg {
 		margin-right: 15px;
+		fill: ${primaryGrey};
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -857,7 +858,7 @@ const Item = ({id, customerToken, close}) => {
 			/>
 			<HR />
 			<FlexRowButtons justifyContent="space-between">
-				<div>
+				<FlexRowButtons>
 					{!customerToken
 						&& (deletingItem ? (
 							<>
@@ -895,7 +896,7 @@ const Item = ({id, customerToken, close}) => {
 							customerToken={customerToken}
 						/>
 					)}
-				</div>
+				</FlexRowButtons>
 				<div>
 					<Button onClick={() => close()}>
 						Enregistrer et fermer

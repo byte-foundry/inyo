@@ -14,6 +14,7 @@ export const TopBarLogo = styled(NavLink)`
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
+	display: block;
 `;
 
 export const TopBarMenu = styled('div')`
@@ -21,6 +22,11 @@ export const TopBarMenu = styled('div')`
 	flex-flow: row nowrap;
 	justify-content: flex-end;
 	align-items: center;
+`;
+
+export const TopBarLogoNotif = styled(TopBarMenu)`
+	margin-right: 20px;
+	justify-content: space-between;
 `;
 
 export const TopBarMenuLink = styled(NavLink)`
@@ -50,6 +56,11 @@ export const TopBarMenuLink = styled(NavLink)`
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-left: 0;
 		margin-right: 1.2rem;
+		font-size: 0.8rem;
+
+		&:first-of-type {
+			margin-left: 0.7rem;
+		}
 	}
 `;
 

@@ -135,6 +135,8 @@ export const Button = styled('button')`
 	}
 
 	border-color: currentColor;
+	display: flex;
+  align-items: center;
 
 	${props => !props.disabled
 		&& css`
@@ -210,6 +212,7 @@ export const Button = styled('button')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		width: 100%;
 		padding: 0.6rem 0.8rem;
+		display: initial;
 	}
 `;
 
@@ -271,7 +274,7 @@ export const Label = styled('label')`
 `;
 
 export const A = styled('a')`
-	font-size: inherit;
+	font-size: 1em;
 	color: ${primaryPurple};
 	text-decoration: none;
 	border-bottom: 2px solid transparent;
@@ -377,8 +380,8 @@ export const Input = styled('input')`
 	font-size: inherit;
 
 	background-color: ${props => (props.error ? lightRed : lightPurple)};
-	border-radius: 20px;
-	height: 27px;
+	border-radius: ${props => (props.big ? '24px' : '20px')};
+	height: ${props => (props.big ? '48px' : '27px')};
 	padding: 0 1rem;
 	width: auto;
 	border: 1px solid ${props => (props.error ? primaryRed : 'transparent')};
@@ -563,6 +566,11 @@ export const Content = styled('div')`
 	${props => (props.small ? 'margin: 0 auto' : '')};
 `;
 
+export const UL = styled('ul')`
+	${props => (props.noBullet ? 'padding: 0' : '')};
+	${props => (props.noBullet ? 'list-style-type: none' : '')};
+`;
+
 export const IllusContainer = styled('div')`
 	height: 660px;
 	background: url('${props => props.bg}');
@@ -689,7 +697,6 @@ export const Select = ({style, ...rest}) => (
 
 export const DateContainer = styled('div')`
 	position: relative;
-	z-index: 1;
 
 	p:hover {
 		position: relative;
@@ -733,6 +740,7 @@ export const BigNumber = styled(P)`
 export const BackButton = styled(Button)`
 	align-self: flex-start;
 	text-transform: uppercase;
+	margin: 1rem 0;
 	${props => props.withMargin && 'margin-bottom: 1rem;'}
 
 	::before {

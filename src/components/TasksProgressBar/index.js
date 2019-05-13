@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+
 import {
 	primaryPurple,
 	lightGrey,
@@ -8,6 +9,7 @@ import {
 	lightPurple,
 	mediumPurple,
 } from '../../utils/new/design-system';
+import Plural from '../Plural';
 
 const TasksProgressBarWrapper = styled('div')`
 	display: flex;
@@ -48,20 +50,11 @@ const TasksProgressBarMain = styled('div')`
 	${props => (props.timeItTook === 0
 		? ''
 		: `&:before {
-			font-size: 0.75rem;
-			line-height: 3rem;
-			text-align: right;
-			overflow: visible;
-			color: ${accentGrey};
 			border-radius: 5px;
 			position: absolute;
 			transition: width 0.2s ease;
 
-			content: ${
-		props.timeItTook >= 0
-			? `"+${props.timeItTook.toFixed(2)} jours"`
-			: `"${props.timeItTook.toFixed(2)} jours"`
-		};
+			content: "";
 			top: ${props.timeItTookPercentage >= 1 ? 0 : '1px'};
 			left: calc(
 				2px +
@@ -91,6 +84,14 @@ const TasksProgressBarLabel = styled('div')`
 	&::after {
 		content: '%';
 	}
+`;
+
+const ExtraDaysLabel = styled('span')`
+	color: ${accentGrey};
+	font-size: 0.75rem;
+	position: absolute;
+	top: 10px;
+	right: calc(100% - ${props => props.left}%);
 `;
 
 function TasksProgressBar({project, customerToken}) {
@@ -148,6 +149,11 @@ function TasksProgressBar({project, customerToken}) {
 			? tasksCompleted / (tasksTotal || 1)
 			: tasksCompleted / (tasksTotalWithTimeItTook || 1);
 
+	const extraDaysLeftPos
+		= (timeItTookPercentage >= 1 ? timeItTookPercentage : 1)
+		* completionRate
+		* 100;
+
 	return (
 		<TasksProgressBarWrapper>
 			<TasksProgressBarLabel>
@@ -159,7 +165,19 @@ function TasksProgressBar({project, customerToken}) {
 				completionRate={completionRate * 100}
 				timeItTook={timeItTook}
 				timeItTookPercentage={timeItTookPercentage}
-			/>
+			>
+				{timeItTook !== 0 && (
+					<ExtraDaysLabel left={extraDaysLeftPos}>
+						{timeItTook >= 0 && '+'}
+						{timeItTook.toFixed(2)}{' '}
+						<Plural
+							value={timeItTook}
+							singular="jour"
+							plural="jours"
+						/>
+					</ExtraDaysLabel>
+				)}
+			</TasksProgressBarMain>
 		</TasksProgressBarWrapper>
 	);
 }

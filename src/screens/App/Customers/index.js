@@ -11,6 +11,7 @@ import {
 	Button,
 	primaryBlack,
 	P,
+	A,
 } from '../../../utils/new/design-system';
 import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import ConfirmModal from '../../../components/ConfirmModal';
@@ -113,15 +114,38 @@ const Row = styled('tr')`
 	}
 `;
 
-const Forms = styled('div')`
+const Actions = styled('div')`
 	display: flex;
-	flex-direction: row-reverse;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+
+	* ~ * {
+		margin-left: 2rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+		justify-content: flex-start;
+
+		* ~ * {
+			margin-left: 0;
+			margin-bottom: 0.5rem;
+		}
+	}
+`;
+
+const Forms = styled('div')`
+	display: grid;
+	grid-template-columns: 50% 1fr;
 	align-items: center;
 	justify-content: space-between;
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
 		flex-direction: column;
-		margin-bottom: 1rem;
+		align-items: stretch;
+		margin-bottom: 2rem;
 	}
 `;
 
@@ -174,9 +198,6 @@ const Customers = () => {
 			<Container>
 				<Heading>Clients</Heading>
 				<Forms>
-					<Button big onClick={() => setEditCustomer(true)}>
-						Créer un nouveau client
-					</Button>
 					<FilterInput
 						icon={Search}
 						name="filter"
@@ -185,6 +206,14 @@ const Customers = () => {
 						onChange={e => setFilter(e.target.value)}
 						value={filter}
 					/>
+					<Actions>
+						<A target="_blank" href="https://inyo.pro">
+							Présenter Inyo à un client
+						</A>
+						<Button big onClick={() => setEditCustomer(true)}>
+							Créer un nouveau client
+						</Button>
+					</Actions>
 				</Forms>
 				<Table>
 					<thead>

@@ -6,7 +6,9 @@ import Tasks from './tasks';
 import CreateTask from '../../../components/CreateTask';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 
-import {Main, Container, Content} from '../../../utils/new/design-system';
+import {
+	Main, Container, Content, Help,
+} from '../../../utils/new/design-system';
 
 function Dashboard({history}) {
 	const setProjectSelected = (selected, removeCustomer) => {
@@ -30,6 +32,13 @@ function Dashboard({history}) {
 
 	return (
 		<Container>
+			<Help
+				customerToken
+				data-tip="Instructions pour utiliser l'interface"
+				onClick={() => history.push('/app/tasks?openHelpModal=true')}
+			>
+				?
+			</Help>
 			<Main>
 				<Content>
 					<CreateTask setProjectSelected={setProjectSelected} />

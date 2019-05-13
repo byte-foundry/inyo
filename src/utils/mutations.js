@@ -853,3 +853,9 @@ export const SEND_REMINDER_PREVIEW_TEST_EMAIL = gql`
 		sent: sendReminderPreviewTestEmail(taskId: $taskId, type: $type)
 	}
 `;
+
+export const MARK_NOTIFICATIONS_AS_READ = gql`
+	mutation markNotificationsAsRead {
+		marked: markNotificationsAsRead
+	}
+`;

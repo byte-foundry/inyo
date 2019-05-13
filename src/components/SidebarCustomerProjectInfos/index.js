@@ -146,7 +146,6 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 
 			<SubSection>
-				<SidebarHeading>Menu Projet</SidebarHeading>
 				<SidebarLink
 					onClick={() => setView('tasks')}
 					active={activeView === 'tasks' || !activeView}
@@ -171,17 +170,16 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 				<IssuerNameAndAddress issuer={project.issuer} />
 			</SubSection>
 
-			<SubSection>
-				<SidebarHeading>Deadline</SidebarHeading>
-				<DateContainer>
-					<BigNumber data-tip="Date limite du projet">
-						{(project.deadline
-							&& moment(project.deadline).format('DD/MM/YYYY')) || (
-							<>&mdash;</>
-						)}
-					</BigNumber>
-				</DateContainer>
-			</SubSection>
+			{project.deadline && (
+				<SubSection>
+					<SidebarHeading>Deadline</SidebarHeading>
+					<DateContainer>
+						<BigNumber data-tip="Date limite du projet">
+							{moment(project.deadline).format('DD/MM/YYYY')}
+						</BigNumber>
+					</DateContainer>
+				</SubSection>
+			)}
 
 			{project.daysUntilDeadline !== null && (
 				<SubSection>

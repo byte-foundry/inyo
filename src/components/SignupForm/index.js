@@ -125,6 +125,7 @@ const SignupForm = ({from, history}) => {
 								label="Adresse email"
 								placeholder="jean@dupont.fr"
 								required
+								big
 							/>
 							<FormElem
 								{...props}
@@ -133,6 +134,7 @@ const SignupForm = ({from, history}) => {
 								label="Mot de passe"
 								placeholder="***************"
 								required
+								big
 							/>
 							<FormElem
 								{...props}
@@ -141,6 +143,7 @@ const SignupForm = ({from, history}) => {
 								label="Prénom"
 								placeholder="Jean"
 								required
+								big
 							/>
 							<FormElem
 								{...props}
@@ -149,6 +152,7 @@ const SignupForm = ({from, history}) => {
 								label="Nom"
 								placeholder="Dupont"
 								required
+								big
 							/>
 							{status && status.msg && (
 								<ErrorInput>{status.msg}</ErrorInput>

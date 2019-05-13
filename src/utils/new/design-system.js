@@ -565,6 +565,11 @@ export const Content = styled('div')`
 	${props => (props.small ? 'margin: 0 auto' : '')};
 `;
 
+export const UL = styled('ul')`
+	${props => (props.noBullet ? 'padding: 0' : '')};
+	${props => (props.noBullet ? 'list-style-type: none' : '')};
+`;
+
 export const IllusContainer = styled('div')`
 	height: 660px;
 	background: url('${props => props.bg}');

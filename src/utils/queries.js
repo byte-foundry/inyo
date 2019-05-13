@@ -438,3 +438,35 @@ export const GET_REMINDERS = gql`
 		}
 	}
 `;
+
+export const GET_USER_NOTIFICATIONS = gql`
+	query getUserNotifications {
+		me {
+			id
+			notifications {
+				id
+				unread
+				eventType
+				from {
+					... on Customer {
+						id
+						title
+						firstName
+						lastName
+					}
+				}
+				object {
+					... on Item {
+						id
+						name
+					}
+					... on Project {
+						id
+						name
+					}
+				}
+				createdAt
+			}
+		}
+	}
+`;

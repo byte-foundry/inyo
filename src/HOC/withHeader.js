@@ -5,12 +5,14 @@ import TopBar, {
 	TopBarLogo,
 	TopBarMenuLink,
 } from '../components/TopBar';
+import NotificationTrayButton from '../components/NotificationTrayButton';
 
 const withHeader = Component => (...args) => (
 	<>
 		<TopBar>
 			<TopBarLogo to="/app/dashboard" />
 			<TopBarMenu>
+				<NotificationTrayButton />
 				<TopBarMenuLink
 					data-tip="Tâches prioritaires"
 					to="/app/dashboard"

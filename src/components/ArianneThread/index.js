@@ -79,14 +79,23 @@ const customSelectStyles = props => ({
 	option: (styles, state) => ({
 		...styles,
 		backgroundColor: state.isSelected ? primaryPurple : primaryWhite,
-		color: state.isSelected
-			? primaryWhite
-			: state.data.colorText || primaryPurple,
-
+		color: primaryPurple,
+		position: 'relative',
 		':hover, :active, :focus': {
 			color: state.data.colorText || primaryWhite,
 			backgroundColor: state.data.colorBg || primaryPurple,
 			cursor: 'pointer',
+		},
+		':before': {
+			content: '""',
+			position: 'absolute',
+			borderRadius: '4px',
+			right: '10px',
+			display: 'block',
+			backgroundColor: state.data.colorBg || 'transparent',
+			top: 'calc(50% - 4px)',
+			width: '30px',
+			height: '8px',
 		},
 	}),
 	placeholder: styles => ({

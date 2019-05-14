@@ -167,12 +167,12 @@ export const REMINDER_TYPES_DATA = {
 		text: customerName => `1er mail envoyé à ${customerName}`,
 	},
 	FIRST: {
-		text: customerName => `1er rappel envoyé à ${customerName}`,
+		text: customerName => `Rappel nº1 envoyé à ${customerName}`,
 	},
 	SECOND: {
-		text: customerName => `2nd rappel envoyé à ${customerName}`,
+		text: customerName => `Rappel nº2 envoyé à ${customerName}`,
 	},
 	LAST: {
-		text: customerName => `Dernier rappel envoyé à ${customerName}`,
+		text: customerName => `Dernier rappel (nº3) envoyé à ${customerName}`,
 	},
 };

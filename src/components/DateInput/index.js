@@ -4,6 +4,7 @@ import moment from 'moment';
 import styled from '@emotion/styled/macro';
 
 import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
+import {BREAKPOINTS} from '../../utils/constants';
 
 import Plural from '../Plural';
 
@@ -24,6 +25,10 @@ const TaskDateInput = styled('div')`
 	}
 	.DayPickerKeyboardShortcuts_show__bottomRight {
 		display: none;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		left: 0;
 	}
 `;
 

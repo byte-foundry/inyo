@@ -109,6 +109,7 @@ const customSelectStyles = props => ({
 	input: styles => ({
 		...styles,
 		padding: 0,
+		flex: 1,
 	}),
 	control: styles => ({
 		...styles,

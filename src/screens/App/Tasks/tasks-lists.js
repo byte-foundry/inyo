@@ -198,8 +198,6 @@ function TasksList({location, history}) {
 
 	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
 
-	console.log(tags);
-
 	return (
 		<Container>
 			<Help

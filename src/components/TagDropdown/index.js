@@ -27,6 +27,7 @@ const TagDropdown = (props) => {
 		<ArianneElemCreatable
 			list={data.me.tags}
 			isMulti
+			closeMenuOnSelect={false}
 			{...props}
 			onCreateOption={onCreateOption}
 		/>

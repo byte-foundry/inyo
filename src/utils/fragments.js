@@ -6,6 +6,9 @@ export const TAG_FRAGMENT = gql`
 		name
 		colorBg
 		colorText
+		items {
+			id
+		}
 	}
 `;
 

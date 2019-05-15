@@ -12,11 +12,16 @@ import {
 	lightPurple,
 	primaryPurple,
 	primaryRed,
+	primaryBlack,
 } from '../../utils/new/design-system';
 
 const A = styled(Link)`
 	text-decoration: none;
-	color: inherit;
+	color: ${primaryGrey};
+
+	&:hover {
+		color: ${primaryBlack};
+	}
 `;
 
 const IconType = styled('div')`

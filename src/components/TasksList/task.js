@@ -208,7 +208,7 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
-	text-decoration: none;
+	text-decoration: ${props => (props.status === itemStatuses.FINISHED ? 'line-through' : 'none')};
 	margin: 0.5rem 0;
 	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryBlack};
@@ -799,6 +799,7 @@ function Task({
 						<TaskHeadingLink
 							noData={noData}
 							small={setTimeItTook}
+							status={item.status}
 							to={{
 								pathname: `${taskUrlPrefix}/${baseUrl}/${
 									item.id

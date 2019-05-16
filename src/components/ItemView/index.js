@@ -29,6 +29,7 @@ import {
 	REMOVE_ITEM,
 	REMOVE_ATTACHMENTS,
 	FOCUS_TASK,
+	UNFOCUS_TASK,
 } from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -288,6 +289,7 @@ const Item = ({id, customerToken, close}) => {
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const focusTask = useMutation(FOCUS_TASK);
+	const unfocusTask = useMutation(UNFOCUS_TASK);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -747,8 +749,24 @@ const Item = ({id, customerToken, close}) => {
 						/>
 						{me.settings.assistantName}
 					</SubHeading>
-					{item.reminders.length > 0 ? (
-						<TaskRemindersList noLink reminders={item.reminders} />
+					{item.isFocused ? (
+						<>
+							<TaskRemindersList
+								noLink
+								reminders={item.reminders}
+							/>
+							<TaskButton
+								onClick={() => {
+									unfocusTask({
+										variables: {itemId: item.id},
+									});
+								}}
+								icon="×"
+							>
+								Ne plus rappeler à {item.linkedCustomer.name} de
+								faire cette tâche
+							</TaskButton>
+						</>
 					) : (
 						<TaskButton
 							onClick={() => {

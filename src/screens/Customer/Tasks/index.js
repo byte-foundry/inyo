@@ -6,8 +6,16 @@ import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
 import CustomerTasks from './tasks';
 
-import {BREAKPOINTS} from '../../../utils/constants';
-import {P, primaryGrey, primaryRed} from '../../../utils/new/design-system';
+import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
+import {
+	P,
+	A,
+	primaryGrey,
+	primaryRed,
+	mediumGrey,
+	primaryBlack,
+	primaryWhite,
+} from '../../../utils/new/design-system';
 
 const Container = styled('div')`
 	min-height: 100vh;
@@ -24,10 +32,44 @@ const WelcomeMessage = styled(P)`
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 3rem;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const Red = styled('span')`
 	color: ${primaryRed};
+`;
+
+export const Help = styled('div')`
+	width: 1.5rem;
+	height: 1.5rem;
+	border: 2px solid transparent;
+	border-radius: 50%;
+	background-color: ${mediumGrey};
+	color: ${primaryBlack};
+	line-height: 0;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	transition: all 300ms ease;
+
+	&:hover {
+		background-color: ${primaryBlack};
+		color: ${primaryWhite};
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const Tasks = ({location, match}) => {
@@ -39,10 +81,20 @@ const Tasks = ({location, match}) => {
 	return (
 		<Container>
 			<WelcomeMessage>
-				Bonjour,
-				<br />
-				Les tâches <Red>rouges</Red> sont celles dont vous êtes
-				responsable.
+				<div>
+					Bonjour,
+					<br />
+					Les tâches <Red>rouges</Red> sont celles dont vous êtes
+					responsable.
+				</div>
+				<A
+					noHover
+					data-tip="À quoi sert cette plateforme ?"
+					target="_blank"
+					href="https://inyo.pro"
+				>
+					<Help>?</Help>
+				</A>
 			</WelcomeMessage>
 
 			<CustomerTasks projectId={projectId} location={location} />

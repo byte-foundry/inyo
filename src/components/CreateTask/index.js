@@ -15,10 +15,7 @@ import {
 	ADD_SECTION,
 	UPDATE_PROJECT,
 } from '../../utils/mutations';
-import {
-	GET_PROJECT_DATA,
-	GET_PROJECT_NOTIFY_ACTIVITY,
-} from '../../utils/queries';
+import {GET_PROJECT_DATA} from '../../utils/queries';
 
 const TaskInputContainer = styled('div')`
 	& + ${TaskContainer} {
@@ -32,11 +29,18 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
-	const {data: currentProjectData} = useQuery(GET_PROJECT_NOTIFY_ACTIVITY, {
-		variables: {id: currentProjectId},
-		skip: !currentProjectId,
-		suspend: true,
-	});
+	const {data: currentProjectData, loading, error} = useQuery(
+		GET_PROJECT_DATA,
+		{
+			variables: {projectId: currentProjectId},
+			skip: !currentProjectId,
+			suspend: true,
+		},
+	);
+
+	if (loading) return false;
+	if (error) throw error;
+
 	const updateProject = useMutation(UPDATE_PROJECT);
 
 	const [confirmModal, askConfirmationNotification] = useConfirmation();
@@ -80,6 +84,13 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	return (
 		<TaskInputContainer>
 			<TaskInput
+				defaultCustomer={
+					currentProjectData
+					&& currentProjectData.project.customer && {
+						id: currentProjectData.project.customer.id,
+						name: currentProjectData.project.customer.name,
+					}
+				}
 				onSubmitTask={async (task) => {
 					if (
 						currentProjectData

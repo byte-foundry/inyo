@@ -331,7 +331,7 @@ const TaskInput = ({
 								}
 							}
 							else if (e.key === 'Tab') {
-								if (!type || type === 'DEFAULT') {
+								if (!type || type !== 'CONTENT_ACQUISITION') {
 									setMoreInfosMode(true);
 								}
 								else if (type === 'CONTENT_ACQUISITION') {

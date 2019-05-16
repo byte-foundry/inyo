@@ -234,6 +234,12 @@ const TaskInput = ({
 		setItemUnit(0);
 	}
 
+	function closeContentAcquisitionInfos() {
+		setShowContentAcquisitionInfos(false);
+		setItemCustomer();
+		setFiles([]);
+	}
+
 	useOnClickOutside(ref, () => {
 		setFocus(false);
 		setOpenedByClick(false);
@@ -277,7 +283,7 @@ const TaskInput = ({
 								});
 								setValue('');
 								closeMoreInfos();
-								setShowContentAcquisitionInfos(false);
+								closeContentAcquisitionInfos();
 							}
 							else if (
 								e.key === 'ArrowDown'
@@ -288,7 +294,7 @@ const TaskInput = ({
 								});
 								setValue('');
 								closeMoreInfos();
-								setShowContentAcquisitionInfos(false);
+								closeContentAcquisitionInfos();
 							}
 							else if (e.key === 'Enter') {
 								e.preventDefault();
@@ -309,7 +315,7 @@ const TaskInput = ({
 										});
 										setValue('');
 										closeMoreInfos();
-										setShowContentAcquisitionInfos(false);
+										closeContentAcquisitionInfos();
 									}
 									else {
 										setShowContentAcquisitionInfos(true);
@@ -328,6 +334,7 @@ const TaskInput = ({
 									});
 									setValue('');
 									closeMoreInfos();
+									closeContentAcquisitionInfos();
 								}
 							}
 							else if (e.key === 'Tab') {
@@ -343,7 +350,7 @@ const TaskInput = ({
 							setValue('');
 							setOpenedByClick(false);
 							closeMoreInfos();
-							setShowContentAcquisitionInfos(false);
+							closeContentAcquisitionInfos();
 						}
 					}}
 					placeholder={
@@ -400,9 +407,7 @@ const TaskInput = ({
 												});
 												setValue('');
 												closeMoreInfos();
-												setShowContentAcquisitionInfos(
-													false,
-												);
+												closeContentAcquisitionInfos();
 											}
 											else {
 												setShowContentAcquisitionInfos(
@@ -424,6 +429,7 @@ const TaskInput = ({
 											});
 											setValue('');
 											closeMoreInfos();
+											closeContentAcquisitionInfos();
 										}
 									}
 								}}
@@ -533,10 +539,14 @@ const TaskInput = ({
 					onSelectCommand={({type: selectedType}) => {
 						setType(selectedType);
 
-						setValue('');
+						if (value.startsWith('/')) {
+							setValue('');
+						}
+
 						inputRef.current.focus();
 						setOpenedByClick(false);
 						closeMoreInfos();
+						closeContentAcquisitionInfos();
 					}}
 				/>
 			)}

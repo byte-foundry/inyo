@@ -4,6 +4,7 @@ import {
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
 	REMINDER_FRAGMENT,
+	TAG_FRAGMENT,
 } from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
@@ -857,12 +858,39 @@ export const SEND_REMINDER_PREVIEW_TEST_EMAIL = gql`
 `;
 
 export const CREATE_TAG = gql`
+	${TAG_FRAGMENT}
+
 	mutation createTag($name: String!, $colorBg: String!, $colorText: String!) {
 		createTag(name: $name, colorBg: $colorBg, colorText: $colorText) {
+			...TagFragment
+		}
+	}
+`;
+
+export const UPDATE_TAG = gql`
+	${TAG_FRAGMENT}
+
+	mutation updateTag(
+		$id: ID!
+		$name: String
+		$colorBg: String
+		$colorText: String
+	) {
+		updateTag(
+			id: $id
+			name: $name
+			colorBg: $colorBg
+			colorText: $colorText
+		) {
+			...TagFragment
+		}
+	}
+`;
+
+export const REMOVE_TAG = gql`
+	mutation removeTag($id: ID!) {
+		removeTag(id: $id) {
 			id
-			name
-			colorBg
-			colorText
 		}
 	}
 `;

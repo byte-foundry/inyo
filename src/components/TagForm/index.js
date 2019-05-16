@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +8,7 @@ import Plural from '../Plural';
 import Tag from '../Tag';
 import FormElem from '../FormElem';
 
+import {UPDATE_TAG, REMOVE_TAG} from '../../utils/mutations';
 import {
 	accentGrey,
 	primaryBlack,
@@ -87,6 +89,9 @@ const ShowColor = styled('div')`
 
 function TagForm({tag}) {
 	const [isEditing, setIsEditing] = useState(false);
+	const [isDeleting, setIsDeleting] = useState(false);
+	const updateTag = useMutation(UPDATE_TAG);
+	const removeTag = useMutation(REMOVE_TAG);
 
 	return (
 		<>
@@ -108,10 +113,48 @@ function TagForm({tag}) {
 					)}
 				</TagItemsNumber>
 				<TagActions>
-					<EditIcon onClick={() => setIsEditing(true)} />
-					<DeleteIcon />
+					<EditIcon
+						onClick={() => {
+							setIsEditing(true);
+							setIsDeleting(false);
+						}}
+					/>
+					<DeleteIcon
+						onClick={() => {
+							setIsDeleting(true);
+							setIsEditing(false);
+						}}
+					/>
 				</TagActions>
 			</TagLine>
+			{isDeleting && (
+				<TagLine>
+					<Button
+						type="button"
+						link
+						grey
+						onClick={() => {
+							setIsDeleting(false);
+						}}
+					>
+						Annuler
+					</Button>
+					<Button
+						type="submit"
+						red
+						onClick={() => {
+							removeTag({
+								variables: {
+									id: tag.id,
+								},
+							});
+							setIsDeleting(false);
+						}}
+					>
+						Supprimer le tag
+					</Button>
+				</TagLine>
+			)}
 			{isEditing && (
 				<TagLine>
 					<Formik
@@ -125,12 +168,37 @@ function TagForm({tag}) {
 							colorBg: Yup.string().matches(/#[0-9a-fA-F]{6}/),
 							colorText: Yup.string().matches(/#[0-9a-fA-F]{6}/),
 						})}
+						onSubmit={async (values, actions) => {
+							actions.setSubmitting(false);
+							try {
+								await updateTag({
+									variables: {
+										id: tag.id,
+										...values,
+									},
+									optimisticResponse: {
+										createTag: {
+											id: tag.id,
+											...values,
+										},
+									},
+								});
+								setIsEditing(false);
+							}
+							catch (error) {
+								actions.setSubmitting(false);
+								actions.setErrors(error);
+								actions.setStatus({
+									msg: "Un problème c'est produit",
+								});
+							}
+						}}
 					>
 						{(props) => {
-							const {handleSubmi, isSubmitting} = props;
+							const {handleSubmit, isSubmitting} = props;
 
 							return (
-								<TagFormElem onSubmit={() => {}}>
+								<TagFormElem onSubmit={handleSubmit}>
 									<TagFormField>
 										<FormElem
 											{...props}
@@ -163,11 +231,17 @@ function TagForm({tag}) {
 											type="button"
 											link
 											grey
-											onClick={() => setIsEditing(false)}
+											onClick={() => {
+												setIsEditing(false);
+											}}
 										>
 											Annuler
 										</Button>
-										<Button disabled={isSubmitting} primary>
+										<Button
+											type="submit"
+											disabled={isSubmitting}
+											primary
+										>
 											Enregistrer
 										</Button>
 									</TagLine>

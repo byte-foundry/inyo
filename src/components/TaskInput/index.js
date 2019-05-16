@@ -209,6 +209,7 @@ const TaskInput = ({
 	onSubmitTask,
 	defaultValue,
 	currentProjectId,
+	defaultCustomer,
 }) => {
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
@@ -318,6 +319,7 @@ const TaskInput = ({
 										closeContentAcquisitionInfos();
 									}
 									else {
+										setItemCustomer(defaultCustomer);
 										setShowContentAcquisitionInfos(true);
 									}
 								}
@@ -342,6 +344,7 @@ const TaskInput = ({
 									setMoreInfosMode(true);
 								}
 								else if (type === 'CONTENT_ACQUISITION') {
+									setItemCustomer(defaultCustomer);
 									setShowContentAcquisitionInfos(true);
 								}
 							}

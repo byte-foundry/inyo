@@ -147,6 +147,11 @@ function TagForm({tag}) {
 								variables: {
 									id: tag.id,
 								},
+								optimisticResponse: {
+									removeTag: {
+										id: tag.id,
+									},
+								},
 							});
 							setIsDeleting(false);
 						}}

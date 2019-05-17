@@ -1,7 +1,8 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom';
 import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
-import Select from 'react-select';
+import Select, {components} from 'react-select';
 import Creatable from 'react-select/lib/Creatable';
 
 import {
@@ -50,6 +51,24 @@ const ArianneElemMain = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex: 1;
 		margin: 0.25rem 0;
+	}
+`;
+
+const ManageTagOption = styled('div')`
+	position: absolute;
+	margin-top: 10px;
+	background: white;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 4px;
+	box-shadow: 0 0 0 1px hsla(0, 0%, 0%, 0.1), 0 4px 11px hsla(0, 0%, 0%, 0.1);
+	top: 100%;
+	cursor: pointer;
+
+	&:hover {
+		background: ${primaryPurple};
+		color: ${primaryWhite};
 	}
 `;
 
@@ -184,6 +203,7 @@ export function ArianneElemCreatable({
 	list,
 	selectedId,
 	long,
+	supplementaryOption,
 	...rest
 }) {
 	const selectedString = selectedId || [];
@@ -206,6 +226,18 @@ export function ArianneElemCreatable({
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
+				components={
+					supplementaryOption && {
+						MenuList: props => (
+							<>
+								<components.MenuList {...props}>
+									{props.children}
+								</components.MenuList>
+								{supplementaryOption}
+							</>
+						),
+					}
+				}
 				noOptionsMessage={() => 'Aucune option'}
 				{...rest}
 			/>
@@ -221,6 +253,8 @@ function ArianneThread({
 	projectId,
 	filterId = 'PENDING',
 	tagsSelected = '',
+	history,
+	location,
 }) {
 	const {
 		data: {
@@ -294,10 +328,27 @@ function ArianneThread({
 				isMulti
 				long
 				short
+				supplementaryOption={
+					<ManageTagOption
+						onClick={() => {
+							history.push({
+								pathname: '/app/tags',
+								state: {
+									prevLocation: location,
+									prevSearch:
+										location.search
+										|| location.state.prevSearch,
+								},
+							});
+						}}
+					>
+						Gérer les tags
+					</ManageTagOption>
+				}
 				placeholder={'Chercher par tags'}
 			/>
 		</ArianneContainer>
 	);
 }
 
-export default ArianneThread;
+export default withRouter(ArianneThread);

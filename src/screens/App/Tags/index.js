@@ -17,7 +17,13 @@ function Tags({location: {state = {}}, history}) {
 		<ProjectMain>
 			<Route path="/app/tags" component={TasksList} />
 			<Modal
-				onDismiss={() => history.push(`/app/tasks${state.prevSearch || ''}`)
+				onDismiss={() => history.push({
+					pathname: state.prevLocation.pathname,
+					state: {
+						prevSearch:
+								state.prevLocation.search || state.prevSearch,
+					},
+				})
 				}
 			>
 				<ModalElem>

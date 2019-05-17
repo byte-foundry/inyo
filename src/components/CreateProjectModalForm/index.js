@@ -108,6 +108,7 @@ export default function ({
 	setAddDeadline,
 	addCustomer,
 	setAddCustomer,
+	setCustomerName,
 	onDismiss,
 	...props
 }) {
@@ -236,6 +237,12 @@ export default function ({
 					<CreateProjectElem big leftMargin>
 						<FormSelect
 							{...props}
+							onInputChange={(value, {action}) => {
+								if (action === 'input-change') {
+									setCustomerName(value);
+								}
+							}}
+							handleBlur={() => {}}
 							options={optionsCustomers}
 							name="customerId"
 							label="Client principal du projet"

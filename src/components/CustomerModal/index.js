@@ -253,7 +253,7 @@ const CustomerModal = ({
 										<CreateCustomerForm>
 											<FormElem
 												{...props}
-												label="Nom"
+												label="Nom de l'entreprise"
 												type="text"
 												required
 												name="name"

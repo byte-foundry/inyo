@@ -34,7 +34,7 @@ function LoginForm({from = '/app', history, client}) {
 	return (
 		<LoginFormMain>
 			<Formik
-				initialValues={{email: ''}}
+				initialValues={{email: '', password: ''}}
 				validationSchema={Yup.object().shape({
 					email: Yup.string()
 						.email("L'email n'est pas valide")

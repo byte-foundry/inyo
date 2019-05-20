@@ -46,7 +46,7 @@ const SignupForm = ({from, history}) => {
 							"L'email est déjà utilisé",
 							value => debouncedCheckEmail({
 								variables: {
-									email: value,
+									email: value || '',
 								},
 							}).then(({data}) => data.isAvailable),
 						),

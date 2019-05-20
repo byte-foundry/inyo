@@ -12,6 +12,7 @@ import {
 	primaryGrey,
 	primaryRed,
 	primaryWhite,
+	lightGrey,
 } from '../../utils/new/design-system';
 import {Loading} from '../../utils/content';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
@@ -29,6 +30,7 @@ const Dropdown = styled('div')`
 	box-shadow: 0 0 10px ${primaryGrey};
 	border-radius: 3px;
 	background: ${primaryWhite};
+
 	@media (max-width: ${BREAKPOINTS}px) {
 		width: calc(100% - 10px);
 	}
@@ -71,6 +73,10 @@ const List = styled('ul')`
 
 const Item = styled('li')`
 	display: block;
+
+	&:nth-child(odd) {
+		background: ${lightGrey};
+	}
 
 	& + li {
 		margin-top: 2px;

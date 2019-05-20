@@ -6,7 +6,9 @@
     "start": "cross-env REACT_APP_INYO_ENV=development react-scripts start",
     "build": "react-scripts build",
     "storybook": "start-storybook",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "cypress": "cypress open",
+	"e2e": "cypress run --record --key $CYPRESS_RECORD_KEY"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,11 +29,13 @@
     "apollo-link-error": "^1.1.10",
     "apollo-link-watched-mutation": "^0.2.4",
     "apollo-upload-client": "^10.0.0",
+    "cypress": "^3.3.0",
     "debounce-promise": "^3.1.0",
     "draft-js": "^0.10.5",
     "emotion": "^9.2.12",
     "escape-html": "^1.0.3",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-cypress": "^2.2.1",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",

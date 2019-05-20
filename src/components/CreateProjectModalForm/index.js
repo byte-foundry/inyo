@@ -52,6 +52,10 @@ const CreateProjectRow = styled('div')`
 	${props => (props.third ? 'display: grid;' : '')}
 	${props => (props.third ? 'grid-template-columns: 150px 1fr 150px;' : '')}
 	${props => (props.third ? 'align-items: end;' : '')}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: block;
+	}
 `;
 
 const CreateProjectElem = styled('div')`
@@ -69,12 +73,21 @@ const CreateProjectElem = styled('div')`
 		margin-bottom: 9px;
 	`}
 	${props => (props.leftMargin ? 'margin-left: -1rem;' : '')}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+	}
 `;
 
 const CreateProjectGrid = styled('form')`
 	display: grid;
 	grid-template-columns: 400px 1fr 1fr;
 	grid-row-gap: 1.5rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const FlexRowButtons = styled(FlexRow)`
@@ -95,6 +108,7 @@ export default function ({
 	setAddDeadline,
 	addCustomer,
 	setAddCustomer,
+	setCustomerName,
 	onDismiss,
 	...props
 }) {
@@ -223,6 +237,12 @@ export default function ({
 					<CreateProjectElem big leftMargin>
 						<FormSelect
 							{...props}
+							onInputChange={(value, {action}) => {
+								if (action === 'input-change') {
+									setCustomerName(value);
+								}
+							}}
+							handleBlur={() => {}}
 							options={optionsCustomers}
 							name="customerId"
 							label="Client principal du projet"

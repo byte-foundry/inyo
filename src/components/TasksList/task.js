@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import ClockIconSvg from '../../utils/icons/clock.svg';
 import FilesIconSvg from '../../utils/icons/file.svg';
+import TagIconSvg from '../../utils/icons/tags.svg';
 import DateIconSvg from '../../utils/icons/date.svg';
 import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
@@ -208,7 +209,7 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
-	text-decoration: none;
+	text-decoration: ${props => (props.status === itemStatuses.FINISHED ? 'line-through' : 'none')};
 	margin: 0.5rem 0;
 	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryBlack};
@@ -358,6 +359,19 @@ const FocusStateIcon = styled('div')`
 
 	:hover ${NotificationsState} {
 		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)}');
+	}
+`;
+
+const Tag = styled(Link)`
+	background-color: ${props => props.bg};
+	color: ${props => props.color};
+	border-radius: 2px;
+	padding: 0 3px;
+	margin-right: 5px;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: none;
 	}
 `;
 
@@ -673,6 +687,26 @@ export function TaskInfosInputs({
 					}
 				/>
 			)}
+			{item.tags && item.tags.length > 0 && (
+				<TaskIconText
+					data-tip="Tags"
+					inactive={true}
+					icon={<TaskInfosIcon icon={TagIconSvg} />}
+					content={
+						<>
+							{item.tags.map(tag => (
+								<Tag
+									to={{search: `?tags=${tag.id}`}}
+									bg={tag.colorBg}
+									color={tag.colorText}
+								>
+									{tag.name}
+								</Tag>
+							))}
+						</>
+					}
+				/>
+			)}
 		</TaskInfos>
 	);
 }
@@ -799,6 +833,7 @@ function Task({
 						<TaskHeadingLink
 							noData={noData}
 							small={setTimeItTook}
+							status={item.status}
 							to={{
 								pathname: `${taskUrlPrefix}/${baseUrl}/${
 									item.id

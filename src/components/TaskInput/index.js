@@ -209,6 +209,7 @@ const TaskInput = ({
 	onSubmitTask,
 	defaultValue,
 	currentProjectId,
+	defaultCustomer,
 }) => {
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
@@ -232,6 +233,12 @@ const TaskInput = ({
 		setItemDueDate();
 		setItemCustomer();
 		setItemUnit(0);
+	}
+
+	function closeContentAcquisitionInfos() {
+		setShowContentAcquisitionInfos(false);
+		setItemCustomer();
+		setFiles([]);
 	}
 
 	useOnClickOutside(ref, () => {
@@ -277,7 +284,7 @@ const TaskInput = ({
 								});
 								setValue('');
 								closeMoreInfos();
-								setShowContentAcquisitionInfos(false);
+								closeContentAcquisitionInfos();
 							}
 							else if (
 								e.key === 'ArrowDown'
@@ -288,7 +295,7 @@ const TaskInput = ({
 								});
 								setValue('');
 								closeMoreInfos();
-								setShowContentAcquisitionInfos(false);
+								closeContentAcquisitionInfos();
 							}
 							else if (e.key === 'Enter') {
 								e.preventDefault();
@@ -309,9 +316,10 @@ const TaskInput = ({
 										});
 										setValue('');
 										closeMoreInfos();
-										setShowContentAcquisitionInfos(false);
+										closeContentAcquisitionInfos();
 									}
 									else {
+										setItemCustomer(defaultCustomer);
 										setShowContentAcquisitionInfos(true);
 									}
 								}
@@ -328,13 +336,15 @@ const TaskInput = ({
 									});
 									setValue('');
 									closeMoreInfos();
+									closeContentAcquisitionInfos();
 								}
 							}
 							else if (e.key === 'Tab') {
-								if (!type || type === 'DEFAULT') {
+								if (!type || type !== 'CONTENT_ACQUISITION') {
 									setMoreInfosMode(true);
 								}
 								else if (type === 'CONTENT_ACQUISITION') {
+									setItemCustomer(defaultCustomer);
 									setShowContentAcquisitionInfos(true);
 								}
 							}
@@ -343,7 +353,7 @@ const TaskInput = ({
 							setValue('');
 							setOpenedByClick(false);
 							closeMoreInfos();
-							setShowContentAcquisitionInfos(false);
+							closeContentAcquisitionInfos();
 						}
 					}}
 					placeholder={
@@ -400,9 +410,7 @@ const TaskInput = ({
 												});
 												setValue('');
 												closeMoreInfos();
-												setShowContentAcquisitionInfos(
-													false,
-												);
+												closeContentAcquisitionInfos();
 											}
 											else {
 												setShowContentAcquisitionInfos(
@@ -424,6 +432,7 @@ const TaskInput = ({
 											});
 											setValue('');
 											closeMoreInfos();
+											closeContentAcquisitionInfos();
 										}
 									}
 								}}
@@ -533,10 +542,14 @@ const TaskInput = ({
 					onSelectCommand={({type: selectedType}) => {
 						setType(selectedType);
 
-						setValue('');
+						if (value.startsWith('/')) {
+							setValue('');
+						}
+
 						inputRef.current.focus();
 						setOpenedByClick(false);
 						closeMoreInfos();
+						closeContentAcquisitionInfos();
 					}}
 				/>
 			)}

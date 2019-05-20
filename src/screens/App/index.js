@@ -6,6 +6,7 @@ import Onboarding from './Onboarding';
 import Dashboard from './Dashboard';
 import Account from './Account';
 import Tasks from './Tasks';
+import Tags from './Tags';
 import CustomerList from './Customers';
 import Projects from './Projects';
 
@@ -37,6 +38,7 @@ function App() {
 				/>
 				<Route path="/app/account" component={withHeader(Account)} />
 				<Route path="/app/tasks" component={withHeader(Tasks)} />
+				<Route path="/app/tags" component={withHeader(Tags)} />
 				<Route path="/app/projects" component={withHeader(Projects)} />
 				<Route
 					path="/app/customers"

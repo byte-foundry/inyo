@@ -17,6 +17,7 @@ import {
 } from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import {Loading} from '../../utils/content';
+import {BREAKPOINTS} from '../../utils/constants';
 
 const TemplateSubHeading = styled(SubHeading)`
 	margin-bottom: 1.5rem;
@@ -25,6 +26,11 @@ const TemplateSubHeading = styled(SubHeading)`
 const TemplateContent = styled('div')`
 	display: flex;
 	margin-left: -1rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: 0;
+		flex-direction: column;
+	}
 `;
 
 const Column = styled('div')`
@@ -42,6 +48,11 @@ const TemplateButton = styled(Button)`
 
 const TemplateColumnSmall = styled('div')`
 	flex: 0.6;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex: 1;
+		margin-top: 1rem;
+	}
 `;
 
 const TemplateColumn = styled('div')`
@@ -49,6 +60,11 @@ const TemplateColumn = styled('div')`
 	font-size: 13px;
 	position: relative;
 	margin-left: 0.5rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: 0;
+		margin-top: 1rem;
+	}
 `;
 
 const TemplateColumnLabel = styled(Label)`

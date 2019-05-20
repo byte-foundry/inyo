@@ -18,6 +18,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 	const [viewContent, setViewContent] = useState(false);
 	const [createCustomer, setCreateCustomer] = useState(false);
 	const [addCustomer, setAddCustomer] = useState(false);
+	const [customerName, setCustomerName] = useState('');
 	const [addDeadline, setAddDeadline] = useState(false);
 	const createProject = useMutation(CREATE_PROJECT);
 	const client = useApolloClient();
@@ -139,6 +140,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 										addCustomer={addCustomer}
 										setAddDeadline={setAddDeadline}
 										setAddCustomer={setAddCustomer}
+										setCustomerName={setCustomerName}
 										optionsProjects={optionsProjects}
 									/>
 								</ModalElem>
@@ -162,7 +164,9 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 						<CustomerModalAndMail
 							noSelect
 							withBack
+							customer={{name: customerName}}
 							onDismiss={() => {
+								setCustomerName('');
 								setCreateCustomer(false);
 							}}
 							onValidate={({id}) => {

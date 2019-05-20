@@ -167,12 +167,34 @@ export const REMINDER_TYPES_DATA = {
 		text: customerName => `1er mail envoyé à ${customerName}`,
 	},
 	FIRST: {
-		text: customerName => `1er rappel envoyé à ${customerName}`,
+		text: customerName => `Rappel nº1 envoyé à ${customerName}`,
 	},
 	SECOND: {
-		text: customerName => `2nd rappel envoyé à ${customerName}`,
+		text: customerName => `Rappel nº2 envoyé à ${customerName}`,
 	},
 	LAST: {
-		text: customerName => `Dernier rappel envoyé à ${customerName}`,
+		text: customerName => `Dernier rappel (nº3) envoyé à ${customerName}`,
 	},
 };
+
+export const TAG_COLOR_PALETTE = [
+	[[244, 67, 54], [255, 255, 255]],
+	[[233, 30, 99], [255, 255, 255]],
+	[[156, 39, 176], [255, 255, 255]],
+	[[103, 58, 183], [255, 255, 255]],
+	[[63, 81, 181], [255, 255, 255]],
+	[[33, 150, 243], [255, 255, 255]],
+	[[3, 169, 244], [255, 255, 255]],
+	[[0, 188, 212], [255, 255, 255]],
+	[[0, 150, 136], [255, 255, 255]],
+	[[76, 175, 80], [255, 255, 255]],
+	[[139, 195, 74], [255, 255, 255]],
+	[[205, 220, 57], [51, 51, 51]],
+	[[255, 235, 59], [51, 51, 51]],
+	[[255, 193, 7], [51, 51, 51]],
+	[[255, 152, 0], [255, 255, 255]],
+	[[255, 87, 34], [255, 255, 255]],
+	[[121, 85, 72], [255, 255, 255]],
+	[[158, 158, 158], [255, 255, 255]],
+	[[96, 125, 139], [255, 255, 255]],
+];

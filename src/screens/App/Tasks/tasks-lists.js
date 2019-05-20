@@ -58,7 +58,9 @@ const TaskAndArianne = styled('div')`
 	flex: auto;
 `;
 
-function TasksListContainer({projectId, linkedCustomerId, filter}) {
+function TasksListContainer({
+	projectId, linkedCustomerId, filter, tags,
+}) {
 	const {data, error} = useQuery(GET_ALL_TASKS, {
 		variables: {
 			linkedCustomerId: linkedCustomerId || undefined,
@@ -72,7 +74,8 @@ function TasksListContainer({projectId, linkedCustomerId, filter}) {
 		task => (!filter || task.status === filter || filter === 'ALL')
 			&& (!task.section
 				|| task.section.project.status === 'ONGOING'
-				|| projectId),
+				|| projectId)
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
 	// order by creation date
@@ -127,6 +130,7 @@ function TasksList({location, history}) {
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 	const view = query.get('view');
+	const tags = query.getAll('tags');
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -182,6 +186,19 @@ function TasksList({location, history}) {
 		history.push(`/app/tasks?${newQuery.toString()}`);
 	};
 
+	const setTagSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		newQuery.delete('view');
+
+		if (selected) {
+			newQuery.delete('tags');
+			selected.forEach(tag => newQuery.append('tags', tag.value));
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
 	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
 
 	return (
@@ -200,7 +217,9 @@ function TasksList({location, history}) {
 					selectCustomer={setCustomerSelected}
 					selectProjects={setProjectSelected}
 					selectFilter={setFilterSelected}
+					selectTag={setTagSelected}
 					filterId={filter}
+					tagsSelected={tags}
 				/>
 				{projectId && (
 					<ProjectHeader
@@ -229,6 +248,7 @@ function TasksList({location, history}) {
 									projectId={projectId}
 									linkedCustomerId={linkedCustomerId}
 									filter={filter}
+									tags={tags}
 								/>
 							</Suspense>
 						</Content>

@@ -3,7 +3,9 @@ import React, {useState} from 'react';
 import CustomerIntroMail from '../CustomerIntroMail';
 import CustomerModal from '../CustomerModal';
 
-function CustomerModalAndMail({onDismiss, onValidate, ...rest}) {
+function CustomerModalAndMail({
+	onDismiss, onValidate, customer, ...rest
+}) {
 	const [createdCustomer, setCreatedCustomer] = useState(false);
 
 	return createdCustomer ? (
@@ -16,6 +18,7 @@ function CustomerModalAndMail({onDismiss, onValidate, ...rest}) {
 	) : (
 		<CustomerModal
 			{...rest}
+			customer={customer}
 			onDismiss={onDismiss}
 			onValidate={onValidate}
 			onCustomerWasCreated={(customer) => {

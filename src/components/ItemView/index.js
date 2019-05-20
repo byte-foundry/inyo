@@ -18,10 +18,12 @@ import UnitInput from '../UnitInput';
 import DateInput from '../DateInput';
 import CustomersDropdown from '../CustomersDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
+import TagDropdown from '../TagDropdown';
 import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
+import TagList from '../TagList';
 
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -29,6 +31,8 @@ import {
 	REMOVE_ITEM,
 	REMOVE_ATTACHMENTS,
 	FOCUS_TASK,
+	UNFOCUS_TASK,
+	CREATE_TAG,
 } from '../../utils/mutations';
 import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
 import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
@@ -37,6 +41,7 @@ import TrashIcon from '../../utils/icons/trash-icon.svg';
 import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
 import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
 import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
+import {ReactComponent as TagIcon} from '../../utils/icons/tags.svg';
 import {
 	TaskHeading,
 	SubHeading,
@@ -53,14 +58,19 @@ import {
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
-import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import {
+	ITEM_TYPES,
+	TOOLTIP_DELAY,
+	BREAKPOINTS,
+	TAG_COLOR_PALETTE,
+} from '../../utils/constants';
 
 const Header = styled('div')``;
 
 const Metas = styled('div')`
 	display: grid;
 	grid-template-columns: 340px 1fr;
-	grid-row-gap: 0.8em;
+	grid-row-gap: 5px;
 	color: ${gray50};
 	padding-bottom: 2rem;
 	font-size: 14px;
@@ -75,8 +85,9 @@ const Metas = styled('div')`
 const Meta = styled('div')`
 	display: flex;
 	align-items: flex-start;
+	min-height: 1.25rem;
 
-	svg {
+	& > svg {
 		margin-right: 15px;
 		fill: ${primaryGrey};
 	}
@@ -88,6 +99,7 @@ const Meta = styled('div')`
 
 const MetaLabel = styled('div')`
 	margin-right: 1rem;
+	min-width: 40px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
@@ -100,7 +112,19 @@ const MetaText = styled('span')`
 	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
 
 	:empty::before {
-		content: '\\2014';
+		content: '+';
+		border: 1px solid ${primaryPurple};
+		border-radius: 50%;
+		width: 0.85rem;
+		height: 0.8rem;
+		font-size: 0.8rem;
+		display: flex;
+		text-align: center;
+		flex-direction: column;
+		line-height: 1;
+		position: relative;
+		top: 2px;
+		left: -2px;
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -272,6 +296,7 @@ const Item = ({id, customerToken, close}) => {
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
+	const [editTags, setEditTags] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
 	const [isActivating, setIsActivating] = useState(false);
 	const dateRef = useRef();
@@ -288,6 +313,8 @@ const Item = ({id, customerToken, close}) => {
 
 	const updateItem = useMutation(UPDATE_ITEM);
 	const focusTask = useMutation(FOCUS_TASK);
+	const unfocusTask = useMutation(UNFOCUS_TASK);
+	const createTag = useMutation(CREATE_TAG);
 	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
@@ -705,6 +732,60 @@ const Item = ({id, customerToken, close}) => {
 					<MetaLabel>Type de tâche</MetaLabel>
 					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
+				{!customerToken && (
+					<Meta data-tip="Tag de la tâche">
+						<TagIcon />
+						<MetaLabel>Tags</MetaLabel>
+						<TagDropdown
+							id="tags"
+							long
+							placeholder="Ajouter ou créer un tag"
+							value={item.tags.map(tag => ({
+								value: tag.id,
+								label: tag.name,
+								colorBg: tag.colorBg,
+								colorText: tag.colorText,
+							}))}
+							onCreateOption={async (
+								name,
+								colorBg,
+								colorText,
+							) => {
+								const {
+									data: {createTag: tag},
+								} = await createTag({
+									variables: {
+										name,
+										colorBg,
+										colorText,
+									},
+								});
+
+								updateItem({
+									variables: {
+										itemId: item.id,
+										tags: [
+											...item.tags.map(i => i.id),
+											tag.id,
+										],
+									},
+								});
+							}}
+							onChange={(tags) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										tags: tags.map(({value}) => value),
+									},
+								});
+								setEditTags(false);
+							}}
+							onBlur={() => {
+								setEditTags(false);
+							}}
+						/>
+					</Meta>
+				)}
 			</Metas>
 			{(!customerToken || description) && (
 				<Description data-tip="Description de la tâche">
@@ -747,8 +828,24 @@ const Item = ({id, customerToken, close}) => {
 						/>
 						{me.settings.assistantName}
 					</SubHeading>
-					{item.reminders.length > 0 ? (
-						<TaskRemindersList noLink reminders={item.reminders} />
+					{item.isFocused ? (
+						<>
+							<TaskRemindersList
+								noLink
+								reminders={item.reminders}
+							/>
+							<TaskButton
+								onClick={() => {
+									unfocusTask({
+										variables: {itemId: item.id},
+									});
+								}}
+								icon="×"
+							>
+								Ne plus rappeler à {item.linkedCustomer.name} de
+								faire cette tâche
+							</TaskButton>
+						</>
 					) : (
 						<TaskButton
 							onClick={() => {

@@ -42,7 +42,7 @@ const ReminderTestEmailButton = ({
 	}
 
 	if (status === 'done') {
-		return <Status>Envoyé ✔</Status>;
+		return <Status>Test Envoyé ✔</Status>;
 	}
 
 	if (status === 'error') {

@@ -105,7 +105,7 @@ const ProjectNotes = ({
 						placeholder={`Écrivez des notes...
 Pour accèder aux options sélectionnez un bout de texte. Vous pouvez aussi utiliser markdown.`}
 					/>
-					{saved && <EditorToast>Sauvé!</EditorToast>}
+					{saved && <EditorToast>Sauvegardé !</EditorToast>}
 				</TextEditorMain>
 			</TasksListContainer>
 		</ProjectNotesContainer>

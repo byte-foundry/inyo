@@ -137,6 +137,7 @@ export const Button = styled('button')`
 	border-color: currentColor;
 	display: flex;
   align-items: center;
+	justify-content: center;
 
 	${props => !props.disabled
 		&& css`
@@ -278,6 +279,7 @@ export const A = styled('a')`
 	color: ${primaryPurple};
 	text-decoration: none;
 	border-bottom: 2px solid transparent;
+	${props => props.noHover && 'border: none;'}
 
 	&:hover {
 		border-color: ${primaryPurple};

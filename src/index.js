@@ -167,6 +167,7 @@ function Root() {
 								'/app/account',
 								'/app/dashboard',
 								'/app/tasks',
+								'/app/tags',
 							]}
 							render={props => <ConditionalContent {...props} />}
 							isAllowed={data && data.me}

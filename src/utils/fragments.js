@@ -1,5 +1,17 @@
 import gql from 'graphql-tag';
 
+export const TAG_FRAGMENT = gql`
+	fragment TagFragment on Tag {
+		id
+		name
+		colorBg
+		colorText
+		items {
+			id
+		}
+	}
+`;
+
 export const REMINDER_FRAGMENT = gql`
 	fragment ReminderFragment on Reminder {
 		id
@@ -52,6 +64,7 @@ export const COMMENT_ON_ITEM_FRAGMENT = gql`
 export const ITEM_FRAGMENT = gql`
 	${COMMENT_ON_ITEM_FRAGMENT}
 	${REMINDER_FRAGMENT}
+	${TAG_FRAGMENT}
 
 	fragment ItemFragment on Item {
 		id
@@ -86,6 +99,10 @@ export const ITEM_FRAGMENT = gql`
 		linkedCustomer {
 			id
 			name
+		}
+
+		tags {
+			...TagFragment
 		}
 
 		section {

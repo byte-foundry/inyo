@@ -1,24 +1,24 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
-import {useQuery} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
-import Select, {components} from 'react-select';
-import Creatable from 'react-select/lib/Creatable';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { useQuery } from "react-apollo-hooks";
+import styled from "@emotion/styled";
+import Select, { components } from "react-select";
+import Creatable from "react-select/lib/Creatable";
 
 import {
 	primaryPurple,
 	primaryWhite,
 	lightGrey,
-	primaryRed,
-} from '../../utils/new/design-system';
+	primaryRed
+} from "../../utils/new/design-system";
 import {
 	GET_ALL_CUSTOMERS,
 	GET_ALL_PROJECTS,
-	GET_USER_TAGS,
-} from '../../utils/queries';
-import {BREAKPOINTS} from '../../utils/constants';
+	GET_USER_TAGS
+} from "../../utils/queries";
+import { BREAKPOINTS } from "../../utils/constants";
 
-const ArianneContainer = styled('div')`
+const ArianneContainer = styled("div")`
 	display: flex;
 	margin-bottom: 60px;
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -27,8 +27,8 @@ const ArianneContainer = styled('div')`
 	}
 `;
 
-const ArianneElemMain = styled('div')`
-	flex: ${props => (props.long ? '0 0 280px' : '0 0 170px')};
+const ArianneElemMain = styled("div")`
+	flex: ${props => (props.long ? "0 0 280px" : "0 0 170px")};
 	margin-right: 1rem;
 	position: relative;
 
@@ -36,7 +36,7 @@ const ArianneElemMain = styled('div')`
 		cursor: text;
 
 		&:before {
-			content: '';
+			content: "";
 			display: block;
 			background: ${lightGrey};
 			position: absolute;
@@ -54,7 +54,7 @@ const ArianneElemMain = styled('div')`
 	}
 `;
 
-const ManageTagOption = styled('div')`
+const ManageTagOption = styled("div")`
 	position: absolute;
 	margin-top: 10px;
 	background: white;
@@ -77,9 +77,9 @@ const customSelectStyles = props => ({
 		...styles,
 		color: primaryPurple,
 		padding: 0,
-		marginRight: '.5rem',
-		marginTop: '-2px',
-		transform: 'scale(.7)',
+		marginRight: ".5rem",
+		marginTop: "-2px",
+		transform: "scale(.7)"
 	}),
 	clearIndicator: styles => ({
 		...styles,
@@ -87,98 +87,96 @@ const customSelectStyles = props => ({
 		padding: 0,
 		paddingBottom: 0,
 		background: primaryPurple,
-		borderRadius: '50%',
-		transform: 'scale(.7)',
+		borderRadius: "50%",
+		transform: "scale(.7)",
 
-		':hover, :active, :focus': {
+		":hover, :active, :focus": {
 			background: primaryRed,
-			color: primaryWhite,
-		},
+			color: primaryWhite
+		}
 	}),
 	option: (styles, state) => ({
 		...styles,
 		backgroundColor: state.isSelected ? primaryPurple : primaryWhite,
 		color: primaryPurple,
-		position: 'relative',
-		':hover, :active, :focus': {
+		position: "relative",
+		":hover, :active, :focus": {
 			color: state.data.colorText || primaryWhite,
 			backgroundColor: state.data.colorBg || primaryPurple,
-			cursor: 'pointer',
+			cursor: "pointer"
 		},
-		':before': {
+		":before": {
 			content: '""',
-			position: 'absolute',
-			borderRadius: '4px',
-			right: '10px',
-			display: 'block',
-			backgroundColor: state.data.colorBg || 'transparent',
-			top: 'calc(50% - 4px)',
-			width: '30px',
-			height: '8px',
-		},
+			position: "absolute",
+			borderRadius: "4px",
+			right: "10px",
+			display: "block",
+			backgroundColor: state.data.colorBg || "transparent",
+			top: "calc(50% - 4px)",
+			width: "30px",
+			height: "8px"
+		}
 	}),
 	placeholder: styles => ({
 		...styles,
-		color: primaryPurple,
+		color: primaryPurple
 	}),
 	singleValue: styles => ({
 		...styles,
-		color: primaryPurple,
+		color: primaryPurple
 	}),
 	input: styles => ({
 		...styles,
 		padding: 0,
-		flex: 1,
+		flex: 1
 	}),
 	control: styles => ({
 		...styles,
-		border: 'none',
-		boxShadow: 'none',
-		minHeight: 'auto',
-		':hover, :focus, :active': {
-			border: 'none',
-			boxShadow: 'none',
-			cursor: 'pointer',
+		border: "none",
+		boxShadow: "none",
+		minHeight: "auto",
+		":hover, :focus, :active": {
+			border: "none",
+			boxShadow: "none",
+			cursor: "pointer"
 		},
-		fontSize: '14px',
-		overflow: 'hidden',
-		textOverflow: 'ellipsis',
-		backgroundColor: 'transparent',
+		fontSize: "14px",
+		overflow: "hidden",
+		textOverflow: "ellipsis",
+		backgroundColor: "transparent"
 	}),
 	indicatorSeparator: () => ({
-		backgroundColor: 'transparent',
+		backgroundColor: "transparent"
 	}),
 	menu: styles => ({
 		...styles,
-		width: '300px',
-		fontSize: '14px',
+		width: "300px",
+		fontSize: "14px"
 	}),
 	valueContainer: styles => ({
 		...styles,
 		padding: 0,
-		height: props.short ? '27px' : 'auto',
-		overflow: 'auto',
+		height: props.short ? "27px" : "auto",
+		overflow: "auto"
 	}),
 	container: styles => ({
 		...styles,
 		padding: 0,
-		backgroundColor: 'transparent',
+		backgroundColor: "transparent"
 	}),
-	multiValue: (styles, {data}) => ({
+	multiValue: (styles, { data }) => ({
 		...styles,
 		backgroundColor: data.colorBg,
-		color: data.colorText,
+		color: data.colorText
 	}),
-	multiValueLabel: (styles, {data}) => ({
+	multiValueLabel: (styles, { data }) => ({
 		...styles,
-		color: data.colorText,
-	}),
+		color: data.colorText
+	})
 });
 
-export function ArianneElem({
-	children, id, list, selectedId, ...rest
-}) {
-	const options = list.map(item => ({value: item.id, label: item.name}));
+export function ArianneElem({ children, id, list, selectedId, ...rest }) {
+	const options = list.map(item => ({ value: item.id, label: item.name }));
 	const selectedItem = options.find(item => item.value === selectedId);
 
 	return (
@@ -186,11 +184,11 @@ export function ArianneElem({
 			<Select
 				placeholder={children}
 				options={options}
-				styles={customSelectStyles({...rest})}
+				styles={customSelectStyles({ ...rest })}
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
-				noOptionsMessage={() => 'Aucune option'}
+				noOptionsMessage={() => "Aucune option"}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -211,7 +209,7 @@ export function ArianneElemCreatable({
 		value: item.id,
 		label: item.name,
 		colorBg: item.colorBg,
-		colorText: item.colorText,
+		colorText: item.colorText
 	}));
 	const selectedItem = rest.isMulti
 		? options.filter(item => selectedString.find(i => i === item.value))
@@ -222,7 +220,7 @@ export function ArianneElemCreatable({
 			<Creatable
 				placeholder={children}
 				options={options}
-				styles={customSelectStyles({...rest})}
+				styles={customSelectStyles({ ...rest })}
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
@@ -235,10 +233,10 @@ export function ArianneElemCreatable({
 								</components.MenuList>
 								{supplementaryOption}
 							</>
-						),
+						)
 					}
 				}
-				noOptionsMessage={() => 'Aucune option'}
+				noOptionsMessage={() => "Aucune option"}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -251,42 +249,43 @@ function ArianneThread({
 	selectTag,
 	linkedCustomerId,
 	projectId,
-	filterId = 'PENDING',
-	tagsSelected = '',
+	filterId = "PENDING",
+	tagsSelected = "",
 	history,
-	location,
+	location
 }) {
 	const {
 		data: {
-			me: {customers},
+			me: { customers }
 		},
-		errors: errorsCustomers,
-	} = useQuery(GET_ALL_CUSTOMERS, {suspend: true});
+		errors: errorsCustomers
+	} = useQuery(GET_ALL_CUSTOMERS, { suspend: true });
 	const {
 		data: {
-			me: {projects: projectsUnfiltered},
+			me: { projects: projectsUnfiltered }
 		},
-		errors: errorsProject,
-	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
+		errors: errorsProject
+	} = useQuery(GET_ALL_PROJECTS, { suspend: true });
 	const {
 		loading,
 		data: {
-			me: {tags},
+			me: { tags }
 		},
-		errors: errorsTags,
-	} = useQuery(GET_USER_TAGS, {suspend: false});
+		errors: errorsTags
+	} = useQuery(GET_USER_TAGS, { suspend: false });
 
 	const projects = projectsUnfiltered.filter(
-		project => (!linkedCustomerId
-				|| (project.customer
-					&& project.customer.id === linkedCustomerId))
-			&& project.status === 'ONGOING',
+		project =>
+			(!linkedCustomerId ||
+				(project.customer &&
+					project.customer.id === linkedCustomerId)) &&
+			project.status === "ONGOING"
 	);
 
 	const filters = [
-		{id: 'PENDING', name: 'Tâches à faire'},
-		{id: 'FINISHED', name: 'Tâches faites'},
-		{id: 'ALL', name: 'Toutes les tâches'},
+		{ id: "PENDING", name: "Tâches à faire" },
+		{ id: "FINISHED", name: "Tâches faites" },
+		{ id: "ALL", name: "Toutes les tâches" }
 	];
 
 	if (errorsProject) throw errorsProject;
@@ -318,7 +317,7 @@ function ArianneThread({
 				list={filters}
 				onChange={selectFilter}
 				selectedId={filterId}
-				placeholder={'Toutes les tâches'}
+				placeholder={"Toutes les tâches"}
 			/>
 			<ArianneElemCreatable
 				id="tags"
@@ -332,20 +331,21 @@ function ArianneThread({
 					<ManageTagOption
 						onClick={() => {
 							history.push({
-								pathname: '/app/tags',
+								pathname: "/app/tags",
 								state: {
 									prevLocation: location,
 									prevSearch:
-										location.search
-										|| location.state.prevSearch,
-								},
+										location.search ||
+										(location.state &&
+											location.state.prevSearch)
+								}
 							});
 						}}
 					>
 						Gérer les tags
 					</ManageTagOption>
 				}
-				placeholder={'Chercher par tags'}
+				placeholder={"Chercher par tags"}
 			/>
 		</ArianneContainer>
 	);

@@ -25,7 +25,10 @@ function CreateProjectLinkButton({project}) {
 
 	return (
 		<>
-			<Button onClick={() => setOpenLinkModal(true)}>
+			<Button
+				onClick={() => setOpenLinkModal(true)}
+				id="create-project-link"
+			>
 				<LinkIcon /> Créer un lien pour partager
 			</Button>
 			{openLinkModal && (

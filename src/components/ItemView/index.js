@@ -995,7 +995,7 @@ const Item = ({id, customerToken, close}) => {
 					)}
 				</FlexRowButtons>
 				<div>
-					<Button onClick={() => close()}>
+					<Button id="save-change-task" onClick={() => close()}>
 						Enregistrer et fermer
 					</Button>
 				</div>

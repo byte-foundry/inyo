@@ -4,7 +4,7 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import useOnClickOutside from 'use-onclickoutside';
 
-import NotificationPicto from '../../utils/icons/notifications.svg';
+import IconButton from '../../utils/new/components/IconButton';
 import NotificationItem from '../NotificationItem';
 import {
 	Button,
@@ -37,14 +37,9 @@ const Dropdown = styled('div')`
 `;
 
 const Icon = styled('button')`
-	background: ${props => (props.someUnread ? primaryRed : primaryGrey)};
-	mask-image: url(${NotificationPicto});
-	width: 26px;
-	height: 26px;
-	mask-repeat: no-repeat;
-	mask-position: center;
-	mask-size: cover;
-	cursor: pointer;
+	i {
+		color: ${props => (props.someUnread ? primaryRed : '')} !important;
+	}
 `;
 
 const MarkRead = styled(Button)`
@@ -170,7 +165,9 @@ const NotificationTrayButton = ({mobile}) => {
 				someUnread={someUnread}
 				ref={icon}
 				onClick={() => setOpen(!isOpen)}
-			/>
+			>
+				<IconButton icon="notifications" size="small" />
+			</Icon>
 			{isOpen
 				&& ReactDOM.createPortal(
 					<Dropdown

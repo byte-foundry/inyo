@@ -7,17 +7,15 @@ import ReactTooltip from 'react-tooltip';
 
 import Plural from '../Plural';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
+import IconButton from '../../utils/new/components/IconButton';
 
 import {
 	SubHeading,
 	primaryGrey,
 	P,
 	primaryPurple,
-	primaryBlack,
-	lightGrey,
+	primaryWhite,
 } from '../../utils/new/design-system';
-import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
-import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
@@ -52,55 +50,28 @@ const DateContainer = styled('div')`
 `;
 
 const SidebarLink = styled('div')`
-	display: inline-flex;
+	display: block;
 	align-items: center;
-	color: ${props => (props.active ? primaryBlack : primaryPurple)};
+	color: ${props => (props.active ? primaryPurple : primaryGrey)};
 	text-decoration: none;
 	font-weight: 500;
-	margin-bottom: 0.8rem;
+	margin-bottom: 0.4rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
+	pointer-events: ${props => (props.active ? 'none' : 'all')};
 	position: relative;
 	max-width: calc(100% - 2rem);
 
-	${props => props.active
-		&& `&:before {
-			content: '';
-			display: 'block';
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -1rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-
-		svg {
-			fill: ${primaryBlack} !important;
-		}`}
-
-	&:hover {
-		&:before {
-			content: '';
-			display: 'block';
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -1rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-		color: ${primaryBlack};
-		svg {
-			fill: ${primaryBlack};
-		}
-	}
-
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: flex;
+	}
+
+	div {
+		&:after {
+			display: ${props => (props.active ? 'block' : 'none')};
+		}
+		i {
+			color: ${props => (props.active ? primaryWhite : '')} !important;
+		}
 	}
 `;
 
@@ -108,14 +79,6 @@ const SidebarHeading = styled(SubHeading)`
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
-`;
-
-const ProjectMenuIcon = styled('div')`
-	margin: 0 10px -3px 0;
-
-	svg {
-		fill: ${primaryPurple};
-	}
 `;
 
 const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
@@ -150,19 +113,23 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 					onClick={() => setView('tasks')}
 					active={activeView === 'tasks' || !activeView}
 				>
-					<ProjectMenuIcon>
-						<TasksIcon />
-					</ProjectMenuIcon>
-					Tâches du projet
+					<IconButton
+						icon="format_list_bulleted"
+						size="tiny"
+						label="Tâches du projet"
+						current={activeView === 'tasks' || !activeView}
+					/>
 				</SidebarLink>
 				<SidebarLink
 					onClick={() => setView('shared-notes')}
 					active={activeView === 'shared-notes'}
 				>
-					<ProjectMenuIcon>
-						<SharedNotesIcon />
-					</ProjectMenuIcon>
-					Notes partagées
+					<IconButton
+						icon="people_outline"
+						size="tiny"
+						label="Notes partagées"
+						current={activeView === 'shared-notes'}
+					/>
 				</SidebarLink>
 			</SubSection>
 			<SubSection>

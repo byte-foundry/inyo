@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import MaterialIcon from 'material-icons-react';
 
-import {ReactComponent as LinkIcon} from '../../utils/icons/link-icon.svg';
 import {SubHeading, Input, Button} from '../../utils/new/design-system';
 import {
 	ModalContainer,
@@ -26,7 +26,8 @@ function CreateProjectLinkButton({project}) {
 	return (
 		<>
 			<Button onClick={() => setOpenLinkModal(true)}>
-				<LinkIcon /> Créer un lien pour partager
+				<MaterialIcon icon="link" size="tiny" color="inherit" /> Créer
+				un lien pour partager
 			</Button>
 			{openLinkModal && (
 				<ModalContainer

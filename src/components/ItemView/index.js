@@ -5,6 +5,7 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
+import MaterialIcon from 'material-icons-react';
 
 import TaskStatusButton from '../TaskStatusButton';
 import TaskActivationButton from '../TaskActivationButton';
@@ -31,13 +32,7 @@ import {
 	FOCUS_TASK,
 	UNFOCUS_TASK,
 } from '../../utils/mutations';
-import {ReactComponent as FolderIcon} from '../../utils/icons/folder.svg';
-import {ReactComponent as TimeIcon} from '../../utils/icons/time.svg';
-import {ReactComponent as FileIcon} from '../../utils/icons/file.svg';
-import TrashIcon from '../../utils/icons/trash-icon.svg';
-import {ReactComponent as ContactIcon} from '../../utils/icons/contact.svg';
-import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
-import {ReactComponent as TaskTypeIcon} from '../../utils/icons/task-type.svg';
+import IconButton from '../../utils/new/components/IconButton';
 import {
 	TaskHeading,
 	SubHeading,
@@ -77,9 +72,8 @@ const Meta = styled('div')`
 	display: flex;
 	align-items: flex-start;
 
-	svg {
+	i {
 		margin-right: 15px;
-		fill: ${primaryGrey};
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -210,26 +204,13 @@ const AttachedList = styled('div')`
 	}
 `;
 
-const RemoveFile = styled('div')`
-	background-color: ${accentGrey};
-	mask-position: center;
-	mask-repeat: no-repeat;
-	mask-image: url(${TrashIcon});
-
-	width: 20px;
-	height: 20px;
+const RemoveFile = styled(IconButton)`
+	opacity: 0;
 	margin-left: 3rem;
-	cursor: pointer;
-
 	transition: all 300ms ease;
-
-	&:hover {
-		background-color: ${primaryRed};
-	}
 `;
 
 const Attachment = styled('div')`
-	margin-bottom: 10px;
 	display: flex;
 	align-items: center;
 
@@ -241,7 +222,7 @@ const Attachment = styled('div')`
 `;
 
 const FileContainer = styled('span')`
-	margin-right: 1rem;
+	margin-right: 0.7rem;
 	margin-bottom: -0.3rem;
 `;
 
@@ -458,7 +439,7 @@ const Item = ({id, customerToken, close}) => {
 				|| item.status !== 'FINISHED'
 				|| !item.timeItTook ? (
 						<Meta data-tip="Temps estimé pour cette tâche">
-							<TimeIcon />
+							<MaterialIcon icon="timer" size="tiny" />
 							<MetaLabel>Temps estimé</MetaLabel>
 							<MetaText>
 								{!customerToken && editUnit ? (
@@ -512,7 +493,7 @@ const Item = ({id, customerToken, close}) => {
 						</Meta>
 					) : (
 						<Meta data-tip="Temps passé pour cette tâche">
-							<TimeIcon />
+							<MaterialIcon icon="timer" size="tiny" />
 							<MetaLabel>Temps passé</MetaLabel>
 							<MetaText>
 								{editUnit ? (
@@ -560,7 +541,7 @@ const Item = ({id, customerToken, close}) => {
 						</Meta>
 					)}
 				<Meta data-tip="Personne liée à cette tâche">
-					<ContactIcon />
+					<MaterialIcon icon="person_outline" size="tiny" />
 					<MetaLabel>Client</MetaLabel>
 					{!customerToken && editCustomer ? (
 						<ClientDropdown
@@ -600,7 +581,7 @@ const Item = ({id, customerToken, close}) => {
 				</Meta>
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Meta data-tip="Date limite pour réaliser cette tâche">
-						<DateIcon />
+						<MaterialIcon icon="event" size="tiny" />
 						<MetaLabel>Temps restant</MetaLabel>
 						<MetaTime
 							title={deadline && deadline.toLocaleString()}
@@ -661,7 +642,7 @@ const Item = ({id, customerToken, close}) => {
 					</Meta>
 				)}
 				<Meta data-tip="Projet lié à cette tâche">
-					<FolderIcon />
+					<MaterialIcon icon="folder_open" size="tiny" />
 					<MetaLabel>Projet</MetaLabel>
 					{!customerToken && editProject ? (
 						<StyledProjectsDropdown
@@ -703,7 +684,7 @@ const Item = ({id, customerToken, close}) => {
 					)}
 				</Meta>
 				<Meta data-tip="Définit s'il y a des actions automatiques">
-					<TaskTypeIcon />
+					<MaterialIcon icon="check_circle_outline" size="tiny" />
 					<MetaLabel>Type de tâche</MetaLabel>
 					<MetaText>{typeInfo.name}</MetaText>
 				</Meta>
@@ -803,7 +784,11 @@ const Item = ({id, customerToken, close}) => {
 						return (
 							<Attachment key={attachmentId}>
 								<FileContainer>
-									<FileIcon />
+									<MaterialIcon
+										icon="attachment"
+										size="tiny"
+										color={accentGrey}
+									/>
 								</FileContainer>
 								<a
 									href={url}
@@ -819,6 +804,9 @@ const Item = ({id, customerToken, close}) => {
 								)}
 								{(!customerToken || isOwner) && (
 									<RemoveFile
+										icon="delete_forever"
+										size="tiny"
+										danger
 										onClick={async () => {
 											await removeFile({
 												variables: {
@@ -882,12 +870,14 @@ const Item = ({id, customerToken, close}) => {
 							<>
 								<Button
 									grey
+									aligned
 									onClick={() => setDeletingItem(false)}
 								>
 									Annuler
 								</Button>
 								<Button
 									red
+									aligned
 									onClick={() => {
 										deleteItem();
 										close();
@@ -901,6 +891,7 @@ const Item = ({id, customerToken, close}) => {
 								<Button
 									red
 									onClick={() => setDeletingItem(true)}
+									aligned
 								>
 									Supprimer la tâche
 								</Button>
@@ -912,6 +903,7 @@ const Item = ({id, customerToken, close}) => {
 							primary={item.status === 'FINISHED'}
 							isFinished={item.status === 'FINISHED'}
 							customerToken={customerToken}
+							aligned
 						/>
 					)}
 				</FlexRowButtons>

@@ -205,9 +205,16 @@ export const Button = styled('button')`
 		margin: 0 auto;
 	`}
 
+	${props => props.aligned
+		&& `
+		& + button {
+			margin-left: .5rem;
+		}
+	`}
 
-	& + button {
-		margin-left: .5rem;
+	i {
+		color: inherit;
+		margin-right: ${props => (props.link ? 0 : '10px')};
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -287,58 +294,12 @@ export const A = styled('a')`
 	}
 `;
 
-export const CommentIcon = styled('div')`
-	display: flex;
-	position: relative;
-	width: 20px;
-	height: 14px;
-	margin-top: -1px;
-	margin-right: 0.3rem;
-	font-weight: 600;
-	background-color: ${props => (props.new ? primaryPurple : mediumGrey)};
-	color: ${(props) => {
-		if (props.new) {
-			return primaryWhite;
-		}
-		if (props.old) {
-			return primaryBlack;
-		}
-		return primaryPurple;
-	}};
-	font-size: 12px;
-	text-align: center;
-	cursor: pointer;
-	justify-content: center;
-	align-items: center;
-
-	&:hover {
-		background: ${primaryPurple};
-		color: ${primaryWhite};
-
-		&::after {
-			border-color: ${primaryPurple} transparent transparent transparent;
-		}
-	}
-
-	&::after {
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		left: calc(50% - 4px);
-		top: 100%;
-		border-style: solid;
-		border-width: 4px 4px 0 4px;
-		border-color: ${props => (props.new ? primaryPurple : mediumGrey)}
-			transparent transparent transparent;
-	}
-`;
-
 const TaskInfosContent = styled('div')`
 	color: ${primaryGrey};
 	padding-bottom: 0;
 	display: flex;
 	border-bottom: solid 1px transparent;
+	margin-left: 10px;
 `;
 
 export const TaskInfosItem = styled('div')`
@@ -348,6 +309,7 @@ export const TaskInfosItem = styled('div')`
 	${props => props.onClick && 'cursor: pointer;'}
 	align-items: center;
 	height: 30px;
+	position: relative;
 	text-decoration: none;
 
 	&:hover {

@@ -16,6 +16,7 @@ const TaskActivationButton = ({
 
 	return (
 		<BistableButton
+			id="task-activation-button"
 			white={!isActive}
 			value={isActive}
 			disabled={disabled}

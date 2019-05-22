@@ -109,7 +109,7 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 			<TaskInputDropdownHeader>
 				Tâches automatiques et/ou prédéfinies
 			</TaskInputDropdownHeader>
-			<List>
+			<List id="task-dropdown-list">
 				{filteredTypes.map(({icon, name, description}, index) => (
 					<ListItem
 						key={name}

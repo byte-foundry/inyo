@@ -184,6 +184,7 @@ export default function ({
 								name="modelTemplate"
 								label="Titre du modèle"
 								big
+								classNamePrefix="intercom-tour"
 								options={templates.map(template => ({
 									value: template.name,
 									label: template.label,
@@ -213,6 +214,7 @@ export default function ({
 								name="modelProject"
 								label="Titre du projet"
 								big
+								classNamePrefix="intercom-tour"
 								options={optionsProjects}
 							/>
 						</CreateProjectElem>

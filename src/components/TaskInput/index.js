@@ -265,6 +265,7 @@ const TaskInput = ({
 					data-tip="Définir le type de tâche"
 					onClick={() => setOpenedByClick(true)}
 					active={type}
+					id="task-input-type-icon"
 				>
 					{icon}
 				</Icon>
@@ -380,6 +381,7 @@ const TaskInput = ({
 							<Button
 								data-tip="Touche entrée pour créer la tâche"
 								icon="↵"
+								id="create-task-button"
 								onClick={() => {
 									if (!value.startsWith('/')) {
 										if (type === 'CONTENT_ACQUISITION') {
@@ -445,6 +447,7 @@ const TaskInput = ({
 									icon="↑"
 									onClick={() => onSubmitProject({name: value})
 									}
+									id="create-project-button"
 								>
 									créer un projet
 								</Button>

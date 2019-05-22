@@ -352,6 +352,7 @@ const SidebarProjectInfos = ({
 							data-tip="Ce que verra votre client lorsqu'il se connecte au projet"
 							link
 							onClick={() => setCustomerPreview(true)}
+							id="show-customer-view"
 						>
 							<ClientPreviewIcon />
 							<span>Voir la vue de mon client</span>
@@ -474,6 +475,7 @@ const SidebarProjectInfos = ({
 			<div>
 				<Actions>
 					<DuplicateProjectButton
+						id="duplicate-project-button"
 						data-tip="Copier ces tâches dans un nouveau projet"
 						projectId={project.id}
 						onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)

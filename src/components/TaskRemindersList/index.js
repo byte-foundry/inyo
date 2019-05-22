@@ -3,14 +3,13 @@ import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import IconButton from '../../utils/new/components/IconButton';
 
 import {REMINDER_TYPES_DATA} from '../../utils/constants';
 import {
 	primaryGrey,
 	primaryBlack,
-	primaryRed,
 	accentGrey,
-	primaryWhite,
 	mediumGrey,
 	Button,
 } from '../../utils/new/design-system';
@@ -20,18 +19,6 @@ import {CANCEL_REMINDER} from '../../utils/mutations';
 const ReminderList = styled('div')`
 	margin-bottom: 2rem;
 	margin-top: 1rem;
-`;
-
-const Delete = styled(Button)`
-	color: ${primaryRed};
-	width: 1.2rem;
-	height: 1.2rem;
-	transition: all 200ms ease;
-
-	&:hover {
-		color: ${primaryWhite};
-		background-color: ${primaryRed};
-	}
 `;
 
 const ReminderLine = styled('div')`
@@ -91,11 +78,7 @@ const ReminderActions = styled('div')`
 	display: flex;
 	text-align: right;
 	justify-content: space-between;
-	align-items: baseline;
-`;
-
-const ReminderCancel = styled('div')`
-	${props => props.noLink && 'margin-right: 10px;'}
+	align-items: center;
 `;
 
 const statuses = ['PENDING', 'SENT', 'CANCELED', 'ERRORED'];
@@ -172,14 +155,14 @@ function TaskRemindersList({
 									{reminder.status === 'SENT' && 'Envoyé'}
 								</ReminderDate>
 								{reminder.status === 'PENDING' && (
-									<ReminderCancel
+									<div
 										noLink={noLink}
 										canceled={
 											reminder.status === 'CANCELED'
 										}
 										data-tip="Supprimer cette action automatique"
 									>
-										<Delete
+										<Button
 											link
 											small
 											onClick={() => {
@@ -190,9 +173,13 @@ function TaskRemindersList({
 												});
 											}}
 										>
-											&times;
-										</Delete>
-									</ReminderCancel>
+											<IconButton
+												icon="cancel"
+												size="tiny"
+												danger
+											/>
+										</Button>
+									</div>
 								)}
 								{noLink && reminder.status === 'PENDING' && (
 									<ReminderTestEmailButton

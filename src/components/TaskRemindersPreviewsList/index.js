@@ -5,9 +5,6 @@ import moment from 'moment';
 
 import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
 import {
-	primaryGrey,
-	primaryWhite,
-	primaryRed,
 	primaryBlack,
 	Button,
 	Select,
@@ -15,39 +12,17 @@ import {
 } from '../../utils/new/design-system';
 import usePrevious from '../../utils/usePrevious';
 import useMeasure from '../../utils/useMeasure';
+import IconButton from '../../utils/new/components/IconButton';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
-import {ReactComponent as PencilIcon} from '../../utils/icons/pencil.svg';
 
 const Container = styled('div')`
 	display: flex;
 	flex-direction: column;
 `;
 
-const EditIcon = styled(PencilIcon)`
-	width: 18px;
-	height: 18px;
-	vertical-align: middle;
-
-	path {
-		fill: ${primaryGrey};
-	}
-`;
-
 const ReminderList = styled('div')`
 	margin-bottom: 2rem;
 	margin-top: 1rem;
-`;
-
-const Delete = styled(Button)`
-	color: ${primaryRed};
-	width: 1.2rem;
-	height: 1.2rem;
-	transition: all 200ms ease;
-
-	&:hover {
-		color: ${primaryWhite};
-		background-color: ${primaryRed};
-	}
 `;
 
 const ReminderItem = styled('div')`
@@ -109,13 +84,6 @@ const ReminderButtons = styled('div')`
 	}
 `;
 
-const ButtonIcon = styled(Button)`
-	svg {
-		width: 14px;
-		max-height: 14px;
-	}
-`;
-
 const ReminderForm = styled(animated.form)`
 	display: flex;
 	flex-direction: column;
@@ -124,6 +92,7 @@ const ReminderForm = styled(animated.form)`
 const ReminderFormGroup = styled('div')`
 	display: flex;
 	margin: 1rem 0 0.5rem 0;
+	font-size: 0.8rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
@@ -167,7 +136,10 @@ const CollapsableReminderForm = ({children, isOpen, ...props}) => {
 		},
 		from: {opacity: 0, height: 0, overflow: 'hidden'},
 		config: {
-			mass: 1, tension: 350, friction: 22, clamp: true,
+			mass: 1,
+			tension: 350,
+			friction: 22,
+			clamp: true,
 		},
 	});
 
@@ -261,20 +233,23 @@ const TaskRemindersPreviewsList = ({
 									<ReminderActions>
 										<ReminderDate>{delay}</ReminderDate>
 										<ReminderButtons>
-											<ButtonIcon
+											<Button
 												link
 												onClick={() => {
 													setEditingIndex(index);
 												}}
 											>
-												<EditIcon />
-											</ButtonIcon>
+												<IconButton
+													icon="edit"
+													size="tiny"
+												/>
+											</Button>
 											<ReminderTestEmailButton
 												taskId={taskId}
 												reminder={reminder}
 												preview
 											/>
-											<Delete
+											<Button
 												data-tip="Supprimer cette action automatique"
 												link
 												onClick={() => {
@@ -289,8 +264,12 @@ const TaskRemindersPreviewsList = ({
 													]);
 												}}
 											>
-												&times;
-											</Delete>
+												<IconButton
+													icon="cancel"
+													size="tiny"
+													danger
+												/>
+											</Button>
 										</ReminderButtons>
 									</ReminderActions>
 								</ReminderItem>
@@ -423,12 +402,15 @@ const TaskRemindersPreviewsList = ({
 											grey
 											type="button"
 											link
+											aligned
 											onClick={() => setEditingIndex(null)
 											}
 										>
 											Annuler
 										</Button>
-										<Button type="submit">Valider</Button>
+										<Button aligned type="submit">
+											Valider
+										</Button>
 									</ReminderFormActions>
 								</CollapsableReminderForm>
 							</>
@@ -436,11 +418,18 @@ const TaskRemindersPreviewsList = ({
 					})}
 			</ReminderList>
 			<ReminderFormActions>
-				<Button grey type="button" link onClick={() => onCancel()}>
+				<Button
+					aligned
+					grey
+					type="button"
+					link
+					onClick={() => onCancel()}
+				>
 					Annuler
 				</Button>
 				<Button
 					type="submit"
+					aligned
 					onClick={() => onFocusTask(
 						reminders.map(r => ({
 							delay: r.delay,

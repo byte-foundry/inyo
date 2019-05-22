@@ -16,8 +16,7 @@ import {
 import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import ConfirmModal from '../../../components/ConfirmModal';
 import Search from '../../../utils/icons/search.svg';
-import {ReactComponent as PencilIcon} from '../../../utils/icons/pencil.svg';
-import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
+import IconButton from '../../../utils/new/components/IconButton';
 
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 import {
@@ -149,21 +148,6 @@ const Forms = styled('div')`
 	}
 `;
 
-const EditIcon = styled(PencilIcon)`
-	width: 18px;
-	padding: 0 5px;
-
-	path {
-		fill: ${accentGrey};
-	}
-`;
-
-const DeleteIcon = styled(TrashIcon)`
-	path {
-		fill: ${accentGrey};
-	}
-`;
-
 const Customers = () => {
 	const {data, error} = useQuery(GET_USER_CUSTOMERS, {suspend: true});
 	const createCustomer = useMutation(CREATE_CUSTOMER);
@@ -242,8 +226,11 @@ const Customers = () => {
 								<Cell>{customer.email}</Cell>
 								<Cell>{customer.phone}</Cell>
 								<ActionCell>
-									<EditIcon />
-									<DeleteIcon
+									<IconButton icon="edit" size="tiny" />
+									<IconButton
+										icon="delete_forever"
+										size="tiny"
+										danger
 										onClick={async (e) => {
 											e.stopPropagation();
 

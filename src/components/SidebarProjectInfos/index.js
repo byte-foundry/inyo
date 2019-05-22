@@ -11,25 +11,15 @@ import {
 	SubHeading,
 	Button,
 	primaryPurple,
-	primaryBlack,
-	lightGrey,
+	primaryWhite,
+	primaryGrey,
 	P,
 	DateContainer,
 	BigNumber,
 } from '../../utils/new/design-system';
 import {ModalContainer} from '../../utils/content';
 
-import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
-import {ReactComponent as Pencil} from '../../utils/icons/pencil.svg';
-import {ReactComponent as DuplicateIcon} from '../../utils/icons/file_copy.svg';
-import {ReactComponent as DateIcon} from '../../utils/icons/date.svg';
-import {ReactComponent as ClientIcon} from '../../utils/icons/contact.svg';
-import {ReactComponent as TasksIcon} from '../../utils/icons/tasks-icon.svg';
-import {ReactComponent as SharedNotesIcon} from '../../utils/icons/shared-notes-icon.svg';
-import {ReactComponent as PersonalNotesIcon} from '../../utils/icons/personal-notes-icon.svg';
-import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
-import {ReactComponent as ArchiveIcon} from '../../utils/icons/archive-icon.svg';
-import {ReactComponent as UnarchiveIcon} from '../../utils/icons/unarchive-icon.svg';
+import IconButton from '../../utils/new/components/IconButton';
 import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
@@ -41,6 +31,7 @@ import {
 } from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
+import MaterialIcon from '../MaterialIcon';
 import ConfirmModal from '../ConfirmModal';
 import RemoveProjectButton from '../RemoveProjectButton';
 import CreateProjectLinkButton from '../CreateProjectLinkButton';
@@ -50,14 +41,6 @@ import StaticCustomerView from '../StaticCustomerView';
 import DuplicateProjectButton from '../DuplicateProjectButton';
 import DateInput from '../DateInput';
 import Plural from '../Plural';
-
-const ProjectMenuIcon = styled('div')`
-	margin: 0 10px -3px 0;
-
-	svg {
-		fill: ${primaryPurple};
-	}
-`;
 
 const SubSection = styled('div')`
 	margin-bottom: 2rem;
@@ -77,14 +60,6 @@ const Actions = styled('div')`
 	}
 `;
 
-const ClientPreviewIcon = styled(EyeIcon)`
-	vertical-align: middle;
-	margin-top: -2px;
-	width: 16px;
-	margin-right: 10px;
-	margin-left: 4px;
-`;
-
 const PreviewModal = styled(ModalContainer)`
 	min-height: 500px;
 	padding: 0;
@@ -98,69 +73,61 @@ const Notice = styled(P)`
 	margin: 0;
 `;
 
+const Checked = styled('div')``;
+const NotChecked = styled('div')``;
+
+const CheckBoxFakeLabel = styled('div')`
+	margin-left: 10px;
+`;
+
 const CheckBoxLabel = styled('label')`
 	font-size: 13px;
 	margin: 0.5em 0;
 	color: ${primaryPurple};
 	cursor: pointer;
 
+	display: flex;
+	align-items: center;
+
 	input[type='checkbox'] {
-		margin-left: 0.5em;
-		margin-right: 0.9em;
-		margin-top: -1px;
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+	}
+
+	${NotChecked} {
+		display: ${props => (props.checked ? 'none' : 'inline-flex')};
+	}
+	${Checked} {
+		display: ${props => (props.checked ? 'inline-flex' : 'none')};
 	}
 `;
 
 const SidebarLink = styled('div')`
-	display: inline-flex;
+	display: block;
 	align-items: center;
-	color: ${props => (props.active ? primaryBlack : primaryPurple)};
+	color: ${props => (props.active ? primaryPurple : primaryGrey)};
 	text-decoration: none;
 	font-weight: 500;
-	margin-bottom: 0.8rem;
+	margin-bottom: 0.4rem;
 	cursor: ${props => (props.active ? 'default' : 'pointer')};
+	pointer-events: ${props => (props.active ? 'none' : 'all')};
 	position: relative;
 	max-width: calc(100% - 2rem);
 
-	${props => props.active
-		&& `&:before {
-			content: '';
-			display: 'block';
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -1rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-
-		svg {
-			fill: ${primaryBlack} !important;
-		}`}
-
-	&:hover {
-		&:before {
-			content: '';
-			display: 'block';
-			background: ${lightGrey};
-			position: absolute;
-			left: -0.5rem;
-			top: -0.5rem;
-			right: -1rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-		color: ${primaryBlack};
-		svg {
-			fill: ${primaryBlack};
-		}
-	}
-
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: flex;
+	}
+
+	div {
+		&:after {
+			display: ${props => (props.active ? 'block' : 'none')};
+		}
+		i {
+			color: ${props => (props.active ? primaryWhite : '')} !important;
+		}
 	}
 `;
 
@@ -176,11 +143,11 @@ const Illus = styled('img')`
 	margin: 1rem auto;
 `;
 
-const PencilElem = styled(Pencil)`
+const PencilElem = styled(IconButton)`
 	cursor: pointer;
-	width: 1rem;
 	position: absolute;
 	left: 0;
+	top: -2px;
 
 	display: none;
 `;
@@ -192,7 +159,7 @@ const CustomerInfos = styled('div')`
 
 	&:hover {
 		${PencilElem} {
-			display: block;
+			display: flex;
 		}
 	}
 `;
@@ -255,30 +222,36 @@ const SidebarProjectInfos = ({
 					onClick={() => setView('tasks')}
 					active={activeView === 'tasks' || !activeView}
 				>
-					<ProjectMenuIcon>
-						<TasksIcon />
-					</ProjectMenuIcon>
-					Tâches du projet
+					<IconButton
+						icon="format_list_bulleted"
+						size="tiny"
+						label="Tâches du projet"
+						current={activeView === 'tasks' || !activeView}
+					/>
 				</SidebarLink>
 				<SidebarLink
 					data-tip="Seulement visibles par vous"
 					onClick={() => setView('personal-notes')}
 					active={activeView === 'personal-notes'}
 				>
-					<ProjectMenuIcon>
-						<PersonalNotesIcon />
-					</ProjectMenuIcon>
-					Notes personnelles
+					<IconButton
+						icon="lock_open"
+						size="tiny"
+						label="Notes personnelles"
+						current={activeView === 'personal-notes'}
+					/>
 				</SidebarLink>
 				<SidebarLink
 					data-tip="Visibles par tout le monde"
 					onClick={() => setView('shared-notes')}
 					active={activeView === 'shared-notes'}
 				>
-					<ProjectMenuIcon>
-						<SharedNotesIcon />
-					</ProjectMenuIcon>
-					Notes partagées
+					<IconButton
+						icon="people_outline"
+						size="tiny"
+						label="Notes partagées"
+						current={activeView === 'shared-notes'}
+					/>
 				</SidebarLink>
 			</SubSection>
 			<SubSection>
@@ -286,6 +259,8 @@ const SidebarProjectInfos = ({
 					<>
 						<CustomerInfos>
 							<PencilElem
+								icon="edit"
+								size="tiny"
 								data-tip="Changer le client lié au projet"
 								onClick={() => setEditCustomer(true)}
 							/>
@@ -293,7 +268,10 @@ const SidebarProjectInfos = ({
 								customer={project.customer}
 							/>
 						</CustomerInfos>
-						<CheckBoxLabel data-tip="Évolution du projet, tâches qui requièrent une action, etc.">
+						<CheckBoxLabel
+							checked={project.notifyActivityToCustomer}
+							data-tip="Évolution du projet, tâches qui requièrent une action, etc."
+						>
 							<input
 								type="checkbox"
 								checked={project.notifyActivityToCustomer}
@@ -320,7 +298,23 @@ const SidebarProjectInfos = ({
 									});
 								}}
 							/>
-							Notifier mon client par email
+							<Checked>
+								<IconButton
+									icon="check_box"
+									size="tiny"
+									color={primaryPurple}
+								/>
+							</Checked>
+							<NotChecked>
+								<IconButton
+									icon="check_box_outline_blank"
+									size="tiny"
+									color={primaryPurple}
+								/>
+							</NotChecked>
+							<CheckBoxFakeLabel>
+								Notifier mon client par email
+							</CheckBoxFakeLabel>
 						</CheckBoxLabel>
 						{askNotifyActivityConfirm.resolve && (
 							<ConfirmModal
@@ -354,16 +348,28 @@ const SidebarProjectInfos = ({
 							onClick={() => setCustomerPreview(true)}
 							id="show-customer-view"
 						>
-							<ClientPreviewIcon />
-							<span>Voir la vue de mon client</span>
+							<IconButton
+								icon="visibility"
+								size="tiny"
+								label="Voir la vue de mon client"
+								color={primaryPurple}
+							/>
 						</Button>
 					</>
 				) : (
 					<>
 						<Illus src={noClientIllus} />
 						<Actions>
-							<Button onClick={() => setEditCustomer(true)}>
-								<ClientIcon /> Ajouter un client
+							<Button
+								materialIcon
+								onClick={() => setEditCustomer(true)}
+							>
+								<MaterialIcon
+									icon="person_outline"
+									size="tiny"
+									color="inherit"
+								/>{' '}
+								Ajouter un client
 							</Button>
 						</Actions>
 					</>
@@ -426,8 +432,16 @@ const SidebarProjectInfos = ({
 						</>
 					) : (
 						<Actions>
-							<Button onClick={() => setEditDueDate(true)}>
-								<DateIcon /> Ajouter une deadline
+							<Button
+								materialIcon
+								onClick={() => setEditDueDate(true)}
+							>
+								<MaterialIcon
+									icon="event"
+									size="tiny"
+									color="inherit"
+								/>{' '}
+								Ajouter une deadline
 							</Button>
 						</Actions>
 					)}
@@ -481,7 +495,8 @@ const SidebarProjectInfos = ({
 						onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
 						}
 					>
-						<DuplicateIcon /> Dupliquer le projet
+						<MaterialIcon icon="redo" size="tiny" color="inherit" />{' '}
+						Dupliquer le projet
 					</DuplicateProjectButton>
 				</Actions>
 				<Actions>
@@ -498,7 +513,12 @@ const SidebarProjectInfos = ({
 								})
 								}
 							>
-								<UnarchiveIcon /> Désarchiver le projet
+								<MaterialIcon
+									icon="unarchive"
+									size="tiny"
+									color="inherit"
+								/>{' '}
+								Désarchiver le projet
 							</Button>
 						</Actions>
 						<Actions>
@@ -507,7 +527,12 @@ const SidebarProjectInfos = ({
 								projectId={project.id}
 								onRemove={() => history.push('/app/projects')}
 							>
-								<TrashIcon /> Supprimer le projet
+								<MaterialIcon
+									icon="delete_forever"
+									size="tiny"
+									color="inherit"
+								/>{' '}
+								Supprimer le projet
 							</RemoveProjectButton>
 						</Actions>
 					</>
@@ -521,7 +546,12 @@ const SidebarProjectInfos = ({
 							})
 							}
 						>
-							<ArchiveIcon /> Archiver le projet
+							<MaterialIcon
+								icon="archive"
+								size="tiny"
+								color="inherit"
+							/>{' '}
+							Archiver le projet
 						</Button>
 					</Actions>
 				)}

@@ -70,6 +70,7 @@
     "shevyjs": "^1.1.0",
     "timezone-support": "^1.8.1",
     "use-onclickoutside": "^0.2.2",
+    "webfontloader": "^1.6.28",
     "yup": "^0.26.6"
   },
   "devDependencies": {

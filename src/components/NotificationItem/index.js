@@ -2,16 +2,12 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 
-import EyeIcon from '../../utils/icons/eye.svg';
-import CommentIcon from '../../utils/icons/comment-icon.svg';
-import DefaultIcon from '../../utils/icons/notifications.svg';
+import MaterialIcon from '../MaterialIcon';
 
 import {
-	lightGrey,
 	primaryGrey,
+	accentGrey,
 	lightPurple,
-	primaryPurple,
-	primaryRed,
 	primaryBlack,
 } from '../../utils/new/design-system';
 
@@ -24,17 +20,6 @@ const A = styled(Link)`
 	}
 `;
 
-const IconType = styled('div')`
-	background-color: ${primaryGrey};
-	mask-position: center;
-	mask-repeat: no-repeat;
-	mask-size: 16px;
-	mask-image: url(${props => (props.type ? props.type : DefaultIcon)});
-
-	width: 20px;
-	height: 20px;
-`;
-
 const Container = styled('div')`
 	border-radius: 4px;
 	padding: 10px;
@@ -45,16 +30,8 @@ const Container = styled('div')`
 	display: grid;
 	grid-template-columns: 30px 1fr;
 
-	${IconType} {
-		background-color: ${props => (props.unread ? primaryRed : primaryGrey)};
-	}
-
 	&:hover {
 		background-color: ${lightPurple};
-
-		${IconType} {
-			background-color: ${primaryPurple};
-		}
 	}
 `;
 
@@ -63,18 +40,18 @@ const NotificationItem = ({
 }) => {
 	let action = 'a effectué';
 
-	let icon = DefaultIcon;
+	let icon = 'notifications';
 
 	let objectLink = '';
 
 	switch (eventType) {
 	case 'POSTED_COMMENT':
 		action = 'a commenté la tâche';
-		icon = CommentIcon;
+		icon = 'mode_comment';
 		break;
 	case 'VIEWED_PROJECT':
 		action = 'a consulté le projet';
-		icon = EyeIcon;
+		icon = 'visibility';
 		break;
 	default:
 	}
@@ -93,7 +70,11 @@ const NotificationItem = ({
 	return (
 		<A to={objectLink}>
 			<Container unread={unread}>
-				<IconType type={icon} />
+				<MaterialIcon
+					icon={icon}
+					size="tiny"
+					color={unread ? '' : accentGrey}
+				/>
 				<div>
 					{from.firstName} {from.lastName} {action} {object.name}.
 				</div>

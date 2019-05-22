@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
-import MaterialIcon from 'material-icons-react';
+
+import MaterialIcon from '../MaterialIcon';
 
 import {SubHeading, Input, Button} from '../../utils/new/design-system';
 import {

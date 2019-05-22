@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
-import MaterialIcon from 'material-icons-react';
+
+import MaterialIcon from '../MaterialIcon';
 
 import {
 	primaryGrey,

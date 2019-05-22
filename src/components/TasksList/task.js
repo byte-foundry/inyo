@@ -4,7 +4,6 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
-import MaterialIcon from 'material-icons-react';
 
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
@@ -35,6 +34,7 @@ import UnitInput from '../UnitInput';
 import Plural from '../Plural';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 import TimeItTookDisplay from '../TimeItTookDisplay';
+import MaterialIcon from '../MaterialIcon';
 
 export const TaskContainer = styled('div')`
 	display: flex;

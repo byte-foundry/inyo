@@ -5,7 +5,6 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
 import ReactTooltip from 'react-tooltip';
-import MaterialIcon from 'material-icons-react';
 
 import {
 	Aside,
@@ -32,6 +31,7 @@ import {
 } from '../../utils/mutations';
 import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
 
+import MaterialIcon from '../MaterialIcon';
 import ConfirmModal from '../ConfirmModal';
 import RemoveProjectButton from '../RemoveProjectButton';
 import CreateProjectLinkButton from '../CreateProjectLinkButton';

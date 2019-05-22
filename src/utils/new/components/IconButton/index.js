@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React, {memo} from 'react';
 import styled from '@emotion/styled';
-import MaterialIcon from 'material-icons-react';
+
+import MaterialIcon from '../../../../components/MaterialIcon';
 
 import {
 	mediumGrey,
@@ -129,39 +130,35 @@ const IconWrap = styled('div')`
 	}
 `;
 
-class IconButton extends Component {
-	render() {
-		const {
-			icon,
-			size,
-			invert,
-			inactive,
-			color,
-			danger,
-			label,
-			current,
-			...rest
-		} = this.props;
-
-		return (
-			<IconWrap
+function IconButton({
+	icon,
+	size,
+	invert,
+	inactive,
+	color,
+	danger,
+	label,
+	current,
+	...rest
+}) {
+	return (
+		<IconWrap
+			size={size}
+			danger={danger}
+			{...rest}
+			inactive={inactive}
+			current={current}
+		>
+			<MaterialIcon
+				icon={icon}
 				size={size}
-				danger={danger}
-				{...rest}
+				color={color}
+				invert={invert}
 				inactive={inactive}
-				current={current}
-			>
-				<MaterialIcon
-					icon={icon}
-					size={size}
-					color={color}
-					invert={invert}
-					inactive={inactive}
-				/>
-				{label && <label>{label}</label>}
-			</IconWrap>
-		);
-	}
+			/>
+			{label && <label>{label}</label>}
+		</IconWrap>
+	);
 }
 
-export default IconButton;
+export default memo(IconButton, () => true);

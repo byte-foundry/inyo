@@ -46,10 +46,10 @@ export default function ConfirmModal({
 			<ModalElem>
 				<ModalRow>{children}</ModalRow>
 				<ModalRowHoriz>
-					<Button link onClick={() => onConfirm(false)}>
+					<Button aligned link onClick={() => onConfirm(false)}>
 						Annuler
 					</Button>
-					<Button autoFocus onClick={() => onConfirm(true)}>
+					<Button aligned autoFocus onClick={() => onConfirm(true)}>
 						Valider
 					</Button>
 				</ModalRowHoriz>

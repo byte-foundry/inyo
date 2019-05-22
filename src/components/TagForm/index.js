@@ -15,8 +15,7 @@ import {
 	primaryRed,
 	Button,
 } from '../../utils/new/design-system';
-import {ReactComponent as PencilIcon} from '../../utils/icons/pencil.svg';
-import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
+import IconButton from '../../utils/new/components/IconButton';
 
 const TagLine = styled('div')`
 	display: flex;
@@ -38,32 +37,6 @@ const TagActions = styled('div')`
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-`;
-
-const EditIcon = styled(PencilIcon)`
-	width: 18px;
-	padding: 0 5px;
-	cursor: pointer;
-
-	path {
-		fill: ${accentGrey};
-	}
-
-	&:hover path {
-		fill: ${primaryBlack};
-	}
-`;
-
-const DeleteIcon = styled(TrashIcon)`
-	cursor: pointer;
-
-	path {
-		fill: ${accentGrey};
-	}
-
-	&:hover path {
-		fill: ${primaryRed};
-	}
 `;
 
 const TagFormElem = styled('form')`
@@ -113,13 +86,18 @@ function TagForm({tag}) {
 					)}
 				</TagItemsNumber>
 				<TagActions>
-					<EditIcon
+					<IconButton
+						icon="edit"
+						size="tiny"
 						onClick={() => {
 							setIsEditing(true);
 							setIsDeleting(false);
 						}}
 					/>
-					<DeleteIcon
+					<IconButton
+						icon="delete_forever"
+						size="tiny"
+						danger
 						onClick={() => {
 							setIsDeleting(true);
 							setIsEditing(false);
@@ -133,6 +111,7 @@ function TagForm({tag}) {
 						type="button"
 						link
 						grey
+						aligned
 						onClick={() => {
 							setIsDeleting(false);
 						}}
@@ -236,6 +215,7 @@ function TagForm({tag}) {
 											type="button"
 											link
 											grey
+											aligned
 											onClick={() => {
 												setIsEditing(false);
 											}}

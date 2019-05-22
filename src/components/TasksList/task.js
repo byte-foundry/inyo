@@ -5,24 +5,15 @@ import moment from 'moment';
 import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
-import ClockIconSvg from '../../utils/icons/clock.svg';
-import FilesIconSvg from '../../utils/icons/file.svg';
-import TagIconSvg from '../../utils/icons/tags.svg';
-import DateIconSvg from '../../utils/icons/date.svg';
-import ClientIconSvg from '../../utils/icons/clienticon.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
-import DescriptionIcon from '../../utils/icons/descriptionicon.svg';
-import NotificationsActiveIcon from '../../utils/icons/baseline-notifications_active-24px.svg';
-import NotificationsOffIcon from '../../utils/icons/baseline-notifications_off-24px.svg';
-import NotificationsImpossibleIcon from '../../utils/icons/baseline-error-24px.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {isCustomerTask} from '../../utils/functions';
+import IconButton from '../../utils/new/components/IconButton';
 
 import {
 	ButtonLink,
 	TaskHeading,
-	CommentIcon,
 	TaskIconText,
 	TaskInfosItemLink,
 	primaryPurple,
@@ -32,6 +23,7 @@ import {
 	primaryBlack,
 	accentGrey,
 	primaryRed,
+	primaryWhite,
 	DueDateInputElem,
 	DateInputContainer,
 } from '../../utils/new/design-system';
@@ -42,6 +34,7 @@ import UnitInput from '../UnitInput';
 import Plural from '../Plural';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 import TimeItTookDisplay from '../TimeItTookDisplay';
+import MaterialIcon from '../MaterialIcon';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -176,16 +169,6 @@ const TaskIcon = styled('div')`
 	}
 `;
 
-const TaskInfosIcon = styled('div')`
-	width: 0.8rem;
-	height: 0.8rem;
-	background: ${primaryGrey};
-	mask-repeat: no-repeat;
-	mask-size: contain;
-	mask-image: url(${props => props.icon});
-	margin-right: 0.4rem;
-`;
-
 const TaskContent = styled('div')`
 	flex: 1;
 	margin-top: ${props => (props.noData ? '0.9rem' : '1rem')};
@@ -265,49 +248,8 @@ const TaskHeader = styled('div')`
 	}
 `;
 
-const HaveDescription = styled('div')`
-	background-color: ${accentGrey};
-	mask: center no-repeat url('${DescriptionIcon}');
-	width: 16px;
-	height: 16px;
-	display: inline-flex;
-	margin: 0 0 1px 0.3rem;
-
-	&:hover{
-		background-color: ${primaryPurple};
-	}
-`;
-
-const NotificationsState = styled(Link)`
-	display: block;
-	background-color: ${props => (props.isFocused ? primaryPurple : accentGrey)};
-	mask: center no-repeat url('${props => (props.isFocused ? NotificationsActiveIcon : NotificationsOffIcon)}');
-	mask-size: contain;
-	width: 18px;
-	height: 18px;
-	display: inline-flex;
-	margin-left: -.75rem;
-	align-self: center;
-
-	&:hover{
-		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)};
-	}
-`;
-
-const NotificationsImpossible = styled(Link)`
-	display: block;
-	background-color: ${primaryRed};
-	mask: center no-repeat url('${NotificationsImpossibleIcon}');
-	mask-size: contain;
-	width: 19px;
-	height: 19px;
-	display: inline-flex;
-	margin-left: -.5rem;
-	align-self: center;
-
-	&:hover{
-		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)};
-	}
+const IconButtonLink = styled(Link)`
+	text-decoration: none;
 `;
 
 const OpenBtn = styled(ButtonLink)`
@@ -324,6 +266,31 @@ const TaskInfos = styled('div')`
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
 	}
+`;
+
+const IconsWrap = styled('div')`
+	display: flex;
+	margin-right: 1rem;
+
+	${TaskInfosItemLink} {
+		margin-right: 0;
+	}
+`;
+
+const CommentWrap = styled('span')`
+	position: relative;
+`;
+
+const CommentNumber = styled('span')`
+	color: ${primaryWhite};
+	position: absolute;
+	left: 8px;
+	top: 5px;
+	font-weight: 600;
+	font-size: 10px;
+	width: 0.75rem;
+	text-align: center;
+	pointer-events: none;
 `;
 
 const SetTimeContainer = styled('div')`
@@ -352,16 +319,6 @@ const SetTimeCaption = styled('div')`
 	white-space: nowrap;
 `;
 
-const FocusStateIcon = styled('div')`
-	display: flex;
-	margin-right: 1rem;
-	cursor: pointer;
-
-	:hover ${NotificationsState} {
-		background-color: ${props => (props.isFocused ? primaryRed : primaryPurple)}');
-	}
-`;
-
 const Tag = styled(Link)`
 	background-color: ${props => props.bg};
 	color: ${props => props.color};
@@ -388,7 +345,13 @@ export function TaskCustomerInput({
 		<TaskIconText
 			data-tip="Personne liée à la tâche"
 			inactive={editCustomer}
-			icon={<TaskInfosIcon icon={ClientIconSvg} />}
+			icon={
+				<MaterialIcon
+					icon="person_outline"
+					size="tiny"
+					color={accentGrey}
+				/>
+			}
 			content={
 				!disabled && editCustomer ? (
 					<CustomerDropdown
@@ -488,66 +451,108 @@ export function TaskInfosInputs({
 
 	return (
 		<TaskInfos>
-			{!noComment && (
-				<TaskInfosItemLink
-					to={{
-						pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-						state: {prevSearch: location.search},
-					}}
-				>
-					<CommentIcon
-						new={unreadCommentLength > 0}
-						data-tip="Ouvrir les commentaires"
+			<IconsWrap>
+				{!noComment && (
+					<TaskInfosItemLink
+						to={{
+							pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+							state: {prevSearch: location.search},
+						}}
 					>
-						{item.comments.length > 0 ? item.comments.length : '+'}
-					</CommentIcon>
-					{item.description && (
-						<HaveDescription data-tip="Lire la description de cette tâche" />
-					)}
-				</TaskInfosItemLink>
-			)}
-			{customerTask && (
-				<FocusStateIcon>
-					{activableTask && item.linkedCustomer && !item.isFocused && (
-						<NotificationsState
-							data-tip="Les rappels clients ne sont pas activés pour cette tâche"
-							isFocused={item.isFocused}
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						/>
-					)}
-					{activableTask && item.linkedCustomer && item.isFocused && (
-						<NotificationsState
-							data-tip="Les rappels client sont activés pour cette tâche"
-							isFocused={item.isFocused}
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						/>
-					)}
-					{activableTask && !item.linkedCustomer && (
-						<NotificationsImpossible
-							data-tip="Aucun client n’est lié à cette tâche"
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						/>
-					)}
-				</FocusStateIcon>
-			)}
+						<CommentWrap>
+							<IconButton
+								icon={
+									item.comments.length > 0
+										? 'mode_comment'
+										: 'add_comment'
+								}
+								size="tiny"
+								color={
+									unreadCommentLength > 0 ? primaryRed : ''
+								}
+								data-tip="Ouvrir les commentaires"
+							/>
+							<CommentNumber unread={unreadCommentLength > 0}>
+								{item.comments.length > 0
+									? item.comments.length
+									: ''}
+							</CommentNumber>
+						</CommentWrap>
+						{item.description && (
+							<IconButton
+								icon="assignment"
+								size="tiny"
+								data-tip="Lire la description de cette tâche"
+							/>
+						)}
+					</TaskInfosItemLink>
+				)}
+				{customerTask && (
+					<>
+						{activableTask
+							&& item.linkedCustomer
+							&& !item.isFocused && (
+							<IconButtonLink
+								data-tip="Les rappels clients ne sont pas activés pour cette tâche"
+								isFocused={item.isFocused}
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								<IconButton
+									icon="notifications_off"
+									size="tiny"
+								/>
+							</IconButtonLink>
+						)}
+						{activableTask
+							&& item.linkedCustomer
+							&& item.isFocused && (
+							<IconButtonLink
+								data-tip="Les rappels client sont activés pour cette tâche"
+								isFocused={item.isFocused}
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								<IconButton
+									icon="notifications_active"
+									size="tiny"
+									color={primaryPurple}
+								/>
+							</IconButtonLink>
+						)}
+						{activableTask && !item.linkedCustomer && (
+							<IconButtonLink
+								data-tip="Aucun client n’est lié à cette tâche"
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								<IconButton
+									icon="warning"
+									size="tiny"
+									color={primaryRed}
+								/>
+							</IconButtonLink>
+						)}
+					</>
+				)}
+			</IconsWrap>
 			<TaskIconText
 				inactive={editUnit}
-				icon={<TaskInfosIcon icon={ClockIconSvg} />}
+				icon={
+					<MaterialIcon icon="timer" size="tiny" color={accentGrey} />
+				}
 				content={
 					!customerToken && editUnit ? (
 						<UnitInput
@@ -605,7 +610,9 @@ export function TaskInfosInputs({
 			<TaskIconText
 				data-tip="Marge restante pour commencer la tâche"
 				inactive={editDueDate}
-				icon={<TaskInfosIcon icon={DateIconSvg} />}
+				icon={
+					<MaterialIcon icon="event" size="tiny" color={accentGrey} />
+				}
 				content={
 					<DateInputContainer
 						onClick={
@@ -674,7 +681,13 @@ export function TaskInfosInputs({
 				<TaskIconText
 					data-tip="Fichiers joints"
 					inactive={editDueDate}
-					icon={<TaskInfosIcon icon={FilesIconSvg} />}
+					icon={
+						<MaterialIcon
+							icon="attach_file"
+							size="tiny"
+							color={accentGrey}
+						/>
+					}
 					content={
 						<>
 							{item.attachments.length}{' '}
@@ -691,7 +704,13 @@ export function TaskInfosInputs({
 				<TaskIconText
 					data-tip="Tags"
 					inactive={true}
-					icon={<TaskInfosIcon icon={TagIconSvg} />}
+					icon={
+						<MaterialIcon
+							icon="label"
+							size="tiny"
+							color={accentGrey}
+						/>
+					}
 					content={
 						<>
 							{item.tags.map(tag => (

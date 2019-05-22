@@ -180,7 +180,7 @@ export function ArianneElem({ children, id, list, selectedId, ...rest }) {
 	const selectedItem = options.find(item => item.value === selectedId);
 
 	return (
-		<ArianneElemMain>
+		<ArianneElemMain id={`${id}-filter`}>
 			<Select
 				placeholder={children}
 				options={options}
@@ -216,7 +216,7 @@ export function ArianneElemCreatable({
 		: options.find(item => item.value === selectedId);
 
 	return (
-		<ArianneElemMain long={long}>
+		<ArianneElemMain long={long} id={`${id}-filter`}>
 			<Creatable
 				placeholder={children}
 				options={options}

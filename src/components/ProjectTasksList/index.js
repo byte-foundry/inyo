@@ -34,7 +34,7 @@ import {
 import InlineEditable from '../InlineEditable';
 import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
-import {ReactComponent as TrashIcon} from '../../utils/icons/trash-icon.svg';
+import IconButton from '../../utils/new/components/IconButton';
 
 const TasksListContainer = styled(LayoutMainElem)``;
 
@@ -227,8 +227,8 @@ function SectionTitle({onClickTrash, ...props}) {
 				onClick={onClickTrash}
 				data-tip="Supprimer cette section"
 			>
-				<TrashButton>
-					<TrashIcon />
+				<TrashButton link>
+					<IconButton icon="delete_forever" size="small" danger />
 				</TrashButton>
 			</TrashIconContainer>
 		</SectionTitleContainer>

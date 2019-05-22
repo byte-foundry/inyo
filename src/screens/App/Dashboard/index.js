@@ -36,6 +36,7 @@ function Dashboard({history}) {
 				customerToken
 				data-tip="Instructions pour utiliser l'interface"
 				onClick={() => history.push('/app/tasks?openHelpModal=true')}
+				id="help-button"
 			>
 				?
 			</Help>

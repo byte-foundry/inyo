@@ -24,6 +24,7 @@ const TaskActivationButton = ({
 
 	return (
 		<BistableButton
+			id="task-customer-activation-button"
 			white={!isActive}
 			value={isActive}
 			disabled={disabled}

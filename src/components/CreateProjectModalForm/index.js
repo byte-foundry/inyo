@@ -8,6 +8,7 @@ import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
 import FormRadiosList from '../FormRadiosList';
 import DateInput from '../DateInput';
+import IconButton from '../../utils/new/components/IconButton';
 
 import {GET_ALL_PROJECTS, GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {templates} from '../../utils/project-templates';
@@ -19,29 +20,11 @@ import {
 	InputLabel,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {ReactComponent as EyeIcon} from '../../utils/icons/eye.svg';
-import {ReactComponent as AddIcon} from '../../utils/icons/add-circle.svg';
 import {ModalActions, FlexRow} from '../../utils/content';
 import {BREAKPOINTS} from '../../utils/constants';
 
 const FormSubHeading = styled(SubHeading)`
 	grid-column: 1 / 4;
-`;
-
-const SeeContentIcon = styled(EyeIcon)`
-	vertical-align: middle;
-	margin-top: -2px;
-	width: 16px;
-	margin-right: 10px;
-	margin-left: 4px;
-`;
-
-const AddCustomerIcon = styled(AddIcon)`
-	vertical-align: middle;
-	margin-top: -2px;
-	width: 16px;
-	margin-right: 10px;
-	margin-left: 4px;
 `;
 
 const CreateProjectRow = styled('div')`
@@ -184,6 +167,7 @@ export default function ({
 								name="modelTemplate"
 								label="Titre du modèle"
 								big
+								classNamePrefix="intercom-tour"
 								options={templates.map(template => ({
 									value: template.name,
 									label: template.label,
@@ -199,8 +183,12 @@ export default function ({
 									setViewContent(true);
 								}}
 							>
-								<SeeContentIcon />
-								<span>Voir le contenu</span>
+								<IconButton
+									icon="infos"
+									size="tiny"
+									inactive={!props.values.modelTemplate}
+									label="Voir le contenu"
+								/>
 							</Button>
 						</CreateProjectElem>
 					</>
@@ -213,6 +201,7 @@ export default function ({
 								name="modelProject"
 								label="Titre du projet"
 								big
+								classNamePrefix="intercom-tour"
 								options={optionsProjects}
 							/>
 						</CreateProjectElem>
@@ -225,8 +214,12 @@ export default function ({
 									setViewContent(true);
 								}}
 							>
-								<SeeContentIcon />
-								<span>Voir le contenu</span>
+								<IconButton
+									icon="infos"
+									size="tiny"
+									inactive={!props.values.modelProject}
+									label="Voir le contenu"
+								/>
 							</Button>
 						</CreateProjectElem>
 					</>
@@ -252,8 +245,11 @@ export default function ({
 					</CreateProjectElem>
 					<CreateProjectElem end>
 						<Button link onClick={() => setCreateCustomer(true)}>
-							<AddCustomerIcon />
-							<span>Créer un nouveau client</span>
+							<IconButton
+								icon="perm_contact_calendar"
+								size="tiny"
+								label="Créer un nouveau client"
+							/>
 						</Button>
 					</CreateProjectElem>
 				</>
@@ -298,6 +294,7 @@ export default function ({
 					<FlexRowButtons>
 						{!addCustomer && (
 							<Button
+								aligned
 								onClick={(e) => {
 									e.preventDefault();
 									setAddCustomer(true);
@@ -308,6 +305,7 @@ export default function ({
 						)}
 						{!addDeadline && (
 							<Button
+								aligned
 								onClick={(e) => {
 									e.preventDefault();
 									setAddDeadline(true);

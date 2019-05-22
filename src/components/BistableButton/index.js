@@ -13,8 +13,10 @@ const BistableButton = ({
 	reverse,
 	white,
 	primary,
+	id,
 }) => (
 	<Button
+		id={id}
 		data-tip={value ? trueTooltip : falseTooltip}
 		white={white}
 		primary={primary}

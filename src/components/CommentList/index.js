@@ -202,6 +202,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 						<form onSubmit={handleSubmit}>
 							<FlexRow>
 								<ItemComment
+									id="comment-textarea"
 									data-tip="Les personnes liées à la tâche seront notifiées"
 									placeholder={placeholderText}
 									value={values.newComment}
@@ -218,6 +219,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 							)}
 							<FlexRow justifyContent="flex-end">
 								<Button
+									id="add-comment-button"
 									data-tip="Visible par les personnes liées au projet"
 									type="submit"
 								>

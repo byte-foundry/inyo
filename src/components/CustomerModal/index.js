@@ -355,6 +355,7 @@ const CustomerModal = ({
 									{selectedCustomerId && (
 										<Button
 											red
+											aligned
 											type="button"
 											onClick={() => {
 												onValidate({
@@ -368,6 +369,7 @@ const CustomerModal = ({
 									)}
 									<Button
 										type="submit"
+										aligned
 										disabled={isSubmitting}
 									>
 										Valider

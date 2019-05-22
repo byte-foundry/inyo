@@ -7,16 +7,13 @@ import ReactTooltip from 'react-tooltip';
 import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import CreateProjectModal from '../../../components/CreateProjectModal';
+import IconButton from '../../../utils/new/components/IconButton';
 
-import {ReactComponent as TrashIcon} from '../../../utils/icons/trash-icon.svg';
-import {ReactComponent as ArchiveIcon} from '../../../utils/icons/archive-icon.svg';
-import {ReactComponent as UnarchiveIcon} from '../../../utils/icons/unarchive-icon.svg';
 import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
 import IllusBackground from '../../../utils/images/empty-project-background.svg';
 import IllusFigure from '../../../utils/images/empty-project-illus.svg';
 
 import {TOOLTIP_DELAY} from '../../../utils/constants';
-import {FlexRow, FlexColumn} from '../../../utils/content';
 import {onboardingTemplate} from '../../../utils/project-templates';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
@@ -25,7 +22,13 @@ import {
 	UNARCHIVE_PROJECT,
 	CREATE_PROJECT,
 } from '../../../utils/mutations';
-import {ModalContainer, ModalElem, ModalActions} from '../../../utils/content';
+import {
+	ModalContainer,
+	ModalElem,
+	ModalActions,
+	FlexRow,
+	FlexColumn,
+} from '../../../utils/content';
 import {
 	Main,
 	Container,
@@ -192,6 +195,7 @@ function Projects({history}) {
 	return (
 		<Container>
 			<Help
+				id="help-button"
 				customerToken
 				data-tip="Instructions pour utiliser l'interface"
 				onClick={() => history.push('/app/tasks?openHelpModal=true')}
@@ -377,7 +381,11 @@ function Projects({history}) {
 												}}
 												data-tip="Supprimer ce projet"
 											>
-												<TrashIcon />
+												<IconButton
+													icon="delete_forever"
+													size="tiny"
+													danger
+												/>
 											</TrashButton>
 											<ArchiveButton
 												onClick={(e) => {
@@ -391,7 +399,10 @@ function Projects({history}) {
 												}}
 												data-tip="Archiver ce projet"
 											>
-												<ArchiveIcon />
+												<IconButton
+													icon="archive"
+													size="tiny"
+												/>
 											</ArchiveButton>
 										</ActionsIconContainer>
 									</ProjectHeader>
@@ -460,7 +471,11 @@ function Projects({history}) {
 														}}
 														data-tip="Supprimer ce projet"
 													>
-														<TrashIcon />
+														<IconButton
+															icon="delete_forever"
+															size="tiny"
+															danger
+														/>
 													</TrashButton>
 													<ArchiveButton
 														onClick={(e) => {
@@ -474,7 +489,10 @@ function Projects({history}) {
 														}}
 														data-tip="Désarchiver ce projet"
 													>
-														<UnarchiveIcon />
+														<IconButton
+															icon="unarchive"
+															size="tiny"
+														/>
 													</ArchiveButton>
 												</ActionsIconContainer>
 											</ProjectHeader>

@@ -103,12 +103,14 @@ const NotificationContainer = styled('div')`
 `;
 
 const NotificationTrayButton = ({mobile}) => {
+	const originalTitle = useRef(document.title);
 	const icon = useRef();
 	const dialogRef = useRef();
 	const containerElement = useRef(null);
 	const [isOpen, setOpen] = useState(false);
-	const {data, loading} = useQuery(GET_USER_NOTIFICATIONS, {
+	const {data, refetch, loading} = useQuery(GET_USER_NOTIFICATIONS, {
 		suspend: false,
+		pollInterval: 1000 * 60,
 	});
 	const markNotificationsAsRead = useMutation(MARK_NOTIFICATIONS_AS_READ, {
 		optimisticResponse: {
@@ -134,13 +136,27 @@ const NotificationTrayButton = ({mobile}) => {
 		},
 	});
 
-	let someUnread = false;
+	let unreadNumber = 0;
 
 	if (!loading) {
-		someUnread = data.me.notifications.some(
-			notification => notification.unread,
+		unreadNumber = data.me.notifications.reduce(
+			(sum, notification) => sum + (notification.unread ? 1 : 0),
+			0,
 		);
 	}
+
+	useEffect(() => {
+		if (unreadNumber > 0) {
+			document.title = `(${unreadNumber}) ${originalTitle.current}`;
+		}
+		else {
+			document.title = originalTitle.current;
+		}
+
+		return () => {
+			document.title = originalTitle.current;
+		};
+	}, [unreadNumber]);
 
 	useEffect(() => {
 		if (!containerElement.current) {
@@ -162,9 +178,15 @@ const NotificationTrayButton = ({mobile}) => {
 		<NotificationContainer mobile={mobile}>
 			<Icon
 				data-tip="Notifications liées à vos clients"
-				someUnread={someUnread}
+				someUnread={unreadNumber > 0}
 				ref={icon}
-				onClick={() => setOpen(!isOpen)}
+				onClick={() => {
+					setOpen(!isOpen);
+
+					if (!isOpen) {
+						refetch();
+					}
+				}}
 			>
 				<IconButton icon="notifications" size="small" />
 			</Icon>
@@ -191,7 +213,7 @@ const NotificationTrayButton = ({mobile}) => {
 						}}
 					>
 						<MarkRead
-							someUnread={someUnread}
+							someUnread={unreadNumber > 0}
 							link
 							onClick={() => markNotificationsAsRead()}
 						>

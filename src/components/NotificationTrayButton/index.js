@@ -103,7 +103,6 @@ const NotificationContainer = styled('div')`
 `;
 
 const NotificationTrayButton = ({mobile}) => {
-	const originalTitle = useRef(document.title);
 	const icon = useRef();
 	const dialogRef = useRef();
 	const containerElement = useRef(null);
@@ -147,14 +146,14 @@ const NotificationTrayButton = ({mobile}) => {
 
 	useEffect(() => {
 		if (unreadNumber > 0) {
-			document.title = `(${unreadNumber}) ${originalTitle.current}`;
+			document.title = `(${unreadNumber}) Inyo`;
 		}
 		else {
-			document.title = originalTitle.current;
+			document.title = 'Inyo';
 		}
 
 		return () => {
-			document.title = originalTitle.current;
+			document.title = 'Inyo';
 		};
 	}, [unreadNumber]);
 

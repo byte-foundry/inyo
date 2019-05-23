@@ -20,7 +20,7 @@ const A = styled(Link)`
 	}
 `;
 
-const Container = styled('div')`
+const Container = styled('span')`
 	border-radius: 4px;
 	padding: 10px;
 	font-size: 0.85rem;
@@ -44,6 +44,8 @@ const NotificationItem = ({
 
 	let objectLink = '';
 
+	let objectName = '';
+
 	switch (eventType) {
 	case 'POSTED_COMMENT':
 		action = 'a commenté la tâche';
@@ -53,18 +55,30 @@ const NotificationItem = ({
 		action = 'a consulté le projet';
 		icon = 'visibility';
 		break;
+	case 'UPLOADED_ATTACHMENT':
+		action = 'a ajouté un nouveau document sur la tâche';
+		icon = 'attachment';
+		break;
+	case 'FINISHED_TASK':
+		action = 'a validé la tâche';
+		icon = 'done';
+		break;
 	default:
 	}
 
-	// eslint-disable-next-line no-underscore-dangle
-	switch (object.__typename) {
-	case 'Project':
-		objectLink = `/app/tasks?projectId=${object.id}`;
-		break;
-	case 'Item':
-		objectLink = `/app/tasks/${object.id}`;
-		break;
-	default:
+	if (object) {
+		// eslint-disable-next-line no-underscore-dangle
+		switch (object.__typename) {
+		case 'Project':
+			objectLink = `/app/tasks?projectId=${object.id}`;
+			objectName = object.name;
+			break;
+		case 'Item':
+			objectLink = `/app/tasks/${object.id}`;
+			objectName = object.name;
+			break;
+		default:
+		}
 	}
 
 	return (
@@ -76,7 +90,7 @@ const NotificationItem = ({
 					color={unread ? '' : accentGrey}
 				/>
 				<div>
-					{from.firstName} {from.lastName} {action} {object.name}.
+					{from.firstName} {from.lastName} {action} {objectName}.
 				</div>
 			</Container>
 		</A>

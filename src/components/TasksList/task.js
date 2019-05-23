@@ -700,7 +700,7 @@ export function TaskInfosInputs({
 					}
 				/>
 			)}
-			{item.tags && item.tags.length > 0 && (
+			{!customerToken && item.tags && item.tags.length > 0 && (
 				<TaskIconText
 					data-tip="Tags"
 					inactive={true}

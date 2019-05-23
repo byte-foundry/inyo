@@ -12,6 +12,9 @@ import TaskCustomerIconValidatedUrl, {
 } from './icons/taskicon-customer-validated.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 
+import TaskInvoiceIconUrl, {
+	ReactComponent as TaskInvoiceIcon,
+} from './icons/invoice-icon.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
@@ -108,6 +111,25 @@ export const ITEM_TYPES = [
 		type: 'CONTENT_ACQUISITION',
 		name: 'Récupération contenu',
 		description: 'Lister et récupérer les contenus nécessaires',
+	},
+	{
+		icon: <ContentAcquisitionIcon />,
+		iconValidated: <TaskCustomerIconValidated />,
+		iconUrl: ContentAcquisitionIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'SECTION',
+		name: 'Section de projet',
+		description: "Créer une section pour classer les tâches d'un projet",
+	},
+	{
+		icon: <TaskInvoiceIcon />,
+		iconValidated: <TaskCustomerIconValidated />,
+		iconUrl: TaskInvoiceIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'INVOICE',
+		name: 'Paiement de facture',
+		description:
+			'Envoyer une facture et demander le paiement a votre client',
 	},
 	/* {
 		icon: <CustomerReminderIcon />,

@@ -324,6 +324,14 @@ const TaskInput = ({
 										setShowContentAcquisitionInfos(true);
 									}
 								}
+								else if (type === 'SECTION') {
+									onSubmitSection({
+										name: value,
+									});
+									setValue('');
+									closeMoreInfos();
+									closeContentAcquisitionInfos();
+								}
 								else {
 									onSubmitTask({
 										name: value,
@@ -439,7 +447,8 @@ const TaskInput = ({
 									}
 								}}
 							>
-								créer la tâche
+								créer la{' '}
+								{type === 'SECTION' ? 'section' : 'tâche'}
 							</Button>
 							{onSubmitProject && (
 								<Button
@@ -452,7 +461,7 @@ const TaskInput = ({
 									créer un projet
 								</Button>
 							)}
-							{onSubmitSection && (
+							{type !== 'SECTION' && onSubmitSection && (
 								<Button
 									data-tip="Flèche du bas pour créer un ensemble de tâches"
 									icon="↓"
@@ -540,7 +549,9 @@ const TaskInput = ({
 			)}
 			{((value.startsWith('/') && focus) || openedByClick) && (
 				<TaskTypeDropdown
-					types={types}
+					types={types.filter(
+						t => t.type !== 'SECTION' || onSubmitSection,
+					)}
 					filter={value.startsWith('/') ? value.substr(1) : ''}
 					onSelectCommand={({type: selectedType}) => {
 						setType(selectedType);

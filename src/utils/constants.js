@@ -12,6 +12,9 @@ import TaskCustomerIconValidatedUrl, {
 } from './icons/taskicon-customer-validated.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 
+import SectionIconUrl, {
+	ReactComponent as SectionIcon,
+} from './icons/section-icon.svg';
 import TaskInvoiceIconUrl, {
 	ReactComponent as TaskInvoiceIcon,
 } from './icons/invoice-icon.svg';
@@ -113,9 +116,9 @@ export const ITEM_TYPES = [
 		description: 'Lister et récupérer les contenus nécessaires',
 	},
 	{
-		icon: <ContentAcquisitionIcon />,
+		icon: <SectionIcon />,
 		iconValidated: <TaskCustomerIconValidated />,
-		iconUrl: ContentAcquisitionIconUrl,
+		iconUrl: SectionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'SECTION',
 		name: 'Section de projet',

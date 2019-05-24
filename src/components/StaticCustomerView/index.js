@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import CustomerTasks from '../../screens/Customer/Tasks/tasks';
 import {BREAKPOINTS} from '../../utils/constants';
+import {CustomerContext} from '../../utils/contexts';
 
 const Container = styled('div')`
 	padding: 3rem;
@@ -13,13 +14,14 @@ const Container = styled('div')`
 `;
 
 const StaticCustomerView = ({projectId}) => (
-	<Container>
-		<CustomerTasks
-			projectId={projectId}
-			customerToken="preview"
-			style={{pointerEvents: 'none', minHeight: 'auto'}}
-		/>
-	</Container>
+	<CustomerContext.Provider value="preview">
+		<Container>
+			<CustomerTasks
+				projectId={projectId}
+				style={{pointerEvents: 'none', minHeight: 'auto'}}
+			/>
+		</Container>
+	</CustomerContext.Provider>
 );
 
 export default StaticCustomerView;

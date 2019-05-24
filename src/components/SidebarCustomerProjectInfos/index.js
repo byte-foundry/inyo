@@ -86,9 +86,10 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 	const activeView = query.get('view');
 
 	const customerToken = useContext(CustomerContext);
+	const token = customerToken === 'preview' ? undefined : customerToken;
 
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
-		variables: {projectId, token: customerToken},
+		variables: {projectId, token},
 		suspend: true,
 	});
 

@@ -288,7 +288,7 @@ const CommentNumber = styled("span")`
 	color: ${primaryWhite};
 	position: absolute;
 	left: 8px;
-	top: 3px;
+	top: 5px;
 	font-weight: 600;
 	font-size: 10px;
 	width: 0.75rem;

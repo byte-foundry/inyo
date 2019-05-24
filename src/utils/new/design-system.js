@@ -156,6 +156,12 @@ export const Button = styled("button")`
 			}
 		`}
 
+		${props =>
+			props.disabled &&
+			css`
+				opacity: 0.5;
+			`}
+
 	${props =>
 		props.textIcon &&
 		`

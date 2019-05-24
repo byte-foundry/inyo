@@ -1,24 +1,20 @@
-import React from 'react';
-import {
-	Link, Switch, Route, Redirect,
-} from 'react-router-dom';
-import styled from '@emotion/styled';
+import React from "react";
+import { Link, Switch, Route, Redirect } from "react-router-dom";
+import styled from "@emotion/styled";
 
-import {
-	P, primaryNavyBlue, primaryBlue, H1,
-} from '../../utils/content';
+import { P, primaryNavyBlue, primaryBlue, H1 } from "../../utils/content";
 
-import LoginForm from '../../components/LoginForm';
-import SignUpForm from '../../components/SignupForm';
-import SendResetPasswordForm from '../../components/SendResetPasswordForm';
-import ResetPasswordForm from '../../components/ResetPasswordForm';
+import LoginForm from "../../components/LoginForm";
+import SignUpForm from "../../components/SignupForm";
+import SendResetPasswordForm from "../../components/SendResetPasswordForm";
+import ResetPasswordForm from "../../components/ResetPasswordForm";
 
-import {ReactComponent as AppLogo} from '../../utils/icons/appLogo.svg';
-import SuccessIllus from '../../utils/images/bermuda-success.svg';
+import { ReactComponent as AppLogo } from "../../utils/icons/appLogo.svg";
+import SuccessIllus from "../../utils/images/bermuda-success.svg";
 
-import {BREAKPOINTS} from '../../utils/constants';
+import { BREAKPOINTS } from "../../utils/constants";
 
-const AuthMain = styled('div')`
+const AuthMain = styled("div")`
 	display: flex;
 	flex-direction: row;
 	min-height: 100vh;
@@ -28,7 +24,7 @@ const AuthMain = styled('div')`
 		min-height: initial;
 	}
 `;
-const AuthForm = styled('div')`
+const AuthForm = styled("div")`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -48,7 +44,7 @@ const AuthForm = styled('div')`
 		}
 	}
 `;
-const AuthText = styled('div')`
+const AuthText = styled("div")`
 	display: flex;
 	flex-direction: column;
 	justify-content: top;
@@ -62,14 +58,14 @@ const AuthText = styled('div')`
 	}
 `;
 
-const AuthTextContent = styled('div')`
+const AuthTextContent = styled("div")`
 	max-width: 700px;
 	margin-left: auto;
 	margin-right: auto;
 `;
 const TextTitle = styled(H1)`
 	color: ${primaryBlue};
-	font-size: 32px;
+	font-size: 24px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
@@ -77,14 +73,14 @@ const TextTitle = styled(H1)`
 `;
 const TextContent = styled(P)`
 	color: ${primaryNavyBlue};
-	font-size: 20px;
+	font-size: 18px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
 	}
 `;
 
-const Illus = styled('img')`
+const Illus = styled("img")`
 	max-width: 60%;
 	margin: 0 auto;
 `;
@@ -103,7 +99,7 @@ function Auth() {
 					/>
 					<Route
 						path="/auth/reset/:token"
-						render={({match}) => (
+						render={({ match }) => (
 							<ResetPasswordForm
 								resetToken={match.params.token}
 							/>
@@ -118,7 +114,7 @@ function Auth() {
 						path="/auth/sign-in"
 						render={() => (
 							<P>
-								Vous êtes nouveau ?{' '}
+								Vous êtes nouveau ?{" "}
 								<Link to="/auth/sign-up">Créer un compte</Link>
 							</P>
 						)}
@@ -128,7 +124,7 @@ function Auth() {
 						path="/auth/sign-up"
 						render={() => (
 							<P>
-								Vous avez déjà un compte ?{' '}
+								Vous avez déjà un compte ?{" "}
 								<Link to="/auth/sign-in">Se connecter</Link>
 							</P>
 						)}
@@ -138,13 +134,15 @@ function Auth() {
 			<AuthText>
 				<AuthTextContent>
 					<Illus src={SuccessIllus} />
-					<TextTitle>Créez votre compte gratuitement</TextTitle>
+					<TextTitle>
+						Partagez avec votre client une liste de tâches
+						intelligente.
+					</TextTitle>
 					<TextContent>
-						Optimisez votre temps en automatisant des tâches
-						répétitives et réévaluez vos projets en direct avec vos
-						clients. Avec Inyo vous gagnez du temps en vous
-						concentrant sur votre vrai métier et votre travail est
-						payé à sa juste valeur.
+						Déclenchez automatiquement des actions en fonction de
+						vos projets. Vous ne perdrez plus de temps à relancer
+						vos clients et ceux-ci auront une meilleure
+						compréhension de votre travail.
 					</TextContent>
 				</AuthTextContent>
 			</AuthText>

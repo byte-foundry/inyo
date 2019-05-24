@@ -1,15 +1,15 @@
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
-import React, {useState, useRef, useEffect} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
-import ReactTooltip from 'react-tooltip';
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
+import React, { useState, useRef, useEffect } from "react";
+import useOnClickOutside from "use-onclickoutside";
+import ReactTooltip from "react-tooltip";
 
-import TaskTypeDropdown from '../TaskTypeDropdown';
-import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
-import CheckList from '../CheckList';
-import CustomerModalAndMail from '../CustomerModalAndMail';
+import TaskTypeDropdown from "../TaskTypeDropdown";
+import { TaskInfosInputs, TaskCustomerInput } from "../TasksList/task";
+import CheckList from "../CheckList";
+import CustomerModalAndMail from "../CustomerModalAndMail";
 
-import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import { ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS } from "../../utils/constants";
 import {
 	Button,
 	TaskInputDropdown,
@@ -21,14 +21,16 @@ import {
 	mediumGrey,
 	accentGrey,
 	primaryWhite,
-} from '../../utils/new/design-system';
+	primaryBlack,
+	lightGrey
+} from "../../utils/new/design-system";
 
-const Container = styled('div')`
+const Container = styled("div")`
 	font-size: 14px;
 	position: relative;
 `;
 
-const InputContainer = styled('div')`
+const InputContainer = styled("div")`
 	display: flex;
 	align-items: center;
 	padding-left: 0.3rem;
@@ -41,11 +43,11 @@ const InputContainer = styled('div')`
 	}
 `;
 
-const InputButtonWrapper = styled('div')`
+const InputButtonWrapper = styled("div")`
 	position: relative;
 `;
 
-const InputButtonContainer = styled('div')`
+const InputButtonContainer = styled("div")`
 	position: absolute;
 	display: flex;
 	flex-flow: column nowrap;
@@ -71,7 +73,7 @@ const InputButtonContainer = styled('div')`
 		background: rgba(255, 255, 255, 0.5);
 
 		&:after {
-			content: 'ou';
+			content: "ou";
 			color: ${primaryGrey};
 			position: absolute;
 			left: -1.2rem;
@@ -101,30 +103,30 @@ const InputButtonContainer = styled('div')`
 	}
 `;
 
-const Input = styled('input')`
+const Input = styled("input")`
 	display: flex;
 	flex: 1;
-	background-color: ${primaryWhite};
+	background-color: ${mediumGrey}; /* #f1f3f4 */
 	border-radius: 2rem;
 	padding: 0.2rem 1.2rem 0.2rem 5rem;
 	margin-left: -2.7rem;
 	color: ${primaryPurple};
-	font-size: 1.2rem;
-	border: 1px solid ${mediumGrey};
+	font-size: 1.1rem;
+	border: 1px solid transparent;
 	transition: all 400ms ease;
 	height: 2.5rem;
 
 	&:hover {
-		background-color: ${lightPurple};
+		background-color: ${lightGrey};
 		animation: all 400ms ease;
 	}
 
 	&::placeholder {
-		color: ${mediumPurple};
-		font-size: 14px;
+		color: ${primaryBlack};
+		font-size: 15px;
+		line-height: 1;
 		align-items: center;
-		font-style: italic;
-		font-family: 'Work Sans', sans-serif;
+		font-family: "Work Sans", sans-serif;
 	}
 
 	&:focus {
@@ -133,7 +135,8 @@ const Input = styled('input')`
 		outline: 0;
 		box-shadow: none;
 		background: #fff;
-		border: 1px solid ${mediumPurple};
+		border: 1px solid ${mediumGrey};
+		box-shadow: 3px 3px 10px ${lightGrey};
 		transition: all 400ms ease;
 	}
 
@@ -145,11 +148,12 @@ const Input = styled('input')`
 	}
 `;
 
-const Icon = styled('div')`
+const Icon = styled("div")`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: ${props => (props.active ? 'transparent' : primaryPurple)};
+	background-color: ${props =>
+		props.active ? "transparent" : primaryPurple};
 	color: #fff;
 	border: 2px solid transparent;
 	border-radius: 50%;
@@ -162,7 +166,7 @@ const Icon = styled('div')`
 
 	&:hover {
 		border: 2px dashed
-			${props => (props.active ? 'transparent' : primaryPurple)};
+			${props => (props.active ? "transparent" : primaryPurple)};
 		color: ${primaryPurple};
 		background-color: #fff;
 		transition: all 400ms ease;
@@ -175,30 +179,30 @@ const Icon = styled('div')`
 	}
 `;
 
-const TaskInfosInputsContainer = styled('div')`
+const TaskInfosInputsContainer = styled("div")`
 	position: absolute;
 	top: 61px;
 	left: 57px;
 `;
 
-const TaskInputCheckListContainer = styled('div')`
+const TaskInputCheckListContainer = styled("div")`
 	margin-left: 2em;
 `;
 
 const types = ITEM_TYPES;
 
-const useTrackEventInput = ({focus, openedByClick, value}) => {
+const useTrackEventInput = ({ focus, openedByClick, value }) => {
 	useEffect(() => {
-		if (focus && value.startsWith('/')) {
-			window.Intercom('trackEvent', 'open-task-dropdown');
-			window.Intercom('trackEvent', 'open-task-dropdown-with-slash');
+		if (focus && value.startsWith("/")) {
+			window.Intercom("trackEvent", "open-task-dropdown");
+			window.Intercom("trackEvent", "open-task-dropdown-with-slash");
 		}
-	}, [focus, value.startsWith('/')]);
+	}, [focus, value.startsWith("/")]);
 
 	useEffect(() => {
 		if (openedByClick) {
-			window.Intercom('trackEvent', 'open-task-dropdown');
-			window.Intercom('trackEvent', 'open-task-dropdown-with-button');
+			window.Intercom("trackEvent", "open-task-dropdown");
+			window.Intercom("trackEvent", "open-task-dropdown-with-button");
 		}
 	}, [openedByClick]);
 };
@@ -209,17 +213,17 @@ const TaskInput = ({
 	onSubmitTask,
 	defaultValue,
 	currentProjectId,
-	defaultCustomer,
+	defaultCustomer
 }) => {
 	const [value, setValue] = useState(defaultValue);
-	const [type, setType] = useState('');
+	const [type, setType] = useState("");
 	const [focus, setFocus] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [openedByClick, setOpenedByClick] = useState(false);
 	const [moreInfosMode, setMoreInfosMode] = useState(false);
 	const [
 		showContentAcquisitionInfos,
-		setShowContentAcquisitionInfos,
+		setShowContentAcquisitionInfos
 	] = useState(false);
 	const [itemUnit, setItemUnit] = useState(0);
 	const [itemDueDate, setItemDueDate] = useState();
@@ -246,16 +250,15 @@ const TaskInput = ({
 		setOpenedByClick(false);
 	});
 
-	let icon = '▾';
+	let icon = "▾";
 
 	if (type) {
-		({icon} = types.find(t => t.type === type));
-	}
-	else if (!value.startsWith('/') && value.length > 0) {
-		({icon} = types.find(t => t.type === 'DEFAULT'));
+		({ icon } = types.find(t => t.type === type));
+	} else if (!value.startsWith("/") && value.length > 0) {
+		({ icon } = types.find(t => t.type === "DEFAULT"));
 	}
 
-	useTrackEventInput({focus, openedByClick, value});
+	useTrackEventInput({ focus, openedByClick, value });
 
 	return (
 		<Container ref={ref}>
@@ -277,81 +280,76 @@ const TaskInput = ({
 					onChange={e => setValue(e.target.value)}
 					value={value}
 					onFocus={() => setFocus(true)}
-					onKeyDown={(e) => {
-						if (!value.startsWith('/')) {
-							if (e.key === 'ArrowUp' && onSubmitProject) {
+					onKeyDown={e => {
+						if (!value.startsWith("/")) {
+							if (e.key === "ArrowUp" && onSubmitProject) {
 								onSubmitProject({
-									name: value,
+									name: value
 								});
-								setValue('');
+								setValue("");
 								closeMoreInfos();
 								closeContentAcquisitionInfos();
-							}
-							else if (
-								e.key === 'ArrowDown'
-								&& onSubmitSection
+							} else if (
+								e.key === "ArrowDown" &&
+								onSubmitSection
 							) {
 								onSubmitSection({
-									name: value,
+									name: value
 								});
-								setValue('');
+								setValue("");
 								closeMoreInfos();
 								closeContentAcquisitionInfos();
-							}
-							else if (e.key === 'Enter') {
+							} else if (e.key === "Enter") {
 								e.preventDefault();
-								if (type === 'CONTENT_ACQUISITION') {
+								if (type === "CONTENT_ACQUISITION") {
 									if (showContentAcquisitionInfos) {
 										onSubmitTask({
 											name: value,
-											type: type || 'DEFAULT',
+											type: type || "DEFAULT",
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											description: `\n# content-acquisition-list\n${files
 												.map(
-													({checked, name}) => `- [${
-														checked ? 'x' : ' '
-													}] ${name}`,
+													({ checked, name }) =>
+														`- [${
+															checked ? "x" : " "
+														}] ${name}`
 												)
-												.join('\n')}`,
+												.join("\n")}`
 										});
-										setValue('');
+										setValue("");
 										closeMoreInfos();
 										closeContentAcquisitionInfos();
-									}
-									else {
+									} else {
 										setItemCustomer(defaultCustomer);
 										setShowContentAcquisitionInfos(true);
 									}
-								}
-								else {
+								} else {
 									onSubmitTask({
 										name: value,
-										type: type || 'DEFAULT',
+										type: type || "DEFAULT",
 										dueDate:
-											itemDueDate
-											&& itemDueDate.toISOString(),
+											itemDueDate &&
+											itemDueDate.toISOString(),
 										unit: parseFloat(itemUnit || 0),
 										linkedCustomerId:
-											itemCustomer && itemCustomer.id,
+											itemCustomer && itemCustomer.id
 									});
-									setValue('');
+									setValue("");
 									closeMoreInfos();
 									closeContentAcquisitionInfos();
 								}
-							}
-							else if (e.key === 'Tab') {
-								if (!type || type !== 'CONTENT_ACQUISITION') {
+							} else if (e.key === "Tab") {
+								if (!type || type !== "CONTENT_ACQUISITION") {
 									setMoreInfosMode(true);
-								}
-								else if (type === 'CONTENT_ACQUISITION') {
+								} else if (type === "CONTENT_ACQUISITION") {
 									setItemCustomer(defaultCustomer);
 									setShowContentAcquisitionInfos(true);
 								}
 							}
 						}
-						if (e.key === 'Escape') {
-							setValue('');
+						if (e.key === "Escape") {
+							setValue("");
 							setOpenedByClick(false);
 							closeMoreInfos();
 							closeContentAcquisitionInfos();
@@ -359,15 +357,15 @@ const TaskInput = ({
 					}}
 					placeholder={
 						focus
-							? `Entrer le titre de la tâche ou ${
-								currentProjectId
-									? 'de la section'
-									: 'du projet'
-							  }. Taper un slash "/" pour changer le type de tâche`
+							? `Titre de la tâche ou ${
+									currentProjectId
+										? "de la section"
+										: "du projet"
+							  }. Commencez par "/" pour changer le type de tâche`
 							: `Ajouter une tâche ou créer ${
-								currentProjectId
-									? 'une section'
-									: 'un projet'
+									currentProjectId
+										? "une section"
+										: "un projet"
 							  }`
 					}
 				/>
@@ -383,56 +381,55 @@ const TaskInput = ({
 								icon="↵"
 								id="create-task-button"
 								onClick={() => {
-									if (!value.startsWith('/')) {
-										if (type === 'CONTENT_ACQUISITION') {
+									if (!value.startsWith("/")) {
+										if (type === "CONTENT_ACQUISITION") {
 											if (showContentAcquisitionInfos) {
 												onSubmitTask({
 													name: value,
-													type: type || 'DEFAULT',
+													type: type || "DEFAULT",
 													linkedCustomerId:
-														itemCustomer
-														&& itemCustomer.id,
+														itemCustomer &&
+														itemCustomer.id,
 													description:
 														files.length > 0
 															? `\n# content-acquisition-list\n${files
-																.map(
-																	({
-																		checked,
-																		name,
-																	}) => `- [${
-																		checked
-																			? 'x'
-																			: ' '
-																	}] ${name}`,
-																)
-																.join(
-																	'\n',
-																)}`
-															: '',
+																	.map(
+																		({
+																			checked,
+																			name
+																		}) =>
+																			`- [${
+																				checked
+																					? "x"
+																					: " "
+																			}] ${name}`
+																	)
+																	.join(
+																		"\n"
+																	)}`
+															: ""
 												});
-												setValue('');
+												setValue("");
 												closeMoreInfos();
 												closeContentAcquisitionInfos();
-											}
-											else {
+											} else {
 												setShowContentAcquisitionInfos(
-													true,
+													true
 												);
 											}
-										}
-										else {
+										} else {
 											onSubmitTask({
 												name: value,
-												type: type || 'DEFAULT',
+												type: type || "DEFAULT",
 												dueDate:
-													itemDueDate
-													&& itemDueDate.toISOString(),
+													itemDueDate &&
+													itemDueDate.toISOString(),
 												unit: parseFloat(itemUnit || 0),
 												linkedCustomerId:
-													itemCustomer
-													&& itemCustomer.id,
+													itemCustomer &&
+													itemCustomer.id
 											});
-											setValue('');
+											setValue("");
 											closeMoreInfos();
 											closeContentAcquisitionInfos();
 										}
@@ -445,7 +442,8 @@ const TaskInput = ({
 								<Button
 									data-tip="Flèche du haut pour créer un projet"
 									icon="↑"
-									onClick={() => onSubmitProject({name: value})
+									onClick={() =>
+										onSubmitProject({ name: value })
 									}
 									id="create-project-button"
 								>
@@ -456,7 +454,8 @@ const TaskInput = ({
 								<Button
 									data-tip="Flèche du bas pour créer un ensemble de tâches"
 									icon="↓"
-									onClick={() => onSubmitSection({name: value})
+									onClick={() =>
+										onSubmitSection({ name: value })
 									}
 								>
 									Créer une section
@@ -474,22 +473,20 @@ const TaskInput = ({
 						item={{
 							dueDate: itemDueDate,
 							unit: itemUnit,
-							linkedCustomer: itemCustomer,
+							linkedCustomer: itemCustomer
 						}}
 						noComment
 						noAttachment
 						onDueDateSubmit={date => setItemDueDate(date)}
-						onCustomerSubmit={(customer) => {
+						onCustomerSubmit={customer => {
 							if (customer === null) {
 								setItemCustomer();
-							}
-							else if (customer.value === 'CREATE') {
+							} else if (customer.value === "CREATE") {
 								setEditCustomer(true);
-							}
-							else {
+							} else {
 								setItemCustomer({
 									id: customer.value,
-									name: customer.label,
+									name: customer.label
 								});
 							}
 						}}
@@ -505,20 +502,18 @@ const TaskInput = ({
 					<TaskInputCheckListContainer>
 						<TaskCustomerInput
 							item={{
-								linkedCustomer: itemCustomer,
+								linkedCustomer: itemCustomer
 							}}
 							noComment
-							onCustomerSubmit={(customer) => {
+							onCustomerSubmit={customer => {
 								if (customer === null) {
 									setItemCustomer();
-								}
-								else if (customer.value === 'CREATE') {
+								} else if (customer.value === "CREATE") {
 									setEditCustomer(true);
-								}
-								else {
+								} else {
 									setItemCustomer({
 										id: customer.value,
-										name: customer.label,
+										name: customer.label
 									});
 								}
 							}}
@@ -531,22 +526,22 @@ const TaskInput = ({
 						<CheckList
 							editable={true} // editable by user only, but checkable
 							items={files}
-							onChange={({items}) => {
+							onChange={({ items }) => {
 								setFiles(items);
 							}}
 						/>
 					</TaskInputCheckListContainer>
 				</TaskInputDropdown>
 			)}
-			{((value.startsWith('/') && focus) || openedByClick) && (
+			{((value.startsWith("/") && focus) || openedByClick) && (
 				<TaskTypeDropdown
 					types={types}
-					filter={value.startsWith('/') ? value.substr(1) : ''}
-					onSelectCommand={({type: selectedType}) => {
+					filter={value.startsWith("/") ? value.substr(1) : ""}
+					onSelectCommand={({ type: selectedType }) => {
 						setType(selectedType);
 
-						if (value.startsWith('/')) {
-							setValue('');
+						if (value.startsWith("/")) {
+							setValue("");
 						}
 
 						inputRef.current.focus();
@@ -558,7 +553,7 @@ const TaskInput = ({
 			)}
 			{isEditingCustomer && (
 				<CustomerModalAndMail
-					onValidate={(customer) => {
+					onValidate={customer => {
 						setItemCustomer(customer);
 					}}
 					noSelect
@@ -570,15 +565,15 @@ const TaskInput = ({
 };
 
 TaskInput.defaultProps = {
-	defaultValue: '',
-	onSubmitTask: () => {},
+	defaultValue: "",
+	onSubmitTask: () => {}
 };
 
 TaskInput.propTypes = {
 	defaultValue: PropTypes.string,
 	onSubmitTask: PropTypes.func,
 	onSubmitProject: PropTypes.func,
-	onSubmitSection: PropTypes.func,
+	onSubmitSection: PropTypes.func
 };
 
 export default TaskInput;

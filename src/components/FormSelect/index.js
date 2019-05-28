@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import {Field} from 'formik';
 
@@ -30,6 +30,7 @@ function FormSelect({
 			css={css}
 			style={style}
 			required={required}
+			data-test={name}
 		>
 			{label && (
 				<Label htmlFor={name} required={required}>

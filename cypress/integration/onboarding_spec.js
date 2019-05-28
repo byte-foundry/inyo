@@ -1,19 +1,23 @@
-describe('Onboarding', function() {
-	it('should present the first step of onboarding', function() {
+describe('Onboarding', () => {
+	beforeEach(() => {
 		cy.visit('http://localhost:3000/auth/sign-in');
 
 		cy.get('input[name=email]')
 			.type('notused@used.email')
-			.should('have.value', 'notused@used.email').blur();
+			.should('have.value', 'notused@used.email')
+			.blur();
 
 		cy.get('input[name=password]')
 			.type('testtest')
-			.should('have.value', 'testtest').blur();
+			.should('have.value', 'testtest')
+			.blur();
 
 		cy.contains('Se connecter').click();
 
 		cy.url().should('include', 'app/tasks');
+	});
 
+	it('should present the first step of onboarding', () => {
 		cy.visit('http://localhost:3000/app/onboarding');
 
 		cy.get('.css-tsu775').should('have.length', 5);
@@ -31,7 +35,7 @@ describe('Onboarding', function() {
 
 		cy.contains('Continuer').click();
 
-		cy.contains('Qu\'est-ce qui vous ennuie le plus au quotidien');
+		cy.contains("Qu'est-ce qui vous ennuie le plus au quotidien");
 
 		cy.contains('Retour').click();
 
@@ -50,13 +54,17 @@ describe('Onboarding', function() {
 
 		cy.contains('Comment souhaitez-vous appeler');
 
-		cy.get('input').type('Yannus').should('have.value', 'EdwigeYannus');
+		cy.get('input')
+			.type('Yannus')
+			.should('have.value', 'EdwigeYannus');
 
 		cy.contains('Valider').click();
 
 		cy.contains('Oui').click();
 
-		cy.get('input[name=phone]').click().blur();
+		cy.get('input[name=phone]')
+			.click()
+			.blur();
 
 		cy.contains('Requis');
 
@@ -69,36 +77,26 @@ describe('Onboarding', function() {
 		cy.contains('Bienvenue sur Inyo');
 
 		cy.get('iframe[title*=YouTube]').should('have.length', 1);
-	})
+	});
 
-	it('should display empty views', function() {
-		cy.visit('http://localhost:3000/auth/sign-in');
-
-		cy.get('input[name=email]')
-			.type('notused@used.email')
-			.should('have.value', 'notused@used.email').blur();
-
-		cy.get('input[name=password]')
-			.type('testtest')
-			.should('have.value', 'testtest').blur();
-
-		cy.contains('Se connecter').click();
-
-		cy.url().should('include', 'app/tasks');
-
+	it('should display empty views', () => {
 		cy.contains('Aucune tâche à faire pour le moment');
 
 		cy.contains('Projets').click();
 
 		cy.contains('Aucun projet en cours');
 
-		cy.get('.css-1h9djfa-IllusText > :nth-child(2) > :nth-child(1)').click();
+		cy.get(
+			'.css-1h9djfa-IllusText > :nth-child(2) > :nth-child(1)',
+		).click();
 
 		cy.contains('Utiliser un de nos modèles');
 
 		cy.get('.css-1ic2po7').click();
 
-		cy.get('.css-1h9djfa-IllusText > :nth-child(2) > :nth-child(2)').click();
+		cy.get(
+			'.css-1h9djfa-IllusText > :nth-child(2) > :nth-child(2)',
+		).click();
 
 		cy.contains('Se baser');
 
@@ -106,13 +104,13 @@ describe('Onboarding', function() {
 
 		cy.contains('Dashboard').click();
 
-		cy.contains('Vous n\'avez pas de tâches prévues');
+		cy.contains("Vous n'avez pas de tâches prévues");
 
 		cy.contains('Aucune tâches client n');
 
 		cy.get('.css-3tccu1-Help').click();
 
 		cy.contains('Aide').click();
-		cy.contains('J\'ai compris!').click();
+		cy.contains("J'ai compris!").click();
 	});
 });

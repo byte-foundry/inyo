@@ -138,7 +138,7 @@ export const ITEM_TYPES = [
 		type: 'INVOICE',
 		name: 'Paiement de facture',
 		description:
-			'Envoyer une facture et demander le paiement a votre client',
+			'Envoyer une facture et demander un paiement à votre client',
 	},
 	/* {
 		icon: <CustomerReminderIcon />,

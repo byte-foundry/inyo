@@ -62,19 +62,19 @@ function TaskActivationHeader({
 				))
 					|| (item.linkedCustomer && item.attachments.length === 0 && (
 						<div>
-							Il manque une facture a cette tâche pour qu'elle
+							Il manque une facture à cette tâche pour qu'elle
 							soit réalisable. Joignez une facture à cette tâche.
 						</div>
 					))
 					|| (!item.linkedCustomer && item.attachments.length > 0 && (
 						<div>
-							Il manque un client a cette tâche pour qu'elle soit
+							Il manque un client à cette tâche pour qu'elle soit
 							réalisable.
 						</div>
 					))
 					|| (!item.linkedCustomer && item.attachments.length === 0 && (
 						<div>
-							Il manque un client et une facture a cette tâche
+							Il manque un client et une facture à cette tâche
 							pour qu'elle soit réalisable.
 						</div>
 					)))}

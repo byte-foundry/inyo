@@ -208,6 +208,7 @@ const Title = styled(TaskHeading)`
 const TaskHeadingIcon = styled('div')`
 	position: relative;
 	left: -5px;
+	top: 4px;
 `;
 
 const AttachedList = styled('div')`

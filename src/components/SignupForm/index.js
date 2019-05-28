@@ -1,27 +1,27 @@
-import React from "react";
-import { useMutation, useApolloClient } from "react-apollo-hooks";
-import ReactGA from "react-ga";
-import * as Sentry from "@sentry/browser";
-import styled from "@emotion/styled";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import debounce from "debounce-promise";
+import React from 'react';
+import {useMutation, useApolloClient} from 'react-apollo-hooks';
+import ReactGA from 'react-ga';
+import * as Sentry from '@sentry/browser';
+import styled from '@emotion/styled';
+import {Formik} from 'formik';
+import * as Yup from 'yup';
+import debounce from 'debounce-promise';
 
-import { SIGNUP, CHECK_UNIQUE_EMAIL } from "../../utils/mutations";
-import { Button, A, primaryPurple } from "../../utils/new/design-system";
-import { ErrorInput } from "../../utils/content";
-import { INTERCOM_APP_ID } from "../../utils/constants";
+import {SIGNUP, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
+import {Button, A, primaryPurple} from '../../utils/new/design-system';
+import {ErrorInput} from '../../utils/content';
+import {INTERCOM_APP_ID} from '../../utils/constants';
 
-import FormElem from "../FormElem";
+import FormElem from '../FormElem';
 
-const SignupFormMain = styled("div")``;
+const SignupFormMain = styled('div')``;
 
 const SignupButton = styled(Button)`
 	display: block;
 	margin-left: auto;
 `;
 
-const CGU = styled("label")`
+const CGU = styled('label')`
 	padding: 1rem;
 	color: ${primaryPurple};
 	margin-bottom: 1rem;
@@ -31,7 +31,7 @@ const CGU = styled("label")`
 	}
 `;
 
-const SignupForm = ({ from, history }) => {
+const SignupForm = ({from, history}) => {
 	const client = useApolloClient();
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
@@ -42,88 +42,89 @@ const SignupForm = ({ from, history }) => {
 		<SignupFormMain>
 			<Formik
 				initialValues={{
-					email: "",
-					password: "",
-					firstname: "",
-					lastname: ""
+					email: '',
+					password: '',
+					firstname: '',
+					lastname: '',
 				}}
 				validationSchema={Yup.object().shape({
 					email: Yup.string()
 						.email("L'email doit être valide")
-						.required("Requis")
+						.required('Requis')
 						.test(
-							"unique-email",
+							'unique-email',
 							"L'email est déjà utilisé",
-							value =>
-								debouncedCheckEmail({
-									variables: {
-										email: value || ""
-									}
-								}).then(({ data }) => data.isAvailable)
+							value => debouncedCheckEmail({
+								variables: {
+									email: value || '',
+								},
+							}).then(({data}) => data.isAvailable),
 						),
-					password: Yup.string().required("Requis"),
-					firstname: Yup.string().required("Requis"),
-					lastname: Yup.string().required("Requis")
+					password: Yup.string().required('Requis'),
+					firstname: Yup.string().required('Requis'),
+					lastname: Yup.string().required('Requis'),
 				})}
 				onSubmit={async (values, actions) => {
 					try {
-						const { data } = await signup({
+						const {data} = await signup({
 							variables: {
 								email: values.email,
 								password: values.password,
 								firstName: values.firstname,
-								lastName: values.lastname
-							}
+								lastName: values.lastname,
+							},
 						});
 
 						if (data) {
 							window.localStorage.setItem(
-								"authToken",
-								data.signup.token
+								'authToken',
+								data.signup.token,
 							);
 							ReactGA.event({
-								category: "User",
-								action: "Created an account"
+								category: 'User',
+								action: 'Created an account',
 							});
 
-							const { user } = data.signup;
+							const {user} = data.signup;
 
-							window.Intercom("boot", {
+							window.Intercom('boot', {
 								app_id: INTERCOM_APP_ID,
 								email: user.email,
 								user_id: user.id,
 								name: `${user.firstName} ${user.lastName}`,
 								user_hash: user.hmacIntercomId,
-								phone: user.company.phone
+								phone: user.company.phone,
 							});
 
 							await client.resetStore();
-							const fromPage = from || "/app/onboarding";
+							const fromPage = from || '/app/onboarding';
 
 							history.push(fromPage);
 						}
-					} catch (error) {
+					}
+					catch (error) {
 						if (
-							error.networkError &&
-							error.networkError.result &&
-							error.networkError.result.errors
+							error.networkError
+							&& error.networkError.result
+							&& error.networkError.result.errors
 						) {
 							Sentry.captureException(
-								error.networkError.result.errors
+								error.networkError.result.errors,
 							);
-						} else {
+						}
+						else {
 							Sentry.captureException(error);
 						}
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: "Quelque chose ne s'est pas passé comme prévu"
+							msg: "Quelque chose ne s'est pas passé comme prévu",
 						});
 					}
 				}}
 			>
-				{props => {
-					const { isSubmitting, status, handleSubmit } = props;
+				{(props) => {
+					const {isSubmitting, status, handleSubmit} = props;
 
 					return (
 						<form onSubmit={handleSubmit}>
@@ -168,7 +169,7 @@ const SignupForm = ({ from, history }) => {
 							)}
 							<CGU>
 								<input name="CGU" type="checkbox" required />
-								J'accepte les{" "}
+								J'accepte les{' '}
 								<b>
 									<A
 										target="blank"
@@ -176,7 +177,7 @@ const SignupForm = ({ from, history }) => {
 									>
 										CGU
 									</A>
-								</b>{" "}
+								</b>{' '}
 								et consent à recevoir des emails de la part
 								d'Inyo.
 							</CGU>

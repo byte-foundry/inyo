@@ -224,11 +224,9 @@ const TaskInput = ({
 		showContentAcquisitionInfos,
 		setShowContentAcquisitionInfos,
 	] = useState(false);
-	const [showInvoiceInfos, setShowInvoiceInfos] = useState(false);
 	const [itemUnit, setItemUnit] = useState(0);
 	const [itemDueDate, setItemDueDate] = useState();
 	const [files, setFiles] = useState([]);
-	const [attachments, setAttachments] = useState([]);
 	const [itemCustomer, setItemCustomer] = useState();
 	const ref = useRef();
 	const inputRef = useRef();
@@ -244,12 +242,6 @@ const TaskInput = ({
 		setShowContentAcquisitionInfos(false);
 		setItemCustomer();
 		setFiles([]);
-	}
-
-	function closeInvoiceInfos() {
-		setShowInvoiceInfos(false);
-		setItemCustomer();
-		setAttachments([]);
 	}
 
 	useOnClickOutside(ref, () => {
@@ -297,7 +289,6 @@ const TaskInput = ({
 								setValue('');
 								closeMoreInfos();
 								closeContentAcquisitionInfos();
-								closeInvoiceInfos();
 							}
 							else if (
 								e.key === 'ArrowDown'
@@ -309,30 +300,10 @@ const TaskInput = ({
 								setValue('');
 								closeMoreInfos();
 								closeContentAcquisitionInfos();
-								closeInvoiceInfos();
 							}
 							else if (e.key === 'Enter') {
 								e.preventDefault();
-								if (type === 'INVOICE') {
-									if (showInvoiceInfos) {
-										onSubmitTask({
-											name: value,
-											type: type || 'DEFAULT',
-											linkedCustomerId:
-												itemCustomer && itemCustomer.id,
-											attachments,
-										});
-										setValue('');
-										closeMoreInfos();
-										closeContentAcquisitionInfos();
-										closeInvoiceInfos();
-									}
-									else {
-										setItemCustomer(defaultCustomer);
-										setShowInvoiceInfos(true);
-									}
-								}
-								else if (type === 'CONTENT_ACQUISITION') {
+								if (type === 'CONTENT_ACQUISITION') {
 									if (showContentAcquisitionInfos) {
 										onSubmitTask({
 											name: value,
@@ -350,7 +321,6 @@ const TaskInput = ({
 										setValue('');
 										closeMoreInfos();
 										closeContentAcquisitionInfos();
-										closeInvoiceInfos();
 									}
 									else {
 										setItemCustomer(defaultCustomer);
@@ -364,7 +334,6 @@ const TaskInput = ({
 									setValue('');
 									closeMoreInfos();
 									closeContentAcquisitionInfos();
-									closeInvoiceInfos();
 								}
 								else {
 									onSubmitTask({
@@ -380,7 +349,6 @@ const TaskInput = ({
 									setValue('');
 									closeMoreInfos();
 									closeContentAcquisitionInfos();
-									closeInvoiceInfos();
 								}
 							}
 							else if (e.key === 'Tab') {
@@ -398,7 +366,6 @@ const TaskInput = ({
 							setOpenedByClick(false);
 							closeMoreInfos();
 							closeContentAcquisitionInfos();
-							closeInvoiceInfos();
 						}
 					}}
 					placeholder={
@@ -457,7 +424,6 @@ const TaskInput = ({
 												setValue('');
 												closeMoreInfos();
 												closeContentAcquisitionInfos();
-												closeInvoiceInfos();
 											}
 											else {
 												setShowContentAcquisitionInfos(
@@ -480,7 +446,6 @@ const TaskInput = ({
 											setValue('');
 											closeMoreInfos();
 											closeContentAcquisitionInfos();
-											closeInvoiceInfos();
 										}
 									}
 								}}
@@ -583,40 +548,6 @@ const TaskInput = ({
 							}}
 						/>
 					</TaskInputCheckListContainer>
-				</TaskInputDropdown>
-			)}
-			{showInvoiceInfos && (
-				<TaskInputDropdown>
-					<TaskInputDropdownHeader>
-						Choisir un client
-					</TaskInputDropdownHeader>
-					<TaskInputCheckListContainer>
-						<TaskCustomerInput
-							item={{
-								linkedCustomer: itemCustomer,
-							}}
-							noComment
-							onCustomerSubmit={(customer) => {
-								if (customer === null) {
-									setItemCustomer();
-								}
-								else if (customer.value === 'CREATE') {
-									setEditCustomer(true);
-								}
-								else {
-									setItemCustomer({
-										id: customer.value,
-										name: customer.label,
-									});
-								}
-							}}
-						/>
-					</TaskInputCheckListContainer>
-					<TaskInputDropdownHeader>
-						Uploader la facture
-					</TaskInputDropdownHeader>
-					<Button>Joindre un document</Button>
-					<TaskInputCheckListContainer />
 				</TaskInputDropdown>
 			)}
 			{((value.startsWith('/') && focus) || openedByClick) && (

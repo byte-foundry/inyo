@@ -380,6 +380,7 @@ function Projects({history}) {
 													setProjectId(project.id);
 												}}
 												data-tip="Supprimer ce projet"
+												link
 											>
 												<IconButton
 													icon="delete_forever"
@@ -388,6 +389,7 @@ function Projects({history}) {
 												/>
 											</TrashButton>
 											<ArchiveButton
+												link
 												onClick={(e) => {
 													e.stopPropagation();
 													archiveProject({
@@ -460,6 +462,7 @@ function Projects({history}) {
 												</ProjectTitle>
 												<ActionsIconContainer>
 													<TrashButton
+														link
 														onClick={(e) => {
 															e.stopPropagation();
 															setRemoveProjectModal(
@@ -478,6 +481,7 @@ function Projects({history}) {
 														/>
 													</TrashButton>
 													<ArchiveButton
+														link
 														onClick={(e) => {
 															e.stopPropagation();
 															unarchiveProject({

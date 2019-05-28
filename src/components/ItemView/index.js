@@ -8,8 +8,6 @@ import ReactTooltip from 'react-tooltip';
 
 import MaterialIcon from '../MaterialIcon';
 import TaskStatusButton from '../TaskStatusButton';
-import TaskActivationButton from '../TaskActivationButton';
-import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 import Plural from '../Plural';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
@@ -24,7 +22,7 @@ import UploadDashboard from '../UploadDashboard';
 import TaskRemindersList from '../TaskRemindersList';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
-import TagList from '../TagList';
+import TaskActivationHeader from '../TaskActivationHeader';
 
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
@@ -56,7 +54,6 @@ import {
 	ITEM_TYPES,
 	TOOLTIP_DELAY,
 	BREAKPOINTS,
-	TAG_COLOR_PALETTE,
 	CUSTOMER_TASK_TYPES,
 } from '../../utils/constants';
 
@@ -277,7 +274,6 @@ const Item = ({id, customerToken, close}) => {
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
-	const [editTags, setEditTags] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
 	const [isActivating, setIsActivating] = useState(false);
 	const dateRef = useRef();
@@ -393,41 +389,13 @@ const Item = ({id, customerToken, close}) => {
 		<>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader customer={item.type !== 'DEFAULT'}>
-				{activableTask && !customerTask && (
-					<TaskActivationButton
-						taskId={id}
-						isActive={item.isFocused}
-						onCommit={() => focusTask({
-							variables: {itemId: item.id},
-						})
-						}
-					/>
-				)}
-				{activableTask && customerTask && item.linkedCustomer && (
-					<TaskCustomerActivationButton
-						taskId={id}
-						isActive={item.isFocused}
-						customerName={
-							item.linkedCustomer && item.linkedCustomer.name
-						}
-						onCommit={() => {
-							if (item.type === 'CONTENT_ACQUISITION') {
-								focusTask({
-									variables: {itemId: item.id},
-								});
-							}
-							else {
-								setIsActivating(true);
-							}
-						}}
-					/>
-				)}
-				{activableTask && customerTask && !item.linkedCustomer && (
-					<div>
-						Il manque un client a cette tâche pour qu'elle soit
-						réalisable
-					</div>
-				)}
+				<TaskActivationHeader
+					item={item}
+					focusTask={focusTask}
+					activableTask={activableTask}
+					customerTask={customerTask}
+					setIsActivating={setIsActivating}
+				/>
 			</StickyHeader>
 			<Header>
 				<Title data-tip="Type et titre de la tâche">
@@ -758,10 +726,6 @@ const Item = ({id, customerToken, close}) => {
 										tags: tags.map(({value}) => value),
 									},
 								});
-								setEditTags(false);
-							}}
-							onBlur={() => {
-								setEditTags(false);
 							}}
 						/>
 					</Meta>
@@ -797,54 +761,61 @@ const Item = ({id, customerToken, close}) => {
 					/>
 				</Description>
 			)}
-			{!customerToken && customerTask && item.linkedCustomer && (
-				<>
-					<SubHeading>
-						Actions{' '}
-						<Apostrophe
-							value={me.settings.assistantName}
-							withVowel="d'"
-							withConsonant="de "
-						/>
-						{me.settings.assistantName}
-					</SubHeading>
-					{item.isFocused ? (
-						<>
-							<TaskRemindersList
-								noLink
-								reminders={item.reminders}
+			{!customerToken
+				&& customerTask
+				&& ((item.linkedCustomer && item.type !== 'INVOICE')
+					|| (item.type === 'INVOICE'
+						&& item.linkedCustomer
+						&& item.attachments.length > 0)) && (
+					<>
+						<SubHeading>
+							Actions{' '}
+							<Apostrophe
+								value={me.settings.assistantName}
+								withVowel="d'"
+								withConsonant="de "
 							/>
+							{me.settings.assistantName}
+						</SubHeading>
+						{item.isFocused ? (
+							<>
+								<TaskRemindersList
+									noLink
+									reminders={item.reminders}
+								/>
+								<TaskButton
+									onClick={() => {
+										unfocusTask({
+											variables: {itemId: item.id},
+										});
+									}}
+									icon="×"
+								>
+									Ne plus rappeler à{' '}
+									{item.linkedCustomer.name} de faire cette
+									tâche
+								</TaskButton>
+							</>
+						) : (
 							<TaskButton
 								onClick={() => {
-									unfocusTask({
-										variables: {itemId: item.id},
-									});
+									if (item.type === 'CONTENT_ACQUISITION') {
+										focusTask({
+											variables: {itemId: item.id},
+										});
+									}
+									else {
+										setIsActivating(true);
+									}
 								}}
-								icon="×"
+								icon="✓"
 							>
-								Ne plus rappeler à {item.linkedCustomer.name} de
-								faire cette tâche
+								Charger {me.settings.assistantName} de faire
+								réaliser cette tâche à{' '}
+								{item.linkedCustomer.name}
 							</TaskButton>
-						</>
-					) : (
-						<TaskButton
-							onClick={() => {
-								if (item.type === 'CONTENT_ACQUISITION') {
-									focusTask({
-										variables: {itemId: item.id},
-									});
-								}
-								else {
-									setIsActivating(true);
-								}
-							}}
-							icon="✓"
-						>
-							Charger {me.settings.assistantName} de faire
-							réaliser cette tâche à {item.linkedCustomer.name}
-						</TaskButton>
-					)}
-				</>
+						)}
+					</>
 			)}
 			<SubHeading>Pièces jointes</SubHeading>
 			<AttachedList>

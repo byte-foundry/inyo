@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import {Route} from 'react-router-dom';
 
-import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
+import {ModalContainer as Modal} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
 import CustomerTasks from './tasks';
 
@@ -116,17 +116,15 @@ const Tasks = ({location, match}) => {
 						)
 						}
 					>
-						<ModalElem>
-							<TaskView
-								id={taskId}
-								customerToken={customerToken}
-								close={() => history.push(
-									`/app/${customerToken}/tasks${state.prevSearch
-											|| ''}`,
-								)
-								}
-							/>
-						</ModalElem>
+						<TaskView
+							id={taskId}
+							customerToken={customerToken}
+							close={() => history.push(
+								`/app/${customerToken}/tasks${state.prevSearch
+										|| ''}`,
+							)
+							}
+						/>
 					</Modal>
 				)}
 			/>

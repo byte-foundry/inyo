@@ -12,7 +12,6 @@ import {
 	H3,
 	primaryBlue,
 	ModalContainer as Modal,
-	ModalElem,
 } from '../../../utils/content';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {A} from '../../../utils/new/design-system';
@@ -126,12 +125,10 @@ const DashboardTasks = () => {
 				path="/app/dashboard/:taskId"
 				render={({match, history}) => (
 					<Modal onDismiss={() => history.push('/app/dashboard')}>
-						<ModalElem>
-							<TaskView
-								id={match.params.taskId}
-								close={() => history.push('/app/dashboard')}
-							/>
-						</ModalElem>
+						<TaskView
+							id={match.params.taskId}
+							close={() => history.push('/app/dashboard')}
+						/>
 					</Modal>
 				)}
 			/>

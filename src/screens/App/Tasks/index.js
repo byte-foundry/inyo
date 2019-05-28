@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Route} from 'react-router-dom';
 
-import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
+import {ModalContainer as Modal} from '../../../utils/content';
 import TasksList from './tasks-lists';
 import TaskView from '../../../components/ItemView';
 
@@ -24,16 +24,13 @@ class Tasks extends Component {
 							)
 							}
 						>
-							<ModalElem>
-								<TaskView
-									id={match.params.taskId}
-									close={() => history.push(
-										`/app/tasks${state.prevSearch
-												|| ''}`,
-									)
-									}
-								/>
-							</ModalElem>
+							<TaskView
+								id={match.params.taskId}
+								close={() => history.push(
+									`/app/tasks${state.prevSearch || ''}`,
+								)
+								}
+							/>
 						</Modal>
 					)}
 				/>

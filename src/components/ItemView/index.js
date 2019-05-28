@@ -48,7 +48,11 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {
-	FlexRow, gray50, gray70, LoadingLogo,
+	FlexRow,
+	gray50,
+	gray70,
+	LoadingLogo,
+	ModalElem,
 } from '../../utils/content';
 import {
 	ITEM_TYPES,
@@ -358,7 +362,7 @@ const Item = ({id, customerToken, close}) => {
 
 	if (isActivating) {
 		return (
-			<>
+			<ModalElem>
 				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 				<StickyHeader customer={item.type !== 'DEFAULT'}>
 					Prévisualisation des actions{' '}
@@ -382,12 +386,12 @@ const Item = ({id, customerToken, close}) => {
 					}}
 					onCancel={() => setIsActivating(false)}
 				/>
-			</>
+			</ModalElem>
 		);
 	}
 
 	return (
-		<>
+		<ModalElem id={item.type}>
 			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader customer={item.type !== 'DEFAULT'}>
 				<TaskActivationHeader
@@ -963,7 +967,7 @@ const Item = ({id, customerToken, close}) => {
 					</Button>
 				</div>
 			</FlexRowButtons>
-		</>
+		</ModalElem>
 	);
 };
 

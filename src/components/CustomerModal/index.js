@@ -315,7 +315,7 @@ const CustomerModal = ({
 											<NotesFormLabel>
 												Notes
 											</NotesFormLabel>
-											<NotesForm>
+											<NotesForm data-test="customer-notes">
 												<Editor
 													editorEnabled
 													editorState={editorState}

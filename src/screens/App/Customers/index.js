@@ -231,6 +231,7 @@ const Customers = () => {
 										icon="delete_forever"
 										size="tiny"
 										danger
+										data-test="customer-delete"
 										onClick={async (e) => {
 											e.stopPropagation();
 

@@ -180,7 +180,11 @@ class UserCompanyForm extends Component {
 											</FormContainer>
 
 											{status && status.msg && (
-												<ErrorInput>
+												<ErrorInput
+													style={{
+														marginBottom: '1rem',
+													}}
+												>
 													{status.msg}
 												</ErrorInput>
 											)}

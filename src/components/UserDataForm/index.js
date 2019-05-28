@@ -193,7 +193,9 @@ const UserDataForm = ({done, ...componentProps}) => {
 									/>
 								</FormContainer>
 								{status && status.msg && (
-									<ErrorInput>{status.msg}</ErrorInput>
+									<ErrorInput style={{marginBottom: '1rem'}}>
+										{status.msg}
+									</ErrorInput>
 								)}
 							</ProfileSection>
 							<UpdateButton type="submit" big>

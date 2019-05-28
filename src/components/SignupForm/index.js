@@ -165,7 +165,9 @@ const SignupForm = ({from, history}) => {
 								big
 							/>
 							{status && status.msg && (
-								<ErrorInput>{status.msg}</ErrorInput>
+								<ErrorInput style={{marginBottom: '1rem'}}>
+									{status.msg}
+								</ErrorInput>
 							)}
 							<CGU>
 								<input name="CGU" type="checkbox" required />

@@ -94,7 +94,6 @@ function LoginForm({from = '/app', history, client}) {
 								label="Mot de passe"
 								placeholder="***************"
 								required
-								style={{marginBottom: '5px'}}
 								big
 							/>
 							<ForgotPasswordLinkContainer>
@@ -103,7 +102,9 @@ function LoginForm({from = '/app', history, client}) {
 								</ForgotPasswordLink>
 							</ForgotPasswordLinkContainer>
 							{status && status.msg && (
-								<ErrorInput>{status.msg}</ErrorInput>
+								<ErrorInput style={{marginBottom: '1rem'}}>
+									{status.msg}
+								</ErrorInput>
 							)}
 							<LoginButton
 								type="submit"

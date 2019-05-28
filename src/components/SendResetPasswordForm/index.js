@@ -94,7 +94,11 @@ class SendResetPasswordForm extends Component {
 										required
 									/>
 									{status && status.msg && (
-										<ErrorInput>{status.msg}</ErrorInput>
+										<ErrorInput
+											style={{marginBottom: '1rem'}}
+										>
+											{status.msg}
+										</ErrorInput>
 									)}
 									<SendButton
 										type="submit"

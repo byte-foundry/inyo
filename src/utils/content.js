@@ -328,7 +328,7 @@ export const ErrorInput = styled('p')`
 	color: ${signalRed};
 	text-align: right;
 	margin-top: 2px;
-	margin-bottom: -16px;
+	margin-bottom: 0;
 `;
 // Layout
 

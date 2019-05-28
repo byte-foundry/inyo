@@ -8,7 +8,7 @@ import * as Yup from 'yup';
 import debounce from 'debounce-promise';
 
 import {SIGNUP, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
-import {Button} from '../../utils/new/design-system';
+import {Button, A, primaryPurple} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
 import {INTERCOM_APP_ID} from '../../utils/constants';
 
@@ -19,6 +19,16 @@ const SignupFormMain = styled('div')``;
 const SignupButton = styled(Button)`
 	display: block;
 	margin-left: auto;
+`;
+
+const CGU = styled('label')`
+	padding: 1rem;
+	color: ${primaryPurple};
+	margin-bottom: 1rem;
+
+	input {
+		margin-right: 0.5rem;
+	}
 `;
 
 const SignupForm = ({from, history}) => {
@@ -155,8 +165,24 @@ const SignupForm = ({from, history}) => {
 								big
 							/>
 							{status && status.msg && (
-								<ErrorInput>{status.msg}</ErrorInput>
+								<ErrorInput style={{marginBottom: '1rem'}}>
+									{status.msg}
+								</ErrorInput>
 							)}
+							<CGU>
+								<input name="CGU" type="checkbox" required />
+								J'accepte les{' '}
+								<b>
+									<A
+										target="blank"
+										href="https://inyo.me/a-propos/cgu/"
+									>
+										CGU
+									</A>
+								</b>{' '}
+								et consent à recevoir des emails de la part
+								d'Inyo.
+							</CGU>
 							<SignupButton
 								type="submit"
 								isSubmitting={isSubmitting}

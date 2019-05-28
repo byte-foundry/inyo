@@ -102,7 +102,11 @@
     "src/**/*.{js,jsx,json,css}": [
       "prettier-eslint --write",
       "git add"
-    ]
+	],
+	"cypress/**/*.{js,jsx,json,css}": [
+		"prettier-eslint --write",
+		"git add"
+	]
   },
   "prettier": {
     "tabWidth": 4,

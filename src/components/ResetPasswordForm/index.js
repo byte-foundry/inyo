@@ -183,7 +183,11 @@ class ResetPasswordForm extends Component {
 										required
 									/>
 									{status && status.msg && (
-										<ErrorInput>{status.msg}</ErrorInput>
+										<ErrorInput
+											style={{marginBottom: '1rem'}}
+										>
+											{status.msg}
+										</ErrorInput>
 									)}
 									<ResetButton
 										type="submit"

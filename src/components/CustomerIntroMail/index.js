@@ -9,7 +9,6 @@ import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
 	ModalContainer,
 	ModalElem,
-	ErrorInput,
 	ModalActions,
 	Loading,
 } from '../../utils/content';

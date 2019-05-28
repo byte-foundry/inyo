@@ -69,7 +69,7 @@ const AuthTextContent = styled('div')`
 `;
 const TextTitle = styled(H1)`
 	color: ${primaryBlue};
-	font-size: 32px;
+	font-size: 24px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
@@ -77,7 +77,7 @@ const TextTitle = styled(H1)`
 `;
 const TextContent = styled(P)`
 	color: ${primaryNavyBlue};
-	font-size: 20px;
+	font-size: 18px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 1rem;
@@ -138,13 +138,15 @@ function Auth() {
 			<AuthText>
 				<AuthTextContent>
 					<Illus src={SuccessIllus} />
-					<TextTitle>Créez votre compte gratuitement</TextTitle>
+					<TextTitle>
+						Partagez avec votre client une liste de tâches
+						intelligente.
+					</TextTitle>
 					<TextContent>
-						Optimisez votre temps en automatisant des tâches
-						répétitives et réévaluez vos projets en direct avec vos
-						clients. Avec Inyo vous gagnez du temps en vous
-						concentrant sur votre vrai métier et votre travail est
-						payé à sa juste valeur.
+						Déclenchez automatiquement des actions en fonction de
+						vos projets. Vous ne perdrez plus de temps à relancer
+						vos clients et ceux-ci auront une meilleure
+						compréhension de votre travail.
 					</TextContent>
 				</AuthTextContent>
 			</AuthText>

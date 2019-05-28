@@ -17,7 +17,7 @@ export const lightRed = '#fff2f5';
 export const primaryGrey = '#A9A9A9';
 export const accentGrey = '#c7c7c7';
 export const lightGrey = '#fafafa';
-export const mediumGrey = '#eee';
+export const mediumGrey = '#f1f3f4';
 export const primaryBlack = '#140642';
 
 const shevy = new Shevy({
@@ -154,6 +154,11 @@ export const Button = styled('button')`
 				}
 			}
 		`}
+
+		${props => props.disabled
+			&& css`
+				opacity: 0.5;
+			`}
 
 	${props => props.textIcon
 		&& `

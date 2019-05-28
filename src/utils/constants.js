@@ -85,6 +85,12 @@ export const TOOLTIP_DELAY = 650;
 
 export const BREAKPOINTS = [420];
 
+export const CUSTOMER_TASK_TYPES = [
+	'CUSTOMER',
+	'CONTENT_ACQUISITION',
+	'INVOICE',
+];
+
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,
@@ -132,7 +138,7 @@ export const ITEM_TYPES = [
 		type: 'INVOICE',
 		name: 'Paiement de facture',
 		description:
-			'Envoyer une facture et demander le paiement a votre client',
+			'Envoyer une facture et demander un paiement à votre client',
 	},
 	/* {
 		icon: <CustomerReminderIcon />,
@@ -199,6 +205,24 @@ export const REMINDER_TYPES_DATA = {
 	},
 	LAST: {
 		text: customerName => `Dernier rappel (nº3) envoyé à ${customerName}`,
+	},
+	INVOICE_DELAY: {
+		text: customerName => `1er mail règlement de facture envoyé à ${customerName}`,
+	},
+	INVOICE_FIRST: {
+		text: customerName => `Rappel règlement de facture nº1 envoyé à ${customerName}`,
+	},
+	INVOICE_SECOND: {
+		text: customerName => `Rappel règlement de facture nº2 envoyé à ${customerName}`,
+	},
+	INVOICE_THIRD: {
+		text: customerName => `Rappel règlement de facture nº3 envoyé à ${customerName}`,
+	},
+	INVOICE_FOURTH: {
+		text: customerName => `Rappel règlement de facture nº4 envoyé à ${customerName}`,
+	},
+	INVOICE_LAST: {
+		text: customerName => `Dernier règlement de facture rappel (nº5) envoyé à ${customerName}`,
 	},
 };
 

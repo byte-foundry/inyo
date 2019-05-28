@@ -29,8 +29,11 @@ class FormElem extends Component {
 			inline,
 			onboarding,
 			big,
+			noMarginBottom,
 			...rest
 		} = this.props;
+
+		const hasErrors = getDeep(name, errors) && getDeep(name, touched);
 
 		return (
 			<FormElemMain
@@ -38,6 +41,7 @@ class FormElem extends Component {
 				inline={inline}
 				onboarding={onboarding}
 				required={required}
+				noMarginBottom={noMarginBottom || hasErrors}
 				{...rest}
 			>
 				{this.props.label && (
@@ -57,7 +61,7 @@ class FormElem extends Component {
 					touched={touched}
 					inline={inline}
 				/>
-				{getDeep(name, errors) && getDeep(name, touched) && (
+				{hasErrors && (
 					<ErrorInput className="input-feedback">
 						{getDeep(name, errors)}
 					</ErrorInput>

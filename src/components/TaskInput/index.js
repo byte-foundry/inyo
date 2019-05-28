@@ -21,6 +21,8 @@ import {
 	mediumGrey,
 	accentGrey,
 	primaryWhite,
+	primaryBlack,
+	lightGrey,
 } from '../../utils/new/design-system';
 
 const Container = styled('div')`
@@ -104,26 +106,26 @@ const InputButtonContainer = styled('div')`
 const Input = styled('input')`
 	display: flex;
 	flex: 1;
-	background-color: ${primaryWhite};
+	background-color: ${mediumGrey}; /* #f1f3f4 */
 	border-radius: 2rem;
 	padding: 0.2rem 1.2rem 0.2rem 5rem;
 	margin-left: -2.7rem;
 	color: ${primaryPurple};
-	font-size: 1.2rem;
-	border: 1px solid ${mediumGrey};
+	font-size: 1.1rem;
+	border: 1px solid transparent;
 	transition: all 400ms ease;
 	height: 2.5rem;
 
 	&:hover {
-		background-color: ${lightPurple};
+		background-color: ${lightGrey};
 		animation: all 400ms ease;
 	}
 
 	&::placeholder {
-		color: ${mediumPurple};
-		font-size: 14px;
+		color: ${primaryBlack};
+		font-size: 15px;
+		line-height: 1;
 		align-items: center;
-		font-style: italic;
 		font-family: 'Work Sans', sans-serif;
 	}
 
@@ -133,7 +135,8 @@ const Input = styled('input')`
 		outline: 0;
 		box-shadow: none;
 		background: #fff;
-		border: 1px solid ${mediumPurple};
+		border: 1px solid ${mediumGrey};
+		box-shadow: 3px 3px 10px ${lightGrey};
 		transition: all 400ms ease;
 	}
 
@@ -367,11 +370,11 @@ const TaskInput = ({
 					}}
 					placeholder={
 						focus
-							? `Entrer le titre de la tâche ou ${
+							? `Titre de la tâche ou ${
 								currentProjectId
 									? 'de la section'
 									: 'du projet'
-							  }. Taper un slash "/" pour changer le type de tâche`
+							  }. Commencez par "/" pour changer le type de tâche`
 							: `Ajouter une tâche ou créer ${
 								currentProjectId
 									? 'une section'

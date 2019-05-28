@@ -52,6 +52,7 @@ const CustomerTasks = ({
 	const {data, error} = useQuery(GET_CUSTOMER_TASKS, {
 		variables: {
 			token,
+			projectId,
 		},
 		suspend: true,
 	});

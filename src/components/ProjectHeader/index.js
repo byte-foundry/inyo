@@ -105,8 +105,9 @@ const editableCss = css`
 `;
 
 export default function ProjectHeader({projectId, customerToken}) {
+	const token = customerToken === 'preview' ? undefined : customerToken;
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
-		variables: {projectId, token: customerToken},
+		variables: {projectId, token},
 		suspend: true,
 	});
 	const updateProject = useMutation(UPDATE_PROJECT);

@@ -57,6 +57,7 @@ import {
 	TOOLTIP_DELAY,
 	BREAKPOINTS,
 	TAG_COLOR_PALETTE,
+	CUSTOMER_TASK_TYPES,
 } from '../../utils/constants';
 
 const Header = styled('div')``;
@@ -352,8 +353,7 @@ const Item = ({id, customerToken, close}) => {
 		= ITEM_TYPES.find(({type}) => type === item.type)
 		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
-	const customerTask
-		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
+	const customerTask = CUSTOMER_TASK_TYPES.includes(item.type);
 	const finishableTask
 		= (customerToken && customerTask) || (!customerToken && !customerTask);
 

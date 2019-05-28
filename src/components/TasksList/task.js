@@ -1,15 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
-import { withRouter, Link } from "react-router-dom";
-import styled from "@emotion/styled/macro";
-import moment from "moment";
-import { useMutation } from "react-apollo-hooks";
-import useOnClickOutside from "use-onclickoutside";
+import React, {useState, useRef, useEffect} from 'react';
+import {withRouter, Link} from 'react-router-dom';
+import styled from '@emotion/styled/macro';
+import moment from 'moment';
+import {useMutation} from 'react-apollo-hooks';
+import useOnClickOutside from 'use-onclickoutside';
 
-import DragIconSvg from "../../utils/icons/drag.svg";
-import { ITEM_TYPES, itemStatuses, BREAKPOINTS } from "../../utils/constants";
-import { FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM } from "../../utils/mutations";
-import { isCustomerTask } from "../../utils/functions";
-import IconButton from "../../utils/new/components/IconButton";
+import DragIconSvg from '../../utils/icons/drag.svg';
+import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
+import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {isCustomerTask} from '../../utils/functions';
+import IconButton from '../../utils/new/components/IconButton';
 
 import {
 	ButtonLink,
@@ -25,31 +25,30 @@ import {
 	primaryRed,
 	primaryWhite,
 	DueDateInputElem,
-	DateInputContainer
-} from "../../utils/new/design-system";
+	DateInputContainer,
+} from '../../utils/new/design-system';
 
-import CustomerDropdown from "../CustomersDropdown";
-import DateInput from "../DateInput";
-import UnitInput from "../UnitInput";
-import Plural from "../Plural";
-import CustomerModalAndMail from "../CustomerModalAndMail";
-import TimeItTookDisplay from "../TimeItTookDisplay";
-import MaterialIcon from "../MaterialIcon";
+import CustomerDropdown from '../CustomersDropdown';
+import DateInput from '../DateInput';
+import UnitInput from '../UnitInput';
+import Plural from '../Plural';
+import CustomerModalAndMail from '../CustomerModalAndMail';
+import TimeItTookDisplay from '../TimeItTookDisplay';
+import MaterialIcon from '../MaterialIcon';
 
-export const TaskContainer = styled("div")`
+export const TaskContainer = styled('div')`
 	display: flex;
-	margin-bottom: ${props => (props.noData ? "-1rem" : "0.6rem")};
+	margin-bottom: ${props => (props.noData ? '-1rem' : '0.6rem')};
 	position: relative;
 	padding-left: 2rem;
 	margin-left: -2rem;
 
 	&:after {
-		content: "";
+		content: '';
 		display: block;
 		width: 0.8rem;
 		height: 1.2rem;
-		background: ${props =>
-			props.isDraggable ? `url(${DragIconSvg})` : "none"};
+		background: ${props => (props.isDraggable ? `url(${DragIconSvg})` : 'none')};
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
@@ -77,39 +76,39 @@ export const TaskContainer = styled("div")`
 	}
 `;
 
-const TaskAdd = styled("div")``;
+const TaskAdd = styled('div')``;
 
-const TaskIcon = styled("div")`
+const TaskIcon = styled('div')`
 	cursor: pointer;
 	width: 3.5rem;
 	height: 3.5rem;
 	margin-left: -0.8725rem;
-	margin-right: ${props => (props.noData ? ".5rem" : "2rem")};
+	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
 	overflow: visible;
 	background: center no-repeat
-		url(${props => {
-			const typeInfos =
-				ITEM_TYPES.find(t => t.type === props.type) || ITEM_TYPES[0];
+		url(${(props) => {
+		const typeInfos
+				= ITEM_TYPES.find(t => t.type === props.type) || ITEM_TYPES[0];
 
-			let icon = typeInfos.iconUrl;
+		let icon = typeInfos.iconUrl;
 
-			if (props.status === itemStatuses.FINISHED) {
-				icon =
-					(props.justUpdated
-						? typeInfos.iconUrlValidatedAnim
-						: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
-			}
-			return icon;
-		}});
-	margin-top: ${props => (props.noData ? "0.1rem" : ".6775rem")};
-	margin-bottom: ${props => (props.noData ? 0 : "2rem")};
+		if (props.status === itemStatuses.FINISHED) {
+			icon
+					= (props.justUpdated
+					? typeInfos.iconUrlValidatedAnim
+					: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
+		}
+		return icon;
+	}});
+	margin-top: ${props => (props.noData ? '0.1rem' : '.6775rem')};
+	margin-bottom: ${props => (props.noData ? 0 : '2rem')};
 
-	transform: scale(${props => (props.noData ? 0.75 : "")});
+	transform: scale(${props => (props.noData ? 0.75 : '')});
 
 	&:after,
 	&:before {
-		content: "";
-		display: ${props => (props.noData ? "none" : "block")};
+		content: '';
+		display: ${props => (props.noData ? 'none' : 'block')};
 		display: block;
 		border-left: 1px dotted ${mediumGrey};
 		position: absolute;
@@ -128,19 +127,18 @@ const TaskIcon = styled("div")`
 
 	&:hover {
 		background: center no-repeat
-			url(${props => {
-				const typeInfos =
-					ITEM_TYPES.find(t => t.type === props.type) ||
-					ITEM_TYPES[0];
+			url(${(props) => {
+		const typeInfos
+					= ITEM_TYPES.find(t => t.type === props.type)
+					|| ITEM_TYPES[0];
 
-				let icon = typeInfos.iconUrl;
+		let icon = typeInfos.iconUrl;
 
-				icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
-				return icon;
-			}});
+		icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
+		return icon;
+	}});
 
-		animation: ${props =>
-			props.status === itemStatuses.FINISHED ? "none" : "growth 300ms"};
+		animation: ${props => (props.status === itemStatuses.FINISHED ? 'none' : 'growth 300ms')};
 
 		@keyframes growth {
 			0% {
@@ -171,9 +169,9 @@ const TaskIcon = styled("div")`
 	}
 `;
 
-const TaskContent = styled("div")`
+const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: ${props => (props.noData ? "0.9rem" : "1rem")};
+	margin-top: ${props => (props.noData ? '0.9rem' : '1rem')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 2rem;
@@ -184,7 +182,7 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
 	font-style: italic;
 	margin: 0.5rem 0;
-	margin: ${props => (props.noData ? "0.1rem 0" : "0.5rem 0")};
+	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryGrey};
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -194,10 +192,9 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
-	text-decoration: ${props =>
-		props.status === itemStatuses.FINISHED ? "line-through" : "none"};
+	text-decoration: ${props => (props.status === itemStatuses.FINISHED ? 'line-through' : 'none')};
 	margin: 0.5rem 0;
-	margin: ${props => (props.noData ? "0.1rem 0" : "0.5rem 0")};
+	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryBlack};
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -206,7 +203,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	}
 `;
 
-const TaskActions = styled("div")`
+const TaskActions = styled('div')`
 	opacity: ${props => (props.stayActive ? 1 : 0)};
 	margin-right: ${props => (props.stayActive ? 0 : -100)}px;
 	pointer-events: none;
@@ -218,7 +215,7 @@ const TaskActions = styled("div")`
 	}
 `;
 
-const TaskHeader = styled("div")`
+const TaskHeader = styled('div')`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -227,7 +224,7 @@ const TaskHeader = styled("div")`
 
 	&:hover {
 		&:before {
-			content: "";
+			content: '';
 			display: block;
 			background: ${lightGrey};
 			position: absolute;
@@ -261,7 +258,7 @@ const OpenBtn = styled(ButtonLink)`
 	background: transparent;
 `;
 
-const TaskInfos = styled("div")`
+const TaskInfos = styled('div')`
 	display: flex;
 	letter-spacing: 0.05em;
 	margin-top: -0.25rem;
@@ -271,7 +268,7 @@ const TaskInfos = styled("div")`
 	}
 `;
 
-const IconsWrap = styled("div")`
+const IconsWrap = styled('div')`
 	display: flex;
 	margin-right: 1rem;
 
@@ -280,11 +277,11 @@ const IconsWrap = styled("div")`
 	}
 `;
 
-const CommentWrap = styled("span")`
+const CommentWrap = styled('span')`
 	position: relative;
 `;
 
-const CommentNumber = styled("span")`
+const CommentNumber = styled('span')`
 	color: ${primaryWhite};
 	position: absolute;
 	left: 8px;
@@ -296,25 +293,25 @@ const CommentNumber = styled("span")`
 	pointer-events: none;
 `;
 
-const SetTimeContainer = styled("div")`
+const SetTimeContainer = styled('div')`
 	display: flex;
 	margin-right: 1rem;
 `;
 
-const SetTimeInfos = styled("div")`
+const SetTimeInfos = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
 	margin-right: 1rem;
 `;
 
-const SetTimeHeadline = styled("div")`
+const SetTimeHeadline = styled('div')`
 	color: ${primaryPurple};
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 1.3;
 `;
 
-const SetTimeCaption = styled("div")`
+const SetTimeCaption = styled('div')`
 	color: ${primaryGrey};
 	font-size: 12px;
 	font-style: italic;
@@ -339,7 +336,7 @@ export function TaskCustomerInput({
 	disabled,
 	editCustomer: editCustomerProp,
 	onCustomerSubmit,
-	item
+	item,
 }) {
 	const clientName = item.linkedCustomer && item.linkedCustomer.name;
 	const [editCustomer, setEditCustomer] = useState(editCustomerProp);
@@ -363,13 +360,13 @@ export function TaskCustomerInput({
 						defaultValue={
 							item.linkedCustomer && {
 								value: item.linkedCustomer.id,
-								label: item.linkedCustomer.name
+								label: item.linkedCustomer.name,
 							}
 						}
 						creatable
 						isClearable
 						autoFocus
-						onChange={args => {
+						onChange={(args) => {
 							onCustomerSubmit(args);
 							setEditCustomer(false);
 						}}
@@ -383,7 +380,7 @@ export function TaskCustomerInput({
 							disabled
 								? undefined
 								: () => {
-										setEditCustomer(true);
+									setEditCustomer(true);
 								  }
 						}
 					>
@@ -407,7 +404,7 @@ export function TaskInfosInputs({
 	location,
 	customerToken,
 	taskUrlPrefix,
-	baseUrl
+	baseUrl,
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -422,17 +419,15 @@ export function TaskInfosInputs({
 
 	if (!noComment && item.comments.length > 0) {
 		unreadCommentLength = item.comments.filter(
-			comment =>
-				!comment.views.find(
-					e =>
-						e.viewer.__typename ===
-						(customerToken ? "Customer" : "User")
-				)
+			comment => !comment.views.find(
+				e => e.viewer.__typename
+						=== (customerToken ? 'Customer' : 'User'),
+			),
 		).length;
 	}
 
-	let unitToDisplay =
-		item.timeItTook === null || item.timeItTook === undefined
+	let unitToDisplay
+		= item.timeItTook === null || item.timeItTook === undefined
 			? item.unit
 			: item.timeItTook;
 
@@ -443,16 +438,16 @@ export function TaskInfosInputs({
 		unitInHours = true;
 	}
 
-	const dueDate =
-		item.dueDate ||
-		(item.dueDate ||
-			(item.section &&
-				item.section.project &&
-				item.section.project.deadline));
+	const dueDate
+		= item.dueDate
+		|| (item.dueDate
+			|| (item.section
+				&& item.section.project
+				&& item.section.project.deadline));
 
-	const activableTask = !customerToken && item.status === "PENDING";
-	const customerTask =
-		item.type === "CUSTOMER" || item.type === "CONTENT_ACQUISITION";
+	const activableTask = !customerToken && item.status === 'PENDING';
+	const customerTask
+		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
 
 	return (
 		<TaskInfos>
@@ -461,26 +456,26 @@ export function TaskInfosInputs({
 					<TaskInfosItemLink
 						to={{
 							pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-							state: { prevSearch: location.search }
+							state: {prevSearch: location.search},
 						}}
 					>
 						<CommentWrap>
 							<IconButton
 								icon={
 									item.comments.length > 0
-										? "mode_comment"
-										: "add_comment"
+										? 'mode_comment'
+										: 'add_comment'
 								}
 								size="tiny"
 								color={
-									unreadCommentLength > 0 ? primaryRed : ""
+									unreadCommentLength > 0 ? primaryRed : ''
 								}
 								data-tip="Ouvrir les commentaires"
 							/>
 							<CommentNumber unread={unreadCommentLength > 0}>
 								{item.comments.length > 0
 									? item.comments.length
-									: ""}
+									: ''}
 							</CommentNumber>
 						</CommentWrap>
 						{item.description && (
@@ -494,45 +489,45 @@ export function TaskInfosInputs({
 				)}
 				{customerTask && (
 					<>
-						{activableTask &&
-							item.linkedCustomer &&
-							!item.isFocused && (
-								<IconButtonLink
-									data-tip="Les rappels clients ne sont pas activés pour cette tâche"
-									isFocused={item.isFocused}
-									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
-										state: { prevSearch: location.search }
-									}}
-								>
-									<IconButton
-										icon="notifications_off"
-										size="tiny"
-									/>
-								</IconButtonLink>
-							)}
-						{activableTask &&
-							item.linkedCustomer &&
-							item.isFocused && (
-								<IconButtonLink
-									data-tip="Les rappels client sont activés pour cette tâche"
-									isFocused={item.isFocused}
-									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
-										state: { prevSearch: location.search }
-									}}
-								>
-									<IconButton
-										icon="notifications_active"
-										size="tiny"
-										color={primaryPurple}
-									/>
-								</IconButtonLink>
-							)}
+						{activableTask
+							&& item.linkedCustomer
+							&& !item.isFocused && (
+							<IconButtonLink
+								data-tip="Les rappels clients ne sont pas activés pour cette tâche"
+								isFocused={item.isFocused}
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								<IconButton
+									icon="notifications_off"
+									size="tiny"
+								/>
+							</IconButtonLink>
+						)}
+						{activableTask
+							&& item.linkedCustomer
+							&& item.isFocused && (
+							<IconButtonLink
+								data-tip="Les rappels client sont activés pour cette tâche"
+								isFocused={item.isFocused}
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								<IconButton
+									icon="notifications_active"
+									size="tiny"
+									color={primaryPurple}
+								/>
+							</IconButtonLink>
+						)}
 						{activableTask && !item.linkedCustomer && (
 							<IconButtonLink
 								data-tip="Aucun client n’est lié à cette tâche"
@@ -540,7 +535,7 @@ export function TaskInfosInputs({
 									pathname: `${taskUrlPrefix}/${baseUrl}/${
 										item.id
 									}`,
-									state: { prevSearch: location.search }
+									state: {prevSearch: location.search},
 								}}
 							>
 								<IconButton
@@ -562,18 +557,18 @@ export function TaskInfosInputs({
 					!customerToken && editUnit ? (
 						<UnitInput
 							unit={item.timeItTook ? item.timeItTook : item.unit}
-							onBlur={args => {
+							onBlur={(args) => {
 								onUnitSubmit(args);
 								setEditUnit(false);
 							}}
-							onSubmit={args => {
+							onSubmit={(args) => {
 								onUnitSubmit(args);
 								setEditUnit(false);
 								if (switchOnSelect) {
 									setEditDueDate(true);
 								}
 							}}
-							onTab={args => {
+							onTab={(args) => {
 								onUnitSubmit(args);
 								setEditUnit(false);
 								setEditDueDate(true);
@@ -587,7 +582,7 @@ export function TaskInfosInputs({
 									: () => setEditUnit(true)
 							}
 						>
-							{+unitToDisplay.toFixed(2)}{" "}
+							{+unitToDisplay.toFixed(2)}{' '}
 							{!unitInHours && (
 								<Plural
 									value={unitToDisplay}
@@ -630,13 +625,13 @@ export function TaskInfosInputs({
 							<>
 								<DueDateInputElem
 									value={moment(dueDate || new Date()).format(
-										"DD/MM/YYYY"
+										'DD/MM/YYYY',
 									)}
 								/>
 								<DateInput
 									innerRef={dateRef}
 									date={moment(dueDate || new Date())}
-									onDateChange={args => {
+									onDateChange={(args) => {
 										onDueDateSubmit(args);
 										setEditDueDate(false);
 										if (switchOnSelect) {
@@ -654,15 +649,15 @@ export function TaskInfosInputs({
 											+(
 												moment(dueDate).diff(
 													moment(),
-													"days"
+													'days',
 												) - item.unit
 											).toFixed(2)
-										}{" "}
+										}{' '}
 										<Plural
 											value={
 												moment(dueDate).diff(
 													moment(),
-													"days"
+													'days',
 												) - item.unit
 											}
 											singular="jour"
@@ -695,7 +690,7 @@ export function TaskInfosInputs({
 					}
 					content={
 						<>
-							{item.attachments.length}{" "}
+							{item.attachments.length}{' '}
 							<Plural
 								singular="fichier"
 								plural="fichiers"
@@ -705,7 +700,7 @@ export function TaskInfosInputs({
 					}
 				/>
 			)}
-			{item.tags && item.tags.length > 0 && (
+			{!customerToken && item.tags && item.tags.length > 0 && (
 				<TaskIconText
 					data-tip="Tags"
 					inactive={true}
@@ -720,7 +715,7 @@ export function TaskInfosInputs({
 						<>
 							{item.tags.map(tag => (
 								<Tag
-									to={{ search: `?tags=${tag.id}` }}
+									to={{search: `?tags=${tag.id}`}}
 									bg={tag.colorBg}
 									color={tag.colorText}
 								>
@@ -741,7 +736,7 @@ function Task({
 	location,
 	isDraggable,
 	noData,
-	baseUrl = "tasks"
+	baseUrl = 'tasks',
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
@@ -760,29 +755,29 @@ function Task({
 			variables: {
 				itemId: item.id,
 				token: customerToken,
-				timeItTook: unit
+				timeItTook: unit,
 			},
 			optimisticResponse: {
 				finishItem: {
 					...item,
-					status: "FINISHED",
-					timeItTook: unit
-				}
-			}
+					status: 'FINISHED',
+					timeItTook: unit,
+				},
+			},
 		});
 		setJustUpdated(true);
 		setSetTimeItTook(false);
 	}
 
-	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : "/app";
-	const isFinishable =
-		(item.status !== "FINISHED" &&
-			(!customerToken && !isCustomerTask(item.type))) ||
-		(customerToken && isCustomerTask(item.type));
-	const isUnfinishable =
-		(item.status === "FINISHED" &&
-			(!customerToken && !isCustomerTask(item.type))) ||
-		(customerToken && isCustomerTask(item.type));
+	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
+	const isFinishable
+		= (item.status !== 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item.type)))
+		|| (customerToken && isCustomerTask(item.type));
+	const isUnfinishable
+		= (item.status === 'FINISHED'
+			&& (!customerToken && !isCustomerTask(item.type)))
+		|| (customerToken && isCustomerTask(item.type));
 
 	return (
 		<TaskContainer
@@ -803,20 +798,23 @@ function Task({
 					if (isFinishable) {
 						if (customerToken) {
 							finishItemCallback(item.unit);
-						} else if (setTimeItTook) {
+						}
+						else if (setTimeItTook) {
 							finishItemCallback(
-								parseFloat(setTimeItTookValueRef.current())
+								parseFloat(setTimeItTookValueRef.current()),
 							);
 							setSetTimeItTook(false);
-						} else {
+						}
+						else {
 							setSetTimeItTook(true);
 						}
-					} else if (isUnfinishable) {
+					}
+					else if (isUnfinishable) {
 						unfinishItem({
 							variables: {
 								itemId: item.id,
-								token: customerToken
-							}
+								token: customerToken,
+							},
 						});
 					}
 				}}
@@ -826,7 +824,7 @@ function Task({
 					data-tip={
 						setTimeItTook
 							? undefined
-							: "Cliquer pour voir le contenu de la tâche"
+							: 'Cliquer pour voir le contenu de la tâche'
 					}
 				>
 					{setTimeItTook && (
@@ -834,7 +832,7 @@ function Task({
 							<UnitInput
 								getValue={setTimeItTookValueRef}
 								unit={item.unit}
-								onBlur={unit => {
+								onBlur={(unit) => {
 									finishItemCallback(unit);
 									setSetTimeItTook(false);
 								}}
@@ -859,7 +857,7 @@ function Task({
 								pathname: `${taskUrlPrefix}/${baseUrl}/${
 									item.id
 								}`,
-								state: { prevSearch: location.search }
+								state: {prevSearch: location.search},
 							}}
 						>
 							{item.name}
@@ -870,7 +868,7 @@ function Task({
 							small={setTimeItTook}
 							to={{
 								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
-								state: { prevSearch: location.search }
+								state: {prevSearch: location.search},
 							}}
 						>
 							Choisir un titre pour cette tâche
@@ -883,7 +881,7 @@ function Task({
 								pathname: `${taskUrlPrefix}/${baseUrl}/${
 									item.id
 								}`,
-								state: { prevSearch: location.search }
+								state: {prevSearch: location.search},
 							}}
 						>
 							Ouvrir
@@ -897,55 +895,57 @@ function Task({
 						location={location}
 						item={item}
 						customerToken={customerToken}
-						onDueDateSubmit={date => {
+						onDueDateSubmit={(date) => {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									dueDate: date.toISOString()
+									dueDate: date.toISOString(),
 								},
 								optimisticResponse: {
-									__typename: "Mutation",
+									__typename: 'Mutation',
 									updateItem: {
-										__typename: "Item",
+										__typename: 'Item',
 										...item,
-										dueDate: date.toISOString()
-									}
-								}
+										dueDate: date.toISOString(),
+									},
+								},
 							});
 						}}
-						onCustomerSubmit={customer => {
+						onCustomerSubmit={(customer) => {
 							if (customer === null) {
 								updateItem({
 									variables: {
 										itemId: item.id,
-										linkedCustomerId: null
-									}
+										linkedCustomerId: null,
+									},
 								});
-							} else if (customer.value === "CREATE") {
+							}
+							else if (customer.value === 'CREATE') {
 								setEditCustomer(true);
-							} else {
+							}
+							else {
 								updateItem({
 									variables: {
 										itemId: item.id,
-										linkedCustomerId: customer.value
-									}
+										linkedCustomerId: customer.value,
+									},
 								});
 							}
 						}}
-						onUnitSubmit={unit => {
+						onUnitSubmit={(unit) => {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									unit
+									unit,
 								},
 								optimisticResponse: {
-									__typename: "Mutation",
+									__typename: 'Mutation',
 									updateItem: {
-										__typename: "Item",
+										__typename: 'Item',
 										...item,
-										unit
-									}
-								}
+										unit,
+									},
+								},
 							});
 						}}
 					/>
@@ -953,12 +953,12 @@ function Task({
 			</TaskContent>
 			{isEditingCustomer && (
 				<CustomerModalAndMail
-					onValidate={customer => {
+					onValidate={(customer) => {
 						updateItem({
 							variables: {
 								itemId: item.id,
-								linkedCustomerId: customer.id
-							}
+								linkedCustomerId: customer.id,
+							},
 						});
 					}}
 					noSelect

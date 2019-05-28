@@ -12,14 +12,22 @@ import TaskCustomerIconValidatedUrl, {
 } from './icons/taskicon-customer-validated.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 
+import SectionIconUrl, {
+	ReactComponent as SectionIcon,
+} from './icons/section-icon.svg';
+import TaskInvoiceIconUrl, {
+	ReactComponent as TaskInvoiceIcon,
+} from './icons/invoice-icon.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
 
-export const GRAPHQL_API = `https://prisma${
+/* export const GRAPHQL_API = `https://prisma${
 	// eslint-disable-line import/prefer-default-export
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
-}.inyo.me/`;
+}.inyo.me/`; */
+
+export const GRAPHQL_API = 'http://prisma.prototypo.io:4002/';
 
 export const INTERCOM_APP_ID
 	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
@@ -79,6 +87,12 @@ export const TOOLTIP_DELAY = 650;
 
 export const BREAKPOINTS = [420];
 
+export const CUSTOMER_TASK_TYPES = [
+	'CUSTOMER',
+	'CONTENT_ACQUISITION',
+	'INVOICE',
+];
+
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,
@@ -108,6 +122,25 @@ export const ITEM_TYPES = [
 		type: 'CONTENT_ACQUISITION',
 		name: 'Récupération contenu',
 		description: 'Lister et récupérer les contenus nécessaires',
+	},
+	{
+		icon: <SectionIcon />,
+		iconValidated: <TaskCustomerIconValidated />,
+		iconUrl: SectionIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'SECTION',
+		name: 'Section de projet',
+		description: "Créer une section pour classer les tâches d'un projet",
+	},
+	{
+		icon: <TaskInvoiceIcon />,
+		iconValidated: <TaskCustomerIconValidated />,
+		iconUrl: TaskInvoiceIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'INVOICE',
+		name: 'Paiement de facture',
+		description:
+			'Envoyer une facture et demander le paiement a votre client',
 	},
 	/* {
 		icon: <CustomerReminderIcon />,
@@ -174,6 +207,24 @@ export const REMINDER_TYPES_DATA = {
 	},
 	LAST: {
 		text: customerName => `Dernier rappel (nº3) envoyé à ${customerName}`,
+	},
+	INVOICE_DELAY: {
+		text: customerName => `1er mail règlement de facture envoyé à ${customerName}`,
+	},
+	INVOICE_FIRST: {
+		text: customerName => `Rappel règlement de facture nº1 envoyé à ${customerName}`,
+	},
+	INVOICE_SECOND: {
+		text: customerName => `Rappel règlement de facture nº2 envoyé à ${customerName}`,
+	},
+	INVOICE_THIRD: {
+		text: customerName => `Rappel règlement de facture nº3 envoyé à ${customerName}`,
+	},
+	INVOICE_FOURTH: {
+		text: customerName => `Rappel règlement de facture nº4 envoyé à ${customerName}`,
+	},
+	INVOICE_LAST: {
+		text: customerName => `Dernier règlement de facture rappel (nº5) envoyé à ${customerName}`,
 	},
 };
 

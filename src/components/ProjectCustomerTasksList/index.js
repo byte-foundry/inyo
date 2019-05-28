@@ -50,8 +50,9 @@ const nameCss = css`
 
 function ProjectTasksList({items, projectId, sectionId}) {
 	const customerToken = useContext(CustomerContext);
+	const token = customerToken === 'preview' ? undefined : customerToken;
 	const {data, error} = useQuery(GET_PROJECT_DATA_WITH_TOKEN, {
-		variables: {projectId, token: customerToken},
+		variables: {projectId, token},
 		suspend: true,
 	});
 

@@ -30,6 +30,7 @@ import App from './screens/App';
 import Auth from './screens/Auth';
 import StraightToCheckout from './screens/StraightToCheckout';
 import Paid from './screens/Paid';
+import EndOfTrial from './screens/EndOfTrial';
 import Customer from './screens/Customer';
 import ConditionalContent from './screens/App/ConditionalContent';
 
@@ -97,18 +98,24 @@ if (query.has('dimension')) {
 }
 
 const ProtectedRoute = ({isAllowed, protectedPath, ...props}) => (isAllowed ? <Route path={protectedPath} {...props} /> : false);
-const ProtectedRedirect = ({isAllowed, protectedPath, ...props}) => (isAllowed ? (
+const ProtectedRedirect = ({
+	isAllowed,
+	paymentError,
+	protectedPath,
+	...props
+}) => (isAllowed ? (
 	<Redirect path={protectedPath} {...props} />
-) : (
+) : !paymentError ? (
 	<Redirect to="/auth" />
+) : (
+	<Redirect to="/end-of-trial" />
 ));
 
 function Root() {
 	const [setupDone, setSetupDone] = useState(false);
-	const {data, loading} = useQuery(CHECK_LOGIN_USER, {
+	const {data, loading, error} = useQuery(CHECK_LOGIN_USER, {
 		suspend: false,
 		fetchPolicy: 'network-only',
-		errorPolicy: 'ignore',
 	});
 	// This is utter shit and should be removed once it works properly
 
@@ -174,10 +181,30 @@ function Root() {
 								{ProtectedRoute({
 									protectedPath: '/auth',
 									component: withTracker(Auth),
-									isAllowed: !(data && data.me),
+									isAllowed:
+										!(data && data.me)
+										&& !(
+											error
+											&& error.graphQLErrors[0].extensions
+												.code === 'Payment'
+										),
+								})}
+								{ProtectedRoute({
+									protectedPath: '/end-of-trial',
+									component: withTracker(EndOfTrial),
+									isAllowed:
+										!(data && data.me)
+										&& (error
+											&& error.graphQLErrors[0].extensions
+												.code === 'Payment'),
 								})}
 								<ProtectedRedirect
 									to="/app"
+									paymentError={
+										error
+										&& error.graphQLErrors[0].extensions.code
+											=== 'Payment'
+									}
 									isAllowed={data && data.me}
 								/>
 							</Switch>

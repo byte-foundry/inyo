@@ -1,5 +1,6 @@
 import React, {memo} from 'react';
 import styled from '@emotion/styled/macro';
+import {Draggable} from 'react-beautiful-dnd';
 
 import Task from './task';
 
@@ -24,17 +25,27 @@ const TasksListContainer = styled('div')`
 	}
 `;
 
-function TasksList({items, customerToken, baseUrl}) {
+function TasksList({
+	items,
+	customerToken,
+	baseUrl,
+	children,
+	createTaskComponent,
+	...rest
+}) {
 	return (
-		<TasksListContainer>
-			{items.map(item => (
+		<TasksListContainer {...rest}>
+			{items.map((item, index) => (createTaskComponent ? (
+				createTaskComponent({item, index})
+			) : (
 				<Task
 					item={item}
 					key={item.id}
 					customerToken={customerToken}
 					baseUrl={baseUrl}
 				/>
-			))}
+			)))}
+			{children}
 			{items.length === 0 && (
 				<IllusContainer bg={IllusBackground}>
 					<IllusFigureContainer fig={IllusFigure} />

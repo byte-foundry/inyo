@@ -116,6 +116,7 @@ function Root() {
 	const {data, loading, error} = useQuery(CHECK_LOGIN_USER, {
 		suspend: false,
 		fetchPolicy: 'network-only',
+		errorPolicy: 'all',
 	});
 	// This is utter shit and should be removed once it works properly
 
@@ -186,6 +187,7 @@ function Root() {
 										&& !(
 											error
 											&& error.graphQLErrors[0].extensions
+											&& error.graphQLErrors[0].extensions
 												.code === 'Payment'
 										),
 								})}
@@ -196,12 +198,14 @@ function Root() {
 										!(data && data.me)
 										&& (error
 											&& error.graphQLErrors[0].extensions
+											&& error.graphQLErrors[0].extensions
 												.code === 'Payment'),
 								})}
 								<ProtectedRedirect
 									to="/app"
 									paymentError={
 										error
+										&& error.graphQLErrors[0].extensions
 										&& error.graphQLErrors[0].extensions.code
 											=== 'Payment'
 									}

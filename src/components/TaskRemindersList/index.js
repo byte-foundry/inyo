@@ -104,7 +104,7 @@ function TaskRemindersList({
 					if (statuses.indexOf(a.status) < statuses.indexOf(b.status)) return -1;
 					if (statuses.indexOf(a.status) > statuses.indexOf(b.status)) return 1;
 
-					return new Date(b.sendingDate) - new Date(a.sendingDate);
+					return new Date(a.sendingDate) - new Date(b.sendingDate);
 				})
 				.map((reminder) => {
 					const text = REMINDER_TYPES_DATA[reminder.type].text(

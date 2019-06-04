@@ -124,7 +124,6 @@ const Input = styled('input')`
 	&::placeholder {
 		color: ${primaryBlack};
 		font-size: 15px;
-		line-height: 1;
 		align-items: center;
 		font-family: 'Work Sans', sans-serif;
 	}

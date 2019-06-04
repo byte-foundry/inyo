@@ -121,13 +121,17 @@ const Schedule = ({days}) => {
 	const iteratorDate = moment(startDay).startOf('week');
 
 	do {
+		const tasks
+			= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
+				&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
+			|| [];
+
+		tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
+
 		weekdays.push({
 			momentDate: iteratorDate.clone(),
 			date: iteratorDate.format(moment.HTML5_FMT.DATE),
-			tasks:
-				(days[iteratorDate.format(moment.HTML5_FMT.DATE)]
-					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
-				|| [],
+			tasks,
 		});
 	} while (
 		iteratorDate.add(1, 'day').toDate() < startDay.endOf('week').toDate()

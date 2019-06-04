@@ -78,6 +78,7 @@ export const ITEM_FRAGMENT = gql`
 		timeItTook
 		isFocused
 		scheduledFor
+		schedulePosition
 		reminders {
 			...ReminderFragment
 		}

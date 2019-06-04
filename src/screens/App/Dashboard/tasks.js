@@ -77,9 +77,7 @@ const DashboardTasks = () => {
 						await focusTask({
 							variables: {
 								itemId: result.draggableId,
-								for: moment(result.destination.id).format(
-									moment.HTML5_FMT.DATE,
-								),
+								for: result.destination.droppableId,
 								schedulePosition: result.destination.index,
 							},
 						});

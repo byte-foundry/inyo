@@ -1,8 +1,9 @@
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import moment from 'moment';
 
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
@@ -18,6 +19,7 @@ import {
 	Loading,
 } from '../../../utils/content';
 import {GET_ALL_TASKS} from '../../../utils/queries';
+import {FOCUS_TASK} from '../../../utils/mutations';
 
 const SectionTitle = styled(H3)`
 	color: ${primaryBlue};
@@ -28,6 +30,7 @@ const SectionTitle = styled(H3)`
 
 const DashboardTasks = () => {
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const focusTask = useMutation(FOCUS_TASK);
 
 	if (loading) return <Loading />;
 	if (error) throw error;
@@ -36,22 +39,56 @@ const DashboardTasks = () => {
 		me: {tasks},
 	} = data;
 
-	const unscheduledTasks = tasks.filter(
-		task => !task.isFocused
-			&& task.status === 'PENDING'
-			&& (!task.section || task.section.project.status === 'ONGOING'),
-	);
+	const unscheduledTasks = [];
+	const scheduledTasks = {};
+
+	tasks.forEach((task) => {
+		if (!task.scheduledFor) {
+			if (
+				task.status === 'PENDING'
+				&& (!task.section || task.section.project.status === 'ONGOING')
+			) {
+				unscheduledTasks.push(task);
+			}
+
+			return;
+		}
+
+		scheduledTasks[task.scheduledFor] = scheduledTasks[
+			task.scheduledFor
+		] || {
+			date: task.scheduledFor,
+			tasks: [],
+		};
+
+		scheduledTasks[task.scheduledFor].tasks.push(task);
+	});
 
 	return (
 		<>
 			<DragDropContext
 				onDragEnd={async (result) => {
-					console.log(result);
+					if (
+						result.destination
+						&& (result.source.droppableId
+							!== result.destination.droppableId
+							|| result.source.index !== result.destination.index)
+					) {
+						await focusTask({
+							variables: {
+								itemId: result.draggableId,
+								for: moment(result.destination.id).format(
+									moment.HTML5_FMT.DATE,
+								),
+								schedulePosition: result.destination.index,
+							},
+						});
+					}
 				}}
 			>
 				<SectionTitle>Planning</SectionTitle>
 
-				<Schedule />
+				<Schedule days={scheduledTasks} />
 
 				<SectionTitle>Tâches à planifier</SectionTitle>
 

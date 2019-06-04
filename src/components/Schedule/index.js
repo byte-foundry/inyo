@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import moment from 'moment';
 import {Droppable, Draggable} from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
@@ -12,7 +12,9 @@ import {
 } from '../../utils/new/design-system';
 import IconButton from '../../utils/new/components/IconButton';
 
-const Container = styled('div')`
+const Container = styled('div')``;
+
+const Week = styled('div')`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -111,133 +113,103 @@ const DroppableDayTasks = ({id, children}) => (
 	</Droppable>
 );
 
-const Schedule = () => {
-	const days = [
-		{
-			date: '2019-05-27',
-			tasks: [
-				{
-					type: 'DEFAULT',
-					status: 'FINISHED',
-					name: 'Tâche 1',
-					linkedCustomer: {
-						name: 'Client A',
-					},
-				},
-				{
-					type: 'DEFAULT',
-					status: 'FINISHED',
-					name: 'Tâche 2',
-					linkedCustomer: null,
-				},
-				{
-					type: 'CUSTOMER',
-					status: 'FINISHED',
-					name: 'Tâche 3',
-					linkedCustomer: {
-						name: 'Client A',
-					},
-				},
-			],
-		},
-		{
-			date: '2019-05-28',
-			tasks: [
-				{
-					type: 'DEFAULT',
-					status: 'FINISHED',
-					name: 'Tâche 4',
-					linkedCustomer: null,
-				},
-				{
-					type: 'DEFAULT',
-					status: 'FINISHED',
-					name: 'Tâche 5',
-					linkedCustomer: {
-						name: 'Client A',
-					},
-				},
-				{
-					type: 'DEFAULT',
-					status: 'FINISHED',
-					name: 'Tâche dont le titre est très long',
-					linkedCustomer: {
-						name: 'Client A',
-					},
-				},
-			],
-		},
-		{
-			date: '2019-05-30',
-			tasks: [],
-		},
-		{
-			date: '2019-05-31',
-			tasks: [
-				{
-					type: 'DEFAULT',
-					status: 'PENDING',
-					name: 'Tâche 7',
-					linkedCustomer: {
-						name: 'Client A',
-					},
-				},
-				{
-					type: 'DEFAULT',
-					status: 'PENDING',
-					name: 'Tâche 8',
-					linkedCustomer: {
-						name: 'Client A',
-					},
-				},
-			],
-		},
-	];
+const Schedule = ({days}) => {
+	const [startDay, setStartDay] = useState(moment().startOf('week'));
+
+	const weekdays = [];
+
+	const iteratorDate = moment(startDay).startOf('week');
+
+	do {
+		weekdays.push({
+			momentDate: iteratorDate.clone(),
+			date: iteratorDate.format(moment.HTML5_FMT.DATE),
+			tasks:
+				(days[iteratorDate.format(moment.HTML5_FMT.DATE)]
+					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
+				|| [],
+		});
+	} while (
+		iteratorDate.add(1, 'day').toDate() < startDay.endOf('week').toDate()
+	);
 
 	return (
 		<Container>
-			{days.map(day => (
-				<Day selected={moment().isSame(day.date || null, 'day')}>
-					<DayTitle>{moment(day.date).format('dddd')}</DayTitle>
-					<DroppableDayTasks id={`day-${day.date}-tasks`}>
-						{day.tasks.map((task, index) => (
-							<DraggableTaskCard
-								id={`${day.date}-${index}`}
-								index={index}
-							>
-								{!isCustomerTask(task.type) && (
-									<IconButton
-										current={task.status === 'FINISHED'}
-										invert={task.status === 'FINISHED'}
+			<button
+				onClick={() => setStartDay(startDay.clone().subtract(1, 'week'))
+				}
+			>
+				prev
+			</button>
+			<button
+				onClick={() => setStartDay(startDay.clone().add(1, 'week'))}
+			>
+				next
+			</button>
+			<Week>
+				{weekdays.map(day => (
+					<Day selected={moment().isSame(day.momentDate, 'day')}>
+						<DayTitle>
+							{day.momentDate
+								.toDate()
+								.toLocaleDateString('default', {
+									weekday: 'short',
+									day: 'numeric',
+									month: moment().isSame(
+										day.momentDate,
+										'month',
+									)
+										? undefined
+										: 'numeric',
+									year: moment().isSame(
+										day.momentDate,
+										'year',
+									)
+										? undefined
+										: '2-digit',
+								})}
+						</DayTitle>
+						<DroppableDayTasks id={day.date}>
+							{day.tasks.map((task, index) => (
+								<DraggableTaskCard id={task.id} index={index}>
+									{!isCustomerTask(task.type) && (
+										<IconButton
+											current={task.status === 'FINISHED'}
+											invert={task.status === 'FINISHED'}
+											style={{
+												gridColumnStart: '2',
+												gridRow: '1 / 3',
+											}}
+											icon="done"
+											size="tiny"
+										/>
+									)}
+									<CardTitle
 										style={{
-											gridColumnStart: '2',
-											gridRow: '1 / 3',
+											gridColumn: isCustomerTask(
+												task.type,
+											)
+												? '1 / 3'
+												: '',
 										}}
-										icon="done"
-										size="tiny"
-									/>
-								)}
-								<CardTitle
-									style={{
-										gridColumn: isCustomerTask(task.type)
-											? '1 / 3'
-											: '',
-									}}
-								>
-									{task.name}
-								</CardTitle>
-								{task.linkedCustomer && (
-									<CardSubTitle>
-										{task.linkedCustomer.name}
-									</CardSubTitle>
-								)}
-							</DraggableTaskCard>
-						))}
-					</DroppableDayTasks>
-				</Day>
-			))}
+									>
+										{task.name}
+									</CardTitle>
+									{task.linkedCustomer && (
+										<CardSubTitle>
+											{task.linkedCustomer.name}
+										</CardSubTitle>
+									)}
+								</DraggableTaskCard>
+							))}
+						</DroppableDayTasks>
+					</Day>
+				))}
+			</Week>
 		</Container>
 	);
 };
+
+Schedule.propTypes = {};
 
 export default Schedule;

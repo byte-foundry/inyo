@@ -634,8 +634,18 @@ export const SNOOZE_ITEM = gql`
 export const FOCUS_TASK = gql`
 	${ITEM_FRAGMENT}
 
-	mutation focusTask($itemId: ID!, $reminders: [ReminderInput]) {
-		focusTask(id: $itemId, reminders: $reminders) {
+	mutation focusTask(
+		$itemId: ID!
+		$reminders: [ReminderInput]
+		$for: Date
+		$schedulePosition: Int
+	) {
+		focusTask(
+			id: $itemId
+			reminders: $reminders
+			for: $for
+			schedulePosition: $schedulePosition
+		) {
 			...ItemFragment
 		}
 	}

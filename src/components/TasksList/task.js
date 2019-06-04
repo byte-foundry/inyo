@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
@@ -7,7 +7,12 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
-import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {
+	FINISH_ITEM,
+	UPDATE_ITEM,
+	UNFINISH_ITEM,
+	FOCUS_TASK,
+} from '../../utils/mutations';
 import {isCustomerTask} from '../../utils/functions';
 import IconButton from '../../utils/new/components/IconButton';
 
@@ -26,6 +31,7 @@ import {
 	primaryWhite,
 	DueDateInputElem,
 	DateInputContainer,
+	Button,
 } from '../../utils/new/design-system';
 
 import CustomerDropdown from '../CustomersDropdown';
@@ -741,6 +747,7 @@ function Task({
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
+	const focusTask = useMutation(FOCUS_TASK);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
@@ -886,6 +893,21 @@ function Task({
 						>
 							Ouvrir
 						</OpenBtn>
+						{baseUrl === 'dashboard' && !isCustomerTask(item) && (
+							<Button
+								onClick={() => focusTask({
+									variables: {
+										itemId: item.id,
+										for: new Date()
+											.toJSON()
+											.split('T')[0],
+									},
+								})
+								}
+							>
+								Ajouter à ma journée
+							</Button>
+						)}
 					</TaskActions>
 				</TaskHeader>
 				{!noData && !setTimeItTook && (

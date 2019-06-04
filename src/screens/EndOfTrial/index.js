@@ -23,7 +23,7 @@ const IllusForPaying = styled('img')`
 const Column = styled(FlexColumn)`
 	width: 400px;
 	margin-left: 2rem;
-	justify-content: space-between;
+	justify-content: center;
 `;
 
 function EndOfTrial() {
@@ -32,14 +32,15 @@ function EndOfTrial() {
 			<FlexRow>
 				<IllusForPaying src={Illus} />
 				<Column>
-					<P>Votre période d'essai est arrivé a sa fin.</P>
+					<P>Votre période d'essai de 21 jours est terminée!</P>
 					<P>
-						Nous espérons que vous avez passé 3 bonnes semaines en
-						compagnie de votre assistant personnel
+						Pour vos clients rien ne change: ils peuvent toujours
+						accéder aux projets, commenter, valider, etc.
 					</P>
 					<P>
-						Pour profiter d'inyo à vie un paiement unique est
-						nécessaire.
+						Pour profiter a nouveau d'Inyo et effectuer des actions
+						sur vos projets en cours, merci de souscrire a un plan
+						payant.
 					</P>
 					<Button
 						onClick={() => {

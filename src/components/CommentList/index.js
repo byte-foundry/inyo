@@ -145,7 +145,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 					try {
-						debouncePostComment.current({
+						await debouncePostComment.current({
 							variables: {
 								itemId,
 								token: customerToken,
@@ -153,31 +153,11 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 									text: values.newComment,
 								},
 							},
-							update: (cache, {data: {postComment}}) => {
-								window.Intercom('trackEvent', 'comment-sent');
-								const commentsQueryResult = cache.readQuery({
-									query: GET_COMMENTS_BY_ITEM,
-									variables: {
-										itemId,
-										token: customerToken,
-									},
-								});
-
-								commentsQueryResult.item.comments.push(
-									postComment.comments.pop(),
-								);
-
-								cache.writeQuery({
-									query: GET_COMMENTS_BY_ITEM,
-									variables: {
-										itemId,
-										token: customerToken,
-									},
-									data: commentsQueryResult,
-								});
-								actions.resetForm();
-							},
 						});
+
+						window.Intercom('trackEvent', 'comment-sent');
+
+						actions.resetForm();
 					}
 					catch (commentError) {
 						actions.setSubmitting(false);

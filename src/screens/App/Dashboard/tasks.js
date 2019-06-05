@@ -64,7 +64,7 @@ const DashboardTasks = ({location, history}) => {
 			newQuery.delete('customerId');
 		}
 
-		history.push(`/app/tasks?${newQuery.toString()}`);
+		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
 	const setCustomerSelected = (selected) => {
@@ -83,7 +83,7 @@ const DashboardTasks = ({location, history}) => {
 			newQuery.delete('projectId');
 		}
 
-		history.push(`/app/tasks?${newQuery.toString()}`);
+		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
 	const setFilterSelected = (selected) => {
@@ -95,7 +95,7 @@ const DashboardTasks = ({location, history}) => {
 			newQuery.set('filter', selectedFilterId);
 		}
 
-		history.push(`/app/tasks?${newQuery.toString()}`);
+		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
 	const setTagSelected = (selected) => {
@@ -109,27 +109,37 @@ const DashboardTasks = ({location, history}) => {
 		history.push(`/app/tasks?${newQuery.toString()}`);
 	};
 
-	tasks.forEach((task) => {
-		if (!task.scheduledFor) {
-			if (
-				task.status === 'PENDING'
-				&& (!task.section || task.section.project.status === 'ONGOING')
-			) {
-				unscheduledTasks.push(task);
+	tasks
+		.filter(
+			task => (!filter || task.status === filter || filter === 'ALL')
+				&& (!task.section
+					|| task.section.project.status === 'ONGOING'
+					|| projectId)
+				&& (!projectId
+					|| (task.section && task.section.project.id === projectId))
+				&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
+		)
+		.forEach((task) => {
+			if (!task.scheduledFor) {
+				if (
+					task.status === 'PENDING'
+					&& (!task.section || task.section.project.status === 'ONGOING')
+				) {
+					unscheduledTasks.push(task);
+				}
+
+				return;
 			}
 
-			return;
-		}
+			scheduledTasks[task.scheduledFor] = scheduledTasks[
+				task.scheduledFor
+			] || {
+				date: task.scheduledFor,
+				tasks: [],
+			};
 
-		scheduledTasks[task.scheduledFor] = scheduledTasks[
-			task.scheduledFor
-		] || {
-			date: task.scheduledFor,
-			tasks: [],
-		};
-
-		scheduledTasks[task.scheduledFor].tasks.push(task);
-	});
+			scheduledTasks[task.scheduledFor].tasks.push(task);
+		});
 
 	return (
 		<>
@@ -195,7 +205,6 @@ const DashboardTasks = ({location, history}) => {
 					// )}
 				}
 			/>
-
 			<Route
 				path="/app/dashboard/:taskId"
 				render={({match, history}) => (

@@ -15,6 +15,7 @@ import {
 } from '../../utils/new/design-system';
 
 import TaskCard from '../TaskCard';
+import IconButton from '../../utils/new/components/IconButton';
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -75,19 +76,17 @@ const ScheduleNav = styled('div')`
 const ScheduleNavInfo = styled('div')`
 	margin: 0 1rem;
 	text-transform: uppercase;
+
+	display: flex;
+	align-items: center;
 `;
 
 const ScheduleNavButton = styled('button')`
-	color: ${primaryPurple};
+	/* color: ${primaryPurple};
 	cursor: pointer;
 	height: 21px;
 	width: 21px;
-	border-radius: 50%;
-
-	&:hover {
-		color: ${primaryWhite};
-		background: ${primaryPurple};
-	}
+	border-radius: 50%; */
 `;
 
 const DraggableTaskCard = ({id, index, ...rest}) => (
@@ -172,18 +171,23 @@ const Schedule = ({days, workingDays, fullWeek}) => {
 	return (
 		<Container>
 			<ScheduleNav>
-				<ScheduleNavButton
-					onClick={() => setStartDay(startDay.clone().subtract(1, 'week'))
-					}
-				>
-					{'<'}
-				</ScheduleNavButton>
+				{
+					<IconButton
+						icon="navigate_before"
+						size="tiny"
+						onClick={() => setStartDay(startDay.clone().subtract(1, 'week'))
+						}
+					/>
+				}
 				<ScheduleNavInfo>Sem. {startDay.week()}</ScheduleNavInfo>
-				<ScheduleNavButton
-					onClick={() => setStartDay(startDay.clone().add(1, 'week'))}
-				>
-					{'>'}
-				</ScheduleNavButton>
+				{
+					<IconButton
+						icon="navigate_next"
+						size="tiny"
+						onClick={() => setStartDay(startDay.clone().add(1, 'week'))
+						}
+					/>
+				}
 			</ScheduleNav>
 			<Week>
 				{weekdays.map(day => (

@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 
 import MaterialIcon from '../../../../components/MaterialIcon';
@@ -8,7 +8,6 @@ import {
 	primaryRed,
 	primaryPurple,
 	lightRed,
-	primaryWhite,
 } from '../../design-system';
 
 const IconWrap = styled('div')`
@@ -161,4 +160,4 @@ function IconButton({
 	);
 }
 
-export default memo(IconButton, () => true);
+export default IconButton;

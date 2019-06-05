@@ -3,16 +3,18 @@ import moment from 'moment';
 import {Droppable, Draggable} from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
 
-import {isCustomerTask} from '../../utils/functions';
 import {
 	mediumGrey,
 	accentGrey,
-	primaryBlack,
-	primaryGrey,
+	primaryPurple,
+	primaryWhite,
 } from '../../utils/new/design-system';
-import IconButton from '../../utils/new/components/IconButton';
 
-const Container = styled('div')``;
+import TaskCard from '../TaskCard';
+
+const Container = styled('div')`
+	margin-top: 3rem;
+`;
 
 const Week = styled('div')`
 	display: flex;
@@ -28,12 +30,6 @@ const Day = styled('div')`
 	flex: 1;
 	max-width: calc(100% / 7);
 	margin: 0 -1px;
-
-	${props => props.selected
-		&& `
-		color: #ff5c84;
-		background: #ffe0e8;
-	`}
 `;
 
 const DayTitle = styled('span')`
@@ -41,8 +37,16 @@ const DayTitle = styled('span')`
 	text-transform: uppercase;
 	font-size: 0.75rem;
 	display: block;
-	padding: 0.5rem 0;
+	padding: 0.3rem 0;
 	text-align: center;
+	margin: 0.2rem 2rem 0.5rem;
+	border-radius: 4px;
+
+	${props => props.selected
+		&& `
+		color: ${primaryWhite};
+		background: ${primaryPurple};
+	`}
 `;
 
 const DayTasks = styled('div')`
@@ -51,26 +55,29 @@ const DayTasks = styled('div')`
 	flex-direction: column;
 `;
 
-const TaskCard = styled('div')`
-	background: #fff;
-	border: 2px solid ${mediumGrey};
-	border-radius: 3px;
-	padding: 5px;
-	margin-bottom: 5px;
-	font-size: 0.75rem;
-	display: grid;
-	grid-template-columns: 1fr auto;
+const ScheduleNav = styled('div')`
+	display: flex;
+	margin-bottom: 1rem;
+	color: ${primaryPurple};
+	justify-content: flex-end;
 `;
 
-const CardTitle = styled('span')`
-	display: block;
-	color: ${primaryBlack};
-	text-overflow: ellipsis;
-	overflow: hidden;
+const ScheduleNavInfo = styled('div')`
+	margin: 0 1rem;
+	text-transform: uppercase;
 `;
 
-const CardSubTitle = styled('span')`
-	color: ${primaryGrey};
+const ScheduleNavButton = styled('button')`
+	color: ${primaryPurple};
+	cursor: pointer;
+	height: 21px;
+	width: 21px;
+	border-radius: 50%;
+
+	&:hover {
+		color: ${primaryWhite};
+		background: ${primaryPurple};
+	}
 `;
 
 const DraggableTaskCard = ({id, index, ...rest}) => (
@@ -92,7 +99,7 @@ const DraggableTaskCard = ({id, index, ...rest}) => (
 					...provided.draggableProps.style,
 				}}
 			>
-				<TaskCard {...rest} />
+				<TaskCard index={index} {...rest} />
 			</div>
 		)}
 	</Draggable>
@@ -102,7 +109,7 @@ const DroppableDayTasks = ({id, children}) => (
 	<Droppable droppableId={id} type="TASK" direction="vertical">
 		{provided => (
 			<DayTasks
-				style={{minHeight: '50px'}}
+				style={{minHeight: '50px', height: '100%'}}
 				ref={provided.innerRef}
 				{...provided.droppableProps}
 			>
@@ -139,21 +146,26 @@ const Schedule = ({days}) => {
 
 	return (
 		<Container>
-			<button
-				onClick={() => setStartDay(startDay.clone().subtract(1, 'week'))
-				}
-			>
-				prev
-			</button>
-			<button
-				onClick={() => setStartDay(startDay.clone().add(1, 'week'))}
-			>
-				next
-			</button>
+			<ScheduleNav>
+				<ScheduleNavButton
+					onClick={() => setStartDay(startDay.clone().subtract(1, 'week'))
+					}
+				>
+					{'<'}
+				</ScheduleNavButton>
+				<ScheduleNavInfo>Sem. {startDay.week()}</ScheduleNavInfo>
+				<ScheduleNavButton
+					onClick={() => setStartDay(startDay.clone().add(1, 'week'))}
+				>
+					{'>'}
+				</ScheduleNavButton>
+			</ScheduleNav>
 			<Week>
 				{weekdays.map(day => (
-					<Day selected={moment().isSame(day.momentDate, 'day')}>
-						<DayTitle>
+					<Day>
+						<DayTitle
+							selected={moment().isSame(day.momentDate, 'day')}
+						>
 							{day.momentDate
 								.toDate()
 								.toLocaleDateString('default', {
@@ -175,36 +187,11 @@ const Schedule = ({days}) => {
 						</DayTitle>
 						<DroppableDayTasks id={day.date}>
 							{day.tasks.map((task, index) => (
-								<DraggableTaskCard id={task.id} index={index}>
-									{!isCustomerTask(task.type) && (
-										<IconButton
-											current={task.status === 'FINISHED'}
-											invert={task.status === 'FINISHED'}
-											style={{
-												gridColumnStart: '2',
-												gridRow: '1 / 3',
-											}}
-											icon="done"
-											size="tiny"
-										/>
-									)}
-									<CardTitle
-										style={{
-											gridColumn: isCustomerTask(
-												task.type,
-											)
-												? '1 / 3'
-												: '',
-										}}
-									>
-										{task.name}
-									</CardTitle>
-									{task.linkedCustomer && (
-										<CardSubTitle>
-											{task.linkedCustomer.name}
-										</CardSubTitle>
-									)}
-								</DraggableTaskCard>
+								<DraggableTaskCard
+									id={task.id}
+									task={task}
+									index={index}
+								/>
 							))}
 						</DroppableDayTasks>
 					</Day>

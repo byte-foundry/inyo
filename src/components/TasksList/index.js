@@ -18,7 +18,7 @@ import {
 } from '../../utils/new/design-system';
 
 const TasksListContainer = styled('div')`
-	margin-top: 3rem;
+	margin-top: 2rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-top: 1rem;

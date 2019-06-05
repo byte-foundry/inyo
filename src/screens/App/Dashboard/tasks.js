@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -9,7 +9,9 @@ import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
 import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
+import ArianneThread from '../../../components/ArianneThread';
 import noTaskPlanned from '../../../utils/images/bermuda-searching.svg';
+import TaskCard from '../../../components/TaskCard';
 
 import {
 	H3,
@@ -28,9 +30,18 @@ const SectionTitle = styled(H3)`
 	margin: 2em 0 0;
 `;
 
-const DashboardTasks = () => {
+const DashboardTasks = ({location, history}) => {
+	const {prevSearch} = location.state || {};
+	const [draggedId, setDraggedId] = useState();
+	const query = new URLSearchParams(prevSearch || location.search);
+
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
+
+	const projectId = query.get('projectId');
+	const filter = query.get('filter');
+	const tags = query.getAll('tags');
+	const linkedCustomerId = query.get('customerId');
 
 	if (loading) return <Loading />;
 	if (error) throw error;
@@ -41,6 +52,67 @@ const DashboardTasks = () => {
 
 	const unscheduledTasks = [];
 	const scheduledTasks = {};
+
+	const setProjectSelected = (selected, removeCustomer) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedProjectId} = selected;
+
+			newQuery.set('projectId', selectedProjectId);
+		}
+		else if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		if (removeCustomer) {
+			newQuery.delete('customerId');
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
+	const setCustomerSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedCustomerId} = selected;
+
+			newQuery.set('customerId', selectedCustomerId);
+		}
+		else if (newQuery.has('customerId')) {
+			newQuery.delete('customerId');
+		}
+
+		if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
+	const setFilterSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedFilterId} = selected;
+
+			newQuery.set('filter', selectedFilterId);
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
+
+	const setTagSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			newQuery.delete('tags');
+			selected.forEach(tag => newQuery.append('tags', tag.value));
+		}
+
+		history.push(`/app/tasks?${newQuery.toString()}`);
+	};
 
 	tasks.forEach((task) => {
 		if (!task.scheduledFor) {
@@ -68,6 +140,7 @@ const DashboardTasks = () => {
 		<>
 			<DragDropContext
 				onDragEnd={async (result) => {
+					setDraggedId(undefined);
 					if (
 						result.destination
 						&& (result.source.droppableId
@@ -84,12 +157,19 @@ const DashboardTasks = () => {
 					}
 				}}
 			>
-				<SectionTitle>Planning</SectionTitle>
-
 				<Schedule days={scheduledTasks} />
 
-				<SectionTitle>Tâches à planifier</SectionTitle>
-
+				<ArianneThread
+					projectId={projectId}
+					linkedCustomerId={linkedCustomerId}
+					selectCustomer={setCustomerSelected}
+					selectProjects={setProjectSelected}
+					selectFilter={setFilterSelected}
+					selectTag={setTagSelected}
+					filterId={filter}
+					tagsSelected={tags}
+					marginTop
+				/>
 				<Droppable
 					isDropDisabled
 					droppableId="unscheduled-tasks"
@@ -119,22 +199,41 @@ const DashboardTasks = () => {
 											ref={provided.innerRef}
 											{...provided.draggableProps}
 											{...provided.dragHandleProps}
-											onMouseDown={e => provided.dragHandleProps
-												&& provided.dragHandleProps.onMouseDown(
-													e,
-												)
-											}
-											style={{
-												// some basic styles to make the tasks look a bit nicer
-												userSelect: 'none',
-
-												// styles we need to apply on draggables
-												...provided.draggableProps
-													.style,
+											onMouseDown={(e) => {
+												setDraggedId(item.id);
+												return (
+													provided.dragHandleProps
+													&& provided.dragHandleProps.onMouseDown(
+														e,
+													)
+												);
 											}}
+											style={
+												draggedId === item.id
+													? {
+														// some basic styles to make the tasks look a bit nicer
+														userSelect: 'none',
+														// styles we need to apply on draggables
+														...provided
+															.draggableProps
+															.style,
+														width: '100px',
+													  }
+													: {
+														// some basic styles to make the tasks look a bit nicer
+														userSelect: 'none',
+														// styles we need to apply on draggables
+														...provided
+															.draggableProps
+															.style,
+													  }
+											}
 										>
-											{snapshot.isDragging ? (
-												<p>is dragging</p>
+											{draggedId === item.id ? (
+												<TaskCard
+													task={item}
+													index={index}
+												/>
 											) : (
 												<Task
 													item={item}

@@ -221,6 +221,7 @@ function TasksList({location, history}) {
 					selectTag={setTagSelected}
 					filterId={filter}
 					tagsSelected={tags}
+					marginBottom
 				/>
 				{projectId && (
 					<ProjectHeader

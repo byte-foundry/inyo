@@ -1,34 +1,22 @@
 import React, {useState} from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
-import styled from '@emotion/styled';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
-import moment from 'moment';
 
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
 import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
 import ArianneThread from '../../../components/ArianneThread';
-import noTaskPlanned from '../../../utils/images/bermuda-searching.svg';
 import TaskCard from '../../../components/TaskCard';
 
 import {
-	H3,
-	primaryBlue,
 	ModalContainer as Modal,
 	ModalElem,
 	Loading,
 } from '../../../utils/content';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 import {FOCUS_TASK} from '../../../utils/mutations';
-
-const SectionTitle = styled(H3)`
-	color: ${primaryBlue};
-	font-size: 22px;
-	font-weight: 500;
-	margin: 2em 0 0;
-`;
 
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
@@ -36,6 +24,10 @@ const DashboardTasks = ({location, history}) => {
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {data: userPrefsData, loadingUserPrefs, errorUserPrefs} = useQuery(
+		GET_USER_INFOS,
+		{suspend: true},
+	);
 	const focusTask = useMutation(FOCUS_TASK);
 
 	const projectId = query.get('projectId');
@@ -45,6 +37,7 @@ const DashboardTasks = ({location, history}) => {
 
 	if (loading) return <Loading />;
 	if (error) throw error;
+	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {
 		me: {tasks},
@@ -157,7 +150,15 @@ const DashboardTasks = ({location, history}) => {
 					}
 				}}
 			>
-				<Schedule days={scheduledTasks} />
+				{loadingUserPrefs ? (
+					<Loading />
+				) : (
+					<Schedule
+						days={scheduledTasks}
+						workingDays={userPrefsData.me.workingDays}
+						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					/>
+				)}
 
 				<ArianneThread
 					projectId={projectId}

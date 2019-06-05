@@ -65,8 +65,6 @@ export const UPDATE_USER = gql`
 			email
 			firstName
 			lastName
-			defaultDailyPrice
-			defaultVatRate
 			startWorkAt
 			endWorkAt
 			workingDays
@@ -92,8 +90,6 @@ export const UPDATE_USER = gql`
 
 export const UPDATE_USER_CONSTANTS = gql`
 	mutation updateUserConstant(
-		$defaultDailyPrice: Int
-		$defaultVatRate: Int
 		$workingFields: [String!]
 		$jobType: JobType
 		$interestedFeatures: [String!]
@@ -106,10 +102,9 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$company: CompanyInput
 		$workingDays: [DAY!]
 		$timeZone: TimeZone
+		$hasFullWeekSchedule: Boolean
 	) {
 		updateUser(
-			defaultDailyPrice: $defaultDailyPrice
-			defaultVatRate: $defaultVatRate
 			workingFields: $workingFields
 			jobType: $jobType
 			interestedFeatures: $interestedFeatures
@@ -122,13 +117,12 @@ export const UPDATE_USER_CONSTANTS = gql`
 			endWorkAt: $endWorkAt
 			workingDays: $workingDays
 			timeZone: $timeZone
+			settings: {hasFullWeekSchedule: $hasFullWeekSchedule}
 		) {
 			id
 			email
 			firstName
 			lastName
-			defaultDailyPrice
-			defaultVatRate
 			workingFields
 			jobType
 			interestedFeatures
@@ -137,6 +131,9 @@ export const UPDATE_USER_CONSTANTS = gql`
 			endWorkAt
 			workingDays
 			timeZone
+			settings {
+				hasFullWeekSchedule
+			}
 			company {
 				id
 				name
@@ -165,8 +162,6 @@ export const UPDATE_USER_SETTINGS = gql`
 			email
 			firstName
 			lastName
-			defaultDailyPrice
-			defaultVatRate
 			workingFields
 			jobType
 			interestedFeatures
@@ -202,8 +197,6 @@ export const UPDATE_USER_COMPANY = gql`
 			email
 			firstName
 			lastName
-			defaultDailyPrice
-			defaultVatRate
 			company {
 				id
 				name

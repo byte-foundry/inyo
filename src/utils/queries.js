@@ -52,8 +52,6 @@ export const GET_USER_INFOS = gql`
 			email
 			firstName
 			lastName
-			defaultDailyPrice
-			defaultVatRate
 			workingFields
 			jobType
 			interestedFeatures
@@ -83,6 +81,7 @@ export const GET_USER_INFOS = gql`
 			}
 			settings {
 				assistantName
+				hasFullWeekSchedule
 			}
 		}
 	}
@@ -228,7 +227,6 @@ export const GET_PROJECT_INFOS = gql`
 					firstName
 					lastName
 					email
-					defaultVatRate
 				}
 				siret
 			}
@@ -267,7 +265,6 @@ export const GET_PROJECT_DATA = gql`
 					firstName
 					lastName
 					email
-					defaultVatRate
 				}
 				siret
 			}
@@ -334,7 +331,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					firstName
 					lastName
 					email
-					defaultVatRate
 				}
 				siret
 			}

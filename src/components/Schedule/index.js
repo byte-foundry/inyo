@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import {Droppable, Draggable} from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
@@ -8,6 +9,9 @@ import {
 	accentGrey,
 	primaryPurple,
 	primaryWhite,
+	primaryBlack,
+	primaryGrey,
+	lightGrey,
 } from '../../utils/new/design-system';
 
 import TaskCard from '../TaskCard';
@@ -30,6 +34,12 @@ const Day = styled('div')`
 	flex: 1;
 	max-width: calc(100% / 7);
 	margin: 0 -1px;
+
+	${props => props.isOff
+		&& `
+		color: ${accentGrey};
+		background: ${lightGrey};
+	`}
 `;
 
 const DayTitle = styled('span')`
@@ -120,7 +130,17 @@ const DroppableDayTasks = ({id, children}) => (
 	</Droppable>
 );
 
-const Schedule = ({days}) => {
+const WEEKDAYS = {
+	1: 'MONDAY',
+	2: 'TUESDAY',
+	3: 'WEDNESDAY',
+	4: 'THURSDAY',
+	5: 'FRIDAY',
+	6: 'SATURDAY',
+	0: 'SUNDAY',
+};
+
+const Schedule = ({days, workingDays, fullWeek}) => {
 	const [startDay, setStartDay] = useState(moment().startOf('week'));
 
 	const weekdays = [];
@@ -128,18 +148,23 @@ const Schedule = ({days}) => {
 	const iteratorDate = moment(startDay).startOf('week');
 
 	do {
-		const tasks
-			= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
-				&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
-			|| [];
+		const workedDay = workingDays.includes(WEEKDAYS[iteratorDate.day()]);
 
-		tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
+		if (fullWeek || workedDay) {
+			const tasks
+				= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
+					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
+				|| [];
 
-		weekdays.push({
-			momentDate: iteratorDate.clone(),
-			date: iteratorDate.format(moment.HTML5_FMT.DATE),
-			tasks,
-		});
+			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
+
+			weekdays.push({
+				momentDate: iteratorDate.clone(),
+				date: iteratorDate.format(moment.HTML5_FMT.DATE),
+				tasks,
+				workedDay,
+			});
+		}
 	} while (
 		iteratorDate.add(1, 'day').toDate() < startDay.endOf('week').toDate()
 	);
@@ -162,7 +187,7 @@ const Schedule = ({days}) => {
 			</ScheduleNav>
 			<Week>
 				{weekdays.map(day => (
-					<Day>
+					<Day isOff={!day.workedDay}>
 						<DayTitle
 							selected={moment().isSame(day.momentDate, 'day')}
 						>
@@ -201,6 +226,22 @@ const Schedule = ({days}) => {
 	);
 };
 
-Schedule.propTypes = {};
+Schedule.defaultProps = {
+	workingDays: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
+};
+
+Schedule.propTypes = {
+	workingDays: PropTypes.arrayOf(
+		PropTypes.oneOf([
+			'MONDAY',
+			'TUESDAY',
+			'WEDNESDAY',
+			'THURSDAY',
+			'FRIDAY',
+			'SATURDAY',
+			'SUNDAY',
+		]),
+	),
+};
 
 export default Schedule;

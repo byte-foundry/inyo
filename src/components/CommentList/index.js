@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 import debounce from 'lodash.debounce';
-import {Formik} from 'formik';
+import {Formik, Field} from 'formik';
 import ReactTooltip from 'react-tooltip';
 import {Waypoint} from 'react-waypoint';
 
@@ -39,7 +39,7 @@ const Comments = styled('div')`
 	overflow-y: auto;
 `;
 
-const ItemComment = styled('textarea')`
+const ItemComment = styled(Field)`
 	margin-top: 10px;
 	width: 100%;
 	background: ${primaryWhite};
@@ -95,7 +95,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 	if (loading) return <span />;
 	if (error) throw error;
 
-	const {itemComments} = data;
+	const {comments: itemComments} = data.item;
 
 	const comments = itemComments.map(comment => (
 		<Comment key={`comment${comment.id}`} comment={comment} />
@@ -163,7 +163,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 									},
 								});
 
-								commentsQueryResult.itemComments.push(
+								commentsQueryResult.item.comments.push(
 									postComment.comments.pop(),
 								);
 
@@ -184,19 +184,13 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 						actions.setErrors(commentError);
 						actions.setStatus({
 							msg:
-								"Une erreur c'est produit pendant la soumission du commentaire",
+								"Une erreur s'est produite pendant la soumission du commentaire",
 						});
 					}
 				}}
 			>
 				{(props) => {
-					const {
-						touched,
-						errors,
-						handleSubmit,
-						setFieldValue,
-						values,
-					} = props;
+					const {touched, errors, handleSubmit} = props;
 
 					return (
 						<form onSubmit={handleSubmit}>
@@ -205,13 +199,8 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 									id="comment-textarea"
 									data-tip="Les personnes liées à la tâche seront notifiées"
 									placeholder={placeholderText}
-									value={values.newComment}
 									name="newComment"
-									onChange={e => setFieldValue(
-										'newComment',
-										e.target.value,
-									)
-									}
+									component="textarea"
 								/>
 							</FlexRow>
 							{errors.comment && touched.comment && (

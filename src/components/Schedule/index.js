@@ -34,7 +34,6 @@ const Day = styled('div')`
 	border-radius: 3px;
 	padding: 0 5px;
 	flex: 1;
-	max-width: calc(100% / 7);
 	margin: 0 -1px;
 
 	${props => props.isOff

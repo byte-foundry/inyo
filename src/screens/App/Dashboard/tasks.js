@@ -45,7 +45,7 @@ const DashboardTasks = ({location, history}) => {
 		me: {tasks},
 	} = data;
 
-	const unscheduledTasks = [];
+	let unscheduledTasks = [];
 	const scheduledTasks = {};
 
 	const setProjectSelected = (selected, removeCustomer) => {
@@ -106,40 +106,40 @@ const DashboardTasks = ({location, history}) => {
 			selected.forEach(tag => newQuery.append('tags', tag.value));
 		}
 
-		history.push(`/app/tasks?${newQuery.toString()}`);
+		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
-	tasks
-		.filter(
-			task => (!filter || task.status === filter || filter === 'ALL')
-				&& (!task.section
-					|| task.section.project.status === 'ONGOING'
-					|| projectId)
-				&& (!projectId
-					|| (task.section && task.section.project.id === projectId))
-				&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
-		)
-		.forEach((task) => {
-			if (!task.scheduledFor) {
-				if (
-					task.status === 'PENDING'
-					&& (!task.section || task.section.project.status === 'ONGOING')
-				) {
-					unscheduledTasks.push(task);
-				}
-
-				return;
+	tasks.forEach((task) => {
+		if (!task.scheduledFor) {
+			if (
+				task.status === 'PENDING'
+				&& (!task.section || task.section.project.status === 'ONGOING')
+			) {
+				unscheduledTasks.push(task);
 			}
 
-			scheduledTasks[task.scheduledFor] = scheduledTasks[
-				task.scheduledFor
-			] || {
-				date: task.scheduledFor,
-				tasks: [],
-			};
+			return;
+		}
 
-			scheduledTasks[task.scheduledFor].tasks.push(task);
-		});
+		scheduledTasks[task.scheduledFor] = scheduledTasks[
+			task.scheduledFor
+		] || {
+			date: task.scheduledFor,
+			tasks: [],
+		};
+
+		scheduledTasks[task.scheduledFor].tasks.push(task);
+	});
+
+	unscheduledTasks = unscheduledTasks.filter(
+		task => (!filter || task.status === filter || filter === 'ALL')
+			&& (!task.section
+				|| task.section.project.status === 'ONGOING'
+				|| projectId)
+			&& (!projectId
+				|| (task.section && task.section.project.id === projectId))
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
+	);
 
 	return (
 		<>

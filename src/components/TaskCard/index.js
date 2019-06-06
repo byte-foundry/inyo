@@ -1,5 +1,4 @@
-import React from 'react';
-import {Draggable} from 'react-beautiful-dnd';
+import React, {forwardRef} from 'react';
 import styled from '@emotion/styled';
 
 import {isCustomerTask} from '../../utils/functions';
@@ -32,33 +31,31 @@ const CardSubTitle = styled('span')`
 	color: ${primaryGrey};
 `;
 
-function TaskCard({task, index}) {
-	return (
-		<TaskCardElem>
-			{!isCustomerTask(task.type) && (
-				<IconButton
-					current={task.status === 'FINISHED'}
-					invert={task.status === 'FINISHED'}
-					style={{
-						gridColumnStart: '2',
-						gridRow: '1 / 3',
-					}}
-					icon="done"
-					size="tiny"
-				/>
-			)}
-			<CardTitle
+const TaskCard = forwardRef(({task, index, ...rest}, ref) => (
+	<TaskCardElem {...rest} ref={ref}>
+		{!isCustomerTask(task.type) && (
+			<IconButton
+				current={task.status === 'FINISHED'}
+				invert={task.status === 'FINISHED'}
 				style={{
-					gridColumn: isCustomerTask(task.type) ? '1 / 3' : '',
+					gridColumnStart: '2',
+					gridRow: '1 / 3',
 				}}
-			>
-				{task.name}
-			</CardTitle>
-			{task.linkedCustomer && (
-				<CardSubTitle>{task.linkedCustomer.name}</CardSubTitle>
-			)}
-		</TaskCardElem>
-	);
-}
+				icon="done"
+				size="tiny"
+			/>
+		)}
+		<CardTitle
+			style={{
+				gridColumn: isCustomerTask(task.type) ? '1 / 3' : '',
+			}}
+		>
+			{task.name}
+		</CardTitle>
+		{task.linkedCustomer && (
+			<CardSubTitle>{task.linkedCustomer.name}</CardSubTitle>
+		)}
+	</TaskCardElem>
+));
 
 export default TaskCard;

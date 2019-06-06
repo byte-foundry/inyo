@@ -7,6 +7,8 @@ import {
 	ApolloProvider as ApolloHooksProvider,
 	useQuery,
 } from 'react-apollo-hooks';
+import HTML5Backend from 'react-dnd-html5-backend';
+import {DragDropContextProvider} from 'react-dnd';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -133,50 +135,54 @@ function Root() {
 	}
 
 	return (
-		<ProvidersSentry>
-			<BodyMain>
-				<main>
-					<UserContext.Provider user={data && data.me}>
-						<Switch>
-							<Route
-								path="/app/:customerToken(.*-.*-.*-.*)/tasks"
-								component={withTracker(Customer)}
-							/>
-							<Redirect
-								from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
-								to="/app/:customerToken/tasks?projectId=:projectId"
-							/>
-							{ProtectedRoute({
-								protectedPath: '/app',
-								component: withTracker(App),
-								isAllowed: data && data.me,
-							})}
-							{ProtectedRoute({
-								protectedPath: '/auth',
-								component: withTracker(Auth),
-								isAllowed: !(data && data.me),
-							})}
-							<ProtectedRedirect
-								to="/app"
+		<DragDropContextProvider backend={HTML5Backend}>
+			<ProvidersSentry>
+				<BodyMain>
+					<main>
+						<UserContext.Provider user={data && data.me}>
+							<Switch>
+								<Route
+									path="/app/:customerToken(.*-.*-.*-.*)/tasks"
+									component={withTracker(Customer)}
+								/>
+								<Redirect
+									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
+									to="/app/:customerToken/tasks?projectId=:projectId"
+								/>
+								{ProtectedRoute({
+									protectedPath: '/app',
+									component: withTracker(App),
+									isAllowed: data && data.me,
+								})}
+								{ProtectedRoute({
+									protectedPath: '/auth',
+									component: withTracker(Auth),
+									isAllowed: !(data && data.me),
+								})}
+								<ProtectedRedirect
+									to="/app"
+									isAllowed={data && data.me}
+								/>
+							</Switch>
+							<ProtectedRoute
+								protectedPath={[
+									'/app/projects',
+									'/app/account',
+									'/app/dashboard',
+									'/app/tasks',
+									'/app/tags',
+								]}
+								render={props => (
+									<ConditionalContent {...props} />
+								)}
 								isAllowed={data && data.me}
 							/>
-						</Switch>
-						<ProtectedRoute
-							protectedPath={[
-								'/app/projects',
-								'/app/account',
-								'/app/dashboard',
-								'/app/tasks',
-								'/app/tags',
-							]}
-							render={props => <ConditionalContent {...props} />}
-							isAllowed={data && data.me}
-						/>
-					</UserContext.Provider>
-				</main>
-				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			</BodyMain>
-		</ProvidersSentry>
+						</UserContext.Provider>
+					</main>
+					<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+				</BodyMain>
+			</ProvidersSentry>
+		</DragDropContextProvider>
 	);
 }
 

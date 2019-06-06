@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {Droppable, Draggable} from 'react-beautiful-dnd';
 import styled from '@emotion/styled';
+import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
 
 import {
 	mediumGrey,
@@ -15,6 +15,8 @@ import {
 
 import TaskCard from '../TaskCard';
 import IconButton from '../../utils/new/components/IconButton';
+
+const {useDrop, useDrag} = dnd;
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -63,6 +65,8 @@ const DayTasks = styled('div')`
 	color: ${accentGrey};
 	display: flex;
 	flex-direction: column;
+
+	${props => props.isOver && 'background-color: blue;'}
 `;
 
 const ScheduleNav = styled('div')`
@@ -80,45 +84,36 @@ const ScheduleNavInfo = styled('div')`
 	align-items: center;
 `;
 
-const DraggableTaskCard = ({id, index, ...rest}) => (
-	<Draggable key={id} draggableId={id} index={index} type="TASK">
-		{provided => (
-			<div
-				className="task"
-				ref={provided.innerRef}
-				{...provided.draggableProps}
-				{...provided.dragHandleProps}
-				onMouseDown={e => provided.dragHandleProps
-					&& provided.dragHandleProps.onMouseDown(e)
-				}
-				style={{
-					// some basic styles to make the tasks look a bit nicer
-					userSelect: 'none',
+const DraggableTaskCard = ({id, index, ...rest}) => {
+	const [collectedProps, drag] = useDrag({
+		item: {id, type: 'TASK'},
+		begin(monitor) {
+			console.log('drag begin');
+		},
+		end(monitor) {
+			console.log('drag end');
+		},
+	});
 
-					// styles we need to apply on draggables
-					...provided.draggableProps.style,
-				}}
-			>
-				<TaskCard index={index} {...rest} />
-			</div>
-		)}
-	</Draggable>
-);
+	return <TaskCard ref={drag} index={index} {...rest} />;
+};
 
-const DroppableDayTasks = ({id, children}) => (
-	<Droppable droppableId={id} type="TASK" direction="vertical">
-		{provided => (
-			<DayTasks
-				style={{minHeight: '50px', height: '100%'}}
-				ref={provided.innerRef}
-				{...provided.droppableProps}
-			>
-				{children}
-				{provided.placeholder}
-			</DayTasks>
-		)}
-	</Droppable>
-);
+const DroppableDayTasks = ({id, children}) => {
+	const [{isOver}, drop] = useDrop({
+		accept: 'TASK',
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+	});
+
+	return (
+		<DayTasks ref={drop} isOver={isOver}>
+			{children}
+		</DayTasks>
+	);
+};
 
 const WEEKDAYS = {
 	1: 'MONDAY',

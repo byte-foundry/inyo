@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
+import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
 
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
@@ -17,6 +17,8 @@ import {
 } from '../../../utils/content';
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 import {FOCUS_TASK} from '../../../utils/mutations';
+
+const {useDrop} = dnd;
 
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
@@ -131,7 +133,7 @@ const DashboardTasks = ({location, history}) => {
 
 	return (
 		<>
-			<DragDropContext
+			{/* <DragDropContext
 				onDragEnd={async (result) => {
 					setDraggedId(undefined);
 					if (
@@ -149,112 +151,50 @@ const DashboardTasks = ({location, history}) => {
 						});
 					}
 				}}
-			>
-				{loadingUserPrefs ? (
-					<Loading />
-				) : (
-					<Schedule
-						days={scheduledTasks}
-						workingDays={userPrefsData.me.workingDays}
-						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-					/>
-				)}
-
-				<ArianneThread
-					projectId={projectId}
-					linkedCustomerId={linkedCustomerId}
-					selectCustomer={setCustomerSelected}
-					selectProjects={setProjectSelected}
-					selectFilter={setFilterSelected}
-					selectTag={setTagSelected}
-					filterId={filter}
-					tagsSelected={tags}
-					marginTop
+			> */}
+			{loadingUserPrefs ? (
+				<Loading />
+			) : (
+				<Schedule
+					days={scheduledTasks}
+					workingDays={userPrefsData.me.workingDays}
+					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
 				/>
-				<Droppable
-					isDropDisabled
-					droppableId="unscheduled-tasks"
-					type="TASK"
-					direction="vertical"
-				>
-					{provided => (
-						<TasksList
-							style={{minHeight: '50px'}}
-							innerRef={provided.innerRef}
-							{...provided.droppableProps}
-							items={unscheduledTasks}
+			)}
+
+			<ArianneThread
+				projectId={projectId}
+				linkedCustomerId={linkedCustomerId}
+				selectCustomer={setCustomerSelected}
+				selectProjects={setProjectSelected}
+				selectFilter={setFilterSelected}
+				selectTag={setTagSelected}
+				filterId={filter}
+				tagsSelected={tags}
+				marginTop
+			/>
+			<TasksList
+				style={{minHeight: '50px'}}
+				items={unscheduledTasks}
+				baseUrl="dashboard"
+				createTaskComponent={
+					({item, index, customerToken}) => (
+						// {draggedId === item.id ? (
+						// 	<TaskCard
+						// 		task={item}
+						// 		index={index}
+						// 	/>
+						// ) : (
+						<Task
+							item={item}
+							key={item.id}
+							customerToken={customerToken}
 							baseUrl="dashboard"
-							createTaskComponent={({
-								item,
-								index,
-								customerToken,
-							}) => (
-								<Draggable
-									key={item.id}
-									draggableId={item.id}
-									index={index}
-									type="TASK"
-								>
-									{(provided, snapshot) => (
-										<div
-											ref={provided.innerRef}
-											{...provided.draggableProps}
-											{...provided.dragHandleProps}
-											onMouseDown={(e) => {
-												setDraggedId(item.id);
-												return (
-													provided.dragHandleProps
-													&& provided.dragHandleProps.onMouseDown(
-														e,
-													)
-												);
-											}}
-											style={
-												draggedId === item.id
-													? {
-														// some basic styles to make the tasks look a bit nicer
-														userSelect: 'none',
-														// styles we need to apply on draggables
-														...provided
-															.draggableProps
-															.style,
-														width: '100px',
-													  }
-													: {
-														// some basic styles to make the tasks look a bit nicer
-														userSelect: 'none',
-														// styles we need to apply on draggables
-														...provided
-															.draggableProps
-															.style,
-													  }
-											}
-										>
-											{draggedId === item.id ? (
-												<TaskCard
-													task={item}
-													index={index}
-												/>
-											) : (
-												<Task
-													item={item}
-													key={item.id}
-													customerToken={
-														customerToken
-													}
-													baseUrl="dashboard"
-												/>
-											)}
-										</div>
-									)}
-								</Draggable>
-							)}
-						>
-							{provided.placeholder}
-						</TasksList>
-					)}
-				</Droppable>
-			</DragDropContext>
+						/>
+					)
+					// )}
+				}
+			/>
 
 			<Route
 				path="/app/dashboard/:taskId"

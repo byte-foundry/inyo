@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, forwardRef} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
@@ -743,6 +743,7 @@ function Task({
 	isDraggable,
 	noData,
 	baseUrl = 'tasks',
+	forwardedRef,
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
@@ -787,208 +788,216 @@ function Task({
 		|| (customerToken && isCustomerTask(item.type));
 
 	return (
-		<TaskContainer
-			noData={noData}
-			isDraggable={isDraggable}
-			ref={setTimeItTookRef}
-		>
-			<TaskAdd />
-			<TaskIcon
-				status={item.status}
-				type={item.type}
+		<div ref={forwardedRef}>
+			<TaskContainer
 				noData={noData}
-				ref={iconRef}
-				justUpdated={justUpdated}
-				onClick={() => {
-					if (!isFinishable && !isUnfinishable) return;
+				isDraggable={isDraggable}
+				ref={setTimeItTookRef}
+			>
+				<TaskAdd />
+				<TaskIcon
+					status={item.status}
+					type={item.type}
+					noData={noData}
+					ref={iconRef}
+					justUpdated={justUpdated}
+					onClick={() => {
+						if (!isFinishable && !isUnfinishable) return;
 
-					if (isFinishable) {
-						if (customerToken) {
-							finishItemCallback(item.unit);
-						}
-						else if (setTimeItTook) {
-							finishItemCallback(
-								parseFloat(setTimeItTookValueRef.current()),
-							);
-							setSetTimeItTook(false);
-						}
-						else {
-							setSetTimeItTook(true);
-						}
-					}
-					else if (isUnfinishable) {
-						unfinishItem({
-							variables: {
-								itemId: item.id,
-								token: customerToken,
-							},
-						});
-					}
-				}}
-			/>
-			<TaskContent noData={noData}>
-				<TaskHeader
-					data-tip={
-						setTimeItTook
-							? undefined
-							: 'Cliquer pour voir le contenu de la tâche'
-					}
-				>
-					{setTimeItTook && (
-						<SetTimeContainer>
-							<UnitInput
-								getValue={setTimeItTookValueRef}
-								unit={item.unit}
-								onBlur={(unit) => {
-									finishItemCallback(unit);
-									setSetTimeItTook(false);
-								}}
-								onSubmit={finishItemCallback}
-							/>
-							<SetTimeInfos>
-								<SetTimeHeadline>
-									Temps réellement passé
-								</SetTimeHeadline>
-								<SetTimeCaption>
-									Uniquement visible par vous
-								</SetTimeCaption>
-							</SetTimeInfos>
-						</SetTimeContainer>
-					)}
-					{item.name ? (
-						<TaskHeadingLink
-							noData={noData}
-							small={setTimeItTook}
-							status={item.status}
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						>
-							{item.name}
-						</TaskHeadingLink>
-					) : (
-						<TaskHeadingPlaceholder
-							noData={noData}
-							small={setTimeItTook}
-							to={{
-								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
-								state: {prevSearch: location.search},
-							}}
-						>
-							Choisir un titre pour cette tâche
-						</TaskHeadingPlaceholder>
-					)}
-					<TaskActions stayActive={setTimeItTook}>
-						<OpenBtn
-							data-tip="Description, détails, commentaires, etc."
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						>
-							Ouvrir
-						</OpenBtn>
-						{baseUrl === 'dashboard' && !isCustomerTask(item) && (
-							<Button
-								onClick={() => focusTask({
-									variables: {
-										itemId: item.id,
-										for: new Date()
-											.toJSON()
-											.split('T')[0],
-									},
-								})
-								}
-							>
-								Ajouter à ma journée
-							</Button>
-						)}
-					</TaskActions>
-				</TaskHeader>
-				{!noData && !setTimeItTook && (
-					<TaskInfosInputs
-						taskUrlPrefix={taskUrlPrefix}
-						baseUrl={baseUrl}
-						location={location}
-						item={item}
-						customerToken={customerToken}
-						onDueDateSubmit={(date) => {
-							updateItem({
-								variables: {
-									itemId: item.id,
-									dueDate: date.toISOString(),
-								},
-								optimisticResponse: {
-									__typename: 'Mutation',
-									updateItem: {
-										__typename: 'Item',
-										...item,
-										dueDate: date.toISOString(),
-									},
-								},
-							});
-						}}
-						onCustomerSubmit={(customer) => {
-							if (customer === null) {
-								updateItem({
-									variables: {
-										itemId: item.id,
-										linkedCustomerId: null,
-									},
-								});
+						if (isFinishable) {
+							if (customerToken) {
+								finishItemCallback(item.unit);
 							}
-							else if (customer.value === 'CREATE') {
-								setEditCustomer(true);
+							else if (setTimeItTook) {
+								finishItemCallback(
+									parseFloat(setTimeItTookValueRef.current()),
+								);
+								setSetTimeItTook(false);
 							}
 							else {
+								setSetTimeItTook(true);
+							}
+						}
+						else if (isUnfinishable) {
+							unfinishItem({
+								variables: {
+									itemId: item.id,
+									token: customerToken,
+								},
+							});
+						}
+					}}
+				/>
+				<TaskContent noData={noData}>
+					<TaskHeader
+						data-tip={
+							setTimeItTook
+								? undefined
+								: 'Cliquer pour voir le contenu de la tâche'
+						}
+					>
+						{setTimeItTook && (
+							<SetTimeContainer>
+								<UnitInput
+									getValue={setTimeItTookValueRef}
+									unit={item.unit}
+									onBlur={(unit) => {
+										finishItemCallback(unit);
+										setSetTimeItTook(false);
+									}}
+									onSubmit={finishItemCallback}
+								/>
+								<SetTimeInfos>
+									<SetTimeHeadline>
+										Temps réellement passé
+									</SetTimeHeadline>
+									<SetTimeCaption>
+										Uniquement visible par vous
+									</SetTimeCaption>
+								</SetTimeInfos>
+							</SetTimeContainer>
+						)}
+						{item.name ? (
+							<TaskHeadingLink
+								noData={noData}
+								small={setTimeItTook}
+								status={item.status}
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								{item.name}
+							</TaskHeadingLink>
+						) : (
+							<TaskHeadingPlaceholder
+								noData={noData}
+								small={setTimeItTook}
+								to={{
+									pathname: `${taskUrlPrefix}/tasks/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								Choisir un titre pour cette tâche
+							</TaskHeadingPlaceholder>
+						)}
+						<TaskActions stayActive={setTimeItTook}>
+							<OpenBtn
+								data-tip="Description, détails, commentaires, etc."
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${
+										item.id
+									}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								Ouvrir
+							</OpenBtn>
+							{baseUrl === 'dashboard' && !isCustomerTask(item) && (
+								<Button
+									onClick={() => focusTask({
+										variables: {
+											itemId: item.id,
+											for: new Date()
+												.toJSON()
+												.split('T')[0],
+										},
+									})
+									}
+								>
+									Ajouter à ma journée
+								</Button>
+							)}
+						</TaskActions>
+					</TaskHeader>
+					{!noData && !setTimeItTook && (
+						<TaskInfosInputs
+							taskUrlPrefix={taskUrlPrefix}
+							baseUrl={baseUrl}
+							location={location}
+							item={item}
+							customerToken={customerToken}
+							onDueDateSubmit={(date) => {
 								updateItem({
 									variables: {
 										itemId: item.id,
-										linkedCustomerId: customer.value,
+										dueDate: date.toISOString(),
+									},
+									optimisticResponse: {
+										__typename: 'Mutation',
+										updateItem: {
+											__typename: 'Item',
+											...item,
+											dueDate: date.toISOString(),
+										},
 									},
 								});
-							}
-						}}
-						onUnitSubmit={(unit) => {
+							}}
+							onCustomerSubmit={(customer) => {
+								if (customer === null) {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											linkedCustomerId: null,
+										},
+									});
+								}
+								else if (customer.value === 'CREATE') {
+									setEditCustomer(true);
+								}
+								else {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											linkedCustomerId: customer.value,
+										},
+									});
+								}
+							}}
+							onUnitSubmit={(unit) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										unit,
+									},
+									optimisticResponse: {
+										__typename: 'Mutation',
+										updateItem: {
+											__typename: 'Item',
+											...item,
+											unit,
+										},
+									},
+								});
+							}}
+						/>
+					)}
+				</TaskContent>
+				{isEditingCustomer && (
+					<CustomerModalAndMail
+						onValidate={(customer) => {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									unit,
-								},
-								optimisticResponse: {
-									__typename: 'Mutation',
-									updateItem: {
-										__typename: 'Item',
-										...item,
-										unit,
-									},
+									linkedCustomerId: customer.id,
 								},
 							});
 						}}
+						noSelect
+						onDismiss={() => setEditCustomer(false)}
 					/>
 				)}
-			</TaskContent>
-			{isEditingCustomer && (
-				<CustomerModalAndMail
-					onValidate={(customer) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								linkedCustomerId: customer.id,
-							},
-						});
-					}}
-					noSelect
-					onDismiss={() => setEditCustomer(false)}
-				/>
-			)}
-		</TaskContainer>
+			</TaskContainer>
+		</div>
 	);
 }
 
-export default withRouter(Task);
+const RouterTask = withRouter(Task);
+
+export default forwardRef((props, ref) => (
+	<RouterTask forwardedRef={ref} {...props} />
+));

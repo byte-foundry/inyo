@@ -1,3 +1,7 @@
+import moment from 'moment';
+
+import {WEEKDAYS} from './constants';
+
 export const dateDiff = (datepart, fromdate, todate) => {
 	const lowerDatepart = datepart.toLowerCase();
 	const diff = todate - fromdate;
@@ -40,3 +44,37 @@ export function parseDate(dateString) {
 export const getDeep = (p, o) => p.split('.').reduce((xs, x) => (xs && xs[x] ? xs[x] : null), o);
 
 export const isCustomerTask = type => ['CUSTOMER', 'CONTENT_ACQUISITION', 'VALIDATION'].includes(type);
+
+export function extractScheduleFromWorkingDays(
+	workingDays,
+	iteratorDate,
+	days,
+	fullWeek,
+	startDay,
+) {
+	const weekdays = [];
+
+	do {
+		const workedDay = workingDays.includes(WEEKDAYS[iteratorDate.day()]);
+
+		if (fullWeek || workedDay) {
+			const tasks
+				= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
+					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
+				|| [];
+
+			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
+
+			weekdays.push({
+				momentDate: iteratorDate.clone(),
+				date: iteratorDate.format(moment.HTML5_FMT.DATE),
+				tasks,
+				workedDay,
+			});
+		}
+	} while (
+		iteratorDate.add(1, 'day').toDate() < startDay.endOf('week').toDate()
+	);
+
+	return weekdays;
+}

@@ -61,10 +61,11 @@ const DashboardTasks = ({location, history}) => {
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {data: userPrefsData, loadingUserPrefs, errorUserPrefs} = useQuery(
-		GET_USER_INFOS,
-		{suspend: true},
-	);
+	const {
+		data: userPrefsData,
+		loading: loadingUserPrefs,
+		error: errorUserPrefs,
+	} = useQuery(GET_USER_INFOS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
 
 	const projectId = query.get('projectId');

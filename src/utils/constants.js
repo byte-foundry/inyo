@@ -32,6 +32,16 @@ export const GRAPHQL_API = 'http://prisma.prototypo.io:4002';
 export const INTERCOM_APP_ID
 	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
 
+export const WEEKDAYS = {
+	1: 'MONDAY',
+	2: 'TUESDAY',
+	3: 'WEDNESDAY',
+	4: 'THURSDAY',
+	5: 'FRIDAY',
+	6: 'SATURDAY',
+	0: 'SUNDAY',
+};
+
 export const WEEKDAYS_SHORT = {
 	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
 };

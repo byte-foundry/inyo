@@ -73,14 +73,12 @@ function LeftBarSchedule({isDragging}) {
 	const workingDays = userPrefsData.me.workingDays;
 	const iteratorDate = moment(startDay).startOf('week');
 
-	const weekdays = extractScheduleFromWorkingDays(
-		workingDays,
-
 	return (
 		<LeftBarContainer>
 			<LeftBarElem style={animatedProps}>
 				<LeftBarContent>
 					{workingDays.map(() =>
+							false
 					)}
 				</LeftBarContent>
 			</LeftBarElem>

@@ -13,7 +13,8 @@ import {
 	lightGrey,
 	Button,
 } from '../../utils/new/design-system';
-import {DRAG_TYPES} from '../../utils/constants';
+import {DRAG_TYPES, WEEKDAYS} from '../../utils/constants';
+import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import IconButton from '../../utils/new/components/IconButton';
 
@@ -188,45 +189,19 @@ const PlaceholderTask = ({index, scheduledFor}) => {
 	);
 };
 
-const WEEKDAYS = {
-	1: 'MONDAY',
-	2: 'TUESDAY',
-	3: 'WEDNESDAY',
-	4: 'THURSDAY',
-	5: 'FRIDAY',
-	6: 'SATURDAY',
-	0: 'SUNDAY',
-};
-
 const Schedule = ({
 	days, workingDays, fullWeek, onMoveTask,
 }) => {
 	const [startDay, setStartDay] = useState(moment().startOf('week'));
 
-	const weekdays = [];
-
 	const iteratorDate = moment(startDay).startOf('week');
 
-	do {
-		const workedDay = workingDays.includes(WEEKDAYS[iteratorDate.day()]);
-
-		if (fullWeek || workedDay) {
-			const tasks
-				= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
-					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
-				|| [];
-
-			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
-
-			weekdays.push({
-				momentDate: iteratorDate.clone(),
-				date: iteratorDate.format(moment.HTML5_FMT.DATE),
-				tasks,
-				workedDay,
-			});
-		}
-	} while (
-		iteratorDate.add(1, 'day').toDate() < startDay.endOf('week').toDate()
+	const weekdays = extractScheduleFromWorkingDays(
+		workingDays,
+		iteratorDate,
+		days,
+		fullWeek,
+		startDay,
 	);
 
 	return (

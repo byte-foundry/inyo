@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
+import ReactDOM from 'react-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
@@ -8,6 +9,7 @@ import TasksList from '../../../components/TasksList';
 import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
 import ArianneThread from '../../../components/ArianneThread';
+import LeftBarSchedule from '../../../components/LeftBarSchedule';
 
 import {
 	ModalContainer as Modal,
@@ -21,12 +23,23 @@ import {FOCUS_TASK} from '../../../utils/mutations';
 const {useDrag} = dnd;
 
 function DraggableTask({
-	item, key, customerToken, baseUrl,
+	item,
+	key,
+	customerToken,
+	baseUrl,
+	setIsDragging = () => {},
 }) {
 	const [, drag] = useDrag({
 		item: {
 			id: item.id,
 			type: DRAG_TYPES.TASK,
+		},
+		begin() {
+			console.log('fuck');
+			setIsDragging(true);
+		},
+		end() {
+			setIsDragging(false);
 		},
 	});
 
@@ -43,6 +56,8 @@ function DraggableTask({
 
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
+	const [isDragging, setIsDragging] = useState(false);
+	const leftBarRef = useRef();
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
@@ -129,6 +144,18 @@ const DashboardTasks = ({location, history}) => {
 		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
+	useEffect(() => {
+		if (!leftBarRef.current) {
+			leftBarRef.current = document.createElement('div');
+		}
+
+		document.body.appendChild(leftBarRef.current);
+
+		return () => {
+			document.body.removeChild(leftBarRef.current);
+		};
+	});
+
 	tasks.forEach((task) => {
 		if (!task.scheduledFor) {
 			if (
@@ -210,6 +237,7 @@ const DashboardTasks = ({location, history}) => {
 							key={item.id}
 							customerToken={customerToken}
 							baseUrl="dashboard"
+							setIsDragging={setIsDragging}
 						/>
 					)
 					// )}
@@ -228,6 +256,11 @@ const DashboardTasks = ({location, history}) => {
 					</Modal>
 				)}
 			/>
+			{leftBarRef.current
+				&& ReactDOM.createPortal(
+					<LeftBarSchedule isDragging={isDragging} />,
+					leftBarRef.current,
+				)}
 		</>
 	);
 };

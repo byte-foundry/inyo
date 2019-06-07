@@ -18,6 +18,8 @@ const TaskCardElem = styled('div')`
 	font-size: 0.75rem;
 	display: grid;
 	grid-template-columns: 1fr auto;
+
+	${props => props.isOver && 'border-top: 5px solid black;'}
 `;
 
 const CardTitle = styled('span')`
@@ -31,31 +33,35 @@ const CardSubTitle = styled('span')`
 	color: ${primaryGrey};
 `;
 
-const TaskCard = forwardRef(({task, index, ...rest}, ref) => (
-	<TaskCardElem {...rest} ref={ref}>
-		{!isCustomerTask(task.type) && (
-			<IconButton
-				current={task.status === 'FINISHED'}
-				invert={task.status === 'FINISHED'}
+const TaskCard = forwardRef(
+	({
+		task, index, connectDragSource, connectDropTarget, ...rest
+	}, ref) => (
+		<TaskCardElem {...rest} ref={ref}>
+			{!isCustomerTask(task.type) && (
+				<IconButton
+					current={task.status === 'FINISHED'}
+					invert={task.status === 'FINISHED'}
+					style={{
+						gridColumnStart: '2',
+						gridRow: '1 / 3',
+					}}
+					icon="done"
+					size="tiny"
+				/>
+			)}
+			<CardTitle
 				style={{
-					gridColumnStart: '2',
-					gridRow: '1 / 3',
+					gridColumn: isCustomerTask(task.type) ? '1 / 3' : '',
 				}}
-				icon="done"
-				size="tiny"
-			/>
-		)}
-		<CardTitle
-			style={{
-				gridColumn: isCustomerTask(task.type) ? '1 / 3' : '',
-			}}
-		>
-			{task.name}
-		</CardTitle>
-		{task.linkedCustomer && (
-			<CardSubTitle>{task.linkedCustomer.name}</CardSubTitle>
-		)}
-	</TaskCardElem>
-));
+			>
+				{task.name}
+			</CardTitle>
+			{task.linkedCustomer && (
+				<CardSubTitle>{task.linkedCustomer.name}</CardSubTitle>
+			)}
+		</TaskCardElem>
+	),
+);
 
 export default TaskCard;

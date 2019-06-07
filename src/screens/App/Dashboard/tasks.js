@@ -164,25 +164,6 @@ const DashboardTasks = ({location, history}) => {
 
 	return (
 		<>
-			{/* <DragDropContext
-				onDragEnd={async (result) => {
-					setDraggedId(undefined);
-					if (
-						result.destination
-						&& (result.source.droppableId
-							!== result.destination.droppableId
-							|| result.source.index !== result.destination.index)
-					) {
-						await focusTask({
-							variables: {
-								itemId: result.draggableId,
-								for: result.destination.droppableId,
-								schedulePosition: result.destination.index,
-							},
-						});
-					}
-				}}
-			> */}
 			{loadingUserPrefs ? (
 				<Loading />
 			) : (
@@ -190,6 +171,15 @@ const DashboardTasks = ({location, history}) => {
 					days={scheduledTasks}
 					workingDays={userPrefsData.me.workingDays}
 					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					onMoveTask={({task, scheduledFor, position}) => {
+						focusTask({
+							variables: {
+								itemId: task.id,
+								for: scheduledFor,
+								schedulePosition: position,
+							},
+						});
+					}}
 				/>
 			)}
 

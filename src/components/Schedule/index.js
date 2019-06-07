@@ -67,8 +67,6 @@ const DayTasks = styled('div')`
 	color: ${accentGrey};
 	display: flex;
 	flex-direction: column;
-
-	${props => props.isOver && 'background-color: blue;'}
 `;
 
 const ScheduleNav = styled('div')`
@@ -86,15 +84,19 @@ const ScheduleNavInfo = styled('div')`
 	align-items: center;
 `;
 
-const DraggableTaskCard = ({id, index, ...rest}) => {
+const DraggableTaskCard = ({
+	id, index, scheduledFor, onMove, ...rest
+}) => {
 	const unfocusTask = useMutation(UNFOCUS_TASK);
-
-	const [collectedProps, drag] = useDrag({
+	const [_, drag] = useDrag({
 		item: {id, type: DRAG_TYPES.TASK},
-		begin(monitor) {
-			console.log('drag begin');
+		begin() {
+			return {
+				id,
+				index,
+			};
 		},
-		end(props, monitor) {
+		end(item, monitor) {
 			if (!monitor.didDrop()) {
 				unfocusTask({
 					variables: {
@@ -102,11 +104,50 @@ const DraggableTaskCard = ({id, index, ...rest}) => {
 					},
 				});
 			}
-			console.log('drag end');
+
+			const result = monitor.getDropResult();
+
+			if (!result) return;
+			if (scheduledFor === result.scheduledFor) {
+				if (index === result.index || index + 1 === result.index) return;
+
+				onMove({
+					index:
+						result.index > index ? result.index - 1 : result.index,
+					scheduledFor: result.scheduledFor,
+				});
+			}
+			else {
+				onMove({
+					index: result.index,
+					scheduledFor: result.scheduledFor,
+				});
+			}
+		},
+	});
+	const [{isOver}, drop] = useDrop({
+		accept: 'TASK',
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop(item) {
+			return {index, scheduledFor};
 		},
 	});
 
-	return <TaskCard ref={drag} index={index} {...rest} />;
+	return (
+		<TaskCard
+			isOver={isOver}
+			ref={(node) => {
+				drag(node);
+				drop(node);
+			}}
+			index={index}
+			{...rest}
+		/>
+	);
 };
 
 const DroppableDayTasks = ({id, children}) => {
@@ -119,10 +160,27 @@ const DroppableDayTasks = ({id, children}) => {
 		},
 	});
 
+	return <DayTasks ref={drop}>{children}</DayTasks>;
+};
+
+const PlaceholderTask = ({index, scheduledFor}) => {
+	const [{isOver}, drop] = useDrop({
+		accept: 'TASK',
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop(item) {
+			return {index, scheduledFor};
+		},
+	});
+
 	return (
-		<DayTasks ref={drop} isOver={isOver}>
-			{children}
-		</DayTasks>
+		<div
+			ref={drop}
+			style={{height: '50px', borderTop: isOver && '5px solid black'}}
+		/>
 	);
 };
 
@@ -136,7 +194,9 @@ const WEEKDAYS = {
 	0: 'SUNDAY',
 };
 
-const Schedule = ({days, workingDays, fullWeek}) => {
+const Schedule = ({
+	days, workingDays, fullWeek, onMoveTask,
+}) => {
 	const [startDay, setStartDay] = useState(moment().startOf('week'));
 
 	const weekdays = [];
@@ -215,8 +275,23 @@ const Schedule = ({days, workingDays, fullWeek}) => {
 									id={task.id}
 									task={task}
 									index={index}
+									scheduledFor={day.date}
+									onMove={({
+										index: position,
+										scheduledFor,
+									}) => {
+										onMoveTask({
+											task,
+											scheduledFor,
+											position,
+										});
+									}}
 								/>
 							))}
+							<PlaceholderTask
+								index={day.tasks.length}
+								scheduledFor={day.date}
+							/>
 						</DroppableDayTasks>
 					</Day>
 				))}
@@ -227,6 +302,8 @@ const Schedule = ({days, workingDays, fullWeek}) => {
 
 Schedule.defaultProps = {
 	workingDays: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
+	fullWeek: false,
+	onMoveTask: () => {},
 };
 
 Schedule.propTypes = {
@@ -241,6 +318,8 @@ Schedule.propTypes = {
 			'SUNDAY',
 		]),
 	),
+	fullWeek: PropTypes.bool,
+	onMoveTask: PropTypes.func,
 };
 
 export default Schedule;

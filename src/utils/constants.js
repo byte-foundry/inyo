@@ -249,3 +249,7 @@ export const TAG_COLOR_PALETTE = [
 	[[158, 158, 158], [255, 255, 255]],
 	[[96, 125, 139], [255, 255, 255]],
 ];
+
+export const DRAG_TYPES = {
+	TASK: 'SCHEDULE_TASK',
+};

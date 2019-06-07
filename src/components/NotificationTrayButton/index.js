@@ -4,8 +4,9 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import useOnClickOutside from 'use-onclickoutside';
 
-import IconButton from '../../utils/new/components/IconButton';
 import NotificationItem from '../NotificationItem';
+
+import IconButton from '../../utils/new/components/IconButton';
 import {
 	Button,
 	primaryPurple,

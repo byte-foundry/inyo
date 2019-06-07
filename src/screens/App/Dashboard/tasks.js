@@ -8,17 +8,38 @@ import TasksList from '../../../components/TasksList';
 import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
 import ArianneThread from '../../../components/ArianneThread';
-import TaskCard from '../../../components/TaskCard';
 
 import {
 	ModalContainer as Modal,
 	ModalElem,
 	Loading,
 } from '../../../utils/content';
+import {DRAG_TYPES} from '../../../utils/constants';
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 import {FOCUS_TASK} from '../../../utils/mutations';
 
-const {useDrop} = dnd;
+const {useDrag} = dnd;
+
+function DraggableTask({
+	item, key, customerToken, baseUrl,
+}) {
+	const [, drag] = useDrag({
+		item: {
+			id: item.id,
+			type: DRAG_TYPES.TASK,
+		},
+	});
+
+	return (
+		<Task
+			ref={drag}
+			item={item}
+			key={key}
+			customerToken={customerToken}
+			baseUrl={baseUrl}
+		/>
+	);
+}
 
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
@@ -195,7 +216,7 @@ const DashboardTasks = ({location, history}) => {
 						// 		index={index}
 						// 	/>
 						// ) : (
-						<Task
+						<DraggableTask
 							item={item}
 							key={item.id}
 							customerToken={customerToken}

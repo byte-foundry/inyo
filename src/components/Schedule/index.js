@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from '@emotion/styled';
@@ -12,9 +13,11 @@ import {
 	lightGrey,
 	Button,
 } from '../../utils/new/design-system';
+import {DRAG_TYPES} from '../../utils/constants';
+import {UNFOCUS_TASK} from '../../utils/mutations';
+import IconButton from '../../utils/new/components/IconButton';
 
 import TaskCard from '../TaskCard';
-import IconButton from '../../utils/new/components/IconButton';
 
 const {useDrop, useDrag} = dnd;
 
@@ -84,12 +87,21 @@ const ScheduleNavInfo = styled('div')`
 `;
 
 const DraggableTaskCard = ({id, index, ...rest}) => {
+	const unfocusTask = useMutation(UNFOCUS_TASK);
+
 	const [collectedProps, drag] = useDrag({
-		item: {id, type: 'TASK'},
+		item: {id, type: DRAG_TYPES.TASK},
 		begin(monitor) {
 			console.log('drag begin');
 		},
-		end(monitor) {
+		end(props, monitor) {
+			if (!monitor.didDrop()) {
+				unfocusTask({
+					variables: {
+						itemId: id,
+					},
+				});
+			}
 			console.log('drag end');
 		},
 	});
@@ -99,7 +111,7 @@ const DraggableTaskCard = ({id, index, ...rest}) => {
 
 const DroppableDayTasks = ({id, children}) => {
 	const [{isOver}, drop] = useDrop({
-		accept: 'TASK',
+		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
 				isOver: monitor.isOver(),

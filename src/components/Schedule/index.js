@@ -126,7 +126,7 @@ const DraggableTaskCard = ({
 		},
 	});
 	const [{isOver}, drop] = useDrop({
-		accept: 'TASK',
+		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
 				isOver: monitor.isOver(),
@@ -160,12 +160,16 @@ const DroppableDayTasks = ({id, children}) => {
 		},
 	});
 
-	return <DayTasks ref={drop}>{children}</DayTasks>;
+	return (
+		<DayTasks ref={drop} isOver={isOver}>
+			{children}
+		</DayTasks>
+	);
 };
 
 const PlaceholderTask = ({index, scheduledFor}) => {
 	const [{isOver}, drop] = useDrop({
-		accept: 'TASK',
+		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
 				isOver: monitor.isOver(),

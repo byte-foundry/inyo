@@ -43,7 +43,6 @@ function DraggableTask({
 
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
-	const [draggedId, setDraggedId] = useState();
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});

@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
+import moment from 'moment';
 import {useSpring, animated} from 'react-spring';
 
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../utils/queries';
 import usePrevious from '../../utils/usePrevious';
 import {primaryPurple} from '../../utils/new/design-system';
-import {
-	Loading,
-} from '../../utils/content';
+import {Loading} from '../../utils/content';
 
 const LeftBarContainer = styled('div')`
 	position: fixed;
@@ -19,11 +18,11 @@ const LeftBarContainer = styled('div')`
 `;
 
 const LeftBarElem = styled(animated.div)`
-	position:absolute;
+	position: absolute;
 	top: 0;
 	left: 0;
-	width: ${props => props.open ? '100px' : '0px'};
-	transition: width .2s ease-out;
+	width: ${props => (props.open ? '100px' : '0px')};
+	transition: width 0.2s ease-out;
 	height: 100%;
 	background: ${primaryPurple};
 	overflow: hidden;
@@ -34,6 +33,7 @@ const LeftBarContent = styled('div')`
 `;
 
 function LeftBarSchedule({isDragging}) {
+	const [startDay, setStartDay] = useState(moment().startOf('week'));
 	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
 		to: async (next) => {
@@ -60,13 +60,18 @@ function LeftBarSchedule({isDragging}) {
 			clamp: true,
 		},
 	});
-	const {data: allTasksData, loading: loadingAllTasks, error: errorAllTasks} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {data: userPrefsData, loading: loadingUserPrefs, error: errorUserPrefs} = useQuery(
-		GET_USER_INFOS,
-		{suspend: true},
-	);
+	const {
+		data: allTasksData,
+		loading: loadingAllTasks,
+		error: errorAllTasks,
+	} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {
+		data: userPrefsData,
+		loading: loadingUserPrefs,
+		error: errorUserPrefs,
+	} = useQuery(GET_USER_INFOS, {suspend: true});
 
-	if (loadingUserPrefs || loadingAllTasks) return <Loading />
+	if (loadingUserPrefs || loadingAllTasks) return <Loading />;
 	if (errorUserPrefs) throw errorUserPrefs;
 	if (errorAllTasks) throw errorAllTasks;
 
@@ -76,11 +81,7 @@ function LeftBarSchedule({isDragging}) {
 	return (
 		<LeftBarContainer>
 			<LeftBarElem style={animatedProps}>
-				<LeftBarContent>
-					{workingDays.map(() =>
-							false
-					)}
-				</LeftBarContent>
+				<LeftBarContent>{workingDays.map(() => false)}</LeftBarContent>
 			</LeftBarElem>
 		</LeftBarContainer>
 	);

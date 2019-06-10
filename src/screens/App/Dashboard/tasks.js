@@ -205,6 +205,13 @@ const DashboardTasks = ({location, history}) => {
 								for: scheduledFor,
 								schedulePosition: position,
 							},
+							optimisticReponse: {
+								focusTask: {
+									itemId: task.id,
+									for: scheduledFor,
+									schedulePosition: position,
+								},
+							},
 						});
 					}}
 				/>

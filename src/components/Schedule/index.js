@@ -224,56 +224,70 @@ const Schedule = ({
 				/>
 			</ScheduleNav>
 			<Week>
-				{weekdays.map(day => (
-					<Day isOff={!day.workedDay}>
-						<DayTitle
-							selected={moment().isSame(day.momentDate, 'day')}
-						>
-							{day.momentDate
-								.toDate()
-								.toLocaleDateString('default', {
-									weekday: 'short',
-									day: 'numeric',
-									month: moment().isSame(
-										day.momentDate,
-										'month',
-									)
-										? undefined
-										: 'numeric',
-									year: moment().isSame(
-										day.momentDate,
-										'year',
-									)
-										? undefined
-										: '2-digit',
-								})}
-						</DayTitle>
-						<DroppableDayTasks id={day.date}>
-							{day.tasks.map((task, index) => (
-								<DraggableTaskCard
-									id={task.id}
-									task={task}
-									index={index}
-									scheduledFor={day.date}
-									onMove={({
-										index: position,
-										scheduledFor,
-									}) => {
-										onMoveTask({
-											task,
+				{weekdays.map((day) => {
+					const sortedTasks = [...day.tasks];
+
+					sortedTasks.sort(
+						(a, b) => a.schedulePosition - b.schedulePosition,
+					);
+
+					return (
+						<Day isOff={!day.workedDay}>
+							<DayTitle
+								selected={moment().isSame(
+									day.momentDate,
+									'day',
+								)}
+							>
+								{day.momentDate
+									.toDate()
+									.toLocaleDateString('default', {
+										weekday: 'short',
+										day: 'numeric',
+										month: moment().isSame(
+											day.momentDate,
+											'month',
+										)
+											? undefined
+											: 'numeric',
+										year: moment().isSame(
+											day.momentDate,
+											'year',
+										)
+											? undefined
+											: '2-digit',
+									})}
+							</DayTitle>
+							<DroppableDayTasks id={day.date}>
+								{sortedTasks.map(task => (
+									<DraggableTaskCard
+										key={`${task.id}-${
+											task.schedulePosition
+										}`}
+										id={task.id}
+										task={task}
+										index={task.schedulePosition}
+										scheduledFor={day.date}
+										onMove={({
+											index: position,
 											scheduledFor,
-											position,
-										});
-									}}
+										}) => {
+											onMoveTask({
+												task,
+												scheduledFor,
+												position,
+											});
+										}}
+									/>
+								))}
+								<PlaceholderTask
+									index={day.tasks.length}
+									scheduledFor={day.date}
 								/>
-							))}
-							<PlaceholderTask
-								index={day.tasks.length}
-								scheduledFor={day.date}
-							/>
-						</DroppableDayTasks>
-					</Day>
-				))}
+							</DroppableDayTasks>
+						</Day>
+					);
+				})}
 			</Week>
 		</Container>
 	);

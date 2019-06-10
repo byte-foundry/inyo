@@ -379,8 +379,11 @@ export const GET_COMMENTS_BY_ITEM = gql`
 	${COMMENT_ON_ITEM_FRAGMENT}
 
 	query getCommentsFromItemId($itemId: ID!, $token: String) {
-		itemComments(itemId: $itemId, token: $token) {
-			...CommentOnItemFragment
+		item(id: $itemId, token: $token) {
+			id
+			comments {
+				...CommentOnItemFragment
+			}
 		}
 	}
 `;

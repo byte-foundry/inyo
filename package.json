@@ -8,7 +8,7 @@
     "storybook": "start-storybook",
     "test": "react-scripts test",
     "cypress": "cypress open",
-	"e2e": "cypress run --record --key $CYPRESS_RECORD_KEY"
+    "e2e": "cypress run --record --key $CYPRESS_RECORD_KEY"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,6 +43,7 @@
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
     "history": "^4.9.0",
+    "js-yaml": "^3.13.1",
     "lodash.debounce": "^4.0.8",
     "medium-draft": "^0.5.6",
     "moment": "^2.24.0",
@@ -102,11 +103,11 @@
     "src/**/*.{js,jsx,json,css}": [
       "prettier-eslint --write",
       "git add"
-	],
-	"cypress/**/*.{js,jsx,json,css}": [
-		"prettier-eslint --write",
-		"git add"
-	]
+    ],
+    "cypress/**/*.{js,jsx,json,css}": [
+      "prettier-eslint --write",
+      "git add"
+    ]
   },
   "prettier": {
     "tabWidth": 4,

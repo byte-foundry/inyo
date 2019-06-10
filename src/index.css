@@ -19,14 +19,24 @@ img {
 input,
 label,
 select,
-button,
-textarea {
+button {
 	margin: 0;
 	border: 0;
 	padding: 0;
 	display: inline-block;
 	vertical-align: middle;
 	white-space: normal;
+	background: none;
+	line-height: 1;
+}
+
+/* resetting white-space: normal; makes textarea single line */
+textarea {
+	margin: 0;
+	border: 0;
+	padding: 0;
+	display: inline-block;
+	vertical-align: middle;
 	background: none;
 	line-height: 1;
 }

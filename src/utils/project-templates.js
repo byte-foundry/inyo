@@ -108,6 +108,12 @@ export const templates = [
 						description: '',
 					},
 					{
+						name: 'Paiement acompte de 30%',
+						unit: 0,
+						description: '',
+						type: 'INVOICE',
+					},
+					{
 						name: 'Benchmark',
 						unit: 0.5,
 						description: '',
@@ -164,8 +170,13 @@ export const templates = [
 						name:
 							'Envoi de l’ensemble des contenus textes + images',
 						unit: 0,
-						description:
-							'Ci-dessous la liste des documents à récupérer.',
+						description: `
+
+# content-acquisition-list
+- [ ] Logo vectoriel
+- [ ] Contenus menu principal
+- [ ] Contenus textes
+- [ ] Visuels HD`,
 						type: 'CONTENT_ACQUISITION',
 					},
 					{
@@ -177,25 +188,7 @@ export const templates = [
 						name: 'Validation de la direction artistique',
 						unit: 1,
 						description:
-							'2 aller-retour corrections sont prévus dans la proposition commerciale',
-						type: 'CUSTOMER',
-					},
-					{
-						name:
-							'Traitement de vos images pour les optimiser pour le web',
-						unit: 0.5,
-						description: '',
-					},
-					{
-						name: 'Design de l’ensemble des pages',
-						unit: 4,
-						description: '',
-					},
-					{
-						name: 'Validation de l’ensemble des pages',
-						unit: 0.5,
-						description:
-							'1 aller-retour corrections est prévu dans la proposition commerciale',
+							'2 allers-retours corrections sont prévus dans la proposition commerciale',
 						type: 'CUSTOMER',
 					},
 					{
@@ -272,15 +265,188 @@ export const templates = [
 						description: '',
 					},
 					{
-						name: 'Envoi facture',
-						unit: 0,
+						name:
+							'Intégration et configuration d’un outil de suivi de trafic',
+						unit: 0.25,
+						description: '',
+					},
+					{
+						name:
+							'Intégration et configuration d’un formulaire de contact',
+						unit: 0.25,
 						description: '',
 					},
 					{
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
+						type: 'INVOICE',
+					},
+				],
+			},
+		],
+	},
+	{
+		name: 'LANDING',
+		label: 'Landing page',
+		sections: [
+			{
+				name: 'Pré-projet',
+				items: [
+					{
+						name: 'Réunion de lancement',
+						unit: 0.5,
+						description: '',
+					},
+					{
+						name: 'Paiement acompte de 30%',
+						unit: 0,
+						description: '',
+						type: 'INVOICE',
+					},
+					{
+						name: 'Benchmark',
+						unit: 0.25,
+						description: '',
+					},
+					{
+						name: "Rédaction d'un cahier des charges",
+						unit: 0.5,
+						description: '',
+					},
+					{
+						name: 'Validation du cahier des charges',
+						unit: 0,
+						description: '',
 						type: 'CUSTOMER',
+					},
+					{
+						name: 'Moodboard',
+						unit: 0.5,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Conception',
+				items: [
+					{
+						name:
+							'Wireframe des principales sections de la landing page',
+						unit: 1,
+						description: '',
+					},
+					{
+						name: 'Validation du wireframe des sections',
+						unit: 0.5,
+						description:
+							'1 aller-retour corrections est prévu dans la proposition commerciale',
+						type: 'CUSTOMER',
+					},
+					{
+						name:
+							'Envoi de l’ensemble des contenus textes + images',
+						unit: 0,
+						description: `
+
+# content-acquisition-list
+- [ ] Logo vectoriel
+- [ ] Contenus textes
+- [ ] Visuels HD`,
+						type: 'CONTENT_ACQUISITION',
+					},
+					{
+						name: 'Direction artistique',
+						unit: 1,
+						description: '',
+					},
+					{
+						name: 'Validation de la direction artistique',
+						unit: 1,
+						description:
+							'2 allers-retours corrections sont prévus dans la proposition commerciale',
+						type: 'CUSTOMER',
+					},
+					{
+						name:
+							'Déclinaison maquettes Responsive design 1 point de rupture 1024',
+						unit: 1,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Développement',
+				items: [
+					{
+						name: 'Configuration nom de domaine + base MySQL',
+						unit: 0.25,
+						description: '',
+					},
+					{
+						name: "Installation d'un CMS",
+						unit: 0.25,
+						description: '',
+					},
+					{
+						name:
+							'Intégration des pages clefs principales et annexes (base 10 pages)',
+						unit: 8,
+						description: '',
+					},
+					{
+						name: 'Responsive design 1 point de rupture 1024',
+						unit: 1,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Tests, corrections et mise en ligne',
+				items: [
+					{
+						name: 'Compatibilité navigateurs',
+						unit: 0.5,
+						description: '',
+					},
+					{
+						name: 'Tests (Phase de recette) et corrections',
+						unit: 0.5,
+						description: '',
+					},
+					{
+						name: 'Validation finale de la landing page',
+						unit: 0,
+						description: '',
+						type: 'CUSTOMER',
+					},
+					{
+						name: 'Mise en production',
+						unit: 0,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Divers',
+				items: [
+					{
+						name:
+							'Intégration et configuration d’un outil de suivi de trafic',
+						unit: 0.25,
+						description: '',
+					},
+					{
+						name:
+							'Intégration et configuration d’un formulaire de contact',
+						unit: 0.25,
+						description: '',
+					},
+					{
+						name: 'Paiement facture',
+						unit: 0,
+						description: '',
+						type: 'INVOICE',
 					},
 				],
 			},
@@ -297,6 +463,12 @@ export const templates = [
 						name: 'Réunion de lancement',
 						unit: 0.5,
 						description: '',
+					},
+					{
+						name: 'Paiement acompte de 30%',
+						unit: 0,
+						description: '',
+						type: 'INVOICE',
 					},
 					{
 						name: 'Benchmark',
@@ -343,9 +515,9 @@ export const templates = [
 					},
 					{
 						name: 'Validation',
-						unit: 0,
+						unit: 1,
 						description:
-							'2 allers-retours sont prévus dans la proposition commerciale',
+							'2 allers-retours corrections sont prévus dans la proposition commerciale',
 						type: 'CUSTOMER',
 					},
 					{
@@ -371,15 +543,151 @@ export const templates = [
 						description: '',
 					},
 					{
-						name: 'Envoi facture',
+						name: 'Paiement facture',
 						unit: 0,
 						description: '',
+						type: 'INVOICE',
+					},
+				],
+			},
+		],
+	},
+	{
+		name: 'MOTION',
+		label: 'Motion design 1 min',
+		sections: [
+			{
+				name: 'Pré-projet',
+				items: [
+					{
+						name: 'Réunion de lancement',
+						unit: 0.5,
+						description: '',
+					},
+					{
+						name: 'Paiement acompte de 30%',
+						unit: 0,
+						description: '',
+						type: 'INVOICE',
+					},
+					{
+						name: 'Benchmark',
+						unit: 0.5,
+						description: '',
+					},
+					{
+						name: "Rédaction d'un cahier des charges",
+						unit: 1,
+						description: '',
+					},
+					{
+						name: 'Validation du cahier des charges',
+						unit: 0,
+						description: '',
+						type: 'CUSTOMER',
+					},
+					{
+						name: 'Moodboard',
+						unit: 0.5,
+						description: '',
+					},
+				],
+			},
+			{
+				name: 'Storyboard',
+				items: [
+					{
+						name: 'Storyboard crayonné',
+						unit: 0.5,
+						description: 'Livraison: 1 fichier .pdf',
+					},
+					{
+						name: 'Validation du storyboard crayonné',
+						unit: 0,
+						description:
+							'Nous cherchons à valider ici les grandes étapes et plans principaux du scenario',
+						type: 'CUSTOMER',
+					},
+					{
+						name: 'Storyboard avancé',
+						unit: 1,
+						description: 'Livraison: 1 fichier .pdf',
+					},
+					{
+						name: 'Validation du storyboard détaillé',
+						unit: 0.75,
+						description:
+							'2 allers-retours corrections sont prévus dans la proposition commerciale',
+						type: 'CUSTOMER',
+					},
+				],
+			},
+			{
+				name: 'Production',
+				items: [
+					{
+						name: 'Conception et production des images clefs',
+						unit: 2,
+						description: '',
+					},
+					{
+						name: 'Validation du style et des images clefs',
+						unit: 1,
+						description:
+							'2 allers-retours corrections sont prévus dans la proposition commerciale',
+						type: 'CUSTOMER',
+					},
+					{
+						name: 'Animation des écrans',
+						unit: 3,
+						description: '',
+					},
+					{
+						name: 'Validation de l’animation',
+						unit: 0.5,
+						description:
+							'1 aller-retour est prévu dans la proposition commerciale',
+						type: 'CUSTOMER',
+					},
+				],
+			},
+			{
+				name: 'Divers',
+				items: [
+					{
+						name:
+							'Récupération des sous-titres et bande son à intégrer',
+						unit: 0,
+						description: `
+
+# content-acquisition-list
+- [ ] Contenus texte
+- [ ] Données temporelles
+- [ ] Bande son`,
+						type: 'CONTENT_ACQUISITION',
+					},
+					{
+						name: 'Intégration des sous-titres et de la bande son',
+						unit: 1,
+						description: '',
+					},
+					{
+						name: 'Validation de l’ensemble du montage',
+						unit: 0.25,
+						description:
+							'Livraison .mp4 BD - 1 allers-retours sont prévus dans la proposition commerciale',
+						type: 'CUSTOMER',
+					},
+					{
+						name: 'Encodage et livraison des fichiers HD',
+						unit: 0.25,
+						description: 'Livraison .mp4 HD',
 					},
 					{
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						type: 'CUSTOMER',
+						type: 'INVOICE',
 					},
 				],
 			},
@@ -397,6 +705,12 @@ export const templates = [
 						unit: 0.5,
 						description: '',
 					},
+					{
+						name: 'Paiement acompte de 30%',
+						unit: 0,
+						description: '',
+						type: 'INVOICE',
+					},
 				],
 			},
 			{
@@ -413,15 +727,10 @@ export const templates = [
 				name: 'Divers',
 				items: [
 					{
-						name: 'Envoi facture',
-						unit: 0,
-						description: '',
-					},
-					{
 						name: 'Paiement facture',
 						unit: 0,
 						description: '',
-						type: 'CUSTOMER',
+						type: 'INVOICE',
 					},
 				],
 			},

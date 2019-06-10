@@ -31,7 +31,7 @@ const CGU = styled('label')`
 	}
 `;
 
-const SignupForm = ({from, history}) => {
+const SignupForm = ({from, history, location}) => {
 	const client = useApolloClient();
 	const signup = useMutation(SIGNUP);
 	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
@@ -87,6 +87,8 @@ const SignupForm = ({from, history}) => {
 
 							const {user} = data.signup;
 
+							const query = new URLSearchParams(location.search);
+
 							window.Intercom('boot', {
 								app_id: INTERCOM_APP_ID,
 								email: user.email,
@@ -94,6 +96,7 @@ const SignupForm = ({from, history}) => {
 								name: `${user.firstName} ${user.lastName}`,
 								user_hash: user.hmacIntercomId,
 								phone: user.company.phone,
+								referrer: query.get('referral'),
 							});
 
 							await client.resetStore();

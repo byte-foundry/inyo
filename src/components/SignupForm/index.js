@@ -173,7 +173,12 @@ const SignupForm = ({from, history, location}) => {
 								</ErrorInput>
 							)}
 							<CGU>
-								<input name="CGU" type="checkbox" required />
+								<input
+									name="CGU"
+									id="toscheck"
+									type="checkbox"
+									required
+								/>
 								J'accepte les{' '}
 								<b>
 									<A

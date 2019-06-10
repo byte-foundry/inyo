@@ -6,12 +6,14 @@ describe('Sign up', () => {
 	});
 
 	it('should require an email, a password, a last name and a firstname', () => {
+		cy.get('#toscheck').click();
 		cy.contains('Commencez').click();
 
 		cy.get('.input-feedback').should('have.length', 4);
 	});
 
 	it('should not allow an invalid email', () => {
+		cy.get('#toscheck').click();
 		cy.get('input[name=email]')
 			.type('already@used')
 			.should('have.value', 'already@used')
@@ -21,6 +23,7 @@ describe('Sign up', () => {
 	});
 
 	it('should not allow a already used email', () => {
+		cy.get('#toscheck').click();
 		cy.get('input[name=email]')
 			.type('already@used.email')
 			.should('have.value', 'already@used.email')
@@ -30,6 +33,7 @@ describe('Sign up', () => {
 	});
 
 	it('should allow to sign up', () => {
+		cy.get('#toscheck').click();
 		cy.get('input[name=email]')
 			.type('notused@used.email')
 			.should('have.value', 'notused@used.email');

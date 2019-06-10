@@ -108,7 +108,7 @@ describe('Onboarding', () => {
 
 		cy.contains('Aucune tâches client n');
 
-		cy.get('.css-3tccu1-Help').click();
+		cy.get('#help-button').click();
 
 		cy.contains('Aide').click();
 		cy.contains("J'ai compris!").click();

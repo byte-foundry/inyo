@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
@@ -88,7 +88,12 @@ const Illus = styled('img')`
 `;
 
 function UserWorkHourAndDaysForm({data, done = () => {}}) {
-	const {timeZone: initialTimeZone, startWorkAt, endWorkAt} = data;
+	const {
+		timeZone: initialTimeZone,
+		startWorkAt,
+		endWorkAt,
+		workingDays,
+	} = data;
 
 	const currentDate = new Date().toJSON().split('T')[0];
 	const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
@@ -111,7 +116,7 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 		= endWorkAtDate.toString() === 'Invalid Date'
 			? 0
 			: endWorkAtDate.getMinutes();
-	const workingDaysInitial = data.workingDays || [
+	const workingDaysInitial = workingDays || [
 		'MONDAY',
 		'TUESDAY',
 		'WEDNESDAY',
@@ -139,8 +144,7 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 						startMinutes,
 						endHour,
 						endMinutes,
-						workingDays,
-						timeZone,
+						...rest
 					} = values;
 
 					const start = new Date();
@@ -160,10 +164,9 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 					try {
 						updateUser({
 							variables: {
+								...rest,
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
-								workingDays,
-								timeZone,
 							},
 							update: (
 								cache,

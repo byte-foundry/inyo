@@ -35,8 +35,10 @@ function DraggableTask({
 			type: DRAG_TYPES.TASK,
 		},
 		begin() {
-			console.log('fuck');
 			setIsDragging(true);
+			return {
+				id: item.id,
+			};
 		},
 		end() {
 			setIsDragging(false);
@@ -232,24 +234,15 @@ const DashboardTasks = ({location, history}) => {
 				style={{minHeight: '50px'}}
 				items={unscheduledTasks}
 				baseUrl="dashboard"
-				createTaskComponent={
-					({item, index, customerToken}) => (
-						// {draggedId === item.id ? (
-						// 	<TaskCard
-						// 		task={item}
-						// 		index={index}
-						// 	/>
-						// ) : (
-						<DraggableTask
-							item={item}
-							key={item.id}
-							customerToken={customerToken}
-							baseUrl="dashboard"
-							setIsDragging={setIsDragging}
-						/>
-					)
-					// )}
-				}
+				createTaskComponent={({item, index, customerToken}) => (
+					<DraggableTask
+						item={item}
+						key={item.id}
+						customerToken={customerToken}
+						baseUrl="dashboard"
+						setIsDragging={setIsDragging}
+					/>
+				)}
 			/>
 			<Route
 				path="/app/dashboard/:taskId"

@@ -134,6 +134,9 @@ const DraggableTaskCard = ({
 			};
 		},
 		drop(item) {
+			if (typeof item.index !== 'number') {
+				return onMove({id: item.id, index, scheduledFor});
+			}
 			return {index, scheduledFor};
 		},
 	});
@@ -168,7 +171,7 @@ const DroppableDayTasks = ({id, children}) => {
 	);
 };
 
-const PlaceholderTask = ({index, scheduledFor}) => {
+const PlaceholderTask = ({index, scheduledFor, onMove}) => {
 	const [{isOver}, drop] = useDrop({
 		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
@@ -177,6 +180,9 @@ const PlaceholderTask = ({index, scheduledFor}) => {
 			};
 		},
 		drop(item) {
+			if (!item.index) {
+				return onMove({id: item.id, scheduledFor});
+			}
 			return {index, scheduledFor};
 		},
 	});
@@ -269,13 +275,17 @@ const Schedule = ({
 										index={task.schedulePosition}
 										scheduledFor={day.date}
 										onMove={({
+											id,
 											index: position,
 											scheduledFor,
 										}) => {
 											onMoveTask({
-												task,
+												task: id ? {id} : task,
 												scheduledFor,
-												position,
+												position:
+													typeof position === 'number'
+														? position
+														: sortedTasks.length,
 											});
 										}}
 									/>
@@ -283,6 +293,20 @@ const Schedule = ({
 								<PlaceholderTask
 									index={day.tasks.length}
 									scheduledFor={day.date}
+									onMove={({
+										id,
+										index: position,
+										scheduledFor,
+									}) => {
+										onMoveTask({
+											task: {id},
+											scheduledFor,
+											position:
+												typeof position === 'number'
+													? position
+													: sortedTasks.length,
+										});
+									}}
 								/>
 							</DroppableDayTasks>
 						</Day>

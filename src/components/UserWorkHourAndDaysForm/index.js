@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Mutation} from 'react-apollo';
+import React from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import * as Sentry from '@sentry/browser';
@@ -87,278 +87,241 @@ const Illus = styled('img')`
 	grid-row: 4 / 8;
 `;
 
-class UserWorkHourAndDaysForm extends Component {
-	render() {
-		const {
-			timeZone: initialTimeZone,
-			startWorkAt,
-			endWorkAt,
-		} = this.props.data;
+function UserWorkHourAndDaysForm({data, done = () => {}}) {
+	const {
+		timeZone: initialTimeZone,
+		startWorkAt,
+		endWorkAt,
+		workingDays,
+	} = data;
 
-		const currentDate = new Date().toJSON().split('T')[0];
-		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
-		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+	const currentDate = new Date().toJSON().split('T')[0];
+	const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
+	const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+	const updateUser = useMutation(UPDATE_USER_CONSTANTS);
 
-		const startHourInitial
-			= startWorkAtDate.toString() === 'Invalid Date'
-				? 8
-				: startWorkAtDate.getHours();
-		const startMinutesInitial
-			= startWorkAtDate.toString() === 'Invalid Date'
-				? 30
-				: startWorkAtDate.getMinutes();
-		const endHourInitial
-			= endWorkAtDate.toString() === 'Invalid Date'
-				? 19
-				: endWorkAtDate.getHours();
-		const endMinutesInitial
-			= endWorkAtDate.toString() === 'Invalid Date'
-				? 0
-				: endWorkAtDate.getMinutes();
-		const workingDaysInitial = this.props.data.workingDays || [
-			'MONDAY',
-			'TUESDAY',
-			'WEDNESDAY',
-			'THURSDAY',
-			'FRIDAY',
-		];
+	const startHourInitial
+		= startWorkAtDate.toString() === 'Invalid Date'
+			? 8
+			: startWorkAtDate.getHours();
+	const startMinutesInitial
+		= startWorkAtDate.toString() === 'Invalid Date'
+			? 30
+			: startWorkAtDate.getMinutes();
+	const endHourInitial
+		= endWorkAtDate.toString() === 'Invalid Date'
+			? 19
+			: endWorkAtDate.getHours();
+	const endMinutesInitial
+		= endWorkAtDate.toString() === 'Invalid Date'
+			? 0
+			: endWorkAtDate.getMinutes();
+	const workingDaysInitial = workingDays || [
+		'MONDAY',
+		'TUESDAY',
+		'WEDNESDAY',
+		'THURSDAY',
+		'FRIDAY',
+	];
 
-		return (
-			<UserWorkHourAndDaysFormMain>
-				<Mutation mutation={UPDATE_USER_CONSTANTS}>
-					{updateUser => (
-						<Formik
-							initialValues={{
-								startMinutes: startMinutesInitial,
-								startHour: startHourInitial,
-								endHour: endHourInitial,
-								endMinutes: endMinutesInitial,
-								workingDays: workingDaysInitial,
-								timeZone: initialTimeZone,
-							}}
-							validationSchema={Yup.object().shape({})}
-							onSubmit={async (values, actions) => {
-								actions.setSubmitting(false);
+	return (
+		<UserWorkHourAndDaysFormMain>
+			<Formik
+				initialValues={{
+					startMinutes: startMinutesInitial,
+					startHour: startHourInitial,
+					endHour: endHourInitial,
+					endMinutes: endMinutesInitial,
+					workingDays: workingDaysInitial,
+					timeZone: initialTimeZone,
+				}}
+				validationSchema={Yup.object().shape({})}
+				onSubmit={async (values, actions) => {
+					actions.setSubmitting(false);
 
-								const {
-									startHour,
-									startMinutes,
-									endHour,
-									endMinutes,
-									workingDays,
-									timeZone,
-								} = values;
+					const {
+						startHour,
+						startMinutes,
+						endHour,
+						endMinutes,
+						...rest
+					} = values;
 
-								const start = new Date();
+					const start = new Date();
 
-								start.setHours(startHour);
-								start.setMinutes(startMinutes);
-								start.setSeconds(0);
-								start.setMilliseconds(0);
+					start.setHours(startHour);
+					start.setMinutes(startMinutes);
+					start.setSeconds(0);
+					start.setMilliseconds(0);
 
-								const end = new Date();
+					const end = new Date();
 
-								end.setHours(endHour);
-								end.setMinutes(endMinutes);
-								end.setSeconds(0);
-								end.setMilliseconds(0);
+					end.setHours(endHour);
+					end.setMinutes(endMinutes);
+					end.setSeconds(0);
+					end.setMilliseconds(0);
 
-								try {
-									updateUser({
-										variables: {
-											startWorkAt: start
-												.toJSON()
-												.split('T')[1],
-											endWorkAt: end
-												.toJSON()
-												.split('T')[1],
-											workingDays,
-											timeZone,
-										},
-										update: (
-											cache,
-											{data: {updateUser: updatedUser}},
-										) => {
-											window.Intercom(
-												'trackEvent',
-												'updated-user-hours',
-											);
-											const data = cache.readQuery({
-												query: GET_USER_INFOS,
-											});
-
-											data.me = updatedUser;
-											try {
-												cache.writeQuery({
-													query: GET_USER_INFOS,
-													data,
-												});
-												ReactGA.event({
-													category: 'User',
-													action: 'Updated user data',
-												});
-												this.props.done();
-											}
-											catch (e) {
-												throw e;
-											}
-										},
-									});
-								}
-								catch (error) {
-									Sentry.captureException(error);
-									actions.setSubmitting(false);
-									actions.setErrors(error);
-									actions.setStatus({
-										msg: "Quelque chose s'est mal passé",
-									});
-								}
-							}}
-						>
-							{(props) => {
-								const {
-									status,
-									handleSubmit,
-									values: {
-										startHour,
-										startMinutes,
-										endHour,
-										endMinutes,
-										workingDays,
-										timeZone,
-									},
-									setFieldValue,
-								} = props;
-
-								return (
-									<form onSubmit={handleSubmit}>
-										<ProfileSection>
-											<FormContainer>
-												<Illus src={workingIllus} />
-												<Label
-													style={{
-														gridColumn: '1 / 3',
-													}}
-												>
-													Horaires de travail
-												</Label>
-												<DoubleRangeTimeInput
-													style={{
-														gridColumn: '1 / 3',
-													}}
-													value={{
-														start: [
-															startHour,
-															startMinutes,
-														],
-														end: [
-															endHour,
-															endMinutes,
-														],
-													}}
-													setFieldValue={
-														setFieldValue
-													}
-												/>
-												<EmojiTimeline
-													style={{
-														gridColumn: '1 / 3',
-													}}
-												>
-													<Emoji offset={0}>🌙</Emoji>
-													<Emoji offset={33}>
-														☕
-													</Emoji>
-													<Emoji offset={50}>
-														🍽️
-													</Emoji>
-													<Emoji offset={87}>
-														🛌
-													</Emoji>
-													<Emoji offset={100}>
-														🌗
-													</Emoji>
-												</EmojiTimeline>
-												<Label>Jours travaillés</Label>
-												<WeekDaysInput
-													values={workingDays}
-													setFieldValue={
-														setFieldValue
-													}
-												/>
-												<Label>Fuseau horaire</Label>
-												<FormSelect
-													{...props}
-													name="timeZone"
-													placeholder="Triez par fuseau"
-													value={{
-														value:
-															timeZone
-															|| 'Europe/Paris',
-														label: `${timeZone
-															|| 'Europe/Paris'} (${
-															getUTCOffset(
-																Date.now(),
-																findTimeZone(
-																	timeZone
-																		|| 'Europe/Paris',
-																),
-															).abbreviation
-														})`,
-													}}
-													options={timezones
-														.sort(
-															(a, b) => getUTCOffset(
-																Date.now(),
-																findTimeZone(
-																	a,
-																),
-															).offset
-																	- getUTCOffset(
-																		Date.now(),
-																		findTimeZone(
-																			b,
-																		),
-																	).offset
-																|| a - b,
-														)
-														.map(tz => ({
-															value: tz,
-															label: `${tz} (${
-																getUTCOffset(
-																	Date.now(),
-																	findTimeZone(
-																		tz,
-																	),
-																).abbreviation
-															})`,
-														}))}
-													hideSelectedOptions
-													isSearchable
-												/>
-											</FormContainer>
-											{status && status.msg && (
-												<ErrorInput
-													style={{
-														marginBottom: '1rem',
-													}}
-												>
-													{status.msg}
-												</ErrorInput>
-											)}
-										</ProfileSection>
-										<UpdateButton type="submit" big>
-											Mettre à jour
-										</UpdateButton>
-									</form>
+					try {
+						updateUser({
+							variables: {
+								...rest,
+								startWorkAt: start.toJSON().split('T')[1],
+								endWorkAt: end.toJSON().split('T')[1],
+							},
+							update: (
+								cache,
+								{data: {updateUser: updatedUser}},
+							) => {
+								window.Intercom(
+									'trackEvent',
+									'updated-user-hours',
 								);
-							}}
-						</Formik>
-					)}
-				</Mutation>
-			</UserWorkHourAndDaysFormMain>
-		);
-	}
+								const data = cache.readQuery({
+									query: GET_USER_INFOS,
+								});
+
+								data.me = {...data.me, ...updatedUser};
+								try {
+									cache.writeQuery({
+										query: GET_USER_INFOS,
+										data,
+									});
+									ReactGA.event({
+										category: 'User',
+										action: 'Updated user data',
+									});
+									done();
+								}
+								catch (e) {
+									throw e;
+								}
+							},
+						});
+					}
+					catch (error) {
+						Sentry.captureException(error);
+						actions.setSubmitting(false);
+						actions.setErrors(error);
+						actions.setStatus({
+							msg: "Quelque chose s'est mal passé",
+						});
+					}
+				}}
+			>
+				{(props) => {
+					const {
+						status,
+						handleSubmit,
+						values: {
+							startHour,
+							startMinutes,
+							endHour,
+							endMinutes,
+							workingDays,
+							timeZone,
+						},
+						setFieldValue,
+					} = props;
+
+					return (
+						<form onSubmit={handleSubmit}>
+							<ProfileSection>
+								<FormContainer>
+									<Illus src={workingIllus} />
+									<Label
+										style={{
+											gridColumn: '1 / 3',
+										}}
+									>
+										Horaires de travail
+									</Label>
+									<DoubleRangeTimeInput
+										style={{
+											gridColumn: '1 / 3',
+										}}
+										value={{
+											start: [startHour, startMinutes],
+											end: [endHour, endMinutes],
+										}}
+										setFieldValue={setFieldValue}
+									/>
+									<EmojiTimeline
+										style={{
+											gridColumn: '1 / 3',
+										}}
+									>
+										<Emoji offset={0}>🌙</Emoji>
+										<Emoji offset={33}>☕</Emoji>
+										<Emoji offset={50}>🍽️</Emoji>
+										<Emoji offset={87}>🛌</Emoji>
+										<Emoji offset={100}>🌗</Emoji>
+									</EmojiTimeline>
+									<Label>Jours travaillés</Label>
+									<WeekDaysInput
+										values={workingDays}
+										setFieldValue={setFieldValue}
+									/>
+									<Label>Fuseau horaire</Label>
+									<FormSelect
+										{...props}
+										name="timeZone"
+										placeholder="Triez par fuseau"
+										value={{
+											value: timeZone || 'Europe/Paris',
+											label: `${timeZone
+												|| 'Europe/Paris'} (${
+												getUTCOffset(
+													Date.now(),
+													findTimeZone(
+														timeZone
+															|| 'Europe/Paris',
+													),
+												).abbreviation
+											})`,
+										}}
+										options={timezones
+											.sort(
+												(a, b) => getUTCOffset(
+													Date.now(),
+													findTimeZone(a),
+												).offset
+														- getUTCOffset(
+															Date.now(),
+															findTimeZone(b),
+														).offset || a - b,
+											)
+											.map(tz => ({
+												value: tz,
+												label: `${tz} (${
+													getUTCOffset(
+														Date.now(),
+														findTimeZone(tz),
+													).abbreviation
+												})`,
+											}))}
+										hideSelectedOptions
+										isSearchable
+									/>
+								</FormContainer>
+								{status && status.msg && (
+									<ErrorInput
+										style={{
+											marginBottom: '1rem',
+										}}
+									>
+										{status.msg}
+									</ErrorInput>
+								)}
+							</ProfileSection>
+							<UpdateButton type="submit" big>
+								Mettre à jour
+							</UpdateButton>
+						</form>
+					);
+				}}
+			</Formik>
+		</UserWorkHourAndDaysFormMain>
+	);
 }
 
 export default UserWorkHourAndDaysForm;

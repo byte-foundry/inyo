@@ -259,7 +259,11 @@ const DashboardTasks = ({location, history}) => {
 			/>
 			{leftBarRef.current
 				&& ReactDOM.createPortal(
-					<LeftBarSchedule isDragging={isDragging} />,
+					<LeftBarSchedule
+						isDragging={true}
+						days={scheduledTasks}
+						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					/>,
 					leftBarRef.current,
 				)}
 		</>

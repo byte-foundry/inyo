@@ -170,8 +170,13 @@ export const templates = [
 						name:
 							'Envoi de l’ensemble des contenus textes + images',
 						unit: 0,
-						description:
-							'# content-acquisition-list - [ ] Logo vectoriel - [ ] Contenus menu principal - [ ] Contenus textes - [ ] Visuels HD',
+						description: `
+
+# content-acquisition-list
+- [ ] Logo vectoriel
+- [ ] Contenus menu principal
+- [ ] Contenus textes
+- [ ] Visuels HD`,
 						type: 'CONTENT_ACQUISITION',
 					},
 					{
@@ -342,8 +347,12 @@ export const templates = [
 						name:
 							'Envoi de l’ensemble des contenus textes + images',
 						unit: 0,
-						description:
-							'# content-acquisition-list - [ ] Logo vectoriel - [ ] Contenus textes - [ ] Visuels HD',
+						description: `
+
+# content-acquisition-list
+- [ ] Logo vectoriel
+- [ ] Contenus textes
+- [ ] Visuels HD`,
 						type: 'CONTENT_ACQUISITION',
 					},
 					{
@@ -649,8 +658,12 @@ export const templates = [
 						name:
 							'Récupération des sous-titres et bande son à intégrer',
 						unit: 0,
-						description:
-							'# content-acquisition-list - [ ] Contenus texte - [ ] Données temporelles - [ ] Bande son',
+						description: `
+
+# content-acquisition-list
+- [ ] Contenus texte
+- [ ] Données temporelles
+- [ ] Bande son`,
 						type: 'CONTENT_ACQUISITION',
 					},
 					{

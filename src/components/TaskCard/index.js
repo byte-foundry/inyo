@@ -6,15 +6,17 @@ import {useMutation} from 'react-apollo-hooks';
 import {isCustomerTask} from '../../utils/functions';
 import IconButton from '../../utils/new/components/IconButton';
 import {
-	mediumGrey,
+	accentGrey,
 	primaryBlack,
 	primaryGrey,
+	primaryPurple,
+	primaryRed,
 } from '../../utils/new/design-system';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
 const TaskCardElem = styled('div')`
 	background: #fff;
-	border: 2px solid ${mediumGrey};
+	border: 1px solid ${props => (props.customerTask ? primaryRed : accentGrey)};
 	border-radius: 3px;
 	padding: 5px;
 	margin-bottom: 5px;
@@ -22,8 +24,7 @@ const TaskCardElem = styled('div')`
 	display: grid;
 	grid-template-columns: 1fr auto;
 	cursor: pointer;
-
-	${props => props.isOver && 'border-top: 5px solid black;'}
+	position: relative;
 `;
 
 const CardTitle = styled('span')`
@@ -37,6 +38,14 @@ const CardSubTitle = styled('span')`
 	color: ${primaryGrey};
 `;
 
+const Separator = styled('div')`
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	top: -5px;
+	background: ${primaryPurple};
+`;
+
 const TaskCard = withRouter(
 	({
 		task,
@@ -46,6 +55,7 @@ const TaskCard = withRouter(
 		history,
 		location,
 		cardRef,
+		isOver,
 		...rest
 	}) => {
 		const finishItem = useMutation(FINISH_ITEM);
@@ -55,12 +65,14 @@ const TaskCard = withRouter(
 			<TaskCardElem
 				{...rest}
 				ref={cardRef}
+				customerTask={isCustomerTask(task.type)}
 				onClick={() => history.push({
 					pathname: `/app/dashboard/${task.id}`,
 					state: {prevSearch: location.search},
 				})
 				}
 			>
+				{isOver && <Separator />}
 				{!isCustomerTask(task.type) && (
 					<IconButton
 						current={task.status === 'FINISHED'}

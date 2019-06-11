@@ -3,8 +3,11 @@ import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import moment from 'moment';
 import {useSpring, animated} from 'react-spring';
+import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
 
-import {GET_ALL_TASKS, GET_USER_INFOS} from '../../utils/queries';
+import DefaultDroppableDay from '../DefaultDroppableDay';
+
+import {GET_USER_INFOS} from '../../utils/queries';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import usePrevious from '../../utils/usePrevious';
 import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
@@ -16,22 +19,6 @@ const LeftBarContainer = styled('div')`
 	left: 0;
 	height: 100%;
 	z-index: 2;
-`;
-
-const DayElem = styled('div')`
-	width: calc(100% - 2rem);
-	background: ${primaryWhite};
-	margin: 1rem 1rem 0;
-	box-sizing: border-box;
-	height: 100px;
-	border-radius: 24px;
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-	padding-top: 7px;
-	color: ${primaryPurple};
-	border: solid 1px ${primaryWhite};
-	position: relative;
 `;
 
 const DayTaskNumber = styled('div')`
@@ -48,6 +35,23 @@ const DayTaskNumber = styled('div')`
 	bottom: 5px;
 	font-size: 17px;
 `;
+
+const DayElem = styled('div')`
+	width: calc(100% - 2rem);
+	background: ${props => (props.isOver ? primaryPurple : primaryWhite)};
+	margin: 1rem 1rem 0;
+	box-sizing: border-box;
+	height: 100px;
+	border-radius: 24px;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	padding-top: 7px;
+	color: ${props => (props.isOver ? primaryWhite : primaryPurple)};
+	border: solid 1px ${primaryWhite};
+	position: relative;
+`;
+
 const DayDate = styled('div')``;
 const DayDateDay = styled('div')`
 	text-align: center;
@@ -71,7 +75,43 @@ const LeftBarContent = styled('div')`
 	width: 70px;
 `;
 
-function LeftBarSchedule({isDragging, days, fullWeek}) {
+function DroppableDay({
+	day, index, scheduledFor, onMove,
+}) {
+	return (
+		<DefaultDroppableDay
+			index={index}
+			scheduledFor={scheduledFor}
+			onMove={onMove}
+		>
+			<DayElem>
+				<DayDate>
+					<DayDateDay>
+						{day.momentDate.toDate().toLocaleDateString('default', {
+							weekday: 'narrow',
+							day: undefined,
+							month: undefined,
+							year: undefined,
+						})}
+					</DayDateDay>
+					<DayDateNumber>
+						{day.momentDate.toDate().toLocaleDateString('default', {
+							weekday: undefined,
+							day: 'numeric',
+							month: undefined,
+							year: undefined,
+						})}
+					</DayDateNumber>
+				</DayDate>
+				<DayTaskNumber>{day.tasks.length}</DayTaskNumber>
+			</DayElem>
+		</DefaultDroppableDay>
+	);
+}
+
+function LeftBarSchedule({
+	isDragging, days, fullWeek, onMoveTask,
+}) {
 	const [startDay] = useState(moment().startOf('week'));
 	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
@@ -124,31 +164,21 @@ function LeftBarSchedule({isDragging, days, fullWeek}) {
 			<LeftBarElem style={animatedProps}>
 				<LeftBarContent>
 					{weekdays.map(day => (
-						<DayElem>
-							<DayDate>
-								<DayDateDay>
-									{day.momentDate
-										.toDate()
-										.toLocaleDateString('default', {
-											weekday: 'narrow',
-											day: undefined,
-											month: undefined,
-											year: undefined,
-										})}
-								</DayDateDay>
-								<DayDateNumber>
-									{day.momentDate
-										.toDate()
-										.toLocaleDateString('default', {
-											weekday: undefined,
-											day: 'numeric',
-											month: undefined,
-											year: undefined,
-										})}
-								</DayDateNumber>
-							</DayDate>
-							<DayTaskNumber>{day.tasks.length}</DayTaskNumber>
-						</DayElem>
+						<DroppableDay
+							day={day}
+							index={day.tasks.length}
+							scheduledFor={day.date}
+							onMove={({id, index: position, scheduledFor}) => {
+								onMoveTask({
+									task: {id},
+									scheduledFor,
+									position:
+										typeof position === 'number'
+											? position
+											: day.tasks.length,
+								});
+							}}
+						/>
 					))}
 				</LeftBarContent>
 			</LeftBarElem>

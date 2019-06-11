@@ -191,6 +191,24 @@ const DashboardTasks = ({location, history}) => {
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
+	const onMoveTask = useRef(({task, scheduledFor, position}) => {
+		console.log('focusTask');
+		focusTask({
+			variables: {
+				itemId: task.id,
+				for: scheduledFor,
+				schedulePosition: position,
+			},
+			optimisticReponse: {
+				focusTask: {
+					itemId: task.id,
+					for: scheduledFor,
+					schedulePosition: position,
+				},
+			},
+		});
+	});
+
 	return (
 		<>
 			{loadingUserPrefs ? (
@@ -200,22 +218,7 @@ const DashboardTasks = ({location, history}) => {
 					days={scheduledTasks}
 					workingDays={userPrefsData.me.workingDays}
 					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-					onMoveTask={({task, scheduledFor, position}) => {
-						focusTask({
-							variables: {
-								itemId: task.id,
-								for: scheduledFor,
-								schedulePosition: position,
-							},
-							optimisticReponse: {
-								focusTask: {
-									itemId: task.id,
-									for: scheduledFor,
-									schedulePosition: position,
-								},
-							},
-						});
-					}}
+					onMoveTask={onMoveTask.current}
 				/>
 			)}
 
@@ -260,9 +263,10 @@ const DashboardTasks = ({location, history}) => {
 			{leftBarRef.current
 				&& ReactDOM.createPortal(
 					<LeftBarSchedule
-						isDragging={true}
+						isDragging={isDragging}
 						days={scheduledTasks}
 						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+						onMoveTask={onMoveTask.current}
 					/>,
 					leftBarRef.current,
 				)}

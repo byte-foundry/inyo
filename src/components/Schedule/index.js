@@ -5,6 +5,8 @@ import moment from 'moment';
 import styled from '@emotion/styled';
 import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
 
+import DefaultDroppableDay from '../DefaultDroppableDay';
+
 import {
 	mediumGrey,
 	accentGrey,
@@ -39,6 +41,8 @@ const Day = styled('div')`
 	padding: 0 5px;
 	flex: 1;
 	margin: 0 -1px;
+	display: flex;
+	flex-flow: column;
 
 	${props => props.isOff
 		&& `
@@ -64,10 +68,17 @@ const DayTitle = styled('span')`
 	`}
 `;
 
+const DroppableSeparator = styled('div')`
+	flex: 1 0 50px;
+	margin-top: -3px;
+	border-top: ${props => (props.isOver ? `3px solid ${primaryPurple}` : '5px solid transparent')};
+`;
+
 const DayTasks = styled('div')`
 	color: ${accentGrey};
 	display: flex;
 	flex-direction: column;
+	flex: 1;
 `;
 
 const ScheduleNav = styled('div')`
@@ -171,29 +182,15 @@ const DroppableDayTasks = ({id, children}) => {
 	);
 };
 
-const PlaceholderTask = ({index, scheduledFor, onMove}) => {
-	const [{isOver}, drop] = useDrop({
-		accept: DRAG_TYPES.TASK,
-		collect(monitor) {
-			return {
-				isOver: monitor.isOver(),
-			};
-		},
-		drop(item) {
-			if (!item.index) {
-				return onMove({id: item.id, scheduledFor});
-			}
-			return {index, scheduledFor};
-		},
-	});
-
-	return (
-		<div
-			ref={drop}
-			style={{height: '50px', borderTop: isOver && '5px solid black'}}
-		/>
-	);
-};
+const PlaceholderTask = ({index, scheduledFor, onMove}) => (
+	<DefaultDroppableDay
+		index={index}
+		scheduledFor={scheduledFor}
+		onMove={onMove}
+	>
+		<DroppableSeparator />
+	</DefaultDroppableDay>
+);
 
 const Schedule = ({
 	days, workingDays, fullWeek, onMoveTask,

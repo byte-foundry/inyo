@@ -192,7 +192,6 @@ const DashboardTasks = ({location, history}) => {
 	);
 
 	const onMoveTask = useRef(({task, scheduledFor, position}) => {
-		console.log('focusTask');
 		focusTask({
 			variables: {
 				itemId: task.id,

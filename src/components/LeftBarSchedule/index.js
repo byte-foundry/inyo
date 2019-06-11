@@ -3,14 +3,17 @@ import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import moment from 'moment';
 import {useSpring, animated} from 'react-spring';
-import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
 
 import DefaultDroppableDay from '../DefaultDroppableDay';
 
 import {GET_USER_INFOS} from '../../utils/queries';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import usePrevious from '../../utils/usePrevious';
-import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
+import {
+	primaryPurple,
+	primaryWhite,
+	mediumGrey,
+} from '../../utils/new/design-system';
 import {Loading} from '../../utils/content';
 
 const LeftBarContainer = styled('div')`
@@ -38,7 +41,7 @@ const DayTaskNumber = styled('div')`
 
 const DayElem = styled('div')`
 	width: calc(100% - 2rem);
-	background: ${props => (props.isOver ? primaryPurple : primaryWhite)};
+	background: ${props => (props.isOver ? primaryPurple : props.isOff ? mediumGrey : primaryWhite)};
 	margin: 1rem 1rem 0;
 	box-sizing: border-box;
 	height: 100px;
@@ -47,7 +50,11 @@ const DayElem = styled('div')`
 	flex-flow: column;
 	align-items: center;
 	padding-top: 7px;
-	color: ${props => (props.isOver ? primaryWhite : primaryPurple)};
+	color: ${props => (props.isOver
+		? props.isOff
+			? mediumGrey
+			: primaryWhite
+		: primaryPurple)};
 	border: solid 1px ${primaryWhite};
 	position: relative;
 `;
@@ -76,7 +83,7 @@ const LeftBarContent = styled('div')`
 `;
 
 function DroppableDay({
-	day, index, scheduledFor, onMove,
+	day, index, scheduledFor, onMove, isOff,
 }) {
 	return (
 		<DefaultDroppableDay
@@ -84,7 +91,7 @@ function DroppableDay({
 			scheduledFor={scheduledFor}
 			onMove={onMove}
 		>
-			<DayElem>
+			<DayElem isOff={isOff}>
 				<DayDate>
 					<DayDateDay>
 						{day.momentDate.toDate().toLocaleDateString('default', {
@@ -168,6 +175,7 @@ function LeftBarSchedule({
 							day={day}
 							index={day.tasks.length}
 							scheduledFor={day.date}
+							isOff={!day.workedDay}
 							onMove={({id, index: position, scheduledFor}) => {
 								onMoveTask({
 									task: {id},

@@ -499,7 +499,10 @@ export function TaskInfosInputs({
 									pathname: `${taskUrlPrefix}/${baseUrl}/${
 										item.id
 									}`,
-									state: {prevSearch: location.search},
+									state: {
+										prevSearch: location.search,
+										isActivating: true,
+									},
 								}}
 							>
 								<IconButton

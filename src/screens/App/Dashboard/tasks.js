@@ -161,10 +161,7 @@ const DashboardTasks = ({location, history}) => {
 
 	tasks.forEach((task) => {
 		if (!task.scheduledFor) {
-			if (
-				task.status === 'PENDING'
-				&& (!task.section || task.section.project.status === 'ONGOING')
-			) {
+			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
 			}
 

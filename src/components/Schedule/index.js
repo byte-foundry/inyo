@@ -184,6 +184,7 @@ const DroppableDayTasks = ({id, children}) => {
 
 const PlaceholderTask = ({index, scheduledFor, onMove}) => (
 	<DefaultDroppableDay
+		key={scheduledFor}
 		index={index}
 		scheduledFor={scheduledFor}
 		onMove={onMove}

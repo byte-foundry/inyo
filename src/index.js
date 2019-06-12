@@ -20,7 +20,6 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import 'moment/locale/fr';
 import * as Sentry from '@sentry/browser';
-import ReactTooltip from 'react-tooltip';
 
 import withTracker from './HOC/withTracker';
 
@@ -34,7 +33,7 @@ import ConditionalContent from './screens/App/ConditionalContent';
 import {UserContext} from './utils/contexts';
 import {Loading} from './utils/content';
 import client from './utils/graphQLConfig';
-import {INTERCOM_APP_ID, TOOLTIP_DELAY} from './utils/constants';
+import {INTERCOM_APP_ID} from './utils/constants';
 import {CHECK_LOGIN_USER} from './utils/queries';
 import {Body} from './utils/new/design-system';
 
@@ -179,7 +178,6 @@ function Root() {
 							/>
 						</UserContext.Provider>
 					</main>
-					<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 				</BodyMain>
 			</ProvidersSentry>
 		</DndProvider>

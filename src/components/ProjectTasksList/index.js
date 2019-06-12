@@ -35,6 +35,7 @@ import InlineEditable from '../InlineEditable';
 import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import IconButton from '../../utils/new/components/IconButton';
+import Tooltip from '../Tooltip';
 
 const TasksListContainer = styled(LayoutMainElem)``;
 
@@ -223,14 +224,13 @@ function SectionTitle({onClickTrash, ...props}) {
 	return (
 		<SectionTitleContainer>
 			<SectionInput {...props} />
-			<TrashIconContainer
-				onClick={onClickTrash}
-				data-tip="Supprimer cette section"
-			>
-				<TrashButton link>
-					<IconButton icon="delete_forever" size="small" danger />
-				</TrashButton>
-			</TrashIconContainer>
+			<Tooltip label="Supprimer cette section">
+				<TrashIconContainer onClick={onClickTrash}>
+					<TrashButton link>
+						<IconButton icon="delete_forever" size="small" danger />
+					</TrashButton>
+				</TrashIconContainer>
+			</Tooltip>
 		</SectionTitleContainer>
 	);
 }

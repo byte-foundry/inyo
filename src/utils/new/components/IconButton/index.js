@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import styled from '@emotion/styled';
 
 import MaterialIcon from '../../../../components/MaterialIcon';
@@ -129,24 +129,20 @@ const IconWrap = styled('div')`
 	}
 `;
 
-function IconButton({
-	icon,
-	size,
-	invert,
-	inactive,
-	color,
-	danger,
-	label,
-	current,
-	...rest
-}) {
-	return (
+const IconButton = forwardRef(
+	(
+		{
+			icon, size, invert, inactive, color, danger, label, current, ...rest
+		},
+		ref,
+	) => (
 		<IconWrap
 			size={size}
 			danger={danger}
 			{...rest}
 			inactive={inactive}
 			current={current}
+			ref={ref}
 		>
 			<MaterialIcon
 				icon={icon}
@@ -157,7 +153,7 @@ function IconButton({
 			/>
 			{label && <label>{label}</label>}
 		</IconWrap>
-	);
-}
+	),
+);
 
 export default IconButton;

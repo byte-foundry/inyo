@@ -4,9 +4,10 @@ import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import useOnClickOutside from 'use-onclickoutside';
 
+import Tooltip from '../Tooltip';
+import IconButton from '../../utils/new/components/IconButton';
 import NotificationItem from '../NotificationItem';
 
-import IconButton from '../../utils/new/components/IconButton';
 import {
 	Button,
 	primaryPurple,
@@ -176,20 +177,21 @@ const NotificationTrayButton = ({mobile}) => {
 
 	return (
 		<NotificationContainer mobile={mobile}>
-			<Icon
-				data-tip="Notifications liées à vos clients"
-				someUnread={unreadNumber > 0}
-				ref={icon}
-				onClick={() => {
-					setOpen(!isOpen);
+			<Tooltip label="Notifications liées à vos clients">
+				<Icon
+					someUnread={unreadNumber > 0}
+					ref={icon}
+					onClick={() => {
+						setOpen(!isOpen);
 
-					if (!isOpen) {
-						refetch();
-					}
-				}}
-			>
-				<IconButton icon="notifications" size="small" />
-			</Icon>
+						if (!isOpen) {
+							refetch();
+						}
+					}}
+				>
+					<IconButton icon="notifications" size="small" />
+				</Icon>
+			</Tooltip>
 			{isOpen
 				&& ReactDOM.createPortal(
 					<Dropdown

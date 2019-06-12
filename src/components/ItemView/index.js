@@ -4,7 +4,6 @@ import {css} from '@emotion/core';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
-import ReactTooltip from 'react-tooltip';
 
 import MaterialIcon from '../MaterialIcon';
 import TaskStatusButton from '../TaskStatusButton';
@@ -52,10 +51,10 @@ import {
 } from '../../utils/content';
 import {
 	ITEM_TYPES,
-	TOOLTIP_DELAY,
 	BREAKPOINTS,
 	CUSTOMER_TASK_TYPES,
 } from '../../utils/constants';
+import Tooltip from '../Tooltip';
 
 const Header = styled('div')``;
 
@@ -364,7 +363,6 @@ const Item = ({
 	if (isActivating) {
 		return (
 			<>
-				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 				<StickyHeader customer={item.type !== 'DEFAULT'}>
 					Prévisualisation des actions{' '}
 					<Apostrophe
@@ -393,7 +391,6 @@ const Item = ({
 
 	return (
 		<>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<StickyHeader customer={item.type !== 'DEFAULT'}>
 				<TaskActivationHeader
 					item={item}
@@ -404,368 +401,389 @@ const Item = ({
 				/>
 			</StickyHeader>
 			<Header>
-				<Title data-tip="Type et titre de la tâche">
-					<TaskHeadingIcon>
-						{item.status === 'FINISHED'
-							? typeInfo.iconValidated
-							: typeInfo.icon}
-					</TaskHeadingIcon>
-					<InlineEditable
-						disabled={!!customerToken}
-						editableCss={css`
-							padding: 1rem 1.5rem;
-						`}
-						value={item.name}
-						type="text"
-						placeholder="Nommez cette tâche"
-						onFocusOut={(value) => {
-							if (value && value !== item.name) {
-								updateItem({
-									variables: {
-										itemId: id,
-										token: customerToken,
-										name: value,
-									},
-								});
-							}
-						}}
-					/>
-				</Title>
+				<Tooltip label="Type et titre de la tâche">
+					<Title>
+						<TaskHeadingIcon>
+							{item.status === 'FINISHED'
+								? typeInfo.iconValidated
+								: typeInfo.icon}
+						</TaskHeadingIcon>
+						<InlineEditable
+							disabled={!!customerToken}
+							editableCss={css`
+								padding: 1rem 1.5rem;
+							`}
+							value={item.name}
+							type="text"
+							placeholder="Nommez cette tâche"
+							onFocusOut={(value) => {
+								if (value && value !== item.name) {
+									updateItem({
+										variables: {
+											itemId: id,
+											token: customerToken,
+											name: value,
+										},
+									});
+								}
+							}}
+						/>
+					</Title>
+				</Tooltip>
 			</Header>
 			<Metas>
 				{customerToken
 				|| item.status !== 'FINISHED'
 				|| !item.timeItTook ? (
-						<Meta data-tip="Temps estimé pour cette tâche">
-							<MaterialIcon icon="timer" size="tiny" />
-							<MetaLabel>Temps estimé</MetaLabel>
-							<MetaText>
-								{!customerToken && editUnit ? (
-									<UnitInput
-										unit={item.unit}
-										onBlur={(unit) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													unit,
-												},
-											});
-											setEditUnit(false);
-										}}
-										onSubmit={(unit) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													unit,
-												},
-											});
-											setEditUnit(false);
-										}}
-										onTab={(unit) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													unit,
-												},
-											});
-											setEditUnit(false);
-										}}
-									/>
-								) : (
-									<div
-										onClick={
-											customerToken
-												? undefined
-												: () => setEditUnit(true)
-										}
-									>
-										{+item.unit.toFixed(2)}
-										<Plural
-											singular=" jour"
-											plural=" jours"
-											value={item.unit}
+						<Tooltip label="Temps estimé pour cette tâche">
+							<Meta>
+								<MaterialIcon icon="timer" size="tiny" />
+								<MetaLabel>Temps estimé</MetaLabel>
+								<MetaText>
+									{!customerToken && editUnit ? (
+										<UnitInput
+											unit={item.unit}
+											onBlur={(unit) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														unit,
+													},
+												});
+												setEditUnit(false);
+											}}
+											onSubmit={(unit) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														unit,
+													},
+												});
+												setEditUnit(false);
+											}}
+											onTab={(unit) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														unit,
+													},
+												});
+												setEditUnit(false);
+											}}
 										/>
-									</div>
-								)}
-							</MetaText>
-						</Meta>
-					) : (
-						<Meta data-tip="Temps passé pour cette tâche">
-							<MaterialIcon icon="timer" size="tiny" />
-							<MetaLabel>Temps passé</MetaLabel>
-							<MetaText>
-								{editUnit ? (
-									<UnitInput
-										unit={item.timeItTook}
-										onBlur={(timeItTook) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													timeItTook,
-												},
-											});
-											setEditUnit(false);
-										}}
-										onSubmit={(timeItTook) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													timeItTook,
-												},
-											});
-											setEditUnit(false);
-										}}
-										onTab={(timeItTook) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													timeItTook,
-												},
-											});
-											setEditUnit(false);
-										}}
-									/>
-								) : (
-									<div onClick={() => setEditUnit(true)}>
-										{+item.timeItTook.toFixed(2)}
-										<Plural
-											singular=" jour"
-											plural=" jours"
-											value={item.timeItTook}
-										/>
-									</div>
-								)}
-							</MetaText>
-						</Meta>
-					)}
-				<Meta data-tip="Personne liée à cette tâche">
-					<MaterialIcon icon="person_outline" size="tiny" />
-					<MetaLabel>Client</MetaLabel>
-					{!customerToken && editCustomer ? (
-						<ClientDropdown
-							id="projects"
-							defaultMenuIsOpen
-							defaultValue={
-								item.linkedCustomer && {
-									value: item.linkedCustomer.id,
-									label: item.linkedCustomer.name,
-								}
-							}
-							autoFocus
-							onChange={({value}) => {
-								updateItem({
-									variables: {
-										itemId: item.id,
-										linkedCustomerId: value,
-									},
-								});
-								setEditCustomer(false);
-							}}
-							onBlur={() => {
-								setEditCustomer(false);
-							}}
-						/>
-					) : (
-						<MetaText
-							onClick={
-								customerToken
-									? undefined
-									: () => setEditCustomer(true)
-							}
-						>
-							{customer && customer.name}
-						</MetaText>
-					)}
-				</Meta>
-				{(!deadline || deadline.toString() !== 'Invalid Date') && (
-					<Meta data-tip="Date limite pour réaliser cette tâche">
-						<MaterialIcon icon="event" size="tiny" />
-						<MetaLabel>Temps restant</MetaLabel>
-						<MetaTime
-							title={deadline && deadline.toLocaleString()}
-							dateTime={deadline && deadline.toJSON()}
-							onClick={
-								customerToken
-									? undefined
-									: () => !editDueDate && setEditDueDate(true)
-							}
-						>
-							{!customerToken && editDueDate ? (
-								<DateInputContainer>
-									<DueDateInputElem
-										value={moment(
-											deadline || new Date(),
-										).format('DD/MM/YYYY')}
-									/>
-									<DateInput
-										innerRef={dateRef}
-										date={moment(deadline || new Date())}
-										onDateChange={(date) => {
-											updateItem({
-												variables: {
-													itemId: item.id,
-													dueDate: date.toISOString(),
-												},
-											});
-											setEditDueDate(false);
-										}}
-										duration={item.unit}
-									/>
-								</DateInputContainer>
-							) : (
-								deadline && (
-									<div>
-										{
-											+(
-												moment(deadline).diff(
-													moment(),
-													'days',
-												) - item.unit
-											).toFixed(2)
-										}{' '}
-										<Plural
-											value={
-												moment(deadline).diff(
-													moment(),
-													'days',
-												) - item.unit
+									) : (
+										<div
+											onClick={
+												customerToken
+													? undefined
+													: () => setEditUnit(true)
 											}
-											singular="jour"
-											plural="jours"
-										/>
-									</div>
-								)
-							)}
-						</MetaTime>
-					</Meta>
-				)}
-				<Meta data-tip="Projet lié à cette tâche">
-					<MaterialIcon icon="folder_open" size="tiny" />
-					<MetaLabel>Projet</MetaLabel>
-					{!customerToken && editProject ? (
-						<StyledProjectsDropdown
-							id="projects"
-							defaultMenuIsOpen
-							autoFocus
-							defaultValue={
-								item.section
-								&& item.section.project && {
-									value: item.section.project.id,
-									label: item.section.project.name,
-								}
-							}
-							onChange={({value}) => {
-								updateItem({
-									variables: {
-										itemId: item.id,
-										projectId: value,
-									},
-								});
-								setEditProject(false);
-							}}
-							onBlur={() => {
-								setEditProject(false);
-							}}
-						/>
+										>
+											{+item.unit.toFixed(2)}
+											<Plural
+												singular=" jour"
+												plural=" jours"
+												value={item.unit}
+											/>
+										</div>
+									)}
+								</MetaText>
+							</Meta>
+						</Tooltip>
 					) : (
-						<MetaText
-							onClick={
-								customerToken
-									? undefined
-									: () => setEditProject(true)
-							}
-						>
-							{item.section
-								&& item.section.project
-								&& item.section.project.name}
-						</MetaText>
+						<Tooltip label="Temps passé pour cette tâche">
+							<Meta>
+								<MaterialIcon icon="timer" size="tiny" />
+								<MetaLabel>Temps passé</MetaLabel>
+								<MetaText>
+									{editUnit ? (
+										<UnitInput
+											unit={item.timeItTook}
+											onBlur={(timeItTook) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														timeItTook,
+													},
+												});
+												setEditUnit(false);
+											}}
+											onSubmit={(timeItTook) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														timeItTook,
+													},
+												});
+												setEditUnit(false);
+											}}
+											onTab={(timeItTook) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														timeItTook,
+													},
+												});
+												setEditUnit(false);
+											}}
+										/>
+									) : (
+										<div onClick={() => setEditUnit(true)}>
+											{+item.timeItTook.toFixed(2)}
+											<Plural
+												singular=" jour"
+												plural=" jours"
+												value={item.timeItTook}
+											/>
+										</div>
+									)}
+								</MetaText>
+							</Meta>
+						</Tooltip>
 					)}
-				</Meta>
-				<Meta data-tip="Définit s'il y a des actions automatiques">
-					<MaterialIcon icon="check_circle_outline" size="tiny" />
-					<MetaLabel>Type de tâche</MetaLabel>
-					<MetaText>{typeInfo.name}</MetaText>
-				</Meta>
-				{!customerToken && (
-					<Meta data-tip="Tag de la tâche">
-						<MaterialIcon icon="label" size="tiny" />
-						<MetaLabel>Tags</MetaLabel>
-						<TagDropdown
-							id="tags"
-							long
-							placeholder="Ajouter ou créer un tag"
-							value={item.tags.map(tag => ({
-								value: tag.id,
-								label: tag.name,
-								colorBg: tag.colorBg,
-								colorText: tag.colorText,
-							}))}
-							onCreateOption={async (
-								name,
-								colorBg,
-								colorText,
-							) => {
-								const {
-									data: {createTag: tag},
-								} = await createTag({
-									variables: {
-										name,
-										colorBg,
-										colorText,
-									},
-								});
-
-								updateItem({
-									variables: {
-										itemId: item.id,
-										tags: [
-											...item.tags.map(i => i.id),
-											tag.id,
-										],
-									},
-								});
-							}}
-							onChange={(tags) => {
-								updateItem({
-									variables: {
-										itemId: item.id,
-										tags: tags.map(({value}) => value),
-									},
-								});
-							}}
-						/>
+				<Tooltip label="Personne liée à cette tâche">
+					<Meta>
+						<MaterialIcon icon="person_outline" size="tiny" />
+						<MetaLabel>Client</MetaLabel>
+						{!customerToken && editCustomer ? (
+							<ClientDropdown
+								id="projects"
+								defaultMenuIsOpen
+								defaultValue={
+									item.linkedCustomer && {
+										value: item.linkedCustomer.id,
+										label: item.linkedCustomer.name,
+									}
+								}
+								autoFocus
+								onChange={({value}) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											linkedCustomerId: value,
+										},
+									});
+									setEditCustomer(false);
+								}}
+								onBlur={() => {
+									setEditCustomer(false);
+								}}
+							/>
+						) : (
+							<MetaText
+								onClick={
+									customerToken
+										? undefined
+										: () => setEditCustomer(true)
+								}
+							>
+								{customer && customer.name}
+							</MetaText>
+						)}
 					</Meta>
+				</Tooltip>
+				{(!deadline || deadline.toString() !== 'Invalid Date') && (
+					<Tooltip label="Date limite pour réaliser cette tâche">
+						<Meta>
+							<MaterialIcon icon="event" size="tiny" />
+							<MetaLabel>Temps restant</MetaLabel>
+							<MetaTime
+								title={deadline && deadline.toLocaleString()}
+								dateTime={deadline && deadline.toJSON()}
+								onClick={
+									customerToken
+										? undefined
+										: () => !editDueDate
+												&& setEditDueDate(true)
+								}
+							>
+								{!customerToken && editDueDate ? (
+									<DateInputContainer>
+										<DueDateInputElem
+											value={moment(
+												deadline || new Date(),
+											).format('DD/MM/YYYY')}
+										/>
+										<DateInput
+											innerRef={dateRef}
+											date={moment(
+												deadline || new Date(),
+											)}
+											onDateChange={(date) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														dueDate: date.toISOString(),
+													},
+												});
+												setEditDueDate(false);
+											}}
+											duration={item.unit}
+										/>
+									</DateInputContainer>
+								) : (
+									deadline && (
+										<div>
+											{
+												+(
+													moment(deadline).diff(
+														moment(),
+														'days',
+													) - item.unit
+												).toFixed(2)
+											}{' '}
+											<Plural
+												value={
+													moment(deadline).diff(
+														moment(),
+														'days',
+													) - item.unit
+												}
+												singular="jour"
+												plural="jours"
+											/>
+										</div>
+									)
+								)}
+							</MetaTime>
+						</Meta>
+					</Tooltip>
+				)}
+				<Tooltip label="Projet lié à cette tâche">
+					<Meta>
+						<MaterialIcon icon="folder_open" size="tiny" />
+						<MetaLabel>Projet</MetaLabel>
+						{!customerToken && editProject ? (
+							<StyledProjectsDropdown
+								id="projects"
+								defaultMenuIsOpen
+								autoFocus
+								defaultValue={
+									item.section
+									&& item.section.project && {
+										value: item.section.project.id,
+										label: item.section.project.name,
+									}
+								}
+								onChange={({value}) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											projectId: value,
+										},
+									});
+									setEditProject(false);
+								}}
+								onBlur={() => {
+									setEditProject(false);
+								}}
+							/>
+						) : (
+							<MetaText
+								onClick={
+									customerToken
+										? undefined
+										: () => setEditProject(true)
+								}
+							>
+								{item.section
+									&& item.section.project
+									&& item.section.project.name}
+							</MetaText>
+						)}
+					</Meta>
+				</Tooltip>
+				<Tooltip label="Définit s'il y a des actions automatiques">
+					<Meta>
+						<MaterialIcon icon="check_circle_outline" size="tiny" />
+						<MetaLabel>Type de tâche</MetaLabel>
+						<MetaText>{typeInfo.name}</MetaText>
+					</Meta>
+				</Tooltip>
+				{!customerToken && (
+					<Tooltip label="Tag de la tâche">
+						<Meta>
+							<MaterialIcon icon="label" size="tiny" />
+							<MetaLabel>Tags</MetaLabel>
+							<TagDropdown
+								id="tags"
+								long
+								placeholder="Ajouter ou créer un tag"
+								value={item.tags.map(tag => ({
+									value: tag.id,
+									label: tag.name,
+									colorBg: tag.colorBg,
+									colorText: tag.colorText,
+								}))}
+								onCreateOption={async (
+									name,
+									colorBg,
+									colorText,
+								) => {
+									const {
+										data: {createTag: tag},
+									} = await createTag({
+										variables: {
+											name,
+											colorBg,
+											colorText,
+										},
+									});
+
+									updateItem({
+										variables: {
+											itemId: item.id,
+											tags: [
+												...item.tags.map(i => i.id),
+												tag.id,
+											],
+										},
+									});
+								}}
+								onChange={(tags) => {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											tags: tags.map(({value}) => value),
+										},
+									});
+								}}
+							/>
+						</Meta>
+					</Tooltip>
 				)}
 			</Metas>
 			{(!customerToken || description) && (
-				<Description data-tip="Description de la tâche">
-					<MultilineEditable
-						disabled={!!customerToken}
-						placeholder="Ajouter une description…"
-						style={{padding: '1rem 4rem'}}
-						onBlur={e => updateItem({
-							variables: {
-								itemId: id,
-								token: customerToken,
-								description: e.target.innerText.concat(
-									files.length > 0
-										? `\n# content-acquisition-list\n${files
-											.map(
-												({checked, name}) => `- [${
-													checked
-														? 'x'
-														: ' '
-												}] ${name}`,
-											)
-											.join('\n')}`
-										: '',
-								),
-							},
-						})
-						}
-						defaultValue={description}
-					/>
-				</Description>
+				<Tooltip label="Description de la tâche">
+					<Description>
+						<MultilineEditable
+							disabled={!!customerToken}
+							placeholder="Ajouter une description…"
+							style={{padding: '1rem 4rem'}}
+							onBlur={e => updateItem({
+								variables: {
+									itemId: id,
+									token: customerToken,
+									description: e.target.innerText.concat(
+										files.length > 0
+											? `\n# content-acquisition-list\n${files
+												.map(
+													({checked, name}) => `- [${
+														checked
+															? 'x'
+															: ' '
+													}] ${name}`,
+												)
+												.join('\n')}`
+											: '',
+									),
+								},
+							})
+							}
+							defaultValue={description}
+						/>
+					</Description>
+				</Tooltip>
 			)}
 			{!customerToken
 				&& customerTask

@@ -4,9 +4,10 @@ import {Route} from 'react-router-dom';
 
 import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
+import Tooltip from '../../../components/Tooltip';
 import CustomerTasks from './tasks';
 
-import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
+import {BREAKPOINTS} from '../../../utils/constants';
 import {
 	P,
 	A,
@@ -87,14 +88,11 @@ const Tasks = ({location, match}) => {
 					Les tâches <Red>rouges</Red> sont celles dont vous êtes
 					responsable.
 				</div>
-				<A
-					noHover
-					data-tip="À quoi sert cette plateforme ?"
-					target="_blank"
-					href="https://inyo.pro"
-				>
-					<Help>?</Help>
-				</A>
+				<Tooltip label="À quoi sert cette plateforme ?">
+					<A noHover target="_blank" href="https://inyo.pro">
+						<Help>?</Help>
+					</A>
+				</Tooltip>
 			</WelcomeMessage>
 
 			<CustomerTasks projectId={projectId} location={location} />

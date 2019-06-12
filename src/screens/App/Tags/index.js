@@ -6,7 +6,7 @@ import TagListForm from '../../../components/TagListForm';
 import TasksList from '../Tasks/tasks-lists';
 
 import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
-import {Button, SubHeading} from '../../../utils/new/design-system';
+import {SubHeading} from '../../../utils/new/design-system';
 
 const ProjectMain = styled('div')`
 	min-height: 100vh;

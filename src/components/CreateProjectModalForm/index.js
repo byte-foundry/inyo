@@ -4,13 +4,14 @@ import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
 import {useQuery} from 'react-apollo-hooks';
 
+import Tooltip from '../Tooltip';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
 import FormRadiosList from '../FormRadiosList';
 import DateInput from '../DateInput';
 import IconButton from '../../utils/new/components/IconButton';
 
-import {GET_ALL_PROJECTS, GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {templates} from '../../utils/project-templates';
 import {
 	Button,
@@ -96,7 +97,7 @@ export default function ({
 	...props
 }) {
 	const [editDeadline, setEditDeadline] = useState(false);
-	const {loading: loadingCustomers, data: dataCustomers, error} = useQuery(
+	const {loading: loadingCustomers, data: dataCustomers} = useQuery(
 		GET_ALL_CUSTOMERS,
 		{
 			suspend: true,
@@ -259,15 +260,16 @@ export default function ({
 					<InputLabel>
 						<Label>Deadline</Label>
 						<DateContainer>
-							<BigNumber
-								data-tip="Date limite du projet"
-								onClick={() => setEditDeadline(true)}
-							>
-								{(props.values.deadline
-									&& moment(props.values.deadline).format(
-										'DD/MM/YYYY',
-									)) || <>&mdash;</>}
-							</BigNumber>
+							<Tooltip label="Date limite du projet">
+								<BigNumber
+									onClick={() => setEditDeadline(true)}
+								>
+									{(props.values.deadline
+										&& moment(props.values.deadline).format(
+											'DD/MM/YYYY',
+										)) || <>&mdash;</>}
+								</BigNumber>
+							</Tooltip>
 							{addDeadline && editDeadline && (
 								<DateInput
 									innerRef={dateRef}

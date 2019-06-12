@@ -87,7 +87,7 @@ function CreateTagForm({tags}) {
 			}}
 		>
 			{(props) => {
-				const {isSubmitting, status, handleSubmit} = props;
+				const {isSubmitting, handleSubmit} = props;
 
 				return (
 					<form onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled/macro';
 
-import {accentGrey, HR} from '../../utils/new/design-system';
+import {accentGrey} from '../../utils/new/design-system';
 
 const SubjectAndToElem = styled('div')`
 	display: flex;

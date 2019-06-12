@@ -15,6 +15,7 @@ import {
 } from '../../utils/new/design-system';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import {CANCEL_REMINDER} from '../../utils/mutations';
+import Tooltip from '../Tooltip';
 
 const ReminderList = styled('div')`
 	margin-bottom: 2rem;
@@ -112,36 +113,38 @@ function TaskRemindersList({
 							&& reminder.item.linkedCustomer.name,
 					);
 
-					const dataTipProps = {};
-
-					if (!noLink) {
-						dataTipProps['data-tip'] = `Ouvrir la tâche "${
-							reminder.item.name
-						}"`;
-					}
+					const reminderText = (
+						<ReminderText
+							withLink={baseUrl}
+							onClick={() => !noLink
+								&& history.push(`${baseUrl}/${reminder.item.id}`)
+							}
+							small={small}
+							canceled={reminder.status === 'CANCELED'}
+							done={reminder.status === 'SENT'}
+							noLink={noLink}
+						>
+							{text}
+						</ReminderText>
+					);
 
 					return (
 						<ReminderContainer>
-							<ReminderText
-								withLink={baseUrl}
-								onClick={() => !noLink
-									&& history.push(
-										`${baseUrl}/${reminder.item.id}`,
-									)
-								}
-								small={small}
-								canceled={reminder.status === 'CANCELED'}
-								done={reminder.status === 'SENT'}
-								{...dataTipProps}
-								noLink={noLink}
-							>
-								{text}
-							</ReminderText>
+							{noLink ? (
+								reminderText
+							) : (
+								<Tooltip
+									label={`Ouvrir la tâche "${
+										reminder.item.name
+									}"`}
+								>
+									{reminderText}
+								</Tooltip>
+							)}
 							<ReminderLine />
 							<ReminderActions>
-								<ReminderDate
-									small={small}
-									data-tip={
+								<Tooltip
+									label={
 										reminder.status === 'CANCELED'
 											? undefined
 											: moment(
@@ -149,37 +152,43 @@ function TaskRemindersList({
 											  ).format('DD/MM/YYYY [à] HH:mm')
 									}
 								>
-									{reminder.status === 'PENDING'
-										&& moment(reminder.sendingDate).fromNow()}
-									{reminder.status === 'CANCELED' && 'Annulé'}
-									{reminder.status === 'SENT' && 'Envoyé'}
-								</ReminderDate>
+									<ReminderDate small={small || undefined}>
+										{reminder.status === 'PENDING'
+											&& moment(
+												reminder.sendingDate,
+											).fromNow()}
+										{reminder.status === 'CANCELED'
+											&& 'Annulé'}
+										{reminder.status === 'SENT' && 'Envoyé'}
+									</ReminderDate>
+								</Tooltip>
 								{reminder.status === 'PENDING' && (
-									<div
-										noLink={noLink}
-										canceled={
-											reminder.status === 'CANCELED'
-										}
-										data-tip="Supprimer cette action automatique"
-									>
-										<Button
-											link
-											small
-											onClick={() => {
-												cancelReminder({
-													variables: {
-														id: reminder.id,
-													},
-												});
-											}}
+									<Tooltip label="Supprimer cette action automatique">
+										<div
+											noLink={noLink}
+											canceled={
+												reminder.status === 'CANCELED'
+											}
 										>
-											<IconButton
-												icon="cancel"
-												size="tiny"
-												danger
-											/>
-										</Button>
-									</div>
+											<Button
+												link
+												small
+												onClick={() => {
+													cancelReminder({
+														variables: {
+															id: reminder.id,
+														},
+													});
+												}}
+											>
+												<IconButton
+													icon="cancel"
+													size="tiny"
+													danger
+												/>
+											</Button>
+										</div>
+									</Tooltip>
 								)}
 								{noLink && reminder.status === 'PENDING' && (
 									<ReminderTestEmailButton

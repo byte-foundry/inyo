@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import styled from '@emotion/styled/macro';
 import {withRouter} from 'react-router-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
-import ReactTooltip from 'react-tooltip';
 
 import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
@@ -13,7 +12,6 @@ import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
 import IllusBackground from '../../../utils/images/empty-project-background.svg';
 import IllusFigure from '../../../utils/images/empty-project-illus.svg';
 
-import {TOOLTIP_DELAY} from '../../../utils/constants';
 import {onboardingTemplate} from '../../../utils/project-templates';
 
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
@@ -47,6 +45,7 @@ import {
 	IllusTextIcon,
 	Help,
 } from '../../../utils/new/design-system';
+import Tooltip from '../../../components/Tooltip';
 
 const ProjectTitle = styled(SubHeading)`
 	color: ${primaryGrey};
@@ -194,15 +193,16 @@ function Projects({history}) {
 
 	return (
 		<Container>
-			<Help
-				id="help-button"
-				customerToken
-				data-tip="Instructions pour utiliser l'interface"
-				onClick={() => history.push('/app/tasks?openHelpModal=true')}
-			>
-				?
-			</Help>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
+			<Tooltip label="Instructions pour utiliser l'interface">
+				<Help
+					id="help-button"
+					customerToken
+					onClick={() => history.push('/app/tasks?openHelpModal=true')
+					}
+				>
+					?
+				</Help>
+			</Tooltip>
 			<Main>
 				<Content
 					small={
@@ -373,39 +373,45 @@ function Projects({history}) {
 											{project.name}
 										</ProjectTitle>
 										<ActionsIconContainer>
-											<TrashButton
-												onClick={(e) => {
-													e.stopPropagation();
-													setRemoveProjectModal(true);
-													setProjectId(project.id);
-												}}
-												data-tip="Supprimer ce projet"
-												link
-											>
-												<IconButton
-													icon="delete_forever"
-													size="tiny"
-													danger
-												/>
-											</TrashButton>
-											<ArchiveButton
-												link
-												onClick={(e) => {
-													e.stopPropagation();
-													archiveProject({
-														variables: {
-															projectId:
-																project.id,
-														},
-													});
-												}}
-												data-tip="Archiver ce projet"
-											>
-												<IconButton
-													icon="archive"
-													size="tiny"
-												/>
-											</ArchiveButton>
+											<Tooltip label="Supprimer ce projet">
+												<TrashButton
+													onClick={(e) => {
+														e.stopPropagation();
+														setRemoveProjectModal(
+															true,
+														);
+														setProjectId(
+															project.id,
+														);
+													}}
+													link
+												>
+													<IconButton
+														icon="delete_forever"
+														size="tiny"
+														danger
+													/>
+												</TrashButton>
+											</Tooltip>
+											<Tooltip label="Archiver ce projet">
+												<ArchiveButton
+													link
+													onClick={(e) => {
+														e.stopPropagation();
+														archiveProject({
+															variables: {
+																projectId:
+																	project.id,
+															},
+														});
+													}}
+												>
+													<IconButton
+														icon="archive"
+														size="tiny"
+													/>
+												</ArchiveButton>
+											</Tooltip>
 										</ActionsIconContainer>
 									</ProjectHeader>
 									<TasksProgressBar project={project} />
@@ -435,6 +441,7 @@ function Projects({history}) {
 									{archivedProject.length === 0 && (
 										<EmptyProjectList>
 											<img
+												alt=""
 												src={noArchivedIllus}
 												height="300px"
 											/>
@@ -461,43 +468,47 @@ function Projects({history}) {
 													{project.name}
 												</ProjectTitle>
 												<ActionsIconContainer>
-													<TrashButton
-														link
-														onClick={(e) => {
-															e.stopPropagation();
-															setRemoveProjectModal(
-																true,
-															);
-															setProjectId(
-																project.id,
-															);
-														}}
-														data-tip="Supprimer ce projet"
-													>
-														<IconButton
-															icon="delete_forever"
-															size="tiny"
-															danger
-														/>
-													</TrashButton>
-													<ArchiveButton
-														link
-														onClick={(e) => {
-															e.stopPropagation();
-															unarchiveProject({
-																variables: {
-																	projectId:
-																		project.id,
-																},
-															});
-														}}
-														data-tip="Désarchiver ce projet"
-													>
-														<IconButton
-															icon="unarchive"
-															size="tiny"
-														/>
-													</ArchiveButton>
+													<Tooltip label="Supprimer ce projet">
+														<TrashButton
+															link
+															onClick={(e) => {
+																e.stopPropagation();
+																setRemoveProjectModal(
+																	true,
+																);
+																setProjectId(
+																	project.id,
+																);
+															}}
+														>
+															<IconButton
+																icon="delete_forever"
+																size="tiny"
+																danger
+															/>
+														</TrashButton>
+													</Tooltip>
+													<Tooltip label="Désarchiver ce projet">
+														<ArchiveButton
+															link
+															onClick={(e) => {
+																e.stopPropagation();
+																unarchiveProject(
+																	{
+																		variables: {
+																			projectId:
+																				project.id,
+																		},
+																	},
+																);
+															}}
+														>
+															<IconButton
+																icon="unarchive"
+																size="tiny"
+															/>
+														</ArchiveButton>
+													</Tooltip>
 												</ActionsIconContainer>
 											</ProjectHeader>
 											<TasksProgressBar

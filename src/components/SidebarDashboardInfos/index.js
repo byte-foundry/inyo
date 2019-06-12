@@ -80,7 +80,6 @@ const SidebarDashboardInfos = () => {
 	const {
 		loading: loadingUser,
 		data: {me},
-		error: errorUser,
 	} = useQuery(GET_USER_INFOS);
 
 	const reminders
@@ -112,7 +111,7 @@ const SidebarDashboardInfos = () => {
 						/>
 					) : (
 						<NoReminders>
-							<img src={noRemindersIllus} />
+							<img alt="" src={noRemindersIllus} />
 							Aucune tâches client n’ont été activées pour le
 							moment
 						</NoReminders>

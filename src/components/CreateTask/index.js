@@ -9,12 +9,7 @@ import CreateProjectModal from '../CreateProjectModal';
 
 import {isCustomerTask} from '../../utils/functions';
 import {P} from '../../utils/new/design-system';
-import {
-	ADD_ITEM,
-	CREATE_PROJECT,
-	ADD_SECTION,
-	UPDATE_PROJECT,
-} from '../../utils/mutations';
+import {ADD_ITEM, ADD_SECTION, UPDATE_PROJECT} from '../../utils/mutations';
 import {GET_PROJECT_DATA} from '../../utils/queries';
 
 const TaskInputContainer = styled('div')`
@@ -23,11 +18,10 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = ({setProjectSelected, currentProjectId}) => {
+const CreateTask = ({currentProjectId}) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const createTask = useMutation(ADD_ITEM);
-	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
 	const updateProject = useMutation(UPDATE_PROJECT);
 	const [confirmModal, askConfirmationNotification] = useConfirmation();

@@ -7,7 +7,6 @@ import {
 	Label,
 	primaryPurple,
 	primaryWhite,
-	mediumPurple,
 } from '../../utils/new/design-system';
 
 const FormRadiosMain = styled(InputLabel)``;

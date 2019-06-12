@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Tasks from './tasks';
 import CreateTask from '../../../components/CreateTask';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
+import Tooltip from '../../../components/Tooltip';
 
 import {
 	Main, Container, Content, Help,
@@ -32,14 +33,16 @@ function Dashboard({history}) {
 
 	return (
 		<Container>
-			<Help
-				customerToken
-				data-tip="Instructions pour utiliser l'interface"
-				onClick={() => history.push('/app/tasks?openHelpModal=true')}
-				id="help-button"
-			>
-				?
-			</Help>
+			<Tooltip label="Instructions pour utiliser l'interface">
+				<Help
+					customerToken
+					onClick={() => history.push('/app/tasks?openHelpModal=true')
+					}
+					id="help-button"
+				>
+					?
+				</Help>
+			</Tooltip>
 			<Main>
 				<Content>
 					<CreateTask setProjectSelected={setProjectSelected} />

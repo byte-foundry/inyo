@@ -55,6 +55,8 @@
     "react-beautiful-dnd": "^10.0.3",
     "react-dates": "^19.0.3",
     "react-day-picker": "^7.2.4",
+    "react-dnd": "^7.4.5",
+    "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "^16.8.1",
     "react-ga": "^2.5.3",
     "react-router": "^5.0.0",

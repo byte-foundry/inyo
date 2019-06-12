@@ -20,7 +20,8 @@ import {BREAKPOINTS} from '../../utils/constants';
 
 const ArianneContainer = styled('div')`
 	display: flex;
-	margin-bottom: 60px;
+	${props => props.marginBottom && 'margin-bottom: 2rem;'}
+	${props => props.marginTop && 'margin-top: 2rem;'}
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
 		margin-bottom: 1rem;
@@ -255,6 +256,8 @@ function ArianneThread({
 	tagsSelected = '',
 	history,
 	location,
+	marginTop,
+	marginBottom,
 }) {
 	const {
 		data: {
@@ -294,7 +297,7 @@ function ArianneThread({
 	if (errorsCustomers) throw errorsCustomers;
 
 	return (
-		<ArianneContainer>
+		<ArianneContainer marginBottom={marginBottom} marginTop={marginTop}>
 			<ArianneElem
 				id="clients"
 				list={customers}

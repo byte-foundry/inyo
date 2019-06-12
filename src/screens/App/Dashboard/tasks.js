@@ -1,4 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {
+	useState, useEffect, useRef, useCallback,
+} from 'react';
 import ReactDOM from 'react-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
@@ -188,22 +190,25 @@ const DashboardTasks = ({location, history}) => {
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
-	const onMoveTask = useRef(({task, scheduledFor, position}) => {
-		focusTask({
-			variables: {
-				itemId: task.id,
-				for: scheduledFor,
-				schedulePosition: position,
-			},
-			optimisticReponse: {
-				focusTask: {
+	const onMoveTask = useCallback(
+		({task, scheduledFor, position}) => {
+			focusTask({
+				variables: {
 					itemId: task.id,
 					for: scheduledFor,
 					schedulePosition: position,
 				},
-			},
-		});
-	});
+				optimisticReponse: {
+					focusTask: {
+						itemId: task.id,
+						for: scheduledFor,
+						schedulePosition: position,
+					},
+				},
+			});
+		},
+		[focusTask],
+	);
 
 	return (
 		<>

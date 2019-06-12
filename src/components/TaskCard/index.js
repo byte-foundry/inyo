@@ -11,6 +11,7 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryRed,
+	DragSeparator,
 } from '../../utils/new/design-system';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
@@ -36,14 +37,6 @@ const CardTitle = styled('span')`
 
 const CardSubTitle = styled('span')`
 	color: ${primaryGrey};
-`;
-
-const Separator = styled('div')`
-	position: absolute;
-	height: 3px;
-	width: 100%;
-	top: -5px;
-	background: ${primaryPurple};
 `;
 
 const TaskCard = withRouter(
@@ -72,7 +65,7 @@ const TaskCard = withRouter(
 				})
 				}
 			>
-				{isOver && <Separator />}
+				{isOver && <DragSeparator />}
 				{!isCustomerTask(task.type) && (
 					<IconButton
 						current={task.status === 'FINISHED'}

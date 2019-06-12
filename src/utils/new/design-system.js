@@ -717,3 +717,11 @@ export const BackButton = styled(Button)`
 		margin-right: 10px;
 	}
 `;
+
+export const DragSeparator = styled('div')`
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	top: -5px;
+	background: ${primaryPurple};
+`;

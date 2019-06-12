@@ -4,11 +4,12 @@ import styled from '@emotion/styled/macro';
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
+import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
 
 import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 
-import {BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import {
@@ -23,6 +24,7 @@ import {
 	Button,
 	SubHeading,
 	P,
+	DragSeparator,
 } from '../../utils/new/design-system';
 import {ModalContainer, ModalElem, ModalActions} from '../../utils/content';
 import {
@@ -35,6 +37,8 @@ import InlineEditable from '../InlineEditable';
 import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import IconButton from '../../utils/new/components/IconButton';
+
+const {useDrop, useDrag} = dnd;
 
 const TasksListContainer = styled(LayoutMainElem)``;
 
@@ -265,87 +269,122 @@ const Heading = styled(SubHeading)`
 	margin-bottom: 3rem;
 `;
 
-const DraggableTask = ({task, index, ...rest}) => (
-	<Draggable key={task.id} draggableId={task.id} index={index} type="ITEM">
-		{provided => (
-			<div
-				className="task"
-				ref={provided.innerRef}
-				{...provided.draggableProps}
-				{...provided.dragHandleProps}
-				onMouseDown={e => provided.dragHandleProps
-					&& provided.dragHandleProps.onMouseDown(e)
-				}
-				style={{
-					// some basic styles to make the tasks look a bit nicer
-					userSelect: 'none',
+const DraggableTask = ({
+	task, position, sections, ...rest
+}) => {
+	const updateTask = useMutation(UPDATE_ITEM);
+	const [_, drag] = useDrag({
+		item: {id: task.id, position, type: DRAG_TYPES.TASK},
+		begin() {
+			return {
+				id: task.id,
+				position,
+				sectionId: task.section.id,
+			};
+		},
+		async end({sectionId}, monitor) {
+			const {
+				position: endPosition,
+				sectionId: endSectionId,
+			} = monitor.getDropResult();
 
-					// styles we need to apply on draggables
-					...provided.draggableProps.style,
-				}}
-			>
-				<Task item={task} key={task.id} {...rest} isDraggable />
-			</div>
-		)}
-	</Draggable>
-);
+			await updateTask({
+				variables: {
+					itemId: task.id,
+					sectionId: endSectionId,
+					position: endPosition,
+				},
+				optimisticResponse: {
+					updateItem: {
+						...sections.find(section => section.id === sectionId)
+							.items[position],
+						position: endPosition,
+						section: sections.find(
+							section => section.id === endSectionId,
+						),
+					},
+				},
+				update: () => {},
+			});
+		},
+	});
 
-const DroppableTaskArea = ({children, section}) => (
-	<Droppable droppableId={section.id} type="ITEM" direction="vertical">
-		{(provided, snapshot) => (
-			<div
-				style={{minHeight: '50px'}}
-				ref={provided.innerRef}
-				{...provided.droppableProps}
-			>
-				{children}
-				{snapshot.draggingFromThisWith && provided.placeholder}
-			</div>
-		)}
-	</Droppable>
-);
+	const [{isOver}, drop] = useDrop({
+		accept: DRAG_TYPES.TASK,
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop() {
+			return {position, sectionId: task.section.id};
+		},
+	});
 
-const DroppableSectionArea = ({children}) => (
-	<Droppable droppableId="sections" type="SECTION" direction="vertical">
-		{provided => (
-			<div
-				style={{minHeight: '50px'}}
-				ref={provided.innerRef}
-				{...provided.droppableProps}
-			>
-				{children}
-				{provided.placeholder}
-			</div>
-		)}
-	</Droppable>
-);
+	return (
+		<div
+			className="task"
+			ref={(node) => {
+				drag(node);
+				drop(node);
+			}}
+			style={{
+				// some basic styles to make the tasks look a bit nicer
+				userSelect: 'none',
+				position: 'relative',
+			}}
+		>
+			{isOver && <DragSeparator />}
+			<Task item={task} key={task.id} {...rest} isDraggable />
+		</div>
+	);
+};
 
-const DraggableSection = ({children, section, index}) => (
-	<Draggable
-		key={section.id}
-		draggableId={section.id}
-		index={index}
-		type="SECTION"
-	>
-		{(provided, snapshot) => (
-			<SectionDraggable
-				ref={provided.innerRef}
-				isDragging={snapshot.isDragging}
-				{...provided.draggableProps}
-				{...provided.dragHandleProps}
-				style={{
-					// some basic styles to make the items look a bit nicer
-					userSelect: 'none',
+const DraggableSection = ({children, section, position}) => {
+	const [_, drag] = useDrag({
+		item: {id: section.id, position, type: DRAG_TYPES.SECTION},
+		begin() {
+			return {
+				id: section.id,
+				position,
+			};
+		},
+		end(item, monitor) {
+			const {position: endPosition} = monitor.getDropResult();
 
-					// styles we need to apply on draggables
-					...provided.draggableProps.style,
-				}}
-			>
-				{children}
-			</SectionDraggable>
-		)}
-	</Draggable>
-);
+			console.log('Start pos: ', position);
+			console.log('End pos: ', endPosition);
+		},
+	});
+
+	const [{isOver}, drop] = useDrop({
+		accept: DRAG_TYPES.SECTION,
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop() {
+			return {position};
+		},
+	});
+
+	return (
+		<SectionDraggable
+			ref={(node) => {
+				drag(node);
+				drop(node);
+			}}
+			style={{
+				// some basic styles to make the items look a bit nicer
+				userSelect: 'none',
+			}}
+		>
+			{isOver && <DragSeparator />}
+			{children}
+		</SectionDraggable>
+	);
+};
 
 function ProjectTasksList({items, projectId, sectionId}) {
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
@@ -353,7 +392,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 		suspend: true,
 	});
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
-	const updateTask = useMutation(UPDATE_ITEM);
 	const removeSection = useMutation(REMOVE_SECTION, {
 		optimisticResponse: {
 			removeSection: {
@@ -435,6 +473,98 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 	return (
 		<TasksListContainer>
+			{sections.map(section => (
+				<DraggableSection
+					section={section}
+					key={section.id}
+					position={section.position}
+				>
+					<SectionTitle
+						onClickTrash={() => setRemoveSectionModalOpen(section)}
+						placeholder="Nom de la section"
+						value={section.name}
+						missingTitle={section.name === ''}
+						placeholderCss={placeholderCss}
+						nameCss={nameCss}
+						editableCss={editableCss}
+						onFocusOut={(value) => {
+							if (value) {
+								updateSection({
+									variables: {
+										sectionId: section.id,
+										name: value,
+									},
+								});
+							}
+						}}
+					/>
+					{section.items.map(task => (
+						<DraggableTask
+							position={task.position}
+							task={task}
+							key={task.id}
+							projectId={projectId}
+							sectionId={sectionId}
+						/>
+					))}
+				</DraggableSection>
+			))}
+			{removeSectionModalOpen && (
+				<ModalContainer
+					onDismiss={() => setRemoveSectionModalOpen(false)}
+				>
+					<ModalElem>
+						<Heading>
+							Êtes-vous sûr de vouloir supprimer cette section ?
+						</Heading>
+						<P>
+							Vous allez supprimer la section "
+							{removeSectionModalOpen.name}", en supprimant cette
+							section vous allez supprimer les tâches suivantes:
+						</P>
+						<DisableTask>
+							{removeSectionModalOpen.items.map(task => (
+								<Task item={task} key={task.id} noData />
+							))}
+						</DisableTask>
+						<P>
+							Vous pouvez glisser/déposer ses tâches dans une
+							autre section pour ne pas qu'elles soient
+							supprimées.
+						</P>
+						<ModalActions>
+							<Button
+								link
+								grey
+								onClick={() => setRemoveSectionModalOpen(false)}
+							>
+								Annuler
+							</Button>
+							<Button
+								big
+								red
+								onClick={async () => {
+									await removeSection({
+										variables: {
+											sectionId:
+												removeSectionModalOpen.id,
+										},
+									});
+									setRemoveSectionModalOpen(false);
+								}}
+							>
+								Supprimer
+							</Button>
+						</ModalActions>
+					</ModalElem>
+				</ModalContainer>
+			)}
+		</TasksListContainer>
+	);
+}
+
+export default ProjectTasksList;
+/*
 			<DragDropContext
 				onDragEnd={async (result) => {
 					// dropped outside the list
@@ -679,100 +809,4 @@ function ProjectTasksList({items, projectId, sectionId}) {
 					}
 				}}
 			>
-				<DroppableSectionArea>
-					{sections.map((section, sectionIndex) => (
-						<DraggableSection
-							section={section}
-							key={section.id}
-							index={sectionIndex}
-						>
-							<SectionTitle
-								onClickTrash={() => setRemoveSectionModalOpen(section)
-								}
-								placeholder="Nom de la section"
-								value={section.name}
-								missingTitle={section.name === ''}
-								placeholderCss={placeholderCss}
-								nameCss={nameCss}
-								editableCss={editableCss}
-								onFocusOut={(value) => {
-									if (value) {
-										updateSection({
-											variables: {
-												sectionId: section.id,
-												name: value,
-											},
-										});
-									}
-								}}
-							/>
-							<DroppableTaskArea section={section}>
-								{section.items.map((task, itemIndex) => (
-									<DraggableTask
-										index={itemIndex}
-										task={task}
-										key={task.id}
-										projectId={projectId}
-										sectionId={sectionId}
-									/>
-								))}
-							</DroppableTaskArea>
-						</DraggableSection>
-					))}
-				</DroppableSectionArea>
-			</DragDropContext>
-			{removeSectionModalOpen && (
-				<ModalContainer
-					onDismiss={() => setRemoveSectionModalOpen(false)}
-				>
-					<ModalElem>
-						<Heading>
-							Êtes-vous sûr de vouloir supprimer cette section ?
-						</Heading>
-						<P>
-							Vous allez supprimer la section "
-							{removeSectionModalOpen.name}", en supprimant cette
-							section vous allez supprimer les tâches suivantes:
-						</P>
-						<DisableTask>
-							{removeSectionModalOpen.items.map(task => (
-								<Task item={task} key={task.id} noData />
-							))}
-						</DisableTask>
-						<P>
-							Vous pouvez glisser/déposer ses tâches dans une
-							autre section pour ne pas qu'elles soient
-							supprimées.
-						</P>
-						<ModalActions>
-							<Button
-								link
-								grey
-								onClick={() => setRemoveSectionModalOpen(false)}
-							>
-								Annuler
-							</Button>
-							<Button
-								big
-								red
-								onClick={async () => {
-									await removeSection({
-										variables: {
-											sectionId:
-												removeSectionModalOpen.id,
-										},
-									});
-									setRemoveSectionModalOpen(false);
-								}}
-							>
-								Supprimer
-							</Button>
-						</ModalActions>
-					</ModalElem>
-				</ModalContainer>
-			)}
-		</TasksListContainer>
-	);
-}
-
-export default ProjectTasksList;
+			*/

@@ -247,12 +247,13 @@ const DashboardTasks = ({location, history}) => {
 			/>
 			<Route
 				path="/app/dashboard/:taskId"
-				render={({match, history}) => (
+				render={({match, history, location: {state = {}}}) => (
 					<Modal onDismiss={() => history.push('/app/dashboard')}>
 						<ModalElem>
 							<TaskView
 								id={match.params.taskId}
 								close={() => history.push('/app/dashboard')}
+								isActivating={state.isActivating}
 							/>
 						</ModalElem>
 					</Modal>

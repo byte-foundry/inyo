@@ -270,13 +270,18 @@ const FlexRowButtons = styled(FlexRow)`
 	}
 `;
 
-const Item = ({id, customerToken, close}) => {
+const Item = ({
+	id,
+	customerToken,
+	close,
+	isActivating: initialIsActivating = false,
+}) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [editUnit, setEditUnit] = useState(false);
 	const [editProject, setEditProject] = useState(false);
 	const [deletingItem, setDeletingItem] = useState(false);
-	const [isActivating, setIsActivating] = useState(false);
+	const [isActivating, setIsActivating] = useState(initialIsActivating);
 	const dateRef = useRef();
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {

@@ -32,6 +32,7 @@ class Tasks extends Component {
 												|| ''}`,
 									)
 									}
+									isActivating={state.isActivating}
 								/>
 							</ModalElem>
 						</Modal>

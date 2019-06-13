@@ -55,7 +55,7 @@ const DayElem = styled('div')`
 			? mediumGrey
 			: primaryWhite
 		: primaryPurple)};
-	border: solid 1px ${primaryWhite};
+	border: solid 2px ${primaryWhite};
 	position: relative;
 `;
 

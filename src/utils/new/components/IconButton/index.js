@@ -12,6 +12,9 @@ import {
 
 const IconWrap = styled('div')`
   width: ${(props) => {
+		if (props.size === 'micro') {
+			return '1.2rem';
+		}
 		if (props.size === 'tiny') {
 			return '1.75rem';
 		}
@@ -28,6 +31,9 @@ const IconWrap = styled('div')`
 	}};
 
   height: ${(props) => {
+		if (props.size === 'micro') {
+			return '1.2rem';
+		}
 		if (props.size === 'tiny') {
 			return '1.75rem';
 		}
@@ -45,6 +51,9 @@ const IconWrap = styled('div')`
 
 	i {
 		width: ${(props) => {
+		if (props.size === 'micro') {
+			return '12px';
+		}
 		if (props.size === 'tiny') {
 			return '18px';
 		}

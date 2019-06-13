@@ -32,17 +32,32 @@ const Week = styled('div')`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
+	border: 1px solid ${mediumGrey};
 `;
 
 const Day = styled('div')`
 	color: ${accentGrey};
-	border: 2px solid ${mediumGrey};
-	border-radius: 3px;
 	padding: 0 5px;
 	flex: 1;
-	margin: 0 -1px;
+	margin: 0;
 	display: flex;
 	flex-flow: column;
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		right: -1px;
+		top: 10px;
+		bottom: 10px;
+		border-right: 1px solid ${mediumGrey};
+	}
+
+	&:last-child {
+		&:after {
+			display: none;
+		}
+	}
 
 	${props => props.isOff
 		&& `
@@ -56,15 +71,16 @@ const DayTitle = styled('span')`
 	text-transform: uppercase;
 	font-size: 0.75rem;
 	display: block;
-	padding: 0.3rem 0;
+	margin-bottom: 0.5rem;
 	text-align: center;
-	margin: 0.2rem 2rem 0.5rem;
+	margin: 0.4rem 3rem;
 	border-radius: 4px;
 
 	${props => props.selected
 		&& `
 		color: ${primaryWhite};
 		background: ${primaryPurple};
+		font-weight: 500;
 	`}
 `;
 

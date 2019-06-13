@@ -136,6 +136,7 @@ export const Button = styled('button')`
 
 	border-color: currentColor;
 	display: flex;
+	flex-shrink: 0;
   align-items: center;
 	justify-content: center;
 
@@ -253,7 +254,7 @@ export const TaskHeading = styled('h2')`
 	line-height: 1.5;
 	font-weight: 400;
 	flex: 1 0
-		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 168px)')};
+		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 218px)')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 14px;

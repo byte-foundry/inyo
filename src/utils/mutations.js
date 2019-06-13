@@ -36,12 +36,14 @@ export const SIGNUP = gql`
 		$password: String!
 		$firstName: String!
 		$lastName: String!
+		$referrer: String
 	) {
 		signup(
 			email: $email
 			password: $password
 			firstName: $firstName
 			lastName: $lastName
+			referrer: $referrer
 		) {
 			token
 			user {

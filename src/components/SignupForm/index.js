@@ -66,12 +66,16 @@ const SignupForm = ({from, history, location}) => {
 				})}
 				onSubmit={async (values, actions) => {
 					try {
+						const query = new URLSearchParams(location.search);
+						const referrer = query.get('referral');
+
 						const {data} = await signup({
 							variables: {
 								email: values.email,
 								password: values.password,
 								firstName: values.firstname,
 								lastName: values.lastname,
+								referrer,
 							},
 						});
 
@@ -87,8 +91,6 @@ const SignupForm = ({from, history, location}) => {
 
 							const {user} = data.signup;
 
-							const query = new URLSearchParams(location.search);
-
 							window.Intercom('boot', {
 								app_id: INTERCOM_APP_ID,
 								email: user.email,
@@ -96,7 +98,7 @@ const SignupForm = ({from, history, location}) => {
 								name: `${user.firstName} ${user.lastName}`,
 								user_hash: user.hmacIntercomId,
 								phone: user.company.phone,
-								referrer: query.get('referral'),
+								referrer,
 							});
 
 							await client.resetStore();

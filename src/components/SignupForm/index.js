@@ -193,38 +193,6 @@ const SignupForm = ({from, history, location}) => {
 								et consent à recevoir des emails de la part
 								d'Inyo.
 							</CGU>
-							<Button
-								onClick={() => {
-									const stripe = window.Stripe(
-										'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
-									);
-
-									stripe
-										.redirectToCheckout({
-											items: [
-												{
-													sku: 'sku_F9hrygxAJQuSLp',
-													quantity: 1,
-												},
-											],
-											successUrl:
-												'https://dev.inyo.me/paid',
-											cancelUrl:
-												'https://dev.inyo.me/canceled',
-											customerEmail:
-												'francois.poizat@gmail.com',
-											clientReferenceId:
-												'cjs1r01mh052a0794q3ah2o97',
-										})
-										.then((result) => {
-											if (result.error) {
-												console.log('zboub');
-											}
-										});
-								}}
-							>
-								Yo
-							</Button>
 							<SignupButton
 								type="submit"
 								isSubmitting={isSubmitting}

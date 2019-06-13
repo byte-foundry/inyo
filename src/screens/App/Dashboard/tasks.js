@@ -1,4 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {
+	useState, useEffect, useRef, useCallback,
+} from 'react';
 import ReactDOM from 'react-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
@@ -69,6 +71,35 @@ const DashboardTasks = ({location, history}) => {
 		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
+
+	useEffect(() => {
+		if (!leftBarRef.current) {
+			leftBarRef.current = document.createElement('div');
+		}
+
+		document.body.appendChild(leftBarRef.current);
+
+		return () => {
+			document.body.removeChild(leftBarRef.current);
+		};
+	});
+
+	const onMoveTask = useCallback(({task, scheduledFor, position}) => {
+		focusTask({
+			variables: {
+				itemId: task.id,
+				for: scheduledFor,
+				schedulePosition: position,
+			},
+			optimisticReponse: {
+				focusTask: {
+					itemId: task.id,
+					for: scheduledFor,
+					schedulePosition: position,
+				},
+			},
+		});
+	});
 
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
@@ -147,18 +178,6 @@ const DashboardTasks = ({location, history}) => {
 		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
-	useEffect(() => {
-		if (!leftBarRef.current) {
-			leftBarRef.current = document.createElement('div');
-		}
-
-		document.body.appendChild(leftBarRef.current);
-
-		return () => {
-			document.body.removeChild(leftBarRef.current);
-		};
-	});
-
 	tasks.forEach((task) => {
 		if (!task.scheduledFor) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
@@ -188,23 +207,6 @@ const DashboardTasks = ({location, history}) => {
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
-	const onMoveTask = useRef(({task, scheduledFor, position}) => {
-		focusTask({
-			variables: {
-				itemId: task.id,
-				for: scheduledFor,
-				schedulePosition: position,
-			},
-			optimisticReponse: {
-				focusTask: {
-					itemId: task.id,
-					for: scheduledFor,
-					schedulePosition: position,
-				},
-			},
-		});
-	});
-
 	return (
 		<>
 			{loadingUserPrefs ? (
@@ -214,7 +216,7 @@ const DashboardTasks = ({location, history}) => {
 					days={scheduledTasks}
 					workingDays={userPrefsData.me.workingDays}
 					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-					onMoveTask={onMoveTask.current}
+					onMoveTask={onMoveTask}
 				/>
 			)}
 
@@ -262,7 +264,7 @@ const DashboardTasks = ({location, history}) => {
 						isDragging={isDragging}
 						days={scheduledTasks}
 						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-						onMoveTask={onMoveTask.current}
+						onMoveTask={onMoveTask}
 					/>,
 					leftBarRef.current,
 				)}

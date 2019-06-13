@@ -29,6 +29,8 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 	const createTask = useMutation(ADD_ITEM);
 	const createProject = useMutation(CREATE_PROJECT);
 	const addSection = useMutation(ADD_SECTION);
+	const updateProject = useMutation(UPDATE_PROJECT);
+	const [confirmModal, askConfirmationNotification] = useConfirmation();
 	const {data: currentProjectData, loading, error} = useQuery(
 		GET_PROJECT_DATA,
 		{
@@ -40,10 +42,6 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 
 	if (loading) return false;
 	if (error) throw error;
-
-	const updateProject = useMutation(UPDATE_PROJECT);
-
-	const [confirmModal, askConfirmationNotification] = useConfirmation();
 
 	const props = {};
 

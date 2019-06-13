@@ -4,21 +4,24 @@ import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
-import {gray30} from '../content';
+import {
+	primaryPurple,
+	primaryWhite,
+	gray30,
+	primaryRed,
+	primaryGrey,
+	primaryBlack,
+	accentGrey,
+	mediumGrey,
+	lightRed,
+	lightPurple,
+	mediumPurple,
+	lightGrey,
+} from '../colors';
 import {BREAKPOINTS} from '../constants';
 import Pencil from '../icons/pencil.svg';
 
-export const primaryPurple = '#5020ee';
-export const mediumPurple = '#8f76e0';
-export const lightPurple = '#f8f8ff';
-export const primaryWhite = '#fff';
-export const primaryRed = '#ff3366';
-export const lightRed = '#fff2f5';
-export const primaryGrey = '#A9A9A9';
-export const accentGrey = '#c7c7c7';
-export const lightGrey = '#fafafa';
-export const mediumGrey = '#f1f3f4';
-export const primaryBlack = '#140642';
+export * from '../colors';
 
 const shevy = new Shevy({
 	baseFontSize: '14px',

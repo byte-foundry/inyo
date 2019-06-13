@@ -61,7 +61,7 @@
     "react-ga": "^2.5.3",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.0.4",
+    "react-scripts": "3.0.1",
     "react-select": "^2.1.0",
     "react-spring": "^8.0.19",
     "react-toastify": "^4.4.0",
@@ -90,12 +90,18 @@
     "react-test-renderer": "^16.8.6",
     "require-context.macro": "^1.0.4"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"

@@ -274,38 +274,18 @@ const DraggableTask = ({
 }) => {
 	const updateTask = useMutation(UPDATE_ITEM);
 	const [_, drag] = useDrag({
-		item: {id: task.id, position, type: DRAG_TYPES.TASK},
+		item: {
+			id: task.id,
+			position,
+			type: DRAG_TYPES.TASK,
+			sectionId: task.section.id,
+		},
 		begin() {
 			return {
 				id: task.id,
 				position,
 				sectionId: task.section.id,
 			};
-		},
-		async end({sectionId}, monitor) {
-			const {
-				position: endPosition,
-				sectionId: endSectionId,
-			} = monitor.getDropResult();
-
-			await updateTask({
-				variables: {
-					itemId: task.id,
-					sectionId: endSectionId,
-					position: endPosition,
-				},
-				optimisticResponse: {
-					updateItem: {
-						...sections.find(section => section.id === sectionId)
-							.items[position],
-						position: endPosition,
-						section: sections.find(
-							section => section.id === endSectionId,
-						),
-					},
-				},
-				update: () => {},
-			});
 		},
 	});
 
@@ -316,8 +296,146 @@ const DraggableTask = ({
 				isOver: monitor.isOver(),
 			};
 		},
-		drop() {
-			return {position, sectionId: task.section.id};
+		drop({position: startPosition, id: draggedId, sectionId}) {
+			const endPosition
+				= position > startPosition ? position - 1 : position;
+			const endSectionId = task.section.id;
+
+			updateTask({
+				variables: {
+					itemId: draggedId,
+					sectionId: endSectionId,
+					position: endPosition,
+				},
+				optimisticResponse: {
+					updateItem: {
+						...sections.find(section => section.id === sectionId)
+							.items[startPosition],
+						position: endPosition,
+						section: sections.find(
+							section => section.id === endSectionId,
+						),
+					},
+				},
+				update: (cache, {data: {updateItem}}) => {
+					const dataToUpdate = cache.readQuery({
+						query: GET_ALL_TASKS,
+					});
+					const itemsToUpdate = [updateItem];
+					const oldItemsToUpdate = [];
+					const section = sections.find(
+						sectionItem => sectionItem.id === endSectionId,
+					);
+					const oldSection = sections.find(
+						sectionItem => sectionItem.id === sectionId,
+					);
+
+					if (sectionId === endSectionId) {
+						// task is drag and drop in the same section
+						if (
+							section.items.find(
+								item => updateItem.id === item.id,
+							).position !== endPosition
+						) {
+							section.items.forEach((item) => {
+								if (
+									item.position > startPosition
+									&& item.position <= endPosition
+								) {
+									itemsToUpdate.push({
+										...item,
+										position: item.position - 1,
+									});
+								}
+								else if (
+									item.position < startPosition
+									&& item.position >= endPosition
+								) {
+									itemsToUpdate.push({
+										...item,
+										position: item.position + 1,
+									});
+								}
+							});
+
+							itemsToUpdate.forEach((itemUpdated) => {
+								const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
+									t => itemUpdated.id === t.id,
+								);
+
+								dataToUpdate.me.tasks[
+									indexTaskToUpdate
+								].position = itemUpdated.position;
+							});
+
+							cache.writeQuery({
+								query: GET_ALL_TASKS,
+								data: dataToUpdate,
+							});
+						}
+					}
+					else {
+						section.items.forEach((item) => {
+							if (item.position >= endPosition) {
+								itemsToUpdate.push({
+									...item,
+									position: item.position + 1,
+								});
+							}
+						});
+
+						oldSection.items.forEach((item) => {
+							if (item.position >= startPosition) {
+								oldItemsToUpdate.push({
+									...item,
+									position: item.position - 1,
+								});
+							}
+						});
+
+						oldSection.items.splice(position, 1);
+
+						const sectionForItem = {
+							...section,
+							items: undefined,
+						};
+
+						const oldSectionForItem = {
+							...oldSection,
+							items: undefined,
+						};
+
+						oldItemsToUpdate.forEach((itemUpdated) => {
+							const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
+								t => itemUpdated.id === t.id,
+							);
+
+							dataToUpdate.me.tasks[indexTaskToUpdate].position
+								= itemUpdated.position;
+							dataToUpdate.me.tasks[
+								indexTaskToUpdate
+							].section = oldSectionForItem;
+						});
+
+						itemsToUpdate.forEach((itemUpdated) => {
+							const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
+								t => itemUpdated.id === t.id,
+							);
+
+							dataToUpdate.me.tasks[indexTaskToUpdate].position
+								= itemUpdated.position;
+							dataToUpdate.me.tasks[
+								indexTaskToUpdate
+							].section = sectionForItem;
+						});
+
+						cache.writeQuery({
+							query: GET_ALL_TASKS,
+							data: dataToUpdate,
+						});
+					}
+				},
+			});
 		},
 	});
 
@@ -476,7 +594,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 			{sections.map(section => (
 				<DraggableSection
 					section={section}
-					key={section.id}
+					key={`${section.id}-${section.position}`}
 					position={section.position}
 				>
 					<SectionTitle
@@ -502,9 +620,10 @@ function ProjectTasksList({items, projectId, sectionId}) {
 						<DraggableTask
 							position={task.position}
 							task={task}
-							key={task.id}
+							key={`${task.id}-${task.position}`}
 							projectId={projectId}
 							sectionId={sectionId}
+							sections={sections}
 						/>
 					))}
 				</DraggableSection>

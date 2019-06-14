@@ -10,10 +10,7 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryRed,
-	primaryPurple,
 	primaryWhite,
-	lightGrey,
-	lightRed,
 	DragSeparator,
 } from '../../utils/new/design-system';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
@@ -24,6 +21,9 @@ const CardTitle = styled('span')`
 	display: block;
 	color: ${primaryBlack};
 	text-overflow: ellipsis;
+	overflow: hidden;
+
+	${props => props.hasCheckbox && 'grid-column: 1 / 3;'}
 `;
 
 const CardSubTitle = styled('span')`
@@ -42,7 +42,6 @@ const TaskCardElem = styled('div')`
 	grid-template-columns: 1fr 1.2rem;
 	cursor: pointer;
 	position: relative;
-	overflow: hidden;
 
 	transition: all 300ms ease;
 
@@ -125,11 +124,7 @@ const TaskCard = withRouter(
 						}}
 					/>
 				)}
-				<CardTitle
-					style={{
-						gridColumn: isCustomerTask(task.type) ? '1 / 3' : '',
-					}}
-				>
+				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
 					{task.name}
 				</CardTitle>
 				{task.linkedCustomer && (

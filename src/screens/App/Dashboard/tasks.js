@@ -219,7 +219,7 @@ const DashboardTasks = ({location, history}) => {
 					days={scheduledTasks}
 					workingDays={userPrefsData.me.workingDays}
 					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-					onMoveTask={onMoveTask.current}
+					onMoveTask={onMoveTask}
 				/>
 			)}
 
@@ -267,7 +267,7 @@ const DashboardTasks = ({location, history}) => {
 						isDragging={isDragging}
 						days={scheduledTasks}
 						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-						onMoveTask={onMoveTask.current}
+						onMoveTask={onMoveTask}
 					/>,
 					leftBarRef.current,
 				)}

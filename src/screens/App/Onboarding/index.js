@@ -62,7 +62,7 @@ function Onboarding() {
 
 	if (currentStep >= steps.length) {
 		window.Intercom('trackEvent', 'start-onboarding-project');
-		return <Redirect to="/app/tasks?openModal=true" />;
+		return <Redirect to="/app/tasks" />;
 	}
 
 	const CurrentOnboardingStep = steps[currentStep];

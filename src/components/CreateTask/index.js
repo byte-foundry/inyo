@@ -110,6 +110,8 @@ const CreateTask = ({setProjectSelected, currentProjectId}) => {
 					return createTask({
 						variables: {projectId: currentProjectId, ...task},
 						update: (cache, {data: {addItem: addedItem}}) => {
+							if (!currentProjectId) return;
+
 							const data = cache.readQuery({
 								query: GET_PROJECT_DATA,
 								variables: {projectId: currentProjectId},

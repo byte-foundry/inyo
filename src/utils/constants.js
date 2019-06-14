@@ -247,3 +247,18 @@ export const TAG_COLOR_PALETTE = [
 	[[158, 158, 158], [255, 255, 255]],
 	[[96, 125, 139], [255, 255, 255]],
 ];
+
+export const STRIPE_CONSTANT
+	= process.env.REACT_APP_INYO_ENV === 'production'
+		? {
+			stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
+			items: [{sku: 'sku_FF2rL7Jk5zl0C7', quantity: 1}],
+			successUrl: 'https://app.inyo.me/paid',
+			cancelUrl: 'https://app.inyo.me/canceled',
+		  }
+		: {
+			stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
+			items: [{sku: 'sku_F9hrygxAJQuSLp', quantity: 1}],
+			successUrl: 'https://dev.inyo.me/paid',
+			cancelUrl: 'https://dev.inyo.me/canceled',
+		  };

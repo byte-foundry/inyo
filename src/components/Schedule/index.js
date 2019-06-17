@@ -3,7 +3,7 @@ import {useMutation} from 'react-apollo-hooks';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from '@emotion/styled';
-import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
+import {useDrop, useDrag} from 'react-dnd';
 
 import DefaultDroppableDay from '../DefaultDroppableDay';
 
@@ -15,14 +15,12 @@ import {
 	lightGrey,
 	Button,
 } from '../../utils/new/design-system';
-import {DRAG_TYPES, WEEKDAYS} from '../../utils/constants';
+import {DRAG_TYPES} from '../../utils/constants';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import IconButton from '../../utils/new/components/IconButton';
 
 import TaskCard from '../TaskCard';
-
-const {useDrop, useDrag} = dnd;
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -182,16 +180,6 @@ const DroppableDayTasks = ({id, children}) => {
 	);
 };
 
-const PlaceholderTask = ({index, scheduledFor, onMove}) => (
-	<DefaultDroppableDay
-		index={index}
-		scheduledFor={scheduledFor}
-		onMove={onMove}
-	>
-		<DroppableSeparator />
-	</DefaultDroppableDay>
-);
-
 const Schedule = ({
 	days, workingDays, fullWeek, onMoveTask,
 }) => {
@@ -264,9 +252,7 @@ const Schedule = ({
 							<DroppableDayTasks id={day.date}>
 								{sortedTasks.map(task => (
 									<DraggableTaskCard
-										key={`${task.id}-${
-											task.schedulePosition
-										}`}
+										key={`${task.id}-${task.schedulePosition}`}
 										id={task.id}
 										task={task}
 										index={task.schedulePosition}
@@ -287,7 +273,7 @@ const Schedule = ({
 										}}
 									/>
 								))}
-								<PlaceholderTask
+								<DefaultDroppableDay
 									index={day.tasks.length}
 									scheduledFor={day.date}
 									onMove={({
@@ -304,7 +290,9 @@ const Schedule = ({
 													: sortedTasks.length,
 										});
 									}}
-								/>
+								>
+									<DroppableSeparator />
+								</DefaultDroppableDay>
 							</DroppableDayTasks>
 						</Day>
 					);

@@ -183,6 +183,9 @@ const DashboardTasks = ({location, history}) => {
 			&& (!task.section
 				|| task.section.project.status === 'ONGOING'
 				|| projectId)
+			&& (!linkedCustomerId
+				|| (task.linkedCustomer
+					&& task.linkedCustomer.id === linkedCustomerId))
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),

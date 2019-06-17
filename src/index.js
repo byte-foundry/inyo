@@ -113,7 +113,6 @@ function Root() {
 	// This is utter shit and should be removed once it works properly
 
 	const PaidWithTracker = withTracker(Paid);
-
 	const paidWithProps = useCallback(
 		routeProps => <PaidWithTracker {...routeProps} user={data} />,
 		[data],
@@ -159,6 +158,10 @@ function Root() {
 									component={withTracker(StraightToCheckout)}
 								/>
 								<Route path="/paid" component={paidWithProps} />
+								<Redirect
+									from="/canceled"
+									to="/app/dashboard"
+								/>
 								<Redirect
 									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
 									to="/app/:customerToken/tasks?projectId=:projectId"

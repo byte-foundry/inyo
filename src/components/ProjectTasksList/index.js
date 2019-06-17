@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import gql from 'graphql-tag';
 import styled from '@emotion/styled/macro';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
 import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
@@ -461,17 +460,22 @@ const DraggableTask = ({
 	);
 };
 
-const DraggableSection = ({children, section, position}) => {
+const DraggableSection = ({
+	children, section, position, sections,
+}) => {
+	const updateSection = useMutation(UPDATE_SECTION);
 	const [_, drag] = useDrag({
 		item: {
 			id: section.id,
 			position,
 			type: DRAG_TYPES.SECTION,
+			projectId: section.project.id,
 		},
 		begin() {
 			return {
 				id: section.id,
 				position,
+				projectId: section.project.id,
 			};
 		},
 	});
@@ -483,8 +487,80 @@ const DraggableSection = ({children, section, position}) => {
 				isOver: monitor.isOver(),
 			};
 		},
-		drop() {
-			return {position};
+		drop({position: startPosition, id: draggedId, projectId}) {
+			const endPosition = position;
+
+			updateSection({
+				variables: {
+					sectionId: draggedId,
+					position: endPosition,
+				},
+				optimisticResponse: {
+					updateSection: {
+						...sections[startPosition],
+						position: endPosition,
+					},
+				},
+				update: (cache, {data: {updateSection: updatedSection}}) => {
+					const dataToUpdate = cache.readFragment({
+						fragment: gql`
+							fragment myProject on Project {
+								sections {
+									id
+									name
+									position
+								}
+							}
+						`,
+						id: projectId,
+					});
+
+					const sectionsInProject = dataToUpdate.sections;
+					const cachedUpdatedSection = sectionsInProject.find(
+						sec => sec.id === updatedSection.id,
+					);
+
+					if (endPosition < startPosition) {
+						const sectionsToUpdate = sectionsInProject.filter(
+							sec => sec.position < startPosition
+								&& sec.position >= endPosition,
+						);
+
+						sectionsToUpdate.forEach((sec) => {
+							sec.position += 1;
+						});
+					}
+					else if (endPosition > startPosition) {
+						const sectionsToUpdate = sectionsInProject.filter(
+							sec => sec.position > startPosition
+								&& sec.position <= endPosition,
+						);
+
+						sectionsToUpdate.forEach((sec) => {
+							sec.position -= 1;
+						});
+					}
+
+					cachedUpdatedSection.position = endPosition;
+
+					cache.writeFragment({
+						fragment: gql`
+							fragment myProject on Project {
+								sections {
+									id
+									name
+									position
+								}
+							}
+						`,
+						id: projectId,
+						data: {
+							...dataToUpdate,
+							sections: sectionsInProject,
+						},
+					});
+				},
+			});
 		},
 	});
 
@@ -597,6 +673,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 					section={section}
 					key={`${section.id}-${section.position}`}
 					position={section.position}
+					sections={sections}
 				>
 					<SectionTitle
 						onClickTrash={() => setRemoveSectionModalOpen(section)}
@@ -684,249 +761,3 @@ function ProjectTasksList({items, projectId, sectionId}) {
 }
 
 export default ProjectTasksList;
-/*
-			<DragDropContext
-				onDragEnd={async (result) => {
-					// dropped outside the list
-					if (!result.destination) {
-						return;
-					}
-
-					const {type, source, destination} = result;
-
-					if (
-						source.droppableId === destination.droppableId
-						&& source.index === destination.index
-					) {
-						return;
-					}
-
-					if (type === 'SECTION') {
-						await updateSection({
-							variables: {
-								sectionId: sections[source.index].id,
-								position: destination.index,
-							},
-							optimisticResponse: {
-								updateSection: {
-									...sections[source.index],
-									position: destination.index,
-								},
-							},
-							update: (
-								cache,
-								{data: {updateSection: updatedSection}},
-							) => {
-								const dataToUpdate = cache.readFragment({
-									fragment: gql`
-										fragment myProject on Project {
-											sections {
-												id
-												name
-												position
-											}
-										}
-									`,
-									id: projectId,
-								});
-
-								const sectionsInProject = dataToUpdate.sections;
-								const cachedUpdatedSection = sectionsInProject.find(
-									sec => sec.id === updatedSection.id,
-								);
-
-								if (destination.index < source.index) {
-									const sectionsToUpdate = sectionsInProject.filter(
-										sec => sec.position < source.index
-											&& sec.position >= destination.index,
-									);
-
-									sectionsToUpdate.forEach(
-										sec => (sec.position += 1),
-									);
-								}
-								else if (destination.index > source.index) {
-									const sectionsToUpdate = sectionsInProject.filter(
-										sec => sec.position > source.index
-											&& sec.position <= destination.index,
-									);
-
-									sectionsToUpdate.forEach(
-										sec => (sec.position -= 1),
-									);
-								}
-
-								cachedUpdatedSection.position
-									= destination.index;
-
-								cache.writeFragment({
-									fragment: gql`
-										fragment myProject on Project {
-											sections {
-												id
-												name
-												position
-											}
-										}
-									`,
-									id: projectId,
-									data: {
-										...dataToUpdate,
-										sections: sectionsInProject,
-									},
-								});
-							},
-						});
-					}
-					else if (type === 'ITEM') {
-						await updateTask({
-							variables: {
-								itemId: result.draggableId,
-								sectionId: destination.droppableId,
-								position: destination.index,
-							},
-							optimisticResponse: {
-								updateItem: {
-									...sections.find(
-										section => section.id === source.droppableId,
-									).items[source.index],
-									position: destination.index,
-									section: sections.find(
-										section => section.id
-											=== destination.droppableId,
-									),
-								},
-							},
-							update: (cache, {data: {updateItem}}) => {
-								const dataToUpdate = cache.readQuery({
-									query: GET_ALL_TASKS,
-								});
-								const itemsToUpdate = [updateItem];
-								const oldItemsToUpdate = [];
-								const section = sections.find(
-									sectionItem => sectionItem.id
-										=== destination.droppableId,
-								);
-								const oldSection = sections.find(
-									sectionItem => sectionItem.id === source.droppableId,
-								);
-
-								if (
-									source.droppableId
-									=== destination.droppableId
-								) {
-									// task is drag and drop in the same section
-									if (
-										section.items.find(
-											item => updateItem.id === item.id,
-										).position !== destination.index
-									) {
-										section.items.forEach((item) => {
-											if (
-												item.position > source.index
-												&& item.position
-													<= destination.index
-											) {
-												itemsToUpdate.push({
-													...item,
-													position: item.position - 1,
-												});
-											}
-											else if (
-												item.position < source.index
-												&& item.position
-													>= destination.index
-											) {
-												itemsToUpdate.push({
-													...item,
-													position: item.position + 1,
-												});
-											}
-										});
-
-										itemsToUpdate.forEach((itemUpdated) => {
-											const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
-												task => itemUpdated.id === task.id,
-											);
-
-											dataToUpdate.me.tasks[
-												indexTaskToUpdate
-											].position = itemUpdated.position;
-										});
-
-										cache.writeQuery({
-											query: GET_ALL_TASKS,
-											data: dataToUpdate,
-										});
-									}
-								}
-								else {
-									section.items.forEach((item) => {
-										if (
-											item.position >= destination.index
-										) {
-											itemsToUpdate.push({
-												...item,
-												position: item.position + 1,
-											});
-										}
-									});
-
-									oldSection.items.forEach((item) => {
-										if (item.position >= source.index) {
-											oldItemsToUpdate.push({
-												...item,
-												position: item.position - 1,
-											});
-										}
-									});
-
-									oldSection.items.splice(source.index, 1);
-
-									const sectionForItem = {
-										...section,
-										items: undefined,
-									};
-
-									const oldSectionForItem = {
-										...oldSection,
-										items: undefined,
-									};
-
-									oldItemsToUpdate.forEach((itemUpdated) => {
-										const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
-											task => itemUpdated.id === task.id,
-										);
-
-										dataToUpdate.me.tasks[
-											indexTaskToUpdate
-										].position = itemUpdated.position;
-										dataToUpdate.me.tasks[
-											indexTaskToUpdate
-										].section = oldSectionForItem;
-									});
-
-									itemsToUpdate.forEach((itemUpdated) => {
-										const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
-											task => itemUpdated.id === task.id,
-										);
-
-										dataToUpdate.me.tasks[
-											indexTaskToUpdate
-										].position = itemUpdated.position;
-										dataToUpdate.me.tasks[
-											indexTaskToUpdate
-										].section = sectionForItem;
-									});
-
-									cache.writeQuery({
-										query: GET_ALL_TASKS,
-										data: dataToUpdate,
-									});
-								}
-							},
-						});
-					}
-				}}
-			>
-			*/

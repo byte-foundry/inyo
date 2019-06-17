@@ -71,9 +71,9 @@ const DayTitle = styled('span')`
 	text-transform: uppercase;
 	font-size: 0.75rem;
 	display: block;
-	margin-bottom: 0.5rem;
 	text-align: center;
-	margin: 0.4rem 3rem;
+	margin: 0.4rem auto;
+	padding: 0.1rem 0.5rem 0;
 	border-radius: 4px;
 
 	${props => props.selected

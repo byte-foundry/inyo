@@ -297,8 +297,7 @@ const DraggableTask = ({
 			};
 		},
 		drop({position: startPosition, id: draggedId, sectionId}) {
-			const endPosition
-				= position > startPosition ? position - 1 : position;
+			let endPosition = position;
 			const endSectionId = task.section.id;
 
 			updateTask({
@@ -331,6 +330,10 @@ const DraggableTask = ({
 					);
 
 					if (sectionId === endSectionId) {
+						endPosition
+							= endPosition > startPosition
+								? endPosition - 1
+								: endPosition;
 						// task is drag and drop in the same section
 						if (
 							section.items.find(
@@ -460,18 +463,16 @@ const DraggableTask = ({
 
 const DraggableSection = ({children, section, position}) => {
 	const [_, drag] = useDrag({
-		item: {id: section.id, position, type: DRAG_TYPES.SECTION},
+		item: {
+			id: section.id,
+			position,
+			type: DRAG_TYPES.SECTION,
+		},
 		begin() {
 			return {
 				id: section.id,
 				position,
 			};
-		},
-		end(item, monitor) {
-			const {position: endPosition} = monitor.getDropResult();
-
-			console.log('Start pos: ', position);
-			console.log('End pos: ', endPosition);
 		},
 	});
 

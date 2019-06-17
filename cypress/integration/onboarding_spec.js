@@ -72,11 +72,7 @@ describe('Onboarding', () => {
 
 		cy.contains('Continuer').click();
 
-		cy.url().should('include', 'app/tasks?openModal=true');
-
-		cy.contains('Bienvenue sur Inyo');
-
-		cy.get('iframe[title*=YouTube]').should('have.length', 1);
+		cy.url().should('include', 'app/tasks');
 	});
 
 	it('should display empty views', () => {
@@ -108,7 +104,7 @@ describe('Onboarding', () => {
 
 		cy.contains('Aucune tâches client n');
 
-		cy.get('#help-button').click();
+		cy.get('.css-3tccu1-Help').click();
 
 		cy.contains('Aide').click();
 		cy.contains("J'ai compris!").click();

@@ -1,6 +1,6 @@
 import React, {forwardRef} from 'react';
 import {withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import {useMutation} from 'react-apollo-hooks';
 
 import {isCustomerTask} from '../../utils/functions';
@@ -9,41 +9,69 @@ import {
 	accentGrey,
 	primaryBlack,
 	primaryGrey,
-	primaryPurple,
 	primaryRed,
+	primaryWhite,
+	DragSeparator,
 } from '../../utils/new/design-system';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 
-const TaskCardElem = styled('div')`
-	background: #fff;
-	border: 1px solid ${props => (props.customerTask ? primaryRed : accentGrey)};
-	border-radius: 3px;
-	padding: 5px;
-	margin-bottom: 5px;
-	font-size: 0.75rem;
-	display: grid;
-	grid-template-columns: 1fr auto;
-	cursor: pointer;
-	position: relative;
-`;
+const Button = styled(IconButton)``;
 
 const CardTitle = styled('span')`
 	display: block;
 	color: ${primaryBlack};
 	text-overflow: ellipsis;
 	overflow: hidden;
+
+	${props => props.hasCheckbox && 'grid-column: 1 / 3;'}
 `;
 
 const CardSubTitle = styled('span')`
 	color: ${primaryGrey};
 `;
 
-const Separator = styled('div')`
-	position: absolute;
-	height: 3px;
-	width: 100%;
-	top: -5px;
-	background: ${primaryPurple};
+const TaskCardElem = styled('div')`
+	background: ${primaryWhite};
+	border: 1px solid ${props => (props.customerTask ? primaryRed : accentGrey)};
+	border-radius: 3px;
+	padding: 5px;
+	margin-bottom: 5px;
+	font-size: 0.75rem;
+	line-height: 1.4;
+	display: grid;
+	grid-template-columns: 1fr 1.2rem;
+	cursor: pointer;
+	position: relative;
+
+	transition: all 300ms ease;
+
+	${Button} {
+		transition: all 300ms ease;
+		opacity: 0;
+
+		pointer-events: none;
+	}
+
+	&:hover {
+		box-shadow: 0 0 5px ${accentGrey};
+		transition: all 300ms ease;
+
+		${Button} {
+			opacity: 1;
+
+			pointer-events: all;
+		}
+	}
+
+	${props => props.done
+		&& `
+		${Button} {
+			margin-right: 0;
+			opacity: 1;
+
+			pointer-events: all;
+		}
+	`}
 `;
 
 const TaskCard = withRouter(
@@ -65,6 +93,7 @@ const TaskCard = withRouter(
 			<TaskCardElem
 				{...rest}
 				ref={cardRef}
+				done={task.status === 'FINISHED'}
 				customerTask={isCustomerTask(task.type)}
 				onClick={() => history.push({
 					pathname: `/app/dashboard/${task.id}`,
@@ -72,9 +101,9 @@ const TaskCard = withRouter(
 				})
 				}
 			>
-				{isOver && <Separator />}
+				{isOver && <DragSeparator />}
 				{!isCustomerTask(task.type) && (
-					<IconButton
+					<Button
 						current={task.status === 'FINISHED'}
 						invert={task.status === 'FINISHED'}
 						style={{
@@ -82,7 +111,7 @@ const TaskCard = withRouter(
 							gridRow: '1 / 3',
 						}}
 						icon="done"
-						size="tiny"
+						size="micro"
 						onClick={(e) => {
 							e.stopPropagation();
 
@@ -95,11 +124,7 @@ const TaskCard = withRouter(
 						}}
 					/>
 				)}
-				<CardTitle
-					style={{
-						gridColumn: isCustomerTask(task.type) ? '1 / 3' : '',
-					}}
-				>
+				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
 					{task.name}
 				</CardTitle>
 				{task.linkedCustomer && (

@@ -255,7 +255,10 @@ const DashboardTasks = ({location, history}) => {
 					</Modal>
 				)}
 			/>
-			{leftBarRef.current
+			{loadingUserPrefs ? (
+				<Loading />
+			) : (
+				leftBarRef.current
 				&& ReactDOM.createPortal(
 					<LeftBarSchedule
 						isDragging={isDragging}
@@ -264,7 +267,8 @@ const DashboardTasks = ({location, history}) => {
 						onMoveTask={onMoveTask}
 					/>,
 					leftBarRef.current,
-				)}
+				)
+			)}
 		</>
 	);
 };

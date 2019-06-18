@@ -260,4 +260,5 @@ export const TAG_COLOR_PALETTE = [
 
 export const DRAG_TYPES = {
 	TASK: 'SCHEDULE_TASK',
+	SECTION: 'SECTION',
 };

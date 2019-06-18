@@ -1,10 +1,9 @@
-import React, {
-	useState, useEffect, useRef, useCallback,
-} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState, useCallback} from 'react';
+import Portal from '@reach/portal';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import {useDrag} from 'react-dnd';
+import moment from 'moment';
 
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
@@ -57,7 +56,6 @@ function DraggableTask({
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
 	const [isDragging, setIsDragging] = useState(false);
-	const leftBarRef = useRef();
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
@@ -67,18 +65,6 @@ const DashboardTasks = ({location, history}) => {
 		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
-
-	useEffect(() => {
-		if (!leftBarRef.current) {
-			leftBarRef.current = document.createElement('div');
-		}
-
-		document.body.appendChild(leftBarRef.current);
-
-		return () => {
-			document.body.removeChild(leftBarRef.current);
-		};
-	});
 
 	const onMoveTask = useCallback(({task, scheduledFor, position}) => {
 		focusTask({
@@ -255,16 +241,14 @@ const DashboardTasks = ({location, history}) => {
 					</Modal>
 				)}
 			/>
-			{leftBarRef.current
-				&& ReactDOM.createPortal(
-					<LeftBarSchedule
-						isDragging={isDragging}
-						days={scheduledTasks}
-						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-						onMoveTask={onMoveTask}
-					/>,
-					leftBarRef.current,
-				)}
+			<Portal>
+				<LeftBarSchedule
+					isDragging={isDragging}
+					days={scheduledTasksPerDay}
+					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					onMoveTask={onMoveTask}
+				/>
+			</Portal>
 		</>
 	);
 };

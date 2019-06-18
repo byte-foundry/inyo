@@ -454,8 +454,7 @@ export function TaskInfosInputs({
 				&& item.section.project.deadline));
 
 	const activableTask = !customerToken && item.status === 'PENDING';
-	const customerTask
-		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
+	const customerTask = isCustomerTask(item.type);
 
 	return (
 		<TaskInfos>

@@ -8,7 +8,7 @@ import {
 	useQuery,
 } from 'react-apollo-hooks';
 import HTML5Backend from 'react-dnd-html5-backend';
-import {DragDropContextProvider} from 'react-dnd';
+import {DndProvider} from 'react-dnd';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -135,7 +135,7 @@ function Root() {
 	}
 
 	return (
-		<DragDropContextProvider backend={HTML5Backend}>
+		<DndProvider backend={HTML5Backend}>
 			<ProvidersSentry>
 				<BodyMain>
 					<main>
@@ -182,7 +182,7 @@ function Root() {
 					<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 				</BodyMain>
 			</ProvidersSentry>
-		</DragDropContextProvider>
+		</DndProvider>
 	);
 }
 

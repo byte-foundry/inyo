@@ -3,7 +3,7 @@ import {useMutation} from 'react-apollo-hooks';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import styled from '@emotion/styled';
-import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
+import {useDrop, useDrag} from 'react-dnd';
 
 import DefaultDroppableDay from '../DefaultDroppableDay';
 
@@ -21,8 +21,6 @@ import {UNFOCUS_TASK} from '../../utils/mutations';
 import IconButton from '../../utils/new/components/IconButton';
 
 import TaskCard from '../TaskCard';
-
-const {useDrop, useDrag} = dnd;
 
 const Container = styled('div')`
 	margin-top: 3rem;

@@ -89,7 +89,7 @@ const TaskIcon = styled('div')`
 	width: 3.5rem;
 	height: 3.5rem;
 	margin-left: -0.8725rem;
-	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
+	margin-right: ${props => (props.noData ? '.5rem' : '1rem')};
 	overflow: visible;
 	background: center no-repeat
 		url(${(props) => {
@@ -106,8 +106,8 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: ${props => (props.noData ? '0.1rem' : '.6775rem')};
-	margin-bottom: ${props => (props.noData ? 0 : '2rem')};
+	margin-top: ${props => (props.noData ? '0.1rem' : '0.6rem')};
+	margin-bottom: 0;
 
 	transform: scale(${props => (props.noData ? 0.75 : '')});
 
@@ -123,12 +123,12 @@ const TaskIcon = styled('div')`
 
 	&:before {
 		height: 1rem;
-		top: 0.15rem;
+		top: 0;
 	}
 
 	&:after {
-		top: 4.15rem;
-		bottom: -0.85rem;
+		top: 62px;
+		bottom: -10px;
 	}
 
 	&:hover {

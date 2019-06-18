@@ -1,9 +1,7 @@
 import React from 'react';
-import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
+import {useDrop} from 'react-dnd';
 
 import {DRAG_TYPES} from '../../utils/constants';
-
-const {useDrop} = dnd;
 
 function DefaultDroppableDay({
 	index,

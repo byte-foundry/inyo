@@ -4,7 +4,7 @@ import React, {
 import ReactDOM from 'react-dom';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
-import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
+import {useDrag} from 'react-dnd';
 
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
@@ -21,8 +21,6 @@ import {
 import {DRAG_TYPES} from '../../../utils/constants';
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 import {FOCUS_TASK} from '../../../utils/mutations';
-
-const {useDrag} = dnd;
 
 function DraggableTask({
 	item,
@@ -261,7 +259,10 @@ const DashboardTasks = ({location, history}) => {
 					</Modal>
 				)}
 			/>
-			{leftBarRef.current
+			{loadingUserPrefs ? (
+				<Loading />
+			) : (
+				leftBarRef.current
 				&& ReactDOM.createPortal(
 					<LeftBarSchedule
 						isDragging={isDragging}
@@ -270,7 +271,8 @@ const DashboardTasks = ({location, history}) => {
 						onMoveTask={onMoveTask}
 					/>,
 					leftBarRef.current,
-				)}
+				)
+			)}
 		</>
 	);
 };

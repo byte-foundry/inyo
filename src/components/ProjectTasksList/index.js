@@ -1,16 +1,24 @@
-import React, {useState} from 'react';
+import React, {
+	useState, useRef, useEffect, useCallback,
+} from 'react';
+import ReactDOM from 'react-dom';
 import gql from 'graphql-tag';
 import styled from '@emotion/styled/macro';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
-import {__EXPERIMENTAL_DND_HOOKS_THAT_MAY_CHANGE_AND_BREAK_MY_BUILD__ as dnd} from 'react-dnd';
+import {useDrag, useDrop} from 'react-dnd';
 
 import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
+import LeftBarSchedule from '../LeftBarSchedule';
 
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 
-import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
+import {
+	GET_ALL_TASKS,
+	GET_PROJECT_DATA,
+	GET_USER_INFOS,
+} from '../../utils/queries';
 import {
 	LayoutMainElem,
 	primaryBlack,
@@ -25,19 +33,23 @@ import {
 	P,
 	DragSeparator,
 } from '../../utils/new/design-system';
-import {ModalContainer, ModalElem, ModalActions} from '../../utils/content';
+import {
+	ModalContainer,
+	ModalElem,
+	ModalActions,
+	Loading,
+} from '../../utils/content';
 import {
 	UPDATE_SECTION,
 	UPDATE_ITEM,
 	ADD_SECTION,
 	REMOVE_SECTION,
+	FOCUS_TASK,
 } from '../../utils/mutations';
 import InlineEditable from '../InlineEditable';
 import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import IconButton from '../../utils/new/components/IconButton';
-
-const {useDrop, useDrag} = dnd;
 
 const TasksListContainer = styled(LayoutMainElem)``;
 
@@ -179,7 +191,7 @@ const TrashIconContainer = styled('div')`
 `;
 
 const SectionTitleContainer = styled('div')`
-	margin: 3rem 0 2rem;
+	margin: 1rem 0 0.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -268,8 +280,53 @@ const Heading = styled(SubHeading)`
 	margin-bottom: 3rem;
 `;
 
+function PlaceholderDropSection({position}) {
+	const [{isOver}, drop] = useDrop({
+		accept: DRAG_TYPES.SECTION,
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop() {
+			return {
+				dropPosition: position,
+			};
+		},
+	});
+
+	return (
+		<div ref={drop} style={{position: 'relative', minHeight: '30px'}}>
+			{isOver && <DragSeparator />}
+		</div>
+	);
+}
+
+function PlaceholderDropTask({sectionId, position}) {
+	const [{isOver}, drop] = useDrop({
+		accept: DRAG_TYPES.TASK,
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop() {
+			return {
+				dropPosition: position,
+				endSectionId: sectionId,
+			};
+		},
+	});
+
+	return (
+		<div ref={drop} style={{position: 'relative', minHeight: '30px'}}>
+			{isOver && <DragSeparator />}
+		</div>
+	);
+}
+
 const DraggableTask = ({
-	task, position, sections, ...rest
+	task, position, sections, setIsDragging, ...rest
 }) => {
 	const updateTask = useMutation(UPDATE_ITEM);
 	const [_, drag] = useDrag({
@@ -280,24 +337,28 @@ const DraggableTask = ({
 			sectionId: task.section.id,
 		},
 		begin() {
+			setIsDragging(true);
 			return {
 				id: task.id,
 				position,
 				sectionId: task.section.id,
 			};
 		},
-	});
+		end(item, monitor) {
+			setIsDragging(false);
 
-	const [{isOver}, drop] = useDrop({
-		accept: DRAG_TYPES.TASK,
-		collect(monitor) {
-			return {
-				isOver: monitor.isOver(),
-			};
-		},
-		drop({position: startPosition, id: draggedId, sectionId}) {
-			let endPosition = position;
-			const endSectionId = task.section.id;
+			const {endSectionId, dropPosition} = monitor.getDropResult();
+
+			if (!endSectionId) return;
+			// Dropped in a day not a section
+
+			const startPosition = position;
+			const sectionId = task.section.id;
+			const draggedId = task.id;
+			const endPosition
+				= dropPosition > startPosition && sectionId === endSectionId
+					? dropPosition - 1
+					: dropPosition;
 
 			updateTask({
 				variables: {
@@ -329,10 +390,6 @@ const DraggableTask = ({
 					);
 
 					if (sectionId === endSectionId) {
-						endPosition
-							= endPosition > startPosition
-								? endPosition - 1
-								: endPosition;
 						// task is drag and drop in the same section
 						if (
 							section.items.find(
@@ -359,6 +416,8 @@ const DraggableTask = ({
 									});
 								}
 							});
+
+							console.table(itemsToUpdate);
 
 							itemsToUpdate.forEach((itemUpdated) => {
 								const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
@@ -441,6 +500,21 @@ const DraggableTask = ({
 		},
 	});
 
+	const [{isOver}, drop] = useDrop({
+		accept: DRAG_TYPES.TASK,
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop() {
+			return {
+				dropPosition: position,
+				endSectionId: task.section.id,
+			};
+		},
+	});
+
 	return (
 		<div
 			className="task"
@@ -478,17 +552,13 @@ const DraggableSection = ({
 				projectId: section.project.id,
 			};
 		},
-	});
-
-	const [{isOver}, drop] = useDrop({
-		accept: DRAG_TYPES.SECTION,
-		collect(monitor) {
-			return {
-				isOver: monitor.isOver(),
-			};
-		},
-		drop({position: startPosition, id: draggedId, projectId}) {
-			const endPosition = position;
+		end(item, monitor) {
+			const {dropPosition} = monitor.getDropResult();
+			const draggedId = section.id;
+			const startPosition = position;
+			const projectId = section.project.id;
+			const endPosition
+				= dropPosition > startPosition ? dropPosition - 1 : dropPosition;
 
 			updateSection({
 				variables: {
@@ -564,6 +634,20 @@ const DraggableSection = ({
 		},
 	});
 
+	const [{isOver}, drop] = useDrop({
+		accept: DRAG_TYPES.SECTION,
+		collect(monitor) {
+			return {
+				isOver: monitor.isOver(),
+			};
+		},
+		drop() {
+			return {
+				dropPosition: position,
+			};
+		},
+	});
+
 	return (
 		<SectionDraggable
 			ref={(node) => {
@@ -582,6 +666,14 @@ const DraggableSection = ({
 };
 
 function ProjectTasksList({items, projectId, sectionId}) {
+	const {
+		data: userPrefsData,
+		loading: loadingUserPrefs,
+		error: errorUserPrefs,
+	} = useQuery(GET_USER_INFOS, {suspend: true});
+	const focusTask = useMutation(FOCUS_TASK);
+	const leftBarRef = useRef();
+	const [isDragging, setIsDragging] = useState(false);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
 		suspend: true,
@@ -629,7 +721,20 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	});
 	const updateSection = useMutation(UPDATE_SECTION);
 
+	useEffect(() => {
+		if (!leftBarRef.current) {
+			leftBarRef.current = document.createElement('div');
+		}
+
+		document.body.appendChild(leftBarRef.current);
+
+		return () => {
+			document.body.removeChild(leftBarRef.current);
+		};
+	});
+
 	if (error) throw error;
+	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {sections: sectionsInfos} = projectData.project;
 
@@ -666,6 +771,43 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 	sections.sort((a, b) => a.position - b.position);
 
+	const scheduledTasks = {};
+
+	items.forEach((task) => {
+		if (!task.scheduledFor) {
+			return;
+		}
+
+		scheduledTasks[task.scheduledFor] = scheduledTasks[
+			task.scheduledFor
+		] || {
+			date: task.scheduledFor,
+			tasks: [],
+		};
+
+		scheduledTasks[task.scheduledFor].tasks.push(task);
+	});
+
+	const onMoveTask = useCallback(
+		({task, scheduledFor, position}) => {
+			focusTask({
+				variables: {
+					itemId: task.id,
+					for: scheduledFor,
+					schedulePosition: position,
+				},
+				optimisticReponse: {
+					focusTask: {
+						itemId: task.id,
+						for: scheduledFor,
+						schedulePosition: position,
+					},
+				},
+			});
+		},
+		[focusTask],
+	);
+
 	return (
 		<TasksListContainer>
 			{sections.map(section => (
@@ -696,6 +838,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 					/>
 					{section.items.map(task => (
 						<DraggableTask
+							setIsDragging={setIsDragging}
 							position={task.position}
 							task={task}
 							key={`${task.id}-${task.position}`}
@@ -704,8 +847,17 @@ function ProjectTasksList({items, projectId, sectionId}) {
 							sections={sections}
 						/>
 					))}
+					<PlaceholderDropTask
+						sectionId={section.id}
+						position={section.items.length}
+						key={`task-placeholder-${section.items.length}`}
+					/>
 				</DraggableSection>
 			))}
+			<PlaceholderDropSection
+				position={sections.length}
+				key={`section-placeholder-${sections.length}`}
+			/>
 			{removeSectionModalOpen && (
 				<ModalContainer
 					onDismiss={() => setRemoveSectionModalOpen(false)}
@@ -755,6 +907,20 @@ function ProjectTasksList({items, projectId, sectionId}) {
 						</ModalActions>
 					</ModalElem>
 				</ModalContainer>
+			)}
+			{loadingUserPrefs ? (
+				<Loading />
+			) : (
+				leftBarRef.current
+				&& ReactDOM.createPortal(
+					<LeftBarSchedule
+						isDragging={isDragging}
+						days={scheduledTasks}
+						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+						onMoveTask={onMoveTask}
+					/>,
+					leftBarRef.current,
+				)
 			)}
 		</TasksListContainer>
 	);

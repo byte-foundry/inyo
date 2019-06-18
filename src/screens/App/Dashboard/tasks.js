@@ -11,6 +11,7 @@ import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
 import ArianneThread from '../../../components/ArianneThread';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
+import RescheduleModal from '../../../components/RescheduleModal';
 
 import {
 	ModalContainer as Modal,
@@ -97,7 +98,8 @@ const DashboardTasks = ({location, history}) => {
 	} = data;
 
 	let unscheduledTasks = [];
-	const scheduledTasks = {};
+	const tasksToReschedule = [];
+	const scheduledTasksPerDay = {};
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -169,14 +171,21 @@ const DashboardTasks = ({location, history}) => {
 			return;
 		}
 
-		scheduledTasks[task.scheduledFor] = scheduledTasks[
+		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
 			task.scheduledFor
 		] || {
 			date: task.scheduledFor,
 			tasks: [],
 		};
 
-		scheduledTasks[task.scheduledFor].tasks.push(task);
+		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+
+		if (
+			task.status === 'PENDING'
+			&& moment(task.scheduledFor).isBefore(moment(), 'day')
+		) {
+			tasksToReschedule.push(task);
+		}
 	});
 
 	unscheduledTasks = unscheduledTasks.filter(
@@ -195,10 +204,16 @@ const DashboardTasks = ({location, history}) => {
 				<Loading />
 			) : (
 				<Schedule
-					days={scheduledTasks}
+					days={scheduledTasksPerDay}
 					workingDays={userPrefsData.me.workingDays}
 					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
 					onMoveTask={onMoveTask}
+				/>
+			)}
+			{tasksToReschedule.length > 0 && (
+				<RescheduleModal
+					tasks={tasksToReschedule}
+					onReschedule={onMoveTask}
 				/>
 			)}
 

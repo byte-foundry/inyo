@@ -1,15 +1,13 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, forwardRef} from 'react';
 import styled from '@emotion/styled';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 import debounce from 'lodash.debounce';
 import {Formik, Field} from 'formik';
-import ReactTooltip from 'react-tooltip';
 import {Waypoint} from 'react-waypoint';
 
 import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
 import {POST_COMMENT} from '../../utils/mutations';
-import {TOOLTIP_DELAY} from '../../utils/constants';
 
 import {
 	gray20,
@@ -25,6 +23,7 @@ import {
 	accentGrey,
 } from '../../utils/new/design-system';
 
+import Tooltip from '../Tooltip';
 import Comment from '../Comment';
 
 const CommentRow = styled('div')`
@@ -39,7 +38,11 @@ const Comments = styled('div')`
 	overflow-y: auto;
 `;
 
-const ItemComment = styled(Field)`
+const FieldWithRef = forwardRef((props, ref) => (
+	<Field {...props} innerRef={ref} />
+));
+
+const ItemComment = styled(FieldWithRef)`
 	margin-top: 10px;
 	width: 100%;
 	background: ${primaryWhite};
@@ -113,7 +116,6 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 
 	return (
 		<>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<Comments id="comments">
 				{comments.length ? (
 					<CommentRow>{comments}</CommentRow>
@@ -175,25 +177,27 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					return (
 						<form onSubmit={handleSubmit}>
 							<FlexRow>
-								<ItemComment
-									id="comment-textarea"
-									data-tip="Les personnes liées à la tâche seront notifiées"
-									placeholder={placeholderText}
-									name="newComment"
-									component="textarea"
-								/>
+								<Tooltip label="Les personnes liées à la tâche seront notifiées">
+									<ItemComment
+										id="comment-textarea"
+										placeholder={placeholderText}
+										name="newComment"
+										component="textarea"
+									/>
+								</Tooltip>
 							</FlexRow>
 							{errors.comment && touched.comment && (
 								<ErrorInput>{errors.comment}</ErrorInput>
 							)}
 							<FlexRow justifyContent="flex-end">
-								<Button
-									id="add-comment-button"
-									data-tip="Visible par les personnes liées au projet"
-									type="submit"
-								>
-									Ajouter un commentaire
-								</Button>
+								<Tooltip label="Visible par les personnes liées au projet">
+									<Button
+										id="add-comment-button"
+										type="submit"
+									>
+										Ajouter un commentaire
+									</Button>
+								</Tooltip>
 							</FlexRow>
 						</form>
 					);

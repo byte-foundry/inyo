@@ -9,12 +9,7 @@ import Tag from '../Tag';
 import FormElem from '../FormElem';
 
 import {UPDATE_TAG, REMOVE_TAG} from '../../utils/mutations';
-import {
-	accentGrey,
-	primaryBlack,
-	primaryRed,
-	Button,
-} from '../../utils/new/design-system';
+import {Button} from '../../utils/new/design-system';
 import IconButton from '../../utils/new/components/IconButton';
 
 const TagLine = styled('div')`

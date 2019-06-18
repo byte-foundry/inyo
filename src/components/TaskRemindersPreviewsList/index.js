@@ -14,6 +14,7 @@ import usePrevious from '../../utils/usePrevious';
 import useMeasure from '../../utils/useMeasure';
 import IconButton from '../../utils/new/components/IconButton';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
+import Tooltip from '../Tooltip';
 
 const Container = styled('div')`
 	display: flex;
@@ -249,27 +250,28 @@ const TaskRemindersPreviewsList = ({
 												reminder={reminder}
 												preview
 											/>
-											<Button
-												data-tip="Supprimer cette action automatique"
-												link
-												onClick={() => {
-													setReminders([
-														...reminders.slice(
-															0,
-															index,
-														),
-														...reminders.slice(
-															index + 1,
-														),
-													]);
-												}}
-											>
-												<IconButton
-													icon="cancel"
-													size="tiny"
-													danger
-												/>
-											</Button>
+											<Tooltip label="Supprimer cette action automatique">
+												<Button
+													link
+													onClick={() => {
+														setReminders([
+															...reminders.slice(
+																0,
+																index,
+															),
+															...reminders.slice(
+																index + 1,
+															),
+														]);
+													}}
+												>
+													<IconButton
+														icon="cancel"
+														size="tiny"
+														danger
+													/>
+												</Button>
+											</Tooltip>
 										</ReminderButtons>
 									</ReminderActions>
 								</ReminderItem>

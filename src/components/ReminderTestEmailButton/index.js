@@ -9,6 +9,7 @@ import {
 } from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import IconButton from '../../utils/new/components/IconButton';
+import Tooltip from '../Tooltip';
 
 const Status = styled('span')`
 	white-space: nowrap;
@@ -37,36 +38,37 @@ const ReminderTestEmailButton = ({
 	}
 
 	return (
-		<Button
-			link
-			onClick={async () => {
-				setStatus('loading');
+		<Tooltip label="S'envoyer un email test">
+			<Button
+				link
+				onClick={async () => {
+					setStatus('loading');
 
-				let sent = false;
+					let sent = false;
 
-				if (preview) {
-					({
-						data: {sent},
-					} = await sendReminderPreviewTestEmail({
-						variables: {type: reminder.type, taskId},
-					}));
-				}
-				else {
-					({
-						data: {sent},
-					} = await sendReminderTestEmail({
-						variables: {id: reminder.id},
-					}));
-				}
+					if (preview) {
+						({
+							data: {sent},
+						} = await sendReminderPreviewTestEmail({
+							variables: {type: reminder.type, taskId},
+						}));
+					}
+					else {
+						({
+							data: {sent},
+						} = await sendReminderTestEmail({
+							variables: {id: reminder.id},
+						}));
+					}
 
-				setStatus(sent ? 'done' : 'error');
-			}}
-			data-tip="S'envoyer un email test"
-			disabled={!preview && reminder.status !== 'PENDING'}
-			{...props}
-		>
-			<IconButton icon="info" size="tiny" />
-		</Button>
+					setStatus(sent ? 'done' : 'error');
+				}}
+				disabled={!preview && reminder.status !== 'PENDING'}
+				{...props}
+			>
+				<IconButton icon="info" size="tiny" />
+			</Button>
+		</Tooltip>
 	);
 };
 

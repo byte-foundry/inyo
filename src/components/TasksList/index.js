@@ -3,6 +3,7 @@ import styled from '@emotion/styled/macro';
 import {Draggable} from 'react-beautiful-dnd';
 
 import Task from './task';
+import Tooltip from '../Tooltip';
 
 import {BREAKPOINTS} from '../../utils/constants';
 
@@ -53,13 +54,13 @@ function TasksList({
 						<P>Aucune tâche à faire pour le moment.</P>
 						<P>
 							Dites-nous ce que{' '}
-							<UserSpan data-tip="Les tâches violettes sont les tâches que vous prévoyez de faire">
-								vous
-							</UserSpan>{' '}
+							<Tooltip label="Les tâches violettes sont les tâches que vous prévoyez de faire">
+								<UserSpan>vous</UserSpan>
+							</Tooltip>{' '}
 							souhaitez faire aujourd'hui ou affectez des tâches à{' '}
-							<CustomerSpan data-tip="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
-								votre client
-							</CustomerSpan>
+							<Tooltip label="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
+								<CustomerSpan>votre client</CustomerSpan>
+							</Tooltip>
 							.
 						</P>
 						<P>

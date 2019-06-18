@@ -1,7 +1,6 @@
 import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
-import ReactTooltip from 'react-tooltip';
 import YouTube from 'react-youtube';
 import moment from 'moment';
 
@@ -23,7 +22,6 @@ import {
 	Container,
 	Content,
 } from '../../../utils/new/design-system';
-import {TOOLTIP_DELAY} from '../../../utils/constants';
 
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectList from '../../../components/ProjectTasksList';
@@ -33,6 +31,7 @@ import CreateTask from '../../../components/CreateTask';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
+import Tooltip from '../../../components/Tooltip';
 
 const PA = styled(P)`
 	font-size: 16px;
@@ -96,28 +95,21 @@ function TasksListContainer({
 
 	if (projectId) {
 		return (
-			<>
-				<ProjectList
-					projectId={projectId}
-					items={tasks.filter(
-						item => item.section
-							&& item.section.project.id === projectId,
-					)}
-				/>
-				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			</>
+			<ProjectList
+				projectId={projectId}
+				items={tasks.filter(
+					item => item.section && item.section.project.id === projectId,
+				)}
+			/>
 		);
 	}
 
 	return (
-		<>
-			<TasksListComponent
-				items={[...tasks]}
-				projectId={projectId}
-				customerId={linkedCustomerId}
-			/>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-		</>
+		<TasksListComponent
+			items={[...tasks]}
+			projectId={projectId}
+			customerId={linkedCustomerId}
+		/>
 	);
 }
 
@@ -203,14 +195,15 @@ function TasksList({location, history}) {
 
 	return (
 		<Container>
-			<Help
-				id="help-button"
-				customerToken
-				data-tip="Instructions pour utiliser l'interface"
-				onClick={() => history.push('?openHelpModal=true')}
-			>
-				?
-			</Help>
+			<Tooltip label="Instructions pour utiliser l'interface">
+				<Help
+					id="help-button"
+					customerToken
+					onClick={() => history.push('?openHelpModal=true')}
+				>
+					?
+				</Help>
+			</Tooltip>
 			<TaskAndArianne>
 				<ArianneThread
 					projectId={projectId}
@@ -294,8 +287,15 @@ function TasksList({location, history}) {
 						<PA>
 							<UL noBullet>
 								<li>
-									🎬 -{' '}
+									<span
+										aria-labelledby="presentation-link"
+										role="img"
+									>
+										🎬
+									</span>{' '}
+									-{' '}
 									<A
+										id="presentation-link"
 										href=""
 										onClick={() => history.push('?openModal=true')
 										}
@@ -304,8 +304,15 @@ function TasksList({location, history}) {
 									</A>
 								</li>
 								<li>
-									✅ -{' '}
+									<span
+										aria-labelledby="new-task-link"
+										role="img"
+									>
+										✅
+									</span>{' '}
+									-{' '}
 									<A
+										id="new-task-link"
 										target="_blank"
 										href="https://inyo.me/documentation/creer-une-nouvelle-tache/"
 									>
@@ -313,8 +320,15 @@ function TasksList({location, history}) {
 									</A>
 								</li>
 								<li>
-									🤑 -{' '}
+									<span
+										aria-labelledby="new-client-link"
+										role="img"
+									>
+										🤑
+									</span>{' '}
+									-{' '}
 									<A
+										id="new-client-link"
 										target="_blank"
 										href="https://inyo.me/documentation/liste-de-mes-clients/"
 									>
@@ -322,8 +336,15 @@ function TasksList({location, history}) {
 									</A>
 								</li>
 								<li>
-									🗂️ -{' '}
+									<span
+										aria-labelledby="new-project-link"
+										role="img"
+									>
+										🗂️
+									</span>{' '}
+									-{' '}
 									<A
+										id="new-project-link"
 										target="_blank"
 										href="https://inyo.me/documentation/creer-un-nouveau-projet/"
 									>
@@ -331,8 +352,15 @@ function TasksList({location, history}) {
 									</A>
 								</li>
 								<li>
-									📝 -{' '}
+									<span
+										aria-labelledby="use-template-link"
+										role="img"
+									>
+										📝
+									</span>{' '}
+									-{' '}
 									<A
+										id="use-template-link"
 										target="_blank"
 										href="https://inyo.me/documentation/creer-un-nouveau-projet/utiliser-un-modele-predefini/"
 									>
@@ -340,8 +368,15 @@ function TasksList({location, history}) {
 									</A>
 								</li>
 								<li>
-									🕵️ -{' '}
+									<span
+										aria-labelledby="client-view-link"
+										role="img"
+									>
+										🕵️
+									</span>{' '}
+									-{' '}
 									<A
+										id="client-view-link"
 										target="_blank"
 										href="https://inyo.me/documentation/les-principales-vues/vue-du-client-d-un-projet/"
 									>
@@ -349,8 +384,18 @@ function TasksList({location, history}) {
 									</A>
 								</li>
 								<li>
-									🌀 -{' '}
-									<A target="_blank" href="https://inyo.pro">
+									<span
+										aria-labelledby="client-presentation-link"
+										role="img"
+									>
+										🌀
+									</span>{' '}
+									-{' '}
+									<A
+										id="client-presentation-link"
+										target="_blank"
+										href="https://inyo.pro"
+									>
 										Présenter Inyo à votre client
 									</A>
 								</li>

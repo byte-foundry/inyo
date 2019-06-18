@@ -3,14 +3,13 @@ import styled from '@emotion/styled';
 import useOnClickOutside from 'use-onclickoutside';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
-import ReactTooltip from 'react-tooltip';
 
 import {
 	primaryPurple,
 	primaryWhite,
 	Button,
 } from '../../utils/new/design-system';
-import {TOOLTIP_DELAY} from '../../utils/constants';
+import Tooltip from '../Tooltip';
 
 const UnitInputContainer = styled('div')`
 	display: flex;
@@ -148,47 +147,43 @@ export default function ({
 		>
 			{({handleSubmit, values, setFieldValue}) => (
 				<UnitInputForm onSubmit={handleSubmit} novalidate>
-					<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 					<UnitInputContainer ref={containerRef}>
-						<UnitInputInput
-							data-tip="Durée de la tâche"
-							id="unit"
-							value={values.unit}
-							name="unit"
-							type="number"
-							ref={inputRef}
-							step="any"
-							isHours={isHours}
-							onChange={e => setFieldValue('unit', e.target.value)
-							}
-							onKeyDown={(e) => {
-								if (e.key === 'Tab') {
-									onTab(e.target.value);
+						<Tooltip label="Durée de la tâche">
+							<UnitInputInput
+								id="unit"
+								value={values.unit}
+								name="unit"
+								type="number"
+								ref={inputRef}
+								step="any"
+								isHours={isHours}
+								onChange={e => setFieldValue('unit', e.target.value)
 								}
-							}}
-						/>
-						<UnitInputSwitch
-							data-tip="Changer l'unité de temps"
-							onClick={() => {
-								setIsHours(!isHours);
-							}}
-						>
-							<UnitInputLabel>J</UnitInputLabel>
-							<UnitInputLabel>h</UnitInputLabel>
-							<UnitInputSlider isHours={isHours} />
-						</UnitInputSwitch>
+								onKeyDown={(e) => {
+									if (e.key === 'Tab') {
+										onTab(e.target.value);
+									}
+								}}
+							/>
+						</Tooltip>
+						<Tooltip label="Changer l'unité de temps">
+							<UnitInputSwitch
+								onClick={() => {
+									setIsHours(!isHours);
+								}}
+							>
+								<UnitInputLabel>J</UnitInputLabel>
+								<UnitInputLabel>h</UnitInputLabel>
+								<UnitInputSlider isHours={isHours} />
+							</UnitInputSwitch>
+						</Tooltip>
 					</UnitInputContainer>
 					{withButton && (
-						<>
-							<Button
-								textIcon
-								tiny
-								type="submit"
-								data-tip="Valider le temps et marquer comme fait"
-							>
+						<Tooltip label="Valider le temps et marquer comme fait">
+							<Button textIcon tiny type="submit">
 								✓
 							</Button>
-						</>
+						</Tooltip>
 					)}
 				</UnitInputForm>
 			)}

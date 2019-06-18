@@ -41,7 +41,8 @@ const EmojiTimeline = styled('div')`
 	height: 50px;
 `;
 
-const Emoji = styled('div')`
+const Emoji = styled('span')`
+	display: block;
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
@@ -208,11 +209,36 @@ class OnboardingThirdStep extends Component {
 											setFieldValue={setFieldValue}
 										/>
 										<EmojiTimeline>
-											<Emoji offset={0}>🌙</Emoji>
-											<Emoji offset={33}>☕</Emoji>
-											<Emoji offset={50}>🍽️</Emoji>
-											<Emoji offset={87}>🛌</Emoji>
-											<Emoji offset={100}>🌗</Emoji>
+											<Emoji
+												role="img"
+												aria-label="matin"
+												offset={0}
+												children="🌙"
+											/>
+											<Emoji
+												role="img"
+												aria-label="petit déjeuner"
+												offset={33}
+												children="☕"
+											/>
+											<Emoji
+												role="img"
+												aria-label="déjeuner"
+												offset={50}
+												children="🍽️"
+											/>
+											<Emoji
+												role="img"
+												aria-label="soirée"
+												offset={87}
+												children="🛌"
+											/>
+											<Emoji
+												role="img"
+												aria-label="nuit"
+												offset={100}
+												children="🌗"
+											/>
 										</EmojiTimeline>
 										<Label onboarding>
 											Définissez vos jours travaillés

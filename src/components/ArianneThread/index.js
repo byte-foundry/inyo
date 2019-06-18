@@ -272,7 +272,6 @@ function ArianneThread({
 		errors: errorsProject,
 	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 	const {
-		loading,
 		data: {
 			me: {tags},
 		},

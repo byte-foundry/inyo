@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {Formik} from 'formik';
 import {useMutation, useApolloClient, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
 import * as Yup from 'yup';
 
 import CreateProjectModalForm from '../CreateProjectModalForm';

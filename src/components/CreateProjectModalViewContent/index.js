@@ -10,7 +10,6 @@ import {
 	Button,
 	Label,
 	SubHeading,
-	primaryPurple,
 	primaryBlack,
 	primaryRed,
 	BackButton,
@@ -150,7 +149,6 @@ export default function ({back, optionsProjects, ...props}) {
 	const {
 		data: {project},
 		loading,
-		error,
 	} = useQuery(GET_PROJECT_DATA, {
 		variables: {
 			projectId:

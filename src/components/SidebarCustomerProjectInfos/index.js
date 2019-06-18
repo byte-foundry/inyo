@@ -3,8 +3,8 @@ import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import moment from 'moment';
-import ReactTooltip from 'react-tooltip';
 
+import Tooltip from '../Tooltip';
 import Plural from '../Plural';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
 import IconButton from '../../utils/new/components/IconButton';
@@ -17,7 +17,7 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
 
 const Aside = styled('aside')`
@@ -107,8 +107,6 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 
 	return (
 		<Aside>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-
 			<SubSection>
 				<SidebarLink
 					onClick={() => setView('tasks')}
@@ -142,9 +140,11 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 				<SubSection>
 					<SidebarHeading>Deadline</SidebarHeading>
 					<DateContainer>
-						<BigNumber data-tip="Date limite du projet">
-							{moment(project.deadline).format('DD/MM/YYYY')}
-						</BigNumber>
+						<Tooltip label="Date limite du projet">
+							<BigNumber>
+								{moment(project.deadline).format('DD/MM/YYYY')}
+							</BigNumber>
+						</Tooltip>
 					</DateContainer>
 				</SubSection>
 			)}
@@ -152,14 +152,16 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
-					<BigNumber data-tip="Nombre de jours travaillés avant deadline">
-						{project.daysUntilDeadline}&nbsp;
-						<Plural
-							value={project.daysUntilDeadline}
-							singular="jour"
-							plural="jours"
-						/>
-					</BigNumber>
+					<Tooltip label="Nombre de jours travaillés avant deadline">
+						<BigNumber>
+							{project.daysUntilDeadline}&nbsp;
+							<Plural
+								value={project.daysUntilDeadline}
+								singular="jour"
+								plural="jours"
+							/>
+						</BigNumber>
+					</Tooltip>
 				</SubSection>
 			)}
 		</Aside>

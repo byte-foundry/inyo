@@ -1,10 +1,9 @@
 import React, {useContext, Suspense} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
-import ReactTooltip from 'react-tooltip';
 
 import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
-import {TOOLTIP_DELAY, BREAKPOINTS} from '../../../utils/constants';
+import {BREAKPOINTS} from '../../../utils/constants';
 import {CustomerContext} from '../../../utils/contexts';
 
 import {Loading} from '../../../utils/content';
@@ -95,7 +94,6 @@ const CustomerTasks = ({
 						</Suspense>
 					</Main>
 				</TaskAndArianne>
-				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</Container>
 		);
 	}
@@ -104,7 +102,6 @@ const CustomerTasks = ({
 		<Container css={css} style={style}>
 			<TaskAndArianne>
 				<TasksList items={tasks} customerToken={token} />
-				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			</TaskAndArianne>
 		</Container>
 	);

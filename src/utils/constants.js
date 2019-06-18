@@ -91,8 +91,6 @@ export const itemStatuses = {
 	PENDING: 'PENDING',
 };
 
-export const TOOLTIP_DELAY = 650;
-
 export const BREAKPOINTS = [420];
 
 export const CUSTOMER_TASK_TYPES = [

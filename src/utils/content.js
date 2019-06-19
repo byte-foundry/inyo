@@ -387,13 +387,15 @@ function useLockBodyScroll() {
 	}, []); // Empty array ensures effect is only run on mount and unmount
 }
 
-export function ModalContainer({...props}) {
+export function ModalContainer({noClose, children, ...props}) {
 	useLockBodyScroll();
 
 	return (
 		<ResponsiveDialog {...props}>
-			<ModalCloseIcon onClick={props.onDismiss}>×</ModalCloseIcon>
-			{props.children}
+			{!noClose && (
+				<ModalCloseIcon onClick={props.onDismiss}>×</ModalCloseIcon>
+			)}
+			{children}
 		</ResponsiveDialog>
 	);
 }

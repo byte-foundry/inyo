@@ -1,10 +1,9 @@
-import React, {
-	useState, useEffect, useRef, useCallback,
-} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState, useCallback} from 'react';
+import Portal from '@reach/portal';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
 import {useDrag} from 'react-dnd';
+import moment from 'moment';
 
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
@@ -12,6 +11,7 @@ import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
 import ArianneThread from '../../../components/ArianneThread';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
+import RescheduleModal from '../../../components/RescheduleModal';
 
 import {
 	ModalContainer as Modal,
@@ -57,7 +57,6 @@ function DraggableTask({
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
 	const [isDragging, setIsDragging] = useState(false);
-	const leftBarRef = useRef();
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
@@ -67,18 +66,6 @@ const DashboardTasks = ({location, history}) => {
 		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
-
-	useEffect(() => {
-		if (!leftBarRef.current) {
-			leftBarRef.current = document.createElement('div');
-		}
-
-		document.body.appendChild(leftBarRef.current);
-
-		return () => {
-			document.body.removeChild(leftBarRef.current);
-		};
-	});
 
 	const onMoveTask = useCallback(({task, scheduledFor, position}) => {
 		focusTask({
@@ -111,7 +98,8 @@ const DashboardTasks = ({location, history}) => {
 	} = data;
 
 	let unscheduledTasks = [];
-	const scheduledTasks = {};
+	const tasksToReschedule = [];
+	const scheduledTasksPerDay = {};
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -183,14 +171,21 @@ const DashboardTasks = ({location, history}) => {
 			return;
 		}
 
-		scheduledTasks[task.scheduledFor] = scheduledTasks[
+		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
 			task.scheduledFor
 		] || {
 			date: task.scheduledFor,
 			tasks: [],
 		};
 
-		scheduledTasks[task.scheduledFor].tasks.push(task);
+		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+
+		if (
+			task.status === 'PENDING'
+			&& moment(task.scheduledFor).isBefore(moment(), 'day')
+		) {
+			tasksToReschedule.push(task);
+		}
 	});
 
 	unscheduledTasks = unscheduledTasks.filter(
@@ -209,10 +204,16 @@ const DashboardTasks = ({location, history}) => {
 				<Loading />
 			) : (
 				<Schedule
-					days={scheduledTasks}
+					days={scheduledTasksPerDay}
 					workingDays={userPrefsData.me.workingDays}
 					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
 					onMoveTask={onMoveTask}
+				/>
+			)}
+			{tasksToReschedule.length > 0 && (
+				<RescheduleModal
+					tasks={tasksToReschedule}
+					onReschedule={onMoveTask}
 				/>
 			)}
 
@@ -258,16 +259,14 @@ const DashboardTasks = ({location, history}) => {
 			{loadingUserPrefs ? (
 				<Loading />
 			) : (
-				leftBarRef.current
-				&& ReactDOM.createPortal(
+				<Portal>
 					<LeftBarSchedule
 						isDragging={isDragging}
-						days={scheduledTasks}
+						days={scheduledTasksPerDay}
 						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
 						onMoveTask={onMoveTask}
-					/>,
-					leftBarRef.current,
-				)
+					/>
+				</Portal>
 			)}
 		</>
 	);

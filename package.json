@@ -21,6 +21,7 @@
     "@emotion/styled": "^10.0.6",
     "@reach/dialog": "^0.1.2",
     "@reach/tooltip": "^0.2.1",
+    "@reach/portal": "^0.2.1",
     "@sentry/browser": "^4.2.1",
     "@uppy/core": "^0.30.3",
     "@uppy/react": "^0.30.3",

@@ -1,7 +1,5 @@
-import React, {
-	useState, useRef, useEffect, useCallback,
-} from 'react';
-import ReactDOM from 'react-dom';
+import React, {useState, useCallback} from 'react';
+import Portal from '@reach/portal';
 import gql from 'graphql-tag';
 import styled from '@emotion/styled/macro';
 import {useMutation, useQuery} from 'react-apollo-hooks';
@@ -672,7 +670,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
-	const leftBarRef = useRef();
 	const [isDragging, setIsDragging] = useState(false);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
@@ -720,18 +717,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 		},
 	});
 	const updateSection = useMutation(UPDATE_SECTION);
-
-	useEffect(() => {
-		if (!leftBarRef.current) {
-			leftBarRef.current = document.createElement('div');
-		}
-
-		document.body.appendChild(leftBarRef.current);
-
-		return () => {
-			document.body.removeChild(leftBarRef.current);
-		};
-	});
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -911,16 +896,14 @@ function ProjectTasksList({items, projectId, sectionId}) {
 			{loadingUserPrefs ? (
 				<Loading />
 			) : (
-				leftBarRef.current
-				&& ReactDOM.createPortal(
+				<Portal>
 					<LeftBarSchedule
 						isDragging={isDragging}
 						days={scheduledTasks}
 						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
 						onMoveTask={onMoveTask}
-					/>,
-					leftBarRef.current,
-				)
+					/>
+				</Portal>
 			)}
 		</TasksListContainer>
 	);

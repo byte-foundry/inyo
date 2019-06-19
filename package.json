@@ -51,7 +51,6 @@
     "react-apollo": "^2.5.4",
     "react-apollo-hooks": "^0.4.5",
     "react-autocomplete": "^1.8.1",
-    "react-beautiful-dnd": "^10.0.3",
     "react-dates": "^19.0.3",
     "react-day-picker": "^7.2.4",
     "react-dnd": "^8.0.0",

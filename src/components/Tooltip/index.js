@@ -32,7 +32,26 @@ const AnimatedTooltip = ({children, needsWrapper, ...rest}) => {
 			{needsWrapper ? (
 				<div {...trigger}>{child}</div>
 			) : (
-				cloneElement(child, trigger)
+				cloneElement(child, {
+					...trigger,
+					ref: (node) => {
+						const {ref} = child;
+
+						if (typeof ref === 'function') {
+							ref(node);
+						}
+						else if (ref !== null) {
+							ref.current = node;
+						}
+
+						if (typeof trigger.ref === 'function') {
+							trigger.ref(node);
+						}
+						else if (trigger.ref !== null) {
+							trigger.ref.current = node;
+						}
+					},
+				})
 			)}
 
 			{transitions.map(

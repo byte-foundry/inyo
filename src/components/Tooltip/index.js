@@ -17,7 +17,8 @@ animated.TooltipPopup = animated(CustomTooltipPopup);
 animated.TooltipContent = animated(CustomTooltipPopup);
 
 const AnimatedTooltip = ({children, needsWrapper, ...rest}) => {
-	const [trigger, tooltip, isVisible] = useTooltip();
+	const child = Children.only(children);
+	const [trigger, tooltip, isVisible] = useTooltip(child.props);
 
 	const transitions = useTransition(isVisible ? tooltip : false, null, {
 		from: {opacity: 0},
@@ -29,9 +30,9 @@ const AnimatedTooltip = ({children, needsWrapper, ...rest}) => {
 	return (
 		<>
 			{needsWrapper ? (
-				<div {...trigger}>{children}</div>
+				<div {...trigger}>{child}</div>
 			) : (
-				cloneElement(Children.only(children), trigger)
+				cloneElement(child, trigger)
 			)}
 
 			{transitions.map(

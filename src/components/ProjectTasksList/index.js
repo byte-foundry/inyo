@@ -686,6 +686,25 @@ function ProjectTasksList({items, projectId, sectionId}) {
 			},
 		},
 	});
+	const onMoveTask = useCallback(
+		({task, scheduledFor, position}) => {
+			focusTask({
+				variables: {
+					itemId: task.id,
+					for: scheduledFor,
+					schedulePosition: position,
+				},
+				optimisticReponse: {
+					focusTask: {
+						itemId: task.id,
+						for: scheduledFor,
+						schedulePosition: position,
+					},
+				},
+			});
+		},
+		[focusTask],
+	);
 	const addSection = useMutation(ADD_SECTION, {
 		update: (cache, {data: {addSection: addedSection}}) => {
 			const data = cache.readQuery({
@@ -787,26 +806,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 		scheduledTasks[task.scheduledFor].tasks.push(task);
 	});
-
-	const onMoveTask = useCallback(
-		({task, scheduledFor, position}) => {
-			focusTask({
-				variables: {
-					itemId: task.id,
-					for: scheduledFor,
-					schedulePosition: position,
-				},
-				optimisticReponse: {
-					focusTask: {
-						itemId: task.id,
-						for: scheduledFor,
-						schedulePosition: position,
-					},
-				},
-			});
-		},
-		[focusTask],
-	);
 
 	return (
 		<TasksListContainer>

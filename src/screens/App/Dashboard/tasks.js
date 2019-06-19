@@ -21,6 +21,7 @@ import {
 import {DRAG_TYPES} from '../../../utils/constants';
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 import {FOCUS_TASK} from '../../../utils/mutations';
+import {isCustomerTask} from '../../../utils/functions';
 
 function DraggableTask({
 	item,
@@ -43,6 +44,12 @@ function DraggableTask({
 			setIsDragging(false);
 		},
 	});
+
+	if (isCustomerTask(item.type)) {
+		return (
+			<Task item={item} customerToken={customerToken} baseUrl={baseUrl} />
+		);
+	}
 
 	return (
 		<Task

@@ -17,6 +17,7 @@ describe('Client', () => {
 		cy.url().should('include', 'app/tasks');
 
 		cy.contains('Dashboard').click();
+		cy.contains('Dashboard').click();
 
 		cy.url().should('include', 'app/dashboard');
 	});

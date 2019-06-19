@@ -79,6 +79,7 @@ describe('Onboarding', () => {
 		cy.contains('Aucune tâche à faire pour le moment');
 
 		cy.contains('Projets').click();
+		cy.contains('Projets').click();
 
 		cy.contains('Aucun projet en cours');
 
@@ -99,8 +100,9 @@ describe('Onboarding', () => {
 		cy.get('.css-1ic2po7').click();
 
 		cy.contains('Dashboard').click();
+		cy.contains('Dashboard').click();
 
-		cy.contains("Vous n'avez pas de tâches prévues");
+		cy.contains('Aucune tâche à faire');
 
 		cy.contains('Aucune tâches client n');
 

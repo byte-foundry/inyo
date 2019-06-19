@@ -329,7 +329,7 @@ const DraggableTask = ({
 	task, position, sections, setIsDragging, ...rest
 }) => {
 	const updateTask = useMutation(UPDATE_ITEM);
-	const [_, drag] = useDrag({
+	const [, drag] = useDrag({
 		item: {
 			id: task.id,
 			position,
@@ -538,7 +538,7 @@ const DraggableSection = ({
 	children, section, position, sections,
 }) => {
 	const updateSection = useMutation(UPDATE_SECTION);
-	const [_, drag] = useDrag({
+	const [, drag] = useDrag({
 		item: {
 			id: section.id,
 			position,
@@ -751,6 +751,26 @@ function ProjectTasksList({items, projectId, sectionId}) {
 			document.body.removeChild(leftBarRef.current);
 		};
 	});
+
+	const onMoveTask = useCallback(
+		({task, scheduledFor, position}) => {
+			focusTask({
+				variables: {
+					itemId: task.id,
+					for: scheduledFor,
+					schedulePosition: position,
+				},
+				optimisticReponse: {
+					focusTask: {
+						itemId: task.id,
+						for: scheduledFor,
+						schedulePosition: position,
+					},
+				},
+			});
+		},
+		[focusTask],
+	);
 
 	if (error) throw error;
 	if (errorUserPrefs) throw errorUserPrefs;

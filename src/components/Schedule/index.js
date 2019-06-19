@@ -114,7 +114,7 @@ const DraggableTaskCard = ({
 	id, index, scheduledFor, onMove, ...rest
 }) => {
 	const unfocusTask = useMutation(UNFOCUS_TASK);
-	const [_, drag] = useDrag({
+	const [, drag] = useDrag({
 		item: {id, type: DRAG_TYPES.TASK},
 		begin() {
 			return {
@@ -179,7 +179,7 @@ const DraggableTaskCard = ({
 	);
 };
 
-const DroppableDayTasks = ({id, children}) => {
+const DroppableDayTasks = ({children}) => {
 	const [{isOver}, drop] = useDrop({
 		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
@@ -268,9 +268,7 @@ const Schedule = ({
 							<DroppableDayTasks id={day.date}>
 								{sortedTasks.map(task => (
 									<DraggableTaskCard
-										key={`${task.id}-${
-											task.schedulePosition
-										}`}
+										key={`${task.id}-${task.schedulePosition}`}
 										id={task.id}
 										task={task}
 										index={task.schedulePosition}

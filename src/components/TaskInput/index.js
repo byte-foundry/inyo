@@ -186,12 +186,14 @@ const TaskInputCheckListContainer = styled('div')`
 const types = ITEM_TYPES;
 
 const useTrackEventInput = ({focus, openedByClick, value}) => {
+	const isTypingCommand = value.startsWith('/');
+
 	useEffect(() => {
-		if (focus && value.startsWith('/')) {
+		if (focus && isTypingCommand) {
 			window.Intercom('trackEvent', 'open-task-dropdown');
 			window.Intercom('trackEvent', 'open-task-dropdown-with-slash');
 		}
-	}, [focus, value.startsWith('/')]);
+	}, [focus, isTypingCommand]);
 
 	useEffect(() => {
 		if (openedByClick) {

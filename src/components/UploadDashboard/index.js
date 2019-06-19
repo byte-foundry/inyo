@@ -57,7 +57,7 @@ function UploadDashboard({customerToken, taskId}) {
 		() => function cleanup() {
 			uppyState.close();
 		},
-		[],
+		[uppyState],
 	);
 
 	return (

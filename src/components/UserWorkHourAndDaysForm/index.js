@@ -227,7 +227,6 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 							endMinutes,
 							workingDays,
 							timeZone,
-							hasNotFullWeekSchedule,
 						},
 						setFieldValue,
 					} = props;

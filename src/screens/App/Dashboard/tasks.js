@@ -67,22 +67,25 @@ const DashboardTasks = ({location, history}) => {
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 	const focusTask = useMutation(FOCUS_TASK);
 
-	const onMoveTask = useCallback(({task, scheduledFor, position}) => {
-		focusTask({
-			variables: {
-				itemId: task.id,
-				for: scheduledFor,
-				schedulePosition: position,
-			},
-			optimisticReponse: {
-				focusTask: {
+	const onMoveTask = useCallback(
+		({task, scheduledFor, position}) => {
+			focusTask({
+				variables: {
 					itemId: task.id,
 					for: scheduledFor,
 					schedulePosition: position,
 				},
-			},
-		});
-	});
+				optimisticReponse: {
+					focusTask: {
+						itemId: task.id,
+						for: scheduledFor,
+						schedulePosition: position,
+					},
+				},
+			});
+		},
+		[focusTask],
+	);
 
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');

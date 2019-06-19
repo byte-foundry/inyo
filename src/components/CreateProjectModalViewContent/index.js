@@ -147,6 +147,12 @@ function TemplateTaskList({selectedTemplate}) {
 
 export default function ({back, optionsProjects, ...props}) {
 	const {
+		setFieldValue,
+		modelTemplate,
+		modelProject,
+		source: type,
+	} = props.values;
+	const {
 		data: {project},
 		loading,
 	} = useQuery(GET_PROJECT_DATA, {
@@ -158,12 +164,10 @@ export default function ({back, optionsProjects, ...props}) {
 
 	let content;
 
-	const type = props.values.source;
-
 	useEffect(() => {
-		props.setFieldValue('modelTemplateTemp', props.values.modelTemplate);
-		props.setFieldValue('modelProjectTemp', props.values.modelProject);
-	}, []);
+		setFieldValue('modelTemplateTemp', modelTemplate);
+		setFieldValue('modelProjectTemp', modelProject);
+	}, [setFieldValue, modelTemplate, modelProject]);
 
 	if (type === 'MODELS') {
 		content = templates.find(

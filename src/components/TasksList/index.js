@@ -1,6 +1,5 @@
 import React, {memo} from 'react';
 import styled from '@emotion/styled/macro';
-import {Draggable} from 'react-beautiful-dnd';
 
 import Task from './task';
 import Tooltip from '../Tooltip';

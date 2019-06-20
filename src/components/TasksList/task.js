@@ -504,9 +504,7 @@ export function TaskInfosInputs({
 								<IconButtonLink
 									isFocused={item.isFocused}
 									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 										state: {
 											prevSearch: location.search,
 											isActivating: true,
@@ -527,9 +525,7 @@ export function TaskInfosInputs({
 								<IconButtonLink
 									isFocused={item.isFocused}
 									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 										state: {
 											prevSearch: location.search,
 										},
@@ -547,9 +543,7 @@ export function TaskInfosInputs({
 							<Tooltip label="Aucun client n’est lié à cette tâche">
 								<IconButtonLink
 									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
@@ -880,9 +874,7 @@ function Task({
 									small={setTimeItTook}
 									status={item.status}
 									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
@@ -893,9 +885,7 @@ function Task({
 									noData={noData}
 									small={setTimeItTook}
 									to={{
-										pathname: `${taskUrlPrefix}/tasks/${
-											item.id
-										}`,
+										pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
@@ -906,16 +896,14 @@ function Task({
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${
-											item.id
-										}`,
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 										state: {prevSearch: location.search},
 									}}
 								>
 									Ouvrir
 								</OpenBtn>
 								{baseUrl === 'dashboard'
-									&& !isCustomerTask(item) && (
+									&& !isCustomerTask(item.type) && (
 									<Button
 										onClick={() => focusTask({
 											variables: {

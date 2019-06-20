@@ -45,6 +45,12 @@ function DraggableTask({
 		},
 	});
 
+	if (isCustomerTask(item.type) && !item.linkedCustomer) {
+		return (
+			<Task item={item} customerToken={customerToken} baseUrl={baseUrl} />
+		);
+	}
+
 	return (
 		<Task
 			ref={drag}

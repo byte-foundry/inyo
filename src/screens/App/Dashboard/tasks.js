@@ -45,7 +45,7 @@ function DraggableTask({
 		},
 	});
 
-	if (isCustomerTask(item.type)) {
+	if (isCustomerTask(item.type) && !item.linkedCustomer) {
 		return (
 			<Task item={item} customerToken={customerToken} baseUrl={baseUrl} />
 		);
@@ -76,6 +76,21 @@ const DashboardTasks = ({location, history}) => {
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
+			const cachedTask = data.me.tasks.find(t => task.id === t.id);
+
+			if (isCustomerTask(cachedTask.type)) {
+				history.push({
+					pathname: `/app/dashboard/${task.id}`,
+					state: {
+						prevSearch: location.search,
+						isActivating: true,
+						scheduledFor,
+					},
+				});
+
+				return;
+			}
+
 			focusTask({
 				variables: {
 					itemId: task.id,
@@ -91,7 +106,7 @@ const DashboardTasks = ({location, history}) => {
 				},
 			});
 		},
-		[focusTask],
+		[focusTask, data.me.tasks, history, location.search],
 	);
 
 	const projectId = query.get('projectId');
@@ -261,6 +276,7 @@ const DashboardTasks = ({location, history}) => {
 								id={match.params.taskId}
 								close={() => history.push('/app/dashboard')}
 								isActivating={state.isActivating}
+								scheduledFor={state.scheduledFor}
 							/>
 						</ModalElem>
 					</Modal>

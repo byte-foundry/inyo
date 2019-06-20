@@ -1,4 +1,5 @@
 import React, {useState, useCallback} from 'react';
+import {withRouter} from 'react-router-dom';
 import Portal from '@reach/portal';
 import gql from 'graphql-tag';
 import styled from '@emotion/styled/macro';
@@ -49,6 +50,7 @@ import Pencil from '../../utils/icons/pencil.svg';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import IconButton from '../../utils/new/components/IconButton';
 import Tooltip from '../Tooltip';
+import {isCustomerTask} from '../../utils/functions';
 
 const TasksListContainer = styled(LayoutMainElem)``;
 
@@ -663,7 +665,9 @@ const DraggableSection = ({
 	);
 };
 
-function ProjectTasksList({items, projectId, sectionId}) {
+function ProjectTasksList({
+	items, projectId, sectionId, history, location,
+}) {
 	const {
 		data: userPrefsData,
 		loading: loadingUserPrefs,
@@ -720,6 +724,22 @@ function ProjectTasksList({items, projectId, sectionId}) {
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
+			const cachedSection = projectData.project.sections.find(s => s.items.find(t => task.id === t.id));
+			const cachedTask = cachedSection.items.find(t => task.id === t.id);
+
+			if (isCustomerTask(cachedTask.type)) {
+				history.push({
+					pathname: `/app/tasks/${task.id}`,
+					state: {
+						prevSearch: location.search,
+						isActivating: true,
+						scheduledFor,
+					},
+				});
+
+				return;
+			}
+
 			focusTask({
 				variables: {
 					itemId: task.id,
@@ -735,7 +755,7 @@ function ProjectTasksList({items, projectId, sectionId}) {
 				},
 			});
 		},
-		[focusTask],
+		[focusTask, projectData, location.search, history],
 	);
 
 	if (error) throw error;
@@ -909,4 +929,4 @@ function ProjectTasksList({items, projectId, sectionId}) {
 	);
 }
 
-export default ProjectTasksList;
+export default withRouter(ProjectTasksList);

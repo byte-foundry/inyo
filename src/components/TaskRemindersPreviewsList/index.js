@@ -1,5 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {useSpring, animated} from 'react-spring';
+import useOnClickOutside from 'use-onclickoutside';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 
@@ -9,12 +10,14 @@ import {
 	Button,
 	Select,
 	BackButton,
+	DateContainer,
 } from '../../utils/new/design-system';
 import usePrevious from '../../utils/usePrevious';
 import useMeasure from '../../utils/useMeasure';
 import IconButton from '../../utils/new/components/IconButton';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import Tooltip from '../Tooltip';
+import DateInput from '../DateInput';
 
 const Container = styled('div')`
 	display: flex;
@@ -155,6 +158,7 @@ const TaskRemindersPreviewsList = ({
 	taskId,
 	remindersPreviews: plannedReminders = [],
 	customerName = '',
+	initialScheduledFor,
 	onFocusTask,
 	onCancel,
 }) => {
@@ -163,6 +167,16 @@ const TaskRemindersPreviewsList = ({
 	const [value, setValue] = useState(1);
 	const [unit, setUnit] = useState('days');
 	const [isRelative, setIsRelative] = useState(true);
+	const [isEditingScheduledFor, setIsEditingScheduledFor] = useState(false);
+	const [scheduledFor, setScheduledFor] = useState(
+		moment(initialScheduledFor),
+	);
+
+	const dateRef = useRef();
+
+	useOnClickOutside(dateRef, () => {
+		setIsEditingScheduledFor(false);
+	});
 
 	const durationOptions = {
 		minutes: new Array(60 / 5 - 1).fill(0).map((_, i) => ({
@@ -194,6 +208,20 @@ const TaskRemindersPreviewsList = ({
 			<BackButton grey type="button" link onClick={() => onCancel()}>
 				Retour
 			</BackButton>
+			<DateContainer style={{alignSelf: 'flex-start'}}>
+				<span onClick={() => setIsEditingScheduledFor(true)}>
+					Date d'activation :{' '}
+					{moment(scheduledFor).format('DD/MM/YYYY')}
+				</span>
+				{isEditingScheduledFor && (
+					<DateInput
+						innerRef={dateRef}
+						date={scheduledFor}
+						onDateChange={date => setScheduledFor(date)}
+						position="right"
+					/>
+				)}
+			</DateContainer>
 			<ReminderList>
 				{reminders
 					.sort((a, b) => a.delay - b.delay)
@@ -432,12 +460,15 @@ const TaskRemindersPreviewsList = ({
 				<Button
 					type="submit"
 					aligned
-					onClick={() => onFocusTask(
-						reminders.map(r => ({
+					onClick={() => onFocusTask({
+						reminders: reminders.map(r => ({
 							delay: r.delay,
 							type: r.type,
 						})),
-					)
+						scheduledFor: scheduledFor.format(
+							moment.HTML5_FMT.DATE,
+						),
+					})
 					}
 				>
 					Valider l'activation

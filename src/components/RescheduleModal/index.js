@@ -1,11 +1,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from '@emotion/styled';
 import {useMutation} from 'react-apollo-hooks';
 
 import Task from '../TasksList/task';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {P, Button} from '../../utils/new/design-system';
 import {UNFOCUS_TASK} from '../../utils/mutations';
+
+const WrapTasks = styled('div')`
+	margin: 1rem 0 2rem;
+`;
 
 const RescheduleModal = ({tasks}) => {
 	const unfocusTask = useMutation(UNFOCUS_TASK);
@@ -17,9 +22,11 @@ const RescheduleModal = ({tasks}) => {
 					Il semblerait qu'il y ait des tâches prévues les jours
 					précédents que vous n'avez pas validées ou déplacées.
 				</P>
-				{tasks.map(task => (
-					<Task item={task} baseUrl="dashboard" />
-				))}
+				<WrapTasks>
+					{tasks.map(task => (
+						<Task item={task} baseUrl="dashboard" />
+					))}
+				</WrapTasks>
 				<Button
 					onClick={() => tasks.forEach(task => unfocusTask({
 						variables: {

@@ -15,7 +15,7 @@ import {
 	lightGrey,
 	Button,
 } from '../../utils/new/design-system';
-import {DRAG_TYPES} from '../../utils/constants';
+import {DRAG_TYPES, BREAKPOINTS} from '../../utils/constants';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import IconButton from '../../utils/new/components/IconButton';
@@ -24,6 +24,7 @@ import TaskCard from '../TaskCard';
 
 const Container = styled('div')`
 	margin-top: 3rem;
+	max-width: 100vw;
 `;
 
 const Week = styled('div')`
@@ -31,6 +32,10 @@ const Week = styled('div')`
 	flex-direction: row;
 	justify-content: center;
 	border: 1px solid ${mediumGrey};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-flow: column-reverse;
+	}
 `;
 
 const Day = styled('div')`
@@ -100,6 +105,12 @@ const ScheduleNav = styled('div')`
 	margin-bottom: 1rem;
 	color: ${primaryPurple};
 	justify-content: flex-end;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		${Button} {
+			width: auto;
+		}
+	}
 `;
 
 const ScheduleNavInfo = styled('div')`

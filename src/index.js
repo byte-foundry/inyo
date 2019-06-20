@@ -7,7 +7,8 @@ import {
 	ApolloProvider as ApolloHooksProvider,
 	useQuery,
 } from 'react-apollo-hooks';
-import HTML5Backend from 'react-dnd-html5-backend';
+import MultiBackend from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
 import {DndProvider} from 'react-dnd';
 import {
 	BrowserRouter as Router,
@@ -134,7 +135,7 @@ function Root() {
 	}
 
 	return (
-		<DndProvider backend={HTML5Backend}>
+		<DndProvider backend={MultiBackend(HTML5toTouch)}>
 			<ProvidersSentry>
 				<BodyMain>
 					<main>

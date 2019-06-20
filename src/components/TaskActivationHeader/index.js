@@ -34,7 +34,7 @@ function TaskActivationHeader({
 					/>
 				)) || (
 					<div>
-						Il manque un client a cette tâche pour qu'elle soit
+						Il manque un client à cette tâche pour qu'elle soit
 						réalisable.
 					</div>
 				))}

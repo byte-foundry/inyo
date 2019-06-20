@@ -1,4 +1,19 @@
+import {testConfig, userForPost} from '../support';
+
+const {notCreated, alreadyExisting} = testConfig;
+
 describe('Sign up', () => {
+	before(() => {
+		cy.request({
+			url: 'https://prisma-dev.inyo.me/prep-for-test',
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(userForPost),
+		});
+	});
+
 	beforeEach(() => {
 		cy.visit('/');
 
@@ -15,8 +30,8 @@ describe('Sign up', () => {
 	it('should not allow an invalid email', () => {
 		cy.get('#toscheck').click();
 		cy.get('input[name=email]')
-			.type('already@used')
-			.should('have.value', 'already@used')
+			.type('already@prout')
+			.should('have.value', 'already@prout')
 			.blur();
 
 		cy.contains('email doit être valide');
@@ -25,8 +40,8 @@ describe('Sign up', () => {
 	it('should not allow a already used email', () => {
 		cy.get('#toscheck').click();
 		cy.get('input[name=email]')
-			.type('already@used.email')
-			.should('have.value', 'already@used.email')
+			.type(alreadyExisting.email)
+			.should('have.value', alreadyExisting.email)
 			.blur();
 
 		cy.contains('email est déjà utilisé');
@@ -35,20 +50,20 @@ describe('Sign up', () => {
 	it('should allow to sign up', () => {
 		cy.get('#toscheck').click();
 		cy.get('input[name=email]')
-			.type('notused@used.email')
-			.should('have.value', 'notused@used.email');
+			.type(notCreated.email)
+			.should('have.value', notCreated.email);
 
 		cy.get('input[name=password]')
-			.type('testtest')
-			.should('have.value', 'testtest');
+			.type(notCreated.password)
+			.should('have.value', notCreated.password);
 
 		cy.get('input[name=firstname]')
-			.type('Jack')
-			.should('have.value', 'Jack');
+			.type(notCreated.firstName)
+			.should('have.value', notCreated.firstName);
 
 		cy.get('input[name=lastname]')
-			.type('Lang')
-			.should('have.value', 'Lang');
+			.type(notCreated.lastName)
+			.should('have.value', notCreated.lastName);
 
 		cy.contains('Commencez').click();
 

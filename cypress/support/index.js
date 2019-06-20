@@ -19,3 +19,34 @@ import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 Cypress.on('uncaught:exception', (err, runnable) => false);
+
+export const testConfig = {
+	baseUser: {
+		email: 'base@user.email',
+		password: 'testtest',
+		firstName: 'Jack',
+		lastName: 'Lang',
+	},
+	baseUser: {
+		email: 'base@user.email',
+		password: 'testtest',
+		firstName: 'Jack',
+		lastName: 'Lang',
+	},
+	alreadyExisting: {
+		email: 'already@used.email',
+		password: 'testtest',
+		firstName: 'Jack',
+		lastName: 'Lang',
+	},
+	notCreated: {
+		email: 'notused@used.email',
+		password: 'testtest',
+		firstName: 'Jack',
+		lastName: 'Lang',
+	},
+};
+
+export const userForPost = {
+	users: [testConfig.baseUser, testConfig.alreadyExisting],
+};

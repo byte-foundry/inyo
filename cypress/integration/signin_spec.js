@@ -1,4 +1,19 @@
+import {testConfig, userForPost} from '../support';
+
+const {baseUser} = testConfig;
+
 describe('Sign in', () => {
+	before(() => {
+		cy.request({
+			url: 'https://prisma-dev.inyo.me/prep-for-test',
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(userForPost),
+		});
+	});
+
 	it('should require an email and a password', () => {
 		cy.visit('/');
 
@@ -46,8 +61,8 @@ describe('Sign in', () => {
 		cy.visit('/auth/sign-in');
 
 		cy.get('input[name=email]')
-			.type('notused@used.email')
-			.should('have.value', 'notused@used.email')
+			.type(baseUser.email)
+			.should('have.value', baseUser.email)
 			.blur();
 
 		cy.get('input[name=password]')
@@ -64,13 +79,13 @@ describe('Sign in', () => {
 		cy.visit('/auth/sign-in');
 
 		cy.get('input[name=email]')
-			.type('notused@used.email')
-			.should('have.value', 'notused@used.email')
+			.type(baseUser.email)
+			.should('have.value', baseUser.email)
 			.blur();
 
 		cy.get('input[name=password]')
-			.type('testtest')
-			.should('have.value', 'testtest')
+			.type(baseUser.password)
+			.should('have.value', baseUser.password)
 			.blur();
 
 		cy.contains('Se connecter').click();

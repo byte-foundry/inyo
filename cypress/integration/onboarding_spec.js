@@ -1,15 +1,30 @@
+import {testConfig, userForPost} from '../support';
+
+const {baseUser} = testConfig;
+
 describe('Onboarding', () => {
+	before(() => {
+		cy.request({
+			url: 'https://prisma-dev.inyo.me/prep-for-test',
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(userForPost),
+		});
+	});
+
 	beforeEach(() => {
 		cy.visit('http://localhost:3000/auth/sign-in');
 
 		cy.get('input[name=email]')
-			.type('notused@used.email')
-			.should('have.value', 'notused@used.email')
+			.type(baseUser.email)
+			.should('have.value', baseUser.email)
 			.blur();
 
 		cy.get('input[name=password]')
-			.type('testtest')
-			.should('have.value', 'testtest')
+			.type(baseUser.password)
+			.should('have.value', baseUser.password)
 			.blur();
 
 		cy.contains('Se connecter').click();
@@ -106,7 +121,7 @@ describe('Onboarding', () => {
 
 		cy.contains('Aucune tâches client n');
 
-		cy.get('.css-3tccu1-Help').click();
+		cy.get('#help-button').click();
 
 		cy.contains('Aide').click();
 		cy.contains("J'ai compris!").click();

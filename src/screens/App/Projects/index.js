@@ -281,9 +281,7 @@ function Projects({history}) {
 										});
 
 										history.push(
-											`/app/tasks?projectId=${
-												createdProject.id
-											}`,
+											`/app/tasks?projectId=${createdProject.id}`,
 										);
 									}}
 								>
@@ -361,10 +359,9 @@ function Projects({history}) {
 							</SubHeadingProject>
 							{unarchivedProject.map(project => (
 								<ProjectItem
+									key={project.id}
 									onClick={() => history.push(
-										`/app/tasks?projectId=${
-											project.id
-										}`,
+										`/app/tasks?projectId=${project.id}`,
 									)
 									}
 								>
@@ -455,10 +452,9 @@ function Projects({history}) {
 									)}
 									{archivedProject.map(project => (
 										<ProjectItem
+											key={project.id}
 											onClick={() => history.push(
-												`/app/tasks?projectId=${
-													project.id
-												}`,
+												`/app/tasks?projectId=${project.id}`,
 											)
 											}
 											archived

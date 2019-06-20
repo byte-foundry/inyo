@@ -172,6 +172,7 @@ function LeftBarSchedule({
 				<LeftBarContent>
 					{weekdays.map(day => (
 						<DroppableDay
+							key={day.date}
 							day={day}
 							index={day.tasks.length}
 							scheduledFor={day.date}

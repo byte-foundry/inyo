@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import ReactSelect from 'react-select';
 import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
@@ -335,14 +335,12 @@ export const TaskInfosItem = styled('div')`
 
 export const TaskInfosItemLink = TaskInfosItem.withComponent(Link);
 
-export function TaskIconText({icon, content, ...rest}) {
-	return (
-		<TaskInfosItem {...rest}>
-			{icon}
-			<TaskInfosContent>{content}</TaskInfosContent>
-		</TaskInfosItem>
-	);
-}
+export const TaskIconText = forwardRef(({icon, content, ...rest}, ref) => (
+	<TaskInfosItem {...rest} ref={ref}>
+		{icon}
+		<TaskInfosContent>{content}</TaskInfosContent>
+	</TaskInfosItem>
+));
 
 export const LayoutMainElem = styled('div')`
 	flex: 1;

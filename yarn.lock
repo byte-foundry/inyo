@@ -1730,10 +1730,10 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@reach/tooltip@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@reach/tooltip/-/tooltip-0.2.1.tgz#70a80d6defedee53cedf5480cd3d37dfb20020d0"
-  integrity sha512-3O7oXoymNkEAolHN9WbuspY7mA3zIOrTaibmYkKFtGT6FgyBrAQyOQn1ZhBuSza6RjSIkEtFRpbDEKK1UJEI6A==
+"@reach/tooltip@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@reach/tooltip/-/tooltip-0.2.2.tgz#a861ce38269b586597ab40417323b33d3d6dc927"
+  integrity sha512-afcfqH6EzDHmwTB6g1k0dSbkyT0s9KPIi5bX56nNuldsCIasImFFYDjRZLhFcuxjskwIsHAi06yC3GV6mtcRxw==
   dependencies:
     "@reach/auto-id" "0.2.0"
     "@reach/portal" "^0.2.1"

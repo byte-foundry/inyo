@@ -274,6 +274,7 @@ const Item = ({
 	customerToken,
 	close,
 	isActivating: initialIsActivating = false,
+	scheduledFor: initialScheduledFor,
 }) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -376,9 +377,14 @@ const Item = ({
 					taskId={item.id}
 					remindersPreviews={item.remindersPreviews}
 					customerName={item.linkedCustomer.name}
-					onFocusTask={async (reminders) => {
+					initialScheduledFor={initialScheduledFor}
+					onFocusTask={async ({reminders, scheduledFor}) => {
 						await focusTask({
-							variables: {itemId: item.id, reminders},
+							variables: {
+								itemId: item.id,
+								reminders,
+								scheduledFor,
+							},
 						});
 
 						setIsActivating(false);

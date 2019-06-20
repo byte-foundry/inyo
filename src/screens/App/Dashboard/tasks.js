@@ -207,6 +207,7 @@ const DashboardTasks = ({location, history}) => {
 
 		if (
 			task.status === 'PENDING'
+			&& !isCustomerTask(task.type)
 			&& moment(task.scheduledFor).isBefore(moment(), 'day')
 		) {
 			tasksToReschedule.push(task);

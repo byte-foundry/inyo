@@ -383,7 +383,7 @@ const Item = ({
 							variables: {
 								itemId: item.id,
 								reminders,
-								scheduledFor,
+								for: scheduledFor,
 							},
 						});
 

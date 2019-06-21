@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Tooltip from '../Tooltip';
+
 function TimeItTookDisplay({
 	timeItTook, unit, customerToken, status,
 }) {
@@ -10,9 +12,9 @@ function TimeItTookDisplay({
 
 	return (
 		((customerToken && diff > 0) || !customerToken) && (
-			<span data-tip={diff > 0 ? 'Temps dépassé' : 'Temps surestimé'}>
-				{` (${diff > 0 ? '+' : ''}${diff})`}
-			</span>
+			<Tooltip label={diff > 0 ? 'Temps dépassé' : 'Temps surestimé'}>
+				<span>{` (${diff > 0 ? '+' : ''}${diff})`}</span>
+			</Tooltip>
 		)
 	);
 }

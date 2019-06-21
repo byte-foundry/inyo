@@ -15,6 +15,7 @@ import {
 } from '../../utils/content';
 import {Button} from '../../utils/new/design-system';
 import FormSelect from '../FormSelect';
+import FormCheckbox from '../FormCheckbox';
 import {GET_USER_INFOS} from '../../utils/queries';
 
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
@@ -75,7 +76,8 @@ const EmojiTimeline = styled('div')`
 	}
 `;
 
-const Emoji = styled('div')`
+const Emoji = styled('span')`
+	display: block;
 	position: absolute;
 	left: calc(${props => props.offset}% - 21px);
 	user-select: none;
@@ -84,16 +86,17 @@ const Emoji = styled('div')`
 const Illus = styled('img')`
 	margin-right: 2rem;
 	align-self: end;
-	grid-row: 4 / 8;
+	grid-row: 4 / 9;
 `;
 
-function UserWorkHourAndDaysForm({data, done = () => {}}) {
+const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 	const {
 		timeZone: initialTimeZone,
 		startWorkAt,
 		endWorkAt,
+		settings: {hasFullWeekSchedule: hasFullWeekScheduleInitial},
 		workingDays,
-	} = data;
+	} = props;
 
 	const currentDate = new Date().toJSON().split('T')[0];
 	const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
@@ -133,6 +136,7 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 					endHour: endHourInitial,
 					endMinutes: endMinutesInitial,
 					workingDays: workingDaysInitial,
+					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
 				}}
 				validationSchema={Yup.object().shape({})}
@@ -144,7 +148,9 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 						startMinutes,
 						endHour,
 						endMinutes,
-						...rest
+						workingDays,
+						timeZone,
+						hasNotFullWeekSchedule,
 					} = values;
 
 					const start = new Date();
@@ -164,9 +170,11 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 					try {
 						updateUser({
 							variables: {
-								...rest,
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
+								workingDays,
+								timeZone,
+								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},
 							update: (
 								cache,
@@ -180,7 +188,7 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 									query: GET_USER_INFOS,
 								});
 
-								data.me = {...data.me, ...updatedUser};
+								data.me = updatedUser;
 								try {
 									cache.writeQuery({
 										query: GET_USER_INFOS,
@@ -250,16 +258,48 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 											gridColumn: '1 / 3',
 										}}
 									>
-										<Emoji offset={0}>🌙</Emoji>
-										<Emoji offset={33}>☕</Emoji>
-										<Emoji offset={50}>🍽️</Emoji>
-										<Emoji offset={87}>🛌</Emoji>
-										<Emoji offset={100}>🌗</Emoji>
+										<Emoji
+											role="img"
+											aria-label="matin"
+											offset={0}
+											children="🌙"
+										/>
+										<Emoji
+											role="img"
+											aria-label="petit déjeuner"
+											offset={33}
+											children="☕"
+										/>
+										<Emoji
+											role="img"
+											aria-label="déjeuner"
+											offset={50}
+											children="🍽️"
+										/>
+										<Emoji
+											role="img"
+											aria-label="soirée"
+											offset={87}
+											children="🛌"
+										/>
+										<Emoji
+											role="img"
+											aria-label="nuit"
+											offset={100}
+											children="🌗"
+										/>
 									</EmojiTimeline>
 									<Label>Jours travaillés</Label>
 									<WeekDaysInput
 										values={workingDays}
 										setFieldValue={setFieldValue}
+									/>
+									<FormCheckbox
+										{...props}
+										name="hasNotFullWeekSchedule"
+										type="checkbox"
+										label="Afficher seulement les jours travaillés
+										dans le calendrier"
 									/>
 									<Label>Fuseau horaire</Label>
 									<FormSelect
@@ -322,6 +362,6 @@ function UserWorkHourAndDaysForm({data, done = () => {}}) {
 			</Formik>
 		</UserWorkHourAndDaysFormMain>
 	);
-}
+};
 
 export default UserWorkHourAndDaysForm;

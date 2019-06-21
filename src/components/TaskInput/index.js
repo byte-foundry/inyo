@@ -2,25 +2,21 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import React, {useState, useRef, useEffect} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
-import ReactTooltip from 'react-tooltip';
 
+import Tooltip from '../Tooltip';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
 import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 
-import {ITEM_TYPES, TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import {ITEM_TYPES, BREAKPOINTS} from '../../utils/constants';
 import {
 	Button,
 	TaskInputDropdown,
 	TaskInputDropdownHeader,
 	primaryPurple,
-	mediumPurple,
-	lightPurple,
 	primaryGrey,
 	mediumGrey,
-	accentGrey,
-	primaryWhite,
 	primaryBlack,
 	lightGrey,
 } from '../../utils/new/design-system';
@@ -190,12 +186,14 @@ const TaskInputCheckListContainer = styled('div')`
 const types = ITEM_TYPES;
 
 const useTrackEventInput = ({focus, openedByClick, value}) => {
+	const isTypingCommand = value.startsWith('/');
+
 	useEffect(() => {
-		if (focus && value.startsWith('/')) {
+		if (focus && isTypingCommand) {
 			window.Intercom('trackEvent', 'open-task-dropdown');
 			window.Intercom('trackEvent', 'open-task-dropdown-with-slash');
 		}
-	}, [focus, value.startsWith('/')]);
+	}, [focus, isTypingCommand]);
 
 	useEffect(() => {
 		if (openedByClick) {
@@ -261,72 +259,46 @@ const TaskInput = ({
 
 	return (
 		<Container ref={ref}>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<InputContainer>
-				<Icon
-					data-tip="Définir le type de tâche"
-					onClick={() => setOpenedByClick(true)}
-					active={type}
-					id="task-input-type-icon"
+				<Tooltip label="Définir le type de tâche">
+					<Icon
+						onClick={() => setOpenedByClick(true)}
+						active={type}
+						id="task-input-type-icon"
+					>
+						{icon}
+					</Icon>
+				</Tooltip>
+				<Tooltip
+					label={
+						<p>
+							Presser `Tab` pour changer de paramètre.
+							<br />
+							`Entrée` pour valider
+						</p>
+					}
 				>
-					{icon}
-				</Icon>
-				<Input
-					data-multiline
-					data-tip="Presser `Tab` pour changer de paramètre<br/>`Entrée` pour valider"
-					ref={inputRef}
-					type="text"
-					onChange={e => setValue(e.target.value)}
-					value={value}
-					onFocus={() => setFocus(true)}
-					onKeyDown={(e) => {
-						if (!value.startsWith('/')) {
-							if (e.key === 'ArrowUp' && onSubmitProject) {
-								onSubmitProject({
-									name: value,
-								});
-								setValue('');
-								closeMoreInfos();
-								closeContentAcquisitionInfos();
-							}
-							else if (
-								e.key === 'ArrowDown'
-								&& onSubmitSection
-							) {
-								onSubmitSection({
-									name: value,
-								});
-								setValue('');
-								closeMoreInfos();
-								closeContentAcquisitionInfos();
-							}
-							else if (e.key === 'Enter') {
-								e.preventDefault();
-								if (type === 'CONTENT_ACQUISITION') {
-									if (showContentAcquisitionInfos) {
-										onSubmitTask({
-											name: value,
-											type: type || 'DEFAULT',
-											linkedCustomerId:
-												itemCustomer && itemCustomer.id,
-											description: `\n# content-acquisition-list\n${files
-												.map(
-													({checked, name}) => `- [${
-														checked ? 'x' : ' '
-													}] ${name}`,
-												)
-												.join('\n')}`,
-										});
-										setValue('');
-										closeMoreInfos();
-										closeContentAcquisitionInfos();
-									}
-									else {
-										setItemCustomer(defaultCustomer);
-										setShowContentAcquisitionInfos(true);
-									}
+					<Input
+						data-multiline
+						ref={inputRef}
+						type="text"
+						onChange={e => setValue(e.target.value)}
+						value={value}
+						onFocus={() => setFocus(true)}
+						onKeyDown={(e) => {
+							if (!value.startsWith('/')) {
+								if (e.key === 'ArrowUp' && onSubmitProject) {
+									onSubmitProject({
+										name: value,
+									});
+									setValue('');
+									closeMoreInfos();
+									closeContentAcquisitionInfos();
 								}
-								else if (type === 'SECTION') {
+								else if (
+									e.key === 'ArrowDown'
+									&& onSubmitSection
+								) {
 									onSubmitSection({
 										name: value,
 									});
@@ -334,144 +306,192 @@ const TaskInput = ({
 									closeMoreInfos();
 									closeContentAcquisitionInfos();
 								}
-								else {
-									onSubmitTask({
-										name: value,
-										type: type || 'DEFAULT',
-										dueDate:
-											itemDueDate
-											&& itemDueDate.toISOString(),
-										unit: parseFloat(itemUnit || 0),
-										linkedCustomerId:
-											itemCustomer && itemCustomer.id,
-									});
-									setValue('');
-									closeMoreInfos();
-									closeContentAcquisitionInfos();
-								}
-							}
-							else if (e.key === 'Tab') {
-								if (!type || type !== 'CONTENT_ACQUISITION') {
-									setMoreInfosMode(true);
-								}
-								else if (type === 'CONTENT_ACQUISITION') {
-									setItemCustomer(defaultCustomer);
-									setShowContentAcquisitionInfos(true);
-								}
-							}
-						}
-						if (e.key === 'Escape') {
-							setValue('');
-							setOpenedByClick(false);
-							closeMoreInfos();
-							closeContentAcquisitionInfos();
-						}
-					}}
-					placeholder={
-						focus
-							? `Titre de la tâche ou ${
-								currentProjectId
-									? 'de la section'
-									: 'du projet'
-							  }. Commencez par "/" pour changer le type de tâche`
-							: `Ajouter une tâche ou créer ${
-								currentProjectId
-									? 'une section'
-									: 'un projet'
-							  }`
-					}
-				/>
-				{(focus || value) && (
-					<InputButtonWrapper>
-						<ReactTooltip
-							effect="solid"
-							delayShow={TOOLTIP_DELAY}
-						/>
-						<InputButtonContainer>
-							<Button
-								data-tip="Touche entrée pour créer la tâche"
-								icon="↵"
-								id="create-task-button"
-								onClick={() => {
-									if (!value.startsWith('/')) {
-										if (type === 'CONTENT_ACQUISITION') {
-											if (showContentAcquisitionInfos) {
-												onSubmitTask({
-													name: value,
-													type: type || 'DEFAULT',
-													linkedCustomerId:
-														itemCustomer
-														&& itemCustomer.id,
-													description:
-														files.length > 0
-															? `\n# content-acquisition-list\n${files
-																.map(
-																	({
-																		checked,
-																		name,
-																	}) => `- [${
-																		checked
-																			? 'x'
-																			: ' '
-																	}] ${name}`,
-																)
-																.join(
-																	'\n',
-																)}`
-															: '',
-												});
-												setValue('');
-												closeMoreInfos();
-												closeContentAcquisitionInfos();
-											}
-											else {
-												setShowContentAcquisitionInfos(
-													true,
-												);
-											}
-										}
-										else {
+								else if (e.key === 'Enter') {
+									e.preventDefault();
+									if (type === 'CONTENT_ACQUISITION') {
+										if (showContentAcquisitionInfos) {
 											onSubmitTask({
 												name: value,
 												type: type || 'DEFAULT',
-												dueDate:
-													itemDueDate
-													&& itemDueDate.toISOString(),
-												unit: parseFloat(itemUnit || 0),
 												linkedCustomerId:
 													itemCustomer
 													&& itemCustomer.id,
+												description: `\n# content-acquisition-list\n${files
+													.map(
+														({checked, name}) => `- [${
+															checked
+																? 'x'
+																: ' '
+														}] ${name}`,
+													)
+													.join('\n')}`,
 											});
 											setValue('');
 											closeMoreInfos();
 											closeContentAcquisitionInfos();
 										}
+										else {
+											setItemCustomer(defaultCustomer);
+											setShowContentAcquisitionInfos(
+												true,
+											);
+										}
 									}
-								}}
-							>
-								créer la{' '}
-								{type === 'SECTION' ? 'section' : 'tâche'}
-							</Button>
-							{onSubmitProject && (
+									else if (type === 'SECTION') {
+										onSubmitSection({
+											name: value,
+										});
+										setValue('');
+										closeMoreInfos();
+										closeContentAcquisitionInfos();
+									}
+									else {
+										onSubmitTask({
+											name: value,
+											type: type || 'DEFAULT',
+											dueDate:
+												itemDueDate
+												&& itemDueDate.toISOString(),
+											unit: parseFloat(itemUnit || 0),
+											linkedCustomerId:
+												itemCustomer && itemCustomer.id,
+										});
+										setValue('');
+										closeMoreInfos();
+										closeContentAcquisitionInfos();
+									}
+								}
+								else if (e.key === 'Tab') {
+									if (
+										!type
+										|| type !== 'CONTENT_ACQUISITION'
+									) {
+										setMoreInfosMode(true);
+									}
+									else if (type === 'CONTENT_ACQUISITION') {
+										setItemCustomer(defaultCustomer);
+										setShowContentAcquisitionInfos(true);
+									}
+								}
+							}
+							if (e.key === 'Escape') {
+								setValue('');
+								setOpenedByClick(false);
+								closeMoreInfos();
+								closeContentAcquisitionInfos();
+							}
+						}}
+						placeholder={
+							focus
+								? `Titre de la tâche ou ${
+									currentProjectId
+										? 'de la section'
+										: 'du projet'
+								  }. Commencez par "/" pour changer le type de tâche`
+								: `Ajouter une tâche ou créer ${
+									currentProjectId
+										? 'une section'
+										: 'un projet'
+								  }`
+						}
+					/>
+				</Tooltip>
+				{(focus || value) && (
+					<InputButtonWrapper>
+						<InputButtonContainer>
+							<Tooltip label="Touche entrée pour créer la tâche">
 								<Button
-									data-tip="Flèche du haut pour créer un projet"
-									icon="↑"
-									onClick={() => onSubmitProject({name: value})
-									}
-									id="create-project-button"
+									icon="↵"
+									id="create-task-button"
+									onClick={() => {
+										if (!value.startsWith('/')) {
+											if (
+												type === 'CONTENT_ACQUISITION'
+											) {
+												if (
+													showContentAcquisitionInfos
+												) {
+													onSubmitTask({
+														name: value,
+														type: type || 'DEFAULT',
+														linkedCustomerId:
+															itemCustomer
+															&& itemCustomer.id,
+														description:
+															files.length > 0
+																? `\n# content-acquisition-list\n${files
+																	.map(
+																		({
+																			checked,
+																			name,
+																		}) => `- [${
+																			checked
+																				? 'x'
+																				: ' '
+																		}] ${name}`,
+																	)
+																	.join(
+																		'\n',
+																	)}`
+																: '',
+													});
+													setValue('');
+													closeMoreInfos();
+													closeContentAcquisitionInfos();
+												}
+												else {
+													setShowContentAcquisitionInfos(
+														true,
+													);
+												}
+											}
+											else {
+												onSubmitTask({
+													name: value,
+													type: type || 'DEFAULT',
+													dueDate:
+														itemDueDate
+														&& itemDueDate.toISOString(),
+													unit: parseFloat(
+														itemUnit || 0,
+													),
+													linkedCustomerId:
+														itemCustomer
+														&& itemCustomer.id,
+												});
+												setValue('');
+												closeMoreInfos();
+												closeContentAcquisitionInfos();
+											}
+										}
+									}}
 								>
-									créer un projet
+									créer la{' '}
+									{type === 'SECTION' ? 'section' : 'tâche'}
 								</Button>
+							</Tooltip>
+							{onSubmitProject && (
+								<Tooltip label="Flèche du haut pour créer un projet">
+									<Button
+										icon="↑"
+										onClick={() => onSubmitProject({name: value})
+										}
+										id="create-project-button"
+									>
+										créer un projet
+									</Button>
+								</Tooltip>
 							)}
 							{type !== 'SECTION' && onSubmitSection && (
-								<Button
-									data-tip="Flèche du bas pour créer un ensemble de tâches"
-									icon="↓"
-									onClick={() => onSubmitSection({name: value})
-									}
-								>
-									Créer une section
-								</Button>
+								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
+									<Button
+										icon="↓"
+										onClick={() => onSubmitSection({name: value})
+										}
+									>
+										Créer une section
+									</Button>
+								</Tooltip>
 							)}
 						</InputButtonContainer>
 					</InputButtonWrapper>

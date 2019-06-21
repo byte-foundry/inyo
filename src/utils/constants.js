@@ -30,6 +30,16 @@ export const GRAPHQL_API = `https://prisma${
 export const INTERCOM_APP_ID
 	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
 
+export const WEEKDAYS = {
+	1: 'MONDAY',
+	2: 'TUESDAY',
+	3: 'WEDNESDAY',
+	4: 'THURSDAY',
+	5: 'FRIDAY',
+	6: 'SATURDAY',
+	0: 'SUNDAY',
+};
+
 export const WEEKDAYS_SHORT = {
 	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
 };
@@ -80,8 +90,6 @@ export const itemStatuses = {
 	FINISHED: 'FINISHED',
 	PENDING: 'PENDING',
 };
-
-export const TOOLTIP_DELAY = 650;
 
 export const BREAKPOINTS = [420];
 
@@ -247,6 +255,11 @@ export const TAG_COLOR_PALETTE = [
 	[[158, 158, 158], [255, 255, 255]],
 	[[96, 125, 139], [255, 255, 255]],
 ];
+
+export const DRAG_TYPES = {
+	TASK: 'SCHEDULE_TASK',
+	SECTION: 'SECTION',
+};
 
 export const STRIPE_CONSTANT
 	= process.env.REACT_APP_INYO_ENV === 'production'

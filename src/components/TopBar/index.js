@@ -1,3 +1,4 @@
+import React, {forwardRef} from 'react';
 import styled from '@emotion/styled';
 import {NavLink} from 'react-router-dom';
 import {BREAKPOINTS} from '../../utils/constants';
@@ -6,6 +7,10 @@ import {primaryWhite} from '../../utils/content';
 
 import {primaryPurple, primaryGrey} from '../../utils/new/design-system';
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
+
+const ForwardedRefNavLink = forwardRef((props, ref) => (
+	<NavLink {...props} innerRef={ref} />
+));
 
 export const TopBarLogo = styled(NavLink)`
 	background: url(${Logo});
@@ -29,7 +34,7 @@ export const TopBarLogoNotif = styled(TopBarMenu)`
 	justify-content: space-between;
 `;
 
-export const TopBarMenuLink = styled(NavLink)`
+export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 	text-decoration: none;
 	margin-left: 2rem;
 	color: ${primaryGrey};

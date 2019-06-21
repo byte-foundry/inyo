@@ -4,7 +4,6 @@ import styled from '@emotion/styled/macro';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
 import useOnClickOutside from 'use-onclickoutside';
-import ReactTooltip from 'react-tooltip';
 
 import {
 	Aside,
@@ -19,6 +18,7 @@ import {
 } from '../../utils/new/design-system';
 import {ModalContainer} from '../../utils/content';
 
+import Tooltip from '../Tooltip';
 import IconButton from '../../utils/new/components/IconButton';
 import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
@@ -27,9 +27,8 @@ import {
 	UPDATE_PROJECT,
 	ARCHIVE_PROJECT,
 	UNARCHIVE_PROJECT,
-	REMOVE_PROJECT,
 } from '../../utils/mutations';
-import {TOOLTIP_DELAY, BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS} from '../../utils/constants';
 
 import MaterialIcon from '../MaterialIcon';
 import ConfirmModal from '../ConfirmModal';
@@ -181,7 +180,6 @@ const SidebarProjectInfos = ({
 	const updateProject = useMutation(UPDATE_PROJECT);
 	const archiveProject = useMutation(ARCHIVE_PROJECT);
 	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
-	const removeProject = useMutation(REMOVE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
 		suspend: true,
@@ -215,107 +213,115 @@ const SidebarProjectInfos = ({
 
 	return (
 		<Aside>
-			<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
 			<SubSection>
-				<SidebarLink
-					data-tip="Vue principale"
-					onClick={() => setView('tasks')}
-					active={activeView === 'tasks' || !activeView}
-				>
-					<IconButton
-						icon="format_list_bulleted"
-						size="tiny"
-						label="Tâches du projet"
-						current={activeView === 'tasks' || !activeView}
-					/>
-				</SidebarLink>
-				<SidebarLink
-					data-tip="Seulement visibles par vous"
-					onClick={() => setView('personal-notes')}
-					active={activeView === 'personal-notes'}
-				>
-					<IconButton
-						icon="lock_open"
-						size="tiny"
-						label="Notes personnelles"
-						current={activeView === 'personal-notes'}
-					/>
-				</SidebarLink>
-				<SidebarLink
-					data-tip="Visibles par tout le monde"
-					onClick={() => setView('shared-notes')}
-					active={activeView === 'shared-notes'}
-				>
-					<IconButton
-						icon="people_outline"
-						size="tiny"
-						label="Notes partagées"
-						current={activeView === 'shared-notes'}
-					/>
-				</SidebarLink>
+				<Tooltip label="Vue principale">
+					<SidebarLink
+						onClick={() => setView('tasks')}
+						active={activeView === 'tasks' || !activeView}
+					>
+						<IconButton
+							icon="format_list_bulleted"
+							size="tiny"
+							label="Tâches du projet"
+							current={activeView === 'tasks' || !activeView}
+						/>
+					</SidebarLink>
+				</Tooltip>
+				<Tooltip label="Seulement visibles par vous">
+					<SidebarLink
+						onClick={() => setView('personal-notes')}
+						active={activeView === 'personal-notes'}
+					>
+						<IconButton
+							icon="lock_open"
+							size="tiny"
+							label="Notes personnelles"
+							current={activeView === 'personal-notes'}
+						/>
+					</SidebarLink>
+				</Tooltip>
+				<Tooltip label="Visibles par tout le monde">
+					<SidebarLink
+						onClick={() => setView('shared-notes')}
+						active={activeView === 'shared-notes'}
+					>
+						<IconButton
+							icon="people_outline"
+							size="tiny"
+							label="Notes partagées"
+							current={activeView === 'shared-notes'}
+						/>
+					</SidebarLink>
+				</Tooltip>
 			</SubSection>
 			<SubSection>
 				{project.customer ? (
 					<>
 						<CustomerInfos>
-							<PencilElem
-								icon="edit"
-								size="tiny"
-								data-tip="Changer le client lié au projet"
-								onClick={() => setEditCustomer(true)}
-							/>
+							<Tooltip label="Changer le client lié au projet">
+								<div>
+									<PencilElem
+										icon="edit"
+										size="tiny"
+										onClick={() => setEditCustomer(true)}
+									/>
+								</div>
+							</Tooltip>
 							<CustomerNameAndAddress
 								customer={project.customer}
 							/>
 						</CustomerInfos>
-						<CheckBoxLabel
-							checked={project.notifyActivityToCustomer}
-							data-tip="Évolution du projet, tâches qui requièrent une action, etc."
-						>
-							<input
-								type="checkbox"
+						<Tooltip label="Évolution du projet, tâches qui requièrent une action, etc.">
+							<CheckBoxLabel
 								checked={project.notifyActivityToCustomer}
-								onChange={async () => {
-									if (project.notifyActivityToCustomer) {
-										const confirmed = await new Promise(
-											resolve => setAskNotifyActivityConfirm({
-												resolve,
-											}),
-										);
+							>
+								<input
+									type="checkbox"
+									checked={project.notifyActivityToCustomer}
+									onChange={async () => {
+										if (project.notifyActivityToCustomer) {
+											const confirmed = await new Promise(
+												resolve => setAskNotifyActivityConfirm(
+													{
+														resolve,
+													},
+												),
+											);
 
-										setAskNotifyActivityConfirm({});
+											setAskNotifyActivityConfirm({});
 
-										if (!confirmed) {
-											return;
+											if (!confirmed) {
+												return;
+											}
 										}
-									}
 
-									await updateProject({
-										variables: {
-											projectId: project.id,
-											notifyActivityToCustomer: !project.notifyActivityToCustomer,
-										},
-									});
-								}}
-							/>
-							<Checked>
-								<IconButton
-									icon="check_box"
-									size="tiny"
-									color={primaryPurple}
+										await updateProject({
+											variables: {
+												projectId: project.id,
+												notifyActivityToCustomer: !project.notifyActivityToCustomer,
+											},
+										});
+									}}
 								/>
-							</Checked>
-							<NotChecked>
-								<IconButton
-									icon="check_box_outline_blank"
-									size="tiny"
-									color={primaryPurple}
-								/>
-							</NotChecked>
-							<CheckBoxFakeLabel>
-								Notifier mon client par email
-							</CheckBoxFakeLabel>
-						</CheckBoxLabel>
+								<Checked>
+									<IconButton
+										icon="check_box"
+										size="tiny"
+										color={primaryPurple}
+									/>
+								</Checked>
+								<NotChecked>
+									<IconButton
+										icon="check_box_outline_blank"
+										size="tiny"
+										color={primaryPurple}
+									/>
+								</NotChecked>
+								<CheckBoxFakeLabel>
+									Notifier mon client par email
+								</CheckBoxFakeLabel>
+							</CheckBoxLabel>
+						</Tooltip>
 						{askNotifyActivityConfirm.resolve && (
 							<ConfirmModal
 								onConfirm={confirmed => askNotifyActivityConfirm.resolve(confirmed)
@@ -342,19 +348,20 @@ const SidebarProjectInfos = ({
 								<P>Êtes-vous sûr de vouloir continuer?</P>
 							</ConfirmModal>
 						)}
-						<Button
-							data-tip="Ce que verra votre client lorsqu'il se connecte au projet"
-							link
-							onClick={() => setCustomerPreview(true)}
-							id="show-customer-view"
-						>
-							<IconButton
-								icon="visibility"
-								size="tiny"
-								label="Voir la vue de mon client"
-								color={primaryPurple}
-							/>
-						</Button>
+						<Tooltip label="Ce que verra votre client lorsqu'il se connecte au projet">
+							<Button
+								link
+								onClick={() => setCustomerPreview(true)}
+								id="show-customer-view"
+							>
+								<IconButton
+									icon="visibility"
+									size="tiny"
+									label="Voir la vue de mon client"
+									color={primaryPurple}
+								/>
+							</Button>
+						</Tooltip>
 					</>
 				) : (
 					<>
@@ -420,15 +427,14 @@ const SidebarProjectInfos = ({
 					{project.deadline ? (
 						<>
 							<SidebarHeading>Deadline</SidebarHeading>
-							<BigNumber
-								data-tip="Date limite du projet"
-								onClick={() => setEditDueDate(true)}
-							>
-								{(project.deadline
-									&& moment(project.deadline).format(
-										'DD/MM/YYYY',
-									)) || <>&mdash;</>}
-							</BigNumber>
+							<Tooltip label="Date limite du projet">
+								<BigNumber onClick={() => setEditDueDate(true)}>
+									{(project.deadline
+										&& moment(project.deadline).format(
+											'DD/MM/YYYY',
+										)) || <>&mdash;</>}
+								</BigNumber>
+							</Tooltip>
 						</>
 					) : (
 						<Actions>
@@ -476,28 +482,36 @@ const SidebarProjectInfos = ({
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
-					<BigNumber
-						data-tip="Nombre de jours travaillés avant deadline"
-						urgent={margin < 1}
-					>
-						{+margin.toFixed(2)}&nbsp;
-						<Plural value={margin} singular="jour" plural="jours" />
-					</BigNumber>
+					<Tooltip label="Nombre de jours travaillés avant deadline">
+						<BigNumber urgent={margin < 1}>
+							{+margin.toFixed(2)}&nbsp;
+							<Plural
+								value={margin}
+								singular="jour"
+								plural="jours"
+							/>
+						</BigNumber>
+					</Tooltip>
 				</SubSection>
 			)}
 
 			<div>
 				<Actions>
-					<DuplicateProjectButton
-						id="duplicate-project-button"
-						data-tip="Copier ces tâches dans un nouveau projet"
-						projectId={project.id}
-						onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
-						}
-					>
-						<MaterialIcon icon="redo" size="tiny" color="inherit" />{' '}
-						Dupliquer le projet
-					</DuplicateProjectButton>
+					<Tooltip label="Copier ces tâches dans un nouveau projet">
+						<DuplicateProjectButton
+							id="duplicate-project-button"
+							projectId={project.id}
+							onCreate={({id}) => history.push(`/app/tasks?projectId=${id}`)
+							}
+						>
+							<MaterialIcon
+								icon="redo"
+								size="tiny"
+								color="inherit"
+							/>{' '}
+							Dupliquer le projet
+						</DuplicateProjectButton>
+					</Tooltip>
 				</Actions>
 				<Actions>
 					<CreateProjectLinkButton project={project} />

@@ -64,6 +64,7 @@ export default function ({
 	const [currentDate, setCurrentDate] = useState(rest.date);
 
 	const margin = currentDate.diff(moment(), 'days') - duration;
+	const displayInfo = !noInfo && typeof duration === 'number';
 
 	return (
 		<TaskDateInput ref={innerRef} position={position}>
@@ -76,7 +77,7 @@ export default function ({
 					}
 				}}
 				isDayBlocked={day => day.isBefore(startDate)}
-				renderCalendarInfo={() => !noInfo && (
+				renderCalendarInfo={() => displayInfo && (
 					<MarginMessage>
 							Cela vous laisse {margin}{' '}
 						<Plural

@@ -32,6 +32,8 @@ class Tasks extends Component {
 												|| ''}`,
 									)
 									}
+									isActivating={state.isActivating}
+									scheduledFor={state.scheduledFor}
 								/>
 							</ModalElem>
 						</Modal>

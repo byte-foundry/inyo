@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, forwardRef} from 'react';
 import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
@@ -7,9 +7,15 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
-import {FINISH_ITEM, UPDATE_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {
+	FINISH_ITEM,
+	UPDATE_ITEM,
+	UNFINISH_ITEM,
+	FOCUS_TASK,
+} from '../../utils/mutations';
 import {isCustomerTask} from '../../utils/functions';
 import IconButton from '../../utils/new/components/IconButton';
+import Tooltip from '../Tooltip';
 
 import {
 	ButtonLink,
@@ -26,6 +32,7 @@ import {
 	primaryWhite,
 	DueDateInputElem,
 	DateInputContainer,
+	Button,
 } from '../../utils/new/design-system';
 
 import CustomerDropdown from '../CustomersDropdown';
@@ -83,7 +90,7 @@ const TaskIcon = styled('div')`
 	width: 3.5rem;
 	height: 3.5rem;
 	margin-left: -0.8725rem;
-	margin-right: ${props => (props.noData ? '.5rem' : '2rem')};
+	margin-right: ${props => (props.noData ? '.5rem' : '1rem')};
 	overflow: visible;
 	background: center no-repeat
 		url(${(props) => {
@@ -100,8 +107,8 @@ const TaskIcon = styled('div')`
 		}
 		return icon;
 	}});
-	margin-top: ${props => (props.noData ? '0.1rem' : '.6775rem')};
-	margin-bottom: ${props => (props.noData ? 0 : '2rem')};
+	margin-top: ${props => (props.noData ? '0.1rem' : '0.6rem')};
+	margin-bottom: 0;
 
 	transform: scale(${props => (props.noData ? 0.75 : '')});
 
@@ -117,12 +124,12 @@ const TaskIcon = styled('div')`
 
 	&:before {
 		height: 1rem;
-		top: 0.15rem;
+		top: 0;
 	}
 
 	&:after {
-		top: 4.15rem;
-		bottom: -0.85rem;
+		top: 62px;
+		bottom: -10px;
 	}
 
 	&:hover {
@@ -342,53 +349,54 @@ export function TaskCustomerInput({
 	const [editCustomer, setEditCustomer] = useState(editCustomerProp);
 
 	return (
-		<TaskIconText
-			data-tip="Personne liée à la tâche"
-			inactive={editCustomer}
-			icon={
-				<MaterialIcon
-					icon="person_outline"
-					size="tiny"
-					color={accentGrey}
-				/>
-			}
-			content={
-				!disabled && editCustomer ? (
-					<CustomerDropdown
-						id="projects"
-						defaultMenuIsOpen
-						defaultValue={
-							item.linkedCustomer && {
-								value: item.linkedCustomer.id,
-								label: item.linkedCustomer.name,
-							}
-						}
-						creatable
-						isClearable
-						autoFocus
-						onChange={(args) => {
-							onCustomerSubmit(args);
-							setEditCustomer(false);
-						}}
-						onBlur={() => {
-							setEditCustomer(false);
-						}}
+		<Tooltip label="Personne liée à la tâche">
+			<TaskIconText
+				inactive={editCustomer}
+				icon={
+					<MaterialIcon
+						icon="person_outline"
+						size="tiny"
+						color={accentGrey}
 					/>
-				) : (
-					<div
-						onClick={
-							disabled
-								? undefined
-								: () => {
-									setEditCustomer(true);
-								  }
-						}
-					>
-						{clientName || <>&mdash;</>}
-					</div>
-				)
-			}
-		/>
+				}
+				content={
+					!disabled && editCustomer ? (
+						<CustomerDropdown
+							id="projects"
+							defaultMenuIsOpen
+							defaultValue={
+								item.linkedCustomer && {
+									value: item.linkedCustomer.id,
+									label: item.linkedCustomer.name,
+								}
+							}
+							creatable
+							isClearable
+							autoFocus
+							onChange={(args) => {
+								onCustomerSubmit(args);
+								setEditCustomer(false);
+							}}
+							onBlur={() => {
+								setEditCustomer(false);
+							}}
+						/>
+					) : (
+						<div
+							onClick={
+								disabled
+									? undefined
+									: () => {
+										setEditCustomer(true);
+									  }
+							}
+						>
+							{clientName || <>&mdash;</>}
+						</div>
+					)
+				}
+			/>
+		</Tooltip>
 	);
 }
 
@@ -446,8 +454,7 @@ export function TaskInfosInputs({
 				&& item.section.project.deadline));
 
 	const activableTask = !customerToken && item.status === 'PENDING';
-	const customerTask
-		= item.type === 'CUSTOMER' || item.type === 'CONTENT_ACQUISITION';
+	const customerTask = isCustomerTask(item.type);
 
 	return (
 		<TaskInfos>
@@ -460,18 +467,21 @@ export function TaskInfosInputs({
 						}}
 					>
 						<CommentWrap>
-							<IconButton
-								icon={
-									item.comments.length > 0
-										? 'mode_comment'
-										: 'add_comment'
-								}
-								size="tiny"
-								color={
-									unreadCommentLength > 0 ? primaryRed : ''
-								}
-								data-tip="Ouvrir les commentaires"
-							/>
+							<Tooltip label="Ouvrir les commentaires">
+								<IconButton
+									icon={
+										item.comments.length > 0
+											? 'mode_comment'
+											: 'add_comment'
+									}
+									size="tiny"
+									color={
+										unreadCommentLength > 0
+											? primaryRed
+											: ''
+									}
+								/>
+							</Tooltip>
 							<CommentNumber unread={unreadCommentLength > 0}>
 								{item.comments.length > 0
 									? item.comments.length
@@ -479,11 +489,9 @@ export function TaskInfosInputs({
 							</CommentNumber>
 						</CommentWrap>
 						{item.description && (
-							<IconButton
-								icon="assignment"
-								size="tiny"
-								data-tip="Lire la description de cette tâche"
-							/>
+							<Tooltip label="Lire la description de cette tâche">
+								<IconButton icon="assignment" size="tiny" />
+							</Tooltip>
 						)}
 					</TaskInfosItemLink>
 				)}
@@ -492,58 +500,60 @@ export function TaskInfosInputs({
 						{activableTask
 							&& item.linkedCustomer
 							&& !item.isFocused && (
-							<IconButtonLink
-								data-tip="Les rappels clients ne sont pas activés pour cette tâche"
-								isFocused={item.isFocused}
-								to={{
-									pathname: `${taskUrlPrefix}/${baseUrl}/${
-										item.id
-									}`,
-									state: {prevSearch: location.search},
-								}}
-							>
-								<IconButton
-									icon="notifications_off"
-									size="tiny"
-								/>
-							</IconButtonLink>
+							<Tooltip label="Les rappels clients ne sont pas activés pour cette tâche">
+								<IconButtonLink
+									isFocused={item.isFocused}
+									to={{
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+										state: {
+											prevSearch: location.search,
+											isActivating: true,
+										},
+									}}
+								>
+									<IconButton
+										icon="notifications_off"
+										size="tiny"
+									/>
+								</IconButtonLink>
+							</Tooltip>
 						)}
 						{activableTask
 							&& item.linkedCustomer
 							&& item.isFocused && (
-							<IconButtonLink
-								data-tip="Les rappels client sont activés pour cette tâche"
-								isFocused={item.isFocused}
-								to={{
-									pathname: `${taskUrlPrefix}/${baseUrl}/${
-										item.id
-									}`,
-									state: {prevSearch: location.search},
-								}}
-							>
-								<IconButton
-									icon="notifications_active"
-									size="tiny"
-									color={primaryPurple}
-								/>
-							</IconButtonLink>
+							<Tooltip label="Les rappels client sont activés pour cette tâche">
+								<IconButtonLink
+									isFocused={item.isFocused}
+									to={{
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+										state: {
+											prevSearch: location.search,
+										},
+									}}
+								>
+									<IconButton
+										icon="notifications_active"
+										size="tiny"
+										color={primaryPurple}
+									/>
+								</IconButtonLink>
+							</Tooltip>
 						)}
 						{activableTask && !item.linkedCustomer && (
-							<IconButtonLink
-								data-tip="Aucun client n’est lié à cette tâche"
-								to={{
-									pathname: `${taskUrlPrefix}/${baseUrl}/${
-										item.id
-									}`,
-									state: {prevSearch: location.search},
-								}}
-							>
-								<IconButton
-									icon="warning"
-									size="tiny"
-									color={primaryRed}
-								/>
-							</IconButtonLink>
+							<Tooltip label="Aucun client n’est lié à cette tâche">
+								<IconButtonLink
+									to={{
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+										state: {prevSearch: location.search},
+									}}
+								>
+									<IconButton
+										icon="warning"
+										size="tiny"
+										color={primaryRed}
+									/>
+								</IconButtonLink>
+							</Tooltip>
 						)}
 					</>
 				)}
@@ -607,69 +617,74 @@ export function TaskInfosInputs({
 					)
 				}
 			/>
-			<TaskIconText
-				data-tip="Marge restante pour commencer la tâche"
-				inactive={editDueDate}
-				icon={
-					<MaterialIcon icon="event" size="tiny" color={accentGrey} />
-				}
-				content={
-					<DateInputContainer
-						onClick={
-							customerToken
-								? undefined
-								: () => !editDueDate && setEditDueDate(true)
-						}
-					>
-						{!customerToken && editDueDate ? (
-							<>
-								<DueDateInputElem
-									value={moment(dueDate || new Date()).format(
-										'DD/MM/YYYY',
-									)}
-								/>
-								<DateInput
-									innerRef={dateRef}
-									date={moment(dueDate || new Date())}
-									onDateChange={(args) => {
-										onDueDateSubmit(args);
-										setEditDueDate(false);
-										if (switchOnSelect) {
-											setEditCustomer(true);
-										}
-									}}
-									duration={item.unit}
-								/>
-							</>
-						) : (
-							<>
-								{(dueDate && (
-									<>
-										{
-											+(
-												moment(dueDate).diff(
-													moment(),
-													'days',
-												) - item.unit
-											).toFixed(2)
-										}{' '}
-										<Plural
-											value={
-												moment(dueDate).diff(
-													moment(),
-													'days',
-												) - item.unit
+			<Tooltip label="Marge restante pour commencer la tâche">
+				<TaskIconText
+					inactive={editDueDate}
+					icon={
+						<MaterialIcon
+							icon="event"
+							size="tiny"
+							color={accentGrey}
+						/>
+					}
+					content={
+						<DateInputContainer
+							onClick={
+								customerToken
+									? undefined
+									: () => !editDueDate && setEditDueDate(true)
+							}
+						>
+							{!customerToken && editDueDate ? (
+								<>
+									<DueDateInputElem
+										value={moment(
+											dueDate || new Date(),
+										).format('DD/MM/YYYY')}
+									/>
+									<DateInput
+										innerRef={dateRef}
+										date={moment(dueDate || new Date())}
+										onDateChange={(args) => {
+											onDueDateSubmit(args);
+											setEditDueDate(false);
+											if (switchOnSelect) {
+												setEditCustomer(true);
 											}
-											singular="jour"
-											plural="jours"
-										/>
-									</>
-								)) || <>&mdash;</>}
-							</>
-						)}
-					</DateInputContainer>
-				}
-			/>
+										}}
+										duration={item.unit}
+									/>
+								</>
+							) : (
+								<>
+									{(dueDate && (
+										<>
+											{
+												+(
+													moment(dueDate).diff(
+														moment(),
+														'days',
+													) - item.unit
+												).toFixed(2)
+											}{' '}
+											<Plural
+												value={
+													moment(dueDate).diff(
+														moment(),
+														'days',
+													) - item.unit
+												}
+												singular="jour"
+												plural="jours"
+											/>
+										</>
+									)) || <>&mdash;</>}
+								</>
+							)}
+						</DateInputContainer>
+					}
+				/>
+			</Tooltip>
 			<TaskCustomerInput
 				editCustomer={editCustomer}
 				setEditCustomer={setEditCustomer}
@@ -678,53 +693,55 @@ export function TaskInfosInputs({
 				disabled={!!customerToken}
 			/>
 			{!noAttachment && !!item.attachments.length && (
-				<TaskIconText
-					data-tip="Fichiers joints"
-					inactive={editDueDate}
-					icon={
-						<MaterialIcon
-							icon="attach_file"
-							size="tiny"
-							color={accentGrey}
-						/>
-					}
-					content={
-						<>
-							{item.attachments.length}{' '}
-							<Plural
-								singular="fichier"
-								plural="fichiers"
-								value={item.attachments.length}
+				<Tooltip label="Fichiers joints">
+					<TaskIconText
+						inactive={editDueDate}
+						icon={
+							<MaterialIcon
+								icon="attach_file"
+								size="tiny"
+								color={accentGrey}
 							/>
-						</>
-					}
-				/>
+						}
+						content={
+							<>
+								{item.attachments.length}{' '}
+								<Plural
+									singular="fichier"
+									plural="fichiers"
+									value={item.attachments.length}
+								/>
+							</>
+						}
+					/>
+				</Tooltip>
 			)}
 			{!customerToken && item.tags && item.tags.length > 0 && (
-				<TaskIconText
-					data-tip="Tags"
-					inactive={true}
-					icon={
-						<MaterialIcon
-							icon="label"
-							size="tiny"
-							color={accentGrey}
-						/>
-					}
-					content={
-						<>
-							{item.tags.map(tag => (
-								<Tag
-									to={{search: `?tags=${tag.id}`}}
-									bg={tag.colorBg}
-									color={tag.colorText}
-								>
-									{tag.name}
-								</Tag>
-							))}
-						</>
-					}
-				/>
+				<Tooltip label="Tags">
+					<TaskIconText
+						inactive={true}
+						icon={
+							<MaterialIcon
+								icon="label"
+								size="tiny"
+								color={accentGrey}
+							/>
+						}
+						content={
+							<>
+								{item.tags.map(tag => (
+									<Tag
+										to={{search: `?tags=${tag.id}`}}
+										bg={tag.colorBg}
+										color={tag.colorText}
+									>
+										{tag.name}
+									</Tag>
+								))}
+							</>
+						}
+					/>
+				</Tooltip>
 			)}
 		</TaskInfos>
 	);
@@ -737,10 +754,12 @@ function Task({
 	isDraggable,
 	noData,
 	baseUrl = 'tasks',
+	forwardedRef,
 }) {
 	const finishItem = useMutation(FINISH_ITEM);
 	const unfinishItem = useMutation(UNFINISH_ITEM);
 	const updateItem = useMutation(UPDATE_ITEM);
+	const focusTask = useMutation(FOCUS_TASK);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
@@ -780,193 +799,212 @@ function Task({
 		|| (customerToken && isCustomerTask(item.type));
 
 	return (
-		<TaskContainer
-			noData={noData}
-			isDraggable={isDraggable}
-			ref={setTimeItTookRef}
-		>
-			<TaskAdd />
-			<TaskIcon
-				status={item.status}
-				type={item.type}
+		<div ref={forwardedRef}>
+			<TaskContainer
 				noData={noData}
-				ref={iconRef}
-				justUpdated={justUpdated}
-				onClick={() => {
-					if (!isFinishable && !isUnfinishable) return;
+				isDraggable={isDraggable}
+				ref={setTimeItTookRef}
+			>
+				<TaskAdd />
+				<TaskIcon
+					status={item.status}
+					type={item.type}
+					noData={noData}
+					ref={iconRef}
+					justUpdated={justUpdated}
+					onClick={() => {
+						if (!isFinishable && !isUnfinishable) return;
 
-					if (isFinishable) {
-						if (customerToken) {
-							finishItemCallback(item.unit);
-						}
-						else if (setTimeItTook) {
-							finishItemCallback(
-								parseFloat(setTimeItTookValueRef.current()),
-							);
-							setSetTimeItTook(false);
-						}
-						else {
-							setSetTimeItTook(true);
-						}
-					}
-					else if (isUnfinishable) {
-						unfinishItem({
-							variables: {
-								itemId: item.id,
-								token: customerToken,
-							},
-						});
-					}
-				}}
-			/>
-			<TaskContent noData={noData}>
-				<TaskHeader
-					data-tip={
-						setTimeItTook
-							? undefined
-							: 'Cliquer pour voir le contenu de la tâche'
-					}
-				>
-					{setTimeItTook && (
-						<SetTimeContainer>
-							<UnitInput
-								getValue={setTimeItTookValueRef}
-								unit={item.unit}
-								onBlur={(unit) => {
-									finishItemCallback(unit);
-									setSetTimeItTook(false);
-								}}
-								onSubmit={finishItemCallback}
-							/>
-							<SetTimeInfos>
-								<SetTimeHeadline>
-									Temps réellement passé
-								</SetTimeHeadline>
-								<SetTimeCaption>
-									Uniquement visible par vous
-								</SetTimeCaption>
-							</SetTimeInfos>
-						</SetTimeContainer>
-					)}
-					{item.name ? (
-						<TaskHeadingLink
-							noData={noData}
-							small={setTimeItTook}
-							status={item.status}
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						>
-							{item.name}
-						</TaskHeadingLink>
-					) : (
-						<TaskHeadingPlaceholder
-							noData={noData}
-							small={setTimeItTook}
-							to={{
-								pathname: `${taskUrlPrefix}/tasks/${item.id}`,
-								state: {prevSearch: location.search},
-							}}
-						>
-							Choisir un titre pour cette tâche
-						</TaskHeadingPlaceholder>
-					)}
-					<TaskActions stayActive={setTimeItTook}>
-						<OpenBtn
-							data-tip="Description, détails, commentaires, etc."
-							to={{
-								pathname: `${taskUrlPrefix}/${baseUrl}/${
-									item.id
-								}`,
-								state: {prevSearch: location.search},
-							}}
-						>
-							Ouvrir
-						</OpenBtn>
-					</TaskActions>
-				</TaskHeader>
-				{!noData && !setTimeItTook && (
-					<TaskInfosInputs
-						taskUrlPrefix={taskUrlPrefix}
-						baseUrl={baseUrl}
-						location={location}
-						item={item}
-						customerToken={customerToken}
-						onDueDateSubmit={(date) => {
-							updateItem({
-								variables: {
-									itemId: item.id,
-									dueDate: date.toISOString(),
-								},
-								optimisticResponse: {
-									__typename: 'Mutation',
-									updateItem: {
-										__typename: 'Item',
-										...item,
-										dueDate: date.toISOString(),
-									},
-								},
-							});
-						}}
-						onCustomerSubmit={(customer) => {
-							if (customer === null) {
-								updateItem({
-									variables: {
-										itemId: item.id,
-										linkedCustomerId: null,
-									},
-								});
+						if (isFinishable) {
+							if (customerToken) {
+								finishItemCallback(item.unit);
 							}
-							else if (customer.value === 'CREATE') {
-								setEditCustomer(true);
+							else if (setTimeItTook) {
+								finishItemCallback(
+									parseFloat(setTimeItTookValueRef.current()),
+								);
+								setSetTimeItTook(false);
 							}
 							else {
+								setSetTimeItTook(true);
+							}
+						}
+						else if (isUnfinishable) {
+							unfinishItem({
+								variables: {
+									itemId: item.id,
+									token: customerToken,
+								},
+							});
+						}
+					}}
+				/>
+				<TaskContent noData={noData}>
+					<Tooltip
+						label={
+							!setTimeItTook
+							&& 'Cliquer pour voir le contenu de la tâche'
+						}
+					>
+						<TaskHeader>
+							{setTimeItTook && (
+								<SetTimeContainer>
+									<UnitInput
+										getValue={setTimeItTookValueRef}
+										unit={item.unit}
+										onBlur={(unit) => {
+											finishItemCallback(unit);
+											setSetTimeItTook(false);
+										}}
+										onSubmit={finishItemCallback}
+									/>
+									<SetTimeInfos>
+										<SetTimeHeadline>
+											Temps réellement passé
+										</SetTimeHeadline>
+										<SetTimeCaption>
+											Uniquement visible par vous
+										</SetTimeCaption>
+									</SetTimeInfos>
+								</SetTimeContainer>
+							)}
+							{item.name ? (
+								<TaskHeadingLink
+									noData={noData}
+									small={setTimeItTook}
+									status={item.status}
+									to={{
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+										state: {prevSearch: location.search},
+									}}
+								>
+									{item.name}
+								</TaskHeadingLink>
+							) : (
+								<TaskHeadingPlaceholder
+									noData={noData}
+									small={setTimeItTook}
+									to={{
+										pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+										state: {prevSearch: location.search},
+									}}
+								>
+									Choisir un titre pour cette tâche
+								</TaskHeadingPlaceholder>
+							)}
+							<TaskActions stayActive={setTimeItTook}>
+								<OpenBtn
+									data-tip="Description, détails, commentaires, etc."
+									to={{
+										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+										state: {prevSearch: location.search},
+									}}
+								>
+									Ouvrir
+								</OpenBtn>
+								{baseUrl === 'dashboard'
+									&& !isCustomerTask(item.type) && (
+									<Button
+										onClick={() => focusTask({
+											variables: {
+												itemId: item.id,
+												for: new Date()
+													.toJSON()
+													.split('T')[0],
+											},
+										})
+										}
+									>
+											Ajouter à ma journée
+									</Button>
+								)}
+							</TaskActions>
+						</TaskHeader>
+					</Tooltip>
+					{!noData && !setTimeItTook && (
+						<TaskInfosInputs
+							taskUrlPrefix={taskUrlPrefix}
+							baseUrl={baseUrl}
+							location={location}
+							item={item}
+							customerToken={customerToken}
+							onDueDateSubmit={(date) => {
 								updateItem({
 									variables: {
 										itemId: item.id,
-										linkedCustomerId: customer.value,
+										dueDate: date.toISOString(),
+									},
+									optimisticResponse: {
+										__typename: 'Mutation',
+										updateItem: {
+											__typename: 'Item',
+											...item,
+											dueDate: date.toISOString(),
+										},
 									},
 								});
-							}
-						}}
-						onUnitSubmit={(unit) => {
+							}}
+							onCustomerSubmit={(customer) => {
+								if (customer === null) {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											linkedCustomerId: null,
+										},
+									});
+								}
+								else if (customer.value === 'CREATE') {
+									setEditCustomer(true);
+								}
+								else {
+									updateItem({
+										variables: {
+											itemId: item.id,
+											linkedCustomerId: customer.value,
+										},
+									});
+								}
+							}}
+							onUnitSubmit={(unit) => {
+								updateItem({
+									variables: {
+										itemId: item.id,
+										unit,
+									},
+									optimisticResponse: {
+										__typename: 'Mutation',
+										updateItem: {
+											__typename: 'Item',
+											...item,
+											unit,
+										},
+									},
+								});
+							}}
+						/>
+					)}
+				</TaskContent>
+				{isEditingCustomer && (
+					<CustomerModalAndMail
+						onValidate={(customer) => {
 							updateItem({
 								variables: {
 									itemId: item.id,
-									unit,
-								},
-								optimisticResponse: {
-									__typename: 'Mutation',
-									updateItem: {
-										__typename: 'Item',
-										...item,
-										unit,
-									},
+									linkedCustomerId: customer.id,
 								},
 							});
 						}}
+						noSelect
+						onDismiss={() => setEditCustomer(false)}
 					/>
 				)}
-			</TaskContent>
-			{isEditingCustomer && (
-				<CustomerModalAndMail
-					onValidate={(customer) => {
-						updateItem({
-							variables: {
-								itemId: item.id,
-								linkedCustomerId: customer.id,
-							},
-						});
-					}}
-					noSelect
-					onDismiss={() => setEditCustomer(false)}
-				/>
-			)}
-		</TaskContainer>
+			</TaskContainer>
+		</div>
 	);
 }
 
-export default withRouter(Task);
+const RouterTask = withRouter(Task);
+
+export default forwardRef((props, ref) => (
+	<RouterTask forwardedRef={ref} {...props} />
+));

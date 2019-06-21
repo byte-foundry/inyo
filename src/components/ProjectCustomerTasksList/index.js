@@ -88,7 +88,6 @@ function ProjectTasksList({items, projectId, sectionId}) {
 							key={task.id}
 							index={itemIndex}
 							task={task}
-							key={task.id}
 							projectId={projectId}
 							sectionId={sectionId}
 							isDraggable

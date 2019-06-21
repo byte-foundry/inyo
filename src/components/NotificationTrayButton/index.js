@@ -1,11 +1,13 @@
 import React, {useState, useRef, useEffect} from 'react';
-import ReactDOM from 'react-dom';
+import Portal from '@reach/portal';
 import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import useOnClickOutside from 'use-onclickoutside';
 
+import Tooltip from '../Tooltip';
 import IconButton from '../../utils/new/components/IconButton';
 import NotificationItem from '../NotificationItem';
+
 import {
 	Button,
 	primaryPurple,
@@ -105,7 +107,6 @@ const NotificationContainer = styled('div')`
 const NotificationTrayButton = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
-	const containerElement = useRef(null);
 	const [isOpen, setOpen] = useState(false);
 	const {data, refetch, loading} = useQuery(GET_USER_NOTIFICATIONS, {
 		suspend: false,
@@ -157,40 +158,29 @@ const NotificationTrayButton = ({mobile}) => {
 		};
 	}, [unreadNumber]);
 
-	useEffect(() => {
-		if (!containerElement.current) {
-			containerElement.current = document.createElement('div');
-		}
-
-		document.body.appendChild(containerElement.current);
-
-		return () => {
-			document.body.removeChild(containerElement.current);
-		};
-	});
-
 	useOnClickOutside(dialogRef, () => {
 		setOpen(false);
 	});
 
 	return (
 		<NotificationContainer mobile={mobile}>
-			<Icon
-				data-tip="Notifications liées à vos clients"
-				someUnread={unreadNumber > 0}
-				ref={icon}
-				onClick={() => {
-					setOpen(!isOpen);
+			<Tooltip label="Notifications liées à vos clients">
+				<Icon
+					someUnread={unreadNumber > 0}
+					ref={icon}
+					onClick={() => {
+						setOpen(!isOpen);
 
-					if (!isOpen) {
-						refetch();
-					}
-				}}
-			>
-				<IconButton icon="notifications" size="small" />
-			</Icon>
-			{isOpen
-				&& ReactDOM.createPortal(
+						if (!isOpen) {
+							refetch();
+						}
+					}}
+				>
+					<IconButton icon="notifications" size="small" />
+				</Icon>
+			</Tooltip>
+			{isOpen && (
+				<Portal>
 					<Dropdown
 						ref={dialogRef}
 						aria-modal="true"
@@ -233,9 +223,9 @@ const NotificationTrayButton = ({mobile}) => {
 								<p>Aucune notification.</p>
 							</EmptyState>
 						)}
-					</Dropdown>,
-					containerElement.current,
-				)}
+					</Dropdown>
+				</Portal>
+			)}
 		</NotificationContainer>
 	);
 };

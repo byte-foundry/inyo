@@ -306,7 +306,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 						freelances expérimentés dans leurs domaines (design,
 						développement etc.)
 					</P>
-					<img src={templateIllus} />
+					<img alt="" src={templateIllus} />
 				</TemplateInfo>
 			)}
 			<TemplateTaskList selectedTemplate={selectedTemplate} />

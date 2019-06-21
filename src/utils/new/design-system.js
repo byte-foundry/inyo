@@ -1,24 +1,27 @@
-import React from 'react';
+import React, {forwardRef} from 'react';
 import ReactSelect from 'react-select';
 import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
 import Shevy from 'shevyjs';
 import {Link} from 'react-router-dom';
-import {gray30} from '../content';
+import {
+	primaryPurple,
+	primaryWhite,
+	gray30,
+	primaryRed,
+	primaryGrey,
+	primaryBlack,
+	accentGrey,
+	mediumGrey,
+	lightRed,
+	lightPurple,
+	mediumPurple,
+	lightGrey,
+} from '../colors';
 import {BREAKPOINTS} from '../constants';
 import Pencil from '../icons/pencil.svg';
 
-export const primaryPurple = '#5020ee';
-export const mediumPurple = '#8f76e0';
-export const lightPurple = '#f8f8ff';
-export const primaryWhite = '#fff';
-export const primaryRed = '#ff3366';
-export const lightRed = '#fff2f5';
-export const primaryGrey = '#A9A9A9';
-export const accentGrey = '#c7c7c7';
-export const lightGrey = '#fafafa';
-export const mediumGrey = '#f1f3f4';
-export const primaryBlack = '#140642';
+export * from '../colors';
 
 const shevy = new Shevy({
 	baseFontSize: '14px',
@@ -136,6 +139,7 @@ export const Button = styled('button')`
 
 	border-color: currentColor;
 	display: flex;
+	flex-shrink: 0;
   align-items: center;
 	justify-content: center;
 
@@ -253,7 +257,7 @@ export const TaskHeading = styled('h2')`
 	line-height: 1.5;
 	font-weight: 400;
 	flex: 1 0
-		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 168px)')};
+		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 218px)')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 14px;
@@ -331,14 +335,12 @@ export const TaskInfosItem = styled('div')`
 
 export const TaskInfosItemLink = TaskInfosItem.withComponent(Link);
 
-export function TaskIconText({icon, content, ...rest}) {
-	return (
-		<TaskInfosItem {...rest}>
-			{icon}
-			<TaskInfosContent>{content}</TaskInfosContent>
-		</TaskInfosItem>
-	);
-}
+export const TaskIconText = forwardRef(({icon, content, ...rest}, ref) => (
+	<TaskInfosItem {...rest} ref={ref}>
+		{icon}
+		<TaskInfosContent>{content}</TaskInfosContent>
+	</TaskInfosItem>
+));
 
 export const LayoutMainElem = styled('div')`
 	flex: 1;
@@ -716,4 +718,12 @@ export const BackButton = styled(Button)`
 		content: '⇽';
 		margin-right: 10px;
 	}
+`;
+
+export const DragSeparator = styled('div')`
+	position: absolute;
+	height: 3px;
+	width: 100%;
+	top: -5px;
+	background: ${primaryPurple};
 `;

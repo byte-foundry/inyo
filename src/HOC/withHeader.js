@@ -7,6 +7,7 @@ import TopBar, {
 	TopBarLogoNotif,
 } from '../components/TopBar';
 import NotificationTrayButton from '../components/NotificationTrayButton';
+import Tooltip from '../components/Tooltip';
 
 const withHeader = Component => (...args) => (
 	<>
@@ -17,30 +18,23 @@ const withHeader = Component => (...args) => (
 			</TopBarLogoNotif>
 			<TopBarMenu>
 				<NotificationTrayButton desktop />
-				<TopBarMenuLink
-					data-tip="Tâches prioritaires"
-					to="/app/dashboard"
-				>
-					Dashboard
-				</TopBarMenuLink>
-				<TopBarMenuLink data-tip="Toutes les tâches" to="/app/tasks">
-					Tâches
-				</TopBarMenuLink>
-				<TopBarMenuLink
-					data-tip="Toutes les projets"
-					to="/app/projects"
-				>
-					Projets
-				</TopBarMenuLink>
-				<TopBarMenuLink data-tip="Tous les clients" to="/app/customers">
-					Clients
-				</TopBarMenuLink>
-				<TopBarMenuLink
-					data-tip="Profil, jours travaillés, etc."
-					to="/app/account"
-				>
-					Réglages
-				</TopBarMenuLink>
+				<Tooltip label="Tâches prioritaires">
+					<TopBarMenuLink to="/app/dashboard">
+						Dashboard
+					</TopBarMenuLink>
+				</Tooltip>
+				<Tooltip label="Toutes les tâches">
+					<TopBarMenuLink to="/app/tasks">Tâches</TopBarMenuLink>
+				</Tooltip>
+				<Tooltip label="Toutes les projets">
+					<TopBarMenuLink to="/app/projects">Projets</TopBarMenuLink>
+				</Tooltip>
+				<Tooltip label="Tous les clients">
+					<TopBarMenuLink to="/app/customers">Clients</TopBarMenuLink>
+				</Tooltip>
+				<Tooltip label="Profil, jours travaillés, etc.">
+					<TopBarMenuLink to="/app/account">Réglages</TopBarMenuLink>
+				</Tooltip>
 			</TopBarMenu>
 		</TopBar>
 		<Component {...args} />

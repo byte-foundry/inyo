@@ -1,10 +1,11 @@
-import React, {useState, useRef} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import WebFont from 'webfontloader';
 
 import './index.css';
 
 const sizes = {
+	micro: 'md-12',
 	tiny: 'md-18',
 	small: 'md-24',
 	medium: 'md-36',

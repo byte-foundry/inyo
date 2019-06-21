@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {forwardRef} from 'react';
 import styled from '@emotion/styled';
 
 import MaterialIcon from '../../../../components/MaterialIcon';
@@ -8,11 +8,13 @@ import {
 	primaryRed,
 	primaryPurple,
 	lightRed,
-	primaryWhite,
 } from '../../design-system';
 
 const IconWrap = styled('div')`
   width: ${(props) => {
+		if (props.size === 'micro') {
+			return '1.2rem';
+		}
 		if (props.size === 'tiny') {
 			return '1.75rem';
 		}
@@ -29,6 +31,9 @@ const IconWrap = styled('div')`
 	}};
 
   height: ${(props) => {
+		if (props.size === 'micro') {
+			return '1.2rem';
+		}
 		if (props.size === 'tiny') {
 			return '1.75rem';
 		}
@@ -46,6 +51,9 @@ const IconWrap = styled('div')`
 
 	i {
 		width: ${(props) => {
+		if (props.size === 'micro') {
+			return '12px';
+		}
 		if (props.size === 'tiny') {
 			return '18px';
 		}
@@ -130,24 +138,20 @@ const IconWrap = styled('div')`
 	}
 `;
 
-function IconButton({
-	icon,
-	size,
-	invert,
-	inactive,
-	color,
-	danger,
-	label,
-	current,
-	...rest
-}) {
-	return (
+const IconButton = forwardRef(
+	(
+		{
+			icon, size, invert, inactive, color, danger, label, current, ...rest
+		},
+		ref,
+	) => (
 		<IconWrap
 			size={size}
 			danger={danger}
 			{...rest}
 			inactive={inactive}
 			current={current}
+			ref={ref}
 		>
 			<MaterialIcon
 				icon={icon}
@@ -158,7 +162,7 @@ function IconButton({
 			/>
 			{label && <label>{label}</label>}
 		</IconWrap>
-	);
-}
+	),
+);
 
-export default memo(IconButton, () => true);
+export default IconButton;

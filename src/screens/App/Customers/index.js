@@ -19,11 +19,7 @@ import Search from '../../../utils/icons/search.svg';
 import IconButton from '../../../utils/new/components/IconButton';
 
 import {GET_USER_CUSTOMERS} from '../../../utils/queries';
-import {
-	CREATE_CUSTOMER,
-	UPDATE_CUSTOMER,
-	REMOVE_CUSTOMER,
-} from '../../../utils/mutations';
+import {REMOVE_CUSTOMER} from '../../../utils/mutations';
 
 import {BREAKPOINTS} from '../../../utils/constants';
 
@@ -150,8 +146,6 @@ const Forms = styled('div')`
 
 const Customers = () => {
 	const {data, error} = useQuery(GET_USER_CUSTOMERS, {suspend: true});
-	const createCustomer = useMutation(CREATE_CUSTOMER);
-	const updateCustomer = useMutation(UPDATE_CUSTOMER);
 	const removeCustomer = useMutation(REMOVE_CUSTOMER);
 
 	if (error) throw error;

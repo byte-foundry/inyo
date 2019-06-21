@@ -7,6 +7,9 @@ import {
 	ApolloProvider as ApolloHooksProvider,
 	useQuery,
 } from 'react-apollo-hooks';
+import MultiBackend from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
+import {DndProvider} from 'react-dnd';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -18,7 +21,6 @@ import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment';
 import 'moment/locale/fr';
 import * as Sentry from '@sentry/browser';
-import ReactTooltip from 'react-tooltip';
 
 import withTracker from './HOC/withTracker';
 
@@ -34,7 +36,7 @@ import ConditionalContent from './screens/App/ConditionalContent';
 import {UserContext} from './utils/contexts';
 import {Loading} from './utils/content';
 import client from './utils/graphQLConfig';
-import {INTERCOM_APP_ID, TOOLTIP_DELAY} from './utils/constants';
+import {INTERCOM_APP_ID} from './utils/constants';
 import {CHECK_LOGIN_USER} from './utils/queries';
 import {Body} from './utils/new/design-system';
 
@@ -141,56 +143,62 @@ function Root() {
 	}
 
 	return (
-		<ProvidersSentry>
-			<BodyMain>
-				<main>
-					<UserContext.Provider user={data && data.me}>
-						<Switch>
-							<Route
-								path="/app/:customerToken(.*-.*-.*-.*)/tasks"
-								component={withTracker(Customer)}
-							/>
-							<Redirect
-								from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
-								to="/app/:customerToken/tasks?projectId=:projectId"
-							/>
-							<Route
-								path="/inyo-a-vie"
-								component={withTracker(StraightToCheckout)}
-							/>
-							<Route path="/paid" component={paidWithProps} />
-							<Redirect from="/canceled" to="/app/dashboard" />
-							{ProtectedRoute({
-								protectedPath: '/app',
-								component: withTracker(App),
-								isAllowed: data && data.me,
-							})}
-							{ProtectedRoute({
-								protectedPath: '/auth',
-								component: withTracker(Auth),
-								isAllowed: !(data && data.me),
-							})}
-							<ProtectedRedirect
-								to="/app"
+		<DndProvider backend={MultiBackend(HTML5toTouch)}>
+			<ProvidersSentry>
+				<BodyMain>
+					<main>
+						<UserContext.Provider user={data && data.me}>
+							<Switch>
+								<Route
+									path="/app/:customerToken(.*-.*-.*-.*)/tasks"
+									component={withTracker(Customer)}
+								/>
+								<Redirect
+									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
+									to="/app/:customerToken/tasks?projectId=:projectId"
+								/>
+								<Route
+									path="/inyo-a-vie"
+									component={withTracker(StraightToCheckout)}
+								/>
+								<Route path="/paid" component={paidWithProps} />
+								<Redirect
+									from="/canceled"
+									to="/app/dashboard"
+								/>
+								{ProtectedRoute({
+									protectedPath: '/app',
+									component: withTracker(App),
+									isAllowed: data && data.me,
+								})}
+								{ProtectedRoute({
+									protectedPath: '/auth',
+									component: withTracker(Auth),
+									isAllowed: !(data && data.me),
+								})}
+								<ProtectedRedirect
+									to="/app"
+									isAllowed={data && data.me}
+								/>
+							</Switch>
+							<ProtectedRoute
+								protectedPath={[
+									'/app/projects',
+									'/app/account',
+									'/app/dashboard',
+									'/app/tasks',
+									'/app/tags',
+								]}
+								render={props => (
+									<ConditionalContent {...props} />
+								)}
 								isAllowed={data && data.me}
 							/>
-						</Switch>
-						<ProtectedRoute
-							protectedPath={[
-								'/app/projects',
-								'/app/account',
-								'/app/dashboard',
-								'/app/tasks',
-								'/app/tags',
-							]}
-							render={props => <ConditionalContent {...props} />}
-							isAllowed={data && data.me}
-						/>
-					</UserContext.Provider>
-				</main>
-				<ReactTooltip effect="solid" delayShow={TOOLTIP_DELAY} />
-			</BodyMain>
-		</ProvidersSentry>
+						</UserContext.Provider>
+					</main>
+				</BodyMain>
+			</ProvidersSentry>
+		</DndProvider>
 	);
 }
 

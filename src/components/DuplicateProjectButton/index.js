@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, forwardRef} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import ConfirmModal from '../ConfirmModal';
@@ -58,27 +58,29 @@ const DuplicateProjectModal = ({
 	);
 };
 
-const DuplicateProjectButton = ({
-	children, projectId, onCreate, ...rest
-}) => {
-	const [isOpen, toggleModal] = useState(false);
+const DuplicateProjectButton = forwardRef(
+	({
+		children, projectId, onCreate, ...rest
+	}, ref) => {
+		const [isOpen, toggleModal] = useState(false);
 
-	return (
-		<>
-			<Button {...rest} onClick={() => toggleModal(true)}>
-				{children}
-			</Button>
+		return (
+			<>
+				<Button {...rest} onClick={() => toggleModal(true)} ref={ref}>
+					{children}
+				</Button>
 
-			{isOpen && (
-				<DuplicateProjectModal
-					projectId={projectId}
-					onCreate={onCreate}
-					onConfirm={confirmed => toggleModal(confirmed)}
-					closeModal={() => toggleModal(false)}
-				/>
-			)}
-		</>
-	);
-};
+				{isOpen && (
+					<DuplicateProjectModal
+						projectId={projectId}
+						onCreate={onCreate}
+						onConfirm={confirmed => toggleModal(confirmed)}
+						closeModal={() => toggleModal(false)}
+					/>
+				)}
+			</>
+		);
+	},
+);
 
 export default DuplicateProjectButton;

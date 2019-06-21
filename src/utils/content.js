@@ -9,6 +9,21 @@ import '@reach/dialog/styles.css';
 import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
 import {primaryRed, primaryBlack, primaryGrey} from './new/design-system';
 import {BREAKPOINTS} from './constants';
+import {
+	primaryBlue,
+	primaryWhite,
+	signalRed,
+	gray70,
+	gray30,
+	primaryNavyBlue,
+	signalOrange,
+	signalGreen,
+	gray50,
+	gray10,
+	gray80,
+} from './colors';
+
+export * from './colors';
 
 const shevy = new Shevy({
 	baseFontSize: '17px',
@@ -17,26 +32,6 @@ const {
 	content, h1, h2, h3, h4, h5, h6,
 } = shevy;
 
-// Colors
-export const primaryWhite = '#ffffff';
-export const primaryBlue = '#5020ee';
-export const primaryNavyBlue = '#171a44';
-export const primarySalmon = '#fbada1';
-export const pastelGreen = '#e9fffd';
-export const secondaryRed = '#e62043';
-export const secondaryLightBlue = '#deebff';
-export const secondaryLightYellow = '#fffae6';
-export const secondaryLightGreen = '#e3fcef';
-export const gray10 = '#f9f9f9';
-export const gray20 = '#e0e0e0';
-export const gray30 = '#cccccc';
-export const gray50 = '#8c8c8c';
-export const gray70 = '#666666';
-export const gray80 = '#4d4d4d';
-export const alpha10 = 'rgba(0, 0, 0, 0.1)';
-export const signalGreen = '#0dcc94';
-export const signalOrange = '#ffab00';
-export const signalRed = '#fe4a49';
 // Typography
 
 export const H1 = styled('h1')`
@@ -392,13 +387,15 @@ function useLockBodyScroll() {
 	}, []); // Empty array ensures effect is only run on mount and unmount
 }
 
-export function ModalContainer({...props}) {
+export function ModalContainer({noClose, children, ...props}) {
 	useLockBodyScroll();
 
 	return (
 		<ResponsiveDialog {...props}>
-			<ModalCloseIcon onClick={props.onDismiss}>×</ModalCloseIcon>
-			{props.children}
+			{!noClose && (
+				<ModalCloseIcon onClick={props.onDismiss}>×</ModalCloseIcon>
+			)}
+			{children}
 		</ResponsiveDialog>
 	);
 }

@@ -2,6 +2,7 @@ import React, {memo} from 'react';
 import styled from '@emotion/styled/macro';
 
 import Task from './task';
+import Tooltip from '../Tooltip';
 
 import {BREAKPOINTS} from '../../utils/constants';
 
@@ -17,24 +18,34 @@ import {
 } from '../../utils/new/design-system';
 
 const TasksListContainer = styled('div')`
-	margin-top: 3rem;
+	margin-top: 2rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-top: 1rem;
 	}
 `;
 
-function TasksList({items, customerToken, baseUrl}) {
+function TasksList({
+	items,
+	customerToken,
+	baseUrl,
+	children,
+	createTaskComponent,
+	...rest
+}) {
 	return (
-		<TasksListContainer>
-			{items.map(item => (
+		<TasksListContainer {...rest}>
+			{items.map((item, index) => (createTaskComponent ? (
+				createTaskComponent({item, index})
+			) : (
 				<Task
 					item={item}
 					key={item.id}
 					customerToken={customerToken}
 					baseUrl={baseUrl}
 				/>
-			))}
+			)))}
+			{children}
 			{items.length === 0 && (
 				<IllusContainer bg={IllusBackground}>
 					<IllusFigureContainer fig={IllusFigure} />
@@ -42,13 +53,13 @@ function TasksList({items, customerToken, baseUrl}) {
 						<P>Aucune tâche à faire pour le moment.</P>
 						<P>
 							Dites-nous ce que{' '}
-							<UserSpan data-tip="Les tâches violettes sont les tâches que vous prévoyez de faire">
-								vous
-							</UserSpan>{' '}
+							<Tooltip label="Les tâches violettes sont les tâches que vous prévoyez de faire">
+								<UserSpan>vous</UserSpan>
+							</Tooltip>{' '}
 							souhaitez faire aujourd'hui ou affectez des tâches à{' '}
-							<CustomerSpan data-tip="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
-								votre client
-							</CustomerSpan>
+							<Tooltip label="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
+								<CustomerSpan>votre client</CustomerSpan>
+							</Tooltip>
 							.
 						</P>
 						<P>

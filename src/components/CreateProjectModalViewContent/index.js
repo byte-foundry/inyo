@@ -10,7 +10,6 @@ import {
 	Button,
 	Label,
 	SubHeading,
-	primaryPurple,
 	primaryBlack,
 	primaryRed,
 	BackButton,
@@ -148,9 +147,14 @@ function TemplateTaskList({selectedTemplate}) {
 
 export default function ({back, optionsProjects, ...props}) {
 	const {
+		setFieldValue,
+		modelTemplate,
+		modelProject,
+		source: type,
+	} = props.values;
+	const {
 		data: {project},
 		loading,
-		error,
 	} = useQuery(GET_PROJECT_DATA, {
 		variables: {
 			projectId:
@@ -160,12 +164,10 @@ export default function ({back, optionsProjects, ...props}) {
 
 	let content;
 
-	const type = props.values.source;
-
 	useEffect(() => {
-		props.setFieldValue('modelTemplateTemp', props.values.modelTemplate);
-		props.setFieldValue('modelProjectTemp', props.values.modelProject);
-	}, []);
+		setFieldValue('modelTemplateTemp', modelTemplate);
+		setFieldValue('modelProjectTemp', modelProject);
+	}, [setFieldValue, modelTemplate, modelProject]);
 
 	if (type === 'MODELS') {
 		content = templates.find(

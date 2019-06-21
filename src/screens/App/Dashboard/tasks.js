@@ -1,140 +1,314 @@
-import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import React, {useState, useCallback} from 'react';
+import Portal from '@reach/portal';
+import {useQuery, useMutation} from 'react-apollo-hooks';
 import {withRouter, Route} from 'react-router-dom';
-import styled from '@emotion/styled';
+import {useDrag} from 'react-dnd';
+import moment from 'moment';
 
+import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
+import Task from '../../../components/TasksList/task';
 import TaskView from '../../../components/ItemView';
-import noTaskPlanned from '../../../utils/images/bermuda-searching.svg';
+import ArianneThread from '../../../components/ArianneThread';
+import LeftBarSchedule from '../../../components/LeftBarSchedule';
+import RescheduleModal from '../../../components/RescheduleModal';
 
 import {
-	P,
-	H3,
-	primaryBlue,
 	ModalContainer as Modal,
 	ModalElem,
+	Loading,
 } from '../../../utils/content';
-import {BREAKPOINTS} from '../../../utils/constants';
-import {A} from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {DRAG_TYPES} from '../../../utils/constants';
+import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
+import {FOCUS_TASK} from '../../../utils/mutations';
+import {isCustomerTask} from '../../../utils/functions';
 
-const SectionTitle = styled(H3)`
-	color: ${primaryBlue};
-	font-size: 22px;
-	font-weight: 500;
-	margin: 2em 0 0;
-`;
+function DraggableTask({
+	item,
+	customerToken,
+	baseUrl,
+	setIsDragging = () => {},
+}) {
+	const [, drag] = useDrag({
+		item: {
+			id: item.id,
+			type: DRAG_TYPES.TASK,
+		},
+		begin() {
+			setIsDragging(true);
+			return {
+				id: item.id,
+			};
+		},
+		end() {
+			setIsDragging(false);
+		},
+	});
 
-const NoTask = styled('div')`
-	display: flex;
-	flex-direction: row;
-	margin-top: 2rem;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: flex;
-		flex-direction: column;
+	if (isCustomerTask(item.type) && !item.linkedCustomer) {
+		return (
+			<Task item={item} customerToken={customerToken} baseUrl={baseUrl} />
+		);
 	}
-`;
 
-const NoTaskIllus = styled('div')`
-	flex: 0 0 300px;
-	margin-right: 3rem;
-`;
+	return (
+		<Task
+			ref={drag}
+			item={item}
+			customerToken={customerToken}
+			baseUrl={baseUrl}
+		/>
+	);
+}
 
-const NoTaskContent = styled('div')``;
+const DashboardTasks = ({location, history}) => {
+	const {prevSearch} = location.state || {};
+	const [isDragging, setIsDragging] = useState(false);
+	const query = new URLSearchParams(prevSearch || location.search);
 
-const DashboardTasks = () => {
 	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
-
-	if (loading) return <p>Loading</p>;
-	if (error) throw error;
-
 	const {
-		me: {tasks, endWorkAt},
-	} = data;
-	const now = new Date();
-	const endWorkAtDate = new Date();
+		data: userPrefsData,
+		loading: loadingUserPrefs,
+		error: errorUserPrefs,
+	} = useQuery(GET_USER_INFOS, {suspend: true});
+	const focusTask = useMutation(FOCUS_TASK);
 
-	endWorkAtDate.setUTCHours(
-		endWorkAt ? endWorkAt.split(':')[0] : 19,
-		endWorkAt ? endWorkAt.split(':')[1] : 30,
-		0,
-		0,
+	const onMoveTask = useCallback(
+		({task, scheduledFor, position}) => {
+			const cachedTask = data.me.tasks.find(t => task.id === t.id);
+
+			if (isCustomerTask(cachedTask.type) && !cachedTask.scheduledFor) {
+				history.push({
+					pathname: `/app/dashboard/${task.id}`,
+					state: {
+						prevSearch: location.search,
+						isActivating: true,
+						scheduledFor,
+					},
+				});
+
+				return;
+			}
+
+			if (
+				isCustomerTask(cachedTask.type)
+				&& cachedTask.scheduledFor !== scheduledFor
+			) return;
+
+			focusTask({
+				variables: {
+					itemId: task.id,
+					for: scheduledFor,
+					schedulePosition: position,
+				},
+				optimisticReponse: {
+					focusTask: {
+						itemId: task.id,
+						for: scheduledFor,
+						schedulePosition: position,
+					},
+				},
+			});
+		},
+		[focusTask, data.me.tasks, history, location.search],
 	);
 
-	const itemsToDo = tasks.filter(task => task.isFocused);
+	const projectId = query.get('projectId');
+	const filter = query.get('filter');
+	const tags = query.getAll('tags');
+	const linkedCustomerId = query.get('customerId');
 
-	const itemsToDoLater = tasks.filter(
-		task => !task.isFocused
-			&& task.status === 'PENDING'
-			&& (!task.section || task.section.project.status === 'ONGOING'),
+	if (loading) return <Loading />;
+	if (error) throw error;
+	if (errorUserPrefs) throw errorUserPrefs;
+
+	const {
+		me: {tasks},
+	} = data;
+
+	let unscheduledTasks = [];
+	const tasksToReschedule = [];
+	const scheduledTasksPerDay = {};
+
+	const setProjectSelected = (selected, removeCustomer) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedProjectId} = selected;
+
+			newQuery.set('projectId', selectedProjectId);
+		}
+		else if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		if (removeCustomer) {
+			newQuery.delete('customerId');
+		}
+
+		history.push(`/app/dashboard?${newQuery.toString()}`);
+	};
+
+	const setCustomerSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedCustomerId} = selected;
+
+			newQuery.set('customerId', selectedCustomerId);
+		}
+		else if (newQuery.has('customerId')) {
+			newQuery.delete('customerId');
+		}
+
+		if (newQuery.has('projectId')) {
+			newQuery.delete('projectId');
+		}
+
+		history.push(`/app/dashboard?${newQuery.toString()}`);
+	};
+
+	const setFilterSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			const {value: selectedFilterId} = selected;
+
+			newQuery.set('filter', selectedFilterId);
+		}
+
+		history.push(`/app/dashboard?${newQuery.toString()}`);
+	};
+
+	const setTagSelected = (selected) => {
+		const newQuery = new URLSearchParams(query);
+
+		if (selected) {
+			newQuery.delete('tags');
+			selected.forEach(tag => newQuery.append('tags', tag.value));
+		}
+
+		history.push(`/app/dashboard?${newQuery.toString()}`);
+	};
+
+	tasks.forEach((task) => {
+		if (!task.scheduledFor) {
+			if (!task.section || task.section.project.status === 'ONGOING') {
+				unscheduledTasks.push(task);
+			}
+
+			return;
+		}
+
+		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
+			task.scheduledFor
+		] || {
+			date: task.scheduledFor,
+			tasks: [],
+		};
+
+		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+
+		if (
+			task.status === 'PENDING'
+			&& !isCustomerTask(task.type)
+			&& moment(task.scheduledFor).isBefore(moment(), 'day')
+		) {
+			tasksToReschedule.push(task);
+		}
+	});
+
+	unscheduledTasks = unscheduledTasks.filter(
+		task => (!filter || task.status === filter || filter === 'ALL')
+			&& (!task.section
+				|| task.section.project.status === 'ONGOING'
+				|| projectId)
+			&& (!projectId
+				|| (task.section && task.section.project.id === projectId))
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
 	return (
 		<>
-			{now > endWorkAtDate ? (
-				<SectionTitle>Tâches à faire demain</SectionTitle>
+			{loadingUserPrefs ? (
+				<Loading />
 			) : (
-				<SectionTitle>Tâches à faire aujourd'hui</SectionTitle>
+				<Schedule
+					days={scheduledTasksPerDay}
+					workingDays={userPrefsData.me.workingDays}
+					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					onMoveTask={onMoveTask}
+				/>
 			)}
-			{itemsToDo.length ? (
-				<>
-					<TasksList items={[...itemsToDo]} baseUrl="dashboard" />
-				</>
-			) : (
-				<NoTask>
-					<NoTaskIllus>
-						<img src={noTaskPlanned} />
-					</NoTaskIllus>
-					<NoTaskContent>
-						<P>
-							Vous n'avez pas de tâches prévues pour aujourd'hui.
-							Pour en ajouter, ouvrez une tâche puis cliquez sur{' '}
-							<A
-								target="_blank"
-								href="https://inyo.me/documentation/les-principales-vues/vue-tache/activer-une-tache"
-							>
-								{' '}
-								"Je fais cette tâche aujourd'hui"
-							</A>{' '}
-							en haut de la fenêtre.
-						</P>
-						<P>
-							Vous pouvez aussi{' '}
-							<A
-								target="_blank"
-								href="https://inyo.me/documentation/les-principales-vues/vue-tache/activer-une-tache"
-							>
-								activer une tâche client pour que celui-ci soit
-								notifié et qu'il la réalise.
-							</A>
-						</P>
-					</NoTaskContent>
-				</NoTask>
-			)}
-			{itemsToDoLater.length > 0 && (
-				<>
-					<SectionTitle>Il vous reste du temps ?</SectionTitle>
-					<TasksList
-						items={[...itemsToDoLater]}
-						baseUrl="dashboard"
-					/>
-				</>
+			{tasksToReschedule.length > 0 && (
+				<RescheduleModal
+					tasks={tasksToReschedule}
+					onReschedule={onMoveTask}
+				/>
 			)}
 
+			<ArianneThread
+				projectId={projectId}
+				linkedCustomerId={linkedCustomerId}
+				selectCustomer={setCustomerSelected}
+				selectProjects={setProjectSelected}
+				selectFilter={setFilterSelected}
+				selectTag={setTagSelected}
+				filterId={filter}
+				tagsSelected={tags}
+				marginTop
+			/>
+			<TasksList
+				style={{minHeight: '50px'}}
+				items={unscheduledTasks}
+				baseUrl="dashboard"
+				createTaskComponent={({item, index, customerToken}) => (
+					<DraggableTask
+						item={item}
+						key={item.id}
+						customerToken={customerToken}
+						baseUrl="dashboard"
+						setIsDragging={setIsDragging}
+					/>
+				)}
+			/>
 			<Route
 				path="/app/dashboard/:taskId"
-				render={({match, history}) => (
-					<Modal onDismiss={() => history.push('/app/dashboard')}>
+				render={({match, history, location: {state = {}}}) => (
+					<Modal
+						onDismiss={() => history.push(
+							`/app/dashboard${state.prevSearch || ''}`,
+						)
+						}
+					>
 						<ModalElem>
 							<TaskView
 								id={match.params.taskId}
-								close={() => history.push('/app/dashboard')}
+								close={() => history.push(
+									`/app/dashboard${state.prevSearch
+											|| ''}`,
+								)
+								}
+								isActivating={state.isActivating}
+								scheduledFor={state.scheduledFor}
 							/>
 						</ModalElem>
 					</Modal>
 				)}
 			/>
+			{loadingUserPrefs ? (
+				<Loading />
+			) : (
+				<Portal>
+					<LeftBarSchedule
+						isDragging={isDragging}
+						days={scheduledTasksPerDay}
+						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+						onMoveTask={onMoveTask}
+					/>
+				</Portal>
+			)}
 		</>
 	);
 };

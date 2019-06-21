@@ -72,7 +72,7 @@ describe("Onboarding", () => {
 
 		cy.contains("Continuer").click();
 
-		cy.url().should("include", "app/tasks");
+		cy.url().should('include', 'app/tasks');
 	});
 
 	it("should display empty views", () => {

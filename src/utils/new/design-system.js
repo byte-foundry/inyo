@@ -219,6 +219,10 @@ export const Button = styled('button')`
 		& + button {
 			margin-left: .5rem;
 		}
+		@media (max-width: ${BREAKPOINTS}px) {
+			margin-left: 0;
+			margin-bottom: .5rem;
+		}
 	`}
 
 	i {

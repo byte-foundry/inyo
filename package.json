@@ -70,10 +70,8 @@
     "timezone-support": "^1.8.1",
     "use-onclickoutside": "^0.2.2",
     "webfontloader": "^1.6.28",
-    "yup": "^0.26.6"
-  },
-  "devDependencies": {
-    "@storybook/addon-storyshots": "^5.0.6",
+    "yup": "^0.26.6",
+	"@storybook/addon-storyshots": "^5.0.6",
     "@storybook/react": "^5.0.6",
     "@storybook/theming": "^5.0.6",
     "cross-env": "^5.2.0",

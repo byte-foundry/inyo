@@ -32,7 +32,8 @@ const CardSubTitle = styled('span')`
 
 const TaskCardElem = styled('div')`
 	background: ${primaryWhite};
-	border: 1px solid ${props => (props.customerTask ? primaryRed : accentGrey)};
+	border: 1px solid ${accentGrey};
+	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
 	border-radius: 3px;
 	padding: 5px;
 	margin-bottom: 5px;

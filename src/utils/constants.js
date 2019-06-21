@@ -260,3 +260,18 @@ export const DRAG_TYPES = {
 	TASK: 'SCHEDULE_TASK',
 	SECTION: 'SECTION',
 };
+
+export const STRIPE_CONSTANT
+	= process.env.REACT_APP_INYO_ENV === 'production'
+		? {
+			stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
+			items: [{sku: 'sku_FF2rL7Jk5zl0C7', quantity: 1}],
+			successUrl: 'https://app.inyo.me/paid',
+			cancelUrl: 'https://app.inyo.me/canceled',
+		  }
+		: {
+			stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
+			items: [{sku: 'sku_F9hrygxAJQuSLp', quantity: 1}],
+			successUrl: 'https://dev.inyo.me/paid',
+			cancelUrl: 'https://dev.inyo.me/canceled',
+		  };

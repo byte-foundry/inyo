@@ -1,4 +1,4 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense, useState, useCallback} from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import styled from '@emotion/styled';
@@ -28,6 +28,8 @@ import ProvidersSentry from './providers/sentry';
 
 import App from './screens/App';
 import Auth from './screens/Auth';
+import StraightToCheckout from './screens/StraightToCheckout';
+import Paid from './screens/Paid';
 import Customer from './screens/Customer';
 import ConditionalContent from './screens/App/ConditionalContent';
 
@@ -110,6 +112,12 @@ function Root() {
 	});
 	// This is utter shit and should be removed once it works properly
 
+	const PaidWithTracker = withTracker(Paid);
+	const paidWithProps = useCallback(
+		routeProps => <PaidWithTracker {...routeProps} user={data} />,
+		[data],
+	);
+
 	if (loading) return <Loading />;
 
 	if (data && data.me && !setupDone) {
@@ -148,6 +156,15 @@ function Root() {
 								<Redirect
 									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
 									to="/app/:customerToken/tasks?projectId=:projectId"
+								/>
+								<Route
+									path="/inyo-a-vie"
+									component={withTracker(StraightToCheckout)}
+								/>
+								<Route path="/paid" component={paidWithProps} />
+								<Redirect
+									from="/canceled"
+									to="/app/dashboard"
 								/>
 								{ProtectedRoute({
 									protectedPath: '/app',

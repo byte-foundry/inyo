@@ -47,11 +47,12 @@ export const isCustomerTask = type => CUSTOMER_TASK_TYPES.includes(type);
 
 export function extractScheduleFromWorkingDays(
 	workingDays,
-	iteratorDate,
+	startDate,
 	days,
 	fullWeek,
-	startDay,
+	endDate,
 ) {
+	const iteratorDate = moment(startDate);
 	const weekdays = [];
 
 	do {
@@ -72,9 +73,7 @@ export function extractScheduleFromWorkingDays(
 				workedDay,
 			});
 		}
-	} while (
-		iteratorDate.add(1, 'day').toDate() < startDay.endOf('week').toDate()
-	);
+	} while (iteratorDate.add(1, 'day').toDate() < endDate.toDate());
 
 	return weekdays;
 }

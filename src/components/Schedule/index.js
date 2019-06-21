@@ -212,14 +212,12 @@ const Schedule = ({
 }) => {
 	const [startDay, setStartDay] = useState(moment().startOf('week'));
 
-	const iteratorDate = moment(startDay).startOf('week');
-
 	const weekdays = extractScheduleFromWorkingDays(
 		workingDays,
-		iteratorDate,
+		moment(startDay).startOf('week'),
 		days,
 		fullWeek,
-		startDay,
+		moment(startDay).endOf('week'),
 	);
 
 	return (

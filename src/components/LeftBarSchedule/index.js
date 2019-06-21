@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 import moment from 'moment';
@@ -119,7 +119,6 @@ function DroppableDay({
 function LeftBarSchedule({
 	isDragging, days, fullWeek, onMoveTask,
 }) {
-	const [startDay] = useState(moment().startOf('week'));
 	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
 		to: async (next) => {
@@ -156,14 +155,15 @@ function LeftBarSchedule({
 	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {workingDays} = userPrefsData.me;
-	const iteratorDate = moment(startDay).startOf('week');
+	const startDate = moment();
+	const endDate = moment(startDate).add(10, 'days');
 
 	const weekdays = extractScheduleFromWorkingDays(
 		workingDays,
-		iteratorDate,
+		startDate,
 		days,
 		fullWeek,
-		startDay,
+		endDate,
 	);
 
 	return (

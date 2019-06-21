@@ -5,11 +5,21 @@ export default {
 			reminder => reminder.status === 'PENDING',
 		);
 
-		cachedReminders.push(...newRemindersItem);
+		const reminders = cachedReminders.map((reminder) => {
+			const currentReminderIndex = newRemindersItem.findIndex(
+				r => r.id === reminder.id,
+			);
+
+			if (currentReminderIndex > -1) {
+				return newRemindersItem.splice(currentReminderIndex, 1)[0];
+			}
+
+			return reminder;
+		});
 
 		return {
 			...query.result,
-			reminders: [...cachedReminders],
+			reminders: reminders.concat(...newRemindersItem),
 		};
 	},
 	getAllTasks: ({mutation, query}) => {

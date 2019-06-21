@@ -78,7 +78,7 @@ const DashboardTasks = ({location, history}) => {
 		({task, scheduledFor, position}) => {
 			const cachedTask = data.me.tasks.find(t => task.id === t.id);
 
-			if (isCustomerTask(cachedTask.type)) {
+			if (isCustomerTask(cachedTask.type) && !cachedTask.scheduledFor) {
 				history.push({
 					pathname: `/app/dashboard/${task.id}`,
 					state: {
@@ -90,6 +90,11 @@ const DashboardTasks = ({location, history}) => {
 
 				return;
 			}
+
+			if (
+				isCustomerTask(cachedTask.type)
+				&& cachedTask.scheduledFor !== scheduledFor
+			) return;
 
 			focusTask({
 				variables: {

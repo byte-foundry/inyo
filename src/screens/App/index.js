@@ -41,7 +41,7 @@ function App() {
 					component={withHeader(CustomerList)}
 				/>
 				<Route path="/app/onboarding" component={Onboarding} />
-				<Redirect to="/app/tasks" />
+				<Redirect to="/app/dashboard" />
 			</Switch>
 		</AppMain>
 	);

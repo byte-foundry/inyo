@@ -146,12 +146,8 @@ function TemplateTaskList({selectedTemplate}) {
 }
 
 export default function ({back, optionsProjects, ...props}) {
-	const {
-		setFieldValue,
-		modelTemplate,
-		modelProject,
-		source: type,
-	} = props.values;
+	const {setFieldValue, values} = props;
+	const {modelTemplate, modelProject, source: type} = values;
 	const {
 		data: {project},
 		loading,

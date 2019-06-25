@@ -87,6 +87,15 @@ export const GET_USER_INFOS = gql`
 	}
 `;
 
+export const GET_USER_PAYMENT_INFOS = gql`
+	query userInfosQuery {
+		me {
+			id
+			email
+		}
+	}
+`;
+
 export const GET_USER_TAGS = gql`
 	${TAG_FRAGMENT}
 

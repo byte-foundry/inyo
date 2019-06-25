@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import styled from '@emotion/styled';
+import {useQuery} from 'react-apollo-hooks';
 
 import Illus from '../../utils/images/bermuda-done.svg';
 import {Button, P} from '../../utils/new/design-system';
-import {FlexRow, FlexColumn} from '../../utils/content';
+import {FlexRow, FlexColumn, Loading} from '../../utils/content';
 import {STRIPE_CONSTANT} from '../../utils/constants';
+import {GET_USER_PAYMENT_INFOS} from '../../utils/queries';
 
 const {stripeKey, ...stripeInfos} = STRIPE_CONSTANT;
 
@@ -27,6 +29,28 @@ const Column = styled(FlexColumn)`
 `;
 
 function EndOfTrial() {
+	const {data, loading, error} = useQuery(GET_USER_PAYMENT_INFOS, {
+		fetchPolicy: 'no-cache',
+	});
+
+	const stripeCheckout = useCallback(() => {
+		const stripe = window.Stripe(stripeKey);
+
+		stripe
+			.redirectToCheckout({
+				...stripeInfos,
+				customerEmail: data.me && data.me.email,
+				clientReferenceId: data.me && data.me.id,
+			})
+			.then((result) => {
+				if (result.error) {
+				}
+			});
+	}, [data.me]);
+
+	if (loading) return <Loading />;
+	if (error) throw error;
+
 	return (
 		<Container>
 			<FlexRow>
@@ -42,27 +66,7 @@ function EndOfTrial() {
 						sur vos projets en cours, merci de souscrire a un plan
 						payant.
 					</P>
-					<Button
-						onClick={() => {
-							const stripe = window.Stripe(stripeKey);
-
-							stripe
-								.redirectToCheckout({
-									...stripeInfos,
-									customerEmail: 'francois.poizat@gmail.com',
-									clientReferenceId:
-										'cjs1r01mh052a0794q3ah2o97',
-								})
-								.then((result) => {
-									if (result.error) {
-										console.log('zboub');
-									}
-								});
-						}}
-						big
-						primary
-						centered
-					>
+					<Button onClick={stripeCheckout} big primary centered>
 						Continuer a utiliser Inyo!
 					</Button>
 				</Column>

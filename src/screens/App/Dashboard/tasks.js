@@ -193,6 +193,34 @@ const DashboardTasks = ({location, history}) => {
 	};
 
 	tasks.forEach((task) => {
+		if (isCustomerTask(task.type)) {
+			const plannedReminders = task.reminders.filter(
+				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
+			);
+
+			plannedReminders.forEach((reminder) => {
+				const reminderDate = moment(reminder.sendingDate).format(
+					moment.HTML5_FMT.DATE,
+				);
+
+				scheduledTasksPerDay[reminderDate] = scheduledTasksPerDay[
+					reminderDate
+				] || {
+					date: reminderDate,
+					tasks: [],
+					reminders: [],
+				};
+
+				scheduledTasksPerDay[reminderDate].reminders.push({
+					...reminder,
+					item: task,
+				});
+			});
+
+			// we just want the reminders
+			return;
+		}
+
 		if (!task.scheduledFor) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
@@ -206,6 +234,7 @@ const DashboardTasks = ({location, history}) => {
 		] || {
 			date: task.scheduledFor,
 			tasks: [],
+			reminders: [],
 		};
 
 		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);

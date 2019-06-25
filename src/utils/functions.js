@@ -59,10 +59,8 @@ export function extractScheduleFromWorkingDays(
 		const workedDay = workingDays.includes(WEEKDAYS[iteratorDate.day()]);
 
 		if (fullWeek || workedDay) {
-			const tasks
-				= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
-					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
-				|| [];
+			const date = iteratorDate.format(moment.HTML5_FMT.DATE);
+			const {tasks = [], reminders = []} = days[date] || {};
 
 			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
 
@@ -70,6 +68,7 @@ export function extractScheduleFromWorkingDays(
 				momentDate: iteratorDate.clone(),
 				date: iteratorDate.format(moment.HTML5_FMT.DATE),
 				tasks,
+				reminders,
 				workedDay,
 			});
 		}

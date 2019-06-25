@@ -77,15 +77,7 @@ const TaskCardElem = styled('div')`
 
 const TaskCard = withRouter(
 	({
-		task,
-		index,
-		connectDragSource,
-		connectDropTarget,
-		history,
-		location,
-		cardRef,
-		isOver,
-		...rest
+		task, index, history, location, cardRef, isOver, ...rest
 	}) => {
 		const finishItem = useMutation(FINISH_ITEM);
 		const unfinishItem = useMutation(UNFINISH_ITEM);

@@ -37,13 +37,14 @@ const httpLink = ApolloLink.split(
 	new BatchHttpLink(options),
 );
 
-const withToken = setContext((_, {headers}) => {
+const withToken = setContext((op, {headers}) => {
 	const token = localStorage.getItem('authToken');
 
 	return {
 		headers: {
 			...headers,
 			authorization: token ? `Bearer ${token}` : '',
+			tokenFromRequest: op.variables.token || '',
 		},
 	};
 });

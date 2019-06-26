@@ -107,6 +107,15 @@ const ReminderFormActions = styled('div')`
 	display: flex;
 	align-self: flex-end;
 	margin: 0 0 1.5rem 0;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column-reverse;
+		width: 100%;
+
+		${Button} {
+			margin: 0 0 1rem 0;
+		}
+	}
 `;
 
 const WrapProps = styled(animated.div)`

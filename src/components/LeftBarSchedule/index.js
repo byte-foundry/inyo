@@ -35,7 +35,7 @@ const DayTaskNumber = styled('div')`
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	bottom: 5px;
+	bottom: 3px;
 	font-size: 17px;
 `;
 

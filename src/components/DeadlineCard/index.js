@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import {primaryBlack, primaryGrey} from '../../utils/new/design-system';
 import Icon from '../MaterialIcon';
 
-const TaskCardElem = styled(Link)`
+const CardElem = styled(Link)`
 	color: ${primaryGrey};
 	padding: 5px;
 	font-size: 0.75rem;
@@ -14,37 +14,42 @@ const TaskCardElem = styled(Link)`
 
 	transition: all 300ms ease;
 
-	${props => props.done && 'text-decoration: line-through;'}
-
 	&:hover {
 		color: ${primaryBlack};
 		${props => !props.done && 'text-decoration: underline;'}
 	}
 `;
 
-const ReminderCard = withRouter(
+const DeadlineCard = withRouter(
 	({
-		reminder, task, location, cardRef, ...rest
+		date, task, project, location, cardRef, ...rest
 	}) => (
-		<TaskCardElem
+		<CardElem
 			{...rest}
-			done={reminder.status === 'SENT'}
 			ref={cardRef}
-			to={{
-				pathname: `/app/dashboard/${task.id}`,
-				state: {prevSearch: location.search},
-			}}
+			datetime={date}
+			to={
+				project
+					? {
+						pathname: '/app/tasks',
+						search: `?projectId=${project.id}`,
+					  }
+					: {
+						pathname: `/app/dashboard/${task.id}`,
+						state: {prevSearch: location.search},
+					  }
+			}
 		>
-			<Icon icon="alarm" size="micro" />
-			{new Date(reminder.sendingDate).toLocaleTimeString('default', {
-				hour: '2-digit',
-				minute: '2-digit',
-			})}{' '}
-			: {task.name}
-		</TaskCardElem>
+			<Icon
+				icon="event"
+				size="micro"
+				style={{verticalAlign: 'middle', marginRight: '5px'}}
+			/>
+			{project ? project.name : task.name}
+		</CardElem>
 	),
 );
 
 export default forwardRef((props, ref) => (
-	<ReminderCard {...props} cardRef={ref} />
+	<DeadlineCard {...props} cardRef={ref} />
 ));

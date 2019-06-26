@@ -60,7 +60,8 @@ export function extractScheduleFromWorkingDays(
 
 		if (fullWeek || workedDay) {
 			const date = iteratorDate.format(moment.HTML5_FMT.DATE);
-			const {tasks = [], reminders = []} = days[date] || {};
+			const {tasks = [], reminders = [], deadlines = []}
+				= days[date] || {};
 
 			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
 
@@ -69,6 +70,7 @@ export function extractScheduleFromWorkingDays(
 				date: iteratorDate.format(moment.HTML5_FMT.DATE),
 				tasks,
 				reminders,
+				deadlines,
 				workedDay,
 			});
 		}

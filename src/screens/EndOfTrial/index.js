@@ -58,16 +58,16 @@ function EndOfTrial() {
 				<Column>
 					<P>Votre période d'essai de 21 jours est terminée!</P>
 					<P>
-						Pour vos clients rien ne change: ils peuvent toujours
+						Pour vos clients rien ne change : ils peuvent toujours
 						accéder aux projets, commenter, valider, etc.
 					</P>
 					<P>
-						Pour profiter a nouveau d'Inyo et effectuer des actions
-						sur vos projets en cours, merci de souscrire a un plan
+						Pour profiter à nouveau d'Inyo et effectuer des actions
+						sur vos projets en cours, merci de souscrire à un plan
 						payant.
 					</P>
 					<Button onClick={stripeCheckout} big primary centered>
-						Continuer a utiliser Inyo!
+						Continuer à utiliser Inyo !
 					</Button>
 				</Column>
 			</FlexRow>

@@ -77,3 +77,25 @@ export function extractScheduleFromWorkingDays(
 
 	return weekdays;
 }
+
+const normalizeFalsyParams = f => (...args) => f(...args.map(v => v || undefined));
+
+export const formatTitle = (title) => {
+	if (title === 'MONSIEUR') {
+		return 'M.';
+	}
+
+	if (title === 'MADAME') {
+		return 'Mme';
+	}
+
+	return '';
+};
+
+export const formatName = normalizeFalsyParams(
+	(firstName = '', lastName = '') => `${firstName} ${lastName}`.trim(),
+);
+
+export const formatFullName = normalizeFalsyParams(
+	(title = '', firstName = '', lastName = '') => `${formatTitle(title)} ${formatName(firstName, lastName)}`.trim(),
+);

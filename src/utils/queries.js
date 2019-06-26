@@ -497,3 +497,15 @@ export const GET_USER_NOTIFICATIONS = gql`
 		}
 	}
 `;
+
+export const GET_CUSTOMER_INFOS = gql`
+	query getCustomerInfos($token: String) {
+		customer(token: $token) {
+			id
+			name
+			title
+			firstName
+			lastName
+		}
+	}
+`;

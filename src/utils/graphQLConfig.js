@@ -44,7 +44,7 @@ const withToken = setContext((op, {headers}) => {
 		headers: {
 			...headers,
 			authorization: token ? `Bearer ${token}` : '',
-			tokenFromRequest: op.variables.token,
+			tokenFromRequest: op.variables.token || '',
 		},
 	};
 });

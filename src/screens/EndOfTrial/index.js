@@ -5,7 +5,7 @@ import {useQuery} from 'react-apollo-hooks';
 import Illus from '../../utils/images/bermuda-done.svg';
 import {Button, P, primaryGrey} from '../../utils/new/design-system';
 import {FlexRow, FlexColumn, Loading} from '../../utils/content';
-import {STRIPE_CONSTANT} from '../../utils/constants';
+import {STRIPE_CONSTANT, BREAKPOINTS} from '../../utils/constants';
 import {GET_USER_PAYMENT_INFOS} from '../../utils/queries';
 
 const {stripeKey, ...stripeInfos} = STRIPE_CONSTANT;
@@ -16,21 +16,48 @@ const Container = styled('div')`
 	align-items: center;
 	width: 100%;
 	height: 800px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 1rem;
+		align-items: initial;
+		width: auto;
+		height: auto;
+	}
+`;
+
+const FlewRowMobile = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const IllusForPaying = styled('img')`
 	height: 330px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		height: 30vh;
+	}
 `;
 
 const Separator = styled('span')`
 	color: ${primaryGrey};
 	padding: 1rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		padding: 10px;
+		margin: 0 auto;
+	}
 `;
 
 const Column = styled(FlexColumn)`
 	width: 400px;
 	margin-left: 2rem;
 	justify-content: center;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: auto;
+		margin-left: 0;
+	}
 `;
 
 function EndOfTrial() {
@@ -58,7 +85,7 @@ function EndOfTrial() {
 
 	return (
 		<Container>
-			<FlexRow>
+			<FlewRowMobile>
 				<IllusForPaying src={Illus} />
 				<Column>
 					<P>Votre période d'essai de 21 jours est terminée !</P>
@@ -71,7 +98,7 @@ function EndOfTrial() {
 						sur vos projets en cours, merci de souscrire à l'un de
 						nos plans payants.
 					</P>
-					<FlexRow>
+					<FlewRowMobile>
 						<Button onClick={stripeCheckout} link>
 							S'abonner pour 8€ /mois
 						</Button>
@@ -79,14 +106,14 @@ function EndOfTrial() {
 						<Button onClick={stripeCheckout} link>
 							pour 60€ /an (2 mois gratuits)
 						</Button>
-					</FlexRow>
+					</FlewRowMobile>
 					<P>
 						<Button onClick={stripeCheckout} big primary>
 							Acheter un accès à vie à 99€ !
 						</Button>
 					</P>
 				</Column>
-			</FlexRow>
+			</FlewRowMobile>
 		</Container>
 	);
 }

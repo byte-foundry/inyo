@@ -104,12 +104,12 @@ function EndOfTrial() {
 						</Button>
 						<Separator>ou</Separator>
 						<Button onClick={stripeCheckout} link>
-							pour 60€ /an (2 mois gratuits)
+							60€ /an (2 mois offerts)
 						</Button>
 					</FlewRowMobile>
 					<P>
 						<Button onClick={stripeCheckout} big primary>
-							Acheter un accès à vie à 99€ !
+							Acheter un accès à vie pour 99€ !
 						</Button>
 					</P>
 				</Column>

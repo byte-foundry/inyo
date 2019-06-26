@@ -104,7 +104,7 @@ function EndOfTrial() {
 						</Button>
 						<Separator>ou</Separator>
 						<Button onClick={stripeCheckout} link>
-							60€ /an (2 mois offerts)
+							60€ /an (4 mois offerts)
 						</Button>
 					</FlewRowMobile>
 					<P>

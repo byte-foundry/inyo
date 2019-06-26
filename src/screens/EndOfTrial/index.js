@@ -1,11 +1,11 @@
 import React, {useCallback} from 'react';
 import styled from '@emotion/styled';
-import {useQuery} from 'react-apollo-hooks';
+import {useQuery, useApolloClient} from 'react-apollo-hooks';
 
 import Illus from '../../utils/images/bermuda-done.svg';
 import {Button, P, primaryGrey} from '../../utils/new/design-system';
 import {FlexRow, FlexColumn, Loading} from '../../utils/content';
-import {STRIPE_CONSTANT, BREAKPOINTS} from '../../utils/constants';
+import {STRIPE_CONSTANT, BREAKPOINTS, PLAN_NAMES} from '../../utils/constants';
 import {GET_USER_PAYMENT_INFOS} from '../../utils/queries';
 
 const {stripeKey, ...stripeInfos} = STRIPE_CONSTANT;
@@ -60,25 +60,40 @@ const Column = styled(FlexColumn)`
 	}
 `;
 
+const createStripeCheckout = (me, planName) => () => {
+	const stripe = window.Stripe(stripeKey);
+
+	stripe
+		.redirectToCheckout({
+			...stripeInfos,
+			items: [stripeInfos.items[planName]],
+			customerEmail: me && me.email,
+			clientReferenceId: me && me.id,
+		})
+		.then((result) => {
+			if (result.error) {
+			}
+		});
+};
+
 function EndOfTrial() {
 	const {data, loading, error} = useQuery(GET_USER_PAYMENT_INFOS, {
 		fetchPolicy: 'no-cache',
 	});
+	const client = useApolloClient();
 
-	const stripeCheckout = useCallback(() => {
-		const stripe = window.Stripe(stripeKey);
-
-		stripe
-			.redirectToCheckout({
-				...stripeInfos,
-				customerEmail: data.me && data.me.email,
-				clientReferenceId: data.me && data.me.id,
-			})
-			.then((result) => {
-				if (result.error) {
-				}
-			});
-	}, [data.me]);
+	const lifeStripeCheckout = useCallback(
+		createStripeCheckout(data.me, PLAN_NAMES.LIFE),
+		[data.me],
+	);
+	const monthlyStripeCheckout = useCallback(
+		createStripeCheckout(data.me, PLAN_NAMES.MONTHLY),
+		[data.me],
+	);
+	const yearlyStripeCheckout = useCallback(
+		createStripeCheckout(data.me, PLAN_NAMES.YEARLY),
+		[data.me],
+	);
 
 	if (loading) return <Loading />;
 	if (error) throw error;
@@ -88,6 +103,7 @@ function EndOfTrial() {
 			<FlewRowMobile>
 				<IllusForPaying src={Illus} />
 				<Column>
+					<P>Bonjour {data.me ? data.me.email : ''},</P>
 					<P>Votre période d'essai de 21 jours est terminée !</P>
 					<P>
 						Pour vos clients rien ne change : ils peuvent toujours
@@ -99,17 +115,29 @@ function EndOfTrial() {
 						nos plans payants.
 					</P>
 					<FlewRowMobile>
-						<Button onClick={stripeCheckout} link>
+						<Button onClick={monthlyStripeCheckout} link>
 							S'abonner pour 8€ /mois
 						</Button>
 						<Separator>ou</Separator>
-						<Button onClick={stripeCheckout} link>
+						<Button onClick={yearlyStripeCheckout} link>
 							60€ /an (4 mois offerts)
 						</Button>
 					</FlewRowMobile>
 					<P>
-						<Button onClick={stripeCheckout} big primary>
+						<Button onClick={lifeStripeCheckout} big primary>
 							Acheter un accès à vie pour 99€ !
+						</Button>
+					</P>
+					<P>
+						<Button
+							onClick={() => {
+								window.localStorage.removeItem('authToken');
+								client.resetStore();
+							}}
+							link
+						>
+							Si ce n'est pas vous, cliquez ici pour vous
+							déconnecter.
 						</Button>
 					</P>
 				</Column>

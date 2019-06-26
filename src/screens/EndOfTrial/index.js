@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import {useQuery} from 'react-apollo-hooks';
 
 import Illus from '../../utils/images/bermuda-done.svg';
-import {Button, P} from '../../utils/new/design-system';
+import {Button, P, primaryGrey} from '../../utils/new/design-system';
 import {FlexRow, FlexColumn, Loading} from '../../utils/content';
 import {STRIPE_CONSTANT} from '../../utils/constants';
 import {GET_USER_PAYMENT_INFOS} from '../../utils/queries';
@@ -20,6 +20,11 @@ const Container = styled('div')`
 
 const IllusForPaying = styled('img')`
 	height: 330px;
+`;
+
+const Separator = styled('span')`
+	color: ${primaryGrey};
+	padding: 1rem;
 `;
 
 const Column = styled(FlexColumn)`
@@ -56,19 +61,30 @@ function EndOfTrial() {
 			<FlexRow>
 				<IllusForPaying src={Illus} />
 				<Column>
-					<P>Votre période d'essai de 21 jours est terminée!</P>
+					<P>Votre période d'essai de 21 jours est terminée !</P>
 					<P>
 						Pour vos clients rien ne change : ils peuvent toujours
 						accéder aux projets, commenter, valider, etc.
 					</P>
 					<P>
 						Pour profiter à nouveau d'Inyo et effectuer des actions
-						sur vos projets en cours, merci de souscrire à un plan
-						payant.
+						sur vos projets en cours, merci de souscrire à l'un de
+						nos plans payants.
 					</P>
-					<Button onClick={stripeCheckout} big primary centered>
-						Continuer à utiliser Inyo !
-					</Button>
+					<FlexRow>
+						<Button onClick={stripeCheckout} link>
+							S'abonner pour 8€ /mois
+						</Button>
+						<Separator>ou</Separator>
+						<Button onClick={stripeCheckout} link>
+							pour 60€ /an (2 mois gratuits)
+						</Button>
+					</FlexRow>
+					<P>
+						<Button onClick={stripeCheckout} big primary>
+							Acheter un accès à vie à 99€ !
+						</Button>
+					</P>
 				</Column>
 			</FlexRow>
 		</Container>

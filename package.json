@@ -17,8 +17,8 @@
     "extends": "react-app"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.6",
-    "@emotion/styled": "^10.0.6",
+    "@emotion/core": "^10.0.14",
+    "@emotion/styled": "^10.0.14",
     "@reach/dialog": "^0.1.2",
     "@reach/portal": "^0.2.1",
     "@reach/tooltip": "^0.2.2",

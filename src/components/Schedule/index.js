@@ -21,6 +21,8 @@ import {UNFOCUS_TASK} from '../../utils/mutations';
 import IconButton from '../../utils/new/components/IconButton';
 
 import TaskCard from '../TaskCard';
+import ReminderCard from '../ReminderCard';
+import DeadlineCard from '../DeadlineCard';
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -243,10 +245,14 @@ const Schedule = ({
 			<Week>
 				{weekdays.map((day) => {
 					const sortedTasks = [...day.tasks];
+					const sortedReminders = [...day.reminders];
+					const sortedDeadlines = [...day.deadlines];
 
 					sortedTasks.sort(
 						(a, b) => a.schedulePosition - b.schedulePosition,
 					);
+					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
+					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
 					return (
 						<Day isOff={!day.workedDay}>
@@ -319,6 +325,22 @@ const Schedule = ({
 								>
 									<DroppableSeparator />
 								</DefaultDroppableDay>
+								{sortedReminders.map(reminder => (
+									<ReminderCard
+										key={`${reminder.id}`}
+										datetime={reminder.sendingDate}
+										reminder={reminder}
+										task={reminder.item}
+									/>
+								))}
+								{sortedDeadlines.map(deadline => (
+									<DeadlineCard
+										key={`${deadline.id}`}
+										project={deadline.project}
+										task={deadline.task}
+										date={deadline.date}
+									/>
+								))}
 							</DroppableDayTasks>
 						</Day>
 					);

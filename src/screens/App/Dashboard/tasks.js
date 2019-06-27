@@ -193,6 +193,77 @@ const DashboardTasks = ({location, history}) => {
 	};
 
 	tasks.forEach((task) => {
+		if (task.section && task.section.project.deadline) {
+			const {project} = task.section;
+
+			const deadlineDate = moment(project.deadline).format(
+				moment.HTML5_FMT.DATE,
+			);
+
+			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
+				deadlineDate
+			] || {
+				date: deadlineDate,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+			};
+
+			scheduledTasksPerDay[deadlineDate].deadlines.push({
+				date: project.deadline,
+				project,
+			});
+		}
+
+		if (task.dueDate) {
+			const deadlineDate = moment(task.dueDate).format(
+				moment.HTML5_FMT.DATE,
+			);
+
+			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
+				deadlineDate
+			] || {
+				date: deadlineDate,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+			};
+
+			scheduledTasksPerDay[deadlineDate].deadlines.push({
+				date: task.dueDate,
+				task,
+			});
+		}
+
+		if (isCustomerTask(task.type)) {
+			const plannedReminders = task.reminders.filter(
+				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
+			);
+
+			plannedReminders.forEach((reminder) => {
+				const reminderDate = moment(reminder.sendingDate).format(
+					moment.HTML5_FMT.DATE,
+				);
+
+				scheduledTasksPerDay[reminderDate] = scheduledTasksPerDay[
+					reminderDate
+				] || {
+					date: reminderDate,
+					tasks: [],
+					reminders: [],
+					deadlines: [],
+				};
+
+				scheduledTasksPerDay[reminderDate].reminders.push({
+					...reminder,
+					item: task,
+				});
+			});
+
+			// we just want the reminders
+			return;
+		}
+
 		if (!task.scheduledFor) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
@@ -206,6 +277,8 @@ const DashboardTasks = ({location, history}) => {
 		] || {
 			date: task.scheduledFor,
 			tasks: [],
+			reminders: [],
+			deadlines: [],
 		};
 
 		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);

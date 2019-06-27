@@ -61,9 +61,13 @@
 		"react/jsx-uses-react": "error",
      	"react/jsx-uses-vars": "error",
 
-		"import/extensions": 1
+		"import/extensions": 1,
+
+		"sort-imports": "off",
+		"import/order": "off",
+		"simple-import-sort/sort": "error"
 	},
-	"plugins": ["react", "prettier", "cypress"],
+	"plugins": ["react", "prettier", "cypress", "simple-import-sort"],
 	"settings": {
 		"import/resolver": {
 			"node": {

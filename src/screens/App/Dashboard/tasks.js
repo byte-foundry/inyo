@@ -57,6 +57,7 @@ function DraggableTask({
 			item={item}
 			customerToken={customerToken}
 			baseUrl={baseUrl}
+			isDraggable
 		/>
 	);
 }

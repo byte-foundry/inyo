@@ -1,27 +1,26 @@
-import React, {useState, useCallback} from 'react';
 import Portal from '@reach/portal';
-import {useQuery, useMutation} from 'react-apollo-hooks';
-import {withRouter, Route} from 'react-router-dom';
-import {useDrag} from 'react-dnd';
 import moment from 'moment';
+import React, {useCallback, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
+import {useDrag} from 'react-dnd';
+import {Route, withRouter} from 'react-router-dom';
 
+import ArianneThread from '../../../components/ArianneThread';
+import TaskView from '../../../components/ItemView';
+import LeftBarSchedule from '../../../components/LeftBarSchedule';
+import RescheduleModal from '../../../components/RescheduleModal';
 import Schedule from '../../../components/Schedule';
 import TasksList from '../../../components/TasksList';
 import Task from '../../../components/TasksList/task';
-import TaskView from '../../../components/ItemView';
-import ArianneThread from '../../../components/ArianneThread';
-import LeftBarSchedule from '../../../components/LeftBarSchedule';
-import RescheduleModal from '../../../components/RescheduleModal';
-
+import {DRAG_TYPES} from '../../../utils/constants';
 import {
+	Loading,
 	ModalContainer as Modal,
 	ModalElem,
-	Loading,
 } from '../../../utils/content';
-import {DRAG_TYPES} from '../../../utils/constants';
-import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
-import {FOCUS_TASK} from '../../../utils/mutations';
 import {isCustomerTask} from '../../../utils/functions';
+import {FOCUS_TASK} from '../../../utils/mutations';
+import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 
 function DraggableTask({
 	item,
@@ -235,6 +234,14 @@ const DashboardTasks = ({location, history}) => {
 			});
 		}
 
+		if (!task.scheduledFor) {
+			if (!task.section || task.section.project.status === 'ONGOING') {
+				unscheduledTasks.push(task);
+			}
+
+			return;
+		}
+
 		if (isCustomerTask(task.type)) {
 			const plannedReminders = task.reminders.filter(
 				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
@@ -261,14 +268,6 @@ const DashboardTasks = ({location, history}) => {
 			});
 
 			// we just want the reminders
-			return;
-		}
-
-		if (!task.scheduledFor) {
-			if (!task.section || task.section.project.status === 'ONGOING') {
-				unscheduledTasks.push(task);
-			}
-
 			return;
 		}
 

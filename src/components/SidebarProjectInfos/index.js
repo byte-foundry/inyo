@@ -1,45 +1,43 @@
-import React, {useState, useRef} from 'react';
-import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
-import {useQuery, useMutation} from 'react-apollo-hooks';
 import moment from 'moment';
+import React, {useRef, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 import useOnClickOutside from 'use-onclickoutside';
 
-import {
-	Aside,
-	SubHeading,
-	Button,
-	primaryPurple,
-	primaryWhite,
-	primaryGrey,
-	P,
-	DateContainer,
-	BigNumber,
-} from '../../utils/new/design-system';
+import {BREAKPOINTS} from '../../utils/constants';
 import {ModalContainer} from '../../utils/content';
-
-import Tooltip from '../Tooltip';
-import IconButton from '../../utils/new/components/IconButton';
-import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
-import {GET_PROJECT_INFOS} from '../../utils/queries';
+import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import {
-	UPDATE_PROJECT,
 	ARCHIVE_PROJECT,
 	UNARCHIVE_PROJECT,
+	UPDATE_PROJECT,
 } from '../../utils/mutations';
-import {BREAKPOINTS} from '../../utils/constants';
-
-import MaterialIcon from '../MaterialIcon';
+import {
+	Aside,
+	BigNumber,
+	Button,
+	DateContainer,
+	P,
+	primaryGrey,
+	primaryPurple,
+	primaryWhite,
+	SubHeading,
+} from '../../utils/new/design-system';
+import {GET_PROJECT_INFOS} from '../../utils/queries';
 import ConfirmModal from '../ConfirmModal';
-import RemoveProjectButton from '../RemoveProjectButton';
 import CreateProjectLinkButton from '../CreateProjectLinkButton';
-import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import CustomerModalAndMail from '../CustomerModalAndMail';
-import StaticCustomerView from '../StaticCustomerView';
-import DuplicateProjectButton from '../DuplicateProjectButton';
+import CustomerNameAndAddress from '../CustomerNameAndAddress';
 import DateInput from '../DateInput';
+import DuplicateProjectButton from '../DuplicateProjectButton';
+import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
+import RemoveProjectButton from '../RemoveProjectButton';
+import StaticCustomerView from '../StaticCustomerView';
+import Tooltip from '../Tooltip';
 
 const SubSection = styled('div')`
 	margin-bottom: 2rem;

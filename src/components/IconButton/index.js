@@ -1,14 +1,13 @@
-import React, {forwardRef} from 'react';
 import styled from '@emotion/styled';
-
-import MaterialIcon from '../../../../components/MaterialIcon';
+import React, {forwardRef} from 'react';
 
 import {
-	mediumGrey,
-	primaryRed,
-	primaryPurple,
 	lightRed,
-} from '../../design-system';
+	mediumGrey,
+	primaryPurple,
+	primaryRed,
+} from '../../utils/new/design-system';
+import MaterialIcon from '../MaterialIcon';
 
 const IconWrap = styled('div')`
   width: ${(props) => {

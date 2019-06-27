@@ -1,60 +1,59 @@
-import React, {useState, useRef} from 'react';
-import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
-import {useQuery, useMutation} from 'react-apollo-hooks';
+import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import React, {useRef, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
-import MaterialIcon from '../MaterialIcon';
-import TaskStatusButton from '../TaskStatusButton';
-import Plural from '../Plural';
-import CheckList from '../CheckList';
-import CommentList from '../CommentList';
-import MultilineEditable from '../MultilineEditable';
-import InlineEditable from '../InlineEditable';
-import UnitInput from '../UnitInput';
-import DateInput from '../DateInput';
-import CustomersDropdown from '../CustomersDropdown';
-import ProjectsDropdown from '../ProjectsDropdown';
-import TagDropdown from '../TagDropdown';
-import UploadDashboard from '../UploadDashboard';
-import TaskRemindersList from '../TaskRemindersList';
-import Apostrophe from '../Apostrophe';
-import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
-import TaskActivationHeader from '../TaskActivationHeader';
-
-import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import {
-	UPDATE_ITEM,
-	REMOVE_ITEM,
-	REMOVE_ATTACHMENTS,
-	FOCUS_TASK,
-	UNFOCUS_TASK,
-	CREATE_TAG,
-} from '../../utils/mutations';
-import IconButton from '../../utils/new/components/IconButton';
-import {
-	TaskHeading,
-	SubHeading,
-	Button,
-	DueDateInputElem,
-	DateInputContainer,
-	HR,
-	primaryPurple,
-	accentGrey,
-	primaryRed,
-	primaryGrey,
-	primaryWhite,
-} from '../../utils/new/design-system';
+	BREAKPOINTS,
+	CUSTOMER_TASK_TYPES,
+	ITEM_TYPES,
+} from '../../utils/constants';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
 import {
-	ITEM_TYPES,
-	BREAKPOINTS,
-	CUSTOMER_TASK_TYPES,
-} from '../../utils/constants';
+	CREATE_TAG,
+	FOCUS_TASK,
+	REMOVE_ATTACHMENTS,
+	REMOVE_ITEM,
+	UNFOCUS_TASK,
+	UPDATE_ITEM,
+} from '../../utils/mutations';
+import {
+	accentGrey,
+	Button,
+	DateInputContainer,
+	DueDateInputElem,
+	HR,
+	primaryGrey,
+	primaryPurple,
+	primaryRed,
+	primaryWhite,
+	SubHeading,
+	TaskHeading,
+} from '../../utils/new/design-system';
+import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
+import Apostrophe from '../Apostrophe';
+import CheckList from '../CheckList';
+import CommentList from '../CommentList';
+import CustomersDropdown from '../CustomersDropdown';
+import DateInput from '../DateInput';
+import IconButton from '../IconButton';
+import InlineEditable from '../InlineEditable';
+import MaterialIcon from '../MaterialIcon';
+import MultilineEditable from '../MultilineEditable';
+import Plural from '../Plural';
+import ProjectsDropdown from '../ProjectsDropdown';
+import TagDropdown from '../TagDropdown';
+import TaskActivationHeader from '../TaskActivationHeader';
+import TaskRemindersList from '../TaskRemindersList';
+import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
+import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
+import UnitInput from '../UnitInput';
+import UploadDashboard from '../UploadDashboard';
 
 const Header = styled('div')``;
 

@@ -1,28 +1,27 @@
-import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
 import moment from 'moment';
-import useOnClickOutside from 'use-onclickoutside';
+import React, {useRef, useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
+import useOnClickOutside from 'use-onclickoutside';
 
-import Tooltip from '../Tooltip';
-import FormElem from '../FormElem';
-import FormSelect from '../FormSelect';
-import FormRadiosList from '../FormRadiosList';
-import DateInput from '../DateInput';
-import IconButton from '../../utils/new/components/IconButton';
-
-import {GET_ALL_CUSTOMERS} from '../../utils/queries';
-import {templates} from '../../utils/project-templates';
+import {BREAKPOINTS} from '../../utils/constants';
+import {FlexRow, ModalActions} from '../../utils/content';
 import {
+	BigNumber,
 	Button,
 	DateContainer,
-	BigNumber,
-	Label,
 	InputLabel,
+	Label,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {ModalActions, FlexRow} from '../../utils/content';
-import {BREAKPOINTS} from '../../utils/constants';
+import {templates} from '../../utils/project-templates';
+import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import DateInput from '../DateInput';
+import FormElem from '../FormElem';
+import FormRadiosList from '../FormRadiosList';
+import FormSelect from '../FormSelect';
+import IconButton from '../IconButton';
+import Tooltip from '../Tooltip';
 
 const FormSubHeading = styled(SubHeading)`
 	grid-column: 1 / 4;

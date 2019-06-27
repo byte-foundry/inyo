@@ -1,14 +1,14 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
 import {
-	SEND_REMINDER_TEST_EMAIL,
 	SEND_REMINDER_PREVIEW_TEST_EMAIL,
+	SEND_REMINDER_TEST_EMAIL,
 } from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
-import IconButton from '../../utils/new/components/IconButton';
+import IconButton from '../IconButton';
 import Tooltip from '../Tooltip';
 
 const Status = styled('span')`

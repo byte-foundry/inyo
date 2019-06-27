@@ -1,51 +1,48 @@
-import React, {useState} from 'react';
 import styled from '@emotion/styled/macro';
+import React, {useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
-import {useQuery, useMutation} from 'react-apollo-hooks';
 
+import CreateProjectModal from '../../../components/CreateProjectModal';
+import IconButton from '../../../components/IconButton';
 import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
-import CreateProjectModal from '../../../components/CreateProjectModal';
-import IconButton from '../../../utils/new/components/IconButton';
-
+import Tooltip from '../../../components/Tooltip';
+import {
+	FlexColumn,
+	FlexRow,
+	ModalActions,
+	ModalContainer,
+	ModalElem,
+} from '../../../utils/content';
 import noArchivedIllus from '../../../utils/images/bermuda-no-message.svg';
 import IllusBackground from '../../../utils/images/empty-project-background.svg';
 import IllusFigure from '../../../utils/images/empty-project-illus.svg';
-
-import {onboardingTemplate} from '../../../utils/project-templates';
-
-import {GET_ALL_PROJECTS} from '../../../utils/queries';
 import {
 	ARCHIVE_PROJECT,
-	UNARCHIVE_PROJECT,
 	CREATE_PROJECT,
+	UNARCHIVE_PROJECT,
 } from '../../../utils/mutations';
 import {
-	ModalContainer,
-	ModalElem,
-	ModalActions,
-	FlexRow,
-	FlexColumn,
-} from '../../../utils/content';
-import {
-	Main,
+	accentGrey,
+	Button,
 	Container,
 	Content,
-	SubHeading,
-	Button,
-	primaryGrey,
-	primaryPurple,
-	lightGrey,
-	accentGrey,
-	primaryRed,
-	P,
-	IllusFigureContainer,
+	Help,
 	IllusContainer,
+	IllusFigureContainer,
 	IllusText,
 	IllusTextIcon,
-	Help,
+	lightGrey,
+	Main,
+	P,
+	primaryGrey,
+	primaryPurple,
+	primaryRed,
+	SubHeading,
 } from '../../../utils/new/design-system';
-import Tooltip from '../../../components/Tooltip';
+import {onboardingTemplate} from '../../../utils/project-templates';
+import {GET_ALL_PROJECTS} from '../../../utils/queries';
 
 const ProjectTitle = styled(SubHeading)`
 	color: ${primaryGrey};

@@ -1,28 +1,26 @@
+import styled from '@emotion/styled';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import PropTypes from 'prop-types';
-import moment from 'moment';
-import styled from '@emotion/styled';
-import {useDrop, useDrag} from 'react-dnd';
+import {useDrag, useDrop} from 'react-dnd';
 
-import DefaultDroppableDay from '../DefaultDroppableDay';
-
-import {
-	mediumGrey,
-	accentGrey,
-	primaryPurple,
-	primaryWhite,
-	lightGrey,
-	Button,
-} from '../../utils/new/design-system';
-import {DRAG_TYPES, BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
-import IconButton from '../../utils/new/components/IconButton';
-
-import TaskCard from '../TaskCard';
-import ReminderCard from '../ReminderCard';
+import {
+	accentGrey,
+	Button,
+	lightGrey,
+	mediumGrey,
+	primaryPurple,
+	primaryWhite,
+} from '../../utils/new/design-system';
 import DeadlineCard from '../DeadlineCard';
+import DefaultDroppableDay from '../DefaultDroppableDay';
+import IconButton from '../IconButton';
+import ReminderCard from '../ReminderCard';
+import TaskCard from '../TaskCard';
 
 const Container = styled('div')`
 	margin-top: 3rem;

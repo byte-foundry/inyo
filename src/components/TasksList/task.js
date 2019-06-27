@@ -1,47 +1,45 @@
-import React, {useState, useRef, forwardRef} from 'react';
-import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import React, {forwardRef, useRef, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
+import {Link, withRouter} from 'react-router-dom';
 import useOnClickOutside from 'use-onclickoutside';
 
+import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
+import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
-import {ITEM_TYPES, itemStatuses, BREAKPOINTS} from '../../utils/constants';
 import {
 	FINISH_ITEM,
-	UPDATE_ITEM,
-	UNFINISH_ITEM,
 	FOCUS_TASK,
+	UNFINISH_ITEM,
+	UPDATE_ITEM,
 } from '../../utils/mutations';
-import {isCustomerTask} from '../../utils/functions';
-import IconButton from '../../utils/new/components/IconButton';
-import Tooltip from '../Tooltip';
-
 import {
+	accentGrey,
+	Button,
 	ButtonLink,
-	TaskHeading,
-	TaskIconText,
-	TaskInfosItemLink,
-	primaryPurple,
-	primaryGrey,
+	DateInputContainer,
+	DueDateInputElem,
 	lightGrey,
 	mediumGrey,
 	primaryBlack,
-	accentGrey,
+	primaryGrey,
+	primaryPurple,
 	primaryRed,
 	primaryWhite,
-	DueDateInputElem,
-	DateInputContainer,
-	Button,
+	TaskHeading,
+	TaskIconText,
+	TaskInfosItemLink,
 } from '../../utils/new/design-system';
-
+import CustomerModalAndMail from '../CustomerModalAndMail';
 import CustomerDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
-import UnitInput from '../UnitInput';
-import Plural from '../Plural';
-import CustomerModalAndMail from '../CustomerModalAndMail';
-import TimeItTookDisplay from '../TimeItTookDisplay';
+import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
+import Plural from '../Plural';
+import TimeItTookDisplay from '../TimeItTookDisplay';
+import Tooltip from '../Tooltip';
+import UnitInput from '../UnitInput';
 
 export const TaskContainer = styled('div')`
 	display: flex;

@@ -261,17 +261,49 @@ export const DRAG_TYPES = {
 	SECTION: 'SECTION',
 };
 
+export const PLAN_NAMES = {
+	LIFE: 'LIFE',
+	MONTHLY: 'MONTHLY',
+	YEARLY: 'YEARLY',
+};
+
 export const STRIPE_CONSTANT
 	= process.env.REACT_APP_INYO_ENV === 'production'
 		? {
 			stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
-			items: [{sku: 'sku_FF2rL7Jk5zl0C7', quantity: 1}],
+			items: {
+				[PLAN_NAMES.LIFE]: {
+					sku: 'sku_FF2rL7Jk5zl0C7',
+					quantity: 1,
+				},
+				[PLAN_NAMES.MONTHLY]: {
+					plan: 'INYO_MONTHLY',
+					quantity: 1,
+				},
+				[PLAN_NAMES.YEARLY]: {
+					plan: 'plan_FJQhEIJQnlzriF',
+					quantity: 1,
+				},
+			},
 			successUrl: 'https://app.inyo.me/paid',
 			cancelUrl: 'https://app.inyo.me/canceled',
 		  }
 		: {
 			stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
-			items: [{sku: 'sku_F9hrygxAJQuSLp', quantity: 1}],
+			items: {
+				[PLAN_NAMES.LIFE]: {
+					sku: 'sku_F9hrygxAJQuSLp',
+					quantity: 1,
+				},
+				[PLAN_NAMES.MONTHLY]: {
+					plan: 'INYO_MONTHLY',
+					quantity: 1,
+				},
+				[PLAN_NAMES.YEARLY]: {
+					plan: 'INYO_YEARLY',
+					quantity: 1,
+				},
+			},
 			successUrl: 'https://dev.inyo.me/paid',
 			cancelUrl: 'https://dev.inyo.me/canceled',
 		  };

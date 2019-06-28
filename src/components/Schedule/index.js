@@ -89,7 +89,7 @@ const DayTitle = styled('span')`
 `;
 
 const DroppableSeparator = styled('div')`
-	flex: 1 0 50px;
+	flex: 1 0 70px;
 	margin-top: -3px;
 	border-top: ${props => (props.isOver ? `3px solid ${primaryPurple}` : '5px solid transparent')};
 `;

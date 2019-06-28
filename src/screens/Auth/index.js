@@ -1,22 +1,19 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import {
-	Link, Switch, Route, Redirect,
+	Link, Redirect, Route, Switch,
 } from 'react-router-dom';
-import styled from '@emotion/styled';
-
-import {
-	P, primaryNavyBlue, primaryBlue, H1,
-} from '../../utils/content';
 
 import LoginForm from '../../components/LoginForm';
-import SignUpForm from '../../components/SignupForm';
-import SendResetPasswordForm from '../../components/SendResetPasswordForm';
 import ResetPasswordForm from '../../components/ResetPasswordForm';
-
+import SendResetPasswordForm from '../../components/SendResetPasswordForm';
+import SignUpForm from '../../components/SignupForm';
+import {BREAKPOINTS} from '../../utils/constants';
+import {
+	H1, P, primaryBlue, primaryNavyBlue,
+} from '../../utils/content';
 import {ReactComponent as AppLogo} from '../../utils/icons/appLogo.svg';
 import SuccessIllus from '../../utils/images/bermuda-success.svg';
-
-import {BREAKPOINTS} from '../../utils/constants';
 
 const AuthMain = styled('div')`
 	display: flex;

@@ -1,18 +1,17 @@
-import React from 'react';
-import {Formik} from 'formik';
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
-import {useQuery, useMutation} from 'react-apollo-hooks';
+import {Formik} from 'formik';
+import React from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
-import TagForm from '../TagForm';
-import FormElem from '../FormElem';
-
-import {CREATE_TAG} from '../../utils/mutations';
-import {GET_USER_TAGS} from '../../utils/queries';
-import {Loading, FlexRow} from '../../utils/content';
 import {TAG_COLOR_PALETTE} from '../../utils/constants';
-import {P, Button} from '../../utils/new/design-system';
+import {FlexRow, Loading} from '../../utils/content';
+import {CREATE_TAG} from '../../utils/mutations';
+import {Button, P} from '../../utils/new/design-system';
+import {GET_USER_TAGS} from '../../utils/queries';
+import FormElem from '../FormElem';
+import TagForm from '../TagForm';
 
 const TagEmptyContainer = styled('div')`
 	display: flex;

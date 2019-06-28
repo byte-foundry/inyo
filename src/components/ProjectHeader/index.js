@@ -1,21 +1,20 @@
-import React from 'react';
-import {useQuery, useMutation} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
 import {css} from '@emotion/core';
+import styled from '@emotion/styled';
+import React from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 
-import {
-	primaryBlack,
-	lightRed,
-	lightGrey,
-	accentGrey,
-} from '../../utils/new/design-system';
-import Pencil from '../../utils/icons/pencil.svg';
-import {GET_PROJECT_INFOS} from '../../utils/queries';
-import {UPDATE_PROJECT} from '../../utils/mutations';
 import {BREAKPOINTS} from '../../utils/constants';
-
-import TasksProgressBar from '../TasksProgressBar';
+import Pencil from '../../utils/icons/pencil.svg';
+import {UPDATE_PROJECT} from '../../utils/mutations';
+import {
+	accentGrey,
+	lightGrey,
+	lightRed,
+	primaryBlack,
+} from '../../utils/new/design-system';
+import {GET_PROJECT_INFOS} from '../../utils/queries';
 import InlineEditable from '../InlineEditable';
+import TasksProgressBar from '../TasksProgressBar';
 
 const ProjectHeaderContainer = styled('div')`
 	margin-bottom: 4rem;

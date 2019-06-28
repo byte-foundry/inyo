@@ -1,6 +1,6 @@
-import React, {forwardRef} from 'react';
-import {withRouter, Link} from 'react-router-dom';
 import styled from '@emotion/styled';
+import React, {forwardRef} from 'react';
+import {Link, withRouter} from 'react-router-dom';
 
 import {primaryBlack, primaryGrey} from '../../utils/new/design-system';
 import Icon from '../MaterialIcon';

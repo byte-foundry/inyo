@@ -1,25 +1,24 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
 import {Route} from 'react-router-dom';
 
-import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
 import Tooltip from '../../../components/Tooltip';
-import CustomerTasks from './tasks';
-
 import {BREAKPOINTS} from '../../../utils/constants';
+import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
+import {formatFullName} from '../../../utils/functions';
 import {
-	P,
 	A,
+	mediumGrey,
+	P,
+	primaryBlack,
 	primaryGrey,
 	primaryRed,
-	mediumGrey,
-	primaryBlack,
 	primaryWhite,
 } from '../../../utils/new/design-system';
-import {formatFullName} from '../../../utils/functions';
 import {GET_CUSTOMER_INFOS} from '../../../utils/queries';
+import CustomerTasks from './tasks';
 
 const Container = styled('div')`
 	min-height: 100vh;

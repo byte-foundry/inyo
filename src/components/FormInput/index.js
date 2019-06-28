@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from '@emotion/styled';
 import {css} from '@emotion/core';
+import styled from '@emotion/styled';
 import {Field} from 'formik';
+import React from 'react';
 
-import {Input, primaryWhite} from '../../utils/new/design-system';
 import {getDeep} from '../../utils/functions';
+import {Input, primaryWhite} from '../../utils/new/design-system';
 
 const FormInputMain = styled(Input)`
 	display: block;

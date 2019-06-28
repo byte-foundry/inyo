@@ -1,13 +1,12 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
+import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 
-import {ArianneElemCreatable} from '../ArianneThread';
-
-import {GET_USER_TAGS} from '../../utils/queries';
 import {TAG_COLOR_PALETTE} from '../../utils/constants';
 import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
+import {GET_USER_TAGS} from '../../utils/queries';
+import {ArianneElemCreatable} from '../ArianneThread';
 
 const ManageTagOption = styled('div')`
 	position: absolute;

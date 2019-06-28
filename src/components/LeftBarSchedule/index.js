@@ -1,20 +1,19 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import {useQuery} from 'react-apollo-hooks';
 import moment from 'moment';
-import {useSpring, animated} from 'react-spring';
+import React from 'react';
+import {useQuery} from 'react-apollo-hooks';
+import {animated, useSpring} from 'react-spring';
 
-import DefaultDroppableDay from '../DefaultDroppableDay';
-
-import {GET_USER_INFOS} from '../../utils/queries';
+import {Loading} from '../../utils/content';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
-import usePrevious from '../../utils/usePrevious';
 import {
+	mediumGrey,
 	primaryPurple,
 	primaryWhite,
-	mediumGrey,
 } from '../../utils/new/design-system';
-import {Loading} from '../../utils/content';
+import {GET_USER_INFOS} from '../../utils/queries';
+import usePrevious from '../../utils/usePrevious';
+import DefaultDroppableDay from '../DefaultDroppableDay';
 
 const LeftBarContainer = styled('div')`
 	position: fixed;

@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 const TagElem = styled('div')`
 	background-color: ${props => props.bg};

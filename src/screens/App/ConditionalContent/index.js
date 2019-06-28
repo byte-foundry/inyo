@@ -1,6 +1,6 @@
+import styled from '@emotion/styled';
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
 
 import ModalWithHoursAndDays from '../../../components/ModalWithHoursAndDays';
 import {GET_USER_INFOS} from '../../../utils/queries';

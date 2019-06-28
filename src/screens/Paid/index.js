@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
+import {FlexColumn, FlexRow} from '../../utils/content';
 import Illus from '../../utils/images/bermuda-done.svg';
 import {ButtonLink, P} from '../../utils/new/design-system';
-import {FlexRow, FlexColumn} from '../../utils/content';
 
 const Container = styled('div')`
 	display: flex;

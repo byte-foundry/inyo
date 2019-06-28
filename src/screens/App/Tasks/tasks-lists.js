@@ -1,37 +1,36 @@
-import React, {Suspense} from 'react';
 import styled from '@emotion/styled';
+import moment from 'moment';
+import React, {Suspense} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import YouTube from 'react-youtube';
-import moment from 'moment';
 
-import {GET_ALL_TASKS} from '../../../utils/queries';
-import {
-	Loading,
-	ModalContainer,
-	ModalElem,
-	ModalActions,
-} from '../../../utils/content';
-import {
-	Help,
-	Heading,
-	Button,
-	A,
-	P,
-	UL,
-	Main,
-	Container,
-	Content,
-} from '../../../utils/new/design-system';
-
-import ProjectHeader from '../../../components/ProjectHeader';
-import ProjectList from '../../../components/ProjectTasksList';
-import TasksListComponent from '../../../components/TasksList';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
-import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
-import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
+import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
+import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
+import ProjectList from '../../../components/ProjectTasksList';
+import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
+import TasksListComponent from '../../../components/TasksList';
 import Tooltip from '../../../components/Tooltip';
+import {
+	Loading,
+	ModalActions,
+	ModalContainer,
+	ModalElem,
+} from '../../../utils/content';
+import {
+	A,
+	Button,
+	Container,
+	Content,
+	Heading,
+	Help,
+	Main,
+	P,
+	UL,
+} from '../../../utils/new/design-system';
+import {GET_ALL_TASKS} from '../../../utils/queries';
 
 const PA = styled(P)`
 	font-size: 16px;

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import React, {Component} from 'react';
 
 const Textarea = styled('textarea')``;
 

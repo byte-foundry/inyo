@@ -1,21 +1,20 @@
+import styled from '@emotion/styled';
 import React, {useRef, useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
-
-import EmailExample from '../EmailExample';
-import Apostrophe from '../Apostrophe';
 
 import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
+	Loading,
+	ModalActions,
 	ModalContainer,
 	ModalElem,
-	ModalActions,
-	Loading,
 } from '../../utils/content';
 import {
-	SubHeading, Button, P, lightGrey,
+	Button, lightGrey, P, SubHeading,
 } from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
+import Apostrophe from '../Apostrophe';
+import EmailExample from '../EmailExample';
 
 const Header = styled(SubHeading)`
 	margin-bottom: 2rem;

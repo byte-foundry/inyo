@@ -1,11 +1,10 @@
-import React, {useState, forwardRef} from 'react';
+import React, {forwardRef, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
-import ConfirmModal from '../ConfirmModal';
-import {Button, P, Input} from '../../utils/new/design-system';
-
-import {GET_PROJECT_DATA} from '../../utils/queries';
 import {CREATE_PROJECT} from '../../utils/mutations';
+import {Button, Input, P} from '../../utils/new/design-system';
+import {GET_PROJECT_DATA} from '../../utils/queries';
+import ConfirmModal from '../ConfirmModal';
 
 const DuplicateProjectModal = ({
 	projectId, onCreate, onConfirm, ...rest

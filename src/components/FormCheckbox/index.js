@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Field} from 'formik';
+import React, {Component} from 'react';
 
-import {FlexRow, Label, ErrorInput} from '../../utils/content';
+import {ErrorInput, FlexRow, Label} from '../../utils/content';
 
 const FormCheckboxMain = styled(FlexRow)``;
 const CheckboxLabel = styled('span')`
@@ -48,8 +48,7 @@ class FormCheckbox extends Component {
 						)}
 					</Field>
 				)}
-				{errors[name]
-					&& touched[name] && (
+				{errors[name] && touched[name] && (
 					<ErrorInput className="input-feedback">
 						{errors[name]}
 					</ErrorInput>

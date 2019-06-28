@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import {css} from '@emotion/core';
+import styled from '@emotion/styled';
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import {Ul, secondaryRed, primaryBlue} from '../../utils/content';
-
+import {primaryBlue, secondaryRed, Ul} from '../../utils/content';
 import InlineEditable from '../InlineEditable';
 
 const ContentList = styled(Ul)`

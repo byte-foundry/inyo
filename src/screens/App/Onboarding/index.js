@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import React, {useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {Redirect} from 'react-router-dom';
 
+import OnboardingCustomAssistant from '../../../components/Onboarding/onboarding-custom-assistant';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSecondStep from '../../../components/Onboarding/onboarding-second-step';
 import OnboardingThirdStep from '../../../components/Onboarding/onboarding-third-step';
-import OnboardingCustomAssistant from '../../../components/Onboarding/onboarding-custom-assistant';
+import {gray20, Loading, signalGreen} from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
-
-import {gray20, signalGreen, Loading} from '../../../utils/content';
 
 const OnboardingMain = styled('div')`
 	max-width: 650px;

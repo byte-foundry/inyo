@@ -1,10 +1,11 @@
-import React, {useState, useRef} from 'react';
+import 'medium-draft/lib/index.css';
+
 import styled from '@emotion/styled';
 import {convertToRaw} from 'draft-js';
-import {Editor, createEditorState} from 'medium-draft';
-import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
 import debounce from 'lodash.debounce';
-import 'medium-draft/lib/index.css';
+import {createEditorState, Editor} from 'medium-draft';
+import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
+import React, {useRef, useState} from 'react';
 
 import {gray20} from '../../utils/content';
 import {lightPurple, primaryPurple} from '../../utils/new/design-system';

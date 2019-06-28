@@ -1,15 +1,15 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 
-import 'react-toastify/dist/ReactToastify.css';
-import Tasks from './tasks';
 import CreateTask from '../../../components/CreateTask';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import Tooltip from '../../../components/Tooltip';
-
 import {
-	Main, Container, Content, Help,
+	Container, Content, Help, Main,
 } from '../../../utils/new/design-system';
+import Tasks from './tasks';
 
 function Dashboard({history}) {
 	const setProjectSelected = (selected, removeCustomer) => {

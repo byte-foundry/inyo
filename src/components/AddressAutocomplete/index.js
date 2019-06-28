@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import AlgoliaPlaces from 'algolia-places-react';
 import styled from '@emotion/styled';
+import AlgoliaPlaces from 'algolia-places-react';
+import React, {Component} from 'react';
 
-import {InputLabel, Label} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
+import {InputLabel, Label} from '../../utils/new/design-system';
 
 const AddressAutocompleteMain = styled(InputLabel)`
 	width: 100%;
@@ -58,9 +58,7 @@ class AddressAutocomplete extends Component {
 					defaultValue={
 						values
 						&& values.street
-						&& `${values.street} ${values.postalCode} ${values.city} ${
-							values.country
-						}`
+						&& `${values.street} ${values.postalCode} ${values.city} ${values.country}`
 					}
 				/>
 				{errors[name] && touched[name] && (

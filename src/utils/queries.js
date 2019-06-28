@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
 import {
+	COMMENT_ON_ITEM_FRAGMENT,
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
-	COMMENT_ON_ITEM_FRAGMENT,
 	REMINDER_FRAGMENT,
 	TAG_FRAGMENT,
 } from './fragments';

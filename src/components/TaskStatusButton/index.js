@@ -1,13 +1,12 @@
-import React, {useState, useRef} from 'react';
 import styled from '@emotion/styled';
+import React, {useRef, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
 import BistableButton from '../BistableButton';
 import UnitInput from '../UnitInput';
-
-import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
-import {primaryPurple, primaryGrey} from '../../utils/new/design-system';
 
 const SetTimeContainer = styled('div')`
 	display: flex;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import {ModalActions, ModalContainer, ModalElem} from '../../utils/content';
+import {ARCHIVE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {Button, Heading, P} from '../../utils/new/design-system';
-import {ModalContainer, ModalElem, ModalActions} from '../../utils/content';
-import {REMOVE_PROJECT, ARCHIVE_PROJECT} from '../../utils/mutations';
 
 function RemoveProject({closeModal, projectId, onRemove = () => {}}) {
 	const removeProject = useMutation(REMOVE_PROJECT);

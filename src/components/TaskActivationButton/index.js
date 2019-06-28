@@ -1,9 +1,8 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
-import BistableButton from '../BistableButton';
-
 import {UNFOCUS_TASK} from '../../utils/mutations';
+import BistableButton from '../BistableButton';
 
 const TaskActivationButton = ({
 	customerToken,

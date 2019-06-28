@@ -1,26 +1,24 @@
+import styled from '@emotion/styled';
+import * as Sentry from '@sentry/browser';
+import {Formik} from 'formik';
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
-import {Formik} from 'formik';
-import * as Sentry from '@sentry/browser';
-import * as Yup from 'yup';
 import ReactGA from 'react-ga';
-import {timezones, findTimeZone, getUTCOffset} from '../../utils/timezones';
+import * as Yup from 'yup';
 
 import {BREAKPOINTS} from '../../utils/constants';
-
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import {
-	primaryWhite, gray20, ErrorInput, Label,
+	ErrorInput, gray20, Label, primaryWhite,
 } from '../../utils/content';
-import {Button} from '../../utils/new/design-system';
-import FormSelect from '../FormSelect';
-import FormCheckbox from '../FormCheckbox';
-import {GET_USER_INFOS} from '../../utils/queries';
-
-import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
-import WeekDaysInput from '../WeekDaysInput';
 import workingIllus from '../../utils/images/bermuda-uploading.svg';
+import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {Button} from '../../utils/new/design-system';
+import {GET_USER_INFOS} from '../../utils/queries';
+import {findTimeZone, getUTCOffset, timezones} from '../../utils/timezones';
+import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
+import FormCheckbox from '../FormCheckbox';
+import FormSelect from '../FormSelect';
+import WeekDaysInput from '../WeekDaysInput';
 
 const UserWorkHourAndDaysFormMain = styled('div')``;
 

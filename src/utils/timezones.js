@@ -1,4 +1,5 @@
 import {populateTimeZones} from 'timezone-support/dist/lookup-convert';
+
 import data from './timezone-data';
 
 populateTimeZones(data);

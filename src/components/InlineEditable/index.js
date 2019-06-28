@@ -1,10 +1,10 @@
-import React, {useState, useCallback, useRef} from 'react';
-import styled from '@emotion/styled';
 import {css} from '@emotion/core';
+import styled from '@emotion/styled';
+import React, {useCallback, useRef, useState} from 'react';
 
-import {Input, gray50} from '../../utils/content';
-import {lightGrey, accentGrey} from '../../utils/new/design-system';
+import {gray50, Input} from '../../utils/content';
 import Pencil from '../../utils/icons/pencil.svg';
+import {accentGrey, lightGrey} from '../../utils/new/design-system';
 
 const Placeholder = styled('span')`
 	color: ${gray50};

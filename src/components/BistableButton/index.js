@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Tooltip from '../Tooltip';
 import {Button} from '../../utils/new/design-system';
+import Tooltip from '../Tooltip';
 
 const BistableButton = ({
 	value,

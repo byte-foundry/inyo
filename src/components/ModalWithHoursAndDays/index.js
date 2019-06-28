@@ -18,19 +18,13 @@ export default function ModalWithHoursAndDays(props) {
 		<ModalContainer>
 			<ModalElem>
 				<ModalRow>
-					<H4>Besoin d'informations supplémentaires</H4>
+					<H4>Comment travaillez-vous ?</H4>
 				</ModalRow>
 				<ModalRow>
 					<P>
-						Nous avons ajouté des fonctionnalités qui nécessitent de
-						nouvelles informations sur la façon dont vous
-						travaillez.
-					</P>
-					<P>
-						Inyo vous enverra un email chaque matin à l'heure à
-						laquelle vous commencez le travail, c'est pourquoi nous
-						vous demandons vos horaires de travail et vos jours
-						travaillés.
+						Nous avons besoin de ces informations pour vous envoyer
+						des emails au bon moment, en cohérence avec vos journées
+						de travail.
 					</P>
 				</ModalRow>
 				<ModalRow>

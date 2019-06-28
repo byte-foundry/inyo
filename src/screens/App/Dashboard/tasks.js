@@ -22,7 +22,15 @@ import {
 	ModalElem,
 } from '../../../utils/content';
 import {isCustomerTask} from '../../../utils/functions';
+import IllusBackground from '../../../utils/images/empty-tasks-background.svg';
+import IllusFigure from '../../../utils/images/empty-tasks-illus.svg';
 import {FOCUS_TASK} from '../../../utils/mutations';
+import {
+	IllusContainer,
+	IllusFigureContainer,
+	IllusText,
+	P,
+} from '../../../utils/new/design-system';
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 
 const FlexRowMobile = styled(FlexRow)`
@@ -135,7 +143,7 @@ const DashboardTasks = ({location, history}) => {
 		me: {tasks},
 	} = data;
 
-	let unscheduledTasks = [];
+	const unscheduledTasks = [];
 	const tasksToReschedule = [];
 	const scheduledTasksPerDay = {};
 
@@ -300,7 +308,7 @@ const DashboardTasks = ({location, history}) => {
 		}
 	});
 
-	unscheduledTasks = unscheduledTasks.filter(
+	const unscheduledFilteredTasks = unscheduledTasks.filter(
 		task => (!filter || task.status === filter || filter === 'ALL')
 			&& (!task.section
 				|| task.section.project.status === 'ONGOING'
@@ -341,20 +349,35 @@ const DashboardTasks = ({location, history}) => {
 						tagsSelected={tags}
 						marginTop
 					/>
-					<TasksList
-						style={{minHeight: '50px'}}
-						items={unscheduledTasks}
-						baseUrl="dashboard"
-						createTaskComponent={({item, index, customerToken}) => (
-							<DraggableTask
-								item={item}
-								key={item.id}
-								customerToken={customerToken}
+					{tasks.length === 0
+					|| unscheduledTasks.length !== 0
+					|| unscheduledFilteredTasks.length
+						!== unscheduledTasks.length ? (
+							<TasksList
+								style={{minHeight: '50px'}}
+								hasFilteredItems={
+									tasks.length !== unscheduledFilteredTasks.length
+								}
+								items={unscheduledFilteredTasks}
 								baseUrl="dashboard"
-								setIsDragging={setIsDragging}
+								createTaskComponent={({item, customerToken}) => (
+									<DraggableTask
+										item={item}
+										key={item.id}
+										customerToken={customerToken}
+										baseUrl="dashboard"
+										setIsDragging={setIsDragging}
+									/>
+								)}
 							/>
+						) : (
+							<IllusContainer bg={IllusBackground}>
+								<IllusFigureContainer fig={IllusFigure} />
+								<IllusText>
+									<P>Vous n'avez plus de tâches à planifier.</P>
+								</IllusText>
+							</IllusContainer>
 						)}
-					/>
 				</div>
 				<SidebarDashboardInfos baseUrl="app/dashboard" />
 			</FlexRowMobile>

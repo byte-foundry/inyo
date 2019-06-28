@@ -25,6 +25,7 @@ const TasksListContainer = styled('div')`
 
 function TasksList({
 	items,
+	hasFilteredItems,
 	customerToken,
 	baseUrl,
 	children,
@@ -47,23 +48,31 @@ function TasksList({
 			{items.length === 0 && (
 				<IllusContainer bg={IllusBackground}>
 					<IllusFigureContainer fig={IllusFigure} />
-					<IllusText>
-						<P>Aucune tâche à faire pour le moment.</P>
-						<P>
-							Dites-nous ce que{' '}
-							<Tooltip label="Les tâches violettes sont les tâches que vous prévoyez de faire">
-								<UserSpan>vous</UserSpan>
-							</Tooltip>{' '}
-							souhaitez faire aujourd'hui ou affectez des tâches à{' '}
-							<Tooltip label="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
-								<CustomerSpan>votre client</CustomerSpan>
-							</Tooltip>
-							.
-						</P>
-						<P>
-							Cliquez sur l'icône pour choisir un type de tâche.
-						</P>
-					</IllusText>
+					{hasFilteredItems ? (
+						<IllusText>
+							<P>Aucune tâche ne correspond à ses critères.</P>
+						</IllusText>
+					) : (
+						<IllusText>
+							<P>Aucune tâche à faire pour le moment.</P>
+							<P>
+								Dites-nous ce que{' '}
+								<Tooltip label="Les tâches violettes sont les tâches que vous prévoyez de faire">
+									<UserSpan>vous</UserSpan>
+								</Tooltip>{' '}
+								souhaitez faire aujourd'hui ou affectez des
+								tâches à{' '}
+								<Tooltip label="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
+									<CustomerSpan>votre client</CustomerSpan>
+								</Tooltip>
+								.
+							</P>
+							<P>
+								Cliquez sur l'icône pour choisir un type de
+								tâche.
+							</P>
+						</IllusText>
+					)}
 				</IllusContainer>
 			)}
 		</TasksListContainer>
@@ -87,5 +96,6 @@ export default memo(
 				&& item.status === nextProps.items[i].status,
 		)
 		&& prevProps.projectId === nextProps.projectId
-		&& prevProps.customerId === nextProps.customerId,
+		&& prevProps.customerId === nextProps.customerId
+		&& prevProps.hasFilteredItems === nextProps.hasFilteredItems,
 );

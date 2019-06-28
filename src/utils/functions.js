@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import {WEEKDAYS, CUSTOMER_TASK_TYPES} from './constants';
+import {CUSTOMER_TASK_TYPES, WEEKDAYS} from './constants';
 
 export const dateDiff = (datepart, fromdate, todate) => {
 	const lowerDatepart = datepart.toLowerCase();

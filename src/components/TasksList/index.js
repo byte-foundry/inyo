@@ -1,21 +1,19 @@
-import React, {memo} from 'react';
 import styled from '@emotion/styled/macro';
-
-import Task from './task';
-import Tooltip from '../Tooltip';
+import React, {memo} from 'react';
 
 import {BREAKPOINTS} from '../../utils/constants';
-
 import IllusBackground from '../../utils/images/empty-tasks-background.svg';
 import IllusFigure from '../../utils/images/empty-tasks-illus.svg';
 import {
-	P,
+	CustomerSpan,
 	IllusContainer,
 	IllusFigureContainer,
 	IllusText,
+	P,
 	UserSpan,
-	CustomerSpan,
 } from '../../utils/new/design-system';
+import Tooltip from '../Tooltip';
+import Task from './task';
 
 const TasksListContainer = styled('div')`
 	margin-top: 2rem;

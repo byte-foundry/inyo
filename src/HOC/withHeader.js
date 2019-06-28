@@ -1,13 +1,13 @@
 import React from 'react';
 
-import TopBar, {
-	TopBarMenu,
-	TopBarLogo,
-	TopBarMenuLink,
-	TopBarLogoNotif,
-} from '../components/TopBar';
 import NotificationTrayButton from '../components/NotificationTrayButton';
 import Tooltip from '../components/Tooltip';
+import TopBar, {
+	TopBarLogo,
+	TopBarLogoNotif,
+	TopBarMenu,
+	TopBarMenuLink,
+} from '../components/TopBar';
 
 const withHeader = Component => (...args) => (
 	<>

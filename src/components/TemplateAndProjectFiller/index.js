@@ -1,25 +1,24 @@
+import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
 
-import Plural from '../Plural';
-import templateIllus from '../../utils/images/bermuda-order-completed.svg';
-
-import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
-import {templates} from '../../utils/project-templates';
-import {
-	SubHeading,
-	Button,
-	primaryPurple,
-	primaryGrey,
-	primaryBlack,
-	FilterInput,
-	Heading,
-} from '../../utils/new/design-system';
+import {BREAKPOINTS} from '../../utils/constants';
 import {Loading, P} from '../../utils/content';
 import Search from '../../utils/icons/search.svg';
-import {BREAKPOINTS} from '../../utils/constants';
+import templateIllus from '../../utils/images/bermuda-order-completed.svg';
+import {
+	Button,
+	FilterInput,
+	Heading,
+	primaryBlack,
+	primaryGrey,
+	primaryPurple,
+	SubHeading,
+} from '../../utils/new/design-system';
+import {templates} from '../../utils/project-templates';
+import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
+import Plural from '../Plural';
 
 const Container = styled('div')`
 	display: flex;

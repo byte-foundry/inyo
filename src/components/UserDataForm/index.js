@@ -1,20 +1,18 @@
+import styled from '@emotion/styled';
+import * as Sentry from '@sentry/browser';
+import {Formik} from 'formik';
+import debounce from 'lodash.debounce';
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
-import {Formik} from 'formik';
-import * as Sentry from '@sentry/browser';
-import * as Yup from 'yup';
 import ReactGA from 'react-ga';
-import debounce from 'lodash.debounce';
-
-import {UPDATE_USER, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
-import {gray20, ErrorInput} from '../../utils/content';
-import {Button, primaryWhite} from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
-import userIllus from '../../utils/images/bermuda-coming-soon.svg';
+import * as Yup from 'yup';
 
 import {BREAKPOINTS} from '../../utils/constants';
-
+import {ErrorInput, gray20} from '../../utils/content';
+import userIllus from '../../utils/images/bermuda-coming-soon.svg';
+import {CHECK_UNIQUE_EMAIL, UPDATE_USER} from '../../utils/mutations';
+import {Button, primaryWhite} from '../../utils/new/design-system';
+import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 const UserDataFormMain = styled('div')``;

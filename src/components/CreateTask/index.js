@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
-import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled/macro';
-
-import TaskInput from '../TaskInput';
-import {TaskContainer} from '../TasksList/task';
-import ConfirmModal, {useConfirmation} from '../ConfirmModal';
-import CreateProjectModal from '../CreateProjectModal';
+import React, {useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import {isCustomerTask} from '../../utils/functions';
-import {P} from '../../utils/new/design-system';
 import {ADD_ITEM, ADD_SECTION, UPDATE_PROJECT} from '../../utils/mutations';
+import {P} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
+import ConfirmModal, {useConfirmation} from '../ConfirmModal';
+import CreateProjectModal from '../CreateProjectModal';
+import TaskInput from '../TaskInput';
+import {TaskContainer} from '../TasksList/task';
 
 const TaskInputContainer = styled('div')`
 	& + ${TaskContainer} {

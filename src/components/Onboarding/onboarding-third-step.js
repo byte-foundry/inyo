@@ -1,23 +1,22 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
+import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {GET_USER_INFOS} from '../../utils/queries';
-
-import welcomeIllus from '../../utils/images/bermuda-welcome.svg';
 
 import {
-	H4,
+	Button,
+	FlexColumn,
 	FlexRow,
 	gray70,
-	primaryWhite,
-	primaryBlue,
 	gray80,
-	FlexColumn,
-	Button,
+	H4,
 	P,
+	primaryBlue,
+	primaryWhite,
 } from '../../utils/content';
+import welcomeIllus from '../../utils/images/bermuda-welcome.svg';
+import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`

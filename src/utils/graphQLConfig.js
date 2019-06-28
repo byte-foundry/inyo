@@ -1,31 +1,30 @@
+import {
+	InMemoryCache,
+	IntrospectionFragmentMatcher,
+} from 'apollo-cache-inmemory';
 import {ApolloClient} from 'apollo-client';
 import {ApolloLink} from 'apollo-link';
 import {BatchHttpLink} from 'apollo-link-batch-http';
 import {setContext} from 'apollo-link-context';
 import {onError} from 'apollo-link-error';
-import {createUploadLink} from 'apollo-upload-client';
-import {
-	InMemoryCache,
-	IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory';
 import WatchedMutationLink from 'apollo-link-watched-mutation';
-import introspectionQueryResultData from './fragmentTypes.json';
-
-import createTaskWatchMutation from './mutationLinks/createTask';
-import createProjectWatchMutation from './mutationLinks/createProject';
-import updateProjectWatchMutation from './mutationLinks/updateProject';
-import createCustomerWatchMutation from './mutationLinks/createCustomer';
-import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
-import updateItemWatchMutation from './mutationLinks/updateItem';
-import deleteTaskWatchMutation from './mutationLinks/deleteTask';
-import focusTaskWatchMutation from './mutationLinks/focusTask';
-import createTagWatchMutation from './mutationLinks/createTag';
-import removeTagWatchMutation from './mutationLinks/removeTag';
-import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
-import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
-import removeSectionWatchMutation from './mutationLinks/removeSection';
+import {createUploadLink} from 'apollo-upload-client';
 
 import {GRAPHQL_API} from './constants';
+import introspectionQueryResultData from './fragmentTypes.json';
+import createCustomerWatchMutation from './mutationLinks/createCustomer';
+import createProjectWatchMutation from './mutationLinks/createProject';
+import createTagWatchMutation from './mutationLinks/createTag';
+import createTaskWatchMutation from './mutationLinks/createTask';
+import deleteTaskWatchMutation from './mutationLinks/deleteTask';
+import focusTaskWatchMutation from './mutationLinks/focusTask';
+import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
+import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
+import removeSectionWatchMutation from './mutationLinks/removeSection';
+import removeTagWatchMutation from './mutationLinks/removeTag';
+import updateItemWatchMutation from './mutationLinks/updateItem';
+import updateProjectWatchMutation from './mutationLinks/updateProject';
+import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
 
 const options = {
 	uri: GRAPHQL_API,

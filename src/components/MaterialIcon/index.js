@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import WebFont from 'webfontloader';
-
 import './index.css';
+
+import PropTypes from 'prop-types';
+import React from 'react';
+import WebFont from 'webfontloader';
 
 const sizes = {
 	micro: 'md-12',

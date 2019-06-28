@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 
 import {Button} from '../../utils/new/design-system';
-
 import RemoveProjectModal from '../RemoveProjectModal';
 
 const RemoveProjectButton = ({

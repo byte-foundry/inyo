@@ -1,20 +1,19 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
-import TaskRemindersList from '../TaskRemindersList';
-import Apostrophe from '../Apostrophe';
+import {BREAKPOINTS} from '../../utils/constants';
+import {Loading} from '../../utils/content';
 import noRemindersIllus from '../../utils/images/bermuda-done.svg';
-
 import {
 	Aside,
-	SubHeading,
-	primaryGrey,
 	lightGrey,
+	primaryGrey,
+	SubHeading,
 } from '../../utils/new/design-system';
-import {Loading} from '../../utils/content';
-import {BREAKPOINTS} from '../../utils/constants';
 import {GET_REMINDERS, GET_USER_INFOS} from '../../utils/queries';
+import Apostrophe from '../Apostrophe';
+import TaskRemindersList from '../TaskRemindersList';
 
 const DashboardAside = styled(Aside)`
 	padding-right: 0;

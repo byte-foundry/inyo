@@ -1,22 +1,23 @@
-import React, {forwardRef} from 'react';
-import ReactSelect from 'react-select';
-import styled from '@emotion/styled/macro';
 import {css} from '@emotion/core';
-import Shevy from 'shevyjs';
+import styled from '@emotion/styled/macro';
+import React, {forwardRef} from 'react';
 import {Link} from 'react-router-dom';
+import ReactSelect from 'react-select';
+import Shevy from 'shevyjs';
+
 import {
-	primaryPurple,
-	primaryWhite,
-	gray30,
-	primaryRed,
-	primaryGrey,
-	primaryBlack,
 	accentGrey,
-	mediumGrey,
-	lightRed,
-	lightPurple,
-	mediumPurple,
+	gray30,
 	lightGrey,
+	lightPurple,
+	lightRed,
+	mediumGrey,
+	mediumPurple,
+	primaryBlack,
+	primaryGrey,
+	primaryPurple,
+	primaryRed,
+	primaryWhite,
 } from '../colors';
 import {BREAKPOINTS} from '../constants';
 import Pencil from '../icons/pencil.svg';

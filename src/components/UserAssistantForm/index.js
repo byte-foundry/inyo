@@ -1,16 +1,15 @@
-import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
+import React from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
-import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
+import {BREAKPOINTS} from '../../utils/constants';
 import {gray20} from '../../utils/content';
 import illus from '../../utils/images/bermuda-hello-edwige.svg';
+import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import FormElem from '../FormElem';
-
-import {BREAKPOINTS} from '../../utils/constants';
 
 const UserDataFormMain = styled('div')``;
 

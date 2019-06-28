@@ -1,31 +1,31 @@
+import 'react-toastify/dist/ReactToastify.css';
+
+import {css} from '@emotion/core';
+import styled from '@emotion/styled';
 import React, {Component} from 'react';
 import {Query} from 'react-apollo';
-import {withRouter, Redirect} from 'react-router-dom';
-import styled from '@emotion/styled';
-import {css} from '@emotion/core';
-import {ToastContainer, toast} from 'react-toastify';
+import {Redirect, withRouter} from 'react-router-dom';
+import {toast, ToastContainer} from 'react-toastify';
 
-import {
-	H3,
-	Button,
-	gray50,
-	primaryBlue,
-	signalRed,
-	FlexRow,
-	primaryWhite,
-	gray20,
-	Loading,
-} from '../../../utils/content';
-import {primaryPurple} from '../../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../../utils/queries';
+import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
-import UserAssistantForm from '../../../components/UserAssistantForm';
-import 'react-toastify/dist/ReactToastify.css';
-import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
-
 import {BREAKPOINTS} from '../../../utils/constants';
+import {
+	Button,
+	FlexRow,
+	gray20,
+	gray50,
+	H3,
+	Loading,
+	primaryBlue,
+	primaryWhite,
+	signalRed,
+} from '../../../utils/content';
+import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
+import {primaryPurple} from '../../../utils/new/design-system';
+import {GET_USER_INFOS} from '../../../utils/queries';
 
 const AccountMain = styled('div')`
 	padding-bottom: 80px;

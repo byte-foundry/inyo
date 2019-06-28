@@ -1,10 +1,9 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 import {
-	ModalContainer, ModalElem, H4, P,
+	H4, ModalContainer, ModalElem, P,
 } from '../../utils/content';
-
 import UserWorkHourAndDaysForm from '../UserWorkHourAndDaysForm';
 
 const ModalRow = styled('div')`

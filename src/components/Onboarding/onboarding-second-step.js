@@ -1,22 +1,22 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
+import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {GET_USER_INFOS} from '../../utils/queries';
+
 import {
+	Button,
+	FlexColumn,
+	FlexRow,
+	gray50,
+	gray70,
+	gray80,
 	H4,
 	P,
-	gray50,
-	FlexRow,
-	gray70,
-	primaryWhite,
 	primaryBlue,
-	gray80,
-	FlexColumn,
-	Button,
+	primaryWhite,
 } from '../../utils/content';
-
+import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`

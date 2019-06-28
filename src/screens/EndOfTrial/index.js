@@ -1,11 +1,11 @@
-import React, {useCallback} from 'react';
 import styled from '@emotion/styled';
-import {useQuery, useApolloClient} from 'react-apollo-hooks';
+import React, {useCallback} from 'react';
+import {useApolloClient, useQuery} from 'react-apollo-hooks';
 
+import {BREAKPOINTS, PLAN_NAMES, STRIPE_CONSTANT} from '../../utils/constants';
+import {FlexColumn, FlexRow, Loading} from '../../utils/content';
 import Illus from '../../utils/images/bermuda-done.svg';
 import {Button, P, primaryGrey} from '../../utils/new/design-system';
-import {FlexRow, FlexColumn, Loading} from '../../utils/content';
-import {STRIPE_CONSTANT, BREAKPOINTS, PLAN_NAMES} from '../../utils/constants';
 import {GET_USER_PAYMENT_INFOS} from '../../utils/queries';
 
 const {stripeKey, ...stripeInfos} = STRIPE_CONSTANT;
@@ -69,6 +69,7 @@ const createStripeCheckout = (me, planName) => () => {
 			items: [stripeInfos.items[planName]],
 			customerEmail: me && me.email,
 			clientReferenceId: me && me.id,
+			billingAddressCollection: 'required',
 		})
 		.then((result) => {
 			if (result.error) {

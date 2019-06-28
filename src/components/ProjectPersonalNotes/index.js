@@ -1,12 +1,12 @@
-import React from 'react';
-import {useQuery, useMutation} from 'react-apollo-hooks';
 import 'medium-draft/lib/index.css';
 
-import ProjectNotes from '../ProjectNotes';
+import React from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 
-import {GET_PROJECT_PERSONAL_NOTES} from '../../utils/queries';
 import {UPDATE_PROJECT_PERSONAL_NOTES} from '../../utils/mutations';
 import {SubHeading} from '../../utils/new/design-system';
+import {GET_PROJECT_PERSONAL_NOTES} from '../../utils/queries';
+import ProjectNotes from '../ProjectNotes';
 
 const ProjectPersonalNotes = ({projectId}) => {
 	const {data, error} = useQuery(GET_PROJECT_PERSONAL_NOTES, {

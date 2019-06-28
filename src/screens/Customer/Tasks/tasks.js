@@ -1,17 +1,16 @@
-import React, {useContext, Suspense} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
+import React, {Suspense, useContext} from 'react';
+import {useQuery} from 'react-apollo-hooks';
 
-import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
-import {BREAKPOINTS} from '../../../utils/constants';
-import {CustomerContext} from '../../../utils/contexts';
-
-import {Loading} from '../../../utils/content';
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
 import ProjectHeader from '../../../components/ProjectHeader';
-import TasksList from '../../../components/TasksList';
-import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
+import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
+import TasksList from '../../../components/TasksList';
+import {BREAKPOINTS} from '../../../utils/constants';
+import {Loading} from '../../../utils/content';
+import {CustomerContext} from '../../../utils/contexts';
+import {GET_CUSTOMER_TASKS} from '../../../utils/queries';
 
 const Container = styled('div')`
 	display: flex;

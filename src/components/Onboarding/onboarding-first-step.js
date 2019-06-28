@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
+import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {GET_USER_INFOS} from '../../utils/queries';
+import * as Yup from 'yup';
 
 import {
-	H4, FlexColumn, Button, Label,
+	Button, FlexColumn, H4, Label,
 } from '../../utils/content';
-
+import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {GET_USER_INFOS} from '../../utils/queries';
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
 import WeekDaysInput from '../WeekDaysInput';
 

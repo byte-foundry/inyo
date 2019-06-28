@@ -1,26 +1,26 @@
 import React from 'react';
-import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
-import TaskIconValidatedUrl, {
-	ReactComponent as TaskIconValidated,
-} from './icons/taskicon-user-validated.svg';
-import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
-import TaskCustomerIconUrl, {
-	ReactComponent as TaskCustomerIcon,
-} from './icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl, {
-	ReactComponent as TaskCustomerIconValidated,
-} from './icons/taskicon-customer-validated.svg';
-import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 
-import SectionIconUrl, {
-	ReactComponent as SectionIcon,
-} from './icons/section-icon.svg';
-import TaskInvoiceIconUrl, {
-	ReactComponent as TaskInvoiceIcon,
-} from './icons/invoice-icon.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
+import TaskInvoiceIconUrl, {
+	ReactComponent as TaskInvoiceIcon,
+} from './icons/invoice-icon.svg';
+import SectionIconUrl, {
+	ReactComponent as SectionIcon,
+} from './icons/section-icon.svg';
+import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
+import TaskCustomerIconValidatedUrl, {
+	ReactComponent as TaskCustomerIconValidated,
+} from './icons/taskicon-customer-validated.svg';
+import TaskCustomerIconUrl, {
+	ReactComponent as TaskCustomerIcon,
+} from './icons/taskicon-customer.svg';
+import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
+import TaskIconValidatedUrl, {
+	ReactComponent as TaskIconValidated,
+} from './icons/taskicon-user-validated.svg';
+import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 
 export const GRAPHQL_API = `https://prisma${
 	// eslint-disable-line import/prefer-default-export

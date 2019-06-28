@@ -1,18 +1,16 @@
+import styled from '@emotion/styled';
+import * as Sentry from '@sentry/browser';
+import {Formik} from 'formik';
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import styled from '@emotion/styled';
-import {Formik} from 'formik';
-import * as Sentry from '@sentry/browser';
-import * as Yup from 'yup';
 import ReactGA from 'react-ga';
-
-import {UPDATE_USER_COMPANY} from '../../utils/mutations';
-import {gray20, ErrorInput} from '../../utils/content';
-import {Button, primaryWhite} from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
+import * as Yup from 'yup';
 
 import {BREAKPOINTS} from '../../utils/constants';
-
+import {ErrorInput, gray20} from '../../utils/content';
+import {UPDATE_USER_COMPANY} from '../../utils/mutations';
+import {Button, primaryWhite} from '../../utils/new/design-system';
+import {GET_USER_INFOS} from '../../utils/queries';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
 

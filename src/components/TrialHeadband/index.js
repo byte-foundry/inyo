@@ -1,13 +1,13 @@
-import React from 'react';
-import moment from 'moment';
 import styled from '@emotion/styled';
-import {useQuery} from 'react-apollo-hooks';
 import gql from 'graphql-tag';
+import moment from 'moment';
+import React from 'react';
+import {useQuery} from 'react-apollo-hooks';
 
 import {
+	Button,
 	primaryPurple,
 	primaryWhite,
-	Button,
 } from '../../utils/new/design-system';
 
 const Headband = styled('p')`

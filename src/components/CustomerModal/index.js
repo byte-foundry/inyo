@@ -1,27 +1,27 @@
-import React, {useState} from 'react';
-import {useQuery, useMutation} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
-import * as Yup from 'yup';
-import {Formik} from 'formik';
-import {convertToRaw} from 'draft-js';
-import {Editor, createEditorState} from 'medium-draft';
-import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
 import 'medium-draft/lib/index.css';
 
-import {ModalContainer, ModalElem, ErrorInput} from '../../utils/content';
-import FormElem from '../FormElem';
-import FormSelect from '../FormSelect';
+import styled from '@emotion/styled';
+import {convertToRaw} from 'draft-js';
+import {Formik} from 'formik';
+import {createEditorState, Editor} from 'medium-draft';
+import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
+import React, {useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
+import * as Yup from 'yup';
+
+import {BREAKPOINTS} from '../../utils/constants';
+import {ErrorInput, ModalContainer, ModalElem} from '../../utils/content';
+import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../utils/mutations';
 import {
-	SubHeading,
+	BackButton,
 	Button,
 	Label,
 	primaryGrey,
-	BackButton,
+	SubHeading,
 } from '../../utils/new/design-system';
-
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
-import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../utils/mutations';
-import {BREAKPOINTS} from '../../utils/constants';
+import FormElem from '../FormElem';
+import FormSelect from '../FormSelect';
 
 const Header = styled(SubHeading)`
 	margin-bottom: 2rem;

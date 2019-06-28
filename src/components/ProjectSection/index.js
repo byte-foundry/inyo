@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import React, {Component} from 'react';
 
+import {FlexRow, H5, primaryNavyBlue} from '../../utils/content';
 import InlineEditable from '../InlineEditable';
 import TasksList from '../TasksList';
-import {H5, FlexRow, primaryNavyBlue} from '../../utils/content';
 
 const SectionTitle = styled(H5)`
 	color: ${primaryNavyBlue};

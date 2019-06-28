@@ -4,7 +4,6 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 
 import CreateTask from '../../../components/CreateTask';
-import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import Tooltip from '../../../components/Tooltip';
 import {
 	Container, Content, Help, Main,
@@ -48,7 +47,6 @@ function Dashboard({history}) {
 					<CreateTask setProjectSelected={setProjectSelected} />
 					<Tasks />
 				</Content>
-				<SidebarDashboardInfos baseUrl="app/dashboard" />
 			</Main>
 		</Container>
 	);

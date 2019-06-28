@@ -16,8 +16,7 @@ import Apostrophe from '../Apostrophe';
 import TaskRemindersList from '../TaskRemindersList';
 
 const DashboardAside = styled(Aside)`
-	padding-right: 0;
-	padding-left: 4rem;
+	padding: 1.5rem 0 0 4rem;
 	max-width: 320px;
 	flex: 0 0 320px;
 	display: flex;

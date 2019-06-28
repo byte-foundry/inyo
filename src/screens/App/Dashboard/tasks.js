@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import moment from 'moment';
 import React, {useCallback, useState} from 'react';
@@ -10,10 +11,12 @@ import TaskView from '../../../components/ItemView';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
 import RescheduleModal from '../../../components/RescheduleModal';
 import Schedule from '../../../components/Schedule';
+import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import TasksList from '../../../components/TasksList';
 import Task from '../../../components/TasksList/task';
-import {DRAG_TYPES} from '../../../utils/constants';
+import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
+	FlexRow,
 	Loading,
 	ModalContainer as Modal,
 	ModalElem,
@@ -21,6 +24,12 @@ import {
 import {isCustomerTask} from '../../../utils/functions';
 import {FOCUS_TASK} from '../../../utils/mutations';
 import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
+
+const FlexRowMobile = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
+`;
 
 function DraggableTask({
 	item,
@@ -319,32 +328,36 @@ const DashboardTasks = ({location, history}) => {
 					onReschedule={onMoveTask}
 				/>
 			)}
-
-			<ArianneThread
-				projectId={projectId}
-				linkedCustomerId={linkedCustomerId}
-				selectCustomer={setCustomerSelected}
-				selectProjects={setProjectSelected}
-				selectFilter={setFilterSelected}
-				selectTag={setTagSelected}
-				filterId={filter}
-				tagsSelected={tags}
-				marginTop
-			/>
-			<TasksList
-				style={{minHeight: '50px'}}
-				items={unscheduledTasks}
-				baseUrl="dashboard"
-				createTaskComponent={({item, index, customerToken}) => (
-					<DraggableTask
-						item={item}
-						key={item.id}
-						customerToken={customerToken}
-						baseUrl="dashboard"
-						setIsDragging={setIsDragging}
+			<FlexRowMobile justifyContent="space-between">
+				<div>
+					<ArianneThread
+						projectId={projectId}
+						linkedCustomerId={linkedCustomerId}
+						selectCustomer={setCustomerSelected}
+						selectProjects={setProjectSelected}
+						selectFilter={setFilterSelected}
+						selectTag={setTagSelected}
+						filterId={filter}
+						tagsSelected={tags}
+						marginTop
 					/>
-				)}
-			/>
+					<TasksList
+						style={{minHeight: '50px'}}
+						items={unscheduledTasks}
+						baseUrl="dashboard"
+						createTaskComponent={({item, index, customerToken}) => (
+							<DraggableTask
+								item={item}
+								key={item.id}
+								customerToken={customerToken}
+								baseUrl="dashboard"
+								setIsDragging={setIsDragging}
+							/>
+						)}
+					/>
+				</div>
+				<SidebarDashboardInfos baseUrl="app/dashboard" />
+			</FlexRowMobile>
 			<Route
 				path="/app/dashboard/:taskId"
 				render={({match, history, location: {state = {}}}) => (

@@ -1,27 +1,35 @@
-import React, {useState, useCallback} from 'react';
+import styled from '@emotion/styled';
 import Portal from '@reach/portal';
-import {useQuery, useMutation} from 'react-apollo-hooks';
-import {withRouter, Route} from 'react-router-dom';
-import {useDrag} from 'react-dnd';
 import moment from 'moment';
+import React, {useCallback, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
+import {useDrag} from 'react-dnd';
+import {Route, withRouter} from 'react-router-dom';
 
-import Schedule from '../../../components/Schedule';
-import TasksList from '../../../components/TasksList';
-import Task from '../../../components/TasksList/task';
-import TaskView from '../../../components/ItemView';
 import ArianneThread from '../../../components/ArianneThread';
+import TaskView from '../../../components/ItemView';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
 import RescheduleModal from '../../../components/RescheduleModal';
-
+import Schedule from '../../../components/Schedule';
+import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
+import TasksList from '../../../components/TasksList';
+import Task from '../../../components/TasksList/task';
+import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
+	FlexRow,
+	Loading,
 	ModalContainer as Modal,
 	ModalElem,
-	Loading,
 } from '../../../utils/content';
-import {DRAG_TYPES} from '../../../utils/constants';
-import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
-import {FOCUS_TASK} from '../../../utils/mutations';
 import {isCustomerTask} from '../../../utils/functions';
+import {FOCUS_TASK} from '../../../utils/mutations';
+import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
+
+const FlexRowMobile = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
+`;
 
 function DraggableTask({
 	item,
@@ -194,6 +202,48 @@ const DashboardTasks = ({location, history}) => {
 	};
 
 	tasks.forEach((task) => {
+		if (task.section && task.section.project.deadline) {
+			const {project} = task.section;
+
+			const deadlineDate = moment(project.deadline).format(
+				moment.HTML5_FMT.DATE,
+			);
+
+			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
+				deadlineDate
+			] || {
+				date: deadlineDate,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+			};
+
+			scheduledTasksPerDay[deadlineDate].deadlines.push({
+				date: project.deadline,
+				project,
+			});
+		}
+
+		if (task.dueDate) {
+			const deadlineDate = moment(task.dueDate).format(
+				moment.HTML5_FMT.DATE,
+			);
+
+			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
+				deadlineDate
+			] || {
+				date: deadlineDate,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+			};
+
+			scheduledTasksPerDay[deadlineDate].deadlines.push({
+				date: task.dueDate,
+				task,
+			});
+		}
+
 		if (!task.scheduledFor) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
@@ -202,11 +252,42 @@ const DashboardTasks = ({location, history}) => {
 			return;
 		}
 
+		if (isCustomerTask(task.type)) {
+			const plannedReminders = task.reminders.filter(
+				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
+			);
+
+			plannedReminders.forEach((reminder) => {
+				const reminderDate = moment(reminder.sendingDate).format(
+					moment.HTML5_FMT.DATE,
+				);
+
+				scheduledTasksPerDay[reminderDate] = scheduledTasksPerDay[
+					reminderDate
+				] || {
+					date: reminderDate,
+					tasks: [],
+					reminders: [],
+					deadlines: [],
+				};
+
+				scheduledTasksPerDay[reminderDate].reminders.push({
+					...reminder,
+					item: task,
+				});
+			});
+
+			// we just want the reminders
+			return;
+		}
+
 		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
 			task.scheduledFor
 		] || {
 			date: task.scheduledFor,
 			tasks: [],
+			reminders: [],
+			deadlines: [],
 		};
 
 		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
@@ -248,32 +329,36 @@ const DashboardTasks = ({location, history}) => {
 					onReschedule={onMoveTask}
 				/>
 			)}
-
-			<ArianneThread
-				projectId={projectId}
-				linkedCustomerId={linkedCustomerId}
-				selectCustomer={setCustomerSelected}
-				selectProjects={setProjectSelected}
-				selectFilter={setFilterSelected}
-				selectTag={setTagSelected}
-				filterId={filter}
-				tagsSelected={tags}
-				marginTop
-			/>
-			<TasksList
-				style={{minHeight: '50px'}}
-				items={unscheduledTasks}
-				baseUrl="dashboard"
-				createTaskComponent={({item, index, customerToken}) => (
-					<DraggableTask
-						item={item}
-						key={item.id}
-						customerToken={customerToken}
-						baseUrl="dashboard"
-						setIsDragging={setIsDragging}
+			<FlexRowMobile justifyContent="space-between">
+				<div>
+					<ArianneThread
+						projectId={projectId}
+						linkedCustomerId={linkedCustomerId}
+						selectCustomer={setCustomerSelected}
+						selectProjects={setProjectSelected}
+						selectFilter={setFilterSelected}
+						selectTag={setTagSelected}
+						filterId={filter}
+						tagsSelected={tags}
+						marginTop
 					/>
-				)}
-			/>
+					<TasksList
+						style={{minHeight: '50px'}}
+						items={unscheduledTasks}
+						baseUrl="dashboard"
+						createTaskComponent={({item, index, customerToken}) => (
+							<DraggableTask
+								item={item}
+								key={item.id}
+								customerToken={customerToken}
+								baseUrl="dashboard"
+								setIsDragging={setIsDragging}
+							/>
+						)}
+					/>
+				</div>
+				<SidebarDashboardInfos baseUrl="app/dashboard" />
+			</FlexRowMobile>
 			<Route
 				path="/app/dashboard/:taskId"
 				render={({match, history, location: {state = {}}}) => (

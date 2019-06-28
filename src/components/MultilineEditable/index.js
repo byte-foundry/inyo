@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, {useState, useRef, useEffect} from 'react';
 import styled from '@emotion/styled';
 import escapeHtml from 'escape-html';
+import PropTypes from 'prop-types';
+import React, {useEffect, useRef, useState} from 'react';
 import Remarkable from 'remarkable';
 
 import {mediumPurple} from '../../utils/new/design-system';

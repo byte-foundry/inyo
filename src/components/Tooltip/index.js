@@ -1,9 +1,7 @@
-import React, {cloneElement, Children} from 'react';
-import {useTooltip, TooltipPopup} from '@reach/tooltip';
 import styled from '@emotion/styled';
-import {useTransition, animated} from 'react-spring';
-
-import '@reach/tooltip/styles.css';
+import {TooltipPopup, useTooltip} from '@reach/tooltip';
+import React, {Children, cloneElement} from 'react';
+import {animated, useTransition} from 'react-spring';
 
 const CustomTooltipPopup = styled(TooltipPopup)`
 	background: hsla(0, 0%, 0%, 0.75);

@@ -1,12 +1,11 @@
-import React, {forwardRef} from 'react';
 import styled from '@emotion/styled';
+import React, {forwardRef} from 'react';
 import {NavLink} from 'react-router-dom';
+
 import {BREAKPOINTS} from '../../utils/constants';
-
 import {primaryWhite} from '../../utils/content';
-
-import {primaryPurple, primaryGrey} from '../../utils/new/design-system';
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
+import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
 
 const ForwardedRefNavLink = forwardRef((props, ref) => (
 	<NavLink {...props} innerRef={ref} />

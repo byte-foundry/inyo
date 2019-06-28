@@ -1,19 +1,18 @@
-import React from 'react';
-import {Switch, Route, Redirect} from 'react-router-dom';
 import styled from '@emotion/styled';
-
-import Onboarding from './Onboarding';
-import Dashboard from './Dashboard';
-import Account from './Account';
-import Tasks from './Tasks';
-import Tags from './Tags';
-import CustomerList from './Customers';
-import Projects from './Projects';
+import React from 'react';
+import {Redirect, Route, Switch} from 'react-router-dom';
 
 import TrialHeadband from '../../components/TrialHeadband';
 import withHeader from '../../HOC/withHeader';
-
 import {BREAKPOINTS} from '../../utils/constants';
+
+const Account = React.lazy(() => import('./Account'));
+const CustomerList = React.lazy(() => import('./Customers'));
+const Dashboard = React.lazy(() => import('./Dashboard'));
+const Onboarding = React.lazy(() => import('./Onboarding'));
+const Projects = React.lazy(() => import('./Projects'));
+const Tags = React.lazy(() => import('./Tags'));
+const Tasks = React.lazy(() => import('./Tasks'));
 
 const AppMain = styled('div')`
 	display: flex;

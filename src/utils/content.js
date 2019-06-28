@@ -1,27 +1,28 @@
-import styled from '@emotion/styled';
-import {css} from '@emotion/core';
-import React, {useLayoutEffect} from 'react';
-import Shevy from 'shevyjs';
-import {Dialog} from '@reach/dialog';
-import {Link} from 'react-router-dom';
-
 import '@reach/dialog/styles.css';
-import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
-import {primaryRed, primaryBlack, primaryGrey} from './new/design-system';
-import {BREAKPOINTS} from './constants';
+
+import {css} from '@emotion/core';
+import styled from '@emotion/styled';
+import {Dialog} from '@reach/dialog';
+import React, {useLayoutEffect} from 'react';
+import {Link} from 'react-router-dom';
+import Shevy from 'shevyjs';
+
 import {
-	primaryBlue,
-	primaryWhite,
-	signalRed,
-	gray70,
-	gray30,
-	primaryNavyBlue,
-	signalOrange,
-	signalGreen,
-	gray50,
 	gray10,
+	gray30,
+	gray50,
+	gray70,
 	gray80,
+	primaryBlue,
+	primaryNavyBlue,
+	primaryWhite,
+	signalGreen,
+	signalOrange,
+	signalRed,
 } from './colors';
+import {BREAKPOINTS} from './constants';
+import {ReactComponent as InyoLogo} from './icons/inyo-topbar-logo.svg';
+import {primaryBlack, primaryGrey, primaryRed} from './new/design-system';
 
 export * from './colors';
 

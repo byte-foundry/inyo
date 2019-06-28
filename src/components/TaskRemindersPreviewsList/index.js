@@ -1,23 +1,23 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {useSpring, animated} from 'react-spring';
-import useOnClickOutside from 'use-onclickoutside';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import React, {useEffect, useRef, useState} from 'react';
+import {animated, useSpring} from 'react-spring';
+import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
 import {
-	primaryBlack,
-	Button,
-	Select,
 	BackButton,
+	Button,
 	DateContainer,
+	primaryBlack,
+	Select,
 } from '../../utils/new/design-system';
-import usePrevious from '../../utils/usePrevious';
 import useMeasure from '../../utils/useMeasure';
-import IconButton from '../../utils/new/components/IconButton';
+import usePrevious from '../../utils/usePrevious';
+import DateInput from '../DateInput';
+import IconButton from '../IconButton';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import Tooltip from '../Tooltip';
-import DateInput from '../DateInput';
 
 const Container = styled('div')`
 	display: flex;

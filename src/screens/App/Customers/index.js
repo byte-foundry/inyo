@@ -1,27 +1,25 @@
-import React, {useState} from 'react';
 import styled from '@emotion/styled/macro';
-import {useQuery, useMutation} from 'react-apollo-hooks';
+import React, {useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 
-import {
-	Heading,
-	primaryPurple,
-	accentGrey,
-	lightGrey,
-	FilterInput,
-	Button,
-	primaryBlack,
-	P,
-	A,
-} from '../../../utils/new/design-system';
-import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import ConfirmModal from '../../../components/ConfirmModal';
-import Search from '../../../utils/icons/search.svg';
-import IconButton from '../../../utils/new/components/IconButton';
-
-import {GET_USER_CUSTOMERS} from '../../../utils/queries';
-import {REMOVE_CUSTOMER} from '../../../utils/mutations';
-
+import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
+import IconButton from '../../../components/IconButton';
 import {BREAKPOINTS} from '../../../utils/constants';
+import Search from '../../../utils/icons/search.svg';
+import {REMOVE_CUSTOMER} from '../../../utils/mutations';
+import {
+	A,
+	accentGrey,
+	Button,
+	FilterInput,
+	Heading,
+	lightGrey,
+	P,
+	primaryBlack,
+	primaryPurple,
+} from '../../../utils/new/design-system';
+import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 
 const Main = styled('div')`
 	min-height: 100vh;

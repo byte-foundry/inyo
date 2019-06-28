@@ -1,9 +1,9 @@
 import gql from 'graphql-tag';
 
 import {
+	COMMENT_ON_ITEM_FRAGMENT,
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
-	COMMENT_ON_ITEM_FRAGMENT,
 	REMINDER_FRAGMENT,
 	TAG_FRAGMENT,
 } from './fragments';
@@ -494,6 +494,18 @@ export const GET_USER_NOTIFICATIONS = gql`
 				}
 				createdAt
 			}
+		}
+	}
+`;
+
+export const GET_CUSTOMER_INFOS = gql`
+	query getCustomerInfos($token: String) {
+		customer(token: $token) {
+			id
+			name
+			title
+			firstName
+			lastName
 		}
 	}
 `;

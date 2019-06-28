@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
 import {Formik} from 'formik';
-import {useMutation, useApolloClient, useQuery} from 'react-apollo-hooks';
+import React, {useState} from 'react';
+import {useApolloClient, useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import * as Yup from 'yup';
 
-import CreateProjectModalForm from '../CreateProjectModalForm';
-import CustomerModalAndMail from '../CustomerModalAndMail';
-import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
-
-import {GET_PROJECT_DATA, GET_ALL_PROJECTS} from '../../utils/queries';
+import {ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_PROJECT} from '../../utils/mutations';
 import {templates} from '../../utils/project-templates';
-import {ModalContainer, ModalElem} from '../../utils/content';
+import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
+import CreateProjectModalForm from '../CreateProjectModalForm';
+import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
+import CustomerModalAndMail from '../CustomerModalAndMail';
 
 function CreateProjectModal({onDismiss, history, baseName}) {
 	const [viewContent, setViewContent] = useState(false);

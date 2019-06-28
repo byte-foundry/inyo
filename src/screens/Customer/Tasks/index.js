@@ -1,22 +1,24 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
+import {useQuery} from 'react-apollo-hooks';
 import {Route} from 'react-router-dom';
 
-import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TaskView from '../../../components/ItemView';
 import Tooltip from '../../../components/Tooltip';
-import CustomerTasks from './tasks';
-
 import {BREAKPOINTS} from '../../../utils/constants';
+import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
+import {formatFullName} from '../../../utils/functions';
 import {
-	P,
 	A,
+	mediumGrey,
+	P,
+	primaryBlack,
 	primaryGrey,
 	primaryRed,
-	mediumGrey,
-	primaryBlack,
 	primaryWhite,
 } from '../../../utils/new/design-system';
+import {GET_CUSTOMER_INFOS} from '../../../utils/queries';
+import CustomerTasks from './tasks';
 
 const Container = styled('div')`
 	min-height: 100vh;
@@ -78,12 +80,24 @@ const Tasks = ({location, match}) => {
 	const {prevSearch} = location.state || {prevSearch: location.search};
 	const query = new URLSearchParams(prevSearch || location.search);
 	const projectId = query.get('projectId');
+	const {data: customerInfosData} = useQuery(GET_CUSTOMER_INFOS, {
+		variables: {token: customerToken},
+		suspend: true,
+	});
+
+	let welcome = 'Bonjour';
+
+	if (customerInfosData) {
+		const {customer: c} = customerInfosData;
+
+		welcome += ` ${formatFullName(c.title, c.firstName, c.lastName)}`;
+	}
 
 	return (
 		<Container>
 			<WelcomeMessage>
 				<div>
-					Bonjour,
+					{welcome},
 					<br />
 					Les tâches <Red>rouges</Red> sont celles dont vous êtes
 					responsable.

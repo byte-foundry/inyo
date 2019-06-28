@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import React, {useState} from 'react';
 
-import {Button} from '../../utils/new/design-system';
 import {ModalContainer, ModalElem} from '../../utils/content';
+import {Button} from '../../utils/new/design-system';
 
 const ModalRow = styled('div')`
 	padding: 1rem 2rem;

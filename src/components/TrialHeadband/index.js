@@ -1,13 +1,13 @@
-import React from 'react';
-import moment from 'moment';
 import styled from '@emotion/styled';
-import {useQuery} from 'react-apollo-hooks';
 import gql from 'graphql-tag';
+import moment from 'moment';
+import React from 'react';
+import {useQuery} from 'react-apollo-hooks';
 
 import {
+	Button,
 	primaryPurple,
 	primaryWhite,
-	Button,
 } from '../../utils/new/design-system';
 
 const Headband = styled('p')`
@@ -24,6 +24,7 @@ const TrialHeadband = () => {
 			{
 				me {
 					id
+					email
 					signedUpAt
 					lifetimePayment
 				}
@@ -34,7 +35,9 @@ const TrialHeadband = () => {
 
 	if (loading || error) return null;
 
-	const {lifetimePayment, signedUpAt} = data.me;
+	const {
+		lifetimePayment, signedUpAt, id, email,
+	} = data.me;
 
 	if (
 		lifetimePayment
@@ -48,7 +51,7 @@ const TrialHeadband = () => {
 
 	return (
 		<Headband>
-			Tu dois payer{' '}
+			La version d'essai s'arrête{' '}
 			{moment(signedUpAt)
 				.add(21, 'days')
 				.fromNow()}{' '}
@@ -69,12 +72,13 @@ const TrialHeadband = () => {
 							],
 							successUrl: 'https://dev.inyo.me/paid',
 							cancelUrl: 'https://dev.inyo.me/canceled',
-							customerEmail: 'francois.poizat@gmail.com',
-							clientReferenceId: 'cjs1r01mh052a0794q3ah2o97',
+							customerEmail: email,
+							clientReferenceId: id,
+							billingAddressCollection: 'required',
 						})
 						.then((result) => {
 							if (result.error) {
-								console.log('zboub');
+								throw result.error;
 							}
 						});
 				}}

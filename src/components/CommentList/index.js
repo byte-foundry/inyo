@@ -1,30 +1,28 @@
-import React, {useState, useRef, forwardRef} from 'react';
 import styled from '@emotion/styled';
-import {useQuery, useMutation} from 'react-apollo-hooks';
-import * as Yup from 'yup';
+import {Field, Formik} from 'formik';
 import debounce from 'lodash.debounce';
-import {Formik, Field} from 'formik';
+import React, {forwardRef, useRef, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import {Waypoint} from 'react-waypoint';
-
-import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
-import {POST_COMMENT} from '../../utils/mutations';
+import * as Yup from 'yup';
 
 import {
-	gray20,
-	primaryWhite,
-	gray80,
 	ErrorInput,
 	FlexRow,
+	gray20,
+	gray80,
+	primaryWhite,
 } from '../../utils/content';
+import {POST_COMMENT} from '../../utils/mutations';
 import {
-	Button,
-	primaryPurple,
-	primaryBlack,
 	accentGrey,
+	Button,
+	primaryBlack,
+	primaryPurple,
 } from '../../utils/new/design-system';
-
-import Tooltip from '../Tooltip';
+import {GET_COMMENTS_BY_ITEM} from '../../utils/queries';
 import Comment from '../Comment';
+import Tooltip from '../Tooltip';
 
 const CommentRow = styled('div')`
 	padding-right: 40px;

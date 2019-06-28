@@ -1,25 +1,24 @@
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import React, {useState, useRef, useEffect} from 'react';
+import PropTypes from 'prop-types';
+import React, {useEffect, useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
-import Tooltip from '../Tooltip';
-import TaskTypeDropdown from '../TaskTypeDropdown';
-import {TaskInfosInputs, TaskCustomerInput} from '../TasksList/task';
-import CheckList from '../CheckList';
-import CustomerModalAndMail from '../CustomerModalAndMail';
-
-import {ITEM_TYPES, BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {
 	Button,
-	TaskInputDropdown,
-	TaskInputDropdownHeader,
-	primaryPurple,
-	primaryGrey,
+	lightGrey,
 	mediumGrey,
 	primaryBlack,
-	lightGrey,
+	primaryGrey,
+	primaryPurple,
+	TaskInputDropdown,
+	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
+import CheckList from '../CheckList';
+import CustomerModalAndMail from '../CustomerModalAndMail';
+import {TaskCustomerInput, TaskInfosInputs} from '../TasksList/task';
+import TaskTypeDropdown from '../TaskTypeDropdown';
+import Tooltip from '../Tooltip';
 
 const Container = styled('div')`
 	font-size: 14px;

@@ -1,16 +1,14 @@
-import React, {useContext} from 'react';
-import styled from '@emotion/styled';
-import {useQuery} from 'react-apollo-hooks';
 import {css} from '@emotion/core';
-
-import Task from '../TasksList/task';
-
-import {GET_PROJECT_DATA_WITH_TOKEN} from '../../utils/queries';
-import {CustomerContext} from '../../utils/contexts';
-import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';
-import InlineEditable from '../InlineEditable';
+import styled from '@emotion/styled';
+import React, {useContext} from 'react';
+import {useQuery} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
+import {CustomerContext} from '../../utils/contexts';
+import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';
+import {GET_PROJECT_DATA_WITH_TOKEN} from '../../utils/queries';
+import InlineEditable from '../InlineEditable';
+import Task from '../TasksList/task';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 0;

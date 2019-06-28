@@ -1,13 +1,13 @@
+import styled from '@emotion/styled';
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import styled from '@emotion/styled';
-import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
-import {
-	H4, P, gray50, Button,
-} from '../../utils/content';
-import {Input} from '../../utils/new/design-system';
 
+import {
+	Button, gray50, H4, P,
+} from '../../utils/content';
 import illus from '../../utils/images/bermuda-hello-edwige.svg';
+import {UPDATE_USER_SETTINGS} from '../../utils/mutations';
+import {Input} from '../../utils/new/design-system';
 
 const OnboardingStep = styled('div')`
 	display: flex;
@@ -56,6 +56,8 @@ const OnboardingCustomAssistant = ({
 	const updateUserSettings = useMutation(UPDATE_USER_SETTINGS);
 	const [assistantName, setAssistantName] = useState('Edwige');
 
+	const hasValidName = !!assistantName.trim();
+
 	return (
 		<OnboardingStep>
 			<StepSubtitle>
@@ -75,6 +77,8 @@ const OnboardingCustomAssistant = ({
 			<Form
 				onSubmit={async (e) => {
 					e.preventDefault();
+
+					if (!hasValidName) return;
 
 					await updateUserSettings({
 						variables: {
@@ -96,7 +100,11 @@ const OnboardingCustomAssistant = ({
 					value={assistantName}
 				/>
 
-				<ActionButton type="submit" theme="Primary" size="Medium">
+				<ActionButton
+					type="submit"
+					theme={hasValidName ? 'Primary' : 'Disabled'}
+					size="Medium"
+				>
 					Valider
 				</ActionButton>
 			</Form>

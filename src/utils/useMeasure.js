@@ -1,4 +1,4 @@
-import {useRef, useState, useEffect} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
 export default function useMeasure() {

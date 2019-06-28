@@ -1,15 +1,16 @@
+import styled from '@emotion/styled';
+import * as Sentry from '@sentry/browser';
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import * as Sentry from '@sentry/browser';
-import styled from '@emotion/styled';
+
 import {FlexRow} from '../utils/content';
-import errorIllus from '../utils/images/bermuda-fatal-error.svg';
 import {ReactComponent as AppLogo} from '../utils/icons/appLogo.svg';
+import errorIllus from '../utils/images/bermuda-fatal-error.svg';
 import {
-	primaryPurple,
-	primaryBlack,
-	lightRed,
 	Heading,
+	lightRed,
+	primaryBlack,
+	primaryPurple,
 } from '../utils/new/design-system';
 
 const ReporterMain = styled('div')`

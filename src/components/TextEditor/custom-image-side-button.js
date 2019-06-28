@@ -1,11 +1,10 @@
-import {
-	ImageSideButton,
-	addNewBlock,
-	getCurrentBlock,
-	Block,
-} from 'medium-draft';
-
 import {EditorState} from 'draft-js';
+import {
+	addNewBlock,
+	Block,
+	getCurrentBlock,
+	ImageSideButton,
+} from 'medium-draft';
 
 export default class CustomImageSideButton extends ImageSideButton {
 	/*

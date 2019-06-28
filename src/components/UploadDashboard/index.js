@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
-import {useMutation} from 'react-apollo-hooks';
+import '@uppy/core/dist/style.css';
+import '@uppy/dashboard/dist/style.css';
+
 import Uppy, {Plugin} from '@uppy/core';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
+import React, {useEffect, useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 
 import {UPLOAD_ATTACHMENTS} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
-
-import '@uppy/core/dist/style.css';
-import '@uppy/dashboard/dist/style.css';
 
 class GraphQlUpload extends Plugin {
 	constructor(uppy, opts) {

@@ -1,6 +1,6 @@
-import React from 'react';
-import {Field} from 'formik';
 import styled from '@emotion/styled/macro';
+import {Field} from 'formik';
+import React from 'react';
 
 import {
 	InputLabel,

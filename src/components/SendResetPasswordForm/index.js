@@ -1,13 +1,12 @@
-import React, {Component} from 'react';
-import {Mutation} from 'react-apollo';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import * as Yup from 'yup';
 import gql from 'graphql-tag';
+import React, {Component} from 'react';
+import {Mutation} from 'react-apollo';
+import * as Yup from 'yup';
 
-import {P, Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
-
+import {Button, P} from '../../utils/new/design-system';
 import FormElem from '../FormElem';
 
 const SEND_RESET_PASSWORD = gql`

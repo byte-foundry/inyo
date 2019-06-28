@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
+import React, {useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import {REMOVE_TAG, UPDATE_TAG} from '../../utils/mutations';
+import {Button} from '../../utils/new/design-system';
+import FormElem from '../FormElem';
+import IconButton from '../IconButton';
 import Plural from '../Plural';
 import Tag from '../Tag';
-import FormElem from '../FormElem';
-
-import {UPDATE_TAG, REMOVE_TAG} from '../../utils/mutations';
-import {Button} from '../../utils/new/design-system';
-import IconButton from '../../utils/new/components/IconButton';
 
 const TagLine = styled('div')`
 	display: flex;

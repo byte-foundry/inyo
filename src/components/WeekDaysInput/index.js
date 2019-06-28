@@ -1,8 +1,8 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
-import {primaryBlue, primaryWhite} from '../../utils/content';
 import {BREAKPOINTS} from '../../utils/constants';
+import {primaryBlue, primaryWhite} from '../../utils/content';
 
 const DayInputContainer = styled('div')`
 	display: flex;

@@ -1,10 +1,10 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import {Field} from 'formik';
+import React from 'react';
 
-import {InputLabel, Label, Select} from '../../utils/new/design-system';
-import {getDeep} from '../../utils/functions';
 import {ErrorInput} from '../../utils/content';
+import {getDeep} from '../../utils/functions';
+import {InputLabel, Label, Select} from '../../utils/new/design-system';
 
 const FormSelectMain = styled(InputLabel)``;
 

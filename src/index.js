@@ -1,49 +1,48 @@
-import React, {Suspense, useState, useCallback} from 'react';
-import ReactDOM from 'react-dom';
-import ReactGA from 'react-ga';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import 'moment/locale/fr';
+import './index.css';
+// if imported with the tooltip, the order is wrong due to code-splitting
+import '@reach/tooltip/styles.css';
+
 import styled from '@emotion/styled';
+import * as Sentry from '@sentry/browser';
+import moment from 'moment';
+import React, {Suspense, useCallback, useState} from 'react';
 import {ApolloProvider} from 'react-apollo';
 import {
 	ApolloProvider as ApolloHooksProvider,
 	useQuery,
 } from 'react-apollo-hooks';
+import {DndProvider} from 'react-dnd';
 import MultiBackend from 'react-dnd-multi-backend';
 import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
-import {DndProvider} from 'react-dnd';
+import ReactDOM from 'react-dom';
+import ReactGA from 'react-ga';
 import {
 	BrowserRouter as Router,
-	Switch,
-	Route,
 	Redirect,
+	Route,
+	Switch,
 } from 'react-router-dom';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import moment from 'moment';
-import 'moment/locale/fr';
-import * as Sentry from '@sentry/browser';
 
 import withTracker from './HOC/withTracker';
-
 import ProvidersSentry from './providers/sentry';
-
-import App from './screens/App';
-import Auth from './screens/Auth';
-import StraightToCheckout from './screens/StraightToCheckout';
-import Paid from './screens/Paid';
-import EndOfTrial from './screens/EndOfTrial';
-import Customer from './screens/Customer';
-import ConditionalContent from './screens/App/ConditionalContent';
-
-import {UserContext} from './utils/contexts';
-import {Loading} from './utils/content';
-import client from './utils/graphQLConfig';
-import {INTERCOM_APP_ID} from './utils/constants';
-import {CHECK_LOGIN_USER} from './utils/queries';
-import {Body} from './utils/new/design-system';
-
 import * as serviceWorker from './serviceWorker';
+import {INTERCOM_APP_ID} from './utils/constants';
+import {Loading} from './utils/content';
+import {UserContext} from './utils/contexts';
+import client from './utils/graphQLConfig';
+import {Body} from './utils/new/design-system';
+import {CHECK_LOGIN_USER} from './utils/queries';
 
-import './index.css';
+const Customer = React.lazy(() => import('./screens/Customer'));
+const App = React.lazy(() => import('./screens/App'));
+const Auth = React.lazy(() => import('./screens/Auth'));
+const StraightToCheckout = React.lazy(() => import('./screens/StraightToCheckout'));
+const Paid = React.lazy(() => import('./screens/Paid'));
+const EndOfTrial = React.lazy(() => import('./screens/EndOfTrial'));
+const ConditionalContent = React.lazy(() => import('./screens/App/ConditionalContent'));
 
 // Setting up locale mostly for react-dates
 moment.locale((navigator && navigator.language) || 'fr-FR');
@@ -206,8 +205,8 @@ function Root() {
 									paymentError={
 										error
 										&& error.graphQLErrors[0].extensions
-										&& error.graphQLErrors[0].extensions.code
-											=== 'Payment'
+										&& error.graphQLErrors[0].extensions
+											.code === 'Payment'
 									}
 									isAllowed={data && data.me}
 								/>

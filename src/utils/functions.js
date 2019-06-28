@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import {WEEKDAYS, CUSTOMER_TASK_TYPES} from './constants';
+import {CUSTOMER_TASK_TYPES, WEEKDAYS} from './constants';
 
 export const dateDiff = (datepart, fromdate, todate) => {
 	const lowerDatepart = datepart.toLowerCase();
@@ -59,10 +59,9 @@ export function extractScheduleFromWorkingDays(
 		const workedDay = workingDays.includes(WEEKDAYS[iteratorDate.day()]);
 
 		if (fullWeek || workedDay) {
-			const tasks
-				= (days[iteratorDate.format(moment.HTML5_FMT.DATE)]
-					&& days[iteratorDate.format(moment.HTML5_FMT.DATE)].tasks)
-				|| [];
+			const date = iteratorDate.format(moment.HTML5_FMT.DATE);
+			const {tasks = [], reminders = [], deadlines = []}
+				= days[date] || {};
 
 			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
 
@@ -70,6 +69,8 @@ export function extractScheduleFromWorkingDays(
 				momentDate: iteratorDate.clone(),
 				date: iteratorDate.format(moment.HTML5_FMT.DATE),
 				tasks,
+				reminders,
+				deadlines,
 				workedDay,
 			});
 		}
@@ -77,3 +78,25 @@ export function extractScheduleFromWorkingDays(
 
 	return weekdays;
 }
+
+const normalizeFalsyParams = f => (...args) => f(...args.map(v => v || undefined));
+
+export const formatTitle = (title) => {
+	if (title === 'MONSIEUR') {
+		return 'M.';
+	}
+
+	if (title === 'MADAME') {
+		return 'Mme';
+	}
+
+	return '';
+};
+
+export const formatName = normalizeFalsyParams(
+	(firstName = '', lastName = '') => `${firstName} ${lastName}`.trim(),
+);
+
+export const formatFullName = normalizeFalsyParams(
+	(title = '', firstName = '', lastName = '') => `${formatTitle(title)} ${formatName(firstName, lastName)}`.trim(),
+);

@@ -1,15 +1,14 @@
+import styled from '@emotion/styled/macro';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import styled from '@emotion/styled/macro';
-
-import MaterialIcon from '../MaterialIcon';
 
 import {
-	primaryGrey,
 	accentGrey,
 	lightPurple,
 	primaryBlack,
+	primaryGrey,
 } from '../../utils/new/design-system';
+import MaterialIcon from '../MaterialIcon';
 
 const A = styled(Link)`
 	text-decoration: none;

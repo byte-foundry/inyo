@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import React, {Component} from 'react';
 
 import {
 	H4,
 	primaryNavyBlue,
-	ProjectDataMain,
 	ProjectDataElem,
 	ProjectDataLabel,
+	ProjectDataMain,
 } from '../../utils/content';
 
 const TotalNumber = styled(H4)`

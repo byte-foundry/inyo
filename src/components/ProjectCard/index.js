@@ -1,17 +1,17 @@
+import styled from '@emotion/styled';
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
 
-import Plural from '../Plural';
 import {
-	P,
 	alpha10,
-	primaryNavyBlue,
 	gray50,
-	secondaryLightBlue,
+	P,
 	primaryBlue,
+	primaryNavyBlue,
 	primaryWhite,
+	secondaryLightBlue,
 } from '../../utils/content';
+import Plural from '../Plural';
 
 const ProjectCardMain = styled('div')`
 	position: relative;

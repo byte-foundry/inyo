@@ -1,56 +1,54 @@
-import React, {useState, useCallback} from 'react';
-import {withRouter} from 'react-router-dom';
+import {css} from '@emotion/core';
+import styled from '@emotion/styled/macro';
 import Portal from '@reach/portal';
 import gql from 'graphql-tag';
-import styled from '@emotion/styled/macro';
+import React, {useCallback, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
-import {css} from '@emotion/core';
 import {useDrag, useDrop} from 'react-dnd';
-
-import Task from '../TasksList/task';
-import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
-import LeftBarSchedule from '../LeftBarSchedule';
+import {withRouter} from 'react-router-dom';
 
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
-
+import {
+	Loading,
+	ModalActions,
+	ModalContainer,
+	ModalElem,
+} from '../../utils/content';
+import {isCustomerTask} from '../../utils/functions';
+import DragIconSvg from '../../utils/icons/drag.svg';
+import Pencil from '../../utils/icons/pencil.svg';
+import {
+	ADD_SECTION,
+	FOCUS_TASK,
+	REMOVE_SECTION,
+	UPDATE_ITEM,
+	UPDATE_SECTION,
+} from '../../utils/mutations';
+import {
+	accentGrey,
+	Button,
+	DragSeparator,
+	LayoutMainElem,
+	lightGrey,
+	lightRed,
+	mediumGrey,
+	P,
+	primaryBlack,
+	primaryRed,
+	primaryWhite,
+	SubHeading,
+} from '../../utils/new/design-system';
 import {
 	GET_ALL_TASKS,
 	GET_PROJECT_DATA,
 	GET_USER_INFOS,
 } from '../../utils/queries';
-import {
-	LayoutMainElem,
-	primaryBlack,
-	primaryWhite,
-	lightGrey,
-	lightRed,
-	accentGrey,
-	mediumGrey,
-	primaryRed,
-	Button,
-	SubHeading,
-	P,
-	DragSeparator,
-} from '../../utils/new/design-system';
-import {
-	ModalContainer,
-	ModalElem,
-	ModalActions,
-	Loading,
-} from '../../utils/content';
-import {
-	UPDATE_SECTION,
-	UPDATE_ITEM,
-	ADD_SECTION,
-	REMOVE_SECTION,
-	FOCUS_TASK,
-} from '../../utils/mutations';
+import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
-import Pencil from '../../utils/icons/pencil.svg';
-import DragIconSvg from '../../utils/icons/drag.svg';
-import IconButton from '../../utils/new/components/IconButton';
+import LeftBarSchedule from '../LeftBarSchedule';
+import Task from '../TasksList/task';
+import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
-import {isCustomerTask} from '../../utils/functions';
 
 const TasksListContainer = styled(LayoutMainElem)``;
 

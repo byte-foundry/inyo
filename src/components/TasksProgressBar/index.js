@@ -1,13 +1,13 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 import {
-	primaryPurple,
-	lightGrey,
-	mediumGrey,
 	accentGrey,
+	lightGrey,
 	lightPurple,
+	mediumGrey,
 	mediumPurple,
+	primaryPurple,
 } from '../../utils/new/design-system';
 import Plural from '../Plural';
 

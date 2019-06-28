@@ -1,26 +1,26 @@
 import React from 'react';
-import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
-import TaskIconValidatedUrl, {
-	ReactComponent as TaskIconValidated,
-} from './icons/taskicon-user-validated.svg';
-import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
-import TaskCustomerIconUrl, {
-	ReactComponent as TaskCustomerIcon,
-} from './icons/taskicon-customer.svg';
-import TaskCustomerIconValidatedUrl, {
-	ReactComponent as TaskCustomerIconValidated,
-} from './icons/taskicon-customer-validated.svg';
-import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 
-import SectionIconUrl, {
-	ReactComponent as SectionIcon,
-} from './icons/section-icon.svg';
-import TaskInvoiceIconUrl, {
-	ReactComponent as TaskInvoiceIcon,
-} from './icons/invoice-icon.svg';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
+import TaskInvoiceIconUrl, {
+	ReactComponent as TaskInvoiceIcon,
+} from './icons/invoice-icon.svg';
+import SectionIconUrl, {
+	ReactComponent as SectionIcon,
+} from './icons/section-icon.svg';
+import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
+import TaskCustomerIconValidatedUrl, {
+	ReactComponent as TaskCustomerIconValidated,
+} from './icons/taskicon-customer-validated.svg';
+import TaskCustomerIconUrl, {
+	ReactComponent as TaskCustomerIcon,
+} from './icons/taskicon-customer.svg';
+import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
+import TaskIconValidatedUrl, {
+	ReactComponent as TaskIconValidated,
+} from './icons/taskicon-user-validated.svg';
+import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 
 export const GRAPHQL_API = `https://prisma${
 	// eslint-disable-line import/prefer-default-export
@@ -261,17 +261,49 @@ export const DRAG_TYPES = {
 	SECTION: 'SECTION',
 };
 
+export const PLAN_NAMES = {
+	LIFE: 'LIFE',
+	MONTHLY: 'MONTHLY',
+	YEARLY: 'YEARLY',
+};
+
 export const STRIPE_CONSTANT
 	= process.env.REACT_APP_INYO_ENV === 'production'
 		? {
 			stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
-			items: [{sku: 'sku_FF2rL7Jk5zl0C7', quantity: 1}],
+			items: {
+				[PLAN_NAMES.LIFE]: {
+					sku: 'sku_FF2rL7Jk5zl0C7',
+					quantity: 1,
+				},
+				[PLAN_NAMES.MONTHLY]: {
+					plan: 'INYO_MONTHLY',
+					quantity: 1,
+				},
+				[PLAN_NAMES.YEARLY]: {
+					plan: 'plan_FJQhEIJQnlzriF',
+					quantity: 1,
+				},
+			},
 			successUrl: 'https://app.inyo.me/paid',
 			cancelUrl: 'https://app.inyo.me/canceled',
 		  }
 		: {
 			stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
-			items: [{sku: 'sku_F9hrygxAJQuSLp', quantity: 1}],
+			items: {
+				[PLAN_NAMES.LIFE]: {
+					sku: 'sku_F9hrygxAJQuSLp',
+					quantity: 1,
+				},
+				[PLAN_NAMES.MONTHLY]: {
+					plan: 'INYO_MONTHLY',
+					quantity: 1,
+				},
+				[PLAN_NAMES.YEARLY]: {
+					plan: 'INYO_YEARLY',
+					quantity: 1,
+				},
+			},
 			successUrl: 'https://dev.inyo.me/paid',
 			cancelUrl: 'https://dev.inyo.me/canceled',
 		  };

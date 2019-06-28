@@ -1,18 +1,17 @@
+import styled from '@emotion/styled';
+import {Formik} from 'formik';
+import gql from 'graphql-tag';
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
-import {Link, withRouter} from 'react-router-dom';
-import styled from '@emotion/styled';
 import ReactGA from 'react-ga';
-import {Formik} from 'formik';
+import {Link, withRouter} from 'react-router-dom';
 import * as Yup from 'yup';
-import gql from 'graphql-tag';
 
-import apolloClient from '../../utils/graphQLConfig';
-import {P, Button} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
-import FormElem from '../FormElem';
-
+import apolloClient from '../../utils/graphQLConfig';
+import {Button, P} from '../../utils/new/design-system';
 import {CHECK_LOGIN_USER} from '../../utils/queries';
+import FormElem from '../FormElem';
 
 const CHECK_RESET_PASSWORD = gql`
 	mutation checkResetPassword($resetToken: String!) {

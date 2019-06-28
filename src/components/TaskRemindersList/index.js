@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import {useMutation} from 'react-apollo-hooks';
-import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
-import IconButton from '../../utils/new/components/IconButton';
+import React, {useEffect, useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 
 import {REMINDER_TYPES_DATA} from '../../utils/constants';
-import {
-	primaryGrey,
-	primaryBlack,
-	accentGrey,
-	mediumGrey,
-	Button,
-} from '../../utils/new/design-system';
-import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import {CANCEL_REMINDER} from '../../utils/mutations';
+import {
+	accentGrey,
+	Button,
+	mediumGrey,
+	primaryBlack,
+	primaryGrey,
+} from '../../utils/new/design-system';
+import IconButton from '../IconButton';
+import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import Tooltip from '../Tooltip';
 
 const ReminderList = styled('div')`
@@ -134,9 +134,7 @@ function TaskRemindersList({
 								reminderText
 							) : (
 								<Tooltip
-									label={`Ouvrir la tâche "${
-										reminder.item.name
-									}"`}
+									label={`Ouvrir la tâche "${reminder.item.name}"`}
 								>
 									{reminderText}
 								</Tooltip>

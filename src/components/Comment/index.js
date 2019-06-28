@@ -1,19 +1,18 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 import Remarkable from 'remarkable';
 
 import {
-	FlexRow,
 	FlexColumn,
-	primaryWhite,
+	FlexRow,
 	gray70,
 	gray80,
+	primaryWhite,
 } from '../../utils/content';
-
 import {
+	primaryGrey,
 	primaryPurple,
 	primaryRed,
-	primaryGrey,
 } from '../../utils/new/design-system';
 
 const CommentMain = styled('div')`

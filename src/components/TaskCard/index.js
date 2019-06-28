@@ -1,19 +1,19 @@
-import React, {forwardRef} from 'react';
-import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled/macro';
+import React, {forwardRef} from 'react';
 import {useMutation} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 
 import {isCustomerTask} from '../../utils/functions';
-import IconButton from '../../utils/new/components/IconButton';
+import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
+	DragSeparator,
 	primaryBlack,
 	primaryGrey,
 	primaryRed,
 	primaryWhite,
-	DragSeparator,
 } from '../../utils/new/design-system';
-import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import IconButton from '../IconButton';
 
 const Button = styled(IconButton)``;
 
@@ -77,15 +77,7 @@ const TaskCardElem = styled('div')`
 
 const TaskCard = withRouter(
 	({
-		task,
-		index,
-		connectDragSource,
-		connectDropTarget,
-		history,
-		location,
-		cardRef,
-		isOver,
-		...rest
+		task, index, history, location, cardRef, isOver, ...rest
 	}) => {
 		const finishItem = useMutation(FINISH_ITEM);
 		const unfinishItem = useMutation(UNFINISH_ITEM);

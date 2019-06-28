@@ -1,7 +1,7 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
-import {primaryBlue, gray30, primaryWhite} from '../../utils/content';
+import {gray30, primaryBlue, primaryWhite} from '../../utils/content';
 
 const SwitchButtonMain = styled('div')`
 	display: flex;

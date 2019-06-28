@@ -1,9 +1,8 @@
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
-import {ArianneElem} from '../ArianneThread';
-
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import {ArianneElem} from '../ArianneThread';
 
 const CustomersDropdown = ({creatable, ...props}) => {
 	const {data, errors} = useQuery(GET_ALL_CUSTOMERS, {suspend: true});

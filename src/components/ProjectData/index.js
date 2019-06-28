@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
 import {
-	ProjectDataMain,
 	ProjectDataElem,
 	ProjectDataLabel,
+	ProjectDataMain,
 } from '../../utils/content';
 
 class ProjectData extends Component {

@@ -1,25 +1,25 @@
+import styled from '@emotion/styled';
+import moment from 'moment';
+import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
-import PropTypes from 'prop-types';
-import moment from 'moment';
-import styled from '@emotion/styled';
-import {useDrop, useDrag} from 'react-dnd';
+import {useDrag, useDrop} from 'react-dnd';
 
-import DefaultDroppableDay from '../DefaultDroppableDay';
-
-import {
-	mediumGrey,
-	accentGrey,
-	primaryPurple,
-	primaryWhite,
-	lightGrey,
-	Button,
-} from '../../utils/new/design-system';
-import {DRAG_TYPES, BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
-import IconButton from '../../utils/new/components/IconButton';
-
+import {
+	accentGrey,
+	Button,
+	lightGrey,
+	mediumGrey,
+	primaryPurple,
+	primaryWhite,
+} from '../../utils/new/design-system';
+import DeadlineCard from '../DeadlineCard';
+import DefaultDroppableDay from '../DefaultDroppableDay';
+import IconButton from '../IconButton';
+import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
 
 const Container = styled('div')`
@@ -89,7 +89,7 @@ const DayTitle = styled('span')`
 `;
 
 const DroppableSeparator = styled('div')`
-	flex: 1 0 50px;
+	flex: 1 0 70px;
 	margin-top: -3px;
 	border-top: ${props => (props.isOver ? `3px solid ${primaryPurple}` : '5px solid transparent')};
 `;
@@ -243,10 +243,14 @@ const Schedule = ({
 			<Week>
 				{weekdays.map((day) => {
 					const sortedTasks = [...day.tasks];
+					const sortedReminders = [...day.reminders];
+					const sortedDeadlines = [...day.deadlines];
 
 					sortedTasks.sort(
 						(a, b) => a.schedulePosition - b.schedulePosition,
 					);
+					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
+					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
 					return (
 						<Day isOff={!day.workedDay}>
@@ -319,6 +323,22 @@ const Schedule = ({
 								>
 									<DroppableSeparator />
 								</DefaultDroppableDay>
+								{sortedReminders.map(reminder => (
+									<ReminderCard
+										key={`${reminder.id}`}
+										datetime={reminder.sendingDate}
+										reminder={reminder}
+										task={reminder.item}
+									/>
+								))}
+								{sortedDeadlines.map(deadline => (
+									<DeadlineCard
+										key={`${deadline.id}`}
+										project={deadline.project}
+										task={deadline.task}
+										date={deadline.date}
+									/>
+								))}
 							</DroppableDayTasks>
 						</Day>
 					);

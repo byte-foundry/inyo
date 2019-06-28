@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from '@emotion/styled/macro';
+import React from 'react';
 
-import {H4, H5} from '../../utils/content';
 import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
-import {P, accentGrey, primaryBlack} from '../../utils/new/design-system';
+import {H4, H5} from '../../utils/content';
+import {accentGrey, P, primaryBlack} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;

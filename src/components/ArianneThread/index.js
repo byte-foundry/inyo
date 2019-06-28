@@ -1,22 +1,22 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
-import {useQuery} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
+import React from 'react';
+import {useQuery} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 import Select, {components} from 'react-select';
-import Creatable from 'react-select/lib/Creatable';
+import Creatable from 'react-select/creatable';
 
+import {BREAKPOINTS} from '../../utils/constants';
 import {
-	primaryPurple,
-	primaryWhite,
 	lightGrey,
+	primaryPurple,
 	primaryRed,
+	primaryWhite,
 } from '../../utils/new/design-system';
 import {
 	GET_ALL_CUSTOMERS,
 	GET_ALL_PROJECTS,
 	GET_USER_TAGS,
 } from '../../utils/queries';
-import {BREAKPOINTS} from '../../utils/constants';
 
 const ArianneContainer = styled('div')`
 	display: flex;

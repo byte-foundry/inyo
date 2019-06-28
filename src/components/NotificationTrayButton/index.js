@@ -1,25 +1,24 @@
-import React, {useState, useRef, useEffect} from 'react';
-import Portal from '@reach/portal';
-import {useQuery, useMutation} from 'react-apollo-hooks';
 import styled from '@emotion/styled';
+import Portal from '@reach/portal';
+import React, {useEffect, useRef, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
-import Tooltip from '../Tooltip';
-import IconButton from '../../utils/new/components/IconButton';
-import NotificationItem from '../NotificationItem';
-
+import {BREAKPOINTS} from '../../utils/constants';
+import {Loading} from '../../utils/content';
+import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
 import {
 	Button,
-	primaryPurple,
+	lightGrey,
 	primaryGrey,
+	primaryPurple,
 	primaryRed,
 	primaryWhite,
-	lightGrey,
 } from '../../utils/new/design-system';
-import {Loading} from '../../utils/content';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
-import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
-import {BREAKPOINTS} from '../../utils/constants';
+import IconButton from '../IconButton';
+import NotificationItem from '../NotificationItem';
+import Tooltip from '../Tooltip';
 
 const Dropdown = styled('div')`
 	display: flex;

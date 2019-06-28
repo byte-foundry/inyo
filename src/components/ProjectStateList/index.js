@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import React, {Component} from 'react';
 
+import {
+	gray20,
+	P,
+	primaryBlue,
+	primaryNavyBlue,
+	primaryWhite,
+} from '../../utils/content';
 import Plural from '../Plural';
 import ProjectCard from '../ProjectCard';
-import {
-	P,
-	primaryNavyBlue,
-	primaryBlue,
-	primaryWhite,
-	gray20,
-} from '../../utils/content';
 
 const ProjectStateListMain = styled('div')`
 	display: flex;

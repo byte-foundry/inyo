@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import {convertToRaw} from 'draft-js';
-import {Editor, createEditorState} from 'medium-draft';
-import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
-import styled from '@emotion/styled';
 import 'medium-draft/lib/index.css';
+
+import styled from '@emotion/styled';
+import {convertToRaw} from 'draft-js';
+import {createEditorState, Editor} from 'medium-draft';
+import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
+import React, {Component} from 'react';
+
 import {gray20} from '../../utils/content';
 
 const TextEditorMain = styled('div')`

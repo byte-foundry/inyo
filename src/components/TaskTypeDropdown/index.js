@@ -1,15 +1,13 @@
-import PropTypes from 'prop-types';
-import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled/macro';
+import PropTypes from 'prop-types';
+import React, {useEffect, useState} from 'react';
 
 import {BREAKPOINTS} from '../../utils/constants';
-
 import {gray30, gray50, gray80} from '../../utils/content';
-
 import {
+	lightGrey,
 	TaskInputDropdown,
 	TaskInputDropdownHeader,
-	lightGrey,
 } from '../../utils/new/design-system';
 
 const List = styled('ul')`

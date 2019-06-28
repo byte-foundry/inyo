@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
 import styled from '@emotion/styled';
+import React, {useState} from 'react';
 
-import MaterialIcon from '../MaterialIcon';
-
-import {SubHeading, Input, Button} from '../../utils/new/design-system';
 import {
-	ModalContainer,
-	ModalElem,
 	FlexColumn,
 	ModalActions,
+	ModalContainer,
+	ModalElem,
 } from '../../utils/content';
+import {Button, Input, SubHeading} from '../../utils/new/design-system';
+import MaterialIcon from '../MaterialIcon';
 
 const ModalContent = styled(FlexColumn)`
 	margin-top: 2rem;

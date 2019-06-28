@@ -1,8 +1,7 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import {CustomerContext} from '../../utils/contexts';
-
 import CustomerTasks from './Tasks';
 
 export default function Customer({match}) {

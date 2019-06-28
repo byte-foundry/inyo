@@ -1,24 +1,23 @@
-import React, {useContext} from 'react';
-import {withRouter} from 'react-router-dom';
 import styled from '@emotion/styled';
-import {useQuery} from 'react-apollo-hooks';
 import moment from 'moment';
+import React, {useContext} from 'react';
+import {useQuery} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 
-import Tooltip from '../Tooltip';
-import Plural from '../Plural';
-import IssuerNameAndAddress from '../IssuerNameAndAddress';
-import IconButton from '../../utils/new/components/IconButton';
-
-import {
-	SubHeading,
-	primaryGrey,
-	P,
-	primaryPurple,
-	primaryWhite,
-} from '../../utils/new/design-system';
-import {GET_PROJECT_INFOS} from '../../utils/queries';
 import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
+import {
+	P,
+	primaryGrey,
+	primaryPurple,
+	primaryWhite,
+	SubHeading,
+} from '../../utils/new/design-system';
+import {GET_PROJECT_INFOS} from '../../utils/queries';
+import IconButton from '../IconButton';
+import IssuerNameAndAddress from '../IssuerNameAndAddress';
+import Plural from '../Plural';
+import Tooltip from '../Tooltip';
 
 const Aside = styled('aside')`
 	display: flex;

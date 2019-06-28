@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import React, {Component} from 'react';
 
-import FormInput from '../FormInput';
-
-import {InputLabel, Label} from '../../utils/new/design-system';
 import {ErrorInput} from '../../utils/content';
 import {getDeep} from '../../utils/functions';
+import {InputLabel, Label} from '../../utils/new/design-system';
+import FormInput from '../FormInput';
 
 const FormElemMain = styled(InputLabel)`
 	width: 100%;

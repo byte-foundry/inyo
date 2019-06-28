@@ -1,22 +1,21 @@
-import React, {useEffect} from 'react';
 import styled from '@emotion/styled';
+import React, {useEffect} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
-import FormSelect from '../FormSelect';
-
+import {BREAKPOINTS} from '../../utils/constants';
+import {Loading} from '../../utils/content';
 import {isCustomerTask} from '../../utils/functions';
-import {templates} from '../../utils/project-templates';
 import {
+	BackButton,
 	Button,
 	Label,
-	SubHeading,
 	primaryBlack,
 	primaryRed,
-	BackButton,
+	SubHeading,
 } from '../../utils/new/design-system';
+import {templates} from '../../utils/project-templates';
 import {GET_PROJECT_DATA} from '../../utils/queries';
-import {Loading} from '../../utils/content';
-import {BREAKPOINTS} from '../../utils/constants';
+import FormSelect from '../FormSelect';
 
 const TemplateSubHeading = styled(SubHeading)`
 	margin-bottom: 1.5rem;

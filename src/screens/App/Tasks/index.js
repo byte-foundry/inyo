@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
 import styled from '@emotion/styled';
+import React, {Component} from 'react';
 import {Route} from 'react-router-dom';
 
+import TaskView from '../../../components/ItemView';
 import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import TasksList from './tasks-lists';
-import TaskView from '../../../components/ItemView';
 
 const ProjectMain = styled('div')`
 	min-height: 100vh;

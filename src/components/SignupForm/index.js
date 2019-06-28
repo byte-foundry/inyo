@@ -1,17 +1,16 @@
-import React from 'react';
-import {useMutation, useApolloClient} from 'react-apollo-hooks';
-import ReactGA from 'react-ga';
-import * as Sentry from '@sentry/browser';
 import styled from '@emotion/styled';
-import {Formik} from 'formik';
-import * as Yup from 'yup';
+import * as Sentry from '@sentry/browser';
 import debounce from 'debounce-promise';
+import {Formik} from 'formik';
+import React from 'react';
+import {useApolloClient, useMutation} from 'react-apollo-hooks';
+import ReactGA from 'react-ga';
+import * as Yup from 'yup';
 
-import {SIGNUP, CHECK_UNIQUE_EMAIL} from '../../utils/mutations';
-import {Button, A, primaryPurple} from '../../utils/new/design-system';
-import {ErrorInput} from '../../utils/content';
 import {INTERCOM_APP_ID} from '../../utils/constants';
-
+import {ErrorInput} from '../../utils/content';
+import {CHECK_UNIQUE_EMAIL, SIGNUP} from '../../utils/mutations';
+import {A, Button, primaryPurple} from '../../utils/new/design-system';
 import FormElem from '../FormElem';
 
 const SignupFormMain = styled('div')``;

@@ -1,13 +1,13 @@
-import React, {useState, useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
-import useOnClickOutside from 'use-onclickoutside';
 import {Formik} from 'formik';
+import React, {useEffect, useRef, useState} from 'react';
+import useOnClickOutside from 'use-onclickoutside';
 import * as Yup from 'yup';
 
 import {
+	Button,
 	primaryPurple,
 	primaryWhite,
-	Button,
 } from '../../utils/new/design-system';
 import Tooltip from '../Tooltip';
 

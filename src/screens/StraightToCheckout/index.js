@@ -13,6 +13,7 @@ function StraightToCheckout({location}) {
 			...stripeInfos,
 			customerEmail: queryString.get('email'),
 			clientReferenceId: queryString.get('id'),
+			billingAddressCollection: 'required',
 		})
 		.then((result) => {
 			if (result.error) {

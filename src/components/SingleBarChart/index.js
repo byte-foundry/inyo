@@ -64,15 +64,15 @@ const LegendRow = styled('li')`
 const SingleBarChart = ({entries = []}) => (
 	<>
 		<Container>
-			{entries.map(({label, value}, index) => (
-				<Tooltip key={index} label={`${label} (${value}%)`}>
-					<Bar width={value} color={intToRGB(hashCode(label))} />
+			{entries.map(({id, label, value}) => (
+				<Tooltip key={id} label={`${label} (${value}%)`}>
+					<Bar width={value} color={intToRGB(hashCode(id))} />
 				</Tooltip>
 			))}
 		</Container>
 		<Legend>
-			{entries.map(({label}, index) => (
-				<LegendRow key={index} color={intToRGB(hashCode(label))}>
+			{entries.map(({id, label}) => (
+				<LegendRow key={id} color={intToRGB(hashCode(id))}>
 					{label}
 				</LegendRow>
 			))}

@@ -23,7 +23,12 @@ const Container = styled('div')`
 `;
 
 const Stats = ({history, location}) => {
-	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {
+		data: {
+			me: {tasks},
+		},
+		error,
+	} = useQuery(GET_ALL_TASKS, {suspend: true});
 	const query = new URLSearchParams(location.search);
 
 	const projectId = query.get('projectId');
@@ -31,8 +36,6 @@ const Stats = ({history, location}) => {
 	const linkedCustomerId = query.get('customerId');
 
 	if (error) throw error;
-
-	const {tasks} = data.me;
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -90,17 +93,44 @@ const Stats = ({history, location}) => {
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
+	const customers = {};
+
+	let totalTime = 0;
+
+	tasks.forEach((task) => {
+		if (task.status !== 'FINISHED') return;
+
+		const customer
+			= task.linkedCustomer
+			|| (task.section && task.section.project.customer);
+
+		if (!customer) return;
+
+		customers[customer.id] = customers[customer.id] || {
+			value: 0,
+			label: customer.name,
+		};
+
+		const time
+			= typeof task.timeItTook === 'number' ? task.timeItTook : task.unit;
+
+		customers[customer.id].value += time;
+		totalTime += time;
+	});
+
+	const customerDistributions = Object.entries(customers).map(
+		([key, obj]) => ({
+			id: key,
+			label: obj.label,
+			value: (obj.value / totalTime) * 100,
+		}),
+	);
+
 	return (
 		<Container>
 			<Heading>Statistiques</Heading>
 			<SubHeading>Répartition de vos clients</SubHeading>
-			<SingleBarChart
-				entries={[
-					{label: 'Mon Client', value: 25},
-					{label: 'Mon Autre Client', value: 35},
-					{label: 'Le dernier', value: 40},
-				]}
-			/>
+			<SingleBarChart entries={customerDistributions} />
 			<SubHeading>
 				Rapport temps estimé / temps réellement passé
 			</SubHeading>

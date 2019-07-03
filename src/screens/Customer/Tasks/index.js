@@ -87,7 +87,7 @@ const Tasks = ({location, match}) => {
 
 	let welcome = 'Bonjour';
 
-	if (customerInfosData) {
+	if (customerInfosData && customerInfosData.customer) {
 		const {customer: c} = customerInfosData;
 
 		welcome += c

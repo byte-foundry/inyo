@@ -1,22 +1,20 @@
 import styled from '@emotion/styled/macro';
-import moment from 'moment';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
-import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS} from '../../utils/constants';
+import {isCustomerTask} from '../../utils/functions';
 import {
 	accentGrey,
-	DateInputContainer,
-	DueDateInputElem,
 	TaskIconText,
 	TaskInfosItemLink,
 } from '../../utils/new/design-system';
-import DateInput from '../DateInput';
 import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
+import TaskCollaboratorList from '../TaskCollaboratorList';
 import TaskComment from '../TaskComment';
 import TaskCustomerInput from '../TaskCustomerInput';
+import TaskDueDate from '../TaskDueDate';
 import TaskReminderIcon from '../TaskReminderIcon';
 import TaskUnitInfo from '../TaskUnitInfo';
 import Tooltip from '../Tooltip';
@@ -69,18 +67,13 @@ function TaskInfosInputs({
 }) {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
-	const dateRef = useRef();
+	const [taskIsCustomer, setTaskIsCustomer] = useState(
+		isCustomerTask(item.type),
+	);
 
-	useOnClickOutside(dateRef, () => {
-		setEditDueDate(false);
-	});
-
-	const dueDate
-		= item.dueDate
-		|| (item.dueDate
-			|| (item.section
-				&& item.section.project
-				&& item.section.project.deadline));
+	useEffect(() => {
+		setTaskIsCustomer(isCustomerTask(item.type));
+	}, [item.type]);
 
 	return (
 		<TaskInfos>
@@ -112,81 +105,25 @@ function TaskInfosInputs({
 				switchOnSelect={switchOnSelect}
 				setEditDueDate={setEditDueDate}
 			/>
-			<Tooltip label="Marge restante pour commencer la tâche">
-				<TaskIconText
-					inactive={editDueDate}
-					icon={
-						<MaterialIcon
-							icon="event"
-							size="tiny"
-							color={accentGrey}
-						/>
-					}
-					content={
-						<DateInputContainer
-							onClick={
-								customerToken
-									? undefined
-									: () => !editDueDate && setEditDueDate(true)
-							}
-						>
-							{!customerToken && editDueDate ? (
-								<>
-									<DueDateInputElem
-										value={moment(
-											dueDate || new Date(),
-										).format('DD/MM/YYYY')}
-									/>
-									<DateInput
-										innerRef={dateRef}
-										date={moment(dueDate || new Date())}
-										onDateChange={(args) => {
-											onDueDateSubmit(args);
-											setEditDueDate(false);
-											if (switchOnSelect) {
-												setEditCustomer(true);
-											}
-										}}
-										duration={item.unit}
-									/>
-								</>
-							) : (
-								<>
-									{(dueDate && (
-										<>
-											{
-												+(
-													moment(dueDate).diff(
-														moment(),
-														'days',
-													) - item.unit
-												).toFixed(2)
-											}{' '}
-											<Plural
-												value={
-													moment(dueDate).diff(
-														moment(),
-														'days',
-													) - item.unit
-												}
-												singular="jour"
-												plural="jours"
-											/>
-										</>
-									)) || <>&mdash;</>}
-								</>
-							)}
-						</DateInputContainer>
-					}
-				/>
-			</Tooltip>
-			<TaskCustomerInput
-				editCustomer={editCustomer}
-				setEditCustomer={setEditCustomer}
-				onCustomerSubmit={onCustomerSubmit}
+			<TaskDueDate
+				editDueDate={editDueDate}
+				customerToken={customerToken}
+				setEditDueDate={setEditDueDate}
 				item={item}
-				disabled={!!customerToken}
+				onDueDateSubmit={onDueDateSubmit}
+				switchOnSelect={switchOnSelect}
+				setEditCustomer={setEditCustomer}
 			/>
+			{taskIsCustomer && (
+				<TaskCustomerInput
+					editCustomer={editCustomer}
+					setEditCustomer={setEditCustomer}
+					onCustomerSubmit={onCustomerSubmit}
+					item={item}
+					disabled={!!customerToken}
+				/>
+			)}
+			{!taskIsCustomer && !customerToken && <TaskCollaboratorList />}
 			{!noAttachment && !!item.attachments.length && (
 				<Tooltip label="Fichiers joints">
 					<TaskIconText

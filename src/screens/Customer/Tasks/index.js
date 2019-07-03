@@ -90,7 +90,9 @@ const Tasks = ({location, match}) => {
 	if (customerInfosData) {
 		const {customer: c} = customerInfosData;
 
-		welcome += ` ${formatFullName(c.title, c.firstName, c.lastName)}`;
+		welcome += c
+			? ` ${formatFullName(c.title, c.firstName, c.lastName)}`
+			: '';
 	}
 
 	return (

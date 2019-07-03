@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {mediumGrey} from '../../utils/colors';
+import {TAG_COLOR_PALETTE} from '../../utils/constants';
 import Tooltip from '../Tooltip';
 
 function hashCode(str) {
@@ -61,32 +62,79 @@ const LegendRow = styled('li')`
 	}
 `;
 
-const SingleBarChart = ({entries = []}) => (
-	<>
-		<Container>
-			{entries.map(({id, label, value}) => (
-				<Tooltip key={id} label={`${label} (${value}%)`}>
-					<Bar width={value} color={intToRGB(hashCode(id))} />
-				</Tooltip>
-			))}
-		</Container>
-		<Legend>
-			{entries.map(({id, label}) => (
-				<LegendRow key={id} color={intToRGB(hashCode(id))}>
-					{label}
-				</LegendRow>
-			))}
-		</Legend>
-	</>
-);
+const SingleBarChart = ({entries = [], max = 8}) => {
+	const sortedEntries = [...entries];
+
+	sortedEntries.sort((a, b) => b.value - a.value);
+
+	const others = sortedEntries.splice(max - 1);
+
+	if (others.length) {
+		sortedEntries.push(
+			others.reduce((acc, current) => {
+				acc.value += current.value;
+
+				return acc;
+			}),
+			{id: 'others', label: `Autres (${others.length})`, value: 0},
+		);
+	}
+
+	const getColor = index => (index >= TAG_COLOR_PALETTE.length
+		? null
+		: TAG_COLOR_PALETTE[index].map(
+			color => `#${color
+				.map(p => p.toString(16).padStart(2, '0'))
+				.join('')}`,
+			  )[0]);
+
+	return (
+		<>
+			<Container>
+				{sortedEntries.map(({
+					id, label, value, color,
+				}, index) => (
+					<Tooltip
+						key={id}
+						label={`${label} (${Math.round(value)}%)`}
+					>
+						<Bar
+							width={value}
+							color={
+								color
+								|| getColor(index)
+								|| intToRGB(hashCode(id))
+							}
+						/>
+					</Tooltip>
+				))}
+			</Container>
+			<Legend>
+				{sortedEntries.map(({id, label, color}, index) => (
+					<LegendRow
+						key={id}
+						color={
+							color || getColor(index) || intToRGB(hashCode(id))
+						}
+					>
+						{label}
+					</LegendRow>
+				))}
+			</Legend>
+		</>
+	);
+};
 
 SingleBarChart.propTypes = {
 	entries: PropTypes.arrayOf(
 		PropTypes.shape({
+			id: PropTypes.string,
 			label: PropTypes.string,
 			value: PropTypes.number,
+			color: PropTypes.string,
 		}),
 	),
+	max: PropTypes.number,
 };
 
 export default SingleBarChart;

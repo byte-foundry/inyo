@@ -58,6 +58,7 @@ export const TaskContainer = styled('div')`
 		position: absolute;
 		left: -3rem;
 		top: 1.9rem;
+		cursor: ${props => (props.isDraggable ? 'grab' : 'default')};
 
 		opacity: 0;
 		transition: all 300ms ease;

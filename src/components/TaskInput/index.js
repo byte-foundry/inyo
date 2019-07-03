@@ -16,7 +16,8 @@ import {
 } from '../../utils/new/design-system';
 import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
-import {TaskCustomerInput, TaskInfosInputs} from '../TasksList/task';
+import TaskCustomerInput from '../TaskCustomerInput';
+import TaskInfosInputs from '../TaskInfosInputs';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
 

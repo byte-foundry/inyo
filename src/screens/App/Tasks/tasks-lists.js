@@ -68,11 +68,14 @@ function TasksListContainer({
 
 	if (error) throw error;
 
-	const tasks = data.me.tasks.filter(
+	const ongoingProjectAndNoProjectTask = data.me.tasks.filter(
+		task => !task.section
+			|| task.section.project.status === 'ONGOING'
+			|| projectId,
+	);
+
+	const tasks = ongoingProjectAndNoProjectTask.filter(
 		task => (!filter || task.status === filter || filter === 'ALL')
-			&& (!task.section
-				|| task.section.project.status === 'ONGOING'
-				|| projectId)
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
 
@@ -108,6 +111,9 @@ function TasksListContainer({
 			items={[...tasks]}
 			projectId={projectId}
 			customerId={linkedCustomerId}
+			hasFilteredItems={
+				tasks.length !== ongoingProjectAndNoProjectTask.length
+			}
 		/>
 	);
 }

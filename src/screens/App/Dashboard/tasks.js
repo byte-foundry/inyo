@@ -209,7 +209,11 @@ const DashboardTasks = ({location, history}) => {
 	};
 
 	tasks.forEach((task) => {
-		if (task.section && task.section.project.deadline) {
+		if (
+			task.section
+			&& task.section.project.deadline
+			&& task.section.project.status === 'ONGOING'
+		) {
 			const {project} = task.section;
 
 			const deadlineDate = moment(project.deadline).format(
@@ -260,9 +264,14 @@ const DashboardTasks = ({location, history}) => {
 		}
 
 		if (isCustomerTask(task.type)) {
-			const plannedReminders = task.reminders.filter(
-				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
-			);
+			const plannedReminders = task
+				.filter(
+					t => !t.section || t.section.project.status === 'ONGOING',
+				)
+				.reminders.filter(
+					reminder => reminder.status === 'PENDING'
+						|| reminder.status === 'SENT',
+				);
 
 			plannedReminders.forEach((reminder) => {
 				const reminderDate = moment(reminder.sendingDate).format(
@@ -308,11 +317,14 @@ const DashboardTasks = ({location, history}) => {
 		}
 	});
 
-	const unscheduledFilteredTasks = unscheduledTasks.filter(
+	const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
+		task => !task.section
+			|| task.section.project.status === 'ONGOING'
+			|| projectId,
+	);
+
+	const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
 		task => (!filter || task.status === filter || filter === 'ALL')
-			&& (!task.section
-				|| task.section.project.status === 'ONGOING'
-				|| projectId)
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
@@ -337,7 +349,7 @@ const DashboardTasks = ({location, history}) => {
 				/>
 			)}
 			<FlexRowMobile justifyContent="space-between">
-				<div>
+				<div style={{flex: 1}}>
 					<ArianneThread
 						projectId={projectId}
 						linkedCustomerId={linkedCustomerId}
@@ -356,7 +368,8 @@ const DashboardTasks = ({location, history}) => {
 							<TasksList
 								style={{minHeight: '50px'}}
 								hasFilteredItems={
-									tasks.length !== unscheduledFilteredTasks.length
+									ongoingProjectAndNoProjectTask.length
+								!== unscheduledFilteredTasks.length
 								}
 								items={unscheduledFilteredTasks}
 								baseUrl="dashboard"
@@ -371,12 +384,16 @@ const DashboardTasks = ({location, history}) => {
 								)}
 							/>
 						) : (
-							<IllusContainer bg={IllusBackground}>
-								<IllusFigureContainer fig={IllusFigure} />
-								<IllusText>
-									<P>Vous n'avez plus de tâches à planifier.</P>
-								</IllusText>
-							</IllusContainer>
+							<div style={{marginTop: '2rem'}}>
+								<IllusContainer bg={IllusBackground}>
+									<IllusFigureContainer fig={IllusFigure} />
+									<IllusText>
+										<P>
+										Vous n'avez plus de tâches à planifier.
+										</P>
+									</IllusText>
+								</IllusContainer>
+							</div>
 						)}
 				</div>
 				<SidebarDashboardInfos baseUrl="app/dashboard" />

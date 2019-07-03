@@ -265,14 +265,9 @@ const DashboardTasks = ({location, history}) => {
 		}
 
 		if (isCustomerTask(task.type)) {
-			const plannedReminders = task
-				.filter(
-					t => !t.section || t.section.project.status === 'ONGOING',
-				)
-				.reminders.filter(
-					reminder => reminder.status === 'PENDING'
-						|| reminder.status === 'SENT',
-				);
+			const plannedReminders = task.reminders.filter(
+				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
+			);
 
 			plannedReminders.forEach((reminder) => {
 				const reminderDate = moment(reminder.sendingDate).format(

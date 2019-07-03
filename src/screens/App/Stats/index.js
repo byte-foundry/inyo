@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
@@ -7,8 +7,15 @@ import ArianneThread from '../../../components/ArianneThread';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import {BREAKPOINTS} from '../../../utils/constants';
-import {Heading, SubHeading} from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {
+	Heading,
+	mediumGrey,
+	P,
+	primaryBlack,
+	primaryGrey,
+	SubHeading,
+} from '../../../utils/new/design-system';
+import {GET_ALL_TASKS, GET_REMINDERS} from '../../../utils/queries';
 
 const Container = styled('div')`
 	width: 980px;
@@ -22,6 +29,24 @@ const Container = styled('div')`
 	}
 `;
 
+const Cards = styled('div')`
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-column-gap: 20px;
+`;
+
+const Card = styled('div')`
+	background-color: ${mediumGrey};
+	padding: 20px;
+`;
+
+const Number = styled(P)`
+	font-size: 3rem;
+	font-weight: 500;
+	color: ${primaryGrey};
+	margin: 0;
+`;
+
 const Stats = ({history, location}) => {
 	const {
 		data: {
@@ -29,6 +54,7 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
+
 	const query = new URLSearchParams(location.search);
 
 	const projectId = query.get('projectId');
@@ -87,7 +113,14 @@ const Stats = ({history, location}) => {
 	};
 
 	const filteredTasks = tasks.filter(
-		task => (!task.section || projectId)
+		task => (!linkedCustomerId
+				|| ((task.linkedCustomer
+					&& task.linkedCustomer.id === linkedCustomerId)
+					|| (task.section
+						&& task.section.project.customer
+						&& task.section.project.customer.id
+							=== linkedCustomerId)))
+			&& (!task.section || projectId)
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
@@ -126,6 +159,11 @@ const Stats = ({history, location}) => {
 		}),
 	);
 
+	const reminders = filteredTasks
+		.filter(t => t.status === 'FINISHED')
+		.map(task => task.reminders)
+		.flat();
+
 	return (
 		<Container>
 			<Heading>Statistiques</Heading>
@@ -151,6 +189,39 @@ const Stats = ({history, location}) => {
 						.map(t => ({items: t})),
 				}}
 			/>
+			<Cards>
+				<Card>
+					<SubHeading>Temps travaillé</SubHeading>
+					<Number>
+						{filteredTasks
+							.filter(t => t.status === 'FINISHED')
+							.reduce(
+								(total, {timeItTook}) => total + timeItTook,
+								0,
+							) * 24}
+						h
+					</Number>
+				</Card>
+				<Card>
+					<SubHeading>Temps estimé</SubHeading>
+					<Number>
+						{filteredTasks
+							.filter(t => t.status === 'FINISHED')
+							.reduce((total, {unit}) => total + unit, 0) * 24}
+						h
+					</Number>
+				</Card>
+				<Card>
+					<SubHeading>Rappels envoyés</SubHeading>
+					<Number>
+						{
+							reminders.filter(
+								reminder => reminder.status === 'SENT',
+							).length
+						}
+					</Number>
+				</Card>
+			</Cards>
 		</Container>
 	);
 };

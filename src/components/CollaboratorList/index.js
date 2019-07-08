@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 import {BREAKPOINTS} from '../../utils/constants';
-import {Button} from '../../utils/new/design-system';
+import {Button, CollaboratorLineRow} from '../../utils/new/design-system';
 import CollaboratorAvatar from '../CollaboratorAvatar';
 import IconButton from '../IconButton';
 
@@ -26,12 +26,6 @@ const Actions = styled('div')`
 			margin-bottom: 0.5rem;
 		}
 	}
-`;
-
-const CollaboratorLineRow = styled('div')`
-	display: flex;
-	align-items: center;
-	margin-bottom: 2rem;
 `;
 
 function CollaboratorLine({collaborator, isNew}) {

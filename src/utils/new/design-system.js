@@ -410,21 +410,25 @@ export const InputLabel = styled('div')`
 	}
 `;
 
-export const TaskInputDropdown = styled('div')`
-	background: white;
+export const GenericDropdown = styled('div')`
+	background: ${primaryWhite};
 	border: 1px solid ${mediumGrey};
 	box-shadow: 5px 5px 15px ${primaryGrey};
-	position: absolute;
-	z-index: 2; /* do a portal instead */
-	width: 500px;
-	top: calc(100% + 15px);
-	left: 55px;
+	width: ${props => (props.width ? props.width : 'auto')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		left: -1rem;
 		width: calc(100% + 2rem);
 		box-shadow: 0 0 20rem ${primaryBlack};
 	}
+`;
+
+export const TaskInputDropdown = styled(GenericDropdown)`
+	position: absolute;
+	z-index: 2; /* do a portal instead */
+	width: 500px;
+	top: calc(100% + 15px);
+	left: 55px;
 `;
 
 export const TaskInputDropdownHeader = styled('p')`
@@ -732,4 +736,10 @@ export const DragSeparator = styled('div')`
 	width: 100%;
 	top: -5px;
 	background: ${primaryPurple};
+`;
+
+export const CollaboratorLineRow = styled('div')`
+	display: flex;
+	align-items: center;
+	margin-bottom: 2rem;
 `;

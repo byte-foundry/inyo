@@ -12,7 +12,6 @@ import {
 	mediumGrey,
 	primaryBlack,
 	primaryGrey,
-	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';

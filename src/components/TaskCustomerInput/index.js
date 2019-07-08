@@ -41,10 +41,10 @@ function TaskCustomerInput({
 	}, [setEditCustomer]);
 
 	const onClickElement = useCallback(() => {
-		if (disabled) {
+		if (!disabled) {
 			setEditCustomer(true);
 		}
-	}, [setEditCustomer]);
+	}, [setEditCustomer, disabled]);
 
 	return (
 		<Tooltip label="Personne liée à la tâche">

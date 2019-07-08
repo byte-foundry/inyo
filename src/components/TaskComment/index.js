@@ -25,8 +25,6 @@ const CommentNumber = styled('span')`
 	pointer-events: none;
 `;
 
-const emptyArray = [];
-
 function TaskComment({
 	taskUrlPrefix,
 	baseUrl,

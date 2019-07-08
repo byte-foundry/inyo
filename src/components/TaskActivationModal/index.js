@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 
 import {StickyHeader} from '../../utils/new/design-system';
 import Apostrophe from '../Apostrophe';
@@ -11,6 +11,21 @@ function TaskActivationModal({
 	focusTask,
 	setIsActivating,
 }) {
+	const onFocusTask = useCallback(
+		async ({reminders, scheduledFor}) => {
+			await focusTask({
+				variables: {
+					itemId: item.id,
+					reminders,
+					for: scheduledFor,
+				},
+			});
+
+			setIsActivating(false);
+		},
+		[focusTask, item.id, setIsActivating],
+	);
+
 	return (
 		<>
 			<StickyHeader customer={item.type !== 'DEFAULT'}>
@@ -27,17 +42,7 @@ function TaskActivationModal({
 				remindersPreviews={item.remindersPreviews}
 				customerName={item.linkedCustomer.name}
 				initialScheduledFor={initialScheduledFor}
-				onFocusTask={async ({reminders, scheduledFor}) => {
-					await focusTask({
-						variables: {
-							itemId: item.id,
-							reminders,
-							for: scheduledFor,
-						},
-					});
-
-					setIsActivating(false);
-				}}
+				onFocusTask={onFocusTask}
 				onCancel={() => setIsActivating(false)}
 			/>
 		</>

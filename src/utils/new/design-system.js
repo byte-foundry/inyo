@@ -760,3 +760,57 @@ export const StickyHeader = styled('div')`
 		margin-right: -2rem;
 	}
 `;
+
+export const Meta = styled('div')`
+	display: flex;
+	align-items: flex-start;
+	min-height: 1.25rem;
+
+	i {
+		margin-right: 15px;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 0;
+	}
+`;
+
+export const MetaLabel = styled('div')`
+	margin-right: 1rem;
+	min-width: 40px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
+`;
+
+export const MetaText = styled('span')`
+	color: ${primaryPurple};
+	flex: 1;
+	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
+
+	:empty::before {
+		content: '+';
+		border: 1px solid ${primaryPurple};
+		border-radius: 50%;
+		width: 0.85rem;
+		height: 0.8rem;
+		font-size: 0.8rem;
+		display: flex;
+		text-align: center;
+		flex-direction: column;
+		line-height: 1;
+		position: relative;
+		top: 2px;
+		left: -2px;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+		flex: 1 auto 100%;
+	}
+`;
+
+export const MetaTime = styled(MetaText)`
+	position: relative;
+`;

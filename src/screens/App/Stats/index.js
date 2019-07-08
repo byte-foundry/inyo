@@ -1,9 +1,10 @@
 import styled from '@emotion/styled/macro';
-import React from 'react';
+import moment from 'moment';
+import React, {useCallback} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
-import ArianneThread from '../../../components/ArianneThread';
+import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import {BREAKPOINTS} from '../../../utils/constants';
@@ -11,11 +12,10 @@ import {
 	Heading,
 	mediumGrey,
 	P,
-	primaryBlack,
 	primaryGrey,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS, GET_REMINDERS} from '../../../utils/queries';
+import {GET_ALL_TASKS} from '../../../utils/queries';
 
 const Container = styled('div')`
 	width: 980px;
@@ -47,6 +47,31 @@ const Number = styled(P)`
 	margin: 0;
 `;
 
+const TimeSelectContainer = styled('div')`
+	display: flex;
+	align-items: center;
+	width: 200px;
+`;
+
+const TimeSelect = styled(ArianneElem)`
+	margin-left: 5px;
+	width: 100%;
+`;
+
+const MetaHeading = styled('div')`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+const PageSubHeading = styled(SubHeading)`
+	margin-bottom: 20px;
+`;
+
+const Section = styled('div')`
+	margin-top: 20px;
+`;
+
 const Stats = ({history, location}) => {
 	const {
 		data: {
@@ -57,11 +82,23 @@ const Stats = ({history, location}) => {
 
 	const query = new URLSearchParams(location.search);
 
+	const since = parseInt(query.get('since'), 10) || 30;
 	const projectId = query.get('projectId');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
 
 	if (error) throw error;
+
+	const setSince = useCallback(
+		(value) => {
+			const newQuery = new URLSearchParams(query);
+
+			newQuery.set('since', value);
+
+			history.push(`/app/stats?${newQuery.toString()}`);
+		},
+		[query],
+	);
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -113,7 +150,10 @@ const Stats = ({history, location}) => {
 	};
 
 	const filteredTasks = tasks.filter(
-		task => (!linkedCustomerId
+		task => moment(task.createdAt).isSameOrAfter(
+			moment().subtract(since, 'days'),
+		)
+			&& (!linkedCustomerId
 				|| ((task.linkedCustomer
 					&& task.linkedCustomer.id === linkedCustomerId)
 					|| (task.section
@@ -131,7 +171,10 @@ const Stats = ({history, location}) => {
 	let totalTime = 0;
 
 	tasks.forEach((task) => {
-		if (task.status !== 'FINISHED') return;
+		if (
+			task.status !== 'FINISHED'
+			&& moment(task.createdAt).isBefore(moment().subtract(since, 'days'))
+		) return;
 
 		const customer
 			= task.linkedCustomer
@@ -166,62 +209,85 @@ const Stats = ({history, location}) => {
 
 	return (
 		<Container>
-			<Heading>Statistiques</Heading>
-			<SubHeading>Répartition de vos clients</SubHeading>
-			<SingleBarChart entries={customerDistributions} />
-			<SubHeading>
-				Rapport temps estimé / temps réellement passé
-			</SubHeading>
-			<ArianneThread
-				projectId={projectId}
-				linkedCustomerId={linkedCustomerId}
-				selectCustomer={setCustomerSelected}
-				selectProjects={setProjectSelected}
-				selectTag={setTagSelected}
-				tagsSelected={tags}
-				marginTop
-			/>
-			<TasksProgressBar
-				showCompletionPercentage={false}
-				project={{
-					sections: filteredTasks
-						.filter(t => t.status === 'FINISHED')
-						.map(t => ({items: t})),
-				}}
-			/>
-			<Cards>
-				<Card>
-					<SubHeading>Temps travaillé</SubHeading>
-					<Number>
-						{filteredTasks
+			<MetaHeading>
+				<Heading style={{marginBottom: 0}}>Statistiques</Heading>
+				<TimeSelectContainer>
+					Afficher{' '}
+					<TimeSelect
+						selectedId={since}
+						onChange={({value}) => setSince(value)}
+						list={[
+							{name: 'les 7 derniers jours', id: 7},
+							{name: 'les 30 derniers jours', id: 30},
+							{name: 'les 3 derniers mois', id: 90},
+							{name: 'les 6 derniers mois', id: 180},
+						]}
+					/>
+				</TimeSelectContainer>
+			</MetaHeading>
+
+			<Section>
+				<PageSubHeading>Répartition de vos clients</PageSubHeading>
+				<SingleBarChart entries={customerDistributions} />
+			</Section>
+
+			<Section>
+				<ArianneThread
+					projectId={projectId}
+					linkedCustomerId={linkedCustomerId}
+					selectCustomer={setCustomerSelected}
+					selectProjects={setProjectSelected}
+					selectTag={setTagSelected}
+					tagsSelected={tags}
+					marginTop
+					marginBottom
+				/>
+				<PageSubHeading>
+					Rapport temps estimé / temps réellement passé
+				</PageSubHeading>
+				<TasksProgressBar
+					showCompletionPercentage={false}
+					project={{
+						sections: filteredTasks
 							.filter(t => t.status === 'FINISHED')
-							.reduce(
-								(total, {timeItTook}) => total + timeItTook,
-								0,
-							) * 24}
-						h
-					</Number>
-				</Card>
-				<Card>
-					<SubHeading>Temps estimé</SubHeading>
-					<Number>
-						{filteredTasks
-							.filter(t => t.status === 'FINISHED')
-							.reduce((total, {unit}) => total + unit, 0) * 24}
-						h
-					</Number>
-				</Card>
-				<Card>
-					<SubHeading>Rappels envoyés</SubHeading>
-					<Number>
-						{
-							reminders.filter(
-								reminder => reminder.status === 'SENT',
-							).length
-						}
-					</Number>
-				</Card>
-			</Cards>
+							.map(t => ({items: t})),
+					}}
+				/>
+				<Cards>
+					<Card>
+						<SubHeading>Temps travaillé</SubHeading>
+						<Number>
+							{filteredTasks
+								.filter(t => t.status === 'FINISHED')
+								.reduce(
+									(total, {timeItTook}) => total + timeItTook,
+									0,
+								) * 24}
+							h
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>Temps estimé</SubHeading>
+						<Number>
+							{filteredTasks
+								.filter(t => t.status === 'FINISHED')
+								.reduce((total, {unit}) => total + unit, 0)
+								* 24}
+							h
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>Rappels envoyés</SubHeading>
+						<Number>
+							{
+								reminders.filter(
+									reminder => reminder.status === 'SENT',
+								).length
+							}
+						</Number>
+					</Card>
+				</Cards>
+			</Section>
 		</Container>
 	);
 };

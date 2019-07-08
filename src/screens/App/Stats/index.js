@@ -160,7 +160,9 @@ const Stats = ({history, location}) => {
 						&& task.section.project.customer
 						&& task.section.project.customer.id
 							=== linkedCustomerId)))
-			&& (!task.section || projectId)
+			&& (!task.section
+				|| task.section.project.status === 'ONGOING'
+				|| projectId)
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),

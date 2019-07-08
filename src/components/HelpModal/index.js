@@ -11,8 +11,8 @@ const PA = styled(P)`
 	font-size: 16px;
 `;
 
-const HelpModal = ({history}) => (
-	<ModalContainer size="small" onDismiss={() => history.push('/app/tasks')}>
+const HelpModal = ({history, ...rest}) => (
+	<ModalContainer size="small" {...rest}>
 		<ModalElem>
 			<Heading>Aide</Heading>
 			<PA>Voici quelques liens pour vous aider à utiliser Inyo.</PA>

@@ -5,6 +5,7 @@ import {useQuery} from 'react-apollo-hooks';
 
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
+import HelpButton from '../../../components/HelpButton';
 import HelpModal from '../../../components/HelpModal';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
@@ -12,12 +13,9 @@ import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import ProjectList from '../../../components/ProjectTasksList';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
 import TasksListComponent from '../../../components/TasksList';
-import Tooltip from '../../../components/Tooltip';
 import WelcomeModal from '../../../components/WelcomeModal';
 import {Loading} from '../../../utils/content';
-import {
-	Container, Content, Help, Main,
-} from '../../../utils/new/design-system';
+import {Container, Content, Main} from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 
 const TaskAndArianne = styled('div')`
@@ -93,7 +91,6 @@ function TasksList({location, history}) {
 	const query = new URLSearchParams(prevSearch || location.search);
 	const linkedCustomerId = query.get('customerId');
 	const openModal = query.get('openModal');
-	const openHelpModal = query.get('openHelpModal');
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 	const view = query.get('view');
@@ -170,15 +167,7 @@ function TasksList({location, history}) {
 
 	return (
 		<Container>
-			<Tooltip label="Instructions pour utiliser l'interface">
-				<Help
-					id="help-button"
-					customerToken
-					onClick={() => history.push('?openHelpModal=true')}
-				>
-					?
-				</Help>
-			</Tooltip>
+			<HelpButton />
 			<TaskAndArianne>
 				<ArianneThread
 					projectId={projectId}
@@ -226,7 +215,6 @@ function TasksList({location, history}) {
 				</Main>
 			</TaskAndArianne>
 			{openModal && <WelcomeModal />}
-			{openHelpModal && <HelpModal />}
 		</Container>
 	);
 }

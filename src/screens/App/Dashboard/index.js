@@ -4,10 +4,8 @@ import React from 'react';
 import {withRouter} from 'react-router-dom';
 
 import CreateTask from '../../../components/CreateTask';
-import Tooltip from '../../../components/Tooltip';
-import {
-	Container, Content, Help, Main,
-} from '../../../utils/new/design-system';
+import HelpButton from '../../../components/HelpButton';
+import {Container, Content, Main} from '../../../utils/new/design-system';
 import Tasks from './tasks';
 
 function Dashboard({history}) {
@@ -32,16 +30,7 @@ function Dashboard({history}) {
 
 	return (
 		<Container>
-			<Tooltip label="Instructions pour utiliser l'interface">
-				<Help
-					customerToken
-					onClick={() => history.push('/app/tasks?openHelpModal=true')
-					}
-					id="help-button"
-				>
-					?
-				</Help>
-			</Tooltip>
+			<HelpButton />
 			<Main>
 				<Content>
 					<CreateTask setProjectSelected={setProjectSelected} />

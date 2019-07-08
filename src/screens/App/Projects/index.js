@@ -4,6 +4,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import CreateProjectModal from '../../../components/CreateProjectModal';
+import HelpButton from '../../../components/HelpButton';
 import IconButton from '../../../components/IconButton';
 import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
@@ -28,7 +29,6 @@ import {
 	Button,
 	Container,
 	Content,
-	Help,
 	IllusContainer,
 	IllusFigureContainer,
 	IllusText,
@@ -190,16 +190,7 @@ function Projects({history}) {
 
 	return (
 		<Container>
-			<Tooltip label="Instructions pour utiliser l'interface">
-				<Help
-					id="help-button"
-					customerToken
-					onClick={() => history.push('/app/tasks?openHelpModal=true')
-					}
-				>
-					?
-				</Help>
-			</Tooltip>
+			<HelpButton />
 			<Main>
 				<Content
 					small={

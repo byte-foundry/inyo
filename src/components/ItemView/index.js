@@ -31,6 +31,7 @@ import {
 	primaryPurple,
 	primaryRed,
 	primaryWhite,
+	StickyHeader,
 	SubHeading,
 	TaskHeading,
 } from '../../utils/new/design-system';
@@ -48,8 +49,8 @@ import Plural from '../Plural';
 import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
 import TaskActivationHeader from '../TaskActivationHeader';
+import TaskActivationModal from '../TaskActivationModal';
 import TaskRemindersList from '../TaskRemindersList';
-import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
 import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
@@ -171,23 +172,6 @@ const Description = styled('div')`
 		div {
 			padding: 1rem 2rem !important;
 		}
-	}
-`;
-
-const StickyHeader = styled('div')`
-	position: sticky;
-	top: 0;
-	background: ${props => (props.customer ? primaryRed : primaryPurple)};
-	margin: -4rem -4rem 1.4rem;
-	display: flex;
-	justify-content: center;
-	padding: 1rem;
-	z-index: 1;
-	color: ${primaryWhite};
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-left: -2rem;
-		margin-right: -2rem;
 	}
 `;
 
@@ -364,35 +348,13 @@ const Item = ({
 
 	if (isActivating) {
 		return (
-			<>
-				<StickyHeader customer={item.type !== 'DEFAULT'}>
-					Prévisualisation des actions{' '}
-					<Apostrophe
-						value={me.settings.assistantName}
-						withVowel="d'"
-						withConsonant="de "
-					/>
-					{me.settings.assistantName}
-				</StickyHeader>
-				<TaskRemindersPreviewsList
-					taskId={item.id}
-					remindersPreviews={item.remindersPreviews}
-					customerName={item.linkedCustomer.name}
-					initialScheduledFor={initialScheduledFor}
-					onFocusTask={async ({reminders, scheduledFor}) => {
-						await focusTask({
-							variables: {
-								itemId: item.id,
-								reminders,
-								for: scheduledFor,
-							},
-						});
-
-						setIsActivating(false);
-					}}
-					onCancel={() => setIsActivating(false)}
-				/>
-			</>
+			<TaskActivationModal
+				item={item}
+				assistantName={me.settings.assistantName}
+				initialScheduledFor={initialScheduledFor}
+				focusTask={focusTask}
+				setIsActivating={setIsActivating}
+			/>
 		);
 	}
 

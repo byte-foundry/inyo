@@ -743,3 +743,20 @@ export const CollaboratorLineRow = styled('div')`
 	align-items: center;
 	margin-bottom: 2rem;
 `;
+
+export const StickyHeader = styled('div')`
+	position: sticky;
+	top: 0;
+	background: ${props => (props.customer ? primaryRed : primaryPurple)};
+	margin: -4rem -4rem 1.4rem;
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+	z-index: 1;
+	color: ${primaryWhite};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: -2rem;
+		margin-right: -2rem;
+	}
+`;

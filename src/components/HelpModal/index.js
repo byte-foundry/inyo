@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {withRouter} from 'react-router';
 
 import {ModalActions, ModalContainer, ModalElem} from '../../utils/content';
 import {
@@ -11,8 +10,8 @@ const PA = styled(P)`
 	font-size: 16px;
 `;
 
-const HelpModal = ({history, ...rest}) => (
-	<ModalContainer size="small" {...rest}>
+const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
+	<ModalContainer size="small" onDismiss={onDismiss} {...rest}>
 		<ModalElem>
 			<Heading>Aide</Heading>
 			<PA>Voici quelques liens pour vous aider à utiliser Inyo.</PA>
@@ -24,9 +23,9 @@ const HelpModal = ({history, ...rest}) => (
 						</span>{' '}
 						-{' '}
 						<A
+							as="button"
 							id="presentation-link"
-							href=""
-							onClick={() => history.push('?openModal=true')}
+							onClick={openWelcomeModal}
 						>
 							Voir la vidéo de présentation
 						</A>
@@ -125,7 +124,7 @@ const HelpModal = ({history, ...rest}) => (
 				</A>
 			</PA>
 			<ModalActions>
-				<Button big primary onClick={() => history.push('/app/tasks')}>
+				<Button big primary onClick={onDismiss}>
 					J'ai compris!
 				</Button>
 			</ModalActions>
@@ -133,4 +132,4 @@ const HelpModal = ({history, ...rest}) => (
 	</ModalContainer>
 );
 
-export default withRouter(HelpModal);
+export default HelpModal;

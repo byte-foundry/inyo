@@ -4,13 +4,24 @@ import {withRouter} from 'react-router';
 import {Help} from '../../utils/new/design-system';
 import HelpModal from '../HelpModal';
 import Tooltip from '../Tooltip';
+import WelcomeModal from '../WelcomeModal';
 
 const HelpButton = ({history, location}) => {
 	const query = new URLSearchParams(location.search);
-	const openHelpModal = query.get('openHelpModal');
+	const isHelpModalOpen = query.get('openHelpModal');
+	const isWelcomeModalOpen = query.get('openWelcomeModal');
 
-	const openModal = useCallback(() => {
+	const openHelpModal = useCallback(() => {
 		query.set('openHelpModal', true);
+
+		history.push({
+			pathname: location.pathname,
+			search: `?${query.toString()}`,
+		});
+	});
+
+	const openWelcomeModal = useCallback(() => {
+		query.set('openWelcomeModal', true);
 
 		history.push({
 			pathname: location.pathname,
@@ -20,6 +31,7 @@ const HelpButton = ({history, location}) => {
 
 	const closeModal = useCallback(() => {
 		query.delete('openHelpModal');
+		query.delete('openWelcomeModal');
 
 		history.push({
 			pathname: location.pathname,
@@ -30,11 +42,17 @@ const HelpButton = ({history, location}) => {
 	return (
 		<>
 			<Tooltip label="Instructions pour utiliser l'interface">
-				<Help id="help-button" customerToken onClick={openModal}>
+				<Help id="help-button" customerToken onClick={openHelpModal}>
 					?
 				</Help>
 			</Tooltip>
-			{openHelpModal && <HelpModal onDismiss={closeModal} />}
+			{!isWelcomeModalOpen && isHelpModalOpen && (
+				<HelpModal
+					openWelcomeModal={openWelcomeModal}
+					onDismiss={closeModal}
+				/>
+			)}
+			{isWelcomeModalOpen && <WelcomeModal onDismiss={closeModal} />}
 		</>
 	);
 };

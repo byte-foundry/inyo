@@ -18,7 +18,7 @@ import {
 	P,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
 
 const Container = styled('div')`
 	width: 980px;
@@ -93,6 +93,18 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {
+		data: {
+			me: {startWorkAt, endWorkAt},
+		},
+	} = useQuery(GET_USER_INFOS, {suspend: true});
+
+	const diffTime = moment(endWorkAt, 'HH:mm:ss').diff(
+		moment(startWorkAt, 'HH:mm:ss'),
+		'hours',
+		true,
+	);
+	const workingTime = diffTime < 0 ? diffTime + 24 : diffTime;
 
 	const query = new URLSearchParams(location.search);
 
@@ -278,7 +290,7 @@ const Stats = ({history, location}) => {
 								.reduce(
 									(total, {timeItTook}) => total + timeItTook,
 									0,
-								) * 24}
+								) * workingTime}
 							h
 						</Number>
 					</Card>
@@ -288,7 +300,7 @@ const Stats = ({history, location}) => {
 							{filteredTasks
 								.filter(t => t.status === 'FINISHED')
 								.reduce((total, {unit}) => total + unit, 0)
-								* 24}
+								* workingTime}
 							h
 						</Number>
 					</Card>

@@ -126,7 +126,7 @@ const Stats = ({history, location}) => {
 		[query],
 	);
 
-	const setProjectSelected = (selected, removeCustomer) => {
+	const setProjectSelected = useCallback((selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
 
 		if (selected) {
@@ -143,9 +143,9 @@ const Stats = ({history, location}) => {
 		}
 
 		history.push(`/app/stats?${newQuery.toString()}`);
-	};
+	}, [query, history]);
 
-	const setCustomerSelected = (selected) => {
+	const setCustomerSelected = useCallback((selected) => {
 		const newQuery = new URLSearchParams(query);
 
 		if (selected) {
@@ -162,9 +162,9 @@ const Stats = ({history, location}) => {
 		}
 
 		history.push(`/app/stats?${newQuery.toString()}`);
-	};
+	}, [query, history]);
 
-	const setTagSelected = (selected) => {
+	const setTagSelected = useCallback((selected) => {
 		const newQuery = new URLSearchParams(query);
 
 		if (selected) {
@@ -173,7 +173,7 @@ const Stats = ({history, location}) => {
 		}
 
 		history.push(`/app/stats?${newQuery.toString()}`);
-	};
+	}, [query, history]);
 
 	const filteredTasks = tasks.filter(
 		task => moment(task.createdAt).isSameOrAfter(

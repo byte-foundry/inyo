@@ -71,6 +71,7 @@ const LegendRow = styled('li')`
 		vertical-align: middle;
 		border-radius: 50%;
 		margin: 10px;
+		margin-left: 0;
 	}
 `;
 

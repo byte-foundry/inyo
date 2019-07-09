@@ -75,6 +75,6 @@ describe('Sign in', () => {
 
 		cy.contains('Se connecter').click();
 
-		cy.url().should('include', '/app/tasks');
+		cy.url().should('include', '/app/dashboard');
 	});
 });

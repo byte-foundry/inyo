@@ -111,11 +111,11 @@ function TasksList({location, history}) {
 
 	// the tasks list page doesn't exist anymore, redirecting to dashboard with the same filters
 	if (!projectId || linkedCustomerId) {
-		const redirectQuery = new URLSearchParams({
-			linkedCustomerId,
-			filter,
-			tags,
-		});
+		const redirectQuery = new URLSearchParams();
+
+		if (linkedCustomerId) redirectQuery.append('customerId', linkedCustomerId);
+		if (filter) redirectQuery.append('filter', filter);
+		if (tags.length) redirectQuery.append('tags', tags);
 
 		return (
 			<Redirect

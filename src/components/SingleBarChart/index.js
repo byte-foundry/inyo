@@ -48,17 +48,16 @@ const Bar = styled('div')`
 const Legend = styled('ul')`
 	list-style-type: none;
 	padding: 0;
-	display: flex;
-	justify-content: center;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
 		flex-direction: column;
 	}
 `;
 
 const LegendRow = styled('li')`
-	margin: 0 1rem;
-
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin: 0;
 	}

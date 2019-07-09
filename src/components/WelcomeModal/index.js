@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {withRouter} from 'react-router';
 import YouTube from 'react-youtube';
 
 import {ModalActions, ModalContainer, ModalElem} from '../../utils/content';
@@ -24,8 +23,8 @@ const YoutubeContainer = styled('div')`
 	padding-bottom: 56.25%;
 `;
 
-const HelpModal = ({history}) => (
-	<ModalContainer onDismiss={() => history.push('/app/tasks')}>
+const WelcomeModal = ({onDismiss}) => (
+	<ModalContainer onDismiss={onDismiss}>
 		<ModalElem>
 			<Heading>Bienvenue sur Inyo,</Heading>
 			<PA>
@@ -36,7 +35,7 @@ const HelpModal = ({history}) => (
 				<IframeYouTube videoId="qBJvclaZ-yQ" />
 			</YoutubeContainer>
 			<ModalActions>
-				<Button big primary onClick={() => history.push('/app/tasks')}>
+				<Button big primary onClick={onDismiss}>
 					J'ai compris!
 				</Button>
 			</ModalActions>
@@ -44,4 +43,4 @@ const HelpModal = ({history}) => (
 	</ModalContainer>
 );
 
-export default withRouter(HelpModal);
+export default WelcomeModal;

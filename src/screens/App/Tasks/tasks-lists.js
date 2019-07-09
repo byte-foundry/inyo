@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
-import React, {Suspense} from 'react';
+import React, {Suspense, useCallback} from 'react';
 import {useQuery} from 'react-apollo-hooks';
+import {Redirect} from 'react-router-dom';
 
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
@@ -11,10 +12,9 @@ import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import ProjectList from '../../../components/ProjectTasksList';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
-import TasksListComponent from '../../../components/TasksList';
 import {Loading} from '../../../utils/content';
 import {Container, Content, Main} from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {GET_PROJECT_DATA} from '../../../utils/queries';
 
 const TaskAndArianne = styled('div')`
 	display: flex;
@@ -22,25 +22,21 @@ const TaskAndArianne = styled('div')`
 	flex: auto;
 `;
 
-function TasksListContainer({
-	projectId, linkedCustomerId, filter, tags,
-}) {
-	const {data, error} = useQuery(GET_ALL_TASKS, {
-		variables: {
-			linkedCustomerId: linkedCustomerId || undefined,
-		},
+function TasksListContainer({projectId, filter, tags}) {
+	const {data, error} = useQuery(GET_PROJECT_DATA, {
+		variables: {projectId},
 		suspend: true,
 	});
 
 	if (error) throw error;
 
-	const ongoingProjectAndNoProjectTask = data.me.tasks.filter(
-		task => !task.section
-			|| task.section.project.status === 'ONGOING'
-			|| projectId,
+	const {sections} = data.project;
+	const allTasks = sections.reduce(
+		(arr, section) => arr.concat(section.items),
+		[],
 	);
 
-	const tasks = ongoingProjectAndNoProjectTask.filter(
+	const tasks = allTasks.filter(
 		task => (!filter || task.status === filter || filter === 'ALL')
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 	);
@@ -61,25 +57,12 @@ function TasksListContainer({
 		);
 	});
 
-	if (projectId) {
-		return (
-			<ProjectList
-				projectId={projectId}
-				items={tasks.filter(
-					item => item.section && item.section.project.id === projectId,
-				)}
-			/>
-		);
-	}
-
 	return (
-		<TasksListComponent
-			items={[...tasks]}
+		<ProjectList
 			projectId={projectId}
-			customerId={linkedCustomerId}
-			hasFilteredItems={
-				tasks.length !== ongoingProjectAndNoProjectTask.length
-			}
+			items={tasks.filter(
+				item => item.section && item.section.project.id === projectId,
+			)}
 		/>
 	);
 }
@@ -93,116 +76,90 @@ function TasksList({location, history}) {
 	const view = query.get('view');
 	const tags = query.getAll('tags');
 
-	const setProjectSelected = (selected, removeCustomer) => {
-		const newQuery = new URLSearchParams(query);
+	const setFilterSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
 
-		if (selected) {
-			const {value: selectedProjectId} = selected;
+			newQuery.delete('view');
 
-			newQuery.set('projectId', selectedProjectId);
-		}
-		else if (newQuery.has('projectId')) {
-			newQuery.delete('projectId');
-		}
+			if (selected) {
+				const {value: selectedFilterId} = selected;
 
-		if (removeCustomer) {
-			newQuery.delete('customerId');
-		}
+				newQuery.set('filter', selectedFilterId);
+			}
 
-		history.push(`/app/tasks?${newQuery.toString()}`);
-	};
+			history.push(`/app/tasks?${newQuery.toString()}`);
+		},
+		[query, history],
+	);
 
-	const setCustomerSelected = (selected) => {
-		const newQuery = new URLSearchParams(query);
+	const setTagSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
 
-		newQuery.delete('view');
+			newQuery.delete('view');
 
-		if (selected) {
-			const {value: selectedCustomerId} = selected;
+			if (selected) {
+				newQuery.delete('tags');
+				selected.forEach(tag => newQuery.append('tags', tag.value));
+			}
 
-			newQuery.set('customerId', selectedCustomerId);
-		}
-		else if (newQuery.has('customerId')) {
-			newQuery.delete('customerId');
-		}
+			history.push(`/app/tasks?${newQuery.toString()}`);
+		},
+		[query, history],
+	);
 
-		if (newQuery.has('projectId')) {
-			newQuery.delete('projectId');
-		}
+	// the tasks list page doesn't exist anymore, redirecting to dashboard with the same filters
+	if (!projectId || linkedCustomerId) {
+		const redirectQuery = new URLSearchParams({
+			linkedCustomerId,
+			filter,
+			tags,
+		});
 
-		history.push(`/app/tasks?${newQuery.toString()}`);
-	};
+		return (
+			<Redirect
+				to={{
+					pathname: '/app/dashboard',
+					search: `?${redirectQuery.toString()}`,
+				}}
+			/>
+		);
+	}
 
-	const setFilterSelected = (selected) => {
-		const newQuery = new URLSearchParams(query);
-
-		newQuery.delete('view');
-
-		if (selected) {
-			const {value: selectedFilterId} = selected;
-
-			newQuery.set('filter', selectedFilterId);
-		}
-
-		history.push(`/app/tasks?${newQuery.toString()}`);
-	};
-
-	const setTagSelected = (selected) => {
-		const newQuery = new URLSearchParams(query);
-
-		newQuery.delete('view');
-
-		if (selected) {
-			newQuery.delete('tags');
-			selected.forEach(tag => newQuery.append('tags', tag.value));
-		}
-
-		history.push(`/app/tasks?${newQuery.toString()}`);
-	};
-
-	const tasksView = (projectId && (view === 'tasks' || !view)) || !projectId;
+	const isTasksView = view === 'tasks' || !view;
 
 	return (
 		<Container>
 			<HelpButton />
 			<TaskAndArianne>
-				<ArianneThread
+				<ProjectHeader
 					projectId={projectId}
-					linkedCustomerId={linkedCustomerId}
-					selectCustomer={setCustomerSelected}
-					selectProjects={setProjectSelected}
-					selectFilter={setFilterSelected}
-					selectTag={setTagSelected}
-					filterId={filter}
-					tagsSelected={tags}
-					marginBottom
+					showProgress={isTasksView}
 				/>
-				{projectId && (
-					<ProjectHeader
-						projectId={projectId}
-						showProgress={tasksView}
-					/>
-				)}
 				<Main>
-					{projectId && <SidebarProjectInfos projectId={projectId} />}
+					<SidebarProjectInfos projectId={projectId} />
 					<Suspense fallback={<Loading />}>
-						{projectId && view === 'shared-notes' && (
+						{view === 'shared-notes' && (
 							<ProjectSharedNotes projectId={projectId} />
 						)}
-						{projectId && view === 'personal-notes' && (
+						{view === 'personal-notes' && (
 							<ProjectPersonalNotes projectId={projectId} />
 						)}
 					</Suspense>
-					{tasksView && (
+					{isTasksView && (
 						<Content>
-							<CreateTask
-								setProjectSelected={setProjectSelected}
-								currentProjectId={projectId}
+							<CreateTask currentProjectId={projectId} />
+							<ArianneThread
+								selectFilter={setFilterSelected}
+								selectTag={setTagSelected}
+								filterId={filter}
+								tagsSelected={tags}
+								marginTop
 							/>
 							<Suspense fallback={<Loading />}>
 								<TasksListContainer
 									projectId={projectId}
-									linkedCustomerId={linkedCustomerId}
 									filter={filter}
 									tags={tags}
 								/>

@@ -23,9 +23,6 @@ const withHeader = Component => (...args) => (
 						Dashboard
 					</TopBarMenuLink>
 				</Tooltip>
-				<Tooltip label="Toutes les tâches">
-					<TopBarMenuLink to="/app/tasks">Tâches</TopBarMenuLink>
-				</Tooltip>
 				<Tooltip label="Toutes les projets">
 					<TopBarMenuLink to="/app/projects">Projets</TopBarMenuLink>
 				</Tooltip>

@@ -5,14 +5,17 @@ import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
+import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
+import Tooltip from '../../../components/Tooltip';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {
+	A,
+	accentGrey,
 	Heading,
 	mediumGrey,
 	P,
-	primaryGrey,
 	SubHeading,
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
@@ -23,9 +26,7 @@ const Container = styled('div')`
 	min-height: 100vh;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		padding: 1rem;
-		max-width: 980px;
-		width: auto;
+		max-width: 100%;
 	}
 `;
 
@@ -33,17 +34,25 @@ const Cards = styled('div')`
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		grid-template-columns: 1fr;
+	}
 `;
 
 const Card = styled('div')`
 	background-color: ${mediumGrey};
-	padding: 20px;
+	border-radius: 4px;
+	padding: 1rem;
+	min-height: 100px;
+	position: relative;
 `;
 
 const Number = styled(P)`
 	font-size: 3rem;
 	font-weight: 500;
-	color: ${primaryGrey};
+	color: ${accentGrey};
 	margin: 0;
 `;
 
@@ -62,14 +71,19 @@ const MetaHeading = styled('div')`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+		align-items: start;
+	}
 `;
 
 const PageSubHeading = styled(SubHeading)`
-	margin-bottom: 20px;
+	margin: 2rem 0;
 `;
 
 const Section = styled('div')`
-	margin-top: 20px;
+	margin-bottom: 5rem;
 `;
 
 const Stats = ({history, location}) => {
@@ -287,6 +301,21 @@ const Stats = ({history, location}) => {
 								).length
 							}
 						</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<MaterialIcon
+								icon="add_circle_outline"
+								size="medium"
+								color="lightGrey"
+							/>
+						</SubHeading>
+						<P>
+							Vous souhaitez d'autres statistiques?
+							<A href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…">
+								Contactez-nous
+							</A>
+						</P>
 					</Card>
 				</Cards>
 			</Section>

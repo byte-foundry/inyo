@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {mediumGrey} from '../../utils/colors';
-import {TAG_COLOR_PALETTE} from '../../utils/constants';
+import {BREAKPOINTS, TAG_COLOR_PALETTE} from '../../utils/constants';
 import Tooltip from '../Tooltip';
 
 function hashCode(str) {
@@ -47,9 +47,22 @@ const Bar = styled('div')`
 
 const Legend = styled('ul')`
 	list-style-type: none;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
 `;
 
 const LegendRow = styled('li')`
+	margin: 0 1rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 0;
+	}
+
 	:before {
 		content: '';
 		background: ${props => props.color};

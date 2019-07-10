@@ -11,6 +11,7 @@ const CustomerList = React.lazy(() => import('./Customers'));
 const Dashboard = React.lazy(() => import('./Dashboard'));
 const Onboarding = React.lazy(() => import('./Onboarding'));
 const Projects = React.lazy(() => import('./Projects'));
+const Stats = React.lazy(() => import('./Stats'));
 const Tags = React.lazy(() => import('./Tags'));
 const Tasks = React.lazy(() => import('./Tasks'));
 
@@ -48,6 +49,7 @@ function App() {
 						path="/app/customers"
 						component={withHeader(CustomerList)}
 					/>
+					<Route path="/app/stats" component={withHeader(Stats)} />
 					<Route path="/app/onboarding" component={Onboarding} />
 					<Redirect to="/app/dashboard" />
 				</Switch>

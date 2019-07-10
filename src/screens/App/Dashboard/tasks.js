@@ -320,7 +320,14 @@ const DashboardTasks = ({location, history}) => {
 	);
 
 	const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
-		task => (!filter || task.status === filter || filter === 'ALL')
+		task => (!linkedCustomerId
+				|| ((task.linkedCustomer
+					&& task.linkedCustomer.id === linkedCustomerId)
+					|| (task.section
+						&& task.section.project.customer
+						&& task.section.project.customer.id
+							=== linkedCustomerId)))
+			&& (!filter || task.status === filter || filter === 'ALL')
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),

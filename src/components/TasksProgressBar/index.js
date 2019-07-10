@@ -80,10 +80,6 @@ const TasksProgressBarLabel = styled('div')`
 	color: ${primaryPurple};
 	text-align: right;
 	flex: 1 1 50px;
-
-	&::after {
-		content: '%';
-	}
 `;
 
 const ExtraDaysLabel = styled('span')`
@@ -94,7 +90,11 @@ const ExtraDaysLabel = styled('span')`
 	right: calc(100% - ${props => props.left}%);
 `;
 
-function TasksProgressBar({project, customerToken}) {
+function TasksProgressBar({
+	project,
+	customerToken,
+	showCompletionPercentage = true,
+}) {
 	const allItems = project.sections.reduce(
 		(total, section) => total.concat(section.items),
 		[],
@@ -156,11 +156,14 @@ function TasksProgressBar({project, customerToken}) {
 
 	return (
 		<TasksProgressBarWrapper>
-			<TasksProgressBarLabel>
-				{Math.round((tasksCompleted / tasksTotal) * 100)
-					? Math.round((tasksCompleted / tasksTotal) * 100)
-					: '0'}
-			</TasksProgressBarLabel>
+			{showCompletionPercentage && (
+				<TasksProgressBarLabel>
+					{Math.round((tasksCompleted / tasksTotal) * 100)
+						? Math.round((tasksCompleted / tasksTotal) * 100)
+						: '0'}
+					%
+				</TasksProgressBarLabel>
+			)}
 			<TasksProgressBarMain
 				completionRate={completionRate * 100}
 				timeItTook={timeItTook}

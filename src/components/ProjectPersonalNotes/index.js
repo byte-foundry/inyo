@@ -13,7 +13,7 @@ const ProjectPersonalNotes = ({projectId}) => {
 		variables: {id: projectId},
 		suspend: true,
 	});
-	const updateNotes = useMutation(UPDATE_PROJECT_PERSONAL_NOTES);
+	const [updateNotes] = useMutation(UPDATE_PROJECT_PERSONAL_NOTES);
 
 	if (error) throw error;
 

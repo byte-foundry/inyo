@@ -38,7 +38,7 @@ const Illus = styled('img')`
 `;
 
 const UserAssistantForm = ({defaultAssistantName, done}) => {
-	const updateUserSettings = useMutation(UPDATE_USER_SETTINGS);
+	const [updateUserSettings] = useMutation(UPDATE_USER_SETTINGS);
 
 	return (
 		<UserDataFormMain>

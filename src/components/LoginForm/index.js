@@ -29,7 +29,7 @@ const LoginButton = styled(Button)`
 `;
 
 function LoginForm({from = '/app', history, client}) {
-	const login = useMutation(LOGIN);
+	const [login] = useMutation(LOGIN);
 
 	return (
 		<LoginFormMain>

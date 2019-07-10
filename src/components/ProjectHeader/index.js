@@ -109,7 +109,7 @@ export default function ProjectHeader({projectId, customerToken}) {
 		variables: {projectId, token},
 		suspend: true,
 	});
-	const updateProject = useMutation(UPDATE_PROJECT);
+	const [updateProject] = useMutation(UPDATE_PROJECT);
 
 	if (error) throw error;
 

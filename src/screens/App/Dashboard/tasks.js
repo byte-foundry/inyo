@@ -88,7 +88,7 @@ const DashboardTasks = ({location, history}) => {
 		GET_USER_INFOS,
 		{suspend: true},
 	);
-	const focusTask = useMutation(FOCUS_TASK);
+	const [focusTask] = useMutation(FOCUS_TASK);
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {

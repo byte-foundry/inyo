@@ -177,9 +177,9 @@ function Projects({history}) {
 			me: {projects},
 		},
 	} = useQuery(GET_ALL_PROJECTS, {suspend: true});
-	const createProject = useMutation(CREATE_PROJECT);
-	const archiveProject = useMutation(ARCHIVE_PROJECT);
-	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
+	const [createProject] = useMutation(CREATE_PROJECT);
+	const [archiveProject] = useMutation(ARCHIVE_PROJECT);
+	const [unarchiveProject] = useMutation(UNARCHIVE_PROJECT);
 
 	const unarchivedProject = projects.filter(
 		project => project.status !== 'ARCHIVED' && project.status !== 'REMOVED',

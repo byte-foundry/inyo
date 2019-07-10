@@ -18,7 +18,7 @@ const ProjectSharedNotes = ({projectId, customerToken}) => {
 		variables: {id: projectId, token: customerToken},
 		suspend: true,
 	});
-	const updateNotes = useMutation(UPDATE_PROJECT_SHARED_NOTES);
+	const [updateNotes] = useMutation(UPDATE_PROJECT_SHARED_NOTES);
 
 	if (error) throw error;
 

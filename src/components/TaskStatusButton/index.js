@@ -43,8 +43,8 @@ const TaskStatusButton = ({
 	primary,
 }) => {
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
-	const finishItem = useMutation(FINISH_ITEM);
-	const unfinishItem = useMutation(UNFINISH_ITEM);
+	const [finishItem] = useMutation(FINISH_ITEM);
+	const [unfinishItem] = useMutation(UNFINISH_ITEM);
 	const setTimeItTookRef = useRef();
 
 	useOnClickOutside(setTimeItTookRef, () => {

@@ -40,7 +40,7 @@ const ButtonInRow = styled(Button)`
 `;
 
 function CreateTagForm({tags}) {
-	const createTag = useMutation(CREATE_TAG);
+	const [createTag] = useMutation(CREATE_TAG);
 
 	return (
 		<Formik

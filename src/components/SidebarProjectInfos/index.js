@@ -175,9 +175,9 @@ const SidebarProjectInfos = ({
 	const [askNotifyActivityConfirm, setAskNotifyActivityConfirm] = useState(
 		{},
 	);
-	const updateProject = useMutation(UPDATE_PROJECT);
-	const archiveProject = useMutation(ARCHIVE_PROJECT);
-	const unarchiveProject = useMutation(UNARCHIVE_PROJECT);
+	const [updateProject] = useMutation(UPDATE_PROJECT);
+	const [archiveProject] = useMutation(ARCHIVE_PROJECT);
+	const [unarchiveProject] = useMutation(UNARCHIVE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId},
 		suspend: true,

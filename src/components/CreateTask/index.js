@@ -20,9 +20,9 @@ const TaskInputContainer = styled('div')`
 const CreateTask = ({currentProjectId}) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
-	const createTask = useMutation(ADD_ITEM);
-	const addSection = useMutation(ADD_SECTION);
-	const updateProject = useMutation(UPDATE_PROJECT);
+	const [createTask] = useMutation(ADD_ITEM);
+	const [addSection] = useMutation(ADD_SECTION);
+	const [updateProject] = useMutation(UPDATE_PROJECT);
 	const [confirmModal, askConfirmationNotification] = useConfirmation();
 	const {data: currentProjectData, loading, error} = useQuery(
 		GET_PROJECT_DATA,

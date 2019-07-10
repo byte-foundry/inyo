@@ -125,7 +125,7 @@ const ScheduleNavInfo = styled('div')`
 const DraggableTaskCard = ({
 	id, index, scheduledFor, onMove, ...rest
 }) => {
-	const unfocusTask = useMutation(UNFOCUS_TASK);
+	const [unfocusTask] = useMutation(UNFOCUS_TASK);
 	const [, drag] = useDrag({
 		item: {id, type: DRAG_TYPES.TASK},
 		begin() {

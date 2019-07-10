@@ -79,8 +79,8 @@ const TaskCard = withRouter(
 	({
 		task, index, history, location, cardRef, isOver, ...rest
 	}) => {
-		const finishItem = useMutation(FINISH_ITEM);
-		const unfinishItem = useMutation(UNFINISH_ITEM);
+		const [finishItem] = useMutation(FINISH_ITEM);
+		const [unfinishItem] = useMutation(UNFINISH_ITEM);
 
 		return (
 			<TaskCardElem

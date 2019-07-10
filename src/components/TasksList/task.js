@@ -755,10 +755,10 @@ function Task({
 	baseUrl = 'tasks',
 	forwardedRef,
 }) {
-	const finishItem = useMutation(FINISH_ITEM);
-	const unfinishItem = useMutation(UNFINISH_ITEM);
-	const updateItem = useMutation(UPDATE_ITEM);
-	const focusTask = useMutation(FOCUS_TASK);
+	const [finishItem] = useMutation(FINISH_ITEM);
+	const [unfinishItem] = useMutation(UNFINISH_ITEM);
+	const [updateItem] = useMutation(UPDATE_ITEM);
+	const [focusTask] = useMutation(FOCUS_TASK);
 
 	const [setTimeItTook, setSetTimeItTook] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);

@@ -32,8 +32,8 @@ const CGU = styled('label')`
 
 const SignupForm = ({from, history, location}) => {
 	const client = useApolloClient();
-	const signup = useMutation(SIGNUP);
-	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
+	const [signup] = useMutation(SIGNUP);
+	const [checkEmailAvailability] = useMutation(CHECK_UNIQUE_EMAIL);
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 500);
 

@@ -99,7 +99,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 	const currentDate = new Date().toJSON().split('T')[0];
 	const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
 	const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
-	const updateUser = useMutation(UPDATE_USER_CONSTANTS);
+	const [updateUser] = useMutation(UPDATE_USER_CONSTANTS);
 
 	const startHourInitial
 		= startWorkAtDate.toString() === 'Invalid Date'

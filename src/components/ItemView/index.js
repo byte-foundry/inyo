@@ -293,14 +293,14 @@ const Item = ({
 		error: errorUser,
 	} = useQuery(GET_USER_INFOS);
 
-	const updateItem = useMutation(UPDATE_ITEM);
-	const focusTask = useMutation(FOCUS_TASK);
-	const unfocusTask = useMutation(UNFOCUS_TASK);
-	const createTag = useMutation(CREATE_TAG);
-	const removeFile = useMutation(REMOVE_ATTACHMENTS, {
+	const [updateItem] = useMutation(UPDATE_ITEM);
+	const [focusTask] = useMutation(FOCUS_TASK);
+	const [unfocusTask] = useMutation(UNFOCUS_TASK);
+	const [createTag] = useMutation(CREATE_TAG);
+	const [removeFile] = useMutation(REMOVE_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
-	const deleteItem = useMutation(REMOVE_ITEM, {
+	const [deleteItem] = useMutation(REMOVE_ITEM, {
 		variables: {
 			itemId: id,
 		},

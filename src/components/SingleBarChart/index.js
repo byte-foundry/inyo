@@ -49,7 +49,7 @@ const Legend = styled('ul')`
 	list-style-type: none;
 	padding: 0;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(3, auto);
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: flex;

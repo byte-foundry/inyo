@@ -102,7 +102,7 @@ export default function ({
 	withButton,
 	getValue = {},
 }) {
-	const [isHours, setIsHours] = useState(false);
+	const [isHours, setIsHours] = useState(true);
 	const inputRef = innerRef || useRef();
 	const containerRef = useRef(null);
 
@@ -127,7 +127,7 @@ export default function ({
 	return (
 		<Formik
 			initialValues={{
-				unit,
+				unit: isHours ? unit * 8 : unit,
 			}}
 			validationSchema={Yup.object().shape({
 				unit: Yup.number().required(),

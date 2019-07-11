@@ -100,3 +100,15 @@ export const formatName = normalizeFalsyParams(
 export const formatFullName = normalizeFalsyParams(
 	(title = '', firstName = '', lastName = '') => `${formatTitle(title)} ${formatName(firstName, lastName)}`.trim(),
 );
+
+export const formatCollabStatus = (status) => {
+	if (status === 'REJECTED') {
+		return 'Rejeté';
+	}
+
+	if (status === 'PENDING') {
+		return 'En attente';
+	}
+
+	return '';
+};

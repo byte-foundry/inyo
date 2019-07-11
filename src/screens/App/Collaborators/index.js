@@ -5,7 +5,8 @@ import {useQuery} from 'react-apollo-hooks';
 import AddCollaboratorModal from '../../../components/AddCollaboratorModal';
 import ConfirmModal from '../../../components/ConfirmModal';
 import IconButton from '../../../components/IconButton';
-import {BREAKPOINTS} from '../../../utils/constants';
+import {BREAKPOINTS, collabStatuses} from '../../../utils/constants';
+import {formatCollabStatus, formatFullName} from '../../../utils/functions';
 import Search from '../../../utils/icons/search.svg';
 import {
 	A,
@@ -71,6 +72,7 @@ const Cell = styled('td')`
 const ActionCell = styled(Cell)`
 	display: flex;
 	align-items: center;
+	opacity: ${props => (props.unhidden ? 1 : 0)};
 `;
 
 const Row = styled('tr')`
@@ -88,10 +90,6 @@ const Row = styled('tr')`
 				color: ${primaryPurple};
 			}
 		}
-	}
-
-	${ActionCell} {
-		opacity: 0;
 	}
 
 	:hover {
@@ -176,6 +174,19 @@ const Collaborators = () => {
 			|| includesFilter(email),
 	);
 
+	const filteredCollaboratorRequests = data.me.collaboratorRequests.filter(
+		({status, requestee: {firstName, lastName, email}}) => (includesFilter(firstName || '')
+				|| includesFilter(lastName || '')
+				|| includesFilter(email))
+			&& status !== collabStatuses.ACCEPTED,
+	);
+
+	const filteredCollaborationRequests = data.me.collaborationRequests.filter(
+		({requester: {firstName, lastName, email}}) => includesFilter(firstName || '')
+			|| includesFilter(lastName || '')
+			|| includesFilter(email),
+	);
+
 	return (
 		<Main>
 			<Container>
@@ -256,7 +267,7 @@ const Collaborators = () => {
 						))}
 					</tbody>
 				</Table>
-				<SubHeading>Requête envoyées</SubHeading>
+				<SubHeading>Requête reçus</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>
@@ -266,11 +277,63 @@ const Collaborators = () => {
 						</RowHeader>
 					</thead>
 					<tbody>
-						<Row key="a" tabIndex="0" role="button">
-							<Cell>Yoyo</Cell>
-							<Cell>allo@ouais.fr</Cell>
-							<Cell>Non</Cell>
-						</Row>
+						{filteredCollaborationRequests.map(
+							({
+								status,
+								requester: {firstName, lastName, email},
+							}) => (
+								<Row key="a" tabIndex="0" role="button">
+									<Cell>
+										{formatFullName(
+											undefined,
+											firstName,
+											lastName,
+										)}
+									</Cell>
+									<Cell>{email}</Cell>
+									<ActionCell unhidden>
+										{status !== collabStatuses.REJECTED ? (
+											<>
+												<Button>Accepter</Button>
+												<Button red>Rejeter</Button>
+											</>
+										) : (
+											formatCollabStatus(status)
+										)}
+									</ActionCell>
+								</Row>
+							),
+						)}
+					</tbody>
+				</Table>
+				<SubHeading>Requête envoyées</SubHeading>
+				<Table>
+					<thead>
+						<RowHeader>
+							<HeaderCell>Prénom et nom</HeaderCell>
+							<HeaderCell>Email</HeaderCell>
+							<HeaderCell>Statut</HeaderCell>
+						</RowHeader>
+					</thead>
+					<tbody>
+						{filteredCollaboratorRequests.map(
+							({
+								status,
+								requestee: {firstName, lastName, email},
+							}) => (
+								<Row key="a" tabIndex="0" role="button">
+									<Cell>
+										{formatFullName(
+											undefined,
+											firstName,
+											lastName,
+										)}
+									</Cell>
+									<Cell>{email}</Cell>
+									<Cell>{formatCollabStatus(status)}</Cell>
+								</Row>
+							),
+						)}
 					</tbody>
 				</Table>
 

@@ -56,18 +56,22 @@ export const GET_USER_COLLABORATORS = gql`
 			collaboratorRequests {
 				id
 				requestee {
+					id
 					firstName
 					lastName
 					email
 				}
+				status
 			}
 			collaborationRequests {
 				id
 				requester {
+					id
 					firstName
 					lastName
 					email
 				}
+				status
 			}
 		}
 	}

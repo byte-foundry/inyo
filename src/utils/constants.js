@@ -92,6 +92,12 @@ export const itemStatuses = {
 	PENDING: 'PENDING',
 };
 
+export const collabStatuses = {
+	PENDING: 'PENDING',
+	ACCEPTED: 'ACCEPTED',
+	REJECTED: 'REJECTED',
+};
+
 export const BREAKPOINTS = [420];
 
 export const CUSTOMER_TASK_TYPES = [

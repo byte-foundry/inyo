@@ -326,7 +326,7 @@ function PlaceholderDropTask({sectionId, position}) {
 const DraggableTask = ({
 	task, position, sections, setIsDragging, ...rest
 }) => {
-	const updateTask = useMutation(UPDATE_ITEM);
+	const [updateTask] = useMutation(UPDATE_ITEM);
 	const [, drag] = useDrag({
 		item: {
 			id: task.id,
@@ -535,7 +535,7 @@ const DraggableTask = ({
 const DraggableSection = ({
 	children, section, position, sections,
 }) => {
-	const updateSection = useMutation(UPDATE_SECTION);
+	const [updateSection] = useMutation(UPDATE_SECTION);
 	const [, drag] = useDrag({
 		item: {
 			id: section.id,
@@ -671,21 +671,21 @@ function ProjectTasksList({
 		loading: loadingUserPrefs,
 		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
-	const focusTask = useMutation(FOCUS_TASK);
+	const [focusTask] = useMutation(FOCUS_TASK);
 	const [isDragging, setIsDragging] = useState(false);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
 		suspend: true,
 	});
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
-	const removeSection = useMutation(REMOVE_SECTION, {
+	const [removeSection] = useMutation(REMOVE_SECTION, {
 		optimisticResponse: {
 			removeSection: {
 				id: removeSectionModalOpen.id,
 			},
 		},
 	});
-	const addSection = useMutation(ADD_SECTION, {
+	const [addSection] = useMutation(ADD_SECTION, {
 		update: (cache, {data: {addSection: addedSection}}) => {
 			const data = cache.readQuery({
 				query: GET_ALL_TASKS,
@@ -718,7 +718,7 @@ function ProjectTasksList({
 			});
 		},
 	});
-	const updateSection = useMutation(UPDATE_SECTION);
+	const [updateSection] = useMutation(UPDATE_SECTION);
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {

@@ -276,7 +276,7 @@ function ArianneThread({
 			me: {tags},
 		},
 		errors: errorsTags,
-	} = useQuery(GET_USER_TAGS, {suspend: false});
+	} = useQuery(GET_USER_TAGS, {suspend: true});
 
 	const projects = projectsUnfiltered.filter(
 		project => (!linkedCustomerId
@@ -315,13 +315,15 @@ function ArianneThread({
 			>
 				Tous les projets
 			</ArianneElem>
-			<ArianneElem
-				id="filter"
-				list={filters}
-				onChange={selectFilter}
-				selectedId={filterId}
-				placeholder={'Toutes les tâches'}
-			/>
+			{selectFilter && (
+				<ArianneElem
+					id="filter"
+					list={filters}
+					onChange={selectFilter}
+					selectedId={filterId}
+					placeholder={'Toutes les tâches'}
+				/>
+			)}
 			<ArianneElemCreatable
 				id="tags"
 				list={tags}

@@ -20,8 +20,8 @@ const ReminderTestEmailButton = ({
 	reminder, taskId, preview, ...props
 }) => {
 	const [status, setStatus] = useState();
-	const sendReminderTestEmail = useMutation(SEND_REMINDER_TEST_EMAIL);
-	const sendReminderPreviewTestEmail = useMutation(
+	const [sendReminderTestEmail] = useMutation(SEND_REMINDER_TEST_EMAIL);
+	const [sendReminderPreviewTestEmail] = useMutation(
 		SEND_REMINDER_PREVIEW_TEST_EMAIL,
 	);
 

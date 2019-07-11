@@ -1,5 +1,5 @@
 export default {
-	getAllProjectsQuery: ({mutation, query}) => {
+	getAllProjects: ({mutation, query}) => {
 		const cachedProjects = [...query.result.me.projects];
 		const addedProject = mutation.result.data.createProject;
 

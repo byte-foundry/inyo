@@ -144,7 +144,7 @@ const Forms = styled('div')`
 
 const Customers = () => {
 	const {data, error} = useQuery(GET_USER_CUSTOMERS, {suspend: true});
-	const removeCustomer = useMutation(REMOVE_CUSTOMER);
+	const [removeCustomer] = useMutation(REMOVE_CUSTOMER);
 
 	if (error) throw error;
 

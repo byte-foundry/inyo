@@ -13,7 +13,7 @@ const WrapTasks = styled('div')`
 `;
 
 const RescheduleModal = ({tasks}) => {
-	const unfocusTask = useMutation(UNFOCUS_TASK);
+	const [unfocusTask] = useMutation(UNFOCUS_TASK);
 
 	return (
 		<ModalContainer noClose>

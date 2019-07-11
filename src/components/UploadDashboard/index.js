@@ -39,7 +39,7 @@ class GraphQlUpload extends Plugin {
 }
 
 function UploadDashboard({customerToken, taskId}) {
-	const uploadAttachements = useMutation(UPLOAD_ATTACHMENTS, {
+	const [uploadAttachements] = useMutation(UPLOAD_ATTACHMENTS, {
 		refetchQueries: ['getAllTasks'],
 	});
 	const [modalOpen, setModalOpen] = useState(false);

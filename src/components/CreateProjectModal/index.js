@@ -18,7 +18,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 	const [addCustomer, setAddCustomer] = useState(false);
 	const [customerName, setCustomerName] = useState('');
 	const [addDeadline, setAddDeadline] = useState(false);
-	const createProject = useMutation(CREATE_PROJECT);
+	const [createProject] = useMutation(CREATE_PROJECT);
 	const client = useApolloClient();
 
 	const {loading: loadingProjects, data: dataProjects} = useQuery(

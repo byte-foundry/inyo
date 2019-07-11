@@ -83,13 +83,12 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = new URLSearchParams(prevSearch || location.search);
 
-	const {data, loading, error} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {
-		data: userPrefsData,
-		loading: loadingUserPrefs,
-		error: errorUserPrefs,
-	} = useQuery(GET_USER_INFOS, {suspend: true});
-	const focusTask = useMutation(FOCUS_TASK);
+	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {data: userPrefsData, error: errorUserPrefs} = useQuery(
+		GET_USER_INFOS,
+		{suspend: true},
+	);
+	const [focusTask] = useMutation(FOCUS_TASK);
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -136,7 +135,6 @@ const DashboardTasks = ({location, history}) => {
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
 
-	if (loading) return <Loading />;
 	if (error) throw error;
 	if (errorUserPrefs) throw errorUserPrefs;
 
@@ -320,7 +318,14 @@ const DashboardTasks = ({location, history}) => {
 	);
 
 	const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
-		task => (!filter || task.status === filter || filter === 'ALL')
+		task => (!linkedCustomerId
+				|| ((task.linkedCustomer
+					&& task.linkedCustomer.id === linkedCustomerId)
+					|| (task.section
+						&& task.section.project.customer
+						&& task.section.project.customer.id
+							=== linkedCustomerId)))
+			&& (!filter || task.status === filter || filter === 'ALL')
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
 			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
@@ -328,16 +333,12 @@ const DashboardTasks = ({location, history}) => {
 
 	return (
 		<>
-			{loadingUserPrefs ? (
-				<Loading />
-			) : (
-				<Schedule
-					days={scheduledTasksPerDay}
-					workingDays={userPrefsData.me.workingDays}
-					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-					onMoveTask={onMoveTask}
-				/>
-			)}
+			<Schedule
+				days={scheduledTasksPerDay}
+				workingDays={userPrefsData.me.workingDays}
+				fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+				onMoveTask={onMoveTask}
+			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal
 					tasks={tasksToReschedule}
@@ -418,18 +419,14 @@ const DashboardTasks = ({location, history}) => {
 					</Modal>
 				)}
 			/>
-			{loadingUserPrefs ? (
-				<Loading />
-			) : (
-				<Portal>
-					<LeftBarSchedule
-						isDragging={isDragging}
-						days={scheduledTasksPerDay}
-						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-						onMoveTask={onMoveTask}
-					/>
-				</Portal>
-			)}
+			<Portal>
+				<LeftBarSchedule
+					isDragging={isDragging}
+					days={scheduledTasksPerDay}
+					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					onMoveTask={onMoveTask}
+				/>
+			</Portal>
 		</>
 	);
 };

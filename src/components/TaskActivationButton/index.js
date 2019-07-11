@@ -11,7 +11,7 @@ const TaskActivationButton = ({
 	disabled,
 	onCommit,
 }) => {
-	const unfocusItem = useMutation(UNFOCUS_TASK);
+	const [unfocusItem] = useMutation(UNFOCUS_TASK);
 
 	return (
 		<BistableButton

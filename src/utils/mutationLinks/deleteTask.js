@@ -22,6 +22,8 @@ export default {
 		);
 
 		cachedItems.splice(removedItemIndex, 1);
+		// remove it even from the previous object to avoid getting it in the way
+		query.result.me.tasks.splice(removedItemIndex, 1);
 
 		return {
 			...query.result,

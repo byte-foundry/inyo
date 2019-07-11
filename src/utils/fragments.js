@@ -73,6 +73,7 @@ export const ITEM_FRAGMENT = gql`
 		name
 		position
 		status
+		createdAt
 		type
 		unit
 		timeItTook

@@ -62,8 +62,8 @@ const Illus = styled('img')`
 
 const UserDataForm = ({done, ...componentProps}) => {
 	const {firstName, lastName, email} = componentProps.data;
-	const updateUser = useMutation(UPDATE_USER);
-	const checkEmailAvailability = useMutation(CHECK_UNIQUE_EMAIL);
+	const [updateUser] = useMutation(UPDATE_USER);
+	const [checkEmailAvailability] = useMutation(CHECK_UNIQUE_EMAIL);
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 300);
 

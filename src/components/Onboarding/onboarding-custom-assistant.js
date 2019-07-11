@@ -53,7 +53,7 @@ const OnboardingCustomAssistant = ({
 	getPreviousStep,
 	isFirstStep,
 }) => {
-	const updateUserSettings = useMutation(UPDATE_USER_SETTINGS);
+	const [updateUserSettings] = useMutation(UPDATE_USER_SETTINGS);
 	const [assistantName, setAssistantName] = useState('Edwige');
 
 	const hasValidName = !!assistantName.trim();

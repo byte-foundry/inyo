@@ -6,8 +6,8 @@ import {ARCHIVE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {Button, Heading, P} from '../../utils/new/design-system';
 
 function RemoveProject({closeModal, projectId, onRemove = () => {}}) {
-	const removeProject = useMutation(REMOVE_PROJECT);
-	const archiveProject = useMutation(ARCHIVE_PROJECT);
+	const [removeProject] = useMutation(REMOVE_PROJECT);
+	const [archiveProject] = useMutation(ARCHIVE_PROJECT);
 
 	return (
 		<ModalContainer onDismiss={() => closeModal()}>

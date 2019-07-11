@@ -78,8 +78,8 @@ const CustomerModal = ({
 		skip: noSelect,
 		suspend: true,
 	});
-	const updateCustomer = useMutation(UPDATE_CUSTOMER);
-	const createCustomer = useMutation(CREATE_CUSTOMER);
+	const [updateCustomer] = useMutation(UPDATE_CUSTOMER);
+	const [createCustomer] = useMutation(CREATE_CUSTOMER);
 	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
 	const [editorState, setEditorState] = useState(
 		createEditorState(

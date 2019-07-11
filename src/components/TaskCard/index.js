@@ -8,12 +8,15 @@ import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
 	DragSeparator,
+	lightGrey,
+	mediumGrey,
 	primaryBlack,
 	primaryGrey,
 	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
+import Tooltip from '../Tooltip';
 
 const Button = styled(IconButton)``;
 
@@ -27,17 +30,19 @@ const CardTitle = styled('span')`
 `;
 
 const CardSubTitle = styled('span')`
-	color: ${primaryGrey};
+	color: ${accentGrey};
+	margin-top: 2px;
 `;
 
 const TaskCardElem = styled('div')`
 	background: ${primaryWhite};
-	border: 1px solid ${accentGrey};
+	border: 1px solid ${mediumGrey};
+	box-shadow: 3px 3px 6px ${mediumGrey};
 	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
 	border-radius: 3px;
-	padding: 5px;
+	padding: 8px;
 	margin-bottom: 5px;
-	font-size: 0.75rem;
+	font-size: 0.8rem;
 	line-height: 1.4;
 	display: grid;
 	grid-template-columns: 1fr 1.2rem;
@@ -54,7 +59,7 @@ const TaskCardElem = styled('div')`
 	}
 
 	&:hover {
-		box-shadow: 0 0 5px ${accentGrey};
+		box-shadow: 0 0 5px ${primaryGrey};
 		transition: all 300ms ease;
 
 		${Button} {
@@ -66,6 +71,12 @@ const TaskCardElem = styled('div')`
 
 	${props => props.done
 		&& `
+		opacity: 0.5;
+
+		&:hover {
+			opacity: 1;
+		}
+
 		${Button} {
 			margin-right: 0;
 			opacity: 1;
@@ -75,12 +86,25 @@ const TaskCardElem = styled('div')`
 	`}
 `;
 
+const TagContainer = styled('div')`
+	margin-bottom: 5px;
+	display: flex;
+`;
+
+const Tag = styled('span')`
+	background-color: ${props => props.bg};
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	margin-right: 3px;
+`;
+
 const TaskCard = withRouter(
 	({
 		task, index, history, location, cardRef, isOver, ...rest
 	}) => {
-		const finishItem = useMutation(FINISH_ITEM);
-		const unfinishItem = useMutation(UNFINISH_ITEM);
+		const [finishItem] = useMutation(FINISH_ITEM);
+		const [unfinishItem] = useMutation(UNFINISH_ITEM);
 
 		return (
 			<TaskCardElem
@@ -116,6 +140,15 @@ const TaskCard = withRouter(
 							}
 						}}
 					/>
+				)}
+				{!!task.tags.length && (
+					<TagContainer>
+						{task.tags.map(tag => (
+							<Tooltip label={tag.name}>
+								<Tag bg={tag.colorBg} />
+							</Tooltip>
+						))}
+					</TagContainer>
 				)}
 				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
 					{task.name}

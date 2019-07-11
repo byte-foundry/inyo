@@ -21,12 +21,15 @@ const DashboardAside = styled(Aside)`
 	flex: 0 0 320px;
 	display: flex;
 
+	margin-right: 1rem;
+
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
 		flex: 1;
 		max-width: none;
 		width: 100%;
 		margin-bottom: 1rem;
+		margin-right: 0;
 	}
 
 	img {
@@ -75,14 +78,12 @@ const NoReminders = styled('div')`
 
 const SidebarDashboardInfos = () => {
 	const {data, loading} = useQuery(GET_REMINDERS, {suspend: false});
-	const {
-		loading: loadingUser,
-		data: {me},
-	} = useQuery(GET_USER_INFOS);
+	const {loading: loadingUser, data: userData} = useQuery(GET_USER_INFOS);
 
 	const reminders
-		= data.reminders
+		= data
 		&& data.reminders.filter(reminder => reminder.status === 'PENDING');
+	const {me} = userData || {};
 
 	return (
 		<DashboardAside>

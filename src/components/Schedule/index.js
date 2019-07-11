@@ -31,8 +31,8 @@ const Week = styled('div')`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	border: 1px solid ${mediumGrey};
 	border-radius: 8px;
+	background-color: ${lightGrey};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-flow: column-reverse;
@@ -125,7 +125,7 @@ const ScheduleNavInfo = styled('div')`
 const DraggableTaskCard = ({
 	id, index, scheduledFor, onMove, ...rest
 }) => {
-	const unfocusTask = useMutation(UNFOCUS_TASK);
+	const [unfocusTask] = useMutation(UNFOCUS_TASK);
 	const [, drag] = useDrag({
 		item: {id, type: DRAG_TYPES.TASK},
 		begin() {

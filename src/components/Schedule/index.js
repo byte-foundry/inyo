@@ -31,8 +31,8 @@ const Week = styled('div')`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	border: 1px solid ${mediumGrey};
 	border-radius: 8px;
+	background-color: ${lightGrey};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-flow: column-reverse;

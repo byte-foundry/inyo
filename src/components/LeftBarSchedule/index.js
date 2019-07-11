@@ -7,6 +7,8 @@ import {animated, useSpring} from 'react-spring';
 import {Loading} from '../../utils/content';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {
+	accentGrey,
+	lightGrey,
 	mediumGrey,
 	primaryPurple,
 	primaryWhite,
@@ -24,18 +26,19 @@ const LeftBarContainer = styled('div')`
 `;
 
 const DayTaskNumber = styled('div')`
-	width: 30px;
-	background: ${primaryPurple};
-	color: ${primaryWhite};
+	width: 26px;
+	color: ${accentGrey};
+	background-color: ${primaryWhite};
+	border: 2px dashed ${mediumGrey};
 	font-weight: 600;
-	height: 30px;
-	border-radius: 15px;
+	height: 26px;
+	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: absolute;
-	bottom: 3px;
-	font-size: 17px;
+	bottom: 2px;
+	font-size: 15px;
 `;
 
 const DayElem = styled('div')`
@@ -73,7 +76,7 @@ const LeftBarElem = styled(animated.div)`
 	width: ${props => (props.open ? '70px' : '0px')};
 	transition: width 0.2s ease-out;
 	height: 100%;
-	background: ${primaryPurple};
+	background: ${lightGrey};
 	overflow: hidden;
 `;
 
@@ -155,7 +158,7 @@ function LeftBarSchedule({
 
 	const {workingDays} = userPrefsData.me;
 	const startDate = moment();
-	const endDate = moment(startDate).add(10, 'days');
+	const endDate = moment(startDate).add(12, 'days');
 
 	const weekdays = extractScheduleFromWorkingDays(
 		workingDays,

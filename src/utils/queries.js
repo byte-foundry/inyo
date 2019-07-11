@@ -43,6 +43,36 @@ export const GET_USER_CUSTOMERS = gql`
 	}
 `;
 
+export const GET_USER_COLLABORATORS = gql`
+	query getUserCustomers {
+		me {
+			id
+			collaborators {
+				id
+				firstName
+				lastName
+				email
+			}
+			collaboratorRequests {
+				id
+				requestee {
+					firstName
+					lastName
+					email
+				}
+			}
+			collaborationRequests {
+				id
+				requester {
+					firstName
+					lastName
+					email
+				}
+			}
+		}
+	}
+`;
+
 export const GET_USER_INFOS = gql`
 	${TAG_FRAGMENT}
 

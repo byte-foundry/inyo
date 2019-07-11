@@ -905,3 +905,11 @@ export const REMOVE_TAG = gql`
 		}
 	}
 `;
+
+export const REQUEST_COLLAB = gql`
+	mutation requestCollab($userEmail: String!, $projectId: ID) {
+		requestCollab(userEmail: $userEmail, projectId: $projectId) {
+			id
+		}
+	}
+`;

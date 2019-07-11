@@ -1,14 +1,12 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
+import {useQuery} from 'react-apollo-hooks';
 
+import AddCollaboratorModal from '../../../components/AddCollaboratorModal';
 import ConfirmModal from '../../../components/ConfirmModal';
-import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
-import HelpButton from '../../../components/HelpButton';
 import IconButton from '../../../components/IconButton';
 import {BREAKPOINTS} from '../../../utils/constants';
 import Search from '../../../utils/icons/search.svg';
-import {REMOVE_CUSTOMER} from '../../../utils/mutations';
 import {
 	A,
 	accentGrey,
@@ -22,7 +20,7 @@ import {
 	primaryBlack,
 	primaryPurple,
 } from '../../../utils/new/design-system';
-import {GET_USER_CUSTOMERS} from '../../../utils/queries';
+import {GET_USER_COLLABORATORS} from '../../../utils/queries';
 
 const Main = styled('div')`
 	min-height: 100vh;
@@ -145,17 +143,23 @@ const Forms = styled('div')`
 	}
 `;
 
-const Customers = () => {
-	const {data, error} = useQuery(GET_USER_CUSTOMERS, {suspend: true});
-	const [removeCustomer] = useMutation(REMOVE_CUSTOMER);
+const SubHeading = styled('h2')`
+	color: ${accentGrey};
+`;
+
+const Collaborators = () => {
+	const {data, error} = useQuery(GET_USER_COLLABORATORS, {suspend: true});
 
 	if (error) throw error;
 
 	const [filter, setFilter] = useState('');
-	const [isEditingCustomer, setEditCustomer] = useState(false);
-	const [customerToEdit, setCustomerToEdit] = useState(null);
-	const [confirmRemoveCustomer, setConfirmRemoveCustomer] = useState({});
-	const [customerToBeRemoved, setCustomerToBeRemoved] = useState(null);
+	const [addCollaborator, setAddCollaborator] = useState(false);
+	const [confirmRemoveCollaborator, setConfirmRemoveCollaborator] = useState(
+		{},
+	);
+	const [collaboratorToBeRemoved, setCollaboratorToBeRemoved] = useState(
+		null,
+	);
 
 	const sanitize = str => str
 		.toLowerCase()
@@ -163,7 +167,7 @@ const Customers = () => {
 		.replace(/[\u0300-\u036f]/g, '');
 	const includesFilter = str => sanitize(str).includes(sanitize(filter));
 
-	const filteredCustomers = data.me.customers.filter(
+	const filteredCollaborators = data.me.collaborators.filter(
 		({
 			name, firstName, lastName, email,
 		}) => includesFilter(name)
@@ -174,13 +178,10 @@ const Customers = () => {
 
 	return (
 		<Main>
-			<HelpButton />
 			<Container>
 				<HeadingRow>
-					<Heading>Clients</Heading>
-					<HeadingLink to="/app/collaborators">
-						Collaborateurs
-					</HeadingLink>
+					<HeadingLink to="/app/customers">Clients</HeadingLink>
+					<Heading>Collaborateurs</Heading>
 				</HeadingRow>
 				<Forms>
 					<FilterInput
@@ -193,39 +194,33 @@ const Customers = () => {
 					/>
 					<Actions>
 						<A target="_blank" href="https://inyo.pro">
-							Présenter Inyo à un client
+							Présenter Inyo à un collaborateur
 						</A>
-						<Button big onClick={() => setEditCustomer(true)}>
-							Créer un nouveau client
+						<Button big onClick={() => setAddCollaborator(true)}>
+							Inviter un collaborateur
 						</Button>
 					</Actions>
 				</Forms>
+				<SubHeading>Collaborateurs</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>
-							<HeaderCell>Raison sociale</HeaderCell>
-							<HeaderCell>Référent·e</HeaderCell>
+							<HeaderCell>Prénom et nom</HeaderCell>
 							<HeaderCell>Email</HeaderCell>
-							<HeaderCell>Téléphone</HeaderCell>
 						</RowHeader>
 					</thead>
 					<tbody>
-						{filteredCustomers.map(customer => (
+						{filteredCollaborators.map(collaborator => (
 							<Row
-								key={customer.id}
+								key={collaborator.id}
 								tabIndex="0"
 								role="button"
-								onClick={() => {
-									setCustomerToEdit(customer);
-									setEditCustomer(true);
-								}}
 							>
-								<Cell>{customer.name}</Cell>
 								<Cell>
-									{customer.firstName} {customer.lastName}
+									{collaborator.firstName}{' '}
+									{collaborator.lastName}
 								</Cell>
-								<Cell>{customer.email}</Cell>
-								<Cell>{customer.phone}</Cell>
+								<Cell>{collaborator.email}</Cell>
 								<ActionCell>
 									<IconButton icon="edit" size="tiny" />
 									<IconButton
@@ -236,23 +231,23 @@ const Customers = () => {
 										onClick={async (e) => {
 											e.stopPropagation();
 
-											setCustomerToBeRemoved(customer);
-
-											const confirmed = await new Promise(
-												resolve => setConfirmRemoveCustomer({
-													resolve,
-												}),
+											setCollaboratorToBeRemoved(
+												collaborator,
 											);
 
-											setConfirmRemoveCustomer({});
-											setCustomerToBeRemoved(null);
+											const confirmed = await new Promise(
+												resolve => setConfirmRemoveCollaborator(
+													{
+														resolve,
+													},
+												),
+											);
+
+											setConfirmRemoveCollaborator({});
+											setCollaboratorToBeRemoved(null);
 
 											if (confirmed) {
-												removeCustomer({
-													variables: {
-														id: customer.id,
-													},
-												});
+												// removeCollaborator
 											}
 										}}
 									/>
@@ -261,32 +256,42 @@ const Customers = () => {
 						))}
 					</tbody>
 				</Table>
+				<SubHeading>Requête envoyées</SubHeading>
+				<Table>
+					<thead>
+						<RowHeader>
+							<HeaderCell>Prénom et nom</HeaderCell>
+							<HeaderCell>Email</HeaderCell>
+							<HeaderCell>Status</HeaderCell>
+						</RowHeader>
+					</thead>
+					<tbody>
+						<Row key="a" tabIndex="0" role="button">
+							<Cell>Yoyo</Cell>
+							<Cell>allo@ouais.fr</Cell>
+							<Cell>Non</Cell>
+						</Row>
+					</tbody>
+				</Table>
 
-				{isEditingCustomer && (
-					<CustomerModalAndMail
-						noSelect
-						customer={customerToEdit}
-						onValidate={async () => {
-							setCustomerToEdit(null);
-						}}
-						onDismiss={() => {
-							setCustomerToEdit(null);
-							setEditCustomer(false);
-						}}
+				{addCollaborator && (
+					<AddCollaboratorModal
+						onDismiss={() => setAddCollaborator(false)}
 					/>
 				)}
 
-				{confirmRemoveCustomer.resolve && (
+				{confirmRemoveCollaborator.resolve && (
 					<ConfirmModal
-						onConfirm={confirmed => confirmRemoveCustomer.resolve(confirmed)
+						onConfirm={confirmed => confirmRemoveCollaborator.resolve(confirmed)
 						}
-						onDismiss={() => confirmRemoveCustomer.resolve(false)}
+						onDismiss={() => confirmRemoveCollaborator.resolve(false)
+						}
 					>
 						<P>
 							Êtes-vous sûr de vouloir supprimer{' '}
-							{customerToBeRemoved.email} ? Tous les projets et
-							les tâches associés à ce client se retrouveront sans
-							client.
+							{collaboratorToBeRemoved.email} ? Tous les projets
+							et les tâches associés à ce client se retrouveront
+							sans client.
 						</P>
 						<P>Êtes-vous sûr de vouloir continuer?</P>
 					</ConfirmModal>
@@ -296,4 +301,4 @@ const Customers = () => {
 	);
 };
 
-export default Customers;
+export default Collaborators;

@@ -256,6 +256,26 @@ export const Heading = styled('h1')`
 	}
 `;
 
+export const HeadingLink = styled(Link)`
+	font-size: 20px;
+	color: ${primaryBlack};
+	vertical-align: baseline;
+	line-height: 56px;
+	text-decoration: none;
+
+	&:hover {
+		color: ${primaryPurple};
+	}
+`;
+
+export const HeadingRow = styled('div')`
+	display: flex;
+
+	* ~ * {
+		margin-left: 2rem;
+	}
+`;
+
 export const TaskHeading = styled('h2')`
 	color: ${primaryGrey};
 	font-size: 18px;

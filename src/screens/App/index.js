@@ -8,6 +8,7 @@ import {BREAKPOINTS} from '../../utils/constants';
 
 const Account = React.lazy(() => import('./Account'));
 const CustomerList = React.lazy(() => import('./Customers'));
+const CollaboratorList = React.lazy(() => import('./Collaborators'));
 const Dashboard = React.lazy(() => import('./Dashboard'));
 const Onboarding = React.lazy(() => import('./Onboarding'));
 const Projects = React.lazy(() => import('./Projects'));
@@ -44,6 +45,10 @@ function App() {
 					<Route
 						path="/app/projects"
 						component={withHeader(Projects)}
+					/>
+					<Route
+						path="/app/collaborators"
+						component={withHeader(CollaboratorList)}
 					/>
 					<Route
 						path="/app/customers"

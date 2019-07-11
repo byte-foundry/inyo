@@ -126,54 +126,63 @@ const Stats = ({history, location}) => {
 		[query],
 	);
 
-	const setProjectSelected = useCallback((selected, removeCustomer) => {
-		const newQuery = new URLSearchParams(query);
+	const setProjectSelected = useCallback(
+		(selected, removeCustomer) => {
+			const newQuery = new URLSearchParams(query);
 
-		if (selected) {
-			const {value: selectedProjectId} = selected;
+			if (selected) {
+				const {value: selectedProjectId} = selected;
 
-			newQuery.set('projectId', selectedProjectId);
-		}
-		else if (newQuery.has('projectId')) {
-			newQuery.delete('projectId');
-		}
+				newQuery.set('projectId', selectedProjectId);
+			}
+			else if (newQuery.has('projectId')) {
+				newQuery.delete('projectId');
+			}
 
-		if (removeCustomer) {
-			newQuery.delete('customerId');
-		}
+			if (removeCustomer) {
+				newQuery.delete('customerId');
+			}
 
-		history.push(`/app/stats?${newQuery.toString()}`);
-	}, [query, history]);
+			history.push(`/app/stats?${newQuery.toString()}`);
+		},
+		[query, history],
+	);
 
-	const setCustomerSelected = useCallback((selected) => {
-		const newQuery = new URLSearchParams(query);
+	const setCustomerSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
 
-		if (selected) {
-			const {value: selectedCustomerId} = selected;
+			if (selected) {
+				const {value: selectedCustomerId} = selected;
 
-			newQuery.set('customerId', selectedCustomerId);
-		}
-		else if (newQuery.has('customerId')) {
-			newQuery.delete('customerId');
-		}
+				newQuery.set('customerId', selectedCustomerId);
+			}
+			else if (newQuery.has('customerId')) {
+				newQuery.delete('customerId');
+			}
 
-		if (newQuery.has('projectId')) {
-			newQuery.delete('projectId');
-		}
+			if (newQuery.has('projectId')) {
+				newQuery.delete('projectId');
+			}
 
-		history.push(`/app/stats?${newQuery.toString()}`);
-	}, [query, history]);
+			history.push(`/app/stats?${newQuery.toString()}`);
+		},
+		[query, history],
+	);
 
-	const setTagSelected = useCallback((selected) => {
-		const newQuery = new URLSearchParams(query);
+	const setTagSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
 
-		if (selected) {
-			newQuery.delete('tags');
-			selected.forEach(tag => newQuery.append('tags', tag.value));
-		}
+			if (selected) {
+				newQuery.delete('tags');
+				selected.forEach(tag => newQuery.append('tags', tag.value));
+			}
 
-		history.push(`/app/stats?${newQuery.toString()}`);
-	}, [query, history]);
+			history.push(`/app/stats?${newQuery.toString()}`);
+		},
+		[query, history],
+	);
 
 	const filteredTasks = tasks.filter(
 		task => moment(task.createdAt).isSameOrAfter(
@@ -187,7 +196,7 @@ const Stats = ({history, location}) => {
 						&& task.section.project.customer.id
 							=== linkedCustomerId)))
 			&& (!task.section
-				|| task.section.project.status === 'ONGOING'
+				|| task.section.project.status !== 'REMOVED'
 				|| projectId)
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
@@ -201,7 +210,8 @@ const Stats = ({history, location}) => {
 	tasks.forEach((task) => {
 		if (
 			task.status !== 'FINISHED'
-			&& moment(task.createdAt).isBefore(moment().subtract(since, 'days'))
+			|| moment(task.createdAt).isBefore(moment().subtract(since, 'days'))
+			|| (task.section && task.section.project.status === 'REMOVED')
 		) return;
 
 		const customer
@@ -285,22 +295,28 @@ const Stats = ({history, location}) => {
 					<Card>
 						<SubHeading>Temps travaillé</SubHeading>
 						<Number>
-							{filteredTasks
-								.filter(t => t.status === 'FINISHED')
-								.reduce(
-									(total, {timeItTook}) => total + timeItTook,
-									0,
-								) * workingTime}
+							{(
+								filteredTasks
+									.filter(t => t.status === 'FINISHED')
+									.reduce(
+										(total, {timeItTook}) => total + timeItTook,
+										0,
+									) * workingTime
+							).toFixed(0)}
 							h
 						</Number>
 					</Card>
 					<Card>
 						<SubHeading>Temps estimé</SubHeading>
 						<Number>
-							{filteredTasks
-								.filter(t => t.status === 'FINISHED')
-								.reduce((total, {unit}) => total + unit, 0)
-								* workingTime}
+							{(
+								filteredTasks
+									.filter(t => t.status === 'FINISHED')
+									.reduce(
+										(total, {unit}) => total + unit,
+										0,
+									) * workingTime
+							).toFixed(0)}
 							h
 						</Number>
 					</Card>
@@ -324,7 +340,10 @@ const Stats = ({history, location}) => {
 						</SubHeading>
 						<P>
 							Vous souhaitez d'autres statistiques?
-							<A href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…">
+							<A
+								style={{marginLeft: '1rem'}}
+								href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…"
+							>
 								Contactez-nous
 							</A>
 						</P>

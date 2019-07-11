@@ -20,6 +20,7 @@ import deleteTaskWatchMutation from './mutationLinks/deleteTask';
 import focusTaskWatchMutation from './mutationLinks/focusTask';
 import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
 import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
+import removeProjectWatchMutation from './mutationLinks/removeProject';
 import removeSectionWatchMutation from './mutationLinks/removeSection';
 import removeTagWatchMutation from './mutationLinks/removeTag';
 import updateItemWatchMutation from './mutationLinks/updateItem';
@@ -89,6 +90,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	updateProject: updateProjectWatchMutation,
 	createCustomer: createCustomerWatchMutation,
 	removeCustomer: removeCustomerWatchMutation,
+	removeProject: removeProjectWatchMutation,
 	updateItem: updateItemWatchMutation,
 	uploadAttachments: uploadAttachmentsWatchMutation,
 	removeAttachment: removeAttachmentWatchMutation,

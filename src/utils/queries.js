@@ -112,7 +112,7 @@ export const GET_USER_TAGS = gql`
 /** ******** PROJECT QUERIES ********* */
 
 export const GET_ALL_PROJECTS = gql`
-	query getAllProjectsQuery {
+	query getAllProjects {
 		me {
 			id
 			projects {

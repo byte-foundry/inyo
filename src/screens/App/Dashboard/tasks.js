@@ -230,13 +230,22 @@ const DashboardTasks = ({location, history}) => {
 				deadlines: [],
 			};
 
-			scheduledTasksPerDay[deadlineDate].deadlines.push({
-				date: project.deadline,
-				project,
-			});
+			if (
+				!scheduledTasksPerDay[deadlineDate].deadlines.find(
+					d => d.project && d.project.id === project.id,
+				)
+			) {
+				scheduledTasksPerDay[deadlineDate].deadlines.push({
+					date: project.deadline,
+					project,
+				});
+			}
 		}
 
-		if (task.dueDate) {
+		if (
+			task.dueDate
+			&& (!task.section || task.dueDate !== task.section.project.deadline)
+		) {
 			const deadlineDate = moment(task.dueDate).format(
 				moment.HTML5_FMT.DATE,
 			);

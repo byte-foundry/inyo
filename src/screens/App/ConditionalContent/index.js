@@ -8,21 +8,18 @@ import {GET_USER_INFOS} from '../../../utils/queries';
 const ConditionalContentMain = styled('div')``;
 
 export default function ConditionalContent() {
-	const {
-		data: {me},
-		loading,
-	} = useQuery(GET_USER_INFOS, {suspend: false});
+	const {data, loading} = useQuery(GET_USER_INFOS, {suspend: false});
 
 	if (loading) {
 		return false;
 	}
 
-	const {workingDays, startWorkAt, endWorkAt} = me;
+	const {workingDays, startWorkAt, endWorkAt} = data.me;
 
 	return (
 		<ConditionalContentMain>
 			{(!workingDays || !startWorkAt || !endWorkAt) && (
-				<ModalWithHoursAndDays data={me} />
+				<ModalWithHoursAndDays data={data.me} />
 			)}
 		</ConditionalContentMain>
 	);

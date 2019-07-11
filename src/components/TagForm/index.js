@@ -57,8 +57,8 @@ const ShowColor = styled('div')`
 function TagForm({tag}) {
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleting, setIsDeleting] = useState(false);
-	const updateTag = useMutation(UPDATE_TAG);
-	const removeTag = useMutation(REMOVE_TAG);
+	const [updateTag] = useMutation(UPDATE_TAG);
+	const [removeTag] = useMutation(REMOVE_TAG);
 
 	return (
 		<>

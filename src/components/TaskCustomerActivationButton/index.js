@@ -12,7 +12,7 @@ const TaskActivationButton = ({
 	customerName,
 	onCommit,
 }) => {
-	const unfocusItem = useMutation(UNFOCUS_TASK);
+	const [unfocusItem] = useMutation(UNFOCUS_TASK);
 
 	const {
 		data: {me},

@@ -13,7 +13,7 @@ const DuplicateProjectModal = ({
 		variables: {projectId},
 		suspend: true,
 	});
-	const duplicateProject = useMutation(CREATE_PROJECT);
+	const [duplicateProject] = useMutation(CREATE_PROJECT);
 	const [name, setName] = useState(false);
 
 	if (error) throw error;

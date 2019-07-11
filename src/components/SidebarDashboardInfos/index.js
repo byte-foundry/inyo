@@ -75,14 +75,12 @@ const NoReminders = styled('div')`
 
 const SidebarDashboardInfos = () => {
 	const {data, loading} = useQuery(GET_REMINDERS, {suspend: false});
-	const {
-		loading: loadingUser,
-		data: {me},
-	} = useQuery(GET_USER_INFOS);
+	const {loading: loadingUser, data: userData} = useQuery(GET_USER_INFOS);
 
 	const reminders
-		= data.reminders
+		= data
 		&& data.reminders.filter(reminder => reminder.status === 'PENDING');
+	const {me} = userData || {};
 
 	return (
 		<DashboardAside>

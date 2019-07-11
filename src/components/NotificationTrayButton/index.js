@@ -111,7 +111,7 @@ const NotificationTrayButton = ({mobile}) => {
 		suspend: false,
 		pollInterval: 1000 * 60,
 	});
-	const markNotificationsAsRead = useMutation(MARK_NOTIFICATIONS_AS_READ, {
+	const [markNotificationsAsRead] = useMutation(MARK_NOTIFICATIONS_AS_READ, {
 		optimisticResponse: {
 			marked: true,
 		},

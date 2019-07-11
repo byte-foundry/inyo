@@ -88,7 +88,7 @@ function TaskRemindersList({
 	reminders = [], small, baseUrl, history, noLink,
 }) {
 	const [, setLastUpdatedAt] = useState(new Date());
-	const cancelReminder = useMutation(CANCEL_REMINDER);
+	const [cancelReminder] = useMutation(CANCEL_REMINDER);
 
 	useEffect(() => {
 		const id = setInterval(() => {

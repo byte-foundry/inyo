@@ -21,12 +21,15 @@ const DashboardAside = styled(Aside)`
 	flex: 0 0 320px;
 	display: flex;
 
+	margin-right: 1rem;
+
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 0;
 		flex: 1;
 		max-width: none;
 		width: 100%;
 		margin-bottom: 1rem;
+		margin-right: 0;
 	}
 
 	img {

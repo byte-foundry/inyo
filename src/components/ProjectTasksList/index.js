@@ -2,7 +2,7 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import Portal from '@reach/portal';
 import gql from 'graphql-tag';
-import React, {useCallback, useState} from 'react';
+import React, {Suspense, useCallback, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 import {withRouter} from 'react-router-dom';
@@ -764,19 +764,21 @@ function ProjectTasksList({
 	if (!items.length && !sectionsInfos.length) {
 		return (
 			<>
-				<TemplateAndProjectFiller
-					projectId={projectId}
-					onChoose={(template) => {
-						template.sections.forEach((section) => {
-							addSection({
-								variables: {
-									projectId,
-									...section,
-								},
+				<Suspense fallback={Loading}>
+					<TemplateAndProjectFiller
+						projectId={projectId}
+						onChoose={(template) => {
+							template.sections.forEach((section) => {
+								addSection({
+									variables: {
+										projectId,
+										...section,
+									},
+								});
 							});
-						});
-					}}
-				/>
+						}}
+					/>
+				</Suspense>
 			</>
 		);
 	}

@@ -173,12 +173,11 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 	const selectedProject = filteredProjects.find(t => t.id === selected);
 	const {
 		data: {project: selectedProjectData},
-		loading,
 	} = useQuery(GET_PROJECT_DATA, {
 		variables: {
 			projectId: selectedProject && selectedProject.id,
 		},
-		suspend: false,
+		suspend: true,
 	});
 
 	const listSize = showAll ? filteredProjects.length : PROJECT_LIST_BASE_SIZE;
@@ -309,13 +308,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 				</TemplateInfo>
 			)}
 			<TemplateTaskList selectedTemplate={selectedTemplate} />
-			{loading ? (
-				<LoadingContainer>
-					<Loading />
-				</LoadingContainer>
-			) : (
-				<TemplateTaskList selectedTemplate={selectedProjectData} />
-			)}
+			<TemplateTaskList selectedTemplate={selectedProjectData} />
 		</Container>
 	);
 };

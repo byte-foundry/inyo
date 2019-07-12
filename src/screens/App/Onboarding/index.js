@@ -61,7 +61,7 @@ function Onboarding() {
 
 	if (currentStep >= steps.length) {
 		window.Intercom('trackEvent', 'start-onboarding-project');
-		return <Redirect to="/app/tasks" />;
+		return <Redirect to="/app/dashboard" />;
 	}
 
 	const CurrentOnboardingStep = steps[currentStep];

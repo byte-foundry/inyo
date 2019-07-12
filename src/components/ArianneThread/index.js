@@ -339,6 +339,7 @@ function ArianneThread({
 						onClick={() => {
 							history.push({
 								pathname: '/app/tags',
+								search: location.search,
 								state: {
 									prevLocation: location,
 									prevSearch:

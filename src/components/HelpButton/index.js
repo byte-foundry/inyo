@@ -18,7 +18,7 @@ const HelpButton = ({history, location}) => {
 			pathname: location.pathname,
 			search: `?${query.toString()}`,
 		});
-	});
+	}, [query, history, location.pathname]);
 
 	const openWelcomeModal = useCallback(() => {
 		query.set('openWelcomeModal', true);
@@ -27,7 +27,7 @@ const HelpButton = ({history, location}) => {
 			pathname: location.pathname,
 			search: `?${query.toString()}`,
 		});
-	});
+	}, [query, history, location.pathname]);
 
 	const closeModal = useCallback(() => {
 		query.delete('openHelpModal');
@@ -37,7 +37,7 @@ const HelpButton = ({history, location}) => {
 			pathname: location.pathname,
 			search: `?${query.toString()}`,
 		});
-	});
+	}, [query, history, location.pathname]);
 
 	return (
 		<>

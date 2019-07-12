@@ -2328,6 +2328,11 @@
     "@svgr/plugin-svgo" "^4.2.0"
     loader-utils "^1.2.3"
 
+"@types/asap@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/asap/-/asap-2.0.0.tgz#d529e9608c83499a62ae08c871c5e62271aa2963"
+  integrity sha512-upIS0Gt9Mc8eEpCbYMZ1K8rhNosfKUtimNcINce+zLwJF5UpM3Vv7yz3S5l/1IX+DxTa8lTkUjqynvjRXyJzsg==
+
 "@types/babel__core@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.2.tgz#608c74f55928033fce18b99b213c16be4b3d114f"
@@ -2373,6 +2378,11 @@
   dependencies:
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
+
+"@types/invariant@^2.2.30":
+  version "2.2.30"
+  resolved "https://registry.yarnpkg.com/@types/invariant/-/invariant-2.2.30.tgz#20efa342807606ada5483731a8137cb1561e5fe9"
+  integrity sha512-98fB+yo7imSD2F7PF7GIpELNgtLNgo5wjivu0W5V4jx+KVVJxo6p/qN4zdzSTBWy4/sN3pPyXwnhRSD28QX+ag==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
@@ -2420,12 +2430,17 @@
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
 "@types/react@*":
-  version "16.8.20"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.20.tgz#4f633ecbd0a4d56d0ccc50fff6f9321bbcd7d583"
-  integrity sha512-ZLmI+ubSJpfUIlQuULDDrdyuFQORBuGOvNnMue8HeA0GVrAJbWtZQhcBvnBPNRBI/GrfSfrKPFhthzC2SLEtLQ==
+  version "16.8.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.8.23.tgz#ec6be3ceed6353a20948169b6cb4c97b65b97ad2"
+  integrity sha512-abkEOIeljniUN9qB5onp++g0EY38h7atnDHxwKUFz1r3VH1+yG1OKi2sNPTyObL40goBmfKFpdii2lEzwLX1cA==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/shallowequal@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@types/shallowequal/-/shallowequal-1.1.1.tgz#aad262bb3f2b1257d94c71d545268d592575c9b1"
+  integrity sha512-Lhni3aX80zbpdxRuWhnuYPm8j8UQaa571lHP/xI4W+7BAFhSIhRReXnqjEgT/XzPoXZTJkCqstFMJ8CZTK6IlQ==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
@@ -5275,9 +5290,9 @@ cssstyle@^1.0.0, cssstyle@^1.1.1:
     cssom "0.3.x"
 
 csstype@^2.2.0:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.5.tgz#1cd1dff742ebf4d7c991470ae71e12bb6751e034"
-  integrity sha512-JsTaiksRsel5n7XwqPAfB0l3TFKdpjW/kgAELf9vrb5adGA7UCPLajKK5s3nFrcFm3Rkyp/Qkgl73ENc1UY3cA==
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
+  integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
 
 csstype@^2.5.7:
   version "2.6.4"
@@ -5595,28 +5610,16 @@ dlv@^1.1.0:
   resolved "https://registry.yarnpkg.com/dlv/-/dlv-1.1.2.tgz#270f6737b30d25b6657a7e962c784403f85137e5"
   integrity sha512-xxD4VSH67GbRvSGUrckvha94RD7hjgOH7rqGxiytLpkaeMvixOHFZTGFK6EkIm3T761OVHT8ABHmGkq9gXgu6Q==
 
-dnd-core@^7.4.4:
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-7.6.0.tgz#5907ca291bdcf6dce98322e4d0937efe1b167e85"
-  integrity sha512-JboJ8BKh5nsW2KXbhCY1SzYV+vV3TlQQzgOEtB4IyYbefkhSOwG8wOgcyTD95TyypPaCh8nqxrrRTEC1c8rVMA==
+dnd-core@^9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-9.3.2.tgz#d30f4a53fc296d6fedee05ed690db97974c7decc"
+  integrity sha512-cc6aAFmLDYdXguC+YbKB+SCsXlNd+LS/+T22M4OpmehWI3wBqXBik3o+myjr19ie3K11S3ATTiwir7b0s3TAhw==
   dependencies:
+    "@types/asap" "^2.0.0"
+    "@types/invariant" "^2.2.30"
     asap "^2.0.6"
     invariant "^2.2.4"
     redux "^4.0.1"
-
-dnd-core@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/dnd-core/-/dnd-core-8.0.0.tgz#0e2c8b722809ae50ca47a5d4b80e7ed753decb25"
-  integrity sha512-NbNLhcqPwTkOnoHbUnu1yBV01Wl11PAzpp2N0ps8F0NRsuW8eQx3MmP2YnTJLjrwRQb53anAKzEb7gCNwu29CQ==
-  dependencies:
-    asap "^2.0.6"
-    invariant "^2.2.4"
-    redux "^4.0.1"
-
-dnd-multi-backend@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/dnd-multi-backend/-/dnd-multi-backend-3.2.1.tgz#528c7624b831d1c23512cbed191b34fb506dcf93"
-  integrity sha512-A783JbrONpeufxX+jDMHOxR2AWh+gFv5Z/lLpDB3vdON6t0bb2fHSh8fKH2h8gOLRAJGD08m9xYXAJIWreTI5A==
 
 dns-equal@^1.0.0:
   version "1.0.0"
@@ -7849,7 +7852,7 @@ interpret@^1.0.0, interpret@^1.2.0:
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.2.0.tgz#d5061a6224be58e8083985f5014d844359576296"
   integrity sha512-mT34yGKMNceBQUoVn7iCDKDntA7SC6gycMAWzGx1z/CMCTV7b2AAtXlo3nRyHZ1FelRkQbQjprHSYGwzLtkVbw==
 
-invariant@^2.1.0, invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.3, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -12082,46 +12085,22 @@ react-dev-utils@^9.0.1:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-dnd-html5-backend@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-8.0.0.tgz#918058134fc9222524c3ec9b6563821dee010db4"
-  integrity sha512-/he7ZczwhBezz2v7IHuie0jYMBLgiwSM4CLbZcanzotfppWVnOlVC21/rcrMts6SLhWl6fXA5tZ6EwUWugBAiA==
+react-dnd-html5-backend@^9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/react-dnd-html5-backend/-/react-dnd-html5-backend-9.3.2.tgz#4833043aec91e69dd968ac136deebf7535f5eb9d"
+  integrity sha512-EsQLA3fikHxkkvs6COnEdo3McJg2Q82z6EQxo7s3yqez4LAutrcp7pf5/eyW1nFDcdN3JNx2p+TrkjVjEd5exw==
   dependencies:
-    dnd-core "^8.0.0"
+    dnd-core "^9.3.2"
 
-react-dnd-multi-backend@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-dnd-multi-backend/-/react-dnd-multi-backend-3.2.1.tgz#bfda3b72b738704d638c56fd5e992c3fac556652"
-  integrity sha512-UrS1Ey4l80F6Fu+QAodZGX9OJYi4EB23nWhQP3L+DSyXXJkoQLPoX3JqoCYs/tUpH9Ztkr+sRORRBRj6D22WOg==
-  dependencies:
-    dnd-multi-backend "^3.2.1"
-    prop-types "^15.6.2"
-    react-dnd-preview "^3.2.1"
-
-react-dnd-preview@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/react-dnd-preview/-/react-dnd-preview-3.2.1.tgz#8067f146d58b2d8b4b15ca785fae4320dbdd0de0"
-  integrity sha512-LeLEwNhCrl33Di0qqUPou/NmXTbuq6kFO1CyiOvpa44ZOXk0a6a0ZDwCXGmqFV4qLEkbcRvjHzvIWqz983VBWg==
-  dependencies:
-    prop-types "^15.6.2"
-
-react-dnd-touch-backend@^0.8.3:
-  version "0.8.3"
-  resolved "https://registry.yarnpkg.com/react-dnd-touch-backend/-/react-dnd-touch-backend-0.8.3.tgz#85d961ec8578dc9efa5b78000ea904d37e01e60f"
-  integrity sha512-LLJlpeJftRreP9ixm3yfd1JEXf+6BeKo5dkfJFHvNSOEOu+FDSwNl5l8uAG0FeD4z2ZVi7RDQ/jUxdjkBV3zBg==
-  dependencies:
-    dnd-core "^7.4.4"
-    invariant "^2.2.4"
-
-react-dnd@^8.0.0:
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-8.0.0.tgz#72fe2e0bd9da05db2c44b7d26e347ce7be2b4544"
-  integrity sha512-en8AGdf8WRRr3lrPVw7ir31RmrbmquC0MTu6lQ6F+ZKPvaGaxcO18uoAInK4fNMFjvCUJzrLW03egCj0ddgUwg==
+react-dnd@^9.3.2:
+  version "9.3.2"
+  resolved "https://registry.yarnpkg.com/react-dnd/-/react-dnd-9.3.2.tgz#e06c0f566201fbd4617db6d023fcb45629874bbc"
+  integrity sha512-3xwrd+z25CplNmO1j6BmvFlL72fK0IjW0WqCV7NCYLvKCjomZLhf3ZPAfCyCOSP9riTglnh53OV47M3ydo25ZA==
   dependencies:
     "@types/hoist-non-react-statics" "^3.3.1"
-    dnd-core "^8.0.0"
+    "@types/shallowequal" "^1.1.1"
+    dnd-core "^9.3.2"
     hoist-non-react-statics "^3.3.0"
-    invariant "^2.1.0"
     shallowequal "^1.1.0"
 
 react-docgen@^3.0.0:
@@ -12663,9 +12642,9 @@ reduce@^1.0.1:
     object-keys "^1.1.0"
 
 redux@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
-  integrity sha512-R7bAtSkk7nY6O/OYMVR9RiBI+XghjF9rlbl5806HJbQph0LJVHZrU5oaO4q70eUKiqMRqm4y07KLTlMZ2BlVmg==
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.4.tgz#4ee1aeb164b63d6a1bcc57ae4aa0b6e6fa7a3796"
+  integrity sha512-vKv4WdiJxOWKxK0yRoaK3Y4pxxB0ilzVx6dszU2W8wLxlb2yikRph4iV/ymtdJ6ZxpBLFbyrxklnT5yBbQSl3Q==
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"

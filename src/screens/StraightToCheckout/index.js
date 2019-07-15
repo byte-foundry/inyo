@@ -11,6 +11,7 @@ function StraightToCheckout({location}) {
 	stripe
 		.redirectToCheckout({
 			...stripeInfos,
+			items: [stripeInfos.items.LIFE],
 			customerEmail: queryString.get('email'),
 			clientReferenceId: queryString.get('id'),
 			billingAddressCollection: 'required',

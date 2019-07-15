@@ -81,19 +81,20 @@ function EndOfTrial() {
 	const {data, loading, error} = useQuery(GET_USER_PAYMENT_INFOS, {
 		fetchPolicy: 'no-cache',
 	});
+
 	const client = useApolloClient();
 
 	const lifeStripeCheckout = useCallback(
-		createStripeCheckout(data.me, PLAN_NAMES.LIFE),
-		[data.me],
+		createStripeCheckout(data && data.me, PLAN_NAMES.LIFE),
+		[data],
 	);
 	const monthlyStripeCheckout = useCallback(
-		createStripeCheckout(data.me, PLAN_NAMES.MONTHLY),
-		[data.me],
+		createStripeCheckout(data && data.me, PLAN_NAMES.MONTHLY),
+		[data],
 	);
 	const yearlyStripeCheckout = useCallback(
-		createStripeCheckout(data.me, PLAN_NAMES.YEARLY),
-		[data.me],
+		createStripeCheckout(data && data.me, PLAN_NAMES.YEARLY),
+		[data],
 	);
 
 	if (loading) return <Loading />;

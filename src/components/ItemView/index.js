@@ -291,7 +291,9 @@ const Item = ({
 		loading: loadingUser,
 		data: {me},
 		error: errorUser,
-	} = useQuery(GET_USER_INFOS);
+	} = useQuery(GET_USER_INFOS, {
+		suspend: true,
+	});
 
 	const [updateItem] = useMutation(UPDATE_ITEM);
 	const [focusTask] = useMutation(FOCUS_TASK);

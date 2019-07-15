@@ -297,24 +297,28 @@ function ArianneThread({
 
 	return (
 		<ArianneContainer marginBottom={marginBottom} marginTop={marginTop}>
-			<ArianneElem
-				id="clients"
-				list={customers}
-				onChange={selectCustomer}
-				isClearable
-				selectedId={linkedCustomerId}
-			>
-				Tous les clients
-			</ArianneElem>
-			<ArianneElem
-				id="projects"
-				list={projects}
-				onChange={selectProjects}
-				isClearable
-				selectedId={projectId}
-			>
-				Tous les projets
-			</ArianneElem>
+			{selectCustomer && (
+				<ArianneElem
+					id="clients"
+					list={customers}
+					onChange={selectCustomer}
+					isClearable
+					selectedId={linkedCustomerId}
+				>
+					Tous les clients
+				</ArianneElem>
+			)}
+			{selectProjects && (
+				<ArianneElem
+					id="projects"
+					list={projects}
+					onChange={selectProjects}
+					isClearable
+					selectedId={projectId}
+				>
+					Tous les projets
+				</ArianneElem>
+			)}
 			{selectFilter && (
 				<ArianneElem
 					id="filter"
@@ -337,6 +341,7 @@ function ArianneThread({
 						onClick={() => {
 							history.push({
 								pathname: '/app/tags',
+								search: location.search,
 								state: {
 									prevLocation: location,
 									prevSearch:

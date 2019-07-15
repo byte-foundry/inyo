@@ -53,6 +53,7 @@ const TagDropdown = (props) => {
 					onClick={() => {
 						props.history.push({
 							pathname: '/app/tags',
+							search: props.location.search,
 							state: {
 								prevLocation: props.location,
 								prevSearch:

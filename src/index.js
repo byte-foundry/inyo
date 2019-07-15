@@ -4,6 +4,7 @@ import 'moment/locale/fr';
 import './index.css';
 // if imported with the tooltip, the order is wrong due to code-splitting
 import '@reach/tooltip/styles.css';
+import './dragdroptouch';
 
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
@@ -15,8 +16,7 @@ import {
 	useQuery,
 } from 'react-apollo-hooks';
 import {DndProvider} from 'react-dnd';
-import MultiBackend from 'react-dnd-multi-backend';
-import HTML5toTouch from 'react-dnd-multi-backend/lib/HTML5toTouch';
+import HTML5Backend from 'react-dnd-html5-backend';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import {
@@ -150,7 +150,7 @@ function Root() {
 	}
 
 	return (
-		<DndProvider backend={MultiBackend(HTML5toTouch)}>
+		<DndProvider backend={HTML5Backend}>
 			<ProvidersSentry>
 				<BodyMain>
 					<main>

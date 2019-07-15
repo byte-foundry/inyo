@@ -4,6 +4,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import ConfirmModal from '../../../components/ConfirmModal';
 import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
+import HelpButton from '../../../components/HelpButton';
 import IconButton from '../../../components/IconButton';
 import {BREAKPOINTS} from '../../../utils/constants';
 import Search from '../../../utils/icons/search.svg';
@@ -171,6 +172,7 @@ const Customers = () => {
 
 	return (
 		<Main>
+			<HelpButton />
 			<Container>
 				<Heading>Clients</Heading>
 				<Forms>

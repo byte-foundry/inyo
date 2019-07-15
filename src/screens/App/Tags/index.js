@@ -5,6 +5,7 @@ import {Route, withRouter} from 'react-router-dom';
 import TagListForm from '../../../components/TagListForm';
 import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import {SubHeading} from '../../../utils/new/design-system';
+import Dashboard from '../Dashboard';
 import TasksList from '../Tasks/tasks-lists';
 
 const ProjectMain = styled('div')`
@@ -12,9 +13,13 @@ const ProjectMain = styled('div')`
 `;
 
 function Tags({location: {state = {}}, history}) {
+	const Background = state.prevLocation.pathname.includes('tasks')
+		? TasksList
+		: Dashboard;
+
 	return (
 		<ProjectMain>
-			<Route path="/app/tags" component={TasksList} />
+			<Route path="/app/tags" component={Background} />
 			<Modal
 				onDismiss={() => history.push({
 					pathname: state.prevLocation.pathname,

@@ -300,6 +300,7 @@ export const A = styled('a')`
 	color: ${primaryPurple};
 	text-decoration: none;
 	border-bottom: 2px solid transparent;
+	cursor: ${props => (props.noHover ? 'default' : 'pointer')};
 	${props => props.noHover && 'border: none;'}
 
 	&:hover {

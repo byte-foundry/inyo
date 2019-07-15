@@ -65,8 +65,13 @@ const Day = styled('div')`
 
 	${props => props.isOff
 		&& `
-		color: ${accentGrey};
-		background: ${lightGrey};
+		background: repeating-linear-gradient(
+		  45deg,
+		  ${mediumGrey},
+		  ${mediumGrey} 20px,
+		  transparent 20px,
+		  transparent 40px
+		);
 	`}
 `;
 

@@ -58,6 +58,7 @@ const UpdateButton = styled(Button)`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-right: 0;
+		margin-bottom: 20px;
 	}
 `;
 

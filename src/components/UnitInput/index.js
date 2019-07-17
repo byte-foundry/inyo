@@ -9,6 +9,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import Tooltip from '../Tooltip';
 
 const UnitInputContainer = styled('div')`
@@ -105,13 +106,14 @@ export default function ({
 	const [isHours, setIsHours] = useState(true);
 	const inputRef = innerRef || useRef();
 	const containerRef = useRef(null);
+	const {workingTime = 8} = useUserInfos() || {};
 
 	outsideClosureState = isHours;
 
 	getValue.current = () => {
 		const valueFloat = parseFloat(inputRef.current.value);
 
-		return outsideClosureState ? valueFloat / 8 : valueFloat;
+		return outsideClosureState ? valueFloat / workingTime : valueFloat;
 	};
 
 	useEffect(() => {
@@ -121,13 +123,13 @@ export default function ({
 	useOnClickOutside(containerRef, () => {
 		const valueFloat = parseFloat(inputRef.current.value);
 
-		onBlur(outsideClosureState ? valueFloat / 8 : valueFloat);
+		onBlur(outsideClosureState ? valueFloat / workingTime : valueFloat);
 	});
 
 	return (
 		<Formik
 			initialValues={{
-				unit: isHours ? unit * 8 : unit,
+				unit: isHours ? unit * workingTime : unit,
 			}}
 			validationSchema={Yup.object().shape({
 				unit: Yup.number().required(),

@@ -1,8 +1,14 @@
 import styled from '@emotion/styled/macro';
 import React from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import {Link} from 'react-router-dom';
 
+import {collabStatuses} from '../../utils/constants';
 import {formatFullName} from '../../utils/functions';
+import {
+	ACCEPT_COLLAB_REQUEST,
+	REJECT_COLLAB_REQUEST,
+} from '../../utils/mutations';
 import {
 	accentGrey,
 	Button,
@@ -118,16 +124,52 @@ const TextPlusObjectNotification = ({
 	);
 };
 
-const CollaborationRequestNotification = ({unread, from, object}) => (
-	<Notification icon="people" unread={unread}>
-		{formatFullName(undefined, from.firstName, from.lastName)} vous a
-			invité à collaborer sur le projet {object.name}{' '}
-		<Button link>Accepter</Button>{' '}
-		<Button link red>
-				Refuser
-		</Button>
-	</Notification>
-);
+const CollaborationRequestNotification = ({unread, from, object}) => {
+	const [acceptCollabRequest] = useMutation(ACCEPT_COLLAB_REQUEST);
+	const [rejectCollabRequest] = useMutation(REJECT_COLLAB_REQUEST);
+
+	if (object.status === collabStatuses.PENDING) {
+		return (
+			<Notification icon="people" unread={unread}>
+				{formatFullName(undefined, from.firstName, from.lastName)} vous
+				a invité à collaborer
+				<Button
+					onClick={() => acceptCollabRequest({variables: {requestId: object.id}})
+					}
+					link
+				>
+					Accepter
+				</Button>{' '}
+				<Button
+					onClick={() => rejectCollabRequest({variables: {requestId: object.id}})
+					}
+					link
+					red
+				>
+					Refuser
+				</Button>
+			</Notification>
+		);
+	}
+	if (object.status === collabStatuses.ACCEPTED) {
+		return (
+			<Notification icon="people" unread={unread}>
+				Vous avez accepté la requête de collaboration de{' '}
+				{formatFullName(undefined, from.firstName, from.lastName)}
+			</Notification>
+		);
+	}
+	if (object.status === collabStatuses.REJECTED) {
+		return (
+			<Notification icon="people" unread={unread}>
+				Vous avez rejeté la requête de collaboration de{' '}
+				{formatFullName(undefined, from.firstName, from.lastName)}
+			</Notification>
+		);
+	}
+
+	return false;
+};
 
 const NotificationItem = (props) => {
 	let notification;
@@ -140,7 +182,7 @@ const NotificationItem = (props) => {
 	case 'ASSIGNED_TASK':
 		notification = <TextPlusObjectNotification {...props} />;
 		break;
-	case 'COLLAB_REQUEST':
+	case 'COLLAB_ASKED':
 		notification = <CollaborationRequestNotification {...props} />;
 		break;
 	default:

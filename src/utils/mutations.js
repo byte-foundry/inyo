@@ -910,6 +910,99 @@ export const REQUEST_COLLAB = gql`
 	mutation requestCollab($userEmail: String!, $projectId: ID) {
 		requestCollab(userEmail: $userEmail, projectId: $projectId) {
 			id
+			status
+			requestee {
+				id
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;
+
+export const ACCEPT_COLLAB_REQUEST = gql`
+	mutation acceptCollabRequest($requestId: ID!) {
+		acceptCollabRequest(requestId: $requestId) {
+			id
+			status
+			requester {
+				id
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;
+
+export const REJECT_COLLAB_REQUEST = gql`
+	mutation rejectCollabRequest($requestId: ID!) {
+		rejectCollabRequest(requestId: $requestId) {
+			id
+			status
+			requester {
+				id
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;
+
+export const LINK_TO_PROJECT = gql`
+	mutation linkToProject($collaboratorId: ID!, $projectId: ID!) {
+		linkToProject(collaboratorId: $collaboratorId, projectId: $projectId) {
+			id
+			collabLinkToProject {
+				id
+			}
+		}
+	}
+`;
+
+export const REMOVE_LINK_TO_PROJECT = gql`
+	mutation removeLinkToProject($collaboratorId: ID!, $projectId: ID!) {
+		removeLinkToProject(
+			collaboratorId: $collaboratorId
+			projectId: $projectId
+		) {
+			id
+			collabLinkToProject {
+				id
+			}
+		}
+	}
+`;
+
+export const ASSIGN_TO_TASK = gql`
+	mutation assignToTask($taskId: ID!, $collaboratorId: ID!) {
+		assignToTask(taskId: $taskId, collaboratorId: $collaboratorId) {
+			id
+			assignee {
+				id
+				email
+				firstName
+				lastName
+			}
+		}
+	}
+`;
+
+export const REMOVE_ASSIGNEMENT_TO_TASK = gql`
+	mutation removeAssignementToTask($taskId: ID!, $collaboratorId: ID!) {
+		removeAssignementToTask(
+			taskId: $taskId
+			collaboratorId: $collaboratorId
+		) {
+			id
+			assignee {
+				id
+				email
+				firstName
+				lastName
+			}
 		}
 	}
 `;

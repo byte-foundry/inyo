@@ -138,10 +138,12 @@ const NotificationTrayButton = ({mobile}) => {
 	let unreadNumber = 0;
 
 	if (!loading) {
-		unreadNumber = data.me.notifications.reduce(
-			(sum, notification) => sum + (notification.unread ? 1 : 0),
-			0,
-		);
+		unreadNumber
+			= data.me
+			&& data.me.notifications.reduce(
+				(sum, notification) => sum + (notification.unread ? 1 : 0),
+				0,
+			);
 	}
 
 	useEffect(() => {
@@ -211,22 +213,6 @@ const NotificationTrayButton = ({mobile}) => {
 							<Loading />
 						) : data.me.notifications.length > 0 ? (
 							<List>
-								<Item key="zboub">
-									<NotificationItem
-										eventType="ASSIGNED_TASK"
-										unread={true}
-										from={{firstName: 'Paulo'}}
-										object={{name: 'Tâche Y'}}
-									/>
-								</Item>
-								<Item key="zboub">
-									<NotificationItem
-										eventType="COLLAB_REQUEST"
-										unread={true}
-										from={{firstName: 'Paulo'}}
-										object={{name: 'Projet X'}}
-									/>
-								</Item>
 								{data.me.notifications.map(notification => (
 									<Item key={notification.id}>
 										<NotificationItem {...notification} />

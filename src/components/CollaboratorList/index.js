@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
 import React from 'react';
+import {useMutation} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
+import {formatFullName} from '../../utils/functions';
+import {LINK_TO_PROJECT, REMOVE_LINK_TO_PROJECT} from '../../utils/mutations';
 import {Button, CollaboratorLineRow} from '../../utils/new/design-system';
 import CollaboratorAvatar from '../CollaboratorAvatar';
-import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 
 const Actions = styled('div')`
 	display: flex;
@@ -28,52 +31,51 @@ const Actions = styled('div')`
 	}
 `;
 
-function CollaboratorLine({collaborator, isNew}) {
+function CollaboratorLine({collaborator: {collaborator, isLinked}, projectId}) {
+	const [linkToProject] = useMutation(LINK_TO_PROJECT);
+	const [removeLinkToProject] = useMutation(REMOVE_LINK_TO_PROJECT);
+
 	return (
-		<CollaboratorLineRow>
+		<CollaboratorLineRow
+			onClick={() => {
+				if (isLinked) {
+					removeLinkToProject({
+						variables: {
+							collaboratorId: collaborator.id,
+							projectId,
+						},
+					});
+				}
+				else {
+					linkToProject({
+						variables: {
+							collaboratorId: collaborator.id,
+							projectId,
+						},
+					});
+				}
+			}}
+		>
 			<CollaboratorAvatar email={collaborator.email} />
-			<div>{collaborator.name}</div>
+			<div>
+				{formatFullName(
+					undefined,
+					collaborator.firstName,
+					collaborator.lastName,
+				)}
+			</div>
 			<Actions>
-				{isNew && (
-					<>
-						<Button red>Ce n'est pas la bonne personne</Button>
-						<Button icon="✓">Confirmer</Button>
-					</>
-				)}
-				{collaborator.collaborationStatus
-					=== 'COLLABORATION_ACCEPTED' && (
-					<IconButton icon="delete" size="small" />
-				)}
-				{collaborator.collaborationStatus
-					=== 'WAITING_FOR_CONFIRMATION' && (
-					<>
-						<div>En attente</div>
-						<Button>Renvoyer l'email</Button>
-					</>
-				)}
-				{collaborator.collaborationStatus
-					=== 'COLLABORATION_REJECTED' && (
-					<>
-						<div>A rejeté la collaboration</div>
-					</>
-				)}
+				{isLinked && <MaterialIcon icon="done" size="small" />}
 			</Actions>
 		</CollaboratorLineRow>
 	);
 }
 
-function CollaboratorList({collaborators}) {
+function CollaboratorList({collaborators, projectId}) {
 	return (
 		<div>
-			<CollaboratorLine
-				collaborator={{
-					email: 'yorunohikage@gmail.com',
-					name: 'New Zboub',
-				}}
-				isNew
-			/>
 			{collaborators.map(c => (
-				<CollaboratorLine collaborator={c} />
+				<CollaboratorLine collaborator={c} projectId={projectId} />
 			))}
 		</div>
 	);

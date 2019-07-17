@@ -26,6 +26,7 @@ import {
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
+import CollabLinkToProjectList from '../CollabLinkToProjectList';
 import CollaboratorModal from '../CollaboratorModal';
 import ConfirmModal from '../ConfirmModal';
 import CreateProjectLinkButton from '../CreateProjectLinkButton';
@@ -501,24 +502,33 @@ const SidebarProjectInfos = ({
 			)}
 			<SubSection>
 				<Actions>
-					<Button
-						materialIcon
-						onClick={() => {
-							setEditCollab(true);
-						}}
-					>
-						<MaterialIcon
-							icon="people"
-							size="tiny"
-							color="inherit"
-						/>{' '}
-						Ajouter un collaborateur
-					</Button>
+					{project.collabLinkToProject.length === 0 ? (
+						<Button
+							materialIcon
+							onClick={() => {
+								setEditCollab(true);
+							}}
+						>
+							<MaterialIcon
+								icon="people"
+								size="tiny"
+								color="inherit"
+							/>{' '}
+							Ajouter un collaborateur
+						</Button>
+					) : (
+						<>
+							<SubHeading>Collaborateurs du projet</SubHeading>
+							<CollabLinkToProjectList project={project} />
+						</>
+					)}
 				</Actions>
 				{isEditingCollab && (
 					<CollaboratorModal
 						onDismiss={() => setEditCollab(false)}
 						projectName={project.name}
+						projectId={project.id}
+						projectCollabLink={project.collabLinkToProject}
 					/>
 				)}
 			</SubSection>

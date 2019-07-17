@@ -761,7 +761,13 @@ export const DragSeparator = styled('div')`
 export const CollaboratorLineRow = styled('div')`
 	display: flex;
 	align-items: center;
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
+	padding: 0.5rem;
+
+	&:hover {
+		background: ${primaryPurple};
+		color: ${primaryWhite};
+	}
 `;
 
 export const StickyHeader = styled('div')`

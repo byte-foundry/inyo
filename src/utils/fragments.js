@@ -80,6 +80,12 @@ export const ITEM_FRAGMENT = gql`
 		isFocused
 		scheduledFor
 		schedulePosition
+		assignee {
+			id
+			email
+			firstName
+			lastName
+		}
 		reminders {
 			...ReminderFragment
 		}

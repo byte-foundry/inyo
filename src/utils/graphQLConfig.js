@@ -12,6 +12,7 @@ import {createUploadLink} from 'apollo-upload-client';
 
 import {GRAPHQL_API} from './constants';
 import introspectionQueryResultData from './fragmentTypes.json';
+import acceptCollabRequestWatchMutation from './mutationLinks/acceptCollabRequest';
 import createCustomerWatchMutation from './mutationLinks/createCustomer';
 import createProjectWatchMutation from './mutationLinks/createProject';
 import createTagWatchMutation from './mutationLinks/createTag';
@@ -23,6 +24,7 @@ import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
 import removeProjectWatchMutation from './mutationLinks/removeProject';
 import removeSectionWatchMutation from './mutationLinks/removeSection';
 import removeTagWatchMutation from './mutationLinks/removeTag';
+import requestCollabWatchMutation from './mutationLinks/requestCollab';
 import updateItemWatchMutation from './mutationLinks/updateItem';
 import updateProjectWatchMutation from './mutationLinks/updateProject';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
@@ -83,20 +85,22 @@ const errorLink = onError(({graphQLErrors}) => {
 });
 
 const watchLink = new WatchedMutationLink(cache, {
+	acceptCollabRequest: acceptCollabRequestWatchMutation,
 	addItem: createTaskWatchMutation,
-	removeItem: deleteTaskWatchMutation,
-	focusTask: focusTaskWatchMutation,
 	createProject: createProjectWatchMutation,
-	updateProject: updateProjectWatchMutation,
 	createCustomer: createCustomerWatchMutation,
-	removeCustomer: removeCustomerWatchMutation,
-	removeProject: removeProjectWatchMutation,
-	updateItem: updateItemWatchMutation,
-	uploadAttachments: uploadAttachmentsWatchMutation,
-	removeAttachment: removeAttachmentWatchMutation,
-	removeSection: removeSectionWatchMutation,
 	createTag: createTagWatchMutation,
+	focusTask: focusTaskWatchMutation,
+	removeAttachment: removeAttachmentWatchMutation,
+	removeCustomer: removeCustomerWatchMutation,
+	removeItem: deleteTaskWatchMutation,
+	removeProject: removeProjectWatchMutation,
+	removeSection: removeSectionWatchMutation,
 	removeTag: removeTagWatchMutation,
+	requestCollab: requestCollabWatchMutation,
+	updateItem: updateItemWatchMutation,
+	updateProject: updateProjectWatchMutation,
+	uploadAttachments: uploadAttachmentsWatchMutation,
 });
 
 const client = new ApolloClient({

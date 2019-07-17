@@ -166,10 +166,7 @@ const Collaborators = () => {
 	const includesFilter = str => sanitize(str).includes(sanitize(filter));
 
 	const filteredCollaborators = data.me.collaborators.filter(
-		({
-			name, firstName, lastName, email,
-		}) => includesFilter(name)
-			|| includesFilter(firstName || '')
+		({firstName, lastName, email}) => includesFilter(firstName || '')
 			|| includesFilter(lastName || '')
 			|| includesFilter(email),
 	);
@@ -182,9 +179,10 @@ const Collaborators = () => {
 	);
 
 	const filteredCollaborationRequests = data.me.collaborationRequests.filter(
-		({requester: {firstName, lastName, email}}) => includesFilter(firstName || '')
-			|| includesFilter(lastName || '')
-			|| includesFilter(email),
+		({status, requester: {firstName, lastName, email}}) => (includesFilter(firstName || '')
+				|| includesFilter(lastName || '')
+				|| includesFilter(email))
+			&& status !== collabStatuses.ACCEPTED,
 	);
 
 	return (

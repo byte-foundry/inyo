@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, {useCallback} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
+import {formatFullName} from '../../utils/functions';
+import {
+	ASSIGN_TO_TASK,
+	REMOVE_ASSIGNEMENT_TO_TASK,
+} from '../../utils/mutations';
 import {
 	CollaboratorLineRow,
 	GenericDropdown,
@@ -64,11 +70,38 @@ const DropdownCollaboratorLineRow = styled(CollaboratorLineRow)`
 	}
 `;
 
-function CollaboratorLine({collaborator, active}) {
+function CollaboratorLine({taskId, collaborator, active}) {
+	const [assignToTask] = useMutation(ASSIGN_TO_TASK);
+	const [removeAssignementToTask] = useMutation(REMOVE_ASSIGNEMENT_TO_TASK);
+	const assignOrUnassign = useCallback(() => {
+		if (active) {
+			removeAssignementToTask({
+				variables: {
+					taskId,
+					collaboratorId: collaborator.id,
+				},
+			});
+		}
+		else {
+			assignToTask({
+				variables: {
+					taskId,
+					collaboratorId: collaborator.id,
+				},
+			});
+		}
+	}, [active, collaborator]);
+
 	return (
-		<DropdownCollaboratorLineRow active={active}>
+		<DropdownCollaboratorLineRow active={active} onClick={assignOrUnassign}>
 			<CollaboratorAvatar email={collaborator.email} />
-			<div>{collaborator.name}</div>
+			<div>
+				{formatFullName(
+					undefined,
+					collaborator.firstName,
+					collaborator.lastName,
+				)}
+			</div>
 			{active && (
 				<Actions>
 					<Tooltip label="Renvoyer l'email de notification">
@@ -81,18 +114,15 @@ function CollaboratorLine({collaborator, active}) {
 	);
 }
 
-function CollaboratorDropdown({collaborators = []}) {
+function CollaboratorDropdown({collaborators = [], assignee, taskId}) {
 	return (
 		<CollaboratorDropdownElem>
-			<CollaboratorLine
-				active
-				collaborator={{
-					email: 'francois.poizat@gmail.com',
-					name: 'zboub',
-				}}
-			/>
 			{collaborators.map(collab => (
-				<CollaboratorLine collaborator={collab} />
+				<CollaboratorLine
+					collaborator={collab}
+					active={assignee && assignee.id === collab.id}
+					taskId={taskId}
+				/>
 			))}
 		</CollaboratorDropdownElem>
 	);

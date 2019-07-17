@@ -2,20 +2,30 @@ import Portal from '@reach/portal';
 import React, {
 	useCallback, useEffect, useRef, useState,
 } from 'react';
+import {useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import {formatFullName} from '../../utils/functions';
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
+import {GET_PROJECT_COLLAB_LINK} from '../../utils/queries';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
-function TaskCollaboratorList() {
+function TaskCollaboratorList({projectId, taskId, assignee}) {
 	const [editCollab, setEditCollab] = useState(false);
 	const [dropdownStyle, setDropdownStyle] = useState(false);
 	const onClickElem = useCallback(() => {
 		setEditCollab(true);
 	}, [setEditCollab]);
 	const containerRef = useRef();
+	const {data, error} = useQuery(GET_PROJECT_COLLAB_LINK, {
+		variables: {
+			id: projectId,
+		},
+		suspend: true,
+	});
+	const {collabLinkToProject} = data.project;
 
 	useOnClickOutside(containerRef, () => {
 		setEditCollab(false);
@@ -47,33 +57,21 @@ function TaskCollaboratorList() {
 			}
 			content={
 				<>
-					<div ref={containerRef} onClick={onClickElem}>
-						&mdash;
+					<div onClick={onClickElem}>
+						{(assignee
+							&& formatFullName(
+								undefined,
+								assignee.firstName,
+								assignee.lastName,
+							)) || <>&mdash;</>}
 					</div>
 					{editCollab && (
 						<Portal>
-							<div style={dropdownStyle}>
+							<div ref={containerRef} style={dropdownStyle}>
 								<CollaboratorDropdown
-									collaborators={[
-										{
-											email: 'francois.poizat@gmail.com',
-											name: 'zboub',
-											collaborationStatus:
-												'COLLABORATION_ACCEPTED',
-										},
-										{
-											email: 'barack@obama.org',
-											name: '2zboub',
-											collaborationStatus:
-												'WAITING_FOR_CONFIRMATION',
-										},
-										{
-											email: 'donald@trump.com',
-											name: '3zboub',
-											collaborationStatus:
-												'COLLABORATION_REJECTED',
-										},
-									]}
+									collaborators={collabLinkToProject}
+									assignee={assignee}
+									taskId={taskId}
 								/>
 							</div>
 						</Portal>

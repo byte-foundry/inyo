@@ -14,6 +14,7 @@ import {
 	primaryGrey,
 	SubHeading,
 } from '../../utils/new/design-system';
+import {GET_USER_COLLABORATORS} from '../../utils/queries';
 import CollaboratorList from '../CollaboratorList';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
@@ -65,62 +66,67 @@ const CreateCustomerForm = styled('div')`
 	}
 `;
 
-const CollaboratorModal = ({onDismiss, projectName}) => (
-	<ModalContainer onDismiss={onDismiss}>
-		<ModalElem>
-			<Header>Collaborateur sur le projet {projectName}</Header>
-			<Formik
-				initialValues={{
-					email: '',
-				}}
-				validate={(values) => {}}
-				onSubmit={async (values, actions) => {}}
-			>
-				{({values, setFieldValue}) => (
-					<div>
-						<Forms>
-							<FilterInput
-								icon={Search}
-								name="email"
-								placeholder="Filtrer par nom, email..."
-								type="text"
-								onChange={e => setFieldValue(e.target.value)
-								}
-								value={values.email}
+const CollaboratorModal = ({
+	onDismiss,
+	projectName,
+	projectId,
+	projectCollabLink,
+}) => {
+	const {
+		data: {
+			me: {collaborators},
+		},
+		errors,
+	} = useQuery(GET_USER_COLLABORATORS, {suspend: true});
+
+	if (errors) throw errors;
+
+	const collaboratorsWithLink = collaborators.map(collaborator => ({
+		collaborator,
+		isLinked: projectCollabLink.find(
+			linkedTo => collaborator.id === linkedTo.id,
+		),
+	}));
+
+	return (
+		<ModalContainer onDismiss={onDismiss}>
+			<ModalElem>
+				<Header>Collaborateur sur le projet {projectName}</Header>
+				<Formik
+					initialValues={{
+						email: '',
+					}}
+					validate={(values) => {}}
+					onSubmit={async (values, actions) => {}}
+				>
+					{({values, setFieldValue}) => (
+						<div>
+							<Forms>
+								<FilterInput
+									icon={Search}
+									name="email"
+									placeholder="Filtrer par nom, email..."
+									type="text"
+									onChange={e => setFieldValue(e.target.value)
+									}
+									value={values.email}
+								/>
+								<Actions>
+									<Button big>
+										Ajouter un collaborateur
+									</Button>
+								</Actions>
+							</Forms>
+							<CollaboratorList
+								collaborators={collaboratorsWithLink}
+								projectId={projectId}
 							/>
-							<Actions>
-								<Button big>
-											Ajouter un collaborateur
-								</Button>
-							</Actions>
-						</Forms>
-						<CollaboratorList
-							collaborators={[
-								{
-									email: 'francois.poizat@gmail.com',
-									name: 'zboub',
-									collaborationStatus:
-												'COLLABORATION_ACCEPTED',
-								},
-								{
-									email: 'barack@obama.org',
-									name: '2zboub',
-									collaborationStatus:
-												'WAITING_FOR_CONFIRMATION',
-								},
-								{
-									email: 'donald@trump.com',
-									name: '3zboub',
-									collaborationStatus:
-												'COLLABORATION_REJECTED',
-								},
-							]}
-						/>
-					</div>
-				)}
-			</Formik>
-		</ModalElem>
-	</ModalContainer>
-);
+						</div>
+					)}
+				</Formik>
+			</ModalElem>
+		</ModalContainer>
+	);
+};
 
 export default CollaboratorModal;

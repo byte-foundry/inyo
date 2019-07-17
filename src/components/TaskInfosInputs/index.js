@@ -123,7 +123,13 @@ function TaskInfosInputs({
 					disabled={!!customerToken}
 				/>
 			)}
-			{!taskIsCustomer && !customerToken && <TaskCollaboratorList />}
+			{!taskIsCustomer && !customerToken && item.section && (
+				<TaskCollaboratorList
+					projectId={item.section.project.id}
+					taskId={item.id}
+					assignee={item.assignee}
+				/>
+			)}
 			{!noAttachment && !!item.attachments.length && (
 				<Tooltip label="Fichiers joints">
 					<TaskIconText

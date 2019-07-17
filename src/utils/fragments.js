@@ -127,6 +127,12 @@ export const ITEM_FRAGMENT = gql`
 				daysUntilDeadline
 				status
 				name
+				collabLinkToProject {
+					id
+					email
+					firstName
+					lastName
+				}
 				customer {
 					id
 					name

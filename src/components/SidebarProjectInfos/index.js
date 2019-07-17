@@ -518,7 +518,9 @@ const SidebarProjectInfos = ({
 						</Button>
 					) : (
 						<>
-							<SubHeading>Collaborateurs du projet</SubHeading>
+							<SubHeading onClick={() => setEditCollab(true)}>
+								Collaborateurs du projet
+							</SubHeading>
 							<CollabLinkToProjectList project={project} />
 						</>
 					)}

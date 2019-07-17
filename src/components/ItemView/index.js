@@ -507,7 +507,11 @@ const Item = ({
 				) : (
 					<ItemViewAssigneeInput
 						customerToken={customerToken}
-						assignee={{name: 'yo'}}
+						assignee={item.assignee}
+						collabLinkToProject={
+							item.section
+							&& item.section.project.collabLinkToProject
+						}
 					/>
 				)}
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (

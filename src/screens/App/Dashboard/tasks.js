@@ -206,11 +206,7 @@ const DashboardTasks = ({location, history}) => {
 		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
-	const tasksWithoutAssignedToOtherTask = tasks.filter(
-		task => !(task.owner.id === id && task.assignee && task.assignee.id !== id),
-	);
-
-	tasksWithoutAssignedToOtherTask.forEach((task) => {
+	tasks.forEach((task) => {
 		if (
 			task.section
 			&& task.section.project.deadline
@@ -229,6 +225,7 @@ const DashboardTasks = ({location, history}) => {
 				tasks: [],
 				reminders: [],
 				deadlines: [],
+				assignedTasks: [],
 			};
 
 			if (
@@ -258,6 +255,7 @@ const DashboardTasks = ({location, history}) => {
 				tasks: [],
 				reminders: [],
 				deadlines: [],
+				assignedTasks: [],
 			};
 
 			scheduledTasksPerDay[deadlineDate].deadlines.push({
@@ -266,7 +264,14 @@ const DashboardTasks = ({location, history}) => {
 			});
 		}
 
-		if (!task.scheduledFor) {
+		if (
+			!(
+				task.owner.id === id
+				&& task.assignee
+				&& task.assignee.id !== id
+			)
+			&& !task.scheduledFor
+		) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
 			}
@@ -291,6 +296,7 @@ const DashboardTasks = ({location, history}) => {
 					tasks: [],
 					reminders: [],
 					deadlines: [],
+					assignedTasks: [],
 				};
 
 				scheduledTasksPerDay[reminderDate].reminders.push({
@@ -303,6 +309,27 @@ const DashboardTasks = ({location, history}) => {
 			return;
 		}
 
+		if (
+			task.owner.id === id
+			&& task.assignee
+			&& task.assignee.id !== id
+			&& task.scheduledFor
+		) {
+			scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
+				task.scheduledFor
+			] || {
+				date: task.scheduledFor,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+				assignedTasks: [],
+			};
+
+			scheduledTasksPerDay[task.scheduledFor].assignedTasks.push(task);
+
+			return;
+		}
+
 		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
 			task.scheduledFor
 		] || {
@@ -310,6 +337,7 @@ const DashboardTasks = ({location, history}) => {
 			tasks: [],
 			reminders: [],
 			deadlines: [],
+			assignedTasks: [],
 		};
 
 		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);

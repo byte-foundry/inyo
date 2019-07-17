@@ -14,20 +14,20 @@ const CollabLinkToProject = styled(FlexRow)`
 `;
 
 const CollabLinkToProjectList = ({project}) => (
-	<CollabLinkToProject>
+	<div>
 		{project.collabLinkToProject.map(collaborator => (
-				<>
-					<CollaboratorAvatar email={collaborator.email} size={30} />
-					<CollaboratorEmail>
-						{formatFullName(
-							undefined,
-							collaborator.firstName,
-							collaborator.lastName,
-						)}
-					</CollaboratorEmail>
-				</>
+			<CollabLinkToProject>
+				<CollaboratorAvatar email={collaborator.email} size={30} />
+				<CollaboratorEmail>
+					{formatFullName(
+						undefined,
+						collaborator.firstName,
+						collaborator.lastName,
+					)}
+				</CollaboratorEmail>
+			</CollabLinkToProject>
 		))}
-	</CollabLinkToProject>
+	</div>
 );
 
 export default CollabLinkToProjectList;

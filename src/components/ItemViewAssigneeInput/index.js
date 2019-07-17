@@ -2,12 +2,13 @@ import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
+import {formatFullName} from '../../utils/functions';
 import {Meta, MetaLabel, MetaText} from '../../utils/new/design-system';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
-function ItemViewAssigneeInput({customerToken, assignee}) {
+function ItemViewAssigneeInput({customerToken, assignee, collabLinkToProject}) {
 	const [editAssignee, setEditAssignee] = useState(false);
 	const [dropdownStyle, setDropdownStyle] = useState(false);
 	const containerRef = useRef();
@@ -39,26 +40,18 @@ function ItemViewAssigneeInput({customerToken, assignee}) {
 						customerToken ? undefined : () => setEditAssignee(true)
 					}
 				>
-					{assignee && assignee.name}
+					{(assignee
+						&& formatFullName(
+							undefined,
+							assignee.firstName,
+							assignee.lastName,
+						)) || <>&mdash;</>}
 				</MetaText>
 				{!customerToken && editAssignee && (
 					<Portal>
 						<div style={dropdownStyle}>
 							<CollaboratorDropdown
-								collaborators={[
-									{
-										email: 'francois.poizat@gmail.com',
-										name: 'zboub',
-									},
-									{
-										email: 'barack@obama.org',
-										name: '2zboub',
-									},
-									{
-										email: 'donald@trump.com',
-										name: '3zboub',
-									},
-								]}
+								collaborators={collabLinkToProject}
 							/>
 						</div>
 					</Portal>

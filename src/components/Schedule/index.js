@@ -16,6 +16,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
+import AssignedToOtherCard from '../AssignedToOtherCard';
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
 import IconButton from '../IconButton';
@@ -245,6 +246,7 @@ const Schedule = ({
 					const sortedTasks = [...day.tasks];
 					const sortedReminders = [...day.reminders];
 					const sortedDeadlines = [...day.deadlines];
+					const sortedAssignedTasks = [...day.assignedTasks];
 
 					sortedTasks.sort(
 						(a, b) => a.schedulePosition - b.schedulePosition,
@@ -337,6 +339,12 @@ const Schedule = ({
 										project={deadline.project}
 										task={deadline.task}
 										date={deadline.date}
+									/>
+								))}
+								{sortedAssignedTasks.map(assignedTask => (
+									<AssignedToOtherCard
+										key={`${assignedTask.id}`}
+										task={assignedTask}
 									/>
 								))}
 							</DroppableDayTasks>

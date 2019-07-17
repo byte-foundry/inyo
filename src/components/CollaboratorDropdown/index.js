@@ -4,10 +4,7 @@ import {useMutation} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatFullName} from '../../utils/functions';
-import {
-	ASSIGN_TO_TASK,
-	REMOVE_ASSIGNEMENT_TO_TASK,
-} from '../../utils/mutations';
+import {ASSIGN_TO_TASK, REMOVE_ASSIGNMENT_TO_TASK} from '../../utils/mutations';
 import {
 	CollaboratorLineRow,
 	GenericDropdown,
@@ -72,13 +69,19 @@ const DropdownCollaboratorLineRow = styled(CollaboratorLineRow)`
 
 function CollaboratorLine({taskId, collaborator, active}) {
 	const [assignToTask] = useMutation(ASSIGN_TO_TASK);
-	const [removeAssignementToTask] = useMutation(REMOVE_ASSIGNEMENT_TO_TASK);
+	const [removeAssignmentToTask] = useMutation(REMOVE_ASSIGNMENT_TO_TASK);
 	const assignOrUnassign = useCallback(() => {
 		if (active) {
-			removeAssignementToTask({
+			removeAssignmentToTask({
 				variables: {
 					taskId,
 					collaboratorId: collaborator.id,
+				},
+				optimisticResponse: {
+					removeAssignmentToTask: {
+						id: taskId,
+						assignee: undefined,
+					},
 				},
 			});
 		}
@@ -87,6 +90,14 @@ function CollaboratorLine({taskId, collaborator, active}) {
 				variables: {
 					taskId,
 					collaboratorId: collaborator.id,
+				},
+				optimisticResponse: {
+					assignToTask: {
+						id: taskId,
+						assignee: {
+							...collaborator,
+						},
+					},
 				},
 			});
 		}

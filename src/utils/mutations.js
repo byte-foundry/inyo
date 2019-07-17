@@ -990,9 +990,9 @@ export const ASSIGN_TO_TASK = gql`
 	}
 `;
 
-export const REMOVE_ASSIGNEMENT_TO_TASK = gql`
-	mutation removeAssignementToTask($taskId: ID!, $collaboratorId: ID!) {
-		removeAssignementToTask(
+export const REMOVE_ASSIGNMENT_TO_TASK = gql`
+	mutation removeAssignmentToTask($taskId: ID!, $collaboratorId: ID!) {
+		removeAssignmentToTask(
 			taskId: $taskId
 			collaboratorId: $collaboratorId
 		) {

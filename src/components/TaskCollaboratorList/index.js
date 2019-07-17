@@ -32,7 +32,7 @@ function TaskCollaboratorList({projectId, taskId, assignee}) {
 	});
 
 	useEffect(() => {
-		if (editCollab) {
+		if (editCollab && containerRef.current) {
 			const pos = containerRef.current.getBoundingClientRect();
 
 			setDropdownStyle({

@@ -48,11 +48,7 @@ function TaskCollaboratorList({projectId, taskId, assignee}) {
 			ref={containerRef}
 			icon={
 				<Tooltip label="Tâche assigné à">
-					<MaterialIcon
-						icon="people"
-						size="tiny"
-						color={accentGrey}
-					/>
+					<MaterialIcon icon="face" size="tiny" color={accentGrey} />
 				</Tooltip>
 			}
 			content={

@@ -80,6 +80,9 @@ export const ITEM_FRAGMENT = gql`
 		isFocused
 		scheduledFor
 		schedulePosition
+		owner {
+			id
+		}
 		assignee {
 			id
 			email

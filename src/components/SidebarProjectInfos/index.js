@@ -510,7 +510,7 @@ const SidebarProjectInfos = ({
 							}}
 						>
 							<MaterialIcon
-								icon="people"
+								icon="face"
 								size="tiny"
 								color="inherit"
 							/>{' '}

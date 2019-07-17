@@ -79,8 +79,14 @@ const TaskIcon = styled('div')`
 	overflow: visible;
 	background: center no-repeat
 		url(${(props) => {
+		let {type} = props;
+
+		if (props.assigned) {
+			type += '_ASSIGNED';
+		}
+
 		const typeInfos
-				= ITEM_TYPES.find(t => t.type === props.type) || ITEM_TYPES[0];
+				= ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
 
 		let icon = typeInfos.iconUrl;
 
@@ -334,6 +340,7 @@ function Task({
 				<TaskIcon
 					status={item.status}
 					type={item.type}
+					assigned={item.assignee}
 					noData={noData}
 					ref={iconRef}
 					justUpdated={justUpdated}

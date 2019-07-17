@@ -17,7 +17,6 @@ import Task from '../../../components/TasksList/task';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
 	FlexRow,
-	Loading,
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
@@ -139,7 +138,7 @@ const DashboardTasks = ({location, history}) => {
 	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {
-		me: {tasks},
+		me: {id, tasks},
 	} = data;
 
 	const unscheduledTasks = [];
@@ -207,7 +206,11 @@ const DashboardTasks = ({location, history}) => {
 		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
-	tasks.forEach((task) => {
+	const tasksWithoutAssignedToOtherTask = tasks.filter(
+		task => !(task.owner.id === id && task.assignee && task.assignee.id !== id),
+	);
+
+	tasksWithoutAssignedToOtherTask.forEach((task) => {
 		if (
 			task.section
 			&& task.section.project.deadline

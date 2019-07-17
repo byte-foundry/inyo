@@ -31,7 +31,7 @@ function ItemViewAssigneeInput({customerToken, assignee}) {
 	return (
 		<Tooltip label="Personne assigné a la tâche">
 			<Meta>
-				<MaterialIcon icon="people" size="tiny" />
+				<MaterialIcon icon="face" size="tiny" />
 				<MetaLabel>Assigné à</MetaLabel>
 				<MetaText
 					ref={containerRef}

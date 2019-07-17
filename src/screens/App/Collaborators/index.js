@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import AddCollaboratorModal from '../../../components/AddCollaboratorModal';
 import ConfirmModal from '../../../components/ConfirmModal';
@@ -8,6 +8,10 @@ import IconButton from '../../../components/IconButton';
 import {BREAKPOINTS, collabStatuses} from '../../../utils/constants';
 import {formatCollabStatus, formatFullName} from '../../../utils/functions';
 import Search from '../../../utils/icons/search.svg';
+import {
+	ACCEPT_COLLAB_REQUEST,
+	REJECT_COLLAB_REQUEST,
+} from '../../../utils/mutations';
 import {
 	A,
 	accentGrey,
@@ -147,6 +151,8 @@ const SubHeading = styled('h2')`
 
 const Collaborators = () => {
 	const {data, error} = useQuery(GET_USER_COLLABORATORS, {suspend: true});
+	const [acceptCollabRequest] = useMutation(ACCEPT_COLLAB_REQUEST);
+	const [rejectCollabRequest] = useMutation(REJECT_COLLAB_REQUEST);
 
 	if (error) throw error;
 
@@ -278,6 +284,7 @@ const Collaborators = () => {
 						{filteredCollaborationRequests.map(
 							({
 								status,
+								id,
 								requester: {firstName, lastName, email},
 							}) => (
 								<Row key="a" tabIndex="0" role="button">
@@ -292,8 +299,27 @@ const Collaborators = () => {
 									<ActionCell unhidden>
 										{status !== collabStatuses.REJECTED ? (
 											<>
-												<Button>Accepter</Button>
-												<Button red>Rejeter</Button>
+												<Button
+													onClick={() => acceptCollabRequest({
+														variables: {
+															requestId: id,
+														},
+													})
+													}
+												>
+													Accepter
+												</Button>
+												<Button
+													onClick={() => rejectCollabRequest({
+														variables: {
+															requestId: id,
+														},
+													})
+													}
+													red
+												>
+													Rejeter
+												</Button>
 											</>
 										) : (
 											formatCollabStatus(status)

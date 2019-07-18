@@ -3,6 +3,7 @@ import {withRouter} from 'react-router-dom';
 
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
+import PendingActionsTray from '../../../components/PendingActionsTray';
 import {Container, Content, Main} from '../../../utils/new/design-system';
 import Tasks from './tasks';
 
@@ -34,6 +35,7 @@ function Dashboard({history}) {
 					<CreateTask setProjectSelected={setProjectSelected} />
 					<Tasks />
 				</Content>
+				<PendingActionsTray />
 			</Main>
 		</Container>
 	);

@@ -91,9 +91,17 @@ const TextPlusObjectNotification = ({
 		action = 'a validé la tâche';
 		icon = 'done';
 		break;
-	case 'ASSIGNED_TASK':
+	case 'ASSIGNED_TO_TASK':
 		action = 'vous a assigné à la tâche';
 		icon = 'assignment';
+		break;
+	case 'REMOVE_ASSIGNMENT_TO_TASK':
+		action = 'vous a assigné à la tâche';
+		icon = 'assignment';
+		break;
+	case 'COLLAB_ACCEPTED':
+		action = 'a accepté la collaboration';
+		icon = 'face';
 		break;
 	default:
 		action = '';
@@ -109,7 +117,7 @@ const TextPlusObjectNotification = ({
 			objectName = object.name;
 			break;
 		case 'Item':
-			objectLink = `/app/tasks/${object.id}`;
+			objectLink = `/app/dashboard/${object.id}`;
 			objectName = object.name;
 			break;
 		default:
@@ -179,7 +187,10 @@ const NotificationItem = (props) => {
 	case 'VIEWED_PROJECT':
 	case 'UPLOADED_ATTACHMENT':
 	case 'FINISHED_TASK':
-	case 'ASSIGNED_TASK':
+	case 'ASSIGNED_TO_TASK':
+	case 'REMOVE_ASSIGNMENT_TASK':
+	case 'COLLAB_ACCEPTED':
+	case 'COLLAB_REJECTED':
 		notification = <TextPlusObjectNotification {...props} />;
 		break;
 	case 'COLLAB_ASKED':

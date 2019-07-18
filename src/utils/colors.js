@@ -14,6 +14,7 @@ export const gray50 = '#8c8c8c';
 export const gray70 = '#666666';
 export const gray80 = '#4d4d4d';
 export const alpha10 = 'rgba(0, 0, 0, 0.1)';
+export const collabGreen = '#cddc39';
 export const signalGreen = '#0dcc94';
 export const signalOrange = '#ffab00';
 export const signalRed = '#fe4a49';

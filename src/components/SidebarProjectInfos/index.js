@@ -166,6 +166,19 @@ const CustomerInfos = styled('div')`
 	}
 `;
 
+const CollabLinkToProjectContainer = styled('div')`
+	position: relative;
+	margin-left: -2rem;
+	padding-left: 2rem;
+	cursor: pointer;
+
+	&:hover {
+		${PencilElem} {
+			display: flex;
+		}
+	}
+`;
+
 const SidebarProjectInfos = ({
 	projectId,
 	hasClientAttributedTasks,
@@ -517,12 +530,13 @@ const SidebarProjectInfos = ({
 							Ajouter un collaborateur
 						</Button>
 					) : (
-						<>
-							<SubHeading onClick={() => setEditCollab(true)}>
-								Collaborateurs du projet
-							</SubHeading>
+						<CollabLinkToProjectContainer
+							onClick={() => setEditCollab(true)}
+						>
+							<PencilElem icon="edit" size="tiny" />
+							<SubHeading>Collaborateurs du projet</SubHeading>
 							<CollabLinkToProjectList project={project} />
-						</>
+						</CollabLinkToProjectContainer>
 					)}
 				</Actions>
 				{isEditingCollab && (

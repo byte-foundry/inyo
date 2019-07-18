@@ -7,6 +7,7 @@ import {isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
+	collabGreen,
 	DragSeparator,
 	lightGrey,
 	mediumGrey,
@@ -35,7 +36,7 @@ const CardSubTitle = styled('span')`
 
 const TaskCardElem = styled('div')`
 	background: ${primaryWhite};
-	border: 1px solid ${mediumGrey};
+	border: 1px solid ${props => (props.isAssigned ? collabGreen : mediumGrey)};
 	box-shadow: 3px 3px 6px ${mediumGrey};
 	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
 	border-radius: 3px;
@@ -108,6 +109,7 @@ const TaskCard = withRouter(
 		return (
 			<TaskCardElem
 				{...rest}
+				isAssigned={task.assignee}
 				ref={cardRef}
 				done={task.status === 'FINISHED'}
 				customerTask={isCustomerTask(task.type)}

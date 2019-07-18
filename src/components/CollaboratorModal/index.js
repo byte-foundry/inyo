@@ -94,35 +94,43 @@ const CollaboratorModal = ({
 				<Header>Collaborateur sur le projet {projectName}</Header>
 				<Formik
 					initialValues={{
-						email: '',
+						search: '',
 					}}
 					validate={(values) => {}}
 					onSubmit={async (values, actions) => {}}
 				>
-					{({values, setFieldValue}) => (
-						<div>
-							<Forms>
-								<FilterInput
-									icon={Search}
-									name="email"
-									placeholder="Filtrer par nom, email..."
-									type="text"
-									onChange={e => setFieldValue(e.target.value)
-									}
-									value={values.email}
+					{({values, setFieldValue}) => {
+						const filteredCollaborators = collaboratorsWithLink.filter(
+							c => c.collaborator.email.includes(values.search)
+								|| c.collaborator.firstName.includes(
+									values.search,
+								)
+								|| c.collaborator.lastName.includes(values.search),
+						);
+
+						return (
+							<div>
+								<Forms>
+									<FilterInput
+										icon={Search}
+										name="search"
+										placeholder="Filtrer par nom, email..."
+										type="text"
+										onChange={e => setFieldValue(
+											'search',
+											e.target.value,
+										)
+										}
+										value={values.search}
+									/>
+								</Forms>
+								<CollaboratorList
+									collaborators={filteredCollaborators}
+									projectId={projectId}
 								/>
-								<Actions>
-									<Button big>
-										Ajouter un collaborateur
-									</Button>
-								</Actions>
-							</Forms>
-							<CollaboratorList
-								collaborators={collaboratorsWithLink}
-								projectId={projectId}
-							/>
-						</div>
-					)}
+							</div>
+						);
+					}}
 				</Formik>
 			</ModalElem>
 		</ModalContainer>

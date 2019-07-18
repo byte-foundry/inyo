@@ -56,13 +56,11 @@ const TaskStatusButton = ({
 			variables: {
 				itemId: item.id,
 				token: customerToken,
-				timeItTook: unit,
 			},
 			optimisticResponse: {
 				finishItem: {
 					...item,
 					status: 'FINISHED',
-					timeItTook: unit,
 				},
 			},
 		});

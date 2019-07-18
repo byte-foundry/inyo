@@ -301,18 +301,16 @@ function Task({
 	const setTimeItTookValueRef = useRef();
 	const iconRef = useRef();
 
-	function finishItemCallback(unit) {
+	function finishItemCallback() {
 		finishItem({
 			variables: {
 				itemId: item.id,
 				token: customerToken,
-				timeItTook: unit,
 			},
 			optimisticResponse: {
 				finishItem: {
 					...item,
 					status: 'FINISHED',
-					timeItTook: unit,
 				},
 			},
 		});

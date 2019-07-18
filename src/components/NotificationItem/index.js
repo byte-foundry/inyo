@@ -96,7 +96,7 @@ const TextPlusObjectNotification = ({
 		icon = 'assignment';
 		break;
 	case 'REMOVE_ASSIGNMENT_TO_TASK':
-		action = 'vous a assigné à la tâche';
+		action = 'vous a retiré la tâche';
 		icon = 'assignment';
 		break;
 	case 'COLLAB_ACCEPTED':
@@ -188,7 +188,7 @@ const NotificationItem = (props) => {
 	case 'UPLOADED_ATTACHMENT':
 	case 'FINISHED_TASK':
 	case 'ASSIGNED_TO_TASK':
-	case 'REMOVE_ASSIGNMENT_TASK':
+	case 'REMOVE_ASSIGNMENT_TO_TASK':
 	case 'COLLAB_ACCEPTED':
 	case 'COLLAB_REJECTED':
 		notification = <TextPlusObjectNotification {...props} />;

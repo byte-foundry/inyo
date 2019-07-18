@@ -8,12 +8,18 @@ import CollaboratorDropdown from '../CollaboratorDropdown';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
-function ItemViewAssigneeInput({customerToken, assignee, collabLinkToProject}) {
+function ItemViewAssigneeInput({
+	customerToken,
+	assignee,
+	collabLinkToProject,
+	taskId,
+}) {
 	const [editAssignee, setEditAssignee] = useState(false);
 	const [dropdownStyle, setDropdownStyle] = useState(false);
 	const containerRef = useRef();
+	const dropdownRef = useRef();
 
-	useOnClickOutside(containerRef, () => {
+	useOnClickOutside(dropdownRef, () => {
 		setEditAssignee(false);
 	});
 
@@ -30,34 +36,40 @@ function ItemViewAssigneeInput({customerToken, assignee, collabLinkToProject}) {
 	}, [editAssignee]);
 
 	return (
-		<Tooltip label="Personne assigné a la tâche">
-			<Meta>
-				<MaterialIcon icon="face" size="tiny" />
-				<MetaLabel>Assigné à</MetaLabel>
-				<MetaText
-					ref={containerRef}
-					onClick={
-						customerToken ? undefined : () => setEditAssignee(true)
-					}
-				>
-					{(assignee
-						&& formatFullName(
-							undefined,
-							assignee.firstName,
-							assignee.lastName,
-						)) || <>&mdash;</>}
-				</MetaText>
-				{!customerToken && editAssignee && (
-					<Portal>
-						<div style={dropdownStyle}>
-							<CollaboratorDropdown
-								collaborators={collabLinkToProject}
-							/>
-						</div>
-					</Portal>
-				)}
-			</Meta>
-		</Tooltip>
+		<>
+			<Tooltip label="Personne assigné a la tâche">
+				<Meta>
+					<MaterialIcon icon="face" size="tiny" />
+					<MetaLabel>Assigné à</MetaLabel>
+					<MetaText
+						ref={containerRef}
+						onClick={
+							customerToken
+								? undefined
+								: () => setEditAssignee(true)
+						}
+					>
+						{(assignee
+							&& formatFullName(
+								undefined,
+								assignee.firstName,
+								assignee.lastName,
+							)) || <>&mdash;</>}
+					</MetaText>
+				</Meta>
+			</Tooltip>
+			{!customerToken && editAssignee && (
+				<Portal>
+					<div ref={dropdownRef} style={dropdownStyle}>
+						<CollaboratorDropdown
+							assignee={assignee}
+							taskId={taskId}
+							collaborators={collabLinkToProject}
+						/>
+					</div>
+				</Portal>
+			)}
+		</>
 	);
 }
 

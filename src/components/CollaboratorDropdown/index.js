@@ -115,9 +115,6 @@ function CollaboratorLine({taskId, collaborator, active}) {
 			</div>
 			{active && (
 				<Actions>
-					<Tooltip label="Renvoyer l'email de notification">
-						<IconButton icon="email" size="tiny" invert />
-					</Tooltip>
 					<IconButton icon="close" size="tiny" invert />
 				</Actions>
 			)}

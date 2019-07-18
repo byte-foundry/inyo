@@ -507,6 +507,7 @@ const Item = ({
 				) : (
 					<ItemViewAssigneeInput
 						customerToken={customerToken}
+						taskId={item.id}
 						assignee={item.assignee}
 						collabLinkToProject={
 							item.section

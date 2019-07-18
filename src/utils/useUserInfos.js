@@ -10,7 +10,9 @@ export default function useUserInfos() {
 		return null;
 	}
 
-	const {startWorkAt, endWorkAt} = data.me;
+	const {
+		startWorkAt, endWorkAt, workingDays, settings,
+	} = data.me;
 
 	let workingTime = null;
 
@@ -28,5 +30,7 @@ export default function useUserInfos() {
 		startWorkAt,
 		endWorkAt,
 		workingTime,
+		workingDays,
+		hasFullWeekSchedule: settings.hasFullWeekSchedule,
 	};
 }

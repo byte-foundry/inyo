@@ -19,6 +19,8 @@ import {
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
 import IconButton from '../IconButton';
+import RawPieChart from '../PieChart';
+import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
 
@@ -93,12 +95,6 @@ const DayTitle = styled('span')`
 	`}
 `;
 
-const DroppableSeparator = styled('div')`
-	flex: 1 0 70px;
-	margin-top: -3px;
-	border-top: ${props => (props.isOver ? `3px solid ${primaryPurple}` : '5px solid transparent')};
-`;
-
 const DayTasks = styled('div')`
 	color: ${accentGrey};
 	display: flex;
@@ -125,6 +121,13 @@ const ScheduleNavInfo = styled('div')`
 
 	display: flex;
 	align-items: center;
+`;
+
+const PieChart = styled(RawPieChart)`
+	flex: 0 0 16px;
+	margin: 15px 10px;
+	margin-left: 10px;
+	margin-left: 0;
 `;
 
 const DraggableTaskCard = ({
@@ -214,7 +217,11 @@ const DroppableDayTasks = ({children}) => {
 };
 
 const Schedule = ({
-	days, workingDays, fullWeek, onMoveTask,
+	days,
+	workingDays,
+	fullWeek,
+	onMoveTask,
+	workingTime = 8,
 }) => {
 	const [startDay, setStartDay] = useState(moment().startOf('week'));
 
@@ -256,6 +263,72 @@ const Schedule = ({
 					);
 					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
 					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
+
+					const timeLeft
+						= workingTime
+						- sortedTasks.reduce(
+							(time, task) => time + task.unit,
+							0,
+						)
+							* workingTime;
+					const timeSpent
+						= sortedTasks.reduce(
+							(time, task) => time + task.timeItTook,
+							0,
+						) * workingTime;
+					const isPastDay = moment(day.momentDate).isBefore(
+						moment(),
+						'day',
+					);
+
+					let stat;
+
+					if (isPastDay && timeSpent > 0) {
+						stat = (
+							<>
+								<PieChart value={timeSpent / workingTime} />
+								<p>
+									{moment
+										.duration(timeSpent, 'hours')
+										.humanize()}{' '}
+									<Plural
+										singular="travaillée"
+										plural="travaillées"
+										value={timeSpent}
+									/>
+								</p>
+							</>
+						);
+					}
+					else if (
+						!isPastDay
+						&& timeLeft > 0
+						&& timeLeft < workingTime
+					) {
+						stat = (
+							<>
+								<PieChart value={1 - timeLeft / workingTime} />
+								<p>
+									Il vous reste{' '}
+									{moment
+										.duration(timeLeft, 'hours')
+										.humanize()}
+								</p>
+							</>
+						);
+					}
+					else if (
+						!isPastDay
+						&& timeLeft === workingTime
+						&& sortedTasks.length > 0
+					) {
+						stat = (
+							<p>
+								Ajoutez des durées à ces tâches pour qu'Inyo
+								vous aide à gérer votre temps.
+							</p>
+						);
+					}
 
 					return (
 						<Day isOff={!day.workedDay}>
@@ -326,7 +399,7 @@ const Schedule = ({
 										});
 									}}
 								>
-									<DroppableSeparator />
+									{stat}
 								</DefaultDroppableDay>
 								{sortedReminders.map(reminder => (
 									<ReminderCard

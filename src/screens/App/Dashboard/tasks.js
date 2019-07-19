@@ -263,6 +263,27 @@ const DashboardTasks = ({location, history}) => {
 			});
 		}
 
+		if (
+			!task.scheduledFor
+			&& task.status === 'FINISHED'
+			&& moment(task.finishedAt).isBefore(moment(), 'day')
+		) {
+			const finishedAtDate = task.finishedAt.split('T')[0];
+
+			scheduledTasksPerDay[finishedAtDate] = scheduledTasksPerDay[
+				finishedAtDate
+			] || {
+				date: finishedAtDate,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+			};
+
+			scheduledTasksPerDay[finishedAtDate].tasks.push(task);
+
+			return;
+		}
+
 		if (!task.scheduledFor) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);

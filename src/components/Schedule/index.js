@@ -130,7 +130,7 @@ const DayInfos = styled('div')`
 	align-items: flex-start;
 	flex: 1;
 
-	font-size: 0.8rem;
+	font-size: 0.75rem;
 	line-height: 1.4;
 	color: ${primaryGrey};
 `;

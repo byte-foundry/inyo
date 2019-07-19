@@ -7,7 +7,6 @@ import {animated, useSpring} from 'react-spring';
 import {Loading} from '../../utils/content';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {
-	accentGrey,
 	lightGrey,
 	mediumGrey,
 	primaryPurple,
@@ -16,6 +15,7 @@ import {
 import {GET_USER_INFOS} from '../../utils/queries';
 import usePrevious from '../../utils/usePrevious';
 import DefaultDroppableDay from '../DefaultDroppableDay';
+import PieChart from '../PieChart';
 
 const LeftBarContainer = styled('div')`
 	position: fixed;
@@ -25,20 +25,8 @@ const LeftBarContainer = styled('div')`
 	z-index: 2;
 `;
 
-const DayTaskNumber = styled('div')`
-	width: 26px;
-	color: ${accentGrey};
-	background-color: ${primaryWhite};
-	border: 2px dashed ${mediumGrey};
-	font-weight: 600;
-	height: 26px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	bottom: 2px;
-	font-size: 15px;
+const DayPieChart = styled(PieChart)`
+	margin: 10px;
 `;
 
 const DayElem = styled('div')`
@@ -51,6 +39,7 @@ const DayElem = styled('div')`
 	display: flex;
 	flex-flow: column;
 	align-items: center;
+	justify-content: space-between;
 	padding-top: 7px;
 	color: ${props => (props.isOver
 		? props.isOff
@@ -85,13 +74,23 @@ const LeftBarContent = styled('div')`
 `;
 
 function DroppableDay({
-	day, index, scheduledFor, onMove, isOff,
+	day,
+	index,
+	scheduledFor,
+	onMove,
+	isOff,
+	workingTime = 8,
 }) {
+	const timeLeft
+		= workingTime
+		- day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
+
 	return (
 		<DefaultDroppableDay
 			index={index}
 			scheduledFor={scheduledFor}
 			onMove={onMove}
+			separator={false}
 		>
 			<DayElem isOff={isOff}>
 				<DayDate>
@@ -112,7 +111,7 @@ function DroppableDay({
 						})}
 					</DayDateNumber>
 				</DayDate>
-				<DayTaskNumber>{day.tasks.length}</DayTaskNumber>
+				<DayPieChart value={1 - timeLeft / workingTime} />
 			</DayElem>
 		</DefaultDroppableDay>
 	);

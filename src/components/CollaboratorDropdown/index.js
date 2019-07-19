@@ -104,7 +104,10 @@ function CollaboratorLine({taskId, collaborator, active}) {
 	}, [active, collaborator]);
 
 	return (
-		<DropdownCollaboratorLineRow active={active} onClick={assignOrUnassign}>
+		<DropdownCollaboratorLineRow
+			active={active}
+			onMouseUp={assignOrUnassign}
+		>
 			<CollaboratorAvatar email={collaborator.email} />
 			<div>
 				{formatFullName(

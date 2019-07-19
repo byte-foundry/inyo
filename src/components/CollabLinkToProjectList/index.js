@@ -17,7 +17,7 @@ const CollabLinkToProjectList = ({project}) => (
 	<div>
 		{project.collabLinkToProject.map(collaborator => (
 			<CollabLinkToProject>
-				<CollaboratorAvatar email={collaborator.email} size={30} />
+				<CollaboratorAvatar collaborator={collaborator} size={30} />
 				<CollaboratorEmail>
 					{formatFullName(
 						undefined,

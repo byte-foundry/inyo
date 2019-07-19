@@ -56,7 +56,7 @@ function CollaboratorLine({collaborator: {collaborator, isLinked}, projectId}) {
 				}
 			}}
 		>
-			<CollaboratorAvatar email={collaborator.email} />
+			<CollaboratorAvatar collaborator={collaborator} size={50} />
 			<div>
 				{formatFullName(
 					undefined,

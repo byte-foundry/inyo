@@ -240,7 +240,6 @@ const Collaborators = () => {
 								</Cell>
 								<Cell>{collaborator.email}</Cell>
 								<ActionCell>
-									<IconButton icon="edit" size="tiny" />
 									<IconButton
 										icon="delete_forever"
 										size="tiny"

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import Gravatar from 'react-gravatar';
+
+import InitialIdentifier from '../InitialIdentifier';
 
 const CollaboratorAvatarContainer = styled('div')`
 	border-radius: 50%;
@@ -10,10 +11,10 @@ const CollaboratorAvatarContainer = styled('div')`
 	overflow: hidden;
 `;
 
-function CollaboratorAvatar({email, size = 50}) {
+function CollaboratorAvatar({collaborator, size = 50}) {
 	return (
 		<CollaboratorAvatarContainer size={size}>
-			<Gravatar email={email} size={size} />
+			<InitialIdentifier author={collaborator} size={size} />
 		</CollaboratorAvatarContainer>
 	);
 }

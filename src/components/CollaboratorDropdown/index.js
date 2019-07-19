@@ -108,7 +108,7 @@ function CollaboratorLine({taskId, collaborator, active}) {
 			active={active}
 			onMouseUp={assignOrUnassign}
 		>
-			<CollaboratorAvatar email={collaborator.email} />
+			<CollaboratorAvatar collaborator={collaborator} size={50} />
 			<div>
 				{formatFullName(
 					undefined,

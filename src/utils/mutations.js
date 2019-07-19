@@ -1006,3 +1006,22 @@ export const REMOVE_ASSIGNMENT_TO_TASK = gql`
 		}
 	}
 `;
+
+export const REMOVE_COLLABORATION = gql`
+	mutation removeCollab($collaboratorId: ID!) {
+		removeCollab(collaboratorId: $collaboratorId) {
+			id
+			collaborators {
+				id
+			}
+		}
+	}
+`;
+
+export const CANCEL_REQUEST_COLLAB = gql`
+	mutation cancelRequestCollab($collabRequestId: ID!) {
+		cancelRequestCollab(collabRequestId: $collabRequestId) {
+			id
+		}
+	}
+`;

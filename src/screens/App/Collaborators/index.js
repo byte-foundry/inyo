@@ -10,7 +10,9 @@ import {formatCollabStatus, formatFullName} from '../../../utils/functions';
 import Search from '../../../utils/icons/search.svg';
 import {
 	ACCEPT_COLLAB_REQUEST,
+	CANCEL_REQUEST_COLLAB,
 	REJECT_COLLAB_REQUEST,
+	REMOVE_COLLABORATION,
 } from '../../../utils/mutations';
 import {
 	A,
@@ -48,9 +50,6 @@ const Table = styled('table')`
 	margin: 1rem 0 2rem;
 
 	th,
-	td {
-		width: 33%;
-	}
 `;
 
 const RowHeader = styled('tr')`
@@ -82,6 +81,7 @@ const Cell = styled('td')`
 
 const ActionCell = styled(Cell)`
 	display: flex;
+	justify-content: flex-end;
 	align-items: center;
 	opacity: ${props => (props.unhidden ? 1 : 0)};
 `;
@@ -156,6 +156,8 @@ const Collaborators = () => {
 	const {data, error} = useQuery(GET_USER_COLLABORATORS, {suspend: true});
 	const [acceptCollabRequest] = useMutation(ACCEPT_COLLAB_REQUEST);
 	const [rejectCollabRequest] = useMutation(REJECT_COLLAB_REQUEST);
+	const [removeCollab] = useMutation(REMOVE_COLLABORATION);
+	const [cancelRequestCollab] = useMutation(CANCEL_REQUEST_COLLAB);
 
 	if (error) throw error;
 
@@ -264,7 +266,12 @@ const Collaborators = () => {
 											setCollaboratorToBeRemoved(null);
 
 											if (confirmed) {
-												// removeCollaborator
+												removeCollab({
+													variables: {
+														collaboratorId:
+															collaborator.id,
+													},
+												});
 											}
 										}}
 									/>
@@ -345,6 +352,7 @@ const Collaborators = () => {
 					<tbody>
 						{filteredCollaboratorRequests.map(
 							({
+								id,
 								status,
 								requestee: {firstName, lastName, email},
 							}) => (
@@ -358,6 +366,18 @@ const Collaborators = () => {
 									</Cell>
 									<Cell>{email}</Cell>
 									<Cell>{formatCollabStatus(status)}</Cell>
+									<Cell>
+										<Button
+											onClick={() => cancelRequestCollab({
+												variables: {
+													collabRequestId: id,
+												},
+											})
+											}
+										>
+											Annuler
+										</Button>
+									</Cell>
 								</Row>
 							),
 						)}
@@ -380,8 +400,8 @@ const Collaborators = () => {
 						<P>
 							Êtes-vous sûr de vouloir supprimer{' '}
 							{collaboratorToBeRemoved.email} ? Tous les projets
-							et les tâches associés à ce client se retrouveront
-							sans client.
+							et les tâches assignées à ce collaborateur seront
+							desassignées.
 						</P>
 						<P>Êtes-vous sûr de vouloir continuer?</P>
 					</ConfirmModal>

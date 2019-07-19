@@ -91,7 +91,7 @@ const CollaboratorModal = ({
 	return (
 		<ModalContainer onDismiss={onDismiss}>
 			<ModalElem>
-				<Header>Collaborateur sur le projet {projectName}</Header>
+				<Header>Collaborateurs sur le projet {projectName}</Header>
 				<Formik
 					initialValues={{
 						search: '',

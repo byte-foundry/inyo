@@ -7,7 +7,6 @@ import {isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
-	collabGreen,
 	DragSeparator,
 	lightGrey,
 	mediumGrey,
@@ -16,6 +15,7 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
 const Button = styled(IconButton)``;
@@ -36,7 +36,7 @@ const CardSubTitle = styled('span')`
 
 const TaskCardElem = styled('div')`
 	background: ${primaryWhite};
-	border: 1px solid ${props => (props.isAssigned ? collabGreen : mediumGrey)};
+	border: 1px solid ${mediumGrey};
 	box-shadow: 3px 3px 6px ${mediumGrey};
 	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
 	border-radius: 3px;
@@ -152,6 +152,13 @@ const TaskCard = withRouter(
 					</TagContainer>
 				)}
 				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
+					{task.assignee && (
+						<MaterialIcon
+							icon="reply"
+							size="micro"
+							color="inherit"
+						/>
+					)}{' '}
 					{task.name}
 				</CardTitle>
 				{task.linkedCustomer && (

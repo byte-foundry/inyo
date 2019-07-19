@@ -440,6 +440,42 @@ const SidebarProjectInfos = ({
 			)}
 
 			<SubSection>
+				<Actions>
+					{project.collabLinkToProject.length === 0 ? (
+						<Button
+							materialIcon
+							onClick={() => {
+								setEditCollab(true);
+							}}
+						>
+							<MaterialIcon
+								icon="face"
+								size="tiny"
+								color="inherit"
+							/>{' '}
+							Ajouter un collaborateur
+						</Button>
+					) : (
+						<CollabLinkToProjectContainer
+							onClick={() => setEditCollab(true)}
+						>
+							<PencilElem icon="edit" size="tiny" />
+							<SubHeading>Collaborateurs du projet</SubHeading>
+							<CollabLinkToProjectList project={project} />
+						</CollabLinkToProjectContainer>
+					)}
+				</Actions>
+				{isEditingCollab && (
+					<CollaboratorModal
+						onDismiss={() => setEditCollab(false)}
+						projectName={project.name}
+						projectId={project.id}
+						projectCollabLink={project.collabLinkToProject}
+					/>
+				)}
+			</SubSection>
+
+			<SubSection>
 				<DateContainer>
 					{project.deadline ? (
 						<>
@@ -513,41 +549,6 @@ const SidebarProjectInfos = ({
 					</Tooltip>
 				</SubSection>
 			)}
-			<SubSection>
-				<Actions>
-					{project.collabLinkToProject.length === 0 ? (
-						<Button
-							materialIcon
-							onClick={() => {
-								setEditCollab(true);
-							}}
-						>
-							<MaterialIcon
-								icon="face"
-								size="tiny"
-								color="inherit"
-							/>{' '}
-							Ajouter un collaborateur
-						</Button>
-					) : (
-						<CollabLinkToProjectContainer
-							onClick={() => setEditCollab(true)}
-						>
-							<PencilElem icon="edit" size="tiny" />
-							<SubHeading>Collaborateurs du projet</SubHeading>
-							<CollabLinkToProjectList project={project} />
-						</CollabLinkToProjectContainer>
-					)}
-				</Actions>
-				{isEditingCollab && (
-					<CollaboratorModal
-						onDismiss={() => setEditCollab(false)}
-						projectName={project.name}
-						projectId={project.id}
-						projectCollabLink={project.collabLinkToProject}
-					/>
-				)}
-			</SubSection>
 
 			<div>
 				<Actions>

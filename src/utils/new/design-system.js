@@ -763,6 +763,7 @@ export const CollaboratorLineRow = styled('div')`
 	align-items: center;
 	margin-bottom: 1.5rem;
 	padding: 0.5rem;
+	cursor: pointer;
 
 	&:hover {
 		background: ${primaryPurple};

@@ -24,6 +24,7 @@ import {
 	P,
 	primaryBlack,
 	primaryPurple,
+	SubHeading,
 } from '../../../utils/new/design-system';
 import {GET_USER_COLLABORATORS} from '../../../utils/queries';
 
@@ -44,6 +45,12 @@ const Table = styled('table')`
 	border-collapse: collapse;
 	text-align: left;
 	width: 100%;
+	margin: 1rem 0 2rem;
+
+	th,
+	td {
+		width: 33%;
+	}
 `;
 
 const RowHeader = styled('tr')`
@@ -143,10 +150,6 @@ const Forms = styled('div')`
 		align-items: stretch;
 		margin-bottom: 2rem;
 	}
-`;
-
-const SubHeading = styled('h2')`
-	color: ${accentGrey};
 `;
 
 const Collaborators = () => {
@@ -271,7 +274,7 @@ const Collaborators = () => {
 						))}
 					</tbody>
 				</Table>
-				<SubHeading>Requête reçus</SubHeading>
+				<SubHeading>Requêtes reçues</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>
@@ -300,6 +303,7 @@ const Collaborators = () => {
 										{status !== collabStatuses.REJECTED ? (
 											<>
 												<Button
+													aligned
 													onClick={() => acceptCollabRequest({
 														variables: {
 															requestId: id,
@@ -330,7 +334,7 @@ const Collaborators = () => {
 						)}
 					</tbody>
 				</Table>
-				<SubHeading>Requête envoyées</SubHeading>
+				<SubHeading>Requêtes envoyées</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>

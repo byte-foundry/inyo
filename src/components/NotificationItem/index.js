@@ -42,6 +42,19 @@ const Container = styled('span')`
 	}
 `;
 
+const Actions = styled('div')`
+	margin: 0.5rem 0;
+	display: flex;
+
+	span {
+		margin-left: .5rem;
+	}
+
+	${Button} + ${Button} {
+		margin-left: 1rem;
+	}
+`;
+
 const Notification = ({
 	icon, unread, link, children,
 }) => {
@@ -141,21 +154,37 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 			<Notification icon="people" unread={unread}>
 				{formatFullName(undefined, from.firstName, from.lastName)} vous
 				a invité à collaborer
-				<Button
-					onClick={() => acceptCollabRequest({variables: {requestId: object.id}})
-					}
-					link
-				>
-					Accepter
-				</Button>{' '}
-				<Button
-					onClick={() => rejectCollabRequest({variables: {requestId: object.id}})
-					}
-					link
-					red
-				>
-					Refuser
-				</Button>
+				<Actions>
+					<Button
+						onClick={() => acceptCollabRequest({
+							variables: {requestId: object.id},
+						})
+						}
+						link
+					>
+						<MaterialIcon
+							icon="check_circle"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>Accepter</span>
+					</Button>
+					<Button
+						onClick={() => rejectCollabRequest({
+							variables: {requestId: object.id},
+						})
+						}
+						link
+						red
+					>
+						<MaterialIcon
+							icon="remove_circle"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>Rejeter</span>
+					</Button>
+				</Actions>
 			</Notification>
 		);
 	}

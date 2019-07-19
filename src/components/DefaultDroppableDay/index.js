@@ -10,7 +10,7 @@ const Content = styled('div')`
 	flex: 1 0 70px;
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: flex-start;
 `;
 
 function DefaultDroppableDay({

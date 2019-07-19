@@ -1,24 +1,29 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
-import {primaryBlue, primaryRed, primaryWhite} from '../../utils/colors';
+import {
+	accentGrey,
+	primaryBlue,
+	primaryRed,
+	primaryWhite,
+} from '../../utils/colors';
 
 const Pie = styled('div')`
-	width: 16px;
-	height: 16px;
+	width: 18px;
+	height: 18px;
 	border-radius: 50%;
 	background: ${props => (props.value <= 1
-		? primaryWhite
+		? accentGrey
 		: props.value > 2
 			? primaryRed
 			: primaryBlue)};
-	border: 2px solid ${primaryBlue};
 	background-image: linear-gradient(
 		to right,
 		transparent 50%,
 		currentColor 0
 	);
 	color: ${props => (props.value <= 1 ? primaryBlue : primaryRed)};
+	position: relative;
 
 	::before {
 		content: '';
@@ -32,6 +37,18 @@ const Pie = styled('div')`
 		transform: rotate(
 			${props => (props.value <= 2 ? props.value % 0.5 : 1)}turn
 		);
+	}
+
+	::after {
+		content: '';
+		width: 12px;
+		height: 12px;
+		position: absolute;
+		top: 3px;
+		left: 3px;
+		display: block;
+		background: ${primaryWhite};
+		border-radius: 50%;
 	}
 `;
 

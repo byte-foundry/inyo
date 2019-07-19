@@ -13,12 +13,14 @@ import {
 	Button,
 	lightGrey,
 	mediumGrey,
+	primaryGrey,
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
 import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 import RawPieChart from '../PieChart';
 import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
@@ -123,10 +125,25 @@ const ScheduleNavInfo = styled('div')`
 	align-items: center;
 `;
 
+const DayInfos = styled('div')`
+	display: flex;
+	align-items: flex-start;
+	flex: 1;
+
+	font-size: 0.8rem;
+	line-height: 1.4;
+	color: ${primaryGrey};
+`;
+
+const Icon = styled('div')`
+	flex: 0 0 18px;
+	margin: 13px 10px;
+	margin-left: 0;
+`;
+
 const PieChart = styled(RawPieChart)`
-	flex: 0 0 16px;
-	margin: 15px 10px;
-	margin-left: 10px;
+	flex: 0 0 18px;
+	margin: 13px 10px;
 	margin-left: 0;
 `;
 
@@ -285,7 +302,7 @@ const Schedule = ({
 
 					if (isPastDay && timeSpent > 0) {
 						stat = (
-							<>
+							<DayInfos>
 								<PieChart value={timeSpent / workingTime} />
 								<p>
 									{moment
@@ -297,7 +314,7 @@ const Schedule = ({
 										value={timeSpent}
 									/>
 								</p>
-							</>
+							</DayInfos>
 						);
 					}
 					else if (
@@ -306,15 +323,20 @@ const Schedule = ({
 						&& timeLeft < workingTime
 					) {
 						stat = (
-							<>
+							<DayInfos>
 								<PieChart value={1 - timeLeft / workingTime} />
 								<p>
-									Il vous reste{' '}
 									{moment
 										.duration(timeLeft, 'hours')
-										.humanize()}
+										.humanize()}{' '}
+									encore{' '}
+									<Plural
+										singular="disponible"
+										plural="disponibles"
+										value={timeLeft}
+									/>
 								</p>
-							</>
+							</DayInfos>
 						);
 					}
 					else if (
@@ -323,10 +345,19 @@ const Schedule = ({
 						&& sortedTasks.length > 0
 					) {
 						stat = (
-							<p>
-								Ajoutez des durées à ces tâches pour qu'Inyo
-								vous aide à gérer votre temps.
-							</p>
+							<DayInfos>
+								<Icon>
+									<MaterialIcon
+										icon="settings"
+										size="tiny"
+										color="inherit"
+									/>
+								</Icon>
+								<p>
+									Ajoutez des durées à ces tâches pour qu'Inyo
+									vous aide à gérer votre temps.
+								</p>
+							</DayInfos>
 						);
 					}
 

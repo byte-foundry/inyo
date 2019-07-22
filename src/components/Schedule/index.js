@@ -25,6 +25,7 @@ import RawPieChart from '../PieChart';
 import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
+import UnitDisplay from '../UnitDisplay';
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -282,17 +283,12 @@ const Schedule = ({
 					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
 					const timeLeft
-						= workingTime
-						- sortedTasks.reduce(
-							(time, task) => time + task.unit,
-							0,
-						)
-							* workingTime;
-					const timeSpent
-						= sortedTasks.reduce(
-							(time, task) => time + task.timeItTook,
-							0,
-						) * workingTime;
+						= 1
+						- sortedTasks.reduce((time, task) => time + task.unit, 0);
+					const timeSpent = sortedTasks.reduce(
+						(time, task) => time + task.timeItTook,
+						0,
+					);
 					const isPastDay = moment(day.momentDate).isBefore(
 						moment(),
 						'day',
@@ -303,37 +299,26 @@ const Schedule = ({
 					if (isPastDay && timeSpent > 0) {
 						stat = (
 							<DayInfos>
-								<PieChart value={timeSpent / workingTime} />
+								<PieChart value={timeSpent} />
 								<p>
-									{moment
-										.duration(timeSpent, 'hours')
-										.humanize()}{' '}
-									<Plural
-										singular="travaillée"
-										plural="travaillées"
-										value={timeSpent}
+									<UnitDisplay
+										unit={timeSpent}
+										singular=" travaillée"
+										plural=" travaillées"
 									/>
 								</p>
 							</DayInfos>
 						);
 					}
-					else if (
-						!isPastDay
-						&& timeLeft > 0
-						&& timeLeft < workingTime
-					) {
+					else if (!isPastDay && timeLeft > 0 && timeLeft < 1) {
 						stat = (
 							<DayInfos>
-								<PieChart value={1 - timeLeft / workingTime} />
+								<PieChart value={1 - timeLeft} />
 								<p>
-									{moment
-										.duration(timeLeft, 'hours')
-										.humanize()}{' '}
-									encore{' '}
-									<Plural
-										singular="disponible"
-										plural="disponibles"
-										value={timeLeft}
+									<UnitDisplay
+										unit={timeLeft}
+										singular=" encore disponible"
+										plural=" encore disponibles"
 									/>
 								</p>
 							</DayInfos>
@@ -342,15 +327,12 @@ const Schedule = ({
 					else if (!isPastDay && timeLeft < 0) {
 						stat = (
 							<DayInfos>
-								<PieChart value={1 - timeLeft / workingTime} />
+								<PieChart value={1 - timeLeft} />
 								<p>
-									{moment
-										.duration(timeLeft, 'hours')
-										.humanize()}{' '}
-									<Plural
-										singular="supplémentaire"
-										plural="supplémentaires"
-										value={timeLeft}
+									<UnitDisplay
+										unit={-timeLeft}
+										singular=" supplémentaire"
+										plural=" supplémentaires"
 									/>
 								</p>
 							</DayInfos>

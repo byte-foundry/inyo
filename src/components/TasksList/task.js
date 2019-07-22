@@ -39,6 +39,7 @@ import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
 import TimeItTookDisplay from '../TimeItTookDisplay';
 import Tooltip from '../Tooltip';
+import UnitDisplay from '../UnitDisplay';
 import UnitInput from '../UnitInput';
 
 export const TaskContainer = styled('div')`
@@ -433,17 +434,10 @@ export function TaskInfosInputs({
 		).length;
 	}
 
-	let unitToDisplay
+	const unitToDisplay
 		= item.timeItTook === null || item.timeItTook === undefined
 			? item.unit
 			: item.timeItTook;
-
-	let unitInHours = false;
-
-	if (unitToDisplay < 1) {
-		unitToDisplay *= 8;
-		unitInHours = true;
-	}
 
 	const dueDate
 		= item.dueDate
@@ -591,27 +585,15 @@ export function TaskInfosInputs({
 									: () => setEditUnit(true)
 							}
 						>
-							{+unitToDisplay.toFixed(2)}{' '}
-							{!unitInHours && (
-								<Plural
-									value={unitToDisplay}
-									singular="jour"
-									plural="jours"
+							<UnitDisplay unit={unitToDisplay} />
+							{item.status !== 'FINISHED' && (
+								<TimeItTookDisplay
+									timeItTook={item.timeItTook}
+									unit={item.unit}
+									displayForCustomer={!!customerToken}
+									status={item.status}
 								/>
 							)}
-							{unitInHours && (
-								<Plural
-									value={unitToDisplay}
-									singular="heure"
-									plural="heures"
-								/>
-							)}
-							<TimeItTookDisplay
-								timeItTook={item.timeItTook}
-								unit={item.unit}
-								customerToken={customerToken}
-								status={item.status}
-							/>
 						</div>
 					)
 				}

@@ -2,9 +2,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import React, {Component} from 'react';
-import {Query} from 'react-apollo';
-import {Redirect, withRouter} from 'react-router-dom';
+import React, {useEffect, useRef, useState} from 'react';
+import {useApolloClient, useQuery} from 'react-apollo-hooks';
+import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
 import UserAssistantForm from '../../../components/UserAssistantForm';
@@ -12,24 +12,29 @@ import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
 import {BREAKPOINTS} from '../../../utils/constants';
+import {Button, H3} from '../../../utils/content';
+import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
 import {
-	Button,
-	FlexRow,
+	accentGrey,
 	gray20,
 	gray50,
-	H3,
-	Loading,
-	primaryBlue,
+	Heading,
+	primaryPurple,
 	primaryWhite,
 	signalRed,
-} from '../../../utils/content';
-import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
-import {primaryPurple} from '../../../utils/new/design-system';
+} from '../../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
-const AccountMain = styled('div')`
-	padding-bottom: 80px;
+const Container = styled('div')`
+	/* max-width: 980px;
+	margin: 0 auto;
+	min-height: 100vh;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		max-width: 100%;
+	} */
 `;
+
 const AccountBody = styled('div')`
 	padding-left: 40px;
 	padding-right: 40px;
@@ -38,7 +43,9 @@ const AccountBody = styled('div')`
 		padding: 1rem;
 	}
 `;
-const Profile = styled(FlexRow)`
+
+const Profile = styled('div')`
+	display: flex;
 	align-items: flex-start;
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -46,7 +53,7 @@ const Profile = styled(FlexRow)`
 	}
 `;
 
-const ProfileSide = styled('div')`
+const ProfileSide = styled('nav')`
 	margin-top: 80px;
 	margin-right: 80px;
 	position: sticky;
@@ -97,9 +104,11 @@ const ProfileSection = styled('div')`
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
 	display: flex;
-	flex-direction: row;
+	align-items: center;
+	flex-direction: row-reverse;
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
 		padding: 0;
 		border: none;
 	}
@@ -109,13 +118,18 @@ const LogoutButton = styled(Button)`
 	padding: 10px 5px;
 	font-size: 15px;
 	margin-bottom: 10px;
+	color: ${accentGrey};
+	flex: 1 1 50%;
+`;
+
+const UnsubscribeButton = styled('a')`
+	padding: 10px 5px;
+	font-size: 15px;
+	margin-bottom: 10px;
 	color: ${signalRed};
 	flex: 1 1 50%;
 `;
 
-const WelcomeMessage = styled(H3)`
-	color: ${primaryBlue};
-`;
 const ProfileTitle = styled(H3)`
 	font-size: 1.5rem;
 
@@ -130,28 +144,54 @@ const Illus = styled('img')`
 	height: 250px;
 `;
 
-class Account extends Component {
-	state = {
-		activeItem: 'me',
-		initialRender: true,
-	};
+const Footer = styled('div')`
+	text-align: center;
+	margin: 10px;
+`;
 
-	initialScroll = () => {
-		const hash = this.props.history.location.hash.slice(1);
+const Account = ({location}) => {
+	const [intercomLoaded, setIntercomLoaded] = useState(false);
+	const [activeItem, setActiveItem] = useState('me');
+	const refsContainer = useRef([]);
+	const refs = refsContainer.current;
+	const {data} = useQuery(GET_USER_INFOS, {
+		suspend: true,
+	});
+	const client = useApolloClient();
 
-		if (hash && this[hash] && this.state.initialRender) {
-			this[hash].scrollIntoView({
+	useEffect(() => {
+		const hash = location.hash.slice(1);
+
+		if (hash && refs[hash]) {
+			refs[hash].scrollIntoView({
 				block: 'start',
 				behavior: 'smooth',
 			});
-			this.setState({
-				activeItem: this[hash],
-				initialRender: false,
-			});
+			setActiveItem(refs[hash]);
 		}
+
+		window.Intercom('onUnreadCountChange', () => {
+			if (!intercomLoaded) setIntercomLoaded(true);
+		});
+	});
+
+	const createRef = value => (node) => {
+		refs[value] = node;
 	};
 
-	toast = () => {
+	const handleScroll = (e) => {
+		e.preventDefault();
+
+		const hashValue = e.target.hash.slice(1);
+
+		refs[hashValue].scrollIntoView({
+			block: 'start',
+			behavior: 'smooth',
+		});
+		setActiveItem(hashValue);
+	};
+
+	const displayToast = () => {
 		toast.info(
 			<div>
 				<p>Les données ont été mises à jour</p>
@@ -163,187 +203,128 @@ class Account extends Component {
 		);
 	};
 
-	handleScroll = (e) => {
-		e.preventDefault();
+	const {me} = data;
+	const {firstName, company, settings} = me;
 
-		const hashValue = e.target.hash.slice(1);
+	return (
+		<Container>
+			<ToastContainer />
 
-		this[hashValue].scrollIntoView({
-			block: 'start',
-			behavior: 'smooth',
-		});
-		this.setState({activeItem: hashValue});
-	};
+			<AccountBody>
+				<Heading>Bonjour {firstName} !</Heading>
 
-	render() {
-		const {activeItem} = this.state;
+				<Profile>
+					<ProfileSide>
+						<ProfileSideLinks>
+							<ProfileSideElem active={activeItem === 'me'}>
+								<ProfileSideLink
+									href="#me"
+									onClick={handleScroll}
+								>
+									Vous
+								</ProfileSideLink>
+							</ProfileSideElem>
+							<ProfileSideElem active={activeItem === 'company'}>
+								<ProfileSideLink
+									href="#company"
+									onClick={handleScroll}
+								>
+									Votre société
+								</ProfileSideLink>
+							</ProfileSideElem>
+							<ProfileSideElem active={activeItem === 'settings'}>
+								<ProfileSideLink
+									href="#settings"
+									onClick={handleScroll}
+								>
+									Vos options
+								</ProfileSideLink>
+							</ProfileSideElem>
+							<ProfileSideElem
+								active={activeItem === 'assistant'}
+							>
+								<ProfileSideLink
+									href="#assistant"
+									onClick={handleScroll}
+								>
+									Votre assistant·e
+								</ProfileSideLink>
+							</ProfileSideElem>
+							<ProfileSideElem active={activeItem === 'account'}>
+								<ProfileSideLink
+									href="#account"
+									onClick={handleScroll}
+								>
+									Votre compte
+								</ProfileSideLink>
+							</ProfileSideElem>
+						</ProfileSideLinks>
+					</ProfileSide>
 
-		return (
-			<Query query={GET_USER_INFOS} onCompleted={this.initialScroll}>
-				{({client, loading, data}) => {
-					if (loading) return <Loading />;
-					if (!data || !data.me) return <Redirect to="/auth" />;
-
-					const {me} = data;
-					const {firstName} = me;
-
-					return (
-						<AccountMain>
-							<ToastContainer />
-
-							<AccountBody>
-								<WelcomeMessage>
-									Bonjour {firstName} !
-								</WelcomeMessage>
-
-								<Profile>
-									<ProfileSide>
-										<ProfileSideLinks>
-											<ProfileSideElem
-												active={activeItem === 'me'}
-											>
-												<ProfileSideLink
-													href="#me"
-													onClick={this.handleScroll}
-												>
-													Vous
-												</ProfileSideLink>
-											</ProfileSideElem>
-											<ProfileSideElem
-												active={
-													activeItem === 'company'
-												}
-											>
-												<ProfileSideLink
-													href="#company"
-													onClick={this.handleScroll}
-												>
-													Votre société
-												</ProfileSideLink>
-											</ProfileSideElem>
-											<ProfileSideElem
-												active={
-													activeItem === 'settings'
-												}
-											>
-												<ProfileSideLink
-													href="#settings"
-													onClick={this.handleScroll}
-												>
-													Vos options
-												</ProfileSideLink>
-											</ProfileSideElem>
-											<ProfileSideElem
-												active={
-													activeItem === 'assistant'
-												}
-											>
-												<ProfileSideLink
-													href="#assistant"
-													onClick={this.handleScroll}
-												>
-													Votre assistant·e
-												</ProfileSideLink>
-											</ProfileSideElem>
-											<ProfileSideElem
-												active={
-													activeItem === 'account'
-												}
-											>
-												<ProfileSideLink
-													href="#account"
-													onClick={this.handleScroll}
-												>
-													Votre compte
-												</ProfileSideLink>
-											</ProfileSideElem>
-										</ProfileSideLinks>
-									</ProfileSide>
-
-									<ProfileMain>
-										<ProfileTitle
-											id="me"
-											ref={(elem) => {
-												this.me = elem;
-											}}
-										>
-											Vous
-										</ProfileTitle>
-										<UserDataForm
-											data={me}
-											done={() => this.toast()}
-										/>
-										<ProfileTitle
-											id="company"
-											ref={(elem) => {
-												this.company = elem;
-											}}
-										>
-											Votre société
-										</ProfileTitle>
-										<UserCompanyForm
-											data={me.company}
-											done={() => this.toast()}
-										/>
-										<ProfileTitle
-											id="settings"
-											ref={(elem) => {
-												this.settings = elem;
-											}}
-										>
-											Vos horaires et jours de travail
-										</ProfileTitle>
-										<UserWorkHourAndDaysForm
-											data={me}
-											done={() => this.toast()}
-										/>
-										<ProfileTitle
-											id="assistant"
-											ref={(elem) => {
-												this.assistant = elem;
-											}}
-										>
-											Votre assistant·e
-										</ProfileTitle>
-										<UserAssistantForm
-											defaultAssistantName={
-												me.settings.assistantName
-											}
-											done={() => this.toast()}
-										/>
-										<ProfileTitle
-											id="account"
-											ref={(elem) => {
-												this.account = elem;
-											}}
-										>
-											Votre compte
-										</ProfileTitle>
-										<ProfileSection>
-											<LogoutButton
-												theme="Link"
-												size="XSmall"
-												type="button"
-												onClick={() => {
-													window.localStorage.removeItem(
-														'authToken',
-													);
-													client.resetStore();
-												}}
-											>
-												Me déconnecter
-											</LogoutButton>
-											<Illus src={logoutIllus} />
-										</ProfileSection>
-									</ProfileMain>
-								</Profile>
-							</AccountBody>
-						</AccountMain>
-					);
-				}}
-			</Query>
-		);
-	}
-}
+					<ProfileMain>
+						<ProfileTitle id="me" ref={createRef('me')}>
+							Vous
+						</ProfileTitle>
+						<UserDataForm data={me} done={displayToast} />
+						<ProfileTitle id="company" ref={createRef('company')}>
+							Votre société
+						</ProfileTitle>
+						<UserCompanyForm data={company} done={displayToast} />
+						<ProfileTitle id="settings" ref={createRef('settings')}>
+							Vos horaires et jours de travail
+						</ProfileTitle>
+						<UserWorkHourAndDaysForm
+							data={me}
+							done={displayToast}
+						/>
+						<ProfileTitle
+							id="assistant"
+							ref={createRef('assistant')}
+						>
+							Votre assistant·e
+						</ProfileTitle>
+						<UserAssistantForm
+							defaultAssistantName={settings.assistantName}
+							done={displayToast}
+						/>
+						<ProfileTitle id="account" ref={createRef('account')}>
+							Votre compte
+						</ProfileTitle>
+						<ProfileSection>
+							<Illus src={logoutIllus} />
+							<UnsubscribeButton
+								href="mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
+								onClick={(e) => {
+									if (intercomLoaded) {
+										e.preventDefault();
+										window.Intercom(
+											'showNewMessage',
+											"Bonjour, je souhaiterai me désinscrire d'Inyo.",
+										);
+									}
+								}}
+							>
+								Me désinscrire
+							</UnsubscribeButton>
+						</ProfileSection>
+						<Footer>
+							<LogoutButton
+								theme="Link"
+								size="XSmall"
+								type="button"
+								onClick={() => {
+									window.localStorage.removeItem('authToken');
+									client.resetStore();
+								}}
+							>
+								Me déconnecter
+							</LogoutButton>
+						</Footer>
+					</ProfileMain>
+				</Profile>
+			</AccountBody>
+		</Container>
+	);
+};
 
 export default withRouter(Account);

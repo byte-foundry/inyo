@@ -8,7 +8,6 @@ import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
-import Tooltip from '../../../components/Tooltip';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {
 	A,
@@ -18,7 +17,8 @@ import {
 	P,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
+import {GET_ALL_TASKS} from '../../../utils/queries';
+import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
 	width: 980px;
@@ -93,18 +93,7 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {
-		data: {
-			me: {startWorkAt, endWorkAt},
-		},
-	} = useQuery(GET_USER_INFOS, {suspend: true});
-
-	const diffTime = moment(endWorkAt, 'HH:mm:ss').diff(
-		moment(startWorkAt, 'HH:mm:ss'),
-		'hours',
-		true,
-	);
-	const workingTime = diffTime < 0 ? diffTime + 24 : diffTime;
+	const {workingTime = 8} = useUserInfos() || {};
 
 	const query = new URLSearchParams(location.search);
 

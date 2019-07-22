@@ -17,7 +17,6 @@ import Task from '../../../components/TasksList/task';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
 	FlexRow,
-	Loading,
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
@@ -31,7 +30,8 @@ import {
 	IllusText,
 	P,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS, GET_USER_INFOS} from '../../../utils/queries';
+import {GET_ALL_TASKS} from '../../../utils/queries';
+import useUserInfos from '../../../utils/useUserInfos';
 
 const FlexRowMobile = styled(FlexRow)`
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -84,10 +84,7 @@ const DashboardTasks = ({location, history}) => {
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {data: userPrefsData, error: errorUserPrefs} = useQuery(
-		GET_USER_INFOS,
-		{suspend: true},
-	);
+	const {workingTime, workingDays, hasFullWeekSchedule} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 
 	const onMoveTask = useCallback(
@@ -136,7 +133,6 @@ const DashboardTasks = ({location, history}) => {
 	const linkedCustomerId = query.get('customerId');
 
 	if (error) throw error;
-	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {
 		me: {tasks},
@@ -263,6 +259,27 @@ const DashboardTasks = ({location, history}) => {
 			});
 		}
 
+		if (
+			!task.scheduledFor
+			&& task.status === 'FINISHED'
+			&& moment(task.finishedAt).isBefore(moment(), 'day')
+		) {
+			const finishedAtDate = task.finishedAt.split('T')[0];
+
+			scheduledTasksPerDay[finishedAtDate] = scheduledTasksPerDay[
+				finishedAtDate
+			] || {
+				date: finishedAtDate,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+			};
+
+			scheduledTasksPerDay[finishedAtDate].tasks.push(task);
+
+			return;
+		}
+
 		if (!task.scheduledFor) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
@@ -344,8 +361,8 @@ const DashboardTasks = ({location, history}) => {
 		<>
 			<Schedule
 				days={scheduledTasksPerDay}
-				workingDays={userPrefsData.me.workingDays}
-				fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+				workingDays={workingDays}
+				fullWeek={hasFullWeekSchedule}
 				onMoveTask={onMoveTask}
 			/>
 			{tasksToReschedule.length > 0 && (
@@ -432,8 +449,9 @@ const DashboardTasks = ({location, history}) => {
 				<LeftBarSchedule
 					isDragging={isDragging}
 					days={scheduledTasksPerDay}
-					fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
+					fullWeek={hasFullWeekSchedule}
 					onMoveTask={onMoveTask}
+					workingTime={workingTime}
 				/>
 			</Portal>
 		</>

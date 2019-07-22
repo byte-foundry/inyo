@@ -1,5 +1,3 @@
-import 'react-toastify/dist/ReactToastify.css';
-
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 

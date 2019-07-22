@@ -12,6 +12,7 @@ import {
 	mediumGrey,
 	primaryBlack,
 	primaryGrey,
+	primaryPurple,
 	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
@@ -45,7 +46,7 @@ const TaskCardElem = styled('div')`
 	font-size: 0.8rem;
 	line-height: 1.4;
 	display: grid;
-	grid-template-columns: 1fr 1.2rem;
+	grid-template-columns: 1fr 1.5rem;
 	cursor: pointer;
 	position: relative;
 
@@ -82,6 +83,10 @@ const TaskCardElem = styled('div')`
 			opacity: 1;
 
 			pointer-events: all;
+
+			&::after {
+				background: transparent;
+			}
 		}
 	`}
 `;
@@ -127,8 +132,13 @@ const TaskCard = withRouter(
 							gridColumnStart: '2',
 							gridRow: '1 / 3',
 						}}
-						icon="done"
-						size="micro"
+						icon="check_circle"
+						size="tiny"
+						color={
+							task.status === 'FINISHED'
+								? primaryPurple
+								: primaryGrey
+						}
 						onClick={(e) => {
 							e.stopPropagation();
 

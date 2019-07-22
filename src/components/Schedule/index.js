@@ -13,14 +13,19 @@ import {
 	Button,
 	lightGrey,
 	mediumGrey,
+	primaryGrey,
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
 import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
+import RawPieChart from '../PieChart';
+import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
+import UnitDisplay from '../UnitDisplay';
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -35,7 +40,7 @@ const Week = styled('div')`
 	background-color: ${lightGrey};
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		flex-flow: column-reverse;
+		flex-flow: column;
 	}
 `;
 
@@ -65,8 +70,13 @@ const Day = styled('div')`
 
 	${props => props.isOff
 		&& `
-		color: ${accentGrey};
-		background: ${lightGrey};
+		background: repeating-linear-gradient(
+		  45deg,
+		  ${mediumGrey},
+		  ${mediumGrey} 20px,
+		  transparent 20px,
+		  transparent 40px
+		);
 	`}
 `;
 
@@ -86,12 +96,6 @@ const DayTitle = styled('span')`
 		background: ${primaryPurple};
 		font-weight: 500;
 	`}
-`;
-
-const DroppableSeparator = styled('div')`
-	flex: 1 0 70px;
-	margin-top: -3px;
-	border-top: ${props => (props.isOver ? `3px solid ${primaryPurple}` : '5px solid transparent')};
 `;
 
 const DayTasks = styled('div')`
@@ -120,6 +124,28 @@ const ScheduleNavInfo = styled('div')`
 
 	display: flex;
 	align-items: center;
+`;
+
+const DayInfos = styled('div')`
+	display: flex;
+	align-items: flex-start;
+	flex: 1;
+
+	font-size: 0.75rem;
+	line-height: 1.4;
+	color: ${primaryGrey};
+`;
+
+const Icon = styled('div')`
+	flex: 0 0 18px;
+	margin: 13px 10px;
+	margin-left: 0;
+`;
+
+const PieChart = styled(RawPieChart)`
+	flex: 0 0 18px;
+	margin: 13px 10px;
+	margin-left: 0;
 `;
 
 const DraggableTaskCard = ({
@@ -209,7 +235,11 @@ const DroppableDayTasks = ({children}) => {
 };
 
 const Schedule = ({
-	days, workingDays, fullWeek, onMoveTask,
+	days,
+	workingDays,
+	fullWeek,
+	onMoveTask,
+	workingTime = 8,
 }) => {
 	const [startDay, setStartDay] = useState(moment().startOf('week'));
 
@@ -251,6 +281,84 @@ const Schedule = ({
 					);
 					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
 					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
+
+					const timeLeft
+						= 1
+						- sortedTasks.reduce((time, task) => time + task.unit, 0);
+					const timeSpent = sortedTasks.reduce(
+						(time, task) => time + task.timeItTook,
+						0,
+					);
+					const isPastDay = moment(day.momentDate).isBefore(
+						moment(),
+						'day',
+					);
+
+					let stat;
+
+					if (isPastDay && timeSpent > 0) {
+						stat = (
+							<DayInfos>
+								<PieChart value={timeSpent} />
+								<p>
+									<UnitDisplay
+										unit={timeSpent}
+										singular=" travaillée"
+										plural=" travaillées"
+									/>
+								</p>
+							</DayInfos>
+						);
+					}
+					else if (!isPastDay && timeLeft > 0 && timeLeft < 1) {
+						stat = (
+							<DayInfos>
+								<PieChart value={1 - timeLeft} />
+								<p>
+									<UnitDisplay
+										unit={timeLeft}
+										singular=" encore disponible"
+										plural=" encore disponibles"
+									/>
+								</p>
+							</DayInfos>
+						);
+					}
+					else if (!isPastDay && timeLeft < 0) {
+						stat = (
+							<DayInfos>
+								<PieChart value={1 - timeLeft} />
+								<p>
+									<UnitDisplay
+										unit={-timeLeft}
+										singular=" supplémentaire"
+										plural=" supplémentaires"
+									/>
+								</p>
+							</DayInfos>
+						);
+					}
+					else if (
+						!isPastDay
+						&& timeLeft === workingTime
+						&& sortedTasks.length > 0
+					) {
+						stat = (
+							<DayInfos>
+								<Icon>
+									<MaterialIcon
+										icon="settings"
+										size="tiny"
+										color="inherit"
+									/>
+								</Icon>
+								<p>
+									Ajoutez des durées à ces tâches pour qu'Inyo
+									vous aide à gérer votre temps.
+								</p>
+							</DayInfos>
+						);
+					}
 
 					return (
 						<Day isOff={!day.workedDay}>
@@ -321,7 +429,7 @@ const Schedule = ({
 										});
 									}}
 								>
-									<DroppableSeparator />
+									{stat}
 								</DefaultDroppableDay>
 								{sortedReminders.map(reminder => (
 									<ReminderCard

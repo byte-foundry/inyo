@@ -42,6 +42,7 @@ const Auth = React.lazy(() => import('./screens/Auth'));
 const StraightToCheckout = React.lazy(() => import('./screens/StraightToCheckout'));
 const Paid = React.lazy(() => import('./screens/Paid'));
 const EndOfTrial = React.lazy(() => import('./screens/EndOfTrial'));
+const PrematureEndOfTrial = React.lazy(() => import('./screens/PrematureEndOfTrial'));
 const ConditionalContent = React.lazy(() => import('./screens/App/ConditionalContent'));
 
 // Setting up locale mostly for react-dates
@@ -176,6 +177,11 @@ function Root() {
 								{ProtectedRoute({
 									protectedPath: '/app',
 									component: withTracker(App),
+									isAllowed: data && data.me,
+								})}
+								{ProtectedRoute({
+									protectedPath: '/pay-for-inyo',
+									component: withTracker(PrematureEndOfTrial),
 									isAllowed: data && data.me,
 								})}
 								{ProtectedRoute({

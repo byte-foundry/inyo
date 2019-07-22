@@ -18,6 +18,12 @@ const ProfileSection = styled('div')`
 	border: 1px solid ${gray20};
 	display: flex;
 	align-items: center;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+		padding: 0;
+		border: none;
+	}
 `;
 
 const UpdateButton = styled(Button)`
@@ -29,12 +35,17 @@ const UpdateButton = styled(Button)`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-right: 0;
+		margin-bottom: 20px;
 	}
 `;
 
 const Illus = styled('img')`
 	width: 44%;
 	margin-right: 2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-right: 0;
+	}
 `;
 
 const UserAssistantForm = ({defaultAssistantName, done}) => {

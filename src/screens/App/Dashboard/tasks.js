@@ -40,6 +40,7 @@ const FlexRowMobile = styled(FlexRow)`
 
 function DraggableTask({
 	item,
+	userId,
 	customerToken,
 	baseUrl,
 	setIsDragging = () => {},
@@ -72,6 +73,7 @@ function DraggableTask({
 			item={item}
 			customerToken={customerToken}
 			baseUrl={baseUrl}
+			userId={userId}
 			isDraggable
 		/>
 	);
@@ -413,6 +415,7 @@ const DashboardTasks = ({location, history}) => {
 								createTaskComponent={({item, customerToken}) => (
 									<DraggableTask
 										item={item}
+										userId={id}
 										key={item.id}
 										customerToken={customerToken}
 										baseUrl="dashboard"

@@ -286,6 +286,7 @@ function Task({
 	noData,
 	baseUrl = 'tasks',
 	forwardedRef,
+	userId,
 }) {
 	const [finishItem] = useMutation(FINISH_ITEM);
 	const [unfinishItem] = useMutation(UNFINISH_ITEM);
@@ -340,7 +341,7 @@ function Task({
 				<TaskIcon
 					status={item.status}
 					type={item.type}
-					assigned={item.assignee}
+					assigned={item.assignee && item.assignee.id !== userId}
 					noData={noData}
 					ref={iconRef}
 					justUpdated={justUpdated}

@@ -65,7 +65,7 @@ const TrialHeadband = ({history}) => {
 					history.push('/pay-for-inyo');
 				}}
 			>
-				le faire maintenant
+				Passer à la version payante
 			</Button>
 		</Headband>
 	);

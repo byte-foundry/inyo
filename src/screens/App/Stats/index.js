@@ -89,7 +89,7 @@ const Section = styled('div')`
 const Stats = ({history, location}) => {
 	const {
 		data: {
-			me: {tasks},
+			me: {id, tasks},
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
@@ -200,7 +200,8 @@ const Stats = ({history, location}) => {
 				|| projectId)
 			&& (!projectId
 				|| (task.section && task.section.project.id === projectId))
-			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag))
+			&& !(task.assignee && task.assignee.id !== id),
 	);
 
 	const customers = {};
@@ -212,6 +213,7 @@ const Stats = ({history, location}) => {
 			task.status !== 'FINISHED'
 			|| moment(task.createdAt).isBefore(moment().subtract(since, 'days'))
 			|| (task.section && task.section.project.status === 'REMOVED')
+			|| (task.assignee && task.assignee.id !== id)
 		) return;
 
 		const customer

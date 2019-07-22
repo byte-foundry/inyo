@@ -25,10 +25,10 @@ const AppMain = styled('div')`
 	}
 `;
 
-function App() {
+function App({history}) {
 	return (
 		<>
-			<TrialHeadband />
+			<TrialHeadband history={history} />
 			<AppMain>
 				<Switch>
 					<Route

@@ -344,8 +344,11 @@ const DraggableTask = ({
 		},
 		end(item, monitor) {
 			setIsDragging(false);
+			const result = monitor.getDropResult();
 
-			const {endSectionId, dropPosition} = monitor.getDropResult();
+			if (!result) return;
+
+			const {endSectionId, dropPosition} = result;
 
 			if (!endSectionId) return;
 			// Dropped in a day not a section

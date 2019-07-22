@@ -18,7 +18,7 @@ const Headband = styled('p')`
 	padding: 8px;
 `;
 
-const TrialHeadband = () => {
+const TrialHeadband = ({history}) => {
 	const {data, loading, error} = useQuery(
 		gql`
 			{
@@ -62,25 +62,7 @@ const TrialHeadband = () => {
 						'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
 					);
 
-					stripe
-						.redirectToCheckout({
-							items: [
-								{
-									sku: 'sku_F9hrygxAJQuSLp',
-									quantity: 1,
-								},
-							],
-							successUrl: 'https://dev.inyo.me/paid',
-							cancelUrl: 'https://dev.inyo.me/canceled',
-							customerEmail: email,
-							clientReferenceId: id,
-							billingAddressCollection: 'required',
-						})
-						.then((result) => {
-							if (result.error) {
-								throw result.error;
-							}
-						});
+					history.push('/pay-for-inyo');
 				}}
 			>
 				le faire maintenant

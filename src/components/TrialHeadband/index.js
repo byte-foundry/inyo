@@ -83,7 +83,7 @@ const TrialHeadband = () => {
 						});
 				}}
 			>
-				le faire maintenant
+				Passer à la version payante
 			</Button>
 		</Headband>
 	);

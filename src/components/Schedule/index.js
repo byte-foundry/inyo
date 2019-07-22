@@ -40,7 +40,7 @@ const Week = styled('div')`
 	background-color: ${lightGrey};
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		flex-flow: column-reverse;
+		flex-flow: column;
 	}
 `;
 

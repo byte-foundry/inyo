@@ -339,6 +339,23 @@ const Schedule = ({
 							</DayInfos>
 						);
 					}
+					else if (!isPastDay && timeLeft < 0) {
+						stat = (
+							<DayInfos>
+								<PieChart value={1 - timeLeft / workingTime} />
+								<p>
+									{moment
+										.duration(timeLeft, 'hours')
+										.humanize()}{' '}
+									<Plural
+										singular="supplémentaire"
+										plural="supplémentaires"
+										value={timeLeft}
+									/>
+								</p>
+							</DayInfos>
+						);
+					}
 					else if (
 						!isPastDay
 						&& timeLeft === workingTime

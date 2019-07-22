@@ -14,7 +14,7 @@ const Pie = styled('div')`
 	border-radius: 50%;
 	background: ${props => (props.value <= 1
 		? accentGrey
-		: props.value > 2
+		: props.value >= 2
 			? primaryRed
 			: primaryBlue)};
 	background-image: linear-gradient(
@@ -33,9 +33,9 @@ const Pie = styled('div')`
 		border-radius: 0 100% 100% 0 / 50%;
 		background-color: inherit;
 		transform-origin: left;
-		background: ${props => (props.value % 1 >= 0.5 || props.value > 2 ? 'currentColor' : '')};
+		background: ${props => (props.value % 1 >= 0.5 || props.value >= 2 ? 'currentColor' : '')};
 		transform: rotate(
-			${props => (props.value <= 2 ? props.value % 0.5 : 1)}turn
+			${props => (props.value < 2 ? props.value % 0.5 : 1)}turn
 		);
 	}
 

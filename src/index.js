@@ -165,6 +165,10 @@ function Root() {
 									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
 									to="/app/:customerToken/tasks?projectId=:projectId"
 								/>
+								<Route
+									path="/inyo-a-vie"
+									component={withTracker(StraightToCheckout)}
+								/>
 								<Route path="/paid" component={paidWithProps} />
 								<Redirect
 									from="/canceled"

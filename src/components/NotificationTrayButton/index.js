@@ -138,10 +138,12 @@ const NotificationTrayButton = ({mobile}) => {
 	let unreadNumber = 0;
 
 	if (!loading) {
-		unreadNumber = data.me.notifications.reduce(
-			(sum, notification) => sum + (notification.unread ? 1 : 0),
-			0,
-		);
+		unreadNumber
+			= data.me
+			&& data.me.notifications.reduce(
+				(sum, notification) => sum + (notification.unread ? 1 : 0),
+				0,
+			);
 	}
 
 	useEffect(() => {

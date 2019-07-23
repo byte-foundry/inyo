@@ -30,7 +30,7 @@ function Paid({user}) {
 				<FlexRow>
 					<IllusForPaying src={Illus} />
 					<Column>
-						<P>Merci pour votre achat..</P>
+						<P>Merci pour votre confiance et bienvenue…!</P>
 						<ButtonLink to="app/dashboard">
 							Retourner au dashboard
 						</ButtonLink>

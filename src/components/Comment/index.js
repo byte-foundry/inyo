@@ -3,31 +3,12 @@ import React from 'react';
 import Remarkable from 'remarkable';
 
 import {
-	FlexColumn,
-	FlexRow,
-	gray70,
-	gray80,
-	primaryWhite,
+	FlexColumn, FlexRow, gray70, gray80,
 } from '../../utils/content';
-import {
-	primaryGrey,
-	primaryPurple,
-	primaryRed,
-} from '../../utils/new/design-system';
+import InitialIdentifier from '../InitialIdentifier';
 
 const CommentMain = styled('div')`
 	margin: 20px 0;
-`;
-const CommentImage = styled('div')`
-	border-radius: 50%;
-	background: ${props => props.color};
-	width: 40px;
-	height: 40px;
-	text-align: center;
-	line-height: 40px;
-	color: ${primaryWhite};
-	text-transform: uppercase;
-	min-width: 40px;
 `;
 const CommentInfo = styled('time')`
 	font-size: 13px;
@@ -48,24 +29,10 @@ const CommentContent = styled(FlexColumn)`
 `;
 
 function Comment({comment: {text, author, createdAt}}) {
-	let color = primaryGrey;
-
-	let initials = '?';
-
-	if (author) {
-		// eslint-disable-next-line no-underscore-dangle
-		const isCustomer = author.__typename === 'Customer';
-
-		color = isCustomer ? primaryRed : primaryPurple;
-		initials
-			= (author.firstName || '').charAt(0)
-			+ (author.lastName || '').charAt(0);
-	}
-
 	return (
 		<CommentMain>
 			<FlexRow>
-				<CommentImage color={color}>{initials}</CommentImage>
+				<InitialIdentifier author={author} />
 				<CommentContent>
 					<CommentInfo dateTime={createdAt}>
 						{new Date(createdAt).toLocaleString()}

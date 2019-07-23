@@ -9,6 +9,13 @@ import TaskInvoiceIconUrl, {
 import SectionIconUrl, {
 	ReactComponent as SectionIcon,
 } from './icons/section-icon.svg';
+import TaskCollaboratorIconValidatedAnimUrl from './icons/taskicon-collaborator-validated-anim.svg';
+import TaskCollaboratorIconValidatedUrl, {
+	ReactComponent as TaskCollaboratorIconValidated,
+} from './icons/taskicon-collaborator-validated.svg';
+import TaskCollaboratorIconUrl, {
+	ReactComponent as TaskCollaboratorIcon,
+} from './icons/taskicon-collaborator.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 import TaskCustomerIconValidatedUrl, {
 	ReactComponent as TaskCustomerIconValidated,
@@ -23,7 +30,6 @@ import TaskIconValidatedUrl, {
 import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 
 export const GRAPHQL_API = `https://prisma${
-	// eslint-disable-line import/prefer-default-export
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 }.inyo.me/`;
 
@@ -91,6 +97,12 @@ export const itemStatuses = {
 	PENDING: 'PENDING',
 };
 
+export const collabStatuses = {
+	PENDING: 'PENDING',
+	ACCEPTED: 'ACCEPTED',
+	REJECTED: 'REJECTED',
+};
+
 export const BREAKPOINTS = [420];
 
 export const CUSTOMER_TASK_TYPES = [
@@ -109,6 +121,16 @@ export const ITEM_TYPES = [
 		type: 'DEFAULT',
 		name: 'Basique',
 		description: 'Une tâche dont vous êtes responsable',
+	},
+	{
+		icon: <TaskCollaboratorIcon />,
+		iconValidated: <TaskCollaboratorIconValidated />,
+		iconUrl: TaskCollaboratorIconUrl,
+		iconUrlValidated: TaskCollaboratorIconValidatedUrl,
+		iconUrlValidatedAnim: TaskCollaboratorIconValidatedAnimUrl,
+		type: 'DEFAULT_ASSIGNED',
+		name: 'Basique',
+		description: 'Une tâche dont la personne assigné est responsable',
 	},
 	{
 		icon: <TaskCustomerIcon />,

@@ -60,8 +60,12 @@ export function extractScheduleFromWorkingDays(
 
 		if (fullWeek || workedDay) {
 			const date = iteratorDate.format(moment.HTML5_FMT.DATE);
-			const {tasks = [], reminders = [], deadlines = []}
-				= days[date] || {};
+			const {
+				tasks = [],
+				reminders = [],
+				deadlines = [],
+				assignedTasks = [],
+			} = days[date] || {};
 
 			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
 
@@ -71,6 +75,7 @@ export function extractScheduleFromWorkingDays(
 				tasks,
 				reminders,
 				deadlines,
+				assignedTasks,
 				workedDay,
 			});
 		}
@@ -100,3 +105,15 @@ export const formatName = normalizeFalsyParams(
 export const formatFullName = normalizeFalsyParams(
 	(title = '', firstName = '', lastName = '') => `${formatTitle(title)} ${formatName(firstName, lastName)}`.trim(),
 );
+
+export const formatCollabStatus = (status) => {
+	if (status === 'REJECTED') {
+		return 'Rejeté';
+	}
+
+	if (status === 'PENDING') {
+		return 'En attente';
+	}
+
+	return '';
+};

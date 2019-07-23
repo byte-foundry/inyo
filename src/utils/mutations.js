@@ -905,3 +905,123 @@ export const REMOVE_TAG = gql`
 		}
 	}
 `;
+
+export const REQUEST_COLLAB = gql`
+	mutation requestCollab($userEmail: String!, $projectId: ID) {
+		requestCollab(userEmail: $userEmail, projectId: $projectId) {
+			id
+			status
+			requestee {
+				id
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;
+
+export const ACCEPT_COLLAB_REQUEST = gql`
+	mutation acceptCollabRequest($requestId: ID!) {
+		acceptCollabRequest(requestId: $requestId) {
+			id
+			status
+			requester {
+				id
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;
+
+export const REJECT_COLLAB_REQUEST = gql`
+	mutation rejectCollabRequest($requestId: ID!) {
+		rejectCollabRequest(requestId: $requestId) {
+			id
+			status
+			requester {
+				id
+				firstName
+				lastName
+				email
+			}
+		}
+	}
+`;
+
+export const LINK_TO_PROJECT = gql`
+	mutation linkToProject($collaboratorId: ID!, $projectId: ID!) {
+		linkToProject(collaboratorId: $collaboratorId, projectId: $projectId) {
+			id
+			linkedCollaborators {
+				id
+			}
+		}
+	}
+`;
+
+export const REMOVE_LINK_TO_PROJECT = gql`
+	mutation removeLinkToProject($collaboratorId: ID!, $projectId: ID!) {
+		removeLinkToProject(
+			collaboratorId: $collaboratorId
+			projectId: $projectId
+		) {
+			id
+			linkedCollaborators {
+				id
+			}
+		}
+	}
+`;
+
+export const ASSIGN_TO_TASK = gql`
+	mutation assignToTask($taskId: ID!, $collaboratorId: ID!) {
+		assignToTask(taskId: $taskId, collaboratorId: $collaboratorId) {
+			id
+			assignee {
+				id
+				email
+				firstName
+				lastName
+			}
+		}
+	}
+`;
+
+export const REMOVE_ASSIGNMENT_TO_TASK = gql`
+	mutation removeAssignmentToTask($taskId: ID!, $collaboratorId: ID!) {
+		removeAssignmentToTask(
+			taskId: $taskId
+			collaboratorId: $collaboratorId
+		) {
+			id
+			assignee {
+				id
+				email
+				firstName
+				lastName
+			}
+		}
+	}
+`;
+
+export const REMOVE_COLLABORATION = gql`
+	mutation removeCollab($collaboratorId: ID!) {
+		removeCollab(collaboratorId: $collaboratorId) {
+			id
+			collaborators {
+				id
+			}
+		}
+	}
+`;
+
+export const CANCEL_REQUEST_COLLAB = gql`
+	mutation cancelRequestCollab($collabRequestId: ID!) {
+		cancelRequestCollab(collabRequestId: $collabRequestId) {
+			id
+		}
+	}
+`;

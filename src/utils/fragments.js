@@ -81,6 +81,15 @@ export const ITEM_FRAGMENT = gql`
 		isFocused
 		scheduledFor
 		schedulePosition
+		owner {
+			id
+		}
+		assignee {
+			id
+			email
+			firstName
+			lastName
+		}
 		reminders {
 			...ReminderFragment
 		}
@@ -119,6 +128,12 @@ export const ITEM_FRAGMENT = gql`
 				daysUntilDeadline
 				status
 				name
+				linkedCollaborators {
+					id
+					email
+					firstName
+					lastName
+				}
 				customer {
 					id
 					name

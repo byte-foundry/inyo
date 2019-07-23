@@ -256,6 +256,26 @@ export const Heading = styled('h1')`
 	}
 `;
 
+export const HeadingLink = styled(Link)`
+	font-size: 20px;
+	color: ${primaryBlack};
+	vertical-align: baseline;
+	line-height: 56px;
+	text-decoration: none;
+
+	&:hover {
+		color: ${primaryPurple};
+	}
+`;
+
+export const HeadingRow = styled('div')`
+	display: flex;
+
+	* ~ * {
+		margin-left: 2rem;
+	}
+`;
+
 export const TaskHeading = styled('h2')`
 	color: ${primaryGrey};
 	font-size: 18px;
@@ -410,21 +430,25 @@ export const InputLabel = styled('div')`
 	}
 `;
 
-export const TaskInputDropdown = styled('div')`
-	background: white;
+export const GenericDropdown = styled('div')`
+	background: ${primaryWhite};
 	border: 1px solid ${mediumGrey};
 	box-shadow: 5px 5px 15px ${primaryGrey};
-	position: absolute;
-	z-index: 2; /* do a portal instead */
-	width: 500px;
-	top: calc(100% + 15px);
-	left: 55px;
+	width: ${props => (props.width ? props.width : 'auto')};
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		left: -1rem;
 		width: calc(100% + 2rem);
 		box-shadow: 0 0 20rem ${primaryBlack};
 	}
+`;
+
+export const TaskInputDropdown = styled(GenericDropdown)`
+	position: absolute;
+	z-index: 2; /* do a portal instead */
+	width: 500px;
+	top: calc(100% + 15px);
+	left: 55px;
 `;
 
 export const TaskInputDropdownHeader = styled('p')`
@@ -732,4 +756,88 @@ export const DragSeparator = styled('div')`
 	width: 100%;
 	top: -5px;
 	background: ${primaryPurple};
+`;
+
+export const CollaboratorLineRow = styled('div')`
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	padding: 0.5rem;
+	cursor: pointer;
+
+	&:hover {
+		background: ${primaryPurple};
+		color: ${primaryWhite};
+	}
+`;
+
+export const StickyHeader = styled('div')`
+	position: sticky;
+	top: 0;
+	background: ${props => (props.customer ? primaryRed : primaryPurple)};
+	margin: -4rem -4rem 1.4rem;
+	display: flex;
+	justify-content: center;
+	padding: 1rem;
+	z-index: 1;
+	color: ${primaryWhite};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-left: -2rem;
+		margin-right: -2rem;
+	}
+`;
+
+export const Meta = styled('div')`
+	display: flex;
+	align-items: flex-start;
+	min-height: 1.25rem;
+
+	i {
+		margin-right: 15px;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 0;
+	}
+`;
+
+export const MetaLabel = styled('div')`
+	margin-right: 1rem;
+	min-width: 40px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
+`;
+
+export const MetaText = styled('span')`
+	color: ${primaryPurple};
+	flex: 1;
+	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
+
+	:empty::before {
+		content: '+';
+		border: 1px solid ${primaryPurple};
+		border-radius: 50%;
+		width: 0.85rem;
+		height: 0.8rem;
+		font-size: 0.8rem;
+		display: flex;
+		text-align: center;
+		flex-direction: column;
+		line-height: 1;
+		position: relative;
+		top: 2px;
+		left: -2px;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 1rem;
+		flex: 1 auto 100%;
+	}
+`;
+
+export const MetaTime = styled(MetaText)`
+	position: relative;
 `;

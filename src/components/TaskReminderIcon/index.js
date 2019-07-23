@@ -1,5 +1,5 @@
 import styled from '@emotion/styled/macro';
-import React, {useEffect, useState} from 'react';
+import React, {useMemo} from 'react';
 import {Link} from 'react-router-dom';
 
 import {isCustomerTask} from '../../utils/functions';
@@ -21,35 +21,25 @@ function TaskReminderIcon({
 	const activableTask = !customerToken && item.status === 'PENDING';
 	const customerTask = isCustomerTask(item.type);
 
-	const [activateLink, setActivateLink] = useState({
-		pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-		state: {
-			prevSearch: locationSearch,
-			isActivating: true,
-		},
-	});
-	const [taskLink, setTaskLink] = useState({
-		pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-		state: {
-			prevSearch: locationSearch,
-		},
-	});
-
-	useEffect(() => {
-		setActivateLink({
+	const [activateLink, setActivateLink] = useMemo(
+		() => ({
 			pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 			state: {
 				prevSearch: locationSearch,
 				isActivating: true,
 			},
-		});
-		setTaskLink({
+		}),
+		[taskUrlPrefix, baseUrl, item.id, locationSearch],
+	);
+	const [taskLink, setTaskLink] = useMemo(
+		() => ({
 			pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 			state: {
 				prevSearch: locationSearch,
 			},
-		});
-	}, [taskUrlPrefix, baseUrl, item.id, locationSearch]);
+		}),
+		[taskUrlPrefix, baseUrl, item.id, locationSearch],
+	);
 
 	return (
 		customerTask && (

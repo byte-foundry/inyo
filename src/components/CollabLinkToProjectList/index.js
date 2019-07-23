@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 
 import {FlexRow} from '../../utils/content';
-import {formatFullName} from '../../utils/functions';
+import {formatName} from '../../utils/functions';
 import CollaboratorAvatar from '../CollaboratorAvatar';
 
 const CollaboratorEmail = styled('div')`
@@ -15,15 +15,11 @@ const CollabLinkToProject = styled(FlexRow)`
 
 const CollabLinkToProjectList = ({project}) => (
 	<div>
-		{project.collabLinkToProject.map(collaborator => (
-			<CollabLinkToProject>
+		{project.linkedCollaborators.map(collaborator => (
+			<CollabLinkToProject key={collaborator.id}>
 				<CollaboratorAvatar collaborator={collaborator} size={30} />
 				<CollaboratorEmail>
-					{formatFullName(
-						undefined,
-						collaborator.firstName,
-						collaborator.lastName,
-					)}
+					{formatName(collaborator.firstName, collaborator.lastName)}
 				</CollaboratorEmail>
 			</CollabLinkToProject>
 		))}

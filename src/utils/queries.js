@@ -206,7 +206,7 @@ export const GET_PROJECT_COLLAB_LINK = gql`
 	query getProjectCollabLink($id: ID!) {
 		project(id: $id) {
 			id
-			collabLinkToProject {
+			linkedCollaborators {
 				id
 				email
 				firstName
@@ -287,7 +287,7 @@ export const GET_PROJECT_INFOS = gql`
 				}
 				siret
 			}
-			collabLinkToProject {
+			linkedCollaborators {
 				id
 				email
 				firstName

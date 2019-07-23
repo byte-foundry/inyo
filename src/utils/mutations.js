@@ -955,7 +955,7 @@ export const LINK_TO_PROJECT = gql`
 	mutation linkToProject($collaboratorId: ID!, $projectId: ID!) {
 		linkToProject(collaboratorId: $collaboratorId, projectId: $projectId) {
 			id
-			collabLinkToProject {
+			linkedCollaborators {
 				id
 			}
 		}
@@ -969,7 +969,7 @@ export const REMOVE_LINK_TO_PROJECT = gql`
 			projectId: $projectId
 		) {
 			id
-			collabLinkToProject {
+			linkedCollaborators {
 				id
 			}
 		}

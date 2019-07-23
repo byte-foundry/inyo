@@ -127,7 +127,7 @@ export const ITEM_FRAGMENT = gql`
 				daysUntilDeadline
 				status
 				name
-				collabLinkToProject {
+				linkedCollaborators {
 					id
 					email
 					firstName

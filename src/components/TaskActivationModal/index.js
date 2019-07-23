@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 
+import {isCustomerTask} from '../../utils/functions';
 import {StickyHeader} from '../../utils/new/design-system';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
@@ -28,7 +29,7 @@ function TaskActivationModal({
 
 	return (
 		<>
-			<StickyHeader customer={item.type !== 'DEFAULT'}>
+			<StickyHeader customer={isCustomerTask(item.type)}>
 				Prévisualisation des actions{' '}
 				<Apostrophe
 					value={assistantName}

@@ -2,7 +2,7 @@ import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
-import {formatFullName} from '../../utils/functions';
+import {formatName} from '../../utils/functions';
 import {Meta, MetaLabel, MetaText} from '../../utils/new/design-system';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import MaterialIcon from '../MaterialIcon';
@@ -11,7 +11,7 @@ import Tooltip from '../Tooltip';
 function ItemViewAssigneeInput({
 	customerToken,
 	assignee,
-	collabLinkToProject,
+	linkedCollaborators,
 	taskId,
 }) {
 	const [editAssignee, setEditAssignee] = useState(false);
@@ -50,8 +50,7 @@ function ItemViewAssigneeInput({
 						}
 					>
 						{(assignee
-							&& formatFullName(
-								undefined,
+							&& formatName(
 								assignee.firstName,
 								assignee.lastName,
 							)) || <>&mdash;</>}
@@ -64,7 +63,7 @@ function ItemViewAssigneeInput({
 						<CollaboratorDropdown
 							assignee={assignee}
 							taskId={taskId}
-							collaborators={collabLinkToProject}
+							collaborators={linkedCollaborators}
 						/>
 					</div>
 				</Portal>

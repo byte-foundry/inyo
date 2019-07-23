@@ -6,7 +6,7 @@ import AddCollaboratorModal from '../../../components/AddCollaboratorModal';
 import ConfirmModal from '../../../components/ConfirmModal';
 import IconButton from '../../../components/IconButton';
 import {BREAKPOINTS, collabStatuses} from '../../../utils/constants';
-import {formatCollabStatus, formatFullName} from '../../../utils/functions';
+import {formatCollabStatus, formatName} from '../../../utils/functions';
 import Search from '../../../utils/icons/search.svg';
 import {
 	ACCEPT_COLLAB_REQUEST,
@@ -298,11 +298,7 @@ const Collaborators = () => {
 							}) => (
 								<Row key="a" tabIndex="0" role="button">
 									<Cell>
-										{formatFullName(
-											undefined,
-											firstName,
-											lastName,
-										)}
+										{formatName(firstName, lastName)}
 									</Cell>
 									<Cell>{email}</Cell>
 									<ActionCell unhidden>
@@ -358,11 +354,7 @@ const Collaborators = () => {
 							}) => (
 								<Row key="a" tabIndex="0" role="button">
 									<Cell>
-										{formatFullName(
-											undefined,
-											firstName,
-											lastName,
-										)}
+										{formatName(firstName, lastName)}
 									</Cell>
 									<Cell>{email}</Cell>
 									<Cell>{formatCollabStatus(status)}</Cell>

@@ -441,7 +441,7 @@ const SidebarProjectInfos = ({
 
 			<SubSection>
 				<Actions>
-					{project.collabLinkToProject.length === 0 ? (
+					{project.linkedCollaborators.length === 0 ? (
 						<Button
 							materialIcon
 							onClick={() => {
@@ -470,7 +470,7 @@ const SidebarProjectInfos = ({
 						onDismiss={() => setEditCollab(false)}
 						projectName={project.name}
 						projectId={project.id}
-						projectCollabLink={project.collabLinkToProject}
+						linkedCollaborators={project.linkedCollaborators}
 					/>
 				)}
 			</SubSection>

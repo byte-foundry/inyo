@@ -327,7 +327,7 @@ const Schedule = ({
 								</DefaultDroppableDay>
 								{sortedReminders.map(reminder => (
 									<ReminderCard
-										key={`${reminder.id}`}
+										key={reminder.id}
 										datetime={reminder.sendingDate}
 										reminder={reminder}
 										task={reminder.item}
@@ -335,7 +335,7 @@ const Schedule = ({
 								))}
 								{sortedDeadlines.map(deadline => (
 									<DeadlineCard
-										key={`${deadline.id}`}
+										key={deadline.id}
 										project={deadline.project}
 										task={deadline.task}
 										date={deadline.date}
@@ -343,7 +343,7 @@ const Schedule = ({
 								))}
 								{sortedAssignedTasks.map(assignedTask => (
 									<AssignedToOtherCard
-										key={`${assignedTask.id}`}
+										key={assignedTask.id}
 										task={assignedTask}
 									/>
 								))}

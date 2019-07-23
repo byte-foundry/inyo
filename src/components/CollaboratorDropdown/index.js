@@ -3,7 +3,7 @@ import React, {useCallback} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
-import {formatFullName} from '../../utils/functions';
+import {formatName} from '../../utils/functions';
 import {ASSIGN_TO_TASK, REMOVE_ASSIGNMENT_TO_TASK} from '../../utils/mutations';
 import {
 	CollaboratorLineRow,
@@ -110,11 +110,7 @@ function CollaboratorLine({taskId, collaborator, active}) {
 		>
 			<CollaboratorAvatar collaborator={collaborator} size={50} />
 			<div>
-				{formatFullName(
-					undefined,
-					collaborator.firstName,
-					collaborator.lastName,
-				)}
+				{formatName(collaborator.firstName, collaborator.lastName)}
 			</div>
 			{active && (
 				<Actions>
@@ -130,6 +126,7 @@ function CollaboratorDropdown({collaborators = [], assignee, taskId}) {
 		<CollaboratorDropdownElem>
 			{collaborators.map(collab => (
 				<CollaboratorLine
+					key={collab.id}
 					collaborator={collab}
 					active={assignee && assignee.id === collab.id}
 					taskId={taskId}

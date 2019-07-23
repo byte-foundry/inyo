@@ -5,7 +5,7 @@ import React, {
 import {useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
-import {formatFullName} from '../../utils/functions';
+import {formatName} from '../../utils/functions';
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
 import {GET_PROJECT_COLLAB_LINK} from '../../utils/queries';
 import CollaboratorDropdown from '../CollaboratorDropdown';
@@ -25,7 +25,7 @@ function TaskCollaboratorList({projectId, taskId, assignee}) {
 		},
 		suspend: true,
 	});
-	const {collabLinkToProject} = data.project;
+	const {linkedCollaborators} = data.project;
 
 	useOnClickOutside(containerRef, () => {
 		setEditCollab(false);
@@ -55,8 +55,7 @@ function TaskCollaboratorList({projectId, taskId, assignee}) {
 				<>
 					<div onClick={onClickElem}>
 						{(assignee
-							&& formatFullName(
-								undefined,
+							&& formatName(
 								assignee.firstName,
 								assignee.lastName,
 							)) || <>&mdash;</>}
@@ -65,7 +64,7 @@ function TaskCollaboratorList({projectId, taskId, assignee}) {
 						<Portal>
 							<div ref={containerRef} style={dropdownStyle}>
 								<CollaboratorDropdown
-									collaborators={collabLinkToProject}
+									collaborators={linkedCollaborators}
 									assignee={assignee}
 									taskId={taskId}
 								/>

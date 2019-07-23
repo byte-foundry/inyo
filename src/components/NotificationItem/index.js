@@ -4,7 +4,7 @@ import {useMutation} from 'react-apollo-hooks';
 import {Link} from 'react-router-dom';
 
 import {collabStatuses} from '../../utils/constants';
-import {formatFullName} from '../../utils/functions';
+import {formatFullName, formatName} from '../../utils/functions';
 import {
 	ACCEPT_COLLAB_REQUEST,
 	REJECT_COLLAB_REQUEST,
@@ -152,8 +152,8 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 	if (object.status === collabStatuses.PENDING) {
 		return (
 			<Notification icon="people" unread={unread}>
-				{formatFullName(undefined, from.firstName, from.lastName)} vous
-				a invité à collaborer
+				{formatName(from.firstName, from.lastName)} vous a invité à
+				collaborer
 				<Actions>
 					<Button
 						onClick={() => acceptCollabRequest({
@@ -192,7 +192,7 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 		return (
 			<Notification icon="people" unread={unread}>
 				Vous avez accepté la requête de collaboration de{' '}
-				{formatFullName(undefined, from.firstName, from.lastName)}
+				{formatName(from.firstName, from.lastName)}
 			</Notification>
 		);
 	}
@@ -200,7 +200,7 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 		return (
 			<Notification icon="people" unread={unread}>
 				Vous avez rejeté la requête de collaboration de{' '}
-				{formatFullName(undefined, from.firstName, from.lastName)}
+				{formatName(from.firstName, from.lastName)}
 			</Notification>
 		);
 	}

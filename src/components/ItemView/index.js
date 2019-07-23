@@ -509,9 +509,9 @@ const Item = ({
 						customerToken={customerToken}
 						taskId={item.id}
 						assignee={item.assignee}
-						collabLinkToProject={
+						linkedCollaborators={
 							item.section
-							&& item.section.project.collabLinkToProject
+							&& item.section.project.linkedCollaborators
 						}
 					/>
 				)}

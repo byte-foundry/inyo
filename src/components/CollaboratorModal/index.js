@@ -70,7 +70,7 @@ const CollaboratorModal = ({
 	onDismiss,
 	projectName,
 	projectId,
-	projectCollabLink,
+	linkedCollaborators,
 }) => {
 	const {
 		data: {
@@ -83,7 +83,7 @@ const CollaboratorModal = ({
 
 	const collaboratorsWithLink = collaborators.map(collaborator => ({
 		collaborator,
-		isLinked: projectCollabLink.find(
+		isLinked: linkedCollaborators.find(
 			linkedTo => collaborator.id === linkedTo.id,
 		),
 	}));

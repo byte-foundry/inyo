@@ -7,7 +7,7 @@ export default function useUserInfos() {
 	const {data, loading, error} = useQuery(GET_USER_INFOS);
 
 	if (!data || !data.me || loading || error) {
-		return null;
+		return {};
 	}
 
 	const {

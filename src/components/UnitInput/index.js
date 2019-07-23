@@ -106,7 +106,7 @@ export default function ({
 	const [isHours, setIsHours] = useState(true);
 	const inputRef = innerRef || useRef();
 	const containerRef = useRef(null);
-	const {workingTime = 8} = useUserInfos() || {};
+	const {workingTime = 8} = useUserInfos();
 
 	outsideClosureState = isHours;
 

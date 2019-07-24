@@ -30,6 +30,18 @@ export function nonEmpty(parts, ...rest) {
 	return res;
 }
 
+export function taskFulfillsActivationCriteria(task) {
+	switch (task.type) {
+	case 'CUSTOMER':
+	case 'CONTENT_ACQUISITION':
+		return task.linkedCustomer;
+	case 'INVOICE':
+		return task.linkedCustomer && task.attachments.length > 0;
+	default:
+		return false;
+	}
+}
+
 export function formatDate(dateObject) {
 	return new Date(dateObject).toLocaleDateString('fr-FR');
 }

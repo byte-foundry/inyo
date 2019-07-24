@@ -34,6 +34,8 @@ const SignupForm = ({from, history, location}) => {
 	const client = useApolloClient();
 	const [signup] = useMutation(SIGNUP);
 	const [checkEmailAvailability] = useMutation(CHECK_UNIQUE_EMAIL);
+	const query = new URLSearchParams(location.search);
+	const prefilledEmail = query.get('email');
 
 	const debouncedCheckEmail = debounce(checkEmailAvailability, 500);
 
@@ -41,7 +43,7 @@ const SignupForm = ({from, history, location}) => {
 		<SignupFormMain>
 			<Formik
 				initialValues={{
-					email: '',
+					email: prefilledEmail || '',
 					password: '',
 					firstname: '',
 					lastname: '',

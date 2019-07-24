@@ -94,17 +94,19 @@ let outsideClosureState;
 // This is necessary becuse useOnClickOutside
 // does not update the handler when state changes
 
-export default function ({
+const UnitInput = ({
 	unit,
 	onBlur,
 	onSubmit,
 	onTab,
 	innerRef,
 	withButton,
+	autoFocus = true,
 	getValue = {},
-}) {
+}) => {
 	const [isHours, setIsHours] = useState(true);
-	const inputRef = innerRef || useRef();
+	const inputOwnRef = useRef();
+	const inputRef = innerRef || inputOwnRef;
 	const containerRef = useRef(null);
 	const {workingTime = 8} = useUserInfos();
 
@@ -116,14 +118,10 @@ export default function ({
 		return outsideClosureState ? valueFloat / workingTime : valueFloat;
 	};
 
-	useEffect(() => {
-		inputRef.current.focus();
-	});
-
 	useOnClickOutside(containerRef, () => {
 		const valueFloat = parseFloat(inputRef.current.value);
 
-		onBlur(outsideClosureState ? valueFloat / workingTime : valueFloat);
+		if (document.activeElement === inputRef.current) onBlur(outsideClosureState ? valueFloat / workingTime : valueFloat);
 	});
 
 	return (
@@ -139,7 +137,7 @@ export default function ({
 				try {
 					const valueFloat = parseFloat(values.unit);
 
-					onSubmit(isHours ? valueFloat / 8 : valueFloat);
+					onSubmit(isHours ? valueFloat / workingTime : valueFloat);
 				}
 				catch (error) {
 					actions.setSubmitting(false);
@@ -157,6 +155,7 @@ export default function ({
 								name="unit"
 								type="number"
 								ref={inputRef}
+								autoFocus={autoFocus}
 								step="any"
 								isHours={isHours}
 								onChange={e => setFieldValue('unit', e.target.value)
@@ -171,6 +170,7 @@ export default function ({
 						<Tooltip label="Changer l'unité de temps">
 							<UnitInputSwitch
 								onClick={() => {
+									inputRef.current.focus();
 									setIsHours(!isHours);
 								}}
 							>
@@ -191,4 +191,10 @@ export default function ({
 			)}
 		</Formik>
 	);
-}
+};
+
+UnitInput.defaultProps = {
+	onBlur: () => {},
+};
+
+export default UnitInput;

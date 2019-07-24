@@ -1,12 +1,20 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useEffect, useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
-import {P, primaryPurple, primaryWhite} from '../../utils/new/design-system';
+import {FINISH_ITEM} from '../../utils/mutations';
+import {
+	Button,
+	P,
+	primaryPurple,
+	primaryWhite,
+	SubHeading,
+} from '../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../utils/queries';
 import MaterialIcon from '../MaterialIcon';
+import TimeItTookForm from '../TimeItTookForm';
 
 const Tray = styled('div')`
 	width: 600px;
@@ -51,9 +59,13 @@ const Title = styled(P)`
 
 const TitleBarIcon = styled('div')``;
 
-const Content = styled('div')``;
+const Content = styled('div')`
+	padding: 10px;
+`;
 
 const PendingActionsTray = () => {
+	const [valuesMap, setValuesMap] = useState({});
+	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
 	const [isOpen, setIsOpen] = useState(false);
 	const {
 		data: {
@@ -86,7 +98,52 @@ const PendingActionsTray = () => {
 						/>
 					</TitleBarIcon>
 				</TitleBar>
-				<Content>Content</Content>
+				<Content>
+					{pendingTimeItTookTasks.map(task => (
+						<div key={task.id}>
+							<SubHeading>{task.name}</SubHeading>
+							<TimeItTookForm
+								estimation={task.unit}
+								onChange={timeItTook => setValuesMap({
+									...valuesMap,
+									[task.id]: timeItTook,
+								})
+								}
+								onSubmit={timeItTook => finishItem({
+									variables: {
+										itemId: task.id,
+										timeItTook,
+									},
+									optimisticResponse: {
+										...task,
+										timeItTook,
+									},
+								})
+								}
+							/>
+						</div>
+					))}
+					<Button
+						big
+						style={{margin: '5px 5px 5px auto'}}
+						onClick={() => {
+							pendingTimeItTookTasks.forEach(task => finishItem({
+								variables: {
+									itemId: task.id,
+									timeItTook:
+											valuesMap[task.id] || task.unit,
+								},
+								optimisticResponse: {
+									...task,
+									timeItTook:
+											valuesMap[task.id] || task.unit,
+								},
+							}));
+						}}
+					>
+						Valider
+					</Button>
+				</Content>
 			</Tray>
 		</Portal>
 	);

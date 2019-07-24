@@ -554,7 +554,11 @@ const DraggableSection = ({
 			};
 		},
 		end(item, monitor) {
-			const {dropPosition} = monitor.getDropResult();
+			const dropResult = monitor.getDropResult();
+
+			if (!dropResult) return;
+
+			const {dropPosition} = dropResult;
 			const draggedId = section.id;
 			const startPosition = position;
 			const projectId = section.project.id;

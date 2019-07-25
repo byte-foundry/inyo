@@ -1,11 +1,13 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import * as Yup from 'yup';
 
 import {
 	Button,
+	mediumGrey,
+	primaryBlack,
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
@@ -19,69 +21,45 @@ const UnitInputContainer = styled('div')`
 
 const UnitInputInput = styled('input')`
 	width: 50px;
-	margin-right: 1rem;
+	margin-right: 0.5rem;
 	font-size: 14px;
 	font-family: inherit;
-	color: ${primaryPurple};
-	padding-left: 1rem;
+	color: ${primaryBlack};
+	padding-left: 0.5rem;
+	text-align: center;
+	background: ${mediumGrey};
+	border-radius: 3px;
 `;
 
 const UnitInputSwitch = styled('label')`
 	position: relative;
-	top: 0.45rem;
-	right: 1.2rem;
-	display: inline-block;
-	width: 100px;
-	height: 29px;
+	display: flex;
+	padding: 5px;
+	font-size: 0.75rem;
+	border-radius: 3px;
+	border: 2px solid #ddd;
+	color: ${primaryPurple};
+	background-color: ${primaryWhite};
 	cursor: pointer;
-	transform: scale(0.8);
-	margin-top: -0.85rem;
 `;
 
 const UnitInputLabel = styled('span')`
-	position: absolute;
-	top: 26%;
-	color: ${primaryPurple};
-	right: 1rem;
-	z-index: 1;
-
-	&:first-child {
-		left: 1rem;
-	}
+	padding: 0 5px;
 `;
 
 const UnitInputSlider = styled('span')`
 	position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: -7px;
-    bottom: 0;
-    background-color: ${primaryWhite};
-    transition: transform ease .4s;
-    border-radius: 29px;
-    border: 2px solid #DDD;
-
-	&::before {
-		position: absolute;
-		content: '${props => (props.isHours ? 'heures' : 'Jours')}';
-		transform: ${props => (props.isHours ? 'translateX(29px)' : 'translateX(0px)')};
-		font-family: 'Work Sans', sans-serif;
-		font-size: 12px;
-		line-height: 21px;
-		height: 21px;
-		width: auto;
-		left: 2px;
-		bottom: 2px;
-		background-color: #5020ee;
-		color: #FFF;
-		font-weight: 500;
-		letter-spacing: .05rem;
-		transition: .4s;
-		border-radius: 16px;
-		padding: 0 .8rem;
-		z-index: 2;
-	}
+	background: blue;
+	color: white;
+	top: 1px;
+	bottom: 1px;
+	left: ${props => (props.isHours ? '50%' : '1px')};
+	right: ${props => (props.isHours ? '1px' : '50%')};
+	border-radius: 3px;
+	transition: ease 0.4s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 const UnitInputForm = styled('form')`
@@ -180,9 +158,11 @@ const UnitInput = ({
 									setIsHours(!isHours);
 								}}
 							>
-								<UnitInputLabel>J</UnitInputLabel>
+								<UnitInputLabel>j</UnitInputLabel>
 								<UnitInputLabel>h</UnitInputLabel>
-								<UnitInputSlider isHours={isHours} />
+								<UnitInputSlider isHours={isHours}>
+									{isHours ? 'h' : 'j'}
+								</UnitInputSlider>
 							</UnitInputSwitch>
 						</Tooltip>
 					</UnitInputContainer>

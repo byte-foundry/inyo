@@ -6,7 +6,6 @@ import {
 	Button,
 	mediumGrey,
 	primaryBlack,
-	primaryGrey,
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
@@ -21,10 +20,10 @@ const Container = styled('div')`
 const SuggestedTime = styled('button')`
 	flex: 1;
 	background: ${props => (props.selected ? primaryPurple : primaryWhite)};
-	border: 1px solid ${mediumGrey};
+	border: 1px solid ${props => (props.selected ? 'transparent' : mediumGrey)};
 	box-shadow: 3px 3px 6px ${mediumGrey};
 	border-radius: 3px;
-	padding: 8px;
+	line-height: 0;
 	cursor: pointer;
 	transition: all 300ms ease;
 	margin: 0 5px;
@@ -33,6 +32,7 @@ const SuggestedTime = styled('button')`
 	:hover {
 		background: ${primaryPurple};
 		color: ${primaryWhite};
+		border-color: transparent;
 	}
 `;
 

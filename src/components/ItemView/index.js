@@ -15,6 +15,10 @@ import {
 } from '../../utils/content';
 import {isCustomerTask} from '../../utils/functions';
 import {
+	isCustomerTask,
+	taskFulfillsActivationCriteria,
+} from '../../utils/functions';
+import {
 	CREATE_TAG,
 	FOCUS_TASK,
 	REMOVE_ATTACHMENTS,
@@ -292,7 +296,7 @@ const Item = ({
 		= ITEM_TYPES.find(({type}) => type === item.type)
 		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
-	const customerTask = CUSTOMER_TASK_TYPES.includes(item.type);
+	const customerTask = isCustomerTask(item.type);
 	const finishableTask
 		= (customerToken && customerTask) || (!customerToken && !customerTask);
 
@@ -720,10 +724,7 @@ const Item = ({
 			)}
 			{!customerToken
 				&& customerTask
-				&& ((item.linkedCustomer && item.type !== 'INVOICE')
-					|| (item.type === 'INVOICE'
-						&& item.linkedCustomer
-						&& item.attachments.length > 0)) && (
+				&& taskFulfillsActivationCriteria(item) && (
 					<>
 						<SubHeading>
 							Actions{' '}

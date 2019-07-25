@@ -20,7 +20,10 @@ import {
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
-import {isCustomerTask} from '../../../utils/functions';
+import {
+	isCustomerTask,
+	taskFulfillsActivationCriteria,
+} from '../../../utils/functions';
 import IllusBackground from '../../../utils/images/empty-tasks-background.svg';
 import IllusFigure from '../../../utils/images/empty-tasks-illus.svg';
 import {FOCUS_TASK} from '../../../utils/mutations';
@@ -98,7 +101,9 @@ const DashboardTasks = ({location, history}) => {
 					pathname: `/app/dashboard/${task.id}`,
 					state: {
 						prevSearch: location.search,
-						isActivating: true,
+						isActivating: taskFulfillsActivationCriteria(
+							cachedTask,
+						),
 						scheduledFor,
 					},
 				});

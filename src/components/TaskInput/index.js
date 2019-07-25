@@ -470,18 +470,6 @@ const TaskInput = ({
 									{type === 'SECTION' ? 'section' : 'tâche'}
 								</Button>
 							</Tooltip>
-							{onSubmitProject && (
-								<Tooltip label="Flèche du haut pour créer un projet">
-									<Button
-										icon="↑"
-										onClick={() => onSubmitProject({name: value})
-										}
-										id="create-project-button"
-									>
-										créer un projet
-									</Button>
-								</Tooltip>
-							)}
 							{type !== 'SECTION' && onSubmitSection && (
 								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
 									<Button

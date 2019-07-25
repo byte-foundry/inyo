@@ -158,8 +158,14 @@ const UnitInput = ({
 								autoFocus={autoFocus}
 								step="any"
 								isHours={isHours}
-								onChange={e => setFieldValue('unit', e.target.value)
-								}
+								onChange={(e) => {
+									setFieldValue('unit', e.target.value);
+
+									if (
+										document.activeElement
+										!== inputRef.current
+									) inputRef.current.focus();
+								}}
 								onKeyDown={(e) => {
 									if (e.key === 'Tab') {
 										onTab(e.target.value);

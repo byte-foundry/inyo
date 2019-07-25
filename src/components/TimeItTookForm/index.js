@@ -31,7 +31,8 @@ const SuggestedTime = styled('button')`
 	color: ${props => (props.selected ? primaryWhite : primaryBlack)};
 
 	:hover {
-		background: primaryPurple;
+		background: ${primaryPurple};
+		color: ${primaryWhite};
 	}
 `;
 
@@ -40,6 +41,7 @@ const formatDuration = (minutes, minutesInDay) => {
 
 	if (minutes >= minutesInDay) {
 		formattedTime += `${minutes / minutesInDay}j`;
+		return formattedTime;
 	}
 
 	const remainingMinutes = moment.duration(minutes % minutesInDay, 'minutes');
@@ -62,27 +64,25 @@ const TimeItTookForm = ({estimation, onSubmit}) => {
 	);
 	const workingTime = Math.ceil(exactWorkingTime);
 
-	console.log(selection);
-
-	// fixed minutes
-	const timeList = [15, 30, 45, 60];
-
-	// every hours until working time
-	while (timeList[timeList.length - 1] < workingTime * 60) {
-		timeList.push(timeList[timeList.length - 1] + 60);
-	}
-
+	// every 15 minutes until 2h
+	const timeList = [15, 30, 45, 60, 75, 90, 105, 120];
 	const workingDay = workingTime * 60;
 
-	// if (estimation > 1) {
-	// every day until the estimated time
+	// every day until there are 3 entries than the estimation
 	do {
-		timeList.push(timeList[timeList.length - 1] + workingDay);
-	} while (
-		timeList[timeList.length - 1]
-		< estimation * workingDay + 3 * workingDay
-	);
-	// }
+		// every half hours until working time
+		if (timeList[timeList.length - 1] < workingDay) {
+			timeList.push(timeList[timeList.length - 1] + 30);
+		}
+		// every half day until 6 day
+		else if (timeList[timeList.length - 1] < workingDay * 6) {
+			timeList.push(timeList[timeList.length - 1] + workingDay / 2);
+		}
+		// every day until estimation
+		else {
+			timeList.push(timeList[timeList.length - 1] + workingDay);
+		}
+	} while (timeList[timeList.length - 3] <= estimation * workingDay);
 
 	let nextTimeIndex = 0;
 

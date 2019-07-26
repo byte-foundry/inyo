@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
+import {isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM} from '../../utils/mutations';
 import {
 	Button,
@@ -80,7 +81,9 @@ const PendingActionsTray = () => {
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
 
 	const pendingTimeItTookTasks = tasks.filter(
-		task => task.timeItTook === null && task.status === 'FINISHED',
+		task => !isCustomerTask(task.type)
+			&& task.timeItTook === null
+			&& task.status === 'FINISHED',
 	);
 	const isVisible = pendingTimeItTookTasks.length > 0;
 

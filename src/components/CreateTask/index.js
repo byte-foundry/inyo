@@ -8,8 +8,8 @@ import {P} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import ConfirmModal, {useConfirmation} from '../ConfirmModal';
 import CreateProjectModal from '../CreateProjectModal';
+import {TaskContainer} from '../CustomerTaskRow';
 import TaskInput from '../TaskInput';
-import {TaskContainer} from '../TasksList/task';
 
 const TaskInputContainer = styled('div')`
 	& + ${TaskContainer} {

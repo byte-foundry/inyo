@@ -12,8 +12,8 @@ import {
 	P,
 	UserSpan,
 } from '../../utils/new/design-system';
+import Task from '../CustomerTaskRow';
 import Tooltip from '../Tooltip';
-import Task from './task';
 
 const TasksListContainer = styled('div')`
 	margin-top: 2rem;

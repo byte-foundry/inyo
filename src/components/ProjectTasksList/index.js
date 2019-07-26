@@ -1,7 +1,6 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import Portal from '@reach/portal';
-import gql from 'graphql-tag';
 import React, {Suspense, useCallback, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
@@ -39,14 +38,17 @@ import {
 	ScrollHelper,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
+import {
+	GET_ALL_TASKS,
+	GET_PROJECT_DATA,
+} from '../../utils/queries';
 import useScheduleData from '../../utils/useScheduleData';
 import useUserInfos from '../../utils/useUserInfos';
+import Task from '../CustomerTaskRow';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
 import MaterialIcon from '../MaterialIcon';
-import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
 

@@ -149,7 +149,11 @@ const UnitInput = ({
 								}}
 								onKeyDown={(e) => {
 									if (e.key === 'Tab') {
-										onTab(e.target.value);
+										onTab(
+											isHours
+												? e.target.value / workingTime
+												: e.target.value,
+										);
 									}
 								}}
 								css={inputStyle}

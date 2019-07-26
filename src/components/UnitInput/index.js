@@ -29,6 +29,8 @@ const UnitInputInput = styled('input')`
 	text-align: center;
 	background: ${mediumGrey};
 	border-radius: 3px;
+
+	${props => props.css}
 `;
 
 const UnitInputSwitch = styled('label')`
@@ -81,6 +83,7 @@ const UnitInput = ({
 	withButton,
 	autoFocus = true,
 	getValue = {},
+	inputStyle = {},
 }) => {
 	const [isHours, setIsHours] = useState(true);
 	const inputOwnRef = useRef();
@@ -149,6 +152,7 @@ const UnitInput = ({
 										onTab(e.target.value);
 									}
 								}}
+								css={inputStyle}
 							/>
 						</Tooltip>
 						<Tooltip label="Changer l'unité de temps">

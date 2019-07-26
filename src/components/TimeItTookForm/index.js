@@ -1,9 +1,9 @@
+import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import moment from 'moment';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import {
-	Button,
 	mediumGrey,
 	primaryBlack,
 	primaryPurple,
@@ -14,7 +14,7 @@ import UnitInput from '../UnitInput';
 
 const Container = styled('div')`
 	display: flex;
-	margin: 10px;
+	margin-bottom: 10px;
 `;
 
 const SuggestedTime = styled('button')`
@@ -57,12 +57,18 @@ const formatDuration = (minutes, minutesInDay) => {
 	return formattedTime;
 };
 
-const TimeItTookForm = ({estimation, onSubmit}) => {
+const TimeItTookForm = ({
+	estimation, onChange, onSubmit, ...rest
+}) => {
 	const {workingTime: exactWorkingTime = 8} = useUserInfos();
 	const [selection, setSelection] = useState(
 		estimation * exactWorkingTime * 60,
 	);
 	const workingTime = Math.ceil(exactWorkingTime);
+
+	useEffect(() => {
+		onChange(selection / (exactWorkingTime * 60));
+	}, [selection]);
 
 	// every 15 minutes until 2h
 	const timeList = [15, 30, 45, 60, 75, 90, 105, 120];
@@ -108,7 +114,7 @@ const TimeItTookForm = ({estimation, onSubmit}) => {
 	);
 
 	return (
-		<Container>
+		<Container {...rest}>
 			{underestimatedTimes.map(time => (
 				<SuggestedTime
 					key={time}
@@ -121,8 +127,14 @@ const TimeItTookForm = ({estimation, onSubmit}) => {
 			<UnitInput
 				unit={estimation}
 				onBlur={value => setSelection(value * exactWorkingTime * 60)}
-				onSubmit={value => onSubmit(value * exactWorkingTime * 60)}
+				onSubmit={value => onSubmit(value)}
 				autoFocus={false}
+				inputStyle={({value, isHours}) => value * 60 * (isHours ? 1 : exactWorkingTime)
+						=== selection
+					&& css`
+						border: 2px solid ${primaryPurple};
+					`
+				}
 			/>
 			{overestimatedTimes.map(time => (
 				<SuggestedTime
@@ -133,14 +145,6 @@ const TimeItTookForm = ({estimation, onSubmit}) => {
 					{formatDuration(time, workingDay)}
 				</SuggestedTime>
 			))}
-			<Button
-				textIcon
-				tiny
-				type="button"
-				onClick={() => onSubmit(selection / (exactWorkingTime * 60))}
-			>
-				✓
-			</Button>
 		</Container>
 	);
 };

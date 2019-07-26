@@ -8,11 +8,13 @@ import {FINISH_ITEM} from '../../utils/mutations';
 import {
 	Button,
 	P,
+	primaryGrey,
 	primaryPurple,
 	primaryWhite,
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../utils/queries';
+import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import TimeItTookForm from '../TimeItTookForm';
 
@@ -41,13 +43,7 @@ const TitleBar = styled('div')`
 	background: ${primaryPurple};
 	align-items: center;
 	color: ${primaryWhite};
-	overflow-y: auto;
-	max-height: 90vh;
 	cursor: pointer;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		max-height: 100%;
-	}
 `;
 
 const Title = styled(P)`
@@ -61,10 +57,20 @@ const TitleBarIcon = styled('div')``;
 
 const Content = styled('div')`
 	padding: 10px;
+	overflow-y: auto;
+	max-height: 90vh;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		max-height: 100%;
+	}
+`;
+
+const PendingAction = styled('div')`
+	display: grid;
+	grid-template-columns: 1fr 28px;
 `;
 
 const PendingActionsTray = () => {
-	const [valuesMap, setValuesMap] = useState({});
 	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
 	const [isOpen, setIsOpen] = useState(false);
 	const {
@@ -84,6 +90,13 @@ const PendingActionsTray = () => {
 		}
 	}, [isVisible]);
 
+	const [valuesMap, setValuesMap] = useState(
+		pendingTimeItTookTasks.reduce((map, {id, unit}) => {
+			map[id] = unit;
+			return map;
+		}, {}),
+	);
+
 	return (
 		<Portal>
 			<Tray isOpen={isOpen} isVisible={isVisible}>
@@ -100,9 +113,26 @@ const PendingActionsTray = () => {
 				</TitleBar>
 				<Content>
 					{pendingTimeItTookTasks.map(task => (
-						<div key={task.id}>
+						<PendingAction key={task.id}>
 							<SubHeading>{task.name}</SubHeading>
+							<IconButton
+								icon="check_circle"
+								size="tiny"
+								color={primaryGrey}
+								onClick={() => finishItem({
+									variables: {
+										itemId: task.id,
+										timeItTook: valuesMap[task.id],
+									},
+									optimisticResponse: {
+										...task,
+										timeItTook: valuesMap[task.id],
+									},
+								})
+								}
+							/>
 							<TimeItTookForm
+								style={{gridColumn: '1 / 3'}}
 								estimation={task.unit}
 								onChange={timeItTook => setValuesMap({
 									...valuesMap,
@@ -121,7 +151,7 @@ const PendingActionsTray = () => {
 								})
 								}
 							/>
-						</div>
+						</PendingAction>
 					))}
 					<Button
 						big

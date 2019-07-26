@@ -13,7 +13,6 @@ import {
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
-import {isCustomerTask} from '../../utils/functions';
 import {
 	isCustomerTask,
 	taskFulfillsActivationCriteria,

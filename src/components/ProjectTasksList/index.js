@@ -36,6 +36,7 @@ import {
 	primaryBlack,
 	primaryRed,
 	primaryWhite,
+	ScrollHelper,
 	SubHeading,
 } from '../../utils/new/design-system';
 import {
@@ -46,6 +47,7 @@ import {
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
+import MaterialIcon from '../MaterialIcon';
 import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
@@ -822,6 +824,9 @@ function ProjectTasksList({
 
 	return (
 		<TasksListContainer>
+			<ScrollHelper>
+				<MaterialIcon icon="unfold_more" size="normal" />
+			</ScrollHelper>
 			{sections.map(section => (
 				<DraggableSection
 					section={section}

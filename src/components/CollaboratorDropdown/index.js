@@ -6,6 +6,7 @@ import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {ASSIGN_TO_TASK, REMOVE_ASSIGNMENT_TO_TASK} from '../../utils/mutations';
 import {
+	accentGrey,
 	CollaboratorLineRow,
 	GenericDropdown,
 	primaryPurple,
@@ -124,14 +125,21 @@ function CollaboratorLine({taskId, collaborator, active}) {
 function CollaboratorDropdown({collaborators = [], assignee, taskId}) {
 	return (
 		<CollaboratorDropdownElem>
-			{collaborators.map(collab => (
-				<CollaboratorLine
-					key={collab.id}
-					collaborator={collab}
-					active={assignee && assignee.id === collab.id}
-					taskId={taskId}
-				/>
-			))}
+			{collaborators.length > 0
+				&& collaborators.map(collab => (
+					<CollaboratorLine
+						key={collab.id}
+						collaborator={collab}
+						active={assignee && assignee.id === collab.id}
+						taskId={taskId}
+					/>
+				))}
+			{collaborators.length === 0 && (
+				<div style={{padding: '1rem', color: accentGrey}}>
+					Vous devez d'abord ajouter
+					<br /> un collaborateur au projet.
+				</div>
+			)}
 		</CollaboratorDropdownElem>
 	);
 }

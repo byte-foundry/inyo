@@ -186,6 +186,7 @@ const Collaborators = () => {
 		({status, requestee: {firstName, lastName, email}}) => (includesFilter(firstName || '')
 				|| includesFilter(lastName || '')
 				|| includesFilter(email))
+			&& status !== collabStatuses.CANCELED
 			&& status !== collabStatuses.ACCEPTED,
 	);
 
@@ -193,6 +194,7 @@ const Collaborators = () => {
 		({status, requester: {firstName, lastName, email}}) => (includesFilter(firstName || '')
 				|| includesFilter(lastName || '')
 				|| includesFilter(email))
+			&& status !== collabStatuses.CANCELED
 			&& status !== collabStatuses.ACCEPTED,
 	);
 

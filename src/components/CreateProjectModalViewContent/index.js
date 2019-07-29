@@ -147,10 +147,7 @@ function TemplateTaskList({selectedTemplate}) {
 export default function ({back, optionsProjects, ...props}) {
 	const {setFieldValue, values} = props;
 	const {modelTemplate, modelProject, source: type} = values;
-	const {
-		data: {project},
-		loading,
-	} = useQuery(GET_PROJECT_DATA, {
+	const {data, loading} = useQuery(GET_PROJECT_DATA, {
 		variables: {
 			projectId:
 				props.values.modelProjectTemp || props.values.modelProject,
@@ -170,7 +167,7 @@ export default function ({back, optionsProjects, ...props}) {
 		);
 	}
 	else if (type === 'PROJECTS') {
-		content = project;
+		content = data ? data.project : {};
 	}
 
 	return (

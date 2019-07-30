@@ -286,7 +286,14 @@ const Schedule = ({
 
 					const timeLeft
 						= 1
-						- sortedTasks.reduce((time, task) => time + task.unit, 0);
+						- sortedTasks.reduce(
+							(time, task) => time
+								+ (task.status === 'FINISHED'
+								&& task.timeItTook !== null
+									? task.timeItTook
+									: task.unit),
+							0,
+						);
 					const timeSpent = sortedTasks.reduce(
 						(time, task) => time + task.timeItTook,
 						0,

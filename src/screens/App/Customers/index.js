@@ -15,6 +15,8 @@ import {
 	Button,
 	FilterInput,
 	Heading,
+	HeadingLink,
+	HeadingRow,
 	lightGrey,
 	P,
 	primaryBlack,
@@ -174,7 +176,12 @@ const Customers = () => {
 		<Main>
 			<HelpButton />
 			<Container>
-				<Heading>Clients</Heading>
+				<HeadingRow>
+					<Heading>Clients</Heading>
+					<HeadingLink to="/app/collaborators">
+						Collaborateurs
+					</HeadingLink>
+				</HeadingRow>
 				<Forms>
 					<FilterInput
 						icon={Search}

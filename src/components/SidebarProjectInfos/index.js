@@ -26,6 +26,8 @@ import {
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
+import CollabLinkToProjectList from '../CollabLinkToProjectList';
+import CollaboratorModal from '../CollaboratorModal';
 import ConfirmModal from '../ConfirmModal';
 import CreateProjectLinkButton from '../CreateProjectLinkButton';
 import CustomerModalAndMail from '../CustomerModalAndMail';
@@ -40,7 +42,7 @@ import StaticCustomerView from '../StaticCustomerView';
 import Tooltip from '../Tooltip';
 
 const SubSection = styled('div')`
-	margin-bottom: 2rem;
+	margin-bottom: 1.5rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		margin-bottom: 1rem;
@@ -131,7 +133,10 @@ const SidebarLink = styled('div')`
 const SidebarHeading = styled(SubHeading)`
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 10px;
+`;
+
+const SidebarBigNumber = styled(BigNumber)`
+	margin: 15px 0;
 `;
 
 const Illus = styled('img')`
@@ -161,6 +166,19 @@ const CustomerInfos = styled('div')`
 	}
 `;
 
+const CollabLinkToProjectContainer = styled('div')`
+	position: relative;
+	margin-left: -2rem;
+	padding-left: 2rem;
+	cursor: pointer;
+
+	&:hover {
+		${PencilElem} {
+			display: flex;
+		}
+	}
+`;
+
 const SidebarProjectInfos = ({
 	projectId,
 	hasClientAttributedTasks,
@@ -170,6 +188,7 @@ const SidebarProjectInfos = ({
 	const query = new URLSearchParams(location.search);
 	const activeView = query.get('view');
 	const [isEditingCustomer, setEditCustomer] = useState(false);
+	const [isEditingCollab, setEditCollab] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
 	const [isCustomerPreviewOpen, setCustomerPreview] = useState(false);
 	const [askNotifyActivityConfirm, setAskNotifyActivityConfirm] = useState(
@@ -421,17 +440,55 @@ const SidebarProjectInfos = ({
 			)}
 
 			<SubSection>
+				<Actions>
+					{project.linkedCollaborators.length === 0 ? (
+						<Button
+							materialIcon
+							onClick={() => {
+								setEditCollab(true);
+							}}
+						>
+							<MaterialIcon
+								icon="face"
+								size="tiny"
+								color="inherit"
+							/>{' '}
+							Ajouter un collaborateur
+						</Button>
+					) : (
+						<CollabLinkToProjectContainer
+							onClick={() => setEditCollab(true)}
+						>
+							<PencilElem icon="edit" size="tiny" />
+							<SubHeading>Collaborateurs du projet</SubHeading>
+							<CollabLinkToProjectList project={project} />
+						</CollabLinkToProjectContainer>
+					)}
+				</Actions>
+				{isEditingCollab && (
+					<CollaboratorModal
+						onDismiss={() => setEditCollab(false)}
+						projectName={project.name}
+						projectId={project.id}
+						linkedCollaborators={project.linkedCollaborators}
+					/>
+				)}
+			</SubSection>
+
+			<SubSection>
 				<DateContainer>
 					{project.deadline ? (
 						<>
 							<SidebarHeading>Deadline</SidebarHeading>
 							<Tooltip label="Date limite du projet">
-								<BigNumber onClick={() => setEditDueDate(true)}>
+								<SidebarBigNumber
+									onClick={() => setEditDueDate(true)}
+								>
 									{(project.deadline
 										&& moment(project.deadline).format(
 											'DD/MM/YYYY',
 										)) || <>&mdash;</>}
-								</BigNumber>
+								</SidebarBigNumber>
 							</Tooltip>
 						</>
 					) : (
@@ -481,14 +538,14 @@ const SidebarProjectInfos = ({
 				<SubSection>
 					<SubHeading>Marge jours restants</SubHeading>
 					<Tooltip label="Nombre de jours travaillés avant deadline">
-						<BigNumber urgent={margin < 1}>
+						<SidebarBigNumber urgent={margin < 1}>
 							{+margin.toFixed(2)}&nbsp;
 							<Plural
 								value={margin}
 								singular="jour"
 								plural="jours"
 							/>
-						</BigNumber>
+						</SidebarBigNumber>
 					</Tooltip>
 				</SubSection>
 			)}

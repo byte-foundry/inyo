@@ -44,6 +44,7 @@ const FlexRowMobile = styled(FlexRow)`
 
 function DraggableTask({
 	item,
+	userId,
 	customerToken,
 	baseUrl,
 	setIsDragging = () => {},
@@ -76,6 +77,7 @@ function DraggableTask({
 			item={item}
 			customerToken={customerToken}
 			baseUrl={baseUrl}
+			userId={userId}
 			isDraggable
 		/>
 	);
@@ -140,7 +142,7 @@ const DashboardTasks = ({location, history}) => {
 	if (error) throw error;
 
 	const {
-		me: {tasks},
+		me: {id, tasks},
 	} = data;
 
 	const unscheduledTasks = [];
@@ -227,6 +229,7 @@ const DashboardTasks = ({location, history}) => {
 				tasks: [],
 				reminders: [],
 				deadlines: [],
+				assignedTasks: [],
 			};
 
 			if (
@@ -256,6 +259,7 @@ const DashboardTasks = ({location, history}) => {
 				tasks: [],
 				reminders: [],
 				deadlines: [],
+				assignedTasks: [],
 			};
 
 			scheduledTasksPerDay[deadlineDate].deadlines.push({
@@ -285,7 +289,14 @@ const DashboardTasks = ({location, history}) => {
 			return;
 		}
 
-		if (!task.scheduledFor) {
+		if (
+			!(
+				task.owner.id === id
+				&& task.assignee
+				&& task.assignee.id !== id
+			)
+			&& !task.scheduledFor
+		) {
 			if (!task.section || task.section.project.status === 'ONGOING') {
 				unscheduledTasks.push(task);
 			}
@@ -310,6 +321,7 @@ const DashboardTasks = ({location, history}) => {
 					tasks: [],
 					reminders: [],
 					deadlines: [],
+					assignedTasks: [],
 				};
 
 				scheduledTasksPerDay[reminderDate].reminders.push({
@@ -322,6 +334,27 @@ const DashboardTasks = ({location, history}) => {
 			return;
 		}
 
+		if (
+			task.owner.id === id
+			&& task.assignee
+			&& task.assignee.id !== id
+			&& task.scheduledFor
+		) {
+			scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
+				task.scheduledFor
+			] || {
+				date: task.scheduledFor,
+				tasks: [],
+				reminders: [],
+				deadlines: [],
+				assignedTasks: [],
+			};
+
+			scheduledTasksPerDay[task.scheduledFor].assignedTasks.push(task);
+
+			return;
+		}
+
 		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
 			task.scheduledFor
 		] || {
@@ -329,6 +362,7 @@ const DashboardTasks = ({location, history}) => {
 			tasks: [],
 			reminders: [],
 			deadlines: [],
+			assignedTasks: [],
 		};
 
 		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
@@ -404,6 +438,7 @@ const DashboardTasks = ({location, history}) => {
 								createTaskComponent={({item, customerToken}) => (
 									<DraggableTask
 										item={item}
+										userId={id}
 										key={item.id}
 										customerToken={customerToken}
 										baseUrl="dashboard"

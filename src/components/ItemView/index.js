@@ -31,10 +31,15 @@ import {
 	DateInputContainer,
 	DueDateInputElem,
 	HR,
+	Meta,
+	MetaLabel,
+	MetaText,
+	MetaTime,
 	primaryGrey,
 	primaryPurple,
 	primaryRed,
 	primaryWhite,
+	StickyHeader,
 	SubHeading,
 	TaskHeading,
 } from '../../utils/new/design-system';
@@ -46,14 +51,15 @@ import CustomersDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
+import ItemViewAssigneeInput from '../ItemViewAssigneeInput';
 import MaterialIcon from '../MaterialIcon';
 import MultilineEditable from '../MultilineEditable';
 import Plural from '../Plural';
 import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
 import TaskActivationHeader from '../TaskActivationHeader';
+import TaskActivationModal from '../TaskActivationModal';
 import TaskRemindersList from '../TaskRemindersList';
-import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
 import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
@@ -74,60 +80,6 @@ const Metas = styled('div')`
 		flex-direction: column;
 		padding: 1rem 0;
 	}
-`;
-
-const Meta = styled('div')`
-	display: flex;
-	align-items: flex-start;
-	min-height: 1.25rem;
-
-	i {
-		margin-right: 15px;
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-bottom: 0;
-	}
-`;
-
-const MetaLabel = styled('div')`
-	margin-right: 1rem;
-	min-width: 40px;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: none;
-	}
-`;
-
-const MetaText = styled('span')`
-	color: ${primaryPurple};
-	flex: 1;
-	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
-
-	:empty::before {
-		content: '+';
-		border: 1px solid ${primaryPurple};
-		border-radius: 50%;
-		width: 0.85rem;
-		height: 0.8rem;
-		font-size: 0.8rem;
-		display: flex;
-		text-align: center;
-		flex-direction: column;
-		line-height: 1;
-		position: relative;
-		top: 2px;
-		left: -2px;
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-bottom: 1rem;
-		flex: 1 auto 100%;
-	}
-`;
-
-const MetaTime = styled(MetaText)`
-	position: relative;
 `;
 
 const ClientDropdown = styled(CustomersDropdown)`
@@ -175,23 +127,6 @@ const Description = styled('div')`
 		div {
 			padding: 1rem 2rem !important;
 		}
-	}
-`;
-
-const StickyHeader = styled('div')`
-	position: sticky;
-	top: 0;
-	background: ${props => (props.customer ? primaryRed : primaryPurple)};
-	margin: -4rem -4rem 1.4rem;
-	display: flex;
-	justify-content: center;
-	padding: 1rem;
-	z-index: 1;
-	color: ${primaryWhite};
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-left: -2rem;
-		margin-right: -2rem;
 	}
 `;
 
@@ -368,36 +303,25 @@ const Item = ({
 
 	if (isActivating) {
 		return (
-			<>
-				<StickyHeader customer={item.type !== 'DEFAULT'}>
-					Prévisualisation des actions{' '}
-					<Apostrophe
-						value={me.settings.assistantName}
-						withVowel="d'"
-						withConsonant="de "
-					/>
-					{me.settings.assistantName}
-				</StickyHeader>
-				<TaskRemindersPreviewsList
-					taskId={item.id}
-					remindersPreviews={item.remindersPreviews}
-					customerName={item.linkedCustomer.name}
-					initialScheduledFor={initialScheduledFor}
-					onFocusTask={async ({reminders, scheduledFor}) => {
-						await focusTask({
-							variables: {
-								itemId: item.id,
-								reminders,
-								for: scheduledFor,
-							},
-						});
-
-						setIsActivating(false);
-					}}
-					onCancel={() => setIsActivating(false)}
-				/>
-			</>
+			<TaskActivationModal
+				item={item}
+				assistantName={me.settings.assistantName}
+				initialScheduledFor={initialScheduledFor}
+				focusTask={focusTask}
+				setIsActivating={setIsActivating}
+			/>
 		);
+	}
+
+	let hasProjectCustomerLinked = false;
+
+	if (
+		!item.linkedCustomer
+		|| (item.section
+			&& item.section.project.customer
+			&& item.section.project.customer.id === item.linkedCustomer.id)
+	) {
+		hasProjectCustomerLinked = true;
 	}
 
 	return (
@@ -552,47 +476,62 @@ const Item = ({
 							</Meta>
 						</Tooltip>
 					)}
-				<Tooltip label="Personne liée à cette tâche">
-					<Meta>
-						<MaterialIcon icon="person_outline" size="tiny" />
-						<MetaLabel>Client</MetaLabel>
-						{!customerToken && editCustomer ? (
-							<ClientDropdown
-								id="projects"
-								defaultMenuIsOpen
-								defaultValue={
-									item.linkedCustomer && {
-										value: item.linkedCustomer.id,
-										label: item.linkedCustomer.name,
+				{isCustomerTask(item.type) ? (
+					<Tooltip label="Personne liée à cette tâche">
+						<Meta>
+							<MaterialIcon icon="person_outline" size="tiny" />
+							<MetaLabel>Client</MetaLabel>
+							{!customerToken && editCustomer ? (
+								<ClientDropdown
+									id="projects"
+									defaultMenuIsOpen
+									defaultValue={
+										item.linkedCustomer && {
+											value: item.linkedCustomer.id,
+											label: item.linkedCustomer.name,
+										}
 									}
-								}
-								autoFocus
-								onChange={({value}) => {
-									updateItem({
-										variables: {
-											itemId: item.id,
-											linkedCustomerId: value,
-										},
-									});
-									setEditCustomer(false);
-								}}
-								onBlur={() => {
-									setEditCustomer(false);
-								}}
-							/>
-						) : (
-							<MetaText
-								onClick={
-									customerToken
-										? undefined
-										: () => setEditCustomer(true)
-								}
-							>
-								{customer && customer.name}
-							</MetaText>
-						)}
-					</Meta>
-				</Tooltip>
+									autoFocus
+									onChange={(selection) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												linkedCustomerId: selection
+													? selection.value
+													: null,
+											},
+										});
+										setEditCustomer(false);
+									}}
+									onBlur={() => {
+										setEditCustomer(false);
+									}}
+									isClearable={!hasProjectCustomerLinked}
+								/>
+							) : (
+								<MetaText
+									onClick={
+										customerToken
+											? undefined
+											: () => setEditCustomer(true)
+									}
+								>
+									{customer && customer.name}
+								</MetaText>
+							)}
+						</Meta>
+					</Tooltip>
+				) : (
+					<ItemViewAssigneeInput
+						customerToken={customerToken}
+						taskId={item.id}
+						assignee={item.assignee}
+						linkedCollaborators={
+							item.section
+							&& item.section.project.linkedCollaborators
+						}
+					/>
+				)}
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Tooltip label="Date limite pour réaliser cette tâche">
 						<Meta>

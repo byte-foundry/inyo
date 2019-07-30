@@ -43,6 +43,40 @@ export const GET_USER_CUSTOMERS = gql`
 	}
 `;
 
+export const GET_USER_COLLABORATORS = gql`
+	query getUserCollaboratorsAndRequests {
+		me {
+			id
+			collaborators {
+				id
+				firstName
+				lastName
+				email
+			}
+			collaboratorRequests {
+				id
+				requestee {
+					id
+					firstName
+					lastName
+					email
+				}
+				status
+			}
+			collaborationRequests {
+				id
+				requester {
+					id
+					firstName
+					lastName
+					email
+				}
+				status
+			}
+		}
+	}
+`;
+
 export const GET_USER_INFOS = gql`
 	${TAG_FRAGMENT}
 
@@ -168,6 +202,20 @@ export const GET_PROJECT_PERSONAL_NOTES = gql`
 	}
 `;
 
+export const GET_PROJECT_COLLAB_LINK = gql`
+	query getProjectCollabLink($id: ID!) {
+		project(id: $id) {
+			id
+			linkedCollaborators {
+				id
+				email
+				firstName
+				lastName
+			}
+		}
+	}
+`;
+
 export const GET_PROJECT_INFOS = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 
@@ -238,6 +286,12 @@ export const GET_PROJECT_INFOS = gql`
 					email
 				}
 				siret
+			}
+			linkedCollaborators {
+				id
+				email
+				firstName
+				lastName
 			}
 			customer {
 				...ProjectCustomerFragment
@@ -475,6 +529,12 @@ export const GET_USER_NOTIFICATIONS = gql`
 				unread
 				eventType
 				from {
+					... on User {
+						id
+						email
+						firstName
+						lastName
+					}
 					... on Customer {
 						id
 						title
@@ -483,6 +543,16 @@ export const GET_USER_NOTIFICATIONS = gql`
 					}
 				}
 				object {
+					... on CollabRequest {
+						id
+						status
+					}
+					... on User {
+						id
+						email
+						firstName
+						lastName
+					}
 					... on Item {
 						id
 						name

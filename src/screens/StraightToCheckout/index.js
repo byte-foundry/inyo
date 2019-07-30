@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {STRIPE_CONSTANT} from '../../utils/constants';
 
 const {stripeKey, ...stripeInfos} = STRIPE_CONSTANT;

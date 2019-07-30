@@ -3,7 +3,15 @@ import React from 'react';
 import useUserInfos from '../../utils/useUserInfos';
 import Plural from '../Plural';
 
-const UnitDisplay = ({unit, plural, singular}) => {
+const UnitDisplay = ({
+	unit,
+	plural,
+	singular,
+	pluralF,
+	singularF,
+	pluralM,
+	singularM,
+}) => {
 	const {workingTime = 8} = useUserInfos();
 
 	let unitInHours = false;
@@ -27,7 +35,26 @@ const UnitDisplay = ({unit, plural, singular}) => {
 			) : (
 				<Plural value={unitToDisplay} singular="jour" plural="jours" />
 			)}
-			{plural && singular && (
+			{unitInHours && pluralF && singularF && (
+				<Plural
+					plural={pluralF}
+					singular={singularF}
+					value={unitToDisplay}
+				/>
+			)}
+			{!unitInHours && pluralM && singularM && (
+				<Plural
+					plural={pluralM}
+					singular={singularM}
+					value={unitToDisplay}
+				/>
+			)}
+			{!pluralF
+				&& !singularF
+				&& !pluralM
+				&& !singularM
+				&& plural
+				&& singular && (
 				<Plural
 					plural={plural}
 					singular={singular}

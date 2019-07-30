@@ -3,8 +3,6 @@ import React, {forwardRef} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
 import {
-	accentGrey,
-	lightGrey,
 	primaryBlack,
 	primaryGrey,
 	primaryRed,

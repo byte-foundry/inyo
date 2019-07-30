@@ -8,15 +8,14 @@ import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
 	DragSeparator,
-	lightGrey,
 	mediumGrey,
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
-	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
 const Button = styled(IconButton)``;
@@ -114,6 +113,7 @@ const TaskCard = withRouter(
 		return (
 			<TaskCardElem
 				{...rest}
+				isAssigned={task.assignee}
 				ref={cardRef}
 				done={task.status === 'FINISHED'}
 				customerTask={isCustomerTask(task.type)}
@@ -161,6 +161,13 @@ const TaskCard = withRouter(
 					</TagContainer>
 				)}
 				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
+					{task.assignee && (
+						<MaterialIcon
+							icon="reply"
+							size="micro"
+							color="inherit"
+						/>
+					)}{' '}
 					{task.name}
 				</CardTitle>
 				{task.linkedCustomer && (

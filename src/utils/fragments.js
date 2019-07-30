@@ -112,6 +112,8 @@ export const ITEM_FRAGMENT = gql`
 		linkedCustomer {
 			id
 			name
+			firstName
+			lastName
 		}
 
 		tags {

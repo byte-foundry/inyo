@@ -14,6 +14,7 @@ import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
 import {
+	formatName,
 	isCustomerTask,
 	taskFulfillsActivationCriteria,
 } from '../../utils/functions';
@@ -477,7 +478,12 @@ const Item = ({
 									defaultValue={
 										item.linkedCustomer && {
 											value: item.linkedCustomer.id,
-											label: item.linkedCustomer.name,
+											label: `${
+												item.linkedCustomer.name
+											} (${formatName(
+												item.linkedCustomer.firstName,
+												item.linkedCustomer.lastName,
+											)})`,
 										}
 									}
 									autoFocus
@@ -502,7 +508,11 @@ const Item = ({
 											: () => setEditCustomer(true)
 									}
 								>
-									{customer && customer.name}
+									{customer
+										&& `${customer.name} (${formatName(
+											customer.firstName,
+											customer.lastName,
+										)})`}
 								</MetaText>
 							)}
 						</Meta>
@@ -749,8 +759,12 @@ const Item = ({
 									icon="×"
 								>
 									Ne plus rappeler à{' '}
-									{item.linkedCustomer.name} de faire cette
-									tâche
+									{item.linkedCustomer.name} (
+									{formatName(
+										item.linkedCustomer.firstName,
+										item.linkedCustomer.lastName,
+									)}
+									) de faire cette tâche
 								</TaskButton>
 							</>
 						) : (
@@ -769,7 +783,12 @@ const Item = ({
 							>
 								Charger {me.settings.assistantName} de faire
 								réaliser cette tâche à{' '}
-								{item.linkedCustomer.name}
+								{item.linkedCustomer.name} (
+								{formatName(
+									item.linkedCustomer.firstName,
+									item.linkedCustomer.lastName,
+								)}
+								)
 							</TaskButton>
 						)}
 					</>

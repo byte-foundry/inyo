@@ -491,6 +491,8 @@ export const GET_ALL_CUSTOMERS = gql`
 			customers {
 				id
 				name
+				firstName
+				lastName
 			}
 		}
 	}

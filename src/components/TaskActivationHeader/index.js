@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {formatName} from '../../utils/functions';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 
@@ -20,7 +21,11 @@ function TaskActivationHeader({
 						taskId={item.id}
 						isActive={item.isFocused}
 						customerName={
-							item.linkedCustomer && item.linkedCustomer.name
+							item.linkedCustomer
+							&& `${item.linkedCustomer.name} (${formatName(
+								item.linkedCustomer.firstName,
+								item.linkedCustomer.lastName,
+							)})`
 						}
 						onCommit={() => {
 							if (item.type === 'CONTENT_ACQUISITION') {
@@ -47,7 +52,11 @@ function TaskActivationHeader({
 						taskId={item.id}
 						isActive={item.isFocused}
 						customerName={
-							item.linkedCustomer && item.linkedCustomer.name
+							item.linkedCustomer
+							&& `${item.linkedCustomer.name} (${formatName(
+								item.linkedCustomer.firstName,
+								item.linkedCustomer.lastName,
+							)})`
 						}
 						onCommit={() => {
 							if (item.type === 'CONTENT_ACQUISITION') {

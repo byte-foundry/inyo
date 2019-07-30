@@ -39,6 +39,7 @@ import {
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
+import useScheduleData from '../../utils/useScheduleData';
 import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
@@ -719,6 +720,7 @@ function ProjectTasksList({
 		},
 	});
 	const [updateSection] = useMutation(UPDATE_SECTION);
+	const {scheduledTasksPerDay} = useScheduleData();
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -794,23 +796,6 @@ function ProjectTasksList({
 	});
 
 	sections.sort((a, b) => a.position - b.position);
-
-	const scheduledTasks = {};
-
-	items.forEach((task) => {
-		if (!task.scheduledFor) {
-			return;
-		}
-
-		scheduledTasks[task.scheduledFor] = scheduledTasks[
-			task.scheduledFor
-		] || {
-			date: task.scheduledFor,
-			tasks: [],
-		};
-
-		scheduledTasks[task.scheduledFor].tasks.push(task);
-	});
 
 	return (
 		<TasksListContainer>
@@ -915,7 +900,7 @@ function ProjectTasksList({
 			<Portal>
 				<LeftBarSchedule
 					isDragging={isDragging}
-					days={scheduledTasks}
+					days={scheduledTasksPerDay}
 					fullWeek={hasFullWeekSchedule}
 					onMoveTask={onMoveTask}
 					workingTime={workingTime}

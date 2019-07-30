@@ -305,8 +305,10 @@ const Schedule = ({
 								<p>
 									<UnitDisplay
 										unit={timeSpent}
-										singular=" travaillée"
-										plural=" travaillées"
+										singularF={' travaillée'}
+										pluralF={' travaillées'}
+										singularM={' travaillé'}
+										pluralM={' travaillés'}
 									/>
 								</p>
 							</DayInfos>

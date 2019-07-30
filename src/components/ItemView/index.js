@@ -313,6 +313,17 @@ const Item = ({
 		);
 	}
 
+	let hasProjectCustomerLinked = false;
+
+	if (
+		!item.linkedCustomer
+		|| (item.section
+			&& item.section.project.customer
+			&& item.section.project.customer.id === item.linkedCustomer.id)
+	) {
+		hasProjectCustomerLinked = true;
+	}
+
 	return (
 		<>
 			<StickyHeader customer={item.type !== 'DEFAULT'}>
@@ -481,11 +492,13 @@ const Item = ({
 										}
 									}
 									autoFocus
-									onChange={({value}) => {
+									onChange={(selection) => {
 										updateItem({
 											variables: {
 												itemId: item.id,
-												linkedCustomerId: value,
+												linkedCustomerId: selection
+													? selection.value
+													: null,
 											},
 										});
 										setEditCustomer(false);
@@ -493,6 +506,7 @@ const Item = ({
 									onBlur={() => {
 										setEditCustomer(false);
 									}}
+									isClearable={!hasProjectCustomerLinked}
 								/>
 							) : (
 								<MetaText

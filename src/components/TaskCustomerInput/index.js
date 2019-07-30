@@ -38,6 +38,17 @@ function TaskCustomerInput({
 		}
 	}, [setEditCustomer, disabled]);
 
+	let hasProjectCustomerLinked = false;
+
+	if (
+		!item.linkedCustomer
+		|| (item.section
+			&& item.section.project.customer
+			&& item.section.project.customer.id === item.linkedCustomer.id)
+	) {
+		hasProjectCustomerLinked = true;
+	}
+
 	return (
 		<Tooltip label="Personne liée à la tâche">
 			<TaskIconText
@@ -56,7 +67,7 @@ function TaskCustomerInput({
 							defaultMenuIsOpen
 							defaultValue={defaultCustomer}
 							creatable
-							isClearable
+							isClearable={!hasProjectCustomerLinked}
 							autoFocus
 							onChange={onChangeCustomerDropDown}
 							onBlur={onBlurCustomerDropDown}

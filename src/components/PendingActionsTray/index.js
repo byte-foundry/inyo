@@ -84,7 +84,7 @@ const TimeItTookHeading = styled('h3')`
 	text-transform: capitalize;
 `;
 
-const PendingActionsTray = () => {
+const PendingActionsTray = ({projectId}) => {
 	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
 	const [isOpen, setIsOpen] = useState(false);
 	const {
@@ -96,7 +96,9 @@ const PendingActionsTray = () => {
 	const pendingTimeItTookTasks = tasks.filter(
 		task => !isCustomerTask(task.type)
 			&& task.timeItTook === null
-			&& task.status === 'FINISHED',
+			&& task.status === 'FINISHED'
+			&& (!projectId
+				|| (task.section && task.section.project.id === projectId)),
 	);
 	const isVisible = pendingTimeItTookTasks.length > 0;
 

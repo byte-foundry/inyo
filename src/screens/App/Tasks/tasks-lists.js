@@ -7,6 +7,7 @@ import {Redirect} from 'react-router-dom';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
+import PendingActionsTray from '../../../components/PendingActionsTray';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
@@ -166,6 +167,7 @@ function TasksList({location, history}) {
 							</Suspense>
 						</Content>
 					)}
+					<PendingActionsTray projectId={projectId} />
 				</Main>
 			</TaskAndArianne>
 		</Container>

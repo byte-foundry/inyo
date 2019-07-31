@@ -5,11 +5,7 @@ import React, {useRef, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
-import {
-	BREAKPOINTS,
-	CUSTOMER_TASK_TYPES,
-	ITEM_TYPES,
-} from '../../utils/constants';
+import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
@@ -37,8 +33,6 @@ import {
 	MetaTime,
 	primaryGrey,
 	primaryPurple,
-	primaryRed,
-	primaryWhite,
 	StickyHeader,
 	SubHeading,
 	TaskHeading,

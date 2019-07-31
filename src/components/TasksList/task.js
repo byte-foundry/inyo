@@ -252,32 +252,6 @@ const OpenBtn = styled(ButtonLink)`
 	background: transparent;
 `;
 
-const SetTimeContainer = styled('div')`
-	display: flex;
-	margin-right: 1rem;
-`;
-
-const SetTimeInfos = styled('div')`
-	display: flex;
-	flex-flow: column nowrap;
-	margin-right: 1rem;
-`;
-
-const SetTimeHeadline = styled('div')`
-	color: ${primaryPurple};
-	font-size: 12px;
-	font-weight: 500;
-	line-height: 1.3;
-`;
-
-const SetTimeCaption = styled('div')`
-	color: ${primaryGrey};
-	font-size: 12px;
-	font-style: italic;
-	line-height: 1.3;
-	white-space: nowrap;
-`;
-
 function Task({
 	item,
 	customerToken,
@@ -293,31 +267,25 @@ function Task({
 	const [updateItem] = useMutation(UPDATE_ITEM);
 	const [focusTask] = useMutation(FOCUS_TASK);
 
-	const [setTimeItTook, setSetTimeItTook] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [justUpdated, setJustUpdated] = useState(false);
 
-	const setTimeItTookRef = useRef();
-	const setTimeItTookValueRef = useRef();
 	const iconRef = useRef();
 
-	function finishItemCallback(unit) {
+	function finishItemCallback() {
 		finishItem({
 			variables: {
 				itemId: item.id,
 				token: customerToken,
-				timeItTook: unit,
 			},
 			optimisticResponse: {
 				finishItem: {
 					...item,
 					status: 'FINISHED',
-					timeItTook: unit,
 				},
 			},
 		});
 		setJustUpdated(true);
-		setSetTimeItTook(false);
 	}
 
 	const taskUrlPrefix = customerToken ? `/app/${customerToken}` : '/app';
@@ -332,11 +300,7 @@ function Task({
 
 	return (
 		<div ref={forwardedRef}>
-			<TaskContainer
-				noData={noData}
-				isDraggable={isDraggable}
-				ref={setTimeItTookRef}
-			>
+			<TaskContainer noData={noData} isDraggable={isDraggable}>
 				<TaskAdd />
 				<TaskIcon
 					status={item.status}
@@ -352,14 +316,8 @@ function Task({
 							if (customerToken) {
 								finishItemCallback(item.unit);
 							}
-							else if (setTimeItTook) {
-								finishItemCallback(
-									parseFloat(setTimeItTookValueRef.current()),
-								);
-								setSetTimeItTook(false);
-							}
 							else {
-								setSetTimeItTook(true);
+								finishItemCallback();
 							}
 						}
 						else if (isUnfinishable) {
@@ -373,38 +331,12 @@ function Task({
 					}}
 				/>
 				<TaskContent noData={noData}>
-					<Tooltip
-						label={
-							!setTimeItTook
-							&& 'Cliquer pour voir le contenu de la tâche'
-						}
-					>
+					<Tooltip label="Cliquer pour voir le contenu de la tâche">
 						<TaskHeader>
-							{setTimeItTook && (
-								<SetTimeContainer>
-									<UnitInput
-										getValue={setTimeItTookValueRef}
-										unit={item.unit}
-										onBlur={(unit) => {
-											finishItemCallback(unit);
-											setSetTimeItTook(false);
-										}}
-										onSubmit={finishItemCallback}
-									/>
-									<SetTimeInfos>
-										<SetTimeHeadline>
-											Temps réellement passé
-										</SetTimeHeadline>
-										<SetTimeCaption>
-											Uniquement visible par vous
-										</SetTimeCaption>
-									</SetTimeInfos>
-								</SetTimeContainer>
-							)}
 							{item.name ? (
 								<TaskHeadingLink
 									noData={noData}
-									small={setTimeItTook}
+									small={false}
 									status={item.status}
 									to={{
 										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
@@ -416,7 +348,7 @@ function Task({
 							) : (
 								<TaskHeadingPlaceholder
 									noData={noData}
-									small={setTimeItTook}
+									small={false}
 									to={{
 										pathname: `${taskUrlPrefix}/tasks/${item.id}`,
 										state: {prevSearch: location.search},
@@ -425,7 +357,7 @@ function Task({
 									Choisir un titre pour cette tâche
 								</TaskHeadingPlaceholder>
 							)}
-							<TaskActions stayActive={setTimeItTook}>
+							<TaskActions stayActive={false}>
 								<OpenBtn
 									data-tip="Description, détails, commentaires, etc."
 									to={{
@@ -454,7 +386,7 @@ function Task({
 							</TaskActions>
 						</TaskHeader>
 					</Tooltip>
-					{!noData && !setTimeItTook && (
+					{!noData && (
 						<TaskInfosInputs
 							taskUrlPrefix={taskUrlPrefix}
 							baseUrl={baseUrl}

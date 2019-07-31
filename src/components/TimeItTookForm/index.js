@@ -130,7 +130,6 @@ const TimeItTookForm = ({
 				onBlur={value => setSelection(value * exactWorkingTime * 60)}
 				onSubmit={value => onSubmit(value)}
 				onTab={value => setSelection(value * exactWorkingTime * 60)}
-				onChange={value => setSelection(value * exactWorkingTime * 60)}
 				onFocus={value => setSelection(value * exactWorkingTime * 60)}
 				autoFocus={false}
 				inputStyle={({value, isHours}) => (value * 60 * (isHours ? 1 : exactWorkingTime) === selection

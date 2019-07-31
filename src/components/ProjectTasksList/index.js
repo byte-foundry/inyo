@@ -39,11 +39,9 @@ import {
 	ScrollHelper,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {
-	GET_ALL_TASKS,
-	GET_PROJECT_DATA,
-	GET_USER_INFOS,
-} from '../../utils/queries';
+import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
+import useScheduleData from '../../utils/useScheduleData';
+import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
@@ -675,11 +673,7 @@ const DraggableSection = ({
 function ProjectTasksList({
 	items, projectId, sectionId, history, location,
 }) {
-	const {
-		data: userPrefsData,
-		loading: loadingUserPrefs,
-		error: errorUserPrefs,
-	} = useQuery(GET_USER_INFOS, {suspend: true});
+	const {workingTime, hasFullWeekSchedule} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const [isDragging, setIsDragging] = useState(false);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
@@ -728,6 +722,7 @@ function ProjectTasksList({
 		},
 	});
 	const [updateSection] = useMutation(UPDATE_SECTION);
+	const {scheduledTasksPerDay} = useScheduleData();
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -766,7 +761,6 @@ function ProjectTasksList({
 	);
 
 	if (error) throw error;
-	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {sections: sectionsInfos} = projectData.project;
 
@@ -804,23 +798,6 @@ function ProjectTasksList({
 	});
 
 	sections.sort((a, b) => a.position - b.position);
-
-	const scheduledTasks = {};
-
-	items.forEach((task) => {
-		if (!task.scheduledFor) {
-			return;
-		}
-
-		scheduledTasks[task.scheduledFor] = scheduledTasks[
-			task.scheduledFor
-		] || {
-			date: task.scheduledFor,
-			tasks: [],
-		};
-
-		scheduledTasks[task.scheduledFor].tasks.push(task);
-	});
 
 	return (
 		<TasksListContainer>
@@ -925,18 +902,15 @@ function ProjectTasksList({
 					</ModalElem>
 				</ModalContainer>
 			)}
-			{loadingUserPrefs ? (
-				<Loading />
-			) : (
-				<Portal>
-					<LeftBarSchedule
-						isDragging={isDragging}
-						days={scheduledTasks}
-						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-						onMoveTask={onMoveTask}
-					/>
-				</Portal>
-			)}
+			<Portal>
+				<LeftBarSchedule
+					isDragging={isDragging}
+					days={scheduledTasksPerDay}
+					fullWeek={hasFullWeekSchedule}
+					onMoveTask={onMoveTask}
+					workingTime={workingTime}
+				/>
+			</Portal>
 		</TasksListContainer>
 	);
 }

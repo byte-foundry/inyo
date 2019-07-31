@@ -47,11 +47,13 @@ const UnitInputSwitch = styled('label')`
 
 const UnitInputLabel = styled('span')`
 	padding: 0 5px;
+	display: flex;
+	align-items: center;
 `;
 
 const UnitInputSlider = styled('span')`
 	position: absolute;
-	background: blue;
+	background: ${primaryPurple};
 	color: white;
 	top: 1px;
 	bottom: 1px;
@@ -79,6 +81,7 @@ const UnitInput = ({
 	onBlur,
 	onSubmit,
 	onTab,
+	onFocus,
 	innerRef,
 	withButton,
 	autoFocus = true,
@@ -139,6 +142,17 @@ const UnitInput = ({
 								autoFocus={autoFocus}
 								step="any"
 								isHours={isHours}
+								onFocus={() => {
+									const valueFloat = parseFloat(
+										inputRef.current.value,
+									);
+
+									onFocus(
+										isHours
+											? valueFloat / workingTime
+											: valueFloat,
+									);
+								}}
 								onChange={(e) => {
 									setFieldValue('unit', e.target.value);
 
@@ -189,6 +203,7 @@ const UnitInput = ({
 
 UnitInput.defaultProps = {
 	onBlur: () => {},
+	onFocus: () => {},
 };
 
 export default UnitInput;

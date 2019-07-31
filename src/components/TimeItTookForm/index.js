@@ -1,8 +1,8 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 
+import {formatDuration} from '../../utils/functions';
 import {
 	mediumGrey,
 	primaryBlack,
@@ -36,27 +36,6 @@ const SuggestedTime = styled('button')`
 		border-color: transparent;
 	}
 `;
-
-const formatDuration = (minutes, minutesInDay) => {
-	let formattedTime = '';
-
-	if (minutes >= minutesInDay) {
-		formattedTime += `${minutes / minutesInDay}j`;
-		return formattedTime;
-	}
-
-	const remainingMinutes = moment.duration(minutes % minutesInDay, 'minutes');
-
-	if (remainingMinutes.get('hours') > 0) {
-		formattedTime += `${remainingMinutes.get('hours')}h`;
-	}
-
-	if (remainingMinutes.get('minutes') > 0) {
-		formattedTime += `${remainingMinutes.get('minutes')}min`;
-	}
-
-	return formattedTime;
-};
 
 const TimeItTookForm = ({
 	estimation, onChange, onSubmit, ...rest

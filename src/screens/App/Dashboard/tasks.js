@@ -140,6 +140,7 @@ const DashboardTasks = ({location, history}) => {
 	const filter = query.get('filter');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
+	const startingFrom = query.get('from');
 
 	if (error) throw error;
 
@@ -404,6 +405,17 @@ const DashboardTasks = ({location, history}) => {
 				<MaterialIcon icon="unfold_more" size="normal" />
 			</ScrollHelper>
 			<Schedule
+				startingFrom={startingFrom}
+				onChangeWeek={(newWeek) => {
+					const newQuery = new URLSearchParams(query);
+
+					newQuery.set('from', newWeek);
+
+					history.replace({
+						...location,
+						search: newQuery.toString(),
+					});
+				}}
 				days={scheduledTasksPerDay}
 				workingDays={workingDays}
 				fullWeek={hasFullWeekSchedule}

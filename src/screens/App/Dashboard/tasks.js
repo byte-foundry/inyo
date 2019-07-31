@@ -9,6 +9,7 @@ import {Route, withRouter} from 'react-router-dom';
 import ArianneThread from '../../../components/ArianneThread';
 import TaskView from '../../../components/ItemView';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
+import MaterialIcon from '../../../components/MaterialIcon';
 import RescheduleModal from '../../../components/RescheduleModal';
 import Schedule from '../../../components/Schedule';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
@@ -32,6 +33,7 @@ import {
 	IllusFigureContainer,
 	IllusText,
 	P,
+	ScrollHelper,
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
@@ -398,6 +400,9 @@ const DashboardTasks = ({location, history}) => {
 
 	return (
 		<>
+			<ScrollHelper>
+				<MaterialIcon icon="unfold_more" size="normal" />
+			</ScrollHelper>
 			<Schedule
 				days={scheduledTasksPerDay}
 				workingDays={workingDays}

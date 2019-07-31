@@ -1,5 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
+import {formatName} from '../../utils/functions';
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
 import CustomerDropdown from '../CustomersDropdown';
 import MaterialIcon from '../MaterialIcon';
@@ -11,14 +12,19 @@ function TaskCustomerInput({
 	onCustomerSubmit,
 	item,
 }) {
-	const clientName = item.linkedCustomer && item.linkedCustomer.name;
+	const clientName
+		= item.linkedCustomer
+		&& `${item.linkedCustomer.name} (${formatName(
+			item.linkedCustomer.firstName,
+			item.linkedCustomer.lastName,
+		)})`;
 	const [editCustomer, setEditCustomer] = useState(editCustomerProp);
 	const defaultCustomer = useMemo(
 		() => item.linkedCustomer && {
 			value: item.linkedCustomer.id,
-			label: item.linkedCustomer.name,
+			label: clientName,
 		},
-		[item.linkedCustomer],
+		[item.linkedCustomer, clientName],
 	);
 
 	const onChangeCustomerDropDown = useCallback(

@@ -2,7 +2,7 @@ import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
-import {isCustomerTask} from '../../utils/functions';
+import {formatName, isCustomerTask} from '../../utils/functions';
 import {ADD_ITEM, ADD_SECTION, UPDATE_PROJECT} from '../../utils/mutations';
 import {P} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
@@ -79,7 +79,12 @@ const CreateTask = ({currentProjectId}) => {
 					currentProjectData
 					&& currentProjectData.project.customer && {
 						id: currentProjectData.project.customer.id,
-						name: currentProjectData.project.customer.name,
+						name: `${
+							currentProjectData.project.customer.name
+						} (${formatName(
+							currentProjectData.project.customer.firstName,
+							currentProjectData.project.customer.lastName,
+						)})`,
 					}
 				}
 				onSubmitTask={async (task) => {

@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 
-import {isCustomerTask} from '../../utils/functions';
+import {formatName, isCustomerTask} from '../../utils/functions';
 import {StickyHeader} from '../../utils/new/design-system';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersPreviewsList from '../TaskRemindersPreviewsList';
@@ -41,7 +41,13 @@ function TaskActivationModal({
 			<TaskRemindersPreviewsList
 				taskId={item.id}
 				remindersPreviews={item.remindersPreviews}
-				customerName={item.linkedCustomer.name}
+				customerName={
+					item.linkedCustomer
+					&& `${item.linkedCustomer.name} (${formatName(
+						item.linkedCustomer.firstName,
+						item.linkedCustomer.lastName,
+					)})`
+				}
 				initialScheduledFor={initialScheduledFor}
 				onFocusTask={onFocusTask}
 				onCancel={() => setIsActivating(false)}

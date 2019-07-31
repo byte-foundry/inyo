@@ -6,6 +6,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS} from '../../utils/constants';
 import {FlexRow, ModalActions} from '../../utils/content';
+import {formatName} from '../../utils/functions';
 import {
 	BigNumber,
 	Button,
@@ -108,7 +109,10 @@ export default function ({
 	if (!loadingCustomers) {
 		optionsCustomers = dataCustomers.me.customers.map(customer => ({
 			value: customer.id,
-			label: customer.name,
+			label: `${customer.name} (${formatName(
+				customer.firstName,
+				customer.lastName,
+			)})`,
 		}));
 	}
 

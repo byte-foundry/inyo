@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import fbt from 'fbt';
 import React, {useState} from 'react';
 
 import {ModalContainer, ModalElem} from '../../utils/content';
@@ -47,10 +48,14 @@ export default function ConfirmModal({
 				<ModalRow>{children}</ModalRow>
 				<ModalRowHoriz>
 					<Button aligned link onClick={() => onConfirm(false)}>
-						Annuler
+						<fbt project="inyo" desc="cancel">
+							Annuler
+						</fbt>
 					</Button>
 					<Button aligned autoFocus onClick={() => onConfirm(true)}>
-						Valider
+						<fbt project="inyo" desc="confirm">
+							Valider
+						</fbt>
 					</Button>
 				</ModalRowHoriz>
 			</ModalElem>

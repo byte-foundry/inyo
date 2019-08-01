@@ -129,12 +129,17 @@ const CreateTask = ({currentProjectId}) => {
 					onDismiss={() => confirmModal(false)}
 				>
 					<P>
-						Vous souhaitez créer une tâche attribuée au client qui
-						nécessite d'activer les notifications par email à
-						celui-ci.
+						<fbt project="inyo" desc="">
+							Vous souhaitez créer une tâche attribuée au client
+							qui nécessite d'activer les notifications par email
+							à celui-ci.
+						</fbt>
 					</P>
 					<P>
-						Souhaitez vous continuer et activer les notifications?
+						<fbt project="inyo" desc="">
+							Souhaitez vous continuer et activer les
+							notifications?
+						</fbt>
 					</P>
 				</ConfirmModal>
 			)}

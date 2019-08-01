@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import fbt from 'fbt';
+import React, {useEffect} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
@@ -134,7 +135,7 @@ const CreateProjectModalViewContent = ({content}) => {
 
 	return (
 		<Container>
-			<TemplateColumnLabel>Contenu du modèle</TemplateColumnLabel>
+			<TemplateColumnLabel><fbt project="inyo" desc="content of template">Contenu du modèle</fbt></TemplateColumnLabel>
 			<TemplateTaskList selectedTemplate={selectedTemplate} />
 		</Container>
 	);

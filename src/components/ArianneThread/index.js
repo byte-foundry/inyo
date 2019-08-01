@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import fbt from 'fbt';
 import React, {useMemo} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
@@ -192,7 +193,11 @@ export function ArianneElem({
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
-				noOptionsMessage={() => 'Aucune option'}
+				noOptionsMessage={() => (
+					<fbt project="inyo" desc="arianne elem no option message">
+						Aucune option
+					</fbt>
+				)}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -240,7 +245,14 @@ export function ArianneElemCreatable({
 						),
 					}
 				}
-				noOptionsMessage={() => 'Aucune option'}
+				noOptionsMessage={() => (
+					<fbt
+						project="inyo"
+						desc="arianne elem with create no option message"
+					>
+						Aucune option
+					</fbt>
+				)}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -287,9 +299,30 @@ function ArianneThread({
 	);
 
 	const filters = [
-		{id: 'PENDING', name: 'Tâches à faire'},
-		{id: 'FINISHED', name: 'Tâches faites'},
-		{id: 'ALL', name: 'Toutes les tâches'},
+		{
+			id: 'PENDING',
+			name: (
+				<fbt project="inyo" desc="tasks to do filter label">
+					Tâches à faire
+				</fbt>
+			),
+		},
+		{
+			id: 'FINISHED',
+			name: (
+				<fbt project="inyo" desc="tasks done filter label">
+					Tâches faites
+				</fbt>
+			),
+		},
+		{
+			id: 'ALL',
+			name: (
+				<fbt project="inyo" desc="all tasks filter label">
+					Toutes les tâches
+				</fbt>
+			),
+		},
 	];
 
 	const customersList = useMemo(
@@ -337,7 +370,11 @@ function ArianneThread({
 					list={filters}
 					onChange={selectFilter}
 					selectedId={filterId}
-					placeholder={'Toutes les tâches'}
+					placeholder={
+						<fbt project="inyo" desc="tasks filter placeholder">
+							Toutes les tâches
+						</fbt>
+					}
 				/>
 			)}
 			<ArianneElemCreatable
@@ -367,7 +404,11 @@ function ArianneThread({
 						Gérer les tags
 					</ManageTagOption>
 				}
-				placeholder={'Chercher par tags'}
+				placeholder={
+					<fbt project="inyo" desc="filter by tag placeholder">
+						Chercher par tags
+					</fbt>
+				}
 			/>
 		</ArianneContainer>
 	);

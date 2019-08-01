@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import fbt from 'fbt';
 import {Formik} from 'formik';
 import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
@@ -91,7 +92,12 @@ const CollaboratorModal = ({
 	return (
 		<ModalContainer onDismiss={onDismiss}>
 			<ModalElem>
-				<Header>Collaborateurs sur le projet {projectName}</Header>
+				<Header>
+					<fbt project="inyo" desc="collaborators modal header">
+						Collaborateurs sur le projet{' '}
+						{fbt.param('projectName', projectName)}
+					</fbt>
+				</Header>
 				<Formik
 					initialValues={{
 						search: '',
@@ -114,7 +120,14 @@ const CollaboratorModal = ({
 									<FilterInput
 										icon={Search}
 										name="search"
-										placeholder="Filtrer par nom, email..."
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="filter collaborator by email placeholder"
+											>
+												Filtrer par nom, email...
+											</fbt>
+										}
 										type="text"
 										onChange={e => setFieldValue(
 											'search',

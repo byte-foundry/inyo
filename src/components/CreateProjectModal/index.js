@@ -1,3 +1,4 @@
+import fbt from 'fbt';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
 import {useApolloClient, useMutation, useQuery} from 'react-apollo-hooks';
@@ -35,7 +36,11 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 				name: baseName,
 			}}
 			validateSchema={Yup.object({
-				name: Yup.string().required('Requis'),
+				name: Yup.string().required(
+					<fbt project="inyo" desc="required">
+						Requis
+					</fbt>,
+				),
 			})}
 			onSubmit={async (
 				{

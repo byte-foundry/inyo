@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import fbt from 'fbt';
 import React, {useState} from 'react';
 
 import {
@@ -29,8 +30,10 @@ function CreateProjectLinkButton({project}) {
 				onClick={() => setOpenLinkModal(true)}
 				id="create-project-link"
 			>
-				<MaterialIcon icon="link" size="tiny" color="inherit" /> Créer
-				un lien pour partager
+				<fbt project="inyo" desc="create project link label">
+					<MaterialIcon icon="link" size="tiny" color="inherit" />{' '}
+					Créer un lien pour partager
+				</fbt>
 			</Button>
 			{openLinkModal && (
 				<ModalContainer
@@ -39,7 +42,13 @@ function CreateProjectLinkButton({project}) {
 				>
 					<ModalElem>
 						<SubHeading>
-							Lien pour partager votre projet avec votre client
+							<fbt
+								project="inyo"
+								desc="project link modal header"
+							>
+								Lien pour partager votre projet avec votre
+								client
+							</fbt>
 						</SubHeading>
 						<ModalContent>
 							<Input
@@ -49,7 +58,12 @@ function CreateProjectLinkButton({project}) {
 						</ModalContent>
 						<ModalActions>
 							<Button onClick={() => setOpenLinkModal(false)}>
-								Fermer
+								<fbt
+									project="inyo"
+									desc="project link modal close button"
+								>
+									Fermer
+								</fbt>
 							</Button>
 						</ModalActions>
 					</ModalElem>

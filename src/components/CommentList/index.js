@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import fbt from 'fbt';
 import {Field, Formik} from 'formik';
 import debounce from 'lodash.debounce';
 import React, {forwardRef, useRef, useState} from 'react';
@@ -102,14 +103,25 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 		<Comment key={`comment${comment.id}`} comment={comment} />
 	));
 
-	let placeholderText = 'Votre commentaire';
+	let placeholderText = (
+		<fbt project="inyo" desc="comment placeholder text">
+			Votre commentaire
+		</fbt>
+	);
 
 	if (linkedCustomer && !customerToken) {
-		placeholderText = 'Écrire et envoyer un commentaire à votre client';
+		placeholderText = (
+			<fbt project="inyo" desc="comment placeholder text for customer">
+				Écrire et envoyer un commentaire à votre client
+			</fbt>
+		);
 	}
 	else if (linkedCustomer) {
-		placeholderText
-			= 'Écrire et envoyer un commentaire à votre prestataire';
+		placeholderText = (
+			<fbt project="inyo" desc="comment placeholder text for user">
+				Écrire et envoyer un commentaire à votre prestataire
+			</fbt>
+		);
 	}
 
 	return (
@@ -119,7 +131,10 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					<CommentRow>{comments}</CommentRow>
 				) : (
 					<Empty>
-						Une question ou une suggestion? Ajoutez un commentaire.
+						<fbt project="inyo" desc="empty comment message">
+							Une question ou une suggestion? Ajoutez un
+							commentaire.
+						</fbt>
 					</Empty>
 				)}
 				<Waypoint
@@ -131,7 +146,9 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			<ScrollAlert>
 				{!noScrollIndicator && (
 					<ScrollAlertContent>
-						↓ Autres commentaires
+						<fbt project="inyo" desc="other comments scroll alert">
+							↓ Autres commentaires
+						</fbt>
 					</ScrollAlertContent>
 				)}
 			</ScrollAlert>
@@ -163,8 +180,15 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 						actions.setSubmitting(false);
 						actions.setErrors(commentError);
 						actions.setStatus({
-							msg:
-								"Une erreur s'est produite pendant la soumission du commentaire",
+							msg: (
+								<fbt
+									project="inyo"
+									desc="unpecified error message for comment"
+								>
+									Une erreur s'est produite pendant la
+									soumission du commentaire
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -175,7 +199,17 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					return (
 						<form onSubmit={handleSubmit}>
 							<FlexRow>
-								<Tooltip label="Les personnes liées à la tâche seront notifiées">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="tooltipe comment text area"
+										>
+											Les personnes liées à la tâche
+											seront notifiées
+										</fbt>
+									}
+								>
 									<ItemComment
 										id="comment-textarea"
 										placeholder={placeholderText}
@@ -188,12 +222,27 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 								<ErrorInput>{errors.comment}</ErrorInput>
 							)}
 							<FlexRow justifyContent="flex-end">
-								<Tooltip label="Visible par les personnes liées au projet">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="add comment button tooltip"
+										>
+											Visible par les personnes liées au
+											projet
+										</fbt>
+									}
+								>
 									<Button
 										id="add-comment-button"
 										type="submit"
 									>
-										Ajouter un commentaire
+										<fbt
+											project="inyo"
+											desc="add comment button label"
+										>
+											Ajouter un commentaire
+										</fbt>
 									</Button>
 								</Tooltip>
 							</FlexRow>

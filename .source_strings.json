@@ -1,0 +1,33 @@
+{
+ "phrases": [
+  {
+   "hashToText": {
+    "PxWkigElFF+ZAugyaWBayQ==": "L'email doit être valide"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 35,
+   "col_beg": 14,
+   "line_end": 35,
+   "col_end": 72,
+   "type": "text",
+   "desc": "",
+   "project": "inyo",
+   "jsfbt": "L'email doit être valide"
+  },
+  {
+   "hashToText": {
+    "sAbSkE5NP4fqrLL3UdHfsA==": "Email du collaborateur"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 77,
+   "col_beg": 15,
+   "line_end": 77,
+   "col_end": 95,
+   "type": "text",
+   "desc": "label collaborator email",
+   "project": "inyo",
+   "jsfbt": "Email du collaborateur"
+  }
+ ],
+ "childParentMappings": {}
+}

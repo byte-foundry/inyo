@@ -1,5 +1,6 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
+import fbt from 'fbt';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -77,7 +78,15 @@ function CheckList({items, editable, onChange}) {
 						value={item.name}
 						type="text"
 						for="checkList"
-						placeholder="Ajoutez les titres des documents et appuyez sur entrée"
+						placeholder={
+							<fbt
+								project="inyo"
+								desc="add requested document placeholder"
+							>
+								Ajoutez les titres des documents et appuyez sur
+								entrée
+							</fbt>
+						}
 						placeholderCss={placeholderCss}
 						nameCss={nameCss}
 						editableCss={editableCss}
@@ -122,7 +131,15 @@ function CheckList({items, editable, onChange}) {
 					<InlineEditable
 						type="text"
 						size="small"
-						placeholder="Ajoutez les titres des documents et appuyez sur entrée"
+						placeholder={
+							<fbt
+								project="inyo"
+								desc="add requested document placeholder"
+							>
+								Ajoutez les titres des documents et appuyez sur
+								entrée
+							</fbt>
+						}
 						placeholderCss={placeholderCss}
 						nameCss={nameCss}
 						editableCss={editableCss}

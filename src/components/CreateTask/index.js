@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+import fbt from 'fbt';
 import React, {useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
@@ -129,14 +130,20 @@ const CreateTask = ({currentProjectId}) => {
 					onDismiss={() => confirmModal(false)}
 				>
 					<P>
-						<fbt project="inyo" desc="">
+						<fbt
+							project="inyo"
+							desc="confirm modal notify customer 1st part"
+						>
 							Vous souhaitez créer une tâche attribuée au client
 							qui nécessite d'activer les notifications par email
 							à celui-ci.
 						</fbt>
 					</P>
 					<P>
-						<fbt project="inyo" desc="">
+						<fbt
+							project="inyo"
+							desc="confirm modal notify customer 2nd part"
+						>
 							Souhaitez vous continuer et activer les
 							notifications?
 						</fbt>

@@ -139,7 +139,10 @@ function CollaboratorDropdown({collaborators = [], assignee, taskId}) {
 				<div style={{padding: '1rem', color: accentGrey}}>
 					<fbt project="inyo" desc="missing collaborator on project">
 						Vous devez d'abord ajouter
-						<br /> un collaborateur au projet.
+					</fbt>
+					<br />
+					<fbt project="inyo" desc="missing collaborator on project">
+						un collaborateur au projet.
 					</fbt>
 				</div>
 			)}

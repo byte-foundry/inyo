@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import fbt, {param} from 'fbt';
 import React, {useRef, useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
@@ -76,64 +77,103 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 	return (
 		<ModalContainer onDismiss={onDismiss}>
 			<ModalElem>
-				<Header>Présentation d'Inyo à votre client</Header>
+				<Header>
+					<fbt
+						project="inyo"
+						desc="inyo customer presentation header"
+					>
+						Présentation d'Inyo à votre client
+					</fbt>
+				</Header>
 				<Info>
-					Vous venez de créer un client ! Voici un email prérédigé qui
-					vous permettra de lui présenter inyo.
+					<fbt project="inyo" desc="info inyo customer presentation">
+						Vous venez de créer un client ! Voici un email prérédigé
+						qui vous permettra de lui présenter inyo.
+					</fbt>
 				</Info>
 				<EmailExample
 					subject={
 						<>
-							Nous allons utiliser Inyo pour le suivi du projet{' '}
-							<ReplaceableText>[nom du projet]</ReplaceableText>
+							<fbt
+								project="inyo"
+								desc="beginning of subject of customer info mail"
+							>
+								Nous allons utiliser Inyo pour le suivi du
+								projet{' '}
+								<ReplaceableText>
+									[nom du projet]
+								</ReplaceableText>
+							</fbt>
 						</>
 					}
 					email={customer.email}
 					userEmail={email}
 				>
 					<P>
-						Bonjour{' '}
+						<fbt project="inyo" desc="hello">
+							Bonjour
+						</fbt>{' '}
 						{`${nullStr(getCiv(customer.title))} ${nullStr(
 							customer.firstName,
 						)} ${nullStr(customer.lastName)}`.trim()}
 						,
 					</P>
 					<P>
-						Je vais utiliser Inyo, un outil de gestion de projet
-						360, pour communiquer avec vous pendant le projet{' '}
-						<ReplaceableText>[nom du projet]</ReplaceableText>
+						<fbt project="inyo" desc="first part of email">
+							Je vais utiliser Inyo, un outil de gestion de projet
+							360, pour communiquer avec vous pendant le projet{' '}
+							<ReplaceableText>[nom du projet]</ReplaceableText>
+						</fbt>
 						<br />
-						Vous allez prochainement recevoir des emails provenant{' '}
+						<fbt project="inyo" desc="first part of email">
+							Vous allez prochainement recevoir des emails
+							provenant{' '}
+						</fbt>
+						//TODO: take care of this
 						<Apostrophe
 							value={assistantName}
 							withVowel="d'"
 							withConsonant="de "
 						/>
-						{assistantName} Inyo. Ne les placez pas en spam, ils
-						vont vous tenir informé de l'avancement de votre projet.
+						<fbt project="inyo" desc="first part of email">
+							{fbt.param('assistantName', assistantName)} Inyo. Ne
+							les placez pas en spam, ils vont vous tenir informé
+							de l'avancement de votre projet.
+						</fbt>
 						<br />
-						Afin d'avoir un aperçu en temps réel des avancées de ce
-						projet, vous recevrez régulièrement des résumés des
-						tâches réalisées, des notifications lorsque j'aurais des
-						questions ou lorsqu'une action de votre part est
-						nécessaire.
+						<fbt project="inyo" desc="first part of email">
+							Afin d'avoir un aperçu en temps réel des avancées de
+							ce projet, vous recevrez régulièrement des résumés
+							des tâches réalisées, des notifications lorsque
+							j'aurais des questions ou lorsqu'une action de votre
+							part est nécessaire.
+						</fbt>
 					</P>
 					<P>
-						Ces emails contiendront un lien personnalisé vous
-						permettant d'accéder directement au projet. Vous pourrez
-						ajouter des commentaires, valider des tâches et déposer
-						ou récupérer des documents.
+						<fbt project="inyo" desc="first part of email">
+							Ces emails contiendront un lien personnalisé vous
+							permettant d'accéder directement au projet. Vous
+							pourrez ajouter des commentaires, valider des tâches
+							et déposer ou récupérer des documents.
+						</fbt>
 					</P>
 					<P>
-						Merci de privilégier cette plateforme pour nos échanges,
-						cela nous permettra d'être plus efficaces en
-						centralisant nos échanges et la documentation.
+						<fbt project="inyo" desc="first part of email">
+							Merci de privilégier cette plateforme pour nos
+							échanges, cela nous permettra d'être plus efficaces
+							en centralisant nos échanges et la documentation.
+						</fbt>
 					</P>
 					<P>
-						Je reste à votre disposition si vous avez des questions.
+						<fbt project="inyo" desc="first part of email">
+							Je reste à votre disposition si vous avez des
+							questions.
+						</fbt>
 					</P>
 					<P>
-						<ReplaceableText>[Votre signature]</ReplaceableText>
+						<fbt project="inyo" desc="first part of email">
+							<ReplaceableText>[Votre signature]</ReplaceableText>
+						</fbt>
 					</P>
 				</EmailExample>
 				<ContentForCopy

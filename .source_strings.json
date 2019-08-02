@@ -2,32 +2,1100 @@
  "phrases": [
   {
    "hashToText": {
-    "PxWkigElFF+ZAugyaWBayQ==": "L'email doit être valide"
+    "c+lcFfPMwayO0O5SNqYW9w==": "Inviter un collaborateur"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 35,
-   "col_beg": 14,
-   "line_end": 35,
-   "col_end": 72,
+   "line_beg": 29,
+   "col_beg": 5,
+   "line_end": 31,
+   "col_end": 11,
    "type": "text",
-   "desc": "",
+   "desc": "header collaborator modal",
+   "project": "inyo",
+   "jsfbt": "Inviter un collaborateur"
+  },
+  {
+   "hashToText": {
+    "Kk05koBmsDqaTTQVJCU3aw==": "L'email doit être valide"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 40,
+   "col_beg": 8,
+   "line_end": 45,
+   "col_end": 14,
+   "type": "text",
+   "desc": "error collaborator email not valid",
    "project": "inyo",
    "jsfbt": "L'email doit être valide"
+  },
+  {
+   "hashToText": {
+    "XA7LD0ywIXskOmvYyTrrWw==": "Requis"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 48,
+   "col_beg": 8,
+   "line_end": 53,
+   "col_end": 14,
+   "type": "text",
+   "desc": "error collaborator email required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "mnvxbQlOlB/Afe9kwyUkCg==": "Cette utilisateur n'est pas encore inscrit sur Inyo"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 77,
+   "col_beg": 10,
+   "line_end": 83,
+   "col_end": 16,
+   "type": "text",
+   "desc": "error collaborator user not signed up",
+   "project": "inyo",
+   "jsfbt": "Cette utilisateur n'est pas encore inscrit sur Inyo"
+  },
+  {
+   "hashToText": {
+    "KrxZqOX203SN16dEZK0TGA==": "Une erreur s'est produite pendant la soumission du commentaire"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 90,
+   "col_beg": 10,
+   "line_end": 96,
+   "col_end": 16,
+   "type": "text",
+   "desc": "error collaborator unspecified error",
+   "project": "inyo",
+   "jsfbt": "Une erreur s'est produite pendant la soumission du commentaire"
   },
   {
    "hashToText": {
     "sAbSkE5NP4fqrLL3UdHfsA==": "Email du collaborateur"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 77,
-   "col_beg": 15,
-   "line_end": 77,
-   "col_end": 95,
+   "line_beg": 110,
+   "col_beg": 9,
+   "line_end": 115,
+   "col_end": 15,
    "type": "text",
    "desc": "label collaborator email",
    "project": "inyo",
    "jsfbt": "Email du collaborateur"
+  },
+  {
+   "hashToText": {
+    "D5BQpw+HPrLQbvb3mzK+cA==": "Inviter"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 128,
+   "col_beg": 9,
+   "line_end": 133,
+   "col_end": 15,
+   "type": "text",
+   "desc": "label collaborator invite button",
+   "project": "inyo",
+   "jsfbt": "Inviter"
+  },
+  {
+   "hashToText": {
+    "i3dSHU/47fQIhYGWTaqpDA==": "Aucune option"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 197,
+   "col_beg": 5,
+   "line_end": 199,
+   "col_end": 11,
+   "type": "text",
+   "desc": "arianne elem no option message",
+   "project": "inyo",
+   "jsfbt": "Aucune option"
+  },
+  {
+   "hashToText": {
+    "GB7LzwqHzSvCOtk0++uCyA==": "Aucune option"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 249,
+   "col_beg": 5,
+   "line_end": 254,
+   "col_end": 11,
+   "type": "text",
+   "desc": "arianne elem with create no option message",
+   "project": "inyo",
+   "jsfbt": "Aucune option"
+  },
+  {
+   "hashToText": {
+    "5YXIwCOKaXxjfG2gjXkHgA==": "Tâches à faire"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 305,
+   "col_beg": 4,
+   "line_end": 307,
+   "col_end": 10,
+   "type": "text",
+   "desc": "tasks to do filter label",
+   "project": "inyo",
+   "jsfbt": "Tâches à faire"
+  },
+  {
+   "hashToText": {
+    "bEAPRPQzUxZKgDEqti1LXg==": "Tâches faites"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 313,
+   "col_beg": 4,
+   "line_end": 315,
+   "col_end": 10,
+   "type": "text",
+   "desc": "tasks done filter label",
+   "project": "inyo",
+   "jsfbt": "Tâches faites"
+  },
+  {
+   "hashToText": {
+    "PCB0T4qV3n3Tl30CCccaaQ==": "Toutes les tâches"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 321,
+   "col_beg": 4,
+   "line_end": 323,
+   "col_end": 10,
+   "type": "text",
+   "desc": "all tasks filter label",
+   "project": "inyo",
+   "jsfbt": "Toutes les tâches"
+  },
+  {
+   "hashToText": {
+    "AqJMl0+P/pzfbxqbc9rd/A==": "Toutes les tâches"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 374,
+   "col_beg": 6,
+   "line_end": 376,
+   "col_end": 12,
+   "type": "text",
+   "desc": "tasks filter placeholder",
+   "project": "inyo",
+   "jsfbt": "Toutes les tâches"
+  },
+  {
+   "hashToText": {
+    "GnXDLOI0hcNOgOYJFIxscQ==": "Chercher par tags"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 408,
+   "col_beg": 5,
+   "line_end": 410,
+   "col_end": 11,
+   "type": "text",
+   "desc": "filter by tag placeholder",
+   "project": "inyo",
+   "jsfbt": "Chercher par tags"
+  },
+  {
+   "hashToText": {
+    "a8kwylJwa+wa0lEvy1HvBw==": "Ajoutez les titres des documents et appuyez sur entrée"
+   },
+   "filepath": "src/components/CheckList/index.js",
+   "line_beg": 82,
+   "col_beg": 7,
+   "line_end": 88,
+   "col_end": 13,
+   "type": "text",
+   "desc": "add requested document placeholder",
+   "project": "inyo",
+   "jsfbt": "Ajoutez les titres des documents et appuyez sur entrée"
+  },
+  {
+   "hashToText": {
+    "a8kwylJwa+wa0lEvy1HvBw==": "Ajoutez les titres des documents et appuyez sur entrée"
+   },
+   "filepath": "src/components/CheckList/index.js",
+   "line_beg": 135,
+   "col_beg": 7,
+   "line_end": 141,
+   "col_end": 13,
+   "type": "text",
+   "desc": "add requested document placeholder",
+   "project": "inyo",
+   "jsfbt": "Ajoutez les titres des documents et appuyez sur entrée"
+  },
+  {
+   "hashToText": {
+    "9tizAmpj5IlSDHpumdi54w==": "Vous devez d'abord ajouter"
+   },
+   "filepath": "src/components/CollaboratorDropdown/index.js",
+   "line_beg": 140,
+   "col_beg": 5,
+   "line_end": 142,
+   "col_end": 11,
+   "type": "text",
+   "desc": "missing collaborator on project",
+   "project": "inyo",
+   "jsfbt": "Vous devez d'abord ajouter"
+  },
+  {
+   "hashToText": {
+    "mjALk1C7sK+wlxgLusuBlg==": "un collaborateur au projet."
+   },
+   "filepath": "src/components/CollaboratorDropdown/index.js",
+   "line_beg": 144,
+   "col_beg": 5,
+   "line_end": 146,
+   "col_end": 11,
+   "type": "text",
+   "desc": "missing collaborator on project",
+   "project": "inyo",
+   "jsfbt": "un collaborateur au projet."
+  },
+  {
+   "hashToText": {
+    "CBEk0tjxRg3kn3CsSs2gTA==": "Collaborateurs sur le projet {projectName}"
+   },
+   "filepath": "src/components/CollaboratorModal/index.js",
+   "line_beg": 96,
+   "col_beg": 5,
+   "line_end": 99,
+   "col_end": 11,
+   "type": "text",
+   "desc": "collaborators modal header",
+   "project": "inyo",
+   "jsfbt": "Collaborateurs sur le projet {projectName}"
+  },
+  {
+   "hashToText": {
+    "qx1GG8725BwZccTubShfmA==": "Filtrer par nom, email..."
+   },
+   "filepath": "src/components/CollaboratorModal/index.js",
+   "line_beg": 124,
+   "col_beg": 11,
+   "line_end": 129,
+   "col_end": 17,
+   "type": "text",
+   "desc": "filter collaborator by email placeholder",
+   "project": "inyo",
+   "jsfbt": "Filtrer par nom, email..."
+  },
+  {
+   "hashToText": {
+    "Ku1n2y9WmL1lBgy6V/mNGA==": "Votre commentaire"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 107,
+   "col_beg": 2,
+   "line_end": 109,
+   "col_end": 8,
+   "type": "text",
+   "desc": "comment placeholder text",
+   "project": "inyo",
+   "jsfbt": "Votre commentaire"
+  },
+  {
+   "hashToText": {
+    "qY2JiUsK5dPxldd+wY2hwg==": "Écrire et envoyer un commentaire à votre client"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 114,
+   "col_beg": 3,
+   "line_end": 116,
+   "col_end": 9,
+   "type": "text",
+   "desc": "comment placeholder text for customer",
+   "project": "inyo",
+   "jsfbt": "Écrire et envoyer un commentaire à votre client"
+  },
+  {
+   "hashToText": {
+    "h9XywMaYUPXbmAMMxdTbQw==": "Écrire et envoyer un commentaire à votre prestataire"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 121,
+   "col_beg": 3,
+   "line_end": 123,
+   "col_end": 9,
+   "type": "text",
+   "desc": "comment placeholder text for user",
+   "project": "inyo",
+   "jsfbt": "Écrire et envoyer un commentaire à votre prestataire"
+  },
+  {
+   "hashToText": {
+    "/3uP7HTxJ/lHt7iNlgT3lQ==": "Une question ou une suggestion? Ajoutez un commentaire."
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 134,
+   "col_beg": 6,
+   "line_end": 137,
+   "col_end": 12,
+   "type": "text",
+   "desc": "empty comment message",
+   "project": "inyo",
+   "jsfbt": "Une question ou une suggestion? Ajoutez un commentaire."
+  },
+  {
+   "hashToText": {
+    "SqtjllI4dc2YZbvJXjfkfQ==": "↓ Autres commentaires"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 149,
+   "col_beg": 6,
+   "line_end": 151,
+   "col_end": 12,
+   "type": "text",
+   "desc": "other comments scroll alert",
+   "project": "inyo",
+   "jsfbt": "↓ Autres commentaires"
+  },
+  {
+   "hashToText": {
+    "H/doAMLoC9R3NO6NQmhd5Q==": "Une erreur s'est produite pendant la soumission du commentaire"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 184,
+   "col_beg": 8,
+   "line_end": 190,
+   "col_end": 14,
+   "type": "text",
+   "desc": "unpecified error message for comment",
+   "project": "inyo",
+   "jsfbt": "Une erreur s'est produite pendant la soumission du commentaire"
+  },
+  {
+   "hashToText": {
+    "oxns+QSfjmP/31eed9WLlw==": "Les personnes liées à la tâche seront notifiées"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 204,
+   "col_beg": 10,
+   "line_end": 210,
+   "col_end": 16,
+   "type": "text",
+   "desc": "tooltipe comment text area",
+   "project": "inyo",
+   "jsfbt": "Les personnes liées à la tâche seront notifiées"
+  },
+  {
+   "hashToText": {
+    "rh2V7ZeVauprF2x0tEMSvQ==": "Visible par les personnes liées au projet"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 227,
+   "col_beg": 10,
+   "line_end": 233,
+   "col_end": 16,
+   "type": "text",
+   "desc": "add comment button tooltip",
+   "project": "inyo",
+   "jsfbt": "Visible par les personnes liées au projet"
+  },
+  {
+   "hashToText": {
+    "vctbu+1iQDAHeWXFel8aDw==": "Ajouter un commentaire"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 240,
+   "col_beg": 10,
+   "line_end": 245,
+   "col_end": 16,
+   "type": "text",
+   "desc": "add comment button label",
+   "project": "inyo",
+   "jsfbt": "Ajouter un commentaire"
+  },
+  {
+   "hashToText": {
+    "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
+   },
+   "filepath": "src/components/ConfirmModal/index.js",
+   "line_beg": 51,
+   "col_beg": 6,
+   "line_end": 53,
+   "col_end": 12,
+   "type": "text",
+   "desc": "cancel",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
+   },
+   "filepath": "src/components/ConfirmModal/index.js",
+   "line_beg": 56,
+   "col_beg": 6,
+   "line_end": 58,
+   "col_end": 12,
+   "type": "text",
+   "desc": "confirm",
+   "project": "inyo",
+   "jsfbt": "Valider"
+  },
+  {
+   "hashToText": {
+    "Yqfjo8yW61yd54vX0hbLDw==": "Créer un lien pour partager"
+   },
+   "filepath": "src/components/CreateProjectLinkButton/index.js",
+   "line_beg": 34,
+   "col_beg": 4,
+   "line_end": 36,
+   "col_end": 10,
+   "type": "text",
+   "desc": "create project link label",
+   "project": "inyo",
+   "jsfbt": "Créer un lien pour partager"
+  },
+  {
+   "hashToText": {
+    "Bd89ZCXvcu/9faxnpga7dg==": "Lien pour partager votre projet avec votre client"
+   },
+   "filepath": "src/components/CreateProjectLinkButton/index.js",
+   "line_beg": 45,
+   "col_beg": 7,
+   "line_end": 51,
+   "col_end": 13,
+   "type": "text",
+   "desc": "project link modal header",
+   "project": "inyo",
+   "jsfbt": "Lien pour partager votre projet avec votre client"
+  },
+  {
+   "hashToText": {
+    "2USEdvsctPl5RFxIBfqqfQ==": "Fermer"
+   },
+   "filepath": "src/components/CreateProjectLinkButton/index.js",
+   "line_beg": 61,
+   "col_beg": 8,
+   "line_end": 66,
+   "col_end": 14,
+   "type": "text",
+   "desc": "project link modal close button",
+   "project": "inyo",
+   "jsfbt": "Fermer"
+  },
+  {
+   "hashToText": {
+    "JlqAJhidOola1T6sNfVC2w==": "Requis"
+   },
+   "filepath": "src/components/CreateProjectModal/index.js",
+   "line_beg": 51,
+   "col_beg": 7,
+   "line_end": 53,
+   "col_end": 13,
+   "type": "text",
+   "desc": "project name required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "esAlFRsJRyJYPdy1Etih2g==": "Titre du projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 135,
+   "col_beg": 6,
+   "line_end": 137,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project name label",
+   "project": "inyo",
+   "jsfbt": "Titre du projet"
+  },
+  {
+   "hashToText": {
+    "uR3RFRSyvsifyNkawiLp/A==": "Ex: Landing page nouvelle collection, etc."
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 140,
+   "col_beg": 6,
+   "line_end": 142,
+   "col_end": 12,
+   "type": "text",
+   "desc": "new project name placeholder",
+   "project": "inyo",
+   "jsfbt": "Ex: Landing page nouvelle collection, etc."
+  },
+  {
+   "hashToText": {
+    "vO2iC9t1o0c05l14ZCYjdA==": "Projet vierge"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 157,
+   "col_beg": 9,
+   "line_end": 159,
+   "col_end": 15,
+   "type": "text",
+   "desc": "empty project",
+   "project": "inyo",
+   "jsfbt": "Projet vierge"
+  },
+  {
+   "hashToText": {
+    "eht+qxxh8qLe293ArR18hQ==": "Nos modèles"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 165,
+   "col_beg": 9,
+   "line_end": 167,
+   "col_end": 15,
+   "type": "text",
+   "desc": "our templates",
+   "project": "inyo",
+   "jsfbt": "Nos modèles"
+  },
+  {
+   "hashToText": {
+    "k2apqNGi2MbCKc/kVRLWMA==": "Vos projets"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 173,
+   "col_beg": 9,
+   "line_end": 175,
+   "col_end": 15,
+   "type": "text",
+   "desc": "your projects",
+   "project": "inyo",
+   "jsfbt": "Vos projets"
+  },
+  {
+   "hashToText": {
+    "4CJoR6T35Kfy08wjRsUeUA==": "Titre du modèle"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 194,
+   "col_beg": 9,
+   "line_end": 199,
+   "col_end": 15,
+   "type": "text",
+   "desc": "template name label",
+   "project": "inyo",
+   "jsfbt": "Titre du modèle"
+  },
+  {
+   "hashToText": {
+    "RCQxet+RULtBF5TH7YKWDg==": "Voir le contenu"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 223,
+   "col_beg": 10,
+   "line_end": 228,
+   "col_end": 16,
+   "type": "text",
+   "desc": "see content label",
+   "project": "inyo",
+   "jsfbt": "Voir le contenu"
+  },
+  {
+   "hashToText": {
+    "BH/f+AItQ77i02GAD7Cnqg==": "Titre du projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 242,
+   "col_beg": 9,
+   "line_end": 247,
+   "col_end": 15,
+   "type": "text",
+   "desc": "project title label",
+   "project": "inyo",
+   "jsfbt": "Titre du projet"
+  },
+  {
+   "hashToText": {
+    "RCQxet+RULtBF5TH7YKWDg==": "Voir le contenu"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 268,
+   "col_beg": 10,
+   "line_end": 273,
+   "col_end": 16,
+   "type": "text",
+   "desc": "see content label",
+   "project": "inyo",
+   "jsfbt": "Voir le contenu"
+  },
+  {
+   "hashToText": {
+    "43iQnPzDY12BKHYrcSF3hA==": "Client principal du projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 295,
+   "col_beg": 8,
+   "line_end": 297,
+   "col_end": 14,
+   "type": "text",
+   "desc": "",
+   "project": "inyo",
+   "jsfbt": "Client principal du projet"
+  },
+  {
+   "hashToText": {
+    "7ot1HYeB83HUF8jFjx1OKA==": "Créer un nouveau client"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 309,
+   "col_beg": 9,
+   "line_end": 311,
+   "col_end": 15,
+   "type": "text",
+   "desc": "",
+   "project": "inyo",
+   "jsfbt": "Créer un nouveau client"
+  },
+  {
+   "hashToText": {
+    "l4cZtYj+egHpaq5Po6GGZA==": "Date limite du projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 325,
+   "col_beg": 9,
+   "line_end": 330,
+   "col_end": 15,
+   "type": "text",
+   "desc": "project deadline tooltip",
+   "project": "inyo",
+   "jsfbt": "Date limite du projet"
+  },
+  {
+   "hashToText": {
+    "lJvnLX/Da0W3tUYgsYThQQ==": "DD/MM/YYYY'"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 338,
+   "col_beg": 11,
+   "line_end": 343,
+   "col_end": 17,
+   "type": "text",
+   "desc": "date dd/mm/yyy format",
+   "project": "inyo",
+   "jsfbt": "DD/MM/YYYY'"
+  },
+  {
+   "hashToText": {
+    "+FPDHD0zjkn+hUqnxkCVtQ==": "Ajouter un client"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 379,
+   "col_beg": 8,
+   "line_end": 384,
+   "col_end": 14,
+   "type": "text",
+   "desc": "add a client create project button label",
+   "project": "inyo",
+   "jsfbt": "Ajouter un client"
+  },
+  {
+   "hashToText": {
+    "jYhD5vi0Onp2chfdhpRCpw==": "Ajouter une deadline"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 396,
+   "col_beg": 8,
+   "line_end": 401,
+   "col_end": 14,
+   "type": "text",
+   "desc": "add a deadline create project button label",
+   "project": "inyo",
+   "jsfbt": "Ajouter une deadline"
+  },
+  {
+   "hashToText": {
+    "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 409,
+   "col_beg": 5,
+   "line_end": 411,
+   "col_end": 11,
+   "type": "text",
+   "desc": "cancel create project",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 414,
+   "col_beg": 5,
+   "line_end": 416,
+   "col_end": 11,
+   "type": "text",
+   "desc": "confirm create project",
+   "project": "inyo",
+   "jsfbt": "Créer le projet"
+  },
+  {
+   "hashToText": {
+    "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 180,
+   "col_beg": 4,
+   "line_end": 182,
+   "col_end": 10,
+   "type": "text",
+   "desc": "back",
+   "project": "inyo",
+   "jsfbt": "Retour"
+  },
+  {
+   "hashToText": {
+    "/Jd7ezr1l5vzSDxJIaJPvg==": "Choisir un de nos modèles"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 187,
+   "col_beg": 6,
+   "line_end": 189,
+   "col_end": 12,
+   "type": "text",
+   "desc": "choose a template header",
+   "project": "inyo",
+   "jsfbt": "Choisir un de nos modèles"
+  },
+  {
+   "hashToText": {
+    "4CJoR6T35Kfy08wjRsUeUA==": "Titre du modèle"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 197,
+   "col_beg": 9,
+   "line_end": 202,
+   "col_end": 15,
+   "type": "text",
+   "desc": "template name label",
+   "project": "inyo",
+   "jsfbt": "Titre du modèle"
+  },
+  {
+   "hashToText": {
+    "T97sCAQhA8Onbh91K0YRqQ==": "Choisir ce modèle"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 219,
+   "col_beg": 8,
+   "line_end": 224,
+   "col_end": 14,
+   "type": "text",
+   "desc": "choose this template button label",
+   "project": "inyo",
+   "jsfbt": "Choisir ce modèle"
+  },
+  {
+   "hashToText": {
+    "+zXOcjND4CWEi+ekUnJ8Ag==": "Contenu du modèle"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 229,
+   "col_beg": 8,
+   "line_end": 234,
+   "col_end": 14,
+   "type": "text",
+   "desc": "content of the template",
+   "project": "inyo",
+   "jsfbt": "Contenu du modèle"
+  },
+  {
+   "hashToText": {
+    "Ofka5qDA4mmxuLv6M4YYjw==": "Choisir un de vos projets"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 244,
+   "col_beg": 6,
+   "line_end": 246,
+   "col_end": 12,
+   "type": "text",
+   "desc": "choose a project header",
+   "project": "inyo",
+   "jsfbt": "Choisir un de vos projets"
+  },
+  {
+   "hashToText": {
+    "46CGa9sMgnzSIx5/PaV4yQ==": "Titre du projet"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 254,
+   "col_beg": 9,
+   "line_end": 259,
+   "col_end": 15,
+   "type": "text",
+   "desc": "name of project placeholder",
+   "project": "inyo",
+   "jsfbt": "Titre du projet"
+  },
+  {
+   "hashToText": {
+    "wZZ1r5jb6/X1dxMAi60HxA==": "Choisir ce projet"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 273,
+   "col_beg": 8,
+   "line_end": 278,
+   "col_end": 14,
+   "type": "text",
+   "desc": "choose this project button label",
+   "project": "inyo",
+   "jsfbt": "Choisir ce projet"
+  },
+  {
+   "hashToText": {
+    "r6TESSFjzSGL4tnVpqiVng==": "Contenu du projet"
+   },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
+   "line_beg": 283,
+   "col_beg": 8,
+   "line_end": 288,
+   "col_end": 14,
+   "type": "text",
+   "desc": "content of the project",
+   "project": "inyo",
+   "jsfbt": "Contenu du projet"
+  },
+  {
+   "hashToText": {
+    "cq/K4aFF4Ae4s8QbGAuZrw==": "Vous souhaitez créer une tâche attribuée au client qui nécessite d'activer les notifications par email à celui-ci."
+   },
+   "filepath": "src/components/CreateTask/index.js",
+   "line_beg": 144,
+   "col_beg": 6,
+   "line_end": 148,
+   "col_end": 12,
+   "type": "text",
+   "desc": "confirm modal notify customer 1st part",
+   "project": "inyo",
+   "jsfbt": "Vous souhaitez créer une tâche attribuée au client qui nécessite d'activer les notifications par email à celui-ci."
+  },
+  {
+   "hashToText": {
+    "c3VHPe85E60l03JpI4/uPA==": "Souhaitez vous continuer et activer les notifications?"
+   },
+   "filepath": "src/components/CreateTask/index.js",
+   "line_beg": 151,
+   "col_beg": 6,
+   "line_end": 154,
+   "col_end": 12,
+   "type": "text",
+   "desc": "confirm modal notify customer 2nd part",
+   "project": "inyo",
+   "jsfbt": "Souhaitez vous continuer et activer les notifications?"
+  },
+  {
+   "hashToText": {
+    "8644T2R+4scYGO0LpX3DQw==": "Présentation d'Inyo à votre client"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 80,
+   "col_beg": 12,
+   "line_end": 80,
+   "col_end": 113,
+   "type": "text",
+   "desc": "inyo customer presentation header",
+   "project": "inyo",
+   "jsfbt": "Présentation d'Inyo à votre client"
+  },
+  {
+   "hashToText": {
+    "yRJfdDz1yU1Hmh6jMHqK0A==": "Vous venez de créer un client ! Voici un email prérédigé qui vous permettra de lui présenter inyo."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 82,
+   "col_beg": 5,
+   "line_end": 83,
+   "col_end": 49,
+   "type": "text",
+   "desc": "info inyo customer presentation",
+   "project": "inyo",
+   "jsfbt": "Vous venez de créer un client ! Voici un email prérédigé qui vous permettra de lui présenter inyo."
+  },
+  {
+   "hashToText": {
+    "DQeXAvwG7dJoYDdF7IN2HQ==": "Nous allons utiliser Inyo pour le suivi du projet {=[nom du projet]}"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 88,
+   "col_beg": 7,
+   "line_end": 90,
+   "col_end": 13,
+   "type": "text",
+   "desc": "beginning of subject of customer info mail",
+   "project": "inyo",
+   "jsfbt": "Nous allons utiliser Inyo pour le suivi du projet {=[nom du projet]}"
+  },
+  {
+   "hashToText": {
+    "aB5b9kvkppVMDoMtWkIZZw==": "[nom du projet]"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 89,
+   "col_beg": 7,
+   "line_end": 89,
+   "col_end": 57,
+   "type": "text",
+   "desc": "In the phrase: \"Nous allons utiliser Inyo pour le suivi du projet{=[nom du projet]}\"",
+   "project": "",
+   "jsfbt": "[nom du projet]"
+  },
+  {
+   "hashToText": {
+    "c2yAAU75ZlKJnwRNFXtsfQ==": "Bonjour"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 97,
+   "col_beg": 6,
+   "line_end": 97,
+   "col_end": 52,
+   "type": "text",
+   "desc": "hello",
+   "project": "inyo",
+   "jsfbt": "Bonjour"
+  },
+  {
+   "hashToText": {
+    "b7SBiQSY8WADC+OOtpqcXA==": "Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet {=[nom du projet]}"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 104,
+   "col_beg": 6,
+   "line_end": 108,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet {=[nom du projet]}"
+  },
+  {
+   "hashToText": {
+    "Yz/hEevDIK59WUd+cWCUCQ==": "[nom du projet]"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 107,
+   "col_beg": 6,
+   "line_end": 107,
+   "col_end": 56,
+   "type": "text",
+   "desc": "In the phrase: \"Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet{=[nom du projet]}\"",
+   "project": "",
+   "jsfbt": "[nom du projet]"
+  },
+  {
+   "hashToText": {
+    "69w/1T7K8HXXXh3oCdcbLw==": "Vous allez prochainement recevoir des emails provenant"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 110,
+   "col_beg": 6,
+   "line_end": 112,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "Vous allez prochainement recevoir des emails provenant"
+  },
+  {
+   "hashToText": {
+    "aWQMWcJJDEVku4UiIGUTHQ==": "{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 119,
+   "col_beg": 6,
+   "line_end": 122,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet."
+  },
+  {
+   "hashToText": {
+    "qvosYuyXlERa6kcMFltOrg==": "Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 124,
+   "col_beg": 6,
+   "line_end": 130,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire."
+  },
+  {
+   "hashToText": {
+    "/xJTSSeUxLgHBVVBf1yoAQ==": "Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 133,
+   "col_beg": 6,
+   "line_end": 138,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents."
+  },
+  {
+   "hashToText": {
+    "FTUglGa5v8qzJfeHmSafGA==": "Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 141,
+   "col_beg": 6,
+   "line_end": 145,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation."
+  },
+  {
+   "hashToText": {
+    "lGJBnl1neTaJOVzo5UyTpQ==": "Je reste à votre disposition si vous avez des questions."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 148,
+   "col_beg": 6,
+   "line_end": 150,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "Je reste à votre disposition si vous avez des questions."
+  },
+  {
+   "hashToText": {
+    "4dknal2HpNimLw2l4O6/+Q==": "{=[Votre signature]}"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 153,
+   "col_beg": 6,
+   "line_end": 155,
+   "col_end": 12,
+   "type": "text",
+   "desc": "first part of email",
+   "project": "inyo",
+   "jsfbt": "{=[Votre signature]}"
+  },
+  {
+   "hashToText": {
+    "P9tRkqcJzVR2yfHAPd134w==": "[Votre signature]"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 154,
+   "col_beg": 6,
+   "line_end": 154,
+   "col_end": 58,
+   "type": "text",
+   "desc": "In the phrase: \"{=[Votre signature]}\"",
+   "project": "",
+   "jsfbt": "[Votre signature]"
   }
  ],
- "childParentMappings": {}
+ "childParentMappings": {
+  "3": 2,
+  "6": 5,
+  "14": 13
+ }
 }

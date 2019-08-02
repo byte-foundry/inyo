@@ -30,8 +30,8 @@ function CreateProjectLinkButton({project}) {
 				onClick={() => setOpenLinkModal(true)}
 				id="create-project-link"
 			>
+				<MaterialIcon icon="link" size="tiny" color="inherit" />{' '}
 				<fbt project="inyo" desc="create project link label">
-					<MaterialIcon icon="link" size="tiny" color="inherit" />{' '}
 					Créer un lien pour partager
 				</fbt>
 			</Button>

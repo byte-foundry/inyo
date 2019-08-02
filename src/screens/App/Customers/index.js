@@ -178,7 +178,10 @@ const Customers = () => {
 			<Container>
 				<HeadingRow>
 					<Heading>Clients</Heading>
-					<HeadingLink to="/app/collaborators">
+					<HeadingLink
+						to="/app/collaborators"
+						id="collaborators-button"
+					>
 						Collaborateurs
 					</HeadingLink>
 				</HeadingRow>

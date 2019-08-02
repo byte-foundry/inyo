@@ -213,10 +213,11 @@ const Collaborators = () => {
 						value={filter}
 					/>
 					<Actions>
-						<A target="_blank" href="https://inyo.pro">
-							Présenter Inyo à un collaborateur
-						</A>
-						<Button big onClick={() => setAddCollaborator(true)}>
+						<Button
+							big
+							onClick={() => setAddCollaborator(true)}
+							id="invite-collaborator-button"
+						>
 							Inviter un collaborateur
 						</Button>
 					</Actions>

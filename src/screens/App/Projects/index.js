@@ -202,6 +202,7 @@ function Projects({history}) {
 						<Button
 							big
 							onClick={() => setOpenCreateProjectModal(true)}
+							id="create-project-button"
 						>
 							Nouveau projet
 						</Button>

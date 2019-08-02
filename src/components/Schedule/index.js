@@ -257,7 +257,7 @@ const Schedule = ({
 	);
 
 	return (
-		<Container>
+		<Container id="schedule-container">
 			<ScheduleNav>
 				<Button
 					onClick={() => onChangeWeek(
@@ -266,6 +266,7 @@ const Schedule = ({
 							.format(moment.HTML5_FMT.DATE),
 					)
 					}
+					id="schedule-today-button"
 				>
 					Aujourd'hui
 				</Button>
@@ -279,6 +280,7 @@ const Schedule = ({
 							.format(moment.HTML5_FMT.DATE),
 					)
 					}
+					id="schedule-prev-button"
 				/>
 				<ScheduleNavInfo>Sem. {startDay.week()}</ScheduleNavInfo>
 				<IconButton
@@ -291,6 +293,7 @@ const Schedule = ({
 							.format(moment.HTML5_FMT.DATE),
 					)
 					}
+					id="schedule-next-button"
 				/>
 			</ScheduleNav>
 			<Week>

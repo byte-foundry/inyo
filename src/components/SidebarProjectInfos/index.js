@@ -459,6 +459,7 @@ const SidebarProjectInfos = ({
 							onClick={() => {
 								setEditCollab(true);
 							}}
+							id="project-add-collaborator"
 						>
 							<MaterialIcon
 								icon="face"

@@ -122,10 +122,12 @@ const TaskCard = withRouter(
 					state: {prevSearch: location.search},
 				})
 				}
+				id="schedule-task-card"
 			>
 				{isOver && <DragSeparator />}
 				{!isCustomerTask(task.type) && (
 					<Button
+						id="schedule-task-card-finish-button"
 						current={task.status === 'FINISHED'}
 						invert={task.status === 'FINISHED'}
 						style={{

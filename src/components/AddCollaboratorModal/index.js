@@ -77,6 +77,7 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								placeholder="michel@gmail.com"
 								required
 								big
+								id="invite-collaborator-email"
 							/>
 							{props.status && props.status.msg && (
 								<ErrorInput style={{marginBottom: '1rem'}}>

@@ -38,143 +38,149 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 	}
 
 	return (
-		<Formik
-			initialValues={{
-				source: 'BLANK',
-				name: baseName,
-			}}
-			validate={(values) => {
-				try {
-					Yup.object({
-						name: Yup.string().required('Requis'),
-					}).validateSync(values, {abortEarly: false});
+		<div id="create-project-modal">
+			<Formik
+				initialValues={{
+					source: 'BLANK',
+					name: baseName,
+				}}
+				validate={(values) => {
+					try {
+						Yup.object({
+							name: Yup.string().required('Requis'),
+						}).validateSync(values, {abortEarly: false});
 
-					return {};
-				}
-				catch (err) {
-					return err.inner.reduce((errors, errorContent) => {
-						errors[errorContent.path] = errorContent.message;
-						return errors;
-					}, {});
-				}
-			}}
-			onSubmit={async (
-				{
-					modelTemplate,
-					modelProject,
-					customerId,
-					deadline,
-					name,
-					source,
-				},
-				actions,
-			) => {
-				actions.setSubmitting(true);
+						return {};
+					}
+					catch (err) {
+						return err.inner.reduce((errors, errorContent) => {
+							errors[errorContent.path] = errorContent.message;
+							return errors;
+						}, {});
+					}
+				}}
+				onSubmit={async (
+					{
+						modelTemplate,
+						modelProject,
+						customerId,
+						deadline,
+						name,
+						source,
+					},
+					actions,
+				) => {
+					actions.setSubmitting(true);
 
-				let sections;
+					let sections;
 
-				if (modelTemplate && source === 'MODELS') {
-					const sourceTemplate = templates.find(
-						tplt => tplt.name === modelTemplate,
-					);
+					if (modelTemplate && source === 'MODELS') {
+						const sourceTemplate = templates.find(
+							tplt => tplt.name === modelTemplate,
+						);
 
-					sections = sourceTemplate.sections;
-				}
-				else if (modelProject && source === 'PROJECTS') {
-					const {
-						data: {project: sourceProject},
-					} = await client.query({
-						query: GET_PROJECT_DATA,
+						sections = sourceTemplate.sections;
+					}
+					else if (modelProject && source === 'PROJECTS') {
+						const {
+							data: {project: sourceProject},
+						} = await client.query({
+							query: GET_PROJECT_DATA,
+							variables: {
+								projectId: modelProject,
+							},
+						});
+
+						sections = sourceProject.sections.map(section => ({
+							name: section.name,
+							items: section.items.map(
+								({
+									name: itemName,
+									unit,
+									description,
+									type,
+									timeItTook,
+								}) => ({
+									name: itemName,
+									unit: timeItTook || unit || 0,
+									description,
+									type,
+								}),
+							),
+						}));
+					}
+
+					const {data} = await createProject({
 						variables: {
-							projectId: modelProject,
+							name,
+							sections,
+							customerId,
+							deadline,
+							template: modelTemplate,
 						},
 					});
 
-					sections = sourceProject.sections.map(section => ({
-						name: section.name,
-						items: section.items.map(
-							({
-								name: itemName,
-								unit,
-								description,
-								type,
-								timeItTook,
-							}) => ({
-								name: itemName,
-								unit: timeItTook || unit || 0,
-								description,
-								type,
-							}),
-						),
-					}));
-				}
-
-				const {data} = await createProject({
-					variables: {
-						name,
-						sections,
-						customerId,
-						deadline,
-						template: modelTemplate,
-					},
-				});
-
-				history.push(`/app/tasks?projectId=${data.createProject.id}`);
-				actions.setSubmitting(false);
-			}}
-		>
-			{props => (
-				<>
-					{!createCustomer && !viewContent && (
-						<form onSubmit={props.handleSubmit}>
-							<ModalContainer onDismiss={onDismiss}>
-								<ModalElem>
-									<CreateProjectModalForm
-										{...props}
-										setViewContent={setViewContent}
-										setCreateCustomer={setCreateCustomer}
-										onDismiss={onDismiss}
-										addDeadline={addDeadline}
-										addCustomer={addCustomer}
-										setAddDeadline={setAddDeadline}
-										setAddCustomer={setAddCustomer}
-										setCustomerName={setCustomerName}
-										optionsProjects={optionsProjects}
-									/>
-								</ModalElem>
-							</ModalContainer>
-						</form>
-					)}
-					{viewContent && (
-						<form onSubmit={props.handleSubmit}>
-							<ModalContainer onDismiss={onDismiss}>
-								<ModalElem>
-									<CreateProjectModalViewContent
-										optionsProjects={optionsProjects}
-										back={() => setViewContent(false)}
-										{...props}
-									/>
-								</ModalElem>
-							</ModalContainer>
-						</form>
-					)}
-					{createCustomer && (
-						<CustomerModalAndMail
-							noSelect
-							withBack
-							customer={{name: customerName}}
-							onDismiss={() => {
-								setCustomerName('');
-								setCreateCustomer(false);
-							}}
-							onValidate={({id}) => {
-								props.setFieldValue('customerId', id);
-							}}
-						/>
-					)}
-				</>
-			)}
-		</Formik>
+					history.push(
+						`/app/tasks?projectId=${data.createProject.id}`,
+					);
+					actions.setSubmitting(false);
+				}}
+			>
+				{props => (
+					<>
+						{!createCustomer && !viewContent && (
+							<form onSubmit={props.handleSubmit}>
+								<ModalContainer onDismiss={onDismiss}>
+									<ModalElem>
+										<CreateProjectModalForm
+											{...props}
+											setViewContent={setViewContent}
+											setCreateCustomer={
+												setCreateCustomer
+											}
+											onDismiss={onDismiss}
+											addDeadline={addDeadline}
+											addCustomer={addCustomer}
+											setAddDeadline={setAddDeadline}
+											setAddCustomer={setAddCustomer}
+											setCustomerName={setCustomerName}
+											optionsProjects={optionsProjects}
+										/>
+									</ModalElem>
+								</ModalContainer>
+							</form>
+						)}
+						{viewContent && (
+							<form onSubmit={props.handleSubmit}>
+								<ModalContainer onDismiss={onDismiss}>
+									<ModalElem>
+										<CreateProjectModalViewContent
+											optionsProjects={optionsProjects}
+											back={() => setViewContent(false)}
+											{...props}
+										/>
+									</ModalElem>
+								</ModalContainer>
+							</form>
+						)}
+						{createCustomer && (
+							<CustomerModalAndMail
+								noSelect
+								withBack
+								customer={{name: customerName}}
+								onDismiss={() => {
+									setCustomerName('');
+									setCreateCustomer(false);
+								}}
+								onValidate={({id}) => {
+									props.setFieldValue('customerId', id);
+								}}
+							/>
+						)}
+					</>
+				)}
+			</Formik>
+		</div>
 	);
 }
 

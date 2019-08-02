@@ -1,48 +1,48 @@
 export default {
 	getProjectInfos({mutation, query}) {
-		const cachedProject = query.result.project;
+		const {project} = query.result;
 
 		const removedSection = mutation.result.data.removeSection;
-		const sections = cachedProject.sections.filter(
+		const sections = project.sections.filter(
 			section => section.id !== removedSection.id,
 		);
 
 		return {
 			...query.result,
 			project: {
-				...cachedProject,
+				...project,
 				sections,
 			},
 		};
 	},
 	getProjectData({mutation, query}) {
-		const cachedProject = query.result.project;
+		const {project} = query.result;
 
 		const removedSection = mutation.result.data.removeSection;
-		const sections = cachedProject.sections.filter(
+		const sections = project.sections.filter(
 			section => section.id !== removedSection.id,
 		);
 
 		return {
 			...query.result,
 			project: {
-				...cachedProject,
+				...project,
 				sections,
 			},
 		};
 	},
 	getAllTasks({mutation, query}) {
-		const cachedMe = query.result.me;
+		const {me} = query.result;
 
 		const removedSection = mutation.result.data.removeSection;
-		const tasks = cachedMe.tasks.filter(
+		const tasks = me.tasks.filter(
 			task => !task.section || task.section.id !== removedSection.id,
 		);
 
 		return {
 			...query.result,
 			me: {
-				...cachedMe,
+				...me,
 				tasks,
 			},
 		};

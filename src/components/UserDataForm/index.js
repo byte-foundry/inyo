@@ -96,40 +96,21 @@ const UserDataForm = ({done, ...componentProps}) => {
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 					try {
-						updateUser({
+						await updateUser({
 							variables: {
 								firstName: values.firstName,
 								lastName: values.lastName,
 								email: values.email,
 							},
-							update: (
-								cache,
-								{data: {updateUser: updatedUser}},
-							) => {
-								window.Intercom(
-									'trackEvent',
-									'updated-user-data',
-								);
-								const data = cache.readQuery({
-									query: GET_USER_INFOS,
-								});
-
-								data.me = {
-									...data.me,
-									...updatedUser,
-								};
-
-								cache.writeQuery({
-									query: GET_USER_INFOS,
-									data,
-								});
-								ReactGA.event({
-									category: 'User',
-									action: 'Updated user data',
-								});
-								done();
-							},
 						});
+
+						window.Intercom('trackEvent', 'updated-user-data');
+
+						ReactGA.event({
+							category: 'User',
+							action: 'Updated user data',
+						});
+						done();
 					}
 					catch (error) {
 						if (

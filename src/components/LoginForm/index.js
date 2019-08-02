@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import {ErrorInput} from '../../utils/content';
 import {LOGIN} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
+import {CHECK_LOGIN_USER} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 const LoginFormMain = styled('div')``;

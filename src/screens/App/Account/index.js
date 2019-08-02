@@ -314,7 +314,8 @@ const Account = ({location}) => {
 								type="button"
 								onClick={() => {
 									window.localStorage.removeItem('authToken');
-									client.resetStore();
+									// refresh the page to empty store completely
+									window.location.href = '/auth/sign-in';
 								}}
 							>
 								Me déconnecter

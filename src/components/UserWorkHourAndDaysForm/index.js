@@ -167,7 +167,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 					end.setMilliseconds(0);
 
 					try {
-						updateUser({
+						await updateUser({
 							variables: {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
@@ -175,35 +175,15 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},
-							update: (
-								cache,
-								{data: {updateUser: updatedUser}},
-							) => {
-								window.Intercom(
-									'trackEvent',
-									'updated-user-hours',
-								);
-								const data = cache.readQuery({
-									query: GET_USER_INFOS,
-								});
-
-								data.me = updatedUser;
-								try {
-									cache.writeQuery({
-										query: GET_USER_INFOS,
-										data,
-									});
-									ReactGA.event({
-										category: 'User',
-										action: 'Updated user data',
-									});
-									done();
-								}
-								catch (e) {
-									throw e;
-								}
-							},
 						});
+
+						window.Intercom('trackEvent', 'updated-user-hours');
+
+						ReactGA.event({
+							category: 'User',
+							action: 'Updated user data',
+						});
+						done();
 					}
 					catch (error) {
 						Sentry.captureException(error);

@@ -15,6 +15,7 @@ import introspectionQueryResultData from './fragmentTypes.json';
 import acceptCollabRequestWatchMutation from './mutationLinks/acceptCollabRequest';
 import createCustomerWatchMutation from './mutationLinks/createCustomer';
 import createProjectWatchMutation from './mutationLinks/createProject';
+import createSectionWatchMutation from './mutationLinks/createSection';
 import createTagWatchMutation from './mutationLinks/createTag';
 import createTaskWatchMutation from './mutationLinks/createTask';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
@@ -58,11 +59,12 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 const cache = new InMemoryCache({
 	fragmentMatcher,
 	dataIdFromObject: o => o.id,
-	// addTypename: true,
-	// cacheResolvers: {},
-	// 	fragmentMatcher: new IntrospectionFragmentMatcher({
-	// 		introspectionQueryResultData: yourData
-	// 	}),
+	cacheRedirects: {
+		Query: {
+			item: (_, args, {getCacheKey}) => getCacheKey({__typename: 'Item', id: args.id}),
+		},
+	},
+	freezeResults: true,
 });
 
 const errorLink = onError(({graphQLErrors}) => {
@@ -87,6 +89,7 @@ const errorLink = onError(({graphQLErrors}) => {
 const watchLink = new WatchedMutationLink(cache, {
 	acceptCollabRequest: acceptCollabRequestWatchMutation,
 	addItem: createTaskWatchMutation,
+	addSection: createSectionWatchMutation,
 	createProject: createProjectWatchMutation,
 	createCustomer: createCustomerWatchMutation,
 	createTag: createTagWatchMutation,

@@ -1,10 +1,10 @@
 export default {
 	getAllTasks: ({mutation, query}) => {
-		const cachedTasks = [...query.result.me.tasks];
+		const cachedTasks = query.result.me.tasks;
 
 		const addedCustomer = mutation.result.data.updateProject.customer;
 
-		const newItems = cachedTasks.map((task) => {
+		const tasks = cachedTasks.map((task) => {
 			if (
 				task.section
 				&& task.section.project.id === mutation.variables.projectId
@@ -14,7 +14,6 @@ export default {
 					linkedCustomer: addedCustomer && {
 						id: addedCustomer.id,
 						name: addedCustomer.name,
-						__typename: 'Customer',
 					},
 					section: {
 						...task.section,
@@ -23,21 +22,20 @@ export default {
 							customer: addedCustomer && {
 								id: addedCustomer.id,
 								name: addedCustomer.name,
-								__typename: 'Customer',
 							},
 						},
 					},
 				};
 			}
 
-			return {...task};
+			return task;
 		});
 
 		return {
 			...query.result,
 			me: {
 				...query.result.me,
-				tasks: newItems,
+				tasks,
 			},
 		};
 	},

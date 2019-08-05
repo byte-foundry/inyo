@@ -88,7 +88,45 @@ class SentryReporter extends Component {
 	}
 
 	render() {
-		if (this.state.error) {
+		const {error} = this.state;
+
+		if (error && error.message.includes('Loading chunk')) {
+			return (
+				<ReporterMain>
+					<AppLogo />
+					<ReporterRow>
+						<Illus src={errorIllus} />
+						<ErrorText>
+							<ErrorTitle>Erreur de chargement</ErrorTitle>
+							<p>
+								Cette erreur peut survenir lorsque l'application
+								vient d'être mise à jour, merci de recharger la
+								page.
+								<br />
+								Si le problème persiste, vous pouvez nous{' '}
+								<A
+									onClick={() => {
+										Sentry.showReportDialog();
+									}}
+								>
+									transmettre cette erreur
+								</A>
+								.
+							</p>
+							<LinkButton
+								to="/app"
+								onClick={() => {
+									window.location.href = '/app';
+								}}
+							>
+								Recharger la page
+							</LinkButton>
+						</ErrorText>
+					</ReporterRow>
+				</ReporterMain>
+			);
+		}
+		if (error) {
 			// render fallback UI
 			return (
 				<ReporterMain>
@@ -111,7 +149,7 @@ class SentryReporter extends Component {
 								. Voici l'erreur en question :
 							</div>
 							<ErrorCode>
-								<code>{this.state.error.toString()}</code>
+								<code>{error.toString()}</code>
 							</ErrorCode>
 							<LinkButton
 								to="/app"

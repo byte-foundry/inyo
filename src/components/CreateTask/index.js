@@ -45,24 +45,6 @@ const CreateTask = ({currentProjectId}) => {
 				position: 0,
 				...section,
 			},
-			update: (cache, {data: {addSection: addedSection}}) => {
-				const data = cache.readQuery({
-					query: GET_PROJECT_DATA,
-					variables: {projectId: currentProjectId},
-				});
-
-				const {project} = data;
-
-				project.sections.forEach(sec => (sec.position += 1));
-
-				project.sections.unshift(addedSection);
-
-				cache.writeQuery({
-					query: GET_PROJECT_DATA,
-					variables: {projectId: currentProjectId},
-					data,
-				});
-			},
 		});
 	}
 	else {
@@ -116,15 +98,22 @@ const CreateTask = ({currentProjectId}) => {
 							});
 
 							if (data.project.sections.length === 0) {
-								data.project.sections.push({
-									...addedItem.section,
-									items: [addedItem],
-								});
-
 								cache.writeQuery({
 									query: GET_PROJECT_DATA,
 									variables: {projectId: currentProjectId},
-									data,
+									data: {
+										...data,
+										project: {
+											...data.project,
+											sections: [
+												...data.project.sections,
+												{
+													...addedItem.section,
+													items: [addedItem],
+												},
+											],
+										},
+									},
 								});
 							}
 						},

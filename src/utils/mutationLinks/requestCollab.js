@@ -1,17 +1,16 @@
 export default {
 	getUserCollaboratorsAndRequests: ({mutation, query}) => {
-		const cachedCollaboratorRequests = [
-			...query.result.me.collaboratorRequests,
-		];
+		const {collaboratorRequests} = query.result.me;
 		const addedRequestCollab = mutation.result.data.requestCollab;
-
-		cachedCollaboratorRequests.unshift(addedRequestCollab);
 
 		return {
 			...query.result,
 			me: {
 				...query.result.me,
-				collaboratorRequests: cachedCollaboratorRequests,
+				collaboratorRequests: [
+					addedRequestCollab,
+					...collaboratorRequests,
+				],
 			},
 		};
 	},

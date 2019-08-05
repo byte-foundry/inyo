@@ -1,32 +1,28 @@
 export default {
 	getAllTags: ({mutation, query}) => {
-		const cachedTags = [...query.result.me.tags];
+		const {tags} = query.result.me;
 		const addedTag = mutation.result.data.createTag;
 
-		if (!cachedTags.find(t => t.id === addedTag.id)) {
-			cachedTags.push(addedTag);
-
+		if (!tags.find(t => t.id === addedTag.id)) {
 			return {
 				...query.result,
 				me: {
 					...query.result.me,
-					tags: cachedTags,
+					tags: [...tags, addedTag],
 				},
 			};
 		}
 	},
 	userInfosQuery: ({mutation, query}) => {
-		const cachedTags = [...query.result.me.tags];
+		const {tags} = query.result.me;
 		const addedTag = mutation.result.data.createTag;
 
-		if (!cachedTags.find(t => t.id === addedTag.id)) {
-			cachedTags.push(addedTag);
-
+		if (!tags.find(t => t.id === addedTag.id)) {
 			return {
 				...query.result,
 				me: {
 					...query.result.me,
-					tags: cachedTags,
+					tags: [...tags, addedTag],
 				},
 			};
 		}

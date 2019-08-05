@@ -134,7 +134,7 @@ class OnboardingThirdStep extends Component {
 								});
 
 								try {
-									updateUser({
+									await updateUser({
 										variables: {
 											startWorkAt: start
 												.toJSON()
@@ -144,27 +144,9 @@ class OnboardingThirdStep extends Component {
 												.split('T')[1],
 											workingDays,
 										},
-										update: (
-											cache,
-											{data: {updateUser: updatedUser}},
-										) => {
-											const data = cache.readQuery({
-												query: GET_USER_INFOS,
-											});
-
-											data.me = updatedUser;
-											try {
-												cache.writeQuery({
-													query: GET_USER_INFOS,
-													data,
-												});
-												getNextStep();
-											}
-											catch (e) {
-												throw e;
-											}
-										},
 									});
+
+									getNextStep();
 								}
 								catch (error) {
 									actions.setSubmitting(false);

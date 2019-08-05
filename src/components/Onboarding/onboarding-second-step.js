@@ -130,32 +130,14 @@ class OnboardingSecondStep extends Component {
 								const newPainsExpressed = values.painsExpressed;
 
 								try {
-									updateUser({
+									await updateUser({
 										variables: {
 											painsExpressed: newPainsExpressed,
 											otherPain: values.other,
 										},
-										update: (
-											cache,
-											{data: {updateUser: updatedUser}},
-										) => {
-											const data = cache.readQuery({
-												query: GET_USER_INFOS,
-											});
-
-											data.me = updatedUser;
-											try {
-												cache.writeQuery({
-													query: GET_USER_INFOS,
-													data,
-												});
-												getNextStep();
-											}
-											catch (e) {
-												throw e;
-											}
-										},
 									});
+
+									getNextStep();
 								}
 								catch (error) {
 									actions.setSubmitting(false);

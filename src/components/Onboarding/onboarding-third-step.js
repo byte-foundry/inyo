@@ -117,7 +117,7 @@ class OnboardingFifthStep extends Component {
 								});
 
 								try {
-									updateUser({
+									await updateUser({
 										variables: {
 											canBeContacted:
 												values.canBeContacted,
@@ -125,27 +125,9 @@ class OnboardingFifthStep extends Component {
 												phone: values.phone,
 											},
 										},
-										update: (
-											cache,
-											{data: {updateUser: newUpdateUser}},
-										) => {
-											const data = cache.readQuery({
-												query: GET_USER_INFOS,
-											});
-
-											data.me = newUpdateUser;
-											try {
-												cache.writeQuery({
-													query: GET_USER_INFOS,
-													data,
-												});
-												getNextStep();
-											}
-											catch (e) {
-												throw e;
-											}
-										},
 									});
+
+									getNextStep();
 								}
 								catch (error) {
 									actions.setSubmitting(false);

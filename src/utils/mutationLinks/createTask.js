@@ -3,23 +3,25 @@ export default {
 		const addedItem = mutation.result.data.addItem;
 
 		if (addedItem.section) {
-			const cachedSections = [...query.result.project.sections];
+			const sections = [...query.result.project.sections];
 
-			if (cachedSections.length > 0) {
-				const cachedSection = cachedSections.find(
+			if (sections.length > 0) {
+				const index = sections.findIndex(
 					section => section.id === addedItem.section.id,
 				);
+				const cachedSection = sections[index];
 
 				if (cachedSection) {
-					const cachedItems = cachedSection.items;
-
-					cachedItems.unshift(addedItem);
+					sections.splice(index, 1, {
+						...cachedSection,
+						items: [addedItem, ...cachedSection.items],
+					});
 
 					return {
 						...query.result,
 						project: {
 							...query.result.project,
-							sections: [...cachedSections],
+							sections,
 						},
 					};
 				}
@@ -36,24 +38,25 @@ export default {
 		const addedItem = mutation.result.data.addItem;
 
 		if (addedItem.section) {
-			const cachedSections = [...query.result.project.sections];
+			const sections = [...query.result.project.sections];
 
-			if (cachedSections.length > 0) {
-				const cachedSection = cachedSections.find(
+			if (sections.length > 0) {
+				const index = sections.findIndex(
 					section => section.id === addedItem.section.id,
 				);
+				const cachedSection = sections[index];
 
 				if (cachedSection) {
-					const cachedItems = cachedSection.items;
-
-					cachedItems.unshift(addedItem);
-					cachedSection.items = cachedItems;
+					sections.splice(index, 1, {
+						...cachedSection,
+						items: [addedItem, ...cachedSection.items],
+					});
 
 					return {
 						...query.result,
 						project: {
 							...query.result.project,
-							sections: [...cachedSections],
+							sections,
 						},
 					};
 				}
@@ -67,42 +70,38 @@ export default {
 		return undefined;
 	},
 	getAllTasks: ({mutation, query}) => {
-		const cachedItems = [...query.result.me.tasks];
+		let cachedItems = query.result.me.tasks;
 		const addedItem = mutation.result.data.addItem;
 
 		if (addedItem.section) {
-			const updatePositionItems = cachedItems.filter(
-				item => item.section && item.section.id === addedItem.section.id,
-			);
+			cachedItems = cachedItems.map((item) => {
+				if (item.section && item.section.id === addedItem.section.id) {
+					return {...item, position: item.position + 1};
+				}
 
-			updatePositionItems.forEach((item) => {
-				item.position += 1;
+				return item;
 			});
 		}
-
-		cachedItems.unshift(addedItem);
 
 		return {
 			...query.result,
 			me: {
 				...query.result.me,
-				tasks: cachedItems,
+				tasks: [addedItem, ...cachedItems],
 			},
 		};
 	},
 	getAllCustomers: ({mutation, query}) => {
-		const cachedCustomers = [...query.result.me.customers];
+		const {customers} = query.result.me;
 
 		if (mutation.variables.linkedCustomer) {
 			const addedCustomer = mutation.result.data.addItem.linkedCustomer;
-
-			cachedCustomers.unshift(addedCustomer);
 
 			return {
 				...query.result,
 				me: {
 					...query.result.me,
-					customers: cachedCustomers,
+					customers: [addedCustomer, ...customers],
 				},
 			};
 		}

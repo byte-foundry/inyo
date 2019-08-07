@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 
 import {formatName} from '../../utils/functions';
@@ -31,6 +32,16 @@ function TaskActivationHeader({
 							if (item.type === 'CONTENT_ACQUISITION') {
 								focusTask({
 									variables: {itemId: item.id},
+									optimisticResponse: {
+										focusTask: {
+											...item,
+											scheduledFor: moment().format(
+												moment.HTML5_FMT.DATE,
+											),
+											schedulePosition: -1,
+											isFocused: true,
+										},
+									},
 								});
 							}
 							else {
@@ -62,6 +73,16 @@ function TaskActivationHeader({
 							if (item.type === 'CONTENT_ACQUISITION') {
 								focusTask({
 									variables: {itemId: item.id},
+									optimisticResponse: {
+										focusTask: {
+											...item,
+											scheduledFor: moment().format(
+												moment.HTML5_FMT.DATE,
+											),
+											schedulePosition: -1,
+											isFocused: true,
+										},
+									},
 								});
 							}
 							else {
@@ -94,6 +115,16 @@ function TaskActivationHeader({
 					isActive={item.isFocused}
 					onCommit={() => focusTask({
 						variables: {itemId: item.id},
+						optimisticResponse: {
+							focusTask: {
+								...item,
+								scheduledFor: moment().format(
+									moment.HTML5_FMT.DATE,
+								),
+								schedulePosition: -1,
+								isFocused: true,
+							},
+						},
 					})
 					}
 				/>

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled/macro';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
+import {withRouter} from 'react-router-dom';
 
 import {
 	primaryRed,
@@ -31,13 +32,8 @@ function TaskComment({
 	item,
 	noComment,
 	customerToken,
-	locationSearch,
+	location,
 }) {
-	const [linkToTask, setLinkToTask] = useState({
-		pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-		state: {prevSearch: locationSearch},
-	});
-
 	let unreadCommentLength = (item.comments || []).length;
 
 	if (!noComment && item.comments.length > 0) {
@@ -49,15 +45,13 @@ function TaskComment({
 		).length;
 	}
 
-	useEffect(() => {
-		setLinkToTask({
-			pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-			state: {prevSearch: locationSearch},
-		});
-	}, [taskUrlPrefix, baseUrl, item.id, locationSearch]);
-
 	return (
-		<TaskInfosItemLink to={linkToTask}>
+		<TaskInfosItemLink
+			to={{
+				pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+				state: {prevSearch: location.search},
+			}}
+		>
 			<CommentWrap>
 				<Tooltip label="Ouvrir les commentaires">
 					<IconButton
@@ -86,4 +80,4 @@ function TaskComment({
 	);
 }
 
-export default TaskComment;
+export default withRouter(TaskComment);

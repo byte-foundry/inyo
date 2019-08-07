@@ -143,6 +143,8 @@ const UnitInput = ({
 								step="any"
 								isHours={isHours}
 								onFocus={() => {
+									if (!inputRef.current) return;
+
 									const valueFloat = parseFloat(
 										inputRef.current.value,
 									);

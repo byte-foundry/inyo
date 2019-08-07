@@ -1,68 +1,19 @@
 import styled from '@emotion/styled';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {isCustomerTask} from '../../utils/functions';
-import {
-	BackButton,
-	Button,
-	Label,
-	primaryBlack,
-	primaryRed,
-	SubHeading,
-} from '../../utils/new/design-system';
+import {Label, primaryBlack, primaryRed} from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_PROJECT_DATA} from '../../utils/queries';
-import FormSelect from '../FormSelect';
 
-const TemplateSubHeading = styled(SubHeading)`
-	margin-bottom: 1.5rem;
-`;
-
-const TemplateContent = styled('div')`
-	display: flex;
-	margin-left: -1rem;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-left: 0;
-		flex-direction: column;
-	}
-`;
-
-const Column = styled('div')`
-	margin-bottom: 2rem;
-`;
+const Column = styled('div')``;
 
 const InfoNoSections = styled(Column)`
 	font-style: italic;
 	margin-left: 1rem;
-`;
-
-const TemplateButton = styled(Button)`
-	margin-top: 1rem;
-`;
-
-const TemplateColumnSmall = styled('div')`
-	flex: 0.6;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex: 1;
-		margin-top: 1rem;
-	}
-`;
-
-const TemplateColumn = styled('div')`
-	flex: 1;
-	font-size: 13px;
-	position: relative;
-	margin-left: 0.5rem;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-left: 0;
-		margin-top: 1rem;
-	}
 `;
 
 const TemplateColumnLabel = styled(Label)`
@@ -113,6 +64,19 @@ const Li = styled('li')`
 const Container = styled('div')`
 	display: flex;
 	flex-direction: column;
+	position: absolute;
+	top: 0;
+	background: white;
+	left: 100%;
+	width: 20vw;
+	padding: 2rem;
+	margin-left: 2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		position: static;
+		width: initial;
+		margin: 0;
+	}
 `;
 
 function TemplateTaskList({selectedTemplate}) {
@@ -144,114 +108,36 @@ function TemplateTaskList({selectedTemplate}) {
 	);
 }
 
-export default function ({back, optionsProjects, ...props}) {
-	const {setFieldValue, values} = props;
-	const {modelTemplate, modelProject, source: type} = values;
+const CreateProjectModalViewContent = ({content}) => {
+	const selectedTemplate = templates.find(tplt => tplt.name === content);
+
+	const isTemplate = !!selectedTemplate;
 	const {data, loading} = useQuery(GET_PROJECT_DATA, {
 		variables: {
-			projectId:
-				props.values.modelProjectTemp || props.values.modelProject,
+			projectId: content,
 		},
+		skip: isTemplate,
 	});
 
-	let content;
-
-	useEffect(() => {
-		setFieldValue('modelTemplateTemp', modelTemplate);
-		setFieldValue('modelProjectTemp', modelProject);
-	}, [setFieldValue, modelTemplate, modelProject]);
-
-	if (type === 'MODELS') {
-		content = templates.find(
-			tplt => tplt.name === props.values.modelTemplateTemp,
+	if (!isTemplate && !loading) {
+		return (
+			<Container>
+				<TemplateColumnLabel>Contenu du projet</TemplateColumnLabel>
+				{loading ? (
+					<Loading />
+				) : (
+					<TemplateTaskList selectedTemplate={data.project} />
+				)}
+			</Container>
 		);
-	}
-	else if (type === 'PROJECTS') {
-		content = data ? data.project : {};
 	}
 
 	return (
 		<Container>
-			<BackButton withMargin grey type="button" link onClick={back}>
-				Retour
-			</BackButton>
-			{type === 'MODELS' && (
-				<>
-					<TemplateSubHeading>
-						Choisir un de nos modèles
-					</TemplateSubHeading>
-					<TemplateContent>
-						<TemplateColumnSmall>
-							<FormSelect
-								{...props}
-								name="modelTemplateTemp"
-								label="Titre du modèle"
-								big
-								options={templates.map(template => ({
-									value: template.name,
-									label: template.label,
-								}))}
-							/>
-							<TemplateButton
-								onClick={() => {
-									props.setFieldValue(
-										'modelTemplate',
-										props.values.modelTemplateTemp,
-									);
-									back();
-								}}
-							>
-								Choisir ce modèle
-							</TemplateButton>
-						</TemplateColumnSmall>
-						<TemplateColumn>
-							<TemplateColumnLabel>
-								Contenu du modèle
-							</TemplateColumnLabel>
-							<TemplateTaskList selectedTemplate={content} />
-						</TemplateColumn>
-					</TemplateContent>
-				</>
-			)}
-			{type === 'PROJECTS' && (
-				<>
-					<TemplateSubHeading>
-						Choisir un de vos projets
-					</TemplateSubHeading>
-					<TemplateContent>
-						<TemplateColumnSmall>
-							<FormSelect
-								{...props}
-								name="modelProjectTemp"
-								label="Titre du projet"
-								big
-								options={optionsProjects}
-							/>
-							<TemplateButton
-								onClick={() => {
-									props.setFieldValue(
-										'modelProject',
-										props.values.modelProjectTemp,
-									);
-									back();
-								}}
-							>
-								Choisir ce projet
-							</TemplateButton>
-						</TemplateColumnSmall>
-						<TemplateColumn>
-							<TemplateColumnLabel>
-								Contenu du projet
-							</TemplateColumnLabel>
-							{loading ? (
-								<Loading />
-							) : (
-								<TemplateTaskList selectedTemplate={content} />
-							)}
-						</TemplateColumn>
-					</TemplateContent>
-				</>
-			)}
+			<TemplateColumnLabel>Contenu du modèle</TemplateColumnLabel>
+			<TemplateTaskList selectedTemplate={selectedTemplate} />
 		</Container>
 	);
-}
+};
+
+export default CreateProjectModalViewContent;

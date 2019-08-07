@@ -13,59 +13,33 @@ import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 
 function CreateProjectModal({onDismiss, history, baseName}) {
-	const [viewContent, setViewContent] = useState(false);
+	const [viewContent, setViewContent] = useState(null);
 	const [createCustomer, setCreateCustomer] = useState(false);
-	const [addCustomer, setAddCustomer] = useState(false);
 	const [customerName, setCustomerName] = useState('');
-	const [addDeadline, setAddDeadline] = useState(false);
 	const [createProject] = useMutation(CREATE_PROJECT);
 	const client = useApolloClient();
 
-	const {loading: loadingProjects, data: dataProjects} = useQuery(
-		GET_ALL_PROJECTS,
-		{suspend: true},
-	);
+	const {data: dataProjects} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 
-	let optionsProjects = [];
-
-	if (!loadingProjects) {
-		optionsProjects = dataProjects.me.projects
-			.filter(project => project.status !== 'REMOVED')
-			.map(project => ({
-				value: project.id,
-				label: project.name,
-			}));
-	}
+	const optionsProjects = dataProjects.me.projects
+		.filter(project => project.status !== 'REMOVED')
+		.map(project => ({
+			value: project.id,
+			label: project.name,
+		}));
 
 	return (
 		<Formik
 			initialValues={{
-				source: 'BLANK',
+				template: 'BLANK',
 				name: baseName,
 			}}
-			validate={(values) => {
-				try {
-					Yup.object({
-						name: Yup.string().required('Requis'),
-					}).validateSync(values, {abortEarly: false});
-
-					return {};
-				}
-				catch (err) {
-					return err.inner.reduce((errors, errorContent) => {
-						errors[errorContent.path] = errorContent.message;
-						return errors;
-					}, {});
-				}
-			}}
+			validateSchema={Yup.object({
+				name: Yup.string().required('Requis'),
+			})}
 			onSubmit={async (
 				{
-					modelTemplate,
-					modelProject,
-					customerId,
-					deadline,
-					name,
-					source,
+					template, customerId, deadline, name,
 				},
 				actions,
 			) => {
@@ -73,40 +47,45 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 
 				let sections;
 
-				if (modelTemplate && source === 'MODELS') {
+				let isModelTemplate = false;
+
+				if (template !== 'EMPTY') {
 					const sourceTemplate = templates.find(
-						tplt => tplt.name === modelTemplate,
+						tplt => tplt.name === template,
 					);
 
-					sections = sourceTemplate.sections;
-				}
-				else if (modelProject && source === 'PROJECTS') {
-					const {
-						data: {project: sourceProject},
-					} = await client.query({
-						query: GET_PROJECT_DATA,
-						variables: {
-							projectId: modelProject,
-						},
-					});
+					if (sourceTemplate) {
+						isModelTemplate = true;
+						({sections} = sourceTemplate);
+					}
+					else {
+						const {
+							data: {project: sourceProject},
+						} = await client.query({
+							query: GET_PROJECT_DATA,
+							variables: {
+								projectId: template,
+							},
+						});
 
-					sections = sourceProject.sections.map(section => ({
-						name: section.name,
-						items: section.items.map(
-							({
-								name: itemName,
-								unit,
-								description,
-								type,
-								timeItTook,
-							}) => ({
-								name: itemName,
-								unit: timeItTook || unit || 0,
-								description,
-								type,
-							}),
-						),
-					}));
+						sections = sourceProject.sections.map(section => ({
+							name: section.name,
+							items: section.items.map(
+								({
+									name: itemName,
+									unit,
+									description,
+									type,
+									timeItTook,
+								}) => ({
+									name: itemName,
+									unit: timeItTook || unit || 0,
+									description,
+									type,
+								}),
+							),
+						}));
+					}
 				}
 
 				const {data} = await createProject({
@@ -115,7 +94,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 						sections,
 						customerId,
 						deadline,
-						template: modelTemplate,
+						template: isModelTemplate ? template : undefined,
 					},
 				});
 
@@ -125,36 +104,24 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 		>
 			{props => (
 				<>
-					{!createCustomer && !viewContent && (
+					{!createCustomer && (
 						<form onSubmit={props.handleSubmit}>
-							<ModalContainer onDismiss={onDismiss}>
+							<ModalContainer onDismiss={onDismiss} size="small">
 								<ModalElem>
 									<CreateProjectModalForm
 										{...props}
 										setViewContent={setViewContent}
 										setCreateCustomer={setCreateCustomer}
 										onDismiss={onDismiss}
-										addDeadline={addDeadline}
-										addCustomer={addCustomer}
-										setAddDeadline={setAddDeadline}
-										setAddCustomer={setAddCustomer}
 										setCustomerName={setCustomerName}
 										optionsProjects={optionsProjects}
 									/>
 								</ModalElem>
-							</ModalContainer>
-						</form>
-					)}
-					{viewContent && (
-						<form onSubmit={props.handleSubmit}>
-							<ModalContainer onDismiss={onDismiss}>
-								<ModalElem>
+								{viewContent && (
 									<CreateProjectModalViewContent
-										optionsProjects={optionsProjects}
-										back={() => setViewContent(false)}
-										{...props}
+										content={viewContent}
 									/>
-								</ModalElem>
+								)}
 							</ModalContainer>
 						</form>
 					)}

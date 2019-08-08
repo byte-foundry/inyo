@@ -1022,6 +1022,7 @@ export const CANCEL_REQUEST_COLLAB = gql`
 	mutation cancelRequestCollab($collabRequestId: ID!) {
 		cancelRequestCollab(collabRequestId: $collabRequestId) {
 			id
+			status
 		}
 	}
 `;

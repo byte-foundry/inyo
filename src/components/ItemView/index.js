@@ -32,6 +32,7 @@ import {
 	MetaLabel,
 	MetaText,
 	MetaTime,
+	P,
 	primaryGrey,
 	primaryPurple,
 	StickyHeader,
@@ -252,7 +253,15 @@ const Item = ({
 	});
 
 	if (loading || loadingUser) return <LoadingLogo />;
-	if (error || errorUser) throw error || errorUser;
+	if (error && error.graphQLErrors[0].message.includes('Non autorisé')) {
+		return (
+			<>
+				<Header>Accès non autorisé</Header>
+				<P>Vous n'avez pas ou plus accès a cette tâche.</P>
+			</>
+		);
+	}
+	if (error || errorUser) throw errorUser || error;
 
 	const {item} = data;
 	const {linkedCustomer: customer} = item;

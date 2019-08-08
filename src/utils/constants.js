@@ -101,6 +101,7 @@ export const collabStatuses = {
 	PENDING: 'PENDING',
 	ACCEPTED: 'ACCEPTED',
 	REJECTED: 'REJECTED',
+	CANCELED: 'CANCELED',
 };
 
 export const BREAKPOINTS = [420];

@@ -55,21 +55,21 @@ const AddCollaboratorModal = ({onDismiss}) => {
 							) {
 								actions.setStatus({
 									msg:
-										"Cette utilisateur n'est pas encore inscrit sur Inyo",
+										"Cet utilisateur n'est pas encore inscrit sur Inyo.",
 								});
 							}
 							else if (
 								e.graphQLErrors[0].extensions.code
-								=== 'AlreadyExists'
+								=== 'AlreadyExisting'
 							) {
 								actions.setStatus({
 									msg:
-										'Cette personne collabore déjà avec vous.',
+										'Cet utilisateur est déjà un de vos collaborateur ou une requête est déjà en cours.',
 								});
 							}
 							else {
 								actions.setStatus({
-									msg: "Une erreur s'est produite",
+									msg: "Une erreur s'est produite.",
 								});
 							}
 						}

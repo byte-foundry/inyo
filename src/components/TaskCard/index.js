@@ -3,7 +3,7 @@ import React, {forwardRef} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
-import {isCustomerTask} from '../../utils/functions';
+import {formatName, isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
@@ -171,7 +171,14 @@ const TaskCard = withRouter(
 					{task.name}
 				</CardTitle>
 				{task.linkedCustomer && (
-					<CardSubTitle>{task.linkedCustomer.name}</CardSubTitle>
+					<CardSubTitle>
+						{task.linkedCustomer.name} (
+						{formatName(
+							task.linkedCustomer.firstName,
+							task.linkedCustomer.lastName,
+						)}
+						)
+					</CardSubTitle>
 				)}
 			</TaskCardElem>
 		);

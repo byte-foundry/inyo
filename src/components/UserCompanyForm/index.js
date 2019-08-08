@@ -80,38 +80,19 @@ class UserCompanyForm extends Component {
 								actions.setSubmitting(false);
 								values.address.__typename = undefined; // eslint-disable-line no-underscore-dangle, no-param-reassign
 								try {
-									updateUser({
+									await updateUser({
 										variables: {
 											company: values,
 										},
-										update: (
-											cache,
-											{data: {updateUser: updatedUser}},
-										) => {
-											window.Intercom(
-												'trackEvent',
-												'updated-company-data',
-											);
-											const data = cache.readQuery({
-												query: GET_USER_INFOS,
-											});
+									});
 
-											data.me = updatedUser;
-											ReactGA.event({
-												category: 'User',
-												action: 'Updated company data',
-											});
-											try {
-												cache.writeQuery({
-													query: GET_USER_INFOS,
-													data,
-												});
-												done();
-											}
-											catch (e) {
-												throw e;
-											}
-										},
+									window.Intercom(
+										'trackEvent',
+										'updated-company-data',
+									);
+									ReactGA.event({
+										category: 'User',
+										action: 'Updated company data',
 									});
 								}
 								catch (error) {

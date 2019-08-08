@@ -1,7 +1,7 @@
 export default {
 	getAllCustomers: ({mutation, query}) => {
-		const cachedMe = query.result.me;
-		const customers = [...cachedMe.customers];
+		const {me} = query.result;
+		const customers = [...me.customers];
 		const removedCustomer = mutation.result.data.removeCustomer;
 		const indexToRemove = customers.findIndex(
 			customer => customer.id === removedCustomer.id,
@@ -12,14 +12,14 @@ export default {
 		return {
 			...query.result,
 			me: {
-				...cachedMe,
+				...me,
 				customers,
 			},
 		};
 	},
 	getUserCustomers: ({mutation, query}) => {
-		const cachedMe = query.result.me;
-		const customers = [...cachedMe.customers];
+		const {me} = query.result;
+		const customers = [...me.customers];
 		const removedCustomer = mutation.result.data.removeCustomer;
 		const indexToRemove = customers.findIndex(
 			customer => customer.id === removedCustomer.id,
@@ -30,7 +30,7 @@ export default {
 		return {
 			...query.result,
 			me: {
-				...cachedMe,
+				...me,
 				customers,
 			},
 		};

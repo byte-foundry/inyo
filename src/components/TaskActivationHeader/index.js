@@ -1,5 +1,7 @@
+import moment from 'moment';
 import React from 'react';
 
+import {formatName} from '../../utils/functions';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 
@@ -20,12 +22,26 @@ function TaskActivationHeader({
 						taskId={item.id}
 						isActive={item.isFocused}
 						customerName={
-							item.linkedCustomer && item.linkedCustomer.name
+							item.linkedCustomer
+							&& `${item.linkedCustomer.name} (${formatName(
+								item.linkedCustomer.firstName,
+								item.linkedCustomer.lastName,
+							)})`
 						}
 						onCommit={() => {
 							if (item.type === 'CONTENT_ACQUISITION') {
 								focusTask({
 									variables: {itemId: item.id},
+									optimisticResponse: {
+										focusTask: {
+											...item,
+											scheduledFor: moment().format(
+												moment.HTML5_FMT.DATE,
+											),
+											schedulePosition: -1,
+											isFocused: true,
+										},
+									},
 								});
 							}
 							else {
@@ -47,12 +63,26 @@ function TaskActivationHeader({
 						taskId={item.id}
 						isActive={item.isFocused}
 						customerName={
-							item.linkedCustomer && item.linkedCustomer.name
+							item.linkedCustomer
+							&& `${item.linkedCustomer.name} (${formatName(
+								item.linkedCustomer.firstName,
+								item.linkedCustomer.lastName,
+							)})`
 						}
 						onCommit={() => {
 							if (item.type === 'CONTENT_ACQUISITION') {
 								focusTask({
 									variables: {itemId: item.id},
+									optimisticResponse: {
+										focusTask: {
+											...item,
+											scheduledFor: moment().format(
+												moment.HTML5_FMT.DATE,
+											),
+											schedulePosition: -1,
+											isFocused: true,
+										},
+									},
 								});
 							}
 							else {
@@ -85,6 +115,16 @@ function TaskActivationHeader({
 					isActive={item.isFocused}
 					onCommit={() => focusTask({
 						variables: {itemId: item.id},
+						optimisticResponse: {
+							focusTask: {
+								...item,
+								scheduledFor: moment().format(
+									moment.HTML5_FMT.DATE,
+								),
+								schedulePosition: -1,
+								isFocused: true,
+							},
+						},
 					})
 					}
 				/>

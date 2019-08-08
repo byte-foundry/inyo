@@ -9,6 +9,7 @@ import {Route, withRouter} from 'react-router-dom';
 import ArianneThread from '../../../components/ArianneThread';
 import TaskView from '../../../components/ItemView';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
+import MaterialIcon from '../../../components/MaterialIcon';
 import RescheduleModal from '../../../components/RescheduleModal';
 import Schedule from '../../../components/Schedule';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
@@ -32,8 +33,10 @@ import {
 	IllusFigureContainer,
 	IllusText,
 	P,
+	ScrollHelper,
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
+import useScheduleData from '../../../utils/useScheduleData';
 import useUserInfos from '../../../utils/useUserInfos';
 
 const FlexRowMobile = styled(FlexRow)`
@@ -91,6 +94,11 @@ const DashboardTasks = ({location, history}) => {
 	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
 	const {workingTime, workingDays, hasFullWeekSchedule} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
+	const {
+		unscheduledTasks,
+		tasksToReschedule,
+		scheduledTasksPerDay,
+	} = useScheduleData();
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -138,16 +146,13 @@ const DashboardTasks = ({location, history}) => {
 	const filter = query.get('filter');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
+	const startingFrom = query.get('from');
 
 	if (error) throw error;
 
 	const {
 		me: {id, tasks},
 	} = data;
-
-	const unscheduledTasks = [];
-	const tasksToReschedule = [];
-	const scheduledTasksPerDay = {};
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -210,172 +215,6 @@ const DashboardTasks = ({location, history}) => {
 		history.push(`/app/dashboard?${newQuery.toString()}`);
 	};
 
-	tasks.forEach((task) => {
-		if (
-			task.section
-			&& task.section.project.deadline
-			&& task.section.project.status === 'ONGOING'
-		) {
-			const {project} = task.section;
-
-			const deadlineDate = moment(project.deadline).format(
-				moment.HTML5_FMT.DATE,
-			);
-
-			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
-				deadlineDate
-			] || {
-				date: deadlineDate,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			if (
-				!scheduledTasksPerDay[deadlineDate].deadlines.find(
-					d => d.project && d.project.id === project.id,
-				)
-			) {
-				scheduledTasksPerDay[deadlineDate].deadlines.push({
-					date: project.deadline,
-					project,
-				});
-			}
-		}
-
-		if (
-			task.dueDate
-			&& (!task.section || task.dueDate !== task.section.project.deadline)
-		) {
-			const deadlineDate = moment(task.dueDate).format(
-				moment.HTML5_FMT.DATE,
-			);
-
-			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
-				deadlineDate
-			] || {
-				date: deadlineDate,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			scheduledTasksPerDay[deadlineDate].deadlines.push({
-				date: task.dueDate,
-				task,
-			});
-		}
-
-		if (
-			!task.scheduledFor
-			&& task.status === 'FINISHED'
-			&& moment(task.finishedAt).isBefore(moment(), 'day')
-		) {
-			const finishedAtDate = task.finishedAt.split('T')[0];
-
-			scheduledTasksPerDay[finishedAtDate] = scheduledTasksPerDay[
-				finishedAtDate
-			] || {
-				date: finishedAtDate,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-			};
-
-			scheduledTasksPerDay[finishedAtDate].tasks.push(task);
-
-			return;
-		}
-
-		if (
-			!(
-				task.owner.id === id
-				&& task.assignee
-				&& task.assignee.id !== id
-			)
-			&& !task.scheduledFor
-		) {
-			if (!task.section || task.section.project.status === 'ONGOING') {
-				unscheduledTasks.push(task);
-			}
-
-			return;
-		}
-
-		if (isCustomerTask(task.type)) {
-			const plannedReminders = task.reminders.filter(
-				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
-			);
-
-			plannedReminders.forEach((reminder) => {
-				const reminderDate = moment(reminder.sendingDate).format(
-					moment.HTML5_FMT.DATE,
-				);
-
-				scheduledTasksPerDay[reminderDate] = scheduledTasksPerDay[
-					reminderDate
-				] || {
-					date: reminderDate,
-					tasks: [],
-					reminders: [],
-					deadlines: [],
-					assignedTasks: [],
-				};
-
-				scheduledTasksPerDay[reminderDate].reminders.push({
-					...reminder,
-					item: task,
-				});
-			});
-
-			// we just want the reminders
-			return;
-		}
-
-		if (
-			task.owner.id === id
-			&& task.assignee
-			&& task.assignee.id !== id
-			&& task.scheduledFor
-		) {
-			scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
-				task.scheduledFor
-			] || {
-				date: task.scheduledFor,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			scheduledTasksPerDay[task.scheduledFor].assignedTasks.push(task);
-
-			return;
-		}
-
-		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
-			task.scheduledFor
-		] || {
-			date: task.scheduledFor,
-			tasks: [],
-			reminders: [],
-			deadlines: [],
-			assignedTasks: [],
-		};
-
-		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
-
-		if (
-			task.status === 'PENDING'
-			&& !isCustomerTask(task.type)
-			&& moment(task.scheduledFor).isBefore(moment(), 'day')
-		) {
-			tasksToReschedule.push(task);
-		}
-	});
-
 	const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
 		task => !task.section
 			|| task.section.project.status === 'ONGOING'
@@ -398,7 +237,21 @@ const DashboardTasks = ({location, history}) => {
 
 	return (
 		<>
+			<ScrollHelper>
+				<MaterialIcon icon="unfold_more" size="normal" />
+			</ScrollHelper>
 			<Schedule
+				startingFrom={startingFrom}
+				onChangeWeek={(newWeek) => {
+					const newQuery = new URLSearchParams(query);
+
+					newQuery.set('from', newWeek);
+
+					history.replace({
+						...location,
+						search: newQuery.toString(),
+					});
+				}}
 				days={scheduledTasksPerDay}
 				workingDays={workingDays}
 				fullWeek={hasFullWeekSchedule}

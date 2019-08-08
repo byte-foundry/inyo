@@ -841,3 +841,27 @@ export const MetaText = styled('span')`
 export const MetaTime = styled(MetaText)`
 	position: relative;
 `;
+
+export const ScrollHelper = styled('div')`
+	width: 60px;
+	height: 60px;
+	position: fixed;
+	right: 20px;
+	bottom: 20%;
+	background-color: rgba(180, 180, 180, 0.5);
+	z-index: 100;
+	border-radius: 50%;
+	align-items: center;
+	justify-content: center;
+	display: none;
+	transition: opacity 5s ease;
+
+	&:hover {
+		opacity: 0.2;
+		transition: opacity 600ms ease;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+	}
+`;

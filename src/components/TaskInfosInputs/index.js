@@ -60,7 +60,6 @@ function TaskInfosInputs({
 	onCustomerSubmit,
 	startOpen,
 	switchOnSelect,
-	location,
 	customerToken,
 	taskUrlPrefix,
 	baseUrl,
@@ -86,7 +85,6 @@ function TaskInfosInputs({
 						item={item}
 						noComment={noComment}
 						customerToken={customerToken}
-						locationSearch={location.search}
 					/>
 				)}
 				<TaskReminderIcon
@@ -94,7 +92,6 @@ function TaskInfosInputs({
 					customerToken={customerToken}
 					taskUrlPrefix={taskUrlPrefix}
 					baseUrl={baseUrl}
-					locationSearch={location.search}
 				/>
 			</IconsWrap>
 			<TaskUnitInfo

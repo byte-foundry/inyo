@@ -2,7 +2,7 @@ import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
-import {isCustomerTask} from '../../utils/functions';
+import {formatName, isCustomerTask} from '../../utils/functions';
 import {ADD_ITEM, ADD_SECTION, UPDATE_PROJECT} from '../../utils/mutations';
 import {P} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
@@ -45,24 +45,6 @@ const CreateTask = ({currentProjectId}) => {
 				position: 0,
 				...section,
 			},
-			update: (cache, {data: {addSection: addedSection}}) => {
-				const data = cache.readQuery({
-					query: GET_PROJECT_DATA,
-					variables: {projectId: currentProjectId},
-				});
-
-				const {project} = data;
-
-				project.sections.forEach(sec => (sec.position += 1));
-
-				project.sections.unshift(addedSection);
-
-				cache.writeQuery({
-					query: GET_PROJECT_DATA,
-					variables: {projectId: currentProjectId},
-					data,
-				});
-			},
 		});
 	}
 	else {
@@ -79,7 +61,12 @@ const CreateTask = ({currentProjectId}) => {
 					currentProjectData
 					&& currentProjectData.project.customer && {
 						id: currentProjectData.project.customer.id,
-						name: currentProjectData.project.customer.name,
+						name: `${
+							currentProjectData.project.customer.name
+						} (${formatName(
+							currentProjectData.project.customer.firstName,
+							currentProjectData.project.customer.lastName,
+						)})`,
 					}
 				}
 				onSubmitTask={async (task) => {
@@ -111,15 +98,22 @@ const CreateTask = ({currentProjectId}) => {
 							});
 
 							if (data.project.sections.length === 0) {
-								data.project.sections.push({
-									...addedItem.section,
-									items: [addedItem],
-								});
-
 								cache.writeQuery({
 									query: GET_PROJECT_DATA,
 									variables: {projectId: currentProjectId},
-									data,
+									data: {
+										...data,
+										project: {
+											...data.project,
+											sections: [
+												...data.project.sections,
+												{
+													...addedItem.section,
+													items: [addedItem],
+												},
+											],
+										},
+									},
 								});
 							}
 						},

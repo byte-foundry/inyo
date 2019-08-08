@@ -41,6 +41,9 @@ function MaterialIcon(props) {
 	const styleOverride = Object.assign(propStyle, {
 		color: color || '',
 		fontSize: sizeMapped,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
 	});
 	const clsName
 		= className

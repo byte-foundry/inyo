@@ -129,3 +129,84 @@ export const formatCollabStatus = (status) => {
 
 	return '';
 };
+
+export const formatDuration = (minutes, minutesInDay) => {
+	let formattedTime = '';
+
+	if (minutes >= minutesInDay) {
+		formattedTime += `${minutes / minutesInDay}j`;
+		return formattedTime;
+	}
+
+	const remainingMinutes = moment.duration(minutes % minutesInDay, 'minutes');
+
+	if (remainingMinutes.get('hours') > 0) {
+		formattedTime += `${remainingMinutes.get('hours')}h`;
+	}
+
+	if (remainingMinutes.get('minutes') > 0) {
+		formattedTime += `${remainingMinutes.get('minutes')}min`;
+	}
+
+	return formattedTime;
+};
+
+export const clamp = (min, max, value) => {
+	const minClamped = value < min ? min : value;
+
+	return minClamped > max ? max : minClamped;
+};
+
+export const getMarginUntilDeadline = (
+	deadline,
+	taskArray,
+	endWorkAt = '17:00:00.000Z',
+	workingTime = 9,
+) => {
+	const workingTimeMilli = moment
+		.duration(workingTime, 'hours')
+		.asMilliseconds();
+	const momentEndOfDay = moment(
+		`${moment().format('YYYY-MM-DDT')}${endWorkAt}`,
+	);
+	const timeUntilEndOfDay = clamp(
+		0,
+		Infinity,
+		moment(momentEndOfDay).diff(moment()),
+	);
+	const numberOfDaysFromEndOfTodayUntilDeadline
+		= moment
+			.duration(
+				moment(deadline)
+					.endOf('day')
+					.diff(moment().endOf('day')),
+			)
+			.days() * workingTimeMilli;
+	const timeRemainingForTasks = taskArray.reduce(
+		(sumOfTime, t) => t.unit * workingTimeMilli + sumOfTime,
+		0,
+	);
+	const timeRemainingToday = clamp(
+		0,
+		Infinity,
+		timeUntilEndOfDay - timeRemainingForTasks,
+	);
+	const remainingMilliAfterToday
+		= numberOfDaysFromEndOfTodayUntilDeadline
+		- (timeRemainingForTasks - timeUntilEndOfDay);
+	const daysAfterTodayRemaining = Math.floor(
+		remainingMilliAfterToday / workingTimeMilli,
+	);
+	const millisecondsAfterTodayRemaining
+		= remainingMilliAfterToday % workingTimeMilli;
+	const duration = moment.duration({
+		milliseconds: timeRemainingToday + millisecondsAfterTodayRemaining,
+		days: daysAfterTodayRemaining,
+	});
+
+	if (duration.asMilliseconds() > 0) {
+		return duration.humanize();
+	}
+
+	return `${duration.humanize()} de retard`;
+};

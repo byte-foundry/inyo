@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 import React, {useMemo} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import {isCustomerTask} from '../../utils/functions';
 import {primaryPurple, primaryRed} from '../../utils/new/design-system';
@@ -16,7 +16,7 @@ function TaskReminderIcon({
 	customerToken,
 	taskUrlPrefix,
 	baseUrl,
-	locationSearch,
+	location,
 }) {
 	const activableTask = !customerToken && item.status === 'PENDING';
 	const customerTask = isCustomerTask(item.type);
@@ -25,20 +25,20 @@ function TaskReminderIcon({
 		() => ({
 			pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 			state: {
-				prevSearch: locationSearch,
+				prevSearch: location.search,
 				isActivating: true,
 			},
 		}),
-		[taskUrlPrefix, baseUrl, item.id, locationSearch],
+		[taskUrlPrefix, baseUrl, item.id, location.search],
 	);
 	const taskLink = useMemo(
 		() => ({
 			pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 			state: {
-				prevSearch: locationSearch,
+				prevSearch: location.search,
 			},
 		}),
-		[taskUrlPrefix, baseUrl, item.id, locationSearch],
+		[taskUrlPrefix, baseUrl, item.id, location.search],
 	);
 
 	return (
@@ -93,4 +93,4 @@ function TaskReminderIcon({
 	);
 }
 
-export default TaskReminderIcon;
+export default withRouter(TaskReminderIcon);

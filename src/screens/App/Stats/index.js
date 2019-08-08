@@ -9,6 +9,7 @@ import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import {BREAKPOINTS} from '../../../utils/constants';
+import {formatName} from '../../../utils/functions';
 import {
 	A,
 	accentGrey,
@@ -213,7 +214,10 @@ const Stats = ({history, location}) => {
 
 		customers[customer.id] = customers[customer.id] || {
 			value: 0,
-			label: customer.name,
+			label: `${customer.name} (${formatName(
+				customer.firstName,
+				customer.lastName,
+			)})`,
 		};
 
 		const time

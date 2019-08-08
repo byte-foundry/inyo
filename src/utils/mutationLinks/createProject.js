@@ -1,20 +1,17 @@
 export default {
 	getAllProjects: ({mutation, query}) => {
-		const cachedProjects = [...query.result.me.projects];
 		const addedProject = mutation.result.data.createProject;
-
-		cachedProjects.unshift(addedProject);
 
 		return {
 			...query.result,
 			me: {
 				...query.result.me,
-				projects: cachedProjects,
+				projects: [addedProject, ...query.result.me.projects],
 			},
 		};
 	},
 	getAllTasks: ({mutation, query}) => {
-		const cachedTasks = [...query.result.me.tasks];
+		const {tasks} = query.result.me;
 		const addedTasks = mutation.result.data.createProject.sections
 			.map(section => section.items)
 			.flat();
@@ -23,7 +20,7 @@ export default {
 			...query.result,
 			me: {
 				...query.result.me,
-				tasks: [...cachedTasks, ...addedTasks],
+				tasks: [...tasks, ...addedTasks],
 			},
 		};
 	},

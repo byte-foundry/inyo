@@ -1,6 +1,6 @@
 export default {
 	getAllTags: ({mutation, query}) => {
-		const cachedTags = [...query.result.me.tags];
+		const cachedTags = query.result.me.tags;
 		const removedTag = mutation.result.data.removeTag;
 		const tags = cachedTags.filter(tag => tag.id !== removedTag.id);
 
@@ -13,7 +13,7 @@ export default {
 		};
 	},
 	userInfosQuery: ({mutation, query}) => {
-		const cachedTags = [...query.result.me.tags];
+		const cachedTags = query.result.me.tags;
 		const removedTag = mutation.result.data.removeTag;
 		const tags = cachedTags.filter(tag => tag.id !== removedTag.id);
 
@@ -26,7 +26,7 @@ export default {
 		};
 	},
 	getAllTasks: ({mutation, query}) => {
-		const cachedItems = [...query.result.me.tasks];
+		const cachedItems = query.result.me.tasks;
 		const removedTag = mutation.result.data.removeTag;
 
 		const newItems = cachedItems.map(item => ({

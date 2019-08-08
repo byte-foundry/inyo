@@ -1,15 +1,15 @@
 const getProject = ({mutation, query}) => {
-	const cachedProject = query.result.project;
+	const {project} = query.result;
 	const removedItem = mutation.result.data.removeItem;
 
-	cachedProject.sections = cachedProject.sections.map(section => ({
+	const sections = project.sections.map(section => ({
 		...section,
 		items: section.items.filter(item => item.id !== removedItem.id),
 	}));
 
 	return {
 		...query.result,
-		project: cachedProject,
+		project: {...project, sections},
 	};
 };
 
@@ -22,8 +22,6 @@ export default {
 		);
 
 		cachedItems.splice(removedItemIndex, 1);
-		// remove it even from the previous object to avoid getting it in the way
-		query.result.me.tasks.splice(removedItemIndex, 1);
 
 		return {
 			...query.result,

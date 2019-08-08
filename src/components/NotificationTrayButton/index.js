@@ -123,14 +123,19 @@ const NotificationTrayButton = ({mobile}) => {
 				variables: {},
 			});
 
-			data.me.notifications.forEach((n) => {
-				n.unread = false; // eslint-disable-line
-			});
-
 			cache.writeQuery({
 				query: GET_USER_NOTIFICATIONS,
 				variables: {},
-				data: queryData,
+				data: {
+					...queryData,
+					me: {
+						...queryData.me,
+						notifications: queryData.me.notifications.map(n => ({
+							...n,
+							unread: false,
+						})),
+					},
+				},
 			});
 		},
 	});

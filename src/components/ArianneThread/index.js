@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import Select, {components} from 'react-select';
 import Creatable from 'react-select/creatable';
 
 import {BREAKPOINTS} from '../../utils/constants';
+import {formatName} from '../../utils/functions';
 import {
 	lightGrey,
 	primaryPurple,
@@ -291,6 +292,17 @@ function ArianneThread({
 		{id: 'ALL', name: 'Toutes les tâches'},
 	];
 
+	const customersList = useMemo(
+		() => customers.map(customer => ({
+			...customer,
+			name: `${customer.name} (${formatName(
+				customer.firstName,
+				customer.lastName,
+			)})`,
+		})),
+		[customers],
+	);
+
 	if (errorsProject) throw errorsProject;
 	if (errorsTags) throw errorsTags;
 	if (errorsCustomers) throw errorsCustomers;
@@ -300,7 +312,7 @@ function ArianneThread({
 			{selectCustomer && (
 				<ArianneElem
 					id="clients"
-					list={customers}
+					list={customersList}
 					onChange={selectCustomer}
 					isClearable
 					selectedId={linkedCustomerId}

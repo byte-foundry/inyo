@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
+import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 
@@ -236,13 +236,17 @@ const DroppableDayTasks = ({children}) => {
 };
 
 const Schedule = ({
+	startingFrom,
+	onChangeWeek,
 	days,
 	workingDays,
 	fullWeek,
 	onMoveTask,
 	workingTime = 8,
 }) => {
-	const [startDay, setStartDay] = useState(moment().startOf('week'));
+	const startDay = moment(
+		moment(startingFrom).isValid() ? startingFrom : undefined,
+	).startOf('week');
 
 	const weekdays = extractScheduleFromWorkingDays(
 		workingDays,
@@ -255,20 +259,38 @@ const Schedule = ({
 	return (
 		<Container>
 			<ScheduleNav>
-				<Button onClick={() => setStartDay(moment().startOf('week'))}>
+				<Button
+					onClick={() => onChangeWeek(
+						moment()
+							.startOf('week')
+							.format(moment.HTML5_FMT.DATE),
+					)
+					}
+				>
 					Aujourd'hui
 				</Button>
 				<IconButton
 					icon="navigate_before"
 					size="tiny"
-					onClick={() => setStartDay(startDay.clone().subtract(1, 'week'))
+					onClick={() => onChangeWeek(
+						startDay
+							.clone()
+							.subtract(1, 'week')
+							.format(moment.HTML5_FMT.DATE),
+					)
 					}
 				/>
 				<ScheduleNavInfo>Sem. {startDay.week()}</ScheduleNavInfo>
 				<IconButton
 					icon="navigate_next"
 					size="tiny"
-					onClick={() => setStartDay(startDay.clone().add(1, 'week'))}
+					onClick={() => onChangeWeek(
+						startDay
+							.clone()
+							.add(1, 'week')
+							.format(moment.HTML5_FMT.DATE),
+					)
+					}
 				/>
 			</ScheduleNav>
 			<Week>
@@ -286,7 +308,14 @@ const Schedule = ({
 
 					const timeLeft
 						= 1
-						- sortedTasks.reduce((time, task) => time + task.unit, 0);
+						- sortedTasks.reduce(
+							(time, task) => time
+								+ (task.status === 'FINISHED'
+								&& task.timeItTook !== null
+									? task.timeItTook
+									: task.unit),
+							0,
+						);
 					const timeSpent = sortedTasks.reduce(
 						(time, task) => time + task.timeItTook,
 						0,
@@ -467,12 +496,15 @@ const Schedule = ({
 };
 
 Schedule.defaultProps = {
+	onChangeWeek: () => {},
 	workingDays: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
 	fullWeek: false,
 	onMoveTask: () => {},
 };
 
 Schedule.propTypes = {
+	startingFrom: PropTypes.string,
+	onChangeWeek: PropTypes.func,
 	workingDays: PropTypes.arrayOf(
 		PropTypes.oneOf([
 			'MONDAY',

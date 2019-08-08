@@ -36,16 +36,16 @@ import {
 	primaryBlack,
 	primaryRed,
 	primaryWhite,
+	ScrollHelper,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {
-	GET_ALL_TASKS,
-	GET_PROJECT_DATA,
-	GET_USER_INFOS,
-} from '../../utils/queries';
+import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
+import useScheduleData from '../../utils/useScheduleData';
+import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
+import MaterialIcon from '../MaterialIcon';
 import Task from '../TasksList/task';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
@@ -381,8 +381,11 @@ const DraggableTask = ({
 					const dataToUpdate = cache.readQuery({
 						query: GET_ALL_TASKS,
 					});
-					const itemsToUpdate = [updateItem];
-					const oldItemsToUpdate = [];
+					const itemsToUpdate = {
+						[updateItem.id]: updateItem,
+					};
+					const oldItemsToUpdate = {};
+
 					const section = sections.find(
 						sectionItem => sectionItem.id === endSectionId,
 					);
@@ -390,112 +393,91 @@ const DraggableTask = ({
 						sectionItem => sectionItem.id === sectionId,
 					);
 
+					let oldSectionItems = oldSection.items;
+
 					if (sectionId === endSectionId) {
 						// task is drag and drop in the same section
 						if (
 							section.items.find(
 								item => updateItem.id === item.id,
-							).position !== endPosition
-						) {
-							section.items.forEach((item) => {
-								if (
-									item.position > startPosition
-									&& item.position <= endPosition
-								) {
-									itemsToUpdate.push({
-										...item,
-										position: item.position - 1,
-									});
-								}
-								else if (
-									item.position < startPosition
-									&& item.position >= endPosition
-								) {
-									itemsToUpdate.push({
-										...item,
-										position: item.position + 1,
-									});
-								}
-							});
+							).position === endPosition
+						) return;
 
-							console.table(itemsToUpdate);
-
-							itemsToUpdate.forEach((itemUpdated) => {
-								const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
-									t => itemUpdated.id === t.id,
-								);
-
-								dataToUpdate.me.tasks[
-									indexTaskToUpdate
-								].position = itemUpdated.position;
-							});
-
-							cache.writeQuery({
-								query: GET_ALL_TASKS,
-								data: dataToUpdate,
-							});
-						}
+						section.items.forEach((item) => {
+							if (
+								item.position > startPosition
+								&& item.position <= endPosition
+							) {
+								itemsToUpdate[item.id] = {
+									...item,
+									position: item.position - 1,
+								};
+							}
+							else if (
+								item.position < startPosition
+								&& item.position >= endPosition
+							) {
+								itemsToUpdate[item.id] = {
+									...item,
+									position: item.position + 1,
+								};
+							}
+						});
 					}
 					else {
 						section.items.forEach((item) => {
 							if (item.position >= endPosition) {
-								itemsToUpdate.push({
+								itemsToUpdate[item.id] = {
 									...item,
 									position: item.position + 1,
-								});
+								};
 							}
 						});
 
 						oldSection.items.forEach((item) => {
 							if (item.position >= startPosition) {
-								oldItemsToUpdate.push({
+								oldItemsToUpdate[item.id] = {
 									...item,
 									position: item.position - 1,
-								});
+								};
 							}
 						});
 
-						oldSection.items.splice(position, 1);
-
-						const sectionForItem = {
-							...section,
-							items: undefined,
-						};
-
-						const oldSectionForItem = {
-							...oldSection,
-							items: undefined,
-						};
-
-						oldItemsToUpdate.forEach((itemUpdated) => {
-							const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
-								t => itemUpdated.id === t.id,
-							);
-
-							dataToUpdate.me.tasks[indexTaskToUpdate].position
-								= itemUpdated.position;
-							dataToUpdate.me.tasks[
-								indexTaskToUpdate
-							].section = oldSectionForItem;
-						});
-
-						itemsToUpdate.forEach((itemUpdated) => {
-							const indexTaskToUpdate = dataToUpdate.me.tasks.findIndex(
-								t => itemUpdated.id === t.id,
-							);
-
-							dataToUpdate.me.tasks[indexTaskToUpdate].position
-								= itemUpdated.position;
-							dataToUpdate.me.tasks[
-								indexTaskToUpdate
-							].section = sectionForItem;
-						});
-
-						cache.writeQuery({
-							query: GET_ALL_TASKS,
-							data: dataToUpdate,
-						});
+						oldSectionItems = [...oldSection.items];
+						oldSectionItems.splice(position, 1);
 					}
+
+					cache.writeQuery({
+						query: GET_ALL_TASKS,
+						data: {
+							...dataToUpdate,
+							me: {
+								...dataToUpdate.me,
+								tasks: dataToUpdate.me.tasks.map((task) => {
+									if (itemsToUpdate[task.id]) {
+										return {
+											...itemsToUpdate[task.id],
+											section: {
+												...section,
+												items: undefined,
+											},
+										};
+									}
+									if (oldItemsToUpdate[task.id]) {
+										return {
+											...oldItemsToUpdate[task.id],
+											section: {
+												...oldSection,
+												items: oldSectionItems,
+											},
+										};
+									}
+
+									return task;
+								}),
+							},
+						},
+					});
 				},
 			});
 		},
@@ -577,61 +559,34 @@ const DraggableSection = ({
 					},
 				},
 				update: (cache, {data: {updateSection: updatedSection}}) => {
-					const dataToUpdate = cache.readFragment({
-						fragment: gql`
-							fragment myProject on Project {
-								sections {
-									id
-									name
-									position
-								}
-							}
-						`,
-						id: projectId,
+					const dataToUpdate = cache.readQuery({
+						query: GET_PROJECT_DATA,
+						variables: {projectId},
 					});
 
-					const sectionsInProject = dataToUpdate.sections;
-					const cachedUpdatedSection = sectionsInProject.find(
-						sec => sec.id === updatedSection.id,
+					let projectSections = dataToUpdate.project.sections.filter(
+						s => s.id !== updatedSection.id,
 					);
 
-					if (endPosition < startPosition) {
-						const sectionsToUpdate = sectionsInProject.filter(
-							sec => sec.position < startPosition
-								&& sec.position >= endPosition,
-						);
+					projectSections.splice(
+						updatedSection.position,
+						0,
+						updatedSection,
+					);
+					projectSections = projectSections.map((section, index) => ({
+						...section,
+						position: index,
+					}));
 
-						sectionsToUpdate.forEach((sec) => {
-							sec.position += 1;
-						});
-					}
-					else if (endPosition > startPosition) {
-						const sectionsToUpdate = sectionsInProject.filter(
-							sec => sec.position > startPosition
-								&& sec.position <= endPosition,
-						);
-
-						sectionsToUpdate.forEach((sec) => {
-							sec.position -= 1;
-						});
-					}
-
-					cachedUpdatedSection.position = endPosition;
-
-					cache.writeFragment({
-						fragment: gql`
-							fragment myProject on Project {
-								sections {
-									id
-									name
-									position
-								}
-							}
-						`,
-						id: projectId,
+					cache.writeQuery({
+						query: GET_PROJECT_DATA,
+						variables: {projectId},
 						data: {
 							...dataToUpdate,
-							sections: sectionsInProject,
+							project: {
+								...dataToUpdate.project,
+								sections: projectSections,
+							},
 						},
 					});
 				},
@@ -673,11 +628,7 @@ const DraggableSection = ({
 function ProjectTasksList({
 	items, projectId, sectionId, history, location,
 }) {
-	const {
-		data: userPrefsData,
-		loading: loadingUserPrefs,
-		error: errorUserPrefs,
-	} = useQuery(GET_USER_INFOS, {suspend: true});
+	const {workingTime, hasFullWeekSchedule} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const [isDragging, setIsDragging] = useState(false);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
@@ -692,40 +643,9 @@ function ProjectTasksList({
 			},
 		},
 	});
-	const [addSection] = useMutation(ADD_SECTION, {
-		update: (cache, {data: {addSection: addedSection}}) => {
-			const data = cache.readQuery({
-				query: GET_ALL_TASKS,
-				variables: {},
-			});
-
-			const {me} = data;
-
-			me.tasks.push(...addedSection.items);
-
-			cache.writeQuery({
-				query: GET_ALL_TASKS,
-				variables: {},
-				data,
-			});
-
-			const cachedProject = cache.readQuery({
-				query: GET_PROJECT_DATA,
-				variables: {projectId},
-			});
-
-			const {project} = cachedProject;
-
-			project.sections.push(addedSection);
-
-			cache.writeQuery({
-				query: GET_PROJECT_DATA,
-				variables: {projectId},
-				data: cachedProject,
-			});
-		},
-	});
+	const [addSection] = useMutation(ADD_SECTION);
 	const [updateSection] = useMutation(UPDATE_SECTION);
+	const {scheduledTasksPerDay} = useScheduleData();
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -764,7 +684,6 @@ function ProjectTasksList({
 	);
 
 	if (error) throw error;
-	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {sections: sectionsInfos} = projectData.project;
 
@@ -803,25 +722,11 @@ function ProjectTasksList({
 
 	sections.sort((a, b) => a.position - b.position);
 
-	const scheduledTasks = {};
-
-	items.forEach((task) => {
-		if (!task.scheduledFor) {
-			return;
-		}
-
-		scheduledTasks[task.scheduledFor] = scheduledTasks[
-			task.scheduledFor
-		] || {
-			date: task.scheduledFor,
-			tasks: [],
-		};
-
-		scheduledTasks[task.scheduledFor].tasks.push(task);
-	});
-
 	return (
 		<TasksListContainer>
+			<ScrollHelper>
+				<MaterialIcon icon="unfold_more" size="normal" />
+			</ScrollHelper>
 			{sections.map(section => (
 				<DraggableSection
 					section={section}
@@ -920,18 +825,15 @@ function ProjectTasksList({
 					</ModalElem>
 				</ModalContainer>
 			)}
-			{loadingUserPrefs ? (
-				<Loading />
-			) : (
-				<Portal>
-					<LeftBarSchedule
-						isDragging={isDragging}
-						days={scheduledTasks}
-						fullWeek={userPrefsData.me.settings.hasFullWeekSchedule}
-						onMoveTask={onMoveTask}
-					/>
-				</Portal>
-			)}
+			<Portal>
+				<LeftBarSchedule
+					isDragging={isDragging}
+					days={scheduledTasksPerDay}
+					fullWeek={hasFullWeekSchedule}
+					onMoveTask={onMoveTask}
+					workingTime={workingTime}
+				/>
+			</Portal>
 		</TasksListContainer>
 	);
 }

@@ -1,11 +1,10 @@
 export default {
 	getReminders: ({mutation, query}) => {
-		const cachedReminders = [...query.result.reminders];
 		const newRemindersItem = mutation.result.data.focusTask.reminders.filter(
 			reminder => reminder.status === 'PENDING',
 		);
 
-		const reminders = cachedReminders.map((reminder) => {
+		const reminders = query.result.reminders.map((reminder) => {
 			const currentReminderIndex = newRemindersItem.findIndex(
 				r => r.id === reminder.id,
 			);
@@ -23,7 +22,7 @@ export default {
 		};
 	},
 	getAllTasks: ({mutation, query}) => {
-		const {focusTask: task} = mutation.result.data;
+		const task = mutation.result.data.focusTask;
 		const {tasks} = query.result.me;
 
 		const outdatedTask = tasks.find(item => item.id === task.id);
@@ -35,6 +34,8 @@ export default {
 			return {...query.result};
 		}
 
+		const updatedItems = {};
+
 		if (outdatedTask.scheduledFor !== task.scheduledFor) {
 			const outdatedList = tasks.filter(
 				item => item.scheduledFor === outdatedTask.scheduledFor
@@ -45,7 +46,10 @@ export default {
 				(a, b) => a.schedulePosition - b.schedulePosition,
 			);
 			outdatedList.forEach((item, index) => {
-				item.schedulePosition = index;
+				updatedItems[item.id] = {
+					...item,
+					schedulePosition: index,
+				};
 			});
 		}
 
@@ -56,8 +60,11 @@ export default {
 
 		list.sort((a, b) => a.schedulePosition - b.schedulePosition);
 		list.forEach((item, index) => {
-			item.schedulePosition
-				= index >= task.schedulePosition ? index + 1 : index;
+			updatedItems[item.id] = {
+				...item,
+				schedulePosition:
+					index >= task.schedulePosition ? index + 1 : index,
+			};
 		});
 
 		return {
@@ -65,9 +72,9 @@ export default {
 			me: {
 				...query.result.me,
 				tasks: tasks.map((item) => {
-					if (outdatedTask.id === item.id) {
-						return task;
-					}
+					if (outdatedTask.id === item.id) return task;
+					if (updatedItems[item.id]) return updatedItems[item.id];
+
 					return item;
 				}),
 			},

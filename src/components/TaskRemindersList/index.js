@@ -5,6 +5,7 @@ import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import {REMINDER_TYPES_DATA} from '../../utils/constants';
+import {formatName} from '../../utils/functions';
 import {CANCEL_REMINDER} from '../../utils/mutations';
 import {
 	accentGrey,
@@ -108,9 +109,13 @@ function TaskRemindersList({
 					return new Date(a.sendingDate) - new Date(b.sendingDate);
 				})
 				.map((reminder) => {
+					const {linkedCustomer} = reminder.item;
 					const text = REMINDER_TYPES_DATA[reminder.type].text(
-						reminder.item.linkedCustomer
-							&& reminder.item.linkedCustomer.name,
+						linkedCustomer
+							&& `${linkedCustomer.name} (${formatName(
+								linkedCustomer.firstName,
+								linkedCustomer.lastName,
+							)})`,
 					);
 
 					const reminderText = (

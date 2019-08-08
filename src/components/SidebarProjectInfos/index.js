@@ -7,6 +7,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS} from '../../utils/constants';
 import {ModalContainer} from '../../utils/content';
+import {getMarginUntilDeadline} from '../../utils/functions';
 import noNotificationsIllus from '../../utils/images/bermuda-no-comments.svg';
 import noClientIllus from '../../utils/images/bermuda-page-not-found.svg';
 import {
@@ -26,6 +27,7 @@ import {
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import CollabLinkToProjectList from '../CollabLinkToProjectList';
 import CollaboratorModal from '../CollaboratorModal';
 import ConfirmModal from '../ConfirmModal';
@@ -201,6 +203,7 @@ const SidebarProjectInfos = ({
 		variables: {projectId},
 		suspend: true,
 	});
+	const {endWorkAt, workingTime} = useUserInfos();
 
 	const dateRef = useRef();
 
@@ -226,7 +229,16 @@ const SidebarProjectInfos = ({
 			+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0),
 		0,
 	);
-	const margin = project.daysUntilDeadline - timeItTookPending;
+	const taskArray = project.sections
+		.map(s => s.items.filter(i => i.status === 'PENDING'))
+		.flat();
+
+	const margin = getMarginUntilDeadline(
+		project.deadline,
+		taskArray,
+		endWorkAt,
+		workingTime,
+	);
 
 	return (
 		<Aside>
@@ -536,15 +548,10 @@ const SidebarProjectInfos = ({
 
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
-					<SubHeading>Marge jours restants</SubHeading>
+					<SubHeading>Marge restantes</SubHeading>
 					<Tooltip label="Nombre de jours travaillés avant deadline">
-						<SidebarBigNumber urgent={margin < 1}>
-							{+margin.toFixed(2)}&nbsp;
-							<Plural
-								value={margin}
-								singular="jour"
-								plural="jours"
-							/>
+						<SidebarBigNumber urgent={margin.includes('retard')}>
+							{margin}
 						</SidebarBigNumber>
 					</Tooltip>
 				</SubSection>

@@ -12,7 +12,8 @@ import {
 	P,
 	UserSpan,
 } from '../../utils/new/design-system';
-import Task from '../CustomerTaskRow';
+import NormalTask from '../CustomerTaskRow';
+import InlineTask from '../TaskRow';
 import Tooltip from '../Tooltip';
 
 const TasksListContainer = styled('div')`
@@ -30,8 +31,11 @@ function TasksList({
 	baseUrl,
 	children,
 	createTaskComponent,
+	condensed = false,
 	...rest
 }) {
+	const Task = condensed ? InlineTask : NormalTask;
+
 	return (
 		<TasksListContainer {...rest}>
 			{items.map((item, index) => (createTaskComponent ? (

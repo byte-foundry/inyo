@@ -7,13 +7,13 @@ import {useDrag} from 'react-dnd';
 import {Route, withRouter} from 'react-router-dom';
 
 import ArianneThread from '../../../components/ArianneThread';
-import Task from '../../../components/CustomerTaskRow';
 import TaskView from '../../../components/ItemView';
 import LeftBarSchedule from '../../../components/LeftBarSchedule';
 import MaterialIcon from '../../../components/MaterialIcon';
 import RescheduleModal from '../../../components/RescheduleModal';
 import Schedule from '../../../components/Schedule';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
+import Task from '../../../components/TaskRow';
 import TasksList from '../../../components/TasksList';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
@@ -298,6 +298,7 @@ const DashboardTasks = ({location, history}) => {
 										setIsDragging={setIsDragging}
 									/>
 								)}
+								condensed
 							/>
 						) : (
 							<div style={{marginTop: '2rem'}}>

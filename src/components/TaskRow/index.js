@@ -8,16 +8,9 @@ import {Link, withRouter} from 'react-router-dom';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
-import {
-	FINISH_ITEM,
-	FOCUS_TASK,
-	UNFINISH_ITEM,
-	UPDATE_ITEM,
-} from '../../utils/mutations';
+import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
 	accentGrey,
-	Button,
-	ButtonLink,
 	lightGrey,
 	mediumGrey,
 	primaryBlack,
@@ -26,13 +19,11 @@ import {
 	TaskIconText,
 } from '../../utils/new/design-system';
 import CollaboratorAvatar from '../CollaboratorAvatar';
-import CustomerModalAndMail from '../CustomerModalAndMail';
 import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
 import Tag from '../Tag';
 import TaskComment from '../TaskComment';
 import TaskDescription from '../TaskDescription';
-import TaskInfosInputs from '../TaskInfosInputs';
 import TaskReminderIcon from '../TaskReminderIcon';
 import Tooltip from '../Tooltip';
 
@@ -41,6 +32,7 @@ export const TaskContainer = styled('div')`
 	position: relative;
 	padding-left: 2rem;
 	margin-left: -2rem;
+	align-items: center;
 
 	&:after {
 		content: '';
@@ -205,7 +197,6 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 
 const TaskContent = styled('div')`
 	flex: 1;
-	margin-top: 0.4rem;
 	display: grid;
 	grid-template-columns: minmax(200px, auto) minmax(100px, 200px) 80px 110px;
 	grid-gap: 15px;
@@ -230,14 +221,23 @@ const TaskContent = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 2rem;
+		grid-template-columns: minmax(200px, 4fr) 1fr;
 	}
 `;
 
-const ProjectName = styled('p')``;
+const ProjectName = styled('p')`
+	text-align: right;
+	color: ${primaryGrey};
+	margin: 0;
+`;
 
 const CustomerCondensed = styled('div')`
 	display: flex;
 	align-items: center;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 const CustomerAvatar = styled(CollaboratorAvatar)`
@@ -247,11 +247,22 @@ const CustomerAvatar = styled(CollaboratorAvatar)`
 const TaskHeader = styled('div')`
 	display: flex;
 	align-items: center;
+	margin: 0.5rem 0;
+
+	${props => props.noProject && 'grid-column: 1 / 3;'}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		${props => props.noProject && 'grid-column: 1 / 3;'}
+	}
 `;
 
 const TaskMetas = styled('div')`
 	display: grid;
 	grid-template-columns: repeat(4, 28px);
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: none;
+	}
 `;
 
 function TaskRow({
@@ -259,6 +270,7 @@ function TaskRow({
 	location,
 	isDraggable,
 	noData,
+	noProject,
 	baseUrl = 'tasks',
 	forwardedRef,
 	userId,
@@ -319,7 +331,7 @@ function TaskRow({
 				/>
 				<Tooltip label="Cliquer pour voir le contenu de la tâche">
 					<TaskContent>
-						<TaskHeader>
+						<TaskHeader noProject={noProject}>
 							{item.name ? (
 								<TaskHeadingLink
 									noData={noData}
@@ -344,19 +356,28 @@ function TaskRow({
 									Choisir un titre pour cette tâche
 								</TaskHeadingPlaceholder>
 							)}
-							{item.tags.map(tag => (
-								<Tag tag={tag} key={tag.id}>
-									{tag.name}
-								</Tag>
+							{item.tags.slice(0, 2).map(tag => (
+								<Tag tag={tag} key={tag.id} />
 							))}
-						</TaskHeader>
-						<ProjectName>
-							{item.section && item.section.project ? (
-								item.section.project.name
-							) : (
-								<>&mdash;</>
+							{item.tags.length > 2 && (
+								<Tag
+									tag={{
+										name: `${item.tags.length - 2}+`,
+										colorBg: '#4b4b4b',
+										colorText: '#fff',
+									}}
+								/>
 							)}
-						</ProjectName>
+						</TaskHeader>
+						{!noProject && (
+							<ProjectName>
+								{item.section && item.section.project ? (
+									item.section.project.name
+								) : (
+									<>&mdash;</>
+								)}
+							</ProjectName>
+						)}
 						{!noData && (
 							<>
 								<CustomerCondensed>

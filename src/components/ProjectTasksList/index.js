@@ -38,17 +38,14 @@ import {
 	ScrollHelper,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {
-	GET_ALL_TASKS,
-	GET_PROJECT_DATA,
-} from '../../utils/queries';
+import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import useScheduleData from '../../utils/useScheduleData';
 import useUserInfos from '../../utils/useUserInfos';
-import Task from '../CustomerTaskRow';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
 import MaterialIcon from '../MaterialIcon';
+import Task from '../TaskRow';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
 
@@ -514,7 +511,7 @@ const DraggableTask = ({
 			}}
 		>
 			{isOver && <DragSeparator />}
-			<Task item={task} key={task.id} {...rest} isDraggable />
+			<Task noProject item={task} key={task.id} {...rest} isDraggable />
 		</div>
 	);
 };

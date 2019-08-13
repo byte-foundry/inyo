@@ -225,11 +225,13 @@ const TaskContent = styled('div')`
 	}
 `;
 
-const ProjectName = styled('p')`
+const EmptyProjectName = styled('div')`
 	text-align: right;
 	color: ${primaryGrey};
-	margin: 0;
+	text-decoration: none;
 `;
+
+const ProjectName = EmptyProjectName.withComponent(Link);
 
 const CustomerCondensed = styled('div')`
 	display: flex;
@@ -369,15 +371,20 @@ function TaskRow({
 								/>
 							)}
 						</TaskHeader>
-						{!noProject && (
-							<ProjectName>
-								{item.section && item.section.project ? (
-									item.section.project.name
-								) : (
-									<>&mdash;</>
-								)}
-							</ProjectName>
-						)}
+						{!noProject
+							&& (item.section && item.section.project ? (
+								<ProjectName
+									to={`/app/tasks?projectId=${item.section.project.id}`}
+									onClick={(e) => {
+										// needed to avoid another history push to be triggered, should be investigated
+										e.stopPropagation();
+									}}
+								>
+									{item.section.project.name}
+								</ProjectName>
+							) : (
+								<EmptyProjectName>&mdash;</EmptyProjectName>
+							))}
 						{!noData && (
 							<>
 								<CustomerCondensed>

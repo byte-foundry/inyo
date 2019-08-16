@@ -12,14 +12,13 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
-	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../utils/queries';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
-import TimeItTookForm from '../TimeItTookForm';
 import Tooltip from '../Tooltip';
+import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
 const Tray = styled('div')`
 	width: 700px;
@@ -157,9 +156,10 @@ const PendingActionsTray = ({projectId}) => {
 									}
 								/>
 							</Tooltip>
-							<TimeItTookForm
+							<UnitWithSuggestionsForm
+								isTimeItTook
 								style={{gridColumn: '1 / 3'}}
-								estimation={task.unit}
+								defaultValue={task.unit}
 								onChange={timeItTook => setValuesMap({
 									...valuesMap,
 									[task.id]: timeItTook,

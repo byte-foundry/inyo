@@ -530,6 +530,7 @@ export const ADD_ITEM = gql`
 		$dueDate: DateTime
 		$linkedCustomerId: ID
 		$linkedCustomer: CustomerInput
+		$tags: [ID!]
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -541,6 +542,7 @@ export const ADD_ITEM = gql`
 			dueDate: $dueDate
 			linkedCustomerId: $linkedCustomerId
 			linkedCustomer: $linkedCustomer
+			tags: $tags
 		) {
 			...ItemFragment
 		}

@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
+import {CREATE_TAG} from '../../utils/mutations';
 import {
 	Button,
 	lightGrey,
@@ -16,10 +18,12 @@ import {
 } from '../../utils/new/design-system';
 import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
+import TagDropdown from '../TagDropdown';
 import TaskCustomerInput from '../TaskCustomerInput';
 import TaskInfosInputs from '../TaskInfosInputs';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
+import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
 const Container = styled('div')`
 	font-size: 14px;
@@ -174,13 +178,10 @@ const Icon = styled('div')`
 `;
 
 const TaskInfosInputsContainer = styled('div')`
-	position: absolute;
-	top: 61px;
-	left: 57px;
-`;
-
-const TaskInputCheckListContainer = styled('div')`
-	margin-left: 2em;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 10px 0;
 `;
 
 const types = ITEM_TYPES;
@@ -211,17 +212,18 @@ const TaskInput = ({
 	currentProjectId,
 	defaultCustomer,
 }) => {
+	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [openedByClick, setOpenedByClick] = useState(false);
-	const [moreInfosMode, setMoreInfosMode] = useState(false);
 	const [
 		showContentAcquisitionInfos,
 		setShowContentAcquisitionInfos,
 	] = useState(false);
 	const [itemUnit, setItemUnit] = useState(0);
+	const [itemTags, setItemTags] = useState([]);
 	const [itemDueDate, setItemDueDate] = useState();
 	const [files, setFiles] = useState([]);
 	const [itemCustomer, setItemCustomer] = useState();
@@ -229,7 +231,6 @@ const TaskInput = ({
 	const inputRef = useRef();
 
 	function closeMoreInfos() {
-		setMoreInfosMode(false);
 		setItemDueDate();
 		setItemCustomer();
 		setItemUnit(0);
@@ -325,6 +326,9 @@ const TaskInput = ({
 														}] ${name}`,
 													)
 													.join('\n')}`,
+												tags: itemTags.map(
+													({id}) => id,
+												),
 											});
 											setValue('');
 											closeMoreInfos();
@@ -355,22 +359,11 @@ const TaskInput = ({
 											unit: parseFloat(itemUnit || 0),
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
+											tags: itemTags.map(({id}) => id),
 										});
 										setValue('');
 										closeMoreInfos();
 										closeContentAcquisitionInfos();
-									}
-								}
-								else if (e.key === 'Tab') {
-									if (
-										!type
-										|| type !== 'CONTENT_ACQUISITION'
-									) {
-										setMoreInfosMode(true);
-									}
-									else if (type === 'CONTENT_ACQUISITION') {
-										setItemCustomer(defaultCustomer);
-										setShowContentAcquisitionInfos(true);
 									}
 								}
 							}
@@ -434,6 +427,9 @@ const TaskInput = ({
 																		'\n',
 																	)}`
 																: '',
+														tags: itemTags.map(
+															({id}) => id,
+														),
 													});
 													setValue('');
 													closeMoreInfos();
@@ -458,6 +454,9 @@ const TaskInput = ({
 													linkedCustomerId:
 														itemCustomer
 														&& itemCustomer.id,
+													tags: itemTags.map(
+														({id}) => id,
+													),
 												});
 												setValue('');
 												closeMoreInfos();
@@ -485,78 +484,46 @@ const TaskInput = ({
 					</InputButtonWrapper>
 				)}
 			</InputContainer>
-			{moreInfosMode && (
-				<TaskInfosInputsContainer>
-					<TaskInfosInputs
-						startOpen
-						switchOnSelect
-						item={{
-							dueDate: itemDueDate,
-							unit: itemUnit,
-							linkedCustomer: itemCustomer,
-						}}
-						noComment
-						noAttachment
-						onDueDateSubmit={date => setItemDueDate(date)}
-						onCustomerSubmit={(customer) => {
-							if (customer === null) {
-								setItemCustomer();
-							}
-							else if (customer.value === 'CREATE') {
-								setEditCustomer(true);
-							}
-							else {
-								setItemCustomer({
-									id: customer.value,
-									name: customer.label,
-								});
-							}
-						}}
-						onUnitSubmit={unit => setItemUnit(unit)}
-					/>
-				</TaskInfosInputsContainer>
-			)}
-			{showContentAcquisitionInfos && (
-				<TaskInputDropdown>
-					<TaskInputDropdownHeader>
-						Choisir un client
-					</TaskInputDropdownHeader>
-					<TaskInputCheckListContainer>
-						<TaskCustomerInput
-							item={{
-								linkedCustomer: itemCustomer,
-							}}
-							noComment
-							onCustomerSubmit={(customer) => {
-								if (customer === null) {
-									setItemCustomer();
-								}
-								else if (customer.value === 'CREATE') {
-									setEditCustomer(true);
-								}
-								else {
-									setItemCustomer({
-										id: customer.value,
-										name: customer.label,
-									});
-								}
-							}}
-						/>
-					</TaskInputCheckListContainer>
-					<TaskInputDropdownHeader>
-						Liste des documents a récuperer
-					</TaskInputDropdownHeader>
-					<TaskInputCheckListContainer>
-						<CheckList
-							editable={true} // editable by user only, but checkable
-							items={files}
-							onChange={({items}) => {
-								setFiles(items);
-							}}
-						/>
-					</TaskInputCheckListContainer>
-				</TaskInputDropdown>
-			)}
+			<TaskInfosInputsContainer>
+				<UnitWithSuggestionsForm
+					small
+					onChange={unit => setItemUnit(unit)}
+				/>
+				<TagDropdown
+					id="tags"
+					long
+					placeholder="Ajouter ou créer un tag"
+					value={itemTags.map(tag => ({
+						value: tag.id,
+						label: tag.name,
+						colorBg: tag.colorBg,
+						colorText: tag.colorText,
+					}))}
+					onCreateOption={async (name, colorBg, colorText) => {
+						const {
+							data: {createTag: tag},
+						} = await createTag({
+							variables: {
+								name,
+								colorBg,
+								colorText,
+							},
+						});
+
+						setItemTags([...itemTags, tag]);
+					}}
+					onChange={(tags) => {
+						setItemTags(
+							tags.map(tag => ({
+								id: tag.value,
+								name: tag.label,
+								colorBg: tag.colorBg,
+								colorText: tag.colorText,
+							})),
+						);
+					}}
+				/>
+			</TaskInfosInputsContainer>
 			{((value.startsWith('/') && focus) || openedByClick) && (
 				<TaskTypeDropdown
 					types={types.filter(

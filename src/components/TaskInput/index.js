@@ -15,6 +15,7 @@ import {
 	primaryPurple,
 } from '../../utils/new/design-system';
 import CustomerModalAndMail from '../CustomerModalAndMail';
+import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
@@ -206,6 +207,7 @@ const TaskInput = ({
 	defaultValue,
 	currentProjectId,
 	defaultCustomer,
+	withProject,
 }) => {
 	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);
@@ -217,6 +219,7 @@ const TaskInput = ({
 		showContentAcquisitionInfos,
 		setShowContentAcquisitionInfos,
 	] = useState(false);
+	const [selectedProject, setSelectedProject] = useState();
 	const [itemUnit, setItemUnit] = useState(0);
 	const [itemTags, setItemTags] = useState([]);
 	const [itemDueDate, setItemDueDate] = useState();
@@ -255,6 +258,16 @@ const TaskInput = ({
 
 	return (
 		<Container ref={ref}>
+			{withProject && (
+				<ProjectsDropdown
+					style={{margin: '0 0 10px auto', width: '250px'}}
+					autoFocus
+					onChange={({value: id}) => {
+						setSelectedProject(id);
+					}}
+					children="Lier à un projet"
+				/>
+			)}
 			<InputContainer>
 				<Tooltip label="Définir le type de tâche">
 					<Icon
@@ -324,6 +337,7 @@ const TaskInput = ({
 												tags: itemTags.map(
 													({id}) => id,
 												),
+												projectId: selectedProject,
 											});
 											setValue('');
 											closeMoreInfos();
@@ -355,6 +369,7 @@ const TaskInput = ({
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											tags: itemTags.map(({id}) => id),
+											projectId: selectedProject,
 										});
 										setValue('');
 										closeMoreInfos();
@@ -425,6 +440,7 @@ const TaskInput = ({
 														tags: itemTags.map(
 															({id}) => id,
 														),
+														projectId: selectedProject,
 													});
 													setValue('');
 													closeMoreInfos();
@@ -452,6 +468,7 @@ const TaskInput = ({
 													tags: itemTags.map(
 														({id}) => id,
 													),
+													projectId: selectedProject,
 												});
 												setValue('');
 												closeMoreInfos();
@@ -557,10 +574,12 @@ const TaskInput = ({
 TaskInput.defaultProps = {
 	defaultValue: '',
 	onSubmitTask: () => {},
+	withProject: false,
 };
 
 TaskInput.propTypes = {
 	defaultValue: PropTypes.string,
+	withProject: PropTypes.bool,
 	onSubmitTask: PropTypes.func,
 	onSubmitProject: PropTypes.func,
 	onSubmitSection: PropTypes.func,

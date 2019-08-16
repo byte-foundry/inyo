@@ -178,13 +178,13 @@ const customSelectStyles = props => ({
 });
 
 export function ArianneElem({
-	children, id, list, selectedId, ...rest
+	children, id, list, selectedId, style, ...rest
 }) {
 	const options = list.map(item => ({value: item.id, label: item.name}));
 	const selectedItem = options.find(item => item.value === selectedId);
 
 	return (
-		<ArianneElemMain id={`${id}-filter`}>
+		<ArianneElemMain id={`${id}-filter`} style={style}>
 			<Select
 				placeholder={children}
 				options={options}

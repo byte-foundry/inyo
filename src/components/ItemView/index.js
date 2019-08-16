@@ -447,8 +447,13 @@ const Item = ({
 													: () => setEditUnit(true)
 											}
 										>
-											<fbt project="inyo" desc="hello">
-												{+item.unit.toFixed(2)}
+											<fbt
+												project="inyo"
+												desc="time estimated item view"
+											>
+												<fbt:param name="timeEstimated">
+													{+item.unit.toFixed(2)}
+												</fbt:param>
 												<fbt:plural
 													count={item.unit}
 													name="time estimated plural"
@@ -517,8 +522,13 @@ const Item = ({
 										/>
 									) : (
 										<div onClick={() => setEditUnit(true)}>
-											<fbt project="inyo" desc="hello">
-												{+item.timeItTook.toFixed(2)}
+											<fbt
+												project="inyo"
+												desc="time it took item view"
+											>
+												<fbt:param name="timeItTook">
+													{+item.timeItTook.toFixed(2)}
+												</fbt:param>
 												<fbt:plural
 													count={item.timeItTook}
 													name="time it took plural"

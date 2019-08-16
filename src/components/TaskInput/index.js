@@ -13,14 +13,9 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
-	TaskInputDropdown,
-	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
-import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 import TagDropdown from '../TagDropdown';
-import TaskCustomerInput from '../TaskCustomerInput';
-import TaskInfosInputs from '../TaskInfosInputs';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
 import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
@@ -484,46 +479,48 @@ const TaskInput = ({
 					</InputButtonWrapper>
 				)}
 			</InputContainer>
-			<TaskInfosInputsContainer>
-				<UnitWithSuggestionsForm
-					small
-					onChange={unit => setItemUnit(unit)}
-				/>
-				<TagDropdown
-					id="tags"
-					long
-					placeholder="Ajouter ou créer un tag"
-					value={itemTags.map(tag => ({
-						value: tag.id,
-						label: tag.name,
-						colorBg: tag.colorBg,
-						colorText: tag.colorText,
-					}))}
-					onCreateOption={async (name, colorBg, colorText) => {
-						const {
-							data: {createTag: tag},
-						} = await createTag({
-							variables: {
-								name,
-								colorBg,
-								colorText,
-							},
-						});
+			{type !== 'SECTION' && (
+				<TaskInfosInputsContainer>
+					<UnitWithSuggestionsForm
+						small
+						onChange={unit => setItemUnit(unit)}
+					/>
+					<TagDropdown
+						id="tags"
+						long
+						placeholder="Ajouter ou créer un tag"
+						value={itemTags.map(tag => ({
+							value: tag.id,
+							label: tag.name,
+							colorBg: tag.colorBg,
+							colorText: tag.colorText,
+						}))}
+						onCreateOption={async (name, colorBg, colorText) => {
+							const {
+								data: {createTag: tag},
+							} = await createTag({
+								variables: {
+									name,
+									colorBg,
+									colorText,
+								},
+							});
 
-						setItemTags([...itemTags, tag]);
-					}}
-					onChange={(tags) => {
-						setItemTags(
-							tags.map(tag => ({
-								id: tag.value,
-								name: tag.label,
-								colorBg: tag.colorBg,
-								colorText: tag.colorText,
-							})),
-						);
-					}}
-				/>
-			</TaskInfosInputsContainer>
+							setItemTags([...itemTags, tag]);
+						}}
+						onChange={(tags) => {
+							setItemTags(
+								tags.map(tag => ({
+									id: tag.value,
+									name: tag.label,
+									colorBg: tag.colorBg,
+									colorText: tag.colorText,
+								})),
+							);
+						}}
+					/>
+				</TaskInfosInputsContainer>
+			)}
 			{((value.startsWith('/') && focus) || openedByClick) && (
 				<TaskTypeDropdown
 					types={types.filter(

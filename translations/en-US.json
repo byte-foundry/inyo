@@ -1,0 +1,765 @@
+{
+ "fb-locale": "en-US",
+ "translations": {
+  "c+lcFfPMwayO0O5SNqYW9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Inviter un collaborateur",
+     "variations": {}
+    }
+   ]
+  },
+  "Kk05koBmsDqaTTQVJCU3aw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "L'email doit être valide",
+     "variations": {}
+    }
+   ]
+  },
+  "XA7LD0ywIXskOmvYyTrrWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Requis",
+     "variations": {}
+    }
+   ]
+  },
+  "mnvxbQlOlB/Afe9kwyUkCg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cette utilisateur n'est pas encore inscrit sur Inyo",
+     "variations": {}
+    }
+   ]
+  },
+  "KrxZqOX203SN16dEZK0TGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Une erreur s'est produite pendant la soumission du commentaire",
+     "variations": {}
+    }
+   ]
+  },
+  "sAbSkE5NP4fqrLL3UdHfsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email du collaborateur",
+     "variations": {}
+    }
+   ]
+  },
+  "D5BQpw+HPrLQbvb3mzK+cA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Inviter",
+     "variations": {}
+    }
+   ]
+  },
+  "i3dSHU/47fQIhYGWTaqpDA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Aucune option",
+     "variations": {}
+    }
+   ]
+  },
+  "GB7LzwqHzSvCOtk0++uCyA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Aucune option",
+     "variations": {}
+    }
+   ]
+  },
+  "5YXIwCOKaXxjfG2gjXkHgA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tâches à faire",
+     "variations": {}
+    }
+   ]
+  },
+  "bEAPRPQzUxZKgDEqti1LXg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tâches faites",
+     "variations": {}
+    }
+   ]
+  },
+  "PCB0T4qV3n3Tl30CCccaaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Toutes les tâches",
+     "variations": {}
+    }
+   ]
+  },
+  "AqJMl0+P/pzfbxqbc9rd/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Toutes les tâches",
+     "variations": {}
+    }
+   ]
+  },
+  "GnXDLOI0hcNOgOYJFIxscQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Chercher par tags",
+     "variations": {}
+    }
+   ]
+  },
+  "a8kwylJwa+wa0lEvy1HvBw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajoutez les titres des documents et appuyez sur entrée",
+     "variations": {}
+    }
+   ]
+  },
+  "9tizAmpj5IlSDHpumdi54w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vous devez d'abord ajouter",
+     "variations": {}
+    }
+   ]
+  },
+  "mjALk1C7sK+wlxgLusuBlg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "un collaborateur au projet.",
+     "variations": {}
+    }
+   ]
+  },
+  "CBEk0tjxRg3kn3CsSs2gTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Collaborateurs sur le projet {projectName}",
+     "variations": {}
+    }
+   ]
+  },
+  "qx1GG8725BwZccTubShfmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Filtrer par nom, email...",
+     "variations": {}
+    }
+   ]
+  },
+  "Ku1n2y9WmL1lBgy6V/mNGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Votre commentaire",
+     "variations": {}
+    }
+   ]
+  },
+  "qY2JiUsK5dPxldd+wY2hwg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Écrire et envoyer un commentaire à votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "h9XywMaYUPXbmAMMxdTbQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Écrire et envoyer un commentaire à votre prestataire",
+     "variations": {}
+    }
+   ]
+  },
+  "/3uP7HTxJ/lHt7iNlgT3lQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Une question ou une suggestion? Ajoutez un commentaire.",
+     "variations": {}
+    }
+   ]
+  },
+  "SqtjllI4dc2YZbvJXjfkfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "↓ Autres commentaires",
+     "variations": {}
+    }
+   ]
+  },
+  "H/doAMLoC9R3NO6NQmhd5Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Une erreur s'est produite pendant la soumission du commentaire",
+     "variations": {}
+    }
+   ]
+  },
+  "oxns+QSfjmP/31eed9WLlw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Les personnes liées à la tâche seront notifiées",
+     "variations": {}
+    }
+   ]
+  },
+  "rh2V7ZeVauprF2x0tEMSvQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Visible par les personnes liées au projet",
+     "variations": {}
+    }
+   ]
+  },
+  "vctbu+1iQDAHeWXFel8aDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter un commentaire",
+     "variations": {}
+    }
+   ]
+  },
+  "fEllyq1WiFdeYXrC6eIGTg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Annuler",
+     "variations": {}
+    }
+   ]
+  },
+  "WBNkCR3Xvk8q7WMnMXyVLg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Valider",
+     "variations": {}
+    }
+   ]
+  },
+  "Yqfjo8yW61yd54vX0hbLDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer un lien pour partager",
+     "variations": {}
+    }
+   ]
+  },
+  "Bd89ZCXvcu/9faxnpga7dg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Lien pour partager votre projet avec votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "2USEdvsctPl5RFxIBfqqfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fermer",
+     "variations": {}
+    }
+   ]
+  },
+  "JlqAJhidOola1T6sNfVC2w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Requis",
+     "variations": {}
+    }
+   ]
+  },
+  "esAlFRsJRyJYPdy1Etih2g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Titre du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "uR3RFRSyvsifyNkawiLp/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ex: Landing page nouvelle collection, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "vO2iC9t1o0c05l14ZCYjdA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Projet vierge",
+     "variations": {}
+    }
+   ]
+  },
+  "eht+qxxh8qLe293ArR18hQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nos modèles",
+     "variations": {}
+    }
+   ]
+  },
+  "k2apqNGi2MbCKc/kVRLWMA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vos projets",
+     "variations": {}
+    }
+   ]
+  },
+  "4CJoR6T35Kfy08wjRsUeUA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Titre du modèle",
+     "variations": {}
+    }
+   ]
+  },
+  "RCQxet+RULtBF5TH7YKWDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Voir le contenu",
+     "variations": {}
+    }
+   ]
+  },
+  "BH/f+AItQ77i02GAD7Cnqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Titre du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "43iQnPzDY12BKHYrcSF3hA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Client principal du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "7ot1HYeB83HUF8jFjx1OKA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer un nouveau client",
+     "variations": {}
+    }
+   ]
+  },
+  "l4cZtYj+egHpaq5Po6GGZA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Date limite du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "lJvnLX/Da0W3tUYgsYThQQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "DD/MM/YYYY'",
+     "variations": {}
+    }
+   ]
+  },
+  "+FPDHD0zjkn+hUqnxkCVtQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter un client",
+     "variations": {}
+    }
+   ]
+  },
+  "jYhD5vi0Onp2chfdhpRCpw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter une deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "VvRTh0XNNoQzToCLNOwqEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Annuler",
+     "variations": {}
+    }
+   ]
+  },
+  "d8A0c/QN9wdtAbRBSvxB2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer le projet",
+     "variations": {}
+    }
+   ]
+  },
+  "/R9b6rrgd1R9NNnkFL+DWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Retour",
+     "variations": {}
+    }
+   ]
+  },
+  "/Jd7ezr1l5vzSDxJIaJPvg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choisir un de nos modèles",
+     "variations": {}
+    }
+   ]
+  },
+  "T97sCAQhA8Onbh91K0YRqQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choisir ce modèle",
+     "variations": {}
+    }
+   ]
+  },
+  "+zXOcjND4CWEi+ekUnJ8Ag==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Contenu du modèle",
+     "variations": {}
+    }
+   ]
+  },
+  "Ofka5qDA4mmxuLv6M4YYjw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choisir un de vos projets",
+     "variations": {}
+    }
+   ]
+  },
+  "46CGa9sMgnzSIx5/PaV4yQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Titre du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "wZZ1r5jb6/X1dxMAi60HxA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choisir ce projet",
+     "variations": {}
+    }
+   ]
+  },
+  "r6TESSFjzSGL4tnVpqiVng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Contenu du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "cq/K4aFF4Ae4s8QbGAuZrw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vous souhaitez créer une tâche attribuée au client qui nécessite d'activer les notifications par email à celui-ci.",
+     "variations": {}
+    }
+   ]
+  },
+  "c3VHPe85E60l03JpI4/uPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Souhaitez vous continuer et activer les notifications?",
+     "variations": {}
+    }
+   ]
+  },
+  "8644T2R+4scYGO0LpX3DQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Présentation d'Inyo à votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "yRJfdDz1yU1Hmh6jMHqK0A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vous venez de créer un client ! Voici un email prérédigé qui vous permettra de lui présenter inyo.",
+     "variations": {}
+    }
+   ]
+  },
+  "DQeXAvwG7dJoYDdF7IN2HQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nous allons utiliser Inyo pour le suivi du projet {=[nom du projet]}",
+     "variations": {}
+    }
+   ]
+  },
+  "aB5b9kvkppVMDoMtWkIZZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "[nom du projet]",
+     "variations": {}
+    }
+   ]
+  },
+  "c2yAAU75ZlKJnwRNFXtsfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Bonjour",
+     "variations": {}
+    }
+   ]
+  },
+  "b7SBiQSY8WADC+OOtpqcXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet {=[nom du projet]}",
+     "variations": {}
+    }
+   ]
+  },
+  "Yz/hEevDIK59WUd+cWCUCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "[nom du projet]",
+     "variations": {}
+    }
+   ]
+  },
+  "69w/1T7K8HXXXh3oCdcbLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vous allez prochainement recevoir des emails provenant",
+     "variations": {}
+    }
+   ]
+  },
+  "aWQMWcJJDEVku4UiIGUTHQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.",
+     "variations": {}
+    }
+   ]
+  },
+  "qvosYuyXlERa6kcMFltOrg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire.",
+     "variations": {}
+    }
+   ]
+  },
+  "/xJTSSeUxLgHBVVBf1yoAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents.",
+     "variations": {}
+    }
+   ]
+  },
+  "FTUglGa5v8qzJfeHmSafGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation.",
+     "variations": {}
+    }
+   ]
+  },
+  "lGJBnl1neTaJOVzo5UyTpQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Je reste à votre disposition si vous avez des questions.",
+     "variations": {}
+    }
+   ]
+  },
+  "4dknal2HpNimLw2l4O6/+Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=[Votre signature]}",
+     "variations": {}
+    }
+   ]
+  },
+  "P9tRkqcJzVR2yfHAPd134w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "[Votre signature]",
+     "variations": {}
+    }
+   ]
+  },
+  "XExdBgqJHNNwA1FTFraJjw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{prout}haha",
+     "variations": {}
+    }
+   ]
+  }
+ }
+}

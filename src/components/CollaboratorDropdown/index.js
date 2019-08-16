@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import fbt from 'fbt';
 import React, {useCallback} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {ASSIGN_TO_TASK, REMOVE_ASSIGNMENT_TO_TASK} from '../../utils/mutations';

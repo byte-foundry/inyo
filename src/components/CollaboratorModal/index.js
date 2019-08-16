@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import fbt from 'fbt';
 import {Formik} from 'formik';
 import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, ModalContainer, ModalElem} from '../../utils/content';
 import Search from '../../utils/icons/search.svg';
@@ -95,7 +95,7 @@ const CollaboratorModal = ({
 				<Header>
 					<fbt project="inyo" desc="collaborators modal header">
 						Collaborateurs sur le projet{' '}
-						{fbt.param('projectName', projectName)}
+						<fbt:param name="projectName">{projectName}</fbt:param>
 					</fbt>
 				</Header>
 				<Formik

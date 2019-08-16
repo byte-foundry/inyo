@@ -12,16 +12,18 @@
     "test": "react-scripts test",
     "cypress": "cypress open",
     "e2e": "cypress run --record --key $CYPRESS_RECORD_KEY",
-	"manifest": "babel-node node_modules/babel-plugin-fbt/bin/manifest --src src",
-	"collect-fbts": "babel-node node_modules/babel-plugin-fbt/bin/collectFBT --pretty --manifest < .src_manifest.json > .source_strings.json",
-	"translate-fbts": "babel-node node_modules/babel-plugin-fbt/bin/translate.js --translations translations/*.json --jenkins > src/translatedFbts.json",
-	"translate-fbts-single-file": "babel-node node_modules/babel-plugin-fbt/bin/translate.js --jenkins --stdin < translation_input.json > src/translatedFbts.json",
-	"clean-fbts": "rm .enum_manifest.json .src_manifest.json .source_strings.json src/translatedFbts.json 2&> /dev/null || exit 0"
+    "manifest": "babel-node node_modules/babel-plugin-fbt/bin/manifest --src src",
+    "collect-fbts": "babel-node node_modules/babel-plugin-fbt/bin/collectFBT --pretty --manifest < .src_manifest.json > .source_strings.json",
+    "translate-fbts": "babel-node node_modules/babel-plugin-fbt/bin/translate.js --translations translations/*.json --jenkins > src/translatedFbts.json",
+    "translate-fbts-single-file": "babel-node node_modules/babel-plugin-fbt/bin/translate.js --jenkins --stdin < translation_input.json > src/translatedFbts.json",
+    "clean-fbts": "rm .enum_manifest.json .src_manifest.json .source_strings.json src/translatedFbts.json 2&> /dev/null || exit 0",
+    "generate-locale-file": "babel-node src/fbt/generateTranslateFile.js"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "dependencies": {
+    "@babel/helper-module-imports": "^7.0.0",
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "@reach/dialog": "^0.1.2",
@@ -43,7 +45,7 @@
     "apollo-link-watched-mutation": "^0.2.4",
     "apollo-upload-client": "^11.0.0",
     "babel-plugin-fbt": "^0.9.12",
-    "babel-plugin-macros": "^2.4.2",
+    "babel-plugin-fbt-runtime": "^0.9.1",
     "cross-env": "^5.2.0",
     "cypress": "^3.3.0",
     "cypress-drag-drop": "^1.1.1",
@@ -96,6 +98,7 @@
     "timezone-support": "^1.8.1",
     "use-onclickoutside": "^0.2.2",
     "webfontloader": "^1.6.28",
+    "yargs": "^13.3.0",
     "yup": "^0.26.6"
   },
   "browserslist": {
@@ -130,6 +133,8 @@
     "useTabs": true
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5"
   }
 }

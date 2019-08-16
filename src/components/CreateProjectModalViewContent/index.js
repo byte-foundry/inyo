@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import fbt from 'fbt';
 import React, {useEffect} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {isCustomerTask} from '../../utils/functions';

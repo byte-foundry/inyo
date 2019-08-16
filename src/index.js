@@ -8,6 +8,7 @@ import './dragdroptouch';
 
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
+import {init, IntlViewerContext} from 'fbt';
 import moment from 'moment';
 import React, {Suspense, useCallback, useState} from 'react';
 import {ApolloProvider} from 'react-apollo';
@@ -35,6 +36,11 @@ import {UserContext} from './utils/contexts';
 import client from './utils/graphQLConfig';
 import {Body} from './utils/new/design-system';
 import {CHECK_LOGIN_USER} from './utils/queries';
+
+const translations = require('./translatedFbts.json');
+
+init({translations});
+IntlViewerContext.locale = navigator.language;
 
 const Customer = React.lazy(() => import('./screens/Customer'));
 const App = React.lazy(() => import('./screens/App'));

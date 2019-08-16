@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
-import fbt from 'fbt';
 import {Formik} from 'formik';
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ErrorInput, ModalContainer, ModalElem} from '../../utils/content';
 import {REQUEST_COLLAB} from '../../utils/mutations';
 import {Button, SubHeading} from '../../utils/new/design-system';

@@ -41,7 +41,13 @@ const HelpButton = ({history, location}) => {
 
 	return (
 		<>
-			<Tooltip label="Instructions pour utiliser l'interface">
+			<Tooltip
+				label={
+					<fbt project="inyo" desc="Tooltip help button">
+						Instructions pour utiliser l'interface
+					</fbt>
+				}
+			>
 				<Help id="help-button" customerToken onClick={openHelpModal}>
 					?
 				</Help>

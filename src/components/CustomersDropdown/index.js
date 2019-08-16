@@ -18,7 +18,17 @@ const CustomersDropdown = ({creatable, ...props}) => {
 	}));
 
 	if (creatable) {
-		customers.unshift({id: 'CREATE', name: 'Créer un nouveau client'});
+		customers.unshift({
+			id: 'CREATE',
+			name: (
+				<fbt
+					project="inyo"
+					desc="customer dropdown create new customer"
+				>
+					Créer un nouveau client
+				</fbt>
+			),
+		});
 	}
 
 	return <ArianneElem list={customers} {...props} />;

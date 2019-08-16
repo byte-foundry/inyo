@@ -340,7 +340,13 @@ const Item = ({
 				/>
 			</StickyHeader>
 			<Header>
-				<Tooltip label="Type et titre de la tâche">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="Tooltip task title item view">
+							Type et titre de la tâche
+						</fbt>
+					}
+				>
 					<Title>
 						<TaskHeadingIcon>
 							{item.status === 'FINISHED'
@@ -354,7 +360,14 @@ const Item = ({
 							`}
 							value={item.name}
 							type="text"
-							placeholder="Nommez cette tâche"
+							placeholder={
+								<fbt
+									project="inyo"
+									desc="task name placeholder item view"
+								>
+									Nommez cette tâche
+								</fbt>
+							}
 							onFocusOut={(value) => {
 								if (value && value !== item.name) {
 									updateItem({
@@ -374,10 +387,26 @@ const Item = ({
 				{customerToken
 				|| item.status !== 'FINISHED'
 				|| !item.timeItTook ? (
-						<Tooltip label="Temps estimé pour cette tâche">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="time estimated tooltip item view"
+								>
+								Temps estimé pour cette tâche
+								</fbt>
+							}
+						>
 							<Meta>
 								<MaterialIcon icon="timer" size="tiny" />
-								<MetaLabel>Temps estimé</MetaLabel>
+								<MetaLabel>
+									<fbt
+										project="inyo"
+										desc="time estimated label item view"
+									>
+									Temps estimé
+									</fbt>
+								</MetaLabel>
 								<MetaText>
 									{!customerToken && editUnit ? (
 										<UnitInput
@@ -418,22 +447,42 @@ const Item = ({
 													: () => setEditUnit(true)
 											}
 										>
-											{+item.unit.toFixed(2)}
-											<Plural
-												singular=" jour"
-												plural=" jours"
-												value={item.unit}
-											/>
+											<fbt project="inyo" desc="hello">
+												{+item.unit.toFixed(2)}
+												<fbt:plural
+													count={item.unit}
+													name="time estimated plural"
+													many="jours"
+												>
+												jour
+												</fbt:plural>
+											</fbt>
 										</div>
 									)}
 								</MetaText>
 							</Meta>
 						</Tooltip>
 					) : (
-						<Tooltip label="Temps passé pour cette tâche">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="time it took tooltip item view"
+								>
+								Temps passé pour cette tâche
+								</fbt>
+							}
+						>
 							<Meta>
 								<MaterialIcon icon="timer" size="tiny" />
-								<MetaLabel>Temps passé</MetaLabel>
+								<MetaLabel>
+									<fbt
+										project="inyo"
+										desc="time it took label item view"
+									>
+									Temps passé
+									</fbt>
+								</MetaLabel>
 								<MetaText>
 									{editUnit ? (
 										<UnitInput
@@ -468,12 +517,16 @@ const Item = ({
 										/>
 									) : (
 										<div onClick={() => setEditUnit(true)}>
-											{+item.timeItTook.toFixed(2)}
-											<Plural
-												singular=" jour"
-												plural=" jours"
-												value={item.timeItTook}
-											/>
+											<fbt project="inyo" desc="hello">
+												{+item.timeItTook.toFixed(2)}
+												<fbt:plural
+													count={item.timeItTook}
+													name="time it took plural"
+													many="jours"
+												>
+												jour
+												</fbt:plural>
+											</fbt>
 										</div>
 									)}
 								</MetaText>
@@ -481,10 +534,26 @@ const Item = ({
 						</Tooltip>
 					)}
 				{isCustomerTask(item.type) || !item.section ? (
-					<Tooltip label="Personne liée à cette tâche">
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="linked customer tooltip item view"
+							>
+								Personne liée à cette tâche
+							</fbt>
+						}
+					>
 						<Meta>
 							<MaterialIcon icon="person_outline" size="tiny" />
-							<MetaLabel>Client</MetaLabel>
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="linked customer label item view"
+								>
+									Client
+								</fbt>
+							</MetaLabel>
 							{!customerToken && editCustomer ? (
 								<ClientDropdown
 									id="projects"
@@ -546,10 +615,26 @@ const Item = ({
 					/>
 				)}
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
-					<Tooltip label="Date limite pour réaliser cette tâche">
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="deadline tooltip item view"
+							>
+								Date limite pour réaliser cette tâche
+							</fbt>
+						}
+					>
 						<Meta>
 							<MaterialIcon icon="event" size="tiny" />
-							<MetaLabel>Temps restant</MetaLabel>
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="deadline label item view"
+								>
+									Temps restant
+								</fbt>
+							</MetaLabel>
 							<MetaTime
 								title={deadline && deadline.toLocaleString()}
 								dateTime={deadline && deadline.toJSON()}

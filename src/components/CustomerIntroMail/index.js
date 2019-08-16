@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import fbt, {param} from 'fbt';
 import React, {useRef, useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
 	Loading,
@@ -111,12 +111,14 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 				>
 					<P>
 						<fbt project="inyo" desc="hello">
-							Bonjour
-						</fbt>{' '}
-						{`${nullStr(getCiv(customer.title))} ${nullStr(
-							customer.firstName,
-						)} ${nullStr(customer.lastName)}`.trim()}
-						,
+							Bonjour{' '}
+							<fbt:param name="customer name">
+								{`${nullStr(getCiv(customer.title))} ${nullStr(
+									customer.firstName,
+								)} ${nullStr(customer.lastName)}`.trim()}
+							</fbt:param>
+							,
+						</fbt>
 					</P>
 					<P>
 						<fbt project="inyo" desc="first part of email">
@@ -129,16 +131,17 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 							Vous allez prochainement recevoir des emails
 							provenant{' '}
 						</fbt>
-						//TODO: take care of this
 						<Apostrophe
 							value={assistantName}
 							withVowel="d'"
 							withConsonant="de "
 						/>
 						<fbt project="inyo" desc="first part of email">
-							{fbt.param('assistantName', assistantName)} Inyo. Ne
-							les placez pas en spam, ils vont vous tenir informé
-							de l'avancement de votre projet.
+							<fbt:param name="assistantName">
+								{assistantName}
+							</fbt:param>{' '}
+							Inyo. Ne les placez pas en spam, ils vont vous tenir
+							informé de l'avancement de votre projet.
 						</fbt>
 						<br />
 						<fbt project="inyo" desc="first part of email">

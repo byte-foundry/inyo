@@ -13,8 +13,16 @@ const PA = styled(P)`
 const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 	<ModalContainer size="small" onDismiss={onDismiss} {...rest}>
 		<ModalElem>
-			<Heading>Aide</Heading>
-			<PA>Voici quelques liens pour vous aider à utiliser Inyo.</PA>
+			<Heading>
+				<fbt project="inyo" desc="Help title">
+					Aide
+				</fbt>
+			</Heading>
+			<PA>
+				<fbt project="inyo" desc="Help introduction">
+					Voici quelques liens pour vous aider à utiliser Inyo.
+				</fbt>
+			</PA>
 			<PA>
 				<UL noBullet>
 					<li>
@@ -27,7 +35,9 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							id="presentation-link"
 							onClick={openWelcomeModal}
 						>
-							Voir la vidéo de présentation
+							<fbt project="inyo" desc="Video presentation link">
+								Voir la vidéo de présentation
+							</fbt>
 						</A>
 					</li>
 					<li>
@@ -40,7 +50,12 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							target="_blank"
 							href="https://inyo.me/documentation/creer-une-nouvelle-tache/"
 						>
-							Créer une nouvelle tâche
+							<fbt
+								project="inyo"
+								desc="create new task help link"
+							>
+								Créer une nouvelle tâche
+							</fbt>
 						</A>
 					</li>
 					<li>
@@ -53,7 +68,12 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							target="_blank"
 							href="https://inyo.me/documentation/liste-de-mes-clients/"
 						>
-							Créer un nouveau client
+							<fbt
+								project="inyo"
+								desc="create new client help link"
+							>
+								Créer un nouveau client
+							</fbt>
 						</A>
 					</li>
 					<li>
@@ -66,7 +86,12 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							target="_blank"
 							href="https://inyo.me/documentation/creer-un-nouveau-projet/"
 						>
-							Créer un nouveau projet
+							<fbt
+								project="inyo"
+								desc="create new project help link"
+							>
+								Créer un nouveau projet
+							</fbt>
 						</A>
 					</li>
 					<li>
@@ -79,7 +104,12 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							target="_blank"
 							href="https://inyo.me/documentation/creer-un-nouveau-projet/utiliser-un-modele-predefini/"
 						>
-							Utiliser un modèle de projet
+							<fbt
+								project="inyo"
+								desc="Use a project template help link"
+							>
+								Utiliser un modèle de projet
+							</fbt>
 						</A>
 					</li>
 					<li>
@@ -92,7 +122,12 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							target="_blank"
 							href="https://inyo.me/documentation/les-principales-vues/vue-du-client-d-un-projet/"
 						>
-							Voir ce que voit le client
+							<fbt
+								project="inyo"
+								desc="see customer view help link"
+							>
+								Voir ce que voit le client
+							</fbt>
 						</A>
 					</li>
 					<li>
@@ -108,24 +143,34 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 							target="_blank"
 							href="https://inyo.pro"
 						>
-							Présenter Inyo à votre client
+							<fbt
+								project="inyo"
+								desc="introduce inyo to a customer help link"
+							>
+								Présenter Inyo à votre client
+							</fbt>
 						</A>
 					</li>
 				</UL>
 			</PA>
 			<PA>
-				Une information est manquante? Contactez-nous via la messagerie
-				en bas à droite, ou proposez des fonctionnalités sur{' '}
-				<A
-					target="_blank"
-					href="https://inyo.me/produit/fonctionnalites/proposer-une-fonctionnalite/"
-				>
-					notre roadmap collaborative.
-				</A>
+				<fbt project="inyo" desc="missing information help link">
+					Une information est manquante? Contactez-nous via la
+					messagerie en bas à droite, ou proposez des fonctionnalités
+					sur{' '}
+					<A
+						target="_blank"
+						href="https://inyo.me/produit/fonctionnalites/proposer-une-fonctionnalite/"
+					>
+						notre roadmap collaborative.
+					</A>
+				</fbt>
 			</PA>
 			<ModalActions>
 				<Button big primary onClick={onDismiss}>
-					J'ai compris!
+					<fbt project="inyo" desc="I got it link help modal">
+						J'ai compris!
+					</fbt>
 				</Button>
 			</ModalActions>
 		</ModalElem>

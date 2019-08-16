@@ -1,9 +1,9 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
-import fbt from 'fbt';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {primaryBlue, secondaryRed, Ul} from '../../utils/content';
 import InlineEditable from '../InlineEditable';
 

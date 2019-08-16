@@ -1,0 +1,15 @@
+{
+	"fb-locale": "fr-FR",
+	"translations": {
+		"CBEk0tjxRg3kn3CsSs2gTA==": {
+			"tokens": [],
+			"types": [],
+			"translations": [
+				{
+					"translation": "prout {projectName}",
+					"variations": {}
+				}
+			]
+		}
+	}
+}

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import fbt from 'fbt';
 import React, {useState} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {Button} from '../../utils/new/design-system';
 

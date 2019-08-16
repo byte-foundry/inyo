@@ -43,6 +43,9 @@ const TagDropdown = (props) => {
 		props.onCreateOption(name, colorBg, colorText);
 	};
 
+	const {history, location} = props;
+	const {search, state = {}} = location;
+
 	return (
 		<ArianneElemCreatable
 			list={data.me.tags}
@@ -51,14 +54,12 @@ const TagDropdown = (props) => {
 			supplementaryOption={
 				<ManageTagOption
 					onClick={() => {
-						props.history.push({
+						history.push({
 							pathname: '/app/tags',
-							search: props.location.search,
+							search,
 							state: {
-								prevLocation: props.location,
-								prevSearch:
-									props.location.search
-									|| props.location.state.prevSearch,
+								prevLocation: location,
+								prevSearch: search || state.prevSearch,
 							},
 						});
 					}}

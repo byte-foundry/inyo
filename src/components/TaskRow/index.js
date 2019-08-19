@@ -18,7 +18,7 @@ import {
 	TaskHeading,
 	TaskIconText,
 } from '../../utils/new/design-system';
-import CollaboratorAvatar from '../CollaboratorAvatar';
+import InitialIdentifier from '../InitialIdentifier';
 import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
 import Tag from '../Tag';
@@ -104,26 +104,6 @@ const TaskIcon = styled('div')`
 
 	transform: scale(${props => (props.noData ? 0.75 : '')});
 
-	&:after,
-	&:before {
-		content: '';
-		display: ${props => (props.noData ? 'none' : 'block')};
-		display: block;
-		border-left: 1px dotted ${mediumGrey};
-		position: absolute;
-		left: 2.85rem;
-	}
-
-	&:before {
-		height: 1rem;
-		top: 0;
-	}
-
-	&:after {
-		top: 62px;
-		bottom: -10px;
-	}
-
 	&:hover {
 		background: center no-repeat
 			url(${(props) => {
@@ -160,11 +140,6 @@ const TaskIcon = styled('div')`
 		margin: 0;
 		position: absolute;
 		left: -1rem;
-
-		&:after,
-		&:before {
-			display: none;
-		}
 	}
 `;
 
@@ -242,10 +217,6 @@ const CustomerCondensed = styled('div')`
 	}
 `;
 
-const CustomerAvatar = styled(CollaboratorAvatar)`
-	margin-right: 0;
-`;
-
 const TaskHeader = styled('div')`
 	display: flex;
 	align-items: center;
@@ -254,6 +225,7 @@ const TaskHeader = styled('div')`
 	${props => props.noProject && 'grid-column: 1 / 3;'}
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		overflow: hidden;
 		${props => props.noProject && 'grid-column: 1 / 3;'}
 	}
 `;
@@ -387,27 +359,54 @@ function TaskRow({
 							))}
 						{!noData && (
 							<>
-								<CustomerCondensed>
-									<MaterialIcon
-										style={{marginTop: '5px'}}
-										icon="person"
-									/>
-									{item.linkedCustomer
-									|| (item.section
-										&& item.section.project.customer) ? (
-											<CustomerAvatar
-												collaborator={
-													item.linkedCustomer
-												|| (item.section
-													&& item.section.project
-														.customer)
-												}
+								{isCustomerTask(item.type) ? (
+									<CustomerCondensed>
+										<MaterialIcon
+											style={{
+												marginTop: '5px',
+												marginRight: '5px',
+											}}
+											icon="person"
+										/>
+										{item.linkedCustomer
+										|| (item.section
+											&& item.section.project.customer) ? (
+												<InitialIdentifier
+													person={
+														item.linkedCustomer
+													|| (item.section
+														&& item.section.project
+															.customer)
+													}
+													size={24}
+												/>
+											) : (
+												<span style={{marginLeft: '5px'}}>
+												&mdash;
+												</span>
+											)}
+									</CustomerCondensed>
+								) : (
+									<CustomerCondensed>
+										<MaterialIcon
+											style={{
+												marginTop: '5px',
+												marginRight: '5px',
+											}}
+											icon="face"
+										/>
+										{item.assignee ? (
+											<InitialIdentifier
+												person={item.assignee}
 												size={24}
 											/>
 										) : (
-										<>&mdash;</>
+											<span style={{marginLeft: '5px'}}>
+												&mdash;
+											</span>
 										)}
-								</CustomerCondensed>
+									</CustomerCondensed>
+								)}
 								<TaskMetas>
 									<TaskComment
 										key={`TaskComment-${item.id}`}

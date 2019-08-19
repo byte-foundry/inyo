@@ -32,7 +32,7 @@ function Comment({comment: {text, author, createdAt}}) {
 	return (
 		<CommentMain>
 			<FlexRow>
-				<InitialIdentifier author={author} />
+				<InitialIdentifier person={author} />
 				<CommentContent>
 					<CommentInfo dateTime={createdAt}>
 						{new Date(createdAt).toLocaleString()}

@@ -14,7 +14,7 @@ const CollaboratorAvatarContainer = styled('div')`
 function CollaboratorAvatar({collaborator, size = 50}) {
 	return (
 		<CollaboratorAvatarContainer size={size}>
-			<InitialIdentifier author={collaborator} size={size} />
+			<InitialIdentifier person={collaborator} size={size} />
 		</CollaboratorAvatarContainer>
 	);
 }

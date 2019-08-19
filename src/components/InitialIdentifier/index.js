@@ -19,19 +19,19 @@ const CommentImage = styled('div')`
 	text-transform: uppercase;
 `;
 
-const InitialIdentifier = ({author, size = 40}) => {
+const InitialIdentifier = ({person, size = 40}) => {
 	let color = primaryGrey;
 
 	let initials = '?';
 
-	if (author) {
+	if (person) {
 		// eslint-disable-next-line no-underscore-dangle
-		const isCustomer = author.__typename === 'Customer';
+		const isCustomer = person.__typename === 'Customer';
 
 		color = isCustomer ? primaryRed : primaryPurple;
 		initials
-			= (author.firstName || '').charAt(0)
-			+ (author.lastName || '').charAt(0);
+			= (person.firstName || '').charAt(0)
+			+ (person.lastName || '').charAt(0);
 	}
 
 	return (

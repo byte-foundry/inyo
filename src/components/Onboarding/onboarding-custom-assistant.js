@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button, gray50, H4, P,
 } from '../../utils/content';
@@ -61,17 +62,21 @@ const OnboardingCustomAssistant = ({
 	return (
 		<OnboardingStep>
 			<StepSubtitle>
-				Comment souhaitez-vous appeler
-				<br />
-				votre assistant·e ?
+				<fbt project="inyo" desc="onboarding assistant title">
+					Comment souhaitez-vous appeler
+					<br />
+					votre assistant·e ?
+				</fbt>
 			</StepSubtitle>
 
 			<Illus src={illus} />
 
 			<StepDescription>
-				Lorsque nous notifierons vos clients d'une tâche à réaliser,
-				d'un commentaire, etc. ce sera le prénom utilisé pour signer les
-				emails.
+				<fbt project="inyo" desc="onboarding assistant description">
+					Lorsque nous notifierons vos clients d'une tâche à réaliser,
+					d'un commentaire, etc. ce sera le prénom utilisé pour signer
+					les emails.
+				</fbt>
 			</StepDescription>
 
 			<Form
@@ -105,14 +110,18 @@ const OnboardingCustomAssistant = ({
 					theme={hasValidName ? 'Primary' : 'Disabled'}
 					size="Medium"
 				>
-					Valider
+					<fbt project="inyo" desc="confirm onboarding assistant">
+						Valider
+					</fbt>
 				</ActionButton>
 			</Form>
 
 			{!isFirstStep && (
 				<ActionButton theme="Link" onClick={getPreviousStep}>
 					{'< '}
-					Retour
+					<fbt project="inyo" desc="back onboarding assistant">
+						Retour
+					</fbt>
 				</ActionButton>
 			)}
 		</OnboardingStep>

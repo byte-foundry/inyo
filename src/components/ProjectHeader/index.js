@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import Pencil from '../../utils/icons/pencil.svg';
 import {UPDATE_PROJECT} from '../../utils/mutations';
@@ -118,14 +119,26 @@ export default function ProjectHeader({projectId, customerToken}) {
 	return (
 		<ProjectHeaderContainer>
 			<ProjectHeading
-				placeholder="Ajouter un titre à ce projet"
+				placeholder={
+					<fbt
+						project="inyo"
+						desc="Project header add a title to project"
+					>
+						Ajouter un titre à ce projet
+					</fbt>
+				}
 				value={project.name}
 				placeholderCss={placeholderCss}
 				nameCss={nameCss}
 				editableCss={editableCss}
 				disabled={customerToken}
 				missingTitle={
-					project.name === 'Nom du projet' || project.name === ''
+					project.name
+					=== (
+						<fbt project="inyo" desc="project name placeholder">
+							Nom du projet
+						</fbt>
+					) || project.name === ''
 				}
 				onFocusOut={(value) => {
 					if (value) {

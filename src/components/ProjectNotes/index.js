@@ -7,6 +7,7 @@ import {createEditorState, Editor} from 'medium-draft';
 import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
 import React, {useRef, useState} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {gray20} from '../../utils/content';
 import {lightPurple, primaryPurple} from '../../utils/new/design-system';
 
@@ -103,10 +104,27 @@ const ProjectNotes = ({
 								'HIGHLIGHT',
 							],
 						}}
-						placeholder={`Écrivez des notes...
-Pour accèder aux options sélectionnez un bout de texte. Vous pouvez aussi utiliser markdown.`}
+						placeholder={
+							<fbt
+								project="inyo"
+								desc="Project notes placeholder"
+							>
+								Écrivez des notes...<br />
+								Pour accèder aux options sélectionnez un bout de
+								texte. Vous pouvez aussi utiliser markdown.
+							</fbt>
+						}
 					/>
-					{saved && <EditorToast>Sauvegardé !</EditorToast>}
+					{saved && (
+						<EditorToast>
+							<fbt
+								project="inyo"
+								desc="project notes saved message"
+							>
+								Sauvegardé !
+							</fbt>
+						</EditorToast>
+					)}
 				</TextEditorMain>
 			</TasksListContainer>
 		</ProjectNotesContainer>

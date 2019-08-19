@@ -1,6 +1,7 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {ModalActions, ModalContainer, ModalElem} from '../../utils/content';
 import {ARCHIVE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {Button, Heading, P} from '../../utils/new/design-system';
@@ -13,19 +14,32 @@ function RemoveProject({closeModal, projectId, onRemove = () => {}}) {
 		<ModalContainer onDismiss={() => closeModal()}>
 			<ModalElem>
 				<Heading>
-					Êtes-vous sûr de vouloir supprimer ce projet ?
+					<fbt project="inyo" desc="delete project heading">
+						Êtes-vous sûr de vouloir supprimer ce projet ?
+					</fbt>
 				</Heading>
 				<P>
-					En ce supprimant ce projet vous perdrez toutes les données.
+					<fbt project="inyo" desc="delete project first paragraph">
+						En ce supprimant ce projet vous perdrez toutes les
+						données.
+					</fbt>
 				</P>
 				<P>
-					Cette option est présente pour supprimer un projet créé par
-					erreur.
+					<fbt project="inyo" desc="delete project second paragraph">
+						Cette option est présente pour supprimer un projet créé
+						par erreur.
+					</fbt>
 				</P>
-				<P>Pour les projets terminés, préférez l'archivage :)</P>
+				<P>
+					<fbt project="inyo" desc="delete project third paragraph">
+						Pour les projets terminés, préférez l'archivage :)
+					</fbt>
+				</P>
 				<ModalActions>
 					<Button grey onClick={() => closeModal()}>
-						Annuler
+						<fbt project="inyo" desc="cancel">
+							Annuler
+						</fbt>
 					</Button>
 					<Button
 						primary
@@ -38,7 +52,9 @@ function RemoveProject({closeModal, projectId, onRemove = () => {}}) {
 							closeModal();
 						}}
 					>
-						Archiver le projet
+						<fbt project="inyo" desc="archive project">
+							Archiver le projet
+						</fbt>
 					</Button>
 					<Button
 						red
@@ -52,7 +68,9 @@ function RemoveProject({closeModal, projectId, onRemove = () => {}}) {
 							onRemove();
 						}}
 					>
-						Supprimer le projet
+						<fbt project="inyo" desc="delete project">
+							Supprimer le projet
+						</fbt>
 					</Button>
 				</ModalActions>
 			</ModalElem>

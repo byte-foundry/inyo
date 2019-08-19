@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button,
 	FlexColumn,
@@ -16,7 +17,6 @@ import {
 } from '../../utils/content';
 import welcomeIllus from '../../utils/images/bermuda-welcome.svg';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`
@@ -81,11 +81,17 @@ const OnboardingThirdStep = ({
 
 	return (
 		<OnboardingStep>
-			<StepSubtitle>Dernière question !</StepSubtitle>
+			<StepSubtitle>
+				<fbt project="inyo" desc="onboarding last step title">
+					Dernière question !
+				</fbt>
+			</StepSubtitle>
 			<Illus src={welcomeIllus} />
 			<StepDescription>
-				Auriez-vous quelques minutes pour nous aider à transformer Inyo
-				en l'application de vos rêves?
+				<fbt project="inyo" desc="onboarding last step description">
+					Auriez-vous quelques minutes pour nous aider à
+					transformer Inyo en l'application de vos rêves?
+				</fbt>
 			</StepDescription>
 			<Formik
 				initialValues={{
@@ -96,7 +102,11 @@ const OnboardingThirdStep = ({
 					const errors = {};
 
 					if (canBeContacted && !phone) {
-						errors.phone = 'Requis';
+						errors.phone = (
+							<fbt project="inyo" desc="required">
+								Requis
+							</fbt>
+						);
 					}
 
 					return errors;
@@ -146,14 +156,22 @@ const OnboardingThirdStep = ({
 							<UseCaseCards>
 								<UseCaseCard
 									selected={values.canBeContacted}
-									onClick={() => setFieldValue('canBeContacted', true)
+									onClick={() => setFieldValue(
+										'canBeContacted',
+										true,
+									)
 									}
 								>
 									Oui
 								</UseCaseCard>
 								<UseCaseCard
-									selected={!values.canBeContacted}
-									onClick={() => setFieldValue('canBeContacted', false)
+									selected={
+										!values.canBeContacted
+									}
+									onClick={() => setFieldValue(
+										'canBeContacted',
+										false,
+									)
 									}
 								>
 									Non
@@ -161,7 +179,16 @@ const OnboardingThirdStep = ({
 							</UseCaseCards>
 							{values.canBeContacted && (
 								<FormElem
-									label="Merci! Renseignez svp votre numéro de téléphone"
+									label={
+										<fbt
+											project="inyo"
+											desc="onboarding phone number label"
+										>
+											Merci! Renseignez svp
+											votre numéro de
+											téléphone
+										</fbt>
+									}
 									errors={errors}
 									required
 									values={values}
@@ -180,7 +207,12 @@ const OnboardingThirdStep = ({
 									size="Medium"
 									type="submit"
 								>
-									Continuer
+									<fbt
+										project="inyo"
+										desc="onboarding last step confirm"
+									>
+										Continuer
+									</fbt>
 								</ActionButton>
 								{!isFirstStep && (
 									<ActionButton
@@ -191,7 +223,12 @@ const OnboardingThirdStep = ({
 										}}
 									>
 										{'< '}
-										Retour
+										<fbt
+											project="inyo"
+											desc="back"
+										>
+											Retour
+										</fbt>
 									</ActionButton>
 								)}
 							</ActionButtons>

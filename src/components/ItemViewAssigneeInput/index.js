@@ -2,6 +2,7 @@ import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName} from '../../utils/functions';
 import {Meta, MetaLabel, MetaText} from '../../utils/new/design-system';
 import CollaboratorDropdown from '../CollaboratorDropdown';
@@ -37,10 +38,23 @@ function ItemViewAssigneeInput({
 
 	return (
 		<>
-			<Tooltip label="Personne assigné a la tâche">
+			<Tooltip
+				label={
+					<fbt project="inyo" desc="tooltip item view assignee input">
+						Personne assigné a la tâche
+					</fbt>
+				}
+			>
 				<Meta>
 					<MaterialIcon icon="face" size="tiny" />
-					<MetaLabel>Assigné à</MetaLabel>
+					<MetaLabel>
+						<fbt
+							project="inyo"
+							desc="assigned at label item view assignee input"
+						>
+							Assigné à
+						</fbt>
+					</MetaLabel>
 					<MetaText
 						ref={containerRef}
 						onClick={

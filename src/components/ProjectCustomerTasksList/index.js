@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import React, {useContext} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
 import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';
@@ -75,7 +76,14 @@ function ProjectTasksList({items, projectId, sectionId}) {
 				<>
 					<SectionTitle
 						disabled
-						placeholder="Nom de la section"
+						placeholder={
+							<fbt
+								project="inyo"
+								desc="project customer list section placeholder"
+							>
+								Nom de la section
+							</fbt>
+						}
 						value={section.name}
 						placeholderCss={placeholderCss}
 						nameCss={nameCss}

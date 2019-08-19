@@ -3,6 +3,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {Link} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {collabStatuses} from '../../utils/constants';
 import {formatFullName, formatName} from '../../utils/functions';
 import {
@@ -89,31 +90,68 @@ const TextPlusObjectNotification = ({
 
 	switch (eventType) {
 	case 'POSTED_COMMENT':
-		action = 'a commenté la tâche';
+		action = (
+			<fbt project="inyo" desc="posted comment notification message">
+					a commenté la tâche
+			</fbt>
+		);
 		icon = 'mode_comment';
 		break;
 	case 'VIEWED_PROJECT':
-		action = 'a consulté le projet';
+		action = (
+			<fbt project="inyo" desc="viewed project notification message">
+					a consulté le projet
+			</fbt>
+		);
 		icon = 'visibility';
 		break;
 	case 'UPLOADED_ATTACHMENT':
-		action = 'a ajouté un nouveau document sur la tâche';
+		action = (
+			<fbt
+				project="inyo"
+				desc="upload attachement notification message"
+			>
+					a ajouté un nouveau document sur la tâche
+			</fbt>
+		);
 		icon = 'attachment';
 		break;
 	case 'FINISHED_TASK':
-		action = 'a validé la tâche';
+		action = (
+			<fbt project="inyo" desc="finished tasked notification message">
+					a validé la tâche
+			</fbt>
+		);
 		icon = 'done';
 		break;
 	case 'ASSIGNED_TO_TASK':
-		action = 'vous a assigné à la tâche';
+		action = (
+			<fbt
+				project="inyo"
+				desc="assigned to task notification message"
+			>
+					vous a assigné à la tâche
+			</fbt>
+		);
 		icon = 'assignment';
 		break;
 	case 'REMOVE_ASSIGNMENT_TO_TASK':
-		action = 'vous a retiré la tâche';
+		action = (
+			<fbt
+				project="inyo"
+				desc="remove assignement to task notification message"
+			>
+					vous a retiré la tâche
+			</fbt>
+		);
 		icon = 'assignment';
 		break;
 	case 'COLLAB_ACCEPTED':
-		action = 'a accepté la collaboration';
+		action = (
+			<fbt project="inyo" desc="collab accepted notification message">
+					a accepté la collaboration
+			</fbt>
+		);
 		icon = 'face';
 		break;
 	default:
@@ -152,8 +190,12 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 	if (object.status === collabStatuses.PENDING) {
 		return (
 			<Notification icon="people" unread={unread}>
-				{formatName(from.firstName, from.lastName)} vous a invité à
-				collaborer
+				<fbt project="inyo" desc="collab request notification message">
+					<fbt:param name="collabFullName">
+						{formatName(from.firstName, from.lastName)}
+					</fbt:param>{' '}
+					vous a invité à collaborer
+				</fbt>
 				<Actions>
 					<Button
 						onClick={() => acceptCollabRequest({
@@ -167,7 +209,11 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 							size="tiny"
 							color="inherit"
 						/>
-						<span>Accepter</span>
+						<span>
+							<fbt project="inyo" desc="accept collab request">
+								Accepter
+							</fbt>
+						</span>
 					</Button>
 					<Button
 						onClick={() => rejectCollabRequest({
@@ -182,7 +228,11 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 							size="tiny"
 							color="inherit"
 						/>
-						<span>Rejeter</span>
+						<span>
+							<fbt project="inyo" desc="reject collab request">
+								Rejeter
+							</fbt>
+						</span>
 					</Button>
 				</Actions>
 			</Notification>
@@ -191,16 +241,24 @@ const CollaborationRequestNotification = ({unread, from, object}) => {
 	if (object.status === collabStatuses.ACCEPTED) {
 		return (
 			<Notification icon="people" unread={unread}>
-				Vous avez accepté la requête de collaboration de{' '}
-				{formatName(from.firstName, from.lastName)}
+				<fbt project="inyo" desc="accepted collab notification message">
+					Vous avez accepté la requête de collaboration de{' '}
+					<fbt:param name="collaboratorFullName">
+						{formatName(from.firstName, from.lastName)}
+					</fbt:param>
+				</fbt>
 			</Notification>
 		);
 	}
 	if (object.status === collabStatuses.REJECTED) {
 		return (
 			<Notification icon="people" unread={unread}>
-				Vous avez rejeté la requête de collaboration de{' '}
-				{formatName(from.firstName, from.lastName)}
+				<fbt project="inyo" desc="rejected collab notification message">
+					Vous avez rejeté la requête de collaboration de{' '}
+					<fbt:param name="collaboratorFullName">
+						{formatName(from.firstName, from.lastName)}
+					</fbt:param>
+				</fbt>
 			</Notification>
 		);
 	}

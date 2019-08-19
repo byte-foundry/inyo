@@ -3,6 +3,7 @@ import 'medium-draft/lib/index.css';
 import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {UPDATE_PROJECT_PERSONAL_NOTES} from '../../utils/mutations';
 import {SubHeading} from '../../utils/new/design-system';
 import {GET_PROJECT_PERSONAL_NOTES} from '../../utils/queries';
@@ -24,7 +25,10 @@ const ProjectPersonalNotes = ({projectId}) => {
 			projectId={projectId}
 		>
 			<SubHeading>
-				Ces notes sont personnelles. Votre client ne peut pas les voir.
+				<fbt project="inyo" desc="Project personal notes heading">
+					Ces notes sont personnelles. Votre client ne peut pas les
+					voir.
+				</fbt>
 			</SubHeading>
 		</ProjectNotes>
 	);

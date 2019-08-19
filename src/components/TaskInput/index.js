@@ -5,6 +5,7 @@ import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
+import {ModalContainer} from '../../utils/content';
 import {CREATE_TAG} from '../../utils/mutations';
 import {
 	Button,
@@ -13,10 +14,13 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
+	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
+import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
+import TaskCustomerInput from '../TaskCustomerInput';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
 import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
@@ -178,6 +182,10 @@ const TaskInfosInputsContainer = styled('div')`
 	justify-content: space-between;
 	align-items: flex-start;
 	padding: 10px 0;
+`;
+
+const TaskInputCheckListContainer = styled('div')`
+	margin-left: 2em;
 `;
 
 const types = ITEM_TYPES;
@@ -411,46 +419,9 @@ const TaskInput = ({
 											if (
 												type === 'CONTENT_ACQUISITION'
 											) {
-												if (
-													showContentAcquisitionInfos
-												) {
-													onSubmitTask({
-														name: value,
-														type: type || 'DEFAULT',
-														linkedCustomerId:
-															itemCustomer
-															&& itemCustomer.id,
-														description:
-															files.length > 0
-																? `\n# content-acquisition-list\n${files
-																	.map(
-																		({
-																			checked,
-																			name,
-																		}) => `- [${
-																			checked
-																				? 'x'
-																				: ' '
-																		}] ${name}`,
-																	)
-																	.join(
-																		'\n',
-																	)}`
-																: '',
-														tags: itemTags.map(
-															({id}) => id,
-														),
-														projectId: selectedProject,
-													});
-													setValue('');
-													closeMoreInfos();
-													closeContentAcquisitionInfos();
-												}
-												else {
-													setShowContentAcquisitionInfos(
-														true,
-													);
-												}
+												setShowContentAcquisitionInfos(
+													true,
+												);
 											}
 											else {
 												onSubmitTask({
@@ -539,6 +510,80 @@ const TaskInput = ({
 						}}
 					/>
 				</TaskInfosInputsContainer>
+			)}
+			{!isEditingCustomer && showContentAcquisitionInfos && (
+				<ModalContainer
+					onDismiss={() => {
+						setShowContentAcquisitionInfos(false);
+					}}
+				>
+					<TaskInputDropdownHeader>
+						Choisir un client
+					</TaskInputDropdownHeader>
+					<TaskInputCheckListContainer>
+						<TaskCustomerInput
+							item={{
+								linkedCustomer: itemCustomer,
+							}}
+							noComment
+							onCustomerSubmit={(customer) => {
+								if (customer === null) {
+									setItemCustomer();
+								}
+								else if (customer.value === 'CREATE') {
+									setEditCustomer(true);
+								}
+								else {
+									setItemCustomer({
+										id: customer.value,
+										name: customer.label,
+									});
+								}
+							}}
+						/>
+					</TaskInputCheckListContainer>
+					<TaskInputDropdownHeader>
+						Liste des documents a récuperer
+					</TaskInputDropdownHeader>
+					<TaskInputCheckListContainer>
+						<CheckList
+							editable
+							items={files}
+							onChange={({items}) => {
+								setFiles(items);
+							}}
+						/>
+					</TaskInputCheckListContainer>
+					<Button
+						disabled={files.length === 0 || !itemCustomer}
+						style={{marginLeft: 'auto'}}
+						onClick={() => {
+							onSubmitTask({
+								name: value,
+								type: type || 'DEFAULT',
+								linkedCustomerId:
+									itemCustomer && itemCustomer.id,
+								description:
+									files.length > 0
+										? `\n# content-acquisition-list\n${files
+											.map(
+												({checked, name}) => `- [${
+													checked ? 'x' : ' '
+												}] ${name}`,
+											)
+											.join('\n')}`
+										: '',
+								tags: itemTags.map(({id}) => id),
+								projectId: selectedProject,
+							});
+							setValue('');
+							closeMoreInfos();
+							closeContentAcquisitionInfos();
+						}}
+					>
+						Créer la tâche
+					</Button>
+				</ModalContainer>
 			)}
 			{((value.startsWith('/') && focus) || openedByClick) && (
 				<TaskTypeDropdown

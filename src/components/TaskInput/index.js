@@ -527,12 +527,14 @@ const TaskInput = ({
 						}}
 						onChange={(tags) => {
 							setItemTags(
-								tags.map(tag => ({
-									id: tag.value,
-									name: tag.label,
-									colorBg: tag.colorBg,
-									colorText: tag.colorText,
-								})),
+								tags
+									? tags.map(tag => ({
+										id: tag.value,
+										name: tag.label,
+										colorBg: tag.colorBg,
+										colorText: tag.colorText,
+									  }))
+									: [],
 							);
 						}}
 					/>

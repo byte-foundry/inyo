@@ -109,7 +109,6 @@ function TemplateTaskList({selectedTemplate}) {
 }
 
 const CreateProjectModalViewContent = ({content}) => {
-	console.log(content);
 	const selectedTemplate = templates.find(tplt => tplt.name === content);
 
 	const isTemplate = !!selectedTemplate;

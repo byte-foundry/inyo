@@ -421,7 +421,6 @@ export const ModalCloseIcon = styled('div')`
 	position: absolute;
 	color: ${primaryRed};
 	font-size: 2.5rem;
-	position: absolute;
 	top: -3rem;
 	right: -3rem;
 	cursor: pointer;
@@ -431,7 +430,10 @@ export const ModalCloseIcon = styled('div')`
 	background-color: ${primaryWhite};
 	border-radius: 50%;
 	width: 3rem;
-	text-align: center;
+	height: 3rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
 
 	&:hover {
 		background-color: ${primaryRed};
@@ -439,10 +441,12 @@ export const ModalCloseIcon = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		right: 0;
-		top: -4.1rem;
+		right: 1rem;
+		top: -4.5rem;
 		font-size: 2rem;
 		background: transparent;
+		width: 2rem;
+		height: 2rem;
 	}
 `;
 

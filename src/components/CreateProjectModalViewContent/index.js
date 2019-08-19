@@ -70,7 +70,7 @@ const Container = styled('div')`
 	left: 100%;
 	width: 20vw;
 	padding: 2rem;
-	margin-left: 2rem;
+	margin-left: 3rem;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		position: static;
@@ -109,6 +109,7 @@ function TemplateTaskList({selectedTemplate}) {
 }
 
 const CreateProjectModalViewContent = ({content}) => {
+	console.log(content);
 	const selectedTemplate = templates.find(tplt => tplt.name === content);
 
 	const isTemplate = !!selectedTemplate;

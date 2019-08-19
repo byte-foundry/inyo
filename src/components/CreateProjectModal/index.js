@@ -117,7 +117,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 										optionsProjects={optionsProjects}
 									/>
 								</ModalElem>
-								{viewContent && (
+								{viewContent && viewContent !== 'EMPTY' && (
 									<CreateProjectModalViewContent
 										content={viewContent}
 									/>

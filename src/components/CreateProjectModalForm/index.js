@@ -110,6 +110,7 @@ export default function ({
 	...props
 }) {
 	const [editDeadline, setEditDeadline] = useState(false);
+	const [selectedViewContent, setSelectedViewContent] = useState();
 	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
 		suspend: true,
 	});
@@ -170,9 +171,17 @@ export default function ({
 					big
 					classNamePrefix="intercom-tour"
 					options={templateOptions}
+					handleBlur={() => setViewContent(selectedViewContent)}
+					onChange={(option) => {
+						setViewContent(option.value);
+						setSelectedViewContent(option.value);
+					}}
 					components={{
 						Option: createPreviewableOption({
-							onHover: option => setViewContent(option && option.value),
+							onHover: option => option
+								&& option.value
+								&& option.value !== 'EMPTY'
+								&& setViewContent(option.value),
 						}),
 					}}
 				/>

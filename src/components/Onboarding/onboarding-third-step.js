@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import React, {Component} from 'react';
-import {Mutation} from 'react-apollo';
+import React, {useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 
 import {
 	Button,
@@ -71,155 +71,136 @@ const Illus = styled('img')`
 	height: 250px;
 `;
 
-class OnboardingFifthStep extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			canBeContacted: false,
-		};
-	}
+const OnboardingThirdStep = ({
+	me,
+	getNextStep,
+	getPreviousStep,
+	isFirstStep,
+}) => {
+	const [updateUser] = useMutation(UPDATE_USER_CONSTANTS);
 
-	render() {
-		const {
-			me, getNextStep, getPreviousStep, isFirstStep,
-		} = this.props;
+	return (
+		<OnboardingStep>
+			<StepSubtitle>Dernière question !</StepSubtitle>
+			<Illus src={welcomeIllus} />
+			<StepDescription>
+				Auriez-vous quelques minutes pour nous aider à transformer Inyo
+				en l'application de vos rêves?
+			</StepDescription>
+			<Formik
+				initialValues={{
+					canBeContacted: me.canBeContacted,
+					phone: '',
+				}}
+				validate={({canBeContacted, phone}) => {
+					const errors = {};
 
-		return (
-			<OnboardingStep>
-				<StepSubtitle>Dernière question !</StepSubtitle>
-				<Illus src={welcomeIllus} />
-				<StepDescription>
-					Auriez-vous quelques minutes pour nous aider à transformer
-					Inyo en l'application de vos rêves?
-				</StepDescription>
-				<Mutation mutation={UPDATE_USER_CONSTANTS}>
-					{updateUser => (
-						<Formik
-							initialValues={{
-								canBeContacted: me.canBeContacted,
-								phone: '',
-							}}
-							validate={({canBeContacted, phone}) => {
-								const errors = {};
+					if (canBeContacted && !phone) {
+						errors.phone = 'Requis';
+					}
 
-								if (canBeContacted && !phone) {
-									errors.phone = 'Requis';
-								}
+					return errors;
+				}}
+				onSubmit={(values, actions) => {
+					actions.setSubmitting(false);
 
-								return errors;
-							}}
-							onSubmit={async (values, actions) => {
-								actions.setSubmitting(false);
+					window.Intercom('update', {
+						canBeContacted: values.canBeContacted,
+						phone: values.phone,
+					});
 
-								window.Intercom('update', {
-									canBeContacted: values.canBeContacted,
+					try {
+						updateUser({
+							variables: {
+								canBeContacted: values.canBeContacted,
+								company: {
 									phone: values.phone,
-								});
+								},
+							},
+						});
 
-								try {
-									await updateUser({
-										variables: {
-											canBeContacted:
-												values.canBeContacted,
-											company: {
-												phone: values.phone,
-											},
-										},
-									});
+						getNextStep();
+					}
+					catch (error) {
+						actions.setSubmitting(false);
+						actions.setErrors(error);
+						actions.setStatus({
+							msg: "Quelque chose s'est mal passé",
+						});
+					}
+				}}
+			>
+				{(props) => {
+					const {
+						values,
+						errors,
+						setFieldValue,
+						handleChange,
+						handleBlur,
+						handleSubmit,
+						touched,
+					} = props;
 
-									getNextStep();
-								}
-								catch (error) {
-									actions.setSubmitting(false);
-									actions.setErrors(error);
-									actions.setStatus({
-										msg: "Quelque chose s'est mal passé",
-									});
-								}
-							}}
-						>
-							{(props) => {
-								const {
-									values,
-									errors,
-									setFieldValue,
-									handleChange,
-									handleBlur,
-									handleSubmit,
-									touched,
-								} = props;
+					return (
+						<form onSubmit={handleSubmit}>
+							<UseCaseCards>
+								<UseCaseCard
+									selected={values.canBeContacted}
+									onClick={() => setFieldValue('canBeContacted', true)
+									}
+								>
+									Oui
+								</UseCaseCard>
+								<UseCaseCard
+									selected={!values.canBeContacted}
+									onClick={() => setFieldValue('canBeContacted', false)
+									}
+								>
+									Non
+								</UseCaseCard>
+							</UseCaseCards>
+							{values.canBeContacted && (
+								<FormElem
+									label="Merci! Renseignez svp votre numéro de téléphone"
+									errors={errors}
+									required
+									values={values}
+									type="text"
+									touched={touched}
+									name="phone"
+									id="phone"
+									handleBlur={handleBlur}
+									handleChange={handleChange}
+									placeholder="08 36 65 65 65"
+								/>
+							)}
+							<ActionButtons>
+								<ActionButton
+									theme="Primary"
+									size="Medium"
+									type="submit"
+								>
+									Continuer
+								</ActionButton>
+								{!isFirstStep && (
+									<ActionButton
+										theme="Link"
+										size="XSmall"
+										onClick={() => {
+											getPreviousStep();
+										}}
+									>
+										{'< '}
+										Retour
+									</ActionButton>
+								)}
+							</ActionButtons>
+						</form>
+					);
+				}}
+			</Formik>
+		</OnboardingStep>
+	);
+};
 
-								return (
-									<form onSubmit={handleSubmit}>
-										<UseCaseCards>
-											<UseCaseCard
-												selected={values.canBeContacted}
-												onClick={() => setFieldValue(
-													'canBeContacted',
-													true,
-												)
-												}
-											>
-												Oui
-											</UseCaseCard>
-											<UseCaseCard
-												selected={
-													!values.canBeContacted
-												}
-												onClick={() => setFieldValue(
-													'canBeContacted',
-													false,
-												)
-												}
-											>
-												Non
-											</UseCaseCard>
-										</UseCaseCards>
-										{values.canBeContacted && (
-											<FormElem
-												label="Merci! Renseignez svp votre numéro de téléphone"
-												errors={errors}
-												required
-												values={values}
-												type="text"
-												touched={touched}
-												name="phone"
-												id="phone"
-												handleBlur={handleBlur}
-												handleChange={handleChange}
-												placeholder="08 36 65 65 65"
-											/>
-										)}
-										<ActionButtons>
-											<ActionButton
-												theme="Primary"
-												size="Medium"
-												type="submit"
-											>
-												Continuer
-											</ActionButton>
-											{!isFirstStep && (
-												<ActionButton
-													theme="Link"
-													size="XSmall"
-													onClick={() => {
-														getPreviousStep();
-													}}
-												>
-													{'< '}
-													Retour
-												</ActionButton>
-											)}
-										</ActionButtons>
-									</form>
-								);
-							}}
-						</Formik>
-					)}
-				</Mutation>
-			</OnboardingStep>
-		);
-	}
-}
-
-export default OnboardingFifthStep;
+export default OnboardingThirdStep;

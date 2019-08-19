@@ -19,6 +19,7 @@ import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import Plural from '../Plural';
 import TimeItTookForm from '../TimeItTookForm';
+import Tooltip from '../Tooltip';
 
 const Tray = styled('div')`
 	width: 700px;
@@ -52,7 +53,7 @@ const Title = styled(P)`
 	margin: 1rem;
 	padding-left: 10px;
 	color: currentColor;
-	font-weight: 600;
+	font-weight: 500;
 	font-size: 1rem;
 `;
 
@@ -74,12 +75,12 @@ const Content = styled('div')`
 const PendingAction = styled('div')`
 	display: grid;
 	grid-template-columns: 1fr 28px;
-	margin-top: 2rem;
+	margin-top: 1.6rem;
 `;
 
 const TimeItTookHeading = styled('h3')`
 	margin-top: 0;
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: 400;
 	text-transform: capitalize;
 `;
@@ -122,8 +123,8 @@ const PendingActionsTray = ({projectId}) => {
 					<Title>
 						{pendingTimeItTookTasks.length}{' '}
 						<Plural
-							plural="Actions requises"
-							singular="Action requise"
+							plural="Temps réellement passés à définir"
+							singular="Temps réellement passé à définir"
 							value={pendingTimeItTookTasks.length}
 						/>
 					</Title>
@@ -138,22 +139,24 @@ const PendingActionsTray = ({projectId}) => {
 					{pendingTimeItTookTasks.map(task => (
 						<PendingAction key={task.id}>
 							<TimeItTookHeading>{task.name}</TimeItTookHeading>
-							<IconButton
-								icon="check_circle"
-								size="tiny"
-								color={primaryGrey}
-								onClick={() => finishItem({
-									variables: {
-										itemId: task.id,
-										timeItTook: valuesMap[task.id],
-									},
-									optimisticResponse: {
-										...task,
-										timeItTook: valuesMap[task.id],
-									},
-								})
-								}
-							/>
+							<Tooltip label="Valider le temps passé pour cette tâche">
+								<IconButton
+									icon="check_circle"
+									size="tiny"
+									color={primaryGrey}
+									onClick={() => finishItem({
+										variables: {
+											itemId: task.id,
+											timeItTook: valuesMap[task.id],
+										},
+										optimisticResponse: {
+											...task,
+											timeItTook: valuesMap[task.id],
+										},
+									})
+									}
+								/>
+							</Tooltip>
 							<TimeItTookForm
 								style={{gridColumn: '1 / 3'}}
 								estimation={task.unit}
@@ -176,31 +179,33 @@ const PendingActionsTray = ({projectId}) => {
 							/>
 						</PendingAction>
 					))}
-					<Button
-						big
-						style={{margin: '5px 5px 5px auto'}}
-						onClick={() => {
-							pendingTimeItTookTasks.forEach(task => finishItem({
-								variables: {
-									itemId: task.id,
-									timeItTook:
-											valuesMap[task.id] || task.unit,
-								},
-								optimisticResponse: {
-									...task,
-									timeItTook:
-											valuesMap[task.id] || task.unit,
-								},
-							}));
-						}}
-					>
-						<MaterialIcon
-							icon="done_all"
-							size="tiny"
-							color="inherit"
-						/>
-						Valider
-					</Button>
+					<Tooltip label="Valider tous les temps passés">
+						<Button
+							big
+							style={{margin: '5px 5px 5px auto'}}
+							onClick={() => {
+								pendingTimeItTookTasks.forEach(task => finishItem({
+									variables: {
+										itemId: task.id,
+										timeItTook:
+												valuesMap[task.id] || task.unit,
+									},
+									optimisticResponse: {
+										...task,
+										timeItTook:
+												valuesMap[task.id] || task.unit,
+									},
+								}));
+							}}
+						>
+							<MaterialIcon
+								icon="done_all"
+								size="tiny"
+								color="inherit"
+							/>
+							Tout valider
+						</Button>
+					</Tooltip>
 				</Content>
 			</Tray>
 		</Portal>

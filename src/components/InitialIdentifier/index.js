@@ -11,7 +11,7 @@ import {
 const CommentImage = styled('div')`
 	border-radius: 50%;
 	background: ${props => props.color};
-	width: ${props => props.size}px;
+	min-width: ${props => props.size}px;
 	height: ${props => props.size}px;
 	text-align: center;
 	line-height: ${props => props.size}px;

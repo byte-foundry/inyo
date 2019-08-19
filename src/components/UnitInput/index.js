@@ -21,7 +21,7 @@ const UnitInputContainer = styled('div')`
 
 const UnitInputInput = styled('input')`
 	width: 50px;
-	margin-right: 0.5rem;
+	margin-right: 5px;
 	font-size: 14px;
 	font-family: inherit;
 	color: ${primaryBlack};
@@ -37,6 +37,7 @@ const UnitInputSwitch = styled('label')`
 	position: relative;
 	display: flex;
 	padding: 5px;
+	margin-right: 5px;
 	font-size: 0.75rem;
 	border-radius: 3px;
 	border: 2px solid #ddd;

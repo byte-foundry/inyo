@@ -303,168 +303,161 @@ function TaskRow({
 						}
 					}}
 				/>
-				<Tooltip label="Cliquer pour voir le contenu de la tâche">
-					<TaskContent>
-						<TaskHeader noProject={noProject}>
-							{item.name ? (
-								<TaskHeadingLink
-									noData={noData}
-									small={false}
-									status={item.status}
-									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-										state: {prevSearch: location.search},
-									}}
-								>
-									{item.name}
-								</TaskHeadingLink>
-							) : (
-								<TaskHeadingPlaceholder
-									noData={noData}
-									small={false}
-									to={{
-										pathname: `${taskUrlPrefix}/tasks/${item.id}`,
-										state: {prevSearch: location.search},
-									}}
-								>
-									Choisir un titre pour cette tâche
-								</TaskHeadingPlaceholder>
-							)}
-							{item.tags.slice(0, 2).map(tag => (
-								<Tag tag={tag} key={tag.id} />
-							))}
-							{item.tags.length > 2 && (
-								<Tag
-									tag={{
-										name: `${item.tags.length - 2}+`,
-										colorBg: '#4b4b4b',
-										colorText: '#fff',
-									}}
-								/>
-							)}
-						</TaskHeader>
-						{!noProject
-							&& (item.section && item.section.project ? (
-								<ProjectName
-									to={`/app/tasks?projectId=${item.section.project.id}`}
-									onClick={(e) => {
-										// needed to avoid another history push to be triggered, should be investigated
-										e.stopPropagation();
-									}}
-								>
-									{item.section.project.name}
-								</ProjectName>
-							) : (
-								<EmptyProjectName>&mdash;</EmptyProjectName>
-							))}
-						{!noData && (
-							<>
-								{isCustomerTask(item.type) ? (
-									<CustomerCondensed>
-										<MaterialIcon
-											style={{
-												marginTop: '5px',
-												marginRight: '5px',
-											}}
-											icon="person"
-											size="tiny"
-										/>
-										{item.linkedCustomer
-										|| (item.section
-											&& item.section.project.customer) ? (
-												<InitialIdentifier
-													person={
-														item.linkedCustomer
-													|| (item.section
-														&& item.section.project
-															.customer)
-													}
-													size={20}
-												/>
-											) : (
-												<span style={{marginLeft: '5px'}}>
-												&mdash;
-												</span>
-											)}
-									</CustomerCondensed>
-								) : (
-									<CustomerCondensed>
-										<MaterialIcon
-											style={{
-												marginTop: '5px',
-												marginRight: '5px',
-											}}
-											icon="face"
-											size="tiny"
-										/>
-										{item.assignee ? (
+				<TaskContent>
+					<TaskHeader noProject={noProject}>
+						{item.name ? (
+							<TaskHeadingLink
+								noData={noData}
+								small={false}
+								status={item.status}
+								to={{
+									pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								{item.name}
+							</TaskHeadingLink>
+						) : (
+							<TaskHeadingPlaceholder
+								noData={noData}
+								small={false}
+								to={{
+									pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+									state: {prevSearch: location.search},
+								}}
+							>
+								Choisir un titre pour cette tâche
+							</TaskHeadingPlaceholder>
+						)}
+						{item.tags.slice(0, 2).map(tag => (
+							<Tag tag={tag} key={tag.id} />
+						))}
+						{item.tags.length > 2 && (
+							<Tag
+								tag={{
+									name: `${item.tags.length - 2}+`,
+									colorBg: '#4b4b4b',
+									colorText: '#fff',
+								}}
+							/>
+						)}
+					</TaskHeader>
+					{!noProject
+						&& (item.section && item.section.project ? (
+							<ProjectName
+								to={`/app/tasks?projectId=${item.section.project.id}`}
+								onClick={(e) => {
+									// needed to avoid another history push to be triggered, should be investigated
+									e.stopPropagation();
+								}}
+							>
+								{item.section.project.name}
+							</ProjectName>
+						) : (
+							<EmptyProjectName>&mdash;</EmptyProjectName>
+						))}
+					{!noData && (
+						<>
+							{isCustomerTask(item.type) ? (
+								<CustomerCondensed>
+									<MaterialIcon
+										style={{
+											marginTop: '5px',
+											marginRight: '5px',
+										}}
+										icon="person"
+										size="tiny"
+									/>
+									{item.linkedCustomer
+									|| (item.section
+										&& item.section.project.customer) ? (
 											<InitialIdentifier
-												person={item.assignee}
+												person={
+													item.linkedCustomer
+												|| (item.section
+													&& item.section.project
+														.customer)
+												}
 												size={20}
 											/>
 										) : (
 											<span style={{marginLeft: '5px'}}>
-												&mdash;
+											&mdash;
 											</span>
 										)}
-									</CustomerCondensed>
-								)}
-								<TaskMetas>
-									<TaskComment
-										key={`TaskComment-${item.id}`}
-										taskUrlPrefix={taskUrlPrefix}
-										baseUrl={baseUrl}
-										item={item}
-										noComment
-										locationSearch={location.search}
+								</CustomerCondensed>
+							) : (
+								<CustomerCondensed>
+									<MaterialIcon
+										style={{
+											marginTop: '5px',
+											marginRight: '5px',
+										}}
+										icon="face"
+										size="tiny"
 									/>
-									{item.description ? (
-										<TaskDescription
-											taskUrlPrefix={taskUrlPrefix}
-											baseUrl={baseUrl}
-											item={item}
-											locationSearch={location.search}
+									{item.assignee ? (
+										<InitialIdentifier
+											person={item.assignee}
+											size={20}
 										/>
 									) : (
-										<div />
+										<span style={{marginLeft: '5px'}}>
+											&mdash;
+										</span>
 									)}
-									<TaskReminderIcon
-										item={item}
+								</CustomerCondensed>
+							)}
+							<TaskMetas>
+								<TaskComment
+									key={`TaskComment-${item.id}`}
+									taskUrlPrefix={taskUrlPrefix}
+									baseUrl={baseUrl}
+									item={item}
+									noComment
+									locationSearch={location.search}
+								/>
+								{item.description ? (
+									<TaskDescription
 										taskUrlPrefix={taskUrlPrefix}
 										baseUrl={baseUrl}
+										item={item}
 										locationSearch={location.search}
 									/>
-									{item.attachments.length > 0 ? (
-										<Tooltip label="Fichiers joints">
-											<TaskIconText
-												inactive={false}
-												icon={
-													<MaterialIcon
-														icon="attach_file"
-														size="tiny"
-													/>
-												}
-												style={{
-													fontWeight: '600',
-												}}
-												content={
-													<>
-														{
-															item.attachments
-																.length
-														}
-													</>
-												}
-											/>
-										</Tooltip>
-									) : (
-										<div />
-									)}
-								</TaskMetas>
-							</>
-						)}
-					</TaskContent>
-				</Tooltip>
+								) : (
+									<div />
+								)}
+								<TaskReminderIcon
+									item={item}
+									taskUrlPrefix={taskUrlPrefix}
+									baseUrl={baseUrl}
+									locationSearch={location.search}
+								/>
+								{item.attachments.length > 0 ? (
+									<Tooltip label="Fichiers joints">
+										<TaskIconText
+											inactive={false}
+											icon={
+												<MaterialIcon
+													icon="attach_file"
+													size="tiny"
+												/>
+											}
+											style={{
+												fontWeight: '600',
+											}}
+											content={
+												<>{item.attachments.length}</>
+											}
+										/>
+									</Tooltip>
+								) : (
+									<div />
+								)}
+							</TaskMetas>
+						</>
+					)}
+				</TaskContent>
 			</TaskContainer>
 		</div>
 	);

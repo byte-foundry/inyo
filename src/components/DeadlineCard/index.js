@@ -13,6 +13,7 @@ const CardElem = styled(Link)`
 	cursor: pointer;
 	display: flex;
 	align-items: flex-start;
+	text-decoration: none;
 
 	transition: all 300ms ease;
 

@@ -12,11 +12,15 @@ const CommentImage = styled('div')`
 	border-radius: 50%;
 	background: ${props => props.color};
 	min-width: ${props => props.size}px;
+	width: ${props => props.size}px;
+	min-height: ${props => props.size}px;
 	height: ${props => props.size}px;
 	text-align: center;
 	line-height: ${props => props.size}px;
 	color: ${primaryWhite};
 	text-transform: uppercase;
+	font-size: ${props => props.size / 2}px;
+	font-weight: 500;
 `;
 
 const InitialIdentifier = ({person, size = 40}) => {

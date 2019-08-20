@@ -367,6 +367,7 @@ function TaskRow({
 												marginRight: '5px',
 											}}
 											icon="person"
+											size="tiny"
 										/>
 										{item.linkedCustomer
 										|| (item.section
@@ -378,7 +379,7 @@ function TaskRow({
 														&& item.section.project
 															.customer)
 													}
-													size={24}
+													size={20}
 												/>
 											) : (
 												<span style={{marginLeft: '5px'}}>
@@ -394,11 +395,12 @@ function TaskRow({
 												marginRight: '5px',
 											}}
 											icon="face"
+											size="tiny"
 										/>
 										{item.assignee ? (
 											<InitialIdentifier
 												person={item.assignee}
-												size={24}
+												size={20}
 											/>
 										) : (
 											<span style={{marginLeft: '5px'}}>
@@ -440,23 +442,17 @@ function TaskRow({
 													<MaterialIcon
 														icon="attach_file"
 														size="tiny"
-														color={accentGrey}
 													/>
 												}
+												style={{
+													fontWeight: '600',
+												}}
 												content={
 													<>
 														{
 															item.attachments
 																.length
-														}{' '}
-														<Plural
-															singular="fichier"
-															plural="fichiers"
-															value={
-																item.attachments
-																	.length
-															}
-														/>
+														}
 													</>
 												}
 											/>

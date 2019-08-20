@@ -11,6 +11,7 @@ const CardElem = styled(Link)`
 	font-size: 0.75rem;
 	line-height: 1;
 	cursor: pointer;
+	display: flex;
 
 	transition: all 300ms ease;
 

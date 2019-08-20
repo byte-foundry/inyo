@@ -36,7 +36,7 @@ function TaskComment({
 }) {
 	let unreadCommentLength = (item.comments || []).length;
 
-	if (!noComment && item.comments.length > 0) {
+	if (!noComment && unreadCommentLength > 0) {
 		unreadCommentLength = item.comments.filter(
 			comment => !comment.views.find(
 				e => e.viewer.__typename
@@ -68,14 +68,6 @@ function TaskComment({
 					{item.comments.length > 0 ? item.comments.length : ''}
 				</CommentNumber>
 			</CommentWrap>
-			{item.description && (
-				<Tooltip
-					key={`label-task-comment-${item.id}`}
-					label="Lire la description de cette tâche"
-				>
-					<IconButton icon="assignment" size="tiny" />
-				</Tooltip>
-			)}
 		</TaskInfosItemLink>
 	);
 }

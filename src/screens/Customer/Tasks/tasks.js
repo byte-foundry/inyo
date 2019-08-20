@@ -57,7 +57,7 @@ const CustomerTasks = ({
 
 	if (error) throw error;
 
-	const {tasks} = data;
+	const tasks = [...data.tasks];
 
 	// order by creation date
 	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

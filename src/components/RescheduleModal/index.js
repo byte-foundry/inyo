@@ -6,7 +6,7 @@ import {useMutation} from 'react-apollo-hooks';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import {Button, P} from '../../utils/new/design-system';
-import Task from '../TasksList/task';
+import Task from '../CustomerTaskRow';
 
 const WrapTasks = styled('div')`
 	margin: 1rem 0 2rem;

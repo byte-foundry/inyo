@@ -173,7 +173,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 const TaskContent = styled('div')`
 	flex: 1;
 	display: grid;
-	grid-template-columns: minmax(200px, auto) minmax(100px, 200px) 80px 110px;
+	grid-template-columns: minmax(200px, auto) minmax(100px, 150px) 80px 110px;
 	grid-gap: 15px;
 	align-items: center;
 	position: relative;
@@ -199,11 +199,19 @@ const TaskContent = styled('div')`
 		grid-template-columns: minmax(200px, 4fr) 1fr;
 	}
 `;
+const ProjectNameWrap = styled('div')`
+	display: flex;
+`;
 
 const EmptyProjectName = styled('div')`
-	text-align: right;
 	color: ${primaryGrey};
 	text-decoration: none;
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	text-align: right;
+	flex: 1;
 `;
 
 const ProjectName = EmptyProjectName.withComponent(Link);
@@ -344,69 +352,77 @@ function TaskRow({
 					</TaskHeader>
 					{!noProject
 						&& (item.section && item.section.project ? (
-							<ProjectName
-								to={`/app/tasks?projectId=${item.section.project.id}`}
-								onClick={(e) => {
-									// needed to avoid another history push to be triggered, should be investigated
-									e.stopPropagation();
-								}}
-							>
-								{item.section.project.name}
-							</ProjectName>
+							<Tooltip label="Ouvrir le projet">
+								<ProjectNameWrap>
+									<ProjectName
+										to={`/app/tasks?projectId=${item.section.project.id}`}
+										onClick={(e) => {
+											// needed to avoid another history push to be triggered, should be investigated
+											e.stopPropagation();
+										}}
+									>
+										{item.section.project.name}
+									</ProjectName>
+								</ProjectNameWrap>
+							</Tooltip>
 						) : (
 							<EmptyProjectName>&mdash;</EmptyProjectName>
 						))}
 					{!noData && (
 						<>
 							{isCustomerTask(item.type) ? (
-								<CustomerCondensed>
-									<MaterialIcon
-										style={{
-											marginTop: '5px',
-											marginRight: '5px',
-										}}
-										icon="person"
-										size="tiny"
-									/>
-									{item.linkedCustomer
-									|| (item.section
-										&& item.section.project.customer) ? (
+								<Tooltip label="Client responsable de la tâche">
+									<CustomerCondensed>
+										<MaterialIcon
+											style={{
+												marginTop: '5px',
+												marginRight: '5px',
+											}}
+											icon="person"
+											size="tiny"
+										/>
+										{item.linkedCustomer
+										|| (item.section
+											&& item.section.project.customer) ? (
+												<InitialIdentifier
+													person={
+														item.linkedCustomer
+													|| (item.section
+														&& item.section.project
+															.customer)
+													}
+													size={20}
+												/>
+											) : (
+												<span style={{marginLeft: '5px'}}>
+												&mdash;
+												</span>
+											)}
+									</CustomerCondensed>
+								</Tooltip>
+							) : (
+								<Tooltip label="Collaborateur responsable de la tâche">
+									<CustomerCondensed>
+										<MaterialIcon
+											style={{
+												marginTop: '5px',
+												marginRight: '5px',
+											}}
+											icon="face"
+											size="tiny"
+										/>
+										{item.assignee ? (
 											<InitialIdentifier
-												person={
-													item.linkedCustomer
-												|| (item.section
-													&& item.section.project
-														.customer)
-												}
+												person={item.assignee}
 												size={20}
 											/>
 										) : (
 											<span style={{marginLeft: '5px'}}>
-											&mdash;
+												&mdash;
 											</span>
 										)}
-								</CustomerCondensed>
-							) : (
-								<CustomerCondensed>
-									<MaterialIcon
-										style={{
-											marginTop: '5px',
-											marginRight: '5px',
-										}}
-										icon="face"
-										size="tiny"
-									/>
-									{item.assignee ? (
-										<InitialIdentifier
-											person={item.assignee}
-											size={20}
-										/>
-									) : (
-										<span style={{marginLeft: '5px'}}>
-											&mdash;
-										</span>
-									)}
-								</CustomerCondensed>
+									</CustomerCondensed>
+								</Tooltip>
 							)}
 							<TaskMetas>
 								<TaskComment

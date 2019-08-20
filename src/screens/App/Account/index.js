@@ -284,6 +284,7 @@ const Account = ({location}) => {
 							Votre assistant·e
 						</ProfileTitle>
 						<UserAssistantForm
+							defaultLanguage={settings.language}
 							defaultAssistantName={settings.assistantName}
 							done={displayToast}
 						/>

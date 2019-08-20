@@ -186,6 +186,7 @@ export const UPDATE_USER_SETTINGS = gql`
 			}
 			settings {
 				assistantName
+				language
 			}
 		}
 	}

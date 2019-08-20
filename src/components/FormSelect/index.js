@@ -21,6 +21,7 @@ function FormSelect({
 	options,
 	css,
 	style,
+	onChange,
 	...rest
 }) {
 	return (
@@ -41,11 +42,12 @@ function FormSelect({
 				{({form}) => (
 					<Select
 						id={name}
-						onChange={(selected) => {
+						onChange={(selected, ...args) => {
 							form.setFieldValue(
 								name,
 								selected && selected.value,
 							);
+							onChange(selected, ...args);
 						}}
 						onBlur={(...args) => {
 							form.setFieldTouched(name);
@@ -69,5 +71,9 @@ function FormSelect({
 		</FormSelectMain>
 	);
 }
+
+FormSelect.defaultProps = {
+	onChange: () => {},
+};
 
 export default FormSelect;

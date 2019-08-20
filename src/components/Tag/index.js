@@ -5,7 +5,7 @@ const TagElem = styled('div')`
 	background-color: ${props => props.bg};
 	color: ${props => props.color};
 	border-radius: 2px;
-	padding: 3px 10px;
+	padding: 0 5px;
 	margin-right: 5px;
 	text-decoration: none;
 	display: inline-block;

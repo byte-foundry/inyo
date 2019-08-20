@@ -14,6 +14,7 @@ import Plural from '../Plural';
 import TaskCollaboratorList from '../TaskCollaboratorList';
 import TaskComment from '../TaskComment';
 import TaskCustomerInput from '../TaskCustomerInput';
+import TaskDescription from '../TaskDescription';
 import TaskDueDate from '../TaskDueDate';
 import TaskReminderIcon from '../TaskReminderIcon';
 import TaskUnitInfo from '../TaskUnitInfo';
@@ -79,7 +80,6 @@ function TaskInfosInputs({
 			<IconsWrap>
 				{!noComment && (
 					<TaskComment
-						key={`TaskComment-${item.id}`}
 						taskUrlPrefix={taskUrlPrefix}
 						baseUrl={baseUrl}
 						item={item}
@@ -87,6 +87,11 @@ function TaskInfosInputs({
 						customerToken={customerToken}
 					/>
 				)}
+				<TaskDescription
+					taskUrlPrefix={taskUrlPrefix}
+					baseUrl={baseUrl}
+					item={item}
+				/>
 				<TaskReminderIcon
 					item={item}
 					customerToken={customerToken}

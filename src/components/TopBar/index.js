@@ -31,6 +31,14 @@ export const TopBarMenu = styled('div')`
 export const TopBarLogoNotif = styled(TopBarMenu)`
 	margin-right: 20px;
 	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		justify-content: start;
+
+		a {
+			margin-right: 1rem;
+		}
+	}
 `;
 
 export const TopBarMenuLink = styled(ForwardedRefNavLink)`

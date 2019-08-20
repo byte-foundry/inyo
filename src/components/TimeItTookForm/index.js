@@ -26,8 +26,8 @@ const SuggestedTime = styled('button')`
 	line-height: 0;
 	cursor: pointer;
 	transition: all 300ms ease;
-	margin: 0 5px;
-	padding: 1rem 0;
+	margin: 0 5px 0 0;
+	padding: 0.5rem 0;
 	color: ${props => (props.selected ? primaryWhite : primaryBlack)};
 
 	:hover {
@@ -114,13 +114,13 @@ const TimeItTookForm = ({
 				inputStyle={({value, isHours}) => (value * 60 * (isHours ? 1 : exactWorkingTime) === selection
 					? css`
 								border: 2px solid ${primaryPurple};
-								padding-top: 1rem;
-								padding-bottom: 1rem;
+								padding-top: 0.5rem;
+								padding-bottom: 0.5rem;
 						  `
 					: css`
 								border: 2px solid transparent;
-								padding-top: 1rem;
-								padding-bottom: 1rem;
+								padding-top: 0.5rem;
+								padding-bottom: 0.5rem;
 						  `)
 				}
 			/>

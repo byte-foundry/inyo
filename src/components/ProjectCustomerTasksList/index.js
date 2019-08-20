@@ -7,8 +7,8 @@ import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
 import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA_WITH_TOKEN} from '../../utils/queries';
+import Task from '../CustomerTaskRow';
 import InlineEditable from '../InlineEditable';
-import Task from '../TasksList/task';
 
 const TasksListContainer = styled(LayoutMainElem)`
 	margin-top: 0;

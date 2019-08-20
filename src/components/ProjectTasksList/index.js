@@ -1,7 +1,6 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import Portal from '@reach/portal';
-import gql from 'graphql-tag';
 import React, {Suspense, useCallback, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
@@ -46,7 +45,7 @@ import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
 import MaterialIcon from '../MaterialIcon';
-import Task from '../TasksList/task';
+import Task from '../TaskRow';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
 
@@ -512,7 +511,7 @@ const DraggableTask = ({
 			}}
 		>
 			{isOver && <DragSeparator />}
-			<Task item={task} key={task.id} {...rest} isDraggable />
+			<Task noProject item={task} key={task.id} {...rest} isDraggable />
 		</div>
 	);
 };

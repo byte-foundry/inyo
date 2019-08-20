@@ -4,6 +4,7 @@ import React, {useContext} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
 import {
@@ -114,7 +115,11 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 					<IconButton
 						icon="format_list_bulleted"
 						size="tiny"
-						label="Tâches du projet"
+						label={
+							<fbt project="inyo" desc="project task list">
+								Tâches du projet
+							</fbt>
+						}
 						current={activeView === 'tasks' || !activeView}
 					/>
 				</SidebarLink>
@@ -125,21 +130,37 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 					<IconButton
 						icon="people_outline"
 						size="tiny"
-						label="Notes partagées"
+						label=<fbt project="inyo" desc="project shared notes">
+							Notes partagées
+						</fbt>
 						current={activeView === 'shared-notes'}
 					/>
 				</SidebarLink>
 			</SubSection>
 			<SubSection>
-				<SidebarHeading>Votre prestataire</SidebarHeading>
+				<SidebarHeading>
+					<fbt project="inyo" desc="your contractor">
+						Votre prestataire
+					</fbt>
+				</SidebarHeading>
 				<IssuerNameAndAddress issuer={project.issuer} />
 			</SubSection>
 
 			{project.deadline && (
 				<SubSection>
-					<SidebarHeading>Deadline</SidebarHeading>
+					<SidebarHeading>
+						<fbt project="inyo" desc="deadline">
+							Deadline
+						</fbt>
+					</SidebarHeading>
 					<DateContainer>
-						<Tooltip label="Date limite du projet">
+						<Tooltip
+							label={
+								<fbt project="inyo" desc="deadline tooltip">
+									Date limite du projet
+								</fbt>
+							}
+						>
 							<BigNumber>
 								{moment(project.deadline).format('DD/MM/YYYY')}
 							</BigNumber>
@@ -150,15 +171,35 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
-					<SubHeading>Marge jours restants</SubHeading>
-					<Tooltip label="Nombre de jours travaillés avant deadline">
+					<SubHeading>
+						<fbt project="inyo" desc="margin of day available">
+							Marge jours restants
+						</fbt>
+					</SubHeading>
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="margin of day available tooltip"
+							>
+								Nombre de jours travaillés avant deadline
+							</fbt>
+						}
+					>
 						<BigNumber>
-							{project.daysUntilDeadline}&nbsp;
-							<Plural
-								value={project.daysUntilDeadline}
-								singular="jour"
-								plural="jours"
-							/>
+							<fbt
+								project="inyo"
+								desc="display margin of days available"
+							>
+								<fbt:plural
+									name="margin of days count"
+									showCount="yes"
+									count={project.daysUntilDeadline}
+									many="jours"
+								>
+									jour
+								</fbt:plural>
+							</fbt>
 						</BigNumber>
 					</Tooltip>
 				</SubSection>

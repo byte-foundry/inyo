@@ -62,9 +62,11 @@ const OnboardingCustomAssistant = ({
 	return (
 		<OnboardingStep>
 			<StepSubtitle>
-				<fbt project="inyo" desc="onboarding assistant title">
+				<fbt project="inyo" desc="onboarding assistant title 1st">
 					Comment souhaitez-vous appeler
-					<br />
+				</fbt>
+				<br />
+				<fbt project="inyo" desc="onboarding assistant title 2nd">
 					votre assistant·e ?
 				</fbt>
 			</StepSubtitle>

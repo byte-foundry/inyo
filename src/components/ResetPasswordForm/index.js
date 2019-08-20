@@ -99,16 +99,18 @@ class ResetPasswordForm extends Component {
 							Ce lien n'est pas ou plus valide. Essayez de
 							recommencer en vous rendant sur la page{' '}
 							<fbt:param name="link">
-								<Link to="/auth/forgotten-password">
-									{
-										<fbt
-											project="inyo"
-											desc="forgotten password"
-										>
-											Mot de passe oublié ?
-										</fbt>
-									}
-								</Link>{' '}
+								{
+									<Link to="/auth/forgotten-password">
+										{
+											<fbt
+												project="inyo"
+												desc="forgotten password"
+											>
+												Mot de passe oublié ?
+											</fbt>
+										}
+									</Link>
+								}
 							</fbt:param>
 							.
 						</fbt>

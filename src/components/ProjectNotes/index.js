@@ -105,14 +105,23 @@ const ProjectNotes = ({
 							],
 						}}
 						placeholder={
-							<fbt
-								project="inyo"
-								desc="Project notes placeholder"
-							>
-								Écrivez des notes...<br />
-								Pour accèder aux options sélectionnez un bout de
-								texte. Vous pouvez aussi utiliser markdown.
-							</fbt>
+							<>
+								<fbt
+									project="inyo"
+									desc="Project notes placeholder 1st"
+								>
+									Écrivez des notes...
+								</fbt>
+								<br />
+								<fbt
+									project="inyo"
+									desc="Project notes placeholder 2nd"
+								>
+									Pour accèder aux options sélectionnez un
+									bout de texte. Vous pouvez aussi utiliser
+									markdown.
+								</fbt>
+							</>
 						}
 					/>
 					{saved && (

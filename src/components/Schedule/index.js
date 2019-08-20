@@ -5,6 +5,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
@@ -26,7 +27,11 @@ import RawPieChart from '../PieChart';
 import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
-import UnitDisplay from '../UnitDisplay';
+import {
+	UnitAvailableDisplay,
+	UnitOvertimeDisplay,
+	UnitWorkedDisplay,
+} from '../UnitDisplay';
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -332,13 +337,7 @@ const Schedule = ({
 							<DayInfos>
 								<PieChart value={timeSpent} />
 								<p>
-									<UnitDisplay
-										unit={timeSpent}
-										singularF={' travaillée'}
-										pluralF={' travaillées'}
-										singularM={' travaillé'}
-										pluralM={' travaillés'}
-									/>
+									<UnitWorkedDisplay unit={timeSpent} />
 								</p>
 							</DayInfos>
 						);
@@ -348,11 +347,7 @@ const Schedule = ({
 							<DayInfos>
 								<PieChart value={1 - timeLeft} />
 								<p>
-									<UnitDisplay
-										unit={timeLeft}
-										singular=" encore disponible"
-										plural=" encore disponibles"
-									/>
+									<UnitAvailableDisplay unit={timeLeft} />
 								</p>
 							</DayInfos>
 						);
@@ -362,11 +357,7 @@ const Schedule = ({
 							<DayInfos>
 								<PieChart value={1 - timeLeft} />
 								<p>
-									<UnitDisplay
-										unit={-timeLeft}
-										singular=" supplémentaire"
-										plural=" supplémentaires"
-									/>
+									<UnitOvertimeDisplay unit={-timeLeft} />
 								</p>
 							</DayInfos>
 						);
@@ -386,8 +377,13 @@ const Schedule = ({
 									/>
 								</Icon>
 								<p>
-									Ajoutez des durées à ces tâches pour qu'Inyo
-									vous aide à gérer votre temps.
+									<fbt
+										project="inyo"
+										desc="Add task duration to get info"
+									>
+										Ajoutez des durées à ces tâches pour
+										qu'Inyo vous aide à gérer votre temps.
+									</fbt>
 								</p>
 							</DayInfos>
 						);

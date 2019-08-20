@@ -185,11 +185,16 @@ class OnboardingThirdStep extends Component {
 										<Label onboarding>
 											<fbt
 												project="inyo"
-												desc="onboarding first step description"
+												desc="onboarding first step description 1st part"
 											>
 												Définissez vos horaires de
 												travail
-												<br />
+											</fbt>
+											<br />
+											<fbt
+												project="inyo"
+												desc="onboarding first step description 2nd part"
+											>
 												(cela nous aide à organiser les
 												tâches que vous pouvez effectuer
 												dans une journée)
@@ -275,10 +280,15 @@ class OnboardingThirdStep extends Component {
 										<Label onboarding>
 											<fbt
 												project="inyo"
-												desc="onboarding first step days working description"
+												desc="onboarding first step days working description 1st part"
 											>
 												Définissez vos jours travaillés
-												<br />
+											</fbt>
+											<br />
+											<fbt
+												project="inyo"
+												desc="onboarding first step days working description 2nd part"
+											>
 												(Pour vous aider à ne pas être
 												débordé et ne jamais manquer une
 												deadline)

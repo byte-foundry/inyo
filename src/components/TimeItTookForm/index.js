@@ -40,35 +40,40 @@ const SuggestedTime = styled('button')`
 const TimeItTookForm = ({
 	estimation, onChange, onSubmit, ...rest
 }) => {
-	const {workingTime: exactWorkingTime = 8} = useUserInfos();
-	const [selection, setSelection] = useState(
-		estimation * exactWorkingTime * 60,
-	);
-	const workingTime = Math.ceil(exactWorkingTime);
+	const {workingTime = 8} = useUserInfos();
+	const [selection, setSelection] = useState(estimation * workingTime * 60);
 
 	useEffect(() => {
-		onChange(selection / (exactWorkingTime * 60));
+		onChange(selection / (workingTime * 60));
 	}, [selection]);
 
 	// every 15 minutes until 2h
-	const timeList = [15, 30, 45, 60, 75, 90, 105, 120];
+	let timeList = [15, 30, 45, 60, 75, 90, 105, 120];
 	const workingDay = workingTime * 60;
 
 	// every day until there are 3 entries than the estimation
 	do {
+		const lastTime = timeList[timeList.length - 1];
+
+		// if the last entry is just before 1 working day, then let's switch to days
+		if (lastTime + 30 > workingDay && lastTime < workingDay) {
+			timeList.push(workingDay);
+		}
 		// every half hours until working time
-		if (timeList[timeList.length - 1] < workingDay) {
-			timeList.push(timeList[timeList.length - 1] + 30);
+		else if (lastTime < workingDay) {
+			timeList.push(lastTime + 30);
 		}
 		// every half day until 6 day
-		else if (timeList[timeList.length - 1] < workingDay * 6) {
-			timeList.push(timeList[timeList.length - 1] + workingDay / 2);
+		else if (lastTime < workingDay * 6) {
+			timeList.push(lastTime + workingDay / 2);
 		}
 		// every day until estimation
 		else {
-			timeList.push(timeList[timeList.length - 1] + workingDay);
+			timeList.push(lastTime + workingDay);
 		}
 	} while (timeList[timeList.length - 3] <= estimation * workingDay);
+
+	timeList = timeList.filter(t => t !== estimation * workingDay);
 
 	let nextTimeIndex = 0;
 
@@ -106,12 +111,12 @@ const TimeItTookForm = ({
 			))}
 			<UnitInput
 				unit={estimation}
-				onBlur={value => setSelection(value * exactWorkingTime * 60)}
+				onBlur={value => setSelection(value * workingTime * 60)}
 				onSubmit={value => onSubmit(value)}
-				onTab={value => setSelection(value * exactWorkingTime * 60)}
-				onFocus={value => setSelection(value * exactWorkingTime * 60)}
+				onTab={value => setSelection(value * workingTime * 60)}
+				onFocus={value => setSelection(value * workingTime * 60)}
 				autoFocus={false}
-				inputStyle={({value, isHours}) => (value * 60 * (isHours ? 1 : exactWorkingTime) === selection
+				inputStyle={({value, isHours}) => (value * 60 * (isHours ? 1 : workingTime) === selection
 					? css`
 								border: 2px solid ${primaryPurple};
 								padding-top: 0.5rem;

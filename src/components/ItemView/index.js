@@ -480,7 +480,7 @@ const Item = ({
 							</Meta>
 						</Tooltip>
 					)}
-				{isCustomerTask(item.type) ? (
+				{isCustomerTask(item.type) || !item.section ? (
 					<Tooltip label="Personne liée à cette tâche">
 						<Meta>
 							<MaterialIcon icon="person_outline" size="tiny" />

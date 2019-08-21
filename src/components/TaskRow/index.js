@@ -370,7 +370,7 @@ function TaskRow({
 						))}
 					{!noData && (
 						<>
-							{isCustomerTask(item.type) ? (
+							{isCustomerTask(item.type) || !item.section ? (
 								<Tooltip label="Client responsable de la tâche">
 									<CustomerCondensed>
 										<MaterialIcon

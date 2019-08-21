@@ -130,9 +130,11 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 					<IconButton
 						icon="people_outline"
 						size="tiny"
-						label=<fbt project="inyo" desc="project shared notes">
-							Notes partagées
-						</fbt>
+						label={
+							<fbt project="inyo" desc="project shared notes">
+								Notes partagées
+							</fbt>
+						}
 						current={activeView === 'shared-notes'}
 					/>
 				</SidebarLink>

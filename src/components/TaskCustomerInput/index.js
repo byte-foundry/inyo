@@ -1,5 +1,6 @@
 import React, {useCallback, useMemo, useState} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName} from '../../utils/functions';
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
 import CustomerDropdown from '../CustomersDropdown';
@@ -56,7 +57,13 @@ function TaskCustomerInput({
 	}
 
 	return (
-		<Tooltip label="Personne liée à la tâche">
+		<Tooltip
+			label={
+				<fbt project="inyo" desc="linked customer">
+					Personne liée à la tâche
+				</fbt>
+			}
+		>
 			<TaskIconText
 				inactive={editCustomer}
 				icon={

@@ -4,11 +4,11 @@ import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {REMOVE_TAG, UPDATE_TAG} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import FormElem from '../FormElem';
 import IconButton from '../IconButton';
-import Plural from '../Plural';
 import Tag from '../Tag';
 
 const TagLine = styled('div')`
@@ -69,13 +69,17 @@ function TagForm({tag}) {
 				<TagItemsNumber>
 					{tag.items.length > 0 && (
 						<>
-							{tag.items.length}{' '}
-							<Plural
-								value={tag.items.length}
-								singular="tâche"
-								plural="tâches"
-							/>{' '}
-							avec ce tag
+							<fbt project="inyo" desc="task per tag info">
+								<fbt:plural
+									name="task per tag count"
+									count={tag.items.length}
+									many="tâches"
+									showCount="yes"
+								>
+									tâche
+								</fbt:plural>{' '}
+								avec ce tag
+							</fbt>
 						</>
 					)}
 				</TagItemsNumber>
@@ -110,7 +114,9 @@ function TagForm({tag}) {
 							setIsDeleting(false);
 						}}
 					>
-						Annuler
+						<fbt project="inyo" desc="cancel delete tag">
+							Annuler
+						</fbt>
 					</Button>
 					<Button
 						type="submit"
@@ -129,7 +135,9 @@ function TagForm({tag}) {
 							setIsDeleting(false);
 						}}
 					>
-						Supprimer le tag
+						<fbt project="inyo" desc="confirm delete tag">
+							Supprimer le tag
+						</fbt>
 					</Button>
 				</TagLine>
 			)}
@@ -142,7 +150,11 @@ function TagForm({tag}) {
 							colorText: tag.colorText,
 						}}
 						validateSchema={Yup.object().shape({
-							name: Yup.string().required('Requis'),
+							name: Yup.string().required(
+								<fbt project="inyo" desc="required">
+									Requis
+								</fbt>,
+							),
 							colorBg: Yup.string().matches(/#[0-9a-fA-F]{6}/),
 							colorText: Yup.string().matches(/#[0-9a-fA-F]{6}/),
 						})}
@@ -167,7 +179,14 @@ function TagForm({tag}) {
 								actions.setSubmitting(false);
 								actions.setErrors(error);
 								actions.setStatus({
-									msg: "Un problème c'est produit",
+									msg: (
+										<fbt
+											project="inyo"
+											desc="something went wrong"
+										>
+											Un problème c'est produit
+										</fbt>
+									),
 								});
 							}
 						}}
@@ -181,7 +200,14 @@ function TagForm({tag}) {
 										<FormElem
 											{...props}
 											name="name"
-											label="Nom"
+											label={
+												<fbt
+													project="inyo"
+													desc="tag name"
+												>
+													Nom
+												</fbt>
+											}
 										/>
 									</TagFormField>
 									<TagFormField>
@@ -191,7 +217,14 @@ function TagForm({tag}) {
 										<FormElem
 											{...props}
 											name="colorBg"
-											label="Couleur fond"
+											label={
+												<fbt
+													project="inyo"
+													desc="tag background color"
+												>
+													Couleur fond
+												</fbt>
+											}
 										/>
 									</TagFormField>
 									<TagFormField>
@@ -201,7 +234,14 @@ function TagForm({tag}) {
 										<FormElem
 											{...props}
 											name="colorText"
-											label="Couleur texte"
+											label={
+												<fbt
+													project="inyo"
+													desc="tag text color"
+												>
+													Couleur texte
+												</fbt>
+											}
 										/>
 									</TagFormField>
 									<TagLine>
@@ -214,14 +254,24 @@ function TagForm({tag}) {
 												setIsEditing(false);
 											}}
 										>
-											Annuler
+											<fbt
+												project="inyo"
+												desc="cancel tag create"
+											>
+												Annuler
+											</fbt>
 										</Button>
 										<Button
 											type="submit"
 											disabled={isSubmitting}
 											primary
 										>
-											Enregistrer
+											<fbt
+												project="inyo"
+												desc="confirm tag create"
+											>
+												Enregistrer
+											</fbt>
 										</Button>
 									</TagLine>
 								</TagFormElem>

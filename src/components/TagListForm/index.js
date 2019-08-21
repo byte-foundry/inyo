@@ -46,7 +46,11 @@ function CreateTagForm({tags}) {
 		<Formik
 			initialValues={{name: ''}}
 			validationSchema={Yup.object().shape({
-				name: Yup.string().required('Requis'),
+				name: Yup.string().required(
+					<fbt project="inyo" desc="required">
+						Requis
+					</fbt>,
+				),
 			})}
 			onSubmit={async (values, actions) => {
 				try {
@@ -80,7 +84,11 @@ function CreateTagForm({tags}) {
 					actions.setSubmitting(false);
 					actions.setErrors(err);
 					actions.setStatus({
-						msg: "Quelque chose ne s'est pas passé comme prévu",
+						msg: (
+							<fbt project="inyo" desc="something went wrong">
+								Quelque chose ne s'est pas passé comme prévu
+							</fbt>
+						),
 					});
 				}
 			}}
@@ -95,8 +103,22 @@ function CreateTagForm({tags}) {
 								<FormElem
 									{...props}
 									name="name"
-									label="Nom du tags"
-									placeholder="Administratif"
+									label={
+										<fbt
+											project="inyo"
+											desc="tag name tag list form label"
+										>
+											Nom du tag
+										</fbt>
+									}
+									placeholder={
+										<fbt
+											project="inyo"
+											desc="tag name tag list form placeholder"
+										>
+											Administratif
+										</fbt>
+									}
 									required
 									big
 								/>
@@ -106,7 +128,9 @@ function CreateTagForm({tags}) {
 								type="submit"
 								size="big"
 							>
-								Créer un tag
+								<fbt project="inyo" desc="create tag">
+									Créer un tag
+								</fbt>
 							</ButtonInRow>
 						</InputRow>
 					</form>
@@ -128,10 +152,14 @@ function TagListForm() {
 				<>
 					<TagEmptyContainer>
 						<P>
-							Vous n'avez pas encore créé de tags.
+							<fbt project="inyo" desc="no tag message 1st part">
+								Vous n'avez pas encore créé de tags.
+							</fbt>
 							<br />
-							Créer votre premier et commencer a classer vos
-							tâches.
+							<fbt project="inyo" desc="no tag message 2nd part">
+								Créer votre premier et commencer a classer vos
+								tâches.
+							</fbt>
 						</P>
 					</TagEmptyContainer>
 					<CreateTagForm tags={data.me.tags} />

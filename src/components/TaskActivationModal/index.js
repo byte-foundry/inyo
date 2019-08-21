@@ -30,7 +30,9 @@ function TaskActivationModal({
 	return (
 		<>
 			<StickyHeader customer={isCustomerTask(item.type)}>
-				Prévisualisation des actions{' '}
+				<fbt project="inyo" desc="previsualize action">
+					Prévisualisation des actions
+				</fbt>{' '}
 				<Apostrophe
 					value={assistantName}
 					withVowel="d'"

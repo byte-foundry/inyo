@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {gray30, gray50, gray80} from '../../utils/content';
 import {
@@ -105,7 +106,9 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 	return (
 		<TaskInputDropdown>
 			<TaskInputDropdownHeader>
-				Tâches automatiques et/ou prédéfinies
+				<fbt project="inyo" desc="task type dropdown heading">
+					Tâches automatiques et/ou prédéfinies
+				</fbt>
 			</TaskInputDropdownHeader>
 			<List id="task-dropdown-list">
 				{filteredTypes.map(({icon, name, description}, index) => (

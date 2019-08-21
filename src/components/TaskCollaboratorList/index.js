@@ -5,6 +5,7 @@ import React, {
 import {useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName} from '../../utils/functions';
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
 import {GET_PROJECT_COLLAB_LINK} from '../../utils/queries';
@@ -47,7 +48,13 @@ function TaskCollaboratorList({projectId, taskId, assignee}) {
 		<TaskIconText
 			ref={containerRef}
 			icon={
-				<Tooltip label="Tâche assigné à">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="assigned task to">
+							Tâche assigné à
+						</fbt>
+					}
+				>
 					<MaterialIcon icon="face" size="tiny" color={accentGrey} />
 				</Tooltip>
 			}

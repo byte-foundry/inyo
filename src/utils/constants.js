@@ -120,8 +120,16 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskIconValidatedUrl,
 		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
 		type: 'DEFAULT',
-		name: 'Basique',
-		description: 'Une tâche dont vous êtes responsable',
+		name: (
+			<fbt project="inyo" desc="basic task name">
+				Basique
+			</fbt>
+		),
+		description: (
+			<fbt project="inyo" desc="basic task description">
+				Une tâche dont vous êtes responsable
+			</fbt>
+		),
 	},
 	{
 		icon: <TaskCollaboratorIcon />,
@@ -130,8 +138,16 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskCollaboratorIconValidatedUrl,
 		iconUrlValidatedAnim: TaskCollaboratorIconValidatedAnimUrl,
 		type: 'DEFAULT_ASSIGNED',
-		name: 'Basique',
-		description: 'Une tâche dont la personne assigné est responsable',
+		name: (
+			<fbt project="inyo" desc="basic task name">
+				Basique
+			</fbt>
+		),
+		description: (
+			<fbt project="inyo" desc="basic task description">
+				Une tâche dont la personne assigné est responsable
+			</fbt>
+		),
 	},
 	{
 		icon: <TaskCustomerIcon />,
@@ -140,8 +156,16 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		iconUrlValidatedAnim: TaskCustomerIconValidatedAnimUrl,
 		type: 'CUSTOMER',
-		name: 'Tâche attribuée au client',
-		description: 'Une tâche à réaliser par votre client',
+		name: (
+			<fbt project="inyo" desc="customer task name">
+				Tâche attribuée au client
+			</fbt>
+		),
+		description: (
+			<fbt project="inyo" desc="customer task description">
+				Une tâche à réaliser par votre client
+			</fbt>
+		),
 	},
 	{
 		icon: <ContentAcquisitionIcon />,
@@ -149,8 +173,16 @@ export const ITEM_TYPES = [
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',
-		name: 'Récupération contenu',
-		description: 'Lister et récupérer les contenus nécessaires',
+		name: (
+			<fbt project="inyo" desc="content acquisition name">
+				Récupération contenu
+			</fbt>
+		),
+		description: (
+			<fbt project="inyo" desc="content acquisition description">
+				Lister et récupérer les contenus nécessaires
+			</fbt>
+		),
 	},
 	{
 		icon: <SectionIcon />,

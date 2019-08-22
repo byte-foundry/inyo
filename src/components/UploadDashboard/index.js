@@ -6,6 +6,7 @@ import DashboardModal from '@uppy/react/lib/DashboardModal';
 import React, {useEffect, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {UPLOAD_ATTACHMENTS} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 

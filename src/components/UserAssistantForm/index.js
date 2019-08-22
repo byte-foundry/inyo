@@ -4,6 +4,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {gray20} from '../../utils/content';
 import illus from '../../utils/images/bermuda-hello-edwige.svg';
@@ -58,7 +59,11 @@ const UserAssistantForm = ({defaultAssistantName, done}) => {
 					assistantName: defaultAssistantName,
 				}}
 				validationSchema={Yup.object().shape({
-					assistantName: Yup.string().required('Requis'),
+					assistantName: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(true);
@@ -81,14 +86,20 @@ const UserAssistantForm = ({defaultAssistantName, done}) => {
 							<FormElem
 								{...props}
 								name="assistantName"
-								label="Nom de l'assistant"
+								label={
+									<fbt project="inyo" desc="assistant name">
+										Nom de l'assistant
+									</fbt>
+								}
 								placeholder="Edwige"
 								padded
 								required
 							/>
 						</ProfileSection>
 						<UpdateButton type="submit" big>
-							Mettre à jour
+							<fbt project="inyo" desc="update">
+								Mettre à jour
+							</fbt>
 						</UpdateButton>
 					</form>
 				)}

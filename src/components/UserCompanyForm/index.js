@@ -6,6 +6,7 @@ import {Mutation} from 'react-apollo';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, gray20} from '../../utils/content';
 import {UPDATE_USER_COMPANY} from '../../utils/mutations';
@@ -65,7 +66,11 @@ class UserCompanyForm extends Component {
 								address: address || '',
 							}}
 							validationSchema={Yup.object().shape({
-								name: Yup.string().required('Requis'),
+								name: Yup.string().required(
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>,
+								),
 								phone: Yup.string(),
 								address: Yup.object()
 									.shape({
@@ -74,7 +79,11 @@ class UserCompanyForm extends Component {
 										postalCode: Yup.string().required(),
 										country: Yup.string().required(),
 									})
-									.required('Requis'),
+									.required(
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>,
+									),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -111,7 +120,14 @@ class UserCompanyForm extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg: "Quelque chose s'est mal passé",
+										msg: (
+											<fbt
+												project="inyo"
+												desc="something went wrong"
+											>
+												Quelque chose s'est mal passé
+											</fbt>
+										),
 									});
 								}
 							}}
@@ -131,8 +147,22 @@ class UserCompanyForm extends Component {
 													{...props}
 													name="name"
 													type="text"
-													label="Raison sociale"
-													placeholder="Bertrand SA"
+													label={
+														<fbt
+															project="inyo"
+															desc="company name"
+														>
+															Raison sociale
+														</fbt>
+													}
+													placeholder={
+														<fbt
+															project="inyo"
+															desc="company name placeholder"
+														>
+															Bertrand SA
+														</fbt>
+													}
 													padded
 													required
 												/>
@@ -140,8 +170,22 @@ class UserCompanyForm extends Component {
 													{...props}
 													name="phone"
 													type="tel"
-													label="Numéro de téléphone"
-													placeholder="0427..."
+													label={
+														<fbt
+															project="inyo"
+															desc="phone number"
+														>
+															Numéro de téléphone
+														</fbt>
+													}
+													placeholder={
+														<fbt
+															project="inyo"
+															desc="phone number"
+														>
+															0427...
+														</fbt>
+													}
 													padded
 												/>
 												<AddressAutocomplete
@@ -150,7 +194,15 @@ class UserCompanyForm extends Component {
 													name="address"
 													values={address}
 													placeholder=""
-													label="Adresse de la société"
+													label={
+														<fbt
+															project="inyo"
+															desc="company address"
+														>
+															Adresse de la
+															société
+														</fbt>
+													}
 													padded
 													required
 													style={{
@@ -170,7 +222,14 @@ class UserCompanyForm extends Component {
 											)}
 										</ProfileSection>
 										<UpdateButton type="submit" big>
-											{buttonText || 'Mettre à jour'}
+											{buttonText || (
+												<fbt
+													project="inyo"
+													desc="update"
+												>
+													Mettre à jour
+												</fbt>
+											)}
 										</UpdateButton>
 									</form>
 								);

@@ -7,6 +7,7 @@ import {useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, gray20} from '../../utils/content';
 import userIllus from '../../utils/images/bermuda-coming-soon.svg';
@@ -78,11 +79,21 @@ const UserDataForm = ({done, ...componentProps}) => {
 				}}
 				validationSchema={Yup.object().shape({
 					email: Yup.string()
-						.email('Email invalide')
-						.required('Requis')
+						.email(
+							<fbt project="inyo" desc="invalid email">
+								Email invalide
+							</fbt>,
+						)
+						.required(
+							<fbt project="inyo" desc="required">
+								Requis
+							</fbt>,
+						)
 						.test(
 							'unique-email',
-							"L'email est déjà utilisé",
+							<fbt project="inyo" desc="email is already used">
+								L'email est déjà utilisé
+							</fbt>,
 							value => email === value
 								|| debouncedCheckEmail({
 									variables: {
@@ -90,8 +101,16 @@ const UserDataForm = ({done, ...componentProps}) => {
 									},
 								}).then(({data}) => data.isAvailable),
 						),
-					firstName: Yup.string().required('Requis'),
-					lastName: Yup.string().required('Requis'),
+					firstName: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
+					lastName: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
@@ -128,7 +147,11 @@ const UserDataForm = ({done, ...componentProps}) => {
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: "Quelque chose s'est mal passé",
+							msg: (
+								<fbt project="inyo" desc="something went wrong">
+									Quelque chose s'est mal passé
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -145,8 +168,22 @@ const UserDataForm = ({done, ...componentProps}) => {
 										{...props}
 										name="firstName"
 										type="text"
-										label="Prénom"
-										placeholder="Jacques"
+										label={
+											<fbt
+												project="inyo"
+												desc="first name"
+											>
+												Prénom
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="first name placeholder"
+											>
+												Jacques
+											</fbt>
+										}
 										padded
 										required
 									/>
@@ -154,8 +191,22 @@ const UserDataForm = ({done, ...componentProps}) => {
 										{...props}
 										name="lastName"
 										type="text"
-										label="Nom"
-										placeholder="Bertrand"
+										label={
+											<fbt
+												project="inyo"
+												desc="last name"
+											>
+												Nom
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="last name placeholder"
+											>
+												Bertrand
+											</fbt>
+										}
 										padded
 										required
 									/>
@@ -163,8 +214,19 @@ const UserDataForm = ({done, ...componentProps}) => {
 										{...props}
 										name="email"
 										type="email"
-										label="Email"
-										placeholder="jacques@bertrandsa.com"
+										label={
+											<fbt project="inyo" desc="email">
+												Email
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="email placeholder"
+											>
+												jacques@bertrandsa.com
+											</fbt>
+										}
 										padded
 										required
 										style={{
@@ -179,7 +241,9 @@ const UserDataForm = ({done, ...componentProps}) => {
 								)}
 							</ProfileSection>
 							<UpdateButton type="submit" big>
-								Mettre à jour
+								<fbt project="inyo" desc="update">
+									Mettre à jour
+								</fbt>
 							</UpdateButton>
 						</form>
 					);

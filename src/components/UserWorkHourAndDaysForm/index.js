@@ -6,6 +6,7 @@ import {useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {
 	ErrorInput, gray20, Label, primaryWhite,
@@ -190,7 +191,11 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: "Quelque chose s'est mal passé",
+							msg: (
+								<fbt project="inyo" desc="something went wrong">
+									Quelque chose s'est mal passé
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -239,36 +244,75 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 									>
 										<Emoji
 											role="img"
-											aria-label="matin"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="morning"
+												>
+													matin
+												</fbt>
+											}
 											offset={0}
 											children="🌙"
 										/>
 										<Emoji
 											role="img"
-											aria-label="petit déjeuner"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="breakfast"
+												>
+													petit déjeuner
+												</fbt>
+											}
 											offset={33}
 											children="☕"
 										/>
 										<Emoji
 											role="img"
-											aria-label="déjeuner"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="lunch"
+												>
+													déjeuner
+												</fbt>
+											}
 											offset={50}
 											children="🍽️"
 										/>
 										<Emoji
 											role="img"
-											aria-label="soirée"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="evening"
+												>
+													soirée
+												</fbt>
+											}
 											offset={87}
 											children="🛌"
 										/>
 										<Emoji
 											role="img"
-											aria-label="nuit"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="night"
+												>
+													nuit
+												</fbt>
+											}
 											offset={100}
 											children="🌗"
 										/>
 									</EmojiTimeline>
-									<Label>Jours travaillés</Label>
+									<Label>
+										<fbt project="inyo" desc="working days">
+											Jours travaillés
+										</fbt>
+									</Label>
 									<WeekDaysInput
 										values={workingDays}
 										setFieldValue={setFieldValue}
@@ -277,14 +321,32 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 										{...props}
 										name="hasNotFullWeekSchedule"
 										type="checkbox"
-										label="Afficher seulement les jours travaillés
-										dans le calendrier"
+										label={
+											<fbt
+												project="inyo"
+												desc="display only worked days"
+											>
+												Afficher seulement les jours
+												travaillés dans le calendrier
+											</fbt>
+										}
 									/>
-									<Label>Fuseau horaire</Label>
+									<Label>
+										<fbt project="inyo" desc="timezone">
+											Fuseau horaire
+										</fbt>
+									</Label>
 									<FormSelect
 										{...props}
 										name="timeZone"
-										placeholder="Triez par fuseau"
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="sort by timezone"
+											>
+												Triez par fuseau
+											</fbt>
+										}
 										value={{
 											value: timeZone || 'Europe/Paris',
 											label: `${timeZone
@@ -333,7 +395,9 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 								)}
 							</ProfileSection>
 							<UpdateButton type="submit" big>
-								Mettre à jour
+								<fbt project="inyo" desc="update">
+									Mettre à jour
+								</fbt>
 							</UpdateButton>
 						</form>
 					);

@@ -87,6 +87,7 @@ const useScheduleData = () => {
 				tasks: [],
 				reminders: [],
 				deadlines: [],
+				assignedTasks: [],
 			};
 
 			scheduledTasksPerDay[finishedAtDate].tasks.push(task);

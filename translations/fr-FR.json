@@ -2256,7 +2256,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Vue principale",
+     "translations": "Main view",
      "variations": {}
     }
    ]
@@ -2266,7 +2266,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Tâches du projet",
+     "translations": "Project's tasks",
      "variations": {}
     }
    ]
@@ -2276,7 +2276,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Seulement visibles par vous",
+     "translations": "Only visible by you",
      "variations": {}
     }
    ]
@@ -2286,7 +2286,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Notes personnelles",
+     "translations": "Private notes",
      "variations": {}
     }
    ]
@@ -2296,7 +2296,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Visibles par tout le monde",
+     "translations": "Visible by you and your client",
      "variations": {}
     }
    ]
@@ -2306,7 +2306,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Notes partagées",
+     "translations": "Shared notes",
      "variations": {}
     }
    ]
@@ -2316,7 +2316,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Changer le client lié au projet",
+     "translations": "Change the project's client",
      "variations": {}
     }
    ]
@@ -2326,7 +2326,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Évolution du projet, tâches qui requièrent une action, etc.",
+     "translations": "Status report, tasks that require a client action, etc.",
      "variations": {}
     }
    ]
@@ -2336,7 +2336,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Notifier mon client par email",
+     "translations": "Notify my client by email",
      "variations": {}
     }
    ]
@@ -2346,7 +2346,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "En décochant cette option, votre client ne recevra aucune notification de l'avancée de votre projet.",
+     "translations": "By unchecking this your client will not receive notification about the project's progress.",
      "variations": {}
     }
    ]
@@ -2356,7 +2356,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Cependant, certaines des tâches sont attribuées à votre client et nécessitent l'envoi d'emails à celui-ci. Désactiver les notifications changera aussi l'attribution de ces tâches et votre client n'en sera pas averti.",
+     "translations": "Some tasks are assigned to your client et needs notification. By stopping the notifications those task will be converted to regular tasks.",
      "variations": {}
     }
    ]
@@ -2366,7 +2366,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Êtes-vous sûr de vouloir continuer?",
+     "translations": "Are you sure?",
      "variations": {}
     }
    ]
@@ -2376,7 +2376,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ce que verra votre client lorsqu'il se connecte au projet",
+     "translations": "This is what your client will see when he click on his project's link",
      "variations": {}
     }
    ]
@@ -2386,7 +2386,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Voir la vue de mon client",
+     "translations": "Check my client view",
      "variations": {}
     }
    ]
@@ -2396,7 +2396,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter un client",
+     "translations": "Add a client",
      "variations": {}
     }
    ]
@@ -2406,7 +2406,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Cette vue est celle que verra votre client lorsqu'il devra effectuer des actions.",
+     "translations": "This is what your client will see.",
      "variations": {}
     }
    ]
@@ -2416,7 +2416,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter un Collaborateurs",
+     "translations": "Add a collaborator",
      "variations": {}
     }
    ]
@@ -2426,7 +2426,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Collaborateurs du projet",
+     "translations": "Project's collaborators",
      "variations": {}
     }
    ]
@@ -2446,7 +2446,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Date limite du projet",
+     "translations": "Project's due date",
      "variations": {}
     }
    ]
@@ -2456,7 +2456,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter une deadline",
+     "translations": "Add a deadline",
      "variations": {}
     }
    ]
@@ -2466,7 +2466,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Marge restantes",
+     "translations": "Remaining days",
      "variations": {}
     }
    ]
@@ -2476,7 +2476,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Nombre de jours travaillés avant deadline",
+     "translations": "Remaining days before you need to start working the project full time",
      "variations": {}
     }
    ]
@@ -2486,7 +2486,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Copier ces tâches dans un nouveau projet",
+     "translations": "Copy these tasks in a new project",
      "variations": {}
     }
    ]
@@ -2496,7 +2496,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Dupliquer le projet",
+     "translations": "Duplicate project",
      "variations": {}
     }
    ]
@@ -2506,7 +2506,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Désarchiver le projet",
+     "translations": "Unarchive project",
      "variations": {}
     }
    ]
@@ -2516,7 +2516,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "L'email est déjà utilisé",
+     "translations": "This email is already used",
      "variations": {}
     }
    ]
@@ -2526,7 +2526,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "jean@dupont.fr",
+     "translations": "john@smith.com",
      "variations": {}
     }
    ]
@@ -2536,7 +2536,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mot de passe",
+     "translations": "Password",
      "variations": {}
     }
    ]
@@ -2546,7 +2546,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Prénom",
+     "translations": "First name",
      "variations": {}
     }
    ]
@@ -2556,7 +2556,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Jean",
+     "translations": "John",
      "variations": {}
     }
    ]
@@ -2566,7 +2566,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Nom",
+     "translations": "Last name",
      "variations": {}
     }
    ]
@@ -2576,7 +2576,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Dupont",
+     "translations": "McClane",
      "variations": {}
     }
    ]
@@ -2586,7 +2586,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "J'accepte les {=CGU} et consent à recevoir des emails de la part d'Inyo.",
+     "translations": "I accept the {=CGU} and consent to receive email from the Inyo team",
      "variations": {}
     }
    ]
@@ -2606,7 +2606,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "CGU",
+     "translations": "TOS",
      "variations": {}
     }
    ]
@@ -2616,7 +2616,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Commencez",
+     "translations": "Start",
      "variations": {}
     }
    ]
@@ -2626,7 +2626,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Autres",
+     "translations": "Other",
      "variations": {}
     }
    ]
@@ -2636,7 +2636,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Gérer les tags",
+     "translations": "Manage tags",
      "variations": {}
     }
    ]
@@ -2646,7 +2646,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{task per tag count} tâches avec ce tag",
+     "translations": "{task per tag count} tasks with this tag",
      "variations": {}
     }
    ]
@@ -2656,7 +2656,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "1 tâche avec ce tag",
+     "translations": "1 task with this tag",
      "variations": {}
     }
    ]
@@ -2666,7 +2666,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Annuler",
+     "translations": "Cancel",
      "variations": {}
     }
    ]
@@ -2676,7 +2676,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Supprimer le tag",
+     "translations": "Delete this tag",
      "variations": {}
     }
    ]
@@ -2686,7 +2686,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Un problème c'est produit",
+     "translations": "Something went wrong",
      "variations": {}
     }
    ]
@@ -2696,7 +2696,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Nom",
+     "translations": "Name",
      "variations": {}
     }
    ]
@@ -2706,7 +2706,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Couleur fond",
+     "translations": "Background color",
      "variations": {}
     }
    ]
@@ -2716,7 +2716,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Couleur texte",
+     "translations": "Text color",
      "variations": {}
     }
    ]
@@ -2726,7 +2726,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Annuler",
+     "translations": "Cancel",
      "variations": {}
     }
    ]
@@ -2736,7 +2736,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Enregistrer",
+     "translations": "Save",
      "variations": {}
     }
    ]

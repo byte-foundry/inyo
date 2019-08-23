@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName, isCustomerTask} from '../../utils/functions';
 import {StickyHeader} from '../../utils/new/design-system';
 import Apostrophe from '../Apostrophe';

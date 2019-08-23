@@ -5,6 +5,7 @@ import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {TAG_COLOR_PALETTE} from '../../utils/constants';
 import {FlexRow, Loading} from '../../utils/content';
 import {CREATE_TAG} from '../../utils/mutations';

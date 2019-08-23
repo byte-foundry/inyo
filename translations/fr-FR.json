@@ -1,15 +1,4605 @@
 {
-	"fb-locale": "fr-FR",
-	"translations": {
-		"CBEk0tjxRg3kn3CsSs2gTA==": {
-			"tokens": [],
-			"types": [],
-			"translations": [
-				{
-					"translation": "prout {projectName}",
-					"variations": {}
-				}
-			]
-		}
-	}
+ "fb-locale": "fr-FR",
+ "translations": {
+  "c+lcFfPMwayO0O5SNqYW9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Invite a collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "Kk05koBmsDqaTTQVJCU3aw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "email must be valid",
+     "variations": {}
+    }
+   ]
+  },
+  "XA7LD0ywIXskOmvYyTrrWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "required",
+     "variations": {}
+    }
+   ]
+  },
+  "mnvxbQlOlB/Afe9kwyUkCg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "This user has not signed up to Inyo yet",
+     "variations": {}
+    }
+   ]
+  },
+  "/kvuEOtMqSh/iULB4okW6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "This user is already one of your collaborator, or a request is pending",
+     "variations": {}
+    }
+   ]
+  },
+  "HaV1oGWQEHMlWZY+YJhCaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "An error has occured",
+     "variations": {}
+    }
+   ]
+  },
+  "sAbSkE5NP4fqrLL3UdHfsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email address",
+     "variations": {}
+    }
+   ]
+  },
+  "D5BQpw+HPrLQbvb3mzK+cA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Invite",
+     "variations": {}
+    }
+   ]
+  },
+  "i3dSHU/47fQIhYGWTaqpDA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "No option",
+     "variations": {}
+    }
+   ]
+  },
+  "GB7LzwqHzSvCOtk0++uCyA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "No option",
+     "variations": {}
+    }
+   ]
+  },
+  "5YXIwCOKaXxjfG2gjXkHgA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tasks to do",
+     "variations": {}
+    }
+   ]
+  },
+  "bEAPRPQzUxZKgDEqti1LXg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tasks done",
+     "variations": {}
+    }
+   ]
+  },
+  "PCB0T4qV3n3Tl30CCccaaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "All the tasks",
+     "variations": {}
+    }
+   ]
+  },
+  "AqJMl0+P/pzfbxqbc9rd/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "All the tasks",
+     "variations": {}
+    }
+   ]
+  },
+  "GnXDLOI0hcNOgOYJFIxscQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Search by tags",
+     "variations": {}
+    }
+   ]
+  },
+  "a8kwylJwa+wa0lEvy1HvBw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Add the name of the documents and press enter",
+     "variations": {}
+    }
+   ]
+  },
+  "9tizAmpj5IlSDHpumdi54w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You must first add",
+     "variations": {}
+    }
+   ]
+  },
+  "mjALk1C7sK+wlxgLusuBlg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "a collaborator to the project",
+     "variations": {}
+    }
+   ]
+  },
+  "CBEk0tjxRg3kn3CsSs2gTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "prout {projectName}",
+     "variations": {}
+    }
+   ]
+  },
+  "qx1GG8725BwZccTubShfmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Filter by name, email...",
+     "variations": {}
+    }
+   ]
+  },
+  "Ku1n2y9WmL1lBgy6V/mNGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Your comment",
+     "variations": {}
+    }
+   ]
+  },
+  "qY2JiUsK5dPxldd+wY2hwg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Write and send a comment to your client",
+     "variations": {}
+    }
+   ]
+  },
+  "h9XywMaYUPXbmAMMxdTbQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Write and send a comment to your contractor",
+     "variations": {}
+    }
+   ]
+  },
+  "/3uP7HTxJ/lHt7iNlgT3lQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "If you have any questions or suggestions add a comment",
+     "variations": {}
+    }
+   ]
+  },
+  "SqtjllI4dc2YZbvJXjfkfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "↓ Other comments",
+     "variations": {}
+    }
+   ]
+  },
+  "H/doAMLoC9R3NO6NQmhd5Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "An error occured while posting the comment",
+     "variations": {}
+    }
+   ]
+  },
+  "oxns+QSfjmP/31eed9WLlw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "The different stakeholders will be notified",
+     "variations": {}
+    }
+   ]
+  },
+  "rh2V7ZeVauprF2x0tEMSvQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Can be viewed by all the project's stakeholders",
+     "variations": {}
+    }
+   ]
+  },
+  "vctbu+1iQDAHeWXFel8aDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Add a comment",
+     "variations": {}
+    }
+   ]
+  },
+  "fEllyq1WiFdeYXrC6eIGTg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cancel",
+     "variations": {}
+    }
+   ]
+  },
+  "WBNkCR3Xvk8q7WMnMXyVLg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Confirm",
+     "variations": {}
+    }
+   ]
+  },
+  "Yqfjo8yW61yd54vX0hbLDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a link to share",
+     "variations": {}
+    }
+   ]
+  },
+  "Bd89ZCXvcu/9faxnpga7dg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Link to share your project with your customer",
+     "variations": {}
+    }
+   ]
+  },
+  "2USEdvsctPl5RFxIBfqqfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Close",
+     "variations": {}
+    }
+   ]
+  },
+  "wuxa5BJR7fALB7nYflk8oA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Required",
+     "variations": {}
+    }
+   ]
+  },
+  "esAlFRsJRyJYPdy1Etih2g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Name of the project",
+     "variations": {}
+    }
+   ]
+  },
+  "uR3RFRSyvsifyNkawiLp/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "E.g. Landing page for Andrew, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "gZ40VvEnPKdmyRSpiIDSJQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Template",
+     "variations": {}
+    }
+   ]
+  },
+  "DO9+CF8YimXXP8yznO3s8g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a new client",
+     "variations": {}
+    }
+   ]
+  },
+  "k/uE34MBak4zE0Vv8cXJyQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Main client of the project",
+     "variations": {}
+    }
+   ]
+  },
+  "T9u2jJt5ihci27CmtReUng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "iPGKvsjHfnnJw/l7IwyApg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "No deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "VvRTh0XNNoQzToCLNOwqEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cancel",
+     "variations": {}
+    }
+   ]
+  },
+  "d8A0c/QN9wdtAbRBSvxB2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create the project",
+     "variations": {}
+    }
+   ]
+  },
+  "J8Ln1i5WSWrMQQvGVaNDEA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Content of the template",
+     "variations": {}
+    }
+   ]
+  },
+  "cq/K4aFF4Ae4s8QbGAuZrw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You're trying to create a client's task which requires email notifications to be active",
+     "variations": {}
+    }
+   ]
+  },
+  "c3VHPe85E60l03JpI4/uPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Do you wish to turn email notifications on?",
+     "variations": {}
+    }
+   ]
+  },
+  "8644T2R+4scYGO0LpX3DQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Present Inyo to your clients!",
+     "variations": {}
+    }
+   ]
+  },
+  "yRJfdDz1yU1Hmh6jMHqK0A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You've just created a new client. Here is an email that will describe how Inyo works for both of you.",
+     "variations": {}
+    }
+   ]
+  },
+  "DQeXAvwG7dJoYDdF7IN2HQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "I am using Inyo for your project {=[nom du projet]} status reporting",
+     "variations": {}
+    }
+   ]
+  },
+  "aB5b9kvkppVMDoMtWkIZZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "[Name of the project]",
+     "variations": {}
+    }
+   ]
+  },
+  "hHYW2oe78FnFa9Li2wIUXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Hello {customer name} ,",
+     "variations": {}
+    }
+   ]
+  },
+  "b7SBiQSY8WADC+OOtpqcXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "I am going to use Inyo, a comprehensive project management tool, to communicate with you during our collaboration on {=[nom du projet]}",
+     "variations": {}
+    }
+   ]
+  },
+  "Yz/hEevDIK59WUd+cWCUCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "[Name of the project]",
+     "variations": {}
+    }
+   ]
+  },
+  "69w/1T7K8HXXXh3oCdcbLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You are going to receive email from",
+     "variations": {}
+    }
+   ]
+  },
+  "aWQMWcJJDEVku4UiIGUTHQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{assistantName} from Inyo. Don't send them to spam. They will keep you up to date on the progress of the project.",
+     "variations": {}
+    }
+   ]
+  },
+  "qvosYuyXlERa6kcMFltOrg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "In order to keep you aware of the progress, you will regularly receive summary of the finished tasks or notifications if your input is needed on some part of the project.",
+     "variations": {}
+    }
+   ]
+  },
+  "/xJTSSeUxLgHBVVBf1yoAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "These emails will contain a personalized link that will allow you to access the project's page. You will be able to comment, mark tasks as done and attach or retrieve documents.",
+     "variations": {}
+    }
+   ]
+  },
+  "FTUglGa5v8qzJfeHmSafGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Thank you for using this platform for our communications. This will makes our collaboration easier by centralizing all our exchanges and documents.",
+     "variations": {}
+    }
+   ]
+  },
+  "lGJBnl1neTaJOVzo5UyTpQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "If you have any questions please send them to me.",
+     "translations": "Je reste à votre disposition si vous avez des questions.",
+     "variations": {}
+    }
+   ]
+  },
+  "4dknal2HpNimLw2l4O6/+Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=[Votre signature]}",
+     "variations": {}
+    }
+   ]
+  },
+  "P9tRkqcJzVR2yfHAPd134w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "[Your name]",
+     "variations": {}
+    }
+   ]
+  },
+  "uH7UR393QOWWV8YhLbgE0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Or create a new client",
+     "variations": {}
+    }
+   ]
+  },
+  "XL3V5He7KnUZ4oZ2pJtLhQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Edit a client's infos",
+     "variations": {}
+    }
+   ]
+  },
+  "8cT5/Uh4WErOpyI3wS/28w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a new client",
+     "variations": {}
+    }
+   ]
+  },
+  "/R9b6rrgd1R9NNnkFL+DWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Back",
+     "variations": {}
+    }
+   ]
+  },
+  "/QURQjp/ePc9rqZ9ZcWJGQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email must be valid",
+     "variations": {}
+    }
+   ]
+  },
+  "g36loioX2hVHJrE3snRFTw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choose an existing client",
+     "variations": {}
+    }
+   ]
+  },
+  "89l2cu2TsJ35DhW7HUwuqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "All the clients",
+     "variations": {}
+    }
+   ]
+  },
+  "clchauJp4nlBJ+jKLlvbOQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Name of the company",
+     "variations": {}
+    }
+   ]
+  },
+  "rSSycaApkSaVv6JTqTXF2Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mr.",
+     "variations": {}
+    }
+   ]
+  },
+  "NlzsArLWsW/HBDujtxGGdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ms.",
+     "variations": {}
+    }
+   ]
+  },
+  "EUkozX96p1/2s0oRey22NA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "First name of your contact",
+     "variations": {}
+    }
+   ]
+  },
+  "vzYCdi+fgwl6vVAd5ajgvA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Last name of your contact",
+     "variations": {}
+    }
+   ]
+  },
+  "R0ugF4YhG+KImuzC1UncBw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Their email",
+     "variations": {}
+    }
+   ]
+  },
+  "VwFvdWoENPEFQI1N3r5RAA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Their phone number",
+     "variations": {}
+    }
+   ]
+  },
+  "yyNpnNGNRgi/0EDm6hj5tQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Their position",
+     "variations": {}
+    }
+   ]
+  },
+  "oMCo1MqBUHsRddRHGuosxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Notes",
+     "variations": {}
+    }
+   ]
+  },
+  "1A8O0AybMXlInVad9zYpHg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Private notes on your client",
+     "variations": {}
+    }
+   ]
+  },
+  "zXX+TVzO/0BzAWt8jrX28A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Remove the client",
+     "variations": {}
+    }
+   ]
+  },
+  "F4JH4MOdAD+MMwtvo9+iNQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Confirm",
+     "variations": {}
+    }
+   ]
+  },
+  "W8joBAIjwZ3uQ8ZWo39feQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a new client",
+     "variations": {}
+    }
+   ]
+  },
+  "ceUjjAB1oCqg2miah11W9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Click to see the content of the task",
+     "variations": {}
+    }
+   ]
+  },
+  "GUyjBOX+sqBysdoNstGXPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choose a name for this task",
+     "variations": {}
+    }
+   ]
+  },
+  "k/+uIjjL0YApJFLLp5Cqbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Description, informations, comments, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "ZP1cZY0RsQMSlzX5EECysA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Open",
+     "variations": {}
+    }
+   ]
+  },
+  "kxWgCWlS7cY80/RG/n2JtQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Add to today's workload",
+     "variations": {}
+    }
+   ]
+  },
+  "GDM45j0r2I8JAnfxgDJ/ww==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{days of margin} days until you need to start this task",
+     "translations": "Cela vous laisse {days of margin} jours pour commencer cette tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "qTIpZJlXjqo9ckH7FjtOGg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "1 day until you need to start this task",
+     "variations": {}
+    }
+   ]
+  },
+  "8+x9QRzX3/lHvy27gf11Ew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "From",
+     "variations": {}
+    }
+   ]
+  },
+  "WCg3QBVQYanqIXS5KYcnqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "To",
+     "variations": {}
+    }
+   ]
+  },
+  "BZG0ddMl6DD00Gk4RpydtA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Subject",
+     "variations": {}
+    }
+   ]
+  },
+  "GhD8nv8COzRInX96Yf8TvA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Instructions on how to use Inyo",
+     "variations": {}
+    }
+   ]
+  },
+  "Z1S9aCtsVDvT1V72xU32aw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Help",
+     "variations": {}
+    }
+   ]
+  },
+  "zjKt6Z/8ViNt1KglUM8z7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Here are some links to help you use Inyo",
+     "variations": {}
+    }
+   ]
+  },
+  "aotCRpuYFXMbvylBtbOh7A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Watch the introduction video",
+     "variations": {}
+    }
+   ]
+  },
+  "zgC9eGZjOBBo3eHbAgC37w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a new task",
+     "variations": {}
+    }
+   ]
+  },
+  "qCWteMVThArPuiSDLJhDbQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a new client",
+     "variations": {}
+    }
+   ]
+  },
+  "bQDf7mCwoaWaeOYRKa0x2g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Create a new project",
+     "variations": {}
+    }
+   ]
+  },
+  "Xwu7G8DMFfF7mgkY+OhaVA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Use a project template",
+     "variations": {}
+    }
+   ]
+  },
+  "oZT0Gv5Lwo18objHRm30nQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "See what your client will see",
+     "variations": {}
+    }
+   ]
+  },
+  "H0aue5s+hJE+zx+UweGnFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Introduce Inyo to your clients",
+     "variations": {}
+    }
+   ]
+  },
+  "nJXdBPESFZpgEaLqquBuGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Missing informations? Contact us using the instant messaging in the lower right or vote on feature on {=notre roadmap collaborative.}",
+     "translations": "Une information est manquante? Contactez-nous via la messagerie en bas à droite, ou proposez des fonctionnalités sur {=notre roadmap collaborative.}",
+     "variations": {}
+    }
+   ]
+  },
+  "ppJv43cOEgEEDleIQ+ouBQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "our collaborative roadmap",
+     "variations": {}
+    }
+   ]
+  },
+  "9oXQI3qbIizBeaqnxlooSQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Got it!",
+     "variations": {}
+    }
+   ]
+  },
+  "Aw7c13n1qyBFVCJRP4+ZAw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Type and name of the task",
+     "variations": {}
+    }
+   ]
+  },
+  "JhxU3feEsDnVk/NaRsH5bQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Name this task",
+     "variations": {}
+    }
+   ]
+  },
+  "n2nEPSXW8r/mJCL++eK6XA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Estimated duration of the task",
+     "variations": {}
+    }
+   ]
+  },
+  "PZk9D95cJdaKYixeW4cp0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Duration",
+     "variations": {}
+    }
+   ]
+  },
+  "si/vrssaZZ8obVRLlu/LGQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{timeEstimated} days",
+     "variations": {}
+    }
+   ]
+  },
+  "RcD6Kl3RIbKdSaK2IEulLQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{timeEstimated} day",
+     "variations": {}
+    }
+   ]
+  },
+  "RZ7sYwiQT57dr8nfhuD+ww==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Time spent on this task",
+     "variations": {}
+    }
+   ]
+  },
+  "7Lnr7BpFnIeCy3zXln3JWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Time spent",
+     "variations": {}
+    }
+   ]
+  },
+  "u7YTd2C7Ml3qkgMAgNDiHQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{timeItTook} days",
+     "variations": {}
+    }
+   ]
+  },
+  "fkVXVBffc7QKksvh/IQ26w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{timeItTook} day",
+     "variations": {}
+    }
+   ]
+  },
+  "ew4YOAKY1eedm0Xk5R444A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Task's client",
+     "variations": {}
+    }
+   ]
+  },
+  "vRZY5zcFhPD/Le3J1JJKiw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Client",
+     "variations": {}
+    }
+   ]
+  },
+  "HLV6gRDo4cU1fnr1mVGuig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Task's deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "9WiJli6bYRZdd9b3WFN4sw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Remaining time",
+     "variations": {}
+    }
+   ]
+  },
+  "g42vvqqGi7CcjAIwPUjXqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "User assigned to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "a6k0XUl4YErALp3Dib3LZg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Assigned to",
+     "variations": {}
+    }
+   ]
+  },
+  "xy6wkmuEBOfpG12vqkZlxg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email must be valid",
+     "variations": {}
+    }
+   ]
+  },
+  "rtI44XiXVDB64ScOGNpfkg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Wrong email or password",
+     "variations": {}
+    }
+   ]
+  },
+  "JKX7eCssqo7wpJJNeg8a7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email address",
+     "variations": {}
+    }
+   ]
+  },
+  "yhmFk/aBwGP4frNYdx2DAA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "john@smith.com",
+     "variations": {}
+    }
+   ]
+  },
+  "bTEhOPQde8XSp0mJ3esu0g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Password",
+     "variations": {}
+    }
+   ]
+  },
+  "k4sROnrZJPT+KaahRRfDAw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Forgotten password?",
+     "variations": {}
+    }
+   ]
+  },
+  "bLtR1W4+wtlehXcJMp3SjQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Sign up",
+     "variations": {}
+    }
+   ]
+  },
+  "SJ1uY2Np2PHq0zcGonbL2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "How do you work?",
+     "variations": {}
+    }
+   ]
+  },
+  "LTMb6aDgFaePsAU0YLJ7aw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "We need this info to send you email at the right time.",
+     "translations": "Nous avons besoin de ces informations pour vous envoyer des emails au bon moment, en cohérence avec vos journées de travail.",
+     "variations": {}
+    }
+   ]
+  },
+  "FpcLLvZekZ0mMbObsPV7CQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "has commented the task",
+     "variations": {}
+    }
+   ]
+  },
+  "GgJM4EY/QordX9pchDp0tw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "viewed the project",
+     "variations": {}
+    }
+   ]
+  },
+  "+TSsouyNnpOuotBby5ZXPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "has added a new document to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "ZNDtqOQeGjKx3QtGvXEdDA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "completed the task",
+     "variations": {}
+    }
+   ]
+  },
+  "BWRxbAxOYcelgP37U3CIzg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "assigned you to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "w8/beP4+rOLbIjTxAKvxtg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "removed your assignement to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "gt19H3XilCm3PgNwieVZGw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "accepted to collaborate with you",
+     "variations": {}
+    }
+   ]
+  },
+  "4RIQiXhEoAvj7h3xjsg+gg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{collabFullName} invited you to collaborate",
+     "variations": {}
+    }
+   ]
+  },
+  "hVdfqluxJics5siW+Rw2+g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Accept",
+     "variations": {}
+    }
+   ]
+  },
+  "s+0tlgcA9Df2YHz/y760pQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Refuse",
+     "variations": {}
+    }
+   ]
+  },
+  "jemQX+JlzruXJ4cGtR3+7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You've just accepted {collaboratorFullName}'s collaboration invite",
+     "variations": {}
+    }
+   ]
+  },
+  "2EK9Ky8XhfFM0jYpn1U2NQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You've just refused {collaboratorFullName}'s collaboration invite",
+     "variations": {}
+    }
+   ]
+  },
+  "s7Am8IKTQ0RWV1ZfuKTA1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Notifications",
+     "variations": {}
+    }
+   ]
+  },
+  "cTKVM7yUdcTOW1xZeBceRA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "No notification.",
+     "variations": {}
+    }
+   ]
+  },
+  "mlcI2UUdu+fEUNon6P7YXg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "What should we call",
+     "variations": {}
+    }
+   ]
+  },
+  "8X+nL459rFe1K+J2Q0Rqnw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "your assistant?",
+     "variations": {}
+    }
+   ]
+  },
+  "Lk4ElWr+K3ycF+uTrMRxKg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "We will use this name when we notifify your clients by email.",
+     "variations": {}
+    }
+   ]
+  },
+  "9hB6zPcFdo5ckVQDLtJJ8Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Confirm",
+     "variations": {}
+    }
+   ]
+  },
+  "k/Gjsa4x8ssgvn3ax7zvWQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Back",
+     "variations": {}
+    }
+   ]
+  },
+  "RebJYGeN66oFsddPmWZ+UQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "We need some informations so that we can help you properly.",
+     "variations": {}
+    }
+   ]
+  },
+  "nrujg7Lf3b8K6u3FCOqaaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Something went wrong",
+     "variations": {}
+    }
+   ]
+  },
+  "529vNRKMPnX6AkWCX2g28g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choose your working hours",
+     "variations": {}
+    }
+   ]
+  },
+  "9S0hQgBZJTb/A5Xtj7ZQDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "(It will help help us determine which tasks you can do during a day)",
+     "variations": {}
+    }
+   ]
+  },
+  "RNCvB1ldoXUQYB1gXIW4Jg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "morning",
+     "variations": {}
+    }
+   ]
+  },
+  "e5dRoxBZ1DCDsMniI4yxIQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "breakfast",
+     "variations": {}
+    }
+   ]
+  },
+  "f880Q3eyevRZTYnpdyeB7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "lunch",
+     "variations": {}
+    }
+   ]
+  },
+  "lbWLZARSw5Aey/zDn9mRUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "evening",
+     "variations": {}
+    }
+   ]
+  },
+  "3DEfsU/Xps0QY+zjLvsQYw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "night",
+     "variations": {}
+    }
+   ]
+  },
+  "xw9pS/o234ZUM46YXHvioQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Choose your working hours",
+     "variations": {}
+    }
+   ]
+  },
+  "buFkcUlMOkhiUZMajO+4Ww==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "(This will help you make your deadline without going into overtime)",
+     "variations": {}
+    }
+   ]
+  },
+  "scR/NIF5guL2ddzFGIy1Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Next",
+     "variations": {}
+    }
+   ]
+  },
+  "71Ok3J3hqlKSXq92DhLhnA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Juggle between multiple communication channels",
+     "translations": "Jongler entre plusieurs canaux de communications (Slack, emails, etc.)",
+     "variations": {}
+    }
+   ]
+  },
+  "TBi3rStgXXXujN+iH1DDyQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Correctly estimate the duration of my projects",
+     "translations": "Estimer correctement le temps et les tâches en amont du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "/rSj1XkECqRd0ON6VZjmqw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Organise and succesfully stick to my planning",
+     "translations": "Organiser et respecter mon programme de temps de travail",
+     "variations": {}
+    }
+   ]
+  },
+  "lhOe8DhOe6Tbl9YfVpr00A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Follow up with my clients for validations",
+     "translations": "Relancer mes clients pour obtenir des validations",
+     "variations": {}
+    }
+   ]
+  },
+  "hdjeCSmSL8zaiME/mBgdmw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "What's the most bothersome thing in your daily work routine?",
+     "variations": {}
+    }
+   ]
+  },
+  "rBXWE+Cu3qldiigMAL433g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "You can choose multiple options",
+     "variations": {}
+    }
+   ]
+  },
+  "9I/hJQHmNv8K2Kia3Fwfdw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Other",
+     "variations": {}
+    }
+   ]
+  },
+  "SXKldbfoDGNTWPI3fjepQQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Something went wrong",
+     "variations": {}
+    }
+   ]
+  },
+  "jqDgd6R8Prk5GZzYWj9ovw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Give us an example",
+     "variations": {}
+    }
+   ]
+  },
+  "tLc08MxFJ43xexn8smLDTg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Next",
+     "variations": {}
+    }
+   ]
+  },
+  "bDRYEB9iupBuFDH0uql8Qg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Last question!",
+     "variations": {}
+    }
+   ]
+  },
+  "J2ovXvgFpq+ptqVFj3NH5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Would you take a couple of minutes to help us shape Inyo into your dream application?",
+     "variations": {}
+    }
+   ]
+  },
+  "ZX0vrDdnTBF/oL6bhHe8dg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Thank you! Please fill out your phone number.",
+     "variations": {}
+    }
+   ]
+  },
+  "lC5QKGL863oLEdhXp1VBXQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Next",
+     "variations": {}
+    }
+   ]
+  },
+  "S9/JwL4Xm5vX6oSwkK+/wg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Name of the part",
+     "variations": {}
+    }
+   ]
+  },
+  "2xEWo7wuhRBdVX59AdoS7w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Add a name to this project",
+     "variations": {}
+    }
+   ]
+  },
+  "MrFyR9h3EMGytdjiArRIlg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Project's name",
+     "variations": {}
+    }
+   ]
+  },
+  "2T0cDshSqUPZs9v6Wh7FbA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Write some notes...",
+     "variations": {}
+    }
+   ]
+  },
+  "/eGE0cJEHMTuGWu6sSL18g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "To access the options select part of the text. You can also use markdown.",
+     "variations": {}
+    }
+   ]
+  },
+  "bkUwxsMrGdCK/V0tNxzLHg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Saved!",
+     "variations": {}
+    }
+   ]
+  },
+  "R91C4bZC4Jj8FX6Ou+ulLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "These notes are private. Your client cannot see them.",
+     "variations": {}
+    }
+   ]
+  },
+  "JOxxH5XzBwZ6iHW40mWiOg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Name of the part",
+     "variations": {}
+    }
+   ]
+  },
+  "OBxwe8U4azO+nEMeD+ZFIQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "These notes are shared with your {otherUserName}.",
+     "translations": "Ces notes sont partagées avec votre {otherUserName}.",
+     "variations": {}
+    }
+   ]
+  },
+  "xcfdrC78ur9az8HEiQ+W7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "contractor",
+     "variations": {}
+    }
+   ]
+  },
+  "4BKjcB5xtpV5gBYkA8IYWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "client",
+     "variations": {}
+    }
+   ]
+  },
+  "VoesFaOlo+IoPjaKqVF8xQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Clients' reminders",
+     "variations": {}
+    }
+   ]
+  },
+  "wo45m6zeGJQOTSMd76q04A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Sending...",
+     "variations": {}
+    }
+   ]
+  },
+  "aXwOrkM99o7PVRb8h+ctYA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Test sent",
+     "variations": {}
+    }
+   ]
+  },
+  "4u6BlPabsaUGSORsyybBFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Error",
+     "variations": {}
+    }
+   ]
+  },
+  "9O803GvokBv7/cMyu4NkcA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Sent yourself a test email",
+     "variations": {}
+    }
+   ]
+  },
+  "El/IE3T56zb2AovWLUnhyw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Are you sure you want to delete this project?",
+     "variations": {}
+    }
+   ]
+  },
+  "n192PQNTzb8hYGbMLGYKuA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "By deleting this project you will lose all its data.",
+     "variations": {}
+    }
+   ]
+  },
+  "LUjTHVOk0yiT09NiY1+gcQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "This option is mostly to be used to delete project created by mistake.",
+     "variations": {}
+    }
+   ]
+  },
+  "bSDE84ZvWja6PaBjiECyOg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Completed projects should rather be archived :)",
+     "variations": {}
+    }
+   ]
+  },
+  "VqmYRsc7GyBxLKABP9egLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Archive this project",
+     "variations": {}
+    }
+   ]
+  },
+  "xhRGYwrRenegpYibHaLriQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Delete this project",
+     "variations": {}
+    }
+   ]
+  },
+  "Omn/E1WJwFGJsAiL1vf5VQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Some task planned for past days are not finished.",
+     "variations": {}
+    }
+   ]
+  },
+  "M3bQF4irVE3tYHCE4Ge2Rw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Put everything back in the list",
+     "variations": {}
+    }
+   ]
+  },
+  "/Z+OswR9A/iWTdOIrvEsdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Verifying the token's validity...",
+     "variations": {}
+    }
+   ]
+  },
+  "6E9ep+gKWepROcrClnP8Hg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "This link is not valid anymore. Try again by going to the page {link}",
+     "translations": "Ce lien n'est pas ou plus valide. Essayez de recommencer en vous rendant sur la page {link} .",
+     "variations": {}
+    }
+   ]
+  },
+  "Zrxp3VDBlfH3B+cQ5PGLFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Forgotten password?",
+     "variations": {}
+    }
+   ]
+  },
+  "0+kFQAEBGnwwqOlMXDXj5Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Enter a new password. You'll be automatically connected and redirected to your dashboard.",
+     "variations": {}
+    }
+   ]
+  },
+  "zTDwnn/40EtfXcJ35Fu01g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Something went wrong",
+     "variations": {}
+    }
+   ]
+  },
+  "io+w2IFW4qlm0AtL6CDNTQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "New password",
+     "variations": {}
+    }
+   ]
+  },
+  "UgCMWAE3dOnlYZVraWvNKw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Change your password",
+     "variations": {}
+    }
+   ]
+  },
+  "Br1Otdcnl9fjClm/yhZwog==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Add a duration to these tasks to let Inyo help you manage your planning.",
+     "variations": {}
+    }
+   ]
+  },
+  "YFMbTeNoi9iC2wAJUjqtEA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "The email has been sent! Check your inbox!",
+     "variations": {}
+    }
+   ]
+  },
+  "ZfOxGoJ/3tKdL1E6Nu3/mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fill in your email address. A link will be sent there to let you reset your password.",
+     "variations": {}
+    }
+   ]
+  },
+  "Ky1807DMT8v55jGmxM+Yqw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email must be valid",
+     "variations": {}
+    }
+   ]
+  },
+  "SpMltHwMWpvYs2v7rKKEiQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email",
+     "variations": {}
+    }
+   ]
+  },
+  "CHrKtVc4yGE5EfuS8uJzuw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "john@smith.com",
+     "variations": {}
+    }
+   ]
+  },
+  "OcGRRtpN/aoTi8t0S92bew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Reset password",
+     "variations": {}
+    }
+   ]
+  },
+  "kr4eHtsx2qAP4N9hWTLB8Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Project's tasks",
+     "variations": {}
+    }
+   ]
+  },
+  "QHoXP7VKbIjPYLhwW+T3Kw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Shared notes",
+     "variations": {}
+    }
+   ]
+  },
+  "NBjTlN4A0Vjh7rfqIoO3SQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Your contractor",
+     "variations": {}
+    }
+   ]
+  },
+  "5r3VHOyz03CGZ5uyw2S8uQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "P2qgZgeJVcj2qEwqhbReOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Date when the project is due",
+     "variations": {}
+    }
+   ]
+  },
+  "nRb6PqktA2dOmoaUuqTu9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Remaining days",
+     "variations": {}
+    }
+   ]
+  },
+  "JlXEGumz9REKJGcm60WwKA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Days remaining before you need to start working on the project full time",
+     "variations": {}
+    }
+   ]
+  },
+  "jK1Ko+o185ENa/vQkqEFsQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{margin of days count} days",
+     "variations": {}
+    }
+   ]
+  },
+  "ijg6lMgW07tYN5oshr8jog==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "1 day",
+     "variations": {}
+    }
+   ]
+  },
+  "RTU7TTnGwvET8+HZjJghfw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Actions",
+     "variations": {}
+    }
+   ]
+  },
+  "7AjDpNETd4pcpVcI4F37Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "There's no activated tasks right now",
+     "variations": {}
+    }
+   ]
+  },
+  "HDuXEugJ+zLx46I/Mtqbog==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vue principale",
+     "variations": {}
+    }
+   ]
+  },
+  "EHQ8kyruFfhFbqt+PaVvaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tâches du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "L067xGXkMfARcJBjS7f+9g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Seulement visibles par vous",
+     "variations": {}
+    }
+   ]
+  },
+  "ikjA3VDH0k6vn2narEXR3Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Notes personnelles",
+     "variations": {}
+    }
+   ]
+  },
+  "fLR9KuAsosc/XK5bMWk7Mg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Visibles par tout le monde",
+     "variations": {}
+    }
+   ]
+  },
+  "jFCupc9C9dtcx4e30UI0Iw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Notes partagées",
+     "variations": {}
+    }
+   ]
+  },
+  "rH9wh0hUEutLLvjXj/nvVA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Changer le client lié au projet",
+     "variations": {}
+    }
+   ]
+  },
+  "fe/ia+wsEnlijrwwdh21Ww==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Évolution du projet, tâches qui requièrent une action, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "aCi6l7XNAZcbqUgKkFcIiw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Notifier mon client par email",
+     "variations": {}
+    }
+   ]
+  },
+  "BMeuJg0uY2MVeovVNQK5Hw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "En décochant cette option, votre client ne recevra aucune notification de l'avancée de votre projet.",
+     "variations": {}
+    }
+   ]
+  },
+  "RltTNFLZaA3NsiUnfH0sDQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cependant, certaines des tâches sont attribuées à votre client et nécessitent l'envoi d'emails à celui-ci. Désactiver les notifications changera aussi l'attribution de ces tâches et votre client n'en sera pas averti.",
+     "variations": {}
+    }
+   ]
+  },
+  "v6Zu+7e97z2OYmTF4p4PrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Êtes-vous sûr de vouloir continuer?",
+     "variations": {}
+    }
+   ]
+  },
+  "CF4JsqOY3g7b6ZAwfWBAGg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ce que verra votre client lorsqu'il se connecte au projet",
+     "variations": {}
+    }
+   ]
+  },
+  "gofuUhe30NUXKseA+qKbNQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Voir la vue de mon client",
+     "variations": {}
+    }
+   ]
+  },
+  "5CkV1QNEPRDdQTru3O35Dw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter un client",
+     "variations": {}
+    }
+   ]
+  },
+  "kijfhgj2q4NVR0iPj3IV7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cette vue est celle que verra votre client lorsqu'il devra effectuer des actions.",
+     "variations": {}
+    }
+   ]
+  },
+  "AtjVa1IeKjBwoEeU+DLbEQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter un Collaborateurs",
+     "variations": {}
+    }
+   ]
+  },
+  "0ywQKSABbvePNgYOS03q0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Collaborateurs du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "FEQsZWN5sT5lTchEhNcWig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "yuKsays7MRc0FJ6J2ZzZuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Date limite du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "xa4T9aJVs5d5AApNfpZD0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter une deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "nH52xB7hAoZdMWbGpgHFnw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Marge restantes",
+     "variations": {}
+    }
+   ]
+  },
+  "ID7HPKtlTKMeyu5vkHZXlQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nombre de jours travaillés avant deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "Jki2Y6p4cfpaCTxQ41bZRw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Copier ces tâches dans un nouveau projet",
+     "variations": {}
+    }
+   ]
+  },
+  "uYR1hk87PyaQht9P3tSOlg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Dupliquer le projet",
+     "variations": {}
+    }
+   ]
+  },
+  "pavdXdUr565DmuS3Z9MnlQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Désarchiver le projet",
+     "variations": {}
+    }
+   ]
+  },
+  "TTfvlLEkZBV4WNpvf04jlg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "L'email est déjà utilisé",
+     "variations": {}
+    }
+   ]
+  },
+  "fMsQGqARQXNf74qbRBFxUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "jean@dupont.fr",
+     "variations": {}
+    }
+   ]
+  },
+  "OPVK8+uQoMyO/5czEGpRPQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mot de passe",
+     "variations": {}
+    }
+   ]
+  },
+  "Hhva+w6dWLzpGHhfUVWsMA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Prénom",
+     "variations": {}
+    }
+   ]
+  },
+  "XcIjHZX+CAoxLfWe4baocg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Jean",
+     "variations": {}
+    }
+   ]
+  },
+  "umaza+QDGWDvbw5t7ezVdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nom",
+     "variations": {}
+    }
+   ]
+  },
+  "+K305NT/lYSJ5LSt2ZR5Nw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Dupont",
+     "variations": {}
+    }
+   ]
+  },
+  "FTgHma41k2LvlCnizQVAMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "J'accepte les {=CGU} et consent à recevoir des emails de la part d'Inyo.",
+     "variations": {}
+    }
+   ]
+  },
+  "+2c9zJlDnQxqxGjVfc5+mQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=CGU}",
+     "variations": {}
+    }
+   ]
+  },
+  "RkU3tXWQs9wkkAw2K5Abrw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "CGU",
+     "variations": {}
+    }
+   ]
+  },
+  "L78l5yHZgyKFDOMJzP/Vng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Commencez",
+     "variations": {}
+    }
+   ]
+  },
+  "JZSEg2EIl4FZrjTbLykCDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Autres",
+     "variations": {}
+    }
+   ]
+  },
+  "71IsaHOQkQhHdTafaHJM/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Gérer les tags",
+     "variations": {}
+    }
+   ]
+  },
+  "T6P+XEx/fMBW3v4lBxcpsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{task per tag count} tâches avec ce tag",
+     "variations": {}
+    }
+   ]
+  },
+  "TwwteQJ0k9zJi4vCY+IONA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "1 tâche avec ce tag",
+     "variations": {}
+    }
+   ]
+  },
+  "DhFbrIT699RZmAOgrzxElA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Annuler",
+     "variations": {}
+    }
+   ]
+  },
+  "Lq8w88lpi2mEfiwx3FD9kQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Supprimer le tag",
+     "variations": {}
+    }
+   ]
+  },
+  "ZtGFvH83j2mpmRnBiaBlKA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Un problème c'est produit",
+     "variations": {}
+    }
+   ]
+  },
+  "ECi7RTFMNuHIvqLeoMOhyg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nom",
+     "variations": {}
+    }
+   ]
+  },
+  "acacS0kpJT5Uc7yGFnCtAA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Couleur fond",
+     "variations": {}
+    }
+   ]
+  },
+  "7AnJvMWBafagakQgWQswZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Couleur texte",
+     "variations": {}
+    }
+   ]
+  },
+  "z+fr/8GXtHYfCIdNcTRB4w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Annuler",
+     "variations": {}
+    }
+   ]
+  },
+  "1nrcQSPCDuKGcH1XRfKObA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Enregistrer",
+     "variations": {}
+    }
+   ]
+  },
+  "a9nh7e7+Q28hBhKVaHDlhA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nom du tag",
+     "variations": {}
+    }
+   ]
+  },
+  "RCo85QS5GGrngLOl7/BEgg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Administratif",
+     "variations": {}
+    }
+   ]
+  },
+  "8/GAQZM05MooRP2RpKeRmQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer un tag",
+     "variations": {}
+    }
+   ]
+  },
+  "sdp+Qf1mdSOOjJjER9mb+Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vous n'avez pas encore créé de tags.",
+     "variations": {}
+    }
+   ]
+  },
+  "kV/aVnAolzSxafm4nBxqow==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer votre premier et commencer a classer vos tâches.",
+     "variations": {}
+    }
+   ]
+  },
+  "yaey51Cf+rbg1ONjyCH2Mg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Enlever cette tâche de mon programme du jour",
+     "variations": {}
+    }
+   ]
+  },
+  "p7Bh4qNiXDAOVDDSo8BBIQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cette tâche est prévue pour aujourd'hui",
+     "variations": {}
+    }
+   ]
+  },
+  "W28x86MN0JbWGRhTd4W1Kg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Je fais cette tâche aujourd'hui",
+     "variations": {}
+    }
+   ]
+  },
+  "N+0u4KHqwRgSP+exA6KMmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter cette tâche à mon programme du jour",
+     "variations": {}
+    }
+   ]
+  },
+  "7VWGG3LM2Bt1rhX4nX3Dmw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Il manque un client à cette tâche pour qu'elle soit réalisable.",
+     "variations": {}
+    }
+   ]
+  },
+  "AUS+8OsrnhVojy23PDQq/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Il manque une facture à cette tâche pour qu'elle soit réalisable. Joignez une facture à cette tâche.",
+     "variations": {}
+    }
+   ]
+  },
+  "hwPU+hzB4mtaP0yXA38uEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Il manque un client et une facture à cette tâche pour qu'elle soit réalisable.",
+     "variations": {}
+    }
+   ]
+  },
+  "dl65fCERby2tIxsYfHlIWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Prévisualisation des actions",
+     "variations": {}
+    }
+   ]
+  },
+  "kKBr0Qtx2Acz6jLfU+Q7YQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tâche assigné à",
+     "variations": {}
+    }
+   ]
+  },
+  "WW2TgmyNPwsJ1sfvQa/mBg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ouvrir les commentaires",
+     "variations": {}
+    }
+   ]
+  },
+  "oadX5Ncr9ZMKyEUe+XSEMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ne plus rappeler à {customerName} de faire cette tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "cWisi7bqGYxheSieiCg/6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{assistantName} s'occupe de faire réaliser cette tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "z13l3P+sKl01d3AEdLHejA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Charger {assitantName} de faire réaliser cette tâche à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "54EoweRc8cDBiU/i9twd7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter la tâche aux choses à faire aujourd'hui",
+     "variations": {}
+    }
+   ]
+  },
+  "8ZnNcGSB/BPEaEtmI8Vtjg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Personne liée à la tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "yMFdToiRWmhXMnPGPHZWZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Marge restante pour commencer la tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "ccco5PNdevget3/uhxCPqQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{workedDays} {workedDaysText} jours",
+     "variations": {}
+    }
+   ]
+  },
+  "aOjE6JyG7zXWWPLzq9HPhg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{workedDays} 1 jour",
+     "variations": {}
+    }
+   ]
+  },
+  "17IyZBB4fTfHe5kW/X9e5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fichiers joints",
+     "variations": {}
+    }
+   ]
+  },
+  "b0Yiz/XkK5/Co87U0l2m6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{attachedFilesLength} fichiers",
+     "variations": {}
+    }
+   ]
+  },
+  "2we0ogHHnf6MjAUxWI6Krw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "1 fichier",
+     "variations": {}
+    }
+   ]
+  },
+  "e8wn6btvUxtacwoZA+Iwyg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Définir le type de tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "P2kqmVLdsvrWni60lCFxkw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Presser `Tab` pour changer de paramètre.",
+     "variations": {}
+    }
+   ]
+  },
+  "WZoWx/wb1FxbtVmU3ZXJ/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "`Entrée` pour valider",
+     "variations": {}
+    }
+   ]
+  },
+  "xFbeuoXyCmhu2wVfZ169QA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "VJtgIUDKGBWDdOnmN9yHEA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "yRfe5GzJEatV3OwaTjyFEw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter une tâche ou créer un section.",
+     "variations": {}
+    }
+   ]
+  },
+  "Jfg2NGSco6/jhBpoOckN1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter une tâche.",
+     "variations": {}
+    }
+   ]
+  },
+  "h55L1vyz9OWIj8NZdRbg4A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Touche entrée pour créer la tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "wGMGXmXdaUGNT5aYOUe+hQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Flèche du bas pour créer un ensemble de tâches",
+     "variations": {}
+    }
+   ]
+  },
+  "ujxdW7OMXWEAivFBdB1/rg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer une section",
+     "variations": {}
+    }
+   ]
+  },
+  "r9pf9/OwLbOscalNfHnklg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Les rappels clients ne sont pas activés pour cette tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "NtAapLMNerQHeLEq3FU6Hg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Les rappels client sont activés pour cette tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "lFSFJr7KLr8/V++kNbLOAg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Aucun client n’est lié à cette tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "QgL8RFGOAMmRs3hREibuRg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ouvrir la tâche \"{taskName}\"",
+     "variations": {}
+    }
+   ]
+  },
+  "8y1kSgtWLBmsYjJ5yYNpaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Annulé",
+     "variations": {}
+    }
+   ]
+  },
+  "NmNYKt+KBb5u8AaTr7URvw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Envoyé",
+     "variations": {}
+    }
+   ]
+  },
+  "uSyiYH1dzsHsqDVTug/UWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Supprimer cette action automatique",
+     "variations": {}
+    }
+   ]
+  },
+  "5VmV5o8Y9ut6W1vsO4/fRg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Aucune tâche ne correspond à ses critères.",
+     "variations": {}
+    }
+   ]
+  },
+  "dgWVUOq0Zg052Tg2vjr8jg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=Aucune tâche à faire pour le moment.}{=Dites-nous ce quevous souhaitez faire aujourd'hui ou affectez des tâches àvotre client .}{=Cliquez sur l'icône pour choisir un type de tâche.}",
+     "variations": {}
+    }
+   ]
+  },
+  "XltoUdKHNez2UHWg2JFmAA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Aucune tâche à faire pour le moment.",
+     "variations": {}
+    }
+   ]
+  },
+  "iT05AF5sWkFtC0ygfVFavA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Dites-nous ce que {=vous} souhaitez faire aujourd'hui ou affectez des tâches à {=votre client} .",
+     "variations": {}
+    }
+   ]
+  },
+  "2URC807fqkwzAp+obIu6sA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Les tâches violettes sont les tâches que vous prévoyez de faire",
+     "variations": {}
+    }
+   ]
+  },
+  "OW9i2hJcQBHr04+Mr9E8gQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=vous}",
+     "variations": {}
+    }
+   ]
+  },
+  "k2wcG0IVykGCyS+7jyjwqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "vous",
+     "variations": {}
+    }
+   ]
+  },
+  "TSy8ePDMG+hb8FQEnjaNTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "XWxNWBnXnPc4ViQkc17Mpg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=votre client}",
+     "variations": {}
+    }
+   ]
+  },
+  "heQ22r11vqa58TcX8xOCSg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "qh5O/c/BMAA5XZDj2PHZCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cliquez sur l'icône pour choisir un type de tâche.",
+     "variations": {}
+    }
+   ]
+  },
+  "DimmS3Y6gQZG+lPiaJdcQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "jours",
+     "variations": {}
+    }
+   ]
+  },
+  "I/1VqcYjGVDwj3ER+mFxwA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " jour",
+     "variations": {}
+    }
+   ]
+  },
+  "VLQLsjivrXj3/IpKs1hohA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fait",
+     "variations": {}
+    }
+   ]
+  },
+  "lec416WWcYuS0tj9KEk83g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ré-ouvrir la tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "XQIMLBvqMLYA+0BuEA11BA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Marquer comme fait",
+     "variations": {}
+    }
+   ]
+  },
+  "wSDqRzNSRCV/lAFstY3cZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Cliquer si cette tâche a été réalisée",
+     "variations": {}
+    }
+   ]
+  },
+  "R1l/CHfPdQLEvMGzqCZy4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tâches automatiques et/ou prédéfinies",
+     "variations": {}
+    }
+   ]
+  },
+  "EQjurO3LYr2flJ+mnPDmPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ecrivez ici...",
+     "variations": {}
+    }
+   ]
+  },
+  "26cu1NFCEaNmdGnMxeeWvw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Temps dépassé",
+     "variations": {}
+    }
+   ]
+  },
+  "qRD7hPACxpf6ERPedGAzDA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Temps surestimé",
+     "variations": {}
+    }
+   ]
+  },
+  "NS4pcMPvWXw6aCVask7ujw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "La version d'essai s'arrête {date}",
+     "variations": {}
+    }
+   ]
+  },
+  "AK9QcaD1X1QUjUtNEyASQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Passer à la version payante",
+     "variations": {}
+    }
+   ]
+  },
+  "PhPVSOdXlMF6mLuFBvzyPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "heures",
+     "variations": {}
+    }
+   ]
+  },
+  "UjPKEfcKm0iqOwG63Z/KeQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " heure",
+     "variations": {}
+    }
+   ]
+  },
+  "x1tyvdB8MRzLg+jGjhF7lw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "jours",
+     "variations": {}
+    }
+   ]
+  },
+  "lAnttCCjfPCPrV7JDQRmIg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " jour",
+     "variations": {}
+    }
+   ]
+  },
+  "eWEhoomhYZ5RU7xkRHO29Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "travaillées",
+     "variations": {}
+    }
+   ]
+  },
+  "j+BJwT4aXGrolwB4Xvy4EQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " travaillée",
+     "variations": {}
+    }
+   ]
+  },
+  "BmcGhdMvkoWYqoLSqLuyAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "travaillés",
+     "variations": {}
+    }
+   ]
+  },
+  "tIZMujl463EtvSJOE81ZXw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " travaillé",
+     "variations": {}
+    }
+   ]
+  },
+  "D1+T+h79YUP52R0qppp8yQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "encore disponibles",
+     "variations": {}
+    }
+   ]
+  },
+  "QydQ/u+BrtEDDz0iycVSBg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " encore disponible",
+     "variations": {}
+    }
+   ]
+  },
+  "uOln63s+jZiB/HpReRL68w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "supplémentaire",
+     "variations": {}
+    }
+   ]
+  },
+  "1NAgDG7zwjGA95mqXUp5uw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": " supplémentaires",
+     "variations": {}
+    }
+   ]
+  },
+  "bRrt5b1vViqaEiMxvjdyfA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Durée de la tâche",
+     "variations": {}
+    }
+   ]
+  },
+  "WGB4try42w5d97hqUrQ5Mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Changer l'unité de temps",
+     "variations": {}
+    }
+   ]
+  },
+  "gFFcv3gSdxZk3NFM3z+mqQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Valider le temps et marquer comme fait",
+     "variations": {}
+    }
+   ]
+  },
+  "ufUWSEzOm8vyTuA2ElZeUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "5Mo total maximum",
+     "variations": {}
+    }
+   ]
+  },
+  "uC2Eh2n+q7ybWBSBcdCJXQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fermer",
+     "variations": {}
+    }
+   ]
+  },
+  "LgpEop1rs/PxncMTMR6NCg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Annuler",
+     "variations": {}
+    }
+   ]
+  },
+  "8g1SovisVn7dSjCC+Koi7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Ajouter d'autres fichiers",
+     "variations": {}
+    }
+   ]
+  },
+  "M7YwHi0LPdDtmKpnq0h7wQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Importer",
+     "variations": {}
+    }
+   ]
+  },
+  "DQAuz9tGMIyaLSxAfGx3Cg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Appuyer sur échap pour fermer",
+     "variations": {}
+    }
+   ]
+  },
+  "jO/bkd4gn0RDv3qitl0ddg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Téléversement de document",
+     "variations": {}
+    }
+   ]
+  },
+  "bTmZ5H9iocGPKScFNVq22g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Lien copié !",
+     "variations": {}
+    }
+   ]
+  },
+  "aMAihueHiqs/jvWDRnAJZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Copiez l'url ci-dessous",
+     "variations": {}
+    }
+   ]
+  },
+  "ZUgYx3fJ8ZTUcgBZf0QK9Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Copiez le lien",
+     "variations": {}
+    }
+   ]
+  },
+  "hdywRfEYw1zDeSq9PBmyYw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fichier source: {name}",
+     "variations": {}
+    }
+   ]
+  },
+  "U36ADZ1K4WXynEPg7XSWVw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Terminé",
+     "variations": {}
+    }
+   ]
+  },
+  "ubRu3KZOnpfwgki00HrWhw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Retirer le fichier",
+     "variations": {}
+    }
+   ]
+  },
+  "RruyjG6y/9rRRlv9IFQH/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Modifier le fichier",
+     "variations": {}
+    }
+   ]
+  },
+  "QAS+9Csczykro0iOwUZTPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Modification de {file} en cours",
+     "variations": {}
+    }
+   ]
+  },
+  "eNi/jlbqpHkKzuRpHa7S7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Modifier",
+     "variations": {}
+    }
+   ]
+  },
+  "QiWYflRhc3gIMPq3b/k8lQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Valider modification",
+     "variations": {}
+    }
+   ]
+  },
+  "uNYI17mN79lI3tR/O0qeDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mon appareil",
+     "variations": {}
+    }
+   ]
+  },
+  "QKxyV3qx182h+0AUxS/bBw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Déposer des fichiers ici, {browse} votre ordinateur, ou importer de",
+     "variations": {}
+    }
+   ]
+  },
+  "pNpjtwC48a1T5xQDbThe1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Déposer des fichiers ici ou {browser} votre ordinateur",
+     "variations": {}
+    }
+   ]
+  },
+  "dvngynB1xzacEO672BH3Fw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "parcourir",
+     "variations": {}
+    }
+   ]
+  },
+  "qb746wHKeqixmD3Uyb0TMA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Téléversement complété",
+     "variations": {}
+    }
+   ]
+  },
+  "5Y/wetqEH5fndpP1E9x5jA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Reprendre téléversement",
+     "variations": {}
+    }
+   ]
+  },
+  "wzXtOG/oBdZgxrYIzwGH7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Pauser téléversement",
+     "variations": {}
+    }
+   ]
+  },
+  "MspQFmxO1GpxcQlYABR3Hg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Réessayer téléversement",
+     "variations": {}
+    }
+   ]
+  },
+  "NjEbYFmBk3VcEyT7ZNclfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{smartCount} fichier sélectionné",
+     "variations": {}
+    }
+   ]
+  },
+  "FK7rTGBN5/a379aA1OIZ0g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{smartCount} fichiers sélectionnés",
+     "variations": {}
+    }
+   ]
+  },
+  "tua1HA2mbPyuJDZlBZK4yw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "En cours d'envoi",
+     "variations": {}
+    }
+   ]
+  },
+  "7+YhjI1xOrhhJ0Wf9hyORQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Terminé",
+     "variations": {}
+    }
+   ]
+  },
+  "NtWqhmYpXKhSrATswkArug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nom de l'assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "+H3+Bor//yi+bztLnvoPNw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mettre à jour",
+     "variations": {}
+    }
+   ]
+  },
+  "l3FQqY76BTjAVhnKJLbldg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Raison sociale",
+     "variations": {}
+    }
+   ]
+  },
+  "vcR97IvUeEk/eoSlrsPF7w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Bertrand SA",
+     "variations": {}
+    }
+   ]
+  },
+  "6nC+/TRmyaMHkVN2gM/4LA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Numéro de téléphone",
+     "variations": {}
+    }
+   ]
+  },
+  "8INpXIUFrim0DFqdR969lA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "0427...",
+     "variations": {}
+    }
+   ]
+  },
+  "QBtafI1hKYBVCIJVUQiQNA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Adresse de la société",
+     "variations": {}
+    }
+   ]
+  },
+  "tKDQvuckzlMkqxRQ6nVeUQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Prénom",
+     "variations": {}
+    }
+   ]
+  },
+  "yLb/XMPb6OxiquIsHKUzhg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Jacques",
+     "variations": {}
+    }
+   ]
+  },
+  "rtgzeya0d0tx6WbU7vp5MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Nom",
+     "variations": {}
+    }
+   ]
+  },
+  "RQiAjOLwfLR1RRcfF3WNOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Bertrand",
+     "variations": {}
+    }
+   ]
+  },
+  "wna0FUk7gWFKmLBh9RHo/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Email",
+     "variations": {}
+    }
+   ]
+  },
+  "7rGKz1PBwZPyEyze4fA2lw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "jacques@bertrandsa.com",
+     "variations": {}
+    }
+   ]
+  },
+  "OPnotGia0dOGBf9WwiENqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "matin",
+     "variations": {}
+    }
+   ]
+  },
+  "Jjs0w0HhNdCnigjXbVf/Nw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "petit déjeuner",
+     "variations": {}
+    }
+   ]
+  },
+  "9ddGoR97go79DKEIb6E4Tw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "déjeuner",
+     "variations": {}
+    }
+   ]
+  },
+  "KTBDnqFdeYJqAVvMCQhTZA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "soirée",
+     "variations": {}
+    }
+   ]
+  },
+  "RQWEt64u9sSyyY2x55ZFrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "nuit",
+     "variations": {}
+    }
+   ]
+  },
+  "VEkFArLbNPFCUCcY/9LdMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Jours travaillés",
+     "variations": {}
+    }
+   ]
+  },
+  "e9blpGJ3ohrnJtiqeUPSeQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Afficher seulement les jours travaillés dans le calendrier",
+     "variations": {}
+    }
+   ]
+  },
+  "X3FGQxYJmAJHajDXM4EKdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Fuseau horaire",
+     "variations": {}
+    }
+   ]
+  },
+  "d0hqbx4CE+vVuAB5AmruYQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Triez par fuseau",
+     "variations": {}
+    }
+   ]
+  },
+  "+PmhHJZfOZ3gkpl0DbCeuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "lun.",
+     "variations": {}
+    }
+   ]
+  },
+  "wD+HD22PU9FBg/WiuyKitA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "mar.",
+     "variations": {}
+    }
+   ]
+  },
+  "yzwAJKdqF3VcPTd0oQxk/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "mer.",
+     "variations": {}
+    }
+   ]
+  },
+  "WETd2fSSML0hVoySNkgb2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "jeu.",
+     "variations": {}
+    }
+   ]
+  },
+  "b39Zrr2sgT86V41qBOIr5g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "ven.",
+     "variations": {}
+    }
+   ]
+  },
+  "xhrret5iPPHjzoxV54a0qA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "sam.",
+     "variations": {}
+    }
+   ]
+  },
+  "SPr4BNjUydrldEsrvJjBsQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "dim.",
+     "variations": {}
+    }
+   ]
+  },
+  "dRpvEmIGU8L2bz/BSZSh+g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{=Bienvenue sur Inyo,}{=Découvrez en 1'30 min les options de bases de Inyo et commencez dès maintenant à optimiser vos journées!}",
+     "variations": {}
+    }
+   ]
+  },
+  "fbQO5dX6zr6+oy92rddz7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Bienvenue sur Inyo,",
+     "variations": {}
+    }
+   ]
+  },
+  "Rofp3YzRdAAjRoPxh7q45w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Découvrez en 1'30 min les options de bases de Inyo et commencez dès maintenant à optimiser vos journées!",
+     "variations": {}
+    }
+   ]
+  },
+  "+JrndFhv3EieAmIh4M4Vlw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "J'ai compris!",
+     "variations": {}
+    }
+   ]
+  },
+  "XExdBgqJHNNwA1FTFraJjw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "{prout}haha",
+     "variations": {}
+    }
+   ]
+  },
+  "T6syVNkrj+0HaeYMmjbT2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Janvier",
+     "variations": {}
+    }
+   ]
+  },
+  "GSHolrLm22TJzcRAoqLU/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Février",
+     "variations": {}
+    }
+   ]
+  },
+  "KEWH1ItA0zQFM7zRp5c+yw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mars",
+     "variations": {}
+    }
+   ]
+  },
+  "OKPEwkxQRN11vFVVKgTHkQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Avril",
+     "variations": {}
+    }
+   ]
+  },
+  "TdU0dZQ3Quv5VRZLqfy6iA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mai",
+     "variations": {}
+    }
+   ]
+  },
+  "KZclEfNZNWtnjtwmchV3nQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Juin",
+     "variations": {}
+    }
+   ]
+  },
+  "FL3dzXtERmpL+3ZXkTi/jw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Juillet",
+     "variations": {}
+    }
+   ]
+  },
+  "aLbZBXhCk/Q82C33/70vug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Août",
+     "variations": {}
+    }
+   ]
+  },
+  "t4ktBxFZHW4vixUBvTGZOg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Septembre",
+     "variations": {}
+    }
+   ]
+  },
+  "kg9VQ3PEMp3lN0du4q8VFg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Octobre",
+     "variations": {}
+    }
+   ]
+  },
+  "5p0OYRp5lK58N4NFJICqrQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Novembre",
+     "variations": {}
+    }
+   ]
+  },
+  "BF4QKU2xDn522qR7RFoVOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Décembre'",
+     "variations": {}
+    }
+   ]
+  },
+  "xXh3WMjVhbuTHBgaea6mUg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Dimanche",
+     "variations": {}
+    }
+   ]
+  },
+  "IPjX4NvI5d0Bs6Y6P7crzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Lundi",
+     "variations": {}
+    }
+   ]
+  },
+  "MuMD31rJxrt3Jdn+pk5Omg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mardi",
+     "variations": {}
+    }
+   ]
+  },
+  "utNqaX0OrZKDRVDBEcoaug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mercredi",
+     "variations": {}
+    }
+   ]
+  },
+  "QdPcOI0xiT8MPCNJ4N73Hg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Jeudi",
+     "variations": {}
+    }
+   ]
+  },
+  "ut7u0qJPvl2D0uyQF/CP/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Vendredi",
+     "variations": {}
+    }
+   ]
+  },
+  "SSvJy8FM+/k7esNsMoGaGg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Samedi",
+     "variations": {}
+    }
+   ]
+  },
+  "KQ+cxh8crAErMUaJtC6Tig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mois suivant",
+     "variations": {}
+    }
+   ]
+  },
+  "4xvLl6dKWzFpJOaE4OdKMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Mois précédent",
+     "variations": {}
+    }
+   ]
+  },
+  "nURDqGqUCBOFi2Rl0IvCTQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Basique",
+     "variations": {}
+    }
+   ]
+  },
+  "QOM/iP03p2OQUAqw55BnIA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Une tâche dont vous êtes responsable",
+     "variations": {}
+    }
+   ]
+  },
+  "4CDZsMrT7Lk0cSGs1se2mA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Une tâche dont la personne assigné est responsable",
+     "variations": {}
+    }
+   ]
+  },
+  "t57XFFWkRRQRlX8FSfaN/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Tâche attribuée au client",
+     "variations": {}
+    }
+   ]
+  },
+  "fTU6xdNf6xr2TS3FNcRvuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Une tâche à réaliser par votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "bEovwrqltpJTA+cuJRwcLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Récupération contenu",
+     "variations": {}
+    }
+   ]
+  },
+  "2lCIjYCIJsmj+/lNyb4CTw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Lister et récupérer les contenus nécessaires",
+     "variations": {}
+    }
+   ]
+  },
+  "LWszS7ZyMERr96mv8egdvg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Section de projet",
+     "variations": {}
+    }
+   ]
+  },
+  "K+PfydH1lJTFOdTguW5nhA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Créer une section pour classer les tâches d'un projet",
+     "variations": {}
+    }
+   ]
+  },
+  "0BRk+oCCSvNPhSgoCb9asg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Paiement de facture",
+     "variations": {}
+    }
+   ]
+  },
+  "c/XkS8DDGdK+8cAgMbIimA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Envoyer une facture et demander un paiement à votre client",
+     "variations": {}
+    }
+   ]
+  },
+  "SVhqzzg4/IxMKln7BSYk7A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "1er mail envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "iEJHGAs+SRMHUbeRhU/6HA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Rappel nº1 envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "JYVTZfqT+nW7gKGDbNB7ww==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Rappel nº2 envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "hZl5XZ1gk33FC1X7bPN7dA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Dernier rappel (nº3) envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "b2eK0T8Mm+CY1WEB2ANPpw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "1er mail règlement de facture envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "sZD2JvaE9eACf94+bBkhPQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Rappel règlement de facture nº1 envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "EU4qLnTjs5l/mP+jZD9I4A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Rappel règlement de facture nº2 envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "iIbtwgAEUu75Uwew8JaoAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Rappel règlement de facture nº3 envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "xir0DLqOLa4a/sfH01Gtyg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Rappel règlement de facture nº4 envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "2knHjWicl+L9VjUPYjYNJw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translations": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}",
+     "variations": {}
+    }
+   ]
+  }
+ }
 }

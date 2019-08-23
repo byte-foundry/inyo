@@ -47,19 +47,20 @@ function generateFile(locale, hashToTexts) {
 	};
 
 	hashToTexts.forEach((hashToText) => {
-		const hash = Object.keys(hashToText)[0];
-		const text = hashToText[hash];
+		Object.keys(hashToText).forEach((hash) => {
+			const text = hashToText[hash];
 
-		content.translations[hash] = {
-			tokens: [],
-			types: [],
-			translations: [
-				{
-					translations: text,
-					variations: {},
-				},
-			],
-		};
+			content.translations[hash] = {
+				tokens: [],
+				types: [],
+				translations: [
+					{
+						translations: text,
+						variations: {},
+					},
+				],
+			};
+		});
 	});
 
 	return content;
@@ -71,7 +72,28 @@ if (argv[args.HELP]) {
 }
 
 const hashToTexts = extractHashToTexts(argv[args.SOURCE_STRINGS]);
-const output = generateFile(argv[args.LOCALE], hashToTexts);
+const newOutput = generateFile(argv[args.LOCALE], hashToTexts);
+const outputFilePath = path.join(
+	argv[args.OUT_DIRECTORY],
+	`${argv[args.LOCALE]}.json`,
+);
+
+let output = newOutput;
+
+try {
+	const existingFile = JSON.parse(fs.readFileSync(outputFilePath));
+
+	output = {
+		...newOutput,
+		translations: {
+			...newOutput.translations,
+			...existingFile.translations,
+		},
+	};
+}
+catch (e) {
+	console.log('no existingFile');
+}
 
 fs.writeFileSync(
 	path.join(argv[args.OUT_DIRECTORY], `${argv[args.LOCALE]}.json`),

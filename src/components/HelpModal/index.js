@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {ModalActions, ModalContainer, ModalElem} from '../../utils/content';
 import {
 	A, Button, Heading, P, UL,

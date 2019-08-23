@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {
 	Button,
@@ -260,7 +261,13 @@ const TaskInput = ({
 	return (
 		<Container ref={ref}>
 			<InputContainer>
-				<Tooltip label="Définir le type de tâche">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="task input icon tooltip">
+							Définir le type de tâche
+						</fbt>
+					}
+				>
 					<Icon
 						onClick={() => setOpenedByClick(true)}
 						active={type}
@@ -272,9 +279,19 @@ const TaskInput = ({
 				<Tooltip
 					label={
 						<p>
-							Presser `Tab` pour changer de paramètre.
+							<fbt
+								project="inyo"
+								desc="task input tooltip 1st part"
+							>
+								Presser `Tab` pour changer de paramètre.
+							</fbt>
 							<br />
-							`Entrée` pour valider
+							<fbt
+								project="inyo"
+								desc="task input tooltip 2nd part"
+							>
+								`Entrée` pour valider
+							</fbt>
 						</p>
 					}
 				>
@@ -382,24 +399,56 @@ const TaskInput = ({
 							}
 						}}
 						placeholder={
-							focus
-								? `Titre de la tâche ou ${
-									currentProjectId
-										? 'de la section'
-										: 'du projet'
-								  }. Commencez par "/" pour changer le type de tâche`
-								: `Ajouter une tâche ou créer ${
-									currentProjectId
-										? 'une section'
-										: 'un projet'
-								  }`
+							focus ? (
+								currentProjectId ? (
+									<fbt
+										project="inyo"
+										desc="focused task input placeholder in project"
+									>
+										Titre de la tâche ou de la section.
+										Commencez par "/" pour changer le type
+										de tâche
+									</fbt>
+								) : (
+									<fbt
+										project="inyo"
+										desc="focused task input placeholder"
+									>
+										Titre de la tâche. Commencez par "/"
+										pour changer le type de tâche
+									</fbt>
+								)
+							) : currentProjectId ? (
+								<fbt
+									project="inyo"
+									desc="unfocused task input placeholder in project"
+								>
+									Ajouter une tâche ou créer un section.
+								</fbt>
+							) : (
+								<fbt
+									project="inyo"
+									desc="unfocused task input placeholder"
+								>
+									Ajouter une tâche.
+								</fbt>
+							)
 						}
 					/>
 				</Tooltip>
 				{(focus || value) && (
 					<InputButtonWrapper>
 						<InputButtonContainer>
-							<Tooltip label="Touche entrée pour créer la tâche">
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="input button tooltip create task"
+									>
+										Touche entrée pour créer la tâche
+									</fbt>
+								}
+							>
 								<Button
 									icon="↵"
 									id="create-task-button"
@@ -471,13 +520,28 @@ const TaskInput = ({
 								</Button>
 							</Tooltip>
 							{type !== 'SECTION' && onSubmitSection && (
-								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="section create tooltip"
+										>
+											Flèche du bas pour créer un ensemble
+											de tâches
+										</fbt>
+									}
+								>
 									<Button
 										icon="↓"
 										onClick={() => onSubmitSection({name: value})
 										}
 									>
-										Créer une section
+										<fbt
+											project="inyo"
+											desc="create a section"
+										>
+											Créer une section
+										</fbt>
 									</Button>
 								</Tooltip>
 							)}

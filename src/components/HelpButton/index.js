@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react';
 import {withRouter} from 'react-router';
 
+import fbt from '../../fbt/fbt.macro';
 import {Help} from '../../utils/new/design-system';
 import HelpModal from '../HelpModal';
 import Tooltip from '../Tooltip';

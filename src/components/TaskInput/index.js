@@ -292,9 +292,9 @@ const TaskInput = ({
 				<Tooltip
 					label={
 						<p>
-							Presser `Tab` pour changer de paramètre.
-							<br />
-							`Entrée` pour valider
+							`Entrée` pour créer une tâche
+							<br />`{currentProjectId ? '↓' : '↑'}` pour créer{' '}
+							{currentProjectId ? 'une section' : 'un projet'}
 						</p>
 					}
 				>

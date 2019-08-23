@@ -304,7 +304,12 @@ const TaskInput = ({
 						type="text"
 						onChange={e => setValue(e.target.value)}
 						value={value}
-						onFocus={() => setFocus(true)}
+						onFocus={(e) => {
+							// weird, not sure why the onBlur isn't called instead
+							if (e.type === 'focus') setFocus(true);
+							else if (e.type === 'blur') setFocus(false);
+						}}
+						onBlur={() => setFocus(false)}
 						onKeyDown={(e) => {
 							if (!value.startsWith('/')) {
 								if (e.key === 'ArrowUp' && onSubmitProject) {

@@ -52,7 +52,7 @@ const InputButtonContainer = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
 	right: calc(-100% + 1rem);
-	top: -13px;
+	bottom: -13px;
 	width: 166px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -76,7 +76,10 @@ const InputButtonContainer = styled('div')`
 			content: 'ou';
 			color: ${primaryGrey};
 			position: absolute;
-			left: -1.2rem;
+			top: 37%;
+			background: white;
+			padding: 4px;
+			border-radius: 50%;
 		}
 
 		@media (max-width: ${BREAKPOINTS}px) {
@@ -90,8 +93,8 @@ const InputButtonContainer = styled('div')`
 		}
 	}
 
-	& ${Button}:first-of-type {
-		margin-bottom: 2rem;
+	& ${Button}:last-of-type {
+		margin-top: 1.75rem;
 
 		&:after {
 			display: none;
@@ -410,6 +413,17 @@ const TaskInput = ({
 				{(focus || value) && (
 					<InputButtonWrapper>
 						<InputButtonContainer>
+							{type !== 'SECTION' && onSubmitSection && (
+								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
+									<Button
+										icon="↓"
+										onClick={() => onSubmitSection({name: value})
+										}
+									>
+										Créer une section
+									</Button>
+								</Tooltip>
+							)}
 							<Tooltip label="Touche entrée pour créer la tâche">
 								<Button
 									icon="↵"
@@ -452,17 +466,6 @@ const TaskInput = ({
 									{type === 'SECTION' ? 'section' : 'tâche'}
 								</Button>
 							</Tooltip>
-							{type !== 'SECTION' && onSubmitSection && (
-								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
-									<Button
-										icon="↓"
-										onClick={() => onSubmitSection({name: value})
-										}
-									>
-										Créer une section
-									</Button>
-								</Tooltip>
-							)}
 						</InputButtonContainer>
 					</InputButtonWrapper>
 				)}

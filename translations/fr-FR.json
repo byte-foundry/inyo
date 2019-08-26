@@ -597,7 +597,6 @@
    "translations": [
     {
      "translations": "If you have any questions please send them to me.",
-     "translations": "Je reste à votre disposition si vous avez des questions.",
      "variations": {}
     }
    ]
@@ -878,7 +877,6 @@
    "translations": [
     {
      "translations": "{days of margin} days until you need to start this task",
-     "translations": "Cela vous laisse {days of margin} jours pour commencer cette tâche",
      "variations": {}
     }
    ]
@@ -1029,7 +1027,6 @@
    "translations": [
     {
      "translations": "Missing informations? Contact us using the instant messaging in the lower right or vote on feature on {=notre roadmap collaborative.}",
-     "translations": "Une information est manquante? Contactez-nous via la messagerie en bas à droite, ou proposez des fonctionnalités sur {=notre roadmap collaborative.}",
      "variations": {}
     }
    ]
@@ -1300,7 +1297,6 @@
    "translations": [
     {
      "translations": "We need this info to send you email at the right time.",
-     "translations": "Nous avons besoin de ces informations pour vous envoyer des emails au bon moment, en cohérence avec vos journées de travail.",
      "variations": {}
     }
    ]
@@ -1621,7 +1617,6 @@
    "translations": [
     {
      "translations": "Juggle between multiple communication channels",
-     "translations": "Jongler entre plusieurs canaux de communications (Slack, emails, etc.)",
      "variations": {}
     }
    ]
@@ -1632,7 +1627,6 @@
    "translations": [
     {
      "translations": "Correctly estimate the duration of my projects",
-     "translations": "Estimer correctement le temps et les tâches en amont du projet",
      "variations": {}
     }
    ]
@@ -1643,7 +1637,6 @@
    "translations": [
     {
      "translations": "Organise and succesfully stick to my planning",
-     "translations": "Organiser et respecter mon programme de temps de travail",
      "variations": {}
     }
    ]
@@ -1654,7 +1647,6 @@
    "translations": [
     {
      "translations": "Follow up with my clients for validations",
-     "translations": "Relancer mes clients pour obtenir des validations",
      "variations": {}
     }
    ]
@@ -1845,7 +1837,6 @@
    "translations": [
     {
      "translations": "These notes are shared with your {otherUserName}.",
-     "translations": "Ces notes sont partagées avec votre {otherUserName}.",
      "variations": {}
     }
    ]
@@ -2016,7 +2007,6 @@
    "translations": [
     {
      "translations": "This link is not valid anymore. Try again by going to the page {link}",
-     "translations": "Ce lien n'est pas ou plus valide. Essayez de recommencer en vous rendant sur la page {link} .",
      "variations": {}
     }
    ]
@@ -2746,7 +2736,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Nom du tag",
+     "translations": "Tag's name",
      "variations": {}
     }
    ]
@@ -2756,7 +2746,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Administratif",
+     "translations": "Administrative",
      "variations": {}
     }
    ]
@@ -2766,7 +2756,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Créer un tag",
+     "translations": "Create a tag",
      "variations": {}
     }
    ]
@@ -2776,7 +2766,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Vous n'avez pas encore créé de tags.",
+     "translations": "You have not created any tags",
      "variations": {}
     }
    ]
@@ -2786,7 +2776,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Créer votre premier et commencer a classer vos tâches.",
+     "translations": "Create your first tag and start tagging your tasks!",
      "variations": {}
     }
    ]
@@ -2796,7 +2786,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Enlever cette tâche de mon programme du jour",
+     "translations": "Remove this task from today's workload",
      "variations": {}
     }
    ]
@@ -2806,7 +2796,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Cette tâche est prévue pour aujourd'hui",
+     "translations": "This task is planned for today",
      "variations": {}
     }
    ]
@@ -2816,7 +2806,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Je fais cette tâche aujourd'hui",
+     "translations": "I'm doing this task today",
      "variations": {}
     }
    ]
@@ -2826,7 +2816,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter cette tâche à mon programme du jour",
+     "translations": "Add this task to today's workload",
      "variations": {}
     }
    ]
@@ -2836,7 +2826,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Il manque un client à cette tâche pour qu'elle soit réalisable.",
+     "translations": "This task is missing a client to be activable.",
      "variations": {}
     }
    ]
@@ -2846,7 +2836,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Il manque une facture à cette tâche pour qu'elle soit réalisable. Joignez une facture à cette tâche.",
+     "translations": "This task is missing an invoice to be activable. Attach an invoice to it.",
      "variations": {}
     }
    ]
@@ -2856,7 +2846,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Il manque un client et une facture à cette tâche pour qu'elle soit réalisable.",
+     "translations": "This task is missing an invoice and client to be activable.",
      "variations": {}
     }
    ]
@@ -2866,7 +2856,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Prévisualisation des actions",
+     "translations": "Preview automatic actions",
      "variations": {}
     }
    ]
@@ -2876,7 +2866,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Tâche assigné à",
+     "translations": "Assigned to",
      "variations": {}
     }
    ]
@@ -2886,7 +2876,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ouvrir les commentaires",
+     "translations": "Open comments",
      "variations": {}
     }
    ]
@@ -2896,7 +2886,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ne plus rappeler à {customerName} de faire cette tâche",
+     "translations": "Stop reminding {customerName} to complete this task",
      "variations": {}
     }
    ]
@@ -2906,7 +2896,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{assistantName} s'occupe de faire réaliser cette tâche",
+     "translations": "{assistantName} is handling the completion of this task",
      "variations": {}
     }
    ]
@@ -2916,7 +2906,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Charger {assitantName} de faire réaliser cette tâche à {customerName}",
+     "translations": "Let {assitantName} reminds {customerName} of their task",
      "variations": {}
     }
    ]
@@ -2926,7 +2916,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter la tâche aux choses à faire aujourd'hui",
+     "translations": "Add the task to today's workload",
      "variations": {}
     }
    ]
@@ -2936,7 +2926,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Personne liée à la tâche",
+     "translations": "Task's client",
      "variations": {}
     }
    ]
@@ -2946,7 +2936,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Marge restante pour commencer la tâche",
+     "translations": "Remaining days to start the task",
      "variations": {}
     }
    ]
@@ -2956,7 +2946,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{workedDays} {workedDaysText} jours",
+     "translations": "{workedDays} {workedDaysText} days",
      "variations": {}
     }
    ]
@@ -2966,7 +2956,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{workedDays} 1 jour",
+     "translations": "{workedDays} 1 day",
      "variations": {}
     }
    ]
@@ -2976,7 +2966,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Fichiers joints",
+     "translations": "Attached files",
      "variations": {}
     }
    ]
@@ -2986,7 +2976,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{attachedFilesLength} fichiers",
+     "translations": "{attachedFilesLength} files",
      "variations": {}
     }
    ]
@@ -2996,7 +2986,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "1 fichier",
+     "translations": "1 file",
      "variations": {}
     }
    ]
@@ -3006,7 +2996,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Définir le type de tâche",
+     "translations": "Choose the task's type",
      "variations": {}
     }
    ]
@@ -3016,7 +3006,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Presser `Tab` pour changer de paramètre.",
+     "translations": "Press `Tab` to modify the task's parameters",
      "variations": {}
     }
    ]
@@ -3026,7 +3016,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "`Entrée` pour valider",
+     "translations": "`Enter` to confirm",
      "variations": {}
     }
    ]
@@ -3036,7 +3026,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche",
+     "translations": "Name of the task or part. Type \"/\" to change the type's task",
      "variations": {}
     }
    ]
@@ -3046,7 +3036,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche",
+     "translations": "Name of the task. Type \"/\" to change the type's task",
      "variations": {}
     }
    ]
@@ -3056,7 +3046,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter une tâche ou créer un section.",
+     "translations": "Add a task or a part.",
      "variations": {}
     }
    ]
@@ -3066,7 +3056,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter une tâche.",
+     "translations": "Add a task.",
      "variations": {}
     }
    ]
@@ -3076,7 +3066,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Touche entrée pour créer la tâche",
+     "translations": "Type `Enter` to create the task",
      "variations": {}
     }
    ]
@@ -3086,7 +3076,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Flèche du bas pour créer un ensemble de tâches",
+     "translations": "Down arrow to create the part",
      "variations": {}
     }
    ]
@@ -3096,7 +3086,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Créer une section",
+     "translations": "Create a part",
      "variations": {}
     }
    ]
@@ -3106,7 +3096,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Les rappels clients ne sont pas activés pour cette tâche",
+     "translations": "Client reminders are not active for this task",
      "variations": {}
     }
    ]
@@ -3116,7 +3106,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Les rappels client sont activés pour cette tâche",
+     "translations": "Client reminders are active for this task",
      "variations": {}
     }
    ]
@@ -3126,7 +3116,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Aucun client n’est lié à cette tâche",
+     "translations": "No client has been linked to this task",
      "variations": {}
     }
    ]
@@ -3136,7 +3126,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ouvrir la tâche \"{taskName}\"",
+     "translations": "Open the task \"{taskName}\"",
      "variations": {}
     }
    ]
@@ -3146,7 +3136,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Annulé",
+     "translations": "Cancelled",
      "variations": {}
     }
    ]
@@ -3156,7 +3146,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Envoyé",
+     "translations": "Sent",
      "variations": {}
     }
    ]
@@ -3166,7 +3156,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Supprimer cette action automatique",
+     "translations": "Cancel this reminder",
      "variations": {}
     }
    ]
@@ -3176,7 +3166,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Aucune tâche ne correspond à ses critères.",
+     "translations": "No task match these criteria",
      "variations": {}
     }
    ]
@@ -3196,7 +3186,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Aucune tâche à faire pour le moment.",
+     "translations": "No task to do right now",
      "variations": {}
     }
    ]
@@ -3206,7 +3196,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Dites-nous ce que {=vous} souhaitez faire aujourd'hui ou affectez des tâches à {=votre client} .",
+     "translations": "Tell us what {=vous} want to do today or assign task to your {=votre client} .",
      "variations": {}
     }
    ]
@@ -3216,7 +3206,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Les tâches violettes sont les tâches que vous prévoyez de faire",
+     "translations": "The purple tasks are tasks that you plan to do",
      "variations": {}
     }
    ]
@@ -3236,7 +3226,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "vous",
+     "translations": "you",
      "variations": {}
     }
    ]
@@ -3246,7 +3236,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client",
+     "translations": "The pink tasks can trigger reminders for you client.",
      "variations": {}
     }
    ]
@@ -3266,7 +3256,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "votre client",
+     "translations": "your client",
      "variations": {}
     }
    ]
@@ -3276,7 +3266,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Cliquez sur l'icône pour choisir un type de tâche.",
+     "translations": "Click here to change the task's type",
      "variations": {}
     }
    ]
@@ -3286,7 +3276,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "jours",
+     "translations": " days",
      "variations": {}
     }
    ]
@@ -3296,7 +3286,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " jour",
+     "translations": " day",
      "variations": {}
     }
    ]
@@ -3306,7 +3296,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Fait",
+     "translations": "Done",
      "variations": {}
     }
    ]
@@ -3316,7 +3306,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ré-ouvrir la tâche",
+     "translations": "Reopen the task",
      "variations": {}
     }
    ]
@@ -3326,7 +3316,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Marquer comme fait",
+     "translations": "Mark as done",
      "variations": {}
     }
    ]
@@ -3336,7 +3326,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Cliquer si cette tâche a été réalisée",
+     "translations": "Click here if this task is already done",
      "variations": {}
     }
    ]
@@ -3346,7 +3336,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Tâches automatiques et/ou prédéfinies",
+     "translations":"Types of tasks",
      "variations": {}
     }
    ]
@@ -3356,7 +3346,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ecrivez ici...",
+     "translations": "Type here...",
      "variations": {}
     }
    ]
@@ -3366,7 +3356,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Temps dépassé",
+     "translations": "Overtime",
      "variations": {}
     }
    ]
@@ -3376,7 +3366,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Temps surestimé",
+     "translations": "Overestimated time",
      "variations": {}
     }
    ]
@@ -3386,7 +3376,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "La version d'essai s'arrête {date}",
+     "translations": "The trial version will end on {date}",
      "variations": {}
     }
    ]
@@ -3396,7 +3386,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Passer à la version payante",
+     "translations": "Switch to premium version",
      "variations": {}
     }
    ]
@@ -3406,7 +3396,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "heures",
+     "translations": "hours",
      "variations": {}
     }
    ]
@@ -3416,7 +3406,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " heure",
+     "translations": " hour",
      "variations": {}
     }
    ]
@@ -3426,7 +3416,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "jours",
+     "translations": "days",
      "variations": {}
     }
    ]
@@ -3436,7 +3426,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " jour",
+     "translations": " day",
      "variations": {}
     }
    ]
@@ -3446,7 +3436,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "travaillées",
+     "translations": "worked",
      "variations": {}
     }
    ]
@@ -3456,7 +3446,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " travaillée",
+     "translations": " work",
      "variations": {}
     }
    ]
@@ -3466,7 +3456,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "travaillés",
+     "translations": "worked",
      "variations": {}
     }
    ]
@@ -3476,7 +3466,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " travaillé",
+     "translations": " worked",
      "variations": {}
     }
    ]
@@ -3486,7 +3476,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "encore disponibles",
+     "translations": "still available",
      "variations": {}
     }
    ]
@@ -3496,7 +3486,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " encore disponible",
+     "translations": " still available",
      "variations": {}
     }
    ]
@@ -3506,7 +3496,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "supplémentaire",
+     "translations": "overtime",
      "variations": {}
     }
    ]
@@ -3516,7 +3506,7 @@
    "types": [],
    "translations": [
     {
-     "translations": " supplémentaires",
+     "translations": " overtime",
      "variations": {}
     }
    ]
@@ -3526,7 +3516,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Durée de la tâche",
+     "translations": "Task duration",
      "variations": {}
     }
    ]
@@ -3536,7 +3526,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Changer l'unité de temps",
+     "translations": "Change time unit",
      "variations": {}
     }
    ]
@@ -3546,7 +3536,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Valider le temps et marquer comme fait",
+     "translations": "Confirm duration and mark as done",
      "variations": {}
     }
    ]
@@ -3556,7 +3546,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "5Mo total maximum",
+     "translations": "5MB max",
      "variations": {}
     }
    ]
@@ -3566,7 +3556,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Fermer",
+     "translations": "Close",
      "variations": {}
     }
    ]
@@ -3576,7 +3566,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Annuler",
+     "translations": "Cancel",
      "variations": {}
     }
    ]
@@ -3586,7 +3576,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Ajouter d'autres fichiers",
+     "translations": "Add other files",
      "variations": {}
     }
    ]
@@ -3596,7 +3586,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Importer",
+     "translations": "Import",
      "variations": {}
     }
    ]
@@ -3606,7 +3596,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Appuyer sur échap pour fermer",
+     "translations": "Press escape to close",
      "variations": {}
     }
    ]
@@ -3616,7 +3606,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Téléversement de document",
+     "translations": "Upload the file",
      "variations": {}
     }
    ]
@@ -3626,7 +3616,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Lien copié !",
+     "translations": "Link copied !",
      "variations": {}
     }
    ]
@@ -3636,7 +3626,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Copiez l'url ci-dessous",
+     "translations": "Copy the url below",
      "variations": {}
     }
    ]
@@ -3646,7 +3636,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Copiez le lien",
+     "translations": "Copy the link",
      "variations": {}
     }
    ]
@@ -3656,7 +3646,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Fichier source: {name}",
+     "translations": "Source file: {name}",
      "variations": {}
     }
    ]
@@ -3666,7 +3656,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Terminé",
+     "translations": "Completed",
      "variations": {}
     }
    ]
@@ -3676,7 +3666,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Retirer le fichier",
+     "translations": "Remove the file",
      "variations": {}
     }
    ]
@@ -3686,7 +3676,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Modifier le fichier",
+     "translations": "Edit the file",
      "variations": {}
     }
    ]
@@ -3696,7 +3686,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Modification de {file} en cours",
+     "translations": "Editing the file {file} in progress",
      "variations": {}
     }
    ]
@@ -3706,7 +3696,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Modifier",
+     "translations": "Edit",
      "variations": {}
     }
    ]
@@ -3716,7 +3706,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Valider modification",
+     "translations": "Save modifications",
      "variations": {}
     }
    ]
@@ -3726,7 +3716,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mon appareil",
+     "translations": "My device",
      "variations": {}
     }
    ]
@@ -3736,7 +3726,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Déposer des fichiers ici, {browse} votre ordinateur, ou importer de",
+     "translations": "Drop files here, {browse} your device, or import from",
      "variations": {}
     }
    ]
@@ -3746,7 +3736,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Déposer des fichiers ici ou {browser} votre ordinateur",
+     "translations": "Drop files here or {browser} your device",
      "variations": {}
     }
    ]
@@ -3766,7 +3756,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Téléversement complété",
+     "translations": "Upload complete",
      "variations": {}
     }
    ]
@@ -3776,7 +3766,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Reprendre téléversement",
+     "translations": "Resume upload",
      "variations": {}
     }
    ]
@@ -3786,7 +3776,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Pauser téléversement",
+     "translations": "Pause upload",
      "variations": {}
     }
    ]
@@ -3796,7 +3786,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Réessayer téléversement",
+     "translations": "Retry upload",
      "variations": {}
     }
    ]
@@ -3806,7 +3796,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{smartCount} fichier sélectionné",
+     "translations": "{smartCount} file selected",
      "variations": {}
     }
    ]
@@ -3816,7 +3806,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "{smartCount} fichiers sélectionnés",
+     "translations": "{smartCount} files selected",
      "variations": {}
     }
    ]
@@ -3826,7 +3816,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "En cours d'envoi",
+     "translations": "Sending",
      "variations": {}
     }
    ]
@@ -3836,7 +3826,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Terminé",
+     "translations": "Completed",
      "variations": {}
     }
    ]
@@ -3846,7 +3836,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Nom de l'assistant",
+     "translations": "Name of your assistant",
      "variations": {}
     }
    ]
@@ -3856,7 +3846,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mettre à jour",
+     "translations": "Update",
      "variations": {}
     }
    ]
@@ -3866,7 +3856,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Raison sociale",
+     "translations": "Company's name",
      "variations": {}
     }
    ]
@@ -3876,7 +3866,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Bertrand SA",
+     "translations": "ACME inc.",
      "variations": {}
     }
    ]
@@ -3886,7 +3876,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Numéro de téléphone",
+     "translations": "Phone number",
      "variations": {}
     }
    ]
@@ -3896,7 +3886,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "0427...",
+     "translations": "555...",
      "variations": {}
     }
    ]
@@ -3906,7 +3896,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Adresse de la société",
+     "translations": "Address of the company",
      "variations": {}
     }
    ]
@@ -3916,7 +3906,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Prénom",
+     "translations": "First name",
      "variations": {}
     }
    ]
@@ -3926,7 +3916,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Jacques",
+     "translations": "John",
      "variations": {}
     }
    ]
@@ -3936,7 +3926,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Nom",
+     "translations": "Last name",
      "variations": {}
     }
    ]
@@ -3946,7 +3936,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Bertrand",
+     "translations": "McClane",
      "variations": {}
     }
    ]
@@ -3966,7 +3956,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "jacques@bertrandsa.com",
+     "translations": "john@mcclane.com",
      "variations": {}
     }
    ]
@@ -3976,7 +3966,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "matin",
+     "translations": "morning",
      "variations": {}
     }
    ]
@@ -3986,7 +3976,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "petit déjeuner",
+     "translations": "breakfast",
      "variations": {}
     }
    ]
@@ -3996,7 +3986,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "déjeuner",
+     "translations": "lunch",
      "variations": {}
     }
    ]
@@ -4006,7 +3996,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "soirée",
+     "translations": "evening",
      "variations": {}
     }
    ]
@@ -4016,7 +4006,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "nuit",
+     "translations": "night",
      "variations": {}
     }
    ]
@@ -4026,7 +4016,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Jours travaillés",
+     "translations": "Working days",
      "variations": {}
     }
    ]
@@ -4036,7 +4026,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Afficher seulement les jours travaillés dans le calendrier",
+     "translations": "Display only working days",
      "variations": {}
     }
    ]
@@ -4046,7 +4036,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Fuseau horaire",
+     "translations": "Timezone",
      "variations": {}
     }
    ]
@@ -4056,7 +4046,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Triez par fuseau",
+     "translations": "Sort by timezone",
      "variations": {}
     }
    ]
@@ -4066,7 +4056,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "lun.",
+     "translations": "mon.",
      "variations": {}
     }
    ]
@@ -4076,7 +4066,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "mar.",
+     "translations": "tue.",
      "variations": {}
     }
    ]
@@ -4086,7 +4076,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "mer.",
+     "translations": "wed.",
      "variations": {}
     }
    ]
@@ -4096,7 +4086,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "jeu.",
+     "translations": "thu.",
      "variations": {}
     }
    ]
@@ -4106,7 +4096,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "ven.",
+     "translations": "fri.",
      "variations": {}
     }
    ]
@@ -4116,7 +4106,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "sam.",
+     "translations": "sat.",
      "variations": {}
     }
    ]
@@ -4126,7 +4116,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "dim.",
+     "translations": "sun.",
      "variations": {}
     }
    ]
@@ -4146,7 +4136,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Bienvenue sur Inyo,",
+     "translations": "Welcome to Inyo",
      "variations": {}
     }
    ]
@@ -4156,7 +4146,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Découvrez en 1'30 min les options de bases de Inyo et commencez dès maintenant à optimiser vos journées!",
+     "translations": "Discover in 1'30min the basic features of Inyo. Start optimizing your planning now.",
      "variations": {}
     }
    ]
@@ -4166,7 +4156,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "J'ai compris!",
+     "translations": "Got it!",
      "variations": {}
     }
    ]
@@ -4186,7 +4176,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Janvier",
+     "translations": "January",
      "variations": {}
     }
    ]
@@ -4196,7 +4186,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Février",
+     "translations": "February",
      "variations": {}
     }
    ]
@@ -4206,7 +4196,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mars",
+     "translations": "March",
      "variations": {}
     }
    ]
@@ -4216,7 +4206,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Avril",
+     "translations": "April",
      "variations": {}
     }
    ]
@@ -4226,7 +4216,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mai",
+     "translations": "May",
      "variations": {}
     }
    ]
@@ -4236,7 +4226,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Juin",
+     "translations": "June",
      "variations": {}
     }
    ]
@@ -4246,7 +4236,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Juillet",
+     "translations": "July",
      "variations": {}
     }
    ]
@@ -4256,7 +4246,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Août",
+     "translations": "August",
      "variations": {}
     }
    ]
@@ -4266,7 +4256,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Septembre",
+     "translations": "September",
      "variations": {}
     }
    ]
@@ -4276,7 +4266,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Octobre",
+     "translations": "October",
      "variations": {}
     }
    ]
@@ -4286,7 +4276,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Novembre",
+     "translations": "November",
      "variations": {}
     }
    ]
@@ -4296,7 +4286,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Décembre'",
+     "translations": "December'",
      "variations": {}
     }
    ]
@@ -4306,7 +4296,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Dimanche",
+     "translations": "Sunday",
      "variations": {}
     }
    ]
@@ -4316,7 +4306,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Lundi",
+     "translations": "Monday",
      "variations": {}
     }
    ]
@@ -4326,7 +4316,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mardi",
+     "translations": "Tuesday",
      "variations": {}
     }
    ]
@@ -4336,7 +4326,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mercredi",
+     "translations": "Wednesday",
      "variations": {}
     }
    ]
@@ -4346,7 +4336,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Jeudi",
+     "translations": "Thursday",
      "variations": {}
     }
    ]
@@ -4356,7 +4346,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Vendredi",
+     "translations": "Friday",
      "variations": {}
     }
    ]
@@ -4366,7 +4356,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Samedi",
+     "translations": "Saturday",
      "variations": {}
     }
    ]
@@ -4376,7 +4366,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mois suivant",
+     "translations": "Next month",
      "variations": {}
     }
    ]
@@ -4386,7 +4376,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Mois précédent",
+     "translations": "Previous month",
      "variations": {}
     }
    ]
@@ -4396,7 +4386,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Basique",
+     "translations": "Basic",
      "variations": {}
     }
    ]
@@ -4406,7 +4396,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Une tâche dont vous êtes responsable",
+     "translations": "A basic task",
      "variations": {}
     }
    ]
@@ -4416,7 +4406,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Une tâche dont la personne assigné est responsable",
+     "translations": "A task assigned to someone",
      "variations": {}
     }
    ]
@@ -4426,7 +4416,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Tâche attribuée au client",
+     "translations": "Client's task",
      "variations": {}
     }
    ]
@@ -4436,7 +4426,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Une tâche à réaliser par votre client",
+     "translations": "A task that must be done by your client",
      "variations": {}
     }
    ]
@@ -4446,7 +4436,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Récupération contenu",
+     "translations": "Content acquisition",
      "variations": {}
     }
    ]
@@ -4456,7 +4446,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Lister et récupérer les contenus nécessaires",
+     "translations": "List and retrieve necessary documents",
      "variations": {}
     }
    ]
@@ -4466,7 +4456,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Section de projet",
+     "translations": "Part of a project",
      "variations": {}
     }
    ]
@@ -4476,7 +4466,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Créer une section pour classer les tâches d'un projet",
+     "translations": "Create a part in a project to organize your tasks",
      "variations": {}
     }
    ]
@@ -4486,7 +4476,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Paiement de facture",
+     "translations": "Invoice",
      "variations": {}
     }
    ]
@@ -4496,7 +4486,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Envoyer une facture et demander un paiement à votre client",
+     "translations": "Send an invoice to your client",
      "variations": {}
     }
    ]
@@ -4506,7 +4496,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "1er mail envoyé à {customerName}",
+     "translations": "1st email sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4516,7 +4506,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Rappel nº1 envoyé à {customerName}",
+     "translations": "1st reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4526,7 +4516,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Rappel nº2 envoyé à {customerName}",
+     "translations": "2nd reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4536,7 +4526,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Dernier rappel (nº3) envoyé à {customerName}",
+     "translations": "3rd reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4546,7 +4536,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "1er mail règlement de facture envoyé à {customerName}",
+     "translations": "1st invoice payment email sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4556,7 +4546,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Rappel règlement de facture nº1 envoyé à {customerName}",
+     "translations": "1st invoice payment reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4566,7 +4556,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Rappel règlement de facture nº2 envoyé à {customerName}",
+     "translations": "2nd invoice payment reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4576,7 +4566,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Rappel règlement de facture nº3 envoyé à {customerName}",
+     "translations": "3rd invoice payment reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4586,7 +4576,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Rappel règlement de facture nº4 envoyé à {customerName}",
+     "translations": "4th invoice payment reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -4596,7 +4586,7 @@
    "types": [],
    "translations": [
     {
-     "translations": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}",
+     "translations": "5th invoice payment reminder sent to {customerName}",
      "variations": {}
     }
    ]

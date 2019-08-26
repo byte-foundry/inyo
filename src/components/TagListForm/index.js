@@ -19,9 +19,7 @@ const TagEmptyContainer = styled('div')`
 	align-items: center;
 `;
 
-const InputRow = styled(FlexRow)`
-	width: 640px;
-`;
+const InputRow = styled(FlexRow)``;
 
 const InputContainer = styled('div')`
 	flex: 1;
@@ -48,7 +46,12 @@ function CreateTagForm({tags}) {
 			validationSchema={Yup.object().shape({
 				name: Yup.string().required('Requis'),
 			})}
-			onSubmit={async (values, actions) => {
+			onSubmit={async (
+				values,
+				{
+					resetForm, setSubmitting, setErrors, setStatus,
+				},
+			) => {
 				try {
 					const [colorBg, colorText] = TAG_COLOR_PALETTE[
 						tags.length % TAG_COLOR_PALETTE.length
@@ -65,6 +68,8 @@ function CreateTagForm({tags}) {
 							colorText,
 						},
 					});
+
+					resetForm();
 				}
 				catch (err) {
 					if (
@@ -77,9 +82,9 @@ function CreateTagForm({tags}) {
 					else {
 						Sentry.captureException(err);
 					}
-					actions.setSubmitting(false);
-					actions.setErrors(err);
-					actions.setStatus({
+					setSubmitting(false);
+					setErrors(err);
+					setStatus({
 						msg: "Quelque chose ne s'est pas passé comme prévu",
 					});
 				}

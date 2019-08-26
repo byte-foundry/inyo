@@ -1,9 +1,12 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
+import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
+import {ModalContainer} from '../../utils/content';
+import {CREATE_TAG} from '../../utils/mutations';
 import {
 	Button,
 	lightGrey,
@@ -11,15 +14,16 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
-	TaskInputDropdown,
 	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
 import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
+import ProjectsDropdown from '../ProjectsDropdown';
+import TagDropdown from '../TagDropdown';
 import TaskCustomerInput from '../TaskCustomerInput';
-import TaskInfosInputs from '../TaskInfosInputs';
 import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
+import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
 const Container = styled('div')`
 	font-size: 14px;
@@ -48,7 +52,7 @@ const InputButtonContainer = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
 	right: calc(-100% + 1rem);
-	top: -13px;
+	bottom: -13px;
 	width: 166px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
@@ -72,7 +76,10 @@ const InputButtonContainer = styled('div')`
 			content: 'ou';
 			color: ${primaryGrey};
 			position: absolute;
-			left: -1.2rem;
+			top: 37%;
+			background: white;
+			padding: 4px;
+			border-radius: 50%;
 		}
 
 		@media (max-width: ${BREAKPOINTS}px) {
@@ -86,8 +93,8 @@ const InputButtonContainer = styled('div')`
 		}
 	}
 
-	& ${Button}:first-of-type {
-		margin-bottom: 2rem;
+	& ${Button}:last-of-type {
+		margin-top: 1.75rem;
 
 		&:after {
 			display: none;
@@ -174,9 +181,10 @@ const Icon = styled('div')`
 `;
 
 const TaskInfosInputsContainer = styled('div')`
-	position: absolute;
-	top: 61px;
-	left: 57px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 10px 0;
 `;
 
 const TaskInputCheckListContainer = styled('div')`
@@ -210,18 +218,21 @@ const TaskInput = ({
 	defaultValue,
 	currentProjectId,
 	defaultCustomer,
+	withProject,
 }) => {
+	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
 	const [focus, setFocus] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [openedByClick, setOpenedByClick] = useState(false);
-	const [moreInfosMode, setMoreInfosMode] = useState(false);
 	const [
 		showContentAcquisitionInfos,
 		setShowContentAcquisitionInfos,
 	] = useState(false);
+	const [selectedProject, setSelectedProject] = useState();
 	const [itemUnit, setItemUnit] = useState(0);
+	const [itemTags, setItemTags] = useState([]);
 	const [itemDueDate, setItemDueDate] = useState();
 	const [files, setFiles] = useState([]);
 	const [itemCustomer, setItemCustomer] = useState();
@@ -229,7 +240,6 @@ const TaskInput = ({
 	const inputRef = useRef();
 
 	function closeMoreInfos() {
-		setMoreInfosMode(false);
 		setItemDueDate();
 		setItemCustomer();
 		setItemUnit(0);
@@ -259,6 +269,16 @@ const TaskInput = ({
 
 	return (
 		<Container ref={ref}>
+			{withProject && (
+				<ProjectsDropdown
+					style={{margin: '0 0 10px auto', width: '250px'}}
+					autoFocus
+					onChange={({value: id}) => {
+						setSelectedProject(id);
+					}}
+					children="Lier à un projet"
+				/>
+			)}
 			<InputContainer>
 				<Tooltip label="Définir le type de tâche">
 					<Icon
@@ -272,9 +292,9 @@ const TaskInput = ({
 				<Tooltip
 					label={
 						<p>
-							Presser `Tab` pour changer de paramètre.
-							<br />
-							`Entrée` pour valider
+							`Entrée` pour créer une tâche
+							<br />`{currentProjectId ? '↓' : '↑'}` pour créer{' '}
+							{currentProjectId ? 'une section' : 'un projet'}
 						</p>
 					}
 				>
@@ -284,7 +304,12 @@ const TaskInput = ({
 						type="text"
 						onChange={e => setValue(e.target.value)}
 						value={value}
-						onFocus={() => setFocus(true)}
+						onFocus={(e) => {
+							// weird, not sure why the onBlur isn't called instead
+							if (e.type === 'focus') setFocus(true);
+							else if (e.type === 'blur') setFocus(false);
+						}}
+						onBlur={() => setFocus(false)}
 						onKeyDown={(e) => {
 							if (!value.startsWith('/')) {
 								if (e.key === 'ArrowUp' && onSubmitProject) {
@@ -325,6 +350,10 @@ const TaskInput = ({
 														}] ${name}`,
 													)
 													.join('\n')}`,
+												tags: itemTags.map(
+													({id}) => id,
+												),
+												projectId: selectedProject,
 											});
 											setValue('');
 											closeMoreInfos();
@@ -355,22 +384,12 @@ const TaskInput = ({
 											unit: parseFloat(itemUnit || 0),
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
+											tags: itemTags.map(({id}) => id),
+											projectId: selectedProject,
 										});
 										setValue('');
 										closeMoreInfos();
 										closeContentAcquisitionInfos();
-									}
-								}
-								else if (e.key === 'Tab') {
-									if (
-										!type
-										|| type !== 'CONTENT_ACQUISITION'
-									) {
-										setMoreInfosMode(true);
-									}
-									else if (type === 'CONTENT_ACQUISITION') {
-										setItemCustomer(defaultCustomer);
-										setShowContentAcquisitionInfos(true);
 									}
 								}
 							}
@@ -399,6 +418,17 @@ const TaskInput = ({
 				{(focus || value) && (
 					<InputButtonWrapper>
 						<InputButtonContainer>
+							{type !== 'SECTION' && onSubmitSection && (
+								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
+									<Button
+										icon="↓"
+										onClick={() => onSubmitSection({name: value})
+										}
+									>
+										Créer une section
+									</Button>
+								</Tooltip>
+							)}
 							<Tooltip label="Touche entrée pour créer la tâche">
 								<Button
 									icon="↵"
@@ -408,42 +438,9 @@ const TaskInput = ({
 											if (
 												type === 'CONTENT_ACQUISITION'
 											) {
-												if (
-													showContentAcquisitionInfos
-												) {
-													onSubmitTask({
-														name: value,
-														type: type || 'DEFAULT',
-														linkedCustomerId:
-															itemCustomer
-															&& itemCustomer.id,
-														description:
-															files.length > 0
-																? `\n# content-acquisition-list\n${files
-																	.map(
-																		({
-																			checked,
-																			name,
-																		}) => `- [${
-																			checked
-																				? 'x'
-																				: ' '
-																		}] ${name}`,
-																	)
-																	.join(
-																		'\n',
-																	)}`
-																: '',
-													});
-													setValue('');
-													closeMoreInfos();
-													closeContentAcquisitionInfos();
-												}
-												else {
-													setShowContentAcquisitionInfos(
-														true,
-													);
-												}
+												setShowContentAcquisitionInfos(
+													true,
+												);
 											}
 											else {
 												onSubmitTask({
@@ -458,6 +455,10 @@ const TaskInput = ({
 													linkedCustomerId:
 														itemCustomer
 														&& itemCustomer.id,
+													tags: itemTags.map(
+														({id}) => id,
+													),
+													projectId: selectedProject,
 												});
 												setValue('');
 												closeMoreInfos();
@@ -470,54 +471,60 @@ const TaskInput = ({
 									{type === 'SECTION' ? 'section' : 'tâche'}
 								</Button>
 							</Tooltip>
-							{type !== 'SECTION' && onSubmitSection && (
-								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
-									<Button
-										icon="↓"
-										onClick={() => onSubmitSection({name: value})
-										}
-									>
-										Créer une section
-									</Button>
-								</Tooltip>
-							)}
 						</InputButtonContainer>
 					</InputButtonWrapper>
 				)}
 			</InputContainer>
-			{moreInfosMode && (
+			{type !== 'SECTION' && (
 				<TaskInfosInputsContainer>
-					<TaskInfosInputs
-						startOpen
-						switchOnSelect
-						item={{
-							dueDate: itemDueDate,
-							unit: itemUnit,
-							linkedCustomer: itemCustomer,
+					<UnitWithSuggestionsForm
+						small
+						onChange={unit => setItemUnit(unit)}
+					/>
+					<TagDropdown
+						id="tags"
+						long
+						placeholder="Ajouter ou créer un tag"
+						value={itemTags.map(tag => ({
+							value: tag.id,
+							label: tag.name,
+							colorBg: tag.colorBg,
+							colorText: tag.colorText,
+						}))}
+						onCreateOption={async (name, colorBg, colorText) => {
+							const {
+								data: {createTag: tag},
+							} = await createTag({
+								variables: {
+									name,
+									colorBg,
+									colorText,
+								},
+							});
+
+							setItemTags([...itemTags, tag]);
 						}}
-						noComment
-						noAttachment
-						onDueDateSubmit={date => setItemDueDate(date)}
-						onCustomerSubmit={(customer) => {
-							if (customer === null) {
-								setItemCustomer();
-							}
-							else if (customer.value === 'CREATE') {
-								setEditCustomer(true);
-							}
-							else {
-								setItemCustomer({
-									id: customer.value,
-									name: customer.label,
-								});
-							}
+						onChange={(tags) => {
+							setItemTags(
+								tags
+									? tags.map(tag => ({
+										id: tag.value,
+										name: tag.label,
+										colorBg: tag.colorBg,
+										colorText: tag.colorText,
+									  }))
+									: [],
+							);
 						}}
-						onUnitSubmit={unit => setItemUnit(unit)}
 					/>
 				</TaskInfosInputsContainer>
 			)}
-			{showContentAcquisitionInfos && (
-				<TaskInputDropdown>
+			{!isEditingCustomer && showContentAcquisitionInfos && (
+				<ModalContainer
+					onDismiss={() => {
+						setShowContentAcquisitionInfos(false);
+					}}
+				>
 					<TaskInputDropdownHeader>
 						Choisir un client
 					</TaskInputDropdownHeader>
@@ -548,14 +555,43 @@ const TaskInput = ({
 					</TaskInputDropdownHeader>
 					<TaskInputCheckListContainer>
 						<CheckList
-							editable={true} // editable by user only, but checkable
+							editable
 							items={files}
 							onChange={({items}) => {
 								setFiles(items);
 							}}
 						/>
 					</TaskInputCheckListContainer>
-				</TaskInputDropdown>
+					<Button
+						disabled={files.length === 0 || !itemCustomer}
+						style={{marginLeft: 'auto'}}
+						onClick={() => {
+							onSubmitTask({
+								name: value,
+								type: type || 'DEFAULT',
+								linkedCustomerId:
+									itemCustomer && itemCustomer.id,
+								description:
+									files.length > 0
+										? `\n# content-acquisition-list\n${files
+											.map(
+												({checked, name}) => `- [${
+													checked ? 'x' : ' '
+												}] ${name}`,
+											)
+											.join('\n')}`
+										: '',
+								tags: itemTags.map(({id}) => id),
+								projectId: selectedProject,
+							});
+							setValue('');
+							closeMoreInfos();
+							closeContentAcquisitionInfos();
+						}}
+					>
+						Créer la tâche
+					</Button>
+				</ModalContainer>
 			)}
 			{((value.startsWith('/') && focus) || openedByClick) && (
 				<TaskTypeDropdown
@@ -593,10 +629,12 @@ const TaskInput = ({
 TaskInput.defaultProps = {
 	defaultValue: '',
 	onSubmitTask: () => {},
+	withProject: false,
 };
 
 TaskInput.propTypes = {
 	defaultValue: PropTypes.string,
+	withProject: PropTypes.bool,
 	onSubmitTask: PropTypes.func,
 	onSubmitProject: PropTypes.func,
 	onSubmitSection: PropTypes.func,

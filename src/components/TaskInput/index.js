@@ -311,8 +311,7 @@ const TaskInput = ({
 						value={value}
 						onFocus={(e) => {
 							// weird, not sure why the onBlur isn't called instead
-							if (e.type === 'focus') setFocus(true);
-							else if (e.type === 'blur') setFocus(false);
+							setFocus(true);
 						}}
 						onBlur={() => setFocus(false)}
 						onKeyDown={(e) => {

@@ -398,6 +398,19 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
+						<SubHeading>Temps gagné</SubHeading>
+						<Number>
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length * 15,
+									'minutes',
+								)
+								.toISOString()}
+						</Number>
+					</Card>
+					<Card>
 						<SubHeading>
 							<MaterialIcon
 								icon="add_circle_outline"

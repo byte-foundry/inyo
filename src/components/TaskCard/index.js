@@ -25,8 +25,14 @@ const CardTitle = styled('span')`
 	color: ${primaryBlack};
 	text-overflow: ellipsis;
 	overflow: hidden;
+	display: flex;
+	align-items: baseline;
 
 	${props => props.hasCheckbox && 'grid-column: 1 / 3;'}
+
+	i {
+		margin-right: 5px;
+	}
 `;
 
 const CardSubTitle = styled('span')`

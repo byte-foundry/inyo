@@ -16,6 +16,7 @@ import {
 	primaryPurple,
 	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 import ProjectsDropdown from '../ProjectsDropdown';
@@ -238,6 +239,7 @@ const TaskInput = ({
 	const [itemCustomer, setItemCustomer] = useState();
 	const ref = useRef();
 	const inputRef = useRef();
+	const {workingTime} = useUserInfos();
 
 	function closeMoreInfos() {
 		setItemDueDate();
@@ -273,10 +275,13 @@ const TaskInput = ({
 				<ProjectsDropdown
 					style={{margin: '0 0 10px auto', width: '250px'}}
 					autoFocus
-					onChange={({value: id}) => {
+					onChange={(param) => {
+						const {value: id} = param || {};
+
 						setSelectedProject(id);
 					}}
 					children="Lier à un projet"
+					isClearable
 				/>
 			)}
 			<InputContainer>
@@ -381,7 +386,9 @@ const TaskInput = ({
 											dueDate:
 												itemDueDate
 												&& itemDueDate.toISOString(),
-											unit: parseFloat(itemUnit || 0),
+											unit: parseFloat(
+												itemUnit || 0.1 / workingTime,
+											),
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											tags: itemTags.map(({id}) => id),

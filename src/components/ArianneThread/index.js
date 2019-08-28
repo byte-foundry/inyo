@@ -23,6 +23,7 @@ const ArianneContainer = styled('div')`
 	display: flex;
 	${props => props.marginBottom && 'margin-bottom: 2rem;'}
 	${props => props.marginTop && 'margin-top: 2rem;'}
+
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-direction: column;
 		margin-bottom: 1rem;
@@ -31,8 +32,12 @@ const ArianneContainer = styled('div')`
 
 const ArianneElemMain = styled('div')`
 	flex: ${props => (props.long ? '0 0 280px' : '0 0 170px')};
-	margin-right: 1rem;
+	margin-left: 1rem;
 	position: relative;
+
+	&:first-child {
+		margin-left: 0;
+	}
 
 	&:hover {
 		cursor: text;
@@ -178,13 +183,13 @@ const customSelectStyles = props => ({
 });
 
 export function ArianneElem({
-	children, id, list, selectedId, ...rest
+	children, id, list, selectedId, style, ...rest
 }) {
 	const options = list.map(item => ({value: item.id, label: item.name}));
 	const selectedItem = options.find(item => item.value === selectedId);
 
 	return (
-		<ArianneElemMain id={`${id}-filter`}>
+		<ArianneElemMain id={`${id}-filter`} style={style}>
 			<Select
 				placeholder={children}
 				options={options}

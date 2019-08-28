@@ -32,7 +32,10 @@ function Dashboard({history}) {
 			<HelpButton />
 			<Main>
 				<Content>
-					<CreateTask setProjectSelected={setProjectSelected} />
+					<CreateTask
+						setProjectSelected={setProjectSelected}
+						withProject
+					/>
 					<Tasks />
 				</Content>
 				<PendingActionsTray />

@@ -9,7 +9,12 @@ const ProjectsDropdown = (props) => {
 
 	if (errors) throw errors;
 
-	return <ArianneElem list={data.me.projects} {...props} />;
+	return (
+		<ArianneElem
+			list={data.me.projects.filter(p => p.status === 'ONGOING')}
+			{...props}
+		/>
+	);
 };
 
 export default ProjectsDropdown;

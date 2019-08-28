@@ -17,7 +17,7 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = ({currentProjectId}) => {
+const CreateTask = ({currentProjectId, withProject}) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const [createTask] = useMutation(ADD_ITEM);
@@ -57,6 +57,7 @@ const CreateTask = ({currentProjectId}) => {
 	return (
 		<TaskInputContainer>
 			<TaskInput
+				withProject={withProject}
 				defaultCustomer={
 					currentProjectData
 					&& currentProjectData.project.customer && {

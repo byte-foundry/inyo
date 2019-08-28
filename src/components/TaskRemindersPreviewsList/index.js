@@ -212,6 +212,8 @@ const TaskRemindersPreviewsList = ({
 		setIsRelative(true);
 	}, [editingIndex]);
 
+	const mutableReminders = [...reminders];
+
 	return (
 		<Container>
 			<BackButton grey type="button" link onClick={() => onCancel()}>
@@ -232,7 +234,7 @@ const TaskRemindersPreviewsList = ({
 				)}
 			</DateContainer>
 			<ReminderList>
-				{reminders
+				{mutableReminders
 					.sort((a, b) => a.delay - b.delay)
 					.map((reminder, index) => {
 						const text = REMINDER_TYPES_DATA[reminder.type].text(
@@ -252,7 +254,7 @@ const TaskRemindersPreviewsList = ({
 							delay = `${moment
 								.duration(
 									(reminder.delay
-										- reminders[index - 1].delay)
+										- mutableReminders[index - 1].delay)
 										* 1000,
 								)
 								.humanize()} après l'email précédent`;
@@ -292,11 +294,11 @@ const TaskRemindersPreviewsList = ({
 													link
 													onClick={() => {
 														setReminders([
-															...reminders.slice(
+															...mutableReminders.slice(
 																0,
 																index,
 															),
-															...reminders.slice(
+															...mutableReminders.slice(
 																index + 1,
 															),
 														]);
@@ -324,19 +326,21 @@ const TaskRemindersPreviewsList = ({
 
 										if (isRelative && index > 0) {
 											absoluteDelay.add(
-												reminders[index - 1].delay
-													* 1000,
+												mutableReminders[index - 1]
+													.delay * 1000,
 											);
 										}
 
 										setReminders([
-											...reminders.slice(0, index),
+											...mutableReminders.slice(0, index),
 											{
 												...reminder,
 												delay: absoluteDelay.asSeconds(),
 												isRelative,
 											},
-											...reminders.slice(index + 1),
+											...mutableReminders.slice(
+												index + 1,
+											),
 										]);
 
 										setEditingIndex(null);
@@ -470,7 +474,7 @@ const TaskRemindersPreviewsList = ({
 					type="submit"
 					aligned
 					onClick={() => onFocusTask({
-						reminders: reminders.map(r => ({
+						reminders: mutableReminders.map(r => ({
 							delay: r.delay,
 							type: r.type,
 						})),

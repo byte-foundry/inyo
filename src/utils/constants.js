@@ -9,13 +9,6 @@ import TaskInvoiceIconUrl, {
 import SectionIconUrl, {
 	ReactComponent as SectionIcon,
 } from './icons/section-icon.svg';
-import TaskCollaboratorIconValidatedAnimUrl from './icons/taskicon-collaborator-validated-anim.svg';
-import TaskCollaboratorIconValidatedUrl, {
-	ReactComponent as TaskCollaboratorIconValidated,
-} from './icons/taskicon-collaborator-validated.svg';
-import TaskCollaboratorIconUrl, {
-	ReactComponent as TaskCollaboratorIcon,
-} from './icons/taskicon-collaborator.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 import TaskCustomerIconValidatedUrl, {
 	ReactComponent as TaskCustomerIconValidated,
@@ -122,16 +115,6 @@ export const ITEM_TYPES = [
 		type: 'DEFAULT',
 		name: 'Basique',
 		description: 'Une tâche dont vous êtes responsable',
-	},
-	{
-		icon: <TaskCollaboratorIcon />,
-		iconValidated: <TaskCollaboratorIconValidated />,
-		iconUrl: TaskCollaboratorIconUrl,
-		iconUrlValidated: TaskCollaboratorIconValidatedUrl,
-		iconUrlValidatedAnim: TaskCollaboratorIconValidatedAnimUrl,
-		type: 'DEFAULT_ASSIGNED',
-		name: 'Basique',
-		description: 'Une tâche dont la personne assigné est responsable',
 	},
 	{
 		icon: <TaskCustomerIcon />,

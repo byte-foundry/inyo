@@ -163,6 +163,12 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	display: flex;
+
+	i {
+		margin-right: 0.5rem;
+		display: inline-block !important;
+	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		font-size: 0.85rem;
@@ -196,9 +202,10 @@ const TaskContent = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 2rem;
-		grid-template-columns: minmax(200px, 4fr) 1fr;
+		grid-template-columns: minmax(200px, 4fr) 75px;
 	}
 `;
+
 const ProjectNameWrap = styled('div')`
 	display: flex;
 `;
@@ -323,6 +330,17 @@ function TaskRow({
 									state: {prevSearch: location.search},
 								}}
 							>
+								{item.assignee && (
+									<Tooltip label="Cette tâche vous a été assigné">
+										<div>
+											<MaterialIcon
+												icon="reply"
+												size="tiny"
+												color="inherit"
+											/>
+										</div>
+									</Tooltip>
+								)}{' '}
 								{item.name}
 							</TaskHeadingLink>
 						) : (

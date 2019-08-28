@@ -113,7 +113,8 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 						key={name}
 						tabIndex="0"
 						onMouseEnter={() => setFocusedItemIndex(index)}
-						onClick={() => onSelectCommand(filteredTypes[index])}
+						onMouseDown={() => onSelectCommand(filteredTypes[index])
+						}
 						focused={index === focusedItemIndex}
 					>
 						<ListItemIcon>{icon}</ListItemIcon>

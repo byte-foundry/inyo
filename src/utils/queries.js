@@ -115,6 +115,7 @@ export const GET_USER_INFOS = gql`
 			}
 			settings {
 				assistantName
+				language
 				hasFullWeekSchedule
 			}
 		}

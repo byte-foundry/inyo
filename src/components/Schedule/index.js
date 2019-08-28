@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 
@@ -244,6 +244,8 @@ const Schedule = ({
 	onMoveTask,
 	workingTime = 8,
 }) => {
+	const [, setRefreshState] = useState(new Date().toJSON());
+
 	const startDay = moment(
 		moment(startingFrom).isValid() ? startingFrom : undefined,
 	).startOf('week');
@@ -255,6 +257,15 @@ const Schedule = ({
 		fullWeek,
 		moment(startDay).endOf('week'),
 	);
+
+	// refresh the component every 10 minutes
+	useEffect(() => {
+		const id = setInterval(() => {
+			setRefreshState(new Date().toJSON());
+		}, 10 * 60 * 1000);
+
+		return () => clearInterval(id);
+	});
 
 	return (
 		<Container>

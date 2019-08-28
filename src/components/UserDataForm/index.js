@@ -12,36 +12,26 @@ import {ErrorInput, gray20} from '../../utils/content';
 import userIllus from '../../utils/images/bermuda-coming-soon.svg';
 import {CHECK_UNIQUE_EMAIL, UPDATE_USER} from '../../utils/mutations';
 import {Button, primaryWhite} from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
 import FormElem from '../FormElem';
 
 const UserDataFormMain = styled('div')``;
-
-const FormContainer = styled('div')`
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 20px;
-	flex: 1;
-	align-items: center;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: flex;
-		flex-direction: column;
-	}
-`;
 
 const ProfileSection = styled('div')`
 	background: ${primaryWhite};
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 20px;
+	align-items: center;
 
 	@media (max-width: ${BREAKPOINTS}px) {
+		display: block;
 		padding: 0;
 		border: none;
 	}
 `;
+
 const UpdateButton = styled(Button)`
 	display: block;
 	margin-top: 15px;
@@ -139,41 +129,39 @@ const UserDataForm = ({done, ...componentProps}) => {
 					return (
 						<form onSubmit={handleSubmit}>
 							<ProfileSection>
-								<FormContainer>
-									<Illus src={userIllus} />
-									<FormElem
-										{...props}
-										name="firstName"
-										type="text"
-										label="Prénom"
-										placeholder="Jacques"
-										padded
-										required
-									/>
-									<FormElem
-										{...props}
-										name="lastName"
-										type="text"
-										label="Nom"
-										placeholder="Bertrand"
-										padded
-										required
-									/>
-									<FormElem
-										{...props}
-										name="email"
-										type="email"
-										label="Email"
-										placeholder="jacques@bertrandsa.com"
-										padded
-										required
-										style={{
-											gridColumn: '2 / 4',
-										}}
-									/>
-								</FormContainer>
+								<Illus src={userIllus} />
+								<FormElem
+									{...props}
+									name="firstName"
+									type="text"
+									label="Prénom"
+									placeholder="Jacques"
+									padded
+									required
+								/>
+								<FormElem
+									{...props}
+									name="lastName"
+									type="text"
+									label="Nom"
+									placeholder="Bertrand"
+									padded
+									required
+								/>
+								<FormElem
+									{...props}
+									name="email"
+									type="email"
+									label="Email"
+									placeholder="jacques@bertrandsa.com"
+									padded
+									required
+									style={{
+										gridColumn: '2 / 4',
+									}}
+								/>
 								{status && status.msg && (
-									<ErrorInput style={{marginBottom: '1rem'}}>
+									<ErrorInput style={{gridColumnEnd: '4'}}>
 										{status.msg}
 									</ErrorInput>
 								)}

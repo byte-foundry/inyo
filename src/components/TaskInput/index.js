@@ -186,6 +186,14 @@ const TaskInfosInputsContainer = styled('div')`
 	justify-content: space-between;
 	align-items: flex-start;
 	padding: 10px 0;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+
+		#tags-filter {
+			width: 100%;
+		}
+	}
 `;
 
 const TaskInputCheckListContainer = styled('div')`

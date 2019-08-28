@@ -2,6 +2,7 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import React, {useEffect, useState} from 'react';
 
+import {BREAKPOINTS} from '../../utils/constants';
 import {formatDuration} from '../../utils/functions';
 import {
 	mediumGrey,
@@ -15,6 +16,12 @@ import UnitInput from '../UnitInput';
 const Container = styled('div')`
 	display: flex;
 	margin-bottom: 10px;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: grid;
+		width: 100%;
+		grid-template-columns: 22% 22% 22% 34%;
+	}
 `;
 
 const SuggestedTime = styled('button')`
@@ -34,6 +41,11 @@ const SuggestedTime = styled('button')`
 		background: ${primaryPurple};
 		color: ${primaryWhite};
 		border-color: transparent;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		height: 1.5rem;
+		margin-bottom: 5px;
 	}
 `;
 

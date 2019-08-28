@@ -3,6 +3,7 @@ import React from 'react';
 import {Route, withRouter} from 'react-router-dom';
 
 import TagListForm from '../../../components/TagListForm';
+import fbt from '../../../fbt/fbt.macro';
 import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import {SubHeading} from '../../../utils/new/design-system';
 import Dashboard from '../Dashboard';
@@ -31,7 +32,11 @@ function Tags({location: {state = {}}, history}) {
 				}
 			>
 				<ModalElem>
-					<SubHeading>Liste des tags</SubHeading>
+					<SubHeading>
+						<fbt project="inyo" desc="tag list">
+							Liste des tags
+						</fbt>
+					</SubHeading>
 					<TagListForm />
 				</ModalElem>
 			</Modal>

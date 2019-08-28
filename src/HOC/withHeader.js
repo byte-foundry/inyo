@@ -18,26 +18,70 @@ const withHeader = Component => (...args) => (
 			</TopBarLogoNotif>
 			<TopBarMenu>
 				<NotificationTrayButton desktop />
-				<Tooltip label="Tâches prioritaires">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="dashboard tooltip">
+							Planning et list de tâches
+						</fbt>
+					}
+				>
 					<TopBarMenuLink to="/app/dashboard">
-						Dashboard
+						<fbt project="inyo" desc="dashboard">
+							Dashboard
+						</fbt>
 					</TopBarMenuLink>
 				</Tooltip>
-				<Tooltip label="Toutes les projets">
-					<TopBarMenuLink to="/app/projects">Projets</TopBarMenuLink>
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="projects tooltip">
+							Toutes les projets
+						</fbt>
+					}
+				>
+					<TopBarMenuLink to="/app/projects">
+						<fbt project="inyo" desc="Projets">
+							Projets
+						</fbt>
+					</TopBarMenuLink>
 				</Tooltip>
-				<Tooltip label="Tous les contacts">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="contacts tooltip">
+							Tous les contacts
+						</fbt>
+					}
+				>
 					<TopBarMenuLink to="/app/customers">
-						Contacts
+						<fbt project="inyo" desc="Contacts">
+							Contacts
+						</fbt>
 					</TopBarMenuLink>
 				</Tooltip>
-				<Tooltip label="Rapports de votre activité">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="stats tooltip">
+							Rapports de votre activité
+						</fbt>
+					}
+				>
 					<TopBarMenuLink to="/app/stats">
-						Statistiques
+						<fbt project="inyo" desc="Statistiques">
+							Statistiques
+						</fbt>
 					</TopBarMenuLink>
 				</Tooltip>
-				<Tooltip label="Profil, jours travaillés, etc.">
-					<TopBarMenuLink to="/app/account">Réglages</TopBarMenuLink>
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="settings tooltip">
+							Profil, jours travaillés, etc.
+						</fbt>
+					}
+				>
+					<TopBarMenuLink to="/app/account">
+						<fbt project="inyo" desc="Réglages">
+							Réglages
+						</fbt>
+					</TopBarMenuLink>
 				</Tooltip>
 			</TopBarMenu>
 		</TopBar>

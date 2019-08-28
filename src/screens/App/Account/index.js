@@ -11,6 +11,7 @@ import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {Button, H3} from '../../../utils/content';
 import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
@@ -211,7 +212,12 @@ const Account = ({location}) => {
 			<ToastContainer />
 
 			<AccountBody>
-				<Heading>Bonjour {firstName} !</Heading>
+				<Heading>
+					<fbt project="inyo" desc="hello">
+						Bonjour{' '}
+						<fbt:param name="firstName">{firstName}</fbt:param> !
+					</fbt>
+				</Heading>
 
 				<Profile>
 					<ProfileSide>
@@ -221,7 +227,9 @@ const Account = ({location}) => {
 									href="#me"
 									onClick={handleScroll}
 								>
-									Vous
+									<fbt project="inyo" desc="You">
+										Vous
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem active={activeItem === 'company'}>
@@ -229,7 +237,9 @@ const Account = ({location}) => {
 									href="#company"
 									onClick={handleScroll}
 								>
-									Votre société
+									<fbt project="inyo" desc="your company">
+										Votre société
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem active={activeItem === 'settings'}>
@@ -237,7 +247,9 @@ const Account = ({location}) => {
 									href="#settings"
 									onClick={handleScroll}
 								>
-									Vos options
+									<fbt project="inyo" desc="your options">
+										Vos options
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem
@@ -247,7 +259,9 @@ const Account = ({location}) => {
 									href="#assistant"
 									onClick={handleScroll}
 								>
-									Votre assistant·e
+									<fbt project="inyo" desc="your assistant">
+										Votre assistant·e
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem active={activeItem === 'account'}>
@@ -255,7 +269,9 @@ const Account = ({location}) => {
 									href="#account"
 									onClick={handleScroll}
 								>
-									Votre compte
+									<fbt project="inyo" desc="your account">
+										Votre compte
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 						</ProfileSideLinks>

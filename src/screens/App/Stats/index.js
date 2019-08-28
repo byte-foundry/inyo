@@ -8,6 +8,7 @@ import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {formatName} from '../../../utils/functions';
 import {
@@ -243,24 +244,78 @@ const Stats = ({history, location}) => {
 	return (
 		<Container>
 			<MetaHeading>
-				<Heading style={{marginBottom: 0}}>Statistiques</Heading>
+				<Heading style={{marginBottom: 0}}>
+					<fbt project="inyo" desc="Statistics">
+						Statistiques
+					</fbt>
+				</Heading>
 				<TimeSelectContainer>
-					Afficher{' '}
-					<TimeSelect
-						selectedId={since}
-						onChange={({value}) => setSince(value)}
-						list={[
-							{name: 'les 7 derniers jours', id: 7},
-							{name: 'les 30 derniers jours', id: 30},
-							{name: 'les 3 derniers mois', id: 90},
-							{name: 'les 6 derniers mois', id: 180},
-						]}
-					/>
+					<fbt project="inyo" desc="Show">
+						Afficher{' '}
+						<fbt:param name="timespan">
+							{
+								<TimeSelect
+									selectedId={since}
+									onChange={({value}) => setSince(value)}
+									list={[
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="7 last days"
+												>
+													les 7 derniers jours
+												</fbt>
+											),
+											id: 7,
+										},
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="30 last days"
+												>
+													les 30 derniers jours
+												</fbt>
+											),
+											id: 30,
+										},
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="3 last months"
+												>
+													les 3 derniers mois
+												</fbt>
+											),
+											id: 90,
+										},
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="6 last months"
+												>
+													les 6 derniers mois
+												</fbt>
+											),
+											id: 180,
+										},
+									]}
+								/>
+							}
+						</fbt:param>
+					</fbt>
 				</TimeSelectContainer>
 			</MetaHeading>
 
 			<Section>
-				<PageSubHeading>Répartition de vos clients</PageSubHeading>
+				<PageSubHeading>
+					<fbt project="inyo" desc="client share">
+						Répartition de vos clients
+					</fbt>
+				</PageSubHeading>
 				<SingleBarChart entries={customerDistributions} />
 			</Section>
 
@@ -276,7 +331,12 @@ const Stats = ({history, location}) => {
 					marginBottom
 				/>
 				<PageSubHeading>
-					Rapport temps estimé / temps réellement passé
+					<fbt
+						project="inyo"
+						desc="Estimated time / worked time rate"
+					>
+						Rapport temps estimé / temps réellement passé
+					</fbt>
 				</PageSubHeading>
 				<TasksProgressBar
 					showCompletionPercentage={false}
@@ -288,7 +348,11 @@ const Stats = ({history, location}) => {
 				/>
 				<Cards>
 					<Card>
-						<SubHeading>Temps travaillé</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="Worked time">
+								Temps travaillé
+							</fbt>
+						</SubHeading>
 						<Number>
 							{(
 								filteredTasks
@@ -302,7 +366,11 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
-						<SubHeading>Temps estimé</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="estimated time">
+								Temps estimé
+							</fbt>
+						</SubHeading>
 						<Number>
 							{(
 								filteredTasks
@@ -316,7 +384,11 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
-						<SubHeading>Rappels envoyés</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="reminders sent">
+								Rappels envoyés
+							</fbt>
+						</SubHeading>
 						<Number>
 							{
 								reminders.filter(
@@ -334,13 +406,15 @@ const Stats = ({history, location}) => {
 							/>
 						</SubHeading>
 						<P>
-							Vous souhaitez d'autres statistiques?
-							<A
-								style={{marginLeft: '1rem'}}
-								href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…"
-							>
-								Contactez-nous
-							</A>
+							<fbt project="inyo" desc="stats question">
+								Vous souhaitez d'autres statistiques?
+								<A
+									style={{marginLeft: '1rem'}}
+									href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…"
+								>
+									Contactez-nous
+								</A>
+							</fbt>
 						</P>
 					</Card>
 				</Cards>

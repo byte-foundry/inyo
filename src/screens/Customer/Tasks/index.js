@@ -85,7 +85,11 @@ const Tasks = ({location, match}) => {
 		suspend: true,
 	});
 
-	let welcome = 'Bonjour';
+	let welcome = (
+		<fbt project="inyo" desc="Hello">
+			Bonjour
+		</fbt>
+	);
 
 	if (customerInfosData && customerInfosData.customer) {
 		const {customer: c} = customerInfosData;
@@ -101,10 +105,18 @@ const Tasks = ({location, match}) => {
 				<div>
 					{welcome},
 					<br />
-					Les tâches <Red>rouges</Red> sont celles dont vous êtes
-					responsable.
+					<fbt project="inyo" desc="customer info about task">
+						Les tâches <Red>rouges</Red> sont celles dont vous êtes
+						responsable.
+					</fbt>
 				</div>
-				<Tooltip label="À quoi sert cette plateforme ?">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="what's inyo about">
+							À quoi sert cette plateforme ?
+						</fbt>
+					}
+				>
 					<A noHover target="_blank" href="https://inyo.pro">
 						<Help>?</Help>
 					</A>

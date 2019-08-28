@@ -9,6 +9,7 @@ import IconButton from '../../../components/IconButton';
 import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import Tooltip from '../../../components/Tooltip';
+import fbt from '../../../fbt/fbt.macro';
 import {
 	FlexColumn,
 	FlexRow,
@@ -203,7 +204,9 @@ function Projects({history}) {
 							big
 							onClick={() => setOpenCreateProjectModal(true)}
 						>
-							Nouveau projet
+							<fbt project="inyo" desc="create project">
+								Nouveau projet
+							</fbt>
 						</Button>
 					</ButtonsRow>
 					{unarchivedProject.length === 0
@@ -211,32 +214,38 @@ function Projects({history}) {
 						<IllusContainer bg={IllusBackground}>
 							<IllusFigureContainer fig={IllusFigure} big />
 							<IllusText>
-								<P>Aucun projet en cours?</P>
-								<P>
-										Créez un projet à partir de zéro, ou
-										gagnez du temps en utilisant un modèle
-										existant{' '}
-									<IllusTextIcon
-										onClick={() => setOpenModeleModal(true)
-										}
-									>
-											?
-									</IllusTextIcon>{' '}
-										ou en vous basant sur un de vos anciens
-										projets{' '}
-									<IllusTextIcon
-										onClick={() => setOpenDuplicateModal(true)
-										}
-									>
-											?
-									</IllusTextIcon>
-										.
-								</P>
-								<P>
-										Vous pouvez aussi tester notre projet
-										fictif et comprendre comment inyo
-										fonctionne.
-								</P>
+								<fbt project="inyo" desc="no project">
+									<P>Aucun projet en cours?</P>
+									<P>
+											Créez un projet à partir de zéro, ou
+											gagnez du temps en utilisant un
+											modèle existant{' '}
+										<IllusTextIcon
+											onClick={() => setOpenModeleModal(true)
+											}
+										>
+												?
+										</IllusTextIcon>{' '}
+											ou en vous basant sur un de vos
+											anciens projets{' '}
+										<fbt:param name="link">
+											<IllusTextIcon
+												onClick={() => setOpenDuplicateModal(
+													true,
+												)
+												}
+											>
+													?
+											</IllusTextIcon>
+										</fbt:param>
+											.
+									</P>
+									<P>
+											Vous pouvez aussi tester notre
+											projet fictif et comprendre comment
+											inyo fonctionne.
+									</P>
+								</fbt>
 								<Button
 									grey
 									big
@@ -273,7 +282,9 @@ function Projects({history}) {
 										);
 									}}
 								>
-										Commencer
+									<fbt project="inyo" desc="begin">
+											Commencer
+									</fbt>
 								</Button>
 							</IllusText>
 						</IllusContainer>
@@ -284,27 +295,31 @@ function Projects({history}) {
 							onDismiss={() => setOpenModeleModal(false)}
 						>
 							<ModalElem>
-								<SubHeading>
-									Utiliser un de nos modèles
-								</SubHeading>
-								<P>
-									Les modèles sont composés d'un ensemble de
-									tâches prédéfinies. Ils vous permettront de
-									démarrer vos projets sur de bonnes bases.
-								</P>
-								<P>
-									Nous les avons construits en collaboration
-									avec des freelances expérimentés dans leur
-									domaines (design, développement, etc.)
-								</P>
-								<ModalActions>
-									<Button
-										onClick={() => setOpenModeleModal(false)
-										}
-									>
-										J'ai compris
-									</Button>
-								</ModalActions>
+								<fbt project="inyo" desc="notification message">
+									<SubHeading>
+										Utiliser un de nos modèles
+									</SubHeading>
+									<P>
+										Les modèles sont composés d'un ensemble
+										de tâches prédéfinies. Ils vous
+										permettront de démarrer vos projets sur
+										de bonnes bases.
+									</P>
+									<P>
+										Nous les avons construits en
+										collaboration avec des freelances
+										expérimentés dans leur domaines (design,
+										développement, etc.)
+									</P>
+									<ModalActions>
+										<Button
+											onClick={() => setOpenModeleModal(false)
+											}
+										>
+											J'ai compris
+										</Button>
+									</ModalActions>
+								</fbt>
 							</ModalElem>
 						</ModalContainer>
 					)}
@@ -314,28 +329,30 @@ function Projects({history}) {
 							onDismiss={() => setOpenDuplicateModal(false)}
 						>
 							<ModalElem>
-								<SubHeading>
-									Se baser sur l'un de vos anciens projets
-								</SubHeading>
-								<P>
-									Vous avez le sentiment que beaucoup de vos
-									projets se ressemblent?
-								</P>
-								<P>
-									Utilisez votre expérience passée pour éviter
-									de perdre du temps à recréer vos choses à
-									faire, et devisez au plus juste en vous
-									basant sur le temps réellement passés sur
-									chacune des tâches.
-								</P>
-								<ModalActions>
-									<Button
-										onClick={() => setOpenDuplicateModal(false)
-										}
-									>
-										J'ai compris
-									</Button>
-								</ModalActions>
+								<fbt project="inyo" desc="duplicate message">
+									<SubHeading>
+										Se baser sur l'un de vos anciens projets
+									</SubHeading>
+									<P>
+										Vous avez le sentiment que beaucoup de
+										vos projets se ressemblent?
+									</P>
+									<P>
+										Utilisez votre expérience passée pour
+										éviter de perdre du temps à recréer vos
+										choses à faire, et devisez au plus juste
+										en vous basant sur le temps réellement
+										passés sur chacune des tâches.
+									</P>
+									<ModalActions>
+										<Button
+											onClick={() => setOpenDuplicateModal(false)
+											}
+										>
+											J'ai compris
+										</Button>
+									</ModalActions>
+								</fbt>
 							</ModalElem>
 						</ModalContainer>
 					)}
@@ -343,7 +360,9 @@ function Projects({history}) {
 						|| archivedProject.length > 0) && (
 						<>
 							<SubHeadingProject>
-								Projets en cours
+								<fbt project="inyo" desc="project in progress">
+									Projets en cours
+								</fbt>
 							</SubHeadingProject>
 							{unarchivedProject.map(project => (
 								<ProjectItem
@@ -358,7 +377,16 @@ function Projects({history}) {
 											{project.name}
 										</ProjectTitle>
 										<ActionsIconContainer>
-											<Tooltip label="Supprimer ce projet">
+											<Tooltip
+												label={
+													<fbt
+														project="inyo"
+														desc="delete project"
+													>
+														Supprimer ce projet
+													</fbt>
+												}
+											>
 												<TrashButton
 													onClick={(e) => {
 														e.stopPropagation();
@@ -407,21 +435,36 @@ function Projects({history}) {
 									<Button
 										onClick={() => setSeeArchived(true)}
 									>
-										Voir tous les projets
+										<fbt
+											project="inyo"
+											desc="see all project"
+										>
+											Voir tous les projets
+										</fbt>
 									</Button>
 								)}
 								{seeArchived && (
 									<Button
 										onClick={() => setSeeArchived(false)}
 									>
-										Voir uniquement les projets en cours
+										<fbt
+											project="inyo"
+											desc="see only in progress project"
+										>
+											Voir uniquement les projets en cours
+										</fbt>
 									</Button>
 								)}
 							</ButtonsRow>
 							{seeArchived && (
 								<>
 									<SubHeadingProject>
-										Projets archivés
+										<fbt
+											project="inyo"
+											desc="archived projects"
+										>
+											Projets archivés
+										</fbt>
 									</SubHeadingProject>
 									{archivedProject.length === 0 && (
 										<EmptyProjectList>
@@ -431,10 +474,15 @@ function Projects({history}) {
 												height="300px"
 											/>
 											<P>
-												Une fois vos projets terminés,
-												archivez-les pour vous
-												concentrer sur les projets en
-												cours.
+												<fbt
+													project="inyo"
+													desc="no archived project"
+												>
+													Une fois vos projets
+													terminés, archivez-les pour
+													vous concentrer sur les
+													projets en cours.
+												</fbt>
 											</P>
 										</EmptyProjectList>
 									)}
@@ -452,7 +500,17 @@ function Projects({history}) {
 													{project.name}
 												</ProjectTitle>
 												<ActionsIconContainer>
-													<Tooltip label="Supprimer ce projet">
+													<Tooltip
+														label={
+															<fbt
+																project="inyo"
+																desc="delete project"
+															>
+																Supprimer ce
+																projet
+															</fbt>
+														}
+													>
 														<TrashButton
 															link
 															onClick={(e) => {
@@ -472,7 +530,17 @@ function Projects({history}) {
 															/>
 														</TrashButton>
 													</Tooltip>
-													<Tooltip label="Désarchiver ce projet">
+													<Tooltip
+														label={
+															<fbt
+																project="inyo"
+																desc="unarchive project"
+															>
+																Désarchiver ce
+																projet
+															</fbt>
+														}
+													>
 														<ArchiveButton
 															link
 															onClick={(e) => {

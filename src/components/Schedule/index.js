@@ -272,7 +272,9 @@ const Schedule = ({
 					)
 					}
 				>
-					Aujourd'hui
+					<fbt project="inyo" desc="notification message">
+						Aujourd'hui
+					</fbt>
 				</Button>
 				<IconButton
 					icon="navigate_before"
@@ -285,7 +287,14 @@ const Schedule = ({
 					)
 					}
 				/>
-				<ScheduleNavInfo>Sem. {startDay.week()}</ScheduleNavInfo>
+				<ScheduleNavInfo>
+					<fbt project="inyo" desc="notification message">
+						Sem.{' '}
+						<fbt:param name="weekNumber">
+							{startDay.week()}
+						</fbt:param>
+					</fbt>
+				</ScheduleNavInfo>
 				<IconButton
 					icon="navigate_next"
 					size="tiny"

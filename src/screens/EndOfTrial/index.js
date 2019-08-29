@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, {useCallback} from 'react';
 import {useApolloClient, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, PLAN_NAMES, STRIPE_CONSTANT} from '../../utils/constants';
 import {FlexColumn, FlexRow, Loading} from '../../utils/content';
 import Illus from '../../utils/images/bermuda-done.svg';
@@ -105,43 +106,52 @@ function EndOfTrial() {
 			<FlewRowMobile>
 				<IllusForPaying src={Illus} />
 				<Column>
-					<P>Bonjour {data.me ? data.me.email : ''},</P>
-					<P>Votre période d'essai de 21 jours est terminée !</P>
-					<P>
-						Pour vos clients rien ne change : ils peuvent toujours
-						accéder aux projets, commenter, valider, etc.
-					</P>
-					<P>
-						Pour profiter à nouveau d'Inyo et effectuer des actions
-						sur vos projets en cours, merci de souscrire à l'un de
-						nos plans payants.
-					</P>
-					<FlewRowMobile>
-						<Button onClick={monthlyStripeCheckout} link>
-							S'abonner pour 8€ /mois
-						</Button>
-						<Separator>ou</Separator>
-						<Button onClick={yearlyStripeCheckout} link>
-							60€ /an (4 mois offerts)
-						</Button>
-					</FlewRowMobile>
-					<P>
-						<Button onClick={lifeStripeCheckout} big primary>
-							Acheter un accès à vie pour 99€ !
-						</Button>
-					</P>
-					<P>
-						<Button
-							onClick={() => {
-								window.localStorage.removeItem('authToken');
-								client.resetStore();
-							}}
-							link
-						>
-							Si ce n'est pas vous, cliquez ici pour vous
-							déconnecter.
-						</Button>
-					</P>
+					<fbt project="inyo" desc="end of trial">
+						<P>
+							Bonjour{' '}
+							<fbt:param name="email">
+								{data.me ? data.me.email : ''}
+							</fbt:param>
+							,
+						</P>
+						<P>Votre période d'essai de 21 jours est terminée !</P>
+						<P>
+							Pour vos clients rien ne change : ils peuvent
+							toujours accéder aux projets, commenter, valider,
+							etc.
+						</P>
+						<P>
+							Pour profiter à nouveau d'Inyo et effectuer des
+							actions sur vos projets en cours, merci de souscrire
+							à l'un de nos plans payants.
+						</P>
+						<FlewRowMobile>
+							<Button onClick={monthlyStripeCheckout} link>
+								S'abonner pour 8€ /mois
+							</Button>
+							<Separator>ou</Separator>
+							<Button onClick={yearlyStripeCheckout} link>
+								60€ /an (4 mois offerts)
+							</Button>
+						</FlewRowMobile>
+						<P>
+							<Button onClick={lifeStripeCheckout} big primary>
+								Acheter un accès à vie pour 99€ !
+							</Button>
+						</P>
+						<P>
+							<Button
+								onClick={() => {
+									window.localStorage.removeItem('authToken');
+									client.resetStore();
+								}}
+								link
+							>
+								Si ce n'est pas vous, cliquez ici pour vous
+								déconnecter.
+							</Button>
+						</P>
+					</fbt>
 				</Column>
 			</FlewRowMobile>
 		</Container>

@@ -88,6 +88,10 @@ const CreateTask = ({currentProjectId, withProject}) => {
 						});
 					}
 
+					if (currentProjectId && task.projectId === undefined) {
+						delete task.projectId;
+					}
+
 					return createTask({
 						variables: {projectId: currentProjectId, ...task},
 						update: (cache, {data: {addItem: addedItem}}) => {

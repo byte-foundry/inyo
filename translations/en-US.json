@@ -566,7 +566,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "You're soon going to receive some email from {assistantName} Inyo. Don't throw them in spam. They will keep you up to date on the progress of the project.",
+     "translation": "You're soon going to receive some email from {assistantName} from Inyo. Don't throw them in spam. They will keep you up to date on the progress of the project.",
      "variations": {}
     }
    ]

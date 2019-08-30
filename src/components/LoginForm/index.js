@@ -7,6 +7,7 @@ import ReactGA from 'react-ga';
 import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ErrorInput} from '../../utils/content';
 import {LOGIN} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
@@ -38,9 +39,21 @@ function LoginForm({from = '/app', history, client}) {
 				initialValues={{email: '', password: ''}}
 				validationSchema={Yup.object().shape({
 					email: Yup.string()
-						.email("L'email n'est pas valide")
-						.required('Requis'),
-					password: Yup.string().required('Requis'),
+						.email(
+							<fbt project="inyo" desc="email invalid">
+								L'email n'est pas valide
+							</fbt>,
+						)
+						.required(
+							<fbt project="inyo" desc="required">
+								Requis
+							</fbt>,
+						),
+					password: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
@@ -69,7 +82,14 @@ function LoginForm({from = '/app', history, client}) {
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: 'Mauvais email ou mot de passe',
+							msg: (
+								<fbt
+									project="inyo"
+									desc="wrong email or password"
+								>
+									Mauvais email ou mot de passe
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -83,8 +103,22 @@ function LoginForm({from = '/app', history, client}) {
 								{...props}
 								name="email"
 								type="email"
-								label="Adresse email"
-								placeholder="jean@dupont.fr"
+								label={
+									<fbt
+										project="inyo"
+										desc="login form email label"
+									>
+										Adresse email
+									</fbt>
+								}
+								placeholder={
+									<fbt
+										project="inyo"
+										desc="placeholder email"
+									>
+										jean@dupont.fr
+									</fbt>
+								}
 								required
 								big
 							/>
@@ -92,14 +126,26 @@ function LoginForm({from = '/app', history, client}) {
 								{...props}
 								name="password"
 								type="password"
-								label="Mot de passe"
+								label={
+									<fbt
+										project="inyo"
+										desc="login password label"
+									>
+										Mot de passe
+									</fbt>
+								}
 								placeholder="***************"
 								required
 								big
 							/>
 							<ForgotPasswordLinkContainer>
 								<ForgotPasswordLink to="/auth/forgotten-password">
-									Mot de passe oublié ?
+									<fbt
+										project="inyo"
+										desc="login form forgotten password link"
+									>
+										Mot de passe oublié ?
+									</fbt>
 								</ForgotPasswordLink>
 							</ForgotPasswordLinkContainer>
 							{status && status.msg && (
@@ -112,7 +158,12 @@ function LoginForm({from = '/app', history, client}) {
 								big
 								disabled={isSubmitting}
 							>
-								Se connecter
+								<fbt
+									project="inyo"
+									desc="login form sign in button"
+								>
+									Se connecter
+								</fbt>
 							</LoginButton>
 						</form>
 					);

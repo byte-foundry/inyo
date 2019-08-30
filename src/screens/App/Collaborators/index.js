@@ -5,6 +5,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import AddCollaboratorModal from '../../../components/AddCollaboratorModal';
 import ConfirmModal from '../../../components/ConfirmModal';
 import IconButton from '../../../components/IconButton';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS, collabStatuses} from '../../../utils/constants';
 import {formatCollabStatus, formatName} from '../../../utils/functions';
 import Search from '../../../utils/icons/search.svg';
@@ -202,33 +203,61 @@ const Collaborators = () => {
 		<Main>
 			<Container>
 				<HeadingRow>
-					<HeadingLink to="/app/customers">Clients</HeadingLink>
-					<Heading>Collaborateurs</Heading>
+					<HeadingLink to="/app/customers">
+						<fbt project="inyo" desc="Client">
+							Clients
+						</fbt>
+					</HeadingLink>
+					<Heading>
+						<fbt project="inyo" desc="Collaborateurs">
+							Collaborateurs
+						</fbt>
+					</Heading>
 				</HeadingRow>
 				<Forms>
 					<FilterInput
 						icon={Search}
 						name="filter"
-						placeholder="Filtrer par nom, email..."
+						placeholder={
+							<fbt project="inyo" desc="filter">
+								Filtrer par nom, email...
+							</fbt>
+						}
 						type="text"
 						onChange={e => setFilter(e.target.value)}
 						value={filter}
 					/>
 					<Actions>
 						<A target="_blank" href="https://inyo.pro">
-							Présenter Inyo à un collaborateur
+							<fbt project="inyo" desc="present">
+								Présenter Inyo à un collaborateur
+							</fbt>
 						</A>
 						<Button big onClick={() => setAddCollaborator(true)}>
-							Inviter un collaborateur
+							<fbt project="inyo" desc="invite">
+								Inviter un collaborateur
+							</fbt>
 						</Button>
 					</Actions>
 				</Forms>
-				<SubHeading>Collaborateurs</SubHeading>
+				<SubHeading>
+					<fbt project="inyo" desc="collaborators">
+						Collaborateurs
+					</fbt>
+				</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>
-							<HeaderCell>Prénom et nom</HeaderCell>
-							<HeaderCell>Email</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="full name">
+									Prénom et nom
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="email">
+									Email
+								</fbt>
+							</HeaderCell>
 						</RowHeader>
 					</thead>
 					<tbody>
@@ -282,13 +311,29 @@ const Collaborators = () => {
 						))}
 					</tbody>
 				</Table>
-				<SubHeading>Requêtes reçues</SubHeading>
+				<SubHeading>
+					<fbt project="inyo" desc="request">
+						Requêtes reçues
+					</fbt>
+				</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>
-							<HeaderCell>Prénom et nom</HeaderCell>
-							<HeaderCell>Email</HeaderCell>
-							<HeaderCell>Status</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="full name">
+									Prénom et nom
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="email">
+									Email
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="status">
+									Status
+								</fbt>
+							</HeaderCell>
 						</RowHeader>
 					</thead>
 					<tbody>
@@ -338,13 +383,29 @@ const Collaborators = () => {
 						)}
 					</tbody>
 				</Table>
-				<SubHeading>Requêtes envoyées</SubHeading>
+				<SubHeading>
+					<fbt project="inyo" desc="request">
+						Requêtes envoyées
+					</fbt>
+				</SubHeading>
 				<Table>
 					<thead>
 						<RowHeader>
-							<HeaderCell>Prénom et nom</HeaderCell>
-							<HeaderCell>Email</HeaderCell>
-							<HeaderCell>Statut</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="full name">
+									Prénom et nom
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="email">
+									Email
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="status">
+									Statut
+								</fbt>
+							</HeaderCell>
 						</RowHeader>
 					</thead>
 					<tbody>
@@ -369,7 +430,9 @@ const Collaborators = () => {
 											})
 											}
 										>
-											Annuler
+											<fbt project="inyo" desc="cancel">
+												Annuler
+											</fbt>
 										</Button>
 									</Cell>
 								</Row>
@@ -392,12 +455,20 @@ const Collaborators = () => {
 						}
 					>
 						<P>
-							Êtes-vous sûr de vouloir supprimer{' '}
-							{collaboratorToBeRemoved.email} ? Tous les projets
-							et les tâches assignées à ce collaborateur seront
-							desassignées.
+							<fbt project="inyo" desc="notification message">
+								Êtes-vous sûr de vouloir supprimer{' '}
+								<fbt:param name="email">
+									{collaboratorToBeRemoved.email}
+								</fbt:param>{' '}
+								? Tous les projets et les tâches assignées à ce
+								collaborateur seront desassignées.
+							</fbt>
 						</P>
-						<P>Êtes-vous sûr de vouloir continuer?</P>
+						<P>
+							<fbt project="inyo" desc="continue">
+								Êtes-vous sûr de vouloir continuer?
+							</fbt>
+						</P>
 					</ConfirmModal>
 				)}
 			</Container>

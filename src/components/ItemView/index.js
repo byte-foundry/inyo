@@ -5,6 +5,7 @@ import React, {useRef, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
@@ -340,7 +341,13 @@ const Item = ({
 				/>
 			</StickyHeader>
 			<Header>
-				<Tooltip label="Type et titre de la tâche">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="Tooltip task title item view">
+							Type et titre de la tâche
+						</fbt>
+					}
+				>
 					<Title>
 						<TaskHeadingIcon>
 							{item.status === 'FINISHED'
@@ -354,7 +361,14 @@ const Item = ({
 							`}
 							value={item.name}
 							type="text"
-							placeholder="Nommez cette tâche"
+							placeholder={
+								<fbt
+									project="inyo"
+									desc="task name placeholder item view"
+								>
+									Nommez cette tâche
+								</fbt>
+							}
 							onFocusOut={(value) => {
 								if (value && value !== item.name) {
 									updateItem({
@@ -374,10 +388,26 @@ const Item = ({
 				{customerToken
 				|| item.status !== 'FINISHED'
 				|| !item.timeItTook ? (
-						<Tooltip label="Temps estimé pour cette tâche">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="time estimated tooltip item view"
+								>
+								Temps estimé pour cette tâche
+								</fbt>
+							}
+						>
 							<Meta>
 								<MaterialIcon icon="timer" size="tiny" />
-								<MetaLabel>Temps estimé</MetaLabel>
+								<MetaLabel>
+									<fbt
+										project="inyo"
+										desc="time estimated label item view"
+									>
+									Temps estimé
+									</fbt>
+								</MetaLabel>
 								<MetaText>
 									{!customerToken && editUnit ? (
 										<UnitInput
@@ -418,22 +448,47 @@ const Item = ({
 													: () => setEditUnit(true)
 											}
 										>
-											{+item.unit.toFixed(2)}
-											<Plural
-												singular=" jour"
-												plural=" jours"
-												value={item.unit}
-											/>
+											<fbt
+												project="inyo"
+												desc="time estimated item view"
+											>
+												<fbt:param name="timeEstimated">
+													{+item.unit.toFixed(2)}
+												</fbt:param>
+												<fbt:plural
+													count={item.unit}
+													name="time estimated plural"
+													many="jours"
+												>
+												jour
+												</fbt:plural>
+											</fbt>
 										</div>
 									)}
 								</MetaText>
 							</Meta>
 						</Tooltip>
 					) : (
-						<Tooltip label="Temps passé pour cette tâche">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="time it took tooltip item view"
+								>
+								Temps passé pour cette tâche
+								</fbt>
+							}
+						>
 							<Meta>
 								<MaterialIcon icon="timer" size="tiny" />
-								<MetaLabel>Temps passé</MetaLabel>
+								<MetaLabel>
+									<fbt
+										project="inyo"
+										desc="time it took label item view"
+									>
+									Temps passé
+									</fbt>
+								</MetaLabel>
 								<MetaText>
 									{editUnit ? (
 										<UnitInput
@@ -468,12 +523,21 @@ const Item = ({
 										/>
 									) : (
 										<div onClick={() => setEditUnit(true)}>
-											{+item.timeItTook.toFixed(2)}
-											<Plural
-												singular=" jour"
-												plural=" jours"
-												value={item.timeItTook}
-											/>
+											<fbt
+												project="inyo"
+												desc="time it took item view"
+											>
+												<fbt:param name="timeItTook">
+													{+item.timeItTook.toFixed(2)}
+												</fbt:param>
+												<fbt:plural
+													count={item.timeItTook}
+													name="time it took plural"
+													many="jours"
+												>
+												jour
+												</fbt:plural>
+											</fbt>
 										</div>
 									)}
 								</MetaText>
@@ -481,10 +545,26 @@ const Item = ({
 						</Tooltip>
 					)}
 				{isCustomerTask(item.type) || !item.section ? (
-					<Tooltip label="Personne liée à cette tâche">
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="linked customer tooltip item view"
+							>
+								Personne liée à cette tâche
+							</fbt>
+						}
+					>
 						<Meta>
 							<MaterialIcon icon="person_outline" size="tiny" />
-							<MetaLabel>Client</MetaLabel>
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="linked customer label item view"
+								>
+									Client
+								</fbt>
+							</MetaLabel>
 							{!customerToken && editCustomer ? (
 								<ClientDropdown
 									id="projects"
@@ -546,10 +626,26 @@ const Item = ({
 					/>
 				)}
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
-					<Tooltip label="Date limite pour réaliser cette tâche">
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="deadline tooltip item view"
+							>
+								Date limite pour réaliser cette tâche
+							</fbt>
+						}
+					>
 						<Meta>
 							<MaterialIcon icon="event" size="tiny" />
-							<MetaLabel>Temps restant</MetaLabel>
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="deadline label item view"
+								>
+									Temps restant
+								</fbt>
+							</MetaLabel>
 							<MetaTime
 								title={deadline && deadline.toLocaleString()}
 								dateTime={deadline && deadline.toJSON()}
@@ -612,10 +708,20 @@ const Item = ({
 						</Meta>
 					</Tooltip>
 				)}
-				<Tooltip label="Projet lié à cette tâche">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="project tooltip">
+							Projet lié à cette tâche
+						</fbt>
+					}
+				>
 					<Meta>
 						<MaterialIcon icon="folder_open" size="tiny" />
-						<MetaLabel>Projet</MetaLabel>
+						<MetaLabel>
+							<fbt project="inyo" desc="project label">
+								Projet
+							</fbt>
+						</MetaLabel>
 						{!customerToken && editProject ? (
 							<StyledProjectsDropdown
 								id="projects"
@@ -656,22 +762,45 @@ const Item = ({
 						)}
 					</Meta>
 				</Tooltip>
-				<Tooltip label="Définit s'il y a des actions automatiques">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="type of the task tooltip">
+							Définit s'il y a des actions automatiques
+						</fbt>
+					}
+				>
 					<Meta>
 						<MaterialIcon icon="check_circle_outline" size="tiny" />
-						<MetaLabel>Type de tâche</MetaLabel>
+						<MetaLabel>
+							<fbt project="inyo" desc="task type">
+								Type de tâche
+							</fbt>
+						</MetaLabel>
 						<MetaText>{typeInfo.name}</MetaText>
 					</Meta>
 				</Tooltip>
 				{!customerToken && (
-					<Tooltip label="Tag de la tâche">
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="task's tag">
+								Tag de la tâche
+							</fbt>
+						}
+					>
 						<Meta>
 							<MaterialIcon icon="label" size="tiny" />
 							<MetaLabel>Tags</MetaLabel>
 							<TagDropdown
 								id="tags"
 								long
-								placeholder="Ajouter ou créer un tag"
+								placeholder={
+									<fbt
+										project="inyo"
+										desc="add or create tag"
+									>
+										Ajouter ou créer un tag
+									</fbt>
+								}
 								value={item.tags.map(tag => ({
 									value: tag.id,
 									label: tag.name,
@@ -753,13 +882,33 @@ const Item = ({
 				&& taskFulfillsActivationCriteria(item) && (
 					<>
 						<SubHeading>
-							Actions{' '}
-							<Apostrophe
-								value={me.settings.assistantName}
-								withVowel="d'"
-								withConsonant="de "
-							/>
-							{me.settings.assistantName}
+							<fbt project="inyo" desc="actions of edwige">
+								Actions{' '}
+								<fbt:param name="apos">
+									<Apostrophe
+										value={me.settings.assistantName}
+										withVowel={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												d'
+											</fbt>
+										}
+										withConsonant={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												de{' '}
+											</fbt>
+										}
+									/>
+								</fbt:param>
+								<fbt:param name="assistantName">
+									{me.settings.assistantName}
+								</fbt:param>
+							</fbt>
 						</SubHeading>
 						{item.isFocused ? (
 							<>
@@ -915,7 +1064,9 @@ const Item = ({
 									aligned
 									onClick={() => setDeletingItem(false)}
 								>
-									Annuler
+									<fbt project="inyo" desc="cancel">
+										Annuler
+									</fbt>
 								</Button>
 								<Button
 									red
@@ -925,7 +1076,9 @@ const Item = ({
 										close();
 									}}
 								>
-									Confirmer la suppression
+									<fbt project="inyo" desc="confirm deletion">
+										Confirmer la suppression
+									</fbt>
 								</Button>
 							</>
 						) : (
@@ -935,7 +1088,9 @@ const Item = ({
 									onClick={() => setDeletingItem(true)}
 									aligned
 								>
-									Supprimer la tâche
+									<fbt project="inyo" desc="delete task">
+										Supprimer la tâche
+									</fbt>
 								</Button>
 							</>
 						))}
@@ -951,7 +1106,9 @@ const Item = ({
 				</FlexRowButtons>
 				<div>
 					<Button id="save-change-task" onClick={() => close()}>
-						Enregistrer et fermer
+						<fbt project="inyo" desc="notification message">
+							Enregistrer et fermer
+						</fbt>
 					</Button>
 				</div>
 			</FlexRowButtons>

@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ErrorInput} from '../../utils/content';
 import {Button, P} from '../../utils/new/design-system';
 import FormElem from '../FormElem';
@@ -38,14 +39,25 @@ class SendResetPasswordForm extends Component {
 			<Container>
 				{sent ? (
 					<P>
-						L'email a bien été envoyé ! Vérifiez votre boîte de
-						réception d'ici quelques minutes !
+						<fbt
+							project="inyo"
+							desc="send reset password form sent message"
+						>
+							L'email a bien été envoyé ! Vérifiez votre boîte de
+							réception d'ici quelques minutes !
+						</fbt>
 					</P>
 				) : (
 					<P>
-						Entrez l'adresse mail que vous avez utilisé pour vous
-						enregistrer, on vous enverra un lien pour réinitialiser
-						votre mot de passe et accéder de nouveau à votre compte.
+						<fbt
+							project="inyo"
+							desc="send reset password form before sending message"
+						>
+							Entrez l'adresse mail que vous avez utilisé pour
+							vous enregistrer, on vous enverra un lien pour
+							réinitialiser votre mot de passe et accéder de
+							nouveau à votre compte.
+						</fbt>
 					</P>
 				)}
 				<Mutation mutation={SEND_RESET_PASSWORD}>
@@ -54,8 +66,19 @@ class SendResetPasswordForm extends Component {
 							initialValues={{email: ''}}
 							validationSchema={Yup.object().shape({
 								email: Yup.string()
-									.email("L'email doit être valide")
-									.required('Requis'),
+									.email(
+										<fbt
+											project="inyo"
+											desc="invalid email"
+										>
+											L'email doit être valide
+										</fbt>,
+									)
+									.required(
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>,
+									),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -71,8 +94,15 @@ class SendResetPasswordForm extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg:
-											"Quelque chose ne s'est pas passé comme prévu",
+										msg: (
+											<fbt
+												project="inyo"
+												desc="something went wrong"
+											>
+												Quelque chose ne s'est pas passé
+												comme prévu
+											</fbt>
+										),
 									});
 								}
 							}}
@@ -88,8 +118,22 @@ class SendResetPasswordForm extends Component {
 										{...props}
 										name="email"
 										type="email"
-										label="Adresse email"
-										placeholder="jean@dupont.fr"
+										label={
+											<fbt
+												project="inyo"
+												desc="email address label"
+											>
+												Adresse email
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="placeholder email address"
+											>
+												jean@dupont.fr
+											</fbt>
+										}
 										required
 									/>
 									{status && status.msg && (
@@ -104,7 +148,12 @@ class SendResetPasswordForm extends Component {
 										big
 										disabled={isSubmitting}
 									>
-										Réinitialiser le mot de passe
+										<fbt
+											project="inyo"
+											desc="reset password button"
+										>
+											Réinitialiser le mot de passe
+										</fbt>
 									</SendButton>
 								</form>
 							)}

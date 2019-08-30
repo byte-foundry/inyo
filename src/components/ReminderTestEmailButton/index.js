@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	SEND_REMINDER_PREVIEW_TEST_EMAIL,
 	SEND_REMINDER_TEST_EMAIL,
@@ -26,19 +27,43 @@ const ReminderTestEmailButton = ({
 	);
 
 	if (status === 'loading') {
-		return <Status>Envoi...</Status>;
+		return (
+			<Status>
+				<fbt project="inyo" desc="reminder sending status">
+					Envoi...
+				</fbt>
+			</Status>
+		);
 	}
 
 	if (status === 'done') {
-		return <Status>Test Envoyé</Status>;
+		return (
+			<Status>
+				<fbt project="inyo" desc="reminder sent status">
+					Test Envoyé
+				</fbt>
+			</Status>
+		);
 	}
 
 	if (status === 'error') {
-		return <Status error>Erreur</Status>;
+		return (
+			<Status error>
+				<fbt project="inyo" desc="reminder error status">
+					Erreur
+				</fbt>
+			</Status>
+		);
 	}
 
 	return (
-		<Tooltip label="S'envoyer un email test">
+		<Tooltip
+			label={
+				<fbt project="inyo" desc="send test email tooltip">
+					S'envoyer un email test
+				</fbt>
+			}
+		>
 			<Button
 				link
 				onClick={async () => {

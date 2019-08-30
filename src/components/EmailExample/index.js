@@ -1,6 +1,7 @@
 import styled from '@emotion/styled/macro';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {accentGrey} from '../../utils/new/design-system';
 
 const SubjectAndToElem = styled('div')`
@@ -23,15 +24,27 @@ function EmailExample({
 	return (
 		<div>
 			<SubjectAndToElem noBorder>
-				<SubjectAndToLabel>De</SubjectAndToLabel>
+				<SubjectAndToLabel>
+					<fbt project="inyo" desc="From">
+						De
+					</fbt>
+				</SubjectAndToLabel>
 				<SubjectAndToInfo>{userEmail}</SubjectAndToInfo>
 			</SubjectAndToElem>
 			<SubjectAndToElem>
-				<SubjectAndToLabel>À</SubjectAndToLabel>
+				<SubjectAndToLabel>
+					<fbt project="inyo" desc="To">
+						À
+					</fbt>
+				</SubjectAndToLabel>
 				<SubjectAndToInfo>{email}</SubjectAndToInfo>
 			</SubjectAndToElem>
 			<SubjectAndToElem>
-				<SubjectAndToLabel>Sujet</SubjectAndToLabel>
+				<SubjectAndToLabel>
+					<fbt project="inyo" desc="Subject">
+						Sujet
+					</fbt>
+				</SubjectAndToLabel>
 				<SubjectAndToInfo>{subject}</SubjectAndToInfo>
 			</SubjectAndToElem>
 			{children}

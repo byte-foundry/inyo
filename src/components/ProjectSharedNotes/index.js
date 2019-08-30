@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {UPDATE_PROJECT_SHARED_NOTES} from '../../utils/mutations';
 import {primaryRed, SubHeading} from '../../utils/new/design-system';
 import {GET_PROJECT_SHARED_NOTES} from '../../utils/queries';
@@ -30,8 +31,20 @@ const ProjectSharedNotes = ({projectId, customerToken}) => {
 			projectId={projectId}
 		>
 			<SubHeadingRed>
-				Ces notes sont partagées avec votre{' '}
-				{customerToken ? 'prestataire' : 'client'}.
+				<fbt project="inyo" desc="shared notes placeholder">
+					Ces notes sont partagées avec votre{' '}
+					<fbt:param name="otherUserName">
+						{customerToken ? (
+							<fbt project="inyo" desc="contractor">
+								prestataire
+							</fbt>
+						) : (
+							<fbt project="inyo" desc="customer">
+								client
+							</fbt>
+						)}
+					</fbt:param>.
+				</fbt>
 			</SubHeadingRed>
 		</ProjectNotes>
 	);

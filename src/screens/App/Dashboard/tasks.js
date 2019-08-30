@@ -15,6 +15,7 @@ import Schedule from '../../../components/Schedule';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import Task from '../../../components/TaskRow';
 import TasksList from '../../../components/TasksList';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
 	FlexRow,
@@ -306,7 +307,10 @@ const DashboardTasks = ({location, history}) => {
 									<IllusFigureContainer fig={IllusFigure} />
 									<IllusText>
 										<P>
-										Vous n'avez plus de tâches à planifier.
+											<fbt project="inyo" desc="no more task">
+											Vous n'avez plus de tâches à
+											planifier.
+											</fbt>
 										</P>
 									</IllusText>
 								</IllusContainer>

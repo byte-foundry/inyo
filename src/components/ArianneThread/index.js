@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import Select, {components} from 'react-select';
 import Creatable from 'react-select/creatable';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {
@@ -197,7 +198,11 @@ export function ArianneElem({
 				isSearchable
 				value={selectedItem}
 				hideSelectedOptions
-				noOptionsMessage={() => 'Aucune option'}
+				noOptionsMessage={() => (
+					<fbt project="inyo" desc="arianne elem no option message">
+						Aucune option
+					</fbt>
+				)}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -245,7 +250,14 @@ export function ArianneElemCreatable({
 						),
 					}
 				}
-				noOptionsMessage={() => 'Aucune option'}
+				noOptionsMessage={() => (
+					<fbt
+						project="inyo"
+						desc="arianne elem with create no option message"
+					>
+						Aucune option
+					</fbt>
+				)}
 				{...rest}
 			/>
 		</ArianneElemMain>
@@ -292,9 +304,30 @@ function ArianneThread({
 	);
 
 	const filters = [
-		{id: 'PENDING', name: 'Tâches à faire'},
-		{id: 'FINISHED', name: 'Tâches faites'},
-		{id: 'ALL', name: 'Toutes les tâches'},
+		{
+			id: 'PENDING',
+			name: (
+				<fbt project="inyo" desc="tasks to do filter label">
+					Tâches à faire
+				</fbt>
+			),
+		},
+		{
+			id: 'FINISHED',
+			name: (
+				<fbt project="inyo" desc="tasks done filter label">
+					Tâches faites
+				</fbt>
+			),
+		},
+		{
+			id: 'ALL',
+			name: (
+				<fbt project="inyo" desc="all tasks filter label">
+					Toutes les tâches
+				</fbt>
+			),
+		},
 	];
 
 	const customersList = useMemo(
@@ -322,7 +355,9 @@ function ArianneThread({
 					isClearable
 					selectedId={linkedCustomerId}
 				>
-					Tous les clients
+					<fbt project="inyo" desc="All clients">
+						Tous les clients
+					</fbt>
 				</ArianneElem>
 			)}
 			{selectProjects && (
@@ -333,7 +368,9 @@ function ArianneThread({
 					isClearable
 					selectedId={projectId}
 				>
-					Tous les projets
+					<fbt project="inyo" desc="All projects">
+						Tous les projets
+					</fbt>
 				</ArianneElem>
 			)}
 			{selectFilter && (
@@ -342,7 +379,11 @@ function ArianneThread({
 					list={filters}
 					onChange={selectFilter}
 					selectedId={filterId}
-					placeholder={'Toutes les tâches'}
+					placeholder={
+						<fbt project="inyo" desc="tasks filter placeholder">
+							Toutes les tâches
+						</fbt>
+					}
 				/>
 			)}
 			<ArianneElemCreatable
@@ -372,7 +413,11 @@ function ArianneThread({
 						Gérer les tags
 					</ManageTagOption>
 				}
-				placeholder={'Chercher par tags'}
+				placeholder={
+					<fbt project="inyo" desc="filter by tag placeholder">
+						Chercher par tags
+					</fbt>
+				}
 			/>
 		</ArianneContainer>
 	);

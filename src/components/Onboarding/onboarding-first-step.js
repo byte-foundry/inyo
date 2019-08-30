@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button, FlexColumn, H4, Label,
 } from '../../utils/content';
@@ -85,8 +86,10 @@ class OnboardingThirdStep extends Component {
 		return (
 			<OnboardingStep>
 				<StepSubtitle>
-					Nous avons besoin de quelques informations pour nous aider à
-					travailler pour vous.
+					<fbt project="inyo" desc="onboarding first step title">
+						Nous avons besoin de quelques informations pour nous
+						aider à travailler pour vous.
+					</fbt>
 				</StepSubtitle>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
@@ -152,7 +155,14 @@ class OnboardingThirdStep extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg: "Quelque chose s'est mal passé",
+										msg: (
+											<fbt
+												project="inyo"
+												desc="something went wrong message"
+											>
+												Quelque chose s'est mal passé
+											</fbt>
+										),
 									});
 								}
 							}}
@@ -173,11 +183,22 @@ class OnboardingThirdStep extends Component {
 								return (
 									<form onSubmit={handleSubmit}>
 										<Label onboarding>
-											Définissez vos horaires de travail
+											<fbt
+												project="inyo"
+												desc="onboarding first step description 1st part"
+											>
+												Définissez vos horaires de
+												travail
+											</fbt>
 											<br />
-											(cela nous aide à organiser les
-											tâches que vous pouvez effectuer
-											dans une journée)
+											<fbt
+												project="inyo"
+												desc="onboarding first step description 2nd part"
+											>
+												(cela nous aide à organiser les
+												tâches que vous pouvez effectuer
+												dans une journée)
+											</fbt>
 										</Label>
 										<DoubleRangeTimeInput
 											value={{
@@ -192,41 +213,86 @@ class OnboardingThirdStep extends Component {
 										<EmojiTimeline>
 											<Emoji
 												role="img"
-												aria-label="matin"
+												aria-label={
+													<fbt
+														project="inyo"
+														desc="morning onboarding aria label"
+													>
+														matin
+													</fbt>
+												}
 												offset={0}
 												children="🌙"
 											/>
 											<Emoji
 												role="img"
-												aria-label="petit déjeuner"
+												aria-label={
+													<fbt
+														project="inyo"
+														desc="break onboarding aria label"
+													>
+														petit déjeuner
+													</fbt>
+												}
 												offset={33}
 												children="☕"
 											/>
 											<Emoji
 												role="img"
-												aria-label="déjeuner"
+												aria-label={
+													<fbt
+														project="inyo"
+														desc="lunch onboarding aria label"
+													>
+														déjeuner
+													</fbt>
+												}
 												offset={50}
 												children="🍽️"
 											/>
 											<Emoji
 												role="img"
-												aria-label="soirée"
+												aria-label={
+													<fbt
+														project="inyo"
+														desc="evening onboard aria label"
+													>
+														soirée
+													</fbt>
+												}
 												offset={87}
 												children="🛌"
 											/>
 											<Emoji
 												role="img"
-												aria-label="nuit"
+												aria-label={
+													<fbt
+														project="inyo"
+														desc="night onboarding aria label"
+													>
+														nuit
+													</fbt>
+												}
 												offset={100}
 												children="🌗"
 											/>
 										</EmojiTimeline>
 										<Label onboarding>
-											Définissez vos jours travaillés
+											<fbt
+												project="inyo"
+												desc="onboarding first step days working description 1st part"
+											>
+												Définissez vos jours travaillés
+											</fbt>
 											<br />
-											(Pour vous aider à ne pas être
-											débordé et ne jamais manquer une
-											deadline)
+											<fbt
+												project="inyo"
+												desc="onboarding first step days working description 2nd part"
+											>
+												(Pour vous aider à ne pas être
+												débordé et ne jamais manquer une
+												deadline)
+											</fbt>
 										</Label>
 										<WeekDaysInput
 											values={workingDays}
@@ -238,7 +304,12 @@ class OnboardingThirdStep extends Component {
 												size="Medium"
 												type="submit"
 											>
-												Continuer
+												<fbt
+													project="inyo"
+													desc="confirm onboarding first step"
+												>
+													Continuer
+												</fbt>
 											</ActionButton>
 											{!isFirstStep && (
 												<ActionButton
@@ -249,7 +320,12 @@ class OnboardingThirdStep extends Component {
 													}}
 												>
 													{'< '}
-													Retour
+													<fbt
+														project="inyo"
+														desc="back"
+													>
+														Retour
+													</fbt>
 												</ActionButton>
 											)}
 										</ActionButtons>

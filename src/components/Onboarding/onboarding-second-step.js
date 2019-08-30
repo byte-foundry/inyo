@@ -3,6 +3,7 @@ import {Formik} from 'formik';
 import React, {Component} from 'react';
 import {Mutation} from 'react-apollo';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button,
 	FlexColumn,
@@ -88,19 +89,35 @@ class OnboardingSecondStep extends Component {
 			me, getNextStep, getPreviousStep, isFirstStep,
 		} = this.props;
 		const pains = [
-			'Jongler entre plusieurs canaux de communications (Slack, emails, etc.)',
-			'Estimer correctement le temps et les tâches en amont du projet',
-			'Organiser et respecter mon programme de temps de travail',
-			'Relancer mes clients pour obtenir des validations',
+			<fbt project="inyo" desc="onboarding second step worries juggle">
+				Jongler entre plusieurs canaux de communications (Slack, emails,
+				etc.)
+			</fbt>,
+			<fbt project="inyo" desc="onboarding second step worries estimate">
+				Estimer correctement le temps et les tâches en amont du projet
+			</fbt>,
+			<fbt project="inyo" desc="onboarding second step worries organise">
+				Organiser et respecter mon programme de temps de travail
+			</fbt>,
+			<fbt project="inyo" desc="onboarding second step worries customer">
+				Relancer mes clients pour obtenir des validations
+			</fbt>,
 		];
 
 		return (
 			<OnboardingStep>
 				<StepSubtitle>
-					Qu'est-ce qui vous ennuie le plus au quotidien ?
+					<fbt project="inyo" desc="onboarding second step title">
+						Qu'est-ce qui vous ennuie le plus au quotidien ?
+					</fbt>
 				</StepSubtitle>
 				<StepDescription>
-					Vous pouvez choisir plusieurs options
+					<fbt
+						project="inyo"
+						desc="onboarding second step description"
+					>
+						Vous pouvez choisir plusieurs options
+					</fbt>
 				</StepDescription>
 				<Mutation mutation={UPDATE_USER_CONSTANTS}>
 					{updateUser => (
@@ -113,10 +130,24 @@ class OnboardingSecondStep extends Component {
 								const errors = {};
 
 								if (
-									painsExpressed.find(e => e === 'Autre')
+									painsExpressed.find(
+										e => e
+											=== (
+												<fbt
+													project="inyo"
+													desc="other"
+												>
+													Autre
+												</fbt>
+											),
+									)
 									&& !other
 								) {
-									errors.other = 'Requis';
+									errors.other = (
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>
+									);
 								}
 
 								return errors;
@@ -143,7 +174,14 @@ class OnboardingSecondStep extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg: "Quelque chose s'est mal passé",
+										msg: (
+											<fbt
+												project="inyo"
+												desc="something went wrong"
+											>
+												Quelque chose s'est mal passé
+											</fbt>
+										),
 									});
 								}
 							}}
@@ -180,23 +218,57 @@ class OnboardingSecondStep extends Component {
 											))}
 											<DomainCard
 												selected={values.painsExpressed.find(
-													e => e === 'Autre',
+													e => e
+														=== (
+															<fbt
+																project="inyo"
+																desc="other"
+															>
+																Autre
+															</fbt>
+														),
 												)}
 												onClick={() => {
 													this.toggleSelectedItems(
 														values.painsExpressed,
-														'Autre',
+														<fbt
+															project="inyo"
+															desc="other"
+														>
+															Autre
+														</fbt>,
 														setFieldValue,
 													);
 												}}
 											>
-												Autre
+												<fbt
+													project="inyo"
+													desc="other"
+												>
+													Autre
+												</fbt>
 											</DomainCard>
 											{values.painsExpressed.find(
-												e => e === 'Autre',
+												e => e
+													=== (
+														<fbt
+															project="inyo"
+															desc="other"
+														>
+															Autre
+														</fbt>
+													),
 											) && (
 												<FormElem
-													label="Donnez nous un exemple :)"
+													label={
+														<fbt
+															project="inyo"
+															desc="onboarding second step more information"
+														>
+															Donnez nous un
+															exemple :)
+														</fbt>
+													}
 													errors={errors}
 													required
 													values={values}
@@ -215,7 +287,12 @@ class OnboardingSecondStep extends Component {
 												size="Medium"
 												type="submit"
 											>
-												Continuer
+												<fbt
+													project="inyo"
+													desc="onboarding second step confirm"
+												>
+													Continuer
+												</fbt>
 											</ActionButton>
 											{!isFirstStep && (
 												<ActionButton
@@ -226,7 +303,12 @@ class OnboardingSecondStep extends Component {
 													}}
 												>
 													{'< '}
-													Retour
+													<fbt
+														project="inyo"
+														desc="back"
+													>
+														Retour
+													</fbt>
 												</ActionButton>
 											)}
 										</ActionButtons>

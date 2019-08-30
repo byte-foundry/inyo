@@ -4,6 +4,7 @@ import moment from 'moment';
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button,
 	primaryPurple,
@@ -51,10 +52,14 @@ const TrialHeadband = ({history}) => {
 
 	return (
 		<Headband>
-			La version d'essai s'arrête{' '}
-			{moment(signedUpAt)
-				.add(21, 'days')
-				.fromNow()}{' '}
+			<fbt project="inyo" desc="trial is ending message">
+				La version d'essai s'arrête{' '}
+				<fbt:param name="date">
+					{moment(signedUpAt)
+						.add(21, 'days')
+						.fromNow()}
+				</fbt:param>
+			</fbt>{' '}
 			<Button
 				style={{display: 'inline'}}
 				onClick={() => {
@@ -65,7 +70,9 @@ const TrialHeadband = ({history}) => {
 					history.push('/pay-for-inyo');
 				}}
 			>
-				Passer à la version payante
+				<fbt project="inyo" desc="switch to paid version">
+					Passer à la version payante
+				</fbt>
 			</Button>
 		</Headband>
 	);

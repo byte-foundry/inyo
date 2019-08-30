@@ -4,6 +4,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button, gray50, H4, P,
 } from '../../utils/content';
@@ -53,17 +54,23 @@ const OnboardingCustomAssistant = ({
 	return (
 		<OnboardingStep>
 			<StepSubtitle>
-				Comment souhaitez-vous appeler
+				<fbt project="inyo" desc="onboarding assistant title 1st">
+					Comment souhaitez-vous appeler
+				</fbt>
 				<br />
-				votre assistant·e ?
+				<fbt project="inyo" desc="onboarding assistant title 2nd">
+					votre assistant·e ?
+				</fbt>
 			</StepSubtitle>
 
 			<Illus src={illus} />
 
 			<StepDescription>
-				Lorsque nous notifierons vos clients d'une tâche à réaliser,
-				d'un commentaire, etc. ce sera le prénom utilisé pour signer les
-				emails.
+				<fbt project="inyo" desc="onboarding assistant description">
+					Lorsque nous notifierons vos clients d'une tâche à réaliser,
+					d'un commentaire, etc. ce sera le prénom utilisé pour signer
+					les emails.
+				</fbt>
 			</StepDescription>
 
 			<Formik
@@ -122,7 +129,12 @@ const OnboardingCustomAssistant = ({
 							theme="Primary"
 							size="Medium"
 						>
-							Valider
+							<fbt
+								project="inyo"
+								desc="confirm onboarding assistant"
+							>
+								Valider
+							</fbt>
 						</ActionButton>
 					</Form>
 				)}
@@ -131,7 +143,9 @@ const OnboardingCustomAssistant = ({
 			{!isFirstStep && (
 				<ActionButton theme="Link" onClick={getPreviousStep}>
 					{'< '}
-					Retour
+					<fbt project="inyo" desc="back onboarding assistant">
+						Retour
+					</fbt>
 				</ActionButton>
 			)}
 		</OnboardingStep>

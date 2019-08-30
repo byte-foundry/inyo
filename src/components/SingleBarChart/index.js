@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {mediumGrey} from '../../utils/colors';
 import {BREAKPOINTS, TAG_COLOR_PALETTE} from '../../utils/constants';
 import Tooltip from '../Tooltip';
@@ -89,7 +90,15 @@ const SingleBarChart = ({entries = [], max = 8}) => {
 
 				return acc;
 			}),
-			{id: 'others', label: `Autres (${others.length})`, value: 0},
+			{
+				id: 'others',
+				label: `${(
+					<fbt project="inyo" desc="notification message">
+						Autres
+					</fbt>
+				)} (${others.length})`,
+				value: 0,
+			},
 		);
 	}
 

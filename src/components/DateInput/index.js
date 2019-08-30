@@ -3,6 +3,7 @@ import moment from 'moment';
 import React, {useState} from 'react';
 import {DayPickerSingleDateController} from 'react-dates';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
 import Plural from '../Plural';
@@ -78,13 +79,21 @@ export default function ({
 				isDayBlocked={day => day.isBefore(startDate)}
 				renderCalendarInfo={() => displayInfo && (
 					<MarginMessage>
-							Cela vous laisse {margin}{' '}
-						<Plural
-							value={margin}
-							singular="jour"
-							plural="jours"
-						/>{' '}
-							pour commencer cette tâche
+						<fbt
+							project="inyo"
+							desc="Date input margin message"
+						>
+								Cela vous laisse{' '}
+							<fbt:plural
+								count={margin}
+								name="days of margin"
+								showCount="yes"
+								many="jours"
+							>
+									jour
+							</fbt:plural>{' '}
+								pour commencer cette tâche
+						</fbt>
 					</MarginMessage>
 				)
 				}

@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, {useCallback} from 'react';
 import {useApolloClient, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, PLAN_NAMES, STRIPE_CONSTANT} from '../../utils/constants';
 import {FlexColumn, FlexRow, Loading} from '../../utils/content';
 import Illus from '../../utils/images/bermuda-done.svg';
@@ -105,35 +106,43 @@ function EndOfTrial() {
 			<FlewRowMobile>
 				<IllusForPaying src={Illus} />
 				<Column>
-					<P>Bonjour {data.me ? data.me.email : ''},</P>
-					<P>Votre période d'essai va bientôt se terminer</P>
-					<P>Vous pouvez vous abonner dès maintenant à Inyo.</P>
-					<FlewRowMobile>
-						<Button onClick={monthlyStripeCheckout} link>
-							S'abonner pour 8€ /mois
-						</Button>
-						<Separator>ou</Separator>
-						<Button onClick={yearlyStripeCheckout} link>
-							60€ /an (4 mois offerts)
-						</Button>
-					</FlewRowMobile>
-					<P>
-						<Button onClick={lifeStripeCheckout} big primary>
-							Acheter un accès à vie pour 99€ !
-						</Button>
-					</P>
-					<P>
-						<Button
-							onClick={() => {
-								window.localStorage.removeItem('authToken');
-								client.resetStore();
-							}}
-							link
-						>
-							Si ce n'est pas vous, cliquez ici pour vous
-							déconnecter.
-						</Button>
-					</P>
+					<fbt project="inyo" desc="notification message">
+						<P>
+							Bonjour{' '}
+							<fbt:param name="email">
+								{data.me ? data.me.email : ''}
+							</fbt:param>
+							,
+						</P>
+						<P>Votre période d'essai va bientôt se terminer</P>
+						<P>Vous pouvez vous abonner dès maintenant à Inyo.</P>
+						<FlewRowMobile>
+							<Button onClick={monthlyStripeCheckout} link>
+								S'abonner pour 8€ /mois
+							</Button>
+							<Separator>ou</Separator>
+							<Button onClick={yearlyStripeCheckout} link>
+								60€ /an (4 mois offerts)
+							</Button>
+						</FlewRowMobile>
+						<P>
+							<Button onClick={lifeStripeCheckout} big primary>
+								Acheter un accès à vie pour 99€ !
+							</Button>
+						</P>
+						<P>
+							<Button
+								onClick={() => {
+									window.localStorage.removeItem('authToken');
+									client.resetStore();
+								}}
+								link
+							>
+								Si ce n'est pas vous, cliquez ici pour vous
+								déconnecter.
+							</Button>
+						</P>
+					</fbt>
 				</Column>
 			</FlewRowMobile>
 		</Container>

@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {isCustomerTask} from '../../utils/functions';
@@ -134,7 +135,11 @@ const CreateProjectModalViewContent = ({content}) => {
 
 	return (
 		<Container>
-			<TemplateColumnLabel>Contenu du modèle</TemplateColumnLabel>
+			<TemplateColumnLabel>
+				<fbt project="inyo" desc="content of template">
+					Contenu du modèle
+				</fbt>
+			</TemplateColumnLabel>
 			<TemplateTaskList selectedTemplate={selectedTemplate} />
 		</Container>
 	);

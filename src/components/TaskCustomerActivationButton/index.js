@@ -1,6 +1,7 @@
 import React from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import BistableButton from '../BistableButton';
@@ -27,10 +28,36 @@ const TaskActivationButton = ({
 			white={!isActive}
 			value={isActive}
 			disabled={disabled}
-			trueLabel={`Ne plus rappeler à ${customerName} de faire cette tâche`}
-			trueTooltip={`${me.settings.assistantName} s'occupe de faire réaliser cette tâche`}
-			falseLabel={`Charger ${me.settings.assistantName} de faire réaliser cette tâche à ${customerName}`}
-			falseTooltip="Ajouter la tâche aux choses à faire aujourd'hui"
+			trueLabel={
+				<fbt project="inyo" desc="task customer cancelation label">
+					Ne plus rappeler à{' '}
+					<fbt:param name="customerName">{customerName}</fbt:param> de
+					faire cette tâche
+				</fbt>
+			}
+			trueTooltip={
+				<fbt project="inyo" desc="task customer cancelation tooltip">
+					<fbt:param name="assistantName">
+						{me.settings.assistantName}
+					</fbt:param>{' '}
+					s'occupe de faire réaliser cette tâche
+				</fbt>
+			}
+			falseLabel={
+				<fbt project="inyo" desc="task customer activation label">
+					Charger{' '}
+					<fbt:param name="assitantName">
+						{me.settings.assistantName}
+					</fbt:param>{' '}
+					de faire réaliser cette tâche à{' '}
+					<fbt:param name="customerName">{customerName}</fbt:param>
+				</fbt>
+			}
+			falseTooltip={
+				<fbt project="inyo" desc="task customer activation tooltip">
+					Ajouter la tâche aux choses à faire aujourd'hui
+				</fbt>
+			}
 			commit={onCommit}
 			reverse={() => unfocusItem({variables: {itemId: taskId}})}
 		/>

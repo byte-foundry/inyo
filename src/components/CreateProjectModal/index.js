@@ -4,6 +4,7 @@ import {useApolloClient, useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_PROJECT} from '../../utils/mutations';
 import {templates} from '../../utils/project-templates';
@@ -35,7 +36,11 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 				name: baseName,
 			}}
 			validateSchema={Yup.object({
-				name: Yup.string().required('Requis'),
+				name: Yup.string().required(
+					<fbt project="inyo" desc="required">
+						Requis
+					</fbt>,
+				),
 			})}
 			onSubmit={async (
 				{

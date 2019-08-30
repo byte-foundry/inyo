@@ -8,6 +8,7 @@ import LoginForm from '../../components/LoginForm';
 import ResetPasswordForm from '../../components/ResetPasswordForm';
 import SendResetPasswordForm from '../../components/SendResetPasswordForm';
 import SignUpForm from '../../components/SignupForm';
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {
 	H1, P, primaryBlue, primaryNavyBlue,
@@ -115,8 +116,12 @@ function Auth() {
 						path="/auth/sign-in"
 						render={() => (
 							<P>
-								Vous êtes nouveau ?{' '}
-								<Link to="/auth/sign-up">Créer un compte</Link>
+								<fbt project="inyo" desc="create an account">
+									Vous êtes nouveau ?{' '}
+									<Link to="/auth/sign-up">
+										Créer un compte
+									</Link>
+								</fbt>
 							</P>
 						)}
 					/>
@@ -125,8 +130,10 @@ function Auth() {
 						path="/auth/sign-up"
 						render={() => (
 							<P>
-								Vous avez déjà un compte ?{' '}
-								<Link to="/auth/sign-in">Se connecter</Link>
+								<fbt project="inyo" desc="sign in">
+									Vous avez déjà un compte ?{' '}
+									<Link to="/auth/sign-in">Se connecter</Link>
+								</fbt>
 							</P>
 						)}
 					/>
@@ -135,16 +142,18 @@ function Auth() {
 			<AuthText>
 				<AuthTextContent>
 					<Illus src={SuccessIllus} />
-					<TextTitle>
-						Partagez avec votre client une liste de tâches
-						intelligente.
-					</TextTitle>
-					<TextContent>
-						Déclenchez automatiquement des actions en fonction de
-						vos projets. Vous ne perdrez plus de temps à relancer
-						vos clients et ceux-ci auront une meilleure
-						compréhension de votre travail.
-					</TextContent>
+					<fbt project="inyo" desc="value proposition">
+						<TextTitle>
+							Partagez avec votre client une liste de tâches
+							intelligente.
+						</TextTitle>
+						<TextContent>
+							Déclenchez automatiquement des actions en fonction
+							de vos projets. Vous ne perdrez plus de temps à
+							relancer vos clients et ceux-ci auront une meilleure
+							compréhension de votre travail.
+						</TextContent>
+					</fbt>
 				</AuthTextContent>
 			</AuthText>
 		</AuthMain>

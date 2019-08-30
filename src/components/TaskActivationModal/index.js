@@ -32,14 +32,24 @@ function TaskActivationModal({
 		<>
 			<StickyHeader customer={isCustomerTask(item.type)}>
 				<fbt project="inyo" desc="previsualize action">
-					Prévisualisation des actions
-				</fbt>{' '}
-				<Apostrophe
-					value={assistantName}
-					withVowel="d'"
-					withConsonant="de "
-				/>
-				{assistantName}
+					Prévisualisation des actions{' '}
+					<fbt:param name="apos">
+						<Apostrophe
+							value={assistantName}
+							withVowel={
+								<fbt project="inyo" desc="notification message">
+									d'
+								</fbt>
+							}
+							withConsonant={
+								<fbt project="inyo" desc="notification message">
+									de{' '}
+								</fbt>
+							}
+						/>
+					</fbt:param>
+					<fbt:param name="assistantName">{assistantName}</fbt:param>
+				</fbt>
 			</StickyHeader>
 			<TaskRemindersPreviewsList
 				taskId={item.id}

@@ -882,13 +882,33 @@ const Item = ({
 				&& taskFulfillsActivationCriteria(item) && (
 					<>
 						<SubHeading>
-							Actions{' '}
-							<Apostrophe
-								value={me.settings.assistantName}
-								withVowel="d'"
-								withConsonant="de "
-							/>
-							{me.settings.assistantName}
+							<fbt project="inyo" desc="actions of edwige">
+								Actions{' '}
+								<fbt:param name="apos">
+									<Apostrophe
+										value={me.settings.assistantName}
+										withVowel={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												d'
+											</fbt>
+										}
+										withConsonant={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												de{' '}
+											</fbt>
+										}
+									/>
+								</fbt:param>
+								<fbt:param name="assistantName">
+									{me.settings.assistantName}
+								</fbt:param>
+							</fbt>
 						</SubHeading>
 						{item.isFocused ? (
 							<>

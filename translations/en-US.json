@@ -561,22 +561,32 @@
     }
    ]
   },
-  "69w/1T7K8HXXXh3oCdcbLw==": {
+  "MTHjHHmfiJTmyLA6Fd5Bpw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "You are going to receive email from",
+     "translation": "You're soon going to receive some email from {assistantName} Inyo. Don't throw them in spam. They will keep you up to date on the progress of the project.",
      "variations": {}
     }
    ]
   },
-  "aWQMWcJJDEVku4UiIGUTHQ==": {
+  "lJ8efVGK1fSq0F0v1KSlIQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{assistantName} from Inyo. Don't send them to spam. They will keep you up to date on the progress of the project.",
+     "translation": "from",
+     "variations": {}
+    }
+   ]
+  },
+  "+qIBGqccGH+XX8Ayov1Ruw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "from",
      "variations": {}
     }
    ]
@@ -1267,6 +1277,16 @@
    "translations": [
     {
      "translation": "Add or create a tag",
+     "variations": {}
+    }
+   ]
+  },
+  "uanI7bp7CivGKkYhGclxfw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{assistantName}'s actions",
      "variations": {}
     }
    ]
@@ -2361,16 +2381,6 @@
     }
    ]
   },
-  "RTU7TTnGwvET8+HZjJghfw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Actions",
-     "variations": {}
-    }
-   ]
-  },
   "7AjDpNETd4pcpVcI4F37Yg==": {
    "tokens": [],
    "types": [],
@@ -2991,12 +3001,12 @@
     }
    ]
   },
-  "dl65fCERby2tIxsYfHlIWA==": {
+  "6uwVVD9eKhOL7acPMB8fuQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Preview automatic actions",
+     "translation": "Preview {assistantName}'s actions",
      "variations": {}
     }
    ]
@@ -6007,6 +6017,46 @@
    "translations": [
     {
      "translation": "5th invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "69w/1T7K8HXXXh3oCdcbLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You are going to receive email from",
+     "variations": {}
+    }
+   ]
+  },
+  "aWQMWcJJDEVku4UiIGUTHQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{assistantName} from Inyo. Don't send them to spam. They will keep you up to date on the progress of the project.",
+     "variations": {}
+    }
+   ]
+  },
+  "RTU7TTnGwvET8+HZjJghfw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Actions",
+     "variations": {}
+    }
+   ]
+  },
+  "dl65fCERby2tIxsYfHlIWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Preview automatic actions",
      "variations": {}
     }
    ]

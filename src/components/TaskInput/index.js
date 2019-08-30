@@ -289,7 +289,11 @@ const TaskInput = ({
 
 						setSelectedProject(id);
 					}}
-					children="Lier à un projet"
+					children={
+						<fbt project="inyo" desc="link to a project">
+							Lier à un projet
+						</fbt>
+					}
 					isClearable
 				/>
 			)}
@@ -579,7 +583,11 @@ const TaskInput = ({
 					<TagDropdown
 						id="tags"
 						long
-						placeholder="Ajouter ou créer un tag"
+						placeholder={
+							<fbt project="inyo" desc="add or create a tag">
+								Ajouter ou créer un tag
+							</fbt>
+						}
 						value={itemTags.map(tag => ({
 							value: tag.id,
 							label: tag.name,

@@ -64,7 +64,9 @@ function UploadDashboard({customerToken, taskId}) {
 	return (
 		<>
 			<Button icon="+" onClick={() => setModalOpen(true)}>
-				Joindre un document
+				<fbt project="inyo" desc="notification message">
+					Joindre un document
+				</fbt>
 			</Button>
 			<DashboardModal
 				open={modalOpen}

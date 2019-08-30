@@ -6,6 +6,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 import {withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {
 	Loading,
@@ -735,7 +736,11 @@ function ProjectTasksList({
 				>
 					<SectionTitle
 						onClickTrash={() => setRemoveSectionModalOpen(section)}
-						placeholder="Nom de la section"
+						placeholder={
+							<fbt project="inyo" desc="part name">
+								Nom de la section
+							</fbt>
+						}
 						value={section.name}
 						missingTitle={section.name === ''}
 						placeholderCss={placeholderCss}

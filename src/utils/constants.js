@@ -1,3 +1,4 @@
+import {init, IntlViewerContext} from 'fbt';
 import React from 'react';
 
 import fbt from '../fbt/fbt.macro';
@@ -29,6 +30,11 @@ import TaskIconValidatedUrl, {
 	ReactComponent as TaskIconValidated,
 } from './icons/taskicon-user-validated.svg';
 import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
+
+const translations = require('../translatedFbts.json');
+
+init({translations});
+IntlViewerContext.locale = navigator.language;
 
 export const GRAPHQL_API = `https://prisma${
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''

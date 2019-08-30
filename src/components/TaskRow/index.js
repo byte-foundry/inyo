@@ -5,6 +5,7 @@ import React, {
 import {useMutation} from 'react-apollo-hooks';
 import {Link, withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
@@ -330,11 +331,16 @@ function TaskRow({
 								noData={noData}
 								small={false}
 								to={{
-									pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+									pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 									state: {prevSearch: location.search},
 								}}
 							>
-								Choisir un titre pour cette tâche
+								<fbt
+									project="inyo"
+									desc="task placeholder name"
+								>
+									Choisir un titre pour cette tâche
+								</fbt>
 							</TaskHeadingPlaceholder>
 						)}
 						{item.tags.slice(0, 2).map(tag => (
@@ -355,7 +361,7 @@ function TaskRow({
 							<Tooltip label="Ouvrir le projet">
 								<ProjectNameWrap>
 									<ProjectName
-										to={`/app/tasks?projectId=${item.section.project.id}`}
+										to={`/app/${baseUrl}?projectId=${item.section.project.id}`}
 										onClick={(e) => {
 											// needed to avoid another history push to be triggered, should be investigated
 											e.stopPropagation();

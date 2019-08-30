@@ -126,7 +126,27 @@
    "types": [],
    "translations": [
     {
-     "translation": "All the tasks",
+     "translation": "All tasks",
+     "variations": {}
+    }
+   ]
+  },
+  "amGMYkThJoZPT3GCrqoXKw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All clients",
+     "variations": {}
+    }
+   ]
+  },
+  "P5PugsjucOg8HjCT1pLj2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All projects",
      "variations": {}
     }
    ]
@@ -136,7 +156,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "All the tasks",
+     "translation": "All tasks",
      "variations": {}
     }
    ]
@@ -1191,6 +1211,96 @@
     }
    ]
   },
+  "X2kd6IYQLbQF5T0J4EmDVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project link to task",
+     "variations": {}
+    }
+   ]
+  },
+  "gSUvt41Meg58qA7ieTm91w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project",
+     "variations": {}
+    }
+   ]
+  },
+  "4uWwWAEkjeee+uOwaU7O7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Different type of task trigger different actions",
+     "variations": {}
+    }
+   ]
+  },
+  "WlT9SCoRXpZo1WsKLdRoNA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Type",
+     "variations": {}
+    }
+   ]
+  },
+  "6F6qiWW3cYSOf+pclVSw7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tags",
+     "variations": {}
+    }
+   ]
+  },
+  "3Dfj3RxIOd3jiFRkj5VOfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add or create a tag",
+     "variations": {}
+    }
+   ]
+  },
+  "ddLDsCod8pOsYFPEZ5WAnw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Confirm deletion",
+     "variations": {}
+    }
+   ]
+  },
+  "MLQtSe1yqaoM3uuniMQKiA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Delete task",
+     "variations": {}
+    }
+   ]
+  },
+  "Y897lc2SlSChnVdLW1A6RQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Save and close",
+     "variations": {}
+    }
+   ]
+  },
   "g42vvqqGi7CcjAIwPUjXqg==": {
    "tokens": [],
    "types": [],
@@ -1861,6 +1971,16 @@
     }
    ]
   },
+  "mTh9oP5PlpGc2ijZdZpw1g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Name of the part",
+     "variations": {}
+    }
+   ]
+  },
   "VoesFaOlo+IoPjaKqVF8xQ==": {
    "tokens": [],
    "types": [],
@@ -2057,6 +2177,26 @@
    "translations": [
     {
      "translation": "Change your password",
+     "variations": {}
+    }
+   ]
+  },
+  "T2/JKe1gMxEnFQGdTL5R0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Today",
+     "variations": {}
+    }
+   ]
+  },
+  "UiIYdmEvfJNfoZoGIJ42oA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Week #{weekNumber}",
      "variations": {}
     }
    ]
@@ -3161,6 +3301,16 @@
     }
    ]
   },
+  "TNg0g9/rqIBL5sU4Qx7Jtg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose a name for this task",
+     "variations": {}
+    }
+   ]
+  },
   "5VmV5o8Y9ut6W1vsO4/fRg==": {
    "tokens": [],
    "types": [],
@@ -3336,7 +3486,7 @@
    "types": [],
    "translations": [
     {
-     "translations":"Types of tasks",
+     "translation": "Types of tasks",
      "variations": {}
     }
    ]
@@ -3537,6 +3687,16 @@
    "translations": [
     {
      "translation": "Confirm duration and mark as done",
+     "variations": {}
+    }
+   ]
+  },
+  "OOPK0gSaXTAb7YheBECv+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Attach a file",
      "variations": {}
     }
    ]
@@ -3961,6 +4121,16 @@
     }
    ]
   },
+  "BWZHvitWVUZoKx3CZZtTkw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Working hours",
+     "variations": {}
+    }
+   ]
+  },
   "OPnotGia0dOGBf9WwiENqg==": {
    "tokens": [],
    "types": [],
@@ -4167,6 +4337,1256 @@
    "translations": [
     {
      "translation": "{prout}haha",
+     "variations": {}
+    }
+   ]
+  },
+  "7QXhz33T4NeJ5Gu1AhliDA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Planning et liste de tâches",
+     "variations": {}
+    }
+   ]
+  },
+  "DniocCK/BDluu+FdpMM/rQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Dashboard",
+     "variations": {}
+    }
+   ]
+  },
+  "XSDtyx55XDlbjwDAvcEQuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All the projects",
+     "variations": {}
+    }
+   ]
+  },
+  "ZZ/Pz3sXsx84sVhWrUHaFw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Projects",
+     "variations": {}
+    }
+   ]
+  },
+  "oetc6lmmqleqUpsvhS3rxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All the contacts",
+     "variations": {}
+    }
+   ]
+  },
+  "+O2F4Nyjvrb3Yk/fGGbWQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Contacts",
+     "variations": {}
+    }
+   ]
+  },
+  "ofzGly1xcbm/vDbYLnqnFg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Activity report",
+     "variations": {}
+    }
+   ]
+  },
+  "Lz7HPSfcOTiqazAAyS+/MQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Statistics",
+     "variations": {}
+    }
+   ]
+  },
+  "f3bnThiVUm5UpZyRGjVx7w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Profile, worked days, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "1vtbytZhEPUv21EPWCKSKA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Settings",
+     "variations": {}
+    }
+   ]
+  },
+  "abPJyr5VGFif2i9TExJ3+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {firstName} !",
+     "variations": {}
+    }
+   ]
+  },
+  "NuIIkViQIyeg6HJUdNibGQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You",
+     "variations": {}
+    }
+   ]
+  },
+  "efDJHJxyWWw4dwGW5vwX6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your company",
+     "variations": {}
+    }
+   ]
+  },
+  "4AlAty1s5DLJiucEkPdiKw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your settings",
+     "variations": {}
+    }
+   ]
+  },
+  "qwccLMqDVPIS4TSJMEmLiA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "JUEOmO97Qgp/uV87EEjpVw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your account",
+     "variations": {}
+    }
+   ]
+  },
+  "1kj1WzOm2vc74isNT75ZdA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You",
+     "variations": {}
+    }
+   ]
+  },
+  "aQ4Yv6LVSKEViZ1s9+Uefg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your company",
+     "variations": {}
+    }
+   ]
+  },
+  "KPu9BX8WauG07K7pDVC5TQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your working days and hours",
+     "variations": {}
+    }
+   ]
+  },
+  "AJGA334ZNjXST0vpVk74BQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "mPzERUHPGyQqbs+vT+dw2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Delete account",
+     "variations": {}
+    }
+   ]
+  },
+  "ImPMNsKu/b/s/GaXMWPwCA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sign out",
+     "variations": {}
+    }
+   ]
+  },
+  "lhFPrqsswH0e8NT1rBLU5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Clients",
+     "variations": {}
+    }
+   ]
+  },
+  "ezrQWfta/m1Rf7tNelH8Bw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Collaborators",
+     "variations": {}
+    }
+   ]
+  },
+  "qHq966N5G00X+fNXuhoPOA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Filter by name, email...",
+     "variations": {}
+    }
+   ]
+  },
+  "Cn6gbM9LLN/74A83T0SmWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Introduce Inyo to a collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "IhmalYP8MAl4TAHpVb4tig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Invite a collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "ESj15rHHAIxlu6xc721uVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Collaborators",
+     "variations": {}
+    }
+   ]
+  },
+  "JfFXLtO+EIe34WmpLpRwOQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Full name",
+     "variations": {}
+    }
+   ]
+  },
+  "m5qHdAmgGa2AgFyMnVdcdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Requests received",
+     "variations": {}
+    }
+   ]
+  },
+  "DtOHDHLuRWfnet/XLn3wNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Status",
+     "variations": {}
+    }
+   ]
+  },
+  "8x8YsjKUtibfWhSGgs3kCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Requests sent",
+     "variations": {}
+    }
+   ]
+  },
+  "1Taf1bmzmMgrjwJ4fbSl6g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Status",
+     "variations": {}
+    }
+   ]
+  },
+  "RCLArFDcbvhrRkgAf+sM3w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Are you sure you want to delete {email}? All projects and tasks assigned to them will be unassigned.",
+     "variations": {}
+    }
+   ]
+  },
+  "WNY18oeHyCZ8+4K0wp49ag==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Are you sure you want to continue?",
+     "variations": {}
+    }
+   ]
+  },
+  "2+1jp+4fFq57A55VHIjcqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Clients",
+     "variations": {}
+    }
+   ]
+  },
+  "darLDrB65iABWdvKwY+ZqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Introduce Inyo to a client",
+     "variations": {}
+    }
+   ]
+  },
+  "1uLtnN7bl58Xnr5X44XEWQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Create a new client",
+     "variations": {}
+    }
+   ]
+  },
+  "XDxe14Z+daC5gTIgv3v+KA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Contact name",
+     "variations": {}
+    }
+   ]
+  },
+  "auHpvX9+6eRxkGsrZJwm+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Phone number",
+     "variations": {}
+    }
+   ]
+  },
+  "ebZrZhCCqCyf7csdxVrjbQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Are you sure you wan to delete {email}? All projects and task assigned to them will be unassigned.",
+     "variations": {}
+    }
+   ]
+  },
+  "iGxJg476xNPBaUUrMxS88g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Are you sure you want to continue?",
+     "variations": {}
+    }
+   ]
+  },
+  "UvVjY1/twy9IgUWUD3GGHQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You don't have any more task to plan",
+     "variations": {}
+    }
+   ]
+  },
+  "XLMVB3/nuA090zxeDw+2LQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "New project",
+     "variations": {}
+    }
+   ]
+  },
+  "hJjiV9JzSiHE20v7+30Ksg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}",
+     "variations": {}
+    }
+   ]
+  },
+  "dNnadpl9i/nprGIBfOKEZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No project in progress",
+     "variations": {}
+    }
+   ]
+  },
+  "evrrYaA5Sm3T3uFW0D83tw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Create a project from scratch, or use one of our homemade templates{=?}. You could also use one your own project as a basis{link} .",
+     "variations": {}
+    }
+   ]
+  },
+  "AygQaD7+tnF8Y86EH4yoxg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "?",
+     "variations": {}
+    }
+   ]
+  },
+  "vSUJRGTCto7AIssuqSi1Zg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You can also try our introduction project to learn how Inyo works.",
+     "variations": {}
+    }
+   ]
+  },
+  "HPZQVxoBG4OhMWpXoVN9vg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Start now",
+     "variations": {}
+    }
+   ]
+  },
+  "yPHcScF0Wggnb1ctQYVs3Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}",
+     "variations": {}
+    }
+   ]
+  },
+  "jiyxvjE6WJ3ZmCoBQ+5HLg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "User one of our templates",
+     "variations": {}
+    }
+   ]
+  },
+  "XcfEu+uxC+yuWhPx51Nnzw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Templates contain predefined tasks. They will allow you to start your projects on the right foot.",
+     "variations": {}
+    }
+   ]
+  },
+  "0aoU3CKqbmlefgtfGhyJCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)",
+     "variations": {}
+    }
+   ]
+  },
+  "2+2Ch9ZOVYn7UJmr3H2Y4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=J'ai compris}",
+     "variations": {}
+    }
+   ]
+  },
+  "FzxtJ83hbMojIX8wEifcQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Got it",
+     "variations": {}
+    }
+   ]
+  },
+  "D6npMZDWizC+ERGqpzlFIQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}",
+     "variations": {}
+    }
+   ]
+  },
+  "w73XHxEgyFWRyNa22lRsow==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Start from one of your own project",
+     "variations": {}
+    }
+   ]
+  },
+  "220yHrpOSKYgeqIhlxKXCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Do you like your projects look eerily similar?",
+     "variations": {}
+    }
+   ]
+  },
+  "YZVbyZR1gS45yWy7iJtCOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Use your own experience to avoid recreating a project from scratch, plan right by using an old project as a basis for you new project.",
+     "variations": {}
+    }
+   ]
+  },
+  "E1+7QJSI5oAtGZ2Uzsvi4w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=J'ai compris}",
+     "variations": {}
+    }
+   ]
+  },
+  "e3C6JVsOeac+5TNhwisZew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Got it",
+     "variations": {}
+    }
+   ]
+  },
+  "5hf1LAlyaX4VqgHcM3V29g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project in progress",
+     "variations": {}
+    }
+   ]
+  },
+  "3lJDpgzRQbz8+j0KpkFVzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Delete this project",
+     "variations": {}
+    }
+   ]
+  },
+  "XH+IkdgId0X/tzysM17Avg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "See all projects",
+     "variations": {}
+    }
+   ]
+  },
+  "XEXf079q9jx+wS48JreIMw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "View only projects in progress",
+     "variations": {}
+    }
+   ]
+  },
+  "MZjPW/w0xaRnnR04Xnuh4g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Archived projects",
+     "variations": {}
+    }
+   ]
+  },
+  "0w459u1+v0RIwr2gIVy8MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Once a project is over, archive it to focus on your projects in progress.",
+     "variations": {}
+    }
+   ]
+  },
+  "uigk9OdQe86ktVVkMaSJ0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Unarchive a project",
+     "variations": {}
+    }
+   ]
+  },
+  "KOapM+8+RoGh5EftlvYEOA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Statistics",
+     "variations": {}
+    }
+   ]
+  },
+  "EIjZ8Jh8IVnbctQCJN+z3w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Show {timespan}",
+     "variations": {}
+    }
+   ]
+  },
+  "DKxLQ1KcMR56JIxL15QDog==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the last 7 days",
+     "variations": {}
+    }
+   ]
+  },
+  "rtJdCPl645dXeKmtCpfEFw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the last 30 days",
+     "variations": {}
+    }
+   ]
+  },
+  "3kC4J4DKoJvOVEu3Zh81iA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the last 3 months",
+     "variations": {}
+    }
+   ]
+  },
+  "pMmKDGLFliqJJcK+v+myZg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the last 6 months",
+     "variations": {}
+    }
+   ]
+  },
+  "eJe+ko0d0nvEjGFrDOqZAA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Clients shares of your work",
+     "variations": {}
+    }
+   ]
+  },
+  "1K/eeL6OoINQBgAI2S+tCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Estimated time / Worked time",
+     "variations": {}
+    }
+   ]
+  },
+  "0K+9honF4vsx62F8wA0Svw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Worked time",
+     "variations": {}
+    }
+   ]
+  },
+  "NVAk5+s4aeW/WEWjew+EdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Estimated time",
+     "variations": {}
+    }
+   ]
+  },
+  "krD+apK875r/1FAplgTaQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Reminders sent",
+     "variations": {}
+    }
+   ]
+  },
+  "zZBJ6cBdsYxLXMc/mbyOGw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Do you want to see other infos? {=Contactez-nous}",
+     "variations": {}
+    }
+   ]
+  },
+  "BdSTSL1PZ+q5EHM3jdBIJQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Contact us",
+     "variations": {}
+    }
+   ]
+  },
+  "ugFiGB+rar7uI0qAMHja6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tags",
+     "variations": {}
+    }
+   ]
+  },
+  "FbbkbH9OvX1X/vNoxYkbOQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You don't have an account yet? {=Créer un compte}",
+     "variations": {}
+    }
+   ]
+  },
+  "nBqNvxz4Oi2BTH1NxtSkkg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sign up",
+     "variations": {}
+    }
+   ]
+  },
+  "R7Raymn3bVfHqrldrwY3Vw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You're already signed up? {=Se connecter}",
+     "variations": {}
+    }
+   ]
+  },
+  "08EtixLi+SWBnUDe/PbRCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sign in",
+     "variations": {}
+    }
+   ]
+  },
+  "7vYs75+M4L2enSnrMzN45Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Partagez avec votre client une liste de tâches intelligente.}{=Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail.}",
+     "variations": {}
+    }
+   ]
+  },
+  "90XjBOsl/hQbh2UHXVUrfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Share a smart task list with your clients.",
+     "variations": {}
+    }
+   ]
+  },
+  "/d6zrDDITNzWUAISqbQszw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Trigger automatic actions according to your projects. You won't lose time sending reminders and status reports to clients anymore.",
+     "variations": {}
+    }
+   ]
+  },
+  "O7wWNxU3xU1rENuc5kWc7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello",
+     "variations": {}
+    }
+   ]
+  },
+  "f7nudWeb2fC1Tk9VlYl37g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The {=rouges} tasks are requests from your contractor.",
+     "variations": {}
+    }
+   ]
+  },
+  "00ynEY8XjfYv/pawKwwRIw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "red",
+     "variations": {}
+    }
+   ]
+  },
+  "ytVz8JD9DYU9kL3kivRvUA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "What's Inyo for?",
+     "variations": {}
+    }
+   ]
+  },
+  "CkWC0zqrkQ8io8OgCM5n/Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "IH8+4gBIQituJYvx0vyAmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {email} ,",
+     "variations": {}
+    }
+   ]
+  },
+  "uZnPNnGXS7lmjE2SY5IJPQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your trial period of 21 days comes to an end.",
+     "variations": {}
+    }
+   ]
+  },
+  "v6f8n6XU5zQDQ2bMk9jnqw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "For your clients nothing changes: They can still access your projects, comment, validate, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "T5lkkGZSk2P4hrFCsNMMfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "To continue to use Inyo you need to subscribe to one of our premimum plans.",
+     "variations": {}
+    }
+   ]
+  },
+  "3y7EVwPXU3XFJKA3TCBbgA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}",
+     "variations": {}
+    }
+   ]
+  },
+  "SDbqh6nj5Yu7TtfW4VTjGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subsribe for $8 /month",
+     "variations": {}
+    }
+   ]
+  },
+  "FSW/nkkP5uiaNMttshm6BQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "or",
+     "variations": {}
+    }
+   ]
+  },
+  "h1VxoaBEOh61mu5iI21x5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$60 /year (4 months free)",
+     "variations": {}
+    }
+   ]
+  },
+  "xkhsZHKwsjndj5rQC5+IzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Acheter un accès à vie pour 99€ !}",
+     "variations": {}
+    }
+   ]
+  },
+  "5ZlYlGwLtM5Fj6xZz0Tdug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Buy a lifetime subscription for $99!",
+     "variations": {}
+    }
+   ]
+  },
+  "1opFhdmrokPtcbu27i+Img==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "xMZZhlVT+S3DNf5uu16mvw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If this is not you, click here to sign out.",
+     "variations": {}
+    }
+   ]
+  },
+  "SmrPkGoVtymlySP7a56kxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Merci pour votre confiance et bienvenue…!}{=Retourner au dashboard}",
+     "variations": {}
+    }
+   ]
+  },
+  "sdFZKymFo52fr8MDWXcGYw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Thanks for your business :) Welcome back!",
+     "variations": {}
+    }
+   ]
+  },
+  "gsppA1HkOJaSb8W3BLBhPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Back to the dashboard",
+     "variations": {}
+    }
+   ]
+  },
+  "QichB81QxNNfWIu/SLQxJA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter.}{=Se connecter}",
+     "variations": {}
+    }
+   ]
+  },
+  "AZuIxEHyJSoKF6A+G6+W5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Thank you for subscribing to Inyo. Sign in and get back to work!",
+     "variations": {}
+    }
+   ]
+  },
+  "w+rTGsbq+ilCijHy0uhVWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sign in",
+     "variations": {}
+    }
+   ]
+  },
+  "99FIH8BScoA0lZgZbMlkKg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "+QF7x9U9lY93T+quac6slw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {email} ,",
+     "variations": {}
+    }
+   ]
+  },
+  "UsBb0o1dmZQXI6BSH5okDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your trial period is coming to an end",
+     "variations": {}
+    }
+   ]
+  },
+  "oXbplsVyYs5vsoKpF/SSJw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You can subscribe right now to Inyo.",
+     "variations": {}
+    }
+   ]
+  },
+  "3NYwNqoAZOVkBO7/iaWKvQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}",
+     "variations": {}
+    }
+   ]
+  },
+  "x3vXtZ0ZOPsXQpJjoWtLFw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subscribe for $8 /month",
+     "variations": {}
+    }
+   ]
+  },
+  "K5joI3BM60Yem2nuOFuT9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "or",
+     "variations": {}
+    }
+   ]
+  },
+  "I85YPh/JW7I4Ox4mryNvQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$60 /year (4 months free)",
+     "variations": {}
+    }
+   ]
+  },
+  "OFLxxbxNqzWmoXDq/qutLQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Acheter un accès à vie pour 99€ !}",
+     "variations": {}
+    }
+   ]
+  },
+  "ZwZWXOV1OIEb/uYP7vz6mg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Buy a lifetime access for $99!",
+     "variations": {}
+    }
+   ]
+  },
+  "OFVxiFLN9LII2YvEE9fmCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "PryAREGBvM51ftvwYoHXXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If this is not you, click here to sign out.",
      "variations": {}
     }
    ]
@@ -4587,6 +6007,16 @@
    "translations": [
     {
      "translation": "5th invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "FaHmGdTvGXvsjp7sykq9Qg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Weekly planning and tasks",
      "variations": {}
     }
    ]

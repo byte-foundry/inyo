@@ -184,6 +184,34 @@
   },
   {
    "hashToText": {
+    "amGMYkThJoZPT3GCrqoXKw==": "Tous les clients"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 353,
+   "col_beg": 5,
+   "line_end": 353,
+   "col_end": 66,
+   "type": "text",
+   "desc": "All clients",
+   "project": "inyo",
+   "jsfbt": "Tous les clients"
+  },
+  {
+   "hashToText": {
+    "P5PugsjucOg8HjCT1pLj2A==": "Tous les projets"
+   },
+   "filepath": "src/components/ArianneThread/index.js",
+   "line_beg": 364,
+   "col_beg": 5,
+   "line_end": 364,
+   "col_end": 67,
+   "type": "text",
+   "desc": "All projects",
+   "project": "inyo",
+   "jsfbt": "Tous les projets"
+  },
+  {
+   "hashToText": {
     "AqJMl0+P/pzfbxqbc9rd/A==": "Toutes les tâches"
    },
    "filepath": "src/components/ArianneThread/index.js",
@@ -1727,6 +1755,146 @@
   },
   {
    "hashToText": {
+    "X2kd6IYQLbQF5T0J4EmDVg==": "Projet lié à cette tâche"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 711,
+   "col_beg": 20,
+   "line_end": 711,
+   "col_end": 93,
+   "type": "text",
+   "desc": "project tooltip",
+   "project": "inyo",
+   "jsfbt": "Projet lié à cette tâche"
+  },
+  {
+   "hashToText": {
+    "gSUvt41Meg58qA7ieTm91w==": "Projet"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 714,
+   "col_beg": 17,
+   "line_end": 714,
+   "col_end": 70,
+   "type": "text",
+   "desc": "project label",
+   "project": "inyo",
+   "jsfbt": "Projet"
+  },
+  {
+   "hashToText": {
+    "4uWwWAEkjeee+uOwaU7O7Q==": "Définit s'il y a des actions automatiques"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 755,
+   "col_beg": 20,
+   "line_end": 755,
+   "col_end": 119,
+   "type": "text",
+   "desc": "type of the task tooltip",
+   "project": "inyo",
+   "jsfbt": "Définit s'il y a des actions automatiques"
+  },
+  {
+   "hashToText": {
+    "WlT9SCoRXpZo1WsKLdRoNA==": "Type de tâche"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 758,
+   "col_beg": 17,
+   "line_end": 758,
+   "col_end": 73,
+   "type": "text",
+   "desc": "task type",
+   "project": "inyo",
+   "jsfbt": "Type de tâche"
+  },
+  {
+   "hashToText": {
+    "6F6qiWW3cYSOf+pclVSw7g==": "Tag de la tâche"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 763,
+   "col_beg": 21,
+   "line_end": 763,
+   "col_end": 80,
+   "type": "text",
+   "desc": "task's tag",
+   "project": "inyo",
+   "jsfbt": "Tag de la tâche"
+  },
+  {
+   "hashToText": {
+    "3Dfj3RxIOd3jiFRkj5VOfQ==": "Ajouter ou créer un tag"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 770,
+   "col_beg": 21,
+   "line_end": 770,
+   "col_end": 95,
+   "type": "text",
+   "desc": "add or create tag",
+   "project": "inyo",
+   "jsfbt": "Ajouter ou créer un tag"
+  },
+  {
+   "hashToText": {
+    "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 1014,
+   "col_beg": 9,
+   "line_end": 1014,
+   "col_end": 56,
+   "type": "text",
+   "desc": "cancel",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 1024,
+   "col_beg": 9,
+   "line_end": 1024,
+   "col_end": 83,
+   "type": "text",
+   "desc": "confirm deletion",
+   "project": "inyo",
+   "jsfbt": "Confirmer la suppression"
+  },
+  {
+   "hashToText": {
+    "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 1034,
+   "col_beg": 9,
+   "line_end": 1034,
+   "col_end": 72,
+   "type": "text",
+   "desc": "delete task",
+   "project": "inyo",
+   "jsfbt": "Supprimer la tâche"
+  },
+  {
+   "hashToText": {
+    "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 1050,
+   "col_beg": 6,
+   "line_end": 1050,
+   "col_end": 81,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Enregistrer et fermer"
+  },
+  {
+   "hashToText": {
     "g42vvqqGi7CcjAIwPUjXqg==": "Personne assigné a la tâche"
    },
    "filepath": "src/components/ItemViewAssigneeInput/index.js",
@@ -2819,6 +2987,20 @@
   },
   {
    "hashToText": {
+    "mTh9oP5PlpGc2ijZdZpw1g==": "Nom de la section"
+   },
+   "filepath": "src/components/ProjectTasksList/index.js",
+   "line_beg": 739,
+   "col_beg": 19,
+   "line_end": 739,
+   "col_end": 79,
+   "type": "text",
+   "desc": "part name",
+   "project": "inyo",
+   "jsfbt": "Nom de la section"
+  },
+  {
+   "hashToText": {
     "VoesFaOlo+IoPjaKqVF8xQ==": "Relance client"
    },
    "filepath": "src/components/ReminderCard/index.js",
@@ -3127,12 +3309,40 @@
   },
   {
    "hashToText": {
+    "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
+   },
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 275,
+   "col_beg": 5,
+   "line_end": 277,
+   "col_end": 11,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Aujourd'hui"
+  },
+  {
+   "hashToText": {
+    "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
+   },
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 291,
+   "col_beg": 5,
+   "line_end": 296,
+   "col_end": 11,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Sem. {weekNumber}"
+  },
+  {
+   "hashToText": {
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 380,
+   "line_beg": 389,
    "col_beg": 9,
-   "line_end": 386,
+   "line_end": 395,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
@@ -4638,10 +4848,10 @@
     "e8wn6btvUxtacwoZA+Iwyg==": "Définir le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 264,
-   "col_beg": 20,
-   "line_end": 264,
-   "col_end": 101,
+   "line_beg": 266,
+   "col_beg": 6,
+   "line_end": 268,
+   "col_end": 12,
    "type": "text",
    "desc": "task input icon tooltip",
    "project": "inyo",
@@ -4652,10 +4862,10 @@
     "P2kqmVLdsvrWni60lCFxkw==": "Presser `Tab` pour changer de paramètre."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 276,
+   "line_beg": 282,
    "col_beg": 7,
-   "line_end": 276,
-   "col_end": 108,
+   "line_end": 287,
+   "col_end": 13,
    "type": "text",
    "desc": "task input tooltip 1st part",
    "project": "inyo",
@@ -4666,10 +4876,10 @@
     "WZoWx/wb1FxbtVmU3ZXJ/A==": "`Entrée` pour valider"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 278,
+   "line_beg": 289,
    "col_beg": 7,
-   "line_end": 278,
-   "col_end": 89,
+   "line_end": 294,
+   "col_end": 13,
    "type": "text",
    "desc": "task input tooltip 2nd part",
    "project": "inyo",
@@ -4680,10 +4890,10 @@
     "xFbeuoXyCmhu2wVfZ169QA==": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 388,
-   "col_beg": 11,
-   "line_end": 388,
-   "col_end": 169,
+   "line_beg": 404,
+   "col_beg": 9,
+   "line_end": 411,
+   "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder in project",
    "project": "inyo",
@@ -4694,10 +4904,10 @@
     "VJtgIUDKGBWDdOnmN9yHEA==": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 389,
-   "col_beg": 11,
-   "line_end": 389,
-   "col_end": 141,
+   "line_beg": 413,
+   "col_beg": 9,
+   "line_end": 419,
+   "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder",
    "project": "inyo",
@@ -4708,10 +4918,10 @@
     "yRfe5GzJEatV3OwaTjyFEw==": "Ajouter une tâche ou créer un section."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 391,
-   "col_beg": 11,
-   "line_end": 391,
-   "col_end": 126,
+   "line_beg": 422,
+   "col_beg": 8,
+   "line_end": 427,
+   "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder in project",
    "project": "inyo",
@@ -4722,10 +4932,10 @@
     "Jfg2NGSco6/jhBpoOckN1w==": "Ajouter une tâche."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 392,
-   "col_beg": 11,
-   "line_end": 392,
-   "col_end": 95,
+   "line_beg": 429,
+   "col_beg": 8,
+   "line_end": 434,
+   "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder",
    "project": "inyo",
@@ -4736,10 +4946,10 @@
     "h55L1vyz9OWIj8NZdRbg4A==": "Touche entrée pour créer la tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 399,
-   "col_beg": 23,
-   "line_end": 399,
-   "col_end": 122,
+   "line_beg": 444,
+   "col_beg": 9,
+   "line_end": 449,
+   "col_end": 15,
    "type": "text",
    "desc": "input button tooltip create task",
    "project": "inyo",
@@ -4750,10 +4960,10 @@
     "wGMGXmXdaUGNT5aYOUe+hQ==": "Flèche du bas pour créer un ensemble de tâches"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 471,
-   "col_beg": 24,
-   "line_end": 471,
-   "col_end": 126,
+   "line_beg": 525,
+   "col_beg": 10,
+   "line_end": 531,
+   "col_end": 16,
    "type": "text",
    "desc": "section create tooltip",
    "project": "inyo",
@@ -4764,10 +4974,10 @@
     "ujxdW7OMXWEAivFBdB1/rg==": "Créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 476,
+   "line_beg": 539,
    "col_beg": 10,
-   "line_end": 476,
-   "col_end": 77,
+   "line_end": 544,
+   "col_end": 16,
    "type": "text",
    "desc": "create a section",
    "project": "inyo",
@@ -4870,6 +5080,20 @@
    "desc": "delete this reminder tooltip",
    "project": "inyo",
    "jsfbt": "Supprimer cette action automatique"
+  },
+  {
+   "hashToText": {
+    "TNg0g9/rqIBL5sU4Qx7Jtg==": "Choisir un titre pour cette tâche"
+   },
+   "filepath": "src/components/TaskRow/index.js",
+   "line_beg": 338,
+   "col_beg": 8,
+   "line_end": 338,
+   "col_end": 96,
+   "type": "text",
+   "desc": "task placeholder name",
+   "project": "inyo",
+   "jsfbt": "Choisir un titre pour cette tâche"
   },
   {
    "hashToText": {
@@ -5370,13 +5594,27 @@
   },
   {
    "hashToText": {
+    "OOPK0gSaXTAb7YheBECv+w==": "Joindre un document"
+   },
+   "filepath": "src/components/UploadDashboard/index.js",
+   "line_beg": 67,
+   "col_beg": 4,
+   "line_end": 67,
+   "col_end": 77,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Joindre un document"
+  },
+  {
+   "hashToText": {
     "ufUWSEzOm8vyTuA2ElZeUw==": "5Mo total maximum"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 75,
-   "col_beg": 10,
-   "line_end": 75,
-   "col_end": 72,
+   "line_beg": 76,
+   "col_beg": 5,
+   "line_end": 78,
+   "col_end": 11,
    "type": "text",
    "desc": "upload note",
    "project": "inyo",
@@ -5387,10 +5625,10 @@
     "uC2Eh2n+q7ybWBSBcdCJXQ==": "Fermer"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 78,
-   "col_beg": 18,
-   "line_end": 78,
-   "col_end": 78,
+   "line_beg": 83,
+   "col_beg": 7,
+   "line_end": 85,
+   "col_end": 13,
    "type": "text",
    "desc": "upload close message",
    "project": "inyo",
@@ -5401,10 +5639,10 @@
     "LgpEop1rs/PxncMTMR6NCg==": "Annuler"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 79,
-   "col_beg": 14,
-   "line_end": 79,
-   "col_end": 76,
+   "line_beg": 88,
+   "col_beg": 7,
+   "line_end": 90,
+   "col_end": 13,
    "type": "text",
    "desc": "upload cancel message",
    "project": "inyo",
@@ -5415,10 +5653,10 @@
     "8g1SovisVn7dSjCC+Koi7Q==": "Ajouter d'autres fichiers"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 80,
-   "col_beg": 20,
-   "line_end": 80,
-   "col_end": 100,
+   "line_beg": 93,
+   "col_beg": 7,
+   "line_end": 95,
+   "col_end": 13,
    "type": "text",
    "desc": "upload add more files",
    "project": "inyo",
@@ -5429,10 +5667,10 @@
     "M7YwHi0LPdDtmKpnq0h7wQ==": "Importer"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 81,
-   "col_beg": 18,
-   "line_end": 81,
-   "col_end": 78,
+   "line_beg": 98,
+   "col_beg": 7,
+   "line_end": 100,
+   "col_end": 13,
    "type": "text",
    "desc": "upload import from",
    "project": "inyo",
@@ -5443,10 +5681,10 @@
     "DQAuz9tGMIyaLSxAfGx3Cg==": "Appuyer sur échap pour fermer"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 82,
-   "col_beg": 28,
-   "line_end": 82,
-   "col_end": 111,
+   "line_beg": 103,
+   "col_beg": 7,
+   "line_end": 105,
+   "col_end": 13,
    "type": "text",
    "desc": "upload windows title",
    "project": "inyo",
@@ -5457,10 +5695,10 @@
     "jO/bkd4gn0RDv3qitl0ddg==": "Téléversement de document"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 83,
-   "col_beg": 22,
-   "line_end": 83,
-   "col_end": 93,
+   "line_beg": 108,
+   "col_beg": 7,
+   "line_end": 110,
+   "col_end": 13,
    "type": "text",
    "desc": "upload title",
    "project": "inyo",
@@ -5471,10 +5709,10 @@
     "bTmZ5H9iocGPKScFNVq22g==": "Lien copié !"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 84,
-   "col_beg": 34,
-   "line_end": 84,
-   "col_end": 98,
+   "line_beg": 113,
+   "col_beg": 7,
+   "line_end": 115,
+   "col_end": 13,
    "type": "text",
    "desc": "upload link copied",
    "project": "inyo",
@@ -5485,10 +5723,10 @@
     "aMAihueHiqs/jvWDRnAJZw==": "Copiez l'url ci-dessous"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 85,
-   "col_beg": 35,
-   "line_end": 85,
-   "col_end": 123,
+   "line_beg": 118,
+   "col_beg": 7,
+   "line_end": 123,
+   "col_end": 13,
    "type": "text",
    "desc": "upload manual link copy message",
    "project": "inyo",
@@ -5499,10 +5737,10 @@
     "ZUgYx3fJ8ZTUcgBZf0QK9Q==": "Copiez le lien"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 86,
-   "col_beg": 16,
-   "line_end": 86,
-   "col_end": 88,
+   "line_beg": 126,
+   "col_beg": 7,
+   "line_end": 128,
+   "col_end": 13,
    "type": "text",
    "desc": "upload copy link message",
    "project": "inyo",
@@ -5513,10 +5751,10 @@
     "hdywRfEYw1zDeSq9PBmyYw==": "Fichier source: {name}"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 87,
-   "col_beg": 18,
-   "line_end": 87,
-   "col_end": 140,
+   "line_beg": 131,
+   "col_beg": 7,
+   "line_end": 137,
+   "col_end": 13,
    "type": "text",
    "desc": "upload source file message",
    "project": "inyo",
@@ -5527,10 +5765,10 @@
     "U36ADZ1K4WXynEPg7XSWVw==": "Terminé"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 88,
-   "col_beg": 12,
-   "line_end": 88,
-   "col_end": 57,
+   "line_beg": 140,
+   "col_beg": 7,
+   "line_end": 142,
+   "col_end": 13,
    "type": "text",
    "desc": "done",
    "project": "inyo",
@@ -5541,10 +5779,10 @@
     "ubRu3KZOnpfwgki00HrWhw==": "Retirer le fichier"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 89,
-   "col_beg": 18,
-   "line_end": 89,
-   "col_end": 81,
+   "line_beg": 145,
+   "col_beg": 7,
+   "line_end": 147,
+   "col_end": 13,
    "type": "text",
    "desc": "remove file",
    "project": "inyo",
@@ -5555,10 +5793,10 @@
     "RruyjG6y/9rRRlv9IFQH/A==": "Modifier le fichier"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 90,
-   "col_beg": 16,
-   "line_end": 90,
-   "col_end": 78,
+   "line_beg": 150,
+   "col_beg": 7,
+   "line_end": 152,
+   "col_end": 13,
    "type": "text",
    "desc": "edit file",
    "project": "inyo",
@@ -5569,10 +5807,10 @@
     "QAS+9Csczykro0iOwUZTPw==": "Modification de {file} en cours"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 91,
-   "col_beg": 15,
-   "line_end": 91,
-   "col_end": 132,
+   "line_beg": 155,
+   "col_beg": 7,
+   "line_end": 159,
+   "col_end": 13,
    "type": "text",
    "desc": "editing file",
    "project": "inyo",
@@ -5583,10 +5821,10 @@
     "eNi/jlbqpHkKzuRpHa7S7g==": "Modifier"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 92,
-   "col_beg": 12,
-   "line_end": 92,
-   "col_end": 58,
+   "line_beg": 162,
+   "col_beg": 7,
+   "line_end": 164,
+   "col_end": 13,
    "type": "text",
    "desc": "edit",
    "project": "inyo",
@@ -5597,10 +5835,10 @@
     "QiWYflRhc3gIMPq3b/k8lQ==": "Valider modification"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 93,
-   "col_beg": 25,
-   "line_end": 93,
-   "col_end": 99,
+   "line_beg": 167,
+   "col_beg": 7,
+   "line_end": 169,
+   "col_end": 13,
    "type": "text",
    "desc": "confirm modification",
    "project": "inyo",
@@ -5611,10 +5849,10 @@
     "uNYI17mN79lI3tR/O0qeDw==": "Mon appareil"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 94,
-   "col_beg": 16,
-   "line_end": 94,
-   "col_end": 71,
+   "line_beg": 172,
+   "col_beg": 7,
+   "line_end": 174,
+   "col_end": 13,
    "type": "text",
    "desc": "my device",
    "project": "inyo",
@@ -5625,10 +5863,10 @@
     "QKxyV3qx182h+0AUxS/bBw==": "Déposer des fichiers ici, {browse} votre ordinateur, ou importer de"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 96,
+   "line_beg": 177,
    "col_beg": 7,
-   "line_end": 96,
-   "col_end": 182,
+   "line_end": 186,
+   "col_end": 13,
    "type": "text",
    "desc": "drop file here or import message",
    "project": "inyo",
@@ -5639,10 +5877,10 @@
     "pNpjtwC48a1T5xQDbThe1w==": "Déposer des fichiers ici ou {browser} votre ordinateur"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 98,
+   "line_beg": 189,
    "col_beg": 7,
-   "line_end": 98,
-   "col_end": 152,
+   "line_end": 195,
+   "col_end": 13,
    "type": "text",
    "desc": "drop file here",
    "project": "inyo",
@@ -5653,10 +5891,10 @@
     "dvngynB1xzacEO672BH3Fw==": "parcourir"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 99,
-   "col_beg": 14,
-   "line_end": 99,
-   "col_end": 63,
+   "line_beg": 198,
+   "col_beg": 7,
+   "line_end": 200,
+   "col_end": 13,
    "type": "text",
    "desc": "browse",
    "project": "inyo",
@@ -5667,10 +5905,10 @@
     "qb746wHKeqixmD3Uyb0TMA==": "Téléversement complété"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 100,
-   "col_beg": 22,
-   "line_end": 100,
-   "col_end": 93,
+   "line_beg": 203,
+   "col_beg": 7,
+   "line_end": 205,
+   "col_end": 13,
    "type": "text",
    "desc": "upload complete",
    "project": "inyo",
@@ -5681,10 +5919,10 @@
     "5Y/wetqEH5fndpP1E9x5jA==": "Reprendre téléversement"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 101,
-   "col_beg": 20,
-   "line_end": 101,
-   "col_end": 90,
+   "line_beg": 208,
+   "col_beg": 7,
+   "line_end": 210,
+   "col_end": 13,
    "type": "text",
    "desc": "resume upload",
    "project": "inyo",
@@ -5695,10 +5933,10 @@
     "wzXtOG/oBdZgxrYIzwGH7Q==": "Pauser téléversement"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 102,
-   "col_beg": 19,
-   "line_end": 102,
-   "col_end": 85,
+   "line_beg": 213,
+   "col_beg": 7,
+   "line_end": 215,
+   "col_end": 13,
    "type": "text",
    "desc": "pause upload",
    "project": "inyo",
@@ -5709,10 +5947,10 @@
     "MspQFmxO1GpxcQlYABR3Hg==": "Réessayer téléversement"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 103,
-   "col_beg": 19,
-   "line_end": 103,
-   "col_end": 88,
+   "line_beg": 218,
+   "col_beg": 7,
+   "line_end": 220,
+   "col_end": 13,
    "type": "text",
    "desc": "retry upload",
    "project": "inyo",
@@ -5723,10 +5961,10 @@
     "NjEbYFmBk3VcEyT7ZNclfg==": "{smartCount} fichier sélectionné"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 105,
-   "col_beg": 10,
-   "line_end": 105,
-   "col_end": 144,
+   "line_beg": 224,
+   "col_beg": 8,
+   "line_end": 232,
+   "col_end": 14,
    "type": "text",
    "desc": "file selected count 1",
    "project": "inyo",
@@ -5737,10 +5975,10 @@
     "FK7rTGBN5/a379aA1OIZ0g==": "{smartCount} fichiers sélectionnés"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 106,
-   "col_beg": 10,
-   "line_end": 106,
-   "col_end": 154,
+   "line_beg": 235,
+   "col_beg": 8,
+   "line_end": 243,
+   "col_end": 14,
    "type": "text",
    "desc": "file selected count 2 or more",
    "project": "inyo",
@@ -5751,10 +5989,10 @@
     "tua1HA2mbPyuJDZlBZK4yw==": "En cours d'envoi"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 108,
-   "col_beg": 17,
-   "line_end": 108,
-   "col_end": 76,
+   "line_beg": 247,
+   "col_beg": 7,
+   "line_end": 249,
+   "col_end": 13,
    "type": "text",
    "desc": "uploading",
    "project": "inyo",
@@ -5765,10 +6003,10 @@
     "7+YhjI1xOrhhJ0Wf9hyORQ==": "Terminé"
    },
    "filepath": "src/components/UploadDashboard/index.js",
-   "line_beg": 109,
-   "col_beg": 16,
-   "line_end": 109,
-   "col_end": 65,
+   "line_beg": 252,
+   "col_beg": 7,
+   "line_end": 254,
+   "col_end": 13,
    "type": "text",
    "desc": "complete",
    "project": "inyo",
@@ -6140,6 +6378,20 @@
   },
   {
    "hashToText": {
+    "BWZHvitWVUZoKx3CZZtTkw==": "Horaires de travail"
+   },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
+   "line_beg": 228,
+   "col_beg": 10,
+   "line_end": 228,
+   "col_end": 83,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Horaires de travail"
+  },
+  {
+   "hashToText": {
     "OPnotGia0dOGBf9WwiENqg==": "matin"
    },
    "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
@@ -6448,13 +6700,1931 @@
   },
   {
    "hashToText": {
+    "7QXhz33T4NeJ5Gu1AhliDA==": "Planning et liste de tâches"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 24,
+   "col_beg": 6,
+   "line_end": 26,
+   "col_end": 12,
+   "type": "text",
+   "desc": "dashboard tooltip",
+   "project": "inyo",
+   "jsfbt": "Planning et liste de tâches"
+  },
+  {
+   "hashToText": {
+    "DniocCK/BDluu+FdpMM/rQ==": "Dashboard"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 30,
+   "col_beg": 6,
+   "line_end": 32,
+   "col_end": 12,
+   "type": "text",
+   "desc": "dashboard",
+   "project": "inyo",
+   "jsfbt": "Dashboard"
+  },
+  {
+   "hashToText": {
+    "XSDtyx55XDlbjwDAvcEQuQ==": "Toutes les projets"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 37,
+   "col_beg": 6,
+   "line_end": 39,
+   "col_end": 12,
+   "type": "text",
+   "desc": "projects tooltip",
+   "project": "inyo",
+   "jsfbt": "Toutes les projets"
+  },
+  {
+   "hashToText": {
+    "ZZ/Pz3sXsx84sVhWrUHaFw==": "Projets"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 43,
+   "col_beg": 6,
+   "line_end": 45,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Projets",
+   "project": "inyo",
+   "jsfbt": "Projets"
+  },
+  {
+   "hashToText": {
+    "oetc6lmmqleqUpsvhS3rxQ==": "Tous les contacts"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 50,
+   "col_beg": 6,
+   "line_end": 52,
+   "col_end": 12,
+   "type": "text",
+   "desc": "contacts tooltip",
+   "project": "inyo",
+   "jsfbt": "Tous les contacts"
+  },
+  {
+   "hashToText": {
+    "+O2F4Nyjvrb3Yk/fGGbWQA==": "Contacts"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 56,
+   "col_beg": 6,
+   "line_end": 58,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Contacts",
+   "project": "inyo",
+   "jsfbt": "Contacts"
+  },
+  {
+   "hashToText": {
+    "ofzGly1xcbm/vDbYLnqnFg==": "Rapports de votre activité"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 63,
+   "col_beg": 6,
+   "line_end": 65,
+   "col_end": 12,
+   "type": "text",
+   "desc": "stats tooltip",
+   "project": "inyo",
+   "jsfbt": "Rapports de votre activité"
+  },
+  {
+   "hashToText": {
+    "Lz7HPSfcOTiqazAAyS+/MQ==": "Statistiques"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 69,
+   "col_beg": 6,
+   "line_end": 71,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Statistiques",
+   "project": "inyo",
+   "jsfbt": "Statistiques"
+  },
+  {
+   "hashToText": {
+    "f3bnThiVUm5UpZyRGjVx7w==": "Profil, jours travaillés, etc."
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 76,
+   "col_beg": 6,
+   "line_end": 78,
+   "col_end": 12,
+   "type": "text",
+   "desc": "settings tooltip",
+   "project": "inyo",
+   "jsfbt": "Profil, jours travaillés, etc."
+  },
+  {
+   "hashToText": {
+    "1vtbytZhEPUv21EPWCKSKA==": "Réglages"
+   },
+   "filepath": "src/HOC/withHeader.js",
+   "line_beg": 82,
+   "col_beg": 6,
+   "line_end": 84,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Réglages",
+   "project": "inyo",
+   "jsfbt": "Réglages"
+  },
+  {
+   "hashToText": {
+    "abPJyr5VGFif2i9TExJ3+A==": "Bonjour {firstName} !"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 216,
+   "col_beg": 5,
+   "line_end": 219,
+   "col_end": 11,
+   "type": "text",
+   "desc": "hello",
+   "project": "inyo",
+   "jsfbt": "Bonjour {firstName} !"
+  },
+  {
+   "hashToText": {
+    "NuIIkViQIyeg6HJUdNibGQ==": "Vous"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 230,
+   "col_beg": 9,
+   "line_end": 232,
+   "col_end": 15,
+   "type": "text",
+   "desc": "You",
+   "project": "inyo",
+   "jsfbt": "Vous"
+  },
+  {
+   "hashToText": {
+    "efDJHJxyWWw4dwGW5vwX6Q==": "Votre société"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 240,
+   "col_beg": 9,
+   "line_end": 242,
+   "col_end": 15,
+   "type": "text",
+   "desc": "your company",
+   "project": "inyo",
+   "jsfbt": "Votre société"
+  },
+  {
+   "hashToText": {
+    "4AlAty1s5DLJiucEkPdiKw==": "Vos options"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 250,
+   "col_beg": 9,
+   "line_end": 252,
+   "col_end": 15,
+   "type": "text",
+   "desc": "your options",
+   "project": "inyo",
+   "jsfbt": "Vos options"
+  },
+  {
+   "hashToText": {
+    "qwccLMqDVPIS4TSJMEmLiA==": "Votre assistant·e"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 262,
+   "col_beg": 9,
+   "line_end": 264,
+   "col_end": 15,
+   "type": "text",
+   "desc": "your assistant",
+   "project": "inyo",
+   "jsfbt": "Votre assistant·e"
+  },
+  {
+   "hashToText": {
+    "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 272,
+   "col_beg": 9,
+   "line_end": 274,
+   "col_end": 15,
+   "type": "text",
+   "desc": "your account",
+   "project": "inyo",
+   "jsfbt": "Votre compte"
+  },
+  {
+   "hashToText": {
+    "1kj1WzOm2vc74isNT75ZdA==": "Vous"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 282,
+   "col_beg": 7,
+   "line_end": 282,
+   "col_end": 48,
+   "type": "text",
+   "desc": "you",
+   "project": "inyo",
+   "jsfbt": "Vous"
+  },
+  {
+   "hashToText": {
+    "aQ4Yv6LVSKEViZ1s9+Uefg==": "Votre société"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 286,
+   "col_beg": 7,
+   "line_end": 286,
+   "col_end": 74,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Votre société"
+  },
+  {
+   "hashToText": {
+    "KPu9BX8WauG07K7pDVC5TQ==": "Vos horaires et jours de travail"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 290,
+   "col_beg": 7,
+   "line_end": 290,
+   "col_end": 100,
+   "type": "text",
+   "desc": "your working hours and days",
+   "project": "inyo",
+   "jsfbt": "Vos horaires et jours de travail"
+  },
+  {
+   "hashToText": {
+    "AJGA334ZNjXST0vpVk74BQ==": "Votre assistant·e"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 300,
+   "col_beg": 7,
+   "line_end": 300,
+   "col_end": 72,
+   "type": "text",
+   "desc": "Your assistant",
+   "project": "inyo",
+   "jsfbt": "Votre assistant·e"
+  },
+  {
+   "hashToText": {
+    "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 307,
+   "col_beg": 7,
+   "line_end": 307,
+   "col_end": 65,
+   "type": "text",
+   "desc": "your account",
+   "project": "inyo",
+   "jsfbt": "Votre compte"
+  },
+  {
+   "hashToText": {
+    "mPzERUHPGyQqbs+vT+dw2A==": "Me désinscrire"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 323,
+   "col_beg": 8,
+   "line_end": 323,
+   "col_end": 70,
+   "type": "text",
+   "desc": "Delete account",
+   "project": "inyo",
+   "jsfbt": "Me désinscrire"
+  },
+  {
+   "hashToText": {
+    "ImPMNsKu/b/s/GaXMWPwCA==": "Me déconnecter"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 337,
+   "col_beg": 8,
+   "line_end": 337,
+   "col_end": 64,
+   "type": "text",
+   "desc": "sign out",
+   "project": "inyo",
+   "jsfbt": "Me déconnecter"
+  },
+  {
+   "hashToText": {
+    "lhFPrqsswH0e8NT1rBLU5A==": "Clients"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 207,
+   "col_beg": 6,
+   "line_end": 209,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Client",
+   "project": "inyo",
+   "jsfbt": "Clients"
+  },
+  {
+   "hashToText": {
+    "ezrQWfta/m1Rf7tNelH8Bw==": "Collaborateurs"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 212,
+   "col_beg": 6,
+   "line_end": 214,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Collaborateurs",
+   "project": "inyo",
+   "jsfbt": "Collaborateurs"
+  },
+  {
+   "hashToText": {
+    "qHq966N5G00X+fNXuhoPOA==": "Filtrer par nom, email..."
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 222,
+   "col_beg": 7,
+   "line_end": 224,
+   "col_end": 13,
+   "type": "text",
+   "desc": "filter",
+   "project": "inyo",
+   "jsfbt": "Filtrer par nom, email..."
+  },
+  {
+   "hashToText": {
+    "Cn6gbM9LLN/74A83T0SmWA==": "Présenter Inyo à un collaborateur"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 232,
+   "col_beg": 7,
+   "line_end": 234,
+   "col_end": 13,
+   "type": "text",
+   "desc": "present",
+   "project": "inyo",
+   "jsfbt": "Présenter Inyo à un collaborateur"
+  },
+  {
+   "hashToText": {
+    "IhmalYP8MAl4TAHpVb4tig==": "Inviter un collaborateur"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 237,
+   "col_beg": 7,
+   "line_end": 239,
+   "col_end": 13,
+   "type": "text",
+   "desc": "invite",
+   "project": "inyo",
+   "jsfbt": "Inviter un collaborateur"
+  },
+  {
+   "hashToText": {
+    "ESj15rHHAIxlu6xc721uVg==": "Collaborateurs"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 244,
+   "col_beg": 5,
+   "line_end": 246,
+   "col_end": 11,
+   "type": "text",
+   "desc": "collaborators",
+   "project": "inyo",
+   "jsfbt": "Collaborateurs"
+  },
+  {
+   "hashToText": {
+    "JfFXLtO+EIe34WmpLpRwOQ==": "Prénom et nom"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 252,
+   "col_beg": 8,
+   "line_end": 254,
+   "col_end": 14,
+   "type": "text",
+   "desc": "full name",
+   "project": "inyo",
+   "jsfbt": "Prénom et nom"
+  },
+  {
+   "hashToText": {
+    "wna0FUk7gWFKmLBh9RHo/w==": "Email"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 257,
+   "col_beg": 8,
+   "line_end": 259,
+   "col_end": 14,
+   "type": "text",
+   "desc": "email",
+   "project": "inyo",
+   "jsfbt": "Email"
+  },
+  {
+   "hashToText": {
+    "m5qHdAmgGa2AgFyMnVdcdQ==": "Requêtes reçues"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 315,
+   "col_beg": 5,
+   "line_end": 317,
+   "col_end": 11,
+   "type": "text",
+   "desc": "request",
+   "project": "inyo",
+   "jsfbt": "Requêtes reçues"
+  },
+  {
+   "hashToText": {
+    "JfFXLtO+EIe34WmpLpRwOQ==": "Prénom et nom"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 323,
+   "col_beg": 8,
+   "line_end": 325,
+   "col_end": 14,
+   "type": "text",
+   "desc": "full name",
+   "project": "inyo",
+   "jsfbt": "Prénom et nom"
+  },
+  {
+   "hashToText": {
+    "wna0FUk7gWFKmLBh9RHo/w==": "Email"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 328,
+   "col_beg": 8,
+   "line_end": 330,
+   "col_end": 14,
+   "type": "text",
+   "desc": "email",
+   "project": "inyo",
+   "jsfbt": "Email"
+  },
+  {
+   "hashToText": {
+    "DtOHDHLuRWfnet/XLn3wNg==": "Status"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 333,
+   "col_beg": 8,
+   "line_end": 335,
+   "col_end": 14,
+   "type": "text",
+   "desc": "status",
+   "project": "inyo",
+   "jsfbt": "Status"
+  },
+  {
+   "hashToText": {
+    "8x8YsjKUtibfWhSGgs3kCQ==": "Requêtes envoyées"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 387,
+   "col_beg": 5,
+   "line_end": 389,
+   "col_end": 11,
+   "type": "text",
+   "desc": "request",
+   "project": "inyo",
+   "jsfbt": "Requêtes envoyées"
+  },
+  {
+   "hashToText": {
+    "JfFXLtO+EIe34WmpLpRwOQ==": "Prénom et nom"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 395,
+   "col_beg": 8,
+   "line_end": 397,
+   "col_end": 14,
+   "type": "text",
+   "desc": "full name",
+   "project": "inyo",
+   "jsfbt": "Prénom et nom"
+  },
+  {
+   "hashToText": {
+    "wna0FUk7gWFKmLBh9RHo/w==": "Email"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 400,
+   "col_beg": 8,
+   "line_end": 402,
+   "col_end": 14,
+   "type": "text",
+   "desc": "email",
+   "project": "inyo",
+   "jsfbt": "Email"
+  },
+  {
+   "hashToText": {
+    "1Taf1bmzmMgrjwJ4fbSl6g==": "Statut"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 405,
+   "col_beg": 8,
+   "line_end": 407,
+   "col_end": 14,
+   "type": "text",
+   "desc": "status",
+   "project": "inyo",
+   "jsfbt": "Statut"
+  },
+  {
+   "hashToText": {
+    "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 433,
+   "col_beg": 11,
+   "line_end": 435,
+   "col_end": 17,
+   "type": "text",
+   "desc": "cancel",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "RCLArFDcbvhrRkgAf+sM3w==": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches assignées à ce collaborateur seront desassignées."
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 458,
+   "col_beg": 7,
+   "line_end": 465,
+   "col_end": 13,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches assignées à ce collaborateur seront desassignées."
+  },
+  {
+   "hashToText": {
+    "WNY18oeHyCZ8+4K0wp49ag==": "Êtes-vous sûr de vouloir continuer?"
+   },
+   "filepath": "src/screens/App/Collaborators/index.js",
+   "line_beg": 468,
+   "col_beg": 7,
+   "line_end": 470,
+   "col_end": 13,
+   "type": "text",
+   "desc": "continue",
+   "project": "inyo",
+   "jsfbt": "Êtes-vous sûr de vouloir continuer?"
+  },
+  {
+   "hashToText": {
+    "2+1jp+4fFq57A55VHIjcqg==": "Clients"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 182,
+   "col_beg": 6,
+   "line_end": 184,
+   "col_end": 12,
+   "type": "text",
+   "desc": "clients",
+   "project": "inyo",
+   "jsfbt": "Clients"
+  },
+  {
+   "hashToText": {
+    "ESj15rHHAIxlu6xc721uVg==": "Collaborateurs"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 187,
+   "col_beg": 6,
+   "line_end": 189,
+   "col_end": 12,
+   "type": "text",
+   "desc": "collaborators",
+   "project": "inyo",
+   "jsfbt": "Collaborateurs"
+  },
+  {
+   "hashToText": {
+    "qHq966N5G00X+fNXuhoPOA==": "Filtrer par nom, email..."
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 197,
+   "col_beg": 7,
+   "line_end": 199,
+   "col_end": 13,
+   "type": "text",
+   "desc": "filter",
+   "project": "inyo",
+   "jsfbt": "Filtrer par nom, email..."
+  },
+  {
+   "hashToText": {
+    "darLDrB65iABWdvKwY+ZqA==": "Présenter Inyo à un client"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 207,
+   "col_beg": 7,
+   "line_end": 209,
+   "col_end": 13,
+   "type": "text",
+   "desc": "present",
+   "project": "inyo",
+   "jsfbt": "Présenter Inyo à un client"
+  },
+  {
+   "hashToText": {
+    "1uLtnN7bl58Xnr5X44XEWQ==": "Créer un nouveau client"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 212,
+   "col_beg": 7,
+   "line_end": 214,
+   "col_end": 13,
+   "type": "text",
+   "desc": "create client",
+   "project": "inyo",
+   "jsfbt": "Créer un nouveau client"
+  },
+  {
+   "hashToText": {
+    "l3FQqY76BTjAVhnKJLbldg==": "Raison sociale"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 222,
+   "col_beg": 8,
+   "line_end": 224,
+   "col_end": 14,
+   "type": "text",
+   "desc": "company name",
+   "project": "inyo",
+   "jsfbt": "Raison sociale"
+  },
+  {
+   "hashToText": {
+    "XDxe14Z+daC5gTIgv3v+KA==": "Référent·e"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 227,
+   "col_beg": 8,
+   "line_end": 229,
+   "col_end": 14,
+   "type": "text",
+   "desc": "contact name",
+   "project": "inyo",
+   "jsfbt": "Référent·e"
+  },
+  {
+   "hashToText": {
+    "wna0FUk7gWFKmLBh9RHo/w==": "Email"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 232,
+   "col_beg": 8,
+   "line_end": 234,
+   "col_end": 14,
+   "type": "text",
+   "desc": "email",
+   "project": "inyo",
+   "jsfbt": "Email"
+  },
+  {
+   "hashToText": {
+    "auHpvX9+6eRxkGsrZJwm+A==": "Téléphone"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 237,
+   "col_beg": 8,
+   "line_end": 239,
+   "col_end": 14,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "Téléphone"
+  },
+  {
+   "hashToText": {
+    "ebZrZhCCqCyf7csdxVrjbQ==": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches associés à ce client se retrouveront sans client."
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 317,
+   "col_beg": 7,
+   "line_end": 324,
+   "col_end": 13,
+   "type": "text",
+   "desc": "confirm message intro",
+   "project": "inyo",
+   "jsfbt": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches associés à ce client se retrouveront sans client."
+  },
+  {
+   "hashToText": {
+    "iGxJg476xNPBaUUrMxS88g==": "Êtes-vous sûr de vouloir continuer?"
+   },
+   "filepath": "src/screens/App/Customers/index.js",
+   "line_beg": 327,
+   "col_beg": 7,
+   "line_end": 329,
+   "col_end": 13,
+   "type": "text",
+   "desc": "confirm message",
+   "project": "inyo",
+   "jsfbt": "Êtes-vous sûr de vouloir continuer?"
+  },
+  {
+   "hashToText": {
+    "UvVjY1/twy9IgUWUD3GGHQ==": "Vous n'avez plus de tâches à planifier."
+   },
+   "filepath": "src/screens/App/Dashboard/tasks.js",
+   "line_beg": 310,
+   "col_beg": 11,
+   "line_end": 313,
+   "col_end": 17,
+   "type": "text",
+   "desc": "no more task",
+   "project": "inyo",
+   "jsfbt": "Vous n'avez plus de tâches à planifier."
+  },
+  {
+   "hashToText": {
+    "XLMVB3/nuA090zxeDw+2LQ==": "Nouveau projet"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 207,
+   "col_beg": 7,
+   "line_end": 209,
+   "col_end": 13,
+   "type": "text",
+   "desc": "create project",
+   "project": "inyo",
+   "jsfbt": "Nouveau projet"
+  },
+  {
+   "hashToText": {
+    "hJjiV9JzSiHE20v7+30Ksg==": "{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 217,
+   "col_beg": 8,
+   "line_end": 248,
+   "col_end": 14,
+   "type": "text",
+   "desc": "no project",
+   "project": "inyo",
+   "jsfbt": "{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}"
+  },
+  {
+   "hashToText": {
+    "dNnadpl9i/nprGIBfOKEZw==": "Aucun projet en cours?"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 218,
+   "col_beg": 9,
+   "line_end": 218,
+   "col_end": 38,
+   "type": "text",
+   "desc": "In the phrase: \"{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}\"",
+   "project": "",
+   "jsfbt": "Aucun projet en cours?"
+  },
+  {
+   "hashToText": {
+    "evrrYaA5Sm3T3uFW0D83tw==": "Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant {=?} ou en vous basant sur un de vos anciens projets {link} ."
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 219,
+   "col_beg": 9,
+   "line_end": 242,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}\"",
+   "project": "",
+   "jsfbt": "Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant {=?} ou en vous basant sur un de vos anciens projets {link} ."
+  },
+  {
+   "hashToText": {
+    "AygQaD7+tnF8Y86EH4yoxg==": "?"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 223,
+   "col_beg": 10,
+   "line_end": 228,
+   "col_end": 26,
+   "type": "text",
+   "desc": "In the phrase: \"{=Aucun projet en cours?}Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant{=?} ou en vous basant sur un de vos anciens projets{=?} .{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}\"",
+   "project": "",
+   "jsfbt": "?"
+  },
+  {
+   "hashToText": {
+    "vSUJRGTCto7AIssuqSi1Zg==": "Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne."
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 243,
+   "col_beg": 9,
+   "line_end": 247,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}\"",
+   "project": "",
+   "jsfbt": "Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne."
+  },
+  {
+   "hashToText": {
+    "HPZQVxoBG4OhMWpXoVN9vg==": "Commencer"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 285,
+   "col_beg": 9,
+   "line_end": 287,
+   "col_end": 15,
+   "type": "text",
+   "desc": "begin",
+   "project": "inyo",
+   "jsfbt": "Commencer"
+  },
+  {
+   "hashToText": {
+    "yPHcScF0Wggnb1ctQYVs3Q==": "{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 298,
+   "col_beg": 8,
+   "line_end": 322,
+   "col_end": 14,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}"
+  },
+  {
+   "hashToText": {
+    "jiyxvjE6WJ3ZmCoBQ+5HLg==": "Utiliser un de nos modèles"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 299,
+   "col_beg": 9,
+   "line_end": 301,
+   "col_end": 22,
+   "type": "text",
+   "desc": "In the phrase: \"{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "Utiliser un de nos modèles"
+  },
+  {
+   "hashToText": {
+    "XcfEu+uxC+yuWhPx51Nnzw==": "Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases."
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 302,
+   "col_beg": 9,
+   "line_end": 307,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases."
+  },
+  {
+   "hashToText": {
+    "0aoU3CKqbmlefgtfGhyJCQ==": "Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 308,
+   "col_beg": 9,
+   "line_end": 313,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)"
+  },
+  {
+   "hashToText": {
+    "2+2Ch9ZOVYn7UJmr3H2Y4Q==": "{=J'ai compris}"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 314,
+   "col_beg": 9,
+   "line_end": 321,
+   "col_end": 24,
+   "type": "text",
+   "desc": "In the phrase: \"{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "{=J'ai compris}"
+  },
+  {
+   "hashToText": {
+    "FzxtJ83hbMojIX8wEifcQw==": "J'ai compris"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 315,
+   "col_beg": 10,
+   "line_end": 320,
+   "col_end": 19,
+   "type": "text",
+   "desc": "In the phrase: \"{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "J'ai compris"
+  },
+  {
+   "hashToText": {
+    "D6npMZDWizC+ERGqpzlFIQ==": "{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 332,
+   "col_beg": 8,
+   "line_end": 355,
+   "col_end": 14,
+   "type": "text",
+   "desc": "duplicate message",
+   "project": "inyo",
+   "jsfbt": "{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}"
+  },
+  {
+   "hashToText": {
+    "w73XHxEgyFWRyNa22lRsow==": "Se baser sur l'un de vos anciens projets"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 333,
+   "col_beg": 9,
+   "line_end": 335,
+   "col_end": 22,
+   "type": "text",
+   "desc": "In the phrase: \"{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "Se baser sur l'un de vos anciens projets"
+  },
+  {
+   "hashToText": {
+    "220yHrpOSKYgeqIhlxKXCQ==": "Vous avez le sentiment que beaucoup de vos projets se ressemblent?"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 336,
+   "col_beg": 9,
+   "line_end": 339,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "Vous avez le sentiment que beaucoup de vos projets se ressemblent?"
+  },
+  {
+   "hashToText": {
+    "YZVbyZR1gS45yWy7iJtCOw==": "Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches."
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 340,
+   "col_beg": 9,
+   "line_end": 346,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches."
+  },
+  {
+   "hashToText": {
+    "E1+7QJSI5oAtGZ2Uzsvi4w==": "{=J'ai compris}"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 347,
+   "col_beg": 9,
+   "line_end": 354,
+   "col_end": 24,
+   "type": "text",
+   "desc": "In the phrase: \"{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "{=J'ai compris}"
+  },
+  {
+   "hashToText": {
+    "e3C6JVsOeac+5TNhwisZew==": "J'ai compris"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 348,
+   "col_beg": 10,
+   "line_end": 353,
+   "col_end": 19,
+   "type": "text",
+   "desc": "In the phrase: \"{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}\"",
+   "project": "",
+   "jsfbt": "J'ai compris"
+  },
+  {
+   "hashToText": {
+    "5hf1LAlyaX4VqgHcM3V29g==": "Projets en cours"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 363,
+   "col_beg": 8,
+   "line_end": 365,
+   "col_end": 14,
+   "type": "text",
+   "desc": "project in progress",
+   "project": "inyo",
+   "jsfbt": "Projets en cours"
+  },
+  {
+   "hashToText": {
+    "3lJDpgzRQbz8+j0KpkFVzA==": "Supprimer ce projet"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 382,
+   "col_beg": 13,
+   "line_end": 387,
+   "col_end": 19,
+   "type": "text",
+   "desc": "delete project",
+   "project": "inyo",
+   "jsfbt": "Supprimer ce projet"
+  },
+  {
+   "hashToText": {
+    "XH+IkdgId0X/tzysM17Avg==": "Voir tous les projets"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 438,
+   "col_beg": 10,
+   "line_end": 443,
+   "col_end": 16,
+   "type": "text",
+   "desc": "see all project",
+   "project": "inyo",
+   "jsfbt": "Voir tous les projets"
+  },
+  {
+   "hashToText": {
+    "XEXf079q9jx+wS48JreIMw==": "Voir uniquement les projets en cours"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 450,
+   "col_beg": 10,
+   "line_end": 455,
+   "col_end": 16,
+   "type": "text",
+   "desc": "see only in progress project",
+   "project": "inyo",
+   "jsfbt": "Voir uniquement les projets en cours"
+  },
+  {
+   "hashToText": {
+    "MZjPW/w0xaRnnR04Xnuh4g==": "Projets archivés"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 462,
+   "col_beg": 10,
+   "line_end": 467,
+   "col_end": 16,
+   "type": "text",
+   "desc": "archived projects",
+   "project": "inyo",
+   "jsfbt": "Projets archivés"
+  },
+  {
+   "hashToText": {
+    "0w459u1+v0RIwr2gIVy8MA==": "Une fois vos projets terminés, archivez-les pour vous concentrer sur les projets en cours."
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 477,
+   "col_beg": 12,
+   "line_end": 485,
+   "col_end": 18,
+   "type": "text",
+   "desc": "no archived project",
+   "project": "inyo",
+   "jsfbt": "Une fois vos projets terminés, archivez-les pour vous concentrer sur les projets en cours."
+  },
+  {
+   "hashToText": {
+    "3lJDpgzRQbz8+j0KpkFVzA==": "Supprimer ce projet"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 505,
+   "col_beg": 15,
+   "line_end": 511,
+   "col_end": 21,
+   "type": "text",
+   "desc": "delete project",
+   "project": "inyo",
+   "jsfbt": "Supprimer ce projet"
+  },
+  {
+   "hashToText": {
+    "uigk9OdQe86ktVVkMaSJ0w==": "Désarchiver ce projet"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 535,
+   "col_beg": 15,
+   "line_end": 541,
+   "col_end": 21,
+   "type": "text",
+   "desc": "unarchive project",
+   "project": "inyo",
+   "jsfbt": "Désarchiver ce projet"
+  },
+  {
+   "hashToText": {
+    "KOapM+8+RoGh5EftlvYEOA==": "Statistiques"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 248,
+   "col_beg": 5,
+   "line_end": 250,
+   "col_end": 11,
+   "type": "text",
+   "desc": "Statistics",
+   "project": "inyo",
+   "jsfbt": "Statistiques"
+  },
+  {
+   "hashToText": {
+    "EIjZ8Jh8IVnbctQCJN+z3w==": "Afficher {timespan}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 253,
+   "col_beg": 5,
+   "line_end": 309,
+   "col_end": 11,
+   "type": "text",
+   "desc": "Show",
+   "project": "inyo",
+   "jsfbt": "Afficher {timespan}"
+  },
+  {
+   "hashToText": {
+    "DKxLQ1KcMR56JIxL15QDog==": "les 7 derniers jours"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 263,
+   "col_beg": 12,
+   "line_end": 268,
+   "col_end": 18,
+   "type": "text",
+   "desc": "7 last days",
+   "project": "inyo",
+   "jsfbt": "les 7 derniers jours"
+  },
+  {
+   "hashToText": {
+    "rtJdCPl645dXeKmtCpfEFw==": "les 30 derniers jours"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 274,
+   "col_beg": 12,
+   "line_end": 279,
+   "col_end": 18,
+   "type": "text",
+   "desc": "30 last days",
+   "project": "inyo",
+   "jsfbt": "les 30 derniers jours"
+  },
+  {
+   "hashToText": {
+    "3kC4J4DKoJvOVEu3Zh81iA==": "les 3 derniers mois"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 285,
+   "col_beg": 12,
+   "line_end": 290,
+   "col_end": 18,
+   "type": "text",
+   "desc": "3 last months",
+   "project": "inyo",
+   "jsfbt": "les 3 derniers mois"
+  },
+  {
+   "hashToText": {
+    "pMmKDGLFliqJJcK+v+myZg==": "les 6 derniers mois"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 296,
+   "col_beg": 12,
+   "line_end": 301,
+   "col_end": 18,
+   "type": "text",
+   "desc": "6 last months",
+   "project": "inyo",
+   "jsfbt": "les 6 derniers mois"
+  },
+  {
+   "hashToText": {
+    "eJe+ko0d0nvEjGFrDOqZAA==": "Répartition de vos clients"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 315,
+   "col_beg": 5,
+   "line_end": 317,
+   "col_end": 11,
+   "type": "text",
+   "desc": "client share",
+   "project": "inyo",
+   "jsfbt": "Répartition de vos clients"
+  },
+  {
+   "hashToText": {
+    "1K/eeL6OoINQBgAI2S+tCQ==": "Rapport temps estimé / temps réellement passé"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 334,
+   "col_beg": 5,
+   "line_end": 339,
+   "col_end": 11,
+   "type": "text",
+   "desc": "Estimated time / worked time rate",
+   "project": "inyo",
+   "jsfbt": "Rapport temps estimé / temps réellement passé"
+  },
+  {
+   "hashToText": {
+    "0K+9honF4vsx62F8wA0Svw==": "Temps travaillé"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 352,
+   "col_beg": 7,
+   "line_end": 354,
+   "col_end": 13,
+   "type": "text",
+   "desc": "Worked time",
+   "project": "inyo",
+   "jsfbt": "Temps travaillé"
+  },
+  {
+   "hashToText": {
+    "NVAk5+s4aeW/WEWjew+EdQ==": "Temps estimé"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 370,
+   "col_beg": 7,
+   "line_end": 372,
+   "col_end": 13,
+   "type": "text",
+   "desc": "estimated time",
+   "project": "inyo",
+   "jsfbt": "Temps estimé"
+  },
+  {
+   "hashToText": {
+    "krD+apK875r/1FAplgTaQA==": "Rappels envoyés"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 388,
+   "col_beg": 7,
+   "line_end": 390,
+   "col_end": 13,
+   "type": "text",
+   "desc": "reminders sent",
+   "project": "inyo",
+   "jsfbt": "Rappels envoyés"
+  },
+  {
+   "hashToText": {
+    "zZBJ6cBdsYxLXMc/mbyOGw==": "Vous souhaitez d'autres statistiques? {=Contactez-nous}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 409,
+   "col_beg": 7,
+   "line_end": 417,
+   "col_end": 13,
+   "type": "text",
+   "desc": "stats question",
+   "project": "inyo",
+   "jsfbt": "Vous souhaitez d'autres statistiques? {=Contactez-nous}"
+  },
+  {
+   "hashToText": {
+    "BdSTSL1PZ+q5EHM3jdBIJQ==": "Contactez-nous"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 411,
+   "col_beg": 8,
+   "line_end": 416,
+   "col_end": 12,
+   "type": "text",
+   "desc": "In the phrase: \"Vous souhaitez d'autres statistiques? {=Contactez-nous}\"",
+   "project": "",
+   "jsfbt": "Contactez-nous"
+  },
+  {
+   "hashToText": {
+    "ugFiGB+rar7uI0qAMHja6Q==": "Liste des tags"
+   },
+   "filepath": "src/screens/App/Tags/index.js",
+   "line_beg": 36,
+   "col_beg": 6,
+   "line_end": 38,
+   "col_end": 12,
+   "type": "text",
+   "desc": "tag list",
+   "project": "inyo",
+   "jsfbt": "Liste des tags"
+  },
+  {
+   "hashToText": {
+    "FbbkbH9OvX1X/vNoxYkbOQ==": "Vous êtes nouveau ? {=Créer un compte}"
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 119,
+   "col_beg": 8,
+   "line_end": 124,
+   "col_end": 14,
+   "type": "text",
+   "desc": "create an account",
+   "project": "inyo",
+   "jsfbt": "Vous êtes nouveau ? {=Créer un compte}"
+  },
+  {
+   "hashToText": {
+    "nBqNvxz4Oi2BTH1NxtSkkg==": "Créer un compte"
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 121,
+   "col_beg": 9,
+   "line_end": 123,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"Vous êtes nouveau ?{=Créer un compte}\"",
+   "project": "",
+   "jsfbt": "Créer un compte"
+  },
+  {
+   "hashToText": {
+    "R7Raymn3bVfHqrldrwY3Vw==": "Vous avez déjà un compte ? {=Se connecter}"
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 133,
+   "col_beg": 8,
+   "line_end": 136,
+   "col_end": 14,
+   "type": "text",
+   "desc": "sign in",
+   "project": "inyo",
+   "jsfbt": "Vous avez déjà un compte ? {=Se connecter}"
+  },
+  {
+   "hashToText": {
+    "08EtixLi+SWBnUDe/PbRCQ==": "Se connecter"
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 135,
+   "col_beg": 9,
+   "line_end": 135,
+   "col_end": 53,
+   "type": "text",
+   "desc": "In the phrase: \"Vous avez déjà un compte ?{=Se connecter}\"",
+   "project": "",
+   "jsfbt": "Se connecter"
+  },
+  {
+   "hashToText": {
+    "7vYs75+M4L2enSnrMzN45Q==": "{=Partagez avec votre client une liste de tâches intelligente.}{=Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail.}"
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 145,
+   "col_beg": 5,
+   "line_end": 156,
+   "col_end": 11,
+   "type": "text",
+   "desc": "value proposition",
+   "project": "inyo",
+   "jsfbt": "{=Partagez avec votre client une liste de tâches intelligente.}{=Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail.}"
+  },
+  {
+   "hashToText": {
+    "90XjBOsl/hQbh2UHXVUrfQ==": "Partagez avec votre client une liste de tâches intelligente."
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 146,
+   "col_beg": 6,
+   "line_end": 149,
+   "col_end": 18,
+   "type": "text",
+   "desc": "In the phrase: \"{=Partagez avec votre client une liste de tâches intelligente.}{=Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail.}\"",
+   "project": "",
+   "jsfbt": "Partagez avec votre client une liste de tâches intelligente."
+  },
+  {
+   "hashToText": {
+    "/d6zrDDITNzWUAISqbQszw==": "Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail."
+   },
+   "filepath": "src/screens/Auth/index.js",
+   "line_beg": 150,
+   "col_beg": 6,
+   "line_end": 155,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Partagez avec votre client une liste de tâches intelligente.}{=Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail.}\"",
+   "project": "",
+   "jsfbt": "Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail."
+  },
+  {
+   "hashToText": {
+    "O7wWNxU3xU1rENuc5kWc7Q==": "Bonjour"
+   },
+   "filepath": "src/screens/Customer/Tasks/index.js",
+   "line_beg": 90,
+   "col_beg": 2,
+   "line_end": 92,
+   "col_end": 8,
+   "type": "text",
+   "desc": "Hello",
+   "project": "inyo",
+   "jsfbt": "Bonjour"
+  },
+  {
+   "hashToText": {
+    "f7nudWeb2fC1Tk9VlYl37g==": "Les tâches {=rouges} sont celles dont vous êtes responsable."
+   },
+   "filepath": "src/screens/Customer/Tasks/index.js",
+   "line_beg": 109,
+   "col_beg": 5,
+   "line_end": 112,
+   "col_end": 11,
+   "type": "text",
+   "desc": "customer info about task",
+   "project": "inyo",
+   "jsfbt": "Les tâches {=rouges} sont celles dont vous êtes responsable."
+  },
+  {
+   "hashToText": {
+    "00ynEY8XjfYv/pawKwwRIw==": "rouges"
+   },
+   "filepath": "src/screens/Customer/Tasks/index.js",
+   "line_beg": 110,
+   "col_beg": 17,
+   "line_end": 110,
+   "col_end": 34,
+   "type": "text",
+   "desc": "In the phrase: \"Les tâches {=rouges} sont celles dont vous êtes responsable.\"",
+   "project": "",
+   "jsfbt": "rouges"
+  },
+  {
+   "hashToText": {
+    "ytVz8JD9DYU9kL3kivRvUA==": "À quoi sert cette plateforme ?"
+   },
+   "filepath": "src/screens/Customer/Tasks/index.js",
+   "line_beg": 116,
+   "col_beg": 6,
+   "line_end": 118,
+   "col_end": 12,
+   "type": "text",
+   "desc": "what's inyo about",
+   "project": "inyo",
+   "jsfbt": "À quoi sert cette plateforme ?"
+  },
+  {
+   "hashToText": {
+    "CkWC0zqrkQ8io8OgCM5n/Q==": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 109,
+   "col_beg": 5,
+   "line_end": 154,
+   "col_end": 11,
+   "type": "text",
+   "desc": "end of trial",
+   "project": "inyo",
+   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+  },
+  {
+   "hashToText": {
+    "IH8+4gBIQituJYvx0vyAmA==": "Bonjour {email} ,"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 110,
+   "col_beg": 6,
+   "line_end": 116,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Bonjour {email} ,"
+  },
+  {
+   "hashToText": {
+    "uZnPNnGXS7lmjE2SY5IJPQ==": "Votre période d'essai de 21 jours est terminée !"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 117,
+   "col_beg": 6,
+   "line_end": 117,
+   "col_end": 61,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Votre période d'essai de 21 jours est terminée !"
+  },
+  {
+   "hashToText": {
+    "v6f8n6XU5zQDQ2bMk9jnqw==": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 118,
+   "col_beg": 6,
+   "line_end": 122,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
+  },
+  {
+   "hashToText": {
+    "T5lkkGZSk2P4hrFCsNMMfg==": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 123,
+   "col_beg": 6,
+   "line_end": 127,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
+  },
+  {
+   "hashToText": {
+    "3y7EVwPXU3XFJKA3TCBbgA==": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 128,
+   "col_beg": 6,
+   "line_end": 136,
+   "col_end": 22,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}"
+  },
+  {
+   "hashToText": {
+    "SDbqh6nj5Yu7TtfW4VTjGA==": "S'abonner pour 8€ /mois"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 129,
+   "col_beg": 7,
+   "line_end": 131,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "S'abonner pour 8€ /mois"
+  },
+  {
+   "hashToText": {
+    "FSW/nkkP5uiaNMttshm6BQ==": "ou"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 132,
+   "col_beg": 7,
+   "line_end": 132,
+   "col_end": 32,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "ou"
+  },
+  {
+   "hashToText": {
+    "h1VxoaBEOh61mu5iI21x5A==": "60€ /an (4 mois offerts)"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 133,
+   "col_beg": 7,
+   "line_end": 135,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "60€ /an (4 mois offerts)"
+  },
+  {
+   "hashToText": {
+    "xkhsZHKwsjndj5rQC5+IzA==": "{=Acheter un accès à vie pour 99€ !}"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 137,
+   "col_beg": 6,
+   "line_end": 141,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "{=Acheter un accès à vie pour 99€ !}"
+  },
+  {
+   "hashToText": {
+    "5ZlYlGwLtM5Fj6xZz0Tdug==": "Acheter un accès à vie pour 99€ !"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 138,
+   "col_beg": 7,
+   "line_end": 140,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Acheter un accès à vie pour 99€ !"
+  },
+  {
+   "hashToText": {
+    "1opFhdmrokPtcbu27i+Img==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 142,
+   "col_beg": 6,
+   "line_end": 153,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+  },
+  {
+   "hashToText": {
+    "xMZZhlVT+S3DNf5uu16mvw==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+   },
+   "filepath": "src/screens/EndOfTrial/index.js",
+   "line_beg": 143,
+   "col_beg": 7,
+   "line_end": 152,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+  },
+  {
+   "hashToText": {
+    "SmrPkGoVtymlySP7a56kxQ==": "{=Merci pour votre confiance et bienvenue…!}{=Retourner au dashboard}"
+   },
+   "filepath": "src/screens/Paid/index.js",
+   "line_beg": 34,
+   "col_beg": 6,
+   "line_end": 39,
+   "col_end": 12,
+   "type": "text",
+   "desc": "thanks connected",
+   "project": "inyo",
+   "jsfbt": "{=Merci pour votre confiance et bienvenue…!}{=Retourner au dashboard}"
+  },
+  {
+   "hashToText": {
+    "sdFZKymFo52fr8MDWXcGYw==": "Merci pour votre confiance et bienvenue…!"
+   },
+   "filepath": "src/screens/Paid/index.js",
+   "line_beg": 35,
+   "col_beg": 7,
+   "line_end": 35,
+   "col_end": 55,
+   "type": "text",
+   "desc": "In the phrase: \"{=Merci pour votre confiance et bienvenue…!}{=Retourner au dashboard}\"",
+   "project": "",
+   "jsfbt": "Merci pour votre confiance et bienvenue…!"
+  },
+  {
+   "hashToText": {
+    "gsppA1HkOJaSb8W3BLBhPg==": "Retourner au dashboard"
+   },
+   "filepath": "src/screens/Paid/index.js",
+   "line_beg": 36,
+   "col_beg": 7,
+   "line_end": 38,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Merci pour votre confiance et bienvenue…!}{=Retourner au dashboard}\"",
+   "project": "",
+   "jsfbt": "Retourner au dashboard"
+  },
+  {
+   "hashToText": {
+    "QichB81QxNNfWIu/SLQxJA==": "{=Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter.}{=Se connecter}"
+   },
+   "filepath": "src/screens/Paid/index.js",
+   "line_beg": 51,
+   "col_beg": 5,
+   "line_end": 57,
+   "col_end": 11,
+   "type": "text",
+   "desc": "thanks not connected",
+   "project": "inyo",
+   "jsfbt": "{=Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter.}{=Se connecter}"
+  },
+  {
+   "hashToText": {
+    "AZuIxEHyJSoKF6A+G6+W5A==": "Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter."
+   },
+   "filepath": "src/screens/Paid/index.js",
+   "line_beg": 52,
+   "col_beg": 6,
+   "line_end": 55,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter.}{=Se connecter}\"",
+   "project": "",
+   "jsfbt": "Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter."
+  },
+  {
+   "hashToText": {
+    "w+rTGsbq+ilCijHy0uhVWA==": "Se connecter"
+   },
+   "filepath": "src/screens/Paid/index.js",
+   "line_beg": 56,
+   "col_beg": 6,
+   "line_end": 56,
+   "col_end": 61,
+   "type": "text",
+   "desc": "In the phrase: \"{=Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter.}{=Se connecter}\"",
+   "project": "",
+   "jsfbt": "Se connecter"
+  },
+  {
+   "hashToText": {
+    "99FIH8BScoA0lZgZbMlkKg==": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 109,
+   "col_beg": 5,
+   "line_end": 145,
+   "col_end": 11,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+  },
+  {
+   "hashToText": {
+    "+QF7x9U9lY93T+quac6slw==": "Bonjour {email} ,"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 110,
+   "col_beg": 6,
+   "line_end": 116,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Bonjour {email} ,"
+  },
+  {
+   "hashToText": {
+    "UsBb0o1dmZQXI6BSH5okDw==": "Votre période d'essai va bientôt se terminer"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 117,
+   "col_beg": 6,
+   "line_end": 117,
+   "col_end": 57,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Votre période d'essai va bientôt se terminer"
+  },
+  {
+   "hashToText": {
+    "oXbplsVyYs5vsoKpF/SSJw==": "Vous pouvez vous abonner dès maintenant à Inyo."
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 118,
+   "col_beg": 6,
+   "line_end": 118,
+   "col_end": 60,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Vous pouvez vous abonner dès maintenant à Inyo."
+  },
+  {
+   "hashToText": {
+    "3NYwNqoAZOVkBO7/iaWKvQ==": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 119,
+   "col_beg": 6,
+   "line_end": 127,
+   "col_end": 22,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}"
+  },
+  {
+   "hashToText": {
+    "x3vXtZ0ZOPsXQpJjoWtLFw==": "S'abonner pour 8€ /mois"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 120,
+   "col_beg": 7,
+   "line_end": 122,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "S'abonner pour 8€ /mois"
+  },
+  {
+   "hashToText": {
+    "K5joI3BM60Yem2nuOFuT9w==": "ou"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 123,
+   "col_beg": 7,
+   "line_end": 123,
+   "col_end": 32,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "ou"
+  },
+  {
+   "hashToText": {
+    "I85YPh/JW7I4Ox4mryNvQA==": "60€ /an (4 mois offerts)"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 124,
+   "col_beg": 7,
+   "line_end": 126,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "60€ /an (4 mois offerts)"
+  },
+  {
+   "hashToText": {
+    "OFLxxbxNqzWmoXDq/qutLQ==": "{=Acheter un accès à vie pour 99€ !}"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 128,
+   "col_beg": 6,
+   "line_end": 132,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "{=Acheter un accès à vie pour 99€ !}"
+  },
+  {
+   "hashToText": {
+    "ZwZWXOV1OIEb/uYP7vz6mg==": "Acheter un accès à vie pour 99€ !"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 129,
+   "col_beg": 7,
+   "line_end": 131,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Acheter un accès à vie pour 99€ !"
+  },
+  {
+   "hashToText": {
+    "OFVxiFLN9LII2YvEE9fmCQ==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 133,
+   "col_beg": 6,
+   "line_end": 144,
+   "col_end": 10,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+  },
+  {
+   "hashToText": {
+    "PryAREGBvM51ftvwYoHXXA==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+   },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
+   "line_beg": 134,
+   "col_beg": 7,
+   "line_end": 143,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "project": "",
+   "jsfbt": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+  },
+  {
+   "hashToText": {
     "T6syVNkrj+0HaeYMmjbT2A==": "Janvier"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 61,
+   "line_beg": 68,
    "col_beg": 2,
-   "line_end": 61,
-   "col_end": 50,
+   "line_end": 70,
+   "col_end": 8,
    "type": "text",
    "desc": "january",
    "project": "inyo",
@@ -6465,10 +8635,10 @@
     "GSHolrLm22TJzcRAoqLU/w==": "Février"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 62,
+   "line_beg": 71,
    "col_beg": 2,
-   "line_end": 62,
-   "col_end": 51,
+   "line_end": 73,
+   "col_end": 8,
    "type": "text",
    "desc": "february",
    "project": "inyo",
@@ -6479,10 +8649,10 @@
     "KEWH1ItA0zQFM7zRp5c+yw==": "Mars"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 63,
+   "line_beg": 74,
    "col_beg": 2,
-   "line_end": 63,
-   "col_end": 45,
+   "line_end": 76,
+   "col_end": 8,
    "type": "text",
    "desc": "march",
    "project": "inyo",
@@ -6493,10 +8663,10 @@
     "OKPEwkxQRN11vFVVKgTHkQ==": "Avril"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 64,
+   "line_beg": 77,
    "col_beg": 2,
-   "line_end": 64,
-   "col_end": 46,
+   "line_end": 79,
+   "col_end": 8,
    "type": "text",
    "desc": "april",
    "project": "inyo",
@@ -6507,10 +8677,10 @@
     "TdU0dZQ3Quv5VRZLqfy6iA==": "Mai"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 65,
+   "line_beg": 80,
    "col_beg": 2,
-   "line_end": 65,
-   "col_end": 42,
+   "line_end": 82,
+   "col_end": 8,
    "type": "text",
    "desc": "may",
    "project": "inyo",
@@ -6521,10 +8691,10 @@
     "KZclEfNZNWtnjtwmchV3nQ==": "Juin"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 66,
+   "line_beg": 83,
    "col_beg": 2,
-   "line_end": 66,
-   "col_end": 44,
+   "line_end": 85,
+   "col_end": 8,
    "type": "text",
    "desc": "june",
    "project": "inyo",
@@ -6535,10 +8705,10 @@
     "FL3dzXtERmpL+3ZXkTi/jw==": "Juillet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 67,
+   "line_beg": 86,
    "col_beg": 2,
-   "line_end": 67,
-   "col_end": 47,
+   "line_end": 88,
+   "col_end": 8,
    "type": "text",
    "desc": "july",
    "project": "inyo",
@@ -6549,10 +8719,10 @@
     "aLbZBXhCk/Q82C33/70vug==": "Août"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 68,
+   "line_beg": 89,
    "col_beg": 2,
-   "line_end": 68,
-   "col_end": 46,
+   "line_end": 91,
+   "col_end": 8,
    "type": "text",
    "desc": "august",
    "project": "inyo",
@@ -6563,10 +8733,10 @@
     "t4ktBxFZHW4vixUBvTGZOg==": "Septembre"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 69,
+   "line_beg": 92,
    "col_beg": 2,
-   "line_end": 69,
-   "col_end": 54,
+   "line_end": 94,
+   "col_end": 8,
    "type": "text",
    "desc": "september",
    "project": "inyo",
@@ -6577,10 +8747,10 @@
     "kg9VQ3PEMp3lN0du4q8VFg==": "Octobre"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 70,
+   "line_beg": 95,
    "col_beg": 2,
-   "line_end": 70,
-   "col_end": 50,
+   "line_end": 97,
+   "col_end": 8,
    "type": "text",
    "desc": "october",
    "project": "inyo",
@@ -6591,10 +8761,10 @@
     "5p0OYRp5lK58N4NFJICqrQ==": "Novembre"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 71,
+   "line_beg": 98,
    "col_beg": 2,
-   "line_end": 71,
-   "col_end": 52,
+   "line_end": 100,
+   "col_end": 8,
    "type": "text",
    "desc": "november",
    "project": "inyo",
@@ -6605,10 +8775,10 @@
     "BF4QKU2xDn522qR7RFoVOw==": "Décembre'"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 72,
+   "line_beg": 101,
    "col_beg": 2,
-   "line_end": 72,
-   "col_end": 53,
+   "line_end": 103,
+   "col_end": 8,
    "type": "text",
    "desc": "december",
    "project": "inyo",
@@ -6619,10 +8789,10 @@
     "xXh3WMjVhbuTHBgaea6mUg==": "Dimanche"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 78,
+   "line_beg": 109,
    "col_beg": 2,
-   "line_end": 78,
-   "col_end": 50,
+   "line_end": 111,
+   "col_end": 8,
    "type": "text",
    "desc": "sunday",
    "project": "inyo",
@@ -6633,10 +8803,10 @@
     "IPjX4NvI5d0Bs6Y6P7crzA==": "Lundi"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 79,
+   "line_beg": 112,
    "col_beg": 2,
-   "line_end": 79,
-   "col_end": 47,
+   "line_end": 114,
+   "col_end": 8,
    "type": "text",
    "desc": "monday",
    "project": "inyo",
@@ -6647,10 +8817,10 @@
     "MuMD31rJxrt3Jdn+pk5Omg==": "Mardi"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 80,
+   "line_beg": 115,
    "col_beg": 2,
-   "line_end": 80,
-   "col_end": 48,
+   "line_end": 117,
+   "col_end": 8,
    "type": "text",
    "desc": "tuesday",
    "project": "inyo",
@@ -6661,10 +8831,10 @@
     "utNqaX0OrZKDRVDBEcoaug==": "Mercredi"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 81,
+   "line_beg": 118,
    "col_beg": 2,
-   "line_end": 81,
-   "col_end": 53,
+   "line_end": 120,
+   "col_end": 8,
    "type": "text",
    "desc": "wednesday",
    "project": "inyo",
@@ -6675,10 +8845,10 @@
     "QdPcOI0xiT8MPCNJ4N73Hg==": "Jeudi"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 82,
+   "line_beg": 121,
    "col_beg": 2,
-   "line_end": 82,
-   "col_end": 49,
+   "line_end": 123,
+   "col_end": 8,
    "type": "text",
    "desc": "thursday",
    "project": "inyo",
@@ -6689,10 +8859,10 @@
     "ut7u0qJPvl2D0uyQF/CP/A==": "Vendredi"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 83,
+   "line_beg": 124,
    "col_beg": 2,
-   "line_end": 83,
-   "col_end": 50,
+   "line_end": 126,
+   "col_end": 8,
    "type": "text",
    "desc": "friday",
    "project": "inyo",
@@ -6703,10 +8873,10 @@
     "SSvJy8FM+/k7esNsMoGaGg==": "Samedi"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 84,
+   "line_beg": 127,
    "col_beg": 2,
-   "line_end": 84,
-   "col_end": 50,
+   "line_end": 129,
+   "col_end": 8,
    "type": "text",
    "desc": "saturday",
    "project": "inyo",
@@ -6717,10 +8887,10 @@
     "KQ+cxh8crAErMUaJtC6Tig==": "Mois suivant"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 93,
-   "col_beg": 17,
-   "line_end": 93,
-   "col_end": 83,
+   "line_beg": 140,
+   "col_beg": 3,
+   "line_end": 142,
+   "col_end": 9,
    "type": "text",
    "desc": "notification message",
    "project": "inyo",
@@ -6731,10 +8901,10 @@
     "4xvLl6dKWzFpJOaE4OdKMg==": "Mois précédent"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 93,
-   "col_beg": 100,
-   "line_end": 93,
-   "col_end": 168,
+   "line_beg": 145,
+   "col_beg": 3,
+   "line_end": 147,
+   "col_end": 9,
    "type": "text",
    "desc": "notification message",
    "project": "inyo",
@@ -6745,9 +8915,9 @@
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 125,
+   "line_beg": 181,
    "col_beg": 3,
-   "line_end": 127,
+   "line_end": 183,
    "col_end": 9,
    "type": "text",
    "desc": "basic task name",
@@ -6759,9 +8929,9 @@
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 130,
+   "line_beg": 186,
    "col_beg": 3,
-   "line_end": 132,
+   "line_end": 188,
    "col_end": 9,
    "type": "text",
    "desc": "basic task description",
@@ -6773,9 +8943,9 @@
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 143,
+   "line_beg": 199,
    "col_beg": 3,
-   "line_end": 145,
+   "line_end": 201,
    "col_end": 9,
    "type": "text",
    "desc": "basic task name",
@@ -6787,9 +8957,9 @@
     "4CDZsMrT7Lk0cSGs1se2mA==": "Une tâche dont la personne assigné est responsable"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 148,
+   "line_beg": 204,
    "col_beg": 3,
-   "line_end": 150,
+   "line_end": 206,
    "col_end": 9,
    "type": "text",
    "desc": "basic task description",
@@ -6801,9 +8971,9 @@
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 161,
+   "line_beg": 217,
    "col_beg": 3,
-   "line_end": 163,
+   "line_end": 219,
    "col_end": 9,
    "type": "text",
    "desc": "customer task name",
@@ -6815,9 +8985,9 @@
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 166,
+   "line_beg": 222,
    "col_beg": 3,
-   "line_end": 168,
+   "line_end": 224,
    "col_end": 9,
    "type": "text",
    "desc": "customer task description",
@@ -6829,9 +8999,9 @@
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 178,
+   "line_beg": 234,
    "col_beg": 3,
-   "line_end": 180,
+   "line_end": 236,
    "col_end": 9,
    "type": "text",
    "desc": "content acquisition name",
@@ -6843,9 +9013,9 @@
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 183,
+   "line_beg": 239,
    "col_beg": 3,
-   "line_end": 185,
+   "line_end": 241,
    "col_end": 9,
    "type": "text",
    "desc": "content acquisition description",
@@ -6857,10 +9027,10 @@
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 194,
-   "col_beg": 8,
-   "line_end": 194,
-   "col_end": 71,
+   "line_beg": 251,
+   "col_beg": 3,
+   "line_end": 253,
+   "col_end": 9,
    "type": "text",
    "desc": "section name",
    "project": "inyo",
@@ -6871,10 +9041,10 @@
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 195,
-   "col_beg": 15,
-   "line_end": 195,
-   "col_end": 121,
+   "line_beg": 256,
+   "col_beg": 3,
+   "line_end": 258,
+   "col_end": 9,
    "type": "text",
    "desc": "section description",
    "project": "inyo",
@@ -6885,10 +9055,10 @@
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 203,
-   "col_beg": 8,
-   "line_end": 203,
-   "col_end": 78,
+   "line_beg": 268,
+   "col_beg": 3,
+   "line_end": 270,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice task name",
    "project": "inyo",
@@ -6899,10 +9069,10 @@
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 205,
+   "line_beg": 273,
    "col_beg": 3,
-   "line_end": 205,
-   "col_end": 119,
+   "line_end": 275,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice task description",
    "project": "inyo",
@@ -6913,10 +9083,10 @@
     "SVhqzzg4/IxMKln7BSYk7A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 262,
-   "col_beg": 24,
-   "line_end": 262,
-   "col_end": 155,
+   "line_beg": 334,
+   "col_beg": 3,
+   "line_end": 337,
+   "col_end": 9,
    "type": "text",
    "desc": "reminder text 1st mail",
    "project": "inyo",
@@ -6927,10 +9097,10 @@
     "iEJHGAs+SRMHUbeRhU/6HA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 265,
-   "col_beg": 24,
-   "line_end": 265,
-   "col_end": 161,
+   "line_beg": 342,
+   "col_beg": 3,
+   "line_end": 345,
+   "col_end": 9,
    "type": "text",
    "desc": "reminder text 1st reminder",
    "project": "inyo",
@@ -6941,10 +9111,10 @@
     "JYVTZfqT+nW7gKGDbNB7ww==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 268,
-   "col_beg": 24,
-   "line_end": 268,
-   "col_end": 161,
+   "line_beg": 350,
+   "col_beg": 3,
+   "line_end": 353,
+   "col_end": 9,
    "type": "text",
    "desc": "reminder text 2nd reminder",
    "project": "inyo",
@@ -6955,10 +9125,10 @@
     "hZl5XZ1gk33FC1X7bPN7dA==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 271,
-   "col_beg": 24,
-   "line_end": 271,
-   "col_end": 171,
+   "line_beg": 358,
+   "col_beg": 3,
+   "line_end": 361,
+   "col_end": 9,
    "type": "text",
    "desc": "reminder text 3rd reminder",
    "project": "inyo",
@@ -6969,10 +9139,10 @@
     "b2eK0T8Mm+CY1WEB2ANPpw==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 274,
-   "col_beg": 24,
-   "line_end": 274,
-   "col_end": 175,
+   "line_beg": 366,
+   "col_beg": 3,
+   "line_end": 369,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice text 1st mail",
    "project": "inyo",
@@ -6983,10 +9153,10 @@
     "sZD2JvaE9eACf94+bBkhPQ==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 277,
-   "col_beg": 24,
-   "line_end": 277,
-   "col_end": 181,
+   "line_beg": 374,
+   "col_beg": 3,
+   "line_end": 377,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice text 1st reminder",
    "project": "inyo",
@@ -6997,10 +9167,10 @@
     "EU4qLnTjs5l/mP+jZD9I4A==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 280,
-   "col_beg": 24,
-   "line_end": 280,
-   "col_end": 181,
+   "line_beg": 382,
+   "col_beg": 3,
+   "line_end": 385,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice text 2nd reminder",
    "project": "inyo",
@@ -7011,10 +9181,10 @@
     "iIbtwgAEUu75Uwew8JaoAQ==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 283,
-   "col_beg": 24,
-   "line_end": 283,
-   "col_end": 181,
+   "line_beg": 390,
+   "col_beg": 3,
+   "line_end": 393,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice text 3rd reminder",
    "project": "inyo",
@@ -7025,10 +9195,10 @@
     "xir0DLqOLa4a/sfH01Gtyg==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 286,
-   "col_beg": 24,
-   "line_end": 286,
-   "col_end": 181,
+   "line_beg": 398,
+   "col_beg": 3,
+   "line_end": 401,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice text 4th reminder",
    "project": "inyo",
@@ -7039,10 +9209,10 @@
     "2knHjWicl+L9VjUPYjYNJw==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 289,
-   "col_beg": 24,
-   "line_end": 289,
-   "col_end": 191,
+   "line_beg": 406,
+   "col_beg": 3,
+   "line_end": 409,
+   "col_end": 9,
    "type": "text",
    "desc": "invoice text 5th reminder",
    "project": "inyo",

@@ -350,7 +350,9 @@ function ArianneThread({
 					isClearable
 					selectedId={linkedCustomerId}
 				>
-					Tous les clients
+					<fbt project="inyo" desc="All clients">
+						Tous les clients
+					</fbt>
 				</ArianneElem>
 			)}
 			{selectProjects && (
@@ -361,7 +363,9 @@ function ArianneThread({
 					isClearable
 					selectedId={projectId}
 				>
-					Tous les projets
+					<fbt project="inyo" desc="All projects">
+						Tous les projets
+					</fbt>
 				</ArianneElem>
 			)}
 			{selectFilter && (

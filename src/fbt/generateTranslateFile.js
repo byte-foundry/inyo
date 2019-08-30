@@ -55,7 +55,7 @@ function generateFile(locale, hashToTexts) {
 				types: [],
 				translations: [
 					{
-						translations: text,
+						translation: `#TODO ${text}`,
 						variations: {},
 					},
 				],

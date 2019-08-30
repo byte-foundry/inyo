@@ -225,7 +225,12 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 											gridColumn: '1 / 3',
 										}}
 									>
-										Horaires de travail
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											Horaires de travail
+										</fbt>
 									</Label>
 									<DoubleRangeTimeInput
 										style={{

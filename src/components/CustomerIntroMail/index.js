@@ -130,13 +130,29 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 						<fbt project="inyo" desc="first part of email">
 							Vous allez prochainement recevoir des emails
 							provenant{' '}
-						</fbt>
-						<Apostrophe
-							value={assistantName}
-							withVowel="d'"
-							withConsonant="de "
-						/>
-						<fbt project="inyo" desc="first part of email">
+							<fbt:param name="apos">
+								{
+									<Apostrophe
+										value={assistantName}
+										withVowel={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												d'
+											</fbt>
+										}
+										withConsonant={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												de{' '}
+											</fbt>
+										}
+									/>
+								}
+							</fbt:param>
 							<fbt:param name="assistantName">
 								{assistantName}
 							</fbt:param>{' '}

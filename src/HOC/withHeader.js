@@ -8,6 +8,7 @@ import TopBar, {
 	TopBarMenu,
 	TopBarMenuLink,
 } from '../components/TopBar';
+import fbt from '../fbt/fbt.macro';
 
 const withHeader = Component => (...args) => (
 	<>
@@ -21,7 +22,7 @@ const withHeader = Component => (...args) => (
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="dashboard tooltip">
-							Planning et list de tâches
+							Planning et liste de tâches
 						</fbt>
 					}
 				>

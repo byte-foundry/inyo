@@ -279,15 +279,24 @@ const Account = ({location}) => {
 
 					<ProfileMain>
 						<ProfileTitle id="me" ref={createRef('me')}>
-							Vous
+							<fbt project="inyo" desc="you">
+								Vous
+							</fbt>
 						</ProfileTitle>
 						<UserDataForm data={me} done={displayToast} />
 						<ProfileTitle id="company" ref={createRef('company')}>
-							Votre société
+							<fbt project="inyo" desc="notification message">
+								Votre société
+							</fbt>
 						</ProfileTitle>
 						<UserCompanyForm data={company} done={displayToast} />
 						<ProfileTitle id="settings" ref={createRef('settings')}>
-							Vos horaires et jours de travail
+							<fbt
+								project="inyo"
+								desc="your working hours and days"
+							>
+								Vos horaires et jours de travail
+							</fbt>
 						</ProfileTitle>
 						<UserWorkHourAndDaysForm
 							data={me}
@@ -297,14 +306,18 @@ const Account = ({location}) => {
 							id="assistant"
 							ref={createRef('assistant')}
 						>
-							Votre assistant·e
+							<fbt project="inyo" desc="Your assistant">
+								Votre assistant·e
+							</fbt>
 						</ProfileTitle>
 						<UserAssistantForm
 							defaultAssistantName={settings.assistantName}
 							done={displayToast}
 						/>
 						<ProfileTitle id="account" ref={createRef('account')}>
-							Votre compte
+							<fbt project="inyo" desc="your account">
+								Votre compte
+							</fbt>
 						</ProfileTitle>
 						<ProfileSection>
 							<Illus src={logoutIllus} />
@@ -320,7 +333,9 @@ const Account = ({location}) => {
 									}
 								}}
 							>
-								Me désinscrire
+								<fbt project="inyo" desc="Delete account">
+									Me désinscrire
+								</fbt>
 							</UnsubscribeButton>
 						</ProfileSection>
 						<Footer>
@@ -334,7 +349,9 @@ const Account = ({location}) => {
 									window.location.href = '/auth/sign-in';
 								}}
 							>
-								Me déconnecter
+								<fbt project="inyo" desc="sign out">
+									Me déconnecter
+								</fbt>
 							</LogoutButton>
 						</Footer>
 					</ProfileMain>

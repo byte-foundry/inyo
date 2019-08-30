@@ -708,10 +708,20 @@ const Item = ({
 						</Meta>
 					</Tooltip>
 				)}
-				<Tooltip label="Projet lié à cette tâche">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="project tooltip">
+							Projet lié à cette tâche
+						</fbt>
+					}
+				>
 					<Meta>
 						<MaterialIcon icon="folder_open" size="tiny" />
-						<MetaLabel>Projet</MetaLabel>
+						<MetaLabel>
+							<fbt project="inyo" desc="project label">
+								Projet
+							</fbt>
+						</MetaLabel>
 						{!customerToken && editProject ? (
 							<StyledProjectsDropdown
 								id="projects"
@@ -752,22 +762,45 @@ const Item = ({
 						)}
 					</Meta>
 				</Tooltip>
-				<Tooltip label="Définit s'il y a des actions automatiques">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="type of the task tooltip">
+							Définit s'il y a des actions automatiques
+						</fbt>
+					}
+				>
 					<Meta>
 						<MaterialIcon icon="check_circle_outline" size="tiny" />
-						<MetaLabel>Type de tâche</MetaLabel>
+						<MetaLabel>
+							<fbt project="inyo" desc="task type">
+								Type de tâche
+							</fbt>
+						</MetaLabel>
 						<MetaText>{typeInfo.name}</MetaText>
 					</Meta>
 				</Tooltip>
 				{!customerToken && (
-					<Tooltip label="Tag de la tâche">
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="task's tag">
+								Tag de la tâche
+							</fbt>
+						}
+					>
 						<Meta>
 							<MaterialIcon icon="label" size="tiny" />
 							<MetaLabel>Tags</MetaLabel>
 							<TagDropdown
 								id="tags"
 								long
-								placeholder="Ajouter ou créer un tag"
+								placeholder={
+									<fbt
+										project="inyo"
+										desc="add or create tag"
+									>
+										Ajouter ou créer un tag
+									</fbt>
+								}
 								value={item.tags.map(tag => ({
 									value: tag.id,
 									label: tag.name,
@@ -1011,7 +1044,9 @@ const Item = ({
 									aligned
 									onClick={() => setDeletingItem(false)}
 								>
-									Annuler
+									<fbt project="inyo" desc="cancel">
+										Annuler
+									</fbt>
 								</Button>
 								<Button
 									red
@@ -1021,7 +1056,9 @@ const Item = ({
 										close();
 									}}
 								>
-									Confirmer la suppression
+									<fbt project="inyo" desc="confirm deletion">
+										Confirmer la suppression
+									</fbt>
 								</Button>
 							</>
 						) : (
@@ -1031,7 +1068,9 @@ const Item = ({
 									onClick={() => setDeletingItem(true)}
 									aligned
 								>
-									Supprimer la tâche
+									<fbt project="inyo" desc="delete task">
+										Supprimer la tâche
+									</fbt>
 								</Button>
 							</>
 						))}
@@ -1047,7 +1086,9 @@ const Item = ({
 				</FlexRowButtons>
 				<div>
 					<Button id="save-change-task" onClick={() => close()}>
-						Enregistrer et fermer
+						<fbt project="inyo" desc="notification message">
+							Enregistrer et fermer
+						</fbt>
 					</Button>
 				</div>
 			</FlexRowButtons>

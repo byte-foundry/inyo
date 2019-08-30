@@ -5,6 +5,7 @@ import {Route} from 'react-router-dom';
 
 import TaskView from '../../../components/ItemView';
 import Tooltip from '../../../components/Tooltip';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {ModalContainer as Modal, ModalElem} from '../../../utils/content';
 import {formatFullName} from '../../../utils/functions';

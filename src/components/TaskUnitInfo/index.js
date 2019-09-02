@@ -2,7 +2,6 @@ import React, {useCallback, useState} from 'react';
 
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import TimeItTookDisplay from '../TimeItTookDisplay';
 import UnitDisplay from '../UnitDisplay';
 import UnitInput from '../UnitInput';
@@ -68,11 +67,11 @@ function TaskUnitInfo({
 				) : (
 					<div onClick={onClickElem}>
 						<UnitDisplay unit={unitToDisplay} />
-						{item.status !== 'FINISHED' && (
+						{item.status === 'FINISHED' && (
 							<TimeItTookDisplay
 								timeItTook={item.timeItTook}
 								unit={item.unit}
-								customerToken={customerToken}
+								displayForCustomer={!!customerToken}
 								status={item.status}
 							/>
 						)}

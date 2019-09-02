@@ -74,6 +74,11 @@ const UserAssistantForm = ({defaultAssistantName, defaultLanguage, done}) => {
 						},
 					});
 
+					window.Intercomwindow.Intercom('update', {
+						'assistant-name': values.assistantName,
+						language: values.language,
+					});
+
 					done();
 
 					actions.setSubmitting(false);

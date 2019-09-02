@@ -181,7 +181,7 @@ export const getMarginUntilDeadline = (
 					.endOf('day')
 					.diff(moment().endOf('day')),
 			)
-			.days() * workingTimeMilli;
+			.asDays() * workingTimeMilli;
 	const timeRemainingForTasks = taskArray.reduce(
 		(sumOfTime, t) => t.unit * workingTimeMilli + sumOfTime,
 		0,

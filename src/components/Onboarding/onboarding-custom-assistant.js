@@ -94,6 +94,11 @@ const OnboardingCustomAssistant = ({
 							},
 						});
 
+						window.Intercomwindow.Intercom('update', {
+							'assistant-name': values.assistantName,
+							language: values.language,
+						});
+
 						getNextStep();
 					}
 					catch (e) {

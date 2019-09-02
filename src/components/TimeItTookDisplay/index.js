@@ -22,7 +22,7 @@ function TimeItTookDisplay({timeItTook, unit, displayForCustomer}) {
 					)
 				}
 			>
-				<span>{` (${diff > 0 ? '+' : ''}${diff})`}</span>
+				<span>{` (${diff > 0 ? '+' : ''}${diff.toFixed(2)})`}</span>
 			</Tooltip>
 		)
 	);

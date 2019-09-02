@@ -219,7 +219,9 @@ const NotificationTrayButton = ({mobile}) => {
 							link
 							onClick={() => markNotificationsAsRead()}
 						>
-							Tout marquer comme lu
+							<fbt project="inyo" desc="mark all as read">
+								Tout marquer comme lu
+							</fbt>
 						</MarkRead>
 						{loading ? (
 							<Loading />

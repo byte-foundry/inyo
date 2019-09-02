@@ -43,7 +43,7 @@ export function taskFulfillsActivationCriteria(task) {
 }
 
 export function formatDate(dateObject) {
-	return new Date(dateObject).toLocaleDateString('fr-FR');
+	return new Date(dateObject).toLocaleDateString(navigator.language);
 }
 
 export function parseDate(dateString) {

@@ -114,6 +114,20 @@
   },
   {
    "hashToText": {
+    "yBdJv0+rNmZAgmToroR0LQ==": "Requis"
+   },
+   "filepath": "src/components/AddressAutocomplete/index.js",
+   "line_beg": 69,
+   "col_beg": 33,
+   "line_end": 69,
+   "col_end": 81,
+   "type": "text",
+   "desc": "Required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
     "i3dSHU/47fQIhYGWTaqpDA==": "Aucune option"
    },
    "filepath": "src/components/ArianneThread/index.js",
@@ -391,6 +405,20 @@
    "desc": "other comments scroll alert",
    "project": "inyo",
    "jsfbt": "↓ Autres commentaires"
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/CommentList/index.js",
+   "line_beg": 160,
+   "col_beg": 39,
+   "line_end": 160,
+   "col_end": 87,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
   },
   {
    "hashToText": {
@@ -926,6 +954,48 @@
   },
   {
    "hashToText": {
+    "Wq1J1rqeLZIS29/C7g/O5A==": "Email copié!"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 232,
+   "col_beg": 18,
+   "line_end": 232,
+   "col_end": 76,
+   "type": "text",
+   "desc": "email copied",
+   "project": "inyo",
+   "jsfbt": "Email copié!"
+  },
+  {
+   "hashToText": {
+    "m2dOC+HIcDUb1qW5ykqnsw==": "Copier l'email"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 232,
+   "col_beg": 79,
+   "line_end": 232,
+   "col_end": 137,
+   "type": "text",
+   "desc": "copy email",
+   "project": "inyo",
+   "jsfbt": "Copier l'email"
+  },
+  {
+   "hashToText": {
+    "LLzgzmTd4HAlWFZX9KcqxQ==": "Fermer"
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 234,
+   "col_beg": 33,
+   "line_end": 234,
+   "col_end": 78,
+   "type": "text",
+   "desc": "close",
+   "project": "inyo",
+   "jsfbt": "Fermer"
+  },
+  {
+   "hashToText": {
     "uH7UR393QOWWV8YhLbgE0w==": "Ou créer un nouveau client"
    },
    "filepath": "src/components/CustomerModal/index.js",
@@ -979,6 +1049,20 @@
    "desc": "back",
    "project": "inyo",
    "jsfbt": "Retour"
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/CustomerModal/index.js",
+   "line_beg": 160,
+   "col_beg": 36,
+   "line_end": 160,
+   "col_end": 84,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
   },
   {
    "hashToText": {
@@ -1853,6 +1937,20 @@
   },
   {
    "hashToText": {
+    "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 853,
+   "col_beg": 20,
+   "line_end": 853,
+   "col_end": 95,
+   "type": "text",
+   "desc": "Add a description",
+   "project": "inyo",
+   "jsfbt": "Ajouter une description…"
+  },
+  {
+   "hashToText": {
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
    "filepath": "src/components/ItemView/index.js",
@@ -1892,6 +1990,34 @@
    "desc": "notification message",
    "project": "inyo",
    "jsfbt": "de"
+  },
+  {
+   "hashToText": {
+    "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 962,
+   "col_beg": 15,
+   "line_end": 962,
+   "col_end": 77,
+   "type": "text",
+   "desc": "Attached files",
+   "project": "inyo",
+   "jsfbt": "Pièces jointes"
+  },
+  {
+   "hashToText": {
+    "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 1050,
+   "col_beg": 15,
+   "line_end": 1050,
+   "col_end": 69,
+   "type": "text",
+   "desc": "Comments",
+   "project": "inyo",
+   "jsfbt": "Commentaires"
   },
   {
    "hashToText": {
@@ -2315,12 +2441,26 @@
   },
   {
    "hashToText": {
+    "k5OwMZDKZ01FmGLqqBOdAQ==": "Tout marquer comme lu"
+   },
+   "filepath": "src/components/NotificationTrayButton/index.js",
+   "line_beg": 222,
+   "col_beg": 7,
+   "line_end": 224,
+   "col_end": 13,
+   "type": "text",
+   "desc": "mark all as read",
+   "project": "inyo",
+   "jsfbt": "Tout marquer comme lu"
+  },
+  {
+   "hashToText": {
     "cTKVM7yUdcTOW1xZeBceRA==": "Aucune notification."
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 237,
+   "line_beg": 239,
    "col_beg": 9,
-   "line_end": 242,
+   "line_end": 244,
    "col_end": 15,
    "type": "text",
    "desc": "no notification message",
@@ -2368,6 +2508,48 @@
    "desc": "onboarding assistant description",
    "project": "inyo",
    "jsfbt": "Lorsque nous notifierons vos clients d'une tâche à réaliser, d'un commentaire, etc. ce sera le prénom utilisé pour signer les emails."
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
+   "line_beg": 82,
+   "col_beg": 42,
+   "line_end": 82,
+   "col_end": 90,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
+   "line_beg": 85,
+   "col_beg": 16,
+   "line_end": 85,
+   "col_end": 64,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "/b0GyyL8jbI4DbZyEUBRsQ==": "Langue de l'assistant"
+   },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
+   "line_beg": 119,
+   "col_beg": 14,
+   "line_end": 119,
+   "col_end": 86,
+   "type": "text",
+   "desc": "assitant language",
+   "project": "inyo",
+   "jsfbt": "Langue de l'assistant"
   },
   {
    "hashToText": {
@@ -2886,6 +3068,71 @@
    "desc": "back",
    "project": "inyo",
    "jsfbt": "Retour"
+  },
+  {
+   "hashToText": {
+    "4tuQOsl4Nmc5QSLJQsp94A==": "Temps réellement passés à définir",
+    "sR4tCtkNW24ERtckPrlU5A==": "Temps réellement passé à définir"
+   },
+   "filepath": "src/components/PendingActionsTray/index.js",
+   "line_beg": 125,
+   "col_beg": 6,
+   "line_end": 127,
+   "col_end": 12,
+   "type": "table",
+   "desc": "time spent",
+   "project": "inyo",
+   "jsfbt": {
+    "t": {
+     "*": "Temps réellement passés à définir",
+     "_1": "Temps réellement passé à définir"
+    },
+    "m": [
+     null
+    ]
+   }
+  },
+  {
+   "hashToText": {
+    "La92eOmOY28S7xDx7INOJg==": "Valider le temps passé pour cette tâche"
+   },
+   "filepath": "src/components/PendingActionsTray/index.js",
+   "line_beg": 140,
+   "col_beg": 23,
+   "line_end": 140,
+   "col_end": 128,
+   "type": "text",
+   "desc": "Confirm time spent for this task",
+   "project": "inyo",
+   "jsfbt": "Valider le temps passé pour cette tâche"
+  },
+  {
+   "hashToText": {
+    "ESY/ZSfQCtGlfPrw+J7Leg==": "Valider tous les temps passés"
+   },
+   "filepath": "src/components/PendingActionsTray/index.js",
+   "line_beg": 181,
+   "col_beg": 21,
+   "line_end": 181,
+   "col_end": 106,
+   "type": "text",
+   "desc": "confirm all time spent",
+   "project": "inyo",
+   "jsfbt": "Valider tous les temps passés"
+  },
+  {
+   "hashToText": {
+    "SCktwmFFvmW592qlLEMP2Q==": "Tout valider"
+   },
+   "filepath": "src/components/PendingActionsTray/index.js",
+   "line_beg": 205,
+   "col_beg": 7,
+   "line_end": 205,
+   "col_end": 75,
+   "type": "text",
+   "desc": "Confirm all time spent",
+   "project": "inyo",
+   "jsfbt": "Tout valider"
   },
   {
    "hashToText": {
@@ -4960,10 +5207,10 @@
     "5GBRSMD1wBCKyx/WbMt+TQ==": "Lier à un projet"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 292,
-   "col_beg": 15,
-   "line_end": 292,
-   "col_end": 82,
+   "line_beg": 293,
+   "col_beg": 6,
+   "line_end": 295,
+   "col_end": 12,
    "type": "text",
    "desc": "link to a project",
    "project": "inyo",
@@ -4974,9 +5221,9 @@
     "e8wn6btvUxtacwoZA+Iwyg==": "Définir le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 299,
+   "line_beg": 303,
    "col_beg": 6,
-   "line_end": 301,
+   "line_end": 305,
    "col_end": 12,
    "type": "text",
    "desc": "task input icon tooltip",
@@ -4988,9 +5235,9 @@
     "5Fj4/fEa3KneB26mwqrhng==": "↓ pour créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 318,
+   "line_beg": 322,
    "col_beg": 8,
-   "line_end": 320,
+   "line_end": 324,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -5002,9 +5249,9 @@
     "xFbeuoXyCmhu2wVfZ169QA==": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 433,
+   "line_beg": 437,
    "col_beg": 9,
-   "line_end": 440,
+   "line_end": 444,
    "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder in project",
@@ -5016,9 +5263,9 @@
     "VJtgIUDKGBWDdOnmN9yHEA==": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 442,
+   "line_beg": 446,
    "col_beg": 9,
-   "line_end": 448,
+   "line_end": 452,
    "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder",
@@ -5030,9 +5277,9 @@
     "yRfe5GzJEatV3OwaTjyFEw==": "Ajouter une tâche ou créer un section."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 451,
+   "line_beg": 455,
    "col_beg": 8,
-   "line_end": 456,
+   "line_end": 460,
    "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder in project",
@@ -5044,9 +5291,9 @@
     "Jfg2NGSco6/jhBpoOckN1w==": "Ajouter une tâche."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 458,
+   "line_beg": 462,
    "col_beg": 8,
-   "line_end": 463,
+   "line_end": 467,
    "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder",
@@ -5058,9 +5305,9 @@
     "uqIC+W5oLkhdTexC1W85Dg==": "Flèche du bas pour créer un ensemble de tâches"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 474,
+   "line_beg": 478,
    "col_beg": 10,
-   "line_end": 480,
+   "line_end": 484,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -5072,9 +5319,9 @@
     "PQUt2jQseKI6eHmV/4eXmA==": "Créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 488,
+   "line_beg": 492,
    "col_beg": 10,
-   "line_end": 493,
+   "line_end": 497,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -5086,9 +5333,9 @@
     "6xTdP3vzyjQ8RLeuwn1sZA==": "Touche entrée pour créer la tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 499,
+   "line_beg": 503,
    "col_beg": 9,
-   "line_end": 504,
+   "line_end": 508,
    "col_end": 15,
    "type": "text",
    "desc": "notification message",
@@ -5100,9 +5347,9 @@
     "EYBvXIPLfC+Sg+JgEohtIQ==": "créer la {sectionOrTask}"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 544,
+   "line_beg": 548,
    "col_beg": 9,
-   "line_end": 566,
+   "line_end": 570,
    "col_end": 15,
    "type": "text",
    "desc": "notification message",
@@ -5114,9 +5361,9 @@
     "tkc3hNSCTgv4MCYLPJpaJw==": "section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 551,
+   "line_beg": 555,
    "col_beg": 12,
-   "line_end": 556,
+   "line_end": 560,
    "col_end": 18,
    "type": "text",
    "desc": "notification message",
@@ -5128,9 +5375,9 @@
     "1e2oXXx9vKXjMzI/5f0Vaw==": "tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 558,
+   "line_beg": 562,
    "col_beg": 12,
-   "line_end": 563,
+   "line_end": 567,
    "col_end": 18,
    "type": "text",
    "desc": "notification message",
@@ -5142,10 +5389,10 @@
     "OwotPW85Qrx4xnkP4MPfWg==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 582,
-   "col_beg": 19,
-   "line_end": 582,
-   "col_end": 95,
+   "line_beg": 587,
+   "col_beg": 7,
+   "line_end": 589,
+   "col_end": 13,
    "type": "text",
    "desc": "add or create a tag",
    "project": "inyo",
@@ -5251,6 +5498,272 @@
   },
   {
    "hashToText": {
+    "YkVlfGqCcjXL+Pr934sTwg==": "Retour"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 221,
+   "col_beg": 4,
+   "line_end": 221,
+   "col_end": 48,
+   "type": "text",
+   "desc": "Back",
+   "project": "inyo",
+   "jsfbt": "Retour"
+  },
+  {
+   "hashToText": {
+    "lBZIK3YGEoUGXCeBk5Y8+w==": "Date d'activation : {date}"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 225,
+   "col_beg": 5,
+   "line_end": 226,
+   "col_end": 89,
+   "type": "text",
+   "desc": "activation date",
+   "project": "inyo",
+   "jsfbt": "Date d'activation : {date}"
+  },
+  {
+   "hashToText": {
+    "EnhGQrIfqrrU9LWf9HcFHw==": "{date} après l'activation de la tâche"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 250,
+   "col_beg": 15,
+   "line_end": 252,
+   "col_end": 69,
+   "type": "text",
+   "desc": "after task activation",
+   "project": "inyo",
+   "jsfbt": "{date} après l'activation de la tâche"
+  },
+  {
+   "hashToText": {
+    "sOA/2X+4LszqCMVqRD3PEw==": "{date} après l'email précédent"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 255,
+   "col_beg": 15,
+   "line_end": 261,
+   "col_end": 62,
+   "type": "text",
+   "desc": "after previous email",
+   "project": "inyo",
+   "jsfbt": "{date} après l'email précédent"
+  },
+  {
+   "hashToText": {
+    "q9OBKKxmiSt03JhHomK8Jw==": "Supprimer cette action automatique"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 293,
+   "col_beg": 27,
+   "line_end": 293,
+   "col_end": 115,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Supprimer cette action automatique"
+  },
+  {
+   "hashToText": {
+    "9dvcAZRKPIVpqi6orutALA==": "minutes"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 373,
+   "col_beg": 20,
+   "line_end": 373,
+   "col_end": 68,
+   "type": "text",
+   "desc": "minutes",
+   "project": "inyo",
+   "jsfbt": "minutes"
+  },
+  {
+   "hashToText": {
+    "PhPVSOdXlMF6mLuFBvzyPg==": "heures"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 377,
+   "col_beg": 20,
+   "line_end": 377,
+   "col_end": 65,
+   "type": "text",
+   "desc": "hours",
+   "project": "inyo",
+   "jsfbt": "heures"
+  },
+  {
+   "hashToText": {
+    "x1tyvdB8MRzLg+jGjhF7lw==": "jours"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 381,
+   "col_beg": 20,
+   "line_end": 381,
+   "col_end": 63,
+   "type": "text",
+   "desc": "days",
+   "project": "inyo",
+   "jsfbt": "jours"
+  },
+  {
+   "hashToText": {
+    "GRmeMnPIs2L9scxWCQN9bA==": "semaines"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 385,
+   "col_beg": 20,
+   "line_end": 385,
+   "col_end": 67,
+   "type": "text",
+   "desc": "weeks",
+   "project": "inyo",
+   "jsfbt": "semaines"
+  },
+  {
+   "hashToText": {
+    "x1tyvdB8MRzLg+jGjhF7lw==": "jours"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 393,
+   "col_beg": 19,
+   "line_end": 393,
+   "col_end": 62,
+   "type": "text",
+   "desc": "days",
+   "project": "inyo",
+   "jsfbt": "jours"
+  },
+  {
+   "hashToText": {
+    "Tt+m+eYxAX71R5GCKDCfnQ==": "après l'activation de la tâche"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 410,
+   "col_beg": 13,
+   "line_end": 410,
+   "col_end": 98,
+   "type": "text",
+   "desc": "after task activation",
+   "project": "inyo",
+   "jsfbt": "après l'activation de la tâche"
+  },
+  {
+   "hashToText": {
+    "DplwfsTWQva6fcImyucG4Q==": "après l'email précédent"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 415,
+   "col_beg": 13,
+   "line_end": 415,
+   "col_end": 90,
+   "type": "text",
+   "desc": "after previous email",
+   "project": "inyo",
+   "jsfbt": "après l'email précédent"
+  },
+  {
+   "hashToText": {
+    "DplwfsTWQva6fcImyucG4Q==": "après l'email précédent"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 426,
+   "col_beg": 14,
+   "line_end": 426,
+   "col_end": 91,
+   "type": "text",
+   "desc": "after previous email",
+   "project": "inyo",
+   "jsfbt": "après l'email précédent"
+  },
+  {
+   "hashToText": {
+    "Tt+m+eYxAX71R5GCKDCfnQ==": "après l'activation de la tâche"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 431,
+   "col_beg": 14,
+   "line_end": 431,
+   "col_end": 99,
+   "type": "text",
+   "desc": "after task activation",
+   "project": "inyo",
+   "jsfbt": "après l'activation de la tâche"
+  },
+  {
+   "hashToText": {
+    "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 453,
+   "col_beg": 11,
+   "line_end": 453,
+   "col_end": 58,
+   "type": "text",
+   "desc": "cancel",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 456,
+   "col_beg": 11,
+   "line_end": 456,
+   "col_end": 59,
+   "type": "text",
+   "desc": "confirm",
+   "project": "inyo",
+   "jsfbt": "Valider"
+  },
+  {
+   "hashToText": {
+    "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 472,
+   "col_beg": 5,
+   "line_end": 472,
+   "col_end": 52,
+   "type": "text",
+   "desc": "cancel",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "8qj6hVDu63zae7vwiTMqfg==": "Valider l'activation"
+   },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
+   "line_beg": 488,
+   "col_beg": 5,
+   "line_end": 488,
+   "col_end": 77,
+   "type": "text",
+   "desc": "confirm activation",
+   "project": "inyo",
+   "jsfbt": "Valider l'activation"
+  },
+  {
+   "hashToText": {
+    "FNnWXkrM7hA3vPBzG/OxUg==": "Cette tâche vous a été assigné"
+   },
+   "filepath": "src/components/TaskRow/index.js",
+   "line_beg": 335,
+   "col_beg": 25,
+   "line_end": 335,
+   "col_end": 117,
+   "type": "text",
+   "desc": "this task is assigned to you",
+   "project": "inyo",
+   "jsfbt": "Cette tâche vous a été assigné"
+  },
+  {
+   "hashToText": {
     "TNg0g9/rqIBL5sU4Qx7Jtg==": "Choisir un titre pour cette tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
@@ -5262,6 +5775,62 @@
    "desc": "task placeholder name",
    "project": "inyo",
    "jsfbt": "Choisir un titre pour cette tâche"
+  },
+  {
+   "hashToText": {
+    "RrL6CmQzt+DS6qUtN9B4rQ==": "Ouvrir le projet"
+   },
+   "filepath": "src/components/TaskRow/index.js",
+   "line_beg": 379,
+   "col_beg": 23,
+   "line_end": 379,
+   "col_end": 85,
+   "type": "text",
+   "desc": "open project",
+   "project": "inyo",
+   "jsfbt": "Ouvrir le projet"
+  },
+  {
+   "hashToText": {
+    "dkh9670XE2tzpfITWmPKZg==": "Client responsable de la tâche"
+   },
+   "filepath": "src/components/TaskRow/index.js",
+   "line_beg": 398,
+   "col_beg": 24,
+   "line_end": 398,
+   "col_end": 111,
+   "type": "text",
+   "desc": "client assigned to task",
+   "project": "inyo",
+   "jsfbt": "Client responsable de la tâche"
+  },
+  {
+   "hashToText": {
+    "I9kOFQ2aWdWtdEYILK6Q6g==": "Collaborateur responsable de la tâche"
+   },
+   "filepath": "src/components/TaskRow/index.js",
+   "line_beg": 428,
+   "col_beg": 24,
+   "line_end": 428,
+   "col_end": 124,
+   "type": "text",
+   "desc": "Collaborator assigned to task",
+   "project": "inyo",
+   "jsfbt": "Collaborateur responsable de la tâche"
+  },
+  {
+   "hashToText": {
+    "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
+   },
+   "filepath": "src/components/TaskRow/index.js",
+   "line_beg": 477,
+   "col_beg": 25,
+   "line_end": 477,
+   "col_end": 88,
+   "type": "text",
+   "desc": "attached files",
+   "project": "inyo",
+   "jsfbt": "Fichiers joints"
   },
   {
    "hashToText": {
@@ -5748,6 +6317,34 @@
   },
   {
    "hashToText": {
+    "2715v0MIrtV97ePELMOJzw==": "j"
+   },
+   "filepath": "src/components/UnitInput/index.js",
+   "line_beg": 199,
+   "col_beg": 24,
+   "line_end": 199,
+   "col_end": 73,
+   "type": "text",
+   "desc": "day supershort",
+   "project": "inyo",
+   "jsfbt": "j"
+  },
+  {
+   "hashToText": {
+    "2715v0MIrtV97ePELMOJzw==": "j"
+   },
+   "filepath": "src/components/UnitInput/index.js",
+   "line_beg": 202,
+   "col_beg": 26,
+   "line_end": 202,
+   "col_end": 75,
+   "type": "text",
+   "desc": "day supershort",
+   "project": "inyo",
+   "jsfbt": "j"
+  },
+  {
+   "hashToText": {
     "gFFcv3gSdxZk3NFM3z+mqQ==": "Valider le temps et marquer comme fait"
    },
    "filepath": "src/components/UnitInput/index.js",
@@ -6185,6 +6782,20 @@
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
    "filepath": "src/components/UserAssistantForm/index.js",
+   "line_beg": 61,
+   "col_beg": 16,
+   "line_end": 61,
+   "col_end": 64,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/UserAssistantForm/index.js",
    "line_beg": 63,
    "col_beg": 6,
    "line_end": 65,
@@ -6207,6 +6818,20 @@
    "desc": "assistant name",
    "project": "inyo",
    "jsfbt": "Nom de l'assistant"
+  },
+  {
+   "hashToText": {
+    "DtVyWNtCxnke96ZC9CBHwA==": "Langue de l'assistant"
+   },
+   "filepath": "src/components/UserAssistantForm/index.js",
+   "line_beg": 102,
+   "col_beg": 15,
+   "line_end": 102,
+   "col_end": 90,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Langue de l'assistant"
   },
   {
    "hashToText": {

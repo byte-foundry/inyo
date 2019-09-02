@@ -229,9 +229,21 @@ Je reste à votre disposition si vous avez des questions.`}
 							}
 						}}
 					>
-						{isCopied ? 'Email copié!' : "Copier l'email"}
+						{isCopied ? (
+							<fbt project="inyo" desc="email copied">
+								Email copié!
+							</fbt>
+						) : (
+							<fbt project="inyo" desc="copy email">
+								Copier l'email
+							</fbt>
+						)}
 					</Button>
-					<Button onClick={onDismiss}>Fermer</Button>
+					<Button onClick={onDismiss}>
+						<fbt project="inyo" desc="close">
+							Fermer
+						</fbt>
+					</Button>
 				</ModalActions>
 			</ModalElem>
 		</ModalContainer>

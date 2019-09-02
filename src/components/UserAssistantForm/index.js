@@ -58,7 +58,11 @@ const UserAssistantForm = ({defaultAssistantName, defaultLanguage, done}) => {
 				validationSchema={Yup.object().shape({
 					language: Yup.string()
 						.oneOf(['en', 'fr'])
-						.required('Requis'),
+						.required(
+							<fbt project="inyo" desc="required">
+								Requis
+							</fbt>,
+						),
 					assistantName: Yup.string().required(
 						<fbt project="inyo" desc="required">
 							Requis
@@ -99,7 +103,14 @@ const UserAssistantForm = ({defaultAssistantName, defaultLanguage, done}) => {
 							<FormSelect
 								{...props}
 								name="language"
-								label="Langue de l'assistant"
+								label={
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										Langue de l'assistant
+									</fbt>
+								}
 								options={[
 									{value: 'en', label: 'English'},
 									{value: 'fr', label: 'Français'},

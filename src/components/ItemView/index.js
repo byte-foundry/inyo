@@ -850,7 +850,11 @@ const Item = ({
 					<Description>
 						<MultilineEditable
 							disabled={!!customerToken}
-							placeholder="Ajouter une description…"
+							placeholder={
+								<fbt project="inyo" desc="Add a description">
+									Ajouter une description…
+								</fbt>
+							}
 							style={{padding: '1rem 4rem'}}
 							onBlur={e => updateItem({
 								variables: {
@@ -959,7 +963,11 @@ const Item = ({
 						)}
 					</>
 			)}
-			<SubHeading>Pièces jointes</SubHeading>
+			<SubHeading>
+				<fbt project="inyo" desc="Attached files">
+					Pièces jointes
+				</fbt>
+			</SubHeading>
 			<AttachedList>
 				{item.attachments.map(
 					({
@@ -1047,7 +1055,11 @@ const Item = ({
 					/>
 				</>
 			)}
-			<SubHeading>Commentaires</SubHeading>
+			<SubHeading>
+				<fbt project="inyo" desc="Comments">
+					Commentaires
+				</fbt>
+			</SubHeading>
 			<CommentList
 				itemId={item.id}
 				customerToken={customerToken}

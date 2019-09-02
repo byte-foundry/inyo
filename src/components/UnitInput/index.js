@@ -196,10 +196,23 @@ const UnitInput = ({
 									setIsHours(!isHours);
 								}}
 							>
-								<UnitInputLabel>j</UnitInputLabel>
+								<UnitInputLabel>
+									<fbt project="inyo" desc="day supershort">
+										j
+									</fbt>
+								</UnitInputLabel>
 								<UnitInputLabel>h</UnitInputLabel>
 								<UnitInputSlider isHours={isHours}>
-									{isHours ? 'h' : 'j'}
+									{isHours ? (
+										'h'
+									) : (
+										<fbt
+											project="inyo"
+											desc="day supershort"
+										>
+											j
+										</fbt>
+									)}
 								</UnitInputSlider>
 							</UnitInputSwitch>
 						</Tooltip>

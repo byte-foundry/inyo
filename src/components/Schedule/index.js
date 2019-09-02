@@ -419,7 +419,7 @@ const Schedule = ({
 							>
 								{day.momentDate
 									.toDate()
-									.toLocaleDateString('default', {
+									.toLocaleDateString(navigator.language, {
 										weekday: 'short',
 										day: 'numeric',
 										month: moment().isSame(

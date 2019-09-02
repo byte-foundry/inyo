@@ -40,7 +40,11 @@ const Info = styled(P)`
 `;
 
 function cap(s) {
-	return s.charAt(0).toUpperCase() + s.slice(1);
+	let stringValue = s;
+
+	if (typeof s !== 'string' && s && s._stringValue) stringValue = s._stringValue;
+
+	return stringValue.charAt(0).toUpperCase() + stringValue.slice(1);
 }
 
 function nullStr(s) {
@@ -54,10 +58,7 @@ function getCiv(s) {
 const CustomerIntroMail = ({onDismiss, customer}) => {
 	const contentRef = useRef();
 	const [isCopied, setIsCopied] = useState(false);
-	const {
-		data: {me},
-		loading,
-	} = useQuery(GET_USER_INFOS);
+	const {data, loading} = useQuery(GET_USER_INFOS);
 
 	if (loading) {
 		return (
@@ -70,9 +71,11 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 	}
 
 	const {
-		email,
-		settings: {assistantName},
-	} = me;
+		me: {
+			email,
+			settings: {assistantName},
+		},
+	} = data;
 
 	return (
 		<ModalContainer onDismiss={onDismiss}>

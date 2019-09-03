@@ -120,15 +120,27 @@ export default function ({
 	// TODO: translation here
 	const templateOptions = [
 		{
-			label: 'Projet vierge',
+			label: (
+				<fbt project="inyo" desc="empty project">
+					Projet vierge
+				</fbt>
+			),
 			value: 'EMPTY',
 		},
 		{
-			label: 'Vos projets',
+			label: (
+				<fbt project="inyo" desc="your projects">
+					Vos projets
+				</fbt>
+			),
 			options: optionsProjects,
 		},
 		{
-			label: 'Nos modèles',
+			label: (
+				<fbt project="inyo" desc="our templates">
+					Nos modèles
+				</fbt>
+			),
 			options: templates[language].map(template => ({
 				value: template.name,
 				label: template.label,

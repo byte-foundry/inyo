@@ -110,12 +110,14 @@ export default function ({
 	onDismiss,
 	...props
 }) {
+	const language = (navigator.language || 'fr-FR').split('-')[0];
 	const [editDeadline, setEditDeadline] = useState(false);
 	const [selectedViewContent, setSelectedViewContent] = useState();
 	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
 		suspend: true,
 	});
 
+	// TODO: translation here
 	const templateOptions = [
 		{
 			label: 'Projet vierge',
@@ -127,7 +129,7 @@ export default function ({
 		},
 		{
 			label: 'Nos modèles',
-			options: templates.map(template => ({
+			options: templates[language].map(template => ({
 				value: template.name,
 				label: template.label,
 			})),

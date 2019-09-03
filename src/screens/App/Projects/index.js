@@ -167,6 +167,7 @@ const SubHeadingProject = styled(SubHeading)`
 `;
 
 function Projects({history}) {
+	const language = (navigator.language || 'fr-FR').split('-')[0];
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
@@ -270,7 +271,9 @@ function Projects({history}) {
 													firstName: 'Edwige',
 												},
 												sections:
-														onboardingTemplate.sections,
+														onboardingTemplate[
+															language
+														].sections,
 												name:
 														'Bienvenue, découvrez votre smart assistant!',
 												deadline: deadLineForOnboardingProjet.toISOString(),

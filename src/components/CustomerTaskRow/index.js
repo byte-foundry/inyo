@@ -20,13 +20,12 @@ import {
 	mediumGrey,
 	primaryBlack,
 	primaryGrey,
-	primaryPurple,
 	TaskHeading,
 } from '../../utils/new/design-system';
 import CustomerModalAndMail from '../CustomerModalAndMail';
+import IconButton from '../IconButton';
 import TaskInfosInputs from '../TaskInfosInputs';
 import Tooltip from '../Tooltip';
-import UnitInput from '../UnitInput';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -174,6 +173,7 @@ const TaskContent = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 2rem;
+		display: flex;
 	}
 `;
 
@@ -202,9 +202,23 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	}
 `;
 
+const OpenBtn = styled(ButtonLink)`
+	color: ${primaryGrey};
+	border-color: transparent;
+	background: transparent;
+`;
+
+const RescheduleIconButton = styled(IconButton)`
+	display: none;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: block;
+	}
+`;
+
 const TaskActions = styled('div')`
-	opacity: ${props => (props.stayActive ? 1 : 0)};
-	margin-right: ${props => (props.stayActive ? 0 : -100)}px;
+	opacity: 0;
+	margin-right: -100px;
 	pointer-events: none;
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
@@ -220,6 +234,7 @@ const TaskHeader = styled('div')`
 	align-items: center;
 	position: relative;
 	cursor: pointer;
+	flex: 1;
 
 	&:hover {
 		&:before {
@@ -243,14 +258,8 @@ const TaskHeader = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		display: block;
+		display: flex;
 	}
-`;
-
-const OpenBtn = styled(ButtonLink)`
-	color: ${primaryGrey};
-	border-color: transparent;
-	background: transparent;
 `;
 
 function Task({
@@ -369,7 +378,7 @@ function Task({
 									</fbt>
 								</TaskHeadingPlaceholder>
 							)}
-							<TaskActions stayActive={false}>
+							<TaskActions>
 								<Tooltip
 									label={
 										<fbt
@@ -421,6 +430,17 @@ function Task({
 							</TaskActions>
 						</TaskHeader>
 					</Tooltip>
+					<RescheduleIconButton
+						icon="today"
+						size="tiny"
+						onClick={() => focusTask({
+							variables: {
+								itemId: item.id,
+								for: new Date().toJSON().split('T')[0],
+							},
+						})
+						}
+					/>
 					{!noData && (
 						<TaskInfosInputs
 							taskUrlPrefix={taskUrlPrefix}

@@ -92,7 +92,10 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = new URLSearchParams(prevSearch || location.search);
 
-	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {data, error} = useQuery(GET_ALL_TASKS, {
+		suspend: true,
+		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
+	});
 	const {workingTime, workingDays, hasFullWeekSchedule} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const {

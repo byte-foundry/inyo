@@ -332,7 +332,16 @@ function TaskRow({
 								}}
 							>
 								{item.assignee && (
-									<Tooltip label="Cette tâche vous a été assigné">
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="this task is assigned to you"
+											>
+												Cette tâche vous a été assigné
+											</fbt>
+										}
+									>
 										<div>
 											<MaterialIcon
 												icon="reply"
@@ -376,7 +385,13 @@ function TaskRow({
 					</TaskHeader>
 					{!noProject
 						&& (item.section && item.section.project ? (
-							<Tooltip label="Ouvrir le projet">
+							<Tooltip
+								label={
+									<fbt project="inyo" desc="open project">
+										Ouvrir le projet
+									</fbt>
+								}
+							>
 								<ProjectNameWrap>
 									<ProjectName
 										to={`/app/${baseUrl}?projectId=${item.section.project.id}`}
@@ -395,7 +410,16 @@ function TaskRow({
 					{!noData && (
 						<>
 							{isCustomerTask(item.type) ? (
-								<Tooltip label="Client responsable de la tâche">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="client assigned to task"
+										>
+											Client responsable de la tâche
+										</fbt>
+									}
+								>
 									<CustomerCondensed>
 										<MaterialIcon
 											style={{
@@ -425,7 +449,17 @@ function TaskRow({
 									</CustomerCondensed>
 								</Tooltip>
 							) : (
-								<Tooltip label="Collaborateur responsable de la tâche">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="Collaborator assigned to task"
+										>
+											Collaborateur responsable de la
+											tâche
+										</fbt>
+									}
+								>
 									<CustomerCondensed>
 										<MaterialIcon
 											style={{
@@ -474,7 +508,16 @@ function TaskRow({
 									locationSearch={location.search}
 								/>
 								{item.attachments.length > 0 ? (
-									<Tooltip label="Fichiers joints">
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="attached files"
+											>
+												Fichiers joints
+											</fbt>
+										}
+									>
 										<TaskIconText
 											inactive={false}
 											icon={

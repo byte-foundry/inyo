@@ -157,7 +157,11 @@ const CustomerModal = ({
 
 						try {
 							Yup.object({
-								name: Yup.string().required('Requis'),
+								name: Yup.string().required(
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>,
+								),
 								title: Yup.string().nullable(),
 								firstName: Yup.string(),
 								lastName: Yup.string(),

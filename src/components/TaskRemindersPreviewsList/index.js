@@ -4,6 +4,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {animated, useSpring} from 'react-spring';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
 import {
 	BackButton,
@@ -217,12 +218,18 @@ const TaskRemindersPreviewsList = ({
 	return (
 		<Container>
 			<BackButton grey type="button" link onClick={() => onCancel()}>
-				Retour
+				<fbt project="inyo" desc="Back">
+					Retour
+				</fbt>
 			</BackButton>
 			<DateContainer style={{alignSelf: 'flex-start'}}>
 				<span onClick={() => setIsEditingScheduledFor(true)}>
-					Date d'activation :{' '}
-					{moment(scheduledFor).format('DD/MM/YYYY')}
+					<fbt project="inyo" desc="activation date">
+						Date d'activation :{' '}
+						<fbt:param name="date">
+							{moment(scheduledFor).format('DD/MM/YYYY')}
+						</fbt:param>
+					</fbt>
 				</span>
 				{isEditingScheduledFor && (
 					<DateInput
@@ -246,18 +253,36 @@ const TaskRemindersPreviewsList = ({
 						let delay;
 
 						if (index === 0 || !reminder.isRelative) {
-							delay = `${moment
-								.duration(reminder.delay * 1000)
-								.humanize()} après l'activation de la tâche`;
+							delay = (
+								<fbt
+									project="inyo"
+									desc="after task activation"
+								>
+									<fbt:param name="date">
+										{moment
+											.duration(reminder.delay * 1000)
+											.humanize()}
+									</fbt:param>{' '}
+									après l'activation de la tâche
+								</fbt>
+							);
 						}
 						else {
-							delay = `${moment
-								.duration(
-									(reminder.delay
-										- mutableReminders[index - 1].delay)
-										* 1000,
-								)
-								.humanize()} après l'email précédent`;
+							delay = (
+								<fbt project="inyo" desc="after previous email">
+									<fbt:param name="date">
+										{moment
+											.duration(
+												(reminder.delay
+													- mutableReminders[index - 1]
+														.delay)
+													* 1000,
+											)
+											.humanize()}
+									</fbt:param>{' '}
+									après l'email précédent
+								</fbt>
+							);
 						}
 
 						return (
@@ -289,7 +314,17 @@ const TaskRemindersPreviewsList = ({
 												reminder={reminder}
 												preview
 											/>
-											<Tooltip label="Supprimer cette action automatique">
+											<Tooltip
+												label={
+													<fbt
+														project="inyo"
+														desc="notification message"
+													>
+														Supprimer cette action
+														automatique
+													</fbt>
+												}
+											>
 												<Button
 													link
 													onClick={() => {
@@ -369,19 +404,47 @@ const TaskRemindersPreviewsList = ({
 											name="unit"
 											options={[
 												{
-													label: 'minutes',
+													label: (
+														<fbt
+															project="inyo"
+															desc="minutes"
+														>
+															minutes
+														</fbt>
+													),
 													value: 'minutes',
 												},
 												{
-													label: 'heures',
+													label: (
+														<fbt
+															project="inyo"
+															desc="hours"
+														>
+															heures
+														</fbt>
+													),
 													value: 'hours',
 												},
 												{
-													label: 'jours',
+													label: (
+														<fbt
+															project="inyo"
+															desc="days"
+														>
+															jours
+														</fbt>
+													),
 													value: 'days',
 												},
 												{
-													label: 'semaines',
+													label: (
+														<fbt
+															project="inyo"
+															desc="weeks"
+														>
+															semaines
+														</fbt>
+													),
 													value: 'weeks',
 												},
 											]}
@@ -389,7 +452,14 @@ const TaskRemindersPreviewsList = ({
 											}
 											isSearchable={false}
 											defaultValue={{
-												label: 'jours',
+												label: (
+													<fbt
+														project="inyo"
+														desc="days"
+													>
+														jours
+													</fbt>
+												),
 												value: 'days',
 											}}
 											style={{
@@ -405,13 +475,27 @@ const TaskRemindersPreviewsList = ({
 											isDisabled={index === 0}
 											options={[
 												{
-													label:
-														"après l'activation de la tâche",
+													label: (
+														<fbt
+															project="inyo"
+															desc="after task activation"
+														>
+															après l'activation
+															de la tâche
+														</fbt>
+													),
 													value: false,
 												},
 												{
-													label:
-														"après l'email précédent",
+													label: (
+														<fbt
+															project="inyo"
+															desc="after previous email"
+														>
+															après l'email
+															précédent
+														</fbt>
+													),
 													value: true,
 												},
 											]}
@@ -421,13 +505,29 @@ const TaskRemindersPreviewsList = ({
 											value={
 												index !== 0 && isRelative
 													? {
-														label:
-																"après l'email précédent",
+														label: (
+															<fbt
+																project="inyo"
+																desc="after previous email"
+															>
+																	après
+																	l'email
+																	précédent
+															</fbt>
+														),
 														value: true,
 													  }
 													: {
-														label:
-																"après l'activation de la tâche",
+														label: (
+															<fbt
+																project="inyo"
+																desc="after task activation"
+															>
+																	après
+																	l'activation
+																	de la tâche
+															</fbt>
+														),
 														value: false,
 													  }
 											}
@@ -449,10 +549,14 @@ const TaskRemindersPreviewsList = ({
 											onClick={() => setEditingIndex(null)
 											}
 										>
-											Annuler
+											<fbt project="inyo" desc="cancel">
+												Annuler
+											</fbt>
 										</Button>
 										<Button aligned type="submit">
-											Valider
+											<fbt project="inyo" desc="confirm">
+												Valider
+											</fbt>
 										</Button>
 									</ReminderFormActions>
 								</CollapsableReminderForm>
@@ -468,7 +572,9 @@ const TaskRemindersPreviewsList = ({
 					link
 					onClick={() => onCancel()}
 				>
-					Annuler
+					<fbt project="inyo" desc="cancel">
+						Annuler
+					</fbt>
 				</Button>
 				<Button
 					type="submit"
@@ -484,7 +590,9 @@ const TaskRemindersPreviewsList = ({
 					})
 					}
 				>
-					Valider l'activation
+					<fbt project="inyo" desc="confirm activation">
+						Valider l'activation
+					</fbt>
 				</Button>
 			</ReminderFormActions>
 		</Container>

@@ -79,10 +79,18 @@ const OnboardingCustomAssistant = ({
 					language: me.settings.language || 'en',
 				}}
 				validationSchema={Yup.object().shape({
-					assistantName: Yup.string().required('Requis'),
+					assistantName: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 					language: Yup.string()
 						.oneOf(['en', 'fr'])
-						.required('Requis'),
+						.required(
+							<fbt project="inyo" desc="required">
+								Requis
+							</fbt>,
+						),
 				})}
 				onSubmit={async (values, {setSubmitting, setErrors}) => {
 					setSubmitting(true);
@@ -121,7 +129,11 @@ const OnboardingCustomAssistant = ({
 						<FormSelect
 							{...props}
 							name="language"
-							label="Langue de l'assistant"
+							label={
+								<fbt project="inyo" desc="assitant language">
+									Langue de l'assistant
+								</fbt>
+							}
 							options={[
 								{value: 'en', label: 'English'},
 								{value: 'fr', label: 'Français'},

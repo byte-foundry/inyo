@@ -157,7 +157,11 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					newComment: '',
 				}}
 				validationSchema={Yup.object().shape({
-					newComment: Yup.string().required('Requis'),
+					newComment: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);

@@ -95,20 +95,24 @@ function DroppableDay({
 			<DayElem isOff={isOff}>
 				<DayDate>
 					<DayDateDay>
-						{day.momentDate.toDate().toLocaleDateString('default', {
-							weekday: 'narrow',
-							day: undefined,
-							month: undefined,
-							year: undefined,
-						})}
+						{day.momentDate
+							.toDate()
+							.toLocaleDateString(navigator.language, {
+								weekday: 'narrow',
+								day: undefined,
+								month: undefined,
+								year: undefined,
+							})}
 					</DayDateDay>
 					<DayDateNumber>
-						{day.momentDate.toDate().toLocaleDateString('default', {
-							weekday: undefined,
-							day: 'numeric',
-							month: undefined,
-							year: undefined,
-						})}
+						{day.momentDate
+							.toDate()
+							.toLocaleDateString(navigator.language, {
+								weekday: undefined,
+								day: 'numeric',
+								month: undefined,
+								year: undefined,
+							})}
 					</DayDateNumber>
 				</DayDate>
 				<DayPieChart value={1 - timeLeft / workingTime} />

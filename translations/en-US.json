@@ -16,7 +16,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "email must be valid",
+     "translation": "Email must be valid",
      "variations": {}
     }
    ]
@@ -26,7 +26,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "required",
+     "translation": "Required",
      "variations": {}
     }
    ]
@@ -77,6 +77,16 @@
    "translations": [
     {
      "translation": "Invite",
+     "variations": {}
+    }
+   ]
+  },
+  "yBdJv0+rNmZAgmToroR0LQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Required",
      "variations": {}
     }
    ]
@@ -271,6 +281,16 @@
     }
    ]
   },
+  "wuxa5BJR7fALB7nYflk8oA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Required",
+     "variations": {}
+    }
+   ]
+  },
   "H/doAMLoC9R3NO6NQmhd5Q==": {
    "tokens": [],
    "types": [],
@@ -357,16 +377,6 @@
    "translations": [
     {
      "translation": "Close",
-     "variations": {}
-    }
-   ]
-  },
-  "wuxa5BJR7fALB7nYflk8oA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Required",
      "variations": {}
     }
    ]
@@ -647,6 +657,36 @@
    "translations": [
     {
      "translation": "[Your name]",
+     "variations": {}
+    }
+   ]
+  },
+  "Wq1J1rqeLZIS29/C7g/O5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Email copied!",
+     "variations": {}
+    }
+   ]
+  },
+  "m2dOC+HIcDUb1qW5ykqnsw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Copy email address",
+     "variations": {}
+    }
+   ]
+  },
+  "LLzgzmTd4HAlWFZX9KcqxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Close",
      "variations": {}
     }
    ]
@@ -1281,12 +1321,42 @@
     }
    ]
   },
+  "rCspNgqVvgXUmwcbhFN+3g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a description",
+     "variations": {}
+    }
+   ]
+  },
   "uanI7bp7CivGKkYhGclxfw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "{assistantName}'s actions",
+     "variations": {}
+    }
+   ]
+  },
+  "lcfH71yKmcYYGee2YJcxUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Attached files",
+     "variations": {}
+    }
+   ]
+  },
+  "axA2+EmCpMmeDxbdU3WHcQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comments",
      "variations": {}
     }
    ]
@@ -1561,6 +1631,16 @@
     }
    ]
   },
+  "k5OwMZDKZ01FmGLqqBOdAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mark all as read",
+     "variations": {}
+    }
+   ]
+  },
   "cTKVM7yUdcTOW1xZeBceRA==": {
    "tokens": [],
    "types": [],
@@ -1597,6 +1677,16 @@
    "translations": [
     {
      "translation": "We will use this name when we notifify your clients by email.",
+     "variations": {}
+    }
+   ]
+  },
+  "/b0GyyL8jbI4DbZyEUBRsQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Assistant's language",
      "variations": {}
     }
    ]
@@ -1877,6 +1967,56 @@
    "translations": [
     {
      "translation": "Next",
+     "variations": {}
+    }
+   ]
+  },
+  "4tuQOsl4Nmc5QSLJQsp94A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Time spent to define",
+     "variations": {}
+    }
+   ]
+  },
+  "sR4tCtkNW24ERtckPrlU5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Time spent to define",
+     "variations": {}
+    }
+   ]
+  },
+  "La92eOmOY28S7xDx7INOJg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Confirm time spent for this task",
+     "variations": {}
+    }
+   ]
+  },
+  "ESY/ZSfQCtGlfPrw+J7Leg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Confirm all time spent",
+     "variations": {}
+    }
+   ]
+  },
+  "SCktwmFFvmW592qlLEMP2Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Save all",
      "variations": {}
     }
    ]
@@ -3276,7 +3416,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Add or create a task",
+     "translation": "Add or create a tag",
      "variations": {}
     }
    ]
@@ -3351,12 +3491,172 @@
     }
    ]
   },
+  "YkVlfGqCcjXL+Pr934sTwg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Back",
+     "variations": {}
+    }
+   ]
+  },
+  "lBZIK3YGEoUGXCeBk5Y8+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Activation date: {date}",
+     "variations": {}
+    }
+   ]
+  },
+  "EnhGQrIfqrrU9LWf9HcFHw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{date} after task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "sOA/2X+4LszqCMVqRD3PEw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{date} after previous email",
+     "variations": {}
+    }
+   ]
+  },
+  "q9OBKKxmiSt03JhHomK8Jw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Delete this automatic reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "9dvcAZRKPIVpqi6orutALA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "minutes",
+     "variations": {}
+    }
+   ]
+  },
+  "PhPVSOdXlMF6mLuFBvzyPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "hours",
+     "variations": {}
+    }
+   ]
+  },
+  "x1tyvdB8MRzLg+jGjhF7lw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "days",
+     "variations": {}
+    }
+   ]
+  },
+  "GRmeMnPIs2L9scxWCQN9bA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "weeks",
+     "variations": {}
+    }
+   ]
+  },
+  "Tt+m+eYxAX71R5GCKDCfnQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "DplwfsTWQva6fcImyucG4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after previous email",
+     "variations": {}
+    }
+   ]
+  },
+  "8qj6hVDu63zae7vwiTMqfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Confirm activation",
+     "variations": {}
+    }
+   ]
+  },
+  "FNnWXkrM7hA3vPBzG/OxUg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This task has been assigned to you",
+     "variations": {}
+    }
+   ]
+  },
   "TNg0g9/rqIBL5sU4Qx7Jtg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Choose a name for this task",
+     "variations": {}
+    }
+   ]
+  },
+  "RrL6CmQzt+DS6qUtN9B4rQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Open the project",
+     "variations": {}
+    }
+   ]
+  },
+  "dkh9670XE2tzpfITWmPKZg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Client assigned to task",
+     "variations": {}
+    }
+   ]
+  },
+  "I9kOFQ2aWdWtdEYILK6Q6g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Collaborator assigned to task",
      "variations": {}
     }
    ]
@@ -3591,32 +3891,12 @@
     }
    ]
   },
-  "PhPVSOdXlMF6mLuFBvzyPg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "hours",
-     "variations": {}
-    }
-   ]
-  },
   "UjPKEfcKm0iqOwG63Z/KeQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": " hour",
-     "variations": {}
-    }
-   ]
-  },
-  "x1tyvdB8MRzLg+jGjhF7lw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "days",
      "variations": {}
     }
    ]
@@ -3727,6 +4007,16 @@
    "translations": [
     {
      "translation": "Change time unit",
+     "variations": {}
+    }
+   ]
+  },
+  "2715v0MIrtV97ePELMOJzw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "d",
      "variations": {}
     }
    ]
@@ -4047,6 +4337,16 @@
    "translations": [
     {
      "translation": "Name of your assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "DtVyWNtCxnke96ZC9CBHwA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Assistant's language",
      "variations": {}
     }
    ]
@@ -5016,7 +5316,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Project in progress",
+     "translation": "Projects in progress",
      "variations": {}
     }
    ]

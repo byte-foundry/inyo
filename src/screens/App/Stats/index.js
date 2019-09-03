@@ -401,7 +401,11 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
-						<SubHeading>Temps gagné</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="Gained time">
+								Temps gagné
+							</fbt>
+						</SubHeading>
 						<Number>
 							{moment
 								.duration(
@@ -414,8 +418,21 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
-						<SubHeading>Tâche sans durée spécifié</SubHeading>
-						<Number>{} }</Number>
+						<SubHeading>
+							<fbt project="inyo" desc="estimated time">
+								Temps gagné
+							</fbt>
+						</SubHeading>
+						<Number>
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length * 15,
+									'minutes',
+								)
+								.format('h[h]mm[min]')}
+						</Number>
 					</Card>
 					<Card>
 						<SubHeading>

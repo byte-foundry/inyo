@@ -4,6 +4,7 @@
    "hashToText": {
     "c+lcFfPMwayO0O5SNqYW9w==": "Inviter un collaborateur"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 29,
    "col_beg": 5,
    "line_end": 31,
@@ -17,6 +18,7 @@
    "hashToText": {
     "Kk05koBmsDqaTTQVJCU3aw==": "L'email doit être valide"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 40,
    "col_beg": 8,
    "line_end": 45,
@@ -30,6 +32,7 @@
    "hashToText": {
     "XA7LD0ywIXskOmvYyTrrWw==": "Requis"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 48,
    "col_beg": 8,
    "line_end": 53,
@@ -43,6 +46,7 @@
    "hashToText": {
     "mnvxbQlOlB/Afe9kwyUkCg==": "Cette utilisateur n'est pas encore inscrit sur Inyo"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 77,
    "col_beg": 10,
    "line_end": 83,
@@ -56,6 +60,7 @@
    "hashToText": {
     "/kvuEOtMqSh/iULB4okW6Q==": "Cet utilisateur est déjà un de vos collaborateur ou une requête est déjà en cours."
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 93,
    "col_beg": 10,
    "line_end": 100,
@@ -69,6 +74,7 @@
    "hashToText": {
     "HaV1oGWQEHMlWZY+YJhCaQ==": "Une erreur s'est produite"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 107,
    "col_beg": 10,
    "line_end": 112,
@@ -82,6 +88,7 @@
    "hashToText": {
     "sAbSkE5NP4fqrLL3UdHfsA==": "Email du collaborateur"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 126,
    "col_beg": 9,
    "line_end": 131,
@@ -95,6 +102,7 @@
    "hashToText": {
     "D5BQpw+HPrLQbvb3mzK+cA==": "Inviter"
    },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
    "line_beg": 144,
    "col_beg": 9,
    "line_end": 149,
@@ -108,6 +116,7 @@
    "hashToText": {
     "yBdJv0+rNmZAgmToroR0LQ==": "Requis"
    },
+   "filepath": "src/components/AddressAutocomplete/index.js",
    "line_beg": 70,
    "col_beg": 7,
    "line_end": 72,
@@ -121,6 +130,7 @@
    "hashToText": {
     "i3dSHU/47fQIhYGWTaqpDA==": "Aucune option"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 202,
    "col_beg": 5,
    "line_end": 204,
@@ -134,6 +144,7 @@
    "hashToText": {
     "GB7LzwqHzSvCOtk0++uCyA==": "Aucune option"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 254,
    "col_beg": 5,
    "line_end": 259,
@@ -147,6 +158,7 @@
    "hashToText": {
     "5YXIwCOKaXxjfG2gjXkHgA==": "Tâches à faire"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 310,
    "col_beg": 4,
    "line_end": 312,
@@ -160,6 +172,7 @@
    "hashToText": {
     "bEAPRPQzUxZKgDEqti1LXg==": "Tâches faites"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 318,
    "col_beg": 4,
    "line_end": 320,
@@ -173,6 +186,7 @@
    "hashToText": {
     "PCB0T4qV3n3Tl30CCccaaQ==": "Toutes les tâches"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 326,
    "col_beg": 4,
    "line_end": 328,
@@ -186,6 +200,7 @@
    "hashToText": {
     "amGMYkThJoZPT3GCrqoXKw==": "Tous les clients"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 358,
    "col_beg": 5,
    "line_end": 360,
@@ -199,6 +214,7 @@
    "hashToText": {
     "P5PugsjucOg8HjCT1pLj2A==": "Tous les projets"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 371,
    "col_beg": 5,
    "line_end": 373,
@@ -212,6 +228,7 @@
    "hashToText": {
     "AqJMl0+P/pzfbxqbc9rd/A==": "Toutes les tâches"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 383,
    "col_beg": 6,
    "line_end": 385,
@@ -225,6 +242,7 @@
    "hashToText": {
     "GnXDLOI0hcNOgOYJFIxscQ==": "Chercher par tags"
    },
+   "filepath": "src/components/ArianneThread/index.js",
    "line_beg": 417,
    "col_beg": 5,
    "line_end": 419,
@@ -238,6 +256,7 @@
    "hashToText": {
     "a8kwylJwa+wa0lEvy1HvBw==": "Ajoutez les titres des documents et appuyez sur entrée"
    },
+   "filepath": "src/components/CheckList/index.js",
    "line_beg": 82,
    "col_beg": 7,
    "line_end": 88,
@@ -251,6 +270,7 @@
    "hashToText": {
     "a8kwylJwa+wa0lEvy1HvBw==": "Ajoutez les titres des documents et appuyez sur entrée"
    },
+   "filepath": "src/components/CheckList/index.js",
    "line_beg": 135,
    "col_beg": 7,
    "line_end": 141,
@@ -264,6 +284,7 @@
    "hashToText": {
     "9tizAmpj5IlSDHpumdi54w==": "Vous devez d'abord ajouter"
    },
+   "filepath": "src/components/CollaboratorDropdown/index.js",
    "line_beg": 140,
    "col_beg": 5,
    "line_end": 142,
@@ -277,6 +298,7 @@
    "hashToText": {
     "mjALk1C7sK+wlxgLusuBlg==": "un collaborateur au projet."
    },
+   "filepath": "src/components/CollaboratorDropdown/index.js",
    "line_beg": 144,
    "col_beg": 5,
    "line_end": 146,
@@ -290,6 +312,7 @@
    "hashToText": {
     "CBEk0tjxRg3kn3CsSs2gTA==": "Collaborateurs sur le projet {projectName}"
    },
+   "filepath": "src/components/CollaboratorModal/index.js",
    "line_beg": 96,
    "col_beg": 5,
    "line_end": 99,
@@ -303,6 +326,7 @@
    "hashToText": {
     "qx1GG8725BwZccTubShfmA==": "Filtrer par nom, email..."
    },
+   "filepath": "src/components/CollaboratorModal/index.js",
    "line_beg": 124,
    "col_beg": 11,
    "line_end": 129,
@@ -316,6 +340,7 @@
    "hashToText": {
     "Ku1n2y9WmL1lBgy6V/mNGA==": "Votre commentaire"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 107,
    "col_beg": 2,
    "line_end": 109,
@@ -329,6 +354,7 @@
    "hashToText": {
     "qY2JiUsK5dPxldd+wY2hwg==": "Écrire et envoyer un commentaire à votre client"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 114,
    "col_beg": 3,
    "line_end": 116,
@@ -342,6 +368,7 @@
    "hashToText": {
     "h9XywMaYUPXbmAMMxdTbQw==": "Écrire et envoyer un commentaire à votre prestataire"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 121,
    "col_beg": 3,
    "line_end": 123,
@@ -355,6 +382,7 @@
    "hashToText": {
     "/3uP7HTxJ/lHt7iNlgT3lQ==": "Une question ou une suggestion? Ajoutez un commentaire."
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 134,
    "col_beg": 6,
    "line_end": 137,
@@ -368,6 +396,7 @@
    "hashToText": {
     "SqtjllI4dc2YZbvJXjfkfQ==": "↓ Autres commentaires"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 149,
    "col_beg": 6,
    "line_end": 151,
@@ -381,6 +410,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 161,
    "col_beg": 6,
    "line_end": 163,
@@ -394,6 +424,7 @@
    "hashToText": {
     "H/doAMLoC9R3NO6NQmhd5Q==": "Une erreur s'est produite pendant la soumission du commentaire"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 188,
    "col_beg": 8,
    "line_end": 194,
@@ -407,6 +438,7 @@
    "hashToText": {
     "oxns+QSfjmP/31eed9WLlw==": "Les personnes liées à la tâche seront notifiées"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 208,
    "col_beg": 10,
    "line_end": 214,
@@ -420,6 +452,7 @@
    "hashToText": {
     "rh2V7ZeVauprF2x0tEMSvQ==": "Visible par les personnes liées au projet"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 231,
    "col_beg": 10,
    "line_end": 237,
@@ -433,6 +466,7 @@
    "hashToText": {
     "vctbu+1iQDAHeWXFel8aDw==": "Ajouter un commentaire"
    },
+   "filepath": "src/components/CommentList/index.js",
    "line_beg": 244,
    "col_beg": 10,
    "line_end": 249,
@@ -446,6 +480,7 @@
    "hashToText": {
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
+   "filepath": "src/components/ConfirmModal/index.js",
    "line_beg": 51,
    "col_beg": 6,
    "line_end": 53,
@@ -459,6 +494,7 @@
    "hashToText": {
     "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
    },
+   "filepath": "src/components/ConfirmModal/index.js",
    "line_beg": 56,
    "col_beg": 6,
    "line_end": 58,
@@ -472,6 +508,7 @@
    "hashToText": {
     "Yqfjo8yW61yd54vX0hbLDw==": "Créer un lien pour partager"
    },
+   "filepath": "src/components/CreateProjectLinkButton/index.js",
    "line_beg": 34,
    "col_beg": 4,
    "line_end": 36,
@@ -485,6 +522,7 @@
    "hashToText": {
     "Bd89ZCXvcu/9faxnpga7dg==": "Lien pour partager votre projet avec votre client"
    },
+   "filepath": "src/components/CreateProjectLinkButton/index.js",
    "line_beg": 45,
    "col_beg": 7,
    "line_end": 51,
@@ -498,6 +536,7 @@
    "hashToText": {
     "2USEdvsctPl5RFxIBfqqfQ==": "Fermer"
    },
+   "filepath": "src/components/CreateProjectLinkButton/index.js",
    "line_beg": 61,
    "col_beg": 8,
    "line_end": 66,
@@ -511,6 +550,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CreateProjectModal/index.js",
    "line_beg": 41,
    "col_beg": 5,
    "line_end": 43,
@@ -524,10 +564,11 @@
    "hashToText": {
     "vO2iC9t1o0c05l14ZCYjdA==": "Projet vierge"
    },
-   "line_beg": 123,
-   "col_beg": 10,
-   "line_end": 123,
-   "col_end": 70,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 124,
+   "col_beg": 4,
+   "line_end": 126,
+   "col_end": 10,
    "type": "text",
    "desc": "empty project",
    "project": "inyo",
@@ -537,10 +578,11 @@
    "hashToText": {
     "k2apqNGi2MbCKc/kVRLWMA==": "Vos projets"
    },
-   "line_beg": 127,
-   "col_beg": 10,
-   "line_end": 127,
-   "col_end": 68,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 132,
+   "col_beg": 4,
+   "line_end": 134,
+   "col_end": 10,
    "type": "text",
    "desc": "your projects",
    "project": "inyo",
@@ -550,10 +592,11 @@
    "hashToText": {
     "eht+qxxh8qLe293ArR18hQ==": "Nos modèles"
    },
-   "line_beg": 131,
-   "col_beg": 10,
-   "line_end": 131,
-   "col_end": 68,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 140,
+   "col_beg": 4,
+   "line_end": 142,
+   "col_end": 10,
    "type": "text",
    "desc": "our templates",
    "project": "inyo",
@@ -563,9 +606,10 @@
    "hashToText": {
     "esAlFRsJRyJYPdy1Etih2g==": "Titre du projet"
    },
-   "line_beg": 164,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 176,
    "col_beg": 6,
-   "line_end": 166,
+   "line_end": 178,
    "col_end": 12,
    "type": "text",
    "desc": "project name label",
@@ -576,9 +620,10 @@
    "hashToText": {
     "uR3RFRSyvsifyNkawiLp/A==": "Ex: Landing page nouvelle collection, etc."
    },
-   "line_beg": 169,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 181,
    "col_beg": 6,
-   "line_end": 171,
+   "line_end": 183,
    "col_end": 12,
    "type": "text",
    "desc": "new project name placeholder",
@@ -589,9 +634,10 @@
    "hashToText": {
     "gZ40VvEnPKdmyRSpiIDSJQ==": "Modèle"
    },
-   "line_beg": 182,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 194,
    "col_beg": 6,
-   "line_end": 184,
+   "line_end": 196,
    "col_end": 12,
    "type": "text",
    "desc": "template select",
@@ -602,9 +648,10 @@
    "hashToText": {
     "DO9+CF8YimXXP8yznO3s8g==": "Créer un nouveau client"
    },
-   "line_beg": 225,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 237,
    "col_beg": 8,
-   "line_end": 227,
+   "line_end": 239,
    "col_end": 14,
    "type": "text",
    "desc": "create a new client",
@@ -615,9 +662,10 @@
    "hashToText": {
     "k/uE34MBak4zE0Vv8cXJyQ==": "Client principal du projet"
    },
-   "line_beg": 235,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 247,
    "col_beg": 6,
-   "line_end": 237,
+   "line_end": 249,
    "col_end": 12,
    "type": "text",
    "desc": "main customer of the project",
@@ -628,9 +676,10 @@
    "hashToText": {
     "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
    },
-   "line_beg": 248,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 260,
    "col_beg": 8,
-   "line_end": 253,
+   "line_end": 265,
    "col_end": 14,
    "type": "text",
    "desc": "create project deadline",
@@ -641,9 +690,10 @@
    "hashToText": {
     "iPGKvsjHfnnJw/l7IwyApg==": "Aucune date limite"
    },
-   "line_beg": 263,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 275,
    "col_beg": 9,
-   "line_end": 265,
+   "line_end": 277,
    "col_end": 15,
    "type": "text",
    "desc": "no deadline",
@@ -654,9 +704,10 @@
    "hashToText": {
     "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
    },
-   "line_beg": 292,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 304,
    "col_beg": 5,
-   "line_end": 294,
+   "line_end": 306,
    "col_end": 11,
    "type": "text",
    "desc": "cancel create project",
@@ -667,9 +718,10 @@
    "hashToText": {
     "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
    },
-   "line_beg": 297,
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 309,
    "col_beg": 5,
-   "line_end": 299,
+   "line_end": 311,
    "col_end": 11,
    "type": "text",
    "desc": "confirm create project",
@@ -680,6 +732,7 @@
    "hashToText": {
     "J8Ln1i5WSWrMQQvGVaNDEA==": "Contenu du modèle"
    },
+   "filepath": "src/components/CreateProjectModalViewContent/index.js",
    "line_beg": 142,
    "col_beg": 4,
    "line_end": 144,
@@ -693,6 +746,7 @@
    "hashToText": {
     "cq/K4aFF4Ae4s8QbGAuZrw==": "Vous souhaitez créer une tâche attribuée au client qui nécessite d'activer les notifications par email à celui-ci."
    },
+   "filepath": "src/components/CreateTask/index.js",
    "line_beg": 138,
    "col_beg": 6,
    "line_end": 145,
@@ -706,6 +760,7 @@
    "hashToText": {
     "c3VHPe85E60l03JpI4/uPA==": "Souhaitez vous continuer et activer les notifications?"
    },
+   "filepath": "src/components/CreateTask/index.js",
    "line_beg": 148,
    "col_beg": 6,
    "line_end": 154,
@@ -719,6 +774,7 @@
    "hashToText": {
     "8644T2R+4scYGO0LpX3DQw==": "Présentation d'Inyo à votre client"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 84,
    "col_beg": 5,
    "line_end": 89,
@@ -732,6 +788,7 @@
    "hashToText": {
     "yRJfdDz1yU1Hmh6jMHqK0A==": "Vous venez de créer un client ! Voici un email prérédigé qui vous permettra de lui présenter inyo."
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 92,
    "col_beg": 5,
    "line_end": 95,
@@ -745,6 +802,7 @@
    "hashToText": {
     "DQeXAvwG7dJoYDdF7IN2HQ==": "Nous allons utiliser Inyo pour le suivi du projet {=[nom du projet]}"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 100,
    "col_beg": 7,
    "line_end": 109,
@@ -758,6 +816,7 @@
    "hashToText": {
     "aB5b9kvkppVMDoMtWkIZZw==": "[nom du projet]"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 106,
    "col_beg": 8,
    "line_end": 108,
@@ -771,6 +830,7 @@
    "hashToText": {
     "hHYW2oe78FnFa9Li2wIUXA==": "Bonjour {customer name} ,"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 116,
    "col_beg": 6,
    "line_end": 124,
@@ -784,6 +844,7 @@
    "hashToText": {
     "b7SBiQSY8WADC+OOtpqcXA==": "Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet {=[nom du projet]}"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 127,
    "col_beg": 6,
    "line_end": 131,
@@ -797,6 +858,7 @@
    "hashToText": {
     "Yz/hEevDIK59WUd+cWCUCQ==": "[nom du projet]"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 130,
    "col_beg": 7,
    "line_end": 130,
@@ -810,6 +872,7 @@
    "hashToText": {
     "MTHjHHmfiJTmyLA6Fd5Bpw==": "Vous allez prochainement recevoir des emails provenant {apos}{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet."
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 133,
    "col_beg": 6,
    "line_end": 164,
@@ -823,6 +886,7 @@
    "hashToText": {
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 141,
    "col_beg": 11,
    "line_end": 146,
@@ -836,6 +900,7 @@
    "hashToText": {
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 149,
    "col_beg": 11,
    "line_end": 154,
@@ -849,6 +914,7 @@
    "hashToText": {
     "qvosYuyXlERa6kcMFltOrg==": "Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire."
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 166,
    "col_beg": 6,
    "line_end": 172,
@@ -862,6 +928,7 @@
    "hashToText": {
     "/xJTSSeUxLgHBVVBf1yoAQ==": "Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents."
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 175,
    "col_beg": 6,
    "line_end": 180,
@@ -875,6 +942,7 @@
    "hashToText": {
     "FTUglGa5v8qzJfeHmSafGA==": "Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation."
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 183,
    "col_beg": 6,
    "line_end": 187,
@@ -888,6 +956,7 @@
    "hashToText": {
     "lGJBnl1neTaJOVzo5UyTpQ==": "Je reste à votre disposition si vous avez des questions."
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 190,
    "col_beg": 6,
    "line_end": 193,
@@ -901,6 +970,7 @@
    "hashToText": {
     "4dknal2HpNimLw2l4O6/+Q==": "{=[Votre signature]}"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 196,
    "col_beg": 6,
    "line_end": 198,
@@ -914,6 +984,7 @@
    "hashToText": {
     "P9tRkqcJzVR2yfHAPd134w==": "[Votre signature]"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 197,
    "col_beg": 7,
    "line_end": 197,
@@ -927,6 +998,7 @@
    "hashToText": {
     "Wq1J1rqeLZIS29/C7g/O5A==": "Email copié!"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 236,
    "col_beg": 7,
    "line_end": 238,
@@ -940,6 +1012,7 @@
    "hashToText": {
     "m2dOC+HIcDUb1qW5ykqnsw==": "Copier l'email"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 240,
    "col_beg": 7,
    "line_end": 242,
@@ -953,6 +1026,7 @@
    "hashToText": {
     "LLzgzmTd4HAlWFZX9KcqxQ==": "Fermer"
    },
+   "filepath": "src/components/CustomerIntroMail/index.js",
    "line_beg": 246,
    "col_beg": 6,
    "line_end": 248,
@@ -966,6 +1040,7 @@
    "hashToText": {
     "uH7UR393QOWWV8YhLbgE0w==": "Ou créer un nouveau client"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 107,
    "col_beg": 2,
    "line_end": 109,
@@ -979,6 +1054,7 @@
    "hashToText": {
     "XL3V5He7KnUZ4oZ2pJtLhQ==": "Éditer un client"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 114,
    "col_beg": 3,
    "line_end": 116,
@@ -992,6 +1068,7 @@
    "hashToText": {
     "8cT5/Uh4WErOpyI3wS/28w==": "Créer un nouveau client"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 121,
    "col_beg": 3,
    "line_end": 123,
@@ -1005,6 +1082,7 @@
    "hashToText": {
     "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 132,
    "col_beg": 6,
    "line_end": 134,
@@ -1018,6 +1096,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 161,
    "col_beg": 9,
    "line_end": 163,
@@ -1031,6 +1110,7 @@
    "hashToText": {
     "/QURQjp/ePc9rqZ9ZcWJGQ==": "Email invalide"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 170,
    "col_beg": 10,
    "line_end": 175,
@@ -1044,6 +1124,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 178,
    "col_beg": 10,
    "line_end": 180,
@@ -1057,6 +1138,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 193,
    "col_beg": 10,
    "line_end": 195,
@@ -1070,6 +1152,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 198,
    "col_beg": 10,
    "line_end": 200,
@@ -1083,6 +1166,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 203,
    "col_beg": 10,
    "line_end": 205,
@@ -1096,6 +1180,7 @@
    "hashToText": {
     "g36loioX2hVHJrE3snRFTw==": "Choisir un client existant"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 278,
    "col_beg": 11,
    "line_end": 283,
@@ -1109,6 +1194,7 @@
    "hashToText": {
     "89l2cu2TsJ35DhW7HUwuqg==": "Tous les clients"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 289,
    "col_beg": 12,
    "line_end": 294,
@@ -1122,6 +1208,7 @@
    "hashToText": {
     "clchauJp4nlBJ+jKLlvbOQ==": "Nom de l'entreprise"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 311,
    "col_beg": 13,
    "line_end": 316,
@@ -1135,6 +1222,7 @@
    "hashToText": {
     "rSSycaApkSaVv6JTqTXF2Q==": "M."
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 331,
    "col_beg": 15,
    "line_end": 336,
@@ -1148,6 +1236,7 @@
    "hashToText": {
     "NlzsArLWsW/HBDujtxGGdg==": "Mme"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 342,
    "col_beg": 15,
    "line_end": 347,
@@ -1161,6 +1250,7 @@
    "hashToText": {
     "EUkozX96p1/2s0oRey22NA==": "Le prénom de votre contact"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 357,
    "col_beg": 13,
    "line_end": 363,
@@ -1174,6 +1264,7 @@
    "hashToText": {
     "vzYCdi+fgwl6vVAd5ajgvA==": "Le nom de votre contact"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 372,
    "col_beg": 13,
    "line_end": 377,
@@ -1187,6 +1278,7 @@
    "hashToText": {
     "R0ugF4YhG+KImuzC1UncBw==": "Son email"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 386,
    "col_beg": 13,
    "line_end": 391,
@@ -1200,6 +1292,7 @@
    "hashToText": {
     "VwFvdWoENPEFQI1N3r5RAA==": "Son numéro de téléphone"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 401,
    "col_beg": 13,
    "line_end": 406,
@@ -1213,6 +1306,7 @@
    "hashToText": {
     "yyNpnNGNRgi/0EDm6hj5tQ==": "Son poste"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 415,
    "col_beg": 13,
    "line_end": 420,
@@ -1226,6 +1320,7 @@
    "hashToText": {
     "oMCo1MqBUHsRddRHGuosxQ==": "Notes"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 427,
    "col_beg": 12,
    "line_end": 432,
@@ -1239,6 +1334,7 @@
    "hashToText": {
     "1A8O0AybMXlInVad9zYpHg==": "Notes personnelles à propos de ce client..."
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 459,
    "col_beg": 14,
    "line_end": 466,
@@ -1252,6 +1348,7 @@
    "hashToText": {
     "zXX+TVzO/0BzAWt8jrX28A==": "Enlever le client"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 492,
    "col_beg": 11,
    "line_end": 497,
@@ -1265,6 +1362,7 @@
    "hashToText": {
     "F4JH4MOdAD+MMwtvo9+iNQ==": "Valider"
    },
+   "filepath": "src/components/CustomerModal/index.js",
    "line_beg": 505,
    "col_beg": 10,
    "line_end": 510,
@@ -1278,6 +1376,7 @@
    "hashToText": {
     "W8joBAIjwZ3uQ8ZWo39feQ==": "Créer un nouveau client"
    },
+   "filepath": "src/components/CustomersDropdown/index.js",
    "line_beg": 25,
    "col_beg": 4,
    "line_end": 30,
@@ -1291,9 +1390,10 @@
    "hashToText": {
     "ceUjjAB1oCqg2miah11W9A==": "Cliquer pour voir le contenu de la tâche"
    },
-   "line_beg": 337,
+   "filepath": "src/components/CustomerTaskRow/index.js",
+   "line_beg": 346,
    "col_beg": 7,
-   "line_end": 339,
+   "line_end": 348,
    "col_end": 13,
    "type": "text",
    "desc": "open task tooltip",
@@ -1304,9 +1404,10 @@
    "hashToText": {
     "GUyjBOX+sqBysdoNstGXPg==": "Choisir un titre pour cette tâche"
    },
-   "line_beg": 364,
+   "filepath": "src/components/CustomerTaskRow/index.js",
+   "line_beg": 373,
    "col_beg": 9,
-   "line_end": 369,
+   "line_end": 378,
    "col_end": 15,
    "type": "text",
    "desc": "no title task placeholder",
@@ -1317,9 +1418,10 @@
    "hashToText": {
     "k/+uIjjL0YApJFLLp5Cqbg==": "Description, détails, commentaires, etc."
    },
-   "line_beg": 375,
+   "filepath": "src/components/CustomerTaskRow/index.js",
+   "line_beg": 384,
    "col_beg": 10,
-   "line_end": 381,
+   "line_end": 390,
    "col_end": 16,
    "type": "text",
    "desc": "open task button tooltip",
@@ -1330,9 +1432,10 @@
    "hashToText": {
     "ZP1cZY0RsQMSlzX5EECysA==": "Ouvrir"
    },
-   "line_beg": 392,
+   "filepath": "src/components/CustomerTaskRow/index.js",
+   "line_beg": 401,
    "col_beg": 10,
-   "line_end": 397,
+   "line_end": 406,
    "col_end": 16,
    "type": "text",
    "desc": "open task button label",
@@ -1343,9 +1446,10 @@
    "hashToText": {
     "kxWgCWlS7cY80/RG/n2JtQ==": "Ajouter à ma journée"
    },
-   "line_beg": 413,
+   "filepath": "src/components/CustomerTaskRow/index.js",
+   "line_beg": 422,
    "col_beg": 10,
-   "line_end": 418,
+   "line_end": 427,
    "col_end": 16,
    "type": "text",
    "desc": "add task to today button label",
@@ -1357,6 +1461,7 @@
     "GDM45j0r2I8JAnfxgDJ/ww==": "Cela vous laisse {days of margin} jours pour commencer cette tâche",
     "qTIpZJlXjqo9ckH7FjtOGg==": "Cela vous laisse 1 jour pour commencer cette tâche"
    },
+   "filepath": "src/components/DateInput/index.js",
    "line_beg": 82,
    "col_beg": 6,
    "line_end": 96,
@@ -1382,6 +1487,7 @@
    "hashToText": {
     "8+x9QRzX3/lHvy27gf11Ew==": "De"
    },
+   "filepath": "src/components/EmailExample/index.js",
    "line_beg": 28,
    "col_beg": 5,
    "line_end": 30,
@@ -1395,6 +1501,7 @@
    "hashToText": {
     "WCg3QBVQYanqIXS5KYcnqg==": "À"
    },
+   "filepath": "src/components/EmailExample/index.js",
    "line_beg": 36,
    "col_beg": 5,
    "line_end": 38,
@@ -1408,6 +1515,7 @@
    "hashToText": {
     "BZG0ddMl6DD00Gk4RpydtA==": "Sujet"
    },
+   "filepath": "src/components/EmailExample/index.js",
    "line_beg": 44,
    "col_beg": 5,
    "line_end": 46,
@@ -1421,6 +1529,7 @@
    "hashToText": {
     "GhD8nv8COzRInX96Yf8TvA==": "Instructions pour utiliser l'interface"
    },
+   "filepath": "src/components/HelpButton/index.js",
    "line_beg": 47,
    "col_beg": 5,
    "line_end": 49,
@@ -1434,6 +1543,7 @@
    "hashToText": {
     "Z1S9aCtsVDvT1V72xU32aw==": "Aide"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 18,
    "col_beg": 4,
    "line_end": 20,
@@ -1447,6 +1557,7 @@
    "hashToText": {
     "zjKt6Z/8ViNt1KglUM8z7Q==": "Voici quelques liens pour vous aider à utiliser Inyo."
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 23,
    "col_beg": 4,
    "line_end": 25,
@@ -1460,6 +1571,7 @@
    "hashToText": {
     "aotCRpuYFXMbvylBtbOh7A==": "Voir la vidéo de présentation"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 39,
    "col_beg": 7,
    "line_end": 41,
@@ -1473,6 +1585,7 @@
    "hashToText": {
     "zgC9eGZjOBBo3eHbAgC37w==": "Créer une nouvelle tâche"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 54,
    "col_beg": 7,
    "line_end": 59,
@@ -1486,6 +1599,7 @@
    "hashToText": {
     "qCWteMVThArPuiSDLJhDbQ==": "Créer un nouveau client"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 72,
    "col_beg": 7,
    "line_end": 77,
@@ -1499,6 +1613,7 @@
    "hashToText": {
     "bQDf7mCwoaWaeOYRKa0x2g==": "Créer un nouveau projet"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 90,
    "col_beg": 7,
    "line_end": 95,
@@ -1512,6 +1627,7 @@
    "hashToText": {
     "Xwu7G8DMFfF7mgkY+OhaVA==": "Utiliser un modèle de projet"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 108,
    "col_beg": 7,
    "line_end": 113,
@@ -1525,6 +1641,7 @@
    "hashToText": {
     "oZT0Gv5Lwo18objHRm30nQ==": "Voir ce que voit le client"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 126,
    "col_beg": 7,
    "line_end": 131,
@@ -1538,6 +1655,7 @@
    "hashToText": {
     "H0aue5s+hJE+zx+UweGnFQ==": "Présenter Inyo à votre client"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 147,
    "col_beg": 7,
    "line_end": 152,
@@ -1551,6 +1669,7 @@
    "hashToText": {
     "nJXdBPESFZpgEaLqquBuGA==": "Une information est manquante? Contactez-nous via la messagerie en bas à droite, ou proposez des fonctionnalités sur {=notre roadmap collaborative.}"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 158,
    "col_beg": 4,
    "line_end": 168,
@@ -1564,6 +1683,7 @@
    "hashToText": {
     "ppJv43cOEgEEDleIQ+ouBQ==": "notre roadmap collaborative."
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 162,
    "col_beg": 5,
    "line_end": 167,
@@ -1577,6 +1697,7 @@
    "hashToText": {
     "9oXQI3qbIizBeaqnxlooSQ==": "J'ai compris!"
    },
+   "filepath": "src/components/HelpModal/index.js",
    "line_beg": 172,
    "col_beg": 5,
    "line_end": 174,
@@ -1590,6 +1711,7 @@
    "hashToText": {
     "Aw7c13n1qyBFVCJRP4+ZAw==": "Type et titre de la tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 346,
    "col_beg": 6,
    "line_end": 348,
@@ -1603,6 +1725,7 @@
    "hashToText": {
     "JhxU3feEsDnVk/NaRsH5bQ==": "Nommez cette tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 365,
    "col_beg": 8,
    "line_end": 370,
@@ -1616,6 +1739,7 @@
    "hashToText": {
     "n2nEPSXW8r/mJCL++eK6XA==": "Temps estimé pour cette tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 393,
    "col_beg": 8,
    "line_end": 398,
@@ -1629,6 +1753,7 @@
    "hashToText": {
     "PZk9D95cJdaKYixeW4cp0w==": "Temps estimé"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 404,
    "col_beg": 9,
    "line_end": 409,
@@ -1643,6 +1768,7 @@
     "si/vrssaZZ8obVRLlu/LGQ==": "{timeEstimated}jours",
     "RcD6Kl3RIbKdSaK2IEulLQ==": "{timeEstimated} jour"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 451,
    "col_beg": 11,
    "line_end": 465,
@@ -1664,6 +1790,7 @@
    "hashToText": {
     "RZ7sYwiQT57dr8nfhuD+ww==": "Temps passé pour cette tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 474,
    "col_beg": 8,
    "line_end": 479,
@@ -1677,6 +1804,7 @@
    "hashToText": {
     "7Lnr7BpFnIeCy3zXln3JWw==": "Temps passé"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 485,
    "col_beg": 9,
    "line_end": 490,
@@ -1691,6 +1819,7 @@
     "u7YTd2C7Ml3qkgMAgNDiHQ==": "{timeItTook}jours",
     "fkVXVBffc7QKksvh/IQ26w==": "{timeItTook} jour"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 526,
    "col_beg": 11,
    "line_end": 540,
@@ -1712,6 +1841,7 @@
    "hashToText": {
     "ew4YOAKY1eedm0Xk5R444A==": "Personne liée à cette tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 550,
    "col_beg": 7,
    "line_end": 555,
@@ -1725,6 +1855,7 @@
    "hashToText": {
     "vRZY5zcFhPD/Le3J1JJKiw==": "Client"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 561,
    "col_beg": 8,
    "line_end": 566,
@@ -1738,6 +1869,7 @@
    "hashToText": {
     "HLV6gRDo4cU1fnr1mVGuig==": "Date limite pour réaliser cette tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 631,
    "col_beg": 7,
    "line_end": 636,
@@ -1751,6 +1883,7 @@
    "hashToText": {
     "9WiJli6bYRZdd9b3WFN4sw==": "Temps restant"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 642,
    "col_beg": 8,
    "line_end": 647,
@@ -1764,6 +1897,7 @@
    "hashToText": {
     "X2kd6IYQLbQF5T0J4EmDVg==": "Projet lié à cette tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 713,
    "col_beg": 6,
    "line_end": 715,
@@ -1777,6 +1911,7 @@
    "hashToText": {
     "gSUvt41Meg58qA7ieTm91w==": "Projet"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 721,
    "col_beg": 7,
    "line_end": 723,
@@ -1790,6 +1925,7 @@
    "hashToText": {
     "4uWwWAEkjeee+uOwaU7O7Q==": "Définit s'il y a des actions automatiques"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 767,
    "col_beg": 6,
    "line_end": 769,
@@ -1803,6 +1939,7 @@
    "hashToText": {
     "WlT9SCoRXpZo1WsKLdRoNA==": "Type de tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 775,
    "col_beg": 7,
    "line_end": 777,
@@ -1816,6 +1953,7 @@
    "hashToText": {
     "6F6qiWW3cYSOf+pclVSw7g==": "Tag de la tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 785,
    "col_beg": 7,
    "line_end": 787,
@@ -1829,6 +1967,7 @@
    "hashToText": {
     "3Dfj3RxIOd3jiFRkj5VOfQ==": "Ajouter ou créer un tag"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 797,
    "col_beg": 9,
    "line_end": 802,
@@ -1842,6 +1981,7 @@
    "hashToText": {
     "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 854,
    "col_beg": 8,
    "line_end": 856,
@@ -1855,6 +1995,7 @@
    "hashToText": {
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 889,
    "col_beg": 7,
    "line_end": 915,
@@ -1868,6 +2009,7 @@
    "hashToText": {
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 895,
    "col_beg": 11,
    "line_end": 900,
@@ -1881,6 +2023,7 @@
    "hashToText": {
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 903,
    "col_beg": 11,
    "line_end": 908,
@@ -1894,6 +2037,7 @@
    "hashToText": {
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 967,
    "col_beg": 4,
    "line_end": 969,
@@ -1907,6 +2051,7 @@
    "hashToText": {
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 1059,
    "col_beg": 4,
    "line_end": 1061,
@@ -1920,6 +2065,7 @@
    "hashToText": {
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 1079,
    "col_beg": 9,
    "line_end": 1081,
@@ -1933,6 +2079,7 @@
    "hashToText": {
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 1091,
    "col_beg": 9,
    "line_end": 1093,
@@ -1946,6 +2093,7 @@
    "hashToText": {
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 1103,
    "col_beg": 9,
    "line_end": 1105,
@@ -1959,6 +2107,7 @@
    "hashToText": {
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
+   "filepath": "src/components/ItemView/index.js",
    "line_beg": 1121,
    "col_beg": 6,
    "line_end": 1123,
@@ -1972,6 +2121,7 @@
    "hashToText": {
     "g42vvqqGi7CcjAIwPUjXqg==": "Personne assigné a la tâche"
    },
+   "filepath": "src/components/ItemViewAssigneeInput/index.js",
    "line_beg": 43,
    "col_beg": 5,
    "line_end": 45,
@@ -1985,6 +2135,7 @@
    "hashToText": {
     "a6k0XUl4YErALp3Dib3LZg==": "Assigné à"
    },
+   "filepath": "src/components/ItemViewAssigneeInput/index.js",
    "line_beg": 51,
    "col_beg": 6,
    "line_end": 56,
@@ -1998,6 +2149,7 @@
    "hashToText": {
     "xy6wkmuEBOfpG12vqkZlxg==": "L'email n'est pas valide"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 43,
    "col_beg": 7,
    "line_end": 45,
@@ -2011,6 +2163,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 48,
    "col_beg": 7,
    "line_end": 50,
@@ -2024,6 +2177,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 53,
    "col_beg": 6,
    "line_end": 55,
@@ -2037,6 +2191,7 @@
    "hashToText": {
     "rtI44XiXVDB64ScOGNpfkg==": "Mauvais email ou mot de passe"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 86,
    "col_beg": 8,
    "line_end": 91,
@@ -2050,6 +2205,7 @@
    "hashToText": {
     "JKX7eCssqo7wpJJNeg8a7g==": "Adresse email"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 107,
    "col_beg": 9,
    "line_end": 112,
@@ -2063,6 +2219,7 @@
    "hashToText": {
     "yhmFk/aBwGP4frNYdx2DAA==": "jean@dupont.fr"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 115,
    "col_beg": 9,
    "line_end": 120,
@@ -2076,6 +2233,7 @@
    "hashToText": {
     "bTEhOPQde8XSp0mJ3esu0g==": "Mot de passe"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 130,
    "col_beg": 9,
    "line_end": 135,
@@ -2089,6 +2247,7 @@
    "hashToText": {
     "k4sROnrZJPT+KaahRRfDAw==": "Mot de passe oublié ?"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 143,
    "col_beg": 9,
    "line_end": 148,
@@ -2102,6 +2261,7 @@
    "hashToText": {
     "bLtR1W4+wtlehXcJMp3SjQ==": "Se connecter"
    },
+   "filepath": "src/components/LoginForm/index.js",
    "line_beg": 161,
    "col_beg": 8,
    "line_end": 166,
@@ -2115,6 +2275,7 @@
    "hashToText": {
     "SJ1uY2Np2PHq0zcGonbL2A==": "Comment travaillez-vous ?"
    },
+   "filepath": "src/components/ModalWithHoursAndDays/index.js",
    "line_beg": 23,
    "col_beg": 6,
    "line_end": 28,
@@ -2128,6 +2289,7 @@
    "hashToText": {
     "LTMb6aDgFaePsAU0YLJ7aw==": "Nous avons besoin de ces informations pour vous envoyer des emails au bon moment, en cohérence avec vos journées de travail."
    },
+   "filepath": "src/components/ModalWithHoursAndDays/index.js",
    "line_beg": 33,
    "col_beg": 6,
    "line_end": 40,
@@ -2141,6 +2303,7 @@
    "hashToText": {
     "FpcLLvZekZ0mMbObsPV7CQ==": "a commenté la tâche"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 94,
    "col_beg": 3,
    "line_end": 96,
@@ -2154,6 +2317,7 @@
    "hashToText": {
     "GgJM4EY/QordX9pchDp0tw==": "a consulté le projet"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 102,
    "col_beg": 3,
    "line_end": 104,
@@ -2167,6 +2331,7 @@
    "hashToText": {
     "+TSsouyNnpOuotBby5ZXPg==": "a ajouté un nouveau document sur la tâche"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 110,
    "col_beg": 3,
    "line_end": 115,
@@ -2180,6 +2345,7 @@
    "hashToText": {
     "ZNDtqOQeGjKx3QtGvXEdDA==": "a validé la tâche"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 121,
    "col_beg": 3,
    "line_end": 123,
@@ -2193,6 +2359,7 @@
    "hashToText": {
     "BWRxbAxOYcelgP37U3CIzg==": "vous a assigné à la tâche"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 129,
    "col_beg": 3,
    "line_end": 134,
@@ -2206,6 +2373,7 @@
    "hashToText": {
     "w8/beP4+rOLbIjTxAKvxtg==": "vous a retiré la tâche"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 140,
    "col_beg": 3,
    "line_end": 145,
@@ -2219,6 +2387,7 @@
    "hashToText": {
     "gt19H3XilCm3PgNwieVZGw==": "a accepté la collaboration"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 151,
    "col_beg": 3,
    "line_end": 153,
@@ -2232,6 +2401,7 @@
    "hashToText": {
     "4RIQiXhEoAvj7h3xjsg+gg==": "{collabFullName} vous a invité à collaborer"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 193,
    "col_beg": 4,
    "line_end": 198,
@@ -2245,6 +2415,7 @@
    "hashToText": {
     "hVdfqluxJics5siW+Rw2+g==": "Accepter"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 213,
    "col_beg": 7,
    "line_end": 215,
@@ -2258,6 +2429,7 @@
    "hashToText": {
     "s+0tlgcA9Df2YHz/y760pQ==": "Rejeter"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 232,
    "col_beg": 7,
    "line_end": 234,
@@ -2271,6 +2443,7 @@
    "hashToText": {
     "jemQX+JlzruXJ4cGtR3+7g==": "Vous avez accepté la requête de collaboration de {collaboratorFullName}"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 244,
    "col_beg": 4,
    "line_end": 249,
@@ -2284,6 +2457,7 @@
    "hashToText": {
     "2EK9Ky8XhfFM0jYpn1U2NQ==": "Vous avez rejeté la requête de collaboration de {collaboratorFullName}"
    },
+   "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 256,
    "col_beg": 4,
    "line_end": 261,
@@ -2297,6 +2471,7 @@
    "hashToText": {
     "s7Am8IKTQ0RWV1ZfuKTA1w==": "Notifications liées à vos clients"
    },
+   "filepath": "src/components/NotificationTrayButton/index.js",
    "line_beg": 176,
    "col_beg": 5,
    "line_end": 178,
@@ -2310,6 +2485,7 @@
    "hashToText": {
     "k5OwMZDKZ01FmGLqqBOdAQ==": "Tout marquer comme lu"
    },
+   "filepath": "src/components/NotificationTrayButton/index.js",
    "line_beg": 222,
    "col_beg": 7,
    "line_end": 224,
@@ -2323,6 +2499,7 @@
    "hashToText": {
     "cTKVM7yUdcTOW1xZeBceRA==": "Aucune notification."
    },
+   "filepath": "src/components/NotificationTrayButton/index.js",
    "line_beg": 239,
    "col_beg": 9,
    "line_end": 244,
@@ -2336,6 +2513,7 @@
    "hashToText": {
     "mlcI2UUdu+fEUNon6P7YXg==": "Comment souhaitez-vous appeler"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 57,
    "col_beg": 4,
    "line_end": 59,
@@ -2349,6 +2527,7 @@
    "hashToText": {
     "8X+nL459rFe1K+J2Q0Rqnw==": "votre assistant·e ?"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 61,
    "col_beg": 4,
    "line_end": 63,
@@ -2362,6 +2541,7 @@
    "hashToText": {
     "Lk4ElWr+K3ycF+uTrMRxKg==": "Lorsque nous notifierons vos clients d'une tâche à réaliser, d'un commentaire, etc. ce sera le prénom utilisé pour signer les emails."
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 69,
    "col_beg": 4,
    "line_end": 73,
@@ -2375,6 +2555,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 83,
    "col_beg": 6,
    "line_end": 85,
@@ -2388,6 +2569,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 90,
    "col_beg": 7,
    "line_end": 92,
@@ -2401,6 +2583,7 @@
    "hashToText": {
     "/b0GyyL8jbI4DbZyEUBRsQ==": "Langue de l'assistant"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 133,
    "col_beg": 8,
    "line_end": 135,
@@ -2414,6 +2597,7 @@
    "hashToText": {
     "9hB6zPcFdo5ckVQDLtJJ8Q==": "Valider"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 149,
    "col_beg": 7,
    "line_end": 154,
@@ -2427,6 +2611,7 @@
    "hashToText": {
     "k/Gjsa4x8ssgvn3ax7zvWQ==": "Retour"
    },
+   "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 163,
    "col_beg": 5,
    "line_end": 165,
@@ -2440,6 +2625,7 @@
    "hashToText": {
     "RebJYGeN66oFsddPmWZ+UQ==": "Nous avons besoin de quelques informations pour nous aider à travailler pour vous."
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 89,
    "col_beg": 5,
    "line_end": 92,
@@ -2453,6 +2639,7 @@
    "hashToText": {
     "nrujg7Lf3b8K6u3FCOqaaQ==": "Quelque chose s'est mal passé"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 159,
    "col_beg": 11,
    "line_end": 164,
@@ -2466,6 +2653,7 @@
    "hashToText": {
     "529vNRKMPnX6AkWCX2g28g==": "Définissez vos horaires de travail"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 186,
    "col_beg": 11,
    "line_end": 192,
@@ -2479,6 +2667,7 @@
    "hashToText": {
     "9S0hQgBZJTb/A5Xtj7ZQDg==": "(cela nous aide à organiser les tâches que vous pouvez effectuer dans une journée)"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 194,
    "col_beg": 11,
    "line_end": 201,
@@ -2492,6 +2681,7 @@
    "hashToText": {
     "RNCvB1ldoXUQYB1gXIW4Jg==": "matin"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 217,
    "col_beg": 13,
    "line_end": 222,
@@ -2505,6 +2695,7 @@
    "hashToText": {
     "e5dRoxBZ1DCDsMniI4yxIQ==": "petit déjeuner"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 230,
    "col_beg": 13,
    "line_end": 235,
@@ -2518,6 +2709,7 @@
    "hashToText": {
     "f880Q3eyevRZTYnpdyeB7g==": "déjeuner"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 243,
    "col_beg": 13,
    "line_end": 248,
@@ -2531,6 +2723,7 @@
    "hashToText": {
     "lbWLZARSw5Aey/zDn9mRUw==": "soirée"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 256,
    "col_beg": 13,
    "line_end": 261,
@@ -2544,6 +2737,7 @@
    "hashToText": {
     "3DEfsU/Xps0QY+zjLvsQYw==": "nuit"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 269,
    "col_beg": 13,
    "line_end": 274,
@@ -2557,6 +2751,7 @@
    "hashToText": {
     "xw9pS/o234ZUM46YXHvioQ==": "Définissez vos jours travaillés"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 281,
    "col_beg": 11,
    "line_end": 286,
@@ -2570,6 +2765,7 @@
    "hashToText": {
     "buFkcUlMOkhiUZMajO+4Ww==": "(Pour vous aider à ne pas être débordé et ne jamais manquer une deadline)"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 288,
    "col_beg": 11,
    "line_end": 295,
@@ -2583,6 +2779,7 @@
    "hashToText": {
     "scR/NIF5guL2ddzFGIy1Yg==": "Continuer"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 307,
    "col_beg": 12,
    "line_end": 312,
@@ -2596,6 +2793,7 @@
    "hashToText": {
     "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
    },
+   "filepath": "src/components/Onboarding/onboarding-first-step.js",
    "line_beg": 323,
    "col_beg": 13,
    "line_end": 328,
@@ -2609,6 +2807,7 @@
    "hashToText": {
     "71Ok3J3hqlKSXq92DhLhnA==": "Jongler entre plusieurs canaux de communications (Slack, emails, etc.)"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 92,
    "col_beg": 3,
    "line_end": 95,
@@ -2622,6 +2821,7 @@
    "hashToText": {
     "TBi3rStgXXXujN+iH1DDyQ==": "Estimer correctement le temps et les tâches en amont du projet"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 96,
    "col_beg": 3,
    "line_end": 98,
@@ -2635,6 +2835,7 @@
    "hashToText": {
     "/rSj1XkECqRd0ON6VZjmqw==": "Organiser et respecter mon programme de temps de travail"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 99,
    "col_beg": 3,
    "line_end": 101,
@@ -2648,6 +2849,7 @@
    "hashToText": {
     "lhOe8DhOe6Tbl9YfVpr00A==": "Relancer mes clients pour obtenir des validations"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 102,
    "col_beg": 3,
    "line_end": 104,
@@ -2661,6 +2863,7 @@
    "hashToText": {
     "hdjeCSmSL8zaiME/mBgdmw==": "Qu'est-ce qui vous ennuie le plus au quotidien ?"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 110,
    "col_beg": 5,
    "line_end": 112,
@@ -2674,6 +2877,7 @@
    "hashToText": {
     "rBXWE+Cu3qldiigMAL433g==": "Vous pouvez choisir plusieurs options"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 115,
    "col_beg": 5,
    "line_end": 120,
@@ -2687,6 +2891,7 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 136,
    "col_beg": 12,
    "line_end": 141,
@@ -2700,6 +2905,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 147,
    "col_beg": 10,
    "line_end": 149,
@@ -2713,6 +2919,7 @@
    "hashToText": {
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 178,
    "col_beg": 11,
    "line_end": 183,
@@ -2726,6 +2933,7 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 223,
    "col_beg": 15,
    "line_end": 228,
@@ -2739,6 +2947,7 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 234,
    "col_beg": 14,
    "line_end": 239,
@@ -2752,6 +2961,7 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 244,
    "col_beg": 12,
    "line_end": 249,
@@ -2765,6 +2975,7 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 254,
    "col_beg": 14,
    "line_end": 259,
@@ -2778,6 +2989,7 @@
    "hashToText": {
     "jqDgd6R8Prk5GZzYWj9ovw==": "Donnez nous un exemple :)"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 264,
    "col_beg": 14,
    "line_end": 270,
@@ -2791,6 +3003,7 @@
    "hashToText": {
     "tLc08MxFJ43xexn8smLDTg==": "Continuer"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 290,
    "col_beg": 12,
    "line_end": 295,
@@ -2804,6 +3017,7 @@
    "hashToText": {
     "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
    },
+   "filepath": "src/components/Onboarding/onboarding-second-step.js",
    "line_beg": 306,
    "col_beg": 13,
    "line_end": 311,
@@ -2817,6 +3031,7 @@
    "hashToText": {
     "bDRYEB9iupBuFDH0uql8Qg==": "Dernière question !"
    },
+   "filepath": "src/components/Onboarding/onboarding-third-step.js",
    "line_beg": 85,
    "col_beg": 4,
    "line_end": 87,
@@ -2830,6 +3045,7 @@
    "hashToText": {
     "J2ovXvgFpq+ptqVFj3NH5A==": "Auriez-vous quelques minutes pour nous aider à transformer Inyo en l'application de vos rêves?"
    },
+   "filepath": "src/components/Onboarding/onboarding-third-step.js",
    "line_beg": 91,
    "col_beg": 4,
    "line_end": 94,
@@ -2843,6 +3059,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/Onboarding/onboarding-third-step.js",
    "line_beg": 106,
    "col_beg": 7,
    "line_end": 108,
@@ -2856,6 +3073,7 @@
    "hashToText": {
     "ZX0vrDdnTBF/oL6bhHe8dg==": "Merci! Renseignez svp votre numéro de téléphone"
    },
+   "filepath": "src/components/Onboarding/onboarding-third-step.js",
    "line_beg": 175,
    "col_beg": 10,
    "line_end": 181,
@@ -2869,6 +3087,7 @@
    "hashToText": {
     "lC5QKGL863oLEdhXp1VBXQ==": "Continuer"
    },
+   "filepath": "src/components/Onboarding/onboarding-third-step.js",
    "line_beg": 201,
    "col_beg": 9,
    "line_end": 206,
@@ -2882,6 +3101,7 @@
    "hashToText": {
     "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
    },
+   "filepath": "src/components/Onboarding/onboarding-third-step.js",
    "line_beg": 217,
    "col_beg": 10,
    "line_end": 219,
@@ -2896,6 +3116,7 @@
     "4tuQOsl4Nmc5QSLJQsp94A==": "Temps réellement passés à définir",
     "sR4tCtkNW24ERtckPrlU5A==": "Temps réellement passé à définir"
    },
+   "filepath": "src/components/PendingActionsTray/index.js",
    "line_beg": 125,
    "col_beg": 6,
    "line_end": 135,
@@ -2917,6 +3138,7 @@
    "hashToText": {
     "La92eOmOY28S7xDx7INOJg==": "Valider le temps passé pour cette tâche"
    },
+   "filepath": "src/components/PendingActionsTray/index.js",
    "line_beg": 150,
    "col_beg": 9,
    "line_end": 155,
@@ -2930,6 +3152,7 @@
    "hashToText": {
     "ESY/ZSfQCtGlfPrw+J7Leg==": "Valider tous les temps passés"
    },
+   "filepath": "src/components/PendingActionsTray/index.js",
    "line_beg": 200,
    "col_beg": 7,
    "line_end": 202,
@@ -2943,6 +3166,7 @@
    "hashToText": {
     "SCktwmFFvmW592qlLEMP2Q==": "Tout valider"
    },
+   "filepath": "src/components/PendingActionsTray/index.js",
    "line_beg": 228,
    "col_beg": 7,
    "line_end": 230,
@@ -2956,6 +3180,7 @@
    "hashToText": {
     "S9/JwL4Xm5vX6oSwkK+/wg==": "Nom de la section"
    },
+   "filepath": "src/components/ProjectCustomerTasksList/index.js",
    "line_beg": 80,
    "col_beg": 7,
    "line_end": 85,
@@ -2969,6 +3194,7 @@
    "hashToText": {
     "2xEWo7wuhRBdVX59AdoS7w==": "Ajouter un titre à ce projet"
    },
+   "filepath": "src/components/ProjectHeader/index.js",
    "line_beg": 123,
    "col_beg": 5,
    "line_end": 128,
@@ -2982,6 +3208,7 @@
    "hashToText": {
     "MrFyR9h3EMGytdjiArRIlg==": "Nom du projet"
    },
+   "filepath": "src/components/ProjectHeader/index.js",
    "line_beg": 138,
    "col_beg": 6,
    "line_end": 140,
@@ -2995,6 +3222,7 @@
    "hashToText": {
     "2T0cDshSqUPZs9v6Wh7FbA==": "Écrivez des notes..."
    },
+   "filepath": "src/components/ProjectNotes/index.js",
    "line_beg": 109,
    "col_beg": 8,
    "line_end": 114,
@@ -3008,6 +3236,7 @@
    "hashToText": {
     "/eGE0cJEHMTuGWu6sSL18g==": "Pour accèder aux options sélectionnez un bout de texte. Vous pouvez aussi utiliser markdown."
    },
+   "filepath": "src/components/ProjectNotes/index.js",
    "line_beg": 116,
    "col_beg": 8,
    "line_end": 123,
@@ -3021,6 +3250,7 @@
    "hashToText": {
     "bkUwxsMrGdCK/V0tNxzLHg==": "Sauvegardé !"
    },
+   "filepath": "src/components/ProjectNotes/index.js",
    "line_beg": 129,
    "col_beg": 7,
    "line_end": 134,
@@ -3034,6 +3264,7 @@
    "hashToText": {
     "R91C4bZC4Jj8FX6Ou+ulLw==": "Ces notes sont personnelles. Votre client ne peut pas les voir."
    },
+   "filepath": "src/components/ProjectPersonalNotes/index.js",
    "line_beg": 28,
    "col_beg": 4,
    "line_end": 31,
@@ -3047,6 +3278,7 @@
    "hashToText": {
     "JOxxH5XzBwZ6iHW40mWiOg==": "Nom de la section"
    },
+   "filepath": "src/components/ProjectSection/index.js",
    "line_beg": 26,
    "col_beg": 8,
    "line_end": 28,
@@ -3060,6 +3292,7 @@
    "hashToText": {
     "OBxwe8U4azO+nEMeD+ZFIQ==": "Ces notes sont partagées avec votre {otherUserName}."
    },
+   "filepath": "src/components/ProjectSharedNotes/index.js",
    "line_beg": 34,
    "col_beg": 4,
    "line_end": 47,
@@ -3073,6 +3306,7 @@
    "hashToText": {
     "xcfdrC78ur9az8HEiQ+W7g==": "prestataire"
    },
+   "filepath": "src/components/ProjectSharedNotes/index.js",
    "line_beg": 38,
    "col_beg": 7,
    "line_end": 40,
@@ -3086,6 +3320,7 @@
    "hashToText": {
     "4BKjcB5xtpV5gBYkA8IYWA==": "client"
    },
+   "filepath": "src/components/ProjectSharedNotes/index.js",
    "line_beg": 42,
    "col_beg": 7,
    "line_end": 44,
@@ -3099,6 +3334,7 @@
    "hashToText": {
     "mTh9oP5PlpGc2ijZdZpw1g==": "Nom de la section"
    },
+   "filepath": "src/components/ProjectTasksList/index.js",
    "line_beg": 740,
    "col_beg": 7,
    "line_end": 742,
@@ -3112,6 +3348,7 @@
    "hashToText": {
     "VoesFaOlo+IoPjaKqVF8xQ==": "Relance client"
    },
+   "filepath": "src/components/ReminderCard/index.js",
    "line_beg": 56,
    "col_beg": 4,
    "line_end": 58,
@@ -3125,6 +3362,7 @@
    "hashToText": {
     "wo45m6zeGJQOTSMd76q04A==": "Envoi..."
    },
+   "filepath": "src/components/ReminderTestEmailButton/index.js",
    "line_beg": 32,
    "col_beg": 4,
    "line_end": 34,
@@ -3138,6 +3376,7 @@
    "hashToText": {
     "aXwOrkM99o7PVRb8h+ctYA==": "Test Envoyé"
    },
+   "filepath": "src/components/ReminderTestEmailButton/index.js",
    "line_beg": 42,
    "col_beg": 4,
    "line_end": 44,
@@ -3151,6 +3390,7 @@
    "hashToText": {
     "4u6BlPabsaUGSORsyybBFQ==": "Erreur"
    },
+   "filepath": "src/components/ReminderTestEmailButton/index.js",
    "line_beg": 52,
    "col_beg": 4,
    "line_end": 54,
@@ -3164,6 +3404,7 @@
    "hashToText": {
     "9O803GvokBv7/cMyu4NkcA==": "S'envoyer un email test"
    },
+   "filepath": "src/components/ReminderTestEmailButton/index.js",
    "line_beg": 62,
    "col_beg": 4,
    "line_end": 64,
@@ -3177,6 +3418,7 @@
    "hashToText": {
     "El/IE3T56zb2AovWLUnhyw==": "Êtes-vous sûr de vouloir supprimer ce projet ?"
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 17,
    "col_beg": 5,
    "line_end": 19,
@@ -3190,6 +3432,7 @@
    "hashToText": {
     "n192PQNTzb8hYGbMLGYKuA==": "En ce supprimant ce projet vous perdrez toutes les données."
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 22,
    "col_beg": 5,
    "line_end": 25,
@@ -3203,6 +3446,7 @@
    "hashToText": {
     "LUjTHVOk0yiT09NiY1+gcQ==": "Cette option est présente pour supprimer un projet créé par erreur."
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 28,
    "col_beg": 5,
    "line_end": 31,
@@ -3216,6 +3460,7 @@
    "hashToText": {
     "bSDE84ZvWja6PaBjiECyOg==": "Pour les projets terminés, préférez l'archivage :)"
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 34,
    "col_beg": 5,
    "line_end": 36,
@@ -3229,6 +3474,7 @@
    "hashToText": {
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 40,
    "col_beg": 6,
    "line_end": 42,
@@ -3242,6 +3488,7 @@
    "hashToText": {
     "VqmYRsc7GyBxLKABP9egLw==": "Archiver le projet"
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 55,
    "col_beg": 6,
    "line_end": 57,
@@ -3255,6 +3502,7 @@
    "hashToText": {
     "xhRGYwrRenegpYibHaLriQ==": "Supprimer le projet"
    },
+   "filepath": "src/components/RemoveProjectModal/index.js",
    "line_beg": 71,
    "col_beg": 6,
    "line_end": 73,
@@ -3268,6 +3516,7 @@
    "hashToText": {
     "Omn/E1WJwFGJsAiL1vf5VQ==": "Il semblerait qu'il y ait des tâches prévues les jours précédents que vous n'avez pas validées ou déplacées."
    },
+   "filepath": "src/components/RescheduleModal/index.js",
    "line_beg": 23,
    "col_beg": 5,
    "line_end": 26,
@@ -3281,6 +3530,7 @@
    "hashToText": {
     "M3bQF4irVE3tYHCE4Ge2Rw==": "Tout remettre dans la liste"
    },
+   "filepath": "src/components/RescheduleModal/index.js",
    "line_beg": 41,
    "col_beg": 5,
    "line_end": 43,
@@ -3294,6 +3544,7 @@
    "hashToText": {
     "/Z+OswR9A/iWTdOIrvEsdQ==": "Vérification de la validité du token..."
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 86,
    "col_beg": 6,
    "line_end": 88,
@@ -3307,6 +3558,7 @@
    "hashToText": {
     "6E9ep+gKWepROcrClnP8Hg==": "Ce lien n'est pas ou plus valide. Essayez de recommencer en vous rendant sur la page {link} ."
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 98,
    "col_beg": 6,
    "line_end": 116,
@@ -3320,6 +3572,7 @@
    "hashToText": {
     "Zrxp3VDBlfH3B+cQ5PGLFQ==": "Mot de passe oublié ?"
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 105,
    "col_beg": 11,
    "line_end": 110,
@@ -3333,6 +3586,7 @@
    "hashToText": {
     "0+kFQAEBGnwwqOlMXDXj5Q==": "Entrez votre nouveau mot de passe. Vous serez connecté et redirigé automatiquement ensuite. Et cette fois, ne l'oubliez plus. ;)"
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 125,
    "col_beg": 5,
    "line_end": 129,
@@ -3346,6 +3600,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 137,
    "col_beg": 9,
    "line_end": 139,
@@ -3359,6 +3614,7 @@
    "hashToText": {
     "zTDwnn/40EtfXcJ35Fu01g==": "Quelque chose ne s'est pas passé comme prévu"
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 188,
    "col_beg": 11,
    "line_end": 194,
@@ -3372,6 +3628,7 @@
    "hashToText": {
     "io+w2IFW4qlm0AtL6CDNTQ==": "Nouveau mot de passe"
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 212,
    "col_beg": 11,
    "line_end": 217,
@@ -3385,6 +3642,7 @@
    "hashToText": {
     "UgCMWAE3dOnlYZVraWvNKw==": "Changer le mot de passe"
    },
+   "filepath": "src/components/ResetPasswordForm/index.js",
    "line_beg": 234,
    "col_beg": 10,
    "line_end": 239,
@@ -3398,9 +3656,10 @@
    "hashToText": {
     "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
    },
-   "line_beg": 286,
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 297,
    "col_beg": 5,
-   "line_end": 288,
+   "line_end": 299,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3411,9 +3670,10 @@
    "hashToText": {
     "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
    },
-   "line_beg": 302,
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 313,
    "col_beg": 5,
-   "line_end": 307,
+   "line_end": 318,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3424,9 +3684,10 @@
    "hashToText": {
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
-   "line_beg": 400,
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 411,
    "col_beg": 9,
-   "line_end": 406,
+   "line_end": 417,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
@@ -3435,8 +3696,23 @@
   },
   {
    "hashToText": {
+    "+3NmsH2Z/prpNjoiPTm1/A==": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
+   },
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 523,
+   "col_beg": 5,
+   "line_end": 525,
+   "col_end": 11,
+   "type": "text",
+   "desc": "Banner displayed when the dashboard schedule is empty",
+   "project": "",
+   "jsfbt": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
+  },
+  {
+   "hashToText": {
     "YFMbTeNoi9iC2wAJUjqtEA==": "L'email a bien été envoyé ! Vérifiez votre boîte de réception d'ici quelques minutes !"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 42,
    "col_beg": 6,
    "line_end": 48,
@@ -3450,6 +3726,7 @@
    "hashToText": {
     "ZfOxGoJ/3tKdL1E6Nu3/mw==": "Entrez l'adresse mail que vous avez utilisé pour vous enregistrer, on vous enverra un lien pour réinitialiser votre mot de passe et accéder de nouveau à votre compte."
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 52,
    "col_beg": 6,
    "line_end": 60,
@@ -3463,6 +3740,7 @@
    "hashToText": {
     "Ky1807DMT8v55jGmxM+Yqw==": "L'email doit être valide"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 70,
    "col_beg": 10,
    "line_end": 75,
@@ -3476,6 +3754,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 78,
    "col_beg": 10,
    "line_end": 80,
@@ -3489,6 +3768,7 @@
    "hashToText": {
     "zTDwnn/40EtfXcJ35Fu01g==": "Quelque chose ne s'est pas passé comme prévu"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 98,
    "col_beg": 11,
    "line_end": 104,
@@ -3502,6 +3782,7 @@
    "hashToText": {
     "SpMltHwMWpvYs2v7rKKEiQ==": "Adresse email"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 122,
    "col_beg": 11,
    "line_end": 127,
@@ -3515,6 +3796,7 @@
    "hashToText": {
     "CHrKtVc4yGE5EfuS8uJzuw==": "jean@dupont.fr"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 130,
    "col_beg": 11,
    "line_end": 135,
@@ -3528,6 +3810,7 @@
    "hashToText": {
     "OcGRRtpN/aoTi8t0S92bew==": "Réinitialiser le mot de passe"
    },
+   "filepath": "src/components/SendResetPasswordForm/index.js",
    "line_beg": 151,
    "col_beg": 10,
    "line_end": 156,
@@ -3541,6 +3824,7 @@
    "hashToText": {
     "kr4eHtsx2qAP4N9hWTLB8Q==": "Tâches du projet"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 119,
    "col_beg": 7,
    "line_end": 121,
@@ -3554,6 +3838,7 @@
    "hashToText": {
     "QHoXP7VKbIjPYLhwW+T3Kw==": "Notes partagées"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 134,
    "col_beg": 7,
    "line_end": 136,
@@ -3567,6 +3852,7 @@
    "hashToText": {
     "NBjTlN4A0Vjh7rfqIoO3SQ==": "Votre prestataire"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 144,
    "col_beg": 5,
    "line_end": 146,
@@ -3580,6 +3866,7 @@
    "hashToText": {
     "5r3VHOyz03CGZ5uyw2S8uQ==": "Deadline"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 154,
    "col_beg": 6,
    "line_end": 156,
@@ -3593,6 +3880,7 @@
    "hashToText": {
     "P2qgZgeJVcj2qEwqhbReOw==": "Date limite du projet"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 161,
    "col_beg": 8,
    "line_end": 163,
@@ -3606,6 +3894,7 @@
    "hashToText": {
     "nRb6PqktA2dOmoaUuqTu9w==": "Marge jours restants"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 177,
    "col_beg": 6,
    "line_end": 179,
@@ -3619,6 +3908,7 @@
    "hashToText": {
     "JlXEGumz9REKJGcm60WwKA==": "Nombre de jours travaillés avant deadline"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 183,
    "col_beg": 7,
    "line_end": 188,
@@ -3633,6 +3923,7 @@
     "jK1Ko+o185ENa/vQkqEFsQ==": "{margin of days count} jours",
     "ijg6lMgW07tYN5oshr8jog==": "1 jour"
    },
+   "filepath": "src/components/SidebarCustomerProjectInfos/index.js",
    "line_beg": 192,
    "col_beg": 7,
    "line_end": 204,
@@ -3658,6 +3949,7 @@
    "hashToText": {
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
+   "filepath": "src/components/SidebarDashboardInfos/index.js",
    "line_beg": 95,
    "col_beg": 6,
    "line_end": 121,
@@ -3671,6 +3963,7 @@
    "hashToText": {
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
+   "filepath": "src/components/SidebarDashboardInfos/index.js",
    "line_beg": 101,
    "col_beg": 10,
    "line_end": 106,
@@ -3684,6 +3977,7 @@
    "hashToText": {
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
+   "filepath": "src/components/SidebarDashboardInfos/index.js",
    "line_beg": 109,
    "col_beg": 10,
    "line_end": 114,
@@ -3697,6 +3991,7 @@
    "hashToText": {
     "7AjDpNETd4pcpVcI4F37Yg==": "Aucune tâches client n’ont été activées pour le moment"
    },
+   "filepath": "src/components/SidebarDashboardInfos/index.js",
    "line_beg": 135,
    "col_beg": 7,
    "line_end": 138,
@@ -3710,6 +4005,7 @@
    "hashToText": {
     "HDuXEugJ+zLx46I/Mtqbog==": "Vue principale"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 249,
    "col_beg": 6,
    "line_end": 254,
@@ -3723,6 +4019,7 @@
    "hashToText": {
     "EHQ8kyruFfhFbqt+PaVvaQ==": "Tâches du projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 265,
    "col_beg": 8,
    "line_end": 270,
@@ -3736,6 +4033,7 @@
    "hashToText": {
     "L067xGXkMfARcJBjS7f+9g==": "Seulement visibles par vous"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 278,
    "col_beg": 6,
    "line_end": 283,
@@ -3749,6 +4047,7 @@
    "hashToText": {
     "ikjA3VDH0k6vn2narEXR3Q==": "Notes personnelles"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 294,
    "col_beg": 8,
    "line_end": 299,
@@ -3762,6 +4061,7 @@
    "hashToText": {
     "fLR9KuAsosc/XK5bMWk7Mg==": "Visibles par tout le monde"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 307,
    "col_beg": 6,
    "line_end": 312,
@@ -3775,6 +4075,7 @@
    "hashToText": {
     "jFCupc9C9dtcx4e30UI0Iw==": "Notes partagées"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 323,
    "col_beg": 8,
    "line_end": 328,
@@ -3788,6 +4089,7 @@
    "hashToText": {
     "rH9wh0hUEutLLvjXj/nvVA==": "Changer le client lié au projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 341,
    "col_beg": 9,
    "line_end": 346,
@@ -3801,6 +4103,7 @@
    "hashToText": {
     "fe/ia+wsEnlijrwwdh21Ww==": "Évolution du projet, tâches qui requièrent une action, etc."
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 363,
    "col_beg": 8,
    "line_end": 369,
@@ -3814,6 +4117,7 @@
    "hashToText": {
     "aCi6l7XNAZcbqUgKkFcIiw==": "Notifier mon client par email"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 418,
    "col_beg": 9,
    "line_end": 423,
@@ -3827,6 +4131,7 @@
    "hashToText": {
     "BMeuJg0uY2MVeovVNQK5Hw==": "En décochant cette option, votre client ne recevra aucune notification de l'avancée de votre projet."
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 436,
    "col_beg": 9,
    "line_end": 443,
@@ -3840,6 +4145,7 @@
    "hashToText": {
     "RltTNFLZaA3NsiUnfH0sDQ==": "Cependant, certaines des tâches sont attribuées à votre client et nécessitent l'envoi d'emails à celui-ci. Désactiver les notifications changera aussi l'attribution de ces tâches et votre client n'en sera pas averti."
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 447,
    "col_beg": 10,
    "line_end": 458,
@@ -3853,6 +4159,7 @@
    "hashToText": {
     "v6Zu+7e97z2OYmTF4p4PrA==": "Êtes-vous sûr de vouloir continuer?"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 462,
    "col_beg": 9,
    "line_end": 464,
@@ -3866,6 +4173,7 @@
    "hashToText": {
     "CF4JsqOY3g7b6ZAwfWBAGg==": "Ce que verra votre client lorsqu'il se connecte au projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 470,
    "col_beg": 8,
    "line_end": 476,
@@ -3879,6 +4187,7 @@
    "hashToText": {
     "gofuUhe30NUXKseA+qKbNQ==": "Voir la vue de mon client"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 488,
    "col_beg": 10,
    "line_end": 493,
@@ -3892,6 +4201,7 @@
    "hashToText": {
     "5CkV1QNEPRDdQTru3O35Dw==": "Ajouter un client"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 513,
    "col_beg": 8,
    "line_end": 518,
@@ -3905,6 +4215,7 @@
    "hashToText": {
     "kijfhgj2q4NVR0iPj3IV7g==": "Cette vue est celle que verra votre client lorsqu'il devra effectuer des actions."
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 557,
    "col_beg": 6,
    "line_end": 563,
@@ -3918,6 +4229,7 @@
    "hashToText": {
     "AtjVa1IeKjBwoEeU+DLbEQ==": "Ajouter un Collaborateurs"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 583,
    "col_beg": 7,
    "line_end": 588,
@@ -3931,6 +4243,7 @@
    "hashToText": {
     "0ywQKSABbvePNgYOS03q0w==": "Collaborateurs du projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 596,
    "col_beg": 8,
    "line_end": 601,
@@ -3944,6 +4257,7 @@
    "hashToText": {
     "FEQsZWN5sT5lTchEhNcWig==": "Deadline"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 622,
    "col_beg": 8,
    "line_end": 627,
@@ -3957,6 +4271,7 @@
    "hashToText": {
     "yuKsays7MRc0FJ6J2ZzZuQ==": "Date limite du projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 631,
    "col_beg": 9,
    "line_end": 636,
@@ -3970,6 +4285,7 @@
    "hashToText": {
     "xa4T9aJVs5d5AApNfpZD0w==": "Ajouter une deadline"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 660,
    "col_beg": 8,
    "line_end": 665,
@@ -3983,6 +4299,7 @@
    "hashToText": {
     "nH52xB7hAoZdMWbGpgHFnw==": "Marge restantes"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 700,
    "col_beg": 6,
    "line_end": 705,
@@ -3996,6 +4313,7 @@
    "hashToText": {
     "ID7HPKtlTKMeyu5vkHZXlQ==": "Nombre de jours travaillés avant deadline"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 709,
    "col_beg": 7,
    "line_end": 714,
@@ -4009,6 +4327,7 @@
    "hashToText": {
     "Jki2Y6p4cfpaCTxQ41bZRw==": "Copier ces tâches dans un nouveau projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 728,
    "col_beg": 7,
    "line_end": 733,
@@ -4022,6 +4341,7 @@
    "hashToText": {
     "uYR1hk87PyaQht9P3tSOlg==": "Dupliquer le projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 747,
    "col_beg": 7,
    "line_end": 752,
@@ -4035,6 +4355,7 @@
    "hashToText": {
     "pavdXdUr565DmuS3Z9MnlQ==": "Désarchiver le projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 775,
    "col_beg": 8,
    "line_end": 777,
@@ -4048,6 +4369,7 @@
    "hashToText": {
     "xhRGYwrRenegpYibHaLriQ==": "Supprimer le projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 791,
    "col_beg": 8,
    "line_end": 793,
@@ -4061,6 +4383,7 @@
    "hashToText": {
     "VqmYRsc7GyBxLKABP9egLw==": "Archiver le projet"
    },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 812,
    "col_beg": 7,
    "line_end": 814,
@@ -4074,6 +4397,7 @@
    "hashToText": {
     "Ky1807DMT8v55jGmxM+Yqw==": "L'email doit être valide"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 55,
    "col_beg": 7,
    "line_end": 57,
@@ -4087,6 +4411,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 60,
    "col_beg": 7,
    "line_end": 62,
@@ -4100,6 +4425,7 @@
    "hashToText": {
     "TTfvlLEkZBV4WNpvf04jlg==": "L'email est déjà utilisé"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 66,
    "col_beg": 7,
    "line_end": 68,
@@ -4113,6 +4439,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 76,
    "col_beg": 6,
    "line_end": 78,
@@ -4126,6 +4453,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 81,
    "col_beg": 6,
    "line_end": 83,
@@ -4139,6 +4467,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 86,
    "col_beg": 6,
    "line_end": 88,
@@ -4152,6 +4481,7 @@
    "hashToText": {
     "zTDwnn/40EtfXcJ35Fu01g==": "Quelque chose ne s'est pas passé comme prévu"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 151,
    "col_beg": 8,
    "line_end": 153,
@@ -4165,6 +4495,7 @@
    "hashToText": {
     "SpMltHwMWpvYs2v7rKKEiQ==": "Adresse email"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 169,
    "col_beg": 9,
    "line_end": 174,
@@ -4178,6 +4509,7 @@
    "hashToText": {
     "fMsQGqARQXNf74qbRBFxUw==": "jean@dupont.fr"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 177,
    "col_beg": 9,
    "line_end": 182,
@@ -4191,6 +4523,7 @@
    "hashToText": {
     "OPVK8+uQoMyO/5czEGpRPQ==": "Mot de passe"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 192,
    "col_beg": 9,
    "line_end": 194,
@@ -4204,6 +4537,7 @@
    "hashToText": {
     "Hhva+w6dWLzpGHhfUVWsMA==": "Prénom"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 205,
    "col_beg": 9,
    "line_end": 207,
@@ -4217,6 +4551,7 @@
    "hashToText": {
     "XcIjHZX+CAoxLfWe4baocg==": "Jean"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 210,
    "col_beg": 9,
    "line_end": 215,
@@ -4230,6 +4565,7 @@
    "hashToText": {
     "umaza+QDGWDvbw5t7ezVdg==": "Nom"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 225,
    "col_beg": 9,
    "line_end": 227,
@@ -4243,6 +4579,7 @@
    "hashToText": {
     "+K305NT/lYSJ5LSt2ZR5Nw==": "Dupont"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 230,
    "col_beg": 9,
    "line_end": 235,
@@ -4256,6 +4593,7 @@
    "hashToText": {
     "FTgHma41k2LvlCnizQVAMg==": "J'accepte les {=CGU} et consent à recevoir des emails de la part d'Inyo."
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 252,
    "col_beg": 8,
    "line_end": 264,
@@ -4269,6 +4607,7 @@
    "hashToText": {
     "+2c9zJlDnQxqxGjVfc5+mQ==": "{=CGU}"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 254,
    "col_beg": 9,
    "line_end": 261,
@@ -4282,6 +4621,7 @@
    "hashToText": {
     "RkU3tXWQs9wkkAw2K5Abrw==": "CGU"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 255,
    "col_beg": 10,
    "line_end": 260,
@@ -4295,6 +4635,7 @@
    "hashToText": {
     "L78l5yHZgyKFDOMJzP/Vng==": "Commencez"
    },
+   "filepath": "src/components/SignupForm/index.js",
    "line_beg": 271,
    "col_beg": 8,
    "line_end": 273,
@@ -4308,6 +4649,7 @@
    "hashToText": {
     "JZSEg2EIl4FZrjTbLykCDg==": "Autres"
    },
+   "filepath": "src/components/SingleBarChart/index.js",
    "line_beg": 96,
    "col_beg": 5,
    "line_end": 98,
@@ -4321,6 +4663,7 @@
    "hashToText": {
     "71IsaHOQkQhHdTafaHJM/A==": "Gérer les tags"
    },
+   "filepath": "src/components/TagDropdown/index.js",
    "line_beg": 68,
    "col_beg": 5,
    "line_end": 70,
@@ -4335,6 +4678,7 @@
     "T6P+XEx/fMBW3v4lBxcpsA==": "{task per tag count} tâches avec ce tag",
     "TwwteQJ0k9zJi4vCY+IONA==": "1 tâche avec ce tag"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 72,
    "col_beg": 7,
    "line_end": 82,
@@ -4360,6 +4704,7 @@
    "hashToText": {
     "DhFbrIT699RZmAOgrzxElA==": "Annuler"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 117,
    "col_beg": 6,
    "line_end": 119,
@@ -4373,6 +4718,7 @@
    "hashToText": {
     "Lq8w88lpi2mEfiwx3FD9kQ==": "Supprimer le tag"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 138,
    "col_beg": 6,
    "line_end": 140,
@@ -4386,6 +4732,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 154,
    "col_beg": 8,
    "line_end": 156,
@@ -4399,6 +4746,7 @@
    "hashToText": {
     "ZtGFvH83j2mpmRnBiaBlKA==": "Un problème c'est produit"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 183,
    "col_beg": 10,
    "line_end": 188,
@@ -4412,6 +4760,7 @@
    "hashToText": {
     "ECi7RTFMNuHIvqLeoMOhyg==": "Nom"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 204,
    "col_beg": 12,
    "line_end": 209,
@@ -4425,6 +4774,7 @@
    "hashToText": {
     "acacS0kpJT5Uc7yGFnCtAA==": "Couleur fond"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 221,
    "col_beg": 12,
    "line_end": 226,
@@ -4438,6 +4788,7 @@
    "hashToText": {
     "7AnJvMWBafagakQgWQswZQ==": "Couleur texte"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 238,
    "col_beg": 12,
    "line_end": 243,
@@ -4451,6 +4802,7 @@
    "hashToText": {
     "z+fr/8GXtHYfCIdNcTRB4w==": "Annuler"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 257,
    "col_beg": 11,
    "line_end": 262,
@@ -4464,6 +4816,7 @@
    "hashToText": {
     "1nrcQSPCDuKGcH1XRfKObA==": "Enregistrer"
    },
+   "filepath": "src/components/TagForm/index.js",
    "line_beg": 269,
    "col_beg": 11,
    "line_end": 274,
@@ -4477,6 +4830,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 49,
    "col_beg": 5,
    "line_end": 51,
@@ -4490,6 +4844,7 @@
    "hashToText": {
     "zTDwnn/40EtfXcJ35Fu01g==": "Quelque chose ne s'est pas passé comme prévu"
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 94,
    "col_beg": 7,
    "line_end": 96,
@@ -4503,6 +4858,7 @@
    "hashToText": {
     "a9nh7e7+Q28hBhKVaHDlhA==": "Nom du tag"
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 113,
    "col_beg": 10,
    "line_end": 118,
@@ -4516,6 +4872,7 @@
    "hashToText": {
     "RCo85QS5GGrngLOl7/BEgg==": "Administratif"
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 121,
    "col_beg": 10,
    "line_end": 126,
@@ -4529,6 +4886,7 @@
    "hashToText": {
     "8/GAQZM05MooRP2RpKeRmQ==": "Créer un tag"
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 137,
    "col_beg": 8,
    "line_end": 139,
@@ -4542,6 +4900,7 @@
    "hashToText": {
     "sdp+Qf1mdSOOjJjER9mb+Q==": "Vous n'avez pas encore créé de tags."
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 161,
    "col_beg": 7,
    "line_end": 163,
@@ -4555,6 +4914,7 @@
    "hashToText": {
     "kV/aVnAolzSxafm4nBxqow==": "Créer votre premier et commencer a classer vos tâches."
    },
+   "filepath": "src/components/TagListForm/index.js",
    "line_beg": 165,
    "col_beg": 7,
    "line_end": 168,
@@ -4568,6 +4928,7 @@
    "hashToText": {
     "yaey51Cf+rbg1ONjyCH2Mg==": "Enlever cette tâche de mon programme du jour"
    },
+   "filepath": "src/components/TaskActivationButton/index.js",
    "line_beg": 24,
    "col_beg": 4,
    "line_end": 26,
@@ -4581,6 +4942,7 @@
    "hashToText": {
     "p7Bh4qNiXDAOVDDSo8BBIQ==": "Cette tâche est prévue pour aujourd'hui"
    },
+   "filepath": "src/components/TaskActivationButton/index.js",
    "line_beg": 29,
    "col_beg": 4,
    "line_end": 31,
@@ -4594,6 +4956,7 @@
    "hashToText": {
     "W28x86MN0JbWGRhTd4W1Kg==": "Je fais cette tâche aujourd'hui"
    },
+   "filepath": "src/components/TaskActivationButton/index.js",
    "line_beg": 34,
    "col_beg": 4,
    "line_end": 36,
@@ -4607,6 +4970,7 @@
    "hashToText": {
     "N+0u4KHqwRgSP+exA6KMmA==": "Ajouter cette tâche à mon programme du jour"
    },
+   "filepath": "src/components/TaskActivationButton/index.js",
    "line_beg": 39,
    "col_beg": 4,
    "line_end": 41,
@@ -4620,6 +4984,7 @@
    "hashToText": {
     "7VWGG3LM2Bt1rhX4nX3Dmw==": "Il manque un client à cette tâche pour qu'elle soit réalisable."
    },
+   "filepath": "src/components/TaskActivationHeader/index.js",
    "line_beg": 55,
    "col_beg": 6,
    "line_end": 61,
@@ -4633,6 +4998,7 @@
    "hashToText": {
     "AUS+8OsrnhVojy23PDQq/w==": "Il manque une facture à cette tâche pour qu'elle soit réalisable. Joignez une facture à cette tâche."
    },
+   "filepath": "src/components/TaskActivationHeader/index.js",
    "line_beg": 102,
    "col_beg": 7,
    "line_end": 109,
@@ -4646,6 +5012,7 @@
    "hashToText": {
     "7VWGG3LM2Bt1rhX4nX3Dmw==": "Il manque un client à cette tâche pour qu'elle soit réalisable."
    },
+   "filepath": "src/components/TaskActivationHeader/index.js",
    "line_beg": 114,
    "col_beg": 7,
    "line_end": 120,
@@ -4659,6 +5026,7 @@
    "hashToText": {
     "hwPU+hzB4mtaP0yXA38uEg==": "Il manque un client et une facture à cette tâche pour qu'elle soit réalisable."
    },
+   "filepath": "src/components/TaskActivationHeader/index.js",
    "line_beg": 125,
    "col_beg": 7,
    "line_end": 131,
@@ -4672,6 +5040,7 @@
    "hashToText": {
     "6uwVVD9eKhOL7acPMB8fuQ==": "Prévisualisation des actions {apos}{assistantName}"
    },
+   "filepath": "src/components/TaskActivationModal/index.js",
    "line_beg": 34,
    "col_beg": 4,
    "line_end": 52,
@@ -4685,6 +5054,7 @@
    "hashToText": {
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
+   "filepath": "src/components/TaskActivationModal/index.js",
    "line_beg": 40,
    "col_beg": 8,
    "line_end": 42,
@@ -4698,6 +5068,7 @@
    "hashToText": {
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
+   "filepath": "src/components/TaskActivationModal/index.js",
    "line_beg": 45,
    "col_beg": 8,
    "line_end": 47,
@@ -4711,6 +5082,7 @@
    "hashToText": {
     "kKBr0Qtx2Acz6jLfU+Q7YQ==": "Tâche assigné à"
    },
+   "filepath": "src/components/TaskCollaboratorList/index.js",
    "line_beg": 53,
    "col_beg": 6,
    "line_end": 55,
@@ -4724,6 +5096,7 @@
    "hashToText": {
     "WW2TgmyNPwsJ1sfvQa/mBg==": "Ouvrir les commentaires"
    },
+   "filepath": "src/components/TaskComment/index.js",
    "line_beg": 59,
    "col_beg": 6,
    "line_end": 61,
@@ -4737,6 +5110,7 @@
    "hashToText": {
     "oadX5Ncr9ZMKyEUe+XSEMg==": "Ne plus rappeler à {customerName} de faire cette tâche"
    },
+   "filepath": "src/components/TaskCustomerActivationButton/index.js",
    "line_beg": 32,
    "col_beg": 4,
    "line_end": 36,
@@ -4750,6 +5124,7 @@
    "hashToText": {
     "cWisi7bqGYxheSieiCg/6Q==": "{assistantName} s'occupe de faire réaliser cette tâche"
    },
+   "filepath": "src/components/TaskCustomerActivationButton/index.js",
    "line_beg": 39,
    "col_beg": 4,
    "line_end": 44,
@@ -4763,6 +5138,7 @@
    "hashToText": {
     "z13l3P+sKl01d3AEdLHejA==": "Charger {assitantName} de faire réaliser cette tâche à {customerName}"
    },
+   "filepath": "src/components/TaskCustomerActivationButton/index.js",
    "line_beg": 47,
    "col_beg": 4,
    "line_end": 54,
@@ -4776,6 +5152,7 @@
    "hashToText": {
     "54EoweRc8cDBiU/i9twd7Q==": "Ajouter la tâche aux choses à faire aujourd'hui"
    },
+   "filepath": "src/components/TaskCustomerActivationButton/index.js",
    "line_beg": 57,
    "col_beg": 4,
    "line_end": 59,
@@ -4789,6 +5166,7 @@
    "hashToText": {
     "8ZnNcGSB/BPEaEtmI8Vtjg==": "Personne liée à la tâche"
    },
+   "filepath": "src/components/TaskCustomerInput/index.js",
    "line_beg": 62,
    "col_beg": 4,
    "line_end": 64,
@@ -4802,6 +5180,7 @@
    "hashToText": {
     "yMFdToiRWmhXMnPGPHZWZQ==": "Marge restante pour commencer la tâche"
    },
+   "filepath": "src/components/TaskDueDate/index.js",
    "line_beg": 77,
    "col_beg": 4,
    "line_end": 79,
@@ -4816,6 +5195,7 @@
     "ccco5PNdevget3/uhxCPqQ==": "{workedDays} {workedDaysText} jours",
     "aOjE6JyG7zXWWPLzq9HPhg==": "{workedDays} 1 jour"
    },
+   "filepath": "src/components/TaskDueDate/index.js",
    "line_beg": 107,
    "col_beg": 10,
    "line_end": 134,
@@ -4841,6 +5221,7 @@
    "hashToText": {
     "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
    },
+   "filepath": "src/components/TaskInfosInputs/index.js",
    "line_beg": 139,
    "col_beg": 6,
    "line_end": 141,
@@ -4855,6 +5236,7 @@
     "b0Yiz/XkK5/Co87U0l2m6Q==": "{attachedFilesLength} fichiers",
     "2we0ogHHnf6MjAUxWI6Krw==": "1 fichier"
    },
+   "filepath": "src/components/TaskInfosInputs/index.js",
    "line_beg": 154,
    "col_beg": 7,
    "line_end": 163,
@@ -4880,6 +5262,7 @@
    "hashToText": {
     "5GBRSMD1wBCKyx/WbMt+TQ==": "Lier à un projet"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 293,
    "col_beg": 6,
    "line_end": 295,
@@ -4893,6 +5276,7 @@
    "hashToText": {
     "e8wn6btvUxtacwoZA+Iwyg==": "Définir le type de tâche"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 303,
    "col_beg": 6,
    "line_end": 305,
@@ -4906,10 +5290,11 @@
    "hashToText": {
     "5Fj4/fEa3KneB26mwqrhng==": "↓ pour créer une section"
    },
-   "line_beg": 322,
-   "col_beg": 8,
-   "line_end": 324,
-   "col_end": 14,
+   "filepath": "src/components/TaskInput/index.js",
+   "line_beg": 323,
+   "col_beg": 9,
+   "line_end": 325,
+   "col_end": 15,
    "type": "text",
    "desc": "notification message",
    "project": "inyo",
@@ -4919,6 +5304,7 @@
    "hashToText": {
     "xFbeuoXyCmhu2wVfZ169QA==": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 437,
    "col_beg": 9,
    "line_end": 444,
@@ -4932,6 +5318,7 @@
    "hashToText": {
     "VJtgIUDKGBWDdOnmN9yHEA==": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 446,
    "col_beg": 9,
    "line_end": 452,
@@ -4945,6 +5332,7 @@
    "hashToText": {
     "yRfe5GzJEatV3OwaTjyFEw==": "Ajouter une tâche ou créer un section."
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 455,
    "col_beg": 8,
    "line_end": 460,
@@ -4958,6 +5346,7 @@
    "hashToText": {
     "Jfg2NGSco6/jhBpoOckN1w==": "Ajouter une tâche."
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 462,
    "col_beg": 8,
    "line_end": 467,
@@ -4971,6 +5360,7 @@
    "hashToText": {
     "uqIC+W5oLkhdTexC1W85Dg==": "Flèche du bas pour créer un ensemble de tâches"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 478,
    "col_beg": 10,
    "line_end": 484,
@@ -4984,6 +5374,7 @@
    "hashToText": {
     "PQUt2jQseKI6eHmV/4eXmA==": "Créer une section"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 492,
    "col_beg": 10,
    "line_end": 497,
@@ -4997,6 +5388,7 @@
    "hashToText": {
     "6xTdP3vzyjQ8RLeuwn1sZA==": "Touche entrée pour créer la tâche"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 503,
    "col_beg": 9,
    "line_end": 508,
@@ -5010,6 +5402,7 @@
    "hashToText": {
     "EYBvXIPLfC+Sg+JgEohtIQ==": "créer la {sectionOrTask}"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 548,
    "col_beg": 9,
    "line_end": 570,
@@ -5023,6 +5416,7 @@
    "hashToText": {
     "tkc3hNSCTgv4MCYLPJpaJw==": "section"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 555,
    "col_beg": 12,
    "line_end": 560,
@@ -5036,6 +5430,7 @@
    "hashToText": {
     "1e2oXXx9vKXjMzI/5f0Vaw==": "tâche"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 562,
    "col_beg": 12,
    "line_end": 567,
@@ -5049,6 +5444,7 @@
    "hashToText": {
     "OwotPW85Qrx4xnkP4MPfWg==": "Ajouter ou créer un tag"
    },
+   "filepath": "src/components/TaskInput/index.js",
    "line_beg": 587,
    "col_beg": 7,
    "line_end": 589,
@@ -5062,6 +5458,7 @@
    "hashToText": {
     "r9pf9/OwLbOscalNfHnklg==": "Les rappels clients ne sont pas activés pour cette tâche"
    },
+   "filepath": "src/components/TaskReminderIcon/index.js",
    "line_beg": 52,
    "col_beg": 7,
    "line_end": 58,
@@ -5075,6 +5472,7 @@
    "hashToText": {
     "NtAapLMNerQHeLEq3FU6Hg==": "Les rappels client sont activés pour cette tâche"
    },
+   "filepath": "src/components/TaskReminderIcon/index.js",
    "line_beg": 73,
    "col_beg": 7,
    "line_end": 78,
@@ -5088,6 +5486,7 @@
    "hashToText": {
     "lFSFJr7KLr8/V++kNbLOAg==": "Aucun client n’est lié à cette tâche"
    },
+   "filepath": "src/components/TaskReminderIcon/index.js",
    "line_beg": 97,
    "col_beg": 7,
    "line_end": 102,
@@ -5101,6 +5500,7 @@
    "hashToText": {
     "QgL8RFGOAMmRs3hREibuRg==": "Ouvrir la tâche \"{taskName}\""
    },
+   "filepath": "src/components/TaskRemindersList/index.js",
    "line_beg": 144,
    "col_beg": 10,
    "line_end": 148,
@@ -5114,6 +5514,7 @@
    "hashToText": {
     "8y1kSgtWLBmsYjJ5yYNpaQ==": "Annulé"
    },
+   "filepath": "src/components/TaskRemindersList/index.js",
    "line_beg": 171,
    "col_beg": 11,
    "line_end": 173,
@@ -5127,6 +5528,7 @@
    "hashToText": {
     "NmNYKt+KBb5u8AaTr7URvw==": "Envoyé"
    },
+   "filepath": "src/components/TaskRemindersList/index.js",
    "line_beg": 176,
    "col_beg": 11,
    "line_end": 178,
@@ -5140,6 +5542,7 @@
    "hashToText": {
     "uSyiYH1dzsHsqDVTug/UWw==": "Supprimer cette action automatique"
    },
+   "filepath": "src/components/TaskRemindersList/index.js",
    "line_beg": 185,
    "col_beg": 11,
    "line_end": 191,
@@ -5153,6 +5556,7 @@
    "hashToText": {
     "YkVlfGqCcjXL+Pr934sTwg==": "Retour"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 221,
    "col_beg": 4,
    "line_end": 223,
@@ -5166,6 +5570,7 @@
    "hashToText": {
     "lBZIK3YGEoUGXCeBk5Y8+w==": "Date d'activation : {date}"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 227,
    "col_beg": 5,
    "line_end": 232,
@@ -5179,6 +5584,7 @@
    "hashToText": {
     "EnhGQrIfqrrU9LWf9HcFHw==": "{date} après l'activation de la tâche"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 257,
    "col_beg": 8,
    "line_end": 267,
@@ -5192,6 +5598,7 @@
    "hashToText": {
     "sOA/2X+4LszqCMVqRD3PEw==": "{date} après l'email précédent"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 272,
    "col_beg": 8,
    "line_end": 284,
@@ -5205,6 +5612,7 @@
    "hashToText": {
     "q9OBKKxmiSt03JhHomK8Jw==": "Supprimer cette action automatique"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 319,
    "col_beg": 13,
    "line_end": 325,
@@ -5218,6 +5626,7 @@
    "hashToText": {
     "9dvcAZRKPIVpqi6orutALA==": "minutes"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 408,
    "col_beg": 14,
    "line_end": 413,
@@ -5231,6 +5640,7 @@
    "hashToText": {
     "PhPVSOdXlMF6mLuFBvzyPg==": "heures"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 419,
    "col_beg": 14,
    "line_end": 424,
@@ -5244,6 +5654,7 @@
    "hashToText": {
     "x1tyvdB8MRzLg+jGjhF7lw==": "jours"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 430,
    "col_beg": 14,
    "line_end": 435,
@@ -5257,6 +5668,7 @@
    "hashToText": {
     "GRmeMnPIs2L9scxWCQN9bA==": "semaines"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 441,
    "col_beg": 14,
    "line_end": 446,
@@ -5270,6 +5682,7 @@
    "hashToText": {
     "x1tyvdB8MRzLg+jGjhF7lw==": "jours"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 456,
    "col_beg": 13,
    "line_end": 461,
@@ -5283,6 +5696,7 @@
    "hashToText": {
     "Tt+m+eYxAX71R5GCKDCfnQ==": "après l'activation de la tâche"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 479,
    "col_beg": 14,
    "line_end": 485,
@@ -5296,6 +5710,7 @@
    "hashToText": {
     "DplwfsTWQva6fcImyucG4Q==": "après l'email précédent"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 491,
    "col_beg": 14,
    "line_end": 497,
@@ -5309,6 +5724,7 @@
    "hashToText": {
     "DplwfsTWQva6fcImyucG4Q==": "après l'email précédent"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 509,
    "col_beg": 15,
    "line_end": 516,
@@ -5322,6 +5738,7 @@
    "hashToText": {
     "Tt+m+eYxAX71R5GCKDCfnQ==": "après l'activation de la tâche"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 522,
    "col_beg": 15,
    "line_end": 529,
@@ -5335,6 +5752,7 @@
    "hashToText": {
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 552,
    "col_beg": 11,
    "line_end": 554,
@@ -5348,6 +5766,7 @@
    "hashToText": {
     "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 557,
    "col_beg": 11,
    "line_end": 559,
@@ -5361,6 +5780,7 @@
    "hashToText": {
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 575,
    "col_beg": 5,
    "line_end": 577,
@@ -5374,6 +5794,7 @@
    "hashToText": {
     "8qj6hVDu63zae7vwiTMqfg==": "Valider l'activation"
    },
+   "filepath": "src/components/TaskRemindersPreviewsList/index.js",
    "line_beg": 593,
    "col_beg": 5,
    "line_end": 595,
@@ -5387,6 +5808,7 @@
    "hashToText": {
     "FNnWXkrM7hA3vPBzG/OxUg==": "Cette tâche vous a été assigné"
    },
+   "filepath": "src/components/TaskRow/index.js",
    "line_beg": 337,
    "col_beg": 11,
    "line_end": 342,
@@ -5400,6 +5822,7 @@
    "hashToText": {
     "TNg0g9/rqIBL5sU4Qx7Jtg==": "Choisir un titre pour cette tâche"
    },
+   "filepath": "src/components/TaskRow/index.js",
    "line_beg": 365,
    "col_beg": 8,
    "line_end": 370,
@@ -5413,6 +5836,7 @@
    "hashToText": {
     "RrL6CmQzt+DS6qUtN9B4rQ==": "Ouvrir le projet"
    },
+   "filepath": "src/components/TaskRow/index.js",
    "line_beg": 390,
    "col_beg": 9,
    "line_end": 392,
@@ -5426,6 +5850,7 @@
    "hashToText": {
     "dkh9670XE2tzpfITWmPKZg==": "Client responsable de la tâche"
    },
+   "filepath": "src/components/TaskRow/index.js",
    "line_beg": 415,
    "col_beg": 10,
    "line_end": 420,
@@ -5439,6 +5864,7 @@
    "hashToText": {
     "I9kOFQ2aWdWtdEYILK6Q6g==": "Collaborateur responsable de la tâche"
    },
+   "filepath": "src/components/TaskRow/index.js",
    "line_beg": 454,
    "col_beg": 10,
    "line_end": 460,
@@ -5452,6 +5878,7 @@
    "hashToText": {
     "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
    },
+   "filepath": "src/components/TaskRow/index.js",
    "line_beg": 513,
    "col_beg": 11,
    "line_end": 518,
@@ -5465,6 +5892,7 @@
    "hashToText": {
     "5VmV5o8Y9ut6W1vsO4/fRg==": "Aucune tâche ne correspond à ses critères."
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 59,
    "col_beg": 8,
    "line_end": 64,
@@ -5478,6 +5906,7 @@
    "hashToText": {
     "dgWVUOq0Zg052Tg2vjr8jg==": "{=Aucune tâche à faire pour le moment.}{=Dites-nous ce quevous souhaitez faire aujourd'hui ou affectez des tâches àvotre client .}{=Cliquez sur l'icône pour choisir un type de tâche.}"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 69,
    "col_beg": 7,
    "line_end": 111,
@@ -5491,6 +5920,7 @@
    "hashToText": {
     "XltoUdKHNez2UHWg2JFmAA==": "Aucune tâche à faire pour le moment."
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 70,
    "col_beg": 8,
    "line_end": 70,
@@ -5504,6 +5934,7 @@
    "hashToText": {
     "iT05AF5sWkFtC0ygfVFavA==": "Dites-nous ce que {=vous} souhaitez faire aujourd'hui ou affectez des tâches à {=votre client} ."
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 71,
    "col_beg": 8,
    "line_end": 106,
@@ -5517,6 +5948,7 @@
    "hashToText": {
     "2URC807fqkwzAp+obIu6sA==": "Les tâches violettes sont les tâches que vous prévoyez de faire"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 75,
    "col_beg": 11,
    "line_end": 82,
@@ -5530,6 +5962,7 @@
    "hashToText": {
     "OW9i2hJcQBHr04+Mr9E8gQ==": "{=vous}"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 73,
    "col_beg": 9,
    "line_end": 86,
@@ -5543,6 +5976,7 @@
    "hashToText": {
     "k2wcG0IVykGCyS+7jyjwqA==": "vous"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 85,
    "col_beg": 10,
    "line_end": 85,
@@ -5556,6 +5990,7 @@
    "hashToText": {
     "TSy8ePDMG+hb8FQEnjaNTA==": "Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 91,
    "col_beg": 11,
    "line_end": 98,
@@ -5569,6 +6004,7 @@
    "hashToText": {
     "XWxNWBnXnPc4ViQkc17Mpg==": "{=votre client}"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 89,
    "col_beg": 9,
    "line_end": 104,
@@ -5582,6 +6018,7 @@
    "hashToText": {
     "heQ22r11vqa58TcX8xOCSg==": "votre client"
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 101,
    "col_beg": 10,
    "line_end": 103,
@@ -5595,6 +6032,7 @@
    "hashToText": {
     "qh5O/c/BMAA5XZDj2PHZCQ==": "Cliquez sur l'icône pour choisir un type de tâche."
    },
+   "filepath": "src/components/TasksList/index.js",
    "line_beg": 107,
    "col_beg": 8,
    "line_end": 110,
@@ -5609,6 +6047,7 @@
     "DimmS3Y6gQZG+lPiaJdcQA==": "jours",
     "I/1VqcYjGVDwj3ER+mFxwA==": " jour"
    },
+   "filepath": "src/components/TasksProgressBar/index.js",
    "line_beg": 177,
    "col_beg": 6,
    "line_end": 185,
@@ -5630,6 +6069,7 @@
    "hashToText": {
     "VLQLsjivrXj3/IpKs1hohA==": "Fait"
    },
+   "filepath": "src/components/TaskStatusButton/index.js",
    "line_beg": 24,
    "col_beg": 4,
    "line_end": 26,
@@ -5643,6 +6083,7 @@
    "hashToText": {
     "lec416WWcYuS0tj9KEk83g==": "Ré-ouvrir la tâche"
    },
+   "filepath": "src/components/TaskStatusButton/index.js",
    "line_beg": 29,
    "col_beg": 4,
    "line_end": 31,
@@ -5656,6 +6097,7 @@
    "hashToText": {
     "XQIMLBvqMLYA+0BuEA11BA==": "Marquer comme fait"
    },
+   "filepath": "src/components/TaskStatusButton/index.js",
    "line_beg": 34,
    "col_beg": 4,
    "line_end": 36,
@@ -5669,6 +6111,7 @@
    "hashToText": {
     "wSDqRzNSRCV/lAFstY3cZw==": "Cliquer si cette tâche a été réalisée"
    },
+   "filepath": "src/components/TaskStatusButton/index.js",
    "line_beg": 39,
    "col_beg": 4,
    "line_end": 41,
@@ -5682,6 +6125,7 @@
    "hashToText": {
     "R1l/CHfPdQLEvMGzqCZy4Q==": "Tâches automatiques et/ou prédéfinies"
    },
+   "filepath": "src/components/TaskTypeDropdown/index.js",
    "line_beg": 109,
    "col_beg": 4,
    "line_end": 111,
@@ -5695,6 +6139,7 @@
    "hashToText": {
     "EQjurO3LYr2flJ+mnPDmPw==": "Ecrivez ici..."
    },
+   "filepath": "src/components/TextEditor/index.js",
    "line_beg": 77,
    "col_beg": 6,
    "line_end": 79,
@@ -5708,6 +6153,7 @@
    "hashToText": {
     "26cu1NFCEaNmdGnMxeeWvw==": "Temps dépassé"
    },
+   "filepath": "src/components/TimeItTookDisplay/index.js",
    "line_beg": 15,
    "col_beg": 6,
    "line_end": 17,
@@ -5721,6 +6167,7 @@
    "hashToText": {
     "qRD7hPACxpf6ERPedGAzDA==": "Temps surestimé"
    },
+   "filepath": "src/components/TimeItTookDisplay/index.js",
    "line_beg": 19,
    "col_beg": 6,
    "line_end": 21,
@@ -5734,6 +6181,7 @@
    "hashToText": {
     "NS4pcMPvWXw6aCVask7ujw==": "La version d'essai s'arrête {date}"
    },
+   "filepath": "src/components/TrialHeadband/index.js",
    "line_beg": 55,
    "col_beg": 3,
    "line_end": 62,
@@ -5747,6 +6195,7 @@
    "hashToText": {
     "AK9QcaD1X1QUjUtNEyASQw==": "Passer à la version payante"
    },
+   "filepath": "src/components/TrialHeadband/index.js",
    "line_beg": 73,
    "col_beg": 4,
    "line_end": 75,
@@ -5761,6 +6210,7 @@
     "PhPVSOdXlMF6mLuFBvzyPg==": "heures",
     "UjPKEfcKm0iqOwG63Z/KeQ==": " heure"
    },
+   "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 31,
    "col_beg": 4,
    "line_end": 35,
@@ -5783,6 +6233,7 @@
     "x1tyvdB8MRzLg+jGjhF7lw==": "jours",
     "lAnttCCjfPCPrV7JDQRmIg==": " jour"
    },
+   "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 37,
    "col_beg": 4,
    "line_end": 41,
@@ -5805,6 +6256,7 @@
     "eWEhoomhYZ5RU7xkRHO29Q==": "travaillées",
     "j+BJwT4aXGrolwB4Xvy4EQ==": " travaillée"
    },
+   "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 51,
    "col_beg": 3,
    "line_end": 59,
@@ -5827,6 +6279,7 @@
     "BmcGhdMvkoWYqoLSqLuyAQ==": "travaillés",
     "tIZMujl463EtvSJOE81ZXw==": " travaillé"
    },
+   "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 61,
    "col_beg": 3,
    "line_end": 69,
@@ -5849,6 +6302,7 @@
     "D1+T+h79YUP52R0qppp8yQ==": "encore disponibles",
     "QydQ/u+BrtEDDz0iycVSBg==": " encore disponible"
    },
+   "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 77,
    "col_beg": 2,
    "line_end": 85,
@@ -5871,6 +6325,7 @@
     "uOln63s+jZiB/HpReRL68w==": "supplémentaire",
     "1NAgDG7zwjGA95mqXUp5uw==": " supplémentaires"
    },
+   "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 92,
    "col_beg": 2,
    "line_end": 100,
@@ -5892,6 +6347,7 @@
    "hashToText": {
     "bRrt5b1vViqaEiMxvjdyfA==": "Durée de la tâche"
    },
+   "filepath": "src/components/UnitInput/index.js",
    "line_beg": 139,
    "col_beg": 8,
    "line_end": 141,
@@ -5905,6 +6361,7 @@
    "hashToText": {
     "WGB4try42w5d97hqUrQ5Mw==": "Changer l'unité de temps"
    },
+   "filepath": "src/components/UnitInput/index.js",
    "line_beg": 188,
    "col_beg": 8,
    "line_end": 190,
@@ -5918,6 +6375,7 @@
    "hashToText": {
     "2715v0MIrtV97ePELMOJzw==": "j"
    },
+   "filepath": "src/components/UnitInput/index.js",
    "line_beg": 200,
    "col_beg": 9,
    "line_end": 202,
@@ -5931,6 +6389,7 @@
    "hashToText": {
     "2715v0MIrtV97ePELMOJzw==": "j"
    },
+   "filepath": "src/components/UnitInput/index.js",
    "line_beg": 209,
    "col_beg": 10,
    "line_end": 214,
@@ -5944,6 +6403,7 @@
    "hashToText": {
     "gFFcv3gSdxZk3NFM3z+mqQ==": "Valider le temps et marquer comme fait"
    },
+   "filepath": "src/components/UnitInput/index.js",
    "line_beg": 223,
    "col_beg": 8,
    "line_end": 228,
@@ -5957,6 +6417,7 @@
    "hashToText": {
     "OOPK0gSaXTAb7YheBECv+w==": "Joindre un document"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 67,
    "col_beg": 4,
    "line_end": 69,
@@ -5970,6 +6431,7 @@
    "hashToText": {
     "ufUWSEzOm8vyTuA2ElZeUw==": "5Mo total maximum"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 78,
    "col_beg": 5,
    "line_end": 80,
@@ -5983,6 +6445,7 @@
    "hashToText": {
     "uC2Eh2n+q7ybWBSBcdCJXQ==": "Fermer"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 85,
    "col_beg": 7,
    "line_end": 87,
@@ -5996,6 +6459,7 @@
    "hashToText": {
     "LgpEop1rs/PxncMTMR6NCg==": "Annuler"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 90,
    "col_beg": 7,
    "line_end": 92,
@@ -6009,6 +6473,7 @@
    "hashToText": {
     "8g1SovisVn7dSjCC+Koi7Q==": "Ajouter d'autres fichiers"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 95,
    "col_beg": 7,
    "line_end": 97,
@@ -6022,6 +6487,7 @@
    "hashToText": {
     "M7YwHi0LPdDtmKpnq0h7wQ==": "Importer"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 100,
    "col_beg": 7,
    "line_end": 102,
@@ -6035,6 +6501,7 @@
    "hashToText": {
     "DQAuz9tGMIyaLSxAfGx3Cg==": "Appuyer sur échap pour fermer"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 105,
    "col_beg": 7,
    "line_end": 107,
@@ -6048,6 +6515,7 @@
    "hashToText": {
     "jO/bkd4gn0RDv3qitl0ddg==": "Téléversement de document"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 110,
    "col_beg": 7,
    "line_end": 112,
@@ -6061,6 +6529,7 @@
    "hashToText": {
     "bTmZ5H9iocGPKScFNVq22g==": "Lien copié !"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 115,
    "col_beg": 7,
    "line_end": 117,
@@ -6074,6 +6543,7 @@
    "hashToText": {
     "aMAihueHiqs/jvWDRnAJZw==": "Copiez l'url ci-dessous"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 120,
    "col_beg": 7,
    "line_end": 125,
@@ -6087,6 +6557,7 @@
    "hashToText": {
     "ZUgYx3fJ8ZTUcgBZf0QK9Q==": "Copiez le lien"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 128,
    "col_beg": 7,
    "line_end": 130,
@@ -6100,6 +6571,7 @@
    "hashToText": {
     "hdywRfEYw1zDeSq9PBmyYw==": "Fichier source: {name}"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 133,
    "col_beg": 7,
    "line_end": 139,
@@ -6113,6 +6585,7 @@
    "hashToText": {
     "U36ADZ1K4WXynEPg7XSWVw==": "Terminé"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 142,
    "col_beg": 7,
    "line_end": 144,
@@ -6126,6 +6599,7 @@
    "hashToText": {
     "ubRu3KZOnpfwgki00HrWhw==": "Retirer le fichier"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 147,
    "col_beg": 7,
    "line_end": 149,
@@ -6139,6 +6613,7 @@
    "hashToText": {
     "RruyjG6y/9rRRlv9IFQH/A==": "Modifier le fichier"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 152,
    "col_beg": 7,
    "line_end": 154,
@@ -6152,6 +6627,7 @@
    "hashToText": {
     "QAS+9Csczykro0iOwUZTPw==": "Modification de {file} en cours"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 157,
    "col_beg": 7,
    "line_end": 161,
@@ -6165,6 +6641,7 @@
    "hashToText": {
     "eNi/jlbqpHkKzuRpHa7S7g==": "Modifier"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 164,
    "col_beg": 7,
    "line_end": 166,
@@ -6178,6 +6655,7 @@
    "hashToText": {
     "QiWYflRhc3gIMPq3b/k8lQ==": "Valider modification"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 169,
    "col_beg": 7,
    "line_end": 171,
@@ -6191,6 +6669,7 @@
    "hashToText": {
     "uNYI17mN79lI3tR/O0qeDw==": "Mon appareil"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 174,
    "col_beg": 7,
    "line_end": 176,
@@ -6204,6 +6683,7 @@
    "hashToText": {
     "QKxyV3qx182h+0AUxS/bBw==": "Déposer des fichiers ici, {browse} votre ordinateur, ou importer de"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 179,
    "col_beg": 7,
    "line_end": 188,
@@ -6217,6 +6697,7 @@
    "hashToText": {
     "pNpjtwC48a1T5xQDbThe1w==": "Déposer des fichiers ici ou {browser} votre ordinateur"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 191,
    "col_beg": 7,
    "line_end": 197,
@@ -6230,6 +6711,7 @@
    "hashToText": {
     "dvngynB1xzacEO672BH3Fw==": "parcourir"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 200,
    "col_beg": 7,
    "line_end": 202,
@@ -6243,6 +6725,7 @@
    "hashToText": {
     "qb746wHKeqixmD3Uyb0TMA==": "Téléversement complété"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 205,
    "col_beg": 7,
    "line_end": 207,
@@ -6256,6 +6739,7 @@
    "hashToText": {
     "5Y/wetqEH5fndpP1E9x5jA==": "Reprendre téléversement"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 210,
    "col_beg": 7,
    "line_end": 212,
@@ -6269,6 +6753,7 @@
    "hashToText": {
     "wzXtOG/oBdZgxrYIzwGH7Q==": "Pauser téléversement"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 215,
    "col_beg": 7,
    "line_end": 217,
@@ -6282,6 +6767,7 @@
    "hashToText": {
     "MspQFmxO1GpxcQlYABR3Hg==": "Réessayer téléversement"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 220,
    "col_beg": 7,
    "line_end": 222,
@@ -6295,6 +6781,7 @@
    "hashToText": {
     "NjEbYFmBk3VcEyT7ZNclfg==": "{smartCount} fichier sélectionné"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 226,
    "col_beg": 8,
    "line_end": 234,
@@ -6308,6 +6795,7 @@
    "hashToText": {
     "FK7rTGBN5/a379aA1OIZ0g==": "{smartCount} fichiers sélectionnés"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 237,
    "col_beg": 8,
    "line_end": 245,
@@ -6321,6 +6809,7 @@
    "hashToText": {
     "tua1HA2mbPyuJDZlBZK4yw==": "En cours d'envoi"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 249,
    "col_beg": 7,
    "line_end": 251,
@@ -6334,6 +6823,7 @@
    "hashToText": {
     "7+YhjI1xOrhhJ0Wf9hyORQ==": "Terminé"
    },
+   "filepath": "src/components/UploadDashboard/index.js",
    "line_beg": 254,
    "col_beg": 7,
    "line_end": 256,
@@ -6347,6 +6837,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserAssistantForm/index.js",
    "line_beg": 62,
    "col_beg": 7,
    "line_end": 64,
@@ -6360,6 +6851,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserAssistantForm/index.js",
    "line_beg": 67,
    "col_beg": 6,
    "line_end": 69,
@@ -6373,6 +6865,7 @@
    "hashToText": {
     "NtWqhmYpXKhSrATswkArug==": "Nom de l'assistant"
    },
+   "filepath": "src/components/UserAssistantForm/index.js",
    "line_beg": 99,
    "col_beg": 9,
    "line_end": 101,
@@ -6386,6 +6879,7 @@
    "hashToText": {
     "DtVyWNtCxnke96ZC9CBHwA==": "Langue de l'assistant"
    },
+   "filepath": "src/components/UserAssistantForm/index.js",
    "line_beg": 112,
    "col_beg": 9,
    "line_end": 117,
@@ -6399,6 +6893,7 @@
    "hashToText": {
     "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
    },
+   "filepath": "src/components/UserAssistantForm/index.js",
    "line_beg": 127,
    "col_beg": 7,
    "line_end": 129,
@@ -6412,6 +6907,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 70,
    "col_beg": 9,
    "line_end": 72,
@@ -6425,6 +6921,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 83,
    "col_beg": 10,
    "line_end": 85,
@@ -6438,6 +6935,7 @@
    "hashToText": {
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 124,
    "col_beg": 11,
    "line_end": 129,
@@ -6451,6 +6949,7 @@
    "hashToText": {
     "l3FQqY76BTjAVhnKJLbldg==": "Raison sociale"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 151,
    "col_beg": 14,
    "line_end": 156,
@@ -6464,6 +6963,7 @@
    "hashToText": {
     "vcR97IvUeEk/eoSlrsPF7w==": "Bertrand SA"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 159,
    "col_beg": 14,
    "line_end": 164,
@@ -6477,6 +6977,7 @@
    "hashToText": {
     "6nC+/TRmyaMHkVN2gM/4LA==": "Numéro de téléphone"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 174,
    "col_beg": 14,
    "line_end": 179,
@@ -6490,6 +6991,7 @@
    "hashToText": {
     "8INpXIUFrim0DFqdR969lA==": "0427..."
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 182,
    "col_beg": 14,
    "line_end": 187,
@@ -6503,6 +7005,7 @@
    "hashToText": {
     "QBtafI1hKYBVCIJVUQiQNA==": "Adresse de la société"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 198,
    "col_beg": 14,
    "line_end": 204,
@@ -6516,6 +7019,7 @@
    "hashToText": {
     "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
    },
+   "filepath": "src/components/UserCompanyForm/index.js",
    "line_beg": 226,
    "col_beg": 12,
    "line_end": 231,
@@ -6529,6 +7033,7 @@
    "hashToText": {
     "/QURQjp/ePc9rqZ9ZcWJGQ==": "Email invalide"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 73,
    "col_beg": 7,
    "line_end": 75,
@@ -6542,6 +7047,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 78,
    "col_beg": 7,
    "line_end": 80,
@@ -6555,6 +7061,7 @@
    "hashToText": {
     "TTfvlLEkZBV4WNpvf04jlg==": "L'email est déjà utilisé"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 84,
    "col_beg": 7,
    "line_end": 86,
@@ -6568,6 +7075,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 95,
    "col_beg": 6,
    "line_end": 97,
@@ -6581,6 +7089,7 @@
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 100,
    "col_beg": 6,
    "line_end": 102,
@@ -6594,6 +7103,7 @@
    "hashToText": {
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 141,
    "col_beg": 8,
    "line_end": 143,
@@ -6607,6 +7117,7 @@
    "hashToText": {
     "tKDQvuckzlMkqxRQ6nVeUQ==": "Prénom"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 161,
    "col_beg": 10,
    "line_end": 163,
@@ -6620,6 +7131,7 @@
    "hashToText": {
     "yLb/XMPb6OxiquIsHKUzhg==": "Jacques"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 166,
    "col_beg": 10,
    "line_end": 171,
@@ -6633,6 +7145,7 @@
    "hashToText": {
     "rtgzeya0d0tx6WbU7vp5MA==": "Nom"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 181,
    "col_beg": 10,
    "line_end": 183,
@@ -6646,6 +7159,7 @@
    "hashToText": {
     "RQiAjOLwfLR1RRcfF3WNOw==": "Bertrand"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 186,
    "col_beg": 10,
    "line_end": 191,
@@ -6659,6 +7173,7 @@
    "hashToText": {
     "wna0FUk7gWFKmLBh9RHo/w==": "Email"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 201,
    "col_beg": 10,
    "line_end": 203,
@@ -6672,6 +7187,7 @@
    "hashToText": {
     "7rGKz1PBwZPyEyze4fA2lw==": "jacques@bertrandsa.com"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 206,
    "col_beg": 10,
    "line_end": 211,
@@ -6685,6 +7201,7 @@
    "hashToText": {
     "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
    },
+   "filepath": "src/components/UserDataForm/index.js",
    "line_beg": 226,
    "col_beg": 8,
    "line_end": 228,
@@ -6698,6 +7215,7 @@
    "hashToText": {
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 195,
    "col_beg": 8,
    "line_end": 197,
@@ -6711,6 +7229,7 @@
    "hashToText": {
     "BWZHvitWVUZoKx3CZZtTkw==": "Horaires de travail"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 228,
    "col_beg": 10,
    "line_end": 233,
@@ -6724,6 +7243,7 @@
    "hashToText": {
     "OPnotGia0dOGBf9WwiENqg==": "matin"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 253,
    "col_beg": 12,
    "line_end": 258,
@@ -6737,6 +7257,7 @@
    "hashToText": {
     "Jjs0w0HhNdCnigjXbVf/Nw==": "petit déjeuner"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 266,
    "col_beg": 12,
    "line_end": 271,
@@ -6750,6 +7271,7 @@
    "hashToText": {
     "9ddGoR97go79DKEIb6E4Tw==": "déjeuner"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 279,
    "col_beg": 12,
    "line_end": 284,
@@ -6763,6 +7285,7 @@
    "hashToText": {
     "KTBDnqFdeYJqAVvMCQhTZA==": "soirée"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 292,
    "col_beg": 12,
    "line_end": 297,
@@ -6776,6 +7299,7 @@
    "hashToText": {
     "RQWEt64u9sSyyY2x55ZFrA==": "nuit"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 305,
    "col_beg": 12,
    "line_end": 310,
@@ -6789,6 +7313,7 @@
    "hashToText": {
     "VEkFArLbNPFCUCcY/9LdMg==": "Jours travaillés"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 317,
    "col_beg": 10,
    "line_end": 319,
@@ -6802,6 +7327,7 @@
    "hashToText": {
     "e9blpGJ3ohrnJtiqeUPSeQ==": "Afficher seulement les jours travaillés dans le calendrier"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 330,
    "col_beg": 11,
    "line_end": 336,
@@ -6815,6 +7341,7 @@
    "hashToText": {
     "X3FGQxYJmAJHajDXM4EKdQ==": "Fuseau horaire"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 340,
    "col_beg": 10,
    "line_end": 342,
@@ -6828,6 +7355,7 @@
    "hashToText": {
     "d0hqbx4CE+vVuAB5AmruYQ==": "Triez par fuseau"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 348,
    "col_beg": 11,
    "line_end": 353,
@@ -6841,6 +7369,7 @@
    "hashToText": {
     "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
    },
+   "filepath": "src/components/UserWorkHourAndDaysForm/index.js",
    "line_beg": 403,
    "col_beg": 8,
    "line_end": 405,
@@ -6854,6 +7383,7 @@
    "hashToText": {
     "+PmhHJZfOZ3gkpl0DbCeuQ==": "lun."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 42,
    "col_beg": 3,
    "line_end": 44,
@@ -6867,6 +7397,7 @@
    "hashToText": {
     "wD+HD22PU9FBg/WiuyKitA==": "mar."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 50,
    "col_beg": 3,
    "line_end": 52,
@@ -6880,6 +7411,7 @@
    "hashToText": {
     "yzwAJKdqF3VcPTd0oQxk/w==": "mer."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 58,
    "col_beg": 3,
    "line_end": 60,
@@ -6893,6 +7425,7 @@
    "hashToText": {
     "WETd2fSSML0hVoySNkgb2A==": "jeu."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 66,
    "col_beg": 3,
    "line_end": 68,
@@ -6906,6 +7439,7 @@
    "hashToText": {
     "b39Zrr2sgT86V41qBOIr5g==": "ven."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 74,
    "col_beg": 3,
    "line_end": 76,
@@ -6919,6 +7453,7 @@
    "hashToText": {
     "xhrret5iPPHjzoxV54a0qA==": "sam."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 82,
    "col_beg": 3,
    "line_end": 84,
@@ -6932,6 +7467,7 @@
    "hashToText": {
     "SPr4BNjUydrldEsrvJjBsQ==": "dim."
    },
+   "filepath": "src/components/WeekDaysInput/index.js",
    "line_beg": 90,
    "col_beg": 3,
    "line_end": 92,
@@ -6945,6 +7481,7 @@
    "hashToText": {
     "dRpvEmIGU8L2bz/BSZSh+g==": "{=Bienvenue sur Inyo,}{=Découvrez en 1'30 min les options de bases de Inyo et commencez dès maintenant à optimiser vos journées!}"
    },
+   "filepath": "src/components/WelcomeModal/index.js",
    "line_beg": 30,
    "col_beg": 3,
    "line_end": 36,
@@ -6958,6 +7495,7 @@
    "hashToText": {
     "fbQO5dX6zr6+oy92rddz7g==": "Bienvenue sur Inyo,"
    },
+   "filepath": "src/components/WelcomeModal/index.js",
    "line_beg": 31,
    "col_beg": 4,
    "line_end": 31,
@@ -6971,6 +7509,7 @@
    "hashToText": {
     "Rofp3YzRdAAjRoPxh7q45w==": "Découvrez en 1'30 min les options de bases de Inyo et commencez dès maintenant à optimiser vos journées!"
    },
+   "filepath": "src/components/WelcomeModal/index.js",
    "line_beg": 32,
    "col_beg": 4,
    "line_end": 35,
@@ -6984,6 +7523,7 @@
    "hashToText": {
     "+JrndFhv3EieAmIh4M4Vlw==": "J'ai compris!"
    },
+   "filepath": "src/components/WelcomeModal/index.js",
    "line_beg": 42,
    "col_beg": 5,
    "line_end": 44,
@@ -6997,6 +7537,7 @@
    "hashToText": {
     "XExdBgqJHNNwA1FTFraJjw==": "{prout}haha"
    },
+   "filepath": "src/fbt/test.js",
    "line_beg": 7,
    "col_beg": 2,
    "line_end": 9,
@@ -7010,6 +7551,7 @@
    "hashToText": {
     "7QXhz33T4NeJ5Gu1AhliDA==": "Planning et liste de tâches"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 24,
    "col_beg": 6,
    "line_end": 26,
@@ -7023,6 +7565,7 @@
    "hashToText": {
     "DniocCK/BDluu+FdpMM/rQ==": "Dashboard"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 30,
    "col_beg": 6,
    "line_end": 32,
@@ -7036,6 +7579,7 @@
    "hashToText": {
     "XSDtyx55XDlbjwDAvcEQuQ==": "Toutes les projets"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 37,
    "col_beg": 6,
    "line_end": 39,
@@ -7049,6 +7593,7 @@
    "hashToText": {
     "ZZ/Pz3sXsx84sVhWrUHaFw==": "Projets"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 43,
    "col_beg": 6,
    "line_end": 45,
@@ -7062,6 +7607,7 @@
    "hashToText": {
     "oetc6lmmqleqUpsvhS3rxQ==": "Tous les contacts"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 50,
    "col_beg": 6,
    "line_end": 52,
@@ -7075,6 +7621,7 @@
    "hashToText": {
     "+O2F4Nyjvrb3Yk/fGGbWQA==": "Contacts"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 56,
    "col_beg": 6,
    "line_end": 58,
@@ -7088,6 +7635,7 @@
    "hashToText": {
     "ofzGly1xcbm/vDbYLnqnFg==": "Rapports de votre activité"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 63,
    "col_beg": 6,
    "line_end": 65,
@@ -7101,6 +7649,7 @@
    "hashToText": {
     "Lz7HPSfcOTiqazAAyS+/MQ==": "Statistiques"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 69,
    "col_beg": 6,
    "line_end": 71,
@@ -7114,6 +7663,7 @@
    "hashToText": {
     "f3bnThiVUm5UpZyRGjVx7w==": "Profil, jours travaillés, etc."
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 76,
    "col_beg": 6,
    "line_end": 78,
@@ -7127,6 +7677,7 @@
    "hashToText": {
     "1vtbytZhEPUv21EPWCKSKA==": "Réglages"
    },
+   "filepath": "src/HOC/withHeader.js",
    "line_beg": 82,
    "col_beg": 6,
    "line_end": 84,
@@ -7140,6 +7691,7 @@
    "hashToText": {
     "abPJyr5VGFif2i9TExJ3+A==": "Bonjour {firstName} !"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 216,
    "col_beg": 5,
    "line_end": 219,
@@ -7153,6 +7705,7 @@
    "hashToText": {
     "NuIIkViQIyeg6HJUdNibGQ==": "Vous"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 230,
    "col_beg": 9,
    "line_end": 232,
@@ -7166,6 +7719,7 @@
    "hashToText": {
     "efDJHJxyWWw4dwGW5vwX6Q==": "Votre société"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 240,
    "col_beg": 9,
    "line_end": 242,
@@ -7179,6 +7733,7 @@
    "hashToText": {
     "4AlAty1s5DLJiucEkPdiKw==": "Vos options"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 250,
    "col_beg": 9,
    "line_end": 252,
@@ -7192,6 +7747,7 @@
    "hashToText": {
     "qwccLMqDVPIS4TSJMEmLiA==": "Votre assistant·e"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 262,
    "col_beg": 9,
    "line_end": 264,
@@ -7205,6 +7761,7 @@
    "hashToText": {
     "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 272,
    "col_beg": 9,
    "line_end": 274,
@@ -7218,6 +7775,7 @@
    "hashToText": {
     "1kj1WzOm2vc74isNT75ZdA==": "Vous"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 282,
    "col_beg": 7,
    "line_end": 284,
@@ -7231,6 +7789,7 @@
    "hashToText": {
     "aQ4Yv6LVSKEViZ1s9+Uefg==": "Votre société"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 288,
    "col_beg": 7,
    "line_end": 290,
@@ -7244,6 +7803,7 @@
    "hashToText": {
     "KPu9BX8WauG07K7pDVC5TQ==": "Vos horaires et jours de travail"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 294,
    "col_beg": 7,
    "line_end": 299,
@@ -7257,6 +7817,7 @@
    "hashToText": {
     "AJGA334ZNjXST0vpVk74BQ==": "Votre assistant·e"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 309,
    "col_beg": 7,
    "line_end": 311,
@@ -7270,6 +7831,7 @@
    "hashToText": {
     "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 319,
    "col_beg": 7,
    "line_end": 321,
@@ -7283,6 +7845,7 @@
    "hashToText": {
     "mPzERUHPGyQqbs+vT+dw2A==": "Me désinscrire"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 337,
    "col_beg": 8,
    "line_end": 339,
@@ -7296,6 +7859,7 @@
    "hashToText": {
     "ImPMNsKu/b/s/GaXMWPwCA==": "Me déconnecter"
    },
+   "filepath": "src/screens/App/Account/index.js",
    "line_beg": 353,
    "col_beg": 8,
    "line_end": 355,
@@ -7309,6 +7873,7 @@
    "hashToText": {
     "lhFPrqsswH0e8NT1rBLU5A==": "Clients"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 207,
    "col_beg": 6,
    "line_end": 209,
@@ -7322,6 +7887,7 @@
    "hashToText": {
     "ezrQWfta/m1Rf7tNelH8Bw==": "Collaborateurs"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 212,
    "col_beg": 6,
    "line_end": 214,
@@ -7335,6 +7901,7 @@
    "hashToText": {
     "qHq966N5G00X+fNXuhoPOA==": "Filtrer par nom, email..."
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 222,
    "col_beg": 7,
    "line_end": 224,
@@ -7348,6 +7915,7 @@
    "hashToText": {
     "Cn6gbM9LLN/74A83T0SmWA==": "Présenter Inyo à un collaborateur"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 232,
    "col_beg": 7,
    "line_end": 234,
@@ -7361,6 +7929,7 @@
    "hashToText": {
     "IhmalYP8MAl4TAHpVb4tig==": "Inviter un collaborateur"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 237,
    "col_beg": 7,
    "line_end": 239,
@@ -7374,6 +7943,7 @@
    "hashToText": {
     "ESj15rHHAIxlu6xc721uVg==": "Collaborateurs"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 244,
    "col_beg": 5,
    "line_end": 246,
@@ -7387,6 +7957,7 @@
    "hashToText": {
     "JfFXLtO+EIe34WmpLpRwOQ==": "Prénom et nom"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 252,
    "col_beg": 8,
    "line_end": 254,
@@ -7400,6 +7971,7 @@
    "hashToText": {
     "wna0FUk7gWFKmLBh9RHo/w==": "Email"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 257,
    "col_beg": 8,
    "line_end": 259,
@@ -7413,6 +7985,7 @@
    "hashToText": {
     "m5qHdAmgGa2AgFyMnVdcdQ==": "Requêtes reçues"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 315,
    "col_beg": 5,
    "line_end": 317,
@@ -7426,6 +7999,7 @@
    "hashToText": {
     "JfFXLtO+EIe34WmpLpRwOQ==": "Prénom et nom"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 323,
    "col_beg": 8,
    "line_end": 325,
@@ -7439,6 +8013,7 @@
    "hashToText": {
     "wna0FUk7gWFKmLBh9RHo/w==": "Email"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 328,
    "col_beg": 8,
    "line_end": 330,
@@ -7452,6 +8027,7 @@
    "hashToText": {
     "DtOHDHLuRWfnet/XLn3wNg==": "Status"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 333,
    "col_beg": 8,
    "line_end": 335,
@@ -7465,6 +8041,7 @@
    "hashToText": {
     "8x8YsjKUtibfWhSGgs3kCQ==": "Requêtes envoyées"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 387,
    "col_beg": 5,
    "line_end": 389,
@@ -7478,6 +8055,7 @@
    "hashToText": {
     "JfFXLtO+EIe34WmpLpRwOQ==": "Prénom et nom"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 395,
    "col_beg": 8,
    "line_end": 397,
@@ -7491,6 +8069,7 @@
    "hashToText": {
     "wna0FUk7gWFKmLBh9RHo/w==": "Email"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 400,
    "col_beg": 8,
    "line_end": 402,
@@ -7504,6 +8083,7 @@
    "hashToText": {
     "1Taf1bmzmMgrjwJ4fbSl6g==": "Statut"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 405,
    "col_beg": 8,
    "line_end": 407,
@@ -7517,6 +8097,7 @@
    "hashToText": {
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 433,
    "col_beg": 11,
    "line_end": 435,
@@ -7530,6 +8111,7 @@
    "hashToText": {
     "RCLArFDcbvhrRkgAf+sM3w==": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches assignées à ce collaborateur seront desassignées."
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 458,
    "col_beg": 7,
    "line_end": 465,
@@ -7543,6 +8125,7 @@
    "hashToText": {
     "WNY18oeHyCZ8+4K0wp49ag==": "Êtes-vous sûr de vouloir continuer?"
    },
+   "filepath": "src/screens/App/Collaborators/index.js",
    "line_beg": 468,
    "col_beg": 7,
    "line_end": 470,
@@ -7556,6 +8139,7 @@
    "hashToText": {
     "2+1jp+4fFq57A55VHIjcqg==": "Clients"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 182,
    "col_beg": 6,
    "line_end": 184,
@@ -7569,6 +8153,7 @@
    "hashToText": {
     "ESj15rHHAIxlu6xc721uVg==": "Collaborateurs"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 187,
    "col_beg": 6,
    "line_end": 189,
@@ -7582,6 +8167,7 @@
    "hashToText": {
     "qHq966N5G00X+fNXuhoPOA==": "Filtrer par nom, email..."
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 197,
    "col_beg": 7,
    "line_end": 199,
@@ -7595,6 +8181,7 @@
    "hashToText": {
     "darLDrB65iABWdvKwY+ZqA==": "Présenter Inyo à un client"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 207,
    "col_beg": 7,
    "line_end": 209,
@@ -7608,6 +8195,7 @@
    "hashToText": {
     "1uLtnN7bl58Xnr5X44XEWQ==": "Créer un nouveau client"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 212,
    "col_beg": 7,
    "line_end": 214,
@@ -7621,6 +8209,7 @@
    "hashToText": {
     "l3FQqY76BTjAVhnKJLbldg==": "Raison sociale"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 222,
    "col_beg": 8,
    "line_end": 224,
@@ -7634,6 +8223,7 @@
    "hashToText": {
     "XDxe14Z+daC5gTIgv3v+KA==": "Référent·e"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 227,
    "col_beg": 8,
    "line_end": 229,
@@ -7647,6 +8237,7 @@
    "hashToText": {
     "wna0FUk7gWFKmLBh9RHo/w==": "Email"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 232,
    "col_beg": 8,
    "line_end": 234,
@@ -7660,6 +8251,7 @@
    "hashToText": {
     "auHpvX9+6eRxkGsrZJwm+A==": "Téléphone"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 237,
    "col_beg": 8,
    "line_end": 239,
@@ -7673,6 +8265,7 @@
    "hashToText": {
     "ebZrZhCCqCyf7csdxVrjbQ==": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches associés à ce client se retrouveront sans client."
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 317,
    "col_beg": 7,
    "line_end": 324,
@@ -7686,6 +8279,7 @@
    "hashToText": {
     "iGxJg476xNPBaUUrMxS88g==": "Êtes-vous sûr de vouloir continuer?"
    },
+   "filepath": "src/screens/App/Customers/index.js",
    "line_beg": 327,
    "col_beg": 7,
    "line_end": 329,
@@ -7699,9 +8293,10 @@
    "hashToText": {
     "UvVjY1/twy9IgUWUD3GGHQ==": "Vous n'avez plus de tâches à planifier."
    },
-   "line_beg": 310,
+   "filepath": "src/screens/App/Dashboard/tasks.js",
+   "line_beg": 311,
    "col_beg": 11,
-   "line_end": 313,
+   "line_end": 314,
    "col_end": 17,
    "type": "text",
    "desc": "no more task",
@@ -7712,6 +8307,7 @@
    "hashToText": {
     "XLMVB3/nuA090zxeDw+2LQ==": "Nouveau projet"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 208,
    "col_beg": 7,
    "line_end": 210,
@@ -7725,6 +8321,7 @@
    "hashToText": {
     "hJjiV9JzSiHE20v7+30Ksg==": "{=Aucun projet en cours?}{=Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant? ou en vous basant sur un de vos anciens projets[link] .}{=Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne.}"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 218,
    "col_beg": 8,
    "line_end": 249,
@@ -7738,6 +8335,7 @@
    "hashToText": {
     "dNnadpl9i/nprGIBfOKEZw==": "Aucun projet en cours?"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 219,
    "col_beg": 9,
    "line_end": 219,
@@ -7751,6 +8349,7 @@
    "hashToText": {
     "evrrYaA5Sm3T3uFW0D83tw==": "Créez un projet à partir de zéro, ou gagnez du temps en utilisant un modèle existant {=?} ou en vous basant sur un de vos anciens projets {link} ."
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 220,
    "col_beg": 9,
    "line_end": 243,
@@ -7764,6 +8363,7 @@
    "hashToText": {
     "AygQaD7+tnF8Y86EH4yoxg==": "?"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 224,
    "col_beg": 10,
    "line_end": 229,
@@ -7777,6 +8377,7 @@
    "hashToText": {
     "vSUJRGTCto7AIssuqSi1Zg==": "Vous pouvez aussi tester notre projet fictif et comprendre comment inyo fonctionne."
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 244,
    "col_beg": 9,
    "line_end": 248,
@@ -7790,6 +8391,7 @@
    "hashToText": {
     "HPZQVxoBG4OhMWpXoVN9vg==": "Commencer"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 288,
    "col_beg": 9,
    "line_end": 290,
@@ -7803,6 +8405,7 @@
    "hashToText": {
     "yPHcScF0Wggnb1ctQYVs3Q==": "{=Utiliser un de nos modèles}{=Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases.}{=Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)}{=J'ai compris}"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 301,
    "col_beg": 8,
    "line_end": 325,
@@ -7816,6 +8419,7 @@
    "hashToText": {
     "jiyxvjE6WJ3ZmCoBQ+5HLg==": "Utiliser un de nos modèles"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 302,
    "col_beg": 9,
    "line_end": 304,
@@ -7829,6 +8433,7 @@
    "hashToText": {
     "XcfEu+uxC+yuWhPx51Nnzw==": "Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases."
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 305,
    "col_beg": 9,
    "line_end": 310,
@@ -7842,6 +8447,7 @@
    "hashToText": {
     "0aoU3CKqbmlefgtfGhyJCQ==": "Nous les avons construits en collaboration avec des freelances expérimentés dans leur domaines (design, développement, etc.)"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 311,
    "col_beg": 9,
    "line_end": 316,
@@ -7855,6 +8461,7 @@
    "hashToText": {
     "2+2Ch9ZOVYn7UJmr3H2Y4Q==": "{=J'ai compris}"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 317,
    "col_beg": 9,
    "line_end": 324,
@@ -7868,6 +8475,7 @@
    "hashToText": {
     "FzxtJ83hbMojIX8wEifcQw==": "J'ai compris"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 318,
    "col_beg": 10,
    "line_end": 323,
@@ -7881,6 +8489,7 @@
    "hashToText": {
     "D6npMZDWizC+ERGqpzlFIQ==": "{=Se baser sur l'un de vos anciens projets}{=Vous avez le sentiment que beaucoup de vos projets se ressemblent?}{=Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches.}{=J'ai compris}"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 335,
    "col_beg": 8,
    "line_end": 358,
@@ -7894,6 +8503,7 @@
    "hashToText": {
     "w73XHxEgyFWRyNa22lRsow==": "Se baser sur l'un de vos anciens projets"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 336,
    "col_beg": 9,
    "line_end": 338,
@@ -7907,6 +8517,7 @@
    "hashToText": {
     "220yHrpOSKYgeqIhlxKXCQ==": "Vous avez le sentiment que beaucoup de vos projets se ressemblent?"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 339,
    "col_beg": 9,
    "line_end": 342,
@@ -7920,6 +8531,7 @@
    "hashToText": {
     "YZVbyZR1gS45yWy7iJtCOw==": "Utilisez votre expérience passée pour éviter de perdre du temps à recréer vos choses à faire, et devisez au plus juste en vous basant sur le temps réellement passés sur chacune des tâches."
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 343,
    "col_beg": 9,
    "line_end": 349,
@@ -7933,6 +8545,7 @@
    "hashToText": {
     "E1+7QJSI5oAtGZ2Uzsvi4w==": "{=J'ai compris}"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 350,
    "col_beg": 9,
    "line_end": 357,
@@ -7946,6 +8559,7 @@
    "hashToText": {
     "e3C6JVsOeac+5TNhwisZew==": "J'ai compris"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 351,
    "col_beg": 10,
    "line_end": 356,
@@ -7959,6 +8573,7 @@
    "hashToText": {
     "5hf1LAlyaX4VqgHcM3V29g==": "Projets en cours"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 366,
    "col_beg": 8,
    "line_end": 368,
@@ -7972,6 +8587,7 @@
    "hashToText": {
     "3lJDpgzRQbz8+j0KpkFVzA==": "Supprimer ce projet"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 385,
    "col_beg": 13,
    "line_end": 390,
@@ -7985,6 +8601,7 @@
    "hashToText": {
     "XH+IkdgId0X/tzysM17Avg==": "Voir tous les projets"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 441,
    "col_beg": 10,
    "line_end": 446,
@@ -7998,6 +8615,7 @@
    "hashToText": {
     "XEXf079q9jx+wS48JreIMw==": "Voir uniquement les projets en cours"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 453,
    "col_beg": 10,
    "line_end": 458,
@@ -8011,6 +8629,7 @@
    "hashToText": {
     "MZjPW/w0xaRnnR04Xnuh4g==": "Projets archivés"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 465,
    "col_beg": 10,
    "line_end": 470,
@@ -8024,6 +8643,7 @@
    "hashToText": {
     "0w459u1+v0RIwr2gIVy8MA==": "Une fois vos projets terminés, archivez-les pour vous concentrer sur les projets en cours."
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 480,
    "col_beg": 12,
    "line_end": 488,
@@ -8037,6 +8657,7 @@
    "hashToText": {
     "3lJDpgzRQbz8+j0KpkFVzA==": "Supprimer ce projet"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 508,
    "col_beg": 15,
    "line_end": 514,
@@ -8050,6 +8671,7 @@
    "hashToText": {
     "uigk9OdQe86ktVVkMaSJ0w==": "Désarchiver ce projet"
    },
+   "filepath": "src/screens/App/Projects/index.js",
    "line_beg": 538,
    "col_beg": 15,
    "line_end": 544,
@@ -8063,6 +8685,7 @@
    "hashToText": {
     "KOapM+8+RoGh5EftlvYEOA==": "Statistiques"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 248,
    "col_beg": 5,
    "line_end": 250,
@@ -8076,6 +8699,7 @@
    "hashToText": {
     "EIjZ8Jh8IVnbctQCJN+z3w==": "Afficher {timespan}"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 253,
    "col_beg": 5,
    "line_end": 309,
@@ -8089,6 +8713,7 @@
    "hashToText": {
     "DKxLQ1KcMR56JIxL15QDog==": "les 7 derniers jours"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 263,
    "col_beg": 12,
    "line_end": 268,
@@ -8102,6 +8727,7 @@
    "hashToText": {
     "rtJdCPl645dXeKmtCpfEFw==": "les 30 derniers jours"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 274,
    "col_beg": 12,
    "line_end": 279,
@@ -8115,6 +8741,7 @@
    "hashToText": {
     "3kC4J4DKoJvOVEu3Zh81iA==": "les 3 derniers mois"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 285,
    "col_beg": 12,
    "line_end": 290,
@@ -8128,6 +8755,7 @@
    "hashToText": {
     "pMmKDGLFliqJJcK+v+myZg==": "les 6 derniers mois"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 296,
    "col_beg": 12,
    "line_end": 301,
@@ -8141,6 +8769,7 @@
    "hashToText": {
     "eJe+ko0d0nvEjGFrDOqZAA==": "Répartition de vos clients"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 315,
    "col_beg": 5,
    "line_end": 317,
@@ -8154,6 +8783,7 @@
    "hashToText": {
     "1K/eeL6OoINQBgAI2S+tCQ==": "Rapport temps estimé / temps réellement passé"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 334,
    "col_beg": 5,
    "line_end": 339,
@@ -8167,6 +8797,7 @@
    "hashToText": {
     "0K+9honF4vsx62F8wA0Svw==": "Temps travaillé"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 352,
    "col_beg": 7,
    "line_end": 354,
@@ -8180,6 +8811,7 @@
    "hashToText": {
     "NVAk5+s4aeW/WEWjew+EdQ==": "Temps estimé"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 370,
    "col_beg": 7,
    "line_end": 372,
@@ -8193,6 +8825,7 @@
    "hashToText": {
     "krD+apK875r/1FAplgTaQA==": "Rappels envoyés"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 388,
    "col_beg": 7,
    "line_end": 390,
@@ -8206,6 +8839,7 @@
    "hashToText": {
     "zZBJ6cBdsYxLXMc/mbyOGw==": "Vous souhaitez d'autres statistiques? {=Contactez-nous}"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 409,
    "col_beg": 7,
    "line_end": 417,
@@ -8219,6 +8853,7 @@
    "hashToText": {
     "BdSTSL1PZ+q5EHM3jdBIJQ==": "Contactez-nous"
    },
+   "filepath": "src/screens/App/Stats/index.js",
    "line_beg": 411,
    "col_beg": 8,
    "line_end": 416,
@@ -8232,6 +8867,7 @@
    "hashToText": {
     "ugFiGB+rar7uI0qAMHja6Q==": "Liste des tags"
    },
+   "filepath": "src/screens/App/Tags/index.js",
    "line_beg": 36,
    "col_beg": 6,
    "line_end": 38,
@@ -8245,6 +8881,7 @@
    "hashToText": {
     "FbbkbH9OvX1X/vNoxYkbOQ==": "Vous êtes nouveau ? {=Créer un compte}"
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 119,
    "col_beg": 8,
    "line_end": 124,
@@ -8258,6 +8895,7 @@
    "hashToText": {
     "nBqNvxz4Oi2BTH1NxtSkkg==": "Créer un compte"
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 121,
    "col_beg": 9,
    "line_end": 123,
@@ -8271,6 +8909,7 @@
    "hashToText": {
     "R7Raymn3bVfHqrldrwY3Vw==": "Vous avez déjà un compte ? {=Se connecter}"
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 133,
    "col_beg": 8,
    "line_end": 136,
@@ -8284,6 +8923,7 @@
    "hashToText": {
     "08EtixLi+SWBnUDe/PbRCQ==": "Se connecter"
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 135,
    "col_beg": 9,
    "line_end": 135,
@@ -8297,6 +8937,7 @@
    "hashToText": {
     "7vYs75+M4L2enSnrMzN45Q==": "{=Partagez avec votre client une liste de tâches intelligente.}{=Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail.}"
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 145,
    "col_beg": 5,
    "line_end": 156,
@@ -8310,6 +8951,7 @@
    "hashToText": {
     "90XjBOsl/hQbh2UHXVUrfQ==": "Partagez avec votre client une liste de tâches intelligente."
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 146,
    "col_beg": 6,
    "line_end": 149,
@@ -8323,6 +8965,7 @@
    "hashToText": {
     "/d6zrDDITNzWUAISqbQszw==": "Déclenchez automatiquement des actions en fonction de vos projets. Vous ne perdrez plus de temps à relancer vos clients et ceux-ci auront une meilleure compréhension de votre travail."
    },
+   "filepath": "src/screens/Auth/index.js",
    "line_beg": 150,
    "col_beg": 6,
    "line_end": 155,
@@ -8336,6 +8979,7 @@
    "hashToText": {
     "O7wWNxU3xU1rENuc5kWc7Q==": "Bonjour"
    },
+   "filepath": "src/screens/Customer/Tasks/index.js",
    "line_beg": 90,
    "col_beg": 2,
    "line_end": 92,
@@ -8349,6 +8993,7 @@
    "hashToText": {
     "f7nudWeb2fC1Tk9VlYl37g==": "Les tâches {=rouges} sont celles dont vous êtes responsable."
    },
+   "filepath": "src/screens/Customer/Tasks/index.js",
    "line_beg": 109,
    "col_beg": 5,
    "line_end": 112,
@@ -8362,6 +9007,7 @@
    "hashToText": {
     "00ynEY8XjfYv/pawKwwRIw==": "rouges"
    },
+   "filepath": "src/screens/Customer/Tasks/index.js",
    "line_beg": 110,
    "col_beg": 17,
    "line_end": 110,
@@ -8375,6 +9021,7 @@
    "hashToText": {
     "ytVz8JD9DYU9kL3kivRvUA==": "À quoi sert cette plateforme ?"
    },
+   "filepath": "src/screens/Customer/Tasks/index.js",
    "line_beg": 116,
    "col_beg": 6,
    "line_end": 118,
@@ -8388,6 +9035,7 @@
    "hashToText": {
     "CkWC0zqrkQ8io8OgCM5n/Q==": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 109,
    "col_beg": 5,
    "line_end": 154,
@@ -8401,6 +9049,7 @@
    "hashToText": {
     "IH8+4gBIQituJYvx0vyAmA==": "Bonjour {email} ,"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 110,
    "col_beg": 6,
    "line_end": 116,
@@ -8414,6 +9063,7 @@
    "hashToText": {
     "uZnPNnGXS7lmjE2SY5IJPQ==": "Votre période d'essai de 21 jours est terminée !"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 117,
    "col_beg": 6,
    "line_end": 117,
@@ -8427,6 +9077,7 @@
    "hashToText": {
     "v6f8n6XU5zQDQ2bMk9jnqw==": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 118,
    "col_beg": 6,
    "line_end": 122,
@@ -8440,6 +9091,7 @@
    "hashToText": {
     "T5lkkGZSk2P4hrFCsNMMfg==": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 123,
    "col_beg": 6,
    "line_end": 127,
@@ -8453,6 +9105,7 @@
    "hashToText": {
     "3y7EVwPXU3XFJKA3TCBbgA==": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 128,
    "col_beg": 6,
    "line_end": 136,
@@ -8466,6 +9119,7 @@
    "hashToText": {
     "SDbqh6nj5Yu7TtfW4VTjGA==": "S'abonner pour 8€ /mois"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 129,
    "col_beg": 7,
    "line_end": 131,
@@ -8479,6 +9133,7 @@
    "hashToText": {
     "FSW/nkkP5uiaNMttshm6BQ==": "ou"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 132,
    "col_beg": 7,
    "line_end": 132,
@@ -8492,6 +9147,7 @@
    "hashToText": {
     "h1VxoaBEOh61mu5iI21x5A==": "60€ /an (4 mois offerts)"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 133,
    "col_beg": 7,
    "line_end": 135,
@@ -8505,6 +9161,7 @@
    "hashToText": {
     "xkhsZHKwsjndj5rQC5+IzA==": "{=Acheter un accès à vie pour 99€ !}"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 137,
    "col_beg": 6,
    "line_end": 141,
@@ -8518,6 +9175,7 @@
    "hashToText": {
     "5ZlYlGwLtM5Fj6xZz0Tdug==": "Acheter un accès à vie pour 99€ !"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 138,
    "col_beg": 7,
    "line_end": 140,
@@ -8531,6 +9189,7 @@
    "hashToText": {
     "1opFhdmrokPtcbu27i+Img==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 142,
    "col_beg": 6,
    "line_end": 153,
@@ -8544,6 +9203,7 @@
    "hashToText": {
     "xMZZhlVT+S3DNf5uu16mvw==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
    },
+   "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 143,
    "col_beg": 7,
    "line_end": 152,
@@ -8557,6 +9217,7 @@
    "hashToText": {
     "SmrPkGoVtymlySP7a56kxQ==": "{=Merci pour votre confiance et bienvenue…!}{=Retourner au dashboard}"
    },
+   "filepath": "src/screens/Paid/index.js",
    "line_beg": 34,
    "col_beg": 6,
    "line_end": 39,
@@ -8570,6 +9231,7 @@
    "hashToText": {
     "sdFZKymFo52fr8MDWXcGYw==": "Merci pour votre confiance et bienvenue…!"
    },
+   "filepath": "src/screens/Paid/index.js",
    "line_beg": 35,
    "col_beg": 7,
    "line_end": 35,
@@ -8583,6 +9245,7 @@
    "hashToText": {
     "gsppA1HkOJaSb8W3BLBhPg==": "Retourner au dashboard"
    },
+   "filepath": "src/screens/Paid/index.js",
    "line_beg": 36,
    "col_beg": 7,
    "line_end": 38,
@@ -8596,6 +9259,7 @@
    "hashToText": {
     "QichB81QxNNfWIu/SLQxJA==": "{=Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter.}{=Se connecter}"
    },
+   "filepath": "src/screens/Paid/index.js",
    "line_beg": 51,
    "col_beg": 5,
    "line_end": 57,
@@ -8609,6 +9273,7 @@
    "hashToText": {
     "AZuIxEHyJSoKF6A+G6+W5A==": "Merci pour votre achat. Pour utiliser Inyo vous devez vous connecter."
    },
+   "filepath": "src/screens/Paid/index.js",
    "line_beg": 52,
    "col_beg": 6,
    "line_end": 55,
@@ -8622,6 +9287,7 @@
    "hashToText": {
     "w+rTGsbq+ilCijHy0uhVWA==": "Se connecter"
    },
+   "filepath": "src/screens/Paid/index.js",
    "line_beg": 56,
    "col_beg": 6,
    "line_end": 56,
@@ -8635,6 +9301,7 @@
    "hashToText": {
     "99FIH8BScoA0lZgZbMlkKg==": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 109,
    "col_beg": 5,
    "line_end": 145,
@@ -8648,6 +9315,7 @@
    "hashToText": {
     "+QF7x9U9lY93T+quac6slw==": "Bonjour {email} ,"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 110,
    "col_beg": 6,
    "line_end": 116,
@@ -8661,6 +9329,7 @@
    "hashToText": {
     "UsBb0o1dmZQXI6BSH5okDw==": "Votre période d'essai va bientôt se terminer"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 117,
    "col_beg": 6,
    "line_end": 117,
@@ -8674,6 +9343,7 @@
    "hashToText": {
     "oXbplsVyYs5vsoKpF/SSJw==": "Vous pouvez vous abonner dès maintenant à Inyo."
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 118,
    "col_beg": 6,
    "line_end": 118,
@@ -8687,6 +9357,7 @@
    "hashToText": {
     "3NYwNqoAZOVkBO7/iaWKvQ==": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 119,
    "col_beg": 6,
    "line_end": 127,
@@ -8700,6 +9371,7 @@
    "hashToText": {
     "x3vXtZ0ZOPsXQpJjoWtLFw==": "S'abonner pour 8€ /mois"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 120,
    "col_beg": 7,
    "line_end": 122,
@@ -8713,6 +9385,7 @@
    "hashToText": {
     "K5joI3BM60Yem2nuOFuT9w==": "ou"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 123,
    "col_beg": 7,
    "line_end": 123,
@@ -8726,6 +9399,7 @@
    "hashToText": {
     "I85YPh/JW7I4Ox4mryNvQA==": "60€ /an (4 mois offerts)"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 124,
    "col_beg": 7,
    "line_end": 126,
@@ -8739,6 +9413,7 @@
    "hashToText": {
     "OFLxxbxNqzWmoXDq/qutLQ==": "{=Acheter un accès à vie pour 99€ !}"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 128,
    "col_beg": 6,
    "line_end": 132,
@@ -8752,6 +9427,7 @@
    "hashToText": {
     "ZwZWXOV1OIEb/uYP7vz6mg==": "Acheter un accès à vie pour 99€ !"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 129,
    "col_beg": 7,
    "line_end": 131,
@@ -8765,6 +9441,7 @@
    "hashToText": {
     "OFVxiFLN9LII2YvEE9fmCQ==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 133,
    "col_beg": 6,
    "line_end": 144,
@@ -8778,6 +9455,7 @@
    "hashToText": {
     "PryAREGBvM51ftvwYoHXXA==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
    },
+   "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 134,
    "col_beg": 7,
    "line_end": 143,
@@ -8791,6 +9469,7 @@
    "hashToText": {
     "UzYWkXM20aeDmetJWVQHKQ==": "Di"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 51,
    "col_beg": 2,
    "line_end": 53,
@@ -8804,6 +9483,7 @@
    "hashToText": {
     "8Vc2l3I0fVawMarYs1AzNA==": "Lu"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 54,
    "col_beg": 2,
    "line_end": 56,
@@ -8817,6 +9497,7 @@
    "hashToText": {
     "bDmmkLF/uX8nZedmH1NtMg==": "Ma"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 57,
    "col_beg": 2,
    "line_end": 59,
@@ -8830,6 +9511,7 @@
    "hashToText": {
     "FeXWmdpMTP+JoV+mp3Ckjw==": "Me"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 60,
    "col_beg": 2,
    "line_end": 62,
@@ -8843,6 +9525,7 @@
    "hashToText": {
     "aDYt0x7HoOLgOdhhX05uJA==": "Je"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 63,
    "col_beg": 2,
    "line_end": 65,
@@ -8856,6 +9539,7 @@
    "hashToText": {
     "1oWceLwXPOS73MagOVP91Q==": "Ve"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 66,
    "col_beg": 2,
    "line_end": 68,
@@ -8869,6 +9553,7 @@
    "hashToText": {
     "hU3fn1IT1oj0yv1RCHbH5Q==": "Sa"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 69,
    "col_beg": 2,
    "line_end": 71,
@@ -8882,6 +9567,7 @@
    "hashToText": {
     "tUgAtDVScfbqZJXDk/ycoQ==": "M."
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 77,
    "col_beg": 2,
    "line_end": 79,
@@ -8895,6 +9581,7 @@
    "hashToText": {
     "Tat+CCVmuWJt40xExzIuKQ==": "Mme"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 82,
    "col_beg": 2,
    "line_end": 84,
@@ -8908,6 +9595,7 @@
    "hashToText": {
     "T6syVNkrj+0HaeYMmjbT2A==": "Janvier"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 90,
    "col_beg": 2,
    "line_end": 92,
@@ -8921,6 +9609,7 @@
    "hashToText": {
     "GSHolrLm22TJzcRAoqLU/w==": "Février"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 93,
    "col_beg": 2,
    "line_end": 95,
@@ -8934,6 +9623,7 @@
    "hashToText": {
     "KEWH1ItA0zQFM7zRp5c+yw==": "Mars"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 96,
    "col_beg": 2,
    "line_end": 98,
@@ -8947,6 +9637,7 @@
    "hashToText": {
     "OKPEwkxQRN11vFVVKgTHkQ==": "Avril"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 99,
    "col_beg": 2,
    "line_end": 101,
@@ -8960,6 +9651,7 @@
    "hashToText": {
     "TdU0dZQ3Quv5VRZLqfy6iA==": "Mai"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 102,
    "col_beg": 2,
    "line_end": 104,
@@ -8973,6 +9665,7 @@
    "hashToText": {
     "KZclEfNZNWtnjtwmchV3nQ==": "Juin"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 105,
    "col_beg": 2,
    "line_end": 107,
@@ -8986,6 +9679,7 @@
    "hashToText": {
     "FL3dzXtERmpL+3ZXkTi/jw==": "Juillet"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 108,
    "col_beg": 2,
    "line_end": 110,
@@ -8999,6 +9693,7 @@
    "hashToText": {
     "aLbZBXhCk/Q82C33/70vug==": "Août"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 111,
    "col_beg": 2,
    "line_end": 113,
@@ -9012,6 +9707,7 @@
    "hashToText": {
     "t4ktBxFZHW4vixUBvTGZOg==": "Septembre"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 114,
    "col_beg": 2,
    "line_end": 116,
@@ -9025,6 +9721,7 @@
    "hashToText": {
     "kg9VQ3PEMp3lN0du4q8VFg==": "Octobre"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 117,
    "col_beg": 2,
    "line_end": 119,
@@ -9038,6 +9735,7 @@
    "hashToText": {
     "5p0OYRp5lK58N4NFJICqrQ==": "Novembre"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 120,
    "col_beg": 2,
    "line_end": 122,
@@ -9051,6 +9749,7 @@
    "hashToText": {
     "BF4QKU2xDn522qR7RFoVOw==": "Décembre'"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 123,
    "col_beg": 2,
    "line_end": 125,
@@ -9064,6 +9763,7 @@
    "hashToText": {
     "xXh3WMjVhbuTHBgaea6mUg==": "Dimanche"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 131,
    "col_beg": 2,
    "line_end": 133,
@@ -9077,6 +9777,7 @@
    "hashToText": {
     "IPjX4NvI5d0Bs6Y6P7crzA==": "Lundi"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 134,
    "col_beg": 2,
    "line_end": 136,
@@ -9090,6 +9791,7 @@
    "hashToText": {
     "MuMD31rJxrt3Jdn+pk5Omg==": "Mardi"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 137,
    "col_beg": 2,
    "line_end": 139,
@@ -9103,6 +9805,7 @@
    "hashToText": {
     "utNqaX0OrZKDRVDBEcoaug==": "Mercredi"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 140,
    "col_beg": 2,
    "line_end": 142,
@@ -9116,6 +9819,7 @@
    "hashToText": {
     "QdPcOI0xiT8MPCNJ4N73Hg==": "Jeudi"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 143,
    "col_beg": 2,
    "line_end": 145,
@@ -9129,6 +9833,7 @@
    "hashToText": {
     "ut7u0qJPvl2D0uyQF/CP/A==": "Vendredi"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 146,
    "col_beg": 2,
    "line_end": 148,
@@ -9142,6 +9847,7 @@
    "hashToText": {
     "SSvJy8FM+/k7esNsMoGaGg==": "Samedi"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 149,
    "col_beg": 2,
    "line_end": 151,
@@ -9155,6 +9861,7 @@
    "hashToText": {
     "KQ+cxh8crAErMUaJtC6Tig==": "Mois suivant"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 162,
    "col_beg": 3,
    "line_end": 164,
@@ -9168,6 +9875,7 @@
    "hashToText": {
     "4xvLl6dKWzFpJOaE4OdKMg==": "Mois précédent"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 167,
    "col_beg": 3,
    "line_end": 169,
@@ -9181,6 +9889,7 @@
    "hashToText": {
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 203,
    "col_beg": 3,
    "line_end": 205,
@@ -9194,6 +9903,7 @@
    "hashToText": {
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 208,
    "col_beg": 3,
    "line_end": 210,
@@ -9207,6 +9917,7 @@
    "hashToText": {
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 239,
    "col_beg": 3,
    "line_end": 241,
@@ -9220,6 +9931,7 @@
    "hashToText": {
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 244,
    "col_beg": 3,
    "line_end": 246,
@@ -9233,6 +9945,7 @@
    "hashToText": {
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 256,
    "col_beg": 3,
    "line_end": 258,
@@ -9246,6 +9959,7 @@
    "hashToText": {
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 261,
    "col_beg": 3,
    "line_end": 263,
@@ -9259,6 +9973,7 @@
    "hashToText": {
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 273,
    "col_beg": 3,
    "line_end": 275,
@@ -9272,6 +9987,7 @@
    "hashToText": {
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 278,
    "col_beg": 3,
    "line_end": 280,
@@ -9285,6 +10001,7 @@
    "hashToText": {
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 290,
    "col_beg": 3,
    "line_end": 292,
@@ -9298,6 +10015,7 @@
    "hashToText": {
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 295,
    "col_beg": 3,
    "line_end": 297,
@@ -9311,6 +10029,7 @@
    "hashToText": {
     "SVhqzzg4/IxMKln7BSYk7A==": "1er mail envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 356,
    "col_beg": 3,
    "line_end": 359,
@@ -9324,6 +10043,7 @@
    "hashToText": {
     "iEJHGAs+SRMHUbeRhU/6HA==": "Rappel nº1 envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 364,
    "col_beg": 3,
    "line_end": 367,
@@ -9337,6 +10057,7 @@
    "hashToText": {
     "JYVTZfqT+nW7gKGDbNB7ww==": "Rappel nº2 envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 372,
    "col_beg": 3,
    "line_end": 375,
@@ -9350,6 +10071,7 @@
    "hashToText": {
     "hZl5XZ1gk33FC1X7bPN7dA==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 380,
    "col_beg": 3,
    "line_end": 383,
@@ -9363,6 +10085,7 @@
    "hashToText": {
     "b2eK0T8Mm+CY1WEB2ANPpw==": "1er mail règlement de facture envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 388,
    "col_beg": 3,
    "line_end": 391,
@@ -9376,6 +10099,7 @@
    "hashToText": {
     "sZD2JvaE9eACf94+bBkhPQ==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 396,
    "col_beg": 3,
    "line_end": 399,
@@ -9389,6 +10113,7 @@
    "hashToText": {
     "EU4qLnTjs5l/mP+jZD9I4A==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 404,
    "col_beg": 3,
    "line_end": 407,
@@ -9402,6 +10127,7 @@
    "hashToText": {
     "iIbtwgAEUu75Uwew8JaoAQ==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 412,
    "col_beg": 3,
    "line_end": 415,
@@ -9415,6 +10141,7 @@
    "hashToText": {
     "xir0DLqOLa4a/sfH01Gtyg==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 420,
    "col_beg": 3,
    "line_end": 423,
@@ -9428,6 +10155,7 @@
    "hashToText": {
     "2knHjWicl+L9VjUPYjYNJw==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
+   "filepath": "src/utils/constants.js",
    "line_beg": 428,
    "col_beg": 3,
    "line_end": 431,

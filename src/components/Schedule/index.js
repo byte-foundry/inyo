@@ -14,6 +14,7 @@ import {
 	Button,
 	lightGrey,
 	mediumGrey,
+	P,
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
@@ -154,6 +155,13 @@ const PieChart = styled(RawPieChart)`
 	margin-left: 0;
 `;
 
+const EmptyWeekBanner = styled(P)`
+	text-align: center;
+	border-radius: 8px;
+	background-color: ${lightGrey};
+	padding: 1rem;
+`;
+
 const DraggableTaskCard = ({
 	id, index, scheduledFor, onMove, ...rest
 }) => {
@@ -248,6 +256,7 @@ const Schedule = ({
 	fullWeek,
 	onMoveTask,
 	workingTime = 8,
+	assistantName,
 }) => {
 	const [, setRefreshState] = useState(new Date().toJSON());
 
@@ -271,6 +280,8 @@ const Schedule = ({
 
 		return () => clearInterval(id);
 	});
+
+	const isWeekEmpty = weekdays.every(day => day.tasks.length === 0);
 
 	return (
 		<Container>
@@ -507,6 +518,18 @@ const Schedule = ({
 					);
 				})}
 			</Week>
+			{isWeekEmpty && (
+				<EmptyWeekBanner>
+					<fbt desc="Banner displayed when the dashboard schedule is empty">
+						Glisser des tâches dans le calendrier pour programmer
+						vos journées et demander à{' '}
+						<fbt:param name="assistantName">
+							{assistantName}
+						</fbt:param>{' '}
+						de s'assurer du bon déroulement de votre planning.
+					</fbt>
+				</EmptyWeekBanner>
+			)}
 		</Container>
 	);
 };

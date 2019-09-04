@@ -93,7 +93,12 @@ const DashboardTasks = ({location, history}) => {
 	const query = new URLSearchParams(prevSearch || location.search);
 
 	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {workingTime, workingDays, hasFullWeekSchedule} = useUserInfos();
+	const {
+		assistantName,
+		workingTime,
+		workingDays,
+		hasFullWeekSchedule,
+	} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const {
 		unscheduledTasks,
@@ -257,6 +262,7 @@ const DashboardTasks = ({location, history}) => {
 				workingDays={workingDays}
 				fullWeek={hasFullWeekSchedule}
 				onMoveTask={onMoveTask}
+				assistantName={assistantName}
 			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal

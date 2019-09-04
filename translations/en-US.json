@@ -1891,12 +1891,22 @@
     }
    ]
   },
-  "SXKldbfoDGNTWPI3fjepQQ==": {
+  "tvrE9uX3S9cXBcXnZt8KHw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Something went wrong",
+     "translation": "Admin",
+     "variations": {}
+    }
+   ]
+  },
+  "zjox19CE5WqvW6otO2avVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Personal",
      "variations": {}
     }
    ]
@@ -2007,6 +2017,16 @@
    "translations": [
     {
      "translation": "Back-end Dev",
+     "variations": {}
+    }
+   ]
+  },
+  "SXKldbfoDGNTWPI3fjepQQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Something went wrong",
      "variations": {}
     }
    ]

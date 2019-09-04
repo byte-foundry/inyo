@@ -80,17 +80,11 @@ const OnboardingCustomAssistant = ({
 				}}
 				validationSchema={Yup.object().shape({
 					assistantName: Yup.string().required(
-						<fbt project="inyo" desc="required">
-							Requis
-						</fbt>,
+						fbt('Requis', 'required'),
 					),
 					language: Yup.string()
 						.oneOf(['en', 'fr'])
-						.required(
-							<fbt project="inyo" desc="required">
-								Requis
-							</fbt>,
-						),
+						.required(fbt('Requis', 'required')),
 				})}
 				onSubmit={async (values, {setSubmitting, setErrors}) => {
 					setSubmitting(true);
@@ -102,7 +96,7 @@ const OnboardingCustomAssistant = ({
 							},
 						});
 
-						window.Intercomwindow.Intercom('update', {
+						window.Intercom('update', {
 							'assistant-name': values.assistantName,
 							language: values.language,
 						});

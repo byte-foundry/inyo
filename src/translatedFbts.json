@@ -189,6 +189,21 @@
 		"2YTzm0": "What skills do you have?",
 		"1zqB7r": "You can choose multiple options",
 		"2Wj5CX": "Other",
+		"3EtRjd": "Admin",
+		"uvx5I": "Personal",
+		"296Vkz": {
+			"PRINT_DESIGN": "Print Design",
+			"WEB_DESIGN": "Web Design",
+			"UX_DESIGN": "UX Design",
+			"UI_DESIGN": "UI Design",
+			"COPYWRITING": "Copywriting",
+			"VIDEO": "Video",
+			"ACCOUNTING": "Accounting",
+			"PHOTOGRAPHY": "Photography",
+			"MARKETING": "Marketing",
+			"FRONT_END_DEVELOPMENT": "Front-end Dev",
+			"BACK_END_DEVELOPMENT": "Back-end Dev"
+		},
 		"2vgbcB": "Something went wrong",
 		"296Vkz": {
 			"PRINT_DESIGN": "Print Design",

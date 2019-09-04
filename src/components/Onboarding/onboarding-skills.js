@@ -4,7 +4,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
-import {BREAKPOINTS} from '../../utils/constants';
+import {BREAKPOINTS, TAG_COLOR_PALETTE} from '../../utils/constants';
 import {
 	Button,
 	FlexColumn,
@@ -17,7 +17,7 @@ import {
 	primaryBlue,
 	primaryWhite,
 } from '../../utils/content';
-import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
+import {CREATE_TAG, UPDATE_USER_CONSTANTS} from '../../utils/mutations';
 import FormElem from '../FormElem';
 
 const OnboardingStep = styled('div')`
@@ -87,13 +87,11 @@ const toggleSelectedItem = (oldSkills, item) => {
 	return skills;
 };
 
-const OnboardingSecondStep = ({
-	me,
-	getNextStep,
-	getPreviousStep,
-	isFirstStep,
+const OnboardingSkills = ({
+	me, getNextStep, getPreviousStep, isFirstStep,
 }) => {
 	const [updateUser] = useMutation(UPDATE_USER_CONSTANTS);
+	const [createTag] = useMutation(CREATE_TAG);
 
 	const SKILLS = [
 		'PRINT_DESIGN',
@@ -130,32 +128,24 @@ const OnboardingSecondStep = ({
 					const errors = {};
 
 					if (
-						skills.find(
-							e => e
-								=== (
-									<fbt project="inyo" desc="other">
-										Autre
-									</fbt>
-								),
-						)
+						skills.find(e => e === fbt('Autre', 'other'))
 						&& !other
 					) {
-						errors.other = (
-							<fbt project="inyo" desc="required">
-								Requis
-							</fbt>
-						);
+						errors.other = fbt('Requis', 'required');
 					}
 
 					return errors;
 				}}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
+					const newSkills = values.skills.filter(
+						s => s !== fbt('Autre', 'other'),
+					);
+
 					window.Intercom('update', {
-						skills: values.skills,
+						skills: newSkills,
 						otherSkill: values.otherSkill,
 					});
-					const newSkills = values.skills;
 
 					try {
 						await updateUser({
@@ -165,16 +155,78 @@ const OnboardingSecondStep = ({
 							},
 						});
 
+						const getPaletteColor = index => TAG_COLOR_PALETTE[
+							index % TAG_COLOR_PALETTE.length
+						].map(
+							color => `#${color
+								.map(p => p.toString(16).padStart(2, '0'))
+								.join('')}`,
+						);
+
+						const defaultsTagsPromises = [
+							createTag({
+								variables: {
+									name: fbt(
+										'Admin',
+										'default tag name admin',
+									),
+									colorBg: getPaletteColor(0)[0],
+									colorText: getPaletteColor(0)[1],
+								},
+							}),
+							createTag({
+								variables: {
+									name: fbt(
+										'Perso',
+										'default tag name perso',
+									),
+									colorBg: getPaletteColor(1)[0],
+									colorText: getPaletteColor(1)[1],
+								},
+							}),
+						];
+
+						await Promise.all([
+							...defaultsTagsPromises,
+							...newSkills.map((skill, index) => createTag({
+								variables: {
+									name: fbt(
+										fbt.enum(skill, {
+											PRINT_DESIGN: 'Design Print',
+											WEB_DESIGN: 'Design web',
+											UX_DESIGN: 'Design UX',
+											UI_DESIGN: 'Design UI',
+											COPYWRITING: 'Copywriting',
+											VIDEO: 'Vidéo',
+											ACCOUNTING: 'Comptabilité',
+											PHOTOGRAPHY: 'Photographie',
+											MARKETING: 'Marketing',
+											FRONT_END_DEVELOPMENT:
+													'Dev front end',
+											BACK_END_DEVELOPMENT:
+													'Dev back end',
+										}),
+										'onboarding second step skills',
+									),
+									colorBg: getPaletteColor(
+										defaultsTagsPromises.length + index,
+									)[0],
+									colorText: getPaletteColor(
+										defaultsTagsPromises.length + index,
+									)[1],
+								},
+							})),
+						]);
+
 						getNextStep();
 					}
 					catch (error) {
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: (
-								<fbt project="inyo" desc="something went wrong">
-									Quelque chose s'est mal passé
-								</fbt>
+							msg: fbt(
+								"Quelque chose s'est mal passé",
+								'something went wrong',
 							),
 						});
 					}
@@ -192,12 +244,7 @@ const OnboardingSecondStep = ({
 					} = props;
 
 					const otherSkillSelected = values.skills.find(
-						e => e
-							=== (
-								<fbt project="inyo" desc="other">
-									Autre
-								</fbt>
-							),
+						e => e === fbt('Autre', 'other'),
 					);
 
 					return (
@@ -251,12 +298,7 @@ const OnboardingSecondStep = ({
 											'skills',
 											toggleSelectedItem(
 												values.skills,
-												<fbt
-													project="inyo"
-													desc="other"
-												>
-													Autre
-												</fbt>,
+												fbt('Autre', 'other'),
 											),
 										);
 									}}
@@ -323,4 +365,4 @@ const OnboardingSecondStep = ({
 	);
 };
 
-export default OnboardingSecondStep;
+export default OnboardingSkills;

@@ -2558,11 +2558,11 @@
    "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
    "line_beg": 83,
    "col_beg": 6,
-   "line_end": 85,
-   "col_end": 12,
+   "line_end": 83,
+   "col_end": 31,
    "type": "text",
    "desc": "required",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Requis"
   },
   {
@@ -2570,13 +2570,13 @@
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
    "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
-   "line_beg": 90,
-   "col_beg": 7,
-   "line_end": 92,
-   "col_end": 13,
+   "line_beg": 87,
+   "col_beg": 16,
+   "line_end": 87,
+   "col_end": 41,
    "type": "text",
    "desc": "required",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Requis"
   },
   {
@@ -2584,9 +2584,9 @@
     "/b0GyyL8jbI4DbZyEUBRsQ==": "Langue de l'assistant"
    },
    "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
-   "line_beg": 133,
+   "line_beg": 127,
    "col_beg": 8,
-   "line_end": 135,
+   "line_end": 129,
    "col_end": 14,
    "type": "text",
    "desc": "assitant language",
@@ -2598,9 +2598,9 @@
     "9hB6zPcFdo5ckVQDLtJJ8Q==": "Valider"
    },
    "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
-   "line_beg": 149,
+   "line_beg": 143,
    "col_beg": 7,
-   "line_end": 154,
+   "line_end": 148,
    "col_end": 13,
    "type": "text",
    "desc": "confirm onboarding assistant",
@@ -2612,9 +2612,9 @@
     "k/Gjsa4x8ssgvn3ax7zvWQ==": "Retour"
    },
    "filepath": "src/components/Onboarding/onboarding-custom-assistant.js",
-   "line_beg": 163,
+   "line_beg": 157,
    "col_beg": 5,
-   "line_end": 165,
+   "line_end": 159,
    "col_end": 11,
    "type": "text",
    "desc": "back onboarding assistant",
@@ -2807,10 +2807,10 @@
    "hashToText": {
     "lNEPq596yisQ4uRYTSfA8A==": "Quelles sont les compétences que vous maitrisez ?"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 115,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 113,
    "col_beg": 4,
-   "line_end": 117,
+   "line_end": 115,
    "col_end": 10,
    "type": "text",
    "desc": "onboarding second step title",
@@ -2821,10 +2821,10 @@
    "hashToText": {
     "rBXWE+Cu3qldiigMAL433g==": "Vous pouvez choisir plusieurs options"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 120,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 118,
    "col_beg": 4,
-   "line_end": 122,
+   "line_end": 120,
    "col_end": 10,
    "type": "text",
    "desc": "onboarding second step description",
@@ -2835,56 +2835,139 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 136,
-   "col_beg": 9,
-   "line_end": 138,
-   "col_end": 15,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 132,
+   "col_beg": 18,
+   "line_end": 132,
+   "col_end": 39,
    "type": "text",
    "desc": "other",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Autre"
   },
   {
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 144,
-   "col_beg": 7,
-   "line_end": 146,
-   "col_end": 13,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 136,
+   "col_beg": 21,
+   "line_end": 136,
+   "col_end": 46,
    "type": "text",
    "desc": "required",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
+   },
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 143,
+   "col_beg": 55,
+   "line_end": 143,
+   "col_end": 76,
+   "type": "text",
+   "desc": "other",
+   "project": "",
+   "jsfbt": "Autre"
+  },
+  {
+   "hashToText": {
+    "tvrE9uX3S9cXBcXnZt8KHw==": "Admin"
+   },
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 168,
+   "col_beg": 14,
+   "line_end": 168,
+   "col_end": 52,
+   "type": "text",
+   "desc": "default tag name admin",
+   "project": "",
+   "jsfbt": "Admin"
+  },
+  {
+   "hashToText": {
+    "zjox19CE5WqvW6otO2avVg==": "Perso"
+   },
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 173,
+   "col_beg": 14,
+   "line_end": 173,
+   "col_end": 52,
+   "type": "text",
+   "desc": "default tag name perso",
+   "project": "",
+   "jsfbt": "Perso"
+  },
+  {
+   "hashToText": {
+    "LlMuDxnxnlqgV4DxLFqMUQ==": "Design Print",
+    "/Sow2TVI1T8lR2Mxhp//HA==": "Design web",
+    "YJMk/Kc9qlRKpd1J/C0GWQ==": "Design UX",
+    "EtvV9oh1WpuMoX6dS9tNZQ==": "Design UI",
+    "ncKb2MnTbSOEUWHv7lWiXg==": "Copywriting",
+    "/a9Szcr9hicHpFO3bDFSsA==": "Vidéo",
+    "a34jw71NxnBv1l8BktvYNA==": "Comptabilité",
+    "V0zb8Xk/AlT40GHNbkSKUA==": "Photographie",
+    "Bl1WC1g4ZIWrNRGbk+n4PA==": "Marketing",
+    "sv8gjH19I6Vnp3EtbhqpVg==": "Dev front end",
+    "sNVmYR0MtpfB0/WTIzPySQ==": "Dev back end"
+   },
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 184,
+   "col_beg": 16,
+   "line_end": 201,
+   "col_end": 11,
+   "type": "table",
+   "desc": "onboarding second step skills",
+   "project": "",
+   "jsfbt": {
+    "t": {
+     "PRINT_DESIGN": "Design Print",
+     "WEB_DESIGN": "Design web",
+     "UX_DESIGN": "Design UX",
+     "UI_DESIGN": "Design UI",
+     "COPYWRITING": "Copywriting",
+     "VIDEO": "Vidéo",
+     "ACCOUNTING": "Comptabilité",
+     "PHOTOGRAPHY": "Photographie",
+     "MARKETING": "Marketing",
+     "FRONT_END_DEVELOPMENT": "Dev front end",
+     "BACK_END_DEVELOPMENT": "Dev back end"
+    },
+    "m": [
+     null
+    ]
+   }
   },
   {
    "hashToText": {
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 175,
-   "col_beg": 8,
-   "line_end": 177,
-   "col_end": 14,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 215,
+   "col_beg": 12,
+   "line_end": 215,
+   "col_end": 72,
    "type": "text",
    "desc": "something went wrong",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Quelque chose s'est mal passé"
   },
   {
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 197,
-   "col_beg": 8,
-   "line_end": 199,
-   "col_end": 14,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 232,
+   "col_beg": 17,
+   "line_end": 232,
+   "col_end": 38,
    "type": "text",
    "desc": "other",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Autre"
   },
   {
@@ -2901,10 +2984,10 @@
     "sv8gjH19I6Vnp3EtbhqpVg==": "Dev front end",
     "sNVmYR0MtpfB0/WTIzPySQ==": "Dev back end"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 221,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 253,
    "col_beg": 10,
-   "line_end": 244,
+   "line_end": 276,
    "col_end": 16,
    "type": "table",
    "desc": "onboarding second step skills",
@@ -2932,24 +3015,24 @@
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 254,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 286,
    "col_beg": 12,
-   "line_end": 259,
-   "col_end": 18,
+   "line_end": 286,
+   "col_end": 33,
    "type": "text",
    "desc": "other",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Autre"
   },
   {
    "hashToText": {
     "9I/hJQHmNv8K2Kia3Fwfdw==": "Autre"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 264,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 291,
    "col_beg": 9,
-   "line_end": 266,
+   "line_end": 293,
    "col_end": 15,
    "type": "text",
    "desc": "other",
@@ -2960,10 +3043,10 @@
    "hashToText": {
     "jqDgd6R8Prk5GZzYWj9ovw==": "Donnez nous un exemple :)"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 271,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 298,
    "col_beg": 11,
-   "line_end": 276,
+   "line_end": 303,
    "col_end": 17,
    "type": "text",
    "desc": "onboarding second step more information",
@@ -2974,10 +3057,10 @@
    "hashToText": {
     "tLc08MxFJ43xexn8smLDTg==": "Continuer"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 296,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 323,
    "col_beg": 9,
-   "line_end": 301,
+   "line_end": 328,
    "col_end": 15,
    "type": "text",
    "desc": "onboarding second step confirm",
@@ -2988,10 +3071,10 @@
    "hashToText": {
     "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
    },
-   "filepath": "src/components/Onboarding/onboarding-second-step.js",
-   "line_beg": 312,
+   "filepath": "src/components/Onboarding/onboarding-skills.js",
+   "line_beg": 339,
    "col_beg": 10,
-   "line_end": 314,
+   "line_end": 341,
    "col_end": 16,
    "type": "text",
    "desc": "back",
@@ -5248,10 +5331,10 @@
     "5Fj4/fEa3KneB26mwqrhng==": "↓ pour créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 322,
-   "col_beg": 8,
-   "line_end": 324,
-   "col_end": 14,
+   "line_beg": 323,
+   "col_beg": 9,
+   "line_end": 325,
+   "col_end": 15,
    "type": "text",
    "desc": "notification message",
    "project": "inyo",

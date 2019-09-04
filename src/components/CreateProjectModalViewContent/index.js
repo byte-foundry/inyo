@@ -110,7 +110,10 @@ function TemplateTaskList({selectedTemplate}) {
 }
 
 const CreateProjectModalViewContent = ({content}) => {
-	const selectedTemplate = templates.find(tplt => tplt.name === content);
+	const language = (navigator.language || 'fr-FR').split('-')[0];
+	const selectedTemplate = templates[language].find(
+		tplt => tplt.name === content,
+	);
 
 	const isTemplate = !!selectedTemplate;
 	const {data, loading} = useQuery(GET_PROJECT_DATA, {

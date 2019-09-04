@@ -14,6 +14,7 @@ import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 
 function CreateProjectModal({onDismiss, history, baseName}) {
+	const language = (navigator.language || 'fr-FR').split('-')[0];
 	const [viewContent, setViewContent] = useState(null);
 	const [createCustomer, setCreateCustomer] = useState(false);
 	const [customerName, setCustomerName] = useState('');
@@ -55,7 +56,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 				let isModelTemplate = false;
 
 				if (template !== 'EMPTY') {
-					const sourceTemplate = templates.find(
+					const sourceTemplate = templates[language].find(
 						tplt => tplt.name === template,
 					);
 

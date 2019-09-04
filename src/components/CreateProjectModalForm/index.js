@@ -110,24 +110,38 @@ export default function ({
 	onDismiss,
 	...props
 }) {
+	const language = (navigator.language || 'fr-FR').split('-')[0];
 	const [editDeadline, setEditDeadline] = useState(false);
 	const [selectedViewContent, setSelectedViewContent] = useState();
 	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
 		suspend: true,
 	});
 
+	// TODO: translation here
 	const templateOptions = [
 		{
-			label: 'Projet vierge',
+			label: (
+				<fbt project="inyo" desc="empty project">
+					Projet vierge
+				</fbt>
+			),
 			value: 'EMPTY',
 		},
 		{
-			label: 'Vos projets',
+			label: (
+				<fbt project="inyo" desc="your projects">
+					Vos projets
+				</fbt>
+			),
 			options: optionsProjects,
 		},
 		{
-			label: 'Nos modèles',
-			options: templates.map(template => ({
+			label: (
+				<fbt project="inyo" desc="our templates">
+					Nos modèles
+				</fbt>
+			),
+			options: templates[language].map(template => ({
 				value: template.name,
 				label: template.label,
 			})),

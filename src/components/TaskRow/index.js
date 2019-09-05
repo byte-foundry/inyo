@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import React, {
 	forwardRef, useCallback, useRef, useState,
 } from 'react';
@@ -224,10 +225,12 @@ const EmptyProjectName = styled('div')`
 
 const ProjectName = EmptyProjectName.withComponent(Link);
 
-const CustomerCondensed = styled('div')`
+const IconAndText = styled('div')`
 	display: flex;
 	align-items: center;
+`;
 
+const IconAndTextOptional = styled(IconAndText)`
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
 	}
@@ -238,11 +241,8 @@ const TaskHeader = styled('div')`
 	align-items: center;
 	margin: 0.5rem 0;
 
-	${props => props.noProject && 'grid-column: 1 / 3;'}
-
 	@media (max-width: ${BREAKPOINTS}px) {
 		overflow: hidden;
-		${props => props.noProject && 'grid-column: 1 / 3;'}
 	}
 `;
 
@@ -320,7 +320,7 @@ function TaskRow({
 					}}
 				/>
 				<TaskContent>
-					<TaskHeader noProject={noProject}>
+					<TaskHeader>
 						{item.name ? (
 							<TaskHeadingLink
 								noData={noData}
@@ -383,6 +383,31 @@ function TaskRow({
 							/>
 						)}
 					</TaskHeader>
+					{noProject && (
+						<Tooltip
+							label={
+								<fbt project="inyo" desc="Planned day">
+									Jour planifié
+								</fbt>
+							}
+						>
+							<IconAndText>
+								<MaterialIcon
+									style={{
+										marginTop: '5px',
+										marginRight: '5px',
+									}}
+									icon="today"
+									size="tiny"
+								/>
+								{item.scheduledFor ? (
+									moment(item.scheduledFor).fromNow()
+								) : (
+									<>&mdash;</>
+								)}
+							</IconAndText>
+						</Tooltip>
+					)}
 					{!noProject
 						&& (item.section && item.section.project ? (
 							<Tooltip
@@ -420,7 +445,7 @@ function TaskRow({
 										</fbt>
 									}
 								>
-									<CustomerCondensed>
+									<IconAndTextOptional>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
@@ -446,7 +471,7 @@ function TaskRow({
 												&mdash;
 												</span>
 											)}
-									</CustomerCondensed>
+									</IconAndTextOptional>
 								</Tooltip>
 							) : (
 								<Tooltip
@@ -460,7 +485,7 @@ function TaskRow({
 										</fbt>
 									}
 								>
-									<CustomerCondensed>
+									<IconAndTextOptional>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
@@ -479,7 +504,7 @@ function TaskRow({
 												&mdash;
 											</span>
 										)}
-									</CustomerCondensed>
+									</IconAndTextOptional>
 								</Tooltip>
 							)}
 							<TaskMetas>

@@ -5,7 +5,7 @@ import fbt from '../../fbt/fbt.macro';
 import {
 	H4, ModalContainer, ModalElem, P,
 } from '../../utils/content';
-import UserWorkHourAndDaysForm from '../UserWorkHourAndDaysForm';
+import SettingsForm from '../SettingsForm';
 
 const ModalRow = styled('div')`
 	padding-left: 20px;
@@ -41,7 +41,7 @@ export default function ModalWithHoursAndDays(props) {
 					</P>
 				</ModalRow>
 				<ModalRow>
-					<UserWorkHourAndDaysForm data={props.data} />
+					<SettingsForm data={props.data} />
 				</ModalRow>
 			</ModalElem>
 		</ModalContainer>

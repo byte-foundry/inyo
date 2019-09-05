@@ -524,10 +524,10 @@
    "hashToText": {
     "vO2iC9t1o0c05l14ZCYjdA==": "Projet vierge"
    },
-   "line_beg": 123,
-   "col_beg": 10,
-   "line_end": 123,
-   "col_end": 70,
+   "line_beg": 124,
+   "col_beg": 4,
+   "line_end": 126,
+   "col_end": 10,
    "type": "text",
    "desc": "empty project",
    "project": "inyo",
@@ -537,10 +537,10 @@
    "hashToText": {
     "k2apqNGi2MbCKc/kVRLWMA==": "Vos projets"
    },
-   "line_beg": 127,
-   "col_beg": 10,
-   "line_end": 127,
-   "col_end": 68,
+   "line_beg": 132,
+   "col_beg": 4,
+   "line_end": 134,
+   "col_end": 10,
    "type": "text",
    "desc": "your projects",
    "project": "inyo",
@@ -550,10 +550,10 @@
    "hashToText": {
     "eht+qxxh8qLe293ArR18hQ==": "Nos modèles"
    },
-   "line_beg": 131,
-   "col_beg": 10,
-   "line_end": 131,
-   "col_end": 68,
+   "line_beg": 140,
+   "col_beg": 4,
+   "line_end": 142,
+   "col_end": 10,
    "type": "text",
    "desc": "our templates",
    "project": "inyo",
@@ -563,9 +563,9 @@
    "hashToText": {
     "esAlFRsJRyJYPdy1Etih2g==": "Titre du projet"
    },
-   "line_beg": 164,
+   "line_beg": 176,
    "col_beg": 6,
-   "line_end": 166,
+   "line_end": 178,
    "col_end": 12,
    "type": "text",
    "desc": "project name label",
@@ -576,9 +576,9 @@
    "hashToText": {
     "uR3RFRSyvsifyNkawiLp/A==": "Ex: Landing page nouvelle collection, etc."
    },
-   "line_beg": 169,
+   "line_beg": 181,
    "col_beg": 6,
-   "line_end": 171,
+   "line_end": 183,
    "col_end": 12,
    "type": "text",
    "desc": "new project name placeholder",
@@ -589,9 +589,9 @@
    "hashToText": {
     "gZ40VvEnPKdmyRSpiIDSJQ==": "Modèle"
    },
-   "line_beg": 182,
+   "line_beg": 194,
    "col_beg": 6,
-   "line_end": 184,
+   "line_end": 196,
    "col_end": 12,
    "type": "text",
    "desc": "template select",
@@ -602,9 +602,9 @@
    "hashToText": {
     "DO9+CF8YimXXP8yznO3s8g==": "Créer un nouveau client"
    },
-   "line_beg": 225,
+   "line_beg": 237,
    "col_beg": 8,
-   "line_end": 227,
+   "line_end": 239,
    "col_end": 14,
    "type": "text",
    "desc": "create a new client",
@@ -615,9 +615,9 @@
    "hashToText": {
     "k/uE34MBak4zE0Vv8cXJyQ==": "Client principal du projet"
    },
-   "line_beg": 235,
+   "line_beg": 247,
    "col_beg": 6,
-   "line_end": 237,
+   "line_end": 249,
    "col_end": 12,
    "type": "text",
    "desc": "main customer of the project",
@@ -628,9 +628,9 @@
    "hashToText": {
     "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
    },
-   "line_beg": 248,
+   "line_beg": 260,
    "col_beg": 8,
-   "line_end": 253,
+   "line_end": 265,
    "col_end": 14,
    "type": "text",
    "desc": "create project deadline",
@@ -641,9 +641,9 @@
    "hashToText": {
     "iPGKvsjHfnnJw/l7IwyApg==": "Aucune date limite"
    },
-   "line_beg": 263,
+   "line_beg": 275,
    "col_beg": 9,
-   "line_end": 265,
+   "line_end": 277,
    "col_end": 15,
    "type": "text",
    "desc": "no deadline",
@@ -654,9 +654,9 @@
    "hashToText": {
     "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
    },
-   "line_beg": 292,
+   "line_beg": 304,
    "col_beg": 5,
-   "line_end": 294,
+   "line_end": 306,
    "col_end": 11,
    "type": "text",
    "desc": "cancel create project",
@@ -667,9 +667,9 @@
    "hashToText": {
     "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
    },
-   "line_beg": 297,
+   "line_beg": 309,
    "col_beg": 5,
-   "line_end": 299,
+   "line_end": 311,
    "col_end": 11,
    "type": "text",
    "desc": "confirm create project",
@@ -8792,649 +8792,649 @@
     "UzYWkXM20aeDmetJWVQHKQ==": "Di"
    },
    "line_beg": 51,
-   "col_beg": 2,
-   "line_end": 53,
-   "col_end": 8,
+   "col_beg": 3,
+   "line_end": 51,
+   "col_end": 22,
    "type": "text",
    "desc": "sunday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Di"
   },
   {
    "hashToText": {
     "8Vc2l3I0fVawMarYs1AzNA==": "Lu"
    },
-   "line_beg": 54,
-   "col_beg": 2,
-   "line_end": 56,
-   "col_end": 8,
+   "line_beg": 52,
+   "col_beg": 3,
+   "line_end": 52,
+   "col_end": 22,
    "type": "text",
    "desc": "monday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Lu"
   },
   {
    "hashToText": {
     "bDmmkLF/uX8nZedmH1NtMg==": "Ma"
    },
-   "line_beg": 57,
-   "col_beg": 2,
-   "line_end": 59,
-   "col_end": 8,
+   "line_beg": 53,
+   "col_beg": 3,
+   "line_end": 53,
+   "col_end": 23,
    "type": "text",
    "desc": "tuesday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Ma"
   },
   {
    "hashToText": {
     "FeXWmdpMTP+JoV+mp3Ckjw==": "Me"
    },
-   "line_beg": 60,
-   "col_beg": 2,
-   "line_end": 62,
-   "col_end": 8,
+   "line_beg": 54,
+   "col_beg": 3,
+   "line_end": 54,
+   "col_end": 25,
    "type": "text",
    "desc": "wednesday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Me"
   },
   {
    "hashToText": {
     "aDYt0x7HoOLgOdhhX05uJA==": "Je"
    },
-   "line_beg": 63,
-   "col_beg": 2,
-   "line_end": 65,
-   "col_end": 8,
+   "line_beg": 55,
+   "col_beg": 3,
+   "line_end": 55,
+   "col_end": 24,
    "type": "text",
    "desc": "thursday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Je"
   },
   {
    "hashToText": {
     "1oWceLwXPOS73MagOVP91Q==": "Ve"
    },
-   "line_beg": 66,
-   "col_beg": 2,
-   "line_end": 68,
-   "col_end": 8,
+   "line_beg": 56,
+   "col_beg": 3,
+   "line_end": 56,
+   "col_end": 22,
    "type": "text",
    "desc": "friday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Ve"
   },
   {
    "hashToText": {
     "hU3fn1IT1oj0yv1RCHbH5Q==": "Sa"
    },
-   "line_beg": 69,
-   "col_beg": 2,
-   "line_end": 71,
-   "col_end": 8,
+   "line_beg": 57,
+   "col_beg": 3,
+   "line_end": 57,
+   "col_end": 24,
    "type": "text",
    "desc": "saturday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Sa"
   },
   {
    "hashToText": {
     "tUgAtDVScfbqZJXDk/ycoQ==": "M."
    },
-   "line_beg": 77,
-   "col_beg": 2,
-   "line_end": 79,
-   "col_end": 8,
+   "line_beg": 63,
+   "col_beg": 3,
+   "line_end": 63,
+   "col_end": 22,
    "type": "text",
    "desc": "mister",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "M."
   },
   {
    "hashToText": {
     "Tat+CCVmuWJt40xExzIuKQ==": "Mme"
    },
-   "line_beg": 82,
-   "col_beg": 2,
-   "line_end": 84,
-   "col_end": 8,
+   "line_beg": 65,
+   "col_beg": 3,
+   "line_end": 65,
+   "col_end": 20,
    "type": "text",
    "desc": "mis",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mme"
   },
   {
    "hashToText": {
     "T6syVNkrj+0HaeYMmjbT2A==": "Janvier"
    },
-   "line_beg": 90,
-   "col_beg": 2,
-   "line_end": 92,
-   "col_end": 8,
+   "line_beg": 70,
+   "col_beg": 3,
+   "line_end": 70,
+   "col_end": 28,
    "type": "text",
    "desc": "january",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Janvier"
   },
   {
    "hashToText": {
     "GSHolrLm22TJzcRAoqLU/w==": "Février"
    },
-   "line_beg": 93,
-   "col_beg": 2,
-   "line_end": 95,
-   "col_end": 8,
+   "line_beg": 71,
+   "col_beg": 3,
+   "line_end": 71,
+   "col_end": 29,
    "type": "text",
    "desc": "february",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Février"
   },
   {
    "hashToText": {
     "KEWH1ItA0zQFM7zRp5c+yw==": "Mars"
    },
-   "line_beg": 96,
-   "col_beg": 2,
-   "line_end": 98,
-   "col_end": 8,
+   "line_beg": 72,
+   "col_beg": 3,
+   "line_end": 72,
+   "col_end": 23,
    "type": "text",
    "desc": "march",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mars"
   },
   {
    "hashToText": {
     "OKPEwkxQRN11vFVVKgTHkQ==": "Avril"
    },
-   "line_beg": 99,
-   "col_beg": 2,
-   "line_end": 101,
-   "col_end": 8,
+   "line_beg": 73,
+   "col_beg": 3,
+   "line_end": 73,
+   "col_end": 24,
    "type": "text",
    "desc": "april",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Avril"
   },
   {
    "hashToText": {
     "TdU0dZQ3Quv5VRZLqfy6iA==": "Mai"
    },
-   "line_beg": 102,
-   "col_beg": 2,
-   "line_end": 104,
-   "col_end": 8,
+   "line_beg": 74,
+   "col_beg": 3,
+   "line_end": 74,
+   "col_end": 20,
    "type": "text",
    "desc": "may",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mai"
   },
   {
    "hashToText": {
     "KZclEfNZNWtnjtwmchV3nQ==": "Juin"
    },
-   "line_beg": 105,
-   "col_beg": 2,
-   "line_end": 107,
-   "col_end": 8,
+   "line_beg": 75,
+   "col_beg": 3,
+   "line_end": 75,
+   "col_end": 22,
    "type": "text",
    "desc": "june",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Juin"
   },
   {
    "hashToText": {
     "FL3dzXtERmpL+3ZXkTi/jw==": "Juillet"
    },
-   "line_beg": 108,
-   "col_beg": 2,
-   "line_end": 110,
-   "col_end": 8,
+   "line_beg": 76,
+   "col_beg": 3,
+   "line_end": 76,
+   "col_end": 25,
    "type": "text",
    "desc": "july",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Juillet"
   },
   {
    "hashToText": {
     "aLbZBXhCk/Q82C33/70vug==": "Août"
    },
-   "line_beg": 111,
-   "col_beg": 2,
-   "line_end": 113,
-   "col_end": 8,
+   "line_beg": 77,
+   "col_beg": 3,
+   "line_end": 77,
+   "col_end": 24,
    "type": "text",
    "desc": "august",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Août"
   },
   {
    "hashToText": {
     "t4ktBxFZHW4vixUBvTGZOg==": "Septembre"
    },
-   "line_beg": 114,
-   "col_beg": 2,
-   "line_end": 116,
-   "col_end": 8,
+   "line_beg": 78,
+   "col_beg": 3,
+   "line_end": 78,
+   "col_end": 32,
    "type": "text",
    "desc": "september",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Septembre"
   },
   {
    "hashToText": {
     "kg9VQ3PEMp3lN0du4q8VFg==": "Octobre"
    },
-   "line_beg": 117,
-   "col_beg": 2,
-   "line_end": 119,
-   "col_end": 8,
+   "line_beg": 79,
+   "col_beg": 3,
+   "line_end": 79,
+   "col_end": 28,
    "type": "text",
    "desc": "october",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Octobre"
   },
   {
    "hashToText": {
     "5p0OYRp5lK58N4NFJICqrQ==": "Novembre"
    },
-   "line_beg": 120,
-   "col_beg": 2,
-   "line_end": 122,
-   "col_end": 8,
+   "line_beg": 80,
+   "col_beg": 3,
+   "line_end": 80,
+   "col_end": 30,
    "type": "text",
    "desc": "november",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Novembre"
   },
   {
    "hashToText": {
-    "BF4QKU2xDn522qR7RFoVOw==": "Décembre'"
+    "rFwq1DrCobP2P6NsqP8TGA==": "Décembre"
    },
-   "line_beg": 123,
-   "col_beg": 2,
-   "line_end": 125,
-   "col_end": 8,
+   "line_beg": 81,
+   "col_beg": 3,
+   "line_end": 81,
+   "col_end": 30,
    "type": "text",
    "desc": "december",
-   "project": "inyo",
-   "jsfbt": "Décembre'"
+   "project": "",
+   "jsfbt": "Décembre"
   },
   {
    "hashToText": {
     "xXh3WMjVhbuTHBgaea6mUg==": "Dimanche"
    },
-   "line_beg": 131,
-   "col_beg": 2,
-   "line_end": 133,
-   "col_end": 8,
+   "line_beg": 87,
+   "col_beg": 3,
+   "line_end": 87,
+   "col_end": 28,
    "type": "text",
    "desc": "sunday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Dimanche"
   },
   {
    "hashToText": {
     "IPjX4NvI5d0Bs6Y6P7crzA==": "Lundi"
    },
-   "line_beg": 134,
-   "col_beg": 2,
-   "line_end": 136,
-   "col_end": 8,
+   "line_beg": 88,
+   "col_beg": 3,
+   "line_end": 88,
+   "col_end": 25,
    "type": "text",
    "desc": "monday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Lundi"
   },
   {
    "hashToText": {
     "MuMD31rJxrt3Jdn+pk5Omg==": "Mardi"
    },
-   "line_beg": 137,
-   "col_beg": 2,
-   "line_end": 139,
-   "col_end": 8,
+   "line_beg": 89,
+   "col_beg": 3,
+   "line_end": 89,
+   "col_end": 26,
    "type": "text",
    "desc": "tuesday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mardi"
   },
   {
    "hashToText": {
     "utNqaX0OrZKDRVDBEcoaug==": "Mercredi"
    },
-   "line_beg": 140,
-   "col_beg": 2,
-   "line_end": 142,
-   "col_end": 8,
+   "line_beg": 90,
+   "col_beg": 3,
+   "line_end": 90,
+   "col_end": 31,
    "type": "text",
    "desc": "wednesday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mercredi"
   },
   {
    "hashToText": {
     "QdPcOI0xiT8MPCNJ4N73Hg==": "Jeudi"
    },
-   "line_beg": 143,
-   "col_beg": 2,
-   "line_end": 145,
-   "col_end": 8,
+   "line_beg": 91,
+   "col_beg": 3,
+   "line_end": 91,
+   "col_end": 27,
    "type": "text",
    "desc": "thursday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Jeudi"
   },
   {
    "hashToText": {
     "ut7u0qJPvl2D0uyQF/CP/A==": "Vendredi"
    },
-   "line_beg": 146,
-   "col_beg": 2,
-   "line_end": 148,
-   "col_end": 8,
+   "line_beg": 92,
+   "col_beg": 3,
+   "line_end": 92,
+   "col_end": 28,
    "type": "text",
    "desc": "friday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Vendredi"
   },
   {
    "hashToText": {
     "SSvJy8FM+/k7esNsMoGaGg==": "Samedi"
    },
-   "line_beg": 149,
-   "col_beg": 2,
-   "line_end": 151,
-   "col_end": 8,
+   "line_beg": 93,
+   "col_beg": 3,
+   "line_end": 93,
+   "col_end": 28,
    "type": "text",
    "desc": "saturday",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Samedi"
   },
   {
    "hashToText": {
     "KQ+cxh8crAErMUaJtC6Tig==": "Mois suivant"
    },
-   "line_beg": 162,
-   "col_beg": 3,
-   "line_end": 164,
-   "col_end": 9,
+   "line_beg": 104,
+   "col_beg": 4,
+   "line_end": 104,
+   "col_end": 47,
    "type": "text",
    "desc": "notification message",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mois suivant"
   },
   {
    "hashToText": {
     "4xvLl6dKWzFpJOaE4OdKMg==": "Mois précédent"
    },
-   "line_beg": 167,
-   "col_beg": 3,
-   "line_end": 169,
-   "col_end": 9,
+   "line_beg": 106,
+   "col_beg": 4,
+   "line_end": 106,
+   "col_end": 49,
    "type": "text",
    "desc": "notification message",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Mois précédent"
   },
   {
    "hashToText": {
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
-   "line_beg": 203,
-   "col_beg": 3,
-   "line_end": 205,
-   "col_end": 9,
+   "line_beg": 139,
+   "col_beg": 4,
+   "line_end": 139,
+   "col_end": 37,
    "type": "text",
    "desc": "basic task name",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Basique"
   },
   {
    "hashToText": {
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
-   "line_beg": 208,
-   "col_beg": 3,
-   "line_end": 210,
-   "col_end": 9,
+   "line_beg": 141,
+   "col_beg": 4,
+   "line_end": 141,
+   "col_end": 73,
    "type": "text",
    "desc": "basic task description",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Une tâche dont vous êtes responsable"
   },
   {
    "hashToText": {
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
-   "line_beg": 239,
-   "col_beg": 3,
-   "line_end": 241,
-   "col_end": 9,
+   "line_beg": 169,
+   "col_beg": 4,
+   "line_end": 169,
+   "col_end": 58,
    "type": "text",
    "desc": "customer task name",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Tâche attribuée au client"
   },
   {
    "hashToText": {
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
-   "line_beg": 244,
-   "col_beg": 3,
-   "line_end": 246,
-   "col_end": 9,
+   "line_beg": 171,
+   "col_beg": 4,
+   "line_end": 171,
+   "col_end": 77,
    "type": "text",
    "desc": "customer task description",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Une tâche à réaliser par votre client"
   },
   {
    "hashToText": {
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
-   "line_beg": 256,
-   "col_beg": 3,
-   "line_end": 258,
-   "col_end": 9,
+   "line_beg": 180,
+   "col_beg": 4,
+   "line_end": 180,
+   "col_end": 59,
    "type": "text",
    "desc": "content acquisition name",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Récupération contenu"
   },
   {
    "hashToText": {
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
-   "line_beg": 261,
-   "col_beg": 3,
-   "line_end": 263,
-   "col_end": 9,
+   "line_beg": 182,
+   "col_beg": 4,
+   "line_end": 182,
+   "col_end": 90,
    "type": "text",
    "desc": "content acquisition description",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Lister et récupérer les contenus nécessaires"
   },
   {
    "hashToText": {
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
-   "line_beg": 273,
-   "col_beg": 3,
-   "line_end": 275,
-   "col_end": 9,
+   "line_beg": 191,
+   "col_beg": 4,
+   "line_end": 191,
+   "col_end": 44,
    "type": "text",
    "desc": "section name",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Section de projet"
   },
   {
    "hashToText": {
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
-   "line_beg": 278,
-   "col_beg": 3,
-   "line_end": 280,
-   "col_end": 9,
+   "line_beg": 193,
+   "col_beg": 4,
+   "line_end": 193,
+   "col_end": 87,
    "type": "text",
    "desc": "section description",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Créer une section pour classer les tâches d'un projet"
   },
   {
    "hashToText": {
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
-   "line_beg": 290,
-   "col_beg": 3,
-   "line_end": 292,
-   "col_end": 9,
+   "line_beg": 202,
+   "col_beg": 4,
+   "line_end": 202,
+   "col_end": 51,
    "type": "text",
    "desc": "invoice task name",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Paiement de facture"
   },
   {
    "hashToText": {
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
-   "line_beg": 295,
-   "col_beg": 3,
-   "line_end": 297,
-   "col_end": 9,
+   "line_beg": 204,
+   "col_beg": 4,
+   "line_end": 204,
+   "col_end": 97,
    "type": "text",
    "desc": "invoice task description",
-   "project": "inyo",
+   "project": "",
    "jsfbt": "Envoyer une facture et demander un paiement à votre client"
   },
   {
    "hashToText": {
-    "SVhqzzg4/IxMKln7BSYk7A==": "1er mail envoyé à {customerName}"
+    "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
-   "line_beg": 356,
+   "line_beg": 262,
    "col_beg": 3,
-   "line_end": 359,
-   "col_end": 9,
+   "line_end": 262,
+   "col_end": 94,
    "type": "text",
-   "desc": "reminder text 1st mail",
-   "project": "inyo",
+   "desc": "first customer email",
+   "project": "",
    "jsfbt": "1er mail envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "iEJHGAs+SRMHUbeRhU/6HA==": "Rappel nº1 envoyé à {customerName}"
+    "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
-   "line_beg": 364,
+   "line_beg": 267,
    "col_beg": 3,
-   "line_end": 367,
-   "col_end": 9,
+   "line_end": 267,
+   "col_end": 105,
    "type": "text",
-   "desc": "reminder text 1st reminder",
-   "project": "inyo",
+   "desc": "first reminder customer email",
+   "project": "",
    "jsfbt": "Rappel nº1 envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "JYVTZfqT+nW7gKGDbNB7ww==": "Rappel nº2 envoyé à {customerName}"
+    "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
-   "line_beg": 372,
+   "line_beg": 272,
    "col_beg": 3,
-   "line_end": 375,
-   "col_end": 9,
+   "line_end": 272,
+   "col_end": 106,
    "type": "text",
-   "desc": "reminder text 2nd reminder",
-   "project": "inyo",
+   "desc": "second reminder customer email",
+   "project": "",
    "jsfbt": "Rappel nº2 envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "hZl5XZ1gk33FC1X7bPN7dA==": "Dernier rappel (nº3) envoyé à {customerName}"
+    "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
-   "line_beg": 380,
+   "line_beg": 277,
    "col_beg": 3,
-   "line_end": 383,
-   "col_end": 9,
+   "line_end": 277,
+   "col_end": 115,
    "type": "text",
-   "desc": "reminder text 3rd reminder",
-   "project": "inyo",
+   "desc": "third reminder customer email",
+   "project": "",
    "jsfbt": "Dernier rappel (nº3) envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "b2eK0T8Mm+CY1WEB2ANPpw==": "1er mail règlement de facture envoyé à {customerName}"
+    "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
-   "line_beg": 388,
+   "line_beg": 282,
    "col_beg": 3,
-   "line_end": 391,
-   "col_end": 9,
+   "line_end": 282,
+   "col_end": 114,
    "type": "text",
-   "desc": "invoice text 1st mail",
-   "project": "inyo",
+   "desc": "first invoice email",
+   "project": "",
    "jsfbt": "1er mail règlement de facture envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "sZD2JvaE9eACf94+bBkhPQ==": "Rappel règlement de facture nº1 envoyé à {customerName}"
+    "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
-   "line_beg": 396,
+   "line_beg": 287,
    "col_beg": 3,
-   "line_end": 399,
-   "col_end": 9,
+   "line_end": 287,
+   "col_end": 125,
    "type": "text",
-   "desc": "invoice text 1st reminder",
-   "project": "inyo",
+   "desc": "first reminder invoice email",
+   "project": "",
    "jsfbt": "Rappel règlement de facture nº1 envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "EU4qLnTjs5l/mP+jZD9I4A==": "Rappel règlement de facture nº2 envoyé à {customerName}"
+    "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
-   "line_beg": 404,
+   "line_beg": 292,
    "col_beg": 3,
-   "line_end": 407,
-   "col_end": 9,
+   "line_end": 292,
+   "col_end": 126,
    "type": "text",
-   "desc": "invoice text 2nd reminder",
-   "project": "inyo",
+   "desc": "second reminder invoice email",
+   "project": "",
    "jsfbt": "Rappel règlement de facture nº2 envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "iIbtwgAEUu75Uwew8JaoAQ==": "Rappel règlement de facture nº3 envoyé à {customerName}"
+    "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
-   "line_beg": 412,
+   "line_beg": 297,
    "col_beg": 3,
-   "line_end": 415,
-   "col_end": 9,
+   "line_end": 297,
+   "col_end": 125,
    "type": "text",
-   "desc": "invoice text 3rd reminder",
-   "project": "inyo",
+   "desc": "third reminder invoice email",
+   "project": "",
    "jsfbt": "Rappel règlement de facture nº3 envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "xir0DLqOLa4a/sfH01Gtyg==": "Rappel règlement de facture nº4 envoyé à {customerName}"
+    "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
-   "line_beg": 420,
+   "line_beg": 302,
    "col_beg": 3,
-   "line_end": 423,
-   "col_end": 9,
+   "line_end": 302,
+   "col_end": 126,
    "type": "text",
-   "desc": "invoice text 4th reminder",
-   "project": "inyo",
+   "desc": "fourth reminder invoice email",
+   "project": "",
    "jsfbt": "Rappel règlement de facture nº4 envoyé à {customerName}"
   },
   {
    "hashToText": {
-    "2knHjWicl+L9VjUPYjYNJw==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
+    "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
-   "line_beg": 428,
+   "line_beg": 307,
    "col_beg": 3,
-   "line_end": 431,
-   "col_end": 9,
+   "line_end": 307,
+   "col_end": 135,
    "type": "text",
-   "desc": "invoice text 5th reminder",
-   "project": "inyo",
+   "desc": "fitfh reminder invoice email",
+   "project": "",
    "jsfbt": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
   }
  ],

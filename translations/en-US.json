@@ -6171,12 +6171,12 @@
     }
    ]
   },
-  "BF4QKU2xDn522qR7RFoVOw==": {
+  "rFwq1DrCobP2P6NsqP8TGA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "December'",
+     "translation": "December",
      "variations": {}
     }
    ]
@@ -6367,6 +6367,116 @@
    "translations": [
     {
      "translation": "Send an invoice to your client",
+     "variations": {}
+    }
+   ]
+  },
+  "c4tmVUxwy4QEBsdWdrUh+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "First email sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "bp0S600O7SKtvZD4OLzEmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "First reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "EFNh72i20v7jRH+b5zG6eQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Second reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "CJfoEeYYpj+yBXW5NAy3VQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Third reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "58KBco6Y1j2dxtHTZCpuJQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "First invoice payment email sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "bzY04Ocig9+0PrPSJH0A0Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "First invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "thus7u/y80yiUGrYVHeccA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Second invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "sKqjtUoaH5hkNda587EaqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Third invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "2XTeUbIsiUAdF6RknzMOWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Fourth invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "2GgfrBw4AVKfDLBHCcAgzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "BF4QKU2xDn522qR7RFoVOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "December'",
      "variations": {}
     }
    ]

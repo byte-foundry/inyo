@@ -2461,6 +2461,146 @@
     }
    ]
   },
+  "BWZHvitWVUZoKx3CZZtTkw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Working hours",
+     "variations": {}
+    }
+   ]
+  },
+  "OPnotGia0dOGBf9WwiENqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "morning",
+     "variations": {}
+    }
+   ]
+  },
+  "Jjs0w0HhNdCnigjXbVf/Nw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "breakfast",
+     "variations": {}
+    }
+   ]
+  },
+  "9ddGoR97go79DKEIb6E4Tw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "lunch",
+     "variations": {}
+    }
+   ]
+  },
+  "KTBDnqFdeYJqAVvMCQhTZA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "evening",
+     "variations": {}
+    }
+   ]
+  },
+  "RQWEt64u9sSyyY2x55ZFrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "night",
+     "variations": {}
+    }
+   ]
+  },
+  "VEkFArLbNPFCUCcY/9LdMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Working days",
+     "variations": {}
+    }
+   ]
+  },
+  "e9blpGJ3ohrnJtiqeUPSeQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Display only working days",
+     "variations": {}
+    }
+   ]
+  },
+  "X3FGQxYJmAJHajDXM4EKdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Timezone",
+     "variations": {}
+    }
+   ]
+  },
+  "d0hqbx4CE+vVuAB5AmruYQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sort by timezone",
+     "variations": {}
+    }
+   ]
+  },
+  "pYtMkpRTyp8ob/8NQYLQ/Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amount you bill per day",
+     "variations": {}
+    }
+   ]
+  },
+  "y4ioLUPo3VMB4sOZUBW1kw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Daily rate",
+     "variations": {}
+    }
+   ]
+  },
+  "LFYTgF3/f9HYp1L33vLE5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$300",
+     "variations": {}
+    }
+   ]
+  },
+  "+H3+Bor//yi+bztLnvoPNw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Update",
+     "variations": {}
+    }
+   ]
+  },
   "kr4eHtsx2qAP4N9hWTLB8Q==": {
    "tokens": [],
    "types": [],
@@ -4381,16 +4521,6 @@
     }
    ]
   },
-  "+H3+Bor//yi+bztLnvoPNw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Update",
-     "variations": {}
-    }
-   ]
-  },
   "l3FQqY76BTjAVhnKJLbldg==": {
    "tokens": [],
    "types": [],
@@ -4497,106 +4627,6 @@
    "translations": [
     {
      "translation": "john@mcclane.com",
-     "variations": {}
-    }
-   ]
-  },
-  "BWZHvitWVUZoKx3CZZtTkw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Working hours",
-     "variations": {}
-    }
-   ]
-  },
-  "OPnotGia0dOGBf9WwiENqg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "morning",
-     "variations": {}
-    }
-   ]
-  },
-  "Jjs0w0HhNdCnigjXbVf/Nw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "breakfast",
-     "variations": {}
-    }
-   ]
-  },
-  "9ddGoR97go79DKEIb6E4Tw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "lunch",
-     "variations": {}
-    }
-   ]
-  },
-  "KTBDnqFdeYJqAVvMCQhTZA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "evening",
-     "variations": {}
-    }
-   ]
-  },
-  "RQWEt64u9sSyyY2x55ZFrA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "night",
-     "variations": {}
-    }
-   ]
-  },
-  "VEkFArLbNPFCUCcY/9LdMg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Working days",
-     "variations": {}
-    }
-   ]
-  },
-  "e9blpGJ3ohrnJtiqeUPSeQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Display only working days",
-     "variations": {}
-    }
-   ]
-  },
-  "X3FGQxYJmAJHajDXM4EKdQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Timezone",
-     "variations": {}
-    }
-   ]
-  },
-  "d0hqbx4CE+vVuAB5AmruYQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Sort by timezone",
      "variations": {}
     }
    ]

@@ -524,10 +524,10 @@
    "hashToText": {
     "vO2iC9t1o0c05l14ZCYjdA==": "Projet vierge"
    },
-   "line_beg": 123,
-   "col_beg": 10,
-   "line_end": 123,
-   "col_end": 70,
+   "line_beg": 124,
+   "col_beg": 4,
+   "line_end": 126,
+   "col_end": 10,
    "type": "text",
    "desc": "empty project",
    "project": "inyo",
@@ -537,10 +537,10 @@
    "hashToText": {
     "k2apqNGi2MbCKc/kVRLWMA==": "Vos projets"
    },
-   "line_beg": 127,
-   "col_beg": 10,
-   "line_end": 127,
-   "col_end": 68,
+   "line_beg": 132,
+   "col_beg": 4,
+   "line_end": 134,
+   "col_end": 10,
    "type": "text",
    "desc": "your projects",
    "project": "inyo",
@@ -550,10 +550,10 @@
    "hashToText": {
     "eht+qxxh8qLe293ArR18hQ==": "Nos modèles"
    },
-   "line_beg": 131,
-   "col_beg": 10,
-   "line_end": 131,
-   "col_end": 68,
+   "line_beg": 140,
+   "col_beg": 4,
+   "line_end": 142,
+   "col_end": 10,
    "type": "text",
    "desc": "our templates",
    "project": "inyo",
@@ -563,9 +563,9 @@
    "hashToText": {
     "esAlFRsJRyJYPdy1Etih2g==": "Titre du projet"
    },
-   "line_beg": 164,
+   "line_beg": 176,
    "col_beg": 6,
-   "line_end": 166,
+   "line_end": 178,
    "col_end": 12,
    "type": "text",
    "desc": "project name label",
@@ -576,9 +576,9 @@
    "hashToText": {
     "uR3RFRSyvsifyNkawiLp/A==": "Ex: Landing page nouvelle collection, etc."
    },
-   "line_beg": 169,
+   "line_beg": 181,
    "col_beg": 6,
-   "line_end": 171,
+   "line_end": 183,
    "col_end": 12,
    "type": "text",
    "desc": "new project name placeholder",
@@ -589,9 +589,9 @@
    "hashToText": {
     "gZ40VvEnPKdmyRSpiIDSJQ==": "Modèle"
    },
-   "line_beg": 182,
+   "line_beg": 194,
    "col_beg": 6,
-   "line_end": 184,
+   "line_end": 196,
    "col_end": 12,
    "type": "text",
    "desc": "template select",
@@ -602,9 +602,9 @@
    "hashToText": {
     "DO9+CF8YimXXP8yznO3s8g==": "Créer un nouveau client"
    },
-   "line_beg": 225,
+   "line_beg": 237,
    "col_beg": 8,
-   "line_end": 227,
+   "line_end": 239,
    "col_end": 14,
    "type": "text",
    "desc": "create a new client",
@@ -615,9 +615,9 @@
    "hashToText": {
     "k/uE34MBak4zE0Vv8cXJyQ==": "Client principal du projet"
    },
-   "line_beg": 235,
+   "line_beg": 247,
    "col_beg": 6,
-   "line_end": 237,
+   "line_end": 249,
    "col_end": 12,
    "type": "text",
    "desc": "main customer of the project",
@@ -628,9 +628,9 @@
    "hashToText": {
     "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
    },
-   "line_beg": 248,
+   "line_beg": 260,
    "col_beg": 8,
-   "line_end": 253,
+   "line_end": 265,
    "col_end": 14,
    "type": "text",
    "desc": "create project deadline",
@@ -641,9 +641,9 @@
    "hashToText": {
     "iPGKvsjHfnnJw/l7IwyApg==": "Aucune date limite"
    },
-   "line_beg": 263,
+   "line_beg": 275,
    "col_beg": 9,
-   "line_end": 265,
+   "line_end": 277,
    "col_end": 15,
    "type": "text",
    "desc": "no deadline",
@@ -654,9 +654,9 @@
    "hashToText": {
     "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
    },
-   "line_beg": 292,
+   "line_beg": 304,
    "col_beg": 5,
-   "line_end": 294,
+   "line_end": 306,
    "col_end": 11,
    "type": "text",
    "desc": "cancel create project",
@@ -667,9 +667,9 @@
    "hashToText": {
     "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
    },
-   "line_beg": 297,
+   "line_beg": 309,
    "col_beg": 5,
-   "line_end": 299,
+   "line_end": 311,
    "col_end": 11,
    "type": "text",
    "desc": "confirm create project",
@@ -3536,6 +3536,201 @@
    "desc": "reset password button",
    "project": "inyo",
    "jsfbt": "Réinitialiser le mot de passe"
+  },
+  {
+   "hashToText": {
+    "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
+   },
+   "line_beg": 200,
+   "col_beg": 8,
+   "line_end": 202,
+   "col_end": 14,
+   "type": "text",
+   "desc": "something went wrong",
+   "project": "inyo",
+   "jsfbt": "Quelque chose s'est mal passé"
+  },
+  {
+   "hashToText": {
+    "BWZHvitWVUZoKx3CZZtTkw==": "Horaires de travail"
+   },
+   "line_beg": 233,
+   "col_beg": 10,
+   "line_end": 238,
+   "col_end": 16,
+   "type": "text",
+   "desc": "notification message",
+   "project": "inyo",
+   "jsfbt": "Horaires de travail"
+  },
+  {
+   "hashToText": {
+    "OPnotGia0dOGBf9WwiENqg==": "matin"
+   },
+   "line_beg": 258,
+   "col_beg": 12,
+   "line_end": 263,
+   "col_end": 18,
+   "type": "text",
+   "desc": "morning",
+   "project": "inyo",
+   "jsfbt": "matin"
+  },
+  {
+   "hashToText": {
+    "Jjs0w0HhNdCnigjXbVf/Nw==": "petit déjeuner"
+   },
+   "line_beg": 271,
+   "col_beg": 12,
+   "line_end": 276,
+   "col_end": 18,
+   "type": "text",
+   "desc": "breakfast",
+   "project": "inyo",
+   "jsfbt": "petit déjeuner"
+  },
+  {
+   "hashToText": {
+    "9ddGoR97go79DKEIb6E4Tw==": "déjeuner"
+   },
+   "line_beg": 284,
+   "col_beg": 12,
+   "line_end": 289,
+   "col_end": 18,
+   "type": "text",
+   "desc": "lunch",
+   "project": "inyo",
+   "jsfbt": "déjeuner"
+  },
+  {
+   "hashToText": {
+    "KTBDnqFdeYJqAVvMCQhTZA==": "soirée"
+   },
+   "line_beg": 297,
+   "col_beg": 12,
+   "line_end": 302,
+   "col_end": 18,
+   "type": "text",
+   "desc": "evening",
+   "project": "inyo",
+   "jsfbt": "soirée"
+  },
+  {
+   "hashToText": {
+    "RQWEt64u9sSyyY2x55ZFrA==": "nuit"
+   },
+   "line_beg": 310,
+   "col_beg": 12,
+   "line_end": 315,
+   "col_end": 18,
+   "type": "text",
+   "desc": "night",
+   "project": "inyo",
+   "jsfbt": "nuit"
+  },
+  {
+   "hashToText": {
+    "VEkFArLbNPFCUCcY/9LdMg==": "Jours travaillés"
+   },
+   "line_beg": 322,
+   "col_beg": 10,
+   "line_end": 324,
+   "col_end": 16,
+   "type": "text",
+   "desc": "working days",
+   "project": "inyo",
+   "jsfbt": "Jours travaillés"
+  },
+  {
+   "hashToText": {
+    "e9blpGJ3ohrnJtiqeUPSeQ==": "Afficher seulement les jours travaillés dans le calendrier"
+   },
+   "line_beg": 335,
+   "col_beg": 11,
+   "line_end": 341,
+   "col_end": 17,
+   "type": "text",
+   "desc": "display only worked days",
+   "project": "inyo",
+   "jsfbt": "Afficher seulement les jours travaillés dans le calendrier"
+  },
+  {
+   "hashToText": {
+    "X3FGQxYJmAJHajDXM4EKdQ==": "Fuseau horaire"
+   },
+   "line_beg": 345,
+   "col_beg": 10,
+   "line_end": 347,
+   "col_end": 16,
+   "type": "text",
+   "desc": "timezone",
+   "project": "inyo",
+   "jsfbt": "Fuseau horaire"
+  },
+  {
+   "hashToText": {
+    "d0hqbx4CE+vVuAB5AmruYQ==": "Triez par fuseau"
+   },
+   "line_beg": 354,
+   "col_beg": 11,
+   "line_end": 359,
+   "col_end": 17,
+   "type": "text",
+   "desc": "sort by timezone",
+   "project": "inyo",
+   "jsfbt": "Triez par fuseau"
+  },
+  {
+   "hashToText": {
+    "pYtMkpRTyp8ob/8NQYLQ/Q==": "Prix que vous facturé en moyenne par journée"
+   },
+   "line_beg": 398,
+   "col_beg": 17,
+   "line_end": 401,
+   "col_end": 11,
+   "type": "text",
+   "desc": "daily rate",
+   "project": "",
+   "jsfbt": "Prix que vous facturé en moyenne par journée"
+  },
+  {
+   "hashToText": {
+    "y4ioLUPo3VMB4sOZUBW1kw==": "Prix journalier moyen"
+   },
+   "line_beg": 404,
+   "col_beg": 11,
+   "line_end": 406,
+   "col_end": 17,
+   "type": "text",
+   "desc": "timezone",
+   "project": "inyo",
+   "jsfbt": "Prix journalier moyen"
+  },
+  {
+   "hashToText": {
+    "LFYTgF3/f9HYp1L33vLE5A==": "300€"
+   },
+   "line_beg": 412,
+   "col_beg": 23,
+   "line_end": 412,
+   "col_end": 43,
+   "type": "text",
+   "desc": "price",
+   "project": "",
+   "jsfbt": "300€"
+  },
+  {
+   "hashToText": {
+    "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
+   },
+   "line_beg": 428,
+   "col_beg": 8,
+   "line_end": 430,
+   "col_end": 14,
+   "type": "text",
+   "desc": "update",
+   "project": "inyo",
+   "jsfbt": "Mettre à jour"
   },
   {
    "hashToText": {
@@ -6696,162 +6891,6 @@
   },
   {
    "hashToText": {
-    "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
-   },
-   "line_beg": 195,
-   "col_beg": 8,
-   "line_end": 197,
-   "col_end": 14,
-   "type": "text",
-   "desc": "something went wrong",
-   "project": "inyo",
-   "jsfbt": "Quelque chose s'est mal passé"
-  },
-  {
-   "hashToText": {
-    "BWZHvitWVUZoKx3CZZtTkw==": "Horaires de travail"
-   },
-   "line_beg": 228,
-   "col_beg": 10,
-   "line_end": 233,
-   "col_end": 16,
-   "type": "text",
-   "desc": "notification message",
-   "project": "inyo",
-   "jsfbt": "Horaires de travail"
-  },
-  {
-   "hashToText": {
-    "OPnotGia0dOGBf9WwiENqg==": "matin"
-   },
-   "line_beg": 253,
-   "col_beg": 12,
-   "line_end": 258,
-   "col_end": 18,
-   "type": "text",
-   "desc": "morning",
-   "project": "inyo",
-   "jsfbt": "matin"
-  },
-  {
-   "hashToText": {
-    "Jjs0w0HhNdCnigjXbVf/Nw==": "petit déjeuner"
-   },
-   "line_beg": 266,
-   "col_beg": 12,
-   "line_end": 271,
-   "col_end": 18,
-   "type": "text",
-   "desc": "breakfast",
-   "project": "inyo",
-   "jsfbt": "petit déjeuner"
-  },
-  {
-   "hashToText": {
-    "9ddGoR97go79DKEIb6E4Tw==": "déjeuner"
-   },
-   "line_beg": 279,
-   "col_beg": 12,
-   "line_end": 284,
-   "col_end": 18,
-   "type": "text",
-   "desc": "lunch",
-   "project": "inyo",
-   "jsfbt": "déjeuner"
-  },
-  {
-   "hashToText": {
-    "KTBDnqFdeYJqAVvMCQhTZA==": "soirée"
-   },
-   "line_beg": 292,
-   "col_beg": 12,
-   "line_end": 297,
-   "col_end": 18,
-   "type": "text",
-   "desc": "evening",
-   "project": "inyo",
-   "jsfbt": "soirée"
-  },
-  {
-   "hashToText": {
-    "RQWEt64u9sSyyY2x55ZFrA==": "nuit"
-   },
-   "line_beg": 305,
-   "col_beg": 12,
-   "line_end": 310,
-   "col_end": 18,
-   "type": "text",
-   "desc": "night",
-   "project": "inyo",
-   "jsfbt": "nuit"
-  },
-  {
-   "hashToText": {
-    "VEkFArLbNPFCUCcY/9LdMg==": "Jours travaillés"
-   },
-   "line_beg": 317,
-   "col_beg": 10,
-   "line_end": 319,
-   "col_end": 16,
-   "type": "text",
-   "desc": "working days",
-   "project": "inyo",
-   "jsfbt": "Jours travaillés"
-  },
-  {
-   "hashToText": {
-    "e9blpGJ3ohrnJtiqeUPSeQ==": "Afficher seulement les jours travaillés dans le calendrier"
-   },
-   "line_beg": 330,
-   "col_beg": 11,
-   "line_end": 336,
-   "col_end": 17,
-   "type": "text",
-   "desc": "display only worked days",
-   "project": "inyo",
-   "jsfbt": "Afficher seulement les jours travaillés dans le calendrier"
-  },
-  {
-   "hashToText": {
-    "X3FGQxYJmAJHajDXM4EKdQ==": "Fuseau horaire"
-   },
-   "line_beg": 340,
-   "col_beg": 10,
-   "line_end": 342,
-   "col_end": 16,
-   "type": "text",
-   "desc": "timezone",
-   "project": "inyo",
-   "jsfbt": "Fuseau horaire"
-  },
-  {
-   "hashToText": {
-    "d0hqbx4CE+vVuAB5AmruYQ==": "Triez par fuseau"
-   },
-   "line_beg": 348,
-   "col_beg": 11,
-   "line_end": 353,
-   "col_end": 17,
-   "type": "text",
-   "desc": "sort by timezone",
-   "project": "inyo",
-   "jsfbt": "Triez par fuseau"
-  },
-  {
-   "hashToText": {
-    "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
-   },
-   "line_beg": 403,
-   "col_beg": 8,
-   "line_end": 405,
-   "col_end": 14,
-   "type": "text",
-   "desc": "update",
-   "project": "inyo",
-   "jsfbt": "Mettre à jour"
-  },
-  {
-   "hashToText": {
     "+PmhHJZfOZ3gkpl0DbCeuQ==": "lun."
    },
    "line_beg": 42,
@@ -7257,9 +7296,9 @@
    "hashToText": {
     "AJGA334ZNjXST0vpVk74BQ==": "Votre assistant·e"
    },
-   "line_beg": 309,
+   "line_beg": 306,
    "col_beg": 7,
-   "line_end": 311,
+   "line_end": 308,
    "col_end": 13,
    "type": "text",
    "desc": "Your assistant",
@@ -7270,9 +7309,9 @@
    "hashToText": {
     "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
    },
-   "line_beg": 319,
+   "line_beg": 316,
    "col_beg": 7,
-   "line_end": 321,
+   "line_end": 318,
    "col_end": 13,
    "type": "text",
    "desc": "your account",
@@ -7283,9 +7322,9 @@
    "hashToText": {
     "mPzERUHPGyQqbs+vT+dw2A==": "Me désinscrire"
    },
-   "line_beg": 337,
+   "line_beg": 334,
    "col_beg": 8,
-   "line_end": 339,
+   "line_end": 336,
    "col_end": 14,
    "type": "text",
    "desc": "Delete account",
@@ -7296,9 +7335,9 @@
    "hashToText": {
     "ImPMNsKu/b/s/GaXMWPwCA==": "Me déconnecter"
    },
-   "line_beg": 353,
+   "line_beg": 350,
    "col_beg": 8,
-   "line_end": 355,
+   "line_end": 352,
    "col_end": 14,
    "type": "text",
    "desc": "sign out",

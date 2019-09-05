@@ -297,7 +297,7 @@ const TaskInput = ({
 					isClearable
 				/>
 			)}
-			<InputContainer>
+			<InputContainer id="task-input-container">
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="task input icon tooltip">

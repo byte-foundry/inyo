@@ -7,10 +7,10 @@ import {useApolloClient, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
+import SettingsForm from '../../../components/SettingsForm';
 import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
 import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {Button, H3} from '../../../utils/content';
@@ -298,10 +298,7 @@ const Account = ({location}) => {
 								Vos horaires et jours de travail
 							</fbt>
 						</ProfileTitle>
-						<UserWorkHourAndDaysForm
-							data={me}
-							done={displayToast}
-						/>
+						<SettingsForm data={me} done={displayToast} />
 						<ProfileTitle
 							id="assistant"
 							ref={createRef('assistant')}

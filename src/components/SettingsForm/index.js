@@ -13,15 +13,16 @@ import {
 } from '../../utils/content';
 import workingIllus from '../../utils/images/bermuda-uploading.svg';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {Button} from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
+import {A, Button} from '../../utils/new/design-system';
 import {findTimeZone, getUTCOffset, timezones} from '../../utils/timezones';
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
 import FormCheckbox from '../FormCheckbox';
+import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
+import Tooltip from '../Tooltip';
 import WeekDaysInput from '../WeekDaysInput';
 
-const UserWorkHourAndDaysFormMain = styled('div')``;
+const SettingsFormMain = styled('div')``;
 
 const FormContainer = styled('div')`
 	flex: 1;
@@ -86,10 +87,10 @@ const Emoji = styled('span')`
 const Illus = styled('img')`
 	margin-right: 2rem;
 	align-self: end;
-	grid-row: 4 / 9;
+	grid-row: 4 / 12;
 `;
 
-const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
+const SettingsForm = ({data: props, done = () => {}}) => {
 	const {
 		timeZone: initialTimeZone,
 		startWorkAt,
@@ -128,7 +129,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 	];
 
 	return (
-		<UserWorkHourAndDaysFormMain>
+		<SettingsFormMain>
 			<Formik
 				initialValues={{
 					startMinutes: startMinutesInitial,
@@ -138,6 +139,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 					workingDays: workingDaysInitial,
 					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
+					dailyRate: undefined,
 				}}
 				validationSchema={Yup.object().shape({})}
 				onSubmit={async (values, actions) => {
@@ -151,6 +153,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 						workingDays,
 						timeZone,
 						hasNotFullWeekSchedule,
+						dailyRate,
 					} = values;
 
 					const start = new Date();
@@ -173,6 +176,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
 								workingDays,
+								defaultDailyPrice: dailyRate,
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},
@@ -343,6 +347,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 									</Label>
 									<FormSelect
 										{...props}
+										style={{marginBottom: '1rem'}}
 										name="timeZone"
 										placeholder={
 											<fbt
@@ -388,6 +393,40 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 										hideSelectedOptions
 										isSearchable
 									/>
+									<Tooltip
+										label={fbt(
+											'Prix que vous facturé en moyenne par journée',
+											'daily rate',
+										)}
+									>
+										<Label>
+											<fbt project="inyo" desc="timezone">
+												Prix journalier moyen
+											</fbt>
+										</Label>
+									</Tooltip>
+									<FormElem
+										{...props}
+										name="dailyRate"
+										placeholder={fbt('300€', 'price')}
+										padded
+										required
+									/>
+									<div>
+										<A
+											href={fbt(
+												'https://inyo.me/calculer-son-tjm/',
+												'link to daily rate calculator',
+											)}
+										>
+											<fbt
+												project="inyo"
+												desc="label link to daily rate calculator"
+											>
+												Calculer mon prix journalier
+											</fbt>
+										</A>
+									</div>
 								</FormContainer>
 								{status && status.msg && (
 									<ErrorInput
@@ -408,8 +447,8 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 					);
 				}}
 			</Formik>
-		</UserWorkHourAndDaysFormMain>
+		</SettingsFormMain>
 	);
 };
 
-export default UserWorkHourAndDaysForm;
+export default SettingsForm;

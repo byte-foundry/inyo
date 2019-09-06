@@ -106,6 +106,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$workingDays: [DAY!]
 		$timeZone: TimeZone
 		$hasFullWeekSchedule: Boolean
+		$defaultDailyPrice: Int
 	) {
 		updateUser(
 			workingFields: $workingFields
@@ -122,6 +123,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			workingDays: $workingDays
 			timeZone: $timeZone
 			settings: {hasFullWeekSchedule: $hasFullWeekSchedule}
+			defaultDailyPrice: $defaultDailyPrice
 		) {
 			id
 			email

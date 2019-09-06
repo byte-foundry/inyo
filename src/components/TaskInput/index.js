@@ -316,14 +316,17 @@ const TaskInput = ({
 				<Tooltip
 					label={
 						<p>
-							`Entrée` pour créer une tâche
-							<br />`
-							{currentProjectId ? (
-								<fbt project="inyo" desc="notification message">
-									↓ pour créer une section
-								</fbt>
-							) : (
-								''
+							`Entrée` pour créer une tâche.
+							{currentProjectId && (
+								<>
+									<br />
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										↓ pour créer une section
+									</fbt>
+								</>
 							)}
 						</p>
 					}

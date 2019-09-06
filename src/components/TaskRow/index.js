@@ -1,10 +1,16 @@
 import styled from '@emotion/styled/macro';
+import Portal from '@reach/portal';
 import moment from 'moment';
 import React, {
-	forwardRef, useCallback, useRef, useState,
+	forwardRef,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
 } from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {Link, withRouter} from 'react-router-dom';
+import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
@@ -12,17 +18,16 @@ import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
-	accentGrey,
 	lightGrey,
-	mediumGrey,
 	primaryBlack,
 	primaryGrey,
 	TaskHeading,
 	TaskIconText,
 } from '../../utils/new/design-system';
+import CollaboratorDropdown from '../CollaboratorDropdown';
+import CustomerDropdown from '../CustomerDropdown';
 import InitialIdentifier from '../InitialIdentifier';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import Tag from '../Tag';
 import TaskComment from '../TaskComment';
 import TaskDescription from '../TaskDescription';
@@ -260,7 +265,7 @@ function TaskRow({
 	location,
 	isDraggable,
 	noData,
-	noProject,
+	noProject: inProject,
 	baseUrl = 'tasks',
 	forwardedRef,
 	userId,
@@ -269,8 +274,28 @@ function TaskRow({
 	const [unfinishItem] = useMutation(UNFINISH_ITEM);
 
 	const [justUpdated, setJustUpdated] = useState(false);
+	const [editAssignee, setEditAssignee] = useState(false);
+	const [dropdownStyle, setDropdownStyle] = useState(false);
+	const containerRef = useRef();
 
 	const iconRef = useRef();
+	const dropdownRef = useRef();
+
+	useOnClickOutside(dropdownRef, () => {
+		setEditAssignee(false);
+	});
+
+	useEffect(() => {
+		if (editAssignee) {
+			const pos = containerRef.current.getBoundingClientRect();
+
+			setDropdownStyle({
+				position: 'absolute',
+				top: `${pos.bottom + window.scrollY}px`,
+				left: `${pos.left}px`,
+			});
+		}
+	}, [editAssignee]);
 
 	const finishItemCallback = useCallback(() => {
 		finishItem({
@@ -383,7 +408,7 @@ function TaskRow({
 							/>
 						)}
 					</TaskHeader>
-					{noProject && (
+					{inProject && (
 						<Tooltip
 							label={
 								<fbt project="inyo" desc="Planned day">
@@ -408,7 +433,7 @@ function TaskRow({
 							</IconAndText>
 						</Tooltip>
 					)}
-					{!noProject
+					{!inProject
 						&& (item.section && item.section.project ? (
 							<Tooltip
 								label={
@@ -419,7 +444,7 @@ function TaskRow({
 							>
 								<ProjectNameWrap>
 									<ProjectName
-										to={`/app/${baseUrl}?projectId=${item.section.project.id}`}
+										to={`/app/tasks?projectId=${item.section.project.id}`}
 										onClick={(e) => {
 											// needed to avoid another history push to be triggered, should be investigated
 											e.stopPropagation();
@@ -434,7 +459,7 @@ function TaskRow({
 						))}
 					{!noData && (
 						<>
-							{isCustomerTask(item.type) ? (
+							{isCustomerTask(item.type) || !item.section ? (
 								<Tooltip
 									label={
 										<fbt
@@ -445,7 +470,11 @@ function TaskRow({
 										</fbt>
 									}
 								>
-									<IconAndTextOptional>
+									<IconAndTextOptional
+										ref={containerRef}
+										onClick={() => inProject && setEditAssignee(true)
+										}
+									>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
@@ -471,6 +500,21 @@ function TaskRow({
 												&mdash;
 												</span>
 											)}
+										{inProject && editAssignee && (
+											<Portal>
+												<div
+													ref={dropdownRef}
+													style={dropdownStyle}
+												>
+													<CustomerDropdown
+														assignee={
+															item.linkedCustomer
+														}
+														taskId={item.id}
+													/>
+												</div>
+											</Portal>
+										)}
 									</IconAndTextOptional>
 								</Tooltip>
 							) : (
@@ -485,7 +529,11 @@ function TaskRow({
 										</fbt>
 									}
 								>
-									<IconAndTextOptional>
+									<IconAndTextOptional
+										ref={containerRef}
+										onClick={() => inProject && setEditAssignee(true)
+										}
+									>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
@@ -503,6 +551,23 @@ function TaskRow({
 											<span style={{marginLeft: '5px'}}>
 												&mdash;
 											</span>
+										)}
+										{inProject && editAssignee && (
+											<Portal>
+												<div
+													ref={dropdownRef}
+													style={dropdownStyle}
+												>
+													<CollaboratorDropdown
+														assignee={item.assignee}
+														taskId={item.id}
+														collaborators={
+															item.section.project
+																.linkedCollaborators
+														}
+													/>
+												</div>
+											</Portal>
 										)}
 									</IconAndTextOptional>
 								</Tooltip>

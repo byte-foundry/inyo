@@ -3452,9 +3452,9 @@
    "hashToText": {
     "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
    },
-   "line_beg": 286,
+   "line_beg": 303,
    "col_beg": 5,
-   "line_end": 288,
+   "line_end": 305,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3465,9 +3465,9 @@
    "hashToText": {
     "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
    },
-   "line_beg": 302,
+   "line_beg": 319,
    "col_beg": 5,
-   "line_end": 307,
+   "line_end": 324,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3478,14 +3478,27 @@
    "hashToText": {
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
-   "line_beg": 400,
+   "line_beg": 417,
    "col_beg": 9,
-   "line_end": 406,
+   "line_end": 423,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
    "project": "inyo",
    "jsfbt": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
+  },
+  {
+   "hashToText": {
+    "+3NmsH2Z/prpNjoiPTm1/A==": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
+   },
+   "line_beg": 528,
+   "col_beg": 6,
+   "line_end": 535,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Banner displayed when the dashboard schedule is empty",
+   "project": "",
+   "jsfbt": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
   },
   {
    "hashToText": {
@@ -7831,9 +7844,9 @@
    "hashToText": {
     "UvVjY1/twy9IgUWUD3GGHQ==": "Vous n'avez plus de tâches à planifier."
    },
-   "line_beg": 310,
+   "line_beg": 316,
    "col_beg": 11,
-   "line_end": 313,
+   "line_end": 319,
    "col_end": 17,
    "type": "text",
    "desc": "no more task",

@@ -33,5 +33,6 @@ export default function useUserInfos() {
 		workingDays,
 		language: settings.language,
 		hasFullWeekSchedule: settings.hasFullWeekSchedule,
+		assistantName: settings.assistantName,
 	};
 }

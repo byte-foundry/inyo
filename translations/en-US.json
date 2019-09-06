@@ -1861,52 +1861,12 @@
     }
    ]
   },
-  "71Ok3J3hqlKSXq92DhLhnA==": {
+  "lNEPq596yisQ4uRYTSfA8A==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Juggle between multiple communication channels",
-     "variations": {}
-    }
-   ]
-  },
-  "TBi3rStgXXXujN+iH1DDyQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Correctly estimate the duration of my projects",
-     "variations": {}
-    }
-   ]
-  },
-  "/rSj1XkECqRd0ON6VZjmqw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Organise and succesfully stick to my planning",
-     "variations": {}
-    }
-   ]
-  },
-  "lhOe8DhOe6Tbl9YfVpr00A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Follow up with my clients for validations",
-     "variations": {}
-    }
-   ]
-  },
-  "hdjeCSmSL8zaiME/mBgdmw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "What's the most bothersome thing in your daily work routine?",
+     "translation": "What skills do you have?",
      "variations": {}
     }
    ]
@@ -1927,6 +1887,136 @@
    "translations": [
     {
      "translation": "Other",
+     "variations": {}
+    }
+   ]
+  },
+  "tvrE9uX3S9cXBcXnZt8KHw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Admin",
+     "variations": {}
+    }
+   ]
+  },
+  "zjox19CE5WqvW6otO2avVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Personal",
+     "variations": {}
+    }
+   ]
+  },
+  "LlMuDxnxnlqgV4DxLFqMUQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Print Design",
+     "variations": {}
+    }
+   ]
+  },
+  "/Sow2TVI1T8lR2Mxhp//HA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Web Design",
+     "variations": {}
+    }
+   ]
+  },
+  "YJMk/Kc9qlRKpd1J/C0GWQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "UX Design",
+     "variations": {}
+    }
+   ]
+  },
+  "EtvV9oh1WpuMoX6dS9tNZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "UI Design",
+     "variations": {}
+    }
+   ]
+  },
+  "ncKb2MnTbSOEUWHv7lWiXg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Copywriting",
+     "variations": {}
+    }
+   ]
+  },
+  "/a9Szcr9hicHpFO3bDFSsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Video",
+     "variations": {}
+    }
+   ]
+  },
+  "a34jw71NxnBv1l8BktvYNA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Accounting",
+     "variations": {}
+    }
+   ]
+  },
+  "V0zb8Xk/AlT40GHNbkSKUA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Photography",
+     "variations": {}
+    }
+   ]
+  },
+  "Bl1WC1g4ZIWrNRGbk+n4PA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Marketing",
+     "variations": {}
+    }
+   ]
+  },
+  "sv8gjH19I6Vnp3EtbhqpVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Front-end Dev",
+     "variations": {}
+    }
+   ]
+  },
+  "sNVmYR0MtpfB0/WTIzPySQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Back-end Dev",
      "variations": {}
     }
    ]
@@ -6467,6 +6557,56 @@
    "translations": [
     {
      "translation": "5th invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "71Ok3J3hqlKSXq92DhLhnA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Juggle between multiple communication channels",
+     "variations": {}
+    }
+   ]
+  },
+  "TBi3rStgXXXujN+iH1DDyQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Correctly estimate the duration of my projects",
+     "variations": {}
+    }
+   ]
+  },
+  "/rSj1XkECqRd0ON6VZjmqw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Organise and succesfully stick to my planning",
+     "variations": {}
+    }
+   ]
+  },
+  "lhOe8DhOe6Tbl9YfVpr00A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Follow up with my clients for validations",
+     "variations": {}
+    }
+   ]
+  },
+  "hdjeCSmSL8zaiME/mBgdmw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "What's the most bothersome thing in your daily work routine?",
      "variations": {}
     }
    ]

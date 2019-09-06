@@ -1,4 +1,3 @@
-import {init, IntlViewerContext} from 'fbt';
 import React from 'react';
 
 import fbt from '../fbt/fbt.macro';
@@ -24,11 +23,6 @@ import TaskIconValidatedUrl, {
 } from './icons/taskicon-user-validated.svg';
 import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 
-const translations = require('../translatedFbts.json');
-
-init({translations});
-IntlViewerContext.locale = navigator.language;
-
 export const GRAPHQL_API = `https://prisma${
 	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 }.inyo.me/`;
@@ -48,107 +42,47 @@ export const WEEKDAYS = {
 
 export const WEEKDAYS_SHORT = {
 	fr: [
-		<fbt project="inyo" desc="sunday">
-			Di
-		</fbt>,
-		<fbt project="inyo" desc="monday">
-			Lu
-		</fbt>,
-		<fbt project="inyo" desc="tuesday">
-			Ma
-		</fbt>,
-		<fbt project="inyo" desc="wednesday">
-			Me
-		</fbt>,
-		<fbt project="inyo" desc="thursday">
-			Je
-		</fbt>,
-		<fbt project="inyo" desc="friday">
-			Ve
-		</fbt>,
-		<fbt project="inyo" desc="saturday">
-			Sa
-		</fbt>,
+		fbt('Di', 'sunday'),
+		fbt('Lu', 'monday'),
+		fbt('Ma', 'tuesday'),
+		fbt('Me', 'wednesday'),
+		fbt('Je', 'thursday'),
+		fbt('Ve', 'friday'),
+		fbt('Sa', 'saturday'),
 	],
 };
 
 export const TITLE_ENUM_TO_TITLE = {
-	MONSIEUR: (
-		<fbt project="inyo" desc="mister">
-			M.
-		</fbt>
-	),
-	MADAME: (
-		<fbt project="inyo" desc="mis">
-			Mme
-		</fbt>
-	),
+	MONSIEUR: fbt('M.', 'mister'),
+	MADAME: fbt('Mme', 'mis'),
 };
 
 export const MONTHS = {
 	fr: [
-		<fbt project="inyo" desc="january">
-			Janvier
-		</fbt>,
-		<fbt project="inyo" desc="february">
-			Février
-		</fbt>,
-		<fbt project="inyo" desc="march">
-			Mars
-		</fbt>,
-		<fbt project="inyo" desc="april">
-			Avril
-		</fbt>,
-		<fbt project="inyo" desc="may">
-			Mai
-		</fbt>,
-		<fbt project="inyo" desc="june">
-			Juin
-		</fbt>,
-		<fbt project="inyo" desc="july">
-			Juillet
-		</fbt>,
-		<fbt project="inyo" desc="august">
-			Août
-		</fbt>,
-		<fbt project="inyo" desc="september">
-			Septembre
-		</fbt>,
-		<fbt project="inyo" desc="october">
-			Octobre
-		</fbt>,
-		<fbt project="inyo" desc="november">
-			Novembre
-		</fbt>,
-		<fbt project="inyo" desc="december">
-			Décembre'
-		</fbt>,
+		fbt('Janvier', 'january'),
+		fbt('Février', 'february'),
+		fbt('Mars', 'march'),
+		fbt('Avril', 'april'),
+		fbt('Mai', 'may'),
+		fbt('Juin', 'june'),
+		fbt('Juillet', 'july'),
+		fbt('Août', 'august'),
+		fbt('Septembre', 'september'),
+		fbt('Octobre', 'october'),
+		fbt('Novembre', 'november'),
+		fbt('Décembre', 'december'),
 	],
 };
 
 export const WEEKDAYS_LONG = {
 	fr: [
-		<fbt project="inyo" desc="sunday">
-			Dimanche
-		</fbt>,
-		<fbt project="inyo" desc="monday">
-			Lundi
-		</fbt>,
-		<fbt project="inyo" desc="tuesday">
-			Mardi
-		</fbt>,
-		<fbt project="inyo" desc="wednesday">
-			Mercredi
-		</fbt>,
-		<fbt project="inyo" desc="thursday">
-			Jeudi
-		</fbt>,
-		<fbt project="inyo" desc="friday">
-			Vendredi
-		</fbt>,
-		<fbt project="inyo" desc="saturday">
-			Samedi
-		</fbt>,
+		fbt('Dimanche', 'sunday'),
+		fbt('Lundi', 'monday'),
+		fbt('Mardi', 'tuesday'),
+		fbt('Mercredi', 'wednesday'),
+		fbt('Jeudi', 'thursday'),
+		fbt('Vendredi', 'friday'),
+		fbt('Samedi', 'saturday'),
 	],
 };
 
@@ -158,16 +92,8 @@ export const FIRST_DAY_OF_WEEK = {
 // Translate aria-labels
 export const LABELS = {
 	fr: {
-		nextMonth: (
-			<fbt project="inyo" desc="notification message">
-				Mois suivant
-			</fbt>
-		),
-		previousMonth: (
-			<fbt project="inyo" desc="notification message">
-				Mois précédent
-			</fbt>
-		),
+		nextMonth: fbt('Mois suivant', 'notification message'),
+		previousMonth: fbt('Mois précédent', 'notification message'),
 	},
 };
 
@@ -199,15 +125,10 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskIconValidatedUrl,
 		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
 		type: 'DEFAULT',
-		name: (
-			<fbt project="inyo" desc="basic task name">
-				Basique
-			</fbt>
-		),
-		description: (
-			<fbt project="inyo" desc="basic task description">
-				Une tâche dont vous êtes responsable
-			</fbt>
+		name: fbt('Basique', 'basic task name'),
+		description: fbt(
+			'Une tâche dont vous êtes responsable',
+			'basic task description',
 		),
 	},
 	/* {
@@ -235,15 +156,10 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		iconUrlValidatedAnim: TaskCustomerIconValidatedAnimUrl,
 		type: 'CUSTOMER',
-		name: (
-			<fbt project="inyo" desc="customer task name">
-				Tâche attribuée au client
-			</fbt>
-		),
-		description: (
-			<fbt project="inyo" desc="customer task description">
-				Une tâche à réaliser par votre client
-			</fbt>
+		name: fbt('Tâche attribuée au client', 'customer task name'),
+		description: fbt(
+			'Une tâche à réaliser par votre client',
+			'customer task description',
 		),
 	},
 	{
@@ -252,15 +168,10 @@ export const ITEM_TYPES = [
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',
-		name: (
-			<fbt project="inyo" desc="content acquisition name">
-				Récupération contenu
-			</fbt>
-		),
-		description: (
-			<fbt project="inyo" desc="content acquisition description">
-				Lister et récupérer les contenus nécessaires
-			</fbt>
+		name: fbt('Récupération contenu', 'content acquisition name'),
+		description: fbt(
+			'Lister et récupérer les contenus nécessaires',
+			'content acquisition description',
 		),
 	},
 	{
@@ -269,15 +180,10 @@ export const ITEM_TYPES = [
 		iconUrl: SectionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'SECTION',
-		name: (
-			<fbt project="inyo" desc="section name">
-				Section de projet
-			</fbt>
-		),
-		description: (
-			<fbt project="inyo" desc="section description">
-				Créer une section pour classer les tâches d'un projet
-			</fbt>
+		name: fbt('Section de projet', 'section name'),
+		description: fbt(
+			"Créer une section pour classer les tâches d'un projet",
+			'section description',
 		),
 	},
 	{
@@ -286,15 +192,10 @@ export const ITEM_TYPES = [
 		iconUrl: TaskInvoiceIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'INVOICE',
-		name: (
-			<fbt project="inyo" desc="invoice task name">
-				Paiement de facture
-			</fbt>
-		),
-		description: (
-			<fbt project="inyo" desc="invoice task description">
-				Envoyer une facture et demander un paiement à votre client
-			</fbt>
+		name: fbt('Paiement de facture', 'invoice task name'),
+		description: fbt(
+			'Envoyer une facture et demander un paiement à votre client',
+			'invoice task description',
 		),
 	},
 	/* {
@@ -352,83 +253,90 @@ export const ITEM_TYPES = [
 
 export const REMINDER_TYPES_DATA = {
 	DELAY: {
-		text: customerName => (
-			<fbt project="inyo" desc="reminder text 1st mail">
-				1er mail envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`1er mail envoyé à ${fbt.param('customerName', customerName)}`,
+			'first customer email',
 		),
 	},
 	FIRST: {
-		text: customerName => (
-			<fbt project="inyo" desc="reminder text 1st reminder">
-				Rappel nº1 envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Rappel nº1 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first reminder customer email',
 		),
 	},
 	SECOND: {
-		text: customerName => (
-			<fbt project="inyo" desc="reminder text 2nd reminder">
-				Rappel nº2 envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Rappel nº2 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'second reminder customer email',
 		),
 	},
 	LAST: {
-		text: customerName => (
-			<fbt project="inyo" desc="reminder text 3rd reminder">
-				Dernier rappel (nº3) envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Dernier rappel (nº3) envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'third reminder customer email',
 		),
 	},
 	INVOICE_DELAY: {
-		text: customerName => (
-			<fbt project="inyo" desc="invoice text 1st mail">
-				1er mail règlement de facture envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`1er mail règlement de facture envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first invoice email',
 		),
 	},
 	INVOICE_FIRST: {
-		text: customerName => (
-			<fbt project="inyo" desc="invoice text 1st reminder">
-				Rappel règlement de facture nº1 envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Rappel règlement de facture nº1 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first reminder invoice email',
 		),
 	},
 	INVOICE_SECOND: {
-		text: customerName => (
-			<fbt project="inyo" desc="invoice text 2nd reminder">
-				Rappel règlement de facture nº2 envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Rappel règlement de facture nº2 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'second reminder invoice email',
 		),
 	},
 	INVOICE_THIRD: {
-		text: customerName => (
-			<fbt project="inyo" desc="invoice text 3rd reminder">
-				Rappel règlement de facture nº3 envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Rappel règlement de facture nº3 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'third reminder invoice email',
 		),
 	},
 	INVOICE_FOURTH: {
-		text: customerName => (
-			<fbt project="inyo" desc="invoice text 4th reminder">
-				Rappel règlement de facture nº4 envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Rappel règlement de facture nº4 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'fourth reminder invoice email',
 		),
 	},
 	INVOICE_LAST: {
-		text: customerName => (
-			<fbt project="inyo" desc="invoice text 5th reminder">
-				Dernier règlement de facture rappel (nº5) envoyé à{' '}
-				<fbt:param name="customerName">{customerName}</fbt:param>
-			</fbt>
+		text: customerName => fbt(
+			`Dernier règlement de facture rappel (nº5) envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'fitfh reminder invoice email',
 		),
 	},
 };

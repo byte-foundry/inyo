@@ -20,6 +20,9 @@ export const CHECK_LOGIN_USER = gql`
 			company {
 				phone
 			}
+			settings {
+				language
+			}
 		}
 	}
 `;

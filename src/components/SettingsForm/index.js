@@ -13,8 +13,7 @@ import {
 } from '../../utils/content';
 import workingIllus from '../../utils/images/bermuda-uploading.svg';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {Button} from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
+import {A, Button} from '../../utils/new/design-system';
 import {findTimeZone, getUTCOffset, timezones} from '../../utils/timezones';
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
 import FormCheckbox from '../FormCheckbox';
@@ -88,7 +87,7 @@ const Emoji = styled('span')`
 const Illus = styled('img')`
 	margin-right: 2rem;
 	align-self: end;
-	grid-row: 4 / 11;
+	grid-row: 4 / 12;
 `;
 
 const SettingsForm = ({data: props, done = () => {}}) => {
@@ -413,6 +412,21 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 										padded
 										required
 									/>
+									<div>
+										<A
+											href={fbt(
+												'https://inyo.me/calculer-son-tjm/',
+												'link to daily rate calculator',
+											)}
+										>
+											<fbt
+												project="inyo"
+												desc="label link to daily rate calculator"
+											>
+												Calculer mon prix journalier
+											</fbt>
+										</A>
+									</div>
 								</FormContainer>
 								{status && status.msg && (
 									<ErrorInput

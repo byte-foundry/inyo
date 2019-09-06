@@ -3541,9 +3541,9 @@
    "hashToText": {
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
-   "line_beg": 200,
+   "line_beg": 199,
    "col_beg": 8,
-   "line_end": 202,
+   "line_end": 201,
    "col_end": 14,
    "type": "text",
    "desc": "something went wrong",
@@ -3554,9 +3554,9 @@
    "hashToText": {
     "BWZHvitWVUZoKx3CZZtTkw==": "Horaires de travail"
    },
-   "line_beg": 233,
+   "line_beg": 232,
    "col_beg": 10,
-   "line_end": 238,
+   "line_end": 237,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -3567,9 +3567,9 @@
    "hashToText": {
     "OPnotGia0dOGBf9WwiENqg==": "matin"
    },
-   "line_beg": 258,
+   "line_beg": 257,
    "col_beg": 12,
-   "line_end": 263,
+   "line_end": 262,
    "col_end": 18,
    "type": "text",
    "desc": "morning",
@@ -3580,9 +3580,9 @@
    "hashToText": {
     "Jjs0w0HhNdCnigjXbVf/Nw==": "petit déjeuner"
    },
-   "line_beg": 271,
+   "line_beg": 270,
    "col_beg": 12,
-   "line_end": 276,
+   "line_end": 275,
    "col_end": 18,
    "type": "text",
    "desc": "breakfast",
@@ -3593,9 +3593,9 @@
    "hashToText": {
     "9ddGoR97go79DKEIb6E4Tw==": "déjeuner"
    },
-   "line_beg": 284,
+   "line_beg": 283,
    "col_beg": 12,
-   "line_end": 289,
+   "line_end": 288,
    "col_end": 18,
    "type": "text",
    "desc": "lunch",
@@ -3606,9 +3606,9 @@
    "hashToText": {
     "KTBDnqFdeYJqAVvMCQhTZA==": "soirée"
    },
-   "line_beg": 297,
+   "line_beg": 296,
    "col_beg": 12,
-   "line_end": 302,
+   "line_end": 301,
    "col_end": 18,
    "type": "text",
    "desc": "evening",
@@ -3619,9 +3619,9 @@
    "hashToText": {
     "RQWEt64u9sSyyY2x55ZFrA==": "nuit"
    },
-   "line_beg": 310,
+   "line_beg": 309,
    "col_beg": 12,
-   "line_end": 315,
+   "line_end": 314,
    "col_end": 18,
    "type": "text",
    "desc": "night",
@@ -3632,9 +3632,9 @@
    "hashToText": {
     "VEkFArLbNPFCUCcY/9LdMg==": "Jours travaillés"
    },
-   "line_beg": 322,
+   "line_beg": 321,
    "col_beg": 10,
-   "line_end": 324,
+   "line_end": 323,
    "col_end": 16,
    "type": "text",
    "desc": "working days",
@@ -3645,9 +3645,9 @@
    "hashToText": {
     "e9blpGJ3ohrnJtiqeUPSeQ==": "Afficher seulement les jours travaillés dans le calendrier"
    },
-   "line_beg": 335,
+   "line_beg": 334,
    "col_beg": 11,
-   "line_end": 341,
+   "line_end": 340,
    "col_end": 17,
    "type": "text",
    "desc": "display only worked days",
@@ -3658,9 +3658,9 @@
    "hashToText": {
     "X3FGQxYJmAJHajDXM4EKdQ==": "Fuseau horaire"
    },
-   "line_beg": 345,
+   "line_beg": 344,
    "col_beg": 10,
-   "line_end": 347,
+   "line_end": 346,
    "col_end": 16,
    "type": "text",
    "desc": "timezone",
@@ -3671,9 +3671,9 @@
    "hashToText": {
     "d0hqbx4CE+vVuAB5AmruYQ==": "Triez par fuseau"
    },
-   "line_beg": 354,
+   "line_beg": 353,
    "col_beg": 11,
-   "line_end": 359,
+   "line_end": 358,
    "col_end": 17,
    "type": "text",
    "desc": "sort by timezone",
@@ -3684,9 +3684,9 @@
    "hashToText": {
     "pYtMkpRTyp8ob/8NQYLQ/Q==": "Prix que vous facturé en moyenne par journée"
    },
-   "line_beg": 398,
+   "line_beg": 397,
    "col_beg": 17,
-   "line_end": 401,
+   "line_end": 400,
    "col_end": 11,
    "type": "text",
    "desc": "daily rate",
@@ -3697,9 +3697,9 @@
    "hashToText": {
     "y4ioLUPo3VMB4sOZUBW1kw==": "Prix journalier moyen"
    },
-   "line_beg": 404,
+   "line_beg": 403,
    "col_beg": 11,
-   "line_end": 406,
+   "line_end": 405,
    "col_end": 17,
    "type": "text",
    "desc": "timezone",
@@ -3710,14 +3710,40 @@
    "hashToText": {
     "LFYTgF3/f9HYp1L33vLE5A==": "300€"
    },
-   "line_beg": 412,
+   "line_beg": 411,
    "col_beg": 23,
-   "line_end": 412,
+   "line_end": 411,
    "col_end": 43,
    "type": "text",
    "desc": "price",
    "project": "",
    "jsfbt": "300€"
+  },
+  {
+   "hashToText": {
+    "E2AabVuJD6TEQtShQHpbaQ==": "https://inyo.me/calculer-son-tjm/"
+   },
+   "line_beg": 415,
+   "col_beg": 18,
+   "line_end": 415,
+   "col_end": 91,
+   "type": "text",
+   "desc": "link to daily rate calculator",
+   "project": "",
+   "jsfbt": "https://inyo.me/calculer-son-tjm/"
+  },
+  {
+   "hashToText": {
+    "XG2osROaWzNSsVLARL0RsA==": "Calculer mon prix journalier"
+   },
+   "line_beg": 415,
+   "col_beg": 93,
+   "line_end": 415,
+   "col_end": 190,
+   "type": "text",
+   "desc": "label link to daily rate calculator",
+   "project": "inyo",
+   "jsfbt": "Calculer mon prix journalier"
   },
   {
    "hashToText": {

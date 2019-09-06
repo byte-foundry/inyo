@@ -9,17 +9,18 @@ import {ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_PROJECT} from '../../utils/mutations';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import CreateProjectModalForm from '../CreateProjectModalForm';
 import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 
 function CreateProjectModal({onDismiss, history, baseName}) {
-	const language = (navigator.language || 'fr-FR').split('-')[0];
 	const [viewContent, setViewContent] = useState(null);
 	const [createCustomer, setCreateCustomer] = useState(false);
 	const [customerName, setCustomerName] = useState('');
 	const [createProject] = useMutation(CREATE_PROJECT);
 	const client = useApolloClient();
+	const {language} = useUserInfos();
 
 	const {data: dataProjects} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 

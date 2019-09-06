@@ -19,6 +19,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import AssignedToOtherCard from '../AssignedToOtherCard';
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
@@ -264,6 +265,7 @@ const Schedule = ({
 	workingTime = 8,
 	assistantName,
 }) => {
+	const {language} = useUserInfos();
 	const [, setRefreshState] = useState(new Date().toJSON());
 
 	const startDay = moment(
@@ -436,7 +438,7 @@ const Schedule = ({
 							>
 								{day.momentDate
 									.toDate()
-									.toLocaleDateString(navigator.language, {
+									.toLocaleDateString(language, {
 										weekday: 'short',
 										day: 'numeric',
 										month: moment().isSame(

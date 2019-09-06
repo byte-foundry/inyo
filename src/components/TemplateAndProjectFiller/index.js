@@ -18,6 +18,7 @@ import {
 } from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import Plural from '../Plural';
 
 const Container = styled('div')`
@@ -153,7 +154,7 @@ function TemplateTaskList({selectedTemplate}) {
 const PROJECT_LIST_BASE_SIZE = 10;
 
 const TemplateAndProjectFiller = ({onChoose, projectId}) => {
-	const language = (navigator.language || 'fr-FR').split('-')[0];
+	const {language} = useUserInfos();
 	const [selected, setSelected] = useState(null);
 	const [filter, setFilter] = useState('');
 	const [showAll, setShowAll] = useState(false);

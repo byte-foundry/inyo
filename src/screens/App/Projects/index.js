@@ -44,6 +44,7 @@ import {
 } from '../../../utils/new/design-system';
 import {onboardingTemplate} from '../../../utils/project-templates';
 import {GET_ALL_PROJECTS} from '../../../utils/queries';
+import useUserInfos from '../../../utils/useUserInfos';
 
 const ProjectTitle = styled(SubHeading)`
 	color: ${primaryGrey};
@@ -167,7 +168,7 @@ const SubHeadingProject = styled(SubHeading)`
 `;
 
 function Projects({history}) {
-	const language = (navigator.language || 'fr-FR').split('-')[0];
+	const {language} = useUserInfos();
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);

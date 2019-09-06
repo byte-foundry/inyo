@@ -1,5 +1,6 @@
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import momentDurationFormat from 'moment-duration-format';
 import React, {useCallback} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
@@ -21,6 +22,8 @@ import {
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
+
+momentDurationFormat(moment);
 
 const Container = styled('div')`
 	width: 980px;
@@ -95,7 +98,8 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {workingTime = 8} = useUserInfos() || {};
+	const {workingTime = 8, defaultDailyPrice = 0, clientViews}
+		= useUserInfos() || {};
 
 	const query = new URLSearchParams(location.search);
 
@@ -395,6 +399,54 @@ const Stats = ({history, location}) => {
 									reminder => reminder.status === 'SENT',
 								).length
 							}
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Gained time">
+								Temps gagné
+							</fbt>
+						</SubHeading>
+						<Number>
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length * 15,
+									'minutes',
+								)
+								.format('h[h]mm[min]')}
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Client visits">
+								Visites client
+							</fbt>
+						</SubHeading>
+						<Number>{clientViews}</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="estimated time">
+								Montant travaillé
+							</fbt>
+						</SubHeading>
+						<Number>
+							<fbt project="inyo" desc="worked amount">
+								<fbt:param name="amount">
+									{(
+										filteredTasks
+											.filter(
+												t => t.status === 'FINISHED',
+											)
+											.reduce(
+												(total, {timeItTook}) => total + timeItTook,
+												0,
+											) * defaultDailyPrice
+									).toFixed(2)}
+								</fbt:param>€
+							</fbt>
 						</Number>
 					</Card>
 					<Card>

@@ -9,6 +9,7 @@ import {isCustomerTask} from '../../utils/functions';
 import {Label, primaryBlack, primaryRed} from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_PROJECT_DATA} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 
 const Column = styled('div')``;
 
@@ -110,7 +111,7 @@ function TemplateTaskList({selectedTemplate}) {
 }
 
 const CreateProjectModalViewContent = ({content}) => {
-	const language = (navigator.language || 'fr-FR').split('-')[0];
+	const {language} = useUserInfos();
 	const selectedTemplate = templates[language].find(
 		tplt => tplt.name === content,
 	);

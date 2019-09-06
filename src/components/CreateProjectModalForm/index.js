@@ -17,6 +17,7 @@ import {
 } from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import DateInput from '../DateInput';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
@@ -110,7 +111,7 @@ export default function ({
 	onDismiss,
 	...props
 }) {
-	const language = (navigator.language || 'fr-FR').split('-')[0];
+	const {language} = useUserInfos();
 	const [editDeadline, setEditDeadline] = useState(false);
 	const [selectedViewContent, setSelectedViewContent] = useState();
 	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {

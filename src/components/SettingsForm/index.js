@@ -176,7 +176,7 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
 								workingDays,
-								defaultDailyPrice: dailyRate,
+								defaultDailyPrice: parseInt(dailyRate),
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},

@@ -96,6 +96,8 @@ export const GET_USER_INFOS = gql`
 			startWorkAt
 			endWorkAt
 			workingDays
+			defaultDailyPrice
+			clientViews
 			timeZone
 			tags {
 				...TagFragment

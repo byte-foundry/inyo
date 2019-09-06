@@ -98,7 +98,8 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {workingTime = 8} = useUserInfos() || {};
+	const {workingTime = 8, defaultDailyPrice = 0, clientViews}
+		= useUserInfos() || {};
 
 	const query = new URLSearchParams(location.search);
 
@@ -419,19 +420,33 @@ const Stats = ({history, location}) => {
 					</Card>
 					<Card>
 						<SubHeading>
+							<fbt project="inyo" desc="Client visits">
+								Visites client
+							</fbt>
+						</SubHeading>
+						<Number>{clientViews}</Number>
+					</Card>
+					<Card>
+						<SubHeading>
 							<fbt project="inyo" desc="estimated time">
-								Temps gagné
+								Montant travaillé
 							</fbt>
 						</SubHeading>
 						<Number>
-							{moment
-								.duration(
-									reminders.filter(
-										reminder => reminder.status === 'SENT',
-									).length * 15,
-									'minutes',
-								)
-								.format('h[h]mm[min]')}
+							<fbt project="inyo" desc="worked amount">
+								<fbt:param name="amount">
+									{(
+										filteredTasks
+											.filter(
+												t => t.status === 'FINISHED',
+											)
+											.reduce(
+												(total, {timeItTook}) => total + timeItTook,
+												0,
+											) * defaultDailyPrice
+									).toFixed(2)}
+								</fbt:param>€
+							</fbt>
 						</Number>
 					</Card>
 					<Card>

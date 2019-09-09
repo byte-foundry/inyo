@@ -523,6 +523,14 @@ const TaskInput = ({
 													true,
 												);
 											}
+											else if (type === 'SECTION') {
+												onSubmitSection({
+													name: value,
+												});
+												setValue('');
+												closeMoreInfos();
+												closeContentAcquisitionInfos();
+											}
 											else {
 												onSubmitTask({
 													name: value,

@@ -316,7 +316,9 @@ const TaskInput = ({
 				<Tooltip
 					label={
 						<p>
-							`Entrée` pour créer une tâche.
+							<fbt project="inyo" desc="Enter to create task">
+								`Entrée` pour créer une tâche.
+							</fbt>
 							{currentProjectId && (
 								<>
 									<br />

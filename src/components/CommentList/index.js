@@ -86,6 +86,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 		variables: {
 			itemId,
 			token: customerToken,
+			updateCommentViews: true,
 		},
 		suspend: true,
 	});

@@ -92,6 +92,7 @@ const SignupForm = ({from, history, location}) => {
 					try {
 						const query = new URLSearchParams(location.search);
 						const referrer = query.get('referral');
+						const inyoOffer = query.get('ref');
 
 						const {data} = await signup({
 							variables: {
@@ -123,6 +124,7 @@ const SignupForm = ({from, history, location}) => {
 								user_hash: user.hmacIntercomId,
 								phone: user.company.phone,
 								referrer,
+								inyo_offer: inyoOffer,
 							});
 
 							await client.resetStore();

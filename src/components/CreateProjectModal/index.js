@@ -15,7 +15,7 @@ import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 
 function CreateProjectModal({onDismiss, history, baseName}) {
-	const [viewContent, setViewContent] = useState(null);
+	const [viewContent, setViewContent] = useState('BLANK');
 	const [createCustomer, setCreateCustomer] = useState(false);
 	const [customerName, setCustomerName] = useState('');
 	const [createProject] = useMutation(CREATE_PROJECT);
@@ -37,7 +37,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 				template: 'BLANK',
 				name: baseName,
 			}}
-			validateSchema={Yup.object({
+			validationSchema={Yup.object({
 				name: Yup.string().required(
 					<fbt project="inyo" desc="required">
 						Requis
@@ -140,6 +140,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 							onDismiss={() => {
 								setCustomerName('');
 								setCreateCustomer(false);
+								props.setFieldValue('customerId', null);
 							}}
 							onValidate={({id}) => {
 								props.setFieldValue('customerId', id);

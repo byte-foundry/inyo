@@ -113,12 +113,10 @@ export default function ({
 }) {
 	const {language} = useUserInfos();
 	const [editDeadline, setEditDeadline] = useState(false);
-	const [selectedViewContent, setSelectedViewContent] = useState();
 	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
 		suspend: true,
 	});
 
-	// TODO: translation here
 	const templateOptions = [
 		{
 			label: (
@@ -199,10 +197,8 @@ export default function ({
 					big
 					classNamePrefix="intercom-tour"
 					options={templateOptions}
-					handleBlur={() => setViewContent(selectedViewContent)}
 					onChange={(option) => {
 						setViewContent(option.value);
-						setSelectedViewContent(option.value);
 					}}
 					components={{
 						Option: createPreviewableOption({

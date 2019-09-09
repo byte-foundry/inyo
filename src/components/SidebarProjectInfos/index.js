@@ -584,7 +584,7 @@ const SidebarProjectInfos = ({
 								project="inyo"
 								desc="sidebar project add collaborator label"
 							>
-								Ajouter un Collaborateurs
+								Ajouter un collaborateur
 							</fbt>
 						</Button>
 					) : (

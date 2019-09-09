@@ -142,7 +142,7 @@ const HelpModal = ({openWelcomeModal, onDismiss, ...rest}) => (
 						<A
 							id="client-presentation-link"
 							target="_blank"
-							href="https://inyo.pro"
+							href={fbt('https://inyo.pro', 'inyo pro link')}
 						>
 							<fbt
 								project="inyo"

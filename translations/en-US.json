@@ -1121,6 +1121,16 @@
     }
    ]
   },
+  "DqQ+Qw5/e0mBNHW1l8tIpQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "https://inyo.pro/en/",
+     "variations": {}
+    }
+   ]
+  },
   "H0aue5s+hJE+zx+UweGnFQ==": {
    "tokens": [],
    "types": [],
@@ -5691,6 +5701,46 @@
     }
    ]
   },
+  "zTLbttckbhyR65ApxlfqBg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Time gained",
+     "variations": {}
+    }
+   ]
+  },
+  "J5LcRx9iBIJ6iam4yM6ICg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Client views",
+     "variations": {}
+    }
+   ]
+  },
+  "S5zAFspJmhz4q+bMF4pQqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amount worked",
+     "variations": {}
+    }
+   ]
+  },
+  "lX/U196sA/EDgqxVTz2P4A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amount}",
+     "variations": {}
+    }
+   ]
+  },
   "zZBJ6cBdsYxLXMc/mbyOGw==": {
    "tokens": [],
    "types": [],
@@ -5831,27 +5881,27 @@
     }
    ]
   },
-  "CkWC0zqrkQ8io8OgCM5n/Q==": {
+  "jlMfSYRO0xyLbQCWNycBVg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
      "variations": {}
     }
    ]
   },
-  "IH8+4gBIQituJYvx0vyAmA==": {
+  "S/lDcCNWAvCYQq+NV7vlzQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Hello {email} ,",
+     "translation": "Hello {email},",
      "variations": {}
     }
    ]
   },
-  "uZnPNnGXS7lmjE2SY5IJPQ==": {
+  "Wt+cJPy5epCJEXFSUIwhOw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -5861,7 +5911,7 @@
     }
    ]
   },
-  "v6f8n6XU5zQDQ2bMk9jnqw==": {
+  "eK79Bn5+/nLmk3jYbxqifA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -5871,7 +5921,7 @@
     }
    ]
   },
-  "T5lkkGZSk2P4hrFCsNMMfg==": {
+  "lRliGP7yf62NJEIe6WfLnA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -5881,27 +5931,27 @@
     }
    ]
   },
-  "3y7EVwPXU3XFJKA3TCBbgA==": {
+  "JgsWc6QO5q/HRaqHK/YFHQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}",
+     "translation": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}",
      "variations": {}
     }
    ]
   },
-  "SDbqh6nj5Yu7TtfW4VTjGA==": {
+  "ITI8XvBaWfxkMtyfm/3KXQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Subsribe for $8 /month",
+     "translation": "Subsribe for $12 /month",
      "variations": {}
     }
    ]
   },
-  "FSW/nkkP5uiaNMttshm6BQ==": {
+  "nmxkJz6CkJYHXblHdWWqtA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -5911,37 +5961,17 @@
     }
    ]
   },
-  "h1VxoaBEOh61mu5iI21x5A==": {
+  "Rf0r42Bn091A3C0HbJubEw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "$60 /year (4 months free)",
+     "translation": "Choose our special launch offer and get Inyo for life for $75",
      "variations": {}
     }
    ]
   },
-  "xkhsZHKwsjndj5rQC5+IzA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Acheter un accès à vie pour 99€ !}",
-     "variations": {}
-    }
-   ]
-  },
-  "5ZlYlGwLtM5Fj6xZz0Tdug==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Buy a lifetime subscription for $99!",
-     "variations": {}
-    }
-   ]
-  },
-  "1opFhdmrokPtcbu27i+Img==": {
+  "x8x1qeOJ3eH46s8iXFX4aQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -5951,7 +5981,7 @@
     }
    ]
   },
-  "xMZZhlVT+S3DNf5uu16mvw==": {
+  "c8BZVzAyMqD+7Hz6G9ORqQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -6021,17 +6051,17 @@
     }
    ]
   },
-  "99FIH8BScoA0lZgZbMlkKg==": {
+  "8JdYB43CJ1+vMZ4ava2Teg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
      "variations": {}
     }
    ]
   },
-  "+QF7x9U9lY93T+quac6slw==": {
+  "bN5UClTIYFrOTO2HEt5S0A==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -6041,17 +6071,17 @@
     }
    ]
   },
-  "UsBb0o1dmZQXI6BSH5okDw==": {
+  "NoTnQdYvII3Q6h7znutH/w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Your trial period is coming to an end",
+     "translation": "Your trial period of 21 days is coming to an end.",
      "variations": {}
     }
    ]
   },
-  "oXbplsVyYs5vsoKpF/SSJw==": {
+  "A5oTXW71AoN17ScMbmX2bQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -6061,27 +6091,27 @@
     }
    ]
   },
-  "3NYwNqoAZOVkBO7/iaWKvQ==": {
+  "itpCACFYiHQJlxS4wLJppA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}",
+     "translation": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}",
      "variations": {}
     }
    ]
   },
-  "x3vXtZ0ZOPsXQpJjoWtLFw==": {
+  "xMM/dxOa78xb4UQty6vE/g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Subscribe for $8 /month",
+     "translation": "Subscribe for $12 /month",
      "variations": {}
     }
    ]
   },
-  "K5joI3BM60Yem2nuOFuT9w==": {
+  "XxmNHV+CSDG4dLrxCAstFg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -6091,37 +6121,17 @@
     }
    ]
   },
-  "I85YPh/JW7I4Ox4mryNvQA==": {
+  "uxsVOI0qJgpVehl9SfWe3Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "$60 /year (4 months free)",
+     "translation": "Choose our special launch offer and get Inyo for life for $75",
      "variations": {}
     }
    ]
   },
-  "OFLxxbxNqzWmoXDq/qutLQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Acheter un accès à vie pour 99€ !}",
-     "variations": {}
-    }
-   ]
-  },
-  "ZwZWXOV1OIEb/uYP7vz6mg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Buy a lifetime access for $99!",
-     "variations": {}
-    }
-   ]
-  },
-  "OFVxiFLN9LII2YvEE9fmCQ==": {
+  "sS7lbT6ud332J4JbSuxTMw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -6131,7 +6141,7 @@
     }
    ]
   },
-  "PryAREGBvM51ftvwYoHXXA==": {
+  "beOrGcOnckyqPUWq5EPP7g==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -6637,6 +6647,256 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "CkWC0zqrkQ8io8OgCM5n/Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "IH8+4gBIQituJYvx0vyAmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {email},",
+     "variations": {}
+    }
+   ]
+  },
+  "uZnPNnGXS7lmjE2SY5IJPQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your trial period of 21 days comes to an end.",
+     "variations": {}
+    }
+   ]
+  },
+  "v6f8n6XU5zQDQ2bMk9jnqw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "For your clients nothing changes: They can still access your projects, comment, validate, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "T5lkkGZSk2P4hrFCsNMMfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "To continue to use Inyo you need to subscribe to one of our premimum plans.",
+     "variations": {}
+    }
+   ]
+  },
+  "3y7EVwPXU3XFJKA3TCBbgA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}",
+     "variations": {}
+    }
+   ]
+  },
+  "SDbqh6nj5Yu7TtfW4VTjGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subsribe for $8 /month",
+     "variations": {}
+    }
+   ]
+  },
+  "FSW/nkkP5uiaNMttshm6BQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "or",
+     "variations": {}
+    }
+   ]
+  },
+  "h1VxoaBEOh61mu5iI21x5A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$60 /year (4 months free)",
+     "variations": {}
+    }
+   ]
+  },
+  "xkhsZHKwsjndj5rQC5+IzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Acheter un accès à vie pour 99€ !}",
+     "variations": {}
+    }
+   ]
+  },
+  "5ZlYlGwLtM5Fj6xZz0Tdug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Buy a lifetime subscription for $99!",
+     "variations": {}
+    }
+   ]
+  },
+  "1opFhdmrokPtcbu27i+Img==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "xMZZhlVT+S3DNf5uu16mvw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If this is not you, click here to sign out.",
+     "variations": {}
+    }
+   ]
+  },
+  "99FIH8BScoA0lZgZbMlkKg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 8€ /moisou60€ /an (4 mois offerts)}{=Acheter un accès à vie pour 99€ !}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "+QF7x9U9lY93T+quac6slw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {email} ,",
+     "variations": {}
+    }
+   ]
+  },
+  "UsBb0o1dmZQXI6BSH5okDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your trial period is coming to an end",
+     "variations": {}
+    }
+   ]
+  },
+  "oXbplsVyYs5vsoKpF/SSJw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You can subscribe right now to Inyo.",
+     "variations": {}
+    }
+   ]
+  },
+  "3NYwNqoAZOVkBO7/iaWKvQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=S'abonner pour 8€ /mois}{=ou}{=60€ /an (4 mois offerts)}",
+     "variations": {}
+    }
+   ]
+  },
+  "x3vXtZ0ZOPsXQpJjoWtLFw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subscribe for $8 /month",
+     "variations": {}
+    }
+   ]
+  },
+  "K5joI3BM60Yem2nuOFuT9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "or",
+     "variations": {}
+    }
+   ]
+  },
+  "I85YPh/JW7I4Ox4mryNvQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$60 /year (4 months free)",
+     "variations": {}
+    }
+   ]
+  },
+  "OFLxxbxNqzWmoXDq/qutLQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Acheter un accès à vie pour 99€ !}",
+     "variations": {}
+    }
+   ]
+  },
+  "ZwZWXOV1OIEb/uYP7vz6mg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Buy a lifetime access for $99!",
+     "variations": {}
+    }
+   ]
+  },
+  "OFVxiFLN9LII2YvEE9fmCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "PryAREGBvM51ftvwYoHXXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If this is not you, click here to sign out.",
      "variations": {}
     }
    ]

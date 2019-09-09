@@ -646,7 +646,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "In order to keep you aware of the progress, you will regularly receive summary of the finished tasks or notifications if your input is needed on some part of the project.",
+     "translation": "In order to keep you aware of the progress, you will regularly receive summary of the finished tasks or notifications if your input is needed on some section of the project.",
      "variations": {}
     }
    ]
@@ -2166,7 +2166,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Name of the part",
+     "translation": "Name of the section",
      "variations": {}
     }
    ]
@@ -2236,7 +2236,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Name of the part",
+     "translation": "Name of the section",
      "variations": {}
     }
    ]
@@ -2276,7 +2276,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Name of the part",
+     "translation": "Name of the section",
      "variations": {}
     }
    ]
@@ -3616,7 +3616,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "↓ to create a part",
+     "translation": "↓ to create a section",
      "variations": {}
     }
    ]
@@ -3626,7 +3626,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Name of the task or part. Type \"/\" to change the type's task",
+     "translation": "Name of the task or section. Type \"/\" to change the type's task",
      "variations": {}
     }
    ]
@@ -3646,7 +3646,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Add a task or a part.",
+     "translation": "Add a task or a section.",
      "variations": {}
     }
    ]
@@ -3666,7 +3666,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Down arrow to create a part of a project",
+     "translation": "Down arrow to create a section of a project",
      "variations": {}
     }
    ]
@@ -3676,7 +3676,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Create a part",
+     "translation": "Create a section",
      "variations": {}
     }
    ]
@@ -3706,7 +3706,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "part",
+     "translation": "section",
      "variations": {}
     }
    ]
@@ -6526,7 +6526,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Create a part in a project to organize your tasks",
+     "translation": "Create a section in a project to organize your tasks",
      "variations": {}
     }
    ]
@@ -7096,7 +7096,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Down arrow to create the part",
+     "translation": "Down arrow to create the section",
      "variations": {}
     }
    ]
@@ -7106,7 +7106,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Create a part",
+     "translation": "Create a section",
      "variations": {}
     }
    ]

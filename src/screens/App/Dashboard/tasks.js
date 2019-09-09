@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
-import moment from 'moment';
 import React, {useCallback, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag} from 'react-dnd';
@@ -15,6 +14,7 @@ import Schedule from '../../../components/Schedule';
 import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import Task from '../../../components/TaskRow';
 import TasksList from '../../../components/TasksList';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
 	FlexRow,
@@ -91,8 +91,16 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = new URLSearchParams(prevSearch || location.search);
 
-	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {workingTime, workingDays, hasFullWeekSchedule} = useUserInfos();
+	const {data, error} = useQuery(GET_ALL_TASKS, {
+		suspend: true,
+		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
+	});
+	const {
+		assistantName,
+		workingTime,
+		workingDays,
+		hasFullWeekSchedule,
+	} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const {
 		unscheduledTasks,
@@ -256,6 +264,7 @@ const DashboardTasks = ({location, history}) => {
 				workingDays={workingDays}
 				fullWeek={hasFullWeekSchedule}
 				onMoveTask={onMoveTask}
+				assistantName={assistantName}
 			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal
@@ -306,7 +315,10 @@ const DashboardTasks = ({location, history}) => {
 									<IllusFigureContainer fig={IllusFigure} />
 									<IllusText>
 										<P>
-										Vous n'avez plus de tâches à planifier.
+											<fbt project="inyo" desc="no more task">
+											Vous n'avez plus de tâches à
+											planifier.
+											</fbt>
 										</P>
 									</IllusText>
 								</IllusContainer>

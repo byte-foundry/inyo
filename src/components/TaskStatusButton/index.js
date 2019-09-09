@@ -1,6 +1,7 @@
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import BistableButton from '../BistableButton';
 
@@ -19,10 +20,26 @@ const TaskStatusButton = ({
 		<BistableButton
 			value={isFinished}
 			disabled={disabled}
-			trueLabel="Fait"
-			trueTooltip="Ré-ouvrir la tâche"
-			falseLabel="Marquer comme fait"
-			falseTooltip="Cliquer si cette tâche a été réalisée"
+			trueLabel={
+				<fbt project="inyo" desc="Done">
+					Fait
+				</fbt>
+			}
+			trueTooltip={
+				<fbt project="inyo" desc="done tooltip">
+					Ré-ouvrir la tâche
+				</fbt>
+			}
+			falseLabel={
+				<fbt project="inyo" desc="mark as done">
+					Marquer comme fait
+				</fbt>
+			}
+			falseTooltip={
+				<fbt project="inyo" desc="mark as done tooltip">
+					Cliquer si cette tâche a été réalisée
+				</fbt>
+			}
 			commit={() => {
 				if (customerToken) {
 					finishItem({

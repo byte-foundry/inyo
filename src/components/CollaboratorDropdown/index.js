@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, {useCallback} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {ASSIGN_TO_TASK, REMOVE_ASSIGNMENT_TO_TASK} from '../../utils/mutations';
@@ -136,8 +137,13 @@ function CollaboratorDropdown({collaborators = [], assignee, taskId}) {
 				))}
 			{collaborators.length === 0 && (
 				<div style={{padding: '1rem', color: accentGrey}}>
-					Vous devez d'abord ajouter
-					<br /> un collaborateur au projet.
+					<fbt project="inyo" desc="missing collaborator on project">
+						Vous devez d'abord ajouter
+					</fbt>
+					<br />
+					<fbt project="inyo" desc="missing collaborator on project">
+						un collaborateur au projet.
+					</fbt>
 				</div>
 			)}
 		</CollaboratorDropdownElem>

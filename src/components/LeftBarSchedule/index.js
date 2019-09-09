@@ -14,6 +14,7 @@ import {
 } from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 import usePrevious from '../../utils/usePrevious';
+import useUserInfos from '../../utils/useUserInfos';
 import DefaultDroppableDay from '../DefaultDroppableDay';
 import PieChart from '../PieChart';
 
@@ -81,6 +82,7 @@ function DroppableDay({
 	isOff,
 	workingTime = 8,
 }) {
+	const {language} = useUserInfos();
 	const timeLeft
 		= workingTime
 		- day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
@@ -95,7 +97,7 @@ function DroppableDay({
 			<DayElem isOff={isOff}>
 				<DayDate>
 					<DayDateDay>
-						{day.momentDate.toDate().toLocaleDateString('default', {
+						{day.momentDate.toDate().toLocaleDateString(language, {
 							weekday: 'narrow',
 							day: undefined,
 							month: undefined,
@@ -103,7 +105,7 @@ function DroppableDay({
 						})}
 					</DayDateDay>
 					<DayDateNumber>
-						{day.momentDate.toDate().toLocaleDateString('default', {
+						{day.momentDate.toDate().toLocaleDateString(language, {
 							weekday: undefined,
 							day: 'numeric',
 							month: undefined,

@@ -6,6 +6,7 @@ import {createEditorState, Editor} from 'medium-draft';
 import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
 import React, {Component} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {gray20} from '../../utils/content';
 
 const TextEditorMain = styled('div')`
@@ -72,7 +73,11 @@ class TextEditor extends Component {
 					onChange={this.onChange}
 					sideButtons={this.sideButtons}
 					toolbarConfig={this.toolbarConfig}
-					placeholder="Write here ..."
+					placeholder={
+						<fbt project="inyo" desc="text editor placeholder">
+							Ecrivez ici...
+						</fbt>
+					}
 					ref={(element) => {
 						this.editor = element;
 					}}

@@ -7,10 +7,11 @@ import {useApolloClient, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
+import SettingsForm from '../../../components/SettingsForm';
 import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
-import UserWorkHourAndDaysForm from '../../../components/UserWorkHourAndDaysForm';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {Button, H3} from '../../../utils/content';
 import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
@@ -211,7 +212,12 @@ const Account = ({location}) => {
 			<ToastContainer />
 
 			<AccountBody>
-				<Heading>Bonjour {firstName} !</Heading>
+				<Heading>
+					<fbt project="inyo" desc="hello">
+						Bonjour{' '}
+						<fbt:param name="firstName">{firstName}</fbt:param> !
+					</fbt>
+				</Heading>
 
 				<Profile>
 					<ProfileSide>
@@ -221,7 +227,9 @@ const Account = ({location}) => {
 									href="#me"
 									onClick={handleScroll}
 								>
-									Vous
+									<fbt project="inyo" desc="You">
+										Vous
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem active={activeItem === 'company'}>
@@ -229,7 +237,9 @@ const Account = ({location}) => {
 									href="#company"
 									onClick={handleScroll}
 								>
-									Votre société
+									<fbt project="inyo" desc="your company">
+										Votre société
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem active={activeItem === 'settings'}>
@@ -237,7 +247,9 @@ const Account = ({location}) => {
 									href="#settings"
 									onClick={handleScroll}
 								>
-									Vos options
+									<fbt project="inyo" desc="your options">
+										Vos options
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem
@@ -247,7 +259,9 @@ const Account = ({location}) => {
 									href="#assistant"
 									onClick={handleScroll}
 								>
-									Votre assistant·e
+									<fbt project="inyo" desc="your assistant">
+										Votre assistant·e
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 							<ProfileSideElem active={activeItem === 'account'}>
@@ -255,7 +269,9 @@ const Account = ({location}) => {
 									href="#account"
 									onClick={handleScroll}
 								>
-									Votre compte
+									<fbt project="inyo" desc="your account">
+										Votre compte
+									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
 						</ProfileSideLinks>
@@ -263,25 +279,33 @@ const Account = ({location}) => {
 
 					<ProfileMain>
 						<ProfileTitle id="me" ref={createRef('me')}>
-							Vous
+							<fbt project="inyo" desc="you">
+								Vous
+							</fbt>
 						</ProfileTitle>
 						<UserDataForm data={me} done={displayToast} />
 						<ProfileTitle id="company" ref={createRef('company')}>
-							Votre société
+							<fbt project="inyo" desc="notification message">
+								Votre société
+							</fbt>
 						</ProfileTitle>
 						<UserCompanyForm data={company} done={displayToast} />
 						<ProfileTitle id="settings" ref={createRef('settings')}>
-							Vos horaires et jours de travail
+							<fbt
+								project="inyo"
+								desc="your working hours and days"
+							>
+								Vos horaires et jours de travail
+							</fbt>
 						</ProfileTitle>
-						<UserWorkHourAndDaysForm
-							data={me}
-							done={displayToast}
-						/>
+						<SettingsForm data={me} done={displayToast} />
 						<ProfileTitle
 							id="assistant"
 							ref={createRef('assistant')}
 						>
-							Votre assistant·e
+							<fbt project="inyo" desc="Your assistant">
+								Votre assistant·e
+							</fbt>
 						</ProfileTitle>
 						<UserAssistantForm
 							defaultLanguage={settings.language}
@@ -289,7 +313,9 @@ const Account = ({location}) => {
 							done={displayToast}
 						/>
 						<ProfileTitle id="account" ref={createRef('account')}>
-							Votre compte
+							<fbt project="inyo" desc="your account">
+								Votre compte
+							</fbt>
 						</ProfileTitle>
 						<ProfileSection>
 							<Illus src={logoutIllus} />
@@ -305,7 +331,9 @@ const Account = ({location}) => {
 									}
 								}}
 							>
-								Me désinscrire
+								<fbt project="inyo" desc="Delete account">
+									Me désinscrire
+								</fbt>
 							</UnsubscribeButton>
 						</ProfileSection>
 						<Footer>
@@ -319,7 +347,9 @@ const Account = ({location}) => {
 									window.location.href = '/auth/sign-in';
 								}}
 							>
-								Me déconnecter
+								<fbt project="inyo" desc="sign out">
+									Me déconnecter
+								</fbt>
 							</LogoutButton>
 						</Footer>
 					</ProfileMain>

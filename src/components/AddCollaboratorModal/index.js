@@ -4,6 +4,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ErrorInput, ModalContainer, ModalElem} from '../../utils/content';
 import {REQUEST_COLLAB} from '../../utils/mutations';
 import {Button, SubHeading} from '../../utils/new/design-system';
@@ -24,15 +25,33 @@ const AddCollaboratorModal = ({onDismiss}) => {
 	return (
 		<ModalContainer onDismiss={onDismiss}>
 			<ModalElem>
-				<Header>Inviter un collaborateur</Header>
+				<Header>
+					<fbt project="inyo" desc="header collaborator modal">
+						Inviter un collaborateur
+					</fbt>
+				</Header>
 				<Formik
 					initalValues={{
 						email: '',
 					}}
 					validationSchema={Yup.object().shape({
 						email: Yup.string()
-							.email("L'email doit être valide")
-							.required('Requis'),
+							.email(
+								<fbt
+									project="inyo"
+									desc="error collaborator email not valid"
+								>
+									L'email doit être valide
+								</fbt>,
+							)
+							.required(
+								<fbt
+									project="inyo"
+									desc="error collaborator email required"
+								>
+									Requis
+								</fbt>,
+							),
 					})}
 					onSubmit={async (values, actions) => {
 						actions.setSubmitting(true);
@@ -54,8 +73,15 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								=== 'NotFound'
 							) {
 								actions.setStatus({
-									msg:
-										"Cet utilisateur n'est pas encore inscrit sur Inyo.",
+									msg: (
+										<fbt
+											project="inyo"
+											desc="error collaborator user not signed up"
+										>
+											Cette utilisateur n'est pas encore
+											inscrit sur Inyo
+										</fbt>
+									),
 								});
 							}
 							else if (
@@ -63,13 +89,28 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								=== 'AlreadyExisting'
 							) {
 								actions.setStatus({
-									msg:
-										'Cet utilisateur est déjà un de vos collaborateur ou une requête est déjà en cours.',
+									msg: (
+										<fbt
+											project="inyo"
+											desc="error collaborator user already existing"
+										>
+											Cet utilisateur est déjà un de vos
+											collaborateur ou une requête est
+											déjà en cours.
+										</fbt>
+									),
 								});
 							}
 							else {
 								actions.setStatus({
-									msg: "Une erreur s'est produite.",
+									msg: (
+										<fbt
+											project="inyo"
+											desc="error collaborator unspecified error"
+										>
+											Une erreur s'est produite
+										</fbt>
+									),
 								});
 							}
 						}
@@ -81,7 +122,14 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								{...props}
 								name="email"
 								type="text"
-								label="Email du collaborateur"
+								label={
+									<fbt
+										project="inyo"
+										desc="label collaborator email"
+									>
+										Email du collaborateur
+									</fbt>
+								}
 								placeholder="michel@gmail.com"
 								required
 								big
@@ -92,7 +140,14 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								</ErrorInput>
 							)}
 							<Buttons>
-								<Button>Inviter</Button>
+								<Button>
+									<fbt
+										project="inyo"
+										desc="label collaborator invite button"
+									>
+										Inviter
+									</fbt>
+								</Button>
 							</Buttons>
 						</form>
 					)}

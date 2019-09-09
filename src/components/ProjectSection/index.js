@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React, {Component} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {FlexRow, H5, primaryNavyBlue} from '../../utils/content';
 import InlineEditable from '../InlineEditable';
 import TasksList from '../TasksList';
@@ -21,7 +22,11 @@ class ProjectSection extends Component {
 						<InlineEditable
 							value={data.name}
 							type="text"
-							placeholder="Nom de la section"
+							placeholder={
+								<fbt project="inyo" desc="notification message">
+									Nom de la section
+								</fbt>
+							}
 							disabled
 						/>
 					</SectionTitle>

@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react';
 import {withRouter} from 'react-router';
 
+import fbt from '../../fbt/fbt.macro';
 import {Help} from '../../utils/new/design-system';
 import HelpModal from '../HelpModal';
 import Tooltip from '../Tooltip';
@@ -41,7 +42,13 @@ const HelpButton = ({history, location}) => {
 
 	return (
 		<>
-			<Tooltip label="Instructions pour utiliser l'interface">
+			<Tooltip
+				label={
+					<fbt project="inyo" desc="Tooltip help button">
+						Instructions pour utiliser l'interface
+					</fbt>
+				}
+			>
 				<Help id="help-button" customerToken onClick={openHelpModal}>
 					?
 				</Help>

@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	accentGrey,
 	DateInputContainer,
@@ -71,7 +72,13 @@ function TaskDueDate({
 	);
 
 	return (
-		<Tooltip label="Marge restante pour commencer la tâche">
+		<Tooltip
+			label={
+				<fbt project="inyo" desc="worked days left">
+					Marge restante pour commencer la tâche
+				</fbt>
+			}
+		>
 			<TaskIconText
 				inactive={editDueDate}
 				icon={
@@ -97,24 +104,34 @@ function TaskDueDate({
 							<>
 								{(dueDate && (
 									<>
-										{
-											+(
-												moment(dueDate).diff(
-													moment(),
-													'days',
-												) - item.unit
-											).toFixed(2)
-										}{' '}
-										<Plural
-											value={
-												moment(dueDate).diff(
-													moment(),
-													'days',
-												) - item.unit
-											}
-											singular="jour"
-											plural="jours"
-										/>
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											<fbt:param name="workedDays">
+												{
+													+(
+														moment(dueDate).diff(
+															moment(),
+															'days',
+														) - item.unit
+													).toFixed(2)
+												}
+											</fbt:param>{' '}
+											<fbt:plural
+												name="workedDaysText"
+												count={
+													moment(dueDate).diff(
+														moment(),
+														'days',
+													) - item.unit
+												}
+												showCount="yes"
+												many="jours"
+											>
+												jour
+											</fbt:plural>
+										</fbt>
 									</>
 								)) || <>&mdash;</>}
 							</>

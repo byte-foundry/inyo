@@ -7,6 +7,7 @@ import {useApolloClient, useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {INTERCOM_APP_ID} from '../../utils/constants';
 import {ErrorInput} from '../../utils/content';
 import {CHECK_UNIQUE_EMAIL, SIGNUP} from '../../utils/mutations';
@@ -50,25 +51,48 @@ const SignupForm = ({from, history, location}) => {
 				}}
 				validationSchema={Yup.object().shape({
 					email: Yup.string()
-						.email("L'email doit être valide")
-						.required('Requis')
+						.email(
+							<fbt project="inyo" desc="invalid email">
+								L'email doit être valide
+							</fbt>,
+						)
+						.required(
+							<fbt project="inyo" desc="required">
+								Requis
+							</fbt>,
+						)
 						.test(
 							'unique-email',
-							"L'email est déjà utilisé",
+							<fbt project="inyo" desc="email is already used">
+								L'email est déjà utilisé
+							</fbt>,
 							value => debouncedCheckEmail({
 								variables: {
 									email: value || '',
 								},
 							}).then(({data}) => data.isAvailable),
 						),
-					password: Yup.string().required('Requis'),
-					firstname: Yup.string().required('Requis'),
-					lastname: Yup.string().required('Requis'),
+					password: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
+					firstname: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
+					lastname: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 				})}
 				onSubmit={async (values, actions) => {
 					try {
 						const query = new URLSearchParams(location.search);
 						const referrer = query.get('referral');
+						const inyoOffer = query.get('ref');
 
 						const {data} = await signup({
 							variables: {
@@ -100,6 +124,7 @@ const SignupForm = ({from, history, location}) => {
 								user_hash: user.hmacIntercomId,
 								phone: user.company.phone,
 								referrer,
+								inyo_offer: inyoOffer,
 							});
 
 							await client.resetStore();
@@ -124,7 +149,11 @@ const SignupForm = ({from, history, location}) => {
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: "Quelque chose ne s'est pas passé comme prévu",
+							msg: (
+								<fbt project="inyo" desc="something went wrong">
+									Quelque chose ne s'est pas passé comme prévu
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -138,8 +167,22 @@ const SignupForm = ({from, history, location}) => {
 								{...props}
 								name="email"
 								type="email"
-								label="Adresse email"
-								placeholder="jean@dupont.fr"
+								label={
+									<fbt
+										project="inyo"
+										desc="email address label"
+									>
+										Adresse email
+									</fbt>
+								}
+								placeholder={
+									<fbt
+										project="inyo"
+										desc="email address placeholder"
+									>
+										jean@dupont.fr
+									</fbt>
+								}
 								required
 								big
 							/>
@@ -147,7 +190,11 @@ const SignupForm = ({from, history, location}) => {
 								{...props}
 								name="password"
 								type="password"
-								label="Mot de passe"
+								label={
+									<fbt project="inyo" desc="password">
+										Mot de passe
+									</fbt>
+								}
 								placeholder="***************"
 								required
 								big
@@ -156,8 +203,19 @@ const SignupForm = ({from, history, location}) => {
 								{...props}
 								name="firstname"
 								type="text"
-								label="Prénom"
-								placeholder="Jean"
+								label={
+									<fbt project="inyo" desc="firstname label">
+										Prénom
+									</fbt>
+								}
+								placeholder={
+									<fbt
+										project="inyo"
+										desc="firstname placeholder"
+									>
+										Jean
+									</fbt>
+								}
 								required
 								big
 							/>
@@ -165,8 +223,19 @@ const SignupForm = ({from, history, location}) => {
 								{...props}
 								name="lastname"
 								type="text"
-								label="Nom"
-								placeholder="Dupont"
+								label={
+									<fbt project="inyo" desc="lastname label">
+										Nom
+									</fbt>
+								}
+								placeholder={
+									<fbt
+										project="inyo"
+										desc="lastname placeholder"
+									>
+										Dupont
+									</fbt>
+								}
 								required
 								big
 							/>
@@ -182,24 +251,28 @@ const SignupForm = ({from, history, location}) => {
 									type="checkbox"
 									required
 								/>
-								J'accepte les{' '}
-								<b>
-									<A
-										target="blank"
-										href="https://inyo.me/a-propos/cgu/"
-									>
-										CGU
-									</A>
-								</b>{' '}
-								et consent à recevoir des emails de la part
-								d'Inyo.
+								<fbt project="inyo" desc="notification message">
+									J'accepte les{' '}
+									<b>
+										<A
+											target="blank"
+											href="https://inyo.me/a-propos/cgu/"
+										>
+											CGU
+										</A>
+									</b>{' '}
+									et consent à recevoir des emails de la part
+									d'Inyo.
+								</fbt>
 							</CGU>
 							<SignupButton
 								type="submit"
 								isSubmitting={isSubmitting}
 								big
 							>
-								Commencez
+								<fbt project="inyo" desc="sign up">
+									Commencez
+								</fbt>
 							</SignupButton>
 						</form>
 					);

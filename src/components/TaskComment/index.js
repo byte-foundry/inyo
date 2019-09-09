@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	primaryRed,
 	primaryWhite,
@@ -53,7 +54,13 @@ function TaskComment({
 			}}
 		>
 			<CommentWrap>
-				<Tooltip label="Ouvrir les commentaires">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="open comments tooltip">
+							Ouvrir les commentaires
+						</fbt>
+					}
+				>
 					<IconButton
 						icon={
 							item.comments.length > 0

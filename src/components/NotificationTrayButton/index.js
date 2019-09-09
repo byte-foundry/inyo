@@ -4,6 +4,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
@@ -170,7 +171,13 @@ const NotificationTrayButton = ({mobile}) => {
 
 	return (
 		<NotificationContainer mobile={mobile}>
-			<Tooltip label="Notifications liées à vos clients">
+			<Tooltip
+				label={
+					<fbt project="inyo" desc="notification tray button tooltip">
+						Notifications liées à vos clients
+					</fbt>
+				}
+			>
 				<Icon
 					someUnread={unreadNumber > 0}
 					ref={icon}
@@ -212,7 +219,9 @@ const NotificationTrayButton = ({mobile}) => {
 							link
 							onClick={() => markNotificationsAsRead()}
 						>
-							Tout marquer comme lu
+							<fbt project="inyo" desc="mark all as read">
+								Tout marquer comme lu
+							</fbt>
 						</MarkRead>
 						{loading ? (
 							<Loading />
@@ -226,7 +235,14 @@ const NotificationTrayButton = ({mobile}) => {
 							</List>
 						) : (
 							<EmptyState>
-								<p>Aucune notification.</p>
+								<p>
+									<fbt
+										project="inyo"
+										desc="no notification message"
+									>
+										Aucune notification.
+									</fbt>
+								</p>
 							</EmptyState>
 						)}
 					</Dropdown>

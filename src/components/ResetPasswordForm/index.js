@@ -7,6 +7,7 @@ import ReactGA from 'react-ga';
 import {Link, withRouter} from 'react-router-dom';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ErrorInput} from '../../utils/content';
 import apolloClient from '../../utils/graphQLConfig';
 import {Button, P} from '../../utils/new/design-system';
@@ -81,7 +82,11 @@ class ResetPasswordForm extends Component {
 		if (loading) {
 			return (
 				<div>
-					<P>Vérification de la validité du token...</P>
+					<P>
+						<fbt project="inyo" desc="reset password verify token">
+							Vérification de la validité du token...
+						</fbt>
+					</P>
 				</div>
 			);
 		}
@@ -90,12 +95,25 @@ class ResetPasswordForm extends Component {
 			return (
 				<div>
 					<P>
-						Ce lien n'est pas ou plus valide. Essayez de recommencer
-						en vous rendant sur la page{' '}
-						<Link to="/auth/forgotten-password">
-							Mot de passe oublié ?
-						</Link>{' '}
-						.
+						<fbt project="inyo" desc="notification message">
+							Ce lien n'est pas ou plus valide. Essayez de
+							recommencer en vous rendant sur la page{' '}
+							<fbt:param name="link">
+								{
+									<Link to="/auth/forgotten-password">
+										{
+											<fbt
+												project="inyo"
+												desc="forgotten password"
+											>
+												Mot de passe oublié ?
+											</fbt>
+										}
+									</Link>
+								}
+							</fbt:param>
+							.
+						</fbt>
 					</P>
 				</div>
 			);
@@ -104,16 +122,22 @@ class ResetPasswordForm extends Component {
 		return (
 			<div>
 				<P>
-					Entrez votre nouveau mot de passe. Vous serez connecté et
-					redirigé automatiquement ensuite. Et cette fois, ne
-					l'oubliez plus. ;)
+					<fbt project="inyo" desc="forgotten password description">
+						Entrez votre nouveau mot de passe. Vous serez connecté
+						et redirigé automatiquement ensuite. Et cette fois, ne
+						l'oubliez plus. ;)
+					</fbt>
 				</P>
 				<Mutation mutation={UPDATE_PASSWORD}>
 					{updatePassword => (
 						<Formik
 							initialValues={{password: ''}}
 							validationSchema={Yup.object().shape({
-								password: Yup.string().required('Requis'),
+								password: Yup.string().required(
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>,
+								),
 							})}
 							onSubmit={async (values, actions) => {
 								actions.setSubmitting(false);
@@ -160,8 +184,15 @@ class ResetPasswordForm extends Component {
 									actions.setSubmitting(false);
 									actions.setErrors(error);
 									actions.setStatus({
-										msg:
-											"Quelque chose ne s'est pas passé comme prévu",
+										msg: (
+											<fbt
+												project="inyo"
+												desc="something went wrong"
+											>
+												Quelque chose ne s'est pas passé
+												comme prévu
+											</fbt>
+										),
 									});
 								}
 							}}
@@ -177,7 +208,14 @@ class ResetPasswordForm extends Component {
 										{...props}
 										name="password"
 										type="password"
-										label="Nouveau mot de passe"
+										label={
+											<fbt
+												project="inyo"
+												desc="new password label"
+											>
+												Nouveau mot de passe
+											</fbt>
+										}
 										placeholder="***************"
 										required
 									/>
@@ -193,7 +231,12 @@ class ResetPasswordForm extends Component {
 										big
 										disabled={isSubmitting}
 									>
-										Changer le mot de passe
+										<fbt
+											project="inyo"
+											desc="change password button"
+										>
+											Changer le mot de passe
+										</fbt>
 									</ResetButton>
 								</form>
 							)}

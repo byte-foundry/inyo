@@ -4,20 +4,23 @@ import {useApolloClient, useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_PROJECT} from '../../utils/mutations';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import CreateProjectModalForm from '../CreateProjectModalForm';
 import CreateProjectModalViewContent from '../CreateProjectModalViewContent';
 import CustomerModalAndMail from '../CustomerModalAndMail';
 
 function CreateProjectModal({onDismiss, history, baseName}) {
-	const [viewContent, setViewContent] = useState(null);
+	const [viewContent, setViewContent] = useState('BLANK');
 	const [createCustomer, setCreateCustomer] = useState(false);
 	const [customerName, setCustomerName] = useState('');
 	const [createProject] = useMutation(CREATE_PROJECT);
 	const client = useApolloClient();
+	const {language} = useUserInfos();
 
 	const {data: dataProjects} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 
@@ -34,8 +37,12 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 				template: 'BLANK',
 				name: baseName,
 			}}
-			validateSchema={Yup.object({
-				name: Yup.string().required('Requis'),
+			validationSchema={Yup.object({
+				name: Yup.string().required(
+					<fbt project="inyo" desc="required">
+						Requis
+					</fbt>,
+				),
 			})}
 			onSubmit={async (
 				{
@@ -50,7 +57,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 				let isModelTemplate = false;
 
 				if (template !== 'EMPTY') {
-					const sourceTemplate = templates.find(
+					const sourceTemplate = templates[language].find(
 						tplt => tplt.name === template,
 					);
 
@@ -133,6 +140,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 							onDismiss={() => {
 								setCustomerName('');
 								setCreateCustomer(false);
+								props.setFieldValue('customerId', null);
 							}}
 							onValidate={({id}) => {
 								props.setFieldValue('customerId', id);

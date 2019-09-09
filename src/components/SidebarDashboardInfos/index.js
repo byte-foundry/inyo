@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import noRemindersIllus from '../../utils/images/bermuda-done.svg';
@@ -91,13 +92,33 @@ const SidebarDashboardInfos = () => {
 				{loadingUser && <Loading />}
 				{!loadingUser && (
 					<SidebarHeading>
-						Actions{' '}
-						<Apostrophe
-							value={me.settings.assistantName}
-							withVowel="d'"
-							withConsonant="de "
-						/>{' '}
-						{me.settings.assistantName}
+						<fbt project="inyo" desc="actions of edwige">
+							Actions{' '}
+							<fbt:param name="apos">
+								<Apostrophe
+									value={me.settings.assistantName}
+									withVowel={
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											d'
+										</fbt>
+									}
+									withConsonant={
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											de{' '}
+										</fbt>
+									}
+								/>
+							</fbt:param>
+							<fbt:param name="assistantName">
+								{me.settings.assistantName}
+							</fbt:param>
+						</fbt>
 					</SidebarHeading>
 				)}
 				{loading && <Loading />}
@@ -111,8 +132,10 @@ const SidebarDashboardInfos = () => {
 					) : (
 						<NoReminders>
 							<img alt="" src={noRemindersIllus} />
-							Aucune tâches client n’ont été activées pour le
-							moment
+							<fbt project="inyo" desc="notification message">
+								Aucune tâches client n’ont été activées pour le
+								moment
+							</fbt>
 						</NoReminders>
 					))}
 			</SubSection>

@@ -6,6 +6,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import {Waypoint} from 'react-waypoint';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	ErrorInput,
 	FlexRow,
@@ -85,8 +86,10 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 		variables: {
 			itemId,
 			token: customerToken,
+			updateCommentViews: true,
 		},
 		suspend: true,
+		pollInterval: 1000 * 60 * 5,
 	});
 	const [postCommentMutation] = useMutation(POST_COMMENT);
 	const debouncePostComment = useRef(
@@ -102,14 +105,25 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 		<Comment key={`comment${comment.id}`} comment={comment} />
 	));
 
-	let placeholderText = 'Votre commentaire';
+	let placeholderText = (
+		<fbt project="inyo" desc="comment placeholder text">
+			Votre commentaire
+		</fbt>
+	);
 
 	if (linkedCustomer && !customerToken) {
-		placeholderText = 'Écrire et envoyer un commentaire à votre client';
+		placeholderText = (
+			<fbt project="inyo" desc="comment placeholder text for customer">
+				Écrire et envoyer un commentaire à votre client
+			</fbt>
+		);
 	}
 	else if (linkedCustomer) {
-		placeholderText
-			= 'Écrire et envoyer un commentaire à votre prestataire';
+		placeholderText = (
+			<fbt project="inyo" desc="comment placeholder text for user">
+				Écrire et envoyer un commentaire à votre prestataire
+			</fbt>
+		);
 	}
 
 	return (
@@ -119,7 +133,10 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					<CommentRow>{comments}</CommentRow>
 				) : (
 					<Empty>
-						Une question ou une suggestion? Ajoutez un commentaire.
+						<fbt project="inyo" desc="empty comment message">
+							Une question ou une suggestion? Ajoutez un
+							commentaire.
+						</fbt>
 					</Empty>
 				)}
 				<Waypoint
@@ -131,7 +148,9 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			<ScrollAlert>
 				{!noScrollIndicator && (
 					<ScrollAlertContent>
-						↓ Autres commentaires
+						<fbt project="inyo" desc="other comments scroll alert">
+							↓ Autres commentaires
+						</fbt>
 					</ScrollAlertContent>
 				)}
 			</ScrollAlert>
@@ -140,7 +159,11 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					newComment: '',
 				}}
 				validationSchema={Yup.object().shape({
-					newComment: Yup.string().required('Requis'),
+					newComment: Yup.string().required(
+						<fbt project="inyo" desc="required">
+							Requis
+						</fbt>,
+					),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
@@ -163,8 +186,15 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 						actions.setSubmitting(false);
 						actions.setErrors(commentError);
 						actions.setStatus({
-							msg:
-								"Une erreur s'est produite pendant la soumission du commentaire",
+							msg: (
+								<fbt
+									project="inyo"
+									desc="unpecified error message for comment"
+								>
+									Une erreur s'est produite pendant la
+									soumission du commentaire
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -175,7 +205,17 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 					return (
 						<form onSubmit={handleSubmit}>
 							<FlexRow>
-								<Tooltip label="Les personnes liées à la tâche seront notifiées">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="tooltipe comment text area"
+										>
+											Les personnes liées à la tâche
+											seront notifiées
+										</fbt>
+									}
+								>
 									<ItemComment
 										id="comment-textarea"
 										placeholder={placeholderText}
@@ -188,12 +228,27 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 								<ErrorInput>{errors.comment}</ErrorInput>
 							)}
 							<FlexRow justifyContent="flex-end">
-								<Tooltip label="Visible par les personnes liées au projet">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="add comment button tooltip"
+										>
+											Visible par les personnes liées au
+											projet
+										</fbt>
+									}
+								>
 									<Button
 										id="add-comment-button"
 										type="submit"
 									>
-										Ajouter un commentaire
+										<fbt
+											project="inyo"
+											desc="add comment button label"
+										>
+											Ajouter un commentaire
+										</fbt>
 									</Button>
 								</Tooltip>
 							</FlexRow>

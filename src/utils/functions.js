@@ -42,10 +42,6 @@ export function taskFulfillsActivationCriteria(task) {
 	}
 }
 
-export function formatDate(dateObject) {
-	return new Date(dateObject).toLocaleDateString('fr-FR');
-}
-
 export function parseDate(dateString) {
 	const dates = dateString.split('/');
 

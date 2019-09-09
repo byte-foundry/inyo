@@ -1,5 +1,6 @@
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import useUserInfos from '../../utils/useUserInfos';
 import Plural from '../Plural';
 
@@ -27,42 +28,77 @@ const UnitDisplay = ({
 		<>
 			{+unitToDisplay.toFixed(2)}{' '}
 			{unitInHours ? (
-				<Plural
-					value={unitToDisplay}
-					singular="heure"
-					plural="heures"
-				/>
+				<fbt project="inyo" desc="hours">
+					<fbt:plural name="hour" count={unitToDisplay} many="heures">
+						heure
+					</fbt:plural>
+				</fbt>
 			) : (
-				<Plural value={unitToDisplay} singular="jour" plural="jours" />
-			)}
-			{unitInHours && pluralF && singularF && (
-				<Plural
-					plural={pluralF}
-					singular={singularF}
-					value={unitToDisplay}
-				/>
-			)}
-			{!unitInHours && pluralM && singularM && (
-				<Plural
-					plural={pluralM}
-					singular={singularM}
-					value={unitToDisplay}
-				/>
-			)}
-			{!pluralF
-				&& !singularF
-				&& !pluralM
-				&& !singularM
-				&& plural
-				&& singular && (
-				<Plural
-					plural={plural}
-					singular={singular}
-					value={unitToDisplay}
-				/>
+				<fbt project="inyo" desc="days">
+					<fbt:plural name="day" count={unitToDisplay} many="jours">
+						jour
+					</fbt:plural>
+				</fbt>
 			)}
 		</>
 	);
 };
+
+export const UnitWorkedDisplay = props => (
+	<>
+		<UnitDisplay {...props} />{' '}
+		{props.unit < 1 ? (
+			<fbt project="inyo" desc="hours">
+				<fbt:plural
+					name="travaillé féminin"
+					count={props.unit}
+					many="travaillées"
+				>
+					travaillée
+				</fbt:plural>
+			</fbt>
+		) : (
+			<fbt project="inyo" desc="hours">
+				<fbt:plural
+					name="travaillé masculin"
+					count={props.unit}
+					many="travaillés"
+				>
+					travaillé
+				</fbt:plural>
+			</fbt>
+		)}
+	</>
+);
+
+export const UnitAvailableDisplay = props => (
+	<>
+		<UnitDisplay {...props} />{' '}
+		<fbt project="inyo" desc="hours">
+			<fbt:plural
+				name="encore disponible"
+				count={props.unit}
+				many="encore disponibles"
+			>
+				encore disponible
+			</fbt:plural>
+		</fbt>
+	</>
+);
+
+export const UnitOvertimeDisplay = props => (
+	<>
+		<UnitDisplay {...props} />{' '}
+		<fbt project="inyo" desc="hours">
+			<fbt:plural
+				name="travaillé féminin"
+				count={props.unit}
+				many="supplémentaire"
+			>
+				supplémentaires
+			</fbt:plural>
+		</fbt>
+	</>
+);
 
 export default UnitDisplay;

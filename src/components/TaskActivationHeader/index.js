@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName} from '../../utils/functions';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
@@ -51,8 +52,13 @@ function TaskActivationHeader({
 					/>
 				)) || (
 					<div>
-						Il manque un client à cette tâche pour qu'elle soit
-						réalisable.
+						<fbt
+							project="inyo"
+							desc="missing customer to activate task"
+						>
+							Il manque un client à cette tâche pour qu'elle soit
+							réalisable.
+						</fbt>
 					</div>
 				))}
 			{customerTask
@@ -93,20 +99,36 @@ function TaskActivationHeader({
 				))
 					|| (item.linkedCustomer && item.attachments.length === 0 && (
 						<div>
-							Il manque une facture à cette tâche pour qu'elle
-							soit réalisable. Joignez une facture à cette tâche.
+							<fbt
+								project="inyo"
+								desc="missing invoice to activate task"
+							>
+								Il manque une facture à cette tâche pour qu'elle
+								soit réalisable. Joignez une facture à cette
+								tâche.
+							</fbt>
 						</div>
 					))
 					|| (!item.linkedCustomer && item.attachments.length > 0 && (
 						<div>
-							Il manque un client à cette tâche pour qu'elle soit
-							réalisable.
+							<fbt
+								project="inyo"
+								desc="missing customer to activate task"
+							>
+								Il manque un client à cette tâche pour qu'elle
+								soit réalisable.
+							</fbt>
 						</div>
 					))
 					|| (!item.linkedCustomer && item.attachments.length === 0 && (
 						<div>
-							Il manque un client et une facture à cette tâche
-							pour qu'elle soit réalisable.
+							<fbt
+								project="inyo"
+								desc="missing customer and invoice to activate task"
+							>
+								Il manque un client et une facture à cette tâche
+								pour qu'elle soit réalisable.
+							</fbt>
 						</div>
 					)))}
 			{!customerTask && activableTask && (

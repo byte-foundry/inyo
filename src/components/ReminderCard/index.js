@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import React, {forwardRef} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	primaryBlack,
 	primaryGrey,
@@ -50,7 +51,13 @@ const ReminderCard = withRouter(
 	({
 		reminder, task, location, cardRef, ...rest
 	}) => (
-		<Tooltip label="Relance client">
+		<Tooltip
+			label={
+				<fbt project="inyo" desc="customer reminder">
+					Relance client
+				</fbt>
+			}
+		>
 			<TaskCardElem
 				{...rest}
 				done={reminder.status === 'SENT'}

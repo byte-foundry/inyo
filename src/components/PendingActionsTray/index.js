@@ -3,6 +3,7 @@ import Portal from '@reach/portal';
 import React, {useEffect, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM} from '../../utils/mutations';
@@ -121,11 +122,17 @@ const PendingActionsTray = ({projectId}) => {
 				<TitleBar onClick={() => setIsOpen(!isOpen)}>
 					<Title>
 						{pendingTimeItTookTasks.length}{' '}
-						<Plural
-							plural="Temps réellement passés à définir"
-							singular="Temps réellement passé à définir"
-							value={pendingTimeItTookTasks.length}
-						/>
+						<fbt project="inyo" desc="time spent">
+							Temps réellement{' '}
+							<fbt:plural
+								name="spent"
+								many="passés"
+								count={pendingTimeItTookTasks.length}
+							>
+								passé
+							</fbt:plural>{' '}
+							à définir
+						</fbt>
 					</Title>
 					<TitleBarIcon>
 						<IconButton
@@ -138,7 +145,16 @@ const PendingActionsTray = ({projectId}) => {
 					{pendingTimeItTookTasks.map(task => (
 						<PendingAction key={task.id}>
 							<TimeItTookHeading>{task.name}</TimeItTookHeading>
-							<Tooltip label="Valider le temps passé pour cette tâche">
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="Confirm time spent for this task"
+									>
+										Valider le temps passé pour cette tâche
+									</fbt>
+								}
+							>
 								<IconButton
 									icon="check_circle"
 									size="tiny"
@@ -179,7 +195,13 @@ const PendingActionsTray = ({projectId}) => {
 							/>
 						</PendingAction>
 					))}
-					<Tooltip label="Valider tous les temps passés">
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="confirm all time spent">
+								Valider tous les temps passés
+							</fbt>
+						}
+					>
 						<Button
 							big
 							style={{margin: '5px 5px 5px auto'}}
@@ -203,7 +225,9 @@ const PendingActionsTray = ({projectId}) => {
 								size="tiny"
 								color="inherit"
 							/>
-							Tout valider
+							<fbt project="inyo" desc="Confirm all time spent">
+								Tout valider
+							</fbt>
 						</Button>
 					</Tooltip>
 				</Content>

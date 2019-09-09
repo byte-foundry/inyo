@@ -18,6 +18,7 @@ import {
 } from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import Plural from '../Plural';
 
 const Container = styled('div')`
@@ -153,10 +154,11 @@ function TemplateTaskList({selectedTemplate}) {
 const PROJECT_LIST_BASE_SIZE = 10;
 
 const TemplateAndProjectFiller = ({onChoose, projectId}) => {
+	const {language} = useUserInfos();
 	const [selected, setSelected] = useState(null);
 	const [filter, setFilter] = useState('');
 	const [showAll, setShowAll] = useState(false);
-	const selectedTemplate = templates.find(t => t.name === selected);
+	const selectedTemplate = templates[language].find(t => t.name === selected);
 	const {
 		data: {
 			me: {projects},
@@ -187,7 +189,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 			<Column>
 				<SubHeading>Choisir un modèle de projet prédéfini</SubHeading>
 				<TemplateList>
-					{templates.map(({name, label}) => (
+					{templates[language].map(({name, label}) => (
 						<TemplateItem
 							key={name}
 							tabIndex={selected === name ? '-1' : '0'}

@@ -93,33 +93,37 @@ export const UPDATE_USER = gql`
 export const UPDATE_USER_CONSTANTS = gql`
 	mutation updateUserConstant(
 		$workingFields: [String!]
+		$skills: [Skill!]
+		$otherSkill: String
 		$jobType: JobType
 		$interestedFeatures: [String!]
 		$hasUpcomingProject: Boolean
 		$canBeContacted: Boolean
 		$otherPain: String
-		$painsExpressed: [String!]
 		$startWorkAt: Time
 		$endWorkAt: Time
 		$company: CompanyInput
 		$workingDays: [DAY!]
 		$timeZone: TimeZone
 		$hasFullWeekSchedule: Boolean
+		$defaultDailyPrice: Int
 	) {
 		updateUser(
 			workingFields: $workingFields
+			skills: $skills
+			otherSkill: $otherSkill
 			jobType: $jobType
 			interestedFeatures: $interestedFeatures
 			hasUpcomingProject: $hasUpcomingProject
 			canBeContacted: $canBeContacted
 			otherPain: $otherPain
-			painsExpressed: $painsExpressed
 			company: $company
 			startWorkAt: $startWorkAt
 			endWorkAt: $endWorkAt
 			workingDays: $workingDays
 			timeZone: $timeZone
 			settings: {hasFullWeekSchedule: $hasFullWeekSchedule}
+			defaultDailyPrice: $defaultDailyPrice
 		) {
 			id
 			email

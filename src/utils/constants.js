@@ -1,5 +1,6 @@
 import React from 'react';
 
+import fbt from '../fbt/fbt.macro';
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon,
 } from './icons/content-acquisition.svg';
@@ -40,40 +41,48 @@ export const WEEKDAYS = {
 };
 
 export const WEEKDAYS_SHORT = {
-	fr: ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'],
+	fr: [
+		fbt('Di', 'sunday'),
+		fbt('Lu', 'monday'),
+		fbt('Ma', 'tuesday'),
+		fbt('Me', 'wednesday'),
+		fbt('Je', 'thursday'),
+		fbt('Ve', 'friday'),
+		fbt('Sa', 'saturday'),
+	],
 };
 
 export const TITLE_ENUM_TO_TITLE = {
-	MONSIEUR: 'M.',
-	MADAME: 'Mme',
+	MONSIEUR: fbt('M.', 'mister'),
+	MADAME: fbt('Mme', 'mis'),
 };
 
 export const MONTHS = {
 	fr: [
-		'Janvier',
-		'Février',
-		'Mars',
-		'Avril',
-		'Mai',
-		'Juin',
-		'Juillet',
-		'Août',
-		'Septembre',
-		'Octobre',
-		'Novembre',
-		'Décembre',
+		fbt('Janvier', 'january'),
+		fbt('Février', 'february'),
+		fbt('Mars', 'march'),
+		fbt('Avril', 'april'),
+		fbt('Mai', 'may'),
+		fbt('Juin', 'june'),
+		fbt('Juillet', 'july'),
+		fbt('Août', 'august'),
+		fbt('Septembre', 'september'),
+		fbt('Octobre', 'october'),
+		fbt('Novembre', 'november'),
+		fbt('Décembre', 'december'),
 	],
 };
 
 export const WEEKDAYS_LONG = {
 	fr: [
-		'Dimanche',
-		'Lundi',
-		'Mardi',
-		'Mercredi',
-		'Jeudi',
-		'Vendredi',
-		'Smedi',
+		fbt('Dimanche', 'sunday'),
+		fbt('Lundi', 'monday'),
+		fbt('Mardi', 'tuesday'),
+		fbt('Mercredi', 'wednesday'),
+		fbt('Jeudi', 'thursday'),
+		fbt('Vendredi', 'friday'),
+		fbt('Samedi', 'saturday'),
 	],
 };
 
@@ -82,7 +91,10 @@ export const FIRST_DAY_OF_WEEK = {
 };
 // Translate aria-labels
 export const LABELS = {
-	fr: {nextMonth: 'Mois suivant', previousMonth: 'Mois précédent'},
+	fr: {
+		nextMonth: fbt('Mois suivant', 'notification message'),
+		previousMonth: fbt('Mois précédent', 'notification message'),
+	},
 };
 
 export const itemStatuses = {
@@ -113,9 +125,30 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskIconValidatedUrl,
 		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
 		type: 'DEFAULT',
-		name: 'Basique',
-		description: 'Une tâche dont vous êtes responsable',
+		name: fbt('Basique', 'basic task name'),
+		description: fbt(
+			'Une tâche dont vous êtes responsable',
+			'basic task description',
+		),
 	},
+	/* {
+		icon: <TaskCollaboratorIcon />,
+		iconValidated: <TaskCollaboratorIconValidated />,
+		iconUrl: TaskCollaboratorIconUrl,
+		iconUrlValidated: TaskCollaboratorIconValidatedUrl,
+		iconUrlValidatedAnim: TaskCollaboratorIconValidatedAnimUrl,
+		type: 'DEFAULT_ASSIGNED',
+		name: (
+			<fbt project="inyo" desc="basic task name">
+				Basique
+			</fbt>
+		),
+		description: (
+			<fbt project="inyo" desc="basic task description">
+				Une tâche dont la personne assigné est responsable
+			</fbt>
+		),
+	}, */
 	{
 		icon: <TaskCustomerIcon />,
 		iconValidated: <TaskCustomerIconValidated />,
@@ -123,8 +156,11 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		iconUrlValidatedAnim: TaskCustomerIconValidatedAnimUrl,
 		type: 'CUSTOMER',
-		name: 'Tâche attribuée au client',
-		description: 'Une tâche à réaliser par votre client',
+		name: fbt('Tâche attribuée au client', 'customer task name'),
+		description: fbt(
+			'Une tâche à réaliser par votre client',
+			'customer task description',
+		),
 	},
 	{
 		icon: <ContentAcquisitionIcon />,
@@ -132,8 +168,11 @@ export const ITEM_TYPES = [
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',
-		name: 'Récupération contenu',
-		description: 'Lister et récupérer les contenus nécessaires',
+		name: fbt('Récupération contenu', 'content acquisition name'),
+		description: fbt(
+			'Lister et récupérer les contenus nécessaires',
+			'content acquisition description',
+		),
 	},
 	{
 		icon: <SectionIcon />,
@@ -141,8 +180,11 @@ export const ITEM_TYPES = [
 		iconUrl: SectionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'SECTION',
-		name: 'Section de projet',
-		description: "Créer une section pour classer les tâches d'un projet",
+		name: fbt('Section de projet', 'section name'),
+		description: fbt(
+			"Créer une section pour classer les tâches d'un projet",
+			'section description',
+		),
 	},
 	{
 		icon: <TaskInvoiceIcon />,
@@ -150,9 +192,11 @@ export const ITEM_TYPES = [
 		iconUrl: TaskInvoiceIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'INVOICE',
-		name: 'Paiement de facture',
-		description:
+		name: fbt('Paiement de facture', 'invoice task name'),
+		description: fbt(
 			'Envoyer une facture et demander un paiement à votre client',
+			'invoice task description',
+		),
 	},
 	/* {
 		icon: <CustomerReminderIcon />,
@@ -209,34 +253,91 @@ export const ITEM_TYPES = [
 
 export const REMINDER_TYPES_DATA = {
 	DELAY: {
-		text: customerName => `1er mail envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`1er mail envoyé à ${fbt.param('customerName', customerName)}`,
+			'first customer email',
+		),
 	},
 	FIRST: {
-		text: customerName => `Rappel nº1 envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Rappel nº1 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first reminder customer email',
+		),
 	},
 	SECOND: {
-		text: customerName => `Rappel nº2 envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Rappel nº2 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'second reminder customer email',
+		),
 	},
 	LAST: {
-		text: customerName => `Dernier rappel (nº3) envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Dernier rappel (nº3) envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'third reminder customer email',
+		),
 	},
 	INVOICE_DELAY: {
-		text: customerName => `1er mail règlement de facture envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`1er mail règlement de facture envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first invoice email',
+		),
 	},
 	INVOICE_FIRST: {
-		text: customerName => `Rappel règlement de facture nº1 envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Rappel règlement de facture nº1 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first reminder invoice email',
+		),
 	},
 	INVOICE_SECOND: {
-		text: customerName => `Rappel règlement de facture nº2 envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Rappel règlement de facture nº2 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'second reminder invoice email',
+		),
 	},
 	INVOICE_THIRD: {
-		text: customerName => `Rappel règlement de facture nº3 envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Rappel règlement de facture nº3 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'third reminder invoice email',
+		),
 	},
 	INVOICE_FOURTH: {
-		text: customerName => `Rappel règlement de facture nº4 envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Rappel règlement de facture nº4 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'fourth reminder invoice email',
+		),
 	},
 	INVOICE_LAST: {
-		text: customerName => `Dernier règlement de facture rappel (nº5) envoyé à ${customerName}`,
+		text: customerName => fbt(
+			`Dernier règlement de facture rappel (nº5) envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'fitfh reminder invoice email',
+		),
 	},
 };
 
@@ -279,15 +380,15 @@ export const STRIPE_CONSTANT
 			stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
 			items: {
 				[PLAN_NAMES.LIFE]: {
-					sku: 'sku_FF2rL7Jk5zl0C7',
+					sku: 'sku_FmHtrocbXWvbsS',
 					quantity: 1,
 				},
 				[PLAN_NAMES.MONTHLY]: {
-					plan: 'INYO_MONTHLY',
+					plan: 'INYO_SUB',
 					quantity: 1,
 				},
 				[PLAN_NAMES.YEARLY]: {
-					plan: 'plan_FJQhEIJQnlzriF',
+					plan: 'INYO_YEARLY',
 					quantity: 1,
 				},
 			},
@@ -298,15 +399,15 @@ export const STRIPE_CONSTANT
 			stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
 			items: {
 				[PLAN_NAMES.LIFE]: {
-					sku: 'sku_F9hrygxAJQuSLp',
+					sku: 'sku_FmKQx2r5EisRT8',
 					quantity: 1,
 				},
 				[PLAN_NAMES.MONTHLY]: {
-					plan: 'INYO_MONTHLY',
+					plan: 'INYO_MONTHLY_USD',
 					quantity: 1,
 				},
 				[PLAN_NAMES.YEARLY]: {
-					plan: 'INYO_YEARLY',
+					plan: 'INYO_YEARLY_USD',
 					quantity: 1,
 				},
 			},

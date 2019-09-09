@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import {
@@ -133,7 +134,13 @@ function TaskInfosInputs({
 				/>
 			)}
 			{!noAttachment && !!item.attachments.length && (
-				<Tooltip label="Fichiers joints">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="attached files">
+							Fichiers joints
+						</fbt>
+					}
+				>
 					<TaskIconText
 						inactive={editDueDate}
 						icon={
@@ -144,14 +151,16 @@ function TaskInfosInputs({
 							/>
 						}
 						content={
-							<>
-								{item.attachments.length}{' '}
-								<Plural
-									singular="fichier"
-									plural="fichiers"
-									value={item.attachments.length}
-								/>
-							</>
+							<fbt project="inyo" desc="notification message">
+								<fbt:plural
+									name="attachedFilesLength"
+									count={item.attachments.length}
+									showCount="yes"
+									many="fichiers"
+								>
+									fichier
+								</fbt:plural>
+							</fbt>
 						}
 					/>
 				</Tooltip>

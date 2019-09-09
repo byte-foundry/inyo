@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import AlgoliaPlaces from 'algolia-places-react';
 import React, {Component} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {ErrorInput} from '../../utils/content';
 import {InputLabel, Label} from '../../utils/new/design-system';
 
@@ -65,7 +66,11 @@ class AddressAutocomplete extends Component {
 					<ErrorInput className="input-feedback">
 						{/* Yup does not provide a way to reduce errors to a parent object
 						so errors is always errors on street city, postalCode and country not on address */}
-						{errors && errors[name] && 'Requis'}
+						{errors && errors[name] && (
+							<fbt project="inyo" desc="Required">
+								Requis
+							</fbt>
+						)}
 					</ErrorInput>
 				)}
 			</AddressAutocompleteMain>

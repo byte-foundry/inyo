@@ -9,6 +9,7 @@ import React, {useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../utils/mutations';
@@ -102,13 +103,25 @@ const CustomerModal = ({
 		}));
 	}
 
-	let formTitle = 'Ou créer un nouveau client';
+	let formTitle = (
+		<fbt project="inyo" desc="Create a new client form title">
+			Ou créer un nouveau client
+		</fbt>
+	);
 
 	if (noSelect && customerNotNull.id) {
-		formTitle = 'Éditer un client';
+		formTitle = (
+			<fbt project="inyo" desc="Edit a client form title">
+				Éditer un client
+			</fbt>
+		);
 	}
 	else if (noSelect) {
-		formTitle = 'Créer un nouveau client';
+		formTitle = (
+			<fbt project="inyo" desc="Create a new client form title">
+				Créer un nouveau client
+			</fbt>
+		);
 	}
 
 	return (
@@ -116,7 +129,9 @@ const CustomerModal = ({
 			<ModalElem>
 				{withBack && (
 					<BackButton withMargin grey link onClick={onDismiss}>
-						Retour
+						<fbt project="inyo" desc="back">
+							Retour
+						</fbt>
 					</BackButton>
 				)}
 				<Formik
@@ -142,13 +157,28 @@ const CustomerModal = ({
 
 						try {
 							Yup.object({
-								name: Yup.string().required('Requis'),
+								name: Yup.string().required(
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>,
+								),
 								title: Yup.string().nullable(),
 								firstName: Yup.string(),
 								lastName: Yup.string(),
 								email: Yup.string()
-									.email('Email invalide')
-									.required('Requis'),
+									.email(
+										<fbt
+											project="inyo"
+											desc="invalid email"
+										>
+											Email invalide
+										</fbt>,
+									)
+									.required(
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>,
+									),
 								occupation: Yup.string(),
 								phone: Yup.string(),
 							}).validateSync(values, {abortEarly: false});
@@ -159,9 +189,21 @@ const CustomerModal = ({
 								&& !values.lastName
 							) {
 								return {
-									title: 'Requis',
-									firstName: 'Requis',
-									lastName: 'Requis',
+									title: (
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>
+									),
+									firstName: (
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>
+									),
+									lastName: (
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>
+									),
 								};
 							}
 
@@ -233,12 +275,24 @@ const CustomerModal = ({
 								{!noSelect && (
 									<>
 										<Header>
-											Choisir un client existant
+											<fbt
+												project="inyo"
+												desc="Choose an existing customer"
+											>
+												Choisir un client existant
+											</fbt>
 										</Header>
 										<FormSelect
 											{...props}
 											name="customerId"
-											placeholder="Tous les clients"
+											placeholder={
+												<fbt
+													project="inyo"
+													desc="Customer modal client select placeholder"
+												>
+													Tous les clients
+												</fbt>
+											}
 											options={options}
 											hideSelectedOptions
 											isSearchable
@@ -253,7 +307,14 @@ const CustomerModal = ({
 										<CreateCustomerForm>
 											<FormElem
 												{...props}
-												label="Nom de l'entreprise"
+												label={
+													<fbt
+														project="inyo"
+														desc="Customer modal company name label"
+													>
+														Nom de l'entreprise
+													</fbt>
+												}
 												type="text"
 												required
 												name="name"
@@ -266,11 +327,25 @@ const CustomerModal = ({
 												options={[
 													{
 														value: 'MONSIEUR',
-														label: 'M.',
+														label: (
+															<fbt
+																project="inyo"
+																desc="label mister"
+															>
+																M.
+															</fbt>
+														),
 													},
 													{
 														value: 'MADAME',
-														label: 'Mme',
+														label: (
+															<fbt
+																project="inyo"
+																desc="label mrs"
+															>
+																Mme
+															</fbt>
+														),
 													},
 												]}
 												isClearable
@@ -278,21 +353,43 @@ const CustomerModal = ({
 											/>
 											<FormElem
 												{...props}
-												label="Le prénom de votre contact"
+												label={
+													<fbt
+														project="inyo"
+														desc="label customer modal first name contact"
+													>
+														Le prénom de votre
+														contact
+													</fbt>
+												}
 												name="firstName"
 												placeholder="John"
 												style={{gridColumn: '2 / 3'}}
 											/>
 											<FormElem
 												{...props}
-												label="Le nom de votre contact"
+												label={
+													<fbt
+														project="inyo"
+														desc="label customer modal last name contact"
+													>
+														Le nom de votre contact
+													</fbt>
+												}
 												name="lastName"
 												placeholder="Doe"
 												style={{gridColumn: '3 / 4'}}
 											/>
 											<FormElem
 												{...props}
-												label="Son email"
+												label={
+													<fbt
+														project="inyo"
+														desc="label customer modal email contact"
+													>
+														Son email
+													</fbt>
+												}
 												name="email"
 												placeholder="contact@company.com"
 												required
@@ -300,20 +397,39 @@ const CustomerModal = ({
 											/>
 											<FormElem
 												{...props}
-												label="Son numéro de téléphone"
+												label={
+													<fbt
+														project="inyo"
+														desc="label customer modal phone contact"
+													>
+														Son numéro de téléphone
+													</fbt>
+												}
 												name="phone"
 												placeholder="08 36 65 65 65"
 												style={{gridColumn: '2 / 4'}}
 											/>
 											<FormElem
 												{...props}
-												label="Son poste"
+												label={
+													<fbt
+														project="inyo"
+														desc="label customer modal position contact"
+													>
+														Son poste
+													</fbt>
+												}
 												name="occupation"
 												placeholder="Comptable"
 												style={{gridColumn: '2 / 4'}}
 											/>
 											<NotesFormLabel>
-												Notes
+												<fbt
+													project="inyo"
+													desc="customer modal title notes"
+												>
+													Notes
+												</fbt>
 											</NotesFormLabel>
 											<NotesForm data-test="customer-notes">
 												<Editor
@@ -339,7 +455,16 @@ const CustomerModal = ({
 															'HIGHLIGHT',
 														],
 													}}
-													placeholder="Notes personnelles à propos de ce client..."
+													placeholder={
+														<fbt
+															project="inyo"
+															desc="customer modal placeholder contact notes"
+														>
+															Notes personnelles à
+															propos de ce
+															client...
+														</fbt>
+													}
 												/>
 											</NotesForm>
 										</CreateCustomerForm>
@@ -364,7 +489,12 @@ const CustomerModal = ({
 												onDismiss();
 											}}
 										>
-											Enlever le client
+											<fbt
+												project="inyo"
+												desc="customer modal remove customer"
+											>
+												Enlever le client
+											</fbt>
 										</Button>
 									)}
 									<Button
@@ -372,7 +502,12 @@ const CustomerModal = ({
 										aligned
 										disabled={isSubmitting}
 									>
-										Valider
+										<fbt
+											project="inyo"
+											desc="customer modal confirm modification"
+										>
+											Valider
+										</fbt>
 									</Button>
 								</Buttons>
 							</form>

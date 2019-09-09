@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {REMINDER_TYPES_DATA} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {CANCEL_REMINDER} from '../../utils/mutations';
@@ -139,7 +140,13 @@ function TaskRemindersList({
 								reminderText
 							) : (
 								<Tooltip
-									label={`Ouvrir la tâche "${reminder.item.name}"`}
+									label={
+										<fbt project="inyo" desc="open task">
+											Ouvrir la tâche "<fbt:param name="taskName">
+												{reminder.item.name}
+											</fbt:param>"
+										</fbt>
+									}
 								>
 									{reminderText}
 								</Tooltip>
@@ -160,13 +167,30 @@ function TaskRemindersList({
 											&& moment(
 												reminder.sendingDate,
 											).fromNow()}
-										{reminder.status === 'CANCELED'
-											&& 'Annulé'}
-										{reminder.status === 'SENT' && 'Envoyé'}
+										{reminder.status === 'CANCELED' && (
+											<fbt project="inyo" desc="canceled">
+												Annulé
+											</fbt>
+										)}
+										{reminder.status === 'SENT' && (
+											<fbt project="inyo" desc="sent">
+												Envoyé
+											</fbt>
+										)}
 									</ReminderDate>
 								</Tooltip>
 								{reminder.status === 'PENDING' && (
-									<Tooltip label="Supprimer cette action automatique">
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="delete this reminder tooltip"
+											>
+												Supprimer cette action
+												automatique
+											</fbt>
+										}
+									>
 										<div
 											noLink={noLink}
 											canceled={

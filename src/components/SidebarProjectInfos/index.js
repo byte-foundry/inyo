@@ -5,6 +5,7 @@ import {useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ModalContainer} from '../../utils/content';
 import {getMarginUntilDeadline} from '../../utils/functions';
@@ -243,7 +244,16 @@ const SidebarProjectInfos = ({
 	return (
 		<Aside>
 			<SubSection>
-				<Tooltip label="Vue principale">
+				<Tooltip
+					label={
+						<fbt
+							project="inyo"
+							desc="sidebar project main view tooltip"
+						>
+							Vue principale
+						</fbt>
+					}
+				>
 					<SidebarLink
 						onClick={() => setView('tasks')}
 						active={activeView === 'tasks' || !activeView}
@@ -251,12 +261,28 @@ const SidebarProjectInfos = ({
 						<IconButton
 							icon="format_list_bulleted"
 							size="tiny"
-							label="Tâches du projet"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project project task label"
+								>
+									Tâches du projet
+								</fbt>
+							}
 							current={activeView === 'tasks' || !activeView}
 						/>
 					</SidebarLink>
 				</Tooltip>
-				<Tooltip label="Seulement visibles par vous">
+				<Tooltip
+					label={
+						<fbt
+							project="inyo"
+							desc="sidebar project personal notes tooltip"
+						>
+							Seulement visibles par vous
+						</fbt>
+					}
+				>
 					<SidebarLink
 						onClick={() => setView('personal-notes')}
 						active={activeView === 'personal-notes'}
@@ -264,12 +290,28 @@ const SidebarProjectInfos = ({
 						<IconButton
 							icon="lock_open"
 							size="tiny"
-							label="Notes personnelles"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project personal notes label"
+								>
+									Notes personnelles
+								</fbt>
+							}
 							current={activeView === 'personal-notes'}
 						/>
 					</SidebarLink>
 				</Tooltip>
-				<Tooltip label="Visibles par tout le monde">
+				<Tooltip
+					label={
+						<fbt
+							project="inyo"
+							desc="sidebar project shared notes tooltip"
+						>
+							Visibles par tout le monde
+						</fbt>
+					}
+				>
 					<SidebarLink
 						onClick={() => setView('shared-notes')}
 						active={activeView === 'shared-notes'}
@@ -277,7 +319,14 @@ const SidebarProjectInfos = ({
 						<IconButton
 							icon="people_outline"
 							size="tiny"
-							label="Notes partagées"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project shared notes label"
+								>
+									Notes partagées
+								</fbt>
+							}
 							current={activeView === 'shared-notes'}
 						/>
 					</SidebarLink>
@@ -287,7 +336,16 @@ const SidebarProjectInfos = ({
 				{project.customer ? (
 					<>
 						<CustomerInfos>
-							<Tooltip label="Changer le client lié au projet">
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="sidebar project change customer tooltip"
+									>
+										Changer le client lié au projet
+									</fbt>
+								}
+							>
 								<div>
 									<PencilElem
 										icon="edit"
@@ -300,7 +358,17 @@ const SidebarProjectInfos = ({
 								customer={project.customer}
 							/>
 						</CustomerInfos>
-						<Tooltip label="Évolution du projet, tâches qui requièrent une action, etc.">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project notify customer tooltip"
+								>
+									Évolution du projet, tâches qui requièrent
+									une action, etc.
+								</fbt>
+							}
+						>
 							<CheckBoxLabel
 								checked={project.notifyActivityToCustomer}
 							>
@@ -347,7 +415,12 @@ const SidebarProjectInfos = ({
 									/>
 								</NotChecked>
 								<CheckBoxFakeLabel>
-									Notifier mon client par email
+									<fbt
+										project="inyo"
+										desc="sidebar project notify customer label"
+									>
+										Notifier mon client par email
+									</fbt>
 								</CheckBoxFakeLabel>
 							</CheckBoxLabel>
 						</Tooltip>
@@ -360,24 +433,49 @@ const SidebarProjectInfos = ({
 							>
 								<Illus src={noNotificationsIllus} />
 								<P>
-									En décochant cette option, votre client ne
-									recevra aucune notification de l'avancée de
-									votre projet.
+									<fbt
+										project="inyo"
+										desc="sidebar project notify customer modal warning"
+									>
+										En décochant cette option, votre client
+										ne recevra aucune notification de
+										l'avancée de votre projet.
+									</fbt>
 								</P>
 								{hasClientAttributedTasks && (
 									<P>
-										Cependant, certaines des tâches sont
-										attribuées à votre client et nécessitent
-										l'envoi d'emails à celui-ci. Désactiver
-										les notifications changera aussi
-										l'attribution de ces tâches et votre
-										client n'en sera pas averti.
+										<fbt
+											project="inyo"
+											desc="sidebar project notify customer modal task warning"
+										>
+											Cependant, certaines des tâches sont
+											attribuées à votre client et
+											nécessitent l'envoi d'emails à
+											celui-ci. Désactiver les
+											notifications changera aussi
+											l'attribution de ces tâches et votre
+											client n'en sera pas averti.
+										</fbt>
 									</P>
 								)}
-								<P>Êtes-vous sûr de vouloir continuer?</P>
+								<P>
+									<fbt project="inyo" desc="are you sure">
+										Êtes-vous sûr de vouloir continuer?
+									</fbt>
+								</P>
 							</ConfirmModal>
 						)}
-						<Tooltip label="Ce que verra votre client lorsqu'il se connecte au projet">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project customer view tooltip"
+								>
+									Ce que verra votre client lorsqu'il se
+									connecte au projet
+								</fbt>
+							}
+						>
 							<Button
 								link
 								onClick={() => setCustomerPreview(true)}
@@ -386,7 +484,14 @@ const SidebarProjectInfos = ({
 								<IconButton
 									icon="visibility"
 									size="tiny"
-									label="Voir la vue de mon client"
+									label={
+										<fbt
+											project="inyo"
+											desc="sidebar project customer view label"
+										>
+											Voir la vue de mon client
+										</fbt>
+									}
 									color={primaryPurple}
 								/>
 							</Button>
@@ -405,7 +510,12 @@ const SidebarProjectInfos = ({
 									size="tiny"
 									color="inherit"
 								/>{' '}
-								Ajouter un client
+								<fbt
+									project="inyo"
+									desc="sidebar project add a customer"
+								>
+									Ajouter un client
+								</fbt>
 							</Button>
 						</Actions>
 					</>
@@ -444,8 +554,13 @@ const SidebarProjectInfos = ({
 					onDismiss={() => setCustomerPreview(false)}
 				>
 					<Notice>
-						Cette vue est celle que verra votre client lorsqu'il
-						devra effectuer des actions.
+						<fbt
+							project="inyo"
+							desc="sidebar project customer view modal info "
+						>
+							Cette vue est celle que verra votre client lorsqu'il
+							devra effectuer des actions.
+						</fbt>
 					</Notice>
 					<StaticCustomerView projectId={project.id} />
 				</PreviewModal>
@@ -465,14 +580,26 @@ const SidebarProjectInfos = ({
 								size="tiny"
 								color="inherit"
 							/>{' '}
-							Ajouter un collaborateur
+							<fbt
+								project="inyo"
+								desc="sidebar project add collaborator label"
+							>
+								Ajouter un Collaborateurs
+							</fbt>
 						</Button>
 					) : (
 						<CollabLinkToProjectContainer
 							onClick={() => setEditCollab(true)}
 						>
 							<PencilElem icon="edit" size="tiny" />
-							<SubHeading>Collaborateurs du projet</SubHeading>
+							<SubHeading>
+								<fbt
+									project="inyo"
+									desc="sidebar project collaborator list heading"
+								>
+									Collaborateurs du projet
+								</fbt>
+							</SubHeading>
 							<CollabLinkToProjectList project={project} />
 						</CollabLinkToProjectContainer>
 					)}
@@ -491,8 +618,24 @@ const SidebarProjectInfos = ({
 				<DateContainer>
 					{project.deadline ? (
 						<>
-							<SidebarHeading>Deadline</SidebarHeading>
-							<Tooltip label="Date limite du projet">
+							<SidebarHeading>
+								<fbt
+									project="inyo"
+									desc="sidebar project deadline heading"
+								>
+									Deadline
+								</fbt>
+							</SidebarHeading>
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="sidebar proejct deadline tooltip"
+									>
+										Date limite du projet
+									</fbt>
+								}
+							>
 								<SidebarBigNumber
 									onClick={() => setEditDueDate(true)}
 								>
@@ -514,7 +657,12 @@ const SidebarProjectInfos = ({
 									size="tiny"
 									color="inherit"
 								/>{' '}
-								Ajouter une deadline
+								<fbt
+									project="inyo"
+									desc="sidebar project add a deadline label"
+								>
+									Ajouter une deadline
+								</fbt>
 							</Button>
 						</Actions>
 					)}
@@ -548,8 +696,24 @@ const SidebarProjectInfos = ({
 
 			{project.daysUntilDeadline !== null && (
 				<SubSection>
-					<SubHeading>Marge restantes</SubHeading>
-					<Tooltip label="Nombre de jours travaillés avant deadline">
+					<SubHeading>
+						<fbt
+							project="inyo"
+							desc="sidebar proejct worked days before deadline heading"
+						>
+							Marge restantes
+						</fbt>
+					</SubHeading>
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="sidebar project worked days before deadline tooltip"
+							>
+								Nombre de jours travaillés avant deadline
+							</fbt>
+						}
+					>
 						<SidebarBigNumber urgent={margin.includes('retard')}>
 							{margin}
 						</SidebarBigNumber>
@@ -559,7 +723,16 @@ const SidebarProjectInfos = ({
 
 			<div>
 				<Actions>
-					<Tooltip label="Copier ces tâches dans un nouveau projet">
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="duplicate project tooltip"
+							>
+								Copier ces tâches dans un nouveau projet
+							</fbt>
+						}
+					>
 						<DuplicateProjectButton
 							id="duplicate-project-button"
 							projectId={project.id}
@@ -571,7 +744,12 @@ const SidebarProjectInfos = ({
 								size="tiny"
 								color="inherit"
 							/>{' '}
-							Dupliquer le projet
+							<fbt
+								project="inyo"
+								desc="duplicate project button label"
+							>
+								Dupliquer le projet
+							</fbt>
 						</DuplicateProjectButton>
 					</Tooltip>
 				</Actions>
@@ -594,7 +772,9 @@ const SidebarProjectInfos = ({
 									size="tiny"
 									color="inherit"
 								/>{' '}
-								Désarchiver le projet
+								<fbt project="inyo" desc="unarchive project">
+									Désarchiver le projet
+								</fbt>
 							</Button>
 						</Actions>
 						<Actions>
@@ -608,7 +788,9 @@ const SidebarProjectInfos = ({
 									size="tiny"
 									color="inherit"
 								/>{' '}
-								Supprimer le projet
+								<fbt project="inyo" desc="delete project">
+									Supprimer le projet
+								</fbt>
 							</RemoveProjectButton>
 						</Actions>
 					</>
@@ -627,7 +809,9 @@ const SidebarProjectInfos = ({
 								size="tiny"
 								color="inherit"
 							/>{' '}
-							Archiver le projet
+							<fbt project="inyo" desc="archive project">
+								Archiver le projet
+							</fbt>
 						</Button>
 					</Actions>
 				)}

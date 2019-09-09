@@ -11,12 +11,19 @@
     "storybook": "start-storybook",
     "test": "react-scripts test",
     "cypress": "cypress open",
-    "e2e": "cypress run --record --key $CYPRESS_RECORD_KEY"
+    "e2e": "cypress run --record --key $CYPRESS_RECORD_KEY",
+    "manifest": "babel-node node_modules/babel-plugin-fbt/bin/manifest --src src",
+    "collect-fbts": "babel-node node_modules/babel-plugin-fbt/bin/collectFBT --pretty --manifest < .src_manifest.json > .source_strings.json",
+    "translate-fbts": "babel-node node_modules/babel-plugin-fbt/bin/translate.js --translations translations/*.json --jenkins > src/translatedFbts.json",
+    "translate-fbts-single-file": "babel-node node_modules/babel-plugin-fbt/bin/translate.js --jenkins --stdin < translation_input.json > src/translatedFbts.json",
+    "clean-fbts": "rm .enum_manifest.json .src_manifest.json .source_strings.json src/translatedFbts.json 2&> /dev/null || exit 0",
+    "generate-locale-file": "babel-node src/fbt/generateTranslateFile.js -l en-US -o translations"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "dependencies": {
+    "@babel/helper-module-imports": "^7.0.0",
     "@emotion/core": "^10.0.14",
     "@emotion/styled": "^10.0.14",
     "@reach/dialog": "^0.1.2",
@@ -37,7 +44,8 @@
     "apollo-link-error": "^1.1.11",
     "apollo-link-watched-mutation": "^0.2.4",
     "apollo-upload-client": "^11.0.0",
-    "babel-plugin-macros": "^2.4.2",
+    "babel-plugin-fbt": "^0.9.12",
+    "babel-plugin-fbt-runtime": "^0.9.1",
     "cross-env": "^5.2.0",
     "cypress": "^3.3.0",
     "cypress-drag-drop": "^1.1.1",
@@ -52,6 +60,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-simple-import-sort": "^4.0.0",
+    "fbt": "^0.9.51",
     "formik": "^1.3.1",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.10.0",
@@ -61,6 +70,7 @@
     "lodash.debounce": "^4.0.8",
     "medium-draft": "^0.5.6",
     "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
     "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "prettier-eslint-cli": "^5.0.0",
@@ -89,6 +99,7 @@
     "timezone-support": "^1.8.1",
     "use-onclickoutside": "^0.2.2",
     "webfontloader": "^1.6.28",
+    "yargs": "^13.3.0",
     "yup": "^0.26.6"
   },
   "browserslist": {
@@ -121,5 +132,10 @@
   "prettier": {
     "tabWidth": 4,
     "useTabs": true
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5"
   }
 }

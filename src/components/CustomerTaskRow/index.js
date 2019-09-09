@@ -3,6 +3,7 @@ import React, {forwardRef, useRef, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {Link, withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
@@ -19,13 +20,12 @@ import {
 	mediumGrey,
 	primaryBlack,
 	primaryGrey,
-	primaryPurple,
 	TaskHeading,
 } from '../../utils/new/design-system';
 import CustomerModalAndMail from '../CustomerModalAndMail';
+import IconButton from '../IconButton';
 import TaskInfosInputs from '../TaskInfosInputs';
 import Tooltip from '../Tooltip';
-import UnitInput from '../UnitInput';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -173,6 +173,7 @@ const TaskContent = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		padding-left: 2rem;
+		display: flex;
 	}
 `;
 
@@ -201,9 +202,23 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	}
 `;
 
+const OpenBtn = styled(ButtonLink)`
+	color: ${primaryGrey};
+	border-color: transparent;
+	background: transparent;
+`;
+
+const RescheduleIconButton = styled(IconButton)`
+	display: none;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: block;
+	}
+`;
+
 const TaskActions = styled('div')`
-	opacity: ${props => (props.stayActive ? 1 : 0)};
-	margin-right: ${props => (props.stayActive ? 0 : -100)}px;
+	opacity: 0;
+	margin-right: -100px;
 	pointer-events: none;
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
@@ -219,6 +234,7 @@ const TaskHeader = styled('div')`
 	align-items: center;
 	position: relative;
 	cursor: pointer;
+	flex: 1;
 
 	&:hover {
 		&:before {
@@ -242,14 +258,8 @@ const TaskHeader = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		display: block;
+		display: flex;
 	}
-`;
-
-const OpenBtn = styled(ButtonLink)`
-	color: ${primaryGrey};
-	border-color: transparent;
-	background: transparent;
 `;
 
 function Task({
@@ -331,7 +341,13 @@ function Task({
 					}}
 				/>
 				<TaskContent noData={noData}>
-					<Tooltip label="Cliquer pour voir le contenu de la tâche">
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="open task tooltip">
+								Cliquer pour voir le contenu de la tâche
+							</fbt>
+						}
+					>
 						<TaskHeader>
 							{item.name ? (
 								<TaskHeadingLink
@@ -354,19 +370,42 @@ function Task({
 										state: {prevSearch: location.search},
 									}}
 								>
-									Choisir un titre pour cette tâche
+									<fbt
+										project="inyo"
+										desc="no title task placeholder"
+									>
+										Choisir un titre pour cette tâche
+									</fbt>
 								</TaskHeadingPlaceholder>
 							)}
-							<TaskActions stayActive={false}>
-								<OpenBtn
-									data-tip="Description, détails, commentaires, etc."
-									to={{
-										pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-										state: {prevSearch: location.search},
-									}}
+							<TaskActions>
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="open task button tooltip"
+										>
+											Description, détails, commentaires,
+											etc.
+										</fbt>
+									}
 								>
-									Ouvrir
-								</OpenBtn>
+									<OpenBtn
+										to={{
+											pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
+											state: {
+												prevSearch: location.search,
+											},
+										}}
+									>
+										<fbt
+											project="inyo"
+											desc="open task button label"
+										>
+											Ouvrir
+										</fbt>
+									</OpenBtn>
+								</Tooltip>
 								{baseUrl === 'dashboard'
 									&& !isCustomerTask(item.type) && (
 									<Button
@@ -380,12 +419,28 @@ function Task({
 										})
 										}
 									>
-											Ajouter à ma journée
+										<fbt
+											project="inyo"
+											desc="add task to today button label"
+										>
+												Ajouter à ma journée
+										</fbt>
 									</Button>
 								)}
 							</TaskActions>
 						</TaskHeader>
 					</Tooltip>
+					<RescheduleIconButton
+						icon="today"
+						size="tiny"
+						onClick={() => focusTask({
+							variables: {
+								itemId: item.id,
+								for: new Date().toJSON().split('T')[0],
+							},
+						})
+						}
+					/>
 					{!noData && (
 						<TaskInfosInputs
 							taskUrlPrefix={taskUrlPrefix}

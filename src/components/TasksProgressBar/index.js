@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	accentGrey,
 	lightGrey,
@@ -173,11 +174,15 @@ function TasksProgressBar({
 					<ExtraDaysLabel left={extraDaysLeftPos}>
 						{timeItTook >= 0 && '+'}
 						{timeItTook.toFixed(2)}{' '}
-						<Plural
-							value={timeItTook}
-							singular="jour"
-							plural="jours"
-						/>
+						<fbt project="inyo" desc="notification message">
+							<fbt:plural
+								name="day"
+								count={timeItTook}
+								many="jours"
+							>
+								jour
+							</fbt:plural>
+						</fbt>
 					</ExtraDaysLabel>
 				)}
 			</TasksProgressBarMain>

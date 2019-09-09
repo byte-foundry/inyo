@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {isCustomerTask} from '../../utils/functions';
 import {Label, primaryBlack, primaryRed} from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_PROJECT_DATA} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 
 const Column = styled('div')``;
 
@@ -109,7 +111,10 @@ function TemplateTaskList({selectedTemplate}) {
 }
 
 const CreateProjectModalViewContent = ({content}) => {
-	const selectedTemplate = templates.find(tplt => tplt.name === content);
+	const {language} = useUserInfos();
+	const selectedTemplate = templates[language].find(
+		tplt => tplt.name === content,
+	);
 
 	const isTemplate = !!selectedTemplate;
 	const {data, loading} = useQuery(GET_PROJECT_DATA, {
@@ -134,7 +139,11 @@ const CreateProjectModalViewContent = ({content}) => {
 
 	return (
 		<Container>
-			<TemplateColumnLabel>Contenu du modèle</TemplateColumnLabel>
+			<TemplateColumnLabel>
+				<fbt project="inyo" desc="content of template">
+					Contenu du modèle
+				</fbt>
+			</TemplateColumnLabel>
 			<TemplateTaskList selectedTemplate={selectedTemplate} />
 		</Container>
 	);

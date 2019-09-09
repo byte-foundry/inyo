@@ -2,6 +2,7 @@ import styled from '@emotion/styled/macro';
 import React, {useMemo} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {isCustomerTask} from '../../utils/functions';
 import {primaryPurple, primaryRed} from '../../utils/new/design-system';
 import IconButton from '../IconButton';
@@ -47,7 +48,15 @@ function TaskReminderIcon({
 				{activableTask && item.linkedCustomer && !item.isFocused && (
 					<Tooltip
 						key={`task-focus-icon-${item.id}`}
-						label="Les rappels clients ne sont pas activés pour cette tâche"
+						label={
+							<fbt
+								project="inyo"
+								desc="customer reminder are not active"
+							>
+								Les rappels clients ne sont pas activés pour
+								cette tâche
+							</fbt>
+						}
 					>
 						<IconButtonLink
 							isFocused={item.isFocused}
@@ -60,7 +69,14 @@ function TaskReminderIcon({
 				{activableTask && item.linkedCustomer && item.isFocused && (
 					<Tooltip
 						key={`task-focused-icon-${item.id}`}
-						label="Les rappels client sont activés pour cette tâche"
+						label={
+							<fbt
+								project="inyo"
+								desc="customer reminders are active"
+							>
+								Les rappels client sont activés pour cette tâche
+							</fbt>
+						}
 					>
 						<IconButtonLink
 							isFocused={item.isFocused}
@@ -77,7 +93,14 @@ function TaskReminderIcon({
 				{activableTask && !item.linkedCustomer && (
 					<Tooltip
 						key={`task-noCustomer-icon-${item.id}`}
-						label="Aucun client n’est lié à cette tâche"
+						label={
+							<fbt
+								project="inyo"
+								desc="there is no customer linked to this task"
+							>
+								Aucun client n’est lié à cette tâche
+							</fbt>
+						}
 					>
 						<IconButtonLink to={taskLink}>
 							<IconButton

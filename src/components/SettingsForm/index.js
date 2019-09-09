@@ -6,21 +6,23 @@ import {useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {
 	ErrorInput, gray20, Label, primaryWhite,
 } from '../../utils/content';
 import workingIllus from '../../utils/images/bermuda-uploading.svg';
 import {UPDATE_USER_CONSTANTS} from '../../utils/mutations';
-import {Button} from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
+import {A, Button} from '../../utils/new/design-system';
 import {findTimeZone, getUTCOffset, timezones} from '../../utils/timezones';
 import DoubleRangeTimeInput from '../DoubleRangeTimeInput';
 import FormCheckbox from '../FormCheckbox';
+import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
+import Tooltip from '../Tooltip';
 import WeekDaysInput from '../WeekDaysInput';
 
-const UserWorkHourAndDaysFormMain = styled('div')``;
+const SettingsFormMain = styled('div')``;
 
 const FormContainer = styled('div')`
 	flex: 1;
@@ -85,10 +87,10 @@ const Emoji = styled('span')`
 const Illus = styled('img')`
 	margin-right: 2rem;
 	align-self: end;
-	grid-row: 4 / 9;
+	grid-row: 4 / 12;
 `;
 
-const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
+const SettingsForm = ({data: props, done = () => {}}) => {
 	const {
 		timeZone: initialTimeZone,
 		startWorkAt,
@@ -127,7 +129,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 	];
 
 	return (
-		<UserWorkHourAndDaysFormMain>
+		<SettingsFormMain>
 			<Formik
 				initialValues={{
 					startMinutes: startMinutesInitial,
@@ -137,6 +139,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 					workingDays: workingDaysInitial,
 					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
+					dailyRate: undefined,
 				}}
 				validationSchema={Yup.object().shape({})}
 				onSubmit={async (values, actions) => {
@@ -150,6 +153,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 						workingDays,
 						timeZone,
 						hasNotFullWeekSchedule,
+						dailyRate,
 					} = values;
 
 					const start = new Date();
@@ -172,6 +176,7 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
 								workingDays,
+								defaultDailyPrice: parseInt(dailyRate),
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},
@@ -190,7 +195,11 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
-							msg: "Quelque chose s'est mal passé",
+							msg: (
+								<fbt project="inyo" desc="something went wrong">
+									Quelque chose s'est mal passé
+								</fbt>
+							),
 						});
 					}
 				}}
@@ -220,7 +229,12 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 											gridColumn: '1 / 3',
 										}}
 									>
-										Horaires de travail
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											Horaires de travail
+										</fbt>
 									</Label>
 									<DoubleRangeTimeInput
 										style={{
@@ -239,36 +253,75 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 									>
 										<Emoji
 											role="img"
-											aria-label="matin"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="morning"
+												>
+													matin
+												</fbt>
+											}
 											offset={0}
 											children="🌙"
 										/>
 										<Emoji
 											role="img"
-											aria-label="petit déjeuner"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="breakfast"
+												>
+													petit déjeuner
+												</fbt>
+											}
 											offset={33}
 											children="☕"
 										/>
 										<Emoji
 											role="img"
-											aria-label="déjeuner"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="lunch"
+												>
+													déjeuner
+												</fbt>
+											}
 											offset={50}
 											children="🍽️"
 										/>
 										<Emoji
 											role="img"
-											aria-label="soirée"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="evening"
+												>
+													soirée
+												</fbt>
+											}
 											offset={87}
 											children="🛌"
 										/>
 										<Emoji
 											role="img"
-											aria-label="nuit"
+											aria-label={
+												<fbt
+													project="inyo"
+													desc="night"
+												>
+													nuit
+												</fbt>
+											}
 											offset={100}
 											children="🌗"
 										/>
 									</EmojiTimeline>
-									<Label>Jours travaillés</Label>
+									<Label>
+										<fbt project="inyo" desc="working days">
+											Jours travaillés
+										</fbt>
+									</Label>
 									<WeekDaysInput
 										values={workingDays}
 										setFieldValue={setFieldValue}
@@ -277,14 +330,33 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 										{...props}
 										name="hasNotFullWeekSchedule"
 										type="checkbox"
-										label="Afficher seulement les jours travaillés
-										dans le calendrier"
+										label={
+											<fbt
+												project="inyo"
+												desc="display only worked days"
+											>
+												Afficher seulement les jours
+												travaillés dans le calendrier
+											</fbt>
+										}
 									/>
-									<Label>Fuseau horaire</Label>
+									<Label>
+										<fbt project="inyo" desc="timezone">
+											Fuseau horaire
+										</fbt>
+									</Label>
 									<FormSelect
 										{...props}
+										style={{marginBottom: '1rem'}}
 										name="timeZone"
-										placeholder="Triez par fuseau"
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="sort by timezone"
+											>
+												Triez par fuseau
+											</fbt>
+										}
 										value={{
 											value: timeZone || 'Europe/Paris',
 											label: `${timeZone
@@ -321,6 +393,40 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 										hideSelectedOptions
 										isSearchable
 									/>
+									<Tooltip
+										label={fbt(
+											'Prix que vous facturé en moyenne par journée',
+											'daily rate',
+										)}
+									>
+										<Label>
+											<fbt project="inyo" desc="timezone">
+												Prix journalier moyen
+											</fbt>
+										</Label>
+									</Tooltip>
+									<FormElem
+										{...props}
+										name="dailyRate"
+										placeholder={fbt('300€', 'price')}
+										padded
+										required
+									/>
+									<div>
+										<A
+											href={fbt(
+												'https://inyo.me/calculer-son-tjm/',
+												'link to daily rate calculator',
+											)}
+										>
+											<fbt
+												project="inyo"
+												desc="label link to daily rate calculator"
+											>
+												Calculer mon prix journalier
+											</fbt>
+										</A>
+									</div>
 								</FormContainer>
 								{status && status.msg && (
 									<ErrorInput
@@ -333,14 +439,16 @@ const UserWorkHourAndDaysForm = ({data: props, done = () => {}}) => {
 								)}
 							</ProfileSection>
 							<UpdateButton type="submit" big>
-								Mettre à jour
+								<fbt project="inyo" desc="update">
+									Mettre à jour
+								</fbt>
 							</UpdateButton>
 						</form>
 					);
 				}}
 			</Formik>
-		</UserWorkHourAndDaysFormMain>
+		</SettingsFormMain>
 	);
 };
 
-export default UserWorkHourAndDaysForm;
+export default SettingsForm;

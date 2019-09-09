@@ -4,6 +4,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {ModalContainer} from '../../utils/content';
 import {CREATE_TAG} from '../../utils/mutations';
@@ -288,12 +289,22 @@ const TaskInput = ({
 
 						setSelectedProject(id);
 					}}
-					children="Lier à un projet"
+					children={
+						<fbt project="inyo" desc="link to a project">
+							Lier à un projet
+						</fbt>
+					}
 					isClearable
 				/>
 			)}
-			<InputContainer>
-				<Tooltip label="Définir le type de tâche">
+			<InputContainer id="task-input-container">
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="task input icon tooltip">
+							Définir le type de tâche
+						</fbt>
+					}
+				>
 					<Icon
 						onClick={() => setOpenedByClick(true)}
 						active={type}
@@ -305,9 +316,18 @@ const TaskInput = ({
 				<Tooltip
 					label={
 						<p>
-							`Entrée` pour créer une tâche
-							<br />`{currentProjectId ? '↓' : '↑'}` pour créer{' '}
-							{currentProjectId ? 'une section' : 'un projet'}
+							`Entrée` pour créer une tâche.
+							{currentProjectId && (
+								<>
+									<br />
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										↓ pour créer une section
+									</fbt>
+								</>
+							)}
 						</p>
 					}
 				>
@@ -415,17 +435,40 @@ const TaskInput = ({
 							}
 						}}
 						placeholder={
-							focus
-								? `Titre de la tâche ou ${
-									currentProjectId
-										? 'de la section'
-										: 'du projet'
-								  }. Commencez par "/" pour changer le type de tâche`
-								: `Ajouter une tâche ou créer ${
-									currentProjectId
-										? 'une section'
-										: 'un projet'
-								  }`
+							focus ? (
+								currentProjectId ? (
+									<fbt
+										project="inyo"
+										desc="focused task input placeholder in project"
+									>
+										Titre de la tâche ou de la section.
+										Commencez par "/" pour changer le type
+										de tâche
+									</fbt>
+								) : (
+									<fbt
+										project="inyo"
+										desc="focused task input placeholder"
+									>
+										Titre de la tâche. Commencez par "/"
+										pour changer le type de tâche
+									</fbt>
+								)
+							) : currentProjectId ? (
+								<fbt
+									project="inyo"
+									desc="unfocused task input placeholder in project"
+								>
+									Ajouter une tâche ou créer un section.
+								</fbt>
+							) : (
+								<fbt
+									project="inyo"
+									desc="unfocused task input placeholder"
+								>
+									Ajouter une tâche.
+								</fbt>
+							)
 						}
 					/>
 				</Tooltip>
@@ -433,17 +476,41 @@ const TaskInput = ({
 					<InputButtonWrapper>
 						<InputButtonContainer>
 							{type !== 'SECTION' && onSubmitSection && (
-								<Tooltip label="Flèche du bas pour créer un ensemble de tâches">
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											Flèche du bas pour créer un ensemble
+											de tâches
+										</fbt>
+									}
+								>
 									<Button
 										icon="↓"
 										onClick={() => onSubmitSection({name: value})
 										}
 									>
-										Créer une section
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											Créer une section
+										</fbt>
 									</Button>
 								</Tooltip>
 							)}
-							<Tooltip label="Touche entrée pour créer la tâche">
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										Touche entrée pour créer la tâche
+									</fbt>
+								}
+							>
 								<Button
 									icon="↵"
 									id="create-task-button"
@@ -489,8 +556,29 @@ const TaskInput = ({
 										}
 									}}
 								>
-									créer la{' '}
-									{type === 'SECTION' ? 'section' : 'tâche'}
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										créer la{' '}
+										<fbt:param name="sectionOrTask">
+											{type === 'SECTION' ? (
+												<fbt
+													project="inyo"
+													desc="notification message"
+												>
+													section
+												</fbt>
+											) : (
+												<fbt
+													project="inyo"
+													desc="notification message"
+												>
+													tâche
+												</fbt>
+											)}
+										</fbt:param>
+									</fbt>
 								</Button>
 							</Tooltip>
 						</InputButtonContainer>
@@ -506,7 +594,11 @@ const TaskInput = ({
 					<TagDropdown
 						id="tags"
 						long
-						placeholder="Ajouter ou créer un tag"
+						placeholder={
+							<fbt project="inyo" desc="add or create a tag">
+								Ajouter ou créer un tag
+							</fbt>
+						}
 						value={itemTags.map(tag => ({
 							value: tag.id,
 							label: tag.name,

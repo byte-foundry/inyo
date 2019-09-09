@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName, isCustomerTask} from '../../utils/functions';
 import {StickyHeader} from '../../utils/new/design-system';
 import Apostrophe from '../Apostrophe';
@@ -30,13 +31,25 @@ function TaskActivationModal({
 	return (
 		<>
 			<StickyHeader customer={isCustomerTask(item.type)}>
-				Prévisualisation des actions{' '}
-				<Apostrophe
-					value={assistantName}
-					withVowel="d'"
-					withConsonant="de "
-				/>
-				{assistantName}
+				<fbt project="inyo" desc="previsualize action">
+					Prévisualisation des actions{' '}
+					<fbt:param name="apos">
+						<Apostrophe
+							value={assistantName}
+							withVowel={
+								<fbt project="inyo" desc="notification message">
+									d'
+								</fbt>
+							}
+							withConsonant={
+								<fbt project="inyo" desc="notification message">
+									de{' '}
+								</fbt>
+							}
+						/>
+					</fbt:param>
+					<fbt:param name="assistantName">{assistantName}</fbt:param>
+				</fbt>
 			</StickyHeader>
 			<TaskRemindersPreviewsList
 				taskId={item.id}

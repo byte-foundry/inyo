@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {primaryBlue, primaryWhite} from '../../utils/content';
 
@@ -37,31 +38,59 @@ const DayInput = styled('div')`
 
 const workingDaysNames = [
 	{
-		label: 'lun.',
+		label: (
+			<fbt project="inyo" desc="monday abbrev">
+				lun.
+			</fbt>
+		),
 		value: 'MONDAY',
 	},
 	{
-		label: 'mar.',
+		label: (
+			<fbt project="inyo" desc="tuesday abbrev">
+				mar.
+			</fbt>
+		),
 		value: 'TUESDAY',
 	},
 	{
-		label: 'mer.',
+		label: (
+			<fbt project="inyo" desc="wesneday abbrev">
+				mer.
+			</fbt>
+		),
 		value: 'WEDNESDAY',
 	},
 	{
-		label: 'jeu.',
+		label: (
+			<fbt project="inyo" desc="thursday abbrev">
+				jeu.
+			</fbt>
+		),
 		value: 'THURSDAY',
 	},
 	{
-		label: 'ven.',
+		label: (
+			<fbt project="inyo" desc="friday abbrev">
+				ven.
+			</fbt>
+		),
 		value: 'FRIDAY',
 	},
 	{
-		label: 'sam.',
+		label: (
+			<fbt project="inyo" desc="saturday abbrev">
+				sam.
+			</fbt>
+		),
 		value: 'SATURDAY',
 	},
 	{
-		label: 'dim.',
+		label: (
+			<fbt project="inyo" desc="sunday abbrev">
+				dim.
+			</fbt>
+		),
 		value: 'SUNDAY',
 	},
 ];

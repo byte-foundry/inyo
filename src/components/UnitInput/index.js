@@ -4,6 +4,7 @@ import React, {useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button,
 	mediumGrey,
@@ -133,7 +134,13 @@ const UnitInput = ({
 			{({handleSubmit, values, setFieldValue}) => (
 				<UnitInputForm onSubmit={handleSubmit} novalidate>
 					<UnitInputContainer ref={containerRef}>
-						<Tooltip label="Durée de la tâche">
+						<Tooltip
+							label={
+								<fbt project="inyo" desc="task duration">
+									Durée de la tâche
+								</fbt>
+							}
+						>
 							<UnitInputInput
 								id="unit"
 								value={values.unit}
@@ -176,23 +183,51 @@ const UnitInput = ({
 								css={inputStyle}
 							/>
 						</Tooltip>
-						<Tooltip label="Changer l'unité de temps">
+						<Tooltip
+							label={
+								<fbt project="inyo" desc="change time unit">
+									Changer l'unité de temps
+								</fbt>
+							}
+						>
 							<UnitInputSwitch
 								onClick={() => {
 									inputRef.current.focus();
 									setIsHours(!isHours);
 								}}
 							>
-								<UnitInputLabel>j</UnitInputLabel>
+								<UnitInputLabel>
+									<fbt project="inyo" desc="day supershort">
+										j
+									</fbt>
+								</UnitInputLabel>
 								<UnitInputLabel>h</UnitInputLabel>
 								<UnitInputSlider isHours={isHours}>
-									{isHours ? 'h' : 'j'}
+									{isHours ? (
+										'h'
+									) : (
+										<fbt
+											project="inyo"
+											desc="day supershort"
+										>
+											j
+										</fbt>
+									)}
 								</UnitInputSlider>
 							</UnitInputSwitch>
 						</Tooltip>
 					</UnitInputContainer>
 					{withButton && (
-						<Tooltip label="Valider le temps et marquer comme fait">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="confirm task duration"
+								>
+									Valider le temps et marquer comme fait
+								</fbt>
+							}
+						>
 							<Button textIcon tiny type="submit">
 								✓
 							</Button>

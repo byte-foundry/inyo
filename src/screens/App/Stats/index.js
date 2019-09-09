@@ -1,5 +1,6 @@
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import momentDurationFormat from 'moment-duration-format';
 import React, {useCallback} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
@@ -8,6 +9,7 @@ import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {formatName} from '../../../utils/functions';
 import {
@@ -20,6 +22,8 @@ import {
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
+
+momentDurationFormat(moment);
 
 const Container = styled('div')`
 	width: 980px;
@@ -94,7 +98,8 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {workingTime = 8} = useUserInfos() || {};
+	const {workingTime = 8, defaultDailyPrice = 0, clientViews}
+		= useUserInfos() || {};
 
 	const query = new URLSearchParams(location.search);
 
@@ -243,24 +248,78 @@ const Stats = ({history, location}) => {
 	return (
 		<Container>
 			<MetaHeading>
-				<Heading style={{marginBottom: 0}}>Statistiques</Heading>
+				<Heading style={{marginBottom: 0}}>
+					<fbt project="inyo" desc="Statistics">
+						Statistiques
+					</fbt>
+				</Heading>
 				<TimeSelectContainer>
-					Afficher{' '}
-					<TimeSelect
-						selectedId={since}
-						onChange={({value}) => setSince(value)}
-						list={[
-							{name: 'les 7 derniers jours', id: 7},
-							{name: 'les 30 derniers jours', id: 30},
-							{name: 'les 3 derniers mois', id: 90},
-							{name: 'les 6 derniers mois', id: 180},
-						]}
-					/>
+					<fbt project="inyo" desc="Show">
+						Afficher{' '}
+						<fbt:param name="timespan">
+							{
+								<TimeSelect
+									selectedId={since}
+									onChange={({value}) => setSince(value)}
+									list={[
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="7 last days"
+												>
+													les 7 derniers jours
+												</fbt>
+											),
+											id: 7,
+										},
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="30 last days"
+												>
+													les 30 derniers jours
+												</fbt>
+											),
+											id: 30,
+										},
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="3 last months"
+												>
+													les 3 derniers mois
+												</fbt>
+											),
+											id: 90,
+										},
+										{
+											name: (
+												<fbt
+													project="inyo"
+													desc="6 last months"
+												>
+													les 6 derniers mois
+												</fbt>
+											),
+											id: 180,
+										},
+									]}
+								/>
+							}
+						</fbt:param>
+					</fbt>
 				</TimeSelectContainer>
 			</MetaHeading>
 
 			<Section>
-				<PageSubHeading>Répartition de vos clients</PageSubHeading>
+				<PageSubHeading>
+					<fbt project="inyo" desc="client share">
+						Répartition de vos clients
+					</fbt>
+				</PageSubHeading>
 				<SingleBarChart entries={customerDistributions} />
 			</Section>
 
@@ -276,7 +335,12 @@ const Stats = ({history, location}) => {
 					marginBottom
 				/>
 				<PageSubHeading>
-					Rapport temps estimé / temps réellement passé
+					<fbt
+						project="inyo"
+						desc="Estimated time / worked time rate"
+					>
+						Rapport temps estimé / temps réellement passé
+					</fbt>
 				</PageSubHeading>
 				<TasksProgressBar
 					showCompletionPercentage={false}
@@ -288,7 +352,11 @@ const Stats = ({history, location}) => {
 				/>
 				<Cards>
 					<Card>
-						<SubHeading>Temps travaillé</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="Worked time">
+								Temps travaillé
+							</fbt>
+						</SubHeading>
 						<Number>
 							{(
 								filteredTasks
@@ -302,7 +370,11 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
-						<SubHeading>Temps estimé</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="estimated time">
+								Temps estimé
+							</fbt>
+						</SubHeading>
 						<Number>
 							{(
 								filteredTasks
@@ -316,13 +388,65 @@ const Stats = ({history, location}) => {
 						</Number>
 					</Card>
 					<Card>
-						<SubHeading>Rappels envoyés</SubHeading>
+						<SubHeading>
+							<fbt project="inyo" desc="reminders sent">
+								Rappels envoyés
+							</fbt>
+						</SubHeading>
 						<Number>
 							{
 								reminders.filter(
 									reminder => reminder.status === 'SENT',
 								).length
 							}
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Gained time">
+								Temps gagné
+							</fbt>
+						</SubHeading>
+						<Number>
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length * 15,
+									'minutes',
+								)
+								.format('h[h]mm[min]')}
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Client visits">
+								Visites client
+							</fbt>
+						</SubHeading>
+						<Number>{clientViews}</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="estimated time">
+								Montant travaillé
+							</fbt>
+						</SubHeading>
+						<Number>
+							<fbt project="inyo" desc="worked amount">
+								<fbt:param name="amount">
+									{(
+										filteredTasks
+											.filter(
+												t => t.status === 'FINISHED',
+											)
+											.reduce(
+												(total, {timeItTook}) => total + timeItTook,
+												0,
+											) * defaultDailyPrice
+									).toFixed(2)}
+								</fbt:param>€
+							</fbt>
 						</Number>
 					</Card>
 					<Card>
@@ -334,13 +458,15 @@ const Stats = ({history, location}) => {
 							/>
 						</SubHeading>
 						<P>
-							Vous souhaitez d'autres statistiques?
-							<A
-								style={{marginLeft: '1rem'}}
-								href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…"
-							>
-								Contactez-nous
-							</A>
+							<fbt project="inyo" desc="stats question">
+								Vous souhaitez d'autres statistiques?
+								<A
+									style={{marginLeft: '1rem'}}
+									href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…"
+								>
+									Contactez-nous
+								</A>
+							</fbt>
 						</P>
 					</Card>
 				</Cards>

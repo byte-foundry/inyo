@@ -6,6 +6,7 @@ import ConfirmModal from '../../../components/ConfirmModal';
 import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import HelpButton from '../../../components/HelpButton';
 import IconButton from '../../../components/IconButton';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import Search from '../../../utils/icons/search.svg';
 import {REMOVE_CUSTOMER} from '../../../utils/mutations';
@@ -177,36 +178,69 @@ const Customers = () => {
 			<HelpButton />
 			<Container>
 				<HeadingRow>
-					<Heading>Clients</Heading>
+					<Heading>
+						<fbt project="inyo" desc="clients">
+							Clients
+						</fbt>
+					</Heading>
 					<HeadingLink to="/app/collaborators">
-						Collaborateurs
+						<fbt project="inyo" desc="collaborators">
+							Collaborateurs
+						</fbt>
 					</HeadingLink>
 				</HeadingRow>
 				<Forms>
 					<FilterInput
 						icon={Search}
 						name="filter"
-						placeholder="Filtrer par nom, email..."
+						placeholder={
+							<fbt project="inyo" desc="filter">
+								Filtrer par nom, email...
+							</fbt>
+						}
 						type="text"
 						onChange={e => setFilter(e.target.value)}
 						value={filter}
 					/>
 					<Actions>
-						<A target="_blank" href="https://inyo.pro">
-							Présenter Inyo à un client
+						<A
+							target="_blank"
+							href={fbt('https://inyo.pro', 'inyo pro link')}
+						>
+							<fbt project="inyo" desc="present">
+								Présenter Inyo à un client
+							</fbt>
 						</A>
 						<Button big onClick={() => setEditCustomer(true)}>
-							Créer un nouveau client
+							<fbt project="inyo" desc="create client">
+								Créer un nouveau client
+							</fbt>
 						</Button>
 					</Actions>
 				</Forms>
 				<Table>
 					<thead>
 						<RowHeader>
-							<HeaderCell>Raison sociale</HeaderCell>
-							<HeaderCell>Référent·e</HeaderCell>
-							<HeaderCell>Email</HeaderCell>
-							<HeaderCell>Téléphone</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="company name">
+									Raison sociale
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="contact name">
+									Référent·e
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="email">
+									Email
+								</fbt>
+							</HeaderCell>
+							<HeaderCell>
+								<fbt project="inyo" desc="phone number">
+									Téléphone
+								</fbt>
+							</HeaderCell>
 						</RowHeader>
 					</thead>
 					<tbody>
@@ -283,12 +317,20 @@ const Customers = () => {
 						onDismiss={() => confirmRemoveCustomer.resolve(false)}
 					>
 						<P>
-							Êtes-vous sûr de vouloir supprimer{' '}
-							{customerToBeRemoved.email} ? Tous les projets et
-							les tâches associés à ce client se retrouveront sans
-							client.
+							<fbt project="inyo" desc="confirm message intro">
+								Êtes-vous sûr de vouloir supprimer{' '}
+								<fbt:param name="email">
+									{customerToBeRemoved.email}
+								</fbt:param>{' '}
+								? Tous les projets et les tâches associés à ce
+								client se retrouveront sans client.
+							</fbt>
 						</P>
-						<P>Êtes-vous sûr de vouloir continuer?</P>
+						<P>
+							<fbt project="inyo" desc="confirm message">
+								Êtes-vous sûr de vouloir continuer?
+							</fbt>
+						</P>
 					</ConfirmModal>
 				)}
 			</Container>

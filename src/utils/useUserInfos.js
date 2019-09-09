@@ -11,7 +11,12 @@ export default function useUserInfos() {
 	}
 
 	const {
-		startWorkAt, endWorkAt, workingDays, settings,
+		startWorkAt,
+		endWorkAt,
+		workingDays,
+		settings,
+		defaultDailyPrice,
+		clientViews,
 	} = data.me;
 
 	let workingTime = null;
@@ -31,7 +36,10 @@ export default function useUserInfos() {
 		endWorkAt,
 		workingTime,
 		workingDays,
+		defaultDailyPrice,
+		clientViews,
 		language: settings.language,
 		hasFullWeekSchedule: settings.hasFullWeekSchedule,
+		assistantName: settings.assistantName,
 	};
 }

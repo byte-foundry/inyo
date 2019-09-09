@@ -4,6 +4,7 @@ import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
+import fbt from '../../fbt/fbt.macro';
 import {
 	Button, gray50, H4, P,
 } from '../../utils/content';
@@ -53,17 +54,23 @@ const OnboardingCustomAssistant = ({
 	return (
 		<OnboardingStep>
 			<StepSubtitle>
-				Comment souhaitez-vous appeler
+				<fbt project="inyo" desc="onboarding assistant title 1st">
+					Comment souhaitez-vous appeler
+				</fbt>
 				<br />
-				votre assistant·e ?
+				<fbt project="inyo" desc="onboarding assistant title 2nd">
+					votre assistant·e ?
+				</fbt>
 			</StepSubtitle>
 
 			<Illus src={illus} />
 
 			<StepDescription>
-				Lorsque nous notifierons vos clients d'une tâche à réaliser,
-				d'un commentaire, etc. ce sera le prénom utilisé pour signer les
-				emails.
+				<fbt project="inyo" desc="onboarding assistant description">
+					Lorsque nous notifierons vos clients d'une tâche à réaliser,
+					d'un commentaire, etc. ce sera le prénom utilisé pour signer
+					les emails.
+				</fbt>
 			</StepDescription>
 
 			<Formik
@@ -72,10 +79,12 @@ const OnboardingCustomAssistant = ({
 					language: me.settings.language || 'en',
 				}}
 				validationSchema={Yup.object().shape({
-					assistantName: Yup.string().required('Requis'),
+					assistantName: Yup.string().required(
+						fbt('Requis', 'required'),
+					),
 					language: Yup.string()
 						.oneOf(['en', 'fr'])
-						.required('Requis'),
+						.required(fbt('Requis', 'required')),
 				})}
 				onSubmit={async (values, {setSubmitting, setErrors}) => {
 					setSubmitting(true);
@@ -85,6 +94,11 @@ const OnboardingCustomAssistant = ({
 							variables: {
 								settings: values,
 							},
+						});
+
+						window.Intercom('update', {
+							'assistant-name': values.assistantName,
+							language: values.language,
 						});
 
 						getNextStep();
@@ -109,7 +123,11 @@ const OnboardingCustomAssistant = ({
 						<FormSelect
 							{...props}
 							name="language"
-							label="Langue de l'assistant"
+							label={
+								<fbt project="inyo" desc="assitant language">
+									Langue de l'assistant
+								</fbt>
+							}
 							options={[
 								{value: 'en', label: 'English'},
 								{value: 'fr', label: 'Français'},
@@ -122,7 +140,12 @@ const OnboardingCustomAssistant = ({
 							theme="Primary"
 							size="Medium"
 						>
-							Valider
+							<fbt
+								project="inyo"
+								desc="confirm onboarding assistant"
+							>
+								Valider
+							</fbt>
 						</ActionButton>
 					</Form>
 				)}
@@ -131,7 +154,9 @@ const OnboardingCustomAssistant = ({
 			{!isFirstStep && (
 				<ActionButton theme="Link" onClick={getPreviousStep}>
 					{'< '}
-					Retour
+					<fbt project="inyo" desc="back onboarding assistant">
+						Retour
+					</fbt>
 				</ActionButton>
 			)}
 		</OnboardingStep>

@@ -1,26 +1,33 @@
 import styled from '@emotion/styled/macro';
+import Portal from '@reach/portal';
+import moment from 'moment';
 import React, {
-	forwardRef, useCallback, useRef, useState,
+	forwardRef,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
 } from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {Link, withRouter} from 'react-router-dom';
+import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {
-	accentGrey,
 	lightGrey,
-	mediumGrey,
 	primaryBlack,
 	primaryGrey,
 	TaskHeading,
 	TaskIconText,
 } from '../../utils/new/design-system';
+import CollaboratorDropdown from '../CollaboratorDropdown';
+import CustomerDropdown from '../CustomerDropdown';
 import InitialIdentifier from '../InitialIdentifier';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import Tag from '../Tag';
 import TaskComment from '../TaskComment';
 import TaskDescription from '../TaskDescription';
@@ -223,10 +230,12 @@ const EmptyProjectName = styled('div')`
 
 const ProjectName = EmptyProjectName.withComponent(Link);
 
-const CustomerCondensed = styled('div')`
+const IconAndText = styled('div')`
 	display: flex;
 	align-items: center;
+`;
 
+const IconAndTextOptional = styled(IconAndText)`
 	@media (max-width: ${BREAKPOINTS}px) {
 		display: none;
 	}
@@ -237,11 +246,8 @@ const TaskHeader = styled('div')`
 	align-items: center;
 	margin: 0.5rem 0;
 
-	${props => props.noProject && 'grid-column: 1 / 3;'}
-
 	@media (max-width: ${BREAKPOINTS}px) {
 		overflow: hidden;
-		${props => props.noProject && 'grid-column: 1 / 3;'}
 	}
 `;
 
@@ -259,7 +265,7 @@ function TaskRow({
 	location,
 	isDraggable,
 	noData,
-	noProject,
+	noProject: inProject,
 	baseUrl = 'tasks',
 	forwardedRef,
 	userId,
@@ -268,8 +274,28 @@ function TaskRow({
 	const [unfinishItem] = useMutation(UNFINISH_ITEM);
 
 	const [justUpdated, setJustUpdated] = useState(false);
+	const [editAssignee, setEditAssignee] = useState(false);
+	const [dropdownStyle, setDropdownStyle] = useState(false);
+	const containerRef = useRef();
 
 	const iconRef = useRef();
+	const dropdownRef = useRef();
+
+	useOnClickOutside(dropdownRef, () => {
+		setEditAssignee(false);
+	});
+
+	useEffect(() => {
+		if (editAssignee) {
+			const pos = containerRef.current.getBoundingClientRect();
+
+			setDropdownStyle({
+				position: 'absolute',
+				top: `${pos.bottom + window.scrollY}px`,
+				left: `${pos.left}px`,
+			});
+		}
+	}, [editAssignee]);
 
 	const finishItemCallback = useCallback(() => {
 		finishItem({
@@ -319,7 +345,7 @@ function TaskRow({
 					}}
 				/>
 				<TaskContent>
-					<TaskHeader noProject={noProject}>
+					<TaskHeader>
 						{item.name ? (
 							<TaskHeadingLink
 								noData={noData}
@@ -331,7 +357,16 @@ function TaskRow({
 								}}
 							>
 								{item.assignee && (
-									<Tooltip label="Cette tâche vous a été assigné">
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="this task is assigned to you"
+											>
+												Cette tâche vous a été assigné
+											</fbt>
+										}
+									>
 										<div>
 											<MaterialIcon
 												icon="reply"
@@ -348,11 +383,16 @@ function TaskRow({
 								noData={noData}
 								small={false}
 								to={{
-									pathname: `${taskUrlPrefix}/tasks/${item.id}`,
+									pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 									state: {prevSearch: location.search},
 								}}
 							>
-								Choisir un titre pour cette tâche
+								<fbt
+									project="inyo"
+									desc="task placeholder name"
+								>
+									Choisir un titre pour cette tâche
+								</fbt>
 							</TaskHeadingPlaceholder>
 						)}
 						{item.tags.slice(0, 2).map(tag => (
@@ -368,9 +408,40 @@ function TaskRow({
 							/>
 						)}
 					</TaskHeader>
-					{!noProject
+					{inProject && (
+						<Tooltip
+							label={
+								<fbt project="inyo" desc="Planned day">
+									Jour planifié
+								</fbt>
+							}
+						>
+							<IconAndText>
+								<MaterialIcon
+									style={{
+										marginTop: '5px',
+										marginRight: '5px',
+									}}
+									icon="today"
+									size="tiny"
+								/>
+								{item.scheduledFor ? (
+									moment(item.scheduledFor).fromNow()
+								) : (
+									<>&mdash;</>
+								)}
+							</IconAndText>
+						</Tooltip>
+					)}
+					{!inProject
 						&& (item.section && item.section.project ? (
-							<Tooltip label="Ouvrir le projet">
+							<Tooltip
+								label={
+									<fbt project="inyo" desc="open project">
+										Ouvrir le projet
+									</fbt>
+								}
+							>
 								<ProjectNameWrap>
 									<ProjectName
 										to={`/app/tasks?projectId=${item.section.project.id}`}
@@ -388,9 +459,22 @@ function TaskRow({
 						))}
 					{!noData && (
 						<>
-							{isCustomerTask(item.type) ? (
-								<Tooltip label="Client responsable de la tâche">
-									<CustomerCondensed>
+							{isCustomerTask(item.type) || !item.section ? (
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="client assigned to task"
+										>
+											Client responsable de la tâche
+										</fbt>
+									}
+								>
+									<IconAndTextOptional
+										ref={containerRef}
+										onClick={() => inProject && setEditAssignee(true)
+										}
+									>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
@@ -416,11 +500,40 @@ function TaskRow({
 												&mdash;
 												</span>
 											)}
-									</CustomerCondensed>
+										{inProject && editAssignee && (
+											<Portal>
+												<div
+													ref={dropdownRef}
+													style={dropdownStyle}
+												>
+													<CustomerDropdown
+														assignee={
+															item.linkedCustomer
+														}
+														taskId={item.id}
+													/>
+												</div>
+											</Portal>
+										)}
+									</IconAndTextOptional>
 								</Tooltip>
 							) : (
-								<Tooltip label="Collaborateur responsable de la tâche">
-									<CustomerCondensed>
+								<Tooltip
+									label={
+										<fbt
+											project="inyo"
+											desc="Collaborator assigned to task"
+										>
+											Collaborateur responsable de la
+											tâche
+										</fbt>
+									}
+								>
+									<IconAndTextOptional
+										ref={containerRef}
+										onClick={() => inProject && setEditAssignee(true)
+										}
+									>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
@@ -439,7 +552,24 @@ function TaskRow({
 												&mdash;
 											</span>
 										)}
-									</CustomerCondensed>
+										{inProject && editAssignee && (
+											<Portal>
+												<div
+													ref={dropdownRef}
+													style={dropdownStyle}
+												>
+													<CollaboratorDropdown
+														assignee={item.assignee}
+														taskId={item.id}
+														collaborators={
+															item.section.project
+																.linkedCollaborators
+														}
+													/>
+												</div>
+											</Portal>
+										)}
+									</IconAndTextOptional>
 								</Tooltip>
 							)}
 							<TaskMetas>
@@ -468,7 +598,16 @@ function TaskRow({
 									locationSearch={location.search}
 								/>
 								{item.attachments.length > 0 ? (
-									<Tooltip label="Fichiers joints">
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="attached files"
+											>
+												Fichiers joints
+											</fbt>
+										}
+									>
 										<TaskIconText
 											inactive={false}
 											icon={

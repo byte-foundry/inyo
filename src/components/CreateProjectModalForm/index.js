@@ -4,6 +4,7 @@ import React, {useRef, useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ModalActions} from '../../utils/content';
 import {formatName} from '../../utils/functions';
@@ -16,6 +17,7 @@ import {
 } from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import DateInput from '../DateInput';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
@@ -109,24 +111,36 @@ export default function ({
 	onDismiss,
 	...props
 }) {
+	const {language} = useUserInfos();
 	const [editDeadline, setEditDeadline] = useState(false);
-	const [selectedViewContent, setSelectedViewContent] = useState();
 	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
 		suspend: true,
 	});
 
 	const templateOptions = [
 		{
-			label: 'Projet vierge',
+			label: (
+				<fbt project="inyo" desc="empty project">
+					Projet vierge
+				</fbt>
+			),
 			value: 'EMPTY',
 		},
 		{
-			label: 'Vos projets',
+			label: (
+				<fbt project="inyo" desc="your projects">
+					Vos projets
+				</fbt>
+			),
 			options: optionsProjects,
 		},
 		{
-			label: 'Nos modèles',
-			options: templates.map(template => ({
+			label: (
+				<fbt project="inyo" desc="our templates">
+					Nos modèles
+				</fbt>
+			),
+			options: templates[language].map(template => ({
 				value: template.name,
 				label: template.label,
 			})),
@@ -157,8 +171,16 @@ export default function ({
 					{...props}
 					name="name"
 					type="text"
-					label="Titre du projet"
-					placeholder="Ex: Landing page nouvelle collection, etc."
+					label={
+						<fbt project="inyo" desc="project name label">
+							Titre du projet
+						</fbt>
+					}
+					placeholder={
+						<fbt project="inyo" desc="new project name placeholder">
+							Ex: Landing page nouvelle collection, etc.
+						</fbt>
+					}
 					big
 					noMarginBottom
 				/>
@@ -167,14 +189,16 @@ export default function ({
 				<FormSelect
 					{...props}
 					name="template"
-					label="Modèle"
+					label={
+						<fbt project="inyo" desc="template select">
+							Modèle
+						</fbt>
+					}
 					big
 					classNamePrefix="intercom-tour"
 					options={templateOptions}
-					handleBlur={() => setViewContent(selectedViewContent)}
 					onChange={(option) => {
 						setViewContent(option.value);
-						setSelectedViewContent(option.value);
 					}}
 					components={{
 						Option: createPreviewableOption({
@@ -205,11 +229,22 @@ export default function ({
 					}}
 					handleBlur={() => {}}
 					options={[
-						{label: 'Créer un nouveau client', value: 'CREATE'},
+						{
+							label: (
+								<fbt project="inyo" desc="create a new client">
+									Créer un nouveau client
+								</fbt>
+							),
+							value: 'CREATE',
+						},
 						...optionsCustomers,
 					]}
 					name="customerId"
-					label="Client principal du projet"
+					label={
+						<fbt project="inyo" desc="main customer of the project">
+							Client principal du projet
+						</fbt>
+					}
 					big
 				/>
 			</CreateProjectRow>
@@ -217,15 +252,27 @@ export default function ({
 				<InputLabel>
 					<Label>Deadline</Label>
 					<DeadlineInput>
-						<Tooltip label="Date limite du projet">
+						<Tooltip
+							label={
+								<fbt
+									project="inyo"
+									desc="create project deadline"
+								>
+									Date limite du projet
+								</fbt>
+							}
+						>
 							<DeadlineInputContent
 								onClick={() => setEditDeadline(true)}
 							>
 								{(props.values.deadline
 									&& moment(props.values.deadline).format(
 										'DD/MM/YYYY',
-									))
-									|| 'Aucune date limite'}
+									)) || (
+									<fbt project="inyo" desc="no deadline">
+										Aucune date limite
+									</fbt>
+								)}
 							</DeadlineInputContent>
 						</Tooltip>
 						{editDeadline && (
@@ -251,9 +298,15 @@ export default function ({
 			</CreateProjectRow>
 			<ModalActions>
 				<Button link onClick={onDismiss}>
-					Annuler
+					<fbt project="inyo" desc="cancel create project">
+						Annuler
+					</fbt>
 				</Button>
-				<Button type="submit">Créer le projet</Button>
+				<Button type="submit">
+					<fbt project="inyo" desc="confirm create project">
+						Créer le projet
+					</fbt>
+				</Button>
 			</ModalActions>
 		</CreateProjectGrid>
 	);

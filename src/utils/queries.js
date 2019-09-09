@@ -20,6 +20,9 @@ export const CHECK_LOGIN_USER = gql`
 			company {
 				phone
 			}
+			settings {
+				language
+			}
 		}
 	}
 `;
@@ -93,6 +96,8 @@ export const GET_USER_INFOS = gql`
 			startWorkAt
 			endWorkAt
 			workingDays
+			defaultDailyPrice
+			clientViews
 			timeZone
 			tags {
 				...TagFragment
@@ -438,8 +443,16 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 export const GET_COMMENTS_BY_ITEM = gql`
 	${COMMENT_ON_ITEM_FRAGMENT}
 
-	query getCommentsFromItemId($itemId: ID!, $token: String) {
-		item(id: $itemId, token: $token) {
+	query getCommentsFromItemId(
+		$itemId: ID!
+		$token: String
+		$updateCommentViews: Boolean
+	) {
+		item(
+			id: $itemId
+			token: $token
+			updateCommentViews: $updateCommentViews
+		) {
 			id
 			comments {
 				...CommentOnItemFragment

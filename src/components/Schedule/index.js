@@ -5,6 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import {UNFOCUS_TASK} from '../../utils/mutations';
@@ -13,10 +14,12 @@ import {
 	Button,
 	lightGrey,
 	mediumGrey,
+	P,
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import AssignedToOtherCard from '../AssignedToOtherCard';
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
@@ -26,7 +29,11 @@ import RawPieChart from '../PieChart';
 import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
-import UnitDisplay from '../UnitDisplay';
+import {
+	UnitAvailableDisplay,
+	UnitOvertimeDisplay,
+	UnitWorkedDisplay,
+} from '../UnitDisplay';
 
 const Container = styled('div')`
 	margin-top: 3rem;
@@ -39,6 +46,7 @@ const Week = styled('div')`
 	justify-content: center;
 	border-radius: 8px;
 	background-color: ${lightGrey};
+	min-height: 180px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
 		flex-flow: column;
@@ -149,6 +157,18 @@ const PieChart = styled(RawPieChart)`
 	margin-left: 0;
 `;
 
+const EmptyWeekBanner = styled(P)`
+	text-align: center;
+	border-radius: 8px;
+	background-color: rgba(80, 32, 238, 0.1);
+	padding: 1rem;
+	position: absolute;
+	align-self: center;
+	border: 2px dashed ${primaryPurple};
+	color: ${primaryPurple};
+	pointer-events: none;
+`;
+
 const DraggableTaskCard = ({
 	id, index, scheduledFor, onMove, ...rest
 }) => {
@@ -243,7 +263,9 @@ const Schedule = ({
 	fullWeek,
 	onMoveTask,
 	workingTime = 8,
+	assistantName,
 }) => {
+	const {language} = useUserInfos();
 	const [, setRefreshState] = useState(new Date().toJSON());
 
 	const startDay = moment(
@@ -267,6 +289,8 @@ const Schedule = ({
 		return () => clearInterval(id);
 	});
 
+	const isWeekEmpty = weekdays.every(day => day.tasks.length === 0);
+
 	return (
 		<Container>
 			<ScheduleNav>
@@ -278,7 +302,9 @@ const Schedule = ({
 					)
 					}
 				>
-					Aujourd'hui
+					<fbt project="inyo" desc="notification message">
+						Aujourd'hui
+					</fbt>
 				</Button>
 				<IconButton
 					icon="navigate_before"
@@ -291,7 +317,14 @@ const Schedule = ({
 					)
 					}
 				/>
-				<ScheduleNavInfo>Sem. {startDay.week()}</ScheduleNavInfo>
+				<ScheduleNavInfo>
+					<fbt project="inyo" desc="notification message">
+						Sem.{' '}
+						<fbt:param name="weekNumber">
+							{startDay.week()}
+						</fbt:param>
+					</fbt>
+				</ScheduleNavInfo>
 				<IconButton
 					icon="navigate_next"
 					size="tiny"
@@ -343,13 +376,7 @@ const Schedule = ({
 							<DayInfos>
 								<PieChart value={timeSpent} />
 								<p>
-									<UnitDisplay
-										unit={timeSpent}
-										singularF={' travaillée'}
-										pluralF={' travaillées'}
-										singularM={' travaillé'}
-										pluralM={' travaillés'}
-									/>
+									<UnitWorkedDisplay unit={timeSpent} />
 								</p>
 							</DayInfos>
 						);
@@ -359,11 +386,7 @@ const Schedule = ({
 							<DayInfos>
 								<PieChart value={1 - timeLeft} />
 								<p>
-									<UnitDisplay
-										unit={timeLeft}
-										singular=" encore disponible"
-										plural=" encore disponibles"
-									/>
+									<UnitAvailableDisplay unit={timeLeft} />
 								</p>
 							</DayInfos>
 						);
@@ -373,11 +396,7 @@ const Schedule = ({
 							<DayInfos>
 								<PieChart value={1 - timeLeft} />
 								<p>
-									<UnitDisplay
-										unit={-timeLeft}
-										singular=" supplémentaire"
-										plural=" supplémentaires"
-									/>
+									<UnitOvertimeDisplay unit={-timeLeft} />
 								</p>
 							</DayInfos>
 						);
@@ -397,8 +416,13 @@ const Schedule = ({
 									/>
 								</Icon>
 								<p>
-									Ajoutez des durées à ces tâches pour qu'Inyo
-									vous aide à gérer votre temps.
+									<fbt
+										project="inyo"
+										desc="Add task duration to get info"
+									>
+										Ajoutez des durées à ces tâches pour
+										qu'Inyo vous aide à gérer votre temps.
+									</fbt>
 								</p>
 							</DayInfos>
 						);
@@ -414,7 +438,7 @@ const Schedule = ({
 							>
 								{day.momentDate
 									.toDate()
-									.toLocaleDateString('default', {
+									.toLocaleDateString(language, {
 										weekday: 'short',
 										day: 'numeric',
 										month: moment().isSame(
@@ -501,6 +525,18 @@ const Schedule = ({
 						</Day>
 					);
 				})}
+				{isWeekEmpty && (
+					<EmptyWeekBanner>
+						<fbt desc="Banner displayed when the dashboard schedule is empty">
+							Glisser des tâches dans le calendrier pour
+							programmer vos journées et demander à{' '}
+							<fbt:param name="assistantName">
+								{assistantName}
+							</fbt:param>{' '}
+							de s'assurer du bon déroulement de votre planning.
+						</fbt>
+					</EmptyWeekBanner>
+				)}
 			</Week>
 		</Container>
 	);

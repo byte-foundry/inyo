@@ -1,6 +1,7 @@
 import styled from '@emotion/styled/macro';
 import React, {memo} from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import IllusBackground from '../../utils/images/empty-tasks-background.svg';
 import IllusFigure from '../../utils/images/empty-tasks-illus.svg';
@@ -54,27 +55,60 @@ function TasksList({
 					<IllusFigureContainer fig={IllusFigure} />
 					{hasFilteredItems ? (
 						<IllusText>
-							<P>Aucune tâche ne correspond à ses critères.</P>
+							<P>
+								<fbt
+									project="inyo"
+									desc="no filtered task message"
+								>
+									Aucune tâche ne correspond à ses critères.
+								</fbt>
+							</P>
 						</IllusText>
 					) : (
 						<IllusText>
-							<P>Aucune tâche à faire pour le moment.</P>
-							<P>
-								Dites-nous ce que{' '}
-								<Tooltip label="Les tâches violettes sont les tâches que vous prévoyez de faire">
-									<UserSpan>vous</UserSpan>
-								</Tooltip>{' '}
-								souhaitez faire aujourd'hui ou affectez des
-								tâches à{' '}
-								<Tooltip label="Les tâches roses sont les tâches qui peuvent déclencher des notifications pour votre client">
-									<CustomerSpan>votre client</CustomerSpan>
-								</Tooltip>
-								.
-							</P>
-							<P>
-								Cliquez sur l'icône pour choisir un type de
-								tâche.
-							</P>
+							<fbt project="inyo" desc="no task at all message">
+								<P>Aucune tâche à faire pour le moment.</P>
+								<P>
+									Dites-nous ce que{' '}
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												Les tâches violettes sont les
+												tâches que vous prévoyez de
+												faire
+											</fbt>
+										}
+									>
+										<UserSpan>vous</UserSpan>
+									</Tooltip>{' '}
+									souhaitez faire aujourd'hui ou affectez des
+									tâches à{' '}
+									<Tooltip
+										label={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												Les tâches roses sont les tâches
+												qui peuvent déclencher des
+												notifications pour votre client
+											</fbt>
+										}
+									>
+										<CustomerSpan>
+											votre client
+										</CustomerSpan>
+									</Tooltip>
+									.
+								</P>
+								<P>
+									Cliquez sur l'icône pour choisir un type de
+									tâche.
+								</P>
+							</fbt>
 						</IllusText>
 					)}
 				</IllusContainer>

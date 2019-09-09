@@ -1,6 +1,7 @@
 import React from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {formatName} from '../../utils/functions';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {ArianneElem} from '../ArianneThread';
@@ -18,7 +19,17 @@ const CustomersDropdown = ({creatable, ...props}) => {
 	}));
 
 	if (creatable) {
-		customers.unshift({id: 'CREATE', name: 'Créer un nouveau client'});
+		customers.unshift({
+			id: 'CREATE',
+			name: (
+				<fbt
+					project="inyo"
+					desc="customer dropdown create new customer"
+				>
+					Créer un nouveau client
+				</fbt>
+			),
+		});
 	}
 
 	return <ArianneElem list={customers} {...props} />;

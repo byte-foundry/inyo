@@ -24,6 +24,23 @@ function FormSelect({
 	onChange,
 	...rest
 }) {
+	let value;
+
+	options.forEach((option) => {
+		if (option.options) {
+			const matchingOption = option.options.find(
+				suboption => suboption.value === values[name],
+			);
+
+			if (matchingOption) {
+				value = matchingOption;
+			}
+		}
+		else if (option.value === values[name]) {
+			value = option;
+		}
+	});
+
 	return (
 		<FormSelectMain
 			inline={inline}
@@ -54,9 +71,7 @@ function FormSelect({
 							handleBlur(...args);
 						}}
 						name={name}
-						value={options.find(
-							option => option.value === values[name],
-						)}
+						value={value}
 						error={errors[name] && touched[name]}
 						options={options}
 						{...rest}

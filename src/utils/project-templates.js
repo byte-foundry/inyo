@@ -303,7 +303,7 @@ export const templates = {
 						{
 							name: '30% deposit payment',
 							unit: 0,
-						tags: ['Admin'],
+							tags: ['Admin'],
 							description: '',
 							type: 'INVOICE',
 						},
@@ -320,7 +320,7 @@ export const templates = {
 						{
 							name: 'Requirements validation',
 							unit: 0,
-						tags: ['Important'],
+							tags: ['Important'],
 							description: '',
 							type: 'CUSTOMER',
 						},
@@ -343,7 +343,7 @@ export const templates = {
 						{
 							name: 'Wireframe validation',
 							unit: 0.5,
-						tags: ['Important'],
+							tags: ['Important'],
 							description:
 								'1 back-and-forth based on feedback from the client',
 							type: 'CUSTOMER',
@@ -366,7 +366,7 @@ export const templates = {
 						},
 						{
 							name: 'Artistic direction validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 1,
 							description:
 								'2 back-and-forth base on feedback from the client accounted for',
@@ -419,7 +419,7 @@ export const templates = {
 						},
 						{
 							name: 'Final validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -447,7 +447,7 @@ export const templates = {
 						},
 						{
 							name: 'Invoice payment',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -465,14 +465,14 @@ export const templates = {
 					items: [
 						{
 							name: 'Launch meeting',
-						tags: ['Meeting'],
+							tags: ['Meeting'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: '30% deposit payment',
 							unit: 0,
-						tags: ['Admin'],
+							tags: ['Admin'],
 							description: '',
 							type: 'INVOICE',
 						},
@@ -488,7 +488,7 @@ export const templates = {
 						},
 						{
 							name: 'Requirements validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -510,7 +510,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation of one of the lead',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -523,7 +523,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation of the proposition',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 1,
 							description:
 								'2 back-and-forths based on feedback from the client accounted for',
@@ -553,7 +553,7 @@ export const templates = {
 						},
 						{
 							name: 'Invoice payment',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -571,13 +571,13 @@ export const templates = {
 					items: [
 						{
 							name: 'Launch meeting',
-						tags: ['Rdv'],
+							tags: ['Rdv'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: '30% deposit payment',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -594,7 +594,7 @@ export const templates = {
 						},
 						{
 							name: 'Requirements validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -616,7 +616,7 @@ export const templates = {
 						},
 						{
 							name: 'Storyboard validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							type: 'CUSTOMER',
 						},
@@ -627,7 +627,7 @@ export const templates = {
 						},
 						{
 							name: 'Detailed storyboard validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0.75,
 							description:
 								'2 back-and-forths based on client feedback are accounted for',
@@ -646,7 +646,7 @@ export const templates = {
 						},
 						{
 							name: 'Key frames composition and style validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 1,
 							description:
 								'2 back-and-forths based on client feedback are accounted for',
@@ -659,7 +659,7 @@ export const templates = {
 						},
 						{
 							name: 'Animation validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0.5,
 							description:
 								'1 back-and-forth based on client feedback is accounted for',
@@ -687,7 +687,7 @@ export const templates = {
 						},
 						{
 							name: 'Edit validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0.25,
 							description:
 								'Deliverable: 1 .mp4 SD file\n\n1 back-and-forth based on client feedback is accounted for',
@@ -717,13 +717,13 @@ export const templates = {
 					items: [
 						{
 							name: 'Launch meeting',
-						tags: ['Rdv'],
+							tags: ['Rdv'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: '30% deposit payment',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -745,7 +745,7 @@ export const templates = {
 					items: [
 						{
 							name: 'Invoice payment',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1059,13 +1059,13 @@ export const templates = {
 					items: [
 						{
 							name: 'Réunion de lancement',
-						tags: ['Rdv'],
+							tags: ['Rdv'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: 'Paiement acompte de 30%',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1083,7 +1083,7 @@ export const templates = {
 						{
 							name: 'Validation du cahier des charges',
 							unit: 0,
-						tags: ['Important'],
+							tags: ['Important'],
 							description: '',
 							type: 'CUSTOMER',
 						},
@@ -1106,7 +1106,7 @@ export const templates = {
 						{
 							name: 'Validation du wireframe des sections',
 							unit: 0.5,
-						tags: ['Important'],
+							tags: ['Important'],
 							description:
 								'1 aller-retour corrections est prévu dans la proposition commerciale',
 							type: 'CUSTOMER',
@@ -1131,7 +1131,7 @@ export const templates = {
 						{
 							name: 'Validation de la direction artistique',
 							unit: 1,
-						tags: ['Important'],
+							tags: ['Important'],
 							description:
 								'2 allers-retours corrections sont prévus dans la proposition commerciale',
 							type: 'CUSTOMER',
@@ -1185,7 +1185,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation finale de la landing page',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -1214,7 +1214,7 @@ export const templates = {
 						},
 						{
 							name: 'Paiement facture',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1232,13 +1232,13 @@ export const templates = {
 					items: [
 						{
 							name: 'Réunion de lancement',
-						tags: ['Rdv'],
+							tags: ['Rdv'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: 'Paiement acompte de 30%',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1256,7 +1256,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation du cahier des charges',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -1278,7 +1278,7 @@ export const templates = {
 						},
 						{
 							name: "Validation d'un axe créatif",
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description: '',
 							type: 'CUSTOMER',
@@ -1290,7 +1290,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 1,
 							description:
 								'2 allers-retours corrections sont prévus dans la proposition commerciale',
@@ -1321,7 +1321,7 @@ export const templates = {
 						},
 						{
 							name: 'Paiement facture',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1339,13 +1339,13 @@ export const templates = {
 					items: [
 						{
 							name: 'Réunion de lancement',
-						tags: ['Rdv'],
+							tags: ['Rdv'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: 'Paiement acompte de 30%',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1363,7 +1363,7 @@ export const templates = {
 						{
 							name: 'Validation du cahier des charges',
 							unit: 0,
-						tags: ['Important'],
+							tags: ['Important'],
 							description: '',
 							type: 'CUSTOMER',
 						},
@@ -1384,7 +1384,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation du storyboard crayonné',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0,
 							description:
 								'Nous cherchons à valider ici les grandes étapes et plans principaux du scenario',
@@ -1397,7 +1397,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation du storyboard détaillé',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0.75,
 							description:
 								'2 allers-retours corrections sont prévus dans la proposition commerciale',
@@ -1415,7 +1415,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation du style et des images clefs',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 1,
 							description:
 								'2 allers-retours corrections sont prévus dans la proposition commerciale',
@@ -1428,7 +1428,7 @@ export const templates = {
 						},
 						{
 							name: 'Validation de l’animation',
-						tags: ['Important'],
+							tags: ['Important'],
 							unit: 0.5,
 							description:
 								'1 aller-retour est prévu dans la proposition commerciale',
@@ -1460,7 +1460,7 @@ export const templates = {
 						{
 							name: 'Validation de l’ensemble du montage',
 							unit: 0.25,
-						tags: ['Important'],
+							tags: ['Important'],
 							description:
 								'Livraison .mp4 BD - 1 allers-retours sont prévus dans la proposition commerciale',
 							type: 'CUSTOMER',
@@ -1472,7 +1472,7 @@ export const templates = {
 						},
 						{
 							name: 'Paiement facture',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1490,13 +1490,13 @@ export const templates = {
 					items: [
 						{
 							name: 'Réunion de lancement',
-						tags: ['Rdv'],
+							tags: ['Rdv'],
 							unit: 0.5,
 							description: '',
 						},
 						{
 							name: 'Paiement acompte de 30%',
-						tags: ['Admin'],
+							tags: ['Admin'],
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
@@ -1519,7 +1519,7 @@ export const templates = {
 						{
 							name: 'Paiement facture',
 							unit: 0,
-						tags: ['Admin'],
+							tags: ['Admin'],
 							description: '',
 							type: 'INVOICE',
 						},
@@ -1590,7 +1590,7 @@ export const onboardingTemplate = {
 					},
 					{
 						name: '🏆 Donner une note sur 10 à cet onboarding',
-					tags: ['Important'],
+						tags: ['Important'],
 						unit: 0,
 						description:
 							'# Merci 😍\n\nVous voilà paré·e pour maîtriser et organiser l’ensemble de vos projets, personnels comme professionnels. Envoyez un email à Edwige - [edwige@inyo.me](mailto:edwige@inyo.me), votre nouvel *Smart Assistant*, ou commentez cette tâche pour évaluer votre expérience avec Inyo, merci!',
@@ -1607,36 +1607,30 @@ export const onboardingTemplate = {
 				name: 'Pour commencer…',
 				items: [
 					{
-						name: '✌️ Cliquer sur cette tâche!',
+						name: '✌️ Cliquez sur cette tâche!',
 						unit: 0,
 						description:
 							"### Un projet fictif pour vous aider à comprendre le fonctionnement \n\nBrièvement, nous allons voir comment:\n* créer des tâches,\n* créer des projets,\n* modifier les contenus,\n* créer des tâches clients,\n* et d'autres options qui vous seront très utiles!\n\n Cliquez sur *Marquer comme fait* pour valider celle-ci et passer aux suivantes.",
 					},
 					{
-						name: '✅ Créer votre 1ère tâche',
+						name: '✅ Créez et validez votre 1ère tâche',
 						unit: 0,
 						description:
 							"### Un champ de saisie multitâches \n\nLe champ de saisie en haut de la vue principale vous permet de créer de nouvelles tâches, de nouveaux projets et de nouvelles sections.\n\nLorsque vous commencez par un slash '/' vous pouvez choisir parmi les différents types de tâches: tâche personnelle, tâche client, tâche récupération de contenus. Appuyez sur *Tab* pour parcourir les options et pressez *entrée* pour valider.\n\nÀ vous de jouer, créez votre 1ère tâche et marquez celle-ci comme faîte!",
 					},
 					{
 						name:
-							"🙋 Attendre le mail d'accueil par Edwige de Inyo",
+							"🙋 Glissez cette tâche dans le calendrier pour l'activer",
 						unit: 0,
 						description:
-							"### Comment fonctionnent les tâches client? \n\nCette tâche est une tâche attribuée à votre client (couleur rouge), ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. \n\nVous ne raterez plus aucune deadline 🎉\n\n### Edwige?\nCette tâche est attribuée au client 'Client test' et ce sera donc *Edwige de Inyo* qui se chargera de vous répondre!",
+							"### Comment fonctionnent les tâches client? \n\nCette tâche est une tâche attribuée à votre client (couleur rouge), ce qui signifie que vous êtes en attente d'une action de sa part. Inyo va se charger de le relancer automatiquement pour s'assurer que celui-ci s'en charge en temps et en heure. En l’activant, vous verrez les rappels s'afficher dans votre calendrier et vous pouvez à tout moment les annuler. \n\nVous ne raterez plus aucune deadline 🎉\n\n### Edwige?\nCette tâche est attribuée au client 'Client test' et ce sera donc *Edwige de Inyo* qui se chargera de vous répondre!",
 						type: 'CUSTOMER',
 					},
 					{
-						name: '✏️ Ajouter un commentaire',
+						name: '✏️ Ajoutez un commentaire',
 						unit: 0,
 						description:
 							'Vous pouvez commenter une tâche via le champ de texte ci-dessous. Votre client recevra un email le notifiant de votre commentaire et pourra y répondre en accédant à la tâche. Vous serez notifié à votre tour par email. En centralisant tout au même endroit, vous vous évitez des allers-retours entre de multiples canaux pour retrouver des informations.\n\nAjoutez votre 1er commentaire en cliquant ci-dessous.',
-					},
-					{
-						name: '👀 Ouvrir cette tâche et lire la description',
-						unit: 0,
-						description:
-							'Dans chaque tâche vous pourrez ajouter des descriptions, des deadlines, mesurer le temps passé, etc. Cela vous permettra d’avoir une vision claire de vos priorités au jour le jour. \n\n### Astuce!\nLe champ de description utilise les balises *Markdown,* ce qui signifie que vous pouvez ajouter des titres, du bold, des listes, etc. Plus d’informations sur cette [page](https://openclassrooms.com/fr/courses/1304236-redigez-en-markdown).\n\n👀 Modifiez le titre de cette tâche et validez',
 					},
 				],
 			},
@@ -1644,21 +1638,15 @@ export const onboardingTemplate = {
 				name: '…et pour finir',
 				items: [
 					{
-						name: '😎 Compléter son profil',
-						unit: 0,
-						description:
-							'Un profil bien rempli est le meilleur moyen de tirer un maximum de nos outils.\n\nCela nous permettra de régler par exemple les notifications de début et fin de journées pour que définissions au mieux votre programme.\n\nPour remplir votre profil, rendez-vous sur cette [page](https://beta.inyo.me/app/account).',
-					},
-					{
 						name:
-							'🚀 Créer un nouveau projet en modifiant un modèle existant',
+							'🚀 Créez un nouveau projet en modifiant un modèle existant',
 						unit: 0.1,
 						description:
 							"## 🎉🎉🎉 \nVous connaissez à présent les options de base pour créer un projet, il ne vous reste plus qu'à les appliquer! \n\nPour vous aider, nous proposons des modèles prédéfinis car nous savons que la création de projets est toujours une tâche fastidieuse: créez dès maintenant un projet et commencer à gagner du temps!\n\n Pour cela, il vous suffit de taper un titre de projet dans *le champ multitâches* et pressez *la flèche du haut*.\nVous pourrez ensuite créer des tâches ou choisir un modèle pré-rempli.\n\nÀ vous de jouer, créez votre premier projet!",
 					},
 					{
-						name: '🏆 Donner une note sur 10 à cet onboarding',
-					tags: ['Important'],
+						name: '🏆 Donnez une note sur 10 à cet onboarding',
+						tags: ['Important'],
 						unit: 0,
 						description:
 							'# Merci 😍\n\nVous voilà paré·e pour maîtriser et organiser l’ensemble de vos projets, personnels comme professionnels. Envoyez un email à Edwige - [edwige@inyo.me](mailto:edwige@inyo.me), votre nouvel *Smart Assistant*, ou commentez cette tâche pour évaluer votre expérience avec Inyo, merci!',

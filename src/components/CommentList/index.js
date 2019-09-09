@@ -89,6 +89,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 			updateCommentViews: true,
 		},
 		suspend: true,
+		pollInterval: 1000 * 60 * 5,
 	});
 	const [postCommentMutation] = useMutation(POST_COMMENT);
 	const debouncePostComment = useRef(

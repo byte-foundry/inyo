@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
-import moment from 'moment';
 import React, {useCallback, useState} from 'react';
 import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag} from 'react-dnd';
@@ -92,7 +91,10 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = new URLSearchParams(prevSearch || location.search);
 
-	const {data, error} = useQuery(GET_ALL_TASKS, {suspend: true});
+	const {data, error} = useQuery(GET_ALL_TASKS, {
+		suspend: true,
+		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
+	});
 	const {
 		assistantName,
 		workingTime,

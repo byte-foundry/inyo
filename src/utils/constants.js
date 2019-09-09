@@ -380,15 +380,15 @@ export const STRIPE_CONSTANT
 			stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
 			items: {
 				[PLAN_NAMES.LIFE]: {
-					sku: 'sku_FF2rL7Jk5zl0C7',
+					sku: 'sku_FmHtrocbXWvbsS',
 					quantity: 1,
 				},
 				[PLAN_NAMES.MONTHLY]: {
-					plan: 'INYO_MONTHLY',
+					plan: 'INYO_SUB',
 					quantity: 1,
 				},
 				[PLAN_NAMES.YEARLY]: {
-					plan: 'plan_FJQhEIJQnlzriF',
+					plan: 'INYO_YEARLY',
 					quantity: 1,
 				},
 			},
@@ -399,15 +399,15 @@ export const STRIPE_CONSTANT
 			stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
 			items: {
 				[PLAN_NAMES.LIFE]: {
-					sku: 'sku_F9hrygxAJQuSLp',
+					sku: 'sku_FmKQx2r5EisRT8',
 					quantity: 1,
 				},
 				[PLAN_NAMES.MONTHLY]: {
-					plan: 'INYO_MONTHLY',
+					plan: 'INYO_MONTHLY_USD',
 					quantity: 1,
 				},
 				[PLAN_NAMES.YEARLY]: {
-					plan: 'INYO_YEARLY',
+					plan: 'INYO_YEARLY_USD',
 					quantity: 1,
 				},
 			},

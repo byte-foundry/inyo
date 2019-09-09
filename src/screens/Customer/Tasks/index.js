@@ -118,7 +118,11 @@ const Tasks = ({location, match}) => {
 						</fbt>
 					}
 				>
-					<A noHover target="_blank" href="https://inyo.pro">
+					<A
+						noHover
+						target="_blank"
+						href={fbt('https://inyo.pro', 'inyo pro link')}
+					>
 						<Help>?</Help>
 					</A>
 				</Tooltip>

@@ -228,7 +228,10 @@ const Collaborators = () => {
 						value={filter}
 					/>
 					<Actions>
-						<A target="_blank" href="https://inyo.pro">
+						<A
+							target="_blank"
+							href={fbt('https://inyo.pro', 'inyo pro link')}
+						>
 							<fbt project="inyo" desc="present">
 								Présenter Inyo à un collaborateur
 							</fbt>

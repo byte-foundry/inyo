@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import Remarkable from 'remarkable';
+import {Remarkable} from 'remarkable';
+import {linkify} from 'remarkable/linkify';
 
 import {
 	FlexColumn, FlexRow, gray70, gray80,
@@ -28,6 +29,8 @@ const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
 `;
 
+const md = new Remarkable().use(linkify);
+
 function Comment({comment: {text, author, createdAt}}) {
 	return (
 		<CommentMain>
@@ -40,9 +43,7 @@ function Comment({comment: {text, author, createdAt}}) {
 					<CommentText
 						className="content"
 						dangerouslySetInnerHTML={{
-							__html: new Remarkable({linkify: true}).render(
-								text,
-							),
+							__html: md.render(text),
 						}}
 					/>
 				</CommentContent>

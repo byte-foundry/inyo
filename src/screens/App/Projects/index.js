@@ -275,8 +275,10 @@ function Projects({history}) {
 														onboardingTemplate[
 															language
 														].sections,
-												name:
-														'Bienvenue, découvrez votre smart assistant!',
+												name: fbt(
+													'Bienvenue, découvrez votre smart assistant!',
+													'welcome project name',
+												),
 												deadline: deadLineForOnboardingProjet.toISOString(),
 											},
 										});

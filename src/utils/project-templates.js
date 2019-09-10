@@ -1559,7 +1559,7 @@ export const onboardingTemplate = {
 						type: 'CUSTOMER',
 					},
 					{
-						name: '✏️ AAdd a comment',
+						name: '✏️ Add a comment',
 						unit: 0,
 						description:
 							"You can comment by using the text box below. Your client will receive an email and he'll be able to answer it. You'll be in turn notified of the comment. By centralising everything in the same place, You will avoid switching between different app and platform to find the information you need. \n\nAdd your first comment below.",

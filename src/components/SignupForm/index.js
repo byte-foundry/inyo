@@ -100,6 +100,14 @@ const SignupForm = ({from, history, location}) => {
 								password: values.password,
 								firstName: values.firstname,
 								lastName: values.lastname,
+								settings: {
+									language:
+										navigator
+										&& navigator.language
+										&& navigator.language.includes('fr')
+											? 'fr'
+											: 'en',
+								},
 								referrer,
 							},
 						});

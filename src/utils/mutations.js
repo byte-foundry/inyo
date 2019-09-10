@@ -37,6 +37,7 @@ export const SIGNUP = gql`
 		$firstName: String!
 		$lastName: String!
 		$referrer: String
+		$settings: SettingsInput!
 	) {
 		signup(
 			email: $email
@@ -44,6 +45,7 @@ export const SIGNUP = gql`
 			firstName: $firstName
 			lastName: $lastName
 			referrer: $referrer
+			settings: $settings
 		) {
 			token
 			user {
@@ -52,6 +54,9 @@ export const SIGNUP = gql`
 				hmacIntercomId
 				firstName
 				lastName
+				settings {
+					language
+				}
 				company {
 					phone
 				}

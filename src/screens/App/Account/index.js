@@ -320,13 +320,19 @@ const Account = ({location}) => {
 						<ProfileSection>
 							<Illus src={logoutIllus} />
 							<UnsubscribeButton
-								href="mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
+								href={fbt(
+									"mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo.",
+									'unregister',
+								)}
 								onClick={(e) => {
 									if (intercomLoaded) {
 										e.preventDefault();
 										window.Intercom(
 											'showNewMessage',
-											"Bonjour, je souhaiterai me désinscrire d'Inyo.",
+											fbt(
+												"Bonjour, je souhaiterai me désinscrire d'Inyo.",
+												'unregister intercom',
+											),
 										);
 									}
 								}}

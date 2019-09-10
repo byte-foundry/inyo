@@ -5121,6 +5121,26 @@
     }
    ]
   },
+  "sWe9A61u1VOm3wqRysoERQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "mailto:contact@inyo.me?subject=Désinscription&body=Hello, I'd like to delete my inyo account.",
+     "variations": {}
+    }
+   ]
+  },
+  "yNm4CzziAqYVtRCzykalPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello, I'd like to delete my inyo account.",
+     "variations": {}
+    }
+   ]
+  },
   "mPzERUHPGyQqbs+vT+dw2A==": {
    "tokens": [],
    "types": [],

@@ -356,10 +356,7 @@
 		"35z49C": "Add the task to today's workload",
 		"Fzgrh": "Task's client",
 		"T8zt7": "Remaining days to start the task",
-		"3eyKtq": {
-			"*": "{workedDays} {workedDaysText} days",
-			"_1": "{workedDays} 1 day"
-		},
+		"3sAuHF": {"*": "{workedDaysCount} day", "_1": "1 day"},
 		"3nuXv": "Attached files",
 		"2ZQrur": {"*": "{attachedFilesLength} files", "_1": "1 file"},
 		"1dQQV2": "Link to a project",

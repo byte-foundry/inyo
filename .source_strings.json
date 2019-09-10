@@ -5512,25 +5512,25 @@
   },
   {
    "hashToText": {
-    "ccco5PNdevget3/uhxCPqQ==": "{workedDays} {workedDaysText} jours",
-    "aOjE6JyG7zXWWPLzq9HPhg==": "{workedDays} 1 jour"
+    "7aPb5RwpRbrTfYLBK+eYGQ==": "{workedDaysCount} jours",
+    "7/GySxYNgNPrturwDnUUfg==": "1 jour"
    },
    "filepath": "src/components/TaskDueDate/index.js",
    "line_beg": 107,
    "col_beg": 10,
-   "line_end": 134,
+   "line_end": 130,
    "col_end": 16,
    "type": "table",
    "desc": "notification message",
    "project": "inyo",
    "jsfbt": {
     "t": {
-     "*": "{workedDays} {workedDaysText} jours",
-     "_1": "{workedDays} 1 jour"
+     "*": "{workedDaysCount} jours",
+     "_1": "1 jour"
     },
     "m": [
      {
-      "token": "workedDaysText",
+      "token": "workedDaysCount",
       "type": 2,
       "singular": true
      }

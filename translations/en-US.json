@@ -3541,22 +3541,22 @@
     }
    ]
   },
-  "ccco5PNdevget3/uhxCPqQ==": {
+  "7aPb5RwpRbrTfYLBK+eYGQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{workedDays} {workedDaysText} days",
+     "translation": "{workedDaysCount} day",
      "variations": {}
     }
    ]
   },
-  "aOjE6JyG7zXWWPLzq9HPhg==": {
+  "7/GySxYNgNPrturwDnUUfg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{workedDays} 1 day",
+     "translation": "1 day",
      "variations": {}
     }
    ]

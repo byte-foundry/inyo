@@ -8597,6 +8597,20 @@
   },
   {
    "hashToText": {
+    "bcV+E8flT8GlqDIDAHHxQg==": "Bienvenue, découvrez votre smart assistant!"
+   },
+   "filepath": "src/screens/App/Projects/index.js",
+   "line_beg": 279,
+   "col_beg": 14,
+   "line_end": 279,
+   "col_end": 88,
+   "type": "text",
+   "desc": "welcome project name",
+   "project": "",
+   "jsfbt": "Bienvenue, découvrez votre smart assistant!"
+  },
+  {
+   "hashToText": {
     "HPZQVxoBG4OhMWpXoVN9vg==": "Commencer"
    },
    "filepath": "src/screens/App/Projects/index.js",

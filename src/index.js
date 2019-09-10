@@ -49,7 +49,8 @@ const ConditionalContent = React.lazy(() => import('./screens/App/ConditionalCon
 const translations = require('./translatedFbts.json');
 
 init({translations});
-IntlViewerContext.locale = navigator.language;
+IntlViewerContext.locale
+	= navigator && navigator.language.includes('fr') ? 'fr-FR' : 'en-US';
 
 // Setting up locale mostly for react-dates
 moment.locale((navigator && navigator.language) || 'fr-FR');

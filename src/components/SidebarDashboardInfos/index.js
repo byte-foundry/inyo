@@ -133,7 +133,7 @@ const SidebarDashboardInfos = () => {
 						<NoReminders>
 							<img alt="" src={noRemindersIllus} />
 							<fbt project="inyo" desc="notification message">
-								Aucune tâches client n’ont été activées pour le
+								Aucune tâche client n’ont été activées pour le
 								moment
 							</fbt>
 						</NoReminders>

@@ -1954,9 +1954,9 @@
     "4uWwWAEkjeee+uOwaU7O7Q==": "Définit s'il y a des actions automatiques"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 767,
+   "line_beg": 768,
    "col_beg": 6,
-   "line_end": 769,
+   "line_end": 770,
    "col_end": 12,
    "type": "text",
    "desc": "type of the task tooltip",
@@ -1968,9 +1968,9 @@
     "WlT9SCoRXpZo1WsKLdRoNA==": "Type de tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 775,
+   "line_beg": 776,
    "col_beg": 7,
-   "line_end": 777,
+   "line_end": 778,
    "col_end": 13,
    "type": "text",
    "desc": "task type",
@@ -1982,9 +1982,9 @@
     "6F6qiWW3cYSOf+pclVSw7g==": "Tag de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 785,
+   "line_beg": 786,
    "col_beg": 7,
-   "line_end": 787,
+   "line_end": 788,
    "col_end": 13,
    "type": "text",
    "desc": "task's tag",
@@ -1996,9 +1996,9 @@
     "3Dfj3RxIOd3jiFRkj5VOfQ==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 797,
+   "line_beg": 798,
    "col_beg": 9,
-   "line_end": 802,
+   "line_end": 803,
    "col_end": 15,
    "type": "text",
    "desc": "add or create tag",
@@ -2010,9 +2010,9 @@
     "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 854,
+   "line_beg": 855,
    "col_beg": 8,
-   "line_end": 856,
+   "line_end": 857,
    "col_end": 14,
    "type": "text",
    "desc": "Add a description",
@@ -2024,9 +2024,9 @@
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 889,
+   "line_beg": 890,
    "col_beg": 7,
-   "line_end": 915,
+   "line_end": 916,
    "col_end": 13,
    "type": "text",
    "desc": "actions of edwige",
@@ -2038,9 +2038,9 @@
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 895,
+   "line_beg": 896,
    "col_beg": 11,
-   "line_end": 900,
+   "line_end": 901,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2052,9 +2052,9 @@
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 903,
+   "line_beg": 904,
    "col_beg": 11,
-   "line_end": 908,
+   "line_end": 909,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2066,9 +2066,9 @@
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 967,
+   "line_beg": 968,
    "col_beg": 4,
-   "line_end": 969,
+   "line_end": 970,
    "col_end": 10,
    "type": "text",
    "desc": "Attached files",
@@ -2080,9 +2080,9 @@
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1059,
+   "line_beg": 1060,
    "col_beg": 4,
-   "line_end": 1061,
+   "line_end": 1062,
    "col_end": 10,
    "type": "text",
    "desc": "Comments",
@@ -2094,9 +2094,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1079,
+   "line_beg": 1080,
    "col_beg": 9,
-   "line_end": 1081,
+   "line_end": 1082,
    "col_end": 15,
    "type": "text",
    "desc": "cancel",
@@ -2108,9 +2108,9 @@
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1091,
+   "line_beg": 1092,
    "col_beg": 9,
-   "line_end": 1093,
+   "line_end": 1094,
    "col_end": 15,
    "type": "text",
    "desc": "confirm deletion",
@@ -2122,9 +2122,9 @@
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1103,
+   "line_beg": 1104,
    "col_beg": 9,
-   "line_end": 1105,
+   "line_end": 1106,
    "col_end": 15,
    "type": "text",
    "desc": "delete task",
@@ -2136,9 +2136,9 @@
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1121,
+   "line_beg": 1122,
    "col_beg": 6,
-   "line_end": 1123,
+   "line_end": 1124,
    "col_end": 12,
    "type": "text",
    "desc": "notification message",
@@ -4309,7 +4309,7 @@
   },
   {
    "hashToText": {
-    "7AjDpNETd4pcpVcI4F37Yg==": "Aucune tâches client n’ont été activées pour le moment"
+    "2nmwP0kB4A+tUM2H0+eWMA==": "Aucune tâche client n’ont été activées pour le moment"
    },
    "filepath": "src/components/SidebarDashboardInfos/index.js",
    "line_beg": 135,
@@ -4319,7 +4319,7 @@
    "type": "text",
    "desc": "notification message",
    "project": "inyo",
-   "jsfbt": "Aucune tâches client n’ont été activées pour le moment"
+   "jsfbt": "Aucune tâche client n’ont été activées pour le moment"
   },
   {
    "hashToText": {
@@ -5518,7 +5518,7 @@
    "filepath": "src/components/TaskDueDate/index.js",
    "line_beg": 107,
    "col_beg": 10,
-   "line_end": 130,
+   "line_end": 132,
    "col_end": 16,
    "type": "table",
    "desc": "notification message",

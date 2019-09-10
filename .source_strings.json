@@ -2068,8 +2068,8 @@
    "filepath": "src/components/ItemView/index.js",
    "line_beg": 954,
    "col_beg": 8,
-   "line_end": 963,
-   "col_end": 13,
+   "line_end": 971,
+   "col_end": 14,
    "type": "text",
    "desc": "charger",
    "project": "inyo",
@@ -2080,9 +2080,9 @@
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 969,
+   "line_beg": 977,
    "col_beg": 4,
-   "line_end": 971,
+   "line_end": 979,
    "col_end": 10,
    "type": "text",
    "desc": "Attached files",
@@ -2094,9 +2094,9 @@
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1061,
+   "line_beg": 1069,
    "col_beg": 4,
-   "line_end": 1063,
+   "line_end": 1071,
    "col_end": 10,
    "type": "text",
    "desc": "Comments",
@@ -2108,9 +2108,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1081,
+   "line_beg": 1089,
    "col_beg": 9,
-   "line_end": 1083,
+   "line_end": 1091,
    "col_end": 15,
    "type": "text",
    "desc": "cancel",
@@ -2122,9 +2122,9 @@
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1093,
+   "line_beg": 1101,
    "col_beg": 9,
-   "line_end": 1095,
+   "line_end": 1103,
    "col_end": 15,
    "type": "text",
    "desc": "confirm deletion",
@@ -2136,9 +2136,9 @@
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1105,
+   "line_beg": 1113,
    "col_beg": 9,
-   "line_end": 1107,
+   "line_end": 1115,
    "col_end": 15,
    "type": "text",
    "desc": "delete task",
@@ -2150,9 +2150,9 @@
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1123,
+   "line_beg": 1131,
    "col_beg": 6,
-   "line_end": 1125,
+   "line_end": 1133,
    "col_end": 12,
    "type": "text",
    "desc": "notification message",
@@ -8034,6 +8034,34 @@
    "desc": "your account",
    "project": "inyo",
    "jsfbt": "Votre compte"
+  },
+  {
+   "hashToText": {
+    "sWe9A61u1VOm3wqRysoERQ==": "mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 323,
+   "col_beg": 14,
+   "line_end": 323,
+   "col_end": 132,
+   "type": "text",
+   "desc": "unregister",
+   "project": "",
+   "jsfbt": "mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
+  },
+  {
+   "hashToText": {
+    "yNm4CzziAqYVtRCzykalPA==": "Bonjour, je souhaiterai me désinscrire d'Inyo."
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 329,
+   "col_beg": 11,
+   "line_end": 329,
+   "col_end": 87,
+   "type": "text",
+   "desc": "unregister intercom",
+   "project": "",
+   "jsfbt": "Bonjour, je souhaiterai me désinscrire d'Inyo."
   },
   {
    "hashToText": {

@@ -78,7 +78,7 @@ const UserAssistantForm = ({defaultAssistantName, defaultLanguage, done}) => {
 						},
 					});
 
-					window.Intercomwindow.Intercom('update', {
+					window.Intercom('update', {
 						'assistant-name': values.assistantName,
 						language: values.language,
 					});

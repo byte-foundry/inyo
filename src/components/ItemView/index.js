@@ -961,14 +961,24 @@ const Item = ({
 								}}
 								icon="✓"
 							>
-								Charger {me.settings.assistantName} de faire
-								réaliser cette tâche à{' '}
-								{item.linkedCustomer.name} (
-								{formatName(
-									item.linkedCustomer.firstName,
-									item.linkedCustomer.lastName,
-								)}
-								)
+								<fbt project="inyo" desc="charger">
+									Charger{' '}
+									<fbt:param name="assistantName">
+										{me.settings.assistantName}
+									</fbt:param>{' '}
+									de faire réaliser cette tâche à{' '}
+									<fbt:param name="customerName">
+										{item.linkedCustomer.name}
+									</fbt:param>{' '}
+									(
+									<fbt:param name="contactName">
+										{formatName(
+											item.linkedCustomer.firstName,
+											item.linkedCustomer.lastName,
+										)}
+									</fbt:param>
+									)
+								</fbt>
 							</TaskButton>
 						)}
 					</>

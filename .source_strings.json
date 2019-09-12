@@ -2108,12 +2108,26 @@
   },
   {
    "hashToText": {
+    "x6FPGl0U1x0YCSNscEvLPQ==": "Charger {assistantName} de faire réaliser cette tâche à {customerName} ( {contactName} )"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 964,
+   "col_beg": 8,
+   "line_end": 981,
+   "col_end": 14,
+   "type": "text",
+   "desc": "charger",
+   "project": "inyo",
+   "jsfbt": "Charger {assistantName} de faire réaliser cette tâche à {customerName} ( {contactName} )"
+  },
+  {
+   "hashToText": {
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 977,
+   "line_beg": 987,
    "col_beg": 4,
-   "line_end": 979,
+   "line_end": 989,
    "col_end": 10,
    "type": "text",
    "desc": "Attached files",
@@ -2125,9 +2139,9 @@
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1069,
+   "line_beg": 1079,
    "col_beg": 4,
-   "line_end": 1071,
+   "line_end": 1081,
    "col_end": 10,
    "type": "text",
    "desc": "Comments",
@@ -2139,9 +2153,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1089,
+   "line_beg": 1099,
    "col_beg": 9,
-   "line_end": 1091,
+   "line_end": 1101,
    "col_end": 15,
    "type": "text",
    "desc": "cancel",
@@ -2153,9 +2167,9 @@
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1101,
+   "line_beg": 1111,
    "col_beg": 9,
-   "line_end": 1103,
+   "line_end": 1113,
    "col_end": 15,
    "type": "text",
    "desc": "confirm deletion",
@@ -2167,9 +2181,9 @@
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1113,
+   "line_beg": 1123,
    "col_beg": 9,
-   "line_end": 1115,
+   "line_end": 1125,
    "col_end": 15,
    "type": "text",
    "desc": "delete task",
@@ -2181,9 +2195,9 @@
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1131,
+   "line_beg": 1141,
    "col_beg": 6,
-   "line_end": 1133,
+   "line_end": 1143,
    "col_end": 12,
    "type": "text",
    "desc": "notification message",
@@ -6636,10 +6650,10 @@
     "8iRvDkCJ8f4b4IcLK+EptA==": "1 heure"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 20,
-   "col_beg": 3,
-   "line_end": 24,
-   "col_end": 9,
+   "line_beg": 19,
+   "col_beg": 2,
+   "line_end": 29,
+   "col_end": 8,
    "type": "table",
    "desc": "hours",
    "project": "inyo",
@@ -6663,10 +6677,10 @@
     "XD+zCvEq1JDoojLf0w41Mw==": "1 jour"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 26,
-   "col_beg": 3,
-   "line_end": 30,
-   "col_end": 9,
+   "line_beg": 31,
+   "col_beg": 2,
+   "line_end": 41,
+   "col_end": 8,
    "type": "table",
    "desc": "days",
    "project": "inyo",
@@ -6690,9 +6704,9 @@
     "j+BJwT4aXGrolwB4Xvy4EQ==": " travaillée"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 39,
+   "line_beg": 49,
    "col_beg": 3,
-   "line_end": 47,
+   "line_end": 57,
    "col_end": 9,
    "type": "table",
    "desc": "hours",
@@ -6713,9 +6727,9 @@
     "tIZMujl463EtvSJOE81ZXw==": " travaillé"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 49,
+   "line_beg": 59,
    "col_beg": 3,
-   "line_end": 57,
+   "line_end": 67,
    "col_end": 9,
    "type": "table",
    "desc": "hours",
@@ -6736,9 +6750,9 @@
     "QydQ/u+BrtEDDz0iycVSBg==": " encore disponible"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 65,
+   "line_beg": 75,
    "col_beg": 2,
-   "line_end": 73,
+   "line_end": 83,
    "col_end": 8,
    "type": "table",
    "desc": "hours",
@@ -6759,9 +6773,9 @@
     "1NAgDG7zwjGA95mqXUp5uw==": " supplémentaires"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 80,
+   "line_beg": 90,
    "col_beg": 2,
-   "line_end": 88,
+   "line_end": 98,
    "col_end": 8,
    "type": "table",
    "desc": "hours",
@@ -8108,12 +8122,40 @@
   },
   {
    "hashToText": {
+    "sWe9A61u1VOm3wqRysoERQ==": "mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 323,
+   "col_beg": 14,
+   "line_end": 326,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unregister",
+   "project": "",
+   "jsfbt": "mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
+  },
+  {
+   "hashToText": {
+    "yNm4CzziAqYVtRCzykalPA==": "Bonjour, je souhaiterai me désinscrire d'Inyo."
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 332,
+   "col_beg": 11,
+   "line_end": 335,
+   "col_end": 12,
+   "type": "text",
+   "desc": "unregister intercom",
+   "project": "",
+   "jsfbt": "Bonjour, je souhaiterai me désinscrire d'Inyo."
+  },
+  {
+   "hashToText": {
     "mPzERUHPGyQqbs+vT+dw2A==": "Me désinscrire"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 334,
+   "line_beg": 340,
    "col_beg": 8,
-   "line_end": 336,
+   "line_end": 342,
    "col_end": 14,
    "type": "text",
    "desc": "Delete account",
@@ -8125,9 +8167,9 @@
     "ImPMNsKu/b/s/GaXMWPwCA==": "Me déconnecter"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 350,
+   "line_beg": 356,
    "col_beg": 8,
-   "line_end": 352,
+   "line_end": 358,
    "col_end": 14,
    "type": "text",
    "desc": "sign out",

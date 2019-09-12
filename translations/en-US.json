@@ -1421,6 +1421,16 @@
     }
    ]
   },
+  "x6FPGl0U1x0YCSNscEvLPQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Ask {assistantName} to remind {customerName} ( {contactName} ) to complete this task",
+     "variations": {}
+    }
+   ]
+  },
   "lcfH71yKmcYYGee2YJcxUw==": {
    "tokens": [],
    "types": [],
@@ -2116,7 +2126,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Would you take a couple of minutes to help us shape Inyo into your dream application?",
+     "translation": "Could you take a couple of minutes to help us shape Inyo into the application you've always dreamt of?",
      "variations": {}
     }
    ]
@@ -5167,6 +5177,26 @@
    "translations": [
     {
      "translation": "Your assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "sWe9A61u1VOm3wqRysoERQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "mailto:contact@inyo.me?subject=Désinscription&body=Hello, I'd like to delete my inyo account.",
+     "variations": {}
+    }
+   ]
+  },
+  "yNm4CzziAqYVtRCzykalPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello, I'd like to delete my inyo account.",
      "variations": {}
     }
    ]

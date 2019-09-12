@@ -734,11 +734,13 @@ const Item = ({
 										label: item.section.project.name,
 									}
 								}
-								onChange={({value}) => {
+								onChange={(option) => {
 									updateItem({
 										variables: {
 											itemId: item.id,
-											projectId: value,
+											projectId: option
+												? option.value
+												: null,
 										},
 									});
 									setEditProject(false);
@@ -746,6 +748,7 @@ const Item = ({
 								onBlur={() => {
 									setEditProject(false);
 								}}
+								isClearable
 							/>
 						) : (
 							<MetaText

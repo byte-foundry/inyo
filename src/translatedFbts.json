@@ -132,7 +132,7 @@
 		"14GpPu": "Client",
 		"1bozRN": "Task's deadline",
 		"1jwSSj": "Remaining time",
-		"1CysXa": {"*": "days", "_1": " day"},
+		"2noEu2": {"*": "{number} days", "_1": "1 day"},
 		"28tpQY": "Project link to task",
 		"3VWc5i": "Project",
 		"3QOXRK": "Different type of task trigger different actions",

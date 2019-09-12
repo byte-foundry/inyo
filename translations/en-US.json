@@ -1321,22 +1321,22 @@
     }
    ]
   },
-  "ENXtW073cA7/Y7KgQgpvFQ==": {
+  "DZvvIomOZy3YvU48JtSmPA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "days",
+     "translation": "{number} days",
      "variations": {}
     }
    ]
   },
-  "sEvdeEXVh6/VzdRuIg1vDg==": {
+  "WOBjTLFG6qlMucM7PHA/aA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": " day",
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -6767,6 +6767,26 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "ENXtW073cA7/Y7KgQgpvFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "days",
+     "variations": {}
+    }
+   ]
+  },
+  "sEvdeEXVh6/VzdRuIg1vDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": " day",
      "variations": {}
     }
    ]

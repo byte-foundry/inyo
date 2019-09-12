@@ -693,6 +693,7 @@ const Item = ({
 															'days',
 														) - item.unit
 													}
+													showCount="yes"
 													value={
 														+(
 															moment(

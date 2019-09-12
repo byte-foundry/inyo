@@ -15,9 +15,9 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import Tooltip from '../Tooltip';
 import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
@@ -86,6 +86,7 @@ const TimeItTookHeading = styled('h3')`
 `;
 
 const PendingActionsTray = ({projectId}) => {
+	const {id: userId} = useUserInfos();
 	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
 	const [isOpen, setIsOpen] = useState(false);
 	const {
@@ -99,7 +100,8 @@ const PendingActionsTray = ({projectId}) => {
 			&& task.timeItTook === null
 			&& task.status === 'FINISHED'
 			&& (!projectId
-				|| (task.section && task.section.project.id === projectId)),
+				|| (task.section && task.section.project.id === projectId))
+			&& (!task.assignee || task.assignee.id === userId),
 	);
 	const isVisible = pendingTimeItTookTasks.length > 0;
 

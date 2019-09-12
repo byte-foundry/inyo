@@ -13,7 +13,6 @@ import {
 } from '../../utils/new/design-system';
 import DateInput from '../DateInput';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import Tooltip from '../Tooltip';
 
 function TaskDueDate({
@@ -108,8 +107,16 @@ function TaskDueDate({
 											project="inyo"
 											desc="notification message"
 										>
-											<fbt:param name="workedDays">
-												{
+											<fbt:plural
+												name="workedDaysCount"
+												count={
+													moment(dueDate).diff(
+														moment(),
+														'days',
+													) - item.unit
+												}
+												many="jours"
+												value={
 													+(
 														moment(dueDate).diff(
 															moment(),
@@ -117,17 +124,7 @@ function TaskDueDate({
 														) - item.unit
 													).toFixed(2)
 												}
-											</fbt:param>{' '}
-											<fbt:plural
-												name="workedDaysText"
-												count={
-													moment(dueDate).diff(
-														moment(),
-														'days',
-													) - item.unit
-												}
 												showCount="yes"
-												many="jours"
 											>
 												jour
 											</fbt:plural>

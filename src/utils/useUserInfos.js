@@ -11,6 +11,7 @@ export default function useUserInfos() {
 	}
 
 	const {
+		id,
 		startWorkAt,
 		endWorkAt,
 		workingDays,
@@ -32,6 +33,7 @@ export default function useUserInfos() {
 	}
 
 	return {
+		id,
 		startWorkAt,
 		endWorkAt,
 		workingTime,

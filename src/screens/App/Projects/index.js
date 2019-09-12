@@ -412,7 +412,12 @@ function Projects({history}) {
 													/>
 												</TrashButton>
 											</Tooltip>
-											<Tooltip label="Archiver ce projet">
+											<Tooltip
+												label={fbt(
+													'Archiver ce projet',
+													'Archive project button',
+												)}
+											>
 												<ArchiveButton
 													link
 													onClick={(e) => {

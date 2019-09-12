@@ -17,7 +17,6 @@ import {
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import IconButton from '../IconButton';
 import IssuerNameAndAddress from '../IssuerNameAndAddress';
-import Plural from '../Plural';
 import Tooltip from '../Tooltip';
 
 const Aside = styled('aside')`

@@ -2,9 +2,12 @@ import styled from '@emotion/styled';
 import escapeHtml from 'escape-html';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
-import Remarkable from 'remarkable';
+import {Remarkable} from 'remarkable';
+import {linkify} from 'remarkable/linkify';
 
 import {mediumPurple} from '../../utils/new/design-system';
+
+const md = new Remarkable().use(linkify);
 
 const EditableArea = styled('div')`
 	width: 100%;
@@ -77,7 +80,7 @@ const MultilineEditable = ({
 			dangerouslySetInnerHTML={{
 				__html: isEditing
 					? escapeHtml(defaultValue).replace(/\n/g, '<br>')
-					: new Remarkable({linkify: true}).render(defaultValue),
+					: md.render(defaultValue),
 			}}
 			{...rest}
 		/>

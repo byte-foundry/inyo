@@ -171,6 +171,16 @@
     }
    ]
   },
+  "71IsaHOQkQhHdTafaHJM/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Manage tags",
+     "variations": {}
+    }
+   ]
+  },
   "GnXDLOI0hcNOgOYJFIxscQ==": {
    "tokens": [],
    "types": [],
@@ -1211,7 +1221,7 @@
     }
    ]
   },
-  "si/vrssaZZ8obVRLlu/LGQ==": {
+  "p038/T94EO/ejzQvOS1Hqg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -1221,12 +1231,12 @@
     }
    ]
   },
-  "RcD6Kl3RIbKdSaK2IEulLQ==": {
+  "q3mgeZLjbygjxiRUSkrzzg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{timeEstimated} day",
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -1251,7 +1261,7 @@
     }
    ]
   },
-  "u7YTd2C7Ml3qkgMAgNDiHQ==": {
+  "/U17hovEAazDGh01X2uAzQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -1261,12 +1271,12 @@
     }
    ]
   },
-  "fkVXVBffc7QKksvh/IQ26w==": {
+  "xjFoy8C8nGf+c9I/neBmDg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{timeItTook} day",
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -1307,6 +1317,26 @@
    "translations": [
     {
      "translation": "Remaining time",
+     "variations": {}
+    }
+   ]
+  },
+  "DZvvIomOZy3YvU48JtSmPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{number} days",
+     "variations": {}
+    }
+   ]
+  },
+  "WOBjTLFG6qlMucM7PHA/aA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -1806,7 +1836,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "(It will help help us determine which tasks you can do during a day)",
+     "translation": "(It will help us determine which tasks you can do during a day)",
      "variations": {}
     }
    ]
@@ -2841,7 +2871,7 @@
     }
    ]
   },
-  "7AjDpNETd4pcpVcI4F37Yg==": {
+  "2nmwP0kB4A+tUM2H0+eWMA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3011,7 +3041,7 @@
     }
    ]
   },
-  "AtjVa1IeKjBwoEeU+DLbEQ==": {
+  "RZM13r5SmAgDHVgDTxQ+dg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3227,16 +3257,6 @@
    "translations": [
     {
      "translation": "Other",
-     "variations": {}
-    }
-   ]
-  },
-  "71IsaHOQkQhHdTafaHJM/A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Manage tags",
      "variations": {}
     }
    ]
@@ -3551,22 +3571,22 @@
     }
    ]
   },
-  "ccco5PNdevget3/uhxCPqQ==": {
+  "7aPb5RwpRbrTfYLBK+eYGQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{workedDays} {workedDaysText} days",
+     "translation": "{workedDaysCount} day",
      "variations": {}
     }
    ]
   },
-  "aOjE6JyG7zXWWPLzq9HPhg==": {
+  "7/GySxYNgNPrturwDnUUfg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{workedDays} 1 day",
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -4181,6 +4201,26 @@
     }
    ]
   },
+  "I/+U0FDJaxZfARNlKF8sPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "See the {projectsCount} other projects",
+     "variations": {}
+    }
+   ]
+  },
+  "lRXhtoRR9UPNZAQMz+AYjg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "See the other project",
+     "variations": {}
+    }
+   ]
+  },
   "EQjurO3LYr2flJ+mnPDmPw==": {
    "tokens": [],
    "types": [],
@@ -4231,22 +4271,42 @@
     }
    ]
   },
-  "UjPKEfcKm0iqOwG63Z/KeQ==": {
+  "iNblzow8QtbBqC8mRIA05w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": " hour",
+     "translation": "{hours} hours",
      "variations": {}
     }
    ]
   },
-  "lAnttCCjfPCPrV7JDQRmIg==": {
+  "8iRvDkCJ8f4b4IcLK+EptA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": " day",
+     "translation": "1 hour",
+     "variations": {}
+    }
+   ]
+  },
+  "xPGrHu2Z4oAv2r7npa7d1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{days} days",
+     "variations": {}
+    }
+   ]
+  },
+  "XD+zCvEq1JDoojLf0w41Mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -5591,6 +5651,16 @@
     }
    ]
   },
+  "4zs2EHS/+0npxH2UC6vDJA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Archive this project",
+     "variations": {}
+    }
+   ]
+  },
   "XH+IkdgId0X/tzysM17Avg==": {
    "tokens": [],
    "types": [],
@@ -6697,6 +6767,26 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "ENXtW073cA7/Y7KgQgpvFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "days",
+     "variations": {}
+    }
+   ]
+  },
+  "sEvdeEXVh6/VzdRuIg1vDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": " day",
      "variations": {}
     }
    ]

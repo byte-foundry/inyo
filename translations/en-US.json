@@ -4201,7 +4201,7 @@
     }
    ]
   },
-  "rUheyPOz4Hf0DjPCdJcXFA==": {
+  "lRXhtoRR9UPNZAQMz+AYjg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -4261,22 +4261,42 @@
     }
    ]
   },
-  "UjPKEfcKm0iqOwG63Z/KeQ==": {
+  "iNblzow8QtbBqC8mRIA05w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": " hour",
+     "translation": "{hours} hours",
      "variations": {}
     }
    ]
   },
-  "lAnttCCjfPCPrV7JDQRmIg==": {
+  "8iRvDkCJ8f4b4IcLK+EptA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": " day",
+     "translation": "1 hour",
+     "variations": {}
+    }
+   ]
+  },
+  "xPGrHu2Z4oAv2r7npa7d1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{days} days",
+     "variations": {}
+    }
+   ]
+  },
+  "XD+zCvEq1JDoojLf0w41Mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
      "variations": {}
     }
    ]

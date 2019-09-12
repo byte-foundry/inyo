@@ -417,7 +417,7 @@
 		"111u42": "Mark as done",
 		"2MC7S": "Click here if this task is already done",
 		"3RxPrB": "Types of tasks",
-		"3eXqV": {
+		"3OpVMz": {
 			"*": {"*": "See the {projectsCount} other projects"},
 			"_1": {"_1": "See the other project"}
 		},
@@ -426,8 +426,8 @@
 		"aD1t7": "Overestimated time",
 		"1O7P7t": "The trial version will end on {date}",
 		"49tol8": "Switch to premium version",
-		"34YKkd": {"*": "hours", "_1": " hour"},
-		"4EuwW9": {"*": "days", "_1": " day"},
+		"2sGZ4R": {"*": "{hours} hours", "_1": "1 hour"},
+		"2b98be": {"*": "{days} days", "_1": "1 day"},
 		"164XWv": {"*": "worked", "_1": " work"},
 		"4mMGZG": {"*": "worked", "_1": " worked"},
 		"I8dS8": {"*": "still available", "_1": " still available"},

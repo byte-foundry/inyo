@@ -15,23 +15,30 @@ const UnitDisplay = ({unit}) => {
 		unitInHours = true;
 	}
 
-	return (
-		<>
-			{+unitToDisplay.toFixed(2)}{' '}
-			{unitInHours ? (
-				<fbt project="inyo" desc="hours">
-					<fbt:plural name="hour" count={unitToDisplay} many="heures">
-						heure
-					</fbt:plural>
-				</fbt>
-			) : (
-				<fbt project="inyo" desc="days">
-					<fbt:plural name="day" count={unitToDisplay} many="jours">
-						jour
-					</fbt:plural>
-				</fbt>
-			)}
-		</>
+	return unitInHours ? (
+		<fbt project="inyo" desc="hours">
+			<fbt:plural
+				name="hours"
+				count={unitToDisplay}
+				many="heures"
+				value={unitToDisplay.toFixed(2)}
+				showCount="yes"
+			>
+				heure
+			</fbt:plural>
+		</fbt>
+	) : (
+		<fbt project="inyo" desc="days">
+			<fbt:plural
+				name="days"
+				count={unitToDisplay}
+				many="jours"
+				value={unitToDisplay.toFixed(2)}
+				showCount="yes"
+			>
+				jour
+			</fbt:plural>
+		</fbt>
 	);
 };
 

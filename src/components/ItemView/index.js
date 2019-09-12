@@ -455,7 +455,7 @@ const Item = ({
 													count={item.unit}
 													name="timeEstimated"
 													many="jours"
-													value={+item.unit.toFixed(2)}
+													value={item.unit.toFixed(2)}
 													showCount="yes"
 												>
 												jour
@@ -530,9 +530,9 @@ const Item = ({
 													name="timeItTook"
 													many="jours"
 													showCount="yes"
-													value={
-														+item.timeItTook.toFixed(2)
-													}
+													value={item.timeItTook.toFixed(
+														2,
+													)}
 												>
 												jour
 												</fbt:plural>

@@ -6,7 +6,6 @@ import {DayPickerSingleDateController} from 'react-dates';
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
-import Plural from '../Plural';
 
 const TaskDateInput = styled('div')`
 	position: absolute;

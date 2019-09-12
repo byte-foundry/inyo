@@ -39,7 +39,6 @@ import DateInput from '../DateInput';
 import DuplicateProjectButton from '../DuplicateProjectButton';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import RemoveProjectButton from '../RemoveProjectButton';
 import StaticCustomerView from '../StaticCustomerView';
 import Tooltip from '../Tooltip';

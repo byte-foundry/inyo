@@ -18,7 +18,6 @@ import {GET_ALL_TASKS} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import Tooltip from '../Tooltip';
 import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 

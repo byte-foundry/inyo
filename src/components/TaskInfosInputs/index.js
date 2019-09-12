@@ -11,7 +11,6 @@ import {
 	TaskInfosItemLink,
 } from '../../utils/new/design-system';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import TaskCollaboratorList from '../TaskCollaboratorList';
 import TaskComment from '../TaskComment';
 import TaskCustomerInput from '../TaskCustomerInput';

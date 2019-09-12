@@ -51,7 +51,6 @@ import InlineEditable from '../InlineEditable';
 import ItemViewAssigneeInput from '../ItemViewAssigneeInput';
 import MaterialIcon from '../MaterialIcon';
 import MultilineEditable from '../MultilineEditable';
-import Plural from '../Plural';
 import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
 import TaskActivationHeader from '../TaskActivationHeader';
@@ -452,13 +451,12 @@ const Item = ({
 												project="inyo"
 												desc="time estimated item view"
 											>
-												<fbt:param name="timeEstimated">
-													{+item.unit.toFixed(2)}
-												</fbt:param>
 												<fbt:plural
 													count={item.unit}
-													name="time estimated plural"
+													name="timeEstimated"
 													many="jours"
+													value={item.unit.toFixed(2)}
+													showCount="yes"
 												>
 												jour
 												</fbt:plural>
@@ -527,13 +525,14 @@ const Item = ({
 												project="inyo"
 												desc="time it took item view"
 											>
-												<fbt:param name="timeItTook">
-													{+item.timeItTook.toFixed(2)}
-												</fbt:param>
 												<fbt:plural
 													count={item.timeItTook}
-													name="time it took plural"
+													name="timeItTook"
 													many="jours"
+													showCount="yes"
+													value={item.timeItTook.toFixed(
+														2,
+													)}
 												>
 												jour
 												</fbt:plural>
@@ -683,24 +682,32 @@ const Item = ({
 								) : (
 									deadline && (
 										<div>
-											{
-												+(
-													moment(deadline).diff(
-														moment(),
-														'days',
-													) - item.unit
-												).toFixed(2)
-											}{' '}
-											<Plural
-												value={
-													moment(deadline).diff(
-														moment(),
-														'days',
-													) - item.unit
-												}
-												singular="jour"
-												plural="jours"
-											/>
+											<fbt
+												project="inyo"
+												desc="deadline margin item view"
+											>
+												<fbt:plural
+													count={
+														moment(deadline).diff(
+															moment(),
+															'days',
+														) - item.unit
+													}
+													value={
+														+(
+															moment(
+																deadline,
+															).diff(
+																moment(),
+																'days',
+															) - item.unit
+														).toFixed(2)
+													}
+													many="jours"
+												>
+													jour
+												</fbt:plural>
+											</fbt>
 										</div>
 									)
 								)}

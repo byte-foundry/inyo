@@ -410,7 +410,9 @@ function ArianneThread({
 							});
 						}}
 					>
-						Gérer les tags
+						<fbt project="inyo" desc="manage tags">
+							Gérer les tags
+						</fbt>
 					</ManageTagOption>
 				}
 				placeholder={

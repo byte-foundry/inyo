@@ -26,7 +26,6 @@ import DefaultDroppableDay from '../DefaultDroppableDay';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import RawPieChart from '../PieChart';
-import Plural from '../Plural';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
 import {

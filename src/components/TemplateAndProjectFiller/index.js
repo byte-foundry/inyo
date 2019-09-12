@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 
+import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
-import {Loading, P} from '../../utils/content';
+import {P} from '../../utils/content';
 import Search from '../../utils/icons/search.svg';
 import templateIllus from '../../utils/images/bermuda-order-completed.svg';
 import {
@@ -19,7 +20,6 @@ import {
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_PROJECTS, GET_PROJECT_DATA} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
-import Plural from '../Plural';
 
 const Container = styled('div')`
 	display: flex;
@@ -274,17 +274,33 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 						</TemplateList>
 						{!showAll && filteredProjects.length > listSize && (
 							<Button onClick={() => setShowAll(true)}>
-								Voir les{' '}
-								{filteredProjects.length
-									- PROJECT_LIST_BASE_SIZE}{' '}
-								<Plural
-									value={
-										filteredProjects.length
-										- PROJECT_LIST_BASE_SIZE
-									}
-									singular="autre projet"
-									plural="autres projets"
-								/>
+								<fbt
+									project="inyo"
+									desc="see other projects button"
+								>
+									Voir{' '}
+									<fbt:plural
+										name="projectsCountPrefix"
+										count={
+											filteredProjects.length
+											- PROJECT_LIST_BASE_SIZE
+										}
+										many="les "
+									>
+										l'
+									</fbt:plural>
+									<fbt:plural
+										count={
+											filteredProjects.length
+											- PROJECT_LIST_BASE_SIZE
+										}
+										name="projectsCount"
+										showCount="ifMany"
+										many="autres projets"
+									>
+										autre projet
+									</fbt:plural>
+								</fbt>
 							</Button>
 						)}
 					</>

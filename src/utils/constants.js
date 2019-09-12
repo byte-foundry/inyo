@@ -125,30 +125,16 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskIconValidatedUrl,
 		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
 		type: 'DEFAULT',
-		name: fbt('Basique', 'basic task name'),
-		description: fbt(
-			'Une tâche dont vous êtes responsable',
-			'basic task description',
-		),
+		get name() {
+			return fbt('Basique', 'basic task name');
+		},
+		get description() {
+			return fbt(
+				'Une tâche dont vous êtes responsable',
+				'basic task description',
+			);
+		},
 	},
-	/* {
-		icon: <TaskCollaboratorIcon />,
-		iconValidated: <TaskCollaboratorIconValidated />,
-		iconUrl: TaskCollaboratorIconUrl,
-		iconUrlValidated: TaskCollaboratorIconValidatedUrl,
-		iconUrlValidatedAnim: TaskCollaboratorIconValidatedAnimUrl,
-		type: 'DEFAULT_ASSIGNED',
-		name: (
-			<fbt project="inyo" desc="basic task name">
-				Basique
-			</fbt>
-		),
-		description: (
-			<fbt project="inyo" desc="basic task description">
-				Une tâche dont la personne assigné est responsable
-			</fbt>
-		),
-	}, */
 	{
 		icon: <TaskCustomerIcon />,
 		iconValidated: <TaskCustomerIconValidated />,
@@ -156,11 +142,15 @@ export const ITEM_TYPES = [
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		iconUrlValidatedAnim: TaskCustomerIconValidatedAnimUrl,
 		type: 'CUSTOMER',
-		name: fbt('Tâche attribuée au client', 'customer task name'),
-		description: fbt(
-			'Une tâche à réaliser par votre client',
-			'customer task description',
-		),
+		get name() {
+			return fbt('Tâche attribuée au client', 'customer task name');
+		},
+		get description() {
+			return fbt(
+				'Une tâche à réaliser par votre client',
+				'customer task description',
+			);
+		},
 	},
 	{
 		icon: <ContentAcquisitionIcon />,
@@ -168,11 +158,15 @@ export const ITEM_TYPES = [
 		iconUrl: ContentAcquisitionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'CONTENT_ACQUISITION',
-		name: fbt('Récupération contenu', 'content acquisition name'),
-		description: fbt(
-			'Lister et récupérer les contenus nécessaires',
-			'content acquisition description',
-		),
+		get name() {
+			return fbt('Récupération contenu', 'content acquisition name');
+		},
+		get description() {
+			return fbt(
+				'Lister et récupérer les contenus nécessaires',
+				'content acquisition description',
+			);
+		},
 	},
 	{
 		icon: <SectionIcon />,
@@ -180,11 +174,15 @@ export const ITEM_TYPES = [
 		iconUrl: SectionIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'SECTION',
-		name: fbt('Section de projet', 'section name'),
-		description: fbt(
-			"Créer une section pour classer les tâches d'un projet",
-			'section description',
-		),
+		get name() {
+			return fbt('Section de projet', 'section name');
+		},
+		get description() {
+			return fbt(
+				"Créer une section pour classer les tâches d'un projet",
+				'section description',
+			);
+		},
 	},
 	{
 		icon: <TaskInvoiceIcon />,
@@ -192,11 +190,15 @@ export const ITEM_TYPES = [
 		iconUrl: TaskInvoiceIconUrl,
 		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'INVOICE',
-		name: fbt('Paiement de facture', 'invoice task name'),
-		description: fbt(
-			'Envoyer une facture et demander un paiement à votre client',
-			'invoice task description',
-		),
+		get name() {
+			return fbt('Paiement de facture', 'invoice task name');
+		},
+		get description() {
+			return fbt(
+				'Envoyer une facture et demander un paiement à votre client',
+				'invoice task description',
+			);
+		},
 	},
 	/* {
 		icon: <CustomerReminderIcon />,

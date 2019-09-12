@@ -13,7 +13,6 @@ import {
 } from '../../utils/new/design-system';
 import DateInput from '../DateInput';
 import MaterialIcon from '../MaterialIcon';
-import Plural from '../Plural';
 import Tooltip from '../Tooltip';
 
 function TaskDueDate({

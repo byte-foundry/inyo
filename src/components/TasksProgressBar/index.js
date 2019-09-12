@@ -10,7 +10,6 @@ import {
 	mediumPurple,
 	primaryPurple,
 } from '../../utils/new/design-system';
-import Plural from '../Plural';
 
 const TasksProgressBarWrapper = styled('div')`
 	display: flex;

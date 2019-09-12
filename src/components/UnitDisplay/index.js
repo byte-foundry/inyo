@@ -2,17 +2,8 @@ import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import useUserInfos from '../../utils/useUserInfos';
-import Plural from '../Plural';
 
-const UnitDisplay = ({
-	unit,
-	plural,
-	singular,
-	pluralF,
-	singularF,
-	pluralM,
-	singularM,
-}) => {
+const UnitDisplay = ({unit}) => {
 	const {workingTime = 8} = useUserInfos();
 
 	let unitInHours = false;

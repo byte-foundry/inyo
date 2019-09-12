@@ -294,6 +294,13 @@ const Schedule = ({
 		<Container>
 			<ScheduleNav>
 				<Button
+					onClick={() => window.gapi.auth2.getAuthInstance().signIn()}
+				>
+					<fbt project="inyo" desc="notification message">
+						Sync
+					</fbt>
+				</Button>
+				<Button
 					onClick={() => onChangeWeek(
 						moment()
 							.startOf('week')

@@ -98,7 +98,9 @@ const Stats = ({history, location}) => {
 		},
 		error,
 	} = useQuery(GET_ALL_TASKS, {suspend: true});
-	const {workingTime = 8, defaultDailyPrice = 0, clientViews}
+	const {
+		workingTime = 8, defaultDailyPrice = 0, clientViews, language,
+	}
 		= useUserInfos() || {};
 
 	const query = new URLSearchParams(location.search);
@@ -433,20 +435,17 @@ const Stats = ({history, location}) => {
 							</fbt>
 						</SubHeading>
 						<Number>
-							<fbt project="inyo" desc="worked amount">
-								<fbt:param name="amount">
-									{(
-										filteredTasks
-											.filter(
-												t => t.status === 'FINISHED',
-											)
-											.reduce(
-												(total, {timeItTook}) => total + timeItTook,
-												0,
-											) * defaultDailyPrice
-									).toFixed(2)}
-								</fbt:param>€
-							</fbt>
+							{new Intl.NumberFormat(language, {
+								style: 'currency',
+								currency: language === 'fr' ? 'EUR' : 'USD',
+							}).format(
+								filteredTasks
+									.filter(t => t.status === 'FINISHED')
+									.reduce(
+										(total, {timeItTook}) => total + timeItTook,
+										0,
+									) * defaultDailyPrice,
+							)}
 						</Number>
 					</Card>
 					<Card>

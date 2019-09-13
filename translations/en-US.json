@@ -32,15 +32,15 @@
    ]
   },
   "mnvxbQlOlB/Afe9kwyUkCg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "This user has not signed up to Inyo yet",
-     "variations": {}
-    }
-   ]
-  },
+	"tokens": [],
+	"types": [],
+	"translations": [
+	 {
+	  "translation": "This user has not signed up to Inyo yet",
+	  "variations": {}
+	 }
+	]
+   },
   "/kvuEOtMqSh/iULB4okW6Q==": {
    "tokens": [],
    "types": [],
@@ -4646,7 +4646,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "parcourir",
+     "translation": "browse",
      "variations": {}
     }
    ]
@@ -4971,22 +4971,12 @@
     }
    ]
   },
-  "XExdBgqJHNNwA1FTFraJjw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{prout}haha",
-     "variations": {}
-    }
-   ]
-  },
   "7QXhz33T4NeJ5Gu1AhliDA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Planning et liste de tâches",
+     "translation": "Schedule and tasks list",
      "variations": {}
     }
    ]
@@ -5847,16 +5837,6 @@
    "translations": [
     {
      "translation": "Amount worked",
-     "variations": {}
-    }
-   ]
-  },
-  "lX/U196sA/EDgqxVTz2P4A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "${amount}",
      "variations": {}
     }
    ]

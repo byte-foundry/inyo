@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import React from 'react';
+import React, {useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
@@ -20,6 +20,7 @@ const Buttons = styled('div')`
 `;
 
 const AddCollaboratorModal = ({onDismiss}) => {
+	const [showConfirm, setShowConfirm] = useState(false);
 	const [requestCollab] = useMutation(REQUEST_COLLAB);
 
 	return (
@@ -60,6 +61,7 @@ const AddCollaboratorModal = ({onDismiss}) => {
 							await requestCollab({
 								variables: {
 									userEmail: values.email,
+									inviteSignup: showConfirm,
 								},
 							});
 
@@ -69,24 +71,28 @@ const AddCollaboratorModal = ({onDismiss}) => {
 							actions.setSubmitting(false);
 							actions.setErrors(e);
 							if (
-								e.graphQLErrors[0].extensions.code
-								=== 'NotFound'
+								e.graphQLErrors[0].extensions
+								&& e.graphQLErrors[0].extensions.code
+									=== 'NotFound'
 							) {
+								setShowConfirm(true);
 								actions.setStatus({
 									msg: (
 										<fbt
 											project="inyo"
 											desc="error collaborator user not signed up"
 										>
-											Cette utilisateur n'est pas encore
-											inscrit sur Inyo
+											Cet utilisateur n'est pas encore
+											inscrit sur Inyo, voulez-vous
+											envoyer une invitation ?
 										</fbt>
 									),
 								});
 							}
 							else if (
-								e.graphQLErrors[0].extensions.code
-								=== 'AlreadyExisting'
+								e.graphQLErrors[0].extensions
+								&& e.graphQLErrors[0].extensions.code
+									=== 'AlreadyExisting'
 							) {
 								actions.setStatus({
 									msg: (
@@ -133,6 +139,10 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								placeholder="michel@gmail.com"
 								required
 								big
+								onChange={() => {
+									setShowConfirm(false);
+									props.setStatus({});
+								}}
 							/>
 							{props.status && props.status.msg && (
 								<ErrorInput style={{marginBottom: '1rem'}}>
@@ -140,14 +150,43 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								</ErrorInput>
 							)}
 							<Buttons>
-								<Button>
-									<fbt
-										project="inyo"
-										desc="label collaborator invite button"
-									>
-										Inviter
-									</fbt>
-								</Button>
+								{showConfirm ? (
+									<>
+										<Button
+											type="button"
+											onClick={(e) => {
+												e.preventDefault();
+
+												setShowConfirm(false);
+												props.setStatus({});
+											}}
+										>
+											<fbt
+												project="inyo"
+												desc="label collaborator invite button cancel"
+											>
+												Annuler
+											</fbt>
+										</Button>
+										<Button>
+											<fbt
+												project="inyo"
+												desc="label collaborator invite button confirm"
+											>
+												Envoyer
+											</fbt>
+										</Button>
+									</>
+								) : (
+									<Button>
+										<fbt
+											project="inyo"
+											desc="label collaborator invite button"
+										>
+											Inviter
+										</fbt>
+									</Button>
+								)}
 							</Buttons>
 						</form>
 					)}

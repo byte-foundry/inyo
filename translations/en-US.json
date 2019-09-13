@@ -31,12 +31,12 @@
     }
    ]
   },
-  "mnvxbQlOlB/Afe9kwyUkCg==": {
+  "DCc5EksNiwSX+XeYA/M1ag==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "This user has not signed up to Inyo yet",
+     "translation": "This user has not signed up to Inyo yet, do you want to send an invite ?",
      "variations": {}
     }
    ]
@@ -67,6 +67,26 @@
    "translations": [
     {
      "translation": "Email address",
+     "variations": {}
+    }
+   ]
+  },
+  "uMZzsFviH9YD1coJ9wJd3Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Cancel",
+     "variations": {}
+    }
+   ]
+  },
+  "CvBOBCM3RBKEGfiHdheSlA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Send",
      "variations": {}
     }
    ]
@@ -6757,6 +6777,16 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "mnvxbQlOlB/Afe9kwyUkCg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This user has not signed up to Inyo yet",
      "variations": {}
     }
    ]

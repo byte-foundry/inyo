@@ -5,9 +5,9 @@
     "c+lcFfPMwayO0O5SNqYW9w==": "Inviter un collaborateur"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 29,
+   "line_beg": 30,
    "col_beg": 5,
-   "line_end": 31,
+   "line_end": 32,
    "col_end": 11,
    "type": "text",
    "desc": "header collaborator modal",
@@ -19,9 +19,9 @@
     "Kk05koBmsDqaTTQVJCU3aw==": "L'email doit être valide"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 40,
+   "line_beg": 41,
    "col_beg": 8,
-   "line_end": 45,
+   "line_end": 46,
    "col_end": 14,
    "type": "text",
    "desc": "error collaborator email not valid",
@@ -33,9 +33,9 @@
     "XA7LD0ywIXskOmvYyTrrWw==": "Requis"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 48,
+   "line_beg": 49,
    "col_beg": 8,
-   "line_end": 53,
+   "line_end": 54,
    "col_end": 14,
    "type": "text",
    "desc": "error collaborator email required",
@@ -44,26 +44,26 @@
   },
   {
    "hashToText": {
-    "mnvxbQlOlB/Afe9kwyUkCg==": "Cette utilisateur n'est pas encore inscrit sur Inyo"
+    "DCc5EksNiwSX+XeYA/M1ag==": "Cet utilisateur n'est pas encore inscrit sur Inyo, voulez-vous envoyer une invitation ?"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 77,
+   "line_beg": 81,
    "col_beg": 10,
-   "line_end": 83,
+   "line_end": 87,
    "col_end": 16,
    "type": "text",
    "desc": "error collaborator user not signed up",
    "project": "inyo",
-   "jsfbt": "Cette utilisateur n'est pas encore inscrit sur Inyo"
+   "jsfbt": "Cet utilisateur n'est pas encore inscrit sur Inyo, voulez-vous envoyer une invitation ?"
   },
   {
    "hashToText": {
     "/kvuEOtMqSh/iULB4okW6Q==": "Cet utilisateur est déjà un de vos collaborateur ou une requête est déjà en cours."
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 93,
+   "line_beg": 98,
    "col_beg": 10,
-   "line_end": 100,
+   "line_end": 105,
    "col_end": 16,
    "type": "text",
    "desc": "error collaborator user already existing",
@@ -75,9 +75,9 @@
     "HaV1oGWQEHMlWZY+YJhCaQ==": "Une erreur s'est produite"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 107,
+   "line_beg": 112,
    "col_beg": 10,
-   "line_end": 112,
+   "line_end": 117,
    "col_end": 16,
    "type": "text",
    "desc": "error collaborator unspecified error",
@@ -89,9 +89,9 @@
     "sAbSkE5NP4fqrLL3UdHfsA==": "Email du collaborateur"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 126,
+   "line_beg": 131,
    "col_beg": 9,
-   "line_end": 131,
+   "line_end": 136,
    "col_end": 15,
    "type": "text",
    "desc": "label collaborator email",
@@ -100,13 +100,41 @@
   },
   {
    "hashToText": {
+    "uMZzsFviH9YD1coJ9wJd3Q==": "Annuler"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 157,
+   "col_beg": 11,
+   "line_end": 162,
+   "col_end": 17,
+   "type": "text",
+   "desc": "label collaborator invite button cancel",
+   "project": "inyo",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "CvBOBCM3RBKEGfiHdheSlA==": "Envoyer"
+   },
+   "filepath": "src/components/AddCollaboratorModal/index.js",
+   "line_beg": 165,
+   "col_beg": 11,
+   "line_end": 170,
+   "col_end": 17,
+   "type": "text",
+   "desc": "label collaborator invite button confirm",
+   "project": "inyo",
+   "jsfbt": "Envoyer"
+  },
+  {
+   "hashToText": {
     "D5BQpw+HPrLQbvb3mzK+cA==": "Inviter"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
-   "line_beg": 144,
-   "col_beg": 9,
-   "line_end": 149,
-   "col_end": 15,
+   "line_beg": 175,
+   "col_beg": 10,
+   "line_end": 180,
+   "col_end": 16,
    "type": "text",
    "desc": "label collaborator invite button",
    "project": "inyo",
@@ -327,9 +355,9 @@
     "CBEk0tjxRg3kn3CsSs2gTA==": "Collaborateurs sur le projet {projectName}"
    },
    "filepath": "src/components/CollaboratorModal/index.js",
-   "line_beg": 96,
+   "line_beg": 86,
    "col_beg": 5,
-   "line_end": 99,
+   "line_end": 89,
    "col_end": 11,
    "type": "text",
    "desc": "collaborators modal header",
@@ -341,9 +369,9 @@
     "qx1GG8725BwZccTubShfmA==": "Filtrer par nom, email..."
    },
    "filepath": "src/components/CollaboratorModal/index.js",
-   "line_beg": 124,
+   "line_beg": 114,
    "col_beg": 11,
-   "line_end": 129,
+   "line_end": 119,
    "col_end": 17,
    "type": "text",
    "desc": "filter collaborator by email placeholder",
@@ -8423,9 +8451,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/screens/App/Collaborators/index.js",
-   "line_beg": 436,
+   "line_beg": 437,
    "col_beg": 11,
-   "line_end": 438,
+   "line_end": 439,
    "col_end": 17,
    "type": "text",
    "desc": "cancel",
@@ -8437,9 +8465,9 @@
     "RCLArFDcbvhrRkgAf+sM3w==": "Êtes-vous sûr de vouloir supprimer {email} ? Tous les projets et les tâches assignées à ce collaborateur seront desassignées."
    },
    "filepath": "src/screens/App/Collaborators/index.js",
-   "line_beg": 461,
+   "line_beg": 462,
    "col_beg": 7,
-   "line_end": 468,
+   "line_end": 469,
    "col_end": 13,
    "type": "text",
    "desc": "notification message",
@@ -8451,9 +8479,9 @@
     "WNY18oeHyCZ8+4K0wp49ag==": "Êtes-vous sûr de vouloir continuer?"
    },
    "filepath": "src/screens/App/Collaborators/index.js",
-   "line_beg": 471,
+   "line_beg": 472,
    "col_beg": 7,
-   "line_end": 473,
+   "line_end": 474,
    "col_end": 13,
    "type": "text",
    "desc": "continue",

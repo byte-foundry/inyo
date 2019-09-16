@@ -2056,6 +2056,20 @@
   },
   {
    "hashToText": {
+    "fwFrMMlHn32zsVxwM2CzYg==": "Description de la tâche"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 860,
+   "col_beg": 20,
+   "line_end": 860,
+   "col_end": 78,
+   "type": "text",
+   "desc": "tooltip task description",
+   "project": "",
+   "jsfbt": "Description de la tâche"
+  },
+  {
+   "hashToText": {
     "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
    },
    "filepath": "src/components/ItemView/index.js",
@@ -7818,20 +7832,6 @@
   },
   {
    "hashToText": {
-    "XExdBgqJHNNwA1FTFraJjw==": "{prout}haha"
-   },
-   "filepath": "src/fbt/test.js",
-   "line_beg": 7,
-   "col_beg": 2,
-   "line_end": 9,
-   "col_end": 8,
-   "type": "text",
-   "desc": "haha",
-   "project": "inyo",
-   "jsfbt": "{prout}haha"
-  },
-  {
-   "hashToText": {
     "7QXhz33T4NeJ5Gu1AhliDA==": "Planning et liste de tâches"
    },
    "filepath": "src/HOC/withHeader.js",
@@ -9053,9 +9053,9 @@
     "KOapM+8+RoGh5EftlvYEOA==": "Statistiques"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 252,
+   "line_beg": 254,
    "col_beg": 5,
-   "line_end": 254,
+   "line_end": 256,
    "col_end": 11,
    "type": "text",
    "desc": "Statistics",
@@ -9067,9 +9067,9 @@
     "EIjZ8Jh8IVnbctQCJN+z3w==": "Afficher {timespan}"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 257,
+   "line_beg": 259,
    "col_beg": 5,
-   "line_end": 313,
+   "line_end": 315,
    "col_end": 11,
    "type": "text",
    "desc": "Show",
@@ -9081,9 +9081,9 @@
     "DKxLQ1KcMR56JIxL15QDog==": "les 7 derniers jours"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 267,
+   "line_beg": 269,
    "col_beg": 12,
-   "line_end": 272,
+   "line_end": 274,
    "col_end": 18,
    "type": "text",
    "desc": "7 last days",
@@ -9095,9 +9095,9 @@
     "rtJdCPl645dXeKmtCpfEFw==": "les 30 derniers jours"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 278,
+   "line_beg": 280,
    "col_beg": 12,
-   "line_end": 283,
+   "line_end": 285,
    "col_end": 18,
    "type": "text",
    "desc": "30 last days",
@@ -9109,9 +9109,9 @@
     "3kC4J4DKoJvOVEu3Zh81iA==": "les 3 derniers mois"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 289,
+   "line_beg": 291,
    "col_beg": 12,
-   "line_end": 294,
+   "line_end": 296,
    "col_end": 18,
    "type": "text",
    "desc": "3 last months",
@@ -9123,9 +9123,9 @@
     "pMmKDGLFliqJJcK+v+myZg==": "les 6 derniers mois"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 300,
+   "line_beg": 302,
    "col_beg": 12,
-   "line_end": 305,
+   "line_end": 307,
    "col_end": 18,
    "type": "text",
    "desc": "6 last months",
@@ -9137,9 +9137,9 @@
     "eJe+ko0d0nvEjGFrDOqZAA==": "Répartition de vos clients"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 319,
+   "line_beg": 321,
    "col_beg": 5,
-   "line_end": 321,
+   "line_end": 323,
    "col_end": 11,
    "type": "text",
    "desc": "client share",
@@ -9151,9 +9151,9 @@
     "1K/eeL6OoINQBgAI2S+tCQ==": "Rapport temps estimé / temps réellement passé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 338,
+   "line_beg": 340,
    "col_beg": 5,
-   "line_end": 343,
+   "line_end": 345,
    "col_end": 11,
    "type": "text",
    "desc": "Estimated time / worked time rate",
@@ -9165,9 +9165,9 @@
     "0K+9honF4vsx62F8wA0Svw==": "Temps travaillé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 356,
+   "line_beg": 358,
    "col_beg": 7,
-   "line_end": 358,
+   "line_end": 360,
    "col_end": 13,
    "type": "text",
    "desc": "Worked time",
@@ -9179,9 +9179,9 @@
     "NVAk5+s4aeW/WEWjew+EdQ==": "Temps estimé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 374,
+   "line_beg": 376,
    "col_beg": 7,
-   "line_end": 376,
+   "line_end": 378,
    "col_end": 13,
    "type": "text",
    "desc": "estimated time",
@@ -9193,9 +9193,9 @@
     "krD+apK875r/1FAplgTaQA==": "Rappels envoyés"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 392,
+   "line_beg": 394,
    "col_beg": 7,
-   "line_end": 394,
+   "line_end": 396,
    "col_end": 13,
    "type": "text",
    "desc": "reminders sent",
@@ -9207,9 +9207,9 @@
     "zTLbttckbhyR65ApxlfqBg==": "Temps gagné"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 406,
+   "line_beg": 408,
    "col_beg": 7,
-   "line_end": 408,
+   "line_end": 410,
    "col_end": 13,
    "type": "text",
    "desc": "Gained time",
@@ -9221,9 +9221,9 @@
     "J5LcRx9iBIJ6iam4yM6ICg==": "Visites client"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 423,
+   "line_beg": 425,
    "col_beg": 7,
-   "line_end": 425,
+   "line_end": 427,
    "col_end": 13,
    "type": "text",
    "desc": "Client visits",
@@ -9235,9 +9235,9 @@
     "S5zAFspJmhz4q+bMF4pQqA==": "Montant travaillé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 431,
+   "line_beg": 433,
    "col_beg": 7,
-   "line_end": 433,
+   "line_end": 435,
    "col_end": 13,
    "type": "text",
    "desc": "estimated time",
@@ -9246,26 +9246,12 @@
   },
   {
    "hashToText": {
-    "lX/U196sA/EDgqxVTz2P4A==": "{amount}€"
-   },
-   "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 436,
-   "col_beg": 7,
-   "line_end": 449,
-   "col_end": 13,
-   "type": "text",
-   "desc": "worked amount",
-   "project": "inyo",
-   "jsfbt": "{amount}€"
-  },
-  {
-   "hashToText": {
     "zZBJ6cBdsYxLXMc/mbyOGw==": "Vous souhaitez d'autres statistiques? {=Contactez-nous}"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 461,
+   "line_beg": 460,
    "col_beg": 7,
-   "line_end": 469,
+   "line_end": 468,
    "col_end": 13,
    "type": "text",
    "desc": "stats question",
@@ -9277,9 +9263,9 @@
     "BdSTSL1PZ+q5EHM3jdBIJQ==": "Contactez-nous"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 463,
+   "line_beg": 462,
    "col_beg": 8,
-   "line_end": 468,
+   "line_end": 467,
    "col_end": 12,
    "type": "text",
    "desc": "In the phrase: \"Vous souhaitez d'autres statistiques? {=Contactez-nous}\"",

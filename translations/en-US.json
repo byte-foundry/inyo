@@ -32,15 +32,15 @@
    ]
   },
   "mnvxbQlOlB/Afe9kwyUkCg==": {
-	"tokens": [],
-	"types": [],
-	"translations": [
-	 {
-	  "translation": "This user has not signed up to Inyo yet",
-	  "variations": {}
-	 }
-	]
-   },
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This user has not signed up to Inyo yet",
+     "variations": {}
+    }
+   ]
+  },
   "/kvuEOtMqSh/iULB4okW6Q==": {
    "tokens": [],
    "types": [],
@@ -1397,6 +1397,16 @@
    "translations": [
     {
      "translation": "Add or create a tag",
+     "variations": {}
+    }
+   ]
+  },
+  "fwFrMMlHn32zsVxwM2CzYg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task description",
      "variations": {}
     }
    ]

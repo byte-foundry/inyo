@@ -857,7 +857,12 @@ const Item = ({
 				)}
 			</Metas>
 			{(!customerToken || description) && (
-				<Tooltip label="Description de la tâche">
+				<Tooltip
+					label={fbt(
+						'Description de la tâche',
+						'tooltip task description',
+					)}
+				>
 					<Description>
 						<MultilineEditable
 							disabled={!!customerToken}

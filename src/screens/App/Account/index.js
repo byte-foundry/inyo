@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import React, {useEffect, useRef, useState} from 'react';
-import {useApolloClient, useQuery} from 'react-apollo-hooks';
+import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
@@ -158,7 +158,6 @@ const Account = ({location}) => {
 	const {data} = useQuery(GET_USER_INFOS, {
 		suspend: true,
 	});
-	const client = useApolloClient();
 
 	useEffect(() => {
 		const hash = location.hash.slice(1);
@@ -194,9 +193,11 @@ const Account = ({location}) => {
 
 	const displayToast = () => {
 		toast.info(
-			<div>
-				<p>Les données ont été mises à jour</p>
-			</div>,
+			<p>
+				<fbt project="inyo" desc="data updated">
+					Les données ont été mises à jour
+				</fbt>
+			</p>,
 			{
 				position: toast.POSITION.BOTTOM_LEFT,
 				autoClose: 3000,

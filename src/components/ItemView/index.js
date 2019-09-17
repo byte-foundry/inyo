@@ -412,6 +412,13 @@ const Item = ({
 										<UnitInput
 											unit={item.unit}
 											onBlur={(unit) => {
+												window.Intercom(
+													'trackEvent',
+													'estimated-time-fill-item-view',
+													{
+														estimation: unit,
+													},
+												);
 												updateItem({
 													variables: {
 														itemId: item.id,
@@ -421,6 +428,13 @@ const Item = ({
 												setEditUnit(false);
 											}}
 											onSubmit={(unit) => {
+												window.Intercom(
+													'trackEvent',
+													'estimated-time-fill-item-view',
+													{
+														estimation: unit,
+													},
+												);
 												updateItem({
 													variables: {
 														itemId: item.id,
@@ -430,6 +444,13 @@ const Item = ({
 												setEditUnit(false);
 											}}
 											onTab={(unit) => {
+												window.Intercom(
+													'trackEvent',
+													'estimated-time-fill-item-view',
+													{
+														estimation: unit,
+													},
+												);
 												updateItem({
 													variables: {
 														itemId: item.id,
@@ -492,6 +513,13 @@ const Item = ({
 										<UnitInput
 											unit={item.timeItTook}
 											onBlur={(timeItTook) => {
+												window.Intercom(
+													'trackEvent',
+													'time-it-took-fill-item-view',
+													{
+														timeItTook,
+													},
+												);
 												updateItem({
 													variables: {
 														itemId: item.id,
@@ -501,6 +529,13 @@ const Item = ({
 												setEditUnit(false);
 											}}
 											onSubmit={(timeItTook) => {
+												window.Intercom(
+													'trackEvent',
+													'time-it-took-fill-item-view',
+													{
+														timeItTook,
+													},
+												);
 												updateItem({
 													variables: {
 														itemId: item.id,
@@ -510,6 +545,13 @@ const Item = ({
 												setEditUnit(false);
 											}}
 											onTab={(timeItTook) => {
+												window.Intercom(
+													'trackEvent',
+													'time-it-took-fill-item-view',
+													{
+														timeItTook,
+													},
+												);
 												updateItem({
 													variables: {
 														itemId: item.id,

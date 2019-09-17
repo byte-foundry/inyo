@@ -591,7 +591,16 @@ const TaskInput = ({
 				<TaskInfosInputsContainer>
 					<UnitWithSuggestionsForm
 						small
-						onChange={unit => setItemUnit(unit)}
+						onChange={(unit) => {
+							setItemUnit(unit);
+							window.Intercom(
+								'trackEvent',
+								'estimated-time-fill-input',
+								{
+									estimation: unit,
+								},
+							);
+						}}
 					/>
 					<TagDropdown
 						id="tags"

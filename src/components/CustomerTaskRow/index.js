@@ -430,17 +430,19 @@ function Task({
 							</TaskActions>
 						</TaskHeader>
 					</Tooltip>
-					<RescheduleIconButton
-						icon="today"
-						size="tiny"
-						onClick={() => focusTask({
-							variables: {
-								itemId: item.id,
-								for: new Date().toJSON().split('T')[0],
-							},
-						})
-						}
-					/>
+					{!customerToken && (
+						<RescheduleIconButton
+							icon="today"
+							size="tiny"
+							onClick={() => focusTask({
+								variables: {
+									itemId: item.id,
+									for: new Date().toJSON().split('T')[0],
+								},
+							})
+							}
+						/>
+					)}
 					{!noData && (
 						<TaskInfosInputs
 							taskUrlPrefix={taskUrlPrefix}

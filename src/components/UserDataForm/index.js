@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
+import debounce from 'debounce-promise';
 import {Formik} from 'formik';
-import debounce from 'lodash.debounce';
 import React from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
@@ -57,7 +57,7 @@ const UserDataForm = ({done, ...componentProps}) => {
 	const [updateUser] = useMutation(UPDATE_USER);
 	const [checkEmailAvailability] = useMutation(CHECK_UNIQUE_EMAIL);
 
-	const debouncedCheckEmail = debounce(checkEmailAvailability, 300);
+	const debouncedCheckEmail = debounce(checkEmailAvailability, 500);
 
 	return (
 		<UserDataFormMain>
@@ -71,7 +71,7 @@ const UserDataForm = ({done, ...componentProps}) => {
 					email: Yup.string()
 						.email(
 							<fbt project="inyo" desc="invalid email">
-								Email invalide
+								L'email doit être valide
 							</fbt>,
 						)
 						.required(
@@ -103,7 +103,6 @@ const UserDataForm = ({done, ...componentProps}) => {
 					),
 				})}
 				onSubmit={async (values, actions) => {
-					actions.setSubmitting(false);
 					try {
 						await updateUser({
 							variables: {
@@ -134,7 +133,6 @@ const UserDataForm = ({done, ...componentProps}) => {
 						else {
 							Sentry.captureException(error);
 						}
-						actions.setSubmitting(false);
 						actions.setErrors(error);
 						actions.setStatus({
 							msg: (
@@ -144,6 +142,8 @@ const UserDataForm = ({done, ...componentProps}) => {
 							),
 						});
 					}
+
+					actions.setSubmitting(false);
 				}}
 			>
 				{(props) => {

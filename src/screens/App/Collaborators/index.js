@@ -184,9 +184,11 @@ const Collaborators = () => {
 	);
 
 	const filteredCollaboratorRequests = data.me.collaboratorRequests.filter(
-		({status, requestee: {firstName, lastName, email}}) => (includesFilter(firstName || '')
-				|| includesFilter(lastName || '')
-				|| includesFilter(email))
+		({status, requestee, requesteeEmail}) => (requestee
+			? includesFilter(requestee.firstName || '')
+				  || includesFilter(requestee.lastName || '')
+				  || includesFilter(requestee.email)
+			: includesFilter(requesteeEmail))
 			&& status !== collabStatuses.CANCELED
 			&& status !== collabStatuses.ACCEPTED,
 	);
@@ -414,15 +416,22 @@ const Collaborators = () => {
 					<tbody>
 						{filteredCollaboratorRequests.map(
 							({
-								id,
-								status,
-								requestee: {firstName, lastName, email},
+								id, status, requestee, requesteeEmail,
 							}) => (
 								<Row key="a" tabIndex="0" role="button">
 									<Cell>
-										{formatName(firstName, lastName)}
+										{requestee ? (
+											formatName(
+												requestee.firstName,
+												requestee.lastName,
+											)
+										) : (
+											<>&mdash;</>
+										)}
 									</Cell>
-									<Cell>{email}</Cell>
+									<Cell>
+										{requesteeEmail || requestee.email}
+									</Cell>
 									<Cell>{formatCollabStatus(status)}</Cell>
 									<Cell>
 										<Button

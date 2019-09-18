@@ -919,8 +919,16 @@ export const REMOVE_TAG = gql`
 `;
 
 export const REQUEST_COLLAB = gql`
-	mutation requestCollab($userEmail: String!, $projectId: ID) {
-		requestCollab(userEmail: $userEmail, projectId: $projectId) {
+	mutation requestCollab(
+		$userEmail: String!
+		$inviteSignup: Boolean
+		$projectId: ID
+	) {
+		requestCollab(
+			userEmail: $userEmail
+			inviteSignup: $inviteSignup
+			projectId: $projectId
+		) {
 			id
 			status
 			requestee {
@@ -929,6 +937,7 @@ export const REQUEST_COLLAB = gql`
 				lastName
 				email
 			}
+			requesteeEmail
 		}
 	}
 `;

@@ -64,6 +64,7 @@ export const GET_USER_COLLABORATORS = gql`
 					lastName
 					email
 				}
+				requesteeEmail
 				status
 			}
 			collaborationRequests {

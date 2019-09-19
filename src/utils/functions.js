@@ -55,6 +55,7 @@ export const isCustomerTask = type => CUSTOMER_TASK_TYPES.includes(type);
 
 export function extractScheduleFromWorkingDays(
 	workingDays,
+	eventsPerDay,
 	startDate,
 	days,
 	fullWeek,
@@ -74,6 +75,7 @@ export function extractScheduleFromWorkingDays(
 				deadlines = [],
 				assignedTasks = [],
 			} = days[date] || {};
+			const events = eventsPerDay[date] || [];
 
 			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
 
@@ -84,6 +86,7 @@ export function extractScheduleFromWorkingDays(
 				reminders,
 				deadlines,
 				assignedTasks,
+				events,
 				workedDay,
 			});
 		}
@@ -151,6 +154,87 @@ export const clamp = (min, max, value) => {
 	const minClamped = value < min ? min : value;
 
 	return minClamped > max ? max : minClamped;
+};
+
+export const getEventFromGoogleCalendarEvents = (
+	{result, status},
+	startWorkAt,
+	endWorkAt,
+	workingTime,
+) => {
+	if (status === 200) {
+		const eventsPerDay = {};
+		const formattedEvents = result.items.map(item => ({
+			name: item.summary,
+			owner: item.organizer,
+			link: item.htmlLink,
+			// I know this is not necessary I just want my object to look pretty
+			severalDays: !!(item.start && item.start.date),
+			start:
+				item.start && item.start.dateTime
+					? moment(item.start.dateTime)
+					: moment(item.start.date),
+			end:
+				item.end && item.end.dateTime
+					? moment(item.end.dateTime)
+					: moment(item.end.date),
+		}));
+
+		formattedEvents.forEach((event) => {
+			if (event.severalDays) {
+			}
+			else {
+				const startTime = moment(
+					`${event.start.format('YYYY-MM-DD')}T${startWorkAt}`,
+				);
+				const endTime = moment(
+					`${event.start.format('YYYY-MM-DD')}T${endWorkAt}`,
+				);
+				const milliWorkingTime = workingTime * 60 * 60 * 1000;
+
+				let milliDuration;
+
+				if (
+					event.start.isBefore(endTime)
+					&& event.end.isAfter(endTime)
+				) {
+					milliDuration = endTime.diff(event.start);
+				}
+				else if (
+					event.start.isBefore(startTime)
+					&& event.end.isAfter(startTime)
+				) {
+					milliDuration = event.end.diff(startTime);
+				}
+				else if (
+					event.start.isAfter(startTime)
+					|| event.end.isBefore(endTime)
+				) {
+					milliDuration = event.end.diff(event.start);
+				}
+				if (milliDuration) {
+					const durationInUnit = milliDuration / milliWorkingTime;
+
+					event.unit = durationInUnit;
+
+					if (
+						!eventsPerDay[event.start.format(moment.HTML5_FMT.DATE)]
+					) {
+						eventsPerDay[
+							event.start.format(moment.HTML5_FMT.DATE)
+						] = [];
+					}
+					eventsPerDay[
+						event.start.format(moment.HTML5_FMT.DATE)
+					].push(event);
+				}
+			}
+		});
+
+		return eventsPerDay;
+	}
+
+	return {};
 };
 
 export const getMarginUntilDeadline = (

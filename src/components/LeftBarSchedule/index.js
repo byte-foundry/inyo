@@ -5,7 +5,10 @@ import {useQuery} from 'react-apollo-hooks';
 import {animated, useSpring} from 'react-spring';
 
 import {Loading} from '../../utils/content';
-import {extractScheduleFromWorkingDays} from '../../utils/functions';
+import {
+	extractScheduleFromWorkingDays,
+	getEventFromGoogleCalendarEvents,
+} from '../../utils/functions';
 import {
 	lightGrey,
 	mediumGrey,
@@ -13,6 +16,8 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
+import useAccount from '../../utils/useAccount';
+import useCalendar from '../../utils/useCalendar';
 import usePrevious from '../../utils/usePrevious';
 import useUserInfos from '../../utils/useUserInfos';
 import DefaultDroppableDay from '../DefaultDroppableDay';
@@ -154,15 +159,23 @@ function LeftBarSchedule({
 		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 
+	const startDate = moment().startOf('day');
+	const endDate = moment(startDate).add(12, 'days');
+	const [account] = useAccount();
+	const {data: eventsPerDay, loaded} = useCalendar(account, [
+		'primary',
+		startDate.toISOString(),
+		endDate.toISOString(),
+	]);
+
 	if (loadingUserPrefs) return <Loading />;
 	if (errorUserPrefs) throw errorUserPrefs;
 
 	const {workingDays} = userPrefsData.me;
-	const startDate = moment();
-	const endDate = moment(startDate).add(12, 'days');
 
 	const weekdays = extractScheduleFromWorkingDays(
 		workingDays,
+		eventsPerDay,
 		startDate,
 		days,
 		fullWeek,

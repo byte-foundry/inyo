@@ -55,41 +55,6 @@ IntlViewerContext.locale
 // Setting up locale mostly for react-dates
 moment.locale((navigator && navigator.language) || 'fr-FR');
 
-function startGAPI() {
-	window.gapi.client
-		.init({
-			apiKey: 'AIzaSyCSERFTaVneBgFQKg4TA9GPJqn99dNsuqQ',
-			discoveryDocs: [
-				'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
-			],
-			clientId:
-				'937092301568-ip4jvj47cjlm1hc2vg8jb89dch6fhvo4.apps.googleusercontent.com',
-			scope: 'https://www.googleapis.com/auth/calendar.events.readonly',
-		})
-		.then(() => {
-			window.gapi.auth2
-				.getAuthInstance()
-				.isSignedIn.listen((isSignedIn) => {
-					console.log('signed in to google');
-				});
-
-			if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
-				return window.gapi.client.calendar.events.list({
-					calendarId: 'primary',
-					timeMax: '2019-01-11T16:11:19.729Z',
-					timeMin: '2019-09-11T16:11:19.729Z',
-				});
-			}
-		})
-		.then(({result: {items}}) => {
-			console.log(items);
-		})
-		.catch((e) => {
-			console.log(e);
-		});
-}
-
-window.gapi.load('client', startGAPI);
 /* eslint-disable */
 (function() {
 	var w = window;

@@ -7,6 +7,7 @@ import {useApolloClient, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
+import LinkedCalendarForm from '../../../components/LinkedCalendarForm';
 import SettingsForm from '../../../components/SettingsForm';
 import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
@@ -252,6 +253,16 @@ const Account = ({location}) => {
 									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
+							<ProfileSideElem active={activeItem === 'calendar'}>
+								<ProfileSideLink
+									href="#calendar"
+									onClick={handleScroll}
+								>
+									<fbt project="inyo" desc="your options">
+										Vos Calendrier
+									</fbt>
+								</ProfileSideLink>
+							</ProfileSideElem>
 							<ProfileSideElem
 								active={activeItem === 'assistant'}
 							>
@@ -299,6 +310,15 @@ const Account = ({location}) => {
 							</fbt>
 						</ProfileTitle>
 						<SettingsForm data={me} done={displayToast} />
+						<ProfileTitle
+							id="calendar"
+							ref={createRef('assistant')}
+						>
+							<fbt project="inyo" desc="Your assistant">
+								Vos calendrier
+							</fbt>
+						</ProfileTitle>
+						<LinkedCalendarForm />
 						<ProfileTitle
 							id="assistant"
 							ref={createRef('assistant')}

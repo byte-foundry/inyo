@@ -1,6 +1,6 @@
 import moment from 'moment';
-import {useQuery} from 'react-apollo-hooks';
 
+import {useQuery} from './apollo-hooks';
 import {isCustomerTask} from './functions';
 import {GET_ALL_TASKS} from './queries';
 

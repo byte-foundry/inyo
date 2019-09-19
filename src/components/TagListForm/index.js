@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
 import {Formik} from 'formik';
 import React from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {TAG_COLOR_PALETTE} from '../../utils/constants';
 import {FlexRow, Loading} from '../../utils/content';
 import {CREATE_TAG} from '../../utils/mutations';

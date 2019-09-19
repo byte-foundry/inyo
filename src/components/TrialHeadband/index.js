@@ -2,9 +2,9 @@ import styled from '@emotion/styled';
 import gql from 'graphql-tag';
 import moment from 'moment';
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {
 	Button,
 	primaryPurple,

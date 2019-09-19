@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import React, {useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {Redirect} from 'react-router-dom';
 
 import OnboardingCalendar from '../../../components/Onboarding/onboarding-calendar';
@@ -8,6 +7,7 @@ import OnboardingCustomAssistant from '../../../components/Onboarding/onboarding
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSkills from '../../../components/Onboarding/onboarding-skills';
 import OnboardingThirdStep from '../../../components/Onboarding/onboarding-third-step';
+import {useQuery} from '../../../utils/apollo-hooks';
 import {gray20, Loading, signalGreen} from '../../../utils/content';
 import {GET_USER_INFOS} from '../../../utils/queries';
 

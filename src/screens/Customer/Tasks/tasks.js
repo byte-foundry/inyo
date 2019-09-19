@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
 import React, {Suspense, useContext} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
 import TasksList from '../../../components/TasksList';
+import {useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {Loading} from '../../../utils/content';
 import {CustomerContext} from '../../../utils/contexts';

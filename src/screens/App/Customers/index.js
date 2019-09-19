@@ -1,12 +1,12 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import ConfirmModal from '../../../components/ConfirmModal';
 import CustomerModalAndMail from '../../../components/CustomerModalAndMail';
 import HelpButton from '../../../components/HelpButton';
 import IconButton from '../../../components/IconButton';
 import fbt from '../../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
 import Search from '../../../utils/icons/search.svg';
 import {REMOVE_CUSTOMER} from '../../../utils/mutations';

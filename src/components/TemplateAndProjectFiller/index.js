@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {P} from '../../utils/content';
 import Search from '../../utils/icons/search.svg';

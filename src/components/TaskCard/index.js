@@ -1,8 +1,8 @@
 import styled from '@emotion/styled/macro';
 import React, {forwardRef} from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
+import {useMutation} from '../../utils/apollo-hooks';
 import {formatName, isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import {

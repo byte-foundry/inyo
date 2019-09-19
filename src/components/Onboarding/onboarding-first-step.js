@@ -1,7 +1,7 @@
+import {Mutation} from '@apollo/react-components';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import React, {Component} from 'react';
-import {Mutation} from 'react-apollo';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';

@@ -1,8 +1,8 @@
+import {Mutation} from '@apollo/react-components';
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
 import {Formik} from 'formik';
 import React, {Component} from 'react';
-import {Mutation} from 'react-apollo';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 

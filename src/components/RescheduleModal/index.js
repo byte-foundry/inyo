@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import {Button, P} from '../../utils/new/design-system';

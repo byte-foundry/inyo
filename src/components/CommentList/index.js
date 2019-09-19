@@ -2,11 +2,11 @@ import styled from '@emotion/styled';
 import {Field, Formik} from 'formik';
 import debounce from 'lodash.debounce';
 import React, {forwardRef, useRef, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import {Waypoint} from 'react-waypoint';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {
 	ErrorInput,
 	FlexRow,

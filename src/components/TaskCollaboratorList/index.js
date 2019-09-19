@@ -2,10 +2,10 @@ import Portal from '@reach/portal';
 import React, {
 	useCallback, useEffect, useRef, useState,
 } from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {formatName} from '../../utils/functions';
 import {accentGrey, TaskIconText} from '../../utils/new/design-system';
 import {GET_PROJECT_COLLAB_LINK} from '../../utils/queries';

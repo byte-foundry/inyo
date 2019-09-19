@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import ModalWithHoursAndDays from '../../../components/ModalWithHoursAndDays';
+import {useQuery} from '../../../utils/apollo-hooks';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
 const ConditionalContentMain = styled('div')``;

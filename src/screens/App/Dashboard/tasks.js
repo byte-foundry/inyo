@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useCallback, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag} from 'react-dnd';
 import {Route, withRouter} from 'react-router-dom';
 
@@ -15,6 +14,7 @@ import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import Task from '../../../components/TaskRow';
 import TasksList from '../../../components/TasksList';
 import fbt from '../../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
 	FlexRow,

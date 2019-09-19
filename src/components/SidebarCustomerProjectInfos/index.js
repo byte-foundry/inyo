@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import React, {useContext} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
 import {

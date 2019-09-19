@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {TAG_COLOR_PALETTE} from '../../utils/constants';
 import {primaryPurple, primaryWhite} from '../../utils/new/design-system';
 import {GET_USER_TAGS} from '../../utils/queries';

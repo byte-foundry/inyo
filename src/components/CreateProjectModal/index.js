@@ -1,10 +1,10 @@
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {useApolloClient, useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useApolloClient, useMutation, useQuery} from '../../utils/apollo-hooks';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_PROJECT} from '../../utils/mutations';
 import {templates} from '../../utils/project-templates';

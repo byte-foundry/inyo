@@ -1,6 +1,5 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import CreateProjectModal from '../../../components/CreateProjectModal';
@@ -10,6 +9,7 @@ import RemoveProjectModal from '../../../components/RemoveProjectModal';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import Tooltip from '../../../components/Tooltip';
 import fbt from '../../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {
 	FlexColumn,
 	FlexRow,

@@ -2,10 +2,10 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useRef, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,

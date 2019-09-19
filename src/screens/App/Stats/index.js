@@ -2,7 +2,6 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import momentDurationFormat from 'moment-duration-format';
 import React, {useCallback} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
@@ -10,6 +9,7 @@ import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import fbt from '../../../fbt/fbt.macro';
+import {useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {formatName} from '../../../utils/functions';
 import {

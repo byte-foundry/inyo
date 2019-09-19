@@ -1,10 +1,10 @@
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {REMINDER_TYPES_DATA} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {CANCEL_REMINDER} from '../../utils/mutations';

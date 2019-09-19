@@ -1,9 +1,9 @@
 import 'medium-draft/lib/index.css';
 
 import React from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {UPDATE_PROJECT_PERSONAL_NOTES} from '../../utils/mutations';
 import {SubHeading} from '../../utils/new/design-system';
 import {GET_PROJECT_PERSONAL_NOTES} from '../../utils/queries';

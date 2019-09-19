@@ -125,8 +125,8 @@ function EndOfTrial() {
 								60€ /an (4 mois offerts)
 							</Button> */}
 							<Button onClick={lifeStripeCheckout} link>
-								Choisir l'offre spéciale de lancement et profité
-								d'Inyo a vie pour 75$
+								Choisir le paiement en une fois et profité
+								d'Inyo a vie pour 99$
 							</Button>
 						</FlewRowMobile>
 						{/* <P>

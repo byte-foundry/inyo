@@ -1791,17 +1791,17 @@
     }
    ]
   },
-  "RkrzNG6YWOMV27VPUx72qg==": {
+  "iI0QP0ur9p2SOYleL/ufxg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Know how much you can work each day by connecting your calendars. (You can also do it from the {=Réglages} page)",
+     "translation": "Synchronize your Google Cal to know exactly how much time you have to work on your projects. (Go to Settings page to edit this sync)",
      "variations": {}
     }
    ]
   },
-  "i+N2pMPZHC01CwdcFCYULQ==": {
+  "SynCioVpr7mT3+TuEvtT5w==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -2587,6 +2587,16 @@
    "translations": [
     {
      "translation": "Change your password",
+     "variations": {}
+    }
+   ]
+  },
+  "mNrLD50QABntRu8H4zxj4w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Open in Google Calendar",
      "variations": {}
     }
    ]
@@ -6817,6 +6827,26 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "RkrzNG6YWOMV27VPUx72qg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Know how much you can work each day by connecting your calendars. (You can also do it from the {=Réglages} page)",
+     "variations": {}
+    }
+   ]
+  },
+  "i+N2pMPZHC01CwdcFCYULQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Settings",
      "variations": {}
     }
    ]

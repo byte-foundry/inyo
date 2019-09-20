@@ -36,6 +36,7 @@ import MaterialIcon from '../MaterialIcon';
 import RawPieChart from '../PieChart';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
+import Tooltip from '../Tooltip';
 import {
 	UnitAvailableDisplay,
 	UnitOvertimeDisplay,
@@ -273,24 +274,42 @@ const EventName = styled('div')`
 
 const EventCardElem = TaskCardElem.withComponent('a');
 
+const Logo = styled('div')`
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	padding-left: 5px;
+	img {
+		width: 16px;
+	}
+`;
+
 const EventCard = ({
 	event: {
 		name, start, end, link,
 	}, logo, workingTime,
 }) => (
-	<EventCardElem
-		href={link}
-		target="_blank"
-		style={{textDecoration: 'none', color: 'inherit'}}
+	<Tooltip
+		label={
+			<fbt project="inyo" desc="Google cal event tooltip">
+				Ouvrir dans Google Cal
+			</fbt>
+		}
 	>
-		<div>
-			<EventName>{name}</EventName>
+		<EventCardElem
+			href={link}
+			target="_blank"
+			style={{textDecoration: 'none', color: 'inherit'}}
+		>
 			<div>
-				{start.format('LT')} &mdash; {end.format('LT')}
+				<EventName>{name}</EventName>
+				<div>
+					{start.format('LT')} &mdash; {end.format('LT')}
+				</div>
 			</div>
-		</div>
-		{logo}
-	</EventCardElem>
+			<Logo>{logo}</Logo>
+		</EventCardElem>
+	</Tooltip>
 );
 
 const Schedule = ({
@@ -514,15 +533,7 @@ const Schedule = ({
 									{sortedEvents.map(event => (
 										<EventCard
 											event={event}
-											logo={
-												<img
-													style={{
-														width: '15px',
-														height: '100%',
-													}}
-													src={GoogleGLogo}
-												/>
-											}
+											logo={<img src={GoogleGLogo} />}
 											workingTime={workingTime}
 										/>
 									))}

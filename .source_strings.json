@@ -2672,7 +2672,7 @@
   },
   {
    "hashToText": {
-    "RkrzNG6YWOMV27VPUx72qg==": "En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire a tout moment depuis la page {=Réglages})"
+    "iI0QP0ur9p2SOYleL/ufxg==": "En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire à tout moment depuis la page {=Réglages})"
    },
    "filepath": "src/components/Onboarding/onboarding-calendar.js",
    "line_beg": 88,
@@ -2682,19 +2682,19 @@
    "type": "text",
    "desc": "onboarding last step description",
    "project": "inyo",
-   "jsfbt": "En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire a tout moment depuis la page {=Réglages})"
+   "jsfbt": "En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire à tout moment depuis la page {=Réglages})"
   },
   {
    "hashToText": {
-    "i+N2pMPZHC01CwdcFCYULQ==": "Réglages"
+    "SynCioVpr7mT3+TuEvtT5w==": "Réglages"
    },
    "filepath": "src/components/Onboarding/onboarding-calendar.js",
    "line_beg": 91,
-   "col_beg": 10,
+   "col_beg": 20,
    "line_end": 91,
-   "col_end": 25,
+   "col_end": 35,
    "type": "text",
-   "desc": "In the phrase: \"En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire a tout moment depuis la page {=Réglages})\"",
+   "desc": "In the phrase: \"En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire à tout moment depuis la page {=Réglages})\"",
    "project": "",
    "jsfbt": "Réglages"
   },
@@ -3953,12 +3953,26 @@
   },
   {
    "hashToText": {
+    "mNrLD50QABntRu8H4zxj4w==": "Ouvrir dans Google Cal"
+   },
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 294,
+   "col_beg": 3,
+   "line_end": 299,
+   "col_end": 9,
+   "type": "text",
+   "desc": "Google cal event tooltip",
+   "project": "inyo",
+   "jsfbt": "Ouvrir dans Google Cal"
+  },
+  {
+   "hashToText": {
     "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 341,
+   "line_beg": 376,
    "col_beg": 5,
-   "line_end": 343,
+   "line_end": 378,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3970,9 +3984,9 @@
     "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 357,
+   "line_beg": 392,
    "col_beg": 5,
-   "line_end": 362,
+   "line_end": 397,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3984,9 +3998,9 @@
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 462,
+   "line_beg": 497,
    "col_beg": 9,
-   "line_end": 468,
+   "line_end": 503,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
@@ -3998,9 +4012,9 @@
     "+3NmsH2Z/prpNjoiPTm1/A==": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 590,
+   "line_beg": 621,
    "col_beg": 6,
-   "line_end": 597,
+   "line_end": 628,
    "col_end": 12,
    "type": "text",
    "desc": "Banner displayed when the dashboard schedule is empty",

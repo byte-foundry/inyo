@@ -98,18 +98,21 @@ const IconWrap = styled('div')`
 
 	${props => props.current
 		&& `
-		&:after {
-			background: ${primaryPurple};
+			&:after {
+			${!props.noBg
+				&& `
+				background: ${primaryPurple};
+			`}
 			left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      height: 100%;
-	  }
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 100%;
+			height: 100%;
+		}
 	`}
 
-  &:hover {
+	&:hover {
     i {
 			color: ${props => (props.danger ? primaryRed : primaryPurple)};
 		}

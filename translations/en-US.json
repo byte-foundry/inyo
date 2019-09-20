@@ -36,7 +36,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "This user has not signed up to Inyo yet, do you want to send an invite ?",
+     "translation": "This user isn't signed up to Inyo. Do you wan to invite him?",
      "variations": {}
     }
    ]
@@ -1541,6 +1541,46 @@
     }
    ]
   },
+  "Gl6a1ddcqtexO4ro7Snkzg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Connect your google calendar to see what's coming in your dashboard",
+     "variations": {}
+    }
+   ]
+  },
+  "NAm8OK8J94VNSHYYfw3WVA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You're signed in as {email}",
+     "variations": {}
+    }
+   ]
+  },
+  "Pt3zeHWqdQMKKwjtpVTXpQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sign out from your google account",
+     "variations": {}
+    }
+   ]
+  },
+  "vK+3x+MvYzXVfzUUpoRciA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Connect a google account",
+     "variations": {}
+    }
+   ]
+  },
   "xy6wkmuEBOfpG12vqkZlxg==": {
    "tokens": [],
    "types": [],
@@ -1777,6 +1817,46 @@
    "translations": [
     {
      "translation": "No notification.",
+     "variations": {}
+    }
+   ]
+  },
+  "KxPSkYGXQb0L80UovA/p1Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Connect your calendar!",
+     "variations": {}
+    }
+   ]
+  },
+  "iI0QP0ur9p2SOYleL/ufxg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Know how much you can work each day by connecting your calendars. (You can also do it from the {=Réglages} page)",
+     "variations": {}
+    }
+   ]
+  },
+  "SynCioVpr7mT3+TuEvtT5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Settings",
+     "variations": {}
+    }
+   ]
+  },
+  "lC5QKGL863oLEdhXp1VBXQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Next",
      "variations": {}
     }
    ]
@@ -2181,16 +2261,6 @@
     }
    ]
   },
-  "lC5QKGL863oLEdhXp1VBXQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Next",
-     "variations": {}
-    }
-   ]
-  },
   "4tuQOsl4Nmc5QSLJQsp94A==": {
    "tokens": [],
    "types": [],
@@ -2557,6 +2627,16 @@
    "translations": [
     {
      "translation": "Change your password",
+     "variations": {}
+    }
+   ]
+  },
+  "mNrLD50QABntRu8H4zxj4w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Open in Google Calendar",
      "variations": {}
     }
    ]
@@ -4311,46 +4391,6 @@
     }
    ]
   },
-  "iNblzow8QtbBqC8mRIA05w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{hours} hours",
-     "variations": {}
-    }
-   ]
-  },
-  "8iRvDkCJ8f4b4IcLK+EptA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "1 hour",
-     "variations": {}
-    }
-   ]
-  },
-  "xPGrHu2Z4oAv2r7npa7d1w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{days} days",
-     "variations": {}
-    }
-   ]
-  },
-  "XD+zCvEq1JDoojLf0w41Mw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "1 day",
-     "variations": {}
-    }
-   ]
-  },
   "eWEhoomhYZ5RU7xkRHO29Q==": {
    "tokens": [],
    "types": [],
@@ -4686,7 +4726,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "browse",
+     "translation": "parcourir",
      "variations": {}
     }
    ]
@@ -5016,7 +5056,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Schedule and tasks list",
+     "translation": "Planning et liste de tâches",
      "variations": {}
     }
    ]
@@ -5116,7 +5156,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Data has been updated",
+     "translation": "Updated!",
      "variations": {}
     }
    ]
@@ -5157,6 +5197,16 @@
    "translations": [
     {
      "translation": "Your settings",
+     "variations": {}
+    }
+   ]
+  },
+  "ww70vtrrMfhBege0Owuubg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your calendars",
      "variations": {}
     }
    ]
@@ -5207,6 +5257,16 @@
    "translations": [
     {
      "translation": "Your working days and hours",
+     "variations": {}
+    }
+   ]
+  },
+  "Q8uL4inEQEQp1cEaVMk6Kg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your calendars",
      "variations": {}
     }
    ]
@@ -6807,6 +6867,106 @@
    "translations": [
     {
      "translation": "This user has not signed up to Inyo yet",
+     "variations": {}
+    }
+   ]
+  },
+  "XExdBgqJHNNwA1FTFraJjw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{prout}haha",
+     "variations": {}
+    }
+   ]
+  },
+  "lX/U196sA/EDgqxVTz2P4A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amount}",
+     "variations": {}
+    }
+   ]
+  },
+  "RkrzNG6YWOMV27VPUx72qg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Know how much you can work each day by connecting your calendars. (You can also do it from the {=Réglages} page)",
+     "variations": {}
+    }
+   ]
+  },
+  "i+N2pMPZHC01CwdcFCYULQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Settings",
+     "variations": {}
+    }
+   ]
+  },
+  "HQzhhdpIdw8GsuLLCmy77Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your calendars",
+     "variations": {}
+    }
+   ]
+  },
+  "hTM2hrKjxhpgoUjgDA61vQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Settings",
+     "variations": {}
+    }
+   ]
+  },
+  "iNblzow8QtbBqC8mRIA05w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{hours} hours",
+     "variations": {}
+    }
+   ]
+  },
+  "8iRvDkCJ8f4b4IcLK+EptA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 hour",
+     "variations": {}
+    }
+   ]
+  },
+  "xPGrHu2Z4oAv2r7npa7d1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{days} days",
+     "variations": {}
+    }
+   ]
+  },
+  "XD+zCvEq1JDoojLf0w41Mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
      "variations": {}
     }
    ]

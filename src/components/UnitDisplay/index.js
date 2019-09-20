@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
@@ -15,31 +16,9 @@ const UnitDisplay = ({unit}) => {
 		unitInHours = true;
 	}
 
-	return unitInHours ? (
-		<fbt project="inyo" desc="hours">
-			<fbt:plural
-				name="hours"
-				count={unitToDisplay}
-				many="heures"
-				value={unitToDisplay.toFixed(2)}
-				showCount="yes"
-			>
-				heure
-			</fbt:plural>
-		</fbt>
-	) : (
-		<fbt project="inyo" desc="days">
-			<fbt:plural
-				name="days"
-				count={unitToDisplay}
-				many="jours"
-				value={unitToDisplay.toFixed(2)}
-				showCount="yes"
-			>
-				jour
-			</fbt:plural>
-		</fbt>
-	);
+	return unitInHours
+		? moment.duration(unitToDisplay, 'hours').humanize()
+		: moment.duration(unitToDisplay, 'days').humanize();
 };
 
 export const UnitWorkedDisplay = props => (

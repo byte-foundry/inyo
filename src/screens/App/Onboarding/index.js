@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {useQuery} from 'react-apollo-hooks';
 import {Redirect} from 'react-router-dom';
 
+import OnboardingCalendar from '../../../components/Onboarding/onboarding-calendar';
 import OnboardingCustomAssistant from '../../../components/Onboarding/onboarding-custom-assistant';
 import OnboardingFirstStep from '../../../components/Onboarding/onboarding-first-step';
 import OnboardingSkills from '../../../components/Onboarding/onboarding-skills';
@@ -55,6 +56,7 @@ function Onboarding() {
 	const steps = [
 		OnboardingFirstStep,
 		OnboardingCustomAssistant,
+		OnboardingCalendar,
 		OnboardingSkills,
 		OnboardingThirdStep,
 	];

@@ -1,13 +1,18 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
+import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
-import {extractScheduleFromWorkingDays} from '../../utils/functions';
+import {
+	extractScheduleFromWorkingDays,
+	getEventFromGoogleCalendarEvents,
+} from '../../utils/functions';
+import GoogleGLogo from '../../utils/images/google_g_logo.svg';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import {
 	accentGrey,
@@ -18,7 +23,10 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
+	TaskCardElem,
 } from '../../utils/new/design-system';
+import useAccount from '../../utils/useAccount';
+import useCalendar from '../../utils/useCalendar';
 import useUserInfos from '../../utils/useUserInfos';
 import AssignedToOtherCard from '../AssignedToOtherCard';
 import DeadlineCard from '../DeadlineCard';
@@ -28,6 +36,7 @@ import MaterialIcon from '../MaterialIcon';
 import RawPieChart from '../PieChart';
 import ReminderCard from '../ReminderCard';
 import TaskCard from '../TaskCard';
+import Tooltip from '../Tooltip';
 import {
 	UnitAvailableDisplay,
 	UnitOvertimeDisplay,
@@ -254,6 +263,55 @@ const DroppableDayTasks = ({children}) => {
 	);
 };
 
+const EventName = styled('div')`
+	color: #140642;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: flex;
+	align-items: baseline;
+	margin-bottom: 5px;
+`;
+
+const EventCardElem = TaskCardElem.withComponent('a');
+
+const Logo = styled('div')`
+	display: flex;
+	justify-content: center;
+	align-items: start;
+	padding-left: 5px;
+	img {
+		width: 16px;
+	}
+`;
+
+const EventCard = ({
+	event: {
+		name, start, end, link,
+	}, logo, workingTime,
+}) => (
+	<Tooltip
+		label={
+			<fbt project="inyo" desc="Google cal event tooltip">
+				Ouvrir dans Google Cal
+			</fbt>
+		}
+	>
+		<EventCardElem
+			href={link}
+			target="_blank"
+			style={{textDecoration: 'none', color: 'inherit'}}
+		>
+			<div>
+				<EventName>{name}</EventName>
+				<div>
+					{start.format('LT')} &mdash; {end.format('LT')}
+				</div>
+			</div>
+			<Logo>{logo}</Logo>
+		</EventCardElem>
+	</Tooltip>
+);
+
 const Schedule = ({
 	startingFrom,
 	onChangeWeek,
@@ -270,13 +328,22 @@ const Schedule = ({
 	const startDay = moment(
 		moment(startingFrom).isValid() ? startingFrom : undefined,
 	).startOf('week');
+	const endDay = moment(startDay).endOf('week');
+
+	const [account] = useAccount();
+	const {data: eventsPerDay, loaded} = useCalendar(account, [
+		'primary',
+		startDay.toISOString(),
+		endDay.toISOString(),
+	]);
 
 	const weekdays = extractScheduleFromWorkingDays(
 		workingDays,
-		moment(startDay).startOf('week'),
+		eventsPerDay,
+		startDay,
 		days,
 		fullWeek,
-		moment(startDay).endOf('week'),
+		endDay,
 	);
 
 	// refresh the component every 10 minutes
@@ -342,6 +409,7 @@ const Schedule = ({
 					const sortedReminders = [...day.reminders];
 					const sortedDeadlines = [...day.deadlines];
 					const sortedAssignedTasks = [...day.assignedTasks];
+					const sortedEvents = [...day.events];
 
 					sortedTasks.sort(
 						(a, b) => a.schedulePosition - b.schedulePosition,
@@ -349,6 +417,10 @@ const Schedule = ({
 					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
 					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
+					const timeUsedByEvent = sortedEvents.reduce(
+						(time, event) => time + event.unit,
+						0,
+					);
 					const timeLeft
 						= 1
 						- sortedTasks.reduce(
@@ -358,11 +430,13 @@ const Schedule = ({
 									? task.timeItTook
 									: task.unit),
 							0,
-						);
-					const timeSpent = sortedTasks.reduce(
-						(time, task) => time + task.timeItTook,
-						0,
-					);
+						)
+						- timeUsedByEvent;
+					const timeSpent
+						= sortedTasks.reduce(
+							(time, task) => time + task.timeItTook,
+							0,
+						) + timeUsedByEvent;
 					const isPastDay = moment(day.momentDate).isBefore(
 						moment(),
 						'day',
@@ -455,6 +529,15 @@ const Schedule = ({
 									})}
 							</DayTitle>
 							<DroppableDayTasks id={day.date}>
+								<div>
+									{sortedEvents.map(event => (
+										<EventCard
+											event={event}
+											logo={<img src={GoogleGLogo} />}
+											workingTime={workingTime}
+										/>
+									))}
+								</div>
 								{sortedTasks.map(task => (
 									<DraggableTaskCard
 										key={`${task.id}-${task.schedulePosition}`}

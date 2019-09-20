@@ -2294,6 +2294,62 @@
   },
   {
    "hashToText": {
+    "Gl6a1ddcqtexO4ro7Snkzg==": "Connectez votre google calendar pour voir les évènements dans votre dashboard"
+   },
+   "filepath": "src/components/LinkedCalendarForm/index.js",
+   "line_beg": 53,
+   "col_beg": 6,
+   "line_end": 56,
+   "col_end": 12,
+   "type": "text",
+   "desc": "connect your google calendar",
+   "project": "inyo",
+   "jsfbt": "Connectez votre google calendar pour voir les évènements dans votre dashboard"
+  },
+  {
+   "hashToText": {
+    "NAm8OK8J94VNSHYYfw3WVA==": "Vous êtes connecté en tant que {email}"
+   },
+   "filepath": "src/components/LinkedCalendarForm/index.js",
+   "line_beg": 61,
+   "col_beg": 8,
+   "line_end": 66,
+   "col_end": 14,
+   "type": "text",
+   "desc": "your connected as",
+   "project": "inyo",
+   "jsfbt": "Vous êtes connecté en tant que {email}"
+  },
+  {
+   "hashToText": {
+    "Pt3zeHWqdQMKKwjtpVTXpQ==": "Déconnecter le compte google"
+   },
+   "filepath": "src/components/LinkedCalendarForm/index.js",
+   "line_beg": 69,
+   "col_beg": 8,
+   "line_end": 71,
+   "col_end": 14,
+   "type": "text",
+   "desc": "sign out of google",
+   "project": "inyo",
+   "jsfbt": "Déconnecter le compte google"
+  },
+  {
+   "hashToText": {
+    "vK+3x+MvYzXVfzUUpoRciA==": "Connecter un compte google"
+   },
+   "filepath": "src/components/LinkedCalendarForm/index.js",
+   "line_beg": 77,
+   "col_beg": 8,
+   "line_end": 79,
+   "col_end": 14,
+   "type": "text",
+   "desc": "sign out of google",
+   "project": "inyo",
+   "jsfbt": "Connecter un compte google"
+  },
+  {
+   "hashToText": {
     "xy6wkmuEBOfpG12vqkZlxg==": "L'email n'est pas valide"
    },
    "filepath": "src/components/LoginForm/index.js",
@@ -2655,6 +2711,104 @@
    "desc": "no notification message",
    "project": "inyo",
    "jsfbt": "Aucune notification."
+  },
+  {
+   "hashToText": {
+    "KxPSkYGXQb0L80UovA/p1Q==": "Brancher votre calendrier!"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 82,
+   "col_beg": 4,
+   "line_end": 84,
+   "col_end": 10,
+   "type": "text",
+   "desc": "onboarding last step title",
+   "project": "inyo",
+   "jsfbt": "Brancher votre calendrier!"
+  },
+  {
+   "hashToText": {
+    "iI0QP0ur9p2SOYleL/ufxg==": "En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire à tout moment depuis la page {=Réglages})"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 88,
+   "col_beg": 4,
+   "line_end": 92,
+   "col_end": 10,
+   "type": "text",
+   "desc": "onboarding last step description",
+   "project": "inyo",
+   "jsfbt": "En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire à tout moment depuis la page {=Réglages})"
+  },
+  {
+   "hashToText": {
+    "SynCioVpr7mT3+TuEvtT5w==": "Réglages"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 91,
+   "col_beg": 20,
+   "line_end": 91,
+   "col_end": 35,
+   "type": "text",
+   "desc": "In the phrase: \"En branchant votre calendrier vous pourrez juger au mieux de votre temps disponible. (Vous pourrez le faire à tout moment depuis la page {=Réglages})\"",
+   "project": "",
+   "jsfbt": "Réglages"
+  },
+  {
+   "hashToText": {
+    "NAm8OK8J94VNSHYYfw3WVA==": "Vous êtes connecté en tant que {email}"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 97,
+   "col_beg": 6,
+   "line_end": 100,
+   "col_end": 12,
+   "type": "text",
+   "desc": "your connected as",
+   "project": "inyo",
+   "jsfbt": "Vous êtes connecté en tant que {email}"
+  },
+  {
+   "hashToText": {
+    "vK+3x+MvYzXVfzUUpoRciA==": "Connecter un compte google"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 106,
+   "col_beg": 6,
+   "line_end": 108,
+   "col_end": 12,
+   "type": "text",
+   "desc": "sign out of google",
+   "project": "inyo",
+   "jsfbt": "Connecter un compte google"
+  },
+  {
+   "hashToText": {
+    "lC5QKGL863oLEdhXp1VBXQ==": "Continuer"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 118,
+   "col_beg": 5,
+   "line_end": 120,
+   "col_end": 11,
+   "type": "text",
+   "desc": "onboarding last step confirm",
+   "project": "inyo",
+   "jsfbt": "Continuer"
+  },
+  {
+   "hashToText": {
+    "/R9b6rrgd1R9NNnkFL+DWw==": "Retour"
+   },
+   "filepath": "src/components/Onboarding/onboarding-calendar.js",
+   "line_beg": 131,
+   "col_beg": 6,
+   "line_end": 133,
+   "col_end": 12,
+   "type": "text",
+   "desc": "back",
+   "project": "inyo",
+   "jsfbt": "Retour"
   },
   {
    "hashToText": {
@@ -3855,12 +4009,26 @@
   },
   {
    "hashToText": {
+    "mNrLD50QABntRu8H4zxj4w==": "Ouvrir dans Google Cal"
+   },
+   "filepath": "src/components/Schedule/index.js",
+   "line_beg": 294,
+   "col_beg": 3,
+   "line_end": 296,
+   "col_end": 9,
+   "type": "text",
+   "desc": "Google cal event tooltip",
+   "project": "inyo",
+   "jsfbt": "Ouvrir dans Google Cal"
+  },
+  {
+   "hashToText": {
     "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 304,
+   "line_beg": 371,
    "col_beg": 5,
-   "line_end": 306,
+   "line_end": 373,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3872,9 +4040,9 @@
     "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 320,
+   "line_beg": 387,
    "col_beg": 5,
-   "line_end": 325,
+   "line_end": 392,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -3886,9 +4054,9 @@
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 418,
+   "line_beg": 492,
    "col_beg": 9,
-   "line_end": 424,
+   "line_end": 498,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
@@ -3900,9 +4068,9 @@
     "+3NmsH2Z/prpNjoiPTm1/A==": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 529,
+   "line_beg": 612,
    "col_beg": 6,
-   "line_end": 536,
+   "line_end": 619,
    "col_end": 12,
    "type": "text",
    "desc": "Banner displayed when the dashboard schedule is empty",
@@ -6706,67 +6874,13 @@
   },
   {
    "hashToText": {
-    "iNblzow8QtbBqC8mRIA05w==": "{hours} heures",
-    "8iRvDkCJ8f4b4IcLK+EptA==": "1 heure"
-   },
-   "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 19,
-   "col_beg": 2,
-   "line_end": 29,
-   "col_end": 8,
-   "type": "table",
-   "desc": "hours",
-   "project": "inyo",
-   "jsfbt": {
-    "t": {
-     "*": "{hours} heures",
-     "_1": "1 heure"
-    },
-    "m": [
-     {
-      "token": "hours",
-      "type": 2,
-      "singular": true
-     }
-    ]
-   }
-  },
-  {
-   "hashToText": {
-    "xPGrHu2Z4oAv2r7npa7d1w==": "{days} jours",
-    "XD+zCvEq1JDoojLf0w41Mw==": "1 jour"
-   },
-   "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 31,
-   "col_beg": 2,
-   "line_end": 41,
-   "col_end": 8,
-   "type": "table",
-   "desc": "days",
-   "project": "inyo",
-   "jsfbt": {
-    "t": {
-     "*": "{days} jours",
-     "_1": "1 jour"
-    },
-    "m": [
-     {
-      "token": "days",
-      "type": 2,
-      "singular": true
-     }
-    ]
-   }
-  },
-  {
-   "hashToText": {
     "eWEhoomhYZ5RU7xkRHO29Q==": "travaillées",
     "j+BJwT4aXGrolwB4Xvy4EQ==": " travaillée"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 49,
+   "line_beg": 28,
    "col_beg": 3,
-   "line_end": 57,
+   "line_end": 36,
    "col_end": 9,
    "type": "table",
    "desc": "hours",
@@ -6787,9 +6901,9 @@
     "tIZMujl463EtvSJOE81ZXw==": " travaillé"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 59,
+   "line_beg": 38,
    "col_beg": 3,
-   "line_end": 67,
+   "line_end": 46,
    "col_end": 9,
    "type": "table",
    "desc": "hours",
@@ -6810,9 +6924,9 @@
     "QydQ/u+BrtEDDz0iycVSBg==": " encore disponible"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 75,
+   "line_beg": 54,
    "col_beg": 2,
-   "line_end": 83,
+   "line_end": 62,
    "col_end": 8,
    "type": "table",
    "desc": "hours",
@@ -6833,9 +6947,9 @@
     "1NAgDG7zwjGA95mqXUp5uw==": " supplémentaires"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 90,
+   "line_beg": 69,
    "col_beg": 2,
-   "line_end": 98,
+   "line_end": 77,
    "col_end": 8,
    "type": "table",
    "desc": "hours",
@@ -8017,9 +8131,9 @@
     "5TrreYnkWQUmMG2L1Ux3Dw==": "Les données ont été mises à jour"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 197,
+   "line_beg": 198,
    "col_beg": 4,
-   "line_end": 199,
+   "line_end": 200,
    "col_end": 10,
    "type": "text",
    "desc": "data updated",
@@ -8031,9 +8145,9 @@
     "abPJyr5VGFif2i9TExJ3+A==": "Bonjour {firstName} !"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 217,
+   "line_beg": 218,
    "col_beg": 5,
-   "line_end": 220,
+   "line_end": 221,
    "col_end": 11,
    "type": "text",
    "desc": "hello",
@@ -8045,9 +8159,9 @@
     "NuIIkViQIyeg6HJUdNibGQ==": "Vous"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 231,
+   "line_beg": 232,
    "col_beg": 9,
-   "line_end": 233,
+   "line_end": 234,
    "col_end": 15,
    "type": "text",
    "desc": "You",
@@ -8059,9 +8173,9 @@
     "efDJHJxyWWw4dwGW5vwX6Q==": "Votre société"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 241,
+   "line_beg": 242,
    "col_beg": 9,
-   "line_end": 243,
+   "line_end": 244,
    "col_end": 15,
    "type": "text",
    "desc": "your company",
@@ -8073,9 +8187,9 @@
     "4AlAty1s5DLJiucEkPdiKw==": "Vos options"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 251,
+   "line_beg": 252,
    "col_beg": 9,
-   "line_end": 253,
+   "line_end": 254,
    "col_end": 15,
    "type": "text",
    "desc": "your options",
@@ -8084,12 +8198,26 @@
   },
   {
    "hashToText": {
+    "ww70vtrrMfhBege0Owuubg==": "Vos Calendrier"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 262,
+   "col_beg": 9,
+   "line_end": 264,
+   "col_end": 15,
+   "type": "text",
+   "desc": "your options",
+   "project": "inyo",
+   "jsfbt": "Vos Calendrier"
+  },
+  {
+   "hashToText": {
     "qwccLMqDVPIS4TSJMEmLiA==": "Votre assistant·e"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 263,
+   "line_beg": 274,
    "col_beg": 9,
-   "line_end": 265,
+   "line_end": 276,
    "col_end": 15,
    "type": "text",
    "desc": "your assistant",
@@ -8101,9 +8229,9 @@
     "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 273,
+   "line_beg": 284,
    "col_beg": 9,
-   "line_end": 275,
+   "line_end": 286,
    "col_end": 15,
    "type": "text",
    "desc": "your account",
@@ -8115,9 +8243,9 @@
     "1kj1WzOm2vc74isNT75ZdA==": "Vous"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 283,
+   "line_beg": 294,
    "col_beg": 7,
-   "line_end": 285,
+   "line_end": 296,
    "col_end": 13,
    "type": "text",
    "desc": "you",
@@ -8129,9 +8257,9 @@
     "aQ4Yv6LVSKEViZ1s9+Uefg==": "Votre société"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 289,
+   "line_beg": 300,
    "col_beg": 7,
-   "line_end": 291,
+   "line_end": 302,
    "col_end": 13,
    "type": "text",
    "desc": "notification message",
@@ -8143,9 +8271,9 @@
     "KPu9BX8WauG07K7pDVC5TQ==": "Vos horaires et jours de travail"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 295,
+   "line_beg": 306,
    "col_beg": 7,
-   "line_end": 300,
+   "line_end": 311,
    "col_end": 13,
    "type": "text",
    "desc": "your working hours and days",
@@ -8154,12 +8282,26 @@
   },
   {
    "hashToText": {
+    "Q8uL4inEQEQp1cEaVMk6Kg==": "Vos calendriers"
+   },
+   "filepath": "src/screens/App/Account/index.js",
+   "line_beg": 315,
+   "col_beg": 7,
+   "line_end": 317,
+   "col_end": 13,
+   "type": "text",
+   "desc": "Your assistant",
+   "project": "inyo",
+   "jsfbt": "Vos calendriers"
+  },
+  {
+   "hashToText": {
     "AJGA334ZNjXST0vpVk74BQ==": "Votre assistant·e"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 307,
+   "line_beg": 324,
    "col_beg": 7,
-   "line_end": 309,
+   "line_end": 326,
    "col_end": 13,
    "type": "text",
    "desc": "Your assistant",
@@ -8171,9 +8313,9 @@
     "JUEOmO97Qgp/uV87EEjpVw==": "Votre compte"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 317,
+   "line_beg": 334,
    "col_beg": 7,
-   "line_end": 319,
+   "line_end": 336,
    "col_end": 13,
    "type": "text",
    "desc": "your account",
@@ -8185,9 +8327,9 @@
     "sWe9A61u1VOm3wqRysoERQ==": "mailto:contact@inyo.me?subject=Désinscription&body=Bonjour, je souhaiterai me désinscrire d'Inyo."
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 324,
+   "line_beg": 341,
    "col_beg": 14,
-   "line_end": 327,
+   "line_end": 344,
    "col_end": 9,
    "type": "text",
    "desc": "unregister",
@@ -8199,9 +8341,9 @@
     "yNm4CzziAqYVtRCzykalPA==": "Bonjour, je souhaiterai me désinscrire d'Inyo."
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 333,
+   "line_beg": 350,
    "col_beg": 11,
-   "line_end": 336,
+   "line_end": 353,
    "col_end": 12,
    "type": "text",
    "desc": "unregister intercom",
@@ -8213,9 +8355,9 @@
     "mPzERUHPGyQqbs+vT+dw2A==": "Me désinscrire"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 341,
+   "line_beg": 358,
    "col_beg": 8,
-   "line_end": 343,
+   "line_end": 360,
    "col_end": 14,
    "type": "text",
    "desc": "Delete account",
@@ -8227,9 +8369,9 @@
     "ImPMNsKu/b/s/GaXMWPwCA==": "Me déconnecter"
    },
    "filepath": "src/screens/App/Account/index.js",
-   "line_beg": 357,
+   "line_beg": 374,
    "col_beg": 8,
-   "line_end": 359,
+   "line_end": 376,
    "col_end": 14,
    "type": "text",
    "desc": "sign out",
@@ -8689,9 +8831,9 @@
     "UvVjY1/twy9IgUWUD3GGHQ==": "Vous n'avez plus de tâches à planifier."
    },
    "filepath": "src/screens/App/Dashboard/tasks.js",
-   "line_beg": 318,
+   "line_beg": 319,
    "col_beg": 11,
-   "line_end": 321,
+   "line_end": 322,
    "col_end": 17,
    "type": "text",
    "desc": "no more task",

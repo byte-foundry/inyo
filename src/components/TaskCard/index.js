@@ -13,6 +13,7 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
+	TaskCardElem,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
@@ -38,62 +39,6 @@ const CardTitle = styled('span')`
 const CardSubTitle = styled('span')`
 	color: ${accentGrey};
 	margin-top: 2px;
-`;
-
-const TaskCardElem = styled('div')`
-	background: ${primaryWhite};
-	border: 1px solid ${mediumGrey};
-	box-shadow: 3px 3px 6px ${mediumGrey};
-	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
-	border-radius: 3px;
-	padding: 8px;
-	margin-bottom: 5px;
-	font-size: 0.8rem;
-	line-height: 1.4;
-	display: grid;
-	grid-template-columns: 1fr 1.5rem;
-	cursor: pointer;
-	position: relative;
-
-	transition: all 300ms ease;
-
-	${Button} {
-		transition: all 300ms ease;
-		opacity: 0;
-
-		pointer-events: none;
-	}
-
-	&:hover {
-		box-shadow: 0 0 5px ${primaryGrey};
-		transition: all 300ms ease;
-
-		${Button} {
-			opacity: 1;
-
-			pointer-events: all;
-		}
-	}
-
-	${props => props.done
-		&& `
-		opacity: 0.5;
-
-		&:hover {
-			opacity: 1;
-		}
-
-		${Button} {
-			margin-right: 0;
-			opacity: 1;
-
-			pointer-events: all;
-
-			&::after {
-				background: transparent;
-			}
-		}
-	`}
 `;
 
 const TagContainer = styled('div')`
@@ -132,6 +77,7 @@ const TaskCard = withRouter(
 				{isOver && <DragSeparator />}
 				{!isCustomerTask(task.type) && (
 					<Button
+						noBg
 						current={task.status === 'FINISHED'}
 						invert={task.status === 'FINISHED'}
 						style={{

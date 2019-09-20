@@ -87,7 +87,7 @@ const OnboardingThirdStep = ({
 			<StepDescription>
 				<fbt project="inyo" desc="onboarding last step description">
 					En branchant votre calendrier vous pourrez juger au mieux de
-					votre temps disponible. (Vous pourrez le faire a tout moment
+					votre temps disponible. (Vous pourrez le faire à tout moment
 					depuis la page <i>Réglages</i>)
 				</fbt>
 			</StepDescription>

@@ -36,12 +36,20 @@ export default class GoogleAccount {
 								this.userInfo = this.loadAccountInfo();
 								this.setSignedIn(this.signedIn);
 								this.setUserInfo(this.userInfo);
+								window.Intercom(
+									'trackEvent',
+									'connected-google-cal',
+								);
 							}
 							else {
 								this.signedIn = false;
 								this.userInfo = {};
 								this.setSignedIn(this.signedIn);
 								this.setUserInfo(this.userInfo);
+								window.Intercom(
+									'trackEvent',
+									'disconnected-google-cal',
+								);
 							}
 						});
 

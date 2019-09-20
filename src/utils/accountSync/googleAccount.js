@@ -7,13 +7,12 @@ export default class GoogleAccount {
 
 	userInfo = {};
 
-	setSignedIn = undefined;
+	setSignedIn = new Set();
 
-	setUserInfo = undefined;
+	setUserInfo = new Set();
 
 	constructor(setSignedIn, setUserInfo) {
-		this.setSignedIn = setSignedIn;
-		this.setUserInfo = setUserInfo;
+		this.subscribe(setSignedIn, setUserInfo);
 		this.api = window.gapi;
 
 		const initClient = () => {
@@ -34,8 +33,7 @@ export default class GoogleAccount {
 							if (isSignedIn) {
 								this.signedIn = true;
 								this.userInfo = this.loadAccountInfo();
-								this.setSignedIn(this.signedIn);
-								this.setUserInfo(this.userInfo);
+								this.produceData();
 								window.Intercom(
 									'trackEvent',
 									'connected-google-cal',
@@ -44,8 +42,7 @@ export default class GoogleAccount {
 							else {
 								this.signedIn = false;
 								this.userInfo = {};
-								this.setSignedIn(this.signedIn);
-								this.setUserInfo(this.userInfo);
+								this.produceData();
 								window.Intercom(
 									'trackEvent',
 									'disconnected-google-cal',
@@ -56,13 +53,17 @@ export default class GoogleAccount {
 					if (this.api.auth2.getAuthInstance().isSignedIn.get()) {
 						this.signedIn = true;
 						this.userInfo = this.loadAccountInfo();
-						this.setSignedIn(this.signedIn);
-						this.setUserInfo(this.userInfo);
+						this.produceData();
 					}
 				});
 		};
 
 		this.api.load('client', initClient);
+	}
+
+	produceData() {
+		this.setSignedIn.forEach(setSignedIn => setSignedIn(this.signedIn));
+		this.setUserInfo.forEach(setUserInfo => setUserInfo(this.userInfo));
 	}
 
 	loadAccountInfo() {
@@ -79,6 +80,16 @@ export default class GoogleAccount {
 		return googleUser;
 	}
 
+	subscribe(setSignedIn, setUserInfo) {
+		this.setSignedIn.add(setSignedIn);
+		this.setUserInfo.add(setUserInfo);
+	}
+
+	unsubscribe(setSignedIn, setUserInfo) {
+		this.setSignedIn.delete(setSignedIn);
+		this.setUserInfo.delete(setUserInfo);
+	}
+
 	signIn() {
 		this.api.auth2.getAuthInstance().signIn();
 	}
@@ -92,10 +103,9 @@ export default class GoogleAccount {
 			instance = new GoogleAccount(setSignedIn, setUserInfo);
 		}
 		else {
+			instance.subscribe(setSignedIn, setUserInfo);
 			setSignedIn(instance.signedIn);
 			setUserInfo(instance.userInfo);
-			instance.setSignedIn = setSignedIn;
-			instance.setUserInfo = setUserInfo;
 		}
 
 		return instance;

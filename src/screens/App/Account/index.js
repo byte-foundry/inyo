@@ -310,10 +310,7 @@ const Account = ({location}) => {
 							</fbt>
 						</ProfileTitle>
 						<SettingsForm data={me} done={displayToast} />
-						<ProfileTitle
-							id="calendar"
-							ref={createRef('assistant')}
-						>
+						<ProfileTitle id="calendar" ref={createRef('calendar')}>
 							<fbt project="inyo" desc="Your assistant">
 								Vos calendriers
 							</fbt>

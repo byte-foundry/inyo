@@ -10,6 +10,11 @@ const useAccount = () => {
 		[setSignedIn, setUserInfo],
 	);
 
+	useEffect(
+		() => () => googleAccount.unsubscribe(setSignedIn, setUserInfo),
+		[],
+	);
+
 	return [googleAccount, signedIn, userInfo];
 };
 

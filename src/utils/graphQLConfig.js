@@ -31,7 +31,7 @@ import updateProjectWatchMutation from './mutationLinks/updateProject';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
 
 const options = {
-	uri: 'http://localhost:4000',
+	uri: GRAPHQL_API,
 };
 
 const httpLink = ApolloLink.split(

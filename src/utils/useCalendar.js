@@ -5,7 +5,7 @@ import GoogleCalendar from './calendars/googleCalendar';
 import {getEventFromGoogleCalendarEvents} from './functions';
 import useUserInfos from './useUserInfos';
 
-const cache = {};
+let cache = {};
 
 const useCalendar = (account, calendarOptions) => {
 	const calendarManager = new GoogleCalendar(account);
@@ -17,6 +17,15 @@ const useCalendar = (account, calendarOptions) => {
 		startWorkAt,
 		endWorkAt,
 	].join('_');
+
+	if (account && account.api && account.api.auth2) {
+		account.api.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
+			if (!isSignedIn) {
+				cache = {};
+				setCacheVersion(x => x + 1);
+			}
+		});
+	}
 
 	useEffect(() => {
 		if (!cache[cacheKey].loaded && account.signedIn) {

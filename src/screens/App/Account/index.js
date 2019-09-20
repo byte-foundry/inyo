@@ -315,7 +315,7 @@ const Account = ({location}) => {
 							ref={createRef('assistant')}
 						>
 							<fbt project="inyo" desc="Your assistant">
-								Vos calendrier
+								Vos calendriers
 							</fbt>
 						</ProfileTitle>
 						<LinkedCalendarForm />

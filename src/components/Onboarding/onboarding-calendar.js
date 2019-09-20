@@ -86,9 +86,9 @@ const OnboardingThirdStep = ({
 			<Illus src={calendarIllus} />
 			<StepDescription>
 				<fbt project="inyo" desc="onboarding last step description">
-					En branchant vous pourrez juger au mieux de votre temps
-					disponible. (Vous pourrez le faire a tout moment depuis la
-					page <i>Réglages</i>)
+					En branchant votre calendrier vous pourrez juger au mieux de
+					votre temps disponible. (Vous pourrez le faire a tout moment
+					depuis la page <i>Réglages</i>)
 				</fbt>
 			</StepDescription>
 			{signedIn ? (

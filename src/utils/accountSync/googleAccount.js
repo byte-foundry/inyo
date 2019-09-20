@@ -19,12 +19,11 @@ export default class GoogleAccount {
 		const initClient = () => {
 			this.api.client
 				.init({
-					apiKey: 'AIzaSyC0aZgvpgGnIbF2ZcTUg-apG98CtTkoql4',
+					apiKey: process.env.REACT_APP_GOOGLE_API_KEY,
 					discoveryDocs: [
 						'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest',
 					],
-					clientId:
-						'937092301568-ip4jvj47cjlm1hc2vg8jb89dch6fhvo4.apps.googleusercontent.com',
+					clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
 					scope:
 						'https://www.googleapis.com/auth/calendar.events.readonly',
 				})
@@ -87,6 +86,8 @@ export default class GoogleAccount {
 		else {
 			setSignedIn(instance.signedIn);
 			setUserInfo(instance.userInfo);
+			instance.setSignedIn = setSignedIn;
+			instance.setUserInfo = setUserInfo;
 		}
 
 		return instance;

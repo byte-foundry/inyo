@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useMemo, useState} from 'react';
 import {useMutation} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
+import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
@@ -270,8 +271,18 @@ const EventName = styled('div')`
 	margin-bottom: 5px;
 `;
 
-const EventCard = ({event: {name, start, end}, logo, workingTime}) => (
-	<TaskCardElem>
+const EventCardElem = TaskCardElem.withComponent('a');
+
+const EventCard = ({
+	event: {
+		name, start, end, link,
+	}, logo, workingTime,
+}) => (
+	<EventCardElem
+		href={link}
+		target="_blank"
+		style={{textDecoration: 'none', color: 'inherit'}}
+	>
 		<div>
 			<EventName>{name}</EventName>
 			<div>
@@ -279,7 +290,7 @@ const EventCard = ({event: {name, start, end}, logo, workingTime}) => (
 			</div>
 		</div>
 		{logo}
-	</TaskCardElem>
+	</EventCardElem>
 );
 
 const Schedule = ({

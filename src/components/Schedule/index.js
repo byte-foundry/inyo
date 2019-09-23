@@ -331,6 +331,7 @@ const Schedule = ({
 	const endDay = moment(startDay).endOf('week');
 
 	const [account] = useAccount();
+
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
 		startDay.toISOString(),
@@ -355,7 +356,9 @@ const Schedule = ({
 		return () => clearInterval(id);
 	});
 
-	const isWeekEmpty = weekdays.every(day => day.tasks.length === 0);
+	const isWeekEmpty = weekdays.every(
+		day => day.tasks.length === 0 && day.events.length === 0,
+	);
 
 	return (
 		<Container>

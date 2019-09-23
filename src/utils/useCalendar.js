@@ -18,8 +18,6 @@ const useCalendar = (account, calendarOptions) => {
 		endWorkAt,
 	].join('_');
 
-	console.log('useCalendar for', cacheKey);
-
 	if (account && account.api && account.api.auth2) {
 		account.api.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
 			if (!isSignedIn) {
@@ -30,7 +28,6 @@ const useCalendar = (account, calendarOptions) => {
 	}
 
 	useEffect(() => {
-		console.log('useCalendar effect for', cacheKey);
 		if (!cache[cacheKey].loaded && account.signedIn) {
 			const effect = async () => {
 				const googleEvents = getEventFromGoogleCalendarEvents(
@@ -43,7 +40,6 @@ const useCalendar = (account, calendarOptions) => {
 				cache[cacheKey].data = googleEvents;
 				cache[cacheKey].loaded = true;
 				setCacheVersion(x => x + 1);
-				console.log('cache fed for', cacheKey);
 			};
 
 			effect();

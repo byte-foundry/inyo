@@ -67,10 +67,15 @@ const ListItem = styled('li')`
 const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 	const lowercaseFilter = filter.toLocaleLowerCase();
 
+	// I'm not sure there's a better way to extract a string from a fbt function call
 	const filteredTypes = types.filter(
 		({name, description}) => lowercaseFilter === ''
-			|| name.toLocaleLowerCase().includes(lowercaseFilter)
-			|| description.toLocaleLowerCase().includes(lowercaseFilter),
+			|| name.props.content[0]
+				.toLocaleLowerCase()
+				.includes(lowercaseFilter)
+			|| description.props.content[0]
+				.toLocaleLowerCase()
+				.includes(lowercaseFilter),
 	);
 
 	const [focusedItemIndex, setFocusedItemIndex] = useState(0);

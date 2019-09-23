@@ -3,10 +3,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import React, {useEffect, useRef, useState} from 'react';
-import {useApolloClient, useQuery} from 'react-apollo-hooks';
+import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
+import LinkedCalendarForm from '../../../components/LinkedCalendarForm';
 import SettingsForm from '../../../components/SettingsForm';
 import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
@@ -158,7 +159,6 @@ const Account = ({location}) => {
 	const {data} = useQuery(GET_USER_INFOS, {
 		suspend: true,
 	});
-	const client = useApolloClient();
 
 	useEffect(() => {
 		const hash = location.hash.slice(1);
@@ -194,9 +194,11 @@ const Account = ({location}) => {
 
 	const displayToast = () => {
 		toast.info(
-			<div>
-				<p>Les données ont été mises à jour</p>
-			</div>,
+			<p>
+				<fbt project="inyo" desc="data updated">
+					Les données ont été mises à jour
+				</fbt>
+			</p>,
 			{
 				position: toast.POSITION.BOTTOM_LEFT,
 				autoClose: 3000,
@@ -252,6 +254,16 @@ const Account = ({location}) => {
 									</fbt>
 								</ProfileSideLink>
 							</ProfileSideElem>
+							<ProfileSideElem active={activeItem === 'calendar'}>
+								<ProfileSideLink
+									href="#calendar"
+									onClick={handleScroll}
+								>
+									<fbt project="inyo" desc="your options">
+										Vos Calendrier
+									</fbt>
+								</ProfileSideLink>
+							</ProfileSideElem>
 							<ProfileSideElem
 								active={activeItem === 'assistant'}
 							>
@@ -299,6 +311,12 @@ const Account = ({location}) => {
 							</fbt>
 						</ProfileTitle>
 						<SettingsForm data={me} done={displayToast} />
+						<ProfileTitle id="calendar" ref={createRef('calendar')}>
+							<fbt project="inyo" desc="Your assistant">
+								Vos calendriers
+							</fbt>
+						</ProfileTitle>
+						<LinkedCalendarForm />
 						<ProfileTitle
 							id="assistant"
 							ref={createRef('assistant')}

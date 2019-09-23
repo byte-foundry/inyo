@@ -67,14 +67,16 @@ const cache = new InMemoryCache({
 	freezeResults: true,
 });
 
-const errorLink = onError(({graphQLErrors}) => {
+const errorLink = onError(({graphQLErrors, networkError}) => {
 	if (graphQLErrors) {
-		graphQLErrors.forEach((error) => {
-			if (!error.extensions) {
+		graphQLErrors.forEach(({message, extensions}) => {
+			console.log(`[GraphQL error]: Message: ${message}`);
+
+			if (!extensions) {
 				return;
 			}
 
-			switch (error.extensions.code) {
+			switch (extensions.code) {
 			// disconnect if we know the token is invalid
 			case 'Auth':
 				window.localStorage.removeItem('authToken');
@@ -84,6 +86,7 @@ const errorLink = onError(({graphQLErrors}) => {
 			}
 		});
 	}
+	if (networkError) console.log(`[Network error]: ${networkError}`);
 });
 
 const watchLink = new WatchedMutationLink(cache, {

@@ -265,6 +265,7 @@ const DashboardTasks = ({location, history}) => {
 				fullWeek={hasFullWeekSchedule}
 				onMoveTask={onMoveTask}
 				assistantName={assistantName}
+				workingTime={workingTime}
 			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal

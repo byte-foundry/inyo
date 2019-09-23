@@ -178,11 +178,22 @@ const PendingActionsTray = ({projectId}) => {
 								isTimeItTook
 								style={{gridColumn: '1 / 3'}}
 								defaultValue={task.unit}
-								onChange={timeItTook => setValuesMap({
-									...valuesMap,
-									[task.id]: timeItTook,
-								})
-								}
+								onChange={(timeItTook) => {
+									if (task.unit !== timeItTook) {
+										window.Intercom(
+											'trackEvent',
+											'time-it-took-fill',
+											{
+												estimation: task.unit,
+												timeItTook,
+											},
+										);
+										setValuesMap({
+											...valuesMap,
+											[task.id]: timeItTook,
+										});
+									}
+								}}
 								onSubmit={timeItTook => finishItem({
 									variables: {
 										itemId: task.id,

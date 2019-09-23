@@ -117,6 +117,8 @@ export const CUSTOMER_TASK_TYPES = [
 	'INVOICE',
 ];
 
+// Any change here in the way item types are created is bound to affect
+// TaskTypeDropDown filtering
 export const ITEM_TYPES = [
 	{
 		icon: <TaskIcon />,

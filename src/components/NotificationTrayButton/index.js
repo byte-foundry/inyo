@@ -71,9 +71,7 @@ const List = styled('ul')`
 const Item = styled('li')`
 	display: block;
 
-	&:nth-child(odd) {
-		background: ${lightGrey};
-	}
+	border-bottom: 1px solid ${lightGrey};
 
 	& + li {
 		margin-top: 2px;

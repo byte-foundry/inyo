@@ -97,7 +97,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 	);
 
 	if (loading) return <span />;
-	if (error) throw error;
+	if (error && !data.item) throw error;
 
 	const {comments: itemComments} = data.item;
 

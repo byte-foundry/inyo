@@ -97,7 +97,7 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 	);
 
 	if (loading) return <span />;
-	if (error && !data.item) throw error;
+	if (error && !(data.item && error.message.includes('NetworkError'))) throw error;
 
 	const {comments: itemComments} = data.item;
 

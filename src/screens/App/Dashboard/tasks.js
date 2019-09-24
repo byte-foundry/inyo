@@ -156,7 +156,7 @@ const DashboardTasks = ({location, history}) => {
 	const linkedCustomerId = query.get('customerId');
 	const startingFrom = query.get('from');
 
-	if (error && !data.me) throw error;
+	if (error && !(data.me && error.message.includes('NetworkError'))) throw error;
 
 	const {
 		me: {id, tasks},

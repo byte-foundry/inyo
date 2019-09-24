@@ -66,5 +66,7 @@ export default function useBaseQuery(query, options) {
 		[],
 	);
 
+	result.observable = queryData.currentObservable.query;
+
 	return result;
 }

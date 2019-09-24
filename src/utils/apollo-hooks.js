@@ -3,17 +3,15 @@ import {useQuery as useApolloQuery} from '@apollo/react-hooks';
 import useBaseQuery from './useApolloQuery';
 
 export function useQuery(query, options) {
-	// eslint-disable-next-line
+	/* eslint-disable */
 	const result =
 		options && options.suspend
 			? useBaseQuery(query, options)
 			: useApolloQuery(query, options);
+	/* eslint-enable */
 
 	if (options && options.suspend && result.loading) {
-		// weird stuff happening here
-		throw new Promise(() => {
-			setTimeout(() => {});
-		});
+		throw result.observable.result();
 	}
 
 	return result;

@@ -89,13 +89,6 @@ const SectionItemList = styled('ul')`
 	}
 `;
 
-const LoadingContainer = styled('div')`
-	margin-top: 50px;
-	position: relative;
-	flex: 1;
-	height: 1px;
-`;
-
 const TemplateInfo = styled('div')`
 	margin-left: 4rem;
 	flex: 1;
@@ -173,13 +166,11 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 		({name, id}) => includesFilter(name) && projectId !== id,
 	);
 	const selectedProject = filteredProjects.find(t => t.id === selected);
-	const {
-		data: {project: selectedProjectData},
-	} = useQuery(GET_PROJECT_DATA, {
+	const {data: selectedProjectData} = useQuery(GET_PROJECT_DATA, {
 		variables: {
 			projectId: selectedProject && selectedProject.id,
 		},
-		suspend: true,
+		skip: !selectedProject,
 	});
 
 	const listSize = showAll ? filteredProjects.length : PROJECT_LIST_BASE_SIZE;
@@ -240,7 +231,7 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 											<Button
 												autoFocus
 												onClick={() => {
-													const sections = selectedProjectData.sections.map(
+													const sections = selectedProjectData.project.sections.map(
 														section => ({
 															name: section.name,
 															items: section.items.map(
@@ -326,7 +317,11 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 				</TemplateInfo>
 			)}
 			<TemplateTaskList selectedTemplate={selectedTemplate} />
-			<TemplateTaskList selectedTemplate={selectedProjectData} />
+			{selectedProjectData && (
+				<TemplateTaskList
+					selectedTemplate={selectedProjectData.project}
+				/>
+			)}
 		</Container>
 	);
 };

@@ -1,7 +1,13 @@
-import {useQuery as useOriginalUseQuery} from '@apollo/react-hooks';
+import {useQuery as useApolloQuery} from '@apollo/react-hooks';
+
+import useBaseQuery from './useApolloQuery';
 
 export function useQuery(query, options) {
-	const result = useOriginalUseQuery(query, options);
+	// eslint-disable-next-line
+	const result =
+		options && options.suspend
+			? useBaseQuery(query, options)
+			: useApolloQuery(query, options);
 
 	if (options && options.suspend && result.loading) {
 		// weird stuff happening here

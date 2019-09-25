@@ -883,43 +883,4 @@ export const TaskCardElem = styled('div')`
 	position: relative;
 
 	transition: all 300ms ease;
-
-	${Button} {
-		transition: all 300ms ease;
-		opacity: 0;
-
-		pointer-events: none;
-	}
-
-	&:hover {
-		box-shadow: 0 0 5px ${primaryGrey};
-		transition: all 300ms ease;
-		opacity: 1;
-
-		${Button} {
-			opacity: 1;
-
-			pointer-events: all;
-		}
-	}
-
-	${props => props.done
-		&& `
-		opacity: 0.5;
-
-		&:hover {
-			opacity: 1;
-		}
-
-		${Button} {
-			margin-right: 0;
-			opacity: 1;
-
-			pointer-events: all;
-
-			&::after {
-				background: transparent;
-			}
-		}
-	`}
 `;

@@ -36,6 +36,46 @@ const CardTitle = styled('span')`
 	}
 `;
 
+export const TaskCardElemWithBtn = styled(TaskCardElem)`
+	${Button} {
+		transition: all 300ms ease;
+		opacity: 0;
+
+		pointer-events: none;
+	}
+
+	&:hover {
+		box-shadow: 0 0 5px ${primaryGrey};
+		transition: all 300ms ease;
+
+		${Button} {
+			opacity: 1;
+
+			pointer-events: all;
+		}
+	}
+
+	${props => props.done
+		&& `
+		opacity: 0.5;
+
+		&:hover {
+			opacity: 1;
+		}
+
+		${Button} {
+			margin-right: 0;
+			opacity: 1;
+
+			pointer-events: all;
+
+			&::after {
+				background: transparent;
+			}
+		}
+	`}
+`;
+
 const CardSubTitle = styled('span')`
 	color: ${accentGrey};
 	margin-top: 2px;
@@ -62,7 +102,7 @@ const TaskCard = withRouter(
 		const [unfinishItem] = useMutation(UNFINISH_ITEM);
 
 		return (
-			<TaskCardElem
+			<TaskCardElemWithBtn
 				{...rest}
 				isAssigned={task.assignee}
 				ref={cardRef}
@@ -132,7 +172,7 @@ const TaskCard = withRouter(
 						)
 					</CardSubTitle>
 				)}
-			</TaskCardElem>
+			</TaskCardElemWithBtn>
 		);
 	},
 );

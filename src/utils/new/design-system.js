@@ -867,7 +867,8 @@ export const ScrollHelper = styled('div')`
 `;
 
 export const TaskCardElem = styled('div')`
-	background: ${primaryWhite};
+	background: ${props => (props.isLive ? primaryPurple : primaryWhite)};
+	opacity: ${props => (props.isOver ? '.5' : 1)};
 	border: 1px solid ${mediumGrey};
 	box-shadow: 3px 3px 6px ${mediumGrey};
 	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
@@ -893,6 +894,7 @@ export const TaskCardElem = styled('div')`
 	&:hover {
 		box-shadow: 0 0 5px ${primaryGrey};
 		transition: all 300ms ease;
+		opacity: 1;
 
 		${Button} {
 			opacity: 1;

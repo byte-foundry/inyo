@@ -20,6 +20,7 @@ import {
 	lightGrey,
 	mediumGrey,
 	P,
+	primaryBlack,
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
@@ -264,7 +265,8 @@ const DroppableDayTasks = ({children}) => {
 };
 
 const EventName = styled('div')`
-	color: #140642;
+	color: ${props => (props.isLive ? primaryWhite : primaryBlack)};
+	font-weight: ${props => (props.isLive ? 'bold' : 'normal')};
 	text-overflow: ellipsis;
 	overflow: hidden;
 	display: flex;
@@ -297,12 +299,16 @@ const EventCard = ({
 		}
 	>
 		<EventCardElem
+			isLive={moment(new Date()).isBetween(start, end)}
+			isOver={moment(new Date()).isAfter(end)}
 			href={link}
 			target="_blank"
 			style={{textDecoration: 'none', color: 'inherit'}}
 		>
 			<div>
-				<EventName>{name}</EventName>
+				<EventName isLive={moment(new Date()).isBetween(start, end)}>
+					{name}
+				</EventName>
 				<div>
 					{start.format('LT')} &mdash; {end.format('LT')}
 				</div>

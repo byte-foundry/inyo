@@ -7,13 +7,18 @@ export default class GoogleAccount {
 
 	userInfo = {};
 
+	loading = true;
+
 	setSignedIn = new Set();
 
 	setUserInfo = new Set();
 
-	constructor(setSignedIn, setUserInfo) {
-		this.subscribe(setSignedIn, setUserInfo);
+	setLoading = new Set();
+
+	constructor(setSignedIn, setUserInfo, setLoading) {
+		this.subscribe(setSignedIn, setUserInfo, setLoading);
 		this.api = window.gapi;
+		this.produceData();
 
 		const initClient = () => {
 			this.api.client
@@ -27,6 +32,7 @@ export default class GoogleAccount {
 						'https://www.googleapis.com/auth/calendar.events.readonly',
 				})
 				.then(() => {
+					this.loading = false;
 					this.api.auth2
 						.getAuthInstance()
 						.isSignedIn.listen((isSignedIn) => {
@@ -53,8 +59,9 @@ export default class GoogleAccount {
 					if (this.api.auth2.getAuthInstance().isSignedIn.get()) {
 						this.signedIn = true;
 						this.userInfo = this.loadAccountInfo();
-						this.produceData();
 					}
+
+					this.produceData();
 				});
 		};
 
@@ -64,6 +71,7 @@ export default class GoogleAccount {
 	produceData() {
 		this.setSignedIn.forEach(setSignedIn => setSignedIn(this.signedIn));
 		this.setUserInfo.forEach(setUserInfo => setUserInfo(this.userInfo));
+		this.setLoading.forEach(setLoading => setLoading(this.loading));
 	}
 
 	loadAccountInfo() {
@@ -80,14 +88,16 @@ export default class GoogleAccount {
 		return googleUser;
 	}
 
-	subscribe(setSignedIn, setUserInfo) {
+	subscribe(setSignedIn, setUserInfo, setLoading) {
 		this.setSignedIn.add(setSignedIn);
 		this.setUserInfo.add(setUserInfo);
+		this.setLoading.add(setLoading);
 	}
 
-	unsubscribe(setSignedIn, setUserInfo) {
+	unsubscribe(setSignedIn, setUserInfo, setLoading) {
 		this.setSignedIn.delete(setSignedIn);
 		this.setUserInfo.delete(setUserInfo);
+		this.setLoading.delete(setLoading);
 	}
 
 	signIn() {
@@ -98,14 +108,15 @@ export default class GoogleAccount {
 		this.api.auth2.getAuthInstance().signOut();
 	}
 
-	static instance = (setSignedIn, setUserInfo) => {
+	static instance = (setSignedIn, setUserInfo, setLoading) => {
 		if (!instance) {
-			instance = new GoogleAccount(setSignedIn, setUserInfo);
+			instance = new GoogleAccount(setSignedIn, setUserInfo, setLoading);
 		}
 		else {
-			instance.subscribe(setSignedIn, setUserInfo);
+			instance.subscribe(setSignedIn, setUserInfo, setLoading);
 			setSignedIn(instance.signedIn);
 			setUserInfo(instance.userInfo);
+			setLoading(instance.loading);
 		}
 
 		return instance;

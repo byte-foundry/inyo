@@ -336,7 +336,7 @@ const Schedule = ({
 	).startOf('week');
 	const endDay = moment(startDay).endOf('week');
 
-	const [account] = useAccount();
+	const [account, signedIn, , loading] = useAccount();
 
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
@@ -369,6 +369,17 @@ const Schedule = ({
 	return (
 		<Container>
 			<ScheduleNav>
+				{!loading && !signedIn && (
+					<Link
+						style={{flex: 1, alignSelf: 'center'}}
+						to="/app/account#calendar"
+					>
+						<fbt desc="sync your calendar">
+							Connecter votre calendrier google pour voir vos
+							évènements
+						</fbt>
+					</Link>
+				)}
 				<Button
 					onClick={() => onChangeWeek(
 						moment()

@@ -391,6 +391,10 @@ export const STRIPE_CONSTANT
 					plan: 'INYO_SUB',
 					quantity: 1,
 				},
+				[PLAN_NAMES.PH]: {
+					plan: 'sku_FrdvRBtGCcmCom',
+					quantity: 1,
+				},
 				[PLAN_NAMES.YEARLY]: {
 					plan: 'INYO_YEARLY',
 					quantity: 1,
@@ -408,6 +412,10 @@ export const STRIPE_CONSTANT
 				},
 				[PLAN_NAMES.MONTHLY]: {
 					plan: 'INYO_MONTHLY_USD',
+					quantity: 1,
+				},
+				[PLAN_NAMES.PH]: {
+					plan: 'sku_Frdwrqos88JUyC',
 					quantity: 1,
 				},
 				[PLAN_NAMES.YEARLY]: {

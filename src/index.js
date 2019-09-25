@@ -180,7 +180,7 @@ function Root() {
 									to="/app/:customerToken/tasks?projectId=:projectId"
 								/>
 								<Route
-									path="/inyo-a-vie"
+									path={['/inyo-a-vie', '/premium']}
 									component={withTracker(StraightToCheckout)}
 								/>
 								<Route path="/paid" component={paidWithProps} />

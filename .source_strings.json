@@ -4026,9 +4026,9 @@
     "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 371,
+   "line_beg": 374,
    "col_beg": 5,
-   "line_end": 373,
+   "line_end": 376,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -4040,9 +4040,9 @@
     "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 387,
+   "line_beg": 390,
    "col_beg": 5,
-   "line_end": 392,
+   "line_end": 395,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -4054,9 +4054,9 @@
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 492,
+   "line_beg": 495,
    "col_beg": 9,
-   "line_end": 498,
+   "line_end": 501,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
@@ -4068,9 +4068,9 @@
     "+3NmsH2Z/prpNjoiPTm1/A==": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 612,
+   "line_beg": 615,
    "col_beg": 6,
-   "line_end": 619,
+   "line_end": 622,
    "col_end": 12,
    "type": "text",
    "desc": "Banner displayed when the dashboard schedule is empty",
@@ -6761,9 +6761,9 @@
     "R1l/CHfPdQLEvMGzqCZy4Q==": "Tâches automatiques et/ou prédéfinies"
    },
    "filepath": "src/components/TaskTypeDropdown/index.js",
-   "line_beg": 109,
+   "line_beg": 114,
    "col_beg": 4,
-   "line_end": 111,
+   "line_end": 116,
    "col_end": 10,
    "type": "text",
    "desc": "task type dropdown heading",
@@ -9654,7 +9654,7 @@
   },
   {
    "hashToText": {
-    "jlMfSYRO0xyLbQCWNycBVg==": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+    "pth9dfSM1XyB3KYNrDShZg==": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 109,
@@ -9664,11 +9664,11 @@
    "type": "text",
    "desc": "end of trial",
    "project": "inyo",
-   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
   },
   {
    "hashToText": {
-    "S/lDcCNWAvCYQq+NV7vlzQ==": "Bonjour {email} ,"
+    "J6FjBEf9EvTK84AUacYfqg==": "Bonjour {email} ,"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 110,
@@ -9676,13 +9676,13 @@
    "line_end": 116,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Bonjour {email} ,"
   },
   {
    "hashToText": {
-    "Wt+cJPy5epCJEXFSUIwhOw==": "Votre période d'essai de 21 jours est terminée !"
+    "4BP3euylrZnLknGBeLk1Bg==": "Votre période d'essai de 21 jours est terminée !"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 117,
@@ -9690,13 +9690,13 @@
    "line_end": 117,
    "col_end": 61,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Votre période d'essai de 21 jours est terminée !"
   },
   {
    "hashToText": {
-    "eK79Bn5+/nLmk3jYbxqifA==": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
+    "SFLMxRS5pPE5ZpIsepzAgg==": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 118,
@@ -9704,13 +9704,13 @@
    "line_end": 122,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
   },
   {
    "hashToText": {
-    "lRliGP7yf62NJEIe6WfLnA==": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
+    "TTSWGyswSUUpeFxSA0Xokg==": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 123,
@@ -9718,13 +9718,13 @@
    "line_end": 127,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
   },
   {
    "hashToText": {
-    "JgsWc6QO5q/HRaqHK/YFHQ==": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}"
+    "Epqqbzw6CbrC95R4k2jb3Q==": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 128,
@@ -9732,13 +9732,13 @@
    "line_end": 140,
    "col_end": 22,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
-   "jsfbt": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}"
+   "jsfbt": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
   },
   {
    "hashToText": {
-    "ITI8XvBaWfxkMtyfm/3KXQ==": "S'abonner pour 12$ /mois"
+    "eggk3plkTeLVC/zdfZ0HmQ==": "S'abonner pour 12$ /mois"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 129,
@@ -9746,13 +9746,13 @@
    "line_end": 131,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "S'abonner pour 12$ /mois"
   },
   {
    "hashToText": {
-    "nmxkJz6CkJYHXblHdWWqtA==": "ou"
+    "C/FdpEKIV7nGc4WnBi2exw==": "ou"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 132,
@@ -9760,27 +9760,27 @@
    "line_end": 132,
    "col_end": 32,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "ou"
   },
   {
    "hashToText": {
-    "Rf0r42Bn091A3C0HbJubEw==": "Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$"
+    "oeeqsNM7HCng0S7mIbL5Fg==": "96$ /an (4 mois offerts)"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
-   "line_beg": 136,
+   "line_beg": 133,
    "col_beg": 7,
-   "line_end": 139,
+   "line_end": 135,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
-   "jsfbt": "Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$"
+   "jsfbt": "96$ /an (4 mois offerts)"
   },
   {
    "hashToText": {
-    "x8x1qeOJ3eH46s8iXFX4aQ==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+    "WHutu5rksXpb0Sq2MWT2yw==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 146,
@@ -9788,13 +9788,13 @@
    "line_end": 157,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
   },
   {
    "hashToText": {
-    "c8BZVzAyMqD+7Hz6G9ORqQ==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+    "z3bgbWxTX/mtJmj+cWQD0g==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 147,
@@ -9802,7 +9802,7 @@
    "line_end": 156,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
   },
@@ -9892,7 +9892,7 @@
   },
   {
    "hashToText": {
-    "8JdYB43CJ1+vMZ4ava2Teg==": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+    "4w0Tur4yhi4E+GoNdyL+Rg==": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 109,
@@ -9902,11 +9902,11 @@
    "type": "text",
    "desc": "notification message",
    "project": "inyo",
-   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
   },
   {
    "hashToText": {
-    "bN5UClTIYFrOTO2HEt5S0A==": "Bonjour {email} ,"
+    "ELmwPObwLRfbiv49a1h7rg==": "Bonjour {email} ,"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 110,
@@ -9914,13 +9914,13 @@
    "line_end": 116,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Bonjour {email} ,"
   },
   {
    "hashToText": {
-    "NoTnQdYvII3Q6h7znutH/w==": "Votre période d'essai va bientôt se terminer"
+    "eP4BcLa66wo5+imwKTcWFQ==": "Votre période d'essai va bientôt se terminer"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 117,
@@ -9928,13 +9928,13 @@
    "line_end": 117,
    "col_end": 57,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Votre période d'essai va bientôt se terminer"
   },
   {
    "hashToText": {
-    "A5oTXW71AoN17ScMbmX2bQ==": "Vous pouvez vous abonner dès maintenant à Inyo."
+    "XJPtEJ898msx4cy+Darfow==": "Vous pouvez vous abonner dès maintenant à Inyo."
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 118,
@@ -9942,13 +9942,13 @@
    "line_end": 118,
    "col_end": 60,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Vous pouvez vous abonner dès maintenant à Inyo."
   },
   {
    "hashToText": {
-    "itpCACFYiHQJlxS4wLJppA==": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}"
+    "WEHDQQtj0pmlVS1hn8JoLA==": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 119,
@@ -9956,13 +9956,13 @@
    "line_end": 131,
    "col_end": 22,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
-   "jsfbt": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}"
+   "jsfbt": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
   },
   {
    "hashToText": {
-    "xMM/dxOa78xb4UQty6vE/g==": "S'abonner pour 12$ /mois"
+    "XYD7etl0WB6YTOsX1WBR5A==": "S'abonner pour 12$ /mois"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 120,
@@ -9970,13 +9970,13 @@
    "line_end": 122,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "S'abonner pour 12$ /mois"
   },
   {
    "hashToText": {
-    "XxmNHV+CSDG4dLrxCAstFg==": "ou"
+    "SFDfcirog4vEvHPB9Fbwog==": "ou"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 123,
@@ -9984,27 +9984,27 @@
    "line_end": 123,
    "col_end": 32,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "ou"
   },
   {
    "hashToText": {
-    "uxsVOI0qJgpVehl9SfWe3Q==": "Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$"
+    "P5LK9qRfzrnT0ku9BOJSkQ==": "96$ /an (4 mois offerts)"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
-   "line_beg": 127,
+   "line_beg": 124,
    "col_beg": 7,
-   "line_end": 130,
+   "line_end": 126,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
-   "jsfbt": "Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$"
+   "jsfbt": "96$ /an (4 mois offerts)"
   },
   {
    "hashToText": {
-    "sS7lbT6ud332J4JbSuxTMw==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+    "HTUlJFR0S3TGwXb9Bu0z9w==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 137,
@@ -10012,13 +10012,13 @@
    "line_end": 148,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
   },
   {
    "hashToText": {
-    "beOrGcOnckyqPUWq5EPP7g==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+    "M/GOF9h9fWAlrk4Oazrl3w==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
    },
    "filepath": "src/screens/PrematureEndOfTrial/index.js",
    "line_beg": 138,
@@ -10026,7 +10026,7 @@
    "line_end": 147,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
   },
@@ -10455,9 +10455,9 @@
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 129,
+   "line_beg": 131,
    "col_beg": 10,
-   "line_end": 129,
+   "line_end": 131,
    "col_end": 43,
    "type": "text",
    "desc": "basic task name",
@@ -10469,9 +10469,9 @@
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 132,
+   "line_beg": 134,
    "col_beg": 10,
-   "line_end": 135,
+   "line_end": 137,
    "col_end": 4,
    "type": "text",
    "desc": "basic task description",
@@ -10483,9 +10483,9 @@
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 146,
+   "line_beg": 148,
    "col_beg": 10,
-   "line_end": 146,
+   "line_end": 148,
    "col_end": 64,
    "type": "text",
    "desc": "customer task name",
@@ -10497,9 +10497,9 @@
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 149,
+   "line_beg": 151,
    "col_beg": 10,
-   "line_end": 152,
+   "line_end": 154,
    "col_end": 4,
    "type": "text",
    "desc": "customer task description",
@@ -10511,9 +10511,9 @@
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 162,
+   "line_beg": 164,
    "col_beg": 10,
-   "line_end": 162,
+   "line_end": 164,
    "col_end": 65,
    "type": "text",
    "desc": "content acquisition name",
@@ -10525,9 +10525,9 @@
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 165,
+   "line_beg": 167,
    "col_beg": 10,
-   "line_end": 168,
+   "line_end": 170,
    "col_end": 4,
    "type": "text",
    "desc": "content acquisition description",
@@ -10539,9 +10539,9 @@
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 178,
+   "line_beg": 180,
    "col_beg": 10,
-   "line_end": 178,
+   "line_end": 180,
    "col_end": 50,
    "type": "text",
    "desc": "section name",
@@ -10553,9 +10553,9 @@
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 181,
+   "line_beg": 183,
    "col_beg": 10,
-   "line_end": 184,
+   "line_end": 186,
    "col_end": 4,
    "type": "text",
    "desc": "section description",
@@ -10567,9 +10567,9 @@
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 194,
+   "line_beg": 196,
    "col_beg": 10,
-   "line_end": 194,
+   "line_end": 196,
    "col_end": 57,
    "type": "text",
    "desc": "invoice task name",
@@ -10581,9 +10581,9 @@
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 197,
+   "line_beg": 199,
    "col_beg": 10,
-   "line_end": 200,
+   "line_end": 202,
    "col_end": 4,
    "type": "text",
    "desc": "invoice task description",
@@ -10595,9 +10595,9 @@
     "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 258,
+   "line_beg": 260,
    "col_beg": 24,
-   "line_end": 261,
+   "line_end": 263,
    "col_end": 3,
    "type": "text",
    "desc": "first customer email",
@@ -10609,9 +10609,9 @@
     "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 264,
+   "line_beg": 266,
    "col_beg": 24,
-   "line_end": 270,
+   "line_end": 272,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder customer email",
@@ -10623,9 +10623,9 @@
     "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 273,
+   "line_beg": 275,
    "col_beg": 24,
-   "line_end": 279,
+   "line_end": 281,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder customer email",
@@ -10637,9 +10637,9 @@
     "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 282,
+   "line_beg": 284,
    "col_beg": 24,
-   "line_end": 288,
+   "line_end": 290,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder customer email",
@@ -10651,9 +10651,9 @@
     "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 291,
+   "line_beg": 293,
    "col_beg": 24,
-   "line_end": 297,
+   "line_end": 299,
    "col_end": 3,
    "type": "text",
    "desc": "first invoice email",
@@ -10665,9 +10665,9 @@
     "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 300,
+   "line_beg": 302,
    "col_beg": 24,
-   "line_end": 306,
+   "line_end": 308,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder invoice email",
@@ -10679,9 +10679,9 @@
     "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 309,
+   "line_beg": 311,
    "col_beg": 24,
-   "line_end": 315,
+   "line_end": 317,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder invoice email",
@@ -10693,9 +10693,9 @@
     "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 318,
+   "line_beg": 320,
    "col_beg": 24,
-   "line_end": 324,
+   "line_end": 326,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder invoice email",
@@ -10707,9 +10707,9 @@
     "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 327,
+   "line_beg": 329,
    "col_beg": 24,
-   "line_end": 333,
+   "line_end": 335,
    "col_end": 3,
    "type": "text",
    "desc": "fourth reminder invoice email",
@@ -10721,9 +10721,9 @@
     "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 336,
+   "line_beg": 338,
    "col_beg": 24,
-   "line_end": 342,
+   "line_end": 344,
    "col_end": 3,
    "type": "text",
    "desc": "fitfh reminder invoice email",

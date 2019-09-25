@@ -9,7 +9,7 @@ function StraightToCheckout({location}) {
 	stripe
 		.redirectToCheckout({
 			...stripeInfos,
-			items: [stripeInfos.items.LIFE],
+			items: [stripeInfos.items[queryString.get('plan') || 'MONTHLY']],
 			customerEmail: queryString.get('email'),
 			clientReferenceId: queryString.get('id'),
 			billingAddressCollection: 'required',

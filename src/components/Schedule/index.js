@@ -299,8 +299,8 @@ const EventCard = ({
 		}
 	>
 		<EventCardElem
-			isLive={moment(new Date()).isBetween(start, end)}
-			isOver={moment(new Date()).isAfter(end)}
+			isLive={moment().isBetween(start, end)}
+			isOver={moment().isAfter(end)}
 			href={link}
 			target="_blank"
 			style={{textDecoration: 'none', color: 'inherit'}}

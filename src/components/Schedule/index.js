@@ -306,7 +306,7 @@ const EventCard = ({
 			style={{textDecoration: 'none', color: 'inherit'}}
 		>
 			<div>
-				<EventName isLive={moment(new Date()).isBetween(start, end)}>
+				<EventName isLive={moment().isBetween(start, end)}>
 					{name}
 				</EventName>
 				<div>

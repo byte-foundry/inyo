@@ -42,7 +42,7 @@ const ProfileSection = styled('div')`
 `;
 
 const LinkedCalendarForm = () => {
-	const [account, signedIn, userInfo] = useAccount();
+	const [account, signedIn, userInfo, loading] = useAccount();
 
 	return (
 		<ProfileSection>
@@ -55,31 +55,41 @@ const LinkedCalendarForm = () => {
 							évènements dans votre dashboard
 						</fbt>
 					</P>
-					{signedIn ? (
-						<>
-							<P>
-								<fbt project="inyo" desc="your connected as">
-									Vous êtes connecté en tant que{' '}
-									<fbt:param name="email">
-										{userInfo.email}
-									</fbt:param>
-								</fbt>
-							</P>
-							<Button onClick={() => account.signOut()}>
-								<fbt project="inyo" desc="sign out of google">
-									Déconnecter le compte google
-								</fbt>
-							</Button>
-						</>
-					) : (
-						<>
-							<Button onClick={() => account.signIn()}>
-								<fbt project="inyo" desc="sign out of google">
-									Connecter un compte google
-								</fbt>
-							</Button>
-						</>
-					)}
+					{!loading
+						&& (signedIn ? (
+							<>
+								<P>
+									<fbt
+										project="inyo"
+										desc="your connected as"
+									>
+										Vous êtes connecté en tant que{' '}
+										<fbt:param name="email">
+											{userInfo.email}
+										</fbt:param>
+									</fbt>
+								</P>
+								<Button onClick={() => account.signOut()}>
+									<fbt
+										project="inyo"
+										desc="sign out of google"
+									>
+										Déconnecter le compte google
+									</fbt>
+								</Button>
+							</>
+						) : (
+							<>
+								<Button onClick={() => account.signIn()}>
+									<fbt
+										project="inyo"
+										desc="sign out of google"
+									>
+										Connecter un compte google
+									</fbt>
+								</Button>
+							</>
+						))}
 				</div>
 			</FormContainer>
 		</ProfileSection>

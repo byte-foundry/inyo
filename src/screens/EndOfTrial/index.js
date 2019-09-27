@@ -130,13 +130,13 @@ function EndOfTrial() {
 								S'abonner pour 12$ /mois
 							</Button>
 							<Separator>ou</Separator>
-							{/* <Button onClick={yearlyStripeCheckout} link>
-								60€ /an (4 mois offerts)
-							</Button> */}
-							<Button onClick={lifeStripeCheckout} link>
+							<Button onClick={yearlyStripeCheckout} link>
+								96$ /an (4 mois offerts)
+							</Button>
+							{/* <Button onClick={lifeStripeCheckout} link>
 								Choisir l'offre spéciale de lancement et profité
 								d'Inyo a vie pour 75$
-							</Button>
+							</Button> */}
 						</FlewRowMobile>
 						{/* <P>
 							<Button onClick={lifeStripeCheckout} big primary>

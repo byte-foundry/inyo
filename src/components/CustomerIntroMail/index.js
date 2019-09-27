@@ -42,7 +42,7 @@ const Info = styled(P)`
 function cap(s) {
 	let stringValue = s;
 
-	if (typeof s !== 'string' && s && s._stringValue) stringValue = s._stringValue;
+	if (typeof s !== 'string' && s && s.props.content[0]) stringValue = s.props.content[0];
 
 	return stringValue.charAt(0).toUpperCase() + stringValue.slice(1);
 }

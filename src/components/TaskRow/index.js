@@ -24,6 +24,7 @@ import {
 	TaskHeading,
 	TaskIconText,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import CustomerDropdown from '../CustomerDropdown';
 import InitialIdentifier from '../InitialIdentifier';
@@ -33,6 +34,7 @@ import TaskComment from '../TaskComment';
 import TaskDescription from '../TaskDescription';
 import TaskReminderIcon from '../TaskReminderIcon';
 import Tooltip from '../Tooltip';
+import UnitDisplay from '../UnitDisplay';
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -280,6 +282,7 @@ function TaskRow({
 
 	const iconRef = useRef();
 	const dropdownRef = useRef();
+	const {workingTime} = useUserInfos();
 
 	useOnClickOutside(dropdownRef, () => {
 		setEditAssignee(false);
@@ -581,6 +584,32 @@ function TaskRow({
 									noComment
 									locationSearch={location.search}
 								/>
+								{item.unit <= 0.1 / workingTime
+								&& item.timeItTook <= 0.1 / workingTime ? (
+										<div />
+									) : (
+										<Tooltip
+											label={
+												<UnitDisplay
+													unit={
+														item.timeItTook
+															? item.timeItTook
+															: item.unit
+													}
+												/>
+											}
+										>
+											<TaskIconText
+												inactive={false}
+												icon={
+													<MaterialIcon
+														icon="timer"
+														size="tiny"
+													/>
+												}
+											/>
+										</Tooltip>
+									)}
 								{item.description ? (
 									<TaskDescription
 										taskUrlPrefix={taskUrlPrefix}

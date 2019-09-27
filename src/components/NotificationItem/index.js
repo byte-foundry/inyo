@@ -13,15 +13,17 @@ import {
 import {
 	accentGrey,
 	Button,
+	lightGrey,
 	lightPurple,
 	primaryBlack,
 	primaryGrey,
+	primaryPurple,
+	primaryWhite,
 } from '../../utils/new/design-system';
 import MaterialIcon from '../MaterialIcon';
 
 const A = styled(Link)`
 	text-decoration: none;
-	color: ${primaryGrey};
 
 	&:hover {
 		color: ${primaryBlack};
@@ -30,13 +32,17 @@ const A = styled(Link)`
 
 const Container = styled('span')`
 	border-radius: 4px;
-	padding: 10px;
+	padding: 10px 10px 10px 0;
 	font-size: 0.85rem;
 	line-height: 1.4;
 	transition: all 200ms ease;
 
 	display: grid;
-	grid-template-columns: 30px 1fr;
+	grid-template-columns: 40px 1fr;
+	align-items: self-start;
+
+	background-color: ${props => (props.unread ? lightGrey : primaryWhite)};
+	color: ${props => (props.unread ? primaryBlack : primaryGrey)};
 
 	&:hover {
 		background-color: ${lightPurple};
@@ -64,7 +70,7 @@ const Notification = ({
 			<MaterialIcon
 				icon={icon}
 				size="tiny"
-				color={unread ? '' : accentGrey}
+				color={unread ? primaryPurple : accentGrey}
 			/>
 			<div>{children}</div>
 		</Container>

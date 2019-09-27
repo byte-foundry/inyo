@@ -32,7 +32,16 @@ export default function useBaseQuery(query, options) {
 
 	queryData.setOptions(updatedOptions);
 	queryData.context = context;
-	queryData.forceUpdate = forceUpdate;
+
+	const previousForceUpdate = queryData.forceUpdate;
+
+	if (queryData.forceUpdate !== forceUpdate) {
+		queryData.forceUpdate = () => {
+			// force updating previous same queries hook
+			previousForceUpdate();
+			forceUpdate();
+		};
+	}
 
 	// `onError` and `onCompleted` callback functions will not always have a
 	// stable identity, so we'll exclude them from the memoization key to

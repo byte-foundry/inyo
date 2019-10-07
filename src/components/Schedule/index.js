@@ -3,13 +3,12 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 import {useDrag, useDrop} from 'react-dnd';
+import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
-import {
-	extractScheduleFromWorkingDays,
-} from '../../utils/functions';
+import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import GoogleGLogo from '../../utils/images/google_g_logo.svg';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import {

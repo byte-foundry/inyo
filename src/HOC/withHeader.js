@@ -26,7 +26,10 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/dashboard">
+					<TopBarMenuLink
+						to="/app/dashboard"
+						id="header-menu-dashboard"
+					>
 						<fbt project="inyo" desc="dashboard">
 							Dashboard
 						</fbt>
@@ -39,7 +42,10 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/projects">
+					<TopBarMenuLink
+						to="/app/projects"
+						id="header-menu-projects"
+					>
 						<fbt project="inyo" desc="Projets">
 							Projets
 						</fbt>
@@ -52,7 +58,10 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/customers">
+					<TopBarMenuLink
+						to="/app/customers"
+						id="header-menu-contacts"
+					>
 						<fbt project="inyo" desc="Contacts">
 							Contacts
 						</fbt>
@@ -65,7 +74,7 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/stats">
+					<TopBarMenuLink to="/app/stats" id="header-menu-stats">
 						<fbt project="inyo" desc="Statistiques">
 							Statistiques
 						</fbt>
@@ -78,7 +87,7 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/account">
+					<TopBarMenuLink to="/app/account" id="header-menu-account">
 						<fbt project="inyo" desc="Réglages">
 							Réglages
 						</fbt>

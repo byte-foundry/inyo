@@ -184,7 +184,7 @@ function LeftBarSchedule({
 
 	return (
 		<LeftBarContainer>
-			<LeftBarElem style={animatedProps}>
+			<LeftBarElem style={animatedProps} id="left-bar-schedule">
 				<LeftBarContent>
 					{weekdays.map(day => (
 						<DroppableDay

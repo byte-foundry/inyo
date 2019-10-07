@@ -109,7 +109,7 @@ const TaskTypeDropdown = ({types, filter, onSelectCommand}) => {
 	}, [filter]);
 
 	return (
-		<TaskInputDropdown>
+		<TaskInputDropdown id="task-type-dropdown">
 			<TaskInputDropdownHeader>
 				<fbt project="inyo" desc="task type dropdown heading">
 					Tâches automatiques et/ou prédéfinies

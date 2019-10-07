@@ -14,7 +14,10 @@ import {
 	ModalContainer,
 	ModalElem,
 } from '../../utils/content';
-import {isCustomerTask} from '../../utils/functions';
+import {
+	isCustomerTask,
+	taskFulfillsActivationCriteria,
+} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import Pencil from '../../utils/icons/pencil.svg';
 import {
@@ -657,7 +660,9 @@ function ProjectTasksList({
 					pathname: `/app/tasks/${task.id}`,
 					state: {
 						prevSearch: location.search,
-						isActivating: true,
+						isActivating: taskFulfillsActivationCriteria(
+							cachedTask,
+						),
 						scheduledFor,
 					},
 				});

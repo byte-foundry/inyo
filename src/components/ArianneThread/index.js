@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 import React, {useMemo} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import Select, {components} from 'react-select';
 import Creatable from 'react-select/creatable';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {

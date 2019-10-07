@@ -1,6 +1,6 @@
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
+import {useQuery} from '../../utils/apollo-hooks';
 import {GET_ALL_PROJECTS} from '../../utils/queries';
 import {ArianneElem} from '../ArianneThread';
 

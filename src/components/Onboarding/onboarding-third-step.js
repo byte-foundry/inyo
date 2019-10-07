@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {
 	Button,
 	FlexColumn,

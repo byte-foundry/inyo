@@ -1,13 +1,12 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import React from 'react';
-import {withApollo} from 'react-apollo';
-import {useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useApolloClient, useMutation} from '../../utils/apollo-hooks';
 import {ErrorInput} from '../../utils/content';
 import {LOGIN} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
@@ -30,7 +29,8 @@ const LoginButton = styled(Button)`
 	margin-left: auto;
 `;
 
-function LoginForm({from = '/app', history, client}) {
+function LoginForm({from = '/app', history}) {
+	const client = useApolloClient();
 	const [login] = useMutation(LOGIN);
 
 	return (
@@ -173,4 +173,4 @@ function LoginForm({from = '/app', history, client}) {
 	);
 }
 
-export default withApollo(LoginForm);
+export default LoginForm;

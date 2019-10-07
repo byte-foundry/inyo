@@ -1,7 +1,7 @@
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {ModalActions, ModalContainer, ModalElem} from '../../utils/content';
 import {ARCHIVE_PROJECT, REMOVE_PROJECT} from '../../utils/mutations';
 import {Button, Heading, P} from '../../utils/new/design-system';

@@ -1,7 +1,7 @@
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
 import BistableButton from '../BistableButton';
 

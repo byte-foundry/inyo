@@ -1,6 +1,6 @@
 import React, {forwardRef, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {CREATE_PROJECT} from '../../utils/mutations';
 import {Button, Input, P} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';

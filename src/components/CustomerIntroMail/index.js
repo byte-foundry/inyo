@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React, {useRef, useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
 	Loading,

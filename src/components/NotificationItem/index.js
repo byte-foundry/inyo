@@ -1,9 +1,9 @@
 import styled from '@emotion/styled/macro';
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {collabStatuses} from '../../utils/constants';
 import {formatFullName, formatName} from '../../utils/functions';
 import {

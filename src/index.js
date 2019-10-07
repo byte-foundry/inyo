@@ -6,16 +6,12 @@ import './index.css';
 import '@reach/tooltip/styles.css';
 import './dragdroptouch';
 
+import {ApolloProvider} from '@apollo/react-hooks';
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
 import {init, IntlViewerContext} from 'fbt';
 import moment from 'moment';
 import React, {Suspense, useCallback, useState} from 'react';
-import {ApolloProvider} from 'react-apollo';
-import {
-	ApolloProvider as ApolloHooksProvider,
-	useQuery,
-} from 'react-apollo-hooks';
 import {DndProvider} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ReactDOM from 'react-dom';
@@ -30,6 +26,7 @@ import {
 import withTracker from './HOC/withTracker';
 import ProvidersSentry from './providers/sentry';
 import * as serviceWorker from './serviceWorker';
+import {useQuery} from './utils/apollo-hooks';
 import {INTERCOM_APP_ID} from './utils/constants';
 import {Loading} from './utils/content';
 import {UserContext} from './utils/contexts';
@@ -254,13 +251,11 @@ function Root() {
 
 ReactDOM.render(
 	<ApolloProvider client={client}>
-		<ApolloHooksProvider client={client}>
-			<Router>
-				<Suspense fallback={<Loading />}>
-					<Root />
-				</Suspense>
-			</Router>
-		</ApolloHooksProvider>
+		<Router>
+			<Suspense fallback={<Loading />}>
+				<Root />
+			</Suspense>
+		</Router>
 	</ApolloProvider>,
 	document.getElementById('root'),
 );

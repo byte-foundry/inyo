@@ -1,7 +1,7 @@
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {formatName} from '../../utils/functions';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 import {ArianneElem} from '../ArianneThread';

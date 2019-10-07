@@ -1,8 +1,8 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {formatName, isCustomerTask} from '../../utils/functions';
 import {ADD_ITEM, ADD_SECTION, UPDATE_PROJECT} from '../../utils/mutations';
 import {P} from '../../utils/new/design-system';

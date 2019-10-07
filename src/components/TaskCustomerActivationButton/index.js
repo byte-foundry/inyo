@@ -1,7 +1,7 @@
 import React from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {UNFOCUS_TASK} from '../../utils/mutations';
 import {GET_USER_INFOS} from '../../utils/queries';
 import BistableButton from '../BistableButton';

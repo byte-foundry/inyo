@@ -2,11 +2,11 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import Portal from '@reach/portal';
 import React, {Suspense, useCallback, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {
 	Loading,

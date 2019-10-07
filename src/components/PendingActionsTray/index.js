@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useEffect, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM} from '../../utils/mutations';

@@ -1,8 +1,8 @@
+import {Mutation} from '@apollo/react-components';
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import gql from 'graphql-tag';
 import React, {Component} from 'react';
-import {Mutation} from 'react-apollo';
 import ReactGA from 'react-ga';
 import {Link, withRouter} from 'react-router-dom';
 import * as Yup from 'yup';

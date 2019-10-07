@@ -3,11 +3,11 @@ import * as Sentry from '@sentry/browser';
 import debounce from 'debounce-promise';
 import {Formik} from 'formik';
 import React from 'react';
-import {useApolloClient, useMutation} from 'react-apollo-hooks';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useApolloClient, useMutation} from '../../utils/apollo-hooks';
 import {INTERCOM_APP_ID} from '../../utils/constants';
 import {ErrorInput} from '../../utils/content';
 import {CHECK_UNIQUE_EMAIL, SIGNUP} from '../../utils/mutations';

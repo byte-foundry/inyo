@@ -3,7 +3,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import React, {useEffect, useRef, useState} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {withRouter} from 'react-router-dom';
 import {toast, ToastContainer} from 'react-toastify';
 
@@ -13,6 +12,7 @@ import UserAssistantForm from '../../../components/UserAssistantForm';
 import UserCompanyForm from '../../../components/UserCompanyForm';
 import UserDataForm from '../../../components/UserDataForm';
 import fbt from '../../../fbt/fbt.macro';
+import {useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {Button, H3} from '../../../utils/content';
 import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';

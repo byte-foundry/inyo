@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {ModalContainer} from '../../utils/content';
 import {CREATE_TAG} from '../../utils/mutations';

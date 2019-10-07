@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ModalContainer, ModalElem} from '../../utils/content';
 import Search from '../../utils/icons/search.svg';

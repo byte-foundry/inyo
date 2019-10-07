@@ -64,6 +64,7 @@ const TagDropdown = (props) => {
 							},
 						});
 					}}
+					id="manage-tags-dropdown"
 				>
 					<fbt project="inyo" desc="manage tags">
 						Gérer les tags

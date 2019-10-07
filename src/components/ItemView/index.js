@@ -844,7 +844,7 @@ const Item = ({
 							<MaterialIcon icon="label" size="tiny" />
 							<MetaLabel>Tags</MetaLabel>
 							<TagDropdown
-								id="tags"
+								id="tags-task"
 								long
 								placeholder={
 									<fbt

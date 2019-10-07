@@ -603,7 +603,7 @@ const TaskInput = ({
 						}}
 					/>
 					<TagDropdown
-						id="tags"
+						id="tags-dropdown"
 						long
 						placeholder={
 							<fbt project="inyo" desc="add or create a tag">

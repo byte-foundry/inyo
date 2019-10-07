@@ -11,7 +11,7 @@ export default function useBaseQuery(query, options) {
 	const context = useContext(getApolloContext());
 	const [tick, forceUpdate] = useReducer(x => x + 1, 0);
 	const updatedOptions = options
-		? Object.assign(Object.assign({}, options), {query})
+		? {...options, query}
 		: {query};
 
 	// we used the serialized options to keep track of the queries
@@ -35,7 +35,7 @@ export default function useBaseQuery(query, options) {
 
 	const previousForceUpdate = queryData.forceUpdate;
 
-	if (queryData.forceUpdate !== forceUpdate) {
+	if (previousForceUpdate !== forceUpdate) {
 		queryData.forceUpdate = () => {
 			// force updating previous same queries hook
 			previousForceUpdate();

@@ -5,6 +5,7 @@ import {
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
 	REMINDER_FRAGMENT,
+	SHORT_TASK_FRAGMENT,
 	TAG_FRAGMENT,
 } from './fragments';
 
@@ -471,6 +472,19 @@ export const GET_ITEM_DETAILS = gql`
 			remindersPreviews {
 				type
 				delay
+			}
+		}
+	}
+`;
+
+export const GET_ALL_TASKS_SHORT = gql`
+	${SHORT_TASK_FRAGMENT}
+
+	query getAllTasksShort($linkedCustomerId: ID) {
+		me {
+			id
+			tasks(filter: {linkedCustomerId: $linkedCustomerId}) {
+				...ShortTaskFragment
 			}
 		}
 	}

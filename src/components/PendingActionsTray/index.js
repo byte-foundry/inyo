@@ -14,7 +14,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../utils/queries';
+import {GET_ALL_TASKS_SHORT} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
@@ -86,14 +86,13 @@ const TimeItTookHeading = styled('h3')`
 `;
 
 const PendingActionsTray = ({projectId}) => {
-	const {id: userId} = useUserInfos();
 	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
 	const [isOpen, setIsOpen] = useState(false);
 	const {
 		data: {
 			me: {tasks},
 		},
-	} = useQuery(GET_ALL_TASKS, {
+	} = useQuery(GET_ALL_TASKS_SHORT, {
 		suspend: true,
 		variables: {schedule: 'FINISHED_TIME_IT_TOOK_NULL'},
 	});

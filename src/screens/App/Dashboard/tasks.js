@@ -35,7 +35,7 @@ import {
 	P,
 	ScrollHelper,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {GET_ALL_TASKS_SHORT} from '../../../utils/queries';
 import useScheduleData from '../../../utils/useScheduleData';
 import useUserInfos from '../../../utils/useUserInfos';
 
@@ -104,7 +104,7 @@ const DashboardTasks = ({location, history}) => {
 			.startOf('week')
 			.format(moment.HTML5_FMT.DATE);
 
-	const {data, error} = useQuery(GET_ALL_TASKS, {
+	const {data, error} = useQuery(GET_ALL_TASKS_SHORT, {
 		suspend: true,
 		variables: {schedule: 'UNSCHEDULED'},
 		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min

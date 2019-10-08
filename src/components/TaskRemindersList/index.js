@@ -102,7 +102,7 @@ function TaskRemindersList({
 
 	return (
 		<ReminderList>
-			{reminders
+			{[...reminders]
 				.sort((a, b) => {
 					if (statuses.indexOf(a.status) < statuses.indexOf(b.status)) return -1;
 					if (statuses.indexOf(a.status) > statuses.indexOf(b.status)) return 1;

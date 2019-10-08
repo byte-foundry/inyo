@@ -1,5 +1,5 @@
 export default {
-	getReminders: ({mutation, query}) => {
+	/* getReminders: ({mutation, query}) => {
 		const newRemindersItem = mutation.result.data.focusTask.reminders.filter(
 			reminder => reminder.status === 'PENDING',
 		);
@@ -20,7 +20,7 @@ export default {
 			...query.result,
 			reminders: reminders.concat(...newRemindersItem),
 		};
-	},
+	}, */
 	getAllTasks: ({mutation, query}) => {
 		const task = mutation.result.data.focusTask;
 		const {tasks} = query.result.me;

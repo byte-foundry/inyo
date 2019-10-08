@@ -171,7 +171,9 @@ const useScheduleData = () => {
 			assignedTasks: [],
 		};
 
-		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+		if (!task.section || task.section.project.status === 'ONGOING') {
+			scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+		}
 
 		if (
 			task.status === 'PENDING'

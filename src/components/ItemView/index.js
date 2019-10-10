@@ -1,6 +1,7 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
+import momentDurationFormat from 'moment-duration-format';
 import React, {useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
@@ -41,6 +42,7 @@ import {
 	TaskHeading,
 } from '../../utils/new/design-system';
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import Apostrophe from '../Apostrophe';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
@@ -60,6 +62,8 @@ import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
 import UploadDashboard from '../UploadDashboard';
+
+momentDurationFormat(moment);
 
 const Header = styled('div')``;
 
@@ -229,6 +233,7 @@ const Item = ({
 	} = useQuery(GET_USER_INFOS, {
 		suspend: true,
 	});
+	const {workingTime = 8} = useUserInfos();
 
 	const [updateItem] = useMutation(UPDATE_ITEM);
 	const [focusTask] = useMutation(FOCUS_TASK);
@@ -468,20 +473,14 @@ const Item = ({
 													: () => setEditUnit(true)
 											}
 										>
-											<fbt
-												project="inyo"
-												desc="time estimated item view"
-											>
-												<fbt:plural
-													count={item.unit}
-													name="timeEstimated"
-													many="jours"
-													value={item.unit.toFixed(2)}
-													showCount="yes"
-												>
-												jour
-												</fbt:plural>
-											</fbt>
+											{moment
+												.duration(
+													item.unit * workingTime,
+													'hours',
+												)
+												.format('d[j]h[h]mm[min]', {
+													trim: 'both',
+												})}
 										</div>
 									)}
 								</MetaText>

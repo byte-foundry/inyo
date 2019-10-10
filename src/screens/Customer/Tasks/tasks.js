@@ -19,7 +19,7 @@ const Container = styled('div')`
 	max-width: 1280px;
 	margin: 0 auto;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -35,7 +35,7 @@ const Main = styled('div')`
 	flex-direction: row;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
 	}
 `;

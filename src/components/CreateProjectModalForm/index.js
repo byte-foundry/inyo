@@ -32,7 +32,7 @@ const CreateProjectRow = styled('div')`
 	margin-top: 1rem;
 	grid-column-end: span 3;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: block;
 	}
 `;
@@ -42,7 +42,7 @@ const CreateProjectGrid = styled('form')`
 	grid-template-columns: 400px 1fr 1fr;
 	grid-row-gap: 1.5rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 	}

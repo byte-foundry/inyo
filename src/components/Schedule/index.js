@@ -56,7 +56,7 @@ const Week = styled('div')`
 	min-height: 180px;
 	position: relative;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-flow: column;
 	}
 `;
@@ -128,7 +128,7 @@ const ScheduleNav = styled('div')`
 	color: ${primaryPurple};
 	justify-content: flex-end;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		${Button} {
 			width: auto;
 		}

@@ -39,7 +39,7 @@ const InputContainer = styled('div')`
 	margin-left: -10px;
 	position: relative;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: 0;
 		width: calc(100% + 3px);
 	}
@@ -52,7 +52,7 @@ const InputButtonContainer = styled('div')`
 	right: 1rem;
 	bottom: 67px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		position: static;
 		display: flex;
 		flex-direction: row;
@@ -73,7 +73,7 @@ const InputButtonContainer = styled('div')`
 			border-radius: 50%;
 		}
 
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			flex: 1;
 			color: ${primaryPurple};
 			border-color: ${primaryPurple};
@@ -91,7 +91,7 @@ const InputButtonContainer = styled('div')`
 			display: none;
 		}
 
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			margin: 0;
 		}
 	}
@@ -139,7 +139,7 @@ const Input = styled('input')`
 		transition: all 400ms ease;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 		margin-left: -2rem;
 		padding: 0.5rem 1.2rem 0.5rem 5rem;
@@ -170,7 +170,7 @@ const Icon = styled('div')`
 		transition: all 400ms ease;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 1rem;
 		height: 1rem;
 		font-size: 1rem;
@@ -183,7 +183,7 @@ const TaskInfosInputsContainer = styled('div')`
 	align-items: flex-start;
 	padding: 10px 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 		align-items: stretch;
 	}

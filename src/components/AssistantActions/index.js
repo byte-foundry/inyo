@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
+import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
-import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
@@ -18,17 +18,16 @@ import {
 } from '../../utils/new/design-system';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
 import IconButton from '../IconButton';
-import NotificationItem from '../NotificationItem';
+import SidebarDashboardInfos from '../SidebarDashboardInfos';
 import Tooltip from '../Tooltip';
 
 const Dropdown = styled('div')`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	margin-top: 10px;
 	padding: 5px;
 	position: absolute;
-	width: 400px;
+	width: 450px;
 	box-shadow: 0 0 10px ${primaryGrey};
 	border-radius: 3px;
 	background: ${primaryWhite};
@@ -44,49 +43,7 @@ const Icon = styled('button')`
 	}
 `;
 
-const MarkRead = styled(Button)`
-	color: ${primaryGrey};
-	padding: 15px 10px;
-	${props => (props.someUnread ? '' : 'display: none')};
-	align-self: flex-end;
-
-	&:focus {
-		outline: 0;
-	}
-	&:hover {
-		color: ${primaryPurple};
-	}
-`;
-
-const List = styled('ul')`
-	display: flex;
-	flex-direction: column;
-	margin: 0;
-	padding: 0;
-	min-height: 400px;
-	max-height: 600px;
-	overflow-y: auto;
-`;
-
-const Item = styled('li')`
-	display: block;
-
-	border-bottom: 1px solid ${lightGrey};
-
-	& + li {
-		margin-top: 2px;
-	}
-`;
-
-const EmptyState = styled('div')`
-	flex: 1;
-	display: flex;
-	align-items: center;
-	min-height: 400px;
-	justify-content: center;
-`;
-
-const NotificationContainer = styled('div')`
+const AssistantActionsContainer = styled('div')`
 	${props => (props.mobile
 		? `
 		display: none;
@@ -102,7 +59,7 @@ const NotificationContainer = styled('div')`
 	`)}
 `;
 
-const NotificationTrayButton = ({mobile}) => {
+const AssistantActions = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
 	const [isOpen, setOpen] = useState(false);
@@ -168,11 +125,11 @@ const NotificationTrayButton = ({mobile}) => {
 	});
 
 	return (
-		<NotificationContainer mobile={mobile}>
+		<AssistantActionsContainer mobile={mobile}>
 			<Tooltip
 				label={
-					<fbt project="inyo" desc="notification tray button tooltip">
-						Notifications liées à vos clients
+					<fbt project="inyo" desc="assistant actions tooltip">
+						Futures actions de votre assistant
 					</fbt>
 				}
 			>
@@ -187,7 +144,7 @@ const NotificationTrayButton = ({mobile}) => {
 						}
 					}}
 				>
-					<IconButton icon="notifications" size="small" />
+					<IconButton icon="sentiment_very_satisfied" size="small" />
 				</Icon>
 			</Tooltip>
 			{isOpen && (
@@ -212,42 +169,12 @@ const NotificationTrayButton = ({mobile}) => {
 								: undefined,
 						}}
 					>
-						<MarkRead
-							someUnread={unreadNumber > 0}
-							link
-							onClick={() => markNotificationsAsRead()}
-						>
-							<fbt project="inyo" desc="mark all as read">
-								Tout marquer comme lu
-							</fbt>
-						</MarkRead>
-						{loading ? (
-							<Loading />
-						) : data.me.notifications.length > 0 ? (
-							<List>
-								{data.me.notifications.map(notification => (
-									<Item key={notification.id}>
-										<NotificationItem {...notification} />
-									</Item>
-								))}
-							</List>
-						) : (
-							<EmptyState>
-								<p>
-									<fbt
-										project="inyo"
-										desc="no notification message"
-									>
-										Aucune notification.
-									</fbt>
-								</p>
-							</EmptyState>
-						)}
+						<SidebarDashboardInfos />
 					</Dropdown>
 				</Portal>
 			)}
-		</NotificationContainer>
+		</AssistantActionsContainer>
 	);
 };
 
-export default NotificationTrayButton;
+export default AssistantActions;

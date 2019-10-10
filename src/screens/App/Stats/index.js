@@ -24,10 +24,10 @@ import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
 	width: 980px;
-	margin: 0 auto;
+	margin: 3.5rem auto;
 	min-height: 100vh;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		max-width: 100%;
 	}
 `;
@@ -38,7 +38,7 @@ const Cards = styled('div')`
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		grid-template-columns: 1fr;
 	}
 `;
@@ -74,7 +74,7 @@ const MetaHeading = styled('div')`
 	align-items: center;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 		align-items: start;
 	}

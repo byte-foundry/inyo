@@ -59,7 +59,7 @@ const ListItem = styled('li')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		grid-template-columns: 2.5rem 1fr;
 	}
 `;

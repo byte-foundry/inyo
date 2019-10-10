@@ -32,7 +32,7 @@ const Container = styled('div')`
 	margin: 0 auto;
 	min-height: 100vh;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		max-width: 100%;
 	} */
 `;
@@ -41,7 +41,7 @@ const AccountBody = styled('div')`
 	padding-left: 40px;
 	padding-right: 40px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
 	}
 `;
@@ -50,7 +50,7 @@ const Profile = styled('div')`
 	display: flex;
 	align-items: flex-start;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -61,7 +61,7 @@ const ProfileSide = styled('nav')`
 	position: sticky;
 	top: 20px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -96,7 +96,7 @@ const ProfileMain = styled('div')`
 	margin-right: auto;
 	flex-grow: 2;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
 	}
 `;
@@ -109,7 +109,7 @@ const ProfileSection = styled('div')`
 	align-items: center;
 	flex-direction: row-reverse;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 		padding: 0;
 		border: none;
@@ -135,7 +135,7 @@ const UnsubscribeButton = styled('a')`
 const ProfileTitle = styled(H3)`
 	font-size: 1.5rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1.2rem;
 		margin: 3rem 0 2.5rem 0.8rem;
 	}

@@ -27,7 +27,7 @@ const ReminderList = styled('div')`
 const ReminderLine = styled('div')`
 	border-bottom: 1px dotted ${mediumGrey};
 	height: 1px;
-	flex: 1;
+	flex: 1 1 20px;
 	margin: 0 1%;
 `;
 
@@ -57,7 +57,7 @@ const ReminderText = styled('div')`
 	cursor: ${props => (props.noLink ? 'default' : 'pointer')};
 	${props => props.small
 		&& `
-		flex: 1 0 200px;
+		flex: 0 1 220px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
@@ -70,7 +70,7 @@ const ReminderDate = styled('div')`
 	flex: 1 1 100px;
 	${props => props.small
 		&& `
-		flex: 1 1 50px;
+		flex: 1 0 50px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;

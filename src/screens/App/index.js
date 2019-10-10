@@ -18,11 +18,11 @@ const Tasks = React.lazy(() => import('./Tasks'));
 
 const AppMain = styled('div')`
 	display: flex;
-	flex-direction: column;
-	padding: 3rem;
+	flex-direction: row;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
+		flex-direction: column;
 	}
 `;
 

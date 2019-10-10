@@ -3,9 +3,12 @@ import React, {forwardRef} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import {BREAKPOINTS} from '../../utils/constants';
-import {primaryWhite} from '../../utils/content';
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
-import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
+import {
+	darkGrey,
+	primaryBlack,
+	primaryWhite,
+} from '../../utils/new/design-system';
 
 const ForwardedRefNavLink = forwardRef((props, ref) => (
 	<NavLink {...props} innerRef={ref} />
@@ -23,17 +26,15 @@ export const TopBarLogo = styled(NavLink)`
 
 export const TopBarMenu = styled('div')`
 	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-end;
-	align-items: center;
+	flex-flow: column nowrap;
 `;
 
 export const TopBarLogoNotif = styled(TopBarMenu)`
-	margin-right: 20px;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		justify-content: start;
+		flex-direction: row;
 
 		a {
 			margin-right: 1rem;
@@ -43,29 +44,25 @@ export const TopBarLogoNotif = styled(TopBarMenu)`
 
 export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 	text-decoration: none;
-	margin-left: 2rem;
-	color: ${primaryGrey};
+	color: ${primaryWhite};
 	position: relative;
+	display: flex;
+	flex-direction: columns;
+	transition: all 400ms ease;
+	padding: 0.5rem 1rem;
+	min-width: 170px;
+
+	i {
+		margin-right: 12px;
+	}
 
 	&:hover,
 	&.active {
-		color: ${primaryWhite};
-
-		&::before {
-			content: '';
-			display: block;
-			background: ${primaryPurple};
-			position: absolute;
-			left: -0.7rem;
-			top: -0.5rem;
-			right: -0.7rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
+		color: ${primaryBlack};
+		background-color: ${primaryWhite};
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: 0;
 		margin-right: 1.2rem;
 		font-size: 0.8rem;
@@ -76,13 +73,26 @@ export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 	}
 `;
 
+export const Label = styled('span')``;
+
 const TopBar = styled('div')`
 	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	margin-bottom: 4rem;
+	flex-flow: column nowrap;
+	width: ${props => (props.visible ? 'auto' : '50px')};
+	max-width: ${props => (props.visible ? 'auto' : '50px')};
+	overflow-x: hidden;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	position: relative;
+	top: 0;
+	bottom: 0;
+	right: 0;
+
+	margin-left: 2rem;
+	padding-top: 0.8rem;
+
+	background-color: ${darkGrey};
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		align-items: center;
 		margin-bottom: 1rem;
 		height: 6rem;
@@ -91,6 +101,10 @@ const TopBar = styled('div')`
 		padding-right: 1rem;
 		display: grid;
 		grid-auto-rows: 1fr;
+	}
+
+	span {
+		display: ${props => (props.visible ? 'inline' : 'none')};
 	}
 `;
 

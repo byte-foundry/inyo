@@ -20,7 +20,7 @@ import Tooltip from '../Tooltip';
 const TasksListContainer = styled('div')`
 	margin-top: 2rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-top: 1rem;
 	}
 `;

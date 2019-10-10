@@ -68,7 +68,7 @@ export const TaskContainer = styled('div')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding-left: 0;
 		margin-left: 0;
 		margin-bottom: 0;
@@ -144,7 +144,7 @@ const TaskIcon = styled('div')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		transform: scale(0.6);
 		margin: 0;
 		position: absolute;
@@ -159,7 +159,7 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryGrey};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 		display: block;
 	}
@@ -179,7 +179,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 		display: inline-block !important;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 0.85rem;
 		display: block;
 	}
@@ -209,7 +209,7 @@ const TaskContent = styled('div')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding-left: 2rem;
 		grid-template-columns: minmax(200px, 4fr) 75px;
 	}
@@ -238,7 +238,7 @@ const IconAndText = styled('div')`
 `;
 
 const IconAndTextOptional = styled(IconAndText)`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -248,7 +248,7 @@ const TaskHeader = styled('div')`
 	align-items: center;
 	margin: 0.5rem 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		overflow: hidden;
 	}
 `;
@@ -257,7 +257,7 @@ const TaskMetas = styled('div')`
 	display: grid;
 	grid-template-columns: repeat(4, 28px);
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;

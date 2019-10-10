@@ -52,14 +52,14 @@ const Legend = styled('ul')`
 	display: grid;
 	grid-template-columns: repeat(3, auto);
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 	}
 `;
 
 const LegendRow = styled('li')`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 0;
 	}
 

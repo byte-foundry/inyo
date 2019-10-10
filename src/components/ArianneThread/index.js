@@ -25,7 +25,12 @@ const ArianneContainer = styled('div')`
 	${props => props.marginBottom && 'margin-bottom: 2rem;'}
 	${props => props.marginTop && 'margin-top: 2rem;'}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
+		margin-bottom: 1rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		flex-direction: column;
 		margin-bottom: 1rem;
 	}
@@ -56,7 +61,12 @@ const ArianneElemMain = styled('div')`
 			z-index: -1;
 		}
 	}
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex: 1;
+		margin: 0.25rem 0;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		flex: 1;
 		margin: 0.25rem 0;
 	}

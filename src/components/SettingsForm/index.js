@@ -30,7 +30,7 @@ const FormContainer = styled('div')`
 	grid-template-columns: 1fr 2fr;
 	align-items: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
@@ -45,7 +45,7 @@ const ProfileSection = styled('div')`
 	display: flex;
 	flex-direction: row;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 0;
 		border: none;
 	}
@@ -58,7 +58,7 @@ const UpdateButton = styled(Button)`
 	margin-right: 50px;
 	margin-bottom: 80px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-right: 0;
 		margin-bottom: 20px;
 	}
@@ -72,7 +72,7 @@ const EmojiTimeline = styled('div')`
 	position: relative;
 	height: 50px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1.5rem;
 	}
 `;

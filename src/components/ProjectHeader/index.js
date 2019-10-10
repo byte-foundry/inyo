@@ -20,7 +20,7 @@ import TasksProgressBar from '../TasksProgressBar';
 const ProjectHeaderContainer = styled('div')`
 	margin-bottom: 4rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-bottom: 1rem;
 	}
 `;
@@ -80,7 +80,7 @@ const ProjectHeading = styled(InlineEditable)`
 		}
 	`}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 	}
 `;

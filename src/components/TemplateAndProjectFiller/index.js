@@ -25,7 +25,7 @@ const Container = styled('div')`
 	display: flex;
 	margin: 50px 15px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -93,7 +93,7 @@ const TemplateInfo = styled('div')`
 	margin-left: 4rem;
 	flex: 1;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: 0;
 	}
 `;
@@ -117,7 +117,7 @@ const TemplateInfoIcon = styled('span')`
 	justify-content: center;
 	margin: 0 1rem -0.4rem 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;

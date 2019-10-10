@@ -160,7 +160,7 @@ const SectionInput = styled(InlineEditable)`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 0;
 		padding: 0;
 	}
@@ -210,7 +210,7 @@ const SectionTitleContainer = styled('div')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 1rem 0 0 0;
 	}
 `;

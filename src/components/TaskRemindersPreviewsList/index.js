@@ -38,7 +38,7 @@ const ReminderItem = styled('div')`
 	justify-content: space-between;
 	margin-bottom: 5px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 		display: flow-root;
 		align-items: flex-start;
@@ -51,7 +51,7 @@ const ReminderText = styled('div')`
 	overflow: hidden;
 	white-space: nowrap;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex: 1;
 	}
 `;
@@ -61,7 +61,7 @@ const ReminderDate = styled('div')`
 	margin: 0 5px;
 	cursor: default;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 0;
 	}
 `;
@@ -72,7 +72,7 @@ const ReminderActions = styled('div')`
 	justify-content: space-between;
 	align-items: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 		align-items: flex-start;
 		margin: 10px 0;
@@ -84,7 +84,7 @@ const ReminderButtons = styled('div')`
 	display: flex;
 	align-items: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 10px 0;
 	}
 `;
@@ -99,7 +99,7 @@ const ReminderFormGroup = styled('div')`
 	margin: 1rem 0 0.5rem 0;
 	font-size: 0.8rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -109,7 +109,7 @@ const ReminderFormActions = styled('div')`
 	align-self: flex-end;
 	margin: 0 0 1.5rem 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
 		width: 100%;
 

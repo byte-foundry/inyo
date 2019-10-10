@@ -25,7 +25,7 @@ const Container = styled('div')`
 	min-height: 100vh;
 	padding: 3rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
 	}
 `;
@@ -41,7 +41,7 @@ const WelcomeMessage = styled(P)`
 	flex-direction: row;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -71,7 +71,7 @@ export const Help = styled('div')`
 		color: ${primaryWhite};
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;

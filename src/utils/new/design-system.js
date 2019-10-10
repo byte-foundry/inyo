@@ -204,7 +204,7 @@ export const Button = styled('button')`
 				background: none;
 			}
 
-			@media (max-width: ${BREAKPOINTS}px) {
+			@media (max-width: ${BREAKPOINTS.mobile}px) {
 				width: auto !important;
 				padding: 0 !important;
 			}
@@ -220,7 +220,7 @@ export const Button = styled('button')`
 		& + button {
 			margin-left: .5rem;
 		}
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			margin-left: 0;
 			margin-bottom: .5rem;
 		}
@@ -231,7 +231,7 @@ export const Button = styled('button')`
 		margin-right: ${props => (props.link ? 0 : '10px')};
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
 		padding: 0.6rem 0.8rem;
 		display: initial;
@@ -251,7 +251,7 @@ export const Heading = styled('h1')`
 	font-size: 32px;
 	margin-top: 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 24px;
 	}
 `;
@@ -284,7 +284,7 @@ export const TaskHeading = styled('h2')`
 	flex: 1 0
 		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 218px)')};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 14px;
 		margin: 0;
 	}
@@ -436,7 +436,7 @@ export const GenericDropdown = styled('div')`
 	box-shadow: 5px 5px 15px ${primaryGrey};
 	width: ${props => (props.width ? props.width : 'auto')};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		left: -1rem;
 		width: calc(100% + 2rem);
 		box-shadow: 0 0 20rem ${primaryBlack};
@@ -487,7 +487,7 @@ export const FilterInput = styled(Input)`
 		background-image: url(${props => props.icon});
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 0.5rem 0;
 		width: calc(100% - 4rem);
 	}
@@ -518,7 +518,7 @@ export const Help = styled('div')`
 		background-color: transparent;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -529,7 +529,7 @@ export const Aside = styled('aside')`
 	flex: 0 0 270px;
 	padding-right: 4rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding-right: 0;
 		margin-top: 2rem;
 		width: 100%;
@@ -541,8 +541,9 @@ export const Main = styled('div')`
 	flex-direction: row;
 	justify-content: space-between;
 	flex: 1;
+	padding: 1rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
 	}
 `;
@@ -550,10 +551,8 @@ export const Main = styled('div')`
 export const Container = styled('div')`
 	display: flex;
 	width: 100%;
-	max-width: 1280px;
-	margin: 0 auto;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -563,13 +562,38 @@ export const Content = styled('div')`
 	flex-direction: column;
 	flex: 1;
 	${props => (props.small ? 'width: 100%' : '')};
-	${props => (props.small ? 'max-width: 640px' : '')};
+	${props => (props.small ? 'max-width: 980px' : '')};
 	${props => (props.small ? 'margin: 0 auto' : '')};
 `;
 
 export const UL = styled('ul')`
 	${props => (props.noBullet ? 'padding: 0' : '')};
 	${props => (props.noBullet ? 'list-style-type: none' : '')};
+`;
+
+export const LeftMenu = styled('div')`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 4rem 3rem;
+
+	> div {
+		margin-bottom: 1.4rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
+		padding: 4rem 1rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 1rem;
+
+		> div {
+			margin-bottom: 0;
+		}
+	}
 `;
 
 export const IllusContainer = styled('div')`
@@ -782,7 +806,7 @@ export const StickyHeader = styled('div')`
 	z-index: 1;
 	color: ${primaryWhite};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: -2rem;
 		margin-right: -2rem;
 	}
@@ -798,7 +822,7 @@ export const Meta = styled('div')`
 		margin-right: 15px;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-bottom: 0;
 	}
 `;
@@ -807,7 +831,7 @@ export const MetaLabel = styled('div')`
 	margin-right: 1rem;
 	min-width: 40px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -833,7 +857,7 @@ export const MetaText = styled('span')`
 		left: -2px;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-bottom: 1rem;
 		flex: 1 auto 100%;
 	}
@@ -862,7 +886,7 @@ export const ScrollHelper = styled('div')`
 		transition: opacity 600ms ease;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 	}
 `;

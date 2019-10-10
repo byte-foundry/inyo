@@ -22,7 +22,7 @@ const FormContainer = styled('div')`
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 20px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 	}
@@ -32,7 +32,7 @@ const ProfileSection = styled('div')`
 	padding: 60px 40px;
 	border: 1px solid ${gray20};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 0;
 		border: none;
 	}
@@ -44,7 +44,7 @@ const UpdateButton = styled(Button)`
 	margin-right: 50px;
 	margin-bottom: 80px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-right: 0;
 		margin-bottom: 20px;
 	}

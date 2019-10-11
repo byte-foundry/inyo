@@ -1,7 +1,6 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
-import momentDurationFormat from 'moment-duration-format';
 import React, {useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
@@ -12,6 +11,7 @@ import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
 import {
+	displayDurationPretty,
 	formatName,
 	isCustomerTask,
 	taskFulfillsActivationCriteria,
@@ -62,8 +62,6 @@ import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
 import UploadDashboard from '../UploadDashboard';
-
-momentDurationFormat(moment);
 
 const Header = styled('div')``;
 
@@ -473,14 +471,10 @@ const Item = ({
 													: () => setEditUnit(true)
 											}
 										>
-											{moment
-												.duration(
-													item.unit * workingTime,
-													'hours',
-												)
-												.format('d[j]h[h]mm[min]', {
-													trim: 'both',
-												})}
+											{displayDurationPretty(
+												item.unit,
+												workingTime,
+											)}
 										</div>
 									)}
 								</MetaText>

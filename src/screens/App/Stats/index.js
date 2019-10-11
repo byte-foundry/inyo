@@ -417,7 +417,7 @@ const Stats = ({history, location}) => {
 									).length * 15,
 									'minutes',
 								)
-								.format('h[h]mm[min]')}
+								.format('h_mm_')}
 						</Number>
 					</Card>
 					<Card>

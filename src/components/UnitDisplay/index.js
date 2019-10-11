@@ -7,6 +7,10 @@ import useUserInfos from '../../utils/useUserInfos';
 const UnitDisplay = ({unit}) => {
 	const {workingTime = 8} = useUserInfos();
 
+	if (unit === 0) {
+		return '—';
+	}
+
 	let unitInHours = false;
 
 	let unitToDisplay = unit;

@@ -1,6 +1,6 @@
 import moment from 'moment';
-import {useQuery} from 'react-apollo-hooks';
 
+import {useQuery} from './apollo-hooks';
 import {GET_USER_INFOS} from './queries';
 
 export default function useUserInfos() {

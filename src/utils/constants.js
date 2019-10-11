@@ -117,6 +117,26 @@ export const CUSTOMER_TASK_TYPES = [
 	'INVOICE',
 ];
 
+export const MOMENT_DURATION_LOCALE_FR = {
+	durationLabelsStandard: {
+		d: 'jour',
+		dd: 'jours',
+	},
+	durationTimeTemplates: {
+		HM: 'h[h]mm',
+	},
+};
+
+export const MOMENT_DURATION_LOCALE_EN = {
+	durationLabelsStandard: {
+		d: 'day',
+		dd: 'days',
+	},
+	durationTimeTemplates: {
+		HM: 'h:mm',
+	},
+};
+
 // Any change here in the way item types are created is bound to affect
 // TaskTypeDropDown filtering
 export const ITEM_TYPES = [

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {useMutation} from 'react-apollo-hooks';
 
+import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {LINK_TO_PROJECT, REMOVE_LINK_TO_PROJECT} from '../../utils/mutations';

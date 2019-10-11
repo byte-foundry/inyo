@@ -1,11 +1,11 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import AddCollaboratorModal from '../../../components/AddCollaboratorModal';
 import ConfirmModal from '../../../components/ConfirmModal';
 import IconButton from '../../../components/IconButton';
 import fbt from '../../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS, collabStatuses} from '../../../utils/constants';
 import {formatCollabStatus, formatName} from '../../../utils/functions';
 import Search from '../../../utils/icons/search.svg';

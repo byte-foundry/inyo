@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import React, {Suspense, useCallback} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {Redirect} from 'react-router-dom';
 
 import ArianneThread from '../../../components/ArianneThread';
@@ -13,6 +12,7 @@ import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import ProjectList from '../../../components/ProjectTasksList';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
+import {useQuery} from '../../../utils/apollo-hooks';
 import {Loading} from '../../../utils/content';
 import {Container, Content, Main} from '../../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../../utils/queries';

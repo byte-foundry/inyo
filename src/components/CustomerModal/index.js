@@ -6,10 +6,10 @@ import {Formik} from 'formik';
 import {createEditorState, Editor} from 'medium-draft';
 import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
 import React, {useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, ModalContainer, ModalElem} from '../../utils/content';
 import {CREATE_CUSTOMER, UPDATE_CUSTOMER} from '../../utils/mutations';

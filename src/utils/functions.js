@@ -1,6 +1,17 @@
 import moment from 'moment';
+import momentDurationFormat from 'moment-duration-format';
 
-import {CUSTOMER_TASK_TYPES, WEEKDAYS} from './constants';
+import {
+	CUSTOMER_TASK_TYPES,
+	MOMENT_DURATION_LOCALE_EN,
+	MOMENT_DURATION_LOCALE_FR,
+	WEEKDAYS,
+} from './constants';
+
+momentDurationFormat(moment);
+
+moment.updateLocale('fr', MOMENT_DURATION_LOCALE_FR);
+moment.updateLocale('en', MOMENT_DURATION_LOCALE_EN);
 
 export const dateDiff = (datepart, fromdate, todate) => {
 	const lowerDatepart = datepart.toLowerCase();
@@ -290,3 +301,15 @@ export const getMarginUntilDeadline = (
 
 	return `${duration.humanize()} de retard`;
 };
+
+export function displayDurationPretty(itemUnit, workingTime) {
+	const days = Math.floor(itemUnit);
+
+	const hoursAndMinutes = (itemUnit % 1) * workingTime;
+
+	return `${days ? moment.duration(days, 'days').format('d __') : ''} ${
+		hoursAndMinutes
+			? moment.duration(hoursAndMinutes, 'hours').format('_HM_')
+			: ''
+	}`.trim();
+}

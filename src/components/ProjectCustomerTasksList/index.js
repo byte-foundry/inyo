@@ -1,9 +1,9 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import React, {useContext} from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {CustomerContext} from '../../utils/contexts';
 import {LayoutMainElem, primaryBlack} from '../../utils/new/design-system';

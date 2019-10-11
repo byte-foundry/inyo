@@ -8,11 +8,11 @@ import React, {
 	useRef,
 	useState,
 } from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import {Link, withRouter} from 'react-router-dom';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';

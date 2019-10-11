@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {useMutation} from 'react-apollo-hooks';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {REMOVE_TAG, UPDATE_TAG} from '../../utils/mutations';
 import {Button} from '../../utils/new/design-system';
 import FormElem from '../FormElem';

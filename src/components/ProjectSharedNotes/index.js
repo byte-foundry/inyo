@@ -2,9 +2,9 @@ import 'medium-draft/lib/index.css';
 
 import styled from '@emotion/styled';
 import React from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {UPDATE_PROJECT_SHARED_NOTES} from '../../utils/mutations';
 import {primaryRed, SubHeading} from '../../utils/new/design-system';
 import {GET_PROJECT_SHARED_NOTES} from '../../utils/queries';

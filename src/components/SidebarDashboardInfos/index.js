@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import noRemindersIllus from '../../utils/images/bermuda-done.svg';

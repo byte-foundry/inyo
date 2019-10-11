@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React, {useCallback} from 'react';
-import {useApolloClient, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useApolloClient, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, PLAN_NAMES, STRIPE_CONSTANT} from '../../utils/constants';
 import {FlexColumn, FlexRow, Loading} from '../../utils/content';
 import Illus from '../../utils/images/bermuda-done.svg';

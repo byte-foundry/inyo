@@ -2,11 +2,11 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import Portal from '@reach/portal';
 import React, {Suspense, useCallback, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import {useDrag, useDrop} from 'react-dnd';
 import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
 import {
 	Loading,
@@ -14,7 +14,10 @@ import {
 	ModalContainer,
 	ModalElem,
 } from '../../utils/content';
-import {isCustomerTask} from '../../utils/functions';
+import {
+	isCustomerTask,
+	taskFulfillsActivationCriteria,
+} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import Pencil from '../../utils/icons/pencil.svg';
 import {
@@ -657,7 +660,9 @@ function ProjectTasksList({
 					pathname: `/app/tasks/${task.id}`,
 					state: {
 						prevSearch: location.search,
-						isActivating: true,
+						isActivating: taskFulfillsActivationCriteria(
+							cachedTask,
+						),
 						scheduledFor,
 					},
 				});

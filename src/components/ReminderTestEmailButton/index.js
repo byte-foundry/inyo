@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
-import {useMutation} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {
 	SEND_REMINDER_PREVIEW_TEST_EMAIL,
 	SEND_REMINDER_TEST_EMAIL,

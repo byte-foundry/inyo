@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import React from 'react';
-import {useQuery} from 'react-apollo-hooks';
 import {animated, useSpring} from 'react-spring';
 
+import {useQuery} from '../../utils/apollo-hooks';
 import {Loading} from '../../utils/content';
 import {
 	extractScheduleFromWorkingDays,
@@ -184,7 +184,7 @@ function LeftBarSchedule({
 
 	return (
 		<LeftBarContainer>
-			<LeftBarElem style={animatedProps}>
+			<LeftBarElem style={animatedProps} id="left-bar-schedule">
 				<LeftBarContent>
 					{weekdays.map(day => (
 						<DroppableDay

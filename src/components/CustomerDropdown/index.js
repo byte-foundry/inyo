@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {formatFullName} from '../../utils/functions';
 import {UPDATE_ITEM} from '../../utils/mutations';

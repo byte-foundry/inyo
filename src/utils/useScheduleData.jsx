@@ -1,6 +1,6 @@
 import moment from 'moment';
-import {useQuery} from 'react-apollo-hooks';
 
+import {useQuery} from './apollo-hooks';
 import {isCustomerTask} from './functions';
 import {GET_ALL_TASKS} from './queries';
 
@@ -171,7 +171,9 @@ const useScheduleData = () => {
 			assignedTasks: [],
 		};
 
-		scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+		if (!task.section || task.section.project.status === 'ONGOING') {
+			scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
+		}
 
 		if (
 			task.status === 'PENDING'

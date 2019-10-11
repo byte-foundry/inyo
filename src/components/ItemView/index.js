@@ -2,15 +2,16 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useRef, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {
 	FlexRow, gray50, gray70, LoadingLogo,
 } from '../../utils/content';
 import {
+	displayDurationPretty,
 	formatName,
 	isCustomerTask,
 	taskFulfillsActivationCriteria,
@@ -41,6 +42,7 @@ import {
 	TaskHeading,
 } from '../../utils/new/design-system';
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import Apostrophe from '../Apostrophe';
 import CheckList from '../CheckList';
 import CommentList from '../CommentList';
@@ -229,6 +231,7 @@ const Item = ({
 	} = useQuery(GET_USER_INFOS, {
 		suspend: true,
 	});
+	const {workingTime = 8} = useUserInfos();
 
 	const [updateItem] = useMutation(UPDATE_ITEM);
 	const [focusTask] = useMutation(FOCUS_TASK);
@@ -468,20 +471,10 @@ const Item = ({
 													: () => setEditUnit(true)
 											}
 										>
-											<fbt
-												project="inyo"
-												desc="time estimated item view"
-											>
-												<fbt:plural
-													count={item.unit}
-													name="timeEstimated"
-													many="jours"
-													value={item.unit.toFixed(2)}
-													showCount="yes"
-												>
-												jour
-												</fbt:plural>
-											</fbt>
+											{displayDurationPretty(
+												item.unit,
+												workingTime,
+											)}
 										</div>
 									)}
 								</MetaText>
@@ -844,7 +837,7 @@ const Item = ({
 							<MaterialIcon icon="label" size="tiny" />
 							<MetaLabel>Tags</MetaLabel>
 							<TagDropdown
-								id="tags"
+								id="tags-task"
 								long
 								placeholder={
 									<fbt

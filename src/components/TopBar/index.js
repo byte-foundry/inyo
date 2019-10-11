@@ -78,8 +78,7 @@ export const Label = styled('span')``;
 const TopBar = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
-	width: ${props => (props.visible ? 'auto' : '50px')};
-	max-width: ${props => (props.visible ? 'auto' : '50px')};
+	flex: ${props => (props.visible ? '0 0 auto' : '0 0 50px')};
 	overflow-x: hidden;
 
 	position: relative;

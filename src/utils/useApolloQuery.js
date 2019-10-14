@@ -1,18 +1,17 @@
 import {getApolloContext} from '@apollo/react-common';
 import {QueryData} from '@apollo/react-hooks/lib/data/QueryData';
 import {useDeepMemo} from '@apollo/react-hooks/lib/utils/useDeepMemo';
-import {useContext, useEffect, useReducer} from 'react';
+import {useContext, useEffect, useState} from 'react';
 
 // TODO: might be better in a context
 const queryDataRefs = new Map();
+const forceUpdateRefs = new Map();
 
 // taken from https://github.com/apollographql/react-apollo/blob/master/packages/hooks/src/utils/useBaseQuery.ts
 export default function useBaseQuery(query, options) {
 	const context = useContext(getApolloContext());
-	const [tick, forceUpdate] = useReducer(x => x + 1, 0);
-	const updatedOptions = options
-		? {...options, query}
-		: {query};
+	const [tick, forceUpdate] = useState(0);
+	const updatedOptions = options ? {...options, query} : {query};
 
 	// we used the serialized options to keep track of the queries
 	const queryKey = JSON.stringify(updatedOptions);
@@ -23,7 +22,16 @@ export default function useBaseQuery(query, options) {
 			new QueryData({
 				options: updatedOptions,
 				context,
-				forceUpdate,
+				forceUpdate: () => {
+					const snapshotOfForceUpdate = Array.from(
+						forceUpdateRefs.values(),
+					);
+
+					snapshotOfForceUpdate.forEach((fn) => {
+						forceUpdateRefs.delete(fn);
+						fn(x => x + 1);
+					});
+				},
 			}),
 		);
 	}
@@ -33,14 +41,8 @@ export default function useBaseQuery(query, options) {
 	queryData.setOptions(updatedOptions);
 	queryData.context = context;
 
-	const previousForceUpdate = queryData.forceUpdate;
-
-	if (previousForceUpdate !== forceUpdate) {
-		queryData.forceUpdate = () => {
-			// force updating previous same queries hook
-			previousForceUpdate();
-			forceUpdate();
-		};
+	if (!forceUpdateRefs.has(forceUpdate)) {
+		forceUpdateRefs.set(forceUpdate, forceUpdate);
 	}
 
 	// `onError` and `onCompleted` callback functions will not always have a
@@ -71,6 +73,7 @@ export default function useBaseQuery(query, options) {
 			queryData.cleanup();
 
 			queryDataRefs.delete(queryKey);
+			forceUpdateRefs.delete(forceUpdate);
 		},
 		[],
 	);

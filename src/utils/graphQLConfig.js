@@ -26,6 +26,7 @@ import removeProjectWatchMutation from './mutationLinks/removeProject';
 import removeSectionWatchMutation from './mutationLinks/removeSection';
 import removeTagWatchMutation from './mutationLinks/removeTag';
 import requestCollabWatchMutation from './mutationLinks/requestCollab';
+import unfocusTaskWatchMutation from './mutationLinks/unfocusTask';
 import updateItemWatchMutation from './mutationLinks/updateItem';
 import updateProjectWatchMutation from './mutationLinks/updateProject';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
@@ -58,7 +59,12 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
 
 const cache = new InMemoryCache({
 	fragmentMatcher,
-	dataIdFromObject: o => o.id,
+	dataIdFromObject: (o) => {
+		if (o.__typename === 'ScheduleDay') {
+			return o.date;
+		}
+		return o.id;
+	},
 	cacheRedirects: {
 		Query: {
 			item: (_, args, {getCacheKey}) => getCacheKey({__typename: 'Item', id: args.id}),
@@ -104,6 +110,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	removeSection: removeSectionWatchMutation,
 	removeTag: removeTagWatchMutation,
 	requestCollab: requestCollabWatchMutation,
+	unfocusTask: unfocusTaskWatchMutation,
 	updateItem: updateItemWatchMutation,
 	updateProject: updateProjectWatchMutation,
 	uploadAttachments: uploadAttachmentsWatchMutation,

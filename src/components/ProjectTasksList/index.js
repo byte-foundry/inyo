@@ -648,7 +648,7 @@ function ProjectTasksList({
 	});
 	const [addSection] = useMutation(ADD_SECTION);
 	const [updateSection] = useMutation(UPDATE_SECTION);
-	const {scheduledTasksPerDay} = useScheduleData();
+	const {loadingSchedule, scheduledTasksPerDay} = useScheduleData();
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
@@ -834,15 +834,17 @@ function ProjectTasksList({
 					</ModalElem>
 				</ModalContainer>
 			)}
-			<Portal>
-				<LeftBarSchedule
-					isDragging={isDragging}
-					days={scheduledTasksPerDay}
-					fullWeek={hasFullWeekSchedule}
-					onMoveTask={onMoveTask}
-					workingTime={workingTime}
-				/>
-			</Portal>
+			{!loadingSchedule && (
+				<Portal>
+					<LeftBarSchedule
+						isDragging={isDragging}
+						days={scheduledTasksPerDay}
+						fullWeek={hasFullWeekSchedule}
+						onMoveTask={onMoveTask}
+						workingTime={workingTime}
+					/>
+				</Portal>
+			)}
 		</TasksListContainer>
 	);
 }

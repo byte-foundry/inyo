@@ -1,17 +1,6 @@
 import moment from 'moment';
-import momentDurationFormat from 'moment-duration-format';
 
-import {
-	CUSTOMER_TASK_TYPES,
-	MOMENT_DURATION_LOCALE_EN,
-	MOMENT_DURATION_LOCALE_FR,
-	WEEKDAYS,
-} from './constants';
-
-momentDurationFormat(moment);
-
-moment.updateLocale('fr', MOMENT_DURATION_LOCALE_FR);
-moment.updateLocale('en', MOMENT_DURATION_LOCALE_EN);
+import {CUSTOMER_TASK_TYPES, WEEKDAYS} from './constants';
 
 export const dateDiff = (datepart, fromdate, todate) => {
 	const lowerDatepart = datepart.toLowerCase();

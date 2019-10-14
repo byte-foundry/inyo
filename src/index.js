@@ -11,6 +11,7 @@ import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
 import {init, IntlViewerContext} from 'fbt';
 import moment from 'moment';
+import momentDurationFormat from 'moment-duration-format';
 import React, {Suspense, useCallback, useState} from 'react';
 import {DndProvider} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -27,7 +28,11 @@ import withTracker from './HOC/withTracker';
 import ProvidersSentry from './providers/sentry';
 import * as serviceWorker from './serviceWorker';
 import {useQuery} from './utils/apollo-hooks';
-import {INTERCOM_APP_ID} from './utils/constants';
+import {
+	INTERCOM_APP_ID,
+	MOMENT_DURATION_LOCALE_EN,
+	MOMENT_DURATION_LOCALE_FR,
+} from './utils/constants';
 import {Loading} from './utils/content';
 import {UserContext} from './utils/contexts';
 import client from './utils/graphQLConfig';
@@ -49,8 +54,12 @@ init({translations});
 IntlViewerContext.locale
 	= navigator && navigator.language.includes('fr') ? 'fr-FR' : 'en-US';
 
+momentDurationFormat(moment);
+moment.updateLocale('fr', MOMENT_DURATION_LOCALE_FR);
+moment.updateLocale('en', MOMENT_DURATION_LOCALE_EN);
+
 // Setting up locale mostly for react-dates
-moment.locale((navigator && navigator.language) || 'fr-FR');
+moment.locale((navigator && navigator.language) || 'fr');
 
 /* eslint-disable */
 (function() {
@@ -158,6 +167,7 @@ function Root() {
 		if (data.me.settings.language) {
 			IntlViewerContext.locale
 				= data.me.settings.language === 'fr' ? 'fr-FR' : 'en-US';
+			moment.locale(data.me.settings.language);
 		}
 	}
 

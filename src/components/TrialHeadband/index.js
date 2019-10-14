@@ -36,17 +36,9 @@ const TrialHeadband = ({history}) => {
 
 	if (loading || error) return null;
 
-	const {
-		lifetimePayment, signedUpAt, id, email,
-	} = data.me;
+	const {lifetimePayment, signedUpAt} = data.me;
 
-	if (
-		lifetimePayment
-		|| !moment().isBetween(
-			moment(signedUpAt).add(10, 'days'),
-			moment(signedUpAt).add(21, 'days'),
-		)
-	) {
+	if (lifetimePayment) {
 		return null;
 	}
 
@@ -63,9 +55,7 @@ const TrialHeadband = ({history}) => {
 			<Button
 				style={{display: 'inline'}}
 				onClick={() => {
-					const stripe = window.Stripe(
-						'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
-					);
+					window.Stripe('pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU');
 
 					history.push('/pay-for-inyo');
 				}}

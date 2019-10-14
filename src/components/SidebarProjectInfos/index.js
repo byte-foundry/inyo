@@ -276,6 +276,35 @@ const SidebarProjectInfos = ({
 					label={
 						<fbt
 							project="inyo"
+							desc="sidebar project main view tooltip"
+						>
+							Budget
+						</fbt>
+					}
+				>
+					<SidebarLink
+						onClick={() => setView('budget')}
+						active={activeView === 'budget'}
+					>
+						<IconButton
+							icon="attach_money"
+							size="tiny"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project budget projet"
+								>
+									Budget du projet
+								</fbt>
+							}
+							current={activeView === 'budget'}
+						/>
+					</SidebarLink>
+				</Tooltip>
+				<Tooltip
+					label={
+						<fbt
+							project="inyo"
 							desc="sidebar project personal notes tooltip"
 						>
 							Seulement visibles par vous

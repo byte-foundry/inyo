@@ -1,6 +1,5 @@
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
-import momentDurationFormat from 'moment-duration-format';
 import React, {useCallback} from 'react';
 import {withRouter} from 'react-router-dom';
 
@@ -22,8 +21,6 @@ import {
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
-
-momentDurationFormat(moment);
 
 const Container = styled('div')`
 	width: 980px;

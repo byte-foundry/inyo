@@ -792,6 +792,7 @@ export const Meta = styled('div')`
 	display: flex;
 	align-items: flex-start;
 	min-height: 1.25rem;
+	margin-bottom: 5px;
 
 	i {
 		margin-right: 15px;

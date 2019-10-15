@@ -66,16 +66,14 @@ import UploadDashboard from '../UploadDashboard';
 const Header = styled('div')``;
 
 const Metas = styled('div')`
-	display: grid;
-	grid-template-columns: 340px 1fr;
-	grid-row-gap: 5px;
+	gap: 5px;
+	column-count: 2;
 	color: ${gray50};
 	padding-bottom: 2rem;
 	font-size: 14px;
 
 	@media (max-width: ${BREAKPOINTS}px) {
-		display: flex;
-		flex-direction: column;
+		column-count: 1;
 		padding: 1rem 0;
 	}
 `;
@@ -333,7 +331,7 @@ const Item = ({
 
 	return (
 		<>
-			<StickyHeader customer={item.type !== 'DEFAULT'}>
+			<StickyHeader customer={customerTask}>
 				<TaskActivationHeader
 					item={item}
 					focusTask={focusTask}
@@ -578,87 +576,6 @@ const Item = ({
 							</Meta>
 						</Tooltip>
 					)}
-				{isCustomerTask(item.type) || !item.section ? (
-					<Tooltip
-						label={
-							<fbt
-								project="inyo"
-								desc="linked customer tooltip item view"
-							>
-								Personne liée à cette tâche
-							</fbt>
-						}
-					>
-						<Meta>
-							<MaterialIcon icon="person_outline" size="tiny" />
-							<MetaLabel>
-								<fbt
-									project="inyo"
-									desc="linked customer label item view"
-								>
-									Client
-								</fbt>
-							</MetaLabel>
-							{!customerToken && editCustomer ? (
-								<ClientDropdown
-									id="projects"
-									defaultMenuIsOpen
-									defaultValue={
-										item.linkedCustomer && {
-											value: item.linkedCustomer.id,
-											label: `${
-												item.linkedCustomer.name
-											} (${formatName(
-												item.linkedCustomer.firstName,
-												item.linkedCustomer.lastName,
-											)})`,
-										}
-									}
-									autoFocus
-									onChange={(selection) => {
-										updateItem({
-											variables: {
-												itemId: item.id,
-												linkedCustomerId: selection
-													? selection.value
-													: null,
-											},
-										});
-										setEditCustomer(false);
-									}}
-									onBlur={() => {
-										setEditCustomer(false);
-									}}
-									isClearable={!hasProjectCustomerLinked}
-								/>
-							) : (
-								<MetaText
-									onClick={
-										customerToken
-											? undefined
-											: () => setEditCustomer(true)
-									}
-								>
-									{customer
-										&& `${customer.name} (${formatName(
-											customer.firstName,
-											customer.lastName,
-										)})`}
-								</MetaText>
-							)}
-						</Meta>
-					</Tooltip>
-				) : (
-					<ItemViewAssigneeInput
-						customerToken={customerToken}
-						taskId={item.id}
-						assignee={item.assignee}
-						linkedCollaborators={
-							item.section
-							&& item.section.project.linkedCollaborators
-						}
-					/>
-				)}
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Tooltip
 						label={
@@ -751,6 +668,108 @@ const Item = ({
 						</Meta>
 					</Tooltip>
 				)}
+
+				{isCustomerTask(item.type) || !item.section ? (
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="linked customer tooltip item view"
+							>
+								Personne liée à cette tâche
+							</fbt>
+						}
+					>
+						<Meta>
+							<MaterialIcon icon="person_outline" size="tiny" />
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="linked customer label item view"
+								>
+									Client
+								</fbt>
+							</MetaLabel>
+							{!customerToken && editCustomer ? (
+								<ClientDropdown
+									id="projects"
+									defaultMenuIsOpen
+									defaultValue={
+										item.linkedCustomer && {
+											value: item.linkedCustomer.id,
+											label: `${
+												item.linkedCustomer.name
+											} (${formatName(
+												item.linkedCustomer.firstName,
+												item.linkedCustomer.lastName,
+											)})`,
+										}
+									}
+									autoFocus
+									onChange={(selection) => {
+										updateItem({
+											variables: {
+												itemId: item.id,
+												linkedCustomerId: selection
+													? selection.value
+													: null,
+											},
+										});
+										setEditCustomer(false);
+									}}
+									onBlur={() => {
+										setEditCustomer(false);
+									}}
+									isClearable={!hasProjectCustomerLinked}
+								/>
+							) : (
+								<MetaText
+									onClick={
+										customerToken
+											? undefined
+											: () => setEditCustomer(true)
+									}
+								>
+									{customer
+										&& `${customer.name} (${formatName(
+											customer.firstName,
+											customer.lastName,
+										)})`}
+								</MetaText>
+							)}
+						</Meta>
+					</Tooltip>
+				) : (
+					item.type !== 'PERSONAL' && (
+						<ItemViewAssigneeInput
+							customerToken={customerToken}
+							taskId={item.id}
+							assignee={item.assignee}
+							linkedCollaborators={
+								item.section
+								&& item.section.project.linkedCollaborators
+							}
+						/>
+					)
+				)}
+
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="type of the task tooltip">
+							Définit s'il y a des actions automatiques
+						</fbt>
+					}
+				>
+					<Meta>
+						<MaterialIcon icon="check_circle_outline" size="tiny" />
+						<MetaLabel>
+							<fbt project="inyo" desc="task type">
+								Type de tâche
+							</fbt>
+						</MetaLabel>
+						<MetaText>{typeInfo.name}</MetaText>
+					</Meta>
+				</Tooltip>
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="project tooltip">
@@ -806,23 +825,6 @@ const Item = ({
 									&& item.section.project.name}
 							</MetaText>
 						)}
-					</Meta>
-				</Tooltip>
-				<Tooltip
-					label={
-						<fbt project="inyo" desc="type of the task tooltip">
-							Définit s'il y a des actions automatiques
-						</fbt>
-					}
-				>
-					<Meta>
-						<MaterialIcon icon="check_circle_outline" size="tiny" />
-						<MetaLabel>
-							<fbt project="inyo" desc="task type">
-								Type de tâche
-							</fbt>
-						</MetaLabel>
-						<MetaText>{typeInfo.name}</MetaText>
 					</Meta>
 				</Tooltip>
 				{!customerToken && (

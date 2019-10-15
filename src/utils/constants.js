@@ -101,6 +101,20 @@ export const ITEM_TYPES = [
 		},
 	},
 	{
+		icon: <TaskIcon />,
+		iconValidated: <TaskIconValidated />,
+		type: 'PERSONAL',
+		get name() {
+			return fbt('Tâche personnelle', 'personal task name');
+		},
+		get description() {
+			return fbt(
+				'Une tâche uniquement visible par vous',
+				'personal task description',
+			);
+		},
+	},
+	{
 		icon: <TaskCustomerIcon />,
 		iconValidated: <TaskCustomerIconValidated />,
 		iconUrl: TaskCustomerIconUrl,
@@ -209,12 +223,6 @@ export const ITEM_TYPES = [
 		type: 'SCHEDULE_MEETING',
 		name: 'Programmation de RDV client',
 		description: 'Programmer automatiquement une réunion',
-	},
-	{
-		icon: '⭕',
-		type: 'PERSONAL',
-		name: 'Tâche personnelle',
-		description: 'Créer une tâche uniquement visible par vous',
 	}, */
 ];
 

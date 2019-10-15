@@ -249,6 +249,25 @@ export default function ({
 				/>
 			</CreateProjectRow>
 			<CreateProjectRow>
+				<FormElem
+					{...props}
+					name="budget"
+					type="number"
+					label={
+						<fbt project="inyo" desc="project name label">
+							Budget
+						</fbt>
+					}
+					placeholder={
+						<fbt project="inyo" desc="new project name placeholder">
+							5000 €
+						</fbt>
+					}
+					big
+					noMarginBottom
+				/>
+			</CreateProjectRow>
+			<CreateProjectRow>
 				<InputLabel>
 					<Label>Deadline</Label>
 					<DeadlineInput>

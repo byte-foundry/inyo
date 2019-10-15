@@ -240,6 +240,7 @@ export const GET_PROJECT_INFOS = gql`
 			notifyActivityToCustomer
 			total
 			token
+			budget
 			attachments {
 				id
 				filename
@@ -276,6 +277,7 @@ export const GET_PROJECT_INFOS = gql`
 					status
 					unit
 					timeItTook
+					dailyRate
 				}
 			}
 			issuer {

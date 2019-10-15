@@ -322,6 +322,7 @@ export const GET_PROJECT_DATA = gql`
 			status
 			createdAt
 			deadline
+			budget
 			daysUntilDeadline
 			notifyActivityToCustomer
 			issuer {

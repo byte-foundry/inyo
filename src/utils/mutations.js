@@ -243,6 +243,7 @@ export const CREATE_PROJECT = gql`
 		$template: ProjectTemplate
 		$sections: [SectionInput!]
 		$deadline: DateTime
+		$budget: Float
 		$notifyActivityToCustomer: Boolean
 	) {
 		createProject(
@@ -252,6 +253,7 @@ export const CREATE_PROJECT = gql`
 			sections: $sections
 			name: $name
 			deadline: $deadline
+			budget: $budget
 			notifyActivityToCustomer: $notifyActivityToCustomer
 		) {
 			id
@@ -266,6 +268,7 @@ export const CREATE_PROJECT = gql`
 			createdAt
 			status
 			total
+			budget
 			sections {
 				id
 				items {
@@ -284,6 +287,7 @@ export const UPDATE_PROJECT = gql`
 		$projectId: ID!
 		$name: String
 		$deadline: DateTime
+		$budget: Float
 		$notifyActivityToCustomer: Boolean
 		$customerId: ID
 		$customer: CustomerInput
@@ -292,6 +296,7 @@ export const UPDATE_PROJECT = gql`
 			id: $projectId
 			name: $name
 			deadline: $deadline
+			budget: $budget
 			notifyActivityToCustomer: $notifyActivityToCustomer
 			customerId: $customerId
 			customer: $customer
@@ -299,6 +304,7 @@ export const UPDATE_PROJECT = gql`
 			id
 			name
 			deadline
+			budget
 			daysUntilDeadline
 			notifyActivityToCustomer
 			status

@@ -13,7 +13,7 @@ import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
-import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../../utils/constants';
+import {BREAKPOINTS, itemStatuses} from '../../utils/constants';
 import {isCustomerTask} from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
@@ -22,6 +22,7 @@ import {
 	primaryBlack,
 	primaryGrey,
 	TaskHeading,
+	TaskIcon,
 	TaskIconText,
 } from '../../utils/new/design-system';
 import useUserInfos from '../../utils/useUserInfos';
@@ -80,77 +81,6 @@ export const TaskContainer = styled('div')`
 `;
 
 const TaskAdd = styled('div')``;
-
-const TaskIcon = styled('div')`
-	cursor: pointer;
-	width: 3.5rem;
-	height: 3.5rem;
-	margin-left: -0.8725rem;
-	margin-right: ${props => (props.noData ? '.5rem' : '1rem')};
-	overflow: visible;
-	background: center no-repeat
-		url(${(props) => {
-		let {type} = props;
-
-		if (props.assigned) {
-			type += '_ASSIGNED';
-		}
-
-		const typeInfos
-				= ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
-
-		let icon = typeInfos.iconUrl;
-
-		if (props.status === itemStatuses.FINISHED) {
-			icon
-					= (props.justUpdated
-					? typeInfos.iconUrlValidatedAnim
-					: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
-		}
-		return icon;
-	}});
-	margin-bottom: 0;
-
-	transform: scale(${props => (props.noData ? 0.75 : '')});
-
-	&:hover {
-		background: center no-repeat
-			url(${(props) => {
-		const typeInfos
-					= ITEM_TYPES.find(t => t.type === props.type)
-					|| ITEM_TYPES[0];
-
-		let icon = typeInfos.iconUrl;
-
-		icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
-		return icon;
-	}});
-
-		animation: ${props => (props.status === itemStatuses.FINISHED ? 'none' : 'growth 300ms')};
-
-		@keyframes growth {
-			0% {
-				background-size: 0% auto;
-			}
-			50% {
-				background-size: 50% auto;
-			}
-			70% {
-				background-size: 40% auto;
-			}
-			100% {
-				background-size: 50% auto;
-			}
-		}
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		transform: scale(0.6);
-		margin: 0;
-		position: absolute;
-		left: -1rem;
-	}
-`;
 
 const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;

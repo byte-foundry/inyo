@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import React from 'react';
+import React, {useState} from 'react';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
@@ -9,11 +9,13 @@ import {FlexColumn, FlexRow} from '../../utils/content';
 import {UPDATE_PROJECT} from '../../utils/mutations';
 import {
 	Button,
+	lightGrey,
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
+	TaskIcon,
 } from '../../utils/new/design-system';
-import {GET_PROJECT_INFOS} from '../../utils/queries';
+import {GET_PROJECT_DATA} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
 import FormElem from '../FormElem';
 
@@ -37,7 +39,7 @@ const BudgetInfo = styled('div')`
 `;
 
 const BudgetGraphFlex = styled(FlexColumn)`
-	flex: 1;
+	flex: 0 0 350px;
 	align-items: center;
 `;
 
@@ -69,7 +71,7 @@ const BudgetGraphSpent = styled('div')`
 	width: 200px;
 	position: absolute;
 	position: absolute;
-	height: 50%;
+	height: ${props => props.percent}%;
 	bottom: 0px;
 	left: 50px;
 `;
@@ -82,16 +84,120 @@ const BudgetGraphHalf = styled('div')`
 	left: 25px;
 `;
 
-const BudgetGraph = () => (
+const BudgetGraph = ({percent}) => (
 	<BudgetGraphFlex>
 		<BudgetGraphContainer>
 			<BudgetGraphBudget></BudgetGraphBudget>
-			<BudgetGraphSpent></BudgetGraphSpent>
+			<BudgetGraphSpent percent={percent}></BudgetGraphSpent>
 			<BudgetGraphBaseline></BudgetGraphBaseline>
 			<BudgetGraphHalf></BudgetGraphHalf>
 		</BudgetGraphContainer>
 	</BudgetGraphFlex>
 );
+
+const BudgetItemRow = styled(FlexRow)`
+	color: ${({finished}) => (finished ? primaryPurple : primaryBlack)};
+`;
+
+const BudgetItemName = styled('div')`
+	flex: 1;
+	font-size: 1.2rem;
+	height: 56px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`;
+
+const BudgetItemBudget = styled('div')`
+	font-size: 1.2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+`;
+
+const BudgetItem = ({item, defaultDailyPrice}) => {
+	const budget
+		= (item.timeItTook || item.unit) * (item.dailyRate || defaultDailyPrice);
+
+	return (
+		<BudgetItemRow finished={item.status === 'FINISHED'}>
+			<TaskIcon status={item.status} type={item.type} />
+			<BudgetItemName>{item.name}</BudgetItemName>
+			<BudgetItemBudget>{budget} €</BudgetItemBudget>
+		</BudgetItemRow>
+	);
+};
+
+const BudgetItems = styled('div')`
+	display: ${({open}) => (open ? 'block' : 'none')};
+`;
+
+const BudgetSectionName = styled('div')`
+	font-size: 1.5rem;
+	flex: 1;
+`;
+
+const BudgetSectionBudget = styled('div')`
+	font-size: 1.5rem;
+	margin-left: 1rem;
+`;
+
+const BudgetSectionContainer = styled(FlexColumn)`
+	padding: 0.5rem;
+	border-radius: 3px;
+	cursor: pointer;
+
+	&:hover {
+		background: ${lightGrey};
+	}
+`;
+
+const BudgetSection = ({section, defaultDailyPrice}) => {
+	const [open, setOpen] = useState(false);
+	const sectionBudgetUnworked = section.items.reduce(
+		(itemsSum, item) => itemsSum
+			+ (item.status !== 'FINISHED'
+				? (item.timeItTook || item.unit)
+				  * (item.dailyRate || defaultDailyPrice)
+				: 0),
+		0,
+	);
+
+	const sectionBudgetWorked = section.items.reduce(
+		(itemsSum, item) => itemsSum
+			+ (item.status === 'FINISHED'
+				? (item.timeItTook || item.unit)
+				  * (item.dailyRate || defaultDailyPrice)
+				: 0),
+		0,
+	);
+
+	return (
+		<BudgetSectionContainer onClick={() => setOpen(!open)}>
+			<FlexRow>
+				<BudgetSectionName>{section.name}</BudgetSectionName>
+				<BudgetSectionBudget>
+					Travaillé {sectionBudgetWorked} €
+				</BudgetSectionBudget>
+				<BudgetSectionBudget>
+					Restant {sectionBudgetUnworked} €
+				</BudgetSectionBudget>
+			</FlexRow>
+			<BudgetItems open={open}>
+				{section.items.map(item => (
+					<BudgetItem
+						item={item}
+						defaultDailyPrice={defaultDailyPrice}
+					/>
+				))}
+			</BudgetItems>
+		</BudgetSectionContainer>
+	);
+};
+
+const BudgetSections = styled('div')`
+	margin-top: 2rem;
+`;
 
 const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 	const spentBudget = sections.reduce(
@@ -108,44 +214,61 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 	);
 
 	return (
-		<FlexRow>
-			<BudgetGraph budget={props.values.budget} sections={sections} />
-			<FlexColumn style={{flex: 1}}>
-				<BudgetInfoContainer>
-					<fbt desc="project's budget">
-						<BudgetLabel>Budget du projet</BudgetLabel>
-						<BudgetInfo>
-							<fbt:param name="budget">
-								{props.values.budget}
-							</fbt:param>{' '}
-							€
-						</BudgetInfo>
-					</fbt>
-				</BudgetInfoContainer>
-				<BudgetInfoContainer>
-					<fbt desc="project's budget">
-						<BudgetLabel>Budget restant</BudgetLabel>
-						<BudgetInfo>
-							<fbt:param name="budget">
-								{Math.round(props.values.budget - spentBudget)}
-							</fbt:param>{' '}
-							€
-						</BudgetInfo>
-					</fbt>
-				</BudgetInfoContainer>
-				<BudgetInfoContainer>
-					<fbt desc="project's budget">
-						<BudgetLabel>Rentabilité</BudgetLabel>
-						<BudgetInfo>
-							<fbt:param name="budget">
-								{props.values.budget}
-							</fbt:param>{' '}
-							€
-						</BudgetInfo>
-					</fbt>
-				</BudgetInfoContainer>
-			</FlexColumn>
-		</FlexRow>
+		<FlexColumn>
+			<FlexRow>
+				<BudgetGraph
+					budget={props.values.budget}
+					sections={sections}
+					percent={(spentBudget / props.values.budget) * 100}
+				/>
+				<FlexColumn style={{flex: 1}}>
+					<BudgetInfoContainer>
+						<fbt desc="project's budget">
+							<BudgetLabel>Budget du projet</BudgetLabel>
+							<BudgetInfo>
+								<fbt:param name="budget">
+									{props.values.budget}
+								</fbt:param>{' '}
+								€
+							</BudgetInfo>
+						</fbt>
+					</BudgetInfoContainer>
+					<BudgetInfoContainer>
+						<fbt desc="project's budget">
+							<BudgetLabel>Budget restant</BudgetLabel>
+							<BudgetInfo>
+								<fbt:param name="budget">
+									{Math.round(
+										props.values.budget - spentBudget,
+									)}
+								</fbt:param>{' '}
+								€
+							</BudgetInfo>
+						</fbt>
+					</BudgetInfoContainer>
+					<BudgetInfoContainer>
+						<fbt desc="project's budget">
+							<BudgetLabel>Rentabilité</BudgetLabel>
+							<BudgetInfo>
+								<fbt:param name="budget">
+									{(
+										spentBudget / props.values.budget
+									).toFixed(1)}
+								</fbt:param>{' '}
+							</BudgetInfo>
+						</fbt>
+					</BudgetInfoContainer>
+				</FlexColumn>
+			</FlexRow>
+			<BudgetSections>
+				{sections.map(section => (
+					<BudgetSection
+						section={section}
+						defaultDailyPrice={defaultDailyPrice}
+					/>
+				))}
+			</BudgetSections>
+		</FlexColumn>
 	);
 };
 
@@ -169,7 +292,7 @@ const NoBudgetDisplay = props => (
 
 const ProjectBudget = ({projectId}) => {
 	const [updateProject] = useMutation(UPDATE_PROJECT);
-	const {data, error} = useQuery(GET_PROJECT_INFOS, {
+	const {data, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
 		suspend: true,
 	});

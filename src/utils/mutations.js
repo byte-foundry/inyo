@@ -142,6 +142,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			endWorkAt
 			workingDays
 			timeZone
+			defaultDailyPrice
 			settings {
 				hasFullWeekSchedule
 			}

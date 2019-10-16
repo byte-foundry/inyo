@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
+import moment from 'moment';
 import React, {useCallback, useState} from 'react';
 import {useDrag} from 'react-dnd';
 import {Route, withRouter} from 'react-router-dom';
@@ -91,8 +92,15 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = new URLSearchParams(prevSearch || location.search);
 
+	const startingFrom
+		= query.get('from')
+		|| moment()
+			.startOf('week')
+			.format(moment.HTML5_FMT.DATE);
+
 	const {data, error} = useQuery(GET_ALL_TASKS, {
 		suspend: true,
+		variables: {schedule: 'UNSCHEDULED'},
 		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
 	});
 	const {
@@ -103,23 +111,19 @@ const DashboardTasks = ({location, history}) => {
 	} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const {
-		unscheduledTasks,
+		loading: loadingSchedule,
 		tasksToReschedule,
 		scheduledTasksPerDay,
-	} = useScheduleData();
+	} = useScheduleData({startingFrom});
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
-			const cachedTask = data.me.tasks.find(t => task.id === t.id);
-
-			if (isCustomerTask(cachedTask.type) && !cachedTask.scheduledFor) {
+			if (isCustomerTask(task.type) && !task.scheduledFor) {
 				history.push({
 					pathname: `/app/dashboard/${task.id}`,
 					state: {
 						prevSearch: location.search,
-						isActivating: taskFulfillsActivationCriteria(
-							cachedTask,
-						),
+						isActivating: taskFulfillsActivationCriteria(task),
 						scheduledFor,
 					},
 				});
@@ -127,10 +131,7 @@ const DashboardTasks = ({location, history}) => {
 				return;
 			}
 
-			if (
-				isCustomerTask(cachedTask.type)
-				&& cachedTask.scheduledFor !== scheduledFor
-			) return;
+			if (isCustomerTask(task.type) && task.scheduledFor !== scheduledFor) return;
 
 			focusTask({
 				variables: {
@@ -147,14 +148,13 @@ const DashboardTasks = ({location, history}) => {
 				},
 			});
 		},
-		[focusTask, data.me.tasks, history, location.search],
+		[focusTask, data && data.me.tasks, history, location.search],
 	);
 
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
-	const startingFrom = query.get('from');
 
 	if (
 		error
@@ -168,6 +168,10 @@ const DashboardTasks = ({location, history}) => {
 	const {
 		me: {id, tasks},
 	} = data;
+
+	const unscheduledTasks = tasks.filter(
+		t => !(t.assignee && t.assignee.id !== id),
+	);
 
 	const setProjectSelected = (selected, removeCustomer) => {
 		const newQuery = new URLSearchParams(query);
@@ -256,6 +260,7 @@ const DashboardTasks = ({location, history}) => {
 				<MaterialIcon icon="unfold_more" size="normal" />
 			</ScrollHelper>
 			<Schedule
+				loading={loadingSchedule}
 				startingFrom={startingFrom}
 				onChangeWeek={(newWeek) => {
 					const newQuery = new URLSearchParams(query);
@@ -293,8 +298,7 @@ const DashboardTasks = ({location, history}) => {
 						tagsSelected={tags}
 						marginTop
 					/>
-					{tasks.length === 0
-					|| unscheduledTasks.length !== 0
+					{unscheduledTasks.length !== 0
 					|| unscheduledFilteredTasks.length
 						!== unscheduledTasks.length ? (
 							<TasksList
@@ -359,15 +363,17 @@ const DashboardTasks = ({location, history}) => {
 					</Modal>
 				)}
 			/>
-			<Portal>
-				<LeftBarSchedule
-					isDragging={isDragging}
-					days={scheduledTasksPerDay}
-					fullWeek={hasFullWeekSchedule}
-					onMoveTask={onMoveTask}
-					workingTime={workingTime}
-				/>
-			</Portal>
+			{!loadingSchedule && (
+				<Portal>
+					<LeftBarSchedule
+						isDragging={isDragging}
+						days={scheduledTasksPerDay}
+						fullWeek={hasFullWeekSchedule}
+						onMoveTask={onMoveTask}
+						workingTime={workingTime}
+					/>
+				</Portal>
+			)}
 		</>
 	);
 };

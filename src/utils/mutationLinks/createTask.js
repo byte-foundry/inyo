@@ -73,6 +73,8 @@ export default {
 		let cachedItems = query.result.me.tasks;
 		const addedItem = mutation.result.data.addItem;
 
+		if (query.variables.schedule === 'TO_BE_RESCHEDULED') return query.result;
+
 		if (addedItem.section) {
 			cachedItems = cachedItems.map((item) => {
 				if (item.section && item.section.id === addedItem.section.id) {

@@ -479,11 +479,55 @@ export const GET_ITEM_DETAILS = gql`
 export const GET_ALL_TASKS = gql`
 	${ITEM_FRAGMENT}
 
-	query getAllTasks($linkedCustomerId: ID) {
+	query getAllTasks(
+		$linkedCustomerId: ID
+		$first: Int
+		$after: ID
+		$schedule: ScheduleFilterInput
+	) {
 		me {
 			id
-			tasks(filter: {linkedCustomerId: $linkedCustomerId}) {
+			tasks(
+				filter: {linkedCustomerId: $linkedCustomerId}
+				schedule: $schedule
+				first: $first
+				after: $after
+			) {
 				...ItemFragment
+			}
+		}
+	}
+`;
+
+export const GET_SCHEDULE = gql`
+	${ITEM_FRAGMENT}
+
+	query getSchedule($start: Date) {
+		me {
+			id
+			schedule(start: $start, first: 7) {
+				date
+				tasks {
+					...ItemFragment
+				}
+				reminders {
+					id
+					status
+					item {
+						...ItemFragment
+					}
+				}
+				deadlines {
+					... on Project {
+						id
+						deadline
+						projectStatus: status
+						name
+					}
+					... on Item {
+						...ItemFragment
+					}
+				}
 			}
 		}
 	}

@@ -2,192 +2,49 @@ import moment from 'moment';
 
 import {useQuery} from './apollo-hooks';
 import {isCustomerTask} from './functions';
-import {GET_ALL_TASKS} from './queries';
+import {GET_ALL_TASKS, GET_SCHEDULE} from './queries';
 
-const useScheduleData = () => {
+const useScheduleData = ({startingFrom} = {}) => {
+	const {data: dataTasks, loading: loadingTasks} = useQuery(GET_ALL_TASKS, {
+		variables: {schedule: 'TO_BE_RESCHEDULED'},
+	});
+	const {data, loading} = useQuery(GET_SCHEDULE, {
+		fetchPolicy: 'cache-and-network',
+		variables: {start: startingFrom},
+	});
+
+	if ((loading && !(data && data.me && data.me.schedule)) || loadingTasks) {
+		return {
+			loading: true,
+			scheduledTasksPerDay: {},
+			tasksToReschedule: [],
+		};
+	}
+
 	const {
-		data: {
-			me: {id, tasks},
-		},
-	} = useQuery(GET_ALL_TASKS, {suspend: true});
+		me: {id, schedule},
+	} = data;
 
-	const unscheduledTasks = [];
-	const tasksToReschedule = [];
 	const scheduledTasksPerDay = {};
 
-	tasks.forEach((task) => {
-		if (
-			task.section
-			&& task.section.project.deadline
-			&& task.section.project.status === 'ONGOING'
-		) {
-			const {project} = task.section;
-
-			const deadlineDate = moment(project.deadline).format(
-				moment.HTML5_FMT.DATE,
-			);
-
-			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
-				deadlineDate
-			] || {
-				date: deadlineDate,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			if (
-				!scheduledTasksPerDay[deadlineDate].deadlines.find(
-					d => d.project && d.project.id === project.id,
-				)
-			) {
-				scheduledTasksPerDay[deadlineDate].deadlines.push({
-					date: project.deadline,
-					project,
-				});
-			}
-		}
-
-		if (
-			task.dueDate
-			&& (!task.section || task.dueDate !== task.section.project.deadline)
-		) {
-			const deadlineDate = moment(task.dueDate).format(
-				moment.HTML5_FMT.DATE,
-			);
-
-			scheduledTasksPerDay[deadlineDate] = scheduledTasksPerDay[
-				deadlineDate
-			] || {
-				date: deadlineDate,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			scheduledTasksPerDay[deadlineDate].deadlines.push({
-				date: task.dueDate,
-				task,
-			});
-		}
-
-		if (
-			!task.scheduledFor
-			&& task.status === 'FINISHED'
-			&& moment(task.finishedAt).isBefore(moment(), 'day')
-		) {
-			const finishedAtDate = task.finishedAt.split('T')[0];
-
-			scheduledTasksPerDay[finishedAtDate] = scheduledTasksPerDay[
-				finishedAtDate
-			] || {
-				date: finishedAtDate,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			scheduledTasksPerDay[finishedAtDate].tasks.push(task);
-
-			return;
-		}
-
-		if (
-			!(
-				task.owner.id === id
-				&& task.assignee
-				&& task.assignee.id !== id
-			)
-			&& !task.scheduledFor
-		) {
-			if (!task.section || task.section.project.status === 'ONGOING') {
-				unscheduledTasks.push(task);
-			}
-
-			return;
-		}
-
-		if (isCustomerTask(task.type)) {
-			const plannedReminders = task.reminders.filter(
-				reminder => reminder.status === 'PENDING' || reminder.status === 'SENT',
-			);
-
-			plannedReminders.forEach((reminder) => {
-				const reminderDate = moment(reminder.sendingDate).format(
-					moment.HTML5_FMT.DATE,
-				);
-
-				scheduledTasksPerDay[reminderDate] = scheduledTasksPerDay[
-					reminderDate
-				] || {
-					date: reminderDate,
-					tasks: [],
-					reminders: [],
-					deadlines: [],
-					assignedTasks: [],
-				};
-
-				scheduledTasksPerDay[reminderDate].reminders.push({
-					...reminder,
-					item: task,
-				});
-			});
-
-			// we just want the reminders
-			return;
-		}
-
-		if (
-			task.owner.id === id
-			&& task.assignee
-			&& task.assignee.id !== id
-			&& task.scheduledFor
-		) {
-			scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
-				task.scheduledFor
-			] || {
-				date: task.scheduledFor,
-				tasks: [],
-				reminders: [],
-				deadlines: [],
-				assignedTasks: [],
-			};
-
-			scheduledTasksPerDay[task.scheduledFor].assignedTasks.push(task);
-
-			return;
-		}
-
-		scheduledTasksPerDay[task.scheduledFor] = scheduledTasksPerDay[
-			task.scheduledFor
-		] || {
-			date: task.scheduledFor,
-			tasks: [],
-			reminders: [],
-			deadlines: [],
-			assignedTasks: [],
+	schedule.forEach((day) => {
+		scheduledTasksPerDay[day.date] = {
+			...day,
+			deadlines: day.deadlines.map(d => ({
+				...d,
+				project: d.projectStatus ? d : undefined,
+				task: d.status ? d : undefined,
+			})),
+			tasks: day.tasks.filter(t => !(t.owner.id === id && t.assignee)),
+			assignedTasks: day.tasks.filter(
+				t => t.owner.id === id && t.assignee,
+			),
 		};
-
-		if (!task.section || task.section.project.status === 'ONGOING') {
-			scheduledTasksPerDay[task.scheduledFor].tasks.push(task);
-		}
-
-		if (
-			task.status === 'PENDING'
-			&& !isCustomerTask(task.type)
-			&& moment(task.scheduledFor).isBefore(moment(), 'day')
-		) {
-			tasksToReschedule.push(task);
-		}
 	});
 
 	return {
 		scheduledTasksPerDay,
-		unscheduledTasks,
-		tasksToReschedule,
+		tasksToReschedule: dataTasks.me.tasks,
 	};
 };
 

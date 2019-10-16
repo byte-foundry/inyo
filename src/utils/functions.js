@@ -77,8 +77,6 @@ export function extractScheduleFromWorkingDays(
 			} = days[date] || {};
 			const events = eventsPerDay[date] || [];
 
-			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
-
 			weekdays.push({
 				momentDate: iteratorDate.clone(),
 				date: iteratorDate.format(moment.HTML5_FMT.DATE),

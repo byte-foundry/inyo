@@ -73,6 +73,7 @@
     "graphql-tag": "^2.10.0",
     "history": "^4.9.0",
     "husky": "^2.4.1",
+    "immer": "^4.0.1",
     "lint-staged": "^8.2.0",
     "lodash.debounce": "^4.0.8",
     "medium-draft": "^0.5.6",

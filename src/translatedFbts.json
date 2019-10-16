@@ -436,10 +436,17 @@
 		"111u42": "Mark as done",
 		"2MC7S": "Click here if this task is already done",
 		"3RxPrB": "Types of tasks",
+		"pTtFk": "Choose a preset project template",
+		"35nNTl": "Or use one of your existing projects",
+		"3ujicN": "Search project",
+		"3XCS7R": "Use this template",
 		"3OpVMz": {
 			"*": {"*": "See the {projectsCount} other projects"},
 			"_1": {"_1": "See the other project"}
 		},
+		"1R33Bb": "Preset templates",
+		"26VFj0": "Templates are made with preset tasks. They can help you bootstrap your project well.",
+		"36p1f": "We built them collaboratively with experienced freelances in their fields (design, development etc.)",
 		"2bIIDI": "Type here...",
 		"3Sn3hf": "Overtime",
 		"aD1t7": "Overestimated time",

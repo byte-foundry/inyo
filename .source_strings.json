@@ -3693,8 +3693,8 @@
    "filepath": "src/components/ProjectTasksList/index.js",
    "line_beg": 793,
    "col_beg": 7,
-   "line_end": 793,
-   "col_end": 96,
+   "line_end": 796,
+   "col_end": 13,
    "type": "text",
    "desc": "remove section title",
    "project": "",
@@ -3705,10 +3705,10 @@
     "qZtabrcQIvSwcHy3WAZGlg==": "Vous allez supprimer la section \"{sectionName}\". En supprimant cette section, vous allez supprimer les tâches suivantes :"
    },
    "filepath": "src/components/ProjectTasksList/index.js",
-   "line_beg": 796,
-   "col_beg": 7,
-   "line_end": 799,
-   "col_end": 13,
+   "line_beg": 801,
+   "col_beg": 9,
+   "line_end": 807,
+   "col_end": 15,
    "type": "text",
    "desc": "remove section notice",
    "project": "",
@@ -3719,10 +3719,10 @@
     "TPuvfP8wDhZpRQjEDK+Cpw==": "Vous pouvez glisser/déposer ces tâches dans une autre section afin qu'elles ne soient pas supprimées."
    },
    "filepath": "src/components/ProjectTasksList/index.js",
-   "line_beg": 807,
-   "col_beg": 7,
-   "line_end": 810,
-   "col_end": 13,
+   "line_beg": 819,
+   "col_beg": 9,
+   "line_end": 823,
+   "col_end": 15,
    "type": "text",
    "desc": "remove section notice 2",
    "project": "",
@@ -3733,10 +3733,10 @@
     "dBR4diknxQE3NNnXgo2lfg==": "Annuler"
    },
    "filepath": "src/components/ProjectTasksList/index.js",
-   "line_beg": 818,
+   "line_beg": 833,
    "col_beg": 8,
-   "line_end": 818,
-   "col_end": 62,
+   "line_end": 835,
+   "col_end": 14,
    "type": "text",
    "desc": "remove section cancel button",
    "project": "",
@@ -3747,10 +3747,10 @@
     "4JhC8oL8U6tCIjB4iTEEbw==": "Supprimer"
    },
    "filepath": "src/components/ProjectTasksList/index.js",
-   "line_beg": 833,
+   "line_beg": 850,
    "col_beg": 8,
-   "line_end": 833,
-   "col_end": 65,
+   "line_end": 852,
+   "col_end": 14,
    "type": "text",
    "desc": "remove section confirm button",
    "project": "",
@@ -6843,6 +6843,62 @@
   },
   {
    "hashToText": {
+    "Y5aHcEB9ZmceQSNZOEvFhQ==": "Choisir un modèle de projet prédéfini"
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 181,
+   "col_beg": 16,
+   "line_end": 181,
+   "col_end": 96,
+   "type": "text",
+   "desc": "choose template subtitle",
+   "project": "",
+   "jsfbt": "Choisir un modèle de projet prédéfini"
+  },
+  {
+   "hashToText": {
+    "IYAiMuzZLGnf7+HsW9u/Aw==": "Ou utiliser un de vos projets existants"
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 208,
+   "col_beg": 7,
+   "line_end": 208,
+   "col_end": 97,
+   "type": "text",
+   "desc": "choose existing project subtitle",
+   "project": "",
+   "jsfbt": "Ou utiliser un de vos projets existants"
+  },
+  {
+   "hashToText": {
+    "nOTssOdfpCAjAh3djfmq6A==": "Rechercher un projet"
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 213,
+   "col_beg": 20,
+   "line_end": 213,
+   "col_end": 91,
+   "type": "text",
+   "desc": "searc existing project input placeholder",
+   "project": "",
+   "jsfbt": "Rechercher un projet"
+  },
+  {
+   "hashToText": {
+    "JtlJzsGc+VOxeioktaWAWQ==": "Utiliser ce modèle"
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 260,
+   "col_beg": 12,
+   "line_end": 260,
+   "col_end": 73,
+   "type": "text",
+   "desc": "use this template button",
+   "project": "",
+   "jsfbt": "Utiliser ce modèle"
+  },
+  {
+   "hashToText": {
     "I/+U0FDJaxZfARNlKF8sPA==": "Voir les {projectsCount} autres projets",
     "lRXhtoRR9UPNZAQMz+AYjg==": "Voir l' autre projet"
    },
@@ -6872,6 +6928,48 @@
      }
     ]
    }
+  },
+  {
+   "hashToText": {
+    "sqFm15SMrbEXE/QGFI/bzQ==": "Modèles prédéfinis"
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 303,
+   "col_beg": 45,
+   "line_end": 304,
+   "col_end": 22,
+   "type": "text",
+   "desc": "preset templates title",
+   "project": "",
+   "jsfbt": "Modèles prédéfinis"
+  },
+  {
+   "hashToText": {
+    "VlKh0YC2TO+6HpZ+pv/zzQ==": "Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases."
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 307,
+   "col_beg": 6,
+   "line_end": 311,
+   "col_end": 12,
+   "type": "text",
+   "desc": "preset templates description",
+   "project": "",
+   "jsfbt": "Les modèles sont composés d'un ensemble de tâches prédéfinies. Ils vous permettront de démarrer vos projets sur de bonnes bases."
+  },
+  {
+   "hashToText": {
+    "ezRHKiuvPTbjdoPgehuaiA==": "Nous les avons construits en collaboration avec des freelances expérimentés dans leurs domaines (design, développement etc.)"
+   },
+   "filepath": "src/components/TemplateAndProjectFiller/index.js",
+   "line_beg": 314,
+   "col_beg": 6,
+   "line_end": 318,
+   "col_end": 12,
+   "type": "text",
+   "desc": "preset templates description 2",
+   "project": "",
+   "jsfbt": "Nous les avons construits en collaboration avec des freelances expérimentés dans leurs domaines (design, développement etc.)"
   },
   {
    "hashToText": {

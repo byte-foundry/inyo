@@ -4371,6 +4371,46 @@
     }
    ]
   },
+  "Y5aHcEB9ZmceQSNZOEvFhQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose a preset project template",
+     "variations": {}
+    }
+   ]
+  },
+  "IYAiMuzZLGnf7+HsW9u/Aw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Or use one of your existing projects",
+     "variations": {}
+    }
+   ]
+  },
+  "nOTssOdfpCAjAh3djfmq6A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Search project",
+     "variations": {}
+    }
+   ]
+  },
+  "JtlJzsGc+VOxeioktaWAWQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Use this template",
+     "variations": {}
+    }
+   ]
+  },
   "I/+U0FDJaxZfARNlKF8sPA==": {
    "tokens": [],
    "types": [],
@@ -4387,6 +4427,36 @@
    "translations": [
     {
      "translation": "See the other project",
+     "variations": {}
+    }
+   ]
+  },
+  "sqFm15SMrbEXE/QGFI/bzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Preset templates",
+     "variations": {}
+    }
+   ]
+  },
+  "VlKh0YC2TO+6HpZ+pv/zzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Templates are made with preset tasks. They can help you bootstrap your project well.",
+     "variations": {}
+    }
+   ]
+  },
+  "ezRHKiuvPTbjdoPgehuaiA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "We built them collaboratively with experienced freelances in their fields (design, development etc.)",
      "variations": {}
     }
    ]

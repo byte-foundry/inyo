@@ -694,7 +694,7 @@ function ProjectTasksList({
 
 	if (!items.length && !sectionsInfos.length) {
 		return (
-			<>
+			<div style={{position: 'relative', minHeight: '200px'}}>
 				<Suspense fallback={Loading}>
 					<TemplateAndProjectFiller
 						projectId={projectId}
@@ -710,7 +710,7 @@ function ProjectTasksList({
 						}}
 					/>
 				</Suspense>
-			</>
+			</div>
 		);
 	}
 

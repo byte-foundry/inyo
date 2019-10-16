@@ -3,13 +3,13 @@ import React, {useRef, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
-import {TITLE_ENUM_TO_TITLE} from '../../utils/constants';
 import {
 	Loading,
 	ModalActions,
 	ModalContainer,
 	ModalElem,
 } from '../../utils/content';
+import {formatFullName} from '../../utils/functions';
 import {
 	Button, lightGrey, P, SubHeading,
 } from '../../utils/new/design-system';
@@ -38,22 +38,6 @@ const Info = styled(P)`
 	padding: 1rem;
 	background: ${lightGrey};
 `;
-
-function cap(s) {
-	let stringValue = s;
-
-	if (typeof s !== 'string' && s && s.props.content[0]) stringValue = s.props.content[0];
-
-	return stringValue.charAt(0).toUpperCase() + stringValue.slice(1);
-}
-
-function nullStr(s) {
-	return s ? cap(s) : '';
-}
-
-function getCiv(s) {
-	return TITLE_ENUM_TO_TITLE[s];
-}
 
 const CustomerIntroMail = ({onDismiss, customer}) => {
 	const contentRef = useRef();
@@ -115,10 +99,12 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 					<P>
 						<fbt project="inyo" desc="hello">
 							Bonjour{' '}
-							<fbt:param name="customer name">
-								{`${nullStr(getCiv(customer.title))} ${nullStr(
+							<fbt:param name="customerName">
+								{formatFullName(
+									customer.title,
 									customer.firstName,
-								)} ${nullStr(customer.lastName)}`.trim()}
+									customer.lastName,
+								)}
 							</fbt:param>
 							,
 						</fbt>
@@ -200,25 +186,37 @@ const CustomerIntroMail = ({onDismiss, customer}) => {
 				</EmailExample>
 				<ContentForCopy
 					ref={contentRef}
-					value={`Bonjour ${`${nullStr(
-						getCiv(customer.title),
-					)} ${nullStr(customer.firstName)} ${nullStr(
-						customer.lastName,
-					)}`.trim()},
+					value={fbt(
+						`Bonjour ${fbt.param(
+							'customerName',
+							formatFullName(
+								customer.title,
+								customer.firstName,
+								customer.lastName,
+							),
+						)},
 
 Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet **[nom du projet]**
-Vous allez prochainement recevoir des emails provenant ${Apostrophe({
-			value: assistantName,
-			withVowel: "d'",
-			withConsonant: 'de ',
-		})}${assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.
+Vous allez prochainement recevoir des emails provenant ${fbt.param(
+			'apos',
+			Apostrophe({
+				value: assistantName,
+				withVowel: "d'",
+				withConsonant: 'de ',
+			}),
+		)}${fbt.param(
+			'assistantName',
+			assistantName,
+		)} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet.
 Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire.
 
 Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez  ajouter des commentaires, valider des tâches et déposer ou récupérer des documents.
 
 Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation.
 
-Je reste à votre disposition si vous avez des questions.`}
+Je reste à votre disposition si vous avez des questions.`,
+						'customer intro email',
+					)}
 				/>
 				<ModalActions>
 					<Button

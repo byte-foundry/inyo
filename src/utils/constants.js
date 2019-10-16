@@ -17,6 +17,9 @@ import TaskCustomerIconValidatedUrl, {
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
+import TaskIconPersonalUrl, {
+	ReactComponent as TaskIconPersonal,
+} from './icons/taskicon-personal.svg';
 import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
 import TaskIconValidatedUrl, {
 	ReactComponent as TaskIconValidated,
@@ -101,8 +104,11 @@ export const ITEM_TYPES = [
 		},
 	},
 	{
-		icon: <TaskIcon />,
+		icon: <TaskIconPersonal />,
 		iconValidated: <TaskIconValidated />,
+		iconUrl: TaskIconPersonalUrl,
+		iconUrlValidated: TaskIconValidatedUrl,
+		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
 		type: 'PERSONAL',
 		get name() {
 			return fbt('Tâche personnelle', 'personal task name');

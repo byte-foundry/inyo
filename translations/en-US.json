@@ -2421,6 +2421,56 @@
     }
    ]
   },
+  "ynxNvA4kqINDaBjsU8B01g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Are you sure you want to delete this section?",
+     "variations": {}
+    }
+   ]
+  },
+  "qZtabrcQIvSwcHy3WAZGlg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You're about to delete section \"{sectionName}\". When deleting this section, you're about to delete the following tasks:",
+     "variations": {}
+    }
+   ]
+  },
+  "TPuvfP8wDhZpRQjEDK+Cpw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You can drag/drop these tasks in another section so they won't be deleted.",
+     "variations": {}
+    }
+   ]
+  },
+  "dBR4diknxQE3NNnXgo2lfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Cancel",
+     "variations": {}
+    }
+   ]
+  },
+  "4JhC8oL8U6tCIjB4iTEEbw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Delete",
+     "variations": {}
+    }
+   ]
+  },
   "VoesFaOlo+IoPjaKqVF8xQ==": {
    "tokens": [],
    "types": [],

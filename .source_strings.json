@@ -3688,6 +3688,76 @@
   },
   {
    "hashToText": {
+    "ynxNvA4kqINDaBjsU8B01g==": "Êtes-vous sûr de vouloir supprimer cette section ?"
+   },
+   "filepath": "src/components/ProjectTasksList/index.js",
+   "line_beg": 793,
+   "col_beg": 7,
+   "line_end": 793,
+   "col_end": 96,
+   "type": "text",
+   "desc": "remove section title",
+   "project": "",
+   "jsfbt": "Êtes-vous sûr de vouloir supprimer cette section ?"
+  },
+  {
+   "hashToText": {
+    "qZtabrcQIvSwcHy3WAZGlg==": "Vous allez supprimer la section \"{sectionName}\". En supprimant cette section, vous allez supprimer les tâches suivantes :"
+   },
+   "filepath": "src/components/ProjectTasksList/index.js",
+   "line_beg": 796,
+   "col_beg": 7,
+   "line_end": 799,
+   "col_end": 13,
+   "type": "text",
+   "desc": "remove section notice",
+   "project": "",
+   "jsfbt": "Vous allez supprimer la section \"{sectionName}\". En supprimant cette section, vous allez supprimer les tâches suivantes :"
+  },
+  {
+   "hashToText": {
+    "TPuvfP8wDhZpRQjEDK+Cpw==": "Vous pouvez glisser/déposer ces tâches dans une autre section afin qu'elles ne soient pas supprimées."
+   },
+   "filepath": "src/components/ProjectTasksList/index.js",
+   "line_beg": 807,
+   "col_beg": 7,
+   "line_end": 810,
+   "col_end": 13,
+   "type": "text",
+   "desc": "remove section notice 2",
+   "project": "",
+   "jsfbt": "Vous pouvez glisser/déposer ces tâches dans une autre section afin qu'elles ne soient pas supprimées."
+  },
+  {
+   "hashToText": {
+    "dBR4diknxQE3NNnXgo2lfg==": "Annuler"
+   },
+   "filepath": "src/components/ProjectTasksList/index.js",
+   "line_beg": 818,
+   "col_beg": 8,
+   "line_end": 818,
+   "col_end": 62,
+   "type": "text",
+   "desc": "remove section cancel button",
+   "project": "",
+   "jsfbt": "Annuler"
+  },
+  {
+   "hashToText": {
+    "4JhC8oL8U6tCIjB4iTEEbw==": "Supprimer"
+   },
+   "filepath": "src/components/ProjectTasksList/index.js",
+   "line_beg": 833,
+   "col_beg": 8,
+   "line_end": 833,
+   "col_end": 65,
+   "type": "text",
+   "desc": "remove section confirm button",
+   "project": "",
+   "jsfbt": "Supprimer"
+  },
+  {
+   "hashToText": {
     "VoesFaOlo+IoPjaKqVF8xQ==": "Relance client"
    },
    "filepath": "src/components/ReminderCard/index.js",

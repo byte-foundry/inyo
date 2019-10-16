@@ -845,9 +845,9 @@
     "8644T2R+4scYGO0LpX3DQw==": "Présentation d'Inyo à votre client"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 84,
+   "line_beg": 68,
    "col_beg": 5,
-   "line_end": 89,
+   "line_end": 73,
    "col_end": 11,
    "type": "text",
    "desc": "inyo customer presentation header",
@@ -859,9 +859,9 @@
     "yRJfdDz1yU1Hmh6jMHqK0A==": "Vous venez de créer un client ! Voici un email prérédigé qui vous permettra de lui présenter inyo."
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 92,
+   "line_beg": 76,
    "col_beg": 5,
-   "line_end": 95,
+   "line_end": 79,
    "col_end": 11,
    "type": "text",
    "desc": "info inyo customer presentation",
@@ -873,9 +873,9 @@
     "DQeXAvwG7dJoYDdF7IN2HQ==": "Nous allons utiliser Inyo pour le suivi du projet {=[nom du projet]}"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 100,
+   "line_beg": 84,
    "col_beg": 7,
-   "line_end": 109,
+   "line_end": 93,
    "col_end": 13,
    "type": "text",
    "desc": "beginning of subject of customer info mail",
@@ -887,9 +887,9 @@
     "aB5b9kvkppVMDoMtWkIZZw==": "[nom du projet]"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 106,
+   "line_beg": 90,
    "col_beg": 8,
-   "line_end": 108,
+   "line_end": 92,
    "col_end": 26,
    "type": "text",
    "desc": "In the phrase: \"Nous allons utiliser Inyo pour le suivi du projet{=[nom du projet]}\"",
@@ -898,26 +898,26 @@
   },
   {
    "hashToText": {
-    "hHYW2oe78FnFa9Li2wIUXA==": "Bonjour {customer name} ,"
+    "JOeIX3jlQt3ul2t5gMb3sw==": "Bonjour {customerName} ,"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 116,
+   "line_beg": 100,
    "col_beg": 6,
-   "line_end": 124,
+   "line_end": 110,
    "col_end": 12,
    "type": "text",
    "desc": "hello",
    "project": "inyo",
-   "jsfbt": "Bonjour {customer name} ,"
+   "jsfbt": "Bonjour {customerName} ,"
   },
   {
    "hashToText": {
     "b7SBiQSY8WADC+OOtpqcXA==": "Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet {=[nom du projet]}"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 127,
+   "line_beg": 113,
    "col_beg": 6,
-   "line_end": 131,
+   "line_end": 117,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -929,9 +929,9 @@
     "Yz/hEevDIK59WUd+cWCUCQ==": "[nom du projet]"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 130,
+   "line_beg": 116,
    "col_beg": 7,
-   "line_end": 130,
+   "line_end": 116,
    "col_end": 57,
    "type": "text",
    "desc": "In the phrase: \"Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet{=[nom du projet]}\"",
@@ -943,9 +943,9 @@
     "MTHjHHmfiJTmyLA6Fd5Bpw==": "Vous allez prochainement recevoir des emails provenant {apos}{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet."
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 133,
+   "line_beg": 119,
    "col_beg": 6,
-   "line_end": 164,
+   "line_end": 150,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -957,9 +957,9 @@
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 141,
+   "line_beg": 127,
    "col_beg": 11,
-   "line_end": 146,
+   "line_end": 132,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -971,9 +971,9 @@
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 149,
+   "line_beg": 135,
    "col_beg": 11,
-   "line_end": 154,
+   "line_end": 140,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -985,9 +985,9 @@
     "qvosYuyXlERa6kcMFltOrg==": "Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire."
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 166,
+   "line_beg": 152,
    "col_beg": 6,
-   "line_end": 172,
+   "line_end": 158,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -999,9 +999,9 @@
     "/xJTSSeUxLgHBVVBf1yoAQ==": "Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents."
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 175,
+   "line_beg": 161,
    "col_beg": 6,
-   "line_end": 180,
+   "line_end": 166,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -1013,9 +1013,9 @@
     "FTUglGa5v8qzJfeHmSafGA==": "Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation."
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 183,
+   "line_beg": 169,
    "col_beg": 6,
-   "line_end": 187,
+   "line_end": 173,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -1027,9 +1027,9 @@
     "lGJBnl1neTaJOVzo5UyTpQ==": "Je reste à votre disposition si vous avez des questions."
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 190,
+   "line_beg": 176,
    "col_beg": 6,
-   "line_end": 193,
+   "line_end": 179,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -1041,9 +1041,9 @@
     "4dknal2HpNimLw2l4O6/+Q==": "{=[Votre signature]}"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 196,
+   "line_beg": 182,
    "col_beg": 6,
-   "line_end": 198,
+   "line_end": 184,
    "col_end": 12,
    "type": "text",
    "desc": "first part of email",
@@ -1055,9 +1055,9 @@
     "P9tRkqcJzVR2yfHAPd134w==": "[Votre signature]"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 197,
+   "line_beg": 183,
    "col_beg": 7,
-   "line_end": 197,
+   "line_end": 183,
    "col_end": 59,
    "type": "text",
    "desc": "In the phrase: \"{=[Votre signature]}\"",
@@ -1066,12 +1066,26 @@
   },
   {
    "hashToText": {
+    "wGVwLEPi8T7+zilTLVVYlQ==": "Bonjour {customerName}, Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet **[nom du projet]** Vous allez prochainement recevoir des emails provenant {apos}{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet. Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire. Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents. Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation. Je reste à votre disposition si vous avez des questions."
+   },
+   "filepath": "src/components/CustomerIntroMail/index.js",
+   "line_beg": 189,
+   "col_beg": 12,
+   "line_end": 219,
+   "col_end": 6,
+   "type": "text",
+   "desc": "customer intro email",
+   "project": "",
+   "jsfbt": "Bonjour {customerName}, Je vais utiliser Inyo, un outil de gestion de projet 360, pour communiquer avec vous pendant le projet **[nom du projet]** Vous allez prochainement recevoir des emails provenant {apos}{assistantName} Inyo. Ne les placez pas en spam, ils vont vous tenir informé de l'avancement de votre projet. Afin d'avoir un aperçu en temps réel des avancées de ce projet, vous recevrez régulièrement des résumés des tâches réalisées, des notifications lorsque j'aurais des questions ou lorsqu'une action de votre part est nécessaire. Ces emails contiendront un lien personnalisé vous permettant d'accéder directement au projet. Vous pourrez ajouter des commentaires, valider des tâches et déposer ou récupérer des documents. Merci de privilégier cette plateforme pour nos échanges, cela nous permettra d'être plus efficaces en centralisant nos échanges et la documentation. Je reste à votre disposition si vous avez des questions."
+  },
+  {
+   "hashToText": {
     "Wq1J1rqeLZIS29/C7g/O5A==": "Email copié!"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 236,
+   "line_beg": 234,
    "col_beg": 7,
-   "line_end": 238,
+   "line_end": 236,
    "col_end": 13,
    "type": "text",
    "desc": "email copied",
@@ -1083,9 +1097,9 @@
     "m2dOC+HIcDUb1qW5ykqnsw==": "Copier l'email"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 240,
+   "line_beg": 238,
    "col_beg": 7,
-   "line_end": 242,
+   "line_end": 240,
    "col_end": 13,
    "type": "text",
    "desc": "copy email",
@@ -1097,9 +1111,9 @@
     "LLzgzmTd4HAlWFZX9KcqxQ==": "Fermer"
    },
    "filepath": "src/components/CustomerIntroMail/index.js",
-   "line_beg": 246,
+   "line_beg": 244,
    "col_beg": 6,
-   "line_end": 248,
+   "line_end": 246,
    "col_end": 12,
    "type": "text",
    "desc": "close",
@@ -1796,9 +1810,9 @@
     "Aw7c13n1qyBFVCJRP4+ZAw==": "Type et titre de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 345,
+   "line_beg": 348,
    "col_beg": 6,
-   "line_end": 347,
+   "line_end": 350,
    "col_end": 12,
    "type": "text",
    "desc": "Tooltip task title item view",
@@ -1810,9 +1824,9 @@
     "JhxU3feEsDnVk/NaRsH5bQ==": "Nommez cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 364,
+   "line_beg": 367,
    "col_beg": 8,
-   "line_end": 369,
+   "line_end": 372,
    "col_end": 14,
    "type": "text",
    "desc": "task name placeholder item view",
@@ -1824,9 +1838,9 @@
     "n2nEPSXW8r/mJCL++eK6XA==": "Temps estimé pour cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 392,
+   "line_beg": 395,
    "col_beg": 8,
-   "line_end": 397,
+   "line_end": 400,
    "col_end": 14,
    "type": "text",
    "desc": "time estimated tooltip item view",
@@ -1838,9 +1852,9 @@
     "PZk9D95cJdaKYixeW4cp0w==": "Temps estimé"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 403,
+   "line_beg": 406,
    "col_beg": 9,
-   "line_end": 408,
+   "line_end": 411,
    "col_end": 15,
    "type": "text",
    "desc": "time estimated label item view",
@@ -1849,39 +1863,12 @@
   },
   {
    "hashToText": {
-    "p038/T94EO/ejzQvOS1Hqg==": "{timeEstimated} jours",
-    "q3mgeZLjbygjxiRUSkrzzg==": "1 jour"
-   },
-   "filepath": "src/components/ItemView/index.js",
-   "line_beg": 471,
-   "col_beg": 11,
-   "line_end": 484,
-   "col_end": 17,
-   "type": "table",
-   "desc": "time estimated item view",
-   "project": "inyo",
-   "jsfbt": {
-    "t": {
-     "*": "{timeEstimated} jours",
-     "_1": "1 jour"
-    },
-    "m": [
-     {
-      "token": "timeEstimated",
-      "type": 2,
-      "singular": true
-     }
-    ]
-   }
-  },
-  {
-   "hashToText": {
     "RZ7sYwiQT57dr8nfhuD+ww==": "Temps passé pour cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 493,
+   "line_beg": 486,
    "col_beg": 8,
-   "line_end": 498,
+   "line_end": 491,
    "col_end": 14,
    "type": "text",
    "desc": "time it took tooltip item view",
@@ -1893,9 +1880,9 @@
     "7Lnr7BpFnIeCy3zXln3JWw==": "Temps passé"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 504,
+   "line_beg": 497,
    "col_beg": 9,
-   "line_end": 509,
+   "line_end": 502,
    "col_end": 15,
    "type": "text",
    "desc": "time it took label item view",
@@ -1908,9 +1895,9 @@
     "xjFoy8C8nGf+c9I/neBmDg==": "1 jour"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 566,
+   "line_beg": 559,
    "col_beg": 11,
-   "line_end": 581,
+   "line_end": 574,
    "col_end": 17,
    "type": "table",
    "desc": "time it took item view",
@@ -1934,9 +1921,9 @@
     "ew4YOAKY1eedm0Xk5R444A==": "Personne liée à cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 591,
+   "line_beg": 584,
    "col_beg": 7,
-   "line_end": 596,
+   "line_end": 589,
    "col_end": 13,
    "type": "text",
    "desc": "linked customer tooltip item view",
@@ -1948,9 +1935,9 @@
     "vRZY5zcFhPD/Le3J1JJKiw==": "Client"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 602,
+   "line_beg": 595,
    "col_beg": 8,
-   "line_end": 607,
+   "line_end": 600,
    "col_end": 14,
    "type": "text",
    "desc": "linked customer label item view",
@@ -1962,9 +1949,9 @@
     "HLV6gRDo4cU1fnr1mVGuig==": "Date limite pour réaliser cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 672,
+   "line_beg": 665,
    "col_beg": 7,
-   "line_end": 677,
+   "line_end": 670,
    "col_end": 13,
    "type": "text",
    "desc": "deadline tooltip item view",
@@ -1976,9 +1963,9 @@
     "9WiJli6bYRZdd9b3WFN4sw==": "Temps restant"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 683,
+   "line_beg": 676,
    "col_beg": 8,
-   "line_end": 688,
+   "line_end": 681,
    "col_end": 14,
    "type": "text",
    "desc": "deadline label item view",
@@ -1991,9 +1978,9 @@
     "WOBjTLFG6qlMucM7PHA/aA==": "1 jour"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 727,
+   "line_beg": 720,
    "col_beg": 11,
-   "line_end": 753,
+   "line_end": 746,
    "col_end": 17,
    "type": "table",
    "desc": "deadline margin item view",
@@ -2017,9 +2004,9 @@
     "X2kd6IYQLbQF5T0J4EmDVg==": "Projet lié à cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 763,
+   "line_beg": 756,
    "col_beg": 6,
-   "line_end": 765,
+   "line_end": 758,
    "col_end": 12,
    "type": "text",
    "desc": "project tooltip",
@@ -2031,9 +2018,9 @@
     "gSUvt41Meg58qA7ieTm91w==": "Projet"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 771,
+   "line_beg": 764,
    "col_beg": 7,
-   "line_end": 773,
+   "line_end": 766,
    "col_end": 13,
    "type": "text",
    "desc": "project label",
@@ -2045,9 +2032,9 @@
     "4uWwWAEkjeee+uOwaU7O7Q==": "Définit s'il y a des actions automatiques"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 820,
+   "line_beg": 813,
    "col_beg": 6,
-   "line_end": 822,
+   "line_end": 815,
    "col_end": 12,
    "type": "text",
    "desc": "type of the task tooltip",
@@ -2059,9 +2046,9 @@
     "WlT9SCoRXpZo1WsKLdRoNA==": "Type de tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 828,
+   "line_beg": 821,
    "col_beg": 7,
-   "line_end": 830,
+   "line_end": 823,
    "col_end": 13,
    "type": "text",
    "desc": "task type",
@@ -2073,9 +2060,9 @@
     "6F6qiWW3cYSOf+pclVSw7g==": "Tag de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 838,
+   "line_beg": 831,
    "col_beg": 7,
-   "line_end": 840,
+   "line_end": 833,
    "col_end": 13,
    "type": "text",
    "desc": "task's tag",
@@ -2087,9 +2074,9 @@
     "3Dfj3RxIOd3jiFRkj5VOfQ==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 850,
+   "line_beg": 843,
    "col_beg": 9,
-   "line_end": 855,
+   "line_end": 848,
    "col_end": 15,
    "type": "text",
    "desc": "add or create tag",
@@ -2101,9 +2088,9 @@
     "fwFrMMlHn32zsVxwM2CzYg==": "Description de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 903,
+   "line_beg": 896,
    "col_beg": 12,
-   "line_end": 906,
+   "line_end": 899,
    "col_end": 6,
    "type": "text",
    "desc": "tooltip task description",
@@ -2115,9 +2102,9 @@
     "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 912,
+   "line_beg": 905,
    "col_beg": 8,
-   "line_end": 914,
+   "line_end": 907,
    "col_end": 14,
    "type": "text",
    "desc": "Add a description",
@@ -2129,9 +2116,9 @@
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 947,
+   "line_beg": 940,
    "col_beg": 7,
-   "line_end": 973,
+   "line_end": 966,
    "col_end": 13,
    "type": "text",
    "desc": "actions of edwige",
@@ -2143,9 +2130,9 @@
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 953,
+   "line_beg": 946,
    "col_beg": 11,
-   "line_end": 958,
+   "line_end": 951,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2157,9 +2144,9 @@
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 961,
+   "line_beg": 954,
    "col_beg": 11,
-   "line_end": 966,
+   "line_end": 959,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2171,9 +2158,9 @@
     "x6FPGl0U1x0YCSNscEvLPQ==": "Charger {assistantName} de faire réaliser cette tâche à {customerName} ( {contactName} )"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1012,
+   "line_beg": 1005,
    "col_beg": 8,
-   "line_end": 1029,
+   "line_end": 1022,
    "col_end": 14,
    "type": "text",
    "desc": "charger",
@@ -2185,9 +2172,9 @@
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1035,
+   "line_beg": 1028,
    "col_beg": 4,
-   "line_end": 1037,
+   "line_end": 1030,
    "col_end": 10,
    "type": "text",
    "desc": "Attached files",
@@ -2199,9 +2186,9 @@
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1127,
+   "line_beg": 1120,
    "col_beg": 4,
-   "line_end": 1129,
+   "line_end": 1122,
    "col_end": 10,
    "type": "text",
    "desc": "Comments",
@@ -2213,9 +2200,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1147,
+   "line_beg": 1140,
    "col_beg": 9,
-   "line_end": 1149,
+   "line_end": 1142,
    "col_end": 15,
    "type": "text",
    "desc": "cancel",
@@ -2227,9 +2214,9 @@
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1159,
+   "line_beg": 1152,
    "col_beg": 9,
-   "line_end": 1161,
+   "line_end": 1154,
    "col_end": 15,
    "type": "text",
    "desc": "confirm deletion",
@@ -2241,9 +2228,9 @@
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1171,
+   "line_beg": 1164,
    "col_beg": 9,
-   "line_end": 1173,
+   "line_end": 1166,
    "col_end": 15,
    "type": "text",
    "desc": "delete task",
@@ -2255,9 +2242,9 @@
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1189,
+   "line_beg": 1182,
    "col_beg": 6,
-   "line_end": 1191,
+   "line_end": 1184,
    "col_end": 12,
    "type": "text",
    "desc": "notification message",
@@ -2313,7 +2300,7 @@
    "filepath": "src/components/LinkedCalendarForm/index.js",
    "line_beg": 62,
    "col_beg": 9,
-   "line_end": 67,
+   "line_end": 70,
    "col_end": 15,
    "type": "text",
    "desc": "your connected as",
@@ -2325,9 +2312,9 @@
     "Pt3zeHWqdQMKKwjtpVTXpQ==": "Déconnecter le compte google"
    },
    "filepath": "src/components/LinkedCalendarForm/index.js",
-   "line_beg": 70,
+   "line_beg": 73,
    "col_beg": 9,
-   "line_end": 72,
+   "line_end": 78,
    "col_end": 15,
    "type": "text",
    "desc": "sign out of google",
@@ -2339,9 +2326,9 @@
     "vK+3x+MvYzXVfzUUpoRciA==": "Connecter un compte google"
    },
    "filepath": "src/components/LinkedCalendarForm/index.js",
-   "line_beg": 78,
+   "line_beg": 84,
    "col_beg": 9,
-   "line_end": 80,
+   "line_end": 89,
    "col_end": 15,
    "type": "text",
    "desc": "sign out of google",
@@ -3690,9 +3677,9 @@
     "mTh9oP5PlpGc2ijZdZpw1g==": "Nom de la section"
    },
    "filepath": "src/components/ProjectTasksList/index.js",
-   "line_beg": 740,
+   "line_beg": 745,
    "col_beg": 7,
-   "line_end": 742,
+   "line_end": 747,
    "col_end": 13,
    "type": "text",
    "desc": "part name",
@@ -4012,9 +3999,9 @@
     "mNrLD50QABntRu8H4zxj4w==": "Ouvrir dans Google Cal"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 296,
+   "line_beg": 295,
    "col_beg": 3,
-   "line_end": 298,
+   "line_end": 297,
    "col_end": 9,
    "type": "text",
    "desc": "Google cal event tooltip",
@@ -4026,10 +4013,10 @@
     "zHOwO2lbnBjeh21utLDMCw==": "Connecter votre calendrier google pour voir vos évènements"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 372,
-   "col_beg": 101,
-   "line_end": 372,
-   "col_end": 196,
+   "line_beg": 377,
+   "col_beg": 6,
+   "line_end": 380,
+   "col_end": 12,
    "type": "text",
    "desc": "sync your calendar",
    "project": "",
@@ -4040,9 +4027,9 @@
     "T2/JKe1gMxEnFQGdTL5R0w==": "Aujourd'hui"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 381,
+   "line_beg": 391,
    "col_beg": 5,
-   "line_end": 383,
+   "line_end": 393,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -4054,9 +4041,9 @@
     "UiIYdmEvfJNfoZoGIJ42oA==": "Sem. {weekNumber}"
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 397,
+   "line_beg": 407,
    "col_beg": 5,
-   "line_end": 402,
+   "line_end": 412,
    "col_end": 11,
    "type": "text",
    "desc": "notification message",
@@ -4068,9 +4055,9 @@
     "Br1Otdcnl9fjClm/yhZwog==": "Ajoutez des durées à ces tâches pour qu'Inyo vous aide à gérer votre temps."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 502,
+   "line_beg": 512,
    "col_beg": 9,
-   "line_end": 508,
+   "line_end": 518,
    "col_end": 15,
    "type": "text",
    "desc": "Add task duration to get info",
@@ -4082,9 +4069,9 @@
     "+3NmsH2Z/prpNjoiPTm1/A==": "Glisser des tâches dans le calendrier pour programmer vos journées et demander à {assistantName} de s'assurer du bon déroulement de votre planning."
    },
    "filepath": "src/components/Schedule/index.js",
-   "line_beg": 622,
+   "line_beg": 632,
    "col_beg": 6,
-   "line_end": 629,
+   "line_end": 639,
    "col_end": 12,
    "type": "text",
    "desc": "Banner displayed when the dashboard schedule is empty",
@@ -5285,9 +5272,9 @@
     "71IsaHOQkQhHdTafaHJM/A==": "Gérer les tags"
    },
    "filepath": "src/components/TagDropdown/index.js",
-   "line_beg": 68,
+   "line_beg": 69,
    "col_beg": 5,
-   "line_end": 70,
+   "line_end": 71,
    "col_end": 11,
    "type": "text",
    "desc": "manage tags",
@@ -6444,9 +6431,9 @@
     "FNnWXkrM7hA3vPBzG/OxUg==": "Cette tâche vous a été assigné"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 362,
+   "line_beg": 365,
    "col_beg": 11,
-   "line_end": 367,
+   "line_end": 370,
    "col_end": 17,
    "type": "text",
    "desc": "this task is assigned to you",
@@ -6458,9 +6445,9 @@
     "TNg0g9/rqIBL5sU4Qx7Jtg==": "Choisir un titre pour cette tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 390,
+   "line_beg": 393,
    "col_beg": 8,
-   "line_end": 395,
+   "line_end": 398,
    "col_end": 14,
    "type": "text",
    "desc": "task placeholder name",
@@ -6472,9 +6459,9 @@
     "5u/f09snKvkyQ1LKDHLpsA==": "Jour planifié"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 414,
+   "line_beg": 417,
    "col_beg": 8,
-   "line_end": 416,
+   "line_end": 419,
    "col_end": 14,
    "type": "text",
    "desc": "Planned day",
@@ -6486,9 +6473,9 @@
     "RrL6CmQzt+DS6qUtN9B4rQ==": "Ouvrir le projet"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 440,
+   "line_beg": 443,
    "col_beg": 9,
-   "line_end": 442,
+   "line_end": 445,
    "col_end": 15,
    "type": "text",
    "desc": "open project",
@@ -6500,9 +6487,9 @@
     "dkh9670XE2tzpfITWmPKZg==": "Client responsable de la tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 465,
+   "line_beg": 468,
    "col_beg": 10,
-   "line_end": 470,
+   "line_end": 473,
    "col_end": 16,
    "type": "text",
    "desc": "client assigned to task",
@@ -6514,9 +6501,9 @@
     "I9kOFQ2aWdWtdEYILK6Q6g==": "Collaborateur responsable de la tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 523,
+   "line_beg": 526,
    "col_beg": 10,
-   "line_end": 529,
+   "line_end": 532,
    "col_end": 16,
    "type": "text",
    "desc": "Collaborator assigned to task",
@@ -6528,9 +6515,9 @@
     "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 603,
+   "line_beg": 632,
    "col_beg": 11,
-   "line_end": 608,
+   "line_end": 637,
    "col_end": 17,
    "type": "text",
    "desc": "attached files",
@@ -6790,9 +6777,9 @@
     "lRXhtoRR9UPNZAQMz+AYjg==": "Voir l' autre projet"
    },
    "filepath": "src/components/TemplateAndProjectFiller/index.js",
-   "line_beg": 277,
+   "line_beg": 268,
    "col_beg": 8,
-   "line_end": 303,
+   "line_end": 294,
    "col_end": 14,
    "type": "table",
    "desc": "see other projects button",
@@ -6863,9 +6850,9 @@
     "NS4pcMPvWXw6aCVask7ujw==": "La version d'essai s'arrête {date}"
    },
    "filepath": "src/components/TrialHeadband/index.js",
-   "line_beg": 55,
+   "line_beg": 47,
    "col_beg": 3,
-   "line_end": 62,
+   "line_end": 54,
    "col_end": 9,
    "type": "text",
    "desc": "trial is ending message",
@@ -6877,9 +6864,9 @@
     "AK9QcaD1X1QUjUtNEyASQw==": "Passer à la version payante"
    },
    "filepath": "src/components/TrialHeadband/index.js",
-   "line_beg": 73,
+   "line_beg": 63,
    "col_beg": 4,
-   "line_end": 75,
+   "line_end": 65,
    "col_end": 10,
    "type": "text",
    "desc": "switch to paid version",
@@ -6892,9 +6879,9 @@
     "j+BJwT4aXGrolwB4Xvy4EQ==": " travaillée"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 28,
+   "line_beg": 32,
    "col_beg": 3,
-   "line_end": 36,
+   "line_end": 40,
    "col_end": 9,
    "type": "table",
    "desc": "hours",
@@ -6915,9 +6902,9 @@
     "tIZMujl463EtvSJOE81ZXw==": " travaillé"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 38,
+   "line_beg": 42,
    "col_beg": 3,
-   "line_end": 46,
+   "line_end": 50,
    "col_end": 9,
    "type": "table",
    "desc": "hours",
@@ -6938,9 +6925,9 @@
     "QydQ/u+BrtEDDz0iycVSBg==": " encore disponible"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 54,
+   "line_beg": 58,
    "col_beg": 2,
-   "line_end": 62,
+   "line_end": 66,
    "col_end": 8,
    "type": "table",
    "desc": "hours",
@@ -6961,9 +6948,9 @@
     "1NAgDG7zwjGA95mqXUp5uw==": " supplémentaires"
    },
    "filepath": "src/components/UnitDisplay/index.js",
-   "line_beg": 69,
+   "line_beg": 73,
    "col_beg": 2,
-   "line_end": 77,
+   "line_end": 81,
    "col_end": 8,
    "type": "table",
    "desc": "hours",
@@ -8019,9 +8006,9 @@
     "DniocCK/BDluu+FdpMM/rQ==": "Dashboard"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 30,
+   "line_beg": 33,
    "col_beg": 6,
-   "line_end": 32,
+   "line_end": 35,
    "col_end": 12,
    "type": "text",
    "desc": "dashboard",
@@ -8033,9 +8020,9 @@
     "XSDtyx55XDlbjwDAvcEQuQ==": "Toutes les projets"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 37,
+   "line_beg": 40,
    "col_beg": 6,
-   "line_end": 39,
+   "line_end": 42,
    "col_end": 12,
    "type": "text",
    "desc": "projects tooltip",
@@ -8047,9 +8034,9 @@
     "ZZ/Pz3sXsx84sVhWrUHaFw==": "Projets"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 43,
+   "line_beg": 49,
    "col_beg": 6,
-   "line_end": 45,
+   "line_end": 51,
    "col_end": 12,
    "type": "text",
    "desc": "Projets",
@@ -8061,9 +8048,9 @@
     "oetc6lmmqleqUpsvhS3rxQ==": "Tous les contacts"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 50,
+   "line_beg": 56,
    "col_beg": 6,
-   "line_end": 52,
+   "line_end": 58,
    "col_end": 12,
    "type": "text",
    "desc": "contacts tooltip",
@@ -8075,9 +8062,9 @@
     "+O2F4Nyjvrb3Yk/fGGbWQA==": "Contacts"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 56,
+   "line_beg": 65,
    "col_beg": 6,
-   "line_end": 58,
+   "line_end": 67,
    "col_end": 12,
    "type": "text",
    "desc": "Contacts",
@@ -8089,9 +8076,9 @@
     "ofzGly1xcbm/vDbYLnqnFg==": "Rapports de votre activité"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 63,
+   "line_beg": 72,
    "col_beg": 6,
-   "line_end": 65,
+   "line_end": 74,
    "col_end": 12,
    "type": "text",
    "desc": "stats tooltip",
@@ -8103,9 +8090,9 @@
     "Lz7HPSfcOTiqazAAyS+/MQ==": "Statistiques"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 69,
+   "line_beg": 78,
    "col_beg": 6,
-   "line_end": 71,
+   "line_end": 80,
    "col_end": 12,
    "type": "text",
    "desc": "Statistiques",
@@ -8117,9 +8104,9 @@
     "f3bnThiVUm5UpZyRGjVx7w==": "Profil, jours travaillés, etc."
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 76,
+   "line_beg": 85,
    "col_beg": 6,
-   "line_end": 78,
+   "line_end": 87,
    "col_end": 12,
    "type": "text",
    "desc": "settings tooltip",
@@ -8131,14 +8118,126 @@
     "1vtbytZhEPUv21EPWCKSKA==": "Réglages"
    },
    "filepath": "src/HOC/withHeader.js",
-   "line_beg": 82,
+   "line_beg": 91,
    "col_beg": 6,
-   "line_end": 84,
+   "line_end": 93,
    "col_end": 12,
    "type": "text",
    "desc": "Réglages",
    "project": "inyo",
    "jsfbt": "Réglages"
+  },
+  {
+   "hashToText": {
+    "ee0a3xEZDarec+K5GJl//Q==": "Erreur de chargement"
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 106,
+   "col_beg": 8,
+   "line_end": 108,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Update error page title",
+   "project": "",
+   "jsfbt": "Erreur de chargement"
+  },
+  {
+   "hashToText": {
+    "QiDQ3Z5ciOqhjHlcNUx6cQ==": "Cette erreur peut survenir lorsque l'application vient d'être mise à jour, merci de recharger la page. {br} Si le problème persiste, vous pouvez nous {=transmettre cette erreur} ."
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 111,
+   "col_beg": 8,
+   "line_end": 126,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Update error page message",
+   "project": "",
+   "jsfbt": "Cette erreur peut survenir lorsque l'application vient d'être mise à jour, merci de recharger la page. {br} Si le problème persiste, vous pouvez nous {=transmettre cette erreur} ."
+  },
+  {
+   "hashToText": {
+    "Y1m4JAv7P4DQFj5ZZikFMA==": "transmettre cette erreur"
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 119,
+   "col_beg": 9,
+   "line_end": 124,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"Cette erreur peut survenir lorsque l'application vient d'être mise à jour, merci de recharger la page. {=} Si le problème persiste, vous pouvez nous{=transmettre cette erreur} .\"",
+   "project": "",
+   "jsfbt": "transmettre cette erreur"
+  },
+  {
+   "hashToText": {
+    "uQIpQqgdGjm7u3HIxt6YWQ==": "Recharger la page"
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 134,
+   "col_beg": 8,
+   "line_end": 136,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Error page refresh link",
+   "project": "",
+   "jsfbt": "Recharger la page"
+  },
+  {
+   "hashToText": {
+    "HzO/ynh452tjJJCYkyy+KQ==": "Quelque chose ne s'est pas passé comme prévu."
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 152,
+   "col_beg": 8,
+   "line_end": 155,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Generic error page title",
+   "project": "",
+   "jsfbt": "Quelque chose ne s'est pas passé comme prévu."
+  },
+  {
+   "hashToText": {
+    "nlihJ5adxQzSYvW8AT8tXg==": "Si vous souhaitez nous aider, vous pouvez nous {=transmettre cette erreur} . Voici l'erreur en question :"
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 158,
+   "col_beg": 8,
+   "line_end": 168,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Generic error page message",
+   "project": "",
+   "jsfbt": "Si vous souhaitez nous aider, vous pouvez nous {=transmettre cette erreur} . Voici l'erreur en question :"
+  },
+  {
+   "hashToText": {
+    "rqZXCSnx6AuDUv+RHdDp8w==": "transmettre cette erreur"
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 161,
+   "col_beg": 9,
+   "line_end": 166,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"Si vous souhaitez nous aider, vous pouvez nous{=transmettre cette erreur} . Voici l'erreur en question :\"",
+   "project": "",
+   "jsfbt": "transmettre cette erreur"
+  },
+  {
+   "hashToText": {
+    "/zdwcvwX2PBYVCFXtbwE8Q==": "Revenir à la page d'accueil"
+   },
+   "filepath": "src/providers/sentry.js",
+   "line_beg": 179,
+   "col_beg": 8,
+   "line_end": 181,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Error page get back link",
+   "project": "",
+   "jsfbt": "Revenir à la page d'accueil"
   },
   {
    "hashToText": {
@@ -8845,9 +8944,9 @@
     "UvVjY1/twy9IgUWUD3GGHQ==": "Vous n'avez plus de tâches à planifier."
    },
    "filepath": "src/screens/App/Dashboard/tasks.js",
-   "line_beg": 326,
+   "line_beg": 330,
    "col_beg": 11,
-   "line_end": 329,
+   "line_end": 333,
    "col_end": 17,
    "type": "text",
    "desc": "no more task",
@@ -9265,9 +9364,9 @@
     "KOapM+8+RoGh5EftlvYEOA==": "Statistiques"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 254,
+   "line_beg": 251,
    "col_beg": 5,
-   "line_end": 256,
+   "line_end": 253,
    "col_end": 11,
    "type": "text",
    "desc": "Statistics",
@@ -9279,9 +9378,9 @@
     "EIjZ8Jh8IVnbctQCJN+z3w==": "Afficher {timespan}"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 259,
+   "line_beg": 256,
    "col_beg": 5,
-   "line_end": 315,
+   "line_end": 312,
    "col_end": 11,
    "type": "text",
    "desc": "Show",
@@ -9293,9 +9392,9 @@
     "DKxLQ1KcMR56JIxL15QDog==": "les 7 derniers jours"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 269,
+   "line_beg": 266,
    "col_beg": 12,
-   "line_end": 274,
+   "line_end": 271,
    "col_end": 18,
    "type": "text",
    "desc": "7 last days",
@@ -9307,9 +9406,9 @@
     "rtJdCPl645dXeKmtCpfEFw==": "les 30 derniers jours"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 280,
+   "line_beg": 277,
    "col_beg": 12,
-   "line_end": 285,
+   "line_end": 282,
    "col_end": 18,
    "type": "text",
    "desc": "30 last days",
@@ -9321,9 +9420,9 @@
     "3kC4J4DKoJvOVEu3Zh81iA==": "les 3 derniers mois"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 291,
+   "line_beg": 288,
    "col_beg": 12,
-   "line_end": 296,
+   "line_end": 293,
    "col_end": 18,
    "type": "text",
    "desc": "3 last months",
@@ -9335,9 +9434,9 @@
     "pMmKDGLFliqJJcK+v+myZg==": "les 6 derniers mois"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 302,
+   "line_beg": 299,
    "col_beg": 12,
-   "line_end": 307,
+   "line_end": 304,
    "col_end": 18,
    "type": "text",
    "desc": "6 last months",
@@ -9349,9 +9448,9 @@
     "eJe+ko0d0nvEjGFrDOqZAA==": "Répartition de vos clients"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 321,
+   "line_beg": 318,
    "col_beg": 5,
-   "line_end": 323,
+   "line_end": 320,
    "col_end": 11,
    "type": "text",
    "desc": "client share",
@@ -9363,9 +9462,9 @@
     "1K/eeL6OoINQBgAI2S+tCQ==": "Rapport temps estimé / temps réellement passé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 340,
+   "line_beg": 337,
    "col_beg": 5,
-   "line_end": 345,
+   "line_end": 342,
    "col_end": 11,
    "type": "text",
    "desc": "Estimated time / worked time rate",
@@ -9377,9 +9476,9 @@
     "0K+9honF4vsx62F8wA0Svw==": "Temps travaillé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 358,
+   "line_beg": 355,
    "col_beg": 7,
-   "line_end": 360,
+   "line_end": 357,
    "col_end": 13,
    "type": "text",
    "desc": "Worked time",
@@ -9391,9 +9490,9 @@
     "NVAk5+s4aeW/WEWjew+EdQ==": "Temps estimé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 376,
+   "line_beg": 373,
    "col_beg": 7,
-   "line_end": 378,
+   "line_end": 375,
    "col_end": 13,
    "type": "text",
    "desc": "estimated time",
@@ -9405,9 +9504,9 @@
     "krD+apK875r/1FAplgTaQA==": "Rappels envoyés"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 394,
+   "line_beg": 391,
    "col_beg": 7,
-   "line_end": 396,
+   "line_end": 393,
    "col_end": 13,
    "type": "text",
    "desc": "reminders sent",
@@ -9419,9 +9518,9 @@
     "zTLbttckbhyR65ApxlfqBg==": "Temps gagné"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 408,
+   "line_beg": 405,
    "col_beg": 7,
-   "line_end": 410,
+   "line_end": 407,
    "col_end": 13,
    "type": "text",
    "desc": "Gained time",
@@ -9433,9 +9532,9 @@
     "J5LcRx9iBIJ6iam4yM6ICg==": "Visites client"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 425,
+   "line_beg": 422,
    "col_beg": 7,
-   "line_end": 427,
+   "line_end": 424,
    "col_end": 13,
    "type": "text",
    "desc": "Client visits",
@@ -9447,9 +9546,9 @@
     "S5zAFspJmhz4q+bMF4pQqA==": "Montant travaillé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 433,
+   "line_beg": 430,
    "col_beg": 7,
-   "line_end": 435,
+   "line_end": 432,
    "col_end": 13,
    "type": "text",
    "desc": "estimated time",
@@ -9461,9 +9560,9 @@
     "zZBJ6cBdsYxLXMc/mbyOGw==": "Vous souhaitez d'autres statistiques? {=Contactez-nous}"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 460,
+   "line_beg": 457,
    "col_beg": 7,
-   "line_end": 468,
+   "line_end": 465,
    "col_end": 13,
    "type": "text",
    "desc": "stats question",
@@ -9475,9 +9574,9 @@
     "BdSTSL1PZ+q5EHM3jdBIJQ==": "Contactez-nous"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 462,
+   "line_beg": 459,
    "col_beg": 8,
-   "line_end": 467,
+   "line_end": 464,
    "col_end": 12,
    "type": "text",
    "desc": "In the phrase: \"Vous souhaitez d'autres statistiques? {=Contactez-nous}\"",
@@ -10046,432 +10145,12 @@
   },
   {
    "hashToText": {
-    "UzYWkXM20aeDmetJWVQHKQ==": "Di"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 45,
-   "col_beg": 2,
-   "line_end": 45,
-   "col_end": 21,
-   "type": "text",
-   "desc": "sunday",
-   "project": "",
-   "jsfbt": "Di"
-  },
-  {
-   "hashToText": {
-    "8Vc2l3I0fVawMarYs1AzNA==": "Lu"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 46,
-   "col_beg": 2,
-   "line_end": 46,
-   "col_end": 21,
-   "type": "text",
-   "desc": "monday",
-   "project": "",
-   "jsfbt": "Lu"
-  },
-  {
-   "hashToText": {
-    "bDmmkLF/uX8nZedmH1NtMg==": "Ma"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 47,
-   "col_beg": 2,
-   "line_end": 47,
-   "col_end": 22,
-   "type": "text",
-   "desc": "tuesday",
-   "project": "",
-   "jsfbt": "Ma"
-  },
-  {
-   "hashToText": {
-    "FeXWmdpMTP+JoV+mp3Ckjw==": "Me"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 48,
-   "col_beg": 2,
-   "line_end": 48,
-   "col_end": 24,
-   "type": "text",
-   "desc": "wednesday",
-   "project": "",
-   "jsfbt": "Me"
-  },
-  {
-   "hashToText": {
-    "aDYt0x7HoOLgOdhhX05uJA==": "Je"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 49,
-   "col_beg": 2,
-   "line_end": 49,
-   "col_end": 23,
-   "type": "text",
-   "desc": "thursday",
-   "project": "",
-   "jsfbt": "Je"
-  },
-  {
-   "hashToText": {
-    "1oWceLwXPOS73MagOVP91Q==": "Ve"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 50,
-   "col_beg": 2,
-   "line_end": 50,
-   "col_end": 21,
-   "type": "text",
-   "desc": "friday",
-   "project": "",
-   "jsfbt": "Ve"
-  },
-  {
-   "hashToText": {
-    "hU3fn1IT1oj0yv1RCHbH5Q==": "Sa"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 51,
-   "col_beg": 2,
-   "line_end": 51,
-   "col_end": 23,
-   "type": "text",
-   "desc": "saturday",
-   "project": "",
-   "jsfbt": "Sa"
-  },
-  {
-   "hashToText": {
-    "tUgAtDVScfbqZJXDk/ycoQ==": "M."
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 56,
-   "col_beg": 11,
-   "line_end": 56,
-   "col_end": 30,
-   "type": "text",
-   "desc": "mister",
-   "project": "",
-   "jsfbt": "M."
-  },
-  {
-   "hashToText": {
-    "Tat+CCVmuWJt40xExzIuKQ==": "Mme"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 57,
-   "col_beg": 9,
-   "line_end": 57,
-   "col_end": 26,
-   "type": "text",
-   "desc": "mis",
-   "project": "",
-   "jsfbt": "Mme"
-  },
-  {
-   "hashToText": {
-    "T6syVNkrj+0HaeYMmjbT2A==": "Janvier"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 62,
-   "col_beg": 2,
-   "line_end": 62,
-   "col_end": 27,
-   "type": "text",
-   "desc": "january",
-   "project": "",
-   "jsfbt": "Janvier"
-  },
-  {
-   "hashToText": {
-    "GSHolrLm22TJzcRAoqLU/w==": "Février"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 63,
-   "col_beg": 2,
-   "line_end": 63,
-   "col_end": 28,
-   "type": "text",
-   "desc": "february",
-   "project": "",
-   "jsfbt": "Février"
-  },
-  {
-   "hashToText": {
-    "KEWH1ItA0zQFM7zRp5c+yw==": "Mars"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 64,
-   "col_beg": 2,
-   "line_end": 64,
-   "col_end": 22,
-   "type": "text",
-   "desc": "march",
-   "project": "",
-   "jsfbt": "Mars"
-  },
-  {
-   "hashToText": {
-    "OKPEwkxQRN11vFVVKgTHkQ==": "Avril"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 65,
-   "col_beg": 2,
-   "line_end": 65,
-   "col_end": 23,
-   "type": "text",
-   "desc": "april",
-   "project": "",
-   "jsfbt": "Avril"
-  },
-  {
-   "hashToText": {
-    "TdU0dZQ3Quv5VRZLqfy6iA==": "Mai"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 66,
-   "col_beg": 2,
-   "line_end": 66,
-   "col_end": 19,
-   "type": "text",
-   "desc": "may",
-   "project": "",
-   "jsfbt": "Mai"
-  },
-  {
-   "hashToText": {
-    "KZclEfNZNWtnjtwmchV3nQ==": "Juin"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 67,
-   "col_beg": 2,
-   "line_end": 67,
-   "col_end": 21,
-   "type": "text",
-   "desc": "june",
-   "project": "",
-   "jsfbt": "Juin"
-  },
-  {
-   "hashToText": {
-    "FL3dzXtERmpL+3ZXkTi/jw==": "Juillet"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 68,
-   "col_beg": 2,
-   "line_end": 68,
-   "col_end": 24,
-   "type": "text",
-   "desc": "july",
-   "project": "",
-   "jsfbt": "Juillet"
-  },
-  {
-   "hashToText": {
-    "aLbZBXhCk/Q82C33/70vug==": "Août"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 69,
-   "col_beg": 2,
-   "line_end": 69,
-   "col_end": 23,
-   "type": "text",
-   "desc": "august",
-   "project": "",
-   "jsfbt": "Août"
-  },
-  {
-   "hashToText": {
-    "t4ktBxFZHW4vixUBvTGZOg==": "Septembre"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 70,
-   "col_beg": 2,
-   "line_end": 70,
-   "col_end": 31,
-   "type": "text",
-   "desc": "september",
-   "project": "",
-   "jsfbt": "Septembre"
-  },
-  {
-   "hashToText": {
-    "kg9VQ3PEMp3lN0du4q8VFg==": "Octobre"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 71,
-   "col_beg": 2,
-   "line_end": 71,
-   "col_end": 27,
-   "type": "text",
-   "desc": "october",
-   "project": "",
-   "jsfbt": "Octobre"
-  },
-  {
-   "hashToText": {
-    "5p0OYRp5lK58N4NFJICqrQ==": "Novembre"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 72,
-   "col_beg": 2,
-   "line_end": 72,
-   "col_end": 29,
-   "type": "text",
-   "desc": "november",
-   "project": "",
-   "jsfbt": "Novembre"
-  },
-  {
-   "hashToText": {
-    "rFwq1DrCobP2P6NsqP8TGA==": "Décembre"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 73,
-   "col_beg": 2,
-   "line_end": 73,
-   "col_end": 29,
-   "type": "text",
-   "desc": "december",
-   "project": "",
-   "jsfbt": "Décembre"
-  },
-  {
-   "hashToText": {
-    "xXh3WMjVhbuTHBgaea6mUg==": "Dimanche"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 79,
-   "col_beg": 2,
-   "line_end": 79,
-   "col_end": 27,
-   "type": "text",
-   "desc": "sunday",
-   "project": "",
-   "jsfbt": "Dimanche"
-  },
-  {
-   "hashToText": {
-    "IPjX4NvI5d0Bs6Y6P7crzA==": "Lundi"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 80,
-   "col_beg": 2,
-   "line_end": 80,
-   "col_end": 24,
-   "type": "text",
-   "desc": "monday",
-   "project": "",
-   "jsfbt": "Lundi"
-  },
-  {
-   "hashToText": {
-    "MuMD31rJxrt3Jdn+pk5Omg==": "Mardi"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 81,
-   "col_beg": 2,
-   "line_end": 81,
-   "col_end": 25,
-   "type": "text",
-   "desc": "tuesday",
-   "project": "",
-   "jsfbt": "Mardi"
-  },
-  {
-   "hashToText": {
-    "utNqaX0OrZKDRVDBEcoaug==": "Mercredi"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 82,
-   "col_beg": 2,
-   "line_end": 82,
-   "col_end": 30,
-   "type": "text",
-   "desc": "wednesday",
-   "project": "",
-   "jsfbt": "Mercredi"
-  },
-  {
-   "hashToText": {
-    "QdPcOI0xiT8MPCNJ4N73Hg==": "Jeudi"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 83,
-   "col_beg": 2,
-   "line_end": 83,
-   "col_end": 26,
-   "type": "text",
-   "desc": "thursday",
-   "project": "",
-   "jsfbt": "Jeudi"
-  },
-  {
-   "hashToText": {
-    "ut7u0qJPvl2D0uyQF/CP/A==": "Vendredi"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 84,
-   "col_beg": 2,
-   "line_end": 84,
-   "col_end": 27,
-   "type": "text",
-   "desc": "friday",
-   "project": "",
-   "jsfbt": "Vendredi"
-  },
-  {
-   "hashToText": {
-    "SSvJy8FM+/k7esNsMoGaGg==": "Samedi"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 85,
-   "col_beg": 2,
-   "line_end": 85,
-   "col_end": 27,
-   "type": "text",
-   "desc": "saturday",
-   "project": "",
-   "jsfbt": "Samedi"
-  },
-  {
-   "hashToText": {
-    "KQ+cxh8crAErMUaJtC6Tig==": "Mois suivant"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 95,
-   "col_beg": 13,
-   "line_end": 95,
-   "col_end": 56,
-   "type": "text",
-   "desc": "notification message",
-   "project": "",
-   "jsfbt": "Mois suivant"
-  },
-  {
-   "hashToText": {
-    "4xvLl6dKWzFpJOaE4OdKMg==": "Mois précédent"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 96,
-   "col_beg": 17,
-   "line_end": 96,
-   "col_end": 62,
-   "type": "text",
-   "desc": "notification message",
-   "project": "",
-   "jsfbt": "Mois précédent"
-  },
-  {
-   "hashToText": {
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 131,
+   "line_beg": 94,
    "col_beg": 10,
-   "line_end": 131,
+   "line_end": 94,
    "col_end": 43,
    "type": "text",
    "desc": "basic task name",
@@ -10483,9 +10162,9 @@
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 134,
+   "line_beg": 97,
    "col_beg": 10,
-   "line_end": 137,
+   "line_end": 100,
    "col_end": 4,
    "type": "text",
    "desc": "basic task description",
@@ -10497,9 +10176,9 @@
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 148,
+   "line_beg": 111,
    "col_beg": 10,
-   "line_end": 148,
+   "line_end": 111,
    "col_end": 64,
    "type": "text",
    "desc": "customer task name",
@@ -10511,9 +10190,9 @@
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 151,
+   "line_beg": 114,
    "col_beg": 10,
-   "line_end": 154,
+   "line_end": 117,
    "col_end": 4,
    "type": "text",
    "desc": "customer task description",
@@ -10525,9 +10204,9 @@
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 164,
+   "line_beg": 127,
    "col_beg": 10,
-   "line_end": 164,
+   "line_end": 127,
    "col_end": 65,
    "type": "text",
    "desc": "content acquisition name",
@@ -10539,9 +10218,9 @@
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 167,
+   "line_beg": 130,
    "col_beg": 10,
-   "line_end": 170,
+   "line_end": 133,
    "col_end": 4,
    "type": "text",
    "desc": "content acquisition description",
@@ -10553,9 +10232,9 @@
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 180,
+   "line_beg": 143,
    "col_beg": 10,
-   "line_end": 180,
+   "line_end": 143,
    "col_end": 50,
    "type": "text",
    "desc": "section name",
@@ -10567,9 +10246,9 @@
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 183,
+   "line_beg": 146,
    "col_beg": 10,
-   "line_end": 186,
+   "line_end": 149,
    "col_end": 4,
    "type": "text",
    "desc": "section description",
@@ -10581,9 +10260,9 @@
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 196,
+   "line_beg": 159,
    "col_beg": 10,
-   "line_end": 196,
+   "line_end": 159,
    "col_end": 57,
    "type": "text",
    "desc": "invoice task name",
@@ -10595,9 +10274,9 @@
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 199,
+   "line_beg": 162,
    "col_beg": 10,
-   "line_end": 202,
+   "line_end": 165,
    "col_end": 4,
    "type": "text",
    "desc": "invoice task description",
@@ -10609,9 +10288,9 @@
     "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 260,
+   "line_beg": 223,
    "col_beg": 24,
-   "line_end": 263,
+   "line_end": 226,
    "col_end": 3,
    "type": "text",
    "desc": "first customer email",
@@ -10623,9 +10302,9 @@
     "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 266,
+   "line_beg": 229,
    "col_beg": 24,
-   "line_end": 272,
+   "line_end": 235,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder customer email",
@@ -10637,9 +10316,9 @@
     "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 275,
+   "line_beg": 238,
    "col_beg": 24,
-   "line_end": 281,
+   "line_end": 244,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder customer email",
@@ -10651,9 +10330,9 @@
     "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 284,
+   "line_beg": 247,
    "col_beg": 24,
-   "line_end": 290,
+   "line_end": 253,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder customer email",
@@ -10665,9 +10344,9 @@
     "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 293,
+   "line_beg": 256,
    "col_beg": 24,
-   "line_end": 299,
+   "line_end": 262,
    "col_end": 3,
    "type": "text",
    "desc": "first invoice email",
@@ -10679,9 +10358,9 @@
     "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 302,
+   "line_beg": 265,
    "col_beg": 24,
-   "line_end": 308,
+   "line_end": 271,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder invoice email",
@@ -10693,9 +10372,9 @@
     "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 311,
+   "line_beg": 274,
    "col_beg": 24,
-   "line_end": 317,
+   "line_end": 280,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder invoice email",
@@ -10707,9 +10386,9 @@
     "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 320,
+   "line_beg": 283,
    "col_beg": 24,
-   "line_end": 326,
+   "line_end": 289,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder invoice email",
@@ -10721,9 +10400,9 @@
     "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 329,
+   "line_beg": 292,
    "col_beg": 24,
-   "line_end": 335,
+   "line_end": 298,
    "col_end": 3,
    "type": "text",
    "desc": "fourth reminder invoice email",
@@ -10735,9 +10414,9 @@
     "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 338,
+   "line_beg": 301,
    "col_beg": 24,
-   "line_end": 344,
+   "line_end": 307,
    "col_end": 3,
    "type": "text",
    "desc": "fitfh reminder invoice email",

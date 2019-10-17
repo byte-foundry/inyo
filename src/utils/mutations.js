@@ -482,6 +482,10 @@ export const ADD_SECTION = gql`
 				daysUntilDeadline
 				status
 				name
+				sections {
+					id
+					name
+				}
 				customer {
 					id
 					name

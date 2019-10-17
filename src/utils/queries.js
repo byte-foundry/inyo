@@ -514,7 +514,8 @@ export const GET_SCHEDULE = gql`
 					id
 					status
 					item {
-						...ItemFragment
+						id
+						name
 					}
 				}
 				deadlines {
@@ -525,7 +526,8 @@ export const GET_SCHEDULE = gql`
 						name
 					}
 					... on Item {
-						...ItemFragment
+						id
+						name
 					}
 				}
 			}

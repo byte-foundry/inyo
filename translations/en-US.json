@@ -1301,26 +1301,6 @@
     }
    ]
   },
-  "ew4YOAKY1eedm0Xk5R444A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Task's client",
-     "variations": {}
-    }
-   ]
-  },
-  "vRZY5zcFhPD/Le3J1JJKiw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Client",
-     "variations": {}
-    }
-   ]
-  },
   "HLV6gRDo4cU1fnr1mVGuig==": {
    "tokens": [],
    "types": [],
@@ -1361,22 +1341,22 @@
     }
    ]
   },
-  "X2kd6IYQLbQF5T0J4EmDVg==": {
+  "ew4YOAKY1eedm0Xk5R444A==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Project link to task",
+     "translation": "Task's client",
      "variations": {}
     }
    ]
   },
-  "gSUvt41Meg58qA7ieTm91w==": {
+  "vRZY5zcFhPD/Le3J1JJKiw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Project",
+     "translation": "Client",
      "variations": {}
     }
    ]
@@ -1397,6 +1377,26 @@
    "translations": [
     {
      "translation": "Type",
+     "variations": {}
+    }
+   ]
+  },
+  "X2kd6IYQLbQF5T0J4EmDVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project link to task",
+     "variations": {}
+    }
+   ]
+  },
+  "gSUvt41Meg58qA7ieTm91w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project",
      "variations": {}
     }
    ]
@@ -4591,7 +4591,7 @@
     }
    ]
   },
-  "uOln63s+jZiB/HpReRL68w==": {
+  "OM6KZ8/NG3DqPFhwMghW0A==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -4601,12 +4601,12 @@
     }
    ]
   },
-  "1NAgDG7zwjGA95mqXUp5uw==": {
+  "FDoulManslY9GsxXMbjc6g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": " overtime",
+     "translation": "overtime",
      "variations": {}
     }
    ]
@@ -6597,6 +6597,26 @@
    "translations": [
     {
      "translation": "A basic task",
+     "variations": {}
+    }
+   ]
+  },
+  "HqN4N4HsjCJSjiswdqQIyQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Personal task",
+     "variations": {}
+    }
+   ]
+  },
+  "bKgT6nnmiyl9m1Y3m9AyNw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "A task only visible to you",
      "variations": {}
     }
    ]

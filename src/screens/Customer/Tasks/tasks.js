@@ -57,7 +57,7 @@ const CustomerTasks = ({
 
 	if (error) throw error;
 
-	const tasks = [...data.tasks];
+	const tasks = data.tasks.filter(t => t.type !== 'PERSONAL');
 
 	// order by creation date
 	tasks.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));

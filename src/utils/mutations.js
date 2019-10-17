@@ -633,16 +633,6 @@ export const REMOVE_ITEM = gql`
 	}
 `;
 
-export const SNOOZE_ITEM = gql`
-	${ITEM_FRAGMENT}
-
-	mutation snoozeItem($itemId: ID!, $during: Int) {
-		snoozeItem(id: $itemId, during: $during) {
-			...ItemFragment
-		}
-	}
-`;
-
 export const FOCUS_TASK = gql`
 	${ITEM_FRAGMENT}
 

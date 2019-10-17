@@ -17,6 +17,9 @@ import TaskCustomerIconValidatedUrl, {
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon,
 } from './icons/taskicon-customer.svg';
+import TaskIconPersonalUrl, {
+	ReactComponent as TaskIconPersonal,
+} from './icons/taskicon-personal.svg';
 import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
 import TaskIconValidatedUrl, {
 	ReactComponent as TaskIconValidated,
@@ -97,6 +100,23 @@ export const ITEM_TYPES = [
 			return fbt(
 				'Une tâche dont vous êtes responsable',
 				'basic task description',
+			);
+		},
+	},
+	{
+		icon: <TaskIconPersonal />,
+		iconValidated: <TaskIconValidated />,
+		iconUrl: TaskIconPersonalUrl,
+		iconUrlValidated: TaskIconValidatedUrl,
+		iconUrlValidatedAnim: TaskIconValidatedAnimUrl,
+		type: 'PERSONAL',
+		get name() {
+			return fbt('Tâche personnelle', 'personal task name');
+		},
+		get description() {
+			return fbt(
+				'Une tâche uniquement visible par vous',
+				'personal task description',
 			);
 		},
 	},
@@ -209,12 +229,6 @@ export const ITEM_TYPES = [
 		type: 'SCHEDULE_MEETING',
 		name: 'Programmation de RDV client',
 		description: 'Programmer automatiquement une réunion',
-	},
-	{
-		icon: '⭕',
-		type: 'PERSONAL',
-		name: 'Tâche personnelle',
-		description: 'Créer une tâche uniquement visible par vous',
 	}, */
 ];
 

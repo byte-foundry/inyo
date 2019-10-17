@@ -1810,9 +1810,9 @@
     "Aw7c13n1qyBFVCJRP4+ZAw==": "Type et titre de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 348,
+   "line_beg": 346,
    "col_beg": 6,
-   "line_end": 350,
+   "line_end": 348,
    "col_end": 12,
    "type": "text",
    "desc": "Tooltip task title item view",
@@ -1824,9 +1824,9 @@
     "JhxU3feEsDnVk/NaRsH5bQ==": "Nommez cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 367,
+   "line_beg": 365,
    "col_beg": 8,
-   "line_end": 372,
+   "line_end": 370,
    "col_end": 14,
    "type": "text",
    "desc": "task name placeholder item view",
@@ -1838,9 +1838,9 @@
     "n2nEPSXW8r/mJCL++eK6XA==": "Temps estimé pour cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 395,
+   "line_beg": 393,
    "col_beg": 8,
-   "line_end": 400,
+   "line_end": 398,
    "col_end": 14,
    "type": "text",
    "desc": "time estimated tooltip item view",
@@ -1852,9 +1852,9 @@
     "PZk9D95cJdaKYixeW4cp0w==": "Temps estimé"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 406,
+   "line_beg": 404,
    "col_beg": 9,
-   "line_end": 411,
+   "line_end": 409,
    "col_end": 15,
    "type": "text",
    "desc": "time estimated label item view",
@@ -1866,9 +1866,9 @@
     "RZ7sYwiQT57dr8nfhuD+ww==": "Temps passé pour cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 486,
+   "line_beg": 484,
    "col_beg": 8,
-   "line_end": 491,
+   "line_end": 489,
    "col_end": 14,
    "type": "text",
    "desc": "time it took tooltip item view",
@@ -1880,9 +1880,9 @@
     "7Lnr7BpFnIeCy3zXln3JWw==": "Temps passé"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 497,
+   "line_beg": 495,
    "col_beg": 9,
-   "line_end": 502,
+   "line_end": 500,
    "col_end": 15,
    "type": "text",
    "desc": "time it took label item view",
@@ -1895,9 +1895,9 @@
     "xjFoy8C8nGf+c9I/neBmDg==": "1 jour"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 559,
+   "line_beg": 557,
    "col_beg": 11,
-   "line_end": 574,
+   "line_end": 572,
    "col_end": 17,
    "type": "table",
    "desc": "time it took item view",
@@ -1918,40 +1918,12 @@
   },
   {
    "hashToText": {
-    "ew4YOAKY1eedm0Xk5R444A==": "Personne liée à cette tâche"
-   },
-   "filepath": "src/components/ItemView/index.js",
-   "line_beg": 584,
-   "col_beg": 7,
-   "line_end": 589,
-   "col_end": 13,
-   "type": "text",
-   "desc": "linked customer tooltip item view",
-   "project": "inyo",
-   "jsfbt": "Personne liée à cette tâche"
-  },
-  {
-   "hashToText": {
-    "vRZY5zcFhPD/Le3J1JJKiw==": "Client"
-   },
-   "filepath": "src/components/ItemView/index.js",
-   "line_beg": 595,
-   "col_beg": 8,
-   "line_end": 600,
-   "col_end": 14,
-   "type": "text",
-   "desc": "linked customer label item view",
-   "project": "inyo",
-   "jsfbt": "Client"
-  },
-  {
-   "hashToText": {
     "HLV6gRDo4cU1fnr1mVGuig==": "Date limite pour réaliser cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 665,
+   "line_beg": 582,
    "col_beg": 7,
-   "line_end": 670,
+   "line_end": 587,
    "col_end": 13,
    "type": "text",
    "desc": "deadline tooltip item view",
@@ -1963,9 +1935,9 @@
     "9WiJli6bYRZdd9b3WFN4sw==": "Temps restant"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 676,
+   "line_beg": 593,
    "col_beg": 8,
-   "line_end": 681,
+   "line_end": 598,
    "col_end": 14,
    "type": "text",
    "desc": "deadline label item view",
@@ -1978,9 +1950,9 @@
     "WOBjTLFG6qlMucM7PHA/aA==": "1 jour"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 720,
+   "line_beg": 637,
    "col_beg": 11,
-   "line_end": 746,
+   "line_end": 663,
    "col_end": 17,
    "type": "table",
    "desc": "deadline margin item view",
@@ -2001,40 +1973,40 @@
   },
   {
    "hashToText": {
-    "X2kd6IYQLbQF5T0J4EmDVg==": "Projet lié à cette tâche"
+    "ew4YOAKY1eedm0Xk5R444A==": "Personne liée à cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 756,
-   "col_beg": 6,
-   "line_end": 758,
-   "col_end": 12,
+   "line_beg": 675,
+   "col_beg": 7,
+   "line_end": 680,
+   "col_end": 13,
    "type": "text",
-   "desc": "project tooltip",
+   "desc": "linked customer tooltip item view",
    "project": "inyo",
-   "jsfbt": "Projet lié à cette tâche"
+   "jsfbt": "Personne liée à cette tâche"
   },
   {
    "hashToText": {
-    "gSUvt41Meg58qA7ieTm91w==": "Projet"
+    "vRZY5zcFhPD/Le3J1JJKiw==": "Client"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 764,
-   "col_beg": 7,
-   "line_end": 766,
-   "col_end": 13,
+   "line_beg": 686,
+   "col_beg": 8,
+   "line_end": 691,
+   "col_end": 14,
    "type": "text",
-   "desc": "project label",
+   "desc": "linked customer label item view",
    "project": "inyo",
-   "jsfbt": "Projet"
+   "jsfbt": "Client"
   },
   {
    "hashToText": {
     "4uWwWAEkjeee+uOwaU7O7Q==": "Définit s'il y a des actions automatiques"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 813,
+   "line_beg": 758,
    "col_beg": 6,
-   "line_end": 815,
+   "line_end": 760,
    "col_end": 12,
    "type": "text",
    "desc": "type of the task tooltip",
@@ -2046,9 +2018,9 @@
     "WlT9SCoRXpZo1WsKLdRoNA==": "Type de tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 821,
+   "line_beg": 766,
    "col_beg": 7,
-   "line_end": 823,
+   "line_end": 768,
    "col_end": 13,
    "type": "text",
    "desc": "task type",
@@ -2057,12 +2029,40 @@
   },
   {
    "hashToText": {
+    "X2kd6IYQLbQF5T0J4EmDVg==": "Projet lié à cette tâche"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 775,
+   "col_beg": 6,
+   "line_end": 777,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project tooltip",
+   "project": "inyo",
+   "jsfbt": "Projet lié à cette tâche"
+  },
+  {
+   "hashToText": {
+    "gSUvt41Meg58qA7ieTm91w==": "Projet"
+   },
+   "filepath": "src/components/ItemView/index.js",
+   "line_beg": 783,
+   "col_beg": 7,
+   "line_end": 785,
+   "col_end": 13,
+   "type": "text",
+   "desc": "project label",
+   "project": "inyo",
+   "jsfbt": "Projet"
+  },
+  {
+   "hashToText": {
     "6F6qiWW3cYSOf+pclVSw7g==": "Tag de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 831,
+   "line_beg": 833,
    "col_beg": 7,
-   "line_end": 833,
+   "line_end": 835,
    "col_end": 13,
    "type": "text",
    "desc": "task's tag",
@@ -2074,9 +2074,9 @@
     "3Dfj3RxIOd3jiFRkj5VOfQ==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 843,
+   "line_beg": 845,
    "col_beg": 9,
-   "line_end": 848,
+   "line_end": 850,
    "col_end": 15,
    "type": "text",
    "desc": "add or create tag",
@@ -2088,9 +2088,9 @@
     "fwFrMMlHn32zsVxwM2CzYg==": "Description de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 896,
+   "line_beg": 898,
    "col_beg": 12,
-   "line_end": 899,
+   "line_end": 901,
    "col_end": 6,
    "type": "text",
    "desc": "tooltip task description",
@@ -2102,9 +2102,9 @@
     "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 905,
+   "line_beg": 907,
    "col_beg": 8,
-   "line_end": 907,
+   "line_end": 909,
    "col_end": 14,
    "type": "text",
    "desc": "Add a description",
@@ -2116,9 +2116,9 @@
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 940,
+   "line_beg": 942,
    "col_beg": 7,
-   "line_end": 966,
+   "line_end": 968,
    "col_end": 13,
    "type": "text",
    "desc": "actions of edwige",
@@ -2130,9 +2130,9 @@
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 946,
+   "line_beg": 948,
    "col_beg": 11,
-   "line_end": 951,
+   "line_end": 953,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2144,9 +2144,9 @@
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 954,
+   "line_beg": 956,
    "col_beg": 11,
-   "line_end": 959,
+   "line_end": 961,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2158,9 +2158,9 @@
     "x6FPGl0U1x0YCSNscEvLPQ==": "Charger {assistantName} de faire réaliser cette tâche à {customerName} ( {contactName} )"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1005,
+   "line_beg": 1007,
    "col_beg": 8,
-   "line_end": 1022,
+   "line_end": 1024,
    "col_end": 14,
    "type": "text",
    "desc": "charger",
@@ -2172,9 +2172,9 @@
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1028,
+   "line_beg": 1030,
    "col_beg": 4,
-   "line_end": 1030,
+   "line_end": 1032,
    "col_end": 10,
    "type": "text",
    "desc": "Attached files",
@@ -2186,9 +2186,9 @@
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1120,
+   "line_beg": 1122,
    "col_beg": 4,
-   "line_end": 1122,
+   "line_end": 1124,
    "col_end": 10,
    "type": "text",
    "desc": "Comments",
@@ -2200,9 +2200,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1140,
+   "line_beg": 1142,
    "col_beg": 9,
-   "line_end": 1142,
+   "line_end": 1144,
    "col_end": 15,
    "type": "text",
    "desc": "cancel",
@@ -2214,9 +2214,9 @@
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1152,
+   "line_beg": 1154,
    "col_beg": 9,
-   "line_end": 1154,
+   "line_end": 1156,
    "col_end": 15,
    "type": "text",
    "desc": "confirm deletion",
@@ -2228,9 +2228,9 @@
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1164,
+   "line_beg": 1166,
    "col_beg": 9,
-   "line_end": 1166,
+   "line_end": 1168,
    "col_end": 15,
    "type": "text",
    "desc": "delete task",
@@ -2242,9 +2242,9 @@
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1182,
+   "line_beg": 1184,
    "col_beg": 6,
-   "line_end": 1184,
+   "line_end": 1186,
    "col_end": 12,
    "type": "text",
    "desc": "notification message",
@@ -6613,9 +6613,9 @@
     "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 632,
+   "line_beg": 634,
    "col_beg": 11,
-   "line_end": 637,
+   "line_end": 639,
    "col_end": 17,
    "type": "text",
    "desc": "attached files",
@@ -7140,8 +7140,8 @@
   },
   {
    "hashToText": {
-    "uOln63s+jZiB/HpReRL68w==": "supplémentaire",
-    "1NAgDG7zwjGA95mqXUp5uw==": " supplémentaires"
+    "OM6KZ8/NG3DqPFhwMghW0A==": "supplémentaires",
+    "FDoulManslY9GsxXMbjc6g==": " supplémentaire"
    },
    "filepath": "src/components/UnitDisplay/index.js",
    "line_beg": 73,
@@ -7153,8 +7153,8 @@
    "project": "inyo",
    "jsfbt": {
     "t": {
-     "*": "supplémentaire",
-     "_1": " supplémentaires"
+     "*": "supplémentaires",
+     "_1": " supplémentaire"
     },
     "m": [
      null
@@ -10369,12 +10369,40 @@
   },
   {
    "hashToText": {
-    "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
+    "HqN4N4HsjCJSjiswdqQIyQ==": "Tâche personnelle"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 108,
+   "col_beg": 10,
+   "line_end": 108,
+   "col_end": 56,
+   "type": "text",
+   "desc": "personal task name",
+   "project": "",
+   "jsfbt": "Tâche personnelle"
+  },
+  {
+   "hashToText": {
+    "bKgT6nnmiyl9m1Y3m9AyNw==": "Une tâche uniquement visible par vous"
    },
    "filepath": "src/utils/constants.js",
    "line_beg": 111,
    "col_beg": 10,
-   "line_end": 111,
+   "line_end": 114,
+   "col_end": 4,
+   "type": "text",
+   "desc": "personal task description",
+   "project": "",
+   "jsfbt": "Une tâche uniquement visible par vous"
+  },
+  {
+   "hashToText": {
+    "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 125,
+   "col_beg": 10,
+   "line_end": 125,
    "col_end": 64,
    "type": "text",
    "desc": "customer task name",
@@ -10386,9 +10414,9 @@
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 114,
+   "line_beg": 128,
    "col_beg": 10,
-   "line_end": 117,
+   "line_end": 131,
    "col_end": 4,
    "type": "text",
    "desc": "customer task description",
@@ -10400,9 +10428,9 @@
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 127,
+   "line_beg": 141,
    "col_beg": 10,
-   "line_end": 127,
+   "line_end": 141,
    "col_end": 65,
    "type": "text",
    "desc": "content acquisition name",
@@ -10414,9 +10442,9 @@
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 130,
+   "line_beg": 144,
    "col_beg": 10,
-   "line_end": 133,
+   "line_end": 147,
    "col_end": 4,
    "type": "text",
    "desc": "content acquisition description",
@@ -10428,9 +10456,9 @@
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 143,
+   "line_beg": 157,
    "col_beg": 10,
-   "line_end": 143,
+   "line_end": 157,
    "col_end": 50,
    "type": "text",
    "desc": "section name",
@@ -10442,9 +10470,9 @@
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 146,
+   "line_beg": 160,
    "col_beg": 10,
-   "line_end": 149,
+   "line_end": 163,
    "col_end": 4,
    "type": "text",
    "desc": "section description",
@@ -10456,9 +10484,9 @@
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 159,
+   "line_beg": 173,
    "col_beg": 10,
-   "line_end": 159,
+   "line_end": 173,
    "col_end": 57,
    "type": "text",
    "desc": "invoice task name",
@@ -10470,9 +10498,9 @@
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 162,
+   "line_beg": 176,
    "col_beg": 10,
-   "line_end": 165,
+   "line_end": 179,
    "col_end": 4,
    "type": "text",
    "desc": "invoice task description",
@@ -10484,9 +10512,9 @@
     "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 223,
+   "line_beg": 231,
    "col_beg": 24,
-   "line_end": 226,
+   "line_end": 234,
    "col_end": 3,
    "type": "text",
    "desc": "first customer email",
@@ -10498,9 +10526,9 @@
     "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 229,
+   "line_beg": 237,
    "col_beg": 24,
-   "line_end": 235,
+   "line_end": 243,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder customer email",
@@ -10512,9 +10540,9 @@
     "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 238,
+   "line_beg": 246,
    "col_beg": 24,
-   "line_end": 244,
+   "line_end": 252,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder customer email",
@@ -10526,9 +10554,9 @@
     "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 247,
+   "line_beg": 255,
    "col_beg": 24,
-   "line_end": 253,
+   "line_end": 261,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder customer email",
@@ -10540,9 +10568,9 @@
     "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 256,
+   "line_beg": 264,
    "col_beg": 24,
-   "line_end": 262,
+   "line_end": 270,
    "col_end": 3,
    "type": "text",
    "desc": "first invoice email",
@@ -10554,9 +10582,9 @@
     "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 265,
+   "line_beg": 273,
    "col_beg": 24,
-   "line_end": 271,
+   "line_end": 279,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder invoice email",
@@ -10568,9 +10596,9 @@
     "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 274,
+   "line_beg": 282,
    "col_beg": 24,
-   "line_end": 280,
+   "line_end": 288,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder invoice email",
@@ -10582,9 +10610,9 @@
     "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 283,
+   "line_beg": 291,
    "col_beg": 24,
-   "line_end": 289,
+   "line_end": 297,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder invoice email",
@@ -10596,9 +10624,9 @@
     "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 292,
+   "line_beg": 300,
    "col_beg": 24,
-   "line_end": 298,
+   "line_end": 306,
    "col_end": 3,
    "type": "text",
    "desc": "fourth reminder invoice email",
@@ -10610,9 +10638,9 @@
     "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 301,
+   "line_beg": 309,
    "col_beg": 24,
-   "line_end": 307,
+   "line_end": 315,
    "col_end": 3,
    "type": "text",
    "desc": "fitfh reminder invoice email",

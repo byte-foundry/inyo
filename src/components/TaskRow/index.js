@@ -520,7 +520,7 @@ function TaskRow({
 										)}
 									</IconAndTextOptional>
 								</Tooltip>
-							) : (
+							) : item.type !== 'PERSONAL' ? (
 								<Tooltip
 									label={
 										<fbt
@@ -574,6 +574,8 @@ function TaskRow({
 										)}
 									</IconAndTextOptional>
 								</Tooltip>
+							) : (
+								<div></div>
 							)}
 							<TaskMetas>
 								<TaskComment

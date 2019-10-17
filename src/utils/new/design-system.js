@@ -467,7 +467,7 @@ export const DueDateInputElem = styled('input')`
 
 export const DateInputContainer = styled('div')`
 	position: relative;
-	display: inline-block;
+	display: inline-flex;
 `;
 
 export const FilterInput = styled(Input)`

@@ -629,6 +629,14 @@ export const GET_USER_NOTIFICATIONS = gql`
 	}
 `;
 
+export const GET_CUSTOMER_LANGUAGE = gql`
+	query getCustomerInfos($token: String) {
+		customer(token: $token) {
+			language
+		}
+	}
+`;
+
 export const GET_CUSTOMER_INFOS = gql`
 	query getCustomerInfos($token: String) {
 		customer(token: $token) {

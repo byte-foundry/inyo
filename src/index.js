@@ -163,12 +163,10 @@ function Root() {
 		});
 	}
 
-	if (data && data.me && data.me.settings) {
-		if (data.me.settings.language) {
-			IntlViewerContext.locale
-				= data.me.settings.language === 'fr' ? 'fr-FR' : 'en-US';
-			moment.locale(data.me.settings.language);
-		}
+	if (data && data.me && data.me.settings && data.me.settings.language) {
+		IntlViewerContext.locale
+			= data.me.settings.language === 'fr' ? 'fr-FR' : 'en-US';
+		moment.locale(data.me.settings.language);
 	}
 
 	return (

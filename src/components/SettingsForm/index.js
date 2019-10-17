@@ -97,6 +97,7 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 		endWorkAt,
 		settings: {hasFullWeekSchedule: hasFullWeekScheduleInitial},
 		workingDays,
+		defaultDailyPrice: initialDailyRate,
 	} = props;
 
 	const currentDate = new Date().toJSON().split('T')[0];
@@ -139,9 +140,24 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 					workingDays: workingDaysInitial,
 					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
-					dailyRate: undefined,
+					dailyRate: initialDailyRate,
 				}}
-				validationSchema={Yup.object().shape({})}
+				validationSchema={Yup.object().shape({
+					dailyRate: Yup.number()
+						.typeError(
+							fbt(
+								'Le prix doit être un nombre',
+								'daily rate input not number',
+							),
+						)
+						.positive(
+							fbt(
+								'Le prix doit être un nombre positif',
+								'daily rate input not positive',
+							),
+						)
+						.nullable(),
+				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 
@@ -176,7 +192,7 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
 								workingDays,
-								defaultDailyPrice: parseInt(dailyRate),
+								defaultDailyPrice: dailyRate,
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},

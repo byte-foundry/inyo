@@ -2791,6 +2791,26 @@
     }
    ]
   },
+  "ItRQ6xfbySpjqTYg/nbJLg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The rate must be a number",
+     "variations": {}
+    }
+   ]
+  },
+  "GfAYRDU1IbSTrfru/gyd0Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The rate must be a positive number",
+     "variations": {}
+    }
+   ]
+  },
   "BWZHvitWVUZoKx3CZZtTkw==": {
    "tokens": [],
    "types": [],

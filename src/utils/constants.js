@@ -40,63 +40,6 @@ export const WEEKDAYS = {
 	0: 'SUNDAY',
 };
 
-export const WEEKDAYS_SHORT = {
-	fr: [
-		fbt('Di', 'sunday'),
-		fbt('Lu', 'monday'),
-		fbt('Ma', 'tuesday'),
-		fbt('Me', 'wednesday'),
-		fbt('Je', 'thursday'),
-		fbt('Ve', 'friday'),
-		fbt('Sa', 'saturday'),
-	],
-};
-
-export const TITLE_ENUM_TO_TITLE = {
-	MONSIEUR: fbt('M.', 'mister'),
-	MADAME: fbt('Mme', 'mis'),
-};
-
-export const MONTHS = {
-	fr: [
-		fbt('Janvier', 'january'),
-		fbt('Février', 'february'),
-		fbt('Mars', 'march'),
-		fbt('Avril', 'april'),
-		fbt('Mai', 'may'),
-		fbt('Juin', 'june'),
-		fbt('Juillet', 'july'),
-		fbt('Août', 'august'),
-		fbt('Septembre', 'september'),
-		fbt('Octobre', 'october'),
-		fbt('Novembre', 'november'),
-		fbt('Décembre', 'december'),
-	],
-};
-
-export const WEEKDAYS_LONG = {
-	fr: [
-		fbt('Dimanche', 'sunday'),
-		fbt('Lundi', 'monday'),
-		fbt('Mardi', 'tuesday'),
-		fbt('Mercredi', 'wednesday'),
-		fbt('Jeudi', 'thursday'),
-		fbt('Vendredi', 'friday'),
-		fbt('Samedi', 'saturday'),
-	],
-};
-
-export const FIRST_DAY_OF_WEEK = {
-	fr: 1,
-};
-// Translate aria-labels
-export const LABELS = {
-	fr: {
-		nextMonth: fbt('Mois suivant', 'notification message'),
-		previousMonth: fbt('Mois précédent', 'notification message'),
-	},
-};
-
 export const itemStatuses = {
 	FINISHED: 'FINISHED',
 	PENDING: 'PENDING',

@@ -1,5 +1,6 @@
 import moment from 'moment';
 
+import fbt from '../fbt/fbt.macro';
 import {CUSTOMER_TASK_TYPES, WEEKDAYS} from './constants';
 
 export const dateDiff = (datepart, fromdate, todate) => {
@@ -96,15 +97,18 @@ export function extractScheduleFromWorkingDays(
 const normalizeFalsyParams = f => (...args) => f(...args.map(v => v || undefined));
 
 export const formatTitle = (title) => {
-	if (title === 'MONSIEUR') {
-		return 'M.';
+	if (title !== 'MONSIEUR' || title !== 'MADAME') {
+		return '';
 	}
 
-	if (title === 'MADAME') {
-		return 'Mme';
-	}
-
-	return '';
+	return fbt.enum(
+		title,
+		{
+			MONSIEUR: 'M.',
+			MADAME: 'Mme',
+		},
+		'title',
+	);
 };
 
 export const formatName = normalizeFalsyParams(

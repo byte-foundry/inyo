@@ -694,7 +694,7 @@ function ProjectTasksList({
 
 	if (!items.length && !sectionsInfos.length) {
 		return (
-			<>
+			<div style={{position: 'relative', minHeight: '200px'}}>
 				<Suspense fallback={Loading}>
 					<TemplateAndProjectFiller
 						projectId={projectId}
@@ -710,7 +710,7 @@ function ProjectTasksList({
 						}}
 					/>
 				</Suspense>
-			</>
+			</div>
 		);
 	}
 
@@ -790,30 +790,49 @@ function ProjectTasksList({
 				>
 					<ModalElem>
 						<Heading>
-							Êtes-vous sûr de vouloir supprimer cette section ?
+							<fbt desc="remove section title">
+								Êtes-vous sûr de vouloir supprimer cette section
+								?
+							</fbt>
 						</Heading>
-						<P>
-							Vous allez supprimer la section "
-							{removeSectionModalOpen.name}", en supprimant cette
-							section vous allez supprimer les tâches suivantes:
-						</P>
-						<DisableTask>
-							{removeSectionModalOpen.items.map(task => (
-								<Task item={task} key={task.id} noData />
-							))}
-						</DisableTask>
-						<P>
-							Vous pouvez glisser/déposer ses tâches dans une
-							autre section pour ne pas qu'elles soient
-							supprimées.
-						</P>
+						{removeSectionModalOpen.items.length > 0 && (
+							<>
+								<P>
+									<fbt desc="remove section notice">
+										Vous allez supprimer la section "<fbt:param name="sectionName">
+											{removeSectionModalOpen.name}
+										</fbt:param>". En supprimant cette
+										section, vous allez supprimer les tâches
+										suivantes :
+									</fbt>
+								</P>
+								<DisableTask>
+									{removeSectionModalOpen.items.map(task => (
+										<Task
+											item={task}
+											key={task.id}
+											noData
+										/>
+									))}
+								</DisableTask>
+								<P>
+									<fbt desc="remove section notice 2">
+										Vous pouvez glisser/déposer ces tâches
+										dans une autre section afin qu'elles ne
+										soient pas supprimées.
+									</fbt>
+								</P>
+							</>
+						)}
 						<ModalActions>
 							<Button
 								link
 								grey
 								onClick={() => setRemoveSectionModalOpen(false)}
 							>
-								Annuler
+								<fbt desc="remove section cancel button">
+									Annuler
+								</fbt>
 							</Button>
 							<Button
 								big
@@ -828,7 +847,9 @@ function ProjectTasksList({
 									setRemoveSectionModalOpen(false);
 								}}
 							>
-								Supprimer
+								<fbt desc="remove section confirm button">
+									Supprimer
+								</fbt>
 							</Button>
 						</ModalActions>
 					</ModalElem>

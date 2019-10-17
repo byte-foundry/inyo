@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/browser';
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
+import fbt from '../fbt/fbt.macro';
 import {FlexRow} from '../utils/content';
 import {ReactComponent as AppLogo} from '../utils/icons/appLogo.svg';
 import errorIllus from '../utils/images/bermuda-fatal-error.svg';
@@ -90,28 +91,39 @@ class SentryReporter extends Component {
 	render() {
 		const {error} = this.state;
 
-		if (error && error.message.includes('Loading chunk')) {
+		if (
+			error
+			&& (error.message.includes('Loading chunk')
+				|| error.message.includes('Loading CSS chunk'))
+		) {
 			return (
 				<ReporterMain>
 					<AppLogo />
 					<ReporterRow>
 						<Illus src={errorIllus} />
 						<ErrorText>
-							<ErrorTitle>Erreur de chargement</ErrorTitle>
+							<ErrorTitle>
+								<fbt desc="Update error page title">
+									Erreur de chargement
+								</fbt>
+							</ErrorTitle>
 							<p>
-								Cette erreur peut survenir lorsque l'application
-								vient d'être mise à jour, merci de recharger la
-								page.
-								<br />
-								Si le problème persiste, vous pouvez nous{' '}
-								<A
-									onClick={() => {
-										Sentry.showReportDialog();
-									}}
-								>
-									transmettre cette erreur
-								</A>
-								.
+								<fbt desc="Update error page message">
+									Cette erreur peut survenir lorsque
+									l'application vient d'être mise à jour,
+									merci de recharger la page.
+									<fbt:param name="br">
+										<br />
+									</fbt:param>
+									Si le problème persiste, vous pouvez nous{' '}
+									<A
+										onClick={() => Sentry.showReportDialog()
+										}
+									>
+										transmettre cette erreur
+									</A>
+									.
+								</fbt>
 							</p>
 							<LinkButton
 								to="/app"
@@ -119,7 +131,9 @@ class SentryReporter extends Component {
 									window.location.href = '/app';
 								}}
 							>
-								Recharger la page
+								<fbt desc="Error page refresh link">
+									Recharger la page
+								</fbt>
 							</LinkButton>
 						</ErrorText>
 					</ReporterRow>
@@ -135,18 +149,23 @@ class SentryReporter extends Component {
 						<Illus src={errorIllus} />
 						<ErrorText>
 							<ErrorTitle>
-								Quelque chose ne s'est pas passé comme prévu.
+								<fbt desc="Generic error page title">
+									Quelque chose ne s'est pas passé comme
+									prévu.
+								</fbt>
 							</ErrorTitle>
 							<div>
-								Si vous souhaitez nous aider, vous pouvez nous{' '}
-								<A
-									onClick={() => {
-										Sentry.showReportDialog();
-									}}
-								>
-									transmettre cette erreur
-								</A>
-								. Voici l'erreur en question :
+								<fbt desc="Generic error page message">
+									Si vous souhaitez nous aider, vous pouvez
+									nous{' '}
+									<A
+										onClick={() => Sentry.showReportDialog()
+										}
+									>
+										transmettre cette erreur
+									</A>
+									. Voici l'erreur en question :
+								</fbt>
 							</div>
 							<ErrorCode>
 								<code>{error.toString()}</code>
@@ -157,7 +176,9 @@ class SentryReporter extends Component {
 									this.setState({error: null});
 								}}
 							>
-								Revenir à la page d'accueil
+								<fbt desc="Error page get back link">
+									Revenir à la page d'accueil
+								</fbt>
 							</LinkButton>
 						</ErrorText>
 					</ReporterRow>

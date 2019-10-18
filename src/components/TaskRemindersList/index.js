@@ -135,7 +135,7 @@ function TaskRemindersList({
 					);
 
 					return (
-						<ReminderContainer>
+						<ReminderContainer key={reminder.id}>
 							{noLink ? (
 								reminderText
 							) : (

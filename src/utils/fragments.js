@@ -24,6 +24,8 @@ export const REMINDER_FRAGMENT = gql`
 			linkedCustomer {
 				id
 				name
+				firstName
+				lastName
 			}
 		}
 	}

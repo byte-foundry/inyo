@@ -182,6 +182,8 @@ export const getEventFromGoogleCalendarEvents = (
 					: moment(item.end.date),
 		}));
 
+		formattedEvents.sort((a, b) => (a.start.isBefore(b.start) ? -1 : 1));
+
 		formattedEvents.forEach((event) => {
 			if (event.severalDays) {
 			}

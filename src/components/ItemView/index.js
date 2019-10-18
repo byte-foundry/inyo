@@ -1118,16 +1118,20 @@ const Item = ({
 					/>
 				</>
 			)}
-			<SubHeading>
-				<fbt project="inyo" desc="Comments">
-					Commentaires
-				</fbt>
-			</SubHeading>
-			<CommentList
-				itemId={item.id}
-				customerToken={customerToken}
-				linkedCustomer={item.linkedCustomer}
-			/>
+			{item.type !== 'PERSONAL' && (
+				<>
+					<SubHeading>
+						<fbt project="inyo" desc="Comments">
+							Commentaires
+						</fbt>
+					</SubHeading>
+					<CommentList
+						itemId={item.id}
+						customerToken={customerToken}
+						linkedCustomer={item.linkedCustomer}
+					/>
+				</>
+			)}
 			<HR />
 			<FlexRowButtons justifyContent="space-between">
 				<FlexRowButtons>

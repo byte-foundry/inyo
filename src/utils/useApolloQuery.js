@@ -16,9 +16,6 @@ export default function useBaseQuery(query, options) {
 	// we used the serialized options to keep track of the queries
 	const queryKey = JSON.stringify(updatedOptions);
 
-	console.log('query', queryDataRefs.size);
-	console.log('force', forceUpdateRefs.size);
-
 	if (!queryDataRefs.has(queryKey)) {
 		queryDataRefs.set(
 			queryKey,

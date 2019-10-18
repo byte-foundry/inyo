@@ -102,7 +102,9 @@ function CommentList({itemId, customerToken, linkedCustomer}) {
 		&& !(
 			data.item
 			&& typeof error.message === 'string'
-			&& error.message.includes('NetworkError')
+			&& (error.message.includes('NetworkError')
+				|| error.message.includes('Network error')
+				|| error.message.includes('Whoops'))
 		)
 	) throw error;
 

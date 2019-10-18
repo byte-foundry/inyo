@@ -161,7 +161,9 @@ const DashboardTasks = ({location, history}) => {
 		&& !(
 			data.me
 			&& typeof error.message === 'string'
-			&& error.message.includes('NetworkError')
+			&& (error.message.includes('NetworkError')
+				|| error.message.includes('Network error')
+				|| error.message.includes('Whoops'))
 		)
 	) throw error;
 

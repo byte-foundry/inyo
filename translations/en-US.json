@@ -501,6 +501,26 @@
     }
    ]
   },
+  "QehVyg4J4kupjKZVBZwuUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "OAbwL0JVNTtFr6h1DMt9hQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$5000",
+     "variations": {}
+    }
+   ]
+  },
   "T9u2jJt5ihci27CmtReUng==": {
    "tokens": [],
    "types": [],
@@ -1247,26 +1267,6 @@
    "translations": [
     {
      "translation": "Duration",
-     "variations": {}
-    }
-   ]
-  },
-  "p038/T94EO/ejzQvOS1Hqg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{timeEstimated} days",
-     "variations": {}
-    }
-   ]
-  },
-  "q3mgeZLjbygjxiRUSkrzzg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -2311,6 +2311,176 @@
     }
    ]
   },
+  "zBZuNcVFtlSTSDHHAM01VA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget du projet [icon]}{input}",
+     "variations": {}
+    }
+   ]
+  },
+  "saVl5y7buvhWZNzt90QZWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's budget {icon}",
+     "variations": {}
+    }
+   ]
+  },
+  "oNo+sJB8SjEx1vWwMnzPdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amount}",
+     "variations": {}
+    }
+   ]
+  },
+  "+PZGURjXQmPmRNqpakdFYw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget restant}{=[budget] €}",
+     "variations": {}
+    }
+   ]
+  },
+  "Cs8A5dJl8JGwSGqN3gYa4g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Remaining budget",
+     "variations": {}
+    }
+   ]
+  },
+  "QNFfEDPY7y1v2rOCUQ+5AQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "Z9MDOczz8FmDkxVwlDOIAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Rentabilité}{=[budget]}",
+     "variations": {}
+    }
+   ]
+  },
+  "wjlAZv0/o1YsxTgBM5luLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Profitability",
+     "variations": {}
+    }
+   ]
+  },
+  "knP8NJLKt4OXXHt3sOHS9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "rG+CiBj1sO6n+NvtpQIFhg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO {=Vous n'avez pas encore mis de budget pour ce projet.}",
+     "variations": {}
+    }
+   ]
+  },
+  "Njdk3s+Rn38C4F74ZpAQ4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Vous n'avez pas encore mis de budget pour ce projet.",
+     "variations": {}
+    }
+   ]
+  },
+  "Hq/WLMdSVFGyYiM/ggoR5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Budget du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "uXlGZSghlCKv2CyuFk0Yrg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO 5000 €",
+     "variations": {}
+    }
+   ]
+  },
+  "0/0IE5XdLNMJoppUG+lgBw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Valider",
+     "variations": {}
+    }
+   ]
+  },
+  "oxMtxT5kF8x+GjJX9mRYqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO {=Définissez votre TJM pour profiter des fonctionnalités de budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "RkcVHXpSqsj+4HhGOadeVA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Définissez votre TJM pour profiter des fonctionnalités de budget",
+     "variations": {}
+    }
+   ]
+  },
+  "ZtGFvH83j2mpmRnBiaBlKA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Something went wrong",
+     "variations": {}
+    }
+   ]
+  },
   "S9/JwL4Xm5vX6oSwkK+/wg==": {
    "tokens": [],
    "types": [],
@@ -3031,6 +3201,26 @@
     }
    ]
   },
+  "dHcpbGCWGjNetryXwMmZiA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "imwvh09INyILzvv6mIY3PA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Budget du projet",
+     "variations": {}
+    }
+   ]
+  },
   "L067xGXkMfARcJBjS7f+9g==": {
    "tokens": [],
    "types": [],
@@ -3167,6 +3357,36 @@
    "translations": [
     {
      "translation": "This is what your client will see.",
+     "variations": {}
+    }
+   ]
+  },
+  "wgPKBRYiyHkFULq3Ns1RUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "ORvhi4PTIwYzCN7QQNuvzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Budget du projet",
+     "variations": {}
+    }
+   ]
+  },
+  "v7fom6AQjJQbvBn0igL0zg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO {amount} €",
      "variations": {}
     }
    ]
@@ -3427,16 +3647,6 @@
    "translations": [
     {
      "translation": "Delete this tag",
-     "variations": {}
-    }
-   ]
-  },
-  "ZtGFvH83j2mpmRnBiaBlKA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Something went wrong",
      "variations": {}
     }
    ]
@@ -6867,6 +7077,26 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "p038/T94EO/ejzQvOS1Hqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{timeEstimated} days",
+     "variations": {}
+    }
+   ]
+  },
+  "q3mgeZLjbygjxiRUSkrzzg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
      "variations": {}
     }
    ]

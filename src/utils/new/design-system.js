@@ -14,6 +14,7 @@ import {
 	mediumGrey,
 	mediumPurple,
 	primaryBlack,
+	primaryBlue,
 	primaryGrey,
 	primaryPurple,
 	primaryRed,
@@ -924,13 +925,18 @@ export const TaskIcon = styled('div')`
 					= ITEM_TYPES.find(t => t.type === props.type)
 					|| ITEM_TYPES[0];
 
-		let icon = typeInfos.iconUrl;
+		if (props.noAnim) {
+			return props.status === itemStatuses.FINISHED
+				? typeInfos.iconUrlValidated
+				: typeInfos.iconUrl;
+		}
 
-		icon = typeInfos.iconUrlValidated || typeInfos.iconUrl;
-		return icon;
+		return typeInfos.iconUrlValidated || typeInfos.iconUrl;
 	}});
 
-		animation: ${props => (props.status === itemStatuses.FINISHED ? 'none' : 'growth 300ms')};
+		animation: ${props => (props.status === itemStatuses.FINISHED || props.noAnim
+		? 'none'
+		: 'growth 300ms')};
 
 		@keyframes growth {
 			0% {
@@ -953,5 +959,49 @@ export const TaskIcon = styled('div')`
 		margin: 0;
 		position: absolute;
 		left: -1rem;
+	}
+`;
+
+export const Pie = styled('div')`
+	width: ${props => (props.big ? '300px' : '18px')};
+	height: ${props => (props.big ? '300px' : '18px')};
+	border-radius: 50%;
+	background: ${props => (props.value <= 1
+		? accentGrey
+		: props.value >= 2
+			? primaryRed
+			: primaryBlue)};
+	background-image: linear-gradient(
+		to right,
+		transparent 50%,
+		currentColor 0
+	);
+	color: ${props => (props.value <= 1 ? primaryBlue : primaryRed)};
+	position: relative;
+
+	::before {
+		content: '';
+		display: block;
+		margin-left: 50%;
+		height: 100%;
+		border-radius: 0 100% 100% 0 / 50%;
+		background-color: inherit;
+		transform-origin: left;
+		background: ${props => (props.value % 1 >= 0.5 || props.value >= 2 ? 'currentColor' : '')};
+		transform: rotate(
+			${props => (props.value < 2 ? props.value % 0.5 : 1)}turn
+		);
+	}
+
+	::after {
+		content: '';
+		width: ${props => (props.big ? '270px' : '12px')};
+		height: ${props => (props.big ? '270px' : '12px')};
+		position: absolute;
+		top: ${props => (props.big ? '15px' : '3px')};
+		left: ${props => (props.big ? '15px' : '3px')};
+		display: block;
+		background: ${primaryWhite};
+		border-radius: 50%;
 	}
 `;

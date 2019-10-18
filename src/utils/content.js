@@ -466,6 +466,8 @@ const LoadingMain = styled('div')`
 `;
 
 export const LoadingLogo = styled(InyoLogo)`
+	display: block;
+	margin: auto;
 	animation: breathing 2s ease-out infinite normal;
 
 	@keyframes breathing {

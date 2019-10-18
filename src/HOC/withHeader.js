@@ -43,7 +43,7 @@ const TogglingTopBar = ({children}) => {
 						<MaterialIcon
 							icon={visible ? 'chevron_right' : 'chevron_left'}
 							size="tiny"
-							color={primaryWhite}
+							color="inherit"
 						/>
 					</Tooltip>
 				</ToggleMenu>
@@ -169,18 +169,18 @@ const TogglingTopBar = ({children}) => {
 };
 
 const withHeader = Component => (...args) => (
-		<>
-			<LeftMenu>
-				<TopBarLogoNotif>
-					<TopBarLogo to="/app/dashboard" />
-					<NotificationTrayButton mobile />
-				</TopBarLogoNotif>
-				<NotificationTrayButton desktop />
-				<AssistantActions />
-			</LeftMenu>
-			<Component {...args} />
-			<TogglingTopBar></TogglingTopBar>
-		</>
+	<>
+		<LeftMenu>
+			<TopBarLogoNotif>
+				<TopBarLogo to="/app/dashboard" />
+				<NotificationTrayButton mobile />
+			</TopBarLogoNotif>
+			<NotificationTrayButton desktop />
+			<AssistantActions />
+		</LeftMenu>
+		<Component {...args} />
+		<TogglingTopBar></TogglingTopBar>
+	</>
 );
 
 export default withHeader;

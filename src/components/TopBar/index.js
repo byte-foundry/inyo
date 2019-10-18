@@ -61,16 +61,6 @@ export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 		color: ${primaryBlack};
 		background-color: ${primaryWhite};
 	}
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		margin-left: 0;
-		margin-right: 1.2rem;
-		font-size: 0.8rem;
-
-		&:first-of-type {
-			margin-left: 0.7rem;
-		}
-	}
 `;
 
 export const Label = styled('span')``;
@@ -90,20 +80,33 @@ const TopBar = styled('div')`
 	padding-top: 0.8rem;
 
 	background-color: ${darkGrey};
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		align-items: center;
-		margin-bottom: 1rem;
-		height: 6rem;
-		width: 100%;
-		overflow-x: auto;
-		padding-right: 1rem;
-		display: grid;
-		grid-auto-rows: 1fr;
-	}
+	color: ${primaryWhite};
 
 	span {
 		display: ${props => (props.visible ? 'inline' : 'none')};
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0;
+		padding: 0;
+		padding-top: ${props => (props.visible ? '28px' : '10px')};
+
+		position: fixed;
+		z-index: 100;
+
+		top: ${props => (props.visible ? '0' : 'auto')};
+		right: ${props => (props.visible ? '0' : '1em')};
+		bottom: ${props => (props.visible ? '0' : 'auto')};
+		height: ${props => (props.visible ? 'auto' : '40px')};
+		width: ${props => (props.visible ? 'auto' : '50px;')};
+
+		span {
+			display: inline;
+		}
+
+		a {
+			width: ${props => (props.visible ? 'calc(100vw - 30px);' : '0')};
+		}
 	}
 `;
 

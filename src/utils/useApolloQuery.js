@@ -16,6 +16,9 @@ export default function useBaseQuery(query, options) {
 	// we used the serialized options to keep track of the queries
 	const queryKey = JSON.stringify(updatedOptions);
 
+	console.log('query', queryDataRefs.size);
+	console.log('force', forceUpdateRefs.size);
+
 	if (!queryDataRefs.has(queryKey)) {
 		queryDataRefs.set(
 			queryKey,
@@ -78,7 +81,10 @@ export default function useBaseQuery(query, options) {
 		[],
 	);
 
+	const removeForceUpdate = () => forceUpdateRefs.delete(forceUpdate);
+
 	result.observable = queryData.currentObservable.query;
+	result.removeForceUpdate = removeForceUpdate;
 
 	return result;
 }

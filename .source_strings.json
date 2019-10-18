@@ -744,12 +744,40 @@
   },
   {
    "hashToText": {
-    "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
+    "QehVyg4J4kupjKZVBZwuUw==": "Budget"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
    "line_beg": 257,
+   "col_beg": 6,
+   "line_end": 259,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project name label",
+   "project": "inyo",
+   "jsfbt": "Budget"
+  },
+  {
+   "hashToText": {
+    "OAbwL0JVNTtFr6h1DMt9hQ==": "5000 €"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 262,
+   "col_beg": 6,
+   "line_end": 264,
+   "col_end": 12,
+   "type": "text",
+   "desc": "new project name placeholder",
+   "project": "inyo",
+   "jsfbt": "5000 €"
+  },
+  {
+   "hashToText": {
+    "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 276,
    "col_beg": 8,
-   "line_end": 262,
+   "line_end": 281,
    "col_end": 14,
    "type": "text",
    "desc": "create project deadline",
@@ -761,9 +789,9 @@
     "iPGKvsjHfnnJw/l7IwyApg==": "Aucune date limite"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 272,
+   "line_beg": 291,
    "col_beg": 9,
-   "line_end": 274,
+   "line_end": 293,
    "col_end": 15,
    "type": "text",
    "desc": "no deadline",
@@ -775,9 +803,9 @@
     "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 301,
+   "line_beg": 320,
    "col_beg": 5,
-   "line_end": 303,
+   "line_end": 322,
    "col_end": 11,
    "type": "text",
    "desc": "cancel create project",
@@ -789,9 +817,9 @@
     "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 306,
+   "line_beg": 325,
    "col_beg": 5,
-   "line_end": 308,
+   "line_end": 327,
    "col_end": 11,
    "type": "text",
    "desc": "confirm create project",
@@ -3548,6 +3576,272 @@
   },
   {
    "hashToText": {
+    "zBZuNcVFtlSTSDHHAM01VA==": "{=Budget du projet [icon]}{input}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 174,
+   "col_beg": 1,
+   "line_end": 207,
+   "col_end": 7,
+   "type": "text",
+   "desc": "project's budget",
+   "project": "",
+   "jsfbt": "{=Budget du projet [icon]}{input}"
+  },
+  {
+   "hashToText": {
+    "saVl5y7buvhWZNzt90QZWA==": "Budget du projet {icon}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 175,
+   "col_beg": 2,
+   "line_end": 184,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget du projet [icon]}{=}\"",
+   "project": "",
+   "jsfbt": "Budget du projet {icon}"
+  },
+  {
+   "hashToText": {
+    "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 195,
+   "col_beg": 6,
+   "line_end": 195,
+   "col_end": 39,
+   "type": "text",
+   "desc": "confirm",
+   "project": "",
+   "jsfbt": "Valider"
+  },
+  {
+   "hashToText": {
+    "oNo+sJB8SjEx1vWwMnzPdg==": "{amount} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 200,
+   "col_beg": 5,
+   "line_end": 203,
+   "col_end": 11,
+   "type": "text",
+   "desc": "budget amount",
+   "project": "",
+   "jsfbt": "{amount} €"
+  },
+  {
+   "hashToText": {
+    "+PZGURjXQmPmRNqpakdFYw==": "{=Budget restant}{=[budget] €}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 239,
+   "col_beg": 6,
+   "line_end": 247,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project's budget",
+   "project": "",
+   "jsfbt": "{=Budget restant}{=[budget] €}"
+  },
+  {
+   "hashToText": {
+    "Cs8A5dJl8JGwSGqN3gYa4g==": "Budget restant"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 240,
+   "col_beg": 7,
+   "line_end": 240,
+   "col_end": 48,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget restant}{=[budget] €}\"",
+   "project": "",
+   "jsfbt": "Budget restant"
+  },
+  {
+   "hashToText": {
+    "QNFfEDPY7y1v2rOCUQ+5AQ==": "{budget} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 241,
+   "col_beg": 7,
+   "line_end": 246,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget restant}{=[budget] €}\"",
+   "project": "",
+   "jsfbt": "{budget} €"
+  },
+  {
+   "hashToText": {
+    "Z9MDOczz8FmDkxVwlDOIAQ==": "{=Rentabilité}{=[budget]}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 250,
+   "col_beg": 6,
+   "line_end": 257,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project's budget",
+   "project": "",
+   "jsfbt": "{=Rentabilité}{=[budget]}"
+  },
+  {
+   "hashToText": {
+    "wjlAZv0/o1YsxTgBM5luLw==": "Rentabilité"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 251,
+   "col_beg": 7,
+   "line_end": 251,
+   "col_end": 45,
+   "type": "text",
+   "desc": "In the phrase: \"{=Rentabilité}{=[budget]}\"",
+   "project": "",
+   "jsfbt": "Rentabilité"
+  },
+  {
+   "hashToText": {
+    "knP8NJLKt4OXXHt3sOHS9w==": "{budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 252,
+   "col_beg": 7,
+   "line_end": 256,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Rentabilité}{=[budget]}\"",
+   "project": "",
+   "jsfbt": "{budget}"
+  },
+  {
+   "hashToText": {
+    "rG+CiBj1sO6n+NvtpQIFhg==": "{=Vous n'avez pas encore mis de budget pour ce projet.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 277,
+   "col_beg": 4,
+   "line_end": 281,
+   "col_end": 10,
+   "type": "text",
+   "desc": "No project Budget",
+   "project": "",
+   "jsfbt": "{=Vous n'avez pas encore mis de budget pour ce projet.}"
+  },
+  {
+   "hashToText": {
+    "Njdk3s+Rn38C4F74ZpAQ4Q==": "Vous n'avez pas encore mis de budget pour ce projet."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 278,
+   "col_beg": 5,
+   "line_end": 280,
+   "col_end": 19,
+   "type": "text",
+   "desc": "In the phrase: \"{=Vous n'avez pas encore mis de budget pour ce projet.}\"",
+   "project": "",
+   "jsfbt": "Vous n'avez pas encore mis de budget pour ce projet."
+  },
+  {
+   "hashToText": {
+    "Hq/WLMdSVFGyYiM/ggoR5w==": "Budget du projet"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 283,
+   "col_beg": 12,
+   "line_end": 283,
+   "col_end": 59,
+   "type": "text",
+   "desc": "budget label",
+   "project": "",
+   "jsfbt": "Budget du projet"
+  },
+  {
+   "hashToText": {
+    "uXlGZSghlCKv2CyuFk0Yrg==": "5000 €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 287,
+   "col_beg": 18,
+   "line_end": 287,
+   "col_end": 61,
+   "type": "text",
+   "desc": "budget placeholder",
+   "project": "",
+   "jsfbt": "5000 €"
+  },
+  {
+   "hashToText": {
+    "0/0IE5XdLNMJoppUG+lgBw==": "Valider"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 294,
+   "col_beg": 5,
+   "line_end": 294,
+   "col_end": 48,
+   "type": "text",
+   "desc": "No project Budget",
+   "project": "",
+   "jsfbt": "Valider"
+  },
+  {
+   "hashToText": {
+    "oxMtxT5kF8x+GjJX9mRYqg==": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 299,
+   "col_beg": 3,
+   "line_end": 304,
+   "col_end": 9,
+   "type": "text",
+   "desc": "defined a daily rate",
+   "project": "",
+   "jsfbt": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}"
+  },
+  {
+   "hashToText": {
+    "RkcVHXpSqsj+4HhGOadeVA==": "Définissez votre TJM pour profiter des fonctionnalités de budget"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 300,
+   "col_beg": 4,
+   "line_end": 303,
+   "col_end": 11,
+   "type": "text",
+   "desc": "In the phrase: \"{=Définissez votre TJM pour profiter des fonctionnalités de budget}\"",
+   "project": "",
+   "jsfbt": "Définissez votre TJM pour profiter des fonctionnalités de budget"
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 332,
+   "col_beg": 6,
+   "line_end": 334,
+   "col_end": 12,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "ZtGFvH83j2mpmRnBiaBlKA==": "Un problème c'est produit"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 360,
+   "col_beg": 8,
+   "line_end": 362,
+   "col_end": 14,
+   "type": "text",
+   "desc": "something went wrong",
+   "project": "inyo",
+   "jsfbt": "Un problème c'est produit"
+  },
+  {
+   "hashToText": {
     "S9/JwL4Xm5vX6oSwkK+/wg==": "Nom de la section"
    },
    "filepath": "src/components/ProjectCustomerTasksList/index.js",
@@ -4765,12 +5059,40 @@
   },
   {
    "hashToText": {
-    "L067xGXkMfARcJBjS7f+9g==": "Seulement visibles par vous"
+    "dHcpbGCWGjNetryXwMmZiA==": "Budget"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 277,
    "col_beg": 6,
    "line_end": 282,
+   "col_end": 12,
+   "type": "text",
+   "desc": "sidebar project main view tooltip",
+   "project": "inyo",
+   "jsfbt": "Budget"
+  },
+  {
+   "hashToText": {
+    "imwvh09INyILzvv6mIY3PA==": "Budget du projet"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 293,
+   "col_beg": 8,
+   "line_end": 298,
+   "col_end": 14,
+   "type": "text",
+   "desc": "sidebar project budget projet",
+   "project": "inyo",
+   "jsfbt": "Budget du projet"
+  },
+  {
+   "hashToText": {
+    "L067xGXkMfARcJBjS7f+9g==": "Seulement visibles par vous"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 306,
+   "col_beg": 6,
+   "line_end": 311,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project personal notes tooltip",
@@ -4782,9 +5104,9 @@
     "ikjA3VDH0k6vn2narEXR3Q==": "Notes personnelles"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 293,
+   "line_beg": 322,
    "col_beg": 8,
-   "line_end": 298,
+   "line_end": 327,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project personal notes label",
@@ -4796,9 +5118,9 @@
     "fLR9KuAsosc/XK5bMWk7Mg==": "Visibles par tout le monde"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 306,
+   "line_beg": 335,
    "col_beg": 6,
-   "line_end": 311,
+   "line_end": 340,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project shared notes tooltip",
@@ -4810,9 +5132,9 @@
     "jFCupc9C9dtcx4e30UI0Iw==": "Notes partagées"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 322,
+   "line_beg": 351,
    "col_beg": 8,
-   "line_end": 327,
+   "line_end": 356,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project shared notes label",
@@ -4824,9 +5146,9 @@
     "rH9wh0hUEutLLvjXj/nvVA==": "Changer le client lié au projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 340,
+   "line_beg": 369,
    "col_beg": 9,
-   "line_end": 345,
+   "line_end": 374,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project change customer tooltip",
@@ -4838,9 +5160,9 @@
     "fe/ia+wsEnlijrwwdh21Ww==": "Évolution du projet, tâches qui requièrent une action, etc."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 362,
+   "line_beg": 391,
    "col_beg": 8,
-   "line_end": 368,
+   "line_end": 397,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project notify customer tooltip",
@@ -4852,9 +5174,9 @@
     "aCi6l7XNAZcbqUgKkFcIiw==": "Notifier mon client par email"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 417,
+   "line_beg": 446,
    "col_beg": 9,
-   "line_end": 422,
+   "line_end": 451,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project notify customer label",
@@ -4866,9 +5188,9 @@
     "BMeuJg0uY2MVeovVNQK5Hw==": "En décochant cette option, votre client ne recevra aucune notification de l'avancée de votre projet."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 435,
+   "line_beg": 464,
    "col_beg": 9,
-   "line_end": 442,
+   "line_end": 471,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project notify customer modal warning",
@@ -4880,9 +5202,9 @@
     "RltTNFLZaA3NsiUnfH0sDQ==": "Cependant, certaines des tâches sont attribuées à votre client et nécessitent l'envoi d'emails à celui-ci. Désactiver les notifications changera aussi l'attribution de ces tâches et votre client n'en sera pas averti."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 446,
+   "line_beg": 475,
    "col_beg": 10,
-   "line_end": 457,
+   "line_end": 486,
    "col_end": 16,
    "type": "text",
    "desc": "sidebar project notify customer modal task warning",
@@ -4894,9 +5216,9 @@
     "v6Zu+7e97z2OYmTF4p4PrA==": "Êtes-vous sûr de vouloir continuer?"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 461,
+   "line_beg": 490,
    "col_beg": 9,
-   "line_end": 463,
+   "line_end": 492,
    "col_end": 15,
    "type": "text",
    "desc": "are you sure",
@@ -4908,9 +5230,9 @@
     "CF4JsqOY3g7b6ZAwfWBAGg==": "Ce que verra votre client lorsqu'il se connecte au projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 469,
+   "line_beg": 498,
    "col_beg": 8,
-   "line_end": 475,
+   "line_end": 504,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project customer view tooltip",
@@ -4922,9 +5244,9 @@
     "gofuUhe30NUXKseA+qKbNQ==": "Voir la vue de mon client"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 487,
+   "line_beg": 516,
    "col_beg": 10,
-   "line_end": 492,
+   "line_end": 521,
    "col_end": 16,
    "type": "text",
    "desc": "sidebar project customer view label",
@@ -4936,9 +5258,9 @@
     "5CkV1QNEPRDdQTru3O35Dw==": "Ajouter un client"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 512,
+   "line_beg": 541,
    "col_beg": 8,
-   "line_end": 517,
+   "line_end": 546,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project add a customer",
@@ -4950,9 +5272,9 @@
     "kijfhgj2q4NVR0iPj3IV7g==": "Cette vue est celle que verra votre client lorsqu'il devra effectuer des actions."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 557,
+   "line_beg": 586,
    "col_beg": 6,
-   "line_end": 563,
+   "line_end": 592,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project customer view modal info",
@@ -4961,12 +5283,54 @@
   },
   {
    "hashToText": {
+    "wgPKBRYiyHkFULq3Ns1RUw==": "Budget"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 600,
+   "col_beg": 6,
+   "line_end": 602,
+   "col_end": 12,
+   "type": "text",
+   "desc": "sidebar budget",
+   "project": "inyo",
+   "jsfbt": "Budget"
+  },
+  {
+   "hashToText": {
+    "ORvhi4PTIwYzCN7QQNuvzQ==": "Budget du projet"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 606,
+   "col_beg": 7,
+   "line_end": 608,
+   "col_end": 13,
+   "type": "text",
+   "desc": "sidebar project budget",
+   "project": "inyo",
+   "jsfbt": "Budget du projet"
+  },
+  {
+   "hashToText": {
+    "v7fom6AQjJQbvBn0igL0zg==": "{amount} €"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 612,
+   "col_beg": 7,
+   "line_end": 617,
+   "col_end": 13,
+   "type": "text",
+   "desc": "sidebar budget amount",
+   "project": "",
+   "jsfbt": "{amount} €"
+  },
+  {
+   "hashToText": {
     "RZM13r5SmAgDHVgDTxQ+dg==": "Ajouter un collaborateur"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 583,
+   "line_beg": 637,
    "col_beg": 7,
-   "line_end": 588,
+   "line_end": 642,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project add collaborator label",
@@ -4978,9 +5342,9 @@
     "0ywQKSABbvePNgYOS03q0w==": "Collaborateurs du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 596,
+   "line_beg": 650,
    "col_beg": 8,
-   "line_end": 601,
+   "line_end": 655,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project collaborator list heading",
@@ -4992,9 +5356,9 @@
     "FEQsZWN5sT5lTchEhNcWig==": "Deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 622,
+   "line_beg": 676,
    "col_beg": 8,
-   "line_end": 627,
+   "line_end": 681,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project deadline heading",
@@ -5006,9 +5370,9 @@
     "yuKsays7MRc0FJ6J2ZzZuQ==": "Date limite du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 631,
+   "line_beg": 685,
    "col_beg": 9,
-   "line_end": 636,
+   "line_end": 690,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar proejct deadline tooltip",
@@ -5020,9 +5384,9 @@
     "xa4T9aJVs5d5AApNfpZD0w==": "Ajouter une deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 660,
+   "line_beg": 714,
    "col_beg": 8,
-   "line_end": 665,
+   "line_end": 719,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project add a deadline label",
@@ -5034,9 +5398,9 @@
     "nH52xB7hAoZdMWbGpgHFnw==": "Marge restantes"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 700,
+   "line_beg": 754,
    "col_beg": 6,
-   "line_end": 705,
+   "line_end": 759,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar proejct worked days before deadline heading",
@@ -5048,9 +5412,9 @@
     "ID7HPKtlTKMeyu5vkHZXlQ==": "Nombre de jours travaillés avant deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 709,
+   "line_beg": 763,
    "col_beg": 7,
-   "line_end": 714,
+   "line_end": 768,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project worked days before deadline tooltip",
@@ -5062,9 +5426,9 @@
     "Jki2Y6p4cfpaCTxQ41bZRw==": "Copier ces tâches dans un nouveau projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 728,
+   "line_beg": 782,
    "col_beg": 7,
-   "line_end": 733,
+   "line_end": 787,
    "col_end": 13,
    "type": "text",
    "desc": "duplicate project tooltip",
@@ -5076,9 +5440,9 @@
     "uYR1hk87PyaQht9P3tSOlg==": "Dupliquer le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 747,
+   "line_beg": 801,
    "col_beg": 7,
-   "line_end": 752,
+   "line_end": 806,
    "col_end": 13,
    "type": "text",
    "desc": "duplicate project button label",
@@ -5090,9 +5454,9 @@
     "pavdXdUr565DmuS3Z9MnlQ==": "Désarchiver le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 775,
+   "line_beg": 829,
    "col_beg": 8,
-   "line_end": 777,
+   "line_end": 831,
    "col_end": 14,
    "type": "text",
    "desc": "unarchive project",
@@ -5104,9 +5468,9 @@
     "xhRGYwrRenegpYibHaLriQ==": "Supprimer le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 791,
+   "line_beg": 845,
    "col_beg": 8,
-   "line_end": 793,
+   "line_end": 847,
    "col_end": 14,
    "type": "text",
    "desc": "delete project",
@@ -5118,9 +5482,9 @@
     "VqmYRsc7GyBxLKABP9egLw==": "Archiver le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 812,
+   "line_beg": 866,
    "col_beg": 7,
-   "line_end": 814,
+   "line_end": 868,
    "col_end": 13,
    "type": "text",
    "desc": "archive project",
@@ -6557,9 +6921,9 @@
     "FNnWXkrM7hA3vPBzG/OxUg==": "Cette tâche vous a été assigné"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 365,
+   "line_beg": 295,
    "col_beg": 11,
-   "line_end": 370,
+   "line_end": 300,
    "col_end": 17,
    "type": "text",
    "desc": "this task is assigned to you",
@@ -6571,9 +6935,9 @@
     "TNg0g9/rqIBL5sU4Qx7Jtg==": "Choisir un titre pour cette tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 393,
+   "line_beg": 323,
    "col_beg": 8,
-   "line_end": 398,
+   "line_end": 328,
    "col_end": 14,
    "type": "text",
    "desc": "task placeholder name",
@@ -6585,9 +6949,9 @@
     "5u/f09snKvkyQ1LKDHLpsA==": "Jour planifié"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 417,
+   "line_beg": 347,
    "col_beg": 8,
-   "line_end": 419,
+   "line_end": 349,
    "col_end": 14,
    "type": "text",
    "desc": "Planned day",
@@ -6599,9 +6963,9 @@
     "RrL6CmQzt+DS6qUtN9B4rQ==": "Ouvrir le projet"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 443,
+   "line_beg": 373,
    "col_beg": 9,
-   "line_end": 445,
+   "line_end": 375,
    "col_end": 15,
    "type": "text",
    "desc": "open project",
@@ -6613,9 +6977,9 @@
     "dkh9670XE2tzpfITWmPKZg==": "Client responsable de la tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 468,
+   "line_beg": 398,
    "col_beg": 10,
-   "line_end": 473,
+   "line_end": 403,
    "col_end": 16,
    "type": "text",
    "desc": "client assigned to task",
@@ -6627,9 +6991,9 @@
     "I9kOFQ2aWdWtdEYILK6Q6g==": "Collaborateur responsable de la tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 526,
+   "line_beg": 456,
    "col_beg": 10,
-   "line_end": 532,
+   "line_end": 462,
    "col_end": 16,
    "type": "text",
    "desc": "Collaborator assigned to task",
@@ -6641,9 +7005,9 @@
     "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 634,
+   "line_beg": 564,
    "col_beg": 11,
-   "line_end": 639,
+   "line_end": 569,
    "col_end": 17,
    "type": "text",
    "desc": "attached files",
@@ -10386,9 +10750,9 @@
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 100,
+   "line_beg": 101,
    "col_beg": 10,
-   "line_end": 100,
+   "line_end": 101,
    "col_end": 43,
    "type": "text",
    "desc": "basic task name",
@@ -10400,9 +10764,9 @@
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 103,
+   "line_beg": 104,
    "col_beg": 10,
-   "line_end": 106,
+   "line_end": 107,
    "col_end": 4,
    "type": "text",
    "desc": "basic task description",
@@ -10414,9 +10778,9 @@
     "HqN4N4HsjCJSjiswdqQIyQ==": "Tâche personnelle"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 117,
+   "line_beg": 118,
    "col_beg": 10,
-   "line_end": 117,
+   "line_end": 118,
    "col_end": 56,
    "type": "text",
    "desc": "personal task name",
@@ -10428,9 +10792,9 @@
     "bKgT6nnmiyl9m1Y3m9AyNw==": "Une tâche uniquement visible par vous"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 120,
+   "line_beg": 121,
    "col_beg": 10,
-   "line_end": 123,
+   "line_end": 124,
    "col_end": 4,
    "type": "text",
    "desc": "personal task description",
@@ -10442,9 +10806,9 @@
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 134,
+   "line_beg": 135,
    "col_beg": 10,
-   "line_end": 134,
+   "line_end": 135,
    "col_end": 64,
    "type": "text",
    "desc": "customer task name",
@@ -10456,9 +10820,9 @@
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 137,
+   "line_beg": 138,
    "col_beg": 10,
-   "line_end": 140,
+   "line_end": 141,
    "col_end": 4,
    "type": "text",
    "desc": "customer task description",
@@ -10470,9 +10834,9 @@
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 150,
+   "line_beg": 151,
    "col_beg": 10,
-   "line_end": 150,
+   "line_end": 151,
    "col_end": 65,
    "type": "text",
    "desc": "content acquisition name",
@@ -10484,9 +10848,9 @@
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 153,
+   "line_beg": 154,
    "col_beg": 10,
-   "line_end": 156,
+   "line_end": 157,
    "col_end": 4,
    "type": "text",
    "desc": "content acquisition description",
@@ -10498,9 +10862,9 @@
     "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 166,
+   "line_beg": 167,
    "col_beg": 10,
-   "line_end": 166,
+   "line_end": 167,
    "col_end": 50,
    "type": "text",
    "desc": "section name",
@@ -10512,9 +10876,9 @@
     "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 169,
+   "line_beg": 170,
    "col_beg": 10,
-   "line_end": 172,
+   "line_end": 173,
    "col_end": 4,
    "type": "text",
    "desc": "section description",
@@ -10526,9 +10890,9 @@
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 182,
+   "line_beg": 183,
    "col_beg": 10,
-   "line_end": 182,
+   "line_end": 183,
    "col_end": 57,
    "type": "text",
    "desc": "invoice task name",
@@ -10540,9 +10904,9 @@
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 185,
+   "line_beg": 186,
    "col_beg": 10,
-   "line_end": 188,
+   "line_end": 189,
    "col_end": 4,
    "type": "text",
    "desc": "invoice task description",
@@ -10554,9 +10918,9 @@
     "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 240,
+   "line_beg": 241,
    "col_beg": 24,
-   "line_end": 243,
+   "line_end": 244,
    "col_end": 3,
    "type": "text",
    "desc": "first customer email",
@@ -10568,9 +10932,9 @@
     "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 246,
+   "line_beg": 247,
    "col_beg": 24,
-   "line_end": 252,
+   "line_end": 253,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder customer email",
@@ -10582,9 +10946,9 @@
     "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 255,
+   "line_beg": 256,
    "col_beg": 24,
-   "line_end": 261,
+   "line_end": 262,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder customer email",
@@ -10596,9 +10960,9 @@
     "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 264,
+   "line_beg": 265,
    "col_beg": 24,
-   "line_end": 270,
+   "line_end": 271,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder customer email",
@@ -10610,9 +10974,9 @@
     "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 273,
+   "line_beg": 274,
    "col_beg": 24,
-   "line_end": 279,
+   "line_end": 280,
    "col_end": 3,
    "type": "text",
    "desc": "first invoice email",
@@ -10624,9 +10988,9 @@
     "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 282,
+   "line_beg": 283,
    "col_beg": 24,
-   "line_end": 288,
+   "line_end": 289,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder invoice email",
@@ -10638,9 +11002,9 @@
     "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 291,
+   "line_beg": 292,
    "col_beg": 24,
-   "line_end": 297,
+   "line_end": 298,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder invoice email",
@@ -10652,9 +11016,9 @@
     "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 300,
+   "line_beg": 301,
    "col_beg": 24,
-   "line_end": 306,
+   "line_end": 307,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder invoice email",
@@ -10666,9 +11030,9 @@
     "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 309,
+   "line_beg": 310,
    "col_beg": 24,
-   "line_end": 315,
+   "line_end": 316,
    "col_end": 3,
    "type": "text",
    "desc": "fourth reminder invoice email",
@@ -10680,9 +11044,9 @@
     "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 318,
+   "line_beg": 319,
    "col_beg": 24,
-   "line_end": 324,
+   "line_end": 325,
    "col_end": 3,
    "type": "text",
    "desc": "fitfh reminder invoice email",

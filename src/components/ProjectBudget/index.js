@@ -1,15 +1,18 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {FlexColumn, FlexRow} from '../../utils/content';
+import {clamp} from '../../utils/functions';
 import {UPDATE_PROJECT} from '../../utils/mutations';
 import {
 	Button,
 	lightGrey,
+	Pie,
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
@@ -18,6 +21,7 @@ import {
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
 import FormElem from '../FormElem';
+import IconButton from '../IconButton';
 
 const BudgetContainer = styled('div')`
 	flex: 1;
@@ -31,6 +35,7 @@ const BudgetLabel = styled('div')`
 	font-size: 1.6rem;
 	color: ${primaryBlack};
 	font-weight: 500;
+	display: flex;
 `;
 
 const BudgetInfo = styled('div')`
@@ -43,55 +48,9 @@ const BudgetGraphFlex = styled(FlexColumn)`
 	align-items: center;
 `;
 
-const BudgetGraphContainer = styled('div')`
-	position: relative;
-	width: 300px;
-	height: 100%;
-`;
-
-const BudgetGraphBaseline = styled('div')`
-	width: 300px;
-	position: absolute;
-	border-top: solid 1px black;
-	bottom: 0px;
-`;
-
-const BudgetGraphBudget = styled('div')`
-	width: 200px;
-	position: absolute;
-	height: 100%;
-	border: solid 1px black;
-	box-sizing: border-box;
-	bottom: 0px;
-	left: 50px;
-`;
-
-const BudgetGraphSpent = styled('div')`
-	background-color: ${primaryPurple};
-	width: 200px;
-	position: absolute;
-	position: absolute;
-	height: ${props => props.percent}%;
-	bottom: 0px;
-	left: 50px;
-`;
-
-const BudgetGraphHalf = styled('div')`
-	width: 250px;
-	position: absolute;
-	border-top: dashed 1px black;
-	top: 50%;
-	left: 25px;
-`;
-
 const BudgetGraph = ({percent}) => (
 	<BudgetGraphFlex>
-		<BudgetGraphContainer>
-			<BudgetGraphBudget></BudgetGraphBudget>
-			<BudgetGraphSpent percent={percent}></BudgetGraphSpent>
-			<BudgetGraphBaseline></BudgetGraphBaseline>
-			<BudgetGraphHalf></BudgetGraphHalf>
-		</BudgetGraphContainer>
+		<Pie big value={percent} />
 	</BudgetGraphFlex>
 );
 
@@ -121,7 +80,7 @@ const BudgetItem = ({item, defaultDailyPrice}) => {
 
 	return (
 		<BudgetItemRow finished={item.status === 'FINISHED'}>
-			<TaskIcon status={item.status} type={item.type} />
+			<TaskIcon noAnim status={item.status} type={item.type} />
 			<BudgetItemName>{item.name}</BudgetItemName>
 			<BudgetItemBudget>{budget} €</BudgetItemBudget>
 		</BudgetItemRow>
@@ -195,6 +154,59 @@ const BudgetSection = ({section, defaultDailyPrice}) => {
 	);
 };
 
+const EditBudgetButton = styled(IconButton)`
+	width: 2.4rem;
+	height: 2.4rem;
+	margin-left: 0.5rem;
+`;
+
+const BudgetFormContainer = styled('div')`
+	display: flex;
+	width: 60%;
+`;
+
+const BudgetFormElem = styled(FormElem)`
+	margin-bottom: 0px;
+	margin-right: 1rem;
+`;
+
+const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
+	<fbt desc="project's budget">
+		<BudgetLabel>
+				Budget du projet
+			<fbt:param name="icon">
+				<EditBudgetButton
+					onClick={() => setEditing(!editing)}
+					icon="edit"
+					size="tiny"
+				/>
+			</fbt:param>
+		</BudgetLabel>
+		<fbt:param name="input">
+			{editing ? (
+				<BudgetFormContainer>
+					<BudgetFormElem
+						name="budget"
+						type="number"
+						big
+						{...props}
+					/>
+					<Button type="submit">
+						<fbt desc="confirm">Valider</fbt>
+					</Button>
+				</BudgetFormContainer>
+			) : (
+				<BudgetInfo>
+					<fbt desc="budget amount">
+						<fbt:param name="amount">{props.budget}</fbt:param>{' '}
+							€
+					</fbt>
+				</BudgetInfo>
+			)}
+		</fbt:param>
+	</fbt>
+);
+
 const BudgetSections = styled('div')`
 	margin-top: 2rem;
 `;
@@ -217,30 +229,18 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 		<FlexColumn>
 			<FlexRow>
 				<BudgetGraph
-					budget={props.values.budget}
-					sections={sections}
-					percent={(spentBudget / props.values.budget) * 100}
+					percent={Math.max(0, spentBudget / props.budget)}
 				/>
 				<FlexColumn style={{flex: 1}}>
 					<BudgetInfoContainer>
-						<fbt desc="project's budget">
-							<BudgetLabel>Budget du projet</BudgetLabel>
-							<BudgetInfo>
-								<fbt:param name="budget">
-									{props.values.budget}
-								</fbt:param>{' '}
-								€
-							</BudgetInfo>
-						</fbt>
+						<BudgetAmountAndInput {...props} />
 					</BudgetInfoContainer>
 					<BudgetInfoContainer>
 						<fbt desc="project's budget">
 							<BudgetLabel>Budget restant</BudgetLabel>
 							<BudgetInfo>
 								<fbt:param name="budget">
-									{Math.round(
-										props.values.budget - spentBudget,
-									)}
+									{Math.round(props.budget - spentBudget)}
 								</fbt:param>{' '}
 								€
 							</BudgetInfo>
@@ -251,9 +251,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 							<BudgetLabel>Rentabilité</BudgetLabel>
 							<BudgetInfo>
 								<fbt:param name="budget">
-									{(
-										spentBudget / props.values.budget
-									).toFixed(1)}
+									{(spentBudget / props.budget).toFixed(1)}
 								</fbt:param>{' '}
 							</BudgetInfo>
 						</fbt>
@@ -272,25 +270,44 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 	);
 };
 
-const NoBudgetDisplay = props => (
+const NoBudgetDisplay = ({projectHasBudget, userHasDailyRate, ...props}) => (
 	<div>
-		<fbt desc="No project Budget">
-			<div>Vous n'avez pas encore mis de budget pour ce projet.</div>
-			<div>Entrez un budget pour ce projet</div>
-		</fbt>
-		<FormElem
-			{...props}
-			name="budget"
-			type="number"
-			placeholder={<fbt desc="budget placeholder">5000 €</fbt>}
-		/>
-		<Button onClick={props.onSubmit} disabled={props.isSubmitting}>
-			<fbt desc="No project Budget">Valider</fbt>
-		</Button>
+		{!projectHasBudget && (
+			<>
+				<fbt desc="No project Budget">
+					<BudgetLabel>
+						Vous n'avez pas encore mis de budget pour ce projet.
+					</BudgetLabel>
+				</fbt>
+				<FormElem
+					label={<fbt desc="budget label">Budget du projet</fbt>}
+					{...props}
+					name="budget"
+					type="number"
+					placeholder={<fbt desc="budget placeholder">5000 €</fbt>}
+				/>
+				<Button
+					onClick={props.onSubmit}
+					type="submit"
+					disabled={props.isSubmitting}
+				>
+					<fbt desc="No project Budget">Valider</fbt>
+				</Button>
+			</>
+		)}
+		{!userHasDailyRate && (
+			<fbt desc="defined a daily rate">
+				<Link to="/app/account#settings">
+					Définissez votre TJM pour profiter des fonctionnalités de
+					budget
+				</Link>
+			</fbt>
+		)}
 	</div>
 );
 
 const ProjectBudget = ({projectId}) => {
+	const [editing, setEditing] = useState(false);
 	const [updateProject] = useMutation(UPDATE_PROJECT);
 	const {data, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
@@ -302,6 +319,7 @@ const ProjectBudget = ({projectId}) => {
 
 	const {project} = data;
 	const projectHasBudget = data.project.budget !== null;
+	const userHasDailyRate = defaultDailyPrice !== null;
 
 	return (
 		<BudgetContainer>
@@ -320,6 +338,7 @@ const ProjectBudget = ({projectId}) => {
 					actions.setSubmitting(false);
 
 					try {
+						setEditing(false);
 						await updateProject({
 							variables: {
 								projectId,
@@ -327,7 +346,7 @@ const ProjectBudget = ({projectId}) => {
 							},
 							optimisticResponse: {
 								updateProject: {
-									projectId,
+									...project,
 									budget: Number.parseFloat(values.budget),
 								},
 							},
@@ -351,14 +370,21 @@ const ProjectBudget = ({projectId}) => {
 
 					return (
 						<form onSubmit={handleSubmit}>
-							{projectHasBudget ? (
+							{projectHasBudget || userHasDailyRate ? (
 								<BudgetDisplay
 									{...props}
+									budget={project.budget}
 									sections={project.sections}
 									defaultDailyPrice={defaultDailyPrice}
+									editing={editing}
+									setEditing={setEditing}
 								/>
 							) : (
-								<NoBudgetDisplay {...props} />
+								<NoBudgetDisplay
+									projectHasBudget={projectHasBudget}
+									userHasDailyRate={userHasDailyRate}
+									{...props}
+								/>
 							)}
 						</form>
 					);

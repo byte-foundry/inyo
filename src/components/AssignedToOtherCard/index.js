@@ -5,6 +5,10 @@ import {Link, withRouter} from 'react-router-dom';
 import {primaryBlack, primaryGrey} from '../../utils/new/design-system';
 import Icon from '../MaterialIcon';
 
+const Name = styled('div')`
+	${props => props.done && 'text-decoration: line-through;'}
+`;
+
 const CardElem = styled(Link)`
 	color: ${primaryGrey};
 	padding: 5px;
@@ -39,7 +43,7 @@ const AssignedToOtherCard = withRouter(({
 			size="micro"
 			style={{verticalAlign: 'middle', marginRight: '5px'}}
 		/>
-		{task.name}
+		<Name done={task.status === 'FINISHED'}>{task.name}</Name>
 	</CardElem>
 ));
 

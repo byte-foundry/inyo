@@ -79,6 +79,9 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 const CardSubTitle = styled('span')`
 	color: ${accentGrey};
 	margin-top: 2px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 `;
 
 const TagContainer = styled('div')`
@@ -162,7 +165,10 @@ const TaskCard = withRouter(
 					)}{' '}
 					{task.name}
 				</CardTitle>
-				{task.linkedCustomer && (
+				{task.section && (
+					<CardSubTitle>{task.section.project.name}</CardSubTitle>
+				)}
+				{task.linkedCustomer && !task.section && (
 					<CardSubTitle>
 						{task.linkedCustomer.name} (
 						{formatName(

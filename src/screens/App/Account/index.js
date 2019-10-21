@@ -18,6 +18,7 @@ import {Button, H3} from '../../../utils/content';
 import logoutIllus from '../../../utils/images/bermuda-logged-out.svg';
 import {
 	accentGrey,
+	Container,
 	gray20,
 	gray50,
 	Heading,
@@ -27,19 +28,11 @@ import {
 } from '../../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../../utils/queries';
 
-const Container = styled('div')`
-	/* max-width: 980px;
-	margin: 0 auto;
-	min-height: 100vh;
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		max-width: 100%;
-	} */
-`;
-
 const AccountBody = styled('div')`
 	padding-left: 40px;
 	padding-right: 40px;
+	flex: 1;
+	margin-top: 3rem;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;

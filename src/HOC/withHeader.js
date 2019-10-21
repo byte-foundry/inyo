@@ -2,20 +2,18 @@ import styled from '@emotion/styled';
 import React, {useState} from 'react';
 
 import AssistantActions from '../components/AssistantActions';
-import IconButton from '../components/IconButton';
 import MaterialIcon from '../components/MaterialIcon';
 import NotificationTrayButton from '../components/NotificationTrayButton';
 import Tooltip from '../components/Tooltip';
 import TopBar, {
-	Label,
 	TopBarLogo,
 	TopBarLogoNotif,
 	TopBarMenu,
 	TopBarMenuLink,
 } from '../components/TopBar';
 import fbt from '../fbt/fbt.macro';
-import {LeftMenu, primaryWhite} from '../utils/new/design-system';
-import useLocalStorage from '../utils/useLocalStorage';
+import {BREAKPOINTS} from '../utils/constants';
+import {LeftMenu} from '../utils/new/design-system';
 
 export const ToggleMenu = styled('div')`
 	padding: 0.5rem 1rem;
@@ -24,6 +22,10 @@ export const ToggleMenu = styled('div')`
 	align-self: baseline;
 	cursor: pointer;
 	margin-bottom: 1rem;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		padding: 3px 10px;
+	}
 `;
 
 const TogglingTopBar = ({children}) => {
@@ -174,6 +176,7 @@ const withHeader = Component => (...args) => (
 			<TopBarLogoNotif>
 				<TopBarLogo to="/app/dashboard" />
 				<NotificationTrayButton mobile />
+				<AssistantActions mobile />
 			</TopBarLogoNotif>
 			<NotificationTrayButton desktop />
 			<AssistantActions />

@@ -1,22 +1,17 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
-import {useMutation, useQuery} from 'react-apollo-hooks';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
-import {Loading} from '../../utils/content';
-import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
 import {
-	Button,
-	lightGrey,
 	primaryGrey,
-	primaryPurple,
 	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
-import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
+import {GET_REMINDERS} from '../../utils/queries';
 import IconButton from '../IconButton';
 import SidebarDashboardInfos from '../SidebarDashboardInfos';
 import Tooltip from '../Tooltip';
@@ -63,62 +58,19 @@ const AssistantActions = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
 	const [isOpen, setOpen] = useState(false);
-	const {data, refetch, loading} = useQuery(GET_USER_NOTIFICATIONS, {
+	const {data, refetch, loading} = useQuery(GET_REMINDERS, {
 		suspend: false,
 		pollInterval: 1000 * 60,
 	});
-	const [markNotificationsAsRead] = useMutation(MARK_NOTIFICATIONS_AS_READ, {
-		optimisticResponse: {
-			marked: true,
-		},
-		update: (cache, {data: {marked}}) => {
-			if (!marked) return;
 
-			const queryData = cache.readQuery({
-				query: GET_USER_NOTIFICATIONS,
-				variables: {},
-			});
-
-			cache.writeQuery({
-				query: GET_USER_NOTIFICATIONS,
-				variables: {},
-				data: {
-					...queryData,
-					me: {
-						...queryData.me,
-						notifications: queryData.me.notifications.map(n => ({
-							...n,
-							unread: false,
-						})),
-					},
-				},
-			});
-		},
-	});
-
-	let unreadNumber = 0;
+	let pendingReminders = 0;
 
 	if (!loading) {
-		unreadNumber
+		pendingReminders
 			= data.me
-			&& data.me.notifications.reduce(
-				(sum, notification) => sum + (notification.unread ? 1 : 0),
-				0,
-			);
+			&& data.me.reminders.filter(reminder => reminder.status === 'PENDING')
+				.length;
 	}
-
-	useEffect(() => {
-		if (unreadNumber > 0) {
-			document.title = `(${unreadNumber}) Inyo`;
-		}
-		else {
-			document.title = 'Inyo';
-		}
-
-		return () => {
-			document.title = 'Inyo';
-		};
-	}, [unreadNumber]);
 
 	useOnClickOutside(dialogRef, () => {
 		setOpen(false);
@@ -134,7 +86,7 @@ const AssistantActions = ({mobile}) => {
 				}
 			>
 				<Icon
-					someUnread={unreadNumber > 0}
+					someUnread={pendingReminders > 0}
 					ref={icon}
 					onClick={() => {
 						setOpen(!isOpen);

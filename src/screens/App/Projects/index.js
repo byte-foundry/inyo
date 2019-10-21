@@ -192,7 +192,7 @@ function Projects({history}) {
 	);
 
 	return (
-		<Container>
+		<Container style={{minHeight: '100vh'}}>
 			<HelpButton />
 			<Main>
 				<Content

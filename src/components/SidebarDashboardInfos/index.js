@@ -28,15 +28,9 @@ const Wrapper = styled('div')`
 `;
 
 const SubSection = styled('div')`
-	margin-top: 1rem;
 	position: relative;
 	flex: 1;
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		margin-bottom: 1rem;
-		margin-left: 1rem;
-		margin-right: 1rem;
-	}
+	max-width: 100%;
 `;
 
 const SidebarHeading = styled(SubHeading)`
@@ -48,6 +42,9 @@ const SidebarHeading = styled(SubHeading)`
 const NoReminders = styled('div')`
 	font-style: italic;
 	color: ${primaryGrey};
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
 
 const SidebarDashboardInfos = () => {

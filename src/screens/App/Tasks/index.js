@@ -8,6 +8,8 @@ import TasksList from './tasks-lists';
 
 const ProjectMain = styled('div')`
 	min-height: 100vh;
+	flex: 1;
+	margin-top: 3rem;
 `;
 
 class Tasks extends Component {

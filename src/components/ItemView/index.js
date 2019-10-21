@@ -608,14 +608,31 @@ const Item = ({
 								}
 							>
 								{!customerToken && editDueDate ? (
-									<DateInputContainer>
+									<DateInputContainer ref={dateRef}>
 										<DueDateInputElem
 											value={moment(
 												deadline || new Date(),
 											).format('DD/MM/YYYY')}
 										/>
+										<IconButton
+											icon="clear"
+											size="micro"
+											onClick={() => {
+												deadline
+													&& updateItem({
+														variables: {
+															itemId: item.id,
+															dueDate: null,
+														},
+														optimisticResponse: {
+															...item,
+															dueDate: null,
+														},
+													});
+												setEditDueDate(false);
+											}}
+										/>
 										<DateInput
-											innerRef={dateRef}
 											date={moment(
 												deadline || new Date(),
 											)}
@@ -625,7 +642,12 @@ const Item = ({
 														itemId: item.id,
 														dueDate: date.toISOString(),
 													},
+													optimisticResponse: {
+														...item,
+														dueDate: date.toISOString(),
+													},
 												});
+
 												setEditDueDate(false);
 											}}
 											duration={item.unit}

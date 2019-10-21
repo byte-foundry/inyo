@@ -359,6 +359,32 @@ const SidebarProjectInfos = ({
 						/>
 					</SidebarLink>
 				</Tooltip>
+				<Tooltip
+					label={
+						<fbt desc="sidebar project activity link tooltip">
+							Historique des activités du projet
+						</fbt>
+					}
+				>
+					<SidebarLink
+						onClick={() => setView('activity')}
+						active={activeView === 'activity'}
+					>
+						<IconButton
+							icon="history"
+							size="tiny"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project activity link label"
+								>
+									Activité
+								</fbt>
+							}
+							current={activeView === 'activity'}
+						/>
+					</SidebarLink>
+				</Tooltip>
 			</SubSection>
 			<SubSection>
 				{project.customer ? (

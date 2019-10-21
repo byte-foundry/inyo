@@ -3,6 +3,7 @@ import moment from 'moment';
 import React, {Suspense, useCallback} from 'react';
 import {Redirect} from 'react-router-dom';
 
+import ActivityFeed from '../../../components/ActivityFeed';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
@@ -150,6 +151,9 @@ function TasksList({location, history}) {
 						)}
 						{view === 'budget' && (
 							<ProjectBudget projectId={projectId} />
+						)}
+						{view === 'activity' && (
+							<ActivityFeed projectId={projectId} />
 						)}
 					</Suspense>
 					{isTasksView && (

@@ -720,22 +720,17 @@ const Item = ({
 												deadline || new Date(),
 											)}
 											onDateChange={(date) => {
-												const dueDate = moment(
-													deadline,
-												).isSame(date, 'day')
-													? null
-													: date.toISOString();
-
 												updateItem({
 													variables: {
 														itemId: item.id,
-														dueDate,
+														dueDate: date.toISOString(),
 													},
 													optimisticResponse: {
 														...item,
-														dueDate,
+														dueDate: date.toISOString(),
 													},
 												});
+
 												setEditDueDate(false);
 											}}
 											duration={item.unit}

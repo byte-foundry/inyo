@@ -513,6 +513,7 @@ export const GET_SCHEDULE = gql`
 				reminders {
 					id
 					status
+					sendingDate
 					item {
 						id
 						name

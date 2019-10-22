@@ -7,6 +7,7 @@ import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {
+	darkGrey,
 	primaryGrey,
 	primaryRed,
 	primaryWhite,
@@ -33,6 +34,7 @@ const Dropdown = styled('div')`
 `;
 
 const Icon = styled('button')`
+	position: relative;
 	i {
 		color: ${props => (props.someUnread ? primaryRed : '')} !important;
 	}
@@ -54,6 +56,18 @@ const AssistantActionsContainer = styled('div')`
 	`)}
 `;
 
+const Number = styled('div')`
+	border-radius: 50%;
+	position: absolute;
+	font-size: 0.45rem;
+	font-weight: 600;
+	color: ${primaryWhite};
+	background-color: ${darkGrey}D7;
+	bottom: 3px;
+	right: 0;
+	padding: 4px;
+`;
+
 const AssistantActions = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
@@ -67,8 +81,8 @@ const AssistantActions = ({mobile}) => {
 
 	if (!loading) {
 		pendingReminders
-			= data.me
-			&& data.me.reminders.filter(reminder => reminder.status === 'PENDING')
+			= data
+			&& data.reminders.filter(reminder => reminder.status === 'PENDING')
 				.length;
 	}
 
@@ -86,7 +100,6 @@ const AssistantActions = ({mobile}) => {
 				}
 			>
 				<Icon
-					someUnread={pendingReminders > 0}
 					ref={icon}
 					onClick={() => {
 						setOpen(!isOpen);
@@ -97,6 +110,7 @@ const AssistantActions = ({mobile}) => {
 					}}
 				>
 					<IconButton icon="sentiment_very_satisfied" size="small" />
+					<Number>{pendingReminders}</Number>
 				</Icon>
 			</Tooltip>
 			{isOpen && (

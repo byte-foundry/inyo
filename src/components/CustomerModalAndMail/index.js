@@ -4,7 +4,11 @@ import CustomerIntroMail from '../CustomerIntroMail';
 import CustomerModal from '../CustomerModal';
 
 function CustomerModalAndMail({
-	onDismiss, onValidate, customer, ...rest
+	onDismiss,
+	onValidate,
+	customer,
+	close,
+	...rest
 }) {
 	const [createdCustomer, setCreatedCustomer] = useState(false);
 
@@ -12,7 +16,8 @@ function CustomerModalAndMail({
 		<CustomerIntroMail
 			customer={createdCustomer}
 			onDismiss={() => {
-				onDismiss();
+				onValidate(createdCustomer);
+				close();
 			}}
 		/>
 	) : (

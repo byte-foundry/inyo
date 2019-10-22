@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';

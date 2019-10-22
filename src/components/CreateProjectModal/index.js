@@ -141,6 +141,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 							noSelect
 							withBack
 							customer={{name: customerName}}
+							close={() => setCreateCustomer(false)}
 							onDismiss={() => {
 								setCustomerName('');
 								setCreateCustomer(false);

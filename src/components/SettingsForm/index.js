@@ -192,7 +192,9 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
 								workingDays,
-								defaultDailyPrice: dailyRate,
+								defaultDailyPrice: dailyRate
+									? parseInt(dailyRate, 10)
+									: null,
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},
@@ -442,17 +444,17 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 												Calculer mon prix journalier
 											</fbt>
 										</A>
+										{status && status.msg && (
+											<ErrorInput
+												style={{
+													marginBottom: '1rem',
+												}}
+											>
+												{status.msg}
+											</ErrorInput>
+										)}
 									</div>
 								</FormContainer>
-								{status && status.msg && (
-									<ErrorInput
-										style={{
-											marginBottom: '1rem',
-										}}
-									>
-										{status.msg}
-									</ErrorInput>
-								)}
 							</ProfileSection>
 							<UpdateButton type="submit" big>
 								<fbt project="inyo" desc="update">

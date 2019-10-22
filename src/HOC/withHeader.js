@@ -14,6 +14,7 @@ import TopBar, {
 import fbt from '../fbt/fbt.macro';
 import {BREAKPOINTS} from '../utils/constants';
 import {LeftMenu} from '../utils/new/design-system';
+import useLocalStorage from '../utils/useLocalStorage';
 
 export const ToggleMenu = styled('div')`
 	padding: 0.5rem 1rem;
@@ -29,7 +30,7 @@ export const ToggleMenu = styled('div')`
 `;
 
 const TogglingTopBar = ({children}) => {
-	const [visible, toggleMenu] = useState(false);
+	const [visible, toggleMenu] = useLocalStorage('visibleMenu', false);
 
 	return (
 		<TopBar visible={visible}>

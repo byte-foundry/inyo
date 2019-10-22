@@ -46,7 +46,7 @@ import Tooltip from '../Tooltip';
 const SubSection = styled('div')`
 	margin-bottom: 1.5rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-bottom: 1rem;
 	}
 `;
@@ -118,7 +118,7 @@ const SidebarLink = styled('div')`
 	position: relative;
 	max-width: calc(100% - 2rem);
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 	}
 

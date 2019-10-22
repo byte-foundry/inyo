@@ -366,7 +366,7 @@ const ResponsiveDialog = styled(Dialog)`
 	min-width: 500px;
 	position: relative;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		min-width: initial;
 		width: 100vw;
 		padding: 0;
@@ -440,7 +440,7 @@ export const ModalCloseIcon = styled('div')`
 		color: ${primaryWhite};
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		right: 1rem;
 		top: -4.5rem;
 		font-size: 2rem;

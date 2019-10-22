@@ -55,7 +55,10 @@ export const collabStatuses = {
 	CANCELED: 'CANCELED',
 };
 
-export const BREAKPOINTS = [420];
+export const BREAKPOINTS = {
+	mobile: 480,
+	desktopSmall: 1280,
+};
 
 export const CUSTOMER_TASK_TYPES = [
 	'CUSTOMER',

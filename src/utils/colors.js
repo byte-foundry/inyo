@@ -27,4 +27,5 @@ export const primaryGrey = '#A9A9A9';
 export const accentGrey = '#c7c7c7';
 export const lightGrey = '#F8F9FC';
 export const mediumGrey = '#f1f3f4';
+export const darkGrey = '#24272E';
 export const primaryBlack = '#140642';

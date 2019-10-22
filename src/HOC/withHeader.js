@@ -1,5 +1,8 @@
-import React from 'react';
+import styled from '@emotion/styled';
+import React, {useState} from 'react';
 
+import AssistantActions from '../components/AssistantActions';
+import MaterialIcon from '../components/MaterialIcon';
 import NotificationTrayButton from '../components/NotificationTrayButton';
 import Tooltip from '../components/Tooltip';
 import TopBar, {
@@ -9,16 +12,43 @@ import TopBar, {
 	TopBarMenuLink,
 } from '../components/TopBar';
 import fbt from '../fbt/fbt.macro';
+import {BREAKPOINTS} from '../utils/constants';
+import {LeftMenu} from '../utils/new/design-system';
 
-const withHeader = Component => (...args) => (
-	<>
-		<TopBar>
-			<TopBarLogoNotif>
-				<TopBarLogo to="/app/dashboard" />
-				<NotificationTrayButton mobile />
-			</TopBarLogoNotif>
+export const ToggleMenu = styled('div')`
+	padding: 0.5rem 1rem;
+	display: flex;
+	flex-direction: column;
+	align-self: baseline;
+	cursor: pointer;
+	margin-bottom: 1rem;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		padding: 3px 10px;
+	}
+`;
+
+const TogglingTopBar = ({children}) => {
+	const [visible, toggleMenu] = useState(false);
+
+	return (
+		<TopBar visible={visible}>
 			<TopBarMenu>
-				<NotificationTrayButton desktop />
+				<ToggleMenu onClick={() => toggleMenu(!visible)}>
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="toggle menu">
+								Masquer / afficher le menu
+							</fbt>
+						}
+					>
+						<MaterialIcon
+							icon={visible ? 'chevron_right' : 'chevron_left'}
+							size="tiny"
+							color="inherit"
+						/>
+					</Tooltip>
+				</ToggleMenu>
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="dashboard tooltip">
@@ -26,13 +56,17 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink
-						to="/app/dashboard"
-						id="header-menu-dashboard"
-					>
-						<fbt project="inyo" desc="dashboard">
-							Dashboard
-						</fbt>
+					<TopBarMenuLink to="/app/dashboard">
+						<MaterialIcon
+							icon="event"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>
+							<fbt project="inyo" desc="dashboard">
+								Dashboard
+							</fbt>
+						</span>
 					</TopBarMenuLink>
 				</Tooltip>
 				<Tooltip
@@ -42,29 +76,53 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink
-						to="/app/projects"
-						id="header-menu-projects"
-					>
-						<fbt project="inyo" desc="Projets">
-							Projets
-						</fbt>
+					<TopBarMenuLink to="/app/projects">
+						<MaterialIcon
+							icon="folder_open"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>
+							<fbt project="inyo" desc="Projets">
+								Projets
+							</fbt>
+						</span>
 					</TopBarMenuLink>
 				</Tooltip>
 				<Tooltip
 					label={
-						<fbt project="inyo" desc="contacts tooltip">
-							Tous les contacts
+						<fbt project="inyo" desc="clients tooltip">
+							Tous les clients
 						</fbt>
 					}
 				>
-					<TopBarMenuLink
-						to="/app/customers"
-						id="header-menu-contacts"
-					>
-						<fbt project="inyo" desc="Contacts">
-							Contacts
+					<TopBarMenuLink to="/app/customers">
+						<MaterialIcon
+							icon="person"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>
+							<fbt project="inyo" desc="Clients">
+								Clients
+							</fbt>
+						</span>
+					</TopBarMenuLink>
+				</Tooltip>
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="collaborators tooltip">
+							Tous les collaborateurs
 						</fbt>
+					}
+				>
+					<TopBarMenuLink to="/app/collaborators">
+						<MaterialIcon icon="face" size="tiny" color="inherit" />
+						<span>
+							<fbt project="inyo" desc="Collaborators">
+								Collaborateurs
+							</fbt>
+						</span>
 					</TopBarMenuLink>
 				</Tooltip>
 				<Tooltip
@@ -74,10 +132,17 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/stats" id="header-menu-stats">
-						<fbt project="inyo" desc="Statistiques">
-							Statistiques
-						</fbt>
+					<TopBarMenuLink to="/app/stats">
+						<MaterialIcon
+							icon="equalizer"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>
+							<fbt project="inyo" desc="Statistiques">
+								Statistiques
+							</fbt>
+						</span>
 					</TopBarMenuLink>
 				</Tooltip>
 				<Tooltip
@@ -87,15 +152,37 @@ const withHeader = Component => (...args) => (
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/account" id="header-menu-account">
-						<fbt project="inyo" desc="Réglages">
-							Réglages
-						</fbt>
+					<TopBarMenuLink to="/app/account">
+						<MaterialIcon
+							icon="account_circle"
+							size="tiny"
+							color="inherit"
+						/>
+						<span>
+							<fbt project="inyo" desc="Réglages">
+								Réglages
+							</fbt>
+						</span>
 					</TopBarMenuLink>
 				</Tooltip>
 			</TopBarMenu>
 		</TopBar>
+	);
+};
+
+const withHeader = Component => (...args) => (
+	<>
+		<LeftMenu>
+			<TopBarLogoNotif>
+				<TopBarLogo to="/app/dashboard" />
+				<NotificationTrayButton mobile />
+				<AssistantActions mobile />
+			</TopBarLogoNotif>
+			<NotificationTrayButton desktop />
+			<AssistantActions />
+		</LeftMenu>
 		<Component {...args} />
+		<TogglingTopBar></TogglingTopBar>
 	</>
 );
 

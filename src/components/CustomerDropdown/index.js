@@ -29,7 +29,7 @@ const Actions = styled('div')`
 		margin-left: 0.2rem;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
 		justify-content: flex-start;
 

@@ -211,6 +211,16 @@
     }
    ]
   },
+  "dwYBb3LWs5zhvgqd0/+huQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Next actions of your assistant",
+     "variations": {}
+    }
+   ]
+  },
   "a8kwylJwa+wa0lEvy1HvBw==": {
    "tokens": [],
    "types": [],
@@ -5191,6 +5201,16 @@
     }
    ]
   },
+  "tW0sEO4jLGF1ZaImAs7Jvw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Toggle menu",
+     "variations": {}
+    }
+   ]
+  },
   "7QXhz33T4NeJ5Gu1AhliDA==": {
    "tokens": [],
    "types": [],
@@ -5231,22 +5251,42 @@
     }
    ]
   },
-  "oetc6lmmqleqUpsvhS3rxQ==": {
+  "5QiE012QFGf/1NTIFYNNNA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "All the contacts",
+     "translation": "All clients",
      "variations": {}
     }
    ]
   },
-  "+O2F4Nyjvrb3Yk/fGGbWQA==": {
+  "GffwomETmweU33jPX1+Yzw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Contacts",
+     "translation": "Clients",
+     "variations": {}
+    }
+   ]
+  },
+  "PLfkpAuc6hf7KZghDq9wMw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All collaborators",
+     "variations": {}
+    }
+   ]
+  },
+  "Zq9kMgqv9Lrqo6BajAY9mQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Collaborators",
      "variations": {}
     }
    ]
@@ -5537,16 +5577,6 @@
    "translations": [
     {
      "translation": "Sign out",
-     "variations": {}
-    }
-   ]
-  },
-  "lhFPrqsswH0e8NT1rBLU5A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Clients",
      "variations": {}
     }
    ]
@@ -6801,32 +6831,12 @@
     }
    ]
   },
-  "UzYWkXM20aeDmetJWVQHKQ==": {
+  "lhFPrqsswH0e8NT1rBLU5A==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Su",
-     "variations": {}
-    }
-   ]
-  },
-  "8Vc2l3I0fVawMarYs1AzNA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Mo",
-     "variations": {}
-    }
-   ]
-  },
-  "bDmmkLF/uX8nZedmH1NtMg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Tu",
+     "translation": "Clients",
      "variations": {}
     }
    ]
@@ -7097,6 +7107,196 @@
    "translations": [
     {
      "translation": "Previous month",
+     "variations": {}
+    }
+   ]
+  },
+  "oetc6lmmqleqUpsvhS3rxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All the contacts",
+     "variations": {}
+    }
+   ]
+  },
+  "+O2F4Nyjvrb3Yk/fGGbWQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Contacts",
+     "variations": {}
+    }
+   ]
+  },
+  "jlMfSYRO0xyLbQCWNycBVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "S/lDcCNWAvCYQq+NV7vlzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {email},",
+     "variations": {}
+    }
+   ]
+  },
+  "Wt+cJPy5epCJEXFSUIwhOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your trial period of 21 days comes to an end.",
+     "variations": {}
+    }
+   ]
+  },
+  "eK79Bn5+/nLmk3jYbxqifA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "For your clients nothing changes: They can still access your projects, comment, validate, etc.",
+     "variations": {}
+    }
+   ]
+  },
+  "lRliGP7yf62NJEIe6WfLnA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "To continue to use Inyo you need to subscribe to one of our premimum plans.",
+     "variations": {}
+    }
+   ]
+  },
+  "JgsWc6QO5q/HRaqHK/YFHQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}",
+     "variations": {}
+    }
+   ]
+  },
+  "ITI8XvBaWfxkMtyfm/3KXQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subsribe for $12 /month",
+     "variations": {}
+    }
+   ]
+  },
+  "nmxkJz6CkJYHXblHdWWqtA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "or",
+     "variations": {}
+    }
+   ]
+  },
+  "Rf0r42Bn091A3C0HbJubEw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose our special launch offer and get Inyo for life for $75",
+     "variations": {}
+    }
+   ]
+  },
+  "x8x1qeOJ3eH46s8iXFX4aQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "c8BZVzAyMqD+7Hz6G9ORqQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If this is not you, click here to sign out.",
+     "variations": {}
+    }
+   ]
+  },
+  "8JdYB43CJ1+vMZ4ava2Teg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "bN5UClTIYFrOTO2HEt5S0A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Hello {email},",
+     "variations": {}
+    }
+   ]
+  },
+  "NoTnQdYvII3Q6h7znutH/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your trial period of 21 days is coming to an end.",
+     "variations": {}
+    }
+   ]
+  },
+  "UzYWkXM20aeDmetJWVQHKQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Su",
+     "variations": {}
+    }
+   ]
+  },
+  "8Vc2l3I0fVawMarYs1AzNA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mo",
+     "variations": {}
+    }
+   ]
+  },
+  "bDmmkLF/uX8nZedmH1NtMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tu",
      "variations": {}
     }
    ]

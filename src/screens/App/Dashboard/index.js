@@ -7,9 +7,9 @@ import PendingActionsTray from '../../../components/PendingActionsTray';
 import {Container, Content, Main} from '../../../utils/new/design-system';
 import Tasks from './tasks';
 
-function Dashboard({history}) {
+function Dashboard() {
 	return (
-		<Container>
+		<Container style={{minHeight: '100vh'}}>
 			<HelpButton />
 			<Main>
 				<Content>
@@ -22,4 +22,4 @@ function Dashboard({history}) {
 	);
 }
 
-export default withRouter(Dashboard);
+export default Dashboard;

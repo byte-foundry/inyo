@@ -21,7 +21,7 @@ const AuthMain = styled('div')`
 	flex-direction: row;
 	min-height: 100vh;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 		min-height: initial;
 	}
@@ -38,7 +38,7 @@ const AuthForm = styled('div')`
 	padding-top: 2%;
 	padding-bottom: 10%;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: auto;
 		padding: 3rem 3rem 0 3rem;
 		svg + div {
@@ -54,7 +54,7 @@ const AuthText = styled('div')`
 	width: 60%;
 	padding: 40px 40px 40px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		background: none;
 		width: auto;
 	}
@@ -69,7 +69,7 @@ const TextTitle = styled(H1)`
 	color: ${primaryBlue};
 	font-size: 24px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 	}
 `;
@@ -77,7 +77,7 @@ const TextContent = styled(P)`
 	color: ${primaryNavyBlue};
 	font-size: 18px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 	}
 `;

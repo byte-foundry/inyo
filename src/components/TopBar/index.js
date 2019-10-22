@@ -3,9 +3,12 @@ import React, {forwardRef} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import {BREAKPOINTS} from '../../utils/constants';
-import {primaryWhite} from '../../utils/content';
 import Logo from '../../utils/icons/inyo-topbar-logo.svg';
-import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
+import {
+	darkGrey,
+	primaryBlack,
+	primaryWhite,
+} from '../../utils/new/design-system';
 
 const ForwardedRefNavLink = forwardRef((props, ref) => (
 	<NavLink {...props} innerRef={ref} />
@@ -23,17 +26,15 @@ export const TopBarLogo = styled(NavLink)`
 
 export const TopBarMenu = styled('div')`
 	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-end;
-	align-items: center;
+	flex-flow: column nowrap;
 `;
 
 export const TopBarLogoNotif = styled(TopBarMenu)`
-	margin-right: 20px;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		justify-content: start;
+		flex-direction: row;
 
 		a {
 			margin-right: 1rem;
@@ -43,54 +44,71 @@ export const TopBarLogoNotif = styled(TopBarMenu)`
 
 export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 	text-decoration: none;
-	margin-left: 2rem;
-	color: ${primaryGrey};
+	color: ${primaryWhite};
 	position: relative;
+	display: flex;
+	flex-direction: columns;
+	transition: all 400ms ease;
+	padding: 0.5rem 1rem;
+	min-width: 170px;
+
+	i {
+		margin-right: 12px;
+	}
 
 	&:hover,
 	&.active {
-		color: ${primaryWhite};
-
-		&::before {
-			content: '';
-			display: block;
-			background: ${primaryPurple};
-			position: absolute;
-			left: -0.7rem;
-			top: -0.5rem;
-			right: -0.7rem;
-			bottom: -0.5rem;
-			border-radius: 8px;
-			z-index: -1;
-		}
-	}
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-left: 0;
-		margin-right: 1.2rem;
-		font-size: 0.8rem;
-
-		&:first-of-type {
-			margin-left: 0.7rem;
-		}
+		color: ${primaryBlack};
+		background-color: ${primaryWhite};
 	}
 `;
 
+export const Label = styled('span')``;
+
 const TopBar = styled('div')`
 	display: flex;
-	flex-flow: row nowrap;
-	justify-content: space-between;
-	margin-bottom: 4rem;
+	flex-flow: column nowrap;
+	flex: ${props => (props.visible ? '0 0 auto' : '0 0 50px')};
+	overflow-x: hidden;
 
-	@media (max-width: ${BREAKPOINTS}px) {
-		align-items: center;
-		margin-bottom: 1rem;
-		height: 6rem;
-		width: 100%;
-		overflow-x: auto;
-		padding-right: 1rem;
-		display: grid;
-		grid-auto-rows: 1fr;
+	position: relative;
+	top: 0;
+	bottom: 0;
+	right: 0;
+
+	margin-left: 2rem;
+	padding-top: 0.8rem;
+
+	background-color: ${darkGrey};
+	color: ${primaryWhite};
+
+	span {
+		display: ${props => (props.visible ? 'inline' : 'none')};
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0;
+		padding: 0;
+		padding-top: ${props => (props.visible ? '28px' : '10px')};
+
+		position: fixed;
+		z-index: 100;
+		overflow: hidden;
+
+		top: ${props => (props.visible ? '0' : 'auto')};
+		right: ${props => (props.visible ? '0' : '1em')};
+		bottom: ${props => (props.visible ? '0' : 'auto')};
+		height: ${props => (props.visible ? 'auto' : '30px')};
+		width: ${props => (props.visible ? 'auto' : '40px;')};
+		border-radius: ${props => (props.visible ? '0' : '50%;')};
+
+		span {
+			display: inline;
+		}
+
+		a {
+			width: ${props => (props.visible ? 'calc(100vw - 30px);' : '0')};
+		}
 	}
 `;
 

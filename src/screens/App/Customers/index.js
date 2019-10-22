@@ -27,15 +27,18 @@ import {GET_USER_CUSTOMERS} from '../../../utils/queries';
 
 const Main = styled('div')`
 	min-height: 100vh;
+	display: flex;
+	flex: 1;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
 	}
 `;
 
 const Container = styled('div')`
-	max-width: 980px;
-	margin: 0 auto;
+	flex: 1;
+	max-width: 1200px;
+	margin: 3.5rem auto;
 `;
 
 const Table = styled('table')`
@@ -55,7 +58,7 @@ const RowHeader = styled('tr')`
 		width: 50px;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -86,7 +89,7 @@ const Row = styled('tr')`
 	td {
 		padding: 0.25rem 0;
 
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			&:first-of-type {
 				color: ${primaryPurple};
 			}
@@ -105,7 +108,7 @@ const Row = styled('tr')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: grid;
 		padding-bottom: 1rem;
 	}
@@ -121,7 +124,7 @@ const Actions = styled('div')`
 		margin-left: 2rem;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
 		justify-content: flex-start;
 
@@ -138,7 +141,7 @@ const Forms = styled('div')`
 	align-items: center;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
@@ -183,11 +186,6 @@ const Customers = () => {
 							Clients
 						</fbt>
 					</Heading>
-					<HeadingLink to="/app/collaborators">
-						<fbt project="inyo" desc="collaborators">
-							Collaborateurs
-						</fbt>
-					</HeadingLink>
 				</HeadingRow>
 				<Forms>
 					<FilterInput

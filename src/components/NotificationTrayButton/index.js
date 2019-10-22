@@ -33,7 +33,7 @@ const Dropdown = styled('div')`
 	border-radius: 3px;
 	background: ${primaryWhite};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: calc(100% - 10px);
 	}
 `;
@@ -90,13 +90,13 @@ const NotificationContainer = styled('div')`
 	${props => (props.mobile
 		? `
 		display: none;
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			display: block;
 		}
 	`
 		: `
 		display: block;
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			display: none;
 		}
 	`)}

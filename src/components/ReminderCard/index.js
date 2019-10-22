@@ -33,6 +33,7 @@ const TaskCardElem = styled(Link)`
 	line-height: 1;
 	cursor: pointer;
 	display: flex;
+	align-items: flex-start;
 	flex-direction: row;
 	text-decoration: none;
 

@@ -16,7 +16,7 @@ const Forms = styled('div')`
 	display: flex;
 	justify-content: space-between;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;

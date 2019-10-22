@@ -12,7 +12,7 @@ const DayInputContainer = styled('div')`
 	margin: 20px 0 20px 14px;
 	font-size: 0.85rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 0.6rem;
 		margin: 20px 0;
 	}
@@ -30,7 +30,7 @@ const DayInput = styled('div')`
 	align-items: center;
 	border: solid 1px ${primaryBlue};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 2.5rem;
 		height: 2.5rem;
 	}

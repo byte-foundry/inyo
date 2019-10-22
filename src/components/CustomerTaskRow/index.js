@@ -57,7 +57,7 @@ export const TaskContainer = styled('div')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding-left: 0;
 		margin-left: 0;
 		margin-bottom: 0;
@@ -154,7 +154,7 @@ const TaskIcon = styled('div')`
 		}
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		transform: scale(0.6);
 		margin: 0;
 		position: absolute;
@@ -171,7 +171,7 @@ const TaskContent = styled('div')`
 	flex: 1;
 	margin-top: ${props => (props.noData ? '0.9rem' : '1rem')};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding-left: 2rem;
 		display: flex;
 	}
@@ -184,7 +184,7 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryGrey};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 		display: block;
 	}
@@ -196,7 +196,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 	margin: ${props => (props.noData ? '0.1rem 0' : '0.5rem 0')};
 	color: ${primaryBlack};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 0.85rem;
 		display: block;
 	}
@@ -211,7 +211,7 @@ const OpenBtn = styled(ButtonLink)`
 const RescheduleIconButton = styled(IconButton)`
 	display: none;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: block;
 	}
 `;
@@ -223,7 +223,7 @@ const TaskActions = styled('div')`
 	transition: opacity 200ms ease-out, margin-right 200ms ease-out;
 	display: flex;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -257,7 +257,7 @@ const TaskHeader = styled('div')`
 		pointer-events: all;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 	}
 `;

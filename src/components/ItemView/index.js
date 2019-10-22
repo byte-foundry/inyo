@@ -72,7 +72,7 @@ const Metas = styled('div')`
 	padding-bottom: 2rem;
 	font-size: 14px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		column-count: 1;
 		padding: 1rem 0;
 	}
@@ -116,7 +116,7 @@ const Description = styled('div')`
 		min-height: 5rem;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: -2rem;
 		margin-right: -2rem;
 
@@ -194,7 +194,7 @@ const TaskButton = styled(Button)`
 `;
 
 const FlexRowButtons = styled(FlexRow)`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 
 		button + button {

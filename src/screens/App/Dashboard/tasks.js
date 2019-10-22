@@ -11,7 +11,6 @@ import LeftBarSchedule from '../../../components/LeftBarSchedule';
 import MaterialIcon from '../../../components/MaterialIcon';
 import RescheduleModal from '../../../components/RescheduleModal';
 import Schedule from '../../../components/Schedule';
-import SidebarDashboardInfos from '../../../components/SidebarDashboardInfos';
 import Task from '../../../components/TaskRow';
 import TasksList from '../../../components/TasksList';
 import fbt from '../../../fbt/fbt.macro';
@@ -41,7 +40,11 @@ import useScheduleData from '../../../utils/useScheduleData';
 import useUserInfos from '../../../utils/useUserInfos';
 
 const FlexRowMobile = styled(FlexRow)`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		flex-direction: column;
 	}
 `;
@@ -339,7 +342,6 @@ const DashboardTasks = ({location, history}) => {
 							</div>
 						)}
 				</div>
-				<SidebarDashboardInfos baseUrl="app/dashboard" />
 			</FlexRowMobile>
 			<Route
 				path="/app/dashboard/:taskId"

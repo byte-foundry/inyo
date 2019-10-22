@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
-import {REMINDER_TYPES_DATA} from '../../utils/constants';
+import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {CANCEL_REMINDER} from '../../utils/mutations';
 import {
@@ -27,7 +27,7 @@ const ReminderList = styled('div')`
 const ReminderLine = styled('div')`
 	border-bottom: 1px dotted ${mediumGrey};
 	height: 1px;
-	flex: 1;
+	flex: 0 1 20px;
 	margin: 0 1%;
 `;
 
@@ -57,7 +57,7 @@ const ReminderText = styled('div')`
 	cursor: ${props => (props.noLink ? 'default' : 'pointer')};
 	${props => props.small
 		&& `
-		flex: 1 0 200px;
+		flex: 10 1 220px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
@@ -70,7 +70,7 @@ const ReminderDate = styled('div')`
 	flex: 1 1 100px;
 	${props => props.small
 		&& `
-		flex: 1 1 50px;
+		flex: 1;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
@@ -82,6 +82,7 @@ const ReminderActions = styled('div')`
 	text-align: right;
 	justify-content: space-between;
 	align-items: center;
+	flex: 1;
 `;
 
 const statuses = ['PENDING', 'SENT', 'CANCELED', 'ERRORED'];
@@ -196,6 +197,7 @@ function TaskRemindersList({
 											canceled={
 												reminder.status === 'CANCELED'
 											}
+											style={{flex: '0 0 28px'}}
 										>
 											<Button
 												link

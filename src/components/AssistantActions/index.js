@@ -59,13 +59,18 @@ const AssistantActionsContainer = styled('div')`
 const Number = styled('div')`
 	border-radius: 50%;
 	position: absolute;
-	font-size: 0.45rem;
+	font-size: 0.47rem;
 	font-weight: 600;
 	color: ${primaryWhite};
 	background-color: ${darkGrey}D7;
 	bottom: 3px;
 	right: 0;
 	padding: 4px;
+	width: 8px;
+	height: 7px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 const AssistantActions = ({mobile}) => {
@@ -110,7 +115,9 @@ const AssistantActions = ({mobile}) => {
 					}}
 				>
 					<IconButton icon="sentiment_very_satisfied" size="small" />
-					<Number>{pendingReminders}</Number>
+					{pendingReminders > 0 && (
+						<Number>{pendingReminders}</Number>
+					)}
 				</Icon>
 			</Tooltip>
 			{isOpen && (

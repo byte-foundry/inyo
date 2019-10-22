@@ -66,8 +66,9 @@ import UploadDashboard from '../UploadDashboard';
 const Header = styled('div')``;
 
 const Metas = styled('div')`
-	gap: 5px;
-	column-count: 2;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 5px;
 	color: ${gray50};
 	padding-bottom: 2rem;
 	font-size: 14px;

@@ -300,6 +300,8 @@ export function displayDurationPretty(itemUnit, workingTime) {
 
 	const hoursAndMinutes = (itemUnit % 1) * workingTime;
 
+	if (!itemUnit) return '—';
+
 	return `${days ? moment.duration(days, 'days').format('d __') : ''} ${
 		hoursAndMinutes
 			? moment.duration(hoursAndMinutes, 'hours').format('_HM_')

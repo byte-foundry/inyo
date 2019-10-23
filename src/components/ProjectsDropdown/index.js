@@ -5,9 +5,9 @@ import {GET_ALL_PROJECTS} from '../../utils/queries';
 import {ArianneElem} from '../ArianneThread';
 
 const ProjectsDropdown = (props) => {
-	const {data, errors} = useQuery(GET_ALL_PROJECTS, {suspend: true});
+	const {data, error} = useQuery(GET_ALL_PROJECTS, {suspend: true});
 
-	if (errors) throw errors;
+	if (error) throw error;
 
 	return (
 		<ArianneElem

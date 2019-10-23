@@ -25,7 +25,7 @@ const Container = styled('div')`
 	display: flex;
 	margin: 50px 15px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -93,7 +93,7 @@ const TemplateInfo = styled('div')`
 	margin-left: 4rem;
 	flex: 1;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: 0;
 	}
 `;
@@ -117,7 +117,7 @@ const TemplateInfoIcon = styled('span')`
 	justify-content: center;
 	margin: 0 1rem -0.4rem 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;
@@ -178,7 +178,11 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 	return (
 		<Container>
 			<Column>
-				<SubHeading>Choisir un modèle de projet prédéfini</SubHeading>
+				<SubHeading>
+					<fbt desc="choose template subtitle">
+						Choisir un modèle de projet prédéfini
+					</fbt>
+				</SubHeading>
 				<TemplateList>
 					{templates[language].map(({name, label}) => (
 						<TemplateItem
@@ -205,12 +209,17 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 				{projects && projects.length > 0 && (
 					<>
 						<SubHeading>
-							Ou utiliser un de vos projets existants
+							<fbt desc="choose existing project subtitle">
+								Ou utiliser un de vos projets existants
+							</fbt>
 						</SubHeading>
 						<ProjectFilterInput
 							icon={Search}
 							name="filter"
-							placeholder="Rechercher un projet"
+							placeholder={fbt(
+								'Rechercher un projet',
+								'searc existing project input placeholder',
+							)}
 							type="text"
 							value={filter}
 							onChange={e => setFilter(e.target.value)}
@@ -257,7 +266,9 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 													onChoose({sections});
 												}}
 											>
-												Utiliser ce modèle
+												<fbt desc="use this template button">
+													Utiliser ce modèle
+												</fbt>
 											</Button>
 										)}
 									</TemplateItem>
@@ -300,18 +311,24 @@ const TemplateAndProjectFiller = ({onChoose, projectId}) => {
 			{!selectedTemplate && !selectedProject && (
 				<TemplateInfo>
 					<TemplateInfoHeader>
-						<TemplateInfoIcon>?</TemplateInfoIcon> Modèles
-						prédéfinis
+						<TemplateInfoIcon>?</TemplateInfoIcon>{' '}
+						<fbt desc="preset templates title">
+							Modèles prédéfinis
+						</fbt>
 					</TemplateInfoHeader>
 					<P>
-						Les modèles sont composés d'un ensemble de tâches
-						prédéfinies. Ils vous permettront de démarrer vos
-						projets sur de bonnes bases.
+						<fbt desc="preset templates description">
+							Les modèles sont composés d'un ensemble de tâches
+							prédéfinies. Ils vous permettront de démarrer vos
+							projets sur de bonnes bases.
+						</fbt>
 					</P>
 					<P>
-						Nous les avons construits en collaboration avec des
-						freelances expérimentés dans leurs domaines (design,
-						développement etc.)
+						<fbt desc="preset templates description 2">
+							Nous les avons construits en collaboration avec des
+							freelances expérimentés dans leurs domaines (design,
+							développement etc.)
+						</fbt>
 					</P>
 					<img alt="" src={templateIllus} />
 				</TemplateInfo>

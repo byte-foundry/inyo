@@ -29,7 +29,7 @@ const SectionTitle = styled(InlineEditable)`
 		margin-top: 0;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin: 0.5rem 0 0 0;
 	}
 `;

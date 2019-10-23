@@ -67,7 +67,7 @@ const DomainCard = styled('div')`
 		margin-right: 0;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-right: 0;
 		width: 100%;
 	}

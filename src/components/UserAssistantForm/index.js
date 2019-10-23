@@ -23,7 +23,7 @@ const ProfileSection = styled('div')`
 	column-gap: 20px;
 	align-items: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: block;
 		padding: 0;
 		border: none;
@@ -37,7 +37,7 @@ const UpdateButton = styled(Button)`
 	margin-right: 50px;
 	margin-bottom: 80px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-right: 0;
 		margin-bottom: 20px;
 	}

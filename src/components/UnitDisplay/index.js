@@ -74,9 +74,9 @@ export const UnitOvertimeDisplay = props => (
 			<fbt:plural
 				name="travaillé féminin"
 				count={props.unit}
-				many="supplémentaire"
+				many="supplémentaires"
 			>
-				supplémentaires
+				supplémentaire
 			</fbt:plural>
 		</fbt>
 	</>

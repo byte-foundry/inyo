@@ -1,5 +1,6 @@
 import moment from 'moment';
 
+import fbt from '../fbt/fbt.macro';
 import {CUSTOMER_TASK_TYPES, WEEKDAYS} from './constants';
 
 export const dateDiff = (datepart, fromdate, todate) => {
@@ -77,8 +78,6 @@ export function extractScheduleFromWorkingDays(
 			} = days[date] || {};
 			const events = eventsPerDay[date] || [];
 
-			tasks.sort((a, b) => a.schedulePosition - b.schedulePosition);
-
 			weekdays.push({
 				momentDate: iteratorDate.clone(),
 				date: iteratorDate.format(moment.HTML5_FMT.DATE),
@@ -98,15 +97,18 @@ export function extractScheduleFromWorkingDays(
 const normalizeFalsyParams = f => (...args) => f(...args.map(v => v || undefined));
 
 export const formatTitle = (title) => {
-	if (title === 'MONSIEUR') {
-		return 'M.';
+	if (title !== 'MONSIEUR' || title !== 'MADAME') {
+		return '';
 	}
 
-	if (title === 'MADAME') {
-		return 'Mme';
-	}
-
-	return '';
+	return fbt.enum(
+		title,
+		{
+			MONSIEUR: 'M.',
+			MADAME: 'Mme',
+		},
+		'title',
+	);
 };
 
 export const formatName = normalizeFalsyParams(
@@ -179,6 +181,8 @@ export const getEventFromGoogleCalendarEvents = (
 					? moment(item.end.dateTime)
 					: moment(item.end.date),
 		}));
+
+		formattedEvents.sort((a, b) => (a.start.isBefore(b.start) ? -1 : 1));
 
 		formattedEvents.forEach((event) => {
 			if (event.severalDays) {
@@ -295,6 +299,8 @@ export function displayDurationPretty(itemUnit, workingTime) {
 	const days = Math.floor(itemUnit);
 
 	const hoursAndMinutes = (itemUnit % 1) * workingTime;
+
+	if (!itemUnit) return '—';
 
 	return `${days ? moment.duration(days, 'days').format('d __') : ''} ${
 		hoursAndMinutes

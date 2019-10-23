@@ -33,7 +33,7 @@ const CreateCustomerForm = styled('div')`
 	grid-template-columns: 125px 1fr 1fr;
 	grid-column-gap: 20px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: contents;
 	}
 `;

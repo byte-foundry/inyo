@@ -16,54 +16,21 @@ import {GET_REMINDERS, GET_USER_INFOS} from '../../utils/queries';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersList from '../TaskRemindersList';
 
-const DashboardAside = styled(Aside)`
-	padding: 1.5rem 0 0 4rem;
-	max-width: 320px;
-	flex: 0 0 320px;
+const Wrapper = styled('div')`
+	padding: 1rem;
 	display: flex;
 
-	margin-right: 1rem;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		padding-left: 0;
-		flex: 1;
-		max-width: none;
-		width: 100%;
-		margin-bottom: 1rem;
-		margin-right: 0;
-	}
-
 	img {
-		align-self: center;
 		max-width: 40%;
-		margin: 1rem 30%;
+		display: block;
+		margin-bottom: 1rem;
 	}
 `;
 
 const SubSection = styled('div')`
-	margin-bottom: 2rem;
-	margin-top: 1rem;
 	position: relative;
-	min-height: 200px;
-
-	@media (max-width: ${BREAKPOINTS}px) {
-		margin-bottom: 1rem;
-		margin-left: 1rem;
-		margin-right: 1rem;
-	}
-
-	&:before {
-		content: '';
-		display: block;
-		background: ${lightGrey};
-		position: absolute;
-		left: -1rem;
-		top: -1rem;
-		right: -1rem;
-		bottom: -1rem;
-		border-radius: 8px;
-		z-index: -1;
-	}
+	flex: 1;
+	max-width: 100%;
 `;
 
 const SidebarHeading = styled(SubHeading)`
@@ -75,6 +42,9 @@ const SidebarHeading = styled(SubHeading)`
 const NoReminders = styled('div')`
 	font-style: italic;
 	color: ${primaryGrey};
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 `;
 
 const SidebarDashboardInfos = () => {
@@ -87,7 +57,7 @@ const SidebarDashboardInfos = () => {
 	const {me} = userData || {};
 
 	return (
-		<DashboardAside>
+		<Wrapper>
 			<SubSection>
 				{loadingUser && <Loading />}
 				{!loadingUser && (
@@ -139,7 +109,7 @@ const SidebarDashboardInfos = () => {
 						</NoReminders>
 					))}
 			</SubSection>
-		</DashboardAside>
+		</Wrapper>
 	);
 };
 

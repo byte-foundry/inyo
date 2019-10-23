@@ -39,36 +39,25 @@ const InputContainer = styled('div')`
 	margin-left: -10px;
 	position: relative;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: 0;
 		width: calc(100% + 3px);
 	}
-`;
-
-const InputButtonWrapper = styled('div')`
-	position: relative;
 `;
 
 const InputButtonContainer = styled('div')`
 	position: absolute;
 	display: flex;
 	flex-flow: column nowrap;
-	right: calc(-100% + 1rem);
-	bottom: -13px;
-	width: 166px;
+	right: 1rem;
+	bottom: 67px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
-		flex-direction: row;
-		width: calc(50vh - 3rem);
-		top: 2.2rem;
-		right: 0;
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		position: static;
 		display: flex;
-		flex-direction: row-reverse;
+		flex-direction: row;
 		justify-content: space-between;
-
-		button + button {
-			margin: 0 0.25rem 0 0;
-		}
+		margin: 0.5rem 0;
 	}
 
 	button {
@@ -84,7 +73,7 @@ const InputButtonContainer = styled('div')`
 			border-radius: 50%;
 		}
 
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			flex: 1;
 			color: ${primaryPurple};
 			border-color: ${primaryPurple};
@@ -102,8 +91,14 @@ const InputButtonContainer = styled('div')`
 			display: none;
 		}
 
-		@media (max-width: ${BREAKPOINTS}px) {
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			margin: 0;
+		}
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		${Button} + ${Button} {
+			margin-left: 0.25rem;
 		}
 	}
 `;
@@ -144,7 +139,7 @@ const Input = styled('input')`
 		transition: all 400ms ease;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1rem;
 		margin-left: -2rem;
 		padding: 0.5rem 1.2rem 0.5rem 5rem;
@@ -175,7 +170,7 @@ const Icon = styled('div')`
 		transition: all 400ms ease;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 1rem;
 		height: 1rem;
 		font-size: 1rem;
@@ -188,12 +183,9 @@ const TaskInfosInputsContainer = styled('div')`
 	align-items: flex-start;
 	padding: 10px 0;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
-
-		#tags-filter {
-			width: 100%;
-		}
+		align-items: stretch;
 	}
 `;
 
@@ -283,7 +275,6 @@ const TaskInput = ({
 			{withProject && (
 				<ProjectsDropdown
 					style={{margin: '0 0 10px auto', width: '250px'}}
-					autoFocus
 					onChange={(param) => {
 						const {value: id} = param || {};
 
@@ -474,119 +465,95 @@ const TaskInput = ({
 						}
 					/>
 				</Tooltip>
-				{(focus || value) && (
-					<InputButtonWrapper>
-						<InputButtonContainer>
-							{type !== 'SECTION' && onSubmitSection && (
-								<Tooltip
-									label={
-										<fbt
-											project="inyo"
-											desc="notification message"
-										>
-											Flèche du bas pour créer un ensemble
-											de tâches
-										</fbt>
-									}
-								>
-									<Button
-										icon="↓"
-										onClick={() => onSubmitSection({name: value})
-										}
-									>
-										<fbt
-											project="inyo"
-											desc="notification message"
-										>
-											Créer une section
-										</fbt>
-									</Button>
-								</Tooltip>
-							)}
-							<Tooltip
-								label={
-									<fbt
-										project="inyo"
-										desc="notification message"
-									>
-										Touche entrée pour créer la tâche
-									</fbt>
-								}
-							>
-								<Button
-									icon="↵"
-									id="create-task-button"
-									onClick={() => {
-										if (!value.startsWith('/')) {
-											if (
-												type === 'CONTENT_ACQUISITION'
-											) {
-												setShowContentAcquisitionInfos(
-													true,
-												);
-											}
-											else if (type === 'SECTION') {
-												onSubmitSection({
-													name: value,
-												});
-												setValue('');
-												closeMoreInfos();
-												closeContentAcquisitionInfos();
-											}
-											else {
-												onSubmitTask({
-													name: value,
-													type: type || 'DEFAULT',
-													dueDate:
-														itemDueDate
-														&& itemDueDate.toISOString(),
-													unit: parseFloat(
-														itemUnit || 0,
-													),
-													linkedCustomerId:
-														itemCustomer
-														&& itemCustomer.id,
-													tags: itemTags.map(
-														({id}) => id,
-													),
-													projectId: selectedProject,
-												});
-												setValue('');
-												closeMoreInfos();
-												closeContentAcquisitionInfos();
-											}
-										}
-									}}
-								>
-									<fbt
-										project="inyo"
-										desc="notification message"
-									>
-										créer la{' '}
-										<fbt:param name="sectionOrTask">
-											{type === 'SECTION' ? (
-												<fbt
-													project="inyo"
-													desc="notification message"
-												>
-													section
-												</fbt>
-											) : (
-												<fbt
-													project="inyo"
-													desc="notification message"
-												>
-													tâche
-												</fbt>
-											)}
-										</fbt:param>
-									</fbt>
-								</Button>
-							</Tooltip>
-						</InputButtonContainer>
-					</InputButtonWrapper>
-				)}
 			</InputContainer>
+			{(focus || value) && (
+				<InputButtonContainer>
+					{type !== 'SECTION' && onSubmitSection && (
+						<Tooltip
+							label={
+								<fbt project="inyo" desc="notification message">
+									Flèche du bas pour créer un ensemble de
+									tâches
+								</fbt>
+							}
+						>
+							<Button
+								icon="↓"
+								onClick={() => onSubmitSection({name: value})}
+							>
+								<fbt project="inyo" desc="notification message">
+									Créer une section
+								</fbt>
+							</Button>
+						</Tooltip>
+					)}
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="notification message">
+								Touche entrée pour créer la tâche
+							</fbt>
+						}
+					>
+						<Button
+							icon="↵"
+							id="create-task-button"
+							onClick={() => {
+								if (!value.startsWith('/')) {
+									if (type === 'CONTENT_ACQUISITION') {
+										setShowContentAcquisitionInfos(true);
+									}
+									else if (type === 'SECTION') {
+										onSubmitSection({
+											name: value,
+										});
+										setValue('');
+										closeMoreInfos();
+										closeContentAcquisitionInfos();
+									}
+									else {
+										onSubmitTask({
+											name: value,
+											type: type || 'DEFAULT',
+											dueDate:
+												itemDueDate
+												&& itemDueDate.toISOString(),
+											unit: parseFloat(itemUnit || 0),
+											linkedCustomerId:
+												itemCustomer && itemCustomer.id,
+											tags: itemTags.map(({id}) => id),
+											projectId: selectedProject,
+										});
+										setValue('');
+										closeMoreInfos();
+										closeContentAcquisitionInfos();
+									}
+								}
+							}}
+						>
+							<fbt project="inyo" desc="notification message">
+								créer la{' '}
+								<fbt:param name="sectionOrTask">
+									{type === 'SECTION' ? (
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											section
+										</fbt>
+									) : (
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
+											tâche
+										</fbt>
+									)}
+								</fbt:param>
+							</fbt>
+						</Button>
+					</Tooltip>
+				</InputButtonContainer>
+			)}
 			{type !== 'SECTION' && (
 				<TaskInfosInputsContainer>
 					<UnitWithSuggestionsForm

@@ -74,7 +74,7 @@ const Container = styled('div')`
 	padding: 2rem;
 	margin-left: 3rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		position: static;
 		width: initial;
 		margin: 0;

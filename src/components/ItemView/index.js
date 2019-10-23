@@ -67,15 +67,14 @@ const Header = styled('div')``;
 
 const Metas = styled('div')`
 	display: grid;
-	grid-template-columns: 340px 1fr;
-	grid-row-gap: 5px;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 5px;
 	color: ${gray50};
 	padding-bottom: 2rem;
 	font-size: 14px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
-		display: flex;
-		flex-direction: column;
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		column-count: 1;
 		padding: 1rem 0;
 	}
 `;
@@ -118,7 +117,7 @@ const Description = styled('div')`
 		min-height: 5rem;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: -2rem;
 		margin-right: -2rem;
 
@@ -196,7 +195,7 @@ const TaskButton = styled(Button)`
 `;
 
 const FlexRowButtons = styled(FlexRow)`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 
 		button + button {
@@ -333,7 +332,7 @@ const Item = ({
 
 	return (
 		<>
-			<StickyHeader customer={item.type !== 'DEFAULT'}>
+			<StickyHeader customer={customerTask}>
 				<TaskActivationHeader
 					item={item}
 					focusTask={focusTask}
@@ -578,6 +577,121 @@ const Item = ({
 							</Meta>
 						</Tooltip>
 					)}
+				{(!deadline || deadline.toString() !== 'Invalid Date') && (
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="deadline tooltip item view"
+							>
+								Date limite pour réaliser cette tâche
+							</fbt>
+						}
+					>
+						<Meta>
+							<MaterialIcon icon="event" size="tiny" />
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="deadline label item view"
+								>
+									Temps restant
+								</fbt>
+							</MetaLabel>
+							<MetaTime
+								title={deadline && deadline.toLocaleString()}
+								dateTime={deadline && deadline.toJSON()}
+								onClick={
+									customerToken
+										? undefined
+										: () => !editDueDate
+												&& setEditDueDate(true)
+								}
+							>
+								{!customerToken && editDueDate ? (
+									<DateInputContainer ref={dateRef}>
+										<DueDateInputElem
+											value={moment(
+												deadline || new Date(),
+											).format('DD/MM/YYYY')}
+										/>
+										<IconButton
+											icon="clear"
+											size="micro"
+											onClick={() => {
+												deadline
+													&& updateItem({
+														variables: {
+															itemId: item.id,
+															dueDate: null,
+														},
+														optimisticResponse: {
+															...item,
+															dueDate: null,
+														},
+													});
+												setEditDueDate(false);
+											}}
+										/>
+										<DateInput
+											date={moment(
+												deadline || new Date(),
+											)}
+											onDateChange={(date) => {
+												updateItem({
+													variables: {
+														itemId: item.id,
+														dueDate: date.toISOString(),
+													},
+													optimisticResponse: {
+														...item,
+														dueDate: date.toISOString(),
+													},
+												});
+
+												setEditDueDate(false);
+											}}
+											duration={item.unit}
+										/>
+									</DateInputContainer>
+								) : (
+									deadline && (
+										<div>
+											<fbt
+												project="inyo"
+												desc="deadline margin item view"
+											>
+												<fbt:plural
+													count={
+														moment(deadline).diff(
+															moment(),
+															'days',
+														) - item.unit
+													}
+													showCount="yes"
+													value={
+														+(
+															moment(
+																deadline,
+															).diff(
+																moment(),
+																'days',
+															) - item.unit
+														).toFixed(2)
+													}
+													many="jours"
+												>
+													jour
+												</fbt:plural>
+											</fbt>
+										</div>
+									)
+								)}
+							</MetaTime>
+						</Meta>
+					</Tooltip>
+				)}
+
 				{isCustomerTask(item.type) || !item.section ? (
 					<Tooltip
 						label={
@@ -649,108 +763,36 @@ const Item = ({
 						</Meta>
 					</Tooltip>
 				) : (
-					<ItemViewAssigneeInput
-						customerToken={customerToken}
-						taskId={item.id}
-						assignee={item.assignee}
-						linkedCollaborators={
-							item.section
-							&& item.section.project.linkedCollaborators
-						}
-					/>
+					item.type !== 'PERSONAL' && (
+						<ItemViewAssigneeInput
+							customerToken={customerToken}
+							taskId={item.id}
+							assignee={item.assignee}
+							linkedCollaborators={
+								item.section
+								&& item.section.project.linkedCollaborators
+							}
+						/>
+					)
 				)}
-				{(!deadline || deadline.toString() !== 'Invalid Date') && (
-					<Tooltip
-						label={
-							<fbt
-								project="inyo"
-								desc="deadline tooltip item view"
-							>
-								Date limite pour réaliser cette tâche
+
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="type of the task tooltip">
+							Définit s'il y a des actions automatiques
+						</fbt>
+					}
+				>
+					<Meta>
+						<MaterialIcon icon="check_circle_outline" size="tiny" />
+						<MetaLabel>
+							<fbt project="inyo" desc="task type">
+								Type de tâche
 							</fbt>
-						}
-					>
-						<Meta>
-							<MaterialIcon icon="event" size="tiny" />
-							<MetaLabel>
-								<fbt
-									project="inyo"
-									desc="deadline label item view"
-								>
-									Temps restant
-								</fbt>
-							</MetaLabel>
-							<MetaTime
-								title={deadline && deadline.toLocaleString()}
-								dateTime={deadline && deadline.toJSON()}
-								onClick={
-									customerToken
-										? undefined
-										: () => !editDueDate
-												&& setEditDueDate(true)
-								}
-							>
-								{!customerToken && editDueDate ? (
-									<DateInputContainer>
-										<DueDateInputElem
-											value={moment(
-												deadline || new Date(),
-											).format('DD/MM/YYYY')}
-										/>
-										<DateInput
-											innerRef={dateRef}
-											date={moment(
-												deadline || new Date(),
-											)}
-											onDateChange={(date) => {
-												updateItem({
-													variables: {
-														itemId: item.id,
-														dueDate: date.toISOString(),
-													},
-												});
-												setEditDueDate(false);
-											}}
-											duration={item.unit}
-										/>
-									</DateInputContainer>
-								) : (
-									deadline && (
-										<div>
-											<fbt
-												project="inyo"
-												desc="deadline margin item view"
-											>
-												<fbt:plural
-													count={
-														moment(deadline).diff(
-															moment(),
-															'days',
-														) - item.unit
-													}
-													showCount="yes"
-													value={
-														+(
-															moment(
-																deadline,
-															).diff(
-																moment(),
-																'days',
-															) - item.unit
-														).toFixed(2)
-													}
-													many="jours"
-												>
-													jour
-												</fbt:plural>
-											</fbt>
-										</div>
-									)
-								)}
-							</MetaTime>
-						</Meta>
-					</Tooltip>
-				)}
+						</MetaLabel>
+						<MetaText>{typeInfo.name}</MetaText>
+					</Meta>
+				</Tooltip>
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="project tooltip">
@@ -806,23 +848,6 @@ const Item = ({
 									&& item.section.project.name}
 							</MetaText>
 						)}
-					</Meta>
-				</Tooltip>
-				<Tooltip
-					label={
-						<fbt project="inyo" desc="type of the task tooltip">
-							Définit s'il y a des actions automatiques
-						</fbt>
-					}
-				>
-					<Meta>
-						<MaterialIcon icon="check_circle_outline" size="tiny" />
-						<MetaLabel>
-							<fbt project="inyo" desc="task type">
-								Type de tâche
-							</fbt>
-						</MetaLabel>
-						<MetaText>{typeInfo.name}</MetaText>
 					</Meta>
 				</Tooltip>
 				{!customerToken && (
@@ -1116,16 +1141,20 @@ const Item = ({
 					/>
 				</>
 			)}
-			<SubHeading>
-				<fbt project="inyo" desc="Comments">
-					Commentaires
-				</fbt>
-			</SubHeading>
-			<CommentList
-				itemId={item.id}
-				customerToken={customerToken}
-				linkedCustomer={item.linkedCustomer}
-			/>
+			{item.type !== 'PERSONAL' && (
+				<>
+					<SubHeading>
+						<fbt project="inyo" desc="Comments">
+							Commentaires
+						</fbt>
+					</SubHeading>
+					<CommentList
+						itemId={item.id}
+						customerToken={customerToken}
+						linkedCustomer={item.linkedCustomer}
+					/>
+				</>
+			)}
 			<HR />
 			<FlexRowButtons justifyContent="space-between">
 				<FlexRowButtons>

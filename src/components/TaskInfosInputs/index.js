@@ -25,7 +25,7 @@ const TaskInfos = styled('div')`
 	letter-spacing: 0.05em;
 	margin-top: -0.25rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: none;
 	}
 `;

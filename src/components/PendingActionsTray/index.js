@@ -34,7 +34,7 @@ const Tray = styled('div')`
 		? 'translateY(calc(100%))'
 		: !props.isOpen && 'translateY(calc(100% - 4rem + 10px))')};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
 		right: 0px;
 	}
@@ -67,7 +67,7 @@ const Content = styled('div')`
 	overflow-y: auto;
 	max-height: 90vh;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		max-height: 100%;
 	}
 `;

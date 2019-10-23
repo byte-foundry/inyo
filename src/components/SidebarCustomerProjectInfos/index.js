@@ -27,7 +27,7 @@ const Aside = styled('aside')`
 	width: 270px;
 	padding-right: 4rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-top: 2rem;
 		padding-right: 0;
 		width: 100%;
@@ -60,7 +60,7 @@ const SidebarLink = styled('div')`
 	position: relative;
 	max-width: calc(100% - 2rem);
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 	}
 

@@ -158,13 +158,20 @@ function TasksList({location, history}) {
 								tagsSelected={tags}
 								marginTop
 							/>
-							<Suspense fallback={<Loading />}>
-								<TasksListContainer
-									projectId={projectId}
-									filter={filter}
-									tags={tags}
-								/>
-							</Suspense>
+							<div
+								style={{
+									position: 'relative',
+									minHeight: '200px',
+								}}
+							>
+								<Suspense fallback={<Loading />}>
+									<TasksListContainer
+										projectId={projectId}
+										filter={filter}
+										tags={tags}
+									/>
+								</Suspense>
+							</div>
 						</Content>
 					)}
 					<PendingActionsTray projectId={projectId} />

@@ -17,7 +17,7 @@ const Container = styled('div')`
 	display: flex;
 	margin-bottom: 10px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: grid;
 		width: 100%;
 		grid-template-columns: 22% 22% 22% 34%;
@@ -43,7 +43,7 @@ const SuggestedTime = styled('button')`
 		border-color: transparent;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		height: 1.5rem;
 		margin-bottom: 5px;
 	}

@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, DRAG_TYPES} from '../../utils/constants';
+import {Loading} from '../../utils/content';
 import {extractScheduleFromWorkingDays} from '../../utils/functions';
 import GoogleGLogo from '../../utils/images/google_g_logo.svg';
 import {UNFOCUS_TASK} from '../../utils/mutations';
@@ -53,8 +54,9 @@ const Week = styled('div')`
 	border-radius: 8px;
 	background-color: ${lightGrey};
 	min-height: 180px;
+	position: relative;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-flow: column;
 	}
 `;
@@ -126,7 +128,7 @@ const ScheduleNav = styled('div')`
 	color: ${primaryPurple};
 	justify-content: flex-end;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		${Button} {
 			width: auto;
 		}
@@ -316,6 +318,7 @@ const EventCard = ({
 );
 
 const Schedule = ({
+	loading,
 	startingFrom,
 	onChangeWeek,
 	days,
@@ -333,7 +336,7 @@ const Schedule = ({
 	).startOf('week');
 	const endDay = moment(startDay).endOf('week');
 
-	const [account, signedIn, , loading] = useAccount();
+	const [account, signedIn, , loadingAccount] = useAccount();
 
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
@@ -366,7 +369,7 @@ const Schedule = ({
 	return (
 		<Container>
 			<ScheduleNav>
-				{!loading && !signedIn && (
+				{!loadingAccount && !signedIn && (
 					<Link
 						style={{flex: 1, alignSelf: 'center'}}
 						to="/app/account#calendar"
@@ -624,7 +627,7 @@ const Schedule = ({
 						</Day>
 					);
 				})}
-				{isWeekEmpty && (
+				{!loading && isWeekEmpty && (
 					<EmptyWeekBanner>
 						<fbt desc="Banner displayed when the dashboard schedule is empty">
 							Glisser des tâches dans le calendrier pour
@@ -636,6 +639,7 @@ const Schedule = ({
 						</fbt>
 					</EmptyWeekBanner>
 				)}
+				{loading && <Loading />}
 			</Week>
 		</Container>
 	);

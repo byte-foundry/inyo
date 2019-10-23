@@ -26,7 +26,7 @@ const TaskDateInput = styled('div')`
 		display: none;
 	}
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		left: 0;
 	}
 `;

@@ -142,6 +142,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			endWorkAt
 			workingDays
 			timeZone
+			defaultDailyPrice
 			settings {
 				hasFullWeekSchedule
 			}
@@ -482,6 +483,10 @@ export const ADD_SECTION = gql`
 				daysUntilDeadline
 				status
 				name
+				sections {
+					id
+					name
+				}
 				customer {
 					id
 					name
@@ -624,16 +629,6 @@ export const REMOVE_ITEM = gql`
 	mutation removeItem($itemId: ID!) {
 		removeItem(id: $itemId) {
 			id
-		}
-	}
-`;
-
-export const SNOOZE_ITEM = gql`
-	${ITEM_FRAGMENT}
-
-	mutation snoozeItem($itemId: ID!, $during: Int) {
-		snoozeItem(id: $itemId, during: $during) {
-			...ItemFragment
 		}
 	}
 `;

@@ -18,7 +18,7 @@ const Container = styled('div')`
 	width: 100%;
 	height: 800px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
 		align-items: initial;
 		width: auto;
@@ -27,7 +27,7 @@ const Container = styled('div')`
 `;
 
 const FlewRowMobile = styled(FlexRow)`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;
@@ -35,7 +35,7 @@ const FlewRowMobile = styled(FlexRow)`
 const IllusForPaying = styled('img')`
 	height: 330px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		height: 30vh;
 	}
 `;
@@ -44,7 +44,7 @@ const Separator = styled('span')`
 	color: ${primaryGrey};
 	padding: 1rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 10px;
 		margin: 0 auto;
 	}
@@ -55,7 +55,7 @@ const Column = styled(FlexColumn)`
 	margin-left: 2rem;
 	justify-content: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: auto;
 		margin-left: 0;
 	}

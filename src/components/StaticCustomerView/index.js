@@ -8,7 +8,7 @@ import {CustomerContext} from '../../utils/contexts';
 const Container = styled('div')`
 	padding: 3rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
 	}
 `;

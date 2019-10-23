@@ -20,7 +20,7 @@ const FormContainer = styled('div')`
 	grid-template-columns: 1fr 2fr;
 	align-items: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
@@ -35,7 +35,7 @@ const ProfileSection = styled('div')`
 	display: flex;
 	flex-direction: row;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 0;
 		border: none;
 	}

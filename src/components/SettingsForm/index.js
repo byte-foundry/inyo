@@ -30,7 +30,7 @@ const FormContainer = styled('div')`
 	grid-template-columns: 1fr 2fr;
 	align-items: center;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		flex-direction: column;
 		align-items: stretch;
@@ -45,7 +45,7 @@ const ProfileSection = styled('div')`
 	display: flex;
 	flex-direction: row;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 0;
 		border: none;
 	}
@@ -58,7 +58,7 @@ const UpdateButton = styled(Button)`
 	margin-right: 50px;
 	margin-bottom: 80px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-right: 0;
 		margin-bottom: 20px;
 	}
@@ -72,7 +72,7 @@ const EmojiTimeline = styled('div')`
 	position: relative;
 	height: 50px;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 1.5rem;
 	}
 `;
@@ -97,6 +97,7 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 		endWorkAt,
 		settings: {hasFullWeekSchedule: hasFullWeekScheduleInitial},
 		workingDays,
+		defaultDailyPrice: initialDailyRate,
 	} = props;
 
 	const currentDate = new Date().toJSON().split('T')[0];
@@ -139,9 +140,24 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 					workingDays: workingDaysInitial,
 					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
-					dailyRate: undefined,
+					dailyRate: initialDailyRate,
 				}}
-				validationSchema={Yup.object().shape({})}
+				validationSchema={Yup.object().shape({
+					dailyRate: Yup.number()
+						.typeError(
+							fbt(
+								'Le prix doit être un nombre',
+								'daily rate input not number',
+							),
+						)
+						.positive(
+							fbt(
+								'Le prix doit être un nombre positif',
+								'daily rate input not positive',
+							),
+						)
+						.nullable(),
+				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
 
@@ -176,7 +192,9 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
 								workingDays,
-								defaultDailyPrice: parseInt(dailyRate),
+								defaultDailyPrice: dailyRate
+									? parseInt(dailyRate, 10)
+									: null,
 								timeZone,
 								hasFullWeekSchedule: !hasNotFullWeekSchedule,
 							},
@@ -426,17 +444,17 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 												Calculer mon prix journalier
 											</fbt>
 										</A>
+										{status && status.msg && (
+											<ErrorInput
+												style={{
+													marginBottom: '1rem',
+												}}
+											>
+												{status.msg}
+											</ErrorInput>
+										)}
 									</div>
 								</FormContainer>
-								{status && status.msg && (
-									<ErrorInput
-										style={{
-											marginBottom: '1rem',
-										}}
-									>
-										{status.msg}
-									</ErrorInput>
-								)}
 							</ProfileSection>
 							<UpdateButton type="submit" big>
 								<fbt project="inyo" desc="update">

@@ -64,6 +64,9 @@ function DraggableTask({
 		begin() {
 			setIsDragging(true);
 			return {
+				type: item.type,
+				linkedCustomer: item.linkedCustomer, // we need this
+				attachments: item.attachments, // and this to check for activation criteria fulfillment
 				id: item.id,
 			};
 		},

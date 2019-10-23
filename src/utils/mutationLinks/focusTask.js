@@ -1,6 +1,8 @@
 import produce from 'immer';
 import moment from 'moment';
 
+import {isCustomerTask} from '../functions';
+
 export default {
 	getReminders: ({mutation, query}) => {
 		const newRemindersItem = mutation.result.data.focusTask.reminders.filter(
@@ -55,29 +57,47 @@ export default {
 		return produce(query.result, (draft) => {
 			const {schedule} = draft.me;
 
-			// remove old
-			schedule.forEach((d) => {
-				const filteredTasks = d.tasks.filter(t => t.id !== task.id);
+			if (isCustomerTask(task.type)) {
+				task.reminders
+					.filter(reminder => reminder.status !== 'CANCELED')
+					.forEach((reminder) => {
+						const scheduleDay = schedule.find(
+							d => d.date
+								=== moment(reminder.sendingDate).format(
+									'YYYY-MM-DD',
+								),
+						);
 
-				if (filteredTasks.length !== d.tasks.length) {
-					filteredTasks.forEach((t, i) => {
+						if (scheduleDay) {
+							scheduleDay.reminders.push(reminder);
+						}
+					});
+			}
+			else {
+				// remove old
+				schedule.forEach((d) => {
+					const filteredTasks = d.tasks.filter(t => t.id !== task.id);
+
+					if (filteredTasks.length !== d.tasks.length) {
+						filteredTasks.forEach((t, i) => {
+							t.schedulePosition = i;
+						});
+					}
+
+					d.tasks = filteredTasks;
+				});
+
+				// add new
+				const scheduleDay = schedule.find(
+					d => d.date === task.scheduledFor,
+				);
+
+				if (scheduleDay) {
+					scheduleDay.tasks.splice(task.schedulePosition, 0, task);
+					scheduleDay.tasks.forEach((t, i) => {
 						t.schedulePosition = i;
 					});
 				}
-
-				d.tasks = filteredTasks;
-			});
-
-			// add new
-			const scheduleDay = schedule.find(
-				d => d.date === task.scheduledFor,
-			);
-
-			if (scheduleDay) {
-				scheduleDay.tasks.splice(task.schedulePosition, 0, task);
-				scheduleDay.tasks.forEach((t, i) => {
-					t.schedulePosition = i;
-				});
 			}
 		});
 	},

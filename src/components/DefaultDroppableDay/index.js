@@ -30,7 +30,13 @@ function DefaultDroppableDay({
 		},
 		drop(item) {
 			if (typeof item.index !== 'number') {
-				return onMove({id: item.id, scheduledFor});
+				return onMove({
+					id: item.id,
+					type: item.type,
+					linkedCustomer: item.linkedCustomer, // we need this
+					attachments: item.attachments, // and this to check for activation criteria fulfillment
+					scheduledFor,
+				});
 			}
 			return {index, scheduledFor};
 		},

@@ -275,7 +275,6 @@ const TaskInput = ({
 			{withProject && (
 				<ProjectsDropdown
 					style={{margin: '0 0 10px auto', width: '250px'}}
-					autoFocus
 					onChange={(param) => {
 						const {value: id} = param || {};
 

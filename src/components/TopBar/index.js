@@ -66,7 +66,6 @@ export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 export const Label = styled('span')``;
 
 const TopBar = styled('div')`
-	display: flex;
 	flex-flow: column nowrap;
 	flex: ${props => (props.visible ? '0 0 auto' : '0 0 50px')};
 	overflow-x: hidden;
@@ -107,7 +106,7 @@ const TopBar = styled('div')`
 		}
 
 		a {
-			width: ${props => (props.visible ? 'calc(100vw - 30px);' : '0')};
+			width: ${props => (props.visible ? 'calc(100vw - 100px);' : '0')};
 		}
 	}
 `;

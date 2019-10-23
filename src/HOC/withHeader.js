@@ -29,7 +29,7 @@ export const ToggleMenu = styled('div')`
 	}
 `;
 
-const TogglingTopBar = ({children}) => {
+const TogglingTopBar = () => {
 	const [visible, toggleMenu] = useLocalStorage('visibleMenu', false);
 
 	return (
@@ -183,7 +183,7 @@ const withHeader = Component => (...args) => (
 			<AssistantActions />
 		</LeftMenu>
 		<Component {...args} />
-		<TogglingTopBar></TogglingTopBar>
+		<TogglingTopBar />
 	</>
 );
 

@@ -178,7 +178,12 @@ const EmptyWeekBanner = styled(P)`
 `;
 
 const DraggableTaskCard = ({
-	id, index, scheduledFor, onMove, ...rest
+	id,
+	type,
+	index,
+	scheduledFor,
+	onMove,
+	...rest
 }) => {
 	const [unfocusTask] = useMutation(UNFOCUS_TASK);
 	const [, drag] = useDrag({
@@ -186,6 +191,7 @@ const DraggableTaskCard = ({
 		begin() {
 			return {
 				id,
+				type,
 				index,
 			};
 		},
@@ -227,7 +233,12 @@ const DraggableTaskCard = ({
 		},
 		drop(item) {
 			if (typeof item.index !== 'number') {
-				return onMove({id: item.id, index, scheduledFor});
+				return onMove({
+					id: item.id,
+					type: item.type,
+					index,
+					scheduledFor,
+				});
 			}
 			return {index, scheduledFor};
 		},
@@ -562,16 +573,18 @@ const Schedule = ({
 									<DraggableTaskCard
 										key={`${task.id}-${task.schedulePosition}`}
 										id={task.id}
+										type={task.type}
 										task={task}
 										index={task.schedulePosition}
 										scheduledFor={day.date}
 										onMove={({
 											id,
+											type,
 											index: position,
 											scheduledFor,
 										}) => {
 											onMoveTask({
-												task: id ? {id} : task,
+												task: id ? {id, type} : task,
 												scheduledFor,
 												position:
 													typeof position === 'number'
@@ -586,11 +599,19 @@ const Schedule = ({
 									scheduledFor={day.date}
 									onMove={({
 										id,
+										type,
+										linkedCustomer,
+										attachments,
 										index: position,
 										scheduledFor,
 									}) => {
 										onMoveTask({
-											task: {id},
+											task: {
+												id,
+												type,
+												linkedCustomer, // we need this
+												attachments, // and this to check for activation criteria fulfillment
+											},
 											scheduledFor,
 											position:
 												typeof position === 'number'

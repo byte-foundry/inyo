@@ -58,16 +58,20 @@ export default {
 			const {schedule} = draft.me;
 
 			if (isCustomerTask(task.type)) {
-				task.reminders.forEach((reminder) => {
-					const scheduleDay = schedule.find(
-						d => d.date
-							=== moment(reminder.sendingDate).format('YYYY-MM-DD'),
-					);
+				task.reminders
+					.filter(reminder => reminder.status !== 'CANCELED')
+					.forEach((reminder) => {
+						const scheduleDay = schedule.find(
+							d => d.date
+								=== moment(reminder.sendingDate).format(
+									'YYYY-MM-DD',
+								),
+						);
 
-					if (scheduleDay) {
-						scheduleDay.reminders.push(reminder);
-					}
-				});
+						if (scheduleDay) {
+							scheduleDay.reminders.push(reminder);
+						}
+					});
 			}
 			else {
 				// remove old

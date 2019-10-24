@@ -93,15 +93,14 @@ const PendingActionsTray = ({projectId}) => {
 		data: {
 			me: {tasks},
 		},
-	} = useQuery(GET_ALL_TASKS, {suspend: true});
+	} = useQuery(GET_ALL_TASKS, {
+		suspend: true,
+		variables: {schedule: 'FINISHED_TIME_IT_TOOK_NULL'},
+	});
 
 	const pendingTimeItTookTasks = tasks.filter(
-		task => !isCustomerTask(task.type)
-			&& task.timeItTook === null
-			&& task.status === 'FINISHED'
-			&& (!projectId
-				|| (task.section && task.section.project.id === projectId))
-			&& (!task.assignee || task.assignee.id === userId),
+		task => !projectId
+			|| (task.section && task.section.project.id === projectId),
 	);
 	const isVisible = pendingTimeItTookTasks.length > 0;
 

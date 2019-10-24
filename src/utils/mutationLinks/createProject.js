@@ -10,6 +10,20 @@ export default {
 			},
 		};
 	},
+	getAllTasksShort: ({mutation, query}) => {
+		const {tasks} = query.result.me;
+		const addedTasks = mutation.result.data.createProject.sections
+			.map(section => section.items)
+			.flat();
+
+		return {
+			...query.result,
+			me: {
+				...query.result.me,
+				tasks: [...tasks, ...addedTasks],
+			},
+		};
+	},
 	getAllTasks: ({mutation, query}) => {
 		const {tasks} = query.result.me;
 		const addedTasks = mutation.result.data.createProject.sections

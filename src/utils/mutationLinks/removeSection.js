@@ -31,6 +31,22 @@ export default {
 			},
 		};
 	},
+	getAllTasksShort({mutation, query}) {
+		const {me} = query.result;
+
+		const removedSection = mutation.result.data.removeSection;
+		const tasks = me.tasks.filter(
+			task => !task.section || task.section.id !== removedSection.id,
+		);
+
+		return {
+			...query.result,
+			me: {
+				...me,
+				tasks,
+			},
+		};
+	},
 	getAllTasks({mutation, query}) {
 		const {me} = query.result;
 

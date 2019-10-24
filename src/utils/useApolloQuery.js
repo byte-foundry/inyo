@@ -78,7 +78,9 @@ export default function useBaseQuery(query, options) {
 		[],
 	);
 
-	const removeForceUpdate = () => forceUpdateRefs.delete(forceUpdate);
+	const removeForceUpdate = () => {
+		forceUpdateRefs.delete(forceUpdate);
+	};
 
 	result.observable = queryData.currentObservable.query;
 	result.removeForceUpdate = removeForceUpdate;

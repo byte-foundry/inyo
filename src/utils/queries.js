@@ -480,10 +480,20 @@ export const GET_ITEM_DETAILS = gql`
 export const GET_ALL_TASKS_SHORT = gql`
 	${SHORT_TASK_FRAGMENT}
 
-	query getAllTasksShort($linkedCustomerId: ID) {
+	query getAllTasksShort(
+		$linkedCustomerId: ID
+		$first: Int
+		$after: ID
+		$schedule: ScheduleFilterInput
+	) {
 		me {
 			id
-			tasks(filter: {linkedCustomerId: $linkedCustomerId}) {
+			tasks(
+				filter: {linkedCustomerId: $linkedCustomerId}
+				schedule: $schedule
+				first: $first
+				after: $after
+			) {
 				...ShortTaskFragment
 			}
 		}

@@ -69,6 +69,30 @@ export default {
 
 		return undefined;
 	},
+	getAllTasksShort: ({mutation, query}) => {
+		let cachedItems = query.result.me.tasks;
+		const addedItem = mutation.result.data.addItem;
+
+		if (query.variables.schedule === 'TO_BE_RESCHEDULED') return query.result;
+
+		if (addedItem.section) {
+			cachedItems = cachedItems.map((item) => {
+				if (item.section && item.section.id === addedItem.section.id) {
+					return {...item, position: item.position + 1};
+				}
+
+				return item;
+			});
+		}
+
+		return {
+			...query.result,
+			me: {
+				...query.result.me,
+				tasks: [addedItem, ...cachedItems],
+			},
+		};
+	},
 	getAllTasks: ({mutation, query}) => {
 		let cachedItems = query.result.me.tasks;
 		const addedItem = mutation.result.data.addItem;

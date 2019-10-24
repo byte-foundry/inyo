@@ -19,6 +19,7 @@ import createSectionWatchMutation from './mutationLinks/createSection';
 import createTagWatchMutation from './mutationLinks/createTag';
 import createTaskWatchMutation from './mutationLinks/createTask';
 import deleteTaskWatchMutation from './mutationLinks/deleteTask';
+import finishItemWatchMutation from './mutationLinks/finishItem';
 import focusTaskWatchMutation from './mutationLinks/focusTask';
 import removeAttachmentWatchMutation from './mutationLinks/removeAttachment';
 import removeCustomerWatchMutation from './mutationLinks/removeCustomer';
@@ -26,6 +27,7 @@ import removeProjectWatchMutation from './mutationLinks/removeProject';
 import removeSectionWatchMutation from './mutationLinks/removeSection';
 import removeTagWatchMutation from './mutationLinks/removeTag';
 import requestCollabWatchMutation from './mutationLinks/requestCollab';
+import unfinishItemWatchMutation from './mutationLinks/unfinishItem';
 import unfocusTaskWatchMutation from './mutationLinks/unfocusTask';
 import updateItemWatchMutation from './mutationLinks/updateItem';
 import updateProjectWatchMutation from './mutationLinks/updateProject';
@@ -102,6 +104,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	createProject: createProjectWatchMutation,
 	createCustomer: createCustomerWatchMutation,
 	createTag: createTagWatchMutation,
+	finishItem: finishItemWatchMutation,
 	focusTask: focusTaskWatchMutation,
 	removeAttachment: removeAttachmentWatchMutation,
 	removeCustomer: removeCustomerWatchMutation,
@@ -110,6 +113,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	removeSection: removeSectionWatchMutation,
 	removeTag: removeTagWatchMutation,
 	requestCollab: requestCollabWatchMutation,
+	unfinishItem: unfinishItemWatchMutation,
 	unfocusTask: unfocusTaskWatchMutation,
 	updateItem: updateItemWatchMutation,
 	updateProject: updateProjectWatchMutation,

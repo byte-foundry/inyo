@@ -133,31 +133,11 @@ export const ITEM_FRAGMENT = gql`
 	${COMMENT_ON_ITEM_FRAGMENT}
 	${REMINDER_FRAGMENT}
 	${TAG_FRAGMENT}
+	${SHORT_TASK_FRAGMENT}
 
 	fragment ItemFragment on Item {
-		id
-		description
-		dueDate
-		name
-		position
-		status
-		finishedAt
-		createdAt
-		type
-		unit
-		timeItTook
-		isFocused
-		scheduledFor
-		schedulePosition
-		owner {
-			id
-		}
-		assignee {
-			id
-			email
-			firstName
-			lastName
-		}
+		...ShortTaskFragment
+
 		reminders {
 			...ReminderFragment
 		}
@@ -177,12 +157,6 @@ export const ITEM_FRAGMENT = gql`
 				}
 			}
 		}
-		linkedCustomer {
-			id
-			name
-			firstName
-			lastName
-		}
 
 		tags {
 			...TagFragment
@@ -194,10 +168,7 @@ export const ITEM_FRAGMENT = gql`
 			position
 			project {
 				id
-				deadline
 				daysUntilDeadline
-				status
-				name
 				linkedCollaborators {
 					id
 					email

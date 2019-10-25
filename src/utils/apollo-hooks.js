@@ -11,7 +11,7 @@ export function useQuery(query, options) {
 	/* eslint-enable */
 
 	if (options && options.suspend && result.loading) {
-		result.removeForceUpdate();
+		result.removeDataRefs();
 		throw result.observable.result();
 	}
 

@@ -60,7 +60,7 @@ function TasksList({
 									project="inyo"
 									desc="no filtered task message"
 								>
-									Aucune tâche ne correspond à ses critères.
+									Aucune tâche ne correspond à ces critères.
 								</fbt>
 							</P>
 						</IllusText>

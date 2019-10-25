@@ -110,7 +110,7 @@ const DashboardTasks = ({location, history}) => {
 	const {data, error} = useQuery(GET_ALL_TASKS_SHORT, {
 		suspend: true,
 		variables: {schedule: 'UNSCHEDULED'},
-		pollInterval: 1000 * 30, // refresh tasks every 5 min
+		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
 	});
 
 	const {

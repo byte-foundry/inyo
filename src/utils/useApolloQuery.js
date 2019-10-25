@@ -19,35 +19,40 @@ export default function useBaseQuery(query, options) {
 	if (queryDataRefs.has(queryKey)) {
 		const oldQueryDataRefs = queryDataRefs.get(queryKey);
 
-		oldQueryDataRefs.forceUpdate = () => {};
+		oldQueryDataRefs.push(
+			new QueryData({
+				options: updatedOptions,
+				context,
+				forceUpdate: () => {},
+			}),
+		);
+	}
+	else {
+		queryDataRefs.set(queryKey, [
+			new QueryData({
+				options: updatedOptions,
+				context,
+				forceUpdate: () => {
+					const snapshotOfForceUpdate = Array.from(
+						forceUpdateRefs.values(),
+					);
+
+					snapshotOfForceUpdate.forEach((fn) => {
+						fn(x => x + 1);
+					});
+				},
+			}),
+		]);
 	}
 
-	queryDataRefs.set(
-		queryKey,
-		new QueryData({
-			options: updatedOptions,
-			context,
-			forceUpdate: () => {
-				const snapshotOfForceUpdate = Array.from(
-					forceUpdateRefs.values(),
-				);
-
-				snapshotOfForceUpdate.forEach((fn) => {
-					forceUpdateRefs.delete(fn);
-					fn(x => x + 1);
-				});
-			},
-		}),
-	);
-
-	const queryData = queryDataRefs.get(queryKey);
+	const queryData = queryDataRefs.get(queryKey)[
+		queryDataRefs.get(queryKey).length - 1
+	];
 
 	queryData.setOptions(updatedOptions);
 	queryData.context = context;
 
-	if (!forceUpdateRefs.has(forceUpdate)) {
-		forceUpdateRefs.set(forceUpdate, forceUpdate);
-	}
+	forceUpdateRefs.set(forceUpdate, forceUpdate);
 
 	// `onError` and `onCompleted` callback functions will not always have a
 	// stable identity, so we'll exclude them from the memoization key to
@@ -82,12 +87,18 @@ export default function useBaseQuery(query, options) {
 		[],
 	);
 
-	const removeForceUpdate = () => {
+	const removeDataRefs = () => {
+		const dataRefs = queryDataRefs.get(queryKey);
+
+		const index = dataRefs.findIndex(q => q === queryData);
+
+		dataRefs.splice(index, 1);
+
 		forceUpdateRefs.delete(forceUpdate);
 	};
 
 	result.observable = queryData.currentObservable.query;
-	result.removeForceUpdate = removeForceUpdate;
+	result.removeDataRefs = removeDataRefs;
 
 	return result;
 }

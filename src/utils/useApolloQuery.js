@@ -16,25 +16,29 @@ export default function useBaseQuery(query, options) {
 	// we used the serialized options to keep track of the queries
 	const queryKey = JSON.stringify(updatedOptions);
 
-	if (!queryDataRefs.has(queryKey)) {
-		queryDataRefs.set(
-			queryKey,
-			new QueryData({
-				options: updatedOptions,
-				context,
-				forceUpdate: () => {
-					const snapshotOfForceUpdate = Array.from(
-						forceUpdateRefs.values(),
-					);
+	if (queryDataRefs.has(queryKey)) {
+		const oldQueryDataRefs = queryDataRefs.get(queryKey);
 
-					snapshotOfForceUpdate.forEach((fn) => {
-						forceUpdateRefs.delete(fn);
-						fn(x => x + 1);
-					});
-				},
-			}),
-		);
+		oldQueryDataRefs.forceUpdate = () => {};
 	}
+
+	queryDataRefs.set(
+		queryKey,
+		new QueryData({
+			options: updatedOptions,
+			context,
+			forceUpdate: () => {
+				const snapshotOfForceUpdate = Array.from(
+					forceUpdateRefs.values(),
+				);
+
+				snapshotOfForceUpdate.forEach((fn) => {
+					forceUpdateRefs.delete(fn);
+					fn(x => x + 1);
+				});
+			},
+		}),
+	);
 
 	const queryData = queryDataRefs.get(queryKey);
 
@@ -78,7 +82,9 @@ export default function useBaseQuery(query, options) {
 		[],
 	);
 
-	const removeForceUpdate = () => forceUpdateRefs.delete(forceUpdate);
+	const removeForceUpdate = () => {
+		forceUpdateRefs.delete(forceUpdate);
+	};
 
 	result.observable = queryData.currentObservable.query;
 	result.removeForceUpdate = removeForceUpdate;

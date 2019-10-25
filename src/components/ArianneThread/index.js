@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, {useMemo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {withRouter} from 'react-router-dom';
 import Select, {components} from 'react-select';
 import Creatable from 'react-select/creatable';
@@ -273,6 +273,7 @@ export function ArianneElemCreatable({
 		</ArianneElemMain>
 	);
 }
+
 function ArianneThread({
 	selectCustomer,
 	selectProjects,
@@ -435,4 +436,14 @@ function ArianneThread({
 	);
 }
 
-export default withRouter(ArianneThread);
+export default memo(
+	withRouter(ArianneThread),
+	(prevProps, nextProps) => prevProps.projectId === nextProps.projectId
+		&& prevProps.linkedCustomerId === nextProps.linkedCustomerId
+		&& prevProps.selectCustomer === nextProps.selectCustomer
+		&& prevProps.selectProjects === nextProps.selectProjects
+		&& prevProps.selectFilter === nextProps.selectFilter
+		&& prevProps.selectTag === nextProps.selectTag
+		&& prevProps.filterId === nextProps.filterId
+		&& prevProps.tagsSelected === nextProps.tagsSelected,
+);

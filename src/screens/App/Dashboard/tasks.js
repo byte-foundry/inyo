@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import moment from 'moment';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useMemo, useState} from 'react';
 import {useDrag} from 'react-dnd';
 import {Route, withRouter} from 'react-router-dom';
 
@@ -35,7 +35,7 @@ import {
 	P,
 	ScrollHelper,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {GET_ALL_TASKS_SHORT} from '../../../utils/queries';
 import useScheduleData from '../../../utils/useScheduleData';
 import useUserInfos from '../../../utils/useUserInfos';
 
@@ -96,7 +96,10 @@ function DraggableTask({
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
 	const [isDragging, setIsDragging] = useState(false);
-	const query = new URLSearchParams(prevSearch || location.search);
+	const query = useMemo(
+		() => new URLSearchParams(prevSearch || location.search),
+		[prevSearch, location.search],
+	);
 
 	const startingFrom
 		= query.get('from')
@@ -104,11 +107,12 @@ const DashboardTasks = ({location, history}) => {
 			.startOf('week')
 			.format(moment.HTML5_FMT.DATE);
 
-	const {data, error} = useQuery(GET_ALL_TASKS, {
+	const {data, error} = useQuery(GET_ALL_TASKS_SHORT, {
 		suspend: true,
 		variables: {schedule: 'UNSCHEDULED'},
-		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
+		pollInterval: 1000 * 30, // refresh tasks every 5 min
 	});
+
 	const {
 		assistantName,
 		workingTime,
@@ -159,7 +163,7 @@ const DashboardTasks = ({location, history}) => {
 
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
-	const tags = query.getAll('tags');
+	const tags = useMemo(() => query.getAll('tags'), [query]);
 	const linkedCustomerId = query.get('customerId');
 
 	if (
@@ -173,6 +177,79 @@ const DashboardTasks = ({location, history}) => {
 		)
 	) throw error;
 
+	const setProjectSelected = useCallback(
+		(selected, removeCustomer) => {
+			const newQuery = new URLSearchParams(query);
+
+			if (selected) {
+				const {value: selectedProjectId} = selected;
+
+				newQuery.set('projectId', selectedProjectId);
+			}
+			else if (newQuery.has('projectId')) {
+				newQuery.delete('projectId');
+			}
+
+			if (removeCustomer) {
+				newQuery.delete('customerId');
+			}
+
+			history.push(`/app/dashboard?${newQuery.toString()}`);
+		},
+		[history, query],
+	);
+
+	const setCustomerSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
+
+			if (selected) {
+				const {value: selectedCustomerId} = selected;
+
+				newQuery.set('customerId', selectedCustomerId);
+			}
+			else if (newQuery.has('customerId')) {
+				newQuery.delete('customerId');
+			}
+
+			if (newQuery.has('projectId')) {
+				newQuery.delete('projectId');
+			}
+
+			history.push(`/app/dashboard?${newQuery.toString()}`);
+		},
+		[history, query],
+	);
+
+	const setFilterSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
+
+			if (selected) {
+				const {value: selectedFilterId} = selected;
+
+				newQuery.set('filter', selectedFilterId);
+			}
+
+			history.push(`/app/dashboard?${newQuery.toString()}`);
+		},
+		[history, query],
+	);
+
+	const setTagSelected = useCallback(
+		(selected) => {
+			const newQuery = new URLSearchParams(query);
+
+			if (selected) {
+				newQuery.delete('tags');
+				selected.forEach(tag => newQuery.append('tags', tag.value));
+			}
+
+			history.push(`/app/dashboard?${newQuery.toString()}`);
+		},
+		[history, query],
+	);
+
 	const {
 		me: {id, tasks},
 	} = data;
@@ -180,67 +257,6 @@ const DashboardTasks = ({location, history}) => {
 	const unscheduledTasks = tasks.filter(
 		t => !(t.assignee && t.assignee.id !== id),
 	);
-
-	const setProjectSelected = (selected, removeCustomer) => {
-		const newQuery = new URLSearchParams(query);
-
-		if (selected) {
-			const {value: selectedProjectId} = selected;
-
-			newQuery.set('projectId', selectedProjectId);
-		}
-		else if (newQuery.has('projectId')) {
-			newQuery.delete('projectId');
-		}
-
-		if (removeCustomer) {
-			newQuery.delete('customerId');
-		}
-
-		history.push(`/app/dashboard?${newQuery.toString()}`);
-	};
-
-	const setCustomerSelected = (selected) => {
-		const newQuery = new URLSearchParams(query);
-
-		if (selected) {
-			const {value: selectedCustomerId} = selected;
-
-			newQuery.set('customerId', selectedCustomerId);
-		}
-		else if (newQuery.has('customerId')) {
-			newQuery.delete('customerId');
-		}
-
-		if (newQuery.has('projectId')) {
-			newQuery.delete('projectId');
-		}
-
-		history.push(`/app/dashboard?${newQuery.toString()}`);
-	};
-
-	const setFilterSelected = (selected) => {
-		const newQuery = new URLSearchParams(query);
-
-		if (selected) {
-			const {value: selectedFilterId} = selected;
-
-			newQuery.set('filter', selectedFilterId);
-		}
-
-		history.push(`/app/dashboard?${newQuery.toString()}`);
-	};
-
-	const setTagSelected = (selected) => {
-		const newQuery = new URLSearchParams(query);
-
-		if (selected) {
-			newQuery.delete('tags');
-			selected.forEach(tag => newQuery.append('tags', tag.value));
-		}
-
-		history.push(`/app/dashboard?${newQuery.toString()}`);
-	};
 
 	const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
 		task => !task.section

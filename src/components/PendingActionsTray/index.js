@@ -5,7 +5,6 @@ import React, {useEffect, useState} from 'react';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
-import {isCustomerTask} from '../../utils/functions';
 import {FINISH_ITEM} from '../../utils/mutations';
 import {
 	Button,
@@ -14,8 +13,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../utils/queries';
-import useUserInfos from '../../utils/useUserInfos';
+import {GET_ALL_TASKS_SHORT} from '../../utils/queries';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
@@ -30,9 +28,9 @@ const Tray = styled('div')`
 		0 3px 1px -2px rgba(0, 0, 0, 0.12);
 	transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
 	background: ${primaryWhite};
-	transform: ${props => (!props.isVisible
-		? 'translateY(calc(100%))'
-		: !props.isOpen && 'translateY(calc(100% - 4rem + 10px))')};
+	transform: ${props => (props.isVisible
+		? !props.isOpen && 'translateY(calc(100% - 4rem + 10px))'
+		: 'translateY(calc(100%))')};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
@@ -86,14 +84,13 @@ const TimeItTookHeading = styled('h3')`
 `;
 
 const PendingActionsTray = ({projectId}) => {
-	const {id: userId} = useUserInfos();
 	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
 	const [isOpen, setIsOpen] = useState(false);
 	const {
 		data: {
 			me: {tasks},
 		},
-	} = useQuery(GET_ALL_TASKS, {
+	} = useQuery(GET_ALL_TASKS_SHORT, {
 		suspend: true,
 		variables: {schedule: 'FINISHED_TIME_IT_TOOK_NULL'},
 	});
@@ -166,8 +163,11 @@ const PendingActionsTray = ({projectId}) => {
 											timeItTook: valuesMap[task.id],
 										},
 										optimisticResponse: {
-											...task,
-											timeItTook: valuesMap[task.id],
+											finishItem: {
+												...task,
+												timeItTook:
+														valuesMap[task.id],
+											},
 										},
 									})
 									}
@@ -199,8 +199,10 @@ const PendingActionsTray = ({projectId}) => {
 										timeItTook,
 									},
 									optimisticResponse: {
-										...task,
-										timeItTook,
+										finishItem: {
+											...task,
+											timeItTook,
+										},
 									},
 								})
 								}
@@ -225,9 +227,12 @@ const PendingActionsTray = ({projectId}) => {
 												valuesMap[task.id] || task.unit,
 									},
 									optimisticResponse: {
-										...task,
-										timeItTook:
-												valuesMap[task.id] || task.unit,
+										finishItem: {
+											...task,
+											timeItTook:
+													valuesMap[task.id]
+													|| task.unit,
+										},
 									},
 								}));
 							}}

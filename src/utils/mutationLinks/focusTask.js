@@ -79,7 +79,7 @@ export default {
 		});
 	},
 	getSchedule: ({mutation, query}) => {
-		const task = mutation.result.data.focusTask;
+		const task = {...mutation.result.data.focusTask};
 
 		return produce(query.result, (draft) => {
 			const {schedule} = draft.me;

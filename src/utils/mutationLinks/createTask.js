@@ -73,7 +73,10 @@ export default {
 		let cachedItems = query.result.me.tasks;
 		const addedItem = mutation.result.data.addItem;
 
-		if (query.variables.schedule === 'TO_BE_RESCHEDULED') return query.result;
+		if (
+			query.variables.schedule === 'TO_BE_RESCHEDULED'
+			|| query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
+		) return query.result;
 
 		if (addedItem.section) {
 			cachedItems = cachedItems.map((item) => {
@@ -97,7 +100,10 @@ export default {
 		let cachedItems = query.result.me.tasks;
 		const addedItem = mutation.result.data.addItem;
 
-		if (query.variables.schedule === 'TO_BE_RESCHEDULED') return query.result;
+		if (
+			query.variables.schedule === 'TO_BE_RESCHEDULED'
+			|| query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
+		) return query.result;
 
 		if (addedItem.section) {
 			cachedItems = cachedItems.map((item) => {

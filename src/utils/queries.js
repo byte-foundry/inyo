@@ -661,3 +661,62 @@ export const GET_CUSTOMER_INFOS = gql`
 		}
 	}
 `;
+
+export const GET_PROJECT_ACTIVITY = gql`
+	query getProjectActivity($projectId: ID!) {
+		activity(projectId: $projectId) {
+			id
+			type
+			from {
+				... on User {
+					id
+					email
+					firstName
+					lastName
+				}
+				... on Customer {
+					id
+					title
+					firstName
+					lastName
+				}
+			}
+			subject {
+				... on User {
+					id
+					email
+					firstName
+					lastName
+				}
+			}
+			object {
+				... on Project {
+					id
+					name
+				}
+				... on Section {
+					id
+					name
+				}
+				... on Item {
+					id
+					name
+				}
+				... on Comment {
+					id
+					text
+				}
+				... on Reminder {
+					id
+					type
+					sendingDate
+					item {
+						id
+						name
+					}
+				}
+			}
+			createdAt
+		}
+	}
+`;

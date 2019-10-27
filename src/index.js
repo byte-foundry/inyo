@@ -139,6 +139,8 @@ function Root() {
 		[data],
 	);
 
+	if (error && !error.graphQLErrors[0]) throw error;
+
 	if (loading) return <Loading />;
 
 	if (data && data.me && !setupDone) {

@@ -3,30 +3,34 @@ import {Link} from '@reach/router';
 import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
-import {useMutation, useQuery} from '../../utils/apollo-hooks';
+import {useQuery} from '../../utils/apollo-hooks';
+import {LoadingLogo} from '../../utils/content';
+import {GET_PROJECT_ACTIVITY} from '../../utils/queries';
 
 const Feed = styled('div')`
 	flex: 1;
 `;
 
-const ActivityFeed = ({projectId}) =>
-// useQuery
+const ActivityFeed = ({projectId}) => {
+	const {data, loading, error} = useQuery(GET_PROJECT_ACTIVITY, {
+		variables: {projectId},
+		fetchPolicy: 'cache-and-network',
+	});
 
-	 (
+	if (error) throw error;
+	if (!data && loading) return <LoadingLogo />;
+
+	return (
 		<Feed>
 			<ul>
-				<li>
-					Jean-Michel Client a commenté la tâche{' '}
-					<Link to="">direction artistique</Link>.
-				</li>
-				<li>Jean-Michel Client a consulté le projet.</li>
-				<li>
-					Vous avez fini la tâche <Link to="">faire les courses</Link>
-					.
-				</li>
-				<li>Début du projet</li>
+				{data.activity.map(event => (
+					<li key={event.id}>
+						{event.from.firstName} {event.type} {event.object.id}
+					</li>
+				))}
 			</ul>
 		</Feed>
 	);
+};
 
 export default ActivityFeed;

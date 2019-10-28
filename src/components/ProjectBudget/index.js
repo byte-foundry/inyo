@@ -10,6 +10,7 @@ import {FlexColumn, FlexRow} from '../../utils/content';
 import {clamp} from '../../utils/functions';
 import {UPDATE_PROJECT} from '../../utils/mutations';
 import {
+	accentGrey,
 	Button,
 	lightGrey,
 	Pie,
@@ -22,6 +23,7 @@ import {GET_PROJECT_DATA} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
 import FormElem from '../FormElem';
 import IconButton from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 
 const BudgetContainer = styled('div')`
 	flex: 1;
@@ -44,8 +46,7 @@ const BudgetInfo = styled('div')`
 `;
 
 const BudgetGraphFlex = styled(FlexColumn)`
-	flex: 0 0 350px;
-	align-items: center;
+	margin-right: 2rem;
 `;
 
 const BudgetGraph = ({percent}) => (
@@ -56,19 +57,42 @@ const BudgetGraph = ({percent}) => (
 
 const BudgetItemRow = styled(FlexRow)`
 	color: ${({finished}) => (finished ? primaryPurple : primaryBlack)};
+	padding-left: 2.5rem;
+
+	font-size: 1rem;
+
+	display: grid;
+	grid-template-columns: 2.5rem 1fr 240px;
+
+	${TaskIcon} {
+		transform: scale(0.75);
+	}
+`;
+
+const FlexRowHeader = styled(FlexRow)`
+	display: grid;
+	grid-template-columns: 1fr 120px 120px;
+	padding: 1.5rem 0.5rem;
+
+	color: ${accentGrey};
+	font-size: 1rem;
+`;
+
+const FlexRowSection = styled(FlexRow)`
+	display: grid;
+	grid-template-columns: 1fr 120px 120px;
+
+	font-size: 1.2rem;
 `;
 
 const BudgetItemName = styled('div')`
 	flex: 1;
-	font-size: 1.2rem;
-	height: 56px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 `;
 
 const BudgetItemBudget = styled('div')`
-	font-size: 1.2rem;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -89,20 +113,23 @@ const BudgetItem = ({item, defaultDailyPrice}) => {
 
 const BudgetItems = styled('div')`
 	display: ${({open}) => (open ? 'block' : 'none')};
+	margin-bottom: ${({open}) => (open ? '2rem' : '0')};
 `;
 
 const BudgetSectionName = styled('div')`
-	font-size: 1.5rem;
 	flex: 1;
+	display: flex;
+
+	i {
+		margin-right: 0.5rem;
+	}
 `;
 
-const BudgetSectionBudget = styled('div')`
-	font-size: 1.5rem;
-	margin-left: 1rem;
-`;
+const BudgetSectionBudget = styled('div')``;
 
 const BudgetSectionContainer = styled(FlexColumn)`
 	padding: 0.5rem;
+	padding-left: 0;
 	border-radius: 3px;
 	cursor: pointer;
 
@@ -133,15 +160,21 @@ const BudgetSection = ({section, defaultDailyPrice}) => {
 
 	return (
 		<BudgetSectionContainer onClick={() => setOpen(!open)}>
-			<FlexRow>
-				<BudgetSectionName>{section.name}</BudgetSectionName>
+			<FlexRowSection>
+				<BudgetSectionName>
+					<MaterialIcon
+						size="medium"
+						icon={open ? 'arrow_drop_down' : 'arrow_right'}
+					/>
+					{section.name}
+				</BudgetSectionName>
 				<BudgetSectionBudget>
-					Travaillé {sectionBudgetWorked} €
+					{sectionBudgetWorked} €
 				</BudgetSectionBudget>
 				<BudgetSectionBudget>
-					Restant {sectionBudgetUnworked} €
+					{sectionBudgetUnworked} €
 				</BudgetSectionBudget>
-			</FlexRow>
+			</FlexRowSection>
 			<BudgetItems open={open}>
 				{section.items.map(item => (
 					<BudgetItem
@@ -173,7 +206,7 @@ const BudgetFormElem = styled(FormElem)`
 const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
 	<fbt desc="project's budget">
 		<BudgetLabel>
-				Budget du projet
+			Budget du projet
 			<fbt:param name="icon">
 				<EditBudgetButton
 					onClick={() => setEditing(!editing)}
@@ -198,8 +231,7 @@ const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
 			) : (
 				<BudgetInfo>
 					<fbt desc="budget amount">
-						<fbt:param name="amount">{props.budget}</fbt:param>{' '}
-							€
+						<fbt:param name="amount">{props.budget}</fbt:param> €
 					</fbt>
 				</BudgetInfo>
 			)}
@@ -259,6 +291,11 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 				</FlexColumn>
 			</FlexRow>
 			<BudgetSections>
+				<FlexRowHeader>
+					<div>Phases du projet</div>
+					<div>Travaillé</div>
+					<div>Restant</div>
+				</FlexRowHeader>
 				{sections.map(section => (
 					<BudgetSection
 						section={section}
@@ -280,7 +317,7 @@ const NoBudgetDisplay = ({projectHasBudget, userHasDailyRate, ...props}) => (
 					</BudgetLabel>
 				</fbt>
 				<FormElem
-					label={<fbt desc="budget label">Budget du projet</fbt>}
+					label={<fbt desc="budget label">Budget vendu</fbt>}
 					{...props}
 					name="budget"
 					type="number"

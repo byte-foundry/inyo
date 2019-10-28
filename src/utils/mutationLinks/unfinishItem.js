@@ -11,6 +11,7 @@ export default {
 				if (
 					query.variables.schedule === 'TO_BE_RESCHEDULED'
 					&& task.scheduledFor
+					&& moment(task.scheduledFor).isBefore(moment().startOf('day'))
 				) {
 					draft.me.tasks = draft.me.tasks.filter(
 						t => t.id !== task.id,

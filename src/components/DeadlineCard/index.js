@@ -26,7 +26,7 @@ const CardElem = styled(Link)`
 const DeadlineCard = withRouter(
 	({
 		date, task, project, location, cardRef, ...rest
-	}) => (
+	}) => !!(project || task) && (
 		<CardElem
 			{...rest}
 			ref={cardRef}
@@ -36,11 +36,11 @@ const DeadlineCard = withRouter(
 					? {
 						pathname: '/app/tasks',
 						search: `?projectId=${project.id}`,
-					  }
+						  }
 					: {
 						pathname: `/app/dashboard/${task.id}`,
 						state: {prevSearch: location.search},
-					  }
+						  }
 			}
 		>
 			<Icon

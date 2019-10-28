@@ -522,6 +522,7 @@ const SidebarProjectInfos = ({
 
 				{isEditingCustomer && (
 					<CustomerModalAndMail
+						close={() => setEditCustomer(false)}
 						onValidate={async (customer) => {
 							if (
 								project.customer

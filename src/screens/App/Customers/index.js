@@ -297,6 +297,10 @@ const Customers = () => {
 				{isEditingCustomer && (
 					<CustomerModalAndMail
 						noSelect
+						close={() => {
+							setCustomerToEdit(null);
+							setEditCustomer(false);
+						}}
 						customer={customerToEdit}
 						onValidate={async () => {
 							setCustomerToEdit(null);

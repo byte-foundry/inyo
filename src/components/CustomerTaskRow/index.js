@@ -508,6 +508,7 @@ function Task({
 				</TaskContent>
 				{isEditingCustomer && (
 					<CustomerModalAndMail
+						close={() => setEditCustomer(false)}
 						onValidate={(customer) => {
 							updateItem({
 								variables: {

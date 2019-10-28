@@ -707,6 +707,7 @@ const TaskInput = ({
 			)}
 			{isEditingCustomer && (
 				<CustomerModalAndMail
+					close={() => setEditCustomer(false)}
 					onValidate={(customer) => {
 						setItemCustomer(customer);
 					}}

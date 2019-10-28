@@ -2396,7 +2396,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO {budget}",
+     "translation": "{budget}",
      "variations": {}
     }
    ]
@@ -2406,7 +2406,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO {=Vous n'avez pas encore mis de budget pour ce projet.}",
+     "translation": "{=Vous n'avez pas encore mis de budget pour ce projet.}",
      "variations": {}
     }
    ]
@@ -2416,7 +2416,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Vous n'avez pas encore mis de budget pour ce projet.",
+     "translation": "You haven't added a budget for this project yet.",
      "variations": {}
     }
    ]
@@ -2426,7 +2426,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Budget du projet",
+     "translation": "Budget",
      "variations": {}
     }
    ]
@@ -2436,7 +2436,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO 5000 €",
+     "translation": "$5000",
      "variations": {}
     }
    ]
@@ -2446,7 +2446,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Valider",
+     "translation": "Confirm",
      "variations": {}
     }
    ]
@@ -2456,7 +2456,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO {=Définissez votre TJM pour profiter des fonctionnalités de budget}",
+     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}",
      "variations": {}
     }
    ]
@@ -2466,7 +2466,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Définissez votre TJM pour profiter des fonctionnalités de budget",
+     "translation": "Before you can use the budget feature you need to add a daily rate",
      "variations": {}
     }
    ]
@@ -3206,7 +3206,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Budget",
+     "translation": "Budget",
      "variations": {}
     }
    ]
@@ -3216,7 +3216,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Budget du projet",
+     "translation": "Project's budget",
      "variations": {}
     }
    ]
@@ -3366,7 +3366,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Budget",
+     "translation": "Budget",
      "variations": {}
     }
    ]
@@ -3376,7 +3376,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO Budget du projet",
+     "translation": "Project's budget",
      "variations": {}
     }
    ]
@@ -3386,7 +3386,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "#TODO {amount} €",
+     "translation": "${amount}",
      "variations": {}
     }
    ]

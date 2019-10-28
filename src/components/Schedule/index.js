@@ -42,6 +42,8 @@ import {
 	UnitWorkedDisplay,
 } from '../UnitDisplay';
 
+const googleLogo = <img src={GoogleGLogo} />;
+
 const Container = styled('div')`
 	margin-top: 3rem;
 	max-width: 100vw;
@@ -564,7 +566,7 @@ const Schedule = ({
 									{sortedEvents.map(event => (
 										<EventCard
 											event={event}
-											logo={<img src={GoogleGLogo} />}
+											logo={googleLogo}
 											workingTime={workingTime}
 										/>
 									))}

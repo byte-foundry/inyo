@@ -1,8 +1,8 @@
 import {useQuery} from './apollo-hooks';
-import {GET_ALL_TASKS, GET_SCHEDULE} from './queries';
+import {GET_ALL_TASKS_SHORT, GET_SCHEDULE} from './queries';
 
 const useScheduleData = ({startingFrom} = {}) => {
-	const {data: dataTasks, loading: loadingTasks} = useQuery(GET_ALL_TASKS, {
+	const {data: dataTasks, loading: loadingTasks} = useQuery(GET_ALL_TASKS_SHORT, {
 		variables: {schedule: 'TO_BE_RESCHEDULED'},
 	});
 	const {data, loading} = useQuery(GET_SCHEDULE, {

@@ -10,18 +10,40 @@ export default {
 			},
 		};
 	},
-	getAllTasks: ({mutation, query}) => {
-		const {tasks} = query.result.me;
-		const addedTasks = mutation.result.data.createProject.sections
-			.map(section => section.items)
-			.flat();
+	getAllTasksShort: ({mutation, query}) => {
+		if (query.variables.schedule === 'UNSCHEDULED') {
+			const {tasks} = query.result.me;
+			const addedTasks = mutation.result.data.createProject.sections
+				.map(section => section.items)
+				.flat();
 
-		return {
-			...query.result,
-			me: {
-				...query.result.me,
-				tasks: [...tasks, ...addedTasks],
-			},
-		};
+			return {
+				...query.result,
+				me: {
+					...query.result.me,
+					tasks: [...tasks, ...addedTasks],
+				},
+			};
+		}
+
+		return query.result;
+	},
+	getAllTasks: ({mutation, query}) => {
+		if (query.variables.schedule === 'UNSCHEDULED') {
+			const {tasks} = query.result.me;
+			const addedTasks = mutation.result.data.createProject.sections
+				.map(section => section.items)
+				.flat();
+
+			return {
+				...query.result,
+				me: {
+					...query.result.me,
+					tasks: [...tasks, ...addedTasks],
+				},
+			};
+		}
+
+		return query.result;
 	},
 };

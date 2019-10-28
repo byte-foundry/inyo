@@ -1,5 +1,71 @@
 import gql from 'graphql-tag';
 
+export const SHORT_TAG_FRAGMENT = gql`
+	fragment ShortTagFragment on Tag {
+		id
+		name
+		colorBg
+		colorText
+	}
+`;
+
+export const SHORT_TASK_FRAGMENT = gql`
+	${SHORT_TAG_FRAGMENT}
+
+	fragment ShortTaskFragment on Item {
+		id
+		description
+		dueDate
+		name
+		position
+		status
+		finishedAt
+		createdAt
+		type
+		unit
+		timeItTook
+		isFocused
+		scheduledFor
+		schedulePosition
+		owner {
+			id
+		}
+		assignee {
+			id
+			email
+			firstName
+			lastName
+		}
+		attachments {
+			id
+		}
+		linkedCustomer {
+			id
+			name
+			firstName
+			lastName
+		}
+
+		tags {
+			...ShortTagFragment
+		}
+
+		section {
+			id
+			project {
+				id
+				name
+				deadline
+				status
+			}
+		}
+
+		comments {
+			id
+		}
+	}
+`;
+
 export const TAG_FRAGMENT = gql`
 	fragment TagFragment on Tag {
 		id
@@ -67,31 +133,11 @@ export const ITEM_FRAGMENT = gql`
 	${COMMENT_ON_ITEM_FRAGMENT}
 	${REMINDER_FRAGMENT}
 	${TAG_FRAGMENT}
+	${SHORT_TASK_FRAGMENT}
 
 	fragment ItemFragment on Item {
-		id
-		description
-		dueDate
-		name
-		position
-		status
-		finishedAt
-		createdAt
-		type
-		unit
-		timeItTook
-		isFocused
-		scheduledFor
-		schedulePosition
-		owner {
-			id
-		}
-		assignee {
-			id
-			email
-			firstName
-			lastName
-		}
+		...ShortTaskFragment
+
 		reminders {
 			...ReminderFragment
 		}
@@ -111,12 +157,6 @@ export const ITEM_FRAGMENT = gql`
 				}
 			}
 		}
-		linkedCustomer {
-			id
-			name
-			firstName
-			lastName
-		}
 
 		tags {
 			...TagFragment
@@ -128,10 +168,7 @@ export const ITEM_FRAGMENT = gql`
 			position
 			project {
 				id
-				deadline
 				daysUntilDeadline
-				status
-				name
 				linkedCollaborators {
 					id
 					email

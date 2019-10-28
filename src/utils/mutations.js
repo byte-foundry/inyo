@@ -4,6 +4,7 @@ import {
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
 	REMINDER_FRAGMENT,
+	SHORT_TASK_FRAGMENT,
 	TAG_FRAGMENT,
 } from './fragments';
 
@@ -606,11 +607,11 @@ export const UPDATE_ITEM = gql`
 `;
 
 export const FINISH_ITEM = gql`
-	${ITEM_FRAGMENT}
+	${SHORT_TASK_FRAGMENT}
 
 	mutation finishItem($itemId: ID!, $token: String, $timeItTook: Float) {
 		finishItem(id: $itemId, token: $token, timeItTook: $timeItTook) {
-			...ItemFragment
+			...ShortTaskFragment
 		}
 	}
 `;

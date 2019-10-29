@@ -1004,13 +1004,19 @@ const Item = ({
 									}}
 									icon="×"
 								>
-									Ne plus rappeler à{' '}
-									{item.linkedCustomer.name} (
-									{formatName(
-										item.linkedCustomer.firstName,
-										item.linkedCustomer.lastName,
-									)}
-									) de faire cette tâche
+									<fbt
+										project="inyo"
+										desc="task customer cancelation label"
+									>
+										Ne plus rappeler à{' '}
+										<fbt:param name="customerName">
+											{formatName(
+												item.linkedCustomer.firstName,
+												item.linkedCustomer.lastName,
+											)}
+										</fbt:param>{' '}
+										de faire cette tâche
+									</fbt>
 								</TaskButton>
 							</>
 						) : (

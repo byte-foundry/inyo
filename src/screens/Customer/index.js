@@ -15,7 +15,6 @@ export default function Customer({match}) {
 			variables: {
 				token: match.params.customerToken,
 			},
-			suspend: true,
 			fetchPolicy: 'network-only',
 		},
 	);

@@ -81,10 +81,12 @@ const Tasks = ({location, match}) => {
 	const {prevSearch} = location.state || {prevSearch: location.search};
 	const query = new URLSearchParams(prevSearch || location.search);
 	const projectId = query.get('projectId');
-	const {data: customerInfosData} = useQuery(GET_CUSTOMER_INFOS, {
+	const {data: customerInfosData, error} = useQuery(GET_CUSTOMER_INFOS, {
 		variables: {token: customerToken},
 		suspend: true,
 	});
+
+	if (error) throw error;
 
 	let welcome = (
 		<fbt project="inyo" desc="Hello">

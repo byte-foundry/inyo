@@ -5,7 +5,7 @@ import {useContext, useEffect, useState} from 'react';
 
 // TODO: might be better in a context
 const queryDataRefs = new Map();
-const forceUpdateRefs = new Map();
+const forceUpdateRefs = new Set();
 
 // taken from https://github.com/apollographql/react-apollo/blob/master/packages/hooks/src/utils/useBaseQuery.ts
 export default function useBaseQuery(query, options) {
@@ -16,19 +16,9 @@ export default function useBaseQuery(query, options) {
 	// we used the serialized options to keep track of the queries
 	const queryKey = JSON.stringify(updatedOptions);
 
-	if (queryDataRefs.has(queryKey)) {
-		const oldQueryDataRefs = queryDataRefs.get(queryKey);
-
-		oldQueryDataRefs.push(
-			new QueryData({
-				options: updatedOptions,
-				context,
-				forceUpdate: () => {},
-			}),
-		);
-	}
-	else {
-		queryDataRefs.set(queryKey, [
+	if (!queryDataRefs.has(queryKey)) {
+		queryDataRefs.set(
+			queryKey,
 			new QueryData({
 				options: updatedOptions,
 				context,
@@ -42,17 +32,15 @@ export default function useBaseQuery(query, options) {
 					});
 				},
 			}),
-		]);
+		);
 	}
 
-	const queryData = queryDataRefs.get(queryKey)[
-		queryDataRefs.get(queryKey).length - 1
-	];
+	const queryData = queryDataRefs.get(queryKey);
 
 	queryData.setOptions(updatedOptions);
 	queryData.context = context;
 
-	forceUpdateRefs.set(forceUpdate, forceUpdate);
+	forceUpdateRefs.add(forceUpdate);
 
 	// `onError` and `onCompleted` callback functions will not always have a
 	// stable identity, so we'll exclude them from the memoization key to
@@ -88,12 +76,6 @@ export default function useBaseQuery(query, options) {
 	);
 
 	const removeDataRefs = () => {
-		const dataRefs = queryDataRefs.get(queryKey);
-
-		const index = dataRefs.findIndex(q => q === queryData);
-
-		dataRefs.splice(index, 1);
-
 		forceUpdateRefs.delete(forceUpdate);
 	};
 

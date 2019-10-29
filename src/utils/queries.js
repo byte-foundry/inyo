@@ -657,7 +657,7 @@ export const GET_USER_NOTIFICATIONS = gql`
 `;
 
 export const GET_CUSTOMER_LANGUAGE = gql`
-	query getCustomerInfos($token: String) {
+	query getCustomerLanguage($token: String) {
 		customer(token: $token) {
 			language
 		}

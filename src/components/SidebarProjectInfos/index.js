@@ -278,7 +278,7 @@ const SidebarProjectInfos = ({
 							project="inyo"
 							desc="sidebar project main view tooltip"
 						>
-							Budget
+							Budget vendu
 						</fbt>
 					}
 				>
@@ -598,7 +598,7 @@ const SidebarProjectInfos = ({
 				<SubSection>
 					<SubHeading>
 						<fbt project="inyo" desc="sidebar budget">
-							Budget
+							Budget vendu
 						</fbt>
 					</SubHeading>
 					<Tooltip

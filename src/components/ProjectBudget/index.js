@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
+import {BREAKPOINTS} from '../../utils/constants';
 import {FlexColumn, FlexRow} from '../../utils/content';
 import {clamp} from '../../utils/functions';
 import {UPDATE_PROJECT} from '../../utils/mutations';
@@ -31,6 +32,14 @@ const BudgetContainer = styled('div')`
 
 const BudgetInfoContainer = styled('div')`
 	margin-bottom: 1.2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin-bottom: 0.2rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+	}
 `;
 
 const BudgetLabel = styled('div')`
@@ -46,6 +55,10 @@ const BudgetInfo = styled('div')`
 
 	display: flex;
 	flex-direction: row;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: row-reverse;
+	}
 `;
 
 const BudgetGraphFlex = styled(FlexColumn)`
@@ -56,6 +69,14 @@ const BudgetGraphFlex = styled(FlexColumn)`
 	${BudgetInfoContainer} {
 		margin: 0;
 		position: absolute;
+	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		margin: 1rem 0 3rem;
+
+		${BudgetInfoContainer} {
+			flex-direction: column;
+		}
 	}
 `;
 
@@ -75,6 +96,16 @@ const BudgetItemRow = styled(FlexRow)`
 		transform: scale(0.75);
 		margin: 0;
 	}
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		flex-direction: column;
+		margin-top: 1rem;
+
+		${TaskIcon} {
+			left: 1rem;
+		}
+	}
 `;
 
 const FlexRowHeader = styled(FlexRow)`
@@ -84,6 +115,21 @@ const FlexRowHeader = styled(FlexRow)`
 
 	color: ${accentGrey};
 	font-size: 1rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		display: flex;
+		justify-content: flex-end;
+
+		div:first-child {
+			display: none;
+		}
+
+		div:last-child {
+			&::before {
+				content: '/';
+			}
+		}
+	}
 `;
 
 const FlexRowSection = styled(FlexRow)`
@@ -91,6 +137,10 @@ const FlexRowSection = styled(FlexRow)`
 	grid-template-columns: 1fr 120px 120px;
 
 	font-size: 1.2rem;
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		grid-template-columns: 1fr 40px 40px;
+	}
 `;
 
 const BudgetItemName = styled('div')`
@@ -139,7 +189,11 @@ const BudgetSectionName = styled('div')`
 	}
 `;
 
-const BudgetSectionBudget = styled('div')``;
+const BudgetSectionBudget = styled('div')`
+	@media (max-width: ${BREAKPOINTS}px) {
+		font-size: 0.7rem;
+	}
+`;
 
 const BudgetSectionContainer = styled(FlexColumn)`
 	padding: 0.5rem;
@@ -258,6 +312,12 @@ const BudgetSections = styled('div')`
 	margin-top: 2rem;
 `;
 
+const BudgetHeader = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS}px) {
+		flex-direction: column;
+	}
+`;
+
 const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 	const spentBudget = sections.reduce(
 		(sectionsSum, section) => sectionsSum
@@ -315,7 +375,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 
 	return (
 		<FlexColumn>
-			<FlexRow>
+			<BudgetHeader>
 				<BudgetGraph
 					percent={Math.max(
 						0,
@@ -341,8 +401,8 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 							<BudgetInfo>
 								<fbt:param name="budget">
 									{Math.round(estimatedBudget)}
-								</fbt:param>{' '}
-								€
+								</fbt:param>
+								{' '}€
 							</BudgetInfo>
 						</fbt>
 					</BudgetInfoContainer>
@@ -361,8 +421,8 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 							<BudgetInfo>
 								<fbt:param name="budget">
 									{Math.round(props.budget - spentBudget)}
-								</fbt:param>{' '}
-								€
+								</fbt:param>
+								{' '}€
 							</BudgetInfo>
 						</fbt>
 					</BudgetInfoContainer>
@@ -384,7 +444,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 						</fbt>
 					</BudgetInfoContainer>
 				</FlexColumn>
-			</FlexRow>
+			</BudgetHeader>
 			<BudgetSections>
 				<FlexRowHeader>
 					<div>Phases du projet</div>

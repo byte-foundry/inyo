@@ -91,10 +91,10 @@ const TagContainer = styled('div')`
 
 const Tag = styled('span')`
 	background-color: ${props => props.bg};
-	width: 10px;
+	width: 50px;
 	height: 10px;
-	border-radius: 50%;
-	margin-right: 3px;
+	border-radius: 5px;
+	margin-right: 4px;
 `;
 
 const TaskCard = withRouter(

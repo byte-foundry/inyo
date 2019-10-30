@@ -193,9 +193,21 @@ function LeftBarSchedule({
 							index={day.tasks.length}
 							scheduledFor={day.date}
 							isOff={!day.workedDay}
-							onMove={({id, index: position, scheduledFor}) => {
+							onMove={({
+								id,
+								type,
+								linkedCustomer,
+								attachments,
+								index: position,
+								scheduledFor,
+							}) => {
 								onMoveTask({
-									task: {id},
+									task: {
+										id,
+										type,
+										linkedCustomer,
+										attachments,
+									},
 									scheduledFor,
 									position:
 										typeof position === 'number'

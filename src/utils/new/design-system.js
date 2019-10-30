@@ -1030,3 +1030,20 @@ export const Pie = styled('div')`
 		border-radius: 50%;
 	}
 `;
+
+export const Dropdown = styled('div')`
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	margin-top: 10px;
+	padding: 5px;
+	position: absolute;
+	width: 400px;
+	box-shadow: 0 0 10px ${primaryGrey};
+	border-radius: 3px;
+	background: ${primaryWhite};
+
+	@media (max-width: ${BREAKPOINTS}px) {
+		width: calc(100% - 10px);
+	}
+`;

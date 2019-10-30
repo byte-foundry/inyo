@@ -10,6 +10,7 @@ import {Loading} from '../../utils/content';
 import {MARK_NOTIFICATIONS_AS_READ} from '../../utils/mutations';
 import {
 	Button,
+	Dropdown,
 	lightGrey,
 	primaryGrey,
 	primaryPurple,
@@ -20,23 +21,6 @@ import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
 import IconButton from '../IconButton';
 import NotificationItem from '../NotificationItem';
 import Tooltip from '../Tooltip';
-
-const Dropdown = styled('div')`
-	display: flex;
-	flex-direction: column;
-	align-items: stretch;
-	margin-top: 10px;
-	padding: 5px;
-	position: absolute;
-	width: 400px;
-	box-shadow: 0 0 10px ${primaryGrey};
-	border-radius: 3px;
-	background: ${primaryWhite};
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		width: calc(100% - 10px);
-	}
-`;
 
 const Icon = styled('button')`
 	i {
@@ -199,7 +183,8 @@ const NotificationTrayButton = ({mobile}) => {
 						style={{
 							top:
 								icon.current.getBoundingClientRect().top
-								+ icon.current.getBoundingClientRect().height,
+								+ icon.current.getBoundingClientRect().height
+								+ window.scrollY,
 							left: mobile
 								? 0
 								: icon.current.getBoundingClientRect().left,

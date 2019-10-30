@@ -8,7 +8,6 @@ import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {FlexColumn, FlexRow} from '../../utils/content';
-import {clamp} from '../../utils/functions';
 import {UPDATE_PROJECT} from '../../utils/mutations';
 import {
 	accentGrey,
@@ -23,6 +22,7 @@ import {
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
 import FormElem from '../FormElem';
+import HelpAndTooltip from '../HelpAndTooltip';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 
@@ -169,7 +169,11 @@ const BudgetItem = ({item, defaultDailyPrice}) => {
 				{item.status === 'FINISHED' ? `${budget} €` : '-'}
 			</BudgetItemBudget>
 			<BudgetItemBudget>
-				{item.status === 'FINISHED' ? '-' : `${budget} €`}
+				{item.unit === null
+					? '-'
+					: `${(
+						item.unit * (item.dailyRate || defaultDailyPrice)
+					  ).toFixed(2)} €`}
 			</BudgetItemBudget>
 		</BudgetItemRow>
 	);
@@ -209,11 +213,7 @@ const BudgetSectionContainer = styled(FlexColumn)`
 const BudgetSection = ({section, defaultDailyPrice}) => {
 	const [open, setOpen] = useState(false);
 	const sectionBudgetUnworked = section.items.reduce(
-		(itemsSum, item) => itemsSum
-			+ (item.status !== 'FINISHED'
-				? (item.timeItTook || item.unit)
-				  * (item.dailyRate || defaultDailyPrice)
-				: 0),
+		(itemsSum, item) => itemsSum + item.unit * (item.dailyRate || defaultDailyPrice),
 		0,
 	);
 
@@ -276,7 +276,12 @@ const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
 		<BudgetLabel>
 			Budget vendu
 			<fbt:param name="budget">
-				<IconButton icon="help" size="tiny" color={accentGrey} />
+				<HelpAndTooltip icon="help">
+					<p>
+						Le budget vendu est la somme que vous allez facturer à
+						votre client.
+					</p>
+				</HelpAndTooltip>
 			</fbt:param>
 		</BudgetLabel>
 		<fbt:param name="input">
@@ -356,11 +361,23 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 					<BudgetLabel>
 						Rentabilité
 						<fbt:param name="budget">
-							<IconButton
-								icon="help"
-								size="tiny"
-								color={accentGrey}
-							/>
+							<HelpAndTooltip icon="help">
+								<p>
+									La rentabilité est le ratio entre le budget
+									vendu et la somme des budgets travaillés et
+									budget encore prévu.
+								</p>
+								<p>
+									Un rentabilité supérieur à 1 indique vous
+									avez travaillé moins que ce que vous avez
+									vendu.
+								</p>
+								<p>
+									Une rentabilité entre 0 et 1 indique que
+									vous avez travaillé plus que ce que vous
+									aviez prévu.
+								</p>
+							</HelpAndTooltip>
 						</fbt:param>
 					</BudgetLabel>
 					<BudgetInfo>
@@ -391,11 +408,14 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 							<BudgetLabel>
 								Budget réel
 								<fbt:param name="budget">
-									<IconButton
-										icon="help"
-										size="tiny"
-										color={accentGrey}
-									/>
+									<HelpAndTooltip icon="help">
+										<p>
+											Le budget réel est la somme des
+											jours de travail dans votre projet
+											multiplié par votre taux journalier
+											moyen.
+										</p>
+									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
 							<BudgetInfo>
@@ -411,11 +431,14 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 							<BudgetLabel>
 								Budget restant
 								<fbt:param name="budget">
-									<IconButton
-										icon="help"
-										size="tiny"
-										color={accentGrey}
-									/>
+									<HelpAndTooltip icon="help">
+										<p>
+											Le budget restant correspondant a la
+											différence entre le montant du
+											travail déjà effectué et le budget
+											que vous avez vendu a votre client.
+										</p>
+									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
 							<BudgetInfo>
@@ -431,11 +454,15 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 							<BudgetLabel>
 								Avenant à facturer
 								<fbt:param name="budget">
-									<IconButton
-										icon="help"
-										size="tiny"
-										color={accentGrey}
-									/>
+									<HelpAndTooltip icon="help">
+										<p>
+											L'avenant à facturer est la
+											différence entre le budget vendu et
+											le budget prévu. Il correspond a
+											l'excédent de travail que vous allez
+											fournir.
+										</p>
+									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
 							<fbt:param name="amendment">
@@ -449,7 +476,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 				<FlexRowHeader>
 					<div>Phases du projet</div>
 					<div>Travaillé</div>
-					<div>Restant</div>
+					<div>Planifié</div>
 				</FlexRowHeader>
 				{sections.map(section => (
 					<BudgetSection

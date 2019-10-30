@@ -368,7 +368,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 									budget encore prévu.
 								</p>
 								<p>
-									Un rentabilité supérieur à 1 indique vous
+									Une rentabilité supérieure à 1 indique vous
 									avez travaillé moins que ce que vous avez
 									vendu.
 								</p>
@@ -458,7 +458,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 										<p>
 											L'avenant à facturer est la
 											différence entre le budget vendu et
-											le budget prévu. Il correspond a
+											le budget réel. Il correspond à
 											l'excédent de travail que vous allez
 											fournir.
 										</p>

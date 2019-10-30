@@ -412,7 +412,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 										<p>
 											Le budget réel est la somme des
 											jours de travail dans votre projet
-											multiplié par votre taux journalier
+											multipliée par votre taux journalier
 											moyen.
 										</p>
 									</HelpAndTooltip>
@@ -433,10 +433,10 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 								<fbt:param name="budget">
 									<HelpAndTooltip icon="help">
 										<p>
-											Le budget restant correspondant a la
-											différence entre le montant du
-											travail déjà effectué et le budget
-											que vous avez vendu a votre client.
+											Le budget restant correspond à la
+											différence du montant du travail
+											déjà effectué et le budget que vous
+											avez vendu à votre client.
 										</p>
 									</HelpAndTooltip>
 								</fbt:param>

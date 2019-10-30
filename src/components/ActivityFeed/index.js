@@ -25,7 +25,8 @@ const ActivityFeed = ({projectId}) => {
 			<ul>
 				{data.activity.map(event => (
 					<li key={event.id}>
-						{event.from.firstName} {event.type} {event.object.id}
+						{event.from.firstName} {event.type}{' '}
+						{event.object && event.object.id}
 					</li>
 				))}
 			</ul>

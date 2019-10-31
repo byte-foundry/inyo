@@ -667,6 +667,7 @@ export const GET_PROJECT_ACTIVITY = gql`
 		activity(projectId: $projectId) {
 			id
 			type
+			metadata
 			from {
 				... on User {
 					id

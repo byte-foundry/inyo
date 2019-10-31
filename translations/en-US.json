@@ -2436,7 +2436,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "A rentability between 0 and 1 shows you worked than planned.",
+     "translation": "A rentability between 0 and 1 shows you worked more than planned.",
      "variations": {}
     }
    ]
@@ -7471,76 +7471,6 @@
     }
    ]
   },
-  "CJfoEeYYpj+yBXW5NAy3VQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Third reminder sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
-  "58KBco6Y1j2dxtHTZCpuJQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "First invoice payment email sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
-  "bzY04Ocig9+0PrPSJH0A0Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "First invoice payment reminder sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
-  "thus7u/y80yiUGrYVHeccA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Second invoice payment reminder sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
-  "sKqjtUoaH5hkNda587EaqA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Third invoice payment reminder sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
-  "2XTeUbIsiUAdF6RknzMOWw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Fourth invoice payment reminder sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
-  "2GgfrBw4AVKfDLBHCcAgzQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Last invoice payment reminder sent to {customerName}",
-     "variations": {}
-    }
-   ]
-  },
   "zBZuNcVFtlSTSDHHAM01VA==": {
    "tokens": [],
    "types": [],
@@ -8051,146 +7981,6 @@
     }
    ]
   },
-  "jlMfSYRO0xyLbQCWNycBVg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
-     "variations": {}
-    }
-   ]
-  },
-  "S/lDcCNWAvCYQq+NV7vlzQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Hello {email},",
-     "variations": {}
-    }
-   ]
-  },
-  "Wt+cJPy5epCJEXFSUIwhOw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Your trial period of 21 days comes to an end.",
-     "variations": {}
-    }
-   ]
-  },
-  "eK79Bn5+/nLmk3jYbxqifA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "For your clients nothing changes: They can still access your projects, comment, validate, etc.",
-     "variations": {}
-    }
-   ]
-  },
-  "lRliGP7yf62NJEIe6WfLnA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "To continue to use Inyo you need to subscribe to one of our premimum plans.",
-     "variations": {}
-    }
-   ]
-  },
-  "JgsWc6QO5q/HRaqHK/YFHQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}",
-     "variations": {}
-    }
-   ]
-  },
-  "ITI8XvBaWfxkMtyfm/3KXQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Subsribe for $12 /month",
-     "variations": {}
-    }
-   ]
-  },
-  "nmxkJz6CkJYHXblHdWWqtA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "or",
-     "variations": {}
-    }
-   ]
-  },
-  "Rf0r42Bn091A3C0HbJubEw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Choose our special launch offer and get Inyo for life for $75",
-     "variations": {}
-    }
-   ]
-  },
-  "x8x1qeOJ3eH46s8iXFX4aQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
-     "variations": {}
-    }
-   ]
-  },
-  "c8BZVzAyMqD+7Hz6G9ORqQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "If this is not you, click here to sign out.",
-     "variations": {}
-    }
-   ]
-  },
-  "8JdYB43CJ1+vMZ4ava2Teg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Bonjour[email] ,}{=Votre période d'essai va bientôt se terminer}{=Vous pouvez vous abonner dès maintenant à Inyo.}{=S'abonner pour 12$ /moisouChoisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
-     "variations": {}
-    }
-   ]
-  },
-  "bN5UClTIYFrOTO2HEt5S0A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Hello {email},",
-     "variations": {}
-    }
-   ]
-  },
-  "NoTnQdYvII3Q6h7znutH/w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Your trial period of 21 days is coming to an end.",
-     "variations": {}
-    }
-   ]
-  },
   "UzYWkXM20aeDmetJWVQHKQ==": {
    "tokens": [],
    "types": [],
@@ -8217,26 +8007,6 @@
    "translations": [
     {
      "translation": "Tu",
-     "variations": {}
-    }
-   ]
-  },
-  "p038/T94EO/ejzQvOS1Hqg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{timeEstimated} days",
-     "variations": {}
-    }
-   ]
-  },
-  "q3mgeZLjbygjxiRUSkrzzg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "1 day",
      "variations": {}
     }
    ]

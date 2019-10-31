@@ -702,6 +702,7 @@ export const GET_PROJECT_ACTIVITY = gql`
 				... on Item {
 					id
 					name
+					itemType: type
 				}
 				... on Comment {
 					id
@@ -709,7 +710,7 @@ export const GET_PROJECT_ACTIVITY = gql`
 				}
 				... on Reminder {
 					id
-					type
+					reminderType: type
 					sendingDate
 					item {
 						id

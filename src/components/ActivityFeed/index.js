@@ -14,7 +14,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/content';
-import {formatFullName} from '../../utils/functions';
+import {formatFullName, isCustomerTask} from '../../utils/functions';
 import {A} from '../../utils/new/design-system';
 import {GET_PROJECT_ACTIVITY} from '../../utils/queries';
 import MaterialIcon from '../MaterialIcon';
@@ -39,7 +39,7 @@ const Container = styled('span')`
 
 const ObjectLink = A.withComponent(Link);
 
-const TextPlusObjectNotification = ({
+const EventText = ({
 	from,
 	type: eventType,
 	object,
@@ -242,6 +242,46 @@ const TextPlusObjectNotification = ({
 		);
 		icon = 'done';
 		break;
+	case 'FOCUSED_TASK':
+		if (object && isCustomerTask(object.itemType)) {
+			action = (
+				<fbt
+					project="inyo"
+					desc="focused customer task event message"
+				>
+						a activé la tâche cliente
+				</fbt>
+			);
+		}
+		else {
+			action = (
+				<fbt project="inyo" desc="focused task event message">
+						a programmé dans son calendrier la tâche
+				</fbt>
+			);
+		}
+		icon = 'done';
+		break;
+	case 'UNFOCUSED_TASK':
+		if (object && isCustomerTask(object.itemType)) {
+			action = (
+				<fbt
+					project="inyo"
+					desc="focused customer task event message"
+				>
+						a désactivé la tâche cliente
+				</fbt>
+			);
+		}
+		else {
+			action = (
+				<fbt project="inyo" desc="focused task event message">
+						a déprogrammé de son calendrier la tâche
+				</fbt>
+			);
+		}
+		icon = 'done';
+		break;
 	default:
 		action = eventType;
 		icon = 'done';
@@ -292,9 +332,11 @@ const TextPlusObjectNotification = ({
 	let subjectName = ' ';
 
 	if (subject) {
-		subjectName
-			+= `${formatFullName(subject.title, subject.firstName, subject.lastName)
-			 } `;
+		subjectName += `${formatFullName(
+			subject.title,
+			subject.firstName,
+			subject.lastName,
+		)} `;
 	}
 
 	return (
@@ -323,7 +365,7 @@ const ActivityFeed = ({projectId}) => {
 		<Feed>
 			<ul>
 				{data.activity.map(event => (
-					<TextPlusObjectNotification
+					<EventText
 						projectId={projectId}
 						key={event.id}
 						{...event}

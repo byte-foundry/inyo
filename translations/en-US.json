@@ -1461,6 +1461,16 @@
     }
    ]
   },
+  "oadX5Ncr9ZMKyEUe+XSEMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Stop reminding {customerName} to complete this task",
+     "variations": {}
+    }
+   ]
+  },
   "x6FPGl0U1x0YCSNscEvLPQ==": {
    "tokens": [],
    "types": [],
@@ -3711,16 +3721,6 @@
     }
    ]
   },
-  "oadX5Ncr9ZMKyEUe+XSEMg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Stop reminding {customerName} to complete this task",
-     "variations": {}
-    }
-   ]
-  },
   "cWisi7bqGYxheSieiCg/6Q==": {
    "tokens": [],
    "types": [],
@@ -4221,12 +4221,12 @@
     }
    ]
   },
-  "5VmV5o8Y9ut6W1vsO4/fRg==": {
+  "1kMnGIBDWGbpcpn3pu3RtQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "No task match these criteria",
+     "translation": "There's no task that match these criteria",
      "variations": {}
     }
    ]
@@ -6827,6 +6827,16 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "5VmV5o8Y9ut6W1vsO4/fRg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No task match these criteria",
      "variations": {}
     }
    ]

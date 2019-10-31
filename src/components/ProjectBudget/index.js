@@ -278,8 +278,10 @@ const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
 			<fbt:param name="budget">
 				<HelpAndTooltip icon="help">
 					<p>
-						Le budget vendu est la somme que vous allez facturer à
-						votre client.
+						<fbt desc="project's budget tooltip">
+							Le budget vendu est la somme que vous allez facturer
+							à votre client.
+						</fbt>
 					</p>
 				</HelpAndTooltip>
 			</fbt:param>
@@ -357,26 +359,28 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 		<BudgetGraphFlex>
 			<Pie big value={percent} />
 			<BudgetInfoContainer>
-				<fbt desc="project's budget">
+				<fbt desc="rentability">
 					<BudgetLabel>
 						Rentabilité
 						<fbt:param name="budget">
 							<HelpAndTooltip icon="help">
-								<p>
-									La rentabilité est le ratio entre le budget
-									vendu et la somme des budgets travaillés et
-									budget encore prévu.
-								</p>
-								<p>
-									Une rentabilité supérieure à 1 indique vous
-									avez travaillé moins que ce que vous avez
-									vendu.
-								</p>
-								<p>
-									Une rentabilité entre 0 et 1 indique que
-									vous avez travaillé plus que ce que vous
-									aviez prévu.
-								</p>
+								<fbt desc="rentability tooltip">
+									<p>
+										La rentabilité est le ratio entre le
+										budget vendu et la somme des budgets
+										travaillés et budget encore prévu.
+									</p>
+									<p>
+										Une rentabilité supérieure à 1 indique
+										vous avez travaillé moins que ce que
+										vous avez vendu.
+									</p>
+									<p>
+										Une rentabilité entre 0 et 1 indique que
+										vous avez travaillé plus que ce que vous
+										aviez prévu.
+									</p>
+								</fbt>
 							</HelpAndTooltip>
 						</fbt:param>
 					</BudgetLabel>
@@ -404,17 +408,19 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 						<BudgetAmountAndInput {...props} />
 					</BudgetInfoContainer>
 					<BudgetInfoContainer>
-						<fbt desc="project's budget">
+						<fbt desc="Real budget">
 							<BudgetLabel>
 								Budget réel
 								<fbt:param name="budget">
 									<HelpAndTooltip icon="help">
-										<p>
-											Le budget réel est la somme des
-											jours de travail dans votre projet
-											multipliée par votre taux journalier
-											moyen.
-										</p>
+										<fbt desc="Real budget tooltip">
+											<p>
+												Le budget réel est la somme des
+												jours de travail dans votre
+												projet multipliée par votre taux
+												journalier moyen.
+											</p>
+										</fbt>
 									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
@@ -427,17 +433,20 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 						</fbt>
 					</BudgetInfoContainer>
 					<BudgetInfoContainer>
-						<fbt desc="project's budget">
+						<fbt desc="remaining budget">
 							<BudgetLabel>
 								Budget restant
 								<fbt:param name="budget">
 									<HelpAndTooltip icon="help">
-										<p>
-											Le budget restant correspond à la
-											différence du montant du travail
-											déjà effectué et le budget que vous
-											avez vendu à votre client.
-										</p>
+										<fbt desc="remaining budget tooltip">
+											<p>
+												Le budget restant correspond à
+												la différence du montant du
+												travail déjà effectué et le
+												budget que vous avez vendu à
+												votre client.
+											</p>
+										</fbt>
 									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
@@ -450,18 +459,20 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 						</fbt>
 					</BudgetInfoContainer>
 					<BudgetInfoContainer>
-						<fbt desc="project's budget">
+						<fbt desc="amount to amend">
 							<BudgetLabel>
 								Avenant à facturer
 								<fbt:param name="budget">
 									<HelpAndTooltip icon="help">
-										<p>
-											L'avenant à facturer est la
-											différence entre le budget vendu et
-											le budget réel. Il correspond à
-											l'excédent de travail que vous allez
-											fournir.
-										</p>
+										<fbt desc="Amount to amend tooltip">
+											<p>
+												L'avenant à facturer est la
+												différence entre le budget vendu
+												et le budget réel. Il correspond
+												à l'excédent de travail que vous
+												allez fournir.
+											</p>
+										</fbt>
 									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
@@ -474,9 +485,15 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 			</BudgetHeader>
 			<BudgetSections>
 				<FlexRowHeader>
-					<div>Phases du projet</div>
-					<div>Travaillé</div>
-					<div>Planifié</div>
+					<div>
+						<fbt desc="project milestones">Phases du projet</fbt>
+					</div>
+					<div>
+						<fbt desc="Worked">Travaillé</fbt>
+					</div>
+					<div>
+						<fbt desc="Planned">Planifié</fbt>
+					</div>
 				</FlexRowHeader>
 				{sections.map(section => (
 					<BudgetSection

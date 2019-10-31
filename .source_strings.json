@@ -2718,9 +2718,9 @@
     "s7Am8IKTQ0RWV1ZfuKTA1w==": "Notifications liées à vos clients"
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 174,
+   "line_beg": 158,
    "col_beg": 5,
-   "line_end": 176,
+   "line_end": 160,
    "col_end": 11,
    "type": "text",
    "desc": "notification tray button tooltip",
@@ -2732,9 +2732,9 @@
     "k5OwMZDKZ01FmGLqqBOdAQ==": "Tout marquer comme lu"
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 220,
+   "line_beg": 205,
    "col_beg": 7,
-   "line_end": 222,
+   "line_end": 207,
    "col_end": 13,
    "type": "text",
    "desc": "mark all as read",
@@ -2746,9 +2746,9 @@
     "cTKVM7yUdcTOW1xZeBceRA==": "Aucune notification."
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 237,
+   "line_beg": 222,
    "col_beg": 9,
-   "line_end": 242,
+   "line_end": 227,
    "col_end": 15,
    "type": "text",
    "desc": "no notification message",
@@ -3576,40 +3576,54 @@
   },
   {
    "hashToText": {
-    "zBZuNcVFtlSTSDHHAM01VA==": "{=Budget du projet [icon]}{input}"
+    "eIrHfRHJr3VMTUDdnJrnng==": "{=Budget vendu [budget]}{input}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 174,
+   "line_beg": 275,
    "col_beg": 1,
-   "line_end": 207,
+   "line_end": 315,
    "col_end": 7,
    "type": "text",
    "desc": "project's budget",
    "project": "",
-   "jsfbt": "{=Budget du projet [icon]}{input}"
+   "jsfbt": "{=Budget vendu [budget]}{input}"
   },
   {
    "hashToText": {
-    "saVl5y7buvhWZNzt90QZWA==": "Budget du projet {icon}"
+    "SDTehLh3wo+9/iQ9ZLAdZw==": "Budget vendu {budget}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 175,
+   "line_beg": 276,
    "col_beg": 2,
-   "line_end": 184,
+   "line_end": 288,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Budget du projet [icon]}{=}\"",
+   "desc": "In the phrase: \"{=Budget vendu [budget]}{=}\"",
    "project": "",
-   "jsfbt": "Budget du projet {icon}"
+   "jsfbt": "Budget vendu {budget}"
+  },
+  {
+   "hashToText": {
+    "+mytN+1FSy2Rv8/CXsqNGw==": "Le budget vendu est la somme que vous allez facturer à votre client."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 281,
+   "col_beg": 6,
+   "line_end": 284,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project's budget tooltip",
+   "project": "",
+   "jsfbt": "Le budget vendu est la somme que vous allez facturer à votre client."
   },
   {
    "hashToText": {
     "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 195,
+   "line_beg": 299,
    "col_beg": 6,
-   "line_end": 195,
+   "line_end": 299,
    "col_end": 39,
    "type": "text",
    "desc": "confirm",
@@ -3621,9 +3635,9 @@
     "oNo+sJB8SjEx1vWwMnzPdg==": "{amount} €"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 200,
+   "line_beg": 304,
    "col_beg": 5,
-   "line_end": 203,
+   "line_end": 306,
    "col_end": 11,
    "type": "text",
    "desc": "budget amount",
@@ -3632,138 +3646,390 @@
   },
   {
    "hashToText": {
-    "+PZGURjXQmPmRNqpakdFYw==": "{=Budget restant}{=[budget] €}"
+    "mIGWHktNEAMPX6kwQ2AEnQ==": "{=Rentabilité [budget]}{=[budget]}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 239,
-   "col_beg": 6,
-   "line_end": 247,
-   "col_end": 12,
+   "line_beg": 362,
+   "col_beg": 4,
+   "line_end": 392,
+   "col_end": 10,
    "type": "text",
-   "desc": "project's budget",
+   "desc": "rentability",
    "project": "",
-   "jsfbt": "{=Budget restant}{=[budget] €}"
+   "jsfbt": "{=Rentabilité [budget]}{=[budget]}"
   },
   {
    "hashToText": {
-    "Cs8A5dJl8JGwSGqN3gYa4g==": "Budget restant"
+    "vz/xAwdzVvH9EsexYlkSTA==": "Rentabilité {budget}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 240,
-   "col_beg": 7,
-   "line_end": 240,
-   "col_end": 48,
+   "line_beg": 363,
+   "col_beg": 5,
+   "line_end": 386,
+   "col_end": 19,
    "type": "text",
-   "desc": "In the phrase: \"{=Budget restant}{=[budget] €}\"",
+   "desc": "In the phrase: \"{=Rentabilité [budget]}{=[budget]}\"",
    "project": "",
-   "jsfbt": "Budget restant"
+   "jsfbt": "Rentabilité {budget}"
   },
   {
    "hashToText": {
-    "QNFfEDPY7y1v2rOCUQ+5AQ==": "{budget} €"
+    "Wo08wAWYpnX8Kk8WWNRVYQ==": "{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 241,
-   "col_beg": 7,
-   "line_end": 246,
-   "col_end": 20,
+   "line_beg": 367,
+   "col_beg": 8,
+   "line_end": 383,
+   "col_end": 14,
    "type": "text",
-   "desc": "In the phrase: \"{=Budget restant}{=[budget] €}\"",
+   "desc": "rentability tooltip",
    "project": "",
-   "jsfbt": "{budget} €"
+   "jsfbt": "{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}"
   },
   {
    "hashToText": {
-    "Z9MDOczz8FmDkxVwlDOIAQ==": "{=Rentabilité}{=[budget]}"
+    "fhsfbTLC6I3PLjvqvMLFUA==": "La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu."
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 250,
-   "col_beg": 6,
-   "line_end": 257,
-   "col_end": 12,
+   "line_beg": 368,
+   "col_beg": 9,
+   "line_end": 372,
+   "col_end": 13,
    "type": "text",
-   "desc": "project's budget",
+   "desc": "In the phrase: \"{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}\"",
    "project": "",
-   "jsfbt": "{=Rentabilité}{=[budget]}"
+   "jsfbt": "La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu."
   },
   {
    "hashToText": {
-    "wjlAZv0/o1YsxTgBM5luLw==": "Rentabilité"
+    "FVwdg4iWpMFqkjyNiclNMA==": "Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu."
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 251,
-   "col_beg": 7,
-   "line_end": 251,
-   "col_end": 45,
+   "line_beg": 373,
+   "col_beg": 9,
+   "line_end": 377,
+   "col_end": 13,
    "type": "text",
-   "desc": "In the phrase: \"{=Rentabilité}{=[budget]}\"",
+   "desc": "In the phrase: \"{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}\"",
    "project": "",
-   "jsfbt": "Rentabilité"
+   "jsfbt": "Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu."
   },
   {
    "hashToText": {
-    "knP8NJLKt4OXXHt3sOHS9w==": "{budget}"
+    "Cu9zIL//r/JOaqWxNLTChg==": "Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu."
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 252,
-   "col_beg": 7,
-   "line_end": 256,
-   "col_end": 20,
+   "line_beg": 378,
+   "col_beg": 9,
+   "line_end": 382,
+   "col_end": 13,
    "type": "text",
-   "desc": "In the phrase: \"{=Rentabilité}{=[budget]}\"",
+   "desc": "In the phrase: \"{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}\"",
+   "project": "",
+   "jsfbt": "Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu."
+  },
+  {
+   "hashToText": {
+    "RTga39kEITzjBkqN5Fqgaw==": "{budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 387,
+   "col_beg": 5,
+   "line_end": 391,
+   "col_end": 18,
+   "type": "text",
+   "desc": "In the phrase: \"{=Rentabilité [budget]}{=[budget]}\"",
    "project": "",
    "jsfbt": "{budget}"
   },
   {
    "hashToText": {
-    "rG+CiBj1sO6n+NvtpQIFhg==": "{=Vous n'avez pas encore mis de budget pour ce projet.}"
+    "+a28apNacBiALR3YZvYZpw==": "{=Budget réel [budget]}{=[budget]€}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 277,
+   "line_beg": 411,
+   "col_beg": 6,
+   "line_end": 433,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Real budget",
+   "project": "",
+   "jsfbt": "{=Budget réel [budget]}{=[budget]€}"
+  },
+  {
+   "hashToText": {
+    "pgEn6hWhH58HKuwYd5vSqA==": "Budget réel {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 412,
+   "col_beg": 7,
+   "line_end": 426,
+   "col_end": 21,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget réel [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "Budget réel {budget}"
+  },
+  {
+   "hashToText": {
+    "CsPDLwFed7WEvPobnECAPQ==": "{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 416,
+   "col_beg": 10,
+   "line_end": 423,
+   "col_end": 16,
+   "type": "text",
+   "desc": "Real budget tooltip",
+   "project": "",
+   "jsfbt": "{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}"
+  },
+  {
+   "hashToText": {
+    "7W9zpL19sPNz3KyXVcPgZA==": "Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 417,
+   "col_beg": 11,
+   "line_end": 422,
+   "col_end": 15,
+   "type": "text",
+   "desc": "In the phrase: \"{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}\"",
+   "project": "",
+   "jsfbt": "Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen."
+  },
+  {
+   "hashToText": {
+    "HwwlTPsKKWIIHQfdKeKOLA==": "{budget} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 427,
+   "col_beg": 7,
+   "line_end": 432,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget réel [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "{budget} €"
+  },
+  {
+   "hashToText": {
+    "fDL30wt24taCtWMkf9Ixig==": "{=Budget restant [budget]}{=[budget]€}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 436,
+   "col_beg": 6,
+   "line_end": 459,
+   "col_end": 12,
+   "type": "text",
+   "desc": "remaining budget",
+   "project": "",
+   "jsfbt": "{=Budget restant [budget]}{=[budget]€}"
+  },
+  {
+   "hashToText": {
+    "Y/oOFvGMTbCxq8HijZoINw==": "Budget restant {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 437,
+   "col_beg": 7,
+   "line_end": 452,
+   "col_end": 21,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget restant [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "Budget restant {budget}"
+  },
+  {
+   "hashToText": {
+    "HJjdpDClAP/ptSMOg8LGSA==": "{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 441,
+   "col_beg": 10,
+   "line_end": 449,
+   "col_end": 16,
+   "type": "text",
+   "desc": "remaining budget tooltip",
+   "project": "",
+   "jsfbt": "{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}"
+  },
+  {
+   "hashToText": {
+    "UnyJ9whhDktRngCfMs87Gw==": "Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 442,
+   "col_beg": 11,
+   "line_end": 448,
+   "col_end": 15,
+   "type": "text",
+   "desc": "In the phrase: \"{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}\"",
+   "project": "",
+   "jsfbt": "Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client."
+  },
+  {
+   "hashToText": {
+    "O5c0X22iNXX2xv7XakE9Yg==": "{budget} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 453,
+   "col_beg": 7,
+   "line_end": 458,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget restant [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "{budget} €"
+  },
+  {
+   "hashToText": {
+    "AiiiPx1HXqiasDLDrHbMuQ==": "{=Avenant à facturer [budget]}{amendment}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 462,
+   "col_beg": 6,
+   "line_end": 482,
+   "col_end": 12,
+   "type": "text",
+   "desc": "amount to amend",
+   "project": "",
+   "jsfbt": "{=Avenant à facturer [budget]}{amendment}"
+  },
+  {
+   "hashToText": {
+    "KbyRJRn4tU5y/PIz7ScLbQ==": "Avenant à facturer {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 463,
+   "col_beg": 7,
+   "line_end": 478,
+   "col_end": 21,
+   "type": "text",
+   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=€}\"",
+   "project": "",
+   "jsfbt": "Avenant à facturer {budget}"
+  },
+  {
+   "hashToText": {
+    "8LD2br50aFURtdAu5zprVQ==": "{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 467,
+   "col_beg": 10,
+   "line_end": 475,
+   "col_end": 16,
+   "type": "text",
+   "desc": "Amount to amend tooltip",
+   "project": "",
+   "jsfbt": "{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}"
+  },
+  {
+   "hashToText": {
+    "xsOlb4a+259i0nEbHwDZ9A==": "L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 468,
+   "col_beg": 11,
+   "line_end": 474,
+   "col_end": 15,
+   "type": "text",
+   "desc": "In the phrase: \"{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}\"",
+   "project": "",
+   "jsfbt": "L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir."
+  },
+  {
+   "hashToText": {
+    "/pIgVIkQVOMKC0wU/eLQfg==": "Phases du projet"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 489,
+   "col_beg": 6,
+   "line_end": 489,
+   "col_end": 59,
+   "type": "text",
+   "desc": "project milestones",
+   "project": "",
+   "jsfbt": "Phases du projet"
+  },
+  {
+   "hashToText": {
+    "5dhD2GNTt7sYLPbsLVCwzA==": "Travaillé"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 492,
+   "col_beg": 6,
+   "line_end": 492,
+   "col_end": 40,
+   "type": "text",
+   "desc": "Worked",
+   "project": "",
+   "jsfbt": "Travaillé"
+  },
+  {
+   "hashToText": {
+    "hfCTo83fx4zTWsbeRMVkIA==": "Planifié"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 495,
+   "col_beg": 6,
+   "line_end": 495,
+   "col_end": 40,
+   "type": "text",
+   "desc": "Planned",
+   "project": "",
+   "jsfbt": "Planifié"
+  },
+  {
+   "hashToText": {
+    "2T/8tqRnxn9tiabsE+I2pA==": "{=Vous n'avez pas encore défini de budget pour ce projet.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 513,
    "col_beg": 4,
-   "line_end": 281,
+   "line_end": 517,
    "col_end": 10,
    "type": "text",
    "desc": "No project Budget",
    "project": "",
-   "jsfbt": "{=Vous n'avez pas encore mis de budget pour ce projet.}"
+   "jsfbt": "{=Vous n'avez pas encore défini de budget pour ce projet.}"
   },
   {
    "hashToText": {
-    "Njdk3s+Rn38C4F74ZpAQ4Q==": "Vous n'avez pas encore mis de budget pour ce projet."
+    "3Ncuzxft2v44Y8GPQcF3IA==": "Vous n'avez pas encore défini de budget pour ce projet."
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 278,
+   "line_beg": 514,
    "col_beg": 5,
-   "line_end": 280,
+   "line_end": 516,
    "col_end": 19,
    "type": "text",
-   "desc": "In the phrase: \"{=Vous n'avez pas encore mis de budget pour ce projet.}\"",
+   "desc": "In the phrase: \"{=Vous n'avez pas encore défini de budget pour ce projet.}\"",
    "project": "",
-   "jsfbt": "Vous n'avez pas encore mis de budget pour ce projet."
+   "jsfbt": "Vous n'avez pas encore défini de budget pour ce projet."
   },
   {
    "hashToText": {
-    "Hq/WLMdSVFGyYiM/ggoR5w==": "Budget du projet"
+    "zuGvQwqh8+Ws1fPfKjm1jQ==": "Budget vendu"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 283,
+   "line_beg": 519,
    "col_beg": 12,
-   "line_end": 283,
-   "col_end": 59,
+   "line_end": 519,
+   "col_end": 55,
    "type": "text",
    "desc": "budget label",
    "project": "",
-   "jsfbt": "Budget du projet"
+   "jsfbt": "Budget vendu"
   },
   {
    "hashToText": {
     "uXlGZSghlCKv2CyuFk0Yrg==": "5000 €"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 287,
+   "line_beg": 523,
    "col_beg": 18,
-   "line_end": 287,
+   "line_end": 523,
    "col_end": 61,
    "type": "text",
    "desc": "budget placeholder",
@@ -3775,9 +4041,9 @@
     "0/0IE5XdLNMJoppUG+lgBw==": "Valider"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 294,
+   "line_beg": 530,
    "col_beg": 5,
-   "line_end": 294,
+   "line_end": 530,
    "col_end": 48,
    "type": "text",
    "desc": "No project Budget",
@@ -3786,40 +4052,40 @@
   },
   {
    "hashToText": {
-    "oxMtxT5kF8x+GjJX9mRYqg==": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}"
+    "rzJA9MHp+nXckuqAl9Z4+w==": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 299,
+   "line_beg": 535,
    "col_beg": 3,
-   "line_end": 304,
+   "line_end": 540,
    "col_end": 9,
    "type": "text",
    "desc": "defined a daily rate",
    "project": "",
-   "jsfbt": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}"
+   "jsfbt": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}"
   },
   {
    "hashToText": {
-    "RkcVHXpSqsj+4HhGOadeVA==": "Définissez votre TJM pour profiter des fonctionnalités de budget"
+    "TP9w3Ix1Gy3BXNoKC82VrQ==": "Définissez votre TJM pour profiter des fonctionnalités de budget."
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 300,
+   "line_beg": 536,
    "col_beg": 4,
-   "line_end": 303,
+   "line_end": 539,
    "col_end": 11,
    "type": "text",
-   "desc": "In the phrase: \"{=Définissez votre TJM pour profiter des fonctionnalités de budget}\"",
+   "desc": "In the phrase: \"{=Définissez votre TJM pour profiter des fonctionnalités de budget.}\"",
    "project": "",
-   "jsfbt": "Définissez votre TJM pour profiter des fonctionnalités de budget"
+   "jsfbt": "Définissez votre TJM pour profiter des fonctionnalités de budget."
   },
   {
    "hashToText": {
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 332,
+   "line_beg": 568,
    "col_beg": 6,
-   "line_end": 334,
+   "line_end": 570,
    "col_end": 12,
    "type": "text",
    "desc": "required",
@@ -3828,17 +4094,17 @@
   },
   {
    "hashToText": {
-    "ZtGFvH83j2mpmRnBiaBlKA==": "Un problème c'est produit"
+    "I4n01o8Xl1LM7dZUIdmtZw==": "Un problème s'est produit"
    },
    "filepath": "src/components/ProjectBudget/index.js",
-   "line_beg": 360,
+   "line_beg": 596,
    "col_beg": 8,
-   "line_end": 362,
+   "line_end": 598,
    "col_end": 14,
    "type": "text",
    "desc": "something went wrong",
    "project": "inyo",
-   "jsfbt": "Un problème c'est produit"
+   "jsfbt": "Un problème s'est produit"
   },
   {
    "hashToText": {
@@ -5059,7 +5325,7 @@
   },
   {
    "hashToText": {
-    "dHcpbGCWGjNetryXwMmZiA==": "Budget"
+    "3eF7yd93trcdbIvHS2NrRw==": "Budget vendu"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 277,
@@ -5069,7 +5335,7 @@
    "type": "text",
    "desc": "sidebar project main view tooltip",
    "project": "inyo",
-   "jsfbt": "Budget"
+   "jsfbt": "Budget vendu"
   },
   {
    "hashToText": {
@@ -5283,7 +5549,7 @@
   },
   {
    "hashToText": {
-    "wgPKBRYiyHkFULq3Ns1RUw==": "Budget"
+    "BZty9g3WNrv+MnbPPDpSoQ==": "Budget vendu"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 600,
@@ -5293,7 +5559,7 @@
    "type": "text",
    "desc": "sidebar budget",
    "project": "inyo",
-   "jsfbt": "Budget"
+   "jsfbt": "Budget vendu"
   },
   {
    "hashToText": {

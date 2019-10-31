@@ -2341,22 +2341,32 @@
     }
    ]
   },
-  "zBZuNcVFtlSTSDHHAM01VA==": {
+  "eIrHfRHJr3VMTUDdnJrnng==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Budget du projet [icon]}{input}",
+     "translation": "{=Budget vendu [budget]}{input}",
      "variations": {}
     }
    ]
   },
-  "saVl5y7buvhWZNzt90QZWA==": {
+  "SDTehLh3wo+9/iQ9ZLAdZw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Project's budget {icon}",
+     "translation": "Budget sold {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "+mytN+1FSy2Rv8/CXsqNGw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This is the amount you will invoice your client.",
      "variations": {}
     }
    ]
@@ -2371,57 +2381,67 @@
     }
    ]
   },
-  "+PZGURjXQmPmRNqpakdFYw==": {
+  "mIGWHktNEAMPX6kwQ2AEnQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Budget restant}{=[budget] €}",
+     "translation": "{=Rentabilité [budget]}{=[budget]}",
      "variations": {}
     }
    ]
   },
-  "Cs8A5dJl8JGwSGqN3gYa4g==": {
+  "vz/xAwdzVvH9EsexYlkSTA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Remaining budget",
+     "translation": "Rentability {budget}",
      "variations": {}
     }
    ]
   },
-  "QNFfEDPY7y1v2rOCUQ+5AQ==": {
+  "Wo08wAWYpnX8Kk8WWNRVYQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "${budget}",
+     "translation": "{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}",
      "variations": {}
     }
    ]
   },
-  "Z9MDOczz8FmDkxVwlDOIAQ==": {
+  "fhsfbTLC6I3PLjvqvMLFUA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Rentabilité}{=[budget]}",
+     "translation": "Rentability is the ratio between the budget sold and what you already worked plus what's still planned.",
      "variations": {}
     }
    ]
   },
-  "wjlAZv0/o1YsxTgBM5luLw==": {
+  "FVwdg4iWpMFqkjyNiclNMA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Profitability",
+     "translation": "A rentability above 1 shows you worked less than planned.",
      "variations": {}
     }
    ]
   },
-  "knP8NJLKt4OXXHt3sOHS9w==": {
+  "Cu9zIL//r/JOaqWxNLTChg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "A rentability between 0 and 1 shows you worked than planned.",
+     "variations": {}
+    }
+   ]
+  },
+  "RTga39kEITzjBkqN5Fqgaw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -2431,32 +2451,202 @@
     }
    ]
   },
-  "rG+CiBj1sO6n+NvtpQIFhg==": {
+  "+a28apNacBiALR3YZvYZpw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Vous n'avez pas encore mis de budget pour ce projet.}",
+     "translation": "{=Budget réel [budget]}{=[budget]€}",
      "variations": {}
     }
    ]
   },
-  "Njdk3s+Rn38C4F74ZpAQ4Q==": {
+  "pgEn6hWhH58HKuwYd5vSqA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "You haven't added a budget for this project yet.",
+     "translation": "Real budget {budget}",
      "variations": {}
     }
    ]
   },
-  "Hq/WLMdSVFGyYiM/ggoR5w==": {
+  "CsPDLwFed7WEvPobnECAPQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Budget",
+     "translation": "{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}",
+     "variations": {}
+    }
+   ]
+  },
+  "7W9zpL19sPNz3KyXVcPgZA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The real budget is the number of days of work in your project times your daily rate.",
+     "variations": {}
+    }
+   ]
+  },
+  "HwwlTPsKKWIIHQfdKeKOLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "fDL30wt24taCtWMkf9Ixig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget restant [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "Y/oOFvGMTbCxq8HijZoINw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget remaining {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "HJjdpDClAP/ptSMOg8LGSA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}",
+     "variations": {}
+    }
+   ]
+  },
+  "UnyJ9whhDktRngCfMs87Gw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The remaining budget is your budget sold minus the amount of work you've already done.",
+     "variations": {}
+    }
+   ]
+  },
+  "O5c0X22iNXX2xv7XakE9Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "AiiiPx1HXqiasDLDrHbMuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Avenant à facturer [budget]}{amendment}",
+     "variations": {}
+    }
+   ]
+  },
+  "KbyRJRn4tU5y/PIz7ScLbQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amount to amend {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "8LD2br50aFURtdAu5zprVQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}",
+     "variations": {}
+    }
+   ]
+  },
+  "xsOlb4a+259i0nEbHwDZ9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "",
+     "variations": {}
+    }
+   ]
+  },
+  "/pIgVIkQVOMKC0wU/eLQfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's milestones",
+     "variations": {}
+    }
+   ]
+  },
+  "5dhD2GNTt7sYLPbsLVCwzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Worked",
+     "variations": {}
+    }
+   ]
+  },
+  "hfCTo83fx4zTWsbeRMVkIA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Planned",
+     "variations": {}
+    }
+   ]
+  },
+  "2T/8tqRnxn9tiabsE+I2pA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Vous n'avez pas encore défini de budget pour ce projet.}",
+     "variations": {}
+    }
+   ]
+  },
+  "3Ncuzxft2v44Y8GPQcF3IA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You don't have any budget set for this project.",
+     "variations": {}
+    }
+   ]
+  },
+  "zuGvQwqh8+Ws1fPfKjm1jQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget sold",
      "variations": {}
     }
    ]
@@ -2481,27 +2671,27 @@
     }
    ]
   },
-  "oxMtxT5kF8x+GjJX9mRYqg==": {
+  "rzJA9MHp+nXckuqAl9Z4+w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}",
+     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}",
      "variations": {}
     }
    ]
   },
-  "RkcVHXpSqsj+4HhGOadeVA==": {
+  "TP9w3Ix1Gy3BXNoKC82VrQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Before you can use the budget feature you need to add a daily rate",
+     "translation": "Define your daily rate to benefit from our budget feature.",
      "variations": {}
     }
    ]
   },
-  "ZtGFvH83j2mpmRnBiaBlKA==": {
+  "I4n01o8Xl1LM7dZUIdmtZw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3301,12 +3491,12 @@
     }
    ]
   },
-  "dHcpbGCWGjNetryXwMmZiA==": {
+  "3eF7yd93trcdbIvHS2NrRw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Budget",
+     "translation": "Budget sold",
      "variations": {}
     }
    ]
@@ -3461,12 +3651,12 @@
     }
    ]
   },
-  "wgPKBRYiyHkFULq3Ns1RUw==": {
+  "BZty9g3WNrv+MnbPPDpSoQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Budget",
+     "translation": "Budget sold",
      "variations": {}
     }
    ]
@@ -3747,6 +3937,16 @@
    "translations": [
     {
      "translation": "Delete this tag",
+     "variations": {}
+    }
+   ]
+  },
+  "ZtGFvH83j2mpmRnBiaBlKA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Something went wrong",
      "variations": {}
     }
    ]
@@ -7337,6 +7537,156 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "zBZuNcVFtlSTSDHHAM01VA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget du projet [icon]}{input}",
+     "variations": {}
+    }
+   ]
+  },
+  "saVl5y7buvhWZNzt90QZWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's budget {icon}",
+     "variations": {}
+    }
+   ]
+  },
+  "+PZGURjXQmPmRNqpakdFYw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget restant}{=[budget] €}",
+     "variations": {}
+    }
+   ]
+  },
+  "Cs8A5dJl8JGwSGqN3gYa4g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Remaining budget",
+     "variations": {}
+    }
+   ]
+  },
+  "QNFfEDPY7y1v2rOCUQ+5AQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "Z9MDOczz8FmDkxVwlDOIAQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Rentabilité}{=[budget]}",
+     "variations": {}
+    }
+   ]
+  },
+  "wjlAZv0/o1YsxTgBM5luLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Profitability",
+     "variations": {}
+    }
+   ]
+  },
+  "knP8NJLKt4OXXHt3sOHS9w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "rG+CiBj1sO6n+NvtpQIFhg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Vous n'avez pas encore mis de budget pour ce projet.}",
+     "variations": {}
+    }
+   ]
+  },
+  "Njdk3s+Rn38C4F74ZpAQ4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You haven't added a budget for this project yet.",
+     "variations": {}
+    }
+   ]
+  },
+  "Hq/WLMdSVFGyYiM/ggoR5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "oxMtxT5kF8x+GjJX9mRYqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "RkcVHXpSqsj+4HhGOadeVA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Before you can use the budget feature you need to add a daily rate",
+     "variations": {}
+    }
+   ]
+  },
+  "dHcpbGCWGjNetryXwMmZiA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "wgPKBRYiyHkFULq3Ns1RUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
      "variations": {}
     }
    ]

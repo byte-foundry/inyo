@@ -74,9 +74,6 @@ const Notice = styled(P)`
 	margin: 0;
 `;
 
-const Checked = styled('div')``;
-const NotChecked = styled('div')``;
-
 const CheckBoxFakeLabel = styled('div')`
 	margin-left: 10px;
 `;
@@ -96,13 +93,6 @@ const CheckBoxLabel = styled('label')`
 		cursor: pointer;
 		height: 0;
 		width: 0;
-	}
-
-	${NotChecked} {
-		display: ${props => (props.checked ? 'none' : 'inline-flex')};
-	}
-	${Checked} {
-		display: ${props => (props.checked ? 'inline-flex' : 'none')};
 	}
 `;
 
@@ -224,11 +214,6 @@ const SidebarProjectInfos = ({
 		history.push(`/app/tasks/?${newQuery.toString()}`);
 	}
 
-	const timeItTookPending = project.sections.reduce(
-		(sectionsSum, section) => sectionsSum
-			+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0),
-		0,
-	);
 	const taskArray = project.sections
 		.map(s => s.items.filter(i => i.status === 'PENDING'))
 		.flat();
@@ -454,20 +439,19 @@ const SidebarProjectInfos = ({
 										});
 									}}
 								/>
-								<Checked>
+								{project.notifyActivityToCustomer ? (
 									<IconButton
 										icon="check_box"
 										size="tiny"
 										color={primaryPurple}
 									/>
-								</Checked>
-								<NotChecked>
+								) : (
 									<IconButton
 										icon="check_box_outline_blank"
 										size="tiny"
 										color={primaryPurple}
 									/>
-								</NotChecked>
+								)}
 								<CheckBoxFakeLabel>
 									<fbt
 										project="inyo"

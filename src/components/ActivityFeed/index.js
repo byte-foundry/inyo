@@ -1,21 +1,13 @@
 import styled from '@emotion/styled';
+import moment from 'moment';
 import React from 'react';
 import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
-import {
-	accentGrey,
-	lightGrey,
-	lightPurple,
-	LoadingLogo,
-	primaryBlack,
-	primaryGrey,
-	primaryPurple,
-	primaryWhite,
-} from '../../utils/content';
+import {accentGrey, LoadingLogo, primaryGrey} from '../../utils/content';
 import {formatFullName, isCustomerTask} from '../../utils/functions';
-import {A} from '../../utils/new/design-system';
+import {A, P} from '../../utils/new/design-system';
 import {GET_PROJECT_ACTIVITY} from '../../utils/queries';
 import MaterialIcon from '../MaterialIcon';
 
@@ -23,19 +15,22 @@ const Feed = styled('div')`
 	flex: 1;
 `;
 
-const Container = styled('span')`
-	border-radius: 4px;
-	padding: 10px 10px 10px 0;
-	font-size: 0.85rem;
-	line-height: 1.4;
-	transition: all 200ms ease;
-
+const EventTextContainer = styled('span')`
 	display: grid;
 	grid-template-columns: 40px 1fr;
 	align-items: self-start;
+	flex: 1;
+`;
 
+const EventRow = styled('div')`
+	display: flex;
+	padding: 10px 0;
+	font-size: 0.85rem;
+	line-height: 1.4;
 	color: ${primaryGrey};
 `;
+
+const EventTime = styled('time')``;
 
 const ObjectLink = A.withComponent(Link);
 
@@ -234,6 +229,14 @@ const EventText = ({
 		);
 		icon = 'done';
 		break;
+	case 'UPDATED_TASK':
+		action = (
+			<fbt project="inyo" desc="updated task event message">
+					a mis à jour la tâche
+			</fbt>
+		);
+		icon = 'done';
+		break;
 	case 'REMOVED_TASK':
 		action = (
 			<fbt project="inyo" desc="removed task event message">
@@ -282,6 +285,14 @@ const EventText = ({
 		}
 		icon = 'done';
 		break;
+	case 'SENT_REMINDER':
+		action = (
+			<fbt project="inyo" desc="removed task event message">
+					Un reminder a été envoyé pour la tâche
+			</fbt>
+		);
+		icon = 'done';
+		break;
 	default:
 		action = eventType;
 		icon = 'done';
@@ -302,7 +313,7 @@ const EventText = ({
 			objectName = object.name;
 			break;
 		case 'Item':
-			objectName = objectName = (
+			objectName = (
 				<ObjectLink
 					to={{
 						pathname: `/app/tasks/${object.id}`,
@@ -316,12 +327,33 @@ const EventText = ({
 			);
 			break;
 		case 'Comment':
-			objectName = object.text;
-			// objectName = <A to={`/app/tasks/${object.item.id}`}>{object.name}</A>;
+			objectName = (
+				<ObjectLink
+					to={{
+						pathname: `/app/tasks/${object.task.id}`,
+						state: {
+							prevSearch: `?projectId=${projectId}&view=activity`,
+						},
+					}}
+				>
+					{object.task.name}
+				</ObjectLink>
+			);
 			break;
-			// case 'Reminder':
-			// 		objectName = <A to={`/app/tasks/${object.item.id}`}>{object.name}</A>;
-			// 	break;
+		case 'Reminder':
+			objectName = (
+				<ObjectLink
+					to={{
+						pathname: `/app/tasks/${object.item.id}`,
+						state: {
+							prevSearch: `?projectId=${projectId}&view=activity`,
+						},
+					}}
+				>
+					{object.item.name}
+				</ObjectLink>
+			);
+			break;
 		default:
 		}
 	}
@@ -340,15 +372,20 @@ const EventText = ({
 	}
 
 	return (
-		<Container>
+		<EventTextContainer>
 			<MaterialIcon icon={icon} size="tiny" color={accentGrey} />
 			<span>
-				{formatFullName(from.title, from.firstName, from.lastName)}{' '}
+				{from
+					&& formatFullName(
+						from.title,
+						from.firstName,
+						from.lastName,
+					)}{' '}
 				{action}
 				{subjectName}
 				{subjectOnObject} {objectName}.
 			</span>
-		</Container>
+		</EventTextContainer>
 	);
 };
 
@@ -364,12 +401,24 @@ const ActivityFeed = ({projectId}) => {
 	return (
 		<Feed>
 			<ul>
+				{data.activity.length === 0 && (
+					<P>
+						<fbt desc="no activity placeholder">
+							Aucune activité n'a été enregistrée pour le moment.
+						</fbt>
+					</P>
+				)}
 				{data.activity.map(event => (
-					<EventText
-						projectId={projectId}
-						key={event.id}
-						{...event}
-					/>
+					<EventRow>
+						<EventText
+							projectId={projectId}
+							key={event.id}
+							{...event}
+						/>
+						<EventTime datetime={event.createdAt}>
+							{moment(event.createdAt).calendar()}
+						</EventTime>
+					</EventRow>
 				))}
 			</ul>
 		</Feed>

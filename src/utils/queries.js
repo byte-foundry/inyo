@@ -707,6 +707,10 @@ export const GET_PROJECT_ACTIVITY = gql`
 				... on Comment {
 					id
 					text
+					task {
+						id
+						name
+					}
 				}
 				... on Reminder {
 					id

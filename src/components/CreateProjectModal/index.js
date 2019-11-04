@@ -46,11 +46,13 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 			})}
 			onSubmit={async (
 				{
-					template, customerId, deadline, name,
+					template, customerId, deadline, name, budget,
 				},
 				actions,
 			) => {
 				actions.setSubmitting(true);
+
+				const budgetFloat = Number.parseFloat(budget);
 
 				let sections;
 
@@ -101,6 +103,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 						sections,
 						customerId,
 						deadline,
+						budget: budgetFloat,
 						template: isModelTemplate ? template : undefined,
 					},
 				});

@@ -511,6 +511,26 @@
     }
    ]
   },
+  "QehVyg4J4kupjKZVBZwuUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "OAbwL0JVNTtFr6h1DMt9hQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$5000",
+     "variations": {}
+    }
+   ]
+  },
   "T9u2jJt5ihci27CmtReUng==": {
    "tokens": [],
    "types": [],
@@ -2321,6 +2341,366 @@
     }
    ]
   },
+  "eIrHfRHJr3VMTUDdnJrnng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget vendu [budget]}{input}",
+     "variations": {}
+    }
+   ]
+  },
+  "SDTehLh3wo+9/iQ9ZLAdZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget sold {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "+mytN+1FSy2Rv8/CXsqNGw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This is the amount you will invoice your client.",
+     "variations": {}
+    }
+   ]
+  },
+  "oNo+sJB8SjEx1vWwMnzPdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amount}",
+     "variations": {}
+    }
+   ]
+  },
+  "mIGWHktNEAMPX6kwQ2AEnQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Rentabilité [budget]}{=[budget]}",
+     "variations": {}
+    }
+   ]
+  },
+  "vz/xAwdzVvH9EsexYlkSTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Rentability {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "Wo08wAWYpnX8Kk8WWNRVYQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}",
+     "variations": {}
+    }
+   ]
+  },
+  "fhsfbTLC6I3PLjvqvMLFUA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Rentability is the ratio between the budget sold and what you already worked plus what's still planned.",
+     "variations": {}
+    }
+   ]
+  },
+  "FVwdg4iWpMFqkjyNiclNMA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "A rentability above 1 shows you worked less than planned.",
+     "variations": {}
+    }
+   ]
+  },
+  "Cu9zIL//r/JOaqWxNLTChg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "A rentability between 0 and 1 shows you worked more than planned.",
+     "variations": {}
+    }
+   ]
+  },
+  "RTga39kEITzjBkqN5Fqgaw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "+a28apNacBiALR3YZvYZpw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget réel [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "pgEn6hWhH58HKuwYd5vSqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Real budget {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "CsPDLwFed7WEvPobnECAPQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}",
+     "variations": {}
+    }
+   ]
+  },
+  "7W9zpL19sPNz3KyXVcPgZA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The real budget is the number of days of work in your project times your daily rate.",
+     "variations": {}
+    }
+   ]
+  },
+  "HwwlTPsKKWIIHQfdKeKOLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "fDL30wt24taCtWMkf9Ixig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget restant [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "Y/oOFvGMTbCxq8HijZoINw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget remaining {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "HJjdpDClAP/ptSMOg8LGSA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}",
+     "variations": {}
+    }
+   ]
+  },
+  "UnyJ9whhDktRngCfMs87Gw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The remaining budget is your budget sold minus the amount of work you've already done.",
+     "variations": {}
+    }
+   ]
+  },
+  "O5c0X22iNXX2xv7XakE9Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "AiiiPx1HXqiasDLDrHbMuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Avenant à facturer [budget]}{amendment}",
+     "variations": {}
+    }
+   ]
+  },
+  "KbyRJRn4tU5y/PIz7ScLbQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amount to amend {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "8LD2br50aFURtdAu5zprVQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}",
+     "variations": {}
+    }
+   ]
+  },
+  "xsOlb4a+259i0nEbHwDZ9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "",
+     "variations": {}
+    }
+   ]
+  },
+  "/pIgVIkQVOMKC0wU/eLQfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's milestones",
+     "variations": {}
+    }
+   ]
+  },
+  "5dhD2GNTt7sYLPbsLVCwzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Worked",
+     "variations": {}
+    }
+   ]
+  },
+  "hfCTo83fx4zTWsbeRMVkIA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Planned",
+     "variations": {}
+    }
+   ]
+  },
+  "2T/8tqRnxn9tiabsE+I2pA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Vous n'avez pas encore défini de budget pour ce projet.}",
+     "variations": {}
+    }
+   ]
+  },
+  "3Ncuzxft2v44Y8GPQcF3IA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You don't have any budget set for this project.",
+     "variations": {}
+    }
+   ]
+  },
+  "zuGvQwqh8+Ws1fPfKjm1jQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget sold",
+     "variations": {}
+    }
+   ]
+  },
+  "uXlGZSghlCKv2CyuFk0Yrg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "$5000",
+     "variations": {}
+    }
+   ]
+  },
+  "0/0IE5XdLNMJoppUG+lgBw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Confirm",
+     "variations": {}
+    }
+   ]
+  },
+  "rzJA9MHp+nXckuqAl9Z4+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}",
+     "variations": {}
+    }
+   ]
+  },
+  "TP9w3Ix1Gy3BXNoKC82VrQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Define your daily rate to benefit from our budget feature.",
+     "variations": {}
+    }
+   ]
+  },
+  "I4n01o8Xl1LM7dZUIdmtZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Something went wrong",
+     "variations": {}
+    }
+   ]
+  },
   "S9/JwL4Xm5vX6oSwkK+/wg==": {
    "tokens": [],
    "types": [],
@@ -3111,6 +3491,26 @@
     }
    ]
   },
+  "3eF7yd93trcdbIvHS2NrRw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget sold",
+     "variations": {}
+    }
+   ]
+  },
+  "imwvh09INyILzvv6mIY3PA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's budget",
+     "variations": {}
+    }
+   ]
+  },
   "L067xGXkMfARcJBjS7f+9g==": {
    "tokens": [],
    "types": [],
@@ -3247,6 +3647,36 @@
    "translations": [
     {
      "translation": "This is what your client will see.",
+     "variations": {}
+    }
+   ]
+  },
+  "BZty9g3WNrv+MnbPPDpSoQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget sold",
+     "variations": {}
+    }
+   ]
+  },
+  "ORvhi4PTIwYzCN7QQNuvzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's budget",
+     "variations": {}
+    }
+   ]
+  },
+  "v7fom6AQjJQbvBn0igL0zg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amount}",
      "variations": {}
     }
    ]
@@ -7041,102 +7471,172 @@
     }
    ]
   },
-  "IPjX4NvI5d0Bs6Y6P7crzA==": {
+  "zBZuNcVFtlSTSDHHAM01VA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Monday",
+     "translation": "{=Budget du projet [icon]}{input}",
      "variations": {}
     }
    ]
   },
-  "MuMD31rJxrt3Jdn+pk5Omg==": {
+  "saVl5y7buvhWZNzt90QZWA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Tuesday",
+     "translation": "Project's budget {icon}",
      "variations": {}
     }
    ]
   },
-  "utNqaX0OrZKDRVDBEcoaug==": {
+  "+PZGURjXQmPmRNqpakdFYw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Wednesday",
+     "translation": "{=Budget restant}{=[budget] €}",
      "variations": {}
     }
    ]
   },
-  "QdPcOI0xiT8MPCNJ4N73Hg==": {
+  "Cs8A5dJl8JGwSGqN3gYa4g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Thursday",
+     "translation": "Remaining budget",
      "variations": {}
     }
    ]
   },
-  "ut7u0qJPvl2D0uyQF/CP/A==": {
+  "QNFfEDPY7y1v2rOCUQ+5AQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Friday",
+     "translation": "${budget}",
      "variations": {}
     }
    ]
   },
-  "SSvJy8FM+/k7esNsMoGaGg==": {
+  "Z9MDOczz8FmDkxVwlDOIAQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Saturday",
+     "translation": "{=Rentabilité}{=[budget]}",
      "variations": {}
     }
    ]
   },
-  "KQ+cxh8crAErMUaJtC6Tig==": {
+  "wjlAZv0/o1YsxTgBM5luLw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Next month",
+     "translation": "Profitability",
      "variations": {}
     }
    ]
   },
-  "4xvLl6dKWzFpJOaE4OdKMg==": {
+  "knP8NJLKt4OXXHt3sOHS9w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Previous month",
+     "translation": "{budget}",
      "variations": {}
     }
    ]
   },
-  "oetc6lmmqleqUpsvhS3rxQ==": {
+  "rG+CiBj1sO6n+NvtpQIFhg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "All the contacts",
+     "translation": "{=Vous n'avez pas encore mis de budget pour ce projet.}",
      "variations": {}
     }
    ]
   },
-  "+O2F4Nyjvrb3Yk/fGGbWQA==": {
+  "Njdk3s+Rn38C4F74ZpAQ4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Contacts",
+     "translation": "You haven't added a budget for this project yet.",
+     "variations": {}
+    }
+   ]
+  },
+  "Hq/WLMdSVFGyYiM/ggoR5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "oxMtxT5kF8x+GjJX9mRYqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "RkcVHXpSqsj+4HhGOadeVA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Before you can use the budget feature you need to add a daily rate",
+     "variations": {}
+    }
+   ]
+  },
+  "dHcpbGCWGjNetryXwMmZiA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "wgPKBRYiyHkFULq3Ns1RUw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget",
+     "variations": {}
+    }
+   ]
+  },
+  "p038/T94EO/ejzQvOS1Hqg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{timeEstimated} days",
+     "variations": {}
+    }
+   ]
+  },
+  "q3mgeZLjbygjxiRUSkrzzg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
      "variations": {}
     }
    ]
@@ -7281,6 +7781,206 @@
     }
    ]
   },
+  "A5oTXW71AoN17ScMbmX2bQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You can subscribe right now to Inyo.",
+     "variations": {}
+    }
+   ]
+  },
+  "itpCACFYiHQJlxS4wLJppA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=S'abonner pour 12$ /mois}{=ou}{=Choisir l'offre spéciale de lancement et profité d'Inyo a vie pour 75$}",
+     "variations": {}
+    }
+   ]
+  },
+  "xMM/dxOa78xb4UQty6vE/g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subscribe for $12 /month",
+     "variations": {}
+    }
+   ]
+  },
+  "XxmNHV+CSDG4dLrxCAstFg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "or",
+     "variations": {}
+    }
+   ]
+  },
+  "uxsVOI0qJgpVehl9SfWe3Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose our special launch offer and get Inyo for life for $75",
+     "variations": {}
+    }
+   ]
+  },
+  "sS7lbT6ud332J4JbSuxTMw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}",
+     "variations": {}
+    }
+   ]
+  },
+  "beOrGcOnckyqPUWq5EPP7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If this is not you, click here to sign out.",
+     "variations": {}
+    }
+   ]
+  },
+  "mnvxbQlOlB/Afe9kwyUkCg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This user has not signed up to Inyo yet",
+     "variations": {}
+    }
+   ]
+  },
+  "XExdBgqJHNNwA1FTFraJjw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{prout}haha",
+     "variations": {}
+    }
+   ]
+  },
+  "lX/U196sA/EDgqxVTz2P4A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amount}",
+     "variations": {}
+    }
+   ]
+  },
+  "IPjX4NvI5d0Bs6Y6P7crzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Monday",
+     "variations": {}
+    }
+   ]
+  },
+  "MuMD31rJxrt3Jdn+pk5Omg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tuesday",
+     "variations": {}
+    }
+   ]
+  },
+  "utNqaX0OrZKDRVDBEcoaug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Wednesday",
+     "variations": {}
+    }
+   ]
+  },
+  "QdPcOI0xiT8MPCNJ4N73Hg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Thursday",
+     "variations": {}
+    }
+   ]
+  },
+  "ut7u0qJPvl2D0uyQF/CP/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Friday",
+     "variations": {}
+    }
+   ]
+  },
+  "SSvJy8FM+/k7esNsMoGaGg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Saturday",
+     "variations": {}
+    }
+   ]
+  },
+  "KQ+cxh8crAErMUaJtC6Tig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Next month",
+     "variations": {}
+    }
+   ]
+  },
+  "4xvLl6dKWzFpJOaE4OdKMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Previous month",
+     "variations": {}
+    }
+   ]
+  },
+  "oetc6lmmqleqUpsvhS3rxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "All the contacts",
+     "variations": {}
+    }
+   ]
+  },
+  "+O2F4Nyjvrb3Yk/fGGbWQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Contacts",
+     "variations": {}
+    }
+   ]
+  },
   "UzYWkXM20aeDmetJWVQHKQ==": {
    "tokens": [],
    "types": [],
@@ -7307,26 +8007,6 @@
    "translations": [
     {
      "translation": "Tu",
-     "variations": {}
-    }
-   ]
-  },
-  "p038/T94EO/ejzQvOS1Hqg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{timeEstimated} days",
-     "variations": {}
-    }
-   ]
-  },
-  "q3mgeZLjbygjxiRUSkrzzg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "1 day",
      "variations": {}
     }
    ]

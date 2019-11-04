@@ -276,6 +276,35 @@ const SidebarProjectInfos = ({
 					label={
 						<fbt
 							project="inyo"
+							desc="sidebar project main view tooltip"
+						>
+							Budget vendu
+						</fbt>
+					}
+				>
+					<SidebarLink
+						onClick={() => setView('budget')}
+						active={activeView === 'budget'}
+					>
+						<IconButton
+							icon="attach_money"
+							size="tiny"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project budget projet"
+								>
+									Budget du projet
+								</fbt>
+							}
+							current={activeView === 'budget'}
+						/>
+					</SidebarLink>
+				</Tooltip>
+				<Tooltip
+					label={
+						<fbt
+							project="inyo"
 							desc="sidebar project personal notes tooltip"
 						>
 							Seulement visibles par vous
@@ -565,7 +594,6 @@ const SidebarProjectInfos = ({
 					<StaticCustomerView projectId={project.id} />
 				</PreviewModal>
 			)}
-
 			<SubSection>
 				<Actions>
 					{project.linkedCollaborators.length === 0 ? (
@@ -613,7 +641,31 @@ const SidebarProjectInfos = ({
 					/>
 				)}
 			</SubSection>
-
+			{project.budget !== null && (
+				<SubSection>
+					<SubHeading>
+						<fbt project="inyo" desc="sidebar budget">
+							Budget vendu
+						</fbt>
+					</SubHeading>
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="sidebar project budget">
+								Budget du projet
+							</fbt>
+						}
+					>
+						<SidebarBigNumber>
+							<fbt desc="sidebar budget amount">
+								<fbt:param name="amount">
+									{project.budget}
+								</fbt:param>{' '}
+								€
+							</fbt>
+						</SidebarBigNumber>
+					</Tooltip>
+				</SubSection>
+			)}
 			<SubSection>
 				<DateContainer>
 					{project.deadline ? (

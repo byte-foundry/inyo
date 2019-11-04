@@ -14,12 +14,13 @@ import {
 	mediumGrey,
 	mediumPurple,
 	primaryBlack,
+	primaryBlue,
 	primaryGrey,
 	primaryPurple,
 	primaryRed,
 	primaryWhite,
 } from '../colors';
-import {BREAKPOINTS} from '../constants';
+import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../constants';
 import Pencil from '../icons/pencil.svg';
 
 export * from '../colors';
@@ -908,4 +909,141 @@ export const TaskCardElem = styled('div')`
 	position: relative;
 
 	transition: all 300ms ease;
+`;
+
+export const TaskIcon = styled('div')`
+	cursor: pointer;
+	width: 3.5rem;
+	height: 3.5rem;
+	margin-left: -0.8725rem;
+	margin-right: ${props => (props.noData ? '.5rem' : '1rem')};
+	overflow: visible;
+	background: center no-repeat
+		url(${(props) => {
+		let {type} = props;
+
+		if (props.assigned) {
+			type += '_ASSIGNED';
+		}
+
+		const typeInfos
+				= ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
+
+		let icon = typeInfos.iconUrl;
+
+		if (props.status === itemStatuses.FINISHED) {
+			icon
+					= (props.justUpdated
+					? typeInfos.iconUrlValidatedAnim
+					: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
+		}
+		return icon;
+	}});
+	margin-bottom: 0;
+
+	transform: scale(${props => (props.noData ? 0.75 : '')});
+
+	&:hover {
+		background: center no-repeat
+			url(${(props) => {
+		const typeInfos
+					= ITEM_TYPES.find(t => t.type === props.type)
+					|| ITEM_TYPES[0];
+
+		if (props.noAnim) {
+			return props.status === itemStatuses.FINISHED
+				? typeInfos.iconUrlValidated
+				: typeInfos.iconUrl;
+		}
+
+		return typeInfos.iconUrlValidated || typeInfos.iconUrl;
+	}});
+
+		animation: ${props => (props.status === itemStatuses.FINISHED || props.noAnim
+		? 'none'
+		: 'growth 300ms')};
+
+		@keyframes growth {
+			0% {
+				background-size: 0% auto;
+			}
+			50% {
+				background-size: 50% auto;
+			}
+			70% {
+				background-size: 40% auto;
+			}
+			100% {
+				background-size: 50% auto;
+			}
+		}
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		transform: scale(0.6);
+		margin: 0;
+		position: absolute;
+		left: -1rem;
+	}
+`;
+
+export const Pie = styled('div')`
+	width: ${props => (props.big ? '300px' : '18px')};
+	height: ${props => (props.big ? '300px' : '18px')};
+	border-radius: 50%;
+	background: ${props => (props.value <= 1
+		? accentGrey
+		: props.value >= 2
+			? primaryRed
+			: primaryBlue)};
+	background-image: linear-gradient(
+		to right,
+		transparent 50%,
+		currentColor 0
+	);
+	color: ${props => (props.value <= 1 ? primaryBlue : primaryRed)};
+	position: relative;
+
+	::before {
+		content: '';
+		display: block;
+		margin-left: 50%;
+		height: 100%;
+		border-radius: 0 100% 100% 0 / 50%;
+		background-color: inherit;
+		transform-origin: left;
+		background: ${props => (props.value % 1 >= 0.5 || props.value >= 2 ? 'currentColor' : '')};
+		transform: rotate(
+			${props => (props.value < 2 ? props.value % 0.5 : 1)}turn
+		);
+	}
+
+	::after {
+		content: '';
+		width: ${props => (props.big ? '270px' : '12px')};
+		height: ${props => (props.big ? '270px' : '12px')};
+		position: absolute;
+		top: ${props => (props.big ? '15px' : '3px')};
+		left: ${props => (props.big ? '15px' : '3px')};
+		display: block;
+		background: ${primaryWhite};
+		border-radius: 50%;
+	}
+`;
+
+export const Dropdown = styled('div')`
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	margin-top: 10px;
+	padding: 5px;
+	position: absolute;
+	width: 400px;
+	box-shadow: 0 0 10px ${primaryGrey};
+	border-radius: 3px;
+	background: ${primaryWhite};
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		width: calc(100% - 10px);
+	}
 `;

@@ -4,6 +4,7 @@ import {
 	COMMENT_ON_ITEM_FRAGMENT,
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
+	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
 	TAG_FRAGMENT,
@@ -226,20 +227,11 @@ export const GET_PROJECT_COLLAB_LINK = gql`
 
 export const GET_PROJECT_INFOS = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	query getProjectInfos($projectId: ID!, $token: String) {
 		project(id: $projectId, token: $token) {
-			id
-			template
-			viewedByCustomer
-			name
-			status
-			createdAt
-			deadline
-			daysUntilDeadline
-			notifyActivityToCustomer
-			total
-			token
+			...ProjectShortFragment
 			attachments {
 				id
 				filename
@@ -276,6 +268,7 @@ export const GET_PROJECT_INFOS = gql`
 					status
 					unit
 					timeItTook
+					dailyRate
 				}
 			}
 			issuer {
@@ -310,18 +303,11 @@ export const GET_PROJECT_INFOS = gql`
 
 export const GET_PROJECT_DATA = gql`
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	query getProjectData($projectId: ID!) {
 		project(id: $projectId) {
-			id
-			template
-			viewedByCustomer
-			name
-			status
-			createdAt
-			deadline
-			daysUntilDeadline
-			notifyActivityToCustomer
+			...ProjectShortFragment
 			issuer {
 				name
 				email

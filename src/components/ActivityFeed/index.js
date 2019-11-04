@@ -9,7 +9,7 @@ import {EVENT_TYPES, ITEM_TYPES} from '../../utils/constants';
 import {accentGrey, LoadingLogo, primaryGrey} from '../../utils/content';
 import {formatFullName, isCustomerTask} from '../../utils/functions';
 import {A, P} from '../../utils/new/design-system';
-import {GET_PROJECT_ACTIVITY} from '../../utils/queries';
+import {GET_PROJECT_ACTIVITY, GET_PROJECT_INFOS} from '../../utils/queries';
 import useLocalStorage from '../../utils/useLocalStorage';
 import MaterialIcon from '../MaterialIcon';
 
@@ -417,20 +417,34 @@ const ActivityFeed = ({projectId}) => {
 		variables: {projectId},
 		fetchPolicy: 'cache-and-network',
 	});
+	const [peopleFilter, setPeopleFilter] = useLocalStorage(
+		'activityPeopleFilter',
+		{},
+	);
 	const [eventTypesFilter, setEventTypesFilter] = useLocalStorage(
-		'activityItemTypesFilter',
-		Object.fromEntries(EVENT_TYPES.map(({type}) => [type, true])),
+		'activityEventTypesFilter',
+		{},
 	);
 	const [itemTypesFilter, setItemTypesFilter] = useLocalStorage(
 		'activityItemTypesFilter',
-		Object.fromEntries(ITEM_TYPES.map(({type}) => [type, true])),
+		{},
 	);
 
 	if (error) throw error;
 	if (!data && loading) return <LoadingLogo />;
 
+	const people = data.activity.reduce((acc, event) => {
+		if (event.subject) {
+			acc[event.subject.id] = event.subject;
+		}
+		if (event.from) {
+			acc[event.from.id] = event.from;
+		}
+		return acc;
+	}, {});
+
 	const filteredActivity = data.activity.filter((event) => {
-		if (!eventTypesFilter[event.type]) {
+		if (eventTypesFilter[event.type]) {
 			return false;
 		}
 		if (event.object) {
@@ -438,14 +452,19 @@ const ActivityFeed = ({projectId}) => {
 			const type = event.object.__typename;
 
 			if (
-				(type === 'Item' && !itemTypesFilter[event.object.itemType])
+				(type === 'Item' && itemTypesFilter[event.object.itemType])
 				|| (type === 'Comment'
-					&& !itemTypesFilter[event.object.task.type])
-				|| (type === 'Reminder'
-					&& !itemTypesFilter[event.object.item.type])
+					&& itemTypesFilter[event.object.task.type])
+				|| (type === 'Reminder' && itemTypesFilter[event.object.item.type])
 			) {
 				return false;
 			}
+		}
+		if (event.subject && peopleFilter[event.subject.id]) {
+			return false;
+		}
+		if (event.from && peopleFilter[event.from.id]) {
+			return false;
 		}
 		return true;
 	});
@@ -485,6 +504,20 @@ const ActivityFeed = ({projectId}) => {
 			<div style={{flexBasis: '300px'}}>
 				<FilterCard>
 					<FilterCardHeading>Acteurs du projet</FilterCardHeading>
+					{Object.values(people).map(person => (
+						<FilterOption key={person.id}>
+							<input
+								type="checkbox"
+								checked={!peopleFilter[person.id]}
+								onChange={event => setPeopleFilter({
+									...peopleFilter,
+									[person.id]: !event.target.checked,
+								})
+								}
+							/>
+							{person.firstName} {person.lastName}
+						</FilterOption>
+					))}
 				</FilterCard>
 
 				<FilterCard>
@@ -493,10 +526,10 @@ const ActivityFeed = ({projectId}) => {
 						<FilterOption key={type}>
 							<input
 								type="checkbox"
-								checked={eventTypesFilter[type]}
+								checked={!eventTypesFilter[type]}
 								onChange={event => setEventTypesFilter({
 									...eventTypesFilter,
-									[type]: event.target.checked,
+									[type]: !event.target.checked,
 								})
 								}
 							/>
@@ -511,10 +544,10 @@ const ActivityFeed = ({projectId}) => {
 						<FilterOption key={type}>
 							<input
 								type="checkbox"
-								checked={itemTypesFilter[type]}
+								checked={!itemTypesFilter[type]}
 								onChange={event => setItemTypesFilter({
 									...itemTypesFilter,
-									[type]: event.target.checked,
+									[type]: !event.target.checked,
 								})
 								}
 							/>

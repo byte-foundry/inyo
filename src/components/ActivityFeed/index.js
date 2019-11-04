@@ -5,14 +5,18 @@ import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
+import {EVENT_TYPES, ITEM_TYPES} from '../../utils/constants';
 import {accentGrey, LoadingLogo, primaryGrey} from '../../utils/content';
 import {formatFullName, isCustomerTask} from '../../utils/functions';
 import {A, P} from '../../utils/new/design-system';
 import {GET_PROJECT_ACTIVITY} from '../../utils/queries';
+import useLocalStorage from '../../utils/useLocalStorage';
 import MaterialIcon from '../MaterialIcon';
 
 const Feed = styled('div')`
 	flex: 1;
+	display: flex;
+	color: ${primaryGrey};
 `;
 
 const EventTextContainer = styled('span')`
@@ -27,7 +31,6 @@ const EventRow = styled('div')`
 	padding: 10px 0;
 	font-size: 0.85rem;
 	line-height: 1.4;
-	color: ${primaryGrey};
 `;
 
 const EventTime = styled('time')``;
@@ -389,18 +392,67 @@ const EventText = ({
 	);
 };
 
+const EventList = styled('ul')`
+	margin: 0;
+	padding: 0;
+	margin-right: 20px;
+	flex: 1;
+`;
+
+const FilterCard = styled('div')`
+	margin: 10px 0;
+	padding: 10px;
+`;
+
+const FilterCardHeading = styled('span')`
+	text-decoration: underline;
+`;
+
+const FilterOption = styled('label')`
+	display: block;
+`;
+
 const ActivityFeed = ({projectId}) => {
 	const {data, loading, error} = useQuery(GET_PROJECT_ACTIVITY, {
 		variables: {projectId},
 		fetchPolicy: 'cache-and-network',
 	});
+	const [eventTypesFilter, setEventTypesFilter] = useLocalStorage(
+		'activityItemTypesFilter',
+		Object.fromEntries(EVENT_TYPES.map(({type}) => [type, true])),
+	);
+	const [itemTypesFilter, setItemTypesFilter] = useLocalStorage(
+		'activityItemTypesFilter',
+		Object.fromEntries(ITEM_TYPES.map(({type}) => [type, true])),
+	);
 
 	if (error) throw error;
 	if (!data && loading) return <LoadingLogo />;
 
+	const filteredActivity = data.activity.filter((event) => {
+		if (!eventTypesFilter[event.type]) {
+			return false;
+		}
+		if (event.object) {
+			// eslint-disable-next-line no-underscore-dangle
+			const type = event.object.__typename;
+
+			if (
+				(type === 'Item' && !itemTypesFilter[event.object.itemType])
+				|| (type === 'Comment'
+					&& !itemTypesFilter[event.object.task.type])
+				|| (type === 'Reminder'
+					&& !itemTypesFilter[event.object.item.type])
+			) {
+				return false;
+			}
+		}
+		return true;
+	});
+
 	return (
 		<Feed>
-			<ul>
+			<EventList>
 				{data.activity.length === 0 && (
 					<P>
 						<fbt desc="no activity placeholder">
@@ -408,7 +460,15 @@ const ActivityFeed = ({projectId}) => {
 						</fbt>
 					</P>
 				)}
-				{data.activity.map(event => (
+				{data.activity.length > 0 && filteredActivity.length === 0 && (
+					<P>
+						<fbt desc="all activity filtered placeholder">
+							Aucune activité correspondant aux éléments
+							sélectionnés n'a été enregistrée pour le moment.
+						</fbt>
+					</P>
+				)}
+				{filteredActivity.map(event => (
 					<EventRow>
 						<EventText
 							projectId={projectId}
@@ -420,7 +480,49 @@ const ActivityFeed = ({projectId}) => {
 						</EventTime>
 					</EventRow>
 				))}
-			</ul>
+			</EventList>
+
+			<div style={{flexBasis: '300px'}}>
+				<FilterCard>
+					<FilterCardHeading>Acteurs du projet</FilterCardHeading>
+				</FilterCard>
+
+				<FilterCard>
+					<FilterCardHeading>Actions</FilterCardHeading>
+					{EVENT_TYPES.map(({name, type}) => (
+						<FilterOption key={type}>
+							<input
+								type="checkbox"
+								checked={eventTypesFilter[type]}
+								onChange={event => setEventTypesFilter({
+									...eventTypesFilter,
+									[type]: event.target.checked,
+								})
+								}
+							/>
+							{name}
+						</FilterOption>
+					))}
+				</FilterCard>
+
+				<FilterCard>
+					<FilterCardHeading>Type de tâche</FilterCardHeading>
+					{ITEM_TYPES.map(({name, type}) => (
+						<FilterOption key={type}>
+							<input
+								type="checkbox"
+								checked={itemTypesFilter[type]}
+								onChange={event => setItemTypesFilter({
+									...itemTypesFilter,
+									[type]: event.target.checked,
+								})
+								}
+							/>
+							{name}
+						</FilterOption>
+					))}
+				</FilterCard>
+			</div>
 		</Feed>
 	);
 };

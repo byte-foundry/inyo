@@ -709,6 +709,7 @@ export const GET_PROJECT_ACTIVITY = gql`
 					text
 					task {
 						id
+						type
 						name
 					}
 				}
@@ -718,6 +719,7 @@ export const GET_PROJECT_ACTIVITY = gql`
 					sendingDate
 					item {
 						id
+						type
 						name
 					}
 				}

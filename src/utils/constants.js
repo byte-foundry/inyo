@@ -7,9 +7,6 @@ import ContentAcquisitionIconUrl, {
 import TaskInvoiceIconUrl, {
 	ReactComponent as TaskInvoiceIcon,
 } from './icons/invoice-icon.svg';
-import SectionIconUrl, {
-	ReactComponent as SectionIcon,
-} from './icons/section-icon.svg';
 import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 import TaskCustomerIconValidatedUrl, {
 	ReactComponent as TaskCustomerIconValidated,
@@ -153,22 +150,6 @@ export const ITEM_TYPES = [
 			return fbt(
 				'Lister et récupérer les contenus nécessaires',
 				'content acquisition description',
-			);
-		},
-	},
-	{
-		icon: <SectionIcon />,
-		iconValidated: <TaskCustomerIconValidated />,
-		iconUrl: SectionIconUrl,
-		iconUrlValidated: TaskCustomerIconValidatedUrl,
-		type: 'SECTION',
-		get name() {
-			return fbt('Section de projet', 'section name');
-		},
-		get description() {
-			return fbt(
-				"Créer une section pour classer les tâches d'un projet",
-				'section description',
 			);
 		},
 	},
@@ -324,6 +305,207 @@ export const REMINDER_TYPES_DATA = {
 		),
 	},
 };
+
+export const EVENT_TYPES = [
+	{
+		type: 'FOCUSED_TASK',
+		get name() {
+			return fbt('tâche programmée', 'FOCUSED_TASK event type name');
+		},
+	},
+	{
+		type: 'UNFOCUSED_TASK',
+		get name() {
+			return fbt('tâche déprogrammée', 'UNFOCUSED_TASK event type name');
+		},
+	},
+	{
+		type: 'SENT_REMINDER',
+		get name() {
+			return fbt('rappel envoyé', 'SENT_REMINDER event type name');
+		},
+	},
+	{
+		type: 'CANCELED_REMINDER',
+		get name() {
+			return fbt('rappel annulé', 'CANCELED_REMINDER event type name');
+		},
+	},
+	{
+		type: 'ADDED_TASK',
+		get name() {
+			return fbt('tâche ajoutée', 'ADDED_TASK event type name');
+		},
+	},
+	{
+		type: 'UPDATED_TASK',
+		get name() {
+			return fbt('tâche mise à jour', 'UPDATED_TASK event type name');
+		},
+	},
+	{
+		type: 'FINISHED_TASK',
+		get name() {
+			return fbt('tâche validée', 'FINISHED_TASK event type name');
+		},
+	},
+	{
+		type: 'UNFINISHED_TASK',
+		get name() {
+			return fbt('tâche dé-validée', 'UNFINISHED_TASK event type name');
+		},
+	},
+	{
+		type: 'REMOVED_TASK',
+		get name() {
+			return fbt('tâche supprimée', 'REMOVED_TASK event type name');
+		},
+	},
+	{
+		type: 'CREATED_PROJECT',
+		get name() {
+			return fbt('projet crée', 'CREATED_PROJECT event type name');
+		},
+	},
+	{
+		type: 'UPDATED_PROJECT',
+		get name() {
+			return fbt('projet mis à jour', 'UPDATED_PROJECT event type name');
+		},
+	},
+	{
+		type: 'ARCHIVED_PROJECT',
+		get name() {
+			return fbt('projet archivé', 'ARCHIVED_PROJECT event type name');
+		},
+	},
+	{
+		type: 'UNARCHIVED_PROJECT',
+		get name() {
+			return fbt(
+				'projet dé-archivé',
+				'UNARCHIVED_PROJECT event type name',
+			);
+		},
+	},
+	{
+		type: 'POSTED_COMMENT',
+		get name() {
+			return fbt('commentaire posté', 'POSTED_COMMENT event type name');
+		},
+	},
+	{
+		type: 'ADDED_SECTION',
+		get name() {
+			return fbt('section ajoutée', 'ADDED_SECTION event type name');
+		},
+	},
+	{
+		type: 'UPDATED_SECTION',
+		get name() {
+			return fbt(
+				'section mise à jour',
+				'UPDATED_SECTION event type name',
+			);
+		},
+	},
+	{
+		type: 'REMOVED_SECTION',
+		get name() {
+			return fbt('section supprimée', 'REMOVED_SECTION event type name');
+		},
+	},
+	{
+		type: 'UPLOADED_ATTACHMENT',
+		get name() {
+			return fbt(
+				'document(s) ajouté(s)',
+				'UPLOADED_ATTACHMENT event type name',
+			);
+		},
+	},
+	{
+		type: 'REMOVED_ATTACHMENT',
+		get name() {
+			return fbt(
+				'document(s) supprimé(s)',
+				'REMOVED_ATTACHMENT event type name',
+			);
+		},
+	},
+	{
+		type: 'LINKED_CUSTOMER_TO_TASK',
+		get name() {
+			return fbt(
+				'client assigné à une tâche',
+				'LINKED_CUSTOMER_TO_TASK event type name',
+			);
+		},
+	},
+	{
+		type: 'UNLINKED_CUSTOMER_TO_TASK',
+		get name() {
+			return fbt(
+				"client enlevé d'une tâche",
+				'UNLINKED_CUSTOMER_TO_TASK event type name',
+			);
+		},
+	},
+	{
+		type: 'LINKED_CUSTOMER_TO_PROJECT',
+		get name() {
+			return fbt(
+				'client assigné à un projet',
+				'LINKED_CUSTOMER_TO_PROJECT event type name',
+			);
+		},
+	},
+	{
+		type: 'UNLINKED_CUSTOMER_TO_PROJECT',
+		get name() {
+			return fbt(
+				"client enlevé d'un projet",
+				'UNLINKED_CUSTOMER_TO_PROJECT event type name',
+			);
+		},
+	},
+	{
+		type: 'LINKED_COLLABORATOR_TO_PROJECT',
+		get name() {
+			return fbt(
+				'collaborateur assigné à un projet',
+				'LINKED_COLLABORATOR_TO_PROJECT event type name',
+			);
+		},
+	},
+	{
+		type: 'UNLINKED_COLLABORATOR_TO_PROJECT',
+		get name() {
+			return fbt(
+				"collaborateur enlevé d'un projet",
+				'UNLINKED_COLLABORATOR_TO_PROJECT event type name',
+			);
+		},
+	},
+	{
+		type: 'ASSIGNED_TO_TASK',
+		get name() {
+			return fbt(
+				'collaborateur assigné à une tâche',
+				'ASSIGNED_TO_TASK event type name',
+			);
+		},
+	},
+	{
+		type: 'REMOVE_ASSIGNMENT_TO_TASK',
+		get name() {
+			return fbt(
+				"collaborateur enlevé d'une tâche",
+				'REMOVE_ASSIGNMENT_TO_TASK event type name',
+			);
+		},
+	},
+];
 
 export const TAG_COLOR_PALETTE = [
 	[[244, 67, 54], [255, 255, 255]],

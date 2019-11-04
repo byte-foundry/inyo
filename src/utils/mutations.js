@@ -3,6 +3,7 @@ import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-depen
 import {
 	ITEM_FRAGMENT,
 	PROJECT_CUSTOMER_FRAGMENT,
+	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
 	TAG_FRAGMENT,
@@ -234,6 +235,7 @@ export const UPDATE_USER_COMPANY = gql`
 /** ******** PROJECT MUTATIONS ********* */
 
 export const CREATE_PROJECT = gql`
+	${PROJECT_SHORT_FRAGMENT}
 	${PROJECT_CUSTOMER_FRAGMENT}
 	${ITEM_FRAGMENT}
 
@@ -258,19 +260,10 @@ export const CREATE_PROJECT = gql`
 			budget: $budget
 			notifyActivityToCustomer: $notifyActivityToCustomer
 		) {
-			id
-			name
-			viewedByCustomer
-			deadline
-			daysUntilDeadline
+			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment
 			}
-			issuedAt
-			createdAt
-			status
-			total
-			budget
 			sections {
 				id
 				items {
@@ -283,6 +276,7 @@ export const CREATE_PROJECT = gql`
 export const UPDATE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	# creating project with a customer id or a new customer
 	mutation updateProject(
@@ -303,13 +297,7 @@ export const UPDATE_PROJECT = gql`
 			customerId: $customerId
 			customer: $customer
 		) {
-			id
-			name
-			deadline
-			budget
-			daysUntilDeadline
-			notifyActivityToCustomer
-			status
+			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment
 			}
@@ -355,15 +343,11 @@ export const START_PROJECT = gql`
 export const ARCHIVE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	mutation archiveProject($projectId: ID!) {
 		archiveProject(id: $projectId) {
-			id
-			name
-			deadline
-			daysUntilDeadline
-			status
-			notifyActivityToCustomer
+			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment
 			}
@@ -381,15 +365,11 @@ export const ARCHIVE_PROJECT = gql`
 export const UNARCHIVE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	mutation unarchiveProject($projectId: ID!) {
 		unarchiveProject(id: $projectId) {
-			id
-			name
-			deadline
-			daysUntilDeadline
-			notifyActivityToCustomer
-			status
+			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment
 			}
@@ -407,15 +387,11 @@ export const UNARCHIVE_PROJECT = gql`
 export const REMOVE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	mutation removeProject($projectId: ID!) {
 		removeProject(id: $projectId) {
-			id
-			name
-			deadline
-			daysUntilDeadline
-			notifyActivityToCustomer
-			status
+			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment
 			}
@@ -433,15 +409,11 @@ export const REMOVE_PROJECT = gql`
 export const UNREMOVE_PROJECT = gql`
 	${PROJECT_CUSTOMER_FRAGMENT}
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	mutation unremoveProject($projectId: ID!) {
 		unremoveProject(id: $projectId) {
-			id
-			name
-			deadline
-			daysUntilDeadline
-			notifyActivityToCustomer
-			status
+			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment
 			}
@@ -468,6 +440,7 @@ export const FINISH_PROJECT = gql`
 // Section
 export const ADD_SECTION = gql`
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	mutation addSection(
 		$projectId: ID!
@@ -485,11 +458,7 @@ export const ADD_SECTION = gql`
 			name
 			position
 			project {
-				id
-				deadline
-				daysUntilDeadline
-				status
-				name
+				...ProjectShortFragment
 				sections {
 					id
 					name
@@ -507,6 +476,7 @@ export const ADD_SECTION = gql`
 `;
 export const UPDATE_SECTION = gql`
 	${ITEM_FRAGMENT}
+	${PROJECT_SHORT_FRAGMENT}
 
 	mutation updateSection($sectionId: ID!, $name: String, $position: Int) {
 		updateSection(id: $sectionId, name: $name, position: $position) {
@@ -514,11 +484,7 @@ export const UPDATE_SECTION = gql`
 			name
 			position
 			project {
-				id
-				deadline
-				daysUntilDeadline
-				status
-				name
+				...ProjectShortFragment
 				customer {
 					id
 					name

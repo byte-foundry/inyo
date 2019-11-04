@@ -594,32 +594,6 @@ const SidebarProjectInfos = ({
 					<StaticCustomerView projectId={project.id} />
 				</PreviewModal>
 			)}
-			{project.budget !== null && (
-				<SubSection>
-					<SubHeading>
-						<fbt project="inyo" desc="sidebar budget">
-							Budget vendu
-						</fbt>
-					</SubHeading>
-					<Tooltip
-						label={
-							<fbt project="inyo" desc="sidebar project budget">
-								Budget du projet
-							</fbt>
-						}
-					>
-						<SidebarBigNumber>
-							<fbt desc="sidebar budget amount">
-								<fbt:param name="amount">
-									{project.budget}
-								</fbt:param>{' '}
-								€
-							</fbt>
-						</SidebarBigNumber>
-					</Tooltip>
-				</SubSection>
-			)}
-
 			<SubSection>
 				<Actions>
 					{project.linkedCollaborators.length === 0 ? (
@@ -667,7 +641,31 @@ const SidebarProjectInfos = ({
 					/>
 				)}
 			</SubSection>
-
+			{project.budget !== null && (
+				<SubSection>
+					<SubHeading>
+						<fbt project="inyo" desc="sidebar budget">
+							Budget vendu
+						</fbt>
+					</SubHeading>
+					<Tooltip
+						label={
+							<fbt project="inyo" desc="sidebar project budget">
+								Budget du projet
+							</fbt>
+						}
+					>
+						<SidebarBigNumber>
+							<fbt desc="sidebar budget amount">
+								<fbt:param name="amount">
+									{project.budget}
+								</fbt:param>{' '}
+								€
+							</fbt>
+						</SidebarBigNumber>
+					</Tooltip>
+				</SubSection>
+			)}
 			<SubSection>
 				<DateContainer>
 					{project.deadline ? (

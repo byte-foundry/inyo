@@ -1043,7 +1043,7 @@ export const Dropdown = styled('div')`
 	border-radius: 3px;
 	background: ${primaryWhite};
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: calc(100% - 10px);
 	}
 `;

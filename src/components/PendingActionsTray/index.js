@@ -176,7 +176,7 @@ const PendingActionsTray = ({projectId}) => {
 							<UnitWithSuggestionsForm
 								isTimeItTook
 								style={{gridColumn: '1 / 3'}}
-								defaultValue={task.unit}
+								value={valuesMap[task.id]}
 								onChange={(timeItTook) => {
 									if (task.unit !== timeItTook) {
 										window.Intercom(

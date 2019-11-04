@@ -301,9 +301,18 @@ const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
 				</BudgetFormContainer>
 			) : (
 				<BudgetInfo>
-					<fbt desc="budget amount">
-						<fbt:param name="amount">{props.budget}</fbt:param> €
-					</fbt>
+					{props.budget === null ? (
+						'—'
+					) : (
+						<>
+							<fbt desc="budget amount">
+								<fbt:param name="amount">
+									{props.budget}
+								</fbt:param>{' '}
+								€
+							</fbt>
+						</>
+					)}
 					<EditBudgetButton
 						onClick={() => setEditing(!editing)}
 						icon="edit"
@@ -386,7 +395,9 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 					</BudgetLabel>
 					<BudgetInfo>
 						<fbt:param name="budget">
-							{(props.budget / estimatedBudget).toFixed(1)}
+							{props.budget === null
+								? '—'
+								: (props.budget / estimatedBudget).toFixed(1)}
 						</fbt:param>
 					</BudgetInfo>
 				</fbt>
@@ -397,11 +408,18 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 	return (
 		<FlexColumn>
 			<BudgetHeader>
+				{props.budget !== null && <div></div>}
 				<BudgetGraph
-					percent={Math.max(
-						0,
-						1 - (props.budget - spentBudget) / props.budget,
-					)}
+					percent={
+						props.budget === null
+							? 0
+							: Math.max(
+								0,
+								1
+										- (props.budget - spentBudget)
+											/ props.budget,
+							  )
+					}
 				/>
 				<FlexColumn style={{flex: 1}}>
 					<BudgetInfoContainer>
@@ -545,17 +563,16 @@ const NoBudgetDisplay = ({projectHasBudget, userHasDailyRate, ...props}) => (
 const ProjectBudget = ({projectId}) => {
 	const [editing, setEditing] = useState(false);
 	const [updateProject] = useMutation(UPDATE_PROJECT);
-	const {data, error} = useQuery(GET_PROJECT_DATA, {
+	const {data, loading, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
-		suspend: true,
 	});
 	const {defaultDailyPrice} = useUserInfos();
+
+	if (loading) return false;
 
 	if (error) throw error;
 
 	const {project} = data;
-	const projectHasBudget = data.project.budget !== null;
-	const userHasDailyRate = defaultDailyPrice !== null;
 
 	return (
 		<BudgetContainer>
@@ -606,22 +623,14 @@ const ProjectBudget = ({projectId}) => {
 
 					return (
 						<form onSubmit={handleSubmit}>
-							{projectHasBudget || userHasDailyRate ? (
-								<BudgetDisplay
-									{...props}
-									budget={project.budget}
-									sections={project.sections}
-									defaultDailyPrice={defaultDailyPrice}
-									editing={editing}
-									setEditing={setEditing}
-								/>
-							) : (
-								<NoBudgetDisplay
-									projectHasBudget={projectHasBudget}
-									userHasDailyRate={userHasDailyRate}
-									{...props}
-								/>
-							)}
+							<BudgetDisplay
+								{...props}
+								budget={project.budget}
+								sections={project.sections}
+								defaultDailyPrice={defaultDailyPrice}
+								editing={editing}
+								setEditing={setEditing}
+							/>
 						</form>
 					);
 				}}

@@ -51,20 +51,23 @@ const SuggestedTime = styled('button')`
 
 const UnitWithSuggestionsForm = ({
 	isTimeItTook,
-	defaultValue,
+	value,
 	onChange,
 	onSubmit,
 	small,
 	...rest
 }) => {
 	const {workingTime = 8} = useUserInfos();
-	const [selection, setSelection] = useState(defaultValue * workingTime * 60);
+
+	const [defaultValue, setDefaultValue] = useState();
 
 	useEffect(() => {
-		onChange(selection / (workingTime * 60));
-	}, [selection]);
+		setDefaultValue(value);
+	}, []);
 
 	let underestimatedTimes;
+
+	const timeValue = value * workingTime * 60;
 
 	let overestimatedTimes;
 	const workingDay = workingTime * 60;
@@ -127,22 +130,23 @@ const UnitWithSuggestionsForm = ({
 			{underestimatedTimes.map(time => (
 				<SuggestedTime
 					key={time}
-					selected={selection === time}
-					onClick={() => setSelection(time)}
+					selected={timeValue === time}
+					onClick={() => onChange(time / (workingTime * 60))}
 				>
 					{formatDuration(time, workingDay)}
 				</SuggestedTime>
 			))}
 			<UnitInput
-				unit={defaultValue}
-				onBlur={value => setSelection(value * workingTime * 60)}
-				onSubmit={value => onSubmit(value)}
-				onTab={value => setSelection(value * workingTime * 60)}
-				onFocus={value => setSelection(value * workingTime * 60)}
+				unit={value}
+				onChange={onChange}
+				onBlur={inputValue => onChange(inputValue)}
+				onSubmit={inputValue => onSubmit(inputValue)}
+				onTab={inputValue => onChange(inputValue)}
+				onFocus={inputValue => onChange(inputValue)}
 				autoFocus={false}
-				inputStyle={({value, isHours}) => css`
+				inputStyle={({inputValue, isHours}) => css`
 					border: 2px solid
-						${value * 60 * (isHours ? 1 : workingTime) === selection
+						${inputValue / (isHours ? workingTime : 1) === value
 			? primaryPurple
 			: 'transparent'};
 
@@ -156,8 +160,8 @@ const UnitWithSuggestionsForm = ({
 			{overestimatedTimes.map(time => (
 				<SuggestedTime
 					key={time}
-					selected={selection === time}
-					onClick={() => setSelection(time)}
+					selected={timeValue === time}
+					onClick={() => onChange(time / (workingTime * 60))}
 				>
 					{formatDuration(time, workingDay)}
 				</SuggestedTime>
@@ -169,7 +173,7 @@ const UnitWithSuggestionsForm = ({
 UnitWithSuggestionsForm.defaultProps = {
 	onChange: () => {},
 	small: false,
-	defaultValue: 0,
+	value: 0,
 	isTimeItTook: false,
 };
 

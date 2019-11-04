@@ -103,7 +103,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 						sections,
 						customerId,
 						deadline,
-						budgetFloat,
+						budget: budgetFloat,
 						template: isModelTemplate ? template : undefined,
 					},
 				});

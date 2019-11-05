@@ -221,5 +221,6 @@ export const PROJECT_SHORT_FRAGMENT = gql`
 		budget
 		daysUntilDeadline
 		notifyActivityToCustomer
+		token
 	}
 `;

@@ -86,8 +86,6 @@ const Tasks = ({location, match}) => {
 		suspend: true,
 	});
 
-	if (error) throw error;
-
 	let welcome = (
 		<fbt project="inyo" desc="Hello">
 			Bonjour

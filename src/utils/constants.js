@@ -505,6 +505,12 @@ export const EVENT_TYPES = [
 			);
 		},
 	},
+	{
+		type: 'VIEWED_PROJECT',
+		get name() {
+			return fbt('projet consulté', 'VIEWED_PROJECT event type name');
+		},
+	},
 ];
 
 export const TAG_COLOR_PALETTE = [

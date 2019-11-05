@@ -12,13 +12,12 @@ import {
 	A,
 	CheckBoxFakeLabel,
 	CheckBoxLabel,
-	lightGrey,
 	P,
 	primaryBlack,
 	primaryGrey,
 	SubHeading,
 } from '../../utils/new/design-system';
-import {GET_PROJECT_ACTIVITY, GET_PROJECT_INFOS} from '../../utils/queries';
+import {GET_PROJECT_ACTIVITY} from '../../utils/queries';
 import useLocalStorage from '../../utils/useLocalStorage';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
@@ -140,6 +139,17 @@ const EventText = ({
 		);
 		icon = 'visibility';
 		break;
+	case 'REMOVED_ATTACHMENT':
+		action = (
+			<fbt
+				project="inyo"
+				desc="remove attachement notification message"
+			>
+					a supprimé un document de la tâche
+			</fbt>
+		);
+		icon = 'attachment';
+		break;
 	case 'UPLOADED_ATTACHMENT':
 		action = (
 			<fbt
@@ -158,6 +168,52 @@ const EventText = ({
 			</fbt>
 		);
 		icon = 'done';
+		break;
+	case 'UNFINISHED_TASK':
+		action = (
+			<fbt project="inyo" desc="finished tasked notification message">
+					a dé-validé la tâche
+			</fbt>
+		);
+		icon = 'done';
+		break;
+	case 'LINKED_CUSTOMER_TO_TASK':
+		action = (
+			<fbt
+				project="inyo"
+				desc="link customer to project event message"
+			>
+					a ajouté le client
+			</fbt>
+		);
+		subjectOnObject = (
+			<fbt
+				project="inyo"
+				desc="link customer on a task event preposition"
+			>
+					à la tâche
+			</fbt>
+		);
+		icon = 'person';
+		break;
+	case 'UNLINKED_CUSTOMER_TO_TASK':
+		action = (
+			<fbt
+				project="inyo"
+				desc="unlink customer to project event message"
+			>
+					a retiré le client
+			</fbt>
+		);
+		subjectOnObject = (
+			<fbt
+				project="inyo"
+				desc="unlink customer on a task event preposition"
+			>
+					à la tâche
+			</fbt>
+		);
+		icon = 'person';
 		break;
 	case 'LINKED_CUSTOMER_TO_PROJECT':
 		action = (
@@ -270,14 +326,6 @@ const EventText = ({
 		);
 		icon = 'assignment';
 		break;
-	case 'COLLAB_ACCEPTED':
-		action = (
-			<fbt project="inyo" desc="collab accepted notification message">
-					a accepté la collaboration
-			</fbt>
-		);
-		icon = 'face';
-		break;
 	case 'CREATED_PROJECT':
 		action = (
 			<fbt project="inyo" desc="created project event message">
@@ -293,6 +341,46 @@ const EventText = ({
 			</fbt>
 		);
 		icon = 'folder_open';
+		break;
+	case 'ARCHIVED_PROJECT':
+		action = (
+			<fbt project="inyo" desc="archived project event message">
+					a archivé le projet
+			</fbt>
+		);
+		icon = 'archive';
+		break;
+	case 'UNARCHIVED_PROJECT':
+		action = (
+			<fbt project="inyo" desc="unarchived project event message">
+					a désarchivé le projet
+			</fbt>
+		);
+		icon = 'unarchive';
+		break;
+	case 'ADDED_SECTION':
+		action = (
+			<fbt project="inyo" desc="added section event message">
+					a ajouté la section
+			</fbt>
+		);
+		icon = 'calendar_view_day';
+		break;
+	case 'UPDATED_SECTION':
+		action = (
+			<fbt project="inyo" desc="updated section event message">
+					a mis à jour la section
+			</fbt>
+		);
+		icon = 'calendar_view_day';
+		break;
+	case 'REMOVED_SECTION':
+		action = (
+			<fbt project="inyo" desc="removed section event message">
+					a supprimé la section
+			</fbt>
+		);
+		icon = 'calendar_view_day';
 		break;
 	case 'ADDED_TASK':
 		action = (
@@ -364,7 +452,15 @@ const EventText = ({
 					Un reminder a été envoyé pour la tâche
 			</fbt>
 		);
-		icon = 'done';
+		icon = 'alarm_on';
+		break;
+	case 'CANCELED_REMINDER':
+		action = (
+			<fbt project="inyo" desc="removed reminder event message">
+					Un reminder a été annulé sur la tâche
+			</fbt>
+		);
+		icon = 'alarm_off';
 		break;
 	default:
 		action = eventType;

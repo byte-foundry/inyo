@@ -520,7 +520,7 @@
   },
   {
    "hashToText": {
-    "5AEwHd5gBk9zSm7iT6hHAA==": "Un rappel a été annulé sur la tâche"
+    "xm9DVUlmCz5VJYdTSGyEiw==": "a annulé un rappel de la tâche"
    },
    "filepath": "src/components/ActivityFeed/index.js",
    "line_beg": 460,
@@ -530,7 +530,7 @@
    "type": "text",
    "desc": "removed reminder event message",
    "project": "inyo",
-   "jsfbt": "Un rappel a été annulé sur la tâche"
+   "jsfbt": "a annulé un rappel de la tâche"
   },
   {
    "hashToText": {

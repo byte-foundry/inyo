@@ -458,7 +458,7 @@ const EventText = ({
 	case 'CANCELED_REMINDER':
 		action = (
 			<fbt project="inyo" desc="removed reminder event message">
-					Un rappel a été annulé sur la tâche
+					a annulé un rappel de la tâche
 			</fbt>
 		);
 		icon = 'alarm_off';

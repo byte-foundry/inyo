@@ -210,7 +210,7 @@ const EventText = ({
 				project="inyo"
 				desc="unlink customer on a task event preposition"
 			>
-					à la tâche
+					de la tâche
 			</fbt>
 		);
 		icon = 'person';
@@ -449,7 +449,7 @@ const EventText = ({
 	case 'SENT_REMINDER':
 		action = (
 			<fbt project="inyo" desc="removed task event message">
-					Un reminder a été envoyé pour la tâche
+					Un rappel a été envoyé pour la tâche
 			</fbt>
 		);
 		icon = 'alarm_on';
@@ -457,7 +457,7 @@ const EventText = ({
 	case 'CANCELED_REMINDER':
 		action = (
 			<fbt project="inyo" desc="removed reminder event message">
-					Un reminder a été annulé sur la tâche
+					Un rappel a été annulé sur la tâche
 			</fbt>
 		);
 		icon = 'alarm_off';

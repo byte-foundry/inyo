@@ -2,6 +2,608 @@
  "phrases": [
   {
    "hashToText": {
+    "FpcLLvZekZ0mMbObsPV7CQ==": "a commenté la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 128,
+   "col_beg": 3,
+   "line_end": 130,
+   "col_end": 9,
+   "type": "text",
+   "desc": "posted comment notification message",
+   "project": "inyo",
+   "jsfbt": "a commenté la tâche"
+  },
+  {
+   "hashToText": {
+    "GgJM4EY/QordX9pchDp0tw==": "a consulté le projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 136,
+   "col_beg": 3,
+   "line_end": 138,
+   "col_end": 9,
+   "type": "text",
+   "desc": "viewed project notification message",
+   "project": "inyo",
+   "jsfbt": "a consulté le projet"
+  },
+  {
+   "hashToText": {
+    "VZfpXkXBzL2t2D0asNSwLA==": "a supprimé un document de la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 144,
+   "col_beg": 3,
+   "line_end": 149,
+   "col_end": 9,
+   "type": "text",
+   "desc": "remove attachement notification message",
+   "project": "inyo",
+   "jsfbt": "a supprimé un document de la tâche"
+  },
+  {
+   "hashToText": {
+    "+TSsouyNnpOuotBby5ZXPg==": "a ajouté un nouveau document sur la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 155,
+   "col_beg": 3,
+   "line_end": 160,
+   "col_end": 9,
+   "type": "text",
+   "desc": "upload attachement notification message",
+   "project": "inyo",
+   "jsfbt": "a ajouté un nouveau document sur la tâche"
+  },
+  {
+   "hashToText": {
+    "ZNDtqOQeGjKx3QtGvXEdDA==": "a validé la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 166,
+   "col_beg": 3,
+   "line_end": 168,
+   "col_end": 9,
+   "type": "text",
+   "desc": "finished tasked notification message",
+   "project": "inyo",
+   "jsfbt": "a validé la tâche"
+  },
+  {
+   "hashToText": {
+    "Ls0AAf+/FzocMS/kj+gMIw==": "a dé-validé la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 174,
+   "col_beg": 3,
+   "line_end": 176,
+   "col_end": 9,
+   "type": "text",
+   "desc": "finished tasked notification message",
+   "project": "inyo",
+   "jsfbt": "a dé-validé la tâche"
+  },
+  {
+   "hashToText": {
+    "67UYisLl0eUD3/25aapKkg==": "a ajouté le client"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 182,
+   "col_beg": 3,
+   "line_end": 187,
+   "col_end": 9,
+   "type": "text",
+   "desc": "link customer to project event message",
+   "project": "inyo",
+   "jsfbt": "a ajouté le client"
+  },
+  {
+   "hashToText": {
+    "e/K/+gILK7KX6LuI8kgi3w==": "à la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 190,
+   "col_beg": 3,
+   "line_end": 195,
+   "col_end": 9,
+   "type": "text",
+   "desc": "link customer on a task event preposition",
+   "project": "inyo",
+   "jsfbt": "à la tâche"
+  },
+  {
+   "hashToText": {
+    "jtYKUPOXo9jVuBDCnLMmoA==": "a retiré le client"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 201,
+   "col_beg": 3,
+   "line_end": 206,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unlink customer to project event message",
+   "project": "inyo",
+   "jsfbt": "a retiré le client"
+  },
+  {
+   "hashToText": {
+    "wftxWYE8MHjazCRh72kKwg==": "de la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 209,
+   "col_beg": 3,
+   "line_end": 214,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unlink customer on a task event preposition",
+   "project": "inyo",
+   "jsfbt": "de la tâche"
+  },
+  {
+   "hashToText": {
+    "67UYisLl0eUD3/25aapKkg==": "a ajouté le client"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 220,
+   "col_beg": 3,
+   "line_end": 225,
+   "col_end": 9,
+   "type": "text",
+   "desc": "link customer to project event message",
+   "project": "inyo",
+   "jsfbt": "a ajouté le client"
+  },
+  {
+   "hashToText": {
+    "nYeuo3Afg7WwtfzadN31Og==": "au projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 228,
+   "col_beg": 3,
+   "line_end": 233,
+   "col_end": 9,
+   "type": "text",
+   "desc": "link customer on project event preposition",
+   "project": "inyo",
+   "jsfbt": "au projet"
+  },
+  {
+   "hashToText": {
+    "jtYKUPOXo9jVuBDCnLMmoA==": "a retiré le client"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 239,
+   "col_beg": 3,
+   "line_end": 244,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unlink customer to project event message",
+   "project": "inyo",
+   "jsfbt": "a retiré le client"
+  },
+  {
+   "hashToText": {
+    "rEiwQPc+X8lpEa1x91jM6g==": "du projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 247,
+   "col_beg": 3,
+   "line_end": 252,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unlink customer on project event preposition",
+   "project": "inyo",
+   "jsfbt": "du projet"
+  },
+  {
+   "hashToText": {
+    "eFCkUwBCW0jL42AgLCojYQ==": "a ajouté le collaborateur"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 258,
+   "col_beg": 3,
+   "line_end": 263,
+   "col_end": 9,
+   "type": "text",
+   "desc": "link collaborator to project event message",
+   "project": "inyo",
+   "jsfbt": "a ajouté le collaborateur"
+  },
+  {
+   "hashToText": {
+    "Aw7V4hZzRFGOZGjUGrWnBQ==": "au projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 266,
+   "col_beg": 3,
+   "line_end": 271,
+   "col_end": 9,
+   "type": "text",
+   "desc": "link collaborator on project event preposition",
+   "project": "inyo",
+   "jsfbt": "au projet"
+  },
+  {
+   "hashToText": {
+    "6t2ZmopNk1chufLdnnHQ/w==": "a retiré le collaborateur"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 277,
+   "col_beg": 3,
+   "line_end": 282,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unlink collaborator to project event message",
+   "project": "inyo",
+   "jsfbt": "a retiré le collaborateur"
+  },
+  {
+   "hashToText": {
+    "/V3iK+L31yiTzAGpy1H+MA==": "du projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 285,
+   "col_beg": 3,
+   "line_end": 290,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unlink collaborator on project event preposition",
+   "project": "inyo",
+   "jsfbt": "du projet"
+  },
+  {
+   "hashToText": {
+    "xcL2taFtGHiAkJ17VGmbQA==": "a assigné"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 296,
+   "col_beg": 3,
+   "line_end": 298,
+   "col_end": 9,
+   "type": "text",
+   "desc": "assigned to task event message",
+   "project": "inyo",
+   "jsfbt": "a assigné"
+  },
+  {
+   "hashToText": {
+    "ZI8OmsIDcgARqXubGftWJw==": "à la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 301,
+   "col_beg": 3,
+   "line_end": 306,
+   "col_end": 9,
+   "type": "text",
+   "desc": "assigned to task on project event preposition",
+   "project": "inyo",
+   "jsfbt": "à la tâche"
+  },
+  {
+   "hashToText": {
+    "Vq80dSYnv0/O2J3ESnWQ2w==": "a retiré"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 312,
+   "col_beg": 3,
+   "line_end": 317,
+   "col_end": 9,
+   "type": "text",
+   "desc": "removed assigned to task event message",
+   "project": "inyo",
+   "jsfbt": "a retiré"
+  },
+  {
+   "hashToText": {
+    "U4lv6Ko2lgtWe4NiklO1Yg==": "de la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 320,
+   "col_beg": 3,
+   "line_end": 325,
+   "col_end": 9,
+   "type": "text",
+   "desc": "removed assigned to task on project event preposition",
+   "project": "inyo",
+   "jsfbt": "de la tâche"
+  },
+  {
+   "hashToText": {
+    "PcaRc82OVVIfO95+yuRBHw==": "a créé le projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 331,
+   "col_beg": 3,
+   "line_end": 333,
+   "col_end": 9,
+   "type": "text",
+   "desc": "created project event message",
+   "project": "inyo",
+   "jsfbt": "a créé le projet"
+  },
+  {
+   "hashToText": {
+    "l0OZpgD975ybx1YWGDmvWw==": "a mis à jour le projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 339,
+   "col_beg": 3,
+   "line_end": 341,
+   "col_end": 9,
+   "type": "text",
+   "desc": "updated project event message",
+   "project": "inyo",
+   "jsfbt": "a mis à jour le projet"
+  },
+  {
+   "hashToText": {
+    "5EK5o64M0UWWl7FLBC1HiQ==": "a archivé le projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 347,
+   "col_beg": 3,
+   "line_end": 349,
+   "col_end": 9,
+   "type": "text",
+   "desc": "archived project event message",
+   "project": "inyo",
+   "jsfbt": "a archivé le projet"
+  },
+  {
+   "hashToText": {
+    "5ua1rRlTnAAy88FqAgiZYA==": "a désarchivé le projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 355,
+   "col_beg": 3,
+   "line_end": 357,
+   "col_end": 9,
+   "type": "text",
+   "desc": "unarchived project event message",
+   "project": "inyo",
+   "jsfbt": "a désarchivé le projet"
+  },
+  {
+   "hashToText": {
+    "pf7ZV1AXqHqT8FbxAUqrxg==": "a ajouté la section"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 363,
+   "col_beg": 3,
+   "line_end": 365,
+   "col_end": 9,
+   "type": "text",
+   "desc": "added section event message",
+   "project": "inyo",
+   "jsfbt": "a ajouté la section"
+  },
+  {
+   "hashToText": {
+    "azj07jynNxUw7zR7Bt1rQg==": "a mis à jour la section"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 371,
+   "col_beg": 3,
+   "line_end": 373,
+   "col_end": 9,
+   "type": "text",
+   "desc": "updated section event message",
+   "project": "inyo",
+   "jsfbt": "a mis à jour la section"
+  },
+  {
+   "hashToText": {
+    "tSQMqx2zy0xnPEC1sGi4cQ==": "a supprimé la section"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 379,
+   "col_beg": 3,
+   "line_end": 381,
+   "col_end": 9,
+   "type": "text",
+   "desc": "removed section event message",
+   "project": "inyo",
+   "jsfbt": "a supprimé la section"
+  },
+  {
+   "hashToText": {
+    "B4cH3CWAVbM7zw67DiQY7g==": "a ajouté la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 387,
+   "col_beg": 3,
+   "line_end": 389,
+   "col_end": 9,
+   "type": "text",
+   "desc": "added task event message",
+   "project": "inyo",
+   "jsfbt": "a ajouté la tâche"
+  },
+  {
+   "hashToText": {
+    "kkMlqIob+0SFBvZcgUVvzw==": "a mis à jour la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 395,
+   "col_beg": 3,
+   "line_end": 397,
+   "col_end": 9,
+   "type": "text",
+   "desc": "updated task event message",
+   "project": "inyo",
+   "jsfbt": "a mis à jour la tâche"
+  },
+  {
+   "hashToText": {
+    "bq/hyi1OowPXlcrg9dQQPw==": "a supprimé la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 403,
+   "col_beg": 3,
+   "line_end": 405,
+   "col_end": 9,
+   "type": "text",
+   "desc": "removed task event message",
+   "project": "inyo",
+   "jsfbt": "a supprimé la tâche"
+  },
+  {
+   "hashToText": {
+    "EhK7imIJX0QASFxfGOvBxw==": "a activé la tâche cliente"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 412,
+   "col_beg": 4,
+   "line_end": 417,
+   "col_end": 10,
+   "type": "text",
+   "desc": "focused customer task event message",
+   "project": "inyo",
+   "jsfbt": "a activé la tâche cliente"
+  },
+  {
+   "hashToText": {
+    "JxhAvOcchn32ppX4EY5t+A==": "a programmé dans son calendrier la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 422,
+   "col_beg": 4,
+   "line_end": 424,
+   "col_end": 10,
+   "type": "text",
+   "desc": "focused task event message",
+   "project": "inyo",
+   "jsfbt": "a programmé dans son calendrier la tâche"
+  },
+  {
+   "hashToText": {
+    "226WnrPj0Klt4vnkGeJAvA==": "a désactivé la tâche cliente"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 432,
+   "col_beg": 4,
+   "line_end": 437,
+   "col_end": 10,
+   "type": "text",
+   "desc": "focused customer task event message",
+   "project": "inyo",
+   "jsfbt": "a désactivé la tâche cliente"
+  },
+  {
+   "hashToText": {
+    "glX7IlyurrLRkKJHRby8jQ==": "a déprogrammé de son calendrier la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 442,
+   "col_beg": 4,
+   "line_end": 444,
+   "col_end": 10,
+   "type": "text",
+   "desc": "focused task event message",
+   "project": "inyo",
+   "jsfbt": "a déprogrammé de son calendrier la tâche"
+  },
+  {
+   "hashToText": {
+    "iWPFvKCQAMtFWWzJAdppsA==": "Un rappel a été envoyé pour la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 451,
+   "col_beg": 3,
+   "line_end": 453,
+   "col_end": 9,
+   "type": "text",
+   "desc": "removed task event message",
+   "project": "inyo",
+   "jsfbt": "Un rappel a été envoyé pour la tâche"
+  },
+  {
+   "hashToText": {
+    "5AEwHd5gBk9zSm7iT6hHAA==": "Un rappel a été annulé sur la tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 459,
+   "col_beg": 3,
+   "line_end": 461,
+   "col_end": 9,
+   "type": "text",
+   "desc": "removed reminder event message",
+   "project": "inyo",
+   "jsfbt": "Un rappel a été annulé sur la tâche"
+  },
+  {
+   "hashToText": {
+    "wvr36bJKI5SpnkZWjvHJ3Q==": "Aucune activité n'a été enregistrée pour le moment."
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 646,
+   "col_beg": 6,
+   "line_end": 648,
+   "col_end": 12,
+   "type": "text",
+   "desc": "no activity placeholder",
+   "project": "",
+   "jsfbt": "Aucune activité n'a été enregistrée pour le moment."
+  },
+  {
+   "hashToText": {
+    "xWRxOZm0YAQwhqy/K1Fepw==": "Aucune activité correspondant aux éléments sélectionnés n'a été enregistrée pour le moment."
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 653,
+   "col_beg": 6,
+   "line_end": 656,
+   "col_end": 12,
+   "type": "text",
+   "desc": "all activity filtered placeholder",
+   "project": "",
+   "jsfbt": "Aucune activité correspondant aux éléments sélectionnés n'a été enregistrée pour le moment."
+  },
+  {
+   "hashToText": {
+    "da1d8ZuoOpq/Cl5jA5w3pg==": "Acteurs du projet"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 677,
+   "col_beg": 6,
+   "line_end": 679,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project people filter title",
+   "project": "",
+   "jsfbt": "Acteurs du projet"
+  },
+  {
+   "hashToText": {
+    "rMGGgALSCejlZAcK6wK+IA==": "Actions"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 720,
+   "col_beg": 6,
+   "line_end": 720,
+   "col_end": 51,
+   "type": "text",
+   "desc": "events filter title",
+   "project": "",
+   "jsfbt": "Actions"
+  },
+  {
+   "hashToText": {
+    "KL6cDRHSqtLkjE+yDdT6bA==": "Type de tâche"
+   },
+   "filepath": "src/components/ActivityFeed/index.js",
+   "line_beg": 758,
+   "col_beg": 6,
+   "line_end": 758,
+   "col_end": 60,
+   "type": "text",
+   "desc": "task type filter title",
+   "project": "",
+   "jsfbt": "Type de tâche"
+  },
+  {
+   "hashToText": {
     "c+lcFfPMwayO0O5SNqYW9w==": "Inviter un collaborateur"
    },
    "filepath": "src/components/AddCollaboratorModal/index.js",
@@ -2691,9 +3293,9 @@
     "s7Am8IKTQ0RWV1ZfuKTA1w==": "Notifications liées à vos clients"
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 158,
+   "line_beg": 162,
    "col_beg": 5,
-   "line_end": 160,
+   "line_end": 164,
    "col_end": 11,
    "type": "text",
    "desc": "notification tray button tooltip",
@@ -2705,9 +3307,9 @@
     "k5OwMZDKZ01FmGLqqBOdAQ==": "Tout marquer comme lu"
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 205,
+   "line_beg": 209,
    "col_beg": 7,
-   "line_end": 207,
+   "line_end": 211,
    "col_end": 13,
    "type": "text",
    "desc": "mark all as read",
@@ -2719,9 +3321,9 @@
     "cTKVM7yUdcTOW1xZeBceRA==": "Aucune notification."
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 222,
+   "line_beg": 226,
    "col_beg": 9,
-   "line_end": 227,
+   "line_end": 231,
    "col_end": 15,
    "type": "text",
    "desc": "no notification message",
@@ -5287,9 +5889,9 @@
     "HDuXEugJ+zLx46I/Mtqbog==": "Vue principale"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 248,
+   "line_beg": 213,
    "col_beg": 6,
-   "line_end": 253,
+   "line_end": 218,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project main view tooltip",
@@ -5301,9 +5903,9 @@
     "EHQ8kyruFfhFbqt+PaVvaQ==": "Tâches du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 264,
+   "line_beg": 229,
    "col_beg": 8,
-   "line_end": 269,
+   "line_end": 234,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project project task label",
@@ -5315,9 +5917,9 @@
     "3eF7yd93trcdbIvHS2NrRw==": "Budget vendu"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 277,
+   "line_beg": 242,
    "col_beg": 6,
-   "line_end": 282,
+   "line_end": 247,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project main view tooltip",
@@ -5329,9 +5931,9 @@
     "imwvh09INyILzvv6mIY3PA==": "Budget du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 293,
+   "line_beg": 258,
    "col_beg": 8,
-   "line_end": 298,
+   "line_end": 263,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project budget projet",
@@ -5343,9 +5945,9 @@
     "L067xGXkMfARcJBjS7f+9g==": "Seulement visibles par vous"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 306,
+   "line_beg": 271,
    "col_beg": 6,
-   "line_end": 311,
+   "line_end": 276,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project personal notes tooltip",
@@ -5357,9 +5959,9 @@
     "ikjA3VDH0k6vn2narEXR3Q==": "Notes personnelles"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 322,
+   "line_beg": 287,
    "col_beg": 8,
-   "line_end": 327,
+   "line_end": 292,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project personal notes label",
@@ -5371,9 +5973,9 @@
     "fLR9KuAsosc/XK5bMWk7Mg==": "Visibles par tout le monde"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 335,
+   "line_beg": 300,
    "col_beg": 6,
-   "line_end": 340,
+   "line_end": 305,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project shared notes tooltip",
@@ -5385,9 +5987,9 @@
     "jFCupc9C9dtcx4e30UI0Iw==": "Notes partagées"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 351,
+   "line_beg": 316,
    "col_beg": 8,
-   "line_end": 356,
+   "line_end": 321,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project shared notes label",
@@ -5396,12 +5998,40 @@
   },
   {
    "hashToText": {
+    "WJhsWGefbuGMW3g30ZuCIw==": "Historique des activités du projet"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 329,
+   "col_beg": 6,
+   "line_end": 331,
+   "col_end": 12,
+   "type": "text",
+   "desc": "sidebar project activity link tooltip",
+   "project": "",
+   "jsfbt": "Historique des activités du projet"
+  },
+  {
+   "hashToText": {
+    "5mmQkZWSBGte6eyVcwqtvQ==": "Activité"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 342,
+   "col_beg": 8,
+   "line_end": 347,
+   "col_end": 14,
+   "type": "text",
+   "desc": "sidebar project activity link label",
+   "project": "inyo",
+   "jsfbt": "Activité"
+  },
+  {
+   "hashToText": {
     "rH9wh0hUEutLLvjXj/nvVA==": "Changer le client lié au projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 369,
+   "line_beg": 360,
    "col_beg": 9,
-   "line_end": 374,
+   "line_end": 365,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project change customer tooltip",
@@ -5413,9 +6043,9 @@
     "fe/ia+wsEnlijrwwdh21Ww==": "Évolution du projet, tâches qui requièrent une action, etc."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 391,
+   "line_beg": 382,
    "col_beg": 8,
-   "line_end": 397,
+   "line_end": 388,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project notify customer tooltip",
@@ -5427,9 +6057,9 @@
     "aCi6l7XNAZcbqUgKkFcIiw==": "Notifier mon client par email"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 446,
+   "line_beg": 436,
    "col_beg": 9,
-   "line_end": 451,
+   "line_end": 441,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project notify customer label",
@@ -5441,9 +6071,9 @@
     "BMeuJg0uY2MVeovVNQK5Hw==": "En décochant cette option, votre client ne recevra aucune notification de l'avancée de votre projet."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 464,
+   "line_beg": 454,
    "col_beg": 9,
-   "line_end": 471,
+   "line_end": 461,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project notify customer modal warning",
@@ -5455,9 +6085,9 @@
     "RltTNFLZaA3NsiUnfH0sDQ==": "Cependant, certaines des tâches sont attribuées à votre client et nécessitent l'envoi d'emails à celui-ci. Désactiver les notifications changera aussi l'attribution de ces tâches et votre client n'en sera pas averti."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 475,
+   "line_beg": 465,
    "col_beg": 10,
-   "line_end": 486,
+   "line_end": 476,
    "col_end": 16,
    "type": "text",
    "desc": "sidebar project notify customer modal task warning",
@@ -5469,9 +6099,9 @@
     "v6Zu+7e97z2OYmTF4p4PrA==": "Êtes-vous sûr de vouloir continuer?"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 490,
+   "line_beg": 480,
    "col_beg": 9,
-   "line_end": 492,
+   "line_end": 482,
    "col_end": 15,
    "type": "text",
    "desc": "are you sure",
@@ -5483,9 +6113,9 @@
     "CF4JsqOY3g7b6ZAwfWBAGg==": "Ce que verra votre client lorsqu'il se connecte au projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 498,
+   "line_beg": 488,
    "col_beg": 8,
-   "line_end": 504,
+   "line_end": 494,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project customer view tooltip",
@@ -5497,9 +6127,9 @@
     "gofuUhe30NUXKseA+qKbNQ==": "Voir la vue de mon client"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 516,
+   "line_beg": 506,
    "col_beg": 10,
-   "line_end": 521,
+   "line_end": 511,
    "col_end": 16,
    "type": "text",
    "desc": "sidebar project customer view label",
@@ -5511,9 +6141,9 @@
     "5CkV1QNEPRDdQTru3O35Dw==": "Ajouter un client"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 541,
+   "line_beg": 531,
    "col_beg": 8,
-   "line_end": 546,
+   "line_end": 536,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project add a customer",
@@ -5525,9 +6155,9 @@
     "kijfhgj2q4NVR0iPj3IV7g==": "Cette vue est celle que verra votre client lorsqu'il devra effectuer des actions."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 586,
+   "line_beg": 576,
    "col_beg": 6,
-   "line_end": 592,
+   "line_end": 582,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project customer view modal info",
@@ -5539,9 +6169,9 @@
     "RZM13r5SmAgDHVgDTxQ+dg==": "Ajouter un collaborateur"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 611,
+   "line_beg": 601,
    "col_beg": 7,
-   "line_end": 616,
+   "line_end": 606,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project add collaborator label",
@@ -5553,9 +6183,9 @@
     "0ywQKSABbvePNgYOS03q0w==": "Collaborateurs du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 624,
+   "line_beg": 614,
    "col_beg": 8,
-   "line_end": 629,
+   "line_end": 619,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project collaborator list heading",
@@ -5567,9 +6197,9 @@
     "BZty9g3WNrv+MnbPPDpSoQ==": "Budget vendu"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 647,
+   "line_beg": 637,
    "col_beg": 6,
-   "line_end": 649,
+   "line_end": 639,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar budget",
@@ -5581,9 +6211,9 @@
     "ORvhi4PTIwYzCN7QQNuvzQ==": "Budget du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 653,
+   "line_beg": 643,
    "col_beg": 7,
-   "line_end": 655,
+   "line_end": 645,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project budget",
@@ -5595,9 +6225,9 @@
     "v7fom6AQjJQbvBn0igL0zg==": "{amount} €"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 659,
+   "line_beg": 649,
    "col_beg": 7,
-   "line_end": 664,
+   "line_end": 654,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar budget amount",
@@ -5609,9 +6239,9 @@
     "FEQsZWN5sT5lTchEhNcWig==": "Deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 674,
+   "line_beg": 664,
    "col_beg": 8,
-   "line_end": 679,
+   "line_end": 669,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project deadline heading",
@@ -5623,9 +6253,9 @@
     "yuKsays7MRc0FJ6J2ZzZuQ==": "Date limite du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 683,
+   "line_beg": 673,
    "col_beg": 9,
-   "line_end": 688,
+   "line_end": 678,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar proejct deadline tooltip",
@@ -5637,9 +6267,9 @@
     "xa4T9aJVs5d5AApNfpZD0w==": "Ajouter une deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 712,
+   "line_beg": 702,
    "col_beg": 8,
-   "line_end": 717,
+   "line_end": 707,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project add a deadline label",
@@ -5651,9 +6281,9 @@
     "nH52xB7hAoZdMWbGpgHFnw==": "Marge restantes"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 752,
+   "line_beg": 742,
    "col_beg": 6,
-   "line_end": 757,
+   "line_end": 747,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar proejct worked days before deadline heading",
@@ -5665,9 +6295,9 @@
     "ID7HPKtlTKMeyu5vkHZXlQ==": "Nombre de jours travaillés avant deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 761,
+   "line_beg": 751,
    "col_beg": 7,
-   "line_end": 766,
+   "line_end": 756,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project worked days before deadline tooltip",
@@ -5679,9 +6309,9 @@
     "Jki2Y6p4cfpaCTxQ41bZRw==": "Copier ces tâches dans un nouveau projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 780,
+   "line_beg": 770,
    "col_beg": 7,
-   "line_end": 785,
+   "line_end": 775,
    "col_end": 13,
    "type": "text",
    "desc": "duplicate project tooltip",
@@ -5693,9 +6323,9 @@
     "uYR1hk87PyaQht9P3tSOlg==": "Dupliquer le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 799,
+   "line_beg": 789,
    "col_beg": 7,
-   "line_end": 804,
+   "line_end": 794,
    "col_end": 13,
    "type": "text",
    "desc": "duplicate project button label",
@@ -5707,9 +6337,9 @@
     "pavdXdUr565DmuS3Z9MnlQ==": "Désarchiver le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 827,
+   "line_beg": 817,
    "col_beg": 8,
-   "line_end": 829,
+   "line_end": 819,
    "col_end": 14,
    "type": "text",
    "desc": "unarchive project",
@@ -5721,9 +6351,9 @@
     "xhRGYwrRenegpYibHaLriQ==": "Supprimer le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 843,
+   "line_beg": 833,
    "col_beg": 8,
-   "line_end": 845,
+   "line_end": 835,
    "col_end": 14,
    "type": "text",
    "desc": "delete project",
@@ -5735,9 +6365,9 @@
     "VqmYRsc7GyBxLKABP9egLw==": "Archiver le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 864,
+   "line_beg": 854,
    "col_beg": 7,
-   "line_end": 866,
+   "line_end": 856,
    "col_end": 13,
    "type": "text",
    "desc": "archive project",
@@ -6448,9 +7078,9 @@
     "WW2TgmyNPwsJ1sfvQa/mBg==": "Ouvrir les commentaires"
    },
    "filepath": "src/components/TaskComment/index.js",
-   "line_beg": 59,
+   "line_beg": 60,
    "col_beg": 6,
-   "line_end": 61,
+   "line_end": 62,
    "col_end": 12,
    "type": "text",
    "desc": "open comments tooltip",
@@ -6611,12 +7241,40 @@
   },
   {
    "hashToText": {
+    "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
+   },
+   "filepath": "src/components/TaskInput/index.js",
+   "line_beg": 211,
+   "col_beg": 10,
+   "line_end": 211,
+   "col_end": 50,
+   "type": "text",
+   "desc": "section name",
+   "project": "",
+   "jsfbt": "Section de projet"
+  },
+  {
+   "hashToText": {
+    "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
+   },
+   "filepath": "src/components/TaskInput/index.js",
+   "line_beg": 214,
+   "col_beg": 10,
+   "line_end": 217,
+   "col_end": 4,
+   "type": "text",
+   "desc": "section description",
+   "project": "",
+   "jsfbt": "Créer une section pour classer les tâches d'un projet"
+  },
+  {
+   "hashToText": {
     "5GBRSMD1wBCKyx/WbMt+TQ==": "Lier à un projet"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 283,
+   "line_beg": 307,
    "col_beg": 6,
-   "line_end": 285,
+   "line_end": 309,
    "col_end": 12,
    "type": "text",
    "desc": "link to a project",
@@ -6628,9 +7286,9 @@
     "e8wn6btvUxtacwoZA+Iwyg==": "Définir le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 293,
+   "line_beg": 317,
    "col_beg": 6,
-   "line_end": 295,
+   "line_end": 319,
    "col_end": 12,
    "type": "text",
    "desc": "task input icon tooltip",
@@ -6642,9 +7300,9 @@
     "DabhdhVVtgrWYovjlEipTw==": "`Entrée` pour créer une tâche."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 309,
+   "line_beg": 333,
    "col_beg": 7,
-   "line_end": 311,
+   "line_end": 335,
    "col_end": 13,
    "type": "text",
    "desc": "Enter to create task",
@@ -6656,9 +7314,9 @@
     "5Fj4/fEa3KneB26mwqrhng==": "↓ pour créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 315,
+   "line_beg": 339,
    "col_beg": 9,
-   "line_end": 320,
+   "line_end": 344,
    "col_end": 15,
    "type": "text",
    "desc": "notification message",
@@ -6670,9 +7328,9 @@
     "xFbeuoXyCmhu2wVfZ169QA==": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 435,
+   "line_beg": 459,
    "col_beg": 9,
-   "line_end": 442,
+   "line_end": 466,
    "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder in project",
@@ -6684,9 +7342,9 @@
     "VJtgIUDKGBWDdOnmN9yHEA==": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 444,
+   "line_beg": 468,
    "col_beg": 9,
-   "line_end": 450,
+   "line_end": 474,
    "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder",
@@ -6698,9 +7356,9 @@
     "yRfe5GzJEatV3OwaTjyFEw==": "Ajouter une tâche ou créer un section."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 453,
+   "line_beg": 477,
    "col_beg": 8,
-   "line_end": 458,
+   "line_end": 482,
    "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder in project",
@@ -6712,9 +7370,9 @@
     "Jfg2NGSco6/jhBpoOckN1w==": "Ajouter une tâche."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 460,
+   "line_beg": 484,
    "col_beg": 8,
-   "line_end": 465,
+   "line_end": 489,
    "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder",
@@ -6726,9 +7384,9 @@
     "uqIC+W5oLkhdTexC1W85Dg==": "Flèche du bas pour créer un ensemble de tâches"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 476,
+   "line_beg": 500,
    "col_beg": 8,
-   "line_end": 479,
+   "line_end": 503,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -6740,9 +7398,9 @@
     "PQUt2jQseKI6eHmV/4eXmA==": "Créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 486,
+   "line_beg": 510,
    "col_beg": 8,
-   "line_end": 488,
+   "line_end": 512,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -6754,9 +7412,9 @@
     "6xTdP3vzyjQ8RLeuwn1sZA==": "Touche entrée pour créer la tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 494,
+   "line_beg": 518,
    "col_beg": 7,
-   "line_end": 496,
+   "line_end": 520,
    "col_end": 13,
    "type": "text",
    "desc": "notification message",
@@ -6768,9 +7426,9 @@
     "EYBvXIPLfC+Sg+JgEohtIQ==": "créer la {sectionOrTask}"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 536,
+   "line_beg": 560,
    "col_beg": 7,
-   "line_end": 555,
+   "line_end": 579,
    "col_end": 13,
    "type": "text",
    "desc": "notification message",
@@ -6782,9 +7440,9 @@
     "tkc3hNSCTgv4MCYLPJpaJw==": "section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 540,
+   "line_beg": 564,
    "col_beg": 10,
-   "line_end": 545,
+   "line_end": 569,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -6796,9 +7454,9 @@
     "1e2oXXx9vKXjMzI/5f0Vaw==": "tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 547,
+   "line_beg": 571,
    "col_beg": 10,
-   "line_end": 552,
+   "line_end": 576,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -6810,9 +7468,9 @@
     "OwotPW85Qrx4xnkP4MPfWg==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 580,
+   "line_beg": 604,
    "col_beg": 7,
-   "line_end": 582,
+   "line_end": 606,
    "col_end": 13,
    "type": "text",
    "desc": "add or create a tag",
@@ -11003,9 +11661,9 @@
     "nURDqGqUCBOFi2Rl0IvCTQ==": "Basique"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 100,
+   "line_beg": 95,
    "col_beg": 10,
-   "line_end": 100,
+   "line_end": 95,
    "col_end": 43,
    "type": "text",
    "desc": "basic task name",
@@ -11017,9 +11675,9 @@
     "QOM/iP03p2OQUAqw55BnIA==": "Une tâche dont vous êtes responsable"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 103,
+   "line_beg": 98,
    "col_beg": 10,
-   "line_end": 106,
+   "line_end": 101,
    "col_end": 4,
    "type": "text",
    "desc": "basic task description",
@@ -11031,9 +11689,9 @@
     "HqN4N4HsjCJSjiswdqQIyQ==": "Tâche personnelle"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 117,
+   "line_beg": 112,
    "col_beg": 10,
-   "line_end": 117,
+   "line_end": 112,
    "col_end": 56,
    "type": "text",
    "desc": "personal task name",
@@ -11045,9 +11703,9 @@
     "bKgT6nnmiyl9m1Y3m9AyNw==": "Une tâche uniquement visible par vous"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 120,
+   "line_beg": 115,
    "col_beg": 10,
-   "line_end": 123,
+   "line_end": 118,
    "col_end": 4,
    "type": "text",
    "desc": "personal task description",
@@ -11059,9 +11717,9 @@
     "t57XFFWkRRQRlX8FSfaN/A==": "Tâche attribuée au client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 134,
+   "line_beg": 129,
    "col_beg": 10,
-   "line_end": 134,
+   "line_end": 129,
    "col_end": 64,
    "type": "text",
    "desc": "customer task name",
@@ -11073,9 +11731,9 @@
     "fTU6xdNf6xr2TS3FNcRvuQ==": "Une tâche à réaliser par votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 137,
+   "line_beg": 132,
    "col_beg": 10,
-   "line_end": 140,
+   "line_end": 135,
    "col_end": 4,
    "type": "text",
    "desc": "customer task description",
@@ -11087,9 +11745,9 @@
     "bEovwrqltpJTA+cuJRwcLA==": "Récupération contenu"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 150,
+   "line_beg": 145,
    "col_beg": 10,
-   "line_end": 150,
+   "line_end": 145,
    "col_end": 65,
    "type": "text",
    "desc": "content acquisition name",
@@ -11101,9 +11759,9 @@
     "2lCIjYCIJsmj+/lNyb4CTw==": "Lister et récupérer les contenus nécessaires"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 153,
+   "line_beg": 148,
    "col_beg": 10,
-   "line_end": 156,
+   "line_end": 151,
    "col_end": 4,
    "type": "text",
    "desc": "content acquisition description",
@@ -11112,40 +11770,12 @@
   },
   {
    "hashToText": {
-    "LWszS7ZyMERr96mv8egdvg==": "Section de projet"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 166,
-   "col_beg": 10,
-   "line_end": 166,
-   "col_end": 50,
-   "type": "text",
-   "desc": "section name",
-   "project": "",
-   "jsfbt": "Section de projet"
-  },
-  {
-   "hashToText": {
-    "K+PfydH1lJTFOdTguW5nhA==": "Créer une section pour classer les tâches d'un projet"
-   },
-   "filepath": "src/utils/constants.js",
-   "line_beg": 169,
-   "col_beg": 10,
-   "line_end": 172,
-   "col_end": 4,
-   "type": "text",
-   "desc": "section description",
-   "project": "",
-   "jsfbt": "Créer une section pour classer les tâches d'un projet"
-  },
-  {
-   "hashToText": {
     "0BRk+oCCSvNPhSgoCb9asg==": "Paiement de facture"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 182,
+   "line_beg": 161,
    "col_beg": 10,
-   "line_end": 182,
+   "line_end": 161,
    "col_end": 57,
    "type": "text",
    "desc": "invoice task name",
@@ -11157,9 +11787,9 @@
     "c/XkS8DDGdK+8cAgMbIimA==": "Envoyer une facture et demander un paiement à votre client"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 185,
+   "line_beg": 164,
    "col_beg": 10,
-   "line_end": 188,
+   "line_end": 167,
    "col_end": 4,
    "type": "text",
    "desc": "invoice task description",
@@ -11171,9 +11801,9 @@
     "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 240,
+   "line_beg": 219,
    "col_beg": 24,
-   "line_end": 243,
+   "line_end": 222,
    "col_end": 3,
    "type": "text",
    "desc": "first customer email",
@@ -11185,9 +11815,9 @@
     "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 246,
+   "line_beg": 225,
    "col_beg": 24,
-   "line_end": 252,
+   "line_end": 231,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder customer email",
@@ -11199,9 +11829,9 @@
     "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 255,
+   "line_beg": 234,
    "col_beg": 24,
-   "line_end": 261,
+   "line_end": 240,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder customer email",
@@ -11213,9 +11843,9 @@
     "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 264,
+   "line_beg": 243,
    "col_beg": 24,
-   "line_end": 270,
+   "line_end": 249,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder customer email",
@@ -11227,9 +11857,9 @@
     "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 273,
+   "line_beg": 252,
    "col_beg": 24,
-   "line_end": 279,
+   "line_end": 258,
    "col_end": 3,
    "type": "text",
    "desc": "first invoice email",
@@ -11241,9 +11871,9 @@
     "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 282,
+   "line_beg": 261,
    "col_beg": 24,
-   "line_end": 288,
+   "line_end": 267,
    "col_end": 3,
    "type": "text",
    "desc": "first reminder invoice email",
@@ -11255,9 +11885,9 @@
     "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 291,
+   "line_beg": 270,
    "col_beg": 24,
-   "line_end": 297,
+   "line_end": 276,
    "col_end": 3,
    "type": "text",
    "desc": "second reminder invoice email",
@@ -11269,9 +11899,9 @@
     "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 300,
+   "line_beg": 279,
    "col_beg": 24,
-   "line_end": 306,
+   "line_end": 285,
    "col_end": 3,
    "type": "text",
    "desc": "third reminder invoice email",
@@ -11283,9 +11913,9 @@
     "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 309,
+   "line_beg": 288,
    "col_beg": 24,
-   "line_end": 315,
+   "line_end": 294,
    "col_end": 3,
    "type": "text",
    "desc": "fourth reminder invoice email",
@@ -11297,14 +11927,406 @@
     "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 318,
+   "line_beg": 297,
    "col_beg": 24,
-   "line_end": 324,
+   "line_end": 303,
    "col_end": 3,
    "type": "text",
    "desc": "fitfh reminder invoice email",
    "project": "",
    "jsfbt": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
+  },
+  {
+   "hashToText": {
+    "zxkP3/J5nRzxDVFbUwj0RA==": "tâche programmée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 311,
+   "col_beg": 10,
+   "line_end": 311,
+   "col_end": 65,
+   "type": "text",
+   "desc": "FOCUSED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche programmée"
+  },
+  {
+   "hashToText": {
+    "VdUuKiTb0VDTfKpNFo4l8Q==": "tâche déprogrammée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 317,
+   "col_beg": 10,
+   "line_end": 317,
+   "col_end": 69,
+   "type": "text",
+   "desc": "UNFOCUSED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche déprogrammée"
+  },
+  {
+   "hashToText": {
+    "tL80NzuZ+jVL0Rtx1jaBPw==": "rappel envoyé"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 323,
+   "col_beg": 10,
+   "line_end": 323,
+   "col_end": 63,
+   "type": "text",
+   "desc": "SENT_REMINDER event type name",
+   "project": "",
+   "jsfbt": "rappel envoyé"
+  },
+  {
+   "hashToText": {
+    "wmar7QjaiZluknyWzaVgQQ==": "rappel annulé"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 329,
+   "col_beg": 10,
+   "line_end": 329,
+   "col_end": 67,
+   "type": "text",
+   "desc": "CANCELED_REMINDER event type name",
+   "project": "",
+   "jsfbt": "rappel annulé"
+  },
+  {
+   "hashToText": {
+    "fIOgzqMZ6XFqIHu7LkaAQg==": "tâche ajoutée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 335,
+   "col_beg": 10,
+   "line_end": 335,
+   "col_end": 60,
+   "type": "text",
+   "desc": "ADDED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche ajoutée"
+  },
+  {
+   "hashToText": {
+    "HudPGukU86aP5LNT/z+lxg==": "tâche mise-à-jour"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 341,
+   "col_beg": 10,
+   "line_end": 341,
+   "col_end": 66,
+   "type": "text",
+   "desc": "UPDATED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche mise-à-jour"
+  },
+  {
+   "hashToText": {
+    "paqXe9wQKPvBEiITisUQCw==": "tâche validée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 347,
+   "col_beg": 10,
+   "line_end": 347,
+   "col_end": 63,
+   "type": "text",
+   "desc": "FINISHED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche validée"
+  },
+  {
+   "hashToText": {
+    "qj9jnxl4d5Bk/L3atwME3g==": "tâche dé-validée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 353,
+   "col_beg": 10,
+   "line_end": 353,
+   "col_end": 68,
+   "type": "text",
+   "desc": "UNFINISHED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche dé-validée"
+  },
+  {
+   "hashToText": {
+    "UnnzE0TM30weUvhd19MwBg==": "tâche supprimée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 359,
+   "col_beg": 10,
+   "line_end": 359,
+   "col_end": 64,
+   "type": "text",
+   "desc": "REMOVED_TASK event type name",
+   "project": "",
+   "jsfbt": "tâche supprimée"
+  },
+  {
+   "hashToText": {
+    "62bqq9dtFkUPF+U+QbTPEQ==": "projet créé"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 365,
+   "col_beg": 10,
+   "line_end": 365,
+   "col_end": 63,
+   "type": "text",
+   "desc": "CREATED_PROJECT event type name",
+   "project": "",
+   "jsfbt": "projet créé"
+  },
+  {
+   "hashToText": {
+    "OIVia7AFbNXEsDfO5QQKxA==": "projet mis-à-jour"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 371,
+   "col_beg": 10,
+   "line_end": 371,
+   "col_end": 69,
+   "type": "text",
+   "desc": "UPDATED_PROJECT event type name",
+   "project": "",
+   "jsfbt": "projet mis-à-jour"
+  },
+  {
+   "hashToText": {
+    "+/9t1P/1cOq0z8yaW24Ylg==": "projet archivé"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 377,
+   "col_beg": 10,
+   "line_end": 377,
+   "col_end": 67,
+   "type": "text",
+   "desc": "ARCHIVED_PROJECT event type name",
+   "project": "",
+   "jsfbt": "projet archivé"
+  },
+  {
+   "hashToText": {
+    "d+uJ4n3Ue4iTAN8iuR/mXA==": "projet dé-archivé"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 383,
+   "col_beg": 10,
+   "line_end": 386,
+   "col_end": 4,
+   "type": "text",
+   "desc": "UNARCHIVED_PROJECT event type name",
+   "project": "",
+   "jsfbt": "projet dé-archivé"
+  },
+  {
+   "hashToText": {
+    "wjuWslZ56aHtN8u8Gl7lHw==": "commentaire posté"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 392,
+   "col_beg": 10,
+   "line_end": 392,
+   "col_end": 68,
+   "type": "text",
+   "desc": "POSTED_COMMENT event type name",
+   "project": "",
+   "jsfbt": "commentaire posté"
+  },
+  {
+   "hashToText": {
+    "NBVu19F3w+zj99WvxMQN4g==": "section ajoutée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 398,
+   "col_beg": 10,
+   "line_end": 398,
+   "col_end": 65,
+   "type": "text",
+   "desc": "ADDED_SECTION event type name",
+   "project": "",
+   "jsfbt": "section ajoutée"
+  },
+  {
+   "hashToText": {
+    "c7VfvB+NQF6rARww/4+JHA==": "section mise-à-jour"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 404,
+   "col_beg": 10,
+   "line_end": 407,
+   "col_end": 4,
+   "type": "text",
+   "desc": "UPDATED_SECTION event type name",
+   "project": "",
+   "jsfbt": "section mise-à-jour"
+  },
+  {
+   "hashToText": {
+    "h7fcUX8Nl3mr4xk5YIb8cw==": "section supprimée"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 413,
+   "col_beg": 10,
+   "line_end": 413,
+   "col_end": 69,
+   "type": "text",
+   "desc": "REMOVED_SECTION event type name",
+   "project": "",
+   "jsfbt": "section supprimée"
+  },
+  {
+   "hashToText": {
+    "OknqohG84hnZfe5DwCcBow==": "document(s) ajouté(s)"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 419,
+   "col_beg": 10,
+   "line_end": 422,
+   "col_end": 4,
+   "type": "text",
+   "desc": "UPLOADED_ATTACHMENT event type name",
+   "project": "",
+   "jsfbt": "document(s) ajouté(s)"
+  },
+  {
+   "hashToText": {
+    "m77iQgjJy9CXLjjJro5Trg==": "document(s) supprimé(s)"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 428,
+   "col_beg": 10,
+   "line_end": 431,
+   "col_end": 4,
+   "type": "text",
+   "desc": "REMOVED_ATTACHMENT event type name",
+   "project": "",
+   "jsfbt": "document(s) supprimé(s)"
+  },
+  {
+   "hashToText": {
+    "R2X1QHVUM3z4DxlZFdjAGA==": "client assigné à une tâche"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 437,
+   "col_beg": 10,
+   "line_end": 440,
+   "col_end": 4,
+   "type": "text",
+   "desc": "LINKED_CUSTOMER_TO_TASK event type name",
+   "project": "",
+   "jsfbt": "client assigné à une tâche"
+  },
+  {
+   "hashToText": {
+    "OItnW2RsXP/FkYGnT/IbsA==": "client enlevé d'une tâche"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 446,
+   "col_beg": 10,
+   "line_end": 449,
+   "col_end": 4,
+   "type": "text",
+   "desc": "UNLINKED_CUSTOMER_TO_TASK event type name",
+   "project": "",
+   "jsfbt": "client enlevé d'une tâche"
+  },
+  {
+   "hashToText": {
+    "MHTEF7cfTaT1fDS0JqwJLQ==": "client assigné à un projet"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 455,
+   "col_beg": 10,
+   "line_end": 458,
+   "col_end": 4,
+   "type": "text",
+   "desc": "LINKED_CUSTOMER_TO_PROJECT event type name",
+   "project": "",
+   "jsfbt": "client assigné à un projet"
+  },
+  {
+   "hashToText": {
+    "+YUT+YUoC5vHcT5uGP6lsg==": "client enlevé d'un projet"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 464,
+   "col_beg": 10,
+   "line_end": 467,
+   "col_end": 4,
+   "type": "text",
+   "desc": "UNLINKED_CUSTOMER_TO_PROJECT event type name",
+   "project": "",
+   "jsfbt": "client enlevé d'un projet"
+  },
+  {
+   "hashToText": {
+    "fBtgrEgDW/SkI4mTgrYLpg==": "collaborateur assigné à un projet"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 473,
+   "col_beg": 10,
+   "line_end": 476,
+   "col_end": 4,
+   "type": "text",
+   "desc": "LINKED_COLLABORATOR_TO_PROJECT event type name",
+   "project": "",
+   "jsfbt": "collaborateur assigné à un projet"
+  },
+  {
+   "hashToText": {
+    "xlY2tpPi2KD95DQFEvdOJg==": "collaborateur enlevé d'un projet"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 482,
+   "col_beg": 10,
+   "line_end": 485,
+   "col_end": 4,
+   "type": "text",
+   "desc": "UNLINKED_COLLABORATOR_TO_PROJECT event type name",
+   "project": "",
+   "jsfbt": "collaborateur enlevé d'un projet"
+  },
+  {
+   "hashToText": {
+    "ojPmugN8iri+KJ4VJE5PZQ==": "collaborateur assigné à une tâche"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 491,
+   "col_beg": 10,
+   "line_end": 494,
+   "col_end": 4,
+   "type": "text",
+   "desc": "ASSIGNED_TO_TASK event type name",
+   "project": "",
+   "jsfbt": "collaborateur assigné à une tâche"
+  },
+  {
+   "hashToText": {
+    "Cd+pJGsR6PKr7WS5YH9euw==": "collaborateur enlevé d'une tâche"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 500,
+   "col_beg": 10,
+   "line_end": 503,
+   "col_end": 4,
+   "type": "text",
+   "desc": "REMOVE_ASSIGNMENT_TO_TASK event type name",
+   "project": "",
+   "jsfbt": "collaborateur enlevé d'une tâche"
+  },
+  {
+   "hashToText": {
+    "eB8Wh4BgNVSmiBcB/l9kLQ==": "projet consulté"
+   },
+   "filepath": "src/utils/constants.js",
+   "line_beg": 509,
+   "col_beg": 10,
+   "line_end": 509,
+   "col_end": 66,
+   "type": "text",
+   "desc": "VIEWED_PROJECT event type name",
+   "project": "",
+   "jsfbt": "projet consulté"
   }
  ],
  "childParentMappings": {}

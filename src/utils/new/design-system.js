@@ -547,6 +547,7 @@ export const Main = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
+		padding: 1rem 0;
 	}
 `;
 

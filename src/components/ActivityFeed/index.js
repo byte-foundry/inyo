@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
-import {EVENT_TYPES, ITEM_TYPES} from '../../utils/constants';
+import {BREAKPOINTS, EVENT_TYPES, ITEM_TYPES} from '../../utils/constants';
 import {accentGrey, LoadingLogo} from '../../utils/content';
 import {formatFullName, isCustomerTask} from '../../utils/functions';
 import {
@@ -27,6 +27,16 @@ const Feed = styled('div')`
 	flex: 1;
 	display: flex;
 	color: ${primaryGrey};
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
+		margin-bottom: 2rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
+		flex-direction: column;
+		margin-bottom: 2rem;
+	}
 `;
 
 const EventTextContainer = styled('span')`
@@ -40,6 +50,16 @@ const EventInfo = styled('span')`
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		text-overflow: initial;
+		white-space: normal;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
+		text-overflow: initial;
+		white-space: normal;
+	}
 `;
 
 const EventRow = styled('div')`
@@ -47,6 +67,16 @@ const EventRow = styled('div')`
 	margin-bottom: 0.5rem;
 	font-size: 0.85rem;
 	line-height: 1.4;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column-reverse;
+		margin-bottom: 1.5rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
+		flex-direction: column-reverse;
+		margin-bottom: 1.5rem;
+	}
 `;
 
 const EventSpace = styled('div')`
@@ -61,6 +91,18 @@ const EventSpace = styled('div')`
 const EventTime = styled('time')`
 	display: flex;
 	flex: 0 0 auto;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		padding-left: 40px;
+		font-size: 0.7rem;
+		color: ${primaryBlack};
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
+		padding-left: 40px;
+		font-size: 0.7rem;
+		color: ${primaryBlack};
+	}
 `;
 
 const ObjectLink = A.withComponent(Link);
@@ -239,7 +281,7 @@ const EventText = ({
 	case 'CREATED_PROJECT':
 		action = (
 			<fbt project="inyo" desc="created project event message">
-					a crée le projet
+					a créé le projet
 			</fbt>
 		);
 		icon = 'folder_open';
@@ -425,6 +467,14 @@ const EventList = styled('ul')`
 	padding: 0;
 	margin-right: 4rem;
 	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0 0 2rem 0;
+	}
+
+	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
+		margin: 0 0 2rem 0;
+	}
 `;
 
 const FilterCard = styled('div')`

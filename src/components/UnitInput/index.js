@@ -89,6 +89,7 @@ const UnitInput = ({
 	autoFocus = true,
 	getValue = {},
 	inputStyle = {},
+	onChange = () => {},
 }) => {
 	const [isHours, setIsHours] = useState(unit < 1);
 	const inputOwnRef = useRef();
@@ -166,6 +167,16 @@ const UnitInput = ({
 								onChange={(e) => {
 									setFieldValue('unit', e.target.value);
 
+									const valueFloat = parseFloat(
+										e.target.value,
+									);
+
+									onChange(
+										isHours
+											? valueFloat / workingTime
+											: valueFloat,
+									);
+
 									if (
 										document.activeElement
 										!== inputRef.current
@@ -180,7 +191,21 @@ const UnitInput = ({
 										);
 									}
 								}}
-								css={inputStyle}
+								css={(() => {
+									if (
+										typeof inputStyle === 'function'
+										&& inputRef.current
+									) {
+										return inputStyle({
+											inputValue: parseFloat(
+												inputRef.current.value,
+											),
+											isHours,
+										});
+									}
+
+									return inputStyle;
+								})()}
 							/>
 						</Tooltip>
 						<Tooltip

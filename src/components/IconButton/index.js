@@ -74,6 +74,7 @@ const IconWrap = styled('div')`
   justify-content: center;
   align-items: center;
   z-index: 0;
+  user-select: none;
 
   cursor: ${props => (props.inactive ? 'not-allowed' : 'pointer')};
 

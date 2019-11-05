@@ -27,6 +27,7 @@ export const SHORT_TASK_FRAGMENT = gql`
 		isFocused
 		scheduledFor
 		schedulePosition
+		dailyRate
 		owner {
 			id
 		}
@@ -204,5 +205,23 @@ export const PROJECT_CUSTOMER_FRAGMENT = gql`
 			postalCode
 			country
 		}
+	}
+`;
+
+export const PROJECT_SHORT_FRAGMENT = gql`
+	fragment ProjectShortFragment on Project {
+		id
+		template
+		viewedByCustomer
+		name
+		status
+		createdAt
+		issuedAt
+		deadline
+		total
+		budget
+		daysUntilDeadline
+		notifyActivityToCustomer
+		token
 	}
 `;

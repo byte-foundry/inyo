@@ -302,9 +302,13 @@ export function displayDurationPretty(itemUnit, workingTime) {
 
 	if (!itemUnit) return '—';
 
-	return `${days ? moment.duration(days, 'days').format('d __') : ''} ${
-		hoursAndMinutes
-			? moment.duration(hoursAndMinutes, 'hours').format('_HM_')
-			: ''
-	}`.trim();
+	if (hoursAndMinutes >= 0.99 || days) {
+		return `${days ? moment.duration(days, 'days').format('d __') : ''} ${
+			hoursAndMinutes
+				? moment.duration(hoursAndMinutes, 'hours').format('_HM_')
+				: ''
+		}`.trim();
+	}
+
+	return moment.duration(hoursAndMinutes, 'hours').format('mm[min]');
 }

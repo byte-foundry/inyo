@@ -554,23 +554,17 @@ const Item = ({
 											}}
 										/>
 									) : (
-										<div onClick={() => setEditUnit(true)}>
-											<fbt
-												project="inyo"
-												desc="time it took item view"
-											>
-												<fbt:plural
-													count={item.timeItTook}
-													name="timeItTook"
-													many="jours"
-													showCount="yes"
-													value={item.timeItTook.toFixed(
-														2,
-													)}
-												>
-												jour
-												</fbt:plural>
-											</fbt>
+										<div
+											onClick={
+												customerToken
+													? undefined
+													: () => setEditUnit(true)
+											}
+										>
+											{displayDurationPretty(
+												item.timeItTook,
+												workingTime,
+											)}
 										</div>
 									)}
 								</MetaText>

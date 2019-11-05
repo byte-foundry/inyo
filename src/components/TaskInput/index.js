@@ -245,7 +245,6 @@ const TaskInput = ({
 	function closeMoreInfos() {
 		setItemDueDate();
 		setItemCustomer();
-		setItemUnit(0);
 	}
 
 	function closeContentAcquisitionInfos() {
@@ -359,6 +358,7 @@ const TaskInput = ({
 								else if (e.key === 'Enter') {
 									e.preventDefault();
 									if (type === 'CONTENT_ACQUISITION') {
+										setItemUnit(0);
 										if (showContentAcquisitionInfos) {
 											onSubmitTask({
 												name: value,
@@ -392,6 +392,7 @@ const TaskInput = ({
 										}
 									}
 									else if (type === 'SECTION') {
+										setItemUnit(0);
 										onSubmitSection({
 											name: value,
 										});
@@ -424,6 +425,7 @@ const TaskInput = ({
 								setValue('');
 								setOpenedByClick(false);
 								closeMoreInfos();
+								setItemUnit(0);
 								closeContentAcquisitionInfos();
 							}
 						}}
@@ -508,6 +510,7 @@ const TaskInput = ({
 										});
 										setValue('');
 										closeMoreInfos();
+										setItemUnit(0);
 										closeContentAcquisitionInfos();
 									}
 									else {
@@ -558,6 +561,7 @@ const TaskInput = ({
 				<TaskInfosInputsContainer>
 					<UnitWithSuggestionsForm
 						small
+						value={itemUnit}
 						onChange={(unit) => {
 							setItemUnit(unit);
 							window.Intercom(
@@ -701,6 +705,7 @@ const TaskInput = ({
 						inputRef.current.focus();
 						setOpenedByClick(false);
 						closeMoreInfos();
+						setItemUnit(0);
 						closeContentAcquisitionInfos();
 					}}
 				/>

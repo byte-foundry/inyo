@@ -7,6 +7,7 @@ import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
 import PendingActionsTray from '../../../components/PendingActionsTray';
+import ProjectBudget from '../../../components/ProjectBudget';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
@@ -146,6 +147,9 @@ function TasksList({location, history}) {
 						)}
 						{view === 'personal-notes' && (
 							<ProjectPersonalNotes projectId={projectId} />
+						)}
+						{view === 'budget' && (
+							<ProjectBudget projectId={projectId} />
 						)}
 					</Suspense>
 					{isTasksView && (

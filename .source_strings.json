@@ -744,12 +744,40 @@
   },
   {
    "hashToText": {
-    "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
+    "QehVyg4J4kupjKZVBZwuUw==": "Budget"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
    "line_beg": 257,
+   "col_beg": 6,
+   "line_end": 259,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project name label",
+   "project": "inyo",
+   "jsfbt": "Budget"
+  },
+  {
+   "hashToText": {
+    "OAbwL0JVNTtFr6h1DMt9hQ==": "5000 €"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 262,
+   "col_beg": 6,
+   "line_end": 264,
+   "col_end": 12,
+   "type": "text",
+   "desc": "new project name placeholder",
+   "project": "inyo",
+   "jsfbt": "5000 €"
+  },
+  {
+   "hashToText": {
+    "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
+   },
+   "filepath": "src/components/CreateProjectModalForm/index.js",
+   "line_beg": 276,
    "col_beg": 8,
-   "line_end": 262,
+   "line_end": 281,
    "col_end": 14,
    "type": "text",
    "desc": "create project deadline",
@@ -761,9 +789,9 @@
     "iPGKvsjHfnnJw/l7IwyApg==": "Aucune date limite"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 272,
+   "line_beg": 291,
    "col_beg": 9,
-   "line_end": 274,
+   "line_end": 293,
    "col_end": 15,
    "type": "text",
    "desc": "no deadline",
@@ -775,9 +803,9 @@
     "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 301,
+   "line_beg": 320,
    "col_beg": 5,
-   "line_end": 303,
+   "line_end": 322,
    "col_end": 11,
    "type": "text",
    "desc": "cancel create project",
@@ -789,9 +817,9 @@
     "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 306,
+   "line_beg": 325,
    "col_beg": 5,
-   "line_end": 308,
+   "line_end": 327,
    "col_end": 11,
    "type": "text",
    "desc": "confirm create project",
@@ -1905,39 +1933,12 @@
   },
   {
    "hashToText": {
-    "/U17hovEAazDGh01X2uAzQ==": "{timeItTook} jours",
-    "xjFoy8C8nGf+c9I/neBmDg==": "1 jour"
-   },
-   "filepath": "src/components/ItemView/index.js",
-   "line_beg": 558,
-   "col_beg": 11,
-   "line_end": 573,
-   "col_end": 17,
-   "type": "table",
-   "desc": "time it took item view",
-   "project": "inyo",
-   "jsfbt": {
-    "t": {
-     "*": "{timeItTook} jours",
-     "_1": "1 jour"
-    },
-    "m": [
-     {
-      "token": "timeItTook",
-      "type": 2,
-      "singular": true
-     }
-    ]
-   }
-  },
-  {
-   "hashToText": {
     "HLV6gRDo4cU1fnr1mVGuig==": "Date limite pour réaliser cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 583,
+   "line_beg": 577,
    "col_beg": 7,
-   "line_end": 588,
+   "line_end": 582,
    "col_end": 13,
    "type": "text",
    "desc": "deadline tooltip item view",
@@ -1949,9 +1950,9 @@
     "9WiJli6bYRZdd9b3WFN4sw==": "Temps restant"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 594,
+   "line_beg": 588,
    "col_beg": 8,
-   "line_end": 599,
+   "line_end": 593,
    "col_end": 14,
    "type": "text",
    "desc": "deadline label item view",
@@ -1964,9 +1965,9 @@
     "WOBjTLFG6qlMucM7PHA/aA==": "1 jour"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 660,
+   "line_beg": 654,
    "col_beg": 11,
-   "line_end": 686,
+   "line_end": 680,
    "col_end": 17,
    "type": "table",
    "desc": "deadline margin item view",
@@ -1990,9 +1991,9 @@
     "ew4YOAKY1eedm0Xk5R444A==": "Personne liée à cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 698,
+   "line_beg": 692,
    "col_beg": 7,
-   "line_end": 703,
+   "line_end": 697,
    "col_end": 13,
    "type": "text",
    "desc": "linked customer tooltip item view",
@@ -2004,9 +2005,9 @@
     "vRZY5zcFhPD/Le3J1JJKiw==": "Client"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 709,
+   "line_beg": 703,
    "col_beg": 8,
-   "line_end": 714,
+   "line_end": 708,
    "col_end": 14,
    "type": "text",
    "desc": "linked customer label item view",
@@ -2018,9 +2019,9 @@
     "4uWwWAEkjeee+uOwaU7O7Q==": "Définit s'il y a des actions automatiques"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 781,
+   "line_beg": 775,
    "col_beg": 6,
-   "line_end": 783,
+   "line_end": 777,
    "col_end": 12,
    "type": "text",
    "desc": "type of the task tooltip",
@@ -2032,9 +2033,9 @@
     "WlT9SCoRXpZo1WsKLdRoNA==": "Type de tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 789,
+   "line_beg": 783,
    "col_beg": 7,
-   "line_end": 791,
+   "line_end": 785,
    "col_end": 13,
    "type": "text",
    "desc": "task type",
@@ -2046,9 +2047,9 @@
     "X2kd6IYQLbQF5T0J4EmDVg==": "Projet lié à cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 798,
+   "line_beg": 792,
    "col_beg": 6,
-   "line_end": 800,
+   "line_end": 794,
    "col_end": 12,
    "type": "text",
    "desc": "project tooltip",
@@ -2060,9 +2061,9 @@
     "gSUvt41Meg58qA7ieTm91w==": "Projet"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 806,
+   "line_beg": 800,
    "col_beg": 7,
-   "line_end": 808,
+   "line_end": 802,
    "col_end": 13,
    "type": "text",
    "desc": "project label",
@@ -2074,9 +2075,9 @@
     "6F6qiWW3cYSOf+pclVSw7g==": "Tag de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 856,
+   "line_beg": 850,
    "col_beg": 7,
-   "line_end": 858,
+   "line_end": 852,
    "col_end": 13,
    "type": "text",
    "desc": "task's tag",
@@ -2088,9 +2089,9 @@
     "3Dfj3RxIOd3jiFRkj5VOfQ==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 868,
+   "line_beg": 862,
    "col_beg": 9,
-   "line_end": 873,
+   "line_end": 867,
    "col_end": 15,
    "type": "text",
    "desc": "add or create tag",
@@ -2102,9 +2103,9 @@
     "fwFrMMlHn32zsVxwM2CzYg==": "Description de la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 921,
+   "line_beg": 915,
    "col_beg": 12,
-   "line_end": 924,
+   "line_end": 918,
    "col_end": 6,
    "type": "text",
    "desc": "tooltip task description",
@@ -2116,9 +2117,9 @@
     "rCspNgqVvgXUmwcbhFN+3g==": "Ajouter une description…"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 930,
+   "line_beg": 924,
    "col_beg": 8,
-   "line_end": 932,
+   "line_end": 926,
    "col_end": 14,
    "type": "text",
    "desc": "Add a description",
@@ -2130,9 +2131,9 @@
     "uanI7bp7CivGKkYhGclxfw==": "Actions {apos}{assistantName}"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 965,
+   "line_beg": 959,
    "col_beg": 7,
-   "line_end": 991,
+   "line_end": 985,
    "col_end": 13,
    "type": "text",
    "desc": "actions of edwige",
@@ -2144,9 +2145,9 @@
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 971,
+   "line_beg": 965,
    "col_beg": 11,
-   "line_end": 976,
+   "line_end": 970,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2158,9 +2159,9 @@
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 979,
+   "line_beg": 973,
    "col_beg": 11,
-   "line_end": 984,
+   "line_end": 978,
    "col_end": 17,
    "type": "text",
    "desc": "notification message",
@@ -2172,9 +2173,9 @@
     "oadX5Ncr9ZMKyEUe+XSEMg==": "Ne plus rappeler à {customerName} de faire cette tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1007,
+   "line_beg": 1001,
    "col_beg": 9,
-   "line_end": 1019,
+   "line_end": 1013,
    "col_end": 15,
    "type": "text",
    "desc": "task customer cancelation label",
@@ -2186,9 +2187,9 @@
     "x6FPGl0U1x0YCSNscEvLPQ==": "Charger {assistantName} de faire réaliser cette tâche à {customerName} ( {contactName} )"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1036,
+   "line_beg": 1030,
    "col_beg": 8,
-   "line_end": 1053,
+   "line_end": 1047,
    "col_end": 14,
    "type": "text",
    "desc": "charger",
@@ -2200,9 +2201,9 @@
     "lcfH71yKmcYYGee2YJcxUw==": "Pièces jointes"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1059,
+   "line_beg": 1053,
    "col_beg": 4,
-   "line_end": 1061,
+   "line_end": 1055,
    "col_end": 10,
    "type": "text",
    "desc": "Attached files",
@@ -2214,9 +2215,9 @@
     "axA2+EmCpMmeDxbdU3WHcQ==": "Commentaires"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1153,
+   "line_beg": 1147,
    "col_beg": 6,
-   "line_end": 1155,
+   "line_end": 1149,
    "col_end": 12,
    "type": "text",
    "desc": "Comments",
@@ -2228,9 +2229,9 @@
     "fEllyq1WiFdeYXrC6eIGTg==": "Annuler"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1175,
+   "line_beg": 1169,
    "col_beg": 9,
-   "line_end": 1177,
+   "line_end": 1171,
    "col_end": 15,
    "type": "text",
    "desc": "cancel",
@@ -2242,9 +2243,9 @@
     "ddLDsCod8pOsYFPEZ5WAnw==": "Confirmer la suppression"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1187,
+   "line_beg": 1181,
    "col_beg": 9,
-   "line_end": 1189,
+   "line_end": 1183,
    "col_end": 15,
    "type": "text",
    "desc": "confirm deletion",
@@ -2256,9 +2257,9 @@
     "MLQtSe1yqaoM3uuniMQKiA==": "Supprimer la tâche"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1199,
+   "line_beg": 1193,
    "col_beg": 9,
-   "line_end": 1201,
+   "line_end": 1195,
    "col_end": 15,
    "type": "text",
    "desc": "delete task",
@@ -2270,9 +2271,9 @@
     "Y897lc2SlSChnVdLW1A6RQ==": "Enregistrer et fermer"
    },
    "filepath": "src/components/ItemView/index.js",
-   "line_beg": 1217,
+   "line_beg": 1211,
    "col_beg": 6,
-   "line_end": 1219,
+   "line_end": 1213,
    "col_end": 12,
    "type": "text",
    "desc": "notification message",
@@ -2690,9 +2691,9 @@
     "s7Am8IKTQ0RWV1ZfuKTA1w==": "Notifications liées à vos clients"
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 174,
+   "line_beg": 158,
    "col_beg": 5,
-   "line_end": 176,
+   "line_end": 160,
    "col_end": 11,
    "type": "text",
    "desc": "notification tray button tooltip",
@@ -2704,9 +2705,9 @@
     "k5OwMZDKZ01FmGLqqBOdAQ==": "Tout marquer comme lu"
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 220,
+   "line_beg": 205,
    "col_beg": 7,
-   "line_end": 222,
+   "line_end": 207,
    "col_end": 13,
    "type": "text",
    "desc": "mark all as read",
@@ -2718,9 +2719,9 @@
     "cTKVM7yUdcTOW1xZeBceRA==": "Aucune notification."
    },
    "filepath": "src/components/NotificationTrayButton/index.js",
-   "line_beg": 237,
+   "line_beg": 222,
    "col_beg": 9,
-   "line_end": 242,
+   "line_end": 227,
    "col_end": 15,
    "type": "text",
    "desc": "no notification message",
@@ -3545,6 +3546,552 @@
    "desc": "Confirm all time spent",
    "project": "inyo",
    "jsfbt": "Tout valider"
+  },
+  {
+   "hashToText": {
+    "eIrHfRHJr3VMTUDdnJrnng==": "{=Budget vendu [budget]}{input}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 275,
+   "col_beg": 1,
+   "line_end": 324,
+   "col_end": 7,
+   "type": "text",
+   "desc": "project's budget",
+   "project": "",
+   "jsfbt": "{=Budget vendu [budget]}{input}"
+  },
+  {
+   "hashToText": {
+    "SDTehLh3wo+9/iQ9ZLAdZw==": "Budget vendu {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 276,
+   "col_beg": 2,
+   "line_end": 288,
+   "col_end": 16,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget vendu [budget]}{=}\"",
+   "project": "",
+   "jsfbt": "Budget vendu {budget}"
+  },
+  {
+   "hashToText": {
+    "+mytN+1FSy2Rv8/CXsqNGw==": "Le budget vendu est la somme que vous allez facturer à votre client."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 281,
+   "col_beg": 6,
+   "line_end": 284,
+   "col_end": 12,
+   "type": "text",
+   "desc": "project's budget tooltip",
+   "project": "",
+   "jsfbt": "Le budget vendu est la somme que vous allez facturer à votre client."
+  },
+  {
+   "hashToText": {
+    "WBNkCR3Xvk8q7WMnMXyVLg==": "Valider"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 299,
+   "col_beg": 6,
+   "line_end": 299,
+   "col_end": 39,
+   "type": "text",
+   "desc": "confirm",
+   "project": "",
+   "jsfbt": "Valider"
+  },
+  {
+   "hashToText": {
+    "oNo+sJB8SjEx1vWwMnzPdg==": "{amount} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 308,
+   "col_beg": 7,
+   "line_end": 313,
+   "col_end": 13,
+   "type": "text",
+   "desc": "budget amount",
+   "project": "",
+   "jsfbt": "{amount} €"
+  },
+  {
+   "hashToText": {
+    "mIGWHktNEAMPX6kwQ2AEnQ==": "{=Rentabilité [budget]}{=[budget]}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 371,
+   "col_beg": 4,
+   "line_end": 403,
+   "col_end": 10,
+   "type": "text",
+   "desc": "rentability",
+   "project": "",
+   "jsfbt": "{=Rentabilité [budget]}{=[budget]}"
+  },
+  {
+   "hashToText": {
+    "vz/xAwdzVvH9EsexYlkSTA==": "Rentabilité {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 372,
+   "col_beg": 5,
+   "line_end": 395,
+   "col_end": 19,
+   "type": "text",
+   "desc": "In the phrase: \"{=Rentabilité [budget]}{=[budget]}\"",
+   "project": "",
+   "jsfbt": "Rentabilité {budget}"
+  },
+  {
+   "hashToText": {
+    "Wo08wAWYpnX8Kk8WWNRVYQ==": "{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 376,
+   "col_beg": 8,
+   "line_end": 392,
+   "col_end": 14,
+   "type": "text",
+   "desc": "rentability tooltip",
+   "project": "",
+   "jsfbt": "{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}"
+  },
+  {
+   "hashToText": {
+    "fhsfbTLC6I3PLjvqvMLFUA==": "La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 377,
+   "col_beg": 9,
+   "line_end": 381,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}\"",
+   "project": "",
+   "jsfbt": "La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu."
+  },
+  {
+   "hashToText": {
+    "FVwdg4iWpMFqkjyNiclNMA==": "Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 382,
+   "col_beg": 9,
+   "line_end": 386,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}\"",
+   "project": "",
+   "jsfbt": "Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu."
+  },
+  {
+   "hashToText": {
+    "Cu9zIL//r/JOaqWxNLTChg==": "Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 387,
+   "col_beg": 9,
+   "line_end": 391,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=La rentabilité est le ratio entre le budget vendu et la somme des budgets travaillés et budget encore prévu.}{=Une rentabilité supérieure à 1 indique vous avez travaillé moins que ce que vous avez vendu.}{=Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu.}\"",
+   "project": "",
+   "jsfbt": "Une rentabilité entre 0 et 1 indique que vous avez travaillé plus que ce que vous aviez prévu."
+  },
+  {
+   "hashToText": {
+    "RTga39kEITzjBkqN5Fqgaw==": "{budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 396,
+   "col_beg": 5,
+   "line_end": 402,
+   "col_end": 18,
+   "type": "text",
+   "desc": "In the phrase: \"{=Rentabilité [budget]}{=[budget]}\"",
+   "project": "",
+   "jsfbt": "{budget}"
+  },
+  {
+   "hashToText": {
+    "+a28apNacBiALR3YZvYZpw==": "{=Budget réel [budget]}{=[budget]€}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 429,
+   "col_beg": 6,
+   "line_end": 451,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Real budget",
+   "project": "",
+   "jsfbt": "{=Budget réel [budget]}{=[budget]€}"
+  },
+  {
+   "hashToText": {
+    "pgEn6hWhH58HKuwYd5vSqA==": "Budget réel {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 430,
+   "col_beg": 7,
+   "line_end": 444,
+   "col_end": 21,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget réel [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "Budget réel {budget}"
+  },
+  {
+   "hashToText": {
+    "CsPDLwFed7WEvPobnECAPQ==": "{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 434,
+   "col_beg": 10,
+   "line_end": 441,
+   "col_end": 16,
+   "type": "text",
+   "desc": "Real budget tooltip",
+   "project": "",
+   "jsfbt": "{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}"
+  },
+  {
+   "hashToText": {
+    "7W9zpL19sPNz3KyXVcPgZA==": "Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 435,
+   "col_beg": 11,
+   "line_end": 440,
+   "col_end": 15,
+   "type": "text",
+   "desc": "In the phrase: \"{=Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen.}\"",
+   "project": "",
+   "jsfbt": "Le budget réel est la somme des jours de travail dans votre projet multipliée par votre taux journalier moyen."
+  },
+  {
+   "hashToText": {
+    "HwwlTPsKKWIIHQfdKeKOLA==": "{budget} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 445,
+   "col_beg": 7,
+   "line_end": 450,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget réel [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "{budget} €"
+  },
+  {
+   "hashToText": {
+    "fDL30wt24taCtWMkf9Ixig==": "{=Budget restant [budget]}{=[budget]€}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 454,
+   "col_beg": 6,
+   "line_end": 477,
+   "col_end": 12,
+   "type": "text",
+   "desc": "remaining budget",
+   "project": "",
+   "jsfbt": "{=Budget restant [budget]}{=[budget]€}"
+  },
+  {
+   "hashToText": {
+    "Y/oOFvGMTbCxq8HijZoINw==": "Budget restant {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 455,
+   "col_beg": 7,
+   "line_end": 470,
+   "col_end": 21,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget restant [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "Budget restant {budget}"
+  },
+  {
+   "hashToText": {
+    "HJjdpDClAP/ptSMOg8LGSA==": "{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 459,
+   "col_beg": 10,
+   "line_end": 467,
+   "col_end": 16,
+   "type": "text",
+   "desc": "remaining budget tooltip",
+   "project": "",
+   "jsfbt": "{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}"
+  },
+  {
+   "hashToText": {
+    "UnyJ9whhDktRngCfMs87Gw==": "Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 460,
+   "col_beg": 11,
+   "line_end": 466,
+   "col_end": 15,
+   "type": "text",
+   "desc": "In the phrase: \"{=Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client.}\"",
+   "project": "",
+   "jsfbt": "Le budget restant correspond à la différence du montant du travail déjà effectué et le budget que vous avez vendu à votre client."
+  },
+  {
+   "hashToText": {
+    "O5c0X22iNXX2xv7XakE9Yg==": "{budget} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 471,
+   "col_beg": 7,
+   "line_end": 476,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Budget restant [budget]}{=[budget]€}\"",
+   "project": "",
+   "jsfbt": "{budget} €"
+  },
+  {
+   "hashToText": {
+    "roMx/0StUVgPfVpdayC2Cw==": "{=Avenant à facturer [budget]}{=[amendment] €}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 480,
+   "col_beg": 6,
+   "line_end": 503,
+   "col_end": 12,
+   "type": "text",
+   "desc": "amount to amend",
+   "project": "",
+   "jsfbt": "{=Avenant à facturer [budget]}{=[amendment] €}"
+  },
+  {
+   "hashToText": {
+    "iWdn9ttfxT4xiwFwK5MNyg==": "Avenant à facturer {budget}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 481,
+   "col_beg": 7,
+   "line_end": 496,
+   "col_end": 21,
+   "type": "text",
+   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=[amendment] €}\"",
+   "project": "",
+   "jsfbt": "Avenant à facturer {budget}"
+  },
+  {
+   "hashToText": {
+    "8LD2br50aFURtdAu5zprVQ==": "{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 485,
+   "col_beg": 10,
+   "line_end": 493,
+   "col_end": 16,
+   "type": "text",
+   "desc": "Amount to amend tooltip",
+   "project": "",
+   "jsfbt": "{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}"
+  },
+  {
+   "hashToText": {
+    "xsOlb4a+259i0nEbHwDZ9A==": "L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 486,
+   "col_beg": 11,
+   "line_end": 492,
+   "col_end": 15,
+   "type": "text",
+   "desc": "In the phrase: \"{=L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir.}\"",
+   "project": "",
+   "jsfbt": "L'avenant à facturer est la différence entre le budget vendu et le budget réel. Il correspond à l'excédent de travail que vous allez fournir."
+  },
+  {
+   "hashToText": {
+    "edgdYSPmxhSTKQoFp3+BRw==": "{amendment} €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 497,
+   "col_beg": 7,
+   "line_end": 502,
+   "col_end": 20,
+   "type": "text",
+   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=[amendment] €}\"",
+   "project": "",
+   "jsfbt": "{amendment} €"
+  },
+  {
+   "hashToText": {
+    "/pIgVIkQVOMKC0wU/eLQfg==": "Phases du projet"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 510,
+   "col_beg": 6,
+   "line_end": 510,
+   "col_end": 59,
+   "type": "text",
+   "desc": "project milestones",
+   "project": "",
+   "jsfbt": "Phases du projet"
+  },
+  {
+   "hashToText": {
+    "5dhD2GNTt7sYLPbsLVCwzA==": "Travaillé"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 513,
+   "col_beg": 6,
+   "line_end": 513,
+   "col_end": 40,
+   "type": "text",
+   "desc": "Worked",
+   "project": "",
+   "jsfbt": "Travaillé"
+  },
+  {
+   "hashToText": {
+    "hfCTo83fx4zTWsbeRMVkIA==": "Planifié"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 516,
+   "col_beg": 6,
+   "line_end": 516,
+   "col_end": 40,
+   "type": "text",
+   "desc": "Planned",
+   "project": "",
+   "jsfbt": "Planifié"
+  },
+  {
+   "hashToText": {
+    "2T/8tqRnxn9tiabsE+I2pA==": "{=Vous n'avez pas encore défini de budget pour ce projet.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 534,
+   "col_beg": 4,
+   "line_end": 538,
+   "col_end": 10,
+   "type": "text",
+   "desc": "No project Budget",
+   "project": "",
+   "jsfbt": "{=Vous n'avez pas encore défini de budget pour ce projet.}"
+  },
+  {
+   "hashToText": {
+    "3Ncuzxft2v44Y8GPQcF3IA==": "Vous n'avez pas encore défini de budget pour ce projet."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 535,
+   "col_beg": 5,
+   "line_end": 537,
+   "col_end": 19,
+   "type": "text",
+   "desc": "In the phrase: \"{=Vous n'avez pas encore défini de budget pour ce projet.}\"",
+   "project": "",
+   "jsfbt": "Vous n'avez pas encore défini de budget pour ce projet."
+  },
+  {
+   "hashToText": {
+    "zuGvQwqh8+Ws1fPfKjm1jQ==": "Budget vendu"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 540,
+   "col_beg": 12,
+   "line_end": 540,
+   "col_end": 55,
+   "type": "text",
+   "desc": "budget label",
+   "project": "",
+   "jsfbt": "Budget vendu"
+  },
+  {
+   "hashToText": {
+    "uXlGZSghlCKv2CyuFk0Yrg==": "5000 €"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 544,
+   "col_beg": 18,
+   "line_end": 544,
+   "col_end": 61,
+   "type": "text",
+   "desc": "budget placeholder",
+   "project": "",
+   "jsfbt": "5000 €"
+  },
+  {
+   "hashToText": {
+    "0/0IE5XdLNMJoppUG+lgBw==": "Valider"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 551,
+   "col_beg": 5,
+   "line_end": 551,
+   "col_end": 48,
+   "type": "text",
+   "desc": "No project Budget",
+   "project": "",
+   "jsfbt": "Valider"
+  },
+  {
+   "hashToText": {
+    "rzJA9MHp+nXckuqAl9Z4+w==": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 556,
+   "col_beg": 3,
+   "line_end": 561,
+   "col_end": 9,
+   "type": "text",
+   "desc": "defined a daily rate",
+   "project": "",
+   "jsfbt": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}"
+  },
+  {
+   "hashToText": {
+    "TP9w3Ix1Gy3BXNoKC82VrQ==": "Définissez votre TJM pour profiter des fonctionnalités de budget."
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 557,
+   "col_beg": 4,
+   "line_end": 560,
+   "col_end": 11,
+   "type": "text",
+   "desc": "In the phrase: \"{=Définissez votre TJM pour profiter des fonctionnalités de budget.}\"",
+   "project": "",
+   "jsfbt": "Définissez votre TJM pour profiter des fonctionnalités de budget."
+  },
+  {
+   "hashToText": {
+    "wuxa5BJR7fALB7nYflk8oA==": "Requis"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 588,
+   "col_beg": 6,
+   "line_end": 590,
+   "col_end": 12,
+   "type": "text",
+   "desc": "required",
+   "project": "inyo",
+   "jsfbt": "Requis"
+  },
+  {
+   "hashToText": {
+    "I4n01o8Xl1LM7dZUIdmtZw==": "Un problème s'est produit"
+   },
+   "filepath": "src/components/ProjectBudget/index.js",
+   "line_beg": 616,
+   "col_beg": 8,
+   "line_end": 618,
+   "col_end": 14,
+   "type": "text",
+   "desc": "something went wrong",
+   "project": "inyo",
+   "jsfbt": "Un problème s'est produit"
   },
   {
    "hashToText": {
@@ -4765,12 +5312,40 @@
   },
   {
    "hashToText": {
-    "L067xGXkMfARcJBjS7f+9g==": "Seulement visibles par vous"
+    "3eF7yd93trcdbIvHS2NrRw==": "Budget vendu"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
    "line_beg": 277,
    "col_beg": 6,
    "line_end": 282,
+   "col_end": 12,
+   "type": "text",
+   "desc": "sidebar project main view tooltip",
+   "project": "inyo",
+   "jsfbt": "Budget vendu"
+  },
+  {
+   "hashToText": {
+    "imwvh09INyILzvv6mIY3PA==": "Budget du projet"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 293,
+   "col_beg": 8,
+   "line_end": 298,
+   "col_end": 14,
+   "type": "text",
+   "desc": "sidebar project budget projet",
+   "project": "inyo",
+   "jsfbt": "Budget du projet"
+  },
+  {
+   "hashToText": {
+    "L067xGXkMfARcJBjS7f+9g==": "Seulement visibles par vous"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 306,
+   "col_beg": 6,
+   "line_end": 311,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project personal notes tooltip",
@@ -4782,9 +5357,9 @@
     "ikjA3VDH0k6vn2narEXR3Q==": "Notes personnelles"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 293,
+   "line_beg": 322,
    "col_beg": 8,
-   "line_end": 298,
+   "line_end": 327,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project personal notes label",
@@ -4796,9 +5371,9 @@
     "fLR9KuAsosc/XK5bMWk7Mg==": "Visibles par tout le monde"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 306,
+   "line_beg": 335,
    "col_beg": 6,
-   "line_end": 311,
+   "line_end": 340,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project shared notes tooltip",
@@ -4810,9 +5385,9 @@
     "jFCupc9C9dtcx4e30UI0Iw==": "Notes partagées"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 322,
+   "line_beg": 351,
    "col_beg": 8,
-   "line_end": 327,
+   "line_end": 356,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project shared notes label",
@@ -4824,9 +5399,9 @@
     "rH9wh0hUEutLLvjXj/nvVA==": "Changer le client lié au projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 340,
+   "line_beg": 369,
    "col_beg": 9,
-   "line_end": 345,
+   "line_end": 374,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project change customer tooltip",
@@ -4838,9 +5413,9 @@
     "fe/ia+wsEnlijrwwdh21Ww==": "Évolution du projet, tâches qui requièrent une action, etc."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 362,
+   "line_beg": 391,
    "col_beg": 8,
-   "line_end": 368,
+   "line_end": 397,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project notify customer tooltip",
@@ -4852,9 +5427,9 @@
     "aCi6l7XNAZcbqUgKkFcIiw==": "Notifier mon client par email"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 417,
+   "line_beg": 446,
    "col_beg": 9,
-   "line_end": 422,
+   "line_end": 451,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project notify customer label",
@@ -4866,9 +5441,9 @@
     "BMeuJg0uY2MVeovVNQK5Hw==": "En décochant cette option, votre client ne recevra aucune notification de l'avancée de votre projet."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 435,
+   "line_beg": 464,
    "col_beg": 9,
-   "line_end": 442,
+   "line_end": 471,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar project notify customer modal warning",
@@ -4880,9 +5455,9 @@
     "RltTNFLZaA3NsiUnfH0sDQ==": "Cependant, certaines des tâches sont attribuées à votre client et nécessitent l'envoi d'emails à celui-ci. Désactiver les notifications changera aussi l'attribution de ces tâches et votre client n'en sera pas averti."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 446,
+   "line_beg": 475,
    "col_beg": 10,
-   "line_end": 457,
+   "line_end": 486,
    "col_end": 16,
    "type": "text",
    "desc": "sidebar project notify customer modal task warning",
@@ -4894,9 +5469,9 @@
     "v6Zu+7e97z2OYmTF4p4PrA==": "Êtes-vous sûr de vouloir continuer?"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 461,
+   "line_beg": 490,
    "col_beg": 9,
-   "line_end": 463,
+   "line_end": 492,
    "col_end": 15,
    "type": "text",
    "desc": "are you sure",
@@ -4908,9 +5483,9 @@
     "CF4JsqOY3g7b6ZAwfWBAGg==": "Ce que verra votre client lorsqu'il se connecte au projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 469,
+   "line_beg": 498,
    "col_beg": 8,
-   "line_end": 475,
+   "line_end": 504,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project customer view tooltip",
@@ -4922,9 +5497,9 @@
     "gofuUhe30NUXKseA+qKbNQ==": "Voir la vue de mon client"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 487,
+   "line_beg": 516,
    "col_beg": 10,
-   "line_end": 492,
+   "line_end": 521,
    "col_end": 16,
    "type": "text",
    "desc": "sidebar project customer view label",
@@ -4936,9 +5511,9 @@
     "5CkV1QNEPRDdQTru3O35Dw==": "Ajouter un client"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 512,
+   "line_beg": 541,
    "col_beg": 8,
-   "line_end": 517,
+   "line_end": 546,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project add a customer",
@@ -4950,9 +5525,9 @@
     "kijfhgj2q4NVR0iPj3IV7g==": "Cette vue est celle que verra votre client lorsqu'il devra effectuer des actions."
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 557,
+   "line_beg": 586,
    "col_beg": 6,
-   "line_end": 563,
+   "line_end": 592,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar project customer view modal info",
@@ -4964,9 +5539,9 @@
     "RZM13r5SmAgDHVgDTxQ+dg==": "Ajouter un collaborateur"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 583,
+   "line_beg": 611,
    "col_beg": 7,
-   "line_end": 588,
+   "line_end": 616,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project add collaborator label",
@@ -4978,9 +5553,9 @@
     "0ywQKSABbvePNgYOS03q0w==": "Collaborateurs du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 596,
+   "line_beg": 624,
    "col_beg": 8,
-   "line_end": 601,
+   "line_end": 629,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project collaborator list heading",
@@ -4989,12 +5564,54 @@
   },
   {
    "hashToText": {
+    "BZty9g3WNrv+MnbPPDpSoQ==": "Budget vendu"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 647,
+   "col_beg": 6,
+   "line_end": 649,
+   "col_end": 12,
+   "type": "text",
+   "desc": "sidebar budget",
+   "project": "inyo",
+   "jsfbt": "Budget vendu"
+  },
+  {
+   "hashToText": {
+    "ORvhi4PTIwYzCN7QQNuvzQ==": "Budget du projet"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 653,
+   "col_beg": 7,
+   "line_end": 655,
+   "col_end": 13,
+   "type": "text",
+   "desc": "sidebar project budget",
+   "project": "inyo",
+   "jsfbt": "Budget du projet"
+  },
+  {
+   "hashToText": {
+    "v7fom6AQjJQbvBn0igL0zg==": "{amount} €"
+   },
+   "filepath": "src/components/SidebarProjectInfos/index.js",
+   "line_beg": 659,
+   "col_beg": 7,
+   "line_end": 664,
+   "col_end": 13,
+   "type": "text",
+   "desc": "sidebar budget amount",
+   "project": "",
+   "jsfbt": "{amount} €"
+  },
+  {
+   "hashToText": {
     "FEQsZWN5sT5lTchEhNcWig==": "Deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 622,
+   "line_beg": 674,
    "col_beg": 8,
-   "line_end": 627,
+   "line_end": 679,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project deadline heading",
@@ -5006,9 +5623,9 @@
     "yuKsays7MRc0FJ6J2ZzZuQ==": "Date limite du projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 631,
+   "line_beg": 683,
    "col_beg": 9,
-   "line_end": 636,
+   "line_end": 688,
    "col_end": 15,
    "type": "text",
    "desc": "sidebar proejct deadline tooltip",
@@ -5020,9 +5637,9 @@
     "xa4T9aJVs5d5AApNfpZD0w==": "Ajouter une deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 660,
+   "line_beg": 712,
    "col_beg": 8,
-   "line_end": 665,
+   "line_end": 717,
    "col_end": 14,
    "type": "text",
    "desc": "sidebar project add a deadline label",
@@ -5034,9 +5651,9 @@
     "nH52xB7hAoZdMWbGpgHFnw==": "Marge restantes"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 700,
+   "line_beg": 752,
    "col_beg": 6,
-   "line_end": 705,
+   "line_end": 757,
    "col_end": 12,
    "type": "text",
    "desc": "sidebar proejct worked days before deadline heading",
@@ -5048,9 +5665,9 @@
     "ID7HPKtlTKMeyu5vkHZXlQ==": "Nombre de jours travaillés avant deadline"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 709,
+   "line_beg": 761,
    "col_beg": 7,
-   "line_end": 714,
+   "line_end": 766,
    "col_end": 13,
    "type": "text",
    "desc": "sidebar project worked days before deadline tooltip",
@@ -5062,9 +5679,9 @@
     "Jki2Y6p4cfpaCTxQ41bZRw==": "Copier ces tâches dans un nouveau projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 728,
+   "line_beg": 780,
    "col_beg": 7,
-   "line_end": 733,
+   "line_end": 785,
    "col_end": 13,
    "type": "text",
    "desc": "duplicate project tooltip",
@@ -5076,9 +5693,9 @@
     "uYR1hk87PyaQht9P3tSOlg==": "Dupliquer le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 747,
+   "line_beg": 799,
    "col_beg": 7,
-   "line_end": 752,
+   "line_end": 804,
    "col_end": 13,
    "type": "text",
    "desc": "duplicate project button label",
@@ -5090,9 +5707,9 @@
     "pavdXdUr565DmuS3Z9MnlQ==": "Désarchiver le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 775,
+   "line_beg": 827,
    "col_beg": 8,
-   "line_end": 777,
+   "line_end": 829,
    "col_end": 14,
    "type": "text",
    "desc": "unarchive project",
@@ -5104,9 +5721,9 @@
     "xhRGYwrRenegpYibHaLriQ==": "Supprimer le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 791,
+   "line_beg": 843,
    "col_beg": 8,
-   "line_end": 793,
+   "line_end": 845,
    "col_end": 14,
    "type": "text",
    "desc": "delete project",
@@ -5118,9 +5735,9 @@
     "VqmYRsc7GyBxLKABP9egLw==": "Archiver le projet"
    },
    "filepath": "src/components/SidebarProjectInfos/index.js",
-   "line_beg": 812,
+   "line_beg": 864,
    "col_beg": 7,
-   "line_end": 814,
+   "line_end": 866,
    "col_end": 13,
    "type": "text",
    "desc": "archive project",
@@ -5997,9 +6614,9 @@
     "5GBRSMD1wBCKyx/WbMt+TQ==": "Lier à un projet"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 284,
+   "line_beg": 283,
    "col_beg": 6,
-   "line_end": 286,
+   "line_end": 285,
    "col_end": 12,
    "type": "text",
    "desc": "link to a project",
@@ -6011,9 +6628,9 @@
     "e8wn6btvUxtacwoZA+Iwyg==": "Définir le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 294,
+   "line_beg": 293,
    "col_beg": 6,
-   "line_end": 296,
+   "line_end": 295,
    "col_end": 12,
    "type": "text",
    "desc": "task input icon tooltip",
@@ -6025,9 +6642,9 @@
     "DabhdhVVtgrWYovjlEipTw==": "`Entrée` pour créer une tâche."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 310,
+   "line_beg": 309,
    "col_beg": 7,
-   "line_end": 312,
+   "line_end": 311,
    "col_end": 13,
    "type": "text",
    "desc": "Enter to create task",
@@ -6039,9 +6656,9 @@
     "5Fj4/fEa3KneB26mwqrhng==": "↓ pour créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 316,
+   "line_beg": 315,
    "col_beg": 9,
-   "line_end": 321,
+   "line_end": 320,
    "col_end": 15,
    "type": "text",
    "desc": "notification message",
@@ -6053,9 +6670,9 @@
     "xFbeuoXyCmhu2wVfZ169QA==": "Titre de la tâche ou de la section. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 433,
+   "line_beg": 435,
    "col_beg": 9,
-   "line_end": 440,
+   "line_end": 442,
    "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder in project",
@@ -6067,9 +6684,9 @@
     "VJtgIUDKGBWDdOnmN9yHEA==": "Titre de la tâche. Commencez par \"/\" pour changer le type de tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 442,
+   "line_beg": 444,
    "col_beg": 9,
-   "line_end": 448,
+   "line_end": 450,
    "col_end": 15,
    "type": "text",
    "desc": "focused task input placeholder",
@@ -6081,9 +6698,9 @@
     "yRfe5GzJEatV3OwaTjyFEw==": "Ajouter une tâche ou créer un section."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 451,
+   "line_beg": 453,
    "col_beg": 8,
-   "line_end": 456,
+   "line_end": 458,
    "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder in project",
@@ -6095,9 +6712,9 @@
     "Jfg2NGSco6/jhBpoOckN1w==": "Ajouter une tâche."
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 458,
+   "line_beg": 460,
    "col_beg": 8,
-   "line_end": 463,
+   "line_end": 465,
    "col_end": 14,
    "type": "text",
    "desc": "unfocused task input placeholder",
@@ -6109,9 +6726,9 @@
     "uqIC+W5oLkhdTexC1W85Dg==": "Flèche du bas pour créer un ensemble de tâches"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 474,
+   "line_beg": 476,
    "col_beg": 8,
-   "line_end": 477,
+   "line_end": 479,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -6123,9 +6740,9 @@
     "PQUt2jQseKI6eHmV/4eXmA==": "Créer une section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 484,
+   "line_beg": 486,
    "col_beg": 8,
-   "line_end": 486,
+   "line_end": 488,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -6137,9 +6754,9 @@
     "6xTdP3vzyjQ8RLeuwn1sZA==": "Touche entrée pour créer la tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 492,
+   "line_beg": 494,
    "col_beg": 7,
-   "line_end": 494,
+   "line_end": 496,
    "col_end": 13,
    "type": "text",
    "desc": "notification message",
@@ -6151,9 +6768,9 @@
     "EYBvXIPLfC+Sg+JgEohtIQ==": "créer la {sectionOrTask}"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 533,
+   "line_beg": 536,
    "col_beg": 7,
-   "line_end": 552,
+   "line_end": 555,
    "col_end": 13,
    "type": "text",
    "desc": "notification message",
@@ -6165,9 +6782,9 @@
     "tkc3hNSCTgv4MCYLPJpaJw==": "section"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 537,
+   "line_beg": 540,
    "col_beg": 10,
-   "line_end": 542,
+   "line_end": 545,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -6179,9 +6796,9 @@
     "1e2oXXx9vKXjMzI/5f0Vaw==": "tâche"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 544,
+   "line_beg": 547,
    "col_beg": 10,
-   "line_end": 549,
+   "line_end": 552,
    "col_end": 16,
    "type": "text",
    "desc": "notification message",
@@ -6193,9 +6810,9 @@
     "OwotPW85Qrx4xnkP4MPfWg==": "Ajouter ou créer un tag"
    },
    "filepath": "src/components/TaskInput/index.js",
-   "line_beg": 576,
+   "line_beg": 580,
    "col_beg": 7,
-   "line_end": 578,
+   "line_end": 582,
    "col_end": 13,
    "type": "text",
    "desc": "add or create a tag",
@@ -6557,9 +7174,9 @@
     "FNnWXkrM7hA3vPBzG/OxUg==": "Cette tâche vous a été assigné"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 365,
+   "line_beg": 295,
    "col_beg": 11,
-   "line_end": 370,
+   "line_end": 300,
    "col_end": 17,
    "type": "text",
    "desc": "this task is assigned to you",
@@ -6571,9 +7188,9 @@
     "TNg0g9/rqIBL5sU4Qx7Jtg==": "Choisir un titre pour cette tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 393,
+   "line_beg": 323,
    "col_beg": 8,
-   "line_end": 398,
+   "line_end": 328,
    "col_end": 14,
    "type": "text",
    "desc": "task placeholder name",
@@ -6585,9 +7202,9 @@
     "5u/f09snKvkyQ1LKDHLpsA==": "Jour planifié"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 417,
+   "line_beg": 347,
    "col_beg": 8,
-   "line_end": 419,
+   "line_end": 349,
    "col_end": 14,
    "type": "text",
    "desc": "Planned day",
@@ -6599,9 +7216,9 @@
     "RrL6CmQzt+DS6qUtN9B4rQ==": "Ouvrir le projet"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 443,
+   "line_beg": 373,
    "col_beg": 9,
-   "line_end": 445,
+   "line_end": 375,
    "col_end": 15,
    "type": "text",
    "desc": "open project",
@@ -6613,9 +7230,9 @@
     "dkh9670XE2tzpfITWmPKZg==": "Client responsable de la tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 468,
+   "line_beg": 398,
    "col_beg": 10,
-   "line_end": 473,
+   "line_end": 403,
    "col_end": 16,
    "type": "text",
    "desc": "client assigned to task",
@@ -6627,9 +7244,9 @@
     "I9kOFQ2aWdWtdEYILK6Q6g==": "Collaborateur responsable de la tâche"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 526,
+   "line_beg": 456,
    "col_beg": 10,
-   "line_end": 532,
+   "line_end": 462,
    "col_end": 16,
    "type": "text",
    "desc": "Collaborator assigned to task",
@@ -6641,9 +7258,9 @@
     "17IyZBB4fTfHe5kW/X9e5w==": "Fichiers joints"
    },
    "filepath": "src/components/TaskRow/index.js",
-   "line_beg": 634,
+   "line_beg": 564,
    "col_beg": 11,
-   "line_end": 639,
+   "line_end": 569,
    "col_end": 17,
    "type": "text",
    "desc": "attached files",
@@ -7194,9 +7811,9 @@
     "bRrt5b1vViqaEiMxvjdyfA==": "Durée de la tâche"
    },
    "filepath": "src/components/UnitInput/index.js",
-   "line_beg": 139,
+   "line_beg": 140,
    "col_beg": 8,
-   "line_end": 141,
+   "line_end": 142,
    "col_end": 14,
    "type": "text",
    "desc": "task duration",
@@ -7208,9 +7825,9 @@
     "WGB4try42w5d97hqUrQ5Mw==": "Changer l'unité de temps"
    },
    "filepath": "src/components/UnitInput/index.js",
-   "line_beg": 188,
+   "line_beg": 213,
    "col_beg": 8,
-   "line_end": 190,
+   "line_end": 215,
    "col_end": 14,
    "type": "text",
    "desc": "change time unit",
@@ -7222,9 +7839,9 @@
     "2715v0MIrtV97ePELMOJzw==": "j"
    },
    "filepath": "src/components/UnitInput/index.js",
-   "line_beg": 200,
+   "line_beg": 225,
    "col_beg": 9,
-   "line_end": 202,
+   "line_end": 227,
    "col_end": 15,
    "type": "text",
    "desc": "day supershort",
@@ -7236,9 +7853,9 @@
     "2715v0MIrtV97ePELMOJzw==": "j"
    },
    "filepath": "src/components/UnitInput/index.js",
-   "line_beg": 209,
+   "line_beg": 234,
    "col_beg": 10,
-   "line_end": 214,
+   "line_end": 239,
    "col_end": 16,
    "type": "text",
    "desc": "day supershort",
@@ -7250,9 +7867,9 @@
     "gFFcv3gSdxZk3NFM3z+mqQ==": "Valider le temps et marquer comme fait"
    },
    "filepath": "src/components/UnitInput/index.js",
-   "line_beg": 223,
+   "line_beg": 248,
    "col_beg": 8,
-   "line_end": 228,
+   "line_end": 253,
    "col_end": 14,
    "type": "text",
    "desc": "confirm task duration",
@@ -9938,9 +10555,9 @@
     "O7wWNxU3xU1rENuc5kWc7Q==": "Bonjour"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 92,
+   "line_beg": 90,
    "col_beg": 2,
-   "line_end": 94,
+   "line_end": 92,
    "col_end": 8,
    "type": "text",
    "desc": "Hello",
@@ -9952,9 +10569,9 @@
     "f7nudWeb2fC1Tk9VlYl37g==": "Les tâches {=rouges} sont celles dont vous êtes responsable."
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 111,
+   "line_beg": 109,
    "col_beg": 5,
-   "line_end": 114,
+   "line_end": 112,
    "col_end": 11,
    "type": "text",
    "desc": "customer info about task",
@@ -9966,9 +10583,9 @@
     "00ynEY8XjfYv/pawKwwRIw==": "rouges"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 112,
+   "line_beg": 110,
    "col_beg": 17,
-   "line_end": 112,
+   "line_end": 110,
    "col_end": 34,
    "type": "text",
    "desc": "In the phrase: \"Les tâches {=rouges} sont celles dont vous êtes responsable.\"",
@@ -9980,9 +10597,9 @@
     "ytVz8JD9DYU9kL3kivRvUA==": "À quoi sert cette plateforme ?"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 118,
+   "line_beg": 116,
    "col_beg": 6,
-   "line_end": 120,
+   "line_end": 118,
    "col_end": 12,
    "type": "text",
    "desc": "what's inyo about",
@@ -9994,9 +10611,9 @@
     "DqQ+Qw5/e0mBNHW1l8tIpQ==": "https://inyo.pro"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 126,
+   "line_beg": 124,
    "col_beg": 12,
-   "line_end": 126,
+   "line_end": 124,
    "col_end": 52,
    "type": "text",
    "desc": "inyo pro link",

@@ -671,7 +671,6 @@ export const GET_PROJECT_ACTIVITY = gql`
 			from {
 				... on User {
 					id
-					email
 					firstName
 					lastName
 				}
@@ -685,7 +684,12 @@ export const GET_PROJECT_ACTIVITY = gql`
 			subject {
 				... on User {
 					id
-					email
+					firstName
+					lastName
+				}
+				... on Customer {
+					id
+					name
 					firstName
 					lastName
 				}

@@ -2531,17 +2531,17 @@
     }
    ]
   },
-  "pkaJcskuByWeA2iq56wd1g==": {
+  "roMx/0StUVgPfVpdayC2Cw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Avenant à facturer [budget]}{=[amendment]€}",
+     "translation": "{=Avenant à facturer [budget]}{=[amendment] €}",
      "variations": {}
     }
    ]
   },
-  "ZBsYjC10C5KTcm2LRuy1FQ==": {
+  "iWdn9ttfxT4xiwFwK5MNyg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -2571,7 +2571,7 @@
     }
    ]
   },
-  "hlDRuAK6i0ugMwha5iCUhA==": {
+  "edgdYSPmxhSTKQoFp3+BRw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7247,6 +7247,36 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "pkaJcskuByWeA2iq56wd1g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Avenant à facturer [budget]}{=[amendment]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "ZBsYjC10C5KTcm2LRuy1FQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amount to amend {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "hlDRuAK6i0ugMwha5iCUhA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amendment}",
      "variations": {}
     }
    ]

@@ -3857,7 +3857,7 @@
   },
   {
    "hashToText": {
-    "pkaJcskuByWeA2iq56wd1g==": "{=Avenant à facturer [budget]}{=[amendment]€}"
+    "roMx/0StUVgPfVpdayC2Cw==": "{=Avenant à facturer [budget]}{=[amendment] €}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
    "line_beg": 480,
@@ -3867,11 +3867,11 @@
    "type": "text",
    "desc": "amount to amend",
    "project": "",
-   "jsfbt": "{=Avenant à facturer [budget]}{=[amendment]€}"
+   "jsfbt": "{=Avenant à facturer [budget]}{=[amendment] €}"
   },
   {
    "hashToText": {
-    "ZBsYjC10C5KTcm2LRuy1FQ==": "Avenant à facturer {budget}"
+    "iWdn9ttfxT4xiwFwK5MNyg==": "Avenant à facturer {budget}"
    },
    "filepath": "src/components/ProjectBudget/index.js",
    "line_beg": 481,
@@ -3879,7 +3879,7 @@
    "line_end": 496,
    "col_end": 21,
    "type": "text",
-   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=[amendment]€}\"",
+   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=[amendment] €}\"",
    "project": "",
    "jsfbt": "Avenant à facturer {budget}"
   },
@@ -3913,7 +3913,7 @@
   },
   {
    "hashToText": {
-    "hlDRuAK6i0ugMwha5iCUhA==": "{amendment} €"
+    "edgdYSPmxhSTKQoFp3+BRw==": "{amendment} €"
    },
    "filepath": "src/components/ProjectBudget/index.js",
    "line_beg": 497,
@@ -3921,7 +3921,7 @@
    "line_end": 502,
    "col_end": 20,
    "type": "text",
-   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=[amendment]€}\"",
+   "desc": "In the phrase: \"{=Avenant à facturer [budget]}{=[amendment] €}\"",
    "project": "",
    "jsfbt": "{amendment} €"
   },
@@ -10555,9 +10555,9 @@
     "O7wWNxU3xU1rENuc5kWc7Q==": "Bonjour"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 92,
+   "line_beg": 90,
    "col_beg": 2,
-   "line_end": 94,
+   "line_end": 92,
    "col_end": 8,
    "type": "text",
    "desc": "Hello",
@@ -10569,9 +10569,9 @@
     "f7nudWeb2fC1Tk9VlYl37g==": "Les tâches {=rouges} sont celles dont vous êtes responsable."
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 111,
+   "line_beg": 109,
    "col_beg": 5,
-   "line_end": 114,
+   "line_end": 112,
    "col_end": 11,
    "type": "text",
    "desc": "customer info about task",
@@ -10583,9 +10583,9 @@
     "00ynEY8XjfYv/pawKwwRIw==": "rouges"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 112,
+   "line_beg": 110,
    "col_beg": 17,
-   "line_end": 112,
+   "line_end": 110,
    "col_end": 34,
    "type": "text",
    "desc": "In the phrase: \"Les tâches {=rouges} sont celles dont vous êtes responsable.\"",
@@ -10597,9 +10597,9 @@
     "ytVz8JD9DYU9kL3kivRvUA==": "À quoi sert cette plateforme ?"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 118,
+   "line_beg": 116,
    "col_beg": 6,
-   "line_end": 120,
+   "line_end": 118,
    "col_end": 12,
    "type": "text",
    "desc": "what's inyo about",
@@ -10611,9 +10611,9 @@
     "DqQ+Qw5/e0mBNHW1l8tIpQ==": "https://inyo.pro"
    },
    "filepath": "src/screens/Customer/Tasks/index.js",
-   "line_beg": 126,
+   "line_beg": 124,
    "col_beg": 12,
-   "line_end": 126,
+   "line_end": 124,
    "col_end": 52,
    "type": "text",
    "desc": "inyo pro link",

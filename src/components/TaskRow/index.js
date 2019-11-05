@@ -252,7 +252,7 @@ function TaskRow({
 		= item.status === 'FINISHED' && !isCustomerTask(item.type);
 
 	return (
-		<div ref={forwardedRef}>
+		<div ref={forwardedRef} id={`task-${item.type}`}>
 			<TaskContainer noData={noData} isDraggable={isDraggable}>
 				<TaskAdd />
 				<TaskIcon

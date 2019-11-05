@@ -460,10 +460,10 @@ const ActivityFeed = ({projectId}) => {
 				return false;
 			}
 		}
-		if (event.subject && peopleFilter[event.subject.id]) {
-			return false;
-		}
-		if (event.from && peopleFilter[event.from.id]) {
+		if (
+			(!event.subject || peopleFilter[event.subject.id])
+			&& (!event.from || peopleFilter[event.from.id])
+		) {
 			return false;
 		}
 		return true;

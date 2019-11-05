@@ -340,7 +340,7 @@ export const EVENT_TYPES = [
 	{
 		type: 'UPDATED_TASK',
 		get name() {
-			return fbt('tâche mise à jour', 'UPDATED_TASK event type name');
+			return fbt('tâche mise-à-jour', 'UPDATED_TASK event type name');
 		},
 	},
 	{
@@ -364,13 +364,13 @@ export const EVENT_TYPES = [
 	{
 		type: 'CREATED_PROJECT',
 		get name() {
-			return fbt('projet crée', 'CREATED_PROJECT event type name');
+			return fbt('projet créé', 'CREATED_PROJECT event type name');
 		},
 	},
 	{
 		type: 'UPDATED_PROJECT',
 		get name() {
-			return fbt('projet mis à jour', 'UPDATED_PROJECT event type name');
+			return fbt('projet mis-à-jour', 'UPDATED_PROJECT event type name');
 		},
 	},
 	{
@@ -404,7 +404,7 @@ export const EVENT_TYPES = [
 		type: 'UPDATED_SECTION',
 		get name() {
 			return fbt(
-				'section mise à jour',
+				'section mise-à-jour',
 				'UPDATED_SECTION event type name',
 			);
 		},

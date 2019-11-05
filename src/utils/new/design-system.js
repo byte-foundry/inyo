@@ -543,6 +543,7 @@ export const Main = styled('div')`
 	justify-content: space-between;
 	flex: 1;
 	padding: 1rem;
+	padding-bottom: 4rem;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;
@@ -1045,5 +1046,27 @@ export const Dropdown = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: calc(100% - 10px);
+	}
+`;
+
+export const CheckBoxFakeLabel = styled('div')`
+	margin-left: 10px;
+`;
+
+export const CheckBoxLabel = styled('label')`
+	font-size: 13px;
+	margin: ${props => (props.condensed ? '0' : '0.5em 0')};
+	color: ${props => (props.color ? props.color : primaryPurple)};
+	cursor: pointer;
+
+	display: flex;
+	align-items: center;
+
+	input[type='checkbox'] {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
 	}
 `;

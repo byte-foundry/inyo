@@ -6,11 +6,21 @@ import {Link} from 'react-router-dom';
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
 import {EVENT_TYPES, ITEM_TYPES} from '../../utils/constants';
-import {accentGrey, LoadingLogo, primaryGrey} from '../../utils/content';
+import {accentGrey, LoadingLogo} from '../../utils/content';
 import {formatFullName, isCustomerTask} from '../../utils/functions';
-import {A, P} from '../../utils/new/design-system';
+import {
+	A,
+	CheckBoxFakeLabel,
+	CheckBoxLabel,
+	lightGrey,
+	P,
+	primaryBlack,
+	primaryGrey,
+	SubHeading,
+} from '../../utils/new/design-system';
 import {GET_PROJECT_ACTIVITY, GET_PROJECT_INFOS} from '../../utils/queries';
 import useLocalStorage from '../../utils/useLocalStorage';
+import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 
 const Feed = styled('div')`
@@ -23,17 +33,35 @@ const EventTextContainer = styled('span')`
 	display: grid;
 	grid-template-columns: 40px 1fr;
 	align-items: self-start;
-	flex: 1;
+	flex: 0 1 auto;
+`;
+
+const EventInfo = styled('span')`
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 `;
 
 const EventRow = styled('div')`
 	display: flex;
-	padding: 10px 0;
+	margin-bottom: 0.5rem;
 	font-size: 0.85rem;
 	line-height: 1.4;
 `;
 
-const EventTime = styled('time')``;
+const EventSpace = styled('div')`
+	display: flex;
+	height: 1px;
+	border-top: 1px dotted lightGrey;
+	flex: 1 1 10px;
+	margin: 0 1.2rem;
+	align-self: center;
+`;
+
+const EventTime = styled('time')`
+	display: flex;
+	flex: 0 0 auto;
+`;
 
 const ObjectLink = A.withComponent(Link);
 
@@ -377,7 +405,7 @@ const EventText = ({
 	return (
 		<EventTextContainer>
 			<MaterialIcon icon={icon} size="tiny" color={accentGrey} />
-			<span>
+			<EventInfo>
 				{from
 					&& formatFullName(
 						from.title,
@@ -387,7 +415,7 @@ const EventText = ({
 				{action}
 				{subjectName}
 				{subjectOnObject} {objectName}.
-			</span>
+			</EventInfo>
 		</EventTextContainer>
 	);
 };
@@ -395,17 +423,16 @@ const EventText = ({
 const EventList = styled('ul')`
 	margin: 0;
 	padding: 0;
-	margin-right: 20px;
+	margin-right: 4rem;
 	flex: 1;
 `;
 
 const FilterCard = styled('div')`
-	margin: 10px 0;
-	padding: 10px;
-`;
+	margin-bottom: 1rem;
 
-const FilterCardHeading = styled('span')`
-	text-decoration: underline;
+	${SubHeading} {
+		margin-bottom: 1rem;
+	}
 `;
 
 const FilterOption = styled('label')`
@@ -494,6 +521,7 @@ const ActivityFeed = ({projectId}) => {
 							key={event.id}
 							{...event}
 						/>
+						<EventSpace />
 						<EventTime datetime={event.createdAt}>
 							{moment(event.createdAt).calendar()}
 						</EventTime>
@@ -503,55 +531,114 @@ const ActivityFeed = ({projectId}) => {
 
 			<div style={{flexBasis: '300px'}}>
 				<FilterCard>
-					<FilterCardHeading>Acteurs du projet</FilterCardHeading>
+					<SubHeading>Acteurs du projet</SubHeading>
 					{Object.values(people).map(person => (
 						<FilterOption key={person.id}>
-							<input
-								type="checkbox"
+							<CheckBoxLabel
+								color={primaryBlack}
+								condensed
 								checked={!peopleFilter[person.id]}
-								onChange={event => setPeopleFilter({
-									...peopleFilter,
-									[person.id]: !event.target.checked,
-								})
-								}
-							/>
-							{person.firstName} {person.lastName}
+							>
+								<input
+									type="checkbox"
+									checked={!peopleFilter[person.id]}
+									onChange={event => setPeopleFilter({
+										...peopleFilter,
+										[person.id]: !event.target.checked,
+									})
+									}
+								/>
+								{peopleFilter[person.id] ? (
+									<IconButton
+										icon="check_box_outline_blank"
+										size="tiny"
+										color={primaryBlack}
+									/>
+								) : (
+									<IconButton
+										icon="check_box"
+										size="tiny"
+										color={primaryBlack}
+									/>
+								)}
+								<CheckBoxFakeLabel>
+									{person.firstName} {person.lastName}
+								</CheckBoxFakeLabel>
+							</CheckBoxLabel>
 						</FilterOption>
 					))}
 				</FilterCard>
 
 				<FilterCard>
-					<FilterCardHeading>Actions</FilterCardHeading>
+					<SubHeading>Actions</SubHeading>
 					{EVENT_TYPES.map(({name, type}) => (
 						<FilterOption key={type}>
-							<input
-								type="checkbox"
+							<CheckBoxLabel
+								color={primaryBlack}
+								condensed
 								checked={!eventTypesFilter[type]}
-								onChange={event => setEventTypesFilter({
-									...eventTypesFilter,
-									[type]: !event.target.checked,
-								})
-								}
-							/>
-							{name}
+							>
+								<input
+									type="checkbox"
+									checked={!eventTypesFilter[type]}
+									onChange={event => setEventTypesFilter({
+										...eventTypesFilter,
+										[type]: !event.target.checked,
+									})
+									}
+								/>
+								{eventTypesFilter[type] ? (
+									<IconButton
+										icon="check_box_outline_blank"
+										size="tiny"
+										color={primaryBlack}
+									/>
+								) : (
+									<IconButton
+										icon="check_box"
+										size="tiny"
+										color={primaryBlack}
+									/>
+								)}
+								<CheckBoxFakeLabel>{name}</CheckBoxFakeLabel>
+							</CheckBoxLabel>
 						</FilterOption>
 					))}
 				</FilterCard>
 
 				<FilterCard>
-					<FilterCardHeading>Type de tâche</FilterCardHeading>
+					<SubHeading>Type de tâche</SubHeading>
 					{ITEM_TYPES.map(({name, type}) => (
 						<FilterOption key={type}>
-							<input
-								type="checkbox"
+							<CheckBoxLabel
+								color={primaryBlack}
+								condensed
 								checked={!itemTypesFilter[type]}
-								onChange={event => setItemTypesFilter({
-									...itemTypesFilter,
-									[type]: !event.target.checked,
-								})
-								}
-							/>
-							{name}
+							>
+								<input
+									type="checkbox"
+									checked={!itemTypesFilter[type]}
+									onChange={event => setItemTypesFilter({
+										...itemTypesFilter,
+										[type]: !event.target.checked,
+									})
+									}
+								/>
+								{itemTypesFilter[type] ? (
+									<IconButton
+										icon="check_box_outline_blank"
+										size="tiny"
+										color={primaryBlack}
+									/>
+								) : (
+									<IconButton
+										icon="check_box"
+										size="tiny"
+										color={primaryBlack}
+									/>
+								)}
+								<CheckBoxFakeLabel>{name}</CheckBoxFakeLabel>
+							</CheckBoxLabel>
 						</FilterOption>
 					))}
 				</FilterCard>

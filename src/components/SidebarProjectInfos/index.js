@@ -20,6 +20,8 @@ import {
 	Aside,
 	BigNumber,
 	Button,
+	CheckBoxFakeLabel,
+	CheckBoxLabel,
 	DateContainer,
 	P,
 	primaryGrey,
@@ -72,28 +74,6 @@ const Notice = styled(P)`
 	padding: 10px;
 	text-align: center;
 	margin: 0;
-`;
-
-const CheckBoxFakeLabel = styled('div')`
-	margin-left: 10px;
-`;
-
-const CheckBoxLabel = styled('label')`
-	font-size: 13px;
-	margin: 0.5em 0;
-	color: ${primaryPurple};
-	cursor: pointer;
-
-	display: flex;
-	align-items: center;
-
-	input[type='checkbox'] {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-		height: 0;
-		width: 0;
-	}
 `;
 
 const SidebarLink = styled('div')`

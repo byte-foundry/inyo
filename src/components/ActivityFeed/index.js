@@ -12,6 +12,7 @@ import {
 	A,
 	CheckBoxFakeLabel,
 	CheckBoxLabel,
+	Heading,
 	P,
 	primaryBlack,
 	primaryGrey,
@@ -581,6 +582,10 @@ const FilterCard = styled('div')`
 	}
 `;
 
+const FilterHeading = styled(Heading.withComponent('h2'))`
+	font-size: 1rem;
+`;
+
 const ActivityFeed = ({projectId}) => {
 	const {data, loading, error} = useQuery(GET_PROJECT_ACTIVITY, {
 		variables: {projectId},
@@ -632,6 +637,7 @@ const ActivityFeed = ({projectId}) => {
 		if (
 			(!event.subject || peopleFilter[event.subject.id])
 			&& (!event.from || peopleFilter[event.from.id])
+			&& (event.subject || event.from)
 		) {
 			return false;
 		}
@@ -672,6 +678,19 @@ const ActivityFeed = ({projectId}) => {
 			</EventList>
 
 			<div style={{flexBasis: '300px'}}>
+				<FilterHeading>
+					<fbt desc="filters title">
+						Filtres (Affichés :{' '}
+						<fbt:param name="filteredEventsCount">
+							{filteredActivity.length}
+						</fbt:param>{' '}
+						/{' '}
+						<fbt:param name="eventsCount">
+							{data.activity.length}
+						</fbt:param>)
+					</fbt>
+				</FilterHeading>
+
 				<FilterCard>
 					<SubHeading>
 						<fbt desc="project people filter title">

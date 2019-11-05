@@ -1311,26 +1311,6 @@
     }
    ]
   },
-  "/U17hovEAazDGh01X2uAzQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{timeItTook} days",
-     "variations": {}
-    }
-   ]
-  },
-  "xjFoy8C8nGf+c9I/neBmDg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "1 day",
-     "variations": {}
-    }
-   ]
-  },
   "HLV6gRDo4cU1fnr1mVGuig==": {
    "tokens": [],
    "types": [],
@@ -2551,17 +2531,17 @@
     }
    ]
   },
-  "AiiiPx1HXqiasDLDrHbMuQ==": {
+  "pkaJcskuByWeA2iq56wd1g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Avenant à facturer [budget]}{amendment}",
+     "translation": "{=Avenant à facturer [budget]}{=[amendment]€}",
      "variations": {}
     }
    ]
   },
-  "KbyRJRn4tU5y/PIz7ScLbQ==": {
+  "ZBsYjC10C5KTcm2LRuy1FQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -2587,6 +2567,16 @@
    "translations": [
     {
      "translation": "",
+     "variations": {}
+    }
+   ]
+  },
+  "hlDRuAK6i0ugMwha5iCUhA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${amendment}",
      "variations": {}
     }
    ]
@@ -3651,6 +3641,26 @@
     }
    ]
   },
+  "RZM13r5SmAgDHVgDTxQ+dg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "0ywQKSABbvePNgYOS03q0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's collaborators",
+     "variations": {}
+    }
+   ]
+  },
   "BZty9g3WNrv+MnbPPDpSoQ==": {
    "tokens": [],
    "types": [],
@@ -3677,26 +3687,6 @@
    "translations": [
     {
      "translation": "${amount}",
-     "variations": {}
-    }
-   ]
-  },
-  "RZM13r5SmAgDHVgDTxQ+dg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Add a collaborator",
-     "variations": {}
-    }
-   ]
-  },
-  "0ywQKSABbvePNgYOS03q0w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Project's collaborators",
      "variations": {}
     }
    ]
@@ -7257,6 +7247,46 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "/U17hovEAazDGh01X2uAzQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{timeItTook} days",
+     "variations": {}
+    }
+   ]
+  },
+  "xjFoy8C8nGf+c9I/neBmDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1 day",
+     "variations": {}
+    }
+   ]
+  },
+  "AiiiPx1HXqiasDLDrHbMuQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Avenant à facturer [budget]}{amendment}",
+     "variations": {}
+    }
+   ]
+  },
+  "KbyRJRn4tU5y/PIz7ScLbQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amount to amend {budget}",
      "variations": {}
     }
    ]

@@ -494,9 +494,12 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 									</HelpAndTooltip>
 								</fbt:param>
 							</BudgetLabel>
-							<fbt:param name="amendment">
-								<BudgetInfo>{amendment} €</BudgetInfo>
-							</fbt:param>
+							<BudgetInfo>
+								<fbt:param name="amendment">
+									{amendment}
+								</fbt:param>{' '}
+								€
+							</BudgetInfo>
 						</fbt>
 					</BudgetInfoContainer>
 				</FlexColumn>

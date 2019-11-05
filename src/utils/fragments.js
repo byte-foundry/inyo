@@ -27,6 +27,7 @@ export const SHORT_TASK_FRAGMENT = gql`
 		isFocused
 		scheduledFor
 		schedulePosition
+		dailyRate
 		owner {
 			id
 		}

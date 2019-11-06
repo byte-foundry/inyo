@@ -116,7 +116,7 @@ const FlexRowHeader = styled(FlexRow)`
 	color: ${accentGrey};
 	font-size: 1rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
 		justify-content: flex-end;
 
@@ -138,7 +138,7 @@ const FlexRowSection = styled(FlexRow)`
 
 	font-size: 1.2rem;
 
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		grid-template-columns: 1fr 40px 40px;
 	}
 `;
@@ -194,7 +194,7 @@ const BudgetSectionName = styled('div')`
 `;
 
 const BudgetSectionBudget = styled('div')`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 0.7rem;
 	}
 `;
@@ -329,7 +329,7 @@ const BudgetSections = styled('div')`
 `;
 
 const BudgetHeader = styled(FlexRow)`
-	@media (max-width: ${BREAKPOINTS}px) {
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column;
 	}
 `;

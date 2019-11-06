@@ -28,11 +28,6 @@ const Feed = styled('div')`
 	display: flex;
 	color: ${primaryGrey};
 
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		flex-direction: column;
-		margin-bottom: 2rem;
-	}
-
 	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		flex-direction: column;
 		margin-bottom: 2rem;
@@ -51,11 +46,6 @@ const EventInfo = styled('span')`
 	white-space: nowrap;
 	overflow: hidden;
 
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		text-overflow: initial;
-		white-space: normal;
-	}
-
 	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		text-overflow: initial;
 		white-space: normal;
@@ -67,11 +57,6 @@ const EventRow = styled('div')`
 	margin-bottom: 0.5rem;
 	font-size: 0.85rem;
 	line-height: 1.4;
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		flex-direction: column-reverse;
-		margin-bottom: 1.5rem;
-	}
 
 	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		flex-direction: column-reverse;
@@ -91,12 +76,6 @@ const EventSpace = styled('div')`
 const EventTime = styled('time')`
 	display: flex;
 	flex: 0 0 auto;
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		padding-left: 40px;
-		font-size: 0.7rem;
-		color: ${primaryBlack};
-	}
 
 	@media (max-width: ${BREAKPOINTS.desktopSmall}px) {
 		padding-left: 40px;

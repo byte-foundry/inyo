@@ -20,6 +20,8 @@ import {
 	Aside,
 	BigNumber,
 	Button,
+	CheckBoxFakeLabel,
+	CheckBoxLabel,
 	DateContainer,
 	P,
 	primaryGrey,
@@ -72,38 +74,6 @@ const Notice = styled(P)`
 	padding: 10px;
 	text-align: center;
 	margin: 0;
-`;
-
-const Checked = styled('div')``;
-const NotChecked = styled('div')``;
-
-const CheckBoxFakeLabel = styled('div')`
-	margin-left: 10px;
-`;
-
-const CheckBoxLabel = styled('label')`
-	font-size: 13px;
-	margin: 0.5em 0;
-	color: ${primaryPurple};
-	cursor: pointer;
-
-	display: flex;
-	align-items: center;
-
-	input[type='checkbox'] {
-		position: absolute;
-		opacity: 0;
-		cursor: pointer;
-		height: 0;
-		width: 0;
-	}
-
-	${NotChecked} {
-		display: ${props => (props.checked ? 'none' : 'inline-flex')};
-	}
-	${Checked} {
-		display: ${props => (props.checked ? 'inline-flex' : 'none')};
-	}
 `;
 
 const SidebarLink = styled('div')`
@@ -224,11 +194,6 @@ const SidebarProjectInfos = ({
 		history.push(`/app/tasks/?${newQuery.toString()}`);
 	}
 
-	const timeItTookPending = project.sections.reduce(
-		(sectionsSum, section) => sectionsSum
-			+ section.items.reduce((itemsSum, item) => itemsSum + item.unit, 0),
-		0,
-	);
 	const taskArray = project.sections
 		.map(s => s.items.filter(i => i.status === 'PENDING'))
 		.flat();
@@ -359,6 +324,32 @@ const SidebarProjectInfos = ({
 						/>
 					</SidebarLink>
 				</Tooltip>
+				<Tooltip
+					label={
+						<fbt desc="sidebar project activity link tooltip">
+							Historique des activités du projet
+						</fbt>
+					}
+				>
+					<SidebarLink
+						onClick={() => setView('activity')}
+						active={activeView === 'activity'}
+					>
+						<IconButton
+							icon="history"
+							size="tiny"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project activity link label"
+								>
+									Activité
+								</fbt>
+							}
+							current={activeView === 'activity'}
+						/>
+					</SidebarLink>
+				</Tooltip>
 			</SubSection>
 			<SubSection>
 				{project.customer ? (
@@ -428,20 +419,19 @@ const SidebarProjectInfos = ({
 										});
 									}}
 								/>
-								<Checked>
+								{project.notifyActivityToCustomer ? (
 									<IconButton
 										icon="check_box"
 										size="tiny"
 										color={primaryPurple}
 									/>
-								</Checked>
-								<NotChecked>
+								) : (
 									<IconButton
 										icon="check_box_outline_blank"
 										size="tiny"
 										color={primaryPurple}
 									/>
-								</NotChecked>
+								)}
 								<CheckBoxFakeLabel>
 									<fbt
 										project="inyo"

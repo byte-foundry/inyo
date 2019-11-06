@@ -406,28 +406,6 @@ export const REMOVE_PROJECT = gql`
 	}
 `;
 
-export const UNREMOVE_PROJECT = gql`
-	${PROJECT_CUSTOMER_FRAGMENT}
-	${ITEM_FRAGMENT}
-	${PROJECT_SHORT_FRAGMENT}
-
-	mutation unremoveProject($projectId: ID!) {
-		unremoveProject(id: $projectId) {
-			...ProjectShortFragment
-			customer {
-				...ProjectCustomerFragment
-			}
-			sections {
-				id
-				items {
-					id
-					...ItemFragment
-				}
-			}
-		}
-	}
-`;
-
 export const FINISH_PROJECT = gql`
 	mutation finishProject($projectId: ID!) {
 		finishProject(id: $projectId) {

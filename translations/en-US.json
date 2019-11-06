@@ -1,6 +1,446 @@
 {
  "fb-locale": "en-US",
  "translations": {
+  "UdYA74bGF1X2Nsw3nNCb6w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "did",
+     "variations": {}
+    }
+   ]
+  },
+  "FpcLLvZekZ0mMbObsPV7CQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "commented the task",
+     "variations": {}
+    }
+   ]
+  },
+  "GgJM4EY/QordX9pchDp0tw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "viewed the project",
+     "variations": {}
+    }
+   ]
+  },
+  "RxHkN7yN7nYszzBOaNY0tQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed document",
+     "variations": {}
+    }
+   ]
+  },
+  "X+4B0AHPUMFuIiy+qKP0AA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added document",
+     "variations": {}
+    }
+   ]
+  },
+  "ZNDtqOQeGjKx3QtGvXEdDA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "completed the task",
+     "variations": {}
+    }
+   ]
+  },
+  "Ls0AAf+/FzocMS/kj+gMIw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "unchecked task",
+     "variations": {}
+    }
+   ]
+  },
+  "67UYisLl0eUD3/25aapKkg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added customer",
+     "variations": {}
+    }
+   ]
+  },
+  "e/K/+gILK7KX6LuI8kgi3w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "jtYKUPOXo9jVuBDCnLMmoA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed customer",
+     "variations": {}
+    }
+   ]
+  },
+  "wftxWYE8MHjazCRh72kKwg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "from task",
+     "variations": {}
+    }
+   ]
+  },
+  "nYeuo3Afg7WwtfzadN31Og==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "to project",
+     "variations": {}
+    }
+   ]
+  },
+  "rEiwQPc+X8lpEa1x91jM6g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "from project",
+     "variations": {}
+    }
+   ]
+  },
+  "eFCkUwBCW0jL42AgLCojYQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "Aw7V4hZzRFGOZGjUGrWnBQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "to project",
+     "variations": {}
+    }
+   ]
+  },
+  "6t2ZmopNk1chufLdnnHQ/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "/V3iK+L31yiTzAGpy1H+MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "from project",
+     "variations": {}
+    }
+   ]
+  },
+  "xcL2taFtGHiAkJ17VGmbQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "assigned",
+     "variations": {}
+    }
+   ]
+  },
+  "ZI8OmsIDcgARqXubGftWJw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "Vq80dSYnv0/O2J3ESnWQ2w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed",
+     "variations": {}
+    }
+   ]
+  },
+  "U4lv6Ko2lgtWe4NiklO1Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "from task",
+     "variations": {}
+    }
+   ]
+  },
+  "PcaRc82OVVIfO95+yuRBHw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "created project",
+     "variations": {}
+    }
+   ]
+  },
+  "l0OZpgD975ybx1YWGDmvWw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "updated project",
+     "variations": {}
+    }
+   ]
+  },
+  "5EK5o64M0UWWl7FLBC1HiQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "archived project",
+     "variations": {}
+    }
+   ]
+  },
+  "5ua1rRlTnAAy88FqAgiZYA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "unarchived project",
+     "variations": {}
+    }
+   ]
+  },
+  "pf7ZV1AXqHqT8FbxAUqrxg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added section",
+     "variations": {}
+    }
+   ]
+  },
+  "azj07jynNxUw7zR7Bt1rQg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "updated section",
+     "variations": {}
+    }
+   ]
+  },
+  "tSQMqx2zy0xnPEC1sGi4cQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed section",
+     "variations": {}
+    }
+   ]
+  },
+  "B4cH3CWAVbM7zw67DiQY7g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added task",
+     "variations": {}
+    }
+   ]
+  },
+  "kkMlqIob+0SFBvZcgUVvzw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "updated task",
+     "variations": {}
+    }
+   ]
+  },
+  "bq/hyi1OowPXlcrg9dQQPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed task",
+     "variations": {}
+    }
+   ]
+  },
+  "EhK7imIJX0QASFxfGOvBxw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "activated customer task",
+     "variations": {}
+    }
+   ]
+  },
+  "JxhAvOcchn32ppX4EY5t+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "scheduled task",
+     "variations": {}
+    }
+   ]
+  },
+  "226WnrPj0Klt4vnkGeJAvA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "deactivated customer task",
+     "variations": {}
+    }
+   ]
+  },
+  "glX7IlyurrLRkKJHRby8jQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "unscheduled task",
+     "variations": {}
+    }
+   ]
+  },
+  "iWPFvKCQAMtFWWzJAdppsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "A reminder has been sent for task",
+     "variations": {}
+    }
+   ]
+  },
+  "xm9DVUlmCz5VJYdTSGyEiw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "canceled a reminder on task",
+     "variations": {}
+    }
+   ]
+  },
+  "H/VCdE14a41WI6wb688eFw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{objectUrl} on {taskUrl}",
+     "variations": {}
+    }
+   ]
+  },
+  "wvr36bJKI5SpnkZWjvHJ3Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No activity has been recorded for now.",
+     "variations": {}
+    }
+   ]
+  },
+  "xWRxOZm0YAQwhqy/K1Fepw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No activity corresponding to selected elements has been recorded for now.",
+     "variations": {}
+    }
+   ]
+  },
+  "Ok80wLlcbahO4fujrwCACQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Filters (Displayed : {filteredEventsCount} / {eventsCount})",
+     "variations": {}
+    }
+   ]
+  },
+  "da1d8ZuoOpq/Cl5jA5w3pg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project stakeholders",
+     "variations": {}
+    }
+   ]
+  },
+  "rMGGgALSCejlZAcK6wK+IA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Actions",
+     "variations": {}
+    }
+   ]
+  },
+  "KL6cDRHSqtLkjE+yDdT6bA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tasks type",
+     "variations": {}
+    }
+   ]
+  },
   "c+lcFfPMwayO0O5SNqYW9w==": {
    "tokens": [],
    "types": [],
@@ -1681,42 +2121,12 @@
     }
    ]
   },
-  "FpcLLvZekZ0mMbObsPV7CQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "has commented the task",
-     "variations": {}
-    }
-   ]
-  },
-  "GgJM4EY/QordX9pchDp0tw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "viewed the project",
-     "variations": {}
-    }
-   ]
-  },
   "+TSsouyNnpOuotBby5ZXPg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "has added a new document to the task",
-     "variations": {}
-    }
-   ]
-  },
-  "ZNDtqOQeGjKx3QtGvXEdDA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "completed the task",
+     "translation": "added a new document to the task",
      "variations": {}
     }
    ]
@@ -3541,6 +3951,26 @@
     }
    ]
   },
+  "WJhsWGefbuGMW3g30ZuCIw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project history",
+     "variations": {}
+    }
+   ]
+  },
+  "5mmQkZWSBGte6eyVcwqtvQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "History",
+     "variations": {}
+    }
+   ]
+  },
   "rH9wh0hUEutLLvjXj/nvVA==": {
    "tokens": [],
    "types": [],
@@ -4237,6 +4667,26 @@
    "translations": [
     {
      "translation": "1 file",
+     "variations": {}
+    }
+   ]
+  },
+  "LWszS7ZyMERr96mv8egdvg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Part of a project",
+     "variations": {}
+    }
+   ]
+  },
+  "K+PfydH1lJTFOdTguW5nhA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Create a section in a project to organize your tasks",
      "variations": {}
     }
    ]
@@ -7111,26 +7561,6 @@
     }
    ]
   },
-  "LWszS7ZyMERr96mv8egdvg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Part of a project",
-     "variations": {}
-    }
-   ]
-  },
-  "K+PfydH1lJTFOdTguW5nhA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Create a section in a project to organize your tasks",
-     "variations": {}
-    }
-   ]
-  },
   "0BRk+oCCSvNPhSgoCb9asg==": {
    "tokens": [],
    "types": [],
@@ -7247,6 +7677,296 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "zxkP3/J5nRzxDVFbUwj0RA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "scheduled task",
+     "variations": {}
+    }
+   ]
+  },
+  "VdUuKiTb0VDTfKpNFo4l8Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "unscheduled task",
+     "variations": {}
+    }
+   ]
+  },
+  "tL80NzuZ+jVL0Rtx1jaBPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "sent reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "wmar7QjaiZluknyWzaVgQQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "canceled reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "fIOgzqMZ6XFqIHu7LkaAQg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added task",
+     "variations": {}
+    }
+   ]
+  },
+  "HudPGukU86aP5LNT/z+lxg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "updated task",
+     "variations": {}
+    }
+   ]
+  },
+  "paqXe9wQKPvBEiITisUQCw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "checked task",
+     "variations": {}
+    }
+   ]
+  },
+  "qj9jnxl4d5Bk/L3atwME3g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "unchecked task",
+     "variations": {}
+    }
+   ]
+  },
+  "UnnzE0TM30weUvhd19MwBg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed task",
+     "variations": {}
+    }
+   ]
+  },
+  "62bqq9dtFkUPF+U+QbTPEQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "created project",
+     "variations": {}
+    }
+   ]
+  },
+  "OIVia7AFbNXEsDfO5QQKxA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "updated project",
+     "variations": {}
+    }
+   ]
+  },
+  "+/9t1P/1cOq0z8yaW24Ylg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "archived project",
+     "variations": {}
+    }
+   ]
+  },
+  "d+uJ4n3Ue4iTAN8iuR/mXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "unarchived project",
+     "variations": {}
+    }
+   ]
+  },
+  "wjuWslZ56aHtN8u8Gl7lHw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "posted comment",
+     "variations": {}
+    }
+   ]
+  },
+  "NBVu19F3w+zj99WvxMQN4g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added section",
+     "variations": {}
+    }
+   ]
+  },
+  "c7VfvB+NQF6rARww/4+JHA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "updated section",
+     "variations": {}
+    }
+   ]
+  },
+  "h7fcUX8Nl3mr4xk5YIb8cw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed section",
+     "variations": {}
+    }
+   ]
+  },
+  "OknqohG84hnZfe5DwCcBow==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added document(s)",
+     "variations": {}
+    }
+   ]
+  },
+  "m77iQgjJy9CXLjjJro5Trg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed document(s)",
+     "variations": {}
+    }
+   ]
+  },
+  "R2X1QHVUM3z4DxlZFdjAGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "assigned customer to task",
+     "variations": {}
+    }
+   ]
+  },
+  "OItnW2RsXP/FkYGnT/IbsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed customer from task",
+     "variations": {}
+    }
+   ]
+  },
+  "MHTEF7cfTaT1fDS0JqwJLQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "assigned customer to project",
+     "variations": {}
+    }
+   ]
+  },
+  "+YUT+YUoC5vHcT5uGP6lsg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed customer from project",
+     "variations": {}
+    }
+   ]
+  },
+  "fBtgrEgDW/SkI4mTgrYLpg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "assigned collaborator to a project",
+     "variations": {}
+    }
+   ]
+  },
+  "xlY2tpPi2KD95DQFEvdOJg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed collaborator from projet",
+     "variations": {}
+    }
+   ]
+  },
+  "ojPmugN8iri+KJ4VJE5PZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "assigned collaborator from task",
+     "variations": {}
+    }
+   ]
+  },
+  "Cd+pJGsR6PKr7WS5YH9euw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed collaborator from task",
+     "variations": {}
+    }
+   ]
+  },
+  "eB8Wh4BgNVSmiBcB/l9kLQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "VZfpXkXBzL2t2D0asNSwLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed a document from task",
      "variations": {}
     }
    ]

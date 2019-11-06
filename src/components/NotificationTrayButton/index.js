@@ -90,7 +90,9 @@ const NotificationTrayButton = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
 	const [isOpen, setOpen] = useState(false);
-	const {data, refetch, loading} = useQuery(GET_USER_NOTIFICATIONS, {
+	const {
+		data, refetch, error, loading,
+	} = useQuery(GET_USER_NOTIFICATIONS, {
 		suspend: false,
 		pollInterval: 1000 * 60,
 	});
@@ -122,6 +124,7 @@ const NotificationTrayButton = ({mobile}) => {
 			});
 		},
 	});
+
 
 	let unreadNumber = 0;
 

@@ -7,6 +7,12 @@ import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
 import {ModalContainer} from '../../utils/content';
+import SectionIconUrl, {
+	ReactComponent as SectionIcon,
+} from '../../utils/icons/section-icon.svg';
+import TaskCustomerIconValidatedUrl, {
+	ReactComponent as TaskCustomerIconValidated,
+} from '../../utils/icons/taskicon-customer-validated.svg';
 import {CREATE_TAG} from '../../utils/mutations';
 import {
 	Button,
@@ -193,7 +199,25 @@ const TaskInputCheckListContainer = styled('div')`
 	margin-left: 2em;
 `;
 
-const types = ITEM_TYPES;
+const types = [
+	...ITEM_TYPES,
+	{
+		icon: <SectionIcon />,
+		iconValidated: <TaskCustomerIconValidated />,
+		iconUrl: SectionIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'SECTION',
+		get name() {
+			return fbt('Section de projet', 'section name');
+		},
+		get description() {
+			return fbt(
+				"Créer une section pour classer les tâches d'un projet",
+				'section description',
+			);
+		},
+	},
+];
 
 const useTrackEventInput = ({focus, openedByClick, value}) => {
 	const isTypingCommand = value.startsWith('/');

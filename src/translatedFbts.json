@@ -1,9 +1,10 @@
 {
 	"en-US": {
+		"3i2EUn": "did",
 		"3icDPw": "commented the task",
 		"1NcrQt": "viewed the project",
-		"2K7MeH": "removed a document from task",
-		"1nVioi": "added a new document to the task",
+		"3KudPb": "removed document",
+		"19nf1u": "added document",
 		"1nhnd6": "completed the task",
 		"71Mjw": "unchecked task",
 		"1SV7yO": "added customer",
@@ -36,6 +37,7 @@
 		"JEDSF": "unscheduled task",
 		"1NuSvB": "A reminder has been sent for task",
 		"2NW0uZ": "canceled a reminder on task",
+		"4hidww": "{objectUrl} on {taskUrl}",
 		"390EJU": "No activity has been recorded for now.",
 		"3B1Mhc": "No activity corresponding to selected elements has been recorded for now.",
 		"2ND7zo": "Filters (Displayed : {filteredEventsCount} / {eventsCount})",
@@ -211,6 +213,7 @@
 		"3xIm7q": "Sign up",
 		"1qkY71": "How do you work?",
 		"1Pgdhe": "We need this info to send you email at the right time.",
+		"1nVioi": "added a new document to the task",
 		"1U1sdk": "assigned you to the task",
 		"W2Hva": "removed your assignement to the task",
 		"4sAuo7": "accepted to collaborate with you",

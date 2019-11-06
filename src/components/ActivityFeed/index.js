@@ -94,7 +94,9 @@ const EventText = ({
 	metadata,
 	projectId,
 }) => {
-	let action = <fbt desc="default notification action message">a effectué</fbt>;
+	let action = (
+		<fbt desc="default notification action message">a effectué</fbt>
+	);
 
 	let subjectOnObject = ' ';
 
@@ -125,7 +127,7 @@ const EventText = ({
 				project="inyo"
 				desc="remove attachement notification message"
 			>
-					a supprimé un document de la tâche
+					a supprimé le document
 			</fbt>
 		);
 		icon = 'attachment';
@@ -136,7 +138,7 @@ const EventText = ({
 				project="inyo"
 				desc="upload attachement notification message"
 			>
-					a ajouté un nouveau document sur la tâche
+					a ajouté le document
 			</fbt>
 		);
 		icon = 'attachment';
@@ -501,6 +503,28 @@ const EventText = ({
 				>
 					{object.item.name}
 				</ObjectLink>
+			);
+			break;
+		case 'File':
+			objectName = (
+				<fbt desc="file url on task url">
+					<fbt:param name="objectUrl">
+						<A href={object.url}>{object.filename}</A>
+					</fbt:param>{' '}
+						sur{' '}
+					<fbt:param name="taskUrl">
+						<ObjectLink
+							to={{
+								pathname: `/app/tasks/${object.linkedTask.id}`,
+								state: {
+									prevSearch: `?projectId=${projectId}&view=activity`,
+								},
+							}}
+						>
+							{object.linkedTask.name}
+						</ObjectLink>
+					</fbt:param>
+				</fbt>
 			);
 			break;
 		default:

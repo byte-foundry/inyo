@@ -1,6 +1,16 @@
 {
  "fb-locale": "en-US",
  "translations": {
+  "UdYA74bGF1X2Nsw3nNCb6w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "did",
+     "variations": {}
+    }
+   ]
+  },
   "FpcLLvZekZ0mMbObsPV7CQ==": {
    "tokens": [],
    "types": [],
@@ -21,22 +31,22 @@
     }
    ]
   },
-  "VZfpXkXBzL2t2D0asNSwLA==": {
+  "RxHkN7yN7nYszzBOaNY0tQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "removed a document from task",
+     "translation": "removed document",
      "variations": {}
     }
    ]
   },
-  "+TSsouyNnpOuotBby5ZXPg==": {
+  "X+4B0AHPUMFuIiy+qKP0AA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "added a new document to the task",
+     "translation": "added document",
      "variations": {}
     }
    ]
@@ -357,6 +367,16 @@
    "translations": [
     {
      "translation": "canceled a reminder on task",
+     "variations": {}
+    }
+   ]
+  },
+  "H/VCdE14a41WI6wb688eFw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{objectUrl} on {taskUrl}",
      "variations": {}
     }
    ]
@@ -2097,6 +2117,16 @@
    "translations": [
     {
      "translation": "We need this info to send you email at the right time.",
+     "variations": {}
+    }
+   ]
+  },
+  "+TSsouyNnpOuotBby5ZXPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added a new document to the task",
      "variations": {}
     }
    ]
@@ -7927,6 +7957,16 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "VZfpXkXBzL2t2D0asNSwLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed a document from task",
      "variations": {}
     }
    ]

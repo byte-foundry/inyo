@@ -727,6 +727,16 @@ export const GET_PROJECT_ACTIVITY = gql`
 						name
 					}
 				}
+				... on File {
+					id
+					filename
+					url
+					linkedTask {
+						id
+						type
+						name
+					}
+				}
 			}
 			createdAt
 		}

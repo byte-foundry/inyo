@@ -94,7 +94,7 @@ const EventText = ({
 	metadata,
 	projectId,
 }) => {
-	let action = 'a effectué';
+	let action = <fbt desc="default notification action message">a effectué</fbt>;
 
 	let subjectOnObject = ' ';
 

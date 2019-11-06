@@ -125,7 +125,6 @@ const NotificationTrayButton = ({mobile}) => {
 		},
 	});
 
-	if (error) throw error;
 
 	let unreadNumber = 0;
 

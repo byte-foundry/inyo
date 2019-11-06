@@ -116,9 +116,6 @@ export const GET_USER_INFOS = gql`
 					country
 				}
 				phone
-				siret
-				rcs
-				rm
 				vat
 			}
 			settings {
@@ -286,7 +283,6 @@ export const GET_PROJECT_INFOS = gql`
 					lastName
 					email
 				}
-				siret
 			}
 			linkedCollaborators {
 				id
@@ -323,7 +319,6 @@ export const GET_PROJECT_DATA = gql`
 					lastName
 					email
 				}
-				siret
 			}
 			customer {
 				id
@@ -389,7 +384,6 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					lastName
 					email
 				}
-				siret
 			}
 			customer {
 				id

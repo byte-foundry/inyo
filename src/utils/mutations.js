@@ -88,9 +88,6 @@ export const UPDATE_USER = gql`
 					country
 				}
 				phone
-				siret
-				rcs
-				rm
 				vat
 			}
 		}
@@ -159,9 +156,6 @@ export const UPDATE_USER_CONSTANTS = gql`
 					country
 				}
 				phone
-				siret
-				rcs
-				rm
 				vat
 			}
 		}
@@ -191,9 +185,6 @@ export const UPDATE_USER_SETTINGS = gql`
 					country
 				}
 				phone
-				siret
-				rcs
-				rm
 				vat
 			}
 			settings {
@@ -223,9 +214,6 @@ export const UPDATE_USER_COMPANY = gql`
 					country
 				}
 				phone
-				siret
-				rcs
-				rm
 				vat
 			}
 		}
@@ -391,28 +379,6 @@ export const REMOVE_PROJECT = gql`
 
 	mutation removeProject($projectId: ID!) {
 		removeProject(id: $projectId) {
-			...ProjectShortFragment
-			customer {
-				...ProjectCustomerFragment
-			}
-			sections {
-				id
-				items {
-					id
-					...ItemFragment
-				}
-			}
-		}
-	}
-`;
-
-export const UNREMOVE_PROJECT = gql`
-	${PROJECT_CUSTOMER_FRAGMENT}
-	${ITEM_FRAGMENT}
-	${PROJECT_SHORT_FRAGMENT}
-
-	mutation unremoveProject($projectId: ID!) {
-		unremoveProject(id: $projectId) {
 			...ProjectShortFragment
 			customer {
 				...ProjectCustomerFragment

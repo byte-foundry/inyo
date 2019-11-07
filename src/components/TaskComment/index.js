@@ -52,6 +52,7 @@ function TaskComment({
 				pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
 				state: {prevSearch: location.search},
 			}}
+			id="icon-meta-comment"
 		>
 			<CommentWrap>
 				<Tooltip

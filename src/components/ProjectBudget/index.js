@@ -607,6 +607,13 @@ const ProjectBudget = ({projectId}) => {
 								},
 							},
 						});
+						window.Intercom(
+							'trackEvent',
+							'budget-edited-budget-view',
+							{
+								budget: values.budget,
+							},
+						);
 					}
 					catch (err) {
 						actions.setSubmitting(false);

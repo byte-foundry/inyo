@@ -108,6 +108,12 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 					},
 				});
 
+				if (budgetFloat) {
+					window.Intercom('trackEvent', 'budget-edited-budget-view', {
+						budget: budgetFloat,
+					});
+				}
+
 				history.push(`/app/tasks?projectId=${data.createProject.id}`);
 				actions.setSubmitting(false);
 			}}

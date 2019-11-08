@@ -431,9 +431,7 @@ const TaskInput = ({
 											dueDate:
 												itemDueDate
 												&& itemDueDate.toISOString(),
-											unit: parseFloat(
-												itemUnit || 0.1 / workingTime,
-											),
+											unit: parseFloat(itemUnit),
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											tags: itemTags.map(({id}) => id),
@@ -544,7 +542,7 @@ const TaskInput = ({
 											dueDate:
 												itemDueDate
 												&& itemDueDate.toISOString(),
-											unit: parseFloat(itemUnit || 0),
+											unit: parseFloat(itemUnit),
 											linkedCustomerId:
 												itemCustomer && itemCustomer.id,
 											tags: itemTags.map(({id}) => id),

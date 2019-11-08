@@ -2,461 +2,6 @@ export const templates = {
 	en: [
 		// eslint-disable-line import/prefer-default-export
 		{
-			name: 'CARD',
-			label: 'Business card',
-			sections: [
-				{
-					name: 'Before starting',
-					items: [
-						{
-							name: 'Preparing Launch meeting',
-							unit: 0.1,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Launch meeting',
-							unit: 0.1,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Creating quote and writing requirements',
-							unit: 0.1,
-							description: '',
-						},
-						{
-							name: 'Validation of the requirements',
-							unit: 0,
-							tags: ['Important'],
-							description: '',
-							type: 'CUSTOMER',
-						},
-						{
-							name: '30% deposit',
-							unit: 0,
-							tags: ['Admin'],
-							description: '',
-							type: 'INVOICE',
-						},
-					],
-				},
-				{
-					name: 'Business card creation',
-					items: [
-						{
-							name: 'Research and conception',
-							unit: 0.25,
-							description: 'Benchmarking and visual research',
-							type: ['Design'],
-						},
-						{
-							name: 'Creation of 2 visual leads',
-							unit: 0.25,
-							type: ['Design'],
-						},
-						{
-							name: 'Design pitch',
-							unit: 0.1,
-							description:
-								'Pitch of the 2 visual leads to the client',
-						},
-						{
-							name: 'Choosing a lead',
-							unit: 0,
-							description:
-								'The client choose a lead so it can be finalized',
-							type: 'CUSTOMER',
-						},
-						{
-							name: 'Finalization and feedback',
-							unit: 0.25,
-							description:
-								'Finalization of the lead chosen by the client. 2 back and forth allowed. Asking for a whole new concept might lead to an update of the quote.',
-							type: ['Design'],
-						},
-						{
-							name: 'Validation of the final version',
-							unit: 0,
-							type: 'CUSTOMER',
-							tags: ['Important'],
-						},
-					],
-				},
-				{
-					name: 'Deliverables and payment',
-					items: [
-						{
-							name: 'Create a client file',
-							unit: 0.05,
-							description:
-								'The file contains all the research done during the project, the administrative documents and the deliverables',
-						},
-						{
-							name: 'Send the deliverables ready for printing',
-							unit: 0.05,
-							description: '300DPI .PDF HD files.',
-						},
-						{
-							name: 'Invoice creation',
-							unit: 0,
-							tags: ['Admin'],
-						},
-						{
-							name: 'Invoice payment',
-							unit: 0,
-							type: 'INVOICE',
-							tags: ['Admin'],
-						},
-					],
-				},
-			],
-		},
-		{
-			name: 'FACEBOOK_AD',
-			label: 'Facebook ad banner',
-			sections: [
-				{
-					name: 'Before starting',
-					items: [
-						{
-							name: 'Preparing Launch meeting',
-							unit: 0.1,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Launch meeting',
-							unit: 0.1,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Creating quote and writing requirements',
-							unit: 0.2,
-							description: '',
-						},
-						{
-							name: 'Validation of the requirements',
-							unit: 0,
-							tags: ['Important'],
-							description: '',
-							type: 'CUSTOMER',
-						},
-						{
-							name: '30% deposit',
-							unit: 0,
-							tags: ['Admin'],
-							description: '',
-							type: 'INVOICE',
-						},
-					],
-				},
-				{
-					name: "Visuals' conception",
-					items: [
-						{
-							name: 'Research on target and benchmark',
-							unit: 0.2,
-							description: `Who is the target of the ad ? What kind of visuals works for this target.
-Benchmark other ads on said target and research reference on specialized website (https://adespresso.com/blog/facebook-ad-types-collection-ads-carousel/).`,
-							tags: ['Research'],
-						},
-						{
-							name: 'Creation of 2 ad leads (3 visuals each)',
-							unit: 0.8,
-							description:
-								'Create the ads with respect to facebook ads guideline (https://www.facebook.com/business/ads-guide/image)',
-							tags: ['Design'],
-						},
-						{
-							name: 'Verify image conformity',
-							unit: 0.05,
-							description:
-								'Facebook has a strict policy on text in images. Here is a tool to test images conformity (https://www.facebook.com/ads/tools/text_overlay)',
-							tags: ['Design'],
-						},
-						{
-							name: 'Design pitch',
-							unit: 0.1,
-							description:
-								'Pitch of the 2 ad leads to the client',
-						},
-						{
-							name: 'Choose one of the 2 ad leads',
-							unit: 0,
-							type: 'CUSTOMER',
-						},
-						{
-							name: 'Lead modification',
-							unit: 0.1,
-							description:
-								'Modification of the lead on client feedback',
-							tags: ['Design'],
-						},
-						{
-							name: 'Validation of the final version',
-							unit: 0,
-							type: 'CUSTOMER',
-							tags: ['Important'],
-						},
-					],
-				},
-				{
-					name: 'Deliverables and payment',
-					items: [
-						{
-							name: 'Create a client file',
-							unit: 0.05,
-							description:
-								'The file contains all the research done during the project, the administrative documents and the deliverables',
-						},
-						{
-							name: 'Send the deliverables ready to post',
-							unit: 0.05,
-							description: '75DPI .PNG or .JPG files.',
-						},
-						{
-							name: 'Invoice creation',
-							unit: 0,
-							tags: ['Admin'],
-						},
-						{
-							name: 'Invoice payment',
-							unit: 0,
-							type: 'INVOICE',
-							tags: ['Admin'],
-						},
-					],
-				},
-			],
-		},
-		{
-			name: 'FLYER_A5',
-			label: 'A5 format flyer',
-			sections: [
-				{
-					name: 'Before starting',
-					items: [
-						{
-							name: 'Preparing Launch meeting',
-							unit: 0.1,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Launch meeting',
-							unit: 0.2,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Creating quote and writing requirements',
-							unit: 0.2,
-							description: '',
-						},
-						{
-							name: 'Validation of the requirements',
-							unit: 0,
-							tags: ['Important'],
-							description: '',
-							type: 'CUSTOMER',
-						},
-						{
-							name: '30% deposit',
-							unit: 0,
-							tags: ['Admin'],
-							description: '',
-							type: 'INVOICE',
-						},
-					],
-				},
-				{
-					name: 'Creation of A5 flyer',
-					items: [
-						{
-							name: 'Research and conception',
-							unit: 0.7,
-							description: 'Benchmarking and visual research',
-							type: ['Design'],
-						},
-						{
-							name: 'Create to 2 leads',
-							unit: 0.7,
-							type: ['Design'],
-						},
-						{
-							name: 'Design pitch',
-							unit: 0.1,
-							description: 'Pitch of the 2 leads to the client',
-						},
-						{
-							name: 'Client choice of one of the 2 leads',
-							unit: 0.1,
-							description: 'Pitch of the 2 leads to the client',
-							type: 'CUSTOMER',
-						},
-						{
-							name: 'Finalization and feedback',
-							unit: 0.4,
-							description:
-								'Finalization of the lead chosen by the client. 2 back and forth allowed. Asking for a whole new concept might lead to an update of the quote.',
-							type: ['Design'],
-						},
-						{
-							name: 'Validation of the final version',
-							unit: 0,
-							type: 'CUSTOMER',
-							tags: ['Important'],
-						},
-					],
-				},
-				{
-					name: 'Deliverables and payment',
-					items: [
-						{
-							name: 'Create a client file',
-							unit: 0.05,
-							description:
-								'The file contains all the research done during the project, the administrative documents and the deliverables',
-						},
-						{
-							name: 'Send the deliverables ready for printing',
-							unit: 0.05,
-							description: '300DPI .PDF HD in A5 format',
-						},
-						{
-							name: 'Invoice creation',
-							unit: 0,
-							tags: ['Admin'],
-						},
-						{
-							name: 'Invoice payment',
-							unit: 0,
-							type: 'INVOICE',
-							tags: ['Admin'],
-						},
-					],
-				},
-			],
-		},
-		{
-			name: 'TRANSLATION',
-			label: 'Translation',
-			sections: [
-				{
-					name: 'Before starting',
-					items: [
-						{
-							name: 'Preparing Launch meeting',
-							unit: 0.2,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Launch meeting',
-							unit: 0.4,
-							tags: ['Meeting'],
-							description: '',
-						},
-						{
-							name: 'Creating quote and writing requirements',
-							unit: 1,
-							description:
-								'Define all the step of the work to be done.',
-						},
-						{
-							name: 'Validation of the requirements',
-							unit: 0,
-							tags: ['Important'],
-							description: '',
-							type: 'CUSTOMER',
-						},
-						{
-							name: '30% deposit',
-							unit: 0,
-							tags: ['Admin'],
-							description: '',
-							type: 'INVOICE',
-						},
-					],
-				},
-				{
-					name: 'Translation',
-					items: [
-						{
-							name: 'Moodboard',
-							unit: 2,
-							description:
-								'Create a file containing all the information about the editorial line of the client (voice, specific vocab, keywords, SEO requirements, etc.)',
-						},
-						{
-							name:
-								'Document, linguistic et terminology research',
-							unit: 0.8,
-							description:
-								'This is setup phase of the translation.',
-							tags: ['Translation'],
-						},
-						{
-							name: 'First translation',
-							unit: 1,
-							tags: ['Translation'],
-						},
-						{
-							name: 'First reading',
-							unit: 0.5,
-							tags: ['Translation'],
-						},
-						{
-							name: 'Final version',
-							unit: 1,
-							tags: ['Translation'],
-						},
-						{
-							name: 'Final reading',
-							unit: 0.5,
-							tags: ['Translation'],
-						},
-						{
-							name: 'Validation',
-							unit: 0,
-							description:
-								'Send a first version and feedback allowed for minor changes',
-							type: 'CUSTOMER',
-							tags: ['Important'],
-						},
-					],
-				},
-				{
-					name: 'Deliverables and payment',
-					items: [
-						{
-							name: 'Create a client file',
-							unit: 0.05,
-							description:
-								'The file contains all the research done during the project, the administrative documents and the deliverables',
-						},
-						{
-							name: 'Send the deliverables',
-							unit: 0.05,
-						},
-						{
-							name: 'Invoice creation',
-							unit: 0,
-							tags: ['Admin'],
-						},
-						{
-							name: 'Invoice payment',
-							unit: 0,
-							type: 'INVOICE',
-							tags: ['Admin'],
-						},
-					],
-				},
-			],
-		},
-		{
 			name: 'PROSPECTION',
 			label: 'Find missions',
 			sections: [
@@ -557,6 +102,14 @@ Benchmark other ads on said target and research reference on specialized website
 				{
 					name: 'Before starting',
 					items: [
+						{
+							name: 'Preparing Launch meeting',
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+							type: 'PERSONAL',
+							unit: 0.2,
+							tags: ['Meeting'],
+						},
 						{
 							name: 'Launch meeting',
 							unit: 0.5,
@@ -750,6 +303,14 @@ Benchmark other ads on said target and research reference on specialized website
 					name: 'Before starting',
 					items: [
 						{
+							name: 'Preparing Launch meeting',
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+							type: 'PERSONAL',
+							unit: 0.2,
+							tags: ['Meeting'],
+						},
+						{
 							name: 'Launch meeting',
 							unit: 0.5,
 							tags: ['Meeting'],
@@ -919,6 +480,14 @@ Benchmark other ads on said target and research reference on specialized website
 					name: 'Before starting',
 					items: [
 						{
+							name: 'Preparing Launch meeting',
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+							type: 'PERSONAL',
+							unit: 0.2,
+							tags: ['Meeting'],
+						},
+						{
 							name: 'Launch meeting',
 							tags: ['Meeting'],
 							unit: 0.5,
@@ -1024,6 +593,14 @@ Benchmark other ads on said target and research reference on specialized website
 				{
 					name: 'Before starting',
 					items: [
+						{
+							name: 'Preparing Launch meeting',
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+							type: 'PERSONAL',
+							unit: 0.2,
+							tags: ['Meeting'],
+						},
 						{
 							name: 'Launch meeting',
 							tags: ['Rdv'],
@@ -1158,6 +735,469 @@ Benchmark other ads on said target and research reference on specialized website
 							unit: 0,
 							description: '',
 							type: 'INVOICE',
+						},
+					],
+				},
+			],
+		},
+		{
+			name: 'CARD',
+			label: 'Business card',
+			sections: [
+				{
+					name: 'Before starting',
+					items: [
+						{
+							name: 'Preparing Launch meeting',
+							type: 'PERSONAL',
+							unit: 0.1,
+							tags: ['Meeting'],
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+						},
+						{
+							name: 'Launch meeting',
+							unit: 0.1,
+							tags: ['Meeting'],
+							description: '',
+						},
+						{
+							name: 'Creating quote and writing requirements',
+							unit: 0.1,
+							description: '',
+						},
+						{
+							name: 'Validation of the requirements',
+							unit: 0,
+							tags: ['Important'],
+							description: '',
+							type: 'CUSTOMER',
+						},
+						{
+							name: '30% deposit',
+							unit: 0,
+							tags: ['Admin'],
+							description: '',
+							type: 'INVOICE',
+						},
+					],
+				},
+				{
+					name: 'Business card creation',
+					items: [
+						{
+							name: 'Research and conception',
+							unit: 0.25,
+							description: 'Benchmarking and visual research',
+							tags: ['Design'],
+						},
+						{
+							name: 'Creation of 2 visual leads',
+							unit: 0.25,
+							tags: ['Design'],
+						},
+						{
+							name: 'Design pitch',
+							unit: 0.1,
+							description:
+								'Pitch of the 2 visual leads to the client',
+						},
+						{
+							name: 'Choosing a lead',
+							unit: 0,
+							description:
+								'The client choose a lead so it can be finalized',
+							type: 'CUSTOMER',
+						},
+						{
+							name: 'Finalization and feedback',
+							unit: 0.25,
+							description:
+								'Finalization of the lead chosen by the client. 2 back and forth allowed. Asking for a whole new concept might lead to an update of the quote.',
+							tags: ['Design'],
+						},
+						{
+							name: 'Validation of the final version',
+							unit: 0,
+							type: 'CUSTOMER',
+							tags: ['Important'],
+						},
+					],
+				},
+				{
+					name: 'Deliverables and payment',
+					items: [
+						{
+							name: 'Create a client file',
+							unit: 0.05,
+							description:
+								'The file contains all the research done during the project, the administrative documents and the deliverables',
+						},
+						{
+							name: 'Send the deliverables ready for printing',
+							unit: 0.05,
+							description: '300DPI .PDF HD files.',
+						},
+						{
+							name: 'Invoice creation',
+							unit: 0,
+							tags: ['Admin'],
+						},
+						{
+							name: 'Invoice payment',
+							unit: 0,
+							type: 'INVOICE',
+							tags: ['Admin'],
+						},
+					],
+				},
+			],
+		},
+		{
+			name: 'FACEBOOK_AD',
+			label: 'Facebook ad banner',
+			sections: [
+				{
+					name: 'Before starting',
+					items: [
+						{
+							name: 'Preparing Launch meeting',
+							type: 'PERSONAL',
+							unit: 0.1,
+							tags: ['Meeting'],
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+						},
+						{
+							name: 'Launch meeting',
+							unit: 0.1,
+							tags: ['Meeting'],
+							description: '',
+						},
+						{
+							name: 'Creating quote and writing requirements',
+							unit: 0.2,
+							description: '',
+						},
+						{
+							name: 'Validation of the requirements',
+							unit: 0,
+							tags: ['Important'],
+							description: '',
+							type: 'CUSTOMER',
+						},
+						{
+							name: '30% deposit',
+							unit: 0,
+							tags: ['Admin'],
+							description: '',
+							type: 'INVOICE',
+						},
+					],
+				},
+				{
+					name: "Visuals' conception",
+					items: [
+						{
+							name: 'Research on target and benchmark',
+							unit: 0.2,
+							description: `Who is the target of the ad ? What kind of visuals works for this target.
+Benchmark other ads on said target and research reference on specialized website (https://adespresso.com/blog/facebook-ad-types-collection-ads-carousel/).`,
+							tags: ['Research'],
+						},
+						{
+							name: 'Creation of 2 ad leads (3 visuals each)',
+							unit: 0.8,
+							description:
+								'Create the ads with respect to facebook ads guideline (https://www.facebook.com/business/ads-guide/image)',
+							tags: ['Design'],
+						},
+						{
+							name: 'Verify image conformity',
+							unit: 0.05,
+							description:
+								'Facebook has a strict policy on text in images. Here is a tool to test images conformity (https://www.facebook.com/ads/tools/text_overlay)',
+							tags: ['Design'],
+						},
+						{
+							name: 'Design pitch',
+							unit: 0.1,
+							description:
+								'Pitch of the 2 ad leads to the client',
+						},
+						{
+							name: 'Choose one of the 2 ad leads',
+							unit: 0,
+							type: 'CUSTOMER',
+						},
+						{
+							name: 'Lead modification',
+							unit: 0.1,
+							description:
+								'Modification of the lead on client feedback',
+							tags: ['Design'],
+						},
+						{
+							name: 'Validation of the final version',
+							unit: 0,
+							type: 'CUSTOMER',
+							tags: ['Important'],
+						},
+					],
+				},
+				{
+					name: 'Deliverables and payment',
+					items: [
+						{
+							name: 'Create a client file',
+							unit: 0.05,
+							description:
+								'The file contains all the research done during the project, the administrative documents and the deliverables',
+						},
+						{
+							name: 'Send the deliverables ready to post',
+							unit: 0.05,
+							description: '75DPI .PNG or .JPG files.',
+						},
+						{
+							name: 'Invoice creation',
+							unit: 0,
+							tags: ['Admin'],
+						},
+						{
+							name: 'Invoice payment',
+							unit: 0,
+							type: 'INVOICE',
+							tags: ['Admin'],
+						},
+					],
+				},
+			],
+		},
+		{
+			name: 'FLYER_A5',
+			label: 'A5 format flyer',
+			sections: [
+				{
+					name: 'Before starting',
+					items: [
+						{
+							name: 'Preparing Launch meeting',
+							type: 'PERSONAL',
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+							unit: 0.1,
+							tags: ['Meeting'],
+						},
+						{
+							name: 'Launch meeting',
+							unit: 0.2,
+							tags: ['Meeting'],
+							description: '',
+						},
+						{
+							name: 'Creating quote and writing requirements',
+							unit: 0.2,
+							description: '',
+						},
+						{
+							name: 'Validation of the requirements',
+							unit: 0,
+							tags: ['Important'],
+							description: '',
+							type: 'CUSTOMER',
+						},
+						{
+							name: '30% deposit',
+							unit: 0,
+							tags: ['Admin'],
+							description: '',
+							type: 'INVOICE',
+						},
+					],
+				},
+				{
+					name: 'Creation of A5 flyer',
+					items: [
+						{
+							name: 'Research and conception',
+							unit: 0.7,
+							description: 'Benchmarking and visual research',
+							tags: ['Design'],
+						},
+						{
+							name: 'Create to 2 leads',
+							unit: 0.7,
+							tags: ['Design'],
+						},
+						{
+							name: 'Design pitch',
+							unit: 0.1,
+							description: 'Pitch of the 2 leads to the client',
+						},
+						{
+							name: 'Client choice of one of the 2 leads',
+							unit: 0.1,
+							description: 'Pitch of the 2 leads to the client',
+							type: 'CUSTOMER',
+						},
+						{
+							name: 'Finalization and feedback',
+							unit: 0.4,
+							description:
+								'Finalization of the lead chosen by the client. 2 back and forth allowed. Asking for a whole new concept might lead to an update of the quote.',
+							tags: ['Design'],
+						},
+						{
+							name: 'Validation of the final version',
+							unit: 0,
+							type: 'CUSTOMER',
+							tags: ['Important'],
+						},
+					],
+				},
+				{
+					name: 'Deliverables and payment',
+					items: [
+						{
+							name: 'Create a client file',
+							unit: 0.05,
+							description:
+								'The file contains all the research done during the project, the administrative documents and the deliverables',
+						},
+						{
+							name: 'Send the deliverables ready for printing',
+							unit: 0.05,
+							description: '300DPI .PDF HD in A5 format',
+						},
+						{
+							name: 'Invoice creation',
+							unit: 0,
+							tags: ['Admin'],
+						},
+						{
+							name: 'Invoice payment',
+							unit: 0,
+							type: 'INVOICE',
+							tags: ['Admin'],
+						},
+					],
+				},
+			],
+		},
+		{
+			name: 'TRANSLATION',
+			label: 'Translation',
+			sections: [
+				{
+					name: 'Before starting',
+					items: [
+						{
+							name: 'Preparing Launch meeting',
+							description:
+								'Research on client and their values, update your portfolio, look for reference and trends in the client space.',
+							type: 'PERSONAL',
+							unit: 0.2,
+							tags: ['Meeting'],
+						},
+						{
+							name: 'Launch meeting',
+							unit: 0.4,
+							tags: ['Meeting'],
+							description: '',
+						},
+						{
+							name: 'Creating quote and writing requirements',
+							unit: 1,
+							description:
+								'Define all the step of the work to be done.',
+						},
+						{
+							name: 'Validation of the requirements',
+							unit: 0,
+							tags: ['Important'],
+							description: '',
+							type: 'CUSTOMER',
+						},
+						{
+							name: '30% deposit',
+							unit: 0,
+							tags: ['Admin'],
+							description: '',
+							type: 'INVOICE',
+						},
+					],
+				},
+				{
+					name: 'Translation',
+					items: [
+						{
+							name: 'Moodboard',
+							unit: 2,
+							description:
+								'Create a file containing all the information about the editorial line of the client (voice, specific vocab, keywords, SEO requirements, etc.)',
+						},
+						{
+							name:
+								'Document, linguistic et terminology research',
+							unit: 0.8,
+							description:
+								'This is setup phase of the translation.',
+							tags: ['Translation'],
+						},
+						{
+							name: 'First translation',
+							unit: 1,
+							tags: ['Translation'],
+						},
+						{
+							name: 'First reading',
+							unit: 0.5,
+							tags: ['Translation'],
+						},
+						{
+							name: 'Final version',
+							unit: 1,
+							tags: ['Translation'],
+						},
+						{
+							name: 'Final reading',
+							unit: 0.5,
+							tags: ['Translation'],
+						},
+						{
+							name: 'Validation',
+							unit: 0,
+							description:
+								'Send a first version and feedback allowed for minor changes',
+							type: 'CUSTOMER',
+							tags: ['Important'],
+						},
+					],
+				},
+				{
+					name: 'Deliverables and payment',
+					items: [
+						{
+							name: 'Create a client file',
+							unit: 0.05,
+							description:
+								'The file contains all the research done during the project, the administrative documents and the deliverables',
+						},
+						{
+							name: 'Send the deliverables',
+							unit: 0.05,
+						},
+						{
+							name: 'Invoice creation',
+							unit: 0,
+							tags: ['Admin'],
+						},
+						{
+							name: 'Invoice payment',
+							unit: 0,
+							type: 'INVOICE',
+							tags: ['Admin'],
 						},
 					],
 				},
@@ -1314,6 +1354,14 @@ Benchmark other ads on said target and research reference on specialized website
 				{
 					name: 'Pré-projet',
 					items: [
+						{
+							name: 'Préparer le rendez-vous de lancement',
+							unit: 0.1,
+							tags: ['Meeting'],
+							type: 'PERSONAL',
+							description:
+								"Se renseigner sur le client et l'univers de son entreprise, mettre à jour son book, faire un tour des tendances actuelles sur les conceptions graphiques dans l'univers du client.",
+						},
 						{
 							name: 'Réunion de lancement',
 							unit: 0.5,
@@ -1513,6 +1561,14 @@ Benchmark other ads on said target and research reference on specialized website
 					name: 'Pré-projet',
 					items: [
 						{
+							name: 'Préparer le rendez-vous de lancement',
+							unit: 0.1,
+							tags: ['Meeting'],
+							type: 'PERSONAL',
+							description:
+								"Se renseigner sur le client et l'univers de son entreprise, mettre à jour son book, faire un tour des tendances actuelles sur les conceptions graphiques dans l'univers du client.",
+						},
+						{
 							name: 'Réunion de lancement',
 							tags: ['Rdv'],
 							unit: 0.5,
@@ -1686,6 +1742,14 @@ Benchmark other ads on said target and research reference on specialized website
 					name: 'Pré-projet',
 					items: [
 						{
+							name: 'Préparer le rendez-vous de lancement',
+							unit: 0.1,
+							tags: ['Meeting'],
+							type: 'PERSONAL',
+							description:
+								"Se renseigner sur le client et l'univers de son entreprise, mettre à jour son book, faire un tour des tendances actuelles sur les conceptions graphiques dans l'univers du client.",
+						},
+						{
 							name: 'Réunion de lancement',
 							tags: ['Rdv'],
 							unit: 0.5,
@@ -1792,6 +1856,14 @@ Benchmark other ads on said target and research reference on specialized website
 				{
 					name: 'Pré-projet',
 					items: [
+						{
+							name: 'Préparer le rendez-vous de lancement',
+							unit: 0.1,
+							tags: ['Meeting'],
+							type: 'PERSONAL',
+							description:
+								"Se renseigner sur le client et l'univers de son entreprise, mettre à jour son book, faire un tour des tendances actuelles sur les conceptions graphiques dans l'univers du client.",
+						},
 						{
 							name: 'Réunion de lancement',
 							tags: ['Rdv'],
@@ -1937,52 +2009,6 @@ Benchmark other ads on said target and research reference on specialized website
 			],
 		},
 		{
-			name: 'BLANK',
-			label: 'Basique',
-			sections: [
-				{
-					name: 'Pré-projet',
-					items: [
-						{
-							name: 'Réunion de lancement',
-							tags: ['Rdv'],
-							unit: 0.5,
-							description: '',
-						},
-						{
-							name: 'Paiement acompte de 30%',
-							tags: ['Admin'],
-							unit: 0,
-							description: '',
-							type: 'INVOICE',
-						},
-					],
-				},
-				{
-					name: 'Modifier le titre de cette section',
-					items: [
-						{
-							name: 'Modifier le titre de cette tâche',
-							unit: 0,
-							description: '',
-						},
-					],
-				},
-				{
-					name: 'Divers',
-					items: [
-						{
-							name: 'Paiement facture',
-							unit: 0,
-							tags: ['Admin'],
-							description: '',
-							type: 'INVOICE',
-						},
-					],
-				},
-			],
-		},
-		{
 			name: 'CARD',
 			label: 'Création carte de visite',
 			sections: [
@@ -1993,6 +2019,7 @@ Benchmark other ads on said target and research reference on specialized website
 							name: 'Préparer le rendez-vous de lancement',
 							unit: 0.1,
 							tags: ['Meeting'],
+							type: 'PERSONAL',
 							description:
 								"Se renseigner sur le client et l'univers de son entreprise, mettre à jour son book, faire un tour des tendances actuelles sur les conceptions graphiques dans l'univers du client.",
 						},
@@ -2031,12 +2058,12 @@ Benchmark other ads on said target and research reference on specialized website
 							unit: 0.25,
 							description:
 								"Recherche des tendances actuelles, recherche d'images.",
-							type: ['Design'],
+							tags: ['Design'],
 						},
 						{
 							name: 'Création de 2 pistes visuelles',
 							unit: 0.25,
-							type: ['Design'],
+							tags: ['Design'],
 						},
 						{
 							name: 'Rendez-vous client de présentation',
@@ -2055,7 +2082,7 @@ Benchmark other ads on said target and research reference on specialized website
 							unit: 0.25,
 							description:
 								'Finalisation de la piste et aller-retours suivant les commentaires du client. Seules les modifications mineures sont prises en compte. Si une création totalement nouvelle est demandée et implique le dépassement du temps prévu, un ajustement du devis devra être fait.',
-							type: ['Design'],
+							tags: ['Design'],
 						},
 						{
 							name: 'Validation de la version finale',
@@ -2071,6 +2098,7 @@ Benchmark other ads on said target and research reference on specialized website
 						{
 							name: "Préparation d'un dossier client",
 							unit: 0.05,
+							type: 'PERSONAL',
 							description:
 								'Dossier récapitulatif comprenant les informations collectées pour la réalisation, les documents administratifs et les réalisations finales.',
 						},
@@ -2086,6 +2114,7 @@ Benchmark other ads on said target and research reference on specialized website
 							description:
 								"Facture comprenant la déduction de l'acompte de 30% déjà payé.",
 							tags: ['Admin'],
+							type: 'PERSONAL',
 						},
 						{
 							name: 'Paiement facture',
@@ -2108,6 +2137,7 @@ Benchmark other ads on said target and research reference on specialized website
 							name: 'Préparer le rendez-vous de lancement',
 							unit: 0.1,
 							tags: ['Meeting'],
+							type: 'PERSONAL',
 							description:
 								"Se renseigner sur le client et l'univers de son entreprise, mettre à jour son book, faire un tour des tendances actuelles sur les conceptions graphiques dans l'univers du client.",
 						},
@@ -2196,6 +2226,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 					items: [
 						{
 							name: "Préparation d'un dossier client",
+							type: 'PERSONAL',
 							unit: 0.05,
 							description:
 								'Dossier récapitulatif comprenant les informations collectées pour la réalisation, les documents administratifs et les réalisations finales.',
@@ -2207,6 +2238,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 						},
 						{
 							name: 'Rédaction de la facture',
+							type: 'PERSONAL',
 							unit: 0,
 							description:
 								"Facture comprenant la déduction de l'acompte de 30% déjà payé.",
@@ -2231,6 +2263,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 					items: [
 						{
 							name: 'Préparer le rendez-vous de lancement',
+							type: 'PERSONAL',
 							unit: 0.1,
 							tags: ['Meeting'],
 							description: '',
@@ -2270,12 +2303,12 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 							unit: 0.7,
 							description:
 								"Recherche des tendances actuelles, recherche d'images.",
-							type: ['Design'],
+							tags: ['Design'],
 						},
 						{
 							name: 'Création de 2 visuels',
 							unit: 0.7,
-							type: ['Design'],
+							tags: ['Design'],
 						},
 						{
 							name: 'Rendez-vous client de présentation',
@@ -2294,7 +2327,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 							unit: 0.4,
 							description: `Les modifications simples comprennent le positionnement d'un ou plusieurs objets, la couleur ou la taille.
 Si une création totalement nouvelle est demandée et implique le dépassement du temps prévu, un ajustement du devis devra être fait.`,
-							type: ['Design'],
+							tags: ['Design'],
 						},
 						{
 							name: 'Validation finale',
@@ -2309,6 +2342,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 					items: [
 						{
 							name: "Préparation d'un dossier client",
+							type: 'PERSONAL',
 							unit: 0.05,
 							description:
 								'Dossier récapitulatif comprenant les informations collectées pour la réalisation, les documents administratifs et les réalisations finales.',
@@ -2321,6 +2355,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 						},
 						{
 							name: 'Rédaction de la facture',
+							type: 'PERSONAL',
 							unit: 0,
 							description:
 								"Facture comprenant la déduction de l'acompte de 30% déjà payé.",
@@ -2345,6 +2380,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 					items: [
 						{
 							name: 'Préparer le rendez-vous de lancement',
+							type: 'PERSONAL',
 							unit: 0.2,
 							tags: ['Meeting'],
 							description: '',
@@ -2429,6 +2465,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 					items: [
 						{
 							name: "Préparation d'un dossier client",
+							type: 'PERSONAL',
 							unit: 0.05,
 							description:
 								'Dossier récapitulatif comprenant les informations collectées pour la réalisation, les documents administratifs et les réalisations finales.',
@@ -2439,6 +2476,7 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 						},
 						{
 							name: 'Rédaction de la facture',
+							type: 'PERSONAL',
 							unit: 0,
 							description:
 								"Facture comprenant la déduction de l'acompte de 30% déjà payé.",
@@ -2449,6 +2487,52 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 							unit: 0,
 							type: 'INVOICE',
 							tags: ['Admin'],
+						},
+					],
+				},
+			],
+		},
+		{
+			name: 'BLANK',
+			label: 'Basique',
+			sections: [
+				{
+					name: 'Pré-projet',
+					items: [
+						{
+							name: 'Réunion de lancement',
+							tags: ['Rdv'],
+							unit: 0.5,
+							description: '',
+						},
+						{
+							name: 'Paiement acompte de 30%',
+							tags: ['Admin'],
+							unit: 0,
+							description: '',
+							type: 'INVOICE',
+						},
+					],
+				},
+				{
+					name: 'Modifier le titre de cette section',
+					items: [
+						{
+							name: 'Modifier le titre de cette tâche',
+							unit: 0,
+							description: '',
+						},
+					],
+				},
+				{
+					name: 'Divers',
+					items: [
+						{
+							name: 'Paiement facture',
+							unit: 0,
+							tags: ['Admin'],
+							description: '',
+							type: 'INVOICE',
 						},
 					],
 				},

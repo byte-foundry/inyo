@@ -93,8 +93,8 @@ const NotificationTrayButton = ({mobile}) => {
 	const {
 		data, refetch, error, loading,
 	} = useQuery(GET_USER_NOTIFICATIONS, {
-		suspend: false,
 		pollInterval: 1000 * 60,
+		context: {batch: false},
 	});
 	const [markNotificationsAsRead] = useMutation(MARK_NOTIFICATIONS_AS_READ, {
 		optimisticResponse: {
@@ -124,7 +124,6 @@ const NotificationTrayButton = ({mobile}) => {
 			});
 		},
 	});
-
 
 	let unreadNumber = 0;
 

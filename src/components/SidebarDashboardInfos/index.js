@@ -48,7 +48,7 @@ const NoReminders = styled('div')`
 `;
 
 const SidebarDashboardInfos = () => {
-	const {data, loading} = useQuery(GET_REMINDERS, {suspend: false});
+	const {data, loading} = useQuery(GET_REMINDERS);
 	const {loading: loadingUser, data: userData} = useQuery(GET_USER_INFOS);
 
 	const reminders

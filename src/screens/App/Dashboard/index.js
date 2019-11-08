@@ -1,5 +1,4 @@
-import React from 'react';
-import {withRouter} from 'react-router-dom';
+import React, {Suspense} from 'react';
 
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
@@ -16,7 +15,9 @@ function Dashboard() {
 					<CreateTask withProject />
 					<Tasks />
 				</Content>
-				<PendingActionsTray />
+				<Suspense fallback={null}>
+					<PendingActionsTray />
+				</Suspense>
 			</Main>
 		</Container>
 	);

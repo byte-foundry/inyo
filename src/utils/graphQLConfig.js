@@ -7,6 +7,7 @@ import {ApolloLink} from 'apollo-link';
 import {BatchHttpLink} from 'apollo-link-batch-http';
 import {setContext} from 'apollo-link-context';
 import {onError} from 'apollo-link-error';
+import {HttpLink} from 'apollo-link-http';
 import WatchedMutationLink from 'apollo-link-watched-mutation';
 import {createUploadLink} from 'apollo-upload-client';
 
@@ -40,7 +41,11 @@ const options = {
 const httpLink = ApolloLink.split(
 	operation => operation.getContext().hasUpload,
 	createUploadLink(options),
-	new BatchHttpLink(options),
+	ApolloLink.split(
+		operation => operation.getContext().batch === false,
+		new HttpLink(options),
+		new BatchHttpLink(options),
+	),
 );
 
 const withToken = setContext((op, {headers}) => {

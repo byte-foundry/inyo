@@ -250,6 +250,7 @@ const SidebarProjectInfos = ({
 					<SidebarLink
 						onClick={() => setView('budget')}
 						active={activeView === 'budget'}
+						id="budget-project-button"
 					>
 						<IconButton
 							icon="attach_money"
@@ -334,6 +335,7 @@ const SidebarProjectInfos = ({
 					<SidebarLink
 						onClick={() => setView('activity')}
 						active={activeView === 'activity'}
+						id="activity-project-button"
 					>
 						<IconButton
 							icon="history"

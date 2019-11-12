@@ -65,6 +65,15 @@ const AddCollaboratorModal = ({onDismiss}) => {
 								},
 							});
 
+							window.Intercom(
+								'trackEvent',
+								'requested-collaborator',
+								{
+									email: values.email,
+									'invited-new-user': showConfirm,
+								},
+							);
+
 							onDismiss();
 						}
 						catch (e) {

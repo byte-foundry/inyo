@@ -84,7 +84,7 @@ const TimeItTookHeading = styled('h3')`
 `;
 
 const PendingActionsTray = ({projectId}) => {
-	const [finishItem] = useMutation(FINISH_ITEM, {suspend: true});
+	const [finishItem] = useMutation(FINISH_ITEM);
 	const [isOpen, setIsOpen] = useState(false);
 	const {
 		data: {
@@ -93,6 +93,7 @@ const PendingActionsTray = ({projectId}) => {
 	} = useQuery(GET_ALL_TASKS_SHORT, {
 		suspend: true,
 		variables: {schedule: 'FINISHED_TIME_IT_TOOK_NULL'},
+		context: {batch: false},
 	});
 
 	const pendingTimeItTookTasks = tasks.filter(

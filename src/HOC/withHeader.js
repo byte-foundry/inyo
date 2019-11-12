@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React, {useState} from 'react';
+import React from 'react';
 
 import AssistantActions from '../components/AssistantActions';
 import MaterialIcon from '../components/MaterialIcon';
@@ -9,7 +9,7 @@ import TopBar, {
 	TopBarLogo,
 	TopBarLogoNotif,
 	TopBarMenu,
-	TopBarMenuLink,
+	TopBarMenuLink as TopBarMenuLinkBase,
 } from '../components/TopBar';
 import fbt from '../fbt/fbt.macro';
 import {BREAKPOINTS} from '../utils/constants';
@@ -31,6 +31,15 @@ export const ToggleMenu = styled('div')`
 
 const TogglingTopBar = () => {
 	const [visible, toggleMenu] = useLocalStorage('visibleMenu', false);
+
+	let TopBarMenuLink = TopBarMenuLinkBase;
+
+	// hiding the menu when moving to another page on mobile
+	if (window.matchMedia(`(max-width: ${BREAKPOINTS.mobile}px)`).matches) {
+		TopBarMenuLink = props => (
+			<TopBarMenuLinkBase onClick={() => toggleMenu(false)} {...props} />
+		);
+	}
 
 	return (
 		<TopBar visible={visible}>

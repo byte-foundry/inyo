@@ -19,9 +19,6 @@
     "clean-fbts": "rm .enum_manifest.json .src_manifest.json .source_strings.json src/translatedFbts.json 2&> /dev/null || exit 0",
     "generate-locale-file": "babel-node src/fbt/generateTranslateFile.js -l en-US -o translations"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "dependencies": {
     "@apollo/react-common": "^3.1.1",
     "@apollo/react-components": "^3.1.1",
@@ -61,12 +58,13 @@
     "debounce-promise": "^3.1.0",
     "draft-js": "^0.10.5",
     "escape-html": "^1.0.3",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-cypress": "^2.2.1",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-plugin-cypress": "^2.7.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "fbt": "^0.9.51",
     "formik": "^1.5.8",
@@ -80,7 +78,6 @@
     "medium-draft": "^0.5.6",
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
-    "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "prop-types": "^15.6.2",

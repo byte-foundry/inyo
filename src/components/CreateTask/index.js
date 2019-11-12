@@ -149,8 +149,8 @@ const CreateTask = ({currentProjectId, withProject}) => {
 							project="inyo"
 							desc="confirm modal notify customer 2nd part"
 						>
-							Souhaitez vous continuer et activer les
-							notifications?
+							Souhaitez-vous continuer et activer les
+							notifications ?
 						</fbt>
 					</P>
 				</ConfirmModal>

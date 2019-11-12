@@ -17,7 +17,7 @@ const ConfirmFinishCustomerTaskModal = props => (
 				project="inyo"
 				desc="confirm modal finish customer task 2nd part"
 			>
-				Souhaitez vous continuer ?
+				Souhaitez-vous continuer ?
 			</fbt>
 		</P>
 	</ConfirmModal>

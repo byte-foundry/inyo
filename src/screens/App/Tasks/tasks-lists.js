@@ -182,7 +182,7 @@ function TasksList({location, history}) {
 							</div>
 						</Content>
 					)}
-					<Suspense fallback={null}>
+					<Suspense fallback={false}>
 						<PendingActionsTray projectId={projectId} />
 					</Suspense>
 				</Main>

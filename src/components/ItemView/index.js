@@ -302,8 +302,7 @@ const Item = ({
 		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
 	const customerTask = isCustomerTask(item.type);
-	const finishableTask
-		= (customerToken && customerTask) || (!customerToken && !customerTask);
+	const finishableTask = (customerToken && customerTask) || !customerToken;
 
 	const activableTask = !customerToken && item.status === 'PENDING';
 
@@ -954,100 +953,100 @@ const Item = ({
 			{!customerToken
 				&& customerTask
 				&& taskFulfillsActivationCriteria(item) && (
-					<>
-						<SubHeading>
-							<fbt project="inyo" desc="actions of edwige">
+				<>
+					<SubHeading>
+						<fbt project="inyo" desc="actions of edwige">
 								Actions{' '}
-								<fbt:param name="apos">
-									<Apostrophe
-										value={me.settings.assistantName}
-										withVowel={
-											<fbt
-												project="inyo"
-												desc="notification message"
-											>
+							<fbt:param name="apos">
+								<Apostrophe
+									value={me.settings.assistantName}
+									withVowel={
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
 												d'
-											</fbt>
-										}
-										withConsonant={
-											<fbt
-												project="inyo"
-												desc="notification message"
-											>
+										</fbt>
+									}
+									withConsonant={
+										<fbt
+											project="inyo"
+											desc="notification message"
+										>
 												de{' '}
-											</fbt>
-										}
-									/>
-								</fbt:param>
-								<fbt:param name="assistantName">
-									{me.settings.assistantName}
-								</fbt:param>
-							</fbt>
-						</SubHeading>
-						{item.isFocused ? (
-							<>
-								<TaskRemindersList
-									noLink
-									reminders={item.reminders}
+										</fbt>
+									}
 								/>
-								<TaskButton
-									onClick={() => {
-										unfocusTask({
-											variables: {itemId: item.id},
-										});
-									}}
-									icon="×"
-								>
-									<fbt
-										project="inyo"
-										desc="task customer cancelation label"
-									>
-										Ne plus rappeler à{' '}
-										<fbt:param name="customerName">
-											{formatName(
-												item.linkedCustomer.firstName,
-												item.linkedCustomer.lastName,
-											)}
-										</fbt:param>{' '}
-										de faire cette tâche
-									</fbt>
-								</TaskButton>
-							</>
-						) : (
+							</fbt:param>
+							<fbt:param name="assistantName">
+								{me.settings.assistantName}
+							</fbt:param>
+						</fbt>
+					</SubHeading>
+					{item.isFocused ? (
+						<>
+							<TaskRemindersList
+								noLink
+								reminders={item.reminders}
+							/>
 							<TaskButton
 								onClick={() => {
-									if (item.type === 'CONTENT_ACQUISITION') {
-										focusTask({
-											variables: {itemId: item.id},
-										});
-									}
-									else {
-										setIsActivating(true);
-									}
+									unfocusTask({
+										variables: {itemId: item.id},
+									});
 								}}
-								icon="✓"
+								icon="×"
 							>
-								<fbt project="inyo" desc="charger">
-									Charger{' '}
-									<fbt:param name="assistantName">
-										{me.settings.assistantName}
-									</fbt:param>{' '}
-									de faire réaliser cette tâche à{' '}
+								<fbt
+									project="inyo"
+									desc="task customer cancelation label"
+								>
+										Ne plus rappeler à{' '}
 									<fbt:param name="customerName">
-										{item.linkedCustomer.name}
-									</fbt:param>{' '}
-									(
-									<fbt:param name="contactName">
 										{formatName(
 											item.linkedCustomer.firstName,
 											item.linkedCustomer.lastName,
 										)}
-									</fbt:param>
-									)
+									</fbt:param>{' '}
+										de faire cette tâche
 								</fbt>
 							</TaskButton>
-						)}
-					</>
+						</>
+					) : (
+						<TaskButton
+							onClick={() => {
+								if (item.type === 'CONTENT_ACQUISITION') {
+									focusTask({
+										variables: {itemId: item.id},
+									});
+								}
+								else {
+									setIsActivating(true);
+								}
+							}}
+							icon="✓"
+						>
+							<fbt project="inyo" desc="charger">
+									Charger{' '}
+								<fbt:param name="assistantName">
+									{me.settings.assistantName}
+								</fbt:param>{' '}
+									de faire réaliser cette tâche à{' '}
+								<fbt:param name="customerName">
+									{item.linkedCustomer.name}
+								</fbt:param>{' '}
+									(
+								<fbt:param name="contactName">
+									{formatName(
+										item.linkedCustomer.firstName,
+										item.linkedCustomer.lastName,
+									)}
+								</fbt:param>
+									)
+							</fbt>
+						</TaskButton>
+					)}
+				</>
 			)}
 			<SubHeading>
 				<fbt project="inyo" desc="Attached files">

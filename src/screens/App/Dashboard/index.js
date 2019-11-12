@@ -15,7 +15,7 @@ function Dashboard() {
 					<CreateTask withProject />
 					<Tasks />
 				</Content>
-				<Suspense fallback={null}>
+				<Suspense fallback={false}>
 					<PendingActionsTray />
 				</Suspense>
 			</Main>

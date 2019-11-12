@@ -78,8 +78,8 @@ const AssistantActions = ({mobile}) => {
 	const dialogRef = useRef();
 	const [isOpen, setOpen] = useState(false);
 	const {data, refetch, loading} = useQuery(GET_REMINDERS, {
-		suspend: false,
 		pollInterval: 1000 * 60,
+		context: {batch: false},
 	});
 
 	let pendingReminders = 0;

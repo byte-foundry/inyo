@@ -240,6 +240,9 @@ const CustomerModal = ({
 									),
 								},
 							});
+
+							window.Intercom('trackEvent', 'updated-customer');
+
 							onValidate(customer);
 							onDismiss();
 						}
@@ -259,6 +262,16 @@ const CustomerModal = ({
 										editorState.getCurrentContent(),
 									),
 								},
+							});
+
+							window.Intercom('trackEvent', 'created-customer', {
+								name: createdCustomer.name,
+								title: createdCustomer.title,
+								firstName: createdCustomer.firstName,
+								lastName: createdCustomer.lastName,
+								email: createdCustomer.email,
+								phone: createdCustomer.phone,
+								occupation: createdCustomer.occupation,
 							});
 
 							onCustomerWasCreated(createdCustomer);

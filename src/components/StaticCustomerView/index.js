@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, {Suspense} from 'react';
 
 import CustomerTasks from '../../screens/Customer/Tasks/tasks';
 import {BREAKPOINTS} from '../../utils/constants';
+import {Loading} from '../../utils/content';
 import {CustomerContext} from '../../utils/contexts';
 
 const Container = styled('div')`
@@ -16,10 +17,12 @@ const Container = styled('div')`
 const StaticCustomerView = ({projectId}) => (
 	<CustomerContext.Provider value="preview">
 		<Container>
-			<CustomerTasks
-				projectId={projectId}
-				style={{pointerEvents: 'none', minHeight: 'auto'}}
-			/>
+			<Suspense fallback={<Loading />}>
+				<CustomerTasks
+					projectId={projectId}
+					style={{pointerEvents: 'none', minHeight: 'auto'}}
+				/>
+			</Suspense>
 		</Container>
 	</CustomerContext.Provider>
 );

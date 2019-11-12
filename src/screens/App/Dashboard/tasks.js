@@ -18,6 +18,7 @@ import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS, DRAG_TYPES} from '../../../utils/constants';
 import {
 	FlexRow,
+	LoadingLogo,
 	ModalContainer as Modal,
 	ModalElem,
 } from '../../../utils/content';
@@ -93,6 +94,32 @@ function DraggableTask({
 	);
 }
 
+const Loading = ({loading, fallback, children}) => {
+	if (loading) {
+		return fallback;
+	}
+
+	return children();
+};
+
+const LoadingScreen = () => (
+	<Portal>
+		<div
+			style={{
+				display: 'flex',
+				position: 'fixed',
+				background: 'white',
+				top: '0',
+				bottom: '0',
+				right: '0',
+				left: '0',
+			}}
+		>
+			<LoadingLogo />
+		</div>
+	</Portal>
+);
+
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
 	const [isDragging, setIsDragging] = useState(false);
@@ -107,8 +134,7 @@ const DashboardTasks = ({location, history}) => {
 			.startOf('week')
 			.format(moment.HTML5_FMT.DATE);
 
-	const {data, error} = useQuery(GET_ALL_TASKS_SHORT, {
-		suspend: true,
+	const {data, loading, error} = useQuery(GET_ALL_TASKS_SHORT, {
 		variables: {schedule: 'UNSCHEDULED'},
 		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
 	});
@@ -250,34 +276,6 @@ const DashboardTasks = ({location, history}) => {
 		[history, query],
 	);
 
-	const {
-		me: {id, tasks},
-	} = data;
-
-	const unscheduledTasks = tasks.filter(
-		t => !(t.assignee && t.assignee.id !== id),
-	);
-
-	const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
-		task => !task.section
-			|| task.section.project.status === 'ONGOING'
-			|| projectId,
-	);
-
-	const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
-		task => (!linkedCustomerId
-				|| ((task.linkedCustomer
-					&& task.linkedCustomer.id === linkedCustomerId)
-					|| (task.section
-						&& task.section.project.customer
-						&& task.section.project.customer.id
-							=== linkedCustomerId)))
-			&& (!filter || task.status === filter || filter === 'ALL')
-			&& (!projectId
-				|| (task.section && task.section.project.id === projectId))
-			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
-	);
-
 	return (
 		<>
 			<ScrollHelper>
@@ -322,44 +320,92 @@ const DashboardTasks = ({location, history}) => {
 						tagsSelected={tags}
 						marginTop
 					/>
-					{unscheduledTasks.length !== 0
-					|| unscheduledFilteredTasks.length
-						!== unscheduledTasks.length ? (
-							<TasksList
-								style={{minHeight: '50px'}}
-								hasFilteredItems={
-									ongoingProjectAndNoProjectTask.length
-								!== unscheduledFilteredTasks.length
-								}
-								items={unscheduledFilteredTasks}
-								baseUrl="dashboard"
-								createTaskComponent={({item, customerToken}) => (
-									<DraggableTask
-										item={item}
-										userId={id}
-										key={item.id}
-										customerToken={customerToken}
+					<Loading loading={loading} fallback={<LoadingScreen />}>
+						{() => {
+							const {
+								me: {id, tasks},
+							} = data;
+
+							const unscheduledTasks = tasks.filter(
+								t => !(t.assignee && t.assignee.id !== id),
+							);
+
+							const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
+								task => !task.section
+									|| task.section.project.status === 'ONGOING'
+									|| projectId,
+							);
+
+							const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
+								task => (!linkedCustomerId
+										|| ((task.linkedCustomer
+											&& task.linkedCustomer.id
+												=== linkedCustomerId)
+											|| (task.section
+												&& task.section.project.customer
+												&& task.section.project.customer
+													.id
+													=== linkedCustomerId)))
+									&& (!filter
+										|| task.status === filter
+										|| filter === 'ALL')
+									&& (!projectId
+										|| (task.section
+											&& task.section.project.id
+												=== projectId))
+									&& tags.every(tag => task.tags.some(
+										taskTag => taskTag.id === tag,
+									)),
+							);
+
+							return unscheduledTasks.length !== 0
+								|| unscheduledFilteredTasks.length
+									!== unscheduledTasks.length ? (
+									<TasksList
+										style={{minHeight: '50px'}}
+										hasFilteredItems={
+											ongoingProjectAndNoProjectTask.length
+										!== unscheduledFilteredTasks.length
+										}
+										items={unscheduledFilteredTasks}
 										baseUrl="dashboard"
-										setIsDragging={setIsDragging}
+										createTaskComponent={({
+											item,
+											customerToken,
+										}) => (
+											<DraggableTask
+												item={item}
+												userId={id}
+												key={item.id}
+												customerToken={customerToken}
+												baseUrl="dashboard"
+												setIsDragging={setIsDragging}
+											/>
+										)}
+										condensed
 									/>
-								)}
-								condensed
-							/>
-						) : (
-							<div style={{marginTop: '2rem'}}>
-								<IllusContainer bg={IllusBackground}>
-									<IllusFigureContainer fig={IllusFigure} />
-									<IllusText>
-										<P>
-											<fbt project="inyo" desc="no more task">
-											Vous n'avez plus de tâches à
-											planifier.
-											</fbt>
-										</P>
-									</IllusText>
-								</IllusContainer>
-							</div>
-						)}
+								) : (
+									<div style={{marginTop: '2rem'}}>
+										<IllusContainer bg={IllusBackground}>
+											<IllusFigureContainer
+												fig={IllusFigure}
+											/>
+											<IllusText>
+												<P>
+													<fbt
+														project="inyo"
+														desc="no more task"
+													>
+													Vous n'avez plus de tâches à
+													planifier.
+													</fbt>
+												</P>
+											</IllusText>
+										</IllusContainer>
+									</div>
+								);
+						}}
+					</Loading>
 				</div>
 			</FlexRowMobile>
 			<Route

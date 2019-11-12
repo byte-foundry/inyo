@@ -91,23 +91,15 @@ const TopBar = styled('div')`
 		padding-top: ${props => (props.visible ? '28px' : '10px')};
 
 		position: fixed;
-		z-index: 100;
 		overflow: hidden;
 
+		left: ${props => (props.visible ? '0' : 'auto')};
 		top: ${props => (props.visible ? '0' : 'auto')};
 		right: ${props => (props.visible ? '0' : '1em')};
 		bottom: ${props => (props.visible ? '0' : 'auto')};
 		height: ${props => (props.visible ? 'auto' : '30px')};
 		width: ${props => (props.visible ? 'auto' : '40px;')};
 		border-radius: ${props => (props.visible ? '0' : '50%;')};
-
-		span {
-			display: inline;
-		}
-
-		a {
-			width: ${props => (props.visible ? 'calc(100vw - 100px);' : '0')};
-		}
 	}
 `;
 

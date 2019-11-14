@@ -59,11 +59,26 @@ const UnitWithSuggestionsForm = ({
 }) => {
 	const {workingTime = 8} = useUserInfos();
 
-	const [defaultValue, setDefaultValue] = useState();
+	const [defaultValue, setDefaultValue] = useState(value);
 
+	// This is because the value prop may change because it is transient
+	// to the display of UnitWithSuggestionsForm
+	// So we initialize it with a componentDidMount
 	useEffect(() => {
-		setDefaultValue(value);
-	}, []);
+		if (defaultValue === undefined) {
+			setDefaultValue(value);
+		}
+	}, [value]);
+
+	// This is done because all value in input are use as defaultValue
+	// If we send a value that is not correct it will be treated as
+	// the default value and cannot be owerwritten which leads to an
+	// incorrect display
+	// It would probably be better to make all this chain of component
+	// completely manage but this seems a bit overkill
+	if (defaultValue === undefined) {
+		return false;
+	}
 
 	let underestimatedTimes;
 
@@ -173,7 +188,7 @@ const UnitWithSuggestionsForm = ({
 UnitWithSuggestionsForm.defaultProps = {
 	onChange: () => {},
 	small: false,
-	value: 0,
+	value: undefined,
 	isTimeItTook: false,
 };
 

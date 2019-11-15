@@ -2141,6 +2141,16 @@
     }
    ]
   },
+  "aE5T7Rw8WmlhfUyp0rspAw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Close",
+     "variations": {}
+    }
+   ]
+  },
   "+TSsouyNnpOuotBby5ZXPg==": {
    "tokens": [],
    "types": [],
@@ -4931,6 +4941,26 @@
     }
    ]
   },
+  "eof2ZYrjLb3BbSbbPLuR0g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "When you finish tasks during your day, a report is sent to customers to inform them about the project's or tasks progression about what they are affected.",
+     "variations": {}
+    }
+   ]
+  },
+  "726EBmyncZesHmufFOCfbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If you do not wish the customer to receive a report, you can deactivate the project's notifications.",
+     "variations": {}
+    }
+   ]
+  },
   "YkVlfGqCcjXL+Pr934sTwg==": {
    "tokens": [],
    "types": [],
@@ -7697,6 +7727,16 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "d2jK5DJtnWtXYdobMfs2ug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Daily report sent to {customerName}",
      "variations": {}
     }
    ]

@@ -19,7 +19,7 @@ import {
 	P,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS} from '../../../utils/queries';
+import {GET_ALL_TASKS_STATS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
@@ -94,7 +94,7 @@ const Stats = ({history, location}) => {
 			me: {id, tasks},
 		},
 		error,
-	} = useQuery(GET_ALL_TASKS, {suspend: true});
+	} = useQuery(GET_ALL_TASKS_STATS, {suspend: true});
 	const {
 		workingTime = 8, defaultDailyPrice = 0, clientViews, language,
 	}

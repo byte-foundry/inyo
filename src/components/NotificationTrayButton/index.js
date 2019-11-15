@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
@@ -18,6 +17,7 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_USER_NOTIFICATIONS} from '../../utils/queries';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import IconButton from '../IconButton';
 import NotificationItem from '../NotificationItem';
 import Tooltip from '../Tooltip';

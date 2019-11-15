@@ -3,15 +3,9 @@ import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
-import {BREAKPOINTS} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import noRemindersIllus from '../../utils/images/bermuda-done.svg';
-import {
-	Aside,
-	lightGrey,
-	primaryGrey,
-	SubHeading,
-} from '../../utils/new/design-system';
+import {primaryGrey, SubHeading} from '../../utils/new/design-system';
 import {GET_REMINDERS, GET_USER_INFOS} from '../../utils/queries';
 import Apostrophe from '../Apostrophe';
 import TaskRemindersList from '../TaskRemindersList';
@@ -47,7 +41,7 @@ const NoReminders = styled('div')`
 	align-items: center;
 `;
 
-const SidebarDashboardInfos = () => {
+const SidebarDashboardInfos = ({onOpenSubPortal}) => {
 	const {data, loading} = useQuery(GET_REMINDERS);
 	const {loading: loadingUser, data: userData} = useQuery(GET_USER_INFOS);
 
@@ -100,6 +94,7 @@ const SidebarDashboardInfos = () => {
 							small
 							reminders={reminders}
 							baseUrl="/app/dashboard"
+							onOpenSubPortal={onOpenSubPortal}
 						/>
 					) : (
 						<NoReminders>

@@ -2,7 +2,6 @@ import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
@@ -42,6 +41,7 @@ import {
 	TaskHeading,
 } from '../../utils/new/design-system';
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import Apostrophe from '../Apostrophe';
 import CheckList from '../CheckList';

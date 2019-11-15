@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import {Formik} from 'formik';
-import React, {useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
+import React, {useCallback, useRef, useState} from 'react';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
@@ -12,6 +11,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import Tooltip from '../Tooltip';
 
@@ -74,10 +74,6 @@ const UnitInputForm = styled('form')`
 	align-items: center;
 `;
 
-let outsideClosureState;
-// This is necessary becuse useOnClickOutside
-// does not update the handler when state changes
-
 const UnitInput = ({
 	unit,
 	onBlur,
@@ -97,19 +93,19 @@ const UnitInput = ({
 	const containerRef = useRef(null);
 	const {workingTime = 8} = useUserInfos();
 
-	outsideClosureState = isHours;
-
 	getValue.current = () => {
 		const valueFloat = parseFloat(inputRef.current.value);
 
-		return outsideClosureState ? valueFloat / workingTime : valueFloat;
+		return isHours ? valueFloat / workingTime : valueFloat;
 	};
 
-	useOnClickOutside(containerRef, () => {
+	const blurCallback = useCallback(() => {
 		const valueFloat = parseFloat(inputRef.current.value);
 
-		if (document.activeElement === inputRef.current) onBlur(outsideClosureState ? valueFloat / workingTime : valueFloat);
-	});
+		if (document.activeElement === inputRef.current) onBlur(isHours ? valueFloat / workingTime : valueFloat);
+	}, [inputRef, isHours, onBlur, workingTime]);
+
+	useOnClickOutside(containerRef, blurCallback);
 
 	return (
 		<Formik

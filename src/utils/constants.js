@@ -304,6 +304,15 @@ export const REMINDER_TYPES_DATA = {
 			'fitfh reminder invoice email',
 		),
 	},
+	CUSTOMER_REPORT: {
+		text: customerName => fbt(
+			`Rapport du jour envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'customer report email',
+		),
+	},
 };
 
 export const EVENT_TYPES = [

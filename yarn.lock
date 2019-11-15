@@ -2890,7 +2890,7 @@ arch@2.1.1:
   resolved "https://registry.yarnpkg.com/arch/-/arch-2.1.1.tgz#8f5c2731aa35a30929221bb0640eed65175ec84e"
   integrity sha512-BLM56aPo9vLLFVa8+/+pJLnrZ7QGGTVHWsCwieAWT9o9K8UeGaQbzZbGoabWLOo2ksBCztoXdqBZBplqLDDCSg==
 
-are-passive-events-supported@^1.0.0:
+are-passive-events-supported@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/are-passive-events-supported/-/are-passive-events-supported-1.1.1.tgz#3db180a1753a2186a2de50a32cded3ac0979f5dc"
   integrity sha512-5wnvlvB/dTbfrCvJ027Y4L4gW/6Mwoy1uFSavney0YO++GU+0e/flnjiBBwH+1kh7xNCgCOGvmJC3s32joYbww==
@@ -14339,13 +14339,6 @@ use-callback-ref@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/use-callback-ref/-/use-callback-ref-1.2.1.tgz#898759ccb9e14be6c7a860abafa3ffbd826c89bb"
   integrity sha512-C3nvxh0ZpaOxs9RCnWwAJ+7bJPwQI8LHF71LzbQ3BvzH5XkdtlkMadqElGevg5bYBDFip4sAnD4m06zAKebg1w==
-
-use-onclickoutside@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/use-onclickoutside/-/use-onclickoutside-0.2.2.tgz#1142b67ef0a59d3aa5059f52a8281ba3cac44987"
-  integrity sha512-aJ8sCXqjYUXDWcb3Ke7dF0AxU2cuWcS3U6BO/WYE+26dhLOOK0DZ3rFtDEZmY73TkcciFn06jbx4rmsRdPoCqA==
-  dependencies:
-    are-passive-events-supported "^1.0.0"
 
 use-sidecar@^1.0.1:
   version "1.0.2"

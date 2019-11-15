@@ -2,7 +2,6 @@ import moment from 'moment';
 import React, {
 	useCallback, useEffect, useRef, useState,
 } from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {
@@ -11,6 +10,7 @@ import {
 	DueDateInputElem,
 	TaskIconText,
 } from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import DateInput from '../DateInput';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';

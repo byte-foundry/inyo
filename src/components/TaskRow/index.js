@@ -9,7 +9,6 @@ import React, {
 	useState,
 } from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
@@ -25,6 +24,7 @@ import {
 	TaskIcon,
 	TaskIconText,
 } from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import ConfirmFinishCustomerTaskModal from '../ConfirmFinishCustomerTaskModal';

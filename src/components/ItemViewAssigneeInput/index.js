@@ -1,10 +1,10 @@
 import Portal from '@reach/portal';
 import React, {useEffect, useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {formatName} from '../../utils/functions';
 import {Meta, MetaLabel, MetaText} from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';

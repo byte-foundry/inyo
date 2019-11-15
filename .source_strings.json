@@ -10947,9 +10947,9 @@
     "KOapM+8+RoGh5EftlvYEOA==": "Statistiques"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 251,
+   "line_beg": 252,
    "col_beg": 5,
-   "line_end": 253,
+   "line_end": 254,
    "col_end": 11,
    "type": "text",
    "desc": "Statistics",
@@ -10961,9 +10961,9 @@
     "EIjZ8Jh8IVnbctQCJN+z3w==": "Afficher {timespan}"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 256,
+   "line_beg": 257,
    "col_beg": 5,
-   "line_end": 312,
+   "line_end": 313,
    "col_end": 11,
    "type": "text",
    "desc": "Show",
@@ -10975,9 +10975,9 @@
     "DKxLQ1KcMR56JIxL15QDog==": "les 7 derniers jours"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 266,
+   "line_beg": 267,
    "col_beg": 12,
-   "line_end": 271,
+   "line_end": 272,
    "col_end": 18,
    "type": "text",
    "desc": "7 last days",
@@ -10989,9 +10989,9 @@
     "rtJdCPl645dXeKmtCpfEFw==": "les 30 derniers jours"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 277,
+   "line_beg": 278,
    "col_beg": 12,
-   "line_end": 282,
+   "line_end": 283,
    "col_end": 18,
    "type": "text",
    "desc": "30 last days",
@@ -11003,9 +11003,9 @@
     "3kC4J4DKoJvOVEu3Zh81iA==": "les 3 derniers mois"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 288,
+   "line_beg": 289,
    "col_beg": 12,
-   "line_end": 293,
+   "line_end": 294,
    "col_end": 18,
    "type": "text",
    "desc": "3 last months",
@@ -11017,9 +11017,9 @@
     "pMmKDGLFliqJJcK+v+myZg==": "les 6 derniers mois"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 299,
+   "line_beg": 300,
    "col_beg": 12,
-   "line_end": 304,
+   "line_end": 305,
    "col_end": 18,
    "type": "text",
    "desc": "6 last months",
@@ -11031,9 +11031,9 @@
     "eJe+ko0d0nvEjGFrDOqZAA==": "Répartition de vos clients"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 318,
+   "line_beg": 319,
    "col_beg": 5,
-   "line_end": 320,
+   "line_end": 321,
    "col_end": 11,
    "type": "text",
    "desc": "client share",
@@ -11042,12 +11042,40 @@
   },
   {
    "hashToText": {
+    "AZaXWj2VDuLGp0OWJjxyDg==": "{=Il s'agit de la répartition de votre activité parmi vos clients sur la période sélectionnée.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 323,
+   "col_beg": 6,
+   "line_end": 327,
+   "col_end": 12,
+   "type": "text",
+   "desc": "client share tooltip",
+   "project": "",
+   "jsfbt": "{=Il s'agit de la répartition de votre activité parmi vos clients sur la période sélectionnée.}"
+  },
+  {
+   "hashToText": {
+    "tctjy+H5QzepjY4kSBHrGQ==": "Il s'agit de la répartition de votre activité parmi vos clients sur la période sélectionnée."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 324,
+   "col_beg": 7,
+   "line_end": 326,
+   "col_end": 11,
+   "type": "text",
+   "desc": "In the phrase: \"{=Il s'agit de la répartition de votre activité parmi vos clients sur la période sélectionnée.}\"",
+   "project": "",
+   "jsfbt": "Il s'agit de la répartition de votre activité parmi vos clients sur la période sélectionnée."
+  },
+  {
+   "hashToText": {
     "1K/eeL6OoINQBgAI2S+tCQ==": "Rapport temps estimé / temps réellement passé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 337,
+   "line_beg": 345,
    "col_beg": 5,
-   "line_end": 342,
+   "line_end": 350,
    "col_end": 11,
    "type": "text",
    "desc": "Estimated time / worked time rate",
@@ -11056,12 +11084,54 @@
   },
   {
    "hashToText": {
+    "3xYLR6SfVMV/cz9d2lVvfg==": "{=Permet de mesurer votre productivité selon les filtres et la période sélectionnés.}{=La zone blanche vous indique que vous avez plus rapide que prévu sur les tâches faites. Une barre violet claire représente le temps en sus de vos estimations.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 352,
+   "col_beg": 6,
+   "line_end": 359,
+   "col_end": 12,
+   "type": "text",
+   "desc": "Estimated time / worked time rate tooltip",
+   "project": "",
+   "jsfbt": "{=Permet de mesurer votre productivité selon les filtres et la période sélectionnés.}{=La zone blanche vous indique que vous avez plus rapide que prévu sur les tâches faites. Une barre violet claire représente le temps en sus de vos estimations.}"
+  },
+  {
+   "hashToText": {
+    "O7fdBOvRkVMu4Y9SKZ3dQw==": "Permet de mesurer votre productivité selon les filtres et la période sélectionnés."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 353,
+   "col_beg": 7,
+   "line_end": 355,
+   "col_end": 11,
+   "type": "text",
+   "desc": "In the phrase: \"{=Permet de mesurer votre productivité selon les filtres et la période sélectionnés.}{=La zone blanche vous indique que vous avez plus rapide que prévu sur les tâches faites. Une barre violet claire représente le temps en sus de vos estimations.}\"",
+   "project": "",
+   "jsfbt": "Permet de mesurer votre productivité selon les filtres et la période sélectionnés."
+  },
+  {
+   "hashToText": {
+    "HmJAvJ4k20rfnI44KG5lkg==": "La zone blanche vous indique que vous avez plus rapide que prévu sur les tâches faites. Une barre violet claire représente le temps en sus de vos estimations."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 356,
+   "col_beg": 7,
+   "line_end": 358,
+   "col_end": 11,
+   "type": "text",
+   "desc": "In the phrase: \"{=Permet de mesurer votre productivité selon les filtres et la période sélectionnés.}{=La zone blanche vous indique que vous avez plus rapide que prévu sur les tâches faites. Une barre violet claire représente le temps en sus de vos estimations.}\"",
+   "project": "",
+   "jsfbt": "La zone blanche vous indique que vous avez plus rapide que prévu sur les tâches faites. Une barre violet claire représente le temps en sus de vos estimations."
+  },
+  {
+   "hashToText": {
     "0K+9honF4vsx62F8wA0Svw==": "Temps travaillé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 355,
+   "line_beg": 373,
    "col_beg": 7,
-   "line_end": 357,
+   "line_end": 375,
    "col_end": 13,
    "type": "text",
    "desc": "Worked time",
@@ -11070,12 +11140,40 @@
   },
   {
    "hashToText": {
+    "W5S/eabKGM78p/srSNf8Zw==": "{=La somme des heures réellement travaillées selon les filtres et la période sélectionnés.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 377,
+   "col_beg": 8,
+   "line_end": 381,
+   "col_end": 14,
+   "type": "text",
+   "desc": "rWorked time tooltip",
+   "project": "",
+   "jsfbt": "{=La somme des heures réellement travaillées selon les filtres et la période sélectionnés.}"
+  },
+  {
+   "hashToText": {
+    "F2GNjnshipx4C0n6IiVL+A==": "La somme des heures réellement travaillées selon les filtres et la période sélectionnés."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 378,
+   "col_beg": 9,
+   "line_end": 380,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=La somme des heures réellement travaillées selon les filtres et la période sélectionnés.}\"",
+   "project": "",
+   "jsfbt": "La somme des heures réellement travaillées selon les filtres et la période sélectionnés."
+  },
+  {
+   "hashToText": {
     "NVAk5+s4aeW/WEWjew+EdQ==": "Temps estimé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 373,
+   "line_beg": 398,
    "col_beg": 7,
-   "line_end": 375,
+   "line_end": 400,
    "col_end": 13,
    "type": "text",
    "desc": "estimated time",
@@ -11084,12 +11182,40 @@
   },
   {
    "hashToText": {
+    "BkarQQVPaf0Vblob2ZxhNg==": "{=La somme des heures intialement estimées selon les filtres et la période sélectionnés.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 402,
+   "col_beg": 8,
+   "line_end": 406,
+   "col_end": 14,
+   "type": "text",
+   "desc": "estimated time tooltip",
+   "project": "",
+   "jsfbt": "{=La somme des heures intialement estimées selon les filtres et la période sélectionnés.}"
+  },
+  {
+   "hashToText": {
+    "vJTM5/peG0P0kQfVf1DWEg==": "La somme des heures intialement estimées selon les filtres et la période sélectionnés."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 403,
+   "col_beg": 9,
+   "line_end": 405,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=La somme des heures intialement estimées selon les filtres et la période sélectionnés.}\"",
+   "project": "",
+   "jsfbt": "La somme des heures intialement estimées selon les filtres et la période sélectionnés."
+  },
+  {
+   "hashToText": {
     "krD+apK875r/1FAplgTaQA==": "Rappels envoyés"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 391,
+   "line_beg": 423,
    "col_beg": 7,
-   "line_end": 393,
+   "line_end": 425,
    "col_end": 13,
    "type": "text",
    "desc": "reminders sent",
@@ -11098,12 +11224,54 @@
   },
   {
    "hashToText": {
+    "nIdV3CoZ2WhY1mbiRR4x8g==": "{=Nombre de rappels que votre Smart Assistant a envoyé selon les filtres et la période sélectionnés.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 427,
+   "col_beg": 8,
+   "line_end": 431,
+   "col_end": 14,
+   "type": "text",
+   "desc": "reminders sent tooltip",
+   "project": "",
+   "jsfbt": "{=Nombre de rappels que votre Smart Assistant a envoyé selon les filtres et la période sélectionnés.}"
+  },
+  {
+   "hashToText": {
+    "EGVPD/2eq4jtbsy68EWPNQ==": "Nombre de rappels que votre {=Smart Assistant} a envoyé selon les filtres et la période sélectionnés."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 428,
+   "col_beg": 9,
+   "line_end": 430,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Nombre de rappels que votre Smart Assistant a envoyé selon les filtres et la période sélectionnés.}\"",
+   "project": "",
+   "jsfbt": "Nombre de rappels que votre {=Smart Assistant} a envoyé selon les filtres et la période sélectionnés."
+  },
+  {
+   "hashToText": {
+    "1vip6xVBqrCJhk+X544wJw==": "Smart Assistant"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 429,
+   "col_beg": 38,
+   "line_end": 429,
+   "col_end": 60,
+   "type": "text",
+   "desc": "In the phrase: \"Nombre de rappels que votre {=Smart Assistant} a envoyé selon les filtres et la période sélectionnés.\"",
+   "project": "",
+   "jsfbt": "Smart Assistant"
+  },
+  {
+   "hashToText": {
     "zTLbttckbhyR65ApxlfqBg==": "Temps gagné"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 405,
+   "line_beg": 444,
    "col_beg": 7,
-   "line_end": 407,
+   "line_end": 446,
    "col_end": 13,
    "type": "text",
    "desc": "Gained time",
@@ -11112,12 +11280,54 @@
   },
   {
    "hashToText": {
+    "/6vv96LOLrnPfZA+2L5mXg==": "{=Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votre Smart Assistant.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 448,
+   "col_beg": 8,
+   "line_end": 452,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Gained time tooltip",
+   "project": "",
+   "jsfbt": "{=Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votre Smart Assistant.}"
+  },
+  {
+   "hashToText": {
+    "kqwiZrX3xPb9CLm06zuLhg==": "Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votre {=Smart Assistant}."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 449,
+   "col_beg": 9,
+   "line_end": 451,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votre Smart Assistant.}\"",
+   "project": "",
+   "jsfbt": "Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votre {=Smart Assistant}."
+  },
+  {
+   "hashToText": {
+    "lSUjTG47b6bt1EBywRZt0A==": "Smart Assistant"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 450,
+   "col_beg": 81,
+   "line_end": 450,
+   "col_end": 103,
+   "type": "text",
+   "desc": "In the phrase: \"Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votre {=Smart Assistant}.\"",
+   "project": "",
+   "jsfbt": "Smart Assistant"
+  },
+  {
+   "hashToText": {
     "J5LcRx9iBIJ6iam4yM6ICg==": "Visites client"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 422,
+   "line_beg": 468,
    "col_beg": 7,
-   "line_end": 424,
+   "line_end": 470,
    "col_end": 13,
    "type": "text",
    "desc": "Client visits",
@@ -11126,12 +11336,40 @@
   },
   {
    "hashToText": {
+    "5Bp7ax36rcQ+UJNj2GKPxQ==": "{=Nombre de visites de la part de vos clients sur les projets définis selon les filtres et la période sélectionnés.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 472,
+   "col_beg": 8,
+   "line_end": 476,
+   "col_end": 14,
+   "type": "text",
+   "desc": "Client visits tooltip",
+   "project": "",
+   "jsfbt": "{=Nombre de visites de la part de vos clients sur les projets définis selon les filtres et la période sélectionnés.}"
+  },
+  {
+   "hashToText": {
+    "N/n55T9UGRUO5j7gYgy7sg==": "Nombre de visites de la part de vos clients sur les projets définis selon les filtres et la période sélectionnés."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 473,
+   "col_beg": 9,
+   "line_end": 475,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Nombre de visites de la part de vos clients sur les projets définis selon les filtres et la période sélectionnés.}\"",
+   "project": "",
+   "jsfbt": "Nombre de visites de la part de vos clients sur les projets définis selon les filtres et la période sélectionnés."
+  },
+  {
+   "hashToText": {
     "S5zAFspJmhz4q+bMF4pQqA==": "Montant travaillé"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 430,
+   "line_beg": 483,
    "col_beg": 7,
-   "line_end": 432,
+   "line_end": 485,
    "col_end": 13,
    "type": "text",
    "desc": "estimated time",
@@ -11140,12 +11378,54 @@
   },
   {
    "hashToText": {
+    "mr/TFqKoCMfqxDHVSXGKLw==": "{=Valeur de votre travail selon votre TJM et les filtres et période sélectionnés.}"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 487,
+   "col_beg": 8,
+   "line_end": 491,
+   "col_end": 14,
+   "type": "text",
+   "desc": "estimated time tooltip",
+   "project": "",
+   "jsfbt": "{=Valeur de votre travail selon votre TJM et les filtres et période sélectionnés.}"
+  },
+  {
+   "hashToText": {
+    "qJ7lTJhn5GO7+QUF1IEqag==": "Valeur de votre travail selon {=votre TJM} et les filtres et période sélectionnés."
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 488,
+   "col_beg": 9,
+   "line_end": 490,
+   "col_end": 13,
+   "type": "text",
+   "desc": "In the phrase: \"{=Valeur de votre travail selon votre TJM et les filtres et période sélectionnés.}\"",
+   "project": "",
+   "jsfbt": "Valeur de votre travail selon {=votre TJM} et les filtres et période sélectionnés."
+  },
+  {
+   "hashToText": {
+    "yyaOV3D0TSSmSMSfZDV46w==": "votre TJM"
+   },
+   "filepath": "src/screens/App/Stats/index.js",
+   "line_beg": 489,
+   "col_beg": 40,
+   "line_end": 489,
+   "col_end": 89,
+   "type": "text",
+   "desc": "In the phrase: \"Valeur de votre travail selon {=votre TJM} et les filtres et période sélectionnés.\"",
+   "project": "",
+   "jsfbt": "votre TJM"
+  },
+  {
+   "hashToText": {
     "zZBJ6cBdsYxLXMc/mbyOGw==": "Vous souhaitez d'autres statistiques? {=Contactez-nous}"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 457,
+   "line_beg": 517,
    "col_beg": 7,
-   "line_end": 465,
+   "line_end": 524,
    "col_end": 13,
    "type": "text",
    "desc": "stats question",
@@ -11157,9 +11437,9 @@
     "BdSTSL1PZ+q5EHM3jdBIJQ==": "Contactez-nous"
    },
    "filepath": "src/screens/App/Stats/index.js",
-   "line_beg": 459,
+   "line_beg": 519,
    "col_beg": 8,
-   "line_end": 464,
+   "line_end": 523,
    "col_end": 12,
    "type": "text",
    "desc": "In the phrase: \"Vous souhaitez d'autres statistiques? {=Contactez-nous}\"",

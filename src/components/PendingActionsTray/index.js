@@ -108,12 +108,16 @@ const PendingActionsTray = ({projectId}) => {
 		}
 	}, [isVisible]);
 
-	const [valuesMap, setValuesMap] = useState(
-		pendingTimeItTookTasks.reduce((map, {id, unit}) => {
+	const [valuesMap, setValuesMap] = useState({});
+
+	useEffect(() => {
+		const newValues = pendingTimeItTookTasks.reduce((map, {id, unit}) => {
 			map[id] = unit;
 			return map;
-		}, {}),
-	);
+		}, {});
+
+		setValuesMap(newValues);
+	}, [tasks]);
 
 	return (
 		<Portal>

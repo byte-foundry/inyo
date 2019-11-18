@@ -142,7 +142,7 @@ const TogglingTopBar = () => {
 						</fbt>
 					}
 				>
-					<TopBarMenuLink to="/app/collaborators">
+					<TopBarMenuLink to="/app/emails">
 						<MaterialIcon icon="mail" size="tiny" color="inherit" />
 						<span>
 							<fbt project="inyo" desc="Collaborators">

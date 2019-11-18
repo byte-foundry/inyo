@@ -2,7 +2,6 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useRef, useState} from 'react';
 import {withRouter} from 'react-router-dom';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
@@ -30,6 +29,7 @@ import {
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import CollabLinkToProjectList from '../CollabLinkToProjectList';
 import CollaboratorModal from '../CollaboratorModal';

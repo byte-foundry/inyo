@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
-import React, {useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
+import React, {
+	useCallback, useEffect, useRef, useState,
+} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
@@ -13,6 +14,7 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_REMINDERS} from '../../utils/queries';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import IconButton from '../IconButton';
 import SidebarDashboardInfos from '../SidebarDashboardInfos';
 import Tooltip from '../Tooltip';
@@ -76,6 +78,7 @@ const Number = styled('div')`
 const AssistantActions = ({mobile}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
+	const [preventClose, setPreventClose] = useState(false);
 	const [isOpen, setOpen] = useState(false);
 	const {data, refetch, loading} = useQuery(GET_REMINDERS, {
 		pollInterval: 1000 * 60,
@@ -91,9 +94,12 @@ const AssistantActions = ({mobile}) => {
 				.length;
 	}
 
-	useOnClickOutside(dialogRef, () => {
-		setOpen(false);
-	});
+	const onClickOutsideCallback = useCallback(() => {
+		console.log(!preventClose ? 'oui!' : 'non!');
+		!preventClose && setOpen(false);
+	}, [preventClose]);
+
+	useOnClickOutside(dialogRef, onClickOutsideCallback);
 
 	return (
 		<AssistantActionsContainer mobile={mobile}>
@@ -142,7 +148,10 @@ const AssistantActions = ({mobile}) => {
 								: undefined,
 						}}
 					>
-						<SidebarDashboardInfos />
+						<SidebarDashboardInfos
+							onOpenSubPortal={isSubPortalOpen => setPreventClose(isSubPortalOpen)
+							}
+						/>
 					</Dropdown>
 				</Portal>
 			)}

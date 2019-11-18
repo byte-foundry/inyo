@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
 import React, {useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
@@ -17,6 +16,7 @@ import {
 } from '../../utils/new/design-system';
 import {templates} from '../../utils/project-templates';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import DateInput from '../DateInput';
 import FormElem from '../FormElem';

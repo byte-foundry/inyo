@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
@@ -23,6 +22,7 @@ import {
 	primaryPurple,
 	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import CheckList from '../CheckList';
 import CustomerModalAndMail from '../CustomerModalAndMail';

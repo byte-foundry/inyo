@@ -8,7 +8,9 @@ import IconButton from '../IconButton';
 
 const HelpAndTooltipContainer = styled('div')`
 	padding: 0rem 1rem;
-	corlor: ${gray80};
+	color: ${gray80};
+	font-size: 0.9rem;
+	line-height: 1.5;
 `;
 
 const HelpAndTooltip = ({icon = 'help', children}) => {

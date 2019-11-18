@@ -1,9 +1,10 @@
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useCallback} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
+import HelpAndTooltip from '../../../components/HelpAndTooltip';
 import MaterialIcon from '../../../components/MaterialIcon';
 import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
@@ -318,6 +319,14 @@ const Stats = ({history, location}) => {
 					<fbt project="inyo" desc="client share">
 						Répartition de vos clients
 					</fbt>
+					<HelpAndTooltip icon="help">
+						<fbt desc="client share tooltip">
+							<p>
+								Il s'agit de la répartition de votre activité
+								parmi vos clients sur la période sélectionnée.
+							</p>
+						</fbt>
+					</HelpAndTooltip>
 				</PageSubHeading>
 				<SingleBarChart entries={customerDistributions} />
 			</Section>
@@ -340,6 +349,20 @@ const Stats = ({history, location}) => {
 					>
 						Rapport temps estimé / temps réellement passé
 					</fbt>
+					<HelpAndTooltip icon="help">
+						<fbt desc="Estimated time / worked time rate tooltip">
+							<p>
+								Permet de mesurer votre productivité selon les
+								filtres et la période sélectionnés.
+							</p>
+							<p>
+								La zone blanche vous indique que vous avez plus
+								rapide que prévu sur les tâches faites. Une
+								barre violet claire représente le temps en sus
+								de vos estimations.
+							</p>
+						</fbt>
+					</HelpAndTooltip>
 				</PageSubHeading>
 				<TasksProgressBar
 					showCompletionPercentage={false}
@@ -355,6 +378,15 @@ const Stats = ({history, location}) => {
 							<fbt project="inyo" desc="Worked time">
 								Temps travaillé
 							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="rWorked time tooltip">
+									<p>
+										La somme des heures réellement
+										travaillées selon les filtres et la
+										période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
 							{(
@@ -373,6 +405,15 @@ const Stats = ({history, location}) => {
 							<fbt project="inyo" desc="estimated time">
 								Temps estimé
 							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="estimated time tooltip">
+									<p>
+										La somme des heures intialement estimées
+										selon les filtres et la période
+										sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
 							{(
@@ -391,6 +432,15 @@ const Stats = ({history, location}) => {
 							<fbt project="inyo" desc="reminders sent">
 								Rappels envoyés
 							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="reminders sent tooltip">
+									<p>
+										Nombre de rappels que votre{' '}
+										<i>Smart Assistant</i> a envoyé selon
+										les filtres et la période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
 							{
@@ -405,6 +455,15 @@ const Stats = ({history, location}) => {
 							<fbt project="inyo" desc="Gained time">
 								Temps gagné
 							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Gained time tooltip">
+									<p>
+										Temps gagné grâce à l'utilisation
+										d'Inyo, du fait des actions de votre{' '}
+										<i>Smart Assistant</i>.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
 							{moment
@@ -422,6 +481,15 @@ const Stats = ({history, location}) => {
 							<fbt project="inyo" desc="Client visits">
 								Visites client
 							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Client visits tooltip">
+									<p>
+										Nombre de visites de la part de vos
+										clients sur les projets définis selon
+										les filtres et la période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
 						</SubHeading>
 						<Number>{clientViews}</Number>
 					</Card>
@@ -430,6 +498,17 @@ const Stats = ({history, location}) => {
 							<fbt project="inyo" desc="estimated time">
 								Montant travaillé
 							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="estimated time tooltip">
+									<p>
+										Valeur de votre travail selon{' '}
+										<Link to="/app/account#settings">
+											votre TJM
+										</Link>{' '}
+										et les filtres et période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
 							{new Intl.NumberFormat(language, {
@@ -456,10 +535,7 @@ const Stats = ({history, location}) => {
 						<P>
 							<fbt project="inyo" desc="stats question">
 								Vous souhaitez d'autres statistiques?
-								<A
-									style={{marginLeft: '1rem'}}
-									href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…"
-								>
+								<A href="mailto:contact@inyo.me?subject=Page stats&body=Bonjour,%0D%0A%0D%0AIl serait intéressant d’avoir sur la page stats, des infos par rapport à…">
 									Contactez-nous
 								</A>
 							</fbt>

@@ -821,6 +821,26 @@
     }
    ]
   },
+  "bTXt3ZJO1kLcpvHmZVxSvw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You're about to finish a task your customer should have done through the automatic reminders.",
+     "variations": {}
+    }
+   ]
+  },
+  "F122h/AoSerVkl09OPfFWg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Do you wish to continue?",
+     "variations": {}
+    }
+   ]
+  },
   "fEllyq1WiFdeYXrC6eIGTg==": {
    "tokens": [],
    "types": [],
@@ -1031,7 +1051,7 @@
     }
    ]
   },
-  "c3VHPe85E60l03JpI4/uPA==": {
+  "rsuM33njq+0qHscCKDuC/g==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -2117,6 +2137,16 @@
    "translations": [
     {
      "translation": "We need this info to send you email at the right time.",
+     "variations": {}
+    }
+   ]
+  },
+  "aE5T7Rw8WmlhfUyp0rspAw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Close",
      "variations": {}
     }
    ]
@@ -4911,6 +4941,26 @@
     }
    ]
   },
+  "eof2ZYrjLb3BbSbbPLuR0g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "When you finish tasks during your day, a report is sent to customers to inform them about the project's or tasks progression about what they are affected.",
+     "variations": {}
+    }
+   ]
+  },
+  "726EBmyncZesHmufFOCfbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If you do not wish the customer to receive a report, you can deactivate the project's notifications.",
+     "variations": {}
+    }
+   ]
+  },
   "YkVlfGqCcjXL+Pr934sTwg==": {
    "tokens": [],
    "types": [],
@@ -7001,12 +7051,62 @@
     }
    ]
   },
+  "AZaXWj2VDuLGp0OWJjxyDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This is the distribution of your activity among your customers over the selected period.",
+     "variations": {}
+    }
+   ]
+  },
+  "tctjy+H5QzepjY4kSBHrGQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This the shares of your work",
+     "variations": {}
+    }
+   ]
+  },
   "1K/eeL6OoINQBgAI2S+tCQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Estimated time / Worked time",
+     "variations": {}
+    }
+   ]
+  },
+  "3xYLR6SfVMV/cz9d2lVvfg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Measure your productivity according to the filters and period selected.",
+     "variations": {}
+    }
+   ]
+  },
+  "O7fdBOvRkVMu4Y9SKZ3dQw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Measure your productivity according to the filters and period selected.",
+     "variations": {}
+    }
+   ]
+  },
+  "HmJAvJ4k20rfnI44KG5lkg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The white area indicates that you have worked faster than planned. A clear purple bar represents the time in addition to your estimates.",
      "variations": {}
     }
    ]
@@ -7021,12 +7121,52 @@
     }
    ]
   },
+  "W5S/eabKGM78p/srSNf8Zw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "F2GNjnshipx4C0n6IiVL+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
   "NVAk5+s4aeW/WEWjew+EdQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Estimated time",
+     "variations": {}
+    }
+   ]
+  },
+  "BkarQQVPaf0Vblob2ZxhNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "vJTM5/peG0P0kQfVf1DWEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours initially estimated according to the selected filters and period.",
      "variations": {}
     }
    ]
@@ -7041,12 +7181,72 @@
     }
    ]
   },
+  "nIdV3CoZ2WhY1mbiRR4x8g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of reminders sent by your Smart Assistant according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "EGVPD/2eq4jtbsy68EWPNQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of reminders sent by your Smart Assistant according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "1vip6xVBqrCJhk+X544wJw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Smart Assistant",
+     "variations": {}
+    }
+   ]
+  },
   "zTLbttckbhyR65ApxlfqBg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Time gained",
+     "variations": {}
+    }
+   ]
+  },
+  "/6vv96LOLrnPfZA+2L5mXg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of time gained thanks to the automatic actions from your Smart Assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "kqwiZrX3xPb9CLm06zuLhg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of time gained thanks to the automatic actions from your Smart Assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "lSUjTG47b6bt1EBywRZt0A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Smart Assistant",
      "variations": {}
     }
    ]
@@ -7061,12 +7261,62 @@
     }
    ]
   },
+  "5Bp7ax36rcQ+UJNj2GKPxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "N/n55T9UGRUO5j7gYgy7sg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
   "S5zAFspJmhz4q+bMF4pQqA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Amount worked",
+     "variations": {}
+    }
+   ]
+  },
+  "mr/TFqKoCMfqxDHVSXGKLw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total amount worked according to your daily rate and the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "qJ7lTJhn5GO7+QUF1IEqag==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total amount worked according to your daily rate and the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "yyaOV3D0TSSmSMSfZDV46w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "your daily rate",
      "variations": {}
     }
    ]
@@ -7677,6 +7927,16 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "d2jK5DJtnWtXYdobMfs2ug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Daily report sent to {customerName}",
      "variations": {}
     }
    ]

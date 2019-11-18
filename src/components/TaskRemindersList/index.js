@@ -12,10 +12,12 @@ import {
 	accentGrey,
 	Button,
 	mediumGrey,
+	P,
 	primaryBlack,
 	primaryGrey,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
+import NoticeModal from '../NoticeModal';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
 import Tooltip from '../Tooltip';
 
@@ -88,8 +90,16 @@ const ReminderActions = styled('div')`
 const statuses = ['PENDING', 'SENT', 'CANCELED', 'ERRORED'];
 
 function TaskRemindersList({
-	reminders = [], small, baseUrl, history, noLink,
+	reminders = [],
+	small,
+	baseUrl,
+	history,
+	noLink,
+	onOpenSubPortal,
 }) {
+	const [showCustomerReportNotice, setShowCustomerReportNotice] = useState(
+		false,
+	);
 	const [, setLastUpdatedAt] = useState(new Date());
 	const [cancelReminder] = useMutation(CANCEL_REMINDER);
 
@@ -101,6 +111,10 @@ function TaskRemindersList({
 		return () => clearInterval(id);
 	}, []);
 
+	useEffect(() => {
+		onOpenSubPortal(showCustomerReportNotice);
+	}, [showCustomerReportNotice]);
+
 	return (
 		<ReminderList>
 			{[...reminders]
@@ -111,21 +125,32 @@ function TaskRemindersList({
 					return new Date(a.sendingDate) - new Date(b.sendingDate);
 				})
 				.map((reminder) => {
-					const {linkedCustomer} = reminder.item;
+					let {customer} = reminder;
+
+					if (reminder.item) {
+						customer = reminder.item.linkedCustomer;
+					}
+
 					const text = REMINDER_TYPES_DATA[reminder.type].text(
-						linkedCustomer
-							&& `${linkedCustomer.name} (${formatName(
-								linkedCustomer.firstName,
-								linkedCustomer.lastName,
+						customer
+							&& `${customer.name} (${formatName(
+								customer.firstName,
+								customer.lastName,
 							)})`,
 					);
+
+					const onClick
+						= reminder.type === 'CUSTOMER_REPORT'
+							? () => setShowCustomerReportNotice(true)
+							: () => !noLink
+									&& history.push(
+										`${baseUrl}/${reminder.item.id}`,
+									);
 
 					const reminderText = (
 						<ReminderText
 							withLink={baseUrl}
-							onClick={() => !noLink
-								&& history.push(`${baseUrl}/${reminder.item.id}`)
-							}
+							onClick={onClick}
 							small={small}
 							canceled={reminder.status === 'CANCELED'}
 							done={reminder.status === 'SENT'}
@@ -137,7 +162,7 @@ function TaskRemindersList({
 
 					return (
 						<ReminderContainer key={reminder.id}>
-							{noLink ? (
+							{noLink || reminder.type === 'CUSTOMER_REPORT' ? (
 								reminderText
 							) : (
 								<Tooltip
@@ -180,22 +205,24 @@ function TaskRemindersList({
 										)}
 									</ReminderDate>
 								</Tooltip>
-								{reminder.status === 'PENDING' && (
+								{reminder.status === 'PENDING'
+									&& !reminder.id.includes('report') && (
 									<Tooltip
 										label={
 											<fbt
 												project="inyo"
 												desc="delete this reminder tooltip"
 											>
-												Supprimer cette action
-												automatique
+													Supprimer cette action
+													automatique
 											</fbt>
 										}
 									>
 										<div
 											noLink={noLink}
 											canceled={
-												reminder.status === 'CANCELED'
+												reminder.status
+													=== 'CANCELED'
 											}
 											style={{flex: '0 0 28px'}}
 										>
@@ -228,6 +255,27 @@ function TaskRemindersList({
 						</ReminderContainer>
 					);
 				})}
+			{showCustomerReportNotice && (
+				<NoticeModal
+					onDismiss={() => setShowCustomerReportNotice(false)}
+				>
+					<P>
+						<fbt desc="customer report notice">
+							Lorsque vous validez des tâches pendant votre
+							journée, un rapport est envoyé aux clients pour les
+							informer de l'avancement du projet ou des tâches sur
+							lesquels ils sont concernés.
+						</fbt>
+					</P>
+					<P>
+						<fbt desc="customer report notice">
+							Si vous ne souhaitez pas que ce client reçoive un
+							rapport, vous pouvez désactiver les notifications du
+							projet.
+						</fbt>
+					</P>
+				</NoticeModal>
+			)}
 		</ReminderList>
 	);
 }

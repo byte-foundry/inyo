@@ -9,7 +9,6 @@ import React, {
 	useState,
 } from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
@@ -25,8 +24,11 @@ import {
 	TaskIcon,
 	TaskIconText,
 } from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
 import CollaboratorDropdown from '../CollaboratorDropdown';
+import ConfirmFinishCustomerTaskModal from '../ConfirmFinishCustomerTaskModal';
+import {useConfirmation} from '../ConfirmModal';
 import CustomerDropdown from '../CustomerDropdown';
 import InitialIdentifier from '../InitialIdentifier';
 import MaterialIcon from '../MaterialIcon';
@@ -205,6 +207,7 @@ function TaskRow({
 	const [finishItem] = useMutation(FINISH_ITEM);
 	const [unfinishItem] = useMutation(UNFINISH_ITEM);
 
+	const [confirmModal, askConfirmationNotification] = useConfirmation();
 	const [justUpdated, setJustUpdated] = useState(false);
 	const [editAssignee, setEditAssignee] = useState(false);
 	const [dropdownStyle, setDropdownStyle] = useState(false);
@@ -246,10 +249,8 @@ function TaskRow({
 	}, [finishItem, item]);
 
 	const taskUrlPrefix = '/app';
-	const isFinishable
-		= item.status !== 'FINISHED' && !isCustomerTask(item.type);
-	const isUnfinishable
-		= item.status === 'FINISHED' && !isCustomerTask(item.type);
+	const isFinishable = item.status !== 'FINISHED';
+	const isUnfinishable = item.status === 'FINISHED';
 
 	return (
 		<div ref={forwardedRef} id={`task-${item.type}`}>
@@ -262,10 +263,16 @@ function TaskRow({
 					noData={noData}
 					ref={iconRef}
 					justUpdated={justUpdated}
-					onClick={() => {
+					onClick={async () => {
 						if (!isFinishable && !isUnfinishable) return;
 
 						if (isFinishable) {
+							if (isCustomerTask(item.type)) {
+								const confirmed = await askConfirmationNotification();
+
+								if (!confirmed) return;
+							}
+
 							finishItemCallback();
 						}
 						else if (isUnfinishable) {
@@ -593,6 +600,12 @@ function TaskRow({
 					)}
 				</TaskContent>
 			</TaskContainer>
+			{confirmModal && (
+				<ConfirmFinishCustomerTaskModal
+					onConfirm={confirmModal}
+					onDismiss={() => confirmModal(false)}
+				/>
+			)}
 		</div>
 	);
 }

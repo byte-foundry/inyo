@@ -2,7 +2,6 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
 import {animated, useSpring} from 'react-spring';
-import useOnClickOutside from 'use-onclickoutside';
 
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
@@ -14,6 +13,7 @@ import {
 	Select,
 } from '../../utils/new/design-system';
 import useMeasure from '../../utils/useMeasure';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import usePrevious from '../../utils/usePrevious';
 import DateInput from '../DateInput';
 import IconButton from '../IconButton';

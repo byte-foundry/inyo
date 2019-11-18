@@ -95,6 +95,12 @@ export const REMINDER_FRAGMENT = gql`
 				lastName
 			}
 		}
+		customer {
+			id
+			name
+			firstName
+			lastName
+		}
 	}
 `;
 

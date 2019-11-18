@@ -1,14 +1,16 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import React, {useRef, useState} from 'react';
-import useOnClickOutside from 'use-onclickoutside';
 
 import {accentGrey, Dropdown, gray80} from '../../utils/new/design-system';
+import useOnClickOutside from '../../utils/useOnClickOutside';
 import IconButton from '../IconButton';
 
 const HelpAndTooltipContainer = styled('div')`
 	padding: 0rem 1rem;
-	corlor: ${gray80};
+	color: ${gray80};
+	font-size: 0.9rem;
+	line-height: 1.5;
 `;
 
 const HelpAndTooltip = ({icon = 'help', children}) => {

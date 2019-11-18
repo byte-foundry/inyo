@@ -297,6 +297,8 @@ export const SubHeading = styled('div')`
 	letter-spacing: 0.5px;
 	color: ${primaryBlack};
 	font-weight: 500;
+	display: flex;
+	align-items: center;
 `;
 
 export const P = styled('p')`

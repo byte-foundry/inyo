@@ -1,5 +1,15 @@
-import React from 'react';
+import React from "react";
 
-const CustomEmailSidebar = () => <div></div>;
+import CustomEmailSidebarCategory from "../CustomEmailSidebarCategory";
+
+const CustomEmailSidebar = ({ categories }) => {
+	return (
+		<div>
+			{categories.map((category, index) => (
+				<CustomEmailSidebarCategory category={category} />
+			))}
+		</div>
+	);
+};
 
 export default CustomEmailSidebar;

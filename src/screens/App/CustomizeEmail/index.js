@@ -1,110 +1,156 @@
-import styled from '@emotion/styled/macro';
-import React from 'react';
+import styled from "@emotion/styled";
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
 
-import CustomEmailSidebar from '../../../components/CustomEmailSidebar';
-import EmailCustomizer from '../../../components/EmailCustomizer';
-import {FlexRow} from '../../../utils/content';
+import CustomEmailSidebar from "../../../components/CustomEmailSidebar";
+import EmailCustomizer from "../../../components/EmailCustomizer";
+import { FlexRow } from "../../../utils/content";
+import { BREAKPOINTS } from "../../../utils/constants";
 import {
 	Container,
 	Content,
 	Heading,
-	HeadingRow,
-	Main,
-} from '../../../utils/new/design-system';
+	HeadingRow
+} from "../../../utils/new/design-system";
 
-const EmailContainer = styled('div')`
+const EmailContainer = styled("div")`
 	flex: 1;
 	max-width: 1200px;
 	margin: 3.5rem auto;
 `;
 
+const Main = styled("div")`
+	min-height: 100vh;
+	display: flex;
+	flex: 1;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		padding: 1rem;
+	}
+`;
+
 const CustomizeEmail = () => {
 	const emailCategories = [
 		{
-			name: 'CUSTOMER',
+			name: "CUSTOMER",
 			types: [
 				{
-					label: 'DELAY',
+					name: "DELAY"
 				},
 				{
-					label: 'FIRST',
+					name: "FIRST"
 				},
 				{
-					label: 'SECOND',
+					name: "SECOND"
 				},
 				{
-					label: 'LAST',
-				},
-			],
+					name: "LAST"
+				}
+			]
 		},
 		{
-			name: 'CUSTOMER_REPORT',
+			name: "CUSTOMER_REPORT",
 			types: [
 				{
-					label: '',
-				},
-			],
+					name: "CUSTOMER_REPORT"
+				}
+			]
 		},
 		{
-			name: 'CONTENT_ACQUISITION',
+			name: "CONTENT_ACQUISITION",
 			types: [
 				{
-					label: 'DELAY',
+					name: "DELAY"
 				},
 				{
-					label: 'FIRST',
+					name: "FIRST"
 				},
 				{
-					label: 'SECOND',
+					name: "SECOND"
 				},
 				{
-					label: 'LAST',
-				},
-			],
+					name: "LAST"
+				}
+			]
 		},
 		{
-			name: 'INVOICE',
+			name: "INVOICE",
 			types: [
 				{
-					label: 'INVOICE_DELAY',
+					name: "INVOICE_DELAY"
 				},
 				{
-					label: 'INVOICE_FIRST',
+					name: "INVOICE_FIRST"
 				},
 				{
-					label: 'INVOICE_SECOND',
+					name: "INVOICE_SECOND"
 				},
 				{
-					label: 'INVOICE_THIRD',
+					name: "INVOICE_THIRD"
 				},
 				{
-					label: 'INVOICE_FOURTH',
+					name: "INVOICE_FOURTH"
 				},
 				{
-					label: 'INVOICE_LAST',
-				},
-			],
-		},
+					name: "INVOICE_LAST"
+				}
+			]
+		}
 	];
 
+	//This will change depending on the email type
+	const emailType = {
+		availableParams: [
+			{
+				name: "task.name",
+				label: "Nom de la tâche"
+			},
+			{
+				name: "task.description",
+				label: "Description de la tâche"
+			},
+			{
+				name: "user.firstName",
+				label: "Votre prénom"
+			},
+			{
+				name: "user.lastName",
+				label: "Votre nom de famille"
+			},
+			{
+				name: "customer.fullName",
+				label: "Nom complet du client"
+			}
+		]
+	};
+
 	return (
-		<Container>
-			<Main>
-				<EmailContainer>
-					<HeadingRow>
-						<Heading>
-							<fbt project="inyo" desc="emails">
-								Modèles d'emails
-							</fbt>
-						</Heading>
-					</HeadingRow>
-					<FlexRow>
-						<CustomEmailSidebar categories={emailCategories} />
-						<EmailCustomizer />
-					</FlexRow>
-				</EmailContainer>
-			</Main>
-		</Container>
+		<Switch>
+			<Route path="/app/emails/:category/:type">
+				<Container>
+					<Main>
+						<EmailContainer>
+							<HeadingRow>
+								<Heading>
+									<fbt project="inyo" desc="emails">
+										Modèles d'emails
+									</fbt>
+								</Heading>
+							</HeadingRow>
+							<FlexRow>
+								<CustomEmailSidebar
+									categories={emailCategories}
+								/>
+								<EmailCustomizer emailType={emailType} />
+							</FlexRow>
+						</EmailContainer>
+					</Main>
+				</Container>
+			</Route>
+			<Redirect
+				to={`/app/emails/${emailCategories[0].name}/${emailCategories[0].types[0].name}`}
+			/>
+		</Switch>
 	);
 };
 

@@ -10,6 +10,7 @@ import {GET_PROJECT_DATA} from '../../utils/queries';
 import ConfirmModal, {useConfirmation} from '../ConfirmModal';
 import CreateProjectModal from '../CreateProjectModal';
 import {TaskContainer} from '../CustomerTaskRow';
+import PopinTask from '../PopinTask';
 import TaskInput from '../TaskInput';
 
 const TaskInputContainer = styled('div')`
@@ -18,7 +19,7 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = ({currentProjectId, withProject}) => {
+const CreateTask = ({currentProjectId, withProject, popinTask}) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const [createTask] = useMutation(ADD_ITEM);
@@ -57,77 +58,158 @@ const CreateTask = ({currentProjectId, withProject}) => {
 
 	return (
 		<TaskInputContainer>
-			<TaskInput
-				withProject={withProject}
-				defaultCustomer={
-					currentProjectData
-					&& currentProjectData.project.customer && {
-						id: currentProjectData.project.customer.id,
-						name: `${
-							currentProjectData.project.customer.name
-						} (${formatName(
-							currentProjectData.project.customer.firstName,
-							currentProjectData.project.customer.lastName,
-						)})`,
-					}
-				}
-				onSubmitTask={async (task) => {
-					if (
+			{!popinTask && (
+				<TaskInput
+					withProject={withProject}
+					defaultCustomer={
 						currentProjectData
-						&& !currentProjectData.project.notifyActivityToCustomer
-						&& isCustomerTask(task.type)
-					) {
-						const confirmed = await askConfirmationNotification();
-
-						if (!confirmed) return false;
-
-						await updateProject({
-							variables: {
-								projectId: currentProjectId,
-								notifyActivityToCustomer: true,
-							},
-						});
+						&& currentProjectData.project.customer && {
+							id: currentProjectData.project.customer.id,
+							name: `${
+								currentProjectData.project.customer.name
+							} (${formatName(
+								currentProjectData.project.customer.firstName,
+								currentProjectData.project.customer.lastName,
+							)})`,
+						}
 					}
+					onSubmitTask={async (task) => {
+						if (
+							currentProjectData
+							&& !currentProjectData.project
+								.notifyActivityToCustomer
+							&& isCustomerTask(task.type)
+						) {
+							const confirmed = await askConfirmationNotification();
 
-					if (currentProjectId && task.projectId === undefined) {
-						delete task.projectId;
-					}
+							if (!confirmed) return false;
 
-					return createTask({
-						variables: {projectId: currentProjectId, ...task},
-						update: (cache, {data: {addItem: addedItem}}) => {
-							if (!currentProjectId) return;
-
-							const data = cache.readQuery({
-								query: GET_PROJECT_DATA,
-								variables: {projectId: currentProjectId},
+							await updateProject({
+								variables: {
+									projectId: currentProjectId,
+									notifyActivityToCustomer: true,
+								},
 							});
+						}
 
-							if (data.project.sections.length === 0) {
-								cache.writeQuery({
+						if (currentProjectId && task.projectId === undefined) {
+							delete task.projectId;
+						}
+
+						return createTask({
+							variables: {projectId: currentProjectId, ...task},
+							update: (cache, {data: {addItem: addedItem}}) => {
+								if (!currentProjectId) return;
+
+								const data = cache.readQuery({
 									query: GET_PROJECT_DATA,
 									variables: {projectId: currentProjectId},
-									data: {
-										...data,
-										project: {
-											...data.project,
-											sections: [
-												...data.project.sections,
-												{
-													...addedItem.section,
-													items: [addedItem],
-												},
-											],
-										},
-									},
 								});
-							}
-						},
-					});
-				}}
-				currentProjectId={currentProjectId}
-				{...props}
-			/>
+
+								if (data.project.sections.length === 0) {
+									cache.writeQuery({
+										query: GET_PROJECT_DATA,
+										variables: {
+											projectId: currentProjectId,
+										},
+										data: {
+											...data,
+											project: {
+												...data.project,
+												sections: [
+													...data.project.sections,
+													{
+														...addedItem.section,
+														items: [addedItem],
+													},
+												],
+											},
+										},
+									});
+								}
+							},
+						});
+					}}
+					currentProjectId={currentProjectId}
+					{...props}
+				/>
+			)}
+			{popinTask && (
+				<PopinTask
+					withProject={withProject}
+					defaultCustomer={
+						currentProjectData
+						&& currentProjectData.project.customer && {
+							id: currentProjectData.project.customer.id,
+							name: `${
+								currentProjectData.project.customer.name
+							} (${formatName(
+								currentProjectData.project.customer.firstName,
+								currentProjectData.project.customer.lastName,
+							)})`,
+						}
+					}
+					onSubmitTask={async (task) => {
+						if (
+							currentProjectData
+							&& !currentProjectData.project
+								.notifyActivityToCustomer
+							&& isCustomerTask(task.type)
+						) {
+							const confirmed = await askConfirmationNotification();
+
+							if (!confirmed) return false;
+
+							await updateProject({
+								variables: {
+									projectId: currentProjectId,
+									notifyActivityToCustomer: true,
+								},
+							});
+						}
+
+						if (currentProjectId && task.projectId === undefined) {
+							delete task.projectId;
+						}
+
+						return createTask({
+							variables: {projectId: currentProjectId, ...task},
+							update: (cache, {data: {addItem: addedItem}}) => {
+								if (!currentProjectId) return;
+
+								const data = cache.readQuery({
+									query: GET_PROJECT_DATA,
+									variables: {projectId: currentProjectId},
+								});
+
+								if (data.project.sections.length === 0) {
+									cache.writeQuery({
+										query: GET_PROJECT_DATA,
+										variables: {
+											projectId: currentProjectId,
+										},
+										data: {
+											...data,
+											project: {
+												...data.project,
+												sections: [
+													...data.project.sections,
+													{
+														...addedItem.section,
+														items: [addedItem],
+													},
+												],
+											},
+										},
+									});
+								}
+							},
+						});
+					}}
+					currentProjectId={currentProjectId}
+					{...props}
+				/>
+			)}
 
 			{confirmModal && (
 				<ConfirmModal

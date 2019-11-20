@@ -11,6 +11,7 @@ const HelpAndTooltipContainer = styled('div')`
 	color: ${gray80};
 	font-size: 0.9rem;
 	line-height: 1.5;
+	max-width: 400px;
 `;
 
 const HelpAndTooltip = ({icon = 'help', children}) => {

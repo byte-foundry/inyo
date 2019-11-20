@@ -1,12 +1,9 @@
 import styled from "@emotion/styled";
-import { Editor, EditorState, AtomicBlockUtils } from "draft-js";
-import React, { useState } from "react";
+import { Editor } from "slate-react";
+import { Value } from "slate";
+import React, { useState, useRef } from "react";
 
-import { FlexRow } from "../../utils/content";
-
-const Param = styled("div")`
-	margin-right: 1rem;
-`;
+import EmailParamList from "../EmailParamList";
 
 const MailContainer = styled("div")`
 	border: 1px solid #f1f3f4;
@@ -43,10 +40,6 @@ const MailSubject = styled("div")`
 	border-bottom: 1px solid #f2f2f2;
 	padding: 0.5rem 0;
 	margin: 0.5rem 0;
-
-	& .DraftEditor-root {
-		flex: 1;
-	}
 `;
 const MailSubjectLabel = styled("div")`
 	font-size: 16px;
@@ -54,35 +47,84 @@ const MailSubjectLabel = styled("div")`
 	color: #777;
 	margin-right: 0.7rem;
 `;
-const MailText = styled("div")`
-	& .public-DraftEditor-content {
-		min-height: 150px;
-	}
+const TestEmailLinkContainer = styled("div")`
+	display: flex;
+	justify-content: flex-end;
+	flex: column;
+	margin-bottom: 1rem;
+`;
+const TestEmailLink = styled("div")`
+	color: #684ebc;
+`;
+const MailText = styled("div")``;
+
+const ParamDisplay = styled("span")`
+	background: ${props => (props.isSelected ? "#684EBC" : "#F1F3F4")};
+	border-radius: 20px;
+	padding: 2px 12px;
+	color: ${props => (props.isSelected ? "#F1F3F4" : "#684EBC")};
+	user-select: none;
 `;
 
+const renderInline = ({ attributes, node, isSelected }, editor, next) => {
+	if (node.type === "param") {
+		return (
+			<ParamDisplay isSelected={isSelected} {...attributes}>
+				{node.text}
+			</ParamDisplay>
+		);
+	}
+
+	return next();
+};
+
+const schema = {
+	inlines: {
+		param: {
+			isVoid: true
+		}
+	}
+};
+
+const initialValue = {
+	object: "value",
+	document: {
+		object: "document",
+		nodes: [
+			{
+				object: "block",
+				type: "paragraph",
+				nodes: [
+					{
+						object: "text",
+						text: ""
+					}
+				]
+			}
+		]
+	}
+};
+
 const EmailCustomizer = ({ emailType }) => {
-	const [contentState, setContentState] = useState(EditorState.createEmpty());
-	const [subjectState, setSubjectState] = useState(EditorState.createEmpty());
+	const [contentValue, setContentValue] = useState(
+		Value.fromJSON(initialValue)
+	);
+	const [subjectValue, setSubjectValue] = useState(
+		Value.fromJSON(initialValue)
+	);
+	const contentEditorRef = useRef();
+	const subjectEditorRef = useRef();
+	const [focusedEditorRef, setFocusedEditorRef] = useState(contentEditorRef);
 
 	return (
 		<div>
-			<FlexRow>
-				{emailType.availableParams.map(param => (
-					<Param
-						onClick={() => {
-							const newState = AtomicBlockUtils.insertAtomicBlock(
-								contentState,
-								"param",
-								param.label
-							);
-							setContentState(newState);
-						}}
-					>
-						{param.label}
-					</Param>
-				))}
-			</FlexRow>
-			<div>S'envoyer un email de test</div>
+			<EmailParamList
+				params={emailType.availableParams}
+				editor={focusedEditorRef.current}
+			/>
+			<TestEmailLinkContainer>
+				<TestEmailLink>S'envoyer un email de test</TestEmailLink>
+			</TestEmailLinkContainer>
 			<MailContainer>
 				<MailTopBar />
 				<MailContent>
@@ -99,15 +141,40 @@ const EmailCustomizer = ({ emailType }) => {
 					<MailSubject>
 						<MailSubjectLabel>Objet :</MailSubjectLabel>
 						<Editor
-							style={{ flex: 1, background: "red" }}
-							editorState={subjectState}
-							onChange={setSubjectState}
+							value={subjectValue}
+							ref={subjectEditorRef}
+							onChange={({ value }) => setSubjectValue(value)}
+							renderInline={renderInline}
+							onFocus={() => {
+								setFocusedEditorRef(subjectEditorRef);
+
+								// can't seem to get focus any other way
+								setTimeout(
+									() => subjectEditorRef.current.focus(),
+									0
+								);
+							}}
+							schema={schema}
+							style={{ flex: 1, fontSize: "16px" }}
 						/>
 					</MailSubject>
 					<MailText>
 						<Editor
-							editorState={contentState}
-							onChange={setContentState}
+							value={contentValue}
+							ref={contentEditorRef}
+							onChange={({ value }) => setContentValue(value)}
+							renderInline={renderInline}
+							onFocus={() => {
+								setFocusedEditorRef(contentEditorRef);
+
+								// can't seem to get focus any other way
+								setTimeout(
+									() => contentEditorRef.current.focus(),
+									0
+								);
+							}}
+							schema={schema}
+							style={{ height: "100px", fontSize: "16px" }}
 						/>
 					</MailText>
 				</MailContent>

@@ -120,6 +120,10 @@ const CustomizeEmail = () => {
 			{
 				name: "customer.fullName",
 				label: "Nom complet du client"
+			},
+			{
+				name: "assistant.name",
+				label: "Nom de l'assistant"
 			}
 		]
 	};

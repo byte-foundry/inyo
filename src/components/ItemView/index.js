@@ -22,6 +22,7 @@ import {
 	REMOVE_ITEM,
 	UNFOCUS_TASK,
 	UPDATE_ITEM,
+	UPLOAD_ATTACHMENTS,
 } from '../../utils/mutations';
 import {
 	accentGrey,
@@ -248,6 +249,9 @@ const Item = ({
 				id,
 			},
 		},
+	});
+	const [uploadAttachements] = useMutation(UPLOAD_ATTACHMENTS, {
+		refetchQueries: ['getAllTasks'],
 	});
 
 	useOnClickOutside(dateRef, () => {
@@ -1106,8 +1110,15 @@ const Item = ({
 					},
 				)}
 				<UploadDashboard
-					customerToken={customerToken}
-					taskId={item.id}
+					onUploadFiles={newFiles => uploadAttachements({
+						variables: {
+							token: customerToken,
+							taskId: item.id,
+							files: newFiles,
+						},
+						context: {hasUpload: true},
+					})
+					}
 				/>
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (

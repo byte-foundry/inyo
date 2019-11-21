@@ -1,34 +1,34 @@
-import styled from '@emotion/styled';
-import moment from 'moment';
-import React, {useRef, useState} from 'react';
+import styled from "@emotion/styled";
+import moment from "moment";
+import React, { useRef, useState } from "react";
 
-import fbt from '../../fbt/fbt.macro';
-import {useQuery} from '../../utils/apollo-hooks';
-import {BREAKPOINTS} from '../../utils/constants';
-import {ModalActions} from '../../utils/content';
-import {formatName} from '../../utils/functions';
+import fbt from "../../fbt/fbt.macro";
+import { useQuery } from "../../utils/apollo-hooks";
+import { BREAKPOINTS } from "../../utils/constants";
+import { ModalActions } from "../../utils/content";
+import { formatName } from "../../utils/functions";
 import {
 	Button,
 	Input,
 	InputLabel,
 	Label,
-	SubHeading,
-} from '../../utils/new/design-system';
-import {templates} from '../../utils/project-templates';
-import {GET_ALL_CUSTOMERS} from '../../utils/queries';
-import useOnClickOutside from '../../utils/useOnClickOutside';
-import useUserInfos from '../../utils/useUserInfos';
-import DateInput from '../DateInput';
-import FormElem from '../FormElem';
-import FormSelect from '../FormSelect';
-import Icon from '../MaterialIcon';
-import Tooltip from '../Tooltip';
+	SubHeading
+} from "../../utils/new/design-system";
+import { templates } from "../../utils/project-templates";
+import { GET_ALL_CUSTOMERS } from "../../utils/queries";
+import useOnClickOutside from "../../utils/useOnClickOutside";
+import useUserInfos from "../../utils/useUserInfos";
+import DateInput from "../DateInput";
+import FormElem from "../FormElem";
+import FormSelect from "../FormSelect";
+import Icon from "../MaterialIcon";
+import Tooltip from "../Tooltip";
 
 const FormSubHeading = styled(SubHeading)`
 	grid-column: 1 / 4;
 `;
 
-const CreateProjectRow = styled('div')`
+const CreateProjectRow = styled("div")`
 	margin-top: 1rem;
 	grid-column-end: span 3;
 
@@ -37,7 +37,7 @@ const CreateProjectRow = styled('div')`
 	}
 `;
 
-const CreateProjectGrid = styled('form')`
+const CreateProjectGrid = styled("form")`
 	display: grid;
 	grid-template-columns: 400px 1fr 1fr;
 	grid-row-gap: 1.5rem;
@@ -48,24 +48,24 @@ const CreateProjectGrid = styled('form')`
 	}
 `;
 
-const DeadlineInput = styled(Input.withComponent('div'))`
+const DeadlineInput = styled(Input.withComponent("div"))`
 	height: 40px;
 	display: flex;
 	align-items: center;
 	position: relative;
 `;
 
-const DeadlineInputContent = styled('p')`
+const DeadlineInputContent = styled("p")`
 	flex: 1;
 	cursor: pointer;
 `;
 
-const Option = styled('div')`
+const Option = styled("div")`
 	${props => props.style}
 `;
 
-const createPreviewableOption = ({onHover}) => {
-	const PreviewableOption = (props) => {
+const createPreviewableOption = ({ onHover }) => {
+	const PreviewableOption = props => {
 		const {
 			children,
 			className,
@@ -76,20 +76,20 @@ const createPreviewableOption = ({onHover}) => {
 			isSelected,
 			innerRef,
 			innerProps,
-			data,
+			data
 		} = props;
 
 		return (
 			<Option
-				style={getStyles('option', props)}
+				style={getStyles("option", props)}
 				className={cx(
 					{
 						option: true,
-						'option--is-disabled': isDisabled,
-						'option--is-focused': isFocused,
-						'option--is-selected': isSelected,
+						"option--is-disabled": isDisabled,
+						"option--is-focused": isFocused,
+						"option--is-selected": isSelected
 					},
-					className,
+					className
 				)}
 				ref={innerRef}
 				{...innerProps}
@@ -103,18 +103,19 @@ const createPreviewableOption = ({onHover}) => {
 	return PreviewableOption;
 };
 
-export default function ({
+export default function({
 	optionsProjects,
 	setViewContent,
 	setCreateCustomer,
 	setCustomerName,
 	onDismiss,
+	isSubmitting,
 	...props
 }) {
-	const {language} = useUserInfos();
+	const { language } = useUserInfos();
 	const [editDeadline, setEditDeadline] = useState(false);
-	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
-		suspend: true,
+	const { data: dataCustomers } = useQuery(GET_ALL_CUSTOMERS, {
+		suspend: true
 	});
 
 	const templateOptions = [
@@ -124,7 +125,7 @@ export default function ({
 					Projet vierge
 				</fbt>
 			),
-			value: 'EMPTY',
+			value: "EMPTY"
 		},
 		{
 			label: (
@@ -132,7 +133,7 @@ export default function ({
 					Vos projets
 				</fbt>
 			),
-			options: optionsProjects,
+			options: optionsProjects
 		},
 		{
 			label: (
@@ -142,9 +143,9 @@ export default function ({
 			),
 			options: templates[language].map(template => ({
 				value: template.name,
-				label: template.label,
-			})),
-		},
+				label: template.label
+			}))
+		}
 	];
 
 	let optionsCustomers = [];
@@ -153,8 +154,8 @@ export default function ({
 		value: customer.id,
 		label: `${customer.name} (${formatName(
 			customer.firstName,
-			customer.lastName,
-		)})`,
+			customer.lastName
+		)})`
 	}));
 
 	const dateRef = useRef();
@@ -197,33 +198,34 @@ export default function ({
 					big
 					classNamePrefix="intercom-tour"
 					options={templateOptions}
-					onChange={(option) => {
+					onChange={option => {
 						setViewContent(option.value);
 					}}
 					components={{
 						Option: createPreviewableOption({
-							onHover: option => option
-								&& option.value
-								&& option.value !== 'EMPTY'
-								&& setViewContent(option.value),
-						}),
+							onHover: option =>
+								option &&
+								option.value &&
+								option.value !== "EMPTY" &&
+								setViewContent(option.value)
+						})
 					}}
 				/>
 			</CreateProjectRow>
 			<CreateProjectRow>
 				<FormSelect
 					{...props}
-					onChange={(option, {action}) => {
+					onChange={(option, { action }) => {
 						if (
-							action === 'select-option'
-							&& option
-							&& option.value === 'CREATE'
+							action === "select-option" &&
+							option &&
+							option.value === "CREATE"
 						) {
 							setCreateCustomer(true);
 						}
 					}}
-					onInputChange={(value, {action}) => {
-						if (action === 'input-change') {
+					onInputChange={(value, { action }) => {
+						if (action === "input-change") {
 							setCustomerName(value);
 						}
 					}}
@@ -235,9 +237,9 @@ export default function ({
 									Créer un nouveau client
 								</fbt>
 							),
-							value: 'CREATE',
+							value: "CREATE"
 						},
-						...optionsCustomers,
+						...optionsCustomers
 					]}
 					name="customerId"
 					label={
@@ -284,9 +286,9 @@ export default function ({
 							<DeadlineInputContent
 								onClick={() => setEditDeadline(true)}
 							>
-								{(props.values.deadline
-									&& moment(props.values.deadline).format(
-										'DD/MM/YYYY',
+								{(props.values.deadline &&
+									moment(props.values.deadline).format(
+										"DD/MM/YYYY"
 									)) || (
 									<fbt project="inyo" desc="no deadline">
 										Aucune date limite
@@ -298,12 +300,12 @@ export default function ({
 							<DateInput
 								innerRef={dateRef}
 								date={moment(
-									props.values.deadline || new Date(),
+									props.values.deadline || new Date()
 								)}
-								onDateChange={(date) => {
+								onDateChange={date => {
 									props.setFieldValue(
-										'deadline',
-										date.toISOString(),
+										"deadline",
+										date.toISOString()
 									);
 									setEditDeadline(false);
 								}}
@@ -316,12 +318,12 @@ export default function ({
 				</InputLabel>
 			</CreateProjectRow>
 			<ModalActions>
-				<Button link onClick={onDismiss}>
+				<Button link onClick={onDismiss} disabled={isSubmitting}>
 					<fbt project="inyo" desc="cancel create project">
 						Annuler
 					</fbt>
 				</Button>
-				<Button type="submit">
+				<Button type="submit" disabled={isSubmitting}>
 					<fbt project="inyo" desc="confirm create project">
 						Créer le projet
 					</fbt>

@@ -1,39 +1,39 @@
-import styled from '@emotion/styled/macro';
-import moment from 'moment';
-import React, {useEffect, useState} from 'react';
-import {withRouter} from 'react-router-dom';
+import styled from "@emotion/styled/macro";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { withRouter } from "react-router-dom";
 
-import fbt from '../../fbt/fbt.macro';
-import {useMutation} from '../../utils/apollo-hooks';
-import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
-import {formatName} from '../../utils/functions';
-import {CANCEL_REMINDER} from '../../utils/mutations';
+import fbt from "../../fbt/fbt.macro";
+import { useMutation } from "../../utils/apollo-hooks";
+import { BREAKPOINTS, REMINDER_TYPES_DATA } from "../../utils/constants";
+import { formatName } from "../../utils/functions";
+import { CANCEL_REMINDER } from "../../utils/mutations";
 import {
 	accentGrey,
 	Button,
 	mediumGrey,
 	P,
 	primaryBlack,
-	primaryGrey,
-} from '../../utils/new/design-system';
-import IconButton from '../IconButton';
-import NoticeModal from '../NoticeModal';
-import ReminderTestEmailButton from '../ReminderTestEmailButton';
-import Tooltip from '../Tooltip';
+	primaryGrey
+} from "../../utils/new/design-system";
+import IconButton from "../IconButton";
+import NoticeModal from "../NoticeModal";
+import ReminderTestEmailButton from "../ReminderTestEmailButton";
+import Tooltip from "../Tooltip";
 
-const ReminderList = styled('div')`
+const ReminderList = styled("div")`
 	margin-bottom: 2rem;
 	margin-top: 1rem;
 `;
 
-const ReminderLine = styled('div')`
+const ReminderLine = styled("div")`
 	border-bottom: 1px dotted ${mediumGrey};
 	height: 1px;
 	flex: 0 1 20px;
 	margin: 0 1%;
 `;
 
-const ReminderContainer = styled('div')`
+const ReminderContainer = styled("div")`
 	color: ${primaryGrey};
 	font-size: 12px;
 	height: 1.2rem;
@@ -55,23 +55,25 @@ const ReminderContainer = styled('div')`
 	}
 `;
 
-const ReminderText = styled('div')`
-	cursor: ${props => (props.noLink ? 'default' : 'pointer')};
-	${props => props.small
-		&& `
+const ReminderText = styled("div")`
+	cursor: ${props => (props.noLink ? "default" : "pointer")};
+	${props =>
+		props.small &&
+		`
 		flex: 10 1 220px;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
 	`}
 `;
-const ReminderDate = styled('div')`
+const ReminderDate = styled("div")`
 	font-size: 10px;
 	margin: 0 10px;
 	cursor: default;
 	flex: 1 1 100px;
-	${props => props.small
-		&& `
+	${props =>
+		props.small &&
+		`
 		flex: 1;
 		text-overflow: ellipsis;
 		overflow: hidden;
@@ -79,7 +81,7 @@ const ReminderDate = styled('div')`
 	`}
 `;
 
-const ReminderActions = styled('div')`
+const ReminderActions = styled("div")`
 	display: flex;
 	text-align: right;
 	justify-content: space-between;
@@ -87,7 +89,7 @@ const ReminderActions = styled('div')`
 	flex: 1;
 `;
 
-const statuses = ['PENDING', 'SENT', 'CANCELED', 'ERRORED'];
+const statuses = ["PENDING", "SENT", "CANCELED", "ERRORED"];
 
 function TaskRemindersList({
 	reminders = [],
@@ -95,10 +97,10 @@ function TaskRemindersList({
 	baseUrl,
 	history,
 	noLink,
-	onOpenSubPortal,
+	onOpenSubPortal
 }) {
 	const [showCustomerReportNotice, setShowCustomerReportNotice] = useState(
-		false,
+		false
 	);
 	const [, setLastUpdatedAt] = useState(new Date());
 	const [cancelReminder] = useMutation(CANCEL_REMINDER);
@@ -119,32 +121,35 @@ function TaskRemindersList({
 		<ReminderList>
 			{[...reminders]
 				.sort((a, b) => {
-					if (statuses.indexOf(a.status) < statuses.indexOf(b.status)) return -1;
-					if (statuses.indexOf(a.status) > statuses.indexOf(b.status)) return 1;
+					if (statuses.indexOf(a.status) < statuses.indexOf(b.status))
+						return -1;
+					if (statuses.indexOf(a.status) > statuses.indexOf(b.status))
+						return 1;
 
 					return new Date(a.sendingDate) - new Date(b.sendingDate);
 				})
-				.map((reminder) => {
-					let {customer} = reminder;
+				.map(reminder => {
+					let { customer } = reminder;
 
 					if (reminder.item) {
 						customer = reminder.item.linkedCustomer;
 					}
 
 					const text = REMINDER_TYPES_DATA[reminder.type].text(
-						customer
-							&& `${customer.name} (${formatName(
+						customer &&
+							`${customer.name} (${formatName(
 								customer.firstName,
-								customer.lastName,
-							)})`,
+								customer.lastName
+							)})`
 					);
 
-					const onClick
-						= reminder.type === 'CUSTOMER_REPORT'
+					const onClick =
+						reminder.type === "CUSTOMER_REPORT"
 							? () => setShowCustomerReportNotice(true)
-							: () => !noLink
-									&& history.push(
-										`${baseUrl}/${reminder.item.id}`,
+							: () =>
+									!noLink &&
+									history.push(
+										`${baseUrl}/${reminder.item.id}`
 									);
 
 					const reminderText = (
@@ -152,8 +157,8 @@ function TaskRemindersList({
 							withLink={baseUrl}
 							onClick={onClick}
 							small={small}
-							canceled={reminder.status === 'CANCELED'}
-							done={reminder.status === 'SENT'}
+							canceled={reminder.status === "CANCELED"}
+							done={reminder.status === "SENT"}
 							noLink={noLink}
 						>
 							{text}
@@ -162,7 +167,7 @@ function TaskRemindersList({
 
 					return (
 						<ReminderContainer key={reminder.id}>
-							{noLink || reminder.type === 'CUSTOMER_REPORT' ? (
+							{noLink || reminder.type === "CUSTOMER_REPORT" ? (
 								reminderText
 							) : (
 								<Tooltip
@@ -181,72 +186,72 @@ function TaskRemindersList({
 							<ReminderActions>
 								<Tooltip
 									label={
-										reminder.status === 'CANCELED'
+										reminder.status === "CANCELED"
 											? undefined
 											: moment(
-												reminder.sendingDate,
-											  ).format('DD/MM/YYYY [à] HH:mm')
+													reminder.sendingDate
+											  ).format("DD/MM/YYYY [à] HH:mm")
 									}
 								>
 									<ReminderDate small={small || undefined}>
-										{reminder.status === 'PENDING'
-											&& moment(
-												reminder.sendingDate,
+										{reminder.status === "PENDING" &&
+											moment(
+												reminder.sendingDate
 											).fromNow()}
-										{reminder.status === 'CANCELED' && (
+										{reminder.status === "CANCELED" && (
 											<fbt project="inyo" desc="canceled">
 												Annulé
 											</fbt>
 										)}
-										{reminder.status === 'SENT' && (
+										{reminder.status === "SENT" && (
 											<fbt project="inyo" desc="sent">
 												Envoyé
 											</fbt>
 										)}
 									</ReminderDate>
 								</Tooltip>
-								{reminder.status === 'PENDING'
-									&& !reminder.id.includes('report') && (
-									<Tooltip
-										label={
-											<fbt
-												project="inyo"
-												desc="delete this reminder tooltip"
-											>
+								{reminder.status === "PENDING" &&
+									!reminder.id.includes("report") && (
+										<Tooltip
+											label={
+												<fbt
+													project="inyo"
+													desc="delete this reminder tooltip"
+												>
 													Supprimer cette action
 													automatique
-											</fbt>
-										}
-									>
-										<div
-											noLink={noLink}
-											canceled={
-												reminder.status
-													=== 'CANCELED'
+												</fbt>
 											}
-											style={{flex: '0 0 28px'}}
 										>
-											<Button
-												link
-												small
-												onClick={() => {
-													cancelReminder({
-														variables: {
-															id: reminder.id,
-														},
-													});
-												}}
+											<div
+												noLink={noLink}
+												canceled={
+													reminder.status ===
+													"CANCELED"
+												}
+												style={{ flex: "0 0 28px" }}
 											>
-												<IconButton
-													icon="cancel"
-													size="tiny"
-													danger
-												/>
-											</Button>
-										</div>
-									</Tooltip>
-								)}
-								{noLink && reminder.status === 'PENDING' && (
+												<Button
+													link
+													small
+													onClick={() => {
+														cancelReminder({
+															variables: {
+																id: reminder.id
+															}
+														});
+													}}
+												>
+													<IconButton
+														icon="cancel"
+														size="tiny"
+														danger
+													/>
+												</Button>
+											</div>
+										</Tooltip>
+									)}
+								{noLink && reminder.status === "PENDING" && (
 									<ReminderTestEmailButton
 										reminder={reminder}
 									/>
@@ -279,5 +284,9 @@ function TaskRemindersList({
 		</ReminderList>
 	);
 }
+
+TaskRemindersList.defaultProps = {
+	onOpenSubPortal: () => {}
+};
 
 export default withRouter(TaskRemindersList);

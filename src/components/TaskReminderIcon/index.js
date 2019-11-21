@@ -45,7 +45,7 @@ function TaskReminderIcon({
 	return (
 		customerTask && (
 			<>
-				{activableTask && item.linkedCustomer && !item.isFocused && (
+				{activableTask && item.linkedCustomer && !item.scheduledFor && (
 					<Tooltip
 						key={`task-focus-icon-${item.id}`}
 						label={
@@ -59,14 +59,14 @@ function TaskReminderIcon({
 						}
 					>
 						<IconButtonLink
-							isFocused={item.isFocused}
+							isFocused={item.scheduledFor}
 							to={activateLink}
 						>
 							<IconButton icon="notifications_off" size="tiny" />
 						</IconButtonLink>
 					</Tooltip>
 				)}
-				{activableTask && item.linkedCustomer && item.isFocused && (
+				{activableTask && item.linkedCustomer && item.scheduledFor && (
 					<Tooltip
 						key={`task-focused-icon-${item.id}`}
 						label={
@@ -79,7 +79,7 @@ function TaskReminderIcon({
 						}
 					>
 						<IconButtonLink
-							isFocused={item.isFocused}
+							isFocused={item.scheduledFor}
 							to={taskLink}
 						>
 							<IconButton

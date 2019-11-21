@@ -983,7 +983,7 @@ const Item = ({
 							</fbt:param>
 						</fbt>
 					</SubHeading>
-					{item.isFocused ? (
+					{item.scheduledFor ? (
 						<>
 							<TaskRemindersList
 								noLink

@@ -21,7 +21,7 @@ function TaskActivationHeader({
 				&& ((item.linkedCustomer && (
 					<TaskCustomerActivationButton
 						taskId={item.id}
-						isActive={item.isFocused}
+						isActive={item.scheduledFor}
 						customerName={
 							item.linkedCustomer
 							&& `${item.linkedCustomer.name} (${formatName(
@@ -67,7 +67,7 @@ function TaskActivationHeader({
 				&& ((item.linkedCustomer && item.attachments.length > 0 && (
 					<TaskCustomerActivationButton
 						taskId={item.id}
-						isActive={item.isFocused}
+						isActive={item.scheduledFor}
 						customerName={
 							item.linkedCustomer
 							&& `${item.linkedCustomer.name} (${formatName(
@@ -134,7 +134,7 @@ function TaskActivationHeader({
 			{!customerTask && activableTask && (
 				<TaskActivationButton
 					taskId={item.id}
-					isActive={item.isFocused}
+					isActive={item.scheduledFor}
 					onCommit={() => focusTask({
 						variables: {itemId: item.id},
 						optimisticResponse: {

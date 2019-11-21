@@ -24,7 +24,6 @@ export const SHORT_TASK_FRAGMENT = gql`
 		type
 		unit
 		timeItTook
-		isFocused
 		scheduledFor
 		schedulePosition
 		dailyRate

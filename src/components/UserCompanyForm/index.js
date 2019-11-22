@@ -19,7 +19,7 @@ import {
 } from '../../utils/new/design-system';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
-import UploadDashboardButton from '../UploadDashboard';
+import UploadDashboardButton from '../UploadDashboardButton';
 
 const UserCompanyFormMain = styled('div')``;
 

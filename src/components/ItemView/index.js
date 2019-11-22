@@ -62,7 +62,7 @@ import TaskRemindersList from '../TaskRemindersList';
 import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
-import UploadDashboardButton from '../UploadDashboard';
+import UploadDashboardButton from '../UploadDashboardButton';
 
 const Header = styled('div')``;
 

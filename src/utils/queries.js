@@ -280,6 +280,14 @@ export const GET_PROJECT_INFOS = gql`
 				name
 				email
 				phone
+				logo {
+					id
+					url
+				}
+				banner {
+					id
+					url
+				}
 				address {
 					street
 					city
@@ -316,6 +324,14 @@ export const GET_PROJECT_DATA = gql`
 				name
 				email
 				phone
+				logo {
+					id
+					url
+				}
+				banner {
+					id
+					url
+				}
 				address {
 					street
 					city
@@ -378,9 +394,18 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			deadline
 			daysUntilDeadline
 			issuer {
+				id
 				name
 				email
 				phone
+				logo {
+					id
+					url
+				}
+				banner {
+					id
+					url
+				}
 				address {
 					street
 					city

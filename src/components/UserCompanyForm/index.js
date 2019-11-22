@@ -1,4 +1,3 @@
-import {Mutation} from '@apollo/react-components';
 import {useMutation} from '@apollo/react-hooks';
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
@@ -10,7 +9,7 @@ import * as Yup from 'yup';
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, gray20} from '../../utils/content';
-import {UPDATE_USER_COMPANY, UPLOAD_ATTACHMENTS} from '../../utils/mutations';
+import {UPDATE_USER_COMPANY} from '../../utils/mutations';
 import {
 	Button,
 	InputLabel,

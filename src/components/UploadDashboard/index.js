@@ -28,11 +28,20 @@ class Upload extends Plugin {
 	}
 }
 
-function UploadDashboard({onUploadFiles}) {
+function UploadDashboardButton({
+	onUploadFiles,
+	children,
+	allowMultipleUploads,
+	restrictions,
+	autoProceed,
+	style,
+}) {
 	const [modalOpen, setModalOpen] = useState(false);
 	const [uppyState] = useState(
 		Uppy({
-			allowMultipleUploads: true,
+			autoProceed,
+			allowMultipleUploads,
+			restrictions,
 			locale:
 				IntlViewerContext.locale.startsWith('fr') && uppyFrenchLocale,
 		}).use(Upload, {
@@ -49,10 +58,8 @@ function UploadDashboard({onUploadFiles}) {
 
 	return (
 		<>
-			<Button icon="+" onClick={() => setModalOpen(true)}>
-				<fbt project="inyo" desc="notification message">
-					Joindre un document
-				</fbt>
+			<Button icon="+" onClick={() => setModalOpen(true)} style={style}>
+				{children}
 			</Button>
 			<DashboardModal
 				open={modalOpen}
@@ -70,8 +77,8 @@ function UploadDashboard({onUploadFiles}) {
 	);
 }
 
-UploadDashboard.defaultProps = {
+UploadDashboardButton.defaultProps = {
 	onUploadFiles: () => {},
 };
 
-export default UploadDashboard;
+export default UploadDashboardButton;

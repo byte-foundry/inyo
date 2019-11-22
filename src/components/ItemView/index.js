@@ -62,7 +62,7 @@ import TaskRemindersList from '../TaskRemindersList';
 import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
-import UploadDashboard from '../UploadDashboard';
+import UploadDashboardButton from '../UploadDashboard';
 
 const Header = styled('div')``;
 
@@ -1109,7 +1109,7 @@ const Item = ({
 						);
 					},
 				)}
-				<UploadDashboard
+				<UploadDashboardButton
 					onUploadFiles={newFiles => uploadAttachements({
 						variables: {
 							token: customerToken,
@@ -1119,7 +1119,11 @@ const Item = ({
 						context: {hasUpload: true},
 					})
 					}
-				/>
+				>
+					<fbt project="inyo" desc="notification message">
+						Joindre un document
+					</fbt>
+				</UploadDashboardButton>
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>

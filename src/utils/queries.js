@@ -109,6 +109,14 @@ export const GET_USER_INFOS = gql`
 				id
 				name
 				email
+				logo {
+					id
+					url
+				}
+				banner {
+					id
+					url
+				}
 				address {
 					street
 					city

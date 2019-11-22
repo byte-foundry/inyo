@@ -207,6 +207,14 @@ export const UPDATE_USER_COMPANY = gql`
 				id
 				name
 				email
+				logo {
+					id
+					url
+				}
+				banner {
+					id
+					url
+				}
 				address {
 					street
 					city

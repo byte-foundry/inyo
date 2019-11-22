@@ -480,6 +480,38 @@ export const GET_ALL_TASKS_SHORT = gql`
 	}
 `;
 
+export const GET_ALL_TASKS_STATS = gql`
+	${SHORT_TASK_FRAGMENT}
+
+	query getAllTasksStat(
+		$linkedCustomerId: ID
+		$first: Int
+		$after: ID
+		$schedule: ScheduleFilterInput
+	) {
+		me {
+			id
+			tasks(
+				filter: {linkedCustomerId: $linkedCustomerId}
+				schedule: $schedule
+				first: $first
+				after: $after
+			) {
+				...ShortTaskFragment
+				reminders {
+					id
+					status
+					sendingDate
+					item {
+						id
+						name
+					}
+				}
+			}
+		}
+	}
+`;
+
 export const GET_ALL_TASKS = gql`
 	${ITEM_FRAGMENT}
 

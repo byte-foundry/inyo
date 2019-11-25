@@ -134,6 +134,8 @@
   },
   "prettier": {
     "tabWidth": 4,
-    "useTabs": true
+    "useTabs": true,
+	"singleQuote": true,
+	"bracketSpacing": false
   }
 }

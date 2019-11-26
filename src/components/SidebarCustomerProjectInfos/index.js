@@ -80,21 +80,9 @@ const SidebarHeading = styled(SubHeading)`
 	margin-bottom: 10px;
 `;
 
-const ImageContainer = styled('div')`
-	width: ${props => props.width || '100%'};
-	padding-top: ${props => props.height || '100%'};
-	height: auto;
-	position: relative;
-	overflow: hidden;
-	margin: 10px auto;
-
-	img {
-		display: block;
-		position: absolute;
-		top: 0;
-		object-fit: cover;
-		width: 100%;
-	}
+const CompanyLogo = styled('img')`
+	width: 100%;
+	display: block;
 `;
 
 const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
@@ -156,16 +144,17 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 				</SidebarLink>
 			</SubSection>
 			<SubSection>
-				{project.issuer.logo && (
-					<ImageContainer>
-						<img src={project.issuer.logo.url} alt="Company logo" />
-					</ImageContainer>
-				)}
 				<SidebarHeading>
 					<fbt project="inyo" desc="your contractor">
 						Votre prestataire
 					</fbt>
 				</SidebarHeading>
+				{project.issuer.logo && (
+					<CompanyLogo
+						src={project.issuer.logo.url}
+						alt="Company logo"
+					/>
+				)}
 				<IssuerNameAndAddress issuer={project.issuer} />
 			</SubSection>
 

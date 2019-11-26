@@ -1,3 +1,4 @@
+import {css} from '@emotion/core';
 import styled from '@emotion/styled';
 import React from 'react';
 
@@ -6,87 +7,96 @@ import {
 	accentGrey,
 	lightGrey,
 	lightPurple,
-	mediumGrey,
 	mediumPurple,
 	primaryPurple,
+	primaryWhite,
 } from '../../utils/new/design-system';
 
 const TasksProgressBarWrapper = styled('div')`
 	display: flex;
 	flex-direction: row-reverse;
-	align-items: baseline;
+	align-items: center;
+	margin-bottom: 2rem;
 `;
 
 const TasksProgressBarMain = styled('div')`
 	background: ${lightGrey};
 	position: relative;
-	height: 8px;
+	height: 14px;
 	width: 100%;
-	margin-bottom: 2rem;
-	border-radius: 5px;
-	border: 1px dotted ${mediumGrey};
+	border-radius: 14px;
+	border: 1px dotted ${primaryWhite};
 	z-index: 0;
 
 	&:after {
 		position: absolute;
 		top: 0;
+		bottom: 0;
 		left: 0;
 		content: ' ';
 		width: ${props => props.completionRate || 1.5}%;
-		height: 100%;
 		background: ${primaryPurple};
 		transition: width 0.2s ease;
-		border-radius: 5px;
+		border-radius: 14px;
 		border: 1px solid ${primaryPurple};
+		margin: 2px;
 	}
 
-	&:hover {
-		&:before {
-			color: ${mediumPurple};
-			transition: color 0.2s ease;
-		}
+	&:hover::before {
+		color: ${mediumPurple};
+		transition: color 0.2s ease;
 	}
 
 	${props => (props.timeItTook === 0
 		? ''
-		: `&:before {
-			border-radius: 5px;
-			position: absolute;
-			transition: width 0.2s ease;
+		: css`
+					&:before {
+						border-radius: 14px;
+						position: absolute;
+						transition: width 0.2s ease;
+						margin: 2px;
 
-			content: "";
-			top: ${props.timeItTookPercentage >= 1 ? 0 : '1px'};
-			left: calc(
-				2px +
-					${props.timeItTookPercentage >= 1 ? 0 : props.completionRate || 0}%
-			);
-			width: ${
-		props.timeItTookPercentage >= 1
+						content: '';
+						top: 0;
+						bottom: 0;
+						left: calc(
+							2px +
+								${props.timeItTookPercentage >= 1
+			? 0
+			: props.completionRate || 0}% -
+								${props.timeItTookPercentage >= 1
+			? 0
+			: props.completionRate
+									  * (1 - props.timeItTookPercentage)}%
+						);
+						width: ${props.timeItTookPercentage >= 1
 			? props.completionRate * props.timeItTookPercentage
-			: props.completionRate * (1 - props.timeItTookPercentage)
-		}%;
-			height: ${props.timeItTookPercentage >= 1 ? '100%' : 'calc(100% - 2px)'};
-			background: ${props.timeItTookPercentage >= 1 ? mediumPurple : lightPurple};
-			border: 1px solid
-				${props.timeItTookPercentage >= 1 ? mediumPurple : primaryPurple};
-			transform: translate(
-				${props.timeItTookPercentage >= 1 ? 0 : '-100%'}
-			);
-			z-index: ${props.timeItTookPercentage >= 1 ? 0 : 1};
-		}`)}
+			: props.completionRate
+							  * (1 - props.timeItTookPercentage)}%;
+						background: ${props.timeItTookPercentage >= 1
+			? mediumPurple
+			: lightPurple};
+						border: 1px solid
+							${props.timeItTookPercentage >= 1
+			? mediumPurple
+			: primaryPurple};
+						z-index: ${props.timeItTookPercentage >= 1 ? 0 : 1};
+					}
+			  `)}
 `;
 
 const TasksProgressBarLabel = styled('div')`
 	color: ${primaryPurple};
 	text-align: right;
-	flex: 1 1 50px;
+	margin-left: 10px;
+	line-height: 1;
 `;
 
 const ExtraDaysLabel = styled('span')`
 	color: ${accentGrey};
 	font-size: 0.75rem;
 	position: absolute;
-	top: 10px;
+	top: 15px;
 	right: calc(100% - ${props => props.left}%);
 `;
 

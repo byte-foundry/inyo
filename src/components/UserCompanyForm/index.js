@@ -108,11 +108,17 @@ const UserCompanyForm = ({data, buttonText}) => {
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
-					values.address.__typename = undefined; // eslint-disable-line no-underscore-dangle, no-param-reassign
 					try {
 						await updateUser({
 							variables: {
-								company: values,
+								company: {
+									name: values.name,
+									phone: values.phone,
+									address: {
+										...values.address,
+										__typename: undefined,
+									},
+								},
 							},
 						});
 

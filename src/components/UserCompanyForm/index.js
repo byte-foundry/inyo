@@ -2,7 +2,7 @@ import {useMutation} from '@apollo/react-hooks';
 import styled from '@emotion/styled';
 import * as Sentry from '@sentry/browser';
 import {Formik} from 'formik';
-import React from 'react';
+import React, {useState} from 'react';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
@@ -18,6 +18,7 @@ import {
 } from '../../utils/new/design-system';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
+import ImagePickerModal from '../ImagePickerModal';
 import UploadDashboardButton from '../UploadDashboardButton';
 
 const UserCompanyFormMain = styled('div')``;
@@ -72,11 +73,17 @@ const ImageContainer = styled('div')`
 	}
 `;
 
+const UploadButtons = styled('div')`
+	display: flex;
+	justify-content: space-evenly;
+`;
+
 const UserCompanyForm = ({data, buttonText}) => {
 	const {
 		name, address, phone, logo, banner,
 	} = data;
 	const [updateUser] = useMutation(UPDATE_USER_COMPANY);
+	const [isOpenImagePickerModal, setisOpenImagePickerModal] = useState(false);
 
 	return (
 		<UserCompanyFormMain>
@@ -271,7 +278,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 												style={{margin: 'auto'}}
 											>
 												<fbt desc="Company's logo upload button">
-													Changer le logo
+													Charger un logo
 												</fbt>
 											</UploadDashboardButton>
 										</InputLabel>
@@ -291,37 +298,73 @@ const UserCompanyForm = ({data, buttonText}) => {
 													/>
 												</ImageContainer>
 											)}
-											<UploadDashboardButton
-												onUploadFiles={([file]) => updateUser({
-													variables: {
-														company: {
-															banner: file,
+
+											<UploadButtons>
+												<Button
+													onClick={() => setisOpenImagePickerModal(
+														true,
+													)
+													}
+												>
+													<fbt desc="Company's banner upload button">
+														Choisir une image
+														prédéfinie
+													</fbt>
+												</Button>
+												{isOpenImagePickerModal && (
+													<ImagePickerModal
+														onDismiss={() => setisOpenImagePickerModal(
+															false,
+														)
+														}
+														onSelectImage={({
+															id,
+														}) => {
+															updateUser({
+																variables: {
+																	company: {
+																		bannerUnsplash: id,
+																	},
+																},
+															});
+															setisOpenImagePickerModal(
+																false,
+															);
+														}}
+													/>
+												)}
+
+												<UploadDashboardButton
+													onUploadFiles={([file]) => updateUser({
+														variables: {
+															company: {
+																banner: file,
+															},
 														},
-													},
-													context: {
-														hasUpload: true,
-													},
-												})
-												}
-												restrictions={{
-													maxFileSize: 500000,
-													maxNumberOfFiles: 1,
-													allowedFileTypes: [
-														'image/*',
-														'.jpg',
-														'.jpeg',
-														'.png',
-														'.gif',
-													],
-												}}
-												allowMultipleUploads={false}
-												autoProceed
-												style={{margin: 'auto'}}
-											>
-												<fbt desc="Company's banner upload button">
-													Changer la bannière
-												</fbt>
-											</UploadDashboardButton>
+														context: {
+															hasUpload: true,
+														},
+													})
+													}
+													restrictions={{
+														maxFileSize: 500000,
+														maxNumberOfFiles: 1,
+														allowedFileTypes: [
+															'image/*',
+															'.jpg',
+															'.jpeg',
+															'.png',
+															'.gif',
+														],
+													}}
+													allowMultipleUploads={false}
+													autoProceed
+												>
+													<fbt desc="Company's banner upload button">
+														Charger
+													</fbt>
+												</UploadDashboardButton>
+											</UploadButtons>
 										</InputLabel>
 									</div>
 								</FormContainer>

@@ -1,6 +1,7 @@
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
 
+import Portal from '@reach/portal';
 import Uppy, {Plugin} from '@uppy/core';
 import uppyFrenchLocale from '@uppy/locales/lib/fr_FR';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
@@ -61,18 +62,20 @@ function UploadDashboardButton({
 			<Button icon="+" onClick={() => setModalOpen(true)} style={style}>
 				{children}
 			</Button>
-			<DashboardModal
-				open={modalOpen}
-				onRequestClose={() => setModalOpen(false)}
-				closeModalOnClickOutside
-				closeAfterFinish={true}
-				uppy={uppyState}
-				note={
-					<fbt project="inyo" desc="upload note">
-						5Mo total maximum
-					</fbt>
-				}
-			/>
+			<Portal>
+				<DashboardModal
+					open={modalOpen}
+					onRequestClose={() => setModalOpen(false)}
+					closeModalOnClickOutside
+					closeAfterFinish={true}
+					uppy={uppyState}
+					note={
+						<fbt project="inyo" desc="upload note">
+							5Mo total maximum
+						</fbt>
+					}
+				/>
+			</Portal>
 		</>
 	);
 }

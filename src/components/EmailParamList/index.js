@@ -23,13 +23,13 @@ const EmailParamList = ({ params, editor }) => {
 					onClick={e => {
 						e.preventDefault();
 						editor.insertInlineAtRange(editor.value.selection, {
-							data: {},
+							data: { param: param.param },
 							nodes: [
 								{
 									object: "text",
 									leaves: [
 										{
-											text: param.label
+											text: param.param.name
 										}
 									]
 								}
@@ -41,7 +41,7 @@ const EmailParamList = ({ params, editor }) => {
 						setTimeout(() => editor.focus(), 0);
 					}}
 				>
-					{param.label}
+					{param.param.name}
 				</Param>
 			))}
 		</EmailParamListContainer>

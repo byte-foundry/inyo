@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 import {
 	COMMENT_ON_ITEM_FRAGMENT,
@@ -7,8 +7,8 @@ import {
 	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
-	TAG_FRAGMENT,
-} from './fragments';
+	TAG_FRAGMENT
+} from "./fragments";
 
 /** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
@@ -469,7 +469,7 @@ export const GET_ALL_TASKS_SHORT = gql`
 		me {
 			id
 			tasks(
-				filter: {linkedCustomerId: $linkedCustomerId}
+				filter: { linkedCustomerId: $linkedCustomerId }
 				schedule: $schedule
 				first: $first
 				after: $after
@@ -492,7 +492,7 @@ export const GET_ALL_TASKS = gql`
 		me {
 			id
 			tasks(
-				filter: {linkedCustomerId: $linkedCustomerId}
+				filter: { linkedCustomerId: $linkedCustomerId }
 				schedule: $schedule
 				first: $first
 				after: $after
@@ -733,6 +733,25 @@ export const GET_PROJECT_ACTIVITY = gql`
 				}
 			}
 			createdAt
+		}
+	}
+`;
+
+export const GET_EMAIL_TYPES = gql`
+	query getEmailTypes {
+		emailTypes {
+			id
+			category
+			position
+			name
+			availableParams {
+				id
+				required
+				param {
+					id
+					name
+				}
+			}
 		}
 	}
 `;

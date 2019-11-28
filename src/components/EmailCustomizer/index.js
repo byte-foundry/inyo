@@ -3,6 +3,7 @@ import { Editor } from "slate-react";
 import { Value } from "slate";
 import React, { useState, useRef } from "react";
 
+import { Button } from "../../utils/new/design-system";
 import EmailParamList from "../EmailParamList";
 
 const MailContainer = styled("div")`
@@ -117,7 +118,7 @@ const EmailCustomizer = ({ emailType }) => {
 	const [focusedEditorRef, setFocusedEditorRef] = useState(contentEditorRef);
 
 	return (
-		<div>
+		<div style={{ flex: 1 }}>
 			<EmailParamList
 				params={emailType.availableParams}
 				editor={focusedEditorRef.current}
@@ -174,11 +175,22 @@ const EmailCustomizer = ({ emailType }) => {
 								);
 							}}
 							schema={schema}
-							style={{ height: "100px", fontSize: "16px" }}
+							style={{ minHeight: "100px", fontSize: "16px" }}
 						/>
 					</MailText>
 				</MailContent>
 			</MailContainer>
+			<Button>Enregistrer ce modèle</Button>
+			<Button
+				onClick={() => {
+					console.log("Subject:");
+					console.log(JSON.stringify(subjectEditorRef.current.value));
+					console.log("Content:");
+					console.log(JSON.stringify(contentEditorRef.current.value));
+				}}
+			>
+				Print in console
+			</Button>
 		</div>
 	);
 };

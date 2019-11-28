@@ -50,16 +50,24 @@ function UploadDashboardButton({
 		}),
 	);
 
-	useEffect(
-		() => function cleanup() {
-			uppyState.close();
-		},
-		[uppyState],
-	);
+	useEffect(() => {
+		uppyState.on('complete', () => {
+			if (!allowMultipleUploads) {
+				uppyState.reset();
+			}
+		});
+
+		return () => uppyState.close();
+	}, [uppyState]);
 
 	return (
 		<>
-			<Button icon="+" onClick={() => setModalOpen(true)} style={style}>
+			<Button
+				type="button"
+				icon="+"
+				onClick={() => setModalOpen(true)}
+				style={style}
+			>
 				{children}
 			</Button>
 			<Portal>

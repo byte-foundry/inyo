@@ -114,8 +114,17 @@ export const GET_USER_INFOS = gql`
 					url
 				}
 				banner {
-					id
-					url
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						urls {
+							small
+							thumb
+						}
+					}
 				}
 				address {
 					street
@@ -285,8 +294,21 @@ export const GET_PROJECT_INFOS = gql`
 					url
 				}
 				banner {
-					id
-					url
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						user {
+							id
+							username
+							name
+						}
+						urls {
+							full
+						}
+					}
 				}
 				address {
 					street
@@ -329,8 +351,21 @@ export const GET_PROJECT_DATA = gql`
 					url
 				}
 				banner {
-					id
-					url
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						user {
+							id
+							username
+							name
+						}
+						urls {
+							full
+						}
+					}
 				}
 				address {
 					street
@@ -403,8 +438,21 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 					url
 				}
 				banner {
-					id
-					url
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						user {
+							id
+							username
+							name
+						}
+						urls {
+							full
+						}
+					}
 				}
 				address {
 					street

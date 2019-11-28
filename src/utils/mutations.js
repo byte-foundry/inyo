@@ -212,8 +212,16 @@ export const UPDATE_USER_COMPANY = gql`
 					url
 				}
 				banner {
-					id
-					url
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						urls {
+							small
+						}
+					}
 				}
 				address {
 					street

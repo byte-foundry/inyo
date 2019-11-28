@@ -14,10 +14,12 @@ import {
 	Button,
 	InputLabel,
 	Label,
+	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
+import IconButton from '../IconButton';
 import ImagePickerModal from '../ImagePickerModal';
 import UploadDashboardButton from '../UploadDashboardButton';
 
@@ -75,7 +77,11 @@ const ImageContainer = styled('div')`
 
 const UploadButtons = styled('div')`
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
+
+	button {
+		margin-right: 15px;
+	}
 `;
 
 const UserCompanyForm = ({data, buttonText}) => {
@@ -250,37 +256,53 @@ const UserCompanyForm = ({data, buttonText}) => {
 													/>
 												</ImageContainer>
 											)}
-											<UploadDashboardButton
-												onUploadFiles={([file]) => updateUser({
-													variables: {
-														company: {
-															logo: file,
+
+											<UploadButtons>
+												<UploadDashboardButton
+													onUploadFiles={([file]) => updateUser({
+														variables: {
+															company: {
+																logo: file,
+															},
 														},
-													},
-													context: {
-														hasUpload: true,
-													},
-												})
-												}
-												restrictions={{
-													maxFileSize: 500 * 1024,
-													maxNumberOfFiles: 1,
-													allowedFileTypes: [
-														'image/*',
-														'.jpg',
-														'.jpeg',
-														'.png',
-														'.gif',
-													],
-												}}
-												allowMultipleUploads={false}
-												autoProceed
-												style={{margin: 'auto'}}
-											>
-												<fbt desc="Company's logo upload button">
-													Charger un logo
-												</fbt>
-											</UploadDashboardButton>
+														context: {
+															hasUpload: true,
+														},
+													})
+													}
+													restrictions={{
+														maxFileSize: 500 * 1024,
+														maxNumberOfFiles: 1,
+														allowedFileTypes: [
+															'image/*',
+															'.jpg',
+															'.jpeg',
+															'.png',
+															'.gif',
+														],
+													}}
+													allowMultipleUploads={false}
+													autoProceed
+												>
+													<fbt desc="Company's logo upload button">
+														Charger un logo
+													</fbt>
+												</UploadDashboardButton>
+
+												<IconButton
+													icon="delete"
+													size="small"
+													color={primaryRed}
+													onClick={() => updateUser({
+														variables: {
+															company: {
+																logo: null,
+															},
+														},
+													})
+													}
+												/>
+											</UploadButtons>
 										</InputLabel>
 									</div>
 									<div style={{gridColumn: '2 / 3'}}>
@@ -293,7 +315,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 											{banner && (
 												<ImageContainer height="50%">
 													<img
-														src={banner.url}
+														src={
+															banner.url
+															|| banner.urls.small
+														}
 														alt="Company banner"
 													/>
 												</ImageContainer>
@@ -324,7 +349,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 															updateUser({
 																variables: {
 																	company: {
-																		bannerUnsplash: id,
+																		bannerUnsplashId: id,
 																	},
 																},
 															});
@@ -348,7 +373,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 													})
 													}
 													restrictions={{
-														maxFileSize: 500000,
+														maxFileSize:
+															1024 * 1024,
 														maxNumberOfFiles: 1,
 														allowedFileTypes: [
 															'image/*',
@@ -365,6 +391,21 @@ const UserCompanyForm = ({data, buttonText}) => {
 														Charger
 													</fbt>
 												</UploadDashboardButton>
+
+												<IconButton
+													icon="delete"
+													size="small"
+													color={primaryRed}
+													onClick={() => updateUser({
+														variables: {
+															company: {
+																banner: null,
+																bannerUnsplashId: null,
+															},
+														},
+													})
+													}
+												/>
 											</UploadButtons>
 										</InputLabel>
 									</div>

@@ -301,6 +301,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 
 											<UploadButtons>
 												<Button
+													type="button"
 													onClick={() => setisOpenImagePickerModal(
 														true,
 													)

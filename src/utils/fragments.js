@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const SHORT_TAG_FRAGMENT = gql`
 	fragment ShortTagFragment on Tag {
@@ -62,6 +62,19 @@ export const SHORT_TASK_FRAGMENT = gql`
 
 		comments {
 			id
+			views {
+				viewer {
+					... on User {
+						firstName
+						lastName
+					}
+					... on Customer {
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 		}
 	}
 `;

@@ -5,7 +5,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
-import {ModalContainer} from '../../utils/content';
 import SectionIconUrl, {
 	ReactComponent as SectionIcon,
 } from '../../utils/icons/section-icon.svg';
@@ -18,19 +17,13 @@ import {
 	lightGrey,
 	mediumGrey,
 	primaryBlack,
-	primaryGrey,
 	primaryPurple,
-	TaskInputDropdownHeader,
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
-import CheckList from '../CheckList';
-import CustomerModalAndMail from '../CustomerModalAndMail';
 import MaterialIcon from '../MaterialIcon';
 import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
-import TaskCustomerInput from '../TaskCustomerInput';
-import TaskTypeDropdown from '../TaskTypeDropdown';
 import Tooltip from '../Tooltip';
 import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
@@ -120,22 +113,6 @@ const Icon = styled('div')`
 	}
 `;
 
-const TaskInfosInputsContainer = styled('div')`
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start;
-	padding: 10px 0;
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		flex-direction: column;
-		align-items: stretch;
-	}
-`;
-
-const TaskInputCheckListContainer = styled('div')`
-	margin-left: 2em;
-`;
-
 const PopinItem = styled('div')`
 	display: grid;
 	grid-template-columns: 50px 1fr;
@@ -189,7 +166,6 @@ const PopinTask = ({
 	currentProjectId,
 	defaultCustomer,
 	withProject,
-	popinTask,
 }) => {
 	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);

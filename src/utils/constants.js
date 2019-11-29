@@ -564,7 +564,9 @@ export const PLAN_NAMES = {
 	LIFE: "LIFE",
 	MONTHLY: "MONTHLY",
 	YEARLY: "YEARLY",
-	PROMO: "PROMO"
+	PROMO: "PROMO",
+	PH: "PH",
+	YEARLYPROMO: "YEARLYPROMO"
 };
 
 export const STRIPE_CONSTANT =
@@ -590,6 +592,10 @@ export const STRIPE_CONSTANT =
 					},
 					[PLAN_NAMES.PROMO]: {
 						plan: "plan_GFUTRbT0Ur7bmI",
+						quantity: 1
+					},
+					[PLAN_NAMES.YEARLYPROMO]: {
+						plan: "plan_GFyaaDajORBNcG",
 						quantity: 1
 					}
 				},
@@ -617,6 +623,10 @@ export const STRIPE_CONSTANT =
 					},
 					[PLAN_NAMES.PROMO]: {
 						plan: "plan_GFVhAITzMGhjT5",
+						quantity: 1
+					},
+					[PLAN_NAMES.YEARLYPROMO]: {
+						plan: "plan_GGHRrM0Hi37Xsn",
 						quantity: 1
 					}
 				},

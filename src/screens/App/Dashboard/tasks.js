@@ -20,11 +20,11 @@ import {
 	FlexRow,
 	LoadingLogo,
 	ModalContainer as Modal,
-	ModalElem,
+	ModalElem
 } from '../../../utils/content';
 import {
 	isCustomerTask,
-	taskFulfillsActivationCriteria,
+	taskFulfillsActivationCriteria
 } from '../../../utils/functions';
 import IllusBackground from '../../../utils/images/empty-tasks-background.svg';
 import IllusFigure from '../../../utils/images/empty-tasks-illus.svg';
@@ -34,11 +34,13 @@ import {
 	IllusFigureContainer,
 	IllusText,
 	P,
-	ScrollHelper,
+	ScrollHelper
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS_SHORT} from '../../../utils/queries';
 import useScheduleData from '../../../utils/useScheduleData';
 import useUserInfos from '../../../utils/useUserInfos';
+
+const TasksListStyle = {minHeight: '50px'};
 
 const FlexRowMobile = styled(FlexRow)`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
@@ -55,12 +57,12 @@ function DraggableTask({
 	userId,
 	customerToken,
 	baseUrl,
-	setIsDragging = () => {},
+	setIsDragging = () => {}
 }) {
 	const [, drag] = useDrag({
 		item: {
 			id: item.id,
-			type: DRAG_TYPES.TASK,
+			type: DRAG_TYPES.TASK
 		},
 		begin() {
 			setIsDragging(true);
@@ -68,12 +70,12 @@ function DraggableTask({
 				type: item.type,
 				linkedCustomer: item.linkedCustomer, // we need this
 				attachments: item.attachments, // and this to check for activation criteria fulfillment
-				id: item.id,
+				id: item.id
 			};
 		},
 		end() {
 			setIsDragging(false);
-		},
+		}
 	});
 
 	if (isCustomerTask(item.type) && !item.linkedCustomer) {
@@ -112,7 +114,7 @@ const LoadingScreen = () => (
 				top: '0',
 				bottom: '0',
 				right: '0',
-				left: '0',
+				left: '0'
 			}}
 		>
 			<LoadingLogo />
@@ -125,31 +127,31 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = useMemo(
 		() => new URLSearchParams(prevSearch || location.search),
-		[prevSearch, location.search],
+		[prevSearch, location.search]
 	);
 
-	const startingFrom
-		= query.get('from')
-		|| moment()
+	const startingFrom =
+		query.get('from') ||
+		moment()
 			.startOf('week')
 			.format(moment.HTML5_FMT.DATE);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS_SHORT, {
 		variables: {schedule: 'UNSCHEDULED'},
-		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
+		pollInterval: 1000 * 60 * 5 // refresh tasks every 5 min
 	});
 
 	const {
 		assistantName,
 		workingTime,
 		workingDays,
-		hasFullWeekSchedule,
+		hasFullWeekSchedule
 	} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const {
 		loading: loadingSchedule,
 		tasksToReschedule,
-		scheduledTasksPerDay,
+		scheduledTasksPerDay
 	} = useScheduleData({startingFrom});
 
 	const onMoveTask = useCallback(
@@ -160,48 +162,52 @@ const DashboardTasks = ({location, history}) => {
 					state: {
 						prevSearch: location.search,
 						isActivating: taskFulfillsActivationCriteria(task),
-						scheduledFor,
-					},
+						scheduledFor
+					}
 				});
 
 				return;
 			}
 
-			if (isCustomerTask(task.type) && task.scheduledFor !== scheduledFor) return;
+			if (isCustomerTask(task.type) && task.scheduledFor !== scheduledFor)
+				return;
 
 			focusTask({
 				variables: {
 					itemId: task.id,
 					for: scheduledFor,
-					schedulePosition: position,
+					schedulePosition: position
 				},
 				optimisticReponse: {
 					focusTask: {
 						itemId: task.id,
 						for: scheduledFor,
-						schedulePosition: position,
-					},
-				},
+						schedulePosition: position
+					}
+				}
 			});
 		},
-		[focusTask, data && data.me.tasks, history, location.search],
+		[focusTask, data && data.me.tasks, history, location.search]
 	);
 
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
-	const tags = useMemo(() => query.getAll('tags'), [query]);
+	const tags = useMemo(() => query.getAll('tags'), [
+		query.getAll('tags').length
+	]);
 	const linkedCustomerId = query.get('customerId');
 
 	if (
-		error
-		&& !(
-			data.me
-			&& typeof error.message === 'string'
-			&& (error.message.includes('NetworkError')
-				|| error.message.includes('Network error')
-				|| error.message.includes('Whoops'))
+		error &&
+		!(
+			data.me &&
+			typeof error.message === 'string' &&
+			(error.message.includes('NetworkError') ||
+				error.message.includes('Network error') ||
+				error.message.includes('Whoops'))
 		)
-	) throw error;
+	)
+		throw error;
 
 	const setProjectSelected = useCallback(
 		(selected, removeCustomer) => {
@@ -211,8 +217,7 @@ const DashboardTasks = ({location, history}) => {
 				const {value: selectedProjectId} = selected;
 
 				newQuery.set('projectId', selectedProjectId);
-			}
-			else if (newQuery.has('projectId')) {
+			} else if (newQuery.has('projectId')) {
 				newQuery.delete('projectId');
 			}
 
@@ -222,19 +227,18 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query],
+		[history, query]
 	);
 
 	const setCustomerSelected = useCallback(
-		(selected) => {
+		selected => {
 			const newQuery = new URLSearchParams(query);
 
 			if (selected) {
 				const {value: selectedCustomerId} = selected;
 
 				newQuery.set('customerId', selectedCustomerId);
-			}
-			else if (newQuery.has('customerId')) {
+			} else if (newQuery.has('customerId')) {
 				newQuery.delete('customerId');
 			}
 
@@ -244,11 +248,11 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query],
+		[history, query]
 	);
 
 	const setFilterSelected = useCallback(
-		(selected) => {
+		selected => {
 			const newQuery = new URLSearchParams(query);
 
 			if (selected) {
@@ -259,11 +263,11 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query],
+		[history, query]
 	);
 
 	const setTagSelected = useCallback(
-		(selected) => {
+		selected => {
 			const newQuery = new URLSearchParams(query);
 
 			if (selected) {
@@ -273,8 +277,78 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query],
+		[history, query]
 	);
+
+	const [
+		unscheduledTasks,
+		unscheduledFilteredTasks,
+		ongoingProjectAndNoProjectTask,
+		createTaskComponent
+	] = useMemo(() => {
+		if (!loading) {
+			const {
+				me: {id, tasks}
+			} = data;
+
+			const unscheduledTasks = tasks.filter(
+				t => !(t.assignee && t.assignee.id !== id)
+			);
+
+			const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
+				task =>
+					!task.section ||
+					task.section.project.status === 'ONGOING' ||
+					projectId
+			);
+
+			const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
+				task =>
+					(!linkedCustomerId ||
+						((task.linkedCustomer &&
+							task.linkedCustomer.id === linkedCustomerId) ||
+							(task.section &&
+								task.section.project.customer &&
+								task.section.project.customer.id ===
+									linkedCustomerId))) &&
+					(!filter || task.status === filter || filter === 'ALL') &&
+					(!projectId ||
+						(task.section &&
+							task.section.project.id === projectId)) &&
+					tags.every(tag =>
+						task.tags.some(taskTag => taskTag.id === tag)
+					)
+			);
+
+			const createTaskComponent = ({item, customerToken}) => (
+				<DraggableTask
+					item={item}
+					userId={id}
+					key={item.id}
+					customerToken={customerToken}
+					baseUrl="dashboard"
+					setIsDragging={setIsDragging}
+				/>
+			);
+
+			return [
+				unscheduledTasks,
+				unscheduledFilteredTasks,
+				ongoingProjectAndNoProjectTask,
+				createTaskComponent
+			];
+		}
+
+		return [[], [], [], () => {}];
+	}, [
+		loading,
+		data,
+		projectId,
+		linkedCustomerId,
+		filter,
+		tags,
+		setIsDragging
+	]);
 
 	return (
 		<>
@@ -284,14 +358,14 @@ const DashboardTasks = ({location, history}) => {
 			<Schedule
 				loading={loadingSchedule}
 				startingFrom={startingFrom}
-				onChangeWeek={(newWeek) => {
+				onChangeWeek={newWeek => {
 					const newQuery = new URLSearchParams(query);
 
 					newQuery.set('from', newWeek);
 
 					history.replace({
 						...location,
-						search: newQuery.toString(),
+						search: newQuery.toString()
 					});
 				}}
 				days={scheduledTasksPerDay}
@@ -322,88 +396,40 @@ const DashboardTasks = ({location, history}) => {
 					/>
 					<Loading loading={loading} fallback={<LoadingScreen />}>
 						{() => {
-							const {
-								me: {id, tasks},
-							} = data;
-
-							const unscheduledTasks = tasks.filter(
-								t => !(t.assignee && t.assignee.id !== id),
-							);
-
-							const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
-								task => !task.section
-									|| task.section.project.status === 'ONGOING'
-									|| projectId,
-							);
-
-							const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
-								task => (!linkedCustomerId
-										|| ((task.linkedCustomer
-											&& task.linkedCustomer.id
-												=== linkedCustomerId)
-											|| (task.section
-												&& task.section.project.customer
-												&& task.section.project.customer
-													.id
-													=== linkedCustomerId)))
-									&& (!filter
-										|| task.status === filter
-										|| filter === 'ALL')
-									&& (!projectId
-										|| (task.section
-											&& task.section.project.id
-												=== projectId))
-									&& tags.every(tag => task.tags.some(
-										taskTag => taskTag.id === tag,
-									)),
-							);
-
-							return unscheduledTasks.length !== 0
-								|| unscheduledFilteredTasks.length
-									!== unscheduledTasks.length ? (
-									<TasksList
-										style={{minHeight: '50px'}}
-										hasFilteredItems={
-											ongoingProjectAndNoProjectTask.length
-										!== unscheduledFilteredTasks.length
-										}
-										items={unscheduledFilteredTasks}
-										baseUrl="dashboard"
-										createTaskComponent={({
-											item,
-											customerToken,
-										}) => (
-											<DraggableTask
-												item={item}
-												userId={id}
-												key={item.id}
-												customerToken={customerToken}
-												baseUrl="dashboard"
-												setIsDragging={setIsDragging}
-											/>
-										)}
-										condensed
-									/>
-								) : (
-									<div style={{marginTop: '2rem'}}>
-										<IllusContainer bg={IllusBackground}>
-											<IllusFigureContainer
-												fig={IllusFigure}
-											/>
-											<IllusText>
-												<P>
-													<fbt
-														project="inyo"
-														desc="no more task"
-													>
+							return unscheduledTasks.length !== 0 ||
+								unscheduledFilteredTasks.length !==
+									unscheduledTasks.length ? (
+								<TasksList
+									style={TasksListStyle}
+									hasFilteredItems={
+										ongoingProjectAndNoProjectTask.length !==
+										unscheduledFilteredTasks.length
+									}
+									items={unscheduledFilteredTasks}
+									baseUrl="dashboard"
+									createTaskComponent={createTaskComponent}
+									condensed
+								/>
+							) : (
+								<div style={{marginTop: '2rem'}}>
+									<IllusContainer bg={IllusBackground}>
+										<IllusFigureContainer
+											fig={IllusFigure}
+										/>
+										<IllusText>
+											<P>
+												<fbt
+													project="inyo"
+													desc="no more task"
+												>
 													Vous n'avez plus de tâches à
 													planifier.
-													</fbt>
-												</P>
-											</IllusText>
-										</IllusContainer>
-									</div>
-								);
+												</fbt>
+											</P>
+										</IllusText>
+									</IllusContainer>
+								</div>
+							);
 						}}
 					</Loading>
 				</div>
@@ -412,18 +438,20 @@ const DashboardTasks = ({location, history}) => {
 				path="/app/dashboard/:taskId"
 				render={({match, history, location: {state = {}}}) => (
 					<Modal
-						onDismiss={() => history.push(
-							`/app/dashboard${state.prevSearch || ''}`,
-						)
+						onDismiss={() =>
+							history.push(
+								`/app/dashboard${state.prevSearch || ''}`
+							)
 						}
 					>
 						<ModalElem>
 							<TaskView
 								id={match.params.taskId}
-								close={() => history.push(
-									`/app/dashboard${state.prevSearch
-											|| ''}`,
-								)
+								close={() =>
+									history.push(
+										`/app/dashboard${state.prevSearch ||
+											''}`
+									)
 								}
 								isActivating={state.isActivating}
 								scheduledFor={state.scheduledFor}

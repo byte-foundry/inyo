@@ -7,6 +7,7 @@ import React, {
 	useEffect,
 	useRef,
 	useState,
+	memo
 } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 
@@ -22,7 +23,7 @@ import {
 	primaryGrey,
 	TaskHeading,
 	TaskIcon,
-	TaskIconText,
+	TaskIconText
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
@@ -51,7 +52,8 @@ export const TaskContainer = styled('div')`
 		display: block;
 		width: 0.8rem;
 		height: 1.2rem;
-		background: ${props => (props.isDraggable ? `url(${DragIconSvg})` : 'none')};
+		background: ${props =>
+			props.isDraggable ? `url(${DragIconSvg})` : 'none'};
 		background-repeat: no-repeat;
 		position: absolute;
 		left: -3rem;
@@ -98,7 +100,8 @@ const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 `;
 
 const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
-	text-decoration: ${props => (props.status === itemStatuses.FINISHED ? 'line-through' : 'none')};
+	text-decoration: ${props =>
+		props.status === itemStatuses.FINISHED ? 'line-through' : 'none'};
 	margin-right: 0.5rem;
 	color: ${primaryBlack};
 	white-space: nowrap;
@@ -202,7 +205,7 @@ function TaskRow({
 	noProject: inProject,
 	baseUrl = 'tasks',
 	forwardedRef,
-	userId,
+	userId
 }) {
 	const [finishItem] = useMutation(FINISH_ITEM);
 	const [unfinishItem] = useMutation(UNFINISH_ITEM);
@@ -228,7 +231,7 @@ function TaskRow({
 			setDropdownStyle({
 				position: 'absolute',
 				top: `${pos.bottom + window.scrollY}px`,
-				left: `${pos.left}px`,
+				left: `${pos.left}px`
 			});
 		}
 	}, [editAssignee]);
@@ -236,14 +239,14 @@ function TaskRow({
 	const finishItemCallback = useCallback(() => {
 		finishItem({
 			variables: {
-				itemId: item.id,
+				itemId: item.id
 			},
 			optimisticResponse: {
 				finishItem: {
 					...item,
-					status: 'FINISHED',
-				},
-			},
+					status: 'FINISHED'
+				}
+			}
 		});
 		setJustUpdated(true);
 	}, [finishItem, item]);
@@ -254,6 +257,7 @@ function TaskRow({
 
 	return (
 		<div ref={forwardedRef} id={`task-${item.type}`}>
+			{item.position}
 			<TaskContainer noData={noData} isDraggable={isDraggable}>
 				<TaskAdd />
 				<TaskIcon
@@ -274,12 +278,11 @@ function TaskRow({
 							}
 
 							finishItemCallback();
-						}
-						else if (isUnfinishable) {
+						} else if (isUnfinishable) {
 							unfinishItem({
 								variables: {
-									itemId: item.id,
-								},
+									itemId: item.id
+								}
 							});
 						}
 					}}
@@ -293,7 +296,7 @@ function TaskRow({
 								status={item.status}
 								to={{
 									pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-									state: {prevSearch: location.search},
+									state: {prevSearch: location.search}
 								}}
 							>
 								{item.assignee && (
@@ -324,7 +327,7 @@ function TaskRow({
 								small={false}
 								to={{
 									pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-									state: {prevSearch: location.search},
+									state: {prevSearch: location.search}
 								}}
 							>
 								<fbt
@@ -343,7 +346,7 @@ function TaskRow({
 								tag={{
 									name: `${item.tags.length - 2}+`,
 									colorBg: '#4b4b4b',
-									colorText: '#fff',
+									colorText: '#fff'
 								}}
 							/>
 						)}
@@ -360,7 +363,7 @@ function TaskRow({
 								<MaterialIcon
 									style={{
 										marginTop: '5px',
-										marginRight: '5px',
+										marginRight: '5px'
 									}}
 									icon="today"
 									size="tiny"
@@ -373,8 +376,8 @@ function TaskRow({
 							</IconAndText>
 						</Tooltip>
 					)}
-					{!inProject
-						&& (item.section && item.section.project ? (
+					{!inProject &&
+						(item.section && item.section.project ? (
 							<Tooltip
 								label={
 									<fbt project="inyo" desc="open project">
@@ -385,7 +388,7 @@ function TaskRow({
 								<ProjectNameWrap>
 									<ProjectName
 										to={`/app/tasks?projectId=${item.section.project.id}`}
-										onClick={(e) => {
+										onClick={e => {
 											// needed to avoid another history push to be triggered, should be investigated
 											e.stopPropagation();
 										}}
@@ -412,34 +415,35 @@ function TaskRow({
 								>
 									<IconAndTextOptional
 										ref={containerRef}
-										onClick={() => inProject && setEditAssignee(true)
+										onClick={() =>
+											inProject && setEditAssignee(true)
 										}
 									>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
-												marginRight: '5px',
+												marginRight: '5px'
 											}}
 											icon="person"
 											size="tiny"
 										/>
-										{item.linkedCustomer
-										|| (item.section
-											&& item.section.project.customer) ? (
-												<InitialIdentifier
-													person={
-														item.linkedCustomer
-													|| (item.section
-														&& item.section.project
+										{item.linkedCustomer ||
+										(item.section &&
+											item.section.project.customer) ? (
+											<InitialIdentifier
+												person={
+													item.linkedCustomer ||
+													(item.section &&
+														item.section.project
 															.customer)
-													}
-													size={20}
-												/>
-											) : (
-												<span style={{marginLeft: '5px'}}>
+												}
+												size={20}
+											/>
+										) : (
+											<span style={{marginLeft: '5px'}}>
 												&mdash;
-												</span>
-											)}
+											</span>
+										)}
 										{inProject && editAssignee && (
 											<Portal>
 												<div
@@ -471,13 +475,14 @@ function TaskRow({
 								>
 									<IconAndTextOptional
 										ref={containerRef}
-										onClick={() => inProject && setEditAssignee(true)
+										onClick={() =>
+											inProject && setEditAssignee(true)
 										}
 									>
 										<MaterialIcon
 											style={{
 												marginTop: '5px',
-												marginRight: '5px',
+												marginRight: '5px'
 											}}
 											icon="face"
 											size="tiny"
@@ -523,32 +528,32 @@ function TaskRow({
 									noComment
 									locationSearch={location.search}
 								/>
-								{item.unit <= 0.1 / workingTime
-								&& item.timeItTook <= 0.1 / workingTime ? (
-										<div />
-									) : (
-										<Tooltip
-											label={
-												<UnitDisplay
-													unit={
-														item.timeItTook
-															? item.timeItTook
-															: item.unit
-													}
-												/>
-											}
-										>
-											<TaskIconText
-												inactive={false}
-												icon={
-													<MaterialIcon
-														icon="timer"
-														size="tiny"
-													/>
+								{item.unit <= 0.1 / workingTime &&
+								item.timeItTook <= 0.1 / workingTime ? (
+									<div />
+								) : (
+									<Tooltip
+										label={
+											<UnitDisplay
+												unit={
+													item.timeItTook
+														? item.timeItTook
+														: item.unit
 												}
 											/>
-										</Tooltip>
-									)}
+										}
+									>
+										<TaskIconText
+											inactive={false}
+											icon={
+												<MaterialIcon
+													icon="timer"
+													size="tiny"
+												/>
+											}
+										/>
+									</Tooltip>
+								)}
 								{item.description ? (
 									<TaskDescription
 										taskUrlPrefix={taskUrlPrefix}
@@ -585,7 +590,7 @@ function TaskRow({
 												/>
 											}
 											style={{
-												fontWeight: '600',
+												fontWeight: '600'
 											}}
 											content={
 												<>{item.attachments.length}</>
@@ -610,7 +615,20 @@ function TaskRow({
 	);
 }
 
-const RouterTask = withRouter(TaskRow);
+const RouterTask = withRouter(
+	memo(
+		TaskRow,
+		(prevProps, nextProps) =>
+			prevProps.item === nextProps.item &&
+			prevProps.location.search === nextProps.location.search &&
+			prevProps.isDraggable === nextProps.isDraggable &&
+			prevProps.noData === nextProps.noData &&
+			prevProps.noProject === nextProps.noProject &&
+			prevProps.baseUrl === nextProps.baseUrl &&
+			prevProps.forwardedRef === nextProps.forwardedRef &&
+			prevProps.userId === nextProps.userId
+	)
+);
 
 export default forwardRef((props, ref) => (
 	<RouterTask forwardedRef={ref} {...props} />

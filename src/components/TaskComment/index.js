@@ -1,12 +1,12 @@
 import styled from '@emotion/styled/macro';
-import React from 'react';
+import React, {memo} from 'react';
 import {withRouter} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {
 	primaryRed,
 	primaryWhite,
-	TaskInfosItemLink,
+	TaskInfosItemLink
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
 import Tooltip from '../Tooltip';
@@ -33,16 +33,18 @@ function TaskComment({
 	item,
 	noComment,
 	customerToken,
-	location,
+	location
 }) {
 	let unreadCommentLength = (item.comments || []).length;
 
 	if (!noComment && unreadCommentLength > 0) {
 		unreadCommentLength = item.comments.filter(
-			comment => !comment.views.find(
-				e => e.viewer.__typename
-						=== (customerToken ? 'Customer' : 'User'),
-			),
+			comment =>
+				!comment.views.find(
+					e =>
+						e.viewer.__typename ===
+						(customerToken ? 'Customer' : 'User')
+				)
 		).length;
 	}
 
@@ -50,7 +52,7 @@ function TaskComment({
 		<TaskInfosItemLink
 			to={{
 				pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-				state: {prevSearch: location.search},
+				state: {prevSearch: location.search}
 			}}
 			id="icon-meta-comment"
 		>
@@ -80,4 +82,15 @@ function TaskComment({
 	);
 }
 
-export default withRouter(TaskComment);
+export default withRouter(
+	memo(
+		TaskComment,
+		(prevProps, nextProps) =>
+			prevProps.taskUrlPrefix === nextProps.taskUrlPrefix &&
+			prevProps.baseUrl === nextProps.baseUrl &&
+			prevProps.item === nextProps.item &&
+			prevProps.noComment === nextProps.noComment &&
+			prevProps.customerToken === nextProps.customerToken &&
+			prevProps.location.search === nextProps.location.search
+	)
+);

@@ -504,9 +504,6 @@ const Schedule = ({
 										<UnitAvailableDisplay unit={timeLeft} />
 									</p>
 								</DayTime>
-								<HelpAndTooltip icon="add">
-									<CreateTask popinTask withProject />
-								</HelpAndTooltip>
 							</DayInfos>
 						);
 					}
@@ -519,9 +516,6 @@ const Schedule = ({
 										<UnitOvertimeDisplay unit={-timeLeft} />
 									</p>
 								</DayTime>
-								<HelpAndTooltip icon="add">
-									<CreateTask PopinTask withProject />
-								</HelpAndTooltip>
 							</DayInfos>
 						);
 					}
@@ -641,6 +635,9 @@ const Schedule = ({
 									}}
 								>
 									{stat}
+									<HelpAndTooltip icon="add">
+										<CreateTask popinTask withProject />
+									</HelpAndTooltip>
 								</DefaultDroppableDay>
 								{sortedReminders.map(reminder => (
 									<ReminderCard

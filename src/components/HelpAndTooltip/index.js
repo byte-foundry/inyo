@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
+import {useRect} from '@reach/rect';
 import React, {useRef, useState} from 'react';
 
 import {accentGrey, Dropdown, gray80} from '../../utils/new/design-system';
@@ -14,14 +15,68 @@ const HelpAndTooltipContainer = styled('div')`
 	max-width: 400px;
 `;
 
+// From https://github.com/reach/reach-ui/blob/master/packages/tooltip/src/index.js#L487-L523
+const OFFSET = 8;
+
+function positionDefault(triggerRect, targetRect) {
+	const collisions = {
+		top: triggerRect.top - targetRect.height < 0,
+		right: window.innerWidth < triggerRect.left + targetRect.width,
+		bottom:
+			window.innerHeight
+			< triggerRect.bottom + targetRect.height + OFFSET,
+		left: triggerRect.left - targetRect.width < 0,
+	};
+
+	const directionRight = collisions.right && !collisions.left;
+	const directionUp = collisions.bottom && !collisions.top;
+
+	return {
+		left: directionRight
+			? `${triggerRect.right - targetRect.width + window.pageXOffset}px`
+			: `${triggerRect.left + window.pageXOffset}px`,
+		top: directionUp
+			? `${triggerRect.top
+					- OFFSET
+					- targetRect.height
+					+ window.pageYOffset}px`
+			: `${triggerRect.top
+					+ OFFSET
+					+ triggerRect.height
+					+ window.pageYOffset}px`,
+	};
+}
+
+// Need a separate component so that useRect works inside the portal
+const DropdownContent = ({triggerRect, children, onClose}) => {
+	const ownRef = useRef(null);
+	const dropdownRect = useRect(ownRef, true);
+
+	const styles = dropdownRect
+		? positionDefault(triggerRect, dropdownRect)
+		: {visibility: 'hidden'};
+
+	useOnClickOutside(ownRef, () => {
+		onClose();
+	});
+
+	return (
+		<Dropdown
+			style={{
+				position: 'absolute',
+				...styles,
+			}}
+			ref={ownRef}
+		>
+			<HelpAndTooltipContainer children={children} />
+		</Dropdown>
+	);
+};
+
 const HelpAndTooltip = ({icon = 'help', children}) => {
 	const [open, setOpen] = useState(false);
-	const tooltipRef = useRef();
 	const iconRef = useRef();
-
-	useOnClickOutside(tooltipRef, () => {
-		setOpen(false);
-	});
+	const triggerRect = useRect(iconRef);
 
 	return (
 		<>
@@ -34,20 +89,11 @@ const HelpAndTooltip = ({icon = 'help', children}) => {
 			/>
 			{open && (
 				<Portal>
-					<Dropdown
-						style={{
-							position: 'absolute',
-							top:
-								iconRef.current.getBoundingClientRect().top
-								+ window.scrollY,
-							left: iconRef.current.getBoundingClientRect().right,
-						}}
-						ref={tooltipRef}
-					>
-						<HelpAndTooltipContainer>
-							{children}
-						</HelpAndTooltipContainer>
-					</Dropdown>
+					<DropdownContent
+						triggerRect={triggerRect}
+						children={children}
+						onClose={() => setOpen(false)}
+					/>
 				</Portal>
 			)}
 		</>

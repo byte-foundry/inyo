@@ -1,4 +1,5 @@
-import styled from '@emotion/styled';
+import css from '@emotion/css';
+import styled from '@emotion/styled/macro';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
 
@@ -17,6 +18,7 @@ import {
 	lightGrey,
 	mediumGrey,
 	primaryBlack,
+	primaryGrey,
 	primaryPurple,
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
@@ -33,28 +35,29 @@ const Container = styled('div')`
 `;
 
 const UnitWithSuggestionsFormCondensed = styled(UnitWithSuggestionsForm)`
-	display: grid;
-	margin-bottom: 10px;
-	grid-template-columns: 20% 20% 20% 40%;
+	flex-wrap: wrap;
+	gap: 8px;
+
+	input {
+		width: 100px;
+	}
 `;
 
-const InputContainer = styled('div')`
-	display: flex;
-	align-items: center;
-
-	position: relative;
-`;
+const InputContainer = styled('div')``;
 
 const InputButtonContainer = styled('div')``;
 
 const Input = styled('input')`
+	padding: 5px 0;
+	margin-bottom: 5px;
+	border-bottom: 2px solid
+		${props => (props.value ? primaryGrey : primaryPurple)};
+	font-size: 18px;
+	width: 100%;
 	color: ${primaryPurple};
-	font-size: 1.1rem;
-	transition: all 400ms ease;
 
-	&:hover {
-		background-color: ${lightGrey};
-		animation: all 400ms ease;
+	:hover {
+		border-bottom-color: ${primaryPurple};
 	}
 
 	&::placeholder {
@@ -66,61 +69,33 @@ const Input = styled('input')`
 
 	&:focus {
 		appearance: none;
-		outline: none;
 		outline: 0;
-		box-shadow: none;
-		background: #fff;
-		border: 1px solid ${mediumGrey};
-		box-shadow: 3px 3px 10px ${lightGrey};
-		transition: all 400ms ease;
-	}
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		font-size: 1rem;
-		margin-left: -2rem;
-		padding: 0.5rem 1.2rem 0.5rem 5rem;
-		padding-left: 3rem;
+		border-bottom-color: ${primaryPurple};
 	}
 `;
 
 const Icon = styled('div')`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: ${props => (props.active ? 'transparent' : primaryPurple)};
-	color: #fff;
-	border: 2px solid transparent;
-	border-radius: 50%;
-	width: 2rem;
-	height: 2rem;
-	font-size: 1.2rem;
-	z-index: 0;
-	transition: all 400ms ease;
 	cursor: pointer;
+	transform: scale(0.6);
 
-	&:hover {
-		border: 2px dashed
-			${props => (props.active ? 'transparent' : primaryPurple)};
-		color: ${primaryPurple};
-		background-color: #fff;
-		transition: all 400ms ease;
-	}
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		width: 1rem;
-		height: 1rem;
-		font-size: 1rem;
-	}
+	${props => ['SECTION', 'PROJECT'].includes(props.type)
+		&& css`
+			margin-left: auto;
+		`}
 `;
 
-const PopinItem = styled('div')`
+const Options = styled('div')`
 	display: grid;
 	grid-template-columns: 50px 1fr;
-	align-items: center;
-	margin-bottom: 10px;
+	align-items: baseline;
+	row-gap: 10px;
 `;
 
-const types = [
+const Types = styled('div')`
+	display: flex;
+`;
+
+const TYPES = [
 	...ITEM_TYPES,
 	{
 		icon: <SectionIcon />,
@@ -135,6 +110,22 @@ const types = [
 			return fbt(
 				"Créer une section pour classer les tâches d'un projet",
 				'section description',
+			);
+		},
+	},
+	{
+		icon: <SectionIcon />,
+		iconValidated: <TaskCustomerIconValidated />,
+		iconUrl: SectionIconUrl,
+		iconUrlValidated: TaskCustomerIconValidatedUrl,
+		type: 'PROJECT',
+		get name() {
+			return fbt('Projet', 'project name type');
+		},
+		get description() {
+			return fbt(
+				"Créer un projet pour tenir un client informé de l'avancement.",
+				'project description',
 			);
 		},
 	},
@@ -203,34 +194,19 @@ const PopinTask = ({
 		setOpenedByClick(false);
 	});
 
-	let icon = '▾';
-
-	if (type) {
-		({icon} = types.find(t => t.type === type));
-	}
-	else if (!value.startsWith('/') && value.length > 0) {
-		({icon} = types.find(t => t.type === 'DEFAULT'));
-	}
+	const types = TYPES.filter(
+		t => (currentProjectId && t.type !== 'PROJECT')
+			|| (!currentProjectId && t.type !== 'SECTION'),
+	);
+	const selectedType = types.find(t => t.type === (type || 'DEFAULT'));
 
 	useTrackEventInput({focus, openedByClick, value});
 
 	return (
 		<Container ref={ref}>
-			<PopinItem>
-				<Tooltip
-					label={
-						<fbt project="inyo" desc="task input icon tooltip">
-							Définir le type de tâche
-						</fbt>
-					}
-				>
-					<Icon
-						onClick={() => setOpenedByClick(true)}
-						active={type}
-						id="task-input-type-icon"
-					>
-						{icon}
-					</Icon>
+			<Options>
+				<Tooltip label={selectedType.name}>
+					<Icon>{selectedType.icon}</Icon>
 				</Tooltip>
 				<InputContainer id="task-input-container">
 					<Tooltip
@@ -403,102 +379,119 @@ const PopinTask = ({
 							}
 						/>
 					</Tooltip>
+					<Types>
+						{types.map(type => (
+							<Tooltip label={type.name}>
+								<Icon
+									onClick={() => setType(type.type)}
+									type={type.type}
+								>
+									{type.icon}
+								</Icon>
+							</Tooltip>
+						))}
+					</Types>
 				</InputContainer>
-			</PopinItem>
-			{type !== 'SECTION' && (
-				<PopinItem>
-					<MaterialIcon icon="timer" size="tiny" />
-					<UnitWithSuggestionsFormCondensed
-						small
-						value={itemUnit}
-						onChange={(unit) => {
-							setItemUnit(unit);
-							window.Intercom(
-								'trackEvent',
-								'estimated-time-fill-input',
-								{
-									estimation: unit,
-								},
-							);
-						}}
-					/>
-				</PopinItem>
-			)}
-			{type !== 'SECTION' && (
-				<PopinItem>
-					<MaterialIcon icon="label" size="tiny" />
-					<TagDropdown
-						id="tags-dropdown"
-						long
-						placeholder={
-							<fbt project="inyo" desc="add or create a tag">
-								Ajouter ou créer un tag
-							</fbt>
-						}
-						value={itemTags.map(tag => ({
-							value: tag.id,
-							label: tag.name,
-							colorBg: tag.colorBg,
-							colorText: tag.colorText,
-						}))}
-						onCreateOption={async (name, colorBg, colorText) => {
-							const {
-								data: {createTag: tag},
-							} = await createTag({
-								variables: {
-									name,
-									colorBg,
-									colorText,
-								},
-							});
 
-							setItemTags([...itemTags, tag]);
-						}}
-						onChange={(tags) => {
-							setItemTags(
-								tags
-									? tags.map(tag => ({
-										id: tag.value,
-										name: tag.label,
-										colorBg: tag.colorBg,
-										colorText: tag.colorText,
-									  }))
-									: [],
-							);
-						}}
-					/>
-				</PopinItem>
-			)}
-			{withProject && (
-				<PopinItem>
-					<MaterialIcon icon="folder_open" size="tiny" />
-					<ProjectsDropdown
-						onChange={(param) => {
-							const {value: id} = param || {};
+				{type !== 'SECTION' && (
+					<>
+						<MaterialIcon icon="timer" size="tiny" />
+						<UnitWithSuggestionsFormCondensed
+							small
+							value={itemUnit}
+							onChange={(unit) => {
+								setItemUnit(unit);
+								window.Intercom(
+									'trackEvent',
+									'estimated-time-fill-input',
+									{
+										estimation: unit,
+									},
+								);
+							}}
+						/>
+					</>
+				)}
+				{type !== 'SECTION' && (
+					<>
+						<MaterialIcon icon="label" size="tiny" />
+						<TagDropdown
+							id="tags-dropdown"
+							long
+							placeholder={
+								<fbt project="inyo" desc="add or create a tag">
+									Ajouter ou créer un tag
+								</fbt>
+							}
+							value={itemTags.map(tag => ({
+								value: tag.id,
+								label: tag.name,
+								colorBg: tag.colorBg,
+								colorText: tag.colorText,
+							}))}
+							onCreateOption={async (
+								name,
+								colorBg,
+								colorText,
+							) => {
+								const {
+									data: {createTag: tag},
+								} = await createTag({
+									variables: {
+										name,
+										colorBg,
+										colorText,
+									},
+								});
 
-							setSelectedProject(id);
-						}}
-						children={
-							<fbt project="inyo" desc="link to a project">
-								Lier à un projet
-							</fbt>
-						}
-						isClearable
-					/>
-				</PopinItem>
-			)}
-			<PopinItem>
-				<MaterialIcon icon="person_outline" size="tiny" />
-				<div>…</div>
-			</PopinItem>
-			<PopinItem>
-				<MaterialIcon icon="event" size="tiny" />
-				<div>…</div>
-			</PopinItem>
-			<PopinItem>
-				<MaterialIcon icon="event_available" size="tiny" />
-				<div>…</div>
-			</PopinItem>
+								setItemTags([...itemTags, tag]);
+							}}
+							onChange={(tags) => {
+								setItemTags(
+									tags
+										? tags.map(tag => ({
+											id: tag.value,
+											name: tag.label,
+											colorBg: tag.colorBg,
+											colorText: tag.colorText,
+										  }))
+										: [],
+								);
+							}}
+						/>
+					</>
+				)}
+				{withProject && (
+					<>
+						<MaterialIcon icon="folder_open" size="tiny" />
+						<ProjectsDropdown
+							onChange={(param) => {
+								const {value: id} = param || {};
+
+								setSelectedProject(id);
+							}}
+							children={
+								<fbt project="inyo" desc="link to a project">
+									Lier à un projet
+								</fbt>
+							}
+							isClearable
+						/>
+					</>
+				)}
+				<>
+					<MaterialIcon icon="person_outline" size="tiny" />
+					<div>…</div>
+				</>
+				<>
+					<MaterialIcon icon="event" size="tiny" />
+					<div>…</div>
+				</>
+				<>
+					<MaterialIcon icon="event_available" size="tiny" />
+					<div>…</div>
+				</>
+			</Options>
 			<InputButtonContainer>
 				{type !== 'SECTION' && onSubmitSection && (
 					<Tooltip

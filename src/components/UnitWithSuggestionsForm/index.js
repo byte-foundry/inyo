@@ -16,6 +16,7 @@ import UnitInput from '../UnitInput';
 const Container = styled('div')`
 	display: flex;
 	margin-bottom: 10px;
+	gap: 5px;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: grid;
@@ -28,13 +29,11 @@ const SuggestedTime = styled('button')`
 	flex: 1;
 	background: ${props => (props.selected ? primaryPurple : primaryWhite)};
 	border: 1px solid ${props => (props.selected ? 'transparent' : mediumGrey)};
-	box-shadow: 3px 3px 6px ${mediumGrey};
+	box-shadow: 1px 1px 3px ${mediumGrey};
 	border-radius: 3px;
-	line-height: 0;
 	cursor: pointer;
 	transition: all 300ms ease;
-	margin: 0 5px 0 0;
-	padding: 0.5rem;
+	padding: 0.4rem 0.5rem;
 	color: ${props => (props.selected ? primaryWhite : primaryBlack)};
 
 	:hover {

@@ -2,21 +2,15 @@ import css from '@emotion/css';
 import styled from '@emotion/styled/macro';
 import PropTypes from 'prop-types';
 import React, {useEffect, useRef, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
-import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
-import SectionIconUrl, {
-	ReactComponent as SectionIcon,
-} from '../../utils/icons/section-icon.svg';
-import TaskCustomerIconValidatedUrl, {
-	ReactComponent as TaskCustomerIconValidated,
-} from '../../utils/icons/taskicon-customer-validated.svg';
+import {ITEM_TYPES} from '../../utils/constants';
+import {ReactComponent as SectionIcon} from '../../utils/icons/section-icon.svg';
 import {CREATE_TAG} from '../../utils/mutations';
 import {
 	Button,
-	lightGrey,
-	mediumGrey,
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
@@ -78,7 +72,7 @@ const Icon = styled('div')`
 	cursor: pointer;
 	transform: scale(0.6);
 
-	${props => ['SECTION', 'PROJECT'].includes(props.type)
+	${props => props.right
 		&& css`
 			margin-left: auto;
 		`}
@@ -99,9 +93,6 @@ const TYPES = [
 	...ITEM_TYPES,
 	{
 		icon: <SectionIcon />,
-		iconValidated: <TaskCustomerIconValidated />,
-		iconUrl: SectionIconUrl,
-		iconUrlValidated: TaskCustomerIconValidatedUrl,
 		type: 'SECTION',
 		get name() {
 			return fbt('Section de projet', 'section name');
@@ -110,22 +101,6 @@ const TYPES = [
 			return fbt(
 				"Créer une section pour classer les tâches d'un projet",
 				'section description',
-			);
-		},
-	},
-	{
-		icon: <SectionIcon />,
-		iconValidated: <TaskCustomerIconValidated />,
-		iconUrl: SectionIconUrl,
-		iconUrlValidated: TaskCustomerIconValidatedUrl,
-		type: 'PROJECT',
-		get name() {
-			return fbt('Projet', 'project name type');
-		},
-		get description() {
-			return fbt(
-				"Créer un projet pour tenir un client informé de l'avancement.",
-				'project description',
 			);
 		},
 	},
@@ -158,6 +133,7 @@ const PopinTask = ({
 	defaultCustomer,
 	withProject,
 }) => {
+	const history = useHistory();
 	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('');
@@ -194,10 +170,7 @@ const PopinTask = ({
 		setOpenedByClick(false);
 	});
 
-	const types = TYPES.filter(
-		t => (currentProjectId && t.type !== 'PROJECT')
-			|| (!currentProjectId && t.type !== 'SECTION'),
-	);
+	const types = TYPES.filter(t => !currentProjectId && t.type !== 'SECTION');
 	const selectedType = types.find(t => t.type === (type || 'DEFAULT'));
 
 	useTrackEventInput({focus, openedByClick, value});
@@ -384,12 +357,29 @@ const PopinTask = ({
 							<Tooltip label={type.name}>
 								<Icon
 									onClick={() => setType(type.type)}
-									type={type.type}
+									right={type.type === 'SECTION'}
 								>
 									{type.icon}
 								</Icon>
 							</Tooltip>
 						))}
+						{!currentProjectId && (
+							<Tooltip label={fbt('Projet', 'project name type')}>
+								<Icon
+									right
+									onClick={() => history.push({
+										pathname: '/app/projects/create',
+										state: {name: value},
+									})
+									}
+								>
+									<MaterialIcon
+										icon="folder_open"
+										size="small"
+									/>
+								</Icon>
+							</Tooltip>
+						)}
 					</Types>
 				</InputContainer>
 

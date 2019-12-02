@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
-import {withRouter} from 'react-router-dom';
+import {Route, useHistory} from 'react-router-dom';
 
 import CreateProjectModal from '../../../components/CreateProjectModal';
 import HelpButton from '../../../components/HelpButton';
@@ -28,6 +28,7 @@ import {
 import {
 	accentGrey,
 	Button,
+	ButtonLink,
 	Container,
 	Content,
 	IllusContainer,
@@ -167,11 +168,11 @@ const SubHeadingProject = styled(SubHeading)`
 	margin-bottom: 1.5rem;
 `;
 
-function Projects({history}) {
+const Projects = () => {
+	const history = useHistory();
 	const {language} = useUserInfos();
 	const [removeProjectModal, setRemoveProjectModal] = useState(false);
 	const [projectId, setProjectId] = useState(false);
-	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [seeArchived, setSeeArchived] = useState(false);
 	const [openModeleModal, setOpenModeleModal] = useState(false);
 	const [openDuplicateModal, setOpenDuplicateModal] = useState(false);
@@ -202,14 +203,11 @@ function Projects({history}) {
 					}
 				>
 					<ButtonsRow>
-						<Button
-							big
-							onClick={() => setOpenCreateProjectModal(true)}
-						>
+						<ButtonLink to="/app/projects/create" big>
 							<fbt project="inyo" desc="create project">
 								Nouveau projet
 							</fbt>
-						</Button>
+						</ButtonLink>
 					</ButtonsRow>
 					{unarchivedProject.length === 0
 						&& archivedProject.length === 0 && (
@@ -591,13 +589,17 @@ function Projects({history}) {
 					projectId={projectId}
 				/>
 			)}
-			{openCreateProjectModal && (
-				<CreateProjectModal
-					onDismiss={() => setOpenCreateProjectModal(false)}
-				/>
-			)}
+			<Route
+				path="/app/projects/create"
+				render={({location: {state = {}}, history}) => (
+					<CreateProjectModal
+						baseName={state.name}
+						onDismiss={() => history.push('/app/projects')}
+					/>
+				)}
+			/>
 		</Container>
 	);
-}
+};
 
-export default withRouter(Projects);
+export default Projects;

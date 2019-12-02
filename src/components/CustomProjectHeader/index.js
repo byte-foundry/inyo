@@ -85,7 +85,7 @@ const CustomProjectHeader = ({projectId, customerToken}) => {
 			{banner && banner.urls && (
 				<AttributionLink>
 					<fbt desc="custom project header unsplash attribution link">
-						Photo by{' '}
+						Photo par{' '}
 						<fbt:param name="unsplashProfileUrl">
 							<a
 								rel="noopener"
@@ -94,7 +94,7 @@ const CustomProjectHeader = ({projectId, customerToken}) => {
 								{banner.user.name}
 							</a>
 						</fbt:param>{' '}
-						on{' '}
+						sur{' '}
 						<fbt:param name="unsplashUrl">
 							<a
 								rel="noopener"

@@ -7,6 +7,7 @@ import {useHistory} from 'react-router-dom';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {ITEM_TYPES} from '../../utils/constants';
+import {isCustomerTask} from '../../utils/functions';
 import {ReactComponent as SectionIcon} from '../../utils/icons/section-icon.svg';
 import {CREATE_TAG} from '../../utils/mutations';
 import {
@@ -17,7 +18,9 @@ import {
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
+import CustomersDropdown from '../CustomersDropdown';
 import MaterialIcon from '../MaterialIcon';
+import ProjectCollaboratorsDropdown from '../ProjectCollaboratorsDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
 import TagDropdown from '../TagDropdown';
 import Tooltip from '../Tooltip';
@@ -131,12 +134,11 @@ const PopinTask = ({
 	defaultValue,
 	currentProjectId,
 	defaultCustomer,
-	withProject,
 }) => {
 	const history = useHistory();
 	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);
-	const [type, setType] = useState('');
+	const [type, setType] = useState('DEFAULT');
 	const [focus, setFocus] = useState(false);
 	const [isEditingCustomer, setEditCustomer] = useState(false);
 	const [openedByClick, setOpenedByClick] = useState(false);
@@ -144,7 +146,7 @@ const PopinTask = ({
 		showContentAcquisitionInfos,
 		setShowContentAcquisitionInfos,
 	] = useState(false);
-	const [selectedProject, setSelectedProject] = useState();
+	const [selectedProject, setSelectedProject] = useState(currentProjectId);
 	const [itemUnit, setItemUnit] = useState(0);
 	const [itemTags, setItemTags] = useState([]);
 	const [itemDueDate, setItemDueDate] = useState();
@@ -203,6 +205,7 @@ const PopinTask = ({
 						}
 					>
 						<Input
+							autoFocus
 							data-multiline
 							ref={inputRef}
 							type="text"
@@ -354,7 +357,7 @@ const PopinTask = ({
 					</Tooltip>
 					<Types>
 						{types.map(type => (
-							<Tooltip label={type.name}>
+							<Tooltip key={type.type} label={type.name}>
 								<Icon
 									onClick={() => setType(type.type)}
 									right={type.type === 'SECTION'}
@@ -451,32 +454,59 @@ const PopinTask = ({
 						/>
 					</>
 				)}
-				{withProject && (
+
+				{!currentProjectId && (
 					<>
 						<MaterialIcon icon="folder_open" size="tiny" />
 						<ProjectsDropdown
+							selectedId={selectedProject}
 							onChange={(param) => {
 								const {value: id} = param || {};
 
 								setSelectedProject(id);
 							}}
-							children={
-								<fbt project="inyo" desc="link to a project">
-									Lier à un projet
-								</fbt>
-							}
 							isClearable
-						/>
+						>
+							<fbt project="inyo" desc="link to a project">
+								Lier à un projet
+							</fbt>
+						</ProjectsDropdown>
 					</>
 				)}
-				<>
-					<MaterialIcon icon="person_outline" size="tiny" />
-					<div>…</div>
-				</>
+
+				{isCustomerTask(type) && (
+					<>
+						<MaterialIcon icon="person_outline" size="tiny" />
+						<CustomersDropdown isClearable>
+							<fbt project="inyo" desc="Client">
+								Lier à un client
+							</fbt>
+						</CustomersDropdown>
+					</>
+				)}
+
+				{type === 'DEFAULT' && selectedProject && (
+					<>
+						<MaterialIcon icon="face" size="tiny" />
+						<ProjectCollaboratorsDropdown
+							projectId={selectedProject}
+							isClearable
+						>
+							<fbt
+								project="inyo"
+								desc="Link to collaborator dropdown popin"
+							>
+								Lier à un collaborateur
+							</fbt>
+						</ProjectCollaboratorsDropdown>
+					</>
+				)}
+
 				<>
 					<MaterialIcon icon="event" size="tiny" />
 					<div>…</div>
 				</>
+
 				<>
 					<MaterialIcon icon="event_available" size="tiny" />
 					<div>…</div>

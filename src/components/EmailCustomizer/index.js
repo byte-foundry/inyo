@@ -1,9 +1,16 @@
 import styled from "@emotion/styled";
 import { Editor } from "slate-react";
 import { Value } from "slate";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
+import { useQuery, useMutation } from "../../utils/apollo-hooks";
+import { Loading } from "../../utils/content";
 import { Button } from "../../utils/new/design-system";
+import {
+	SEND_CUSTOM_EMAIL_PREVIEW,
+	UPDATE_EMAIL_TEMPLATE
+} from "../../utils/mutations";
+import { GET_EMAIL_TEMPLATE } from "../../utils/queries";
 import EmailParamList from "../EmailParamList";
 
 const MailContainer = styled("div")`
@@ -116,6 +123,29 @@ const EmailCustomizer = ({ emailType }) => {
 	const contentEditorRef = useRef();
 	const subjectEditorRef = useRef();
 	const [focusedEditorRef, setFocusedEditorRef] = useState(contentEditorRef);
+	const { data, loading, error } = useQuery(GET_EMAIL_TEMPLATE, {
+		variables: {
+			typeName: emailType.name,
+			category: emailType.category
+		}
+	});
+	const [sendCustomEmailPreview] = useMutation(SEND_CUSTOM_EMAIL_PREVIEW);
+	const [updateEmailTemplate] = useMutation(UPDATE_EMAIL_TEMPLATE);
+
+	useEffect(() => {
+		if (!loading) {
+			setSubjectValue(Value.fromJSON(data.emailTemplate.subject));
+			setContentValue(Value.fromJSON(data.emailTemplate.content));
+		}
+	}, [loading, data]);
+
+	if (loading) {
+		return (
+			<div style={{ flex: 1 }}>
+				<Loading />
+			</div>
+		);
+	}
 
 	return (
 		<div style={{ flex: 1 }}>
@@ -124,7 +154,17 @@ const EmailCustomizer = ({ emailType }) => {
 				editor={focusedEditorRef.current}
 			/>
 			<TestEmailLinkContainer>
-				<TestEmailLink>S'envoyer un email de test</TestEmailLink>
+				<TestEmailLink
+					onClick={() => {
+						sendCustomEmailPreview({
+							variables: {
+								templateId: data.emailTemplate.id
+							}
+						});
+					}}
+				>
+					S'envoyer un email de test
+				</TestEmailLink>
 			</TestEmailLinkContainer>
 			<MailContainer>
 				<MailTopBar />
@@ -180,7 +220,19 @@ const EmailCustomizer = ({ emailType }) => {
 					</MailText>
 				</MailContent>
 			</MailContainer>
-			<Button>Enregistrer ce modèle</Button>
+			<Button
+				onClick={() => {
+					updateEmailTemplate({
+						variables: {
+							templateId: data.emailTemplate.id,
+							subject: subjectEditorRef.current.value,
+							content: contentEditorRef.current.value
+						}
+					});
+				}}
+			>
+				Enregistrer ce modèle
+			</Button>
 			<Button
 				onClick={() => {
 					console.log("Subject:");

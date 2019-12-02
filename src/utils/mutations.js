@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'; // eslint-disable-line import/no-extraneous-dependencies
+import gql from "graphql-tag"; // eslint-disable-line import/no-extraneous-dependencies
 
 import {
 	ITEM_FRAGMENT,
@@ -6,8 +6,8 @@ import {
 	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
-	TAG_FRAGMENT,
-} from './fragments';
+	TAG_FRAGMENT
+} from "./fragments";
 
 /** ******** USER GENERIC MUTATIONS ********* */
 export const LOGIN = gql`
@@ -126,7 +126,7 @@ export const UPDATE_USER_CONSTANTS = gql`
 			endWorkAt: $endWorkAt
 			workingDays: $workingDays
 			timeZone: $timeZone
-			settings: {hasFullWeekSchedule: $hasFullWeekSchedule}
+			settings: { hasFullWeekSchedule: $hasFullWeekSchedule }
 			defaultDailyPrice: $defaultDailyPrice
 		) {
 			id
@@ -979,5 +979,34 @@ export const CANCEL_REQUEST_COLLAB = gql`
 			id
 			status
 		}
+	}
+`;
+
+export const UPDATE_EMAIL_TEMPLATE = gql`
+	mutation updateEmailTemplate(
+		$templateId: ID!
+		$subject: Json!
+		$content: Json!
+	) {
+		updateEmailTemplate(
+			id: $templateId
+			subject: $subject
+			content: $content
+		) {
+			id
+			subject
+			content
+			type {
+				id
+				name
+				category
+			}
+		}
+	}
+`;
+
+export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
+	mutation sendCustomEmailPreview($templateId: ID!) {
+		sent: sendCustomEmailPreview(templateId: $templateId)
 	}
 `;

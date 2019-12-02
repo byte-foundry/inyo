@@ -755,3 +755,14 @@ export const GET_EMAIL_TYPES = gql`
 		}
 	}
 `;
+
+export const GET_EMAIL_TEMPLATE = gql`
+	query getEmailTemplate($category: String!, $typeName: String!) {
+		emailTemplate(category: $category, typeName: $typeName) {
+			id
+			timing
+			subject
+			content
+		}
+	}
+`;

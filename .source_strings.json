@@ -1293,9 +1293,9 @@
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
    "filepath": "src/components/CreateProjectModal/index.js",
-   "line_beg": 42,
+   "line_beg": 43,
    "col_beg": 5,
-   "line_end": 44,
+   "line_end": 45,
    "col_end": 11,
    "type": "text",
    "desc": "required",
@@ -1307,9 +1307,9 @@
     "vO2iC9t1o0c05l14ZCYjdA==": "Projet vierge"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 123,
+   "line_beg": 124,
    "col_beg": 4,
-   "line_end": 125,
+   "line_end": 126,
    "col_end": 10,
    "type": "text",
    "desc": "empty project",
@@ -1321,9 +1321,9 @@
     "k2apqNGi2MbCKc/kVRLWMA==": "Vos projets"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 131,
+   "line_beg": 132,
    "col_beg": 4,
-   "line_end": 133,
+   "line_end": 134,
    "col_end": 10,
    "type": "text",
    "desc": "your projects",
@@ -1335,9 +1335,9 @@
     "eht+qxxh8qLe293ArR18hQ==": "Nos modèles"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 139,
+   "line_beg": 140,
    "col_beg": 4,
-   "line_end": 141,
+   "line_end": 142,
    "col_end": 10,
    "type": "text",
    "desc": "our templates",
@@ -1349,9 +1349,9 @@
     "esAlFRsJRyJYPdy1Etih2g==": "Titre du projet"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 175,
+   "line_beg": 176,
    "col_beg": 6,
-   "line_end": 177,
+   "line_end": 178,
    "col_end": 12,
    "type": "text",
    "desc": "project name label",
@@ -1363,9 +1363,9 @@
     "uR3RFRSyvsifyNkawiLp/A==": "Ex: Landing page nouvelle collection, etc."
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 180,
+   "line_beg": 181,
    "col_beg": 6,
-   "line_end": 182,
+   "line_end": 183,
    "col_end": 12,
    "type": "text",
    "desc": "new project name placeholder",
@@ -1377,9 +1377,9 @@
     "gZ40VvEnPKdmyRSpiIDSJQ==": "Modèle"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 193,
+   "line_beg": 195,
    "col_beg": 6,
-   "line_end": 195,
+   "line_end": 197,
    "col_end": 12,
    "type": "text",
    "desc": "template select",
@@ -1391,9 +1391,9 @@
     "DO9+CF8YimXXP8yznO3s8g==": "Créer un nouveau client"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 234,
+   "line_beg": 237,
    "col_beg": 8,
-   "line_end": 236,
+   "line_end": 239,
    "col_end": 14,
    "type": "text",
    "desc": "create a new client",
@@ -1405,9 +1405,9 @@
     "k/uE34MBak4zE0Vv8cXJyQ==": "Client principal du projet"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 244,
+   "line_beg": 247,
    "col_beg": 6,
-   "line_end": 246,
+   "line_end": 249,
    "col_end": 12,
    "type": "text",
    "desc": "main customer of the project",
@@ -1419,9 +1419,9 @@
     "QehVyg4J4kupjKZVBZwuUw==": "Budget"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 257,
+   "line_beg": 260,
    "col_beg": 6,
-   "line_end": 259,
+   "line_end": 262,
    "col_end": 12,
    "type": "text",
    "desc": "project name label",
@@ -1433,9 +1433,9 @@
     "OAbwL0JVNTtFr6h1DMt9hQ==": "5000 €"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 262,
+   "line_beg": 265,
    "col_beg": 6,
-   "line_end": 264,
+   "line_end": 267,
    "col_end": 12,
    "type": "text",
    "desc": "new project name placeholder",
@@ -1447,9 +1447,9 @@
     "T9u2jJt5ihci27CmtReUng==": "Date limite du projet"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 276,
+   "line_beg": 279,
    "col_beg": 8,
-   "line_end": 281,
+   "line_end": 284,
    "col_end": 14,
    "type": "text",
    "desc": "create project deadline",
@@ -1461,9 +1461,9 @@
     "iPGKvsjHfnnJw/l7IwyApg==": "Aucune date limite"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 291,
+   "line_beg": 294,
    "col_beg": 9,
-   "line_end": 293,
+   "line_end": 296,
    "col_end": 15,
    "type": "text",
    "desc": "no deadline",
@@ -1475,9 +1475,9 @@
     "VvRTh0XNNoQzToCLNOwqEg==": "Annuler"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 320,
+   "line_beg": 323,
    "col_beg": 5,
-   "line_end": 322,
+   "line_end": 325,
    "col_end": 11,
    "type": "text",
    "desc": "cancel create project",
@@ -1489,9 +1489,9 @@
     "d8A0c/QN9wdtAbRBSvxB2A==": "Créer le projet"
    },
    "filepath": "src/components/CreateProjectModalForm/index.js",
-   "line_beg": 325,
+   "line_beg": 328,
    "col_beg": 5,
-   "line_end": 327,
+   "line_end": 330,
    "col_end": 11,
    "type": "text",
    "desc": "confirm create project",
@@ -7106,9 +7106,9 @@
     "6uwVVD9eKhOL7acPMB8fuQ==": "Prévisualisation des actions {apos}{assistantName}"
    },
    "filepath": "src/components/TaskActivationModal/index.js",
-   "line_beg": 34,
+   "line_beg": 36,
    "col_beg": 4,
-   "line_end": 52,
+   "line_end": 54,
    "col_end": 10,
    "type": "text",
    "desc": "previsualize action",
@@ -7120,9 +7120,9 @@
     "lJ8efVGK1fSq0F0v1KSlIQ==": "d'"
    },
    "filepath": "src/components/TaskActivationModal/index.js",
-   "line_beg": 40,
+   "line_beg": 42,
    "col_beg": 8,
-   "line_end": 42,
+   "line_end": 44,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -7134,9 +7134,9 @@
     "+qIBGqccGH+XX8Ayov1Ruw==": "de"
    },
    "filepath": "src/components/TaskActivationModal/index.js",
-   "line_beg": 45,
+   "line_beg": 47,
    "col_beg": 8,
-   "line_end": 47,
+   "line_end": 49,
    "col_end": 14,
    "type": "text",
    "desc": "notification message",
@@ -7162,9 +7162,9 @@
     "WW2TgmyNPwsJ1sfvQa/mBg==": "Ouvrir les commentaires"
    },
    "filepath": "src/components/TaskComment/index.js",
-   "line_beg": 60,
+   "line_beg": 62,
    "col_beg": 6,
-   "line_end": 62,
+   "line_end": 64,
    "col_end": 12,
    "type": "text",
    "desc": "open comments tooltip",
@@ -7608,9 +7608,9 @@
     "QgL8RFGOAMmRs3hREibuRg==": "Ouvrir la tâche \"{taskName}\""
    },
    "filepath": "src/components/TaskRemindersList/index.js",
-   "line_beg": 170,
+   "line_beg": 175,
    "col_beg": 10,
-   "line_end": 174,
+   "line_end": 179,
    "col_end": 16,
    "type": "text",
    "desc": "open task",
@@ -7622,9 +7622,9 @@
     "8y1kSgtWLBmsYjJ5yYNpaQ==": "Annulé"
    },
    "filepath": "src/components/TaskRemindersList/index.js",
-   "line_beg": 197,
+   "line_beg": 202,
    "col_beg": 11,
-   "line_end": 199,
+   "line_end": 204,
    "col_end": 17,
    "type": "text",
    "desc": "canceled",
@@ -7636,9 +7636,9 @@
     "NmNYKt+KBb5u8AaTr7URvw==": "Envoyé"
    },
    "filepath": "src/components/TaskRemindersList/index.js",
-   "line_beg": 202,
+   "line_beg": 207,
    "col_beg": 11,
-   "line_end": 204,
+   "line_end": 209,
    "col_end": 17,
    "type": "text",
    "desc": "sent",
@@ -7650,10 +7650,10 @@
     "uSyiYH1dzsHsqDVTug/UWw==": "Supprimer cette action automatique"
    },
    "filepath": "src/components/TaskRemindersList/index.js",
-   "line_beg": 212,
-   "col_beg": 11,
-   "line_end": 218,
-   "col_end": 17,
+   "line_beg": 217,
+   "col_beg": 12,
+   "line_end": 223,
+   "col_end": 18,
    "type": "text",
    "desc": "delete this reminder tooltip",
    "project": "inyo",
@@ -7664,9 +7664,9 @@
     "eof2ZYrjLb3BbSbbPLuR0g==": "Lorsque vous validez des tâches pendant votre journée, un rapport est envoyé aux clients pour les informer de l'avancement du projet ou des tâches sur lesquels ils sont concernés."
    },
    "filepath": "src/components/TaskRemindersList/index.js",
-   "line_beg": 263,
+   "line_beg": 268,
    "col_beg": 6,
-   "line_end": 268,
+   "line_end": 273,
    "col_end": 12,
    "type": "text",
    "desc": "customer report notice",
@@ -7678,9 +7678,9 @@
     "726EBmyncZesHmufFOCfbg==": "Si vous ne souhaitez pas que ce client reçoive un rapport, vous pouvez désactiver les notifications du projet."
    },
    "filepath": "src/components/TaskRemindersList/index.js",
-   "line_beg": 271,
+   "line_beg": 276,
    "col_beg": 6,
-   "line_end": 275,
+   "line_end": 280,
    "col_end": 12,
    "type": "text",
    "desc": "customer report notice",
@@ -8461,9 +8461,9 @@
     "NS4pcMPvWXw6aCVask7ujw==": "La version d'essai s'arrête {date}"
    },
    "filepath": "src/components/TrialHeadband/index.js",
-   "line_beg": 47,
+   "line_beg": 50,
    "col_beg": 3,
-   "line_end": 54,
+   "line_end": 55,
    "col_end": 9,
    "type": "text",
    "desc": "trial is ending message",
@@ -8475,9 +8475,9 @@
     "AK9QcaD1X1QUjUtNEyASQw==": "Passer à la version payante"
    },
    "filepath": "src/components/TrialHeadband/index.js",
-   "line_beg": 63,
+   "line_beg": 64,
    "col_beg": 4,
-   "line_end": 65,
+   "line_end": 66,
    "col_end": 10,
    "type": "text",
    "desc": "switch to paid version",
@@ -11672,7 +11672,7 @@
   },
   {
    "hashToText": {
-    "pth9dfSM1XyB3KYNrDShZg==": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+    "7HhicYJABwi9UK9tXtAm6g==": "{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 109,
@@ -11682,11 +11682,11 @@
    "type": "text",
    "desc": "end of trial",
    "project": "inyo",
-   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+   "jsfbt": "{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
   },
   {
    "hashToText": {
-    "J6FjBEf9EvTK84AUacYfqg==": "Bonjour {email} ,"
+    "lFGiWU8VFIPlEHkIcmYe1A==": "Bonjour {email} ,"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 110,
@@ -11694,13 +11694,13 @@
    "line_end": 116,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Bonjour {email} ,"
   },
   {
    "hashToText": {
-    "4BP3euylrZnLknGBeLk1Bg==": "Votre période d'essai de 21 jours est terminée !"
+    "oLn30S+i1TmgeUQJ6Fve+g==": "Votre période d'essai de 15 jours est terminée !"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 117,
@@ -11708,13 +11708,13 @@
    "line_end": 117,
    "col_end": 61,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
-   "jsfbt": "Votre période d'essai de 21 jours est terminée !"
+   "jsfbt": "Votre période d'essai de 15 jours est terminée !"
   },
   {
    "hashToText": {
-    "SFLMxRS5pPE5ZpIsepzAgg==": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
+    "S8/B8HsIZ6Dm9TDqTu2jKQ==": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 118,
@@ -11722,13 +11722,13 @@
    "line_end": 122,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc."
   },
   {
    "hashToText": {
-    "TTSWGyswSUUpeFxSA0Xokg==": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
+    "eGUwaOmygKL8GzrfG8z2fA==": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 123,
@@ -11736,13 +11736,13 @@
    "line_end": 127,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants."
   },
   {
    "hashToText": {
-    "Epqqbzw6CbrC95R4k2jb3Q==": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
+    "7AXmYMW3jRTtFA53ck40/A==": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 128,
@@ -11750,13 +11750,13 @@
    "line_end": 140,
    "col_end": 22,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}"
   },
   {
    "hashToText": {
-    "eggk3plkTeLVC/zdfZ0HmQ==": "S'abonner pour 12$ /mois"
+    "wTg5C6Gio29r504qnOzYwQ==": "S'abonner pour 12$ /mois"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 129,
@@ -11764,13 +11764,13 @@
    "line_end": 131,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "S'abonner pour 12$ /mois"
   },
   {
    "hashToText": {
-    "C/FdpEKIV7nGc4WnBi2exw==": "ou"
+    "5tLCJaMGYti7csL3Hb5J1Q==": "ou"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 132,
@@ -11778,13 +11778,13 @@
    "line_end": 132,
    "col_end": 32,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "ou"
   },
   {
    "hashToText": {
-    "oeeqsNM7HCng0S7mIbL5Fg==": "96$ /an (4 mois offerts)"
+    "kXk3X/PbQcmlcpgdD/Xrtg==": "96$ /an (4 mois offerts)"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 133,
@@ -11792,13 +11792,13 @@
    "line_end": 135,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /mois}{=ou}{=96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "96$ /an (4 mois offerts)"
   },
   {
    "hashToText": {
-    "WHutu5rksXpb0Sq2MWT2yw==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
+    "wKF/3PfgfrX5i4cX4zVKRw==": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 146,
@@ -11806,13 +11806,13 @@
    "line_end": 157,
    "col_end": 10,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}"
   },
   {
    "hashToText": {
-    "z3bgbWxTX/mtJmj+cWQD0g==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
+    "oMaWc9z30qIiC8fMiIVQQw==": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
    },
    "filepath": "src/screens/EndOfTrial/index.js",
    "line_beg": 147,
@@ -11820,7 +11820,7 @@
    "line_end": 156,
    "col_end": 16,
    "type": "text",
-   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 21 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
+   "desc": "In the phrase: \"{=Bonjour[email] ,}{=Votre période d'essai de 15 jours est terminée !}{=Pour vos clients rien ne change : ils peuvent toujours accéder aux projets, commenter, valider, etc.}{=Pour profiter à nouveau d'Inyo et effectuer des actions sur vos projets en cours, merci de souscrire à l'un de nos plans payants.}{=S'abonner pour 12$ /moisou96$ /an (4 mois offerts)}{=Si ce n'est pas vous, cliquez ici pour vous déconnecter.}\"",
    "project": "",
    "jsfbt": "Si ce n'est pas vous, cliquez ici pour vous déconnecter."
   },
@@ -12193,10 +12193,10 @@
     "c4tmVUxwy4QEBsdWdrUh+A==": "1er mail envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 221,
-   "col_beg": 24,
-   "line_end": 224,
-   "col_end": 3,
+   "line_beg": 222,
+   "col_beg": 3,
+   "line_end": 225,
+   "col_end": 4,
    "type": "text",
    "desc": "first customer email",
    "project": "",
@@ -12207,10 +12207,10 @@
     "bp0S600O7SKtvZD4OLzEmA==": "Rappel nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 227,
-   "col_beg": 24,
-   "line_end": 233,
-   "col_end": 3,
+   "line_beg": 229,
+   "col_beg": 3,
+   "line_end": 235,
+   "col_end": 4,
    "type": "text",
    "desc": "first reminder customer email",
    "project": "",
@@ -12221,10 +12221,10 @@
     "EFNh72i20v7jRH+b5zG6eQ==": "Rappel nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 236,
-   "col_beg": 24,
-   "line_end": 242,
-   "col_end": 3,
+   "line_beg": 239,
+   "col_beg": 3,
+   "line_end": 245,
+   "col_end": 4,
    "type": "text",
    "desc": "second reminder customer email",
    "project": "",
@@ -12235,10 +12235,10 @@
     "CJfoEeYYpj+yBXW5NAy3VQ==": "Dernier rappel (nº3) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 245,
-   "col_beg": 24,
-   "line_end": 251,
-   "col_end": 3,
+   "line_beg": 249,
+   "col_beg": 3,
+   "line_end": 255,
+   "col_end": 4,
    "type": "text",
    "desc": "third reminder customer email",
    "project": "",
@@ -12249,10 +12249,10 @@
     "58KBco6Y1j2dxtHTZCpuJQ==": "1er mail règlement de facture envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 254,
-   "col_beg": 24,
-   "line_end": 260,
-   "col_end": 3,
+   "line_beg": 259,
+   "col_beg": 3,
+   "line_end": 265,
+   "col_end": 4,
    "type": "text",
    "desc": "first invoice email",
    "project": "",
@@ -12263,10 +12263,10 @@
     "bzY04Ocig9+0PrPSJH0A0Q==": "Rappel règlement de facture nº1 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 263,
-   "col_beg": 24,
-   "line_end": 269,
-   "col_end": 3,
+   "line_beg": 269,
+   "col_beg": 3,
+   "line_end": 275,
+   "col_end": 4,
    "type": "text",
    "desc": "first reminder invoice email",
    "project": "",
@@ -12277,10 +12277,10 @@
     "thus7u/y80yiUGrYVHeccA==": "Rappel règlement de facture nº2 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 272,
-   "col_beg": 24,
-   "line_end": 278,
-   "col_end": 3,
+   "line_beg": 279,
+   "col_beg": 3,
+   "line_end": 285,
+   "col_end": 4,
    "type": "text",
    "desc": "second reminder invoice email",
    "project": "",
@@ -12291,10 +12291,10 @@
     "sKqjtUoaH5hkNda587EaqA==": "Rappel règlement de facture nº3 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 281,
-   "col_beg": 24,
-   "line_end": 287,
-   "col_end": 3,
+   "line_beg": 289,
+   "col_beg": 3,
+   "line_end": 295,
+   "col_end": 4,
    "type": "text",
    "desc": "third reminder invoice email",
    "project": "",
@@ -12305,10 +12305,10 @@
     "2XTeUbIsiUAdF6RknzMOWw==": "Rappel règlement de facture nº4 envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 290,
-   "col_beg": 24,
-   "line_end": 296,
-   "col_end": 3,
+   "line_beg": 299,
+   "col_beg": 3,
+   "line_end": 305,
+   "col_end": 4,
    "type": "text",
    "desc": "fourth reminder invoice email",
    "project": "",
@@ -12319,10 +12319,10 @@
     "2GgfrBw4AVKfDLBHCcAgzQ==": "Dernier règlement de facture rappel (nº5) envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 299,
-   "col_beg": 24,
-   "line_end": 305,
-   "col_end": 3,
+   "line_beg": 309,
+   "col_beg": 3,
+   "line_end": 315,
+   "col_end": 4,
    "type": "text",
    "desc": "fitfh reminder invoice email",
    "project": "",
@@ -12333,10 +12333,10 @@
     "d2jK5DJtnWtXYdobMfs2ug==": "Rapport du jour envoyé à {customerName}"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 308,
-   "col_beg": 24,
-   "line_end": 314,
-   "col_end": 3,
+   "line_beg": 319,
+   "col_beg": 3,
+   "line_end": 325,
+   "col_end": 4,
    "type": "text",
    "desc": "customer report email",
    "project": "",
@@ -12347,9 +12347,9 @@
     "zxkP3/J5nRzxDVFbUwj0RA==": "tâche programmée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 322,
+   "line_beg": 333,
    "col_beg": 10,
-   "line_end": 322,
+   "line_end": 333,
    "col_end": 65,
    "type": "text",
    "desc": "FOCUSED_TASK event type name",
@@ -12361,9 +12361,9 @@
     "VdUuKiTb0VDTfKpNFo4l8Q==": "tâche déprogrammée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 328,
+   "line_beg": 339,
    "col_beg": 10,
-   "line_end": 328,
+   "line_end": 339,
    "col_end": 69,
    "type": "text",
    "desc": "UNFOCUSED_TASK event type name",
@@ -12375,9 +12375,9 @@
     "tL80NzuZ+jVL0Rtx1jaBPw==": "rappel envoyé"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 334,
+   "line_beg": 345,
    "col_beg": 10,
-   "line_end": 334,
+   "line_end": 345,
    "col_end": 63,
    "type": "text",
    "desc": "SENT_REMINDER event type name",
@@ -12389,9 +12389,9 @@
     "wmar7QjaiZluknyWzaVgQQ==": "rappel annulé"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 340,
+   "line_beg": 351,
    "col_beg": 10,
-   "line_end": 340,
+   "line_end": 351,
    "col_end": 67,
    "type": "text",
    "desc": "CANCELED_REMINDER event type name",
@@ -12403,9 +12403,9 @@
     "fIOgzqMZ6XFqIHu7LkaAQg==": "tâche ajoutée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 346,
+   "line_beg": 357,
    "col_beg": 10,
-   "line_end": 346,
+   "line_end": 357,
    "col_end": 60,
    "type": "text",
    "desc": "ADDED_TASK event type name",
@@ -12417,9 +12417,9 @@
     "HudPGukU86aP5LNT/z+lxg==": "tâche mise-à-jour"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 352,
+   "line_beg": 363,
    "col_beg": 10,
-   "line_end": 352,
+   "line_end": 363,
    "col_end": 66,
    "type": "text",
    "desc": "UPDATED_TASK event type name",
@@ -12431,9 +12431,9 @@
     "paqXe9wQKPvBEiITisUQCw==": "tâche validée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 358,
+   "line_beg": 369,
    "col_beg": 10,
-   "line_end": 358,
+   "line_end": 369,
    "col_end": 63,
    "type": "text",
    "desc": "FINISHED_TASK event type name",
@@ -12445,9 +12445,9 @@
     "qj9jnxl4d5Bk/L3atwME3g==": "tâche dé-validée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 364,
+   "line_beg": 375,
    "col_beg": 10,
-   "line_end": 364,
+   "line_end": 375,
    "col_end": 68,
    "type": "text",
    "desc": "UNFINISHED_TASK event type name",
@@ -12459,9 +12459,9 @@
     "UnnzE0TM30weUvhd19MwBg==": "tâche supprimée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 370,
+   "line_beg": 381,
    "col_beg": 10,
-   "line_end": 370,
+   "line_end": 381,
    "col_end": 64,
    "type": "text",
    "desc": "REMOVED_TASK event type name",
@@ -12473,9 +12473,9 @@
     "62bqq9dtFkUPF+U+QbTPEQ==": "projet créé"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 376,
+   "line_beg": 387,
    "col_beg": 10,
-   "line_end": 376,
+   "line_end": 387,
    "col_end": 63,
    "type": "text",
    "desc": "CREATED_PROJECT event type name",
@@ -12487,9 +12487,9 @@
     "OIVia7AFbNXEsDfO5QQKxA==": "projet mis-à-jour"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 382,
+   "line_beg": 393,
    "col_beg": 10,
-   "line_end": 382,
+   "line_end": 393,
    "col_end": 69,
    "type": "text",
    "desc": "UPDATED_PROJECT event type name",
@@ -12501,9 +12501,9 @@
     "+/9t1P/1cOq0z8yaW24Ylg==": "projet archivé"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 388,
+   "line_beg": 399,
    "col_beg": 10,
-   "line_end": 388,
+   "line_end": 399,
    "col_end": 67,
    "type": "text",
    "desc": "ARCHIVED_PROJECT event type name",
@@ -12515,9 +12515,9 @@
     "d+uJ4n3Ue4iTAN8iuR/mXA==": "projet dé-archivé"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 394,
+   "line_beg": 405,
    "col_beg": 10,
-   "line_end": 397,
+   "line_end": 408,
    "col_end": 4,
    "type": "text",
    "desc": "UNARCHIVED_PROJECT event type name",
@@ -12529,9 +12529,9 @@
     "wjuWslZ56aHtN8u8Gl7lHw==": "commentaire posté"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 403,
+   "line_beg": 414,
    "col_beg": 10,
-   "line_end": 403,
+   "line_end": 414,
    "col_end": 68,
    "type": "text",
    "desc": "POSTED_COMMENT event type name",
@@ -12543,9 +12543,9 @@
     "NBVu19F3w+zj99WvxMQN4g==": "section ajoutée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 409,
+   "line_beg": 420,
    "col_beg": 10,
-   "line_end": 409,
+   "line_end": 420,
    "col_end": 65,
    "type": "text",
    "desc": "ADDED_SECTION event type name",
@@ -12557,9 +12557,9 @@
     "c7VfvB+NQF6rARww/4+JHA==": "section mise-à-jour"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 415,
+   "line_beg": 426,
    "col_beg": 10,
-   "line_end": 418,
+   "line_end": 429,
    "col_end": 4,
    "type": "text",
    "desc": "UPDATED_SECTION event type name",
@@ -12571,9 +12571,9 @@
     "h7fcUX8Nl3mr4xk5YIb8cw==": "section supprimée"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 424,
+   "line_beg": 435,
    "col_beg": 10,
-   "line_end": 424,
+   "line_end": 435,
    "col_end": 69,
    "type": "text",
    "desc": "REMOVED_SECTION event type name",
@@ -12585,9 +12585,9 @@
     "OknqohG84hnZfe5DwCcBow==": "document(s) ajouté(s)"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 430,
+   "line_beg": 441,
    "col_beg": 10,
-   "line_end": 433,
+   "line_end": 444,
    "col_end": 4,
    "type": "text",
    "desc": "UPLOADED_ATTACHMENT event type name",
@@ -12599,9 +12599,9 @@
     "m77iQgjJy9CXLjjJro5Trg==": "document(s) supprimé(s)"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 439,
+   "line_beg": 450,
    "col_beg": 10,
-   "line_end": 442,
+   "line_end": 453,
    "col_end": 4,
    "type": "text",
    "desc": "REMOVED_ATTACHMENT event type name",
@@ -12613,9 +12613,9 @@
     "R2X1QHVUM3z4DxlZFdjAGA==": "client assigné à une tâche"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 448,
+   "line_beg": 459,
    "col_beg": 10,
-   "line_end": 451,
+   "line_end": 462,
    "col_end": 4,
    "type": "text",
    "desc": "LINKED_CUSTOMER_TO_TASK event type name",
@@ -12627,9 +12627,9 @@
     "OItnW2RsXP/FkYGnT/IbsA==": "client enlevé d'une tâche"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 457,
+   "line_beg": 468,
    "col_beg": 10,
-   "line_end": 460,
+   "line_end": 471,
    "col_end": 4,
    "type": "text",
    "desc": "UNLINKED_CUSTOMER_TO_TASK event type name",
@@ -12641,9 +12641,9 @@
     "MHTEF7cfTaT1fDS0JqwJLQ==": "client assigné à un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 466,
+   "line_beg": 477,
    "col_beg": 10,
-   "line_end": 469,
+   "line_end": 480,
    "col_end": 4,
    "type": "text",
    "desc": "LINKED_CUSTOMER_TO_PROJECT event type name",
@@ -12655,9 +12655,9 @@
     "+YUT+YUoC5vHcT5uGP6lsg==": "client enlevé d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 475,
+   "line_beg": 486,
    "col_beg": 10,
-   "line_end": 478,
+   "line_end": 489,
    "col_end": 4,
    "type": "text",
    "desc": "UNLINKED_CUSTOMER_TO_PROJECT event type name",
@@ -12669,9 +12669,9 @@
     "fBtgrEgDW/SkI4mTgrYLpg==": "collaborateur assigné à un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 484,
+   "line_beg": 495,
    "col_beg": 10,
-   "line_end": 487,
+   "line_end": 498,
    "col_end": 4,
    "type": "text",
    "desc": "LINKED_COLLABORATOR_TO_PROJECT event type name",
@@ -12683,9 +12683,9 @@
     "xlY2tpPi2KD95DQFEvdOJg==": "collaborateur enlevé d'un projet"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 493,
+   "line_beg": 504,
    "col_beg": 10,
-   "line_end": 496,
+   "line_end": 507,
    "col_end": 4,
    "type": "text",
    "desc": "UNLINKED_COLLABORATOR_TO_PROJECT event type name",
@@ -12697,9 +12697,9 @@
     "ojPmugN8iri+KJ4VJE5PZQ==": "collaborateur assigné à une tâche"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 502,
+   "line_beg": 513,
    "col_beg": 10,
-   "line_end": 505,
+   "line_end": 516,
    "col_end": 4,
    "type": "text",
    "desc": "ASSIGNED_TO_TASK event type name",
@@ -12711,9 +12711,9 @@
     "Cd+pJGsR6PKr7WS5YH9euw==": "collaborateur enlevé d'une tâche"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 511,
+   "line_beg": 522,
    "col_beg": 10,
-   "line_end": 514,
+   "line_end": 525,
    "col_end": 4,
    "type": "text",
    "desc": "REMOVE_ASSIGNMENT_TO_TASK event type name",
@@ -12725,9 +12725,9 @@
     "eB8Wh4BgNVSmiBcB/l9kLQ==": "projet consulté"
    },
    "filepath": "src/utils/constants.js",
-   "line_beg": 520,
+   "line_beg": 531,
    "col_beg": 10,
-   "line_end": 520,
+   "line_end": 531,
    "col_end": 66,
    "type": "text",
    "desc": "VIEWED_PROJECT event type name",

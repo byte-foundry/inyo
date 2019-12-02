@@ -2,7 +2,7 @@ import styled from "@emotion/styled/macro";
 import moment from "moment";
 import React, { useCallback } from "react";
 import { Link, withRouter } from "react-router-dom";
-import CalendarHeatmap from "react-calendar-heatmap";
+import { VictoryPie } from "victory";
 
 import ArianneThread, { ArianneElem } from "../../../components/ArianneThread";
 import HelpAndTooltip from "../../../components/HelpAndTooltip";
@@ -88,10 +88,6 @@ const PageSubHeading = styled(SubHeading)`
 
 const Section = styled("div")`
 	margin-bottom: 5rem;
-`;
-
-const CalendarHeatmapWrap = styled("div")`
-	max-height: 200px;
 `;
 
 const Stats = ({ history, location }) => {
@@ -250,29 +246,6 @@ const Stats = ({ history, location }) => {
 		.map(task => task.reminders)
 		.flat();
 
-	let today = moment();
-
-	const randomValues = getRange(200).map(index => {
-		return {
-			date: shiftDate(today, -index),
-			count: getRandomInt(1, 3)
-		};
-	});
-
-	function shiftDate(date, numDays) {
-		const newDate = new Date(date);
-		newDate.setDate(newDate.getDate() + numDays);
-		return newDate;
-	}
-
-	function getRange(count) {
-		return Array.from({ length: count }, (_, i) => i);
-	}
-
-	function getRandomInt(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
-
 	return (
 		<Container>
 			<MetaHeading>
@@ -342,24 +315,6 @@ const Stats = ({ history, location }) => {
 				</TimeSelectContainer>
 			</MetaHeading>
 
-			<CalendarHeatmapWrap>
-				<CalendarHeatmap
-					startDate={shiftDate(today, -since)}
-					endDate={shiftDate(today, +7)}
-					values={randomValues}
-					classForValue={value => {
-						if (!value) {
-							return "color-empty";
-						}
-						return `color-github-${value.count}`;
-					}}
-					showWeekdayLabels={false}
-					onClick={value =>
-						alert(`Clicked on value with count: ${value.count}`)
-					}
-				/>
-			</CalendarHeatmapWrap>
-
 			<Section>
 				<PageSubHeading>
 					<fbt project="inyo" desc="client share">
@@ -375,6 +330,10 @@ const Stats = ({ history, location }) => {
 					</HelpAndTooltip>
 				</PageSubHeading>
 				<SingleBarChart entries={customerDistributions} />
+				<VictoryPie
+					colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
+					innerRadius={120}
+				/>
 			</Section>
 
 			<Section>
@@ -425,7 +384,7 @@ const Stats = ({ history, location }) => {
 								Temps travaillé
 							</fbt>
 							<HelpAndTooltip icon="help">
-								<fbt desc="rWorked time tooltip">
+								<fbt desc="Worked time tooltip">
 									<p>
 										La somme des heures réellement
 										travaillées selon les filtres et la
@@ -517,7 +476,9 @@ const Stats = ({ history, location }) => {
 								.duration(
 									reminders.filter(
 										reminder => reminder.status === "SENT"
-									).length * 15,
+									).length *
+										15 +
+										clientViews * 5,
 									"minutes"
 								)
 								.format("h_mm_")}
@@ -569,6 +530,40 @@ const Stats = ({ history, location }) => {
 											total + timeItTook,
 										0
 									) * defaultDailyPrice
+							)}
+						</Number>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Worked time">
+								Montant avenants
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Extra worked time tooltip">
+									<p>
+										Le montant représenté par la somme des
+										heures travaillées au-delà des
+										estimations que vous devriez facturer
+										selon les filtres et la période
+										sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{new Intl.NumberFormat(language, {
+								style: "currency",
+								currency: language === "fr" ? "EUR" : "USD"
+							}).format(
+								filteredTasks
+									.filter(t => t.status === "FINISHED")
+									.reduce(
+										(total, { timeItTook, unit }) =>
+											total + timeItTook - (total + unit),
+										0
+									) *
+									workingTime *
+									defaultDailyPrice
 							)}
 						</Number>
 					</Card>

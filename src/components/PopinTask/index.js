@@ -1,7 +1,10 @@
 import css from '@emotion/css';
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {
+	useCallback, useEffect, useRef, useState,
+} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
@@ -18,7 +21,10 @@ import {
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import useUserInfos from '../../utils/useUserInfos';
+import CheckList from '../CheckList';
 import CustomersDropdown from '../CustomersDropdown';
+import DateInput from '../DateInput';
+import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import ProjectCollaboratorsDropdown from '../ProjectCollaboratorsDropdown';
 import ProjectsDropdown from '../ProjectsDropdown';
@@ -28,7 +34,6 @@ import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
 const Container = styled('div')`
 	font-size: 14px;
-	position: relative;
 `;
 
 const UnitWithSuggestionsFormCondensed = styled(UnitWithSuggestionsForm)`
@@ -42,7 +47,9 @@ const UnitWithSuggestionsFormCondensed = styled(UnitWithSuggestionsForm)`
 
 const InputContainer = styled('div')``;
 
-const InputButtonContainer = styled('div')``;
+const InputButtonContainer = styled('div')`
+	text-align: right;
+`;
 
 const Input = styled('input')`
 	padding: 5px 0;
@@ -86,10 +93,20 @@ const Options = styled('div')`
 	grid-template-columns: 50px 1fr;
 	align-items: baseline;
 	row-gap: 10px;
+	margin: 15px 0;
 `;
 
 const Types = styled('div')`
 	display: flex;
+`;
+
+const DateContainer = styled('div')`
+	display: flex;
+`;
+
+const DueDate = styled('div')`
+	width: 100%;
+	text-transform: capitalize;
 `;
 
 const TYPES = [
@@ -109,73 +126,59 @@ const TYPES = [
 	},
 ];
 
-const useTrackEventInput = ({focus, openedByClick, value}) => {
-	const isTypingCommand = value.startsWith('/');
-
-	useEffect(() => {
-		if (focus && isTypingCommand) {
-			window.Intercom('trackEvent', 'open-task-dropdown');
-			window.Intercom('trackEvent', 'open-task-dropdown-with-slash');
-		}
-	}, [focus, isTypingCommand]);
-
-	useEffect(() => {
-		if (openedByClick) {
-			window.Intercom('trackEvent', 'open-task-dropdown');
-			window.Intercom('trackEvent', 'open-task-dropdown-with-button');
-		}
-	}, [openedByClick]);
-};
-
 const PopinTask = ({
 	onSubmitProject,
 	onSubmitSection,
 	onSubmitTask,
 	defaultValue,
 	currentProjectId,
-	defaultCustomer,
+	defaultScheduledFor,
 }) => {
 	const history = useHistory();
 	const [createTag] = useMutation(CREATE_TAG);
 	const [value, setValue] = useState(defaultValue);
 	const [type, setType] = useState('DEFAULT');
 	const [focus, setFocus] = useState(false);
-	const [isEditingCustomer, setEditCustomer] = useState(false);
-	const [openedByClick, setOpenedByClick] = useState(false);
-	const [
-		showContentAcquisitionInfos,
-		setShowContentAcquisitionInfos,
-	] = useState(false);
+	const [editDate, setEditDate] = useState(false);
 	const [selectedProject, setSelectedProject] = useState(currentProjectId);
-	const [itemUnit, setItemUnit] = useState(0);
-	const [itemTags, setItemTags] = useState([]);
-	const [itemDueDate, setItemDueDate] = useState();
+	const [unit, setUnit] = useState(0);
+	const [tags, setTags] = useState([]);
+	const [dueDate, setDueDate] = useState();
+	const [scheduledFor, setScheduledFor] = useState(defaultScheduledFor);
 	const [files, setFiles] = useState([]);
-	const [itemCustomer, setItemCustomer] = useState();
+	const [customer, setCustomer] = useState();
+	const [assignedCollaborator, setAssignedCollaborator] = useState();
 	const ref = useRef();
 	const inputRef = useRef();
-	const {workingTime} = useUserInfos();
-
-	function closeMoreInfos() {
-		setItemDueDate();
-		setItemCustomer();
-	}
-
-	function closeContentAcquisitionInfos() {
-		setShowContentAcquisitionInfos(false);
-		setItemCustomer();
-		setFiles([]);
-	}
+	const dueDateRef = useRef();
+	const scheduledForRef = useRef();
 
 	useOnClickOutside(ref, () => {
 		setFocus(false);
-		setOpenedByClick(false);
+	});
+
+	useOnClickOutside(dueDateRef, () => {
+		if (editDate === 'dueDate') setEditDate(false);
+	});
+
+	useOnClickOutside(scheduledForRef, () => {
+		if (editDate === 'scheduledFor') setEditDate(false);
 	});
 
 	const types = TYPES.filter(t => !currentProjectId && t.type !== 'SECTION');
 	const selectedType = types.find(t => t.type === (type || 'DEFAULT'));
 
-	useTrackEventInput({focus, openedByClick, value});
+	const resetForm = () => {
+		setValue('');
+		setUnit(0);
+		setType('DEFAULT');
+		setTags([]);
+		setCustomer();
+		setFiles();
+		setSelectedProject();
+		setAssignedCollaborator();
+		setDueDate();
+	};
 
 	return (
 		<Container ref={ref}>
@@ -211,110 +214,68 @@ const PopinTask = ({
 							type="text"
 							onChange={e => setValue(e.target.value)}
 							value={value}
-							onFocus={(e) => {
-								// weird, not sure why the onBlur isn't called instead
-								setFocus(true);
-							}}
+							onFocus={() => setFocus(true)}
 							onBlur={() => setFocus(false)}
-							onKeyDown={(e) => {
-								if (!value.startsWith('/')) {
-									if (
-										e.key === 'ArrowUp'
-										&& onSubmitProject
-									) {
-										onSubmitProject({
-											name: value,
-										});
-										setValue('');
-										closeMoreInfos();
-										closeContentAcquisitionInfos();
-									}
-									else if (
-										e.key === 'ArrowDown'
-										&& onSubmitSection
-									) {
-										onSubmitSection({
-											name: value,
-										});
-										setValue('');
-										closeMoreInfos();
-										closeContentAcquisitionInfos();
-									}
-									else if (e.key === 'Enter') {
-										e.preventDefault();
-										if (type === 'CONTENT_ACQUISITION') {
-											setItemUnit(0);
-											if (showContentAcquisitionInfos) {
-												onSubmitTask({
-													name: value,
-													type: type || 'DEFAULT',
-													linkedCustomerId:
-														itemCustomer
-														&& itemCustomer.id,
-													description: `\n# content-acquisition-list\n${files
-														.map(
-															({checked, name}) => `- [${
-																checked
-																	? 'x'
-																	: ' '
-															}] ${name}`,
-														)
-														.join('\n')}`,
-													tags: itemTags.map(
-														({id}) => id,
-													),
-													projectId: selectedProject,
-												});
-												setValue('');
-												closeMoreInfos();
-												closeContentAcquisitionInfos();
-											}
-											else {
-												setItemCustomer(
-													defaultCustomer,
-												);
-												setShowContentAcquisitionInfos(
-													true,
-												);
-											}
-										}
-										else if (type === 'SECTION') {
-											setItemUnit(0);
-											onSubmitSection({
-												name: value,
-											});
-											setValue('');
-											closeMoreInfos();
-											closeContentAcquisitionInfos();
-										}
-										else {
-											onSubmitTask({
-												name: value,
-												type: type || 'DEFAULT',
-												dueDate:
-													itemDueDate
-													&& itemDueDate.toISOString(),
-												unit: parseFloat(itemUnit),
-												linkedCustomerId:
-													itemCustomer
-													&& itemCustomer.id,
-												tags: itemTags.map(
-													({id}) => id,
-												),
-												projectId: selectedProject,
-											});
-											setValue('');
-											closeMoreInfos();
-											closeContentAcquisitionInfos();
-										}
-									}
+							onKeyDown={async (e) => {
+								if (e.key === 'ArrowUp' && onSubmitProject) {
+									onSubmitProject({
+										name: value,
+									});
+									resetForm();
 								}
-								if (e.key === 'Escape') {
-									setValue('');
-									setOpenedByClick(false);
-									closeMoreInfos();
-									setItemUnit(0);
-									closeContentAcquisitionInfos();
+								else if (
+									e.key === 'ArrowDown'
+									&& onSubmitSection
+								) {
+									onSubmitSection({
+										name: value,
+										// TODO : after current section
+									});
+									resetForm();
+								}
+								else if (e.key === 'Enter') {
+									e.preventDefault();
+
+									if (type === 'SECTION') {
+										await onSubmitSection({
+											name: value,
+										});
+										resetForm();
+
+										return;
+									}
+
+									const common = {
+										name: value,
+										type: type || 'DEFAULT',
+										projectId: selectedProject,
+										tags: tags.map(({id}) => id),
+										linkedCustomerId:
+											customer && customer.id,
+										dueDate,
+										unit: parseFloat(unit),
+										scheduledFor: isCustomerTask(type)
+											? undefined
+											: scheduledFor,
+									};
+
+									if (type === 'CONTENT_ACQUISITION') {
+										await onSubmitTask({
+											...common,
+											description: `\n# content-acquisition-list\n${files
+												.map(
+													({checked, name}) => `- [${
+														checked ? 'x' : ' '
+													}] ${name}`,
+												)
+												.join('\n')}`,
+										});
+									}
+									else {
+										await onSubmitTask(common);
+									}
+
+									resetForm();
 								}
 							}}
 							placeholder={
@@ -386,14 +347,25 @@ const PopinTask = ({
 					</Types>
 				</InputContainer>
 
+				{type === 'CONTENT_ACQUISITION' && (
+					<>
+						<MaterialIcon icon="folder" size="tiny" />
+						<CheckList
+							editable
+							items={files}
+							onChange={({items}) => setFiles(items)}
+						/>
+					</>
+				)}
+
 				{type !== 'SECTION' && (
 					<>
 						<MaterialIcon icon="timer" size="tiny" />
 						<UnitWithSuggestionsFormCondensed
 							small
-							value={itemUnit}
-							onChange={(unit) => {
-								setItemUnit(unit);
+							value={unit}
+							onChange={(newUnit) => {
+								setUnit(newUnit);
 								window.Intercom(
 									'trackEvent',
 									'estimated-time-fill-input',
@@ -416,7 +388,7 @@ const PopinTask = ({
 									Ajouter ou créer un tag
 								</fbt>
 							}
-							value={itemTags.map(tag => ({
+							value={tags.map(tag => ({
 								value: tag.id,
 								label: tag.name,
 								colorBg: tag.colorBg,
@@ -437,20 +409,19 @@ const PopinTask = ({
 									},
 								});
 
-								setItemTags([...itemTags, tag]);
+								setTags([...tags, tag]);
 							}}
-							onChange={(tags) => {
-								setItemTags(
-									tags
-										? tags.map(tag => ({
-											id: tag.value,
-											name: tag.label,
-											colorBg: tag.colorBg,
-											colorText: tag.colorText,
-										  }))
-										: [],
+							onChange={(newTags) => {
+								setTags(
+									(newTags || []).map(tag => ({
+										id: tag.value,
+										name: tag.label,
+										colorBg: tag.colorBg,
+										colorText: tag.colorText,
+									})),
 								);
 							}}
+							style={{margin: '0'}}
 						/>
 					</>
 				)}
@@ -466,6 +437,7 @@ const PopinTask = ({
 								setSelectedProject(id);
 							}}
 							isClearable
+							style={{margin: '0'}}
 						>
 							<fbt project="inyo" desc="link to a project">
 								Lier à un projet
@@ -477,7 +449,16 @@ const PopinTask = ({
 				{isCustomerTask(type) && (
 					<>
 						<MaterialIcon icon="person_outline" size="tiny" />
-						<CustomersDropdown isClearable>
+						<CustomersDropdown
+							selectedId={customer}
+							onChange={(param) => {
+								const {value: id} = param || {};
+
+								setCustomer(id);
+							}}
+							isClearable
+							style={{margin: '0'}}
+						>
 							<fbt project="inyo" desc="Client">
 								Lier à un client
 							</fbt>
@@ -490,7 +471,14 @@ const PopinTask = ({
 						<MaterialIcon icon="face" size="tiny" />
 						<ProjectCollaboratorsDropdown
 							projectId={selectedProject}
+							selectedId={assignedCollaborator}
+							onChange={(param) => {
+								const {value: id} = param || {};
+
+								setAssignedCollaborator(id);
+							}}
 							isClearable
+							style={{margin: '0'}}
 						>
 							<fbt
 								project="inyo"
@@ -504,38 +492,109 @@ const PopinTask = ({
 
 				<>
 					<MaterialIcon icon="event" size="tiny" />
-					<div>…</div>
+					<DateContainer ref={dueDateRef}>
+						{dueDate ? (
+							<>
+								<DueDate onClick={() => setEditDate('dueDate')}>
+									{moment(dueDate).format('dddd Do MMMM')}
+								</DueDate>
+								<IconButton
+									style={{margin: '0 10px'}}
+									icon="clear"
+									size="micro"
+									onClick={() => setDueDate(false)}
+								/>
+							</>
+						) : (
+							<Button
+								icon="+"
+								onClick={() => setEditDate('dueDate')}
+							>
+								<fbt desc="popin task add deadline">
+									Ajouter une deadline
+								</fbt>
+							</Button>
+						)}
+						{editDate === 'dueDate' && (
+							<DateInput
+								date={moment(dueDate || new Date())}
+								onDateChange={(date) => {
+									setDueDate(date.toISOString());
+									setEditDate(false);
+								}}
+								duration={unit}
+							/>
+						)}
+					</DateContainer>
 				</>
 
-				<>
-					<MaterialIcon icon="event_available" size="tiny" />
-					<div>…</div>
-				</>
-			</Options>
-			<InputButtonContainer>
-				{type !== 'SECTION' && onSubmitSection && (
-					<Tooltip
-						label={
-							<fbt project="inyo" desc="notification message">
-								Flèche du bas pour créer un ensemble de tâches
-							</fbt>
-						}
-					>
-						<Button
-							disabled={!value}
-							icon="↓"
-							onClick={() => onSubmitSection({name: value})}
-						>
-							<fbt project="inyo" desc="notification message">
-								Créer une section
-							</fbt>
-						</Button>
-					</Tooltip>
+				{!isCustomerTask(type) && type !== 'SECTION' && (
+					<>
+						<MaterialIcon icon="event_available" size="tiny" />
+						<DateContainer ref={scheduledForRef}>
+							{scheduledFor ? (
+								<>
+									<DueDate
+										onClick={() => setEditDate('scheduledFor')
+										}
+									>
+										{moment(scheduledFor).format(
+											'dddd Do MMMM',
+										)}
+									</DueDate>
+									<IconButton
+										style={{margin: '0 10px'}}
+										icon="clear"
+										size="micro"
+										onClick={() => setScheduledFor(false)}
+									/>
+								</>
+							) : (
+								<Button
+									icon="+"
+									onClick={() => setEditDate('scheduledFor')}
+								>
+									<fbt desc="popin task add to day">
+										Ajouter cette tâche à une journée
+									</fbt>
+								</Button>
+							)}
+							{editDate === 'scheduledFor' && (
+								<DateInput
+									date={moment(scheduledFor || new Date())}
+									onDateChange={(date) => {
+										setScheduledFor(date.toISOString());
+										setEditDate(false);
+									}}
+								/>
+							)}
+						</DateContainer>
+					</>
 				)}
+			</Options>
+
+			<InputButtonContainer>
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="notification message">
-							Touche entrée pour créer la tâche
+							Touche entrée pour créer la{' '}
+							<fbt:param name="sectionOrTask">
+								{type === 'SECTION' ? (
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										section
+									</fbt>
+								) : (
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										tâche
+									</fbt>
+								)}
+							</fbt:param>
 						</fbt>
 					}
 				>
@@ -546,39 +605,36 @@ const PopinTask = ({
 						onClick={() => {
 							if (!value.startsWith('/')) {
 								if (type === 'CONTENT_ACQUISITION') {
-									setShowContentAcquisitionInfos(true);
+									// check reauired infos here
 								}
 								else if (type === 'SECTION') {
 									onSubmitSection({
 										name: value,
 									});
 									setValue('');
-									closeMoreInfos();
-									setItemUnit(0);
-									closeContentAcquisitionInfos();
+									setUnit(0);
 								}
 								else {
 									onSubmitTask({
 										name: value,
 										type: type || 'DEFAULT',
-										dueDate:
-											itemDueDate
-											&& itemDueDate.toISOString(),
-										unit: parseFloat(itemUnit),
+										dueDate,
+										unit: parseFloat(unit),
 										linkedCustomerId:
-											itemCustomer && itemCustomer.id,
-										tags: itemTags.map(({id}) => id),
+											customer && customer.id,
+										tags: tags.map(({id}) => id),
 										projectId: selectedProject,
 									});
 									setValue('');
-									closeMoreInfos();
-									closeContentAcquisitionInfos();
 								}
 							}
 						}}
 					>
-						<fbt project="inyo" desc="notification message">
-							créer la{' '}
+						<fbt
+							project="inyo"
+							desc="popin create task or section button"
+						>
+							Créer la{' '}
 							<fbt:param name="sectionOrTask">
 								{type === 'SECTION' ? (
 									<fbt

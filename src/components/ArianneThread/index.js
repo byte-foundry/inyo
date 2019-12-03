@@ -226,6 +226,7 @@ export function ArianneElemCreatable({
 	selectedId,
 	long,
 	supplementaryOption,
+	style,
 	...rest
 }) {
 	const selectedString = selectedId || [];
@@ -240,7 +241,7 @@ export function ArianneElemCreatable({
 		: options.find(item => item.value === selectedId);
 
 	return (
-		<ArianneElemMain long={long} id={`${id}-filter`}>
+		<ArianneElemMain long={long} id={`${id}-filter`} style={style}>
 			<Creatable
 				placeholder={children}
 				options={options}

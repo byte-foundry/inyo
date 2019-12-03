@@ -19,7 +19,12 @@ const TaskInputContainer = styled('div')`
 	}
 `;
 
-const CreateTask = ({currentProjectId, withProject, popinTask}) => {
+const CreateTask = ({
+	currentProjectId,
+	withProject,
+	popinTask,
+	defaultScheduledFor,
+}) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const [createTask] = useMutation(ADD_ITEM);
@@ -136,6 +141,7 @@ const CreateTask = ({currentProjectId, withProject, popinTask}) => {
 			)}
 			{popinTask && (
 				<PopinTask
+					defaultScheduledFor={defaultScheduledFor}
 					withProject={withProject}
 					defaultCustomer={
 						currentProjectData

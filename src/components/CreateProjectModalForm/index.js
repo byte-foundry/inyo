@@ -1,34 +1,34 @@
-import styled from "@emotion/styled";
-import moment from "moment";
-import React, { useRef, useState } from "react";
+import styled from '@emotion/styled';
+import moment from 'moment';
+import React, {useRef, useState} from 'react';
 
-import fbt from "../../fbt/fbt.macro";
-import { useQuery } from "../../utils/apollo-hooks";
-import { BREAKPOINTS } from "../../utils/constants";
-import { ModalActions } from "../../utils/content";
-import { formatName } from "../../utils/functions";
+import fbt from '../../fbt/fbt.macro';
+import {useQuery} from '../../utils/apollo-hooks';
+import {BREAKPOINTS} from '../../utils/constants';
+import {ModalActions} from '../../utils/content';
+import {formatName} from '../../utils/functions';
 import {
 	Button,
 	Input,
 	InputLabel,
 	Label,
 	SubHeading
-} from "../../utils/new/design-system";
-import { templates } from "../../utils/project-templates";
-import { GET_ALL_CUSTOMERS } from "../../utils/queries";
-import useOnClickOutside from "../../utils/useOnClickOutside";
-import useUserInfos from "../../utils/useUserInfos";
-import DateInput from "../DateInput";
-import FormElem from "../FormElem";
-import FormSelect from "../FormSelect";
-import Icon from "../MaterialIcon";
-import Tooltip from "../Tooltip";
+} from '../../utils/new/design-system';
+import {templates} from '../../utils/project-templates';
+import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import useOnClickOutside from '../../utils/useOnClickOutside';
+import useUserInfos from '../../utils/useUserInfos';
+import DateInput from '../DateInput';
+import FormElem from '../FormElem';
+import FormSelect from '../FormSelect';
+import Icon from '../MaterialIcon';
+import Tooltip from '../Tooltip';
 
 const FormSubHeading = styled(SubHeading)`
 	grid-column: 1 / 4;
 `;
 
-const CreateProjectRow = styled("div")`
+const CreateProjectRow = styled('div')`
 	margin-top: 1rem;
 	grid-column-end: span 3;
 
@@ -37,7 +37,7 @@ const CreateProjectRow = styled("div")`
 	}
 `;
 
-const CreateProjectGrid = styled("form")`
+const CreateProjectGrid = styled('form')`
 	display: grid;
 	grid-template-columns: 400px 1fr 1fr;
 	grid-row-gap: 1.5rem;
@@ -48,23 +48,23 @@ const CreateProjectGrid = styled("form")`
 	}
 `;
 
-const DeadlineInput = styled(Input.withComponent("div"))`
+const DeadlineInput = styled(Input.withComponent('div'))`
 	height: 40px;
 	display: flex;
 	align-items: center;
 	position: relative;
 `;
 
-const DeadlineInputContent = styled("p")`
+const DeadlineInputContent = styled('p')`
 	flex: 1;
 	cursor: pointer;
 `;
 
-const Option = styled("div")`
+const Option = styled('div')`
 	${props => props.style}
 `;
 
-const createPreviewableOption = ({ onHover }) => {
+const createPreviewableOption = ({onHover}) => {
 	const PreviewableOption = props => {
 		const {
 			children,
@@ -81,13 +81,13 @@ const createPreviewableOption = ({ onHover }) => {
 
 		return (
 			<Option
-				style={getStyles("option", props)}
+				style={getStyles('option', props)}
 				className={cx(
 					{
 						option: true,
-						"option--is-disabled": isDisabled,
-						"option--is-focused": isFocused,
-						"option--is-selected": isSelected
+						'option--is-disabled': isDisabled,
+						'option--is-focused': isFocused,
+						'option--is-selected': isSelected
 					},
 					className
 				)}
@@ -112,9 +112,9 @@ export default function({
 	isSubmitting,
 	...props
 }) {
-	const { language } = useUserInfos();
+	const {language} = useUserInfos();
 	const [editDeadline, setEditDeadline] = useState(false);
-	const { data: dataCustomers } = useQuery(GET_ALL_CUSTOMERS, {
+	const {data: dataCustomers} = useQuery(GET_ALL_CUSTOMERS, {
 		suspend: true
 	});
 
@@ -125,7 +125,7 @@ export default function({
 					Projet vierge
 				</fbt>
 			),
-			value: "EMPTY"
+			value: 'EMPTY'
 		},
 		{
 			label: (
@@ -184,6 +184,7 @@ export default function({
 					}
 					big
 					noMarginBottom
+					handleBlur={() => {}}
 				/>
 			</CreateProjectRow>
 			<CreateProjectRow>
@@ -206,7 +207,7 @@ export default function({
 							onHover: option =>
 								option &&
 								option.value &&
-								option.value !== "EMPTY" &&
+								option.value !== 'EMPTY' &&
 								setViewContent(option.value)
 						})
 					}}
@@ -215,17 +216,17 @@ export default function({
 			<CreateProjectRow>
 				<FormSelect
 					{...props}
-					onChange={(option, { action }) => {
+					onChange={(option, {action}) => {
 						if (
-							action === "select-option" &&
+							action === 'select-option' &&
 							option &&
-							option.value === "CREATE"
+							option.value === 'CREATE'
 						) {
 							setCreateCustomer(true);
 						}
 					}}
-					onInputChange={(value, { action }) => {
-						if (action === "input-change") {
+					onInputChange={(value, {action}) => {
+						if (action === 'input-change') {
 							setCustomerName(value);
 						}
 					}}
@@ -237,7 +238,7 @@ export default function({
 									Créer un nouveau client
 								</fbt>
 							),
-							value: "CREATE"
+							value: 'CREATE'
 						},
 						...optionsCustomers
 					]}
@@ -288,7 +289,7 @@ export default function({
 							>
 								{(props.values.deadline &&
 									moment(props.values.deadline).format(
-										"DD/MM/YYYY"
+										'DD/MM/YYYY'
 									)) || (
 									<fbt project="inyo" desc="no deadline">
 										Aucune date limite
@@ -304,7 +305,7 @@ export default function({
 								)}
 								onDateChange={date => {
 									props.setFieldValue(
-										"deadline",
+										'deadline',
 										date.toISOString()
 									);
 									setEditDeadline(false);

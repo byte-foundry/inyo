@@ -636,7 +636,11 @@ const Schedule = ({
 								>
 									{stat}
 									<HelpAndTooltip icon="add">
-										<CreateTask popinTask withProject />
+										<CreateTask
+											popinTask
+											withProject
+											defaultScheduledFor={day.date}
+										/>
 									</HelpAndTooltip>
 								</DefaultDroppableDay>
 								{sortedReminders.map(reminder => (

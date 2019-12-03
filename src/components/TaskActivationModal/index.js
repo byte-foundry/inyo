@@ -23,8 +23,6 @@ function TaskActivationModal({
 				},
 			});
 
-			window.Intercom('trackEvent', 'activated-customer-task');
-
 			setIsActivating(false);
 		},
 		[focusTask, item.id, setIsActivating],

@@ -12,9 +12,8 @@ const FormInputMain = styled(Input)`
 	box-sizing: border-box;
 	${props => props.big && 'height: 40px;'}
 
-	${props =>
-		props.inline &&
-		css`
+	${props => props.inline
+		&& css`
 			background: ${primaryWhite};
 			padding: 0;
 			width: auto;
@@ -43,7 +42,6 @@ const FormInput = ({
 				{...field}
 				disabled={isSubmitting}
 				{...rest}
-				onBlur={handleBlur}
 				error={getDeep(name, errors) && getDeep(name, touched)}
 			/>
 		)}

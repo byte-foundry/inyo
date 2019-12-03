@@ -28,7 +28,7 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 		.filter(project => project.status !== 'REMOVED')
 		.map(project => ({
 			value: project.id,
-			label: project.name
+			label: project.name,
 		}));
 
 	return (
@@ -36,19 +36,19 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 			initialValues={{
 				template: 'BLANK',
 				name: baseName,
-				budget: null
 			}}
 			validationSchema={Yup.object({
 				name: Yup.string().required(
 					<fbt project="inyo" desc="required">
 						Requis
-					</fbt>
+					</fbt>,
 				),
-				budget: Yup.number().nullable()
 			})}
 			onSubmit={async (
-				{template, customerId, deadline, name, budget},
-				actions
+				{
+					template, customerId, deadline, name, budget,
+				},
+				actions,
 			) => {
 				actions.setSubmitting(true);
 
@@ -60,20 +60,21 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 
 				if (template !== 'EMPTY') {
 					const sourceTemplate = templates[language].find(
-						tplt => tplt.name === template
+						tplt => tplt.name === template,
 					);
 
 					if (sourceTemplate) {
 						isModelTemplate = true;
 						({sections} = sourceTemplate);
-					} else {
+					}
+					else {
 						const {
-							data: {project: sourceProject}
+							data: {project: sourceProject},
 						} = await client.query({
 							query: GET_PROJECT_DATA,
 							variables: {
-								projectId: template
-							}
+								projectId: template,
+							},
 						});
 
 						sections = sourceProject.sections.map(section => ({
@@ -84,14 +85,14 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 									unit,
 									description,
 									type,
-									timeItTook
+									timeItTook,
 								}) => ({
 									name: itemName,
 									unit: timeItTook || unit || 0,
 									description,
-									type
-								})
-							)
+									type,
+								}),
+							),
 						}));
 					}
 				}
@@ -103,13 +104,13 @@ function CreateProjectModal({onDismiss, history, baseName}) {
 						customerId,
 						deadline,
 						budget: budgetFloat,
-						template: isModelTemplate ? template : undefined
-					}
+						template: isModelTemplate ? template : undefined,
+					},
 				});
 
 				if (budgetFloat) {
 					window.Intercom('trackEvent', 'budget-edited-budget-view', {
-						budget: budgetFloat
+						budget: budgetFloat,
 					});
 				}
 

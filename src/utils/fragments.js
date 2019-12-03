@@ -118,6 +118,7 @@ export const REMINDER_FRAGMENT = gql`
 
 export const COMMENT_ON_ITEM_FRAGMENT = gql`
 	fragment CommentOnItemFragment on Comment {
+		createdAt
 		text
 		id
 		views {

@@ -1,25 +1,25 @@
-import 'medium-draft/lib/index.css';
+import "medium-draft/lib/index.css";
 
-import styled from '@emotion/styled';
-import {convertToRaw} from 'draft-js';
-import debounce from 'lodash.debounce';
-import {createEditorState, Editor} from 'medium-draft';
-import {BLOCK_BUTTONS} from 'medium-draft/lib/components/toolbar';
-import React, {useRef, useState} from 'react';
+import styled from "@emotion/styled";
+import { convertToRaw } from "draft-js";
+import debounce from "lodash.debounce";
+import { createEditorState, Editor } from "medium-draft";
+import { BLOCK_BUTTONS } from "medium-draft/lib/components/toolbar";
+import React, { useRef, useState } from "react";
 
-import fbt from '../../fbt/fbt.macro';
-import {gray20} from '../../utils/content';
-import {lightPurple, primaryPurple} from '../../utils/new/design-system';
+import fbt from "../../fbt/fbt.macro";
+import { gray20 } from "../../utils/content";
+import { lightPurple, primaryPurple } from "../../utils/new/design-system";
 
-const ProjectNotesContainer = styled('div')`
+const ProjectNotesContainer = styled("div")`
 	flex: 1;
 `;
 
-const TasksListContainer = styled('div')`
+const TasksListContainer = styled("div")`
 	margin-top: 1rem;
 `;
 
-const TextEditorMain = styled('div')`
+const TextEditorMain = styled("div")`
 	border: 1px solid ${gray20};
 	background-color: ${lightPurple};
 	height: 100%;
@@ -27,7 +27,7 @@ const TextEditorMain = styled('div')`
 	z-index: 0;
 `;
 
-const EditorToast = styled('div')`
+const EditorToast = styled("div")`
 	position: absolute;
 	font-weight: 600;
 	top: 10px;
@@ -36,43 +36,48 @@ const EditorToast = styled('div')`
 `;
 
 BLOCK_BUTTONS.unshift({
-	description: 'Heading 1',
-	icon: 'header',
-	label: 'H1',
-	style: 'header-one',
+	description: "Heading 1",
+	icon: "header",
+	label: "H1",
+	style: "header-one"
 });
 BLOCK_BUTTONS.unshift({
-	description: 'Heading 2',
-	icon: 'header',
-	label: 'H2',
-	style: 'header-two',
+	description: "Heading 2",
+	icon: "header",
+	label: "H2",
+	style: "header-two"
 });
 
 const ProjectNotes = ({
-	notes, updateNotes, projectId, children,
+	notes,
+	updateNotes,
+	projectId,
+	children,
+	customerToken
 }) => {
 	const [saved, setSaved] = useState(false);
 	const [editorState, setEditorState] = useState(
-		createEditorState(Object.keys(notes).length > 0 ? notes : undefined),
+		createEditorState(Object.keys(notes).length > 0 ? notes : undefined)
 	);
 
 	const debounceUpdateNotes = useRef(
-		debounce(({notes: notesVar, id}) => {
+		debounce(({ notes: notesVar, id }) => {
 			updateNotes({
 				variables: {
+					token: customerToken,
 					notes: notesVar,
-					id,
-				},
+					id
+				}
 			});
 			setSaved(true);
 			setTimeout(() => setSaved(false), 1500);
-		}, 2000),
+		}, 2000)
 	);
 
-	const handleChange = useRef((newState) => {
+	const handleChange = useRef(newState => {
 		debounceUpdateNotes.current({
 			notes: convertToRaw(newState.getCurrentContent()),
-			id: projectId,
+			id: projectId
 		});
 		setEditorState(newState);
 	});
@@ -89,20 +94,20 @@ const ProjectNotes = ({
 						sideButtons={[]}
 						toolbarConfig={{
 							block: [
-								'header-one',
-								'header-two',
-								'header-three',
-								'ordered-list-item',
-								'unordered-list-item',
-								'blockquote',
+								"header-one",
+								"header-two",
+								"header-three",
+								"ordered-list-item",
+								"unordered-list-item",
+								"blockquote"
 							],
 							inline: [
-								'BOLD',
-								'ITALIC',
-								'UNDERLINE',
-								'hyperlink',
-								'HIGHLIGHT',
-							],
+								"BOLD",
+								"ITALIC",
+								"UNDERLINE",
+								"hyperlink",
+								"HIGHLIGHT"
+							]
 						}}
 						placeholder={
 							<>

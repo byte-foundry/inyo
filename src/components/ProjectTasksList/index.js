@@ -12,11 +12,11 @@ import {
 	Loading,
 	ModalActions,
 	ModalContainer,
-	ModalElem,
+	ModalElem
 } from '../../utils/content';
 import {
 	isCustomerTask,
-	taskFulfillsActivationCriteria,
+	taskFulfillsActivationCriteria
 } from '../../utils/functions';
 import DragIconSvg from '../../utils/icons/drag.svg';
 import Pencil from '../../utils/icons/pencil.svg';
@@ -25,7 +25,7 @@ import {
 	FOCUS_TASK,
 	REMOVE_SECTION,
 	UPDATE_ITEM,
-	UPDATE_SECTION,
+	UPDATE_SECTION
 } from '../../utils/mutations';
 import {
 	accentGrey,
@@ -40,7 +40,7 @@ import {
 	primaryRed,
 	primaryWhite,
 	ScrollHelper,
-	SubHeading,
+	SubHeading
 } from '../../utils/new/design-system';
 import {GET_ALL_TASKS, GET_PROJECT_DATA} from '../../utils/queries';
 import useScheduleData from '../../utils/useScheduleData';
@@ -85,10 +85,12 @@ const SectionDraggable = styled('div')`
 	.task {
 		position: ${props => (props.isDragging ? 'absolute' : 'relative')};
 		top: ${props => (props.isDragging ? '6rem' : 'auto')};
-		background-color: ${props => (props.isDragging ? primaryWhite : 'auto')};
+		background-color: ${props =>
+			props.isDragging ? primaryWhite : 'auto'};
 		width: ${props => (props.isDragging ? '100%' : 'flex')};
 		padding-left: ${props => (props.isDragging ? '1rem' : 0)};
-		border: ${props => (props.isDragging ? `1px solid ${mediumGrey}` : 'none')};
+		border: ${props =>
+			props.isDragging ? `1px solid ${mediumGrey}` : 'none'};
 		border-radius: 4px;
 
 		&:not(:first-child) {
@@ -113,8 +115,9 @@ const SectionInput = styled(InlineEditable)`
 	margin: 0 14px 0;
 	flex: 1;
 
-	${props => props.missingTitle
-		&& `
+	${props =>
+		props.missingTitle &&
+		`
 		&:before {
 			content: '';
 			display: block;
@@ -286,14 +289,14 @@ function PlaceholderDropSection({position}) {
 		accept: DRAG_TYPES.SECTION,
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver(),
+				isOver: monitor.isOver()
 			};
 		},
 		drop() {
 			return {
-				dropPosition: position,
+				dropPosition: position
 			};
-		},
+		}
 	});
 
 	return (
@@ -308,15 +311,15 @@ function PlaceholderDropTask({sectionId, position}) {
 		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver(),
+				isOver: monitor.isOver()
 			};
 		},
 		drop() {
 			return {
 				dropPosition: position,
-				endSectionId: sectionId,
+				endSectionId: sectionId
 			};
-		},
+		}
 	});
 
 	return (
@@ -326,23 +329,21 @@ function PlaceholderDropTask({sectionId, position}) {
 	);
 }
 
-const DraggableTask = ({
-	task, position, sections, setIsDragging, ...rest
-}) => {
+const DraggableTask = ({task, position, sections, setIsDragging, ...rest}) => {
 	const [updateTask] = useMutation(UPDATE_ITEM);
 	const [, drag] = useDrag({
 		item: {
 			id: task.id,
 			position,
 			type: DRAG_TYPES.TASK,
-			sectionId: task.section.id,
+			sectionId: task.section.id
 		},
 		begin() {
 			setIsDragging(true);
 			return {
 				id: task.id,
 				position,
-				sectionId: task.section.id,
+				sectionId: task.section.id
 			};
 		},
 		end(item, monitor) {
@@ -359,8 +360,8 @@ const DraggableTask = ({
 			const startPosition = position;
 			const sectionId = task.section.id;
 			const draggedId = task.id;
-			const endPosition
-				= dropPosition > startPosition && sectionId === endSectionId
+			const endPosition =
+				dropPosition > startPosition && sectionId === endSectionId
 					? dropPosition - 1
 					: dropPosition;
 
@@ -368,7 +369,7 @@ const DraggableTask = ({
 				variables: {
 					itemId: draggedId,
 					sectionId: endSectionId,
-					position: endPosition,
+					position: endPosition
 				},
 				optimisticResponse: {
 					updateItem: {
@@ -376,24 +377,24 @@ const DraggableTask = ({
 							.items[startPosition],
 						position: endPosition,
 						section: sections.find(
-							section => section.id === endSectionId,
-						),
-					},
+							section => section.id === endSectionId
+						)
+					}
 				},
 				update: (cache, {data: {updateItem}}) => {
 					const dataToUpdate = cache.readQuery({
-						query: GET_ALL_TASKS,
+						query: GET_ALL_TASKS
 					});
 					const itemsToUpdate = {
-						[updateItem.id]: updateItem,
+						[updateItem.id]: updateItem
 					};
 					const oldItemsToUpdate = {};
 
 					const section = sections.find(
-						sectionItem => sectionItem.id === endSectionId,
+						sectionItem => sectionItem.id === endSectionId
 					);
 					const oldSection = sections.find(
-						sectionItem => sectionItem.id === sectionId,
+						sectionItem => sectionItem.id === sectionId
 					);
 
 					let oldSectionItems = oldSection.items;
@@ -402,46 +403,45 @@ const DraggableTask = ({
 						// task is drag and drop in the same section
 						if (
 							section.items.find(
-								item => updateItem.id === item.id,
+								item => updateItem.id === item.id
 							).position === endPosition
-						) return;
+						)
+							return;
 
-						section.items.forEach((item) => {
+						section.items.forEach(item => {
 							if (
-								item.position > startPosition
-								&& item.position <= endPosition
+								item.position > startPosition &&
+								item.position <= endPosition
 							) {
 								itemsToUpdate[item.id] = {
 									...item,
-									position: item.position - 1,
+									position: item.position - 1
 								};
-							}
-							else if (
-								item.position < startPosition
-								&& item.position >= endPosition
+							} else if (
+								item.position < startPosition &&
+								item.position >= endPosition
 							) {
 								itemsToUpdate[item.id] = {
 									...item,
-									position: item.position + 1,
+									position: item.position + 1
 								};
 							}
 						});
-					}
-					else {
-						section.items.forEach((item) => {
+					} else {
+						section.items.forEach(item => {
 							if (item.position >= endPosition) {
 								itemsToUpdate[item.id] = {
 									...item,
-									position: item.position + 1,
+									position: item.position + 1
 								};
 							}
 						});
 
-						oldSection.items.forEach((item) => {
+						oldSection.items.forEach(item => {
 							if (item.position >= startPosition) {
 								oldItemsToUpdate[item.id] = {
 									...item,
-									position: item.position - 1,
+									position: item.position - 1
 								};
 							}
 						});
@@ -456,14 +456,14 @@ const DraggableTask = ({
 							...dataToUpdate,
 							me: {
 								...dataToUpdate.me,
-								tasks: dataToUpdate.me.tasks.map((task) => {
+								tasks: dataToUpdate.me.tasks.map(task => {
 									if (itemsToUpdate[task.id]) {
 										return {
 											...itemsToUpdate[task.id],
 											section: {
 												...section,
-												items: undefined,
-											},
+												items: undefined
+											}
 										};
 									}
 									if (oldItemsToUpdate[task.id]) {
@@ -471,47 +471,47 @@ const DraggableTask = ({
 											...oldItemsToUpdate[task.id],
 											section: {
 												...oldSection,
-												items: oldSectionItems,
-											},
+												items: oldSectionItems
+											}
 										};
 									}
 
 									return task;
-								}),
-							},
-						},
+								})
+							}
+						}
 					});
-				},
+				}
 			});
-		},
+		}
 	});
 
 	const [{isOver}, drop] = useDrop({
 		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver(),
+				isOver: monitor.isOver()
 			};
 		},
 		drop() {
 			return {
 				dropPosition: position,
-				endSectionId: task.section.id,
+				endSectionId: task.section.id
 			};
-		},
+		}
 	});
 
 	return (
 		<div
 			className="task"
-			ref={(node) => {
+			ref={node => {
 				drag(node);
 				drop(node);
 			}}
 			style={{
 				// some basic styles to make the tasks look a bit nicer
 				userSelect: 'none',
-				position: 'relative',
+				position: 'relative'
 			}}
 		>
 			{isOver && <DragSeparator />}
@@ -520,22 +520,20 @@ const DraggableTask = ({
 	);
 };
 
-const DraggableSection = ({
-	children, section, position, sections,
-}) => {
+const DraggableSection = ({children, section, position, sections}) => {
 	const [updateSection] = useMutation(UPDATE_SECTION);
 	const [, drag] = useDrag({
 		item: {
 			id: section.id,
 			position,
 			type: DRAG_TYPES.SECTION,
-			projectId: section.project.id,
+			projectId: section.project.id
 		},
 		begin() {
 			return {
 				id: section.id,
 				position,
-				projectId: section.project.id,
+				projectId: section.project.id
 			};
 		},
 		end(item, monitor) {
@@ -547,38 +545,38 @@ const DraggableSection = ({
 			const draggedId = section.id;
 			const startPosition = position;
 			const projectId = section.project.id;
-			const endPosition
-				= dropPosition > startPosition ? dropPosition - 1 : dropPosition;
+			const endPosition =
+				dropPosition > startPosition ? dropPosition - 1 : dropPosition;
 
 			updateSection({
 				variables: {
 					sectionId: draggedId,
-					position: endPosition,
+					position: endPosition
 				},
 				optimisticResponse: {
 					updateSection: {
 						...sections[startPosition],
-						position: endPosition,
-					},
+						position: endPosition
+					}
 				},
 				update: (cache, {data: {updateSection: updatedSection}}) => {
 					const dataToUpdate = cache.readQuery({
 						query: GET_PROJECT_DATA,
-						variables: {projectId},
+						variables: {projectId}
 					});
 
 					let projectSections = dataToUpdate.project.sections.filter(
-						s => s.id !== updatedSection.id,
+						s => s.id !== updatedSection.id
 					);
 
 					projectSections.splice(
 						updatedSection.position,
 						0,
-						updatedSection,
+						updatedSection
 					);
 					projectSections = projectSections.map((section, index) => ({
 						...section,
-						position: index,
+						position: index
 					}));
 
 					cache.writeQuery({
@@ -588,38 +586,38 @@ const DraggableSection = ({
 							...dataToUpdate,
 							project: {
 								...dataToUpdate.project,
-								sections: projectSections,
-							},
-						},
+								sections: projectSections
+							}
+						}
 					});
-				},
+				}
 			});
-		},
+		}
 	});
 
 	const [{isOver}, drop] = useDrop({
 		accept: DRAG_TYPES.SECTION,
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver(),
+				isOver: monitor.isOver()
 			};
 		},
 		drop() {
 			return {
-				dropPosition: position,
+				dropPosition: position
 			};
-		},
+		}
 	});
 
 	return (
 		<SectionDraggable
-			ref={(node) => {
+			ref={node => {
 				drag(node);
 				drop(node);
 			}}
 			style={{
 				// some basic styles to make the items look a bit nicer
-				userSelect: 'none',
+				userSelect: 'none'
 			}}
 		>
 			{isOver && <DragSeparator />}
@@ -628,23 +626,22 @@ const DraggableSection = ({
 	);
 };
 
-function ProjectTasksList({
-	items, projectId, sectionId, history, location,
-}) {
+function ProjectTasksList({items, projectId, sectionId, history, location}) {
 	const {workingTime, hasFullWeekSchedule} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const [isDragging, setIsDragging] = useState(false);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
 		suspend: true,
+		pollInterval: 1000 * 60 * 3
 	});
 	const [removeSectionModalOpen, setRemoveSectionModalOpen] = useState(false);
 	const [removeSection] = useMutation(REMOVE_SECTION, {
 		optimisticResponse: {
 			removeSection: {
-				id: removeSectionModalOpen.id,
-			},
-		},
+				id: removeSectionModalOpen.id
+			}
+		}
 	});
 	const [addSection] = useMutation(ADD_SECTION);
 	const [updateSection] = useMutation(UPDATE_SECTION);
@@ -652,7 +649,9 @@ function ProjectTasksList({
 
 	const onMoveTask = useCallback(
 		({task, scheduledFor, position}) => {
-			const cachedSection = projectData.project.sections.find(s => s.items.find(t => task.id === t.id));
+			const cachedSection = projectData.project.sections.find(s =>
+				s.items.find(t => task.id === t.id)
+			);
 			const cachedTask = cachedSection.items.find(t => task.id === t.id);
 
 			if (isCustomerTask(cachedTask.type)) {
@@ -661,10 +660,10 @@ function ProjectTasksList({
 					state: {
 						prevSearch: location.search,
 						isActivating: taskFulfillsActivationCriteria(
-							cachedTask,
+							cachedTask
 						),
-						scheduledFor,
-					},
+						scheduledFor
+					}
 				});
 
 				return;
@@ -674,18 +673,18 @@ function ProjectTasksList({
 				variables: {
 					itemId: task.id,
 					for: scheduledFor,
-					schedulePosition: position,
+					schedulePosition: position
 				},
 				optimisticReponse: {
 					focusTask: {
 						itemId: task.id,
 						for: scheduledFor,
-						schedulePosition: position,
-					},
-				},
+						schedulePosition: position
+					}
+				}
 			});
 		},
-		[focusTask, projectData, location.search, history],
+		[focusTask, projectData, location.search, history]
 	);
 
 	if (error) throw error;
@@ -698,13 +697,13 @@ function ProjectTasksList({
 				<Suspense fallback={Loading}>
 					<TemplateAndProjectFiller
 						projectId={projectId}
-						onChoose={(template) => {
-							template.sections.forEach((section) => {
+						onChoose={template => {
+							template.sections.forEach(section => {
 								addSection({
 									variables: {
 										projectId,
-										...section,
-									},
+										...section
+									}
 								});
 							});
 						}}
@@ -714,14 +713,14 @@ function ProjectTasksList({
 		);
 	}
 
-	const sections = sectionsInfos.map((section) => {
+	const sections = sectionsInfos.map(section => {
 		const itemsInSection = items.filter(i => i.section.id === section.id);
 
 		itemsInSection.sort((a, b) => a.position - b.position);
 
 		return {
 			...section,
-			items: itemsInSection,
+			items: itemsInSection
 		};
 	});
 
@@ -751,13 +750,13 @@ function ProjectTasksList({
 						placeholderCss={placeholderCss}
 						nameCss={nameCss}
 						editableCss={editableCss}
-						onFocusOut={(value) => {
+						onFocusOut={value => {
 							if (value) {
 								updateSection({
 									variables: {
 										sectionId: section.id,
-										name: value,
-									},
+										name: value
+									}
 								});
 							}
 						}}
@@ -840,9 +839,8 @@ function ProjectTasksList({
 								onClick={async () => {
 									await removeSection({
 										variables: {
-											sectionId:
-												removeSectionModalOpen.id,
-										},
+											sectionId: removeSectionModalOpen.id
+										}
 									});
 									setRemoveSectionModalOpen(false);
 								}}

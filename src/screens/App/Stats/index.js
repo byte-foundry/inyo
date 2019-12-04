@@ -2,7 +2,7 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useCallback} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {VictoryPie, VictoryLegend} from 'victory';
+import {VictoryPie, VictoryArea, VictoryTooltip} from 'victory';
 import CalendarHeatmap from 'reactjs-calendar-heatmap';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
@@ -22,7 +22,9 @@ import {
 	mediumGrey,
 	P,
 	SubHeading,
-	primaryPurple
+	primaryPurple,
+	mediumPurple,
+	lightPurple
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS_STATS, GET_USER_TAGS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
@@ -50,18 +52,19 @@ const Cards = styled('div')`
 `;
 
 const Card = styled('div')`
-	background-color: ${mediumGrey};
-	border-radius: 4px;
+	background-color: ${lightPurple};
+	border-radius: 8px;
 	padding: 1rem;
-	min-height: 100px;
+	min-height: 200px;
 	position: relative;
+	overflow: hidden;
 `;
 
 const Number = styled(P)`
-	font-size: 3rem;
+	font-size: 2.3rem;
 	font-weight: 500;
-	color: ${accentGrey};
 	margin: 0;
+	position: relative;
 `;
 
 const TimeSelectContainer = styled('div')`
@@ -115,6 +118,9 @@ const Stats = ({history, location}) => {
 	} = useQuery(GET_ALL_TASKS_STATS, {suspend: true});
 	const {workingTime = 8, defaultDailyPrice = 0, clientViews, language} =
 		useUserInfos() || {};
+
+	// console.log("here");
+	// console.log(clientViews);
 
 	const query = new URLSearchParams(location.search);
 
@@ -278,7 +284,7 @@ const Stats = ({history, location}) => {
 		([key, obj]) => ({
 			id: key,
 			x: obj.label,
-			y: (obj.value / totalTime) * 100
+			y: obj.value / totalTime
 		})
 	);
 
@@ -305,6 +311,11 @@ const Stats = ({history, location}) => {
 		y: obj.count / tagsDistributions.length,
 		colorBg: obj.colorBg
 	}));
+
+	// console.log("here");
+	// console.log(activities);
+	// console.log(filteredTasks);
+	// console.log(reminders);
 
 	return (
 		<Container>
@@ -376,6 +387,20 @@ const Stats = ({history, location}) => {
 			</MetaHeading>
 
 			<Section>
+				<PageSubHeading>
+					<fbt project="inyo" desc="client share">
+						Votre activité
+					</fbt>
+					<HelpAndTooltip icon="help">
+						<fbt desc="activity heatmqp">
+							<p>
+								Ce calendrier recense toutes les tâches marquées
+								comme faîtes et vous donne un aperçu global de
+								votre activité.
+							</p>
+						</fbt>
+					</HelpAndTooltip>
+				</PageSubHeading>
 				<CalendarHeatmap
 					data={activities}
 					color={primaryPurple}
@@ -536,6 +561,33 @@ const Stats = ({history, location}) => {
 							).toFixed(0)}
 							h
 						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-58px',
+									left: '-1px'
+								}
+							}}
+							y0={() => -10}
+							height={250}
+							padding={0}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.finishedAt || 0,
+									y:
+										(obj.timeItTook
+											? obj.timeItTook
+											: obj.unit) * workingTime || 0
+								})
+							)}
+						/>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -563,6 +615,30 @@ const Stats = ({history, location}) => {
 							).toFixed(0)}
 							h
 						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-58px',
+									left: '-1px'
+								}
+							}}
+							y0={() => -10}
+							height={250}
+							padding={0}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.finishedAt || 0,
+									y: obj.unit * workingTime || 0
+								})
+							)}
+						/>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -586,6 +662,30 @@ const Stats = ({history, location}) => {
 								).length
 							}
 						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-58px',
+									left: '-1px'
+								}
+							}}
+							y0={() => -1}
+							height={250}
+							padding={0}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.dueDate || 0,
+									y: obj.reminders.length
+								})
+							)}
+						/>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -613,6 +713,7 @@ const Stats = ({history, location}) => {
 									'minutes'
 								)
 								.format('h_mm_')}
+							{console.log(reminders)}
 						</Number>
 					</Card>
 					<Card>
@@ -631,6 +732,30 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>{clientViews}</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-58px',
+									left: '-1px'
+								}
+							}}
+							y0={() => -1}
+							height={250}
+							padding={0}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.dueDate || 0,
+									y: obj.reminders.length
+								})
+							)}
+						/>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -663,6 +788,33 @@ const Stats = ({history, location}) => {
 									) * defaultDailyPrice
 							)}
 						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-58px',
+									left: '-1px'
+								}
+							}}
+							y0={() => -1000}
+							height={250}
+							padding={0}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.finishedAt || 0,
+									y:
+										(obj.timeItTook
+											? obj.timeItTook
+											: obj.unit) * defaultDailyPrice || 0
+								})
+							)}
+						/>
 					</Card>
 					<Card>
 						<SubHeading>

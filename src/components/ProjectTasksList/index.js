@@ -46,6 +46,8 @@ import {
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import useScheduleData from '../../utils/useScheduleData';
 import useUserInfos from '../../utils/useUserInfos';
+import CreateTask from '../CreateTask';
+import HelpAndTooltip from '../HelpAndTooltip';
 import IconButton from '../IconButton';
 import InlineEditable from '../InlineEditable';
 import LeftBarSchedule from '../LeftBarSchedule';
@@ -88,7 +90,7 @@ const SectionDraggable = styled('div')`
 		top: ${props => (props.isDragging ? '6rem' : 'auto')};
 		background-color: ${props =>
 			props.isDragging ? primaryWhite : 'auto'};
-		width: ${props => (props.isDragging ? '100%' : 'flex')};
+		width: ${props => (props.isDragging ? '100%' : 'auto')};
 		padding-left: ${props => (props.isDragging ? '1rem' : 0)};
 		border: ${props =>
 			props.isDragging ? `1px solid ${mediumGrey}` : 'none'};

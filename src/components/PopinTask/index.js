@@ -2,9 +2,7 @@ import css from '@emotion/css';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, {
-	useCallback, useEffect, useRef, useState,
-} from 'react';
+import React, {useRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
@@ -20,7 +18,6 @@ import {
 	primaryPurple,
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
-import useUserInfos from '../../utils/useUserInfos';
 import CheckList from '../CheckList';
 import CustomersDropdown from '../CustomersDropdown';
 import DateInput from '../DateInput';
@@ -48,7 +45,8 @@ const UnitWithSuggestionsFormCondensed = styled(UnitWithSuggestionsForm)`
 const InputContainer = styled('div')``;
 
 const InputButtonContainer = styled('div')`
-	text-align: right;
+	display: flex;
+	justify-content: flex-end;
 `;
 
 const Input = styled('input')`

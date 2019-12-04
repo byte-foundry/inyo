@@ -30,7 +30,9 @@ import useUserInfos from '../../utils/useUserInfos';
 import CollaboratorDropdown from '../CollaboratorDropdown';
 import ConfirmFinishCustomerTaskModal from '../ConfirmFinishCustomerTaskModal';
 import {useConfirmation} from '../ConfirmModal';
+import CreateTask from '../CreateTask';
 import CustomerDropdown from '../CustomerDropdown';
+import HelpAndTooltip from '../HelpAndTooltip';
 import InitialIdentifier from '../InitialIdentifier';
 import MaterialIcon from '../MaterialIcon';
 import Tag from '../Tag';
@@ -40,12 +42,19 @@ import TaskReminderIcon from '../TaskReminderIcon';
 import Tooltip from '../Tooltip';
 import UnitDisplay from '../UnitDisplay';
 
+const CreateButton = styled('div')``;
+
 export const TaskContainer = styled('div')`
 	display: flex;
 	position: relative;
-	padding-left: 2rem;
+	padding-left: ${props => (props.withCreate ? '0' : '2rem')};
 	margin-left: -2rem;
 	align-items: center;
+
+	${CreateButton} {
+		visibility: hidden;
+		margin-right: 0.5rem;
+	}
 
 	&:after {
 		content: '';
@@ -67,9 +76,13 @@ export const TaskContainer = styled('div')`
 	}
 
 	&:hover {
+		${CreateButton} {
+			visibility: visible;
+		}
+
 		&:after {
 			opacity: 1;
-			left: 0.2rem;
+			left: ${props => (props.withCreate ? '-1.2rem' : '0.2rem')};
 		}
 	}
 
@@ -83,8 +96,6 @@ export const TaskContainer = styled('div')`
 		}
 	}
 `;
-
-const TaskAdd = styled('div')``;
 
 const TaskHeadingPlaceholder = styled(TaskHeading.withComponent(Link))`
 	text-decoration: none;
@@ -205,7 +216,8 @@ function TaskRow({
 	noProject: inProject,
 	baseUrl = 'tasks',
 	forwardedRef,
-	userId
+	userId,
+	projectId,
 }) {
 	const [finishItem] = useMutation(FINISH_ITEM);
 	const [unfinishItem] = useMutation(UNFINISH_ITEM);
@@ -257,8 +269,18 @@ function TaskRow({
 
 	return (
 		<div ref={forwardedRef} id={`task-${item.type}`}>
-			<TaskContainer noData={noData} isDraggable={isDraggable}>
-				<TaskAdd />
+			<TaskContainer
+				noData={noData}
+				isDraggable={isDraggable}
+				withCreate={projectId}
+			>
+				{projectId && (
+					<CreateButton>
+						<HelpAndTooltip icon="add">
+							<CreateTask popinTask />
+						</HelpAndTooltip>
+					</CreateButton>
+				)}
 				<TaskIcon
 					status={item.status}
 					type={item.type}

@@ -203,6 +203,10 @@ const FlexRowButtons = styled(FlexRow)`
 	}
 `;
 
+const CustomCheckList = styled(CheckList)`
+	margin: 1rem 0;
+`;
+
 const Item = ({
 	id,
 	customerToken,
@@ -1127,7 +1131,7 @@ const Item = ({
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>
 					<SubHeading>Contenus à récupérer</SubHeading>
-					<CheckList
+					<CustomCheckList
 						editable={!customerToken} // editable by user only, but checkable
 						items={files}
 						onChange={({items}) => {

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
 import {useRect} from '@reach/rect';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import {accentGrey, Dropdown, gray80} from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
@@ -16,7 +16,7 @@ const HelpAndTooltipContainer = styled('div')`
 `;
 
 // From https://github.com/reach/reach-ui/blob/master/packages/tooltip/src/index.js#L487-L523
-const OFFSET = 8;
+const OFFSET = 5;
 
 function positionDefault(triggerRect, targetRect) {
 	const collisions = {
@@ -59,6 +59,17 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 	useOnClickOutside(ownRef, () => {
 		onClose();
 	});
+
+	useEffect(() => {
+		const listener = (event) => {
+			if (event.key === 'Escape' || event.key === 'Esc') {
+				onClose();
+			}
+		};
+
+		document.addEventListener('keydown', listener);
+		return () => document.removeEventListener('keydown', listener);
+	}, []);
 
 	return (
 		<Dropdown

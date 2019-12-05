@@ -2,7 +2,7 @@ import css from '@emotion/css';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
@@ -151,6 +151,18 @@ const PopinTask = ({
 	const dueDateRef = useRef();
 	const scheduledForRef = useRef();
 
+	// since autoFocus doesn't work, focus on mount
+	// but we need to disable tooltip temporarily
+	useEffect(() => {
+		setTimeout(() => {
+			if (inputRef) {
+				window.__REACH_DISABLE_TOOLTIPS = true; // eslint-disable-line no-underscore-dangle
+				inputRef.current.focus();
+				window.__REACH_DISABLE_TOOLTIPS = false; // eslint-disable-line no-underscore-dangle
+			}
+		});
+	}, [inputRef]);
+
 	useOnClickOutside(ref, () => {
 		setFocus(false);
 	});
@@ -179,6 +191,30 @@ const PopinTask = ({
 		setAssignedCollaborator();
 		setDueDate();
 	};
+
+	let inputPlaceholder = fbt(
+		'Ajouter une tâche.',
+		'unfocused task input placeholder',
+	);
+
+	if (focus && type === 'SECTION') {
+		inputPlaceholder = fbt(
+			'Titre de la section.',
+			'focused task input type section placeholder',
+		);
+	}
+	else if (type === 'SECTION') {
+		inputPlaceholder = fbt(
+			'Ajouter une section.',
+			'unfocused task input type section placeholder',
+		);
+	}
+	else if (focus) {
+		inputPlaceholder = fbt(
+			'Titre de la tâche.',
+			'focused task input placeholder',
+		);
+	}
 
 	return (
 		<Container ref={ref}>
@@ -209,7 +245,6 @@ const PopinTask = ({
 					>
 						<Input
 							autoFocus
-							data-multiline
 							ref={inputRef}
 							type="text"
 							onChange={e => setValue(e.target.value)}
@@ -278,42 +313,7 @@ const PopinTask = ({
 									resetForm();
 								}
 							}}
-							placeholder={
-								focus ? (
-									currentProjectId ? (
-										<fbt
-											project="inyo"
-											desc="focused task input placeholder in project"
-										>
-											Titre de la tâche ou de la section.
-											Commencez par "/" pour changer le
-											type de tâche
-										</fbt>
-									) : (
-										<fbt
-											project="inyo"
-											desc="focused task input placeholder"
-										>
-											Titre de la tâche. Commencez par "/"
-											pour changer le type de tâche
-										</fbt>
-									)
-								) : currentProjectId ? (
-									<fbt
-										project="inyo"
-										desc="unfocused task input placeholder in project"
-									>
-										Ajouter une tâche ou créer un section.
-									</fbt>
-								) : (
-									<fbt
-										project="inyo"
-										desc="unfocused task input placeholder"
-									>
-										Ajouter une tâche.
-									</fbt>
-								)
-							}
+							placeholder={inputPlaceholder}
 						/>
 					</Tooltip>
 					<Types>

@@ -65,6 +65,7 @@ const Number = styled(P)`
 	font-weight: 500;
 	margin: 0;
 	position: relative;
+	z-index: 1;
 `;
 
 const TimeSelectContainer = styled('div')`
@@ -312,7 +313,8 @@ const Stats = ({history, location}) => {
 		colorBg: obj.colorBg
 	}));
 
-	// console.log("here");
+	console.log('here');
+	console.log(tagsDistributions);
 	// console.log(activities);
 	// console.log(filteredTasks);
 	// console.log(reminders);
@@ -426,26 +428,42 @@ const Stats = ({history, location}) => {
 						</PageSubHeading>
 						<PieWrapper>
 							<VictoryPie
-								data={customerDistributions}
-								colorScale={[
-									'tomato',
-									'orange',
-									'gold',
-									'cyan',
-									'navy'
-								]}
+								data={
+									customerDistributions.length > 0
+										? customerDistributions
+										: [{x: 'Aucun client lié', y: 100}]
+								}
+								colorScale={
+									customerDistributions.length > 0
+										? [
+												'tomato',
+												'orange',
+												'gold',
+												'cyan',
+												'navy'
+										  ]
+										: ['lightGrey']
+								}
 								innerRadius={50}
 								labels={() => null}
 							/>
 							<Legend
-								list={customerDistributions}
-								colorScale={[
-									'tomato',
-									'orange',
-									'gold',
-									'cyan',
-									'navy'
-								]}
+								list={
+									customerDistributions.length > 0
+										? customerDistributions
+										: [{x: 'Aucun client lié', y: 100}]
+								}
+								colorScale={
+									customerDistributions.length > 0
+										? [
+												'tomato',
+												'orange',
+												'gold',
+												'cyan',
+												'navy'
+										  ]
+										: ['lightGrey']
+								}
 							/>
 						</PieWrapper>
 					</div>
@@ -466,26 +484,42 @@ const Stats = ({history, location}) => {
 						</PageSubHeading>
 						<PieWrapper>
 							<VictoryPie
-								data={tagsDistributionsList}
-								colorScale={[
-									'tomato',
-									'orange',
-									'gold',
-									'cyan',
-									'navy'
-								]}
+								data={
+									tagsDistributionsList.length > 0
+										? tagsDistributionsList
+										: [{x: 'Sans catégorie', y: 100}]
+								}
+								colorScale={
+									tagsDistributionsList.length > 0
+										? [
+												'tomato',
+												'orange',
+												'gold',
+												'cyan',
+												'navy'
+										  ]
+										: ['lightGrey']
+								}
 								innerRadius={50}
 								labels={() => null}
 							/>
 							<Legend
-								list={tagsDistributionsList}
-								colorScale={[
-									'tomato',
-									'orange',
-									'gold',
-									'cyan',
-									'navy'
-								]}
+								list={
+									tagsDistributionsList.length > 0
+										? tagsDistributionsList
+										: [{x: 'Sans catégorie', y: 100}]
+								}
+								colorScale={
+									tagsDistributionsList.length > 0
+										? [
+												'tomato',
+												'orange',
+												'gold',
+												'cyan',
+												'navy'
+										  ]
+										: ['lightGrey']
+								}
 							/>
 						</PieWrapper>
 					</div>
@@ -570,12 +604,12 @@ const Stats = ({history, location}) => {
 								},
 								parent: {
 									position: 'absolute',
-									bottom: '-58px',
+									bottom: '-88px',
 									left: '-1px'
 								}
 							}}
 							y0={() => -10}
-							height={250}
+							height={220}
 							padding={0}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
@@ -624,12 +658,12 @@ const Stats = ({history, location}) => {
 								},
 								parent: {
 									position: 'absolute',
-									bottom: '-58px',
+									bottom: '-88px',
 									left: '-1px'
 								}
 							}}
 							y0={() => -10}
-							height={250}
+							height={220}
 							padding={0}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
@@ -671,12 +705,12 @@ const Stats = ({history, location}) => {
 								},
 								parent: {
 									position: 'absolute',
-									bottom: '-58px',
+									bottom: '-88px',
 									left: '-1px'
 								}
 							}}
 							y0={() => -1}
-							height={250}
+							height={220}
 							padding={0}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
@@ -741,12 +775,12 @@ const Stats = ({history, location}) => {
 								},
 								parent: {
 									position: 'absolute',
-									bottom: '-58px',
+									bottom: '-88px',
 									left: '-1px'
 								}
 							}}
 							y0={() => -1}
-							height={250}
+							height={220}
 							padding={0}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
@@ -797,12 +831,12 @@ const Stats = ({history, location}) => {
 								},
 								parent: {
 									position: 'absolute',
-									bottom: '-58px',
+									bottom: '-88px',
 									left: '-1px'
 								}
 							}}
 							y0={() => -1000}
-							height={250}
+							height={220}
 							padding={0}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(

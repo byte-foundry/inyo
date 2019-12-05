@@ -56,6 +56,10 @@ import Task from '../TaskRow';
 import TemplateAndProjectFiller from '../TemplateAndProjectFiller';
 import Tooltip from '../Tooltip';
 
+const CreateButton = styled('div')`
+	margin-right: 0.5rem;
+`;
+
 const TasksListContainer = styled(LayoutMainElem)``;
 
 const SectionDraggable = styled('div')`
@@ -81,7 +85,7 @@ const SectionDraggable = styled('div')`
 	&:hover {
 		&:before {
 			opacity: 1;
-			left: 0.2rem;
+			left: -1.2rem;
 		}
 	}
 
@@ -199,14 +203,22 @@ const TrashIconContainer = styled('div')`
 `;
 
 const SectionTitleContainer = styled('div')`
-	margin: 1rem 0 0.5rem;
+	margin: 1rem 0 0.5rem -2rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 
+	${CreateButton} {
+		visibility: hidden;
+	}
+
 	&:hover {
 		${TrashIconContainer} {
 			pointer-events: all;
+		}
+
+		${CreateButton} {
+			visibility: visible;
 		}
 
 		button {
@@ -242,9 +254,20 @@ const TrashButton = styled(Button)`
 	}
 `;
 
-function SectionTitle({onClickTrash, ...props}) {
+function SectionTitle({
+	onClickTrash, projectId, section, ...props
+}) {
 	return (
 		<SectionTitleContainer>
+			<CreateButton>
+				<HelpAndTooltip icon="add">
+					<CreateTask
+						popinTask
+						currentProjectId={projectId}
+						createAfterSection={section}
+					/>
+				</HelpAndTooltip>
+			</CreateButton>
 			<SectionInput {...props} />
 			<Tooltip label="Supprimer cette section">
 				<TrashIconContainer onClick={onClickTrash}>
@@ -698,11 +721,13 @@ function ProjectTasksList({items, projectId, sectionId, history, location}) {
 			{sections.map(section => (
 				<DraggableSection
 					section={section}
-					key={`${section.id}-${section.position}`}
+					key={section.id}
 					position={section.position}
 					sections={sections}
 				>
 					<SectionTitle
+						section={section}
+						projectId={projectId}
 						onClickTrash={() => setRemoveSectionModalOpen(section)}
 						placeholder={
 							<fbt project="inyo" desc="part name">
@@ -730,7 +755,7 @@ function ProjectTasksList({items, projectId, sectionId, history, location}) {
 							setIsDragging={setIsDragging}
 							position={task.position}
 							task={task}
-							key={`${task.id}-${task.position}`}
+							key={task.id}
 							projectId={projectId}
 							sectionId={sectionId}
 							sections={sections}
@@ -739,14 +764,11 @@ function ProjectTasksList({items, projectId, sectionId, history, location}) {
 					<PlaceholderDropTask
 						sectionId={section.id}
 						position={section.items.length}
-						key={`task-placeholder-${section.items.length}`}
+						key={section.id}
 					/>
 				</DraggableSection>
 			))}
-			<PlaceholderDropSection
-				position={sections.length}
-				key={`section-placeholder-${sections.length}`}
-			/>
+			<PlaceholderDropSection position={sections.length} />
 			{removeSectionModalOpen && (
 				<ModalContainer
 					onDismiss={() => setRemoveSectionModalOpen(false)}

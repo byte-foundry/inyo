@@ -163,7 +163,9 @@ const PopinTask = ({
 		if (editDate === 'scheduledFor') setEditDate(false);
 	});
 
-	const types = TYPES.filter(t => !currentProjectId && t.type !== 'SECTION');
+	const types = currentProjectId
+		? TYPES
+		: TYPES.filter(t => t.type !== 'SECTION');
 	const selectedType = types.find(t => t.type === (type || 'DEFAULT'));
 
 	const resetForm = () => {
@@ -488,43 +490,47 @@ const PopinTask = ({
 					</>
 				)}
 
-				<>
-					<MaterialIcon icon="event" size="tiny" />
-					<DateContainer ref={dueDateRef}>
-						{dueDate ? (
-							<>
-								<DueDate onClick={() => setEditDate('dueDate')}>
-									{moment(dueDate).format('dddd Do MMMM')}
-								</DueDate>
-								<IconButton
-									style={{margin: '0 10px'}}
-									icon="clear"
-									size="micro"
-									onClick={() => setDueDate(false)}
+				{type !== 'SECTION' && (
+					<>
+						<MaterialIcon icon="event" size="tiny" />
+						<DateContainer ref={dueDateRef}>
+							{dueDate ? (
+								<>
+									<DueDate
+										onClick={() => setEditDate('dueDate')}
+									>
+										{moment(dueDate).format('dddd Do MMMM')}
+									</DueDate>
+									<IconButton
+										style={{margin: '0 10px'}}
+										icon="clear"
+										size="micro"
+										onClick={() => setDueDate(false)}
+									/>
+								</>
+							) : (
+								<Button
+									icon="+"
+									onClick={() => setEditDate('dueDate')}
+								>
+									<fbt desc="popin task add deadline">
+										Ajouter une deadline
+									</fbt>
+								</Button>
+							)}
+							{editDate === 'dueDate' && (
+								<DateInput
+									date={moment(dueDate || new Date())}
+									onDateChange={(date) => {
+										setDueDate(date.toISOString());
+										setEditDate(false);
+									}}
+									duration={unit}
 								/>
-							</>
-						) : (
-							<Button
-								icon="+"
-								onClick={() => setEditDate('dueDate')}
-							>
-								<fbt desc="popin task add deadline">
-									Ajouter une deadline
-								</fbt>
-							</Button>
-						)}
-						{editDate === 'dueDate' && (
-							<DateInput
-								date={moment(dueDate || new Date())}
-								onDateChange={(date) => {
-									setDueDate(date.toISOString());
-									setEditDate(false);
-								}}
-								duration={unit}
-							/>
-						)}
-					</DateContainer>
-				</>
+							)}
+						</DateContainer>
+					</>
+				)}
 
 				{!isCustomerTask(type) && type !== 'SECTION' && (
 					<>

@@ -42,7 +42,9 @@ import TaskReminderIcon from '../TaskReminderIcon';
 import Tooltip from '../Tooltip';
 import UnitDisplay from '../UnitDisplay';
 
-const CreateButton = styled('div')``;
+const CreateButton = styled('div')`
+	margin-right: 0.5rem;
+`;
 
 export const TaskContainer = styled('div')`
 	display: flex;
@@ -53,7 +55,6 @@ export const TaskContainer = styled('div')`
 
 	${CreateButton} {
 		visibility: hidden;
-		margin-right: 0.5rem;
 	}
 
 	&:after {
@@ -277,7 +278,12 @@ function TaskRow({
 				{projectId && (
 					<CreateButton>
 						<HelpAndTooltip icon="add">
-							<CreateTask popinTask />
+							<CreateTask
+								popinTask
+								currentProjectId={projectId}
+								createAfterItem={item}
+								createAfterSection={item.section}
+							/>
 						</HelpAndTooltip>
 					</CreateButton>
 				)}

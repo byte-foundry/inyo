@@ -24,6 +24,8 @@ const CreateTask = ({
 	withProject,
 	popinTask,
 	defaultScheduledFor,
+	createAfterItem,
+	createAfterSection,
 }) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
@@ -49,7 +51,9 @@ const CreateTask = ({
 		props.onSubmitSection = section => addSection({
 			variables: {
 				projectId: currentProjectId,
-				position: 0,
+				position: createAfterSection
+					? createAfterSection.position + 1
+					: 0,
 				...section,
 			},
 		});
@@ -179,7 +183,16 @@ const CreateTask = ({
 						}
 
 						return createTask({
-							variables: {projectId: currentProjectId, ...task},
+							variables: {
+								projectId: currentProjectId,
+								sectionId: createAfterSection
+									? createAfterSection.id
+									: undefined,
+								position: createAfterItem
+									? createAfterItem.position + 1
+									: 0,
+								...task,
+							},
 							update: (cache, {data: {addItem: addedItem}}) => {
 								if (!currentProjectId) return;
 

@@ -7181,7 +7181,17 @@
     }
    ]
   },
-  "nIdV3CoZ2WhY1mbiRR4x8g==": {
+  "u6xDVRuGf3QAlsaIs0j2Kg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Nombre de rappels que votreSmart Assistant a envoyé selon les filtres et la période sélectionnés.}",
+     "variations": {}
+    }
+   ]
+  },
+  "IvPRj8zkrpFPSdVSjgPPmg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7191,17 +7201,7 @@
     }
    ]
   },
-  "EGVPD/2eq4jtbsy68EWPNQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Total of reminders sent by your Smart Assistant according to the selected filters and period.",
-     "variations": {}
-    }
-   ]
-  },
-  "1vip6xVBqrCJhk+X544wJw==": {
+  "hfMdtwpyyabtiQ7gFDjOOg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7221,7 +7221,17 @@
     }
    ]
   },
-  "/6vv96LOLrnPfZA+2L5mXg==": {
+  "pKe5B8Z6XEEC6ydTgrZIkw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of time gained thanks to the automatic actions from your {=Smart Assistant}",
+     "variations": {}
+    }
+   ]
+  },
+  "t1Hki6dHtrZYlM2F9PKzVA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7231,17 +7241,7 @@
     }
    ]
   },
-  "kqwiZrX3xPb9CLm06zuLhg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Total of time gained thanks to the automatic actions from your Smart Assistant",
-     "variations": {}
-    }
-   ]
-  },
-  "lSUjTG47b6bt1EBywRZt0A==": {
+  "FB1H9XqK+qkLXhfZWtaEVQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7291,27 +7291,27 @@
     }
    ]
   },
-  "mr/TFqKoCMfqxDHVSXGKLw==": {
+  "kQZCoZmjl3rS/eWPJw0p4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total amount worked according to your daily rate and the selected filters and period.",
+     "translation": "{=Valeur de votre travail selonvotre TJM et les filtres et période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "qJ7lTJhn5GO7+QUF1IEqag==": {
+  "W0lFiJ/suPXesbFKJunNJw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total amount worked according to your daily rate and the selected filters and period.",
+     "translation": "Total amount worked according to {=votre TJM} and the selected filters and period.",
      "variations": {}
     }
    ]
   },
-  "yyaOV3D0TSSmSMSfZDV46w==": {
+  "Qa/ElixRKejOjIURNZVIUA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7461,7 +7461,7 @@
     }
    ]
   },
-  "pth9dfSM1XyB3KYNrDShZg==": {
+  "7HhicYJABwi9UK9tXtAm6g==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7471,27 +7471,27 @@
     }
    ]
   },
-  "J6FjBEf9EvTK84AUacYfqg==": {
+  "lFGiWU8VFIPlEHkIcmYe1A==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Hello {email},",
+     "translation": "Hello {email} ,",
      "variations": {}
     }
    ]
   },
-  "4BP3euylrZnLknGBeLk1Bg==": {
+  "oLn30S+i1TmgeUQJ6Fve+g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Your trial period of 21 days comes to an end.",
+     "translation": "Your trial period of 15 days comes to an end.",
      "variations": {}
     }
    ]
   },
-  "SFLMxRS5pPE5ZpIsepzAgg==": {
+  "S8/B8HsIZ6Dm9TDqTu2jKQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7501,7 +7501,7 @@
     }
    ]
   },
-  "TTSWGyswSUUpeFxSA0Xokg==": {
+  "eGUwaOmygKL8GzrfG8z2fA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7511,7 +7511,7 @@
     }
    ]
   },
-  "Epqqbzw6CbrC95R4k2jb3Q==": {
+  "7AXmYMW3jRTtFA53ck40/A==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7521,7 +7521,7 @@
     }
    ]
   },
-  "eggk3plkTeLVC/zdfZ0HmQ==": {
+  "wTg5C6Gio29r504qnOzYwQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7531,7 +7531,7 @@
     }
    ]
   },
-  "C/FdpEKIV7nGc4WnBi2exw==": {
+  "5tLCJaMGYti7csL3Hb5J1Q==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7541,7 +7541,7 @@
     }
    ]
   },
-  "oeeqsNM7HCng0S7mIbL5Fg==": {
+  "kXk3X/PbQcmlcpgdD/Xrtg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7551,7 +7551,7 @@
     }
    ]
   },
-  "WHutu5rksXpb0Sq2MWT2yw==": {
+  "wKF/3PfgfrX5i4cX4zVKRw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7561,7 +7561,7 @@
     }
    ]
   },
-  "z3bgbWxTX/mtJmj+cWQD0g==": {
+  "oMaWc9z30qIiC8fMiIVQQw==": {
    "tokens": [],
    "types": [],
    "translations": [

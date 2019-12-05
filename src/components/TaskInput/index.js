@@ -264,7 +264,6 @@ const TaskInput = ({
 	const [itemCustomer, setItemCustomer] = useState();
 	const ref = useRef();
 	const inputRef = useRef();
-	const {workingTime} = useUserInfos();
 
 	function closeMoreInfos() {
 		setItemDueDate();

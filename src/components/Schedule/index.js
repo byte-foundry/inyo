@@ -28,8 +28,10 @@ import useAccount from '../../utils/useAccount';
 import useCalendar from '../../utils/useCalendar';
 import useUserInfos from '../../utils/useUserInfos';
 import AssignedToOtherCard from '../AssignedToOtherCard';
+import CreateTask from '../CreateTask';
 import DeadlineCard from '../DeadlineCard';
 import DefaultDroppableDay from '../DefaultDroppableDay';
+import HelpAndTooltip from '../HelpAndTooltip';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import RawPieChart from '../PieChart';
@@ -147,12 +149,18 @@ const ScheduleNavInfo = styled('div')`
 
 const DayInfos = styled('div')`
 	display: flex;
-	align-items: flex-start;
+	align-items: center;
+	flex-direction: row;
 	flex: 1;
 
 	font-size: 0.75rem;
 	line-height: 1.4;
 	color: ${primaryGrey};
+`;
+
+const DayTime = styled('div')`
+	display: flex;
+	flex: 1;
 `;
 
 const Icon = styled('div')`
@@ -490,20 +498,24 @@ const Schedule = ({
 					else if (!isPastDay && timeLeft > 0 && timeLeft < 1) {
 						stat = (
 							<DayInfos>
-								<PieChart value={1 - timeLeft} />
-								<p>
-									<UnitAvailableDisplay unit={timeLeft} />
-								</p>
+								<DayTime>
+									<PieChart value={1 - timeLeft} />
+									<p>
+										<UnitAvailableDisplay unit={timeLeft} />
+									</p>
+								</DayTime>
 							</DayInfos>
 						);
 					}
 					else if (!isPastDay && timeLeft < 0) {
 						stat = (
 							<DayInfos>
-								<PieChart value={1 - timeLeft} />
-								<p>
-									<UnitOvertimeDisplay unit={-timeLeft} />
-								</p>
+								<DayTime>
+									<PieChart value={1 - timeLeft} />
+									<p>
+										<UnitOvertimeDisplay unit={-timeLeft} />
+									</p>
+								</DayTime>
 							</DayInfos>
 						);
 					}
@@ -623,6 +635,13 @@ const Schedule = ({
 									}}
 								>
 									{stat}
+									<HelpAndTooltip icon="add">
+										<CreateTask
+											popinTask
+											withProject
+											defaultScheduledFor={day.date}
+										/>
+									</HelpAndTooltip>
 								</DefaultDroppableDay>
 								{sortedReminders.map(reminder => (
 									<ReminderCard

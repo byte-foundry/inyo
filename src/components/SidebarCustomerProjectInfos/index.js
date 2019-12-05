@@ -12,7 +12,7 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
-	SubHeading,
+	SubHeading
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import IconButton from '../IconButton';
@@ -80,6 +80,11 @@ const SidebarHeading = styled(SubHeading)`
 	margin-bottom: 10px;
 `;
 
+const CompanyLogo = styled('img')`
+	width: 100%;
+	display: block;
+`;
+
 const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 	const query = new URLSearchParams(location.search);
 	const activeView = query.get('view');
@@ -89,7 +94,7 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token},
-		suspend: true,
+		suspend: true
 	});
 
 	if (error) throw error;
@@ -144,6 +149,12 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 						Votre prestataire
 					</fbt>
 				</SidebarHeading>
+				{project.issuer.logo && (
+					<CompanyLogo
+						src={project.issuer.logo.url}
+						alt="Company logo"
+					/>
+				)}
 				<IssuerNameAndAddress issuer={project.issuer} />
 			</SubSection>
 

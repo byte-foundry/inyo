@@ -638,7 +638,10 @@ const Schedule = ({
 									}}
 								>
 									{stat}
-									<HelpAndTooltip icon="add">
+									<HelpAndTooltip
+										icon="add"
+										color={primaryBlack}
+									>
 										<CreateTask
 											popinTask
 											withProject

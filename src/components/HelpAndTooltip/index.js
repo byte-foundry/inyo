@@ -84,7 +84,7 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 	);
 };
 
-const HelpAndTooltip = ({icon = 'help', children}) => {
+const HelpAndTooltip = ({icon = 'help', color, children}) => {
 	const [open, setOpen] = useState(false);
 	const iconRef = useRef();
 	const triggerRect = useRect(iconRef);
@@ -95,7 +95,7 @@ const HelpAndTooltip = ({icon = 'help', children}) => {
 				icon={icon}
 				ref={iconRef}
 				size="tiny"
-				color={accentGrey}
+				color={color ? color : accentGrey}
 				onClick={() => setOpen(!open)}
 			/>
 			{open && (

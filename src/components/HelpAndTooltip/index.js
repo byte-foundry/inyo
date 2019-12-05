@@ -23,9 +23,9 @@ function positionDefault(triggerRect, targetRect) {
 		top: triggerRect.top - targetRect.height < 0,
 		right: window.innerWidth < triggerRect.left + targetRect.width,
 		bottom:
-			window.innerHeight
-			< triggerRect.bottom + targetRect.height + OFFSET,
-		left: triggerRect.left - targetRect.width < 0,
+			window.innerHeight <
+			triggerRect.bottom + targetRect.height + OFFSET,
+		left: triggerRect.left - targetRect.width < 0
 	};
 
 	const directionRight = collisions.right && !collisions.left;
@@ -36,14 +36,14 @@ function positionDefault(triggerRect, targetRect) {
 			? `${triggerRect.right - targetRect.width + window.pageXOffset}px`
 			: `${triggerRect.left + window.pageXOffset}px`,
 		top: directionUp
-			? `${triggerRect.top
-					- OFFSET
-					- targetRect.height
-					+ window.pageYOffset}px`
-			: `${triggerRect.top
-					+ OFFSET
-					+ triggerRect.height
-					+ window.pageYOffset}px`,
+			? `${triggerRect.top -
+					OFFSET -
+					targetRect.height +
+					window.pageYOffset}px`
+			: `${triggerRect.top +
+					OFFSET +
+					triggerRect.height +
+					window.pageYOffset}px`
 	};
 }
 
@@ -64,7 +64,7 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 		<Dropdown
 			style={{
 				position: 'absolute',
-				...styles,
+				...styles
 			}}
 			ref={ownRef}
 		>

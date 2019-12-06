@@ -18,7 +18,7 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryRed,
-	primaryWhite,
+	primaryWhite
 } from '../colors';
 import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../constants';
 import Pencil from '../icons/pencil.svg';
@@ -26,7 +26,7 @@ import Pencil from '../icons/pencil.svg';
 export * from '../colors';
 
 const shevy = new Shevy({
-	baseFontSize: '14px',
+	baseFontSize: '14px'
 });
 
 const {body} = shevy;
@@ -35,14 +35,14 @@ export const Body = styled('div')`
 	${body};
 `;
 
-const getButtonHoveredColor = (props) => {
+const getButtonHoveredColor = props => {
 	if (props.white || props.link) {
 		return primaryPurple;
 	}
 	return primaryWhite;
 };
 
-const getButtonHoveredBackground = (props) => {
+const getButtonHoveredBackground = props => {
 	if (props.red) {
 		return primaryRed;
 	}
@@ -52,7 +52,7 @@ const getButtonHoveredBackground = (props) => {
 	return primaryPurple;
 };
 
-const getButtonHoveredBorderColor = (props) => {
+const getButtonHoveredBorderColor = props => {
 	if (props.primary) {
 		return 'transparent';
 	}
@@ -69,28 +69,28 @@ export const Button = styled('button')`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
 	padding: 0.3rem 0.8rem;
-	font-weight: ${(props) => {
+	font-weight: ${props => {
 		if (props.white) {
 			return '500';
 		}
 		return '400';
 	}};
-	letter-spacing: ${(props) => {
+	letter-spacing: ${props => {
 		if (props.white) {
 			return '0.01rem';
 		}
 		return 0;
 	}};
-	border: ${(props) => {
+	border: ${props => {
 		if (props.white) {
 			return '2px solid #333';
 		}
 		return '1px solid #333';
 	}};
-	border-radius: 30px;
+	border-radius: 5px;
 	cursor: pointer;
 	text-decoration: none;
-	background: ${(props) => {
+	background: ${props => {
 		if (props.primary) {
 			return primaryPurple;
 		}
@@ -99,7 +99,7 @@ export const Button = styled('button')`
 		}
 		return primaryWhite;
 	}};
-	color: ${(props) => {
+	color: ${props => {
 		if (props.link && props.disabled) {
 			return primaryGrey;
 		}
@@ -119,24 +119,24 @@ export const Button = styled('button')`
 	}};
 
 	svg {
-		fill: ${(props) => {
-		if (props.link && props.disabled) {
-			return primaryGrey;
-		}
-		if (props.primary) {
-			return primaryWhite;
-		}
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.grey) {
-			return primaryGrey;
-		}
-		if (props.white) {
-			return primaryWhite;
-		}
-		return primaryPurple;
-	}};
+		fill: ${props => {
+			if (props.link && props.disabled) {
+				return primaryGrey;
+			}
+			if (props.primary) {
+				return primaryWhite;
+			}
+			if (props.red) {
+				return primaryRed;
+			}
+			if (props.grey) {
+				return primaryGrey;
+			}
+			if (props.white) {
+				return primaryWhite;
+			}
+			return primaryPurple;
+		}};
 	}
 
 	border-color: currentColor;
@@ -145,8 +145,9 @@ export const Button = styled('button')`
   align-items: center;
 	justify-content: center;
 
-	${props => !props.disabled
-		&& css`
+	${props =>
+		!props.disabled &&
+		css`
 			&:hover {
 				svg {
 					fill: ${getButtonHoveredColor(props)};
@@ -161,40 +162,46 @@ export const Button = styled('button')`
 			}
 		`}
 
-		${props => props.disabled
-			&& css`
+		${props =>
+			props.disabled &&
+			css`
 				opacity: 0.5;
 			`}
 
-	${props => props.textIcon
-		&& `
+	${props =>
+		props.textIcon &&
+		`
 		font-weight: 500;
 	`}
 
-	${props => props.big
-		&& `
+	${props =>
+		props.big &&
+		`
 		font-size: 14px;
 		font-weight: 500;
 		padding: .8rem 1.6rem;
 	`}
 
-	${props => props.icon
-		&& `&::before {
+	${props =>
+		props.icon &&
+		`&::before {
 			content: '${props.icon}';
 			margin-right: .4rem;
 			color: currentColor;
 			font-weight: 500;
 		}`};
 
-	${props => props.tiny
-		&& `
+	${props =>
+		props.tiny &&
+		`
 		padding: 0;
 		width: 30px;
 		height: 30px;
 	`}
 
-	${props => props.link
-		&& `
+	${props =>
+		props.link &&
+		`
 			padding: 0;
 			margin: 0;
 			border: none;
@@ -211,13 +218,15 @@ export const Button = styled('button')`
 			}
 		`}
 
-	${props => props.centered
-		&& `
+	${props =>
+		props.centered &&
+		`
 		margin: 0 auto;
 	`}
 
-	${props => props.aligned
-		&& `
+	${props =>
+		props.aligned &&
+		`
 		& + button {
 			margin-left: .5rem;
 		}
@@ -354,12 +363,13 @@ export const TaskInfosItem = styled('div')`
 		text-decoration: none;
 	}
 
-	${props => (props.inactive
-		? ''
-		: `&:hover ${TaskInfosContent} {
+	${props =>
+		props.inactive
+			? ''
+			: `&:hover ${TaskInfosContent} {
 			color: ${primaryPurple};
 			border-bottom: 1px dotted ${primaryPurple};
-		}`)}
+		}`}
 `;
 
 export const TaskInfosItemLink = TaskInfosItem.withComponent(Link);
@@ -422,8 +432,9 @@ export const InputLabel = styled('div')`
 		margin-bottom: 0.8rem;
 		margin-left: 1rem;
 
-		${props => props.required
-			&& css`
+		${props =>
+			props.required &&
+			css`
 				&::after {
 					color: ${primaryRed};
 					content: '*';
@@ -678,28 +689,28 @@ const customSelectStyles = props => ({
 		...styles,
 		color: isDisabled ? primaryGrey : primaryPurple,
 		paddingTop: 0,
-		paddingBottom: 0,
+		paddingBottom: 0
 	}),
 	clearIndicator: styles => ({
 		...styles,
 		color: primaryPurple,
 		paddingTop: 0,
-		paddingBottom: 0,
+		paddingBottom: 0
 	}),
 	placeholder: (styles, {isDisabled}) => ({
 		...styles,
 		color: isDisabled ? lightGrey : lightPurple,
 		fontStyle: 'italic',
-		fontSize: '14px',
+		fontSize: '14px'
 	}),
 	singleValue: (styles, {isDisabled}) => ({
 		...styles,
-		color: isDisabled ? primaryGrey : primaryPurple,
+		color: isDisabled ? primaryGrey : primaryPurple
 	}),
 	input: (styles, {isDisabled}) => ({
 		...styles,
 		padding: 0,
-		color: isDisabled ? primaryGrey : primaryPurple,
+		color: isDisabled ? primaryGrey : primaryPurple
 	}),
 	control: (styles, {isDisabled, big}) => ({
 		...styles,
@@ -709,12 +720,12 @@ const customSelectStyles = props => ({
 		backgroundColor: isDisabled ? lightGrey : lightPurple,
 		borderRadius: '20px',
 		':hover, :focus, :active': {
-			border: 'none',
-		},
+			border: 'none'
+		}
 	}),
 	indicatorSeparator: () => ({
-		backgroundColor: 'transparent',
-	}),
+		backgroundColor: 'transparent'
+	})
 });
 
 export const Select = ({style, ...rest}) => (
@@ -923,49 +934,50 @@ export const TaskIcon = styled('div')`
 	margin-right: ${props => (props.noData ? '.5rem' : '1rem')};
 	overflow: visible;
 	background: center no-repeat
-		url(${(props) => {
-		let {type} = props;
+		url(${props => {
+			let {type} = props;
 
-		if (props.assigned) {
-			type += '_ASSIGNED';
-		}
+			if (props.assigned) {
+				type += '_ASSIGNED';
+			}
 
-		const typeInfos
-				= ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
+			const typeInfos =
+				ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
 
-		let icon = typeInfos.iconUrl;
+			let icon = typeInfos.iconUrl;
 
-		if (props.status === itemStatuses.FINISHED) {
-			icon
-					= (props.justUpdated
-					? typeInfos.iconUrlValidatedAnim
-					: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
-		}
-		return icon;
-	}});
+			if (props.status === itemStatuses.FINISHED) {
+				icon =
+					(props.justUpdated
+						? typeInfos.iconUrlValidatedAnim
+						: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
+			}
+			return icon;
+		}});
 	margin-bottom: 0;
 
 	transform: scale(${props => (props.noData ? 0.75 : '')});
 
 	&:hover {
 		background: center no-repeat
-			url(${(props) => {
-		const typeInfos
-					= ITEM_TYPES.find(t => t.type === props.type)
-					|| ITEM_TYPES[0];
+			url(${props => {
+				const typeInfos =
+					ITEM_TYPES.find(t => t.type === props.type) ||
+					ITEM_TYPES[0];
 
-		if (props.noAnim) {
-			return props.status === itemStatuses.FINISHED
-				? typeInfos.iconUrlValidated
-				: typeInfos.iconUrl;
-		}
+				if (props.noAnim) {
+					return props.status === itemStatuses.FINISHED
+						? typeInfos.iconUrlValidated
+						: typeInfos.iconUrl;
+				}
 
-		return typeInfos.iconUrlValidated || typeInfos.iconUrl;
-	}});
+				return typeInfos.iconUrlValidated || typeInfos.iconUrl;
+			}});
 
-		animation: ${props => (props.status === itemStatuses.FINISHED || props.noAnim
-		? 'none'
-		: 'growth 300ms')};
+		animation: ${props =>
+			props.status === itemStatuses.FINISHED || props.noAnim
+				? 'none'
+				: 'growth 300ms'};
 
 		@keyframes growth {
 			0% {
@@ -995,11 +1007,12 @@ export const Pie = styled('div')`
 	width: ${props => (props.big ? '300px' : '18px')};
 	height: ${props => (props.big ? '300px' : '18px')};
 	border-radius: 50%;
-	background: ${props => (props.value <= 1
-		? accentGrey
-		: props.value >= 2
+	background: ${props =>
+		props.value <= 1
+			? accentGrey
+			: props.value >= 2
 			? primaryRed
-			: primaryBlue)};
+			: primaryBlue};
 	background-image: linear-gradient(
 		to right,
 		transparent 50%,
@@ -1016,7 +1029,8 @@ export const Pie = styled('div')`
 		border-radius: 0 100% 100% 0 / 50%;
 		background-color: inherit;
 		transform-origin: left;
-		background: ${props => (props.value % 1 >= 0.5 || props.value >= 2 ? 'currentColor' : '')};
+		background: ${props =>
+			props.value % 1 >= 0.5 || props.value >= 2 ? 'currentColor' : ''};
 		transform: rotate(
 			${props => (props.value < 2 ? props.value % 0.5 : 1)}turn
 		);

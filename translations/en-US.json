@@ -5731,22 +5731,12 @@
     }
    ]
   },
-  "EX1vp3nzcu/PifVnW+Sk5w==": {
+  "xQtBCL3WIJNWVD8hYDQIwg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Choose a predefined picture",
-     "variations": {}
-    }
-   ]
-  },
-  "vWCEJJ+10MEB1ZAsJwMDjQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Upload",
+     "translation": "Upload a banner",
      "variations": {}
     }
    ]
@@ -8017,6 +8007,26 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "EX1vp3nzcu/PifVnW+Sk5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose a predefined picture",
+     "variations": {}
+    }
+   ]
+  },
+  "vWCEJJ+10MEB1ZAsJwMDjQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Upload",
      "variations": {}
     }
    ]

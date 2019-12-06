@@ -403,7 +403,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 													autoProceed
 												>
 													<fbt desc="Company's banner upload button">
-														Charger
+														Charger une bannière
 													</fbt>
 												</UploadDashboardButton>
 

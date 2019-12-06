@@ -15,11 +15,11 @@ const useCalendar = (account, calendarOptions) => {
 		...calendarOptions,
 		workingTime,
 		startWorkAt,
-		endWorkAt,
+		endWorkAt
 	].join('_');
 
 	if (account && account.api && account.api.auth2) {
-		account.api.auth2.getAuthInstance().isSignedIn.listen((isSignedIn) => {
+		account.api.auth2.getAuthInstance().isSignedIn.listen(isSignedIn => {
 			if (!isSignedIn) {
 				cache = {};
 				setCacheVersion(x => x + 1);
@@ -34,7 +34,7 @@ const useCalendar = (account, calendarOptions) => {
 					await calendarManager.getEvents(...calendarOptions),
 					startWorkAt,
 					endWorkAt,
-					workingTime,
+					workingTime
 				);
 
 				cache[cacheKey].data = googleEvents;
@@ -49,14 +49,14 @@ const useCalendar = (account, calendarOptions) => {
 		...calendarOptions,
 		workingTime,
 		startWorkAt,
-		endWorkAt,
+		endWorkAt
 	]);
 
 	if (!cache[cacheKey]) {
 		cache[cacheKey] = {data: {}, loaded: false};
 	}
 
-	return {...cache[cacheKey]};
+	return cache[cacheKey];
 };
 
 export default useCalendar;

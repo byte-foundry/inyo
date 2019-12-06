@@ -1,21 +1,21 @@
-import styled from "@emotion/styled/macro";
-import React from "react";
-import { withRouter } from "react-router-dom";
+import styled from '@emotion/styled/macro';
+import React, {memo} from 'react';
+import {withRouter} from 'react-router-dom';
 
-import fbt from "../../fbt/fbt.macro";
+import fbt from '../../fbt/fbt.macro';
 import {
 	primaryRed,
 	primaryWhite,
 	TaskInfosItemLink
-} from "../../utils/new/design-system";
-import IconButton from "../IconButton";
-import Tooltip from "../Tooltip";
+} from '../../utils/new/design-system';
+import IconButton from '../IconButton';
+import Tooltip from '../Tooltip';
 
-const CommentWrap = styled("span")`
+const CommentWrap = styled('span')`
 	position: relative;
 `;
 
-const CommentNumber = styled("span")`
+const CommentNumber = styled('span')`
 	color: ${primaryWhite};
 	position: absolute;
 	left: 8px;
@@ -43,7 +43,7 @@ function TaskComment({
 				!comment.views.find(
 					e =>
 						e.viewer.__typename ===
-						(customerToken ? "Customer" : "User")
+						(customerToken ? 'Customer' : 'User')
 				)
 		).length;
 	}
@@ -52,7 +52,7 @@ function TaskComment({
 		<TaskInfosItemLink
 			to={{
 				pathname: `${taskUrlPrefix}/${baseUrl}/${item.id}`,
-				state: { prevSearch: location.search }
+				state: {prevSearch: location.search}
 			}}
 			id="icon-meta-comment"
 		>
@@ -67,19 +67,30 @@ function TaskComment({
 					<IconButton
 						icon={
 							item.comments.length > 0
-								? "mode_comment"
-								: "add_comment"
+								? 'mode_comment'
+								: 'add_comment'
 						}
 						size="tiny"
-						color={unreadCommentLength > 0 ? primaryRed : ""}
+						color={unreadCommentLength > 0 ? primaryRed : ''}
 					/>
 				</Tooltip>
 				<CommentNumber unread={unreadCommentLength > 0}>
-					{item.comments.length > 0 ? item.comments.length : ""}
+					{item.comments.length > 0 ? item.comments.length : ''}
 				</CommentNumber>
 			</CommentWrap>
 		</TaskInfosItemLink>
 	);
 }
 
-export default withRouter(TaskComment);
+export default withRouter(
+	memo(
+		TaskComment,
+		(prevProps, nextProps) =>
+			prevProps.taskUrlPrefix === nextProps.taskUrlPrefix &&
+			prevProps.baseUrl === nextProps.baseUrl &&
+			prevProps.item === nextProps.item &&
+			prevProps.noComment === nextProps.noComment &&
+			prevProps.customerToken === nextProps.customerToken &&
+			prevProps.location.search === nextProps.location.search
+	)
+);

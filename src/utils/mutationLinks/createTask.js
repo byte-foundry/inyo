@@ -7,22 +7,22 @@ export default {
 
 			if (sections.length > 0) {
 				const index = sections.findIndex(
-					section => section.id === addedItem.section.id,
+					section => section.id === addedItem.section.id
 				);
 				const cachedSection = sections[index];
 
 				if (cachedSection) {
 					sections.splice(index, 1, {
 						...cachedSection,
-						items: [addedItem, ...cachedSection.items],
+						items: [addedItem, ...cachedSection.items]
 					});
 
 					return {
 						...query.result,
 						project: {
 							...query.result.project,
-							sections,
-						},
+							sections
+						}
 					};
 				}
 
@@ -42,22 +42,28 @@ export default {
 
 			if (sections.length > 0) {
 				const index = sections.findIndex(
-					section => section.id === addedItem.section.id,
+					section => section.id === addedItem.section.id
 				);
 				const cachedSection = sections[index];
 
 				if (cachedSection) {
+					cachedSection.items = [addedItem, ...cachedSection.items];
+					cachedSection.items = cachedSection.items.map(
+						(item, index) => ({
+							...item,
+							position: index
+						})
+					);
 					sections.splice(index, 1, {
-						...cachedSection,
-						items: [addedItem, ...cachedSection.items],
+						...cachedSection
 					});
 
 					return {
 						...query.result,
 						project: {
 							...query.result.project,
-							sections,
-						},
+							sections
+						}
 					};
 				}
 
@@ -74,12 +80,13 @@ export default {
 		const addedItem = mutation.result.data.addItem;
 
 		if (
-			query.variables.schedule === 'TO_BE_RESCHEDULED'
-			|| query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
-		) return query.result;
+			query.variables.schedule === 'TO_BE_RESCHEDULED' ||
+			query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
+		)
+			return query.result;
 
 		if (addedItem.section) {
-			cachedItems = cachedItems.map((item) => {
+			cachedItems = cachedItems.map(item => {
 				if (item.section && item.section.id === addedItem.section.id) {
 					return {...item, position: item.position + 1};
 				}
@@ -92,8 +99,8 @@ export default {
 			...query.result,
 			me: {
 				...query.result.me,
-				tasks: [addedItem, ...cachedItems],
-			},
+				tasks: [addedItem, ...cachedItems]
+			}
 		};
 	},
 	getAllTasks: ({mutation, query}) => {
@@ -101,12 +108,13 @@ export default {
 		const addedItem = mutation.result.data.addItem;
 
 		if (
-			query.variables.schedule === 'TO_BE_RESCHEDULED'
-			|| query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
-		) return query.result;
+			query.variables.schedule === 'TO_BE_RESCHEDULED' ||
+			query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
+		)
+			return query.result;
 
 		if (addedItem.section) {
-			cachedItems = cachedItems.map((item) => {
+			cachedItems = cachedItems.map(item => {
 				if (item.section && item.section.id === addedItem.section.id) {
 					return {...item, position: item.position + 1};
 				}
@@ -119,8 +127,8 @@ export default {
 			...query.result,
 			me: {
 				...query.result.me,
-				tasks: [addedItem, ...cachedItems],
-			},
+				tasks: [addedItem, ...cachedItems]
+			}
 		};
 	},
 	getAllCustomers: ({mutation, query}) => {
@@ -133,11 +141,11 @@ export default {
 				...query.result,
 				me: {
 					...query.result.me,
-					customers: [addedCustomer, ...customers],
-				},
+					customers: [addedCustomer, ...customers]
+				}
 			};
 		}
 
 		return undefined;
-	},
+	}
 };

@@ -1,19 +1,19 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
-import React from 'react';
+import React, {useMemo, memo} from 'react';
 import {animated, useSpring} from 'react-spring';
 
 import {useQuery} from '../../utils/apollo-hooks';
 import {Loading} from '../../utils/content';
 import {
 	extractScheduleFromWorkingDays,
-	getEventFromGoogleCalendarEvents,
+	getEventFromGoogleCalendarEvents
 } from '../../utils/functions';
 import {
 	lightGrey,
 	mediumGrey,
 	primaryPurple,
-	primaryWhite,
+	primaryWhite
 } from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 import useAccount from '../../utils/useAccount';
@@ -37,7 +37,8 @@ const DayPieChart = styled(PieChart)`
 
 const DayElem = styled('div')`
 	width: calc(100% - 2rem);
-	background: ${props => (props.isOver ? primaryPurple : props.isOff ? mediumGrey : primaryWhite)};
+	background: ${props =>
+		props.isOver ? primaryPurple : props.isOff ? mediumGrey : primaryWhite};
 	margin: 1rem 1rem 0;
 	box-sizing: border-box;
 	height: 100px;
@@ -47,11 +48,12 @@ const DayElem = styled('div')`
 	align-items: center;
 	justify-content: space-between;
 	padding-top: 7px;
-	color: ${props => (props.isOver
-		? props.isOff
-			? mediumGrey
-			: primaryWhite
-		: primaryPurple)};
+	color: ${props =>
+		props.isOver
+			? props.isOff
+				? mediumGrey
+				: primaryWhite
+			: primaryPurple};
 	border: solid 2px ${primaryWhite};
 	position: relative;
 `;
@@ -79,67 +81,70 @@ const LeftBarContent = styled('div')`
 	width: 70px;
 `;
 
-function DroppableDay({
-	day,
-	index,
-	scheduledFor,
-	onMove,
-	isOff,
-	workingTime = 8,
-}) {
-	const {language} = useUserInfos();
-	const timeLeft
-		= workingTime
-		- day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
+const DroppableDay = memo(
+	({day, index, scheduledFor, onMove, isOff, workingTime = 8}) => {
+		const {language} = useUserInfos();
+		const timeLeft =
+			workingTime -
+			day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
 
-	return (
-		<DefaultDroppableDay
-			index={index}
-			scheduledFor={scheduledFor}
-			onMove={onMove}
-			separator={false}
-		>
-			<DayElem isOff={isOff}>
-				<DayDate>
-					<DayDateDay>
-						{day.momentDate.toDate().toLocaleDateString(language, {
-							weekday: 'narrow',
-							day: undefined,
-							month: undefined,
-							year: undefined,
-						})}
-					</DayDateDay>
-					<DayDateNumber>
-						{day.momentDate.toDate().toLocaleDateString(language, {
-							weekday: undefined,
-							day: 'numeric',
-							month: undefined,
-							year: undefined,
-						})}
-					</DayDateNumber>
-				</DayDate>
-				<DayPieChart value={1 - timeLeft / workingTime} />
-			</DayElem>
-		</DefaultDroppableDay>
-	);
-}
+		return (
+			<DefaultDroppableDay
+				index={index}
+				scheduledFor={scheduledFor}
+				onMove={onMove}
+				separator={false}
+			>
+				<DayElem isOff={isOff}>
+					<DayDate>
+						<DayDateDay>
+							{day.momentDate
+								.toDate()
+								.toLocaleDateString(language, {
+									weekday: 'narrow',
+									day: undefined,
+									month: undefined,
+									year: undefined
+								})}
+						</DayDateDay>
+						<DayDateNumber>
+							{day.momentDate
+								.toDate()
+								.toLocaleDateString(language, {
+									weekday: undefined,
+									day: 'numeric',
+									month: undefined,
+									year: undefined
+								})}
+						</DayDateNumber>
+					</DayDate>
+					<DayPieChart value={1 - timeLeft / workingTime} />
+				</DayElem>
+			</DefaultDroppableDay>
+		);
+	},
+	(prevProps, nextProps) =>
+		prevProps.day === nextProps.day &&
+		prevProps.index === nextProps.index &&
+		prevProps.workingTime === nextProps.workingTime &&
+		prevProps.onMove === nextProps.onMove &&
+		prevProps.isOff === nextProps.isOff &&
+		prevProps.scheduledFor === nextProps.scheduledFor
+);
 
-function LeftBarSchedule({
-	isDragging, days, fullWeek, onMoveTask,
-}) {
+function LeftBarSchedule({isDragging, days, fullWeek, onMoveTask}) {
 	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
-		to: async (next) => {
+		to: async next => {
 			if (isDragging) {
 				await next({
-					width: 70,
+					width: 70
 				});
 				await next({width: 70});
-			}
-			else {
+			} else {
 				if (wasOpen) {
 					await next({
-						width: 70,
+						width: 70
 					});
 				}
 				await next({width: 0});
@@ -150,37 +155,82 @@ function LeftBarSchedule({
 			mass: 0.1,
 			tension: 500,
 			friction: 10,
-			clamp: true,
-		},
+			clamp: true
+		}
 	});
 	const {
 		data: userPrefsData,
 		loading: loadingUserPrefs,
-		error: errorUserPrefs,
+		error: errorUserPrefs
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 
-	const startDate = moment().startOf('day');
-	const endDate = moment(startDate).add(12, 'days');
+	const startDate = useMemo(() => moment().startOf('day'), [
+		moment().dayOfYear()
+	]);
+	const endDate = useMemo(() => moment(startDate).add(12, 'days'), [
+		startDate
+	]);
 	const [account] = useAccount();
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
 		startDate.toISOString(),
-		endDate.toISOString(),
+		endDate.toISOString()
 	]);
 
-	if (loadingUserPrefs) return <Loading />;
-	if (errorUserPrefs) throw errorUserPrefs;
+	const weekdays = useMemo(() => {
+		if (!loadingUserPrefs) {
+			const {workingDays} = userPrefsData.me;
 
-	const {workingDays} = userPrefsData.me;
+			const weekdays = extractScheduleFromWorkingDays(
+				workingDays,
+				eventsPerDay,
+				startDate,
+				days,
+				fullWeek,
+				endDate
+			);
 
-	const weekdays = extractScheduleFromWorkingDays(
-		workingDays,
+			weekdays.forEach(day => {
+				day.onMove = ({
+					id,
+					type,
+					linkedCustomer,
+					attachments,
+					index: position,
+					scheduledFor
+				}) => {
+					onMoveTask({
+						task: {
+							id,
+							type,
+							linkedCustomer,
+							attachments
+						},
+						scheduledFor,
+						position:
+							typeof position === 'number'
+								? position
+								: day.tasks.length
+					});
+				};
+			});
+
+			return weekdays;
+		}
+
+		return [];
+	}, [
+		userPrefsData,
 		eventsPerDay,
 		startDate,
 		days,
 		fullWeek,
 		endDate,
-	);
+		onMoveTask
+	]);
+
+	if (loadingUserPrefs) return <Loading />;
+	if (errorUserPrefs) throw errorUserPrefs;
 
 	return (
 		<LeftBarContainer>
@@ -193,28 +243,7 @@ function LeftBarSchedule({
 							index={day.tasks.length}
 							scheduledFor={day.date}
 							isOff={!day.workedDay}
-							onMove={({
-								id,
-								type,
-								linkedCustomer,
-								attachments,
-								index: position,
-								scheduledFor,
-							}) => {
-								onMoveTask({
-									task: {
-										id,
-										type,
-										linkedCustomer,
-										attachments,
-									},
-									scheduledFor,
-									position:
-										typeof position === 'number'
-											? position
-											: day.tasks.length,
-								});
-							}}
+							onMove={day.onMove}
 						/>
 					))}
 				</LeftBarContent>

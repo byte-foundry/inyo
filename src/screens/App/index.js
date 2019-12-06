@@ -34,28 +34,25 @@ function App({history}) {
 				<Switch>
 					<Route
 						path="/app/dashboard"
-						component={withHeader(Dashboard)}
+						render={withHeader(Dashboard)}
 					/>
-					<Route
-						path="/app/account"
-						component={withHeader(Account)}
-					/>
-					<Route path="/app/tasks" component={withHeader(Tasks)} />
-					<Route path="/app/tags" component={withHeader(Tags)} />
-					<Route
-						path="/app/projects"
-						component={withHeader(Projects)}
-					/>
+					<Route path="/app/account" render={withHeader(Account)} />
+					<Route path="/app/tasks" render={withHeader(Tasks)} />
+					<Route path="/app/tags" render={withHeader(Tags)} />
+					<Route path="/app/projects" render={withHeader(Projects)} />
 					<Route
 						path="/app/collaborators"
-						component={withHeader(CollaboratorList)}
+						render={withHeader(CollaboratorList)}
 					/>
 					<Route
 						path="/app/customers"
-						component={withHeader(CustomerList)}
+						render={withHeader(CustomerList)}
 					/>
-					<Route path="/app/stats" component={withHeader(Stats)} />
-					<Route path="/app/onboarding" component={Onboarding} />
+					<Route path="/app/stats" render={withHeader(Stats)} />
+					<Route
+						path="/app/onboarding"
+						render={() => <Onboarding />}
+					/>
 					<Redirect to="/app/dashboard" />
 				</Switch>
 			</AppMain>

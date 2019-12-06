@@ -18,7 +18,12 @@ const useCalendar = (account, calendarOptions) => {
 		endWorkAt
 	].join('_');
 
-	if (account && account.api && account.api.auth2) {
+	if (
+		account &&
+		account.api &&
+		account.api.auth2 &&
+		account.api.auth2.getAuthInstance()
+	) {
 		account.api.auth2.getAuthInstance().isSignedIn.listen(isSignedIn => {
 			if (!isSignedIn) {
 				cache = {};

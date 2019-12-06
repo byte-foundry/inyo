@@ -1,8 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
-import React, {
-	useCallback, useEffect, useRef, useState,
-} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
@@ -11,7 +9,7 @@ import {
 	darkGrey,
 	primaryGrey,
 	primaryRed,
-	primaryWhite,
+	primaryWhite
 } from '../../utils/new/design-system';
 import {GET_REMINDERS} from '../../utils/queries';
 import useOnClickOutside from '../../utils/useOnClickOutside';
@@ -27,7 +25,7 @@ const Dropdown = styled('div')`
 	position: absolute;
 	width: 450px;
 	box-shadow: 0 0 10px ${primaryGrey};
-	border-radius: 3px;
+	border-radius: 8px;
 	background: ${primaryWhite};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
@@ -43,19 +41,20 @@ const Icon = styled('button')`
 `;
 
 const AssistantActionsContainer = styled('div')`
-	${props => (props.mobile
-		? `
+	${props =>
+		props.mobile
+			? `
 		display: none;
 		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			display: block;
 		}
 	`
-		: `
+			: `
 		display: block;
 		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			display: none;
 		}
-	`)}
+	`}
 `;
 
 const Number = styled('div')`
@@ -82,15 +81,15 @@ const AssistantActions = ({mobile}) => {
 	const [isOpen, setOpen] = useState(false);
 	const {data, refetch, loading} = useQuery(GET_REMINDERS, {
 		pollInterval: 1000 * 60,
-		context: {batch: false},
+		context: {batch: false}
 	});
 
 	let pendingReminders = 0;
 
 	if (!loading) {
-		pendingReminders
-			= data
-			&& data.reminders.filter(reminder => reminder.status === 'PENDING')
+		pendingReminders =
+			data &&
+			data.reminders.filter(reminder => reminder.status === 'PENDING')
 				.length;
 	}
 
@@ -134,22 +133,23 @@ const AssistantActions = ({mobile}) => {
 						tabIndex="-1"
 						style={{
 							top:
-								icon.current.getBoundingClientRect().top
-								+ icon.current.getBoundingClientRect().height,
+								icon.current.getBoundingClientRect().top +
+								icon.current.getBoundingClientRect().height,
 							left: mobile
 								? 0
 								: icon.current.getBoundingClientRect().left,
 							height: mobile
 								? `calc(100% - ${icon.current.getBoundingClientRect()
-									.top
-										+ icon.current.getBoundingClientRect()
-											.height
-										+ 20}px`
-								: undefined,
+										.top +
+										icon.current.getBoundingClientRect()
+											.height +
+										20}px`
+								: undefined
 						}}
 					>
 						<SidebarDashboardInfos
-							onOpenSubPortal={isSubPortalOpen => setPreventClose(isSubPortalOpen)
+							onOpenSubPortal={isSubPortalOpen =>
+								setPreventClose(isSubPortalOpen)
 							}
 						/>
 					</Dropdown>

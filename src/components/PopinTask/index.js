@@ -15,7 +15,7 @@ import {
 	Button,
 	primaryBlack,
 	primaryGrey,
-	primaryPurple,
+	primaryPurple
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import CheckList from '../CheckList';
@@ -31,6 +31,13 @@ import UnitWithSuggestionsForm from '../UnitWithSuggestionsForm';
 
 const Container = styled('div')`
 	font-size: 14px;
+	padding: 1rem 0.5rem 1.5rem 0;
+
+	color: ${primaryBlack};
+
+	${Button} {
+		color: ${primaryGrey};
+	}
 `;
 
 const UnitWithSuggestionsFormCondensed = styled(UnitWithSuggestionsForm)`
@@ -54,17 +61,17 @@ const Input = styled('input')`
 	margin-bottom: 5px;
 	border-bottom: 2px solid
 		${props => (props.value ? primaryGrey : primaryPurple)};
-	font-size: 18px;
+	font-size: 20px;
 	width: 100%;
-	color: ${primaryPurple};
+	color: ${primaryBlack};
 
 	:hover {
 		border-bottom-color: ${primaryPurple};
 	}
 
 	&::placeholder {
-		color: ${primaryBlack};
-		font-size: 15px;
+		color: ${primaryGrey};
+		font-size: 20px;
 		align-items: center;
 		font-family: 'Work Sans', sans-serif;
 	}
@@ -80,9 +87,18 @@ const Icon = styled('div')`
 	cursor: pointer;
 	transform: scale(0.6);
 
-	${props => props.right
-		&& css`
+	${props =>
+		props.right &&
+		css`
 			margin-left: auto;
+		`}
+
+	${props =>
+		props.center &&
+		css`
+			display: grid;
+			align-items: center;
+			justify-content: center;
 		`}
 `;
 
@@ -118,10 +134,10 @@ const TYPES = [
 		get description() {
 			return fbt(
 				"Créer une section pour classer les tâches d'un projet",
-				'section description',
+				'section description'
 			);
-		},
-	},
+		}
+	}
 ];
 
 const PopinTask = ({
@@ -130,7 +146,7 @@ const PopinTask = ({
 	onSubmitTask,
 	defaultValue,
 	currentProjectId,
-	defaultScheduledFor,
+	defaultScheduledFor
 }) => {
 	const history = useHistory();
 	const [createTag] = useMutation(CREATE_TAG);
@@ -220,7 +236,7 @@ const PopinTask = ({
 		<Container ref={ref}>
 			<Options>
 				<Tooltip label={selectedType.name}>
-					<Icon>{selectedType.icon}</Icon>
+					<Icon center>{selectedType.icon}</Icon>
 				</Tooltip>
 				<InputContainer id="task-input-container">
 					<Tooltip
@@ -251,29 +267,27 @@ const PopinTask = ({
 							value={value}
 							onFocus={() => setFocus(true)}
 							onBlur={() => setFocus(false)}
-							onKeyDown={async (e) => {
+							onKeyDown={async e => {
 								if (e.key === 'ArrowUp' && onSubmitProject) {
 									onSubmitProject({
-										name: value,
+										name: value
 									});
 									resetForm();
-								}
-								else if (
-									e.key === 'ArrowDown'
-									&& onSubmitSection
+								} else if (
+									e.key === 'ArrowDown' &&
+									onSubmitSection
 								) {
 									onSubmitSection({
-										name: value,
+										name: value
 										// TODO : after current section
 									});
 									resetForm();
-								}
-								else if (e.key === 'Enter') {
+								} else if (e.key === 'Enter') {
 									e.preventDefault();
 
 									if (type === 'SECTION') {
 										await onSubmitSection({
-											name: value,
+											name: value
 										});
 										resetForm();
 
@@ -291,7 +305,7 @@ const PopinTask = ({
 										unit: parseFloat(unit),
 										scheduledFor: isCustomerTask(type)
 											? undefined
-											: scheduledFor,
+											: scheduledFor
 									};
 
 									if (type === 'CONTENT_ACQUISITION') {
@@ -299,14 +313,14 @@ const PopinTask = ({
 											...common,
 											description: `\n# content-acquisition-list\n${files
 												.map(
-													({checked, name}) => `- [${
-														checked ? 'x' : ' '
-													}] ${name}`,
+													({checked, name}) =>
+														`- [${
+															checked ? 'x' : ' '
+														}] ${name}`
 												)
-												.join('\n')}`,
+												.join('\n')}`
 										});
-									}
-									else {
+									} else {
 										await onSubmitTask(common);
 									}
 
@@ -331,10 +345,11 @@ const PopinTask = ({
 							<Tooltip label={fbt('Projet', 'project name type')}>
 								<Icon
 									right
-									onClick={() => history.push({
-										pathname: '/app/projects/create',
-										state: {name: value},
-									})
+									onClick={() =>
+										history.push({
+											pathname: '/app/projects/create',
+											state: {name: value}
+										})
 									}
 								>
 									<MaterialIcon
@@ -364,14 +379,14 @@ const PopinTask = ({
 						<UnitWithSuggestionsFormCondensed
 							small
 							value={unit}
-							onChange={(newUnit) => {
+							onChange={newUnit => {
 								setUnit(newUnit);
 								window.Intercom(
 									'trackEvent',
 									'estimated-time-fill-input',
 									{
-										estimation: unit,
-									},
+										estimation: unit
+									}
 								);
 							}}
 						/>
@@ -392,33 +407,33 @@ const PopinTask = ({
 								value: tag.id,
 								label: tag.name,
 								colorBg: tag.colorBg,
-								colorText: tag.colorText,
+								colorText: tag.colorText
 							}))}
 							onCreateOption={async (
 								name,
 								colorBg,
-								colorText,
+								colorText
 							) => {
 								const {
-									data: {createTag: tag},
+									data: {createTag: tag}
 								} = await createTag({
 									variables: {
 										name,
 										colorBg,
-										colorText,
-									},
+										colorText
+									}
 								});
 
 								setTags([...tags, tag]);
 							}}
-							onChange={(newTags) => {
+							onChange={newTags => {
 								setTags(
 									(newTags || []).map(tag => ({
 										id: tag.value,
 										name: tag.label,
 										colorBg: tag.colorBg,
-										colorText: tag.colorText,
-									})),
+										colorText: tag.colorText
+									}))
 								);
 							}}
 							style={{margin: '0'}}
@@ -431,7 +446,7 @@ const PopinTask = ({
 						<MaterialIcon icon="folder_open" size="tiny" />
 						<ProjectsDropdown
 							selectedId={selectedProject}
-							onChange={(param) => {
+							onChange={param => {
 								const {value: id} = param || {};
 
 								setSelectedProject(id);
@@ -451,7 +466,7 @@ const PopinTask = ({
 						<MaterialIcon icon="person_outline" size="tiny" />
 						<CustomersDropdown
 							selectedId={customer}
-							onChange={(param) => {
+							onChange={param => {
 								const {value: id} = param || {};
 
 								setCustomer(id);
@@ -472,7 +487,7 @@ const PopinTask = ({
 						<ProjectCollaboratorsDropdown
 							projectId={selectedProject}
 							selectedId={assignedCollaborator}
-							onChange={(param) => {
+							onChange={param => {
 								const {value: id} = param || {};
 
 								setAssignedCollaborator(id);
@@ -510,7 +525,7 @@ const PopinTask = ({
 								</>
 							) : (
 								<Button
-									icon="+"
+									link
 									onClick={() => setEditDate('dueDate')}
 								>
 									<fbt desc="popin task add deadline">
@@ -521,7 +536,7 @@ const PopinTask = ({
 							{editDate === 'dueDate' && (
 								<DateInput
 									date={moment(dueDate || new Date())}
-									onDateChange={(date) => {
+									onDateChange={date => {
 										setDueDate(date.toISOString());
 										setEditDate(false);
 									}}
@@ -539,11 +554,12 @@ const PopinTask = ({
 							{scheduledFor ? (
 								<>
 									<DueDate
-										onClick={() => setEditDate('scheduledFor')
+										onClick={() =>
+											setEditDate('scheduledFor')
 										}
 									>
 										{moment(scheduledFor).format(
-											'dddd Do MMMM',
+											'dddd Do MMMM'
 										)}
 									</DueDate>
 									<IconButton
@@ -555,18 +571,18 @@ const PopinTask = ({
 								</>
 							) : (
 								<Button
-									icon="+"
+									link
 									onClick={() => setEditDate('scheduledFor')}
 								>
 									<fbt desc="popin task add to day">
-										Ajouter cette tâche à une journée
+										Ajouter au programme
 									</fbt>
 								</Button>
 							)}
 							{editDate === 'scheduledFor' && (
 								<DateInput
 									date={moment(scheduledFor || new Date())}
-									onDateChange={(date) => {
+									onDateChange={date => {
 										setScheduledFor(date.toISOString());
 										setEditDate(false);
 									}}
@@ -610,15 +626,13 @@ const PopinTask = ({
 							if (!value.startsWith('/')) {
 								if (type === 'CONTENT_ACQUISITION') {
 									// check reauired infos here
-								}
-								else if (type === 'SECTION') {
+								} else if (type === 'SECTION') {
 									onSubmitSection({
-										name: value,
+										name: value
 									});
 									setValue('');
 									setUnit(0);
-								}
-								else {
+								} else {
 									onSubmitTask({
 										name: value,
 										type: type || 'DEFAULT',
@@ -627,7 +641,7 @@ const PopinTask = ({
 										linkedCustomerId:
 											customer && customer.id,
 										tags: tags.map(({id}) => id),
-										projectId: selectedProject,
+										projectId: selectedProject
 									});
 									setValue('');
 								}
@@ -667,7 +681,7 @@ const PopinTask = ({
 PopinTask.defaultProps = {
 	defaultValue: '',
 	onSubmitTask: () => {},
-	withProject: false,
+	withProject: false
 };
 
 PopinTask.propTypes = {
@@ -675,7 +689,7 @@ PopinTask.propTypes = {
 	withProject: PropTypes.bool,
 	onSubmitTask: PropTypes.func,
 	onSubmitProject: PropTypes.func,
-	onSubmitSection: PropTypes.func,
+	onSubmitSection: PropTypes.func
 };
 
 export default PopinTask;

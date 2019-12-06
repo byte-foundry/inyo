@@ -66,7 +66,7 @@ const getButtonHoveredBorderColor = props => {
 };
 
 export const Button = styled('button')`
-	font-size: 13px;
+	font-size: 14px;
 	font-family: 'Work Sans', sans-serif;
 	padding: 0.3rem 0.8rem;
 	font-weight: ${props => {
@@ -1058,7 +1058,7 @@ export const Dropdown = styled('div')`
 	position: absolute;
 	width: 400px;
 	box-shadow: 0 0 10px ${primaryGrey};
-	border-radius: 3px;
+	border-radius: 8px;
 	background: ${primaryWhite};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
@@ -1071,7 +1071,7 @@ export const CheckBoxFakeLabel = styled('div')`
 `;
 
 export const CheckBoxLabel = styled('label')`
-	font-size: 13px;
+	font-size: 14px;
 	margin: ${props => (props.condensed ? '0' : '0.5em 0')};
 	color: ${props => (props.color ? props.color : primaryPurple)};
 	cursor: pointer;

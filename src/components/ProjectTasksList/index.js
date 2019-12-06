@@ -700,7 +700,6 @@ function ProjectTasksList({items, projectId, sectionId, history, location}) {
 					position={section.position}
 					sections={sections}
 				>
-					{section.position}
 					<SectionTitle
 						onClickTrash={() => setRemoveSectionModalOpen(section)}
 						placeholder={

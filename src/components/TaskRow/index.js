@@ -257,7 +257,6 @@ function TaskRow({
 
 	return (
 		<div ref={forwardedRef} id={`task-${item.type}`}>
-			{item.position}
 			<TaskContainer noData={noData} isDraggable={isDraggable}>
 				<TaskAdd />
 				<TaskIcon

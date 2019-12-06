@@ -4,7 +4,12 @@ import React, {useState} from 'react';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {formatName, isCustomerTask} from '../../utils/functions';
-import {ADD_ITEM, ADD_SECTION, UPDATE_PROJECT} from '../../utils/mutations';
+import {
+	ADD_ITEM,
+	ADD_SECTION,
+	FOCUS_TASK,
+	UPDATE_PROJECT,
+} from '../../utils/mutations';
 import {P} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import ConfirmModal, {useConfirmation} from '../ConfirmModal';
@@ -32,6 +37,7 @@ const CreateTask = ({
 	const [createTask] = useMutation(ADD_ITEM);
 	const [addSection] = useMutation(ADD_SECTION);
 	const [updateProject] = useMutation(UPDATE_PROJECT);
+	const [focusTask] = useMutation(FOCUS_TASK);
 	const [confirmModal, askConfirmationNotification] = useConfirmation();
 	const {data: currentProjectData, loading, error} = useQuery(
 		GET_PROJECT_DATA,
@@ -152,7 +158,7 @@ const CreateTask = ({
 							delete task.projectId;
 						}
 
-						return createTask({
+						const response = await createTask({
 							variables: {
 								projectId: currentProjectId,
 								sectionId: createAfterSection
@@ -164,6 +170,15 @@ const CreateTask = ({
 								...task,
 							},
 						});
+
+						if (task.scheduledFor) {
+							focusTask({
+								variables: {
+									itemId: response.data.addItem.id,
+									for: task.scheduledFor,
+								},
+							});
+						}
 					}}
 					currentProjectId={currentProjectId}
 					{...props}

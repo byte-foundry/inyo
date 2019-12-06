@@ -335,19 +335,21 @@ const UserCompanyForm = ({data, buttonText}) => {
 											)}
 
 											<UploadButtons>
-												<Button
-													type="button"
-													onClick={() =>
-														setisOpenImagePickerModal(
-															true
-														)
-													}
-												>
-													<fbt desc="Company's banner upload button">
-														Choisir une image
-														prédéfinie
-													</fbt>
-												</Button>
+												{/*
+													<Button
+														type="button"
+														onClick={() =>
+															setisOpenImagePickerModal(
+																true
+															)
+														}
+													>
+														<fbt desc="Company's banner upload button">
+															Choisir une image
+															prédéfinie
+														</fbt>
+													</Button>}
+												*/}
 												{isOpenImagePickerModal && (
 													<ImagePickerModal
 														onDismiss={() =>

@@ -1,11 +1,36 @@
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import MaterialIcon from "../MaterialIcon";
+import {
+	primaryPurple,
+	primaryGrey,
+	primaryBlack
+} from "../../utils/new/design-system";
 
 import { CATEGORY_NAMES, EMAIL_NAME_BY_TYPE } from "../../utils/constants";
 
+const CategoryWrap = styled("div")`
+	margin-bottom: 1rem;
+`;
+
 const CategoryHeader = styled("div")`
 	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 500;
+	letter-spacing: 0.03rem;
+	display: flex;
+	flex-direction: row;
+	align-items: baseline;
+
+	i {
+		margin-right: 10px;
+	}
+
+	&:hover {
+		color: ${primaryPurple};
+		cursor: pointer;
+	}
 `;
 
 const TypesContainer = styled("div")`
@@ -16,11 +41,32 @@ const TypesContainer = styled("div")`
 `;
 
 const TypeElem = styled(Link)`
-	display: block;
 	text-decoration: none;
-	padding: 10px 18px;
+	padding: 5px 16px 5px 12px;
 	border-radius: 20px;
 	color: inherit;
+	display: inline-flex;
+	flex-direction: row;
+
+	i {
+		margin-right: 8px;
+		transform: scale(0.75);
+		color: ${props => (props.active ? primaryBlack : "")} !important;
+	}
+
+	&:hover {
+		i {
+			color: ${primaryBlack} !important;
+		}
+	}
+
+	&:visited:hover,
+	&:hover,
+	&:focused {
+		text-decoration: none;
+		background: red !important;
+		color: ${primaryPurple};
+	}
 
 	${props =>
 		props.active
@@ -28,17 +74,6 @@ const TypeElem = styled(Link)`
 		background: #F1F3F4;
 	`
 			: ""}
-
-	&:visited {
-		color: inherit;
-		text-decoration: none;
-	}
-
-	&:hover,
-	&:focused {
-		text-decoration: none;
-		background: #f1f3f4;
-	}
 `;
 
 const CustomEmailSidebarCategory = ({ category, opened }) => {
@@ -46,8 +81,12 @@ const CustomEmailSidebarCategory = ({ category, opened }) => {
 	const { category: categoryParam, type: typeParam } = useParams();
 
 	return (
-		<div>
+		<CategoryWrap>
 			<CategoryHeader onClick={() => openCategory(!open)}>
+				<MaterialIcon
+					icon={open ? "keyboard_arrow_down" : "keyboard_arrow_right"}
+					size="tiny"
+				/>
 				{CATEGORY_NAMES[category.name].text()}
 			</CategoryHeader>
 			<TypesContainer opened={open || categoryParam === category.name}>
@@ -59,11 +98,16 @@ const CustomEmailSidebarCategory = ({ category, opened }) => {
 						}
 						to={`/app/emails/${category.name}/${type.name}`}
 					>
+						<MaterialIcon
+							icon="email"
+							size="tiny"
+							color={primaryGrey}
+						/>
 						{EMAIL_NAME_BY_TYPE[type.name].text()}
 					</TypeElem>
 				))}
 			</TypesContainer>
-		</div>
+		</CategoryWrap>
 	);
 };
 

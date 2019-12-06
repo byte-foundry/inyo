@@ -243,7 +243,7 @@ export const EMAIL_NAME_BY_TYPE = {
 		text: () => fbt("2nde relance", "second reminder customer email")
 	},
 	LAST: {
-		text: () => fbt("Dernière chance", "third reminder customer email")
+		text: () => fbt("Dernière relance", "third reminder customer email")
 	},
 	INVOICE_DELAY: {
 		text: () => fbt("Activation de la tâche", "first invoice email")
@@ -255,13 +255,13 @@ export const EMAIL_NAME_BY_TYPE = {
 		text: () => fbt("2nde relance", "second reminder invoice email")
 	},
 	INVOICE_THIRD: {
-		text: () => fbt("3ème relance", "third reminder invoice email")
+		text: () => fbt("3e relance", "third reminder invoice email")
 	},
 	INVOICE_FOURTH: {
-		text: () => fbt("4ème relance", "fourth reminder invoice email")
+		text: () => fbt("4e relance", "fourth reminder invoice email")
 	},
 	INVOICE_LAST: {
-		text: () => fbt("Dernière chance", "fitfh reminder invoice email")
+		text: () => fbt("Dernière relance", "fitfh reminder invoice email")
 	},
 	CUSTOMER_REPORT: {
 		text: () => fbt("Rapport client", "customer report email")

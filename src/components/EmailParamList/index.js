@@ -2,17 +2,30 @@ import styled from "@emotion/styled";
 import React from "react";
 
 import { FlexRow } from "../../utils/content";
+import {
+	lightGrey,
+	mediumGrey,
+	primaryBlack
+} from "../../utils/new/design-system";
 
 const Param = styled("div")`
-	margin-right: 1rem;
-	background: #f1f3f4;
+	margin: 0 0 0.5rem 0.5rem;
+	background: ${lightGrey};
+	color: #505050;
 	border-radius: 20px;
-	padding: 10px 18px;
-	margin-bottom: 0.5rem;
+	padding: 8px 18px;
+	font-size: 12px;
+
+	&:hover {
+		background: ${mediumGrey};
+		color: ${primaryBlack};
+		cursor: pointer;
+	}
 `;
 
 const EmailParamListContainer = styled(FlexRow)`
 	flex-wrap: wrap;
+	margin-top: 2rem;
 `;
 
 const EmailParamList = ({ params, editor }) => {

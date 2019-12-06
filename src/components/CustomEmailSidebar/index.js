@@ -5,6 +5,8 @@ import CustomEmailSidebarCategory from "../CustomEmailSidebarCategory";
 
 const CustomEmailSidebarContainer = styled("div")`
 	flex: 0 0 250px;
+	margin-right: 2rem;
+	margin-top: 2rem;
 `;
 
 const CustomEmailSidebar = ({ categories }) => {

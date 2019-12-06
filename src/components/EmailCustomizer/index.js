@@ -5,38 +5,66 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { useQuery, useMutation } from "../../utils/apollo-hooks";
 import { Loading } from "../../utils/content";
-import { Button } from "../../utils/new/design-system";
+import {
+	Button,
+	primaryGrey,
+	mediumGrey,
+	primaryBlack,
+	primaryPurple,
+	lightGrey,
+	primaryWhite
+} from "../../utils/new/design-system";
 import {
 	SEND_CUSTOM_EMAIL_PREVIEW,
 	UPDATE_EMAIL_TEMPLATE
 } from "../../utils/mutations";
 import { GET_EMAIL_TEMPLATE } from "../../utils/queries";
 import EmailParamList from "../EmailParamList";
+import useUserInfos from "../../utils/useUserInfos";
 
 const MailContainer = styled("div")`
 	border: 1px solid #f1f3f4;
 	box-sizing: border-box;
 	box-shadow: 4px 4px 9px rgba(0, 0, 0, 0.12);
 	border-radius: 12px;
+	margin-bottom: 3rem;
+	padding-bottom: 2rem;
 `;
 const MailContent = styled("div")`
 	padding: 1rem;
+	color: ${primaryGrey};
 `;
+
 const MailTopBar = styled("div")`
 	background: #e6e6e6;
 	border-radius: 8px 8px 0px 0px;
 	height: 1.5rem;
+	position: relative;
+
+	&::before {
+		content: "···";
+		font-size: 70px;
+		position: relative;
+		top: 11px;
+		left: 1rem;
+		line-height: 0;
+		color: ${primaryGrey};
+		-webkit-text-stroke: 1px ${primaryGrey};
+		-webkit-text-fill-color: transparent;
+	}
 `;
 const MailAddresses = styled("div")``;
 const MailFromAndTo = styled("div")`
 	display: flex;
 	flex-direction: row;
+	text-transform: lowercase;
 `;
 const MailAddressLabel = styled("div")`
 	font-size: 16px;
 	font-weight: 500;
 	color: #777;
 	margin-right: 0.7rem;
+	text-transform: capitalize;
 `;
 const MailAddress = styled("div")`
 	font-size: 16px;
@@ -62,16 +90,40 @@ const TestEmailLinkContainer = styled("div")`
 	margin-bottom: 1rem;
 `;
 const TestEmailLink = styled("div")`
-	color: #684ebc;
+	color: ${primaryPurple};
+	border-radius: 30px;
+	padding: 3px 12px;
+
+	&:hover {
+		cursor: pointer;
+		color: ${primaryPurple};
+		background-color: ${lightGrey};
+	}
 `;
-const MailText = styled("div")``;
+
+const MailText = styled("div")`
+	padding-top: 2rem;
+	line-height: 1.7;
+	color: ${primaryBlack};
+`;
 
 const ParamDisplay = styled("span")`
 	background: ${props => (props.isSelected ? "#684EBC" : "#F1F3F4")};
 	border-radius: 20px;
-	padding: 2px 12px;
+	padding: 0px 10px 2px;
 	color: ${props => (props.isSelected ? "#F1F3F4" : "#684EBC")};
 	user-select: none;
+
+	&:hover {
+		background: #684ebc;
+		color: #f1f3f4;
+		cursor: pointer;
+	}
+`;
+
+const ButtonsWrap = styled("div")`
+	display: flex;
+	justify-content: space-between;
 `;
 
 const renderInline = ({ attributes, node, isSelected }, editor, next) => {
@@ -114,6 +166,7 @@ const initialValue = {
 };
 
 const EmailCustomizer = ({ emailType }) => {
+	const { assistantName } = useUserInfos();
 	const [contentValue, setContentValue] = useState(
 		Value.fromJSON(initialValue)
 	);
@@ -172,11 +225,11 @@ const EmailCustomizer = ({ emailType }) => {
 					<MailAddresses>
 						<MailFromAndTo>
 							<MailAddressLabel>De :</MailAddressLabel>
-							<MailAddress>toto@gmail.com</MailAddress>
+							<MailAddress>{assistantName}@inyo.me</MailAddress>
 						</MailFromAndTo>
 						<MailFromAndTo>
 							<MailAddressLabel>À :</MailAddressLabel>
-							<MailAddress>tutu@hotmail.fr</MailAddress>
+							<MailAddress>mail@client.com</MailAddress>
 						</MailFromAndTo>
 					</MailAddresses>
 					<MailSubject>
@@ -220,29 +273,35 @@ const EmailCustomizer = ({ emailType }) => {
 					</MailText>
 				</MailContent>
 			</MailContainer>
-			<Button
-				onClick={() => {
-					updateEmailTemplate({
-						variables: {
-							templateId: data.emailTemplate.id,
-							subject: subjectEditorRef.current.value,
-							content: contentEditorRef.current.value
-						}
-					});
-				}}
-			>
-				Enregistrer ce modèle
-			</Button>
-			<Button
-				onClick={() => {
-					console.log("Subject:");
-					console.log(JSON.stringify(subjectEditorRef.current.value));
-					console.log("Content:");
-					console.log(JSON.stringify(contentEditorRef.current.value));
-				}}
-			>
-				Print in console
-			</Button>
+			<ButtonsWrap>
+				<Button
+					onClick={() => {
+						console.log("Subject:");
+						console.log(
+							JSON.stringify(subjectEditorRef.current.value)
+						);
+						console.log("Content:");
+						console.log(
+							JSON.stringify(contentEditorRef.current.value)
+						);
+					}}
+				>
+					Print in console
+				</Button>
+				<Button
+					onClick={() => {
+						updateEmailTemplate({
+							variables: {
+								templateId: data.emailTemplate.id,
+								subject: subjectEditorRef.current.value,
+								content: contentEditorRef.current.value
+							}
+						});
+					}}
+				>
+					Enregistrer ce modèle
+				</Button>
+			</ButtonsWrap>
 		</div>
 	);
 };

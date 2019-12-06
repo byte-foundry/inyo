@@ -1,9 +1,9 @@
-import {css} from '@emotion/core';
-import styled from '@emotion/styled/macro';
-import React, {forwardRef} from 'react';
-import {Link} from 'react-router-dom';
-import ReactSelect from 'react-select';
-import Shevy from 'shevyjs';
+import { css } from "@emotion/core";
+import styled from "@emotion/styled/macro";
+import React, { forwardRef } from "react";
+import { Link } from "react-router-dom";
+import ReactSelect from "react-select";
+import Shevy from "shevyjs";
 
 import {
 	accentGrey,
@@ -18,31 +18,31 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryRed,
-	primaryWhite,
-} from '../colors';
-import {BREAKPOINTS, ITEM_TYPES, itemStatuses} from '../constants';
-import Pencil from '../icons/pencil.svg';
+	primaryWhite
+} from "../colors";
+import { BREAKPOINTS, ITEM_TYPES, itemStatuses } from "../constants";
+import Pencil from "../icons/pencil.svg";
 
-export * from '../colors';
+export * from "../colors";
 
 const shevy = new Shevy({
-	baseFontSize: '14px',
+	baseFontSize: "14px"
 });
 
-const {body} = shevy;
+const { body } = shevy;
 
-export const Body = styled('div')`
+export const Body = styled("div")`
 	${body};
 `;
 
-const getButtonHoveredColor = (props) => {
+const getButtonHoveredColor = props => {
 	if (props.white || props.link) {
 		return primaryPurple;
 	}
 	return primaryWhite;
 };
 
-const getButtonHoveredBackground = (props) => {
+const getButtonHoveredBackground = props => {
 	if (props.red) {
 		return primaryRed;
 	}
@@ -52,9 +52,9 @@ const getButtonHoveredBackground = (props) => {
 	return primaryPurple;
 };
 
-const getButtonHoveredBorderColor = (props) => {
+const getButtonHoveredBorderColor = props => {
 	if (props.primary) {
-		return 'transparent';
+		return "transparent";
 	}
 	if (props.red) {
 		return primaryRed;
@@ -65,41 +65,41 @@ const getButtonHoveredBorderColor = (props) => {
 	return primaryPurple;
 };
 
-export const Button = styled('button')`
+export const Button = styled("button")`
 	font-size: 13px;
 	font-family: 'Work Sans', sans-serif;
 	padding: 0.3rem 0.8rem;
-	font-weight: ${(props) => {
+	font-weight: ${props => {
 		if (props.white) {
-			return '500';
+			return "500";
 		}
-		return '400';
+		return "400";
 	}};
-	letter-spacing: ${(props) => {
+	letter-spacing: ${props => {
 		if (props.white) {
-			return '0.01rem';
+			return "0.01rem";
 		}
 		return 0;
 	}};
-	border: ${(props) => {
+	border: ${props => {
 		if (props.white) {
-			return '2px solid #333';
+			return "2px solid #333";
 		}
-		return '1px solid #333';
+		return "1px solid #333";
 	}};
 	border-radius: 30px;
 	cursor: pointer;
 	text-decoration: none;
-	background: ${(props) => {
+	background: ${props => {
 		if (props.primary) {
 			return primaryPurple;
 		}
 		if (props.white || props.grey) {
-			return 'transparent';
+			return "transparent";
 		}
 		return primaryWhite;
 	}};
-	color: ${(props) => {
+	color: ${props => {
 		if (props.link && props.disabled) {
 			return primaryGrey;
 		}
@@ -119,24 +119,24 @@ export const Button = styled('button')`
 	}};
 
 	svg {
-		fill: ${(props) => {
-		if (props.link && props.disabled) {
-			return primaryGrey;
-		}
-		if (props.primary) {
-			return primaryWhite;
-		}
-		if (props.red) {
-			return primaryRed;
-		}
-		if (props.grey) {
-			return primaryGrey;
-		}
-		if (props.white) {
-			return primaryWhite;
-		}
-		return primaryPurple;
-	}};
+		fill: ${props => {
+			if (props.link && props.disabled) {
+				return primaryGrey;
+			}
+			if (props.primary) {
+				return primaryWhite;
+			}
+			if (props.red) {
+				return primaryRed;
+			}
+			if (props.grey) {
+				return primaryGrey;
+			}
+			if (props.white) {
+				return primaryWhite;
+			}
+			return primaryPurple;
+		}};
 	}
 
 	border-color: currentColor;
@@ -145,8 +145,9 @@ export const Button = styled('button')`
   align-items: center;
 	justify-content: center;
 
-	${props => !props.disabled
-		&& css`
+	${props =>
+		!props.disabled &&
+		css`
 			&:hover {
 				svg {
 					fill: ${getButtonHoveredColor(props)};
@@ -161,40 +162,46 @@ export const Button = styled('button')`
 			}
 		`}
 
-		${props => props.disabled
-			&& css`
+		${props =>
+			props.disabled &&
+			css`
 				opacity: 0.5;
 			`}
 
-	${props => props.textIcon
-		&& `
+	${props =>
+		props.textIcon &&
+		`
 		font-weight: 500;
 	`}
 
-	${props => props.big
-		&& `
+	${props =>
+		props.big &&
+		`
 		font-size: 14px;
 		font-weight: 500;
 		padding: .8rem 1.6rem;
 	`}
 
-	${props => props.icon
-		&& `&::before {
+	${props =>
+		props.icon &&
+		`&::before {
 			content: '${props.icon}';
 			margin-right: .4rem;
 			color: currentColor;
 			font-weight: 500;
 		}`};
 
-	${props => props.tiny
-		&& `
+	${props =>
+		props.tiny &&
+		`
 		padding: 0;
 		width: 30px;
 		height: 30px;
 	`}
 
-	${props => props.link
-		&& `
+	${props =>
+		props.link &&
+		`
 			padding: 0;
 			margin: 0;
 			border: none;
@@ -211,13 +218,15 @@ export const Button = styled('button')`
 			}
 		`}
 
-	${props => props.centered
-		&& `
+	${props =>
+		props.centered &&
+		`
 		margin: 0 auto;
 	`}
 
-	${props => props.aligned
-		&& `
+	${props =>
+		props.aligned &&
+		`
 		& + button {
 			margin-left: .5rem;
 		}
@@ -229,7 +238,7 @@ export const Button = styled('button')`
 
 	i {
 		color: inherit;
-		margin-right: ${props => (props.link ? 0 : '10px')};
+		margin-right: ${props => (props.link ? 0 : "10px")};
 	}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
@@ -241,15 +250,15 @@ export const Button = styled('button')`
 
 export const ButtonLink = Button.withComponent(Link);
 
-export const ProjectHeading = styled('div')`
+export const ProjectHeading = styled("div")`
 	color: ${accentGrey};
 	font-size: 32px;
 `;
 
-export const Heading = styled('h1')`
+export const Heading = styled("h1")`
 	font-weight: 500;
-	color: ${primaryPurple};
-	font-size: 32px;
+	color: ${primaryBlack};
+	font-size: 1.5rem;
 	margin-top: 0;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
@@ -269,7 +278,7 @@ export const HeadingLink = styled(Link)`
 	}
 `;
 
-export const HeadingRow = styled('div')`
+export const HeadingRow = styled("div")`
 	display: flex;
 
 	* ~ * {
@@ -277,13 +286,13 @@ export const HeadingRow = styled('div')`
 	}
 `;
 
-export const TaskHeading = styled('h2')`
+export const TaskHeading = styled("h2")`
 	color: ${primaryGrey};
 	font-size: 18px;
 	line-height: 1.5;
 	font-weight: 400;
 	flex: 1 0
-		${props => (props.small ? 'calc(100% - 458px)' : 'calc(100% - 218px)')};
+		${props => (props.small ? "calc(100% - 458px)" : "calc(100% - 218px)")};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 14px;
@@ -291,7 +300,7 @@ export const TaskHeading = styled('h2')`
 	}
 `;
 
-export const SubHeading = styled('div')`
+export const SubHeading = styled("div")`
 	text-transform: uppercase;
 	font-size: 12px;
 	letter-spacing: 0.5px;
@@ -301,30 +310,30 @@ export const SubHeading = styled('div')`
 	align-items: center;
 `;
 
-export const P = styled('p')`
+export const P = styled("p")`
 	font-size: 14px;
 	line-height: 1.6em;
 	color: ${primaryBlack};
 `;
 
-export const HR = styled('hr')`
+export const HR = styled("hr")`
 	margin: 2rem 0;
 	border: 0;
 	border-top: 1px solid ${mediumGrey};
 `;
 
-export const Label = styled('label')`
+export const Label = styled("label")`
 	font-size: 14px;
 	color: ${primaryGrey};
 `;
 
-export const A = styled('a')`
+export const A = styled("a")`
 	font-size: 1em;
 	color: ${primaryPurple};
 	text-decoration: none;
 	border-bottom: 2px solid transparent;
-	cursor: ${props => (props.noHover ? 'default' : 'pointer')};
-	${props => props.noHover && 'border: none;'}
+	cursor: ${props => (props.noHover ? "default" : "pointer")};
+	${props => props.noHover && "border: none;"}
 
 	&:hover {
 		border-color: ${primaryPurple};
@@ -332,7 +341,7 @@ export const A = styled('a')`
 	}
 `;
 
-const TaskInfosContent = styled('div')`
+const TaskInfosContent = styled("div")`
 	color: ${primaryGrey};
 	padding-bottom: 0;
 	display: flex;
@@ -340,11 +349,11 @@ const TaskInfosContent = styled('div')`
 	margin-left: 10px;
 `;
 
-export const TaskInfosItem = styled('div')`
+export const TaskInfosItem = styled("div")`
 	display: flex;
 	margin-right: 1rem;
 	font-size: 12px;
-	${props => props.onClick && 'cursor: pointer;'}
+	${props => props.onClick && "cursor: pointer;"}
 	align-items: center;
 	height: 30px;
 	position: relative;
@@ -354,37 +363,38 @@ export const TaskInfosItem = styled('div')`
 		text-decoration: none;
 	}
 
-	${props => (props.inactive
-		? ''
-		: `&:hover ${TaskInfosContent} {
+	${props =>
+		props.inactive
+			? ""
+			: `&:hover ${TaskInfosContent} {
 			color: ${primaryPurple};
 			border-bottom: 1px dotted ${primaryPurple};
-		}`)}
+		}`}
 `;
 
 export const TaskInfosItemLink = TaskInfosItem.withComponent(Link);
 
-export const TaskIconText = forwardRef(({icon, content, ...rest}, ref) => (
+export const TaskIconText = forwardRef(({ icon, content, ...rest }, ref) => (
 	<TaskInfosItem {...rest} ref={ref}>
 		{icon}
 		<TaskInfosContent>{content}</TaskInfosContent>
 	</TaskInfosItem>
 ));
 
-export const LayoutMainElem = styled('div')`
+export const LayoutMainElem = styled("div")`
 	flex: 1;
 `;
 
-export const Input = styled('input')`
-	font-family: 'Work Sans', sans-serif;
+export const Input = styled("input")`
+	font-family: "Work Sans", sans-serif;
 	font-size: inherit;
 
 	background-color: ${props => (props.error ? lightRed : lightPurple)};
-	border-radius: ${props => (props.big ? '24px' : '20px')};
-	height: ${props => (props.big ? '48px' : '27px')};
+	border-radius: ${props => (props.big ? "24px" : "20px")};
+	height: ${props => (props.big ? "48px" : "27px")};
 	padding: 0 1rem;
 	width: auto;
-	border: 1px solid ${props => (props.error ? primaryRed : 'transparent')};
+	border: 1px solid ${props => (props.error ? primaryRed : "transparent")};
 	font-weight: 400;
 	color: ${props => (props.error ? primaryRed : primaryPurple)};
 
@@ -416,28 +426,29 @@ export const Input = styled('input')`
 	}
 `;
 
-export const InputLabel = styled('div')`
+export const InputLabel = styled("div")`
 	${Label} {
 		font-size: 12px;
 		margin-bottom: 0.8rem;
 		margin-left: 1rem;
 
-		${props => props.required
-			&& css`
+		${props =>
+			props.required &&
+			css`
 				&::after {
 					color: ${primaryRed};
-					content: '*';
+					content: "*";
 					padding-left: 5px;
 				}
 			`};
 	}
 `;
 
-export const GenericDropdown = styled('div')`
+export const GenericDropdown = styled("div")`
 	background: ${primaryWhite};
 	border: 1px solid ${mediumGrey};
 	box-shadow: 5px 5px 15px ${primaryGrey};
-	width: ${props => (props.width ? props.width : 'auto')};
+	width: ${props => (props.width ? props.width : "auto")};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		left: -1rem;
@@ -454,21 +465,21 @@ export const TaskInputDropdown = styled(GenericDropdown)`
 	left: 55px;
 `;
 
-export const TaskInputDropdownHeader = styled('p')`
+export const TaskInputDropdownHeader = styled("p")`
 	text-transform: uppercase;
 	color: ${gray30};
 	margin: 1.5em 2em 0.5em 2em;
 `;
 
-export const DueDateInputElem = styled('input')`
-	font-family: 'Work sans', sans-serif;
+export const DueDateInputElem = styled("input")`
+	font-family: "Work sans", sans-serif;
 	font-size: inherit;
 	color: ${primaryPurple};
 	width: 83px;
 	display: block;
 `;
 
-export const DateInputContainer = styled('div')`
+export const DateInputContainer = styled("div")`
 	position: relative;
 	display: inline-flex;
 `;
@@ -496,7 +507,7 @@ export const FilterInput = styled(Input)`
 	}
 `;
 
-export const Help = styled('div')`
+export const Help = styled("div")`
 	position: fixed;
 	bottom: 3rem;
 	left: 3rem;
@@ -508,7 +519,7 @@ export const Help = styled('div')`
 	color: ${primaryBlack};
 	line-height: 0;
 	font-weight: 500;
-	display: ${props => (props.customerToken ? 'flex' : 'none')};
+	display: ${props => (props.customerToken ? "flex" : "none")};
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
@@ -526,7 +537,7 @@ export const Help = styled('div')`
 	}
 `;
 
-export const Aside = styled('aside')`
+export const Aside = styled("aside")`
 	flex-direction: column;
 	align-items: stretch;
 	flex: 0 0 270px;
@@ -539,7 +550,7 @@ export const Aside = styled('aside')`
 	}
 `;
 
-export const Main = styled('div')`
+export const Main = styled("div")`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -553,7 +564,7 @@ export const Main = styled('div')`
 	}
 `;
 
-export const Container = styled('div')`
+export const Container = styled("div")`
 	display: flex;
 	width: 100%;
 
@@ -562,21 +573,21 @@ export const Container = styled('div')`
 	}
 `;
 
-export const Content = styled('div')`
+export const Content = styled("div")`
 	display: flex;
 	flex-direction: column;
 	flex: 1;
-	${props => (props.small ? 'width: 100%' : '')};
-	${props => (props.small ? 'max-width: 980px' : '')};
-	${props => (props.small ? 'margin: 0 auto' : '')};
+	${props => (props.small ? "width: 100%" : "")};
+	${props => (props.small ? "max-width: 980px" : "")};
+	${props => (props.small ? "margin: 0 auto" : "")};
 `;
 
-export const UL = styled('ul')`
-	${props => (props.noBullet ? 'padding: 0' : '')};
-	${props => (props.noBullet ? 'list-style-type: none' : '')};
+export const UL = styled("ul")`
+	${props => (props.noBullet ? "padding: 0" : "")};
+	${props => (props.noBullet ? "list-style-type: none" : "")};
 `;
 
-export const LeftMenu = styled('div')`
+export const LeftMenu = styled("div")`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -601,7 +612,7 @@ export const LeftMenu = styled('div')`
 	}
 `;
 
-export const IllusContainer = styled('div')`
+export const IllusContainer = styled("div")`
 	height: 660px;
 	background: url('${props => props.bg}');
 	background-repeat: no-repeat;
@@ -610,8 +621,8 @@ export const IllusContainer = styled('div')`
 	display: flex;
 `;
 
-export const IllusFigureContainer = styled('div')`
-	height: ${props => (props.big ? '70%' : '60%')};
+export const IllusFigureContainer = styled("div")`
+	height: ${props => (props.big ? "70%" : "60%")};
 	flex: 1;
 	background: url('${props => props.fig}');
 	background-repeat: no-repeat;
@@ -619,7 +630,7 @@ export const IllusFigureContainer = styled('div')`
 	background-position: center;
 `;
 
-export const IllusText = styled('div')`
+export const IllusText = styled("div")`
 	flex: 1;
 	display: flex;
 	flex-direction: column;
@@ -633,7 +644,7 @@ export const IllusText = styled('div')`
 	}
 `;
 
-export const IllusTextIcon = styled('span')`
+export const IllusTextIcon = styled("span")`
 	position: relative;
 	width: 20px;
 	height: 20px;
@@ -644,7 +655,7 @@ export const IllusTextIcon = styled('span')`
 	cursor: pointer;
 
 	&:after {
-		content: '';
+		content: "";
 		width: 20px;
 		height: 20px;
 		position: absolute;
@@ -665,67 +676,67 @@ export const IllusTextIcon = styled('span')`
 	}
 `;
 
-export const UserSpan = styled('span')`
+export const UserSpan = styled("span")`
 	color: ${primaryPurple};
 `;
 
-export const CustomerSpan = styled('span')`
+export const CustomerSpan = styled("span")`
 	color: ${primaryRed};
 `;
 
 const customSelectStyles = props => ({
-	dropdownIndicator: (styles, {isDisabled}) => ({
+	dropdownIndicator: (styles, { isDisabled }) => ({
 		...styles,
 		color: isDisabled ? primaryGrey : primaryPurple,
 		paddingTop: 0,
-		paddingBottom: 0,
+		paddingBottom: 0
 	}),
 	clearIndicator: styles => ({
 		...styles,
 		color: primaryPurple,
 		paddingTop: 0,
-		paddingBottom: 0,
+		paddingBottom: 0
 	}),
-	placeholder: (styles, {isDisabled}) => ({
+	placeholder: (styles, { isDisabled }) => ({
 		...styles,
 		color: isDisabled ? lightGrey : lightPurple,
-		fontStyle: 'italic',
-		fontSize: '14px',
+		fontStyle: "italic",
+		fontSize: "14px"
 	}),
-	singleValue: (styles, {isDisabled}) => ({
+	singleValue: (styles, { isDisabled }) => ({
 		...styles,
-		color: isDisabled ? primaryGrey : primaryPurple,
+		color: isDisabled ? primaryGrey : primaryPurple
 	}),
-	input: (styles, {isDisabled}) => ({
+	input: (styles, { isDisabled }) => ({
 		...styles,
 		padding: 0,
-		color: isDisabled ? primaryGrey : primaryPurple,
+		color: isDisabled ? primaryGrey : primaryPurple
 	}),
-	control: (styles, {isDisabled, big}) => ({
+	control: (styles, { isDisabled, big }) => ({
 		...styles,
-		height: props.big && '40px',
-		minHeight: 'auto',
-		border: 'none',
+		height: props.big && "40px",
+		minHeight: "auto",
+		border: "none",
 		backgroundColor: isDisabled ? lightGrey : lightPurple,
-		borderRadius: '20px',
-		':hover, :focus, :active': {
-			border: 'none',
-		},
+		borderRadius: "20px",
+		":hover, :focus, :active": {
+			border: "none"
+		}
 	}),
 	indicatorSeparator: () => ({
-		backgroundColor: 'transparent',
-	}),
+		backgroundColor: "transparent"
+	})
 });
 
-export const Select = ({style, ...rest}) => (
+export const Select = ({ style, ...rest }) => (
 	<ReactSelect
-		styles={{...customSelectStyles(rest), ...style}}
-		noOptionsMessage={() => 'Aucune option'}
+		styles={{ ...customSelectStyles(rest), ...style }}
+		noOptionsMessage={() => "Aucune option"}
 		{...rest}
 	/>
 );
 
-export const DateContainer = styled('div')`
+export const DateContainer = styled("div")`
 	position: relative;
 
 	p:hover {
@@ -733,7 +744,7 @@ export const DateContainer = styled('div')`
 		cursor: pointer;
 
 		&:before {
-			content: '';
+			content: "";
 			display: block;
 			background: ${lightGrey};
 			position: absolute;
@@ -745,7 +756,7 @@ export const DateContainer = styled('div')`
 			z-index: -1;
 		}
 		&:after {
-			content: '';
+			content: "";
 			display: block;
 			background-color: ${accentGrey};
 			mask-size: 35%;
@@ -771,15 +782,15 @@ export const BackButton = styled(Button)`
 	align-self: flex-start;
 	text-transform: uppercase;
 	margin: 1rem 0;
-	${props => props.withMargin && 'margin-bottom: 1rem;'}
+	${props => props.withMargin && "margin-bottom: 1rem;"}
 
 	::before {
-		content: '⇽';
+		content: "⇽";
 		margin-right: 10px;
 	}
 `;
 
-export const DragSeparator = styled('div')`
+export const DragSeparator = styled("div")`
 	position: absolute;
 	height: 3px;
 	width: 100%;
@@ -787,7 +798,7 @@ export const DragSeparator = styled('div')`
 	background: ${primaryPurple};
 `;
 
-export const CollaboratorLineRow = styled('div')`
+export const CollaboratorLineRow = styled("div")`
 	display: flex;
 	align-items: center;
 	margin-bottom: 1.5rem;
@@ -800,7 +811,7 @@ export const CollaboratorLineRow = styled('div')`
 	}
 `;
 
-export const StickyHeader = styled('div')`
+export const StickyHeader = styled("div")`
 	position: sticky;
 	top: 0;
 	background: ${props => (props.customer ? primaryRed : primaryPurple)};
@@ -817,7 +828,7 @@ export const StickyHeader = styled('div')`
 	}
 `;
 
-export const Meta = styled('div')`
+export const Meta = styled("div")`
 	display: flex;
 	align-items: flex-start;
 	min-height: 1.25rem;
@@ -832,7 +843,7 @@ export const Meta = styled('div')`
 	}
 `;
 
-export const MetaLabel = styled('div')`
+export const MetaLabel = styled("div")`
 	margin-right: 1rem;
 	min-width: 40px;
 
@@ -841,13 +852,13 @@ export const MetaLabel = styled('div')`
 	}
 `;
 
-export const MetaText = styled('span')`
+export const MetaText = styled("span")`
 	color: ${primaryPurple};
 	flex: 1;
-	cursor: ${props => (props.onClick ? 'pointer' : 'initial')};
+	cursor: ${props => (props.onClick ? "pointer" : "initial")};
 
 	:empty::before {
-		content: '+';
+		content: "+";
 		border: 1px solid ${primaryPurple};
 		border-radius: 50%;
 		width: 0.85rem;
@@ -872,7 +883,7 @@ export const MetaTime = styled(MetaText)`
 	position: relative;
 `;
 
-export const ScrollHelper = styled('div')`
+export const ScrollHelper = styled("div")`
 	width: 60px;
 	height: 60px;
 	position: fixed;
@@ -896,12 +907,12 @@ export const ScrollHelper = styled('div')`
 	}
 `;
 
-export const TaskCardElem = styled('div')`
+export const TaskCardElem = styled("div")`
 	background: ${props => (props.isLive ? primaryPurple : primaryWhite)};
-	opacity: ${props => (props.isOver ? '.5' : 1)};
+	opacity: ${props => (props.isOver ? ".5" : 1)};
 	border: 1px solid ${mediumGrey};
 	box-shadow: 3px 3px 6px ${mediumGrey};
-	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
+	${props => props.customerTask && "border-bottom: 2px solid #ff3366;"}
 	border-radius: 3px;
 	padding: 8px;
 	margin-bottom: 5px;
@@ -915,57 +926,58 @@ export const TaskCardElem = styled('div')`
 	transition: all 300ms ease;
 `;
 
-export const TaskIcon = styled('div')`
+export const TaskIcon = styled("div")`
 	cursor: pointer;
 	width: 3.5rem;
 	height: 3.5rem;
 	margin-left: -0.8725rem;
-	margin-right: ${props => (props.noData ? '.5rem' : '1rem')};
+	margin-right: ${props => (props.noData ? ".5rem" : "1rem")};
 	overflow: visible;
 	background: center no-repeat
-		url(${(props) => {
-		let {type} = props;
+		url(${props => {
+			let { type } = props;
 
-		if (props.assigned) {
-			type += '_ASSIGNED';
-		}
+			if (props.assigned) {
+				type += "_ASSIGNED";
+			}
 
-		const typeInfos
-				= ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
+			const typeInfos =
+				ITEM_TYPES.find(t => t.type === type) || ITEM_TYPES[0];
 
-		let icon = typeInfos.iconUrl;
+			let icon = typeInfos.iconUrl;
 
-		if (props.status === itemStatuses.FINISHED) {
-			icon
-					= (props.justUpdated
-					? typeInfos.iconUrlValidatedAnim
-					: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
-		}
-		return icon;
-	}});
+			if (props.status === itemStatuses.FINISHED) {
+				icon =
+					(props.justUpdated
+						? typeInfos.iconUrlValidatedAnim
+						: typeInfos.iconUrlValidated) || typeInfos.iconUrl;
+			}
+			return icon;
+		}});
 	margin-bottom: 0;
 
-	transform: scale(${props => (props.noData ? 0.75 : '')});
+	transform: scale(${props => (props.noData ? 0.75 : "")});
 
 	&:hover {
 		background: center no-repeat
-			url(${(props) => {
-		const typeInfos
-					= ITEM_TYPES.find(t => t.type === props.type)
-					|| ITEM_TYPES[0];
+			url(${props => {
+				const typeInfos =
+					ITEM_TYPES.find(t => t.type === props.type) ||
+					ITEM_TYPES[0];
 
-		if (props.noAnim) {
-			return props.status === itemStatuses.FINISHED
-				? typeInfos.iconUrlValidated
-				: typeInfos.iconUrl;
-		}
+				if (props.noAnim) {
+					return props.status === itemStatuses.FINISHED
+						? typeInfos.iconUrlValidated
+						: typeInfos.iconUrl;
+				}
 
-		return typeInfos.iconUrlValidated || typeInfos.iconUrl;
-	}});
+				return typeInfos.iconUrlValidated || typeInfos.iconUrl;
+			}});
 
-		animation: ${props => (props.status === itemStatuses.FINISHED || props.noAnim
-		? 'none'
-		: 'growth 300ms')};
+		animation: ${props =>
+			props.status === itemStatuses.FINISHED || props.noAnim
+				? "none"
+				: "growth 300ms"};
 
 		@keyframes growth {
 			0% {
@@ -991,15 +1003,16 @@ export const TaskIcon = styled('div')`
 	}
 `;
 
-export const Pie = styled('div')`
-	width: ${props => (props.big ? '300px' : '18px')};
-	height: ${props => (props.big ? '300px' : '18px')};
+export const Pie = styled("div")`
+	width: ${props => (props.big ? "300px" : "18px")};
+	height: ${props => (props.big ? "300px" : "18px")};
 	border-radius: 50%;
-	background: ${props => (props.value <= 1
-		? accentGrey
-		: props.value >= 2
+	background: ${props =>
+		props.value <= 1
+			? accentGrey
+			: props.value >= 2
 			? primaryRed
-			: primaryBlue)};
+			: primaryBlue};
 	background-image: linear-gradient(
 		to right,
 		transparent 50%,
@@ -1009,33 +1022,34 @@ export const Pie = styled('div')`
 	position: relative;
 
 	::before {
-		content: '';
+		content: "";
 		display: block;
 		margin-left: 50%;
 		height: 100%;
 		border-radius: 0 100% 100% 0 / 50%;
 		background-color: inherit;
 		transform-origin: left;
-		background: ${props => (props.value % 1 >= 0.5 || props.value >= 2 ? 'currentColor' : '')};
+		background: ${props =>
+			props.value % 1 >= 0.5 || props.value >= 2 ? "currentColor" : ""};
 		transform: rotate(
 			${props => (props.value < 2 ? props.value % 0.5 : 1)}turn
 		);
 	}
 
 	::after {
-		content: '';
-		width: ${props => (props.big ? '270px' : '12px')};
-		height: ${props => (props.big ? '270px' : '12px')};
+		content: "";
+		width: ${props => (props.big ? "270px" : "12px")};
+		height: ${props => (props.big ? "270px" : "12px")};
 		position: absolute;
-		top: ${props => (props.big ? '15px' : '3px')};
-		left: ${props => (props.big ? '15px' : '3px')};
+		top: ${props => (props.big ? "15px" : "3px")};
+		left: ${props => (props.big ? "15px" : "3px")};
 		display: block;
 		background: ${primaryWhite};
 		border-radius: 50%;
 	}
 `;
 
-export const Dropdown = styled('div')`
+export const Dropdown = styled("div")`
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
@@ -1052,20 +1066,20 @@ export const Dropdown = styled('div')`
 	}
 `;
 
-export const CheckBoxFakeLabel = styled('div')`
+export const CheckBoxFakeLabel = styled("div")`
 	margin-left: 10px;
 `;
 
-export const CheckBoxLabel = styled('label')`
+export const CheckBoxLabel = styled("label")`
 	font-size: 13px;
-	margin: ${props => (props.condensed ? '0' : '0.5em 0')};
+	margin: ${props => (props.condensed ? "0" : "0.5em 0")};
 	color: ${props => (props.color ? props.color : primaryPurple)};
 	cursor: pointer;
 
 	display: flex;
 	align-items: center;
 
-	input[type='checkbox'] {
+	input[type="checkbox"] {
 		position: absolute;
 		opacity: 0;
 		cursor: pointer;

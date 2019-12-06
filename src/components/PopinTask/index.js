@@ -34,22 +34,26 @@ const Container = styled('div')`
 	padding: 1rem 0.5rem 1.5rem 0;
 
 	color: ${primaryBlack};
-
-	${Button} {
-		color: ${primaryGrey};
-	}
 `;
 
 const UnitWithSuggestionsFormCondensed = styled(UnitWithSuggestionsForm)`
 	flex-wrap: wrap;
-	gap: 8px;
+
+	button {
+		margin: 0 6px 6px 0;
+	}
+	form {
+		align-items: baseline;
+	}
 
 	input {
 		width: 100px;
 	}
 `;
 
-const InputContainer = styled('div')``;
+const InputContainer = styled('div')`
+	margin-bottom: 1rem;
+`;
 
 const InputButtonContainer = styled('div')`
 	display: flex;
@@ -99,15 +103,20 @@ const Icon = styled('div')`
 			display: grid;
 			align-items: center;
 			justify-content: center;
+			transform: scale(0.8) translate(0, 10px);
 		`}
 `;
 
 const Options = styled('div')`
+	margin: 15px 0;
+`;
+
+const Row = styled('div')`
 	display: grid;
 	grid-template-columns: 50px 1fr;
-	align-items: baseline;
+	align-items: ${props => (props.multipleRows ? 'baseline' : 'center')};
 	row-gap: 10px;
-	margin: 15px 0;
+	min-height: 2rem;
 `;
 
 const Types = styled('div')`
@@ -235,146 +244,160 @@ const PopinTask = ({
 	return (
 		<Container ref={ref}>
 			<Options>
-				<Tooltip label={selectedType.name}>
-					<Icon center>{selectedType.icon}</Icon>
-				</Tooltip>
-				<InputContainer id="task-input-container">
-					<Tooltip
-						label={
-							<p>
-								<fbt project="inyo" desc="Enter to create task">
-									`Entrée` pour créer une tâche.
-								</fbt>
-								{currentProjectId && (
-									<>
-										<br />
-										<fbt
-											project="inyo"
-											desc="notification message"
-										>
-											↓ pour créer une section
-										</fbt>
-									</>
-								)}
-							</p>
-						}
-					>
-						<Input
-							autoFocus
-							ref={inputRef}
-							type="text"
-							onChange={e => setValue(e.target.value)}
-							value={value}
-							onFocus={() => setFocus(true)}
-							onBlur={() => setFocus(false)}
-							onKeyDown={async e => {
-								if (e.key === 'ArrowUp' && onSubmitProject) {
-									onSubmitProject({
-										name: value
-									});
-									resetForm();
-								} else if (
-									e.key === 'ArrowDown' &&
-									onSubmitSection
-								) {
-									onSubmitSection({
-										name: value
-										// TODO : after current section
-									});
-									resetForm();
-								} else if (e.key === 'Enter') {
-									e.preventDefault();
-
-									if (type === 'SECTION') {
-										await onSubmitSection({
+				<Row multipleRows>
+					<Tooltip label={selectedType.name}>
+						<Icon center>{selectedType.icon}</Icon>
+					</Tooltip>
+					<InputContainer id="task-input-container">
+						<Tooltip
+							label={
+								<p>
+									<fbt
+										project="inyo"
+										desc="Enter to create task"
+									>
+										`Entrée` pour créer une tâche.
+									</fbt>
+									{currentProjectId && (
+										<>
+											<br />
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
+												↓ pour créer une section
+											</fbt>
+										</>
+									)}
+								</p>
+							}
+						>
+							<Input
+								autoFocus
+								ref={inputRef}
+								type="text"
+								onChange={e => setValue(e.target.value)}
+								value={value}
+								onFocus={() => setFocus(true)}
+								onBlur={() => setFocus(false)}
+								onKeyDown={async e => {
+									if (
+										e.key === 'ArrowUp' &&
+										onSubmitProject
+									) {
+										onSubmitProject({
 											name: value
 										});
 										resetForm();
-
-										return;
-									}
-
-									const common = {
-										name: value,
-										type: type || 'DEFAULT',
-										projectId: selectedProject,
-										tags: tags.map(({id}) => id),
-										linkedCustomerId:
-											customer && customer.id,
-										dueDate,
-										unit: parseFloat(unit),
-										scheduledFor: isCustomerTask(type)
-											? undefined
-											: scheduledFor
-									};
-
-									if (type === 'CONTENT_ACQUISITION') {
-										await onSubmitTask({
-											...common,
-											description: `\n# content-acquisition-list\n${files
-												.map(
-													({checked, name}) =>
-														`- [${
-															checked ? 'x' : ' '
-														}] ${name}`
-												)
-												.join('\n')}`
+									} else if (
+										e.key === 'ArrowDown' &&
+										onSubmitSection
+									) {
+										onSubmitSection({
+											name: value
+											// TODO : after current section
 										});
-									} else {
-										await onSubmitTask(common);
-									}
+										resetForm();
+									} else if (e.key === 'Enter') {
+										e.preventDefault();
 
-									resetForm();
-								}
-							}}
-							placeholder={inputPlaceholder}
-						/>
-					</Tooltip>
-					<Types>
-						{types.map(type => (
-							<Tooltip key={type.type} label={type.name}>
-								<Icon
-									onClick={() => setType(type.type)}
-									right={type.type === 'SECTION'}
-								>
-									{type.icon}
-								</Icon>
-							</Tooltip>
-						))}
-						{!currentProjectId && (
-							<Tooltip label={fbt('Projet', 'project name type')}>
-								<Icon
-									right
-									onClick={() =>
-										history.push({
-											pathname: '/app/projects/create',
-											state: {name: value}
-										})
+										if (type === 'SECTION') {
+											await onSubmitSection({
+												name: value
+											});
+											resetForm();
+
+											return;
+										}
+
+										const common = {
+											name: value,
+											type: type || 'DEFAULT',
+											projectId: selectedProject,
+											tags: tags.map(({id}) => id),
+											linkedCustomerId:
+												customer && customer.id,
+											dueDate,
+											unit: parseFloat(unit),
+											scheduledFor: isCustomerTask(type)
+												? undefined
+												: scheduledFor
+										};
+
+										if (type === 'CONTENT_ACQUISITION') {
+											await onSubmitTask({
+												...common,
+												description: `\n# content-acquisition-list\n${files
+													.map(
+														({checked, name}) =>
+															`- [${
+																checked
+																	? 'x'
+																	: ' '
+															}] ${name}`
+													)
+													.join('\n')}`
+											});
+										} else {
+											await onSubmitTask(common);
+										}
+
+										resetForm();
 									}
+								}}
+								placeholder={inputPlaceholder}
+							/>
+						</Tooltip>
+						<Types>
+							{types.map(type => (
+								<Tooltip key={type.type} label={type.name}>
+									<Icon
+										onClick={() => setType(type.type)}
+										right={type.type === 'SECTION'}
+									>
+										{type.icon}
+									</Icon>
+								</Tooltip>
+							))}
+							{!currentProjectId && (
+								<Tooltip
+									label={fbt('Projet', 'project name type')}
 								>
-									<MaterialIcon
-										icon="folder_open"
-										size="small"
-									/>
-								</Icon>
-							</Tooltip>
-						)}
-					</Types>
-				</InputContainer>
+									<Icon
+										right
+										onClick={() =>
+											history.push({
+												pathname:
+													'/app/projects/create',
+												state: {name: value}
+											})
+										}
+									>
+										<MaterialIcon
+											icon="folder_open"
+											size="medium"
+										/>
+									</Icon>
+								</Tooltip>
+							)}
+						</Types>
+					</InputContainer>
+				</Row>
 
 				{type === 'CONTENT_ACQUISITION' && (
-					<>
+					<Row multipleRows>
 						<MaterialIcon icon="folder" size="tiny" />
 						<CheckList
 							editable
 							items={files}
 							onChange={({items}) => setFiles(items)}
+							style={{marginBottom: '1rem'}}
 						/>
-					</>
+					</Row>
 				)}
 
 				{type !== 'SECTION' && (
-					<>
+					<Row multipleRows>
 						<MaterialIcon icon="timer" size="tiny" />
 						<UnitWithSuggestionsFormCondensed
 							small
@@ -390,10 +413,10 @@ const PopinTask = ({
 								);
 							}}
 						/>
-					</>
+					</Row>
 				)}
 				{type !== 'SECTION' && (
-					<>
+					<Row>
 						<MaterialIcon icon="label" size="tiny" />
 						<TagDropdown
 							id="tags-dropdown"
@@ -438,11 +461,11 @@ const PopinTask = ({
 							}}
 							style={{margin: '0'}}
 						/>
-					</>
+					</Row>
 				)}
 
 				{!currentProjectId && (
-					<>
+					<Row>
 						<MaterialIcon icon="folder_open" size="tiny" />
 						<ProjectsDropdown
 							selectedId={selectedProject}
@@ -458,11 +481,11 @@ const PopinTask = ({
 								Lier à un projet
 							</fbt>
 						</ProjectsDropdown>
-					</>
+					</Row>
 				)}
 
 				{isCustomerTask(type) && (
-					<>
+					<Row>
 						<MaterialIcon icon="person_outline" size="tiny" />
 						<CustomersDropdown
 							selectedId={customer}
@@ -478,11 +501,11 @@ const PopinTask = ({
 								Lier à un client
 							</fbt>
 						</CustomersDropdown>
-					</>
+					</Row>
 				)}
 
 				{type === 'DEFAULT' && selectedProject && (
-					<>
+					<Row>
 						<MaterialIcon icon="face" size="tiny" />
 						<ProjectCollaboratorsDropdown
 							projectId={selectedProject}
@@ -502,11 +525,11 @@ const PopinTask = ({
 								Lier à un collaborateur
 							</fbt>
 						</ProjectCollaboratorsDropdown>
-					</>
+					</Row>
 				)}
 
 				{type !== 'SECTION' && (
-					<>
+					<Row>
 						<MaterialIcon icon="event" size="tiny" />
 						<DateContainer ref={dueDateRef}>
 							{dueDate ? (
@@ -544,11 +567,11 @@ const PopinTask = ({
 								/>
 							)}
 						</DateContainer>
-					</>
+					</Row>
 				)}
 
 				{!isCustomerTask(type) && type !== 'SECTION' && (
-					<>
+					<Row>
 						<MaterialIcon icon="event_available" size="tiny" />
 						<DateContainer ref={scheduledForRef}>
 							{scheduledFor ? (
@@ -589,7 +612,7 @@ const PopinTask = ({
 								/>
 							)}
 						</DateContainer>
-					</>
+					</Row>
 				)}
 			</Options>
 

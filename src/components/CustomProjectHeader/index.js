@@ -5,7 +5,7 @@ import React from 'react';
 import fbt from '../../fbt/fbt.macro';
 import {useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
-import {P, primaryBlack} from '../../utils/new/design-system';
+import {P, primaryBlack, primaryGrey} from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import TasksProgressBar from '../TasksProgressBar';
 
@@ -48,7 +48,7 @@ const Heading = styled('span')`
 `;
 
 const AttributionLink = styled(P)`
-	color: ${primaryBlack};
+	color: ${primaryGrey};
 	position: absolute;
 	bottom: 0;
 	right: 20px;
@@ -56,9 +56,15 @@ const AttributionLink = styled(P)`
 	padding: 0 10px;
 	border: 1px;
 	border-radius: 15px;
+	font-size: 10px;
 
 	a {
 		color: inherit;
+	}
+
+	&:hover {
+		color: ${primaryBlack};
+		background: white;
 	}
 `;
 

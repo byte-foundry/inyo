@@ -64,7 +64,7 @@ const ImageContainer = styled('div')`
 	height: auto;
 	position: relative;
 	overflow: hidden;
-	margin: 10px auto;
+	margin: 0 10px;
 
 	img {
 		display: block;
@@ -77,7 +77,8 @@ const ImageContainer = styled('div')`
 
 const UploadButtons = styled('div')`
 	display: flex;
-	justify-content: center;
+	justify-content: left;
+	margin-top: 1rem;
 
 	button {
 		margin-right: 15px;
@@ -234,7 +235,12 @@ const UserCompanyForm = ({data, buttonText}) => {
 											gridColumn: '1 / 3'
 										}}
 									/>
-									<div style={{gridColumn: '1 / 2'}}>
+									<div
+										style={{
+											gridColumn: '1 / 2',
+											marginTop: '1rem'
+										}}
+									>
 										<InputLabel>
 											<Label>
 												<fbt desc="Company's logo form label">
@@ -285,25 +291,31 @@ const UserCompanyForm = ({data, buttonText}) => {
 														Charger un logo
 													</fbt>
 												</UploadDashboardButton>
-
-												<IconButton
-													icon="delete"
-													size="small"
-													color={primaryRed}
-													onClick={() =>
-														updateUser({
-															variables: {
-																company: {
-																	logo: null
+												{logo && (
+													<IconButton
+														icon="delete"
+														size="tiny"
+														color={primaryRed}
+														onClick={() =>
+															updateUser({
+																variables: {
+																	company: {
+																		logo: null
+																	}
 																}
-															}
-														})
-													}
-												/>
+															})
+														}
+													/>
+												)}
 											</UploadButtons>
 										</InputLabel>
 									</div>
-									<div style={{gridColumn: '2 / 3'}}>
+									<div
+										style={{
+											gridColumn: '2 / 3',
+											marginTop: '1rem'
+										}}
+									>
 										<InputLabel>
 											<Label>
 												<fbt desc="Company's logo form label">
@@ -393,21 +405,23 @@ const UserCompanyForm = ({data, buttonText}) => {
 													</fbt>
 												</UploadDashboardButton>
 
-												<IconButton
-													icon="delete"
-													size="small"
-													color={primaryRed}
-													onClick={() =>
-														updateUser({
-															variables: {
-																company: {
-																	banner: null,
-																	bannerUnsplashId: null
+												{banner && (
+													<IconButton
+														icon="delete"
+														size="tiny"
+														color={primaryRed}
+														onClick={() =>
+															updateUser({
+																variables: {
+																	company: {
+																		banner: null,
+																		bannerUnsplashId: null
+																	}
 																}
-															}
-														})
-													}
-												/>
+															})
+														}
+													/>
+												)}
 											</UploadButtons>
 										</InputLabel>
 									</div>

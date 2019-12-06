@@ -81,7 +81,9 @@ const SidebarHeading = styled(SubHeading)`
 `;
 
 const CompanyLogo = styled('img')`
-	width: 100%;
+	max-width: 75%;
+	max-height: 150px;
+	margin-top: 1rem;
 	display: block;
 `;
 

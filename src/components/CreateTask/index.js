@@ -25,7 +25,7 @@ const CreateTask = ({
 	popinTask,
 	defaultScheduledFor,
 	createAfterItem,
-	createAfterSection
+	createAfterSection,
 }) => {
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
@@ -38,8 +38,8 @@ const CreateTask = ({
 		{
 			variables: {projectId: currentProjectId},
 			skip: !currentProjectId,
-			suspend: true
-		}
+			suspend: true,
+		},
 	);
 
 	if (loading) return false;
@@ -48,18 +48,18 @@ const CreateTask = ({
 	const props = {};
 
 	if (currentProjectId) {
-		props.onSubmitSection = section =>
-			addSection({
-				variables: {
-					projectId: currentProjectId,
-					position: createAfterSection
-						? createAfterSection.position + 1
-						: 0,
-					...section
-				}
-			});
-	} else {
-		props.onSubmitProject = async project => {
+		props.onSubmitSection = section => addSection({
+			variables: {
+				projectId: currentProjectId,
+				position: createAfterSection
+					? createAfterSection.position + 1
+					: 0,
+				...section,
+			},
+		});
+	}
+	else {
+		props.onSubmitProject = async (project) => {
 			setOpenCreateProjectModal(true);
 			setNewProjectName(project.name);
 		};
@@ -71,23 +71,23 @@ const CreateTask = ({
 				<TaskInput
 					withProject={withProject}
 					defaultCustomer={
-						currentProjectData &&
-						currentProjectData.project.customer && {
+						currentProjectData
+						&& currentProjectData.project.customer && {
 							id: currentProjectData.project.customer.id,
 							name: `${
 								currentProjectData.project.customer.name
 							} (${formatName(
 								currentProjectData.project.customer.firstName,
-								currentProjectData.project.customer.lastName
-							)})`
+								currentProjectData.project.customer.lastName,
+							)})`,
 						}
 					}
-					onSubmitTask={async task => {
+					onSubmitTask={async (task) => {
 						if (
-							currentProjectData &&
-							!currentProjectData.project
-								.notifyActivityToCustomer &&
-							isCustomerTask(task.type)
+							currentProjectData
+							&& !currentProjectData.project
+								.notifyActivityToCustomer
+							&& isCustomerTask(task.type)
 						) {
 							const confirmed = await askConfirmationNotification();
 
@@ -96,8 +96,8 @@ const CreateTask = ({
 							await updateProject({
 								variables: {
 									projectId: currentProjectId,
-									notifyActivityToCustomer: true
-								}
+									notifyActivityToCustomer: true,
+								},
 							});
 						}
 
@@ -107,36 +107,6 @@ const CreateTask = ({
 
 						return createTask({
 							variables: {projectId: currentProjectId, ...task},
-							update: (cache, {data: {addItem: addedItem}}) => {
-								if (!currentProjectId) return;
-
-								const data = cache.readQuery({
-									query: GET_PROJECT_DATA,
-									variables: {projectId: currentProjectId}
-								});
-
-								if (data.project.sections.length === 0) {
-									cache.writeQuery({
-										query: GET_PROJECT_DATA,
-										variables: {
-											projectId: currentProjectId
-										},
-										data: {
-											...data,
-											project: {
-												...data.project,
-												sections: [
-													...data.project.sections,
-													{
-														...addedItem.section,
-														items: [addedItem]
-													}
-												]
-											}
-										}
-									});
-								}
-							}
 						});
 					}}
 					currentProjectId={currentProjectId}
@@ -148,23 +118,23 @@ const CreateTask = ({
 					defaultScheduledFor={defaultScheduledFor}
 					withProject={withProject}
 					defaultCustomer={
-						currentProjectData &&
-						currentProjectData.project.customer && {
+						currentProjectData
+						&& currentProjectData.project.customer && {
 							id: currentProjectData.project.customer.id,
 							name: `${
 								currentProjectData.project.customer.name
 							} (${formatName(
 								currentProjectData.project.customer.firstName,
-								currentProjectData.project.customer.lastName
-							)})`
+								currentProjectData.project.customer.lastName,
+							)})`,
 						}
 					}
-					onSubmitTask={async task => {
+					onSubmitTask={async (task) => {
 						if (
-							currentProjectData &&
-							!currentProjectData.project
-								.notifyActivityToCustomer &&
-							isCustomerTask(task.type)
+							currentProjectData
+							&& !currentProjectData.project
+								.notifyActivityToCustomer
+							&& isCustomerTask(task.type)
 						) {
 							const confirmed = await askConfirmationNotification();
 
@@ -173,8 +143,8 @@ const CreateTask = ({
 							await updateProject({
 								variables: {
 									projectId: currentProjectId,
-									notifyActivityToCustomer: true
-								}
+									notifyActivityToCustomer: true,
+								},
 							});
 						}
 
@@ -191,38 +161,8 @@ const CreateTask = ({
 								position: createAfterItem
 									? createAfterItem.position + 1
 									: 0,
-								...task
+								...task,
 							},
-							update: (cache, {data: {addItem: addedItem}}) => {
-								if (!currentProjectId) return;
-
-								const data = cache.readQuery({
-									query: GET_PROJECT_DATA,
-									variables: {projectId: currentProjectId}
-								});
-
-								if (data.project.sections.length === 0) {
-									cache.writeQuery({
-										query: GET_PROJECT_DATA,
-										variables: {
-											projectId: currentProjectId
-										},
-										data: {
-											...data,
-											project: {
-												...data.project,
-												sections: [
-													...data.project.sections,
-													{
-														...addedItem.section,
-														items: [addedItem]
-													}
-												]
-											}
-										}
-									});
-								}
-							}
 						});
 					}}
 					currentProjectId={currentProjectId}

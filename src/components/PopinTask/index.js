@@ -8,6 +8,10 @@ import {useHistory} from 'react-router-dom';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {ITEM_TYPES} from '../../utils/constants';
+import {
+	isCustomerTask,
+	taskFulfillsActivationCriteria,
+} from '../../utils/functions';
 import {ReactComponent as SectionIcon} from '../../utils/icons/section-icon.svg';
 import {CREATE_TAG} from '../../utils/mutations';
 import {
@@ -15,6 +19,7 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
+	primaryRed,
 } from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import CheckList from '../CheckList';
@@ -108,12 +113,23 @@ const Options = styled('div')`
 	margin: 15px 0;
 `;
 
+const WarningIcon = styled(MaterialIcon)`
+	position: absolute;
+	top: 12px;
+	left: -10px;
+`;
+
 const Row = styled('div')`
 	display: grid;
 	grid-template-columns: 50px 1fr;
 	align-items: ${props => (props.multipleRows ? 'baseline' : 'center')};
 	row-gap: 10px;
 	min-height: 2rem;
+	position: relative;
+
+	${WarningIcon} {
+		top: ${props => (props.multipleRows ? '12px' : '8px')};
+	}
 `;
 
 const Types = styled('div')`
@@ -377,6 +393,13 @@ const PopinTask = ({
 							onChange={({items}) => setFiles(items)}
 							style={{marginBottom: '1rem'}}
 						/>
+						{scheduledFor && files.length === 0 && (
+							<WarningIcon
+								icon="warning"
+								size="tiny"
+								color={primaryRed}
+							/>
+						)}
 					</Row>
 				)}
 
@@ -485,6 +508,13 @@ const PopinTask = ({
 								Lier à un client
 							</fbt>
 						</CustomersDropdown>
+						{isCustomerTask(type) && scheduledFor && !customer && (
+							<WarningIcon
+								icon="warning"
+								size="tiny"
+								color={primaryRed}
+							/>
+						)}
 					</Row>
 				)}
 
@@ -627,7 +657,13 @@ const PopinTask = ({
 					}
 				>
 					<Button
-						disabled={!value}
+						disabled={
+							!value
+							|| (scheduledFor
+								&& ((isCustomerTask(type) && !customer)
+									|| (type === 'CONTENT_ACQUISITION'
+										&& files.length === 0)))
+						}
 						icon="↵"
 						id="create-task-button"
 						onClick={async () => {

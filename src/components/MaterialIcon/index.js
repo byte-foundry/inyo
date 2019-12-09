@@ -45,9 +45,7 @@ function MaterialIcon(props) {
 		alignItems: 'center',
 		justifyContent: 'center',
 	});
-	const clsName
-		= className
-		|| `material-icons ${sizeMapped} ${defaultColor} ${inactiveColor}`;
+	const clsName = `material-icons ${sizeMapped} ${defaultColor} ${inactiveColor} ${className}`;
 
 	return (
 		<i {...rest} className={clsName} style={styleOverride}>

@@ -2801,6 +2801,196 @@
     }
    ]
   },
+  "LWszS7ZyMERr96mv8egdvg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Part of a project",
+     "variations": {}
+    }
+   ]
+  },
+  "K+PfydH1lJTFOdTguW5nhA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Create a section in a project to organize your tasks",
+     "variations": {}
+    }
+   ]
+  },
+  "Jfg2NGSco6/jhBpoOckN1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a task.",
+     "variations": {}
+    }
+   ]
+  },
+  "H4JpLE7UwSWjvhzIfT2+9g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Section title.",
+     "variations": {}
+    }
+   ]
+  },
+  "jr71DI7qNnilMl+1M8mXAw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a section.",
+     "variations": {}
+    }
+   ]
+  },
+  "sly/z/YOnPEFgw38WclUaQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task title.",
+     "variations": {}
+    }
+   ]
+  },
+  "DabhdhVVtgrWYovjlEipTw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "`Enter` to create a task.",
+     "variations": {}
+    }
+   ]
+  },
+  "5Fj4/fEa3KneB26mwqrhng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "↓ to create a section",
+     "variations": {}
+    }
+   ]
+  },
+  "cclIfI8eD3/kdCNJ2Jyj1Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project",
+     "variations": {}
+    }
+   ]
+  },
+  "OwotPW85Qrx4xnkP4MPfWg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add or create a tag",
+     "variations": {}
+    }
+   ]
+  },
+  "5GBRSMD1wBCKyx/WbMt+TQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Link to a project",
+     "variations": {}
+    }
+   ]
+  },
+  "vCzA+LfXeJOWUTWOd1hFyg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Link to a customer",
+     "variations": {}
+    }
+   ]
+  },
+  "QWGKbqNSQlllB6dsN+nGqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Link to a collaborator",
+     "variations": {}
+    }
+   ]
+  },
+  "Fnem4IQB0qdsGp4aGvhtjg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "BEnT+F/Np7zeJuZoDvO8sQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add to schedule",
+     "variations": {}
+    }
+   ]
+  },
+  "FGSQk1XANDOl4Y7gRhptwA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Press `Enter` to create {sectionOrTask}",
+     "variations": {}
+    }
+   ]
+  },
+  "tkc3hNSCTgv4MCYLPJpaJw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "section",
+     "variations": {}
+    }
+   ]
+  },
+  "1e2oXXx9vKXjMzI/5f0Vaw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "task",
+     "variations": {}
+    }
+   ]
+  },
+  "82ohg9axMDJwclLN+OTQug==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Create {sectionOrTask}",
+     "variations": {}
+    }
+   ]
+  },
   "eIrHfRHJr3VMTUDdnJrnng==": {
    "tokens": [],
    "types": [],
@@ -4741,62 +4931,12 @@
     }
    ]
   },
-  "LWszS7ZyMERr96mv8egdvg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Part of a project",
-     "variations": {}
-    }
-   ]
-  },
-  "K+PfydH1lJTFOdTguW5nhA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Create a section in a project to organize your tasks",
-     "variations": {}
-    }
-   ]
-  },
-  "5GBRSMD1wBCKyx/WbMt+TQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Link to a project",
-     "variations": {}
-    }
-   ]
-  },
   "e8wn6btvUxtacwoZA+Iwyg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Choose the task's type",
-     "variations": {}
-    }
-   ]
-  },
-  "DabhdhVVtgrWYovjlEipTw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "`Enter` to create a task.",
-     "variations": {}
-    }
-   ]
-  },
-  "5Fj4/fEa3KneB26mwqrhng==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "↓ to create a section",
      "variations": {}
     }
    ]
@@ -4827,16 +4967,6 @@
    "translations": [
     {
      "translation": "Add a task or a section.",
-     "variations": {}
-    }
-   ]
-  },
-  "Jfg2NGSco6/jhBpoOckN1w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Add a task.",
      "variations": {}
     }
    ]
@@ -4877,36 +5007,6 @@
    "translations": [
     {
      "translation": "Create the {sectionOrTask}",
-     "variations": {}
-    }
-   ]
-  },
-  "tkc3hNSCTgv4MCYLPJpaJw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "section",
-     "variations": {}
-    }
-   ]
-  },
-  "1e2oXXx9vKXjMzI/5f0Vaw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "task",
-     "variations": {}
-    }
-   ]
-  },
-  "OwotPW85Qrx4xnkP4MPfWg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Add or create a tag",
      "variations": {}
     }
    ]

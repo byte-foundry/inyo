@@ -129,6 +129,7 @@ const Stats = ({history, location}) => {
 	const projectId = query.get('projectId');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
+	const overview = 'week';
 
 	if (error) throw error;
 
@@ -137,6 +138,16 @@ const Stats = ({history, location}) => {
 			const newQuery = new URLSearchParams(query);
 
 			newQuery.set('since', value);
+
+			if (value <= 7) {
+				overview = 'week';
+			} else if (value <= 31) {
+				overview = 'month';
+			} else if (value > 31) {
+				overview = 'year';
+			}
+			console.log('okkk');
+			console.log(overview);
 
 			history.push(`/app/stats?${newQuery.toString()}`);
 		},
@@ -406,6 +417,7 @@ const Stats = ({history, location}) => {
 				<CalendarHeatmap
 					data={activities}
 					color={primaryPurple}
+					overview={overview}
 				></CalendarHeatmap>
 			</Section>
 

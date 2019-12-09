@@ -113,6 +113,12 @@ const PieWrapper = styled('div')`
 const Stats = ({history, location}) => {
 	const {
 		data: {
+			me: {tags: tagsData}
+		},
+		error: errorTags
+	} = useQuery(GET_USER_TAGS, {suspend: true});
+	const {
+		data: {
 			me: {id, tasks}
 		},
 		error
@@ -129,9 +135,9 @@ const Stats = ({history, location}) => {
 	const projectId = query.get('projectId');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
-	const overview = 'week';
+	let overview = 'week';
 
-	if (error) throw error;
+	if (error || errorTags) throw error;
 
 	const setSince = useCallback(
 		value => {
@@ -292,6 +298,19 @@ const Stats = ({history, location}) => {
 		totalTime += time;
 	});
 
+	const allDayWithTasks = [];
+	const startDate = moment();
+	for (let i = 0; i > since; i++) {
+		const currentDate = startDate
+			.subtract(since, 'days')
+			.format('YYYY-MM-DD');
+		const taskForDay = activities.find(a => a.date === currentDate);
+		allDayWithTasks.push({
+			date: currentDate,
+			tasks: taskForDay
+		});
+	}
+
 	const customerDistributions = Object.entries(customers).map(
 		([key, obj]) => ({
 			id: key,
@@ -321,7 +340,7 @@ const Stats = ({history, location}) => {
 		id: key,
 		x: obj.name,
 		y: obj.count / tagsDistributions.length,
-		colorBg: obj.colorBg
+		colorBg: tagsData.find(t => t.name === obj.name).colorBg
 	}));
 
 	console.log('here');
@@ -503,13 +522,9 @@ const Stats = ({history, location}) => {
 								}
 								colorScale={
 									tagsDistributionsList.length > 0
-										? [
-												'tomato',
-												'orange',
-												'gold',
-												'cyan',
-												'navy'
-										  ]
+										? tagsDistributionsList.map(
+												t => t.colorBg
+										  )
 										: ['lightGrey']
 								}
 								innerRadius={50}
@@ -523,13 +538,9 @@ const Stats = ({history, location}) => {
 								}
 								colorScale={
 									tagsDistributionsList.length > 0
-										? [
-												'tomato',
-												'orange',
-												'gold',
-												'cyan',
-												'navy'
-										  ]
+										? tagsDistributionsList.map(
+												t => t.colorBg
+										  )
 										: ['lightGrey']
 								}
 							/>

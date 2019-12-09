@@ -6,7 +6,7 @@ import {
 	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
-	TAG_FRAGMENT,
+	TAG_FRAGMENT
 } from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
@@ -207,6 +207,22 @@ export const UPDATE_USER_COMPANY = gql`
 				id
 				name
 				email
+				logo {
+					id
+					url
+				}
+				banner {
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						urls {
+							small
+						}
+					}
+				}
 				address {
 					street
 					city

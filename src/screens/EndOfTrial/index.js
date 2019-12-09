@@ -85,10 +85,10 @@ function EndOfTrial() {
 
 	const client = useApolloClient();
 
-	const lifeStripeCheckout = useCallback(
-		createStripeCheckout(data && data.me, PLAN_NAMES.LIFE),
-		[data],
-	);
+	// const lifeStripeCheckout = useCallback(
+	// 	createStripeCheckout(data && data.me, PLAN_NAMES.LIFE),
+	// 	[data],
+	// );
 	const monthlyStripeCheckout = useCallback(
 		createStripeCheckout(data && data.me, PLAN_NAMES.MONTHLY),
 		[data],
@@ -114,7 +114,7 @@ function EndOfTrial() {
 							</fbt:param>
 							,
 						</P>
-						<P>Votre période d'essai de 21 jours est terminée !</P>
+						<P>Votre période d'essai de 15 jours est terminée !</P>
 						<P>
 							Pour vos clients rien ne change : ils peuvent
 							toujours accéder aux projets, commenter, valider,

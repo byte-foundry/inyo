@@ -42,15 +42,16 @@ const TrialHeadband = ({history}) => {
 		return null;
 	}
 
+	const isRecentSignup = moment(signedUpAt).isAfter('2019-12-05');
+	const trialEndsAt = moment(signedUpAt)
+		.add(isRecentSignup ? 15 : 21, 'days')
+		.fromNow();
+
 	return (
 		<Headband>
 			<fbt project="inyo" desc="trial is ending message">
 				La version d'essai s'arrête{' '}
-				<fbt:param name="date">
-					{moment(signedUpAt)
-						.add(21, 'days')
-						.fromNow()}
-				</fbt:param>
+				<fbt:param name="date">{trialEndsAt}</fbt:param>
 			</fbt>{' '}
 			<Button
 				style={{display: 'inline'}}

@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 import {
 	COMMENT_ON_ITEM_FRAGMENT,
@@ -8,7 +8,7 @@ import {
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
 	TAG_FRAGMENT
-} from "./fragments";
+} from './fragments';
 
 /** ******** USER QUERIES ********* */
 export const CHECK_LOGIN_USER = gql`
@@ -109,6 +109,23 @@ export const GET_USER_INFOS = gql`
 				id
 				name
 				email
+				logo {
+					id
+					url
+				}
+				banner {
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						urls {
+							small
+							thumb
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -272,6 +289,27 @@ export const GET_PROJECT_INFOS = gql`
 				name
 				email
 				phone
+				logo {
+					id
+					url
+				}
+				banner {
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						user {
+							id
+							username
+							name
+						}
+						urls {
+							full
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -308,6 +346,27 @@ export const GET_PROJECT_DATA = gql`
 				name
 				email
 				phone
+				logo {
+					id
+					url
+				}
+				banner {
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						user {
+							id
+							username
+							name
+						}
+						urls {
+							full
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -370,9 +429,31 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			deadline
 			daysUntilDeadline
 			issuer {
+				id
 				name
 				email
 				phone
+				logo {
+					id
+					url
+				}
+				banner {
+					... on File {
+						id
+						url
+					}
+					... on UnsplashPhoto {
+						id
+						user {
+							id
+							username
+							name
+						}
+						urls {
+							full
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -470,7 +551,7 @@ export const GET_ALL_TASKS_SHORT = gql`
 		me {
 			id
 			tasks(
-				filter: { linkedCustomerId: $linkedCustomerId }
+				filter: {linkedCustomerId: $linkedCustomerId}
 				schedule: $schedule
 				first: $first
 				after: $after
@@ -493,7 +574,7 @@ export const GET_ALL_TASKS_STATS = gql`
 		me {
 			id
 			tasks(
-				filter: { linkedCustomerId: $linkedCustomerId }
+				filter: {linkedCustomerId: $linkedCustomerId}
 				schedule: $schedule
 				first: $first
 				after: $after
@@ -525,7 +606,7 @@ export const GET_ALL_TASKS = gql`
 		me {
 			id
 			tasks(
-				filter: { linkedCustomerId: $linkedCustomerId }
+				filter: {linkedCustomerId: $linkedCustomerId}
 				schedule: $schedule
 				first: $first
 				after: $after

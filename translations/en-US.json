@@ -1521,6 +1521,16 @@
     }
    ]
   },
+  "FsGLaJnHuW0i/jrhI7L+aA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Photo by {unsplashProfileUrl} on {unsplashUrl}",
+     "variations": {}
+    }
+   ]
+  },
   "GDM45j0r2I8JAnfxgDJ/ww==": {
    "tokens": [],
    "types": [],
@@ -1707,6 +1717,26 @@
    "translations": [
     {
      "translation": "Got it!",
+     "variations": {}
+    }
+   ]
+  },
+  "XDqQg4QOx4acilmFHYfr+g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Filter pictures",
+     "variations": {}
+    }
+   ]
+  },
+  "phlHm+E8VGaEr0HN/Z+k7w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Pictures by {unsplashLink}",
      "variations": {}
     }
    ]
@@ -1947,6 +1977,16 @@
    "translations": [
     {
      "translation": "Attached files",
+     "variations": {}
+    }
+   ]
+  },
+  "OOPK0gSaXTAb7YheBECv+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Join a document",
      "variations": {}
     }
    ]
@@ -5581,302 +5621,12 @@
     }
    ]
   },
-  "OOPK0gSaXTAb7YheBECv+w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Attach a file",
-     "variations": {}
-    }
-   ]
-  },
   "ufUWSEzOm8vyTuA2ElZeUw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "5MB max",
-     "variations": {}
-    }
-   ]
-  },
-  "uC2Eh2n+q7ybWBSBcdCJXQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Close",
-     "variations": {}
-    }
-   ]
-  },
-  "LgpEop1rs/PxncMTMR6NCg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Cancel",
-     "variations": {}
-    }
-   ]
-  },
-  "8g1SovisVn7dSjCC+Koi7Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Add other files",
-     "variations": {}
-    }
-   ]
-  },
-  "M7YwHi0LPdDtmKpnq0h7wQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Import",
-     "variations": {}
-    }
-   ]
-  },
-  "DQAuz9tGMIyaLSxAfGx3Cg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Press escape to close",
-     "variations": {}
-    }
-   ]
-  },
-  "jO/bkd4gn0RDv3qitl0ddg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Upload the file",
-     "variations": {}
-    }
-   ]
-  },
-  "bTmZ5H9iocGPKScFNVq22g==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Link copied !",
-     "variations": {}
-    }
-   ]
-  },
-  "aMAihueHiqs/jvWDRnAJZw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Copy the url below",
-     "variations": {}
-    }
-   ]
-  },
-  "ZUgYx3fJ8ZTUcgBZf0QK9Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Copy the link",
-     "variations": {}
-    }
-   ]
-  },
-  "hdywRfEYw1zDeSq9PBmyYw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Source file: {name}",
-     "variations": {}
-    }
-   ]
-  },
-  "U36ADZ1K4WXynEPg7XSWVw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Completed",
-     "variations": {}
-    }
-   ]
-  },
-  "ubRu3KZOnpfwgki00HrWhw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Remove the file",
-     "variations": {}
-    }
-   ]
-  },
-  "RruyjG6y/9rRRlv9IFQH/A==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Edit the file",
-     "variations": {}
-    }
-   ]
-  },
-  "QAS+9Csczykro0iOwUZTPw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Editing the file {file} in progress",
-     "variations": {}
-    }
-   ]
-  },
-  "eNi/jlbqpHkKzuRpHa7S7g==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Edit",
-     "variations": {}
-    }
-   ]
-  },
-  "QiWYflRhc3gIMPq3b/k8lQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Save modifications",
-     "variations": {}
-    }
-   ]
-  },
-  "uNYI17mN79lI3tR/O0qeDw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "My device",
-     "variations": {}
-    }
-   ]
-  },
-  "QKxyV3qx182h+0AUxS/bBw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Drop files here, {browse} your device, or import from",
-     "variations": {}
-    }
-   ]
-  },
-  "pNpjtwC48a1T5xQDbThe1w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Drop files here or {browser} your device",
-     "variations": {}
-    }
-   ]
-  },
-  "dvngynB1xzacEO672BH3Fw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "parcourir",
-     "variations": {}
-    }
-   ]
-  },
-  "qb746wHKeqixmD3Uyb0TMA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Upload complete",
-     "variations": {}
-    }
-   ]
-  },
-  "5Y/wetqEH5fndpP1E9x5jA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Resume upload",
-     "variations": {}
-    }
-   ]
-  },
-  "wzXtOG/oBdZgxrYIzwGH7Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Pause upload",
-     "variations": {}
-    }
-   ]
-  },
-  "MspQFmxO1GpxcQlYABR3Hg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Retry upload",
-     "variations": {}
-    }
-   ]
-  },
-  "NjEbYFmBk3VcEyT7ZNclfg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{smartCount} file selected",
-     "variations": {}
-    }
-   ]
-  },
-  "FK7rTGBN5/a379aA1OIZ0g==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{smartCount} files selected",
-     "variations": {}
-    }
-   ]
-  },
-  "tua1HA2mbPyuJDZlBZK4yw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Sending",
-     "variations": {}
-    }
-   ]
-  },
-  "7+YhjI1xOrhhJ0Wf9hyORQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Completed",
      "variations": {}
     }
    ]
@@ -5947,6 +5697,46 @@
    "translations": [
     {
      "translation": "Address of the company",
+     "variations": {}
+    }
+   ]
+  },
+  "AhM+a4F1MM40rw6vZnqFew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Company logo",
+     "variations": {}
+    }
+   ]
+  },
+  "Y64AA6t7TDwJkqigxzUDmA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Upload a logo",
+     "variations": {}
+    }
+   ]
+  },
+  "hwJzj8rJfXGoed9aJ/U6yA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Company cover picture",
+     "variations": {}
+    }
+   ]
+  },
+  "xQtBCL3WIJNWVD8hYDQIwg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Upload a banner",
      "variations": {}
     }
    ]
@@ -7181,27 +6971,27 @@
     }
    ]
   },
-  "nIdV3CoZ2WhY1mbiRR4x8g==": {
+  "u6xDVRuGf3QAlsaIs0j2Kg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of reminders sent by your Smart Assistant according to the selected filters and period.",
+     "translation": "{=Nombre de rappels que votreSmart Assistant a envoyé selon les filtres et la période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "EGVPD/2eq4jtbsy68EWPNQ==": {
+  "IvPRj8zkrpFPSdVSjgPPmg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of reminders sent by your Smart Assistant according to the selected filters and period.",
+     "translation": "Total of reminders sent by your {=Smart Assistant} according to the selected filters and period.",
      "variations": {}
     }
    ]
   },
-  "1vip6xVBqrCJhk+X544wJw==": {
+  "hfMdtwpyyabtiQ7gFDjOOg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7221,27 +7011,27 @@
     }
    ]
   },
-  "/6vv96LOLrnPfZA+2L5mXg==": {
+  "pKe5B8Z6XEEC6ydTgrZIkw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of time gained thanks to the automatic actions from your Smart Assistant",
+     "translation": "{=Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votreSmart Assistant.}",
      "variations": {}
     }
    ]
   },
-  "kqwiZrX3xPb9CLm06zuLhg==": {
+  "t1Hki6dHtrZYlM2F9PKzVA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of time gained thanks to the automatic actions from your Smart Assistant",
+     "translation": "Total of time gained thanks to the automatic actions from your {=Smart Assistant}",
      "variations": {}
     }
    ]
   },
-  "lSUjTG47b6bt1EBywRZt0A==": {
+  "FB1H9XqK+qkLXhfZWtaEVQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7291,27 +7081,27 @@
     }
    ]
   },
-  "mr/TFqKoCMfqxDHVSXGKLw==": {
+  "kQZCoZmjl3rS/eWPJw0p4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total amount worked according to your daily rate and the selected filters and period.",
+     "translation": "{=Valeur de votre travail selonvotre TJM et les filtres et période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "qJ7lTJhn5GO7+QUF1IEqag==": {
+  "W0lFiJ/suPXesbFKJunNJw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total amount worked according to your daily rate and the selected filters and period.",
+     "translation": "Total amount worked according to {=votre TJM} and the selected filters and period.",
      "variations": {}
     }
    ]
   },
-  "yyaOV3D0TSSmSMSfZDV46w==": {
+  "Qa/ElixRKejOjIURNZVIUA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7461,7 +7251,7 @@
     }
    ]
   },
-  "pth9dfSM1XyB3KYNrDShZg==": {
+  "7HhicYJABwi9UK9tXtAm6g==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7471,27 +7261,27 @@
     }
    ]
   },
-  "J6FjBEf9EvTK84AUacYfqg==": {
+  "lFGiWU8VFIPlEHkIcmYe1A==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Hello {email},",
+     "translation": "Hello {email} ,",
      "variations": {}
     }
    ]
   },
-  "4BP3euylrZnLknGBeLk1Bg==": {
+  "oLn30S+i1TmgeUQJ6Fve+g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Your trial period of 21 days comes to an end.",
+     "translation": "Your trial period of 15 days comes to an end.",
      "variations": {}
     }
    ]
   },
-  "SFLMxRS5pPE5ZpIsepzAgg==": {
+  "S8/B8HsIZ6Dm9TDqTu2jKQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7501,7 +7291,7 @@
     }
    ]
   },
-  "TTSWGyswSUUpeFxSA0Xokg==": {
+  "eGUwaOmygKL8GzrfG8z2fA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7511,7 +7301,7 @@
     }
    ]
   },
-  "Epqqbzw6CbrC95R4k2jb3Q==": {
+  "7AXmYMW3jRTtFA53ck40/A==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7521,7 +7311,7 @@
     }
    ]
   },
-  "eggk3plkTeLVC/zdfZ0HmQ==": {
+  "wTg5C6Gio29r504qnOzYwQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7531,7 +7321,7 @@
     }
    ]
   },
-  "C/FdpEKIV7nGc4WnBi2exw==": {
+  "5tLCJaMGYti7csL3Hb5J1Q==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7541,7 +7331,7 @@
     }
    ]
   },
-  "oeeqsNM7HCng0S7mIbL5Fg==": {
+  "kXk3X/PbQcmlcpgdD/Xrtg==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7551,7 +7341,7 @@
     }
    ]
   },
-  "WHutu5rksXpb0Sq2MWT2yw==": {
+  "wKF/3PfgfrX5i4cX4zVKRw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -7561,7 +7351,7 @@
     }
    ]
   },
-  "z3bgbWxTX/mtJmj+cWQD0g==": {
+  "oMaWc9z30qIiC8fMiIVQQw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -8217,6 +8007,26 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "EX1vp3nzcu/PifVnW+Sk5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose a predefined picture",
+     "variations": {}
+    }
+   ]
+  },
+  "vWCEJJ+10MEB1ZAsJwMDjQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Upload",
      "variations": {}
     }
    ]

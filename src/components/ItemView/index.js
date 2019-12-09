@@ -6,14 +6,12 @@ import React, {useRef, useState} from 'react';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS, ITEM_TYPES} from '../../utils/constants';
-import {
-	FlexRow, gray50, gray70, LoadingLogo,
-} from '../../utils/content';
+import {FlexRow, gray50, gray70, LoadingLogo} from '../../utils/content';
 import {
 	displayDurationPretty,
 	formatName,
 	isCustomerTask,
-	taskFulfillsActivationCriteria,
+	taskFulfillsActivationCriteria
 } from '../../utils/functions';
 import {
 	CREATE_TAG,
@@ -22,6 +20,7 @@ import {
 	REMOVE_ITEM,
 	UNFOCUS_TASK,
 	UPDATE_ITEM,
+	UPLOAD_ATTACHMENTS
 } from '../../utils/mutations';
 import {
 	accentGrey,
@@ -38,7 +37,7 @@ import {
 	primaryPurple,
 	StickyHeader,
 	SubHeading,
-	TaskHeading,
+	TaskHeading
 } from '../../utils/new/design-system';
 import {GET_ITEM_DETAILS, GET_USER_INFOS} from '../../utils/queries';
 import useOnClickOutside from '../../utils/useOnClickOutside';
@@ -61,7 +60,7 @@ import TaskRemindersList from '../TaskRemindersList';
 import TaskStatusButton from '../TaskStatusButton';
 import Tooltip from '../Tooltip';
 import UnitInput from '../UnitInput';
-import UploadDashboard from '../UploadDashboard';
+import UploadDashboardButton from '../UploadDashboardButton';
 
 const Header = styled('div')``;
 
@@ -209,7 +208,7 @@ const Item = ({
 	customerToken,
 	close,
 	isActivating: initialIsActivating = false,
-	scheduledFor: initialScheduledFor,
+	scheduledFor: initialScheduledFor
 }) => {
 	const [editCustomer, setEditCustomer] = useState(false);
 	const [editDueDate, setEditDueDate] = useState(false);
@@ -221,14 +220,14 @@ const Item = ({
 
 	const {loading, data, error} = useQuery(GET_ITEM_DETAILS, {
 		suspend: false,
-		variables: {id, token: customerToken},
+		variables: {id, token: customerToken}
 	});
 	const {
 		loading: loadingUser,
 		data: {me},
-		error: errorUser,
+		error: errorUser
 	} = useQuery(GET_USER_INFOS, {
-		suspend: true,
+		suspend: true
 	});
 	const {workingTime = 8} = useUserInfos();
 
@@ -237,17 +236,20 @@ const Item = ({
 	const [unfocusTask] = useMutation(UNFOCUS_TASK);
 	const [createTag] = useMutation(CREATE_TAG);
 	const [removeFile] = useMutation(REMOVE_ATTACHMENTS, {
-		refetchQueries: ['getAllTasks'],
+		refetchQueries: ['getAllTasks']
 	});
 	const [deleteItem] = useMutation(REMOVE_ITEM, {
 		variables: {
-			itemId: id,
+			itemId: id
 		},
 		optimisticReponse: {
 			removeItem: {
-				id,
-			},
-		},
+				id
+			}
+		}
+	});
+	const [uploadAttachements] = useMutation(UPLOAD_ATTACHMENTS, {
+		refetchQueries: ['getAllTasks']
 	});
 
 	useOnClickOutside(dateRef, () => {
@@ -269,10 +271,10 @@ const Item = ({
 	const {linkedCustomer: customer} = item;
 
 	let {description} = item;
-	const deadline
-		= (item.dueDate || (item.section && item.section.project.deadline))
-		&& new Date(
-			item.dueDate || (item.section && item.section.project.deadline),
+	const deadline =
+		(item.dueDate || (item.section && item.section.project.deadline)) &&
+		new Date(
+			item.dueDate || (item.section && item.section.project.deadline)
 		);
 
 	// parse the description for the file list
@@ -292,14 +294,14 @@ const Item = ({
 			.filter(line => fileItemRegex.test(line))
 			.map(line => ({
 				checked: /^- \[[x]]/.test(line),
-				name: line.match(fileItemRegex).pop(),
+				name: line.match(fileItemRegex).pop()
 			}));
 		description = matches.join('# content-acquisition-list');
 	}
 
-	const typeInfo
-		= ITEM_TYPES.find(({type}) => type === item.type)
-		|| ITEM_TYPES.find(({type}) => type === 'DEFAULT');
+	const typeInfo =
+		ITEM_TYPES.find(({type}) => type === item.type) ||
+		ITEM_TYPES.find(({type}) => type === 'DEFAULT');
 
 	const customerTask = isCustomerTask(item.type);
 	const finishableTask = (customerToken && customerTask) || !customerToken;
@@ -321,10 +323,10 @@ const Item = ({
 	let hasProjectCustomerLinked = false;
 
 	if (
-		!item.linkedCustomer
-		|| (item.section
-			&& item.section.project.customer
-			&& item.section.project.customer.id === item.linkedCustomer.id)
+		!item.linkedCustomer ||
+		(item.section &&
+			item.section.project.customer &&
+			item.section.project.customer.id === item.linkedCustomer.id)
 	) {
 		hasProjectCustomerLinked = true;
 	}
@@ -369,14 +371,14 @@ const Item = ({
 									Nommez cette tâche
 								</fbt>
 							}
-							onFocusOut={(value) => {
+							onFocusOut={value => {
 								if (value && value !== item.name) {
 									updateItem({
 										variables: {
 											itemId: id,
 											token: customerToken,
-											name: value,
-										},
+											name: value
+										}
 									});
 								}
 							}}
@@ -385,191 +387,191 @@ const Item = ({
 				</Tooltip>
 			</Header>
 			<Metas>
-				{customerToken
-				|| item.status !== 'FINISHED'
-				|| !item.timeItTook ? (
-						<Tooltip
-							label={
-								<fbt
-									project="inyo"
-									desc="time estimated tooltip item view"
-								>
+				{customerToken ||
+				item.status !== 'FINISHED' ||
+				!item.timeItTook ? (
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="time estimated tooltip item view"
+							>
 								Temps estimé pour cette tâche
-								</fbt>
-							}
-						>
-							<Meta>
-								<MaterialIcon icon="timer" size="tiny" />
-								<MetaLabel>
-									<fbt
-										project="inyo"
-										desc="time estimated label item view"
-									>
-									Temps estimé
-									</fbt>
-								</MetaLabel>
-								<MetaText>
-									{!customerToken && editUnit ? (
-										<UnitInput
-											unit={item.unit}
-											onBlur={(unit) => {
-												window.Intercom(
-													'trackEvent',
-													'estimated-time-fill-item-view',
-													{
-														estimation: unit,
-													},
-												);
-												updateItem({
-													variables: {
-														itemId: item.id,
-														unit,
-													},
-												});
-												setEditUnit(false);
-											}}
-											onSubmit={(unit) => {
-												window.Intercom(
-													'trackEvent',
-													'estimated-time-fill-item-view',
-													{
-														estimation: unit,
-													},
-												);
-												updateItem({
-													variables: {
-														itemId: item.id,
-														unit,
-													},
-												});
-												setEditUnit(false);
-											}}
-											onTab={(unit) => {
-												window.Intercom(
-													'trackEvent',
-													'estimated-time-fill-item-view',
-													{
-														estimation: unit,
-													},
-												);
-												updateItem({
-													variables: {
-														itemId: item.id,
-														unit,
-													},
-												});
-												setEditUnit(false);
-											}}
-										/>
-									) : (
-										<div
-											onClick={
-												customerToken
-													? undefined
-													: () => setEditUnit(true)
-											}
-										>
-											{displayDurationPretty(
-												item.unit,
-												workingTime,
-											)}
-										</div>
-									)}
-								</MetaText>
-							</Meta>
-						</Tooltip>
-					) : (
-						<Tooltip
-							label={
+							</fbt>
+						}
+					>
+						<Meta>
+							<MaterialIcon icon="timer" size="tiny" />
+							<MetaLabel>
 								<fbt
 									project="inyo"
-									desc="time it took tooltip item view"
+									desc="time estimated label item view"
 								>
-								Temps passé pour cette tâche
+									Temps estimé
 								</fbt>
-							}
-						>
-							<Meta>
-								<MaterialIcon icon="timer" size="tiny" />
-								<MetaLabel>
-									<fbt
-										project="inyo"
-										desc="time it took label item view"
+							</MetaLabel>
+							<MetaText>
+								{!customerToken && editUnit ? (
+									<UnitInput
+										unit={item.unit}
+										onBlur={unit => {
+											window.Intercom(
+												'trackEvent',
+												'estimated-time-fill-item-view',
+												{
+													estimation: unit
+												}
+											);
+											updateItem({
+												variables: {
+													itemId: item.id,
+													unit
+												}
+											});
+											setEditUnit(false);
+										}}
+										onSubmit={unit => {
+											window.Intercom(
+												'trackEvent',
+												'estimated-time-fill-item-view',
+												{
+													estimation: unit
+												}
+											);
+											updateItem({
+												variables: {
+													itemId: item.id,
+													unit
+												}
+											});
+											setEditUnit(false);
+										}}
+										onTab={unit => {
+											window.Intercom(
+												'trackEvent',
+												'estimated-time-fill-item-view',
+												{
+													estimation: unit
+												}
+											);
+											updateItem({
+												variables: {
+													itemId: item.id,
+													unit
+												}
+											});
+											setEditUnit(false);
+										}}
+									/>
+								) : (
+									<div
+										onClick={
+											customerToken
+												? undefined
+												: () => setEditUnit(true)
+										}
 									>
+										{displayDurationPretty(
+											item.unit,
+											workingTime
+										)}
+									</div>
+								)}
+							</MetaText>
+						</Meta>
+					</Tooltip>
+				) : (
+					<Tooltip
+						label={
+							<fbt
+								project="inyo"
+								desc="time it took tooltip item view"
+							>
+								Temps passé pour cette tâche
+							</fbt>
+						}
+					>
+						<Meta>
+							<MaterialIcon icon="timer" size="tiny" />
+							<MetaLabel>
+								<fbt
+									project="inyo"
+									desc="time it took label item view"
+								>
 									Temps passé
-									</fbt>
-								</MetaLabel>
-								<MetaText>
-									{editUnit ? (
-										<UnitInput
-											unit={item.timeItTook}
-											onBlur={(timeItTook) => {
-												window.Intercom(
-													'trackEvent',
-													'time-it-took-fill-item-view',
-													{
-														timeItTook,
-													},
-												);
-												updateItem({
-													variables: {
-														itemId: item.id,
-														timeItTook,
-													},
-												});
-												setEditUnit(false);
-											}}
-											onSubmit={(timeItTook) => {
-												window.Intercom(
-													'trackEvent',
-													'time-it-took-fill-item-view',
-													{
-														timeItTook,
-													},
-												);
-												updateItem({
-													variables: {
-														itemId: item.id,
-														timeItTook,
-													},
-												});
-												setEditUnit(false);
-											}}
-											onTab={(timeItTook) => {
-												window.Intercom(
-													'trackEvent',
-													'time-it-took-fill-item-view',
-													{
-														timeItTook,
-													},
-												);
-												updateItem({
-													variables: {
-														itemId: item.id,
-														timeItTook,
-													},
-												});
-												setEditUnit(false);
-											}}
-										/>
-									) : (
-										<div
-											onClick={
-												customerToken
-													? undefined
-													: () => setEditUnit(true)
-											}
-										>
-											{displayDurationPretty(
-												item.timeItTook,
-												workingTime,
-											)}
-										</div>
-									)}
-								</MetaText>
-							</Meta>
-						</Tooltip>
-					)}
+								</fbt>
+							</MetaLabel>
+							<MetaText>
+								{editUnit ? (
+									<UnitInput
+										unit={item.timeItTook}
+										onBlur={timeItTook => {
+											window.Intercom(
+												'trackEvent',
+												'time-it-took-fill-item-view',
+												{
+													timeItTook
+												}
+											);
+											updateItem({
+												variables: {
+													itemId: item.id,
+													timeItTook
+												}
+											});
+											setEditUnit(false);
+										}}
+										onSubmit={timeItTook => {
+											window.Intercom(
+												'trackEvent',
+												'time-it-took-fill-item-view',
+												{
+													timeItTook
+												}
+											);
+											updateItem({
+												variables: {
+													itemId: item.id,
+													timeItTook
+												}
+											});
+											setEditUnit(false);
+										}}
+										onTab={timeItTook => {
+											window.Intercom(
+												'trackEvent',
+												'time-it-took-fill-item-view',
+												{
+													timeItTook
+												}
+											);
+											updateItem({
+												variables: {
+													itemId: item.id,
+													timeItTook
+												}
+											});
+											setEditUnit(false);
+										}}
+									/>
+								) : (
+									<div
+										onClick={
+											customerToken
+												? undefined
+												: () => setEditUnit(true)
+										}
+									>
+										{displayDurationPretty(
+											item.timeItTook,
+											workingTime
+										)}
+									</div>
+								)}
+							</MetaText>
+						</Meta>
+					</Tooltip>
+				)}
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Tooltip
 						label={
@@ -597,49 +599,50 @@ const Item = ({
 								onClick={
 									customerToken
 										? undefined
-										: () => !editDueDate
-												&& setEditDueDate(true)
+										: () =>
+												!editDueDate &&
+												setEditDueDate(true)
 								}
 							>
 								{!customerToken && editDueDate ? (
 									<DateInputContainer ref={dateRef}>
 										<DueDateInputElem
 											value={moment(
-												deadline || new Date(),
+												deadline || new Date()
 											).format('DD/MM/YYYY')}
 										/>
 										<IconButton
 											icon="clear"
 											size="micro"
 											onClick={() => {
-												deadline
-													&& updateItem({
+												deadline &&
+													updateItem({
 														variables: {
 															itemId: item.id,
-															dueDate: null,
+															dueDate: null
 														},
 														optimisticResponse: {
 															...item,
-															dueDate: null,
-														},
+															dueDate: null
+														}
 													});
 												setEditDueDate(false);
 											}}
 										/>
 										<DateInput
 											date={moment(
-												deadline || new Date(),
+												deadline || new Date()
 											)}
-											onDateChange={(date) => {
+											onDateChange={date => {
 												updateItem({
 													variables: {
 														itemId: item.id,
-														dueDate: date.toISOString(),
+														dueDate: date.toISOString()
 													},
 													optimisticResponse: {
 														...item,
-														dueDate: date.toISOString(),
-													},
+														dueDate: date.toISOString()
+													}
 												});
 
 												setEditDueDate(false);
@@ -658,17 +661,17 @@ const Item = ({
 													count={
 														moment(deadline).diff(
 															moment(),
-															'days',
+															'days'
 														) - item.unit
 													}
 													showCount="yes"
 													value={
 														+(
 															moment(
-																deadline,
+																deadline
 															).diff(
 																moment(),
-																'days',
+																'days'
 															) - item.unit
 														).toFixed(2)
 													}
@@ -717,19 +720,19 @@ const Item = ({
 												item.linkedCustomer.name
 											} (${formatName(
 												item.linkedCustomer.firstName,
-												item.linkedCustomer.lastName,
-											)})`,
+												item.linkedCustomer.lastName
+											)})`
 										}
 									}
 									autoFocus
-									onChange={(selection) => {
+									onChange={selection => {
 										updateItem({
 											variables: {
 												itemId: item.id,
 												linkedCustomerId: selection
 													? selection.value
-													: null,
-											},
+													: null
+											}
 										});
 										setEditCustomer(false);
 									}}
@@ -746,10 +749,10 @@ const Item = ({
 											: () => setEditCustomer(true)
 									}
 								>
-									{customer
-										&& `${customer.name} (${formatName(
+									{customer &&
+										`${customer.name} (${formatName(
 											customer.firstName,
-											customer.lastName,
+											customer.lastName
 										)})`}
 								</MetaText>
 							)}
@@ -762,8 +765,8 @@ const Item = ({
 							taskId={item.id}
 							assignee={item.assignee}
 							linkedCollaborators={
-								item.section
-								&& item.section.project.linkedCollaborators
+								item.section &&
+								item.section.project.linkedCollaborators
 							}
 						/>
 					)
@@ -806,20 +809,20 @@ const Item = ({
 								defaultMenuIsOpen
 								autoFocus
 								defaultValue={
-									item.section
-									&& item.section.project && {
+									item.section &&
+									item.section.project && {
 										value: item.section.project.id,
-										label: item.section.project.name,
+										label: item.section.project.name
 									}
 								}
-								onChange={(option) => {
+								onChange={option => {
 									updateItem({
 										variables: {
 											itemId: item.id,
 											projectId: option
 												? option.value
-												: null,
-										},
+												: null
+										}
 									});
 									setEditProject(false);
 								}}
@@ -836,9 +839,9 @@ const Item = ({
 										: () => setEditProject(true)
 								}
 							>
-								{item.section
-									&& item.section.project
-									&& item.section.project.name}
+								{item.section &&
+									item.section.project &&
+									item.section.project.name}
 							</MetaText>
 						)}
 					</Meta>
@@ -869,21 +872,21 @@ const Item = ({
 									value: tag.id,
 									label: tag.name,
 									colorBg: tag.colorBg,
-									colorText: tag.colorText,
+									colorText: tag.colorText
 								}))}
 								onCreateOption={async (
 									name,
 									colorBg,
-									colorText,
+									colorText
 								) => {
 									const {
-										data: {createTag: tag},
+										data: {createTag: tag}
 									} = await createTag({
 										variables: {
 											name,
 											colorBg,
-											colorText,
-										},
+											colorText
+										}
 									});
 
 									updateItem({
@@ -891,17 +894,17 @@ const Item = ({
 											itemId: item.id,
 											tags: [
 												...item.tags.map(i => i.id),
-												tag.id,
-											],
-										},
+												tag.id
+											]
+										}
 									});
 								}}
-								onChange={(tags) => {
+								onChange={tags => {
 									updateItem({
 										variables: {
 											itemId: item.id,
-											tags: tags.map(({value}) => value),
-										},
+											tags: tags.map(({value}) => value)
+										}
 									});
 								}}
 							/>
@@ -913,7 +916,7 @@ const Item = ({
 				<Tooltip
 					label={fbt(
 						'Description de la tâche',
-						'tooltip task description',
+						'tooltip task description'
 					)}
 				>
 					<Description>
@@ -925,129 +928,130 @@ const Item = ({
 								</fbt>
 							}
 							style={{padding: '1rem 4rem'}}
-							onBlur={e => updateItem({
-								variables: {
-									itemId: id,
-									token: customerToken,
-									description: e.target.innerText.concat(
-										files.length > 0
-											? `\n# content-acquisition-list\n${files
-												.map(
-													({checked, name}) => `- [${
-														checked
-															? 'x'
-															: ' '
-													}] ${name}`,
-												)
-												.join('\n')}`
-											: '',
-									),
-								},
-							})
+							onBlur={e =>
+								updateItem({
+									variables: {
+										itemId: id,
+										token: customerToken,
+										description: e.target.innerText.concat(
+											files.length > 0
+												? `\n# content-acquisition-list\n${files
+														.map(
+															({checked, name}) =>
+																`- [${
+																	checked
+																		? 'x'
+																		: ' '
+																}] ${name}`
+														)
+														.join('\n')}`
+												: ''
+										)
+									}
+								})
 							}
 							defaultValue={description}
 						/>
 					</Description>
 				</Tooltip>
 			)}
-			{!customerToken
-				&& customerTask
-				&& taskFulfillsActivationCriteria(item) && (
-				<>
-					<SubHeading>
-						<fbt project="inyo" desc="actions of edwige">
+			{!customerToken &&
+				customerTask &&
+				taskFulfillsActivationCriteria(item) && (
+					<>
+						<SubHeading>
+							<fbt project="inyo" desc="actions of edwige">
 								Actions{' '}
-							<fbt:param name="apos">
-								<Apostrophe
-									value={me.settings.assistantName}
-									withVowel={
-										<fbt
-											project="inyo"
-											desc="notification message"
-										>
+								<fbt:param name="apos">
+									<Apostrophe
+										value={me.settings.assistantName}
+										withVowel={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
 												d'
-										</fbt>
-									}
-									withConsonant={
-										<fbt
-											project="inyo"
-											desc="notification message"
-										>
+											</fbt>
+										}
+										withConsonant={
+											<fbt
+												project="inyo"
+												desc="notification message"
+											>
 												de{' '}
-										</fbt>
-									}
-								/>
-							</fbt:param>
-							<fbt:param name="assistantName">
-								{me.settings.assistantName}
-							</fbt:param>
-						</fbt>
-					</SubHeading>
-					{item.scheduledFor ? (
-						<>
-							<TaskRemindersList
-								noLink
-								reminders={item.reminders}
-							/>
-							<TaskButton
-								onClick={() => {
-									unfocusTask({
-										variables: {itemId: item.id},
-									});
-								}}
-								icon="×"
-							>
-								<fbt
-									project="inyo"
-									desc="task customer cancelation label"
-								>
-										Ne plus rappeler à{' '}
-									<fbt:param name="customerName">
-										{formatName(
-											item.linkedCustomer.firstName,
-											item.linkedCustomer.lastName,
-										)}
-									</fbt:param>{' '}
-										de faire cette tâche
-								</fbt>
-							</TaskButton>
-						</>
-					) : (
-						<TaskButton
-							onClick={() => {
-								if (item.type === 'CONTENT_ACQUISITION') {
-									focusTask({
-										variables: {itemId: item.id},
-									});
-								}
-								else {
-									setIsActivating(true);
-								}
-							}}
-							icon="✓"
-						>
-							<fbt project="inyo" desc="charger">
-									Charger{' '}
+											</fbt>
+										}
+									/>
+								</fbt:param>
 								<fbt:param name="assistantName">
 									{me.settings.assistantName}
-								</fbt:param>{' '}
-									de faire réaliser cette tâche à{' '}
-								<fbt:param name="customerName">
-									{item.linkedCustomer.name}
-								</fbt:param>{' '}
-									(
-								<fbt:param name="contactName">
-									{formatName(
-										item.linkedCustomer.firstName,
-										item.linkedCustomer.lastName,
-									)}
 								</fbt:param>
-									)
 							</fbt>
-						</TaskButton>
-					)}
-				</>
-			)}
+						</SubHeading>
+						{item.scheduledFor ? (
+							<>
+								<TaskRemindersList
+									noLink
+									reminders={item.reminders}
+								/>
+								<TaskButton
+									onClick={() => {
+										unfocusTask({
+											variables: {itemId: item.id}
+										});
+									}}
+									icon="×"
+								>
+									<fbt
+										project="inyo"
+										desc="task customer cancelation label"
+									>
+										Ne plus rappeler à{' '}
+										<fbt:param name="customerName">
+											{formatName(
+												item.linkedCustomer.firstName,
+												item.linkedCustomer.lastName
+											)}
+										</fbt:param>{' '}
+										de faire cette tâche
+									</fbt>
+								</TaskButton>
+							</>
+						) : (
+							<TaskButton
+								onClick={() => {
+									if (item.type === 'CONTENT_ACQUISITION') {
+										focusTask({
+											variables: {itemId: item.id}
+										});
+									} else {
+										setIsActivating(true);
+									}
+								}}
+								icon="✓"
+							>
+								<fbt project="inyo" desc="charger">
+									Charger{' '}
+									<fbt:param name="assistantName">
+										{me.settings.assistantName}
+									</fbt:param>{' '}
+									de faire réaliser cette tâche à{' '}
+									<fbt:param name="customerName">
+										{item.linkedCustomer.name}
+									</fbt:param>{' '}
+									(
+									<fbt:param name="contactName">
+										{formatName(
+											item.linkedCustomer.firstName,
+											item.linkedCustomer.lastName
+										)}
+									</fbt:param>
+									)
+								</fbt>
+							</TaskButton>
+						)}
+					</>
+				)}
 			<SubHeading>
 				<fbt project="inyo" desc="Attached files">
 					Pièces jointes
@@ -1055,15 +1059,13 @@ const Item = ({
 			</SubHeading>
 			<AttachedList>
 				{item.attachments.map(
-					({
-						url, filename, id: attachmentId, owner,
-					}) => {
-						const isOwner
-							= owner
-							&& ((customerToken
-								&& owner.__typename === 'Customer')
-								|| (!customerToken
-									&& owner.__typename === 'User'));
+					({url, filename, id: attachmentId, owner}) => {
+						const isOwner =
+							owner &&
+							((customerToken &&
+								owner.__typename === 'Customer') ||
+								(!customerToken &&
+									owner.__typename === 'User'));
 
 						return (
 							<Attachment key={attachmentId}>
@@ -1095,20 +1097,32 @@ const Item = ({
 											await removeFile({
 												variables: {
 													token: customerToken,
-													attachmentId,
-												},
+													attachmentId
+												}
 											});
 										}}
 									/>
 								)}
 							</Attachment>
 						);
-					},
+					}
 				)}
-				<UploadDashboard
-					customerToken={customerToken}
-					taskId={item.id}
-				/>
+				<UploadDashboardButton
+					onUploadFiles={newFiles =>
+						uploadAttachements({
+							variables: {
+								token: customerToken,
+								taskId: item.id,
+								files: newFiles
+							},
+							context: {hasUpload: true}
+						})
+					}
+				>
+					<fbt project="inyo" desc="notification message">
+						Joindre un document
+					</fbt>
+				</UploadDashboardButton>
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>
@@ -1124,17 +1138,18 @@ const Item = ({
 									description: description.concat(
 										items.length > 0
 											? `\n# content-acquisition-list\n${items
-												.map(
-													({checked, name}) => `- [${
-														checked
-															? 'x'
-															: ' '
-													}] ${name}`,
-												)
-												.join('\n')}`
-											: '',
-									),
-								},
+													.map(
+														({checked, name}) =>
+															`- [${
+																checked
+																	? 'x'
+																	: ' '
+															}] ${name}`
+													)
+													.join('\n')}`
+											: ''
+									)
+								}
 							});
 						}}
 					/>
@@ -1157,8 +1172,8 @@ const Item = ({
 			<HR />
 			<FlexRowButtons justifyContent="space-between">
 				<FlexRowButtons>
-					{!customerToken
-						&& (deletingItem ? (
+					{!customerToken &&
+						(deletingItem ? (
 							<>
 								<Button
 									grey

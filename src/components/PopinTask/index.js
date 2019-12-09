@@ -8,7 +8,6 @@ import {useHistory} from 'react-router-dom';
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {ITEM_TYPES} from '../../utils/constants';
-import {isCustomerTask} from '../../utils/functions';
 import {ReactComponent as SectionIcon} from '../../utils/icons/section-icon.svg';
 import {CREATE_TAG} from '../../utils/mutations';
 import {
@@ -310,13 +309,10 @@ const PopinTask = ({
 											type: type || 'DEFAULT',
 											projectId: selectedProject,
 											tags: tags.map(({id}) => id),
-											linkedCustomerId:
-												customer && customer.id,
+											linkedCustomerId: customer,
 											dueDate,
 											unit: parseFloat(unit),
-											scheduledFor: isCustomerTask(type)
-												? undefined
-												: scheduledFor,
+											scheduledFor,
 										};
 
 										if (type === 'CONTENT_ACQUISITION') {
@@ -472,7 +468,7 @@ const PopinTask = ({
 					</Row>
 				)}
 
-				{isCustomerTask(type) && (
+				{type !== 'PERSONAL' && type !== 'SECTION' && (
 					<Row>
 						<MaterialIcon icon="person_outline" size="tiny" />
 						<CustomersDropdown
@@ -558,7 +554,7 @@ const PopinTask = ({
 					</Row>
 				)}
 
-				{!isCustomerTask(type) && type !== 'SECTION' && (
+				{type !== 'SECTION' && (
 					<Row>
 						<MaterialIcon icon="event_available" size="tiny" />
 						<DateContainer ref={scheduledForRef}>
@@ -650,12 +646,10 @@ const PopinTask = ({
 								type: type || 'DEFAULT',
 								projectId: selectedProject,
 								tags: tags.map(({id}) => id),
-								linkedCustomerId: customer && customer.id,
+								linkedCustomerId: customer,
 								dueDate,
 								unit: parseFloat(unit),
-								scheduledFor: isCustomerTask(type)
-									? undefined
-									: scheduledFor,
+								scheduledFor,
 							};
 
 							if (type === 'CONTENT_ACQUISITION') {

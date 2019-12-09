@@ -1,9 +1,14 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
+import {useHistory, useLocation} from 'react-router';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
-import {formatName, isCustomerTask} from '../../utils/functions';
+import {
+	formatName,
+	isCustomerTask,
+	taskFulfillsActivationCriteria,
+} from '../../utils/functions';
 import {
 	ADD_ITEM,
 	ADD_SECTION,
@@ -32,6 +37,8 @@ const CreateTask = ({
 	createAfterItem,
 	createAfterSection,
 }) => {
+	const history = useHistory();
+	const location = useLocation();
 	const [openCreateProjectModal, setOpenCreateProjectModal] = useState(false);
 	const [newProjectName, setNewProjectName] = useState('');
 	const [createTask] = useMutation(ADD_ITEM);
@@ -172,12 +179,29 @@ const CreateTask = ({
 						});
 
 						if (task.scheduledFor) {
-							focusTask({
-								variables: {
-									itemId: response.data.addItem.id,
-									for: task.scheduledFor,
-								},
-							});
+							const newTask = response.data.addItem;
+
+							if (
+								isCustomerTask(newTask.type)
+								&& taskFulfillsActivationCriteria(newTask)
+							) {
+								history.push({
+									pathname: `${location.pathname}/${newTask.id}`,
+									state: {
+										prevSearch: location.search,
+										isActivating: true,
+										scheduledFor: task.scheduledFor,
+									},
+								});
+							}
+							else {
+								focusTask({
+									variables: {
+										itemId: newTask.id,
+										for: task.scheduledFor,
+									},
+								});
+							}
 						}
 					}}
 					currentProjectId={currentProjectId}

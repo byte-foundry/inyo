@@ -23,10 +23,9 @@ import TaskIconValidatedUrl, {
 } from "./icons/taskicon-user-validated.svg";
 import TaskIconUrl, { ReactComponent as TaskIcon } from "./icons/taskicon.svg";
 
-// export const GRAPHQL_API = `https://prisma${
-// 	process.env.REACT_APP_INYO_ENV === "development" ? "-dev" : ""
-// }.inyo.me/`;
-export const GRAPHQL_API = "http://prisma.prototypo.io:4002";
+export const GRAPHQL_API = `https://prisma${
+	process.env.REACT_APP_INYO_ENV === "development" ? "-dev" : ""
+}.inyo.me/`;
 
 export const INTERCOM_APP_ID =
 	process.env.REACT_APP_INYO_ENV === "development" ? "cg8ntaar" : "imlnj7st";
@@ -229,6 +228,9 @@ export const CATEGORY_NAMES = {
 	},
 	CUSTOMER_REPORT: {
 		text: () => fbt("Rapport client", "customer report")
+	},
+	COMMENT_ADDED: {
+		text: () => fbt("Commentaire ajouté", "comment added")
 	}
 };
 
@@ -265,6 +267,9 @@ export const EMAIL_NAME_BY_TYPE = {
 	},
 	CUSTOMER_REPORT: {
 		text: () => fbt("Rapport client", "customer report email")
+	},
+	COMMENT_ADDED: {
+		text: () => fbt("Commentaire ajouté", "comment added")
 	}
 };
 

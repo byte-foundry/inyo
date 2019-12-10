@@ -1,36 +1,37 @@
-import styled from '@emotion/styled/macro';
-import moment from 'moment';
-import React, {useEffect, useRef, useState} from 'react';
-import {animated, useSpring} from 'react-spring';
+import styled from "@emotion/styled/macro";
+import moment from "moment";
+import React, { useEffect, useRef, useState } from "react";
+import { animated, useSpring } from "react-spring";
 
-import fbt from '../../fbt/fbt.macro';
-import {BREAKPOINTS, REMINDER_TYPES_DATA} from '../../utils/constants';
+import fbt from "../../fbt/fbt.macro";
+import { BREAKPOINTS, REMINDER_TYPES_DATA } from "../../utils/constants";
 import {
 	BackButton,
 	Button,
 	DateContainer,
 	primaryBlack,
-	Select,
-} from '../../utils/new/design-system';
-import useMeasure from '../../utils/useMeasure';
-import useOnClickOutside from '../../utils/useOnClickOutside';
-import usePrevious from '../../utils/usePrevious';
-import DateInput from '../DateInput';
-import IconButton from '../IconButton';
-import ReminderTestEmailButton from '../ReminderTestEmailButton';
-import Tooltip from '../Tooltip';
+	Select
+} from "../../utils/new/design-system";
+import useMeasure from "../../utils/useMeasure";
+import useOnClickOutside from "../../utils/useOnClickOutside";
+import usePrevious from "../../utils/usePrevious";
+import DateInput from "../DateInput";
+import IconButton from "../IconButton";
+import ReminderTestEmailButton from "../ReminderTestEmailButton";
+import Tooltip from "../Tooltip";
+import TimingInput from "../TimingInput";
 
-const Container = styled('div')`
+const Container = styled("div")`
 	display: flex;
 	flex-direction: column;
 `;
 
-const ReminderList = styled('div')`
+const ReminderList = styled("div")`
 	margin-bottom: 2rem;
 	margin-top: 1rem;
 `;
 
-const ReminderItem = styled('div')`
+const ReminderItem = styled("div")`
 	color: ${primaryBlack};
 	font-size: 14px;
 	display: flex;
@@ -45,7 +46,7 @@ const ReminderItem = styled('div')`
 	}
 `;
 
-const ReminderText = styled('div')`
+const ReminderText = styled("div")`
 	flex: 1 0 200px;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -56,7 +57,7 @@ const ReminderText = styled('div')`
 	}
 `;
 
-const ReminderDate = styled('div')`
+const ReminderDate = styled("div")`
 	font-size: 12px;
 	margin: 0 5px;
 	cursor: default;
@@ -66,7 +67,7 @@ const ReminderDate = styled('div')`
 	}
 `;
 
-const ReminderActions = styled('div')`
+const ReminderActions = styled("div")`
 	display: flex;
 	text-align: right;
 	justify-content: space-between;
@@ -79,7 +80,7 @@ const ReminderActions = styled('div')`
 	}
 `;
 
-const ReminderButtons = styled('div')`
+const ReminderButtons = styled("div")`
 	margin-left: 1rem;
 	display: flex;
 	align-items: center;
@@ -94,8 +95,9 @@ const ReminderForm = styled(animated.form)`
 	flex-direction: column;
 `;
 
-const ReminderFormGroup = styled('div')`
+const ReminderFormGroup = styled("div")`
 	display: flex;
+	align-items: center;
 	margin: 1rem 0 0.5rem 0;
 	font-size: 0.8rem;
 
@@ -104,7 +106,7 @@ const ReminderFormGroup = styled('div')`
 	}
 `;
 
-const ReminderFormActions = styled('div')`
+const ReminderFormActions = styled("div")`
 	display: flex;
 	align-self: flex-end;
 	margin: 0 0 1.5rem 0;
@@ -124,37 +126,36 @@ const WrapProps = styled(animated.div)`
 	flex-direction: column;
 `;
 
-const CollapsableReminderForm = ({children, isOpen, ...props}) => {
-	const [bind, {height: viewHeight}] = useMeasure();
+const CollapsableReminderForm = ({ children, isOpen, ...props }) => {
+	const [bind, { height: viewHeight }] = useMeasure();
 	const wasOpen = usePrevious(isOpen);
 	const animatedProps = useSpring({
-		to: async (next) => {
+		to: async next => {
 			if (isOpen) {
 				await next({
 					opacity: 1,
 					height: viewHeight,
-					overflow: 'hidden',
+					overflow: "hidden"
 				});
-				await next({opacity: 1, height: 'auto', overflow: ''});
-			}
-			else {
+				await next({ opacity: 1, height: "auto", overflow: "" });
+			} else {
 				if (wasOpen) {
 					await next({
 						opacity: 1,
 						height: viewHeight,
-						overflow: 'hidden',
+						overflow: "hidden"
 					});
 				}
-				await next({opacity: 0, height: 0, overflow: 'hidden'});
+				await next({ opacity: 0, height: 0, overflow: "hidden" });
 			}
 		},
-		from: {opacity: 0, height: 0, overflow: 'hidden'},
+		from: { opacity: 0, height: 0, overflow: "hidden" },
 		config: {
 			mass: 1,
 			tension: 350,
 			friction: 22,
-			clamp: true,
-		},
+			clamp: true
+		}
 	});
 
 	return (
@@ -164,22 +165,47 @@ const CollapsableReminderForm = ({children, isOpen, ...props}) => {
 	);
 };
 
+const convertDelayToValues = ({ delay, isRelative }) => {
+	let value;
+	let unit;
+
+	if (delay <= 55 * 60) {
+		value = delay / 60;
+		unit = "minutes";
+	} else if (delay <= 23 * 60 * 60) {
+		value = delay / (60 * 60);
+		unit = "hours";
+	} else if (delay <= 6 * 60 * 60 * 24) {
+		value = delay / (60 * 60 * 24);
+		unit = "days";
+	} else {
+		value = delay / (60 * 60 * 24 * 7);
+		unit = "weeks";
+	}
+
+	return {
+		value,
+		unit,
+		isRelative
+	};
+};
+
 const TaskRemindersPreviewsList = ({
 	taskId,
 	remindersPreviews: plannedReminders = [],
-	customerName = '',
+	customerName = "",
 	initialScheduledFor,
 	onFocusTask,
-	onCancel,
+	onCancel
 }) => {
 	const [reminders, setReminders] = useState(plannedReminders);
 	const [editingIndex, setEditingIndex] = useState(null);
 	const [value, setValue] = useState(1);
-	const [unit, setUnit] = useState('days');
+	const [unit, setUnit] = useState("days");
 	const [isRelative, setIsRelative] = useState(true);
 	const [isEditingScheduledFor, setIsEditingScheduledFor] = useState(false);
 	const [scheduledFor, setScheduledFor] = useState(
-		moment(initialScheduledFor),
+		moment(initialScheduledFor)
 	);
 
 	const dateRef = useRef();
@@ -191,29 +217,37 @@ const TaskRemindersPreviewsList = ({
 	const durationOptions = {
 		minutes: new Array(60 / 5 - 1).fill(0).map((_, i) => ({
 			label: (i + 1) * 5,
-			value: (i + 1) * 5,
+			value: (i + 1) * 5
 		})),
 		hours: new Array(24 - 1).fill(0).map((_, i) => ({
 			label: i + 1,
-			value: i + 1,
+			value: i + 1
 		})),
 		days: new Array(7 - 1).fill(0).map((_, i) => ({
 			label: i + 1,
-			value: i + 1,
+			value: i + 1
 		})),
 		weeks: new Array(12 - 1).fill(0).map((_, i) => ({
 			label: i + 1,
-			value: i + 1,
-		})),
+			value: i + 1
+		}))
 	};
 
-	useEffect(() => {
-		setValue(1);
-		setUnit('days');
-		setIsRelative(true);
-	}, [editingIndex]);
-
 	const mutableReminders = [...reminders];
+
+	useEffect(() => {
+		if (editingIndex !== null) {
+			const reminder = mutableReminders[editingIndex];
+			const { value, unit, isRelative } = convertDelayToValues(reminder);
+			setValue(value);
+			setUnit(unit);
+			setIsRelative(isRelative);
+		} else {
+			setValue(1);
+			setUnit("days");
+			setIsRelative(false);
+		}
+	}, [editingIndex]);
 
 	return (
 		<Container>
@@ -222,12 +256,12 @@ const TaskRemindersPreviewsList = ({
 					Retour
 				</fbt>
 			</BackButton>
-			<DateContainer style={{alignSelf: 'flex-start'}}>
+			<DateContainer style={{ alignSelf: "flex-start" }}>
 				<span onClick={() => setIsEditingScheduledFor(true)}>
 					<fbt project="inyo" desc="activation date">
-						Date d'activation :{' '}
+						Date d'activation :{" "}
 						<fbt:param name="date">
-							{moment(scheduledFor).format('DD/MM/YYYY')}
+							{moment(scheduledFor).format("DD/MM/YYYY")}
 						</fbt:param>
 					</fbt>
 				</span>
@@ -245,7 +279,7 @@ const TaskRemindersPreviewsList = ({
 					.sort((a, b) => a.delay - b.delay)
 					.map((reminder, index) => {
 						const text = REMINDER_TYPES_DATA[reminder.type].text(
-							customerName,
+							customerName
 						);
 
 						const dataTipProps = {};
@@ -262,24 +296,23 @@ const TaskRemindersPreviewsList = ({
 										{moment
 											.duration(reminder.delay * 1000)
 											.humanize()}
-									</fbt:param>{' '}
+									</fbt:param>{" "}
 									après l'activation de la tâche
 								</fbt>
 							);
-						}
-						else {
+						} else {
 							delay = (
 								<fbt project="inyo" desc="after previous email">
 									<fbt:param name="date">
 										{moment
 											.duration(
-												(reminder.delay
-													- mutableReminders[index - 1]
-														.delay)
-													* 1000,
+												(reminder.delay -
+													mutableReminders[index - 1]
+														.delay) *
+													1000
 											)
 											.humanize()}
-									</fbt:param>{' '}
+									</fbt:param>{" "}
 									après l'email précédent
 								</fbt>
 							);
@@ -331,11 +364,11 @@ const TaskRemindersPreviewsList = ({
 														setReminders([
 															...mutableReminders.slice(
 																0,
-																index,
+																index
 															),
 															...mutableReminders.slice(
-																index + 1,
-															),
+																index + 1
+															)
 														]);
 													}}
 												>
@@ -351,18 +384,18 @@ const TaskRemindersPreviewsList = ({
 								</ReminderItem>
 								<CollapsableReminderForm
 									isOpen={editingIndex === index}
-									onSubmit={(e) => {
+									onSubmit={e => {
 										e.preventDefault();
 
 										const absoluteDelay = moment.duration(
 											value,
-											unit,
+											unit
 										);
 
 										if (isRelative && index > 0) {
 											absoluteDelay.add(
 												mutableReminders[index - 1]
-													.delay * 1000,
+													.delay * 1000
 											);
 										}
 
@@ -371,173 +404,23 @@ const TaskRemindersPreviewsList = ({
 											{
 												...reminder,
 												delay: absoluteDelay.asSeconds(),
-												isRelative,
+												isRelative
 											},
-											...mutableReminders.slice(
-												index + 1,
-											),
+											...mutableReminders.slice(index + 1)
 										]);
 
 										setEditingIndex(null);
 									}}
 								>
 									<ReminderFormGroup>
-										<Select
-											key={unit}
-											name="value"
-											options={durationOptions[unit]}
-											onChange={({value}) => setValue(value)
-											}
-											isSearchable={false}
-											defaultValue={
-												durationOptions[unit][0]
-											}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 1,
-													margin: '5px 0 5px 5px',
-												}),
-											}}
-										/>
-										<Select
-											name="unit"
-											options={[
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="minutes"
-														>
-															minutes
-														</fbt>
-													),
-													value: 'minutes',
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="hours"
-														>
-															heures
-														</fbt>
-													),
-													value: 'hours',
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="days"
-														>
-															jours
-														</fbt>
-													),
-													value: 'days',
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="weeks"
-														>
-															semaines
-														</fbt>
-													),
-													value: 'weeks',
-												},
-											]}
-											onChange={({value}) => setUnit(value)
-											}
-											isSearchable={false}
-											defaultValue={{
-												label: (
-													<fbt
-														project="inyo"
-														desc="days"
-													>
-														jours
-													</fbt>
-												),
-												value: 'days',
-											}}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 1,
-													margin: '5px 0 5px 5px',
-												}),
-											}}
-										/>
-										<Select
-											name="from"
-											isDisabled={index === 0}
-											options={[
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="after task activation"
-														>
-															après l'activation
-															de la tâche
-														</fbt>
-													),
-													value: false,
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="after previous email"
-														>
-															après l'email
-															précédent
-														</fbt>
-													),
-													value: true,
-												},
-											]}
-											onChange={({value}) => setIsRelative(value)
-											}
-											isSearchable={false}
-											value={
-												index !== 0 && isRelative
-													? {
-														label: (
-															<fbt
-																project="inyo"
-																desc="after previous email"
-															>
-																	après
-																	l'email
-																	précédent
-															</fbt>
-														),
-														value: true,
-													  }
-													: {
-														label: (
-															<fbt
-																project="inyo"
-																desc="after task activation"
-															>
-																	après
-																	l'activation
-																	de la tâche
-															</fbt>
-														),
-														value: false,
-													  }
-											}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 3,
-													margin: '5px 0 5px 5px',
-												}),
-											}}
+										<TimingInput
+											unit={unit}
+											value={value}
+											isRelative={isRelative}
+											setValue={setValue}
+											setUnit={setUnit}
+											setIsRelative={setIsRelative}
+											relativeDisabled={index === 0}
 										/>
 									</ReminderFormGroup>
 									<ReminderFormActions>
@@ -546,7 +429,8 @@ const TaskRemindersPreviewsList = ({
 											type="button"
 											link
 											aligned
-											onClick={() => setEditingIndex(null)
+											onClick={() =>
+												setEditingIndex(null)
 											}
 										>
 											<fbt project="inyo" desc="cancel">
@@ -579,15 +463,16 @@ const TaskRemindersPreviewsList = ({
 				<Button
 					type="submit"
 					aligned
-					onClick={() => onFocusTask({
-						reminders: mutableReminders.map(r => ({
-							delay: r.delay,
-							type: r.type,
-						})),
-						scheduledFor: scheduledFor.format(
-							moment.HTML5_FMT.DATE,
-						),
-					})
+					onClick={() =>
+						onFocusTask({
+							reminders: mutableReminders.map(r => ({
+								delay: r.delay,
+								type: r.type
+							})),
+							scheduledFor: scheduledFor.format(
+								moment.HTML5_FMT.DATE
+							)
+						})
 					}
 				>
 					<fbt project="inyo" desc="confirm activation">

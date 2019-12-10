@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Editor } from "slate-react";
 import { Value } from "slate";
 import React, { useState, useRef, useEffect } from "react";
+import { Prompt } from "react-router";
 
 import { useQuery, useMutation } from "../../utils/apollo-hooks";
 import { Loading } from "../../utils/content";
@@ -166,8 +167,24 @@ const initialValue = {
 	}
 };
 
+const compareStateAndData = (state, template) => {
+	return (
+		state.timing.value === template.timing.value &&
+		state.timing.unit === template.timing.unit &&
+		state.timing.isRelative === template.timing.isRelative &&
+		state.subject === template.subject &&
+		state.content === template.content
+	);
+};
+
 const EmailCustomizer = ({ emailType }) => {
 	const { assistantName } = useUserInfos();
+	const [stateIsUnchanged, setStateIsUnchange] = useState();
+	const [unit, setUnit] = useState();
+	const [value, setValue] = useState();
+	const [isRelative, setIsRelative] = useState();
+	const [initialSubject, setInitialSubject] = useState();
+	const [initialContent, setInitialContent] = useState();
 	const [contentValue, setContentValue] = useState(
 		Value.fromJSON(initialValue)
 	);
@@ -197,10 +214,51 @@ const EmailCustomizer = ({ emailType }) => {
 
 	useEffect(() => {
 		if (!loading) {
-			setSubjectValue(Value.fromJSON(data.emailTemplate.subject));
-			setContentValue(Value.fromJSON(data.emailTemplate.content));
+			const subject = Value.fromJSON(data.emailTemplate.subject);
+			const content = Value.fromJSON(data.emailTemplate.content);
+
+			setInitialSubject(subject);
+			setInitialContent(content);
+			setSubjectValue(subject);
+			setContentValue(content);
+			setUnit(data.emailTemplate.timing.unit);
+			setValue(data.emailTemplate.timing.value);
+			setIsRelative(data.emailTemplate.timing.isRelative);
 		}
 	}, [loading, data]);
+
+	useEffect(() => {
+		if (!loading) {
+			setStateIsUnchange(
+				compareStateAndData(
+					{
+						timing: {
+							unit,
+							value,
+							isRelative
+						},
+						subject: subjectValue,
+						content: contentValue
+					},
+					{
+						timing: data.emailTemplate.timing,
+						subject: initialSubject,
+						content: initialContent
+					}
+				)
+			);
+		}
+	}, [
+		loading,
+		data,
+		unit,
+		value,
+		isRelative,
+		subjectValue,
+		contentValue,
+		initialValue,
+		initialContent
+	]);
 
 	if (loading) {
 		return (
@@ -212,7 +270,16 @@ const EmailCustomizer = ({ emailType }) => {
 
 	return (
 		<div style={{ flex: 1 }}>
-			<CustomEmailTimingInput />
+			{data.emailTemplate.timing && (
+				<CustomEmailTimingInput
+					unit={unit}
+					value={value}
+					isRelative={isRelative}
+					setUnit={setUnit}
+					setValue={setValue}
+					setIsRelative={setIsRelative}
+				/>
+			)}
 			<EmailParamList
 				params={emailType.availableParams}
 				editor={focusedEditorRef.current}
@@ -305,6 +372,11 @@ const EmailCustomizer = ({ emailType }) => {
 						updateEmailTemplate({
 							variables: {
 								templateId: data.emailTemplate.id,
+								timing: {
+									unit,
+									value,
+									isRelative
+								},
 								subject: subjectEditorRef.current.value,
 								content: contentEditorRef.current.value
 							}
@@ -314,6 +386,16 @@ const EmailCustomizer = ({ emailType }) => {
 					Enregistrer ce modèle
 				</Button>
 			</ButtonsWrap>
+			<Prompt
+				when={!stateIsUnchanged}
+				message="Vous avez des changements non sauvegardés. Etes-vous sûr de vouloir quitter la page ?"
+				messageTranslated={() => (
+					<fbt desc="unsaved changes">
+						Vous avez des changements non sauvegardés. Etes-vous sûr
+						de vouloir quitter la page ?
+					</fbt>
+				)}
+			/>
 		</div>
 	);
 };

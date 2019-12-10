@@ -987,15 +987,18 @@ export const UPDATE_EMAIL_TEMPLATE = gql`
 		$templateId: ID!
 		$subject: Json!
 		$content: Json!
+		$timing: Json
 	) {
 		updateEmailTemplate(
 			id: $templateId
 			subject: $subject
 			content: $content
+			timing: $timing
 		) {
 			id
 			subject
 			content
+			timing
 			type {
 				id
 				name

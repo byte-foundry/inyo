@@ -4,6 +4,7 @@ import { Select } from "../../utils/new/design-system";
 
 const TimingInput = ({
 	unit,
+	value,
 	isRelative,
 	setValue,
 	setUnit,
@@ -29,15 +30,50 @@ const TimingInput = ({
 		}))
 	};
 
+	const unitOptions = [
+		{
+			label: (
+				<fbt project="inyo" desc="minutes">
+					minutes
+				</fbt>
+			),
+			value: "minutes"
+		},
+		{
+			label: (
+				<fbt project="inyo" desc="hours">
+					heures
+				</fbt>
+			),
+			value: "hours"
+		},
+		{
+			label: (
+				<fbt project="inyo" desc="days">
+					jours
+				</fbt>
+			),
+			value: "days"
+		},
+		{
+			label: (
+				<fbt project="inyo" desc="weeks">
+					semaines
+				</fbt>
+			),
+			value: "weeks"
+		}
+	];
+
 	return (
 		<>
 			<Select
 				key={unit}
 				name="value"
+				value={{ label: value, value: value }}
 				options={durationOptions[unit]}
 				onChange={({ value }) => setValue(value)}
 				isSearchable={false}
-				defaultValue={durationOptions[unit][0]}
 				style={{
 					container: styles => ({
 						...styles,
@@ -48,50 +84,15 @@ const TimingInput = ({
 			/>
 			<Select
 				name="unit"
-				options={[
-					{
-						label: (
-							<fbt project="inyo" desc="minutes">
-								minutes
-							</fbt>
-						),
-						value: "minutes"
-					},
-					{
-						label: (
-							<fbt project="inyo" desc="hours">
-								heures
-							</fbt>
-						),
-						value: "hours"
-					},
-					{
-						label: (
-							<fbt project="inyo" desc="days">
-								jours
-							</fbt>
-						),
-						value: "days"
-					},
-					{
-						label: (
-							<fbt project="inyo" desc="weeks">
-								semaines
-							</fbt>
-						),
-						value: "weeks"
-					}
-				]}
-				onChange={({ value }) => setUnit(value)}
-				isSearchable={false}
-				defaultValue={{
-					label: (
-						<fbt project="inyo" desc="days">
-							jours
-						</fbt>
-					),
-					value: "days"
+				options={unitOptions}
+				onChange={({ value }) => {
+					setUnit(value);
+					setValue(durationOptions[value][0].value);
 				}}
+				isSearchable={false}
+				value={unitOptions.find(
+					option => option.value === (unit || "days")
+				)}
 				style={{
 					container: styles => ({
 						...styles,
@@ -122,7 +123,18 @@ const TimingInput = ({
 						value: true
 					}
 				]}
-				onChange={({ value }) => setIsRelative(value)}
+				onChange={({ value }) => {
+					setValue(durationOptions[unit][0].value);
+					setUnit({
+						label: (
+							<fbt project="inyo" desc="days">
+								jours
+							</fbt>
+						),
+						value: "days"
+					});
+					setIsRelative(value);
+				}}
 				isSearchable={false}
 				value={
 					!relativeDisabled && isRelative

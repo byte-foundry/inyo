@@ -20,6 +20,7 @@ import {
 } from "../../utils/mutations";
 import { GET_EMAIL_TEMPLATE } from "../../utils/queries";
 import EmailParamList from "../EmailParamList";
+import CustomEmailTimingInput from "../CustomEmailTimingInput";
 import useUserInfos from "../../utils/useUserInfos";
 
 const MailContainer = styled("div")`
@@ -185,6 +186,15 @@ const EmailCustomizer = ({ emailType }) => {
 	const [sendCustomEmailPreview] = useMutation(SEND_CUSTOM_EMAIL_PREVIEW);
 	const [updateEmailTemplate] = useMutation(UPDATE_EMAIL_TEMPLATE);
 
+	const paramsUsed = [
+		...contentValue.document
+			.filterDescendants(block => block.type === "param")
+			.map(param => param.text),
+		...subjectValue.document
+			.filterDescendants(block => block.type === "param")
+			.map(param => param.text)
+	];
+
 	useEffect(() => {
 		if (!loading) {
 			setSubjectValue(Value.fromJSON(data.emailTemplate.subject));
@@ -202,9 +212,11 @@ const EmailCustomizer = ({ emailType }) => {
 
 	return (
 		<div style={{ flex: 1 }}>
+			<CustomEmailTimingInput />
 			<EmailParamList
 				params={emailType.availableParams}
 				editor={focusedEditorRef.current}
+				paramsUsed={paramsUsed}
 			/>
 			<TestEmailLinkContainer>
 				<TestEmailLink

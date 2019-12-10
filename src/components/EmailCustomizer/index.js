@@ -169,9 +169,10 @@ const initialValue = {
 
 const compareStateAndData = (state, template) => {
 	return (
-		state.timing.value === template.timing.value &&
-		state.timing.unit === template.timing.unit &&
-		state.timing.isRelative === template.timing.isRelative &&
+		(template.timing === null ||
+			(state.timing.value === template.timing.value &&
+				state.timing.unit === template.timing.unit &&
+				state.timing.isRelative === template.timing.isRelative)) &&
 		state.subject === template.subject &&
 		state.content === template.content
 	);
@@ -221,9 +222,11 @@ const EmailCustomizer = ({ emailType }) => {
 			setInitialContent(content);
 			setSubjectValue(subject);
 			setContentValue(content);
-			setUnit(data.emailTemplate.timing.unit);
-			setValue(data.emailTemplate.timing.value);
-			setIsRelative(data.emailTemplate.timing.isRelative);
+			if (data.emailTemplate.timing) {
+				setUnit(data.emailTemplate.timing.unit);
+				setValue(data.emailTemplate.timing.value);
+				setIsRelative(data.emailTemplate.timing.isRelative);
+			}
 		}
 	}, [loading, data]);
 

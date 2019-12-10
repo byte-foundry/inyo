@@ -1008,6 +1008,22 @@ export const UPDATE_EMAIL_TEMPLATE = gql`
 	}
 `;
 
+export const SET_TEMPLATE_TO_DEFAULT = gql`
+	mutation setTemplateToDefault($templateId: ID!) {
+		setTemplateToDefault(id: $templateId) {
+			id
+			subject
+			content
+			timing
+			type {
+				id
+				name
+				category
+			}
+		}
+	}
+`;
+
 export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
 	mutation sendCustomEmailPreview($templateId: ID!) {
 		sent: sendCustomEmailPreview(templateId: $templateId)

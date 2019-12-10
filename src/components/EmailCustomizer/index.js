@@ -4,6 +4,7 @@ import { Value } from "slate";
 import React, { useState, useRef, useEffect } from "react";
 import { Prompt } from "react-router";
 
+import fbt from "../../fbt/fbt.macro";
 import { useQuery, useMutation } from "../../utils/apollo-hooks";
 import { Loading } from "../../utils/content";
 import {
@@ -17,7 +18,8 @@ import {
 } from "../../utils/new/design-system";
 import {
 	SEND_CUSTOM_EMAIL_PREVIEW,
-	UPDATE_EMAIL_TEMPLATE
+	UPDATE_EMAIL_TEMPLATE,
+	SET_TEMPLATE_TO_DEFAULT
 } from "../../utils/mutations";
 import { GET_EMAIL_TEMPLATE } from "../../utils/queries";
 import EmailParamList from "../EmailParamList";
@@ -203,6 +205,7 @@ const EmailCustomizer = ({ emailType }) => {
 	});
 	const [sendCustomEmailPreview] = useMutation(SEND_CUSTOM_EMAIL_PREVIEW);
 	const [updateEmailTemplate] = useMutation(UPDATE_EMAIL_TEMPLATE);
+	const [setTemplateToDefault] = useMutation(SET_TEMPLATE_TO_DEFAULT);
 
 	const paramsUsed = [
 		...contentValue.document
@@ -357,18 +360,17 @@ const EmailCustomizer = ({ emailType }) => {
 			</MailContainer>
 			<ButtonsWrap>
 				<Button
-					onClick={() => {
-						console.log("Subject:");
-						console.log(
-							JSON.stringify(subjectEditorRef.current.value)
-						);
-						console.log("Content:");
-						console.log(
-							JSON.stringify(contentEditorRef.current.value)
-						);
-					}}
+					onClick={() =>
+						setTemplateToDefault({
+							variables: {
+								templateId: data.emailTemplate.id
+							}
+						})
+					}
 				>
-					Print in console
+					<fbt desc="back to default template">
+						Revenir au modèle par défaut
+					</fbt>
 				</Button>
 				<Button
 					onClick={() => {
@@ -391,13 +393,12 @@ const EmailCustomizer = ({ emailType }) => {
 			</ButtonsWrap>
 			<Prompt
 				when={!stateIsUnchanged}
-				message="Vous avez des changements non sauvegardés. Etes-vous sûr de vouloir quitter la page ?"
-				messageTranslated={() => (
+				message={
 					<fbt desc="unsaved changes">
 						Vous avez des changements non sauvegardés. Etes-vous sûr
 						de vouloir quitter la page ?
 					</fbt>
-				)}
+				}
 			/>
 		</div>
 	);

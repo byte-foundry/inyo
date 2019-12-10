@@ -15,7 +15,7 @@ import {
 	InputLabel,
 	Label,
 	primaryRed,
-	primaryWhite
+	primaryWhite,
 } from '../../utils/new/design-system';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
@@ -86,7 +86,9 @@ const UploadButtons = styled('div')`
 `;
 
 const UserCompanyForm = ({data, buttonText}) => {
-	const {name, address, phone, logo, banner} = data;
+	const {
+		name, address, phone, logo, banner,
+	} = data;
 	const [updateUser] = useMutation(UPDATE_USER_COMPANY);
 	const [isOpenImagePickerModal, setisOpenImagePickerModal] = useState(false);
 
@@ -96,13 +98,13 @@ const UserCompanyForm = ({data, buttonText}) => {
 				initialValues={{
 					name: name || '',
 					phone: phone || '',
-					address: address || ''
+					address: address || '',
 				}}
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required(
 						<fbt project="inyo" desc="required">
 							Requis
-						</fbt>
+						</fbt>,
 					),
 					phone: Yup.string(),
 					address: Yup.object()
@@ -110,13 +112,13 @@ const UserCompanyForm = ({data, buttonText}) => {
 							street: Yup.string().required(),
 							city: Yup.string().required(),
 							postalCode: Yup.string().required(),
-							country: Yup.string().required()
+							country: Yup.string().required(),
 						})
 						.required(
 							<fbt project="inyo" desc="required">
 								Requis
-							</fbt>
-						)
+							</fbt>,
+						),
 				})}
 				onSubmit={async (values, actions) => {
 					actions.setSubmitting(false);
@@ -128,27 +130,29 @@ const UserCompanyForm = ({data, buttonText}) => {
 									phone: values.phone,
 									address: {
 										...values.address,
-										__typename: undefined
-									}
-								}
-							}
+										__typename: undefined,
+									},
+								},
+							},
 						});
 
 						window.Intercom('trackEvent', 'updated-company-data');
 						ReactGA.event({
 							category: 'User',
-							action: 'Updated company data'
+							action: 'Updated company data',
 						});
-					} catch (error) {
+					}
+					catch (error) {
 						if (
-							error.networkError &&
-							error.networkError.result &&
-							error.networkError.result.errors
+							error.networkError
+							&& error.networkError.result
+							&& error.networkError.result.errors
 						) {
 							Sentry.captureException(
-								error.networkError.result.errors
+								error.networkError.result.errors,
 							);
-						} else {
+						}
+						else {
 							Sentry.captureException(error);
 						}
 						actions.setSubmitting(false);
@@ -158,12 +162,12 @@ const UserCompanyForm = ({data, buttonText}) => {
 								<fbt project="inyo" desc="something went wrong">
 									Quelque chose s'est mal passé
 								</fbt>
-							)
+							),
 						});
 					}
 				}}
 			>
-				{props => {
+				{(props) => {
 					const {status, handleSubmit, setFieldValue} = props;
 
 					return (
@@ -232,13 +236,13 @@ const UserCompanyForm = ({data, buttonText}) => {
 										padded
 										required
 										style={{
-											gridColumn: '1 / 3'
+											gridColumn: '1 / 3',
 										}}
 									/>
 									<div
 										style={{
 											gridColumn: '1 / 2',
-											marginTop: '1rem'
+											marginTop: '1rem',
 										}}
 									>
 										<InputLabel>
@@ -261,17 +265,16 @@ const UserCompanyForm = ({data, buttonText}) => {
 
 											<UploadButtons>
 												<UploadDashboardButton
-													onUploadFiles={([file]) =>
-														updateUser({
-															variables: {
-																company: {
-																	logo: file
-																}
+													onUploadFiles={([file]) => updateUser({
+														variables: {
+															company: {
+																logo: file,
 															},
-															context: {
-																hasUpload: true
-															}
-														})
+														},
+														context: {
+															hasUpload: true,
+														},
+													})
 													}
 													restrictions={{
 														maxFileSize: 500 * 1024,
@@ -281,8 +284,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 															'.jpg',
 															'.jpeg',
 															'.png',
-															'.gif'
-														]
+															'.gif',
+														],
 													}}
 													allowMultipleUploads={false}
 													autoProceed
@@ -296,14 +299,13 @@ const UserCompanyForm = ({data, buttonText}) => {
 														icon="delete"
 														size="tiny"
 														color={primaryRed}
-														onClick={() =>
-															updateUser({
-																variables: {
-																	company: {
-																		logo: null
-																	}
-																}
-															})
+														onClick={() => updateUser({
+															variables: {
+																company: {
+																	logo: null,
+																},
+															},
+														})
 														}
 													/>
 												)}
@@ -313,7 +315,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 									<div
 										style={{
 											gridColumn: '2 / 3',
-											marginTop: '1rem'
+											marginTop: '1rem',
 										}}
 									>
 										<InputLabel>
@@ -326,66 +328,61 @@ const UserCompanyForm = ({data, buttonText}) => {
 												<ImageContainer height="50%">
 													<img
 														src={
-															banner.url ||
-															banner.urls.small
+															banner.url
+															|| banner.urls.small
 														}
 														alt="Company banner"
 													/>
 												</ImageContainer>
 											)}
-
 											<UploadButtons>
-												{/*
-													<Button
-														type="button"
-														onClick={() =>
-															setisOpenImagePickerModal(
-																true
-															)
-														}
-													>
-														<fbt desc="Company's banner upload button">
-															Choisir une image
-															prédéfinie
-														</fbt>
-													</Button>}
-												*/}
+												<Button
+													type="button"
+													onClick={() => setisOpenImagePickerModal(
+														true,
+													)
+													}
+												>
+													<fbt desc="Company's banner upload button">
+														Choisir une image
+														prédéfinie
+													</fbt>
+												</Button>
+
 												{isOpenImagePickerModal && (
 													<ImagePickerModal
-														onDismiss={() =>
-															setisOpenImagePickerModal(
-																false
-															)
+														onDismiss={() => setisOpenImagePickerModal(
+															false,
+														)
 														}
 														onSelectImage={({
-															id
+															id,
 														}) => {
 															updateUser({
 																variables: {
 																	company: {
-																		bannerUnsplashId: id
-																	}
-																}
+																		bannerUnsplashId: id,
+																	},
+																},
 															});
 															setisOpenImagePickerModal(
-																false
+																false,
 															);
 														}}
 													/>
 												)}
 
 												<UploadDashboardButton
-													onUploadFiles={([file]) =>
-														updateUser({
-															variables: {
-																company: {
-																	banner: file
-																}
+													onUploadFiles={([file]) => updateUser({
+														variables: {
+															company: {
+																banner: file,
 															},
-															context: {
-																hasUpload: true
-															}
-														})
+														},
+														context: {
+															hasUpload: true,
+														},
+													})
 													}
 													restrictions={{
 														maxFileSize:
@@ -396,8 +393,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 															'.jpg',
 															'.jpeg',
 															'.png',
-															'.gif'
-														]
+															'.gif',
+														],
 													}}
 													allowMultipleUploads={false}
 													autoProceed
@@ -412,15 +409,14 @@ const UserCompanyForm = ({data, buttonText}) => {
 														icon="delete"
 														size="tiny"
 														color={primaryRed}
-														onClick={() =>
-															updateUser({
-																variables: {
-																	company: {
-																		banner: null,
-																		bannerUnsplashId: null
-																	}
-																}
-															})
+														onClick={() => updateUser({
+															variables: {
+																company: {
+																	banner: null,
+																	bannerUnsplashId: null,
+																},
+															},
+														})
 														}
 													/>
 												)}
@@ -432,7 +428,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 								{status && status.msg && (
 									<ErrorInput
 										style={{
-											marginBottom: '1rem'
+											marginBottom: '1rem',
 										}}
 									>
 										{status.msg}

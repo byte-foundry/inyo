@@ -14,6 +14,7 @@ import {
 	primaryBlack,
 	primaryPurple,
 	lightGrey,
+	mediumPurple,
 	primaryWhite
 } from "../../utils/new/design-system";
 import {
@@ -112,16 +113,18 @@ const MailText = styled("div")`
 `;
 
 const ParamDisplay = styled("span")`
-	background: ${props => (props.isSelected ? "#684EBC" : "#F1F3F4")};
+	background: ${props => (props.isSelected ? primaryPurple : lightGrey)};
 	border-radius: 20px;
 	padding: 0px 10px 2px;
-	color: ${props => (props.isSelected ? "#F1F3F4" : "#684EBC")};
+	color: ${props => (props.isSelected ? primaryWhite : primaryPurple)};
+	border: 1px solid transparent;
 	user-select: none;
 
 	&:hover {
-		background: #684ebc;
-		color: #f1f3f4;
+		border: 1px solid ${primaryPurple};
+		color: ${primaryPurple};
 		cursor: pointer;
+		transition: 200ms all ease;
 	}
 `;
 
@@ -360,6 +363,8 @@ const EmailCustomizer = ({ emailType }) => {
 			</MailContainer>
 			<ButtonsWrap>
 				<Button
+					link
+					red
 					onClick={() =>
 						setTemplateToDefault({
 							variables: {

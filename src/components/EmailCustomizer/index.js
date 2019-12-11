@@ -278,7 +278,7 @@ const EmailCustomizer = ({ emailType }) => {
 	}
 
 	return (
-		<div style={{ flex: 1 }}>
+		<div style={{ flex: 1, marginTop: "1.5rem" }}>
 			{data.emailTemplate.timing && (
 				<CustomEmailTimingInput
 					unit={unit}

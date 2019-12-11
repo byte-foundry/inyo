@@ -24,7 +24,9 @@ import {
 	SubHeading,
 	primaryPurple,
 	mediumPurple,
-	lightPurple
+	lightPurple,
+	primaryRed,
+	primaryWhite
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS_STATS, GET_USER_TAGS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
@@ -154,8 +156,8 @@ const Stats = ({history, location}) => {
 			} else if (value > 31) {
 				overview = 'year';
 			}
-			console.log('okkk');
-			console.log(overview);
+			// console.log('okkk');
+			// console.log(overview);
 
 			history.push(`/app/stats?${newQuery.toString()}`);
 		},
@@ -348,6 +350,33 @@ const Stats = ({history, location}) => {
 	const defaultTagsColorPalette = Object.values(
 		TAG_COLOR_PALETTE.map(x => 'rgb(' + x[0] + ')')
 	);
+
+	let maxHoursWorkedInADay = 0;
+	activities.forEach(t => {
+		if (
+			t.date !== 'Invalid date' &&
+			moment(t.date).isSameOrAfter(moment().subtract(since, 'days'))
+		) {
+			maxHoursWorkedInADay = Math.max(
+				maxHoursWorkedInADay,
+				t.total / 60 / 60
+			);
+		}
+	});
+	// console.log(maxHoursWorkedInADay);
+
+	let workedTime = filteredTasks
+		.filter(t => t.status === 'FINISHED')
+		.reduce((total, {timeItTook}) => total + timeItTook, 0);
+
+	let estimatedTime = filteredTasks
+		.filter(t => t.status === 'FINISHED')
+		.reduce((total, {unit}) => total + unit, 0);
+
+	let amendment =
+		workedTime - estimatedTime < 0
+			? 0
+			: Math.abs((workedTime - estimatedTime) * defaultDailyPrice);
 
 	// console.log('here');
 	// console.log(tagsDistributions);
@@ -630,8 +659,7 @@ const Stats = ({history, location}) => {
 								data: {
 									stroke: primaryPurple,
 									strokeWidth: 3,
-									fill: mediumPurple,
-									opacity: '.5'
+									fill: mediumPurple
 								},
 								parent: {
 									position: 'absolute',
@@ -639,10 +667,15 @@ const Stats = ({history, location}) => {
 									left: '-1px'
 								}
 							}}
-							y0={() => -10}
+							y0={() => -maxHoursWorkedInADay / 3}
 							height={220}
 							padding={0}
-							domain={{y: [0, 30]}}
+							domain={{
+								y: [
+									-maxHoursWorkedInADay / 3,
+									maxHoursWorkedInADay
+								]
+							}}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
 								([key, obj]) => ({
@@ -660,8 +693,7 @@ const Stats = ({history, location}) => {
 									stroke: primaryPurple,
 									strokeWidth: 2,
 									strokeDasharray: '6, 6',
-									fill: mediumPurple,
-									opacity: '.5'
+									fill: 'transparent'
 								},
 								parent: {
 									position: 'absolute',
@@ -669,10 +701,15 @@ const Stats = ({history, location}) => {
 									left: '-1px'
 								}
 							}}
-							y0={() => -10}
+							y0={() => -maxHoursWorkedInADay / 3}
 							height={220}
 							padding={0}
-							domain={{y: [0, 30]}}
+							domain={{
+								y: [
+									-maxHoursWorkedInADay / 3,
+									maxHoursWorkedInADay
+								]
+							}}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
 								([key, obj]) => ({
@@ -680,6 +717,120 @@ const Stats = ({history, location}) => {
 									y: obj.unit * workingTime || 0
 								})
 							)}
+						/>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="estimated time">
+								Montant travaillé
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="estimated time tooltip">
+									<p>
+										Valeur de votre travail selon{' '}
+										<Link to="/app/account#settings">
+											votre TJM
+										</Link>{' '}
+										et les filtres et période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{new Intl.NumberFormat(language, {
+								style: 'currency',
+								currency: language === 'fr' ? 'EUR' : 'USD'
+							}).format(
+								filteredTasks
+									.filter(t => t.status === 'FINISHED')
+									.reduce(
+										(total, {timeItTook}) =>
+											total + timeItTook,
+										0
+									) * defaultDailyPrice
+							)}
+						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px'
+								}
+							}}
+							y0={() =>
+								((-maxHoursWorkedInADay / workingTime) *
+									defaultDailyPrice) /
+								3
+							}
+							height={220}
+							padding={0}
+							domain={{
+								y: [
+									((-maxHoursWorkedInADay / workingTime) *
+										defaultDailyPrice) /
+										3,
+									(maxHoursWorkedInADay / workingTime) *
+										defaultDailyPrice
+								]
+							}}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.finishedAt || 0,
+									y:
+										(obj.timeItTook
+											? obj.timeItTook
+											: obj.unit) * defaultDailyPrice || 0
+								})
+							)}
+						/>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Worked time">
+								Montant avenants
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Extra worked time tooltip">
+									<p>
+										Le montant représenté par la somme des
+										heures travaillées au-delà des
+										estimations que vous devriez facturer
+										selon les filtres et la période
+										sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{new Intl.NumberFormat(language, {
+								style: 'currency',
+								currency: language === 'fr' ? 'EUR' : 'USD'
+							}).format(amendment)}
+						</Number>
+						<VictoryPie
+							startAngle={-90}
+							endAngle={90}
+							data={[
+								{x: 'b', y: amendment},
+								{x: 'a', y: estimatedTime * defaultDailyPrice}
+							]}
+							style={{
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: 0
+								}
+							}}
+							colorScale={[primaryRed, mediumPurple]}
+							innerRadius={75}
+							labels={() => null}
 						/>
 					</Card>
 					<Card>
@@ -731,35 +882,6 @@ const Stats = ({history, location}) => {
 					</Card>
 					<Card>
 						<SubHeading>
-							<fbt project="inyo" desc="Gained time">
-								Temps gagné
-							</fbt>
-							<HelpAndTooltip icon="help">
-								<fbt desc="Gained time tooltip">
-									<p>
-										Temps gagné grâce à l'utilisation
-										d'Inyo, du fait des actions de votre{' '}
-										<i>Smart Assistant</i>.
-									</p>
-								</fbt>
-							</HelpAndTooltip>
-						</SubHeading>
-						<Number>
-							{moment
-								.duration(
-									reminders.filter(
-										reminder => reminder.status === 'SENT'
-									).length *
-										15 +
-										clientViews * 5,
-									'minutes'
-								)
-								.format('h_mm_')}
-							{console.log(reminders)}
-						</Number>
-					</Card>
-					<Card>
-						<SubHeading>
 							<fbt project="inyo" desc="Client visits">
 								Visites client
 							</fbt>
@@ -801,77 +923,38 @@ const Stats = ({history, location}) => {
 					</Card>
 					<Card>
 						<SubHeading>
-							<fbt project="inyo" desc="estimated time">
-								Montant travaillé
+							<fbt project="inyo" desc="Gained time">
+								Temps gagné
 							</fbt>
 							<HelpAndTooltip icon="help">
-								<fbt desc="estimated time tooltip">
+								<fbt desc="Gained time tooltip">
 									<p>
-										Valeur de votre travail selon{' '}
-										<Link to="/app/account#settings">
-											votre TJM
-										</Link>{' '}
-										et les filtres et période sélectionnés.
+										Temps gagné grâce à l'utilisation
+										d'Inyo, du fait des actions de votre{' '}
+										<i>Smart Assistant</i>.
 									</p>
 								</fbt>
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{new Intl.NumberFormat(language, {
-								style: 'currency',
-								currency: language === 'fr' ? 'EUR' : 'USD'
-							}).format(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {timeItTook}) =>
-											total + timeItTook,
-										0
-									) * defaultDailyPrice
-							)}
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT'
+									).length *
+										15 +
+										clientViews * 5,
+									'minutes'
+								)
+								.format('h_mm_')}
 						</Number>
-						<VictoryArea
-							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple
-								},
-								parent: {
-									position: 'absolute',
-									bottom: '-88px',
-									left: '-1px'
-								}
-							}}
-							y0={() => -1000}
-							height={220}
-							padding={0}
-							interpolation="natural"
-							data={Object.entries(filteredTasks).map(
-								([key, obj]) => ({
-									x: obj.finishedAt || 0,
-									y:
-										(obj.timeItTook
-											? obj.timeItTook
-											: obj.unit) * defaultDailyPrice || 0
-								})
-							)}
-						/>
-					</Card>
-					<Card>
 						<SubHeading>
-							<fbt project="inyo" desc="Worked time">
-								Montant avenants
+							<fbt project="inyo" desc="Soit">
+								Soit
 							</fbt>
 							<HelpAndTooltip icon="help">
-								<fbt desc="Extra worked time tooltip">
-									<p>
-										Le montant représenté par la somme des
-										heures travaillées au-delà des
-										estimations que vous devriez facturer
-										selon les filtres et la période
-										sélectionnés.
-									</p>
+								<fbt desc="From personnal Daily rate">
+									<p>Calculé d'après votre TJM.</p>
 								</fbt>
 							</HelpAndTooltip>
 						</SubHeading>
@@ -880,14 +963,12 @@ const Stats = ({history, location}) => {
 								style: 'currency',
 								currency: language === 'fr' ? 'EUR' : 'USD'
 							}).format(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {timeItTook, unit}) =>
-											total + timeItTook - (total + unit),
-										0
-									) *
-									workingTime *
+								((reminders.filter(
+									reminder => reminder.status === 'SENT'
+								).length *
+									0.25 +
+									clientViews * 0.1) /
+									workingTime) *
 									defaultDailyPrice
 							)}
 						</Number>

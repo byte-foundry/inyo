@@ -48,7 +48,7 @@ const reorderList = (
 	// update
 	else {
 		newList.splice(currentIndex, 1);
-		newList.splice(newIndex, 1, item);
+		newList.splice(newIndex, 0, item);
 
 		start = currentIndex < newIndex ? currentIndex : newIndex;
 		end = currentIndex < newIndex ? newIndex + 1 : currentIndex + 1;

@@ -9,6 +9,10 @@ const reorderList = (
 	let start;
 	let end;
 
+	if (currentIndex < 0 || currentIndex > list.length) {
+		return list;
+	}
+
 	// creation
 	if (currentIndex === null) {
 		// check to avoid duplicates

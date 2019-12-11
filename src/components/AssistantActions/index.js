@@ -27,7 +27,7 @@ const Dropdown = styled('div')`
 	position: absolute;
 	width: 450px;
 	box-shadow: 0 0 10px ${primaryGrey};
-	border-radius: 3px;
+	border-radius: 8px;
 	background: ${primaryWhite};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
@@ -95,7 +95,6 @@ const AssistantActions = ({mobile}) => {
 	}
 
 	const onClickOutsideCallback = useCallback(() => {
-		console.log(!preventClose ? 'oui!' : 'non!');
 		!preventClose && setOpen(false);
 	}, [preventClose]);
 

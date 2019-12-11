@@ -8,7 +8,7 @@ import {
 	mediumGrey,
 	primaryBlack,
 	primaryPurple,
-	primaryWhite,
+	primaryWhite
 } from '../../utils/new/design-system';
 import useUserInfos from '../../utils/useUserInfos';
 import UnitInput from '../UnitInput';
@@ -28,13 +28,12 @@ const SuggestedTime = styled('button')`
 	flex: 1;
 	background: ${props => (props.selected ? primaryPurple : primaryWhite)};
 	border: 1px solid ${props => (props.selected ? 'transparent' : mediumGrey)};
-	box-shadow: 3px 3px 6px ${mediumGrey};
+	box-shadow: 1px 1px 3px ${mediumGrey};
 	border-radius: 3px;
-	line-height: 0;
 	cursor: pointer;
 	transition: all 300ms ease;
-	margin: 0 5px 0 0;
-	padding: 0.5rem;
+	padding: 0.4rem 0.5rem;
+	margin-right: 6px;
 	color: ${props => (props.selected ? primaryWhite : primaryBlack)};
 
 	:hover {
@@ -120,9 +119,9 @@ const UnitWithSuggestionsForm = ({
 		// eslint-disable-next-line no-restricted-syntax
 		for (const [index, time] of timeList.entries()) {
 			if (
-				index > 0
-				&& timeList[index - 1] <= defaultValue * workingDay
-				&& time > defaultValue * workingDay
+				index > 0 &&
+				timeList[index - 1] <= defaultValue * workingDay &&
+				time > defaultValue * workingDay
 			) {
 				nextTimeIndex = index;
 				break;
@@ -132,10 +131,9 @@ const UnitWithSuggestionsForm = ({
 		underestimatedTimes = timeList.slice(nextTimeIndex - 3, nextTimeIndex);
 		overestimatedTimes = timeList.slice(
 			nextTimeIndex,
-			nextTimeIndex + 3 + (3 - underestimatedTimes.length),
+			nextTimeIndex + 3 + (3 - underestimatedTimes.length)
 		);
-	}
-	else {
+	} else {
 		underestimatedTimes = [15, 30, 45, 60, 90, 120, 240];
 		overestimatedTimes = [];
 	}
@@ -162,11 +160,11 @@ const UnitWithSuggestionsForm = ({
 				inputStyle={({inputValue, isHours}) => css`
 					border: 2px solid
 						${inputValue / (isHours ? workingTime : 1) === value
-			? primaryPurple
-			: 'transparent'};
+							? primaryPurple
+							: 'transparent'};
 
-					${!small
-						&& `
+					${!small &&
+						`
 						padding-top: 0.5rem;
 						padding-bottom: 0.5rem;
 					`}
@@ -189,7 +187,7 @@ UnitWithSuggestionsForm.defaultProps = {
 	onChange: () => {},
 	small: false,
 	value: undefined,
-	isTimeItTook: false,
+	isTimeItTook: false
 };
 
 export default UnitWithSuggestionsForm;

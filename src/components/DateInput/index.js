@@ -1,11 +1,18 @@
 import styled from '@emotion/styled/macro';
+import {useRect} from '@reach/rect';
 import moment from 'moment';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {DayPickerSingleDateController} from 'react-dates';
 
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {primaryGrey, primaryPurple} from '../../utils/new/design-system';
+
+const AnchorPlacement = styled('div')`
+	position: absolute;
+	left: calc(100% + 5px);
+	top: 0px;
+`;
 
 const TaskDateInput = styled('div')`
 	position: absolute;
@@ -56,48 +63,67 @@ export default function ({
 	duration,
 	noInfo,
 	startDate = moment(),
-	position,
+	position: fixedPosition,
 	...rest
 }) {
 	const [focused, setFocused] = useState(false);
 	const [currentDate, setCurrentDate] = useState(rest.date);
+	const anchorRef = useRef();
+	const dateRef = useRef();
+	const pannelRect = useRect(dateRef, true);
+	const anchorRect = useRect(anchorRef, true);
 
 	const margin = currentDate.diff(moment(), 'days') - duration;
 	const displayInfo = !noInfo && typeof duration === 'number';
 
+	const isContainedWithinWindowWidth
+		= anchorRect && pannelRect
+			? anchorRect.left + pannelRect.width < window.innerWidth
+			: true;
+	const position = isContainedWithinWindowWidth ? 'right' : 'left';
+
 	return (
-		<TaskDateInput ref={innerRef} position={position}>
-			<InyoDayPickerSingleDateController
-				focused={focused}
-				onFocusChange={setFocused}
-				onDayMouseEnter={(day) => {
-					if (!day.isBefore(moment())) {
-						setCurrentDate(day);
-					}
+		<>
+			<AnchorPlacement ref={anchorRef} />
+			<TaskDateInput
+				ref={(node) => {
+					if (innerRef) innerRef.current = node;
+					dateRef.current = node;
 				}}
-				isDayBlocked={day => day.isBefore(startDate)}
-				renderCalendarInfo={() => displayInfo && (
-					<MarginMessage>
-						<fbt
-							project="inyo"
-							desc="Date input margin message"
-						>
-								Cela vous laisse{' '}
-							<fbt:plural
-								count={margin}
-								name="days of margin"
-								showCount="yes"
-								many="jours"
+				position={fixedPosition || position}
+			>
+				<InyoDayPickerSingleDateController
+					focused={focused}
+					onFocusChange={setFocused}
+					onDayMouseEnter={(day) => {
+						if (!day.isBefore(moment())) {
+							setCurrentDate(day);
+						}
+					}}
+					isDayBlocked={day => day.isBefore(startDate)}
+					renderCalendarInfo={() => displayInfo && (
+						<MarginMessage>
+							<fbt
+								project="inyo"
+								desc="Date input margin message"
 							>
-									jour
-							</fbt:plural>{' '}
-								pour commencer cette tâche
-						</fbt>
-					</MarginMessage>
-				)
-				}
-				{...rest}
-			/>
-		</TaskDateInput>
+									Cela vous laisse{' '}
+								<fbt:plural
+									count={margin}
+									name="days of margin"
+									showCount="yes"
+									many="jours"
+								>
+										jour
+								</fbt:plural>{' '}
+									pour commencer cette tâche
+							</fbt>
+						</MarginMessage>
+					)
+					}
+					{...rest}
+				/>
+			</TaskDateInput>
+		</>
 	);
 }

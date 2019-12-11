@@ -6,7 +6,7 @@ import {
 	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
-	TAG_FRAGMENT
+	TAG_FRAGMENT,
 } from './fragments';
 
 /** ******** USER GENERIC MUTATIONS ********* */
@@ -501,6 +501,7 @@ export const ADD_ITEM = gql`
 		$linkedCustomerId: ID
 		$linkedCustomer: CustomerInput
 		$tags: [ID!]
+		$position: Int
 	) {
 		addItem(
 			sectionId: $sectionId
@@ -513,6 +514,7 @@ export const ADD_ITEM = gql`
 			linkedCustomerId: $linkedCustomerId
 			linkedCustomer: $linkedCustomer
 			tags: $tags
+			position: $position
 		) {
 			...ItemFragment
 		}

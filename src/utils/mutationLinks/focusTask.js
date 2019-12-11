@@ -52,32 +52,6 @@ export default {
 			}
 		});
 	},
-	getAllTasks: ({mutation, query}) => {
-		const task = mutation.result.data.focusTask;
-
-		return produce(query.result, (draft) => {
-			// remove old
-			draft.me.tasks = draft.me.tasks.filter(t => t.id !== task.id);
-
-			// add to unscheduled
-			if (
-				query.variables.schedule === 'UNSCHEDULED'
-				&& !task.scheduledFor
-			) {
-				draft.me.tasks.push(task);
-			}
-
-			// add to rescheduled
-			if (
-				query.variables.schedule === 'TO_BE_RESCHEDULED'
-				&& task.status !== 'FINISHED'
-				&& task.scheduledFor
-				&& moment(task.scheduledFor).isBefore(moment(), 'day')
-			) {
-				draft.me.tasks.push(task);
-			}
-		});
-	},
 	getSchedule: ({mutation, query}) => {
 		const task = {...mutation.result.data.focusTask};
 

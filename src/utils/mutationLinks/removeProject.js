@@ -15,7 +15,6 @@ const getAllTaskMutation = ({mutation, query}) => {
 
 export default {
 	getAllTasksShort: args => getAllTaskMutation(args),
-	getAllTasks: args => getAllTaskMutation(args),
 	getAllProjects({mutation, query}) {
 		const {me} = query.result;
 

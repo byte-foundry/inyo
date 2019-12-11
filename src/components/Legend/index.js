@@ -6,11 +6,25 @@ const LegendList = styled('ul')`
 	margin: 0;
 `;
 
+const Ratio = styled('span')`
+	opacity: 0.5;
+	margin-left: 1rem;
+	font-size: 0.75rem;
+`;
+
 const LegendRow = styled('li')`
-	display: flex;
+	display: grid;
+	grid-template-columns: 10px 1fr 30px;
+	grid-gap: 8px;
 	align-items: baseline;
 	list-style-item: none;
 	margin-bottom: 0.2rem;
+
+	&:hover {
+		${Ratio} {
+			opacity: 1;
+		}
+	}
 `;
 
 const Label = styled('span')`
@@ -20,7 +34,6 @@ const Label = styled('span')`
 	border-radius: 50%;
 	background-color: ${props =>
 		props.colorScale ? props.colorScale : 'grey'};
-	margin-right: 0.5rem;
 	font-size: 0.8rem;
 `;
 
@@ -30,7 +43,7 @@ function Legend({list, colorScale}) {
 			{list.map((item, index) => (
 				<LegendRow>
 					<Label colorScale={colorScale[index]} />
-					{item.x}
+					{item.x} <Ratio>{(item.y * 100).toFixed(1)}%</Ratio>
 				</LegendRow>
 			))}
 		</LegendList>

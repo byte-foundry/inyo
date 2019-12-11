@@ -2,7 +2,7 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useCallback} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {VictoryPie, VictoryArea, VictoryTooltip} from 'victory';
+import {VictoryPie, VictoryArea, VictoryLine, VictoryTooltip} from 'victory';
 import CalendarHeatmap from 'reactjs-calendar-heatmap';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
@@ -65,7 +65,7 @@ const Number = styled(P)`
 	font-weight: 500;
 	margin: 0;
 	position: relative;
-	z-index: 1;
+	z-index: 0;
 `;
 
 const TimeSelectContainer = styled('div')`
@@ -99,15 +99,17 @@ const Section = styled('div')`
 `;
 
 const PiesWrapper = styled('div')`
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
 	justify-content: space-between;
+	gap: 80px;
 `;
 
 const PieWrapper = styled('div')`
 	display: grid;
 	grid-template-columns: 1fr 200px;
 	align-items: center;
+	grid-gap: 20px;
 `;
 
 const Stats = ({history, location}) => {
@@ -135,7 +137,7 @@ const Stats = ({history, location}) => {
 	const projectId = query.get('projectId');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
-	let overview = 'week';
+	let overview = 'year';
 
 	if (error || errorTags) throw error;
 
@@ -315,7 +317,7 @@ const Stats = ({history, location}) => {
 		([key, obj]) => ({
 			id: key,
 			x: obj.label,
-			y: obj.value / totalTime
+			y: obj.value ? obj.value / totalTime : 0.01
 		})
 	);
 
@@ -340,11 +342,19 @@ const Stats = ({history, location}) => {
 		id: key,
 		x: obj.name,
 		y: obj.count / tagsDistributions.length,
-		colorBg: tagsData.find(t => t.name === obj.name).colorBg
+		colorBg: obj.colorBg
 	}));
 
-	console.log('here');
-	console.log(tagsDistributions);
+	const defaultTagsColorPalette = Object.values(
+		TAG_COLOR_PALETTE.map(x => 'rgb(' + x[0] + ')')
+	);
+
+	// console.log('here');
+	// console.log(tagsDistributions);
+	// console.log(tagsDistributionsList);
+	// console.log(tagsData);
+	// console.log(customers);
+	// console.log(customerDistributions);
 	// console.log(activities);
 	// console.log(filteredTasks);
 	// console.log(reminders);
@@ -466,13 +476,7 @@ const Stats = ({history, location}) => {
 								}
 								colorScale={
 									customerDistributions.length > 0
-										? [
-												'tomato',
-												'orange',
-												'gold',
-												'cyan',
-												'navy'
-										  ]
+										? defaultTagsColorPalette
 										: ['lightGrey']
 								}
 								innerRadius={50}
@@ -486,13 +490,7 @@ const Stats = ({history, location}) => {
 								}
 								colorScale={
 									customerDistributions.length > 0
-										? [
-												'tomato',
-												'orange',
-												'gold',
-												'cyan',
-												'navy'
-										  ]
+										? defaultTagsColorPalette
 										: ['lightGrey']
 								}
 							/>
@@ -594,14 +592,14 @@ const Stats = ({history, location}) => {
 					<Card>
 						<SubHeading>
 							<fbt project="inyo" desc="Worked time">
-								Temps travaillé
+								Temps travaillé / estimé
 							</fbt>
 							<HelpAndTooltip icon="help">
 								<fbt desc="Worked time tooltip">
 									<p>
 										La somme des heures réellement
-										travaillées selon les filtres et la
-										période sélectionnés.
+										travaillées / estimées selon les filtres
+										et la période sélectionnés.
 									</p>
 								</fbt>
 							</HelpAndTooltip>
@@ -616,52 +614,7 @@ const Stats = ({history, location}) => {
 										0
 									) * workingTime
 							).toFixed(0)}
-							h
-						</Number>
-						<VictoryArea
-							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple
-								},
-								parent: {
-									position: 'absolute',
-									bottom: '-88px',
-									left: '-1px'
-								}
-							}}
-							y0={() => -10}
-							height={220}
-							padding={0}
-							interpolation="natural"
-							data={Object.entries(filteredTasks).map(
-								([key, obj]) => ({
-									x: obj.finishedAt || 0,
-									y:
-										(obj.timeItTook
-											? obj.timeItTook
-											: obj.unit) * workingTime || 0
-								})
-							)}
-						/>
-					</Card>
-					<Card>
-						<SubHeading>
-							<fbt project="inyo" desc="estimated time">
-								Temps estimé
-							</fbt>
-							<HelpAndTooltip icon="help">
-								<fbt desc="estimated time tooltip">
-									<p>
-										La somme des heures intialement estimées
-										selon les filtres et la période
-										sélectionnés.
-									</p>
-								</fbt>
-							</HelpAndTooltip>
-						</SubHeading>
-						<Number>
+							h /{' '}
 							{(
 								filteredTasks
 									.filter(t => t.status === 'FINISHED')
@@ -677,7 +630,8 @@ const Stats = ({history, location}) => {
 								data: {
 									stroke: primaryPurple,
 									strokeWidth: 3,
-									fill: mediumPurple
+									fill: mediumPurple,
+									opacity: '.5'
 								},
 								parent: {
 									position: 'absolute',
@@ -688,6 +642,37 @@ const Stats = ({history, location}) => {
 							y0={() => -10}
 							height={220}
 							padding={0}
+							domain={{y: [0, 30]}}
+							interpolation="natural"
+							data={Object.entries(filteredTasks).map(
+								([key, obj]) => ({
+									x: obj.finishedAt || 0,
+									y:
+										(obj.timeItTook
+											? obj.timeItTook
+											: obj.unit) * workingTime || 0
+								})
+							)}
+						/>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 2,
+									strokeDasharray: '6, 6',
+									fill: mediumPurple,
+									opacity: '.5'
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px'
+								}
+							}}
+							y0={() => -10}
+							height={220}
+							padding={0}
+							domain={{y: [0, 30]}}
 							interpolation="natural"
 							data={Object.entries(filteredTasks).map(
 								([key, obj]) => ({

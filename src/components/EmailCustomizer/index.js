@@ -379,6 +379,10 @@ const EmailCustomizer = ({ emailType }) => {
 				</Button>
 				<Button
 					onClick={() => {
+						// console.log('Suject');
+						// console.log(JSON.stringify(subjectEditorRef.current.value));
+						// console.log('Content');
+						// console.log(JSON.stringify(contentEditorRef.current.value));
 						updateEmailTemplate({
 							variables: {
 								templateId: data.emailTemplate.id,
@@ -398,7 +402,8 @@ const EmailCustomizer = ({ emailType }) => {
 			</ButtonsWrap>
 			<Prompt
 				when={!stateIsUnchanged}
-				message={
+				message="Vous avez des changements non sauvegardés. Etes-vous sûr de vouloir quitter la page ?"
+				messageTranslated={
 					<fbt desc="unsaved changes">
 						Vous avez des changements non sauvegardés. Etes-vous sûr
 						de vouloir quitter la page ?

@@ -539,6 +539,7 @@ export const UPDATE_ITEM = gql`
 		$unit: Float
 		$timeItTook: Float
 		$tags: [ID!]
+		$dailyRate: Float
 	) {
 		updateItem(
 			id: $itemId
@@ -556,6 +557,7 @@ export const UPDATE_ITEM = gql`
 			unit: $unit
 			timeItTook: $timeItTook
 			tags: $tags
+			dailyRate: $dailyRate
 		) {
 			...ItemFragment
 		}

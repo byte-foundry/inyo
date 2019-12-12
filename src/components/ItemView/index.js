@@ -912,6 +912,61 @@ const Item = ({
 						</Meta>
 					</Tooltip>
 				)}
+
+				{!customerToken && (
+					<Tooltip
+						label={fbt(
+							'Taux journalier moyen de cette tâche',
+							'daily rate item view',
+						)}
+					>
+						<Meta>
+							<MaterialIcon icon="label" size="tiny" />
+							<MetaLabel>TJM</MetaLabel>
+							<InlineEditable
+								nameCss={css`
+									padding: 0;
+									width: auto;
+									margin-right: 1rem;
+								`}
+								editableCss={css`
+									color: ${item.dailyRate
+						? primaryPurple
+						: primaryGrey};
+									margin-right: 1rem;
+								`}
+								value={item.dailyRate}
+								type="text"
+								placeholder={
+									<fbt desc="daily rate item view">300€</fbt>
+								}
+								onFocusOut={(value) => {
+									if (value && value !== item.dailyRate) {
+										updateItem({
+											variables: {
+												itemId: id,
+												dailyRate: parseFloat(value),
+											},
+										});
+									}
+								}}
+							/>
+							{item.dailyRate && (
+								<IconButton
+									icon="clear"
+									size="micro"
+									onClick={() => updateItem({
+										variables: {
+											itemId: id,
+											dailyRate: null,
+										},
+									})
+									}
+								/>
+							)}
+						</Meta>
+					</Tooltip>
+				)}
 			</Metas>
 			{(!customerToken || description) && (
 				<Tooltip

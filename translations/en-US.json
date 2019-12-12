@@ -31,7 +31,7 @@
     }
    ]
   },
-  "RxHkN7yN7nYszzBOaNY0tQ==": {
+  "0JjjyRtOXZNkq09vG1ueEQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -41,7 +41,7 @@
     }
    ]
   },
-  "X+4B0AHPUMFuIiy+qKP0AA==": {
+  "VfC70rk/okLh3urpY9wKQA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -2191,7 +2191,7 @@
     }
    ]
   },
-  "+TSsouyNnpOuotBby5ZXPg==": {
+  "Fls936tmVXEMMCrNh4HKOw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3277,76 +3277,6 @@
    "translations": [
     {
      "translation": "Planned",
-     "variations": {}
-    }
-   ]
-  },
-  "2T/8tqRnxn9tiabsE+I2pA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Vous n'avez pas encore défini de budget pour ce projet.}",
-     "variations": {}
-    }
-   ]
-  },
-  "3Ncuzxft2v44Y8GPQcF3IA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "You don't have any budget set for this project.",
-     "variations": {}
-    }
-   ]
-  },
-  "zuGvQwqh8+Ws1fPfKjm1jQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Budget sold",
-     "variations": {}
-    }
-   ]
-  },
-  "uXlGZSghlCKv2CyuFk0Yrg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "$5000",
-     "variations": {}
-    }
-   ]
-  },
-  "0/0IE5XdLNMJoppUG+lgBw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Confirm",
-     "variations": {}
-    }
-   ]
-  },
-  "rzJA9MHp+nXckuqAl9Z4+w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}",
-     "variations": {}
-    }
-   ]
-  },
-  "TP9w3Ix1Gy3BXNoKC82VrQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Define your daily rate to benefit from our budget feature.",
      "variations": {}
     }
    ]
@@ -5091,12 +5021,12 @@
     }
    ]
   },
-  "726EBmyncZesHmufFOCfbg==": {
+  "2m7b+/CjFUlfRrBUIlA+bQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "If you do not wish the customer to receive a report, you can deactivate the project's notifications.",
+     "translation": "If you do not wish the customer to receive a report for a specific project only, you can deactivate the project's notifications instead.",
      "variations": {}
     }
    ]
@@ -5147,66 +5077,6 @@
    "translations": [
     {
      "translation": "Delete this automatic reminder",
-     "variations": {}
-    }
-   ]
-  },
-  "9dvcAZRKPIVpqi6orutALA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "minutes",
-     "variations": {}
-    }
-   ]
-  },
-  "PhPVSOdXlMF6mLuFBvzyPg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "hours",
-     "variations": {}
-    }
-   ]
-  },
-  "x1tyvdB8MRzLg+jGjhF7lw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "days",
-     "variations": {}
-    }
-   ]
-  },
-  "GRmeMnPIs2L9scxWCQN9bA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "weeks",
-     "variations": {}
-    }
-   ]
-  },
-  "Tt+m+eYxAX71R5GCKDCfnQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "after task activation",
-     "variations": {}
-    }
-   ]
-  },
-  "DplwfsTWQva6fcImyucG4Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "after previous email",
      "variations": {}
     }
    ]
@@ -5827,6 +5697,16 @@
    "translations": [
     {
      "translation": "Company cover picture",
+     "variations": {}
+    }
+   ]
+  },
+  "EX1vp3nzcu/PifVnW+Sk5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose a predefined picture",
      "variations": {}
     }
    ]
@@ -8111,12 +7991,42 @@
     }
    ]
   },
-  "EX1vp3nzcu/PifVnW+Sk5w==": {
+  "RxHkN7yN7nYszzBOaNY0tQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Choose a predefined picture",
+     "translation": "removed document",
+     "variations": {}
+    }
+   ]
+  },
+  "X+4B0AHPUMFuIiy+qKP0AA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added document",
+     "variations": {}
+    }
+   ]
+  },
+  "+TSsouyNnpOuotBby5ZXPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added a new document to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "726EBmyncZesHmufFOCfbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If you do not wish the customer to receive a report, you can deactivate the project's notifications.",
      "variations": {}
     }
    ]

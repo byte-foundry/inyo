@@ -205,24 +205,22 @@ function TaskRemindersList({
 										)}
 									</ReminderDate>
 								</Tooltip>
-								{reminder.status === 'PENDING'
-									&& !reminder.id.includes('report') && (
+								{reminder.status === 'PENDING' && (
 									<Tooltip
 										label={
 											<fbt
 												project="inyo"
 												desc="delete this reminder tooltip"
 											>
-													Supprimer cette action
-													automatique
+												Supprimer cette action
+												automatique
 											</fbt>
 										}
 									>
 										<div
 											noLink={noLink}
 											canceled={
-												reminder.status
-													=== 'CANCELED'
+												reminder.status === 'CANCELED'
 											}
 											style={{flex: '0 0 28px'}}
 										>
@@ -269,9 +267,10 @@ function TaskRemindersList({
 					</P>
 					<P>
 						<fbt desc="customer report notice">
-							Si vous ne souhaitez pas que ce client reçoive un
-							rapport, vous pouvez désactiver les notifications du
-							projet.
+							Si vous ne souhaitez pas qu'un client reçoive un
+							rapport pour un projet en particulier, vous pouvez
+							désactiver les notifications de ce projet à la
+							place.
 						</fbt>
 					</P>
 				</NoticeModal>

@@ -70,6 +70,7 @@
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "fbt": "^0.9.51",
     "formik": "^2.0.6",
+    "git": "^0.1.5",
     "graphql": "^14.5.7",
     "graphql-tag": "^2.10.0",
     "husky": "^3.0.9",

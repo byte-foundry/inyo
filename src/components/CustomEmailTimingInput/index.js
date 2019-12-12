@@ -9,7 +9,8 @@ const CustomEmailTimingInput = ({
 	isRelative,
 	setValue,
 	setUnit,
-	setIsRelative
+	setIsRelative,
+	relativeDisabled
 }) => {
 	return (
 		<div style={{ display: "flex", alignItems: "center" }}>
@@ -21,6 +22,7 @@ const CustomEmailTimingInput = ({
 				setUnit={setUnit}
 				setValue={setValue}
 				setIsRelative={setIsRelative}
+				relativeDisabled={relativeDisabled}
 			/>
 		</div>
 	);

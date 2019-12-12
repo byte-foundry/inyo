@@ -452,6 +452,8 @@ export const GET_ITEM_DETAILS = gql`
 			remindersPreviews {
 				type
 				delay
+				sendingDate
+				isRelative
 			}
 		}
 	}

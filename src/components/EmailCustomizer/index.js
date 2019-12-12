@@ -1,8 +1,12 @@
+import "react-toastify/dist/ReactToastify.css";
+
 import styled from "@emotion/styled";
+import * as Sentry from "@sentry/browser";
 import { Editor } from "slate-react";
 import { Value } from "slate";
 import React, { useState, useRef, useEffect } from "react";
 import { Prompt } from "react-router";
+import { toast, ToastContainer } from "react-toastify";
 
 import fbt from "../../fbt/fbt.macro";
 import { useQuery, useMutation } from "../../utils/apollo-hooks";
@@ -277,8 +281,23 @@ const EmailCustomizer = ({ emailType }) => {
 		);
 	}
 
+	const displayToast = () => {
+		toast.info(
+			<p>
+				<fbt project="inyo" desc="data updated">
+					Les données ont été mises à jour
+				</fbt>
+			</p>,
+			{
+				position: toast.POSITION.BOTTOM_LEFT,
+				autoClose: 3000
+			}
+		);
+	};
+
 	return (
 		<div style={{ flex: 1, marginTop: "1.5rem" }}>
+			<ToastContainer />
 			{data.emailTemplate.timing && (
 				<CustomEmailTimingInput
 					unit={unit}
@@ -287,6 +306,7 @@ const EmailCustomizer = ({ emailType }) => {
 					setUnit={setUnit}
 					setValue={setValue}
 					setIsRelative={setIsRelative}
+					relativeDisabled={emailType.name === "DELAY"}
 				/>
 			)}
 			<EmailParamList
@@ -299,7 +319,8 @@ const EmailCustomizer = ({ emailType }) => {
 					onClick={() => {
 						sendCustomEmailPreview({
 							variables: {
-								templateId: data.emailTemplate.id
+								subject: subjectEditorRef.current.value,
+								content: contentEditorRef.current.value
 							}
 						});
 					}}
@@ -378,23 +399,39 @@ const EmailCustomizer = ({ emailType }) => {
 					</fbt>
 				</Button>
 				<Button
-					onClick={() => {
+					onClick={async () => {
 						// console.log('Suject');
 						// console.log(JSON.stringify(subjectEditorRef.current.value));
 						// console.log('Content');
 						// console.log(JSON.stringify(contentEditorRef.current.value));
-						updateEmailTemplate({
-							variables: {
-								templateId: data.emailTemplate.id,
-								timing: {
-									unit,
-									value,
-									isRelative
-								},
-								subject: subjectEditorRef.current.value,
-								content: contentEditorRef.current.value
+						try {
+							updateEmailTemplate({
+								variables: {
+									templateId: data.emailTemplate.id,
+									timing: {
+										unit,
+										value,
+										isRelative
+									},
+									subject: subjectEditorRef.current.value,
+									content: contentEditorRef.current.value
+								}
+							});
+						} catch (error) {
+							if (
+								error.networkError &&
+								error.networkError.result &&
+								error.networkError.result.errors
+							) {
+								Sentry.captureException(
+									error.networkError.result.errors
+								);
+							} else {
+								Sentry.captureException(error);
 							}
-						});
+						}
+
+						displayToast();
 					}}
 				>
 					Enregistrer ce modèle

@@ -276,7 +276,7 @@ const TaskRemindersPreviewsList = ({
 			</DateContainer>
 			<ReminderList>
 				{mutableReminders
-					.sort((a, b) => a.delay - b.delay)
+					.sort((a, b) => (b.isRelative ? -1 : a.delay - b.delay))
 					.map((reminder, index) => {
 						const text = REMINDER_TYPES_DATA[reminder.type].text(
 							customerName

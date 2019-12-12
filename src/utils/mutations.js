@@ -1025,7 +1025,7 @@ export const SET_TEMPLATE_TO_DEFAULT = gql`
 `;
 
 export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
-	mutation sendCustomEmailPreview($templateId: ID!) {
-		sent: sendCustomEmailPreview(templateId: $templateId)
+	mutation sendCustomEmailPreview($subject: Json!, $content: Json!) {
+		sent: sendCustomEmailPreview(subject: $subject, content: $content)
 	}
 `;

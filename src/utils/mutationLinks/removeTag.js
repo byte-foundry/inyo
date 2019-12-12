@@ -42,21 +42,4 @@ export default {
 			},
 		};
 	},
-	getAllTasks: ({mutation, query}) => {
-		const cachedItems = query.result.me.tasks;
-		const removedTag = mutation.result.data.removeTag;
-
-		const newItems = cachedItems.map(item => ({
-			...item,
-			tags: item.tags.filter(tag => tag.id !== removedTag.id),
-		}));
-
-		return {
-			...query.result,
-			me: {
-				...query.result.me,
-				tasks: newItems,
-			},
-		};
-	},
 };

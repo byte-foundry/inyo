@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
-import {primaryBlue, secondaryRed, Ul} from '../../utils/content';
+import {Ul} from '../../utils/content';
+import {primaryBlue, secondaryRed} from '../../utils/new/design-system';
 import InlineEditable from '../InlineEditable';
 
 const ContentList = styled(Ul)`
+	margin: 0;
 	padding: 0;
 	flex: 1;
 `;
@@ -45,8 +47,8 @@ const placeholderCss = css`
 `;
 
 const nameCss = css`
-	padding: 5px 10px;
-	margin: 5px 20px;
+	padding: 0;
+	margin: 0;
 `;
 
 const editableCss = css`
@@ -55,9 +57,11 @@ const editableCss = css`
 	border: 1px solid transparent;
 `;
 
-function CheckList({items, editable, onChange}) {
+function CheckList({
+	items, editable, onChange, ...rest
+}) {
 	return (
-		<ContentList>
+		<ContentList {...rest}>
 			{items.map((item, i) => (
 				<ContentItem key={item.name}>
 					<input
@@ -151,7 +155,6 @@ function CheckList({items, editable, onChange}) {
 										name: value,
 									}),
 								});
-								return true;
 							}
 							return true;
 						}}

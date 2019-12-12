@@ -32,6 +32,7 @@ import unfinishItemWatchMutation from './mutationLinks/unfinishItem';
 import unfocusTaskWatchMutation from './mutationLinks/unfocusTask';
 import updateItemWatchMutation from './mutationLinks/updateItem';
 import updateProjectWatchMutation from './mutationLinks/updateProject';
+import updateSectionWatchMutation from './mutationLinks/updateSection';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
 
 const options = {
@@ -122,6 +123,7 @@ const watchLink = new WatchedMutationLink(cache, {
 	unfocusTask: unfocusTaskWatchMutation,
 	updateItem: updateItemWatchMutation,
 	updateProject: updateProjectWatchMutation,
+	updateSection: updateSectionWatchMutation,
 	uploadAttachments: uploadAttachmentsWatchMutation,
 });
 

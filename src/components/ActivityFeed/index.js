@@ -125,7 +125,7 @@ const EventText = ({
 		action = (
 			<fbt
 				project="inyo"
-				desc="remove attachement notification message"
+				desc="remove attachment notification message"
 			>
 					a supprimé le document
 			</fbt>
@@ -136,7 +136,7 @@ const EventText = ({
 		action = (
 			<fbt
 				project="inyo"
-				desc="upload attachement notification message"
+				desc="upload attachment notification message"
 			>
 					a ajouté le document
 			</fbt>

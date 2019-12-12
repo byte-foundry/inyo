@@ -115,7 +115,7 @@ const TextPlusObjectNotification = ({
 		action = (
 			<fbt
 				project="inyo"
-				desc="upload attachement notification message"
+				desc="upload attachment notification message"
 			>
 					a ajouté un nouveau document sur la tâche
 			</fbt>

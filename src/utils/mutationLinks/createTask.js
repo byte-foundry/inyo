@@ -1,92 +1,87 @@
+import reorderList from '../reorderList';
+
 export default {
-	getProjectInfos: ({mutation, query}) => {
-		const addedItem = mutation.result.data.addItem;
-
-		if (addedItem.section) {
-			const sections = [...query.result.project.sections];
-
-			if (sections.length > 0) {
-				const index = sections.findIndex(
-					section => section.id === addedItem.section.id
-				);
-				const cachedSection = sections[index];
-
-				if (cachedSection) {
-					sections.splice(index, 1, {
-						...cachedSection,
-						items: [addedItem, ...cachedSection.items]
-					});
-
-					return {
-						...query.result,
-						project: {
-							...query.result.project,
-							sections
-						}
-					};
-				}
-
-				return undefined;
-			}
-
-			return undefined;
-		}
-
-		return undefined;
-	},
 	getProjectData: ({mutation, query}) => {
 		const addedItem = mutation.result.data.addItem;
 
-		if (addedItem.section) {
-			const sections = [...query.result.project.sections];
+		if (!addedItem.section) return null;
 
-			if (sections.length > 0) {
-				const index = sections.findIndex(
-					section => section.id === addedItem.section.id
-				);
-				const cachedSection = sections[index];
+		const sections = [...query.result.project.sections];
 
-				if (cachedSection) {
-					cachedSection.items = [addedItem, ...cachedSection.items];
-					cachedSection.items = cachedSection.items.map(
-						(item, index) => ({
-							...item,
-							position: index
-						})
-					);
-					sections.splice(index, 1, {
-						...cachedSection
-					});
+		if (sections.length === 0) return null;
 
-					return {
-						...query.result,
-						project: {
-							...query.result.project,
-							sections
-						}
-					};
-				}
+		const index = sections.findIndex(
+			section => section.id === addedItem.section.id,
+		);
+		const cachedSection = sections[index];
 
-				return undefined;
-			}
+		if (!cachedSection) return null;
 
-			return undefined;
-		}
+		sections.splice(index, 1, {
+			...cachedSection,
+			items: reorderList(
+				cachedSection.items,
+				addedItem,
+				null,
+				addedItem.position,
+				'position',
+			),
+		});
 
-		return undefined;
+		return {
+			...query.result,
+			project: {
+				...query.result.project,
+				sections,
+			},
+		};
+	},
+	getProjectInfos: ({mutation, query}) => {
+		const addedItem = mutation.result.data.addItem;
+
+		if (!addedItem.section) return null;
+
+		const sections = [...query.result.project.sections];
+
+		if (sections.length === 0) return null;
+
+		const index = sections.findIndex(
+			section => section.id === addedItem.section.id,
+		);
+		const cachedSection = sections[index];
+
+		if (!cachedSection) return null;
+
+		sections.splice(index, 1, {
+			...cachedSection,
+			items: reorderList(
+				cachedSection.items,
+				addedItem,
+				null,
+				addedItem.position,
+				'position',
+			),
+		});
+
+		return {
+			...query.result,
+			project: {
+				...query.result.project,
+				sections,
+			},
+		};
 	},
 	getAllTasksShort: ({mutation, query}) => {
 		let cachedItems = query.result.me.tasks;
 		const addedItem = mutation.result.data.addItem;
 
 		if (
-			query.variables.schedule === 'TO_BE_RESCHEDULED' ||
-			query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
-		)
-			return query.result;
+			query.variables.schedule === 'TO_BE_RESCHEDULED'
+			|| query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
+		) return query.result;
 
 		if (addedItem.section) {
-			cachedItems = cachedItems.map(item => {
+			cachedItems = cachedItems.map((item) => {
 				if (item.section && item.section.id === addedItem.section.id) {
 					return {...item, position: item.position + 1};
 				}
@@ -99,36 +94,8 @@ export default {
 			...query.result,
 			me: {
 				...query.result.me,
-				tasks: [addedItem, ...cachedItems]
-			}
-		};
-	},
-	getAllTasks: ({mutation, query}) => {
-		let cachedItems = query.result.me.tasks;
-		const addedItem = mutation.result.data.addItem;
-
-		if (
-			query.variables.schedule === 'TO_BE_RESCHEDULED' ||
-			query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
-		)
-			return query.result;
-
-		if (addedItem.section) {
-			cachedItems = cachedItems.map(item => {
-				if (item.section && item.section.id === addedItem.section.id) {
-					return {...item, position: item.position + 1};
-				}
-
-				return item;
-			});
-		}
-
-		return {
-			...query.result,
-			me: {
-				...query.result.me,
-				tasks: [addedItem, ...cachedItems]
-			}
+				tasks: [addedItem, ...cachedItems],
+			},
 		};
 	},
 	getAllCustomers: ({mutation, query}) => {
@@ -141,11 +108,11 @@ export default {
 				...query.result,
 				me: {
 					...query.result.me,
-					customers: [addedCustomer, ...customers]
-				}
+					customers: [addedCustomer, ...customers],
+				},
 			};
 		}
 
 		return undefined;
-	}
+	},
 };

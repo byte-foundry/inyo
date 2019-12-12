@@ -7,7 +7,7 @@ import {
 	PROJECT_SHORT_FRAGMENT,
 	REMINDER_FRAGMENT,
 	SHORT_TASK_FRAGMENT,
-	TAG_FRAGMENT
+	TAG_FRAGMENT,
 } from './fragments';
 
 /** ******** USER QUERIES ********* */
@@ -589,29 +589,6 @@ export const GET_ALL_TASKS_STATS = gql`
 						name
 					}
 				}
-			}
-		}
-	}
-`;
-
-export const GET_ALL_TASKS = gql`
-	${ITEM_FRAGMENT}
-
-	query getAllTasks(
-		$linkedCustomerId: ID
-		$first: Int
-		$after: ID
-		$schedule: ScheduleFilterInput
-	) {
-		me {
-			id
-			tasks(
-				filter: {linkedCustomerId: $linkedCustomerId}
-				schedule: $schedule
-				first: $first
-				after: $after
-			) {
-				...ItemFragment
 			}
 		}
 	}

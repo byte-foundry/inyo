@@ -319,7 +319,7 @@ const Stats = ({history, location}) => {
 		([key, obj]) => ({
 			id: key,
 			x: obj.label,
-			y: obj.value ? obj.value / totalTime : 0.01
+			y: obj.value ? obj.value / totalTime : 0
 		})
 	);
 
@@ -475,7 +475,9 @@ const Stats = ({history, location}) => {
 				<CalendarHeatmap
 					data={activities}
 					color={primaryPurple}
+					overColor={primaryRed}
 					overview={overview}
+					workingTime={workingTime}
 				></CalendarHeatmap>
 			</Section>
 

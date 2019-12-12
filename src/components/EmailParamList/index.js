@@ -7,6 +7,7 @@ import {
 	mediumGrey,
 	primaryBlack
 } from "../../utils/new/design-system";
+import { LABEL_EMAIL_PARAM } from "../../utils/constants";
 
 const Param = styled("div")`
 	margin: 0 0 0.5rem 0.5rem;
@@ -45,7 +46,9 @@ const EmailParamList = ({ params, editor, paramsUsed }) => {
 									object: "text",
 									leaves: [
 										{
-											text: param.param.name
+											text: LABEL_EMAIL_PARAM[
+												param.param.name
+											].text()
 										}
 									]
 								}
@@ -57,7 +60,7 @@ const EmailParamList = ({ params, editor, paramsUsed }) => {
 						setTimeout(() => editor.focus(), 0);
 					}}
 				>
-					{param.param.name}
+					{LABEL_EMAIL_PARAM[param.param.name].text()}
 				</Param>
 			))}
 		</EmailParamListContainer>

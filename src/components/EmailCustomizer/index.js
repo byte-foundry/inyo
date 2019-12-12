@@ -11,6 +11,7 @@ import { toast, ToastContainer } from "react-toastify";
 import fbt from "../../fbt/fbt.macro";
 import { useQuery, useMutation } from "../../utils/apollo-hooks";
 import { Loading } from "../../utils/content";
+import { LABEL_EMAIL_PARAM } from "../../utils/constants";
 import {
 	Button,
 	primaryGrey,
@@ -141,7 +142,7 @@ const renderInline = ({ attributes, node, isSelected }, editor, next) => {
 	if (node.type === "param") {
 		return (
 			<ParamDisplay isSelected={isSelected} {...attributes}>
-				{node.text}
+				{LABEL_EMAIL_PARAM[node.data.get("param").name].text()}
 			</ParamDisplay>
 		);
 	}

@@ -5,6 +5,7 @@ import './index.css';
 // if imported with the tooltip, the order is wrong due to code-splitting
 import '@reach/tooltip/styles.css';
 import './dragdroptouch';
+import 'draft-js/dist/Draft.css';
 
 import {ApolloProvider} from '@apollo/react-hooks';
 import styled from '@emotion/styled';
@@ -21,7 +22,7 @@ import {
 	BrowserRouter as Router,
 	Redirect,
 	Route,
-	Switch
+	Switch,
 } from 'react-router-dom';
 
 import withTracker from './HOC/withTracker';
@@ -31,7 +32,7 @@ import {useQuery} from './utils/apollo-hooks';
 import {
 	INTERCOM_APP_ID,
 	MOMENT_DURATION_LOCALE_EN,
-	MOMENT_DURATION_LOCALE_FR
+	MOMENT_DURATION_LOCALE_FR,
 } from './utils/constants';
 import {Loading} from './utils/content';
 import {UserContext} from './utils/contexts';
@@ -42,23 +43,17 @@ import {CHECK_LOGIN_USER} from './utils/queries';
 const Customer = React.lazy(() => import('./screens/Customer'));
 const App = React.lazy(() => import('./screens/App'));
 const Auth = React.lazy(() => import('./screens/Auth'));
-const StraightToCheckout = React.lazy(() =>
-	import('./screens/StraightToCheckout')
-);
+const StraightToCheckout = React.lazy(() => import('./screens/StraightToCheckout'));
 const Paid = React.lazy(() => import('./screens/Paid'));
 const EndOfTrial = React.lazy(() => import('./screens/EndOfTrial'));
-const PrematureEndOfTrial = React.lazy(() =>
-	import('./screens/PrematureEndOfTrial')
-);
-const ConditionalContent = React.lazy(() =>
-	import('./screens/App/ConditionalContent')
-);
+const PrematureEndOfTrial = React.lazy(() => import('./screens/PrematureEndOfTrial'));
+const ConditionalContent = React.lazy(() => import('./screens/App/ConditionalContent'));
 
 const translations = require('./translatedFbts.json');
 
 init({translations});
-IntlViewerContext.locale =
-	navigator && navigator.language.includes('fr') ? 'fr-FR' : 'en-US';
+IntlViewerContext.locale
+	= navigator && navigator.language.includes('fr') ? 'fr-FR' : 'en-US';
 
 momentDurationFormat(moment);
 moment.updateLocale('fr', MOMENT_DURATION_LOCALE_FR);
@@ -106,7 +101,7 @@ const BodyMain = styled(Body)``;
 Sentry.init({
 	dsn: 'https://d6ed2b1e0a594835b2f768405b6c5e90@sentry.io/1307916',
 	environment: process.env.REACT_APP_INYO_ENV,
-	release: 'inyo@v1.0.0'
+	release: 'inyo@v1.0.0',
 });
 ReactGA.initialize('UA-41962243-14');
 
@@ -116,35 +111,33 @@ if (query.has('dimension')) {
 	ReactGA.set({dimension1: query.get('dimension')});
 }
 
-const ProtectedRoute = ({isAllowed, protectedPath, ...props}) =>
-	isAllowed ? <Route path={protectedPath} {...props} /> : false;
+const ProtectedRoute = ({isAllowed, protectedPath, ...props}) => (isAllowed ? <Route path={protectedPath} {...props} /> : false);
 const ProtectedRedirect = ({
 	isAllowed,
 	paymentError,
 	protectedPath,
 	...props
-}) =>
-	isAllowed ? (
-		<Redirect path={protectedPath} {...props} />
-	) : !paymentError ? (
-		<Redirect to="/auth" />
-	) : (
-		<Redirect to="/end-of-trial" />
-	);
+}) => (isAllowed ? (
+	<Redirect path={protectedPath} {...props} />
+) : !paymentError ? (
+	<Redirect to="/auth" />
+) : (
+	<Redirect to="/end-of-trial" />
+));
 
 function Root() {
 	const [setupDone, setSetupDone] = useState(false);
 	const {data, loading, error} = useQuery(CHECK_LOGIN_USER, {
 		suspend: false,
 		fetchPolicy: 'network-only',
-		errorPolicy: 'all'
+		errorPolicy: 'all',
 	});
 	// This is utter shit and should be removed once it works properly
 
 	const PaidWithTracker = withTracker(Paid);
 	const paidWithProps = useCallback(
 		routeProps => <PaidWithTracker {...routeProps} user={data} />,
-		[data]
+		[data],
 	);
 
 	if (error && !error.graphQLErrors[0]) throw error;
@@ -158,23 +151,24 @@ function Root() {
 			user_id: data.me.id,
 			name: `${data.me.firstName} ${data.me.lastName}`,
 			phone: data.me.company.phone,
-			user_hash: data.me.hmacIntercomId
+			user_hash: data.me.hmacIntercomId,
 		});
-		Sentry.configureScope(scope => {
+		Sentry.configureScope((scope) => {
 			scope.setUser({email: data.me.email});
 		});
 		ReactGA.set({userId: data.me.id});
 
 		setSetupDone(true);
-	} else {
+	}
+	else {
 		window.Intercom('boot', {
-			app_id: INTERCOM_APP_ID
+			app_id: INTERCOM_APP_ID,
 		});
 	}
 
 	if (data && data.me && data.me.settings && data.me.settings.language) {
-		IntlViewerContext.locale =
-			data.me.settings.language === 'fr' ? 'fr-FR' : 'en-US';
+		IntlViewerContext.locale
+			= data.me.settings.language === 'fr' ? 'fr-FR' : 'en-US';
 		moment.locale(data.me.settings.language);
 	}
 
@@ -205,41 +199,41 @@ function Root() {
 								{ProtectedRoute({
 									protectedPath: '/app',
 									component: withTracker(App),
-									isAllowed: data && data.me
+									isAllowed: data && data.me,
 								})}
 								{ProtectedRoute({
 									protectedPath: '/pay-for-inyo',
 									component: withTracker(PrematureEndOfTrial),
-									isAllowed: data && data.me
+									isAllowed: data && data.me,
 								})}
 								{ProtectedRoute({
 									protectedPath: '/auth',
 									component: withTracker(Auth),
 									isAllowed:
-										!(data && data.me) &&
-										!(
-											error &&
-											error.graphQLErrors[0].extensions &&
-											error.graphQLErrors[0].extensions
+										!(data && data.me)
+										&& !(
+											error
+											&& error.graphQLErrors[0].extensions
+											&& error.graphQLErrors[0].extensions
 												.code === 'Payment'
-										)
+										),
 								})}
 								{ProtectedRoute({
 									protectedPath: '/end-of-trial',
 									component: withTracker(EndOfTrial),
 									isAllowed:
-										!(data && data.me) &&
-										(error &&
-											error.graphQLErrors[0].extensions &&
-											error.graphQLErrors[0].extensions
-												.code === 'Payment')
+										!(data && data.me)
+										&& (error
+											&& error.graphQLErrors[0].extensions
+											&& error.graphQLErrors[0].extensions
+												.code === 'Payment'),
 								})}
 								<ProtectedRedirect
 									to="/app"
 									paymentError={
-										error &&
-										error.graphQLErrors[0].extensions &&
-										error.graphQLErrors[0].extensions
+										error
+										&& error.graphQLErrors[0].extensions
+										&& error.graphQLErrors[0].extensions
 											.code === 'Payment'
 									}
 									isAllowed={data && data.me}
@@ -251,7 +245,7 @@ function Root() {
 									'/app/account',
 									'/app/dashboard',
 									'/app/tasks',
-									'/app/tags'
+									'/app/tags',
 								]}
 								render={props => (
 									<ConditionalContent {...props} />
@@ -274,7 +268,7 @@ ReactDOM.render(
 			</Suspense>
 		</Router>
 	</ApolloProvider>,
-	document.getElementById('root')
+	document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

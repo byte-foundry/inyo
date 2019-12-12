@@ -217,6 +217,158 @@ export const ITEM_TYPES = [
 		description: 'Programmer automatiquement une réunion',
 	}, */
 ];
+export const CATEGORY_NAMES = {
+	CUSTOMER: {
+		text: () => fbt('Tâche client', 'customer task'),
+	},
+	INVOICE: {
+		text: () => fbt('Tâche paiement facture', 'invoice task'),
+	},
+	CONTENT_ACQUISITION: {
+		text: () => fbt('Tâche récupération de contenu', 'content acquisition task'),
+	},
+	CUSTOMER_REPORT: {
+		text: () => fbt('Rapport client', 'customer report'),
+	},
+	COMMENT_ADDED: {
+		text: () => fbt('Commentaire ajouté', 'comment added'),
+	},
+};
+
+export const LABEL_EMAIL_PARAM = {
+	'task.name': {
+		text: () => fbt('Nom de la tâche', 'first customer email'),
+	},
+	'task.description': {
+		text: () => fbt('Description de la tâche', 'first reminder customer email'),
+	},
+	'task.link': {
+		text: () => fbt('Lien vers la tâche', 'second reminder customer email'),
+	},
+	'task.attachments': {
+		text: () => fbt('Fichiers joints a la tâche', 'third reminder customer email'),
+	},
+	'task.listOfAttachmentsNotUploaded': {
+		text: () => fbt('Fichiers à uploader', 'first invoice email'),
+	},
+	'task.threadOfComments': {
+		text: () => fbt('Fil des commentaires', 'first reminder invoice email'),
+	},
+	'project.name': {
+		text: () => fbt('Nom du projet', 'second reminder invoice email'),
+	},
+	'project.deadline': {
+		text: () => fbt('Deadline du projet', 'third reminder invoice email'),
+	},
+	'project.budget': {
+		text: () => fbt('Budget du projet', 'fourth reminder invoice email'),
+	},
+	'project.link': {
+		text: () => fbt('Lien vers le projet', 'fitfh reminder invoice email'),
+	},
+	'user.firstname': {
+		text: () => fbt('Votre prénom', 'customer report email'),
+	},
+	'user.lastname': {
+		text: () => fbt('Votre nom', 'comment added'),
+	},
+	'user.fullname': {
+		text: () => fbt('Vos nom et prénom', 'comment added'),
+	},
+	'user.phone': {
+		text: () => fbt('Votre téléphone', 'first customer email'),
+	},
+	'user.email': {
+		text: () => fbt('Votre email', 'first reminder customer email'),
+	},
+	'user.listOfTasksCompleteOnDay': {
+		text: () => fbt(
+			"Tâches que vous avez complété aujourd'hui",
+			'second reminder customer email',
+		),
+	},
+	'customer.firstname': {
+		text: () => fbt('Prénom du client', 'third reminder customer email'),
+	},
+	'customer.lastname': {
+		text: () => fbt('Nom du client', 'first invoice email'),
+	},
+	'customer.fullname': {
+		text: () => fbt(
+			'Nom, prénom et civilité du client',
+			'first reminder invoice email',
+		),
+	},
+	'customer.phone': {
+		text: () => fbt('Téléphone du client', 'second reminder invoice email'),
+	},
+	'customer.email': {
+		text: () => fbt('Email du client', 'third reminder invoice email'),
+	},
+	'recipient.firstname': {
+		text: () => fbt('Prénom du destinataire', 'fourth reminder invoice email'),
+	},
+	'recipient.lastname': {
+		text: () => fbt('Nom du destinataire', 'fitfh reminder invoice email'),
+	},
+	'recipient.fullname': {
+		text: () => fbt('Nom et prénom du destinataire', 'customer report email'),
+	},
+	'author.firstname': {
+		text: () => fbt("Prénom de l'auteur", 'comment added'),
+	},
+	'author.lastname': {
+		text: () => fbt("Nom de l'auteur", 'comment added'),
+	},
+	'author.fullname': {
+		text: () => fbt("Nom et prénom de l'auteur", 'customer report email'),
+	},
+	'comment.text': {
+		text: () => fbt('Texte du commentaire', 'comment added'),
+	},
+	'comment.createdAt': {
+		text: () => fbt('Date du commentaire', 'comment added'),
+	},
+};
+
+export const EMAIL_NAME_BY_TYPE = {
+	DELAY: {
+		text: () => fbt('Activation de la tâche', 'first customer email'),
+	},
+	FIRST: {
+		text: () => fbt('1ère relance', 'first reminder customer email'),
+	},
+	SECOND: {
+		text: () => fbt('2nde relance', 'second reminder customer email'),
+	},
+	LAST: {
+		text: () => fbt('Dernière relance', 'third reminder customer email'),
+	},
+	INVOICE_DELAY: {
+		text: () => fbt('Activation de la tâche', 'first invoice email'),
+	},
+	INVOICE_FIRST: {
+		text: () => fbt('1ère relance', 'first reminder invoice email'),
+	},
+	INVOICE_SECOND: {
+		text: () => fbt('2nde relance', 'second reminder invoice email'),
+	},
+	INVOICE_THIRD: {
+		text: () => fbt('3e relance', 'third reminder invoice email'),
+	},
+	INVOICE_FOURTH: {
+		text: () => fbt('4e relance', 'fourth reminder invoice email'),
+	},
+	INVOICE_LAST: {
+		text: () => fbt('Dernière relance', 'fitfh reminder invoice email'),
+	},
+	CUSTOMER_REPORT: {
+		text: () => fbt('Rapport client', 'customer report email'),
+	},
+	COMMENT_ADDED: {
+		text: () => fbt('Commentaire ajouté', 'comment added'),
+	},
+};
 
 export const REMINDER_TYPES_DATA = {
 	DELAY: {

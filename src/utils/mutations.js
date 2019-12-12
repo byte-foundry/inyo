@@ -999,3 +999,51 @@ export const CANCEL_REQUEST_COLLAB = gql`
 		}
 	}
 `;
+
+export const UPDATE_EMAIL_TEMPLATE = gql`
+	mutation updateEmailTemplate(
+		$templateId: ID!
+		$subject: Json!
+		$content: Json!
+		$timing: Json
+	) {
+		updateEmailTemplate(
+			id: $templateId
+			subject: $subject
+			content: $content
+			timing: $timing
+		) {
+			id
+			subject
+			content
+			timing
+			type {
+				id
+				name
+				category
+			}
+		}
+	}
+`;
+
+export const SET_TEMPLATE_TO_DEFAULT = gql`
+	mutation setTemplateToDefault($templateId: ID!) {
+		setTemplateToDefault(id: $templateId) {
+			id
+			subject
+			content
+			timing
+			type {
+				id
+				name
+				category
+			}
+		}
+	}
+`;
+
+export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
+	mutation sendCustomEmailPreview($subject: Json!, $content: Json!) {
+		sent: sendCustomEmailPreview(subject: $subject, content: $content)
+	}
+`;

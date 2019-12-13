@@ -6,21 +6,19 @@ import {FlexRow} from '../../utils/content';
 import {
 	lightGrey,
 	mediumGrey,
-	primaryBlack
+	primaryBlack,
 } from '../../utils/new/design-system';
 
 const Param = styled('div')`
 	margin: 0 0 0.5rem 0.5rem;
-	background: ${props =>
-		props.used ? 'rgba(34, 201, 121, 0.3)' : lightGrey};
+	background: ${props => (props.used ? 'rgba(34, 201, 121, 0.3)' : lightGrey)};
 	color: ${props => (props.used ? '#22C979' : '#505050')};
 	border-radius: 20px;
 	padding: 8px 18px;
 	font-size: 12px;
 
 	&:hover {
-		background: ${props =>
-			props.used ? 'rgba(34, 201, 121, 0.5);' : mediumGrey};
+		background: ${props => (props.used ? 'rgba(34, 201, 121, 0.5);' : mediumGrey)};
 		color: ${props => (props.used ? '#059062' : primaryBlack)};
 		cursor: pointer;
 	}
@@ -36,7 +34,7 @@ const EmailParamList = ({params, editor, paramsUsed}) => (
 		{params.map(param => (
 			<Param
 				used={paramsUsed.includes(param.param.name)}
-				onClick={e => {
+				onClick={(e) => {
 					e.preventDefault();
 					editor.insertInlineAtRange(editor.value.selection, {
 						data: {param: param.param},
@@ -45,12 +43,12 @@ const EmailParamList = ({params, editor, paramsUsed}) => (
 								object: 'text',
 								leaves: [
 									{
-										text: param.param.name
-									}
-								]
-							}
+										text: param.param.name,
+									},
+								],
+							},
 						],
-						type: 'param'
+						type: 'param',
 					});
 
 					// can't seem to get focus any other way

@@ -518,9 +518,12 @@ const Stats = ({history, location}) => {
 								filteredTasks
 									.filter(t => t.status === 'FINISHED')
 									.reduce(
-										(total, {timeItTook}) => total + timeItTook,
+										(total, {timeItTook, dailyRate}) => total
+											+ timeItTook
+												* (dailyRate
+													|| defaultDailyPrice),
 										0,
-									) * defaultDailyPrice,
+									),
 							)}
 						</Number>
 					</Card>

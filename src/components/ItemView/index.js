@@ -235,7 +235,7 @@ const Item = ({
 	} = useQuery(GET_USER_INFOS, {
 		suspend: true,
 	});
-	const {workingTime = 8} = useUserInfos();
+	const {workingTime = 8, defaultDailyPrice} = useUserInfos();
 
 	const [updateItem] = useMutation(UPDATE_ITEM);
 	const [focusTask] = useMutation(FOCUS_TASK);
@@ -909,6 +909,60 @@ const Item = ({
 									});
 								}}
 							/>
+						</Meta>
+					</Tooltip>
+				)}
+
+				{!customerToken && (
+					<Tooltip
+						label={fbt(
+							'Taux journalier moyen de cette tâche',
+							'daily rate item view',
+						)}
+					>
+						<Meta>
+							<MaterialIcon icon="label" size="tiny" />
+							<MetaLabel>TJM</MetaLabel>
+							<InlineEditable
+								nameCss={css`
+									padding: 0;
+									width: auto;
+									margin-right: 1rem;
+								`}
+								editableCss={css`
+									color: ${item.dailyRate
+						? primaryPurple
+						: primaryGrey};
+									margin-right: 1rem;
+								`}
+								value={item.dailyRate}
+								type="text"
+								placeholder={defaultDailyPrice}
+								key={item.dailyRate}
+								onFocusOut={(value) => {
+									if (value && value !== item.dailyRate) {
+										updateItem({
+											variables: {
+												itemId: id,
+												dailyRate: parseFloat(value),
+											},
+										});
+									}
+								}}
+							/>
+							{item.dailyRate && (
+								<IconButton
+									icon="clear"
+									size="micro"
+									onClick={() => updateItem({
+										variables: {
+											itemId: id,
+											dailyRate: null,
+										},
+									})
+									}
+								/>
+							)}
 						</Meta>
 					</Tooltip>
 				)}

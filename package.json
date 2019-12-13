@@ -99,7 +99,7 @@
     "react-toastify": "^4.4.0",
     "react-waypoint": "^9.0.1",
     "react-youtube": "^7.9.0",
-    "reactjs-calendar-heatmap": "^0.0.10",
+    "reactjs-calendar-heatmap": "https://github.com/yannickmathey/reactjs-calendar-heatmap",
     "remarkable": "^2.0.0",
     "require-context.macro": "^1.0.4",
     "resize-observer-polyfill": "^1.5.1",

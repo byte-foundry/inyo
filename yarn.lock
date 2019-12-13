@@ -12705,10 +12705,9 @@ reactcss@^1.2.0:
   dependencies:
     lodash "^4.0.1"
 
-reactjs-calendar-heatmap@^0.0.10:
+"reactjs-calendar-heatmap@https://github.com/yannickmathey/reactjs-calendar-heatmap":
   version "0.0.10"
-  resolved "https://registry.yarnpkg.com/reactjs-calendar-heatmap/-/reactjs-calendar-heatmap-0.0.10.tgz#711a9282ed5d7e51e8a2804efd2e628ea6f6af53"
-  integrity sha512-ailKpUVakA4nkbirP4dzOE0Lz8QjleSdTMiRr7om9/DdBpWdhoWwqLNTa7syoMsx0xEboFqw2suFjJ4Upu0OIw==
+  resolved "https://github.com/yannickmathey/reactjs-calendar-heatmap#88b8c2c11e07f18772754ee03292ea5ff75673d8"
 
 read-pkg-up@^2.0.0:
   version "2.0.0"

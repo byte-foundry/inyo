@@ -7196,7 +7196,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Total of reminders sent by your Smart Assistant according to the selected filters and period.",
+     "translation": "Total of reminders sent by your {=Smart Assistant} according to the selected filters and period.",
      "variations": {}
     }
    ]
@@ -7226,7 +7226,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Total of time gained thanks to the automatic actions from your {=Smart Assistant}",
+     "translation": "{=Temps gagné grâce à l'utilisation d'Inyo, du fait des actions de votreSmart Assistant.}",
      "variations": {}
     }
    ]
@@ -7236,7 +7236,7 @@
    "types": [],
    "translations": [
     {
-     "translation": "Total of time gained thanks to the automatic actions from your Smart Assistant",
+     "translation": "Total of time gained thanks to the automatic actions from your {=Smart Assistant}.",
      "variations": {}
     }
    ]

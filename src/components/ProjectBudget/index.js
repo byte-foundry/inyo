@@ -1,7 +1,6 @@
 import styled from '@emotion/styled/macro';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
 import * as Yup from 'yup';
 
 import fbt from '../../fbt/fbt.macro';
@@ -526,42 +525,6 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 		</FlexColumn>
 	);
 };
-
-const NoBudgetDisplay = ({projectHasBudget, userHasDailyRate, ...props}) => (
-	<div>
-		{!projectHasBudget && (
-			<>
-				<fbt desc="No project Budget">
-					<BudgetLabel>
-						Vous n'avez pas encore défini de budget pour ce projet.
-					</BudgetLabel>
-				</fbt>
-				<FormElem
-					label={<fbt desc="budget label">Budget vendu</fbt>}
-					{...props}
-					name="budget"
-					type="number"
-					placeholder={<fbt desc="budget placeholder">5000 €</fbt>}
-				/>
-				<Button
-					onClick={props.onSubmit}
-					type="submit"
-					disabled={props.isSubmitting}
-				>
-					<fbt desc="No project Budget">Valider</fbt>
-				</Button>
-			</>
-		)}
-		{!userHasDailyRate && (
-			<fbt desc="defined a daily rate">
-				<Link to="/app/account#settings">
-					Définissez votre TJM pour profiter des fonctionnalités de
-					budget.
-				</Link>
-			</fbt>
-		)}
-	</div>
-);
 
 const ProjectBudget = ({projectId}) => {
 	const [editing, setEditing] = useState(false);

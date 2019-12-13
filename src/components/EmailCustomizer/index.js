@@ -215,10 +215,10 @@ const EmailCustomizer = ({emailType}) => {
 	const paramsUsed = [
 		...contentValue.document
 			.filterDescendants(block => block.type === 'param')
-			.map(param => param.data.param.name),
+			.map(param => param.text),
 		...subjectValue.document
 			.filterDescendants(block => block.type === 'param')
-			.map(param => param.data.param.name)
+			.map(param => param.text)
 	];
 
 	useEffect(() => {

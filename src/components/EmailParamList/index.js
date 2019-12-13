@@ -45,9 +45,7 @@ const EmailParamList = ({params, editor, paramsUsed}) => (
 								object: 'text',
 								leaves: [
 									{
-										text: LABEL_EMAIL_PARAM[
-											param.param.name
-										].text()
+										text: param.param.name
 									}
 								]
 							}

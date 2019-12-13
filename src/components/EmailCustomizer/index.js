@@ -15,7 +15,7 @@ import {Loading} from '../../utils/content';
 import {
 	SEND_CUSTOM_EMAIL_PREVIEW,
 	SET_TEMPLATE_TO_DEFAULT,
-	UPDATE_EMAIL_TEMPLATE,
+	UPDATE_EMAIL_TEMPLATE
 } from '../../utils/mutations';
 import {
 	Button,
@@ -25,7 +25,7 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
-	primaryWhite,
+	primaryWhite
 } from '../../utils/new/design-system';
 import {GET_EMAIL_TEMPLATE} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
@@ -153,9 +153,9 @@ const renderInline = ({attributes, node, isSelected}, editor, next) => {
 const schema = {
 	inlines: {
 		param: {
-			isVoid: true,
-		},
-	},
+			isVoid: true
+		}
+	}
 };
 
 const initialValue = {
@@ -169,22 +169,21 @@ const initialValue = {
 				nodes: [
 					{
 						object: 'text',
-						text: '',
-					},
-				],
-			},
-		],
-	},
+						text: ''
+					}
+				]
+			}
+		]
+	}
 };
 
-const compareStateAndData = (state, template) => (
-	(template.timing === null
-			|| (state.timing.value === template.timing.value
-				&& state.timing.unit === template.timing.unit
-				&& state.timing.isRelative === template.timing.isRelative))
-		&& state.subject === template.subject
-		&& state.content === template.content
-);
+const compareStateAndData = (state, template) =>
+	(template.timing === null ||
+		(state.timing.value === template.timing.value &&
+			state.timing.unit === template.timing.unit &&
+			state.timing.isRelative === template.timing.isRelative)) &&
+	state.subject === template.subject &&
+	state.content === template.content;
 
 const EmailCustomizer = ({emailType}) => {
 	const {assistantName} = useUserInfos();
@@ -195,10 +194,10 @@ const EmailCustomizer = ({emailType}) => {
 	const [initialSubject, setInitialSubject] = useState();
 	const [initialContent, setInitialContent] = useState();
 	const [contentValue, setContentValue] = useState(
-		Value.fromJSON(initialValue),
+		Value.fromJSON(initialValue)
 	);
 	const [subjectValue, setSubjectValue] = useState(
-		Value.fromJSON(initialValue),
+		Value.fromJSON(initialValue)
 	);
 	const contentEditorRef = useRef();
 	const subjectEditorRef = useRef();
@@ -206,8 +205,8 @@ const EmailCustomizer = ({emailType}) => {
 	const {data, loading, error} = useQuery(GET_EMAIL_TEMPLATE, {
 		variables: {
 			typeName: emailType.name,
-			category: emailType.category,
-		},
+			category: emailType.category
+		}
 	});
 	const [sendCustomEmailPreview] = useMutation(SEND_CUSTOM_EMAIL_PREVIEW);
 	const [updateEmailTemplate] = useMutation(UPDATE_EMAIL_TEMPLATE);
@@ -216,10 +215,10 @@ const EmailCustomizer = ({emailType}) => {
 	const paramsUsed = [
 		...contentValue.document
 			.filterDescendants(block => block.type === 'param')
-			.map(param => param.text),
+			.map(param => param.data.param.name),
 		...subjectValue.document
 			.filterDescendants(block => block.type === 'param')
-			.map(param => param.text),
+			.map(param => param.data.param.name)
 	];
 
 	useEffect(() => {
@@ -247,17 +246,17 @@ const EmailCustomizer = ({emailType}) => {
 						timing: {
 							unit,
 							value,
-							isRelative,
+							isRelative
 						},
 						subject: subjectValue,
-						content: contentValue,
+						content: contentValue
 					},
 					{
 						timing: data.emailTemplate.timing,
 						subject: initialSubject,
-						content: initialContent,
-					},
-				),
+						content: initialContent
+					}
+				)
 			);
 		}
 	}, [
@@ -269,7 +268,7 @@ const EmailCustomizer = ({emailType}) => {
 		subjectValue,
 		contentValue,
 		initialValue,
-		initialContent,
+		initialContent
 	]);
 
 	if (loading) {
@@ -289,8 +288,8 @@ const EmailCustomizer = ({emailType}) => {
 			</p>,
 			{
 				position: toast.POSITION.BOTTOM_LEFT,
-				autoClose: 3000,
-			},
+				autoClose: 3000
+			}
 		);
 	};
 
@@ -319,8 +318,8 @@ const EmailCustomizer = ({emailType}) => {
 						sendCustomEmailPreview({
 							variables: {
 								subject: subjectEditorRef.current.value,
-								content: contentEditorRef.current.value,
-							},
+								content: contentEditorRef.current.value
+							}
 						});
 					}}
 				>
@@ -353,7 +352,7 @@ const EmailCustomizer = ({emailType}) => {
 								// can't seem to get focus any other way
 								setTimeout(
 									() => subjectEditorRef.current.focus(),
-									0,
+									0
 								);
 							}}
 							schema={schema}
@@ -372,7 +371,7 @@ const EmailCustomizer = ({emailType}) => {
 								// can't seem to get focus any other way
 								setTimeout(
 									() => contentEditorRef.current.focus(),
-									0,
+									0
 								);
 							}}
 							schema={schema}
@@ -385,11 +384,12 @@ const EmailCustomizer = ({emailType}) => {
 				<Button
 					link
 					red
-					onClick={() => setTemplateToDefault({
-						variables: {
-							templateId: data.emailTemplate.id,
-						},
-					})
+					onClick={() =>
+						setTemplateToDefault({
+							variables: {
+								templateId: data.emailTemplate.id
+							}
+						})
 					}
 				>
 					<fbt desc="back to default template">
@@ -409,24 +409,22 @@ const EmailCustomizer = ({emailType}) => {
 									timing: {
 										unit,
 										value,
-										isRelative,
+										isRelative
 									},
 									subject: subjectEditorRef.current.value,
-									content: contentEditorRef.current.value,
-								},
+									content: contentEditorRef.current.value
+								}
 							});
-						}
-						catch (error) {
+						} catch (error) {
 							if (
-								error.networkError
-								&& error.networkError.result
-								&& error.networkError.result.errors
+								error.networkError &&
+								error.networkError.result &&
+								error.networkError.result.errors
 							) {
 								Sentry.captureException(
-									error.networkError.result.errors,
+									error.networkError.result.errors
 								);
-							}
-							else {
+							} else {
 								Sentry.captureException(error);
 							}
 						}

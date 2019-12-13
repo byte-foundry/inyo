@@ -235,7 +235,7 @@ const Item = ({
 	} = useQuery(GET_USER_INFOS, {
 		suspend: true,
 	});
-	const {workingTime = 8} = useUserInfos();
+	const {workingTime = 8, defaultDailyPrice} = useUserInfos();
 
 	const [updateItem] = useMutation(UPDATE_ITEM);
 	const [focusTask] = useMutation(FOCUS_TASK);
@@ -937,9 +937,8 @@ const Item = ({
 								`}
 								value={item.dailyRate}
 								type="text"
-								placeholder={
-									<fbt desc="daily rate item view">300€</fbt>
-								}
+								placeholder={defaultDailyPrice}
+								key={item.dailyRate}
 								onFocusOut={(value) => {
 									if (value && value !== item.dailyRate) {
 										updateItem({

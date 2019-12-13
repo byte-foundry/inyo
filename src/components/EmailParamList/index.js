@@ -57,7 +57,7 @@ const EmailParamList = ({params, editor, paramsUsed}) => (
 					setTimeout(() => editor.focus(), 0);
 				}}
 			>
-				{LABEL_EMAIL_PARAM[param.param.name].text()}
+				{param.param.name}
 			</Param>
 		))}
 	</EmailParamListContainer>

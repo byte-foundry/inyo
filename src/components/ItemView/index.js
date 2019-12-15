@@ -921,7 +921,7 @@ const Item = ({
 						)}
 					>
 						<Meta>
-							<MaterialIcon icon="label" size="tiny" />
+							<MaterialIcon icon="local_atm" size="tiny" />
 							<MetaLabel>TJM</MetaLabel>
 							<InlineEditable
 								nameCss={css`

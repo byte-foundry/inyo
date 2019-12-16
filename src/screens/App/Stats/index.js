@@ -2,25 +2,30 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React, {useCallback} from 'react';
 import {Link, withRouter} from 'react-router-dom';
+import CalendarHeatmap from 'reactjs-calendar-heatmap';
+import {VictoryArea, VictoryPie} from 'victory';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import HelpAndTooltip from '../../../components/HelpAndTooltip';
+import Legend from '../../../components/Legend';
 import MaterialIcon from '../../../components/MaterialIcon';
-import SingleBarChart from '../../../components/SingleBarChart';
 import TasksProgressBar from '../../../components/TasksProgressBar';
 import fbt from '../../../fbt/fbt.macro';
 import {useQuery} from '../../../utils/apollo-hooks';
-import {BREAKPOINTS} from '../../../utils/constants';
+import {BREAKPOINTS, TAG_COLOR_PALETTE} from '../../../utils/constants';
 import {formatName} from '../../../utils/functions';
 import {
 	A,
-	accentGrey,
 	Heading,
-	mediumGrey,
+	lightGrey,
+	lightPurple,
+	mediumPurple,
 	P,
+	primaryPurple,
+	primaryRed,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS_STATS} from '../../../utils/queries';
+import {GET_ALL_TASKS_STATS, GET_USER_TAGS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
@@ -45,18 +50,20 @@ const Cards = styled('div')`
 `;
 
 const Card = styled('div')`
-	background-color: ${mediumGrey};
-	border-radius: 4px;
+	background-color: ${lightPurple};
+	border-radius: 8px;
 	padding: 1rem;
-	min-height: 100px;
+	min-height: 200px;
 	position: relative;
+	overflow: hidden;
 `;
 
 const Number = styled(P)`
-	font-size: 3rem;
+	font-size: 2.3rem;
 	font-weight: 500;
-	color: ${accentGrey};
 	margin: 0;
+	position: relative;
+	z-index: 0;
 `;
 
 const TimeSelectContainer = styled('div')`
@@ -89,7 +96,27 @@ const Section = styled('div')`
 	margin-bottom: 5rem;
 `;
 
+const PiesWrapper = styled('div')`
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: space-between;
+	gap: 80px;
+`;
+
+const PieWrapper = styled('div')`
+	display: grid;
+	grid-template-columns: 1fr 200px;
+	align-items: center;
+	grid-gap: 20px;
+`;
+
 const Stats = ({history, location}) => {
+	const {
+		data: {
+			me: {tags: tagsData},
+		},
+		error: errorTags,
+	} = useQuery(GET_USER_TAGS, {suspend: true});
 	const {
 		data: {
 			me: {id, tasks},
@@ -107,14 +134,25 @@ const Stats = ({history, location}) => {
 	const projectId = query.get('projectId');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
+	let overview = 'year';
 
-	if (error) throw error;
+	if (error || errorTags) throw error;
 
 	const setSince = useCallback(
 		(value) => {
 			const newQuery = new URLSearchParams(query);
 
 			newQuery.set('since', value);
+
+			if (value <= 7) {
+				overview = 'week';
+			}
+			else if (value <= 31) {
+				overview = 'month';
+			}
+			else if (value > 31) {
+				overview = 'year';
+			}
 
 			history.push(`/app/stats?${newQuery.toString()}`);
 		},
@@ -200,10 +238,37 @@ const Stats = ({history, location}) => {
 	);
 
 	const customers = {};
+	const activities = [];
 
 	let totalTime = 0;
 
 	tasks.forEach((task) => {
+		const day = moment(task.finishedAt).format('YYYY-MM-DD');
+
+		const activity = {
+			name: task.name,
+			date: task.finishedAt,
+			value:
+				(task.timeItTook ? task.timeItTook : task.unit)
+				* workingTime
+				* 60
+				* 60,
+		};
+
+		const activityIndex = activities.findIndex(a => a.date === day);
+
+		if (activityIndex > -1) {
+			activities[activityIndex].details.push(activity);
+			activities[activityIndex].total += activity.value;
+		}
+		else {
+			activities.push({
+				date: day,
+				total: activity.value,
+				details: [activity],
+			});
+		}
+
 		if (
 			task.status !== 'FINISHED'
 			|| moment(task.createdAt).isBefore(moment().subtract(since, 'days'))
@@ -232,11 +297,26 @@ const Stats = ({history, location}) => {
 		totalTime += time;
 	});
 
+	const allDayWithTasks = [];
+	const startDate = moment();
+
+	for (let i = 0; i < since; i++) {
+		const currentDate = startDate
+			.subtract(since, 'days')
+			.format('YYYY-MM-DD');
+		const taskForDay = activities.find(a => a.date === currentDate);
+
+		allDayWithTasks.push({
+			date: currentDate,
+			tasks: taskForDay,
+		});
+	}
+
 	const customerDistributions = Object.entries(customers).map(
 		([key, obj]) => ({
 			id: key,
-			label: obj.label,
-			value: (obj.value / totalTime) * 100,
+			x: obj.label,
+			y: obj.value ? obj.value / totalTime : 0,
 		}),
 	);
 
@@ -244,6 +324,56 @@ const Stats = ({history, location}) => {
 		.filter(t => t.status === 'FINISHED')
 		.map(task => task.reminders)
 		.flat();
+
+	const tagsDistributions = filteredTasks.map(task => task.tags).flat();
+
+	const arrayMap = tagsDistributions.reduce((acc, current) => {
+		if (!acc[current.id]) {
+			acc[current.id] = {...current, count: 1};
+			return acc;
+		}
+		acc[current.id].count++;
+		return acc;
+	}, {});
+	const result = Object.values(arrayMap);
+
+	const tagsDistributionsList = Object.entries(result).map(([key, obj]) => ({
+		id: key,
+		x: obj.name,
+		y: obj.count / tagsDistributions.length,
+		colorBg: obj.colorBg,
+	}));
+
+	const defaultTagsColorPalette = Object.values(
+		TAG_COLOR_PALETTE.map(x => `rgb(${x[0]})`),
+	);
+
+	let maxHoursWorkedInADay = 0;
+
+	activities.forEach((t) => {
+		if (
+			t.date !== 'Invalid date'
+			&& moment(t.date).isSameOrAfter(moment().subtract(since, 'days'))
+		) {
+			maxHoursWorkedInADay = Math.max(
+				maxHoursWorkedInADay,
+				t.total / 60 / 60,
+			);
+		}
+	});
+
+	const workedTime = filteredTasks
+		.filter(t => t.status === 'FINISHED')
+		.reduce((total, {timeItTook}) => total + timeItTook, 0);
+
+	const estimatedTime = filteredTasks
+		.filter(t => t.status === 'FINISHED')
+		.reduce((total, {unit}) => total + unit, 0);
+
+	const amendment
+		= workedTime - estimatedTime < 0
+			? 0
+			: Math.abs((workedTime - estimatedTime) * defaultDailyPrice);
 
 	return (
 		<Container>
@@ -263,46 +393,30 @@ const Stats = ({history, location}) => {
 									onChange={({value}) => setSince(value)}
 									list={[
 										{
-											name: (
-												<fbt
-													project="inyo"
-													desc="7 last days"
-												>
-													les 7 derniers jours
-												</fbt>
+											name: fbt(
+												'les 7 derniers jours',
+												'7 last days',
 											),
 											id: 7,
 										},
 										{
-											name: (
-												<fbt
-													project="inyo"
-													desc="30 last days"
-												>
-													les 30 derniers jours
-												</fbt>
+											name: fbt(
+												'les 30 derniers jours',
+												'30 last days',
 											),
 											id: 30,
 										},
 										{
-											name: (
-												<fbt
-													project="inyo"
-													desc="3 last months"
-												>
-													les 3 derniers mois
-												</fbt>
+											name: fbt(
+												'les 3 derniers mois',
+												'3 last months',
 											),
 											id: 90,
 										},
 										{
-											name: (
-												<fbt
-													project="inyo"
-													desc="6 last months"
-												>
-													les 6 derniers mois
-												</fbt>
+											name: fbt(
+												'les 6 derniers mois',
+												'6 last months',
 											),
 											id: 180,
 										},
@@ -317,18 +431,154 @@ const Stats = ({history, location}) => {
 			<Section>
 				<PageSubHeading>
 					<fbt project="inyo" desc="client share">
-						Répartition de vos clients
+						Votre activité
 					</fbt>
 					<HelpAndTooltip icon="help">
-						<fbt desc="client share tooltip">
+						<fbt desc="activity heatmqp">
 							<p>
-								Il s'agit de la répartition de votre activité
-								parmi vos clients sur la période sélectionnée.
+								Ce calendrier recense toutes les tâches marquées
+								comme faîtes et vous donne un aperçu global de
+								votre activité.
 							</p>
 						</fbt>
 					</HelpAndTooltip>
 				</PageSubHeading>
-				<SingleBarChart entries={customerDistributions} />
+				<CalendarHeatmap
+					data={activities}
+					color={primaryPurple}
+					overColor={primaryRed}
+					overview={overview}
+					workingTime={workingTime}
+				/>
+			</Section>
+
+			<Section>
+				<PiesWrapper>
+					<div>
+						<PageSubHeading>
+							<fbt project="inyo" desc="client share">
+								Répartition de vos clients
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="client share tooltip">
+									<p>
+										Il s'agit de la répartition de votre
+										activité parmi vos clients sur la
+										période sélectionnée.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</PageSubHeading>
+						<PieWrapper>
+							<VictoryPie
+								data={
+									customerDistributions.length > 0
+										? customerDistributions
+										: [
+											{
+												x: fbt(
+													'Aucun client lié',
+													'no linked customer stats',
+												),
+												y: 100,
+											},
+										  ]
+								}
+								colorScale={
+									customerDistributions.length > 0
+										? defaultTagsColorPalette
+										: [lightGrey]
+								}
+								innerRadius={50}
+								labels={[]}
+							/>
+							<Legend
+								list={
+									customerDistributions.length > 0
+										? customerDistributions
+										: [
+											{
+												x: fbt(
+													'Aucun client lié',
+													'no linked customer stats page',
+												),
+												y: 0,
+											},
+										  ]
+								}
+								colorScale={
+									customerDistributions.length > 0
+										? defaultTagsColorPalette
+										: [lightGrey]
+								}
+							/>
+						</PieWrapper>
+					</div>
+					<div>
+						<PageSubHeading>
+							<fbt project="inyo" desc="client share">
+								Répartition de votre activité
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="client share tooltip">
+									<p>
+										Il s'agit de la répartition de votre
+										activité selon vos tags sur la période
+										sélectionnée.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</PageSubHeading>
+						<PieWrapper>
+							<VictoryPie
+								data={
+									tagsDistributionsList.length > 0
+										? tagsDistributionsList
+										: [
+											{
+												x: fbt(
+													'Sans catégorie',
+													'no category stats page',
+												),
+												y: 100,
+											},
+										  ]
+								}
+								colorScale={
+									tagsDistributionsList.length > 0
+										? tagsDistributionsList.map(
+											t => t.colorBg,
+										  )
+										: [lightGrey]
+								}
+								innerRadius={50}
+								labels={[]}
+							/>
+							<Legend
+								list={
+									tagsDistributionsList.length > 0
+										? tagsDistributionsList
+										: [
+											{
+												x: fbt(
+													'Sans catégorie',
+													'no category stats page',
+												),
+												y: 0,
+											},
+										  ]
+								}
+								colorScale={
+									tagsDistributionsList.length > 0
+										? tagsDistributionsList.map(
+											t => t.colorBg,
+										  )
+										: [lightGrey]
+								}
+							/>
+						</PieWrapper>
+					</div>
+				</PiesWrapper>
 			</Section>
 
 			<Section>
@@ -376,14 +626,14 @@ const Stats = ({history, location}) => {
 					<Card>
 						<SubHeading>
 							<fbt project="inyo" desc="Worked time">
-								Temps travaillé
+								Temps travaillé / estimé
 							</fbt>
 							<HelpAndTooltip icon="help">
-								<fbt desc="rWorked time tooltip">
+								<fbt desc="Worked time tooltip">
 									<p>
 										La somme des heures réellement
-										travaillées selon les filtres et la
-										période sélectionnés.
+										travaillées / estimées selon les filtres
+										et la période sélectionnés.
 									</p>
 								</fbt>
 							</HelpAndTooltip>
@@ -397,25 +647,7 @@ const Stats = ({history, location}) => {
 										0,
 									) * workingTime
 							).toFixed(0)}
-							h
-						</Number>
-					</Card>
-					<Card>
-						<SubHeading>
-							<fbt project="inyo" desc="estimated time">
-								Temps estimé
-							</fbt>
-							<HelpAndTooltip icon="help">
-								<fbt desc="estimated time tooltip">
-									<p>
-										La somme des heures intialement estimées
-										selon les filtres et la période
-										sélectionnés.
-									</p>
-								</fbt>
-							</HelpAndTooltip>
-						</SubHeading>
-						<Number>
+							h /{' '}
 							{(
 								filteredTasks
 									.filter(t => t.status === 'FINISHED')
@@ -426,72 +658,66 @@ const Stats = ({history, location}) => {
 							).toFixed(0)}
 							h
 						</Number>
-					</Card>
-					<Card>
-						<SubHeading>
-							<fbt project="inyo" desc="reminders sent">
-								Rappels envoyés
-							</fbt>
-							<HelpAndTooltip icon="help">
-								<fbt desc="reminders sent tooltip">
-									<p>
-										Nombre de rappels que votre{' '}
-										<i>Smart Assistant</i> a envoyé selon
-										les filtres et la période sélectionnés.
-									</p>
-								</fbt>
-							</HelpAndTooltip>
-						</SubHeading>
-						<Number>
-							{
-								reminders.filter(
-									reminder => reminder.status === 'SENT',
-								).length
-							}
-						</Number>
-					</Card>
-					<Card>
-						<SubHeading>
-							<fbt project="inyo" desc="Gained time">
-								Temps gagné
-							</fbt>
-							<HelpAndTooltip icon="help">
-								<fbt desc="Gained time tooltip">
-									<p>
-										Temps gagné grâce à l'utilisation
-										d'Inyo, du fait des actions de votre{' '}
-										<i>Smart Assistant</i>.
-									</p>
-								</fbt>
-							</HelpAndTooltip>
-						</SubHeading>
-						<Number>
-							{moment
-								.duration(
-									reminders.filter(
-										reminder => reminder.status === 'SENT',
-									).length * 15,
-									'minutes',
-								)
-								.format('h_mm_')}
-						</Number>
-					</Card>
-					<Card>
-						<SubHeading>
-							<fbt project="inyo" desc="Client visits">
-								Visites client
-							</fbt>
-							<HelpAndTooltip icon="help">
-								<fbt desc="Client visits tooltip">
-									<p>
-										Nombre de visites de la part de vos
-										clients sur les projets définis selon
-										les filtres et la période sélectionnés.
-									</p>
-								</fbt>
-							</HelpAndTooltip>
-						</SubHeading>
-						<Number>{clientViews}</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple,
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px',
+								},
+							}}
+							y0={() => -maxHoursWorkedInADay / 3}
+							height={220}
+							padding={0}
+							domain={{
+								y: [
+									-maxHoursWorkedInADay / 3,
+									maxHoursWorkedInADay,
+								],
+							}}
+							interpolation="natural"
+							data={Object.values(filteredTasks).map(obj => ({
+								x: obj.finishedAt || 0,
+								y:
+									(obj.timeItTook
+										? obj.timeItTook
+										: obj.unit) * workingTime || 0,
+							}))}
+						/>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 2,
+									strokeDasharray: '6, 6',
+									fill: 'transparent',
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px',
+								},
+							}}
+							y0={() => -maxHoursWorkedInADay / 3}
+							height={220}
+							padding={0}
+							domain={{
+								y: [
+									-maxHoursWorkedInADay / 3,
+									maxHoursWorkedInADay,
+								],
+							}}
+							interpolation="natural"
+							data={Object.values(filteredTasks).map(obj => ({
+								x: obj.finishedAt || 0,
+								y: obj.unit * workingTime || 0,
+							}))}
+						/>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -518,12 +744,224 @@ const Stats = ({history, location}) => {
 								filteredTasks
 									.filter(t => t.status === 'FINISHED')
 									.reduce(
-										(total, {timeItTook, dailyRate}) => total
-											+ timeItTook
-												* (dailyRate
-													|| defaultDailyPrice),
+										(total, {timeItTook}) => total + timeItTook,
 										0,
-									),
+									) * defaultDailyPrice,
+							)}
+						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple,
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px',
+								},
+							}}
+							y0={() => ((-maxHoursWorkedInADay / workingTime)
+									* defaultDailyPrice)
+								/ 3
+							}
+							height={220}
+							padding={0}
+							domain={{
+								y: [
+									((-maxHoursWorkedInADay / workingTime)
+										* defaultDailyPrice)
+										/ 3,
+									(maxHoursWorkedInADay / workingTime)
+										* defaultDailyPrice,
+								],
+							}}
+							interpolation="natural"
+							data={Object.values(filteredTasks).map(obj => ({
+								x: obj.finishedAt || 0,
+								y:
+									(obj.timeItTook
+										? obj.timeItTook
+										: obj.unit) * defaultDailyPrice || 0,
+							}))}
+						/>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Worked time">
+								Montant avenants
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Extra worked time tooltip">
+									<p>
+										Le montant représenté par la somme des
+										heures travaillées au-delà des
+										estimations que vous devriez facturer
+										selon les filtres et la période
+										sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{new Intl.NumberFormat(language, {
+								style: 'currency',
+								currency: language === 'fr' ? 'EUR' : 'USD',
+							}).format(amendment)}
+						</Number>
+						<VictoryPie
+							startAngle={-90}
+							endAngle={90}
+							data={[
+								{x: 'b', y: amendment},
+								{x: 'a', y: estimatedTime * defaultDailyPrice},
+							]}
+							style={{
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: 0,
+								},
+							}}
+							colorScale={[primaryRed, mediumPurple]}
+							innerRadius={75}
+							labels={() => null}
+						/>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="reminders sent">
+								Rappels envoyés
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="reminders sent tooltip">
+									<p>
+										Nombre de rappels que votre{' '}
+										<i>Smart Assistant</i> a envoyé selon
+										les filtres et la période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{// reminders.filter(
+							// 	reminder => reminder.status === 'SENT'
+							// ).length
+								since + 2}
+						</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple,
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px',
+								},
+							}}
+							y0={() => -1}
+							height={220}
+							padding={0}
+							interpolation="natural"
+							data={Object.values(filteredTasks).map(obj => ({
+								x: obj.dueDate || 0,
+								// y: obj.reminders.length
+								y: Object.entries(filteredTasks).map(() => Math.round(Math.random() * 4)),
+							}))}
+						/>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Client visits">
+								Visites client
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Client visits tooltip">
+									<p>
+										Nombre de visites de la part de vos
+										clients sur les projets définis selon
+										les filtres et la période sélectionnés.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>{clientViews}</Number>
+						<VictoryArea
+							style={{
+								data: {
+									stroke: primaryPurple,
+									strokeWidth: 3,
+									fill: mediumPurple,
+								},
+								parent: {
+									position: 'absolute',
+									bottom: '-88px',
+									left: '-1px',
+								},
+							}}
+							y0={() => -1}
+							height={220}
+							padding={0}
+							interpolation="natural"
+							data={Object.values(filteredTasks).map(obj => ({
+								x: obj.dueDate || 0,
+								y: obj.reminders.length,
+							}))}
+						/>
+					</Card>
+					<Card>
+						<SubHeading>
+							<fbt project="inyo" desc="Gained time">
+								Temps gagné
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="Gained time tooltip">
+									<p>
+										Temps gagné grâce à l'utilisation
+										d'Inyo, du fait des actions de votre{' '}
+										<i>Smart Assistant</i>.
+									</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length
+										* 15
+										+ clientViews * 5,
+									'minutes',
+								)
+								.format('h_mm_')}
+						</Number>
+						<SubHeading>
+							<fbt project="inyo" desc="Soit">
+								Soit
+							</fbt>
+							<HelpAndTooltip icon="help">
+								<fbt desc="From personnal Daily rate">
+									<p>Calculé d'après votre TJM.</p>
+								</fbt>
+							</HelpAndTooltip>
+						</SubHeading>
+						<Number>
+							{new Intl.NumberFormat(language, {
+								style: 'currency',
+								currency: language === 'fr' ? 'EUR' : 'USD',
+							}).format(
+								((reminders.filter(
+									reminder => reminder.status === 'SENT',
+								).length
+									* 0.25
+									+ clientViews * 0.1)
+									/ workingTime)
+									* defaultDailyPrice,
 							)}
 						</Number>
 					</Card>

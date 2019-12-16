@@ -843,11 +843,10 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{
-								reminders.filter(
-									reminder => reminder.status === 'SENT'
-								).length
-							}
+							{// reminders.filter(
+							// 	reminder => reminder.status === 'SENT'
+							// ).length
+							since + 2}
 						</Number>
 						<VictoryArea
 							style={{
@@ -866,10 +865,15 @@ const Stats = ({history, location}) => {
 							height={220}
 							padding={0}
 							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.dueDate || 0,
-								y: obj.reminders.length
-							}))}
+							data={Object.values(filteredTasks).map(
+								obj => ({
+									x: obj.dueDate || 0,
+									//y: obj.reminders.length
+									y: Object.entries(filteredTasks).map(() =>
+										Math.round(Math.random() * 4)
+									)
+								})
+							)}
 						/>
 					</Card>
 					<Card>

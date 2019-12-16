@@ -3,53 +3,53 @@ import React from "react";
 import fbt from "../fbt/fbt.macro";
 import ContentAcquisitionIconUrl, {
 	ReactComponent as ContentAcquisitionIcon
-} from "./icons/content-acquisition.svg";
+} from './icons/content-acquisition.svg';
 import TaskInvoiceIconUrl, {
 	ReactComponent as TaskInvoiceIcon
-} from "./icons/invoice-icon.svg";
-import TaskCustomerIconValidatedAnimUrl from "./icons/taskicon-customer-validated-anim.svg";
+} from './icons/invoice-icon.svg';
+import TaskCustomerIconValidatedAnimUrl from './icons/taskicon-customer-validated-anim.svg';
 import TaskCustomerIconValidatedUrl, {
 	ReactComponent as TaskCustomerIconValidated
-} from "./icons/taskicon-customer-validated.svg";
+} from './icons/taskicon-customer-validated.svg';
 import TaskCustomerIconUrl, {
 	ReactComponent as TaskCustomerIcon
-} from "./icons/taskicon-customer.svg";
+} from './icons/taskicon-customer.svg';
 import TaskIconPersonalUrl, {
 	ReactComponent as TaskIconPersonal
-} from "./icons/taskicon-personal.svg";
-import TaskIconValidatedAnimUrl from "./icons/taskicon-user-validated-anim.svg";
+} from './icons/taskicon-personal.svg';
+import TaskIconValidatedAnimUrl from './icons/taskicon-user-validated-anim.svg';
 import TaskIconValidatedUrl, {
 	ReactComponent as TaskIconValidated
-} from "./icons/taskicon-user-validated.svg";
-import TaskIconUrl, { ReactComponent as TaskIcon } from "./icons/taskicon.svg";
+} from './icons/taskicon-user-validated.svg';
+import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 
 export const GRAPHQL_API = `https://prisma${
-	process.env.REACT_APP_INYO_ENV === "development" ? "-dev" : ""
+	process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 }.inyo.me/`;
 
 export const INTERCOM_APP_ID =
-	process.env.REACT_APP_INYO_ENV === "development" ? "cg8ntaar" : "imlnj7st";
+	process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';
 
 export const WEEKDAYS = {
-	1: "MONDAY",
-	2: "TUESDAY",
-	3: "WEDNESDAY",
-	4: "THURSDAY",
-	5: "FRIDAY",
-	6: "SATURDAY",
-	0: "SUNDAY"
+	1: 'MONDAY',
+	2: 'TUESDAY',
+	3: 'WEDNESDAY',
+	4: 'THURSDAY',
+	5: 'FRIDAY',
+	6: 'SATURDAY',
+	0: 'SUNDAY'
 };
 
 export const itemStatuses = {
-	FINISHED: "FINISHED",
-	PENDING: "PENDING"
+	FINISHED: 'FINISHED',
+	PENDING: 'PENDING'
 };
 
 export const collabStatuses = {
-	PENDING: "PENDING",
-	ACCEPTED: "ACCEPTED",
-	REJECTED: "REJECTED",
-	CANCELED: "CANCELED"
+	PENDING: 'PENDING',
+	ACCEPTED: 'ACCEPTED',
+	REJECTED: 'REJECTED',
+	CANCELED: 'CANCELED'
 };
 
 export const BREAKPOINTS = {
@@ -58,28 +58,28 @@ export const BREAKPOINTS = {
 };
 
 export const CUSTOMER_TASK_TYPES = [
-	"CUSTOMER",
-	"CONTENT_ACQUISITION",
-	"INVOICE"
+	'CUSTOMER',
+	'CONTENT_ACQUISITION',
+	'INVOICE'
 ];
 
 export const MOMENT_DURATION_LOCALE_FR = {
 	durationLabelsStandard: {
-		d: "jour",
-		dd: "jours"
+		d: 'jour',
+		dd: 'jours'
 	},
 	durationTimeTemplates: {
-		HM: "h[h]mm"
+		HM: 'h[h]mm'
 	}
 };
 
 export const MOMENT_DURATION_LOCALE_EN = {
 	durationLabelsStandard: {
-		d: "day",
-		dd: "days"
+		d: 'day',
+		dd: 'days'
 	},
 	durationTimeTemplates: {
-		HM: "h:mm"
+		HM: 'h:mm'
 	}
 };
 
@@ -98,8 +98,8 @@ export const ITEM_TYPES = [
 		},
 		get description() {
 			return fbt(
-				"Une tâche dont vous êtes responsable",
-				"basic task description"
+				'Une tâche dont vous êtes responsable',
+				'basic task description'
 			);
 		}
 	},
@@ -115,8 +115,8 @@ export const ITEM_TYPES = [
 		},
 		get description() {
 			return fbt(
-				"Une tâche uniquement visible par vous",
-				"personal task description"
+				'Une tâche uniquement visible par vous',
+				'personal task description'
 			);
 		}
 	},
@@ -132,8 +132,8 @@ export const ITEM_TYPES = [
 		},
 		get description() {
 			return fbt(
-				"Une tâche à réaliser par votre client",
-				"customer task description"
+				'Une tâche à réaliser par votre client',
+				'customer task description'
 			);
 		}
 	},
@@ -148,8 +148,8 @@ export const ITEM_TYPES = [
 		},
 		get description() {
 			return fbt(
-				"Lister et récupérer les contenus nécessaires",
-				"content acquisition description"
+				'Lister et récupérer les contenus nécessaires',
+				'content acquisition description'
 			);
 		}
 	},
@@ -164,8 +164,8 @@ export const ITEM_TYPES = [
 		},
 		get description() {
 			return fbt(
-				"Envoyer une facture et demander un paiement à votre client",
-				"invoice task description"
+				'Envoyer une facture et demander un paiement à votre client',
+				'invoice task description'
 			);
 		}
 	}
@@ -220,108 +220,108 @@ export const REMINDER_TYPES_DATA = {
 	DELAY: {
 		text: customerName =>
 			fbt(
-				`1er mail envoyé à ${fbt.param("customerName", customerName)}`,
-				"first customer email"
+				`1er mail envoyé à ${fbt.param('customerName', customerName)}`,
+				'first customer email'
 			)
 	},
 	FIRST: {
 		text: customerName =>
 			fbt(
 				`Rappel nº1 envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"first reminder customer email"
+				'first reminder customer email'
 			)
 	},
 	SECOND: {
 		text: customerName =>
 			fbt(
 				`Rappel nº2 envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"second reminder customer email"
+				'second reminder customer email'
 			)
 	},
 	LAST: {
 		text: customerName =>
 			fbt(
 				`Dernier rappel (nº3) envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"third reminder customer email"
+				'third reminder customer email'
 			)
 	},
 	INVOICE_DELAY: {
 		text: customerName =>
 			fbt(
 				`1er mail règlement de facture envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"first invoice email"
+				'first invoice email'
 			)
 	},
 	INVOICE_FIRST: {
 		text: customerName =>
 			fbt(
 				`Rappel règlement de facture nº1 envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"first reminder invoice email"
+				'first reminder invoice email'
 			)
 	},
 	INVOICE_SECOND: {
 		text: customerName =>
 			fbt(
 				`Rappel règlement de facture nº2 envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"second reminder invoice email"
+				'second reminder invoice email'
 			)
 	},
 	INVOICE_THIRD: {
 		text: customerName =>
 			fbt(
 				`Rappel règlement de facture nº3 envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"third reminder invoice email"
+				'third reminder invoice email'
 			)
 	},
 	INVOICE_FOURTH: {
 		text: customerName =>
 			fbt(
 				`Rappel règlement de facture nº4 envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"fourth reminder invoice email"
+				'fourth reminder invoice email'
 			)
 	},
 	INVOICE_LAST: {
 		text: customerName =>
 			fbt(
 				`Dernier règlement de facture rappel (nº5) envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"fitfh reminder invoice email"
+				'fitfh reminder invoice email'
 			)
 	},
 	CUSTOMER_REPORT: {
 		text: customerName =>
 			fbt(
 				`Rapport du jour envoyé à ${fbt.param(
-					"customerName",
+					'customerName',
 					customerName
 				)}`,
-				"customer report email"
+				'customer report email'
 			)
 	}
 };
@@ -330,117 +330,117 @@ export const EVENT_TYPES = [
 	{
 		type: "FOCUSED_TASK",
 		get name() {
-			return fbt("tâche programmée", "FOCUSED_TASK event type name");
+			return fbt('tâche programmée', 'FOCUSED_TASK event type name');
 		}
 	},
 	{
 		type: "UNFOCUSED_TASK",
 		get name() {
-			return fbt("tâche déprogrammée", "UNFOCUSED_TASK event type name");
+			return fbt('tâche déprogrammée', 'UNFOCUSED_TASK event type name');
 		}
 	},
 	{
 		type: "SENT_REMINDER",
 		get name() {
-			return fbt("rappel envoyé", "SENT_REMINDER event type name");
+			return fbt('rappel envoyé', 'SENT_REMINDER event type name');
 		}
 	},
 	{
 		type: "CANCELED_REMINDER",
 		get name() {
-			return fbt("rappel annulé", "CANCELED_REMINDER event type name");
+			return fbt('rappel annulé', 'CANCELED_REMINDER event type name');
 		}
 	},
 	{
 		type: "ADDED_TASK",
 		get name() {
-			return fbt("tâche ajoutée", "ADDED_TASK event type name");
+			return fbt('tâche ajoutée', 'ADDED_TASK event type name');
 		}
 	},
 	{
 		type: "UPDATED_TASK",
 		get name() {
-			return fbt("tâche mise-à-jour", "UPDATED_TASK event type name");
+			return fbt('tâche mise-à-jour', 'UPDATED_TASK event type name');
 		}
 	},
 	{
 		type: "FINISHED_TASK",
 		get name() {
-			return fbt("tâche validée", "FINISHED_TASK event type name");
+			return fbt('tâche validée', 'FINISHED_TASK event type name');
 		}
 	},
 	{
 		type: "UNFINISHED_TASK",
 		get name() {
-			return fbt("tâche dé-validée", "UNFINISHED_TASK event type name");
+			return fbt('tâche dé-validée', 'UNFINISHED_TASK event type name');
 		}
 	},
 	{
 		type: "REMOVED_TASK",
 		get name() {
-			return fbt("tâche supprimée", "REMOVED_TASK event type name");
+			return fbt('tâche supprimée', 'REMOVED_TASK event type name');
 		}
 	},
 	{
 		type: "CREATED_PROJECT",
 		get name() {
-			return fbt("projet créé", "CREATED_PROJECT event type name");
+			return fbt('projet créé', 'CREATED_PROJECT event type name');
 		}
 	},
 	{
 		type: "UPDATED_PROJECT",
 		get name() {
-			return fbt("projet mis-à-jour", "UPDATED_PROJECT event type name");
+			return fbt('projet mis-à-jour', 'UPDATED_PROJECT event type name');
 		}
 	},
 	{
 		type: "ARCHIVED_PROJECT",
 		get name() {
-			return fbt("projet archivé", "ARCHIVED_PROJECT event type name");
+			return fbt('projet archivé', 'ARCHIVED_PROJECT event type name');
 		}
 	},
 	{
 		type: "UNARCHIVED_PROJECT",
 		get name() {
 			return fbt(
-				"projet dé-archivé",
-				"UNARCHIVED_PROJECT event type name"
+				'projet dé-archivé',
+				'UNARCHIVED_PROJECT event type name'
 			);
 		}
 	},
 	{
 		type: "POSTED_COMMENT",
 		get name() {
-			return fbt("commentaire posté", "POSTED_COMMENT event type name");
+			return fbt('commentaire posté', 'POSTED_COMMENT event type name');
 		}
 	},
 	{
 		type: "ADDED_SECTION",
 		get name() {
-			return fbt("section ajoutée", "ADDED_SECTION event type name");
+			return fbt('section ajoutée', 'ADDED_SECTION event type name');
 		}
 	},
 	{
 		type: "UPDATED_SECTION",
 		get name() {
 			return fbt(
-				"section mise-à-jour",
-				"UPDATED_SECTION event type name"
+				'section mise-à-jour',
+				'UPDATED_SECTION event type name'
 			);
 		}
 	},
 	{
 		type: "REMOVED_SECTION",
 		get name() {
-			return fbt("section supprimée", "REMOVED_SECTION event type name");
+			return fbt('section supprimée', 'REMOVED_SECTION event type name');
 		}
 	},
 	{
 		type: "UPLOADED_ATTACHMENT",
 		get name() {
 			return fbt(
-				"document(s) ajouté(s)",
-				"UPLOADED_ATTACHMENT event type name"
+				'document(s) ajouté(s)',
+				'UPLOADED_ATTACHMENT event type name'
 			);
 		}
 	},
@@ -448,8 +448,8 @@ export const EVENT_TYPES = [
 		type: "REMOVED_ATTACHMENT",
 		get name() {
 			return fbt(
-				"document(s) supprimé(s)",
-				"REMOVED_ATTACHMENT event type name"
+				'document(s) supprimé(s)',
+				'REMOVED_ATTACHMENT event type name'
 			);
 		}
 	},
@@ -457,8 +457,8 @@ export const EVENT_TYPES = [
 		type: "LINKED_CUSTOMER_TO_TASK",
 		get name() {
 			return fbt(
-				"client assigné à une tâche",
-				"LINKED_CUSTOMER_TO_TASK event type name"
+				'client assigné à une tâche',
+				'LINKED_CUSTOMER_TO_TASK event type name'
 			);
 		}
 	},
@@ -467,7 +467,7 @@ export const EVENT_TYPES = [
 		get name() {
 			return fbt(
 				"client enlevé d'une tâche",
-				"UNLINKED_CUSTOMER_TO_TASK event type name"
+				'UNLINKED_CUSTOMER_TO_TASK event type name'
 			);
 		}
 	},
@@ -475,8 +475,8 @@ export const EVENT_TYPES = [
 		type: "LINKED_CUSTOMER_TO_PROJECT",
 		get name() {
 			return fbt(
-				"client assigné à un projet",
-				"LINKED_CUSTOMER_TO_PROJECT event type name"
+				'client assigné à un projet',
+				'LINKED_CUSTOMER_TO_PROJECT event type name'
 			);
 		}
 	},
@@ -485,7 +485,7 @@ export const EVENT_TYPES = [
 		get name() {
 			return fbt(
 				"client enlevé d'un projet",
-				"UNLINKED_CUSTOMER_TO_PROJECT event type name"
+				'UNLINKED_CUSTOMER_TO_PROJECT event type name'
 			);
 		}
 	},
@@ -493,8 +493,8 @@ export const EVENT_TYPES = [
 		type: "LINKED_COLLABORATOR_TO_PROJECT",
 		get name() {
 			return fbt(
-				"collaborateur assigné à un projet",
-				"LINKED_COLLABORATOR_TO_PROJECT event type name"
+				'collaborateur assigné à un projet',
+				'LINKED_COLLABORATOR_TO_PROJECT event type name'
 			);
 		}
 	},
@@ -503,7 +503,7 @@ export const EVENT_TYPES = [
 		get name() {
 			return fbt(
 				"collaborateur enlevé d'un projet",
-				"UNLINKED_COLLABORATOR_TO_PROJECT event type name"
+				'UNLINKED_COLLABORATOR_TO_PROJECT event type name'
 			);
 		}
 	},
@@ -511,8 +511,8 @@ export const EVENT_TYPES = [
 		type: "ASSIGNED_TO_TASK",
 		get name() {
 			return fbt(
-				"collaborateur assigné à une tâche",
-				"ASSIGNED_TO_TASK event type name"
+				'collaborateur assigné à une tâche',
+				'ASSIGNED_TO_TASK event type name'
 			);
 		}
 	},
@@ -521,14 +521,14 @@ export const EVENT_TYPES = [
 		get name() {
 			return fbt(
 				"collaborateur enlevé d'une tâche",
-				"REMOVE_ASSIGNMENT_TO_TASK event type name"
+				'REMOVE_ASSIGNMENT_TO_TASK event type name'
 			);
 		}
 	},
 	{
 		type: "VIEWED_PROJECT",
 		get name() {
-			return fbt("projet consulté", "VIEWED_PROJECT event type name");
+			return fbt('projet consulté', 'VIEWED_PROJECT event type name');
 		}
 	}
 ];
@@ -556,80 +556,80 @@ export const TAG_COLOR_PALETTE = [
 ];
 
 export const DRAG_TYPES = {
-	TASK: "SCHEDULE_TASK",
-	SECTION: "SECTION"
+	TASK: 'SCHEDULE_TASK',
+	SECTION: 'SECTION'
 };
 
 export const PLAN_NAMES = {
-	LIFE: "LIFE",
-	MONTHLY: "MONTHLY",
-	YEARLY: "YEARLY",
-	PROMO: "PROMO",
-	PH: "PH",
-	YEARLYPROMO: "YEARLYPROMO"
+	LIFE: 'LIFE',
+	MONTHLY: 'MONTHLY',
+	YEARLY: 'YEARLY',
+	PROMO: 'PROMO',
+	PH: 'PH',
+	YEARLYPROMO: 'YEARLYPROMO'
 };
 
 export const STRIPE_CONSTANT =
-	process.env.REACT_APP_INYO_ENV === "production"
+	process.env.REACT_APP_INYO_ENV === 'production'
 		? {
-				stripeKey: "pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8",
+				stripeKey: 'pk_live_TpqUjTojdv9aqpzyj5otDoPM00xGrfnmF8',
 				items: {
 					[PLAN_NAMES.LIFE]: {
-						sku: "sku_FmHtrocbXWvbsS",
+						sku: 'sku_FmHtrocbXWvbsS',
 						quantity: 1
 					},
 					[PLAN_NAMES.MONTHLY]: {
-						plan: "INYO_SUB",
+						plan: 'INYO_SUB',
 						quantity: 1
 					},
 					[PLAN_NAMES.PH]: {
-						plan: "sku_FrdvRBtGCcmCom",
+						plan: 'sku_FrdvRBtGCcmCom',
 						quantity: 1
 					},
 					[PLAN_NAMES.YEARLY]: {
-						plan: "INYO_YEARLY",
+						plan: 'INYO_YEARLY',
 						quantity: 1
 					},
 					[PLAN_NAMES.PROMO]: {
-						plan: "plan_GFUTRbT0Ur7bmI",
+						plan: 'plan_GFUTRbT0Ur7bmI',
 						quantity: 1
 					},
 					[PLAN_NAMES.YEARLYPROMO]: {
-						plan: "plan_GFyaaDajORBNcG",
+						plan: 'plan_GFyaaDajORBNcG',
 						quantity: 1
 					}
 				},
-				successUrl: "https://app.inyo.me/paid",
-				cancelUrl: "https://app.inyo.me/canceled"
+				successUrl: 'https://app.inyo.me/paid',
+				cancelUrl: 'https://app.inyo.me/canceled'
 		  }
 		: {
-				stripeKey: "pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU",
+				stripeKey: 'pk_test_sQRzrgMJ5zlrmL6glhP4mKe600LVdPEqRU',
 				items: {
 					[PLAN_NAMES.LIFE]: {
-						sku: "sku_FmKQx2r5EisRT8",
+						sku: 'sku_FmKQx2r5EisRT8',
 						quantity: 1
 					},
 					[PLAN_NAMES.MONTHLY]: {
-						plan: "INYO_MONTHLY_USD",
+						plan: 'INYO_MONTHLY_USD',
 						quantity: 1
 					},
 					[PLAN_NAMES.PH]: {
-						plan: "sku_Frdwrqos88JUyC",
+						plan: 'sku_Frdwrqos88JUyC',
 						quantity: 1
 					},
 					[PLAN_NAMES.YEARLY]: {
-						plan: "INYO_YEARLY_USD",
+						plan: 'INYO_YEARLY_USD',
 						quantity: 1
 					},
 					[PLAN_NAMES.PROMO]: {
-						plan: "plan_GFVhAITzMGhjT5",
+						plan: 'plan_GFVhAITzMGhjT5',
 						quantity: 1
 					},
 					[PLAN_NAMES.YEARLYPROMO]: {
-						plan: "plan_GGHRrM0Hi37Xsn",
+						plan: 'plan_GGHRrM0Hi37Xsn',
 						quantity: 1
 					}
 				},
-				successUrl: "https://dev.inyo.me/paid",
-				cancelUrl: "https://dev.inyo.me/canceled"
+				successUrl: 'https://dev.inyo.me/paid',
+				cancelUrl: 'https://dev.inyo.me/canceled'
 		  };

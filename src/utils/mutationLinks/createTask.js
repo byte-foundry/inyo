@@ -8,25 +8,31 @@ export default {
 
 		const sections = [...query.result.project.sections];
 
-		if (sections.length === 0) return null;
+		if (sections.length === 0) {
+			sections.push({
+				...addedItem.section,
+				items: [addedItem],
+			});
+		}
+		else {
+			const index = sections.findIndex(
+				section => section.id === addedItem.section.id,
+			);
+			const cachedSection = sections[index];
 
-		const index = sections.findIndex(
-			section => section.id === addedItem.section.id,
-		);
-		const cachedSection = sections[index];
+			if (!cachedSection) return null;
 
-		if (!cachedSection) return null;
-
-		sections.splice(index, 1, {
-			...cachedSection,
-			items: reorderList(
-				cachedSection.items,
-				addedItem,
-				null,
-				addedItem.position,
-				'position',
-			),
-		});
+			sections.splice(index, 1, {
+				...cachedSection,
+				items: reorderList(
+					cachedSection.items,
+					addedItem,
+					null,
+					addedItem.position,
+					'position',
+				),
+			});
+		}
 
 		return {
 			...query.result,

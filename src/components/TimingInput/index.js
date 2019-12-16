@@ -124,15 +124,8 @@ const TimingInput = ({
 					},
 				]}
 				onChange={({value}) => {
-					setValue(durationOptions[unit][0].value);
-					setUnit({
-						label: (
-							<fbt project="inyo" desc="days">
-								jours
-							</fbt>
-						),
-						value: 'days',
-					});
+					setValue(durationOptions.days[0].value);
+					setUnit('days');
 					setIsRelative(value);
 				}}
 				isSearchable={false}

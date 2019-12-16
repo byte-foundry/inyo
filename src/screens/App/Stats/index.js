@@ -929,16 +929,22 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{moment
-								.duration(
-									reminders.filter(
-										reminder => reminder.status === 'SENT',
-									).length
-										* 15
-										+ clientViews * 5,
-									'minutes',
-								)
-								.format('h_mm_')}
+							{// moment
+							// .duration(
+							// 	reminders.filter(
+							// 		reminder => reminder.status === 'SENT'
+							// 	).length *
+							// 		15 +
+							// 		clientViews * 5,
+							// 	'minutes'
+							// )
+							// .format('h_mm_')}
+								moment
+									.duration(
+										(since + 2) * 15 + clientViews * 5,
+										'minutes',
+									)
+									.format('h_mm_')}
 						</Number>
 						<SubHeading>
 							<fbt project="inyo" desc="Soit">
@@ -955,11 +961,10 @@ const Stats = ({history, location}) => {
 								style: 'currency',
 								currency: language === 'fr' ? 'EUR' : 'USD',
 							}).format(
-								((reminders.filter(
-									reminder => reminder.status === 'SENT',
-								).length
-									* 0.25
-									+ clientViews * 0.1)
+								// 	reminders.filter(
+								// 	reminder => reminder.status === 'SENT'
+								// ).length *
+								(((since + 2) * 0.25 + clientViews * 0.1)
 									/ workingTime)
 									* defaultDailyPrice,
 							)}

@@ -1061,6 +1061,16 @@
     }
    ]
   },
+  "wFtiHgoHqZ27DtZowK5b7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This email is sent",
+     "variations": {}
+    }
+   ]
+  },
   "2lmqa6fMH9q004POl2GT1w==": {
    "tokens": [],
    "types": [],
@@ -1551,6 +1561,36 @@
     }
    ]
   },
+  "5TrreYnkWQUmMG2L1Ux3Dw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Updated!",
+     "variations": {}
+    }
+   ]
+  },
+  "FW0vHit7lkUcAPNJ1FNw3g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Reset to default's template",
+     "variations": {}
+    }
+   ]
+  },
+  "QJlPZ6MoWLuGdbOsOg3hNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You have unsaved changes. Are you sure you want to leave this page?",
+     "variations": {}
+    }
+   ]
+  },
   "8+x9QRzX3/lHvy27gf11Ew==": {
    "tokens": [],
    "types": [],
@@ -1917,6 +1957,16 @@
    "translations": [
     {
      "translation": "Add or create a tag",
+     "variations": {}
+    }
+   ]
+  },
+  "zueWZg7HgvsosZ5HKPriZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Average daily rate of this task",
      "variations": {}
     }
    ]
@@ -5451,6 +5501,86 @@
     }
    ]
   },
+  "9dvcAZRKPIVpqi6orutALA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "minutes",
+     "variations": {}
+    }
+   ]
+  },
+  "PhPVSOdXlMF6mLuFBvzyPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "hours",
+     "variations": {}
+    }
+   ]
+  },
+  "x1tyvdB8MRzLg+jGjhF7lw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "days",
+     "variations": {}
+    }
+   ]
+  },
+  "GRmeMnPIs2L9scxWCQN9bA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "weeks",
+     "variations": {}
+    }
+   ]
+  },
+  "b+57SnrwmyP9ocjAxliRtQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the task's activation",
+     "variations": {}
+    }
+   ]
+  },
+  "lhRyCYnoIOMT2NssuRNzxA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the previous email",
+     "variations": {}
+    }
+   ]
+  },
+  "DplwfsTWQva6fcImyucG4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after the previous email",
+     "variations": {}
+    }
+   ]
+  },
+  "Tt+m+eYxAX71R5GCKDCfnQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after the task's activation",
+     "variations": {}
+    }
+   ]
+  },
   "NS4pcMPvWXw6aCVask7ujw==": {
    "tokens": [],
    "types": [],
@@ -5981,6 +6111,26 @@
     }
    ]
   },
+  "3IyDUxy0i0OKbDy+OhboMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customize emails",
+     "variations": {}
+    }
+   ]
+  },
+  "qfDjqipjwnQmE1zlwIguPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Emails",
+     "variations": {}
+    }
+   ]
+  },
   "ofzGly1xcbm/vDbYLnqnFg==": {
    "tokens": [],
    "types": [],
@@ -6097,16 +6247,6 @@
    "translations": [
     {
      "translation": "Get back to the home page",
-     "variations": {}
-    }
-   ]
-  },
-  "5TrreYnkWQUmMG2L1Ux3Dw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Updated!",
      "variations": {}
     }
    ]
@@ -6457,6 +6597,16 @@
    "translations": [
     {
      "translation": "Are you sure you want to continue?",
+     "variations": {}
+    }
+   ]
+  },
+  "Cc/6KnOU7ELq0CeukQcjHg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Email templates",
      "variations": {}
     }
    ]
@@ -7597,6 +7747,456 @@
    "translations": [
     {
      "translation": "Send an invoice to your client",
+     "variations": {}
+    }
+   ]
+  },
+  "MBNtA9e7MB0rOeNI+/luTQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer task",
+     "variations": {}
+    }
+   ]
+  },
+  "RdFmeCHboAVZ5IWQ5fydZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Invoice payment task",
+     "variations": {}
+    }
+   ]
+  },
+  "m+QCLRaqtEHMJRGnCP40bQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Content acquisition task",
+     "variations": {}
+    }
+   ]
+  },
+  "OyE+cv6mU8sfHtWU/GW4Cg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer report",
+     "variations": {}
+    }
+   ]
+  },
+  "hQxeALO9d45SGdj0ffZ4Jg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Added comment",
+     "variations": {}
+    }
+   ]
+  },
+  "Zic81mdU7B+otIPZmpGQ7A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task name",
+     "variations": {}
+    }
+   ]
+  },
+  "OdCbjoUmnNosx+Zo2kQ0Bw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task description",
+     "variations": {}
+    }
+   ]
+  },
+  "b0cyIITEP2hbGTNlgjLhSQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task link",
+     "variations": {}
+    }
+   ]
+  },
+  "W1Z+842u8pCuwjzipnA9gA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Files linked to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "iGgOUe27QOL4Q0pF+xPf8w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Files to upload",
+     "variations": {}
+    }
+   ]
+  },
+  "cF8MdDfFbRLn+ux+911H9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comments feed",
+     "variations": {}
+    }
+   ]
+  },
+  "MBpoyvZEBsphiwDQG6WUJQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project name",
+     "variations": {}
+    }
+   ]
+  },
+  "tJfy6uS9Qciv02bsMwb0JA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "dsHdwF60D2k/sbGpMXr/oA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project budget",
+     "variations": {}
+    }
+   ]
+  },
+  "n5R3rjboXW843QZ+67aXiw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Link to the project",
+     "variations": {}
+    }
+   ]
+  },
+  "8601ciBL1UVfccPhb2ozNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your first name",
+     "variations": {}
+    }
+   ]
+  },
+  "POtDz4Nd7WujmwyB9zaPcA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your last name",
+     "variations": {}
+    }
+   ]
+  },
+  "BnS6VLTPVo8d5lqA6HeLcg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your full name",
+     "variations": {}
+    }
+   ]
+  },
+  "SlUyDVwib4Jin8/iDEaL3w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your phone",
+     "variations": {}
+    }
+   ]
+  },
+  "+oEUDkfU5AoRKpE7cxpTxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your email",
+     "variations": {}
+    }
+   ]
+  },
+  "NiN7TMaM/k4xpU6IdMbJVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tasks you've finished today",
+     "variations": {}
+    }
+   ]
+  },
+  "mZDckhl1/DcD39a5rkEyuw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer first name",
+     "variations": {}
+    }
+   ]
+  },
+  "SdVky3OWSSQ9hozu/YWQew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer last name",
+     "variations": {}
+    }
+   ]
+  },
+  "grxdMaqX1bkfVKZhNvqlfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Full name and customer title",
+     "variations": {}
+    }
+   ]
+  },
+  "aP3GfJouThdPadbGX9TWaA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer phone",
+     "variations": {}
+    }
+   ]
+  },
+  "cLvfBXelukJveWhMtWq8oQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer email",
+     "variations": {}
+    }
+   ]
+  },
+  "K5N9Ykzu5cPCufDCSvIDdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Recipient's first name",
+     "variations": {}
+    }
+   ]
+  },
+  "z7uN7pCGGC/402PyzyMqkw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Recipient's last name",
+     "variations": {}
+    }
+   ]
+  },
+  "FgFrsPPyIXC1OXDG+pHysQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Recipient's full name",
+     "variations": {}
+    }
+   ]
+  },
+  "mihTSwsQSTr7EBz/39KHyw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sender's first name",
+     "variations": {}
+    }
+   ]
+  },
+  "UIk/h1P05qIo/GL2meZM0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sender's last name",
+     "variations": {}
+    }
+   ]
+  },
+  "gsiBeHjoryZ2KmKAZja3Xw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sender's full name",
+     "variations": {}
+    }
+   ]
+  },
+  "Tzxr9IflMBr2CDiXuZP0yQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comment text",
+     "variations": {}
+    }
+   ]
+  },
+  "Ojs4CVJ6sHLGOsbMwYyDBQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comment date",
+     "variations": {}
+    }
+   ]
+  },
+  "RqkAEpTTHL2/r08IwQ8vgg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "PE53bhbaInMSWc8vY55b8A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1st reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "UKFh4O6G+0iP2JeJpCTBrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "2nd reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "1BkBJFH8hYWidtj5rXN6mQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Last reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "/jmwoVd03a1H2MTtKOTWrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "Bn3uxz9hCn5WiwVGNcCkOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1st reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "1itO5VYYB4pBQyhAj1Xvbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "2nd reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "6UUR2HvB/02n3TCG6UczEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "3rd reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "ac/tX0zluNI2iK9nIr5L9Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "4th reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "kGBRJCF84XWRYI1sHWsdsw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Last reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "45pRxJDm/k6K1J6FOsKgNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer report",
      "variations": {}
     }
    ]

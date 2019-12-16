@@ -1542,6 +1542,20 @@
   },
   {
    "hashToText": {
+    "wFtiHgoHqZ27DtZowK5b7Q==": "Cet email est envoyé"
+   },
+   "filepath": "src/components/CustomEmailTimingInput/index.js",
+   "line_beg": 16,
+   "col_beg": 2,
+   "line_end": 16,
+   "col_end": 59,
+   "type": "text",
+   "desc": "email timing intro",
+   "project": "",
+   "jsfbt": "Cet email est envoyé"
+  },
+  {
+   "hashToText": {
     "2lmqa6fMH9q004POl2GT1w==": "Vous devez d'abord créer un client."
    },
    "filepath": "src/components/CustomerDropdown/index.js",
@@ -2294,6 +2308,48 @@
      }
     ]
    }
+  },
+  {
+   "hashToText": {
+    "5TrreYnkWQUmMG2L1Ux3Dw==": "Les données ont été mises à jour"
+   },
+   "filepath": "src/components/EmailCustomizer/index.js",
+   "line_beg": 285,
+   "col_beg": 4,
+   "line_end": 287,
+   "col_end": 10,
+   "type": "text",
+   "desc": "data updated",
+   "project": "inyo",
+   "jsfbt": "Les données ont été mises à jour"
+  },
+  {
+   "hashToText": {
+    "FW0vHit7lkUcAPNJ1FNw3g==": "Revenir au modèle par défaut"
+   },
+   "filepath": "src/components/EmailCustomizer/index.js",
+   "line_beg": 395,
+   "col_beg": 5,
+   "line_end": 397,
+   "col_end": 11,
+   "type": "text",
+   "desc": "back to default template",
+   "project": "",
+   "jsfbt": "Revenir au modèle par défaut"
+  },
+  {
+   "hashToText": {
+    "QJlPZ6MoWLuGdbOsOg3hNg==": "Vous avez des changements non sauvegardés. Etes-vous sûr de vouloir quitter la page ?"
+   },
+   "filepath": "src/components/EmailCustomizer/index.js",
+   "line_beg": 442,
+   "col_beg": 5,
+   "line_end": 445,
+   "col_end": 11,
+   "type": "text",
+   "desc": "unsaved changes",
+   "project": "",
+   "jsfbt": "Vous avez des changements non sauvegardés. Etes-vous sûr de vouloir quitter la page ?"
   },
   {
    "hashToText": {
@@ -8598,6 +8654,132 @@
   },
   {
    "hashToText": {
+    "9dvcAZRKPIVpqi6orutALA==": "minutes"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 37,
+   "col_beg": 4,
+   "line_end": 39,
+   "col_end": 10,
+   "type": "text",
+   "desc": "minutes",
+   "project": "inyo",
+   "jsfbt": "minutes"
+  },
+  {
+   "hashToText": {
+    "PhPVSOdXlMF6mLuFBvzyPg==": "heures"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 45,
+   "col_beg": 4,
+   "line_end": 47,
+   "col_end": 10,
+   "type": "text",
+   "desc": "hours",
+   "project": "inyo",
+   "jsfbt": "heures"
+  },
+  {
+   "hashToText": {
+    "x1tyvdB8MRzLg+jGjhF7lw==": "jours"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 53,
+   "col_beg": 4,
+   "line_end": 55,
+   "col_end": 10,
+   "type": "text",
+   "desc": "days",
+   "project": "inyo",
+   "jsfbt": "jours"
+  },
+  {
+   "hashToText": {
+    "GRmeMnPIs2L9scxWCQN9bA==": "semaines"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 61,
+   "col_beg": 4,
+   "line_end": 63,
+   "col_end": 10,
+   "type": "text",
+   "desc": "weeks",
+   "project": "inyo",
+   "jsfbt": "semaines"
+  },
+  {
+   "hashToText": {
+    "b+57SnrwmyP9ocjAxliRtQ==": "l'activation de la tâche"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 112,
+   "col_beg": 7,
+   "line_end": 114,
+   "col_end": 13,
+   "type": "text",
+   "desc": "after task activation",
+   "project": "inyo",
+   "jsfbt": "l'activation de la tâche"
+  },
+  {
+   "hashToText": {
+    "lhRyCYnoIOMT2NssuRNzxA==": "l'email précédent"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 120,
+   "col_beg": 7,
+   "line_end": 122,
+   "col_end": 13,
+   "type": "text",
+   "desc": "after previous email",
+   "project": "inyo",
+   "jsfbt": "l'email précédent"
+  },
+  {
+   "hashToText": {
+    "x1tyvdB8MRzLg+jGjhF7lw==": "jours"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 131,
+   "col_beg": 7,
+   "line_end": 133,
+   "col_end": 13,
+   "type": "text",
+   "desc": "days",
+   "project": "inyo",
+   "jsfbt": "jours"
+  },
+  {
+   "hashToText": {
+    "DplwfsTWQva6fcImyucG4Q==": "après l'email précédent"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 144,
+   "col_beg": 8,
+   "line_end": 149,
+   "col_end": 14,
+   "type": "text",
+   "desc": "after previous email",
+   "project": "inyo",
+   "jsfbt": "après l'email précédent"
+  },
+  {
+   "hashToText": {
+    "Tt+m+eYxAX71R5GCKDCfnQ==": "après l'activation de la tâche"
+   },
+   "filepath": "src/components/TimingInput/index.js",
+   "line_beg": 155,
+   "col_beg": 8,
+   "line_end": 160,
+   "col_end": 14,
+   "type": "text",
+   "desc": "after task activation",
+   "project": "inyo",
+   "jsfbt": "après l'activation de la tâche"
+  },
+  {
+   "hashToText": {
     "NS4pcMPvWXw6aCVask7ujw==": "La version d'essai s'arrête {date}"
    },
    "filepath": "src/components/TrialHeadband/index.js",
@@ -10395,6 +10577,20 @@
    "desc": "confirm message",
    "project": "inyo",
    "jsfbt": "Êtes-vous sûr de vouloir continuer?"
+  },
+  {
+   "hashToText": {
+    "Cc/6KnOU7ELq0CeukQcjHg==": "Modèles d'emails"
+   },
+   "filepath": "src/screens/App/CustomizeEmail/index.js",
+   "line_beg": 70,
+   "col_beg": 7,
+   "line_end": 72,
+   "col_end": 13,
+   "type": "text",
+   "desc": "emails",
+   "project": "inyo",
+   "jsfbt": "Modèles d'emails"
   },
   {
    "hashToText": {

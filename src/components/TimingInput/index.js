@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React from 'react';
 
+import fbt from '../../fbt/fbt.macro';
 import {Select} from '../../utils/new/design-system';
 
 const TimingInput = ({

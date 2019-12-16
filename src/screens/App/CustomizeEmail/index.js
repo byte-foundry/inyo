@@ -6,14 +6,10 @@ import {
 
 import CustomEmailSidebar from '../../../components/CustomEmailSidebar';
 import EmailCustomizer from '../../../components/EmailCustomizer';
+import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {FlexRow} from '../../../utils/content';
-import {
-	Container,
-	Content,
-	Heading,
-	HeadingRow,
-} from '../../../utils/new/design-system';
+import {Container, Heading, HeadingRow} from '../../../utils/new/design-system';
 import useEmailData from '../../../utils/useEmailData';
 
 const EmailContainer = styled('div')`

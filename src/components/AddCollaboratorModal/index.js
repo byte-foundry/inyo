@@ -32,7 +32,7 @@ const AddCollaboratorModal = ({onDismiss}) => {
 					</fbt>
 				</Header>
 				<Formik
-					initalValues={{
+					initialValues={{
 						email: '',
 					}}
 					validationSchema={Yup.object().shape({

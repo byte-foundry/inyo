@@ -102,7 +102,9 @@ const TimingInput = ({
 					}),
 				}}
 			/>
-			<span style={{marginLeft: '5px'}}>après</span>
+			<span style={{marginLeft: '5px'}}>
+				<fbt desc="after">après</fbt>
+			</span>
 			<Select
 				name="from"
 				isDisabled={relativeDisabled}

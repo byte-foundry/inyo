@@ -185,7 +185,7 @@ const compareStateAndData = (state, template) => (template.timing === null
 	&& state.content === template.content;
 
 const EmailCustomizer = ({emailType}) => {
-	const {assistantName} = useUserInfos();
+	const {assistantName, firstName, lastName} = useUserInfos();
 	const [stateIsUnchanged, setStateIsUnchange] = useState();
 	const [unit, setUnit] = useState();
 	const [value, setValue] = useState();
@@ -322,7 +322,9 @@ const EmailCustomizer = ({emailType}) => {
 						});
 					}}
 				>
-					S'envoyer un email de test
+					<fbt desc="send test custom email">
+						S'envoyer un email de test
+					</fbt>
 				</TestEmailLink>
 			</TestEmailLinkContainer>
 			<MailContainer>
@@ -330,16 +332,22 @@ const EmailCustomizer = ({emailType}) => {
 				<MailContent>
 					<MailAddresses>
 						<MailFromAndTo>
-							<MailAddressLabel>De :</MailAddressLabel>
+							<MailAddressLabel>
+								<fbt desc="from">De :</fbt>
+							</MailAddressLabel>
 							<MailAddress>{assistantName}@inyo.me</MailAddress>
 						</MailFromAndTo>
 						<MailFromAndTo>
-							<MailAddressLabel>À :</MailAddressLabel>
+							<MailAddressLabel>
+								<fbt desc="To">À :</fbt>
+							</MailAddressLabel>
 							<MailAddress>mail@client.com</MailAddress>
 						</MailFromAndTo>
 					</MailAddresses>
 					<MailSubject>
-						<MailSubjectLabel>Objet :</MailSubjectLabel>
+						<MailSubjectLabel>
+							<fbt desc="subject">Objet :</fbt>
+						</MailSubjectLabel>
 						<Editor
 							value={subjectValue}
 							ref={subjectEditorRef}
@@ -378,6 +386,48 @@ const EmailCustomizer = ({emailType}) => {
 						/>
 					</MailText>
 				</MailContent>
+				<div>
+					<p
+						style={{
+							fontSize: '16px',
+							margin: '0 1rem',
+							paddingTop: '1rem',
+							borderTop: 'solid 1px #f2f2f2',
+							userSelect: 'none',
+						}}
+					>
+						<a href="https://inyo.pro" title="Inyo website">
+							<img
+								style={{
+									height: '22px',
+									display: 'inline-block',
+									marginBottom: '-2px',
+								}}
+								src="https://marketing-image-production.s3.amazonaws.com/uploads/0e56408bfecadb033b1dfa33f5422c9b534f8938fc9cdf2233d0e454555ff56a72362ef7cb29fc1a4c51e8705f1396ced02e2a5a9d2a6d8903554627a3967293.png"
+							/>
+						</a>{' '}
+						<b>
+							<fbt desc="signature start">
+								<fbt:param name="assistantName">
+									{assistantName}
+								</fbt:param>{' '}
+								de Inyo
+							</fbt>
+						</b>
+						<br />
+						<i>
+							<fbt desc="signature end">
+								Smart Assistant de{' '}
+								<fbt:param name="first name">
+									{firstName}
+								</fbt:param>{' '}
+								<fbt:param name="last name">
+									{lastName}
+								</fbt:param>
+							</fbt>
+						</i>
+					</p>
+				</div>
 			</MailContainer>
 			<ButtonsWrap>
 				<Button
@@ -396,45 +446,39 @@ const EmailCustomizer = ({emailType}) => {
 				</Button>
 				<Button
 					onClick={async () => {
-						console.log('Suject');
-						console.log(
-							JSON.stringify(subjectEditorRef.current.value),
-						);
-						console.log('Content');
-						console.log(
-							JSON.stringify(contentEditorRef.current.value),
-						);
-						// try {
-						// 	updateEmailTemplate({
-						// 		variables: {
-						// 			templateId: data.emailTemplate.id,
-						// 			timing: {
-						// 				unit,
-						// 				value,
-						// 				isRelative
-						// 			},
-						// 			subject: subjectEditorRef.current.value,
-						// 			content: contentEditorRef.current.value
-						// 		}
-						// 	});
-						// } catch (error) {
-						// 	if (
-						// 		error.networkError &&
-						// 		error.networkError.result &&
-						// 		error.networkError.result.errors
-						// 	) {
-						// 		Sentry.captureException(
-						// 			error.networkError.result.errors
-						// 		);
-						// 	} else {
-						// 		Sentry.captureException(error);
-						// 	}
-						// }
+						try {
+							updateEmailTemplate({
+								variables: {
+									templateId: data.emailTemplate.id,
+									timing: {
+										unit,
+										value,
+										isRelative,
+									},
+									subject: subjectEditorRef.current.value,
+									content: contentEditorRef.current.value,
+								},
+							});
+						}
+						catch (error) {
+							if (
+								error.networkError
+								&& error.networkError.result
+								&& error.networkError.result.errors
+							) {
+								Sentry.captureException(
+									error.networkError.result.errors,
+								);
+							}
+							else {
+								Sentry.captureException(error);
+							}
+						}
 
-						// displayToast();
+						displayToast();
 					}}
 				>
-					Enregistrer ce modèle
+					<fbt desc="save custom email">Enregistrer ce modèle</fbt>
 				</Button>
 			</ButtonsWrap>
 			<Prompt

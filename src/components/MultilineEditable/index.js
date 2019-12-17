@@ -7,7 +7,7 @@ import {linkify} from 'remarkable/linkify';
 
 import {mediumPurple} from '../../utils/new/design-system';
 
-const md = new Remarkable().use(linkify);
+const md = new Remarkable({breaks: true}).use(linkify);
 
 const EditableArea = styled('div')`
 	width: 100%;

@@ -4551,16 +4551,6 @@
     }
    ]
   },
-  "JZSEg2EIl4FZrjTbLykCDg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Other",
-     "variations": {}
-    }
-   ]
-  },
   "T6P+XEx/fMBW3v4lBxcpsA==": {
    "tokens": [],
    "types": [],
@@ -6961,6 +6951,36 @@
     }
    ]
   },
+  "wctckNpzzA0ek8SISCgz1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your activity",
+     "variations": {}
+    }
+   ]
+  },
+  "RQ6gBRhnFzFEgf5DEV1dTw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Ce calendrier recense toutes les tâches marquées comme faîtes et vous donne un aperçu global de votre activité.}",
+     "variations": {}
+    }
+   ]
+  },
+  "Dbo9N7WaxkAnGMCZQcRoRg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This calendar gathers all the tasks marked as done and gives you an overview of your activity.",
+     "variations": {}
+    }
+   ]
+  },
   "eJe+ko0d0nvEjGFrDOqZAA==": {
    "tokens": [],
    "types": [],
@@ -6987,6 +7007,66 @@
    "translations": [
     {
      "translation": "This the shares of your work",
+     "variations": {}
+    }
+   ]
+  },
+  "oOjGMZXfhH7xCTGt0Y0n7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No linked customer",
+     "variations": {}
+    }
+   ]
+  },
+  "LlPsGgf40XGo6lKdNk084A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No linked customer",
+     "variations": {}
+    }
+   ]
+  },
+  "I6lC6CXgQicNb2tr9YE0Iw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Activity repartition",
+     "variations": {}
+    }
+   ]
+  },
+  "5JQN2KPi6a5Wd8eMpF/0MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Il s'agit de la répartition de votre activité selon vos tags sur la période sélectionnée.}",
+     "variations": {}
+    }
+   ]
+  },
+  "HMLZa6gs9oHI3EYH4WJ7LA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This is your activity's repartition according to your tags on the selected period.",
+     "variations": {}
+    }
+   ]
+  },
+  "W5STaCc0HqXQqGj8/PGTcg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No category",
      "variations": {}
     }
    ]
@@ -7031,62 +7111,102 @@
     }
    ]
   },
-  "0K+9honF4vsx62F8wA0Svw==": {
+  "Bz+wWTmpfqZaJ3QJvEtN3Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Worked time",
+     "translation": "Working time / estimated",
      "variations": {}
     }
    ]
   },
-  "W5S/eabKGM78p/srSNf8Zw==": {
+  "DSkO5n+cuF4Lss40cgy3eg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "translation": "{=La somme des heures réellement travaillées / estimées selon les filtres et la période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "F2GNjnshipx4C0n6IiVL+A==": {
+  "x1oQfffH/TCGbE9vZNFXjQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "translation": "The sum of worked / estimated hours according to filters and selected period.",
      "variations": {}
     }
    ]
   },
-  "NVAk5+s4aeW/WEWjew+EdQ==": {
+  "S5zAFspJmhz4q+bMF4pQqA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Estimated time",
+     "translation": "Amount worked",
      "variations": {}
     }
    ]
   },
-  "BkarQQVPaf0Vblob2ZxhNg==": {
+  "kQZCoZmjl3rS/eWPJw0p4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "translation": "{=Valeur de votre travail selonvotre TJM et les filtres et période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "vJTM5/peG0P0kQfVf1DWEg==": {
+  "W0lFiJ/suPXesbFKJunNJw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "translation": "Total amount worked according to {=votre TJM} and the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "Qa/ElixRKejOjIURNZVIUA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "your daily rate",
+     "variations": {}
+    }
+   ]
+  },
+  "trKkoB3E7dD76mPncroCBg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amendments amount",
+     "variations": {}
+    }
+   ]
+  },
+  "XtCKlhsMvpydH8RauptO6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Le montant représenté par la somme des heures travaillées au-delà des estimations que vous devriez facturer selon les filtres et la période sélectionnés.}",
+     "variations": {}
+    }
+   ]
+  },
+  "EkPGhrOIm/SxPFvthGhiMA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The amount represented by the sum of worked hours beyond the estimations you should charge according to filters and selected period.",
      "variations": {}
     }
    ]
@@ -7131,6 +7251,36 @@
     }
    ]
   },
+  "J5LcRx9iBIJ6iam4yM6ICg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Client views",
+     "variations": {}
+    }
+   ]
+  },
+  "5Bp7ax36rcQ+UJNj2GKPxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "N/n55T9UGRUO5j7gYgy7sg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
   "zTLbttckbhyR65ApxlfqBg==": {
    "tokens": [],
    "types": [],
@@ -7171,72 +7321,22 @@
     }
    ]
   },
-  "J5LcRx9iBIJ6iam4yM6ICg==": {
+  "g6OSqAaSfsmYmuKduqEOoQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Client views",
+     "translation": "{=Calculé d'après votre TJM.}",
      "variations": {}
     }
    ]
   },
-  "5Bp7ax36rcQ+UJNj2GKPxQ==": {
+  "IpcrgbuLgaQyiM7yneFFmw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of visits from your clients according to the selected filters and period.",
-     "variations": {}
-    }
-   ]
-  },
-  "N/n55T9UGRUO5j7gYgy7sg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Total of visits from your clients according to the selected filters and period.",
-     "variations": {}
-    }
-   ]
-  },
-  "S5zAFspJmhz4q+bMF4pQqA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Amount worked",
-     "variations": {}
-    }
-   ]
-  },
-  "kQZCoZmjl3rS/eWPJw0p4Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Valeur de votre travail selonvotre TJM et les filtres et période sélectionnés.}",
-     "variations": {}
-    }
-   ]
-  },
-  "W0lFiJ/suPXesbFKJunNJw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Total amount worked according to {=votre TJM} and the selected filters and period.",
-     "variations": {}
-    }
-   ]
-  },
-  "Qa/ElixRKejOjIURNZVIUA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "your daily rate",
+     "translation": "Calculated from your daily rate.",
      "variations": {}
     }
    ]
@@ -7377,6 +7477,16 @@
    "translations": [
     {
      "translation": "What's Inyo for?",
+     "variations": {}
+    }
+   ]
+  },
+  "FVMKntUNq6rcBOL0qXCAGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "There was or is no tasks associated to this customer account.",
      "variations": {}
     }
    ]
@@ -8587,6 +8697,76 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "JZSEg2EIl4FZrjTbLykCDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Other",
+     "variations": {}
+    }
+   ]
+  },
+  "0K+9honF4vsx62F8wA0Svw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Worked time",
+     "variations": {}
+    }
+   ]
+  },
+  "W5S/eabKGM78p/srSNf8Zw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "F2GNjnshipx4C0n6IiVL+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "NVAk5+s4aeW/WEWjew+EdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Estimated time",
+     "variations": {}
+    }
+   ]
+  },
+  "BkarQQVPaf0Vblob2ZxhNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "vJTM5/peG0P0kQfVf1DWEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours initially estimated according to the selected filters and period.",
      "variations": {}
     }
    ]

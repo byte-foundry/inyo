@@ -79,6 +79,7 @@ const cache = new InMemoryCache({
 		},
 	},
 	freezeResults: true,
+	assumeImmutableResults: true,
 });
 
 const errorLink = onError(({graphQLErrors, networkError}) => {

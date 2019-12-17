@@ -639,24 +639,8 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {timeItTook}) => total + timeItTook,
-										0,
-									) * workingTime
-							).toFixed(0)}
-							h /{' '}
-							{(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {unit}) => total + unit,
-										0,
-									) * workingTime
-							).toFixed(0)}
-							h
+							{(workedTime * workingTime).toFixed(0)}h /{' '}
+							{(estimatedTime * workingTime).toFixed(0)}h
 						</Number>
 						<VictoryArea
 							style={{
@@ -740,14 +724,7 @@ const Stats = ({history, location}) => {
 							{new Intl.NumberFormat(language, {
 								style: 'currency',
 								currency: language === 'fr' ? 'EUR' : 'USD',
-							}).format(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {timeItTook}) => total + timeItTook,
-										0,
-									) * defaultDailyPrice,
-							)}
+							}).format(workedTime * defaultDailyPrice)}
 						</Number>
 						<VictoryArea
 							style={{
@@ -845,10 +822,11 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{// reminders.filter(
-							// 	reminder => reminder.status === 'SENT'
-							// ).length
-								since + 2}
+							{
+								reminders.filter(
+									reminder => reminder.status === 'SENT',
+								).length
+							}
 						</Number>
 						<VictoryArea
 							style={{
@@ -929,22 +907,16 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{// moment
-							// .duration(
-							// 	reminders.filter(
-							// 		reminder => reminder.status === 'SENT'
-							// 	).length *
-							// 		15 +
-							// 		clientViews * 5,
-							// 	'minutes'
-							// )
-							// .format('h_mm_')}
-								moment
-									.duration(
-										(since + 2) * 15 + clientViews * 5,
-										'minutes',
-									)
-									.format('h_mm_')}
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length
+										* 15
+										+ clientViews * 5,
+									'minutes',
+								)
+								.format('h_mm_')}
 						</Number>
 						<SubHeading>
 							<fbt project="inyo" desc="Soit">
@@ -961,10 +933,11 @@ const Stats = ({history, location}) => {
 								style: 'currency',
 								currency: language === 'fr' ? 'EUR' : 'USD',
 							}).format(
-								// 	reminders.filter(
-								// 	reminder => reminder.status === 'SENT'
-								// ).length *
-								(((since + 2) * 0.25 + clientViews * 0.1)
+								((reminders.filter(
+									reminder => reminder.status === 'SENT',
+								).length
+									* (15 / 60)
+									+ clientViews * (5 / 60))
 									/ workingTime)
 									* defaultDailyPrice,
 							)}

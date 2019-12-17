@@ -502,7 +502,10 @@ const TaskInput = ({
 						>
 							<Button
 								icon="↓"
-								onClick={() => onSubmitSection({name: value})}
+								onClick={() => {
+									onSubmitSection({name: value});
+									setValue('');
+								}}
 							>
 								<fbt project="inyo" desc="notification message">
 									Créer une section

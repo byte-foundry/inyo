@@ -95,21 +95,6 @@ const workingDaysNames = [
 	},
 ];
 
-function selectDay(values, value, setFieldValue) {
-	return () => {
-		const index = values.findIndex(item => value === item);
-
-		if (index === -1) {
-			values.push(value);
-		}
-		else {
-			values.splice(index, 1);
-		}
-
-		setFieldValue('workingDays', values);
-	};
-}
-
 export default function WeekDaysInput({values, setFieldValue}) {
 	return (
 		<DayInputContainer>
@@ -117,7 +102,19 @@ export default function WeekDaysInput({values, setFieldValue}) {
 				<DayInput
 					key={value}
 					active={values.includes(value)}
-					onClick={selectDay(values, value, setFieldValue)}
+					onClick={() => {
+						const index = values.findIndex(item => value === item);
+						const newValues = [...values];
+
+						if (index === -1) {
+							newValues.push(value);
+						}
+						else {
+							newValues.splice(index, 1);
+						}
+
+						setFieldValue('workingDays', newValues);
+					}}
 				>
 					{label}
 				</DayInput>

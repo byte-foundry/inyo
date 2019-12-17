@@ -35,7 +35,9 @@ const InitialIdentifier = ({person, size = 40}) => {
 		color = isCustomer ? primaryRed : primaryPurple;
 		initials
 			= (person.firstName || '').charAt(0)
-			+ (person.lastName || '').charAt(0);
+				+ (person.lastName || '').charAt(0)
+			|| person.name.charAt(0)
+			|| '?';
 	}
 
 	return (

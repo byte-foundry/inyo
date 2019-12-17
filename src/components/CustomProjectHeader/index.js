@@ -11,17 +11,16 @@ import TasksProgressBar from '../TasksProgressBar';
 
 const Container = styled('div')`
 	position: relative;
-	${props =>
-		props.backgroundUrl
-			? css`
+	${props => (props.backgroundUrl
+		? css`
 					background: url(${props.backgroundUrl});
 					background-size: cover;
 					padding: 7rem;
 					margin: -3rem -3rem 4rem -3rem;
 			  `
-			: css`
+		: css`
 					margin-bottom: 5rem;
-			  `}
+			  `)}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-bottom: 1rem;
@@ -72,7 +71,7 @@ const CustomProjectHeader = ({projectId, customerToken}) => {
 	const token = customerToken === 'preview' ? undefined : customerToken;
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token},
-		suspend: true
+		suspend: true,
 	});
 
 	if (error) throw error;

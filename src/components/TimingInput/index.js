@@ -138,7 +138,7 @@ const TimingInput = ({
 									project="inyo"
 									desc="after previous email"
 								>
-										après l'email précédent
+										l'email précédent
 								</fbt>
 							),
 							value: true,
@@ -149,7 +149,7 @@ const TimingInput = ({
 									project="inyo"
 									desc="after task activation"
 								>
-										après l'activation de la tâche
+										l'activation de la tâche
 								</fbt>
 							),
 							value: false,

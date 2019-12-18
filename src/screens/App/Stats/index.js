@@ -3,7 +3,13 @@ import moment from 'moment';
 import React, {useCallback} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import CalendarHeatmap from 'reactjs-calendar-heatmap';
-import {VictoryArea, VictoryBar, VictoryPie} from 'victory';
+import {
+	VictoryArea,
+	VictoryBar,
+	VictoryLine,
+	VictoryPie,
+	VictoryStack,
+} from 'victory';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import HelpAndTooltip from '../../../components/HelpAndTooltip';
@@ -13,6 +19,7 @@ import TasksProgressBar from '../../../components/TasksProgressBar';
 import fbt from '../../../fbt/fbt.macro';
 import {useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS, TAG_COLOR_PALETTE} from '../../../utils/constants';
+import {FlexRow} from '../../../utils/content';
 import {formatName} from '../../../utils/functions';
 import {
 	A,
@@ -21,6 +28,7 @@ import {
 	lightPurple,
 	mediumPurple,
 	P,
+	primaryBlack,
 	primaryPurple,
 	primaryRed,
 	SubHeading,
@@ -59,8 +67,10 @@ const Card = styled('div')`
 `;
 
 const Number = styled(P)`
-	font-size: 2.3rem;
-	font-weight: 500;
+	font-size: ${props => (props.big ? '10rem' : '2.3rem')};
+	line-height: ${props => (props.big ? 1 : 'inherit')};
+	color: ${props => (props.big ? mediumPurple : 'inherit')};
+	font-weight: ${props => (props.big ? 900 : 500)};
 	margin: 0;
 	position: relative;
 	z-index: 0;
@@ -253,7 +263,8 @@ const Stats = ({history, location}) => {
 				* workingTime
 				* 60
 				* 60,
-			estimatedTime: task.unit * workingTime * 60 * 60 || 0,
+			estimatedTime:
+				task.unit > 0 ? task.unit * workingTime * 60 * 60 : 0,
 			dailyRate: task.dailyRate || defaultDailyPrice,
 		};
 
@@ -367,6 +378,7 @@ const Stats = ({history, location}) => {
 	);
 
 	let maxHoursWorkedInADay = 0;
+	let maxPricedDay = 0;
 
 	activities.forEach((t) => {
 		if (
@@ -377,12 +389,12 @@ const Stats = ({history, location}) => {
 				maxHoursWorkedInADay,
 				t.total / 60 / 60,
 			);
+			maxPricedDay = Math.max(
+				maxPricedDay,
+				t.totalPrice / 60 / 60 / workingTime,
+			);
 		}
 	});
-
-	console.log('a');
-	console.log(allDayWithTasks);
-	console.log('z');
 
 	const workedTime = filteredTasks
 		.filter(t => t.status === 'FINISHED')
@@ -676,7 +688,6 @@ const Stats = ({history, location}) => {
 									left: '-1px',
 								},
 							}}
-							y0={() => -maxHoursWorkedInADay / 3}
 							height={220}
 							padding={0}
 							domain={{
@@ -687,14 +698,12 @@ const Stats = ({history, location}) => {
 							}}
 							minDomain={{y: -maxHoursWorkedInADay / 2}}
 							interpolation="natural"
-							data={allDayWithTasks
-								.reverse()
-								.map((obj, index) => ({
-									x: index,
-									y: obj.activity
-										? obj.activity.estimatedTime / 60 / 60
-										: 0,
-								}))}
+							data={allDayWithTasks.map((obj, index) => ({
+								x: index,
+								y: obj.activity
+									? obj.activity.estimatedTime / 60 / 60
+									: 0,
+							}))}
 						/>
 					</Card>
 					<Card>
@@ -720,44 +729,57 @@ const Stats = ({history, location}) => {
 								currency: language === 'fr' ? 'EUR' : 'USD',
 							}).format(workedTime * defaultDailyPrice)}
 						</Number>
-						<VictoryArea
+						<VictoryStack
 							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple,
-								},
 								parent: {
 									position: 'absolute',
 									bottom: '-88px',
 									left: '-1px',
 								},
 							}}
-							// y0={() => ((-maxHoursWorkedInADay / workingTime)
-							// 		* defaultDailyPrice)
-							// 	/ 3
-							// }
+							padding={{left: 20, right: 20}}
 							height={220}
-							padding={0}
-							// domain={{
-							// 	y: [
-							// 		((-maxHoursWorkedInADay / workingTime)
-							// 			* defaultDailyPrice)
-							// 			/ 3,
-							// 		(maxHoursWorkedInADay / workingTime)
-							// 			* defaultDailyPrice,
-							// 	],
-							// }}
-							interpolation="natural"
-							data={allDayWithTasks
-								.reverse()
-								.map((obj, index) => ({
+						>
+							<VictoryBar
+								style={{
+									data: {
+										fill: mediumPurple,
+										opacity: 0.2,
+									},
+									parent: {
+										position: 'absolute',
+										bottom: '-88px',
+										left: '-1px',
+									},
+								}}
+								height={220}
+								data={allDayWithTasks.map((obj, index) => ({
+									x: index,
+									y: obj.activity
+										? obj.activity.total / 60 / 60
+										: 0,
+								}))}
+							/>
+							<VictoryBar
+								style={{
+									data: {
+										fill: mediumPurple,
+									},
+									parent: {
+										position: 'absolute',
+										bottom: '-88px',
+										left: '-1px',
+									},
+								}}
+								height={220}
+								data={allDayWithTasks.map((obj, index) => ({
 									x: index,
 									y: obj.activity
 										? obj.activity.totalPrice
 										: 0,
 								}))}
-						/>
+							/>
+						</VictoryStack>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -816,35 +838,16 @@ const Stats = ({history, location}) => {
 								</fbt>
 							</HelpAndTooltip>
 						</SubHeading>
-						<Number>
-							{
-								reminders.filter(
-									reminder => reminder.status === 'SENT',
-								).length
-							}
-						</Number>
-						<VictoryArea
-							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple,
-								},
-								parent: {
-									position: 'absolute',
-									bottom: '-88px',
-									left: '-1px',
-								},
-							}}
-							y0={() => -1}
-							height={220}
-							padding={0}
-							interpolation="natural"
-							data={allDayWithTasks.map(obj => ({
-								x: obj.date,
-								y: obj.reminders.length,
-							}))}
-						/>
+						<FlexRow alignItems="baseline">
+							<Number big>
+								{
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length
+								}
+							</Number>
+							<MaterialIcon icon="mail" color={primaryBlack} />
+						</FlexRow>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -861,29 +864,13 @@ const Stats = ({history, location}) => {
 								</fbt>
 							</HelpAndTooltip>
 						</SubHeading>
-						<Number>{clientViews}</Number>
-						<VictoryArea
-							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple,
-								},
-								parent: {
-									position: 'absolute',
-									bottom: '-88px',
-									left: '-1px',
-								},
-							}}
-							y0={() => -1}
-							height={220}
-							padding={0}
-							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.dueDate || 0,
-								y: obj.reminders.length,
-							}))}
-						/>
+						<FlexRow alignItems="baseline">
+							<Number big>{clientViews}</Number>
+							<MaterialIcon
+								icon="remove_red_eye"
+								color={primaryBlack}
+							/>
+						</FlexRow>
 					</Card>
 					<Card>
 						<SubHeading>

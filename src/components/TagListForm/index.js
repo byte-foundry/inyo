@@ -177,7 +177,7 @@ function TagListForm() {
 						<CreateTagForm tags={data.me.tags} />
 					</CreateTagFormContainer>
 					{data.me.tags.map(tag => (
-						<TagForm tag={tag} />
+						<TagForm tag={tag} key={tag.id} />
 					))}
 				</>
 			)}

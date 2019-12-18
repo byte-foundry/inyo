@@ -29,7 +29,7 @@ const CommentContent = styled(FlexColumn)`
 	margin-left: 20px;
 `;
 
-const md = new Remarkable().use(linkify);
+const md = new Remarkable({breaks: true}).use(linkify);
 
 function Comment({comment: {text, author, createdAt}}) {
 	return (

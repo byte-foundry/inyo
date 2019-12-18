@@ -17,6 +17,7 @@ import {
 	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
 import IconButton from '../IconButton';
@@ -91,6 +92,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 	} = data;
 	const [updateUser] = useMutation(UPDATE_USER_COMPANY);
 	const [isOpenImagePickerModal, setisOpenImagePickerModal] = useState(false);
+	const {language} = useUserInfos();
 
 	return (
 		<UserCompanyFormMain>
@@ -221,6 +223,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 									/>
 									<AddressAutocomplete
 										{...props}
+										language={language}
 										onChange={setFieldValue}
 										name="address"
 										values={address}

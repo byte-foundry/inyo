@@ -534,6 +534,8 @@ export const GET_ITEM_DETAILS = gql`
 			remindersPreviews {
 				type
 				delay
+				sendingDate
+				isRelative
 			}
 		}
 	}
@@ -824,6 +826,36 @@ export const GET_PROJECT_ACTIVITY = gql`
 				}
 			}
 			createdAt
+		}
+	}
+`;
+
+export const GET_EMAIL_TYPES = gql`
+	query getEmailTypes {
+		emailTypes {
+			id
+			category
+			position
+			name
+			availableParams {
+				id
+				required
+				param {
+					id
+					name
+				}
+			}
+		}
+	}
+`;
+
+export const GET_EMAIL_TEMPLATE = gql`
+	query getEmailTemplate($category: String!, $typeName: String!) {
+		emailTemplate(category: $category, typeName: $typeName) {
+			id
+			timing
+			subject
+			content
 		}
 	}
 `;

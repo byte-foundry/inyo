@@ -1110,7 +1110,7 @@ Benchmark other ads on said target and research reference on specialized website
 							name: 'Creating quote and writing requirements',
 							unit: 1,
 							description:
-								'Define all the step of the work to be done.',
+								'Define all the steps of the work to be done.',
 						},
 						{
 							name: 'Validation of the requirements',
@@ -2392,10 +2392,10 @@ Si une création totalement nouvelle est demandée et implique le dépassement d
 							description: '',
 						},
 						{
-							name: 'Ecrire le devis et le cahier des charges',
+							name: 'Écrire le devis et le cahier des charges',
 							unit: 1,
 							description:
-								'Define all the step of the work to be done.',
+								'Définir toutes les étapes du travail à faire.',
 						},
 						{
 							name: 'Validation du devis',

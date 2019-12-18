@@ -137,6 +137,22 @@ const TogglingTopBar = () => {
 				</Tooltip>
 				<Tooltip
 					label={
+						<fbt project="inyo" desc="collaborators tooltip">
+							Customiser les emails
+						</fbt>
+					}
+				>
+					<TopBarMenuLink to="/app/emails">
+						<MaterialIcon icon="mail" size="tiny" color="inherit" />
+						<span>
+							<fbt project="inyo" desc="Collaborators">
+								Emails
+							</fbt>
+						</span>
+					</TopBarMenuLink>
+				</Tooltip>
+				<Tooltip
+					label={
 						<fbt project="inyo" desc="stats tooltip">
 							Rapports de votre activité
 						</fbt>

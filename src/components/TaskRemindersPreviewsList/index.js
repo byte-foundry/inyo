@@ -18,6 +18,7 @@ import usePrevious from '../../utils/usePrevious';
 import DateInput from '../DateInput';
 import IconButton from '../IconButton';
 import ReminderTestEmailButton from '../ReminderTestEmailButton';
+import TimingInput from '../TimingInput';
 import Tooltip from '../Tooltip';
 
 const Container = styled('div')`
@@ -96,6 +97,7 @@ const ReminderForm = styled(animated.form)`
 
 const ReminderFormGroup = styled('div')`
 	display: flex;
+	align-items: center;
 	margin: 1rem 0 0.5rem 0;
 	font-size: 0.8rem;
 
@@ -164,6 +166,34 @@ const CollapsableReminderForm = ({children, isOpen, ...props}) => {
 	);
 };
 
+const convertDelayToValues = ({delay, isRelative}) => {
+	let value;
+	let unit;
+
+	if (delay <= 55 * 60) {
+		value = delay / 60;
+		unit = 'minutes';
+	}
+	else if (delay <= 23 * 60 * 60) {
+		value = delay / (60 * 60);
+		unit = 'hours';
+	}
+	else if (delay <= 6 * 60 * 60 * 24) {
+		value = delay / (60 * 60 * 24);
+		unit = 'days';
+	}
+	else {
+		value = delay / (60 * 60 * 24 * 7);
+		unit = 'weeks';
+	}
+
+	return {
+		value,
+		unit,
+		isRelative,
+	};
+};
+
 const TaskRemindersPreviewsList = ({
 	taskId,
 	remindersPreviews: plannedReminders = [],
@@ -207,13 +237,22 @@ const TaskRemindersPreviewsList = ({
 		})),
 	};
 
-	useEffect(() => {
-		setValue(1);
-		setUnit('days');
-		setIsRelative(true);
-	}, [editingIndex]);
-
 	const mutableReminders = [...reminders];
+
+	useEffect(() => {
+		if (editingIndex !== null) {
+			const reminder = mutableReminders[editingIndex];
+			const {value, unit, isRelative} = convertDelayToValues(reminder);
+			setValue(value);
+			setUnit(unit);
+			setIsRelative(isRelative);
+		}
+		else {
+			setValue(1);
+			setUnit('days');
+			setIsRelative(false);
+		}
+	}, [editingIndex]);
 
 	return (
 		<Container>
@@ -242,7 +281,7 @@ const TaskRemindersPreviewsList = ({
 			</DateContainer>
 			<ReminderList>
 				{mutableReminders
-					.sort((a, b) => a.delay - b.delay)
+					.sort((a, b) => (b.isRelative ? -1 : a.delay - b.delay))
 					.map((reminder, index) => {
 						const text = REMINDER_TYPES_DATA[reminder.type].text(
 							customerName,
@@ -382,162 +421,14 @@ const TaskRemindersPreviewsList = ({
 									}}
 								>
 									<ReminderFormGroup>
-										<Select
-											key={unit}
-											name="value"
-											options={durationOptions[unit]}
-											onChange={({value}) => setValue(value)
-											}
-											isSearchable={false}
-											defaultValue={
-												durationOptions[unit][0]
-											}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 1,
-													margin: '5px 0 5px 5px',
-												}),
-											}}
-										/>
-										<Select
-											name="unit"
-											options={[
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="minutes"
-														>
-															minutes
-														</fbt>
-													),
-													value: 'minutes',
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="hours"
-														>
-															heures
-														</fbt>
-													),
-													value: 'hours',
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="days"
-														>
-															jours
-														</fbt>
-													),
-													value: 'days',
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="weeks"
-														>
-															semaines
-														</fbt>
-													),
-													value: 'weeks',
-												},
-											]}
-											onChange={({value}) => setUnit(value)
-											}
-											isSearchable={false}
-											defaultValue={{
-												label: (
-													<fbt
-														project="inyo"
-														desc="days"
-													>
-														jours
-													</fbt>
-												),
-												value: 'days',
-											}}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 1,
-													margin: '5px 0 5px 5px',
-												}),
-											}}
-										/>
-										<Select
-											name="from"
-											isDisabled={index === 0}
-											options={[
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="after task activation"
-														>
-															après l'activation
-															de la tâche
-														</fbt>
-													),
-													value: false,
-												},
-												{
-													label: (
-														<fbt
-															project="inyo"
-															desc="after previous email"
-														>
-															après l'email
-															précédent
-														</fbt>
-													),
-													value: true,
-												},
-											]}
-											onChange={({value}) => setIsRelative(value)
-											}
-											isSearchable={false}
-											value={
-												index !== 0 && isRelative
-													? {
-														label: (
-															<fbt
-																project="inyo"
-																desc="after previous email"
-															>
-																	après
-																	l'email
-																	précédent
-															</fbt>
-														),
-														value: true,
-													  }
-													: {
-														label: (
-															<fbt
-																project="inyo"
-																desc="after task activation"
-															>
-																	après
-																	l'activation
-																	de la tâche
-															</fbt>
-														),
-														value: false,
-													  }
-											}
-											style={{
-												container: styles => ({
-													...styles,
-													flex: 3,
-													margin: '5px 0 5px 5px',
-												}),
-											}}
+										<TimingInput
+											unit={unit}
+											value={value}
+											isRelative={isRelative}
+											setValue={setValue}
+											setUnit={setUnit}
+											setIsRelative={setIsRelative}
+											relativeDisabled={index === 0}
 										/>
 									</ReminderFormGroup>
 									<ReminderFormActions>

@@ -19,7 +19,7 @@ import {
 	P,
 	primaryBlack,
 	primaryRed,
-	primaryWhite
+	primaryWhite,
 } from '../../../utils/new/design-system';
 import {GET_CUSTOMER_INFOS, GET_CUSTOMER_TASKS} from '../../../utils/queries';
 
@@ -95,7 +95,9 @@ const Help = styled('div')`
 	}
 `;
 
-const CustomerTasks = ({css, style, projectId, location = {}}) => {
+const CustomerTasks = ({
+	css, style, projectId, location = {},
+}) => {
 	const customerToken = useContext(CustomerContext);
 	const token = customerToken === 'preview' ? undefined : customerToken;
 	const query = new URLSearchParams(location.search);
@@ -103,14 +105,14 @@ const CustomerTasks = ({css, style, projectId, location = {}}) => {
 	const {data, error} = useQuery(GET_CUSTOMER_TASKS, {
 		variables: {
 			token,
-			projectId
+			projectId,
 		},
-		suspend: true
+		suspend: true,
 	});
 	const {data: customerInfosData} = useQuery(GET_CUSTOMER_INFOS, {
 		variables: {token: customerToken},
 		suspend: true,
-		skip: !token
+		skip: !token,
 	});
 
 	if (error) throw error;
@@ -183,10 +185,9 @@ const CustomerTasks = ({css, style, projectId, location = {}}) => {
 									<ProjectCustomerTasksList
 										projectId={projectId}
 										items={tasks.filter(
-											item =>
-												item.section &&
-												item.section.project.id ===
-													projectId
+											item => item.section
+												&& item.section.project.id
+													=== projectId,
 										)}
 									/>
 								</div>
@@ -210,7 +211,16 @@ const CustomerTasks = ({css, style, projectId, location = {}}) => {
 		<Container css={css} style={style}>
 			<TaskAndArianne>
 				{message}
-				<TasksList items={tasks} customerToken={token} />
+				{tasks.length ? (
+					<TasksList items={tasks} customerToken={token} />
+				) : (
+					<P>
+						<fbt desc="no tasks placeholder customer view">
+							Il n'y pas ou plus de tâches associé à ce compte
+							client.
+						</fbt>
+					</P>
+				)}
 			</TaskAndArianne>
 		</Container>
 	);

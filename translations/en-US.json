@@ -31,7 +31,7 @@
     }
    ]
   },
-  "RxHkN7yN7nYszzBOaNY0tQ==": {
+  "0JjjyRtOXZNkq09vG1ueEQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -41,7 +41,7 @@
     }
    ]
   },
-  "X+4B0AHPUMFuIiy+qKP0AA==": {
+  "VfC70rk/okLh3urpY9wKQA==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -1061,6 +1061,16 @@
     }
    ]
   },
+  "wFtiHgoHqZ27DtZowK5b7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This email is sent",
+     "variations": {}
+    }
+   ]
+  },
   "2lmqa6fMH9q004POl2GT1w==": {
    "tokens": [],
    "types": [],
@@ -1551,6 +1561,106 @@
     }
    ]
   },
+  "5TrreYnkWQUmMG2L1Ux3Dw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Updated!",
+     "variations": {}
+    }
+   ]
+  },
+  "FVFcJgCcwMFjVCavCmYN+g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Send a test email to myself",
+     "variations": {}
+    }
+   ]
+  },
+  "fFfSrLEa0C5mv6t4JM1z0Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "From:",
+     "variations": {}
+    }
+   ]
+  },
+  "Te66P3BkgGic2cYlLIY7YQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "To:",
+     "variations": {}
+    }
+   ]
+  },
+  "K9fPzLnbRFBwD9m0843JQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subject:",
+     "variations": {}
+    }
+   ]
+  },
+  "3QYdUA8S01h1KISjb0iGoA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{assistantName} from Inyo",
+     "variations": {}
+    }
+   ]
+  },
+  "dtDfvXRuV7jE0m+EtG/ZYA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{first name} {last name}'s smart assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "FW0vHit7lkUcAPNJ1FNw3g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Reset to default's template",
+     "variations": {}
+    }
+   ]
+  },
+  "hduMTgMr5yUjta6mGsL0mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Save this template",
+     "variations": {}
+    }
+   ]
+  },
+  "QJlPZ6MoWLuGdbOsOg3hNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "You have unsaved changes. Are you sure you want to leave this page?",
+     "variations": {}
+    }
+   ]
+  },
   "8+x9QRzX3/lHvy27gf11Ew==": {
    "tokens": [],
    "types": [],
@@ -1921,6 +2031,16 @@
     }
    ]
   },
+  "zueWZg7HgvsosZ5HKPriZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Average daily rate of this task",
+     "variations": {}
+    }
+   ]
+  },
   "fwFrMMlHn32zsVxwM2CzYg==": {
    "tokens": [],
    "types": [],
@@ -2191,7 +2311,7 @@
     }
    ]
   },
-  "+TSsouyNnpOuotBby5ZXPg==": {
+  "Fls936tmVXEMMCrNh4HKOw==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3277,76 +3397,6 @@
    "translations": [
     {
      "translation": "Planned",
-     "variations": {}
-    }
-   ]
-  },
-  "2T/8tqRnxn9tiabsE+I2pA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Vous n'avez pas encore défini de budget pour ce projet.}",
-     "variations": {}
-    }
-   ]
-  },
-  "3Ncuzxft2v44Y8GPQcF3IA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "You don't have any budget set for this project.",
-     "variations": {}
-    }
-   ]
-  },
-  "zuGvQwqh8+Ws1fPfKjm1jQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Budget sold",
-     "variations": {}
-    }
-   ]
-  },
-  "uXlGZSghlCKv2CyuFk0Yrg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "$5000",
-     "variations": {}
-    }
-   ]
-  },
-  "0/0IE5XdLNMJoppUG+lgBw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Confirm",
-     "variations": {}
-    }
-   ]
-  },
-  "rzJA9MHp+nXckuqAl9Z4+w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Définissez votre TJM pour profiter des fonctionnalités de budget.}",
-     "variations": {}
-    }
-   ]
-  },
-  "TP9w3Ix1Gy3BXNoKC82VrQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Define your daily rate to benefit from our budget feature.",
      "variations": {}
     }
    ]
@@ -4571,16 +4621,6 @@
     }
    ]
   },
-  "JZSEg2EIl4FZrjTbLykCDg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Other",
-     "variations": {}
-    }
-   ]
-  },
   "T6P+XEx/fMBW3v4lBxcpsA==": {
    "tokens": [],
    "types": [],
@@ -5091,12 +5131,12 @@
     }
    ]
   },
-  "726EBmyncZesHmufFOCfbg==": {
+  "2m7b+/CjFUlfRrBUIlA+bQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "If you do not wish the customer to receive a report, you can deactivate the project's notifications.",
+     "translation": "If you do not wish the customer to receive a report for a specific project only, you can deactivate the project's notifications instead.",
      "variations": {}
     }
    ]
@@ -5147,66 +5187,6 @@
    "translations": [
     {
      "translation": "Delete this automatic reminder",
-     "variations": {}
-    }
-   ]
-  },
-  "9dvcAZRKPIVpqi6orutALA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "minutes",
-     "variations": {}
-    }
-   ]
-  },
-  "PhPVSOdXlMF6mLuFBvzyPg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "hours",
-     "variations": {}
-    }
-   ]
-  },
-  "x1tyvdB8MRzLg+jGjhF7lw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "days",
-     "variations": {}
-    }
-   ]
-  },
-  "GRmeMnPIs2L9scxWCQN9bA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "weeks",
-     "variations": {}
-    }
-   ]
-  },
-  "Tt+m+eYxAX71R5GCKDCfnQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "after task activation",
-     "variations": {}
-    }
-   ]
-  },
-  "DplwfsTWQva6fcImyucG4Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "after previous email",
      "variations": {}
     }
    ]
@@ -5581,6 +5561,76 @@
     }
    ]
   },
+  "9dvcAZRKPIVpqi6orutALA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "minutes",
+     "variations": {}
+    }
+   ]
+  },
+  "PhPVSOdXlMF6mLuFBvzyPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "hours",
+     "variations": {}
+    }
+   ]
+  },
+  "x1tyvdB8MRzLg+jGjhF7lw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "days",
+     "variations": {}
+    }
+   ]
+  },
+  "GRmeMnPIs2L9scxWCQN9bA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "weeks",
+     "variations": {}
+    }
+   ]
+  },
+  "Ee4NpZCCxrLtlhE1/VTP/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after",
+     "variations": {}
+    }
+   ]
+  },
+  "b+57SnrwmyP9ocjAxliRtQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the task's activation",
+     "variations": {}
+    }
+   ]
+  },
+  "lhRyCYnoIOMT2NssuRNzxA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "the previous email",
+     "variations": {}
+    }
+   ]
+  },
   "NS4pcMPvWXw6aCVask7ujw==": {
    "tokens": [],
    "types": [],
@@ -5827,6 +5877,16 @@
    "translations": [
     {
      "translation": "Company cover picture",
+     "variations": {}
+    }
+   ]
+  },
+  "EX1vp3nzcu/PifVnW+Sk5w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Choose a predefined picture",
      "variations": {}
     }
    ]
@@ -6101,6 +6161,26 @@
     }
    ]
   },
+  "3IyDUxy0i0OKbDy+OhboMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customize emails",
+     "variations": {}
+    }
+   ]
+  },
+  "qfDjqipjwnQmE1zlwIguPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Emails",
+     "variations": {}
+    }
+   ]
+  },
   "ofzGly1xcbm/vDbYLnqnFg==": {
    "tokens": [],
    "types": [],
@@ -6217,16 +6297,6 @@
    "translations": [
     {
      "translation": "Get back to the home page",
-     "variations": {}
-    }
-   ]
-  },
-  "5TrreYnkWQUmMG2L1Ux3Dw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Updated!",
      "variations": {}
     }
    ]
@@ -6581,6 +6651,16 @@
     }
    ]
   },
+  "Cc/6KnOU7ELq0CeukQcjHg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Email templates",
+     "variations": {}
+    }
+   ]
+  },
   "UvVjY1/twy9IgUWUD3GGHQ==": {
    "tokens": [],
    "types": [],
@@ -6931,6 +7011,36 @@
     }
    ]
   },
+  "wctckNpzzA0ek8SISCgz1w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your activity",
+     "variations": {}
+    }
+   ]
+  },
+  "RQ6gBRhnFzFEgf5DEV1dTw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Ce calendrier recense toutes les tâches marquées comme faîtes et vous donne un aperçu global de votre activité.}",
+     "variations": {}
+    }
+   ]
+  },
+  "Dbo9N7WaxkAnGMCZQcRoRg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This calendar gathers all the tasks marked as done and gives you an overview of your activity.",
+     "variations": {}
+    }
+   ]
+  },
   "eJe+ko0d0nvEjGFrDOqZAA==": {
    "tokens": [],
    "types": [],
@@ -6957,6 +7067,66 @@
    "translations": [
     {
      "translation": "This the shares of your work",
+     "variations": {}
+    }
+   ]
+  },
+  "oOjGMZXfhH7xCTGt0Y0n7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No linked customer",
+     "variations": {}
+    }
+   ]
+  },
+  "LlPsGgf40XGo6lKdNk084A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No linked customer",
+     "variations": {}
+    }
+   ]
+  },
+  "I6lC6CXgQicNb2tr9YE0Iw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Activity repartition",
+     "variations": {}
+    }
+   ]
+  },
+  "5JQN2KPi6a5Wd8eMpF/0MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Il s'agit de la répartition de votre activité selon vos tags sur la période sélectionnée.}",
+     "variations": {}
+    }
+   ]
+  },
+  "HMLZa6gs9oHI3EYH4WJ7LA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This is your activity's repartition according to your tags on the selected period.",
+     "variations": {}
+    }
+   ]
+  },
+  "W5STaCc0HqXQqGj8/PGTcg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No category",
      "variations": {}
     }
    ]
@@ -7001,62 +7171,102 @@
     }
    ]
   },
-  "0K+9honF4vsx62F8wA0Svw==": {
+  "Bz+wWTmpfqZaJ3QJvEtN3Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Worked time",
+     "translation": "Working time / estimated",
      "variations": {}
     }
    ]
   },
-  "W5S/eabKGM78p/srSNf8Zw==": {
+  "DSkO5n+cuF4Lss40cgy3eg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "translation": "{=La somme des heures réellement travaillées / estimées selon les filtres et la période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "F2GNjnshipx4C0n6IiVL+A==": {
+  "x1oQfffH/TCGbE9vZNFXjQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "translation": "The sum of worked / estimated hours according to filters and selected period.",
      "variations": {}
     }
    ]
   },
-  "NVAk5+s4aeW/WEWjew+EdQ==": {
+  "S5zAFspJmhz4q+bMF4pQqA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Estimated time",
+     "translation": "Amount worked",
      "variations": {}
     }
    ]
   },
-  "BkarQQVPaf0Vblob2ZxhNg==": {
+  "kQZCoZmjl3rS/eWPJw0p4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "translation": "{=Valeur de votre travail selonvotre TJM et les filtres et période sélectionnés.}",
      "variations": {}
     }
    ]
   },
-  "vJTM5/peG0P0kQfVf1DWEg==": {
+  "W0lFiJ/suPXesbFKJunNJw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "translation": "Total amount worked according to {=votre TJM} and the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "Qa/ElixRKejOjIURNZVIUA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "your daily rate",
+     "variations": {}
+    }
+   ]
+  },
+  "trKkoB3E7dD76mPncroCBg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Amendments amount",
+     "variations": {}
+    }
+   ]
+  },
+  "XtCKlhsMvpydH8RauptO6Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Le montant représenté par la somme des heures travaillées au-delà des estimations que vous devriez facturer selon les filtres et la période sélectionnés.}",
+     "variations": {}
+    }
+   ]
+  },
+  "EkPGhrOIm/SxPFvthGhiMA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The amount represented by the sum of worked hours beyond the estimations you should charge according to filters and selected period.",
      "variations": {}
     }
    ]
@@ -7101,6 +7311,36 @@
     }
    ]
   },
+  "J5LcRx9iBIJ6iam4yM6ICg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Client views",
+     "variations": {}
+    }
+   ]
+  },
+  "5Bp7ax36rcQ+UJNj2GKPxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "N/n55T9UGRUO5j7gYgy7sg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
   "zTLbttckbhyR65ApxlfqBg==": {
    "tokens": [],
    "types": [],
@@ -7141,72 +7381,32 @@
     }
    ]
   },
-  "J5LcRx9iBIJ6iam4yM6ICg==": {
+  "UwP6YRoOMnJ18Q2GribprA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Client views",
+     "translation": "Namely",
      "variations": {}
     }
    ]
   },
-  "5Bp7ax36rcQ+UJNj2GKPxQ==": {
+  "g6OSqAaSfsmYmuKduqEOoQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of visits from your clients according to the selected filters and period.",
+     "translation": "{=Calculé d'après votre TJM.}",
      "variations": {}
     }
    ]
   },
-  "N/n55T9UGRUO5j7gYgy7sg==": {
+  "IpcrgbuLgaQyiM7yneFFmw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Total of visits from your clients according to the selected filters and period.",
-     "variations": {}
-    }
-   ]
-  },
-  "S5zAFspJmhz4q+bMF4pQqA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Amount worked",
-     "variations": {}
-    }
-   ]
-  },
-  "kQZCoZmjl3rS/eWPJw0p4Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "{=Valeur de votre travail selonvotre TJM et les filtres et période sélectionnés.}",
-     "variations": {}
-    }
-   ]
-  },
-  "W0lFiJ/suPXesbFKJunNJw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Total amount worked according to {=votre TJM} and the selected filters and period.",
-     "variations": {}
-    }
-   ]
-  },
-  "Qa/ElixRKejOjIURNZVIUA==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "your daily rate",
+     "translation": "Calculated from your daily rate.",
      "variations": {}
     }
    ]
@@ -7347,6 +7547,16 @@
    "translations": [
     {
      "translation": "What's Inyo for?",
+     "variations": {}
+    }
+   ]
+  },
+  "FVMKntUNq6rcBOL0qXCAGA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "There was or is no tasks associated to this customer account.",
      "variations": {}
     }
    ]
@@ -7717,6 +7927,456 @@
    "translations": [
     {
      "translation": "Send an invoice to your client",
+     "variations": {}
+    }
+   ]
+  },
+  "MBNtA9e7MB0rOeNI+/luTQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer task",
+     "variations": {}
+    }
+   ]
+  },
+  "RdFmeCHboAVZ5IWQ5fydZw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Invoice payment task",
+     "variations": {}
+    }
+   ]
+  },
+  "m+QCLRaqtEHMJRGnCP40bQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Content acquisition task",
+     "variations": {}
+    }
+   ]
+  },
+  "OyE+cv6mU8sfHtWU/GW4Cg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer report",
+     "variations": {}
+    }
+   ]
+  },
+  "hQxeALO9d45SGdj0ffZ4Jg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Added comment",
+     "variations": {}
+    }
+   ]
+  },
+  "Zic81mdU7B+otIPZmpGQ7A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task name",
+     "variations": {}
+    }
+   ]
+  },
+  "OdCbjoUmnNosx+Zo2kQ0Bw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task description",
+     "variations": {}
+    }
+   ]
+  },
+  "b0cyIITEP2hbGTNlgjLhSQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task link",
+     "variations": {}
+    }
+   ]
+  },
+  "WCZGMXNSsQqAa8/pQIVmPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Files attached to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "iGgOUe27QOL4Q0pF+xPf8w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Files to upload",
+     "variations": {}
+    }
+   ]
+  },
+  "cF8MdDfFbRLn+ux+911H9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comments feed",
+     "variations": {}
+    }
+   ]
+  },
+  "MBpoyvZEBsphiwDQG6WUJQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project name",
+     "variations": {}
+    }
+   ]
+  },
+  "tJfy6uS9Qciv02bsMwb0JA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project deadline",
+     "variations": {}
+    }
+   ]
+  },
+  "dsHdwF60D2k/sbGpMXr/oA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project budget",
+     "variations": {}
+    }
+   ]
+  },
+  "n5R3rjboXW843QZ+67aXiw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Link to the project",
+     "variations": {}
+    }
+   ]
+  },
+  "8601ciBL1UVfccPhb2ozNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your first name",
+     "variations": {}
+    }
+   ]
+  },
+  "POtDz4Nd7WujmwyB9zaPcA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your last name",
+     "variations": {}
+    }
+   ]
+  },
+  "3Mx9kmQKHfLIXdGAm2yEsw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your first name and Last name",
+     "variations": {}
+    }
+   ]
+  },
+  "SlUyDVwib4Jin8/iDEaL3w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your phone",
+     "variations": {}
+    }
+   ]
+  },
+  "+oEUDkfU5AoRKpE7cxpTxQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your email",
+     "variations": {}
+    }
+   ]
+  },
+  "NiN7TMaM/k4xpU6IdMbJVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tasks you've finished today",
+     "variations": {}
+    }
+   ]
+  },
+  "mZDckhl1/DcD39a5rkEyuw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer first name",
+     "variations": {}
+    }
+   ]
+  },
+  "SdVky3OWSSQ9hozu/YWQew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer last name",
+     "variations": {}
+    }
+   ]
+  },
+  "EKzXbJFi4SkB5w/dIUionA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer title, first and last names",
+     "variations": {}
+    }
+   ]
+  },
+  "aP3GfJouThdPadbGX9TWaA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer phone",
+     "variations": {}
+    }
+   ]
+  },
+  "cLvfBXelukJveWhMtWq8oQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer email",
+     "variations": {}
+    }
+   ]
+  },
+  "K5N9Ykzu5cPCufDCSvIDdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Recipient's first name",
+     "variations": {}
+    }
+   ]
+  },
+  "z7uN7pCGGC/402PyzyMqkw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Recipient's last name",
+     "variations": {}
+    }
+   ]
+  },
+  "Z6ro1XVwsoOYT50d7tkmSQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "User's first and last names",
+     "variations": {}
+    }
+   ]
+  },
+  "mihTSwsQSTr7EBz/39KHyw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sender's first name",
+     "variations": {}
+    }
+   ]
+  },
+  "UIk/h1P05qIo/GL2meZM0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sender's last name",
+     "variations": {}
+    }
+   ]
+  },
+  "PHBvDcFy8ZAg20OAAuX7nQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Author's first and last names",
+     "variations": {}
+    }
+   ]
+  },
+  "Tzxr9IflMBr2CDiXuZP0yQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comment text",
+     "variations": {}
+    }
+   ]
+  },
+  "Ojs4CVJ6sHLGOsbMwYyDBQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Comment date",
+     "variations": {}
+    }
+   ]
+  },
+  "RqkAEpTTHL2/r08IwQ8vgg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "PE53bhbaInMSWc8vY55b8A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1st reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "UKFh4O6G+0iP2JeJpCTBrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "2nd reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "1BkBJFH8hYWidtj5rXN6mQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Last reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "/jmwoVd03a1H2MTtKOTWrA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "Bn3uxz9hCn5WiwVGNcCkOw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1st reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "1itO5VYYB4pBQyhAj1Xvbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "2nd reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "6UUR2HvB/02n3TCG6UczEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "3rd reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "ac/tX0zluNI2iK9nIr5L9Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "4th reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "kGBRJCF84XWRYI1sHWsdsw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Last reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "45pRxJDm/k6K1J6FOsKgNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Customer report",
      "variations": {}
     }
    ]
@@ -8111,12 +8771,192 @@
     }
    ]
   },
-  "EX1vp3nzcu/PifVnW+Sk5w==": {
+  "W1Z+842u8pCuwjzipnA9gA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Choose a predefined picture",
+     "translation": "Files linked to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "BnS6VLTPVo8d5lqA6HeLcg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Your full name",
+     "variations": {}
+    }
+   ]
+  },
+  "grxdMaqX1bkfVKZhNvqlfQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Full name and customer title",
+     "variations": {}
+    }
+   ]
+  },
+  "FgFrsPPyIXC1OXDG+pHysQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Recipient's full name",
+     "variations": {}
+    }
+   ]
+  },
+  "gsiBeHjoryZ2KmKAZja3Xw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sender's full name",
+     "variations": {}
+    }
+   ]
+  },
+  "HutExxIWRbf05n9YQfhtsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{first name}{last name}'s smart assistant",
+     "variations": {}
+    }
+   ]
+  },
+  "JZSEg2EIl4FZrjTbLykCDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Other",
+     "variations": {}
+    }
+   ]
+  },
+  "DplwfsTWQva6fcImyucG4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after the previous email",
+     "variations": {}
+    }
+   ]
+  },
+  "Tt+m+eYxAX71R5GCKDCfnQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after the task's activation",
+     "variations": {}
+    }
+   ]
+  },
+  "0K+9honF4vsx62F8wA0Svw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Worked time",
+     "variations": {}
+    }
+   ]
+  },
+  "W5S/eabKGM78p/srSNf8Zw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "F2GNjnshipx4C0n6IiVL+A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours actually worked according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "NVAk5+s4aeW/WEWjew+EdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Estimated time",
+     "variations": {}
+    }
+   ]
+  },
+  "BkarQQVPaf0Vblob2ZxhNg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "vJTM5/peG0P0kQfVf1DWEg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total of hours initially estimated according to the selected filters and period.",
+     "variations": {}
+    }
+   ]
+  },
+  "RxHkN7yN7nYszzBOaNY0tQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "removed document",
+     "variations": {}
+    }
+   ]
+  },
+  "X+4B0AHPUMFuIiy+qKP0AA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added document",
+     "variations": {}
+    }
+   ]
+  },
+  "+TSsouyNnpOuotBby5ZXPg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "added a new document to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "726EBmyncZesHmufFOCfbg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "If you do not wish the customer to receive a report, you can deactivate the project's notifications.",
      "variations": {}
     }
    ]

@@ -45,7 +45,8 @@ const TagDropdown = (props) => {
 	};
 
 	const {history, location} = props;
-	const {search, state = {}} = location;
+	const {search} = location;
+	const state = location.state || {};
 
 	return (
 		<ArianneElemCreatable
@@ -57,7 +58,6 @@ const TagDropdown = (props) => {
 					onClick={() => {
 						history.push({
 							pathname: '/app/tags',
-							search,
 							state: {
 								prevLocation: location,
 								prevSearch: search || state.prevSearch,

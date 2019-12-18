@@ -3,7 +3,9 @@ import moment from 'moment';
 import React, {useCallback} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import CalendarHeatmap from 'reactjs-calendar-heatmap';
-import {VictoryArea, VictoryPie} from 'victory';
+import {
+	VictoryArea, VictoryBar, VictoryPie, VictoryStack,
+} from 'victory';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
 import HelpAndTooltip from '../../../components/HelpAndTooltip';
@@ -13,6 +15,7 @@ import TasksProgressBar from '../../../components/TasksProgressBar';
 import fbt from '../../../fbt/fbt.macro';
 import {useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS, TAG_COLOR_PALETTE} from '../../../utils/constants';
+import {FlexRow} from '../../../utils/content';
 import {formatName} from '../../../utils/functions';
 import {
 	A,
@@ -21,11 +24,12 @@ import {
 	lightPurple,
 	mediumPurple,
 	P,
+	primaryBlack,
 	primaryPurple,
 	primaryRed,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS_STATS, GET_USER_TAGS} from '../../../utils/queries';
+import {GET_ALL_TASKS_STATS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
@@ -59,8 +63,10 @@ const Card = styled('div')`
 `;
 
 const Number = styled(P)`
-	font-size: 2.3rem;
-	font-weight: 500;
+	font-size: ${props => (props.big ? '10rem' : '2.3rem')};
+	line-height: ${props => (props.big ? 1 : 'inherit')};
+	color: ${props => (props.big ? mediumPurple : 'inherit')};
+	font-weight: ${props => (props.big ? 900 : 500)};
 	margin: 0;
 	position: relative;
 	z-index: 0;
@@ -110,13 +116,35 @@ const PieWrapper = styled('div')`
 	grid-gap: 20px;
 `;
 
+const filterTasks = (
+	tasks,
+	filterProp,
+	since,
+	linkedCustomerId,
+	projectId,
+	tags,
+	id,
+) => tasks.filter(
+	task => moment(task[filterProp]).isSameOrAfter(
+		moment().subtract(since, 'days'),
+	)
+			&& (!linkedCustomerId
+				|| ((task.linkedCustomer
+					&& task.linkedCustomer.id === linkedCustomerId)
+					|| (task.section
+						&& task.section.project.customer
+						&& task.section.project.customer.id
+							=== linkedCustomerId)))
+			&& (!task.section
+				|| task.section.project.status !== 'REMOVED'
+				|| projectId)
+			&& (!projectId
+				|| (task.section && task.section.project.id === projectId))
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag))
+			&& !(task.assignee && task.assignee.id !== id),
+);
+
 const Stats = ({history, location}) => {
-	const {
-		data: {
-			me: {tags: tagsData},
-		},
-		error: errorTags,
-	} = useQuery(GET_USER_TAGS, {suspend: true});
 	const {
 		data: {
 			me: {id, tasks},
@@ -136,7 +164,7 @@ const Stats = ({history, location}) => {
 	const linkedCustomerId = query.get('customerId');
 	let overview = 'year';
 
-	if (error || errorTags) throw error;
+	if (error) throw error;
 
 	const setSince = useCallback(
 		(value) => {
@@ -217,24 +245,23 @@ const Stats = ({history, location}) => {
 		[query, history],
 	);
 
-	const filteredTasks = tasks.filter(
-		task => moment(task.createdAt).isSameOrAfter(
-			moment().subtract(since, 'days'),
-		)
-			&& (!linkedCustomerId
-				|| ((task.linkedCustomer
-					&& task.linkedCustomer.id === linkedCustomerId)
-					|| (task.section
-						&& task.section.project.customer
-						&& task.section.project.customer.id
-							=== linkedCustomerId)))
-			&& (!task.section
-				|| task.section.project.status !== 'REMOVED'
-				|| projectId)
-			&& (!projectId
-				|| (task.section && task.section.project.id === projectId))
-			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag))
-			&& !(task.assignee && task.assignee.id !== id),
+	const filteredTasks = filterTasks(
+		tasks,
+		'finishedAt',
+		since,
+		linkedCustomerId,
+		projectId,
+		tags,
+		id,
+	);
+	const createdAtFilteredTasks = filterTasks(
+		tasks,
+		'createdAt',
+		since,
+		linkedCustomerId,
+		projectId,
+		tags,
+		id,
 	);
 
 	const customers = {};
@@ -253,6 +280,9 @@ const Stats = ({history, location}) => {
 				* workingTime
 				* 60
 				* 60,
+			estimatedTime:
+				task.unit > 0 ? task.unit * workingTime * 60 * 60 : 0,
+			dailyRate: task.dailyRate || defaultDailyPrice,
 		};
 
 		const activityIndex = activities.findIndex(a => a.date === day);
@@ -260,11 +290,15 @@ const Stats = ({history, location}) => {
 		if (activityIndex > -1) {
 			activities[activityIndex].details.push(activity);
 			activities[activityIndex].total += activity.value;
+			activities[activityIndex].totalPrice
+				+= activity.dailyRate * activity.value;
 		}
 		else {
 			activities.push({
 				date: day,
 				total: activity.value,
+				estimatedTime: activity.estimatedTime,
+				totalPrice: activity.dailyRate * activity.value,
 				details: [activity],
 			});
 		}
@@ -297,18 +331,24 @@ const Stats = ({history, location}) => {
 		totalTime += time;
 	});
 
+	const reminders = createdAtFilteredTasks.map(task => task.reminders).flat();
+
 	const allDayWithTasks = [];
 	const startDate = moment();
 
 	for (let i = 0; i < since; i++) {
-		const currentDate = startDate
-			.subtract(since, 'days')
+		const currentDate = moment(startDate)
+			.subtract(i, 'days')
 			.format('YYYY-MM-DD');
-		const taskForDay = activities.find(a => a.date === currentDate);
+		const activity = activities.find(a => a.date === currentDate);
+		const remindersForDay = reminders.filter(
+			r => moment(r.sendingDate).format('YYYY-MM-DD') === currentDate,
+		);
 
 		allDayWithTasks.push({
 			date: currentDate,
-			tasks: taskForDay,
+			activity,
+			reminders: remindersForDay,
 		});
 	}
 
@@ -320,35 +360,42 @@ const Stats = ({history, location}) => {
 		}),
 	);
 
-	const reminders = filteredTasks
-		.filter(t => t.status === 'FINISHED')
-		.map(task => task.reminders)
-		.flat();
+	const tagsHours = {
+		notag: {
+			id: 'notag',
+			x: 'Non classée',
+			colorBg: '#f8f9fc',
+			y: 0,
+		},
+	};
 
-	const tagsDistributions = filteredTasks.map(task => task.tags).flat();
+	filteredTasks.forEach((task) => {
+		const unit = task.timeItTook ? task.timeItTook : task.unit;
 
-	const arrayMap = tagsDistributions.reduce((acc, current) => {
-		if (!acc[current.id]) {
-			acc[current.id] = {...current, count: 1};
-			return acc;
+		if (task.tags.length === 0) {
+			tagsHours.notag.y += unit;
 		}
-		acc[current.id].count++;
-		return acc;
-	}, {});
-	const result = Object.values(arrayMap);
 
-	const tagsDistributionsList = Object.entries(result).map(([key, obj]) => ({
-		id: key,
-		x: obj.name,
-		y: obj.count / tagsDistributions.length,
-		colorBg: obj.colorBg,
-	}));
+		task.tags.forEach((tag) => {
+			tagsHours[tag.id] = tagsHours[tag.id] || {
+				id: tag.id,
+				x: tag.name,
+				colorBg: tag.colorBg,
+				y: 0,
+			};
+
+			tagsHours[tag.id].y += unit;
+		});
+	});
+
+	const tagsHoursList = Object.values(tagsHours);
 
 	const defaultTagsColorPalette = Object.values(
 		TAG_COLOR_PALETTE.map(x => `rgb(${x[0]})`),
 	);
 
 	let maxHoursWorkedInADay = 0;
+	let maxPricedDay = 0;
 
 	activities.forEach((t) => {
 		if (
@@ -358,6 +405,10 @@ const Stats = ({history, location}) => {
 			maxHoursWorkedInADay = Math.max(
 				maxHoursWorkedInADay,
 				t.total / 60 / 60,
+			);
+			maxPricedDay = Math.max(
+				maxPricedDay,
+				t.totalPrice / 60 / 60 / workingTime,
 			);
 		}
 	});
@@ -531,50 +582,15 @@ const Stats = ({history, location}) => {
 						</PageSubHeading>
 						<PieWrapper>
 							<VictoryPie
-								data={
-									tagsDistributionsList.length > 0
-										? tagsDistributionsList
-										: [
-											{
-												x: fbt(
-													'Sans catégorie',
-													'no category stats page',
-												),
-												y: 100,
-											},
-										  ]
-								}
-								colorScale={
-									tagsDistributionsList.length > 0
-										? tagsDistributionsList.map(
-											t => t.colorBg,
-										  )
-										: [lightGrey]
-								}
+								data={tagsHoursList}
+								colorScale={tagsHoursList.map(t => t.colorBg)}
 								innerRadius={50}
 								labels={[]}
 							/>
 							<Legend
-								list={
-									tagsDistributionsList.length > 0
-										? tagsDistributionsList
-										: [
-											{
-												x: fbt(
-													'Sans catégorie',
-													'no category stats page',
-												),
-												y: 0,
-											},
-										  ]
-								}
-								colorScale={
-									tagsDistributionsList.length > 0
-										? tagsDistributionsList.map(
-											t => t.colorBg,
-										  )
-										: [lightGrey]
-								}
+								list={tagsHoursList}
+								workingTime={workingTime}
+								colorScale={tagsHoursList.map(t => t.colorBg)}
 							/>
 						</PieWrapper>
 					</div>
@@ -639,24 +655,8 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {timeItTook}) => total + timeItTook,
-										0,
-									) * workingTime
-							).toFixed(0)}
-							h /{' '}
-							{(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {unit}) => total + unit,
-										0,
-									) * workingTime
-							).toFixed(0)}
-							h
+							{(workedTime * workingTime).toFixed(0)}h /{' '}
+							{(estimatedTime * workingTime).toFixed(0)}h
 						</Number>
 						<VictoryArea
 							style={{
@@ -677,17 +677,19 @@ const Stats = ({history, location}) => {
 							domain={{
 								y: [
 									-maxHoursWorkedInADay / 3,
-									maxHoursWorkedInADay,
+									maxHoursWorkedInADay * 1.2,
 								],
 							}}
+							minDomain={{y: -maxHoursWorkedInADay / 2}}
 							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.finishedAt || 0,
-								y:
-									(obj.timeItTook
-										? obj.timeItTook
-										: obj.unit) * workingTime || 0,
-							}))}
+							data={allDayWithTasks
+								.reverse()
+								.map((obj, index) => ({
+									x: index,
+									y: obj.activity
+										? obj.activity.total / 60 / 60
+										: 0,
+								}))}
 						/>
 						<VictoryArea
 							style={{
@@ -703,19 +705,21 @@ const Stats = ({history, location}) => {
 									left: '-1px',
 								},
 							}}
-							y0={() => -maxHoursWorkedInADay / 3}
 							height={220}
 							padding={0}
 							domain={{
 								y: [
 									-maxHoursWorkedInADay / 3,
-									maxHoursWorkedInADay,
+									maxHoursWorkedInADay * 1.2,
 								],
 							}}
+							minDomain={{y: -maxHoursWorkedInADay / 2}}
 							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.finishedAt || 0,
-								y: obj.unit * workingTime || 0,
+							data={allDayWithTasks.map((obj, index) => ({
+								x: index,
+								y: obj.activity
+									? obj.activity.estimatedTime / 60 / 60
+									: 0,
 							}))}
 						/>
 					</Card>
@@ -740,52 +744,59 @@ const Stats = ({history, location}) => {
 							{new Intl.NumberFormat(language, {
 								style: 'currency',
 								currency: language === 'fr' ? 'EUR' : 'USD',
-							}).format(
-								filteredTasks
-									.filter(t => t.status === 'FINISHED')
-									.reduce(
-										(total, {timeItTook}) => total + timeItTook,
-										0,
-									) * defaultDailyPrice,
-							)}
+							}).format(workedTime * defaultDailyPrice)}
 						</Number>
-						<VictoryArea
+						<VictoryStack
 							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple,
-								},
 								parent: {
 									position: 'absolute',
 									bottom: '-88px',
 									left: '-1px',
 								},
 							}}
-							y0={() => ((-maxHoursWorkedInADay / workingTime)
-									* defaultDailyPrice)
-								/ 3
-							}
+							padding={{left: 20, right: 20}}
 							height={220}
-							padding={0}
-							domain={{
-								y: [
-									((-maxHoursWorkedInADay / workingTime)
-										* defaultDailyPrice)
-										/ 3,
-									(maxHoursWorkedInADay / workingTime)
-										* defaultDailyPrice,
-								],
-							}}
-							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.finishedAt || 0,
-								y:
-									(obj.timeItTook
-										? obj.timeItTook
-										: obj.unit) * defaultDailyPrice || 0,
-							}))}
-						/>
+						>
+							<VictoryBar
+								style={{
+									data: {
+										fill: mediumPurple,
+										opacity: 0.2,
+									},
+									parent: {
+										position: 'absolute',
+										bottom: '-88px',
+										left: '-1px',
+									},
+								}}
+								height={220}
+								data={allDayWithTasks.map((obj, index) => ({
+									x: index,
+									y: obj.activity
+										? obj.activity.total / 60 / 60
+										: 0,
+								}))}
+							/>
+							<VictoryBar
+								style={{
+									data: {
+										fill: mediumPurple,
+									},
+									parent: {
+										position: 'absolute',
+										bottom: '-88px',
+										left: '-1px',
+									},
+								}}
+								height={220}
+								data={allDayWithTasks.map((obj, index) => ({
+									x: index,
+									y: obj.activity
+										? obj.activity.totalPrice
+										: 0,
+								}))}
+							/>
+						</VictoryStack>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -844,35 +855,16 @@ const Stats = ({history, location}) => {
 								</fbt>
 							</HelpAndTooltip>
 						</SubHeading>
-						<Number>
-							{// reminders.filter(
-							// 	reminder => reminder.status === 'SENT'
-							// ).length
-								since + 2}
-						</Number>
-						<VictoryArea
-							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple,
-								},
-								parent: {
-									position: 'absolute',
-									bottom: '-88px',
-									left: '-1px',
-								},
-							}}
-							y0={() => -1}
-							height={220}
-							padding={0}
-							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.dueDate || 0,
-								// y: obj.reminders.length
-								y: Object.entries(filteredTasks).map(() => Math.round(Math.random() * 4)),
-							}))}
-						/>
+						<FlexRow alignItems="baseline">
+							<Number big>
+								{
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length
+								}
+							</Number>
+							<MaterialIcon icon="mail" color={primaryBlack} />
+						</FlexRow>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -889,29 +881,13 @@ const Stats = ({history, location}) => {
 								</fbt>
 							</HelpAndTooltip>
 						</SubHeading>
-						<Number>{clientViews}</Number>
-						<VictoryArea
-							style={{
-								data: {
-									stroke: primaryPurple,
-									strokeWidth: 3,
-									fill: mediumPurple,
-								},
-								parent: {
-									position: 'absolute',
-									bottom: '-88px',
-									left: '-1px',
-								},
-							}}
-							y0={() => -1}
-							height={220}
-							padding={0}
-							interpolation="natural"
-							data={Object.values(filteredTasks).map(obj => ({
-								x: obj.dueDate || 0,
-								y: obj.reminders.length,
-							}))}
-						/>
+						<FlexRow alignItems="baseline">
+							<Number big>{clientViews}</Number>
+							<MaterialIcon
+								icon="remove_red_eye"
+								color={primaryBlack}
+							/>
+						</FlexRow>
 					</Card>
 					<Card>
 						<SubHeading>
@@ -929,22 +905,16 @@ const Stats = ({history, location}) => {
 							</HelpAndTooltip>
 						</SubHeading>
 						<Number>
-							{// moment
-							// .duration(
-							// 	reminders.filter(
-							// 		reminder => reminder.status === 'SENT'
-							// 	).length *
-							// 		15 +
-							// 		clientViews * 5,
-							// 	'minutes'
-							// )
-							// .format('h_mm_')}
-								moment
-									.duration(
-										(since + 2) * 15 + clientViews * 5,
-										'minutes',
-									)
-									.format('h_mm_')}
+							{moment
+								.duration(
+									reminders.filter(
+										reminder => reminder.status === 'SENT',
+									).length
+										* 15
+										+ clientViews * 5,
+									'minutes',
+								)
+								.format('h[h]m[m]')}
 						</Number>
 						<SubHeading>
 							<fbt project="inyo" desc="Soit">
@@ -961,10 +931,11 @@ const Stats = ({history, location}) => {
 								style: 'currency',
 								currency: language === 'fr' ? 'EUR' : 'USD',
 							}).format(
-								// 	reminders.filter(
-								// 	reminder => reminder.status === 'SENT'
-								// ).length *
-								(((since + 2) * 0.25 + clientViews * 0.1)
+								((reminders.filter(
+									reminder => reminder.status === 'SENT',
+								).length
+									* (15 / 60)
+									+ clientViews * (5 / 60))
 									/ workingTime)
 									* defaultDailyPrice,
 							)}

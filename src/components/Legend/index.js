@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import React from 'react';
 
 const LegendList = styled('ul')`
@@ -36,13 +37,20 @@ const Label = styled('span')`
 	font-size: 0.8rem;
 `;
 
-function Legend({list, colorScale}) {
+function Legend({list, colorScale, workingTime}) {
 	return (
 		<LegendList>
 			{list.map((item, index) => (
 				<LegendRow>
 					<Label colorScale={colorScale[index]} />
-					{item.x} <Ratio>{(item.y * 100).toFixed(1)}%</Ratio>
+					{item.x}{' '}
+					<Ratio>
+						{workingTime
+							? moment
+								.duration(item.y * workingTime, 'hours')
+								.format('h[h]m[m]')
+							: `${(item.y * 100).toFixed(1)}%`}
+					</Ratio>
 				</LegendRow>
 			))}
 		</LegendList>

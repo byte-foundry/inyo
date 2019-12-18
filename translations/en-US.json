@@ -1571,12 +1571,82 @@
     }
    ]
   },
+  "FVFcJgCcwMFjVCavCmYN+g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Send a test email to myself",
+     "variations": {}
+    }
+   ]
+  },
+  "fFfSrLEa0C5mv6t4JM1z0Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "From:",
+     "variations": {}
+    }
+   ]
+  },
+  "Te66P3BkgGic2cYlLIY7YQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "To:",
+     "variations": {}
+    }
+   ]
+  },
+  "K9fPzLnbRFBwD9m0843JQA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subject:",
+     "variations": {}
+    }
+   ]
+  },
+  "3QYdUA8S01h1KISjb0iGoA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{assistantName} from Inyo",
+     "variations": {}
+    }
+   ]
+  },
+  "dtDfvXRuV7jE0m+EtG/ZYA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "#TODO Smart Assistant de {first name} {last name}",
+     "variations": {}
+    }
+   ]
+  },
   "FW0vHit7lkUcAPNJ1FNw3g==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Reset to default's template",
+     "variations": {}
+    }
+   ]
+  },
+  "hduMTgMr5yUjta6mGsL0mw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Save this template",
      "variations": {}
     }
    ]
@@ -5531,6 +5601,16 @@
     }
    ]
   },
+  "Ee4NpZCCxrLtlhE1/VTP/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after",
+     "variations": {}
+    }
+   ]
+  },
   "b+57SnrwmyP9ocjAxliRtQ==": {
    "tokens": [],
    "types": [],
@@ -5547,26 +5627,6 @@
    "translations": [
     {
      "translation": "the previous email",
-     "variations": {}
-    }
-   ]
-  },
-  "DplwfsTWQva6fcImyucG4Q==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "after the previous email",
-     "variations": {}
-    }
-   ]
-  },
-  "Tt+m+eYxAX71R5GCKDCfnQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "after the task's activation",
      "variations": {}
     }
    ]
@@ -7321,6 +7381,16 @@
     }
    ]
   },
+  "UwP6YRoOMnJ18Q2GribprA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Namely",
+     "variations": {}
+    }
+   ]
+  },
   "g6OSqAaSfsmYmuKduqEOoQ==": {
    "tokens": [],
    "types": [],
@@ -8701,12 +8771,42 @@
     }
    ]
   },
+  "HutExxIWRbf05n9YQfhtsA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{first name}{last name}'s smart assistant",
+     "variations": {}
+    }
+   ]
+  },
   "JZSEg2EIl4FZrjTbLykCDg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Other",
+     "variations": {}
+    }
+   ]
+  },
+  "DplwfsTWQva6fcImyucG4Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after the previous email",
+     "variations": {}
+    }
+   ]
+  },
+  "Tt+m+eYxAX71R5GCKDCfnQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "after the task's activation",
      "variations": {}
     }
    ]

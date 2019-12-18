@@ -8,7 +8,7 @@ import CustomEmailSidebar from '../../../components/CustomEmailSidebar';
 import EmailCustomizer from '../../../components/EmailCustomizer';
 import fbt from '../../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../../utils/constants';
-import {FlexRow} from '../../../utils/content';
+import {FlexRow, Loading} from '../../../utils/content';
 import {Container, Heading, HeadingRow} from '../../../utils/new/design-system';
 import useEmailData from '../../../utils/useEmailData';
 
@@ -31,18 +31,30 @@ const Main = styled('div')`
 const CustomizeEmailRoute = () => {
 	const {categories, error} = useEmailData();
 
-	if (!categories) return false;
+	if (!categories) {
+		return (
+			<Container>
+				<Main>
+					<Loading />
+				</Main>
+			</Container>
+		);
+	}
 	if (error) throw error;
 
 	return (
-		<Switch>
-			<Route path="/app/emails/:category/:type">
-				<CustomizeEmail categories={categories} />
-			</Route>
-			<Redirect
-				to={`/app/emails/${categories[0].name}/${categories[0].types[0].name}`}
-			/>
-		</Switch>
+		<Container>
+			<Main>
+				<Switch>
+					<Route path="/app/emails/:category/:type">
+						<CustomizeEmail categories={categories} />
+					</Route>
+					<Redirect
+						to={`/app/emails/${categories[0].name}/${categories[0].types[0].name}`}
+					/>
+				</Switch>
+			</Main>
+		</Container>
 	);
 };
 
@@ -58,26 +70,22 @@ const CustomizeEmail = ({categories}) => {
 	// This will change depending on the email type
 	//
 	return (
-		<Container>
-			<Main>
-				<EmailContainer>
-					<HeadingRow>
-						<Heading>
-							<fbt project="inyo" desc="emails">
-								Modèles d'emails
-							</fbt>
-						</Heading>
-					</HeadingRow>
-					<FlexRow>
-						<CustomEmailSidebar categories={categories} />
-						<EmailCustomizer
-							emailType={emailType}
-							emailTypeId={emailType.id}
-						/>
-					</FlexRow>
-				</EmailContainer>
-			</Main>
-		</Container>
+		<EmailContainer>
+			<HeadingRow>
+				<Heading>
+					<fbt project="inyo" desc="emails">
+						Modèles d'emails
+					</fbt>
+				</Heading>
+			</HeadingRow>
+			<FlexRow>
+				<CustomEmailSidebar categories={categories} />
+				<EmailCustomizer
+					emailType={emailType}
+					emailTypeId={emailType.id}
+				/>
+			</FlexRow>
+		</EmailContainer>
 	);
 };
 

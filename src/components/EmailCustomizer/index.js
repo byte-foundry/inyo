@@ -15,7 +15,7 @@ import {Loading} from '../../utils/content';
 import {
 	SEND_CUSTOM_EMAIL_PREVIEW,
 	SET_TEMPLATE_TO_DEFAULT,
-	UPDATE_EMAIL_TEMPLATE
+	UPDATE_EMAIL_TEMPLATE,
 } from '../../utils/mutations';
 import {
 	Button,
@@ -25,7 +25,7 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
-	primaryWhite
+	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_EMAIL_TEMPLATE} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
@@ -153,9 +153,9 @@ const renderInline = ({attributes, node, isSelected}, editor, next) => {
 const schema = {
 	inlines: {
 		param: {
-			isVoid: true
-		}
-	}
+			isVoid: true,
+		},
+	},
 };
 
 const initialValue = {
@@ -169,24 +169,23 @@ const initialValue = {
 				nodes: [
 					{
 						object: 'text',
-						text: ''
-					}
-				]
-			}
-		]
-	}
+						text: '',
+					},
+				],
+			},
+		],
+	},
 };
 
-const compareStateAndData = (state, template) =>
-	(template.timing === null ||
-		(state.timing.value === template.timing.value &&
-			state.timing.unit === template.timing.unit &&
-			state.timing.isRelative === template.timing.isRelative)) &&
-	state.subject === template.subject &&
-	state.content === template.content;
+const compareStateAndData = (state, template) => (template.timing === null
+		|| (state.timing.value === template.timing.value
+			&& state.timing.unit === template.timing.unit
+			&& state.timing.isRelative === template.timing.isRelative))
+	&& state.subject === template.subject
+	&& state.content === template.content;
 
 const EmailCustomizer = ({emailType}) => {
-	const {assistantName} = useUserInfos();
+	const {assistantName, firstName, lastName} = useUserInfos();
 	const [stateIsUnchanged, setStateIsUnchange] = useState();
 	const [unit, setUnit] = useState();
 	const [value, setValue] = useState();
@@ -194,10 +193,10 @@ const EmailCustomizer = ({emailType}) => {
 	const [initialSubject, setInitialSubject] = useState();
 	const [initialContent, setInitialContent] = useState();
 	const [contentValue, setContentValue] = useState(
-		Value.fromJSON(initialValue)
+		Value.fromJSON(initialValue),
 	);
 	const [subjectValue, setSubjectValue] = useState(
-		Value.fromJSON(initialValue)
+		Value.fromJSON(initialValue),
 	);
 	const contentEditorRef = useRef();
 	const subjectEditorRef = useRef();
@@ -205,8 +204,8 @@ const EmailCustomizer = ({emailType}) => {
 	const {data, loading, error} = useQuery(GET_EMAIL_TEMPLATE, {
 		variables: {
 			typeName: emailType.name,
-			category: emailType.category
-		}
+			category: emailType.category,
+		},
 	});
 	const [sendCustomEmailPreview] = useMutation(SEND_CUSTOM_EMAIL_PREVIEW);
 	const [updateEmailTemplate] = useMutation(UPDATE_EMAIL_TEMPLATE);
@@ -218,7 +217,7 @@ const EmailCustomizer = ({emailType}) => {
 			.map(param => param.text),
 		...subjectValue.document
 			.filterDescendants(block => block.type === 'param')
-			.map(param => param.text)
+			.map(param => param.text),
 	];
 
 	useEffect(() => {
@@ -246,17 +245,17 @@ const EmailCustomizer = ({emailType}) => {
 						timing: {
 							unit,
 							value,
-							isRelative
+							isRelative,
 						},
 						subject: subjectValue,
-						content: contentValue
+						content: contentValue,
 					},
 					{
 						timing: data.emailTemplate.timing,
 						subject: initialSubject,
-						content: initialContent
-					}
-				)
+						content: initialContent,
+					},
+				),
 			);
 		}
 	}, [
@@ -268,7 +267,7 @@ const EmailCustomizer = ({emailType}) => {
 		subjectValue,
 		contentValue,
 		initialValue,
-		initialContent
+		initialContent,
 	]);
 
 	if (loading) {
@@ -288,8 +287,8 @@ const EmailCustomizer = ({emailType}) => {
 			</p>,
 			{
 				position: toast.POSITION.BOTTOM_LEFT,
-				autoClose: 3000
-			}
+				autoClose: 3000,
+			},
 		);
 	};
 
@@ -318,12 +317,14 @@ const EmailCustomizer = ({emailType}) => {
 						sendCustomEmailPreview({
 							variables: {
 								subject: subjectEditorRef.current.value,
-								content: contentEditorRef.current.value
-							}
+								content: contentEditorRef.current.value,
+							},
 						});
 					}}
 				>
-					S'envoyer un email de test
+					<fbt desc="send test custom email">
+						S'envoyer un email de test
+					</fbt>
 				</TestEmailLink>
 			</TestEmailLinkContainer>
 			<MailContainer>
@@ -331,16 +332,22 @@ const EmailCustomizer = ({emailType}) => {
 				<MailContent>
 					<MailAddresses>
 						<MailFromAndTo>
-							<MailAddressLabel>De :</MailAddressLabel>
+							<MailAddressLabel>
+								<fbt desc="from">De :</fbt>
+							</MailAddressLabel>
 							<MailAddress>{assistantName}@inyo.me</MailAddress>
 						</MailFromAndTo>
 						<MailFromAndTo>
-							<MailAddressLabel>À :</MailAddressLabel>
+							<MailAddressLabel>
+								<fbt desc="To">À :</fbt>
+							</MailAddressLabel>
 							<MailAddress>mail@client.com</MailAddress>
 						</MailFromAndTo>
 					</MailAddresses>
 					<MailSubject>
-						<MailSubjectLabel>Objet :</MailSubjectLabel>
+						<MailSubjectLabel>
+							<fbt desc="subject">Objet :</fbt>
+						</MailSubjectLabel>
 						<Editor
 							value={subjectValue}
 							ref={subjectEditorRef}
@@ -352,7 +359,7 @@ const EmailCustomizer = ({emailType}) => {
 								// can't seem to get focus any other way
 								setTimeout(
 									() => subjectEditorRef.current.focus(),
-									0
+									0,
 								);
 							}}
 							schema={schema}
@@ -371,7 +378,7 @@ const EmailCustomizer = ({emailType}) => {
 								// can't seem to get focus any other way
 								setTimeout(
 									() => contentEditorRef.current.focus(),
-									0
+									0,
 								);
 							}}
 							schema={schema}
@@ -379,17 +386,58 @@ const EmailCustomizer = ({emailType}) => {
 						/>
 					</MailText>
 				</MailContent>
+				<div>
+					<p
+						style={{
+							fontSize: '16px',
+							margin: '0 1rem',
+							paddingTop: '1rem',
+							borderTop: 'solid 1px #f2f2f2',
+							userSelect: 'none',
+						}}
+					>
+						<a href="https://inyo.pro" title="Inyo website">
+							<img
+								style={{
+									height: '22px',
+									display: 'inline-block',
+									marginBottom: '-2px',
+								}}
+								src="https://marketing-image-production.s3.amazonaws.com/uploads/0e56408bfecadb033b1dfa33f5422c9b534f8938fc9cdf2233d0e454555ff56a72362ef7cb29fc1a4c51e8705f1396ced02e2a5a9d2a6d8903554627a3967293.png"
+							/>
+						</a>{' '}
+						<b>
+							<fbt desc="signature start">
+								<fbt:param name="assistantName">
+									{assistantName}
+								</fbt:param>{' '}
+								de Inyo
+							</fbt>
+						</b>
+						<br />
+						<i>
+							<fbt desc="signature end">
+								Smart Assistant de{' '}
+								<fbt:param name="first name">
+									{firstName}
+								</fbt:param>{' '}
+								<fbt:param name="last name">
+									{lastName}
+								</fbt:param>
+							</fbt>
+						</i>
+					</p>
+				</div>
 			</MailContainer>
 			<ButtonsWrap>
 				<Button
 					link
 					red
-					onClick={() =>
-						setTemplateToDefault({
-							variables: {
-								templateId: data.emailTemplate.id
-							}
-						})
+					onClick={() => setTemplateToDefault({
+						variables: {
+							templateId: data.emailTemplate.id,
+						},
+					})
 					}
 				>
 					<fbt desc="back to default template">
@@ -398,10 +446,6 @@ const EmailCustomizer = ({emailType}) => {
 				</Button>
 				<Button
 					onClick={async () => {
-						// console.log('Suject');
-						// console.log(JSON.stringify(subjectEditorRef.current.value));
-						// console.log('Content');
-						// console.log(JSON.stringify(contentEditorRef.current.value));
 						try {
 							updateEmailTemplate({
 								variables: {
@@ -409,22 +453,24 @@ const EmailCustomizer = ({emailType}) => {
 									timing: {
 										unit,
 										value,
-										isRelative
+										isRelative,
 									},
 									subject: subjectEditorRef.current.value,
-									content: contentEditorRef.current.value
-								}
+									content: contentEditorRef.current.value,
+								},
 							});
-						} catch (error) {
+						}
+						catch (error) {
 							if (
-								error.networkError &&
-								error.networkError.result &&
-								error.networkError.result.errors
+								error.networkError
+								&& error.networkError.result
+								&& error.networkError.result.errors
 							) {
 								Sentry.captureException(
-									error.networkError.result.errors
+									error.networkError.result.errors,
 								);
-							} else {
+							}
+							else {
 								Sentry.captureException(error);
 							}
 						}
@@ -432,7 +478,7 @@ const EmailCustomizer = ({emailType}) => {
 						displayToast();
 					}}
 				>
-					Enregistrer ce modèle
+					<fbt desc="save custom email">Enregistrer ce modèle</fbt>
 				</Button>
 			</ButtonsWrap>
 			<Prompt

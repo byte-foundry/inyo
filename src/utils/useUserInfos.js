@@ -18,6 +18,8 @@ export default function useUserInfos() {
 		settings,
 		defaultDailyPrice,
 		clientViews,
+		lastName,
+		firstName,
 	} = data.me;
 
 	let workingTime = null;
@@ -43,5 +45,7 @@ export default function useUserInfos() {
 		language: settings.language,
 		hasFullWeekSchedule: settings.hasFullWeekSchedule,
 		assistantName: settings.assistantName,
+		lastName,
+		firstName,
 	};
 }

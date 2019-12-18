@@ -706,8 +706,9 @@ const customSelectStyles = props => ({
 		height: props.big && '40px',
 		minHeight: 'auto',
 		border: 'none',
-		backgroundColor: isDisabled ? lightGrey : lightPurple,
-		borderRadius: '20px',
+		backgroundColor: isDisabled ? 'transparent' : lightPurple,
+		padding: '5px',
+		borderRadius: '4px',
 		':hover, :focus, :active': {
 			border: 'none',
 		},

@@ -273,7 +273,7 @@ export const LABEL_EMAIL_PARAM = {
 		text: () => fbt('Votre nom', 'comment added'),
 	},
 	'user.fullname': {
-		text: () => fbt('Vos nom et prénom', 'comment added'),
+		text: () => fbt('Vos prénom et nom', 'comment added'),
 	},
 	'user.phone': {
 		text: () => fbt('Votre téléphone', 'first customer email'),
@@ -295,7 +295,7 @@ export const LABEL_EMAIL_PARAM = {
 	},
 	'customer.fullname': {
 		text: () => fbt(
-			'Nom, prénom et civilité du client',
+			'Civilité, prénom et nom du client',
 			'first reminder invoice email',
 		),
 	},
@@ -312,7 +312,7 @@ export const LABEL_EMAIL_PARAM = {
 		text: () => fbt('Nom du destinataire', 'fitfh reminder invoice email'),
 	},
 	'recipient.fullname': {
-		text: () => fbt('Nom et prénom du destinataire', 'customer report email'),
+		text: () => fbt('Prénom et nom du destinataire', 'customer report email'),
 	},
 	'author.firstname': {
 		text: () => fbt("Prénom de l'auteur", 'comment added'),
@@ -321,7 +321,7 @@ export const LABEL_EMAIL_PARAM = {
 		text: () => fbt("Nom de l'auteur", 'comment added'),
 	},
 	'author.fullname': {
-		text: () => fbt("Nom et prénom de l'auteur", 'customer report email'),
+		text: () => fbt("Prénom et nom de l'auteur", 'customer report email'),
 	},
 	'comment.text': {
 		text: () => fbt('Texte du commentaire', 'comment added'),

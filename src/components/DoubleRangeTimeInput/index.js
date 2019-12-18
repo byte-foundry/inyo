@@ -66,10 +66,9 @@ function track(trackingSide, value) {
 	};
 }
 
-function convertMousePosToTime(e) {
-	const mouseOffset = e.clientX;
+function convertMousePosToTime({x}) {
 	const baseOffset = inputRange.current.getBoundingClientRect().left;
-	const realOffset = mouseOffset - baseOffset;
+	const realOffset = x - baseOffset;
 	const baseWidth = inputRange.current.getBoundingClientRect().width;
 
 	const percentage = Math.max(Math.min(realOffset / baseWidth, 1), 0);
@@ -111,16 +110,36 @@ export default function DoubleRangeTimeInput(props) {
 					const [
 						newStartHour,
 						newStartMinutes,
-					] = convertMousePosToTime(e, trackingEnum.START);
+					] = convertMousePosToTime({x: e.clientX});
 
 					setFieldValue('startHour', newStartHour);
 					setFieldValue('startMinutes', newStartMinutes);
 				}
 				else if (trackingState[trackingEnum.END]) {
-					const [newEndHour, newEndMinutes] = convertMousePosToTime(
-						e,
-						trackingEnum.START,
-					);
+					const [newEndHour, newEndMinutes] = convertMousePosToTime({
+						x: e.clientX,
+					});
+
+					setFieldValue('endHour', newEndHour);
+					setFieldValue('endMinutes', newEndMinutes);
+				}
+			}}
+			onTouchMove={(e) => {
+				const [touch] = e.changedTouches;
+
+				if (trackingState[trackingEnum.START]) {
+					const [
+						newStartHour,
+						newStartMinutes,
+					] = convertMousePosToTime({x: touch.pageX});
+
+					setFieldValue('startHour', newStartHour);
+					setFieldValue('startMinutes', newStartMinutes);
+				}
+				else if (trackingState[trackingEnum.END]) {
+					const [newEndHour, newEndMinutes] = convertMousePosToTime({
+						x: touch.pageX,
+					});
 
 					setFieldValue('endHour', newEndHour);
 					setFieldValue('endMinutes', newEndMinutes);
@@ -150,11 +169,15 @@ export default function DoubleRangeTimeInput(props) {
 					percentage={startPercentage}
 					onMouseDown={track(trackingEnum.START, true)}
 					onMouseUp={track(trackingEnum.START, false)}
+					onTouchStart={track(trackingEnum.START, true)}
+					onTouchEnd={track(trackingEnum.START, false)}
 				/>
 				<TimeInput
 					percentage={endPercentage}
 					onMouseDown={track(trackingEnum.END, true)}
 					onMouseUp={track(trackingEnum.END, false)}
+					onTouchStart={track(trackingEnum.END, true)}
+					onTouchEnd={track(trackingEnum.END, false)}
 				/>
 			</TimeInputRange>
 		</TimeInputContainer>

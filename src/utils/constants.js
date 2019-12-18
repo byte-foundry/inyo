@@ -246,7 +246,7 @@ export const LABEL_EMAIL_PARAM = {
 		text: () => fbt('Lien vers la tâche', 'second reminder customer email'),
 	},
 	'task.attachments': {
-		text: () => fbt('Fichiers joints a la tâche', 'third reminder customer email'),
+		text: () => fbt('Fichiers joints à la tâche', 'third reminder customer email'),
 	},
 	'task.listOfAttachmentsNotUploaded': {
 		text: () => fbt('Fichiers à uploader', 'first invoice email'),

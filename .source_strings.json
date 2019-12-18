@@ -12736,7 +12736,7 @@
   },
   {
    "hashToText": {
-    "BnS6VLTPVo8d5lqA6HeLcg==": "Vos nom et prénom"
+    "3Mx9kmQKHfLIXdGAm2yEsw==": "Vos prénom et nom"
    },
    "filepath": "src/utils/constants.js",
    "line_beg": 276,
@@ -12746,7 +12746,7 @@
    "type": "text",
    "desc": "comment added",
    "project": "",
-   "jsfbt": "Vos nom et prénom"
+   "jsfbt": "Vos prénom et nom"
   },
   {
    "hashToText": {
@@ -12820,7 +12820,7 @@
   },
   {
    "hashToText": {
-    "grxdMaqX1bkfVKZhNvqlfQ==": "Nom, prénom et civilité du client"
+    "EKzXbJFi4SkB5w/dIUionA==": "Civilité, prénom et nom du client"
    },
    "filepath": "src/utils/constants.js",
    "line_beg": 297,
@@ -12830,7 +12830,7 @@
    "type": "text",
    "desc": "first reminder invoice email",
    "project": "",
-   "jsfbt": "Nom, prénom et civilité du client"
+   "jsfbt": "Civilité, prénom et nom du client"
   },
   {
    "hashToText": {
@@ -12890,7 +12890,7 @@
   },
   {
    "hashToText": {
-    "FgFrsPPyIXC1OXDG+pHysQ==": "Nom et prénom du destinataire"
+    "Z6ro1XVwsoOYT50d7tkmSQ==": "Prénom et nom du destinataire"
    },
    "filepath": "src/utils/constants.js",
    "line_beg": 315,
@@ -12900,7 +12900,7 @@
    "type": "text",
    "desc": "customer report email",
    "project": "",
-   "jsfbt": "Nom et prénom du destinataire"
+   "jsfbt": "Prénom et nom du destinataire"
   },
   {
    "hashToText": {
@@ -12932,7 +12932,7 @@
   },
   {
    "hashToText": {
-    "gsiBeHjoryZ2KmKAZja3Xw==": "Nom et prénom de l'auteur"
+    "PHBvDcFy8ZAg20OAAuX7nQ==": "Prénom et nom de l'auteur"
    },
    "filepath": "src/utils/constants.js",
    "line_beg": 324,
@@ -12942,7 +12942,7 @@
    "type": "text",
    "desc": "customer report email",
    "project": "",
-   "jsfbt": "Nom et prénom de l'auteur"
+   "jsfbt": "Prénom et nom de l'auteur"
   },
   {
    "hashToText": {

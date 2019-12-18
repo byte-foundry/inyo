@@ -12866,7 +12866,7 @@ reactcss@^1.2.0:
 
 "reactjs-calendar-heatmap@https://github.com/yannickmathey/reactjs-calendar-heatmap":
   version "0.0.10"
-  resolved "https://github.com/yannickmathey/reactjs-calendar-heatmap#88b8c2c11e07f18772754ee03292ea5ff75673d8"
+  resolved "https://github.com/yannickmathey/reactjs-calendar-heatmap#05c6a465355461d6311e370c3c3304646bc1ce67"
 
 read-pkg-up@^2.0.0:
   version "2.0.0"

@@ -4,11 +4,7 @@ import React, {useCallback} from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import CalendarHeatmap from 'reactjs-calendar-heatmap';
 import {
-	VictoryArea,
-	VictoryBar,
-	VictoryLine,
-	VictoryPie,
-	VictoryStack,
+	VictoryArea, VictoryBar, VictoryPie, VictoryStack,
 } from 'victory';
 
 import ArianneThread, {ArianneElem} from '../../../components/ArianneThread';
@@ -33,7 +29,7 @@ import {
 	primaryRed,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_ALL_TASKS_STATS, GET_USER_TAGS} from '../../../utils/queries';
+import {GET_ALL_TASKS_STATS} from '../../../utils/queries';
 import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
@@ -120,13 +116,35 @@ const PieWrapper = styled('div')`
 	grid-gap: 20px;
 `;
 
+const filterTasks = (
+	tasks,
+	filterProp,
+	since,
+	linkedCustomerId,
+	projectId,
+	tags,
+	id,
+) => tasks.filter(
+	task => moment(task[filterProp]).isSameOrAfter(
+		moment().subtract(since, 'days'),
+	)
+			&& (!linkedCustomerId
+				|| ((task.linkedCustomer
+					&& task.linkedCustomer.id === linkedCustomerId)
+					|| (task.section
+						&& task.section.project.customer
+						&& task.section.project.customer.id
+							=== linkedCustomerId)))
+			&& (!task.section
+				|| task.section.project.status !== 'REMOVED'
+				|| projectId)
+			&& (!projectId
+				|| (task.section && task.section.project.id === projectId))
+			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag))
+			&& !(task.assignee && task.assignee.id !== id),
+);
+
 const Stats = ({history, location}) => {
-	const {
-		data: {
-			me: {tags: tagsData},
-		},
-		error: errorTags,
-	} = useQuery(GET_USER_TAGS, {suspend: true});
 	const {
 		data: {
 			me: {id, tasks},
@@ -146,7 +164,7 @@ const Stats = ({history, location}) => {
 	const linkedCustomerId = query.get('customerId');
 	let overview = 'year';
 
-	if (error || errorTags) throw error;
+	if (error) throw error;
 
 	const setSince = useCallback(
 		(value) => {
@@ -227,24 +245,23 @@ const Stats = ({history, location}) => {
 		[query, history],
 	);
 
-	const filteredTasks = tasks.filter(
-		task => moment(task.createdAt).isSameOrAfter(
-			moment().subtract(since, 'days'),
-		)
-			&& (!linkedCustomerId
-				|| ((task.linkedCustomer
-					&& task.linkedCustomer.id === linkedCustomerId)
-					|| (task.section
-						&& task.section.project.customer
-						&& task.section.project.customer.id
-							=== linkedCustomerId)))
-			&& (!task.section
-				|| task.section.project.status !== 'REMOVED'
-				|| projectId)
-			&& (!projectId
-				|| (task.section && task.section.project.id === projectId))
-			&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag))
-			&& !(task.assignee && task.assignee.id !== id),
+	const filteredTasks = filterTasks(
+		tasks,
+		'finishedAt',
+		since,
+		linkedCustomerId,
+		projectId,
+		tags,
+		id,
+	);
+	const createdAtFilteredTasks = filterTasks(
+		tasks,
+		'createdAt',
+		since,
+		linkedCustomerId,
+		projectId,
+		tags,
+		id,
 	);
 
 	const customers = {};
@@ -314,7 +331,7 @@ const Stats = ({history, location}) => {
 		totalTime += time;
 	});
 
-	const reminders = filteredTasks.map(task => task.reminders).flat();
+	const reminders = createdAtFilteredTasks.map(task => task.reminders).flat();
 
 	const allDayWithTasks = [];
 	const startDate = moment();

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled/macro';
 import {Formik} from 'formik';
+import moment from 'moment';
 import React, {useState} from 'react';
 import * as Yup from 'yup';
 
@@ -54,11 +55,18 @@ const BudgetInfo = styled('div')`
 
 	display: flex;
 	flex-direction: row;
+	align-items: center;
+
+	i {
+		margin: 0 0.5rem;
+	}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: row-reverse;
 	}
 `;
+
+const TimeInfo = styled('div')``;
 
 const BudgetGraphFlex = styled(FlexColumn)`
 	margin-right: 4rem;
@@ -270,7 +278,13 @@ const BudgetFormElem = styled(FormElem)`
 	margin-right: 1rem;
 `;
 
-const BudgetAmountAndInput = ({editing, setEditing, ...props}) => (
+const BudgetAmountAndInput = ({
+	editing,
+	setEditing,
+	workingTime,
+	estimatedTime,
+	...props
+}) => (
 	<fbt desc="project's budget">
 		<BudgetLabel>
 			Budget vendu
@@ -357,6 +371,17 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 			),
 		0,
 	);
+
+	const realTime = sections.reduce(
+		(sectionsSum, section) => sectionsSum
+			+ section.items.reduce(
+				(itemsSum, item) => itemsSum + (item.timeItTook || item.unit),
+				0,
+			),
+		0,
+	);
+
+	const {workingTime} = useUserInfos();
 
 	const amendment
 		= Math.round(props.budget - estimatedBudget) < 0
@@ -446,6 +471,19 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 									{Math.round(estimatedBudget)}
 								</fbt:param>
 								{' '}€
+								<fbt:param name="time">
+									<MaterialIcon icon="compare_arrows" />
+								</fbt:param>
+								<TimeInfo>
+									<fbt:param name="time">
+										{moment
+											.duration(
+												realTime * workingTime,
+												'hours',
+											)
+											.format('hh[h]mm')}
+									</fbt:param>
+								</TimeInfo>
 							</BudgetInfo>
 						</fbt>
 					</BudgetInfoContainer>
@@ -472,6 +510,21 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 									{Math.round(props.budget - spentBudget)}
 								</fbt:param>
 								{' '}€
+								<fbt:param name="time">
+									<MaterialIcon icon="compare_arrows" />
+								</fbt:param>
+								<TimeInfo>
+									<fbt:param name="time">
+										{moment
+											.duration(
+												((props.budget - spentBudget)
+													/ defaultDailyPrice)
+													* workingTime,
+												'hours',
+											)
+											.format('hh[h]mm')}
+									</fbt:param>
+								</TimeInfo>
 							</BudgetInfo>
 						</fbt>
 					</BudgetInfoContainer>

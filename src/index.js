@@ -37,13 +37,14 @@ import {
 import {Loading} from './utils/content';
 import {UserContext} from './utils/contexts';
 import client from './utils/graphQLConfig';
-import {Body, Button} from './utils/new/design-system';
+import {Body} from './utils/new/design-system';
 import {CHECK_LOGIN_USER} from './utils/queries';
 
 const Customer = React.lazy(() => import('./screens/Customer'));
 const App = React.lazy(() => import('./screens/App'));
 const Auth = React.lazy(() => import('./screens/Auth'));
 const StraightToCheckout = React.lazy(() => import('./screens/StraightToCheckout'));
+const Quote = React.lazy(() => import('./screens/Quote'));
 const Paid = React.lazy(() => import('./screens/Paid'));
 const EndOfTrial = React.lazy(() => import('./screens/EndOfTrial'));
 const PrematureEndOfTrial = React.lazy(() => import('./screens/PrematureEndOfTrial'));
@@ -182,6 +183,10 @@ function Root() {
 								<Route
 									path="/app/:customerToken(.*-.*-.*-.*)/tasks"
 									render={withTracker(Customer)}
+								/>
+								<Route
+									path="/app/quotes/:quoteId"
+									render={withTracker(Quote)}
 								/>
 								<Redirect
 									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"

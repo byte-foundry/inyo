@@ -11,6 +11,7 @@ import PendingActionsTray from '../../../components/PendingActionsTray';
 import ProjectBudget from '../../../components/ProjectBudget';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
+import ProjectQuotes from '../../../components/ProjectQuotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import ProjectList from '../../../components/ProjectTasksList';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
@@ -154,6 +155,9 @@ function TasksList({location, history}) {
 						)}
 						{view === 'activity' && (
 							<ActivityFeed projectId={projectId} />
+						)}
+						{view === 'quotes' && (
+							<ProjectQuotes projectId={projectId} />
 						)}
 					</Suspense>
 					{isTasksView && (

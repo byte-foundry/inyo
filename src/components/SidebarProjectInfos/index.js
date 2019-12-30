@@ -352,6 +352,33 @@ const SidebarProjectInfos = ({
 						/>
 					</SidebarLink>
 				</Tooltip>
+				<Tooltip
+					label={
+						<fbt desc="sidebar project quote link tooltip">
+							Générer un devis
+						</fbt>
+					}
+				>
+					<SidebarLink
+						onClick={() => setView('quotes')}
+						active={activeView === 'quotes'}
+						id="quote-project-button"
+					>
+						<IconButton
+							icon="description"
+							size="tiny"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project quotes link label"
+								>
+									Devis
+								</fbt>
+							}
+							current={activeView === 'quotes'}
+						/>
+					</SidebarLink>
+				</Tooltip>
 			</SubSection>
 			<SubSection>
 				{project.customer ? (

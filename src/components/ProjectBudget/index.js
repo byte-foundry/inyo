@@ -570,6 +570,7 @@ const BudgetDisplay = ({sections, defaultDailyPrice, ...props}) => {
 				</FlexRowHeader>
 				{sections.map(section => (
 					<BudgetSection
+						key={section.id}
 						section={section}
 						defaultDailyPrice={defaultDailyPrice}
 					/>

@@ -225,6 +225,30 @@ export const GET_PROJECT_PERSONAL_NOTES = gql`
 	}
 `;
 
+export const GET_PROJECT_QUOTES = gql`
+	query getProjectQuotes($id: ID!) {
+		project(id: $id) {
+			id
+			quoteHeader
+			quoteFooter
+			sections {
+				id
+				name
+				position
+				items {
+					id
+					name
+					unit
+					dailyRate
+				}
+			}
+			quotes {
+				id
+			}
+		}
+	}
+`;
+
 export const GET_PROJECT_COLLAB_LINK = gql`
 	query getProjectCollabLink($id: ID!) {
 		project(id: $id) {

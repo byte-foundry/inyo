@@ -333,6 +333,20 @@ export const UPDATE_PROJECT_SHARED_NOTES = gql`
 	}
 `;
 
+export const UPDATE_PROJECT_QUOTE = gql`
+	mutation updateProject($id: ID!, $quoteHeader: Json, $quoteFooter: Json) {
+		updateProject(
+			id: $id
+			quoteHeader: $quoteHeader
+			quoteFooter: $quoteFooter
+		) {
+			id
+			quoteHeader
+			sharedNotes
+		}
+	}
+`;
+
 export const START_PROJECT = gql`
 	# creating project with a customer id or a new customer
 	mutation startProject($projectId: ID!, $notifyCustomer: Boolean) {
@@ -1047,5 +1061,23 @@ export const SET_TEMPLATE_TO_DEFAULT = gql`
 export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
 	mutation sendCustomEmailPreview($subject: Json!, $content: Json!) {
 		sent: sendCustomEmailPreview(subject: $subject, content: $content)
+	}
+`;
+
+export const ISSUE_QUOTE = gql`
+	mutation issueQuote(
+		$projectId: ID!
+		$sections: [QuoteSectionInput!]
+		$header: Json
+		$footer: Json
+	) {
+		issueQuote(
+			projectId: $projectId
+			sections: $sections
+			header: $header
+			footer: $footer
+		) {
+			id
+		}
 	}
 `;

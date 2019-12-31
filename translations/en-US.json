@@ -1571,6 +1571,16 @@
     }
    ]
   },
+  "nCFWeKwdCTwbDAUpMdEHSw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Test email sent",
+     "variations": {}
+    }
+   ]
+  },
   "FVFcJgCcwMFjVCavCmYN+g==": {
    "tokens": [],
    "types": [],
@@ -3221,17 +3231,17 @@
     }
    ]
   },
-  "+a28apNacBiALR3YZvYZpw==": {
+  "n8SQeum+Zg7LoNsiqWZvFQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Budget réel [budget]}{=[budget]€}",
+     "translation": "{=Budget réel [budget]}{=[budget]€ [time][time]}",
      "variations": {}
     }
    ]
   },
-  "pgEn6hWhH58HKuwYd5vSqA==": {
+  "xuTf6C89LuAC77hjg1eubQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3261,32 +3271,42 @@
     }
    ]
   },
-  "HwwlTPsKKWIIHQfdKeKOLA==": {
+  "O/TWJWAsOwDVWSn6+px1/w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "${budget}",
+     "translation": "${budget} {time}{=[time]}",
      "variations": {}
     }
    ]
   },
-  "fDL30wt24taCtWMkf9Ixig==": {
+  "1R6ta7UH4Jxxs/dFTcCw4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Budget restant [budget]}{=[budget]€}",
+     "translation": "{time}",
      "variations": {}
     }
    ]
   },
-  "Y/oOFvGMTbCxq8HijZoINw==": {
+  "Q3fToRZjtNpORL7Q84CY4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Budget remaining {budget}",
+     "translation": "{=Budget restant [budget]}{=[budget]€ [time][time]}",
+     "variations": {}
+    }
+   ]
+  },
+  "snt0dz+OptAjUGFIagZEhw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Remaining budget {budget}",
      "variations": {}
     }
    ]
@@ -3311,12 +3331,22 @@
     }
    ]
   },
-  "O5c0X22iNXX2xv7XakE9Yg==": {
+  "kJdUfbfITdGfnusUmc3ycg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "${budget}",
+     "translation": "${budget} {time}{=[time]}",
+     "variations": {}
+    }
+   ]
+  },
+  "bR5byAVHL3I1O4UtGm1Ihg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{time}",
      "variations": {}
     }
    ]
@@ -7121,16 +7151,6 @@
     }
    ]
   },
-  "W5STaCc0HqXQqGj8/PGTcg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "No category",
-     "variations": {}
-    }
-   ]
-  },
   "1K/eeL6OoINQBgAI2S+tCQ==": {
    "tokens": [],
    "types": [],
@@ -8767,6 +8787,76 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "+a28apNacBiALR3YZvYZpw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget réel [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "pgEn6hWhH58HKuwYd5vSqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Real budget {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "HwwlTPsKKWIIHQfdKeKOLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "fDL30wt24taCtWMkf9Ixig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget restant [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "Y/oOFvGMTbCxq8HijZoINw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget remaining {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "O5c0X22iNXX2xv7XakE9Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "W5STaCc0HqXQqGj8/PGTcg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No category",
      "variations": {}
     }
    ]

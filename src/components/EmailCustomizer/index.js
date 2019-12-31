@@ -446,36 +446,42 @@ const EmailCustomizer = ({emailType}) => {
 				</Button>
 				<Button
 					onClick={async () => {
-						try {
-							updateEmailTemplate({
-								variables: {
-									templateId: data.emailTemplate.id,
-									timing: {
-										unit,
-										value,
-										isRelative,
-									},
-									subject: subjectEditorRef.current.value,
-									content: contentEditorRef.current.value,
-								},
-							});
-						}
-						catch (error) {
-							if (
-								error.networkError
-								&& error.networkError.result
-								&& error.networkError.result.errors
-							) {
-								Sentry.captureException(
-									error.networkError.result.errors,
-								);
-							}
-							else {
-								Sentry.captureException(error);
-							}
-						}
+						console.log(
+							JSON.stringify(contentEditorRef.current.value),
+						);
+						console.log(
+							JSON.stringify(subjectEditorRef.current.value),
+						);
+						// try {
+						// 	updateEmailTemplate({
+						// 		variables: {
+						// 			templateId: data.emailTemplate.id,
+						// 			timing: {
+						// 				unit,
+						// 				value,
+						// 				isRelative,
+						// 			},
+						// 			subject: subjectEditorRef.current.value,
+						// 			content: contentEditorRef.current.value,
+						// 		},
+						// 	});
+						// }
+						// catch (error) {
+						// 	if (
+						// 		error.networkError
+						// 		&& error.networkError.result
+						// 		&& error.networkError.result.errors
+						// 	) {
+						// 		Sentry.captureException(
+						// 			error.networkError.result.errors,
+						// 		);
+						// 	}
+						// 	else {
+						// 		Sentry.captureException(error);
+						// 	}
+						// }
 
-						displayToast();
+						// displayToast();
 					}}
 				>
 					<fbt desc="save custom email">Enregistrer ce modèle</fbt>

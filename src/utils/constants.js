@@ -281,7 +281,7 @@ export const LABEL_EMAIL_PARAM = {
 	'user.email': {
 		text: () => fbt('Votre email', 'first reminder customer email'),
 	},
-	'user.listOfTasksCompleteOnDay': {
+	'user.listOfTasksCompletedOnDay': {
 		text: () => fbt(
 			"Tâches que vous avez complété aujourd'hui",
 			'second reminder customer email',

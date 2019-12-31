@@ -1,12 +1,18 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {FlexColumn, FlexRow, LoadingLogo} from '../../utils/content';
-import {ISSUE_QUOTE, UPDATE_PROJECT_QUOTE} from '../../utils/mutations';
 import {
+	ISSUE_QUOTE,
+	UPDATE_PROJECT_QUOTE,
+	UPDATE_SECTION,
+} from '../../utils/mutations';
+import {
+	A,
 	Button,
 	Input,
 	lightGrey,
@@ -106,22 +112,9 @@ const BudgetSectionInput = styled(Input)`
 `;
 
 const BudgetSection = ({
-	section,
-	sectionPrice,
-	defaultDailyPrice,
-	onChangePrice,
+	section, price, defaultDailyPrice, onChangePrice,
 }) => {
 	const [open, setOpen] = useState(false);
-	const sectionBudgetUnworked
-		= typeof sectionPrice === 'number'
-			? sectionPrice
-			: Math.round(
-				section.items.reduce(
-					(itemsSum, item) => itemsSum
-							+ item.unit * (item.dailyRate || defaultDailyPrice),
-					0,
-				),
-			  );
 
 	return (
 		<BudgetSectionContainer onClick={() => setOpen(!open)}>
@@ -136,7 +129,7 @@ const BudgetSection = ({
 				<BudgetSectionBudget>
 					<BudgetSectionInput
 						type="number"
-						value={sectionBudgetUnworked}
+						value={price}
 						onClick={e => e.stopPropagation()}
 						onChange={e => onChangePrice(parseFloat(e.target.value))
 						}
@@ -147,6 +140,7 @@ const BudgetSection = ({
 			<BudgetItems open={open}>
 				{section.items.map(item => (
 					<BudgetItem
+						key={item.id}
 						item={item}
 						defaultDailyPrice={defaultDailyPrice}
 					/>
@@ -160,6 +154,8 @@ const Container = styled('div')`
 	flex: 1;
 `;
 
+const ObjectLink = A.withComponent(Link);
+
 const ProjectQuotes = ({projectId}) => {
 	const {defaultDailyPrice, workingTime} = useUserInfos();
 	const [quoteCreated, setQuoteCreated] = useState(null);
@@ -170,29 +166,58 @@ const ProjectQuotes = ({projectId}) => {
 			const defaultPrices = {};
 
 			project.sections.forEach((section) => {
-				defaultPrices[section.id] = section.items.reduce(
-					(price, t) => price
-						+ t.unit
-							* workingTime
-							* (t.dailyRate || defaultDailyPrice),
-					0,
-				);
+				defaultPrices[section.id]
+					= section.price
+					|| section.items.reduce(
+						(price, t) => price
+							+ t.unit
+								* workingTime
+								* (t.dailyRate || defaultDailyPrice),
+						0,
+					);
 			});
 
 			setPrices(defaultPrices);
 		},
 	});
 	const [updateProject] = useMutation(UPDATE_PROJECT_QUOTE);
+	const [updateSection] = useMutation(UPDATE_SECTION);
 	const [issueQuote] = useMutation(ISSUE_QUOTE);
 
 	if (error) throw error;
 	if (loading) return <LoadingLogo />;
 
-	console.log(quoteCreated);
-
 	return (
 		<Container>
 			<SubHeading>Devis</SubHeading>
+
+			<Button
+				onClick={async () => {
+					await data.project.sections.map(s => updateSection({
+						variables: {
+							sectionId: s.id,
+							price: null,
+						},
+					}));
+
+					const defaultPrices = {};
+					data.project.sections.forEach((section) => {
+						defaultPrices[section.id] = section.items.reduce(
+							(price, t) => price
+								+ t.unit
+									* workingTime
+									* (t.dailyRate || defaultDailyPrice),
+							0,
+						);
+					});
+					setPrices(defaultPrices);
+				}}
+			>
+				<fbt desc="project quote synchronize prices button">
+					Re-synchroniser les prix
+				</fbt>
+			</Button>
+
 			{quoteCreated ? (
 				<P>
 					Le devis a bien été créé, vous pouvez le partager avec votre
@@ -215,10 +240,14 @@ const ProjectQuotes = ({projectId}) => {
 						<BudgetSection
 							key={section.id}
 							section={section}
-							sectionPrice={prices[section.id]}
+							price={prices[section.id] || 0}
 							defaultDailyPrice={defaultDailyPrice}
-							onChangePrice={price => setPrices({...prices, [section.id]: price})
-							}
+							onChangePrice={(price) => {
+								setPrices({...prices, [section.id]: price});
+								updateSection({
+									variables: {sectionId: section.id, price},
+								});
+							}}
 						/>
 					))}
 					<RichTextEditor
@@ -262,7 +291,16 @@ const ProjectQuotes = ({projectId}) => {
 			<ul>
 				{data.project.quotes.map(quote => (
 					<li key={quote.id}>
-						{quote.id} {quote.createdAt}
+						<ObjectLink
+							to={`/app/${
+								data.project.customer
+									? data.project.customer.token
+									: data.project.token
+							}/quotes/${quote.id}`}
+						>
+							{quote.id}
+						</ObjectLink>{' '}
+						{new Date(quote.createdAt).toLocaleString()}
 					</li>
 				))}
 			</ul>

@@ -229,12 +229,18 @@ export const GET_PROJECT_QUOTES = gql`
 	query getProjectQuotes($id: ID!) {
 		project(id: $id) {
 			id
+			token
 			quoteHeader
 			quoteFooter
+			customer {
+				id
+				token
+			}
 			sections {
 				id
 				name
 				position
+				price
 				items {
 					id
 					name
@@ -244,6 +250,7 @@ export const GET_PROJECT_QUOTES = gql`
 			}
 			quotes {
 				id
+				createdAt
 			}
 		}
 	}
@@ -880,6 +887,21 @@ export const GET_EMAIL_TEMPLATE = gql`
 			timing
 			subject
 			content
+		}
+	}
+`;
+
+export const GET_QUOTE = gql`
+	query getQuote($id: ID!) {
+		quote(id: $id) {
+			id
+			header
+			footer
+			sections {
+				id
+				name
+				price
+			}
 		}
 	}
 `;

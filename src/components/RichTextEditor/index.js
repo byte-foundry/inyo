@@ -45,11 +45,39 @@ const INITIAL_EDITOR_VALUE = {
 	},
 };
 
-const RichTextEditor = ({defaultValue, onChange}) => {
+const RichTextEditor = ({defaultValue, onChange, displayMode}) => {
 	const [value, setValue] = useState(
 		Value.fromJSON(defaultValue || INITIAL_EDITOR_VALUE),
 	);
 	const editorRef = useRef();
+
+	const renderMark = (props, editor, next) => {
+		const {children, mark, attributes} = props;
+
+		switch (mark.type) {
+		case 'bold':
+			return <strong {...attributes}>{children}</strong>;
+		case 'italic':
+			return <em {...attributes}>{children}</em>;
+		case 'underlined':
+			return <u {...attributes}>{children}</u>;
+		default:
+			return next();
+		}
+	};
+
+	if (displayMode) {
+		return (
+			<Editor
+				readOnly
+				spellCheck
+				autoFocus
+				ref={editorRef}
+				value={value}
+				renderMark={renderMark}
+			/>
+		);
+	}
 
 	const onClickMark = (event, type) => {
 		event.preventDefault();
@@ -113,20 +141,7 @@ const RichTextEditor = ({defaultValue, onChange}) => {
 					event.preventDefault();
 					editor.toggleMark(mark);
 				}}
-				renderMark={(props, editor, next) => {
-					const {children, mark, attributes} = props;
-
-					switch (mark.type) {
-					case 'bold':
-						return <strong {...attributes}>{children}</strong>;
-					case 'italic':
-						return <em {...attributes}>{children}</em>;
-					case 'underlined':
-						return <u {...attributes}>{children}</u>;
-					default:
-						return next();
-					}
-				}}
+				renderMark={renderMark}
 			/>
 		</Container>
 	);

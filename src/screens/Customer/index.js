@@ -6,18 +6,16 @@ import {Route, Switch} from 'react-router-dom';
 import {useQuery} from '../../utils/apollo-hooks';
 import {CustomerContext} from '../../utils/contexts';
 import {GET_CUSTOMER_LANGUAGE} from '../../utils/queries';
+import Quote from './Quote';
 import CustomerTasks from './Tasks';
 
 export default function Customer({match}) {
-	const {data: dataLanguage, loading: loadingLanguage} = useQuery(
-		GET_CUSTOMER_LANGUAGE,
-		{
-			variables: {
-				token: match.params.customerToken,
-			},
-			fetchPolicy: 'network-only',
+	const {data: dataLanguage} = useQuery(GET_CUSTOMER_LANGUAGE, {
+		variables: {
+			token: match.params.customerToken,
 		},
-	);
+		fetchPolicy: 'network-only',
+	});
 
 	if (
 		dataLanguage
@@ -35,6 +33,10 @@ export default function Customer({match}) {
 				<Route
 					path="/app/:customerToken/tasks"
 					component={CustomerTasks}
+				/>
+				<Route
+					path="/app/:customerToken/quotes/:quoteId"
+					component={Quote}
 				/>
 			</Switch>
 		</CustomerContext.Provider>

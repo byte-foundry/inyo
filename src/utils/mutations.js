@@ -474,11 +474,22 @@ export const UPDATE_SECTION = gql`
 	${ITEM_FRAGMENT}
 	${PROJECT_SHORT_FRAGMENT}
 
-	mutation updateSection($sectionId: ID!, $name: String, $position: Int) {
-		updateSection(id: $sectionId, name: $name, position: $position) {
+	mutation updateSection(
+		$sectionId: ID!
+		$name: String
+		$position: Int
+		$price: Float
+	) {
+		updateSection(
+			id: $sectionId
+			name: $name
+			position: $position
+			price: $price
+		) {
 			id
 			name
 			position
+			price
 			project {
 				...ProjectShortFragment
 				customer {

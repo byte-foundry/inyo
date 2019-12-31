@@ -44,7 +44,6 @@ const Customer = React.lazy(() => import('./screens/Customer'));
 const App = React.lazy(() => import('./screens/App'));
 const Auth = React.lazy(() => import('./screens/Auth'));
 const StraightToCheckout = React.lazy(() => import('./screens/StraightToCheckout'));
-const Quote = React.lazy(() => import('./screens/Quote'));
 const Paid = React.lazy(() => import('./screens/Paid'));
 const EndOfTrial = React.lazy(() => import('./screens/EndOfTrial'));
 const PrematureEndOfTrial = React.lazy(() => import('./screens/PrematureEndOfTrial'));
@@ -181,12 +180,8 @@ function Root() {
 						<UserContext.Provider user={data && data.me}>
 							<Switch>
 								<Route
-									path="/app/:customerToken(.*-.*-.*-.*)/tasks"
+									path="/app/:customerToken(.*-.*-.*-.*)"
 									render={withTracker(Customer)}
-								/>
-								<Route
-									path="/app/quotes/:quoteId"
-									render={withTracker(Quote)}
 								/>
 								<Redirect
 									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"

@@ -278,11 +278,25 @@ const EmailCustomizer = ({emailType}) => {
 		);
 	}
 
-	const displayToast = () => {
+	const displayToastSave = () => {
 		toast.info(
 			<p>
 				<fbt project="inyo" desc="data updated">
 					Les données ont été mises à jour
+				</fbt>
+			</p>,
+			{
+				position: toast.POSITION.BOTTOM_LEFT,
+				autoClose: 3000,
+			},
+		);
+	};
+
+	const displayToastSent = () => {
+		toast.info(
+			<p>
+				<fbt project="inyo" desc="data updated">
+					Email de test envoyé
 				</fbt>
 			</p>,
 			{
@@ -313,13 +327,31 @@ const EmailCustomizer = ({emailType}) => {
 			/>
 			<TestEmailLinkContainer>
 				<TestEmailLink
-					onClick={() => {
-						sendCustomEmailPreview({
-							variables: {
-								subject: subjectEditorRef.current.value,
-								content: contentEditorRef.current.value,
-							},
-						});
+					onClick={async () => {
+						try {
+							await sendCustomEmailPreview({
+								variables: {
+									subject: subjectEditorRef.current.value,
+									content: contentEditorRef.current.value,
+								},
+							});
+						}
+						catch (errorSent) {
+							if (
+								errorSent.networkError
+								&& errorSent.networkError.result
+								&& errorSent.networkError.result.errors
+							) {
+								Sentry.captureException(
+									errorSent.networkError.result.errors,
+								);
+							}
+							else {
+								Sentry.captureException(errorSent);
+							}
+						}
+
+						displayToastSent();
 					}}
 				>
 					<fbt desc="send test custom email">
@@ -446,42 +478,36 @@ const EmailCustomizer = ({emailType}) => {
 				</Button>
 				<Button
 					onClick={async () => {
-						console.log(
-							JSON.stringify(contentEditorRef.current.value),
-						);
-						console.log(
-							JSON.stringify(subjectEditorRef.current.value),
-						);
-						// try {
-						// 	updateEmailTemplate({
-						// 		variables: {
-						// 			templateId: data.emailTemplate.id,
-						// 			timing: {
-						// 				unit,
-						// 				value,
-						// 				isRelative,
-						// 			},
-						// 			subject: subjectEditorRef.current.value,
-						// 			content: contentEditorRef.current.value,
-						// 		},
-						// 	});
-						// }
-						// catch (error) {
-						// 	if (
-						// 		error.networkError
-						// 		&& error.networkError.result
-						// 		&& error.networkError.result.errors
-						// 	) {
-						// 		Sentry.captureException(
-						// 			error.networkError.result.errors,
-						// 		);
-						// 	}
-						// 	else {
-						// 		Sentry.captureException(error);
-						// 	}
-						// }
+						try {
+							await updateEmailTemplate({
+								variables: {
+									templateId: data.emailTemplate.id,
+									timing: {
+										unit,
+										value,
+										isRelative,
+									},
+									subject: subjectEditorRef.current.value,
+									content: contentEditorRef.current.value,
+								},
+							});
+						}
+						catch (errorSave) {
+							if (
+								errorSave.networkError
+								&& errorSave.networkError.result
+								&& errorSave.networkError.result.errors
+							) {
+								Sentry.captureException(
+									errorSave.networkError.result.errors,
+								);
+							}
+							else {
+								Sentry.captureException(errorSave);
+							}
+						}
 
-						// displayToast();
+						displayToastSave();
 					}}
 				>
 					<fbt desc="save custom email">Enregistrer ce modèle</fbt>

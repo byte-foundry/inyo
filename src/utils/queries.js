@@ -317,6 +317,7 @@ export const GET_PROJECT_INFOS = gql`
 				}
 			}
 			issuer {
+				id
 				name
 				email
 				phone
@@ -374,6 +375,7 @@ export const GET_PROJECT_DATA = gql`
 		project(id: $projectId) {
 			...ProjectShortFragment
 			issuer {
+				id
 				name
 				email
 				phone
@@ -897,6 +899,36 @@ export const GET_QUOTE = gql`
 			id
 			header
 			footer
+			project {
+				id
+				issuer {
+					id
+					logo {
+						id
+						url
+					}
+					address {
+						street
+						city
+						postalCode
+						country
+					}
+					owner {
+						firstName
+						lastName
+						email
+					}
+				}
+				customer {
+					id
+					name
+					title
+					firstName
+					lastName
+					email
+					phone
+				}
+			}
 			sections {
 				id
 				name

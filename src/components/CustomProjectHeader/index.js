@@ -67,7 +67,7 @@ const AttributionLink = styled(P)`
 	}
 `;
 
-const CustomProjectHeader = ({projectId, customerToken}) => {
+const CustomProjectHeader = ({projectId, customerToken, noProgress}) => {
 	const token = customerToken === 'preview' ? undefined : customerToken;
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token},
@@ -83,10 +83,12 @@ const CustomProjectHeader = ({projectId, customerToken}) => {
 		<Container backgroundUrl={banner && (banner.url || banner.urls.full)}>
 			<ContentContainer>
 				<Heading>{project.name}</Heading>
-				<TasksProgressBar
-					project={project}
-					customerToken={customerToken}
-				/>
+				{!noProgress && (
+					<TasksProgressBar
+						project={project}
+						customerToken={customerToken}
+					/>
+				)}
 			</ContentContainer>
 			{banner && banner.urls && (
 				<AttributionLink>

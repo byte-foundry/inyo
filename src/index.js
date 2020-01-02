@@ -180,11 +180,11 @@ function Root() {
 						<UserContext.Provider user={data && data.me}>
 							<Switch>
 								<Route
-									path="/app/:customerToken(.*-.*-.*-.*)"
+									path="/app/:customerToken(.*-.*-.*-\w*)"
 									render={withTracker(Customer)}
 								/>
 								<Redirect
-									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
+									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-\w*)"
 									to="/app/:customerToken/tasks?projectId=:projectId"
 								/>
 								<Route

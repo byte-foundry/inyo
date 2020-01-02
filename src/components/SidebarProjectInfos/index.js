@@ -352,6 +352,33 @@ const SidebarProjectInfos = ({
 						/>
 					</SidebarLink>
 				</Tooltip>
+				<Tooltip
+					label={
+						<fbt desc="sidebar project activity link tooltip">
+							Documents du projet
+						</fbt>
+					}
+				>
+					<SidebarLink
+						onClick={() => setView('documents')}
+						active={activeView === 'documents'}
+						id="document-project-button"
+					>
+						<IconButton
+							icon="folder"
+							size="tiny"
+							label={
+								<fbt
+									project="inyo"
+									desc="sidebar project activity link label"
+								>
+									Documents
+								</fbt>
+							}
+							current={activeView === 'documents'}
+						/>
+					</SidebarLink>
+				</Tooltip>
 			</SubSection>
 			<SubSection>
 				{project.customer ? (

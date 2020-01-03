@@ -157,7 +157,7 @@ const Container = styled('div')`
 const ObjectLink = A.withComponent(Link);
 
 const ProjectQuotes = ({projectId}) => {
-	const {defaultDailyPrice, workingTime} = useUserInfos();
+	const {defaultDailyPrice} = useUserInfos();
 	const [quoteCreated, setQuoteCreated] = useState(null);
 	const [prices, setPrices] = useState({});
 	const {data, error, loading} = useQuery(GET_PROJECT_QUOTES, {
@@ -169,10 +169,7 @@ const ProjectQuotes = ({projectId}) => {
 				defaultPrices[section.id]
 					= section.price
 					|| section.items.reduce(
-						(price, t) => price
-							+ t.unit
-								* workingTime
-								* (t.dailyRate || defaultDailyPrice),
+						(price, t) => price + t.unit * (t.dailyRate || defaultDailyPrice),
 						0,
 					);
 			});
@@ -204,9 +201,7 @@ const ProjectQuotes = ({projectId}) => {
 					data.project.sections.forEach((section) => {
 						defaultPrices[section.id] = section.items.reduce(
 							(price, t) => price
-								+ t.unit
-									* workingTime
-									* (t.dailyRate || defaultDailyPrice),
+								+ t.unit * (t.dailyRate || defaultDailyPrice),
 							0,
 						);
 					});

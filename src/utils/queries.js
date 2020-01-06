@@ -126,6 +126,17 @@ export const GET_USER_INFOS = gql`
 						}
 					}
 				}
+				documents {
+					id
+					filename
+					url
+					owner {
+						... on User {
+							firstName
+							lastName
+						}
+					}
+				}
 				address {
 					street
 					city

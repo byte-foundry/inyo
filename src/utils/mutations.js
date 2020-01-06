@@ -223,6 +223,17 @@ export const UPDATE_USER_COMPANY = gql`
 						}
 					}
 				}
+				documents {
+					id
+					filename
+					url
+					owner {
+						... on User {
+							firstName
+							lastName
+						}
+					}
+				}
 				address {
 					street
 					city

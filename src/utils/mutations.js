@@ -1089,6 +1089,7 @@ export const ISSUE_QUOTE = gql`
 			footer: $footer
 		) {
 			id
+			createdAt
 		}
 	}
 `;

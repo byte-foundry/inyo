@@ -213,76 +213,82 @@ const ProjectQuotes = ({projectId}) => {
 				</fbt>
 			</Button>
 
-			{quoteCreated ? (
+			<RichTextEditor
+				placeholder={fbt(
+					'En-tête du devis...',
+					'quote header placeholder',
+				)}
+				onChange={value => updateProject({
+					variables: {id: projectId, quoteHeader: value},
+				})
+				}
+				defaultValue={data.project.quoteHeader}
+			/>
+			{data.project.sections.map(section => (
+				<BudgetSection
+					key={section.id}
+					section={section}
+					price={prices[section.id] || 0}
+					defaultDailyPrice={defaultDailyPrice}
+					onChangePrice={(price) => {
+						setPrices({...prices, [section.id]: price});
+						updateSection({
+							variables: {sectionId: section.id, price},
+						});
+					}}
+				/>
+			))}
+			<RichTextEditor
+				placeholder={fbt(
+					'Pied de page du devis...',
+					'quote footer placeholder',
+				)}
+				onChange={value => updateProject({
+					variables: {id: projectId, quoteFooter: value},
+				})
+				}
+				defaultValue={data.project.quoteFooter}
+			/>
+			<Button
+				onClick={async () => {
+					const response = await issueQuote({
+						variables: {
+							projectId,
+							header: data.project.quoteHeader,
+							footer: data.project.quoteFooter,
+							sections: data.project.sections.map(section => ({
+								name: section.name,
+								price: prices[section.id],
+							})),
+						},
+					});
+
+					setQuoteCreated(response.data.issueQuote);
+				}}
+			>
+				<fbt desc="project generate quote button">
+					Générer un nouveau devis
+				</fbt>
+			</Button>
+			{quoteCreated && (
 				<P>
 					Le devis a bien été créé, vous pouvez le partager avec votre
-					client en copiant le lien suivant : {quoteCreated.token}
-				</P>
-			) : (
-				<>
-					<RichTextEditor
-						placeholder={fbt(
-							'En-tête du devis...',
-							'quote header placeholder',
-						)}
-						onChange={value => updateProject({
-							variables: {id: projectId, quoteHeader: value},
-						})
-						}
-						defaultValue={data.project.quoteHeader}
-					/>
-					{data.project.sections.map(section => (
-						<BudgetSection
-							key={section.id}
-							section={section}
-							price={prices[section.id] || 0}
-							defaultDailyPrice={defaultDailyPrice}
-							onChangePrice={(price) => {
-								setPrices({...prices, [section.id]: price});
-								updateSection({
-									variables: {sectionId: section.id, price},
-								});
-							}}
-						/>
-					))}
-					<RichTextEditor
-						placeholder={fbt(
-							'Pied de page du devis...',
-							'quote footer placeholder',
-						)}
-						onChange={value => updateProject({
-							variables: {id: projectId, quoteFooter: value},
-						})
-						}
-						defaultValue={data.project.quoteFooter}
-					/>
-					<Button
-						onClick={async () => {
-							const response = await issueQuote({
-								variables: {
-									projectId,
-									header: data.project.quoteHeader,
-									footer: data.project.quoteFooter,
-									sections: data.project.sections.map(
-										section => ({
-											name: section.name,
-											price: prices[section.id],
-										}),
-									),
-								},
-							});
-
-							setQuoteCreated(response.data.issueQuote);
-						}}
+					client en copiant le lien suivant :
+					<ObjectLink
+						to={`/app/${
+							data.project.customer
+								? data.project.customer.token
+								: data.project.token
+						}/quotes/${quoteCreated.id}`}
 					>
-						<fbt desc="project generate quote button">
-							Générer un nouveau devis
-						</fbt>
-					</Button>
-				</>
+						{quoteCreated.id}
+					</ObjectLink>
+				</P>
 			)}
 
-			<SubHeading>Devis générés</SubHeading>
+			<SubHeading>
+				<fbt desc="generated quotes">Devis générés</fbt>
+			</SubHeading>
 			<ul>
 				{data.project.quotes.map(quote => (
 					<li key={quote.id}>

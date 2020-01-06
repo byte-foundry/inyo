@@ -698,6 +698,7 @@ export const CREATE_CUSTOMER = gql`
 		$title: Title
 		$phone: String
 		$occupation: String
+		$address: AddressInput
 		$userNotes: Json
 	) {
 		createCustomer(
@@ -708,6 +709,7 @@ export const CREATE_CUSTOMER = gql`
 			title: $title
 			phone: $phone
 			occupation: $occupation
+			address: $address
 			userNotes: $userNotes
 		) {
 			id
@@ -718,6 +720,12 @@ export const CREATE_CUSTOMER = gql`
 			email
 			phone
 			occupation
+			address {
+				street
+				city
+				postalCode
+				country
+			}
 			userNotes
 		}
 	}
@@ -733,6 +741,7 @@ export const UPDATE_CUSTOMER = gql`
 		$title: Title
 		$phone: String
 		$occupation: String
+		$address: AddressInput
 		$userNotes: Json
 	) {
 		updateCustomer(
@@ -744,6 +753,7 @@ export const UPDATE_CUSTOMER = gql`
 			email: $email
 			phone: $phone
 			occupation: $occupation
+			address: $address
 			userNotes: $userNotes
 		) {
 			id
@@ -754,6 +764,12 @@ export const UPDATE_CUSTOMER = gql`
 			email
 			phone
 			occupation
+			address {
+				street
+				city
+				postalCode
+				country
+			}
 			userNotes
 		}
 	}

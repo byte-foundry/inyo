@@ -43,6 +43,12 @@ export const GET_USER_CUSTOMERS = gql`
 				phone
 				occupation
 				userNotes
+				address {
+					street
+					city
+					postalCode
+					country
+				}
 			}
 		}
 	}

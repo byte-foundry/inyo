@@ -1,6 +1,17 @@
 import produce from 'immer';
 
 export default {
+	getItemDetails: ({mutation, query}) => {
+		const uploadedAttachments = mutation.result.data.uploadAttachments;
+
+		return produce(query.result, (draft) => {
+			uploadedAttachments.forEach((attachment) => {
+				if (!draft.item.attachments.find(a => attachment.id === a.id)) {
+					draft.item.attachments.push(attachment);
+				}
+			});
+		});
+	},
 	getProjectData: ({mutation, query}) => {
 		const uploadedAttachments = mutation.result.data.uploadAttachments;
 		const {taskId} = mutation.variables;
@@ -9,24 +20,16 @@ export default {
 		return produce(queryResult, (draft) => {
 			draft.project.sections.forEach((section) => {
 				section.items.forEach((item) => {
-					if (item.id === taskId) {
-						item.attachments.push(...uploadedAttachments);
-					}
+					uploadedAttachments.forEach((attachment) => {
+						if (
+							item.id === taskId
+							&& !item.attachments.find(a => attachment.id === a.id)
+						) {
+							item.attachments.push(attachment);
+						}
+					});
 				});
 			});
 		});
-	},
-	getItemDetails: ({mutation, query}) => {
-		const cachedItem = query.result.item;
-		const {attachments} = cachedItem;
-		const uploadedAttachments = mutation.result.data.uploadAttachments;
-
-		return {
-			...query.result,
-			item: {
-				...cachedItem,
-				attachments: [...attachments, ...uploadedAttachments],
-			},
-		};
 	},
 };

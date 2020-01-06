@@ -1,8 +1,10 @@
 import styled from '@emotion/styled/macro';
 import React, {useState} from 'react';
+import FileIcon, {defaultStyles} from 'react-file-icon';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
+import {documentTypes} from '../../utils/constants';
 import {ReactComponent as SectionIcon} from '../../utils/icons/section-icon.svg';
 import {REMOVE_ATTACHMENTS, UPLOAD_ATTACHMENTS} from '../../utils/mutations';
 import {TaskIcon} from '../../utils/new/design-system';
@@ -180,11 +182,46 @@ const ProjectDocumentsFolders = ({projectId}) => {
 		suspend: true,
 	});
 
+	const files = projectData.project.sections.flatMap(section => section.items.flatMap(item => item.attachments.map(attachment => ({
+		...attachment,
+		itemName: item.name,
+		sectionName: section.name,
+	}))));
+
 	return (
 		<DocumentFolders>
-			{projectData.project.sections.map(section => (
+			<div>
+				{documentTypes.map(docType => (
+					<div>{docType.name}</div>
+				))}
+			</div>
+			{files.map((file) => {
+				const filenameSplit = file.filename.split('.');
+				const extension = filenameSplit[filenameSplit.length - 1];
+
+				return (
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							marginBottom: '0.5rem',
+						}}
+					>
+						<FileIcon
+							size="32"
+							extension={extension}
+							{...(defaultStyles[extension] || {})}
+						/>
+						<a href={file.url} style={{margin: '0 0.5rem'}}>
+							{file.filename}
+						</a>{' '}
+						- {file.sectionName} - {file.itemName}
+					</div>
+				);
+			})}
+			{/* projectData.project.sections.map(section => (
 				<SectionDocumentFolders section={section} />
-			))}
+			)) */}
 		</DocumentFolders>
 	);
 };

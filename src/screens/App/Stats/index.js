@@ -162,7 +162,15 @@ const Stats = ({history, location}) => {
 	const projectId = query.get('projectId');
 	const tags = query.getAll('tags');
 	const linkedCustomerId = query.get('customerId');
+
 	let overview = 'year';
+
+	if (since <= 7) {
+		overview = 'week';
+	}
+	else if (since <= 31) {
+		overview = 'month';
+	}
 
 	if (error) throw error;
 
@@ -171,16 +179,6 @@ const Stats = ({history, location}) => {
 			const newQuery = new URLSearchParams(query);
 
 			newQuery.set('since', value);
-
-			if (value <= 7) {
-				overview = 'week';
-			}
-			else if (value <= 31) {
-				overview = 'month';
-			}
-			else if (value > 31) {
-				overview = 'year';
-			}
 
 			history.push(`/app/stats?${newQuery.toString()}`);
 		},
@@ -265,12 +263,22 @@ const Stats = ({history, location}) => {
 	);
 
 	const customers = {};
-	const activities = [];
+	const daysMap = {};
 
 	let totalTime = 0;
 
 	tasks.forEach((task) => {
+		if (!task.finishedAt) return;
+
 		const day = moment(task.finishedAt).format('YYYY-MM-DD');
+
+		daysMap[day] = daysMap[day] || {
+			date: day,
+			total: 0,
+			estimatedTime: 0,
+			totalPrice: 0,
+			details: [],
+		};
 
 		const activity = {
 			name: task.name,
@@ -285,23 +293,9 @@ const Stats = ({history, location}) => {
 			dailyRate: task.dailyRate || defaultDailyPrice,
 		};
 
-		const activityIndex = activities.findIndex(a => a.date === day);
-
-		if (activityIndex > -1) {
-			activities[activityIndex].details.push(activity);
-			activities[activityIndex].total += activity.value;
-			activities[activityIndex].totalPrice
-				+= activity.dailyRate * activity.value;
-		}
-		else {
-			activities.push({
-				date: day,
-				total: activity.value,
-				estimatedTime: activity.estimatedTime,
-				totalPrice: activity.dailyRate * activity.value,
-				details: [activity],
-			});
-		}
+		daysMap[day].details.push(activity);
+		daysMap[day].total += activity.value;
+		daysMap[day].totalPrice += activity.dailyRate * activity.value;
 
 		if (
 			task.status !== 'FINISHED'
@@ -329,6 +323,26 @@ const Stats = ({history, location}) => {
 
 		customers[customer.id].value += time;
 		totalTime += time;
+	});
+
+	const activities = Object.values(daysMap).map((d) => {
+		const summary = d.details.reduce((uniques, project) => {
+			if (!uniques[project.name]) {
+				uniques[project.name] = {
+					value: project.value,
+				};
+			}
+			else {
+				uniques[project.name].value += project.value;
+			}
+			return uniques;
+		}, {});
+		const unsorted_summary = Object.keys(summary).map(key => ({
+			name: key,
+			value: summary[key].value,
+		}));
+		d.summary = unsorted_summary.sort((a, b) => b.value - a.value);
+		return d;
 	});
 
 	const reminders = createdAtFilteredTasks.map(task => task.reminders).flat();
@@ -495,11 +509,18 @@ const Stats = ({history, location}) => {
 					</HelpAndTooltip>
 				</PageSubHeading>
 				<CalendarHeatmap
+					key={overview}
 					data={activities}
 					color={primaryPurple}
 					overColor={primaryRed}
 					overview={overview}
 					workingTime={workingTime}
+					handler={(d) => {
+						history.push(
+							`/app/dashboard?from=${
+								moment(d.date).format('YYYY-MM-DD')}`,
+						);
+					}}
 				/>
 			</Section>
 

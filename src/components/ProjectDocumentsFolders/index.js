@@ -1,13 +1,26 @@
 import styled from '@emotion/styled/macro';
-import React, {useState} from 'react';
+import moment from 'moment';
+import React, {useCallback, useState} from 'react';
 import FileIcon, {defaultStyles} from 'react-file-icon';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {documentTypes} from '../../utils/constants';
+import {formatName} from '../../utils/functions';
 import {ReactComponent as SectionIcon} from '../../utils/icons/section-icon.svg';
 import {REMOVE_ATTACHMENTS, UPLOAD_ATTACHMENTS} from '../../utils/mutations';
-import {TaskIcon} from '../../utils/new/design-system';
+import {
+	ActionCell,
+	Actions,
+	Cell,
+	HeaderCell,
+	primaryPurple,
+	primaryWhite,
+	Row,
+	RowHeader,
+	Table,
+	TaskIcon,
+} from '../../utils/new/design-system';
 import {GET_PROJECT_DATA} from '../../utils/queries';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
@@ -42,20 +55,13 @@ const TaskContentDocument = styled('div')`
 	overflow: hidden;
 `;
 
-const RemoveFile = styled(IconButton)`
-	opacity: 0;
-	margin-left: 3rem;
-	transition: all 300ms ease;
+const DocTypeList = styled('div')`
+	display: flex;
 `;
 
-const Attachment = styled('div')`
-	display: flex;
-
-	&:hover ${RemoveFile} {
-		opacity: 1;
-		transition: all 200ms ease;
-		margin-left: 1.5rem;
-	}
+const DocType = styled('div')`
+	background: ${props => (props.active ? primaryPurple : 'transparent')};
+	color: ${props => (props.active ? primaryWhite : primaryPurple)};
 `;
 
 const TaskDocumentFolders = ({task}) => {
@@ -94,21 +100,7 @@ const TaskDocumentFolders = ({task}) => {
 			<TaskContentDocument open={open}>
 				{task.attachments.length > 0 ? (
 					task.attachments.map(attachment => (
-						<Attachment>
-							<a href={attachment.url}>{attachment.filename}</a>
-							<RemoveFile
-								icon="delete_forever"
-								size="tiny"
-								danger
-								onClick={async () => {
-									await removeFile({
-										variables: {
-											attachmentId: attachment.id,
-										},
-									});
-								}}
-							/>
-						</Attachment>
+						<a href={attachment.url}>{attachment.filename}</a>
 					))
 				) : (
 					<div style={{fontStyle: 'italic'}}>
@@ -177,48 +169,134 @@ const SectionDocumentFolders = ({section}) => {
 };
 
 const ProjectDocumentsFolders = ({projectId}) => {
+	const [active, setActive] = useState(documentTypes[0].type);
+	const [uploadAttachments] = useMutation(UPLOAD_ATTACHMENTS);
+	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
 	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
 		variables: {projectId},
 		suspend: true,
 	});
 
-	const files = projectData.project.sections.flatMap(section => section.items.flatMap(item => item.attachments.map(attachment => ({
-		...attachment,
-		itemName: item.name,
-		sectionName: section.name,
-	}))));
+	const uploadAttachmentsCb = useCallback(
+		newFiles => uploadAttachments({
+			variables: {
+				projectId,
+				files: newFiles,
+				documentType: active,
+			},
+			context: {hasUpload: true},
+		}),
+		[projectId, active],
+	);
+
+	const files = [
+		...projectData.project.attachments,
+		...projectData.project.sections.flatMap(section => section.items.flatMap(item => item.attachments.map(attachment => ({
+			...attachment,
+			itemName: item.name,
+			sectionName: section.name,
+		})))),
+	].filter(attachment => (attachment.documentType || 'DEFAULT') === active);
 
 	return (
 		<DocumentFolders>
-			<div>
+			<DocTypeList>
 				{documentTypes.map(docType => (
-					<div>{docType.name}</div>
-				))}
-			</div>
-			{files.map((file) => {
-				const filenameSplit = file.filename.split('.');
-				const extension = filenameSplit[filenameSplit.length - 1];
-
-				return (
-					<div
-						style={{
-							display: 'flex',
-							alignItems: 'center',
-							marginBottom: '0.5rem',
-						}}
+					<DocType
+						active={docType.type === active}
+						onClick={() => setActive(docType.type)}
 					>
-						<FileIcon
-							size="32"
-							extension={extension}
-							{...(defaultStyles[extension] || {})}
-						/>
-						<a href={file.url} style={{margin: '0 0.5rem'}}>
-							{file.filename}
-						</a>{' '}
-						- {file.sectionName} - {file.itemName}
-					</div>
-				);
-			})}
+						{docType.name}
+					</DocType>
+				))}
+			</DocTypeList>
+			<Table>
+				<thead>
+					<RowHeader>
+						<HeaderCell>
+							<fbt project="inyo" desc="company name">
+								Type
+							</fbt>
+						</HeaderCell>
+						<HeaderCell>
+							<fbt project="inyo" desc="contact name">
+								Fichier
+							</fbt>
+						</HeaderCell>
+						<HeaderCell>
+							<fbt project="inyo" desc="phone number">
+								Section
+							</fbt>
+						</HeaderCell>
+						<HeaderCell>
+							<fbt project="inyo" desc="phone number">
+								Tâche
+							</fbt>
+						</HeaderCell>
+						<HeaderCell>
+							<fbt project="inyo" desc="phone number">
+								Date
+							</fbt>
+						</HeaderCell>
+						<HeaderCell>
+							<fbt project="inyo" desc="phone number">
+								Uploadeur
+							</fbt>
+						</HeaderCell>
+					</RowHeader>
+				</thead>
+				{files.map((file) => {
+					const filenameSplit = file.filename.split('.');
+					const extension = filenameSplit[filenameSplit.length - 1];
+
+					return (
+						<Row>
+							<Cell>
+								<FileIcon
+									size="32"
+									extension={extension}
+									{...(defaultStyles[extension] || {})}
+								/>
+							</Cell>
+							<Cell style={{maxWidth: '350px'}}>
+								<a href={file.url} style={{margin: '0 0.5rem'}}>
+									{file.filename}
+								</a>
+							</Cell>
+							<Cell>{file.sectionName}</Cell>
+							<Cell>{file.itemName}</Cell>
+							<Cell title={moment(file.createdAt).format('LLL')}>
+								{moment(file.createdAt).format('L')}
+							</Cell>
+							<Cell>
+								{formatName(
+									file.owner.firstName,
+									file.owner.lastName,
+								)}
+							</Cell>
+							<ActionCell>
+								<IconButton
+									icon="delete_forever"
+									size="tiny"
+									danger
+									onClick={async () => {
+										await removeFile({
+											variables: {
+												attachmentId: file.id,
+											},
+										});
+									}}
+								/>
+							</ActionCell>
+						</Row>
+					);
+				})}
+			</Table>
+			<UploadDashboardButton onUploadFiles={uploadAttachmentsCb}>
+				<fbt project="inyo" desc="notification message">
+					Joindre un document à cette tâche
+				</fbt>
+			</UploadDashboardButton>
 			{/* projectData.project.sections.map(section => (
 				<SectionDocumentFolders section={section} />
 			)) */}

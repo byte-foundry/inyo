@@ -6,6 +6,14 @@ export default {
 		const queryResult = query.result;
 
 		return produce(queryResult, (draft) => {
+			const attachmentIndexInProject = draft.project.attachments.findIndex(
+				attachment => attachment.id === removedAttachment.id,
+			);
+
+			if (attachmentIndexInProject !== -1) {
+				draft.project.attachments.splice(attachmentIndexInProject, 1);
+			}
+
 			draft.project.sections.forEach((section) => {
 				section.items.forEach((item) => {
 					const attachmentIndex = item.attachments.findIndex(

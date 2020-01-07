@@ -765,25 +765,32 @@ export const UPLOAD_ATTACHMENTS = gql`
 		$taskId: ID
 		$projectId: ID
 		$files: [Upload!]!
+		$documentType: DocumentType
 	) {
 		uploadAttachments(
 			token: $token
 			files: $files
 			taskId: $taskId
 			projectId: $projectId
+			documentType: $documentType
 		) {
 			id
 			filename
 			url
+			documentType
+			createdAt
 			owner {
 				__typename
 				... on User {
+					id
 					firstName
 					lastName
 				}
 				... on Customer {
+					id
 					firstName
 					lastName
+					name
 				}
 			}
 		}

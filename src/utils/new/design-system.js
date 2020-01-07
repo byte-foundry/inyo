@@ -1074,3 +1074,99 @@ export const CheckBoxLabel = styled('label')`
 		width: 0;
 	}
 `;
+
+export const Table = styled('table')`
+	border-collapse: collapse;
+	text-align: left;
+	width: 100%;
+`;
+
+export const RowHeader = styled('tr')`
+	border-top: 2px solid ${lightGrey};
+	border-bottom: 2px solid ${lightGrey};
+
+	&:after {
+		content: '';
+		display: block;
+		background: none;
+		width: 50px;
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: none;
+	}
+`;
+
+export const HeaderCell = styled('th')`
+	font-weight: normal;
+	color: ${accentGrey};
+`;
+
+export const Cell = styled('td')`
+	overflow: hidden;
+	text-overflow: ellipsis;
+	:empty::before {
+		content: '\\2014';
+	}
+`;
+
+export const ActionCell = styled(Cell)`
+	display: flex;
+	align-items: center;
+`;
+
+export const Row = styled('tr')`
+	cursor: pointer;
+	color: ${primaryBlack};
+	border-bottom: 2px solid ${lightGrey};
+	position: relative;
+	line-height: 1.6;
+
+	td {
+		padding: 0.25rem 0;
+
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
+			&:first-of-type {
+				color: ${primaryPurple};
+			}
+		}
+	}
+
+	${ActionCell} {
+		opacity: 0;
+	}
+
+	:hover {
+		color: ${primaryPurple};
+
+		${ActionCell} {
+			opacity: 1;
+		}
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: grid;
+		padding-bottom: 1rem;
+	}
+`;
+
+export const Actions = styled('div')`
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
+
+	* ~ * {
+		margin-left: 2rem;
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column-reverse;
+		justify-content: flex-start;
+
+		* ~ * {
+			margin-left: 0;
+			margin-bottom: 0.5rem;
+		}
+	}
+`;

@@ -330,16 +330,19 @@ const Stats = ({history, location}) => {
 			if (!uniques[project.name]) {
 				uniques[project.name] = {
 					value: project.value,
+					estimatedTime: project.estimatedTime,
 				};
 			}
 			else {
 				uniques[project.name].value += project.value;
+				uniques[project.name].estimatedTime += project.estimatedTime;
 			}
 			return uniques;
 		}, {});
 		const unsorted_summary = Object.keys(summary).map(key => ({
 			name: key,
 			value: summary[key].value,
+			estimatedTime: summary[key].estimatedTime,
 		}));
 		d.summary = unsorted_summary.sort((a, b) => b.value - a.value);
 		return d;
@@ -517,8 +520,9 @@ const Stats = ({history, location}) => {
 					workingTime={workingTime}
 					handler={(d) => {
 						history.push(
-							`/app/dashboard?from=${
-								moment(d.date).format('YYYY-MM-DD')}`,
+							`/app/dashboard?from=${moment(d.date).format(
+								'YYYY-MM-DD',
+							)}`,
 						);
 					}}
 				/>

@@ -365,7 +365,7 @@ const SidebarProjectInfos = ({
 						id="document-project-button"
 					>
 						<IconButton
-							icon="folder"
+							icon="attach_file"
 							size="tiny"
 							label={
 								<fbt

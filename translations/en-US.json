@@ -1861,6 +1861,16 @@
     }
    ]
   },
+  "OOPK0gSaXTAb7YheBECv+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Join a document",
+     "variations": {}
+    }
+   ]
+  },
   "Aw7c13n1qyBFVCJRP4+ZAw==": {
    "tokens": [],
    "types": [],
@@ -2107,16 +2117,6 @@
    "translations": [
     {
      "translation": "Attached files",
-     "variations": {}
-    }
-   ]
-  },
-  "OOPK0gSaXTAb7YheBECv+w==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Join a document",
      "variations": {}
     }
    ]
@@ -3451,6 +3451,16 @@
     }
    ]
   },
+  "865Ix0DJb9uyEGiKYB1asg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a document",
+     "variations": {}
+    }
+   ]
+  },
   "2xEWo7wuhRBdVX59AdoS7w==": {
    "tokens": [],
    "types": [],
@@ -4307,6 +4317,26 @@
    "translations": [
     {
      "translation": "History",
+     "variations": {}
+    }
+   ]
+  },
+  "2k12scuS6/CzumkYT9QuZg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Documents",
+     "variations": {}
+    }
+   ]
+  },
+  "iv+MQEKQX+zq+TtBYJwV/w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Documents",
      "variations": {}
     }
    ]
@@ -8787,6 +8817,36 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "KNXeLiAxv3OzxtLj2tWNEQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Project's documents",
+     "variations": {}
+    }
+   ]
+  },
+  "THiOxkzhcYaVZyDc9CitlQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Admin documents",
+     "variations": {}
+    }
+   ]
+  },
+  "MC7t8At3EUi2OAczRZ32UA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Deliverables",
      "variations": {}
     }
    ]

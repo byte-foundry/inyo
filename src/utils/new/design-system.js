@@ -1100,6 +1100,7 @@ export const RowHeader = styled('tr')`
 export const HeaderCell = styled('th')`
 	font-weight: normal;
 	color: ${accentGrey};
+	min-width: 75px;
 `;
 
 export const Cell = styled('td')`

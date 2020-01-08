@@ -246,7 +246,7 @@ const ProjectDocumentsFolders = ({projectId}) => {
 			<UploadContainer>
 				<UploadDashboardButton onUploadFiles={uploadAttachmentsCb}>
 					<fbt project="inyo" desc="notification message">
-						Joindre un document à cette tâche
+						Ajouter un document
 					</fbt>
 				</UploadDashboardButton>
 			</UploadContainer>

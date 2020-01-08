@@ -57,116 +57,54 @@ const TaskContentDocument = styled('div')`
 
 const DocTypeList = styled('div')`
 	display: flex;
+	margin-bottom: 1rem;
 `;
 
 const DocType = styled('div')`
 	background: ${props => (props.active ? primaryPurple : 'transparent')};
 	color: ${props => (props.active ? primaryWhite : primaryPurple)};
+	margin-right: 1rem;
+	padding: 0.3rem 0.5rem;
+	border-radius: 5px;
+	border: solid 1px ${primaryPurple};
+	cursor: pointer;
+
+	&:hover {
+		background: ${primaryPurple};
+		color: ${primaryWhite};
+	}
 `;
 
-const TaskDocumentFolders = ({task}) => {
-	const [uploadAttachments] = useMutation(UPLOAD_ATTACHMENTS);
-	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
-	const [open, setOpen] = useState(false);
+const UploadContainer = styled('div')`
+	margin-top: 1rem;
+`;
 
-	return (
-		<div>
-			<TaskHeaderDocument onClick={() => setOpen(!open)}>
-				<MaterialIcon
-					size="medium"
-					icon={open ? 'arrow_drop_down' : 'arrow_right'}
-				/>
-				<TaskIcon
-					status={task.status}
-					noData={true}
-					noAnim={true}
-					type={task.type}
-					style={{marginRight: '-0.5rem'}}
-					onClick={() => {}}
-				/>
-				{task.name} (
-				<fbt desc="files">
-					<fbt:plural
-						count={task.attachments.length}
-						name="files"
-						showCount="yes"
-						many="fichiers"
-					>
-						fichier
-					</fbt:plural>
-				</fbt>
-				)
-			</TaskHeaderDocument>
-			<TaskContentDocument open={open}>
-				{task.attachments.length > 0 ? (
-					task.attachments.map(attachment => (
-						<a href={attachment.url}>{attachment.filename}</a>
-					))
-				) : (
-					<div style={{fontStyle: 'italic'}}>
-						<fbt desc="no files">
-							Il n'y a pas de fichier dans cette tâche
-						</fbt>
-					</div>
-				)}
-				<UploadDashboardButton
-					onUploadFiles={newFiles => uploadAttachments({
-						variables: {
-							taskId: task.id,
-							files: newFiles,
-						},
-						context: {hasUpload: true},
-					})
-					}
-				>
-					<fbt project="inyo" desc="notification message">
-						Joindre un document à cette tâche
-					</fbt>
-				</UploadDashboardButton>
-			</TaskContentDocument>
-		</div>
-	);
-};
-
-const SectionDocumentFolders = ({section}) => {
-	const [open, setOpen] = useState(false);
-
-	const attachmentsNumber = section.items.reduce(
-		(acc, item) => acc + item.attachments.length,
-		0,
-	);
-
-	return (
-		<div>
-			<SectionHeaderDocument onClick={() => setOpen(!open)}>
-				<MaterialIcon
-					size="medium"
-					icon={open ? 'arrow_drop_down' : 'arrow_right'}
-				/>
-				<span style={{marginRight: '0.5rem'}}>
-					<SectionIcon />
-				</span>
-				{section.name} (
-				<fbt desc="files">
-					<fbt:plural
-						count={attachmentsNumber}
-						name="files"
-						showCount="yes"
-						many="fichiers"
-					>
-						fichier
-					</fbt:plural>
-				</fbt>
-				)
-			</SectionHeaderDocument>
-			<SectionContentDocument open={open}>
-				{section.items.map(item => (
-					<TaskDocumentFolders task={item} />
-				))}
-			</SectionContentDocument>
-		</div>
-	);
-};
+const headerCells = [
+	{
+		label: 'Type',
+		prop: 'extension',
+	},
+	{
+		label: 'Fichier',
+		prop: 'filename',
+	},
+	{
+		label: 'Section',
+		prop: 'sectionName',
+	},
+	{
+		label: 'Tâche',
+		prop: 'itemName',
+	},
+	{
+		label: 'Date',
+		prop: 'datetime',
+	},
+	{
+		label: 'Uploadeur',
+		prop: 'ownerName',
+	},
+];
 
 const ProjectDocumentsFolders = ({projectId}) => {
 	const [active, setActive] = useState(documentTypes[0].type);
@@ -176,6 +114,18 @@ const ProjectDocumentsFolders = ({projectId}) => {
 		variables: {projectId},
 		suspend: true,
 	});
+	const [sorting, setSorting] = useState('Date');
+	const [order, setOrder] = useState(1);
+
+	const sortAndSwitch = (prop) => {
+		if (sorting === prop) {
+			setOrder(-order);
+		}
+		else {
+			setSorting(prop);
+			setOrder(1);
+		}
+	};
 
 	const uploadAttachmentsCb = useCallback(
 		newFiles => uploadAttachments({
@@ -196,7 +146,26 @@ const ProjectDocumentsFolders = ({projectId}) => {
 			itemName: item.name,
 			sectionName: section.name,
 		})))),
-	].filter(attachment => (attachment.documentType || 'DEFAULT') === active);
+	]
+		.filter(attachment => (attachment.documentType || 'DEFAULT') === active)
+		.map((file) => {
+			const filenameSplit = file.filename.split('.');
+			const extension = filenameSplit[filenameSplit.length - 1];
+			const momentDate = moment(file.createdAt);
+
+			return {
+				...file,
+				extension,
+				ownerName: formatName(
+					file.owner.firstName,
+					file.owner.lastName,
+				),
+				datetime: momentDate.valueOf(),
+				formattedDate: momentDate.format('L'),
+				longFormattedDate: momentDate.format('LLL'),
+			};
+		})
+		.sort((a, b) => (a[sorting] > b[sorting] ? order : -order));
 
 	return (
 		<DocumentFolders>
@@ -213,93 +182,74 @@ const ProjectDocumentsFolders = ({projectId}) => {
 			<Table>
 				<thead>
 					<RowHeader>
-						<HeaderCell>
-							<fbt project="inyo" desc="company name">
-								Type
-							</fbt>
-						</HeaderCell>
-						<HeaderCell>
-							<fbt project="inyo" desc="contact name">
-								Fichier
-							</fbt>
-						</HeaderCell>
-						<HeaderCell>
-							<fbt project="inyo" desc="phone number">
-								Section
-							</fbt>
-						</HeaderCell>
-						<HeaderCell>
-							<fbt project="inyo" desc="phone number">
-								Tâche
-							</fbt>
-						</HeaderCell>
-						<HeaderCell>
-							<fbt project="inyo" desc="phone number">
-								Date
-							</fbt>
-						</HeaderCell>
-						<HeaderCell>
-							<fbt project="inyo" desc="phone number">
-								Uploadeur
-							</fbt>
-						</HeaderCell>
+						{headerCells.map(cell => (
+							<HeaderCell
+								onClick={() => sortAndSwitch(cell.prop)}
+							>
+								{cell.label}
+								{cell.prop === sorting && (
+									<MaterialIcon
+										style={{
+											height: '100%',
+											paddingTop: '3px',
+											float: 'right',
+										}}
+										size="tiny"
+										icon={
+											order === 1
+												? 'arrow_drop_down'
+												: 'arrow_drop_up'
+										}
+									/>
+								)}
+							</HeaderCell>
+						))}
 					</RowHeader>
 				</thead>
-				{files.map((file) => {
-					const filenameSplit = file.filename.split('.');
-					const extension = filenameSplit[filenameSplit.length - 1];
-
-					return (
-						<Row>
-							<Cell>
-								<FileIcon
-									size="32"
-									extension={extension}
-									{...(defaultStyles[extension] || {})}
-								/>
-							</Cell>
-							<Cell style={{maxWidth: '350px'}}>
-								<a href={file.url} style={{margin: '0 0.5rem'}}>
-									{file.filename}
-								</a>
-							</Cell>
-							<Cell>{file.sectionName}</Cell>
-							<Cell>{file.itemName}</Cell>
-							<Cell title={moment(file.createdAt).format('LLL')}>
-								{moment(file.createdAt).format('L')}
-							</Cell>
-							<Cell>
-								{formatName(
-									file.owner.firstName,
-									file.owner.lastName,
-								)}
-							</Cell>
-							<ActionCell>
-								<IconButton
-									icon="delete_forever"
-									size="tiny"
-									danger
-									onClick={async () => {
-										await removeFile({
-											variables: {
-												attachmentId: file.id,
-											},
-										});
-									}}
-								/>
-							</ActionCell>
-						</Row>
-					);
-				})}
+				{files.map(file => (
+					<Row>
+						<Cell>
+							<FileIcon
+								size="32"
+								extension={file.extension}
+								{...(defaultStyles[file.extension] || {})}
+							/>
+						</Cell>
+						<Cell style={{maxWidth: '350px'}}>
+							<a href={file.url} style={{margin: '0 0.5rem'}}>
+								{file.filename}
+							</a>
+						</Cell>
+						<Cell>{file.sectionName}</Cell>
+						<Cell>{file.itemName}</Cell>
+						<Cell title={file.longFormattedDate}>
+							{file.formattedDate}
+						</Cell>
+						<Cell>{file.ownerName}</Cell>
+						<ActionCell>
+							<IconButton
+								icon="delete_forever"
+								size="tiny"
+								danger
+								onClick={async () => {
+									await removeFile({
+										variables: {
+											attachmentId: file.id,
+										},
+									});
+								}}
+							/>
+						</ActionCell>
+					</Row>
+				))}
 			</Table>
-			<UploadDashboardButton onUploadFiles={uploadAttachmentsCb}>
-				<fbt project="inyo" desc="notification message">
-					Joindre un document à cette tâche
-				</fbt>
-			</UploadDashboardButton>
-			{/* projectData.project.sections.map(section => (
-				<SectionDocumentFolders section={section} />
-			)) */}
+			<UploadContainer>
+				<UploadDashboardButton onUploadFiles={uploadAttachmentsCb}>
+					<fbt project="inyo" desc="notification message">
+						Joindre un document à cette tâche
+					</fbt>
+				</UploadDashboardButton>
+			</UploadContainer>
 		</DocumentFolders>
 	);
 };

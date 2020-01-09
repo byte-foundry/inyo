@@ -21,7 +21,10 @@ import {
 	Table,
 	TaskIcon,
 } from '../../utils/new/design-system';
-import {GET_PROJECT_DATA} from '../../utils/queries';
+import {
+	GET_PROJECT_DATA,
+	GET_PROJECT_DATA_WITH_TOKEN,
+} from '../../utils/queries';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import UploadDashboardButton from '../UploadDashboardButton';
@@ -106,14 +109,17 @@ const headerCells = [
 	},
 ];
 
-const ProjectDocumentsFolders = ({projectId}) => {
+const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 	const [active, setActive] = useState(documentTypes[0].type);
 	const [uploadAttachments] = useMutation(UPLOAD_ATTACHMENTS);
 	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
-	const {data: projectData, error} = useQuery(GET_PROJECT_DATA, {
-		variables: {projectId},
-		suspend: true,
-	});
+	const {data: projectData, error} = useQuery(
+		customerToken ? GET_PROJECT_DATA_WITH_TOKEN : GET_PROJECT_DATA,
+		{
+			variables: {projectId, token: customerToken},
+			suspend: true,
+		},
+	);
 	const [sorting, setSorting] = useState('Date');
 	const [order, setOrder] = useState(1);
 
@@ -133,11 +139,14 @@ const ProjectDocumentsFolders = ({projectId}) => {
 				projectId,
 				files: newFiles,
 				documentType: active,
+				token: customerToken,
 			},
 			context: {hasUpload: true},
 		}),
 		[projectId, active],
 	);
+
+	if (error) throw error;
 
 	const files = [
 		...projectData.project.attachments,
@@ -226,20 +235,22 @@ const ProjectDocumentsFolders = ({projectId}) => {
 							{file.formattedDate}
 						</Cell>
 						<Cell>{file.ownerName}</Cell>
-						<ActionCell>
-							<IconButton
-								icon="delete_forever"
-								size="tiny"
-								danger
-								onClick={async () => {
-									await removeFile({
-										variables: {
-											attachmentId: file.id,
-										},
-									});
-								}}
-							/>
-						</ActionCell>
+						{!customerToken && (
+							<ActionCell>
+								<IconButton
+									icon="delete_forever"
+									size="tiny"
+									danger
+									onClick={async () => {
+										await removeFile({
+											variables: {
+												attachmentId: file.id,
+											},
+										});
+									}}
+								/>
+							</ActionCell>
+						)}
 					</Row>
 				))}
 			</Table>

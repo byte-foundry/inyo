@@ -27,29 +27,15 @@ import useUserInfos from '../../utils/useUserInfos';
 import MaterialIcon from '../MaterialIcon';
 import RichTextEditor from '../RichTextEditor';
 
-const BudgetItemRow = styled(FlexRow)`
-	color: ${({finished}) => (finished ? primaryPurple : primaryBlack)};
-	padding-left: 2.5rem;
-	margin-top: 0.2rem;
+const BudgetItemRow = styled('li')`
+	list-style-type: circle;
+`;
 
-	font-size: 1rem;
-
-	${TaskIcon} {
-		width: 2rem;
-		height: 2rem;
-		transform: scale(0.75);
-		margin: 0;
-	}
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		display: flex;
-		flex-direction: column;
-		margin-top: 1rem;
-
-		${TaskIcon} {
-			left: 1rem;
-		}
-	}
+const QuoteCreatedConfirmation = styled(P)`
+	background-color: #e8ffe8;
+	padding: 1rem;
+	border-radius: 8px;
+	margin: 2rem 0;
 `;
 
 const FlexRowSection = styled(FlexRow)`
@@ -59,23 +45,19 @@ const FlexRowSection = styled(FlexRow)`
 	font-size: 1.2rem;
 `;
 
-const BudgetItemName = styled('div')`
-	flex: 1;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-`;
+const BudgetItemName = styled('div')``;
 
 const BudgetItem = ({item}) => (
-	<BudgetItemRow finished={item.status === 'FINISHED'}>
-		<TaskIcon noAnim status={item.status} type={item.type} />
+	<BudgetItemRow>
 		<BudgetItemName>{item.name}</BudgetItemName>
 	</BudgetItemRow>
 );
 
-const BudgetItems = styled('div')`
+const BudgetItems = styled('ul')`
 	display: ${({open}) => (open ? 'block' : 'none')};
 	margin-bottom: ${({open}) => (open ? '2rem' : '0')};
+
+	padding-left: 4rem;
 `;
 
 const BudgetSectionName = styled('div')`
@@ -156,6 +138,12 @@ const Container = styled('div')`
 
 const ObjectLink = A.withComponent(Link);
 
+const Actions = styled('div')`
+	margin-bottom: 2rem;
+	display: flex;
+	justify-content: flex-end;
+`;
+
 const ProjectQuotes = ({projectId}) => {
 	const {defaultDailyPrice} = useUserInfos();
 	const [quoteCreated, setQuoteCreated] = useState(null);
@@ -186,32 +174,32 @@ const ProjectQuotes = ({projectId}) => {
 
 	return (
 		<Container>
-			<SubHeading>Devis</SubHeading>
+			<Actions>
+				<Button
+					onClick={async () => {
+						await data.project.sections.map(s => updateSection({
+							variables: {
+								sectionId: s.id,
+								price: null,
+							},
+						}));
 
-			<Button
-				onClick={async () => {
-					await data.project.sections.map(s => updateSection({
-						variables: {
-							sectionId: s.id,
-							price: null,
-						},
-					}));
-
-					const defaultPrices = {};
-					data.project.sections.forEach((section) => {
-						defaultPrices[section.id] = section.items.reduce(
-							(price, t) => price
-								+ t.unit * (t.dailyRate || defaultDailyPrice),
-							0,
-						);
-					});
-					setPrices(defaultPrices);
-				}}
-			>
-				<fbt desc="project quote synchronize prices button">
-					Re-synchroniser les prix
-				</fbt>
-			</Button>
+						const defaultPrices = {};
+						data.project.sections.forEach((section) => {
+							defaultPrices[section.id] = section.items.reduce(
+								(price, t) => price
+									+ t.unit * (t.dailyRate || defaultDailyPrice),
+								0,
+							);
+						});
+						setPrices(defaultPrices);
+					}}
+				>
+					<fbt desc="project quote synchronize prices button">
+						Re-synchroniser les prix
+					</fbt>
+				</Button>
+			</Actions>
 
 			<RichTextEditor
 				placeholder={fbt(
@@ -249,62 +237,72 @@ const ProjectQuotes = ({projectId}) => {
 				}
 				defaultValue={data.project.quoteFooter}
 			/>
-			<Button
-				onClick={async () => {
-					const response = await issueQuote({
-						variables: {
-							projectId,
-							header: data.project.quoteHeader,
-							footer: data.project.quoteFooter,
-							sections: data.project.sections.map(section => ({
-								name: section.name,
-								price: prices[section.id],
-							})),
-						},
-					});
+			<Actions>
+				<Button
+					onClick={async () => {
+						const response = await issueQuote({
+							variables: {
+								projectId,
+								header: data.project.quoteHeader,
+								footer: data.project.quoteFooter,
+								sections: data.project.sections.map(
+									section => ({
+										name: section.name,
+										price: prices[section.id],
+									}),
+								),
+							},
+						});
 
-					setQuoteCreated(response.data.issueQuote);
-				}}
-			>
-				<fbt desc="project generate quote button">
-					Générer un nouveau devis
-				</fbt>
-			</Button>
+						setQuoteCreated(response.data.issueQuote);
+					}}
+				>
+					<fbt desc="project generate quote button">
+						Générer un nouveau devis
+					</fbt>
+				</Button>
+			</Actions>
 			{quoteCreated && (
-				<P>
+				<QuoteCreatedConfirmation>
 					Le devis a bien été créé, vous pouvez le partager avec votre
-					client en copiant le lien suivant :
+					client en copiant le lien suivant :{' '}
 					<ObjectLink
 						to={`/app/${
 							data.project.customer
 								? data.project.customer.token
 								: data.project.token
 						}/quotes/${quoteCreated.id}`}
+						target="_blank"
 					>
 						{quoteCreated.id}
 					</ObjectLink>
-				</P>
+				</QuoteCreatedConfirmation>
 			)}
 
-			<SubHeading>
-				<fbt desc="generated quotes">Devis générés</fbt>
-			</SubHeading>
-			<ul>
-				{data.project.quotes.map(quote => (
-					<li key={quote.id}>
-						<ObjectLink
-							to={`/app/${
-								data.project.customer
-									? data.project.customer.token
-									: data.project.token
-							}/quotes/${quote.id}`}
-						>
-							{quote.id}
-						</ObjectLink>{' '}
-						{new Date(quote.createdAt).toLocaleString()}
-					</li>
-				))}
-			</ul>
+			{data.project.quotes.length > 0 && (
+				<>
+					<SubHeading>
+						<fbt desc="generated quotes">Devis générés</fbt>
+					</SubHeading>
+					<ul>
+						{data.project.quotes.map(quote => (
+							<li key={quote.id}>
+								<ObjectLink
+									to={`/app/${
+										data.project.customer
+											? data.project.customer.token
+											: data.project.token
+									}/quotes/${quote.id}`}
+									target="_blank"
+								>
+									{quote.id}
+								</ObjectLink>{' '}
+								{new Date(quote.createdAt).toLocaleString()}
+							</li>
+						))}
+					</ul>
+				</>
+			)}
 		</Container>
 	);
 };

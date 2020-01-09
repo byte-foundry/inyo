@@ -119,7 +119,6 @@ const Content = styled('div')`
 
 const Actions = styled('div')`
 	max-width: calc(960px + 10rem);
-	margin: 1rem auto;
 	display: flex;
 	justify-content: flex-end;
 	padding: 2rem;

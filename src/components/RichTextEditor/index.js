@@ -5,25 +5,39 @@ import {Value} from 'slate';
 import {Editor} from 'slate-react';
 
 import fbt from '../../fbt/fbt.macro';
-import {Button} from '../../utils/new/design-system';
+import {Button, lightPurple} from '../../utils/new/design-system';
+import MaterialIcon from '../MaterialIcon';
 
 const isBoldHotkey = isKeyHotkey('mod+b');
 const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
 
 const Container = styled('div')`
-	border: 1px solid black;
-	padding: 5px;
+	border: 1px solid ${lightPurple};
+	padding: 1rem;
 	border-radius: 5px;
-	margin-bottom: 1rem;
+	margin-bottom: 2rem;
 `;
 
 const FormatButton = styled(Button)`
 	margin-right: 5px;
+	padding: 0;
+	text-align: center;
+
+	i {
+		margin: 2px;
+	}
+
+	&:hover {
+		i {
+			color: white;
+		}
+	}
 `;
 
 const FormatButtons = styled('div')`
 	display: flex;
+	margin-bottom: 1rem;
 `;
 
 const INITIAL_EDITOR_VALUE = {
@@ -93,7 +107,7 @@ const RichTextEditor = ({defaultValue, onChange, displayMode}) => {
 					)}
 					onMouseDown={event => onClickMark(event, 'bold')}
 				>
-					<fbt desc="rich text editor bold button">Gras</fbt>
+					<MaterialIcon icon="format_bold" size="tiny" />
 				</FormatButton>
 				<FormatButton
 					active={value.activeMarks.some(
@@ -101,7 +115,7 @@ const RichTextEditor = ({defaultValue, onChange, displayMode}) => {
 					)}
 					onMouseDown={event => onClickMark(event, 'italic')}
 				>
-					<fbt desc="rich text editor italic button">Italique</fbt>
+					<MaterialIcon icon="format_italic" size="tiny" />
 				</FormatButton>
 				<FormatButton
 					active={value.activeMarks.some(
@@ -109,7 +123,7 @@ const RichTextEditor = ({defaultValue, onChange, displayMode}) => {
 					)}
 					onMouseDown={event => onClickMark(event, 'underlined')}
 				>
-					<fbt desc="rich text editor underline button">Souligné</fbt>
+					<MaterialIcon icon="format_underline" size="tiny" />
 				</FormatButton>
 			</FormatButtons>
 			<Editor

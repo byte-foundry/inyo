@@ -365,7 +365,7 @@ const SidebarProjectInfos = ({
 						id="quote-project-button"
 					>
 						<IconButton
-							icon="description"
+							icon="list_alt"
 							size="tiny"
 							label={
 								<fbt

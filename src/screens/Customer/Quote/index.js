@@ -11,13 +11,17 @@ import {useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {LoadingLogo} from '../../../utils/content';
 import {
+	accentGrey,
+	Heading,
 	P,
+	primaryBlack,
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
 	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_QUOTE} from '../../../utils/queries';
+import {GET_PROJECT_QUOTES, GET_QUOTE} from '../../../utils/queries';
+import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
 	min-height: 100vh;
@@ -29,18 +33,86 @@ const Container = styled('div')`
 `;
 
 const CompanyLogo = styled('img')`
-	max-width: 75%;
+	max-width: 150px;
 	max-height: 150px;
 	margin-top: 1rem;
 	display: block;
 `;
 
+const Header = styled('div')`
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 5rem;
+	align-items: flex-end;
+`;
+
+const Date = styled('div')`
+	text-align: right;
+	margin-bottom: 5rem;
+`;
+
+const Infos = styled('div')`
+	flex: 1 0 50%;
+`;
+
+const H1 = styled(Heading)`
+	margin-bottom: 2rem;
+`;
+
+const UL = styled('ul')`
+	padding-left: 25%;
+	margin: 5rem auto 0;
+`;
+
+const LI = styled('li')`
+	display: flex;
+	flex-direction: column;
+
+	ul {
+		margin-bottom: 1rem;
+	}
+`;
+
+const Total = styled('div')`
+	border-top: 2px solid ${primaryBlack};
+	margin-top: 1rem;
+	padding-top: 1rem;
+	font-size: 1.4rem;
+	font-weight: 500;
+	text-align: right;
+	margin-left: 25%;
+`;
+
+const TotalTTC = styled('div')`
+	font-size: 1.1rem;
+	color: ${accentGrey};
+`;
+
+const Section = styled('div')`
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+`;
+
+const Line = styled('div')`
+	flex: 1 1 10px;
+	border-bottom: 1px dotted lightgrey;
+	margin: 0 20px;
+	height: 1px;
+	font-weight: 500;
+`;
+
 const Content = styled('div')`
-	max-width: 1280px;
+	max-width: 960px;
+	min-height: 1370px;
 	margin: 0 auto;
+	border: 1px solid lightgrey;
+	box-shadow: 15px 15px 15px lightgrey;
+	padding: 4rem 5rem;
 `;
 
 const Quote = ({match}) => {
+	const {defaultDailyPrice} = useUserInfos();
 	const {data, loading, error} = useQuery(GET_QUOTE, {
 		variables: {
 			id: match.params.quoteId,
@@ -53,6 +125,11 @@ const Quote = ({match}) => {
 
 	const {quote} = data;
 
+	const total = quote.sections.reduce(
+		(total, section) => total + section.price,
+		0,
+	);
+
 	return (
 		<Container>
 			<CustomProjectHeader
@@ -62,41 +139,67 @@ const Quote = ({match}) => {
 			/>
 
 			<Content>
-				<div>
-					<SubHeading>
-						<fbt project="inyo" desc="contractor quote screen">
-							Prestataire
-						</fbt>
-					</SubHeading>
-					{quote.project.issuer.logo && (
-						<CompanyLogo
-							src={quote.project.issuer.logo.url}
-							alt="Company logo"
+				<Date>
+					<fbt project="inyo" desc="quote screen number">
+						Devis #
+					</fbt>
+					#TODO XXXX
+					<br />
+					#TODO date {quote.project.createdAt}
+				</Date>
+				<Header>
+					<Infos>
+						<div>
+							{quote.project.issuer.logo && (
+								<CompanyLogo
+									src={quote.project.issuer.logo.url}
+									alt="Company logo"
+								/>
+							)}
+							<IssuerNameAndAddress
+								issuer={quote.project.issuer}
+							/>
+						</div>
+					</Infos>
+
+					<Infos>
+						<CustomerNameAndAddress
+							customer={quote.project.customer}
 						/>
-					)}
-					<IssuerNameAndAddress issuer={quote.project.issuer} />
-				</div>
+					</Infos>
+				</Header>
 
-				<div>
-					<SubHeading>
-						<fbt project="inyo" desc="customer quote screen">
-							Client
-						</fbt>
-					</SubHeading>
-					<CustomerNameAndAddress customer={quote.project.customer} />
-				</div>
-
-				<SubHeading>
-					<fbt desc="">Client</fbt>
-				</SubHeading>
+				<H1>#TODO Titre du projet</H1>
 				<RichTextEditor displayMode defaultValue={quote.header} />
-				<ul>
+				<UL>
 					{quote.sections.map(section => (
-						<li key={section.id}>
-							{section.name} {section.price}
-						</li>
+						<LI key={section.id}>
+							<Section>
+								{section.name} <Line /> {section.price}
+							</Section>
+							<ul>
+								<li>une tâche</li>
+								<li>une autre tâche</li>
+								<li>une dernière tâche</li>
+							</ul>
+						</LI>
 					))}
-				</ul>
+				</UL>
+				<Total>
+					<div>
+						{total}
+						<fbt project="inyo" desc="quote screen ht">
+							H.T
+						</fbt>
+					</div>
+					<TotalTTC>
+						// #todo vat variable
+						{total * 1.2}
+						<fbt project="inyo" desc="quote screen ttc">
+							T.T.C
+						</fbt>
+					</TotalTTC>
+				</Total>
 				<RichTextEditor displayMode defaultValue={quote.footer} />
 			</Content>
 		</Container>

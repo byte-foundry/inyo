@@ -1072,3 +1072,33 @@ export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
 		sent: sendCustomEmailPreview(subject: $subject, content: $content)
 	}
 `;
+
+export const START_TASK_TIMER = gql`
+	${ITEM_FRAGMENT}
+
+	mutation startTaskTimer($id: ID!) {
+		startTaskTimer(id: $id) {
+			...ItemFragment
+			id
+			workedTimes {
+				start
+				end
+			}
+		}
+	}
+`;
+
+export const STOP_CURRENT_TASK_TIMER = gql`
+	${ITEM_FRAGMENT}
+
+	mutation stopCurrentTaskTimer {
+		stopCurrentTaskTimer {
+			...ItemFragment
+			id
+			workedTimes {
+				start
+				end
+			}
+		}
+	}
+`;

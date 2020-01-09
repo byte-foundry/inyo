@@ -1,10 +1,32 @@
+import styled from '@emotion/styled';
 import moment from 'moment';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
+import {useMutation} from '../../utils/apollo-hooks';
 import {formatName} from '../../utils/functions';
+import {START_TASK_TIMER, STOP_CURRENT_TASK_TIMER} from '../../utils/mutations';
+import {primaryWhite} from '../../utils/new/design-system';
+import Button from '../IconButton';
+import MaterialIcon from '../MaterialIcon';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
+
+const Timer = styled('div')`
+	display: flex;
+	position: absolute;
+	left: 10px;
+`;
+
+const RefreshSeconds = ({children}) => {
+	const [, forceUpdate] = useState();
+	useEffect(() => {
+		const id = setInterval(() => forceUpdate(new Date()), 1000);
+
+		return () => clearInterval(id);
+	});
+	return children();
+};
 
 function TaskActivationHeader({
 	item,
@@ -13,6 +35,20 @@ function TaskActivationHeader({
 	activableTask,
 	setIsActivating,
 }) {
+	const [stopCurrentTaskTimer] = useMutation(STOP_CURRENT_TASK_TIMER);
+	const [startTaskTimer] = useMutation(START_TASK_TIMER);
+
+	const lastWorkedTime
+		= item.workedTimes.length > 0
+			? item.workedTimes[item.workedTimes.length - 1]
+			: null;
+	const previousTimesDiff = item.workedTimes
+		.slice(0, -1)
+		.reduce(
+			(duration, {start, end}) => duration.add(moment(end).diff(start)),
+			moment.duration(),
+		);
+
 	return (
 		<>
 			{customerTask
@@ -132,24 +168,64 @@ function TaskActivationHeader({
 						</div>
 					)))}
 			{!customerTask && activableTask && (
-				<TaskActivationButton
-					taskId={item.id}
-					isActive={item.scheduledFor}
-					onCommit={() => focusTask({
-						variables: {itemId: item.id},
-						optimisticResponse: {
-							focusTask: {
-								...item,
-								scheduledFor: moment().format(
-									moment.HTML5_FMT.DATE,
-								),
-								schedulePosition: -1,
-								isFocused: true,
+				<>
+					<Timer>
+						{lastWorkedTime && !lastWorkedTime.end ? (
+							<>
+								<Button
+									current
+									invert={false}
+									icon="pause_circle_filled"
+									size="tiny"
+									color={primaryWhite}
+									onClick={() => stopCurrentTaskTimer()}
+								/>
+								<RefreshSeconds>
+									{() => (
+										<span>
+											{moment
+												.duration(
+													moment().diff(
+														lastWorkedTime.start,
+													),
+												)
+												.add(previousTimesDiff)
+												.format('HH:mm:ss')}
+										</span>
+									)}
+								</RefreshSeconds>
+							</>
+						) : (
+							<Button
+								current
+								invert
+								icon="play_circle_filled"
+								size="tiny"
+								color={primaryWhite}
+								onClick={() => startTaskTimer({variables: {id: item.id}})
+								}
+							/>
+						)}
+					</Timer>
+					<TaskActivationButton
+						taskId={item.id}
+						isActive={item.scheduledFor}
+						onCommit={() => focusTask({
+							variables: {itemId: item.id},
+							optimisticResponse: {
+								focusTask: {
+									...item,
+									scheduledFor: moment().format(
+										moment.HTML5_FMT.DATE,
+									),
+									schedulePosition: -1,
+									isFocused: true,
+								},
 							},
-						},
-					})
-					}
-				/>
+						})
+						}
+					/>
+				</>
 			)}
 		</>
 	);

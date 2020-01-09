@@ -940,12 +940,16 @@ const Item = ({
 					<Tooltip
 						label={fbt(
 							'Taux journalier moyen de cette tâche',
-							'daily rate item view',
+							'daily rate tooltip item view',
 						)}
 					>
 						<Meta>
 							<MaterialIcon icon="local_atm" size="tiny" />
-							<MetaLabel>TJM</MetaLabel>
+							<MetaLabel>
+								<fbt desc="daily rate label item view">
+									Taux journalier
+								</fbt>
+							</MetaLabel>
 							<InlineEditable
 								nameCss={css`
 									padding: 0;
@@ -986,6 +990,33 @@ const Item = ({
 									}
 								/>
 							)}
+						</Meta>
+					</Tooltip>
+				)}
+
+				{!customerToken && item.workedTimes.length > 0 && (
+					<Tooltip
+						label={fbt(
+							'Temps total mesuré',
+							'mesured time tooltip item view',
+						)}
+					>
+						<Meta>
+							<MaterialIcon
+								icon="play_circle_outline"
+								size="tiny"
+							/>
+							<MetaLabel>
+								<fbt desc="mesured time label item view">
+									Temps mesuré
+								</fbt>
+							</MetaLabel>
+							{item.workedTimes
+								.reduce(
+									(duration, {start, end}) => duration.add(moment(end).diff(start)),
+									moment.duration(),
+								)
+								.format('HH:mm:ss')}
 						</Meta>
 					</Tooltip>
 				)}

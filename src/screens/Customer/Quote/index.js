@@ -12,6 +12,7 @@ import {BREAKPOINTS} from '../../../utils/constants';
 import {LoadingLogo} from '../../../utils/content';
 import {
 	accentGrey,
+	Button,
 	Heading,
 	P,
 	primaryBlack,
@@ -83,6 +84,11 @@ const Total = styled('div')`
 	margin-left: 25%;
 `;
 
+const Footer = styled('div')`
+	margin: 2rem 0;
+	margin-left: 25%;
+`;
+
 const TotalTTC = styled('div')`
 	font-size: 1.1rem;
 	color: ${accentGrey};
@@ -111,8 +117,16 @@ const Content = styled('div')`
 	padding: 4rem 5rem;
 `;
 
+const Actions = styled('div')`
+	max-width: calc(960px + 10rem);
+	margin: 1rem auto;
+	display: flex;
+	justify-content: flex-end;
+	padding: 2rem;
+	margin: 0 auto;
+`;
+
 const Quote = ({match}) => {
-	const {defaultDailyPrice} = useUserInfos();
 	const {data, loading, error} = useQuery(GET_QUOTE, {
 		variables: {
 			id: match.params.quoteId,
@@ -137,6 +151,19 @@ const Quote = ({match}) => {
 				customerToken={match.params.customerToken}
 				noProgress
 			/>
+
+			<Actions>
+				<Button>
+					<fbt desc="quote screen accept button">
+						Accepter le devis
+					</fbt>
+				</Button>
+				<Button>
+					<fbt desc="quote screen print button">
+						Imprimer le devis
+					</fbt>
+				</Button>
+			</Actions>
 
 			<Content>
 				<Date>
@@ -187,20 +214,22 @@ const Quote = ({match}) => {
 				</UL>
 				<Total>
 					<div>
-						{total}
+						{total}{' '}
 						<fbt project="inyo" desc="quote screen ht">
 							H.T
 						</fbt>
 					</div>
 					<TotalTTC>
-						// #todo vat variable
-						{total * 1.2}
+						{/* #todo vat variable */}
+						{total * 1.2}{' '}
 						<fbt project="inyo" desc="quote screen ttc">
 							T.T.C
 						</fbt>
 					</TotalTTC>
 				</Total>
-				<RichTextEditor displayMode defaultValue={quote.footer} />
+				<Footer>
+					<RichTextEditor displayMode defaultValue={quote.footer} />
+				</Footer>
 			</Content>
 		</Container>
 	);

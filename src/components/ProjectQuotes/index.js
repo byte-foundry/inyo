@@ -226,6 +226,15 @@ const ProjectQuotes = ({projectId}) => {
 					}}
 				/>
 			))}
+			<div>
+				<div>Total</div>
+				<div>
+					{Object.keys(prices).reduce(
+						(acc, priceKey) => acc + prices[priceKey],
+					)}{' '}
+					€
+				</div>
+			</div>
 			<RichTextEditor
 				placeholder={fbt(
 					'Pied de page du devis...',

@@ -136,7 +136,7 @@ const TaskCard = withRouter(
 				}
 			>
 				{isOver && <DragSeparator />}
-				{!isCustomerTask(task.type) && lastWorkedTime && (
+				{!isCustomerTask(task.type) && task.status !== 'FINISHED' && (
 					<TimerButton
 						noBg
 						current={isTimerRunning}

@@ -84,27 +84,39 @@ const UploadContainer = styled('div')`
 
 const headerCells = [
 	{
-		label: 'Type',
+		get label() {
+			return fbt('Type', 'header document type');
+		},
 		prop: 'extension',
 	},
 	{
-		label: 'Fichier',
+		get label() {
+			return fbt('Fichier', 'header document filename');
+		},
 		prop: 'filename',
 	},
 	{
-		label: 'Section',
+		get label() {
+			return fbt('Section', 'header document section');
+		},
 		prop: 'sectionName',
 	},
 	{
-		label: 'Tâche',
+		get label() {
+			return fbt('Tâche', 'header document tâche');
+		},
 		prop: 'itemName',
 	},
 	{
-		label: 'Date',
+		get label() {
+			return fbt('Date', 'header document date');
+		},
 		prop: 'datetime',
 	},
 	{
-		label: 'Uploadeur',
+		get label() {
+			return fbt('Uploadeur', 'header document uploadeur');
+		},
 		prop: 'ownerName',
 	},
 ];

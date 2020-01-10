@@ -506,7 +506,7 @@ const EventText = ({
 			);
 			break;
 		case 'File':
-			objectName = (
+			objectName = object.linkedTask ? (
 				<fbt desc="file url on task url">
 					<fbt:param name="objectUrl">
 						<A href={object.url}>{object.filename}</A>
@@ -522,6 +522,25 @@ const EventText = ({
 							}}
 						>
 							{object.linkedTask.name}
+						</ObjectLink>
+					</fbt:param>
+				</fbt>
+			) : (
+				<fbt desc="file url on task url">
+					<fbt:param name="objectUrl">
+						<A href={object.url}>{object.filename}</A>
+					</fbt:param>{' '}
+						sur{' '}
+					<fbt:param name="taskUrl">
+						<ObjectLink
+							to={{
+								pathname: `/app/tasks?projectId=${object.linkedProject.id}`,
+								state: {
+									prevSearch: `?projectId=${projectId}&view=activity`,
+								},
+							}}
+						>
+							{object.linkedProject.name}
 						</ObjectLink>
 					</fbt:param>
 				</fbt>

@@ -172,22 +172,6 @@ export const GET_USER_TAGS = gql`
 	}
 `;
 
-export const GET_USER_CURRENT_TASK = gql`
-	${TAG_FRAGMENT}
-
-	query getCurrentTask {
-		me {
-			id
-			currentTask {
-				id
-				workedTimes {
-					start
-					end
-				}
-			}
-		}
-	}
-`;
 /** ******** PROJECT QUERIES ********* */
 
 export const GET_ALL_PROJECTS = gql`
@@ -632,6 +616,10 @@ export const GET_ALL_TASKS_SHORT = gql`
 				after: $after
 			) {
 				...ShortTaskFragment
+				workedTimes {
+					start
+					end
+				}
 			}
 		}
 	}

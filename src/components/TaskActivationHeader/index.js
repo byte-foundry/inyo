@@ -201,8 +201,25 @@ function TaskActivationHeader({
 								icon="play_circle_filled"
 								size="tiny"
 								color={primaryWhite}
-								onClick={() => startTaskTimer({variables: {id: item.id}})
-								}
+								onClick={() => {
+									if (!item.scheduledFor) {
+										focusTask({
+											variables: {itemId: item.id},
+											optimisticResponse: {
+												focusTask: {
+													...item,
+													scheduledFor: moment().format(
+														moment.HTML5_FMT.DATE,
+													),
+													schedulePosition: -1,
+													isFocused: true,
+												},
+											},
+										});
+									}
+
+									startTaskTimer({variables: {id: item.id}});
+								}}
 							/>
 						)}
 					</Timer>

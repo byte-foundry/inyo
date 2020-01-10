@@ -1077,6 +1077,15 @@ export const START_TASK_TIMER = gql`
 	${ITEM_FRAGMENT}
 
 	mutation startTaskTimer($id: ID!) {
+		stopCurrentTaskTimer {
+			...ItemFragment
+			id
+			workedTimes {
+				start
+				end
+			}
+		}
+
 		startTaskTimer(id: $id) {
 			...ItemFragment
 			id

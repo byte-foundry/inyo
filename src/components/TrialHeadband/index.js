@@ -10,6 +10,7 @@ import {STOP_CURRENT_TASK_TIMER} from '../../utils/mutations';
 import {
 	A,
 	Button,
+	mediumPurple,
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
@@ -28,19 +29,26 @@ const Headband = styled('div')`
 	background: ${primaryPurple};
 	color: ${primaryWhite};
 	margin: 0;
+	min-height: 45px;
+	display: flex;
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	z-index: 1;
 `;
 
 const Content = styled('div')`
-	max-width: 1280px;
 	display: flex;
-	margin: auto;
 	justify-content: space-between;
+	flex: 1;
 	align-items: center;
+	padding: 0 2.5rem;
 `;
 
 const Timer = styled('div')`
 	align-self: center;
-	margin-left: 60px;
+	margin-left: 75px;
 `;
 
 const PlayButton = styled(IconButton)`
@@ -48,13 +56,22 @@ const PlayButton = styled(IconButton)`
 	top: 22px;
 	width: 3rem;
 	height: 3rem;
+	border-radius: 50%;
+	border: 1px solid ${primaryWhite};
 
 	::after {
 		box-shadow: 0 0 0 5px ${primaryWhite};
 	}
 
-	:hover i {
-		color: ${primaryWhite};
+	:hover {
+		cursor: pointer;
+		i {
+			color: ${primaryPurple};
+		}
+		::after {
+			background-color: white !important;
+			border: 1px solid ${mediumPurple};
+		}
 	}
 
 	i {
@@ -64,9 +81,11 @@ const PlayButton = styled(IconButton)`
 `;
 
 const TimerText = styled('span')`
-	min-width: 70px;
+	min-width: 75px;
 	display: inline-block;
 	text-align: left;
+	font-weight: bold;
+	font-size: 1.2rem;
 `;
 
 const RefreshSeconds = ({children}) => {
@@ -79,7 +98,7 @@ const RefreshSeconds = ({children}) => {
 	return children();
 };
 
-const TrialHeadband = ({history, location}) => {
+const TrialHeadband = ({history, location, setHeadband}) => {
 	const {data, loading, error} = useQuery(
 		gql`
 			query getPaymentAndCurrentTask {
@@ -102,6 +121,12 @@ const TrialHeadband = ({history, location}) => {
 		{suspend: false},
 	);
 	const [stopCurrentTaskTimer] = useMutation(STOP_CURRENT_TASK_TIMER);
+
+	useEffect(() => {
+		if (data && data.me) {
+			setHeadband(!(data.me.lifetimePayment && !data.me.currentTask));
+		}
+	}, [data]);
 
 	if (loading || error) return null;
 

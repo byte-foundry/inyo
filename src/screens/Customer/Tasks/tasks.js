@@ -4,6 +4,7 @@ import React, {Suspense, useContext} from 'react';
 
 import CustomProjectHeader from '../../../components/CustomProjectHeader';
 import ProjectCustomerTasksList from '../../../components/ProjectCustomerTasksList';
+import ProjectDocumentsFolders from '../../../components/ProjectDocumentsFolders';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import SidebarCustomerProjectInfos from '../../../components/SidebarCustomerProjectInfos';
 import TasksList from '../../../components/TasksList';
@@ -195,6 +196,14 @@ const CustomerTasks = ({
 							<Suspense fallback={<Loading />}>
 								{projectId && view === 'shared-notes' && (
 									<ProjectSharedNotes
+										projectId={projectId}
+										customerToken={customerToken}
+									/>
+								)}
+							</Suspense>
+							<Suspense fallback={<Loading />}>
+								{projectId && view === 'documents' && (
+									<ProjectDocumentsFolders
 										projectId={projectId}
 										customerToken={customerToken}
 									/>

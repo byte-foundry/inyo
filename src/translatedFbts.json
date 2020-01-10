@@ -188,6 +188,7 @@
 		"3iXB9l": "Got it!",
 		"p3mcv": "Filter pictures",
 		"3LCWM2": "Pictures by {unsplashLink}",
+		"4ctGTT": "Join a document",
 		"3jOo0c": "Type and name of the task",
 		"3YYuoR": "Name this task",
 		"4vdtgX": "Estimated duration of the task",
@@ -212,7 +213,6 @@
 		"uRldP": "Stop reminding {customerName} to complete this task",
 		"4orDmy": "Ask {assistantName} to remind {customerName} ( {contactName} ) to complete this task",
 		"2AoRb7": "Attached files",
-		"4ctGTT": "Join a document",
 		"4yOxTS": "Comments",
 		"1asJL0": "Confirm deletion",
 		"brzbv": "Delete task",
@@ -347,6 +347,7 @@
 		"3HFwhD": "Planned",
 		"1kJm7I": "Something went wrong",
 		"t3MVZ": "Name of the section",
+		"4CD6ci": "Add a document",
 		"gCnoA": "Add a name to this project",
 		"hlLuQ": "Project's name",
 		"1LhDRk": "Write some notes...",
@@ -432,6 +433,8 @@
 		"11ilVY": "Shared notes",
 		"4astIa": "Project history",
 		"3egQbZ": "History",
+		"19Hn9D": "Documents",
+		"2lF9el": "Documents",
 		"2Y7mUR": "Change the project's client",
 		"evxq": "Status report, tasks that require a client action, etc.",
 		"2aIMrY": "Notify my client by email",
@@ -876,6 +879,9 @@
 		"BYx3I": "removed collaborator from projet",
 		"2keB7h": "assigned collaborator from task",
 		"4k0aVq": "removed collaborator from task",
-		"4fMRQd": "viewed project"
+		"4fMRQd": "viewed project",
+		"2t1FnY": "Project's documents",
+		"3NjtDX": "Admin documents",
+		"3DmPYh": "Deliverables"
 	}
 }

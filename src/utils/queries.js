@@ -256,12 +256,17 @@ export const GET_PROJECT_INFOS = gql`
 				id
 				filename
 				url
+				createdAt
+				documentType
 				owner {
+					__typename
 					... on User {
+						id
 						firstName
 						lastName
 					}
 					... on Customer {
+						id
 						firstName
 						lastName
 						name
@@ -348,6 +353,27 @@ export const GET_PROJECT_DATA = gql`
 	query getProjectData($projectId: ID!) {
 		project(id: $projectId) {
 			...ProjectShortFragment
+			attachments {
+				id
+				filename
+				url
+				createdAt
+				documentType
+				owner {
+					__typename
+					... on User {
+						id
+						firstName
+						lastName
+					}
+					... on Customer {
+						id
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 			issuer {
 				name
 				email
@@ -434,6 +460,27 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 			status
 			deadline
 			daysUntilDeadline
+			attachments {
+				id
+				filename
+				url
+				createdAt
+				documentType
+				owner {
+					__typename
+					... on User {
+						id
+						firstName
+						lastName
+					}
+					... on Customer {
+						id
+						firstName
+						lastName
+						name
+					}
+				}
+			}
 			issuer {
 				id
 				name

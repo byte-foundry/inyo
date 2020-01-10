@@ -1,7 +1,7 @@
 import {css} from '@emotion/core';
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
-import React, {useRef, useState} from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
@@ -209,6 +209,29 @@ const CustomCheckList = styled(CheckList)`
 	margin: 1rem 0;
 `;
 
+const Uploader = ({customerToken, taskId}) => {
+	const [uploadAttachments] = useMutation(UPLOAD_ATTACHMENTS);
+	const uploadAttachmentsCb = useCallback(
+		newFiles => uploadAttachments({
+			variables: {
+				token: customerToken,
+				taskId,
+				files: newFiles,
+			},
+			context: {hasUpload: true},
+		}),
+		[customerToken, taskId],
+	);
+
+	return (
+		<UploadDashboardButton onUploadFiles={uploadAttachmentsCb}>
+			<fbt project="inyo" desc="notification message">
+				Joindre un document
+			</fbt>
+		</UploadDashboardButton>
+	);
+};
+
 const Item = ({
 	id,
 	customerToken,
@@ -252,7 +275,6 @@ const Item = ({
 			},
 		},
 	});
-	const [uploadAttachments] = useMutation(UPLOAD_ATTACHMENTS);
 
 	useOnClickOutside(dateRef, () => {
 		setEditDueDate(false);
@@ -270,6 +292,7 @@ const Item = ({
 	if (error || errorUser) throw errorUser || error;
 
 	const {item} = data;
+
 	const {linkedCustomer: customer} = item;
 
 	let {description} = item;
@@ -1163,21 +1186,7 @@ const Item = ({
 						);
 					},
 				)}
-				<UploadDashboardButton
-					onUploadFiles={newFiles => uploadAttachments({
-						variables: {
-							token: customerToken,
-							taskId: item.id,
-							files: newFiles,
-						},
-						context: {hasUpload: true},
-					})
-					}
-				>
-					<fbt project="inyo" desc="notification message">
-						Joindre un document
-					</fbt>
-				</UploadDashboardButton>
+				<Uploader customerToken={customerToken} taskId={item.id} />
 			</AttachedList>
 			{item.type === 'CONTENT_ACQUISITION' && (
 				<>

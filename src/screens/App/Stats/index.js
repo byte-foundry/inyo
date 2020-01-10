@@ -282,7 +282,7 @@ const Stats = ({history, location}) => {
 
 		const activity = {
 			name: task.name,
-			date: task.finishedAt,
+			date: task.scheduledFor ? task.scheduledFor : task.finishedAt,
 			value:
 				(task.timeItTook ? task.timeItTook : task.unit)
 				* workingTime

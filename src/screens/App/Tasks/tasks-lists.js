@@ -9,6 +9,7 @@ import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
 import PendingActionsTray from '../../../components/PendingActionsTray';
 import ProjectBudget from '../../../components/ProjectBudget';
+import ProjectDocumentsFolders from '../../../components/ProjectDocumentsFolders';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
@@ -154,6 +155,9 @@ function TasksList({location, history}) {
 						)}
 						{view === 'activity' && (
 							<ActivityFeed projectId={projectId} />
+						)}
+						{view === 'documents' && (
+							<ProjectDocumentsFolders projectId={projectId} />
 						)}
 					</Suspense>
 					{isTasksView && (

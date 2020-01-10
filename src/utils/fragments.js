@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const SHORT_TAG_FRAGMENT = gql`
 	fragment ShortTagFragment on Tag {
@@ -163,6 +163,8 @@ export const ITEM_FRAGMENT = gql`
 			id
 			filename
 			url
+			documentType
+			createdAt
 			owner {
 				__typename
 				... on User {

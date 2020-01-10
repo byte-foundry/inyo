@@ -776,3 +776,24 @@ export const STRIPE_CONSTANT
 			successUrl: 'https://dev.inyo.me/paid',
 			cancelUrl: 'https://dev.inyo.me/canceled',
 		  };
+
+export const documentTypes = [
+	{
+		type: 'DEFAULT',
+		get name() {
+			return fbt('Documents du projet', 'project doc');
+		},
+	},
+	{
+		type: 'ADMIN',
+		get name() {
+			return fbt('Documents administratifs', 'admin doc');
+		},
+	},
+	{
+		type: 'DELIVERABLE',
+		get name() {
+			return fbt('Livrables', 'deliverables');
+		},
+	},
+];

@@ -41,12 +41,15 @@
 /* Rules for sizing the icon. */
 .material-icons.md-12 {
 	font-size: 12px;
+	padding-top: 2px;
 }
 .material-icons.md-18 {
 	font-size: 18px;
+	padding-top: 2px;
 }
 .material-icons.md-24 {
 	font-size: 24px;
+	padding-top: 3px;
 }
 .material-icons.md-36 {
 	font-size: 36px;

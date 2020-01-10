@@ -12,7 +12,7 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
-	SubHeading
+	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_PROJECT_INFOS} from '../../utils/queries';
 import IconButton from '../IconButton';
@@ -96,7 +96,7 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 
 	const {data, error} = useQuery(GET_PROJECT_INFOS, {
 		variables: {projectId, token},
-		suspend: true
+		suspend: true,
 	});
 
 	if (error) throw error;
@@ -142,6 +142,25 @@ const SidebarCustomerProjectInfos = ({projectId, location, history}) => {
 							</fbt>
 						}
 						current={activeView === 'shared-notes'}
+					/>
+				</SidebarLink>
+				<SidebarLink
+					onClick={() => setView('documents')}
+					active={activeView === 'documents'}
+					id="document-project-button"
+				>
+					<IconButton
+						icon="folder"
+						size="tiny"
+						label={
+							<fbt
+								project="inyo"
+								desc="sidebar project activity link label"
+							>
+								Documents
+							</fbt>
+						}
+						current={activeView === 'documents'}
 					/>
 				</SidebarLink>
 			</SubSection>

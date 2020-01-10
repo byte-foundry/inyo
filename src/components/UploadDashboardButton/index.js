@@ -6,7 +6,7 @@ import Uppy, {Plugin} from '@uppy/core';
 import uppyFrenchLocale from '@uppy/locales/lib/fr_FR';
 import DashboardModal from '@uppy/react/lib/DashboardModal';
 import {IntlViewerContext} from 'fbt';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {Button} from '../../utils/new/design-system';
@@ -21,7 +21,7 @@ class Upload extends Plugin {
 	}
 
 	install() {
-		this.uppy.addUploader(fileIDs => {
+		this.uppy.addUploader((fileIDs) => {
 			const files = fileIDs.map(fileID => this.uppy.getFile(fileID).data);
 
 			return this.callback(files);
@@ -35,19 +35,21 @@ function UploadDashboardButton({
 	allowMultipleUploads,
 	restrictions,
 	autoProceed,
-	style
+	style,
 }) {
 	const [modalOpen, setModalOpen] = useState(false);
-	const [uppyState] = useState(
-		Uppy({
+	const uppyState = useMemo(
+		() => Uppy({
 			autoProceed,
 			allowMultipleUploads,
 			restrictions,
 			locale:
-				IntlViewerContext.locale.startsWith('fr') && uppyFrenchLocale
+					IntlViewerContext.locale.startsWith('fr')
+					&& uppyFrenchLocale,
 		}).use(Upload, {
-			callback: onUploadFiles
-		})
+			callback: onUploadFiles,
+		}),
+		[autoProceed, allowMultipleUploads, restrictions, onUploadFiles],
 	);
 
 	useEffect(() => {
@@ -89,7 +91,7 @@ function UploadDashboardButton({
 }
 
 UploadDashboardButton.defaultProps = {
-	onUploadFiles: () => {}
+	onUploadFiles: () => {},
 };
 
 export default UploadDashboardButton;

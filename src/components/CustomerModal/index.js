@@ -21,6 +21,8 @@ import {
 	SubHeading,
 } from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
+import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
 
@@ -81,6 +83,7 @@ const CustomerModal = ({
 	});
 	const [updateCustomer] = useMutation(UPDATE_CUSTOMER);
 	const [createCustomer] = useMutation(CREATE_CUSTOMER);
+	const {language} = useUserInfos();
 	const customerNotNull = customer || {}; // This is important because js is dumb and default parameters do not replace null
 	const [editorState, setEditorState] = useState(
 		createEditorState(
@@ -144,6 +147,7 @@ const CustomerModal = ({
 						email: customerNotNull.email || '',
 						phone: customerNotNull.phone || '',
 						occupation: customerNotNull.occupation || '',
+						address: customerNotNull.address || '',
 					}}
 					validate={(values) => {
 						if (
@@ -181,6 +185,18 @@ const CustomerModal = ({
 									),
 								occupation: Yup.string(),
 								phone: Yup.string(),
+								address: Yup.object()
+									.shape({
+										street: Yup.string().required(),
+										city: Yup.string().required(),
+										postalCode: Yup.string().required(),
+										country: Yup.string().required(),
+									})
+									.required(
+										<fbt project="inyo" desc="required">
+											Requis
+										</fbt>,
+									),
 							}).validateSync(values, {abortEarly: false});
 
 							if (
@@ -235,6 +251,7 @@ const CustomerModal = ({
 									email: values.email,
 									phone: values.phone,
 									occupation: values.occupation,
+									address: values.address,
 									userNotes: convertToRaw(
 										editorState.getCurrentContent(),
 									),
@@ -258,6 +275,7 @@ const CustomerModal = ({
 									email: values.email,
 									phone: values.phone,
 									occupation: values.occupation,
+									address: values.address,
 									userNotes: convertToRaw(
 										editorState.getCurrentContent(),
 									),
@@ -281,7 +299,12 @@ const CustomerModal = ({
 					}}
 				>
 					{(props) => {
-						const {values, status, isSubmitting} = props;
+						const {
+							values,
+							status,
+							isSubmitting,
+							setFieldValue,
+						} = props;
 
 						return (
 							<form onSubmit={props.handleSubmit}>
@@ -435,6 +458,26 @@ const CustomerModal = ({
 												name="occupation"
 												placeholder="Comptable"
 												style={{gridColumn: '2 / 4'}}
+											/>
+											<AddressAutocomplete
+												{...props}
+												language={language}
+												onChange={setFieldValue}
+												name="address"
+												values={customerNotNull.address}
+												placeholder=""
+												label={
+													<fbt
+														project="inyo"
+														desc="customer modal billing address"
+													>
+														Adresse de facturation
+													</fbt>
+												}
+												padded
+												style={{
+													gridColumn: '1 / 4',
+												}}
 											/>
 											<NotesFormLabel>
 												<fbt

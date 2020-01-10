@@ -120,7 +120,7 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 			suspend: true,
 		},
 	);
-	const [sorting, setSorting] = useState('Date');
+	const [sorting, setSorting] = useState('datetime');
 	const [order, setOrder] = useState(1);
 
 	const sortAndSwitch = (prop) => {

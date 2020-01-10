@@ -145,6 +145,10 @@ const Actions = styled('div')`
 `;
 
 const ProjectQuotes = ({projectId}) => {
+	/* TODO in db */
+	const [hasTaxes, setHasTaxes] = useState(false);
+	const [taxRate, setTaxRate] = useState(20);
+
 	const {defaultDailyPrice} = useUserInfos();
 	const [quoteCreated, setQuoteCreated] = useState(null);
 	const [prices, setPrices] = useState({});
@@ -227,13 +231,99 @@ const ProjectQuotes = ({projectId}) => {
 				/>
 			))}
 			<div>
-				<div>Total</div>
-				<div>
-					{Object.keys(prices).reduce(
-						(acc, priceKey) => acc + prices[priceKey],
-					)}{' '}
-					€
+				<div style={{display: 'flex'}}>
+					<div>Devis avec taxe</div>
+					<input
+						type="checkbox"
+						checked={hasTaxes}
+						onChange={e => setHasTaxes(e.target.checked)}
+					/>
 				</div>
+				{hasTaxes ? (
+					<div>
+						<div style={{fontSize: '1.2rem', display: 'flex'}}>
+							<div
+								style={{
+									flex: 1,
+									display: 'flex',
+									justifyContent: 'flex-end',
+									marginRight: '1rem',
+								}}
+							>
+								Total H.T.
+							</div>
+							<div>
+								{Object.keys(prices).reduce(
+									(acc, priceKey) => acc + prices[priceKey],
+									0,
+								)}{' '}
+								€
+							</div>
+						</div>
+						<div style={{fontSize: '1.2rem', display: 'flex'}}>
+							<div
+								style={{
+									flex: 1,
+									display: 'flex',
+									justifyContent: 'flex-end',
+									marginRight: '1rem',
+								}}
+							>
+								TVA
+							</div>
+							<div>
+								<Input
+									type="number"
+									value={taxRate}
+									onChange={e => setTaxRate(e.target.value)}
+								/>{' '}
+								%
+							</div>
+						</div>
+						<div style={{fontSize: '1.2rem', display: 'flex'}}>
+							<div
+								style={{
+									flex: 1,
+									display: 'flex',
+									justifyContent: 'flex-end',
+									marginRight: '1rem',
+								}}
+							>
+								Total T.T.C.
+							</div>
+							<div>
+								{Object.keys(prices).reduce(
+									(acc, priceKey) => acc + prices[priceKey],
+									0,
+								)
+									* (1 + taxRate / 100)}{' '}
+								€
+							</div>
+						</div>
+					</div>
+				) : (
+					<div style={{fontSize: '1.2rem', display: 'flex'}}>
+						<div
+							style={{
+								flex: 1,
+								display: 'flex',
+								justifyContent: 'flex-end',
+								marginRight: '1rem',
+							}}
+						>
+							Total
+						</div>
+						<div>
+							<span style={{padding: '0 1rem'}}>
+								{Object.keys(prices).reduce(
+									(acc, priceKey) => acc + prices[priceKey],
+									0,
+								)}{' '}
+							</span>
+							€
+						</div>
+					</div>
+				)}
 			</div>
 			<RichTextEditor
 				placeholder={fbt(
@@ -258,8 +348,13 @@ const ProjectQuotes = ({projectId}) => {
 									section => ({
 										name: section.name,
 										price: prices[section.id],
+										items: section.items.map(item => ({
+											name: item.name,
+										})),
 									}),
 								),
+								hasTaxes,
+								taxRate,
 							},
 						});
 

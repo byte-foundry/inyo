@@ -199,32 +199,44 @@ const Quote = ({match}) => {
 				<RichTextEditor displayMode defaultValue={quote.header} />
 				<UL>
 					{quote.sections.map(section => (
-						<LI key={section.id}>
+						<li key={section.id}>
 							<Section>
 								{section.name} <Line /> {section.price}
 							</Section>
 							<ul>
-								<li>une tâche</li>
-								<li>une autre tâche</li>
-								<li>une dernière tâche</li>
+								{section.items.map(item => (
+									<li>{item.name}</li>
+								))}
 							</ul>
-						</LI>
+						</li>
 					))}
 				</UL>
 				<Total>
-					<div>
-						{total}{' '}
-						<fbt project="inyo" desc="quote screen ht">
-							H.T
-						</fbt>
-					</div>
-					<TotalTTC>
-						{/* #todo vat variable */}
-						{total * 1.2}{' '}
-						<fbt project="inyo" desc="quote screen ttc">
-							T.T.C
-						</fbt>
-					</TotalTTC>
+					{quote.hasTaxes ? (
+						<>
+							<div>
+								{total}{' '}
+								<fbt project="inyo" desc="quote screen ht">
+									H.T
+								</fbt>
+							</div>
+							<TotalTTC>
+								{/* #todo vat variable */}
+								{total * (1 + quote.taxRate / 100)}{' '}
+								<fbt project="inyo" desc="quote screen ttc">
+									T.T.C
+								</fbt>
+							</TotalTTC>
+						</>
+					) : (
+						<TotalTTC>
+							{/* #todo vat variable */}
+							{total}{' '}
+							<fbt project="inyo" desc="quote screen ttc">
+								T.T.C
+							</fbt>
+						</TotalTTC>
+					)}
 				</Total>
 				<Footer>
 					<RichTextEditor displayMode defaultValue={quote.footer} />

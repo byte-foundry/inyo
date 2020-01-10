@@ -899,6 +899,8 @@ export const GET_QUOTE = gql`
 			id
 			header
 			footer
+			hasTaxes
+			taxRate
 			project {
 				id
 				issuer {
@@ -933,6 +935,10 @@ export const GET_QUOTE = gql`
 				id
 				name
 				price
+				items {
+					id
+					name
+				}
 			}
 		}
 	}

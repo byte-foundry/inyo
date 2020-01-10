@@ -1081,12 +1081,16 @@ export const ISSUE_QUOTE = gql`
 		$sections: [QuoteSectionInput!]
 		$header: Json
 		$footer: Json
+		$hasTaxes: Boolean!
+		$taxRate: Float!
 	) {
 		issueQuote(
 			projectId: $projectId
 			sections: $sections
 			header: $header
 			footer: $footer
+			hasTaxes: $hasTaxes
+			taxRate: $taxRate
 		) {
 			id
 			createdAt

@@ -57,10 +57,10 @@ const PlayButton = styled(IconButton)`
 	width: 3rem;
 	height: 3rem;
 	border-radius: 50%;
-	border: 1px solid ${primaryWhite};
 
 	::after {
 		box-shadow: 0 0 0 5px ${primaryWhite};
+		border: 1px solid ${primaryWhite};
 	}
 
 	:hover {
@@ -81,11 +81,11 @@ const PlayButton = styled(IconButton)`
 `;
 
 const TimerText = styled('span')`
-	min-width: 75px;
 	display: inline-block;
 	text-align: left;
 	font-weight: bold;
 	font-size: 1.2rem;
+	padding-right: 1rem;
 `;
 
 const RefreshSeconds = ({children}) => {

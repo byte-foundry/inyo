@@ -8,7 +8,6 @@ import {formatName} from '../../utils/functions';
 import {START_TASK_TIMER, STOP_CURRENT_TASK_TIMER} from '../../utils/mutations';
 import {primaryWhite} from '../../utils/new/design-system';
 import Button from '../IconButton';
-import MaterialIcon from '../MaterialIcon';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 

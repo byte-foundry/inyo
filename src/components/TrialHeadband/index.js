@@ -86,6 +86,7 @@ const TimerText = styled('span')`
 	font-weight: bold;
 	font-size: 1.2rem;
 	padding-right: 1rem;
+	min-width: 55px;
 `;
 
 const RefreshSeconds = ({children}) => {

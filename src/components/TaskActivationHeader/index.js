@@ -14,7 +14,11 @@ import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
 const Timer = styled('div')`
 	display: flex;
 	position: absolute;
-	left: 10px;
+	left: 15px;
+`;
+
+const TimerText = styled('div')`
+	padding-left: 0.5em;
 `;
 
 const RefreshSeconds = ({children}) => {
@@ -175,13 +179,13 @@ function TaskActivationHeader({
 									current
 									invert={false}
 									icon="pause_circle_filled"
-									size="tiny"
+									size="normal"
 									color={primaryWhite}
 									onClick={() => stopCurrentTaskTimer()}
 								/>
 								<RefreshSeconds>
 									{() => (
-										<span>
+										<TimerText>
 											{moment
 												.duration(
 													moment().diff(
@@ -190,7 +194,7 @@ function TaskActivationHeader({
 												)
 												.add(previousTimesDiff)
 												.format('HH:mm:ss')}
-										</span>
+										</TimerText>
 									)}
 								</RefreshSeconds>
 							</>
@@ -199,7 +203,7 @@ function TaskActivationHeader({
 								current
 								invert
 								icon="play_circle_filled"
-								size="tiny"
+								size="normal"
 								color={primaryWhite}
 								onClick={() => {
 									if (!item.scheduledFor) {

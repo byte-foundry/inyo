@@ -371,7 +371,7 @@ const ResponsiveDialog = styled(Dialog)`
 		min-width: initial;
 		width: 100vw;
 		padding: 0;
-		margin-top: 13vh;
+		margin-top: 20vh;
 	}
 `;
 

@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import gql from 'graphql-tag';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
+import {BREAKPOINTS} from '../../utils/constants';
 import {STOP_CURRENT_TASK_TIMER} from '../../utils/mutations';
 import {
 	A,
@@ -16,8 +17,14 @@ import {
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
 
+const TrialEndMessage = styled('p')`
+	margin-left: auto;
+`;
+
 const TaskLink = styled(A.withComponent(Link))`
 	color: ${primaryWhite};
+	white-space: nowrap;
+	overflow-x: scroll;
 
 	:hover {
 		border-color: ${primaryWhite};
@@ -36,6 +43,15 @@ const Headband = styled('div')`
 	top: 0;
 	right: 0;
 	z-index: 1;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		${props => props.isDisplayingTimer
+			&& `
+			${TrialEndMessage} {
+				display: none;
+			}
+		`}
+	}
 `;
 
 const Content = styled('div')`
@@ -49,6 +65,11 @@ const Content = styled('div')`
 const Timer = styled('div')`
 	align-self: center;
 	margin-left: 75px;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: flex;
+		align-items: center;
+	}
 `;
 
 const PlayButton = styled(IconButton)`
@@ -155,7 +176,7 @@ const TrialHeadband = ({history, location, setHeadband}) => {
 		: null;
 
 	return (
-		<Headband>
+		<Headband isDisplayingTimer={!!currentTask}>
 			<Content>
 				{currentTask && (
 					<>
@@ -196,7 +217,7 @@ const TrialHeadband = ({history, location, setHeadband}) => {
 					</>
 				)}
 				{!lifetimePayment && (
-					<p style={{marginLeft: 'auto'}}>
+					<TrialEndMessage>
 						<fbt project="inyo" desc="trial is ending message">
 							La version d'essai s'arrête{' '}
 							<fbt:param name="date">{trialEndsAt}</fbt:param>
@@ -215,7 +236,7 @@ const TrialHeadband = ({history, location, setHeadband}) => {
 								Passer à la version payante
 							</fbt>
 						</Button>
-					</p>
+					</TrialEndMessage>
 				)}
 			</Content>
 		</Headband>

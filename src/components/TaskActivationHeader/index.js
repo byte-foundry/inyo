@@ -4,6 +4,7 @@ import React, {useEffect, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
+import {BREAKPOINTS} from '../../utils/constants';
 import {formatName} from '../../utils/functions';
 import {START_TASK_TIMER, STOP_CURRENT_TASK_TIMER} from '../../utils/mutations';
 import {primaryWhite} from '../../utils/new/design-system';
@@ -16,6 +17,11 @@ const Timer = styled('div')`
 	display: flex;
 	position: absolute;
 	left: 15px;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		position: static;
+		min-width: 100px;
+	}
 `;
 
 const TimerText = styled('div')`

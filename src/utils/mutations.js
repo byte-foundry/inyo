@@ -1111,3 +1111,18 @@ export const STOP_CURRENT_TASK_TIMER = gql`
 		}
 	}
 `;
+
+export const CLEAR_TASK_WORKED_TIMES = gql`
+	${ITEM_FRAGMENT}
+
+	mutation clearTaskWorkedTimes($taskId: ID!) {
+		clearTaskWorkedTimes(taskId: $taskId) {
+			...ItemFragment
+			id
+			workedTimes {
+				start
+				end
+			}
+		}
+	}
+`;

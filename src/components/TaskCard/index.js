@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import React, {forwardRef} from 'react';
 import {withRouter} from 'react-router-dom';
 
@@ -6,6 +7,7 @@ import {useMutation} from '../../utils/apollo-hooks';
 import {formatName, isCustomerTask} from '../../utils/functions';
 import {
 	FINISH_ITEM,
+	FOCUS_TASK,
 	START_TASK_TIMER,
 	STOP_CURRENT_TASK_TIMER,
 	UNFINISH_ITEM,
@@ -114,6 +116,7 @@ const TaskCard = withRouter(
 		const [unfinishItem] = useMutation(UNFINISH_ITEM);
 		const [startTaskTimer] = useMutation(START_TASK_TIMER);
 		const [stopCurrentTaskTimer] = useMutation(STOP_CURRENT_TASK_TIMER);
+		const [focusTask] = useMutation(FOCUS_TASK);
 
 		const lastWorkedTime
 			= task.workedTimes.length > 0
@@ -155,9 +158,26 @@ const TaskCard = withRouter(
 						onClick={(e) => {
 							e.stopPropagation();
 
-							isTimerRunning
-								? stopCurrentTaskTimer()
-								: startTaskTimer({variables: {id: task.id}});
+							if (isTimerRunning) {
+								stopCurrentTaskTimer();
+							}
+							else {
+								focusTask({
+									variables: {itemId: task.id},
+									optimisticResponse: {
+										focusTask: {
+											...task,
+											scheduledFor: moment().format(
+												moment.HTML5_FMT.DATE,
+											),
+											schedulePosition: -1,
+											isFocused: true,
+										},
+									},
+								});
+
+								startTaskTimer({variables: {id: task.id}});
+							}
 						}}
 					/>
 				)}

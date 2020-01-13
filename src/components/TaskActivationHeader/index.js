@@ -10,6 +10,7 @@ import {primaryWhite} from '../../utils/new/design-system';
 import Button from '../IconButton';
 import TaskActivationButton from '../TaskActivationButton';
 import TaskCustomerActivationButton from '../TaskCustomerActivationButton';
+import Tooltip from '../Tooltip';
 
 const Timer = styled('div')`
 	display: flex;
@@ -199,14 +200,19 @@ function TaskActivationHeader({
 								</RefreshSeconds>
 							</>
 						) : (
-							<Button
-								current
-								invert
-								icon="play_circle_filled"
-								size="normal"
-								color={primaryWhite}
-								onClick={() => {
-									if (!item.scheduledFor) {
+							<Tooltip
+								label={fbt(
+									'Chronométrer',
+									'time task item view header',
+								)}
+							>
+								<Button
+									current
+									invert
+									icon="play_circle_filled"
+									size="normal"
+									color={primaryWhite}
+									onClick={() => {
 										focusTask({
 											variables: {itemId: item.id},
 											optimisticResponse: {
@@ -220,11 +226,13 @@ function TaskActivationHeader({
 												},
 											},
 										});
-									}
 
-									startTaskTimer({variables: {id: item.id}});
-								}}
-							/>
+										startTaskTimer({
+											variables: {id: item.id},
+										});
+									}}
+								/>
+							</Tooltip>
 						)}
 					</Timer>
 					<TaskActivationButton

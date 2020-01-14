@@ -1,6 +1,6 @@
 import styled from '@emotion/styled/macro';
 import moment from 'moment';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import fbt from '../../fbt/fbt.macro';
@@ -152,11 +152,15 @@ const Actions = styled('div')`
 `;
 
 const ProjectQuotes = ({projectId}) => {
-	/* TODO in db */
-	const [hasTaxes, setHasTaxes] = useState(false);
-	const [taxRate, setTaxRate] = useState(20);
+	const {defaultDailyPrice, vatRate, vat} = useUserInfos();
+	const [hasTaxes, setHasTaxes] = useState(vat);
+	const [taxRate, setTaxRate] = useState(vatRate);
 
-	const {defaultDailyPrice} = useUserInfos();
+	useEffect(() => {
+		setHasTaxes(vat);
+		setTaxRate(vatRate);
+	}, [vat, vatRate]);
+
 	const [quoteCreated, setQuoteCreated] = useState(null);
 	const [prices, setPrices] = useState({});
 	const {data, error, loading} = useQuery(GET_PROJECT_QUOTES, {

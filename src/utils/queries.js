@@ -134,6 +134,9 @@ export const GET_USER_INFOS = gql`
 				}
 				phone
 				vat
+				siret
+				rcs
+				vatRate
 			}
 			settings {
 				assistantName

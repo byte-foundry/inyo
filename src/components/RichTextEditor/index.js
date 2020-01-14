@@ -59,7 +59,9 @@ const INITIAL_EDITOR_VALUE = {
 	},
 };
 
-const RichTextEditor = ({defaultValue, onChange, displayMode}) => {
+const RichTextEditor = ({
+	defaultValue, onChange, displayMode, placeholder,
+}) => {
 	const [value, setValue] = useState(
 		Value.fromJSON(defaultValue || INITIAL_EDITOR_VALUE),
 	);
@@ -129,7 +131,7 @@ const RichTextEditor = ({defaultValue, onChange, displayMode}) => {
 			<Editor
 				spellCheck
 				autoFocus
-				placeholder="Enter some rich text..."
+				placeholder={placeholder._contents[0]}
 				ref={editorRef}
 				value={value}
 				onChange={({value}) => {

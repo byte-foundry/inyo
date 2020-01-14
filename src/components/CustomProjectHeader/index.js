@@ -25,6 +25,10 @@ const Container = styled('div')`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-bottom: 1rem;
 	}
+
+	@media print {
+		display: none;
+	}
 `;
 
 const ContentContainer = styled('div')`

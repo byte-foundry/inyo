@@ -3221,17 +3221,17 @@
     }
    ]
   },
-  "+a28apNacBiALR3YZvYZpw==": {
+  "n8SQeum+Zg7LoNsiqWZvFQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Budget réel [budget]}{=[budget]€}",
+     "translation": "{=Budget réel [budget]}{=[budget]€ [time][time]}",
      "variations": {}
     }
    ]
   },
-  "pgEn6hWhH58HKuwYd5vSqA==": {
+  "xuTf6C89LuAC77hjg1eubQ==": {
    "tokens": [],
    "types": [],
    "translations": [
@@ -3261,32 +3261,42 @@
     }
    ]
   },
-  "HwwlTPsKKWIIHQfdKeKOLA==": {
+  "O/TWJWAsOwDVWSn6+px1/w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "${budget}",
+     "translation": "${budget} {time}{=[time]}",
      "variations": {}
     }
    ]
   },
-  "fDL30wt24taCtWMkf9Ixig==": {
+  "1R6ta7UH4Jxxs/dFTcCw4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Budget restant [budget]}{=[budget]€}",
+     "translation": "{time}",
      "variations": {}
     }
    ]
   },
-  "Y/oOFvGMTbCxq8HijZoINw==": {
+  "Q3fToRZjtNpORL7Q84CY4Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Budget remaining {budget}",
+     "translation": "{=Budget restant [budget]}{=[budget]€ [time][time]}",
+     "variations": {}
+    }
+   ]
+  },
+  "snt0dz+OptAjUGFIagZEhw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Remaining budget {budget}",
      "variations": {}
     }
    ]
@@ -3311,12 +3321,22 @@
     }
    ]
   },
-  "O5c0X22iNXX2xv7XakE9Yg==": {
+  "kJdUfbfITdGfnusUmc3ycg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "${budget}",
+     "translation": "${budget} {time}{=[time]}",
+     "variations": {}
+    }
+   ]
+  },
+  "bR5byAVHL3I1O4UtGm1Ihg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{time}",
      "variations": {}
     }
    ]
@@ -3477,6 +3497,106 @@
    "translations": [
     {
      "translation": "These notes are private. Your client cannot see them.",
+     "variations": {}
+    }
+   ]
+  },
+  "UWDTJHkoZmilujObphq0rw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sync prizes with project",
+     "variations": {}
+    }
+   ]
+  },
+  "gMKkyYQlXiomuXvTmzZ2qA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote header",
+     "variations": {}
+    }
+   ]
+  },
+  "ZxABVMnMGXxWXEo9lHScCw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subtotal",
+     "variations": {}
+    }
+   ]
+  },
+  "4SENJ9e3iDp4xDNJEugzTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${price}",
+     "variations": {}
+    }
+   ]
+  },
+  "B21uE+4eUxxUm0U9QnRm0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "VAT",
+     "variations": {}
+    }
+   ]
+  },
+  "EPeRU24GjYtk+VlXoxQnGQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total",
+     "variations": {}
+    }
+   ]
+  },
+  "o767iga5grsHGrblh6ti9Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${price}",
+     "variations": {}
+    }
+   ]
+  },
+  "X7846IgpnNe8tJuHtz9Y7w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote footer",
+     "variations": {}
+    }
+   ]
+  },
+  "FZVMMWwzultiJ0b3qaGP8A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Issue a new quote",
+     "variations": {}
+    }
+   ]
+  },
+  "T+YVwHbCz7T7IgWkb1h8IA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Issued quotes",
      "variations": {}
     }
    ]
@@ -4277,6 +4397,26 @@
    "translations": [
     {
      "translation": "History",
+     "variations": {}
+    }
+   ]
+  },
+  "ppAw5KQlHU+CoaOQxOzYng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Issue quote",
+     "variations": {}
+    }
+   ]
+  },
+  "R+oxt+2PzhvodY7MNJ0arg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quotes",
      "variations": {}
     }
    ]
@@ -5527,16 +5667,6 @@
    "translations": [
     {
      "translation": "We built them collaboratively with experienced freelances in their fields (design, development etc.)",
-     "variations": {}
-    }
-   ]
-  },
-  "EQjurO3LYr2flJ+mnPDmPw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Type here...",
      "variations": {}
     }
    ]
@@ -7121,16 +7251,6 @@
     }
    ]
   },
-  "W5STaCc0HqXQqGj8/PGTcg==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "No category",
-     "variations": {}
-    }
-   ]
-  },
   "1K/eeL6OoINQBgAI2S+tCQ==": {
    "tokens": [],
    "types": [],
@@ -7507,6 +7627,66 @@
    "translations": [
     {
      "translation": "Trigger automatic actions according to your projects. You won't lose time sending reminders and status reports to clients anymore.",
+     "variations": {}
+    }
+   ]
+  },
+  "AU4UmOPIEzH+sm+ZcUudGg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Accept the quote",
+     "variations": {}
+    }
+   ]
+  },
+  "iaCWbsAv/mlHc9/0k24JdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Print the quote",
+     "variations": {}
+    }
+   ]
+  },
+  "M+waFcEmg7eHJxePwiwiDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote #",
+     "variations": {}
+    }
+   ]
+  },
+  "+Iv8m372AO85AOPkR8ZSFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subtotal {subtotal}",
+     "variations": {}
+    }
+   ]
+  },
+  "937UKHG/y623MnEgw+1m+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total {total}",
+     "variations": {}
+    }
+   ]
+  },
+  "JT3Zq8Z5x0p5ZlpWxfI8GQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total {subtotal}",
      "variations": {}
     }
    ]
@@ -8767,6 +8947,86 @@
    "translations": [
     {
      "translation": "viewed project",
+     "variations": {}
+    }
+   ]
+  },
+  "+a28apNacBiALR3YZvYZpw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget réel [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "pgEn6hWhH58HKuwYd5vSqA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Real budget {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "HwwlTPsKKWIIHQfdKeKOLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "fDL30wt24taCtWMkf9Ixig==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Budget restant [budget]}{=[budget]€}",
+     "variations": {}
+    }
+   ]
+  },
+  "Y/oOFvGMTbCxq8HijZoINw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Budget remaining {budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "O5c0X22iNXX2xv7XakE9Yg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "EQjurO3LYr2flJ+mnPDmPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Type here...",
+     "variations": {}
+    }
+   ]
+  },
+  "W5STaCc0HqXQqGj8/PGTcg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "No category",
      "variations": {}
     }
    ]

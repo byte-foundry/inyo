@@ -1,4 +1,7 @@
+import '../../../print.css';
+
 import styled from '@emotion/styled';
+import moment from 'moment';
 import React from 'react';
 
 import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
@@ -115,6 +118,15 @@ const Content = styled('div')`
 	border: 1px solid lightgrey;
 	box-shadow: 15px 15px 15px lightgrey;
 	padding: 4rem 5rem;
+
+	@media print {
+		box-shadow: none;
+		border: none;
+		padding: 0;
+		width: 100%;
+		max-width: auto;
+		min-height: auto;
+	}
 `;
 
 const Actions = styled('div')`
@@ -123,6 +135,10 @@ const Actions = styled('div')`
 	justify-content: flex-end;
 	padding: 2rem;
 	margin: 0 auto;
+
+	@media print {
+		display: none;
+	}
 `;
 
 const Quote = ({match}) => {
@@ -171,7 +187,7 @@ const Quote = ({match}) => {
 					</fbt>
 					#TODO XXXX
 					<br />
-					#TODO date {quote.project.createdAt}
+					{moment(quote.createdAt).format('L')}
 				</Date>
 				<Header>
 					<Infos>
@@ -195,13 +211,14 @@ const Quote = ({match}) => {
 					</Infos>
 				</Header>
 
-				<H1>#TODO Titre du projet</H1>
+				<H1>{quote.project.name}</H1>
 				<RichTextEditor displayMode defaultValue={quote.header} />
 				<UL>
 					{quote.sections.map(section => (
-						<li key={section.id}>
+						<li key={section.id} style={{pageBreakInside: 'avoid'}}>
 							<Section>
-								{section.name} <Line /> {section.price}
+								{section.name} <Line />{' '}
+								{section.price.toFixed(2)}
 							</Section>
 							<ul>
 								{section.items.map(item => (
@@ -215,25 +232,32 @@ const Quote = ({match}) => {
 					{quote.hasTaxes ? (
 						<>
 							<div>
-								{total}{' '}
 								<fbt project="inyo" desc="quote screen ht">
-									H.T
+									<fbt:param name="subtotal">
+										{total.toFixed(2)}
+									</fbt:param>{' '}
+									HT
 								</fbt>
 							</div>
 							<TotalTTC>
-								{/* #todo vat variable */}
-								{total * (1 + quote.taxRate / 100)}{' '}
 								<fbt project="inyo" desc="quote screen ttc">
-									T.T.C
+									<fbt:param name="total">
+										{(
+											total
+											* (1 + quote.taxRate / 100)
+										).toFixed(2)}
+									</fbt:param>{' '}
+									TTC
 								</fbt>
 							</TotalTTC>
 						</>
 					) : (
 						<TotalTTC>
-							{/* #todo vat variable */}
-							{total}{' '}
 							<fbt project="inyo" desc="quote screen ttc">
-								T.T.C
+								<fbt:param name="subtotal">
+									{total.toFixed(2)}
+								</fbt:param>{' '}
+								TTC
 							</fbt>
 						</TotalTTC>
 					)}

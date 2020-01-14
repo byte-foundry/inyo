@@ -246,6 +246,7 @@ export const GET_PROJECT_QUOTES = gql`
 					name
 					unit
 					dailyRate
+					type
 				}
 			}
 			quotes {
@@ -901,8 +902,10 @@ export const GET_QUOTE = gql`
 			footer
 			hasTaxes
 			taxRate
+			createdAt
 			project {
 				id
+				name
 				issuer {
 					id
 					logo {

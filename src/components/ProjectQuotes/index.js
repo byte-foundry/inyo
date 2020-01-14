@@ -1,4 +1,5 @@
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
@@ -6,6 +7,7 @@ import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../utils/constants';
 import {FlexColumn, FlexRow, LoadingLogo} from '../../utils/content';
+import {isCustomerTask} from '../../utils/functions';
 import {
 	ISSUE_QUOTE,
 	UPDATE_PROJECT_QUOTE,
@@ -110,8 +112,8 @@ const BudgetSection = ({
 				</BudgetSectionName>
 				<BudgetSectionBudget>
 					<BudgetSectionInput
-						type="number"
-						value={price}
+						type="text"
+						value={price.toFixed(2)}
 						onClick={e => e.stopPropagation()}
 						onChange={e => onChangePrice(parseFloat(e.target.value))
 						}
@@ -120,13 +122,18 @@ const BudgetSection = ({
 				</BudgetSectionBudget>
 			</FlexRowSection>
 			<BudgetItems open={open}>
-				{section.items.map(item => (
-					<BudgetItem
-						key={item.id}
-						item={item}
-						defaultDailyPrice={defaultDailyPrice}
-					/>
-				))}
+				{section.items
+					.filter(
+						item => item.type !== 'PERSONAL'
+							&& !isCustomerTask(item.type),
+					)
+					.map(item => (
+						<BudgetItem
+							key={item.id}
+							item={item}
+							defaultDailyPrice={defaultDailyPrice}
+						/>
+					))}
 			</BudgetItems>
 		</BudgetSectionContainer>
 	);
@@ -250,14 +257,20 @@ const ProjectQuotes = ({projectId}) => {
 									marginRight: '1rem',
 								}}
 							>
-								Total H.T.
+								<fbt desc="subtotal">Total HT</fbt>
 							</div>
 							<div>
-								{Object.keys(prices).reduce(
-									(acc, priceKey) => acc + prices[priceKey],
-									0,
-								)}{' '}
-								€
+								<fbt desc="vat">
+									<fbt:param name="price">
+										{Object.keys(prices)
+											.reduce(
+												(acc, priceKey) => acc + prices[priceKey],
+												0,
+											)
+											.toFixed(2)}
+									</fbt:param>{' '}
+									€
+								</fbt>
 							</div>
 						</div>
 						<div style={{fontSize: '1.2rem', display: 'flex'}}>
@@ -269,7 +282,7 @@ const ProjectQuotes = ({projectId}) => {
 									marginRight: '1rem',
 								}}
 							>
-								TVA
+								<fbt desc="vat">TVA</fbt>
 							</div>
 							<div>
 								<Input
@@ -289,15 +302,21 @@ const ProjectQuotes = ({projectId}) => {
 									marginRight: '1rem',
 								}}
 							>
-								Total T.T.C.
+								<fbt desc="total">Total TTC</fbt>
 							</div>
 							<div>
-								{Object.keys(prices).reduce(
-									(acc, priceKey) => acc + prices[priceKey],
-									0,
-								)
-									* (1 + taxRate / 100)}{' '}
-								€
+								<fbt desc="total price">
+									<fbt:param name="price">
+										{(
+											Object.keys(prices).reduce(
+												(acc, priceKey) => acc + prices[priceKey],
+												0,
+											)
+											* (1 + taxRate / 100)
+										).toFixed(2)}
+									</fbt:param>{' '}
+									€
+								</fbt>
 							</div>
 						</div>
 					</div>
@@ -311,16 +330,22 @@ const ProjectQuotes = ({projectId}) => {
 								marginRight: '1rem',
 							}}
 						>
-							Total
+							<fbt desc="total">Total TTC</fbt>
 						</div>
 						<div>
 							<span style={{padding: '0 1rem'}}>
-								{Object.keys(prices).reduce(
-									(acc, priceKey) => acc + prices[priceKey],
-									0,
-								)}{' '}
+								<fbt desc="total price">
+									<fbt:param name="price">
+										{Object.keys(prices)
+											.reduce(
+												(acc, priceKey) => acc + prices[priceKey],
+												0,
+											)
+											.toFixed(2)}
+									</fbt:param>{' '}
+									€
+								</fbt>
 							</span>
-							€
 						</div>
 					</div>
 				)}
@@ -348,9 +373,14 @@ const ProjectQuotes = ({projectId}) => {
 									section => ({
 										name: section.name,
 										price: prices[section.id],
-										items: section.items.map(item => ({
-											name: item.name,
-										})),
+										items: section.items
+											.filter(
+												item => item.type !== 'PERSONAL'
+													&& !isCustomerTask(item.type),
+											)
+											.map(item => ({
+												name: item.name,
+											})),
 									}),
 								),
 								hasTaxes,
@@ -389,21 +419,26 @@ const ProjectQuotes = ({projectId}) => {
 						<fbt desc="generated quotes">Devis générés</fbt>
 					</SubHeading>
 					<ul>
-						{data.project.quotes.map(quote => (
-							<li key={quote.id}>
-								<ObjectLink
-									to={`/app/${
-										data.project.customer
-											? data.project.customer.token
-											: data.project.token
-									}/quotes/${quote.id}`}
-									target="_blank"
-								>
-									{quote.id}
-								</ObjectLink>{' '}
-								{new Date(quote.createdAt).toLocaleString()}
-							</li>
-						))}
+						{[...data.project.quotes]
+							.sort(
+								(a, b) => moment(b.createdAt).valueOf()
+									- moment(a.createdAt).valueOf(),
+							)
+							.map(quote => (
+								<li key={quote.id}>
+									<ObjectLink
+										to={`/app/${
+											data.project.customer
+												? data.project.customer.token
+												: data.project.token
+										}/quotes/${quote.id}`}
+										target="_blank"
+									>
+										{quote.id}
+									</ObjectLink>{' '}
+									{new Date(quote.createdAt).toLocaleString()}
+								</li>
+							))}
 					</ul>
 				</>
 			)}

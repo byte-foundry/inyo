@@ -18,6 +18,7 @@ import {
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
+	primaryWhite,
 	TaskCardElem,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
@@ -43,16 +44,29 @@ const CardTitle = styled('span')`
 	}
 `;
 
-export const TaskCardElemWithBtn = styled(TaskCardElem)`
-	${props => !props.hasTimerRunning
-		&& `
-		${Button}, ${TimerButton} {
-			transition: all 300ms ease;
-			opacity: 0;
+const Actions = styled('div')`
+	position: absolute;
+	background: ${primaryWhite};
+	display: flex;
+	overflow: hidden;
+	height: 0;
+`;
 
-			pointer-events: none;
+export const TaskCardElemWithBtn = styled(TaskCardElem)`
+	${Button} {
+		transition: all 300ms ease;
+		opacity: 0;
+
+		pointer-events: none;
+		transform: scale(0.6);
+
+		&:hover {
+			transition: all 150ms ease;
+			transform: scale(1);
 		}
-	`}
+
+		padding-top: 12px;
+	}
 
 	&:hover {
 		box-shadow: 0 0 5px ${primaryGrey};
@@ -62,6 +76,14 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 			opacity: 1;
 
 			pointer-events: all;
+		}
+
+		${Actions} {
+			right: 0;
+			left: 0;
+			bottom: 0;
+			top: 0;
+			height: 100%;
 		}
 	}
 
@@ -84,6 +106,15 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 			}
 		}
 	`}
+`;
+
+const ActionsWrap = styled('div')`
+	max-width: 200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
 `;
 
 const CardSubTitle = styled('span')`
@@ -139,81 +170,72 @@ const TaskCard = withRouter(
 				}
 			>
 				{isOver && <DragSeparator />}
-				{!isCustomerTask(task.type) && task.status !== 'FINISHED' && (
-					<TimerButton
-						id={
-							isTimerRunning
-								? 'task-stop-timer-button'
-								: 'task-start-timer-button'
-						}
-						noBg
-						current={isTimerRunning}
-						invert={false}
-						style={{
-							gridColumnStart: '2',
-							gridRow: '1 / 3',
-						}}
-						icon={
-							isTimerRunning
-								? 'pause_circle_filled'
-								: 'play_circle_filled'
-						}
-						size="tiny"
-						color={isTimerRunning ? primaryPurple : primaryGrey}
-						onClick={(e) => {
-							e.stopPropagation();
+				<Actions>
+					<ActionsWrap>
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								icon="add_circle"
+								size="medium"
+								color={
+									task.status === 'FINISHED'
+										? primaryPurple
+										: primaryGrey
+								}
+								onClick={(e) => {}}
+							/>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								icon="play_circle_filled"
+								size="medium"
+								color={
+									task.status === 'FINISHED'
+										? primaryPurple
+										: primaryGrey
+								}
+								onClick={(e) => {}}
+							/>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								style={{
+									gridColumnStart: '2',
+									gridRow: '1 / 3',
+								}}
+								icon="check_circle"
+								size="medium"
+								color={
+									task.status === 'FINISHED'
+										? primaryPurple
+										: primaryGrey
+								}
+								onClick={(e) => {
+									e.stopPropagation();
 
-							if (isTimerRunning) {
-								stopCurrentTaskTimer();
-							}
-							else {
-								focusTask({
-									variables: {itemId: task.id},
-									optimisticResponse: {
-										focusTask: {
-											...task,
-											scheduledFor: moment().format(
-												moment.HTML5_FMT.DATE,
-											),
-											schedulePosition: -1,
-											isFocused: true,
-										},
-									},
-								});
-
-								startTaskTimer({variables: {id: task.id}});
-							}
-						}}
-					/>
-				)}
-				{!isCustomerTask(task.type) && (
-					<Button
-						noBg
-						current={task.status === 'FINISHED'}
-						invert={task.status === 'FINISHED'}
-						style={{
-							gridColumnStart: '3',
-							gridRow: '1 / 3',
-						}}
-						icon="check_circle"
-						size="tiny"
-						color={
-							task.status === 'FINISHED'
-								? primaryPurple
-								: primaryGrey
-						}
-						onClick={(e) => {
-							e.stopPropagation();
-
-							if (task.status === 'FINISHED') {
-								unfinishItem({variables: {itemId: task.id}});
-							}
-							else {
-								finishItem({variables: {itemId: task.id}});
-							}
-						}}
-					/>
-				)}
+									if (task.status === 'FINISHED') {
+										unfinishItem({
+											variables: {itemId: task.id},
+										});
+									}
+									else {
+										finishItem({
+											variables: {itemId: task.id},
+										});
+									}
+								}}
+							/>
+						)}
+					</ActionsWrap>
+				</Actions>
 				{!!task.tags.length && (
 					<TagContainer>
 						{task.tags.map(tag => (

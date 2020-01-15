@@ -201,6 +201,15 @@ const Quote = ({match}) => {
 							<IssuerNameAndAddress
 								issuer={quote.project.issuer}
 							/>
+							{quote.project.issuer.vat && (
+								<div>N° TVA: {quote.project.issuer.vat}</div>
+							)}
+							{quote.project.issuer.siret && (
+								<div>SIRET: {quote.project.issuer.siret}</div>
+							)}
+							{quote.project.issuer.rcs && (
+								<div>RCS: {quote.project.issuer.rcs}</div>
+							)}
 						</div>
 					</Infos>
 

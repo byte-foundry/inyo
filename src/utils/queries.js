@@ -910,7 +910,11 @@ export const GET_QUOTE = gql`
 				id
 				name
 				issuer {
+					name
 					id
+					vat
+					siret
+					rcs
 					logo {
 						id
 						url

@@ -217,69 +217,114 @@ const TaskCard = withRouter(
 				<Actions>
 					<ActionsWrap>
 						{!isCustomerTask(task.type) && (
-							<Button
-								noBg
-								current={task.status === 'FINISHED'}
-								invert={task.status === 'FINISHED'}
-								icon="zoom_out_map"
-								size="medium"
-								color={primaryBlack}
-								onClick={(e) => {}}
-							/>
-						)}
-						{!isCustomerTask(task.type) && (
-							<Button
-								noBg
-								current={task.status === 'FINISHED'}
-								invert={task.status === 'FINISHED'}
-								icon="control_point_duplicate"
-								size="medium"
-								color={primaryBlack}
-								onClick={(e) => {}}
-							/>
-						)}
-						{!isCustomerTask(task.type) && (
-							<Button
-								noBg
-								current={task.status === 'FINISHED'}
-								invert={task.status === 'FINISHED'}
-								icon="play_circle_outline"
-								size="medium"
-								color={primaryBlack}
-								onClick={(e) => {}}
-							/>
-						)}
-						{!isCustomerTask(task.type) && (
-							<Button
-								noBg
-								current={task.status === 'FINISHED'}
-								invert={task.status === 'FINISHED'}
-								icon={
-									task.status === 'FINISHED'
-										? 'check_circle'
-										: 'check_circle_outline'
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="Actions card open"
+									>
+										Ouvrir la tâche
+									</fbt>
 								}
-								size="medium"
-								color={
-									task.status === 'FINISHED'
-										? primaryPurple
-										: primaryBlack
+							>
+								<Button
+									noBg
+									current={task.status === 'FINISHED'}
+									invert={task.status === 'FINISHED'}
+									icon="zoom_out_map"
+									size="medium"
+									color={primaryBlack}
+									onClick={(e) => {}}
+								/>
+							</Tooltip>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="Actions card divide"
+									>
+										Planifier cette tâche sur plusieurs
+										jours
+									</fbt>
 								}
-								onClick={(e) => {
-									e.stopPropagation();
+							>
+								<Button
+									noBg
+									current={task.status === 'FINISHED'}
+									invert={task.status === 'FINISHED'}
+									icon="control_point_duplicate"
+									size="medium"
+									color={primaryBlack}
+									onClick={(e) => {}}
+								/>
+							</Tooltip>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="Actions card play"
+									>
+										Lancer le chronomètre
+									</fbt>
+								}
+							>
+								<Button
+									noBg
+									current={task.status === 'FINISHED'}
+									invert={task.status === 'FINISHED'}
+									icon="play_circle_outline"
+									size="medium"
+									color={primaryBlack}
+									onClick={(e) => {}}
+								/>
+							</Tooltip>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Tooltip
+								label={
+									<fbt
+										project="inyo"
+										desc="Actions card done"
+									>
+										Marquer la tâche comme faite
+									</fbt>
+								}
+							>
+								<Button
+									noBg
+									current={task.status === 'FINISHED'}
+									invert={task.status === 'FINISHED'}
+									icon={
+										task.status === 'FINISHED'
+											? 'check_circle'
+											: 'check_circle_outline'
+									}
+									size="medium"
+									color={
+										task.status === 'FINISHED'
+											? primaryPurple
+											: primaryBlack
+									}
+									onClick={(e) => {
+										e.stopPropagation();
 
-									if (task.status === 'FINISHED') {
-										unfinishItem({
-											variables: {itemId: task.id},
-										});
-									}
-									else {
-										finishItem({
-											variables: {itemId: task.id},
-										});
-									}
-								}}
-							/>
+										if (task.status === 'FINISHED') {
+											unfinishItem({
+												variables: {itemId: task.id},
+											});
+										}
+										else {
+											finishItem({
+												variables: {itemId: task.id},
+											});
+										}
+									}}
+								/>
+							</Tooltip>
 						)}
 					</ActionsWrap>
 				</Actions>

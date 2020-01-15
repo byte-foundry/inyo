@@ -16,6 +16,8 @@ import {
 import {
 	A,
 	Button,
+	CheckBoxFakeLabel,
+	CheckBoxLabel,
 	Input,
 	lightGrey,
 	P,
@@ -26,6 +28,7 @@ import {
 } from '../../utils/new/design-system';
 import {GET_PROJECT_QUOTES} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
+import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import RichTextEditor from '../RichTextEditor';
 
@@ -93,6 +96,29 @@ const BudgetSectionContainer = styled(FlexColumn)`
 const BudgetSectionInput = styled(Input)`
 	text-align: right;
 	width: 100px;
+`;
+
+const Total = styled('div')`
+	display: flex;
+	justify-content: flex-end;
+`;
+
+const PriceWithoutTaxes = styled(Total)`
+	font-size: 1.5rem;
+	margin: 1rem 0;
+	font-weight: 500;
+`;
+
+const PriceWithTaxes = styled(Total)`
+	margin: 1.5rem 0;
+`;
+
+const TotalSection = styled('div')`
+	font-size: 1.2rem;
+	margin: 1rem 0;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
 `;
 
 const BudgetSection = ({
@@ -241,74 +267,73 @@ const ProjectQuotes = ({projectId}) => {
 					}}
 				/>
 			))}
-			<div>
-				<div style={{display: 'flex'}}>
-					<div>Devis avec taxe</div>
+			<TotalSection>
+				<Total>
+					<PriceWithoutTaxes>
+						<fbt desc="total">Total HT</fbt>
+						<span style={{padding: '0 0.5rem'}}>
+							<fbt desc="total price">
+								<fbt:param name="price">
+									{Object.keys(prices)
+										.reduce(
+											(acc, priceKey) => acc + prices[priceKey],
+											0,
+										)
+										.toFixed(2)}
+								</fbt:param>{' '}
+								€
+							</fbt>
+						</span>
+					</PriceWithoutTaxes>
+				</Total>
+
+				<CheckBoxLabel
+					checked={hasTaxes}
+					style={{justifyContent: 'flex-end', marginRight: '1rem'}}
+				>
 					<input
 						type="checkbox"
 						checked={hasTaxes}
 						onChange={e => setHasTaxes(e.target.checked)}
 					/>
-				</div>
-				{hasTaxes ? (
+					{hasTaxes ? (
+						<IconButton
+							icon="check_box"
+							size="tiny"
+							color={primaryPurple}
+						/>
+					) : (
+						<IconButton
+							icon="check_box_outline_blank"
+							size="tiny"
+							color={primaryPurple}
+						/>
+					)}
+					<CheckBoxFakeLabel>
+						<fbt project="inyo" desc="quote with taxes">
+							Devis avec taxes
+						</fbt>
+					</CheckBoxFakeLabel>
+				</CheckBoxLabel>
+				{hasTaxes && (
 					<div>
-						<div style={{fontSize: '1.2rem', display: 'flex'}}>
-							<div
-								style={{
-									flex: 1,
-									display: 'flex',
-									justifyContent: 'flex-end',
-									marginRight: '1rem',
-								}}
-							>
-								<fbt desc="subtotal">Total HT</fbt>
-							</div>
+						<Total>
 							<div>
-								<fbt desc="vat">
-									<fbt:param name="price">
-										{Object.keys(prices)
-											.reduce(
-												(acc, priceKey) => acc + prices[priceKey],
-												0,
-											)
-											.toFixed(2)}
-									</fbt:param>{' '}
-									€
-								</fbt>
-							</div>
-						</div>
-						<div style={{fontSize: '1.2rem', display: 'flex'}}>
-							<div
-								style={{
-									flex: 1,
-									display: 'flex',
-									justifyContent: 'flex-end',
-									marginRight: '1rem',
-								}}
-							>
 								<fbt desc="vat">TVA</fbt>
 							</div>
-							<div>
-								<Input
+							<div style={{padding: '0 0.5rem'}}>
+								<BudgetSectionInput
 									type="number"
 									value={taxRate}
 									onChange={e => setTaxRate(e.target.value)}
 								/>{' '}
 								%
 							</div>
-						</div>
-						<div style={{fontSize: '1.2rem', display: 'flex'}}>
-							<div
-								style={{
-									flex: 1,
-									display: 'flex',
-									justifyContent: 'flex-end',
-									marginRight: '1rem',
-								}}
-							>
-								<fbt desc="total">Total TTC</fbt>
-							</div>
-							<div>
+						</Total>
+
+						<PriceWithTaxes>
+							<fbt desc="total">Total TTC</fbt>
+							<div style={{padding: '0 0.5rem'}}>
 								<fbt desc="total price">
 									<fbt:param name="price">
 										{(
@@ -322,38 +347,10 @@ const ProjectQuotes = ({projectId}) => {
 									€
 								</fbt>
 							</div>
-						</div>
-					</div>
-				) : (
-					<div style={{fontSize: '1.2rem', display: 'flex'}}>
-						<div
-							style={{
-								flex: 1,
-								display: 'flex',
-								justifyContent: 'flex-end',
-								marginRight: '1rem',
-							}}
-						>
-							<fbt desc="total">Total TTC</fbt>
-						</div>
-						<div>
-							<span style={{padding: '0 1rem'}}>
-								<fbt desc="total price">
-									<fbt:param name="price">
-										{Object.keys(prices)
-											.reduce(
-												(acc, priceKey) => acc + prices[priceKey],
-												0,
-											)
-											.toFixed(2)}
-									</fbt:param>{' '}
-									€
-								</fbt>
-							</span>
-						</div>
+						</PriceWithTaxes>
 					</div>
 				)}
-			</div>
+			</TotalSection>
 			<RichTextEditor
 				placeholder={fbt(
 					'Pied de page du devis...',

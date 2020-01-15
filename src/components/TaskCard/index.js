@@ -21,23 +21,18 @@ import {
 	primaryWhite,
 	TaskCardElem,
 } from '../../utils/new/design-system';
-import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
-const Button = styled(IconButton)``;
-const TimerButton = styled(IconButton)``;
+const Button = styled(MaterialIcon)``;
 
 const CardTitle = styled('span')`
-	display: block;
 	color: ${primaryBlack};
 	text-overflow: ellipsis;
 	overflow: hidden;
 	display: flex;
 	align-items: baseline;
 	grid-column-start: 1;
-
-	${props => props.hasCheckbox && 'grid-column: 1 / 3;'}
 
 	i {
 		margin-right: 5px;
@@ -50,6 +45,7 @@ const Actions = styled('div')`
 	display: flex;
 	overflow: hidden;
 	height: 0;
+	opacity: 0.97;
 `;
 
 export const TaskCardElemWithBtn = styled(TaskCardElem)`
@@ -72,10 +68,11 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 		box-shadow: 0 0 5px ${primaryGrey};
 		transition: all 300ms ease;
 
-		${Button}, ${TimerButton} {
+		${Button} {
 			opacity: 1;
 
 			pointer-events: all;
+			margin-top: 0 !important;
 		}
 
 		${Actions} {
@@ -94,17 +91,6 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 		&:hover {
 			opacity: 1;
 		}
-
-		${Button} {
-			margin-right: 0;
-			opacity: 1;
-
-			pointer-events: all;
-
-			&::after {
-				background: transparent;
-			}
-		}
 	`}
 `;
 
@@ -115,6 +101,20 @@ const ActionsWrap = styled('div')`
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+
+	${Button} {
+		margin: 1rem 0.25rem 0;
+
+		:nth-child(2) {
+			margin-top: 2rem;
+		}
+		:nth-child(3) {
+			margin-top: 3rem;
+		}
+		:nth-child(4) {
+			margin-top: 4rem;
+		}
+	}
 `;
 
 const CardSubTitle = styled('span')`
@@ -170,6 +170,50 @@ const TaskCard = withRouter(
 				}
 			>
 				{isOver && <DragSeparator />}
+				{!!task.tags.length && (
+					<>
+						<TagContainer>
+							{task.tags.map(tag => (
+								<Tooltip label={tag.name}>
+									<Tag bg={tag.colorBg} />
+								</Tooltip>
+							))}
+						</TagContainer>
+						<div>
+							{task.status === 'FINISHED' && (
+								<MaterialIcon
+									icon="check_circle"
+									size="tiny"
+									color={primaryPurple}
+								/>
+							)}
+						</div>
+					</>
+				)}
+				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
+					{task.assignee && (
+						<MaterialIcon
+							icon="reply"
+							size="micro"
+							color="inherit"
+						/>
+					)}{' '}
+					{task.name}
+				</CardTitle>
+				<div></div>
+				{task.section && (
+					<CardSubTitle>{task.section.project.name}</CardSubTitle>
+				)}
+				{task.linkedCustomer && !task.section && (
+					<CardSubTitle>
+						{task.linkedCustomer.name} (
+						{formatName(
+							task.linkedCustomer.firstName,
+							task.linkedCustomer.lastName,
+						)}
+						)
+					</CardSubTitle>
+				)}
 				<Actions>
 					<ActionsWrap>
 						{!isCustomerTask(task.type) && (
@@ -177,13 +221,9 @@ const TaskCard = withRouter(
 								noBg
 								current={task.status === 'FINISHED'}
 								invert={task.status === 'FINISHED'}
-								icon="add_circle"
+								icon="zoom_out_map"
 								size="medium"
-								color={
-									task.status === 'FINISHED'
-										? primaryPurple
-										: primaryGrey
-								}
+								color={primaryBlack}
 								onClick={(e) => {}}
 							/>
 						)}
@@ -192,13 +232,9 @@ const TaskCard = withRouter(
 								noBg
 								current={task.status === 'FINISHED'}
 								invert={task.status === 'FINISHED'}
-								icon="play_circle_filled"
+								icon="control_point_duplicate"
 								size="medium"
-								color={
-									task.status === 'FINISHED'
-										? primaryPurple
-										: primaryGrey
-								}
+								color={primaryBlack}
 								onClick={(e) => {}}
 							/>
 						)}
@@ -207,16 +243,27 @@ const TaskCard = withRouter(
 								noBg
 								current={task.status === 'FINISHED'}
 								invert={task.status === 'FINISHED'}
-								style={{
-									gridColumnStart: '2',
-									gridRow: '1 / 3',
-								}}
-								icon="check_circle"
+								icon="play_circle_outline"
+								size="medium"
+								color={primaryBlack}
+								onClick={(e) => {}}
+							/>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								icon={
+									task.status === 'FINISHED'
+										? 'check_circle'
+										: 'check_circle_outline'
+								}
 								size="medium"
 								color={
 									task.status === 'FINISHED'
 										? primaryPurple
-										: primaryGrey
+										: primaryBlack
 								}
 								onClick={(e) => {
 									e.stopPropagation();
@@ -236,38 +283,6 @@ const TaskCard = withRouter(
 						)}
 					</ActionsWrap>
 				</Actions>
-				{!!task.tags.length && (
-					<TagContainer>
-						{task.tags.map(tag => (
-							<Tooltip label={tag.name}>
-								<Tag bg={tag.colorBg} />
-							</Tooltip>
-						))}
-					</TagContainer>
-				)}
-				<CardTitle hasCheckbox={isCustomerTask(task.type)}>
-					{task.assignee && (
-						<MaterialIcon
-							icon="reply"
-							size="micro"
-							color="inherit"
-						/>
-					)}{' '}
-					{task.name}
-				</CardTitle>
-				{task.section && (
-					<CardSubTitle>{task.section.project.name}</CardSubTitle>
-				)}
-				{task.linkedCustomer && !task.section && (
-					<CardSubTitle>
-						{task.linkedCustomer.name} (
-						{formatName(
-							task.linkedCustomer.firstName,
-							task.linkedCustomer.lastName,
-						)}
-						)
-					</CardSubTitle>
-				)}
 			</TaskCardElemWithBtn>
 		);
 	},

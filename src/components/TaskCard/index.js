@@ -36,10 +36,18 @@ const CardTitle = styled('span')`
 	}
 `;
 
+const Actions = styled('div')`
+	position: absolute;
+	background: ${primaryWhite};
+	display: flex;
+	overflow: hidden;
+	height: 0;
+`;
+
 export const TaskCardElemWithBtn = styled(TaskCardElem)`
 	${Button} {
 		transition: all 300ms ease;
-		opacity: 0;
+		/* opacity: 0; */
 
 		pointer-events: none;
 	}
@@ -52,6 +60,14 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 			opacity: 1;
 
 			pointer-events: all;
+		}
+
+		${Actions} {
+			right: 0;
+			left: 0;
+			bottom: 0;
+			top: 0;
+			height: 100%;
 		}
 	}
 
@@ -74,6 +90,15 @@ export const TaskCardElemWithBtn = styled(TaskCardElem)`
 			}
 		}
 	`}
+`;
+
+const ActionsWrap = styled('div')`
+	max-width: 200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
 `;
 
 const CardSubTitle = styled('span')`
@@ -118,34 +143,72 @@ const TaskCard = withRouter(
 				}
 			>
 				{isOver && <DragSeparator />}
-				{!isCustomerTask(task.type) && (
-					<Button
-						noBg
-						current={task.status === 'FINISHED'}
-						invert={task.status === 'FINISHED'}
-						style={{
-							gridColumnStart: '2',
-							gridRow: '1 / 3',
-						}}
-						icon="check_circle"
-						size="tiny"
-						color={
-							task.status === 'FINISHED'
-								? primaryPurple
-								: primaryGrey
-						}
-						onClick={(e) => {
-							e.stopPropagation();
+				<Actions>
+					<ActionsWrap>
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								icon="add_circle"
+								size="medium"
+								color={
+									task.status === 'FINISHED'
+										? primaryPurple
+										: primaryGrey
+								}
+								onClick={(e) => {}}
+							/>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								icon="play_circle_filled"
+								size="medium"
+								color={
+									task.status === 'FINISHED'
+										? primaryPurple
+										: primaryGrey
+								}
+								onClick={(e) => {}}
+							/>
+						)}
+						{!isCustomerTask(task.type) && (
+							<Button
+								noBg
+								current={task.status === 'FINISHED'}
+								invert={task.status === 'FINISHED'}
+								style={{
+									gridColumnStart: '2',
+									gridRow: '1 / 3',
+								}}
+								icon="check_circle"
+								size="medium"
+								color={
+									task.status === 'FINISHED'
+										? primaryPurple
+										: primaryGrey
+								}
+								onClick={(e) => {
+									e.stopPropagation();
 
-							if (task.status === 'FINISHED') {
-								unfinishItem({variables: {itemId: task.id}});
-							}
-							else {
-								finishItem({variables: {itemId: task.id}});
-							}
-						}}
-					/>
-				)}
+									if (task.status === 'FINISHED') {
+										unfinishItem({
+											variables: {itemId: task.id},
+										});
+									}
+									else {
+										finishItem({
+											variables: {itemId: task.id},
+										});
+									}
+								}}
+							/>
+						)}
+					</ActionsWrap>
+				</Actions>
 				{!!task.tags.length && (
 					<TagContainer>
 						{task.tags.map(tag => (

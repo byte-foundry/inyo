@@ -233,31 +233,50 @@ const Quote = ({match}) => {
 						<>
 							<div>
 								<fbt project="inyo" desc="quote screen ht">
+									Total HT
 									<fbt:param name="subtotal">
 										{total.toFixed(2)}
 									</fbt:param>{' '}
-									HT
+									€
 								</fbt>
 							</div>
 							<TotalTTC>
+								<fbt project="inyo" desc="quote screen taxes">
+									TVA{' '}
+									<fbt:param name="value">
+										{quote.taxRate}
+									</fbt:param>
+									% soit{' '}
+									<fbt:param name="total">
+										{Math.abs(
+											total
+												- total
+													* (1 + quote.taxRate / 100),
+										).toFixed(2)}
+									</fbt:param>{' '}
+									€
+								</fbt>
+							</TotalTTC>
+							<TotalTTC>
 								<fbt project="inyo" desc="quote screen ttc">
+									Total TTC
 									<fbt:param name="total">
 										{(
 											total
 											* (1 + quote.taxRate / 100)
 										).toFixed(2)}
 									</fbt:param>{' '}
-									TTC
+									€
 								</fbt>
 							</TotalTTC>
 						</>
 					) : (
 						<TotalTTC>
 							<fbt project="inyo" desc="quote screen ttc">
-								<fbt:param name="subtotal">
+								Total HT<fbt:param name="subtotal">
 									{total.toFixed(2)}
 								</fbt:param>{' '}
-								TTC
+								€
 							</fbt>
 						</TotalTTC>
 					)}

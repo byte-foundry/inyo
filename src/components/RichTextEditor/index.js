@@ -5,7 +5,12 @@ import {Value} from 'slate';
 import {Editor} from 'slate-react';
 
 import fbt from '../../fbt/fbt.macro';
-import {Button, lightPurple} from '../../utils/new/design-system';
+import {
+	accentGrey,
+	Button,
+	lightGrey,
+	primaryPurple,
+} from '../../utils/new/design-system';
 import MaterialIcon from '../MaterialIcon';
 
 const isBoldHotkey = isKeyHotkey('mod+b');
@@ -13,8 +18,7 @@ const isItalicHotkey = isKeyHotkey('mod+i');
 const isUnderlinedHotkey = isKeyHotkey('mod+u');
 
 const Container = styled('div')`
-	border: 1px solid ${lightPurple};
-	padding: 1rem;
+	border: 1px solid ${accentGrey};
 	border-radius: 5px;
 	margin-bottom: 2rem;
 `;
@@ -23,14 +27,18 @@ const FormatButton = styled(Button)`
 	margin-right: 5px;
 	padding: 0;
 	text-align: center;
+	border: none;
+	background: transparent;
 
 	i {
 		margin: 2px;
 	}
 
 	&:hover {
+		background: transparent;
+		border: none;
 		i {
-			color: white;
+			color: ${primaryPurple};
 		}
 	}
 `;
@@ -38,6 +46,12 @@ const FormatButton = styled(Button)`
 const FormatButtons = styled('div')`
 	display: flex;
 	margin-bottom: 1rem;
+	background: ${lightGrey};
+	padding: 1rem;
+`;
+
+const Content = styled(Editor)`
+	padding: 0 1rem 1rem 1.5rem;
 `;
 
 const INITIAL_EDITOR_VALUE = {
@@ -84,7 +98,7 @@ const RichTextEditor = ({
 
 	if (displayMode) {
 		return (
-			<Editor
+			<Content
 				readOnly
 				spellCheck
 				autoFocus
@@ -109,7 +123,7 @@ const RichTextEditor = ({
 					)}
 					onMouseDown={event => onClickMark(event, 'bold')}
 				>
-					<MaterialIcon icon="format_bold" size="tiny" />
+					<MaterialIcon icon="format_bold" size="normal" />
 				</FormatButton>
 				<FormatButton
 					active={value.activeMarks.some(
@@ -117,7 +131,7 @@ const RichTextEditor = ({
 					)}
 					onMouseDown={event => onClickMark(event, 'italic')}
 				>
-					<MaterialIcon icon="format_italic" size="tiny" />
+					<MaterialIcon icon="format_italic" size="normal" />
 				</FormatButton>
 				<FormatButton
 					active={value.activeMarks.some(
@@ -125,10 +139,10 @@ const RichTextEditor = ({
 					)}
 					onMouseDown={event => onClickMark(event, 'underlined')}
 				>
-					<MaterialIcon icon="format_underline" size="tiny" />
+					<MaterialIcon icon="format_underline" size="normal" />
 				</FormatButton>
 			</FormatButtons>
-			<Editor
+			<Content
 				spellCheck
 				autoFocus
 				placeholder={placeholder._contents[0]}

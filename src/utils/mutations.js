@@ -1082,7 +1082,7 @@ export const ISSUE_QUOTE = gql`
 		$header: Json
 		$footer: Json
 		$hasTaxes: Boolean!
-		$taxRate: Float!
+		$taxRate: Float
 	) {
 		issueQuote(
 			projectId: $projectId

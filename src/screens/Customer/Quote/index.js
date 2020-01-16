@@ -200,9 +200,10 @@ const Quote = ({match}) => {
 			<Content>
 				<Date>
 					<fbt project="inyo" desc="quote screen number">
-						Devis #
+						Devis #<fbt:param name="issue number">
+							{quote.issueNumber}
+						</fbt:param>
 					</fbt>
-					#TODO XXXX
 					<br />
 					{moment(quote.createdAt).format('L')}
 				</Date>

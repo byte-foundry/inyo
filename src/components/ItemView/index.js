@@ -667,8 +667,10 @@ const Item = ({
 															dueDate: null,
 														},
 														optimisticResponse: {
-															...item,
-															dueDate: null,
+															updateItem: {
+																...item,
+																dueDate: null,
+															},
 														},
 													});
 												setEditDueDate(false);
@@ -685,8 +687,10 @@ const Item = ({
 														dueDate: date.toISOString(),
 													},
 													optimisticResponse: {
-														...item,
-														dueDate: date.toISOString(),
+														updateItem: {
+															...item,
+															dueDate: date.toISOString(),
+														},
 													},
 												});
 

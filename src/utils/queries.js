@@ -410,6 +410,18 @@ export const GET_PROJECT_DATA = gql`
 						}
 					}
 				}
+				documents {
+					filename
+					createdAt
+					id
+					documentType
+					owner {
+						... on User {
+							lastName
+							firstName
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -515,6 +527,18 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 						}
 						urls {
 							full
+						}
+					}
+				}
+				documents {
+					filename
+					createdAt
+					id
+					documentType
+					owner {
+						... on User {
+							lastName
+							firstName
 						}
 					}
 				}
@@ -893,6 +917,10 @@ export const GET_PROJECT_ACTIVITY = gql`
 					linkedTask {
 						id
 						type
+						name
+					}
+					linkedProject {
+						id
 						name
 					}
 				}

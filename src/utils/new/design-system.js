@@ -815,6 +815,9 @@ export const StickyHeader = styled('div')`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		margin-left: -2rem;
 		margin-right: -2rem;
+		padding: 1rem 60px;
+		align-items: baseline;
+		position: static;
 	}
 `;
 

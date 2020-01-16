@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import Portal from '@reach/portal';
+import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
@@ -14,6 +15,7 @@ import {
 	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_ALL_TASKS_SHORT} from '../../utils/queries';
+import useUserInfos from '../../utils/useUserInfos';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
@@ -95,6 +97,7 @@ const PendingActionsTray = ({projectId}) => {
 		variables: {schedule: 'FINISHED_TIME_IT_TOOK_NULL'},
 		context: {batch: false},
 	});
+	const {workingTime} = useUserInfos();
 
 	const pendingTimeItTookTasks = tasks.filter(
 		task => !projectId
@@ -111,10 +114,23 @@ const PendingActionsTray = ({projectId}) => {
 	const [valuesMap, setValuesMap] = useState({});
 
 	useEffect(() => {
-		const newValues = pendingTimeItTookTasks.reduce((map, {id, unit}) => {
-			map[id] = unit;
-			return map;
-		}, {});
+		const newValues = pendingTimeItTookTasks.reduce(
+			(map, {id, unit, workedTimes}) => {
+				// computing time spent
+				const measuredTime = workedTimes
+					.reduce(
+						(duration, {start, end}) => duration.add(moment(end).diff(start)),
+						moment.duration(),
+					)
+					.asHours();
+
+				const measuredTimeInUnit = measuredTime / workingTime;
+
+				map[id] = measuredTimeInUnit || unit; // eslint-disable-line no-param-reassign
+				return map;
+			},
+			{},
+		);
 
 		setValuesMap(newValues);
 	}, [tasks]);

@@ -132,6 +132,17 @@ export const GET_USER_INFOS = gql`
 						}
 					}
 				}
+				documents {
+					id
+					filename
+					url
+					owner {
+						... on User {
+							firstName
+							lastName
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -399,6 +410,18 @@ export const GET_PROJECT_DATA = gql`
 						}
 					}
 				}
+				documents {
+					filename
+					createdAt
+					id
+					documentType
+					owner {
+						... on User {
+							lastName
+							firstName
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -507,6 +530,18 @@ export const GET_PROJECT_DATA_WITH_TOKEN = gql`
 						}
 					}
 				}
+				documents {
+					filename
+					createdAt
+					id
+					documentType
+					owner {
+						... on User {
+							lastName
+							firstName
+						}
+					}
+				}
 				address {
 					street
 					city
@@ -590,6 +625,10 @@ export const GET_ITEM_DETAILS = gql`
 				sendingDate
 				isRelative
 			}
+			workedTimes {
+				start
+				end
+			}
 		}
 	}
 `;
@@ -612,6 +651,10 @@ export const GET_ALL_TASKS_SHORT = gql`
 				after: $after
 			) {
 				...ShortTaskFragment
+				workedTimes {
+					start
+					end
+				}
 			}
 		}
 	}
@@ -874,6 +917,10 @@ export const GET_PROJECT_ACTIVITY = gql`
 					linkedTask {
 						id
 						type
+						name
+					}
+					linkedProject {
+						id
 						name
 					}
 				}

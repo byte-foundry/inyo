@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, {useState} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 
 import TrialHeadband from '../../components/TrialHeadband';
@@ -21,17 +21,24 @@ const AppMain = styled('div')`
 	display: flex;
 	flex-direction: row;
 
+	padding-top: ${props => (props.headband ? '45px' : '')};
+
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
 		flex-direction: column;
 	}
 `;
 
-function App({history}) {
+function App({history, location}) {
+	const [headband, setHeadband] = useState();
 	return (
 		<>
-			<TrialHeadband history={history} />
-			<AppMain>
+			<TrialHeadband
+				history={history}
+				location={location}
+				setHeadband={setHeadband}
+			/>
+			<AppMain headband={headband}>
 				<Switch>
 					<Route
 						path="/app/dashboard"

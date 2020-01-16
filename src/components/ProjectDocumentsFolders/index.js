@@ -161,6 +161,7 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 	if (error) throw error;
 
 	const files = [
+		...projectData.project.issuer.documents,
 		...projectData.project.attachments,
 		...projectData.project.sections.flatMap(section => section.items.flatMap(item => item.attachments.map(attachment => ({
 			...attachment,

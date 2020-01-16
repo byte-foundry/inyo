@@ -28,6 +28,8 @@ import removeProjectWatchMutation from './mutationLinks/removeProject';
 import removeSectionWatchMutation from './mutationLinks/removeSection';
 import removeTagWatchMutation from './mutationLinks/removeTag';
 import requestCollabWatchMutation from './mutationLinks/requestCollab';
+import startTaskTimerWatchMutation from './mutationLinks/startTaskTimer';
+import stopCurrentTaskTimerWatchMutation from './mutationLinks/stopCurrentTaskTimer';
 import unfinishItemWatchMutation from './mutationLinks/unfinishItem';
 import unfocusTaskWatchMutation from './mutationLinks/unfocusTask';
 import updateItemWatchMutation from './mutationLinks/updateItem';
@@ -120,6 +122,8 @@ const watchLink = new WatchedMutationLink(cache, {
 	removeSection: removeSectionWatchMutation,
 	removeTag: removeTagWatchMutation,
 	requestCollab: requestCollabWatchMutation,
+	startTaskTimer: startTaskTimerWatchMutation,
+	stopCurrentTaskTimer: stopCurrentTaskTimerWatchMutation,
 	unfinishItem: unfinishItemWatchMutation,
 	unfocusTask: unfocusTaskWatchMutation,
 	updateItem: updateItemWatchMutation,

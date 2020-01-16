@@ -16,6 +16,7 @@ import {
 	taskFulfillsActivationCriteria,
 } from '../../utils/functions';
 import {
+	CLEAR_TASK_WORKED_TIMES,
 	CREATE_TAG,
 	FOCUS_TASK,
 	REMOVE_ATTACHMENTS,
@@ -275,6 +276,7 @@ const Item = ({
 			},
 		},
 	});
+	const [clearTaskWorkedTimes] = useMutation(CLEAR_TASK_WORKED_TIMES);
 
 	useOnClickOutside(dateRef, () => {
 		setEditDueDate(false);
@@ -597,6 +599,25 @@ const Item = ({
 							</Meta>
 						</Tooltip>
 					)}
+
+				<Tooltip
+					label={
+						<fbt project="inyo" desc="type of the task tooltip">
+							Définit s'il y a des actions automatiques
+						</fbt>
+					}
+				>
+					<Meta>
+						<MaterialIcon icon="check_circle_outline" size="tiny" />
+						<MetaLabel>
+							<fbt project="inyo" desc="task type">
+								Type de tâche
+							</fbt>
+						</MetaLabel>
+						<MetaText>{typeInfo.name}</MetaText>
+					</Meta>
+				</Tooltip>
+
 				{(!deadline || deadline.toString() !== 'Invalid Date') && (
 					<Tooltip
 						label={
@@ -646,8 +667,10 @@ const Item = ({
 															dueDate: null,
 														},
 														optimisticResponse: {
-															...item,
-															dueDate: null,
+															updateItem: {
+																...item,
+																dueDate: null,
+															},
 														},
 													});
 												setEditDueDate(false);
@@ -664,8 +687,10 @@ const Item = ({
 														dueDate: date.toISOString(),
 													},
 													optimisticResponse: {
-														...item,
-														dueDate: date.toISOString(),
+														updateItem: {
+															...item,
+															dueDate: date.toISOString(),
+														},
 													},
 												});
 
@@ -796,23 +821,53 @@ const Item = ({
 					)
 				)}
 
-				<Tooltip
-					label={
-						<fbt project="inyo" desc="type of the task tooltip">
-							Définit s'il y a des actions automatiques
-						</fbt>
-					}
-				>
-					<Meta>
-						<MaterialIcon icon="check_circle_outline" size="tiny" />
-						<MetaLabel>
-							<fbt project="inyo" desc="task type">
-								Type de tâche
-							</fbt>
-						</MetaLabel>
-						<MetaText>{typeInfo.name}</MetaText>
-					</Meta>
-				</Tooltip>
+				{!customerToken && (
+					<Tooltip
+						label={fbt(
+							'Temps total mesuré',
+							'mesured time tooltip item view',
+						)}
+					>
+						<Meta>
+							<MaterialIcon
+								icon="play_circle_outline"
+								size="tiny"
+							/>
+							<MetaLabel>
+								<fbt desc="mesured time label item view">
+									Temps mesuré
+								</fbt>
+							</MetaLabel>
+							{item.workedTimes.length > 0 ? (
+								<>
+									<span style={{marginRight: '1rem'}}>
+										{item.workedTimes
+											.reduce(
+												(duration, {start, end}) => duration.add(
+													moment(end).diff(start),
+												),
+												moment.duration(),
+											)
+											.format('HH:mm:ss')}
+									</span>
+									<IconButton
+										icon="clear"
+										size="micro"
+										onClick={() => clearTaskWorkedTimes({
+											variables: {
+												taskId: id,
+											},
+										})
+										}
+									/>
+								</>
+							) : (
+								<>&mdash;</>
+							)}
+						</Meta>
+					</Tooltip>
+				)}
+
 				<Tooltip
 					label={
 						<fbt project="inyo" desc="project tooltip">
@@ -870,6 +925,65 @@ const Item = ({
 						)}
 					</Meta>
 				</Tooltip>
+
+				{!customerToken && (
+					<Tooltip
+						label={fbt(
+							'Taux journalier moyen de cette tâche',
+							'daily rate tooltip item view',
+						)}
+					>
+						<Meta>
+							<MaterialIcon icon="local_atm" size="tiny" />
+							<MetaLabel>
+								<fbt desc="daily rate label item view">
+									Taux journalier
+								</fbt>
+							</MetaLabel>
+							<InlineEditable
+								nameCss={css`
+									padding: 0;
+									width: auto;
+									margin-right: 1rem;
+								`}
+								editableCss={css`
+									color: ${item.dailyRate
+						? primaryPurple
+						: primaryGrey};
+									margin-right: 1rem;
+								`}
+								value={item.dailyRate}
+								type="text"
+								placeholder={defaultDailyPrice}
+								key={item.dailyRate}
+								onFocusOut={(value) => {
+									if (value && value !== item.dailyRate) {
+										updateItem({
+											variables: {
+												itemId: id,
+												dailyRate: parseFloat(value),
+											},
+										});
+									}
+								}}
+							/>
+							{item.dailyRate && (
+								<IconButton
+									icon="clear"
+									size="micro"
+									onClick={() => updateItem({
+										variables: {
+											itemId: id,
+											dailyRate: null,
+										},
+									})
+									}
+								/>
+							)}
+						</Meta>
+					</Tooltip>
+				)}
+
 				{!customerToken && (
 					<Tooltip
 						label={
@@ -932,60 +1046,6 @@ const Item = ({
 									});
 								}}
 							/>
-						</Meta>
-					</Tooltip>
-				)}
-
-				{!customerToken && (
-					<Tooltip
-						label={fbt(
-							'Taux journalier moyen de cette tâche',
-							'daily rate item view',
-						)}
-					>
-						<Meta>
-							<MaterialIcon icon="local_atm" size="tiny" />
-							<MetaLabel>TJM</MetaLabel>
-							<InlineEditable
-								nameCss={css`
-									padding: 0;
-									width: auto;
-									margin-right: 1rem;
-								`}
-								editableCss={css`
-									color: ${item.dailyRate
-						? primaryPurple
-						: primaryGrey};
-									margin-right: 1rem;
-								`}
-								value={item.dailyRate}
-								type="text"
-								placeholder={defaultDailyPrice}
-								key={item.dailyRate}
-								onFocusOut={(value) => {
-									if (value && value !== item.dailyRate) {
-										updateItem({
-											variables: {
-												itemId: id,
-												dailyRate: parseFloat(value),
-											},
-										});
-									}
-								}}
-							/>
-							{item.dailyRate && (
-								<IconButton
-									icon="clear"
-									size="micro"
-									onClick={() => updateItem({
-										variables: {
-											itemId: id,
-											dailyRate: null,
-										},
-									})
-									}
-								/>
-							)}
 						</Meta>
 					</Tooltip>
 				)}

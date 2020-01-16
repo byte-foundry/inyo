@@ -1,5 +1,5 @@
 import {useMutation} from '@apollo/react-hooks';
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import * as Sentry from '@sentry/browser';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
@@ -9,11 +9,13 @@ import * as Yup from 'yup';
 import fbt from '../../fbt/fbt.macro';
 import {BREAKPOINTS} from '../../utils/constants';
 import {ErrorInput, gray20} from '../../utils/content';
-import {UPDATE_USER_COMPANY} from '../../utils/mutations';
+import {REMOVE_ATTACHMENTS, UPDATE_USER_COMPANY} from '../../utils/mutations';
 import {
+	accentGrey,
 	Button,
 	InputLabel,
 	Label,
+	primaryPurple,
 	primaryRed,
 	primaryWhite,
 } from '../../utils/new/design-system';
@@ -22,6 +24,7 @@ import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
 import IconButton from '../IconButton';
 import ImagePickerModal from '../ImagePickerModal';
+import MaterialIcon from '../MaterialIcon';
 import UploadDashboardButton from '../UploadDashboardButton';
 
 const UserCompanyFormMain = styled('div')``;
@@ -86,11 +89,48 @@ const UploadButtons = styled('div')`
 	}
 `;
 
+const AttachedList = styled('div')`
+	margin-top: 20px;
+	margin-bottom: 40px;
+
+	a {
+		color: ${primaryPurple};
+		font-size: 0.85rem;
+	}
+
+	div + button {
+		margin-top: 1rem;
+	}
+`;
+
+const RemoveFile = styled(IconButton)`
+	opacity: 0;
+	margin-left: 3rem;
+	transition: all 300ms ease;
+`;
+
+const Attachment = styled('div')`
+	display: flex;
+	align-items: center;
+
+	&:hover ${RemoveFile} {
+		opacity: 1;
+		transition: all 200ms ease;
+		margin-left: 1.5rem;
+	}
+`;
+
+const FileContainer = styled('span')`
+	margin-right: 0.7rem;
+	margin-bottom: -0.3rem;
+`;
+
 const UserCompanyForm = ({data, buttonText}) => {
 	const {
-		name, address, phone, logo, banner,
+		name, address, phone, logo, banner, documents,
 	} = data;
 	const [updateUser] = useMutation(UPDATE_USER_COMPANY);
+	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
 	const [isOpenImagePickerModal, setisOpenImagePickerModal] = useState(false);
 	const {language} = useUserInfos();
 
@@ -425,6 +465,81 @@ const UserCompanyForm = ({data, buttonText}) => {
 												)}
 											</UploadButtons>
 										</InputLabel>
+									</div>
+
+									<div
+										style={{
+											gridColumn: '1 / 3',
+											marginTop: '1rem',
+										}}
+									>
+										<Label>
+											<fbt desc="Company's admin documents">
+												Documents administratifs
+											</fbt>
+										</Label>
+
+										<AttachedList>
+											{documents.map(
+												({
+													url,
+													filename,
+													id: attachmentId,
+												}) => (
+													<Attachment
+														key={attachmentId}
+													>
+														<FileContainer>
+															<MaterialIcon
+																icon="attachment"
+																size="tiny"
+																color={
+																	accentGrey
+																}
+															/>
+														</FileContainer>
+														<a
+															href={url}
+															target="_blank"
+															rel="noopener noreferrer"
+														>
+															{filename}
+														</a>
+														<RemoveFile
+															icon="delete_forever"
+															size="tiny"
+															danger
+															onClick={async () => {
+																await removeFile(
+																	{
+																		variables: {
+																			attachmentId,
+																		},
+																	},
+																);
+															}}
+														/>
+													</Attachment>
+												),
+											)}
+											<UploadDashboardButton
+												onUploadFiles={newFiles => updateUser({
+													variables: {
+														company: {
+															documents: newFiles,
+														},
+													},
+													context: {
+														hasUpload: true,
+													},
+												})
+												}
+											>
+												<fbt desc="">
+													Joindre un document
+												</fbt>
+											</UploadDashboardButton>
+										</AttachedList>
 									</div>
 								</FormContainer>
 

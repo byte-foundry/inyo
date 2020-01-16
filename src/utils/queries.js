@@ -590,6 +590,10 @@ export const GET_ITEM_DETAILS = gql`
 				sendingDate
 				isRelative
 			}
+			workedTimes {
+				start
+				end
+			}
 		}
 	}
 `;
@@ -612,6 +616,10 @@ export const GET_ALL_TASKS_SHORT = gql`
 				after: $after
 			) {
 				...ShortTaskFragment
+				workedTimes {
+					start
+					end
+				}
 			}
 		}
 	}

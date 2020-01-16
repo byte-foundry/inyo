@@ -1,18 +1,23 @@
 import styled from '@emotion/styled/macro';
+import moment from 'moment';
 import React, {forwardRef} from 'react';
 import {withRouter} from 'react-router-dom';
 
 import {useMutation} from '../../utils/apollo-hooks';
 import {formatName, isCustomerTask} from '../../utils/functions';
-import {FINISH_ITEM, UNFINISH_ITEM} from '../../utils/mutations';
+import {
+	FINISH_ITEM,
+	FOCUS_TASK,
+	START_TASK_TIMER,
+	STOP_CURRENT_TASK_TIMER,
+	UNFINISH_ITEM,
+} from '../../utils/mutations';
 import {
 	accentGrey,
 	DragSeparator,
-	mediumGrey,
 	primaryBlack,
 	primaryGrey,
 	primaryPurple,
-	primaryWhite,
 	TaskCardElem,
 } from '../../utils/new/design-system';
 import IconButton from '../IconButton';
@@ -20,6 +25,7 @@ import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
 const Button = styled(IconButton)``;
+const TimerButton = styled(IconButton)``;
 
 const CardTitle = styled('span')`
 	display: block;
@@ -28,6 +34,7 @@ const CardTitle = styled('span')`
 	overflow: hidden;
 	display: flex;
 	align-items: baseline;
+	grid-column-start: 1;
 
 	${props => props.hasCheckbox && 'grid-column: 1 / 3;'}
 
@@ -37,18 +44,21 @@ const CardTitle = styled('span')`
 `;
 
 export const TaskCardElemWithBtn = styled(TaskCardElem)`
-	${Button} {
-		transition: all 300ms ease;
-		opacity: 0;
+	${props => !props.hasTimerRunning
+		&& `
+		${Button}, ${TimerButton} {
+			transition: all 300ms ease;
+			opacity: 0;
 
-		pointer-events: none;
-	}
+			pointer-events: none;
+		}
+	`}
 
 	&:hover {
 		box-shadow: 0 0 5px ${primaryGrey};
 		transition: all 300ms ease;
 
-		${Button} {
+		${Button}, ${TimerButton} {
 			opacity: 1;
 
 			pointer-events: all;
@@ -82,6 +92,7 @@ const CardSubTitle = styled('span')`
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	grid-column-start: 1;
 `;
 
 const TagContainer = styled('div')`
@@ -103,6 +114,15 @@ const TaskCard = withRouter(
 	}) => {
 		const [finishItem] = useMutation(FINISH_ITEM);
 		const [unfinishItem] = useMutation(UNFINISH_ITEM);
+		const [startTaskTimer] = useMutation(START_TASK_TIMER);
+		const [stopCurrentTaskTimer] = useMutation(STOP_CURRENT_TASK_TIMER);
+		const [focusTask] = useMutation(FOCUS_TASK);
+
+		const lastWorkedTime
+			= task.workedTimes.length > 0
+				? task.workedTimes[task.workedTimes.length - 1]
+				: null;
+		const isTimerRunning = lastWorkedTime && lastWorkedTime.end === null;
 
 		return (
 			<TaskCardElemWithBtn
@@ -110,6 +130,7 @@ const TaskCard = withRouter(
 				isAssigned={task.assignee}
 				ref={cardRef}
 				done={task.status === 'FINISHED'}
+				hasTimerRunning={isTimerRunning}
 				customerTask={isCustomerTask(task.type)}
 				onClick={() => history.push({
 					pathname: `/app/dashboard/${task.id}`,
@@ -118,13 +139,55 @@ const TaskCard = withRouter(
 				}
 			>
 				{isOver && <DragSeparator />}
+				{!isCustomerTask(task.type) && task.status !== 'FINISHED' && (
+					<TimerButton
+						noBg
+						current={isTimerRunning}
+						invert={false}
+						style={{
+							gridColumnStart: '2',
+							gridRow: '1 / 3',
+						}}
+						icon={
+							isTimerRunning
+								? 'pause_circle_filled'
+								: 'play_circle_filled'
+						}
+						size="tiny"
+						color={isTimerRunning ? primaryPurple : primaryGrey}
+						onClick={(e) => {
+							e.stopPropagation();
+
+							if (isTimerRunning) {
+								stopCurrentTaskTimer();
+							}
+							else {
+								focusTask({
+									variables: {itemId: task.id},
+									optimisticResponse: {
+										focusTask: {
+											...task,
+											scheduledFor: moment().format(
+												moment.HTML5_FMT.DATE,
+											),
+											schedulePosition: -1,
+											isFocused: true,
+										},
+									},
+								});
+
+								startTaskTimer({variables: {id: task.id}});
+							}
+						}}
+					/>
+				)}
 				{!isCustomerTask(task.type) && (
 					<Button
 						noBg
 						current={task.status === 'FINISHED'}
 						invert={task.status === 'FINISHED'}
 						style={{
-							gridColumnStart: '2',
+							gridColumnStart: '3',
 							gridRow: '1 / 3',
 						}}
 						icon="check_circle"

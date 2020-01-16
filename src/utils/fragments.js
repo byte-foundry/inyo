@@ -205,6 +205,11 @@ export const ITEM_FRAGMENT = gql`
 		comments {
 			...CommentOnItemFragment
 		}
+
+		workedTimes {
+			start
+			end
+		}
 	}
 `;
 

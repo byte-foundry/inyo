@@ -342,7 +342,7 @@ export const UPDATE_PROJECT_QUOTE = gql`
 		) {
 			id
 			quoteHeader
-			sharedNotes
+			quoteFooter
 		}
 	}
 `;
@@ -1094,6 +1094,15 @@ export const ISSUE_QUOTE = gql`
 		) {
 			id
 			createdAt
+		}
+	}
+`;
+
+export const ACCEPT_QUOTE = gql`
+	mutation acceptQuote($id: ID!, $token: String!) {
+		acceptQuote(id: $id, token: $token) {
+			id
+			acceptedAt
 		}
 	}
 `;

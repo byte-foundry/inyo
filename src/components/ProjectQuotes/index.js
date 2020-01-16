@@ -137,14 +137,18 @@ const BudgetSection = ({
 					{section.name}
 				</BudgetSectionName>
 				<BudgetSectionBudget>
-					<BudgetSectionInput
-						type="text"
-						value={price.toFixed(2)}
-						onClick={e => e.stopPropagation()}
-						onChange={e => onChangePrice(parseFloat(e.target.value))
-						}
-					/>{' '}
-					€
+					<fbt desc="budget input">
+						<fbt:param name="input">
+							<BudgetSectionInput
+								type="text"
+								value={price}
+								onClick={e => e.stopPropagation()}
+								onChange={e => onChangePrice(parseFloat(e.target.value))
+								}
+							/>
+						</fbt:param>{' '}
+						€
+					</fbt>
 				</BudgetSectionBudget>
 			</FlexRowSection>
 			<BudgetItems open={open}>
@@ -179,11 +183,11 @@ const Actions = styled('div')`
 
 const ProjectQuotes = ({projectId}) => {
 	const {defaultDailyPrice, vatRate, vat} = useUserInfos();
-	const [hasTaxes, setHasTaxes] = useState(vat);
+	const [hasTaxes, setHasTaxes] = useState(!!vat);
 	const [taxRate, setTaxRate] = useState(vatRate);
 
 	useEffect(() => {
-		setHasTaxes(vat);
+		setHasTaxes(!!vat);
 		setTaxRate(vatRate);
 	}, [vat, vatRate]);
 
@@ -399,8 +403,10 @@ const ProjectQuotes = ({projectId}) => {
 			</Actions>
 			{quoteCreated && (
 				<QuoteCreatedConfirmation>
-					Le devis a bien été créé, vous pouvez le partager avec votre
-					client en copiant le lien suivant :{' '}
+					<fbt desc="quote is created">
+						Le devis a bien été créé, vous pouvez le partager avec
+						votre client en copiant le lien suivant :{' '}
+					</fbt>
 					<ObjectLink
 						to={`/app/${
 							data.project.customer
@@ -437,7 +443,19 @@ const ProjectQuotes = ({projectId}) => {
 									>
 										{quote.id}
 									</ObjectLink>{' '}
-									{new Date(quote.createdAt).toLocaleString()}
+									{new Date(quote.createdAt).toLocaleString()}{' '}
+									{quote.acceptedAt && (
+										<span>
+											<fbt desc="accepted at">
+												Accepté le{' '}
+												<fbt:param name="date">
+													{moment(
+														quote.acceptedAt,
+													).format('L')}
+												</fbt:param>
+											</fbt>
+										</span>
+									)}
 								</li>
 							))}
 					</ul>

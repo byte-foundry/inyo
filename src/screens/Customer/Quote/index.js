@@ -2,7 +2,7 @@ import '../../../print.css';
 
 import styled from '@emotion/styled';
 import moment from 'moment';
-import React from 'react';
+import React, {useContext} from 'react';
 
 import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
 import CustomProjectHeader from '../../../components/CustomProjectHeader';
@@ -10,9 +10,11 @@ import IssuerNameAndAddress from '../../../components/IssuerNameAndAddress';
 import RichTextEditor from '../../../components/RichTextEditor';
 import Tooltip from '../../../components/Tooltip';
 import fbt from '../../../fbt/fbt.macro';
-import {useQuery} from '../../../utils/apollo-hooks';
+import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {LoadingLogo} from '../../../utils/content';
+import {CustomerContext} from '../../../utils/contexts';
+import {ACCEPT_QUOTE} from '../../../utils/mutations';
 import {
 	accentGrey,
 	Button,
@@ -142,12 +144,15 @@ const Actions = styled('div')`
 `;
 
 const Quote = ({match}) => {
+	const customerToken = useContext(CustomerContext);
 	const {data, loading, error} = useQuery(GET_QUOTE, {
 		variables: {
 			id: match.params.quoteId,
 			token: match.params.customerToken,
 		},
 	});
+
+	const [acceptQuote] = useMutation(ACCEPT_QUOTE);
 
 	if (loading) return <LoadingLogo />;
 	if (error) throw error;
@@ -166,13 +171,25 @@ const Quote = ({match}) => {
 				customerToken={match.params.customerToken}
 				noProgress
 			/>
-
 			<Actions>
-				<Button>
-					<fbt desc="quote screen accept button">
-						Accepter le devis
-					</fbt>
-				</Button>
+				{quote.acceptedAt ? (
+					<div>Accepté le {moment(quote.acceptedAt).format('L')}</div>
+				) : (
+					<Button
+						onClick={() => {
+							acceptQuote({
+								variables: {
+									id: quote.id,
+									token: customerToken,
+								},
+							});
+						}}
+					>
+						<fbt desc="quote screen accept button">
+							Accepter le devis
+						</fbt>
+					</Button>
+				)}
 				<Button>
 					<fbt desc="quote screen print button">
 						Imprimer le devis
@@ -227,7 +244,12 @@ const Quote = ({match}) => {
 						<li key={section.id} style={{pageBreakInside: 'avoid'}}>
 							<Section>
 								{section.name} <Line />{' '}
-								{section.price.toFixed(2)}
+								<fbt desc="section price">
+									<fbt:param name="price">
+										{section.price.toFixed(2)}
+									</fbt:param>{' '}
+									€
+								</fbt>
 							</Section>
 							<ul>
 								{section.items.map(item => (
@@ -242,7 +264,7 @@ const Quote = ({match}) => {
 						<>
 							<div>
 								<fbt project="inyo" desc="quote screen ht">
-									Total HT
+									Total HT{' '}
 									<fbt:param name="subtotal">
 										{total.toFixed(2)}
 									</fbt:param>{' '}
@@ -282,7 +304,8 @@ const Quote = ({match}) => {
 					) : (
 						<TotalTTC>
 							<fbt project="inyo" desc="quote screen ttc">
-								Total HT<fbt:param name="subtotal">
+								Total HT{' '}
+								<fbt:param name="subtotal">
 									{total.toFixed(2)}
 								</fbt:param>{' '}
 								€

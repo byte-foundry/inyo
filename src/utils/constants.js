@@ -23,11 +23,13 @@ import TaskIconValidatedUrl, {
 } from './icons/taskicon-user-validated.svg';
 import TaskIconUrl, {ReactComponent as TaskIcon} from './icons/taskicon.svg';
 
-export const GRAPHQL_API = process.env.REACT_APP_GRAPHQL_API
+/* export const GRAPHQL_API = process.env.REACT_APP_GRAPHQL_API
 	? process.env.REACT_APP_GRAPHQL_API
 	: `https://prisma${
 		process.env.REACT_APP_INYO_ENV === 'development' ? '-dev' : ''
 	  }.inyo.me/`;
+	  */
+export const GRAPHQL_API = 'http://localhost:4000/';
 
 export const INTERCOM_APP_ID
 	= process.env.REACT_APP_INYO_ENV === 'development' ? 'cg8ntaar' : 'imlnj7st';

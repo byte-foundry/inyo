@@ -254,6 +254,7 @@ export const GET_PROJECT_QUOTES = gql`
 			}
 			quotes {
 				id
+				acceptedAt
 				createdAt
 			}
 		}
@@ -901,11 +902,13 @@ export const GET_QUOTE = gql`
 	query getQuote($id: ID!) {
 		quote(id: $id) {
 			id
+			issueNumber
 			header
 			footer
 			hasTaxes
 			taxRate
 			createdAt
+			acceptedAt
 			project {
 				id
 				name

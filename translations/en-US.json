@@ -1941,6 +1941,26 @@
     }
    ]
   },
+  "4uWwWAEkjeee+uOwaU7O7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Different type of task trigger different actions",
+     "variations": {}
+    }
+   ]
+  },
+  "WlT9SCoRXpZo1WsKLdRoNA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Type",
+     "variations": {}
+    }
+   ]
+  },
   "HLV6gRDo4cU1fnr1mVGuig==": {
    "tokens": [],
    "types": [],
@@ -2001,22 +2021,22 @@
     }
    ]
   },
-  "4uWwWAEkjeee+uOwaU7O7Q==": {
+  "O2bvIP8C7o5hpIjlEoM1RA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Different type of task trigger different actions",
+     "translation": "Total time tracked",
      "variations": {}
     }
    ]
   },
-  "WlT9SCoRXpZo1WsKLdRoNA==": {
+  "jXygJEbSYKbn8Hn1JaF9SQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Type",
+     "translation": "Time tracked",
      "variations": {}
     }
    ]
@@ -2041,6 +2061,26 @@
     }
    ]
   },
+  "jfsOT5lLo1+dCjYndpC6Hw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Custom daily rate for this task",
+     "variations": {}
+    }
+   ]
+  },
+  "g/cBTTXTfg80pg3w/BnsIw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Daily rate",
+     "variations": {}
+    }
+   ]
+  },
   "6F6qiWW3cYSOf+pclVSw7g==": {
    "tokens": [],
    "types": [],
@@ -2057,16 +2097,6 @@
    "translations": [
     {
      "translation": "Add or create a tag",
-     "variations": {}
-    }
-   ]
-  },
-  "zueWZg7HgvsosZ5HKPriZQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Average daily rate of this task",
      "variations": {}
     }
    ]
@@ -4971,12 +5001,72 @@
     }
    ]
   },
+  "Tb/Io0eoU2UHULttWsa0MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Track time",
+     "variations": {}
+    }
+   ]
+  },
   "6uwVVD9eKhOL7acPMB8fuQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
      "translation": "Preview {assistantName}'s actions",
+     "variations": {}
+    }
+   ]
+  },
+  "U5fA0PopKS7SitFLVUy/dQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Open task",
+     "variations": {}
+    }
+   ]
+  },
+  "V/cJd0hL/tLNUaDYneOZdA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Stop time tracking",
+     "variations": {}
+    }
+   ]
+  },
+  "7C1+F86UdfBCMT4c547P9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Track time",
+     "variations": {}
+    }
+   ]
+  },
+  "yz6w73KQ4t3g/T1Jr7VBPA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mark task as undone",
+     "variations": {}
+    }
+   ]
+  },
+  "iwxLTXfEnrLbKWnnLtXlDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mark task as done",
      "variations": {}
     }
    ]
@@ -6027,6 +6117,26 @@
    "translations": [
     {
      "translation": "Upload a banner",
+     "variations": {}
+    }
+   ]
+  },
+  "IR7wPQm3CfbZzUuH9YLW/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Admin Documents",
+     "variations": {}
+    }
+   ]
+  },
+  "MdfQSoAYUftq+V2m1vZ31w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Attach a document",
      "variations": {}
     }
    ]
@@ -8917,6 +9027,16 @@
    "translations": [
     {
      "translation": "Deliverables",
+     "variations": {}
+    }
+   ]
+  },
+  "zueWZg7HgvsosZ5HKPriZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Average daily rate of this task",
      "variations": {}
     }
    ]

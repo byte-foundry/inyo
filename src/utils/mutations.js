@@ -1093,6 +1093,8 @@ export const ISSUE_QUOTE = gql`
 			taxRate: $taxRate
 		) {
 			id
+			issueNumber
+			acceptedAt
 			createdAt
 		}
 	}

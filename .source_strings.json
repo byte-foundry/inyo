@@ -3514,12 +3514,40 @@
   },
   {
    "hashToText": {
-    "gt19H3XilCm3PgNwieVZGw==": "a accepté la collaboration"
+    "YsY2mMHWlF7dWzAJgg4Veg==": "accepté le devis du projet"
    },
    "filepath": "src/components/NotificationItem/index.js",
    "line_beg": 157,
    "col_beg": 3,
    "line_end": 159,
+   "col_end": 9,
+   "type": "text",
+   "desc": "viewed quote notification message",
+   "project": "inyo",
+   "jsfbt": "accepté le devis du projet"
+  },
+  {
+   "hashToText": {
+    "sx9PWMBozFrn88Egrh0cdg==": "a vu le devis du projet"
+   },
+   "filepath": "src/components/NotificationItem/index.js",
+   "line_beg": 165,
+   "col_beg": 3,
+   "line_end": 167,
+   "col_end": 9,
+   "type": "text",
+   "desc": "viewed quote notification message",
+   "project": "inyo",
+   "jsfbt": "a vu le devis du projet"
+  },
+  {
+   "hashToText": {
+    "gt19H3XilCm3PgNwieVZGw==": "a accepté la collaboration"
+   },
+   "filepath": "src/components/NotificationItem/index.js",
+   "line_beg": 173,
+   "col_beg": 3,
+   "line_end": 175,
    "col_end": 9,
    "type": "text",
    "desc": "collab accepted notification message",
@@ -3531,9 +3559,9 @@
     "4RIQiXhEoAvj7h3xjsg+gg==": "{collabFullName} vous a invité à collaborer"
    },
    "filepath": "src/components/NotificationItem/index.js",
-   "line_beg": 199,
+   "line_beg": 215,
    "col_beg": 4,
-   "line_end": 204,
+   "line_end": 220,
    "col_end": 10,
    "type": "text",
    "desc": "collab request notification message",
@@ -3545,9 +3573,9 @@
     "hVdfqluxJics5siW+Rw2+g==": "Accepter"
    },
    "filepath": "src/components/NotificationItem/index.js",
-   "line_beg": 219,
+   "line_beg": 235,
    "col_beg": 7,
-   "line_end": 221,
+   "line_end": 237,
    "col_end": 13,
    "type": "text",
    "desc": "accept collab request",
@@ -3559,9 +3587,9 @@
     "s+0tlgcA9Df2YHz/y760pQ==": "Rejeter"
    },
    "filepath": "src/components/NotificationItem/index.js",
-   "line_beg": 238,
+   "line_beg": 254,
    "col_beg": 7,
-   "line_end": 240,
+   "line_end": 256,
    "col_end": 13,
    "type": "text",
    "desc": "reject collab request",
@@ -3573,9 +3601,9 @@
     "jemQX+JlzruXJ4cGtR3+7g==": "Vous avez accepté la requête de collaboration de {collaboratorFullName}"
    },
    "filepath": "src/components/NotificationItem/index.js",
-   "line_beg": 250,
+   "line_beg": 266,
    "col_beg": 4,
-   "line_end": 255,
+   "line_end": 271,
    "col_end": 10,
    "type": "text",
    "desc": "accepted collab notification message",
@@ -3587,9 +3615,9 @@
     "2EK9Ky8XhfFM0jYpn1U2NQ==": "Vous avez rejeté la requête de collaboration de {collaboratorFullName}"
    },
    "filepath": "src/components/NotificationItem/index.js",
-   "line_beg": 262,
+   "line_beg": 278,
    "col_beg": 4,
-   "line_end": 267,
+   "line_end": 283,
    "col_end": 10,
    "type": "text",
    "desc": "rejected collab notification message",
@@ -5327,12 +5355,26 @@
   },
   {
    "hashToText": {
+    "aHUgwbyL/8yxdaEmlxC9Vg==": "{input} €"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 140,
+   "col_beg": 5,
+   "line_end": 151,
+   "col_end": 11,
+   "type": "text",
+   "desc": "budget input",
+   "project": "",
+   "jsfbt": "{input} €"
+  },
+  {
+   "hashToText": {
     "UWDTJHkoZmilujObphq0rw==": "Re-synchroniser les prix"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 204,
+   "line_beg": 243,
    "col_beg": 5,
-   "line_end": 206,
+   "line_end": 245,
    "col_end": 11,
    "type": "text",
    "desc": "project quote synchronize prices button",
@@ -5344,9 +5386,9 @@
     "gMKkyYQlXiomuXvTmzZ2qA==": "En-tête du devis..."
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 211,
+   "line_beg": 250,
    "col_beg": 17,
-   "line_end": 214,
+   "line_end": 253,
    "col_end": 5,
    "type": "text",
    "desc": "quote header placeholder",
@@ -5355,41 +5397,55 @@
   },
   {
    "hashToText": {
-    "ZxABVMnMGXxWXEo9lHScCw==": "Total HT"
+    "BJYVBEpPTv2slfE3FK2Krg==": "Total HT"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 255,
-   "col_beg": 8,
-   "line_end": 257,
-   "col_end": 14,
+   "line_beg": 277,
+   "col_beg": 6,
+   "line_end": 277,
+   "col_end": 38,
    "type": "text",
-   "desc": "subtotal",
+   "desc": "total",
    "project": "",
    "jsfbt": "Total HT"
   },
   {
    "hashToText": {
-    "4SENJ9e3iDp4xDNJEugzTA==": "{price} €"
+    "o767iga5grsHGrblh6ti9Q==": "{price} €"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 260,
-   "col_beg": 8,
-   "line_end": 266,
-   "col_end": 14,
+   "line_beg": 279,
+   "col_beg": 7,
+   "line_end": 289,
+   "col_end": 13,
    "type": "text",
-   "desc": "vat",
+   "desc": "total price",
    "project": "",
    "jsfbt": "{price} €"
+  },
+  {
+   "hashToText": {
+    "NfkUr+M+QhpY5IsmFIGr5Q==": "Devis avec taxes"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 317,
+   "col_beg": 6,
+   "line_end": 319,
+   "col_end": 12,
+   "type": "text",
+   "desc": "quote with taxes",
+   "project": "inyo",
+   "jsfbt": "Devis avec taxes"
   },
   {
    "hashToText": {
     "B21uE+4eUxxUm0U9QnRm0w==": "TVA"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 278,
+   "line_beg": 326,
    "col_beg": 8,
-   "line_end": 280,
-   "col_end": 14,
+   "line_end": 326,
+   "col_end": 33,
    "type": "text",
    "desc": "vat",
    "project": "",
@@ -5400,52 +5456,24 @@
     "EPeRU24GjYtk+VlXoxQnGQ==": "Total TTC"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 300,
-   "col_beg": 8,
-   "line_end": 302,
-   "col_end": 14,
-   "type": "text",
-   "desc": "total",
-   "project": "",
-   "jsfbt": "Total TTC"
-  },
-  {
-   "hashToText": {
-    "o767iga5grsHGrblh6ti9Q==": "{price} €"
-   },
-   "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 305,
-   "col_beg": 8,
-   "line_end": 312,
-   "col_end": 14,
-   "type": "text",
-   "desc": "total price",
-   "project": "",
-   "jsfbt": "{price} €"
-  },
-  {
-   "hashToText": {
-    "EPeRU24GjYtk+VlXoxQnGQ==": "Total TTC"
-   },
-   "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 326,
-   "col_beg": 7,
-   "line_end": 328,
-   "col_end": 13,
-   "type": "text",
-   "desc": "total",
-   "project": "",
-   "jsfbt": "Total TTC"
-  },
-  {
-   "hashToText": {
-    "o767iga5grsHGrblh6ti9Q==": "{price} €"
-   },
-   "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 331,
+   "line_beg": 339,
    "col_beg": 7,
    "line_end": 339,
-   "col_end": 13,
+   "col_end": 40,
+   "type": "text",
+   "desc": "total",
+   "project": "",
+   "jsfbt": "Total TTC"
+  },
+  {
+   "hashToText": {
+    "o767iga5grsHGrblh6ti9Q==": "{price} €"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 341,
+   "col_beg": 8,
+   "line_end": 352,
+   "col_end": 14,
    "type": "text",
    "desc": "total price",
    "project": "",
@@ -5456,9 +5484,9 @@
     "X7846IgpnNe8tJuHtz9Y7w==": "Pied de page du devis..."
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 345,
+   "line_beg": 359,
    "col_beg": 17,
-   "line_end": 348,
+   "line_end": 362,
    "col_end": 5,
    "type": "text",
    "desc": "quote footer placeholder",
@@ -5470,9 +5498,9 @@
     "FZVMMWwzultiJ0b3qaGP8A==": "Générer un nouveau devis"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 380,
+   "line_beg": 399,
    "col_beg": 5,
-   "line_end": 382,
+   "line_end": 401,
    "col_end": 11,
    "type": "text",
    "desc": "project generate quote button",
@@ -5481,17 +5509,73 @@
   },
   {
    "hashToText": {
+    "MdxW6Pz/Z7ZA7W9vSggd/A==": "Le devis a bien été créé, vous pouvez le partager avec votre client en copiant le lien suivant:"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 406,
+   "col_beg": 5,
+   "line_end": 409,
+   "col_end": 11,
+   "type": "text",
+   "desc": "quote is created",
+   "project": "",
+   "jsfbt": "Le devis a bien été créé, vous pouvez le partager avec votre client en copiant le lien suivant:"
+  },
+  {
+   "hashToText": {
+    "zz9X6epphutal/wuRn1v7Q==": "Devis N° 2020-{issueNumber}"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 418,
+   "col_beg": 6,
+   "line_end": 418,
+   "col_end": 133,
+   "type": "text",
+   "desc": "quote created issue number",
+   "project": "",
+   "jsfbt": "Devis N° 2020-{issueNumber}"
+  },
+  {
+   "hashToText": {
     "T+YVwHbCz7T7IgWkb1h8IA==": "Devis générés"
    },
    "filepath": "src/components/ProjectQuotes/index.js",
-   "line_beg": 405,
+   "line_beg": 426,
    "col_beg": 6,
-   "line_end": 405,
+   "line_end": 426,
    "col_end": 54,
    "type": "text",
    "desc": "generated quotes",
    "project": "",
    "jsfbt": "Devis générés"
+  },
+  {
+   "hashToText": {
+    "Y/9g8Js/k4m6Gk3b42GUVQ==": "Devis N° 2020-{issueNumber}"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 444,
+   "col_beg": 10,
+   "line_end": 444,
+   "col_end": 127,
+   "type": "text",
+   "desc": "quote link label number",
+   "project": "",
+   "jsfbt": "Devis N° 2020-{issueNumber}"
+  },
+  {
+   "hashToText": {
+    "t1yFayJ4yHqq48vvKhvmog==": "Accepté le {date}"
+   },
+   "filepath": "src/components/ProjectQuotes/index.js",
+   "line_beg": 449,
+   "col_beg": 11,
+   "line_end": 456,
+   "col_end": 17,
+   "type": "text",
+   "desc": "accepted at",
+   "project": "",
+   "jsfbt": "Accepté le {date}"
   },
   {
    "hashToText": {
@@ -9351,9 +9435,9 @@
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 107,
+   "line_beg": 111,
    "col_beg": 6,
-   "line_end": 109,
+   "line_end": 113,
    "col_end": 12,
    "type": "text",
    "desc": "required",
@@ -9365,9 +9449,9 @@
     "wuxa5BJR7fALB7nYflk8oA==": "Requis"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 120,
+   "line_beg": 128,
    "col_beg": 7,
-   "line_end": 122,
+   "line_end": 130,
    "col_end": 13,
    "type": "text",
    "desc": "required",
@@ -9379,9 +9463,9 @@
     "SXKldbfoDGNTWPI3fjepQQ==": "Quelque chose s'est mal passé"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 164,
+   "line_beg": 176,
    "col_beg": 8,
-   "line_end": 166,
+   "line_end": 178,
    "col_end": 14,
    "type": "text",
    "desc": "something went wrong",
@@ -9393,9 +9477,9 @@
     "l3FQqY76BTjAVhnKJLbldg==": "Raison sociale"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 184,
+   "line_beg": 198,
    "col_beg": 11,
-   "line_end": 189,
+   "line_end": 203,
    "col_end": 17,
    "type": "text",
    "desc": "company name",
@@ -9407,9 +9491,9 @@
     "vcR97IvUeEk/eoSlrsPF7w==": "Bertrand SA"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 192,
+   "line_beg": 206,
    "col_beg": 11,
-   "line_end": 197,
+   "line_end": 211,
    "col_end": 17,
    "type": "text",
    "desc": "company name placeholder",
@@ -9421,9 +9505,9 @@
     "6nC+/TRmyaMHkVN2gM/4LA==": "Numéro de téléphone"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 207,
+   "line_beg": 221,
    "col_beg": 11,
-   "line_end": 212,
+   "line_end": 226,
    "col_end": 17,
    "type": "text",
    "desc": "phone number",
@@ -9435,9 +9519,9 @@
     "8INpXIUFrim0DFqdR969lA==": "0427..."
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 215,
+   "line_beg": 229,
    "col_beg": 11,
-   "line_end": 220,
+   "line_end": 234,
    "col_end": 17,
    "type": "text",
    "desc": "phone number",
@@ -9449,9 +9533,9 @@
     "QBtafI1hKYBVCIJVUQiQNA==": "Adresse de la société"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 232,
+   "line_beg": 246,
    "col_beg": 11,
-   "line_end": 237,
+   "line_end": 251,
    "col_end": 17,
    "type": "text",
    "desc": "company address",
@@ -9460,12 +9544,124 @@
   },
   {
    "hashToText": {
+    "kBfjZxqlGYwNO42dEVwq6w==": "SIRET"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 264,
+   "col_beg": 11,
+   "line_end": 269,
+   "col_end": 17,
+   "type": "text",
+   "desc": "company name",
+   "project": "inyo",
+   "jsfbt": "SIRET"
+  },
+  {
+   "hashToText": {
+    "39TBvtD/4HyZvxXkRv8LTA==": "123 456 789 12345"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 272,
+   "col_beg": 11,
+   "line_end": 277,
+   "col_end": 17,
+   "type": "text",
+   "desc": "company name placeholder",
+   "project": "inyo",
+   "jsfbt": "123 456 789 12345"
+  },
+  {
+   "hashToText": {
+    "m6O6LqsW1BEIy/mZXQky2w==": "N° TVA"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 286,
+   "col_beg": 11,
+   "line_end": 291,
+   "col_end": 17,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "N° TVA"
+  },
+  {
+   "hashToText": {
+    "akDpZgsLHYSJI82+0sVOvg==": "FR 01 234 567 123"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 294,
+   "col_beg": 11,
+   "line_end": 299,
+   "col_end": 17,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "FR 01 234 567 123"
+  },
+  {
+   "hashToText": {
+    "RsJzZi3RFtQwwmzK88BmCQ==": "Taux TVA"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 308,
+   "col_beg": 11,
+   "line_end": 313,
+   "col_end": 17,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "Taux TVA"
+  },
+  {
+   "hashToText": {
+    "YhwzzsfjrqLeGeusqgMozw==": "20"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 316,
+   "col_beg": 11,
+   "line_end": 321,
+   "col_end": 17,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "20"
+  },
+  {
+   "hashToText": {
+    "0CpRsV+hyYGhAplghS6B2A==": "RCS"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 330,
+   "col_beg": 11,
+   "line_end": 335,
+   "col_end": 17,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "RCS"
+  },
+  {
+   "hashToText": {
+    "0Wg6yd0rJbmpt1ImoHlctg==": "RCS Paris 012 345 678"
+   },
+   "filepath": "src/components/UserCompanyForm/index.js",
+   "line_beg": 338,
+   "col_beg": 11,
+   "line_end": 343,
+   "col_end": 17,
+   "type": "text",
+   "desc": "phone number",
+   "project": "inyo",
+   "jsfbt": "RCS Paris 012 345 678"
+  },
+  {
+   "hashToText": {
     "AhM+a4F1MM40rw6vZnqFew==": "Logo de la société"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 253,
+   "line_beg": 355,
    "col_beg": 12,
-   "line_end": 255,
+   "line_end": 357,
    "col_end": 18,
    "type": "text",
    "desc": "Company's logo form label",
@@ -9477,9 +9673,9 @@
     "Y64AA6t7TDwJkqigxzUDmA==": "Charger un logo"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 296,
+   "line_beg": 398,
    "col_beg": 13,
-   "line_end": 298,
+   "line_end": 400,
    "col_end": 19,
    "type": "text",
    "desc": "Company's logo upload button",
@@ -9491,9 +9687,9 @@
     "hwJzj8rJfXGoed9aJ/U6yA==": "Bannière de la société"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 326,
+   "line_beg": 428,
    "col_beg": 12,
-   "line_end": 328,
+   "line_end": 430,
    "col_end": 18,
    "type": "text",
    "desc": "Company's logo form label",
@@ -9505,9 +9701,9 @@
     "EX1vp3nzcu/PifVnW+Sk5w==": "Choisir une image prédéfinie"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 349,
+   "line_beg": 451,
    "col_beg": 13,
-   "line_end": 352,
+   "line_end": 454,
    "col_end": 19,
    "type": "text",
    "desc": "Company's banner upload button",
@@ -9519,9 +9715,9 @@
     "xQtBCL3WIJNWVD8hYDQIwg==": "Charger une bannière"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 405,
+   "line_beg": 507,
    "col_beg": 13,
-   "line_end": 407,
+   "line_end": 509,
    "col_end": 19,
    "type": "text",
    "desc": "Company's banner upload button",
@@ -9533,9 +9729,9 @@
     "+H3+Bor//yi+bztLnvoPNw==": "Mettre à jour"
    },
    "filepath": "src/components/UserCompanyForm/index.js",
-   "line_beg": 443,
+   "line_beg": 545,
    "col_beg": 9,
-   "line_end": 445,
+   "line_end": 547,
    "col_end": 15,
    "type": "text",
    "desc": "update",
@@ -12081,10 +12277,10 @@
     "AU4UmOPIEzH+sm+ZcUudGg==": "Accepter le devis"
    },
    "filepath": "src/screens/Customer/Quote/index.js",
-   "line_beg": 172,
-   "col_beg": 5,
-   "line_end": 174,
-   "col_end": 11,
+   "line_beg": 193,
+   "col_beg": 7,
+   "line_end": 195,
+   "col_end": 13,
    "type": "text",
    "desc": "quote screen accept button",
    "project": "",
@@ -12095,10 +12291,10 @@
     "iaCWbsAv/mlHc9/0k24JdQ==": "Imprimer le devis"
    },
    "filepath": "src/screens/Customer/Quote/index.js",
-   "line_beg": 177,
-   "col_beg": 5,
-   "line_end": 179,
-   "col_end": 11,
+   "line_beg": 199,
+   "col_beg": 6,
+   "line_end": 201,
+   "col_end": 12,
    "type": "text",
    "desc": "quote screen print button",
    "project": "",
@@ -12106,59 +12302,129 @@
   },
   {
    "hashToText": {
-    "M+waFcEmg7eHJxePwiwiDw==": "Devis #"
+    "NX3XqrpXWPqAHmvSCU/9Cw==": "{=Ce devis n'est plus valide. Le devis à jour ce trouve} {=ici}"
    },
    "filepath": "src/screens/Customer/Quote/index.js",
-   "line_beg": 185,
+   "line_beg": 207,
    "col_beg": 5,
-   "line_end": 187,
+   "line_end": 217,
+   "col_end": 11,
+   "type": "text",
+   "desc": "quote not valid",
+   "project": "",
+   "jsfbt": "{=Ce devis n'est plus valide. Le devis à jour ce trouve} {=ici}"
+  },
+  {
+   "hashToText": {
+    "sTITh0MyN04L80RbRYAY0Q==": "Ce devis n'est plus valide. Le devis à jour ce trouve"
+   },
+   "filepath": "src/screens/Customer/Quote/index.js",
+   "line_beg": 208,
+   "col_beg": 6,
+   "line_end": 208,
+   "col_end": 72,
+   "type": "text",
+   "desc": "In the phrase: \"{=Ce devis n'est plus valide. Le devis à jour ce trouve}{=ici}\"",
+   "project": "",
+   "jsfbt": "Ce devis n'est plus valide. Le devis à jour ce trouve"
+  },
+  {
+   "hashToText": {
+    "70Y3QfqXfUvAWtsXMxAdXA==": "ici"
+   },
+   "filepath": "src/screens/Customer/Quote/index.js",
+   "line_beg": 209,
+   "col_beg": 6,
+   "line_end": 216,
+   "col_end": 19,
+   "type": "text",
+   "desc": "In the phrase: \"{=Ce devis n'est plus valide. Le devis à jour ce trouve}{=ici}\"",
+   "project": "",
+   "jsfbt": "ici"
+  },
+  {
+   "hashToText": {
+    "mGdZuL1oIy4FoZbwr/lW5g==": "Devis N° 2020-{issue number}"
+   },
+   "filepath": "src/screens/Customer/Quote/index.js",
+   "line_beg": 223,
+   "col_beg": 5,
+   "line_end": 227,
    "col_end": 11,
    "type": "text",
    "desc": "quote screen number",
    "project": "inyo",
-   "jsfbt": "Devis #"
+   "jsfbt": "Devis N° 2020-{issue number}"
   },
   {
    "hashToText": {
-    "+Iv8m372AO85AOPkR8ZSFQ==": "{subtotal} HT"
+    "ZMXSm3y5WBMOYr8GyQZg3w==": "{price} €"
    },
    "filepath": "src/screens/Customer/Quote/index.js",
-   "line_beg": 234,
+   "line_beg": 269,
    "col_beg": 8,
-   "line_end": 237,
+   "line_end": 274,
+   "col_end": 14,
+   "type": "text",
+   "desc": "section price",
+   "project": "",
+   "jsfbt": "{price} €"
+  },
+  {
+   "hashToText": {
+    "KDh/wLyZrq+aW3+l713qLA==": "Total HT {subtotal} €"
+   },
+   "filepath": "src/screens/Customer/Quote/index.js",
+   "line_beg": 288,
+   "col_beg": 8,
+   "line_end": 294,
    "col_end": 14,
    "type": "text",
    "desc": "quote screen ht",
    "project": "inyo",
-   "jsfbt": "{subtotal} HT"
+   "jsfbt": "Total HT {subtotal} €"
   },
   {
    "hashToText": {
-    "937UKHG/y623MnEgw+1m+w==": "{total} TTC"
+    "oNBme8a+2/N+MMbwRs8OTQ==": "TVA {value} % soit {total} €"
    },
    "filepath": "src/screens/Customer/Quote/index.js",
-   "line_beg": 240,
+   "line_beg": 297,
    "col_beg": 8,
-   "line_end": 243,
+   "line_end": 311,
+   "col_end": 14,
+   "type": "text",
+   "desc": "quote screen taxes",
+   "project": "inyo",
+   "jsfbt": "TVA {value} % soit {total} €"
+  },
+  {
+   "hashToText": {
+    "TqWTvSF/ttvcqUIYcIjewA==": "Total TTC {total} €"
+   },
+   "filepath": "src/screens/Customer/Quote/index.js",
+   "line_beg": 314,
+   "col_beg": 8,
+   "line_end": 323,
    "col_end": 14,
    "type": "text",
    "desc": "quote screen ttc",
    "project": "inyo",
-   "jsfbt": "{total} TTC"
+   "jsfbt": "Total TTC {total} €"
   },
   {
    "hashToText": {
-    "JT3Zq8Z5x0p5ZlpWxfI8GQ==": "{subtotal} TTC"
+    "rI94XZNL97UZ7VIdDdnUtA==": "Total HT {subtotal} €"
    },
    "filepath": "src/screens/Customer/Quote/index.js",
-   "line_beg": 248,
+   "line_beg": 328,
    "col_beg": 7,
-   "line_end": 251,
+   "line_end": 334,
    "col_end": 13,
    "type": "text",
    "desc": "quote screen ttc",
    "project": "inyo",
-   "jsfbt": "{subtotal} TTC"
+   "jsfbt": "Total HT {subtotal} €"
   },
   {
    "hashToText": {

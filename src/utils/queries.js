@@ -254,6 +254,7 @@ export const GET_PROJECT_QUOTES = gql`
 			}
 			quotes {
 				id
+				issueNumber
 				acceptedAt
 				createdAt
 			}
@@ -907,6 +908,11 @@ export const GET_QUOTE = gql`
 			footer
 			hasTaxes
 			taxRate
+			invalid
+			validQuote {
+				id
+				issueNumber
+			}
 			createdAt
 			acceptedAt
 			project {

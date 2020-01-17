@@ -405,8 +405,8 @@ const ProjectQuotes = ({projectId}) => {
 				<QuoteCreatedConfirmation>
 					<fbt desc="quote is created">
 						Le devis a bien été créé, vous pouvez le partager avec
-						votre client en copiant le lien suivant :{' '}
-					</fbt>
+						votre client en copiant le lien suivant:
+					</fbt>{' '}
 					<ObjectLink
 						to={`/app/${
 							data.project.customer
@@ -415,7 +415,11 @@ const ProjectQuotes = ({projectId}) => {
 						}/quotes/${quoteCreated.id}`}
 						target="_blank"
 					>
-						{quoteCreated.id}
+						<fbt desc="quote created issue number">
+							Devis N° 2020-<fbt:param name="issueNumber">
+								{quoteCreated.issueNumber}
+							</fbt:param>
+						</fbt>
 					</ObjectLink>
 				</QuoteCreatedConfirmation>
 			)}
@@ -441,9 +445,13 @@ const ProjectQuotes = ({projectId}) => {
 										}/quotes/${quote.id}`}
 										target="_blank"
 									>
-										{quote.id}
+										<fbt desc="quote link label number">
+											Devis N° 2020-<fbt:param name="issueNumber">
+												{quote.issueNumber}
+											</fbt:param>
+										</fbt>
 									</ObjectLink>{' '}
-									{new Date(quote.createdAt).toLocaleString()}{' '}
+									{moment(quote.createdAt).format('L')}{' '}
 									{quote.acceptedAt && (
 										<span>
 											<fbt desc="accepted at">

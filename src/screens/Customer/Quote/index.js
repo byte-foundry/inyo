@@ -3,6 +3,7 @@ import '../../../print.css';
 import styled from '@emotion/styled';
 import moment from 'moment';
 import React, {useContext} from 'react';
+import {Link} from 'react-router-dom';
 
 import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
 import CustomProjectHeader from '../../../components/CustomProjectHeader';
@@ -16,6 +17,7 @@ import {LoadingLogo} from '../../../utils/content';
 import {CustomerContext} from '../../../utils/contexts';
 import {ACCEPT_QUOTE} from '../../../utils/mutations';
 import {
+	A,
 	accentGrey,
 	Button,
 	Heading,
@@ -143,6 +145,8 @@ const Actions = styled('div')`
 	}
 `;
 
+const ObjectLink = A.withComponent(Link);
+
 const Quote = ({match}) => {
 	const customerToken = useContext(CustomerContext);
 	const {data, loading, error} = useQuery(GET_QUOTE, {
@@ -171,36 +175,57 @@ const Quote = ({match}) => {
 				customerToken={match.params.customerToken}
 				noProgress
 			/>
-			<Actions>
-				{quote.acceptedAt ? (
-					<div>Accepté le {moment(quote.acceptedAt).format('L')}</div>
-				) : (
-					<Button
-						onClick={() => {
-							acceptQuote({
-								variables: {
-									id: quote.id,
-									token: customerToken,
-								},
-							});
-						}}
-					>
-						<fbt desc="quote screen accept button">
-							Accepter le devis
+			{!quote.invalid && (
+				<Actions>
+					{quote.acceptedAt ? (
+						<div>
+							Accepté le {moment(quote.acceptedAt).format('L')}
+						</div>
+					) : (
+						<Button
+							style={{marginRight: '1rem'}}
+							onClick={() => {
+								acceptQuote({
+									variables: {
+										id: quote.id,
+										token: customerToken,
+									},
+								});
+							}}
+						>
+							<fbt desc="quote screen accept button">
+								Accepter le devis
+							</fbt>
+						</Button>
+					)}
+					<Button>
+						<fbt desc="quote screen print button">
+							Imprimer le devis
 						</fbt>
 					</Button>
-				)}
-				<Button>
-					<fbt desc="quote screen print button">
-						Imprimer le devis
+				</Actions>
+			)}
+			{quote.invalid && (
+				<Actions>
+					<fbt desc="quote not valid">
+						<span>
+							Ce devis n'est plus valide. Le devis à jour ce
+							trouve
+						</span>{' '}
+						<ObjectLink
+							to={`/app/${customerToken}/quotes/${quote.id}`}
+							target="_blank"
+						>
+							ici
+						</ObjectLink>
 					</fbt>
-				</Button>
-			</Actions>
+				</Actions>
+			)}
 
 			<Content>
 				<Date>
 					<fbt project="inyo" desc="quote screen number">
-						Devis #<fbt:param name="issue number">
+						Devis N° 2020-<fbt:param name="issue number">
 							{quote.issueNumber}
 						</fbt:param>
 					</fbt>

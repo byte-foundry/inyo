@@ -178,7 +178,7 @@ const Quote = ({match}) => {
 			{!quote.invalid && (
 				<Actions>
 					{quote.acceptedAt ? (
-						<div>
+						<div style={{marginRight: '1rem'}}>
 							Accepté le {moment(quote.acceptedAt).format('L')}
 						</div>
 					) : (

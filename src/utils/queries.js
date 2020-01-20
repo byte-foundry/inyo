@@ -454,6 +454,7 @@ export const GET_PROJECT_DATA = gql`
 					createdAt
 					id
 					documentType
+					url
 					owner {
 						... on User {
 							lastName
@@ -1048,6 +1049,12 @@ export const GET_QUOTE = gql`
 					lastName
 					email
 					phone
+					address {
+						street
+						city
+						postalCode
+						country
+					}
 				}
 			}
 			sections {

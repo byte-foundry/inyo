@@ -2,7 +2,7 @@ import {useMutation} from '@apollo/react-hooks';
 import styled from '@emotion/styled/macro';
 import * as Sentry from '@sentry/browser';
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
@@ -142,6 +142,71 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
 	const [isOpenImagePickerModal, setisOpenImagePickerModal] = useState(false);
 	const {language} = useUserInfos();
+
+	const uploadAttachmentsCb = useCallback(
+		newFiles => updateUser({
+			variables: {
+				company: {
+					documents: newFiles,
+				},
+			},
+			context: {
+				hasUpload: true,
+			},
+		}),
+		[],
+	);
+
+	const uploadLogoCb = useCallback(
+		([file]) => updateUser({
+			variables: {
+				company: {
+					logo: file,
+				},
+			},
+			context: {
+				hasUpload: true,
+			},
+		}),
+		[],
+	);
+
+	const deleteLogoCb = useCallback(
+		() => updateUser({
+			variables: {
+				company: {
+					logo: null,
+				},
+			},
+		}),
+		[],
+	);
+
+	const uploadBannerCb = useCallback(
+		([file]) => updateUser({
+			variables: {
+				company: {
+					banner: file,
+				},
+			},
+			context: {
+				hasUpload: true,
+			},
+		}),
+		[],
+	);
+
+	const deleteBannerCb = useCallback(
+		() => updateUser({
+			variables: {
+				company: {
+					banner: null,
+					bannerUnsplashId: null,
+				},
+			},
+		}),
+		[],
+	);
 
 	return (
 		<UserCompanyFormMain>
@@ -419,17 +484,7 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 
 											<UploadButtons>
 												<UploadDashboardButton
-													onUploadFiles={([file]) => updateUser({
-														variables: {
-															company: {
-																logo: file,
-															},
-														},
-														context: {
-															hasUpload: true,
-														},
-													})
-													}
+													onUploadFiles={uploadLogoCb}
 													restrictions={{
 														maxFileSize: 500 * 1024,
 														maxNumberOfFiles: 1,
@@ -453,14 +508,7 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 														icon="delete"
 														size="tiny"
 														color={primaryRed}
-														onClick={() => updateUser({
-															variables: {
-																company: {
-																	logo: null,
-																},
-															},
-														})
-														}
+														onClick={deleteLogoCb}
 													/>
 												)}
 											</UploadButtons>
@@ -527,16 +575,8 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 												)}
 
 												<UploadDashboardButton
-													onUploadFiles={([file]) => updateUser({
-														variables: {
-															company: {
-																banner: file,
-															},
-														},
-														context: {
-															hasUpload: true,
-														},
-													})
+													onUploadFiles={
+														uploadBannerCb
 													}
 													restrictions={{
 														maxFileSize:
@@ -563,15 +603,7 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 														icon="delete"
 														size="tiny"
 														color={primaryRed}
-														onClick={() => updateUser({
-															variables: {
-																company: {
-																	banner: null,
-																	bannerUnsplashId: null,
-																},
-															},
-														})
-														}
+														onClick={deleteBannerCb}
 													/>
 												)}
 											</UploadButtons>
@@ -634,16 +666,8 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 												),
 											)}
 											<UploadDashboardButton
-												onUploadFiles={newFiles => updateUser({
-													variables: {
-														company: {
-															documents: newFiles,
-														},
-													},
-													context: {
-														hasUpload: true,
-													},
-												})
+												onUploadFiles={
+													uploadAttachmentsCb
 												}
 											>
 												<fbt desc="">

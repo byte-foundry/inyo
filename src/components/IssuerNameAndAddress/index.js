@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 
 import {H4, H5} from '../../utils/content';
-import {accentGrey, P, primaryBlack} from '../../utils/new/design-system';
+import {gray70, P, primaryBlack} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
 	margin: 20px 0;
@@ -12,13 +12,13 @@ const ClientAddress = styled('div')`
 const ContactName = styled(H5)`
 	font-size: 14px;
 	font-weight: 400;
-	color: ${accentGrey};
+	color: ${gray70};
 `;
 
 const ContactInfo = styled(P)`
 	font-size: 14px;
 	line-height: 1.4;
-	color: ${accentGrey};
+	color: ${gray70};
 	margin-top: 0;
 `;
 

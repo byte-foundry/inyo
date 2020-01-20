@@ -125,9 +125,18 @@ const FileContainer = styled('span')`
 	margin-bottom: -0.3rem;
 `;
 
-const UserCompanyForm = ({data, buttonText}) => {
+const UserCompanyForm = ({data, buttonText, done}) => {
 	const {
-		name, address, phone, logo, banner, documents,
+		name,
+		address,
+		phone,
+		logo,
+		banner,
+		documents,
+		vat,
+		siret,
+		rcs,
+		vatRate,
 	} = data;
 	const [updateUser] = useMutation(UPDATE_USER_COMPANY);
 	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
@@ -141,6 +150,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 					name: name || '',
 					phone: phone || '',
 					address: address || '',
+					vat: vat || '',
+					siret: siret || '',
+					rcs: rcs || '',
+					vatRate,
 				}}
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required(
@@ -149,6 +162,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 						</fbt>,
 					),
 					phone: Yup.string(),
+					vat: Yup.string(),
+					vatRate: Yup.number(),
+					siret: Yup.string(),
+					rcs: Yup.string(),
 					address: Yup.object()
 						.shape({
 							street: Yup.string().required(),
@@ -174,6 +191,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 										...values.address,
 										__typename: undefined,
 									},
+									vat: values.vat,
+									vatRate: values.vatRate,
+									siret: values.siret,
+									rcs: values.rcs,
 								},
 							},
 						});
@@ -207,6 +228,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 							),
 						});
 					}
+
+					done();
 				}}
 			>
 				{(props) => {
@@ -281,6 +304,94 @@ const UserCompanyForm = ({data, buttonText}) => {
 										style={{
 											gridColumn: '1 / 3',
 										}}
+									/>
+									<FormElem
+										{...props}
+										name="siret"
+										type="text"
+										label={
+											<fbt
+												project="inyo"
+												desc="company name"
+											>
+												SIRET
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="company name placeholder"
+											>
+												123 456 789 12345
+											</fbt>
+										}
+										padded
+									/>
+									<FormElem
+										{...props}
+										name="vat"
+										type="text"
+										label={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												N° TVA
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												FR 01 234 567 123
+											</fbt>
+										}
+										padded
+									/>
+									<FormElem
+										{...props}
+										name="vatRate"
+										type="number"
+										label={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												Taux TVA
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												20
+											</fbt>
+										}
+										padded
+									/>
+									<FormElem
+										{...props}
+										name="rcs"
+										type="text"
+										label={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												RCS
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												RCS Paris 012 345 678
+											</fbt>
+										}
+										padded
 									/>
 									<div
 										style={{

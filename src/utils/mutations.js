@@ -344,6 +344,20 @@ export const UPDATE_PROJECT_SHARED_NOTES = gql`
 	}
 `;
 
+export const UPDATE_PROJECT_QUOTE = gql`
+	mutation updateProject($id: ID!, $quoteHeader: Json, $quoteFooter: Json) {
+		updateProject(
+			id: $id
+			quoteHeader: $quoteHeader
+			quoteFooter: $quoteFooter
+		) {
+			id
+			quoteHeader
+			quoteFooter
+		}
+	}
+`;
+
 export const START_PROJECT = gql`
 	# creating project with a customer id or a new customer
 	mutation startProject($projectId: ID!, $notifyCustomer: Boolean) {
@@ -471,11 +485,22 @@ export const UPDATE_SECTION = gql`
 	${ITEM_FRAGMENT}
 	${PROJECT_SHORT_FRAGMENT}
 
-	mutation updateSection($sectionId: ID!, $name: String, $position: Int) {
-		updateSection(id: $sectionId, name: $name, position: $position) {
+	mutation updateSection(
+		$sectionId: ID!
+		$name: String
+		$position: Int
+		$price: Float
+	) {
+		updateSection(
+			id: $sectionId
+			name: $name
+			position: $position
+			price: $price
+		) {
 			id
 			name
 			position
+			price
 			project {
 				...ProjectShortFragment
 				customer {
@@ -1081,6 +1106,40 @@ export const SET_TEMPLATE_TO_DEFAULT = gql`
 export const SEND_CUSTOM_EMAIL_PREVIEW = gql`
 	mutation sendCustomEmailPreview($subject: Json!, $content: Json!) {
 		sent: sendCustomEmailPreview(subject: $subject, content: $content)
+	}
+`;
+
+export const ISSUE_QUOTE = gql`
+	mutation issueQuote(
+		$projectId: ID!
+		$sections: [QuoteSectionInput!]
+		$header: Json
+		$footer: Json
+		$hasTaxes: Boolean!
+		$taxRate: Float
+	) {
+		issueQuote(
+			projectId: $projectId
+			sections: $sections
+			header: $header
+			footer: $footer
+			hasTaxes: $hasTaxes
+			taxRate: $taxRate
+		) {
+			id
+			issueNumber
+			acceptedAt
+			createdAt
+		}
+	}
+`;
+
+export const ACCEPT_QUOTE = gql`
+	mutation acceptQuote($id: ID!, $token: String!) {
+		acceptQuote(id: $id, token: $token) {
+			id
+			acceptedAt
+		}
 	}
 `;
 

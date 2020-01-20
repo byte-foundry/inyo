@@ -20,6 +20,9 @@ export default function useUserInfos() {
 		clientViews,
 		lastName,
 		firstName,
+		company: {
+			vat, vatRate, siret, rcs,
+		},
 	} = data.me;
 
 	let workingTime = null;
@@ -47,5 +50,9 @@ export default function useUserInfos() {
 		assistantName: settings.assistantName,
 		lastName,
 		firstName,
+		vat,
+		vatRate,
+		siret,
+		rcs,
 	};
 }

@@ -12,6 +12,7 @@ import ProjectBudget from '../../../components/ProjectBudget';
 import ProjectDocumentsFolders from '../../../components/ProjectDocumentsFolders';
 import ProjectHeader from '../../../components/ProjectHeader';
 import ProjectPersonalNotes from '../../../components/ProjectPersonalNotes';
+import ProjectQuotes from '../../../components/ProjectQuotes';
 import ProjectSharedNotes from '../../../components/ProjectSharedNotes';
 import ProjectList from '../../../components/ProjectTasksList';
 import SidebarProjectInfos from '../../../components/SidebarProjectInfos';
@@ -158,6 +159,9 @@ function TasksList({location, history}) {
 						)}
 						{view === 'documents' && (
 							<ProjectDocumentsFolders projectId={projectId} />
+						)}
+						{view === 'quotes' && (
+							<ProjectQuotes projectId={projectId} />
 						)}
 					</Suspense>
 					{isTasksView && (

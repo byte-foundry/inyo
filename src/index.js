@@ -37,7 +37,7 @@ import {
 import {Loading} from './utils/content';
 import {UserContext} from './utils/contexts';
 import client from './utils/graphQLConfig';
-import {Body, Button} from './utils/new/design-system';
+import {Body} from './utils/new/design-system';
 import {CHECK_LOGIN_USER} from './utils/queries';
 
 const Customer = React.lazy(() => import('./screens/Customer'));
@@ -180,11 +180,11 @@ function Root() {
 						<UserContext.Provider user={data && data.me}>
 							<Switch>
 								<Route
-									path="/app/:customerToken(.*-.*-.*-.*)/tasks"
+									path="/app/:customerToken(.*-.*-.*-\w*)"
 									render={withTracker(Customer)}
 								/>
 								<Redirect
-									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-.*)"
+									from="/app/projects/:projectId/view/:customerToken(.*-.*-.*-\w*)"
 									to="/app/:customerToken/tasks?projectId=:projectId"
 								/>
 								<Route

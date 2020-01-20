@@ -1941,6 +1941,26 @@
     }
    ]
   },
+  "4uWwWAEkjeee+uOwaU7O7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Different type of task trigger different actions",
+     "variations": {}
+    }
+   ]
+  },
+  "WlT9SCoRXpZo1WsKLdRoNA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Type",
+     "variations": {}
+    }
+   ]
+  },
   "HLV6gRDo4cU1fnr1mVGuig==": {
    "tokens": [],
    "types": [],
@@ -2001,22 +2021,22 @@
     }
    ]
   },
-  "4uWwWAEkjeee+uOwaU7O7Q==": {
+  "O2bvIP8C7o5hpIjlEoM1RA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Different type of task trigger different actions",
+     "translation": "Total timed time",
      "variations": {}
     }
    ]
   },
-  "WlT9SCoRXpZo1WsKLdRoNA==": {
+  "jXygJEbSYKbn8Hn1JaF9SQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Type",
+     "translation": "Timed time",
      "variations": {}
     }
    ]
@@ -2041,6 +2061,26 @@
     }
    ]
   },
+  "jfsOT5lLo1+dCjYndpC6Hw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Daily rate for this task",
+     "variations": {}
+    }
+   ]
+  },
+  "g/cBTTXTfg80pg3w/BnsIw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Daily rate",
+     "variations": {}
+    }
+   ]
+  },
   "6F6qiWW3cYSOf+pclVSw7g==": {
    "tokens": [],
    "types": [],
@@ -2057,16 +2097,6 @@
    "translations": [
     {
      "translation": "Add or create a tag",
-     "variations": {}
-    }
-   ]
-  },
-  "zueWZg7HgvsosZ5HKPriZQ==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Average daily rate of this task",
      "variations": {}
     }
    ]
@@ -2357,6 +2387,26 @@
    "translations": [
     {
      "translation": "removed your assignement to the task",
+     "variations": {}
+    }
+   ]
+  },
+  "YsY2mMHWlF7dWzAJgg4Veg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "accepted the quote for project",
+     "variations": {}
+    }
+   ]
+  },
+  "sx9PWMBozFrn88Egrh0cdg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "viewed the quote for project",
      "variations": {}
     }
    ]
@@ -3591,6 +3641,156 @@
     }
    ]
   },
+  "aHUgwbyL/8yxdaEmlxC9Vg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${input}",
+     "variations": {}
+    }
+   ]
+  },
+  "UWDTJHkoZmilujObphq0rw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Sync prizes with project",
+     "variations": {}
+    }
+   ]
+  },
+  "gMKkyYQlXiomuXvTmzZ2qA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote header",
+     "variations": {}
+    }
+   ]
+  },
+  "BJYVBEpPTv2slfE3FK2Krg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subtotal",
+     "variations": {}
+    }
+   ]
+  },
+  "o767iga5grsHGrblh6ti9Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${price}",
+     "variations": {}
+    }
+   ]
+  },
+  "NfkUr+M+QhpY5IsmFIGr5Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote with taxes",
+     "variations": {}
+    }
+   ]
+  },
+  "B21uE+4eUxxUm0U9QnRm0w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "VAT",
+     "variations": {}
+    }
+   ]
+  },
+  "EPeRU24GjYtk+VlXoxQnGQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total",
+     "variations": {}
+    }
+   ]
+  },
+  "X7846IgpnNe8tJuHtz9Y7w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote footer",
+     "variations": {}
+    }
+   ]
+  },
+  "FZVMMWwzultiJ0b3qaGP8A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Issue a new quote",
+     "variations": {}
+    }
+   ]
+  },
+  "MdxW6Pz/Z7ZA7W9vSggd/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "The quote has been created. Use this link to share it with your client: ",
+     "variations": {}
+    }
+   ]
+  },
+  "zz9X6epphutal/wuRn1v7Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote #2020-{issueNumber}",
+     "variations": {}
+    }
+   ]
+  },
+  "T+YVwHbCz7T7IgWkb1h8IA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Issued quotes",
+     "variations": {}
+    }
+   ]
+  },
+  "Y/9g8Js/k4m6Gk3b42GUVQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote #2020-{issueNumber}",
+     "variations": {}
+    }
+   ]
+  },
+  "t1yFayJ4yHqq48vvKhvmog==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Accepted on {date}",
+     "variations": {}
+    }
+   ]
+  },
   "JOxxH5XzBwZ6iHW40mWiOg==": {
    "tokens": [],
    "types": [],
@@ -4401,6 +4601,26 @@
     }
    ]
   },
+  "ppAw5KQlHU+CoaOQxOzYng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Issue quote",
+     "variations": {}
+    }
+   ]
+  },
+  "R+oxt+2PzhvodY7MNJ0arg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quotes",
+     "variations": {}
+    }
+   ]
+  },
   "2k12scuS6/CzumkYT9QuZg==": {
    "tokens": [],
    "types": [],
@@ -4967,6 +5187,16 @@
    "translations": [
     {
      "translation": "This task is missing an invoice and client to be activable.",
+     "variations": {}
+    }
+   ]
+  },
+  "Tb/Io0eoU2UHULttWsa0MA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Time",
      "variations": {}
     }
    ]
@@ -5661,16 +5891,6 @@
     }
    ]
   },
-  "EQjurO3LYr2flJ+mnPDmPw==": {
-   "tokens": [],
-   "types": [],
-   "translations": [
-    {
-     "translation": "Type here...",
-     "variations": {}
-    }
-   ]
-  },
   "26cu1NFCEaNmdGnMxeeWvw==": {
    "tokens": [],
    "types": [],
@@ -5981,6 +6201,86 @@
     }
    ]
   },
+  "kBfjZxqlGYwNO42dEVwq6w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "SIRET",
+     "variations": {}
+    }
+   ]
+  },
+  "39TBvtD/4HyZvxXkRv8LTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "123 456 789 12345",
+     "variations": {}
+    }
+   ]
+  },
+  "m6O6LqsW1BEIy/mZXQky2w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tax registration number",
+     "variations": {}
+    }
+   ]
+  },
+  "akDpZgsLHYSJI82+0sVOvg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "FR 01 234 567 123",
+     "variations": {}
+    }
+   ]
+  },
+  "RsJzZi3RFtQwwmzK88BmCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tax rate",
+     "variations": {}
+    }
+   ]
+  },
+  "YhwzzsfjrqLeGeusqgMozw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "20",
+     "variations": {}
+    }
+   ]
+  },
+  "0CpRsV+hyYGhAplghS6B2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "RCS",
+     "variations": {}
+    }
+   ]
+  },
+  "0Wg6yd0rJbmpt1ImoHlctg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "RCS Paris 012 345 678",
+     "variations": {}
+    }
+   ]
+  },
   "AhM+a4F1MM40rw6vZnqFew==": {
    "tokens": [],
    "types": [],
@@ -6027,6 +6327,26 @@
    "translations": [
     {
      "translation": "Upload a banner",
+     "variations": {}
+    }
+   ]
+  },
+  "IR7wPQm3CfbZzUuH9YLW/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Admin docs",
+     "variations": {}
+    }
+   ]
+  },
+  "MdfQSoAYUftq+V2m1vZ31w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Attach a document",
      "variations": {}
     }
    ]
@@ -7631,6 +7951,126 @@
     }
    ]
   },
+  "AU4UmOPIEzH+sm+ZcUudGg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Accept the quote",
+     "variations": {}
+    }
+   ]
+  },
+  "iaCWbsAv/mlHc9/0k24JdQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Print the quote",
+     "variations": {}
+    }
+   ]
+  },
+  "NX3XqrpXWPqAHmvSCU/9Cw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Ce devis n'est plus valide. Le devis à jour ce trouve} {=ici}",
+     "variations": {}
+    }
+   ]
+  },
+  "sTITh0MyN04L80RbRYAY0Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This quote is outdated. To see the up to date quote follow this",
+     "variations": {}
+    }
+   ]
+  },
+  "70Y3QfqXfUvAWtsXMxAdXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "link",
+     "variations": {}
+    }
+   ]
+  },
+  "mGdZuL1oIy4FoZbwr/lW5g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote #2020-{issue number}",
+     "variations": {}
+    }
+   ]
+  },
+  "WN6Fgb/2ecFTYhTQcf7Y/g==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "VAT #",
+     "variations": {}
+    }
+   ]
+  },
+  "ZMXSm3y5WBMOYr8GyQZg3w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${price}",
+     "variations": {}
+    }
+   ]
+  },
+  "KDh/wLyZrq+aW3+l713qLA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subtotal ${subtotal}",
+     "variations": {}
+    }
+   ]
+  },
+  "oNBme8a+2/N+MMbwRs8OTQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tax rate {value} % soit ${total}",
+     "variations": {}
+    }
+   ]
+  },
+  "TqWTvSF/ttvcqUIYcIjewA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total ${total}",
+     "variations": {}
+    }
+   ]
+  },
+  "rI94XZNL97UZ7VIdDdnUtA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total ${subtotal}",
+     "variations": {}
+    }
+   ]
+  },
   "O7wWNxU3xU1rENuc5kWc7Q==": {
    "tokens": [],
    "types": [],
@@ -8921,6 +9361,76 @@
     }
    ]
   },
+  "zueWZg7HgvsosZ5HKPriZQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Average daily rate of this task",
+     "variations": {}
+    }
+   ]
+  },
+  "ZxABVMnMGXxWXEo9lHScCw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subtotal",
+     "variations": {}
+    }
+   ]
+  },
+  "4SENJ9e3iDp4xDNJEugzTA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "${price}",
+     "variations": {}
+    }
+   ]
+  },
+  "M+waFcEmg7eHJxePwiwiDw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Quote #",
+     "variations": {}
+    }
+   ]
+  },
+  "+Iv8m372AO85AOPkR8ZSFQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Subtotal {subtotal}",
+     "variations": {}
+    }
+   ]
+  },
+  "937UKHG/y623MnEgw+1m+w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total {total}",
+     "variations": {}
+    }
+   ]
+  },
+  "JT3Zq8Z5x0p5ZlpWxfI8GQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Total {subtotal}",
+     "variations": {}
+    }
+   ]
+  },
   "+a28apNacBiALR3YZvYZpw==": {
    "tokens": [],
    "types": [],
@@ -8977,6 +9487,16 @@
    "translations": [
     {
      "translation": "${budget}",
+     "variations": {}
+    }
+   ]
+  },
+  "EQjurO3LYr2flJ+mnPDmPw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Type here...",
      "variations": {}
     }
    ]

@@ -245,7 +245,10 @@ const Quote = ({match}) => {
 								issuer={quote.project.issuer}
 							/>
 							{quote.project.issuer.vat && (
-								<div>N° TVA: {quote.project.issuer.vat}</div>
+								<div>
+									<fbt desc="vat number">N° TVA</fbt>:{' '}
+									{quote.project.issuer.vat}
+								</div>
 							)}
 							{quote.project.issuer.siret && (
 								<div>SIRET: {quote.project.issuer.siret}</div>

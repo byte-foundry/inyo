@@ -1053,6 +1053,13 @@ export const Dropdown = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: calc(100% - 10px);
+		position: fixed !important;
+		padding-top: 3rem;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
+		z-index: 101;
 	}
 `;
 

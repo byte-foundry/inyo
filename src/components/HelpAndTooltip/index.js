@@ -3,7 +3,13 @@ import Portal from '@reach/portal';
 import {useRect} from '@reach/rect';
 import React, {useEffect, useRef, useState} from 'react';
 
-import {accentGrey, Dropdown, gray80} from '../../utils/new/design-system';
+import {BREAKPOINTS} from '../../utils/constants';
+import {
+	accentGrey,
+	Dropdown,
+	gray80,
+	primaryRed,
+} from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import IconButton from '../IconButton';
 
@@ -15,6 +21,18 @@ const HelpAndTooltipContainer = styled('div')`
 	max-width: 400px;
 `;
 
+const Close = styled(IconButton)`
+	display: none;
+	position: fixed;
+	top: 2rem;
+	right: 1rem;
+	z-index: 102;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: block;
+	}
+`;
+
 // From https://github.com/reach/reach-ui/blob/master/packages/tooltip/src/index.js#L487-L523
 const OFFSET = 5;
 
@@ -23,9 +41,9 @@ function positionDefault(triggerRect, targetRect) {
 		top: triggerRect.top - targetRect.height < 0,
 		right: window.innerWidth < triggerRect.left + targetRect.width,
 		bottom:
-			window.innerHeight <
-			triggerRect.bottom + targetRect.height + OFFSET,
-		left: triggerRect.left - targetRect.width < 0
+			window.innerHeight
+			< triggerRect.bottom + targetRect.height + OFFSET,
+		left: triggerRect.left - targetRect.width < 0,
 	};
 
 	const directionRight = collisions.right && !collisions.left;
@@ -36,14 +54,14 @@ function positionDefault(triggerRect, targetRect) {
 			? `${triggerRect.right - targetRect.width + window.pageXOffset}px`
 			: `${triggerRect.left + window.pageXOffset}px`,
 		top: directionUp
-			? `${triggerRect.top -
-					OFFSET -
-					targetRect.height +
-					window.pageYOffset}px`
-			: `${triggerRect.top +
-					OFFSET +
-					triggerRect.height +
-					window.pageYOffset}px`
+			? `${triggerRect.top
+					- OFFSET
+					- targetRect.height
+					+ window.pageYOffset}px`
+			: `${triggerRect.top
+					+ OFFSET
+					+ triggerRect.height
+					+ window.pageYOffset}px`,
 	};
 }
 
@@ -75,7 +93,7 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 		<Dropdown
 			style={{
 				position: 'absolute',
-				...styles
+				...styles,
 			}}
 			ref={ownRef}
 		>
@@ -84,7 +102,9 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 	);
 };
 
-const HelpAndTooltip = ({icon = 'help', color, children}) => {
+const HelpAndTooltip = ({
+	icon = 'help', color, size, children,
+}) => {
 	const [open, setOpen] = useState(false);
 	const iconRef = useRef();
 	const triggerRect = useRect(iconRef);
@@ -94,12 +114,18 @@ const HelpAndTooltip = ({icon = 'help', color, children}) => {
 			<IconButton
 				icon={icon}
 				ref={iconRef}
-				size="tiny"
-				color={color ? color : accentGrey}
+				size={size || 'tiny'}
+				color={color || accentGrey}
 				onClick={() => setOpen(!open)}
 			/>
 			{open && (
 				<Portal>
+					<Close
+						icon="close"
+						size="normal"
+						color={primaryRed}
+						onClick={() => setOpen(false)}
+					/>
 					<DropdownContent
 						triggerRect={triggerRect}
 						children={children}

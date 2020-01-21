@@ -2,7 +2,7 @@ import {useMutation} from '@apollo/react-hooks';
 import styled from '@emotion/styled/macro';
 import * as Sentry from '@sentry/browser';
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import ReactGA from 'react-ga';
 import * as Yup from 'yup';
 
@@ -125,14 +125,88 @@ const FileContainer = styled('span')`
 	margin-bottom: -0.3rem;
 `;
 
-const UserCompanyForm = ({data, buttonText}) => {
+const UserCompanyForm = ({data, buttonText, done}) => {
 	const {
-		name, address, phone, logo, banner, documents,
+		name,
+		address,
+		phone,
+		logo,
+		banner,
+		documents,
+		vat,
+		siret,
+		rcs,
+		vatRate,
 	} = data;
 	const [updateUser] = useMutation(UPDATE_USER_COMPANY);
 	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
 	const [isOpenImagePickerModal, setisOpenImagePickerModal] = useState(false);
 	const {language} = useUserInfos();
+
+	const uploadAttachmentsCb = useCallback(
+		newFiles => updateUser({
+			variables: {
+				company: {
+					documents: newFiles,
+				},
+			},
+			context: {
+				hasUpload: true,
+			},
+		}),
+		[],
+	);
+
+	const uploadLogoCb = useCallback(
+		([file]) => updateUser({
+			variables: {
+				company: {
+					logo: file,
+				},
+			},
+			context: {
+				hasUpload: true,
+			},
+		}),
+		[],
+	);
+
+	const deleteLogoCb = useCallback(
+		() => updateUser({
+			variables: {
+				company: {
+					logo: null,
+				},
+			},
+		}),
+		[],
+	);
+
+	const uploadBannerCb = useCallback(
+		([file]) => updateUser({
+			variables: {
+				company: {
+					banner: file,
+				},
+			},
+			context: {
+				hasUpload: true,
+			},
+		}),
+		[],
+	);
+
+	const deleteBannerCb = useCallback(
+		() => updateUser({
+			variables: {
+				company: {
+					banner: null,
+					bannerUnsplashId: null,
+				},
+			},
+		}),
+		[],
+	);
 
 	return (
 		<UserCompanyFormMain>
@@ -141,6 +215,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 					name: name || '',
 					phone: phone || '',
 					address: address || '',
+					vat: vat || '',
+					siret: siret || '',
+					rcs: rcs || '',
+					vatRate,
 				}}
 				validationSchema={Yup.object().shape({
 					name: Yup.string().required(
@@ -149,6 +227,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 						</fbt>,
 					),
 					phone: Yup.string(),
+					vat: Yup.string(),
+					vatRate: Yup.number(),
+					siret: Yup.string(),
+					rcs: Yup.string(),
 					address: Yup.object()
 						.shape({
 							street: Yup.string().required(),
@@ -174,6 +256,10 @@ const UserCompanyForm = ({data, buttonText}) => {
 										...values.address,
 										__typename: undefined,
 									},
+									vat: values.vat,
+									vatRate: values.vatRate,
+									siret: values.siret,
+									rcs: values.rcs,
 								},
 							},
 						});
@@ -207,6 +293,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 							),
 						});
 					}
+
+					done();
 				}}
 			>
 				{(props) => {
@@ -282,6 +370,94 @@ const UserCompanyForm = ({data, buttonText}) => {
 											gridColumn: '1 / 3',
 										}}
 									/>
+									<FormElem
+										{...props}
+										name="siret"
+										type="text"
+										label={
+											<fbt
+												project="inyo"
+												desc="company name"
+											>
+												SIRET
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="company name placeholder"
+											>
+												123 456 789 12345
+											</fbt>
+										}
+										padded
+									/>
+									<FormElem
+										{...props}
+										name="vat"
+										type="text"
+										label={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												N° TVA
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												FR 01 234 567 123
+											</fbt>
+										}
+										padded
+									/>
+									<FormElem
+										{...props}
+										name="vatRate"
+										type="number"
+										label={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												Taux TVA
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												20
+											</fbt>
+										}
+										padded
+									/>
+									<FormElem
+										{...props}
+										name="rcs"
+										type="text"
+										label={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												RCS
+											</fbt>
+										}
+										placeholder={
+											<fbt
+												project="inyo"
+												desc="phone number"
+											>
+												RCS Paris 012 345 678
+											</fbt>
+										}
+										padded
+									/>
 									<div
 										style={{
 											gridColumn: '1 / 2',
@@ -308,17 +484,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 
 											<UploadButtons>
 												<UploadDashboardButton
-													onUploadFiles={([file]) => updateUser({
-														variables: {
-															company: {
-																logo: file,
-															},
-														},
-														context: {
-															hasUpload: true,
-														},
-													})
-													}
+													onUploadFiles={uploadLogoCb}
 													restrictions={{
 														maxFileSize: 500 * 1024,
 														maxNumberOfFiles: 1,
@@ -342,14 +508,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 														icon="delete"
 														size="tiny"
 														color={primaryRed}
-														onClick={() => updateUser({
-															variables: {
-																company: {
-																	logo: null,
-																},
-															},
-														})
-														}
+														onClick={deleteLogoCb}
 													/>
 												)}
 											</UploadButtons>
@@ -416,16 +575,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 												)}
 
 												<UploadDashboardButton
-													onUploadFiles={([file]) => updateUser({
-														variables: {
-															company: {
-																banner: file,
-															},
-														},
-														context: {
-															hasUpload: true,
-														},
-													})
+													onUploadFiles={
+														uploadBannerCb
 													}
 													restrictions={{
 														maxFileSize:
@@ -452,15 +603,7 @@ const UserCompanyForm = ({data, buttonText}) => {
 														icon="delete"
 														size="tiny"
 														color={primaryRed}
-														onClick={() => updateUser({
-															variables: {
-																company: {
-																	banner: null,
-																	bannerUnsplashId: null,
-																},
-															},
-														})
-														}
+														onClick={deleteBannerCb}
 													/>
 												)}
 											</UploadButtons>
@@ -523,16 +666,8 @@ const UserCompanyForm = ({data, buttonText}) => {
 												),
 											)}
 											<UploadDashboardButton
-												onUploadFiles={newFiles => updateUser({
-													variables: {
-														company: {
-															documents: newFiles,
-														},
-													},
-													context: {
-														hasUpload: true,
-													},
-												})
+												onUploadFiles={
+													uploadAttachmentsCb
 												}
 											>
 												<fbt desc="">

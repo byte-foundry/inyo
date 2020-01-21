@@ -151,6 +151,9 @@ export const GET_USER_INFOS = gql`
 				}
 				phone
 				vat
+				siret
+				rcs
+				vatRate
 			}
 			settings {
 				assistantName
@@ -242,6 +245,40 @@ export const GET_PROJECT_PERSONAL_NOTES = gql`
 	}
 `;
 
+export const GET_PROJECT_QUOTES = gql`
+	query getProjectQuotes($id: ID!) {
+		project(id: $id) {
+			id
+			token
+			quoteHeader
+			quoteFooter
+			customer {
+				id
+				token
+			}
+			sections {
+				id
+				name
+				position
+				price
+				items {
+					id
+					name
+					unit
+					dailyRate
+					type
+				}
+			}
+			quotes {
+				id
+				issueNumber
+				acceptedAt
+				createdAt
+			}
+		}
+	}
+`;
+
 export const GET_PROJECT_COLLAB_LINK = gql`
 	query getProjectCollabLink($id: ID!) {
 		project(id: $id) {
@@ -308,6 +345,7 @@ export const GET_PROJECT_INFOS = gql`
 				}
 			}
 			issuer {
+				id
 				name
 				email
 				phone
@@ -386,6 +424,7 @@ export const GET_PROJECT_DATA = gql`
 				}
 			}
 			issuer {
+				id
 				name
 				email
 				phone
@@ -415,6 +454,7 @@ export const GET_PROJECT_DATA = gql`
 					createdAt
 					id
 					documentType
+					url
 					owner {
 						... on User {
 							lastName
@@ -956,6 +996,79 @@ export const GET_EMAIL_TEMPLATE = gql`
 			timing
 			subject
 			content
+		}
+	}
+`;
+
+export const GET_QUOTE = gql`
+	query getQuote($id: ID!) {
+		quote(id: $id) {
+			id
+			issueNumber
+			header
+			footer
+			hasTaxes
+			taxRate
+			invalid
+			validQuote {
+				id
+				issueNumber
+			}
+			createdAt
+			acceptedAt
+			project {
+				id
+				name
+				owner {
+					id
+				}
+				issuer {
+					name
+					id
+					vat
+					siret
+					rcs
+					logo {
+						id
+						url
+					}
+					address {
+						street
+						city
+						postalCode
+						country
+					}
+					owner {
+						firstName
+						lastName
+						email
+					}
+				}
+				customer {
+					id
+					name
+					title
+					firstName
+					lastName
+					email
+					phone
+					address {
+						street
+						city
+						postalCode
+						country
+					}
+				}
+			}
+			sections {
+				id
+				name
+				price
+				items {
+					id
+					name
+				}
+			}
 		}
 	}
 `;

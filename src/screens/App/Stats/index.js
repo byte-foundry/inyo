@@ -293,6 +293,7 @@ const Stats = ({history, location}) => {
 			dailyRate: task.dailyRate || defaultDailyPrice,
 		};
 
+		daysMap[day].estimatedTime += activity.estimatedTime;
 		daysMap[day].details.push(activity);
 		daysMap[day].total += activity.value;
 		daysMap[day].totalPrice += activity.dailyRate * activity.value;

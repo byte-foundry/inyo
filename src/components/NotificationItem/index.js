@@ -152,6 +152,22 @@ const TextPlusObjectNotification = ({
 		);
 		icon = 'assignment';
 		break;
+	case 'ACCEPTED_QUOTE':
+		action = (
+			<fbt project="inyo" desc="viewed quote notification message">
+					accepté le devis du projet
+			</fbt>
+		);
+		icon = 'attach_money';
+		break;
+	case 'VIEWED_QUOTE':
+		action = (
+			<fbt project="inyo" desc="viewed quote notification message">
+					a vu le devis du projet
+			</fbt>
+		);
+		icon = 'attach_money';
+		break;
 	case 'COLLAB_ACCEPTED':
 		action = (
 			<fbt project="inyo" desc="collab accepted notification message">
@@ -278,6 +294,8 @@ const NotificationItem = (props) => {
 	switch (props.eventType) {
 	case 'POSTED_COMMENT':
 	case 'VIEWED_PROJECT':
+	case 'VIEWED_QUOTE':
+	case 'ACCEPTED_QUOTE':
 	case 'UPLOADED_ATTACHMENT':
 	case 'FINISHED_TASK':
 	case 'ASSIGNED_TO_TASK':

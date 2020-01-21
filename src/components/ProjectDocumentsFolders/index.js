@@ -24,6 +24,7 @@ import {
 import {
 	GET_PROJECT_DATA,
 	GET_PROJECT_DATA_WITH_TOKEN,
+	GET_PROJECT_QUOTES,
 } from '../../utils/queries';
 import IconButton from '../IconButton';
 import MaterialIcon from '../MaterialIcon';
@@ -125,6 +126,10 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 	const [active, setActive] = useState(documentTypes[0].type);
 	const [uploadAttachments] = useMutation(UPLOAD_ATTACHMENTS);
 	const [removeFile] = useMutation(REMOVE_ATTACHMENTS);
+	const {data: quoteData, error: quoteError} = useQuery(GET_PROJECT_QUOTES, {
+		variables: {id: projectId, token: customerToken},
+		suspend: true,
+	});
 	const {data: projectData, error} = useQuery(
 		customerToken ? GET_PROJECT_DATA_WITH_TOKEN : GET_PROJECT_DATA,
 		{
@@ -158,9 +163,27 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 		[projectId, active],
 	);
 
-	if (error) throw error;
+	if (error || quoteError) throw error;
 
 	const files = [
+		...quoteData.project.quotes
+			.filter(quote => quote.acceptedAt)
+			.map(quote => ({
+				extension: 'web',
+				filename: `Devis N° 2020-${quote.issueNumber}`,
+				createdAt: quote.createdAt,
+				owner: {
+					firstName: projectData.project.issuer.owner.firstName,
+					lastName: projectData.project.issuer.owner.lastName,
+				},
+				url: `/app/${
+					projectData.project.customer
+						? projectData.project.customer.token
+						: projectData.project.token
+				}/quotes/${quote.id}`,
+				documentType: 'ADMIN',
+				undeletable: true,
+			})),
 		...projectData.project.issuer.documents,
 		...projectData.project.attachments,
 		...projectData.project.sections.flatMap(section => section.items.flatMap(item => item.attachments.map(attachment => ({
@@ -172,16 +195,16 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 		.filter(attachment => (attachment.documentType || 'DEFAULT') === active)
 		.map((file) => {
 			const filenameSplit = file.filename.split('.');
-			const extension = filenameSplit[filenameSplit.length - 1];
+			const extension
+				= file.extension || filenameSplit[filenameSplit.length - 1];
 			const momentDate = moment(file.createdAt);
 
 			return {
 				...file,
 				extension,
-				ownerName: formatName(
-					file.owner.firstName,
-					file.owner.lastName,
-				),
+				ownerName:
+					file.owner
+					&& formatName(file.owner.firstName, file.owner.lastName),
 				datetime: momentDate.valueOf(),
 				formattedDate: momentDate.format('L'),
 				longFormattedDate: momentDate.format('LLL'),
@@ -248,7 +271,7 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 							{file.formattedDate}
 						</Cell>
 						<Cell>{file.ownerName}</Cell>
-						{!customerToken && (
+						{!customerToken && !file.undeletable && (
 							<ActionCell>
 								<IconButton
 									icon="delete_forever"

@@ -4,6 +4,12 @@
 	src: url('/utils/fonts/WorkSans-Italic.otf') format('opentype');
 }
 
+@media screen and (max-width: 640px) {
+	#intercom-container {
+		display: none !important;
+	}
+}
+
 body {
 	margin: 0;
 	padding: 0;

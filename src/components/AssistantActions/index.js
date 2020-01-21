@@ -32,6 +32,8 @@ const Dropdown = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: calc(100% - 10px);
+		overflow-y: scroll !important;
+		padding-top: 3rem;
 	}
 `;
 
@@ -73,6 +75,30 @@ const Number = styled('div')`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
+
+const Close = styled(IconButton)`
+	display: none;
+	position: fixed;
+	top: 2rem;
+	right: 1rem;
+	z-index: 102;
+	border-radius: 50%;
+	background: white;
+	width: 25px;
+	height: 25px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	padding: 6px;
+
+	i {
+		width: 100%;
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: block;
+	}
 `;
 
 const AssistantActions = ({mobile}) => {
@@ -119,7 +145,11 @@ const AssistantActions = ({mobile}) => {
 						}
 					}}
 				>
-					<IconButton icon="sentiment_very_satisfied" size="small" />
+					<IconButton
+						icon="sentiment_very_satisfied"
+						size="small"
+						color={primaryGrey}
+					/>
 					{pendingReminders > 0 && (
 						<Number>{pendingReminders}</Number>
 					)}
@@ -127,24 +157,26 @@ const AssistantActions = ({mobile}) => {
 			</Tooltip>
 			{isOpen && (
 				<Portal>
+					<Close
+						icon="close"
+						size="normal"
+						color={primaryRed}
+						onClick={() => setOpen(false)}
+					/>
 					<Dropdown
 						ref={dialogRef}
 						aria-modal="true"
 						tabIndex="-1"
 						style={{
-							top:
-								icon.current.getBoundingClientRect().top
-								+ icon.current.getBoundingClientRect().height,
+							top: mobile
+								? 0
+								: icon.current.getBoundingClientRect().top
+								  + icon.current.getBoundingClientRect().height,
 							left: mobile
 								? 0
 								: icon.current.getBoundingClientRect().left,
-							height: mobile
-								? `calc(100% - ${icon.current.getBoundingClientRect()
-									.top
-										+ icon.current.getBoundingClientRect()
-											.height
-										+ 20}px`
-								: undefined,
+							position: mobile ? 'fixed' : undefined,
+							bottom: mobile ? '80px' : undefined,
 						}}
 					>
 						<SidebarDashboardInfos

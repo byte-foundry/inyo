@@ -40,6 +40,10 @@ const MarkRead = styled(Button)`
 	&:hover {
 		color: ${primaryPurple};
 	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		padding: 1rem !important;
+	}
 `;
 
 const List = styled('ul')`
@@ -84,6 +88,18 @@ const NotificationContainer = styled('div')`
 			display: none;
 		}
 	`)}
+`;
+
+const Close = styled(IconButton)`
+	display: none;
+	position: fixed;
+	top: 2rem;
+	right: 1rem;
+	z-index: 102;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: block;
+	}
 `;
 
 const NotificationTrayButton = ({mobile}) => {
@@ -173,30 +189,42 @@ const NotificationTrayButton = ({mobile}) => {
 						}
 					}}
 				>
-					<IconButton icon="notifications" size="small" />
+					<IconButton
+						icon={
+							unreadNumber > 0
+								? 'notifications'
+								: 'notifications_none'
+						}
+						size="small"
+						color={primaryGrey}
+					/>
 				</Icon>
 			</Tooltip>
 			{isOpen && (
 				<Portal>
+					<Close
+						icon="close"
+						size="normal"
+						color={primaryRed}
+						onClick={() => setOpen(false)}
+					/>
 					<Dropdown
 						ref={dialogRef}
 						aria-modal="true"
 						tabIndex="-1"
 						style={{
-							top:
-								icon.current.getBoundingClientRect().top
-								+ icon.current.getBoundingClientRect().height
-								+ window.scrollY,
+							top: mobile
+								? '0px !important'
+								: icon.current.getBoundingClientRect().top
+								  + icon.current.getBoundingClientRect().height
+								  + window.scrollY,
 							left: mobile
 								? 0
 								: icon.current.getBoundingClientRect().left,
-							height: mobile
-								? `calc(100% - ${icon.current.getBoundingClientRect()
-									.top
-										+ icon.current.getBoundingClientRect()
-											.height
-										+ 20}px`
-								: undefined,
+							height: mobile ? 'auto' : undefined,
+							right: mobile ? '0 !important' : undefined,
+							bottom: mobile ? '80px !important' : undefined,
+							position: mobile ? 'fixed' : undefined,
 						}}
 					>
 						<MarkRead

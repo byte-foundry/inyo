@@ -33,6 +33,7 @@ const {body} = shevy;
 
 export const Body = styled('div')`
 	${body};
+	padding-bottom: 100px;
 `;
 
 const getButtonHoveredColor = (props) => {
@@ -579,7 +580,7 @@ export const UL = styled('ul')`
 export const LeftMenu = styled('div')`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: end;
 	padding: 4rem 3rem;
 
 	> div {
@@ -592,11 +593,28 @@ export const LeftMenu = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: row;
-		justify-content: space-between;
 		padding: 1rem;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-top: 1px solid ${lightGrey};
+		z-index: 99;
+		background: ${primaryWhite};
 
 		> div {
-			margin-bottom: 0;
+			margin: 0;
+			flex: 1;
+			align-items: center;
+
+			div,
+			a {
+				margin: 0 auto;
+				justify-content: space-evenly;
+				align-items: center;
+				flex: 1;
+				text-align: center;
+			}
 		}
 	}
 `;
@@ -881,7 +899,7 @@ export const ScrollHelper = styled('div')`
 	height: 60px;
 	position: fixed;
 	right: 20px;
-	bottom: 20%;
+	bottom: 150px;
 	background-color: rgba(180, 180, 180, 0.5);
 	z-index: 100;
 	border-radius: 50%;
@@ -1058,7 +1076,8 @@ export const Dropdown = styled('div')`
 		top: 0 !important;
 		left: 0 !important;
 		right: 0 !important;
-		bottom: 0 !important;
+		bottom: 80px !important;
+		height: auto !important;
 		z-index: 101;
 	}
 `;

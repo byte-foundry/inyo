@@ -2,7 +2,7 @@ import '../../../print.css';
 
 import styled from '@emotion/styled';
 import moment from 'moment';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
@@ -23,6 +23,7 @@ import {
 	primaryBlack,
 } from '../../../utils/new/design-system';
 import {GET_QUOTE} from '../../../utils/queries';
+import useUserInfos from '../../../utils/useUserInfos';
 
 const Container = styled('div')`
 	min-height: 100vh;
@@ -141,7 +142,10 @@ const Actions = styled('div')`
 const ObjectLink = A.withComponent(Link);
 
 const Quote = ({match}) => {
+	const {id} = useUserInfos();
 	const customerToken = useContext(CustomerContext);
+	const [submiting, setSubmitting] = useState(false);
+	const [alreadyAccepted, setAlreadyAccepted] = useState(false);
 	const {data, loading, error} = useQuery(GET_QUOTE, {
 		variables: {
 			id: match.params.quoteId,
@@ -168,30 +172,69 @@ const Quote = ({match}) => {
 				customerToken={match.params.customerToken}
 				noProgress
 			/>
-			{!quote.invalid && (
+			{!alreadyAccepted
+				&& !quote.invalid
+				&& (!id || id !== quote.project.owner.id) && (
 				<Actions>
 					{quote.acceptedAt ? (
 						<div style={{marginRight: '1rem'}}>
-							Accepté le {moment(quote.acceptedAt).format('L')}
+							<fbt desc="Accepted on">
+									Accepté le{' '}
+								<fbt:param name="accepted date">
+									{moment(quote.acceptedAt).format('L')}
+								</fbt:param>
+							</fbt>
 						</div>
 					) : (
 						<Button
 							style={{marginRight: '1rem'}}
-							onClick={() => {
-								acceptQuote({
-									variables: {
-										id: quote.id,
-										token: customerToken,
-									},
-								});
+							disabled={submiting}
+							onClick={async () => {
+								setSubmitting(true);
+								try {
+									await acceptQuote({
+										variables: {
+											id: quote.id,
+											token: customerToken,
+										},
+									});
+								}
+								catch (e) {
+									setSubmitting(false);
+									if (
+										e.graphQLErrors[0].extensions
+											&& e.graphQLErrors[0].extensions
+												.code === 'AlreadyExisting'
+									) {
+										setAlreadyAccepted(true);
+									}
+								}
+								setSubmitting(false);
 							}}
 						>
 							<fbt desc="quote screen accept button">
-								Accepter le devis
+									Accepter le devis
 							</fbt>
 						</Button>
 					)}
-					<Button>
+					<Button onClick={() => window.print()}>
+						<fbt desc="quote screen print button">
+								Imprimer le devis
+						</fbt>
+					</Button>
+				</Actions>
+			)}
+			{alreadyAccepted && (
+				<Actions>
+					<div>
+						<fbt desc="quote not valid">
+							<span style={{marginRight: '0.3rem'}}>
+								Ce devis n'est plus valide. Le devis à jour se
+								trouve
+							</span>
+						</fbt>
+					</div>
+					<Button onClick={() => window.print()}>
 						<fbt desc="quote screen print button">
 							Imprimer le devis
 						</fbt>

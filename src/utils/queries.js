@@ -1019,6 +1019,9 @@ export const GET_QUOTE = gql`
 			project {
 				id
 				name
+				owner {
+					id
+				}
 				issuer {
 					name
 					id

@@ -181,7 +181,7 @@ const ProjectDocumentsFolders = ({projectId, customerToken}) => {
 						? projectData.project.customer.token
 						: projectData.project.token
 				}/quotes/${quote.id}`,
-				type: 'ADMIN',
+				documentType: 'ADMIN',
 				undeletable: true,
 			})),
 		...projectData.project.issuer.documents,

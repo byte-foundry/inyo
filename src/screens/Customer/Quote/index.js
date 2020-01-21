@@ -9,7 +9,6 @@ import CustomerNameAndAddress from '../../../components/CustomerNameAndAddress';
 import CustomProjectHeader from '../../../components/CustomProjectHeader';
 import IssuerNameAndAddress from '../../../components/IssuerNameAndAddress';
 import RichTextEditor from '../../../components/RichTextEditor';
-import Tooltip from '../../../components/Tooltip';
 import fbt from '../../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../../utils/apollo-hooks';
 import {BREAKPOINTS} from '../../../utils/constants';
@@ -21,15 +20,9 @@ import {
 	accentGrey,
 	Button,
 	Heading,
-	P,
 	primaryBlack,
-	primaryGrey,
-	primaryPurple,
-	primaryWhite,
-	SubHeading,
 } from '../../../utils/new/design-system';
-import {GET_PROJECT_QUOTES, GET_QUOTE} from '../../../utils/queries';
-import useUserInfos from '../../../utils/useUserInfos';
+import {GET_QUOTE} from '../../../utils/queries';
 
 const Container = styled('div')`
 	min-height: 100vh;
@@ -208,8 +201,8 @@ const Quote = ({match}) => {
 			{quote.invalid && (
 				<Actions>
 					<fbt desc="quote not valid">
-						<span>
-							Ce devis n'est plus valide. Le devis à jour ce
+						<span style={{marginRight: '0.3rem'}}>
+							Ce devis n'est plus valide. Le devis à jour se
 							trouve
 						</span>{' '}
 						<ObjectLink

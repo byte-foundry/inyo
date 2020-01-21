@@ -19,9 +19,7 @@ const Container = styled('div')`
 	gap: 5px;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		display: grid;
-		width: 100%;
-		grid-template-columns: 22% 22% 22% 34%;
+		display: flex;
 	}
 `;
 

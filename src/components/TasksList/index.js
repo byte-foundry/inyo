@@ -11,7 +11,7 @@ import {
 	IllusFigureContainer,
 	IllusText,
 	P,
-	UserSpan
+	UserSpan,
 } from '../../utils/new/design-system';
 import NormalTask from '../CustomerTaskRow';
 import InlineTask from '../TaskRow';
@@ -38,19 +38,17 @@ function TasksList({
 	const Task = condensed ? InlineTask : NormalTask;
 
 	return (
-		<TasksListContainer {...rest}>
-			{items.map((item, index) =>
-				createTaskComponent ? (
-					createTaskComponent({item, index})
-				) : (
-					<Task
-						item={item}
-						key={item.id}
-						customerToken={customerToken}
-						baseUrl={baseUrl}
-					/>
-				)
-			)}
+		<TasksListContainer id="task-list-container" {...rest}>
+			{items.map((item, index) => (createTaskComponent ? (
+				createTaskComponent({item, index})
+			) : (
+				<Task
+					item={item}
+					key={item.id}
+					customerToken={customerToken}
+					baseUrl={baseUrl}
+				/>
+			)))}
 			{children}
 			{items.length === 0 && (
 				<IllusContainer bg={IllusBackground}>
@@ -119,16 +117,14 @@ function TasksList({
 	);
 }
 
-export default memo(TasksList, (prevProps, nextProps) => {
-	return (
-		prevProps.style === nextProps.style &&
-		prevProps.hasFilteredItems === nextProps.hasFilteredItems &&
-		prevProps.items === nextProps.items &&
-		prevProps.baseUrl === nextProps.baseUrl &&
-		prevProps.createTaskComponent === nextProps.createTaskComponent &&
-		prevProps.condensed === nextProps.condensed &&
-		prevProps.customerToken === nextProps.customerToken &&
-		prevProps.projectId === nextProps.projectId &&
-		prevProps.sectionId === nextProps.sectionId
-	);
-});
+export default memo(TasksList, (prevProps, nextProps) => (
+	prevProps.style === nextProps.style
+		&& prevProps.hasFilteredItems === nextProps.hasFilteredItems
+		&& prevProps.items === nextProps.items
+		&& prevProps.baseUrl === nextProps.baseUrl
+		&& prevProps.createTaskComponent === nextProps.createTaskComponent
+		&& prevProps.condensed === nextProps.condensed
+		&& prevProps.customerToken === nextProps.customerToken
+		&& prevProps.projectId === nextProps.projectId
+		&& prevProps.sectionId === nextProps.sectionId
+));

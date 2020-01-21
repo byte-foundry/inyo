@@ -163,6 +163,7 @@ const NotificationTrayButton = ({mobile}) => {
 				}
 			>
 				<Icon
+					id="notification-tray-button"
 					someUnread={unreadNumber > 0}
 					ref={icon}
 					onClick={() => {
@@ -211,7 +212,7 @@ const NotificationTrayButton = ({mobile}) => {
 						{loading ? (
 							<Loading />
 						) : data.me.notifications.length > 0 ? (
-							<List>
+							<List id="notifications-list">
 								{data.me.notifications.map(notification => (
 									<Item key={notification.id}>
 										<NotificationItem {...notification} />

@@ -1137,6 +1137,7 @@ const Item = ({
 									});
 								}}
 								icon="×"
+								id="task-cancel-all-actions"
 							>
 								<fbt
 									project="inyo"

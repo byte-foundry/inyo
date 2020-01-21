@@ -141,6 +141,11 @@ const TaskCard = withRouter(
 				{isOver && <DragSeparator />}
 				{!isCustomerTask(task.type) && task.status !== 'FINISHED' && (
 					<TimerButton
+						id={
+							isTimerRunning
+								? 'task-stop-timer-button'
+								: 'task-start-timer-button'
+						}
 						noBg
 						current={isTimerRunning}
 						invert={false}

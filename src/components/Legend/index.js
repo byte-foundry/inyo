@@ -2,6 +2,8 @@ import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import React from 'react';
 
+import {BREAKPOINTS} from '../../utils/constants';
+
 const LegendList = styled('ul')`
 	padding: 0;
 	margin: 0;
@@ -25,6 +27,10 @@ const LegendRow = styled('li')`
 		${Ratio} {
 			opacity: 1;
 		}
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		grid-template-columns: 10px 60% 30px;
 	}
 `;
 

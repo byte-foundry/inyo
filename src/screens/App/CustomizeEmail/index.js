@@ -16,6 +16,10 @@ const EmailContainer = styled('div')`
 	flex: 1;
 	max-width: 1200px;
 	margin: 3.5rem auto;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0 auto 3.5rem auto;
+	}
 `;
 
 const Main = styled('div')`

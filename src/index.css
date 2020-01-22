@@ -8,6 +8,12 @@
 	#intercom-container {
 		display: none !important;
 	}
+
+	#calendar-heatmap {
+		max-width: calc(100vh + 1rem);
+		overflow-x: scroll;
+		margin-right: -1rem;
+	}
 }
 
 body {

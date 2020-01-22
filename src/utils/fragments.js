@@ -168,10 +168,12 @@ export const ITEM_FRAGMENT = gql`
 			owner {
 				__typename
 				... on User {
+					id
 					firstName
 					lastName
 				}
 				... on Customer {
+					id
 					firstName
 					lastName
 				}

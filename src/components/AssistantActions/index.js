@@ -101,7 +101,7 @@ const AssistantActions = ({mobile}) => {
 	useOnClickOutside(dialogRef, onClickOutsideCallback);
 
 	return (
-		<AssistantActionsContainer mobile={mobile}>
+		<AssistantActionsContainer id="assistant-actions" mobile={mobile}>
 			<Tooltip
 				label={
 					<fbt project="inyo" desc="assistant actions tooltip">

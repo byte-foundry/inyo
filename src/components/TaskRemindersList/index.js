@@ -223,6 +223,7 @@ function TaskRemindersList({
 												reminder.status === 'CANCELED'
 											}
 											style={{flex: '0 0 28px'}}
+											id="task-cancel-action"
 										>
 											<Button
 												link

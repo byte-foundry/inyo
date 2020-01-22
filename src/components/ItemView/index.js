@@ -967,7 +967,8 @@ const Item = ({
 									}
 								}}
 							/>
-							{item.dailyRate && (
+							{(item.dailyRate !== undefined
+								|| item.dailyRate !== null) && (
 								<IconButton
 									icon="clear"
 									size="micro"
@@ -1137,6 +1138,7 @@ const Item = ({
 									});
 								}}
 								icon="×"
+								id="task-cancel-all-actions"
 							>
 								<fbt
 									project="inyo"

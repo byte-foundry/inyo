@@ -102,7 +102,7 @@ function InlineEditable({
 		);
 	}
 
-	if (value) {
+	if (value !== undefined && value !== null) {
 		return (
 			<Editable
 				className={className}

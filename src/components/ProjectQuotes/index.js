@@ -233,7 +233,11 @@ const ProjectQuotes = ({projectId}) => {
 						data.project.sections.forEach((section) => {
 							defaultPrices[section.id] = section.items.reduce(
 								(price, t) => price
-									+ t.unit * (t.dailyRate || defaultDailyPrice),
+									+ t.unit
+										* (t.dailyRate === undefined
+										|| t.dailyRate === null
+											? defaultDailyPrice
+											: t.dailyRate),
 								0,
 							);
 						});
@@ -366,41 +370,52 @@ const ProjectQuotes = ({projectId}) => {
 				}
 				defaultValue={data.project.quoteFooter}
 			/>
-			<Actions>
-				<Button
-					onClick={async () => {
-						const response = await issueQuote({
-							variables: {
-								projectId,
-								header: data.project.quoteHeader,
-								footer: data.project.quoteFooter,
-								sections: data.project.sections.map(
-									section => ({
-										name: section.name,
-										price: prices[section.id],
-										items: section.items
-											.filter(
-												item => item.type !== 'PERSONAL'
-													&& !isCustomerTask(item.type),
-											)
-											.map(item => ({
-												name: item.name,
-											})),
-									}),
-								),
-								hasTaxes,
-								taxRate,
-							},
-						});
+			{data.project.customer ? (
+				<Actions>
+					<Button
+						onClick={async () => {
+							const response = await issueQuote({
+								variables: {
+									projectId,
+									header: data.project.quoteHeader,
+									footer: data.project.quoteFooter,
+									sections: data.project.sections.map(
+										section => ({
+											name: section.name,
+											price: prices[section.id],
+											items: section.items
+												.filter(
+													item => item.type
+															!== 'PERSONAL'
+														&& !isCustomerTask(
+															item.type,
+														),
+												)
+												.map(item => ({
+													name: item.name,
+												})),
+										}),
+									),
+									hasTaxes,
+									taxRate,
+								},
+							});
 
-						setQuoteCreated(response.data.issueQuote);
-					}}
-				>
-					<fbt desc="project generate quote button">
-						Générer un nouveau devis
+							setQuoteCreated(response.data.issueQuote);
+						}}
+					>
+						<fbt desc="project generate quote button">
+							Générer un nouveau devis
+						</fbt>
+					</Button>
+				</Actions>
+			) : (
+				<Actions>
+					<fbt desc="add client before creating a quote">
+						Ajouter un client pour pouvoir créer un devis
 					</fbt>
-				</Button>
-			</Actions>
+				</Actions>
+			)}
 			{quoteCreated && (
 				<QuoteCreatedConfirmation>
 					<fbt desc="quote is created">

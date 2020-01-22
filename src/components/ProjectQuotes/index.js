@@ -233,7 +233,11 @@ const ProjectQuotes = ({projectId}) => {
 						data.project.sections.forEach((section) => {
 							defaultPrices[section.id] = section.items.reduce(
 								(price, t) => price
-									+ t.unit * (t.dailyRate || defaultDailyPrice),
+									+ t.unit
+										* (t.dailyRate === undefined
+										|| t.dailyRate === null
+											? defaultDailyPrice
+											: t.dailyRate),
 								0,
 							);
 						});

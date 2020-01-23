@@ -247,7 +247,7 @@ const TogglingTopBar = () => {
 	);
 };
 
-const withHeader = Component => (...args) => (
+const withHeader = Component => (projectId, ...args) => (
 	<>
 		<LeftMenu>
 			<TopBarLogoNotif>
@@ -260,6 +260,7 @@ const withHeader = Component => (...args) => (
 						icon="add_circle_outline"
 						size="medium"
 						color={darkGrey}
+						currentProjectId={projectId || ''}
 					>
 						<CreateTask popinTask withProject />
 					</HelpAndTooltip>

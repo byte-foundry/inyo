@@ -76,8 +76,10 @@ const Metas = styled('div')`
 	font-size: 14px;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		column-count: 1;
 		padding: 1rem 0;
+		grid-template-columns: 1fr;
+		grid-auto-rows: 1fr;
+		grid-gap: 0px;
 	}
 `;
 

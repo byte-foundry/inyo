@@ -126,7 +126,7 @@ const TaskHeadingLink = styled(TaskHeading.withComponent(Link))`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		font-size: 0.85rem;
-		display: block;
+		display: flex;
 	}
 `;
 
@@ -155,8 +155,8 @@ const TaskContent = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		padding-left: 2rem;
 		grid-template-columns: minmax(200px, 4fr) 75px;
+		padding-left: ${props => (props.inProject ? 0 : '2rem')};
 	}
 `;
 
@@ -313,7 +313,7 @@ function TaskRow({
 						}
 					}}
 				/>
-				<TaskContent noData={noData}>
+				<TaskContent noData={noData} inProject={inProject}>
 					<TaskHeader>
 						{item.name ? (
 							<TaskHeadingLink

@@ -32,6 +32,12 @@ const Main = styled('div')`
 	}
 `;
 
+const FlexRowContainer = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
+	}
+`;
+
 const CustomizeEmailRoute = () => {
 	const {categories, error} = useEmailData();
 
@@ -82,13 +88,13 @@ const CustomizeEmail = ({categories}) => {
 					</fbt>
 				</Heading>
 			</HeadingRow>
-			<FlexRow>
+			<FlexRowContainer>
 				<CustomEmailSidebar categories={categories} />
 				<EmailCustomizer
 					emailType={emailType}
 					emailTypeId={emailType.id}
 				/>
-			</FlexRow>
+			</FlexRowContainer>
 		</EmailContainer>
 	);
 };

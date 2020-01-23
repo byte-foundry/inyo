@@ -9,6 +9,10 @@
 		display: none !important;
 	}
 
+	[data-reach-dialog-overlay] {
+		z-index: 1;
+	}
+
 	#calendar-heatmap {
 		max-width: calc(100vh + 1rem);
 		overflow-x: scroll;

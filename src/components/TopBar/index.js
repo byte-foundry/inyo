@@ -86,6 +86,7 @@ export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 		min-width: auto;
 		padding: 0;
 		margin: 0;
+		text-align: center;
 
 		i {
 			margin: 0 0 10px 0;

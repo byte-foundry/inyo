@@ -236,7 +236,9 @@ export const Button = styled('button')`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
 		padding: 0.6rem 0.8rem;
-		display: initial;
+		flex-direction: row;
+		align-items: center;
+		display: flex;
 	}
 `;
 
@@ -834,8 +836,8 @@ export const StickyHeader = styled('div')`
 		margin-left: -2rem;
 		margin-right: -2rem;
 		padding: 1rem 60px;
-		align-items: baseline;
 		position: static;
+		align-items: center;
 	}
 `;
 
@@ -901,7 +903,7 @@ export const ScrollHelper = styled('div')`
 	right: 20px;
 	bottom: 150px;
 	background-color: rgba(180, 180, 180, 0.5);
-	z-index: 100;
+	z-index: 1;
 	border-radius: 50%;
 	align-items: center;
 	justify-content: center;
@@ -1191,7 +1193,7 @@ export const Actions = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		flex-direction: column-reverse;
+		flex-direction: column;
 		justify-content: flex-start;
 
 		* ~ * {

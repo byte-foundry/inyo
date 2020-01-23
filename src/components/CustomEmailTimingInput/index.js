@@ -1,7 +1,18 @@
+import styled from '@emotion/styled/macro';
 import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
+import {BREAKPOINTS} from '../../utils/constants';
 import TimingInput from '../TimingInput';
+
+const Container = styled('span')`
+	display: flex;
+	align-items: center;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: grid;
+	}
+`;
 
 const CustomEmailTimingInput = ({
 	unit,
@@ -12,7 +23,7 @@ const CustomEmailTimingInput = ({
 	setIsRelative,
 	relativeDisabled,
 }) => (
-	<div style={{display: 'flex', alignItems: 'center'}}>
+	<Container>
 		<fbt desc="email timing intro">Cet email est envoyé</fbt>{' '}
 		<TimingInput
 			unit={unit}
@@ -23,7 +34,7 @@ const CustomEmailTimingInput = ({
 			setIsRelative={setIsRelative}
 			relativeDisabled={relativeDisabled}
 		/>
-	</div>
+	</Container>
 );
 
 export default CustomEmailTimingInput;

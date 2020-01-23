@@ -60,7 +60,7 @@ const Forms = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		align-items: stretch;
 		margin-bottom: 2rem;
 	}

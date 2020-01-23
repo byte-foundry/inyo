@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
@@ -22,7 +22,7 @@ import {
 	primaryGrey,
 	primaryPurple,
 	primaryWhite,
-	TaskCardElem
+	TaskCardElem,
 } from '../../utils/new/design-system';
 import useAccount from '../../utils/useAccount';
 import useCalendar from '../../utils/useCalendar';
@@ -41,7 +41,7 @@ import Tooltip from '../Tooltip';
 import {
 	UnitAvailableDisplay,
 	UnitOvertimeDisplay,
-	UnitWorkedDisplay
+	UnitWorkedDisplay,
 } from '../UnitDisplay';
 
 const googleLogo = <img src={GoogleGLogo} />;
@@ -49,6 +49,10 @@ const googleLogo = <img src={GoogleGLogo} />;
 const Container = styled('div')`
 	margin-top: 3rem;
 	max-width: 100vw;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin-top: 0;
+	}
 `;
 
 const Week = styled('div')`
@@ -62,7 +66,44 @@ const Week = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-flow: column;
+		background-color: transparent;
 	}
+`;
+
+const DayTitle = styled('span')`
+	color: inherit;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	display: block;
+	text-align: center;
+	margin: 0.4rem auto;
+	padding: 0.1rem 0.5rem 0;
+	border-radius: 4px;
+
+	${props => props.selected
+		&& `
+		color: ${primaryWhite};
+		background: ${primaryPurple};
+		font-weight: 500;
+	`}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		text-align: left;
+		font-size: 1.25rem;
+		margin: 1rem 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		border: 1px solid ${lightGrey};
+		color: ${primaryGrey};
+	}
+`;
+
+const DayTasks = styled('div')`
+	color: ${accentGrey};
+	display: ${props => (props.isPastDay ? 'none' : 'flex')};
+	flex-direction: column;
+	flex: 1;
 `;
 
 const Day = styled('div')`
@@ -89,9 +130,8 @@ const Day = styled('div')`
 		}
 	}
 
-	${props =>
-		props.isOff &&
-		`
+	${props => props.isOff
+		&& `
 		background: repeating-linear-gradient(
 		  45deg,
 		  ${mediumGrey},
@@ -100,32 +140,24 @@ const Day = styled('div')`
 		  transparent 40px
 		);
 	`}
-`;
 
-const DayTitle = styled('span')`
-	color: inherit;
-	text-transform: uppercase;
-	font-size: 0.75rem;
-	display: block;
-	text-align: center;
-	margin: 0.4rem auto;
-	padding: 0.1rem 0.5rem 0;
-	border-radius: 4px;
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
 
-	${props =>
-		props.selected &&
-		`
-		color: ${primaryWhite};
-		background: ${primaryPurple};
-		font-weight: 500;
-	`}
-`;
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
+			margin-bottom: ${props => (props.isOpen ? '0' : '1rem')};
+		}
 
-const DayTasks = styled('div')`
-	color: ${accentGrey};
-	display: flex;
-	flex-direction: column;
-	flex: 1;
+		&:after {
+			display: none;
+		}
+
+		${DayTasks} {
+			display: ${props => (props.isCurrentDay ? 'flex' : 'none')}
+		}
+		${DayTitle} {
+			margin: ${props => (props.isOpen ? '1rem 0' : '0 0 10px 0')};
+		}
+	}
 `;
 
 const ScheduleNav = styled('div')`
@@ -204,15 +236,15 @@ const DraggableTaskCard = ({
 			return {
 				id,
 				type,
-				index
+				index,
 			};
 		},
 		end(item, monitor) {
 			if (!monitor.didDrop()) {
 				unfocusTask({
 					variables: {
-						itemId: id
-					}
+						itemId: id,
+					},
 				});
 			}
 
@@ -220,27 +252,27 @@ const DraggableTaskCard = ({
 
 			if (!result) return;
 			if (scheduledFor === result.scheduledFor) {
-				if (index === result.index || index + 1 === result.index)
-					return;
+				if (index === result.index || index + 1 === result.index) return;
 
 				onMove({
 					index:
 						result.index > index ? result.index - 1 : result.index,
-					scheduledFor: result.scheduledFor
-				});
-			} else {
-				onMove({
-					index: result.index,
-					scheduledFor: result.scheduledFor
+					scheduledFor: result.scheduledFor,
 				});
 			}
-		}
+			else {
+				onMove({
+					index: result.index,
+					scheduledFor: result.scheduledFor,
+				});
+			}
+		},
 	});
 	const [{isOver}, drop] = useDrop({
 		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver()
+				isOver: monitor.isOver(),
 			};
 		},
 		drop(item) {
@@ -249,17 +281,17 @@ const DraggableTaskCard = ({
 					id: item.id,
 					type: item.type,
 					index,
-					scheduledFor
+					scheduledFor,
 				});
 			}
 			return {index, scheduledFor};
-		}
+		},
 	});
 
 	return (
 		<TaskCard
 			isOver={isOver}
-			ref={node => {
+			ref={(node) => {
 				drag(node);
 				drop(node);
 			}}
@@ -274,9 +306,9 @@ const DroppableDayTasks = ({children}) => {
 		accept: DRAG_TYPES.TASK,
 		collect(monitor) {
 			return {
-				isOver: monitor.isOver()
+				isOver: monitor.isOver(),
 			};
-		}
+		},
 	});
 
 	return (
@@ -308,7 +340,11 @@ const Logo = styled('div')`
 	}
 `;
 
-const EventCard = ({event: {name, start, end, link}, logo, workingTime}) => (
+const EventCard = ({
+	event: {
+		name, start, end, link,
+	}, logo, workingTime,
+}) => (
 	<Tooltip
 		label={
 			<fbt project="inyo" desc="Google cal event tooltip">
@@ -345,13 +381,13 @@ const Schedule = ({
 	fullWeek,
 	onMoveTask,
 	workingTime = 8,
-	assistantName
+	assistantName,
 }) => {
 	const {language} = useUserInfos();
 	const [, setRefreshState] = useState(new Date().toJSON());
 
 	const startDay = moment(
-		moment(startingFrom).isValid() ? startingFrom : undefined
+		moment(startingFrom).isValid() ? startingFrom : undefined,
 	).startOf('week');
 	const endDay = moment(startDay).endOf('week');
 
@@ -360,7 +396,7 @@ const Schedule = ({
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
 		startDay.toISOString(),
-		endDay.toISOString()
+		endDay.toISOString(),
 	]);
 
 	const weekdays = extractScheduleFromWorkingDays(
@@ -369,7 +405,7 @@ const Schedule = ({
 		startDay,
 		days,
 		fullWeek,
-		endDay
+		endDay,
 	);
 
 	// refresh the component every 10 minutes
@@ -382,8 +418,10 @@ const Schedule = ({
 	});
 
 	const isWeekEmpty = weekdays.every(
-		day => day.tasks.length === 0 && day.events.length === 0
+		day => day.tasks.length === 0 && day.events.length === 0,
 	);
+
+	const [isOpen, toggleDay] = useState(false);
 
 	return (
 		<Container>
@@ -400,12 +438,11 @@ const Schedule = ({
 					</Link>
 				)}
 				<Button
-					onClick={() =>
-						onChangeWeek(
-							moment()
-								.startOf('week')
-								.format(moment.HTML5_FMT.DATE)
-						)
+					onClick={() => onChangeWeek(
+						moment()
+							.startOf('week')
+							.format(moment.HTML5_FMT.DATE),
+					)
 					}
 				>
 					<fbt project="inyo" desc="notification message">
@@ -415,13 +452,12 @@ const Schedule = ({
 				<IconButton
 					icon="navigate_before"
 					size="tiny"
-					onClick={() =>
-						onChangeWeek(
-							startDay
-								.clone()
-								.subtract(1, 'week')
-								.format(moment.HTML5_FMT.DATE)
-						)
+					onClick={() => onChangeWeek(
+						startDay
+							.clone()
+							.subtract(1, 'week')
+							.format(moment.HTML5_FMT.DATE),
+					)
 					}
 				/>
 				<ScheduleNavInfo>
@@ -435,18 +471,17 @@ const Schedule = ({
 				<IconButton
 					icon="navigate_next"
 					size="tiny"
-					onClick={() =>
-						onChangeWeek(
-							startDay
-								.clone()
-								.add(1, 'week')
-								.format(moment.HTML5_FMT.DATE)
-						)
+					onClick={() => onChangeWeek(
+						startDay
+							.clone()
+							.add(1, 'week')
+							.format(moment.HTML5_FMT.DATE),
+					)
 					}
 				/>
 			</ScheduleNav>
 			<Week>
-				{weekdays.map(day => {
+				{weekdays.map((day) => {
 					const sortedTasks = [...day.tasks];
 					const sortedReminders = [...day.reminders];
 					const sortedDeadlines = [...day.deadlines];
@@ -454,39 +489,38 @@ const Schedule = ({
 					const sortedEvents = [...day.events];
 
 					sortedTasks.sort(
-						(a, b) => a.schedulePosition - b.schedulePosition
+						(a, b) => a.schedulePosition - b.schedulePosition,
 					);
-					sortedReminders.sort((a, b) =>
-						a.sendingDate > b.sendingDate ? 1 : -1
-					);
-					sortedDeadlines.sort((a, b) =>
-						a.deadline > b.deadline ? 1 : -1
-					);
+					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
+					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
 					const timeUsedByEvent = sortedEvents.reduce(
 						(time, event) => time + event.unit,
-						0
+						0,
 					);
-					const timeLeft =
-						1 -
-						sortedTasks.reduce(
-							(time, task) =>
-								time +
-								(task.status === 'FINISHED' &&
-								task.timeItTook !== null
+					const timeLeft
+						= 1
+						- sortedTasks.reduce(
+							(time, task) => time
+								+ (task.status === 'FINISHED'
+								&& task.timeItTook !== null
 									? task.timeItTook
 									: task.unit),
-							0
-						) -
-						timeUsedByEvent;
-					const timeSpent =
-						sortedTasks.reduce(
+							0,
+						)
+						- timeUsedByEvent;
+					const timeSpent
+						= sortedTasks.reduce(
 							(time, task) => time + task.timeItTook,
-							0
+							0,
 						) + timeUsedByEvent;
 					const isPastDay = moment(day.momentDate).isBefore(
 						moment(),
-						'day'
+						'day',
+					);
+					const isCurrentDay = moment(day.momentDate).isSame(
+						moment(),
+						'day',
 					);
 
 					let stat;
@@ -500,7 +534,8 @@ const Schedule = ({
 								</p>
 							</DayInfos>
 						);
-					} else if (!isPastDay && timeLeft > 0 && timeLeft < 1) {
+					}
+					else if (!isPastDay && timeLeft > 0 && timeLeft < 1) {
 						stat = (
 							<DayInfos>
 								<DayTime>
@@ -511,7 +546,8 @@ const Schedule = ({
 								</DayTime>
 							</DayInfos>
 						);
-					} else if (!isPastDay && timeLeft < 0) {
+					}
+					else if (!isPastDay && timeLeft < 0) {
 						stat = (
 							<DayInfos>
 								<DayTime>
@@ -522,10 +558,11 @@ const Schedule = ({
 								</DayTime>
 							</DayInfos>
 						);
-					} else if (
-						!isPastDay &&
-						timeLeft === workingTime &&
-						sortedTasks.length > 0
+					}
+					else if (
+						!isPastDay
+						&& timeLeft === workingTime
+						&& sortedTasks.length > 0
 					) {
 						stat = (
 							<DayInfos>
@@ -550,11 +587,16 @@ const Schedule = ({
 					}
 
 					return (
-						<Day isOff={!day.workedDay}>
+						<Day
+							isPastDay={isPastDay}
+							isOff={!day.workedDay}
+							isOpen={isCurrentDay ? isOpen : false}
+							isCurrentDay={isCurrentDay}
+						>
 							<DayTitle
 								selected={moment().isSame(
 									day.momentDate,
-									'day'
+									'day',
 								)}
 							>
 								{day.momentDate
@@ -564,17 +606,26 @@ const Schedule = ({
 										day: 'numeric',
 										month: moment().isSame(
 											day.momentDate,
-											'month'
+											'month',
 										)
 											? undefined
 											: 'numeric',
 										year: moment().isSame(
 											day.momentDate,
-											'year'
+											'year',
 										)
 											? undefined
-											: '2-digit'
+											: '2-digit',
 									})}
+								<MaterialIcon
+									icon={
+										isOpen ? 'unfold_less' : 'unfold_more'
+									}
+									size="tiny"
+									color={primaryGrey}
+									onClick={() => toggleDay(!isOpen)
+									}
+								/>
 							</DayTitle>
 							<DroppableDayTasks id={day.date}>
 								<div>
@@ -598,7 +649,7 @@ const Schedule = ({
 											id,
 											type,
 											index: position,
-											scheduledFor
+											scheduledFor,
 										}) => {
 											onMoveTask({
 												task: id ? {id, type} : task,
@@ -606,7 +657,7 @@ const Schedule = ({
 												position:
 													typeof position === 'number'
 														? position
-														: sortedTasks.length
+														: sortedTasks.length,
 											});
 										}}
 									/>
@@ -620,20 +671,20 @@ const Schedule = ({
 										linkedCustomer,
 										attachments,
 										index: position,
-										scheduledFor
+										scheduledFor,
 									}) => {
 										onMoveTask({
 											task: {
 												id,
 												type,
 												linkedCustomer, // we need this
-												attachments // and this to check for activation criteria fulfillment
+												attachments, // and this to check for activation criteria fulfillment
 											},
 											scheduledFor,
 											position:
 												typeof position === 'number'
 													? position
-													: sortedTasks.length
+													: sortedTasks.length,
 										});
 									}}
 								>
@@ -699,7 +750,7 @@ Schedule.defaultProps = {
 	onChangeWeek: () => {},
 	workingDays: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
 	fullWeek: false,
-	onMoveTask: () => {}
+	onMoveTask: () => {},
 };
 
 Schedule.propTypes = {
@@ -713,11 +764,11 @@ Schedule.propTypes = {
 			'THURSDAY',
 			'FRIDAY',
 			'SATURDAY',
-			'SUNDAY'
-		])
+			'SUNDAY',
+		]),
 	),
 	fullWeek: PropTypes.bool,
-	onMoveTask: PropTypes.func
+	onMoveTask: PropTypes.func,
 };
 
 export default Schedule;

@@ -1,7 +1,14 @@
+import styled from '@emotion/styled/macro';
 import React from 'react';
 
 import fbt from '../../fbt/fbt.macro';
+import {BREAKPOINTS} from '../../utils/constants';
 import {Select} from '../../utils/new/design-system';
+
+const Container = styled('div')`
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+	}
+`;
 
 const TimingInput = ({
 	unit,
@@ -67,7 +74,7 @@ const TimingInput = ({
 	];
 
 	return (
-		<>
+		<Container>
 			<Select
 				key={unit}
 				name="value"
@@ -165,7 +172,7 @@ const TimingInput = ({
 					}),
 				}}
 			/>
-		</>
+		</Container>
 	);
 };
 

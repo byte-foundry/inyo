@@ -22,6 +22,7 @@ import {
 import useUserInfos from '../../utils/useUserInfos';
 import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
+import HelpAndTooltip from '../HelpAndTooltip';
 import IconButton from '../IconButton';
 import ImagePickerModal from '../ImagePickerModal';
 import MaterialIcon from '../MaterialIcon';
@@ -380,6 +381,17 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 												desc="company name"
 											>
 												SIRET
+												<fbt:param name="siret">
+													<HelpAndTooltip icon="help">
+														<p>
+															<fbt desc="project's budget tooltip">
+																Ces informations
+																seront affichées
+																sur vos devis.
+															</fbt>
+														</p>
+													</HelpAndTooltip>
+												</fbt:param>
 											</fbt>
 										}
 										placeholder={
@@ -402,6 +414,17 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 												desc="phone number"
 											>
 												N° TVA
+												<fbt:param name="vat">
+													<HelpAndTooltip icon="help">
+														<p>
+															<fbt desc="project's budget tooltip">
+																Ces informations
+																seront affichées
+																sur vos devis.
+															</fbt>
+														</p>
+													</HelpAndTooltip>
+												</fbt:param>
 											</fbt>
 										}
 										placeholder={
@@ -424,6 +447,17 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 												desc="phone number"
 											>
 												Taux TVA
+												<fbt:param name="VAT rate">
+													<HelpAndTooltip icon="help">
+														<p>
+															<fbt desc="project's budget tooltip">
+																Ces informations
+																seront affichées
+																sur vos devis.
+															</fbt>
+														</p>
+													</HelpAndTooltip>
+												</fbt:param>
 											</fbt>
 										}
 										placeholder={
@@ -446,6 +480,17 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 												desc="phone number"
 											>
 												RCS
+												<fbt:param name="RCS">
+													<HelpAndTooltip icon="help">
+														<p>
+															<fbt desc="project's budget tooltip">
+																Ces informations
+																seront affichées
+																sur vos devis.
+															</fbt>
+														</p>
+													</HelpAndTooltip>
+												</fbt:param>
 											</fbt>
 										}
 										placeholder={
@@ -468,6 +513,20 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 											<Label>
 												<fbt desc="Company's logo form label">
 													Logo de la société
+													<fbt:param name="logo">
+														<HelpAndTooltip icon="help">
+															<p>
+																<fbt desc="project's budget tooltip">
+																	Ce logo sera
+																	visible par
+																	vos clients
+																	sur les
+																	projets et
+																	les devis.
+																</fbt>
+															</p>
+														</HelpAndTooltip>
+													</fbt:param>
 												</fbt>
 											</Label>
 											{logo && (
@@ -524,6 +583,21 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 											<Label>
 												<fbt desc="Company's logo form label">
 													Bannière de la société
+													<fbt:param name="banner">
+														<HelpAndTooltip icon="help">
+															<p>
+																<fbt desc="project's budget tooltip">
+																	Cette
+																	bannière
+																	sera visible
+																	par vos
+																	clients sur
+																	les pages
+																	projets.
+																</fbt>
+															</p>
+														</HelpAndTooltip>
+													</fbt:param>
 												</fbt>
 											</Label>
 											{banner && (
@@ -619,6 +693,20 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 										<Label>
 											<fbt desc="Company's admin documents">
 												Documents administratifs
+												<fbt:param name="docs admin">
+													<HelpAndTooltip icon="help">
+														<p>
+															<fbt desc="project's budget tooltip">
+																Ces documents
+																seront liés à
+																tous vos projets
+																et visibles par
+																le client (CGV,
+																RIB, etc.)
+															</fbt>
+														</p>
+													</HelpAndTooltip>
+												</fbt:param>
 											</fbt>
 										</Label>
 

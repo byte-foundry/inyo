@@ -3741,6 +3741,16 @@
     }
    ]
   },
+  "a6pPZwjLGN/QEfRcNkpxMg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Add a client to enable quote creation",
+     "variations": {}
+    }
+   ]
+  },
   "MdxW6Pz/Z7ZA7W9vSggd/A==": {
    "tokens": [],
    "types": [],
@@ -6201,12 +6211,22 @@
     }
    ]
   },
-  "kBfjZxqlGYwNO42dEVwq6w==": {
+  "eJ/HTaUC39bguAu7Tss6Qw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "SIRET",
+     "translation": "Company number {siret}",
+     "variations": {}
+    }
+   ]
+  },
+  "NiqHZjK7F0LEH1lElrEfCw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "These informations will be displayed on quotes",
      "variations": {}
     }
    ]
@@ -6221,12 +6241,12 @@
     }
    ]
   },
-  "m6O6LqsW1BEIy/mZXQky2w==": {
+  "gb/UNgQ8Srf+C9mEM6ffLw==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Tax registration number",
+     "translation": "VAT number {vat}",
      "variations": {}
     }
    ]
@@ -6241,12 +6261,12 @@
     }
    ]
   },
-  "RsJzZi3RFtQwwmzK88BmCQ==": {
+  "2xmSv4MNKgeNo9HrldhJCA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Tax rate",
+     "translation": "VAT rate {VAT rate}",
      "variations": {}
     }
    ]
@@ -6261,12 +6281,12 @@
     }
    ]
   },
-  "0CpRsV+hyYGhAplghS6B2A==": {
+  "fMhUFGOXmmDBsZ6PU0vvig==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "RCS",
+     "translation": "Registry of Companies number {RCS}",
      "variations": {}
     }
    ]
@@ -6281,12 +6301,22 @@
     }
    ]
   },
-  "AhM+a4F1MM40rw6vZnqFew==": {
+  "HoDSXXN1N9XDXjyTtxKH7Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Company logo",
+     "translation": "Logo of your company {logo}",
+     "variations": {}
+    }
+   ]
+  },
+  "l2Pi9sdkr4jwYyD2ad//yQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This logo will be displayed on your quotes and client views",
      "variations": {}
     }
    ]
@@ -6301,12 +6331,22 @@
     }
    ]
   },
-  "hwJzj8rJfXGoed9aJ/U6yA==": {
+  "3pih5F83KVsgAzk5Cg2zzg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Company cover picture",
+     "translation": "Banner of your company {banner}",
+     "variations": {}
+    }
+   ]
+  },
+  "4jLpjkESt+B14+jbEnCqIQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This banner will be displayed on client views",
      "variations": {}
     }
    ]
@@ -6331,12 +6371,22 @@
     }
    ]
   },
-  "IR7wPQm3CfbZzUuH9YLW/A==": {
+  "8+tZs3nAvCywDuBYbTp19w==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Admin docs",
+     "translation": "Admin documents {docs admin}",
+     "variations": {}
+    }
+   ]
+  },
+  "u+vOBu8m0p6WVmduftu7ng==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "These documents will be attached to all your projects and visible by your clients (TOS, BIC, etc.)",
      "variations": {}
     }
    ]
@@ -7951,6 +8001,16 @@
     }
    ]
   },
+  "xq0xbazjnP2lbWM7KfkybA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Accepted on {accepted date}",
+     "variations": {}
+    }
+   ]
+  },
   "AU4UmOPIEzH+sm+ZcUudGg==": {
    "tokens": [],
    "types": [],
@@ -7971,32 +8031,52 @@
     }
    ]
   },
-  "NX3XqrpXWPqAHmvSCU/9Cw==": {
+  "9n1x29Rxa4cTrHuY1BDNFA==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "{=Ce devis n'est plus valide. Le devis à jour ce trouve} {=ici}",
+     "translation": "{=This quote is no longer valid. The updated quote can be found}",
      "variations": {}
     }
    ]
   },
-  "sTITh0MyN04L80RbRYAY0Q==": {
+  "hUYEF+W+LPvdKyMjp6vyIQ==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "This quote is outdated. To see the up to date quote follow this",
+     "translation": "This quote is no longer valid. The updated quote can be found",
      "variations": {}
     }
    ]
   },
-  "70Y3QfqXfUvAWtsXMxAdXA==": {
+  "vcudrr1oODmRJuZG8yBq3A==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "link",
+     "translation": "{=This quote is no longer valid. The updated quote can be found} {=here}",
+     "variations": {}
+    }
+   ]
+  },
+  "Yacb2HcieJKWqBEmZ/iJzA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This quote is no longer valid. The updated quote can be found",
+     "variations": {}
+    }
+   ]
+  },
+  "k1J4GF/pOD9FCusszQCD6A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "here",
      "variations": {}
     }
    ]
@@ -9357,6 +9437,106 @@
    "translations": [
     {
      "translation": "Deliverables",
+     "variations": {}
+    }
+   ]
+  },
+  "kBfjZxqlGYwNO42dEVwq6w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "SIRET",
+     "variations": {}
+    }
+   ]
+  },
+  "m6O6LqsW1BEIy/mZXQky2w==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tax registration number",
+     "variations": {}
+    }
+   ]
+  },
+  "RsJzZi3RFtQwwmzK88BmCQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Tax rate",
+     "variations": {}
+    }
+   ]
+  },
+  "0CpRsV+hyYGhAplghS6B2A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "RCS",
+     "variations": {}
+    }
+   ]
+  },
+  "AhM+a4F1MM40rw6vZnqFew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Company logo",
+     "variations": {}
+    }
+   ]
+  },
+  "hwJzj8rJfXGoed9aJ/U6yA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Company cover picture",
+     "variations": {}
+    }
+   ]
+  },
+  "IR7wPQm3CfbZzUuH9YLW/A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Admin docs",
+     "variations": {}
+    }
+   ]
+  },
+  "NX3XqrpXWPqAHmvSCU/9Cw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "{=Ce devis n'est plus valide. Le devis à jour ce trouve} {=ici}",
+     "variations": {}
+    }
+   ]
+  },
+  "sTITh0MyN04L80RbRYAY0Q==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This quote is outdated. To see the up to date quote follow this",
+     "variations": {}
+    }
+   ]
+  },
+  "70Y3QfqXfUvAWtsXMxAdXA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "link",
      "variations": {}
     }
    ]

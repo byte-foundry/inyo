@@ -901,10 +901,9 @@ export const ScrollHelper = styled('div')`
 `;
 
 export const TaskCardElem = styled('div')`
-	background: ${props => (props.isLive ? primaryPurple : primaryWhite)};
-	opacity: ${props => (props.isOver ? '.5' : 1)};
+	background: ${props => (props.isLive ? primaryPurple : lightGrey)};
+	opacity: ${props => (props.isOver ? '.4' : 1)};
 	border: 1px solid ${mediumGrey};
-	box-shadow: 3px 3px 6px ${mediumGrey};
 	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
 	border-radius: 3px;
 	padding: 8px;

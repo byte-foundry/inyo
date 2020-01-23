@@ -3,6 +3,22 @@ import produce from 'immer';
 import {isCustomerTask} from '../functions';
 
 export default {
+	getPaymentAndCurrentTask: ({mutation, query}) => {
+		const {currentTask} = query.result.me;
+		const finishedTask = mutation.result.data.finishItem;
+
+		if (currentTask.id === finishedTask.id) {
+			return {
+				...query.result,
+				me: {
+					...query.result.me,
+					currentTask: null,
+				},
+			};
+		}
+
+		return query.result;
+	},
 	getAllTasksShort: ({mutation, query}) => {
 		const task = mutation.result.data.finishItem;
 

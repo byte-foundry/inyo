@@ -39,7 +39,7 @@ import updateSectionWatchMutation from './mutationLinks/updateSection';
 import uploadAttachmentsWatchMutation from './mutationLinks/uploadAttachments';
 
 const options = {
-	uri: GRAPHQL_API,
+	uri: 'http://prisma.prototypo.io:4002',
 };
 
 const httpLink = ApolloLink.split(

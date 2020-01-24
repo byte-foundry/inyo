@@ -655,8 +655,8 @@ export const FOCUS_TASK = gql`
 export const UNFOCUS_TASK = gql`
 	${ITEM_FRAGMENT}
 
-	mutation unfocusTask($itemId: ID!) {
-		unfocusTask(id: $itemId) {
+	mutation unfocusTask($itemId: ID!, $from: Date) {
+		unfocusTask(id: $itemId, from: $from) {
 			...ItemFragment
 		}
 	}

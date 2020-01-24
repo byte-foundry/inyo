@@ -210,6 +210,7 @@ const DraggableTaskCard = ({
 				unfocusTask({
 					variables: {
 						itemId: id,
+						from: scheduledFor,
 					},
 				});
 			}

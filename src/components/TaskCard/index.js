@@ -313,34 +313,49 @@ const TaskCard = withRouter(
 							>
 								<Button
 									noBg
-									current={task.status === 'FINISHED'}
-									invert={task.status === 'FINISHED'}
-									icon="control_point_duplicate"
+									current={isTimerRunning}
+									invert={false}
+									icon={
+										isTimerRunning
+											? 'pause_circle_outline'
+											: 'play_circle_outline'
+									}
 									size="medium"
-									color={primaryBlack}
-									onClick={(e) => {}}
-								/>
-							</Tooltip>
-						)}
-						{!isCustomerTask(task.type) && (
-							<Tooltip
-								label={
-									<fbt
-										project="inyo"
-										desc="Actions card play"
-									>
-										Lancer le chronomètre
-									</fbt>
-								}
-							>
-								<Button
-									noBg
-									current={task.status === 'FINISHED'}
-									invert={task.status === 'FINISHED'}
-									icon="play_circle_outline"
-									size="medium"
-									color={primaryBlack}
-									onClick={(e) => {}}
+									color={
+										isTimerRunning
+											? primaryPurple
+											: primaryBlack
+									}
+									onClick={(e) => {
+										e.stopPropagation();
+
+										if (isTimerRunning) {
+											stopCurrentTaskTimer();
+										}
+										else {
+											focusTask({
+												variables: {
+													itemId: task.id,
+													action: 'SPLIT',
+												},
+												optimisticResponse: {
+													focusTask: {
+														...task,
+														scheduledFor: moment().format(
+															moment.HTML5_FMT
+																.DATE,
+														),
+														schedulePosition: -1,
+														isFocused: true,
+													},
+												},
+											});
+
+											startTaskTimer({
+												variables: {id: task.id},
+											});
+										}
+									}}
 								/>
 							</Tooltip>
 						)}
@@ -372,10 +387,6 @@ const TaskCard = withRouter(
 									}
 									onClick={(e) => {
 										e.stopPropagation();
-
-										if (isTimerRunning) {
-											stopCurrentTaskTimer();
-										}
 
 										if (status === 'FINISHED') {
 											unfinishItem({

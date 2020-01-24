@@ -87,6 +87,10 @@ const DayTitle = styled('span')`
 		font-weight: 500;
 	`}
 
+	i {
+		display: none !important;
+	}
+
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		text-align: left;
 		font-size: 1.25rem;
@@ -96,6 +100,10 @@ const DayTitle = styled('span')`
 		justify-content: space-between;
 		border: 1px solid ${lightGrey};
 		color: ${primaryGrey};
+
+		i {
+			display: flex !important;
+		}
 	}
 `;
 
@@ -623,8 +631,7 @@ const Schedule = ({
 									}
 									size="tiny"
 									color={primaryGrey}
-									onClick={() => toggleDay(!isOpen)
-									}
+									onClick={() => toggleDay(!isOpen)}
 								/>
 							</DayTitle>
 							<DroppableDayTasks id={day.date}>

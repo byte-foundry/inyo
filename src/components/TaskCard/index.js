@@ -126,6 +126,10 @@ const CardSubTitle = styled('span')`
 	grid-column-start: 1;
 `;
 
+const CardIndex = styled('div')`
+	white-space: nowrap;
+`;
+
 const TagContainer = styled('div')`
 	margin-bottom: 5px;
 	display: flex;
@@ -141,7 +145,7 @@ const Tag = styled('span')`
 
 const TaskCard = withRouter(
 	({
-		task, index, history, location, cardRef, isOver, ...rest
+		task, index, history, location, cardRef, isOver, date, ...rest
 	}) => {
 		const [finishItem] = useMutation(FINISH_ITEM);
 		const [unfinishItem] = useMutation(UNFINISH_ITEM);
@@ -155,12 +159,18 @@ const TaskCard = withRouter(
 				: null;
 		const isTimerRunning = lastWorkedTime && lastWorkedTime.end === null;
 
+		const scheduledDayIndex = task.scheduledForDays.findIndex(
+			d => d.date === date,
+		);
+		const day = task.scheduledForDays[scheduledDayIndex];
+		const status = day ? day.status : task.status;
+
 		return (
 			<TaskCardElemWithBtn
 				{...rest}
 				isAssigned={task.assignee}
 				ref={cardRef}
-				done={task.status === 'FINISHED'}
+				done={status === 'FINISHED'}
 				hasTimerRunning={isTimerRunning}
 				customerTask={isCustomerTask(task.type)}
 				onClick={() => history.push({
@@ -180,7 +190,7 @@ const TaskCard = withRouter(
 							))}
 						</TagContainer>
 						<div>
-							{task.status === 'FINISHED' && (
+							{status === 'FINISHED' && (
 								<MaterialIcon
 									icon="check_circle"
 									size="tiny"
@@ -200,7 +210,13 @@ const TaskCard = withRouter(
 					)}{' '}
 					{task.name}
 				</CardTitle>
-				<div></div>
+				<CardIndex>
+					{task.scheduledForDays.length > 1
+						? `${scheduledDayIndex + 1} / ${
+							task.scheduledForDays.length
+						  }`
+						: ''}
+				</CardIndex>
 				{task.section && (
 					<CardSubTitle>{task.section.project.name}</CardSubTitle>
 				)}
@@ -229,8 +245,8 @@ const TaskCard = withRouter(
 							>
 								<Button
 									noBg
-									current={task.status === 'FINISHED'}
-									invert={task.status === 'FINISHED'}
+									current={status === 'FINISHED'}
+									invert={status === 'FINISHED'}
 									icon="zoom_out_map"
 									size="medium"
 									color={primaryBlack}
@@ -248,6 +264,51 @@ const TaskCard = withRouter(
 										Planifier cette tâche sur plusieurs
 										jours
 									</fbt>
+								}
+							>
+								<Button
+									noBg
+									current={status === 'FINISHED'}
+									invert={status === 'FINISHED'}
+									icon="control_point_duplicate"
+									size="medium"
+									color={primaryBlack}
+									onClick={(e) => {
+										e.stopPropagation();
+
+										const nextDay = moment(date)
+											.add(1, 'days')
+											.format(moment.HTML5_FMT.DATE);
+
+										focusTask({
+											variables: {
+												itemId: task.id,
+												for: nextDay,
+												action: 'SPLIT',
+											},
+										});
+									}}
+								/>
+							</Tooltip>
+						)}
+						{!isCustomerTask(task.type) && status !== 'FINISHED' && (
+							<Tooltip
+								label={
+									isTimerRunning ? (
+										<fbt
+											project="inyo"
+											desc="Actions card pause"
+										>
+											Stopper le chronomètre
+										</fbt>
+									) : (
+										<fbt
+											project="inyo"
+											desc="Actions card play"
+										>
+											Lancer le chronomètre
+										</fbt>
+									)
 								}
 							>
 								<Button
@@ -296,30 +357,40 @@ const TaskCard = withRouter(
 							>
 								<Button
 									noBg
-									current={task.status === 'FINISHED'}
-									invert={task.status === 'FINISHED'}
+									current={status === 'FINISHED'}
+									invert={status === 'FINISHED'}
 									icon={
-										task.status === 'FINISHED'
+										status === 'FINISHED'
 											? 'check_circle'
 											: 'check_circle_outline'
 									}
 									size="medium"
 									color={
-										task.status === 'FINISHED'
+										status === 'FINISHED'
 											? primaryPurple
 											: primaryBlack
 									}
 									onClick={(e) => {
 										e.stopPropagation();
 
-										if (task.status === 'FINISHED') {
+										if (isTimerRunning) {
+											stopCurrentTaskTimer();
+										}
+
+										if (status === 'FINISHED') {
 											unfinishItem({
-												variables: {itemId: task.id},
+												variables: {
+													itemId: task.id,
+													for: date,
+												},
 											});
 										}
 										else {
 											finishItem({
-												variables: {itemId: task.id},
+												variables: {
+													itemId: task.id,
+													for: date,
+												},
 											});
 										}
 									}}

@@ -192,6 +192,7 @@ const DraggableTaskCard = ({
 	index,
 	scheduledFor,
 	onMove,
+	onCopy,
 	...rest
 }) => {
 	const [unfocusTask] = useMutation(UNFOCUS_TASK);
@@ -216,18 +217,29 @@ const DraggableTaskCard = ({
 			const result = monitor.getDropResult();
 
 			if (!result) return;
+
 			if (scheduledFor === result.scheduledFor) {
 				if (index === result.index || index + 1 === result.index) return;
 
 				onMove({
 					index:
 						result.index > index ? result.index - 1 : result.index,
+					from: scheduledFor,
+					scheduledFor: result.scheduledFor,
+				});
+			}
+			else if (result.dropEffect === 'copy') {
+				onCopy({
+					index:
+						result.index > index ? result.index - 1 : result.index,
+					from: scheduledFor,
 					scheduledFor: result.scheduledFor,
 				});
 			}
 			else {
 				onMove({
 					index: result.index,
+					from: scheduledFor,
 					scheduledFor: result.scheduledFor,
 				});
 			}
@@ -261,6 +273,7 @@ const DraggableTaskCard = ({
 				drop(node);
 			}}
 			index={index}
+			date={scheduledFor}
 			{...rest}
 		/>
 	);
@@ -308,7 +321,7 @@ const Logo = styled('div')`
 const EventCard = ({
 	event: {
 		name, start, end, link,
-	}, logo, workingTime,
+	}, logo,
 }) => (
 	<Tooltip
 		label={
@@ -451,9 +464,16 @@ const Schedule = ({
 					const sortedAssignedTasks = [...day.assignedTasks];
 					const sortedEvents = [...day.events];
 
-					sortedTasks.sort(
-						(a, b) => a.schedulePosition - b.schedulePosition,
-					);
+					sortedTasks.sort((a, b) => {
+						const aDay = a.scheduledForDays.find(
+							d => d.date === day.date,
+						);
+						const bDay = b.scheduledForDays.find(
+							d => d.date === day.date,
+						);
+
+						return aDay.position - bDay.position;
+					});
 					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
 					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
@@ -468,13 +488,15 @@ const Schedule = ({
 								+ (task.status === 'FINISHED'
 								&& task.timeItTook !== null
 									? task.timeItTook
-									: task.unit),
+									: task.unit)
+									/ task.scheduledForDays.length,
 							0,
 						)
 						- timeUsedByEvent;
 					const timeSpent
 						= sortedTasks.reduce(
-							(time, task) => time + task.timeItTook,
+							(time, task) => time
+								+ task.timeItTook / task.scheduledForDays.length,
 							0,
 						) + timeUsedByEvent;
 					const isPastDay = moment(day.momentDate).isBefore(
@@ -582,15 +604,33 @@ const Schedule = ({
 										/>
 									))}
 								</div>
-								{sortedTasks.map(task => (
+								{sortedTasks.map((task, index) => (
 									<DraggableTaskCard
-										key={`${task.id}-${task.schedulePosition}`}
+										key={task.id}
 										id={task.id}
 										type={task.type}
 										task={task}
-										index={task.schedulePosition}
+										index={index}
 										scheduledFor={day.date}
 										onMove={({
+											id,
+											type,
+											index: position,
+											from,
+											scheduledFor,
+										}) => {
+											onMoveTask({
+												task: id ? {id, type} : task,
+												from,
+												scheduledFor,
+												position:
+													typeof position === 'number'
+														? position
+														: sortedTasks.length,
+												action: 'MOVE',
+											});
+										}}
+										onCopy={({
 											id,
 											type,
 											index: position,
@@ -603,6 +643,7 @@ const Schedule = ({
 													typeof position === 'number'
 														? position
 														: sortedTasks.length,
+												action: 'SPLIT',
 											});
 										}}
 									/>
@@ -697,6 +738,7 @@ Schedule.defaultProps = {
 	workingDays: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
 	fullWeek: false,
 	onMoveTask: () => {},
+	onCopyTask: () => {},
 };
 
 Schedule.propTypes = {

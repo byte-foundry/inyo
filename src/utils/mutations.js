@@ -603,8 +603,8 @@ export const UPDATE_ITEM = gql`
 export const FINISH_ITEM = gql`
 	${SHORT_TASK_FRAGMENT}
 
-	mutation finishItem($itemId: ID!, $token: String, $timeItTook: Float) {
-		finishItem(id: $itemId, token: $token, timeItTook: $timeItTook) {
+	mutation finishItem($itemId: ID!, $timeItTook: Float, $for: Date) {
+		finishItem(id: $itemId, timeItTook: $timeItTook, for: $for) {
 			...ShortTaskFragment
 		}
 	}
@@ -613,8 +613,8 @@ export const FINISH_ITEM = gql`
 export const UNFINISH_ITEM = gql`
 	${ITEM_FRAGMENT}
 
-	mutation unfinishItem($itemId: ID!) {
-		unfinishItem(id: $itemId) {
+	mutation unfinishItem($itemId: ID!, $for: Date) {
+		unfinishItem(id: $itemId, for: $for) {
 			...ItemFragment
 		}
 	}
@@ -634,14 +634,18 @@ export const FOCUS_TASK = gql`
 	mutation focusTask(
 		$itemId: ID!
 		$reminders: [ReminderInput]
+		$from: Date
 		$for: Date
 		$schedulePosition: Int
+		$action: FocusActionType
 	) {
 		focusTask(
 			id: $itemId
 			reminders: $reminders
+			from: $from
 			for: $for
 			schedulePosition: $schedulePosition
+			action: $action
 		) {
 			...ItemFragment
 		}

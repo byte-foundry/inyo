@@ -44,6 +44,14 @@ export default {
 
 				if (filteredTasks.length !== d.tasks.length) {
 					filteredTasks.forEach((t, i) => {
+						const scheduledFor = t.scheduledForDays.find(
+							day => day.date === d.date,
+						);
+
+						if (scheduledFor) {
+							scheduledFor.position = i;
+						}
+
 						t.schedulePosition = i;
 					});
 				}

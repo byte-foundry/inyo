@@ -37,6 +37,7 @@ export default {
 			if (
 				query.variables.schedule === 'UNSCHEDULED'
 				&& !task.scheduledFor
+				&& task.scheduledForDays.length === 0
 			) {
 				draft.me.tasks.push(task);
 			}
@@ -44,9 +45,13 @@ export default {
 			// add to rescheduled
 			if (
 				query.variables.schedule === 'TO_BE_RESCHEDULED'
-				&& task.status !== 'FINISHED'
-				&& task.scheduledFor
-				&& moment(task.scheduledFor).isBefore(moment(), 'day')
+				&& ((task.status !== 'FINISHED'
+					&& task.scheduledFor
+					&& moment(task.scheduledFor).isBefore(moment(), 'day'))
+					|| task.scheduledForDays.some(
+						d => moment(d.date).isBefore(moment(), 'day')
+							&& d.status !== 'FINISHED',
+					))
 			) {
 				draft.me.tasks.push(task);
 			}
@@ -81,6 +86,14 @@ export default {
 
 					if (filteredTasks.length !== d.tasks.length) {
 						filteredTasks.forEach((t, i) => {
+							const scheduledFor = t.scheduledForDays.find(
+								day => day.date === d.date,
+							);
+
+							if (scheduledFor) {
+								scheduledFor.position = i;
+							}
+
 							t.schedulePosition = i;
 						});
 					}
@@ -89,16 +102,21 @@ export default {
 				});
 
 				// add new
-				const scheduleDay = schedule.find(
-					d => d.date === task.scheduledFor,
-				);
+				task.scheduledForDays.forEach((day) => {
+					const {date} = day;
+					const scheduleDay = schedule.find(d => d.date === date);
 
-				if (scheduleDay) {
-					scheduleDay.tasks.splice(task.schedulePosition, 0, task);
-					scheduleDay.tasks.forEach((t, i) => {
-						t.schedulePosition = i;
-					});
-				}
+					if (scheduleDay) {
+						scheduleDay.tasks = [
+							...scheduleDay.tasks.slice(0, day.position),
+							task,
+							...scheduleDay.tasks.slice(day.position).map((t) => {
+								t.position += 1;
+								return t;
+							}),
+						];
+					}
+				});
 			}
 		});
 	},

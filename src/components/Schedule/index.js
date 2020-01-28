@@ -94,7 +94,7 @@ const DayTitle = styled('span')`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		text-align: left;
 		font-size: 1.25rem;
-		margin: 1rem 0;
+		margin: 0;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -150,6 +150,7 @@ const Day = styled('div')`
 	`}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0;
 
 		@media (max-width: ${BREAKPOINTS.mobile}px) {
 			margin-bottom: ${props => (props.isOpen ? '0' : '1rem')};
@@ -160,10 +161,10 @@ const Day = styled('div')`
 		}
 
 		${DayTasks} {
-			display: ${props => (props.isCurrentDay ? 'flex' : 'none')}
+			display: ${props => (props.isOpen ? 'flex' : 'none')}
 		}
 		${DayTitle} {
-			margin: ${props => (props.isOpen ? '1rem 0' : '0 0 10px 0')};
+			margin-bottom: ${props => props.isOpen && '1rem'};
 		}
 	}
 `;
@@ -351,7 +352,7 @@ const Logo = styled('div')`
 const EventCard = ({
 	event: {
 		name, start, end, link,
-	}, logo, workingTime,
+	}, logo,
 }) => (
 	<Tooltip
 		label={
@@ -429,7 +430,17 @@ const Schedule = ({
 		day => day.tasks.length === 0 && day.events.length === 0,
 	);
 
-	const [isOpen, toggleDay] = useState(false);
+	// all days in the week are closed except the current day
+	const [openDays, setOpenDays] = useState({
+		0: false,
+		1: false,
+		2: false,
+		3: false,
+		4: false,
+		5: false,
+		6: false,
+		[moment().day()]: true,
+	});
 
 	return (
 		<Container>
@@ -598,7 +609,7 @@ const Schedule = ({
 						<Day
 							isPastDay={isPastDay}
 							isOff={!day.workedDay}
-							isOpen={isCurrentDay ? isOpen : false}
+							isOpen={openDays[day.momentDate.day()]}
 							isCurrentDay={isCurrentDay}
 						>
 							<DayTitle
@@ -627,11 +638,19 @@ const Schedule = ({
 									})}
 								<MaterialIcon
 									icon={
-										isOpen ? 'unfold_less' : 'unfold_more'
+										openDays[day.momentDate.day()]
+											? 'unfold_less'
+											: 'unfold_more'
 									}
 									size="tiny"
 									color={primaryGrey}
-									onClick={() => toggleDay(!isOpen)}
+									onClick={() => setOpenDays({
+										...openDays,
+										[day.momentDate.day()]: !openDays[
+											day.momentDate.day()
+										],
+									})
+									}
 								/>
 							</DayTitle>
 							<DroppableDayTasks id={day.date}>

@@ -1,3 +1,5 @@
+import produce from 'immer';
+
 import reorderList from '../reorderList';
 
 const getProject = ({mutation, query}) => {
@@ -52,4 +54,32 @@ export default {
 	},
 	getProjectData: getProject,
 	getProjectInfos: getProject,
+	getSchedule: ({mutation, query}) => {
+		const taskId = mutation.variables.itemId;
+
+		return produce(query.result, (draft) => {
+			const {schedule} = draft.me;
+
+			// remove old
+			schedule.forEach((d) => {
+				const filteredTasks = d.tasks.filter(t => t.id !== taskId);
+
+				if (filteredTasks.length !== d.tasks.length) {
+					filteredTasks.forEach((t, i) => {
+						const scheduledFor = t.scheduledForDays.find(
+							day => day.date === d.date,
+						);
+
+						if (scheduledFor) {
+							scheduledFor.position = i;
+						}
+
+						t.schedulePosition = i;
+					});
+				}
+
+				d.tasks = filteredTasks;
+			});
+		});
+	},
 };

@@ -4,6 +4,7 @@ import React, {forwardRef} from 'react';
 import {withRouter} from 'react-router-dom';
 
 import {useMutation} from '../../utils/apollo-hooks';
+import {WEEKDAYS} from '../../utils/constants';
 import {formatName, isCustomerTask} from '../../utils/functions';
 import {
 	FINISH_ITEM,
@@ -21,6 +22,7 @@ import {
 	primaryWhite,
 	TaskCardElem,
 } from '../../utils/new/design-system';
+import useUserInfos from '../../utils/useUserInfos';
 import MaterialIcon from '../MaterialIcon';
 import Tooltip from '../Tooltip';
 
@@ -152,6 +154,7 @@ const TaskCard = withRouter(
 		const [startTaskTimer] = useMutation(START_TASK_TIMER);
 		const [stopCurrentTaskTimer] = useMutation(STOP_CURRENT_TASK_TIMER);
 		const [focusTask] = useMutation(FOCUS_TASK);
+		const {workingDays} = useUserInfos();
 
 		const lastWorkedTime
 			= task.workedTimes.length > 0
@@ -276,14 +279,29 @@ const TaskCard = withRouter(
 									onClick={(e) => {
 										e.stopPropagation();
 
-										const nextDay = moment(date)
-											.add(1, 'days')
-											.format(moment.HTML5_FMT.DATE);
+										const nextWorkingDay = moment(date);
+
+										if (workingDays.length > 0) {
+											do {
+												nextWorkingDay.add(1, 'day');
+											} while (
+												!workingDays.includes(
+													WEEKDAYS[
+														nextWorkingDay.day()
+													],
+												)
+											);
+										}
+										else {
+											nextWorkingDay.add(1, 'days');
+										}
 
 										focusTask({
 											variables: {
 												itemId: task.id,
-												for: nextDay,
+												for: nextWorkingDay.format(
+													moment.HTML5_FMT.DATE,
+												),
 												action: 'SPLIT',
 											},
 										});

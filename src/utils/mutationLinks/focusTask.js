@@ -55,6 +55,14 @@ export default {
 			) {
 				draft.me.tasks.push(task);
 			}
+
+			if (query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL') {
+				draft.me.tasks = draft.me.tasks.filter(t => t.id !== task.id);
+
+				if (task.status === 'FINISHED' && task.timeItTook === null) {
+					draft.me.tasks.push(task);
+				}
+			}
 		});
 	},
 	getSchedule: ({mutation, query}) => {

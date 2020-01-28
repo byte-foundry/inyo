@@ -245,8 +245,10 @@ const TogglingTopBar = ({visible, toggleMenu}) => {
 	);
 };
 
-const MenuTopBar = ({projectId, children}) => {
+const MenuTopBar = ({location, children}) => {
 	const [visible, toggleMenu] = useLocalStorage('visibleMenu', false);
+
+	const query = new URLSearchParams(location.search);
 
 	return (
 		<>
@@ -265,9 +267,12 @@ const MenuTopBar = ({projectId, children}) => {
 							icon="add_circle_outline"
 							size="medium"
 							color={darkGrey}
-							currentProjectId={projectId || ''}
 						>
-							<CreateTask popinTask withProject />
+							<CreateTask
+								popinTask
+								withProject
+								currentProjectId={query.get('projectId')}
+							/>
 						</HelpAndTooltip>
 					</MenuMobileIcon>
 					<AssistantActions mobile onOpen={() => toggleMenu(false)} />
@@ -289,9 +294,9 @@ const MenuTopBar = ({projectId, children}) => {
 	);
 };
 
-const withHeader = Component => (projectId, ...args) => (
-	<MenuTopBar projectId={projectId}>
-		<Component {...args} />
+const withHeader = Component => options => (
+	<MenuTopBar location={options.location}>
+		<Component {...options} />
 	</MenuTopBar>
 );
 

@@ -60,9 +60,7 @@ export const TogglingTopBarMobile = styled('div')`
 	}
 `;
 
-const TogglingTopBar = () => {
-	const [visible, toggleMenu] = useLocalStorage('visibleMenu', false);
-
+const TogglingTopBar = ({visible, toggleMenu}) => {
 	let TopBarMenuLink = TopBarMenuLinkBase;
 
 	// hiding the menu when moving to another page on mobile
@@ -247,37 +245,54 @@ const TogglingTopBar = () => {
 	);
 };
 
+const MenuTopBar = ({projectId, children}) => {
+	const [visible, toggleMenu] = useLocalStorage('visibleMenu', false);
+
+	return (
+		<>
+			<LeftMenu>
+				<TopBarLogoNotif>
+					<div>
+						<TopBarLogo to="/app/dashboard" />
+					</div>
+					<NotificationTrayButton
+						mobile
+						onOpen={() => toggleMenu(false)}
+					/>
+					<MenuMobileIcon>
+						<HelpAndTooltip
+							onOpen={() => toggleMenu(false)}
+							icon="add_circle_outline"
+							size="medium"
+							color={darkGrey}
+							currentProjectId={projectId || ''}
+						>
+							<CreateTask popinTask withProject />
+						</HelpAndTooltip>
+					</MenuMobileIcon>
+					<AssistantActions mobile onOpen={() => toggleMenu(false)} />
+					<TogglingTopBarMobile>
+						<TogglingTopBar
+							visible={visible}
+							toggleMenu={toggleMenu}
+						/>
+					</TogglingTopBarMobile>
+				</TopBarLogoNotif>
+				<NotificationTrayButton desktop />
+				<AssistantActions />
+			</LeftMenu>
+			{children}
+			<MenuDesktopIcon>
+				<TogglingTopBar visible={visible} toggleMenu={toggleMenu} />
+			</MenuDesktopIcon>
+		</>
+	);
+};
+
 const withHeader = Component => (projectId, ...args) => (
-	<>
-		<LeftMenu>
-			<TopBarLogoNotif>
-				<div>
-					<TopBarLogo to="/app/dashboard" />
-				</div>
-				<NotificationTrayButton mobile />
-				<MenuMobileIcon>
-					<HelpAndTooltip
-						icon="add_circle_outline"
-						size="medium"
-						color={darkGrey}
-						currentProjectId={projectId || ''}
-					>
-						<CreateTask popinTask withProject />
-					</HelpAndTooltip>
-				</MenuMobileIcon>
-				<AssistantActions mobile />
-				<TogglingTopBarMobile>
-					<TogglingTopBar />
-				</TogglingTopBarMobile>
-			</TopBarLogoNotif>
-			<NotificationTrayButton desktop />
-			<AssistantActions />
-		</LeftMenu>
+	<MenuTopBar projectId={projectId}>
 		<Component {...args} />
-		<MenuDesktopIcon>
-			<TogglingTopBar />
-		</MenuDesktopIcon>
-	</>
+	</MenuTopBar>
 );
 
 export default withHeader;

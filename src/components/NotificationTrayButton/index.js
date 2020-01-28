@@ -102,7 +102,7 @@ const Close = styled(IconButton)`
 	}
 `;
 
-const NotificationTrayButton = ({mobile}) => {
+const NotificationTrayButton = ({mobile, onOpen = () => {}}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
 	const [isOpen, setOpen] = useState(false);
@@ -186,6 +186,7 @@ const NotificationTrayButton = ({mobile}) => {
 
 						if (!isOpen) {
 							refetch();
+							onOpen();
 						}
 					}}
 				>

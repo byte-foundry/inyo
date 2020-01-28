@@ -101,7 +101,7 @@ const Close = styled(IconButton)`
 	}
 `;
 
-const AssistantActions = ({mobile}) => {
+const AssistantActions = ({mobile, onOpen = () => {}}) => {
 	const icon = useRef();
 	const dialogRef = useRef();
 	const [preventClose, setPreventClose] = useState(false);
@@ -142,6 +142,7 @@ const AssistantActions = ({mobile}) => {
 
 						if (!isOpen) {
 							refetch();
+							onOpen();
 						}
 					}}
 				>
@@ -157,12 +158,14 @@ const AssistantActions = ({mobile}) => {
 			</Tooltip>
 			{isOpen && (
 				<Portal>
-					<Close
-						icon="close"
-						size="normal"
-						color={primaryRed}
-						onClick={() => setOpen(false)}
-					/>
+					{mobile && (
+						<Close
+							icon="close"
+							size="normal"
+							color={primaryRed}
+							onClick={() => setOpen(false)}
+						/>
+					)}
 					<Dropdown
 						ref={dialogRef}
 						aria-modal="true"

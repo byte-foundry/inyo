@@ -103,7 +103,11 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 };
 
 const HelpAndTooltip = ({
-	icon = 'help', color, size, children,
+	icon = 'help',
+	color,
+	size,
+	children,
+	onOpen = () => {},
 }) => {
 	const [open, setOpen] = useState(false);
 	const iconRef = useRef();
@@ -116,7 +120,13 @@ const HelpAndTooltip = ({
 				ref={iconRef}
 				size={size || 'tiny'}
 				color={color || accentGrey}
-				onClick={() => setOpen(!open)}
+				onClick={() => {
+					if (!open) {
+						onOpen();
+					}
+
+					setOpen(!open);
+				}}
 			/>
 			{open && (
 				<Portal>

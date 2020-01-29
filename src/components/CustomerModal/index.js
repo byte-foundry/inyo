@@ -147,7 +147,11 @@ const CustomerModal = ({
 						email: customerNotNull.email || '',
 						phone: customerNotNull.phone || '',
 						occupation: customerNotNull.occupation || '',
-						address: customerNotNull.address || '',
+						address:
+							{
+								...customerNotNull.address,
+								__typename: undefined,
+							} || '',
 					}}
 					validate={(values) => {
 						if (

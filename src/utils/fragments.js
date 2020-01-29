@@ -26,6 +26,11 @@ export const SHORT_TASK_FRAGMENT = gql`
 		timeItTook
 		scheduledFor
 		schedulePosition
+		scheduledForDays {
+			date
+			position
+			status
+		}
 		dailyRate
 		owner {
 			id

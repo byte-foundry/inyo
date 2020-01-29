@@ -409,15 +409,47 @@ function Task({
 								{baseUrl === 'dashboard'
 									&& !isCustomerTask(item.type) && (
 									<Button
-										onClick={() => focusTask({
-											variables: {
-												itemId: item.id,
-												for: new Date()
-													.toJSON()
-													.split('T')[0],
-											},
-										})
-										}
+										onClick={() => {
+											if (
+												item.scheduledForDays
+													.length > 0
+											) {
+												item.scheduledForDays.forEach(
+													(day) => {
+														if (
+															new Date(day)
+																	> new Date()
+																|| day.status
+																	=== 'FINISHED'
+														) return;
+
+														focusTask({
+															variables: {
+																itemId:
+																		item.id,
+																from:
+																		day.date,
+																for: new Date()
+																	.toJSON()
+																	.split(
+																		'T',
+																	)[0],
+															},
+														});
+													},
+												);
+											}
+											else {
+												focusTask({
+													variables: {
+														itemId: item.id,
+														for: new Date()
+															.toJSON()
+															.split('T')[0],
+													},
+												});
+											}
+										}}
 									>
 										<fbt
 											project="inyo"

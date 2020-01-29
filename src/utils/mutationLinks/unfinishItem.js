@@ -10,9 +10,17 @@ export default {
 		return produce(query.result, (draft) => {
 			if (!isCustomerTask(task.type)) {
 				if (
-					query.variables.schedule === 'TO_BE_RESCHEDULED'
-					&& task.scheduledFor
-					&& moment(task.scheduledFor).isBefore(moment().startOf('day'))
+					(query.variables.schedule === 'TO_BE_RESCHEDULED'
+						&& (task.status !== 'FINISHED'
+							&& task.scheduledFor
+							&& moment(task.scheduledFor).isBefore(
+								moment(),
+								'day',
+							)))
+					|| task.scheduledForDays.some(
+						d => moment(d.date).isBefore(moment(), 'day')
+							&& d.status !== 'FINISHED',
+					)
 				) {
 					draft.me.tasks = draft.me.tasks.filter(
 						t => t.id !== task.id,
@@ -34,33 +42,33 @@ export default {
 		const task = {...mutation.result.data.unfinishItem};
 
 		return produce({task, result: query.result}, (draft) => {
-			if (task.scheduledFor) {
-				const {
-					task,
-					result: {
-						me: {schedule},
-					},
-				} = draft;
+			const {
+				task,
+				result: {
+					me: {schedule},
+				},
+			} = draft;
 
-				const scheduleDay = schedule.find(
-					d => d.date === task.scheduledFor,
-				);
+			// remove old
+			schedule.forEach((d) => {
+				const filteredTasks = d.tasks.filter(t => t.id !== task.id);
 
-				if (scheduleDay) {
-					// remove old
-					const filteredTasks = scheduleDay.tasks.filter(
-						t => t.id !== task.id,
-					);
+				if (filteredTasks.length !== d.tasks.length) {
+					filteredTasks.forEach((t, i) => {
+						const scheduledFor = t.scheduledForDays.find(
+							day => day.date === d.date,
+						);
 
-					if (filteredTasks.length !== scheduleDay.tasks.length) {
-						filteredTasks.forEach((t, i) => {
-							t.schedulePosition = i;
-						});
-					}
+						if (scheduledFor) {
+							scheduledFor.position = i;
+						}
 
-					scheduleDay.tasks = filteredTasks;
+						t.schedulePosition = i;
+					});
 				}
-			}
+
+				d.tasks = filteredTasks;
+			});
 		});
 	},
 };

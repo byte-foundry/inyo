@@ -37,6 +37,20 @@ export default {
 				},
 			};
 		}
+
+		if (
+			query.variables.schedule === 'FINISHED_TIME_IT_TOOK_NULL'
+			&& task.status === 'FINISHED'
+			&& task.timeItTook === null
+		) {
+			return {
+				...query.result,
+				me: {
+					...query.result.me,
+					tasks: [...tasks, task],
+				},
+			};
+		}
 	},
 	getSchedule: ({mutation, query}) => {
 		const task = mutation.result.data.unfocusTask;

@@ -552,7 +552,7 @@ const Schedule = ({
 								&& task.timeItTook !== null
 									? task.timeItTook
 									: task.unit)
-									/ task.scheduledForDays.length,
+									/ (task.scheduledForDays.length || 1),
 							0,
 						)
 						- timeUsedByEvent;

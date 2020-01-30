@@ -4,6 +4,22 @@
 	src: url('/utils/fonts/WorkSans-Italic.otf') format('opentype');
 }
 
+@media screen and (max-width: 640px) {
+	#intercom-container {
+		display: none !important;
+	}
+
+	[data-reach-dialog-overlay] {
+		z-index: 1;
+	}
+
+	#calendar-heatmap {
+		max-width: calc(100vh + 1rem);
+		overflow-x: scroll;
+		margin-right: -1rem;
+	}
+}
+
 body {
 	margin: 0;
 	padding: 0;

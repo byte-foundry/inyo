@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
@@ -49,6 +49,10 @@ const googleLogo = <img src={GoogleGLogo} />;
 const Container = styled('div')`
 	margin-top: 3rem;
 	max-width: 100vw;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin-top: 0;
+	}
 `;
 
 const Week = styled('div')`
@@ -61,7 +65,52 @@ const Week = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-flow: column;
+		background-color: transparent;
 	}
+`;
+
+const DayTitle = styled('span')`
+	color: inherit;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	display: block;
+	text-align: center;
+	margin: 0.4rem auto;
+	padding: 0.1rem 0.5rem 0;
+	border-radius: 4px;
+
+	${props => props.selected
+		&& `
+		color: ${primaryWhite};
+		background: ${primaryPurple};
+		font-weight: 500;
+	`}
+
+	i {
+		display: none !important;
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		text-align: left;
+		font-size: 1.25rem;
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		border: 1px solid ${lightGrey};
+		color: ${primaryGrey};
+
+		i {
+			display: flex !important;
+		}
+	}
+`;
+
+const DayTasks = styled('div')`
+	color: ${accentGrey};
+	display: ${props => (props.isPastDay ? 'none' : 'flex')};
+	flex-direction: column;
+	flex: 1;
 `;
 
 const Day = styled('div')`
@@ -98,31 +147,25 @@ const Day = styled('div')`
 		  transparent 40px
 		);
 	`}
-`;
 
-const DayTitle = styled('span')`
-	color: inherit;
-	text-transform: uppercase;
-	font-size: 1.25rem;
-	display: block;
-	text-align: left;
-	margin: 0.4rem 0;
-	padding: 0.1rem 0.5rem 0;
-	border-radius: 4px;
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0;
 
-	${props => props.selected
-		&& `
-		color: ${primaryWhite};
-		background: ${primaryPurple};
-		font-weight: 500;
-	`}
-`;
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
+			margin-bottom: ${props => (props.isOpen ? '0' : '1rem')};
+		}
 
-const DayTasks = styled('div')`
-	color: ${accentGrey};
-	display: flex;
-	flex-direction: column;
-	flex: 1;
+		&:after {
+			display: none;
+		}
+
+		${DayTasks} {
+			display: ${props => (props.isOpen ? 'flex' : 'none')}
+		}
+		${DayTitle} {
+			margin-bottom: ${props => props.isOpen && '1rem'};
+		}
+	}
 `;
 
 const ScheduleNav = styled('div')`
@@ -400,6 +443,18 @@ const Schedule = ({
 		day => day.tasks.length === 0 && day.events.length === 0,
 	);
 
+	// all days in the week are closed except the current day
+	const [openDays, setOpenDays] = useState({
+		0: false,
+		1: false,
+		2: false,
+		3: false,
+		4: false,
+		5: false,
+		6: false,
+		[moment().day()]: true,
+	});
+
 	return (
 		<Container>
 			<ScheduleNav>
@@ -504,6 +559,10 @@ const Schedule = ({
 						moment(),
 						'day',
 					);
+					const isCurrentDay = moment(day.momentDate).isSame(
+						moment(),
+						'day',
+					);
 
 					let stat;
 
@@ -569,7 +628,12 @@ const Schedule = ({
 					}
 
 					return (
-						<Day isOff={!day.workedDay}>
+						<Day
+							isPastDay={isPastDay}
+							isOff={!day.workedDay}
+							isOpen={openDays[day.momentDate.day()]}
+							isCurrentDay={isCurrentDay}
+						>
 							<DayTitle
 								selected={moment().isSame(
 									day.momentDate,
@@ -594,6 +658,22 @@ const Schedule = ({
 											? undefined
 											: '2-digit',
 									})}
+								<MaterialIcon
+									icon={
+										openDays[day.momentDate.day()]
+											? 'unfold_less'
+											: 'unfold_more'
+									}
+									size="tiny"
+									color={primaryGrey}
+									onClick={() => setOpenDays({
+										...openDays,
+										[day.momentDate.day()]: !openDays[
+											day.momentDate.day()
+										],
+									})
+									}
+								/>
 							</DayTitle>
 							<DroppableDayTasks id={day.date}>
 								<div>

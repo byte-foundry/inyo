@@ -39,6 +39,8 @@ const Container = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		max-width: 100%;
+		margin: 0 auto 3.5rem auto;
+		overflow-x: hidden;
 	}
 `;
 
@@ -60,6 +62,10 @@ const Card = styled('div')`
 	min-height: 200px;
 	position: relative;
 	overflow: hidden;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		min-height: 230px;
+	}
 `;
 
 const Number = styled(P)`
@@ -102,11 +108,24 @@ const Section = styled('div')`
 	margin-bottom: 5rem;
 `;
 
+const CalendarHeatmapCustom = styled(CalendarHeatmap)`
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		max-width: 100vh !important;
+		margin-right: -1rem !important;
+		overflow-x: scroll !important;
+	}
+`;
+
 const PiesWrapper = styled('div')`
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	justify-content: space-between;
 	gap: 80px;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: flex;
+		flex-direction: column;
+	}
 `;
 
 const PieWrapper = styled('div')`
@@ -114,6 +133,11 @@ const PieWrapper = styled('div')`
 	grid-template-columns: 1fr 200px;
 	align-items: center;
 	grid-gap: 20px;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		grid-template-columns: 25% 1fr;
+		grid-gap: 10px;
+	}
 `;
 
 const filterTasks = (
@@ -512,7 +536,7 @@ const Stats = ({history, location}) => {
 						</fbt>
 					</HelpAndTooltip>
 				</PageSubHeading>
-				<CalendarHeatmap
+				<CalendarHeatmapCustom
 					key={overview}
 					data={activities}
 					color={primaryPurple}

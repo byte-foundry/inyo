@@ -172,7 +172,6 @@ const TaskContent = styled('div')`
 	margin-top: ${props => (props.noData ? '0.9rem' : '1rem')};
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		padding-left: 2rem;
 		display: flex;
 	}
 `;

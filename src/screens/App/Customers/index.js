@@ -46,6 +46,10 @@ const Container = styled('div')`
 	flex: 1;
 	max-width: 1200px;
 	margin: 3.5rem auto;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0 auto 3.5rem auto;
+	}
 `;
 
 const Forms = styled('div')`
@@ -56,7 +60,7 @@ const Forms = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		align-items: stretch;
 		margin-bottom: 2rem;
 	}

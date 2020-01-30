@@ -7,6 +7,7 @@ import Logo from '../../utils/icons/inyo-topbar-logo.svg';
 import {
 	darkGrey,
 	primaryBlack,
+	primaryGrey,
 	primaryWhite,
 } from '../../utils/new/design-system';
 
@@ -22,17 +23,35 @@ export const TopBarLogo = styled(NavLink)`
 	background-position: center;
 	background-size: cover;
 	display: block;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		background: none;
+		background-color: ${primaryGrey};
+		mask-image: url(${Logo});
+		mask-repeat: no-repeat;
+		mask-position: center;
+		mask-size: 20px;
+	}
 `;
 
 export const TopBarMenu = styled('div')`
 	display: flex;
 	flex-flow: column nowrap;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: grid;
+		grid-template-columns: 30% 30% 30%;
+		padding: 0 5%;
+		width: 90%;
+		grid-auto-rows: 120px;
+	}
 `;
 
 export const TopBarLogoNotif = styled(TopBarMenu)`
 	justify-content: space-between;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: flex;
 		justify-content: start;
 		flex-direction: row;
 
@@ -50,7 +69,6 @@ export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 	flex-direction: columns;
 	transition: all 400ms ease;
 	padding: 0.5rem 1rem;
-	min-width: 170px;
 
 	i {
 		margin-right: 12px;
@@ -60,6 +78,25 @@ export const TopBarMenuLink = styled(ForwardedRefNavLink)`
 	&.active {
 		color: ${primaryBlack};
 		background-color: ${primaryWhite};
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
+		color: ${darkGrey};
+		min-width: auto;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+
+		i {
+			margin: 0 0 10px 0;
+			font-size: 40px !important;
+		}
+
+		&:hover,
+		&.active {
+			color: ${primaryGrey};
+		}
 	}
 `;
 
@@ -85,21 +122,19 @@ const TopBar = styled('div')`
 		display: ${props => (props.visible ? 'inline' : 'none')};
 	}
 
+	a {
+		padding-right: ${props => (props.visible ? '1rem' : '0')};
+	}
+
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		margin: 0;
-		padding: 0;
-		padding-top: ${props => (props.visible ? '28px' : '10px')};
-
+		display: ${props => (props.visible ? 'flex' : 'none !important')};
 		position: fixed;
-		overflow: hidden;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 65px;
 
-		left: ${props => (props.visible ? '0' : 'auto')};
-		top: ${props => (props.visible ? '0' : 'auto')};
-		right: ${props => (props.visible ? '0' : '1em')};
-		bottom: ${props => (props.visible ? '0' : 'auto')};
-		height: ${props => (props.visible ? 'auto' : '30px')};
-		width: ${props => (props.visible ? 'auto' : '40px;')};
-		border-radius: ${props => (props.visible ? '0' : '50%;')};
+		background-color: ${primaryWhite};
 	}
 `;
 

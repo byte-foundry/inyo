@@ -18,6 +18,7 @@ import {
 import {
 	A,
 	accentGrey,
+	Actions,
 	Button,
 	FilterInput,
 	Heading,
@@ -45,6 +46,10 @@ const Container = styled('div')`
 	flex: 1;
 	max-width: 1200px;
 	margin: 3.5rem auto;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0 auto 3.5rem auto;
+	}
 `;
 
 const Table = styled('table')`
@@ -88,6 +93,13 @@ const ActionCell = styled(Cell)`
 	justify-content: flex-end;
 	align-items: center;
 	opacity: ${props => (props.unhidden ? 1 : 0)};
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
+		button + button {
+			margin-left: 0;
+		}
+	}
 `;
 
 const Row = styled('tr')`
@@ -121,27 +133,6 @@ const Row = styled('tr')`
 	}
 `;
 
-const Actions = styled('div')`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: flex-end;
-
-	* ~ * {
-		margin-left: 2rem;
-	}
-
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		flex-direction: column-reverse;
-		justify-content: flex-start;
-
-		* ~ * {
-			margin-left: 0;
-			margin-bottom: 0.5rem;
-		}
-	}
-`;
-
 const Forms = styled('div')`
 	display: grid;
 	grid-template-columns: 50% 1fr;
@@ -150,7 +141,7 @@ const Forms = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		align-items: stretch;
 		margin-bottom: 2rem;
 	}

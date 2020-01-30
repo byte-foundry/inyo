@@ -72,10 +72,10 @@ const Week = styled('div')`
 const DayTitle = styled('span')`
 	color: inherit;
 	text-transform: uppercase;
-	font-size: 0.75rem;
+	font-size: 1.25rem;
 	display: block;
-	text-align: center;
-	margin: 0.4rem auto;
+	text-align: left;
+	margin: 0.4rem 0;
 	padding: 0.1rem 0.5rem 0;
 	border-radius: 4px;
 

@@ -75,26 +75,7 @@ function TaskActivationHeader({
 								item.linkedCustomer.lastName,
 							)})`
 						}
-						onCommit={() => {
-							if (item.type === 'CONTENT_ACQUISITION') {
-								focusTask({
-									variables: {itemId: item.id},
-									optimisticResponse: {
-										focusTask: {
-											...item,
-											scheduledFor: moment().format(
-												moment.HTML5_FMT.DATE,
-											),
-											schedulePosition: -1,
-											isFocused: true,
-										},
-									},
-								});
-							}
-							else {
-								setIsActivating(true);
-							}
-						}}
+						onCommit={() => setIsActivating(true)}
 					/>
 				)) || (
 					<div>
@@ -121,26 +102,7 @@ function TaskActivationHeader({
 								item.linkedCustomer.lastName,
 							)})`
 						}
-						onCommit={() => {
-							if (item.type === 'CONTENT_ACQUISITION') {
-								focusTask({
-									variables: {itemId: item.id},
-									optimisticResponse: {
-										focusTask: {
-											...item,
-											scheduledFor: moment().format(
-												moment.HTML5_FMT.DATE,
-											),
-											schedulePosition: -1,
-											isFocused: true,
-										},
-									},
-								});
-							}
-							else {
-								setIsActivating(true);
-							}
-						}}
+						onCommit={() => setIsActivating(true)}
 					/>
 				))
 					|| (item.linkedCustomer && item.attachments.length === 0 && (

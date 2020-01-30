@@ -215,7 +215,7 @@ const TaskCard = withRouter(
 				</CardTitle>
 				<CardIndex>
 					{task.scheduledForDays.length > 1
-						? `${scheduledDayIndex + 1} / ${
+						? `${scheduledDayIndex + 1}/${
 							task.scheduledForDays.length
 						  }`
 						: ''}

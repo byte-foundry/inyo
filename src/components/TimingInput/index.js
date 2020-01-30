@@ -6,7 +6,10 @@ import {BREAKPOINTS} from '../../utils/constants';
 import {Select} from '../../utils/new/design-system';
 
 const Container = styled('div')`
-	@media (max-width: ${BREAKPOINTS.mobile}px) {
+	@media (min-width: ${BREAKPOINTS.mobile}px) {
+		display: flex;
+		flex: 1;
+		align-items: center;
 	}
 `;
 

@@ -532,6 +532,9 @@ const Schedule = ({
 							d => d.date === day.date,
 						);
 
+						if (!aDay) return 1;
+						if (!bDay) return -1;
+
 						return aDay.position - bDay.position;
 					});
 					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));

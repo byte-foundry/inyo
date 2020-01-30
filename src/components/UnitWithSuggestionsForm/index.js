@@ -17,11 +17,11 @@ const Container = styled('div')`
 	display: flex;
 	margin-bottom: 10px;
 	gap: 5px;
+	flex-wrap: wrap;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		display: grid;
-		width: 100%;
-		grid-template-columns: 22% 22% 22% 34%;
+		display: flex;
+		width: 75vw;
 	}
 `;
 

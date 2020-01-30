@@ -371,7 +371,7 @@ const ResponsiveDialog = styled(Dialog)`
 		min-width: initial;
 		width: 100vw;
 		padding: 0;
-		margin-top: 20vh;
+		margin-top: 2rem;
 	}
 `;
 
@@ -442,12 +442,13 @@ export const ModalCloseIcon = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		right: 1rem;
-		top: -4.5rem;
+		right: 1.5rem;
+		top: 5rem;
 		font-size: 2rem;
-		background: transparent;
-		width: 2rem;
-		height: 2rem;
+		width: 3rem;
+		height: 3rem;
+		z-index: 1;
+		position: fixed;
 	}
 `;
 

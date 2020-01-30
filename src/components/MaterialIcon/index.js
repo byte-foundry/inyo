@@ -1,7 +1,7 @@
 import './index.css';
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {forwardRef} from 'react';
 import WebFont from 'webfontloader';
 
 const sizes = {
@@ -22,7 +22,7 @@ WebFont.load({
 	timeout: 5000,
 });
 
-function MaterialIcon(props) {
+const MaterialIcon = forwardRef((props, ref) => {
 	const {
 		size,
 		invert,
@@ -48,11 +48,11 @@ function MaterialIcon(props) {
 	const clsName = `material-icons ${sizeMapped} ${defaultColor} ${inactiveColor} ${className}`;
 
 	return (
-		<i {...rest} className={clsName} style={styleOverride}>
+		<i {...rest} className={clsName} style={styleOverride} ref={ref}>
 			{icon}
 		</i>
 	);
-}
+});
 
 MaterialIcon.propTypes = {
 	icon: PropTypes.string.isRequired,

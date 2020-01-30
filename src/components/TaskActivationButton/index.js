@@ -6,11 +6,7 @@ import {UNFOCUS_TASK} from '../../utils/mutations';
 import BistableButton from '../BistableButton';
 
 const TaskActivationButton = ({
-	customerToken,
-	taskId,
-	isActive,
-	disabled,
-	onCommit,
+	taskId, isActive, disabled, onCommit,
 }) => {
 	const [unfocusItem] = useMutation(UNFOCUS_TASK);
 
@@ -22,12 +18,12 @@ const TaskActivationButton = ({
 			disabled={disabled}
 			trueLabel={
 				<fbt project="inyo" desc="remove task from day">
-					Enlever cette tâche de mon programme du jour
+					Déprogrammer cette tâche
 				</fbt>
 			}
 			trueTooltip={
 				<fbt project="inyo" desc="remove task from day tooltip">
-					Cette tâche est prévue pour aujourd'hui
+					Cette tâche est programmée dans votre calendrier
 				</fbt>
 			}
 			falseLabel={
@@ -41,8 +37,7 @@ const TaskActivationButton = ({
 				</fbt>
 			}
 			commit={onCommit}
-			reverse={() => unfocusItem({variables: {itemId: taskId, token: customerToken}})
-			}
+			reverse={() => unfocusItem({variables: {itemId: taskId}})}
 		/>
 	);
 };

@@ -10,7 +10,7 @@ import {Editor} from 'slate-react';
 
 import fbt from '../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../utils/apollo-hooks';
-import {LABEL_EMAIL_PARAM} from '../../utils/constants';
+import {BREAKPOINTS, LABEL_EMAIL_PARAM} from '../../utils/constants';
 import {Loading} from '../../utils/content';
 import {
 	SEND_CUSTOM_EMAIL_PREVIEW,
@@ -98,6 +98,10 @@ const TestEmailLinkContainer = styled('div')`
 	justify-content: flex-end;
 	flex: column;
 	margin-bottom: 1rem;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 1rem 0;
+	}
 `;
 const TestEmailLink = styled('div')`
 	color: ${primaryPurple};
@@ -136,6 +140,13 @@ const ParamDisplay = styled('span')`
 const ButtonsWrap = styled('div')`
 	display: flex;
 	justify-content: space-between;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column-reverse;
+		button {
+			margin: 1rem 0;
+		}
+	}
 `;
 
 const renderInline = ({attributes, node, isSelected}, editor, next) => {

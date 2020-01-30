@@ -70,7 +70,7 @@ const IconWrap = styled('div')`
 	}
 
   position: relative;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   z-index: 0;

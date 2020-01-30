@@ -3,6 +3,22 @@ import produce from 'immer';
 import {isCustomerTask} from '../functions';
 
 export default {
+	getPaymentAndCurrentTask: ({mutation, query}) => {
+		const {currentTask} = query.result.me;
+		const finishedTask = mutation.result.data.finishItem;
+
+		if (currentTask && currentTask.id === finishedTask.id) {
+			return {
+				...query.result,
+				me: {
+					...query.result.me,
+					currentTask: null,
+				},
+			};
+		}
+
+		return query.result;
+	},
 	getAllTasksShort: ({mutation, query}) => {
 		const task = mutation.result.data.finishItem;
 
@@ -20,7 +36,10 @@ export default {
 						t => t.id !== task.id,
 					);
 
-					if (task.timeItTook === null) {
+					if (
+						task.status === 'FINISHED'
+						&& task.timeItTook === null
+					) {
 						draft.me.tasks.push(task);
 					}
 				}
@@ -31,40 +50,35 @@ export default {
 		const task = {...mutation.result.data.finishItem};
 
 		return produce(query.result, (draft) => {
-			if (task.scheduledFor && !isCustomerTask(task.type)) {
-				const {schedule} = draft.me;
+			const {schedule} = draft.me;
 
-				const scheduleDay = schedule.find(
-					d => d.date === task.scheduledFor,
+			if (!isCustomerTask(task.type)) return;
+
+			schedule.forEach((scheduleDay) => {
+				// remove old
+				const filteredTasks = scheduleDay.tasks.filter(
+					t => t.id !== task.id,
 				);
 
-				if (scheduleDay) {
-					// remove old
-					const filteredTasks = scheduleDay.tasks.filter(
-						t => t.id !== task.id,
-					);
-
-					if (filteredTasks.length !== scheduleDay.tasks.length) {
-						filteredTasks.forEach((t, i) => {
-							t.schedulePosition = i;
-						});
-					}
-
-					scheduleDay.tasks = filteredTasks;
-
-					// add new
-					if (scheduleDay) {
-						scheduleDay.tasks.splice(
-							task.schedulePosition,
-							0,
-							task,
-						);
-						scheduleDay.tasks.forEach((t, i) => {
-							t.schedulePosition = i;
-						});
-					}
+				if (filteredTasks.length !== scheduleDay.tasks.length) {
+					filteredTasks.forEach((t, i) => {
+						t.schedulePosition = i;
+					});
 				}
-			}
+
+				scheduleDay.tasks = filteredTasks;
+
+				const scheduleLink = task.scheduledForDays.find(
+					day => day.date === scheduleDay.date,
+				);
+
+				if (scheduleLink) {
+					scheduleDay.tasks.splice(scheduleLink.position, 0, task);
+					scheduleDay.tasks.forEach((t, i) => {
+						t.schedulePosition = i;
+					});
+				}
+			});
 		});
 	},
 };

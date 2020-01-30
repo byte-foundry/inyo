@@ -298,8 +298,7 @@ const editableCss = css`
 
 const DisableTask = styled('div')`
 	pointer-events: none;
-	margin: 1rem 0 -6rem 0;
-	transform: scale(0.8);
+	margin: 1rem 0 0 0;
 	transform-origin: left top;
 `;
 

@@ -248,7 +248,7 @@ export const LABEL_EMAIL_PARAM = {
 	'task.attachments': {
 		text: () => fbt('Fichiers joints à la tâche', 'third reminder customer email'),
 	},
-	'task.listOfAttachmentsNotUploaded': {
+	'task.listOfAttachmentNotUploaded': {
 		text: () => fbt('Fichiers à uploader', 'first invoice email'),
 	},
 	'task.threadOfComments': {

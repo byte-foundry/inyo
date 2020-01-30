@@ -33,6 +33,7 @@ const {body} = shevy;
 
 export const Body = styled('div')`
 	${body};
+	padding-bottom: 100px;
 `;
 
 const getButtonHoveredColor = (props) => {
@@ -235,7 +236,9 @@ export const Button = styled('button')`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
 		padding: 0.6rem 0.8rem;
-		display: initial;
+		flex-direction: row;
+		align-items: center;
+		display: flex;
 	}
 `;
 
@@ -579,7 +582,7 @@ export const UL = styled('ul')`
 export const LeftMenu = styled('div')`
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: end;
 	padding: 4rem 3rem;
 
 	> div {
@@ -592,11 +595,28 @@ export const LeftMenu = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: row;
-		justify-content: space-between;
 		padding: 1rem;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		border-top: 1px solid ${lightGrey};
+		z-index: 99;
+		background: ${primaryWhite};
 
 		> div {
-			margin-bottom: 0;
+			margin: 0;
+			flex: 1;
+			align-items: center;
+
+			div,
+			a {
+				margin: 0 auto;
+				justify-content: space-evenly;
+				align-items: center;
+				flex: 1;
+				text-align: center;
+			}
 		}
 	}
 `;
@@ -816,8 +836,8 @@ export const StickyHeader = styled('div')`
 		margin-left: -2rem;
 		margin-right: -2rem;
 		padding: 1rem 60px;
-		align-items: baseline;
 		position: static;
+		align-items: center;
 	}
 `;
 
@@ -881,9 +901,9 @@ export const ScrollHelper = styled('div')`
 	height: 60px;
 	position: fixed;
 	right: 20px;
-	bottom: 20%;
+	bottom: 150px;
 	background-color: rgba(180, 180, 180, 0.5);
-	z-index: 100;
+	z-index: 1;
 	border-radius: 50%;
 	align-items: center;
 	justify-content: center;
@@ -901,10 +921,9 @@ export const ScrollHelper = styled('div')`
 `;
 
 export const TaskCardElem = styled('div')`
-	background: ${props => (props.isLive ? primaryPurple : primaryWhite)};
-	opacity: ${props => (props.isOver ? '.5' : 1)};
+	background: ${props => (props.isLive ? primaryPurple : lightGrey)};
+	opacity: ${props => (props.isOver ? '.4' : 1)};
 	border: 1px solid ${mediumGrey};
-	box-shadow: 3px 3px 6px ${mediumGrey};
 	${props => props.customerTask && 'border-bottom: 2px solid #ff3366;'}
 	border-radius: 3px;
 	padding: 8px;
@@ -1053,6 +1072,14 @@ export const Dropdown = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: calc(100% - 10px);
+		position: fixed !important;
+		padding-top: 3rem;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 80px !important;
+		height: auto !important;
+		z-index: 101;
 	}
 `;
 
@@ -1165,7 +1192,7 @@ export const Actions = styled('div')`
 	}
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
-		flex-direction: column-reverse;
+		flex-direction: column;
 		justify-content: flex-start;
 
 		* ~ * {

@@ -16,6 +16,10 @@ const EmailContainer = styled('div')`
 	flex: 1;
 	max-width: 1200px;
 	margin: 3.5rem auto;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0 auto 3.5rem auto;
+	}
 `;
 
 const Main = styled('div')`
@@ -25,6 +29,12 @@ const Main = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;
+	}
+`;
+
+const FlexRowContainer = styled(FlexRow)`
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		flex-direction: column;
 	}
 `;
 
@@ -78,13 +88,13 @@ const CustomizeEmail = ({categories}) => {
 					</fbt>
 				</Heading>
 			</HeadingRow>
-			<FlexRow>
+			<FlexRowContainer>
 				<CustomEmailSidebar categories={categories} />
 				<EmailCustomizer
 					emailType={emailType}
 					emailTypeId={emailType.id}
 				/>
-			</FlexRow>
+			</FlexRowContainer>
 		</EmailContainer>
 	);
 };

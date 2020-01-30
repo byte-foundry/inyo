@@ -20,11 +20,11 @@ import {
 	FlexRow,
 	LoadingLogo,
 	ModalContainer as Modal,
-	ModalElem
+	ModalElem,
 } from '../../../utils/content';
 import {
 	isCustomerTask,
-	taskFulfillsActivationCriteria
+	taskFulfillsActivationCriteria,
 } from '../../../utils/functions';
 import IllusBackground from '../../../utils/images/empty-tasks-background.svg';
 import IllusFigure from '../../../utils/images/empty-tasks-illus.svg';
@@ -34,7 +34,7 @@ import {
 	IllusFigureContainer,
 	IllusText,
 	P,
-	ScrollHelper
+	ScrollHelper,
 } from '../../../utils/new/design-system';
 import {GET_ALL_TASKS_SHORT} from '../../../utils/queries';
 import useScheduleData from '../../../utils/useScheduleData';
@@ -57,12 +57,12 @@ function DraggableTask({
 	userId,
 	customerToken,
 	baseUrl,
-	setIsDragging = () => {}
+	setIsDragging = () => {},
 }) {
 	const [, drag] = useDrag({
 		item: {
 			id: item.id,
-			type: DRAG_TYPES.TASK
+			type: DRAG_TYPES.TASK,
 		},
 		begin() {
 			setIsDragging(true);
@@ -70,12 +70,12 @@ function DraggableTask({
 				type: item.type,
 				linkedCustomer: item.linkedCustomer, // we need this
 				attachments: item.attachments, // and this to check for activation criteria fulfillment
-				id: item.id
+				id: item.id,
 			};
 		},
 		end() {
 			setIsDragging(false);
-		}
+		},
 	});
 
 	if (isCustomerTask(item.type) && !item.linkedCustomer) {
@@ -114,7 +114,7 @@ const LoadingScreen = () => (
 				top: '0',
 				bottom: '0',
 				right: '0',
-				left: '0'
+				left: '0',
 			}}
 		>
 			<LoadingLogo />
@@ -127,87 +127,92 @@ const DashboardTasks = ({location, history}) => {
 	const [isDragging, setIsDragging] = useState(false);
 	const query = useMemo(
 		() => new URLSearchParams(prevSearch || location.search),
-		[prevSearch, location.search]
+		[prevSearch, location.search],
 	);
 
-	const startingFrom =
-		query.get('from') ||
-		moment()
+	const startingFrom
+		= query.get('from')
+		|| moment()
 			.startOf('week')
 			.format(moment.HTML5_FMT.DATE);
 
 	const {data, loading, error} = useQuery(GET_ALL_TASKS_SHORT, {
 		variables: {schedule: 'UNSCHEDULED'},
-		pollInterval: 1000 * 60 * 5 // refresh tasks every 5 min
+		pollInterval: 1000 * 60 * 5, // refresh tasks every 5 min
 	});
 
 	const {
 		assistantName,
 		workingTime,
 		workingDays,
-		hasFullWeekSchedule
+		hasFullWeekSchedule,
 	} = useUserInfos();
 	const [focusTask] = useMutation(FOCUS_TASK);
 	const {
 		loading: loadingSchedule,
 		tasksToReschedule,
-		scheduledTasksPerDay
+		scheduledTasksPerDay,
 	} = useScheduleData({startingFrom});
 
 	const onMoveTask = useCallback(
-		({task, scheduledFor, position}) => {
+		({
+			task, from, scheduledFor, position, action = 'MOVE',
+		}) => {
 			if (isCustomerTask(task.type) && !task.scheduledFor) {
 				history.push({
 					pathname: `/app/dashboard/${task.id}`,
 					state: {
 						prevSearch: location.search,
 						isActivating: taskFulfillsActivationCriteria(task),
-						scheduledFor
-					}
+						scheduledFor,
+					},
 				});
 
 				return;
 			}
 
-			if (isCustomerTask(task.type) && task.scheduledFor !== scheduledFor)
-				return;
+			if (
+				isCustomerTask(task.type)
+				&& task.scheduledForDays.some(day => day.date === scheduledFor)
+			) return;
 
 			focusTask({
 				variables: {
 					itemId: task.id,
+					from,
 					for: scheduledFor,
-					schedulePosition: position
+					schedulePosition: position,
+					action,
 				},
 				optimisticReponse: {
 					focusTask: {
 						itemId: task.id,
 						for: scheduledFor,
-						schedulePosition: position
-					}
-				}
+						schedulePosition: position,
+					},
+				},
 			});
 		},
-		[focusTask, data && data.me.tasks, history, location.search]
+		[focusTask, data && data.me.tasks, history, location.search],
 	);
 
 	const projectId = query.get('projectId');
 	const filter = query.get('filter');
 	const tags = useMemo(() => query.getAll('tags'), [
-		query.getAll('tags').length
+		query.getAll('tags').length,
 	]);
 	const linkedCustomerId = query.get('customerId');
 
 	if (
-		error &&
-		!(
-			data.me &&
-			typeof error.message === 'string' &&
-			(error.message.includes('NetworkError') ||
-				error.message.includes('Network error') ||
-				error.message.includes('Whoops'))
+		error
+		&& !(
+			data.me
+			&& typeof error.message === 'string'
+			&& (error.message.includes('NetworkError')
+				|| error.message.includes('Network error')
+				|| error.message.includes('Whoops'))
 		)
-	)
-		throw error;
+	) throw error;
 
 	const setProjectSelected = useCallback(
 		(selected, removeCustomer) => {
@@ -217,7 +222,8 @@ const DashboardTasks = ({location, history}) => {
 				const {value: selectedProjectId} = selected;
 
 				newQuery.set('projectId', selectedProjectId);
-			} else if (newQuery.has('projectId')) {
+			}
+			else if (newQuery.has('projectId')) {
 				newQuery.delete('projectId');
 			}
 
@@ -227,18 +233,19 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query]
+		[history, query],
 	);
 
 	const setCustomerSelected = useCallback(
-		selected => {
+		(selected) => {
 			const newQuery = new URLSearchParams(query);
 
 			if (selected) {
 				const {value: selectedCustomerId} = selected;
 
 				newQuery.set('customerId', selectedCustomerId);
-			} else if (newQuery.has('customerId')) {
+			}
+			else if (newQuery.has('customerId')) {
 				newQuery.delete('customerId');
 			}
 
@@ -248,11 +255,11 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query]
+		[history, query],
 	);
 
 	const setFilterSelected = useCallback(
-		selected => {
+		(selected) => {
 			const newQuery = new URLSearchParams(query);
 
 			if (selected) {
@@ -263,11 +270,11 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query]
+		[history, query],
 	);
 
 	const setTagSelected = useCallback(
-		selected => {
+		(selected) => {
 			const newQuery = new URLSearchParams(query);
 
 			if (selected) {
@@ -277,47 +284,43 @@ const DashboardTasks = ({location, history}) => {
 
 			history.push(`/app/dashboard?${newQuery.toString()}`);
 		},
-		[history, query]
+		[history, query],
 	);
 
 	const [
 		unscheduledTasks,
 		unscheduledFilteredTasks,
 		ongoingProjectAndNoProjectTask,
-		createTaskComponent
+		createTaskComponent,
 	] = useMemo(() => {
 		if (!loading) {
 			const {
-				me: {id, tasks}
+				me: {id, tasks},
 			} = data;
 
 			const unscheduledTasks = tasks.filter(
-				t => !(t.assignee && t.assignee.id !== id)
+				t => !(t.assignee && t.assignee.id !== id),
 			);
 
 			const ongoingProjectAndNoProjectTask = unscheduledTasks.filter(
-				task =>
-					!task.section ||
-					task.section.project.status === 'ONGOING' ||
-					projectId
+				task => !task.section
+					|| task.section.project.status === 'ONGOING'
+					|| projectId,
 			);
 
 			const unscheduledFilteredTasks = ongoingProjectAndNoProjectTask.filter(
-				task =>
-					(!linkedCustomerId ||
-						((task.linkedCustomer &&
-							task.linkedCustomer.id === linkedCustomerId) ||
-							(task.section &&
-								task.section.project.customer &&
-								task.section.project.customer.id ===
-									linkedCustomerId))) &&
-					(!filter || task.status === filter || filter === 'ALL') &&
-					(!projectId ||
-						(task.section &&
-							task.section.project.id === projectId)) &&
-					tags.every(tag =>
-						task.tags.some(taskTag => taskTag.id === tag)
-					)
+				task => (!linkedCustomerId
+						|| ((task.linkedCustomer
+							&& task.linkedCustomer.id === linkedCustomerId)
+							|| (task.section
+								&& task.section.project.customer
+								&& task.section.project.customer.id
+									=== linkedCustomerId)))
+					&& (!filter || task.status === filter || filter === 'ALL')
+					&& (!projectId
+						|| (task.section
+							&& task.section.project.id === projectId))
+					&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 			);
 
 			const createTaskComponent = ({item, customerToken}) => (
@@ -335,7 +338,7 @@ const DashboardTasks = ({location, history}) => {
 				unscheduledTasks,
 				unscheduledFilteredTasks,
 				ongoingProjectAndNoProjectTask,
-				createTaskComponent
+				createTaskComponent,
 			];
 		}
 
@@ -347,7 +350,7 @@ const DashboardTasks = ({location, history}) => {
 		linkedCustomerId,
 		filter,
 		tags,
-		setIsDragging
+		setIsDragging,
 	]);
 
 	return (
@@ -358,14 +361,14 @@ const DashboardTasks = ({location, history}) => {
 			<Schedule
 				loading={loadingSchedule}
 				startingFrom={startingFrom}
-				onChangeWeek={newWeek => {
+				onChangeWeek={(newWeek) => {
 					const newQuery = new URLSearchParams(query);
 
 					newQuery.set('from', newWeek);
 
 					history.replace({
 						...location,
-						search: newQuery.toString()
+						search: newQuery.toString(),
 					});
 				}}
 				days={scheduledTasksPerDay}
@@ -395,15 +398,14 @@ const DashboardTasks = ({location, history}) => {
 						marginTop
 					/>
 					<Loading loading={loading} fallback={<LoadingScreen />}>
-						{() => {
-							return unscheduledTasks.length !== 0 ||
-								unscheduledFilteredTasks.length !==
-									unscheduledTasks.length ? (
+						{() => (unscheduledTasks.length !== 0
+								|| unscheduledFilteredTasks.length
+									!== unscheduledTasks.length ? (
 								<TasksList
 									style={TasksListStyle}
 									hasFilteredItems={
-										ongoingProjectAndNoProjectTask.length !==
-										unscheduledFilteredTasks.length
+										ongoingProjectAndNoProjectTask.length
+										!== unscheduledFilteredTasks.length
 									}
 									items={unscheduledFilteredTasks}
 									baseUrl="dashboard"
@@ -429,8 +431,7 @@ const DashboardTasks = ({location, history}) => {
 										</IllusText>
 									</IllusContainer>
 								</div>
-							);
-						}}
+							))}
 					</Loading>
 				</div>
 			</FlexRowMobile>
@@ -438,20 +439,18 @@ const DashboardTasks = ({location, history}) => {
 				path="/app/dashboard/:taskId"
 				render={({match, history, location: {state = {}}}) => (
 					<Modal
-						onDismiss={() =>
-							history.push(
-								`/app/dashboard${state.prevSearch || ''}`
-							)
+						onDismiss={() => history.push(
+							`/app/dashboard${state.prevSearch || ''}`,
+						)
 						}
 					>
 						<ModalElem>
 							<TaskView
 								id={match.params.taskId}
-								close={() =>
-									history.push(
-										`/app/dashboard${state.prevSearch ||
-											''}`
-									)
+								close={() => history.push(
+									`/app/dashboard${state.prevSearch
+											|| ''}`,
+								)
 								}
 								isActivating={state.isActivating}
 								scheduledFor={state.scheduledFor}

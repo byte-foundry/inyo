@@ -3,7 +3,13 @@ import Portal from '@reach/portal';
 import {useRect} from '@reach/rect';
 import React, {useEffect, useRef, useState} from 'react';
 
-import {accentGrey, Dropdown, gray80} from '../../utils/new/design-system';
+import {BREAKPOINTS} from '../../utils/constants';
+import {
+	accentGrey,
+	Dropdown,
+	gray80,
+	primaryRed,
+} from '../../utils/new/design-system';
 import useOnClickOutside from '../../utils/useOnClickOutside';
 import IconButton from '../IconButton';
 
@@ -13,6 +19,18 @@ const HelpAndTooltipContainer = styled('div')`
 	font-size: 0.9rem;
 	line-height: 1.5;
 	max-width: 400px;
+`;
+
+const Close = styled(IconButton)`
+	display: none;
+	position: fixed;
+	top: 2rem;
+	right: 1rem;
+	z-index: 102;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: block;
+	}
 `;
 
 // From https://github.com/reach/reach-ui/blob/master/packages/tooltip/src/index.js#L487-L523
@@ -85,7 +103,12 @@ const DropdownContent = ({triggerRect, children, onClose}) => {
 };
 
 const HelpAndTooltip = ({
-	icon = 'help', color, children, id,
+	icon = 'help',
+	color,
+	size,
+	children,
+	onOpen = () => {},
+	id,
 }) => {
 	const [open, setOpen] = useState(false);
 	const iconRef = useRef();
@@ -96,13 +119,25 @@ const HelpAndTooltip = ({
 			<IconButton
 				icon={icon}
 				ref={iconRef}
-				size="tiny"
+				size={size || 'tiny'}
 				color={color || accentGrey}
-				onClick={() => setOpen(!open)}
 				id={id}
+				onClick={() => {
+					if (!open) {
+						onOpen();
+					}
+
+					setOpen(!open);
+				}}
 			/>
 			{open && (
 				<Portal>
+					<Close
+						icon="close"
+						size="normal"
+						color={primaryRed}
+						onClick={() => setOpen(false)}
+					/>
 					<DropdownContent
 						triggerRect={triggerRect}
 						children={children}

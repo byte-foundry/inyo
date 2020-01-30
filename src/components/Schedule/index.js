@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from '@emotion/styled/macro';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
@@ -49,6 +49,10 @@ const googleLogo = <img src={GoogleGLogo} />;
 const Container = styled('div')`
 	margin-top: 3rem;
 	max-width: 100vw;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin-top: 0;
+	}
 `;
 
 const Week = styled('div')`
@@ -56,13 +60,57 @@ const Week = styled('div')`
 	flex-direction: row;
 	justify-content: center;
 	border-radius: 8px;
-	background-color: ${lightGrey};
 	min-height: 180px;
 	position: relative;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-flow: column;
+		background-color: transparent;
 	}
+`;
+
+const DayTitle = styled('span')`
+	color: inherit;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	display: block;
+	text-align: center;
+	margin: 0.4rem auto;
+	padding: 0.1rem 0.5rem 0;
+	border-radius: 4px;
+
+	${props => props.selected
+		&& `
+		color: ${primaryWhite};
+		background: ${primaryPurple};
+		font-weight: 500;
+	`}
+
+	i {
+		display: none !important;
+	}
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		text-align: left;
+		font-size: 1.25rem;
+		margin: 0;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		border: 1px solid ${lightGrey};
+		color: ${primaryGrey};
+
+		i {
+			display: flex !important;
+		}
+	}
+`;
+
+const DayTasks = styled('div')`
+	color: ${accentGrey};
+	display: ${props => (props.isPastDay ? 'none' : 'flex')};
+	flex-direction: column;
+	flex: 1;
 `;
 
 const Day = styled('div')`
@@ -99,31 +147,25 @@ const Day = styled('div')`
 		  transparent 40px
 		);
 	`}
-`;
 
-const DayTitle = styled('span')`
-	color: inherit;
-	text-transform: uppercase;
-	font-size: 0.75rem;
-	display: block;
-	text-align: center;
-	margin: 0.4rem auto;
-	padding: 0.1rem 0.5rem 0;
-	border-radius: 4px;
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0;
 
-	${props => props.selected
-		&& `
-		color: ${primaryWhite};
-		background: ${primaryPurple};
-		font-weight: 500;
-	`}
-`;
+		@media (max-width: ${BREAKPOINTS.mobile}px) {
+			margin-bottom: ${props => (props.isOpen ? '0' : '1rem')};
+		}
 
-const DayTasks = styled('div')`
-	color: ${accentGrey};
-	display: flex;
-	flex-direction: column;
-	flex: 1;
+		&:after {
+			display: none;
+		}
+
+		${DayTasks} {
+			display: ${props => (props.isOpen ? 'flex' : 'none')}
+		}
+		${DayTitle} {
+			margin-bottom: ${props => props.isOpen && '1rem'};
+		}
+	}
 `;
 
 const ScheduleNav = styled('div')`
@@ -185,6 +227,10 @@ const EmptyWeekBanner = styled(P)`
 	border: 2px dashed ${primaryPurple};
 	color: ${primaryPurple};
 	pointer-events: none;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: none;
+	}
 `;
 
 const DraggableTaskCard = ({
@@ -193,6 +239,7 @@ const DraggableTaskCard = ({
 	index,
 	scheduledFor,
 	onMove,
+	onCopy,
 	...rest
 }) => {
 	const [unfocusTask] = useMutation(UNFOCUS_TASK);
@@ -210,6 +257,7 @@ const DraggableTaskCard = ({
 				unfocusTask({
 					variables: {
 						itemId: id,
+						from: scheduledFor,
 					},
 				});
 			}
@@ -217,18 +265,29 @@ const DraggableTaskCard = ({
 			const result = monitor.getDropResult();
 
 			if (!result) return;
+
 			if (scheduledFor === result.scheduledFor) {
 				if (index === result.index || index + 1 === result.index) return;
 
 				onMove({
 					index:
 						result.index > index ? result.index - 1 : result.index,
+					from: scheduledFor,
+					scheduledFor: result.scheduledFor,
+				});
+			}
+			else if (result.dropEffect === 'copy') {
+				onCopy({
+					index:
+						result.index > index ? result.index - 1 : result.index,
+					from: scheduledFor,
 					scheduledFor: result.scheduledFor,
 				});
 			}
 			else {
 				onMove({
 					index: result.index,
+					from: scheduledFor,
 					scheduledFor: result.scheduledFor,
 				});
 			}
@@ -262,6 +321,7 @@ const DraggableTaskCard = ({
 				drop(node);
 			}}
 			index={index}
+			date={scheduledFor}
 			{...rest}
 		/>
 	);
@@ -309,7 +369,7 @@ const Logo = styled('div')`
 const EventCard = ({
 	event: {
 		name, start, end, link,
-	}, logo, workingTime,
+	}, logo,
 }) => (
 	<Tooltip
 		label={
@@ -387,6 +447,18 @@ const Schedule = ({
 		day => day.tasks.length === 0 && day.events.length === 0,
 	);
 
+	// all days in the week are closed except the current day
+	const [openDays, setOpenDays] = useState({
+		0: false,
+		1: false,
+		2: false,
+		3: false,
+		4: false,
+		5: false,
+		6: false,
+		[moment().day()]: true,
+	});
+
 	return (
 		<Container>
 			<ScheduleNav>
@@ -452,9 +524,16 @@ const Schedule = ({
 					const sortedAssignedTasks = [...day.assignedTasks];
 					const sortedEvents = [...day.events];
 
-					sortedTasks.sort(
-						(a, b) => a.schedulePosition - b.schedulePosition,
-					);
+					sortedTasks.sort((a, b) => {
+						const aDay = a.scheduledForDays.find(
+							d => d.date === day.date,
+						);
+						const bDay = b.scheduledForDays.find(
+							d => d.date === day.date,
+						);
+
+						return aDay.position - bDay.position;
+					});
 					sortedReminders.sort((a, b) => (a.sendingDate > b.sendingDate ? 1 : -1));
 					sortedDeadlines.sort((a, b) => (a.deadline > b.deadline ? 1 : -1));
 
@@ -469,16 +548,22 @@ const Schedule = ({
 								+ (task.status === 'FINISHED'
 								&& task.timeItTook !== null
 									? task.timeItTook
-									: task.unit),
+									: task.unit)
+									/ task.scheduledForDays.length,
 							0,
 						)
 						- timeUsedByEvent;
 					const timeSpent
 						= sortedTasks.reduce(
-							(time, task) => time + task.timeItTook,
+							(time, task) => time
+								+ task.timeItTook / task.scheduledForDays.length,
 							0,
 						) + timeUsedByEvent;
 					const isPastDay = moment(day.momentDate).isBefore(
+						moment(),
+						'day',
+					);
+					const isCurrentDay = moment(day.momentDate).isSame(
 						moment(),
 						'day',
 					);
@@ -547,7 +632,12 @@ const Schedule = ({
 					}
 
 					return (
-						<Day isOff={!day.workedDay}>
+						<Day
+							isPastDay={isPastDay}
+							isOff={!day.workedDay}
+							isOpen={openDays[day.momentDate.day()]}
+							isCurrentDay={isCurrentDay}
+						>
 							<DayTitle
 								selected={moment().isSame(
 									day.momentDate,
@@ -572,6 +662,22 @@ const Schedule = ({
 											? undefined
 											: '2-digit',
 									})}
+								<MaterialIcon
+									icon={
+										openDays[day.momentDate.day()]
+											? 'unfold_less'
+											: 'unfold_more'
+									}
+									size="tiny"
+									color={primaryGrey}
+									onClick={() => setOpenDays({
+										...openDays,
+										[day.momentDate.day()]: !openDays[
+											day.momentDate.day()
+										],
+									})
+									}
+								/>
 							</DayTitle>
 							<DroppableDayTasks id={day.date}>
 								<div>
@@ -583,15 +689,33 @@ const Schedule = ({
 										/>
 									))}
 								</div>
-								{sortedTasks.map(task => (
+								{sortedTasks.map((task, index) => (
 									<DraggableTaskCard
-										key={`${task.id}-${task.schedulePosition}`}
+										key={task.id}
 										id={task.id}
 										type={task.type}
 										task={task}
-										index={task.schedulePosition}
+										index={index}
 										scheduledFor={day.date}
 										onMove={({
+											id,
+											type,
+											index: position,
+											from,
+											scheduledFor,
+										}) => {
+											onMoveTask({
+												task: id ? {id, type} : task,
+												from,
+												scheduledFor,
+												position:
+													typeof position === 'number'
+														? position
+														: sortedTasks.length,
+												action: 'MOVE',
+											});
+										}}
+										onCopy={({
 											id,
 											type,
 											index: position,
@@ -604,6 +728,7 @@ const Schedule = ({
 													typeof position === 'number'
 														? position
 														: sortedTasks.length,
+												action: 'SPLIT',
 											});
 										}}
 									/>
@@ -698,6 +823,7 @@ Schedule.defaultProps = {
 	workingDays: ['MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'],
 	fullWeek: false,
 	onMoveTask: () => {},
+	onCopyTask: () => {},
 };
 
 Schedule.propTypes = {

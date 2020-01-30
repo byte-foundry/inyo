@@ -43,6 +43,10 @@ export default {
 			&& task.status === 'FINISHED'
 			&& task.timeItTook === null
 		) {
+			if (tasks.findIndex(t => t.id === task.id) !== -1) {
+				return query.result;
+			}
+
 			return {
 				...query.result,
 				me: {

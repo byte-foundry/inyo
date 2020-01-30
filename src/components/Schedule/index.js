@@ -227,6 +227,10 @@ const EmptyWeekBanner = styled(P)`
 	border: 2px dashed ${primaryPurple};
 	color: ${primaryPurple};
 	pointer-events: none;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		display: none;
+	}
 `;
 
 const DraggableTaskCard = ({

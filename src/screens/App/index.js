@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
-import React, {useState} from 'react';
+import React, {Suspense, useState} from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 
+import PendingActionsTray from '../../components/PendingActionsTray';
 import TrialHeadband from '../../components/TrialHeadband';
 import withHeader from '../../HOC/withHeader';
 import {BREAKPOINTS} from '../../utils/constants';
@@ -67,6 +68,9 @@ function App({history, location}) {
 					/>
 					<Redirect to="/app/dashboard" />
 				</Switch>
+				<Suspense fallback={false}>
+					<PendingActionsTray />
+				</Suspense>
 			</AppMain>
 		</>
 	);

@@ -1,19 +1,20 @@
 import styled from '@emotion/styled';
 import moment from 'moment';
-import React, {useMemo, memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {animated, useSpring} from 'react-spring';
 
 import {useQuery} from '../../utils/apollo-hooks';
 import {Loading} from '../../utils/content';
 import {
 	extractScheduleFromWorkingDays,
-	getEventFromGoogleCalendarEvents
+	getEventFromGoogleCalendarEvents,
 } from '../../utils/functions';
 import {
+	accentGrey,
 	lightGrey,
 	mediumGrey,
 	primaryPurple,
-	primaryWhite
+	primaryWhite,
 } from '../../utils/new/design-system';
 import {GET_USER_INFOS} from '../../utils/queries';
 import useAccount from '../../utils/useAccount';
@@ -31,65 +32,95 @@ const LeftBarContainer = styled('div')`
 	z-index: 2;
 `;
 
+const MiniDroppableDay = styled(DefaultDroppableDay)``;
+
 const DayPieChart = styled(PieChart)`
-	margin: 10px;
+	/* margin: 4px; */
 `;
 
 const DayElem = styled('div')`
-	width: calc(100% - 2rem);
-	background: ${props =>
-		props.isOver ? primaryPurple : props.isOff ? mediumGrey : primaryWhite};
-	margin: 1rem 1rem 0;
+	width: 60px;
+	background: ${props => (props.isOver ? primaryPurple : props.isOff ? mediumGrey : primaryWhite)};
 	box-sizing: border-box;
-	height: 100px;
-	border-radius: 24px;
+	border-radius: 50%;
 	display: flex;
-	flex-flow: column;
+	flex-direction: column;
 	align-items: center;
-	justify-content: space-between;
-	padding-top: 7px;
-	color: ${props =>
-		props.isOver
-			? props.isOff
-				? mediumGrey
-				: primaryWhite
-			: primaryPurple};
-	border: solid 2px ${primaryWhite};
+	color: ${props => (props.isOver ? (props.isOff ? mediumGrey : primaryWhite) : accentGrey)};
 	position: relative;
 `;
 
-const DayDate = styled('div')``;
+const DayDate = styled('div')`
+	&::after {
+		content: '';
+		display: block;
+		border: 2px solid white;
+		position: absolute;
+		width: 42px;
+		height: 42px;
+		top: -1px;
+		border-radius: 50%;
+		left: -1px;
+		pointer-events: none;
+	}
+`;
+
 const DayDateDay = styled('div')`
 	text-align: center;
 `;
 const DayDateNumber = styled('div')`
-	font-weight: 600;
+	position: absolute;
+	top: calc(50% - 8px);
+	left: calc(50% - 8px);
+	width: 16px;
+	height: 16px;
+	line-height: 0;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 const LeftBarElem = styled(animated.div)`
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: ${props => (props.open ? '70px' : '0px')};
 	transition: width 0.2s ease-out;
 	height: 100%;
-	background: ${lightGrey};
-	overflow: hidden;
+	background: ${primaryWhite};
+	overflow-y: scroll;
+	padding: 0 2rem;
 `;
 
 const LeftBarContent = styled('div')`
-	width: 70px;
+	display: flex;
+	flex-direction: column;
+`;
+
+const MonthTitle = styled('div')`
+	color: ${accentGrey};
+	margin: 0.7rem;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-top: 1rem;
+`;
+
+const Month = styled('div')`
+	display: grid;
+	grid-template-columns: 14% repeat(auto-fill, 14%);
 `;
 
 const DroppableDay = memo(
-	({day, index, scheduledFor, onMove, isOff, workingTime = 8}) => {
+	({
+		day, index, scheduledFor, onMove, isOff, workingTime = 8,
+	}) => {
 		const {language} = useUserInfos();
-		const timeLeft =
-			workingTime -
-			day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
+		const timeLeft
+			= workingTime
+			- day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
 
 		return (
-			<DefaultDroppableDay
+			<MiniDroppableDay
 				index={index}
 				scheduledFor={scheduledFor}
 				onMove={onMove}
@@ -97,16 +128,10 @@ const DroppableDay = memo(
 			>
 				<DayElem isOff={isOff}>
 					<DayDate>
-						<DayDateDay>
-							{day.momentDate
-								.toDate()
-								.toLocaleDateString(language, {
-									weekday: 'narrow',
-									day: undefined,
-									month: undefined,
-									year: undefined
-								})}
-						</DayDateDay>
+						<DayPieChart
+							medium
+							value={1 - timeLeft / workingTime}
+						/>
 						<DayDateNumber>
 							{day.momentDate
 								.toDate()
@@ -114,67 +139,72 @@ const DroppableDay = memo(
 									weekday: undefined,
 									day: 'numeric',
 									month: undefined,
-									year: undefined
+									year: undefined,
 								})}
 						</DayDateNumber>
 					</DayDate>
-					<DayPieChart value={1 - timeLeft / workingTime} />
 				</DayElem>
-			</DefaultDroppableDay>
+			</MiniDroppableDay>
 		);
 	},
-	(prevProps, nextProps) =>
-		prevProps.day === nextProps.day &&
-		prevProps.index === nextProps.index &&
-		prevProps.workingTime === nextProps.workingTime &&
-		prevProps.onMove === nextProps.onMove &&
-		prevProps.isOff === nextProps.isOff &&
-		prevProps.scheduledFor === nextProps.scheduledFor
+	(prevProps, nextProps) => prevProps.day === nextProps.day
+		&& prevProps.index === nextProps.index
+		&& prevProps.workingTime === nextProps.workingTime
+		&& prevProps.onMove === nextProps.onMove
+		&& prevProps.isOff === nextProps.isOff
+		&& prevProps.scheduledFor === nextProps.scheduledFor,
 );
 
-function LeftBarSchedule({isDragging, days, fullWeek, onMoveTask}) {
+function LeftBarSchedule({
+	isDragging, days, fullWeek, onMoveTask,
+}) {
 	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
-		to: async next => {
+		to: async (next) => {
 			if (isDragging) {
 				await next({
-					width: 70
+					width: 321,
+					padding: 32,
+					paddingTop: 0,
 				});
-				await next({width: 70});
-			} else {
+				await next({width: 321, padding: 32, paddingTop: 0});
+			}
+			else {
 				if (wasOpen) {
 					await next({
-						width: 70
+						width: 321,
+						padding: 32,
+						paddingTop: 0,
 					});
 				}
-				await next({width: 0});
+				await next({width: 0, padding: 0, paddingTop: 0});
 			}
 		},
-		from: {width: 0},
+		from: {width: 0, padding: 0, paddingTop: 0},
 		config: {
 			mass: 0.1,
 			tension: 500,
 			friction: 10,
-			clamp: true
-		}
+			clamp: true,
+		},
 	});
 	const {
 		data: userPrefsData,
 		loading: loadingUserPrefs,
-		error: errorUserPrefs
+		error: errorUserPrefs,
 	} = useQuery(GET_USER_INFOS, {suspend: true});
 
 	const startDate = useMemo(() => moment().startOf('day'), [
-		moment().dayOfYear()
+		moment().dayOfYear(),
 	]);
-	const endDate = useMemo(() => moment(startDate).add(12, 'days'), [
-		startDate
+	const endDate = useMemo(() => moment(startDate).add(180, 'days'), [
+		startDate,
 	]);
 	const [account] = useAccount();
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
 		startDate.toISOString(),
-		endDate.toISOString()
+		endDate.toISOString(),
 	]);
 
 	const weekdays = useMemo(() => {
@@ -187,30 +217,30 @@ function LeftBarSchedule({isDragging, days, fullWeek, onMoveTask}) {
 				startDate,
 				days,
 				fullWeek,
-				endDate
+				endDate,
 			);
 
-			weekdays.forEach(day => {
+			weekdays.forEach((day) => {
 				day.onMove = ({
 					id,
 					type,
 					linkedCustomer,
 					attachments,
 					index: position,
-					scheduledFor
+					scheduledFor,
 				}) => {
 					onMoveTask({
 						task: {
 							id,
 							type,
 							linkedCustomer,
-							attachments
+							attachments,
 						},
 						scheduledFor,
 						position:
 							typeof position === 'number'
 								? position
-								: day.tasks.length
+								: day.tasks.length,
 					});
 				};
 			});
@@ -226,7 +256,7 @@ function LeftBarSchedule({isDragging, days, fullWeek, onMoveTask}) {
 		days,
 		fullWeek,
 		endDate,
-		onMoveTask
+		onMoveTask,
 	]);
 
 	if (loadingUserPrefs) return <Loading />;
@@ -236,16 +266,21 @@ function LeftBarSchedule({isDragging, days, fullWeek, onMoveTask}) {
 		<LeftBarContainer>
 			<LeftBarElem style={animatedProps} id="left-bar-schedule">
 				<LeftBarContent>
-					{weekdays.map(day => (
-						<DroppableDay
-							key={day.date}
-							day={day}
-							index={day.tasks.length}
-							scheduledFor={day.date}
-							isOff={!day.workedDay}
-							onMove={day.onMove}
-						/>
-					))}
+					<>
+						<MonthTitle>Janvier</MonthTitle>
+						<Month>
+							{weekdays.map(day => (
+								<DroppableDay
+									key={day.date}
+									day={day}
+									index={day.tasks.length}
+									scheduledFor={day.date}
+									isOff={!day.workedDay}
+									onMove={day.onMove}
+								/>
+							))}
+						</Month>
+					</>
 				</LeftBarContent>
 			</LeftBarElem>
 		</LeftBarContainer>

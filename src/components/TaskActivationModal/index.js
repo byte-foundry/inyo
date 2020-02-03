@@ -44,9 +44,14 @@ function TaskActivationModal({
 								</fbt>
 							}
 							withConsonant={
-								<fbt project="inyo" desc="notification message">
-									de{' '}
-								</fbt>
+								<>
+									<fbt
+										project="inyo"
+										desc="notification message"
+									>
+										de
+									</fbt>{' '}
+								</>
 							}
 						/>
 					</fbt:param>

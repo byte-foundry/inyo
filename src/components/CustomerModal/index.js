@@ -163,6 +163,8 @@ const CustomerModal = ({
 							return {};
 						}
 
+						let errors = {};
+
 						try {
 							Yup.object({
 								name: Yup.string().required(
@@ -202,40 +204,44 @@ const CustomerModal = ({
 										</fbt>,
 									),
 							}).validateSync(values, {abortEarly: false});
-
-							if (
-								!values.title
-								&& !values.firstName
-								&& !values.lastName
-							) {
-								return {
-									title: (
-										<fbt project="inyo" desc="required">
-											Requis
-										</fbt>
-									),
-									firstName: (
-										<fbt project="inyo" desc="required">
-											Requis
-										</fbt>
-									),
-									lastName: (
-										<fbt project="inyo" desc="required">
-											Requis
-										</fbt>
-									),
-								};
-							}
-
-							return {};
 						}
 						catch (err) {
-							return err.inner.reduce((errors, errorContent) => {
-								errors[errorContent.path]
-									= errorContent.message;
-								return errors;
-							}, {});
+							errors = {
+								...errors,
+								...err.inner.reduce((errors, errorContent) => {
+									errors[errorContent.path]
+										= errorContent.message;
+									return errors;
+								}, {}),
+							};
 						}
+
+						if (
+							!values.title
+							&& !values.firstName
+							&& !values.lastName
+						) {
+							errors = {
+								...errors,
+								title: (
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>
+								),
+								firstName: (
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>
+								),
+								lastName: (
+									<fbt project="inyo" desc="required">
+										Requis
+									</fbt>
+								),
+							};
+						}
+
+						return errors;
 					}}
 					onSubmit={async (values, actions) => {
 						actions.setSubmitting(true);

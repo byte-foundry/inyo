@@ -1159,16 +1159,7 @@ const Item = ({
 						</>
 					) : (
 						<TaskButton
-							onClick={() => {
-								if (item.type === 'CONTENT_ACQUISITION') {
-									focusTask({
-										variables: {itemId: item.id},
-									});
-								}
-								else {
-									setIsActivating(true);
-								}
-							}}
+							onClick={() => setIsActivating(true)}
 							icon="✓"
 						>
 							<fbt project="inyo" desc="charger">

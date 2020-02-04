@@ -33,7 +33,6 @@ const {body} = shevy;
 
 export const Body = styled('div')`
 	${body};
-	padding-bottom: 100px;
 `;
 
 const getButtonHoveredColor = (props) => {
@@ -549,6 +548,7 @@ export const Main = styled('div')`
 	flex: 1;
 	padding: 1rem;
 	padding-bottom: 4rem;
+	padding-bottom: 100px;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;

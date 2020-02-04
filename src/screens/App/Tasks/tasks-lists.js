@@ -7,7 +7,6 @@ import ActivityFeed from '../../../components/ActivityFeed';
 import ArianneThread from '../../../components/ArianneThread';
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
-import PendingActionsTray from '../../../components/PendingActionsTray';
 import ProjectBudget from '../../../components/ProjectBudget';
 import ProjectDocumentsFolders from '../../../components/ProjectDocumentsFolders';
 import ProjectHeader from '../../../components/ProjectHeader';
@@ -190,9 +189,6 @@ function TasksList({location, history}) {
 							</div>
 						</Content>
 					)}
-					<Suspense fallback={false}>
-						<PendingActionsTray projectId={projectId} />
-					</Suspense>
 				</Main>
 			</TaskAndArianne>
 		</Container>

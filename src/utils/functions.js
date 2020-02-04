@@ -97,16 +97,19 @@ export function extractScheduleFromWorkingDays(
 const normalizeFalsyParams = f => (...args) => f(...args.map(v => v || undefined));
 
 export const formatTitle = (title) => {
-	if (title !== 'MONSIEUR' || title !== 'MADAME') {
+	if (title !== 'MONSIEUR' && title !== 'MADAME') {
 		return '';
 	}
 
-	return fbt.enum(
-		title,
-		{
-			MONSIEUR: 'M.',
-			MADAME: 'Mme',
-		},
+	return fbt(
+		fbt.enum(
+			title,
+			{
+				MONSIEUR: 'M.',
+				MADAME: 'Mme',
+			},
+			'title',
+		),
 		'title',
 	);
 };

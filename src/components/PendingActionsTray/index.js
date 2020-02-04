@@ -37,6 +37,7 @@ const Tray = styled('div')`
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		width: 100%;
 		right: 0px;
+		bottom: 5rem;
 	}
 `;
 

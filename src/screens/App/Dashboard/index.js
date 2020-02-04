@@ -1,9 +1,8 @@
 import styled from '@emotion/styled/macro';
-import React, {Suspense} from 'react';
+import React from 'react';
 
 import CreateTask from '../../../components/CreateTask';
 import HelpButton from '../../../components/HelpButton';
-import PendingActionsTray from '../../../components/PendingActionsTray';
 import {BREAKPOINTS} from '../../../utils/constants';
 import {Container, Content, Main} from '../../../utils/new/design-system';
 import Tasks from './tasks';
@@ -25,9 +24,6 @@ function Dashboard() {
 					</Desktop>
 					<Tasks />
 				</Content>
-				<Suspense fallback={false}>
-					<PendingActionsTray />
-				</Suspense>
 			</Main>
 		</Container>
 	);

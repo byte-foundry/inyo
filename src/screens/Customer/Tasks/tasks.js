@@ -46,6 +46,7 @@ const Main = styled('div')`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	padding-bottom: 100px;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		flex-direction: column-reverse;

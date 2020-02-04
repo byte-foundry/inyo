@@ -559,7 +559,8 @@ const Schedule = ({
 					const timeSpent
 						= sortedTasks.reduce(
 							(time, task) => time
-								+ task.timeItTook / task.scheduledForDays.length,
+								+ task.timeItTook
+									/ (task.scheduledForDays.length || 1),
 							0,
 						) + timeUsedByEvent;
 					const isPastDay = moment(day.momentDate).isBefore(

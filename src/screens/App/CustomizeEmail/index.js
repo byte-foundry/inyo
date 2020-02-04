@@ -26,6 +26,7 @@ const Main = styled('div')`
 	min-height: 100vh;
 	display: flex;
 	flex: 1;
+	padding-bottom: 100px;
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		padding: 1rem;

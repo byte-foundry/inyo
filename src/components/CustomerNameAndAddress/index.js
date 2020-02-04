@@ -2,7 +2,7 @@ import styled from '@emotion/styled/macro';
 import React from 'react';
 
 import {H4, H5} from '../../utils/content';
-import {formatTitle} from '../../utils/functions';
+import {formatFullName} from '../../utils/functions';
 import {gray70, P, primaryBlack} from '../../utils/new/design-system';
 
 const ClientAddress = styled('div')`
@@ -39,7 +39,11 @@ const CustomerNameAndAddress = ({
 }) => (
 	<ClientAddress>
 		<CompanyName>{name}</CompanyName>
-		<ContactName>{formatTitle(title, firstName, lastName)}</ContactName>
+		<ContactName>
+			<fbt desc="contact name">
+				{formatFullName(title, firstName, lastName)}
+			</fbt>
+		</ContactName>
 		{address && (
 			<>
 				<ContactInfo style={{marginBottom: '0px'}}>

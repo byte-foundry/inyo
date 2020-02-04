@@ -67,7 +67,7 @@ class AddressAutocomplete extends Component {
 					<ErrorInput className="input-feedback">
 						{/* Yup does not provide a way to reduce errors to a parent object
 						so errors is always errors on street city, postalCode and country not on address */}
-						{errors && errors[name] && (
+						{errors && (errors[name] || errors[`${name}.street`]) && (
 							<fbt project="inyo" desc="Required">
 								Requis
 							</fbt>

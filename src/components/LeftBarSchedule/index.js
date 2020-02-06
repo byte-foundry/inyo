@@ -262,25 +262,44 @@ function LeftBarSchedule({
 	if (loadingUserPrefs) return <Loading />;
 	if (errorUserPrefs) throw errorUserPrefs;
 
+	const months = weekdays.reduce((acc, weekday) => {
+		const monthNumber = weekday.momentDate.month();
+		let month = acc.find(m => m.month === monthNumber);
+
+		if (!month) {
+			month = {month: monthNumber, days: []};
+			acc.push(month);
+		}
+
+		month.days = [...month.days, weekday];
+		return acc;
+	}, []);
+
 	return (
 		<LeftBarContainer>
 			<LeftBarElem style={animatedProps} id="left-bar-schedule">
 				<LeftBarContent>
-					<>
-						<MonthTitle>Janvier</MonthTitle>
-						<Month>
-							{weekdays.map(day => (
-								<DroppableDay
-									key={day.date}
-									day={day}
-									index={day.tasks.length}
-									scheduledFor={day.date}
-									isOff={!day.workedDay}
-									onMove={day.onMove}
-								/>
-							))}
-						</Month>
-					</>
+					{months.map(({month, days}) => (
+						<>
+							<MonthTitle>
+								{moment()
+									.month(month)
+									.format('MMMM')}
+							</MonthTitle>
+							<Month>
+								{days.map(day => (
+									<DroppableDay
+										key={day.date}
+										day={day}
+										index={day.tasks.length}
+										scheduledFor={day.date}
+										isOff={!day.workedDay}
+										onMove={day.onMove}
+									/>
+								))}
+							</Month>
+						</>
+					))}
 				</LeftBarContent>
 			</LeftBarElem>
 		</LeftBarContainer>

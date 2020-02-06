@@ -10,6 +10,7 @@ import TasksProgressBar from '../../../components/TasksProgressBar';
 import Tooltip from '../../../components/Tooltip';
 import fbt from '../../../fbt/fbt.macro';
 import {useMutation, useQuery} from '../../../utils/apollo-hooks';
+import {BREAKPOINTS} from '../../../utils/constants';
 import {
 	FlexColumn,
 	FlexRow,
@@ -155,6 +156,14 @@ const ArchiveButton = styled(Button)`
 const ButtonsRow = styled(FlexRow)`
 	margin: 3rem 0;
 	justify-content: flex-end;
+
+	@media (max-width: ${BREAKPOINTS.mobile}px) {
+		margin: 0 0 2rem;
+
+		${ButtonLink} {
+			flex: 1;
+		}
+	}
 `;
 
 const EmptyProjectList = styled(FlexColumn)`

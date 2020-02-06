@@ -258,6 +258,7 @@ const TaskHeader = styled('div')`
 
 	@media (max-width: ${BREAKPOINTS.mobile}px) {
 		display: flex;
+		margin-left: 2rem;
 	}
 `;
 

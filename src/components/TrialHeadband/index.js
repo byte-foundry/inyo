@@ -96,7 +96,6 @@ const PlayButton = styled(IconButton)`
 	}
 
 	i {
-		margin-top: 8px;
 		font-size: 2rem !important;
 	}
 `;

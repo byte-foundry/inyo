@@ -362,6 +362,15 @@ export const EMAIL_NAME_BY_TYPE = {
 	INVOICE_LAST: {
 		text: () => fbt('Dernière relance', 'fitfh reminder invoice email'),
 	},
+	CONTENT_ACQUISITION_DELAY: {
+		text: () => fbt('Activation de la tâche', 'first content acquisition email'),
+	},
+	CONTENT_ACQUISITION_FIRST: {
+		text: () => fbt('1ère relance', 'first reminder content acquisition email'),
+	},
+	CONTENT_ACQUISITION_SECOND: {
+		text: () => fbt('2nde relance', 'second reminder content acquisition email'),
+	},
 	CUSTOMER_REPORT: {
 		text: () => fbt('Rapport client', 'customer report email'),
 	},
@@ -456,6 +465,33 @@ export const REMINDER_TYPES_DATA = {
 				customerName,
 			)}`,
 			'fitfh reminder invoice email',
+		),
+	},
+	CONTENT_ACQUISITION_DELAY: {
+		text: customerName => fbt(
+			`1ère demande de contenu envoyée à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first content acquisition email',
+		),
+	},
+	CONTENT_ACQUISITION_FIRST: {
+		text: customerName => fbt(
+			`Rappel de demande de contenu nº1 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'first reminder content acquisition email',
+		),
+	},
+	CONTENT_ACQUISITION_SECOND: {
+		text: customerName => fbt(
+			`Rappel de demande de contenu nº2 envoyé à ${fbt.param(
+				'customerName',
+				customerName,
+			)}`,
+			'second reminder content acquisition email',
 		),
 	},
 	CUSTOMER_REPORT: {

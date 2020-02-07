@@ -881,6 +881,16 @@
     }
    ]
   },
+  "U3AzWmQt+at1SYpxic5tiQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Warning : This link only allows you someone to see the project. Add a client to the project to generate a new link enabling customer actions.",
+     "variations": {}
+    }
+   ]
+  },
   "2USEdvsctPl5RFxIBfqqfQ==": {
    "tokens": [],
    "types": [],
@@ -5131,22 +5141,22 @@
     }
    ]
   },
-  "yaey51Cf+rbg1ONjyCH2Mg==": {
+  "XhXImcPHs9/ro4j8P/zHWg==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "Remove this task from today's workload",
+     "translation": "Unschedule this task",
      "variations": {}
     }
    ]
   },
-  "p7Bh4qNiXDAOVDDSo8BBIQ==": {
+  "lOa7LckdKAIoOeLtHy4U7Q==": {
    "tokens": [],
    "types": [],
    "translations": [
     {
-     "translation": "This task is planned for today",
+     "translation": "This task is scheduled in your calendar",
      "variations": {}
     }
    ]
@@ -5217,6 +5227,56 @@
    "translations": [
     {
      "translation": "Preview {assistantName}'s actions",
+     "variations": {}
+    }
+   ]
+  },
+  "U5fA0PopKS7SitFLVUy/dQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Open the task",
+     "variations": {}
+    }
+   ]
+  },
+  "go3ZA5Tyo9GnZb1BoGv9gw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Schedule this task on multiple days",
+     "variations": {}
+    }
+   ]
+  },
+  "V/cJd0hL/tLNUaDYneOZdA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Stop the timer",
+     "variations": {}
+    }
+   ]
+  },
+  "7C1+F86UdfBCMT4c547P9A==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Start the timer",
+     "variations": {}
+    }
+   ]
+  },
+  "iwxLTXfEnrLbKWnnLtXlDg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mark task as done",
      "variations": {}
     }
    ]
@@ -9011,6 +9071,36 @@
     }
    ]
   },
+  "k4snsAPmxBi2MePUs0BNhw==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Task activation",
+     "variations": {}
+    }
+   ]
+  },
+  "AXadA3J7c5k33IJGw+QSWA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1st reminder",
+     "variations": {}
+    }
+   ]
+  },
+  "ikbysKLw4VZp5gk2dLXqMQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "2nd reminder",
+     "variations": {}
+    }
+   ]
+  },
   "45pRxJDm/k6K1J6FOsKgNg==": {
    "tokens": [],
    "types": [],
@@ -9117,6 +9207,36 @@
    "translations": [
     {
      "translation": "Last invoice payment reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "LL42OR5cIePO801xAfdUVg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "1st content acquisition sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "buF2/xhGE1X3e6iLZQHfWg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "First content acquisition reminder sent to {customerName}",
+     "variations": {}
+    }
+   ]
+  },
+  "H9Ndca3dZyKVU2XYxJEuwg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Second content acquisition reminder sent to {customerName}",
      "variations": {}
     }
    ]
@@ -9437,6 +9557,46 @@
    "translations": [
     {
      "translation": "Deliverables",
+     "variations": {}
+    }
+   ]
+  },
+  "h0KoWh+6ogUtTk/ShsLOew==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mr",
+     "variations": {}
+    }
+   ]
+  },
+  "+0o3NaO467HvxDTKUl9BvA==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Mrs",
+     "variations": {}
+    }
+   ]
+  },
+  "yaey51Cf+rbg1ONjyCH2Mg==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "Remove this task from today's workload",
+     "variations": {}
+    }
+   ]
+  },
+  "p7Bh4qNiXDAOVDDSo8BBIQ==": {
+   "tokens": [],
+   "types": [],
+   "translations": [
+    {
+     "translation": "This task is planned for today",
      "variations": {}
     }
    ]

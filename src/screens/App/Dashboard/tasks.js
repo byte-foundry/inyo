@@ -377,6 +377,7 @@ const DashboardTasks = ({location, history}) => {
 				onMoveTask={onMoveTask}
 				assistantName={assistantName}
 				workingTime={workingTime}
+				setIsDragging={setIsDragging}
 			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal
@@ -399,8 +400,8 @@ const DashboardTasks = ({location, history}) => {
 					/>
 					<Loading loading={loading} fallback={<LoadingScreen />}>
 						{() => (unscheduledTasks.length !== 0
-								|| unscheduledFilteredTasks.length
-									!== unscheduledTasks.length ? (
+							|| unscheduledFilteredTasks.length
+								!== unscheduledTasks.length ? (
 								<TasksList
 									style={TasksListStyle}
 									hasFilteredItems={
@@ -431,7 +432,8 @@ const DashboardTasks = ({location, history}) => {
 										</IllusText>
 									</IllusContainer>
 								</div>
-							))}
+							))
+						}
 					</Loading>
 				</div>
 			</FlexRowMobile>

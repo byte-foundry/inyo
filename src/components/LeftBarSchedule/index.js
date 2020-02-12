@@ -157,10 +157,10 @@ const DroppableDay = memo(
 function LeftBarSchedule({
 	isDragging, days, fullWeek, onMoveTask,
 }) {
-	const wasOpen = usePrevious(true);
+	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
 		to: async (next) => {
-			if (true) {
+			if (isDragging) {
 				await next({
 					width: 337,
 					padding: 15,

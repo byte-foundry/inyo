@@ -133,10 +133,14 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 		<SettingsFormMain>
 			<Formik
 				initialValues={{
-					startMinutes: startMinutesInitial,
 					startHour: startHourInitial,
+					startMinutes: startMinutesInitial,
 					endHour: endHourInitial,
 					endMinutes: endMinutesInitial,
+					breakStartHour: 15,
+					breakStartMinutes: 0,
+					breakEndHour: 18,
+					breakEndMinutes: 30,
 					workingDays: workingDaysInitial,
 					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
@@ -166,6 +170,10 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 						startMinutes,
 						endHour,
 						endMinutes,
+						breakStartHour,
+						breakStartMinutes,
+						breakEndHour,
+						breakEndMinutes,
 						workingDays,
 						timeZone,
 						hasNotFullWeekSchedule,
@@ -231,6 +239,10 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 							startMinutes,
 							endHour,
 							endMinutes,
+							breakStartHour,
+							breakStartMinutes,
+							breakEndHour,
+							breakEndMinutes,
 							workingDays,
 							timeZone,
 						},
@@ -261,6 +273,14 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 										value={{
 											start: [startHour, startMinutes],
 											end: [endHour, endMinutes],
+											breakStart: [
+												breakStartHour,
+												breakStartMinutes,
+											],
+											breakEnd: [
+												breakEndHour,
+												breakEndMinutes,
+											],
 										}}
 										setFieldValue={setFieldValue}
 									/>

@@ -121,340 +121,259 @@ export default function DoubleRangeTimeInput(props) {
 	const breakEndPercentage
 		= (breakEndHour / 24 + breakEndMinutes / (60 * 24)) * 100;
 
-	return (
-		<TimeInputContainer
-			onMouseMove={(e) => {
-				const wasStartAfterEnd = isAAfterOrEqualToB(
-					[startHour, startMinutes],
-					[endHour, endMinutes],
-				);
-				const wasStartBeforeBreakStart = isABeforeOrEqualToB(
-					[startHour, startMinutes],
-					[breakStartHour, breakStartMinutes],
-				);
+	const moveCurrentTo = (newTime) => {
+		const wasStartAfterEnd = isAAfterOrEqualToB(
+			[startHour, startMinutes],
+			[endHour, endMinutes],
+		);
+		const wasStartBeforeBreakStart = isABeforeOrEqualToB(
+			[startHour, startMinutes],
+			[breakStartHour, breakStartMinutes],
+		);
 
-				const wasEndAfterBreakEnd
-					= endHour > breakEndHour
-					|| (endHour === breakEndHour && endMinutes >= breakEndMinutes);
+		const wasEndAfterBreakEnd
+			= endHour > breakEndHour
+			|| (endHour === breakEndHour && endMinutes >= breakEndMinutes);
 
-				if (trackingState === trackingEnum.START) {
-					const [
-						newStartHour,
-						newStartMinutes,
-					] = convertMousePosToTime({x: e.clientX});
+		if (trackingState === trackingEnum.START) {
+			const [newStartHour, newStartMinutes] = newTime;
 
-					if (!wasStartAfterEnd || !wasStartBeforeBreakStart) {
-						// [0, breakStart[ ]end, 100]
-						if (
-							isAAfterOrEqualToB(
-								[newStartHour, newStartMinutes],
-								[breakStartHour, breakStartMinutes - 10],
-							)
-							&& isABeforeOrEqualToB(
-								[newStartHour, newStartMinutes],
-								[endHour, endMinutes + 10],
-							)
-						) {
-							// closer to one or the other
-							if (
-								isCloserToA(
-									[newStartHour, newStartMinutes],
-									[breakStartHour, breakStartMinutes],
-									[endHour, endMinutes],
-								)
-							) {
-								setFieldValue('startHour', breakStartHour);
-								setFieldValue(
-									'startMinutes',
-									breakStartMinutes - 10,
-								);
-							}
-							else {
-								setFieldValue('startHour', endHour);
-								setFieldValue('startMinutes', endMinutes + 10);
-							}
-						}
-						else {
-							setFieldValue('startHour', newStartHour);
-							setFieldValue('startMinutes', newStartMinutes);
-						}
-					}
-					else if (wasStartAfterEnd && wasStartBeforeBreakStart) {
-						// ]end, breakStart[
-						const cap = Math.min(
-							Math.max(
-								newStartHour * 100 + newStartMinutes,
-								endHour * 100 + endMinutes + 10,
-							),
-							breakStartHour * 100 + breakStartMinutes - 10,
-						);
-
-						setFieldValue('startHour', parseInt(cap / 100, 10));
-						setFieldValue(
-							'startMinutes',
-							cap - parseInt(cap / 100, 10) * 100,
-						);
-					}
-				}
-				else if (trackingState === trackingEnum.END) {
-					const [newEndHour, newEndMinutes] = convertMousePosToTime({
-						x: e.clientX,
-					});
-
-					if (!wasStartAfterEnd || !wasEndAfterBreakEnd) {
-						// [0, start[ ]breakEnd, 100]
-						if (
-							isAAfterOrEqualToB(
-								[newEndHour, newEndMinutes],
-								[startHour, startMinutes - 10],
-							)
-							&& isABeforeOrEqualToB(
-								[newEndHour, newEndMinutes],
-								[breakEndHour, breakEndMinutes + 10],
-							)
-						) {
-							// closer to one or the other
-							if (
-								isCloserToA(
-									[newEndHour, newEndMinutes],
-									[startHour, startMinutes],
-									[breakEndHour, breakEndMinutes],
-								)
-							) {
-								setFieldValue('endHour', startHour);
-								setFieldValue('endMinutes', startMinutes - 10);
-							}
-							else {
-								setFieldValue('endHour', breakEndHour);
-								setFieldValue(
-									'endMinutes',
-									breakEndMinutes + 10,
-								);
-							}
-						}
-						else {
-							setFieldValue('endHour', newEndHour);
-							setFieldValue('endMinutes', newEndMinutes);
-						}
-					}
-					else if (wasStartAfterEnd && wasEndAfterBreakEnd) {
-						// ]breakEnd, start[
-						const cap = Math.min(
-							Math.max(
-								newEndHour * 100 + newEndMinutes,
-								breakEndHour * 100 + breakEndMinutes + 10,
-							),
-							startHour * 100 + startMinutes - 10,
-						);
-
-						setFieldValue('endHour', parseInt(cap / 100, 10));
-						setFieldValue(
-							'endMinutes',
-							cap - parseInt(cap / 100, 10) * 100,
-						);
-					}
-				}
-				else if (trackingState === trackingEnum.BREAK_START) {
-					const [
-						newBreakStartHour,
-						newBreakStartMinutes,
-					] = convertMousePosToTime({x: e.clientX});
-
-					const wasBreakStartAfterStart = isAAfterOrEqualToB(
-						[breakStartHour, breakStartMinutes],
-						[startHour, startMinutes],
-					);
-					const wasBreakStartBeforeBreakEnd = isABeforeOrEqualToB(
-						[breakStartHour, breakStartMinutes],
-						[breakEndHour, breakEndMinutes],
-					);
-
+			if (!wasStartAfterEnd || !wasStartBeforeBreakStart) {
+				// [0, breakStart[ ]end, 100]
+				if (
+					isAAfterOrEqualToB(newTime, [
+						breakStartHour,
+						breakStartMinutes - 10,
+					])
+					&& isABeforeOrEqualToB(newTime, [endHour, endMinutes + 10])
+				) {
+					// closer to one or the other
 					if (
-						!wasBreakStartAfterStart
-						|| !wasBreakStartBeforeBreakEnd
+						isCloserToA(
+							newTime,
+							[breakStartHour, breakStartMinutes],
+							[endHour, endMinutes],
+						)
 					) {
-						// [0, breakEnd] ]start, 100]
-						if (
-							isAAfterOrEqualToB(
-								[newBreakStartHour, newBreakStartMinutes],
-								[breakEndHour, breakEndMinutes],
-							)
-							&& isABeforeOrEqualToB(
-								[newBreakStartHour, newBreakStartMinutes],
-								[startHour, startMinutes + 10],
-							)
-						) {
-							// closer to one or the other
-							if (
-								isCloserToA(
-									[newBreakStartHour, newBreakStartMinutes],
-									[breakEndHour, breakEndMinutes],
-									[startHour, startMinutes],
-								)
-							) {
-								setFieldValue('breakStartHour', breakEndHour);
-								setFieldValue(
-									'breakStartMinutes',
-									breakEndMinutes,
-								);
-							}
-							else {
-								setFieldValue('breakStartHour', startHour);
-								setFieldValue(
-									'breakStartMinutes',
-									startMinutes + 10,
-								);
-							}
-						}
-						else {
-							setFieldValue('breakStartHour', newBreakStartHour);
-							setFieldValue(
-								'breakStartMinutes',
-								newBreakStartMinutes,
-							);
-						}
+						setFieldValue('startHour', breakStartHour);
+						setFieldValue('startMinutes', breakStartMinutes - 10);
 					}
-					else if (
-						wasBreakStartAfterStart
-						&& wasBreakStartBeforeBreakEnd
-					) {
-						// ]start, breakEnd]
-						const cap = Math.min(
-							Math.max(
-								newBreakStartHour * 100 + newBreakStartMinutes,
-								startHour * 100 + startMinutes + 10,
-							),
-							breakEndHour * 100 + breakEndMinutes,
-						);
-
-						setFieldValue(
-							'breakStartHour',
-							parseInt(cap / 100, 10),
-						);
-						setFieldValue(
-							'breakStartMinutes',
-							cap - parseInt(cap / 100, 10) * 100,
-						);
+					else {
+						setFieldValue('startHour', endHour);
+						setFieldValue('startMinutes', endMinutes + 10);
 					}
 				}
-				else if (trackingState === trackingEnum.BREAK_END) {
-					const [
-						newBreakEndHour,
-						newBreakEndMinutes,
-					] = convertMousePosToTime({x: e.clientX});
-
-					const wasBreakEndAfterBreakStart = isAAfterOrEqualToB(
-						[breakEndHour, breakEndMinutes],
-						[breakStartHour, breakStartMinutes],
-					);
-					const wasBreakEndBeforeEnd = isABeforeOrEqualToB(
-						[breakEndHour, breakEndMinutes],
-						[endHour, endMinutes],
-					);
-
-					if (!wasBreakEndAfterBreakStart || !wasBreakEndBeforeEnd) {
-						// [0, end[ [breakStart, 100]
-						if (
-							isAAfterOrEqualToB(
-								[newBreakEndHour, newBreakEndMinutes],
-								[endHour, endMinutes - 10],
-							)
-							&& isABeforeOrEqualToB(
-								[newBreakEndHour, newBreakEndMinutes],
-								[breakStartHour, breakStartMinutes],
-							)
-						) {
-							// closer to one or the other
-							if (
-								isCloserToA(
-									[newBreakEndHour, newBreakEndMinutes],
-									[endHour, endMinutes],
-									[breakStartHour, breakStartMinutes],
-								)
-							) {
-								setFieldValue('breakEndHour', endHour);
-								setFieldValue(
-									'breakEndMinutes',
-									endMinutes - 10,
-								);
-							}
-							else {
-								setFieldValue('breakEndHour', breakStartHour);
-								setFieldValue(
-									'breakEndMinutes',
-									breakStartMinutes,
-								);
-							}
-						}
-						else {
-							setFieldValue('breakEndHour', newBreakEndHour);
-							setFieldValue(
-								'breakEndMinutes',
-								newBreakEndMinutes,
-							);
-						}
-					}
-					else if (
-						wasBreakEndAfterBreakStart
-						&& wasBreakEndBeforeEnd
-					) {
-						// [breakStart, end[
-						const cap = Math.min(
-							Math.max(
-								newBreakEndHour * 100 + newBreakEndMinutes,
-								breakStartHour * 100 + breakStartMinutes,
-							),
-							endHour * 100 + endMinutes - 10,
-						);
-
-						setFieldValue('breakEndHour', parseInt(cap / 100, 10));
-						setFieldValue(
-							'breakEndMinutes',
-							cap - parseInt(cap / 100, 10) * 100,
-						);
-					}
-				}
-			}}
-			onTouchMove={(e) => {
-				const [touch] = e.changedTouches;
-
-				if (trackingState === trackingEnum.START) {
-					const [
-						newStartHour,
-						newStartMinutes,
-					] = convertMousePosToTime({x: touch.pageX});
-
+				else {
 					setFieldValue('startHour', newStartHour);
 					setFieldValue('startMinutes', newStartMinutes);
 				}
-				else if (trackingState === trackingEnum.END) {
-					const [newEndHour, newEndMinutes] = convertMousePosToTime({
-						x: touch.pageX,
-					});
+			}
+			else if (wasStartAfterEnd && wasStartBeforeBreakStart) {
+				// ]end, breakStart[
+				const cap = Math.min(
+					Math.max(
+						newStartHour * 100 + newStartMinutes,
+						endHour * 100 + endMinutes + 10,
+					),
+					breakStartHour * 100 + breakStartMinutes - 10,
+				);
 
+				setFieldValue('startHour', parseInt(cap / 100, 10));
+				setFieldValue(
+					'startMinutes',
+					cap - parseInt(cap / 100, 10) * 100,
+				);
+			}
+		}
+		else if (trackingState === trackingEnum.END) {
+			const [newEndHour, newEndMinutes] = newTime;
+
+			if (!wasStartAfterEnd || !wasEndAfterBreakEnd) {
+				// [0, start[ ]breakEnd, 100]
+				if (
+					isAAfterOrEqualToB(newTime, [
+						startHour,
+						startMinutes - 10,
+					])
+					&& isABeforeOrEqualToB(newTime, [
+						breakEndHour,
+						breakEndMinutes + 10,
+					])
+				) {
+					// closer to one or the other
+					if (
+						isCloserToA(
+							newTime,
+							[startHour, startMinutes],
+							[breakEndHour, breakEndMinutes],
+						)
+					) {
+						setFieldValue('endHour', startHour);
+						setFieldValue('endMinutes', startMinutes - 10);
+					}
+					else {
+						setFieldValue('endHour', breakEndHour);
+						setFieldValue('endMinutes', breakEndMinutes + 10);
+					}
+				}
+				else {
 					setFieldValue('endHour', newEndHour);
 					setFieldValue('endMinutes', newEndMinutes);
 				}
-				else if (trackingState === trackingEnum.BREAK_START) {
-					const [
-						newBreakStartHour,
-						newBreakStartMinutes,
-					] = convertMousePosToTime({x: touch.pageX});
+			}
+			else if (wasStartAfterEnd && wasEndAfterBreakEnd) {
+				// ]breakEnd, start[
+				const cap = Math.min(
+					Math.max(
+						newEndHour * 100 + newEndMinutes,
+						breakEndHour * 100 + breakEndMinutes + 10,
+					),
+					startHour * 100 + startMinutes - 10,
+				);
 
+				setFieldValue('endHour', parseInt(cap / 100, 10));
+				setFieldValue(
+					'endMinutes',
+					cap - parseInt(cap / 100, 10) * 100,
+				);
+			}
+		}
+		else if (trackingState === trackingEnum.BREAK_START) {
+			const [newBreakStartHour, newBreakStartMinutes] = newTime;
+
+			const wasBreakStartAfterStart = isAAfterOrEqualToB(
+				[breakStartHour, breakStartMinutes],
+				[startHour, startMinutes],
+			);
+			const wasBreakStartBeforeBreakEnd = isABeforeOrEqualToB(
+				[breakStartHour, breakStartMinutes],
+				[breakEndHour, breakEndMinutes],
+			);
+
+			if (!wasBreakStartAfterStart || !wasBreakStartBeforeBreakEnd) {
+				// [0, breakEnd] ]start, 100]
+				if (
+					isAAfterOrEqualToB(newTime, [
+						breakEndHour,
+						breakEndMinutes,
+					])
+					&& isABeforeOrEqualToB(newTime, [startHour, startMinutes + 10])
+				) {
+					// closer to one or the other
+					if (
+						isCloserToA(
+							newTime,
+							[breakEndHour, breakEndMinutes],
+							[startHour, startMinutes],
+						)
+					) {
+						setFieldValue('breakStartHour', breakEndHour);
+						setFieldValue('breakStartMinutes', breakEndMinutes);
+					}
+					else {
+						setFieldValue('breakStartHour', startHour);
+						setFieldValue('breakStartMinutes', startMinutes + 10);
+					}
+				}
+				else {
 					setFieldValue('breakStartHour', newBreakStartHour);
 					setFieldValue('breakStartMinutes', newBreakStartMinutes);
 				}
-				else if (trackingState === trackingEnum.BREAK_END) {
-					const [
-						newBreakEndHour,
-						newBreakEndMinutes,
-					] = convertMousePosToTime({
-						x: touch.pageX,
-					});
+			}
+			else if (wasBreakStartAfterStart && wasBreakStartBeforeBreakEnd) {
+				// ]start, breakEnd]
+				const cap = Math.min(
+					Math.max(
+						newBreakStartHour * 100 + newBreakStartMinutes,
+						startHour * 100 + startMinutes + 10,
+					),
+					breakEndHour * 100 + breakEndMinutes,
+				);
 
+				setFieldValue('breakStartHour', parseInt(cap / 100, 10));
+				setFieldValue(
+					'breakStartMinutes',
+					cap - parseInt(cap / 100, 10) * 100,
+				);
+			}
+		}
+		else if (trackingState === trackingEnum.BREAK_END) {
+			const [newBreakEndHour, newBreakEndMinutes] = newTime;
+
+			const wasBreakEndAfterBreakStart = isAAfterOrEqualToB(
+				[breakEndHour, breakEndMinutes],
+				[breakStartHour, breakStartMinutes],
+			);
+			const wasBreakEndBeforeEnd = isABeforeOrEqualToB(
+				[breakEndHour, breakEndMinutes],
+				[endHour, endMinutes],
+			);
+
+			if (!wasBreakEndAfterBreakStart || !wasBreakEndBeforeEnd) {
+				// [0, end[ [breakStart, 100]
+				if (
+					isAAfterOrEqualToB(newTime, [endHour, endMinutes - 10])
+					&& isABeforeOrEqualToB(newTime, [
+						breakStartHour,
+						breakStartMinutes,
+					])
+				) {
+					// closer to one or the other
+					if (
+						isCloserToA(
+							newTime,
+							[endHour, endMinutes],
+							[breakStartHour, breakStartMinutes],
+						)
+					) {
+						setFieldValue('breakEndHour', endHour);
+						setFieldValue('breakEndMinutes', endMinutes - 10);
+					}
+					else {
+						setFieldValue('breakEndHour', breakStartHour);
+						setFieldValue('breakEndMinutes', breakStartMinutes);
+					}
+				}
+				else {
 					setFieldValue('breakEndHour', newBreakEndHour);
 					setFieldValue('breakEndMinutes', newBreakEndMinutes);
 				}
+			}
+			else if (wasBreakEndAfterBreakStart && wasBreakEndBeforeEnd) {
+				// [breakStart, end[
+				const cap = Math.min(
+					Math.max(
+						newBreakEndHour * 100 + newBreakEndMinutes,
+						breakStartHour * 100 + breakStartMinutes,
+					),
+					endHour * 100 + endMinutes - 10,
+				);
+
+				setFieldValue('breakEndHour', parseInt(cap / 100, 10));
+				setFieldValue(
+					'breakEndMinutes',
+					cap - parseInt(cap / 100, 10) * 100,
+				);
+			}
+		}
+	};
+
+	return (
+		<TimeInputContainer
+			onMouseMove={(e) => {
+				if (trackingState === null) return;
+
+				const newTime = convertMousePosToTime({x: e.clientX});
+
+				moveCurrentTo(newTime);
+			}}
+			onTouchMove={(e) => {
+				if (trackingState === null) return;
+
+				const [touch] = e.changedTouches;
+				const newTime = convertMousePosToTime({x: touch.pageX});
+
+				moveCurrentTo(newTime);
 			}}
 			style={style}
 		>

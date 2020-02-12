@@ -100,8 +100,6 @@ function convertMousePosToTime({x}) {
 	return [hour, minutes];
 }
 
-const isAAfterOrEqualToB = (a, b) => a[0] > b[0] || (a[0] === b[0] && a[1] >= b[1]);
-const isABeforeOrEqualToB = (a, b) => a[0] < b[0] || (a[0] === b[0] && a[1] <= b[1]);
 const isCloserToA = (curr, a, b) => Math.abs(curr[0] * 60 + curr[1] - (a[0] * 60 + a[1]))
 	< Math.abs(curr[0] * 60 + curr[1] - (b[0] * 60 + b[1]));
 
@@ -121,31 +119,22 @@ export default function DoubleRangeTimeInput(props) {
 	const breakEndPercentage
 		= (breakEndHour / 24 + breakEndMinutes / (60 * 24)) * 100;
 
-	const moveCurrentTo = (newTime) => {
-		const wasStartAfterEnd = isAAfterOrEqualToB(
-			[startHour, startMinutes],
-			[endHour, endMinutes],
-		);
-		const wasStartBeforeBreakStart = isABeforeOrEqualToB(
-			[startHour, startMinutes],
-			[breakStartHour, breakStartMinutes],
-		);
+	const start = startHour * 60 + startMinutes;
+	const end = endHour * 60 + endMinutes;
+	const breakStart = breakStartHour * 60 + breakStartMinutes;
+	const breakEnd = breakEndHour * 60 + breakEndMinutes;
 
-		const wasEndAfterBreakEnd
-			= endHour > breakEndHour
-			|| (endHour === breakEndHour && endMinutes >= breakEndMinutes);
+	const moveCurrentTo = (newTime) => {
+		const newTimeMinutes = newTime[0] * 60 + newTime[1];
 
 		if (trackingState === trackingEnum.START) {
 			const [newStartHour, newStartMinutes] = newTime;
 
-			if (!wasStartAfterEnd || !wasStartBeforeBreakStart) {
+			if (start < end || start > breakStart) {
 				// [0, breakStart[ ]end, 100]
 				if (
-					isAAfterOrEqualToB(newTime, [
-						breakStartHour,
-						breakStartMinutes - 10,
-					])
-					&& isABeforeOrEqualToB(newTime, [endHour, endMinutes + 10])
+					newTimeMinutes >= breakStart - 10
+					&& newTimeMinutes <= end + 10
 				) {
 					// closer to one or the other
 					if (
@@ -155,12 +144,18 @@ export default function DoubleRangeTimeInput(props) {
 							[endHour, endMinutes],
 						)
 					) {
-						setFieldValue('startHour', breakStartHour);
-						setFieldValue('startMinutes', breakStartMinutes - 10);
+						setFieldValue(
+							'startHour',
+							parseInt((breakStart - 10) / 60, 10),
+						);
+						setFieldValue('startMinutes', (breakStart - 10) % 60);
 					}
 					else {
-						setFieldValue('startHour', endHour);
-						setFieldValue('startMinutes', endMinutes + 10);
+						setFieldValue(
+							'startHour',
+							parseInt((end + 10) / 60, 10),
+						);
+						setFieldValue('startMinutes', (end + 10) % 60);
 					}
 				}
 				else {
@@ -168,37 +163,25 @@ export default function DoubleRangeTimeInput(props) {
 					setFieldValue('startMinutes', newStartMinutes);
 				}
 			}
-			else if (wasStartAfterEnd && wasStartBeforeBreakStart) {
+			else {
 				// ]end, breakStart[
 				const cap = Math.min(
-					Math.max(
-						newStartHour * 100 + newStartMinutes,
-						endHour * 100 + endMinutes + 10,
-					),
-					breakStartHour * 100 + breakStartMinutes - 10,
+					Math.max(newStartHour * 60 + newStartMinutes, end + 10),
+					breakStart - 10,
 				);
 
-				setFieldValue('startHour', parseInt(cap / 100, 10));
-				setFieldValue(
-					'startMinutes',
-					cap - parseInt(cap / 100, 10) * 100,
-				);
+				setFieldValue('startHour', parseInt(cap / 60, 10));
+				setFieldValue('startMinutes', cap % 60);
 			}
 		}
 		else if (trackingState === trackingEnum.END) {
 			const [newEndHour, newEndMinutes] = newTime;
 
-			if (!wasStartAfterEnd || !wasEndAfterBreakEnd) {
+			if (start < end || end < breakEnd) {
 				// [0, start[ ]breakEnd, 100]
 				if (
-					isAAfterOrEqualToB(newTime, [
-						startHour,
-						startMinutes - 10,
-					])
-					&& isABeforeOrEqualToB(newTime, [
-						breakEndHour,
-						breakEndMinutes + 10,
-					])
+					newTimeMinutes >= start - 10
+					&& newTimeMinutes <= breakEnd - 10
 				) {
 					// closer to one or the other
 					if (
@@ -208,12 +191,18 @@ export default function DoubleRangeTimeInput(props) {
 							[breakEndHour, breakEndMinutes],
 						)
 					) {
-						setFieldValue('endHour', startHour);
-						setFieldValue('endMinutes', startMinutes - 10);
+						setFieldValue(
+							'endHour',
+							parseInt((start - 10) / 60, 10),
+						);
+						setFieldValue('endMinutes', (start - 10) % 60);
 					}
 					else {
-						setFieldValue('endHour', breakEndHour);
-						setFieldValue('endMinutes', breakEndMinutes + 10);
+						setFieldValue(
+							'endHour',
+							parseInt((breakEnd - 10) / 60, 10),
+						);
+						setFieldValue('endMinutes', (breakEnd + 10) % 60);
 					}
 				}
 				else {
@@ -221,43 +210,25 @@ export default function DoubleRangeTimeInput(props) {
 					setFieldValue('endMinutes', newEndMinutes);
 				}
 			}
-			else if (wasStartAfterEnd && wasEndAfterBreakEnd) {
+			else {
 				// ]breakEnd, start[
 				const cap = Math.min(
-					Math.max(
-						newEndHour * 100 + newEndMinutes,
-						breakEndHour * 100 + breakEndMinutes + 10,
-					),
-					startHour * 100 + startMinutes - 10,
+					Math.max(newEndHour * 60 + newEndMinutes, breakEnd + 10),
+					start - 10,
 				);
 
-				setFieldValue('endHour', parseInt(cap / 100, 10));
-				setFieldValue(
-					'endMinutes',
-					cap - parseInt(cap / 100, 10) * 100,
-				);
+				setFieldValue('endHour', parseInt(cap / 60, 10));
+				setFieldValue('endMinutes', cap % 60);
 			}
 		}
 		else if (trackingState === trackingEnum.BREAK_START) {
 			const [newBreakStartHour, newBreakStartMinutes] = newTime;
 
-			const wasBreakStartAfterStart = isAAfterOrEqualToB(
-				[breakStartHour, breakStartMinutes],
-				[startHour, startMinutes],
-			);
-			const wasBreakStartBeforeBreakEnd = isABeforeOrEqualToB(
-				[breakStartHour, breakStartMinutes],
-				[breakEndHour, breakEndMinutes],
-			);
-
-			if (!wasBreakStartAfterStart || !wasBreakStartBeforeBreakEnd) {
+			if (breakStart < start || breakStart > breakEnd) {
 				// [0, breakEnd] ]start, 100]
 				if (
-					isAAfterOrEqualToB(newTime, [
-						breakEndHour,
-						breakEndMinutes,
-					])
-					&& isABeforeOrEqualToB(newTime, [startHour, startMinutes + 10])
+					newTimeMinutes >= breakEnd
+					&& newTimeMinutes <= start + 10
 				) {
 					// closer to one or the other
 					if (
@@ -271,8 +242,11 @@ export default function DoubleRangeTimeInput(props) {
 						setFieldValue('breakStartMinutes', breakEndMinutes);
 					}
 					else {
-						setFieldValue('breakStartHour', startHour);
-						setFieldValue('breakStartMinutes', startMinutes + 10);
+						setFieldValue(
+							'breakStartHour',
+							parseInt((start + 10) / 60, 10),
+						);
+						setFieldValue('breakStartMinutes', (start + 10) % 60);
 					}
 				}
 				else {
@@ -280,43 +254,28 @@ export default function DoubleRangeTimeInput(props) {
 					setFieldValue('breakStartMinutes', newBreakStartMinutes);
 				}
 			}
-			else if (wasBreakStartAfterStart && wasBreakStartBeforeBreakEnd) {
+			else {
 				// ]start, breakEnd]
 				const cap = Math.min(
 					Math.max(
-						newBreakStartHour * 100 + newBreakStartMinutes,
-						startHour * 100 + startMinutes + 10,
+						newBreakStartHour * 60 + newBreakStartMinutes,
+						start + 10,
 					),
-					breakEndHour * 100 + breakEndMinutes,
+					breakEnd,
 				);
 
-				setFieldValue('breakStartHour', parseInt(cap / 100, 10));
-				setFieldValue(
-					'breakStartMinutes',
-					cap - parseInt(cap / 100, 10) * 100,
-				);
+				setFieldValue('breakStartHour', parseInt(cap / 60, 10));
+				setFieldValue('breakStartMinutes', cap % 60);
 			}
 		}
 		else if (trackingState === trackingEnum.BREAK_END) {
 			const [newBreakEndHour, newBreakEndMinutes] = newTime;
 
-			const wasBreakEndAfterBreakStart = isAAfterOrEqualToB(
-				[breakEndHour, breakEndMinutes],
-				[breakStartHour, breakStartMinutes],
-			);
-			const wasBreakEndBeforeEnd = isABeforeOrEqualToB(
-				[breakEndHour, breakEndMinutes],
-				[endHour, endMinutes],
-			);
-
-			if (!wasBreakEndAfterBreakStart || !wasBreakEndBeforeEnd) {
+			if (breakEnd < breakStart || breakEnd > end) {
 				// [0, end[ [breakStart, 100]
 				if (
-					isAAfterOrEqualToB(newTime, [endHour, endMinutes - 10])
-					&& isABeforeOrEqualToB(newTime, [
-						breakStartHour,
-						breakStartMinutes,
-					])
+					newTimeMinutes >= end - 10
+					&& newTimeMinutes <= breakStart
 				) {
 					// closer to one or the other
 					if (
@@ -326,8 +285,11 @@ export default function DoubleRangeTimeInput(props) {
 							[breakStartHour, breakStartMinutes],
 						)
 					) {
-						setFieldValue('breakEndHour', endHour);
-						setFieldValue('breakEndMinutes', endMinutes - 10);
+						setFieldValue(
+							'breakEndHour',
+							parseInt((end - 10) / 60, 10),
+						);
+						setFieldValue('breakEndMinutes', (end - 10) % 60);
 					}
 					else {
 						setFieldValue('breakEndHour', breakStartHour);
@@ -339,21 +301,18 @@ export default function DoubleRangeTimeInput(props) {
 					setFieldValue('breakEndMinutes', newBreakEndMinutes);
 				}
 			}
-			else if (wasBreakEndAfterBreakStart && wasBreakEndBeforeEnd) {
+			else {
 				// [breakStart, end[
 				const cap = Math.min(
 					Math.max(
-						newBreakEndHour * 100 + newBreakEndMinutes,
-						breakStartHour * 100 + breakStartMinutes,
+						newBreakEndHour * 60 + newBreakEndMinutes,
+						breakStart,
 					),
-					endHour * 100 + endMinutes - 10,
+					end - 10,
 				);
 
-				setFieldValue('breakEndHour', parseInt(cap / 100, 10));
-				setFieldValue(
-					'breakEndMinutes',
-					cap - parseInt(cap / 100, 10) * 100,
-				);
+				setFieldValue('breakEndHour', parseInt(cap / 60, 10));
+				setFieldValue('breakEndMinutes', cap % 60);
 			}
 		}
 	};

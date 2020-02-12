@@ -177,6 +177,8 @@ const DashboardTasks = ({location, history}) => {
 			) return;
 
 			focusTask({
+				refetchQueries: ['getPlannedTimes'],
+				awaitRefetchQueries: true,
 				variables: {
 					itemId: task.id,
 					from,
@@ -399,8 +401,8 @@ const DashboardTasks = ({location, history}) => {
 					/>
 					<Loading loading={loading} fallback={<LoadingScreen />}>
 						{() => (unscheduledTasks.length !== 0
-								|| unscheduledFilteredTasks.length
-									!== unscheduledTasks.length ? (
+							|| unscheduledFilteredTasks.length
+								!== unscheduledTasks.length ? (
 								<TasksList
 									style={TasksListStyle}
 									hasFilteredItems={
@@ -431,7 +433,8 @@ const DashboardTasks = ({location, history}) => {
 										</IllusText>
 									</IllusContainer>
 								</div>
-							))}
+							))
+						}
 					</Loading>
 				</div>
 			</FlexRowMobile>

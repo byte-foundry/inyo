@@ -255,6 +255,8 @@ const DraggableTaskCard = ({
 		end(item, monitor) {
 			if (!monitor.didDrop()) {
 				unfocusTask({
+					refetchQueries: ['getPlannedTimes'],
+					awaitRefetchQueries: true,
 					variables: {
 						itemId: id,
 						from: scheduledFor,

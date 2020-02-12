@@ -16,7 +16,7 @@ import {
 	primaryPurple,
 	primaryWhite,
 } from '../../utils/new/design-system';
-import {GET_USER_INFOS} from '../../utils/queries';
+import {GET_PLANNED_TIMES, GET_USER_INFOS} from '../../utils/queries';
 import useAccount from '../../utils/useAccount';
 import useCalendar from '../../utils/useCalendar';
 import usePrevious from '../../utils/usePrevious';
@@ -107,7 +107,8 @@ const MonthTitle = styled('div')`
 
 const Month = styled('div')`
 	display: grid;
-	grid-template-columns: 14% repeat(auto-fill, 14%);
+	grid-template-columns: 44px repeat(auto-fill, 44px);
+	grid-gap: 2px;
 `;
 
 const DroppableDay = memo(
@@ -115,9 +116,7 @@ const DroppableDay = memo(
 		day, index, scheduledFor, onMove, isOff, workingTime = 8,
 	}) => {
 		const {language} = useUserInfos();
-		const timeLeft
-			= workingTime
-			- day.tasks.reduce((time, task) => time + task.unit, 0) * workingTime;
+		const timeLeft = workingTime * (1 - day.workingTime);
 
 		return (
 			<MiniDroppableDay
@@ -158,22 +157,22 @@ const DroppableDay = memo(
 function LeftBarSchedule({
 	isDragging, days, fullWeek, onMoveTask,
 }) {
-	const wasOpen = usePrevious(isDragging);
+	const wasOpen = usePrevious(true);
 	const animatedProps = useSpring({
 		to: async (next) => {
-			if (isDragging) {
+			if (true) {
 				await next({
-					width: 321,
-					padding: 32,
+					width: 337,
+					padding: 15,
 					paddingTop: 0,
 				});
-				await next({width: 321, padding: 32, paddingTop: 0});
+				await next({width: 337, padding: 15, paddingTop: 0});
 			}
 			else {
 				if (wasOpen) {
 					await next({
-						width: 321,
-						padding: 32,
+						width: 337,
+						padding: 15,
 						paddingTop: 0,
 					});
 				}
@@ -200,6 +199,18 @@ function LeftBarSchedule({
 	const endDate = useMemo(() => moment(startDate).add(180, 'days'), [
 		startDate,
 	]);
+	const {
+		data: plannedWorkingTimes,
+		loading: loadingWorkingTimes,
+		error: errorWorkingTimes,
+	} = useQuery(GET_PLANNED_TIMES, {
+		suspend: true,
+		fetchPolicy: 'no-cache',
+		variables: {
+			from: startDate.format(moment.HTML5_FMT.DATE),
+			to: endDate.format(moment.HTML5_FMT.DATE),
+		},
+	});
 	const [account] = useAccount();
 	const {data: eventsPerDay, loaded} = useCalendar(account, [
 		'primary',
@@ -221,6 +232,11 @@ function LeftBarSchedule({
 			);
 
 			weekdays.forEach((day) => {
+				day.workingTime = (
+					plannedWorkingTimes.plannedWorkingTimes.find(
+						p => p.date === day.date,
+					) || {workingTime: 0}
+				).workingTime;
 				day.onMove = ({
 					id,
 					type,
@@ -259,8 +275,8 @@ function LeftBarSchedule({
 		onMoveTask,
 	]);
 
-	if (loadingUserPrefs) return <Loading />;
-	if (errorUserPrefs) throw errorUserPrefs;
+	if (loadingUserPrefs || loadingWorkingTimes) return <Loading />;
+	if (errorUserPrefs || errorWorkingTimes) throw errorUserPrefs || errorWorkingTimes;
 
 	const months = weekdays.reduce((acc, weekday) => {
 		const monthNumber = weekday.momentDate.month();
@@ -275,6 +291,13 @@ function LeftBarSchedule({
 		return acc;
 	}, []);
 
+	months.forEach((month) => {
+		const firstDay = month.days[0];
+
+		const paddingNumber = firstDay.momentDate.day() - 1;
+		month.days = [...Array(paddingNumber).fill(null), ...month.days];
+	});
+
 	return (
 		<LeftBarContainer>
 			<LeftBarElem style={animatedProps} id="left-bar-schedule">
@@ -287,16 +310,22 @@ function LeftBarSchedule({
 									.format('MMMM')}
 							</MonthTitle>
 							<Month>
-								{days.map(day => (
-									<DroppableDay
-										key={day.date}
-										day={day}
-										index={day.tasks.length}
-										scheduledFor={day.date}
-										isOff={!day.workedDay}
-										onMove={day.onMove}
-									/>
-								))}
+								{days.map((day) => {
+									if (day === null) {
+										return <div></div>;
+									}
+
+									return (
+										<DroppableDay
+											key={day.date}
+											day={day}
+											index={day.tasks.length}
+											scheduledFor={day.date}
+											isOff={!day.workedDay}
+											onMove={day.onMove}
+										/>
+									);
+								})}
 							</Month>
 						</>
 					))}

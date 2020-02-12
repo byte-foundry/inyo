@@ -78,6 +78,8 @@ function TaskActivationHeader({
 						onCommit={() => {
 							if (item.type === 'CONTENT_ACQUISITION') {
 								focusTask({
+									refetchQueries: ['getPlannedTimes'],
+									awaitRefetchQueries: true,
 									variables: {itemId: item.id},
 									optimisticResponse: {
 										focusTask: {
@@ -124,6 +126,8 @@ function TaskActivationHeader({
 						onCommit={() => {
 							if (item.type === 'CONTENT_ACQUISITION') {
 								focusTask({
+									refetchQueries: ['getPlannedTimes'],
+									awaitRefetchQueries: true,
 									variables: {itemId: item.id},
 									optimisticResponse: {
 										focusTask: {
@@ -220,6 +224,8 @@ function TaskActivationHeader({
 									color={primaryWhite}
 									onClick={() => {
 										focusTask({
+											refetchQueries: ['getPlannedTimes'],
+											awaitRefetchQueries: true,
 											variables: {itemId: item.id},
 											optimisticResponse: {
 												focusTask: {
@@ -245,6 +251,8 @@ function TaskActivationHeader({
 						taskId={item.id}
 						isActive={item.scheduledFor}
 						onCommit={() => focusTask({
+							refetchQueries: ['getPlannedTimes'],
+							awaitRefetchQueries: true,
 							variables: {itemId: item.id},
 							optimisticResponse: {
 								focusTask: {

@@ -423,6 +423,10 @@ function Task({
 														) return;
 
 														focusTask({
+															refetchQueries: [
+																'getPlannedTimes',
+															],
+															awaitRefetchQueries: true,
 															variables: {
 																itemId:
 																		item.id,
@@ -440,6 +444,10 @@ function Task({
 											}
 											else {
 												focusTask({
+													refetchQueries: [
+														'getPlannedTimes',
+													],
+													awaitRefetchQueries: true,
 													variables: {
 														itemId: item.id,
 														for: new Date()
@@ -466,6 +474,8 @@ function Task({
 							icon="today"
 							size="tiny"
 							onClick={() => focusTask({
+								refetchQueries: ['getPlannedTimes'],
+								awaitRefetchQueries: true,
 								variables: {
 									itemId: item.id,
 									for: new Date().toJSON().split('T')[0],

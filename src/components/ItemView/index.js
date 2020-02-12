@@ -1136,6 +1136,8 @@ const Item = ({
 							<TaskButton
 								onClick={() => {
 									unfocusTask({
+										refetchQueries: ['getPlannedTimes'],
+										awaitRefetchQueries: true,
 										variables: {itemId: item.id},
 									});
 								}}
@@ -1162,6 +1164,8 @@ const Item = ({
 							onClick={() => {
 								if (item.type === 'CONTENT_ACQUISITION') {
 									focusTask({
+										refetchQueries: ['getPlannedTimes'],
+										awaitRefetchQueries: true,
 										variables: {itemId: item.id},
 									});
 								}

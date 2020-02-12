@@ -23,6 +23,8 @@ export const LOGIN = gql`
 				workingDays
 				startWorkAt
 				endWorkAt
+				startBreakAt
+				endBreakAt
 				timeZone
 				company {
 					phone
@@ -76,6 +78,8 @@ export const UPDATE_USER = gql`
 			lastName
 			startWorkAt
 			endWorkAt
+			startBreakAt
+			endBreakAt
 			workingDays
 			company {
 				id
@@ -106,6 +110,8 @@ export const UPDATE_USER_CONSTANTS = gql`
 		$otherPain: String
 		$startWorkAt: Time
 		$endWorkAt: Time
+		$startBreakAt: Time
+		$endBreakAt: Time
 		$company: CompanyInput
 		$workingDays: [DAY!]
 		$timeZone: TimeZone
@@ -124,6 +130,8 @@ export const UPDATE_USER_CONSTANTS = gql`
 			company: $company
 			startWorkAt: $startWorkAt
 			endWorkAt: $endWorkAt
+			startBreakAt: $startBreakAt
+			endBreakAt: $endBreakAt
 			workingDays: $workingDays
 			timeZone: $timeZone
 			settings: {hasFullWeekSchedule: $hasFullWeekSchedule}
@@ -139,6 +147,8 @@ export const UPDATE_USER_CONSTANTS = gql`
 			hasUpcomingProject
 			startWorkAt
 			endWorkAt
+			startBreakAt
+			endBreakAt
 			workingDays
 			timeZone
 			defaultDailyPrice

@@ -95,6 +95,8 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 		timeZone: initialTimeZone,
 		startWorkAt,
 		endWorkAt,
+		startBreakAt,
+		endBreakAt,
 		settings: {hasFullWeekSchedule: hasFullWeekScheduleInitial},
 		workingDays,
 		defaultDailyPrice: initialDailyRate,
@@ -103,6 +105,8 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 	const currentDate = new Date().toJSON().split('T')[0];
 	const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
 	const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+	const startBreakAtDate = new Date(`${currentDate}T${startBreakAt}`);
+	const endBreakAtDate = new Date(`${currentDate}T${endBreakAt}`);
 	const [updateUser] = useMutation(UPDATE_USER_CONSTANTS);
 
 	const startHourInitial
@@ -121,6 +125,22 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 		= endWorkAtDate.toString() === 'Invalid Date'
 			? 0
 			: endWorkAtDate.getMinutes();
+	const breakStartHourInitial
+		= startBreakAtDate.toString() === 'Invalid Date'
+			? 12
+			: startBreakAtDate.getHours();
+	const breakStartMinutesInitial
+		= startBreakAtDate.toString() === 'Invalid Date'
+			? 0
+			: startBreakAtDate.getMinutes();
+	const breakEndHourInitial
+		= endBreakAtDate.toString() === 'Invalid Date'
+			? 13
+			: endBreakAtDate.getHours();
+	const breakEndMinutesInitial
+		= endBreakAtDate.toString() === 'Invalid Date'
+			? 0
+			: endBreakAtDate.getMinutes();
 	const workingDaysInitial = workingDays || [
 		'MONDAY',
 		'TUESDAY',
@@ -137,10 +157,10 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 					startMinutes: startMinutesInitial,
 					endHour: endHourInitial,
 					endMinutes: endMinutesInitial,
-					breakStartHour: 15,
-					breakStartMinutes: 0,
-					breakEndHour: 18,
-					breakEndMinutes: 30,
+					breakStartHour: breakStartHourInitial,
+					breakStartMinutes: breakStartMinutesInitial,
+					breakEndHour: breakEndHourInitial,
+					breakEndMinutes: breakEndMinutesInitial,
 					workingDays: workingDaysInitial,
 					hasNotFullWeekSchedule: !hasFullWeekScheduleInitial,
 					timeZone: initialTimeZone,
@@ -194,11 +214,35 @@ const SettingsForm = ({data: props, done = () => {}}) => {
 					end.setSeconds(0);
 					end.setMilliseconds(0);
 
+					const breakStart = new Date();
+
+					breakStart.setHours(breakStartHour);
+					breakStart.setMinutes(breakStartMinutes);
+					breakStart.setSeconds(0);
+					breakStart.setMilliseconds(0);
+
+					const breakEnd = new Date();
+
+					breakEnd.setHours(breakEndHour);
+					breakEnd.setMinutes(breakEndMinutes);
+					breakEnd.setSeconds(0);
+					breakEnd.setMilliseconds(0);
+
+					window.Intercom('update', {
+						startHour: `${startHour}:${startMinutes}`,
+						endHour: `${endHour}:${endMinutes}`,
+						breakStartHour: `${breakStartHour}:${breakStartMinutes}`,
+						breakEndHour: `${breakEndHour}:${breakEndMinutes}`,
+						workingDays,
+					});
+
 					try {
 						await updateUser({
 							variables: {
 								startWorkAt: start.toJSON().split('T')[1],
 								endWorkAt: end.toJSON().split('T')[1],
+								startBreakAt: breakStart.toJSON().split('T')[1],
+								endBreakAt: breakEnd.toJSON().split('T')[1],
 								workingDays,
 								defaultDailyPrice: dailyRate
 									? parseInt(dailyRate, 10)

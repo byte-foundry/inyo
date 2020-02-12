@@ -144,15 +144,15 @@ export default function DoubleRangeTimeInput(props) {
 					] = convertMousePosToTime({x: e.clientX});
 
 					if (!wasStartAfterEnd || !wasStartBeforeBreakStart) {
-						// [0, breakStart] [end, 100]
+						// [0, breakStart[ ]end, 100]
 						if (
 							isAAfterOrEqualToB(
 								[newStartHour, newStartMinutes],
-								[breakStartHour, breakStartMinutes],
+								[breakStartHour, breakStartMinutes - 10],
 							)
 							&& isABeforeOrEqualToB(
 								[newStartHour, newStartMinutes],
-								[endHour, endMinutes],
+								[endHour, endMinutes + 10],
 							)
 						) {
 							// closer to one or the other
@@ -166,12 +166,12 @@ export default function DoubleRangeTimeInput(props) {
 								setFieldValue('startHour', breakStartHour);
 								setFieldValue(
 									'startMinutes',
-									breakStartMinutes,
+									breakStartMinutes - 10,
 								);
 							}
 							else {
 								setFieldValue('startHour', endHour);
-								setFieldValue('startMinutes', endMinutes);
+								setFieldValue('startMinutes', endMinutes + 10);
 							}
 						}
 						else {
@@ -180,13 +180,13 @@ export default function DoubleRangeTimeInput(props) {
 						}
 					}
 					else if (wasStartAfterEnd && wasStartBeforeBreakStart) {
-						// [end, breakStart]
+						// ]end, breakStart[
 						const cap = Math.min(
 							Math.max(
 								newStartHour * 100 + newStartMinutes,
-								endHour * 100 + endMinutes,
+								endHour * 100 + endMinutes + 10,
 							),
-							breakStartHour * 100 + breakStartMinutes,
+							breakStartHour * 100 + breakStartMinutes - 10,
 						);
 
 						setFieldValue('startHour', parseInt(cap / 100, 10));
@@ -202,15 +202,15 @@ export default function DoubleRangeTimeInput(props) {
 					});
 
 					if (!wasStartAfterEnd || !wasEndAfterBreakEnd) {
-						// [0, start] [breakEnd, 100]
+						// [0, start[ ]breakEnd, 100]
 						if (
 							isAAfterOrEqualToB(
 								[newEndHour, newEndMinutes],
-								[startHour, startMinutes],
+								[startHour, startMinutes - 10],
 							)
 							&& isABeforeOrEqualToB(
 								[newEndHour, newEndMinutes],
-								[breakEndHour, breakEndMinutes],
+								[breakEndHour, breakEndMinutes + 10],
 							)
 						) {
 							// closer to one or the other
@@ -222,11 +222,14 @@ export default function DoubleRangeTimeInput(props) {
 								)
 							) {
 								setFieldValue('endHour', startHour);
-								setFieldValue('endMinutes', startMinutes);
+								setFieldValue('endMinutes', startMinutes - 10);
 							}
 							else {
 								setFieldValue('endHour', breakEndHour);
-								setFieldValue('endMinutes', breakEndMinutes);
+								setFieldValue(
+									'endMinutes',
+									breakEndMinutes + 10,
+								);
 							}
 						}
 						else {
@@ -235,13 +238,13 @@ export default function DoubleRangeTimeInput(props) {
 						}
 					}
 					else if (wasStartAfterEnd && wasEndAfterBreakEnd) {
-						// [breakEnd, start]
+						// ]breakEnd, start[
 						const cap = Math.min(
 							Math.max(
 								newEndHour * 100 + newEndMinutes,
-								breakEndHour * 100 + breakEndMinutes,
+								breakEndHour * 100 + breakEndMinutes + 10,
 							),
-							startHour * 100 + startMinutes,
+							startHour * 100 + startMinutes - 10,
 						);
 
 						setFieldValue('endHour', parseInt(cap / 100, 10));
@@ -270,7 +273,7 @@ export default function DoubleRangeTimeInput(props) {
 						!wasBreakStartAfterStart
 						|| !wasBreakStartBeforeBreakEnd
 					) {
-						// [0, breakEnd] [start, 100]
+						// [0, breakEnd] ]start, 100]
 						if (
 							isAAfterOrEqualToB(
 								[newBreakStartHour, newBreakStartMinutes],
@@ -278,7 +281,7 @@ export default function DoubleRangeTimeInput(props) {
 							)
 							&& isABeforeOrEqualToB(
 								[newBreakStartHour, newBreakStartMinutes],
-								[startHour, startMinutes],
+								[startHour, startMinutes + 10],
 							)
 						) {
 							// closer to one or the other
@@ -299,7 +302,7 @@ export default function DoubleRangeTimeInput(props) {
 								setFieldValue('breakStartHour', startHour);
 								setFieldValue(
 									'breakStartMinutes',
-									startMinutes,
+									startMinutes + 10,
 								);
 							}
 						}
@@ -315,11 +318,11 @@ export default function DoubleRangeTimeInput(props) {
 						wasBreakStartAfterStart
 						&& wasBreakStartBeforeBreakEnd
 					) {
-						// [start, breakEnd]
+						// ]start, breakEnd]
 						const cap = Math.min(
 							Math.max(
 								newBreakStartHour * 100 + newBreakStartMinutes,
-								startHour * 100 + startMinutes,
+								startHour * 100 + startMinutes + 10,
 							),
 							breakEndHour * 100 + breakEndMinutes,
 						);
@@ -350,11 +353,11 @@ export default function DoubleRangeTimeInput(props) {
 					);
 
 					if (!wasBreakEndAfterBreakStart || !wasBreakEndBeforeEnd) {
-						// [0, end] [breakStart, 100]
+						// [0, end[ [breakStart, 100]
 						if (
 							isAAfterOrEqualToB(
 								[newBreakEndHour, newBreakEndMinutes],
-								[endHour, endMinutes],
+								[endHour, endMinutes - 10],
 							)
 							&& isABeforeOrEqualToB(
 								[newBreakEndHour, newBreakEndMinutes],
@@ -370,7 +373,10 @@ export default function DoubleRangeTimeInput(props) {
 								)
 							) {
 								setFieldValue('breakEndHour', endHour);
-								setFieldValue('breakEndMinutes', endMinutes);
+								setFieldValue(
+									'breakEndMinutes',
+									endMinutes - 10,
+								);
 							}
 							else {
 								setFieldValue('breakEndHour', breakStartHour);
@@ -392,13 +398,13 @@ export default function DoubleRangeTimeInput(props) {
 						wasBreakEndAfterBreakStart
 						&& wasBreakEndBeforeEnd
 					) {
-						// [breakStart, end]
+						// [breakStart, end[
 						const cap = Math.min(
 							Math.max(
 								newBreakEndHour * 100 + newBreakEndMinutes,
 								breakStartHour * 100 + breakStartMinutes,
 							),
-							endHour * 100 + endMinutes,
+							endHour * 100 + endMinutes - 10,
 						);
 
 						setFieldValue('breakEndHour', parseInt(cap / 100, 10));

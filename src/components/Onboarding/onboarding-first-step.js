@@ -51,7 +51,9 @@ const Emoji = styled('span')`
 class OnboardingThirdStep extends Component {
 	render() {
 		const {
-			me: {startWorkAt, endWorkAt},
+			me: {
+				startWorkAt, endWorkAt, startBreakAt, endBreakAt,
+			},
 			me,
 			getNextStep,
 			getPreviousStep,
@@ -61,6 +63,8 @@ class OnboardingThirdStep extends Component {
 		const currentDate = new Date().toJSON().split('T')[0];
 		const startWorkAtDate = new Date(`${currentDate}T${startWorkAt}`);
 		const endWorkAtDate = new Date(`${currentDate}T${endWorkAt}`);
+		const startBreakAtDate = new Date(`${currentDate}T${startBreakAt}`);
+		const endBreakAtDate = new Date(`${currentDate}T${endBreakAt}`);
 
 		const startHourInitial
 			= startWorkAtDate.toString() === 'Invalid Date'
@@ -78,6 +82,22 @@ class OnboardingThirdStep extends Component {
 			= endWorkAtDate.toString() === 'Invalid Date'
 				? 0
 				: endWorkAtDate.getMinutes();
+		const breakStartHourInitial
+			= startBreakAtDate.toString() === 'Invalid Date'
+				? 12
+				: startBreakAtDate.getHours();
+		const breakStartMinutesInitial
+			= startBreakAtDate.toString() === 'Invalid Date'
+				? 0
+				: startBreakAtDate.getMinutes();
+		const breakEndHourInitial
+			= endBreakAtDate.toString() === 'Invalid Date'
+				? 13
+				: endBreakAtDate.getHours();
+		const breakEndMinutesInitial
+			= endBreakAtDate.toString() === 'Invalid Date'
+				? 0
+				: endBreakAtDate.getMinutes();
 		const workingDaysInitial
 			= me.workingDays && me.workingDays.length
 				? me.workingDays
@@ -99,6 +119,10 @@ class OnboardingThirdStep extends Component {
 								startMinutes: startMinutesInitial,
 								endHour: endHourInitial,
 								endMinutes: endMinutesInitial,
+								breakStartHour: breakStartHourInitial,
+								breakStartMinutes: breakStartMinutesInitial,
+								breakEndHour: breakEndHourInitial,
+								breakEndMinutes: breakEndMinutesInitial,
 								workingDays: workingDaysInitial,
 							}}
 							validationSchema={Yup.object().shape({
@@ -114,6 +138,10 @@ class OnboardingThirdStep extends Component {
 									startMinutes,
 									endHour,
 									endMinutes,
+									breakStartHour,
+									breakStartMinutes,
+									breakEndHour,
+									breakEndMinutes,
 									workingDays,
 								} = values;
 
@@ -130,10 +158,27 @@ class OnboardingThirdStep extends Component {
 								end.setMinutes(endMinutes);
 								end.setSeconds(0);
 								end.setMilliseconds(0);
+
+								const breakStart = new Date();
+
+								breakStart.setHours(breakStartHour);
+								breakStart.setMinutes(breakStartMinutes);
+								breakStart.setSeconds(0);
+								breakStart.setMilliseconds(0);
+
+								const breakEnd = new Date();
+
+								breakEnd.setHours(breakEndHour);
+								breakEnd.setMinutes(breakEndMinutes);
+								breakEnd.setSeconds(0);
+								breakEnd.setMilliseconds(0);
+
 								window.Intercom('update', {
 									startHour: `${startHour}:${startMinutes}`,
 									endHour: `${endHour}:${endMinutes}`,
-									workindDays: workingDays,
+									breakStartHour: `${breakStartHour}:${breakStartMinutes}`,
+									breakEndHour: `${breakEndHour}:${breakEndMinutes}`,
+									workingDays,
 								});
 
 								try {
@@ -143,6 +188,12 @@ class OnboardingThirdStep extends Component {
 												.toJSON()
 												.split('T')[1],
 											endWorkAt: end
+												.toJSON()
+												.split('T')[1],
+											startBreakAt: breakStart
+												.toJSON()
+												.split('T')[1],
+											endBreakAt: breakEnd
 												.toJSON()
 												.split('T')[1],
 											workingDays,
@@ -176,6 +227,10 @@ class OnboardingThirdStep extends Component {
 										startMinutes,
 										endHour,
 										endMinutes,
+										breakStartHour,
+										breakStartMinutes,
+										breakEndHour,
+										breakEndMinutes,
 										workingDays,
 									},
 								} = props;
@@ -207,6 +262,14 @@ class OnboardingThirdStep extends Component {
 													startMinutes,
 												],
 												end: [endHour, endMinutes],
+												breakStart: [
+													breakStartHour,
+													breakStartMinutes,
+												],
+												breakEnd: [
+													breakEndHour,
+													breakEndMinutes,
+												],
 											}}
 											setFieldValue={setFieldValue}
 										/>

@@ -14,6 +14,8 @@ export default function useUserInfos() {
 		id,
 		startWorkAt,
 		endWorkAt,
+		startBreakAt,
+		endBreakAt,
 		workingDays,
 		settings,
 		defaultDailyPrice,
@@ -35,6 +37,18 @@ export default function useUserInfos() {
 		);
 
 		workingTime = diffTime < 0 ? diffTime + 24 : diffTime;
+	}
+
+	if (startBreakAt && endBreakAt) {
+		const diffTime = moment(endBreakAt, 'HH:mm:ss').diff(
+			moment(startBreakAt, 'HH:mm:ss'),
+			'hours',
+			true,
+		);
+
+		const breakTime = diffTime < 0 ? diffTime + 24 : diffTime;
+
+		workingTime -= breakTime;
 	}
 
 	return {

@@ -104,6 +104,8 @@ export const GET_USER_INFOS = gql`
 			hasUpcomingProject
 			startWorkAt
 			endWorkAt
+			startBreakAt
+			endBreakAt
 			workingDays
 			defaultDailyPrice
 			clientViews
@@ -801,6 +803,8 @@ export const USER_TASKS = gql`
 			id
 			startWorkAt
 			endWorkAt
+			startBreakAt
+			endBreakAt
 		}
 		tasks {
 			...ItemFragment

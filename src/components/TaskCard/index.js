@@ -298,6 +298,8 @@ const TaskCard = withRouter(
 										}
 
 										focusTask({
+											refetchQueries: ['getPlannedTimes'],
+											awaitRefetchQueries: true,
 											variables: {
 												itemId: task.id,
 												for: nextWorkingDay.format(
@@ -353,6 +355,10 @@ const TaskCard = withRouter(
 										}
 										else {
 											focusTask({
+												refetchQueries: [
+													'getPlannedTimes',
+												],
+												awaitRefetchQueries: true,
 												variables: {
 													itemId: task.id,
 													action: 'SPLIT',

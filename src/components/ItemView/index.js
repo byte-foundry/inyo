@@ -1136,6 +1136,8 @@ const Item = ({
 							<TaskButton
 								onClick={() => {
 									unfocusTask({
+										refetchQueries: ['getPlannedTimes'],
+										awaitRefetchQueries: true,
 										variables: {itemId: item.id},
 									});
 								}}

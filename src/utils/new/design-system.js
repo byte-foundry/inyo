@@ -1016,11 +1016,24 @@ export const TaskIcon = styled('div')`
 `;
 
 export const Pie = styled('div')`
-	width: ${props => (props.big ? '300px' : '18px')};
-	height: ${props => (props.big ? '300px' : '18px')};
+	width: 18px;
+	height: 18px;
+
+	${props => props.big
+		&& `
+		width: 300px;
+		height: 300px;
+	`}
+
+	${props => props.medium
+		&& `
+		width: 44px;
+		height: 44px;
+	`}
+
 	border-radius: 50%;
 	background: ${props => (props.value <= 1
-		? accentGrey
+		? '#f2f2f2'
 		: props.value >= 2
 			? primaryRed
 			: primaryBlue)};
@@ -1048,11 +1061,37 @@ export const Pie = styled('div')`
 
 	::after {
 		content: '';
-		width: ${props => (props.big ? '270px' : '12px')};
-		height: ${props => (props.big ? '270px' : '12px')};
+		width: 12px;
+		height: 12px;
+
+		${props => props.big
+			&& `
+			width: 270px;
+			height: 270px;
+		`}
+
+		${props => props.medium
+			&& `
+			width: 36px;
+			height: 36px;
+		`}
+
 		position: absolute;
-		top: ${props => (props.big ? '15px' : '3px')};
-		left: ${props => (props.big ? '15px' : '3px')};
+		top: 3px;
+		left: 3px;
+
+		${props => props.big
+			&& `
+			top: 15px;
+			left: 15px;
+		`}
+
+		${props => props.medium
+			&& `
+			top: 4px;
+			left: 4px;
+		`}
+
 		display: block;
 		background: ${primaryWhite};
 		border-radius: 50%;

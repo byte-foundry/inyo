@@ -177,6 +177,8 @@ const DashboardTasks = ({location, history}) => {
 			) return;
 
 			focusTask({
+				refetchQueries: ['getPlannedTimes'],
+				awaitRefetchQueries: true,
 				variables: {
 					itemId: task.id,
 					from,

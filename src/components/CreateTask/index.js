@@ -200,6 +200,8 @@ const CreateTask = ({
 										itemId: newTask.id,
 										for: task.scheduledFor,
 									},
+									refetchQueries: ['getPlannedTimes'],
+									awaitRefetchQueries: true,
 								});
 							}
 						}

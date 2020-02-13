@@ -16,6 +16,8 @@ function TaskActivationModal({
 	const onFocusTask = useCallback(
 		async ({reminders, scheduledFor}) => {
 			await focusTask({
+				refetchQueries: ['getPlannedTimes'],
+				awaitRefetchQueries: true,
 				variables: {
 					itemId: item.id,
 					reminders,

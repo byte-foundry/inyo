@@ -1077,3 +1077,12 @@ export const GET_QUOTE = gql`
 		}
 	}
 `;
+
+export const GET_PLANNED_TIMES = gql`
+	query getPlannedTimes($from: Date!, $to: Date!) {
+		plannedWorkingTimes(from: $from, to: $to) {
+			date
+			workingTime
+		}
+	}
+`;

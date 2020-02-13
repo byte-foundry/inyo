@@ -32,6 +32,8 @@ const RescheduleModal = ({tasks}) => {
 				</WrapTasks>
 				<Button
 					onClick={() => tasks.forEach(task => unfocusTask({
+						refetchQueries: ['getPlannedTimes'],
+						awaitRefetchQueries: true,
 						variables: {
 							itemId: task.id,
 						},

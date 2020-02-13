@@ -762,6 +762,7 @@ export const GET_SCHEDULE = gql`
 					... on Item {
 						id
 						name
+						status
 					}
 				}
 			}

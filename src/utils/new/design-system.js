@@ -1030,11 +1030,6 @@ export const Pie = styled('div')`
 		height: 44px;
 	`}
 
-	${props => props.isOver
-		&& `
-		background: red !important;
-	`}
-
 	border-radius: 50%;
 	background: ${props => (props.value <= 1
 		? '#f2f2f2'

@@ -40,11 +40,7 @@ const DayPieChart = styled(PieChart)`
 
 const DayElem = styled('div')`
 	width: 60px;
-	background: ${props => (props.isOff
-		? primaryWhite
-		: props.isOver
-			? primaryPurple
-			: primaryWhite)};
+	background: ${props => (props.isOff ? lightGrey : props.isOver ? primaryPurple : primaryWhite)};
 	box-sizing: border-box;
 	border-radius: 50%;
 	display: flex;

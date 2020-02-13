@@ -40,18 +40,24 @@ const DayPieChart = styled(PieChart)`
 
 const DayElem = styled('div')`
 	width: 60px;
-	background: ${props => (props.isOver ? primaryPurple : props.isOff ? mediumGrey : primaryWhite)};
+	background: ${props => (props.isOff
+		? primaryWhite
+		: props.isOver
+			? primaryPurple
+			: primaryWhite)};
 	box-sizing: border-box;
 	border-radius: 50%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	color: ${props => (props.isOver ? (props.isOff ? mediumGrey : primaryWhite) : accentGrey)};
+	color: ${props => (props.isOver ? (props.isOff ? accentGrey : primaryPurple) : accentGrey)};
 	position: relative;
+	height: ${props => (props.isOff ? '44px' : 'auto')};
 `;
 
 const DayDate = styled('div')`
-	&::after {
+	${props => !props.isOff
+		&& `&::after {
 		content: '';
 		display: block;
 		border: 2px solid white;
@@ -62,7 +68,7 @@ const DayDate = styled('div')`
 		border-radius: 50%;
 		left: -1px;
 		pointer-events: none;
-	}
+	}`}
 `;
 
 const DayDateDay = styled('div')`
@@ -126,11 +132,13 @@ const DroppableDay = memo(
 				separator={false}
 			>
 				<DayElem isOff={isOff}>
-					<DayDate>
-						<DayPieChart
-							medium
-							value={1 - timeLeft / workingTime}
-						/>
+					<DayDate isOff={isOff}>
+						{!isOff && (
+							<DayPieChart
+								medium
+								value={1 - timeLeft / workingTime}
+							/>
+						)}
 						<DayDateNumber>
 							{day.momentDate
 								.toDate()
@@ -154,9 +162,7 @@ const DroppableDay = memo(
 		&& prevProps.scheduledFor === nextProps.scheduledFor,
 );
 
-function LeftBarSchedule({
-	isDragging, days, fullWeek, onMoveTask,
-}) {
+function LeftBarSchedule({isDragging, days, onMoveTask}) {
 	const wasOpen = usePrevious(isDragging);
 	const animatedProps = useSpring({
 		to: async (next) => {
@@ -227,7 +233,7 @@ function LeftBarSchedule({
 				eventsPerDay,
 				startDate,
 				days,
-				fullWeek,
+				true,
 				endDate,
 			);
 
@@ -265,15 +271,7 @@ function LeftBarSchedule({
 		}
 
 		return [];
-	}, [
-		userPrefsData,
-		eventsPerDay,
-		startDate,
-		days,
-		fullWeek,
-		endDate,
-		onMoveTask,
-	]);
+	}, [userPrefsData, eventsPerDay, startDate, days, endDate, onMoveTask]);
 
 	if (loadingUserPrefs || loadingWorkingTimes) return <Loading />;
 	if (errorUserPrefs || errorWorkingTimes) throw errorUserPrefs || errorWorkingTimes;
@@ -294,7 +292,8 @@ function LeftBarSchedule({
 	months.forEach((month) => {
 		const firstDay = month.days[0];
 
-		const paddingNumber = firstDay.momentDate.day() - 1;
+		// we sub 0 (sunday) by 7 to start the week on monday
+		const paddingNumber = (firstDay.momentDate.day() || 7) - 1;
 		month.days = [...Array(paddingNumber).fill(null), ...month.days];
 	});
 

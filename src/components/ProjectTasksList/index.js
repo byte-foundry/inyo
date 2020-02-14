@@ -622,6 +622,8 @@ function ProjectTasksList({
 
 			focusTask({
 				variables: {
+					refetchQueries: ['getPlannedTimes'],
+					awaitRefetchQueries: true,
 					itemId: task.id,
 					for: scheduledFor,
 					schedulePosition: position,

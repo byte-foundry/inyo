@@ -8,7 +8,9 @@ import {
 	ModalContainer,
 	ModalElem,
 } from '../../utils/content';
-import {Button, Input, SubHeading} from '../../utils/new/design-system';
+import {
+	Button, Input, P, SubHeading,
+} from '../../utils/new/design-system';
 import MaterialIcon from '../MaterialIcon';
 
 const ModalContent = styled(FlexColumn)`
@@ -51,6 +53,16 @@ function CreateProjectLinkButton({project}) {
 							</fbt>
 						</SubHeading>
 						<ModalContent>
+							{!project.customer && (
+								<P>
+									<fbt desc="no project customer token warning">
+										Attention : Ce lien permet seulement de
+										consulter le projet. Ajoutez un client
+										pour générer un nouveau lien qui
+										autorise les modifications.
+									</fbt>
+								</P>
+							)}
 							<Input
 								big
 								value={`${protocol}//${host}/app/${customerToken}/tasks?projectId=${projectId}`}

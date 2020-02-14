@@ -14,9 +14,9 @@ const Content = styled('div')`
 
 	${props => props.isOver
 		&& `
-		background: linear-gradient(0deg, rgba(200,200,200,0) 0%, rgba(200,200,200,0.2) 10px, rgba(255,255,255,0) 60%);
+		background: rgba(242,242,242,.4);
 		transitions: all 400ms ease;
-		border-radius: 0 0 8px 8px;
+		border-radius: 8px;
 	`}
 `;
 

@@ -39,11 +39,7 @@ const CustomerNameAndAddress = ({
 }) => (
 	<ClientAddress>
 		<CompanyName>{name}</CompanyName>
-		<ContactName>
-			<fbt desc="contact name">
-				{formatFullName(title, firstName, lastName)}
-			</fbt>
-		</ContactName>
+		<ContactName>{formatFullName(title, firstName, lastName)}</ContactName>
 		{address && (
 			<>
 				<ContactInfo style={{marginBottom: '0px'}}>

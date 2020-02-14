@@ -104,6 +104,8 @@ export const GET_USER_INFOS = gql`
 			hasUpcomingProject
 			startWorkAt
 			endWorkAt
+			startBreakAt
+			endBreakAt
 			workingDays
 			defaultDailyPrice
 			clientViews
@@ -762,6 +764,7 @@ export const GET_SCHEDULE = gql`
 					... on Item {
 						id
 						name
+						status
 					}
 				}
 			}
@@ -800,6 +803,8 @@ export const USER_TASKS = gql`
 			id
 			startWorkAt
 			endWorkAt
+			startBreakAt
+			endBreakAt
 		}
 		tasks {
 			...ItemFragment
@@ -1069,6 +1074,15 @@ export const GET_QUOTE = gql`
 					name
 				}
 			}
+		}
+	}
+`;
+
+export const GET_PLANNED_TIMES = gql`
+	query getPlannedTimes($from: Date!, $to: Date!) {
+		plannedWorkingTimes(from: $from, to: $to) {
+			date
+			workingTime
 		}
 	}
 `;

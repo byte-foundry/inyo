@@ -240,12 +240,14 @@ const DraggableTaskCard = ({
 	scheduledFor,
 	onMove,
 	onCopy,
+	setIsDragging,
 	...rest
 }) => {
 	const [unfocusTask] = useMutation(UNFOCUS_TASK);
 	const [, drag] = useDrag({
 		item: {id, type: DRAG_TYPES.TASK},
 		begin() {
+			setIsDragging(true);
 			return {
 				id,
 				type,
@@ -253,8 +255,11 @@ const DraggableTaskCard = ({
 			};
 		},
 		end(item, monitor) {
+			setIsDragging(false);
 			if (!monitor.didDrop()) {
 				unfocusTask({
+					refetchQueries: ['getPlannedTimes'],
+					awaitRefetchQueries: true,
 					variables: {
 						itemId: id,
 						from: scheduledFor,
@@ -408,6 +413,7 @@ const Schedule = ({
 	onMoveTask,
 	workingTime = 8,
 	assistantName,
+	setIsDragging,
 }) => {
 	const {language} = useUserInfos();
 	const [, setRefreshState] = useState(new Date().toJSON());
@@ -701,6 +707,7 @@ const Schedule = ({
 										task={task}
 										index={index}
 										scheduledFor={day.date}
+										setIsDragging={setIsDragging}
 										onMove={({
 											id,
 											type,

@@ -3,6 +3,7 @@ import moment from 'moment';
 import React, {forwardRef} from 'react';
 import {withRouter} from 'react-router-dom';
 
+import fbt from '../../fbt/fbt.macro';
 import {useMutation} from '../../utils/apollo-hooks';
 import {WEEKDAYS} from '../../utils/constants';
 import {formatName, isCustomerTask} from '../../utils/functions';
@@ -297,6 +298,8 @@ const TaskCard = withRouter(
 										}
 
 										focusTask({
+											refetchQueries: ['getPlannedTimes'],
+											awaitRefetchQueries: true,
 											variables: {
 												itemId: task.id,
 												for: nextWorkingDay.format(
@@ -352,6 +355,10 @@ const TaskCard = withRouter(
 										}
 										else {
 											focusTask({
+												refetchQueries: [
+													'getPlannedTimes',
+												],
+												awaitRefetchQueries: true,
 												variables: {
 													itemId: task.id,
 													action: 'SPLIT',

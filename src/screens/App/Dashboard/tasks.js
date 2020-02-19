@@ -125,6 +125,12 @@ const LoadingScreen = () => (
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
 	const [isDragging, setIsDragging] = useState(false);
+	const setIsDraggingDelayed = useCallback(
+		(value) => {
+			setTimeout(() => setIsDragging(value), 700);
+		},
+		[setIsDragging],
+	);
 	const query = useMemo(
 		() => new URLSearchParams(prevSearch || location.search),
 		[prevSearch, location.search],
@@ -334,7 +340,7 @@ const DashboardTasks = ({location, history}) => {
 					key={item.id}
 					customerToken={customerToken}
 					baseUrl="dashboard"
-					setIsDragging={setIsDragging}
+					setIsDragging={setIsDraggingDelayed}
 				/>
 			);
 
@@ -354,7 +360,7 @@ const DashboardTasks = ({location, history}) => {
 		linkedCustomerId,
 		filter,
 		tags,
-		setIsDragging,
+		setIsDraggingDelayed,
 	]);
 
 	return (
@@ -381,7 +387,7 @@ const DashboardTasks = ({location, history}) => {
 				onMoveTask={onMoveTask}
 				assistantName={assistantName}
 				workingTime={workingTime}
-				setIsDragging={setIsDragging}
+				setIsDragging={setIsDraggingDelayed}
 			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal

@@ -248,14 +248,6 @@ const PendingActionsTray = ({projectId}) => {
 										timeItTook:
 												valuesMap[task.id] || task.unit,
 									},
-									optimisticResponse: {
-										finishItem: {
-											...task,
-											timeItTook:
-													valuesMap[task.id]
-													|| task.unit,
-										},
-									},
 								}));
 							}}
 						>

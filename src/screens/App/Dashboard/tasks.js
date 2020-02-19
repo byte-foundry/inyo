@@ -125,6 +125,12 @@ const LoadingScreen = () => (
 const DashboardTasks = ({location, history}) => {
 	const {prevSearch} = location.state || {};
 	const [isDragging, setIsDragging] = useState(false);
+	const setIsDraggingDelayed = useCallback(
+		(value) => {
+			setTimeout(() => setIsDragging(value), 700);
+		},
+		[setIsDragging],
+	);
 	const query = useMemo(
 		() => new URLSearchParams(prevSearch || location.search),
 		[prevSearch, location.search],
@@ -319,9 +325,11 @@ const DashboardTasks = ({location, history}) => {
 								&& task.section.project.customer.id
 									=== linkedCustomerId)))
 					&& (!filter || task.status === filter || filter === 'ALL')
+					// no project id, or project id, or special fake project id "noproject"
 					&& (!projectId
 						|| (task.section
-							&& task.section.project.id === projectId))
+							&& task.section.project.id === projectId)
+						|| (projectId === 'noproject' && !task.section))
 					&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 			);
 
@@ -332,7 +340,7 @@ const DashboardTasks = ({location, history}) => {
 					key={item.id}
 					customerToken={customerToken}
 					baseUrl="dashboard"
-					setIsDragging={setIsDragging}
+					setIsDragging={setIsDraggingDelayed}
 				/>
 			);
 
@@ -352,7 +360,7 @@ const DashboardTasks = ({location, history}) => {
 		linkedCustomerId,
 		filter,
 		tags,
-		setIsDragging,
+		setIsDraggingDelayed,
 	]);
 
 	return (
@@ -379,7 +387,7 @@ const DashboardTasks = ({location, history}) => {
 				onMoveTask={onMoveTask}
 				assistantName={assistantName}
 				workingTime={workingTime}
-				setIsDragging={setIsDragging}
+				setIsDragging={setIsDraggingDelayed}
 			/>
 			{tasksToReschedule.length > 0 && (
 				<RescheduleModal

@@ -319,9 +319,11 @@ const DashboardTasks = ({location, history}) => {
 								&& task.section.project.customer.id
 									=== linkedCustomerId)))
 					&& (!filter || task.status === filter || filter === 'ALL')
+					// no project id, or project id, or special fake project id "noproject"
 					&& (!projectId
 						|| (task.section
-							&& task.section.project.id === projectId))
+							&& task.section.project.id === projectId)
+						|| (projectId === 'noproject' && !task.section))
 					&& tags.every(tag => task.tags.some(taskTag => taskTag.id === tag)),
 			);
 

@@ -357,6 +357,14 @@ function ArianneThread({
 	if (errorsTags) throw errorsTags;
 	if (errorsCustomers) throw errorsCustomers;
 
+	projects.unshift({
+		id: 'noproject',
+		name: fbt(
+			'Non catégorisé',
+			'uncategorized project arianne thread label',
+		),
+	});
+
 	return (
 		<ArianneContainer marginBottom={marginBottom} marginTop={marginTop}>
 			{selectCustomer && (

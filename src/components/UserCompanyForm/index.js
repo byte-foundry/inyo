@@ -258,7 +258,8 @@ const UserCompanyForm = ({data, buttonText, done}) => {
 										__typename: undefined,
 									},
 									vat: values.vat,
-									vatRate: values.vatRate,
+									vatRate:
+										parseFloat(values.vatRate) || undefined,
 									siret: values.siret,
 									rcs: values.rcs,
 								},

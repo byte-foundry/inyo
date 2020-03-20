@@ -98,9 +98,7 @@ export const GET_USER_INFOS = gql`
 			email
 			firstName
 			lastName
-			workingFields
 			jobType
-			interestedFeatures
 			hasUpcomingProject
 			startWorkAt
 			endWorkAt

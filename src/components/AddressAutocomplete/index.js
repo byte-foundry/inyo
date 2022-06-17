@@ -6,6 +6,8 @@ import fbt from '../../fbt/fbt.macro';
 import {ErrorInput} from '../../utils/content';
 import {InputLabel, Label} from '../../utils/new/design-system';
 
+// TODO : Algo has been sunsetted. Mapbox is a good candidate for replacement.
+
 const AddressAutocompleteMain = styled(InputLabel)`
 	width: 100%;
 	margin-bottom: 20px;

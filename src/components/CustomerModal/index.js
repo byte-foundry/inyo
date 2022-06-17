@@ -22,7 +22,7 @@ import {
 } from '../../utils/new/design-system';
 import {GET_ALL_CUSTOMERS} from '../../utils/queries';
 import useUserInfos from '../../utils/useUserInfos';
-import AddressAutocomplete from '../AddressAutocomplete';
+// import AddressAutocomplete from '../AddressAutocomplete';
 import FormElem from '../FormElem';
 import FormSelect from '../FormSelect';
 
@@ -147,11 +147,11 @@ const CustomerModal = ({
 						email: customerNotNull.email || '',
 						phone: customerNotNull.phone || '',
 						occupation: customerNotNull.occupation || '',
-						address:
-							{
-								...customerNotNull.address,
-								__typename: undefined,
-							} || '',
+						// address:
+						// 	{
+						// 		...customerNotNull.address,
+						// 		__typename: undefined,
+						// 	} || '',
 					}}
 					validate={(values) => {
 						if (
@@ -191,18 +191,18 @@ const CustomerModal = ({
 									),
 								occupation: Yup.string(),
 								phone: Yup.string(),
-								address: Yup.object()
-									.shape({
-										street: Yup.string().required(),
-										city: Yup.string().required(),
-										postalCode: Yup.string().required(),
-										country: Yup.string().required(),
-									})
-									.required(
-										<fbt project="inyo" desc="required">
-											Requis
-										</fbt>,
-									),
+								// address: Yup.object()
+								// 	.shape({
+								// 		street: Yup.string().required(),
+								// 		city: Yup.string().required(),
+								// 		postalCode: Yup.string().required(),
+								// 		country: Yup.string().required(),
+								// 	})
+								// 	.required(
+								// 		<fbt project="inyo" desc="required">
+								// 			Requis
+								// 		</fbt>,
+								// 	),
 							}).validateSync(values, {abortEarly: false});
 						}
 						catch (err) {
@@ -261,7 +261,7 @@ const CustomerModal = ({
 									email: values.email,
 									phone: values.phone,
 									occupation: values.occupation,
-									address: values.address,
+									// address: values.address,
 									userNotes: convertToRaw(
 										editorState.getCurrentContent(),
 									),
@@ -285,7 +285,7 @@ const CustomerModal = ({
 									email: values.email,
 									phone: values.phone,
 									occupation: values.occupation,
-									address: values.address,
+									// address: values.address,
 									userNotes: convertToRaw(
 										editorState.getCurrentContent(),
 									),
@@ -469,7 +469,7 @@ const CustomerModal = ({
 												placeholder="Comptable"
 												style={{gridColumn: '2 / 4'}}
 											/>
-											<AddressAutocomplete
+											{/* <AddressAutocomplete
 												{...props}
 												language={language}
 												onChange={setFieldValue}
@@ -488,7 +488,7 @@ const CustomerModal = ({
 												style={{
 													gridColumn: '1 / 4',
 												}}
-											/>
+											/> */}
 											<NotesFormLabel>
 												<fbt
 													project="inyo"

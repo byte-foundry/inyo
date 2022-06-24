@@ -1,15 +1,25 @@
 import styled from '@emotion/styled';
-import AlgoliaPlaces from 'algolia-places-react';
+// import AlgoliaPlaces from 'algolia-places-react';
+import {AddressAutofill} from '@mapbox/search-js-react';
 import React, {Component} from 'react';
 
 import fbt from '../../fbt/fbt.macro';
 import {ErrorInput} from '../../utils/content';
-import {InputLabel, Label} from '../../utils/new/design-system';
+import {Input, InputLabel, Label} from '../../utils/new/design-system';
 
 const AddressAutocompleteMain = styled(InputLabel)`
 	width: 100%;
 	margin-bottom: 20px;
 `;
+
+const AddressAutofillContent = styled('div')`
+	display: flex;
+	flex-direction: column;
+`;
+
+const accessToken
+	= 'pk.eyJ1IjoieW1hdGhleSIsImEiOiJjbDRpbTU4d2kwODBiM2JxbnF5OHQ2eDgwIn0.0-0DtXFnP568R-cVccqNfw';
+let autofill = '';
 
 class AddressAutocomplete extends Component {
 	render() {
@@ -27,42 +37,43 @@ class AddressAutocomplete extends Component {
 		} = this.props;
 
 		return (
-			<AddressAutocompleteMain style={style} required={required}>
-				<Label htmlFor={name} required={required}>
-					{label}
-				</Label>
-				<AlgoliaPlaces
+			<AddressAutocompleteMain required={required} style={style}>
+				<AddressAutofill
+					accessToken={accessToken}
 					placeholder={placeholder}
 					autoComplete="false"
 					options={{
-						appId: 'pl1YAVPVE0UO',
-						apiKey: 'ca2fe2df77738e8d67dfea649c5ede2e',
 						language,
-						type: 'address',
+						country: 'FR',
 					}}
-					onChange={({suggestion}) => {
+					onRetrieve={(result) => {
+						autofill = result.features[0].properties.full_address;
+						document.getElementsByName(
+							'address',
+						)[0].value = autofill; // Dirty but does the job
 						onChange(name, {
-							street: suggestion.name,
-							city: suggestion.city,
-							country: suggestion.country,
-							postalCode: suggestion.postcode,
+							street: result.features[0].properties.feature_name,
+							city: result.features[0].properties.address_level2,
+							country: result.features[0].properties.country,
+							postalCode: result.features[0].properties.postcode,
 						});
 					}}
-					onSuggestions={() => {}}
-					onCursorChanged={() => {}}
-					onClear={() => onChange(name, {})}
-					onLimit={({message}) => {
-						throw new Error(message);
-					}}
-					onError={({message}) => {
-						throw new Error(message);
-					}}
-					defaultValue={
-						values
-						&& values.street
-						&& `${values.street} ${values.postalCode} ${values.city} ${values.country}`
-					}
-				/>
+				>
+					<AddressAutofillContent>
+						<Label htmlFor={name} required={required}>
+							{label}
+						</Label>
+						<Input
+							type="text"
+							name="address"
+							defaultValue={
+								values
+								&& values.street
+								&& `${values.street} ${values.postalCode} ${values.city} ${values.country}`
+							}
+						/>
+					</AddressAutofillContent>
+				</AddressAutofill>
 				{touched[name] && (errors[name] || errors[`${name}.street`]) && (
 					<ErrorInput className="input-feedback">
 						{/* Yup does not provide a way to reduce errors to a parent object
